@@ -204,6 +204,50 @@ public class ProdutoBaseController extends UtilControllerD
 		return produtoResponse;
 	}
 
+	// classificacao
+	public ClassificacaoResponse fetchClassificacaoByRequest(ClassificacaoInquiryRequest pagedInquiryRequest)
+	{
+
+		ClassificacaoResponse produtoResponse = new ClassificacaoResponse();
+		try
+		{
+
+			produtoResponse = getProdutoBAI().fetchClassificacaoByRequest(pagedInquiryRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return produtoResponse;
+	}
+
+	// cfop
+	public CfopResponse fetchProdutoByRequest(CfopInquiryRequest pagedInquiryRequest)
+	{
+
+		CfopResponse produtoResponse = new CfopResponse();
+		try
+		{
+
+			produtoResponse = getProdutoBAI().fetchCfopByRequest(pagedInquiryRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return produtoResponse;
+	}
+
 	/**
 	 * Fetch produto by id.
 	 *

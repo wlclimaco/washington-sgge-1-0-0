@@ -16,6 +16,14 @@ public class ClienteViewController extends ClienteBaseController
 
 	private static final String FETCH_LIST_CIDADE = "cidade";
 
+	private static final String FETCH_LIST_BANCO = "banco";
+
+	private static final String FETCH_LIST_AGENCIA = "agencia";
+
+	private static final String FETCH_LIST_CONTA = "conta";
+
+	private static final String FETCH_LIST_ESTADO = "estado";
+
 	/** The Constant FETCH_ADD. */
 	private static final String FETCH_ADD = "/add";
 
@@ -160,6 +168,178 @@ public class ClienteViewController extends ClienteBaseController
 
 			modelAndView.addObject(RESPONSE, getMapper()
 					.writeValueAsString(fetchCidadeByRequest(pagedInquiryRequest)));
+
+			FiltersResponse filtersResponse = new FiltersResponse();
+			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
+
+			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
+		}
+
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return modelAndView;
+	}
+
+	// banco
+	@RequestMapping(value = FETCH_LIST_BANCO, method = RequestMethod.GET)
+	public ModelAndView loadList(HttpServletRequest request)
+	{
+		ModelAndView modelAndView = new ModelAndView("banco/banco_main");
+
+		// Check whether has initial load or not
+		if (!isInitialLoad(request, modelAndView))
+		{
+			return modelAndView;
+		}
+
+		BancoRequest pagedInquiryRequest = new BancoRequest();
+		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
+		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
+		pagedInquiryRequest.setPreQueryCount(true);
+		pagedInquiryRequest.addSortExpressions(new SortExpression("ID",
+				Direction.Ascending));
+
+		try
+		{
+
+			modelAndView.addObject(RESPONSE, getMapper()
+					.writeValueAsString(fetchBancoByRequest(pagedInquiryRequest)));
+
+			FiltersResponse filtersResponse = new FiltersResponse();
+			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
+
+			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
+		}
+
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return modelAndView;
+	}
+
+	// agencia
+	@RequestMapping(value = FETCH_LIST_AGENCIA, method = RequestMethod.GET)
+	public ModelAndView loadList(HttpServletRequest request)
+	{
+		ModelAndView modelAndView = new ModelAndView("agencia/agencia_main");
+
+		// Check whether has initial load or not
+		if (!isInitialLoad(request, modelAndView))
+		{
+			return modelAndView;
+		}
+
+		AgenciaRequest pagedInquiryRequest = new AgenciaRequest();
+		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
+		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
+		pagedInquiryRequest.setPreQueryCount(true);
+		pagedInquiryRequest.addSortExpressions(new SortExpression("ID",
+				Direction.Ascending));
+
+		try
+		{
+
+			modelAndView.addObject(RESPONSE, getMapper()
+					.writeValueAsString(fetchAgenciaByRequest(pagedInquiryRequest)));
+
+			FiltersResponse filtersResponse = new FiltersResponse();
+			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
+
+			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
+		}
+
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return modelAndView;
+	}
+
+	// conta
+	@RequestMapping(value = FETCH_LIST_CONTA, method = RequestMethod.GET)
+	public ModelAndView loadList(HttpServletRequest request)
+	{
+		ModelAndView modelAndView = new ModelAndView("conta/conta_main");
+
+		// Check whether has initial load or not
+		if (!isInitialLoad(request, modelAndView))
+		{
+			return modelAndView;
+		}
+
+		ContaInquiryRequest pagedInquiryRequest = new ContaInquiryRequest();
+		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
+		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
+		pagedInquiryRequest.setPreQueryCount(true);
+		pagedInquiryRequest.addSortExpressions(new SortExpression("ID",
+				Direction.Ascending));
+
+		try
+		{
+
+			modelAndView.addObject(RESPONSE, getMapper()
+					.writeValueAsString(fetchContaByRequest(pagedInquiryRequest)));
+
+			FiltersResponse filtersResponse = new FiltersResponse();
+			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
+
+			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
+		}
+
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return modelAndView;
+	}
+
+	// estado
+	@RequestMapping(value = FETCH_LIST_ESTADO, method = RequestMethod.GET)
+	public ModelAndView loadList(HttpServletRequest request)
+	{
+		ModelAndView modelAndView = new ModelAndView("estado/estado_main");
+
+		// Check whether has initial load or not
+		if (!isInitialLoad(request, modelAndView))
+		{
+			return modelAndView;
+		}
+
+		EstadoInquiryRequest pagedInquiryRequest = new EstadoInquiryRequest();
+		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
+		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
+		pagedInquiryRequest.setPreQueryCount(true);
+		pagedInquiryRequest.addSortExpressions(new SortExpression("ID",
+				Direction.Ascending));
+
+		try
+		{
+
+			modelAndView.addObject(RESPONSE, getMapper()
+					.writeValueAsString(fetchEstadoByRequest(pagedInquiryRequest)));
 
 			FiltersResponse filtersResponse = new FiltersResponse();
 			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);

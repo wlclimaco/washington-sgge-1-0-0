@@ -28,6 +28,10 @@ public class ProdutoAPIController extends ProdutoBaseController
 
 	private static final String FETCH_MARCA = "/fetch/marca";
 
+	private static final String FETCH_CLASSIFICACAO = "/fetch/classificacao";
+
+	private static final String FETCH_CFOP = "/fetch/cfop";
+
 	/** The Constant INSERT_LOCATION. */
 	private static final String INSERT_LOCATION = "/add";
 
@@ -89,6 +93,24 @@ public class ProdutoAPIController extends ProdutoBaseController
 	{
 
 		return fetchMarcaByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_CLASSIFICACAO, method = RequestMethod.POST)
+	@ResponseBody
+	public ClassificacaoResponse fetchAll(@RequestBody ClassificacaoInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchClassificacaoByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_CFOP, method = RequestMethod.POST)
+	@ResponseBody
+	public CfopResponse fetchAll(@RequestBody CfopInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchCfopByRequest(pagedInquiryRequest);
 
 	}
 

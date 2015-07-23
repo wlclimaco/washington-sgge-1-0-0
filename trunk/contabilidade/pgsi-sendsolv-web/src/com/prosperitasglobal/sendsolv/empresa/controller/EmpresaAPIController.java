@@ -3,30 +3,6 @@ package com.prosperitasglobal.sendsolv.empresa.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.Cidade;
-import com.prosperitasglobal.sendsolv.model.Cnae;
-import com.prosperitasglobal.sendsolv.model.CnaeEmpresa;
-import com.prosperitasglobal.sendsolv.model.Documento;
-import com.prosperitasglobal.sendsolv.model.Email;
-import com.prosperitasglobal.sendsolv.model.Empresa;
-import com.prosperitasglobal.sendsolv.model.Endereco;
-import com.prosperitasglobal.sendsolv.model.EntidadeTypeEnum;
-import com.prosperitasglobal.sendsolv.model.Estado;
-import com.prosperitasglobal.sendsolv.model.Regime;
-import com.prosperitasglobal.sendsolv.model.Socio;
-import com.prosperitasglobal.sendsolv.model.Telefone;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
-import com.qat.framework.model.QATModel.PersistanceActionEnum;
-
 @Controller
 @RequestMapping("/api/empresa")
 public class EmpresaAPIController extends EmpresaBaseController
@@ -46,6 +22,10 @@ public class EmpresaAPIController extends EmpresaBaseController
 	/** The Constant FETCH. */
 	private static final String FETCH = "/fetch";
 
+	private static final String FETCH_REGIME = "/fetch/regime";
+
+	private static final String FETCH_CNAE = "/fetch/cnae";
+
 	/**
 	 * Fetch all Empresas.
 	 *
@@ -58,6 +38,24 @@ public class EmpresaAPIController extends EmpresaBaseController
 	{
 
 		return fetchEmpresaByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_CNAE, method = RequestMethod.POST)
+	@ResponseBody
+	public CnaeResponse fetchAll(@RequestBody CnaeInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchCnaeByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_REGIME, method = RequestMethod.POST)
+	@ResponseBody
+	public RegimeResponse fetchAll(@RequestBody RegimeInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchRegimeByRequest(pagedInquiryRequest);
 
 	}
 

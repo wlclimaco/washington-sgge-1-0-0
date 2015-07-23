@@ -30,7 +30,7 @@
 	</div>
 </div>
 
-<jsp:include page="../../scripts/pages/empresa/empresa_main.js.jsp" flush="true" />
-<jsp:include page="../../scripts/pages/empresa/empresa_actions.js.jsp" flush="true" />
-<jsp:include page="../../scripts/pages/empresa/empresa_init.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/cnae/cnae_main.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/cnae/cnae_actions.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/cnae/cnae_init.js.jsp" flush="true" />
 

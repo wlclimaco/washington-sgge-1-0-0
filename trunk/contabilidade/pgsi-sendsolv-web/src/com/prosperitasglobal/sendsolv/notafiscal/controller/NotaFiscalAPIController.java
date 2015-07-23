@@ -32,6 +32,14 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 
 	private static final String FETCH_ALL_COMPRAS = "/fetchall/compras";
 
+	private static final String FETCH_ALL_CAIXA = "/fetchall/caixa";
+
+	private static final String FETCH_ALL_CONTAS_PG = "/fetchall/contaspg";
+
+	private static final String FETCH_ALL_CONTAS_RB = "/fetchall/contasrb";
+
+	private static final String FETCH_ALL_CONDPG = "/fetchall/condpg";
+
 	/** The Constant INSERT_NOTAFISCAL. */
 	private static final String INSERT_NOTAFISCAL_ENTRADA = "/add/entrada";
 
@@ -40,6 +48,14 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 	private static final String INSERT_PD_COMPRAS = "/add/compras";
 
 	private static final String INSERT_ORCAMENTO = "/add/orcamento";
+
+	private static final String INSERT_CONTAS_PG = "/add/contaspg";
+
+	private static final String INSERT_CONTAS_RB = "/add/contasrb";
+
+	private static final String INSERT_CAIXA = "/add/caixa";
+
+	private static final String INSERT_CONG_PG = "/add/confpg";
 
 	/** The Constant FETCH. */
 	private static final String FETCH = "/fetch";
@@ -90,6 +106,42 @@ public class NotaFiscalAPIController extends NotaFiscalBaseController
 	{
 
 		return fetchOrcamentoByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_ALL_CAIXA, method = RequestMethod.POST)
+	@ResponseBody
+	public CaixaResponse fetchAll(@RequestBody CaixaInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchCaixaByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_ALL_CONDPG, method = RequestMethod.POST)
+	@ResponseBody
+	public CondPgResponse fetchAll(@RequestBody CondPgInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchCondPgByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_ALL_CONTAS_PG, method = RequestMethod.POST)
+	@ResponseBody
+	public ContasResponse fetchAll(@RequestBody ContasInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchContasByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_ALL_CONTAS_RB, method = RequestMethod.POST)
+	@ResponseBody
+	public ContasResponse fetchAll(@RequestBody ContasInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchContasByRequest(pagedInquiryRequest);
 
 	}
 

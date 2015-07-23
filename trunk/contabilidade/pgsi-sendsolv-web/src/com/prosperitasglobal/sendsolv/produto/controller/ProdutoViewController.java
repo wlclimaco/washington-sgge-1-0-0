@@ -29,6 +29,10 @@ public class ProdutoViewController extends ProdutoBaseController
 
 	private static final String FETCH_LIST_MARCA = "/fetch/marca";
 
+	private static final String FETCH_LIST_CFOP = "/fetch/cfop";
+
+	private static final String FETCH_LIST_CLASSI = "/fetch/classificacao";
+
 	/** The Constant FETCH_ADD. */
 	private static final String FETCH_ADD = "/add";
 
@@ -303,6 +307,92 @@ public class ProdutoViewController extends ProdutoBaseController
 
 			modelAndView.addObject(RESPONSE, getMapper()
 					.writeValueAsString(fetchMarcaByRequest(pagedInquiryRequest)));
+
+			FiltersResponse filtersResponse = new FiltersResponse();
+			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
+
+			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
+		}
+
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return modelAndView;
+	}
+
+	// cfop
+	@RequestMapping(value = FETCH_LIST_CFOP, method = RequestMethod.GET)
+	public ModelAndView loadList(HttpServletRequest request)
+	{
+		ModelAndView modelAndView = new ModelAndView("cfop/cfop_main");
+
+		// Check whether has initial load or not
+		if (!isInitialLoad(request, modelAndView))
+		{
+			return modelAndView;
+		}
+
+		CfopInquiryRequest pagedInquiryRequest = new CfopInquiryRequest();
+		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
+		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
+		pagedInquiryRequest.setPreQueryCount(true);
+		pagedInquiryRequest.addSortExpressions(new SortExpression("ID",
+				Direction.Ascending));
+
+		try
+		{
+
+			modelAndView.addObject(RESPONSE, getMapper()
+					.writeValueAsString(fetchCfopByRequest(pagedInquiryRequest)));
+
+			FiltersResponse filtersResponse = new FiltersResponse();
+			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
+
+			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
+		}
+
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return modelAndView;
+	}
+
+	// classificacao
+	@RequestMapping(value = FETCH_LIST_CLASSI, method = RequestMethod.GET)
+	public ModelAndView loadList(HttpServletRequest request)
+	{
+		ModelAndView modelAndView = new ModelAndView("classificacao/classificacao_main");
+
+		// Check whether has initial load or not
+		if (!isInitialLoad(request, modelAndView))
+		{
+			return modelAndView;
+		}
+
+		ClassificacaoInquiryRequest pagedInquiryRequest = new ClassificacaoInquiryRequest();
+		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
+		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
+		pagedInquiryRequest.setPreQueryCount(true);
+		pagedInquiryRequest.addSortExpressions(new SortExpression("ID",
+				Direction.Ascending));
+
+		try
+		{
+
+			modelAndView.addObject(RESPONSE, getMapper()
+					.writeValueAsString(fetchClassificacaoByRequest(pagedInquiryRequest)));
 
 			FiltersResponse filtersResponse = new FiltersResponse();
 			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);

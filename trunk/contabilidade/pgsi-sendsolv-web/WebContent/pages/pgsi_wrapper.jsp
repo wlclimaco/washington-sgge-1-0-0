@@ -50,7 +50,8 @@
 			<li><a href="cliente" class="alist" data-title='Empresa'>Cliente</a></li>
             <li><a href="fornecedor" class="alist" data-title='Empresa'>Fornecedor</a></li>
             <li><a href="transportador" class="alist" data-title='Empresa'>Transportador</a></li>
-             <li><a href="cliente/Cidade" class="alist" data-title='Cidade'>Cidade</a></li>
+            <li><a href="cliente/Cidade" class="alist" data-title='Cidade'>Cidade</a></li>
+             <li><a href="cliente/Estado" class="alist" data-title='Cidade'>Estado</a></li>
           </ul>
         </li>
 		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Departamento Pessoal</span> <b class="caret"></b></a>
@@ -73,18 +74,21 @@
         </li>
         <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Financeiro</span> <b class="caret"></b></a>
 		 <ul class="dropdown-menu">
-            <li><a href="icons.html">Contas Pagar</a></li>
-            <li><a href="faq.html">Contas Receber</a></li>
-            <li><a href="pricing.html">Caixa</a></li>
-			<li><a href="pricing.html">Condicao Pagamento</a></li>
-			<li><a href="pricing.html">Banco</a></li>
-			<li><a href="pricing.html">Agencia</a></li>
+            <li><a href="notafiscal/fetch/contaspagar">Contas Pagar</a></li>
+            <li><a href="notafiscal/fetch/contasreceber">Contas Receber</a></li>
+            <li><a href="notafiscal/fetch/caixa">Caixa</a></li>
+			<li><a href="notafiscal/fetch/condpg">Condicao Pagamento</a></li>
+			<li><a href="cliente/banco">Banco</a></li>
+			<li><a href="cliente/agencia">Agencia</a></li>
+			<li><a href="cliente/conta">Conta</a></li>
           </ul>
         </li>
 		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Fiscal</span> <b class="caret"></b></a>
 		<ul class="dropdown-menu">
-            <li><a href="pricing.html">CFOP</a></li>
-			<li><a href="pricing.html">CNAE</a></li>
+            <li><a href="produto/fetch/cfop">CFOP</a></li>
+			<li><a href="empresa/fetch/cnae">CNAE</a></li>
+			<li><a href="empresa/fetch/regime">Regime</a></li>
+			<li><a href="produto/fetch/classificacao">Classificacao</a></li>
           </ul>
         </li>
 		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Compras/vendas</span> <b class="caret"></b></a>

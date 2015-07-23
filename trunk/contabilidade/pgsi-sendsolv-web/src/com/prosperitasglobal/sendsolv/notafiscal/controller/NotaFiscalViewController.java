@@ -27,6 +27,14 @@ public class NotaFiscalViewController extends NotaFiscalBaseController
 
 	private static final String FETCH_LIST_ORCAMENTO = "/fetch/orcamento";
 
+	private static final String FETCH_LIST_CAIXA = "/fetch/caixa";
+
+	private static final String FETCH_LIST_CONDPAG = "/fetch/condpg";
+
+	private static final String FETCH_LIST_CONTAS_PG = "/fetch/contaspagar";
+
+	private static final String FETCH_LIST_CONTAS_RB = "/fetch/contasreceber";
+
 	/** The Constant FETCH_ADD. */
 	private static final String FETCH_ADD_SAIDA = "/add/saida";
 
@@ -267,6 +275,178 @@ public class NotaFiscalViewController extends NotaFiscalBaseController
 
 			modelAndView.addObject(RESPONSE, getMapper()
 					.writeValueAsString(fetchOrcamentoByRequest(pagedInquiryRequest)));
+
+			FiltersResponse filtersResponse = new FiltersResponse();
+			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
+
+			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
+		}
+
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return modelAndView;
+	}
+
+	// contasPagar
+	@RequestMapping(value = FETCH_LIST_CONTAS_PG, method = RequestMethod.GET)
+	public ModelAndView loadList(HttpServletRequest request)
+	{
+		ModelAndView modelAndView = new ModelAndView("contas/contas_main");
+
+		// Check whether has initial load or not
+		if (!isInitialLoad(request, modelAndView))
+		{
+			return modelAndView;
+		}
+
+		ContasInquiryRequest pagedInquiryRequest = new ContasInquiryRequest();
+		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
+		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
+		pagedInquiryRequest.setPreQueryCount(true);
+		pagedInquiryRequest.addSortExpressions(new SortExpression("ID",
+				Direction.Ascending));
+
+		try
+		{
+
+			modelAndView.addObject(RESPONSE, getMapper()
+					.writeValueAsString(fetchContasByRequest(pagedInquiryRequest)));
+
+			FiltersResponse filtersResponse = new FiltersResponse();
+			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
+
+			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
+		}
+
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return modelAndView;
+	}
+
+	// Contas receber
+	@RequestMapping(value = FETCH_LIST_CONTAS_RB, method = RequestMethod.GET)
+	public ModelAndView loadList(HttpServletRequest request)
+	{
+		ModelAndView modelAndView = new ModelAndView("contas/contas_main");
+
+		// Check whether has initial load or not
+		if (!isInitialLoad(request, modelAndView))
+		{
+			return modelAndView;
+		}
+
+		ContasInquiryRequest pagedInquiryRequest = new ContasInquiryRequest();
+		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
+		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
+		pagedInquiryRequest.setPreQueryCount(true);
+		pagedInquiryRequest.addSortExpressions(new SortExpression("ID",
+				Direction.Ascending));
+
+		try
+		{
+
+			modelAndView.addObject(RESPONSE, getMapper()
+					.writeValueAsString(fetchContasByRequest(pagedInquiryRequest)));
+
+			FiltersResponse filtersResponse = new FiltersResponse();
+			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
+
+			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
+		}
+
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return modelAndView;
+	}
+
+	// caixa
+	@RequestMapping(value = FETCH_LIST_CAIXA, method = RequestMethod.GET)
+	public ModelAndView loadList(HttpServletRequest request)
+	{
+		ModelAndView modelAndView = new ModelAndView(VIEW_PD_COMPRAS_MAIN);
+
+		// Check whether has initial load or not
+		if (!isInitialLoad(request, modelAndView))
+		{
+			return modelAndView;
+		}
+
+		CaixaInquiryRequest pagedInquiryRequest = new CaixaInquiryRequest();
+		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
+		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
+		pagedInquiryRequest.setPreQueryCount(true);
+		pagedInquiryRequest.addSortExpressions(new SortExpression("ID",
+				Direction.Ascending));
+
+		try
+		{
+
+			modelAndView.addObject(RESPONSE, getMapper()
+					.writeValueAsString(fetchCaixaByRequest(pagedInquiryRequest)));
+
+			FiltersResponse filtersResponse = new FiltersResponse();
+			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
+
+			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
+		}
+
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return modelAndView;
+	}
+
+	// cond pg
+	@RequestMapping(value = FETCH_LIST_CONDPAG, method = RequestMethod.GET)
+	public ModelAndView loadList(HttpServletRequest request)
+	{
+		ModelAndView modelAndView = new ModelAndView(VIEW_PD_COMPRAS_MAIN);
+
+		// Check whether has initial load or not
+		if (!isInitialLoad(request, modelAndView))
+		{
+			return modelAndView;
+		}
+
+		CondPgInquiryRequest pagedInquiryRequest = new CondPgInquiryRequest();
+		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
+		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
+		pagedInquiryRequest.setPreQueryCount(true);
+		pagedInquiryRequest.addSortExpressions(new SortExpression("ID",
+				Direction.Ascending));
+
+		try
+		{
+
+			modelAndView.addObject(RESPONSE, getMapper()
+					.writeValueAsString(fetchCondPgByRequest(pagedInquiryRequest)));
 
 			FiltersResponse filtersResponse = new FiltersResponse();
 			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);

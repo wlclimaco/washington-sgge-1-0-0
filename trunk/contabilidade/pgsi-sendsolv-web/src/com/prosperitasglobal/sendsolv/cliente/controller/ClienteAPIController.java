@@ -1,16 +1,5 @@
 package com.prosperitasglobal.sendsolv.cliente.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.ClienteMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.response.ClienteResponse;
-
 /**
  * The ClienteAPIController Class.
  *
@@ -30,6 +19,14 @@ public class ClienteAPIController extends ClienteBaseController
 
 	/** The Constant FETCH_ALL. */
 	private static final String FETCH_ALL = "/fetchall";
+
+	private static final String FETCH_ALL_AGENCIA = "/fetch/agencia";
+
+	private static final String FETCH_ALL_BANCO = "/fetch/banco";
+
+	private static final String FETCH_ALL_CONTA = "/fetch/conta";
+
+	private static final String FETCH_ALL_ESTADO = "/fetch/estado";
 
 	/** The Constant INSERT_CLIENTE. */
 	private static final String INSERT_CLIENTE = "/add";
@@ -51,6 +48,42 @@ public class ClienteAPIController extends ClienteBaseController
 	{
 
 		return fetchClienteByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_ALL_AGENCIA, method = RequestMethod.POST)
+	@ResponseBody
+	public AgenciaResponse fetchAll(@RequestBody AgenciaInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchAgenciaByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_ALL_BANCO, method = RequestMethod.POST)
+	@ResponseBody
+	public BancoResponse fetchAll(@RequestBody BancoInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchBancoByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_ALL_CONTA, method = RequestMethod.POST)
+	@ResponseBody
+	public ContaResponse fetchAll(@RequestBody ContaInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchContaByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_ALL_ESTADO, method = RequestMethod.POST)
+	@ResponseBody
+	public EstadoResponse fetchAll(@RequestBody EstadoInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchEstadoByRequest(pagedInquiryRequest);
 
 	}
 
