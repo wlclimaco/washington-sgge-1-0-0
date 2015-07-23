@@ -80,7 +80,7 @@
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchClassificacaoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+  <select id="fetchClassificacaoRowCount" parameterType="ClassificacaoInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM classificacao
      WHERE 1 = 1
@@ -103,13 +103,30 @@
     ORDER BY id ASC
   </select>
 
-  <select id="fetchAllClassificacaosByRequest" parameterType="PagedInquiryRequest" resultMap="classificacaoResult">
-	 SELECT b.id,<include refid="allClassificacaoColumns" />
-        FROM classificacao b
-     WHERE 1 = 1
-     <if test="id != null">
-		  AND b.id = #{id}
-	 </if>
+  <select id="fetchAllClassificacaosByRequest" parameterType="ClassificacaoInquiryRequest" resultMap="classificacaoResult">
+     SELECT * FROM
+    			(
+    				SELECT
+    						<include refid="allClassificacaoColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM classificacao b
+					WHERE 2 = 2
+					<if test="id != null">
+						AND b.id = #{id}
+					</if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
   </select>
 
   <select id="fetchClassificacaoByProduto" parameterType="Integer" resultMap="classificacaoResult">

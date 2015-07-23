@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ContaMap">
+
+  <resultMap id="contaResult" type="Conta">
+	<result property="id" 			  column="id" />
+	<result property="parentId" 	  column="parentId" />
+	<result property="pessoaId" 	  column="pessoaId" />
+	<result property="docId" 		  column="docId" />
+	<result property="contaTypeEnum" column="contaTypeEnum" />
+	<result property="numeroParc" 	  column="numeroParc" />
+	<result property="parcela" 		  column="parcela" />
+	<result property="valorOriginal"  column="valorOriginal" />
+	<result property="dataVencimento" column="dataVencimento" />
+	<result property="dataGeracao" 	  column="dataGeracao" />
+	<result property="dataPagamento"  column="dataPagamento" />
+	<result property="juros" 		  column="juros" />
+	<result property="taxa" 		  column="taxa" />
+	<result property="valorTotal"     column="valorTotal" />
+	<result property="processId"      column="processId" />
+	<result property="emprId"     	  column="emprId" />
+	<result property="createUser" 	  column="create_user"/>
+	<result property="createDateUTC"  column="create_date"/>
+	<result property="modifyUser"     column="modify_user"/>
+	<result property="modifyDateUTC"  column="modify_date"/>
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allContaColumns">
+  		 b.parentId
+		,b.pessoaId
+		,b.docId
+		,b.contaTypeEnum
+		,b.numeroParc
+		,b.parcela
+		,b.valorOriginal
+		,b.dataVencimento
+		,b.dataGeracao
+		,b.dataPagamento
+		,b.juros
+		,b.taxa
+		,b.valorTotal
+		,b.processId
+		,b.emprId
+      	,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allContaValues">
+  		#{parentId},
+		#{pessoaId},
+		#{docId},
+		#{contaTypeEnumValue},
+		#{numeroParc},
+		#{parcela},
+		#{valorOriginal},
+		#{dataVencimento},
+		#{dataGeracao},
+		#{dataPagamento},
+		#{juros},
+		#{taxa},
+		#{valorTotal},
+		#{processId},
+		#{emprId},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+
+   <insert id="insertConta" parameterType="Conta" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO conta (
+		<include refid="allContaColumns" />
+      )
+    VALUES (<include refid="allContaValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateConta" parameterType="Conta">
+    UPDATE conta
+    	<set>
+			<if test="parentId!= null"> parentId=#{parentId},</if>
+			<if test="pessoaId!= null"> pessoaId=#{pessoaId},</if>
+			<if test="docId!= null"> docId=#{docId},</if>
+			<if test="contaTypeEnumValue!= null"> contaTypeEnum=#{contaTypeEnumValue},</if>
+			<if test="numeroParc!= null"> numeroParc=#{numeroParc},</if>
+			<if test="parcela!= null"> parcela=#{parcela},</if>
+			<if test="valorOriginal!= null"> valorOriginal=#{valorOriginal},</if>
+			<if test="dataVencimento!= null"> dataVencimento=#{dataVencimento},</if>
+			<if test="dataGeracao!= null"> dataGeracao=#{dataGeracao},</if>
+			<if test="dataPagamento!= null"> dataPagamento=#{dataPagamento},</if>
+			<if test="juros!= null"> juros=#{juros},</if>
+			<if test="taxa!= null"> taxa=#{taxa},</if>
+			<if test="valorTotal!= null"> valorTotal=#{valorTotal},</if>
+			<if test="processId!= null"> processId=#{processId},</if>
+			<if test="emprId!= null"> emprId=#{emprId},</if>
+			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchContaRowCount" parameterType="ContaInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM conta
+
+  </select>
+
+  <select id="fetchAllConta" resultMap="contaResult">
+    SELECT
+	<include refid="allContaColumns" />
+    FROM conta ORDER BY dataGeracao ASC
+  </select>
+
+  <select id="fetchContaById" parameterType="FetchByIdRequest" resultMap="contaResult">
+    			   SELECT
+					b.id,	<include refid="allContaColumns" />
+ 				   FROM conta b
+					where b.id = #{id}
+  </select>
+
+   <select id="fetchContaByNota" parameterType="Integer" resultMap="contaResult">
+    			   SELECT
+					b.id,	<include refid="allContaColumns" />
+ 				   FROM conta b
+					where b.parentid = #{id} order by b.dataGeracao
+  </select>
+
+  <select id="fetchAllContasByRequest" parameterType="ContaInquiryRequest" resultMap="contaResult">
+     SELECT * FROM ( SELECT b.id,
+    						<include refid="allContaColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM conta b
+						where 1 = 1
+					<if test="parentId != null">
+						AND b.parentid = #{id}
+					</if>
+
+					 <if test="statusList != null and !statusList.isEmpty()">
+					     AND b.PGSI_status IN
+					     <foreach item="item" index="index" collection="statusList"
+						     open="(" separator="," close=")">
+						   	 #{item.value}
+						 </foreach>
+					 </if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+</mapper>

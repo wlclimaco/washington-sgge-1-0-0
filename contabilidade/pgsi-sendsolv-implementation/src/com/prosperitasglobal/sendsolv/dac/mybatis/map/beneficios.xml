@@ -170,9 +170,6 @@
     FROM Beneficio b ORDER BY b.id ASC
   </select>
 
-  <select id="fetchAllBeneficiossByRequest" parameterType="PagedInquiryRequest" resultMap="beneficioResult">
-
-  </select>
 
   <select id="fetchFuncByData" parameterType="Integer" resultType="BeneficioMesApp">
 	SELECT c.*
@@ -192,5 +189,43 @@
 		where  f.idFunc =  #{id}
   </select>
 
+<select id="fetchBeneficiosRowCount" parameterType="BeneficiosInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM beneficios
+
+  </select>
+
+  <select id="fetchAllBeneficiosByRequest" parameterType="BeneficiosInquiryRequest" resultMap="beneficioResult">
+    SELECT * FROM
+    			(
+    				SELECT
+    						<include refid="allBeneficiosColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM beneficios b
+					WHERE 2 = 2
+					<if test="codigo != null">
+						AND b.codigo = #{codigo}
+					</if>
+					 <if test="cidadeList != null and !cidadeList.isEmpty()">
+					     AND b.cidade IN
+					     <foreach item="item" index="index" collection="cidadeList"
+						     open="(" separator="," close=")">
+						   	 #{item.value}
+						 </foreach>
+					 </if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
 
 </mapper>

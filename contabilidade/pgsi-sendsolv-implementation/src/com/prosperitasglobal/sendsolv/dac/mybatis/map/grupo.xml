@@ -132,7 +132,7 @@
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchGrupoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+  <select id="fetchGrupoRowCount" parameterType="GrupoInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM grupo
      WHERE 1 = 1
@@ -155,13 +155,30 @@
     ORDER BY grupo ASC
   </select>
 
-  <select id="fetchAllGruposByRequest" parameterType="PagedInquiryRequest" resultMap="grupoResult">
-	 SELECT b.id,<include refid="allGrupoColumns" />
-        FROM grupo b
-     WHERE 1 = 1
-     <if test="id != null">
-		  AND b.id = #{id}
-	 </if>
+  <select id="fetchAllGruposByRequest" parameterType="GrupoInquiryRequest" resultMap="grupoResult">
+	 SELECT * FROM
+    			(
+    				SELECT
+    						<include refid="allGrupoColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM grupo b
+					WHERE 2 = 2
+					<if test="id != null">
+						AND b.id = #{id}
+					</if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
   </select>
 
   <select id="fetchGrupoByProduto" parameterType="Integer" resultMap="grupoProdResult">

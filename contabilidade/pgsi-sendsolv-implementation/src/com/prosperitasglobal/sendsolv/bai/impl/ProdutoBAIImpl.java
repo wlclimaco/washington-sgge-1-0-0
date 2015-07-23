@@ -7,8 +7,16 @@ import org.slf4j.LoggerFactory;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IProdutoBAC;
 import com.prosperitasglobal.sendsolv.bai.IProdutoBAI;
+import com.prosperitasglobal.sendsolv.model.Cfop;
+import com.prosperitasglobal.sendsolv.model.Classificacao;
+import com.prosperitasglobal.sendsolv.model.Grupo;
+import com.prosperitasglobal.sendsolv.model.Marca;
 import com.prosperitasglobal.sendsolv.model.Produto;
+import com.prosperitasglobal.sendsolv.model.SubGrupo;
+import com.prosperitasglobal.sendsolv.model.Tributacao;
+import com.prosperitasglobal.sendsolv.model.UniMed;
 import com.prosperitasglobal.sendsolv.model.request.CfopInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ClassificacaoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.GrupoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.MarcaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ProdutoInquiryRequest;
@@ -17,6 +25,7 @@ import com.prosperitasglobal.sendsolv.model.request.SubGrupoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.TributacaoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.UniMedInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.response.CfopResponse;
+import com.prosperitasglobal.sendsolv.model.response.ClassificacaoResponse;
 import com.prosperitasglobal.sendsolv.model.response.GrupoResponse;
 import com.prosperitasglobal.sendsolv.model.response.MarcaResponse;
 import com.prosperitasglobal.sendsolv.model.response.ProdutoResponse;
@@ -351,43 +360,309 @@ public class ProdutoBAIImpl implements IProdutoBAI
 	@Override
 	public UniMedResponse fetchUniMedByRequest(UniMedInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		UniMedResponse response = new UniMedResponse();
+		try
+		{
+			fetchUniMed(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.bai.IProdutoBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
+	 * RiskMaintenanceRequest)
+	 */
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchUniMed(UniMedInquiryRequest request, UniMedResponse response)
+	{
+		InternalResultsResponse<UniMed> internalResponse = new InternalResultsResponse<UniMed>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getProdutoBAC().fetchUniMedByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
 	@Override
 	public GrupoResponse fetchGrupoByRequest(GrupoInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		GrupoResponse response = new GrupoResponse();
+		try
+		{
+			fetchGrupo(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.bai.IProdutoBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
+	 * RiskMaintenanceRequest)
+	 */
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchGrupo(GrupoInquiryRequest request, GrupoResponse response)
+	{
+		InternalResultsResponse<Grupo> internalResponse = new InternalResultsResponse<Grupo>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getProdutoBAC().fetchGrupoByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
 	@Override
 	public SubGrupoResponse fetchSubGrupoByRequest(SubGrupoInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		SubGrupoResponse response = new SubGrupoResponse();
+		try
+		{
+			fetchSubGrupo(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.bai.IProdutoBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
+	 * RiskMaintenanceRequest)
+	 */
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchSubGrupo(SubGrupoInquiryRequest request, SubGrupoResponse response)
+	{
+		InternalResultsResponse<SubGrupo> internalResponse = new InternalResultsResponse<SubGrupo>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getProdutoBAC().fetchSubGrupoByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
 	@Override
 	public MarcaResponse fetchMarcaByRequest(MarcaInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		MarcaResponse response = new MarcaResponse();
+		try
+		{
+			fetchMarca(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.bai.IProdutoBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
+	 * RiskMaintenanceRequest)
+	 */
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchMarca(MarcaInquiryRequest request, MarcaResponse response)
+	{
+		InternalResultsResponse<Marca> internalResponse = new InternalResultsResponse<Marca>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getProdutoBAC().fetchMarcaByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
 	@Override
 	public TributacaoResponse fetchTributacaoByRequest(TributacaoInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		TributacaoResponse response = new TributacaoResponse();
+		try
+		{
+			fetchTributacao(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.bai.IProdutoBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
+	 * RiskMaintenanceRequest)
+	 */
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchTributacao(TributacaoInquiryRequest request, TributacaoResponse response)
+	{
+		InternalResultsResponse<Tributacao> internalResponse = new InternalResultsResponse<Tributacao>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getProdutoBAC().fetchTributacaoByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
 	@Override
 	public CfopResponse fetchCfopByRequest(CfopInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		CfopResponse response = new CfopResponse();
+		try
+		{
+			fetchCfop(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.bai.IProdutoBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
+	 * RiskMaintenanceRequest)
+	 */
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchCfop(CfopInquiryRequest request, CfopResponse response)
+	{
+		InternalResultsResponse<Cfop> internalResponse = new InternalResultsResponse<Cfop>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getProdutoBAC().fetchCfopByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	@Override
+	public ClassificacaoResponse fetchClassificacaoByRequest(ClassificacaoInquiryRequest request)
+	{
+		ClassificacaoResponse response = new ClassificacaoResponse();
+		try
+		{
+			fetchClassificacao(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.bai.IProdutoBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
+	 * RiskMaintenanceRequest)
+	 */
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchClassificacao(ClassificacaoInquiryRequest request, ClassificacaoResponse response)
+	{
+		InternalResultsResponse<Classificacao> internalResponse = new InternalResultsResponse<Classificacao>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getProdutoBAC().fetchClassificacaoByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
 }

@@ -47,19 +47,43 @@ import com.prosperitasglobal.sendsolv.dacd.mybatis.SalarioDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.StatusDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.TelefoneDACD;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.Agencia;
+import com.prosperitasglobal.sendsolv.model.Banco;
+import com.prosperitasglobal.sendsolv.model.Beneficios;
 import com.prosperitasglobal.sendsolv.model.CdStatusTypeEnum;
+import com.prosperitasglobal.sendsolv.model.Cidade;
 import com.prosperitasglobal.sendsolv.model.Cliente;
+import com.prosperitasglobal.sendsolv.model.Conta;
+import com.prosperitasglobal.sendsolv.model.Contato;
+import com.prosperitasglobal.sendsolv.model.Convenio;
+import com.prosperitasglobal.sendsolv.model.Estado;
+import com.prosperitasglobal.sendsolv.model.Eventos;
+import com.prosperitasglobal.sendsolv.model.FormaPg;
 import com.prosperitasglobal.sendsolv.model.Fornecedor;
 import com.prosperitasglobal.sendsolv.model.Funcionario;
 import com.prosperitasglobal.sendsolv.model.Historico;
 import com.prosperitasglobal.sendsolv.model.HistoricoItens;
+import com.prosperitasglobal.sendsolv.model.HorarioFunc;
 import com.prosperitasglobal.sendsolv.model.Pessoa;
+import com.prosperitasglobal.sendsolv.model.Profissao;
 import com.prosperitasglobal.sendsolv.model.Status;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.Transportador;
+import com.prosperitasglobal.sendsolv.model.request.AgenciaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.BancoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.BeneficiosInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ContaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ContatoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ConvenioInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EstadoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EventoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FormaPgInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FornecedorInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.HoraFuncInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ProfissaoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.TransportadorInquiryRequest;
 import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResponse;
@@ -588,10 +612,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
-								null, AcaoEnum.DELETE,
-								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.CLIENTE, getStatusDAC(),
-								getHistoricoDAC(), pessoa.getProcessId(), null);
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+						null, AcaoEnum.DELETE,
+						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.CLIENTE, getStatusDAC(),
+						getHistoricoDAC(), pessoa.getProcessId(), null);
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
 		{
@@ -799,10 +823,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
-								null, AcaoEnum.DELETE,
-								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.FORNECEDOR, getStatusDAC(),
-								getHistoricoDAC(), pessoa.getProcessId(), null);
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+						null, AcaoEnum.DELETE,
+						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.FORNECEDOR, getStatusDAC(),
+						getHistoricoDAC(), pessoa.getProcessId(), null);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -997,10 +1021,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
-								null, AcaoEnum.DELETE,
-								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.TRANSPORTADOR, getStatusDAC(),
-								getHistoricoDAC(), pessoa.getProcessId(), null);
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+						null, AcaoEnum.DELETE,
+						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.TRANSPORTADOR, getStatusDAC(),
+						getHistoricoDAC(), pessoa.getProcessId(), null);
 		return response;
 	}
 
@@ -1295,12 +1319,204 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response,
-								funcionario.getId(),
-								null, AcaoEnum.DELETE,
-								funcionario.getCreateUser(), funcionario.getEmprId(), TabelaEnum.TRANSPORTADOR,
-								getStatusDAC(),
-								getHistoricoDAC(), funcionario.getProcessId(), null);
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response,
+						funcionario.getId(),
+						null, AcaoEnum.DELETE,
+						funcionario.getCreateUser(), funcionario.getEmprId(), TabelaEnum.TRANSPORTADOR,
+						getStatusDAC(),
+						getHistoricoDAC(), funcionario.getProcessId(), null);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Profissao> fetchProfissaoByRequest(ProfissaoInquiryRequest request)
+	{
+		InternalResultsResponse<Profissao> response = new InternalResultsResponse<Profissao>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "ProfissaoMap.fetchProfissaoRowCount",
+				"ProfissaoMap.fetchAllProfissaosByRequest", response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Convenio> fetchConvenioByRequest(ConvenioInquiryRequest request)
+	{
+		InternalResultsResponse<Convenio> response = new InternalResultsResponse<Convenio>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "ConvenioMap.fetchConvenioRowCount",
+				"ConvenioMap.fetchAllConveniosByRequest", response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Contato> fetchContatoByRequest(ContatoInquiryRequest request)
+	{
+		InternalResultsResponse<Contato> response = new InternalResultsResponse<Contato>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "ContatoMap.fetchContatoRowCount",
+				"ContatoMap.fetchAllContatosByRequest", response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Banco> fetchBancoByRequest(BancoInquiryRequest request)
+	{
+		InternalResultsResponse<Banco> response = new InternalResultsResponse<Banco>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "BancoMap.fetchBancoRowCount",
+				"BancoMap.fetchAllBancosByRequest", response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<FormaPg> fetchFormaPgByRequest(FormaPgInquiryRequest request)
+	{
+		InternalResultsResponse<FormaPg> response = new InternalResultsResponse<FormaPg>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "FormaPgMap.fetchFormaPgRowCount",
+				"FormaPgMap.fetchAllFormaPgsByRequest", response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Agencia> fetchAgenciaByRequest(AgenciaInquiryRequest request)
+	{
+		InternalResultsResponse<Agencia> response = new InternalResultsResponse<Agencia>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "AgenciaMap.fetchAgenciaRowCount",
+				"AgenciaMap.fetchAllAgenciasByRequest", response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Conta> fetchContaByRequest(ContaInquiryRequest request)
+	{
+		InternalResultsResponse<Conta> response = new InternalResultsResponse<Conta>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "ContaMap.fetchContaRowCount",
+				"ContaMap.fetchAllContasByRequest", response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Estado> fetchEstadoByRequest(EstadoInquiryRequest request)
+	{
+		InternalResultsResponse<Estado> response = new InternalResultsResponse<Estado>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "EstadoMap.fetchEstadoRowCount",
+				"EstadoMap.fetchAllEstadoByRequest", response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Cidade> fetchCidadeRequest(CidadeInquiryRequest request)
+	{
+		InternalResultsResponse<Cidade> response = new InternalResultsResponse<Cidade>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "CidadeMap.fetchCidadeRowCount",
+				"CidadeMap.fetchAllCidadesByRequest", response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Eventos> fetchEventosRequest(EventoInquiryRequest request)
+	{
+		InternalResultsResponse<Eventos> response = new InternalResultsResponse<Eventos>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "EventoMap.fetchEventoRowCount",
+				"EventoMap.fetchAllEventosByRequest", response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Beneficios> fetchBeneficiosRequest(BeneficiosInquiryRequest request)
+	{
+		InternalResultsResponse<Beneficios> response = new InternalResultsResponse<Beneficios>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "BeneficiosMap.fetchBeneficiosRowCount",
+				"BeneficiosMap.fetchAllBeneficiosByRequest", response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<HorarioFunc> fetchHorarioFuncsRequest(HoraFuncInquiryRequest request)
+	{
+		InternalResultsResponse<HorarioFunc> response = new InternalResultsResponse<HorarioFunc>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "HoraFuncMap.fetchHoraFuncRowCount",
+				"HoraFuncMap.fetchAllHoraFuncByRequest", response);
 		return response;
 	}
 }

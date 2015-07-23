@@ -32,6 +32,8 @@ import com.prosperitasglobal.sendsolv.dacd.mybatis.NotesDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.TributacaoDACD;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
+import com.prosperitasglobal.sendsolv.model.Caixa;
+import com.prosperitasglobal.sendsolv.model.CondPag;
 import com.prosperitasglobal.sendsolv.model.Contas;
 import com.prosperitasglobal.sendsolv.model.Historico;
 import com.prosperitasglobal.sendsolv.model.HistoricoItens;
@@ -41,6 +43,8 @@ import com.prosperitasglobal.sendsolv.model.NotaFiscalSaida;
 import com.prosperitasglobal.sendsolv.model.Orcamento;
 import com.prosperitasglobal.sendsolv.model.PedidoCompras;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
+import com.prosperitasglobal.sendsolv.model.request.CaixaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CondPgInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ContasInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.OrcamentoInquiryRequest;
@@ -888,8 +892,18 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 	@Override
 	public InternalResultsResponse<Contas> fetchContasByRequest(ContasInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResultsResponse<Contas> response = new InternalResultsResponse<Contas>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request,
+				"ContasMap.fetchContasRowCount",
+				"ContasMap.fetchAllContassByRequest", response);
+		return response;
 	}
 
 	@Override
@@ -1116,5 +1130,39 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 
 		QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistoricoItens", historicoItens, response);
 		return historicoItens.getId();
+	}
+
+	@Override
+	public InternalResultsResponse<Caixa> fetchCaixaByRequest(CaixaInquiryRequest request)
+	{
+		InternalResultsResponse<Caixa> response = new InternalResultsResponse<Caixa>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request,
+				"CaixaMap.fetchCaixaRowCount",
+				"CaixaMap.fetchAllCaixasByRequest", response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<CondPag> fetchCondPgByRequest(CondPgInquiryRequest request)
+	{
+		InternalResultsResponse<CondPag> response = new InternalResultsResponse<CondPag>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request,
+				"CondPagMap.fetchCondPagRowCount",
+				"CondPagMap.fetchAllCondPagsByRequest", response);
+		return response;
 	}
 }
