@@ -122,4 +122,9 @@
     FROM email b where b.tabela = 23 and b.parentId= #{id} ORDER BY b.id ASC
  </select>
 
+ <select id="fetchAllEmailsByMarca" parameterType="Integer" resultMap="emailResult">
+	 SELECT
+	<include refid="allEmailColumns" />
+    FROM email b where b.tabela = 50 and b.parentId= #{id} ORDER BY b.id ASC
+ </select>
 </mapper>

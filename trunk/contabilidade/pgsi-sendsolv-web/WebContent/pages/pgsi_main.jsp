@@ -9,15 +9,43 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<link rel="stylesheet" href="styles/preload.css" />
-<link rel="stylesheet" href="styles/pgsi-common.css" />
-<link href="styles/bootstrap.min.css" rel="stylesheet">
-<link href="styles/bootstrap-responsive.min.css" rel="stylesheet">
-<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"rel="stylesheet">
-<link href="styles/font-awesome.css" rel="stylesheet">
-<link href="styles/style.css" rel="stylesheet">
-<link rel="stylesheet" href="styles/jquery-ui.min.css" />
-<link rel="stylesheet" href="thirdparty/jquery/styles/jquery.dataTables.custom.css">
+
+	<link href="styles/bootstrap.min.css" rel="stylesheet">
+
+	<link href="styles/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="styles//metisMenu.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="styles/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="styles/dataTables.responsive.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="styles/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="styles/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+	<link rel="stylesheet" href="styles/preload.css" />
+
+	<link href="styles/style.css" rel="stylesheet">
+
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"rel="stylesheet">
+
+<!--<link rel="stylesheet" href="styles/preload.css" />-->
+<!-- <link rel="stylesheet" href="styles/pgsi-common.css" /> -->
+<!--<link href="styles/bootstrap.min.css" rel="stylesheet">-->
+<!--<link href="styles/bootstrap-responsive.min.css" rel="stylesheet">-->
+<!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"rel="stylesheet">-->
+<!--<link href="styles/font-awesome.css" rel="stylesheet">-->
+<!--<link href="styles/style.css" rel="stylesheet">-->
+<!--<link href="styles/dataTables.bootstrap.css" rel="stylesheet">-->
+<!--<link href="styles/dataTables.responsive.css" rel="stylesheet">-->
+<!--<link rel="stylesheet" href="styles/jquery-ui.min.css" />-->
+<!-- <link rel="stylesheet" href="thirdparty/jquery/styles/jquery.dataTables.custom.css"> -->
 
 <!--	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css" />
 	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css.map" />

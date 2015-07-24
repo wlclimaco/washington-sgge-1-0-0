@@ -34,14 +34,14 @@
 		<result property="modifyDateUTC" column="modify_date"/>
 		<association property="cfop"    column="cfop" select="CfopMap.fetchCfopById"  />
 		<association property="transportador"    column="transportador" select="TransportadorMap.fetchTransportadorByNota"  />
-		<association property="conhecimentoTransporte"    column="conhecimentoTransporte" select="ConhecimentoTransporteMap.fetchAllConhecimentoTransportesByNotaFiscalId"  />
-		<association property="empresa"    column="empresa" select="EmpresaMap.fetchEmpresaByNota"  />
+		<association property="conhecimentoTransporte"    column="id" select="ConhecimentoTransporteMap.fetchAllConhecimentoTransportesByNotaFiscalId"  />
+		<association property="empresa"    column="empresa" select="EmpresaMap.fetchEmpresaById"  />
 		<association property="pessoa"    column="pessoa" select="PessoaMap.fetchPessoaById"  />
 		<collection property="tributosList" column="id" select="TributosMap.fetchTributosByNota"/>
 		<collection property="formaPagList" column="id" select="FormaPgMap.fetchAllFormaPgByNota"/>
 		<collection property="notaFiscalItens" column="id" select="NotaFiscalItensMap.fetchAllNotaFiscalItensByNota"/>
-		<collection property="noteList" column="id" select="FrequencyEventMap.fetchFrequencyByNotaFiscalId"/>
-		<collection property="contasList" column="id" select="ContasPagarMap.fetchContasPagarByNota"/>
+		<collection property="noteList" column="id" select="NoteMap.fetchNoteByNotaFiscalId"/>
+		<collection property="contasList" column="id" select="ContasMap.fetchContasPagarByNota"/>
 		<collection property="itensEspeciais" column="id" select="ItensEspeciaisMap.fetchItensEspeciaisByNota"/>
 		<collection property="nfStatusList" column="id" select="NFStatusMap.fetchAllNFStatussByNota"/>
 

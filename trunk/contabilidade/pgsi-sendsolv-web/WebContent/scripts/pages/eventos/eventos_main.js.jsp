@@ -10,6 +10,40 @@
  */
 pgsi.pages.eventos = {
 
+	fnCreateNomeLink : function (val, type, full)
+	{ 		if (type !== "display")
+		{
+			return val;
+		}
+
+		return '<a title="View/Edit ' + full.nome + '" href="#/cidade/view?tab=info&pessoaId=' + full.id + '" class="edit_link">' + full.nome + '</a>';
+
+	},
+	fnValor : function (val, type, full)
+	{
+     	if (type !== "display")
+		{
+			return val;
+		}
+		if ((!$.pgsi.isNullOrUndefined(full.valor) && (full.valor != 0))) {
+			return '<span>R$</span>' .full.valor;
+		}else{
+			return full.porcentagem + '<span>%</span>';
+		}
+
+	},
+	fnMensal: function (val, type, full)
+	{
+     	if (type !== "display")
+		{
+			return val;
+		}
+		if (full.isMensal = 0) {
+			return "Sim";
+		}else{
+			return "Nao";
+		}
+	},
 
 	eventosTable: {
 

@@ -2,33 +2,46 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
 
-<nav class="secondary">
-	<a class="alist" href="cliente" title='<s:message code="commons.pages.customers" text="default text" />'>
-		<span><s:message code="commons.pages.customers" text="default text" /></span>
-	</a>
-	<span class="icon-nav icon-angle-right add-business">
-		<span>
-			<s:message code="commons.pages.clientefind" text="default text" />
-		</span>
-	</span>
-	<span id="company-name"></span>
-</nav>
 
-<h2 class="list"><s:message code="commons.pages.clientefind" text="default text" /></h2>
+    <div id="wrapper">
 
-<a href="cliente/add" id="insertPessoa" class="add-business alist" title='<s:message code="commons.pages.clienteadd" text="default text" />'>
-	<span class="icon-nav icon-plus icon-small-button"></span>
-	<s:message code="commons.pages.clienteadd" text="default text" />
-</a>
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="filter">
+					<form id="filterForm"></form>
+				</div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
 
-<div class="content list" >
-	<div class="filter">
-		<form id="filterForm"></form>
-	</div>
-	<div class="data">
-		<table id="data_list"></table>
-	</div>
-</div>
+        <div id="page-wrapper">
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="table-responsive table-bordered">
+                                <table class="table" id="data_list">
+
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- /.row -->
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+
+
+
 
 <jsp:include page="../../scripts/pages/pessoa/pessoa_main.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/cliente/cliente_init.js.jsp" flush="true" />

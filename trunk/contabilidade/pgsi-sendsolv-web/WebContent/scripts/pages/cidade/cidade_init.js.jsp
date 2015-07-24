@@ -21,7 +21,7 @@ $(document).ready(function()
 			var	oFilterPreLoad = ${filters};
 		</c:otherwise>
 	</c:choose>
-
+console.log()
 	$.pgsi.listener.wait({
 		eventName 	: "locationList",
 		arguments 	: ["table"],
@@ -32,7 +32,7 @@ $(document).ready(function()
 	pgsi.pages.cidade.locationTable = $('#data_list').dataTable($.pgsi.table.setTable(
 	{
 		id 			: "#data_list",
-		sAjaxSource : "api/pessoa/fetchall/cidade",
+		sAjaxSource : "api/cliente/fetch/cidade",
 		bPreLoad	: true,
 
 		ajax :
@@ -45,67 +45,39 @@ $(document).ready(function()
 		aoColumns :
 		[
 		{
-			headerData 		: "CNPJ",
+			headerData 		: "Cidade",
 			order			: "name",
-			mRender         : pgsi.pages.cidade.fnCreateEmpresaNameLink,
+			mRender         : pgsi.pages.cidade.fnCreateNomeLink,
 			sDefaultContent : "",
 			bSortable 		: false,
 			sClass          : "name-col"
 		},
 		{
-			headerData 		: "Nome Empresa",
+			headerData 		: "Estado",
 			order			: "organization_column",
-			mRender 		: pgsi.pages.cidade.fnCreateNomeLink,
+			mRender 		: pgsi.pages.cidade.fnEstado,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Cnae",
+			headerData 		: "UF",
 			order			: "city_column",
-			mRender 		: pgsi.pages.cidade.fnCnae,
+			mRender 		: pgsi.pages.cidade.fnUf,
 			mData	 		: "null",
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Email",
+			headerData 		: "Codigo",
 			order			: "state_column",
-			mRender 		: pgsi.pages.cidade.fnEmail,
+			mData 		    : "codigo",
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Telefone",
+			headerData 		: "Codigo IBGE",
 			order			: "country_column",
-			mRender 		: pgsi.pages.cidade.fnTelefone,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Regime",
-			order			: "sdn_status_column",
-			mRender 		: pgsi.pages.cidade.fnRegime,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Endereco",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.cidade.fnEndereco,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Documentos",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.cidade.fnDocumento,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Status",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.cidade.fnStatus,
+			mData 		    : "cdIBGE",
 			sDefaultContent : "",
 			bSortable 		: false
 		},

@@ -20,7 +20,7 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<collection property="notes" column="id" select="FrequencyEventMap.fetchFrequencyByConvenioId"/>
+	<collection property="notes" column="id" select="NoteMap.fetchNoteById"/>
 	<collection property="listCondPag" column="id" select="CondPagMap.fetchCondPagByConvenioId"/>
   </resultMap>
 

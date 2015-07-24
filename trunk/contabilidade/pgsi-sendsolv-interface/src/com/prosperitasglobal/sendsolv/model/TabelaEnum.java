@@ -154,7 +154,9 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 
 	PEDIDOCOMPRAS(48, "sendsolv.base.model.risklevelenum.medium"),
 
-	CONTAS(49, "sendsolv.base.model.risklevelenum.medium");
+	CONTAS(49, "sendsolv.base.model.risklevelenum.medium"),
+
+	MARCA(50, "sendsolv.base.model.risklevelenum.medium");
 
 	/** The code. */
 	private Integer code;

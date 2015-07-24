@@ -11,7 +11,7 @@ public class Classificacao extends ModelCosmeDamiao
 	private Integer id;
 
 	/** The type of an account. */
-	private String nome;
+	private String codigo;
 
 	/** The description. */
 	private String descricao;
@@ -47,19 +47,19 @@ public class Classificacao extends ModelCosmeDamiao
 	}
 
 	/**
-	 * @return the nome
+	 * @return the codigo
 	 */
-	public String getNome()
+	public String getCodigo()
 	{
-		return nome;
+		return codigo;
 	}
 
 	/**
-	 * @param nome the nome to set
+	 * @param codigo the codigo to set
 	 */
-	public void setNome(String nome)
+	public void setCodigo(String codigo)
 	{
-		this.nome = nome;
+		this.codigo = codigo;
 	}
 
 	/**
@@ -85,7 +85,8 @@ public class Classificacao extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Classificacao [getId()=" + getId() + ", getNome()=" + getNome() + ", getDescricao()=" + getDescricao()
+		return "Classificacao [getId()=" + getId() + ", getCodigo()=" + getCodigo() + ", getDescricao()="
+				+ getDescricao()
 				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
 				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
 				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()

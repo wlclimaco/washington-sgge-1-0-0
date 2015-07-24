@@ -15,7 +15,7 @@ public class FuncionarioCriteria implements Serializable
 	private String nome;
 
 	/** The business id. */
-	private Integer empresa;
+	private Integer emprId;
 
 	/** The recipient id. */
 	private Integer funcionarioId;
@@ -54,19 +54,19 @@ public class FuncionarioCriteria implements Serializable
 	}
 
 	/**
-	 * @return the empresa
+	 * @return the emprId
 	 */
-	public Integer getEmpresa()
+	public Integer getEmprId()
 	{
-		return empresa;
+		return emprId;
 	}
 
 	/**
-	 * @param empresa the empresa to set
+	 * @param emprId the emprId to set
 	 */
-	public void setEmpresa(Integer empresa)
+	public void setEmprId(Integer emprId)
 	{
-		this.empresa = empresa;
+		this.emprId = emprId;
 	}
 
 	/**
@@ -140,7 +140,7 @@ public class FuncionarioCriteria implements Serializable
 	@Override
 	public String toString()
 	{
-		return "FuncionarioCriteria [getNome()=" + getNome() + ", getEmpresa()=" + getEmpresa()
+		return "FuncionarioCriteria [getNome()=" + getNome() + ", getEmprId()=" + getEmprId()
 				+ ", getFuncionarioId()=" + getFuncionarioId() + ", getCidade()=" + getCidade() + ", getStatus()="
 				+ getStatus() + ", getBeneficios()=" + getBeneficios() + ", toString()=" + super.toString() + "]";
 	}

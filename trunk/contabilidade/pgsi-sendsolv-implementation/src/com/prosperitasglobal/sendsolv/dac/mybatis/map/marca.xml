@@ -22,9 +22,9 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByMarcaId"/>
-	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByMarca"/>
-	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByMarca"/>
+	<collection property="enderecoList" column="id" select="EnderecoMap.fetchEnderecoByMarcaId"/>
+	<collection property="emailList" column="id" select="EmailMap.fetchAllEmailsByMarca"/>
+	<collection property="telefoneList" column="id" select="TelefoneMap.fetchTelefoneByMarca"/>
   </resultMap>
 
 

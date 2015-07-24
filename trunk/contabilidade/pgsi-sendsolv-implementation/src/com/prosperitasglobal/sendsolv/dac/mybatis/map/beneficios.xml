@@ -33,7 +33,7 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<association property="dataList"    column="id" select="BeneficiosMap.fetchFuncByData"  />
+<!-- 	<association property="dataList"    column="id" select="BeneficiosMap.fetchFuncByData"  /> -->
 
   </resultMap>
 
@@ -191,7 +191,11 @@
 
 <select id="fetchBeneficiosRowCount" parameterType="BeneficiosInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
-        FROM beneficio
+        FROM beneficio WHERE 2 = 2
+					<if test="criteria.emprId != null">
+						AND b.emprId = #{criteria.emprId}
+					</if>
+
 
   </select>
 
@@ -203,16 +207,10 @@
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM beneficio b
 					WHERE 2 = 2
-					<if test="codigo != null">
-						AND b.codigo = #{codigo}
+					<if test="criteria.emprId != null">
+						AND b.emprId = #{criteria.emprId}
 					</if>
-					 <if test="cidadeList != null and !cidadeList.isEmpty()">
-					     AND b.cidade IN
-					     <foreach item="item" index="index" collection="cidadeList"
-						     open="(" separator="," close=")">
-						   	 #{item.value}
-						 </foreach>
-					 </if>
+
     			) LIST
 				<choose>
 					<when test="pageSize != null and pageSize > 0">

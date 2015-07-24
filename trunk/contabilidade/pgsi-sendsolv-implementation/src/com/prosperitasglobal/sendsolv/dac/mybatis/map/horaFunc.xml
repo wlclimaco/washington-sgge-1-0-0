@@ -111,7 +111,14 @@
 
   <select id="fetchHoraFuncRowCount" parameterType="HoraFuncInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
-        FROM horafunc
+        FROM horarios
+        	WHERE 2 = 2
+		<if test="criteria.id != null">
+			AND parentId = #{criteria.id}
+		</if>
+		<if test="criteria.emprId != null">
+			AND emprId = #{criteria.emprId}
+		</if>
 
   </select>
 
@@ -121,10 +128,13 @@
     				SELECT
     						<include refid="allHoraFuncColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
-    				FROM horafunc b
+    				FROM horarios b
 					WHERE 2 = 2
-					<if test="codigo != null">
-						AND b.codigo = #{codigo}
+					<if test="criteria.id != null">
+						AND b.parentId = #{criteria.id}
+					</if>
+					<if test="criteria.emprId != null">
+						AND b.emprId = #{criteria.emprId}
 					</if>
 
     			) LIST

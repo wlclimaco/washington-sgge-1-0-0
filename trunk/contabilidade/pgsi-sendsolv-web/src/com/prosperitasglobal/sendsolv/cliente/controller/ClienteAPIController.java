@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.model.request.AgenciaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.BancoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ClienteMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.ContaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EstadoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.response.AgenciaResponse;
 import com.prosperitasglobal.sendsolv.model.response.BancoResponse;
+import com.prosperitasglobal.sendsolv.model.response.CidadeResponse;
 import com.prosperitasglobal.sendsolv.model.response.ClienteResponse;
 import com.prosperitasglobal.sendsolv.model.response.ContaResponse;
 import com.prosperitasglobal.sendsolv.model.response.EstadoResponse;
@@ -41,6 +43,8 @@ public class ClienteAPIController extends ClienteBaseController
 
 	private static final String FETCH_ALL_ESTADO = "/fetch/estado";
 
+	private static final String FETCH_ALL_CIDADE = "/fetch/cidade";
+
 	/** The Constant INSERT_CLIENTE. */
 	private static final String INSERT_CLIENTE = "/add";
 
@@ -61,6 +65,15 @@ public class ClienteAPIController extends ClienteBaseController
 	{
 
 		return fetchClienteByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_ALL_CIDADE, method = RequestMethod.POST)
+	@ResponseBody
+	public CidadeResponse fetchAll(@RequestBody CidadeInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchCidadeByRequest(pagedInquiryRequest);
 
 	}
 

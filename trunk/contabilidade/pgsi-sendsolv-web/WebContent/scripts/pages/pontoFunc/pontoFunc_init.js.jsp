@@ -32,7 +32,7 @@ $(document).ready(function()
 	pgsi.pages.pontoFunc.locationTable = $('#data_list').dataTable($.pgsi.table.setTable(
 	{
 		id 			: "#data_list",
-		sAjaxSource : "api/pessoa/fetchall/pontoFunc",
+		sAjaxSource : "api/funcionario/fetch/pontoFunc",
 		bPreLoad	: true,
 
 		ajax :
@@ -45,9 +45,9 @@ $(document).ready(function()
 		aoColumns :
 		[
 		{
-			headerData 		: "CNPJ",
+			headerData 		: "ID",
 			order			: "name",
-			mRender         : pgsi.pages.pontoFunc.fnCreateEmpresaNameLink,
+			mData           : "ID",
 			sDefaultContent : "",
 			bSortable 		: false,
 			sClass          : "name-col"

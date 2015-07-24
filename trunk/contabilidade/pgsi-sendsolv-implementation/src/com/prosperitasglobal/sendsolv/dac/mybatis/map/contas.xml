@@ -11,7 +11,7 @@
 	<result property="parentId" 	  column="parentId" />
 	<result property="pessoaId" 	  column="pessoaId" />
 	<result property="docId" 		  column="docId" />
-	<result property="contasTypeEnum" column="contasTypeEnum" />
+	<result property="contasTypeEnumValue" column="contasTypeEnum" />
 	<result property="numeroParc" 	  column="numeroParc" />
 	<result property="parcela" 		  column="parcela" />
 	<result property="valorOriginal"  column="valorOriginal" />
@@ -134,6 +134,13 @@
   </select>
 
    <select id="fetchContasByNota" parameterType="Integer" resultMap="contasResult">
+    			   SELECT
+					b.id,	<include refid="allContasColumns" />
+ 				   FROM contas b
+					where b.parentid = #{id} order by b.dataGeracao
+  </select>
+
+     <select id="fetchContasPagarByNota" parameterType="Integer" resultMap="contasResult">
     			   SELECT
 					b.id,	<include refid="allContasColumns" />
  				   FROM contas b

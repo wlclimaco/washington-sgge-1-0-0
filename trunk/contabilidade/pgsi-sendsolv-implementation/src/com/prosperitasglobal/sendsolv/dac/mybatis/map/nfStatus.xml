@@ -118,7 +118,9 @@
  <select id="fetchAllNFStatussByNota" parameterType="Integer" resultMap="nFStatusResult">
 	 SELECT b.id,
 	<include refid="allNFStatusColumns" />
-    FROM nFStatus b where b.notaId =  #{id} ORDER BY b.dataMudanca ASC
+    FROM nFStatus b where b.idNota =  #{id} ORDER BY b.dataMudanca ASC
  </select>
+
+
 
 </mapper>

@@ -139,25 +139,25 @@
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE
-     cfop_id = #{id}
+     id = #{id}
   </update>
 
    <!--
 		SQL Delete Statements.
    -->
   <delete id="deleteCfopById" parameterType="Integer">
-    	DELETE FROM cfop WHERE cfop_id = #{id}
+    	DELETE FROM cfop WHERE id = #{id}
   </delete>
 
 	<!--
 		SQL Fetch Statements.
  	-->
   <select id="fetchCfopRowCount" parameterType="CfopInquiryRequest" resultType="Integer">
-     SELECT COUNT(cfop_id) AS RECORD_COUNT
+     SELECT COUNT(id) AS RECORD_COUNT
         FROM cfop
      WHERE 2 = 2
-     <if test="parentId != null">
-		  AND FK_cfop_id = #{parentId}
+     <if test="criteria.id != null">
+		  AND id = #{criteria.id}
 	 </if>
   </select>
 
