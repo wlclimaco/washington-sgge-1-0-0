@@ -7,8 +7,12 @@ import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IFuncionarioBAC;
+import com.prosperitasglobal.sendsolv.bac.IPessoaBAC;
 import com.prosperitasglobal.sendsolv.bai.IFuncionarioBAI;
+import com.prosperitasglobal.sendsolv.model.Beneficios;
+import com.prosperitasglobal.sendsolv.model.Eventos;
 import com.prosperitasglobal.sendsolv.model.Funcionario;
+import com.prosperitasglobal.sendsolv.model.HorarioFunc;
 import com.prosperitasglobal.sendsolv.model.request.BeneficiosInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EventoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
@@ -60,6 +64,8 @@ public class FuncionarioBAIImpl implements IFuncionarioBAI
 	/** The funcionario bac. */
 	private IFuncionarioBAC empresaBAC; // injected by Spring through setter
 
+	private IPessoaBAC pessoaBAC;
+
 	/** The validation controller. */
 	private ValidationController validationController;
 
@@ -101,6 +107,38 @@ public class FuncionarioBAIImpl implements IFuncionarioBAI
 	public IFuncionarioBAC getFuncionarioBAC()
 	{
 		return empresaBAC;
+	}
+
+	/**
+	 * @return the empresaBAC
+	 */
+	public IFuncionarioBAC getEmpresaBAC()
+	{
+		return empresaBAC;
+	}
+
+	/**
+	 * @param empresaBAC the empresaBAC to set
+	 */
+	public void setEmpresaBAC(IFuncionarioBAC empresaBAC)
+	{
+		this.empresaBAC = empresaBAC;
+	}
+
+	/**
+	 * @return the pessoaBAC
+	 */
+	public IPessoaBAC getPessoaBAC()
+	{
+		return pessoaBAC;
+	}
+
+	/**
+	 * @param pessoaBAC the pessoaBAC to set
+	 */
+	public void setPessoaBAC(IPessoaBAC pessoaBAC)
+	{
+		this.pessoaBAC = pessoaBAC;
 	}
 
 	/*
@@ -342,22 +380,133 @@ public class FuncionarioBAIImpl implements IFuncionarioBAI
 	@Override
 	public BeneficiosResponse fetchBeneficiosByRequest(BeneficiosInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		BeneficiosResponse response = new BeneficiosResponse();
+		try
+		{
+			fetchPagedBeneficios(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.bai.IFuncionarioBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
+	 * RiskMaintenanceRequest)
+	 */
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchPagedBeneficios(BeneficiosInquiryRequest request, BeneficiosResponse response)
+	{
+		InternalResultsResponse<Beneficios> internalResponse = new InternalResultsResponse<Beneficios>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchBeneficiosRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
 	@Override
 	public HorarioFuncResponse fetchHoraFuncByRequest(HoraFuncInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		HorarioFuncResponse response = new HorarioFuncResponse();
+		try
+		{
+			fetchPagedHorarioFunc(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.bai.IFuncionarioBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
+	 * RiskMaintenanceRequest)
+	 */
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchPagedHorarioFunc(HoraFuncInquiryRequest request, HorarioFuncResponse response)
+	{
+		InternalResultsResponse<HorarioFunc> internalResponse = new InternalResultsResponse<HorarioFunc>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchHorarioFuncsRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
 	@Override
 	public EventoResponse fetchEventoByRequest(EventoInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		EventoResponse response = new EventoResponse();
+		try
+		{
+			fetchPagedEvento(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.bai.IFuncionarioBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
+	 * RiskMaintenanceRequest)
+	 */
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchPagedEvento(EventoInquiryRequest request, EventoResponse response)
+	{
+		InternalResultsResponse<Eventos> internalResponse = new InternalResultsResponse<Eventos>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchEventosRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
 }

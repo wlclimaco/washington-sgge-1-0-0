@@ -102,12 +102,12 @@
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchAgenciaRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+  <select id="fetchAgenciaRowCount" parameterType="AgenciaInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM agencia
      WHERE 1=1
-     <if test="id != null">
-		  AND id = #{id}
+     <if test="criteria.id != null">
+		  AND id = #{criteria.id}
 	 </if>
   </select>
 
@@ -127,10 +127,30 @@
 	 </if>
   </select>
 
-  <select id="fetchAllAgenciasByRequest" parameterType="PagedInquiryRequest" resultMap="agenciaResult">
-		 SELECT b.id
-		<include refid="allAgenciaColumns" />
-	    FROM agencia b ORDER BY b.id ASC
+  <select id="fetchAllAgenciasByRequest" parameterType="AgenciaInquiryRequest" resultMap="agenciaResult">
+	    SELECT * FROM
+    			(
+    				SELECT b.id,
+    						<include refid="allAgenciaColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM agencia b
+					WHERE 2 = 2
+					<if test="criteria.id != null">
+						AND b.id = #{criteria.id}
+					</if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
   </select>
 
   <select id="fetchAgenciaByBanco" parameterType="Integer" resultMap="agenciaResult">

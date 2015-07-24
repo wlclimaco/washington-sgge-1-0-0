@@ -191,17 +191,17 @@
 
 <select id="fetchBeneficiosRowCount" parameterType="BeneficiosInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
-        FROM beneficios
+        FROM beneficio
 
   </select>
 
   <select id="fetchAllBeneficiosByRequest" parameterType="BeneficiosInquiryRequest" resultMap="beneficioResult">
     SELECT * FROM
     			(
-    				SELECT
+    				SELECT b.id,
     						<include refid="allBeneficiosColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
-    				FROM beneficios b
+    				FROM beneficio b
 					WHERE 2 = 2
 					<if test="codigo != null">
 						AND b.codigo = #{codigo}

@@ -146,8 +146,8 @@
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM contas b
 						where 1 = 1
-					<if test="parentId != null">
-						AND b.parentid = #{id}
+					<if test="criteria.id != null">
+						AND b.id = #{criteria.id}
 					</if>
 
 					 <if test="statusList != null and !statusList.isEmpty()">

@@ -135,8 +135,8 @@
      SELECT COUNT(id) AS RECORD_COUNT
         FROM unimed
      WHERE 1 = 1
-     <if test="id != null">
-		  AND id = #{id}
+     <if test="criteria.id != null">
+		  AND id = #{criteria.id}
 	 </if>
   </select>
 
@@ -157,13 +157,13 @@
   <select id="fetchAllUniMedsByRequest" parameterType="UniMedInquiryRequest" resultMap="uniMedResult">
      SELECT * FROM
     			(
-    				SELECT
+    				SELECT b.id,
     						<include refid="allUniMedColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM unimed b
 					WHERE 2 = 2
-					<if test="id != null">
-						AND b.id = #{id}
+					<if test="criteria.id != null">
+						AND b.id = #{criteria.id}
 					</if>
     			) LIST
 				<choose>

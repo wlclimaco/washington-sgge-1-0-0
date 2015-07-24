@@ -153,6 +153,7 @@
 
  	<bean id="funcionarioBAI" class="com.prosperitasglobal.sendsolv.bai.impl.FuncionarioBAIImpl">
  		<property name="funcionarioBAC" ref="funcionarioBACTarget"/>
+ 		<property name="pessoaBAC" ref="pessoaBACTarget"/>
  		<property name="validationController" ref="funcionarioValidationController"/>
  	</bean>
 

@@ -140,13 +140,13 @@
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchConvenioRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+  <select id="fetchConvenioRowCount" parameterType="ConvenioInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM convenio
      WHERE 1=1
-     <if test="parentId != null">
-		  AND FK_convenio_id = #{parentId}
-	 </if>
+     <if test="criteria.id != null">
+		AND b.id = #{criteria.id}
+	</if>
   </select>
 
   <select id="fetchAllConvenios" resultMap="convenioResult">
@@ -161,10 +161,36 @@
     FROM convenio ORDER BY id ASC
   </select>
 
-  <select id="fetchAllConveniosByRequest" parameterType="PagedInquiryRequest" resultMap="convenioResult">
-	 SELECT
-	<include refid="allConvenioColumns" />
-    FROM convenio ORDER BY id ASC
+  <select id="fetchAllConveniosByRequest" parameterType="ConvenioInquiryRequest" resultMap="convenioResult">
+   SELECT * FROM ( SELECT b.id,
+    						<include refid="allConvenioColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM convenio b
+						where 1 = 1
+					<if test="criteria.id != null">
+						AND b.id = #{criteria.id}
+					</if>
+
+					 <if test="statusList != null and !statusList.isEmpty()">
+					     AND b.PGSI_status IN
+					     <foreach item="item" index="index" collection="statusList"
+						     open="(" separator="," close=")">
+						   	 #{item.value}
+						 </foreach>
+					 </if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
   </select>
 
 

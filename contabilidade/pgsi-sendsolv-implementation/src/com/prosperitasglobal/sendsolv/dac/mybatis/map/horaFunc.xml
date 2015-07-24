@@ -111,7 +111,7 @@
 
   <select id="fetchHoraFuncRowCount" parameterType="HoraFuncInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
-        FROM beneficios
+        FROM horafunc
 
   </select>
 
@@ -126,13 +126,7 @@
 					<if test="codigo != null">
 						AND b.codigo = #{codigo}
 					</if>
-					 <if test="cidadeList != null and !cidadeList.isEmpty()">
-					     AND b.cidade IN
-					     <foreach item="item" index="index" collection="cidadeList"
-						     open="(" separator="," close=")">
-						   	 #{item.value}
-						 </foreach>
-					 </if>
+
     			) LIST
 				<choose>
 					<when test="pageSize != null and pageSize > 0">
