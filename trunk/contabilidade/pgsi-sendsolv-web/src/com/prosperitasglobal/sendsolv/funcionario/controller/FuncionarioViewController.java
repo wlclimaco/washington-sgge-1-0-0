@@ -18,6 +18,7 @@ import com.prosperitasglobal.sendsolv.model.criteria.EventoCriteria;
 import com.prosperitasglobal.sendsolv.model.criteria.FuncionarioCriteria;
 import com.prosperitasglobal.sendsolv.model.criteria.HoraFuncCriteria;
 import com.prosperitasglobal.sendsolv.model.request.BeneficiosInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ConvenioInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EventoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.HoraFuncInquiryRequest;
@@ -172,7 +173,7 @@ public class FuncionarioViewController extends FuncionarioBaseController
 		{
 			return modelAndView;
 		}
-		BeneficiosInquiryRequest pagedInquiryRequest = new BeneficiosInquiryRequest();
+		ConvenioInquiryRequest pagedInquiryRequest = new ConvenioInquiryRequest();
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
 		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
 		pagedInquiryRequest.setPreQueryCount(true);
@@ -183,7 +184,7 @@ public class FuncionarioViewController extends FuncionarioBaseController
 		{
 
 			modelAndView.addObject(RESPONSE, getMapper()
-					.writeValueAsString(fetchBeneficiosByRequest(pagedInquiryRequest)));
+					.writeValueAsString(fetchConvenioByRequest(pagedInquiryRequest)));
 
 			FiltersResponse filtersResponse = new FiltersResponse();
 			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);

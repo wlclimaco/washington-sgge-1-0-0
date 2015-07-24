@@ -50,45 +50,45 @@
 			<li><a href="cliente" class="alist" data-title='Empresa'>Cliente</a></li>
             <li><a href="fornecedor" class="alist" data-title='Empresa'>Fornecedor</a></li>
             <li><a href="transportador" class="alist" data-title='Empresa'>Transportador</a></li>
-            <li><a href="cliente/Cidade" class="alist" data-title='Cidade'>Cidade</a></li>
-             <li><a href="cliente/Estado" class="alist" data-title='Cidade'>Estado</a></li>
+            <li><a href="cliente/cidade" class="alist" data-title='Cidade'>Cidade</a></li>
+             <li><a href="cliente/estado" class="alist" data-title='Cidade'>Estado</a></li>
           </ul>
         </li>
 		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Departamento Pessoal</span> <b class="caret"></b></a>
 		 <ul class="dropdown-menu">
             <li><a href="funcionario" class="alist" data-title='Funcionario'>Funcionario</a></li>
-            <li><a href="funcionario/eventos">Eventos</a></li>
-            <li><a href="funcionario/beneficios">Beneficios</a></li>
-			<li><a href="funcionario/convenio">Convenio</a></li>
-			<li><a href="funcionario/funcPonto">Ponto Funcionario</a></li>
+            <li><a href="funcionario/eventos" class="alist" data-title='Cidade'>Eventos</a></li>
+            <li><a href="funcionario/beneficios" class="alist" data-title='Cidade'>Beneficios</a></li>
+			<li><a href="funcionario/convenio" class="alist" data-title='Cidade'>Convenio</a></li>
+			<li><a href="funcionario/funcPonto" class="alist" data-title='Cidade'>Ponto Funcionario</a></li>
           </ul>
         </li>
 		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Produtos</span> <b class="caret"></b></a>
 		 <ul class="dropdown-menu">
             <li><a href="produto" class="alist" data-title='Produto'>Produto</a></li>
-            <li><a href="produto/fetch/unimed">Unidade Medida</a></li>
-            <li><a href="produto/fetch/grupo">Grupo</a></li>
-			<li><a href="produto/fetch/subgrupo">Sub Grupo</a></li>
-			<li><a href="produto/fetch/marca">Marca</a></li>
+            <li><a href="produto/fetch/unimed" class="alist" data-title='Cidade'>Unidade Medida</a></li>
+            <li><a href="produto/fetch/grupo" class="alist" data-title='Cidade'>Grupo</a></li>
+			<li><a href="produto/fetch/subgrupo" class="alist" data-title='Cidade'>Sub Grupo</a></li>
+			<li><a href="produto/fetch/marca" class="alist" data-title='Cidade'>Marca</a></li>
           </ul>
         </li>
         <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Financeiro</span> <b class="caret"></b></a>
 		 <ul class="dropdown-menu">
-            <li><a href="notafiscal/fetch/contaspagar">Contas Pagar</a></li>
-            <li><a href="notafiscal/fetch/contasreceber">Contas Receber</a></li>
-            <li><a href="notafiscal/fetch/caixa">Caixa</a></li>
-			<li><a href="notafiscal/fetch/condpg">Condicao Pagamento</a></li>
-			<li><a href="cliente/banco">Banco</a></li>
-			<li><a href="cliente/agencia">Agencia</a></li>
-			<li><a href="cliente/conta">Conta</a></li>
+            <li><a href="notafiscal/fetch/contaspagar" class="alist" data-title='Cidade'>Contas Pagar</a></li>
+            <li><a href="notafiscal/fetch/contasreceber" class="alist" data-title='Cidade'>Contas Receber</a></li>
+            <li><a href="notafiscal/fetch/caixa" class="alist" data-title='Cidade'>Caixa</a></li>
+			<li><a href="notafiscal/fetch/condpg" class="alist" data-title='Cidade'>Condicao Pagamento</a></li>
+			<li><a href="cliente/banco" class="alist" data-title='Cidade'>Banco</a></li>
+			<li><a href="cliente/agencia" class="alist" data-title='Cidade'>Agencia</a></li>
+			<li><a href="cliente/conta" class="alist" data-title='Cidade'>Conta</a></li>
           </ul>
         </li>
 		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Fiscal</span> <b class="caret"></b></a>
 		<ul class="dropdown-menu">
-            <li><a href="produto/fetch/cfop">CFOP</a></li>
-			<li><a href="empresa/fetch/cnae">CNAE</a></li>
-			<li><a href="empresa/fetch/regime">Regime</a></li>
-			<li><a href="produto/fetch/classificacao">Classificacao</a></li>
+            <li><a href="produto/fetch/cfop" class="alist" data-title='Cidade'>CFOP</a></li>
+			<li><a href="empresa/fetch/cnae" class="alist" data-title='Cidade'>CNAE</a></li>
+			<li><a href="empresa/fetch/regime" class="alist" data-title='Cidade'>Regime</a></li>
+			<li><a href="produto/fetch/classificacao" class="alist" data-title='Cidade'>Classificacao</a></li>
           </ul>
         </li>
 		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Compras/vendas</span> <b class="caret"></b></a>

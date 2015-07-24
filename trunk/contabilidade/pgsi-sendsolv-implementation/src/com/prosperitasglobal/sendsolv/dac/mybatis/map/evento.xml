@@ -184,7 +184,7 @@
 
   <select id="fetchEventoRowCount" parameterType="EventoInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
-        FROM eventos
+        FROM evento
 
   </select>
 
@@ -194,7 +194,7 @@
     				SELECT
     						<include refid="allEventoColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
-    				FROM eventos b
+    				FROM evento b
 					WHERE 2 = 2
 					<if test="codigo != null">
 						AND b.codigo = #{codigo}

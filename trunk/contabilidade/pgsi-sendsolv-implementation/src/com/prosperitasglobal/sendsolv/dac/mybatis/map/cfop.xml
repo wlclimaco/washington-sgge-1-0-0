@@ -181,8 +181,8 @@
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM cfop b
 					WHERE 2 = 2
-					<if test="id != null">
-						AND b.id = #{id}
+					<if test="criteria.id != null">
+						AND b.id = #{criteria.id}
 					</if>
     			) LIST
 				<choose>

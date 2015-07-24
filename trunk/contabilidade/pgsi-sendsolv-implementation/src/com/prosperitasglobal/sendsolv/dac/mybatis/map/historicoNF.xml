@@ -89,9 +89,6 @@
      SELECT COUNT(id) AS RECORD_COUNT
         FROM historicoNF
      WHERE 1 = 1
-     <if test="id != null">
-		  AND id = #{id}
-	 </if>
   </select>
 
   <select id="fetchAllHistoricoNFs" resultMap="historicoNFResult">

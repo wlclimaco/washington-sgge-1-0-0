@@ -93,7 +93,10 @@
  	-->
   <select id="fetchCidadeRowCount" parameterType="CidadeInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
-        FROM cidade
+        FROM cidade where 1 = 1
+        <if test="criteria.id != null">
+						AND b.id = #{criteria.id}
+					</if>
 
   </select>
 
@@ -112,13 +115,13 @@
   <select id="fetchAllCidadesByRequest" parameterType="CidadeInquiryRequest" resultMap="cidadeResult">
     SELECT * FROM
     			(
-    				SELECT
+    				SELECT b.id,
     						<include refid="allCidadeColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM cidade b
 					WHERE 2 = 2
-					<if test="codigo != null">
-						AND b.codigo = #{codigo}
+					<if test="criteria.id != null">
+						AND b.id = #{criteria.id}
 					</if>
 					 <if test="cidadeList != null and !cidadeList.isEmpty()">
 					     AND b.cidade IN

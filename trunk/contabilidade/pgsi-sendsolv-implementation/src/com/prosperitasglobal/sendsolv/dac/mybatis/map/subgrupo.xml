@@ -135,8 +135,8 @@
      SELECT COUNT(id) AS RECORD_COUNT
         FROM subGrupo
      WHERE 1 = 1
-     <if test="id != null">
-		  AND id = #{id}
+     <if test="criteria.id != null">
+		  AND id = #{criteria.id}
 	 </if>
   </select>
 
@@ -162,8 +162,8 @@
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM subgrupo b
 					WHERE 2 = 2
-					<if test="id != null">
-						AND b.id = #{id}
+					<if test="criteria.id != null">
+						AND b.id = #{criteria.id}
 					</if>
     			) LIST
 				<choose>

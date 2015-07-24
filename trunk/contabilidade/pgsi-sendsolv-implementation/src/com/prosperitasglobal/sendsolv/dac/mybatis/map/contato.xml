@@ -94,9 +94,6 @@
      SELECT COUNT(id) AS RECORD_COUNT
         FROM contato
      WHERE 1=1
-     <if test="id != null">
-		  AND id = #{id}
-	 </if>
   </select>
 
   <select id="fetchAllContatos" resultMap="contatoResult">
@@ -110,9 +107,6 @@
 		<include refid="allContatoColumns" />
         FROM contato b
      WHERE 1=1
-     <if test="id != null">
-		  AND b.id = #{id}
-	 </if>
   </select>
 
   <select id="fetchAllContatosByRequest" parameterType="PagedInquiryRequest" resultMap="contatoResult">
