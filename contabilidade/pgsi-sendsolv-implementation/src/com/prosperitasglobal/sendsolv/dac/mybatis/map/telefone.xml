@@ -107,6 +107,10 @@
      WHERE tabela = 23 and parentId = #{id}
   </select>
 
+  <select id="fetchTelefoneByMarca" parameterType="Integer" resultMap="telefoneResult">
+     SELECT * FROM telefone
+     WHERE tabela = 50 and parentId = #{id}
+  </select>
 
 
 </mapper>

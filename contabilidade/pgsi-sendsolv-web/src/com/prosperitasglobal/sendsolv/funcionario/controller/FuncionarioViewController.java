@@ -128,7 +128,7 @@ public class FuncionarioViewController extends FuncionarioBaseController
 			return modelAndView;
 		}
 		FuncionarioCriteria criteria = new FuncionarioCriteria();
-		criteria.setEmpresa(locationId);
+		criteria.setEmprId(locationId);
 		FuncionarioInquiryRequest pagedInquiryRequest = new FuncionarioInquiryRequest();
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
 		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
@@ -217,7 +217,7 @@ public class FuncionarioViewController extends FuncionarioBaseController
 			return modelAndView;
 		}
 		EventoCriteria criteria = new EventoCriteria();
-		criteria.setEmpresa(locationId);
+		criteria.setEmprId(locationId);
 		EventoInquiryRequest pagedInquiryRequest = new EventoInquiryRequest();
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
 		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
@@ -263,7 +263,7 @@ public class FuncionarioViewController extends FuncionarioBaseController
 			return modelAndView;
 		}
 		HoraFuncCriteria criteria = new HoraFuncCriteria();
-		criteria.setEmpresa(locationId);
+		criteria.setEmprId(locationId);
 		HoraFuncInquiryRequest pagedInquiryRequest = new HoraFuncInquiryRequest();
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
 		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
@@ -309,7 +309,7 @@ public class FuncionarioViewController extends FuncionarioBaseController
 			return modelAndView;
 		}
 		BeneficiosCriteria criteria = new BeneficiosCriteria();
-		criteria.setEmpresa(locationId);
+		criteria.setEmprId(locationId);
 		BeneficiosInquiryRequest pagedInquiryRequest = new BeneficiosInquiryRequest();
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
 		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);

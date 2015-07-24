@@ -32,7 +32,7 @@ $(document).ready(function()
 	pgsi.pages.estado.locationTable = $('#data_list').dataTable($.pgsi.table.setTable(
 	{
 		id 			: "#data_list",
-		sAjaxSource : "api/pessoa/fetchall/estado",
+		sAjaxSource : "api/cliente/fetch/estado",
 		bPreLoad	: true,
 
 		ajax :
@@ -45,67 +45,24 @@ $(document).ready(function()
 		aoColumns :
 		[
 		{
-			headerData 		: "CNPJ",
+			headerData 		: "ID",
 			order			: "name",
-			mRender         : pgsi.pages.estado.fnCreateEmpresaNameLink,
+			mData           : "id",
 			sDefaultContent : "",
 			bSortable 		: false,
 			sClass          : "name-col"
 		},
 		{
-			headerData 		: "Nome Empresa",
+			headerData 		: "Estado",
 			order			: "organization_column",
-			mRender 		: pgsi.pages.estado.fnCreateNomeLink,
+			mRender 		: pgsi.pages.estado.fnCreateNameLink,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Cnae",
+			headerData 		: "UF",
 			order			: "city_column",
-			mRender 		: pgsi.pages.estado.fnCnae,
-			mData	 		: "null",
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Email",
-			order			: "state_column",
-			mRender 		: pgsi.pages.estado.fnEmail,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Telefone",
-			order			: "country_column",
-			mRender 		: pgsi.pages.estado.fnTelefone,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Regime",
-			order			: "sdn_status_column",
-			mRender 		: pgsi.pages.estado.fnRegime,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Endereco",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.estado.fnEndereco,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Documentos",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.estado.fnDocumento,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Status",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.estado.fnStatus,
+			mData 		    : "abreviacao",
 			sDefaultContent : "",
 			bSortable 		: false
 		},

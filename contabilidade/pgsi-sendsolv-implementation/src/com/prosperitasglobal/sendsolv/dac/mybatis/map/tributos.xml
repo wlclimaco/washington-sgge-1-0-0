@@ -70,7 +70,7 @@
 		SQL Insert Statements.
  	-->
   <insert id="insertTributacao" parameterType="Tributacao" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO tributos (
+  	INSERT INTO tributacao (
 		<include refid="allTributacaoColumns" />
       )
     VALUES (<include refid="allTributacaoValues" /> )
@@ -82,7 +82,7 @@
  	-->
 
   <update id="updateTributacao" parameterType="Tributacao">
-    UPDATE tributos
+    UPDATE tributacao
     	<set>
     		<if test="codigo!= null">codigo = #{codigo},</if>
 	    	<if test="texto!= null">texto=#{texto},</if>
@@ -97,7 +97,7 @@
 		SQL Delete Statements.
    -->
   <delete id="deleteTributacaoById" parameterType="Integer">
-    	DELETE FROM tributos WHERE id = #{id}
+    	DELETE FROM tributacao WHERE id = #{id}
   </delete>
 
 	<!--
@@ -105,7 +105,7 @@
  	-->
   <select id="fetchTributacaoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
-        FROM tributos
+        FROM tributacao
      WHERE 1 = 1
      <if test="id != null">
 		  AND id = #{id}
@@ -115,13 +115,13 @@
   <select id="fetchAllTributacaos" resultMap="tributosResult">
     SELECT
 	<include refid="allTributacaoColumns" />
-    FROM tributos ORDER BY id ASC
+    FROM tributacao ORDER BY id ASC
   </select>
 
   <select id="fetchTributacaoById" parameterType="FetchByIdRequest" resultMap="tributosResult">
 	SELECT b.id,
 	<include refid="allTributacaoColumns" />
-    FROM tributos b
+    FROM tributacao b
     where id = #{id}
     ORDER BY id ASC
   </select>
@@ -129,14 +129,22 @@
    <select id="fetchTributacaoByNota" parameterType="Integer" resultMap="tributosResult">
 	SELECT b.id,
 	<include refid="allTributacaoColumns" />
-    FROM tributos b
+    FROM tributacao b
+    where id = #{parentId}
+    ORDER BY id ASC
+  </select>
+
+  <select id="fetchTributosByNota" parameterType="Integer" resultMap="tributosResult">
+	SELECT b.id,
+	<include refid="allTributacaoColumns" />
+    FROM tributacao b
     where id = #{parentId}
     ORDER BY id ASC
   </select>
 
   <select id="fetchAllTributacaosByRequest" parameterType="PagedInquiryRequest" resultMap="tributosResult">
 	 SELECT b.id,<include refid="allTributacaoColumns" />
-        FROM tributos b
+        FROM tributacao b
      WHERE 1 = 1
      <if test="id != null">
 		  AND b.id = #{id}
@@ -148,7 +156,7 @@
 
 		  FROM tributosProd AS C
 
-		  INNER JOIN tributos AS F
+		  INNER JOIN tributacao AS F
 
 		    ON F.id like C.tributosId
 		where  c.prodId = #{id}

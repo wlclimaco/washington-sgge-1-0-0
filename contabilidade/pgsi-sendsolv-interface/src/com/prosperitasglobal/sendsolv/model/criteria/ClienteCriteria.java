@@ -13,7 +13,7 @@ public class ClienteCriteria implements Serializable
 	private String nome;
 
 	/** The business id. */
-	private Integer empresa;
+	private Integer emprId;
 
 	private Integer id;
 
@@ -51,19 +51,19 @@ public class ClienteCriteria implements Serializable
 	}
 
 	/**
-	 * @return the empresa
+	 * @return the emprId
 	 */
-	public Integer getEmpresa()
+	public Integer getEmprId()
 	{
-		return empresa;
+		return emprId;
 	}
 
 	/**
-	 * @param empresa the empresa to set
+	 * @param emprId the emprId to set
 	 */
-	public void setEmpresa(Integer empresa)
+	public void setEmprId(Integer emprId)
 	{
-		this.empresa = empresa;
+		this.emprId = emprId;
 	}
 
 	public Integer getType()
@@ -119,7 +119,7 @@ public class ClienteCriteria implements Serializable
 	@Override
 	public String toString()
 	{
-		return "ClienteCriteria [getNome()=" + getNome() + ", getEmpresa()=" + getEmpresa() + ", getType()="
+		return "ClienteCriteria [getNome()=" + getNome() + ", getEmprId()=" + getEmprId() + ", getType()="
 				+ getType() + ", getAssunto()=" + getAssunto() + ", getStatus()=" + getStatus() + ", getId()="
 				+ getId() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
 				+ super.toString() + "]";

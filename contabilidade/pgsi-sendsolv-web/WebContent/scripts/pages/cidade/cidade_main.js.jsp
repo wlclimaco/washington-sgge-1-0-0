@@ -10,6 +10,46 @@
  */
 pgsi.pages.cidade = {
 
+	fnCreateNomeLink : function (val, type, full)
+	{ 		if (type !== "display")
+		{
+			return val;
+		}
+
+		return '<a title="View/Edit ' + full.nome + '" href="#/cidade/view?tab=info&pessoaId=' + full.id + '" class="edit_link">' + full.nome + '</a>';
+
+	},
+
+	fnEstado : function (val, type, full)
+	{ 		if (type !== "display")
+		{
+			return val;
+		}
+
+		if (!$.pgsi.isNullOrUndefined(full.estado)) {
+			return '<span>'+full.estado.nome+'</span>';
+		}
+		else
+		{
+			return "";
+		}
+	},
+
+	fnUf : function (val, type, full)
+	{ 		if (type !== "display")
+		{
+			return val;
+		}
+
+		if (!$.pgsi.isNullOrUndefined(full.estado)) {
+			return '<span>'+full.estado.abreviacao+'</span>';
+		}
+		else
+		{
+			return "";
+		}
+	},
+
 
 	cidadeTable: {
 

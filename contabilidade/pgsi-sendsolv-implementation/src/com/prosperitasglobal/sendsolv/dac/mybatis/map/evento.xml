@@ -196,16 +196,9 @@
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM evento b
 					WHERE 2 = 2
-					<if test="codigo != null">
-						AND b.codigo = #{codigo}
+					<if test="criteria.emprId != null">
+						AND b.emprId = #{criteria.emprId}
 					</if>
-					 <if test="cidadeList != null and !cidadeList.isEmpty()">
-					     AND b.cidade IN
-					     <foreach item="item" index="index" collection="cidadeList"
-						     open="(" separator="," close=")">
-						   	 #{item.value}
-						 </foreach>
-					 </if>
     			) LIST
 				<choose>
 					<when test="pageSize != null and pageSize > 0">

@@ -9,9 +9,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.request.BeneficiosInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ConvenioInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EventoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FuncionarioInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.FuncionarioMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.HoraFuncInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.BeneficiosResponse;
+import com.prosperitasglobal.sendsolv.model.response.ConvenioResponse;
+import com.prosperitasglobal.sendsolv.model.response.EventoResponse;
 import com.prosperitasglobal.sendsolv.model.response.FuncionarioResponse;
+import com.prosperitasglobal.sendsolv.model.response.HorarioFuncResponse;
 
 /**
  * The FuncionarioAPIController Class.
@@ -36,6 +44,14 @@ public class FuncionarioAPIController extends FuncionarioBaseController
 
 	/** The Constant FETCH_ALL. */
 	private static final String FETCH_ALL = "/fetchall";
+
+	private static final String FETCH_LIST_EVENTO = "/eventos";
+
+	private static final String FETCH_LIST_BENEFICIOS = "/beneficios";
+
+	private static final String FETCH_LIST_CONVENIO = "/convenio";
+
+	private static final String FETCH_LIST_FUNCPONTO = "/funcPonto";
 
 	/** The Constant INSERT_LOCATION. */
 	private static final String INSERT_LOCATION = "/add";
@@ -62,6 +78,42 @@ public class FuncionarioAPIController extends FuncionarioBaseController
 	{
 
 		return fetchFuncionarioByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_LIST_EVENTO, method = RequestMethod.POST)
+	@ResponseBody
+	public EventoResponse fetchAllEvento(@RequestBody EventoInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchEventoByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_LIST_BENEFICIOS, method = RequestMethod.POST)
+	@ResponseBody
+	public BeneficiosResponse fetchAllBeneficios(@RequestBody BeneficiosInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchBeneficiosByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_LIST_CONVENIO, method = RequestMethod.POST)
+	@ResponseBody
+	public ConvenioResponse fetchAllConvenio(@RequestBody ConvenioInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchConvenioByRequest(pagedInquiryRequest);
+
+	}
+
+	@RequestMapping(value = FETCH_LIST_FUNCPONTO, method = RequestMethod.POST)
+	@ResponseBody
+	public HorarioFuncResponse fetchAllPonto(@RequestBody HoraFuncInquiryRequest pagedInquiryRequest)
+	{
+
+		return fetchHorarioFuncByRequest(pagedInquiryRequest);
 
 	}
 

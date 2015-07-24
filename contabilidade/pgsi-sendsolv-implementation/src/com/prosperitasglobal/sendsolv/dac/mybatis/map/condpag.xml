@@ -71,7 +71,7 @@
   <sql id="allCondPagColumns">
 		 b.nome
 		,b.valorIni
-		 b.valorFin
+		,b.valorFin
 		,b.parcelas
 		,b.processId
       	,b.create_date

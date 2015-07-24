@@ -135,5 +135,9 @@
 		select * from endereco b where tabela = 23 and parentId = #{id}
   </select>
 
+   <select id="fetchEnderecoByMarcaId" parameterType="Integer" resultMap="enderecoResult">
+		select * from endereco b where tabela = 50 and parentId = #{id}
+  </select>
+
 
 </mapper>

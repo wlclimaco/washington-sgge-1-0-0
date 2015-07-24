@@ -61,7 +61,7 @@
 			modify_date = #{modifyDateUTC},
 			modify_user = #{modifyUser}
 		</set>
-		WHERE note_id = #{id}
+		WHERE id = #{id}
 	</update>
 
 	<!--
@@ -69,7 +69,7 @@
 	-->
 	<update id="deleteNote" parameterType="Note">
 		DELETE FROM Note1
-		WHERE note_id = #{id}
+		WHERE id = #{id}
 	</update>
 
 	<!--
@@ -77,10 +77,10 @@
 	-->
     <select id="fetchNoteById" parameterType="Note" resultMap="noteResult">
 		SELECT
-			note_id,
+			id,
 			<include refid="allNoteColumns" />
 		FROM note
-		WHERE note_id = #{value}
+		WHERE id = #{value}
 	</select>
 
 	 <select id="fetchNoteByPessoa" parameterType="Integer" resultMap="noteResult">
@@ -101,68 +101,14 @@
 	</select>
 
 
-	<select id="fetchNoteByPersonId" parameterType="Integer" resultMap="noteResult">
+	<select id="fetchNoteByNotaFiscalId" parameterType="Integer" resultMap="noteResult">
 		SELECT
-			pn.FK_person_id as note_parentkey,
-			n.note_id,
-			n.sequence_number,
-  			n.note_text,
-  			n.create_date,
-  			n.create_user,
-  			n.modify_date,
-  			n.modify_user
-		FROM note n
-		LEFT JOIN person_note pn ON n.note_id = pn.FK_note_id
-		WHERE pn.FK_person_id=#{value}
-		ORDER BY n.sequence_number
+			b.id,
+			<include refid="allNoteColumns" />
+		FROM note1 b
+		WHERE b.parentId = #{id} and b.tabela = 46
 	</select>
 
-	<select id="fetchNoteByMoneyTransferBatchId" parameterType="Integer" resultMap="noteResult">
-		SELECT
-			mtbn.FK_money_transfer_batch_id as note_parentkey,
-			n.note_id,
-			n.sequence_number,
-  			n.note_text,
-  			n.create_date,
-  			n.create_user,
-  			n.modify_date,
-  			n.modify_user
-		FROM note n
-		LEFT JOIN money_transfer_batch_note mtbn ON n.note_id = mtbn.FK_note_id
-		WHERE mtbn.FK_money_transfer_batch_id=#{value}
-		ORDER BY n.sequence_number
-	</select>
 
-	<select id="fetchNoteByMoneyTransferId" parameterType="Integer" resultMap="noteResult">
-		SELECT
-			mtn.FK_money_transfer_id as note_parentkey,
-			n.note_id,
-			n.sequence_number,
-  			n.note_text,
-  			n.create_date,
-  			n.create_user,
-  			n.modify_date,
-  			n.modify_user
-		FROM note n
-		LEFT JOIN money_transfer_note mtn ON n.note_id = mtn.FK_note_id
-		WHERE mtn.FK_money_transfer_id=#{value}
-		ORDER BY n.sequence_number
-	</select>
-
-	<select id="fetchNoteByTransferSettingId" parameterType="Integer" resultMap="noteResult">
-		SELECT
-			tn.FK_transfer_setting_id as note_parentkey,
-			n.note_id,
-			n.sequence_number,
-  			n.note_text,
-  			n.create_date,
-  			n.create_user,
-  			n.modify_date,
-  			n.modify_user
-		FROM note n
-		LEFT JOIN transfer_setting_note tn ON (tn.FK_note_id = n.note_id)
-		WHERE tn.FK_transfer_setting_id= #{value}
-		ORDER BY n.sequence_number
-	</select>
 
 </mapper>

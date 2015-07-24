@@ -122,5 +122,11 @@
 		where  c.prodId = #{id}
   </select>
 
+    <select id="fetchById" parameterType="Integer" resultMap="incidenciaResult">
+	  	SELECT * from incidencia
+
+		where  id = #{id}
+  </select>
+
 
 </mapper>

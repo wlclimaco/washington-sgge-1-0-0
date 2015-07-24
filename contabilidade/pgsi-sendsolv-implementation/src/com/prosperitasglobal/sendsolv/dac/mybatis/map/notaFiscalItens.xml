@@ -138,7 +138,7 @@
  <select id="fetchAllNotaFiscalItensByNota" parameterType="Integer" resultMap="notaFiscalItensResult">
 	 SELECT
 	<include refid="allNotaFiscalItensColumns" />
-    FROM notaFiscalItens b where b.notaId= #{id} ORDER BY b.id ASC
+    FROM notaFiscalItens b where b.IdNota= #{id} ORDER BY b.id ASC
  </select>
 
  <select id="fetchAllNotaFiscalItenssByFuncionario" parameterType="Integer" resultMap="notaFiscalItensResult">

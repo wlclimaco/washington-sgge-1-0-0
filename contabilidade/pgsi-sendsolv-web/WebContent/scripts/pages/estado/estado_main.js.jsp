@@ -10,6 +10,15 @@
  */
 pgsi.pages.estado = {
 
+	fnCreateNameLink : function (val, type, full)
+	{ 		if (type !== "display")
+		{
+			return val;
+		}
+
+		return '<a title="View/Edit ' + full.nome + '" href="#/cidade/view?tab=info&pessoaId=' + full.id + '" class="edit_link">' + full.nome + '</a>';
+
+	},
 
 	estadoTable: {
 

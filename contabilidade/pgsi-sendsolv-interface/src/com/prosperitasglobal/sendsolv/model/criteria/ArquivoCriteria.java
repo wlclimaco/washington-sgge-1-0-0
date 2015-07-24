@@ -10,7 +10,7 @@ public class ArquivoCriteria implements Serializable
 {
 
 	/** The business id. */
-	private Integer empresa;
+	private Integer emprId;
 
 	/** The recipient id. */
 	private Integer Id;
@@ -34,9 +34,9 @@ public class ArquivoCriteria implements Serializable
 	 *
 	 * @return the empresa
 	 */
-	public Integer getEmpresa()
+	public Integer getEmprId()
 	{
-		return empresa;
+		return emprId;
 	}
 
 	/**
@@ -44,9 +44,9 @@ public class ArquivoCriteria implements Serializable
 	 *
 	 * @param empresa the empresa to set
 	 */
-	public void setEmpresa(Integer empresa)
+	public void setEmprId(Integer emprId)
 	{
-		this.empresa = empresa;
+		this.emprId = emprId;
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class ArquivoCriteria implements Serializable
 	@Override
 	public String toString()
 	{
-		return "ArquivoCriteria [getEmpresa()=" + getEmpresa() + ", getId()="
+		return "ArquivoCriteria [getEmprId()=" + getEmprId() + ", getId()="
 				+ getId() + ", getType()=" + getType() + ", getNumero()=" + getNumero() + ", toString()="
 				+ super.toString() + "]";
 	}

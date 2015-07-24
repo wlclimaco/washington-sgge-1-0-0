@@ -237,12 +237,14 @@ CONSTRAINT [pk_ncm_id] PRIMARY KEY CLUSTERED
 DROP TABLE [dbo].[CIDADE];
 CREATE TABLE [dbo].[CIDADE](
     [ID]         [int] identity(1,1) NOT NULL,
-    [NOME]       [VARCHAR](40) NULL,
-    [ESTADO]     [int] NULL,
+    [CIDADE]     [VARCHAR](40) NULL,
+    [ESTADO]     [int] not NULL,
     [CEP]        [VARCHAR](10) NULL,
-    [cdIBGE]     [VARCHAR](10) NULL,
+    [CODIGO]     [VARCHAR](10) NULL,
     [MUNICIPIO]  [VARCHAR](40) NULL,
-    [processId]    [int] NULL,
+    [UF]  		 [int] not NULL,
+    [processId]  [int] NULL,
+    [IBGE]       [VARCHAR](40) NULL,
     [status]       [int] NULL,
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
@@ -356,6 +358,7 @@ DROP TABLE [dbo].[Evento];
 CREATE TABLE [dbo].[Evento](
 	[id]             [int] identity(1,1) NOT NULL,
 	[data]         [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[nome]         [varchar](50) NULL,
 	[descricao]    [varchar](50) NULL,
 	[tipo]         [varchar](50) NULL,
     [codigo]       [varchar](50) NULL,
@@ -443,7 +446,7 @@ CONSTRAINT [pk_eventoPessoa_id] PRIMARY KEY CLUSTERED
 
 DROP TABLE [dbo].[horarios];
 CREATE TABLE [dbo].[horarios](
-	[id]             [int] identity(1,1) NOT NULL,
+	[id]           [int] identity(1,1) NOT NULL,
 	[parentId]     [int] NULL,
 	[data]         [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[horarioEntr]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1027,7 +1030,8 @@ CREATE TABLE [dbo].[tributacao](
 	[iat]   	   [int] NULL,
 	[ippt]   	   [int] NULL,
 	[pisconfins]   [int] NULL,
-	[incidenciaId] [int] NULL,
+	[parentId]   [int] NULL,
+	[incidencia] [int] NULL,
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1037,6 +1041,7 @@ CONSTRAINT [pk_tributacao_id] PRIMARY KEY CLUSTERED
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
 
 /** ---------------------------------------------------------------*/
 

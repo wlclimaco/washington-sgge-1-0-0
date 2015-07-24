@@ -32,7 +32,7 @@ $(document).ready(function()
 	pgsi.pages.eventos.locationTable = $('#data_list').dataTable($.pgsi.table.setTable(
 	{
 		id 			: "#data_list",
-		sAjaxSource : "api/pessoa/fetchall/eventos",
+		sAjaxSource : "api/funcionario/fetch/eventos",
 		bPreLoad	: true,
 
 		ajax :
@@ -45,67 +45,46 @@ $(document).ready(function()
 		aoColumns :
 		[
 		{
-			headerData 		: "CNPJ",
+			headerData 		: "ID",
 			order			: "name",
-			mRender         : pgsi.pages.eventos.fnCreateEmpresaNameLink,
+			mData           : "id",
 			sDefaultContent : "",
 			bSortable 		: false,
 			sClass          : "name-col"
 		},
 		{
-			headerData 		: "Nome Empresa",
+			headerData 		: "Codigo",
+			order			: "codigo",
+			mData           : "id",
+			sDefaultContent : "",
+			bSortable 		: false,
+			sClass          : "name-col"
+		},
+		{
+			headerData 		: "Nome",
 			order			: "organization_column",
 			mRender 		: pgsi.pages.eventos.fnCreateNomeLink,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Cnae",
+			headerData 		: "Descricao",
 			order			: "city_column",
-			mRender 		: pgsi.pages.eventos.fnCnae,
-			mData	 		: "null",
+			mData	 		: "descricao",
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Email",
+			headerData 		: "Valor",
 			order			: "state_column",
-			mRender 		: pgsi.pages.eventos.fnEmail,
+			mRender 		: pgsi.pages.eventos.fnValor,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Telefone",
+			headerData 		: "Mensal",
 			order			: "country_column",
-			mRender 		: pgsi.pages.eventos.fnTelefone,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Regime",
-			order			: "sdn_status_column",
-			mRender 		: pgsi.pages.eventos.fnRegime,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Endereco",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.eventos.fnEndereco,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Documentos",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.eventos.fnDocumento,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Status",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.eventos.fnStatus,
+			mRender 		: pgsi.pages.eventos.fnMensal,
 			sDefaultContent : "",
 			bSortable 		: false
 		},

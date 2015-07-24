@@ -18,10 +18,11 @@
 
   <resultMap id="cidadeResult" type="Cidade">
     <result property="id" column="id" />
-    <result property="nome" column="nome" />
-   	<result property="cdIBGE" column="cdIBGE"/>
-   	<result property="cep" column="cep" />
-   	<result property="municipio" column="municipio"/>
+    <result property="codigo" column="CODIGO" />
+    <result property="nome" column="CIDADE" />
+   	<result property="cdIBGE" column="IBGE"/>
+   	<result property="cep" column="CEP" />
+   	<result property="municipio" column="MUNICIPIO"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -34,8 +35,9 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allCidadeColumns">
-		 b.nome
-      	,b.cdIBGE
+		 b.cidade
+		,b.codigo
+      	,b.IBGE
       	,b.estado
       	,b.municipio
       	,b.cep
@@ -47,6 +49,7 @@
 
   <sql id="allCidadeValues">
   		#{nome},
+  		#{codigo},
   		#{cdIBGE},
     	#{estado.id},
     	#{municipio}
@@ -72,6 +75,7 @@
     UPDATE cidade
     	<set>
     		<if test="nome!= null">cidade = #{nome},</if>
+    		<if test="codigo!= null">codigo = #{codigo},</if>
 	    	<if test="cdIBGE!= null"> IBGE=#{cdIBGE},</if>
 	    	<if test="estado.id!= null"> estado=#{estado.id},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
@@ -93,10 +97,8 @@
  	-->
   <select id="fetchCidadeRowCount" parameterType="CidadeInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
-        FROM cidade where 1 = 1
-        <if test="criteria.id != null">
-						AND b.id = #{criteria.id}
-					</if>
+        FROM cidade
+
 
   </select>
 
@@ -119,17 +121,7 @@
     						<include refid="allCidadeColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM cidade b
-					WHERE 2 = 2
-					<if test="criteria.id != null">
-						AND b.id = #{criteria.id}
-					</if>
-					 <if test="cidadeList != null and !cidadeList.isEmpty()">
-					     AND b.cidade IN
-					     <foreach item="item" index="index" collection="cidadeList"
-						     open="(" separator="," close=")">
-						   	 #{item.value}
-						 </foreach>
-					 </if>
+
     			) LIST
 				<choose>
 					<when test="pageSize != null and pageSize > 0">
