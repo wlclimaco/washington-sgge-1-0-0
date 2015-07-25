@@ -29,10 +29,10 @@ $(document).ready(function()
 	});
 
 	/** * jQuery dataTable setup ** */
-	pgsi.pages.unimed.locationTable = $('#data_list').dataTable($.pgsi.table.setTable(
+	pgsi.pages.unimed.unimedTable = $('#data_list').dataTable($.pgsi.table.setTable(
 	{
 		id 			: "#data_list",
-		sAjaxSource : "api/pessoa/fetchall/unimed",
+		sAjaxSource : "api/produto/fetch/unimed",
 		bPreLoad	: true,
 
 		ajax :
@@ -45,67 +45,24 @@ $(document).ready(function()
 		aoColumns :
 		[
 		{
-			headerData 		: "CNPJ",
+			headerData 		: "ID",
 			order			: "name",
-			mRender         : pgsi.pages.unimed.fnCreateEmpresaNameLink,
+			mData           : "id",
 			sDefaultContent : "",
 			bSortable 		: false,
 			sClass          : "name-col"
 		},
 		{
-			headerData 		: "Nome Empresa",
+			headerData 		: "Unidade Medida",
 			order			: "organization_column",
-			mRender 		: pgsi.pages.unimed.fnCreateNomeLink,
+			mData    		: "unimed",
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Cnae",
+			headerData 		: "Sigla",
 			order			: "city_column",
-			mRender 		: pgsi.pages.unimed.fnCnae,
-			mData	 		: "null",
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Email",
-			order			: "state_column",
-			mRender 		: pgsi.pages.unimed.fnEmail,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Telefone",
-			order			: "country_column",
-			mRender 		: pgsi.pages.unimed.fnTelefone,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Regime",
-			order			: "sdn_status_column",
-			mRender 		: pgsi.pages.unimed.fnRegime,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Endereco",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.unimed.fnEndereco,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Documentos",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.unimed.fnDocumento,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Status",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.unimed.fnStatus,
+			mData	 		: "sigla",
 			sDefaultContent : "",
 			bSortable 		: false
 		},

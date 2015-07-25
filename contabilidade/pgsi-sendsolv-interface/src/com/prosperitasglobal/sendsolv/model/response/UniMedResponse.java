@@ -3,14 +3,14 @@ package com.prosperitasglobal.sendsolv.model.response;
 import java.util.Collection;
 import java.util.List;
 
-import com.prosperitasglobal.sendsolv.model.Arquivo;
+import com.prosperitasglobal.sendsolv.model.UniMed;
 import com.qat.framework.model.response.InquiryResponse;
 
 public class UniMedResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<Arquivo> arquivoList;
+	private List<UniMed> unimedList;
 
 	/**
 	 * The Constructor.
@@ -21,19 +21,19 @@ public class UniMedResponse extends InquiryResponse
 	}
 
 	/**
-	 * @return the arquivoList
+	 * @return the unimedList
 	 */
-	public List<Arquivo> getArquivoList()
+	public List<UniMed> getUnimedList()
 	{
-		return arquivoList;
+		return unimedList;
 	}
 
 	/**
-	 * @param arquivoList the arquivoList to set
+	 * @param unimedList the unimedList to set
 	 */
-	public void setArquivoList(List<Arquivo> arquivoList)
+	public void setUnimedList(List<UniMed> unimedList)
 	{
-		this.arquivoList = arquivoList;
+		this.unimedList = unimedList;
 	}
 
 	/*
@@ -44,7 +44,7 @@ public class UniMedResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setArquivoList((List<Arquivo>)coll);
+		setUnimedList((List<UniMed>)coll);
 	}
 
 	/*
@@ -54,10 +54,11 @@ public class UniMedResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "LocationResponse [getLocationList()=" + getArquivoList() + ", getResultsSetInfo()="
-				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
-				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
-				+ isOperationSuccess() + "]";
+		return "UniMedResponse [getUnimedList()=" + getUnimedList() + ", getResultsSetInfo()=" + getResultsSetInfo()
+				+ ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()=" + getMessageList()
+				+ ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()=" + isOperationSuccess()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
 }

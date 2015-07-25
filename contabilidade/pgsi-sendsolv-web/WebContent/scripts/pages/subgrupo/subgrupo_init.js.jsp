@@ -29,15 +29,15 @@ $(document).ready(function()
 	});
 
 	/** * jQuery dataTable setup ** */
-	pgsi.pages.subgrupo.locationTable = $('#data_list').dataTable($.pgsi.table.setTable(
+	pgsi.pages.subgrupo.subgrupoTable = $('#data_list').dataTable($.pgsi.table.setTable(
 	{
 		id 			: "#data_list",
-		sAjaxSource : "api/pessoa/fetchall/subgrupo",
+		sAjaxSource : "api/produto/fetch/subgrupo",
 		bPreLoad	: true,
 
 		ajax :
 		{
-			sObj		: "subgrupoList",
+			sObj		: "subGrupoList",
 			oRequest	: PagedInquiryRequest,
 			fnRequest 	: function(){}
 		},
@@ -45,71 +45,29 @@ $(document).ready(function()
 		aoColumns :
 		[
 		{
-			headerData 		: "CNPJ",
+			headerData 		: "ID",
 			order			: "name",
-			mRender         : pgsi.pages.subgrupo.fnCreateEmpresaNameLink,
+			mData           : "id",
 			sDefaultContent : "",
 			bSortable 		: false,
 			sClass          : "name-col"
 		},
 		{
-			headerData 		: "Nome Empresa",
+			headerData 		: "Sub Grupo",
 			order			: "organization_column",
-			mRender 		: pgsi.pages.subgrupo.fnCreateNomeLink,
+			mData 		    : "subGrupo",
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Cnae",
+			headerData 		: "Descrição",
 			order			: "city_column",
-			mRender 		: pgsi.pages.subgrupo.fnCnae,
-			mData	 		: "null",
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Email",
-			order			: "state_column",
-			mRender 		: pgsi.pages.subgrupo.fnEmail,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Telefone",
-			order			: "country_column",
-			mRender 		: pgsi.pages.subgrupo.fnTelefone,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Regime",
-			order			: "sdn_status_column",
-			mRender 		: pgsi.pages.subgrupo.fnRegime,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Endereco",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.subgrupo.fnEndereco,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Documentos",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.subgrupo.fnDocumento,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Status",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.subgrupo.fnStatus,
+			mData	 		: "descricao",
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		],
+
 
 		<c:choose>
 			<c:when test="${not empty refresh}">
@@ -167,7 +125,7 @@ $(document).ready(function()
 
 						// Validations for change pagination when delete one or more groups of last page.
 						var iStart;
-						var oSettings = pgsi.pages.location.locationTable.fnSettings();
+						var oSettings = pgsi.pages.location.subgrupoTable.fnSettings();
 
 							// If exist just one group at last page and this group is deleted, the pagination back to previous page.
 							if (((oSettings._iRecordsDisplay - 1) % $('.dataTables_length').find('select').val() === 0)) {
@@ -175,7 +133,7 @@ $(document).ready(function()
 							}
 
 						$.pgsi.table.reloadTable({
-							table 		: pgsi.pages.location.locationTable,
+							table 		: pgsi.pages.location.subgrupoTable,
 							iStart 		: iStart
 						});
 					}else{
@@ -262,7 +220,7 @@ $(document).ready(function()
 				element			: ".filter",
 				tagsDiv			: ".filter-results-container div.first",
 				title			: $.pgsi.locale.get("commons.pages.filterTitle"),
-				table 			:  pgsi.pages.location.locationTable,
+				table 			:  pgsi.pages.location.subgrupoTable,
 				filters 		: oResponse
 			});
 		});
@@ -273,7 +231,7 @@ $(document).ready(function()
 	{
 		$.address.parameter("organization","");
 		$.address.parameter("location","");
-		pgsi.util.page.fnReloadTable(pgsi.pages.location.locationTable);
+		pgsi.util.page.fnReloadTable(pgsi.pages.location.subgrupoTable);
 	});
 	$(".add-business").on("click", function(e)
 	{

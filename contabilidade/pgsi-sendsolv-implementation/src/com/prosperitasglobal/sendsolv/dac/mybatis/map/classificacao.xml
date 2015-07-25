@@ -99,7 +99,7 @@
 	SELECT b.id,
 	<include refid="allClassificacaoColumns" />
     FROM classificacao b
-    where id = #{id}
+    where b.id = #{id}
     ORDER BY id ASC
   </select>
 

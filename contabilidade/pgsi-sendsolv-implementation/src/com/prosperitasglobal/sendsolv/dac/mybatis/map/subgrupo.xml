@@ -157,7 +157,7 @@
   <select id="fetchAllSubGruposByRequest" parameterType="SubGrupoInquiryRequest" resultMap="subGrupoResult">
       SELECT * FROM
     			(
-    				SELECT
+    				SELECT b.id,
     						<include refid="allSubGrupoColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM subgrupo b

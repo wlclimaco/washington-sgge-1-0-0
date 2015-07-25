@@ -32,7 +32,7 @@ $(document).ready(function()
 	pgsi.pages.convenio.locationTable = $('#data_list').dataTable($.pgsi.table.setTable(
 	{
 		id 			: "#data_list",
-		sAjaxSource : "api/pessoa/fetchall/convenio",
+		sAjaxSource : "api/funcionario/convenio",
 		bPreLoad	: true,
 
 		ajax :
@@ -45,67 +45,31 @@ $(document).ready(function()
 		aoColumns :
 		[
 		{
-			headerData 		: "CNPJ",
+			headerData 		: "ID",
 			order			: "name",
-			mRender         : pgsi.pages.convenio.fnCreateEmpresaNameLink,
+			mData           : "id",
 			sDefaultContent : "",
 			bSortable 		: false,
 			sClass          : "name-col"
 		},
 		{
-			headerData 		: "Nome Empresa",
+			headerData 		: "Nome",
 			order			: "organization_column",
 			mRender 		: pgsi.pages.convenio.fnCreateNomeLink,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Cnae",
+			headerData 		: "Data Inicial",
 			order			: "city_column",
-			mRender 		: pgsi.pages.convenio.fnCnae,
-			mData	 		: "null",
+			mRender	 		: pgsi.pages.convenio.fnDataInicial,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Email",
+			headerData 		: "Data Final",
 			order			: "state_column",
-			mRender 		: pgsi.pages.convenio.fnEmail,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Telefone",
-			order			: "country_column",
-			mRender 		: pgsi.pages.convenio.fnTelefone,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Regime",
-			order			: "sdn_status_column",
-			mRender 		: pgsi.pages.convenio.fnRegime,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Endereco",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.convenio.fnEndereco,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Documentos",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.convenio.fnDocumento,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Status",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.convenio.fnStatus,
+			mRender 		: pgsi.pages.convenio.fnDataFinal,
 			sDefaultContent : "",
 			bSortable 		: false
 		},

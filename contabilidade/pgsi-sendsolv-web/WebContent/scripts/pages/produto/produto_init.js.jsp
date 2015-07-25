@@ -29,7 +29,7 @@ $(document).ready(function()
 	});
 
 	/** * jQuery dataTable setup ** */
-	pgsi.pages.pessoa.produtoTable = $('#data_list').dataTable($.pgsi.table.setTable(
+	pgsi.pages.produto.produtoTable = $('#data_list').dataTable($.pgsi.table.setTable(
 	{
 		id 			: "#data_list",
 		sAjaxSource : "api/produto/fetchall",
@@ -45,60 +45,81 @@ $(document).ready(function()
 		aoColumns :
 		[
 		{
-			headerData 		: "CPF/CNPJ",
+			headerData 		: "ID",
 			order			: "name",
-			mRender         : pgsi.pages.pessoa.fnCreateClienteNameLink,
+			mData           : "id",
 			sDefaultContent : "",
 			bSortable 		: false,
 			sClass          : "name-col"
 		},
 		{
-			headerData 		: "Nome",
+			headerData 		: "Produto",
 			order			: "organization_column",
-			mRender 		: pgsi.pages.pessoa.fnCreateNomeLink,
+			mRender 		: pgsi.pages.produto.fnCreateNomeLink,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Profissao",
+			headerData 		: "Codigo Barra",
 			order			: "city_column",
-			mRender 		: pgsi.pages.pessoa.fnProfissao,
+			mData 		    : "cdBarras",
 			mData	 		: "null",
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Email",
+			headerData 		: "Classificaçao",
 			order			: "state_column",
-			mRender 		: pgsi.pages.pessoa.fnEmail,
+			mRender 		: pgsi.pages.produto.fnClassificacao,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Telefone",
+			headerData 		: "Grupo",
 			order			: "country_column",
-			mRender 		: pgsi.pages.pessoa.fnTelefone,
+			mRender 		: pgsi.pages.produto.fnGrupo,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Convenio",
+			headerData 		: "Sub Grupo",
 			order			: "sdn_status_column",
-			mRender 		: pgsi.pages.pessoa.fnConvenio,
+			mRender 		: pgsi.pages.produto.fnSubGrupo,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Endereco",
+			headerData 		: "Marca",
 			order			: "phone_column",
-			mRender 		: pgsi.pages.pessoa.fnEndereco,
+			mRender 		: pgsi.pages.produto.fnMarca,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Documentos",
+			headerData 		: "Unidade Medida",
 			order			: "phone_column",
-			mRender 		: pgsi.pages.pessoa.fnDocumento,
+			mRender 		: pgsi.pages.produto.fnUniMed,
+			sDefaultContent : "",
+			bSortable 		: false
+		},
+		{
+			headerData 		: "Preço",
+			order			: "phone_column",
+			mRender 		: pgsi.pages.produto.fnTabPreco,
+			sDefaultContent : "",
+			bSortable 		: false
+		},
+		{
+			headerData 		: "Estoque",
+			order			: "phone_column",
+			mRender 		: pgsi.pages.produto.fnEstoque,
+			sDefaultContent : "",
+			bSortable 		: false
+		},
+		{
+			headerData 		: "Status",
+			order			: "phone_column",
+			mRender 		: pgsi.pages.produto.fnStatus,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
@@ -160,7 +181,7 @@ $(document).ready(function()
 
 						// Validations for change pagination when delete one or more groups of last page.
 						var iStart;
-						var oSettings = pgsi.pages.pessoa.produtoTable.fnSettings();
+						var oSettings = pgsi.pages.produto.produtoTable.fnSettings();
 
 							// If exist just one group at last page and this group is deleted, the pagination back to previous page.
 							if (((oSettings._iRecordsDisplay - 1) % $('.dataTables_length').find('select').val() === 0)) {
@@ -168,7 +189,7 @@ $(document).ready(function()
 							}
 
 						$.pgsi.table.reloadTable({
-							table 		: pgsi.pages.pessoa.produtoTable,
+							table 		: pgsi.pages.produto.produtoTable,
 							iStart 		: iStart
 						});
 					}else{
@@ -255,7 +276,7 @@ $(document).ready(function()
 				element			: ".filter",
 				tagsDiv			: ".filter-results-container div.first",
 				title			: $.pgsi.locale.get("commons.pages.filterTitle"),
-				table 			:  pgsi.pages.pessoa.produtoTable,
+				table 			:  pgsi.pages.produto.produtoTable,
 				filters 		: oResponse
 			});
 		});
@@ -265,12 +286,12 @@ $(document).ready(function()
 	$("#clear-all").on("click", function(e)
 	{
 		$.address.parameter("organization","");
-		$.address.parameter("pessoa","");
-		pgsi.util.page.fnReloadTable(pgsi.pages.pessoa.produtoTable);
+		$.address.parameter("produto","");
+		pgsi.util.page.fnReloadTable(pgsi.pages.produto.produtoTable);
 	});
 
 
-	$("#insertPessoa").on("click", function(e)
+	$("#insertproduto").on("click", function(e)
 	{
 		e.preventDefault();
 		$.pgsi.ajax.post({
