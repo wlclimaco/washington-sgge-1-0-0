@@ -51,11 +51,15 @@ pgsi.pages.empresa = {
 			return val;
 		}
 		if (!$.pgsi.isNullOrUndefined(full.cnaes)) {
-			var sCnae ="";
-			for(var i=0;i<full.cnaes.length;i++){
-				sCnae = sCnae + full.cnaes[i].idCnae.cnae  +" - <sup>"+full.cnaes[i].idCnae.descricao+"</sup><br>" ;
+			if (!$.pgsi.isNullOrUndefined(full.cnaes.idCnae)) {
+				var sCnae ="";
+				for(var i=0;i<full.cnaes.length;i++){
+					sCnae = sCnae + full.cnaes[i].idCnae.cnae  +" - <sup>"+full.cnaes[i].idCnae.descricao+"</sup><br>" ;
+				}
+				return sCnae;
+			}else{
+				return '';
 			}
-			return sCnae;
 		}else{
 			return '';
 		}
