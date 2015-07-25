@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
+
 <div id="wrapper">
 
 <nav class="secondary">
@@ -56,7 +57,7 @@
 
     </div>
 
-<jsp:include page="../../scripts/pages/convenio/convenio_main.js.jsp" flush="true" />
-<jsp:include page="../../scripts/pages/convenio/convenio_actions.js.jsp" flush="true" />
-<jsp:include page="../../scripts/pages/convenio/convenio_init.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/notaFiscal/notaFiscal_main.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/notaFiscalEntrada/notaFiscalEntradal_main.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/notaFiscalEntrada/notaFiscalEntrada_init.js.jsp" flush="true" />
 

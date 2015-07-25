@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
+<div id="wrapper">
 
 <nav class="secondary">
 	<a class="alist" href="organization" title='<s:message code="commons.pages.customers" text="default text" />'>
@@ -16,20 +17,44 @@
 
 <h2 class="list"><s:message code="commons.pages.organizationfind" text="default text" /></h2>
 
-<a href="/api/empresa/add" class="add-business alist" title='<s:message code="commons.pages.organizationadd" text="default text" />'>
+<a href="organization/add" class="add-business alist" title='<s:message code="commons.pages.organizationadd" text="default text" />'>
 	<span class="icon-nav icon-plus icon-small-button"></span>
 	<s:message code="commons.pages.organizationadd" text="default text" />
 </a>
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="filter">
+					<form id="filterForm"></form>
+				</div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
 
-<div class="content list" >
-	<div class="filter">
-		<form id="filterForm"></form>
-	</div>
-	<div class="data">
-		<table id="data_list"></table>
-	</div>
-</div>
+        <div id="page-wrapper">
+            <div class="row">
 
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="table-responsive table-bordered">
+                                <table class="table" id="data_list">
+
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- /.row -->
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
 <jsp:include page="../../scripts/pages/empresa/empresa_main.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/empresa/empresa_actions.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/empresa/empresa_init.js.jsp" flush="true" />

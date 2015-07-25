@@ -5,142 +5,119 @@
 
 <script type="text/javascript">
 /**
- * @namespace pgsi.pages.pessoa
+ * @namespace pgsi.pages.produto
  * @fileoverview The main namespace for the Location List Page.
  */
-pgsi.pages.pessoa = {
-
-	/**
-	* Set of functions used by the datatables plugin to customize field values
-	*/
-
-	// Returns link for edit view
-	fnCreateClienteNameLink : function (val, type, full)
-	{
-		var sCnpj="" , returno="";
-		if (type !== "display")
-		{
-			return val;
-		}
-
-		if (!$.pgsi.isNullOrUndefined(full.documentos)) {
-			for(var i=0;i<full.documentos.length;i++){
-				if((full.documentos[i].description == "CNPJ")||(full.documentos[i].description == "CPF")){
-					sCnpj = full.documentos[i].numero;
-				}
-			}
-			returno = '<a title="View/Edit ' + sCnpj + '" href="#/pessoa/view?tab=info&pessoaId=' + full.id + '" class="edit_link">' + sCnpj + '</a>';
-		}
-		return returno;
-	},
+pgsi.pages.produto = {
 
 	fnCreateNomeLink : function (val, type, full)
-	{
-		if (type !== "display")
+	{ 		if (type !== "display")
 		{
 			return val;
 		}
 
-		return '<a title="View/Edit ' + full.nome + '" href="#/pessoa/view?tab=info&pessoaId=' + full.id + '" class="edit_link">' + full.nome + '</a>';
+		return '<a title="View/Edit ' + full.produto + '" href="#/cidade/view?tab=info&pessoaId=' + full.id + '" class="edit_link">' + full.produto + '</a>';
 
 	},
-	fnProfissao: function (val, type, full)
-	{
-		if (type !== "display")
+
+	fnClassificacao : function (val, type, full)
+	{ 		if (type !== "display")
 		{
 			return val;
 		}
-		var sProfissao ="";
-		if (!$.pgsi.isNullOrUndefined(full.profissao)) {
-			for(var i=0;i<full.profissao.length;i++){
-				sProfissao = sProfissao + full.profissao[i].profissao  +" - <sup>"+full.profissao[i].renda+"</sup><br>" ;
-				if(i === (full.profissao.length - 1)){
-					sProfissao = sProfissao + full.profissao[i].profissao  +" - <sup>"+full.profissao[i].renda+" - Atual</sup><br>" ;
+		if (!$.pgsi.isNullOrUndefined(full.classificacao)) {
+			return '<a title="View/Edit ' + full.classificacao.descricao + '" href="#/cidade/view?tab=info&pessoaId=' + full.classificacao.id + '" class="edit_link">' + full.classificacao.descricao + '</a>';
+		}else{
+			return "";
+		}
+	},
+
+	fnUniMed : function (val, type, full)
+	{ 		if (type !== "display")
+		{
+			return val;
+		}
+		if (!$.pgsi.isNullOrUndefined(full.uniMed.unimedId)) {
+			return '<a title="View/Edit ' + full.uniMed.unimedId.sigla + '" href="#/cidade/view?tab=info&pessoaId=' + full.uniMed.unimedId.id + '" class="edit_link">' + full.uniMed.unimedId.sigla + '</a>';
+		}else{
+			return "";
+		}
+	},
+	fnGrupo : function (val, type, full)
+	{ 		if (type !== "display")
+		{
+			return val;
+		}
+		if (!$.pgsi.isNullOrUndefined(full.grupo.grupoId)) {
+			return '<a title="View/Edit ' + full.grupo.grupoId.grupo + '" href="#/cidade/view?tab=info&pessoaId=' + full.grupo.grupoId.id + '" class="edit_link">' + full.grupo.grupoId.grupo + '</a>';
+		}else{
+			return "";
+		}
+	},
+	fnSubGrupo : function (val, type, full)
+	{ 		if (type !== "display")
+		{
+			return val;
+		}
+		if (!$.pgsi.isNullOrUndefined(full.subGrupo.subGrupoId)) {
+			return '<a title="View/Edit ' + full.subGrupo.subGrupoId.subGrupo + '" href="#/cidade/view?tab=info&pessoaId=' + full.subGrupo.subGrupoId.id + '" class="edit_link">' + full.subGrupo.subGrupoId.subGrupo + '</a>';
+		}else{
+			return "";
+		}
+	},
+	fnMarca : function (val, type, full)
+	{ 		if (type !== "display")
+		{
+			return val;
+		}
+		if (!$.pgsi.isNullOrUndefined(full.marca.marcaId)) {
+			return '<a title="View/Edit ' + full.marca.marcaId.marca + '" href="#/cidade/view?tab=info&pessoaId=' + full.marca.marcaId.id + '" class="edit_link">' + full.marca.marcaId.marca + '</a>';
+		}else{
+			return "";
+		}
+	},
+	fnTabPreco : function (val, type, full)
+	{ 		if (type !== "display")
+		{
+			return val;
+		}
+		var sTabPreco = ""
+		if (!$.pgsi.isNullOrUndefined(full.precoList)) {
+				for (var i=0;i<full.precoList.length;i++){
+					if(full.precoList[i].precoTypeEnum == "VENDA"){
+						sTabPreco = sTabPreco + " "+full.precoList[i].valor+"<br>";
+					}
 				}
-			}
 		}
-
-		return sProfissao;
+		return sTabPreco;
 
 	},
-
-	fnEmail: function (val, type, full)
-	{
-		if (type !== "display")
+	fnEstoque : function (val, type, full)
+	{ 		if (type !== "display")
 		{
 			return val;
 		}
-		var sCnae ="";
-		if (!$.pgsi.isNullOrUndefined(full.emails)) {
-
-			for(var i=0;i<full.emails.length;i++){
-				sCnae = sCnae + "<sup>"+full.emails[i].email+"</sup><br>" ;
-			}
+		var sTabPreco = ""
+		if (!$.pgsi.isNullOrUndefined(full.estoqueList)) {
+				for (var i=0;i<full.estoqueList.length;i++){
+					if(full.estoqueList[i].estoqueTypeEnum == "ATUAL"){
+						sTabPreco = sTabPreco + " "+full.estoqueList[i].quant+"<br>";
+					}
+				}
 		}
-
-		return sCnae;
+		return sTabPreco;
 	},
-
-	fnTelefone: function (val, type, full)
-	{
-		if (type !== "display")
+	fnStatus : function (val, type, full)
+	{ 		if (type !== "display")
 		{
 			return val;
 		}
-		var sCnae ="";
-		if (!$.pgsi.isNullOrUndefined(full.telefones)) {
-			for(var i=0;i<full.telefones.length;i++){
-				sCnae = sCnae + "("+full.telefones[i].ddd+ ") "+full.telefones[i].numero+"<br>";
-			}
-		}
-		return sCnae;
-	},
-
-	fnConvenio: function (val, type, full)
-	{
-		if (type !== "display")
-		{
-			return val;
+		var sTabPreco = ""
+		if (!$.pgsi.isNullOrUndefined(full.statusList)) {
+			sTabPreco = full.statusList[full.statusList.length - 1].status;
 		}
 
-		var sCnae ="";
-		if (!$.pgsi.isNullOrUndefined(full.convenioList)) {
-			for(var i=0;i<full.convenioList.length;i++){
-				sCnae = sCnae +'<a title="View/Edit ' + full.convenioList[i].nome + '" href="#/convenio/view?tab=info&convenioId=' + full.convenioList[i].id + '" class="edit_link">' + full.convenioList[i].nome + '</a><br>';
-			}
-		}
-		return sCnae;
-
-	},
-
-	fnEndereco: function (val, type, full)
-	{
-		if (type !== "display")
-		{
-			return val;
-		}
-		var sCnae ="";
-		if (!$.pgsi.isNullOrUndefined(full.enderecos)) {
-			for(var i=0;i<full.enderecos.length;i++){
-				sCnae = sCnae + ' '+full.enderecos[i].logradouro + " "+full.enderecos[i].numero + " "+full.enderecos[i].bairro + " "+full.enderecos[i].cidade+'<br>';
-			}
-		}
-		return sCnae;
-
-	},
-	fnDocumento: function (val, type, full)
-	{
-		if (type !== "display")
-		{
-			return val;
-		}
-		var sDocumentos ="";
-		if (!$.pgsi.isNullOrUndefined(full.documentos)) {
-			for(var i=0;i<full.documentos.length;i++){
-				sDocumentos = sDocumentos +  full.documentos[0].description+ " - "+full.documentos[0].numero + "<br>";
-			}
-		}
-		return sDocumentos;
+		return sTabPreco;
 	},
 
 	produtoTable: {

@@ -77,10 +77,10 @@
 	-->
     <select id="fetchNoteById" parameterType="Note" resultMap="noteResult">
 		SELECT
-			id,
+			b.id,
 			<include refid="allNoteColumns" />
-		FROM note
-		WHERE id = #{value}
+		FROM note1 b
+		WHERE b.id = #{value}
 	</select>
 
 	 <select id="fetchNoteByPessoa" parameterType="Integer" resultMap="noteResult">

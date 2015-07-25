@@ -104,8 +104,8 @@
   <select id="fetchFuncionarioRowCount" parameterType="FuncionarioInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM pessoa where 1 = 1 and type = 3
-     <if test="criteria.empresa != null">
-		  AND cdEmpr = #{criteria.empresa}
+     <if test="criteria.emprId != null">
+		  AND cdEmpr = #{criteria.emprId}
 	 </if>
   </select>
 
@@ -125,8 +125,8 @@
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM pessoa b
 						where  b.type = 3
-					<if test="criteria.empresa != null">
-						AND b.cdEmpr = #{criteria.empresa}
+					<if test="criteria.emprId != null">
+						AND b.cdEmpr = #{criteria.emprId}
 					</if>
 					 <if test="statusList != null and !statusList.isEmpty()">
 					     AND b.PGSI_status IN

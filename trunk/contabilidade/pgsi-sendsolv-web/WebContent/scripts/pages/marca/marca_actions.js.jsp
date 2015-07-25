@@ -4,7 +4,7 @@
 <sec:authorize access="hasAnyRole('ROLE_DOMAIN ADMIN', 'ROLE_ADMIN', 'ROLE_CSR')">
 
 <script type="text/javascript">
-	pgsi.pages.grupo.dialogSettings = {
+	pgsi.pages.marca.dialogSettings = {
 
 		insert : function (iId, sName,sModelAction) {
 
@@ -25,13 +25,13 @@
 						var sUrl = "";
 						if(sModelAction == "insert")
 						{
-							sUrl = "api/grupo/insert"
+							sUrl = "api/marca/insert"
 						}
 						else
 						{
-							sUrl = "api/grupo/update"
+							sUrl = "api/marca/update"
 						}
-						pgsi.pages.grupo.form.ajaxCall(sUrl,sModelAction);
+						pgsi.pages.marca.form.ajaxCall(sUrl,sModelAction);
 
 					};
 
@@ -46,7 +46,7 @@
 
 				action : function (actionDialog) {
 
-					actionDialog.load("grupo/editView?userId=" + pgsi.settings.userContext.userId+"&locationId=2", function() {
+					actionDialog.load("marca/editView?userId=" + pgsi.settings.userContext.userId+"&locationId=2", function() {
 
 						$('#selected', actionDialog).removeClass("hide").append(""+sName+"");
 

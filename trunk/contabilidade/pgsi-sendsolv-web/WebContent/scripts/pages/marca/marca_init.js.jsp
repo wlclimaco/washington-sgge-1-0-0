@@ -29,15 +29,15 @@ $(document).ready(function()
 	});
 
 	/** * jQuery dataTable setup ** */
-	pgsi.pages.grupo.locationTable = $('#data_list').dataTable($.pgsi.table.setTable(
+	pgsi.pages.marca.marcaTable = $('#data_list').dataTable($.pgsi.table.setTable(
 	{
 		id 			: "#data_list",
-		sAjaxSource : "api/pessoa/fetchall/grupo",
+		sAjaxSource : "api/produto/fetch/marca",
 		bPreLoad	: true,
 
 		ajax :
 		{
-			sObj		: "grupoList",
+			sObj		: "marcaList",
 			oRequest	: PagedInquiryRequest,
 			fnRequest 	: function(){}
 		},
@@ -45,67 +45,45 @@ $(document).ready(function()
 		aoColumns :
 		[
 		{
-			headerData 		: "CNPJ",
+			headerData 		: "ID",
 			order			: "name",
-			mRender         : pgsi.pages.grupo.fnCreateEmpresaNameLink,
+			mData           : "id",
 			sDefaultContent : "",
 			bSortable 		: false,
 			sClass          : "name-col"
 		},
 		{
-			headerData 		: "Nome Empresa",
+			headerData 		: "Marca",
 			order			: "organization_column",
-			mRender 		: pgsi.pages.grupo.fnCreateNomeLink,
+			mRender 		: pgsi.pages.marca.fnCreateNomeLink,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Cnae",
+			headerData 		: "Fabricante",
 			order			: "city_column",
-			mRender 		: pgsi.pages.grupo.fnCnae,
-			mData	 		: "null",
+			mData	 		: "fabricante",
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
 			headerData 		: "Email",
 			order			: "state_column",
-			mRender 		: pgsi.pages.grupo.fnEmail,
+			mRender 		: pgsi.pages.marca.fnEmail,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
 			headerData 		: "Telefone",
 			order			: "country_column",
-			mRender 		: pgsi.pages.grupo.fnTelefone,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Regime",
-			order			: "sdn_status_column",
-			mRender 		: pgsi.pages.grupo.fnRegime,
+			mRender 		: pgsi.pages.marca.fnTelefone,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
 			headerData 		: "Endereco",
 			order			: "phone_column",
-			mRender 		: pgsi.pages.grupo.fnEndereco,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Documentos",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.grupo.fnDocumento,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Status",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.grupo.fnStatus,
+			mRender 		: pgsi.pages.marca.fnEndereco,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
@@ -167,7 +145,7 @@ $(document).ready(function()
 
 						// Validations for change pagination when delete one or more groups of last page.
 						var iStart;
-						var oSettings = pgsi.pages.location.locationTable.fnSettings();
+						var oSettings = pgsi.pages.location.marcaTable.fnSettings();
 
 							// If exist just one group at last page and this group is deleted, the pagination back to previous page.
 							if (((oSettings._iRecordsDisplay - 1) % $('.dataTables_length').find('select').val() === 0)) {
@@ -175,7 +153,7 @@ $(document).ready(function()
 							}
 
 						$.pgsi.table.reloadTable({
-							table 		: pgsi.pages.location.locationTable,
+							table 		: pgsi.pages.location.marcaTable,
 							iStart 		: iStart
 						});
 					}else{
@@ -262,7 +240,7 @@ $(document).ready(function()
 				element			: ".filter",
 				tagsDiv			: ".filter-results-container div.first",
 				title			: $.pgsi.locale.get("commons.pages.filterTitle"),
-				table 			:  pgsi.pages.location.locationTable,
+				table 			:  pgsi.pages.location.marcaTable,
 				filters 		: oResponse
 			});
 		});
@@ -273,13 +251,13 @@ $(document).ready(function()
 	{
 		$.address.parameter("organization","");
 		$.address.parameter("location","");
-		pgsi.util.page.fnReloadTable(pgsi.pages.location.locationTable);
+		pgsi.util.page.fnReloadTable(pgsi.pages.location.marcaTable);
 	});
 	$(".add-business").on("click", function(e)
 	{
 		e.preventDefault();
 		$.pgsi.ajax.post({
-			sUrl 		: "api/grupo/add",
+			sUrl 		: "api/marca/add",
 			oRequest 	: {},
 			fnCallback  : function(oResponse) {
 				console.log('dd')
