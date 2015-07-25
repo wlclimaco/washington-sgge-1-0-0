@@ -123,6 +123,12 @@ body {
     padding-left: 37px;
 }
 
+.sidebar .nav-second-level li .form-checkbox {
+    padding-left: 37px!Important;
+}
+
+
+
 .sidebar .nav-third-level li a {
     padding-left: 52px;
 }
@@ -132,7 +138,9 @@ body {
         z-index: 1;
         position: absolute;
         width: 250px;
-        margin-top: 51px;
+        margin-top: 0px;
+		background:#f2f2f2 none repeat scroll 0 0;
+		border-top:1px solid #e7e7e7;
     }
 
     .navbar-top-links .dropdown-messages,
@@ -227,6 +235,7 @@ body {
 .dataTables_wrapper {
     position: relative;
     clear: both;
+    margin-left: 2px!Important;
 }
 
 table.dataTable thead .sorting,
@@ -351,4 +360,12 @@ table.dataTable thead .sorting:after {
 
 .panel-yellow a:hover {
     color: #df8a13;
+}
+.input-group input, textarea, select, .uneditable-input{
+	margin-bottom: 0px!Important;
+    width: 160px!Important;
+	margin-left: 34px!Important;
+}
+#resetFilter{
+	text-align: center;
 }
