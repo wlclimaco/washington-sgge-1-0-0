@@ -27,6 +27,10 @@
 		<typeAlias alias="OrcamentoInquiryRequest"     					 type="com.prosperitasglobal.sendsolv.model.request.OrcamentoInquiryRequest"/>
 		<typeAlias alias="PedidoComprasInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.PedidoComprasInquiryRequest"/>
 
+		<typeAlias alias="HistoricoInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.HistoricoInquiryRequest"/>
+		<typeAlias alias="OrdemServicoInquiryRequest"     					 type="com.prosperitasglobal.sendsolv.model.request.OrdemServicoInquiryRequest"/>
+		<typeAlias alias="TelaInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.TelaInquiryRequest"/>
+
 		<typeAlias alias="UniMedInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.UniMedInquiryRequest"/>
 		<typeAlias alias="GrupoInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.GrupoInquiryRequest"/>
 		<typeAlias alias="SubGrupoInquiryRequest"     				 type="com.prosperitasglobal.sendsolv.model.request.SubGrupoInquiryRequest"/>
