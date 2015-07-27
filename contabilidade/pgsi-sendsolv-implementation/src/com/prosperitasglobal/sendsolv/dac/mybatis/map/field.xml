@@ -7,5 +7,249 @@
 <mapper namespace="FieldMap">
 
 
+	<!--	/** The SendSolv id for the account. */
+	private Integer id;
+
+	/** The type of an account. */
+	private String type;
+
+	/** The description. */
+	private String description;
+
+	/** The numero. */
+	private String numero;
+
+	/** The nome. */
+	private String nome;
+
+	/** The left. */
+	private Integer left;
+
+	/** The top. */
+	private Integer top;
+
+	/** The width. */
+	private Integer width;
+
+	/** The height. */
+	private Integer height;
+
+	/** The z index. */
+	private Integer zIndex;
+
+	/** The label. */
+	private Field label;
+
+	/** The text. */
+	private String text;
+
+	/** The classe. */
+	private String classe;
+
+	/** The mask. */
+	private String mask;
+
+	/** The validation. */
+	private String validation;
+
+	/** The size. */
+	private Integer size;
+
+	/** The busca. */
+	private FieldBusca busca;-->
+
+  <resultMap id="fieldResult" type="Field" >
+    <result property="id" column="id" />
+    <result property="tabId" column="tabId" />
+    <result property="type" column="type" />
+   	<result property="description" column="description"/>
+	<result property="numero" column="numero"/>
+	<result property="nome" column="nome"/>
+	<result property="left" column="left"/>
+	<result property="top" column="top"/>
+	<result property="width" column="width"/>
+	<result property="height" column="height"/>
+	<result property="zIndex" column="zIndex"/>
+	<result property="label" column="label"/>
+	<result property="text" column="text"/>
+	<result property="classe" column="classe"/>
+	<result property="mask" column="mask"/>
+	<result property="validation" column="validation"/>
+	<result property="size" column="size"/>
+	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<association property="busca"    column="busca" select="FieldMap.fetchBuscaLabel"  />
+  </resultMap>
+
+<resultMap id="fieldBuscaResult" type="FieldBusca" >
+    <result property="id" column="id"/>
+	<result property="fieldId" column="fieldId"/>
+	<result property="tabela" column="tabela"/>
+	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+</resultMap>
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allFieldColumns">
+		 b.type
+		,b.tabId
+	   	,b.description
+		,b.numero
+		,b.nome
+		,b.left
+		,b.top
+		,b.width
+		,b.height
+		,b.zIndex
+		,b.label
+		,b.text
+		,b.classe
+		,b.mask
+		,b.validation
+		,b.size
+		,b.busca
+		,b.processId
+    	,b.create_date
+    	,b.create_user
+    	,b.modify_date
+    	,b.modify_user
+  </sql>
+
+  <sql id="allFieldValues">
+  		#{type},
+  		#{tabId},
+	   	#{description},
+		#{numero},
+		#{nome},
+		#{left},
+		#{top},
+		#{width},
+		#{height},
+		#{zIndex},
+		#{label},
+		#{text},
+		#{classe},
+		#{mask},
+		#{validation},
+		#{size},
+		#{busca},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertField" parameterType="Field" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO field (
+		<include refid="allFieldColumns" />
+      )
+    VALUES (<include refid="allFieldValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateField" parameterType="Field">
+    UPDATE field
+    	<set>
+			<if test="type!= null">type = #{type},</if>
+			<if test="tabId!= null">tabId = #{tabId},</if>
+			<if test="description!= null">description = #{description},</if>
+			<if test="numero!= null">numero = #{numero},</if>
+			<if test="nome!= null">nome = #{nome},</if>
+			<if test="left!= null">left = #{left},</if>
+			<if test="top!= null">top = #{top},</if>
+			<if test="width!= null">width = #{width},</if>
+			<if test="height!= null">height = #{height},</if>
+			<if test="zIndex!= null">zIndex = #{zIndex},</if>
+			<if test="label!= null">label = #{label},</if>
+			<if test="text!= null">text = #{text},</if>
+			<if test="classe!= null">classe = #{classe},</if>
+			<if test="mask!= null">mask = #{mask},</if>
+			<if test="validation!= null">validation = #{validation},</if>
+			<if test="size!= null">size = #{size},</if>
+			<if test="busca!= null">busca = #{busca},</if>
+			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteFieldById" parameterType="Integer">
+    	DELETE FROM field WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchFieldRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM field
+
+  </select>
+
+    <select id="fetchBuscaLabel" resultMap="fieldBuscaResult">
+    SELECT
+	*
+    FROM fieldBusca b order BY b.id ASC
+  </select>
+
+  <select id="fetchAllFields" resultMap="fieldResult">
+    SELECT
+	<include refid="allFieldColumns" />
+    FROM field b order BY b.id ASC
+  </select>
+
+  <select id="fetchFieldById" parameterType="FetchByIdRequest" resultMap="fieldResult">
+	 SELECT
+	<include refid="allFieldColumns" />
+    FROM field b where b.id= #{id}  ORDER BY id ASC
+  </select>
+
+   <select id="fetchFieldByTabsId" parameterType="FetchByIdRequest" resultMap="fieldResult">
+	 SELECT
+	<include refid="allFieldColumns" />
+    FROM field b where b.tabId = #{id}  ORDER BY id ASC
+  </select>
+
+  <select id="fetchAllFieldsByRequest" parameterType="PagedInquiryRequest" resultMap="fieldResult">
+	 SELECT * FROM ( SELECT b.id,
+    						<include refid="allEmpresaColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM field b
+						where 1 = 1
+
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+
+
 
 </mapper>

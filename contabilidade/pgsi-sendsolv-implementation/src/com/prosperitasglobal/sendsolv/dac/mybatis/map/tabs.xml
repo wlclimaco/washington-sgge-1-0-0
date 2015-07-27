@@ -12,37 +12,44 @@
   	<!-- Result maps describe the mapping between the columns returned
        from a query, and the class properties.  A result map isn't
        necessary if the columns (or aliases) match to the properties
-       exactly. -->
+       exactly. /** The SendSolv id for the account. */
+	private Integer id;
 
-  <resultMap id="empresaResult" type="Tabs" >
-    <result property="parentOrganizationId" column="FK_empresa_id" />
-    <result property="parentOrganizationName" column="org_name" />
-   	<result property="batchApprovalDayLimit" column="money_transfer_offset_days"/>
-	<result property="fundsTransferDayLimit" column="funds_transfer_offset_days"/>
+	/** The type of an account. */
+	private String text;
 
-	<collection property="frequencyBasedEventList" column="business_id" select="FrequencyEventMap.fetchFrequencyByTabsId"/>
-	<collection property="businessProductPlanList" column="business_id" select="BusinessProductPlanMap.fetchBusinessProductPlanByTabsId"/>
+	/** The description. */
+	private String description;
+
+	/** The numero. */
+	private String nome;
+
+	/** The data. */
+	private List<Field> fiels;-->
+
+  <resultMap id="tabsResult" type="Tabs" >
+    <result property="id" column="id" />
+    <result property="text" column="text" />
+   	<result property="description" column="description"/>
+	<result property="nome" column="nome"/>
+	<result property="telaId" column="telaId"/>
+	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<collection property="fiels" column="id" select="FieldsMap.fetchFieldByTabsId"/>
   </resultMap>
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allTabsColumns">
-		 b.name
-		,b.business_key
-      	,b.business_type
-      	,b.EIN_code
-      	,b.PGSi_status
-      	,b.risk_level
-      	,b.risk_level_note_text
-      	,b.FK_number_of_employees
-      	,b.FK_number_of_migrant_workers
-      	,b.FK_SIC_id
-      	,b.FK_NAICS_id
-      	,b.FK_country_code
-      	,b.FK_empresa_id
-      	,b.money_transfer_offset_days
-      	,b.funds_transfer_offset_days
+		 b.text
+		,b.description
+      	,b.nome
+      	,b.telaId
+      	,b.processId
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -50,41 +57,20 @@
   </sql>
 
   <sql id="allTabsValues">
-  		#{name},
-  		#{key},
-    	#{businessTypeValue},
-    	#{employerIdentificationNumber},
-    	#{statusValue},
-    	#{risk.riskLevelValue},
-    	#{risk.riskLevelNote},
-    	#{numberOfEmployees.id},
-    	#{numberOfMigrantWorkers.id},
-    	#{standardIndustrialClassificationCode.id},
-    	#{northAmericanIndustryClassificationSystemCode.id},
-    	#{country.code},
-    	#{parentOrganizationId},
-    	#{batchApprovalDayLimit},
-    	#{fundsTransferDayLimit},
+  		#{text},
+  		#{description},
+    	#{nome},
+    	#{telaId},
+    	#{processId},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
-  <sql id="allTabsContactColumns">
-		FK_contact_id,
-		FK_business_id,
-		<include refid="CBOFMap.allChangeControlColumns"/>
-  </sql>
-
-  <sql id="allTabsContactValues">
-  		#{id},
-  		#{parentKey},
-    	<include refid="CBOFMap.changeControlFields"/>
-  </sql>
 
   <!--
 		SQL Insert Statements.
  	-->
   <insert id="insertTabs" parameterType="Tabs" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO business (
+  	INSERT INTO tabs (
 		<include refid="allTabsColumns" />
       )
     VALUES (<include refid="allTabsValues" /> )
@@ -96,63 +82,75 @@
  	-->
 
   <update id="updateTabs" parameterType="Tabs">
-    UPDATE business
+    UPDATE tabs
     	<set>
-    		money_transfer_offset_days = #{batchApprovalDayLimit},
-      		funds_transfer_offset_days = #{fundsTransferDayLimit},
-    		<if test="name!= null">name = #{name},</if>
-	    	<if test="businessTypeValue!= null"> business_type=#{businessTypeValue},</if>
-	    	<if test="employerIdentificationNumber!= null"> EIN_code=#{employerIdentificationNumber},</if>
-	    	<if test="statusValue!= null"> PGSi_status=#{statusValue},</if>
-	    	<if test="numberOfEmployees.id!= null"> FK_number_of_employees=#{numberOfEmployees.id},</if>
-	    	<if test="numberOfMigrantWorkers.id!= null"> FK_number_of_migrant_workers=#{numberOfMigrantWorkers.id},</if>
-	    	<if test="standardIndustrialClassificationCode.id!= null"> FK_SIC_id=#{standardIndustrialClassificationCode.id},</if>
-	    	<if test="northAmericanIndustryClassificationSystemCode.id!= null"> FK_NAICS_id=#{northAmericanIndustryClassificationSystemCode.id},</if>
-	    	<if test="parentOrganizationId != null"> FK_empresa_id= #{parentOrganizationId},</if>
-	    	<if test="country.code!= null"> FK_country_code=#{country.code},</if>
+    		<if test="text!= null">text = #{text},</if>
+	    	<if test="description!= null"> description=#{description},</if>
+	    	<if test="nome!= null"> nome=#{nome},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE
-     business_id = #{id} AND versn_lock_num = #{version}
+     id = #{id}
   </update>
 
    <!--
 		SQL Delete Statements.
    -->
   <delete id="deleteTabsById" parameterType="Integer">
-    	DELETE FROM business WHERE business_id = #{id}
+    	DELETE FROM tabs WHERE id = #{id}
   </delete>
 
 	<!--
 		SQL Fetch Statements.
  	-->
   <select id="fetchTabsRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
-     SELECT COUNT(business_id) AS RECORD_COUNT
-        FROM business
-     WHERE business_type = 2
-     <if test="parentId != null">
-		  AND FK_empresa_id = #{parentId}
-	 </if>
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM tabs
+
   </select>
 
-  <select id="fetchAllTabss" resultMap="empresaResult">
+  <select id="fetchAllTabss" resultMap="tabsResult">
     SELECT
 	<include refid="allTabsColumns" />
-    FROM business ORDER BY name ASC
+    FROM tabs b order BY b.id ASC
   </select>
 
-  <select id="fetchTabsById" parameterType="FetchByIdRequest" resultMap="empresaResult">
-
+  <select id="fetchTabsById" parameterType="FetchByIdRequest" resultMap="tabsResult">
+	 SELECT
+	<include refid="allTabsColumns" />
+    FROM tabs b where b.id= #{id}  ORDER BY id ASC
   </select>
 
-  <select id="fetchAllTabssByRequest" parameterType="PagedInquiryRequest" resultMap="empresaResult">
-
+   <select id="fetchTabsByTela" parameterType="FetchByIdRequest" resultMap="tabsResult">
+	 SELECT
+	<include refid="allTabsColumns" />
+    FROM tabs b where b.tela = #{id}  ORDER BY id ASC
   </select>
 
-  <select id="fetchVersionNumber" parameterType="Tabs" resultType="int">
-	SELECT versn_lock_num FROM business WHERE business_id = #{id}
+  <select id="fetchAllTabssByRequest" parameterType="PagedInquiryRequest" resultMap="tabsResult">
+	 SELECT * FROM ( SELECT b.id,
+    						<include refid="allEmpresaColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM tabs b
+						where 1 = 1
+
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
   </select>
+
+
 
 
 </mapper>

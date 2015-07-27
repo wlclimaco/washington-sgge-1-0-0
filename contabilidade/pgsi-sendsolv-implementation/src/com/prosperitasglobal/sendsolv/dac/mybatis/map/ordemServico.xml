@@ -106,16 +106,10 @@
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchOrdemServicoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+  <select id="fetchOrdemServicoRowCount" parameterType="OrdemServicoInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM ordemServico
      WHERE 2 = 2
-     <if test="emprId != null">
-		  AND emprId = #{emprId}
-	 </if>
-	 <if test="userId != null">
-		  AND userId = #{userId}
-	 </if>
   </select>
 
   <select id="fetchAllOrdemServicos" resultMap="ordemServicoResult">
@@ -130,15 +124,24 @@
 		    FROM ordemServico where id= #{id} ORDER BY data ASC
   </select>
 
-  <select id="fetchAllOrdemServicosByRequest" parameterType="PagedInquiryRequest" resultMap="ordemServicoResult">
-	     SELECT *FROM ordemServico
-		     WHERE 2 = 2
-			     <if test="emprId != null">
-					  AND emprId = #{emprId}
-				 </if>
-				 <if test="userId != null">
-					  AND userId = #{userId}
-				 </if>
+  <select id="fetchAllOrdemServicosByRequest" parameterType="OrdemServicoInquiryRequest" resultMap="ordemServicoResult">
+	       SELECT * FROM ( SELECT b.id,
+    						<include refid="allTelaColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM ordemservico b
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
   </select>
 
 

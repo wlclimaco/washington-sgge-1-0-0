@@ -1809,3 +1809,68 @@ CONSTRAINT [pk_historicoNF_id] PRIMARY KEY CLUSTERED
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
+DROP TABLE [dbo].[tabs];
+CREATE TABLE [dbo].[tabs](
+	[id]             [int] identity(1,1) NOT NULL,
+	[telaId]         [int]  NULL,
+	[text]           [varchar](250) NULL,
+	[description]    [varchar](250) NULL,
+	[nome]   		 [varchar](50) NULL,
+    [processId]      [int]  NULL,
+	[create_date]    [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  	 [varchar](50) NULL,
+    [modify_date]    [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]    [varchar](50) NULL,
+CONSTRAINT [pk_tabs_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+DROP TABLE [dbo].[field];
+CREATE TABLE [dbo].[field](
+	[id]             [int] identity(1,1) NOT NULL,
+	[tabId]          [int]  NULL,
+	[type]           [int]  NULL,
+	[description]    [varchar](250) NULL,
+	[numero]   		 [varchar](50) NULL,
+    [nome]      	 [int]  NULL,
+    [left]           [int]  NULL,
+	[top]            [int]  NULL,
+	[width]          [int]  NULL,
+	[height]    	 [int]  NULL,
+	[zIndex]   		 [int]  NULL,
+    [label]      	 [varchar](50) NULL,
+    [text]           [varchar](50) NULL,
+	[classe]         [varchar](50) NULL,
+	[mask]           [varchar](50) NULL,
+	[validation]     [varchar](250) NULL,
+	[size]   		 [int]  NULL,
+    [busca]      	 [int]  NULL,
+    [processId]      [int]  NULL,
+	[create_date]    [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  	 [varchar](50) NULL,
+    [modify_date]    [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]    [varchar](50) NULL,
+CONSTRAINT [pk_field_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+DROP TABLE [dbo].[fieldBusca];
+CREATE TABLE [dbo].[fieldBusca](
+	[id]             [int] identity(1,1) NOT NULL,
+	[fieldId]        [int]  NULL,
+	[tabela]         [int]  NULL,
+	[processId]      [int]  NULL,
+	[create_date]    [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  	 [varchar](50) NULL,
+    [modify_date]    [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]    [varchar](50) NULL,
+CONSTRAINT [pk_fieldBusca_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]

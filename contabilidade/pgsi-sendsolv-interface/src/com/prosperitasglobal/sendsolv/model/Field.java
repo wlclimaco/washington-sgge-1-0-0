@@ -40,7 +40,7 @@ public class Field extends QATModel
 	private Integer zIndex;
 
 	/** The label. */
-	private Field label;
+	private String label;
 
 	/** The text. */
 	private String text;
@@ -273,7 +273,7 @@ public class Field extends QATModel
 	 *
 	 * @return the label
 	 */
-	public Field getLabel()
+	public String getLabel()
 	{
 		return label;
 	}
@@ -283,7 +283,7 @@ public class Field extends QATModel
 	 *
 	 * @param label the new label
 	 */
-	public void setLabel(Field label)
+	public void setLabel(String label)
 	{
 		this.label = label;
 	}
