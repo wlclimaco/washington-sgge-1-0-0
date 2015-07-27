@@ -229,7 +229,7 @@ public class TelaDACImpl extends SqlSessionDaoSupport implements ITelaDAC
 		 * Helper method to translation from the user friendly" sort field names to the
 		 * actual database column names.
 		 */
-		QATMyBatisDacHelper.translateSortFields(request, getTelaInquiryValidSortFields());
+		// QATMyBatisDacHelper.translateSortFields(request, "id");
 
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, TELA_STMT_FETCH_COUNT,
 				TELA_STMT_FETCH_ALL_BY_REQUEST, response);

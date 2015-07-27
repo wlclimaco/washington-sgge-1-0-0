@@ -117,7 +117,7 @@
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchHistoricoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+  <select id="fetchHistoricoRowCount" parameterType="HistoricoInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM historico
      WHERE 2 = 2

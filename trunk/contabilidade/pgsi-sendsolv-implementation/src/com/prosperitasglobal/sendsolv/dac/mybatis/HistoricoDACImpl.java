@@ -46,7 +46,7 @@ public class HistoricoDACImpl extends SqlSessionDaoSupport implements IHistorico
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-						.doInsert(getSqlSession(), statementName, historico, response);
+				.doInsert(getSqlSession(), statementName, historico, response);
 
 		return insertCount;
 	}
@@ -121,7 +121,7 @@ public class HistoricoDACImpl extends SqlSessionDaoSupport implements IHistorico
 		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
 
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "HistoricoMap.fetchHistoricoRowCount",
-				"HistoricoMap", response);
+				"HistoricoMap.fetchAllHistoricosByRequest", response);
 		return response;
 	}
 

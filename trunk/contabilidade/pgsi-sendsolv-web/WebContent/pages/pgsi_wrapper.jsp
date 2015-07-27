@@ -103,7 +103,7 @@
 		<ul class="dropdown-menu">
             <li><a href="tela" class="alist" data-title='Nota Entrada'>Tela</a></li>
             <li><a href="historico" class="alist" data-title='Nota Entrada'>Historico</a></li>
-            <li><a href="ordemServico" class="alist" data-title='Nota Entrada'>Ordem Servico</a></li>
+            <li><a href="ordemservico" class="alist" data-title='Nota Entrada'>Ordem Servico</a></li>
             <li><a href="sistema/icons" class="alist" data-title='Nota Entrada'>Incones</a></li>
 			<li><a href="sistema/reports" class="alist" data-title='Nota Entrada'>Relatorios</a></li>
 			<li><a href="sistema/chats" class="alist" data-title='Nota Entrada'>Graficos</a></li>
