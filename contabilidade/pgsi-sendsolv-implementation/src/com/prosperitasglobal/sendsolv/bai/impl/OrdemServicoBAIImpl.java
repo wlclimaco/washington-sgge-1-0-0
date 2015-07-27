@@ -348,11 +348,4 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 		return null;
 	}
 
-	@Override
-	public OrdemServicoResponse fetchOrdemServicoByOrganization(OrdemServicoInquiryRequest request)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

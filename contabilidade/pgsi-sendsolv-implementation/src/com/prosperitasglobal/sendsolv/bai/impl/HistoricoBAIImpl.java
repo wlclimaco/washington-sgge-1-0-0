@@ -2,9 +2,28 @@ package com.prosperitasglobal.sendsolv.bai.impl;
 
 import java.util.List;
 
-import org.relaxng.datatype.ValidationContext;
+import org.slf4j.LoggerFactory;
 
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IHistoricoBAC;
+import com.prosperitasglobal.sendsolv.bai.IHistoricoBAI;
+import com.prosperitasglobal.sendsolv.model.Alertas;
+import com.prosperitasglobal.sendsolv.model.Historico;
+import com.prosperitasglobal.sendsolv.model.request.AlertasInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.HistoricoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.HistoricoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.AlertasResponse;
+import com.prosperitasglobal.sendsolv.model.response.HistoricoResponse;
+import com.qat.framework.model.MessageInfo;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
+import com.qat.framework.model.UserContext;
+import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATInterfaceUtil;
+import com.qat.framework.validation.ValidationContext;
+import com.qat.framework.validation.ValidationContextIndicator;
+import com.qat.framework.validation.ValidationController;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class HistoricoBAIImpl.
@@ -275,13 +294,6 @@ public class HistoricoBAIImpl implements IHistoricoBAI
 	private HistoricoResponse handleReturn(HistoricoResponse response, InternalResponse internalResponse,
 			List<MessageInfo> messages, boolean copyOver)
 	{
-		// In the case there was an Optimistic Locking error, add the specific message
-		if (!ValidationUtil.isNull(internalResponse) && !ValidationUtil.isNull(internalResponse.getStatus())
-				&& Status.OptimisticLockingError.equals(internalResponse.getStatus()))
-		{
-			messages.add(new MessageInfo(PROSPERITASGLOBAL_BASE_OL_ERROR, MessageSeverity.Error,
-					MessageLevel.Object));
-		}
 
 		QATInterfaceUtil.handleOperationStatusAndMessages(response,
 				internalResponse, messages, copyOver);

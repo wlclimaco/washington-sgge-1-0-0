@@ -51,12 +51,4 @@ public interface IOrdemServicoBAI
 	 */
 	public OrdemServicoResponse fetchOrdemServicoByRequest(OrdemServicoInquiryRequest request);
 
-	/**
-	 * Fetch ordem servico by organization.
-	 *
-	 * @param request the request
-	 * @return the ordem servico response
-	 */
-	public OrdemServicoResponse fetchOrdemServicoByOrganization(OrdemServicoInquiryRequest request);
-
 }

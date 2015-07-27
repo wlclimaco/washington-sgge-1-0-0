@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
+import com.prosperitasglobal.sendsolv.model.request.HistoricoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.HistoricoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.HistoricoResponse;
 
 /**
- * The EmpresaAPIController Class.
+ * The HistoricoAPIController Class.
  *
  * @author Flavio Tosta, Washington Costa
  *
@@ -26,21 +26,17 @@ import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
 public class HistoricoAPIController extends HistoricoBaseController
 {
 
-	/** The Constant FETCH_SIC_NAICS. */
-	private static final String FETCH_SIC_NAICS = "fetchSicNaics";
-	/** The Constant FETCH_ORGANIZATION_BYLOCATION. */
-	private static final String FETCH_ORGANIZATION_BYLOCATION = "fetchOrganizationBylocation";
 	/** The URL mapping constants. */
-	private static final String DELETE_LOCATION = "/delete";
+	private static final String DELETE_HISTORICO = "/delete";
 
-	/** The Constant EDIT_LOCATION. */
-	private static final String EDIT_LOCATION = "/edit";
+	/** The Constant EDIT_HISTORICO. */
+	private static final String EDIT_HISTORICO = "/edit";
 
 	/** The Constant FETCH_ALL. */
 	private static final String FETCH_ALL = "/fetchall";
 
-	/** The Constant INSERT_LOCATION. */
-	private static final String INSERT_LOCATION = "/add";
+	/** The Constant INSERT_HISTORICO. */
+	private static final String INSERT_HISTORICO = "/add";
 
 	/** The Constant FETCH. */
 	private static final String FETCH = "/fetch";
@@ -50,20 +46,20 @@ public class HistoricoAPIController extends HistoricoBaseController
 	private static final Logger LOG = LoggerFactory.getLogger(HistoricoAPIController.class);
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
-	private static final String CONTROLLER_EXCEPTION_MSG = "EmpresaAPIController";
+	private static final String CONTROLLER_EXCEPTION_MSG = "HistoricoAPIController";
 
 	/**
-	 * Fetch all Empresas.
+	 * Fetch all Historicos.
 	 *
 	 * @param pagedInquiryRequest the paged inquiry request
 	 * @return the response
 	 */
 	@RequestMapping(value = FETCH_ALL, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse fetchAll(@RequestBody PagedInquiryRequest pagedInquiryRequest)
+	public HistoricoResponse fetchAll(@RequestBody HistoricoInquiryRequest pagedInquiryRequest)
 	{
 
-		return fetchEmpresaByRequest(pagedInquiryRequest);
+		return fetchHistoricoByRequest(pagedInquiryRequest);
 
 	}
 
@@ -71,95 +67,95 @@ public class HistoricoAPIController extends HistoricoBaseController
 	 * Fetch.
 	 *
 	 * @param fetchByIdRequest the fetch by id request
-	 * @return the location response
+	 * @return the historico response
 	 */
 	@RequestMapping(value = FETCH, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse fetch(@RequestBody FetchByIdRequest fetchByIdRequest)
+	public HistoricoResponse fetch(@RequestBody FetchByIdRequest fetchByIdRequest)
 	{
 
-		return fetchEmpresaById(fetchByIdRequest);
+		return fetchHistoricoById(fetchByIdRequest);
 
 	}
 
 	/**
-	 * Edit one location.
+	 * Edit one historico.
 	 *
-	 * @param locationRequest the location request
+	 * @param historicoRequest the historico request
 	 * @return the response
 	 */
-	@RequestMapping(value = EDIT_LOCATION, method = RequestMethod.POST)
+	@RequestMapping(value = EDIT_HISTORICO, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse edit(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public HistoricoResponse edit(@RequestBody HistoricoMaintenanceRequest historicoRequest)
 	{
-		EmpresaResponse locationResponse = new EmpresaResponse();
+		HistoricoResponse historicoResponse = new HistoricoResponse();
 		try
 		{
 
-			locationResponse = getEmpresaBAI().updateEmpresa(locationRequest);
+			historicoResponse = getHistoricoBAI().updateHistorico(historicoRequest);
 
 		}
 		catch (Exception e)
 		{
 			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			locationResponse = null;
+			historicoResponse = null;
 		}
-		return locationResponse;
+		return historicoResponse;
 
 	}
 
 	/**
-	 * Delete one location.
+	 * Delete one historico.
 	 *
-	 * @param locationRequest the location request
+	 * @param historicoRequest the historico request
 	 * @return the response
 	 */
-	@RequestMapping(value = DELETE_LOCATION, method = RequestMethod.POST)
+	@RequestMapping(value = DELETE_HISTORICO, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse delete(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public HistoricoResponse delete(@RequestBody HistoricoMaintenanceRequest historicoRequest)
 	{
-		EmpresaResponse locationResponse = new EmpresaResponse();
+		HistoricoResponse historicoResponse = new HistoricoResponse();
 		try
 		{
 
-			locationResponse = getEmpresaBAI().deleteEmpresa(locationRequest);
+			historicoResponse = getHistoricoBAI().deleteHistorico(historicoRequest);
 
 		}
 		catch (Exception e)
 		{
 			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			locationResponse = null;
+			historicoResponse = null;
 		}
 
-		return locationResponse;
+		return historicoResponse;
 
 	}
 
 	/**
-	 * Insert one location.
+	 * Insert one historico.
 	 *
-	 * @param locationRequest the location request
+	 * @param historicoRequest the historico request
 	 * @return the response
 	 */
-	@RequestMapping(value = INSERT_LOCATION, method = RequestMethod.POST)
+	@RequestMapping(value = INSERT_HISTORICO, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse insert(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public HistoricoResponse insert(@RequestBody HistoricoMaintenanceRequest historicoRequest)
 	{
-		EmpresaResponse locationResponse = new EmpresaResponse();
+		HistoricoResponse historicoResponse = new HistoricoResponse();
 
 		try
 		{
 
-			locationRequest.getEmpresa().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
-			locationResponse = getEmpresaBAI().insertEmpresa(locationRequest);
+			historicoRequest.getHistorico().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
+			historicoResponse = getHistoricoBAI().insertHistorico(historicoRequest);
 		}
 		catch (Exception e)
 		{
 			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			locationResponse = null;
+			historicoResponse = null;
 		}
 
-		return locationResponse;
+		return historicoResponse;
 
 	}
 

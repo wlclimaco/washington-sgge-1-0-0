@@ -1,12 +1,10 @@
 package com.prosperitasglobal.sendsolv.model.criteria;
 
-import java.io.Serializable;
-
 /**
  * The Class MemberCriteria.
  */
 @SuppressWarnings("serial")
-public class BancoCriteria implements Serializable
+public class BancoCriteria extends ComumCriteria
 {
 
 	/** The business id. */
@@ -21,83 +19,19 @@ public class BancoCriteria implements Serializable
 	}
 
 	/**
-	 * Gets the emprId.
-	 *
-	 * @return the emprId
+	 * @return the agenciaId
 	 */
-	public Integer getEmprId()
+	public Integer getAgenciaId()
 	{
-		return emprId;
+		return agenciaId;
 	}
 
 	/**
-	 * Sets the emprId.
-	 *
-	 * @param emprId the emprId to set
+	 * @param agenciaId the agenciaId to set
 	 */
-	public void setEmprId(Integer emprId)
+	public void setAgenciaId(Integer agenciaId)
 	{
-		this.emprId = emprId;
-	}
-
-	/**
-	 * Gets the id.
-	 *
-	 * @return the id
-	 */
-	public Integer getId()
-	{
-		return Id;
-	}
-
-	/**
-	 * Sets the id.
-	 *
-	 * @param id the id to set
-	 */
-	public void setId(Integer id)
-	{
-		Id = id;
-	}
-
-	/**
-	 * Gets the type.
-	 *
-	 * @return the type
-	 */
-	public String getType()
-	{
-		return type;
-	}
-
-	/**
-	 * Sets the type.
-	 *
-	 * @param type the new type
-	 */
-	public void setType(String type)
-	{
-		this.type = type;
-	}
-
-	/**
-	 * Gets the numero.
-	 *
-	 * @return the numero
-	 */
-	public String getNumero()
-	{
-		return numero;
-	}
-
-	/**
-	 * Sets the numero.
-	 *
-	 * @param numero the new numero
-	 */
-	public void setNumero(String numero)
-	{
-		this.numero = numero;
+		this.agenciaId = agenciaId;
 	}
 
 	/*
@@ -107,9 +41,9 @@ public class BancoCriteria implements Serializable
 	@Override
 	public String toString()
 	{
-		return "ArquivoCriteria [getEmprId()=" + getEmprId() + ", getId()="
-				+ getId() + ", getType()=" + getType() + ", getNumero()=" + getNumero() + ", toString()="
-				+ super.toString() + "]";
+		return "BancoCriteria [getAgenciaId()=" + getAgenciaId() + ", getEmprId()=" + getEmprId() + ", getId()="
+				+ getId() + ", toString()=" + super.toString() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
 
 }
