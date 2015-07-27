@@ -118,7 +118,7 @@
 		SQL Fetch Statements.
  	-->
   <select id="fetchHistoricoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
-     SELECT COUNT(historico_id) AS RECORD_COUNT
+     SELECT COUNT(id) AS RECORD_COUNT
         FROM historico
      WHERE 2 = 2
   </select>
@@ -135,10 +135,30 @@
      WHERE id=#{id}
   </select>
 
-  <select id="fetchAllHistoricosByRequest" parameterType="PagedInquiryRequest" resultMap="historicoResult">
-		SELECT *
-
-		  FROM historico
+  <select id="fetchAllHistoricosByRequest" parameterType="HistoricoInquiryRequest" resultMap="historicoResult">
+		SELECT * FROM
+    			(
+    				SELECT b.id,
+    						<include refid="allHistoricoColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM historico b
+					WHERE 2 = 2
+					<if test="criteria.id != null">
+						AND b.id = #{criteria.id}
+					</if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
   </select>
 
   <select id="fetchAllHistoricoItensByhistorico" parameterType="Integer" resultMap="historicoItensResult">
@@ -146,6 +166,38 @@
 
 		  FROM historicoItens
 		where  idHist = #{id}
+  </select>
+
+  <select id="fetchAlertasRowCount" parameterType="AlertasInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM historico
+     WHERE 2 = 2
+  </select>
+
+   <select id="fetchAllAlertasByRequest" parameterType="AlertasInquiryRequest" resultMap="historicoResult">
+		SELECT * FROM
+    			(
+    				SELECT b.id,
+    						<include refid="allHistoricoColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM historico b
+					WHERE 2 = 2
+					<if test="criteria.id != null">
+						AND b.id = #{criteria.id}
+					</if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
   </select>
 
 

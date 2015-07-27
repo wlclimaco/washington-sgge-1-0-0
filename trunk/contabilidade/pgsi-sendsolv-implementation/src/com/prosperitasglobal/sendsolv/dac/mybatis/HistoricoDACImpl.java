@@ -1,17 +1,7 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
-
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
-import com.prosperitasglobal.sendsolv.model.Historico;
-import com.prosperitasglobal.sendsolv.model.HistoricoItens;
-import com.prosperitasglobal.sendsolv.model.request.HistoricoInquiryRequest;
-import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.framework.validation.ValidationUtil;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
 
 /**
  * The Class HistoricoDACImpl.
@@ -43,7 +33,7 @@ public class HistoricoDACImpl extends SqlSessionDaoSupport implements IHistorico
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-				.doInsert(getSqlSession(), statementName, historico, response);
+						.doInsert(getSqlSession(), statementName, historico, response);
 
 		return insertCount;
 	}
@@ -109,8 +99,33 @@ public class HistoricoDACImpl extends SqlSessionDaoSupport implements IHistorico
 	@Override
 	public InternalResultsResponse<Historico> fetchHistoricoByRequest(HistoricoInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResultsResponse<Historico> response = new InternalResultsResponse<Historico>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequestEmpresa(getSqlSession(), request, "HistoricoMap.fetchHistoricoRowCount",
+				"HistoricoMap", response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Alertas> fetchAlertasByRequest(AlertasInquiryRequest request)
+	{
+		InternalResultsResponse<Alertas> response = new InternalResultsResponse<Alertas>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequestEmpresa(getSqlSession(), request, "HistoricoMap.fetchAlertasRowCount",
+				"HistoricoMap.fetchAllAlertasByRequest", response);
+		return response;
 	}
 
 }

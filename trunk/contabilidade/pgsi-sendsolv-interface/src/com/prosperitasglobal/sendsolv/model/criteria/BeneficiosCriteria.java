@@ -1,25 +1,12 @@
 package com.prosperitasglobal.sendsolv.model.criteria;
 
-import java.io.Serializable;
 
 /**
  * The Class MemberCriteria.
  */
 @SuppressWarnings("serial")
-public class BeneficiosCriteria implements Serializable
+public class BeneficiosCriteria implements ComumCriteria
 {
-
-	/** The business id. */
-	private Integer emprId;
-
-	/** The recipient id. */
-	private Integer Id;
-
-	/** The location name. */
-	private String type;
-
-	/** The organization name. */
-	private String numero;
 
 	/**
 	 * The Constructor.

@@ -2,28 +2,9 @@ package com.prosperitasglobal.sendsolv.bai.impl;
 
 import java.util.List;
 
-import org.slf4j.LoggerFactory;
+import org.relaxng.datatype.ValidationContext;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IHistoricoBAC;
-import com.prosperitasglobal.sendsolv.bai.IHistoricoBAI;
-import com.prosperitasglobal.sendsolv.model.Historico;
-import com.prosperitasglobal.sendsolv.model.request.HistoricoInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.HistoricoMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.response.HistoricoResponse;
-import com.qat.framework.model.Message.MessageLevel;
-import com.qat.framework.model.Message.MessageSeverity;
-import com.qat.framework.model.MessageInfo;
-import com.qat.framework.model.QATModel.PersistanceActionEnum;
-import com.qat.framework.model.UserContext;
-import com.qat.framework.model.response.InternalResponse;
-import com.qat.framework.model.response.InternalResponse.Status;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATInterfaceUtil;
-import com.qat.framework.validation.ValidationContext;
-import com.qat.framework.validation.ValidationContextIndicator;
-import com.qat.framework.validation.ValidationController;
-import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class HistoricoBAIImpl.
@@ -337,4 +318,47 @@ public class HistoricoBAIImpl implements IHistoricoBAI
 		return null;
 	}
 
+	@Override
+	public AlertasResponse fetchAlertasByRequest(AlertasInquiryRequest request)
+	{
+		AlertasResponse response = new AlertasResponse();
+		try
+		{
+			fetchPagedAlertas(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.bai.IHistoricoBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
+	 * RiskMaintenanceRequest)
+	 */
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchPagedAlertas(AlertasInquiryRequest request, AlertasResponse response)
+	{
+		InternalResultsResponse<Alertas> internalResponse = new InternalResultsResponse<Alertas>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getHistoricoBAC().fetchAlertasByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
 }

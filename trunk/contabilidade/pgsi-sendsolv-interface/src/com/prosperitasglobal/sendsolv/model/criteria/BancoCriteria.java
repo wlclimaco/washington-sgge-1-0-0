@@ -10,16 +10,7 @@ public class BancoCriteria implements Serializable
 {
 
 	/** The business id. */
-	private Integer emprId;
-
-	/** The recipient id. */
-	private Integer Id;
-
-	/** The location name. */
-	private String type;
-
-	/** The organization name. */
-	private String numero;
+	private Integer agenciaId;
 
 	/**
 	 * The Constructor.
