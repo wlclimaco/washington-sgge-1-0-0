@@ -4,23 +4,21 @@ package com.prosperitasglobal.sendsolv.model.criteria;
  * The Class MemberCriteria.
  */
 @SuppressWarnings("serial")
-public class ContatoCriteria implements ComumCriteria
+public class AlertasCriteria implements ComumCriteria
 {
-
-	private Long data;
 
 	/**
 	 * The Constructor.
 	 */
-	public ContatoCriteria()
+	public AlertasCriteria()
 	{
 		super();
 	}
 
 	/**
-	 * Gets the emprId.
+	 * Gets the empresa.
 	 *
-	 * @return the emprId
+	 * @return the empresa
 	 */
 	public Integer getEmprId()
 	{
@@ -28,9 +26,9 @@ public class ContatoCriteria implements ComumCriteria
 	}
 
 	/**
-	 * Sets the emprId.
+	 * Sets the empresa.
 	 *
-	 * @param emprId the emprId to set
+	 * @param empresa the empresa to set
 	 */
 	public void setEmprId(Integer emprId)
 	{

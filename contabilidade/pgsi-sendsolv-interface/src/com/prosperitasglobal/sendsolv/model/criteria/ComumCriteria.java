@@ -1,17 +1,24 @@
 package com.prosperitasglobal.sendsolv.model.criteria;
 
+import java.io.Serializable;
 
 /**
  * The Class MemberCriteria.
  */
 @SuppressWarnings("serial")
-public class ArquivoCriteria implements ComumCriteria
+public class ComumCriteria implements Serializable
 {
+
+	/** The business id. */
+	private Integer emprId;
+
+	/** The recipient id. */
+	private Integer Id;
 
 	/**
 	 * The Constructor.
 	 */
-	public ArquivoCriteria()
+	public ComumCriteria()
 	{
 		super();
 	}
@@ -56,46 +63,6 @@ public class ArquivoCriteria implements ComumCriteria
 		Id = id;
 	}
 
-	/**
-	 * Gets the type.
-	 *
-	 * @return the type
-	 */
-	public String getType()
-	{
-		return type;
-	}
-
-	/**
-	 * Sets the type.
-	 *
-	 * @param type the new type
-	 */
-	public void setType(String type)
-	{
-		this.type = type;
-	}
-
-	/**
-	 * Gets the numero.
-	 *
-	 * @return the numero
-	 */
-	public String getNumero()
-	{
-		return numero;
-	}
-
-	/**
-	 * Sets the numero.
-	 *
-	 * @param numero the new numero
-	 */
-	public void setNumero(String numero)
-	{
-		this.numero = numero;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -103,8 +70,8 @@ public class ArquivoCriteria implements ComumCriteria
 	@Override
 	public String toString()
 	{
-		return "ArquivoCriteria [getEmprId()=" + getEmprId() + ", getId()="
-				+ getId() + ", getType()=" + getType() + ", getNumero()=" + getNumero() + ", toString()="
+		return "ComumCriteria [getEmprId()=" + getEmprId() + ", getId()="
+				+ getId() + ", toString()="
 				+ super.toString() + "]";
 	}
 

@@ -1,8 +1,10 @@
 package com.prosperitasglobal.sendsolv.bai;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.request.AlertasInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.HistoricoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.HistoricoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.AlertasResponse;
 import com.prosperitasglobal.sendsolv.model.response.HistoricoResponse;
 
 // TODO: Auto-generated Javadoc
@@ -51,5 +53,13 @@ public interface IHistoricoBAI
 	 * @return the historico response
 	 */
 	public HistoricoResponse fetchHistoricoByRequest(HistoricoInquiryRequest request);
+
+	/**
+	 * Fetch alertas by request.
+	 *
+	 * @param request the request
+	 * @return the alertas response
+	 */
+	public AlertasResponse fetchAlertasByRequest(AlertasInquiryRequest request);
 
 }

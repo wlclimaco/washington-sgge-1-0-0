@@ -1,11 +1,5 @@
 package com.prosperitasglobal.sendsolv.dac;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.Historico;
-import com.prosperitasglobal.sendsolv.model.HistoricoItens;
-import com.prosperitasglobal.sendsolv.model.request.HistoricoInquiryRequest;
-import com.qat.framework.model.response.InternalResultsResponse;
-
 /**
  * The Interface IHistoricoDAC.
  */
@@ -58,5 +52,7 @@ public interface IHistoricoDAC
 	 * @return the internal results response< empresa>
 	 */
 	public InternalResultsResponse<Historico> fetchHistoricoByRequest(HistoricoInquiryRequest request);
+
+	public InternalResultsResponse<Alertas> fetchAlertasByRequest(AlertasInquiryRequest request);
 
 }
