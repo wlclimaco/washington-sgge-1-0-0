@@ -11,30 +11,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
+import com.prosperitasglobal.sendsolv.model.request.OrdemServicoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.OrdemServicoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.OrdemServicoResponse;
 
 @Controller
 @RequestMapping("/api/ordemServico")
 public class OrdemServicoAPIController extends OrdemServicoBaseController
 {
 
-	/** The Constant FETCH_SIC_NAICS. */
-	private static final String FETCH_SIC_NAICS = "fetchSicNaics";
-	/** The Constant FETCH_ORGANIZATION_BYLOCATION. */
-	private static final String FETCH_ORGANIZATION_BYLOCATION = "fetchOrganizationBylocation";
 	/** The URL mapping constants. */
-	private static final String DELETE_LOCATION = "/delete";
+	private static final String DELETE_ORDEMSERVICO = "/delete";
 
-	/** The Constant EDIT_LOCATION. */
-	private static final String EDIT_LOCATION = "/edit";
+	/** The Constant EDIT_ORDEMSERVICO. */
+	private static final String EDIT_ORDEMSERVICO = "/edit";
 
 	/** The Constant FETCH_ALL. */
 	private static final String FETCH_ALL = "/fetchall";
 
-	/** The Constant INSERT_LOCATION. */
-	private static final String INSERT_LOCATION = "/add";
+	/** The Constant INSERT_ORDEMSERVICO. */
+	private static final String INSERT_ORDEMSERVICO = "/add";
 
 	/** The Constant FETCH. */
 	private static final String FETCH = "/fetch";
@@ -44,20 +40,20 @@ public class OrdemServicoAPIController extends OrdemServicoBaseController
 	private static final Logger LOG = LoggerFactory.getLogger(OrdemServicoAPIController.class);
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
-	private static final String CONTROLLER_EXCEPTION_MSG = "EmpresaAPIController";
+	private static final String CONTROLLER_EXCEPTION_MSG = "OrdemServicoAPIController";
 
 	/**
-	 * Fetch all Empresas.
+	 * Fetch all OrdemServicos.
 	 *
 	 * @param pagedInquiryRequest the paged inquiry request
 	 * @return the response
 	 */
 	@RequestMapping(value = FETCH_ALL, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse fetchAll(@RequestBody PagedInquiryRequest pagedInquiryRequest)
+	public OrdemServicoResponse fetchAll(@RequestBody OrdemServicoInquiryRequest pagedInquiryRequest)
 	{
 
-		return fetchEmpresaByRequest(pagedInquiryRequest);
+		return fetchOrdemServicoByRequest(pagedInquiryRequest);
 
 	}
 
@@ -65,95 +61,95 @@ public class OrdemServicoAPIController extends OrdemServicoBaseController
 	 * Fetch.
 	 *
 	 * @param fetchByIdRequest the fetch by id request
-	 * @return the location response
+	 * @return the ordemServico response
 	 */
 	@RequestMapping(value = FETCH, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse fetch(@RequestBody FetchByIdRequest fetchByIdRequest)
+	public OrdemServicoResponse fetch(@RequestBody FetchByIdRequest fetchByIdRequest)
 	{
 
-		return fetchEmpresaById(fetchByIdRequest);
+		return fetchOrdemServicoById(fetchByIdRequest);
 
 	}
 
 	/**
-	 * Edit one location.
+	 * Edit one ordemServico.
 	 *
-	 * @param locationRequest the location request
+	 * @param ordemServicoRequest the ordemServico request
 	 * @return the response
 	 */
-	@RequestMapping(value = EDIT_LOCATION, method = RequestMethod.POST)
+	@RequestMapping(value = EDIT_ORDEMSERVICO, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse edit(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public OrdemServicoResponse edit(@RequestBody OrdemServicoMaintenanceRequest ordemServicoRequest)
 	{
-		EmpresaResponse locationResponse = new EmpresaResponse();
+		OrdemServicoResponse ordemServicoResponse = new OrdemServicoResponse();
 		try
 		{
 
-			locationResponse = getEmpresaBAI().updateEmpresa(locationRequest);
+			ordemServicoResponse = getOrdemServicoBAI().updateOrdemServico(ordemServicoRequest);
 
 		}
 		catch (Exception e)
 		{
 			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			locationResponse = null;
+			ordemServicoResponse = null;
 		}
-		return locationResponse;
+		return ordemServicoResponse;
 
 	}
 
 	/**
-	 * Delete one location.
+	 * Delete one ordemServico.
 	 *
-	 * @param locationRequest the location request
+	 * @param ordemServicoRequest the ordemServico request
 	 * @return the response
 	 */
-	@RequestMapping(value = DELETE_LOCATION, method = RequestMethod.POST)
+	@RequestMapping(value = DELETE_ORDEMSERVICO, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse delete(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public OrdemServicoResponse delete(@RequestBody OrdemServicoMaintenanceRequest ordemServicoRequest)
 	{
-		EmpresaResponse locationResponse = new EmpresaResponse();
+		OrdemServicoResponse ordemServicoResponse = new OrdemServicoResponse();
 		try
 		{
 
-			locationResponse = getEmpresaBAI().deleteEmpresa(locationRequest);
+			ordemServicoResponse = getOrdemServicoBAI().deleteOrdemServico(ordemServicoRequest);
 
 		}
 		catch (Exception e)
 		{
 			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			locationResponse = null;
+			ordemServicoResponse = null;
 		}
 
-		return locationResponse;
+		return ordemServicoResponse;
 
 	}
 
 	/**
-	 * Insert one location.
+	 * Insert one ordemServico.
 	 *
-	 * @param locationRequest the location request
+	 * @param ordemServicoRequest the ordemServico request
 	 * @return the response
 	 */
-	@RequestMapping(value = INSERT_LOCATION, method = RequestMethod.POST)
+	@RequestMapping(value = INSERT_ORDEMSERVICO, method = RequestMethod.POST)
 	@ResponseBody
-	public EmpresaResponse insert(@RequestBody EmpresaMaintenanceRequest locationRequest)
+	public OrdemServicoResponse insert(@RequestBody OrdemServicoMaintenanceRequest ordemServicoRequest)
 	{
-		EmpresaResponse locationResponse = new EmpresaResponse();
+		OrdemServicoResponse ordemServicoResponse = new OrdemServicoResponse();
 
 		try
 		{
 
-			locationRequest.getEmpresa().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
-			locationResponse = getEmpresaBAI().insertEmpresa(locationRequest);
+			ordemServicoRequest.getOrdemServico().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
+			ordemServicoResponse = getOrdemServicoBAI().insertOrdemServico(ordemServicoRequest);
 		}
 		catch (Exception e)
 		{
 			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			locationResponse = null;
+			ordemServicoResponse = null;
 		}
 
-		return locationResponse;
+		return ordemServicoResponse;
 
 	}
 

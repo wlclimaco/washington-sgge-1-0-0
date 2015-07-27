@@ -1,5 +1,6 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
+import com.prosperitasglobal.sendsolv.model.criteria.AlertasCriteria;
 
 /**
  * The Class ProdutoInquiryRequest.

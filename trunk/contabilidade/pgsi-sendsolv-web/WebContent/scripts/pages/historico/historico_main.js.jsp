@@ -7,10 +7,7 @@
 
 pgsi.pages.historico = {
 
-		fnCreateRequest function(){
 
-
-		}
 }
 
 </script>

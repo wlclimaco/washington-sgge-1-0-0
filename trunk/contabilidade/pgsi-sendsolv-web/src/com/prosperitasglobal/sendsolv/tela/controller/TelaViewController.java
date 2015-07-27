@@ -45,25 +45,19 @@ public class TelaViewController extends TelaBaseController
 	/** The Constant EDIT_VIEW. */
 	private static final String EDIT_VIEW = "/editView";
 
-	/** The Constant FETCH_ORGANIZATION_BYEMPRESA. */
-	private static final String FETCH_ORGANIZATION_BYEMPRESA = "fetchOrganizationBylocation";
-
 	/** The view mapping constants . */
-	private static final String VIEW_EMPRESA_MAIN = "/tela/tela_main";
+	private static final String VIEW_TELA_MAIN = "/tela/tela_main";
 
-	/** The Constant VIEW_EMPRESA_ADD. */
-	private static final String VIEW_EMPRESA_ADD = "/tela/tela_create";
+	/** The Constant VIEW_TELA_ADD. */
+	private static final String VIEW_TELA_ADD = "/tela/tela_create";
 
-	/** The Constant VIEW_EMPRESA_VIEW. */
-	private static final String VIEW_EMPRESA_VIEW = "/tela/tela_view";
+	/** The Constant VIEW_TELA_VIEW. */
+	private static final String VIEW_TELA_VIEW = "/tela/tela_view";
 
-	private static final String VIEW_EMPRESA_TABS = "/tela/tela_tabs";
+	private static final String VIEW_TELA_TABS = "/tela/tela_tabs";
 
-	/** The Constant VIEW_EMPRESA_DIALOG_ADD. */
-	private static final String VIEW_EMPRESA_DIALOG_ADD = "/tela/tela_dialog_create";
-
-	/** The Constant ORGANIZATION_BY_EMPRESA_MAIN. */
-	private static final String ORGANIZATION_BY_EMPRESA_MAIN = "/organization/organizationBylocation_main";
+	/** The Constant VIEW_TELA_DIALOG_ADD. */
+	private static final String VIEW_TELA_DIALOG_ADD = "/tela/tela_dialog_create";
 
 	/** The PagedInquiryRequest Constants. */
 	private static final int START_PAGE_NUMBER = 0;
@@ -71,8 +65,8 @@ public class TelaViewController extends TelaBaseController
 	/** The Constant INITIAL_PAGE_SIZE. */
 	private static final int INITIAL_PAGE_SIZE = 25;
 
-	/** The Constant EMPRESA_ID. */
-	private static final String EMPRESA_ID = "locationId";
+	/** The Constant TELA_ID. */
+	private static final String TELA_ID = "telaId";
 
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(TelaViewController.class);
@@ -112,7 +106,7 @@ public class TelaViewController extends TelaBaseController
 	@RequestMapping(value = FETCH_LIST, method = RequestMethod.GET)
 	public ModelAndView loadList(HttpServletRequest request)
 	{
-		ModelAndView modelAndView = new ModelAndView(VIEW_EMPRESA_MAIN);
+		ModelAndView modelAndView = new ModelAndView(VIEW_TELA_MAIN);
 
 		// Check whether has initial load or not
 		if (!isInitialLoad(request, modelAndView))
@@ -154,51 +148,51 @@ public class TelaViewController extends TelaBaseController
 	/**
 	 * Load add/edit view.
 	 *
-	 * @param locationId the location id
+	 * @param telaId the tela id
 	 * @return the model and view
 	 */
 	@RequestMapping(value = {FETCH_ADD, FETCH_EDIT}, method = RequestMethod.GET)
-	public ModelAndView loadUpdate(@RequestParam(value = EMPRESA_ID, required = false) Integer locationId,
+	public ModelAndView loadUpdate(@RequestParam(value = TELA_ID, required = false) Integer telaId,
 			HttpServletRequest request)
 	{
 
-		return locationEditMAV(locationId, VIEW_EMPRESA_ADD, true, request);
+		return telaEditMAV(telaId, VIEW_TELA_ADD, true, request);
 	}
 
 	@RequestMapping(value = {FETCH_VIEW_TABS}, method = RequestMethod.GET)
-	public ModelAndView loadTabs(@RequestParam(value = EMPRESA_ID, required = true) Integer locationId,
+	public ModelAndView loadTabs(@RequestParam(value = TELA_ID, required = true) Integer telaId,
 			HttpServletRequest request)
 	{
-		return new ModelAndView(VIEW_EMPRESA_TABS);
+		return new ModelAndView(VIEW_TELA_TABS);
 	}
 
 	/**
-	 * Load location view.
+	 * Load tela view.
 	 *
-	 * @param locationId the location id
+	 * @param telaId the tela id
 	 * @param request the request
 	 * @return the model and view
 	 */
 	@RequestMapping(value = {FETCH_VIEW}, method = RequestMethod.GET)
-	public ModelAndView loadView(@RequestParam(value = EMPRESA_ID, required = true) Integer locationId,
+	public ModelAndView loadView(@RequestParam(value = TELA_ID, required = true) Integer telaId,
 			HttpServletRequest request)
 	{
-		return locationEditMAV(locationId, VIEW_EMPRESA_VIEW, true, request);
+		return telaEditMAV(telaId, VIEW_TELA_VIEW, true, request);
 	}
 
 	/**
 	 * Load view update.
 	 *
-	 * @param locationId the location id
+	 * @param telaId the tela id
 	 * @param request the request
 	 * @return the model and view
 	 */
 	@RequestMapping(value = {EDIT_VIEW}, method = RequestMethod.GET)
-	public ModelAndView loadViewUpdate(@RequestParam(value = EMPRESA_ID, required = false) Integer locationId,
+	public ModelAndView loadViewUpdate(@RequestParam(value = TELA_ID, required = false) Integer telaId,
 			HttpServletRequest request)
 	{
 
-		return locationEditMAV(locationId, VIEW_EMPRESA_DIALOG_ADD, true, request);
+		return telaEditMAV(telaId, VIEW_TELA_DIALOG_ADD, true, request);
 	}
 
 }

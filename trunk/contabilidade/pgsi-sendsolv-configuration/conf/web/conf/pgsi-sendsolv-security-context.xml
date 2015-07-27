@@ -21,6 +21,7 @@
 	<sec:http security="none" pattern="/fonts/navigation.ttf"/>
 	<sec:http security="none" pattern="/fonts/navigation.svg"/>
 	<sec:http security="none" pattern="/login.jsp*"/>
+	<sec:http security="none" pattern="/styles/*.*"/>
 
 	<sec:http auto-config="true" use-expressions="true">
 		<sec:intercept-url pattern="/**/**"

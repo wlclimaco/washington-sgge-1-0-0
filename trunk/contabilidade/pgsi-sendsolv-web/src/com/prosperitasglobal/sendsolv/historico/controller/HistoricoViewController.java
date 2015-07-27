@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.prosperitasglobal.sendsolv.filter.FilterFactory;
 import com.prosperitasglobal.sendsolv.filter.model.response.FiltersResponse;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.HistoricoInquiryRequest;
 import com.qat.framework.model.SortExpression;
 import com.qat.framework.model.SortExpression.Direction;
 
@@ -46,25 +46,19 @@ public class HistoricoViewController extends HistoricoBaseController
 	/** The Constant EDIT_VIEW. */
 	private static final String EDIT_VIEW = "/editView";
 
-	/** The Constant FETCH_ORGANIZATION_BYEMPRESA. */
-	private static final String FETCH_ORGANIZATION_BYEMPRESA = "fetchOrganizationBylocation";
-
 	/** The view mapping constants . */
-	private static final String VIEW_EMPRESA_MAIN = "/empresa/empresa_main";
+	private static final String VIEW_HISTORICO_MAIN = "/empresa/empresa_main";
 
-	/** The Constant VIEW_EMPRESA_ADD. */
-	private static final String VIEW_EMPRESA_ADD = "/empresa/empresa_create";
+	/** The Constant VIEW_HISTORICO_ADD. */
+	private static final String VIEW_HISTORICO_ADD = "/empresa/empresa_create";
 
-	/** The Constant VIEW_EMPRESA_VIEW. */
-	private static final String VIEW_EMPRESA_VIEW = "/empresa/empresa_view";
+	/** The Constant VIEW_HISTORICO_VIEW. */
+	private static final String VIEW_HISTORICO_VIEW = "/empresa/empresa_view";
 
-	private static final String VIEW_EMPRESA_TABS = "/empresa/empresa_tabs";
+	private static final String VIEW_HISTORICO_TABS = "/empresa/empresa_tabs";
 
-	/** The Constant VIEW_EMPRESA_DIALOG_ADD. */
-	private static final String VIEW_EMPRESA_DIALOG_ADD = "/empresa/empresa_dialog_create";
-
-	/** The Constant ORGANIZATION_BY_EMPRESA_MAIN. */
-	private static final String ORGANIZATION_BY_EMPRESA_MAIN = "/organization/organizationBylocation_main";
+	/** The Constant VIEW_HISTORICO_DIALOG_ADD. */
+	private static final String VIEW_HISTORICO_DIALOG_ADD = "/empresa/empresa_dialog_create";
 
 	/** The PagedInquiryRequest Constants. */
 	private static final int START_PAGE_NUMBER = 0;
@@ -72,8 +66,8 @@ public class HistoricoViewController extends HistoricoBaseController
 	/** The Constant INITIAL_PAGE_SIZE. */
 	private static final int INITIAL_PAGE_SIZE = 25;
 
-	/** The Constant EMPRESA_ID. */
-	private static final String EMPRESA_ID = "locationId";
+	/** The Constant HISTORICO_ID. */
+	private static final String HISTORICO_ID = "historicoId";
 
 	/** The Constant LOG. */
 	private static final Logger LOG = LoggerFactory.getLogger(HistoricoViewController.class);
@@ -113,7 +107,7 @@ public class HistoricoViewController extends HistoricoBaseController
 	@RequestMapping(value = FETCH_LIST, method = RequestMethod.GET)
 	public ModelAndView loadList(HttpServletRequest request)
 	{
-		ModelAndView modelAndView = new ModelAndView(VIEW_EMPRESA_MAIN);
+		ModelAndView modelAndView = new ModelAndView(VIEW_HISTORICO_MAIN);
 
 		// Check whether has initial load or not
 		if (!isInitialLoad(request, modelAndView))
@@ -121,7 +115,7 @@ public class HistoricoViewController extends HistoricoBaseController
 			return modelAndView;
 		}
 
-		PagedInquiryRequest pagedInquiryRequest = new PagedInquiryRequest();
+		HistoricoInquiryRequest pagedInquiryRequest = new HistoricoInquiryRequest();
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
 		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
 		pagedInquiryRequest.setPreQueryCount(true);
@@ -132,7 +126,7 @@ public class HistoricoViewController extends HistoricoBaseController
 		{
 
 			modelAndView.addObject(RESPONSE, getMapper()
-					.writeValueAsString(fetchEmpresaByRequest(pagedInquiryRequest)));
+					.writeValueAsString(fetchHistoricoByRequest(pagedInquiryRequest)));
 
 			FiltersResponse filtersResponse = new FiltersResponse();
 			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
@@ -155,51 +149,51 @@ public class HistoricoViewController extends HistoricoBaseController
 	/**
 	 * Load add/edit view.
 	 *
-	 * @param locationId the location id
+	 * @param historicoId the historico id
 	 * @return the model and view
 	 */
 	@RequestMapping(value = {FETCH_ADD, FETCH_EDIT}, method = RequestMethod.GET)
-	public ModelAndView loadUpdate(@RequestParam(value = EMPRESA_ID, required = false) Integer locationId,
+	public ModelAndView loadUpdate(@RequestParam(value = HISTORICO_ID, required = false) Integer historicoId,
 			HttpServletRequest request)
 	{
 
-		return locationEditMAV(locationId, VIEW_EMPRESA_ADD, true, request);
+		return historicoEditMAV(historicoId, VIEW_HISTORICO_ADD, true, request);
 	}
 
 	@RequestMapping(value = {FETCH_VIEW_TABS}, method = RequestMethod.GET)
-	public ModelAndView loadTabs(@RequestParam(value = EMPRESA_ID, required = true) Integer locationId,
+	public ModelAndView loadTabs(@RequestParam(value = HISTORICO_ID, required = true) Integer historicoId,
 			HttpServletRequest request)
 	{
-		return new ModelAndView(VIEW_EMPRESA_TABS);
+		return new ModelAndView(VIEW_HISTORICO_TABS);
 	}
 
 	/**
-	 * Load location view.
+	 * Load historico view.
 	 *
-	 * @param locationId the location id
+	 * @param historicoId the historico id
 	 * @param request the request
 	 * @return the model and view
 	 */
 	@RequestMapping(value = {FETCH_VIEW}, method = RequestMethod.GET)
-	public ModelAndView loadView(@RequestParam(value = EMPRESA_ID, required = true) Integer locationId,
+	public ModelAndView loadView(@RequestParam(value = HISTORICO_ID, required = true) Integer historicoId,
 			HttpServletRequest request)
 	{
-		return locationEditMAV(locationId, VIEW_EMPRESA_VIEW, true, request);
+		return historicoEditMAV(historicoId, VIEW_HISTORICO_VIEW, true, request);
 	}
 
 	/**
 	 * Load view update.
 	 *
-	 * @param locationId the location id
+	 * @param historicoId the historico id
 	 * @param request the request
 	 * @return the model and view
 	 */
 	@RequestMapping(value = {EDIT_VIEW}, method = RequestMethod.GET)
-	public ModelAndView loadViewUpdate(@RequestParam(value = EMPRESA_ID, required = false) Integer locationId,
+	public ModelAndView loadViewUpdate(@RequestParam(value = HISTORICO_ID, required = false) Integer historicoId,
 			HttpServletRequest request)
 	{
 
-		return locationEditMAV(locationId, VIEW_EMPRESA_DIALOG_ADD, true, request);
+		return historicoEditMAV(historicoId, VIEW_HISTORICO_DIALOG_ADD, true, request);
 	}
 
 }

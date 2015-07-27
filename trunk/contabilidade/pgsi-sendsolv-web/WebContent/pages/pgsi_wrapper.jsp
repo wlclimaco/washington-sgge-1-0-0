@@ -101,15 +101,16 @@
         </li>
         <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Sistema</span> <b class="caret"></b></a>
 		<ul class="dropdown-menu">
-            <li><a href="icons.html">Tabelas</a></li>
-            <li><a href="faq.html">Atributos</a></li>
-            <li><a href="sistema/icons">Incones</a></li>
-			<li><a href="sistema/reports">Relatorios</a></li>
-			<li><a href="sistema/chats">Graficos</a></li>
-			<li><a href="sistema/pricing">pricing</a></li>
-			<li><a href="sistema/shortcodes">shortCodes</a></li>
-			<li><a href="sistema/faq">Faq</a></li>
-			<li><a href="sistema/guidely">Guidely</a></li>
+            <li><a href="tela" class="alist" data-title='Nota Entrada'>Tela</a></li>
+            <li><a href="historico" class="alist" data-title='Nota Entrada'>Historico</a></li>
+            <li><a href="ordemServico" class="alist" data-title='Nota Entrada'>Ordem Servico</a></li>
+            <li><a href="sistema/icons" class="alist" data-title='Nota Entrada'>Incones</a></li>
+			<li><a href="sistema/reports" class="alist" data-title='Nota Entrada'>Relatorios</a></li>
+			<li><a href="sistema/chats" class="alist" data-title='Nota Entrada'>Graficos</a></li>
+			<li><a href="sistema/pricing" class="alist" data-title='Nota Entrada'>pricing</a></li>
+			<li><a href="sistema/shortcodes" class="alist" data-title='Nota Entrada'>shortCodes</a></li>
+			<li><a href="sistema/faq" class="alist" data-title='Nota Entrada'>Faq</a></li>
+			<li><a href="sistema/guidely" class="alist" data-title='Nota Entrada'>Guidely</a></li>
           </ul>
         </li>
 		</ul>

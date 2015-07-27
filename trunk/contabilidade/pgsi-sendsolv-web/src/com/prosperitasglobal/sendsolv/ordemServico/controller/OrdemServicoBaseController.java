@@ -9,13 +9,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
-import com.prosperitasglobal.sendsolv.bai.IEmpresaBAI;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
+import com.prosperitasglobal.sendsolv.bai.IOrdemServicoBAI;
+import com.prosperitasglobal.sendsolv.model.request.OrdemServicoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.OrdemServicoResponse;
 import com.qat.framework.validation.ValidationUtil;
 
 /**
- * The Class EmpresaBaseController.
+ * The Class OrdemServicoBaseController.
  */
 
 /**
@@ -32,44 +32,41 @@ public class OrdemServicoBaseController extends UtilControllerD
 	private static final Logger LOG = LoggerFactory.getLogger(OrdemServicoBaseController.class);
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
-	private static final String CONTROLLER_EXCEPTION_MSG = "EmpresaBaseController";
+	private static final String CONTROLLER_EXCEPTION_MSG = "OrdemServicoBaseController";
 
-	/** The Constant ENROLLED_MEMBERS. */
-	private static final String ENROLLED_MEMBERS = "enrolled_members";
-
-	/** The Empresa BAI. */
-	private IEmpresaBAI locationBAI;
+	/** The OrdemServico BAI. */
+	private IOrdemServicoBAI ordemServicoBAI;
 
 	/**
-	 * Gets the location bai.
+	 * Gets the ordemServico bai.
 	 *
-	 * @return the location bai
+	 * @return the ordemServico bai
 	 */
-	public IEmpresaBAI getEmpresaBAI()
+	public IOrdemServicoBAI getOrdemServicoBAI()
 	{
-		return locationBAI;
+		return ordemServicoBAI;
 	}
 
 	/**
-	 * Sets the location bai.
+	 * Sets the ordemServico bai.
 	 *
-	 * @param locationBAI the location bai
+	 * @param ordemServicoBAI the ordemServico bai
 	 */
 	@Resource
-	public void setEmpresaBAI(IEmpresaBAI locationBAI)
+	public void setOrdemServicoBAI(IOrdemServicoBAI ordemServicoBAI)
 	{
-		this.locationBAI = locationBAI;
+		this.ordemServicoBAI = ordemServicoBAI;
 	}
 
 	/**
-	 * Empresa edit mav.
+	 * OrdemServico edit mav.
 	 *
-	 * @param locationId the location id
+	 * @param ordemServicoId the ordemServico id
 	 * @param returnViewName the return view name
 	 * @param isSelect the is select
 	 * @return the model and view
 	 */
-	protected ModelAndView locationEditMAV(Integer locationId, String returnViewName, Boolean isSelect,
+	protected ModelAndView ordemServicoEditMAV(Integer ordemServicoId, String returnViewName, Boolean isSelect,
 			HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView(returnViewName);
@@ -79,13 +76,13 @@ public class OrdemServicoBaseController extends UtilControllerD
 
 			if (isSelect)
 			{
-				// modelAndView = listSelectBusiness(modelAndView, request);
+				modelAndView = listSelectBusiness(modelAndView, request);
 			}
-			if (!ValidationUtil.isNullOrZero(locationId))
+			if (!ValidationUtil.isNullOrZero(ordemServicoId))
 			{
 
 				modelAndView.addObject(RESPONSE,
-						getMapper().writeValueAsString(fetchEmpresaById(new FetchByIdRequest(locationId))));
+						getMapper().writeValueAsString(fetchOrdemServicoById(new FetchByIdRequest(ordemServicoId))));
 
 				return modelAndView;
 			}
@@ -104,20 +101,20 @@ public class OrdemServicoBaseController extends UtilControllerD
 	}
 
 	/**
-	 * Fetch location by request.
+	 * Fetch ordemServico by request.
 	 *
 	 * @param pagedInquiryRequest the paged inquiry request
-	 * @return the location response
+	 * @return the ordemServico response
 	 */
-	public EmpresaResponse fetchEmpresaByRequest(PagedInquiryRequest pagedInquiryRequest)
+	public OrdemServicoResponse fetchOrdemServicoByRequest(OrdemServicoInquiryRequest pagedInquiryRequest)
 	{
 
-		EmpresaResponse locationResponse = new EmpresaResponse();
+		OrdemServicoResponse ordemServicoResponse = new OrdemServicoResponse();
 		try
 		{
 
-			// locationResponse = Mock();
-			// getEmpresaBAI().fetchEmpresaByRequest(pagedInquiryRequest);
+			// ordemServicoResponse = Mock();
+			getOrdemServicoBAI().fetchOrdemServicoByRequest(pagedInquiryRequest);
 
 		}
 		catch (Exception e)
@@ -128,24 +125,24 @@ public class OrdemServicoBaseController extends UtilControllerD
 			}
 		}
 
-		return locationResponse;
+		return ordemServicoResponse;
 	}
 
 	/**
-	 * Fetch location by id.
+	 * Fetch ordemServico by id.
 	 *
 	 * @param fetchByIdRequest the fetch by id request
-	 * @return the location response
+	 * @return the ordemServico response
 	 */
-	public EmpresaResponse fetchEmpresaById(FetchByIdRequest fetchByIdRequest)
+	public OrdemServicoResponse fetchOrdemServicoById(FetchByIdRequest fetchByIdRequest)
 	{
 
-		EmpresaResponse locationResponse = new EmpresaResponse();
+		OrdemServicoResponse ordemServicoResponse = new OrdemServicoResponse();
 		try
 		{
 
-			// locationResponse = MockById();
-			// getEmpresaBAI().fetchEmpresaById(fetchByIdRequest);
+			// ordemServicoResponse = MockById();
+			getOrdemServicoBAI().fetchOrdemServicoById(fetchByIdRequest);
 
 		}
 		catch (Exception e)
@@ -156,7 +153,7 @@ public class OrdemServicoBaseController extends UtilControllerD
 			}
 		}
 
-		return locationResponse;
+		return ordemServicoResponse;
 	}
 
 }

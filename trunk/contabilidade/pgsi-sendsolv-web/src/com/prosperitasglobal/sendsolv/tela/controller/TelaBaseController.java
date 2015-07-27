@@ -25,42 +25,39 @@ public class TelaBaseController extends UtilControllerD
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
 	private static final String CONTROLLER_EXCEPTION_MSG = "TelaBaseController";
 
-	/** The Constant ENROLLED_MEMBERS. */
-	private static final String ENROLLED_MEMBERS = "enrolled_members";
-
 	/** The Tela BAI. */
-	private ITelaBAI locationBAI;
+	private ITelaBAI telaBAI;
 
 	/**
-	 * Gets the location bai.
+	 * Gets the tela bai.
 	 *
-	 * @return the location bai
+	 * @return the tela bai
 	 */
 	public ITelaBAI getTelaBAI()
 	{
-		return locationBAI;
+		return telaBAI;
 	}
 
 	/**
-	 * Sets the location bai.
+	 * Sets the tela bai.
 	 *
-	 * @param locationBAI the location bai
+	 * @param telaBAI the tela bai
 	 */
 	@Resource
-	public void setTelaBAI(ITelaBAI locationBAI)
+	public void setTelaBAI(ITelaBAI telaBAI)
 	{
-		this.locationBAI = locationBAI;
+		this.telaBAI = telaBAI;
 	}
 
 	/**
 	 * Tela edit mav.
 	 *
-	 * @param locationId the location id
+	 * @param telaId the tela id
 	 * @param returnViewName the return view name
 	 * @param isSelect the is select
 	 * @return the model and view
 	 */
-	protected ModelAndView locationEditMAV(Integer locationId, String returnViewName, Boolean isSelect,
+	protected ModelAndView telaEditMAV(Integer telaId, String returnViewName, Boolean isSelect,
 			HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView(returnViewName);
@@ -72,11 +69,11 @@ public class TelaBaseController extends UtilControllerD
 			{
 				modelAndView = listSelectBusiness(modelAndView, request);
 			}
-			if (!ValidationUtil.isNullOrZero(locationId))
+			if (!ValidationUtil.isNullOrZero(telaId))
 			{
 
 				modelAndView.addObject(RESPONSE,
-						getMapper().writeValueAsString(fetchTelaById(new FetchByIdRequest(locationId))));
+						getMapper().writeValueAsString(fetchTelaById(new FetchByIdRequest(telaId))));
 
 				return modelAndView;
 			}
@@ -95,19 +92,19 @@ public class TelaBaseController extends UtilControllerD
 	}
 
 	/**
-	 * Fetch location by request.
+	 * Fetch tela by request.
 	 *
 	 * @param pagedInquiryRequest the paged inquiry request
-	 * @return the location response
+	 * @return the tela response
 	 */
 	public TelaResponse fetchTelaByRequest(TelaInquiryRequest pagedInquiryRequest)
 	{
 
-		TelaResponse locationResponse = new TelaResponse();
+		TelaResponse telaResponse = new TelaResponse();
 		try
 		{
 
-			locationResponse = getTelaBAI().fetchTelaByRequest(pagedInquiryRequest);
+			telaResponse = getTelaBAI().fetchTelaByRequest(pagedInquiryRequest);
 
 		}
 		catch (Exception e)
@@ -118,23 +115,23 @@ public class TelaBaseController extends UtilControllerD
 			}
 		}
 
-		return locationResponse;
+		return telaResponse;
 	}
 
 	/**
-	 * Fetch location by id.
+	 * Fetch tela by id.
 	 *
 	 * @param fetchByIdRequest the fetch by id request
-	 * @return the location response
+	 * @return the tela response
 	 */
 	public TelaResponse fetchTelaById(FetchByIdRequest fetchByIdRequest)
 	{
 
-		TelaResponse locationResponse = new TelaResponse();
+		TelaResponse telaResponse = new TelaResponse();
 		try
 		{
 
-			locationResponse = getTelaBAI().fetchTelaById(fetchByIdRequest);
+			telaResponse = getTelaBAI().fetchTelaById(fetchByIdRequest);
 
 		}
 		catch (Exception e)
@@ -145,7 +142,7 @@ public class TelaBaseController extends UtilControllerD
 			}
 		}
 
-		return locationResponse;
+		return telaResponse;
 	}
 
 }

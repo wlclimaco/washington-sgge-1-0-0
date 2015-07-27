@@ -5,7 +5,7 @@
 
 <script type="text/javascript">
 
-pgsi.pages.ordemServico = {
+pgsi.pages.tela = {
 
 
 }

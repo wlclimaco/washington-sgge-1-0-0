@@ -1,7 +1,20 @@
 package com.prosperitasglobal.sendsolv.dac.mybatis;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.slf4j.LoggerFactory;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
+import com.prosperitasglobal.sendsolv.model.Alertas;
+import com.prosperitasglobal.sendsolv.model.Historico;
+import com.prosperitasglobal.sendsolv.model.HistoricoItens;
+import com.prosperitasglobal.sendsolv.model.request.AlertasInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.HistoricoInquiryRequest;
+import com.qat.framework.model.QATModel;
+import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.framework.validation.ValidationUtil;
 
 /**
  * The Class HistoricoDACImpl.
@@ -107,7 +120,7 @@ public class HistoricoDACImpl extends SqlSessionDaoSupport implements IHistorico
 		 */
 		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
 
-		PagedResultsDACD.fetchObjectsByRequestEmpresa(getSqlSession(), request, "HistoricoMap.fetchHistoricoRowCount",
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "HistoricoMap.fetchHistoricoRowCount",
 				"HistoricoMap", response);
 		return response;
 	}
@@ -123,7 +136,7 @@ public class HistoricoDACImpl extends SqlSessionDaoSupport implements IHistorico
 		 */
 		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
 
-		PagedResultsDACD.fetchObjectsByRequestEmpresa(getSqlSession(), request, "HistoricoMap.fetchAlertasRowCount",
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "HistoricoMap.fetchAlertasRowCount",
 				"HistoricoMap.fetchAllAlertasByRequest", response);
 		return response;
 	}

@@ -4,7 +4,7 @@
 <sec:authorize access="hasAnyRole('ROLE_DOMAIN ADMIN', 'ROLE_ADMIN', 'ROLE_CSR')">
 <script type="text/javascript">
 /**
- * @namespace pgsi.pages.ordemServico
+ * @namespace pgsi.pages.tela
  * @description The init namespace for the Location Page.
  */
 
@@ -23,21 +23,21 @@ $(document).ready(function()
 	</c:choose>
 
 	$.pgsi.listener.wait({
-		eventName 	: "ordemServicoList",
+		eventName 	: "telaList",
 		arguments 	: ["table"],
 		fnCallback 	: $.pgsi.progressBar.stopGlobal
 	});
 
 	/** * jQuery dataTable setup ** */
-	pgsi.pages.ordemServico.ordemServicoTable = $('#data_list').dataTable($.pgsi.table.setTable(
+	pgsi.pages.pessoa.telaTable = $('#data_list').dataTable($.pgsi.table.setTable(
 	{
 		id 			: "#data_list",
-		sAjaxSource : "api/ordemServico/fetchall",
+		sAjaxSource : "api/tela/fetchall",
 		bPreLoad	: true,
 
 		ajax :
 		{
-			sObj		: "ordemServicoList",
+			sObj		: "telaList",
 			oRequest	: PagedInquiryRequest,
 			fnRequest 	: function(){}
 		},
@@ -47,7 +47,7 @@ $(document).ready(function()
 		{
 			headerData 		: "CPF/CNPJ",
 			order			: "name",
-			mRender         : pgsi.pages.ordemServico.fnCreateClienteNameLink,
+			mRender         : pgsi.pages.pessoa.fnCreateClienteNameLink,
 			sDefaultContent : "",
 			bSortable 		: false,
 			sClass          : "name-col"
@@ -55,14 +55,14 @@ $(document).ready(function()
 		{
 			headerData 		: "Nome",
 			order			: "organization_column",
-			mRender 		: pgsi.pages.ordemServico.fnCreateNomeLink,
+			mRender 		: pgsi.pages.pessoa.fnCreateNomeLink,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
 			headerData 		: "Profissao",
 			order			: "city_column",
-			mRender 		: pgsi.pages.ordemServico.fnProfissao,
+			mRender 		: pgsi.pages.pessoa.fnProfissao,
 			mData	 		: "null",
 			sDefaultContent : "",
 			bSortable 		: false
@@ -70,35 +70,35 @@ $(document).ready(function()
 		{
 			headerData 		: "Email",
 			order			: "state_column",
-			mRender 		: pgsi.pages.ordemServico.fnEmail,
+			mRender 		: pgsi.pages.pessoa.fnEmail,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
 			headerData 		: "Telefone",
 			order			: "country_column",
-			mRender 		: pgsi.pages.ordemServico.fnTelefone,
+			mRender 		: pgsi.pages.pessoa.fnTelefone,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
 			headerData 		: "Convenio",
 			order			: "sdn_status_column",
-			mRender 		: pgsi.pages.ordemServico.fnConvenio,
+			mRender 		: pgsi.pages.pessoa.fnConvenio,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
 			headerData 		: "Endereco",
 			order			: "phone_column",
-			mRender 		: pgsi.pages.ordemServico.fnEndereco,
+			mRender 		: pgsi.pages.pessoa.fnEndereco,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
 			headerData 		: "Documentos",
 			order			: "phone_column",
-			mRender 		: pgsi.pages.ordemServico.fnDocumento,
+			mRender 		: pgsi.pages.pessoa.fnDocumento,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
@@ -142,10 +142,10 @@ $(document).ready(function()
 
 			</sec:authorize>
 
-			oActionSummary = $('<div><div><a href="ordemServico/view?tab=info&ordemServicoId=' + aData.id + '" title="View '+aData.name+'" id="update" class="icon-nav icon-pencil alist icon-small-button"></a>'
+			oActionSummary = $('<div><div><a href="tela/view?tab=info&telaId=' + aData.id + '" title="View '+aData.name+'" id="update" class="icon-nav icon-pencil alist icon-small-button"></a>'
 				+ sButtonStatus
 				+ sButtonDelete
-				+pgsi.util.page.fnInsertButtonSDNSAR(aData,"ordemServico")+"</div></div>");
+				+pgsi.util.page.fnInsertButtonSDNSAR(aData,"tela")+"</div></div>");
 
 			oActionSummary.find('a.deleteDialog, a.active, a.deactivate ,a.sarDialog').click(function (e) {
 				e.preventDefault();
@@ -160,7 +160,7 @@ $(document).ready(function()
 
 						// Validations for change pagination when delete one or more groups of last page.
 						var iStart;
-						var oSettings = pgsi.pages.ordemServico.ordemServicoTable.fnSettings();
+						var oSettings = pgsi.pages.pessoa.telaTable.fnSettings();
 
 							// If exist just one group at last page and this group is deleted, the pagination back to previous page.
 							if (((oSettings._iRecordsDisplay - 1) % $('.dataTables_length').find('select').val() === 0)) {
@@ -168,7 +168,7 @@ $(document).ready(function()
 							}
 
 						$.pgsi.table.reloadTable({
-							table 		: pgsi.pages.ordemServico.ordemServicoTable,
+							table 		: pgsi.pages.pessoa.telaTable,
 							iStart 		: iStart
 						});
 					}else{
@@ -180,30 +180,30 @@ $(document).ready(function()
 				if($(this).hasClass('deleteDialog'))
 				{
 					// Launch Delete Dialog
-					var oRequest = new LocationMaintenanceRequest({ordemServico : {id : aData.id, name: aData.name }});
+					var oRequest = new LocationMaintenanceRequest({tela : {id : aData.id, name: aData.name }});
 
 					pgsi.util.actiondialog.launchActionDialog(
 						"deleteDialog",
 						 pgsi.pages.business.dialogSettings.deleteDialog(
-						 	"api/ordemServico/delete",
+						 	"api/tela/delete",
 						 	 oRequest,
-						 	 $.pgsi.locale.get("pages.ordemServico.dialog.title", oRequest.ordemServico.name),
+						 	 $.pgsi.locale.get("pages.tela.dialog.title", oRequest.tela.name),
 						 	 fnCallBack,
-						 	 $.pgsi.locale.get("commons.pages.erroView", $.pgsi.locale.get("commons.pages.ordemServico"))
+						 	 $.pgsi.locale.get("commons.pages.erroView", $.pgsi.locale.get("commons.pages.tela"))
 						 ));
 
 				}else if($(this).hasClass('active')){
 
-					pgsi.util.page.fnUpdateStatus('api/ordemServico/fetch',parseInt(aData.id,10),'ordemServico',1,fnCallBack,"Activate Location for "+ aData.name, "<span>"+$.pgsi.locale.get("pages.person.dialog.status.question",$.pgsi.locale.get("pages.view.activate"),"Location")+"<br>" +$.pgsi.locale.get("pages.person.dialog.status.information",$.pgsi.locale.get("pages.view.activate"))+"<span>",true);
+					pgsi.util.page.fnUpdateStatus('api/tela/fetch',parseInt(aData.id,10),'tela',1,fnCallBack,"Activate Location for "+ aData.name, "<span>"+$.pgsi.locale.get("pages.person.dialog.status.question",$.pgsi.locale.get("pages.view.activate"),"Location")+"<br>" +$.pgsi.locale.get("pages.person.dialog.status.information",$.pgsi.locale.get("pages.view.activate"))+"<span>",true);
 				}else if($(this).hasClass('deactivate')){
-					pgsi.util.page.fnUpdateStatus('api/ordemServico/fetch',parseInt(aData.id,10),'ordemServico',2,fnCallBack,"Deactivate Location for "+ aData.name, "<span>"+$.pgsi.locale.get("pages.person.dialog.status.question",$.pgsi.locale.get("pages.view.deactivate"),"Location")+"<br>" +$.pgsi.locale.get("pages.person.dialog.status.information",$.pgsi.locale.get("pages.view.deactivate"))+"<span>",true);
+					pgsi.util.page.fnUpdateStatus('api/tela/fetch',parseInt(aData.id,10),'tela',2,fnCallBack,"Deactivate Location for "+ aData.name, "<span>"+$.pgsi.locale.get("pages.person.dialog.status.question",$.pgsi.locale.get("pages.view.deactivate"),"Location")+"<br>" +$.pgsi.locale.get("pages.person.dialog.status.information",$.pgsi.locale.get("pages.view.deactivate"))+"<span>",true);
 				}else if($(this).hasClass('sarDialog')){
 					pgsi.util.actiondialog.launchActionDialog(
 							"dialogSARDetail",
 							 pgsi.pages.sar.dialogSettings.dialogSARDetail(
 								 $.pgsi.locale.get("commons.title.table.SAR"),
 								 aData.id,
-								 "ordemServico",
+								 "tela",
 								 aData.name,
 								 aData.key
 							 ));
@@ -236,7 +236,7 @@ $(document).ready(function()
 			});
 
 			$.pgsi.listener.notify({
-				eventName 	: "ordemServicoList",
+				eventName 	: "telaList",
 				arguments 	: ["table"]
 			});
 		}
@@ -255,7 +255,7 @@ $(document).ready(function()
 				element			: ".filter",
 				tagsDiv			: ".filter-results-container div.first",
 				title			: $.pgsi.locale.get("commons.pages.filterTitle"),
-				table 			:  pgsi.pages.ordemServico.ordemServicoTable,
+				table 			:  pgsi.pages.pessoa.telaTable,
 				filters 		: oResponse
 			});
 		});
@@ -265,8 +265,8 @@ $(document).ready(function()
 	$("#clear-all").on("click", function(e)
 	{
 		$.address.parameter("organization","");
-		$.address.parameter("ordemServico","");
-		pgsi.util.page.fnReloadTable(pgsi.pages.ordemServico.ordemServicoTable);
+		$.address.parameter("pessoa","");
+		pgsi.util.page.fnReloadTable(pgsi.pages.pessoa.telaTable);
 	});
 
 
@@ -274,7 +274,7 @@ $(document).ready(function()
 	{
 		e.preventDefault();
 		$.pgsi.ajax.post({
-			sUrl 		: "api/ordemServico/add",
+			sUrl 		: "api/tela/add",
 			oRequest 	: {},
 			fnCallback  : function(oResponse) {
 				console.log(oResponse)

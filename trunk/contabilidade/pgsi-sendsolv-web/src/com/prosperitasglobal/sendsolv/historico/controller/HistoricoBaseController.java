@@ -9,13 +9,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
-import com.prosperitasglobal.sendsolv.bai.IEmpresaBAI;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
+import com.prosperitasglobal.sendsolv.bai.IHistoricoBAI;
+import com.prosperitasglobal.sendsolv.model.request.HistoricoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.HistoricoResponse;
 import com.qat.framework.validation.ValidationUtil;
 
 /**
- * The Class EmpresaBaseController.
+ * The Class HistoricoBaseController.
  */
 
 /**
@@ -32,44 +32,41 @@ public class HistoricoBaseController extends UtilControllerD
 	private static final Logger LOG = LoggerFactory.getLogger(HistoricoBaseController.class);
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
-	private static final String CONTROLLER_EXCEPTION_MSG = "EmpresaBaseController";
+	private static final String CONTROLLER_EXCEPTION_MSG = "HistoricoBaseController";
 
-	/** The Constant ENROLLED_MEMBERS. */
-	private static final String ENROLLED_MEMBERS = "enrolled_members";
-
-	/** The Empresa BAI. */
-	private IEmpresaBAI locationBAI;
+	/** The Historico BAI. */
+	private IHistoricoBAI historicoBAI;
 
 	/**
-	 * Gets the location bai.
+	 * Gets the historico bai.
 	 *
-	 * @return the location bai
+	 * @return the historico bai
 	 */
-	public IEmpresaBAI getEmpresaBAI()
+	public IHistoricoBAI getHistoricoBAI()
 	{
-		return locationBAI;
+		return historicoBAI;
 	}
 
 	/**
-	 * Sets the location bai.
+	 * Sets the historico bai.
 	 *
-	 * @param locationBAI the location bai
+	 * @param historicoBAI the historico bai
 	 */
 	@Resource
-	public void setEmpresaBAI(IEmpresaBAI locationBAI)
+	public void setHistoricoBAI(IHistoricoBAI historicoBAI)
 	{
-		this.locationBAI = locationBAI;
+		this.historicoBAI = historicoBAI;
 	}
 
 	/**
-	 * Empresa edit mav.
+	 * Historico edit mav.
 	 *
-	 * @param locationId the location id
+	 * @param historicoId the historico id
 	 * @param returnViewName the return view name
 	 * @param isSelect the is select
 	 * @return the model and view
 	 */
-	protected ModelAndView locationEditMAV(Integer locationId, String returnViewName, Boolean isSelect,
+	protected ModelAndView historicoEditMAV(Integer historicoId, String returnViewName, Boolean isSelect,
 			HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView(returnViewName);
@@ -81,11 +78,11 @@ public class HistoricoBaseController extends UtilControllerD
 			{
 				// modelAndView = listSelectBusiness(modelAndView, request);
 			}
-			if (!ValidationUtil.isNullOrZero(locationId))
+			if (!ValidationUtil.isNullOrZero(historicoId))
 			{
 
 				modelAndView.addObject(RESPONSE,
-						getMapper().writeValueAsString(fetchEmpresaById(new FetchByIdRequest(locationId))));
+						getMapper().writeValueAsString(fetchHistoricoById(new FetchByIdRequest(historicoId))));
 
 				return modelAndView;
 			}
@@ -104,20 +101,20 @@ public class HistoricoBaseController extends UtilControllerD
 	}
 
 	/**
-	 * Fetch location by request.
+	 * Fetch historico by request.
 	 *
 	 * @param pagedInquiryRequest the paged inquiry request
-	 * @return the location response
+	 * @return the historico response
 	 */
-	public EmpresaResponse fetchEmpresaByRequest(PagedInquiryRequest pagedInquiryRequest)
+	public HistoricoResponse fetchHistoricoByRequest(HistoricoInquiryRequest pagedInquiryRequest)
 	{
 
-		EmpresaResponse locationResponse = new EmpresaResponse();
+		HistoricoResponse historicoResponse = new HistoricoResponse();
 		try
 		{
 
-			// locationResponse = Mock();
-			// getEmpresaBAI().fetchEmpresaByRequest(pagedInquiryRequest);
+			// historicoResponse = Mock();
+			getHistoricoBAI().fetchHistoricoByRequest(pagedInquiryRequest);
 
 		}
 		catch (Exception e)
@@ -128,24 +125,24 @@ public class HistoricoBaseController extends UtilControllerD
 			}
 		}
 
-		return locationResponse;
+		return historicoResponse;
 	}
 
 	/**
-	 * Fetch location by id.
+	 * Fetch historico by id.
 	 *
 	 * @param fetchByIdRequest the fetch by id request
-	 * @return the location response
+	 * @return the historico response
 	 */
-	public EmpresaResponse fetchEmpresaById(FetchByIdRequest fetchByIdRequest)
+	public HistoricoResponse fetchHistoricoById(FetchByIdRequest fetchByIdRequest)
 	{
 
-		EmpresaResponse locationResponse = new EmpresaResponse();
+		HistoricoResponse historicoResponse = new HistoricoResponse();
 		try
 		{
 
-			// locationResponse = MockById();
-			// getEmpresaBAI().fetchEmpresaById(fetchByIdRequest);
+			// historicoResponse = MockById();
+			getHistoricoBAI().fetchHistoricoById(fetchByIdRequest);
 
 		}
 		catch (Exception e)
@@ -156,7 +153,7 @@ public class HistoricoBaseController extends UtilControllerD
 			}
 		}
 
-		return locationResponse;
+		return historicoResponse;
 	}
 
 }

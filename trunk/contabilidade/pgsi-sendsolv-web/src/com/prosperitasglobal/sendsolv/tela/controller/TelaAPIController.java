@@ -1,5 +1,7 @@
 package com.prosperitasglobal.sendsolv.tela.controller;
 
+import java.util.Calendar;
+
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.model.request.TelaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.TelaMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.response.TelaResponse;
 
 /**
@@ -22,21 +25,8 @@ import com.prosperitasglobal.sendsolv.model.response.TelaResponse;
 public class TelaAPIController extends TelaBaseController
 {
 
-	/** The Constant FETCH_SIC_NAICS. */
-	private static final String FETCH_SIC_NAICS = "fetchSicNaics";
-	/** The Constant FETCH_ORGANIZATION_BYLOCATION. */
-	private static final String FETCH_ORGANIZATION_BYLOCATION = "fetchOrganizationBylocation";
-	/** The URL mapping constants. */
-	private static final String DELETE_LOCATION = "/delete";
-
-	/** The Constant EDIT_LOCATION. */
-	private static final String EDIT_LOCATION = "/edit";
-
 	/** The Constant FETCH_ALL. */
 	private static final String FETCH_ALL = "/fetchall";
-
-	/** The Constant INSERT_LOCATION. */
-	private static final String INSERT_LOCATION = "/add";
 
 	/** The Constant FETCH. */
 	private static final String FETCH = "/fetch";
@@ -47,6 +37,9 @@ public class TelaAPIController extends TelaBaseController
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
 	private static final String CONTROLLER_EXCEPTION_MSG = "TelaAPIController";
+	private static final String EDIT_TELA = "/edit";
+	private static final String DELETE_TELA = "/delete";
+	private static final String INSERT_TELA = "/add";
 
 	/**
 	 * Fetch all Telas.
@@ -75,6 +68,87 @@ public class TelaAPIController extends TelaBaseController
 	{
 
 		return fetchTelaById(fetchByIdRequest);
+
+	}
+
+	/**
+	 * Edit one historico.
+	 *
+	 * @param historicoRequest the historico request
+	 * @return the response
+	 */
+	@RequestMapping(value = EDIT_TELA, method = RequestMethod.POST)
+	@ResponseBody
+	public TelaResponse edit(@RequestBody TelaMaintenanceRequest historicoRequest)
+	{
+		TelaResponse historicoResponse = new TelaResponse();
+		try
+		{
+
+			historicoResponse = getTelaBAI().updateTela(historicoRequest);
+
+		}
+		catch (Exception e)
+		{
+			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			historicoResponse = null;
+		}
+		return historicoResponse;
+
+	}
+
+	/**
+	 * Delete one historico.
+	 *
+	 * @param historicoRequest the historico request
+	 * @return the response
+	 */
+	@RequestMapping(value = DELETE_TELA, method = RequestMethod.POST)
+	@ResponseBody
+	public TelaResponse delete(@RequestBody TelaMaintenanceRequest historicoRequest)
+	{
+		TelaResponse historicoResponse = new TelaResponse();
+		try
+		{
+
+			historicoResponse = getTelaBAI().deleteTela(historicoRequest);
+
+		}
+		catch (Exception e)
+		{
+			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			historicoResponse = null;
+		}
+
+		return historicoResponse;
+
+	}
+
+	/**
+	 * Insert one historico.
+	 *
+	 * @param historicoRequest the historico request
+	 * @return the response
+	 */
+	@RequestMapping(value = INSERT_TELA, method = RequestMethod.POST)
+	@ResponseBody
+	public TelaResponse insert(@RequestBody TelaMaintenanceRequest historicoRequest)
+	{
+		TelaResponse historicoResponse = new TelaResponse();
+
+		try
+		{
+
+			historicoRequest.getTela().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
+			historicoResponse = getTelaBAI().insertTela(historicoRequest);
+		}
+		catch (Exception e)
+		{
+			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			historicoResponse = null;
+		}
+
+		return historicoResponse;
 
 	}
 
