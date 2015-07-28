@@ -36,16 +36,17 @@
 
   <resultMap id="telaResult" type="Tela">
     <result property="id" column="id" />
-    <result property="type" column="type" />
+    <result property="typeValue" column="type" />
     <result property="description" column="description" />
     <result property="help" column="help" />
 	<result property="data" column="data" />
 	<result property="desenvolvida" column="desenvolvida" />
+	<result property="processId" column="processId" />
     <result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-   	<collection property="Tabs" column="id" select="TabsMap.fetchTabsByTela"/>
+   	<collection property="tabs" column="id" select="TabsMap.fetchTabsByTela"/>
   </resultMap>
 
   <!--
@@ -65,7 +66,7 @@
   </sql>
 
   <sql id="allTelaValues">
-  		#{type},
+  		#{typeValue},
   		#{description},
   		#{help},
   		#{data},
@@ -92,7 +93,7 @@
   <update id="updateTela" parameterType="Tela">
     UPDATE tela
     	<set>
-    		<if test="type!= null">type = #{type},</if>
+    		<if test="typeValue!= null">type = #{typeValue},</if>
 	    	<if test="description!= null"> description=#{description},</if>
 	    	<if test="help!= null">help = #{help},</if>
 	    	<if test="data!= null"> data=#{data},</if>

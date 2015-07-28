@@ -87,6 +87,7 @@
 		<typeAlias alias="Eventos"              				 	 type="com.prosperitasglobal.sendsolv.model.Eventos"/>
 		<typeAlias alias="EventoPessoa"              			 	 type="com.prosperitasglobal.sendsolv.model.EventoPessoa"/>
 		<typeAlias alias="Field"              				 		 type="com.prosperitasglobal.sendsolv.model.Field"/>
+		<typeAlias alias="FieldBusca"              				 	 type="com.prosperitasglobal.sendsolv.model.FieldBusca"/>
 		<typeAlias alias="Financeiro"              				 	 type="com.prosperitasglobal.sendsolv.model.Financeiro"/>
 		<typeAlias alias="FormaPg"              				 	 type="com.prosperitasglobal.sendsolv.model.FormaPg"/>
 		<typeAlias alias="FormaPgPessoa"              			 	 type="com.prosperitasglobal.sendsolv.model.FormaPgPessoa"/>

@@ -13,6 +13,8 @@ public class Tabs extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
+	private Integer telaId;
+
 	/** The type of an account. */
 	private String text;
 
@@ -133,6 +135,22 @@ public class Tabs extends ModelCosmeDamiao
 		this.fiels = fiels;
 	}
 
+	/**
+	 * @return the telaId
+	 */
+	public Integer getTelaId()
+	{
+		return telaId;
+	}
+
+	/**
+	 * @param telaId the telaId to set
+	 */
+	public void setTelaId(Integer telaId)
+	{
+		this.telaId = telaId;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -141,7 +159,16 @@ public class Tabs extends ModelCosmeDamiao
 	public String toString()
 	{
 		return "Tabs [getId()=" + getId() + ", getText()=" + getText() + ", getDescription()=" + getDescription()
-				+ ", getNome()=" + getNome() + ", getFiels()=" + getFiels() + ", toString()=" + super.toString() + "]";
+				+ ", getNome()=" + getNome() + ", getFiels()=" + getFiels() + ", getTelaId()=" + getTelaId()
+				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId() + ", getNotes()=" + getNotes()
+				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
+				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
+				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }

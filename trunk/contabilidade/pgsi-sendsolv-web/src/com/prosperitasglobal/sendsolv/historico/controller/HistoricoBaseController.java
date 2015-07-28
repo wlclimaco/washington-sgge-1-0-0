@@ -114,7 +114,7 @@ public class HistoricoBaseController extends UtilControllerD
 		{
 
 			// historicoResponse = Mock();
-			getHistoricoBAI().fetchHistoricoByRequest(pagedInquiryRequest);
+			historicoResponse = getHistoricoBAI().fetchHistoricoByRequest(pagedInquiryRequest);
 
 		}
 		catch (Exception e)

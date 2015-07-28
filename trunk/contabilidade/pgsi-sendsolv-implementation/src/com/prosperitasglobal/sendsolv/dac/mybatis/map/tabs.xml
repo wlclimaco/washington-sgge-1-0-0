@@ -38,7 +38,7 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<collection property="fiels" column="id" select="FieldsMap.fetchFieldByTabsId"/>
+	<collection property="fiels" column="id" select="FieldMap.fetchFieldByTabsId"/>
   </resultMap>
 
   <!--
@@ -123,14 +123,14 @@
   </select>
 
    <select id="fetchTabsByTela" parameterType="FetchByIdRequest" resultMap="tabsResult">
-	 SELECT
+	 SELECT b.id,
 	<include refid="allTabsColumns" />
-    FROM tabs b where b.tela = #{id}  ORDER BY id ASC
+    FROM tabs b where b.telaId = #{id}  ORDER BY b.id ASC
   </select>
 
   <select id="fetchAllTabssByRequest" parameterType="PagedInquiryRequest" resultMap="tabsResult">
 	 SELECT * FROM ( SELECT b.id,
-    						<include refid="allEmpresaColumns" />,
+    						<include refid="allTabsColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM tabs b
 						where 1 = 1

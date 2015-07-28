@@ -40,34 +40,11 @@ public class OrdemServicoDACImpl extends SqlSessionDaoSupport implements IOrdemS
 	/** The Constant ORDEMSERVICO_STMT_INSERT. */
 	private static final String ORDEMSERVICO_STMT_INSERT = ORDEMSERVICO_NAMESPACE + "insertOrdemServico";
 
-	/** The Constant ORDEMSERVICO_STMT_ASSOC_ORG_TO_CONTACT. */
-	private static final String ORDEMSERVICO_STMT_ASSOC_ORG_TO_CONTACT = ORDEMSERVICO_NAMESPACE
-			+ "associateOrdemServicoWithOrdemServico";
-
 	/** The Constant ORDEMSERVICO_STMT_UPDATE. */
 	private static final String ORDEMSERVICO_STMT_UPDATE = ORDEMSERVICO_NAMESPACE + "updateOrdemServico";
 
 	/** The Constant ORDEMSERVICO_STMT_DELETE. */
 	private static final String ORDEMSERVICO_STMT_DELETE = ORDEMSERVICO_NAMESPACE + "deleteOrdemServicoById";
-
-	/** The Constant ORDEMSERVICO_DOCUMENT_STMT_UPDATE. */
-	private static final String ORDEMSERVICO_DOCUMENT_STMT_UPDATE = ORDEMSERVICO_NAMESPACE
-			+ "updateOrdemServicoDocument";
-
-	/** The Constant ORDEMSERVICO_STMT_ASSOC_ORG_TO_DOCUMENT. */
-	private static final String ORDEMSERVICO_STMT_ASSOC_ORG_TO_DOCUMENT = ORDEMSERVICO_NAMESPACE
-			+ "associateOrdemServicoWithDocument";
-
-	/** The Constant ORDEMSERVICO_STMT_DELETE_DOCUMENT. */
-	private static final String ORDEMSERVICO_STMT_DELETE_DOCUMENT = ORDEMSERVICO_NAMESPACE
-			+ "deleteOrdemServicoDocument";
-
-	/** The Constant STMT_VERSION. */
-	private static final String ORDEMSERVICO_STMT_VERSION = ORDEMSERVICO_NAMESPACE + "fetchVersionNumber";
-
-	/** The Constant ORDEMSERVICO_STMT_UPDATE_ORDEMSERVICO_STATUS. */
-	private static final String ORDEMSERVICO_STMT_UPDATE_ORDEMSERVICO_STATUS = CBOF_NAMESPACE
-			+ "updateBusinessStatus";
 
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(OrdemServicoDACImpl.class);
@@ -228,7 +205,7 @@ public class OrdemServicoDACImpl extends SqlSessionDaoSupport implements IOrdemS
 		 * Helper method to translation from the user friendly" sort field names to the
 		 * actual database column names.
 		 */
-		QATMyBatisDacHelper.translateSortFields(request, getOrdemServicoInquiryValidSortFields());
+		// QATMyBatisDacHelper.translateSortFields(request, getOrdemServicoInquiryValidSortFields());
 
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, ORDEMSERVICO_STMT_FETCH_COUNT,
 				ORDEMSERVICO_STMT_FETCH_ALL_BY_REQUEST, response);

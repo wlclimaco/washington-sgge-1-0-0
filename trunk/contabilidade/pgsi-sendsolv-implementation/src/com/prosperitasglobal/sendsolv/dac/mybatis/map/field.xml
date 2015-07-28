@@ -61,12 +61,12 @@
   <resultMap id="fieldResult" type="Field" >
     <result property="id" column="id" />
     <result property="tabId" column="tabId" />
-    <result property="type" column="type" />
+    <result property="typeValue" column="type" />
    	<result property="description" column="description"/>
 	<result property="numero" column="numero"/>
 	<result property="nome" column="nome"/>
-	<result property="left" column="left"/>
-	<result property="top" column="top"/>
+	<result property="left" column="leftt"/>
+	<result property="top" column="topp"/>
 	<result property="width" column="width"/>
 	<result property="height" column="height"/>
 	<result property="zIndex" column="zIndex"/>
@@ -87,12 +87,12 @@
 <resultMap id="fieldBuscaResult" type="FieldBusca" >
     <result property="id" column="id"/>
 	<result property="fieldId" column="fieldId"/>
-	<result property="tabela" column="tabela"/>
 	<result property="processId" column="processId"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
+<!-- 	<association property="tabela"    column="tabela" select="FieldMap.fetchBuscaLabel"  /> -->
 </resultMap>
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
@@ -103,8 +103,8 @@
 	   	,b.description
 		,b.numero
 		,b.nome
-		,b.left
-		,b.top
+		,b.leftt
+		,b.topp
 		,b.width
 		,b.height
 		,b.zIndex
@@ -123,7 +123,7 @@
   </sql>
 
   <sql id="allFieldValues">
-  		#{type},
+  		#{typeValue},
   		#{tabId},
 	   	#{description},
 		#{numero},
@@ -139,7 +139,7 @@
 		#{mask},
 		#{validation},
 		#{size},
-		#{busca},
+		#{busca.id},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -162,13 +162,13 @@
   <update id="updateField" parameterType="Field">
     UPDATE field
     	<set>
-			<if test="type!= null">type = #{type},</if>
+			<if test="typeValue!= null">type = #{typeValue},</if>
 			<if test="tabId!= null">tabId = #{tabId},</if>
 			<if test="description!= null">description = #{description},</if>
 			<if test="numero!= null">numero = #{numero},</if>
 			<if test="nome!= null">nome = #{nome},</if>
-			<if test="left!= null">left = #{left},</if>
-			<if test="top!= null">top = #{top},</if>
+			<if test="left!= null">leftt = #{left},</if>
+			<if test="top!= null">topp = #{top},</if>
 			<if test="width!= null">width = #{width},</if>
 			<if test="height!= null">height = #{height},</if>
 			<if test="zIndex!= null">zIndex = #{zIndex},</if>
@@ -178,7 +178,7 @@
 			<if test="mask!= null">mask = #{mask},</if>
 			<if test="validation!= null">validation = #{validation},</if>
 			<if test="size!= null">size = #{size},</if>
-			<if test="busca!= null">busca = #{busca},</if>
+			<if test="busca.id!= null">busca = #{busca.id},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
@@ -221,14 +221,14 @@
   </select>
 
    <select id="fetchFieldByTabsId" parameterType="FetchByIdRequest" resultMap="fieldResult">
-	 SELECT
+	SELECT b.id,
 	<include refid="allFieldColumns" />
     FROM field b where b.tabId = #{id}  ORDER BY id ASC
   </select>
 
   <select id="fetchAllFieldsByRequest" parameterType="PagedInquiryRequest" resultMap="fieldResult">
 	 SELECT * FROM ( SELECT b.id,
-    						<include refid="allEmpresaColumns" />,
+    						<include refid="allFieldColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM field b
 						where 1 = 1

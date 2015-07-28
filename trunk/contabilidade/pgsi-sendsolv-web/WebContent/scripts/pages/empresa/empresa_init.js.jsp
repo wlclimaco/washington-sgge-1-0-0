@@ -275,7 +275,7 @@ $(document).ready(function()
 		$.address.parameter("location","");
 		pgsi.util.page.fnReloadTable(pgsi.pages.location.locationTable);
 	});
-	$(".add-business").on("click", function(e)
+	$("#buttonInsert").on("click", function(e)
 	{
 		e.preventDefault();
 		$.pgsi.ajax.post({

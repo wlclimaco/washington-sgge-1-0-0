@@ -169,7 +169,9 @@ CREATE TABLE [dbo].[historico] (
 	[id]           [int] identity(1,1) NOT NULL,
 	[data]	       [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[userId]	   [varchar](20) NULL,
-	[emprId]         [int] NULL,
+	[emprId]       [int] NULL,
+	[tabela] 	   [int] NOT NULL,
+	[acao] 		   [int] NOT NULL,
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1810,6 +1812,27 @@ CONSTRAINT [pk_historicoNF_id] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+
+DROP TABLE [dbo].[tela];
+CREATE TABLE [dbo].[tela](
+	[id]             [int] identity(1,1) NOT NULL,
+	[type]           [int]  NULL,
+	[description]    [varchar](250) NULL,
+	[help]           [varchar](250) NULL,
+	[data]   		 [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[desenvolvida]   [varchar](50) NULL,
+    [processId]      [int]  NULL,
+	[create_date]    [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  	 [varchar](50) NULL,
+    [modify_date]    [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]    [varchar](50) NULL,
+CONSTRAINT [pk_tela_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
 DROP TABLE [dbo].[tabs];
 CREATE TABLE [dbo].[tabs](
 	[id]             [int] identity(1,1) NOT NULL,
@@ -1836,8 +1859,8 @@ CREATE TABLE [dbo].[field](
 	[description]    [varchar](250) NULL,
 	[numero]   		 [varchar](50) NULL,
     [nome]      	 [int]  NULL,
-    [left]           [int]  NULL,
-	[top]            [int]  NULL,
+    [leftt]           [int]  NULL,
+	[topp]            [int]  NULL,
 	[width]          [int]  NULL,
 	[height]    	 [int]  NULL,
 	[zIndex]   		 [int]  NULL,

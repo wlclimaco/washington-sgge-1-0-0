@@ -4,7 +4,6 @@
 
 
     <div id="wrapper">
-
                <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
@@ -67,11 +66,49 @@
 
         <div id="page-wrapper">
             <div class="row">
-
+				<ul class="breadcrumb">
+					<li>
+						<a href="#">Home</a> <span class="divider">/</span>
+					</li>
+					<li>
+						<a href="#">Library</a> <span class="divider">/</span>
+					</li>
+					<li class="active">
+						Data
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<button type="button" id="buttonInsert" class="btn active btn-primary">
+							Cadastrar Tela
+						</button>
+					<li>
+				</ul>
                 <div class="col-lg-12">
                      <div class="panel panel-default">
                         <!-- /.panel-heading -->
                         <div class="panel-body">
+							<div class="btn-group">
+								<button class="btn btn-default">
+									Acoes
+								</button>
+								<button data-toggle="dropdown" class="btn btn-default dropdown-toggle">
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="#">Deletar</a>
+									</li>
+									<li class="">
+										<a href="#">Another action</a>
+									</li>
+									<li class="divider">
+									</li>
+									<li>
+										<a href="#">Something else here</a>
+									</li>
+								</ul>
+							</div>
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="data_list">
 

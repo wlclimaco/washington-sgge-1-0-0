@@ -29,7 +29,7 @@ $(document).ready(function()
 	});
 
 	/** * jQuery dataTable setup ** */
-	pgsi.pages.pessoa.telaTable = $('#data_list').dataTable($.pgsi.table.setTable(
+	pgsi.pages.tela.telaTable = $('#data_list').dataTable($.pgsi.table.setTable(
 	{
 		id 			: "#data_list",
 		sAjaxSource : "api/tela/fetchall",
@@ -45,60 +45,53 @@ $(document).ready(function()
 		aoColumns :
 		[
 		{
-			headerData 		: "CPF/CNPJ",
+			headerData 		: "ID",
 			order			: "name",
-			mRender         : pgsi.pages.pessoa.fnCreateClienteNameLink,
+			mData           : "id",
 			sDefaultContent : "",
 			bSortable 		: false,
 			sClass          : "name-col"
 		},
 		{
-			headerData 		: "Nome",
+			headerData 		: "Descricao",
+			order			: "name",
+			mData           : "emprId",
+			sDefaultContent : "",
+			bSortable 		: false,
+			sClass          : "name-col"
+		},
+		{
+			headerData 		: "Data",
 			order			: "organization_column",
-			mRender 		: pgsi.pages.pessoa.fnCreateNomeLink,
+			mRender 		: pgsi.pages.tela.fnCreateData,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Profissao",
+			headerData 		: "Ajuda",
 			order			: "city_column",
-			mRender 		: pgsi.pages.pessoa.fnProfissao,
-			mData	 		: "null",
+			mData 		    : "help",
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Email",
+			headerData 		: "Desenvolvida",
 			order			: "state_column",
-			mRender 		: pgsi.pages.pessoa.fnEmail,
+			mData 		    : "desenvolvida",
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Telefone",
+			headerData 		: "tabs",
 			order			: "country_column",
-			mRender 		: pgsi.pages.pessoa.fnTelefone,
+			mRender 	    : pgsi.pages.tela.fnCreateTabs,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
 		{
-			headerData 		: "Convenio",
+			headerData 		: "Campos",
 			order			: "sdn_status_column",
-			mRender 		: pgsi.pages.pessoa.fnConvenio,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Endereco",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.pessoa.fnEndereco,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Documentos",
-			order			: "phone_column",
-			mRender 		: pgsi.pages.pessoa.fnDocumento,
+			mRender 	    : pgsi.pages.tela.fnCreateFields,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
@@ -160,7 +153,7 @@ $(document).ready(function()
 
 						// Validations for change pagination when delete one or more groups of last page.
 						var iStart;
-						var oSettings = pgsi.pages.pessoa.telaTable.fnSettings();
+						var oSettings = pgsi.pages.tela.telaTable.fnSettings();
 
 							// If exist just one group at last page and this group is deleted, the pagination back to previous page.
 							if (((oSettings._iRecordsDisplay - 1) % $('.dataTables_length').find('select').val() === 0)) {
@@ -168,7 +161,7 @@ $(document).ready(function()
 							}
 
 						$.pgsi.table.reloadTable({
-							table 		: pgsi.pages.pessoa.telaTable,
+							table 		: pgsi.pages.tela.telaTable,
 							iStart 		: iStart
 						});
 					}else{
@@ -255,7 +248,7 @@ $(document).ready(function()
 				element			: ".filter",
 				tagsDiv			: ".filter-results-container div.first",
 				title			: $.pgsi.locale.get("commons.pages.filterTitle"),
-				table 			:  pgsi.pages.pessoa.telaTable,
+				table 			:  pgsi.pages.tela.telaTable,
 				filters 		: oResponse
 			});
 		});
@@ -265,8 +258,8 @@ $(document).ready(function()
 	$("#clear-all").on("click", function(e)
 	{
 		$.address.parameter("organization","");
-		$.address.parameter("pessoa","");
-		pgsi.util.page.fnReloadTable(pgsi.pages.pessoa.telaTable);
+		$.address.parameter("tela","");
+		pgsi.util.page.fnReloadTable(pgsi.pages.tela.telaTable);
 	});
 
 

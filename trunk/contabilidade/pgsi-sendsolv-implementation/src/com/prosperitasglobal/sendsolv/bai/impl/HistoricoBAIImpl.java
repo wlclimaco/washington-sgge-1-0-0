@@ -251,6 +251,7 @@ public class HistoricoBAIImpl implements IHistoricoBAI
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+
 	}
 
 	/**
