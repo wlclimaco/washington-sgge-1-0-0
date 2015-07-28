@@ -125,6 +125,50 @@
 
 	</div>
 
+	<nav class="navbar navbar-default navbar-fixed-bottom"  role="navigation">
+				<div class="navbar-header">
+
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+					</button> <a class="navbar-brand" href="#">Brand</a>
+				</div>
+
+				<div class="collapse navbar-collapse menuBar" id="bs-example-navbar-collapse-2">
+					<ul class="nav nav-pills" role="tablist">
+					  <li role="presentation" class="active"><a href="#">Empresas <span class="badge">42</span></a></li>
+					  <li role="presentation" class="active"><a href="#">Produtos <span class="badge">42</span></a></li>
+					  <li role="presentation" class="active"><a href="#">Ordem Serviço <span class="badge">42</span></a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<div class="btn-group">
+
+								<button class="btn btn-default">
+									Action
+								</button>
+								<button data-toggle="dropdown" class="btn btn-default dropdown-toggle">
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="#">Action</a>
+									</li>
+									<li class="disabled">
+										<a href="#">Another action</a>
+									</li>
+									<li class="divider">
+									</li>
+									<li>
+										<a href="#">Something else here</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+			</nav>
+
 	<footer>
 		    <div class="extra">
         <div class="extra-inner">

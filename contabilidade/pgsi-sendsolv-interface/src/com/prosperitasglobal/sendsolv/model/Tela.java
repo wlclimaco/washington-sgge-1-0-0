@@ -13,9 +13,6 @@ public class Tela extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	/** The type of an account. */
-	private String type;
-
 	/** The description. */
 	private String description;
 
@@ -23,7 +20,7 @@ public class Tela extends ModelCosmeDamiao
 	private String help;
 
 	/** The data. */
-	private Integer data;
+	private Long data;
 
 	/** The estado. */
 	private String desenvolvida;
@@ -104,7 +101,7 @@ public class Tela extends ModelCosmeDamiao
 	 *
 	 * @return the data
 	 */
-	public Integer getData()
+	public Long getData()
 	{
 		return data;
 	}
@@ -114,7 +111,7 @@ public class Tela extends ModelCosmeDamiao
 	 *
 	 * @param data the new data
 	 */
-	public void setData(Integer data)
+	public void setData(Long data)
 	{
 		this.data = data;
 	}

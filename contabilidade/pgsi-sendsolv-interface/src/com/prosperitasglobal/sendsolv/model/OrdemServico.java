@@ -17,7 +17,7 @@ public class OrdemServico extends ModelCosmeDamiao
 	private String nome;
 
 	/** The estado. */
-	private Integer data;
+	private Long data;
 
 	/** The bairro. */
 	private OrdemServicoTypes typeId;
@@ -75,7 +75,7 @@ public class OrdemServico extends ModelCosmeDamiao
 	/**
 	 * @return the data
 	 */
-	public Integer getData()
+	public Long getData()
 	{
 		return data;
 	}
@@ -83,7 +83,7 @@ public class OrdemServico extends ModelCosmeDamiao
 	/**
 	 * @param data the data to set
 	 */
-	public void setData(Integer data)
+	public void setData(Long data)
 	{
 		this.data = data;
 	}

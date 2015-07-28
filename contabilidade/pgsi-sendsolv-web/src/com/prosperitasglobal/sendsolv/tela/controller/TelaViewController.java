@@ -17,7 +17,7 @@ import com.qat.framework.model.SortExpression;
 import com.qat.framework.model.SortExpression.Direction;
 
 /**
- * The LocationViewController Class.
+ * The TelaViewController Class.
  *
  * @author Flavio Tosta, Washington Costa
  *
@@ -72,7 +72,7 @@ public class TelaViewController extends TelaBaseController
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(TelaViewController.class);
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
-	private static final String CONTROLLER_EXCEPTION_MSG = "LocationViewController";
+	private static final String CONTROLLER_EXCEPTION_MSG = "TelaViewController";
 
 	private static final String BUSINESS = "BUSINESS";
 	private static final String FILTERS = "filters";

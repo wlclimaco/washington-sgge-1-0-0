@@ -18,7 +18,7 @@ import com.qat.framework.model.SortExpression;
 import com.qat.framework.model.SortExpression.Direction;
 
 /**
- * The LocationViewController Class.
+ * The HistoricoViewController Class.
  *
  * @author Flavio Tosta, Washington Costa
  *
@@ -47,18 +47,18 @@ public class HistoricoViewController extends HistoricoBaseController
 	private static final String EDIT_VIEW = "/editView";
 
 	/** The view mapping constants . */
-	private static final String VIEW_HISTORICO_MAIN = "/empresa/empresa_main";
+	private static final String VIEW_HISTORICO_MAIN = "/historico/historico_main";
 
 	/** The Constant VIEW_HISTORICO_ADD. */
-	private static final String VIEW_HISTORICO_ADD = "/empresa/empresa_create";
+	private static final String VIEW_HISTORICO_ADD = "/historico/historico_create";
 
 	/** The Constant VIEW_HISTORICO_VIEW. */
-	private static final String VIEW_HISTORICO_VIEW = "/empresa/empresa_view";
+	private static final String VIEW_HISTORICO_VIEW = "/historico/historico_view";
 
-	private static final String VIEW_HISTORICO_TABS = "/empresa/empresa_tabs";
+	private static final String VIEW_HISTORICO_TABS = "/historico/historico_tabs";
 
 	/** The Constant VIEW_HISTORICO_DIALOG_ADD. */
-	private static final String VIEW_HISTORICO_DIALOG_ADD = "/empresa/empresa_dialog_create";
+	private static final String VIEW_HISTORICO_DIALOG_ADD = "/historico/historico_dialog_create";
 
 	/** The PagedInquiryRequest Constants. */
 	private static final int START_PAGE_NUMBER = 0;
@@ -73,7 +73,7 @@ public class HistoricoViewController extends HistoricoBaseController
 	private static final Logger LOG = LoggerFactory.getLogger(HistoricoViewController.class);
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
-	private static final String CONTROLLER_EXCEPTION_MSG = "LocationViewController";
+	private static final String CONTROLLER_EXCEPTION_MSG = "HistoricoViewController";
 
 	private static final String BUSINESS = "BUSINESS";
 	private static final String FILTERS = "filters";

@@ -126,7 +126,7 @@
 
   <select id="fetchAllOrdemServicosByRequest" parameterType="OrdemServicoInquiryRequest" resultMap="ordemServicoResult">
 	       SELECT * FROM ( SELECT b.id,
-    						<include refid="allTelaColumns" />,
+    						<include refid="allOrdemServicoColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM ordemservico b
     			) LIST

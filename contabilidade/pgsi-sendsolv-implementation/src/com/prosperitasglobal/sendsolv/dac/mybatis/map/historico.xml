@@ -29,6 +29,9 @@
     <result property="data" column="data" />
     <result property="userId" column="userId" />
     <result property="emprId" column="emprId" />
+    <result property="tabelaEnumValue" column="tabela" />
+    <result property="acaoEnumValue" column="acao" />
+    <result property="processId" column="processId" />
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -56,6 +59,9 @@
 		 b.data
 		,b.userId
       	,b.emprId
+      	,b.acao
+      	,b.tabela
+      	,b.processId
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -66,6 +72,9 @@
   		#{data},
   		#{userId},
     	#{emprId},
+    	#{acaoEnumValue},
+    	#{tabelaEnumValue},
+    	#{processId},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 

@@ -11,6 +11,11 @@ public class OrdemServicoInquiryRequest extends PagedInquiryRequest
 	/** The criteria. */
 	private OrdemServicoCriteria criteria;
 
+	public OrdemServicoInquiryRequest()
+	{
+		super();
+	}
+
 	/**
 	 * Gets the criteria.
 	 *
@@ -42,7 +47,13 @@ public class OrdemServicoInquiryRequest extends PagedInquiryRequest
 	@Override
 	public String toString()
 	{
-		return "OrdemServicoInquiryRequest [getCriteria()=" + getCriteria() + ", toString()=" + super.toString() + "]";
+		return "OrdemServicoInquiryRequest [getCriteria()=" + getCriteria() + ", getParentId()=" + getParentId()
+				+ ", getInquiryCriteria()=" + getInquiryCriteria() + ", getStatusList()=" + getStatusList()
+				+ ", toString()=" + super.toString() + ", getPageSize()=" + getPageSize() + ", getStartPage()="
+				+ getStartPage() + ", getSortExpressions()=" + getSortExpressions() + ", getSortExpression()="
+				+ getSortExpression() + ", isPreQueryCount()=" + isPreQueryCount() + ", getMaxPreQueryCount()="
+				+ getMaxPreQueryCount() + ", getUserContext()=" + getUserContext() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }

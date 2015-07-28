@@ -1,19 +1,16 @@
 package com.prosperitasglobal.sendsolv.model;
 
-import com.qat.framework.model.QATModel;
-
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
  */
 @SuppressWarnings("serial")
-public class Field extends QATModel
+public class Field extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	/** The type of an account. */
-	private String type;
+	private Integer tabId;
 
 	/** The description. */
 	private String description;
@@ -86,26 +83,6 @@ public class Field extends QATModel
 	public void setId(Integer id)
 	{
 		this.id = id;
-	}
-
-	/**
-	 * Gets the type.
-	 *
-	 * @return the type
-	 */
-	public String getType()
-	{
-		return type;
-	}
-
-	/**
-	 * Sets the type.
-	 *
-	 * @param type the type to set
-	 */
-	public void setType(String type)
-	{
-		this.type = type;
 	}
 
 	/**
@@ -408,6 +385,22 @@ public class Field extends QATModel
 		this.busca = busca;
 	}
 
+	/**
+	 * @return the tabId
+	 */
+	public Integer getTabId()
+	{
+		return tabId;
+	}
+
+	/**
+	 * @param tabId the tabId to set
+	 */
+	public void setTabId(Integer tabId)
+	{
+		this.tabId = tabId;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -415,12 +408,20 @@ public class Field extends QATModel
 	@Override
 	public String toString()
 	{
-		return "Field [getId()=" + getId() + ", getType()=" + getType() + ", getDescription()=" + getDescription()
-				+ ", getNumero()=" + getNumero() + ", getNome()=" + getNome() + ", getLeft()=" + getLeft()
-				+ ", getTop()=" + getTop() + ", getWidth()=" + getWidth() + ", getHeight()=" + getHeight()
-				+ ", getzIndex()=" + getzIndex() + ", getLabel()=" + getLabel() + ", getText()=" + getText()
-				+ ", getClasse()=" + getClasse() + ", getMask()=" + getMask() + ", getValidation()=" + getValidation()
-				+ ", getSize()=" + getSize() + ", getBusca()=" + getBusca() + ", toString()=" + super.toString() + "]";
+		return "Field [getId()=" + getId() + ", getDescription()=" + getDescription() + ", getNumero()=" + getNumero()
+				+ ", getNome()=" + getNome() + ", getLeft()=" + getLeft() + ", getTop()=" + getTop() + ", getWidth()="
+				+ getWidth() + ", getHeight()=" + getHeight() + ", getzIndex()=" + getzIndex() + ", getLabel()="
+				+ getLabel() + ", getText()=" + getText() + ", getClasse()=" + getClasse() + ", getMask()=" + getMask()
+				+ ", getValidation()=" + getValidation() + ", getSize()=" + getSize() + ", getBusca()=" + getBusca()
+				+ ", getTabId()=" + getTabId() + ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()="
+				+ getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId()
+				+ ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()="
+				+ getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId()
+				+ ", getSite()=" + getSite() + ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId()
+				+ ", getNotes()=" + getNotes() + ", toString()=" + super.toString() + ", getModelAction()="
+				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
+				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
+				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }
