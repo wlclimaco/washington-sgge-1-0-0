@@ -4,7 +4,7 @@
 <sec:authorize access="hasAnyRole('ROLE_DOMAIN ADMIN', 'ROLE_ADMIN', 'ROLE_CSR')">
 
 <script type="text/javascript">
-	pgsi.pages.empresa.dialogSettings = {
+	pgsi.pages.entidade.dialogSettings = {
 
 		insert : function (iId, sName,sModelAction) {
 
@@ -25,13 +25,13 @@
 						var sUrl = "";
 						if(sModelAction == "insert")
 						{
-							sUrl = "api/empresa/insert"
+							sUrl = "api/entidade/insert"
 						}
 						else
 						{
-							sUrl = "api/empresa/update"
+							sUrl = "api/entidade/update"
 						}
-						pgsi.pages.empresa.form.ajaxCall(sUrl,sModelAction);
+						pgsi.pages.entidade.form.ajaxCall(sUrl,sModelAction);
 
 					};
 
@@ -46,7 +46,7 @@
 
 				action : function (actionDialog) {
 
-					actionDialog.load("empresa/editView?userId=" + pgsi.settings.userContext.userId+"&locationId=2", function() {
+					actionDialog.load("entidade/editView?userId=" + pgsi.settings.userContext.userId+"&locationId=2", function() {
 
 						$('#selected', actionDialog).removeClass("hide").append(""+sName+"");
 
