@@ -1,5 +1,6 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import java.util.List;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -8,6 +9,24 @@ package com.prosperitasglobal.sendsolv.model;
 @SuppressWarnings("serial")
 public class Filial extends Entidade
 {
+
+	private List<Deposito> depositoList;
+
+	/**
+	 * @return the depositoList
+	 */
+	public List<Deposito> getDepositoList()
+	{
+		return depositoList;
+	}
+
+	/**
+	 * @param depositoList the depositoList to set
+	 */
+	public void setDepositoList(List<Deposito> depositoList)
+	{
+		this.depositoList = depositoList;
+	}
 
 	/**
 	 * Default constructor.
@@ -24,11 +43,12 @@ public class Filial extends Entidade
 	@Override
 	public String toString()
 	{
-		return "Filial [getEntidadeEnumValue()=" + getEntidadeEnumValue() + ", getId()=" + getId() + ", getNome()="
-				+ getNome() + ", getEnderecos()=" + getEnderecos() + ", getDocumentos()=" + getDocumentos()
-				+ ", getEmails()=" + getEmails() + ", getTelefones()=" + getTelefones() + ", getCnaes()=" + getCnaes()
-				+ ", getRegime()=" + getRegime() + ", getEntidadeEnum()=" + getEntidadeEnum() + ", getConfiguracao()="
-				+ getConfiguracao() + ", getEntidadeId()=" + getEntidadeId() + ", toString()=" + super.toString()
+		return "Filial [getDepositoList()=" + getDepositoList() + ", getEntidadeEnumValue()=" + getEntidadeEnumValue()
+				+ ", getId()=" + getId() + ", getNome()=" + getNome() + ", getEnderecos()=" + getEnderecos()
+				+ ", getDocumentos()=" + getDocumentos() + ", getEmails()=" + getEmails() + ", getTelefones()="
+				+ getTelefones() + ", getCnaes()=" + getCnaes() + ", getRegime()=" + getRegime()
+				+ ", getEntidadeEnum()=" + getEntidadeEnum() + ", getConfiguracao()=" + getConfiguracao()
+				+ ", getEntidadeId()=" + getEntidadeId() + ", toString()=" + super.toString()
 				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
 				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
 				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()

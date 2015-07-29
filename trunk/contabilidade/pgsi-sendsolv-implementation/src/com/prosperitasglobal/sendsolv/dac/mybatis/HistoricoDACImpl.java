@@ -22,16 +22,16 @@ import com.qat.framework.validation.ValidationUtil;
 public class HistoricoDACImpl extends SqlSessionDaoSupport implements IHistoricoDAC
 {
 	/** The Constant CONTACT_NAMESPACE. */
-	private static final String CONTACT_NAMESPACE = "EnderecoMap.";
+	private static final String CONTACT_NAMESPACE = "HistoricoMap.";
 
 	/** The Constant CONTACT_STMT_UPDATE. */
-	private static final String CONTACT_STMT_UPDATE = CONTACT_NAMESPACE + "updateEndereco";
+	private static final String CONTACT_STMT_UPDATE = CONTACT_NAMESPACE + "updateHistorico";
 
 	/** The Constant CONTACT_STMT_DELETE_BUSINESS_CONTACT. */
-	private static final String CONTACT_STMT_DELETE_BUSINESS_CONTACT = CONTACT_NAMESPACE + "deleteBusinessEndereco";
+	private static final String CONTACT_STMT_DELETE_BUSINESS_CONTACT = CONTACT_NAMESPACE + "deleteBusinessHistorico";
 
 	/** The Constant CONTACT_STMT_INSERT. */
-	private static final String CONTACT_STMT_INSERT = CONTACT_NAMESPACE + "insertEndereco";
+	private static final String CONTACT_STMT_INSERT = CONTACT_NAMESPACE + "insertHistorico";
 
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(HistoricoDACImpl.class);
@@ -46,7 +46,7 @@ public class HistoricoDACImpl extends SqlSessionDaoSupport implements IHistorico
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-				.doInsert(getSqlSession(), statementName, historico, response);
+						.doInsert(getSqlSession(), statementName, historico, response);
 
 		return insertCount;
 	}

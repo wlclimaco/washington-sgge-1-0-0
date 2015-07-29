@@ -20,9 +20,11 @@
     [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,-->
 
-  <resultMap id="entidadeResult" type="Empresa" extends="EntidadeMap.entidadeResult">
+  <resultMap id="empresaResult" type="Empresa" extends="EntidadeMap.entidadeResult">
 	<collection property="socios" column="id" select="SocioMap.fetchSocioByEmpresaId"/>
 	<collection property="planoList" column="id" select="PlanoMap.fetchPlanoByEmpresa"/>
+	<collection property="filialList" column="id" select="FilialMap.fetchAllFilialByEntidade"/>
+	<collection property="depositoList" column="id" select="DepositoMap.fetchAllDepositoByEntidade"/>
   </resultMap>
 
 
@@ -41,36 +43,36 @@
   <select id="fetchEmpresaRowCount" parameterType="EmpresaInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM entidade
-        where entidadeEnum = entidadeEnumValue
+        where entidadeEnum = 1
 
   </select>
 
-  <select id="fetchAllEmpresas" resultMap="entidadeResult">
+  <select id="fetchAllEmpresas" resultMap="empresaResult">
     SELECT
 	<include refid="allEmpresaColumns" />
     FROM entidade ORDER BY nome ASC
   </select>
 
-  <select id="fetchEmpresaById" parameterType="FetchByIdRequest" resultMap="entidadeResult">
+  <select id="fetchEmpresaById" parameterType="FetchByIdRequest" resultMap="empresaResult">
     			   SELECT
 					b.id,	<include refid="allEmpresaColumns" />
  				   FROM entidade b
 					where b.id = #{id}
   </select>
 
-    <select id="fetchEmpresaByNota" parameterType="Integer" resultMap="entidadeResult">
+    <select id="fetchEmpresaByNota" parameterType="Integer" resultMap="empresaResult">
     			   SELECT
 					b.id,	<include refid="allEmpresaColumns" />
  				   FROM entidade b
 					where b.id = #{id}
   </select>
 
-  <select id="fetchAllEmpresasByRequest" parameterType="EmpresaInquiryRequest" resultMap="entidadeResult">
+  <select id="fetchAllEmpresasByRequest" parameterType="EmpresaInquiryRequest" resultMap="empresaResult">
      SELECT * FROM ( SELECT b.id,
     						<include refid="allEmpresaColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM entidade b
-						where b.entidadeEnum = entidadeEnum
+						where b.entidadeEnum = 1
 					<if test="parentId != null">
 						AND b.id = #{id}
 					</if>
@@ -94,21 +96,6 @@
 					 	ORDER BY RowNumber
 					</otherwise>
 				</choose>
-  </select>
-
-
-  <select id="fetchAllFilialByEmpresa" parameterType="Integer" resultMap="filialResult">
-    			   SELECT
-					b.id,	<include refid="allEmpresaColumns" />
- 				   FROM entidade b
-					where b.entidadeEnum = 2 and b.entidadeId = #{id}
-  </select>
-
-  <select id="fetchAllDepositoByEmpresa" parameterType="Integer" resultMap="depositoResult">
-   			  SELECT
-					b.id,	<include refid="allEmpresaColumns" />
- 				   FROM entidade b
-					where b.entidadeEnum = 3 and b.entidadeId = #{id}
   </select>
 
 

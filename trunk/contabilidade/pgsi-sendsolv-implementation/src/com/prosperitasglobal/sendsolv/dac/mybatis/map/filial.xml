@@ -21,6 +21,7 @@
     [modify_user]  [varchar](50) NULL,-->
 
   <resultMap id="filialResult" type="Filial" extends="EntidadeMap.entidadeResult">
+	<collection property="depositoList" column="emprId" select="DepositoMap.fetchAllDepositoByEntidade"/>
   </resultMap>
 
 
@@ -62,6 +63,15 @@
  				   FROM entidade b
 					where b.id = #{id}
   </select>
+
+  <select id="fetchAllFilialByEntidade" parameterType="Integer" resultMap="filialResult">
+    			   SELECT
+					b.id,	<include refid="allFilialColumns" />
+ 				   FROM entidade b
+					where b.emprId = #{id} and entidadeEnum = 2
+  </select>
+
+
 
   <select id="fetchAllFilialsByRequest" parameterType="FilialInquiryRequest" resultMap="filialResult">
      SELECT * FROM ( SELECT b.id,
