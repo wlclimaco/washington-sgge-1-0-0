@@ -3,9 +3,25 @@ package com.prosperitasglobal.sendsolv.bac.impl;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IEmpresaBAC;
 import com.prosperitasglobal.sendsolv.dac.IEmpresaDAC;
+import com.prosperitasglobal.sendsolv.model.Cidade;
+import com.prosperitasglobal.sendsolv.model.Classificacao;
+import com.prosperitasglobal.sendsolv.model.Cnae;
+import com.prosperitasglobal.sendsolv.model.Deposito;
 import com.prosperitasglobal.sendsolv.model.Empresa;
+import com.prosperitasglobal.sendsolv.model.Filial;
+import com.prosperitasglobal.sendsolv.model.Plano;
+import com.prosperitasglobal.sendsolv.model.Regime;
+import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ClassificacaoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.DepositoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.DepositoMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.FilialInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FilialMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.PlanoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.RegimeInquiryRequest;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 
@@ -95,5 +111,111 @@ public class EmpresaBACImpl implements IEmpresaBAC
 	public InternalResultsResponse<Empresa> fetchEmpresaByRequest(EmpresaInquiryRequest request)
 	{
 		return getEmpresaDAC().fetchEmpresaByRequest(request);
+	}
+
+	@Override
+	public InternalResultsResponse<Filial> insertFilial(FilialMaintenanceRequest request)
+	{
+		InternalResultsResponse<Filial> response = new InternalResultsResponse<Filial>();
+
+		response = getEmpresaDAC().insertFilial(request.getFilial());
+
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Filial> updateFilial(FilialMaintenanceRequest request)
+	{
+		InternalResultsResponse<Filial> response = new InternalResultsResponse<Filial>();
+
+		response = getEmpresaDAC().updateFilial(request.getFilial());
+
+		return response;
+	}
+
+	@Override
+	public InternalResponse deleteFilial(FilialMaintenanceRequest request)
+	{
+		return getEmpresaDAC().deleteFilial(request.getFilial());
+	}
+
+	@Override
+	public InternalResultsResponse<Filial> fetchFilialById(FetchByIdRequest request)
+	{
+		return getEmpresaDAC().fetchFilialById(request);
+	}
+
+	@Override
+	public InternalResultsResponse<Filial> fetchFilialByRequest(FilialInquiryRequest request)
+	{
+		return getEmpresaDAC().fetchFilialByRequest(request);
+	}
+
+	@Override
+	public InternalResultsResponse<Deposito> insertDeposito(DepositoMaintenanceRequest request)
+	{
+		InternalResultsResponse<Deposito> response = new InternalResultsResponse<Deposito>();
+
+		response = getEmpresaDAC().insertDeposito(request.getDeposito());
+
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Deposito> updateDeposito(DepositoMaintenanceRequest request)
+	{
+		InternalResultsResponse<Deposito> response = new InternalResultsResponse<Deposito>();
+
+		response = getEmpresaDAC().updateDeposito(request.getDeposito());
+
+		return response;
+	}
+
+	@Override
+	public InternalResponse deleteDeposito(DepositoMaintenanceRequest request)
+	{
+		return getEmpresaDAC().deleteDeposito(request.getDeposito());
+	}
+
+	@Override
+	public InternalResultsResponse<Deposito> fetchDepositoById(FetchByIdRequest request)
+	{
+		return getEmpresaDAC().fetchDepositoById(request);
+	}
+
+	@Override
+	public InternalResultsResponse<Deposito> fetchDepositoByRequest(DepositoInquiryRequest request)
+	{
+		return getEmpresaDAC().fetchDepositoByRequest(request);
+	}
+
+	@Override
+	public InternalResultsResponse<Cnae> fetchCnaeByRequest(CnaeInquiryRequest request)
+	{
+		return getEmpresaDAC().fetchCnaeByRequest(request);
+	}
+
+	@Override
+	public InternalResultsResponse<Regime> fetchRegimeByRequest(RegimeInquiryRequest request)
+	{
+		return getEmpresaDAC().fetchRegimeByRequest(request);
+	}
+
+	@Override
+	public InternalResultsResponse<Cidade> fetchCidadeByRequest(CidadeInquiryRequest request)
+	{
+		return getEmpresaDAC().fetchCidadeByRequest(request);
+	}
+
+	@Override
+	public InternalResultsResponse<Plano> fetchPlanoByRequest(PlanoInquiryRequest request)
+	{
+		return getEmpresaDAC().fetchPlanoByRequest(request);
+	}
+
+	@Override
+	public InternalResultsResponse<Classificacao> fetchClassificacaoByRequest(ClassificacaoInquiryRequest request)
+	{
+		return getEmpresaDAC().fetchClassificacaoByRequest(request);
 	}
 }
