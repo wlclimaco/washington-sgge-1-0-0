@@ -35,11 +35,12 @@ CONSTRAINT [pk_regime_id] PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 
 /** ---------------------------------------------------------------*/
-DROP TABLE [dbo].[empresa];
-CREATE TABLE [dbo].[empresa] (
+DROP TABLE [dbo].[entidade];
+CREATE TABLE [dbo].[entidade] (
 	[id]           [int] identity(1,1) NOT NULL,
 	[nome]         [varchar](100) NULL,
 	[regime]       [int] NULL,
+	[emprId]       [int] NULL,
 	[processId]    [int] NULL,
 	[entidadeId]   [int] NULL,
 	[entidadeEnum] [int] NULL,
@@ -1893,6 +1894,27 @@ CREATE TABLE [dbo].[fieldBusca](
     [modify_date]    [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]    [varchar](50) NULL,
 CONSTRAINT [pk_fieldBusca_id] PRIMARY KEY CLUSTERED
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+DROP TABLE [dbo].[plano];
+CREATE TABLE [dbo].[plano](
+	[id]             [int] identity(1,1) NOT NULL,
+	[emprId]         [int]  NULL,
+	[dataFinal]      [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[dataInicio]     [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[desconto]       [real]  NULL,
+	[numeroContrato] [int]  NULL,
+	[produto]        [int]  NULL,
+	[processId]      [int]  NULL,
+	[create_date]    [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  	 [varchar](50) NULL,
+    [modify_date]    [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]    [varchar](50) NULL,
+CONSTRAINT [pk_plano_id] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
