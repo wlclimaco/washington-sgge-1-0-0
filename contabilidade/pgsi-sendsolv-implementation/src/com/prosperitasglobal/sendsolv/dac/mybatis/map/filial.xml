@@ -4,7 +4,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="EmpresaMap">
+<mapper namespace="FilialMap">
 
 	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
@@ -20,9 +20,7 @@
     [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,-->
 
-  <resultMap id="entidadeResult" type="Empresa" extends="EntidadeMap.entidadeResult">
-	<collection property="socios" column="id" select="SocioMap.fetchSocioByEmpresaId"/>
-	<collection property="planoList" column="id" select="PlanoMap.fetchPlanoByEmpresa"/>
+  <resultMap id="filialResult" type="Filial" extends="EntidadeMap.entidadeResult">
   </resultMap>
 
 
@@ -30,44 +28,44 @@
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
-  <sql id="allEmpresaColumns">
+  <sql id="allFilialColumns">
 			<include refid="EntidadeMap.allEntidadeColumns"/>
   </sql>
 
-  <sql id="allEmpresaValues">
+  <sql id="allFilialValues">
   			<include refid="EntidadeMap.allEntidadeValues"/>
   </sql>
 
-  <select id="fetchEmpresaRowCount" parameterType="EmpresaInquiryRequest" resultType="Integer">
+  <select id="fetchFilialRowCount" parameterType="FilialInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM entidade
         where entidadeEnum = entidadeEnumValue
 
   </select>
 
-  <select id="fetchAllEmpresas" resultMap="entidadeResult">
+  <select id="fetchAllFilials" resultMap="filialResult">
     SELECT
-	<include refid="allEmpresaColumns" />
+	<include refid="allFilialColumns" />
     FROM entidade ORDER BY nome ASC
   </select>
 
-  <select id="fetchEmpresaById" parameterType="FetchByIdRequest" resultMap="entidadeResult">
+  <select id="fetchFilialById" parameterType="FetchByIdRequest" resultMap="filialResult">
     			   SELECT
-					b.id,	<include refid="allEmpresaColumns" />
+					b.id,	<include refid="allFilialColumns" />
  				   FROM entidade b
 					where b.id = #{id}
   </select>
 
-    <select id="fetchEmpresaByNota" parameterType="Integer" resultMap="entidadeResult">
+    <select id="fetchFilialByNota" parameterType="Integer" resultMap="filialResult">
     			   SELECT
-					b.id,	<include refid="allEmpresaColumns" />
+					b.id,	<include refid="allFilialColumns" />
  				   FROM entidade b
 					where b.id = #{id}
   </select>
 
-  <select id="fetchAllEmpresasByRequest" parameterType="EmpresaInquiryRequest" resultMap="entidadeResult">
+  <select id="fetchAllFilialsByRequest" parameterType="FilialInquiryRequest" resultMap="filialResult">
      SELECT * FROM ( SELECT b.id,
-    						<include refid="allEmpresaColumns" />,
+    						<include refid="allFilialColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM entidade b
 						where b.entidadeEnum = entidadeEnum
@@ -96,20 +94,6 @@
 				</choose>
   </select>
 
-
-  <select id="fetchAllFilialByEmpresa" parameterType="Integer" resultMap="filialResult">
-    			   SELECT
-					b.id,	<include refid="allEmpresaColumns" />
- 				   FROM entidade b
-					where b.entidadeEnum = 2 and b.entidadeId = #{id}
-  </select>
-
-  <select id="fetchAllDepositoByEmpresa" parameterType="Integer" resultMap="depositoResult">
-   			  SELECT
-					b.id,	<include refid="allEmpresaColumns" />
- 				   FROM entidade b
-					where b.entidadeEnum = 3 and b.entidadeId = #{id}
-  </select>
 
 
 </mapper>
