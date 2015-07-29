@@ -391,3 +391,251 @@ table.dataTable thead .sorting:after {
  #buttonInsert {
 	margin-right: 34px!Important;
  }
+
+
+.content .box, .ui-tabs .ui-tabs-panel .box {
+	border: #D8D8D8 solid 1px;
+	background-color: #F8F8F8;
+	float: left;
+	word-wrap: break-word;
+	padding: 10px 10px 10px 10px;
+	width: 268px;
+	box-sizing: border-box;
+	position: absolute;
+}
+
+.box a {
+	float: left;
+}
+
+.outer-box {
+	position: relative;
+	float: left;
+	width: 268px;
+	margin: 0px 14px 14px 0;
+}
+
+section.view {
+	display: table;
+	width: 100%;
+}
+
+section.view div.col-title {
+	display: table-cell;
+	width: 8%;
+	vertical-align: top;
+	padding: 11px 0 10px 0;
+	min-width: 141px;
+}
+
+section.view div.col-title h4 {
+	width: 100%;
+}
+
+ section.view div.title h4 {
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+section.view p.empty {
+	color: gray;
+	font-size: 15px;
+	font-weight: bold;
+	padding-top: 15px;
+}
+
+section.view div.container {
+	display: table-cell;
+	width: 90%;
+	vertical-align: middle;
+	float: left;
+	padding-top: 14px;
+}
+
+#tabs .box a:hover {
+	text-decoration: none;
+}
+
+#tabs .box span.bold {
+	font-weight: bold;
+}
+
+#tabs .box.note span.bold {
+	margin-right: 15px;
+}
+
+#tabs .box.note span.bold {
+	font-size: 13px;
+	margin-left: -2px;
+}
+
+#tabs .box.note span.date {
+	float: right;
+}
+
+#tabs h4 {
+	float: left;
+	display: inline-block;
+	line-height: 26px;
+	padding-right: 20px;
+}
+
+#tabs section .title{
+	overflow: hidden;
+	margin-bottom: 10px;
+	margin-right: 5px;
+}
+
+#tabs section.summary {
+	position: relative;
+	float: left;
+	margin-right: 70px;
+}
+
+#tabs section.risk {
+	position: relative;
+	float: left;
+}
+
+#tabs section.risk .col-title {
+	float: left;
+	clear: left;
+}
+
+#tabs section a.ui-subtitle {
+ 	display: inline-block;
+ 	clear: right;
+ 	float: left;
+ 	position: relative;
+ 	margin-top: 3px;
+}
+
+#tabs section .box a.ui-subtitle {
+	color: white;
+	font-weight: normal;
+}
+
+.links .icon-nav{
+	bottom: -3px;
+    line-height: 14px;
+    margin-right: 3px;
+    padding: 2px 3px 0;
+    position: relative;
+}
+
+#tabs section a.ui-subtitle span{
+	float: left;
+}
+
+#tabs section a.ui-subtitle span:nth-child(2){
+	margin: 2px 0 0 3px;
+}
+
+
+#tabs section.summary .label,
+#tabs section.summary .text {
+	line-height: 150%;
+}
+
+#tabs section.summary .label {
+	display: inline-block;
+	float: left;
+	clear: left;
+}
+#tabs section.summary .column {
+	display: block;
+	position: relative;
+	float: left;
+	margin-top: 10px;
+}
+
+#tabs section.summary .column.first {
+	clear: left;
+	max-width: 300px;
+}
+
+#tabs section.summary .column.first span.text {
+	max-width: 200px;
+}
+
+#tabs section.summary .column.second {
+	margin-right: 35px;
+	margin-left: 25px;
+}
+
+#tabs section.summary .column.first .label {
+	min-width: 125px;
+}
+
+
+#tabs section .box:hover {
+	background: #FFFFFF !important;
+	border: #60C472 solid 1px !important;
+	z-index: 50;
+}
+
+
+#tabs section div.small-box {
+	height: 28px;
+	margin: -41px 0 0 -11px;
+	float: left;
+	display: none;
+	width: 268px;
+}
+
+#tabs section div.small-box .links {
+	text-align: right;
+	border: #60C472 solid 1px;
+	float: right;
+	background: #32B449;
+	padding: 1px 6px 1px 2px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+#tabs section .box.hover .small-box, #tabs section .box:hover .small-box {
+		display: block;
+}
+#tabs section div.small-box .links a {
+	float: none;
+}
+
+#tabs section div.small-box .links a:nth-child(1),
+#tabs section div.small-box .links a:nth-child(2),
+#tabs section div.small-box .links a:nth-child(3) {
+	margin-right: 5px;
+}
+
+#tabs section div.box.action-required div.small-box .links,
+#tabs section div.box.action-required:hover {
+	border-color: #C3383B !important;
+}
+
+
+#tabs section div.small-box {
+	height: 28px;
+	margin: -41px 0 0 -11px;
+	float: left;
+	display: none;
+	width: 268px;
+}
+
+#tabs section div.small-box .links {
+	text-align: right;
+	border: #60C472 solid 1px;
+	float: right;
+	background: #00BA8B;
+	padding: 1px 6px 1px 2px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+#tabs section div.small-box .links a {
+	float: none;
+}
+
+#tabs section div.small-box .links a:nth-child(1),
+#tabs section div.small-box .links a:nth-child(2),
+#tabs section div.small-box .links a:nth-child(3) {
+	margin-right: 5px;
+}
