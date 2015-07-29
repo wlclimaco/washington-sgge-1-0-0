@@ -31,13 +31,7 @@ public class Entidade extends ModelCosmeDamiao
 
 	private List<Telefone> Telefones;
 
-	private List<Socio> socios;
-
 	private List<CnaeEmpresa> cnaes;
-
-	private List<Filial> filialList;
-
-	private List<Deposito> depositoList;
 
 	/**
 	 * Default constructor.
@@ -158,22 +152,6 @@ public class Entidade extends ModelCosmeDamiao
 	}
 
 	/**
-	 * @return the socios
-	 */
-	public List<Socio> getSocios()
-	{
-		return socios;
-	}
-
-	/**
-	 * @param socios the socios to set
-	 */
-	public void setSocios(List<Socio> socios)
-	{
-		this.socios = socios;
-	}
-
-	/**
 	 * @return the cnaes
 	 */
 	public List<CnaeEmpresa> getCnaes()
@@ -238,38 +216,6 @@ public class Entidade extends ModelCosmeDamiao
 	}
 
 	/**
-	 * @return the filialList
-	 */
-	public List<Filial> getFilialList()
-	{
-		return filialList;
-	}
-
-	/**
-	 * @param filialList the filialList to set
-	 */
-	public void setFilialList(List<Filial> filialList)
-	{
-		this.filialList = filialList;
-	}
-
-	/**
-	 * @return the depositoList
-	 */
-	public List<Deposito> getDepositoList()
-	{
-		return depositoList;
-	}
-
-	/**
-	 * @param depositoList the depositoList to set
-	 */
-	public void setDepositoList(List<Deposito> depositoList)
-	{
-		this.depositoList = depositoList;
-	}
-
-	/**
 	 * @return the entidadeId
 	 */
 	public Integer getEntidadeId()
@@ -294,15 +240,14 @@ public class Entidade extends ModelCosmeDamiao
 	{
 		return "Entidade [getEntidadeEnumValue()=" + getEntidadeEnumValue() + ", getId()=" + getId() + ", getNome()="
 				+ getNome() + ", getEnderecos()=" + getEnderecos() + ", getDocumentos()=" + getDocumentos()
-				+ ", getEmails()=" + getEmails() + ", getTelefones()=" + getTelefones() + ", getSocios()="
-				+ getSocios() + ", getCnaes()=" + getCnaes() + ", getRegime()=" + getRegime() + ", getEntidadeEnum()="
-				+ getEntidadeEnum() + ", getConfiguracao()=" + getConfiguracao() + ", getFilialList()="
-				+ getFilialList() + ", getDepositoList()=" + getDepositoList() + ", getEntidadeId()=" + getEntidadeId()
-				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
-				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
-				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
-				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
-				+ ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId() + ", toString()="
+				+ ", getEmails()=" + getEmails() + ", getTelefones()=" + getTelefones() + ", getCnaes()=" + getCnaes()
+				+ ", getRegime()=" + getRegime() + ", getEntidadeEnum()=" + getEntidadeEnum() + ", getConfiguracao()="
+				+ getConfiguracao() + ", getEntidadeId()=" + getEntidadeId() + ", getTabelaEnumValue()="
+				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
+				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
+				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
+				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", getProcessId()="
+				+ getProcessId() + ", getUserId()=" + getUserId() + ", getNotes()=" + getNotes() + ", toString()="
 				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
 				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
 				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
