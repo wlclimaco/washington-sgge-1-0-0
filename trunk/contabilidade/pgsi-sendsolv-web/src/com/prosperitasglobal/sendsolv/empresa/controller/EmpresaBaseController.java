@@ -12,11 +12,17 @@ import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
 import com.prosperitasglobal.sendsolv.bai.IEmpresaBAI;
 import com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.DepositoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.DepositoMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.FilialInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FilialMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.RegimeInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.response.CnaeResponse;
+import com.prosperitasglobal.sendsolv.model.response.DepositoResponse;
 import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
+import com.prosperitasglobal.sendsolv.model.response.FilialResponse;
 import com.prosperitasglobal.sendsolv.model.response.RegimeResponse;
 import com.qat.framework.validation.ValidationUtil;
 
@@ -128,6 +134,50 @@ public class EmpresaBaseController extends UtilControllerD
 		return empresaResponse;
 	}
 
+	// filial
+	public FilialResponse fetchFilialByRequest(FilialInquiryRequest pagedInquiryRequest)
+	{
+
+		FilialResponse empresaResponse = new FilialResponse();
+		try
+		{
+
+			empresaResponse = getEmpresaBAI().fetchFilialByRequest(pagedInquiryRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return empresaResponse;
+	}
+
+	// deposito
+	public DepositoResponse fetchDepositoByRequest(DepositoInquiryRequest pagedInquiryRequest)
+	{
+
+		DepositoResponse empresaResponse = new DepositoResponse();
+		try
+		{
+
+			empresaResponse = getEmpresaBAI().fetchDepositoByRequest(pagedInquiryRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return empresaResponse;
+	}
+
 	// cnae
 	public CnaeResponse fetchCnaeByRequest(CnaeInquiryRequest pagedInquiryRequest)
 	{
@@ -199,6 +249,48 @@ public class EmpresaBaseController extends UtilControllerD
 		return empresaResponse;
 	}
 
+	public FilialResponse fetchFilialById(FetchByIdRequest fetchByIdRequest)
+	{
+
+		FilialResponse empresaResponse = new FilialResponse();
+		try
+		{
+
+			empresaResponse = getEmpresaBAI().fetchFilialById(fetchByIdRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return empresaResponse;
+	}
+
+	public DepositoResponse fetchDepositoById(FetchByIdRequest fetchByIdRequest)
+	{
+
+		DepositoResponse empresaResponse = new DepositoResponse();
+		try
+		{
+
+			empresaResponse = getEmpresaBAI().fetchDepositoById(fetchByIdRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return empresaResponse;
+	}
+
 	public EmpresaResponse insert(EmpresaMaintenanceRequest locationRequest)
 	{
 		EmpresaResponse locationResponse = new EmpresaResponse();
@@ -208,6 +300,46 @@ public class EmpresaBaseController extends UtilControllerD
 
 			locationRequest.getEmpresa().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
 			locationResponse = getEmpresaBAI().insertEmpresa(locationRequest);
+		}
+		catch (Exception e)
+		{
+			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			locationResponse = null;
+		}
+
+		return locationResponse;
+
+	}
+
+	public FilialResponse insert(FilialMaintenanceRequest locationRequest)
+	{
+		FilialResponse locationResponse = new FilialResponse();
+
+		try
+		{
+
+			locationRequest.getFilial().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
+			locationResponse = getEmpresaBAI().insertFilial(locationRequest);
+		}
+		catch (Exception e)
+		{
+			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			locationResponse = null;
+		}
+
+		return locationResponse;
+
+	}
+
+	public DepositoResponse insert(DepositoMaintenanceRequest locationRequest)
+	{
+		DepositoResponse locationResponse = new DepositoResponse();
+
+		try
+		{
+
+			locationRequest.getDeposito().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
+			locationResponse = getEmpresaBAI().insertDeposito(locationRequest);
 		}
 		catch (Exception e)
 		{
@@ -238,6 +370,44 @@ public class EmpresaBaseController extends UtilControllerD
 
 	}
 
+	public FilialResponse delete(FilialMaintenanceRequest locationRequest)
+	{
+		FilialResponse locationResponse = new FilialResponse();
+		try
+		{
+
+			locationResponse = getEmpresaBAI().deleteFilial(locationRequest);
+
+		}
+		catch (Exception e)
+		{
+			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			locationResponse = null;
+		}
+
+		return locationResponse;
+
+	}
+
+	public DepositoResponse delete(DepositoMaintenanceRequest locationRequest)
+	{
+		DepositoResponse locationResponse = new DepositoResponse();
+		try
+		{
+
+			locationResponse = getEmpresaBAI().deleteDeposito(locationRequest);
+
+		}
+		catch (Exception e)
+		{
+			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			locationResponse = null;
+		}
+
+		return locationResponse;
+
+	}
+
 	public EmpresaResponse edit(EmpresaMaintenanceRequest locationRequest)
 	{
 		EmpresaResponse locationResponse = new EmpresaResponse();
@@ -245,6 +415,42 @@ public class EmpresaBaseController extends UtilControllerD
 		{
 
 			locationResponse = getEmpresaBAI().updateEmpresa(locationRequest);
+
+		}
+		catch (Exception e)
+		{
+			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			locationResponse = null;
+		}
+		return locationResponse;
+
+	}
+
+	public FilialResponse edit(FilialMaintenanceRequest locationRequest)
+	{
+		FilialResponse locationResponse = new FilialResponse();
+		try
+		{
+
+			locationResponse = getEmpresaBAI().updateFilial(locationRequest);
+
+		}
+		catch (Exception e)
+		{
+			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			locationResponse = null;
+		}
+		return locationResponse;
+
+	}
+
+	public DepositoResponse edit(DepositoMaintenanceRequest locationRequest)
+	{
+		DepositoResponse locationResponse = new DepositoResponse();
+		try
+		{
+
+			locationResponse = getEmpresaBAI().updateDeposito(locationRequest);
 
 		}
 		catch (Exception e)

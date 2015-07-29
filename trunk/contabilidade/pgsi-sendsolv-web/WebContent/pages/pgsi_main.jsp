@@ -10,12 +10,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 
+	<link rel="stylesheet" href="styles/jquery-ui.min.css" />
+
 	<link href="styles/bootstrap.css" rel="stylesheet">
 
 	<link href="styles/bootstrap-responsive.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="styles//metisMenu.min.css" rel="stylesheet">
+    <link href="styles/metisMenu.min.css" rel="stylesheet">
 
     <!-- DataTables CSS -->
     <link href="styles/dataTables.bootstrap.css" rel="stylesheet">

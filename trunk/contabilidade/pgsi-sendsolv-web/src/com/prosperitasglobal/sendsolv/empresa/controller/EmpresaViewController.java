@@ -13,9 +13,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.prosperitasglobal.sendsolv.filter.FilterFactory;
 import com.prosperitasglobal.sendsolv.filter.model.response.FiltersResponse;
+import com.prosperitasglobal.sendsolv.model.criteria.DepositoCriteria;
 import com.prosperitasglobal.sendsolv.model.criteria.EmpresaCriteria;
 import com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.DepositoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FilialInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.RegimeInquiryRequest;
 import com.qat.framework.model.SortExpression;
 import com.qat.framework.model.SortExpression.Direction;
@@ -54,9 +57,6 @@ public class EmpresaViewController extends EmpresaBaseController
 
 	/** The Constant EDIT_VIEW. */
 	private static final String EDIT_VIEW = "/editView";
-
-	/** The Constant FETCH_ORGANIZATION_BYEMPRESA. */
-	private static final String FETCH_ORGANIZATION_BYEMPRESA = "fetchOrganizationBylocation";
 
 	/** The view mapping constants . */
 	private static final String VIEW_EMPRESA_MAIN = "/empresa/empresa_main";
@@ -263,7 +263,7 @@ public class EmpresaViewController extends EmpresaBaseController
 			return modelAndView;
 		}
 
-		EmpresaInquiryRequest pagedInquiryRequest = new EmpresaInquiryRequest();
+		FilialInquiryRequest pagedInquiryRequest = new FilialInquiryRequest();
 		EmpresaCriteria criteria = new EmpresaCriteria();
 		criteria.setEntidadeEnum(2);
 		pagedInquiryRequest.setCriteria(criteria);
@@ -277,7 +277,7 @@ public class EmpresaViewController extends EmpresaBaseController
 		{
 
 			modelAndView.addObject(RESPONSE, getMapper()
-					.writeValueAsString(fetchEmpresaByRequest(pagedInquiryRequest)));
+					.writeValueAsString(fetchFilialByRequest(pagedInquiryRequest)));
 
 			FiltersResponse filtersResponse = new FiltersResponse();
 			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);
@@ -308,9 +308,9 @@ public class EmpresaViewController extends EmpresaBaseController
 			return modelAndView;
 		}
 
-		EmpresaInquiryRequest pagedInquiryRequest = new EmpresaInquiryRequest();
+		DepositoInquiryRequest pagedInquiryRequest = new DepositoInquiryRequest();
 
-		EmpresaCriteria criteria = new EmpresaCriteria();
+		DepositoCriteria criteria = new DepositoCriteria();
 		criteria.setEntidadeEnum(3);
 		pagedInquiryRequest.setCriteria(criteria);
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
@@ -323,7 +323,7 @@ public class EmpresaViewController extends EmpresaBaseController
 		{
 
 			modelAndView.addObject(RESPONSE, getMapper()
-					.writeValueAsString(fetchEmpresaByRequest(pagedInquiryRequest)));
+					.writeValueAsString(fetchDepositoByRequest(pagedInquiryRequest)));
 
 			FiltersResponse filtersResponse = new FiltersResponse();
 			getFilterFactory().configureFilter(BUSINESS, null, filtersResponse);

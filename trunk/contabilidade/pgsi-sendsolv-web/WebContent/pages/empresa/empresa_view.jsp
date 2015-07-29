@@ -19,73 +19,150 @@
 					Data
 				</li>
 			</ul>
-			<ul class="nav nav-pills">
-				<li class="active">
-					<a href="#">Home</a>
-				</li>
-				<li>
-					<a href="#">Profile</a>
-				</li>
-				<li class="disabled">
-					<a href="#">Messages</a>
-				</li>
-				<li class="dropdown pull-right">
-					 <a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown<strong class="caret"></strong></a>
-					<ul class="dropdown-menu">
-						<li>
-							<a href="#">Action</a>
-						</li>
-						<li>
-							<a href="#">Another action</a>
-						</li>
-						<li>
-							<a href="#">Something else here</a>
-						</li>
-						<li class="divider">
-						</li>
-						<li>
-							<a href="#">Separated link</a>
-						</li>
-					</ul>
-				</li>
-			</ul>
 			<div class="page-header">
 				<h1>
-					LayoutIt! <small>Interface Builder for Bootstrap</small>
+					<small id="nome-empresa"></small>
 				</h1>
 			</div>
 			<div class="row">
 				<div class="col-md-4">
-					<span class="label label-default">Label</span>
-						<s:message code="pages.business.view.dbaname" text="default text" />
-					</span><br>
-					<span class="text organization hide" id="dba-field"></span><br>
+					<span class="label organization hide">
+					<s:message code="pages.business.view.dbaname" text="default text" />
+					</span>
 
-					<span class="label label-default">Label</span>Nome/Fantasia</span>
+					<span class="text organization hide" id="dba-field"></span>
+
+					<span class="label label-default">Nome/Fantasia</span>
 					<span class="text" id="nome-field"></span><br>
 
-					<span class="label label-default">Label</span>CNPJ</span>
+					<span class="label label-default">CNPJ</span>
 					<span class="text" id="cnpj-field"></span><br>
 
-					<span class="label label-default">Label</span>Inscricao Municipal</span>
+					<span class="label label-default">Inscricao Municipal</span>
 					<span class="text" id="im-field"></span><br>
 
-					<span class="label label-default">Label</span>Inscricao Estadual</span>
+					<span class="label label-default">Inscricao Estadual</span>
 					<span class="text" id="IE-field"></span><br>
 				</div>
 				<div class="col-md-4">
-					 <span class="label label-default">Label</span> <span class="label label-default">Label</span> <span class="label label-default">Label</span> <span class="label label-default">Label</span>
+
+					<span class="label label-default">Regime</span>
+					<span class="text" id="regime-field"></span><br>
+
+					<span class="label label-default">Quantidade Funcionarios :</span>
+					<span class="text" id="migrant-members-field"></span><br>
+
+					<span class="label label-default">Quantidade Clientes :</span>
+					<span class="text organization hide" id="total-locations-field"></span><br>
+
+					<span class="label label-default">Plano :</span>
+					<span class="text location" id="enrolled-members"></span><br>
+
 				</div>
 				<div class="col-md-4">
-					 <span class="label label-default">Label</span> <span class="label label-default">Label</span> <span class="label label-default">Label</span> <span class="label label-default">Label</span>
+					<span class="label label-default">Endereço</span> <br>
+					<span class="text" id="street-address-line-1-field"></span>
+					<span class="text" id="street-address-line-2-field"></span>
+					<span class="text" id="street-address-line-3-field"></span>
+					<span class="text" id="street-address-line-4-field"></span>
+					<span class="text"><span id="city-field"></span><span id="state-province-region-field"></span>
+					<span id="zip-postal-code-field"></span></span> <span class="text" id="country-field"></span>
+					<span class="label label-default">Telefone</span> <br>
+					<div id="phone-container"></div>
+					<span class="label label-default">Email</span> <br>
+					<div id="email-container"></div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-8">
-				</div>
-				<div class="col-md-4">
+					<section class="notes view">
+						<div class="col-title">
+							<h4 class="ui-subtitle"><s:message code="pages.view.notes" text="default text" /></h4>
+							<div class="viewNote">
+							<a href="javascript:;" class="ui-subtitle add-note" id="add-note" title='<s:message code="commons.pages.addnote" text="default text" />'>
+								<span class="icon-small-button icon-nav icon-plus"></span>
+								<span><s:message code="commons.pages.addnote" text="default text" /></span>
+							</a>
+							</div>
+						</div>
+						<div class="container">
+							<p class="empty"><s:message code="page.business.view.note.empty" text="default text" /></p>
+						</div>
+
+					</section>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<section class="contact view">
+						<div class="col-title links">
+							<h4 class="ui-subtitle ">Plano</h4>
+							<a href="0" class="ui-subtitle buttonContact add" id="add-contact" title='<s:message code="commons.pages.addnew" text="default text" />'>
+								<span class="icon-small-button icon-nav icon-pencil add"></span>
+								<span>Plano</span>
+							</a>
+						</div>
+
+						<div class="container">
+							<p class="empty"><s:message code="page.business.view.contact.empty" text="default text" /></p>
+						</div>
+
+					</section>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4">
+					<section class="cnae view">
+						<div class="col-title links">
+							<h4 class="ui-subtitle ">Cnae</h4>
+							<a href="0" class="ui-subtitle buttonContact add" id="add-contact" title='<s:message code="commons.pages.addnew" text="default text" />'>
+								<span class="icon-small-button icon-nav icon-pencil add"></span>
+								<span>Add Cnae</span>
+							</a>
+						</div>
+
+						<div class="container">
+							<p class="empty"><s:message code="page.business.view.contact.empty" text="default text" /></p>
+						</div>
+
+					</section>
+				</div>
+			</div>
+			<div class="row organization last">
+				<div class="col-md-4">
+					<section class="documents view">
+						<div class="col-title">
+							<h4 class="ui-subtitle">Filial</h4>
+							<div class="links">
+								<a href="javascript:;" class="ui-subtitle" id="add-document" title='<s:message code="commons.pages.addnew" text="default text" />'>
+									<span class="icon-small-button icon-nav icon-plus"></span>
+									<span>Inserir nova Filial</span>
+								</a>
+							</div>
+						</div>
+						<div class="container"></div>
+					</section>
+				</div>
+			</div>
+
+			<div class="row organization last">
+				<div class="col-md-4">
+					<section class="documents view">
+						<div class="col-title">
+							<h4 class="ui-subtitle">Deposito</h4>
+							<div class="links">
+								<a href="javascript:;" class="ui-subtitle" id="add-document" title='<s:message code="commons.pages.addnew" text="default text" />'>
+									<span class="icon-small-button icon-nav icon-plus"></span>
+									<span>Inserir novo Deposito</span>
+								</a>
+							</div>
+						</div>
+						<div class="container"></div>
+					</section>
+				</div>
+			</div>
+
 		</div>
 	</div>
 </div>
