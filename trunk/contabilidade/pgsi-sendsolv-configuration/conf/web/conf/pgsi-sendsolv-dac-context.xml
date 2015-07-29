@@ -242,6 +242,7 @@
  		<property name="documentoDAC" ref="documentoDACTarget" />
  		<property name="historicoDAC" ref="historicoDACTarget" />
  		<property name="statusDAC" ref="statusDACTarget" />
+ 		<property name="planoDAC" ref="planoDACTarget" />
  	</bean>
 
 
@@ -356,6 +357,10 @@
  	</bean>
 
  	<bean id="horaFuncDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.HoraFuncDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+ 	<bean id="planoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.PlanoDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 
