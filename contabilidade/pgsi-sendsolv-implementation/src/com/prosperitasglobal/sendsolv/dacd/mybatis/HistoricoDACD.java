@@ -1,5 +1,6 @@
 package com.prosperitasglobal.sendsolv.dacd.mybatis;
 
+import java.util.Date;
 import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -8,6 +9,7 @@ import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 import com.prosperitasglobal.sendsolv.model.AcaoEnum;
 import com.prosperitasglobal.sendsolv.model.Historico;
+import com.prosperitasglobal.sendsolv.model.HistoricoItens;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.TypeEnum;
 import com.qat.framework.model.response.InternalResultsResponse;
@@ -73,5 +75,44 @@ public final class HistoricoDACD extends SqlSessionDaoSupport
 		}
 
 		return count;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static Integer inserthistoricoItens(Integer id, String userId, InternalResultsResponse<?> response,
+			TabelaEnum tabelaEnum, AcaoEnum acaoType, Integer historico, IHistoricoDAC historicoDAC)
+	{
+		HistoricoItens historicoItens = new HistoricoItens();
+		historicoItens.setIdHist(historico);
+		historicoItens.setProcessId(historico);
+		historicoItens.setParentId(id);
+		historicoItens.setTabelaEnum(tabelaEnum);
+		historicoItens.setAcaoType(acaoType);
+
+		historicoDAC.insertHistoricoItens(historicoItens,
+				"insertHistorico", response);
+
+		return historicoItens.getId();
+	}
+
+	@SuppressWarnings("unchecked")
+	public static Integer inserthistorico(Integer id, Integer emprId, String userId,
+			InternalResultsResponse<?> response,
+			TabelaEnum tabelaEnum,
+			AcaoEnum acaoType, IHistoricoDAC historicoDAC)
+	{
+		Historico historico = new Historico();
+		historico.setParentId(id);
+		historico.setEmprId(emprId);
+		historico.setUserId(userId);
+		historico.setAcaoType(acaoType);
+		historico.setTabelaEnum(tabelaEnum);
+		historico.setProcessId(0);
+		Date a = new Date();
+		historico.setData(a.getTime());
+		historico.setCreateDateUTC(a.getTime());
+		historicoDAC.insertHistorico(historico,
+				"insertHistorico", response);
+
+		return historico.getId();
 	}
 }
