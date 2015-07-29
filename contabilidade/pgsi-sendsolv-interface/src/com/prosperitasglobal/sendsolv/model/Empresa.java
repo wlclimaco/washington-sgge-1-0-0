@@ -18,6 +18,10 @@ public class Empresa extends Entidade
 
 	private List<Socio> socios;
 
+	private List<Filial> filialList;
+
+	private List<Deposito> depositoList;
+
 	public Empresa()
 	{
 		super();
@@ -92,6 +96,38 @@ public class Empresa extends Entidade
 		this.socios = socios;
 	}
 
+	/**
+	 * @return the filialList
+	 */
+	public List<Filial> getFilialList()
+	{
+		return filialList;
+	}
+
+	/**
+	 * @param filialList the filialList to set
+	 */
+	public void setFilialList(List<Filial> filialList)
+	{
+		this.filialList = filialList;
+	}
+
+	/**
+	 * @return the depositoList
+	 */
+	public List<Deposito> getDepositoList()
+	{
+		return depositoList;
+	}
+
+	/**
+	 * @param depositoList the depositoList to set
+	 */
+	public void setDepositoList(List<Deposito> depositoList)
+	{
+		this.depositoList = depositoList;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -100,12 +136,13 @@ public class Empresa extends Entidade
 	public String toString()
 	{
 		return "Empresa [getPlanoList()=" + getPlanoList() + ", getQntFilial()=" + getQntFilial()
-				+ ", getQntDeposito()=" + getQntDeposito() + ", getSocios()=" + getSocios()
-				+ ", getEntidadeEnumValue()=" + getEntidadeEnumValue() + ", getId()=" + getId() + ", getNome()="
-				+ getNome() + ", getEnderecos()=" + getEnderecos() + ", getDocumentos()=" + getDocumentos()
-				+ ", getEmails()=" + getEmails() + ", getTelefones()=" + getTelefones() + ", getCnaes()=" + getCnaes()
-				+ ", getRegime()=" + getRegime() + ", getEntidadeEnum()=" + getEntidadeEnum() + ", getConfiguracao()="
-				+ getConfiguracao() + ", getEntidadeId()=" + getEntidadeId() + ", toString()=" + super.toString()
+				+ ", getQntDeposito()=" + getQntDeposito() + ", getSocios()=" + getSocios() + ", getFilialList()="
+				+ getFilialList() + ", getDepositoList()=" + getDepositoList() + ", getEntidadeEnumValue()="
+				+ getEntidadeEnumValue() + ", getId()=" + getId() + ", getNome()=" + getNome() + ", getEnderecos()="
+				+ getEnderecos() + ", getDocumentos()=" + getDocumentos() + ", getEmails()=" + getEmails()
+				+ ", getTelefones()=" + getTelefones() + ", getCnaes()=" + getCnaes() + ", getRegime()=" + getRegime()
+				+ ", getEntidadeEnum()=" + getEntidadeEnum() + ", getConfiguracao()=" + getConfiguracao()
+				+ ", getEntidadeId()=" + getEntidadeId() + ", toString()=" + super.toString()
 				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
 				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
 				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()

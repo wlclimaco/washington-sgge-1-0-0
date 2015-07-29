@@ -147,9 +147,9 @@
 				</choose>
   </select>
 
-  <select id="fetchPlanoByEmpresa" parameterType="Integer" resultMap="planoProdResult">
+  <select id="fetchPlanoByEmpresa" parameterType="Integer" resultMap="planoResult">
 	SELECT b.id,
-	<include refid="allPlanoProdColumns" />
+	<include refid="allPlanoColumns" />
     FROM plano b
     where emprId = #{id}
     ORDER BY id ASC

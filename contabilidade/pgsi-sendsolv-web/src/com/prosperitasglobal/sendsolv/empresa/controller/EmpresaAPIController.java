@@ -517,6 +517,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 		empresa.setTelefones(insertTelefone(modelAction));
 		empresa.setSocios(insertSocio(modelAction));
 		empresa.setCnaes(insertCnae(modelAction));
+		empresa.setPlanoList(insertPlano(modelAction));
 
 		empresa.setUserId("WASHINGTON");
 		return empresa;

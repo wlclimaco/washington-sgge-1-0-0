@@ -30,16 +30,14 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-    <association property="regime"    column="regime" select="RegimeMap.fetchRegimeByEntidade"  />
-   	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByEntidade"/>
-	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByEntidadeId"/>
-	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByEntidade"/>
-	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByEntidade"/>
-	<collection property="socios" column="id" select="SocioMap.fetchSocioByEntidadeId"/>
-	<collection property="cnaes" column="id" select="CnaeMap.fetchAllCnaesByEntidade"/>
-	<collection property="filialList" column="id" select="fetchAllFilialByEntidade"/>
-	<collection property="depositoList" column="id" select="fetchAllDepositoByEntidade"/>
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEntidade"/>
+    <association property="regime"    column="regime" select="RegimeMap.fetchRegimeByEmpresa"  />
+   	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByEmpresaId"/>
+	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByEmpresa"/>
+	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByEmpresa"/>
+	<collection property="socios" column="id" select="SocioMap.fetchSocioByEmpresaId"/>
+	<collection property="cnaes" column="id" select="CnaeMap.fetchAllCnaesByEmpresa"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
   </resultMap>
 
   <!--

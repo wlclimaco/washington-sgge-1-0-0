@@ -20,7 +20,7 @@
     [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,-->
 
-  <resultMap id="depositoResult" type="Deposito" extends="entidadeMap.EntidadeResult">
+  <resultMap id="depositoResult" type="Deposito" extends="EntidadeMap.entidadeResult">
 
   </resultMap>
 
@@ -93,6 +93,13 @@
 					 	ORDER BY RowNumber
 					</otherwise>
 				</choose>
+  </select>
+
+    <select id="fetchAllDepositoByEntidade" parameterType="Integer" resultMap="depositoResult">
+    			   SELECT
+					b.id,	<include refid="allDepositoColumns" />
+ 				   FROM entidade b
+					where b.emprId = #{id} and entidadeEnum = 3
   </select>
 
 
