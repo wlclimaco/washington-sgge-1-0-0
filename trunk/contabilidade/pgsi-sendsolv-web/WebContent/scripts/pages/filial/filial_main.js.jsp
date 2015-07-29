@@ -8,10 +8,9 @@
  * @namespace pgsi.pages.location
  * @fileoverview The main namespace for the Location List Page.
  */
-pgsi.pages.empresa = {
+pgsi.pages.filial = {
 
-
-	empresaTable: {
+	filialTable: {
 
 	}
 }

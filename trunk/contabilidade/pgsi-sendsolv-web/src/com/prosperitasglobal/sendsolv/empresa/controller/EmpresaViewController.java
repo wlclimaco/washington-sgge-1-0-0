@@ -264,9 +264,7 @@ public class EmpresaViewController extends EmpresaBaseController
 		}
 
 		FilialInquiryRequest pagedInquiryRequest = new FilialInquiryRequest();
-		EmpresaCriteria criteria = new EmpresaCriteria();
-		criteria.setEntidadeEnum(2);
-		pagedInquiryRequest.setCriteria(criteria);
+
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
 		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
 		pagedInquiryRequest.setPreQueryCount(true);

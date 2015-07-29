@@ -4,7 +4,7 @@
 <sec:authorize access="hasAnyRole('ROLE_DOMAIN ADMIN', 'ROLE_ADMIN', 'ROLE_CSR')">
 <script type="text/javascript">
 /**
- * @namespace pgsi.pages.location
+ * @namespace pgsi.pages.filial
  * @description The init namespace for the Location Page.
  */
 
@@ -23,21 +23,21 @@ $(document).ready(function()
 	</c:choose>
 
 	$.pgsi.listener.wait({
-		eventName 	: "locationList",
+		eventName 	: "filialList",
 		arguments 	: ["table"],
 		fnCallback 	: $.pgsi.progressBar.stopGlobal
 	});
 
 	/** * jQuery dataTable setup ** */
-	pgsi.pages.empresa.empresaTable = $('#data_list').dataTable($.pgsi.table.setTable(
+	pgsi.pages.filial.filialTable = $('#data_list').dataTable($.pgsi.table.setTable(
 	{
 		id 			: "#data_list",
-		sAjaxSource : "api/empresa/fetchall",
+		sAjaxSource : "api/empresa/fetchall/filial",
 		bPreLoad	: true,
 
 		ajax :
 		{
-			sObj		: "empresaList",
+			sObj		: "filialList",
 			oRequest	: PagedInquiryRequest,
 			fnRequest 	: function(){}
 		},
@@ -78,13 +78,6 @@ $(document).ready(function()
 			headerData 		: "Telefone",
 			order			: "country_column",
 			mRender 		: pgsi.pages.entidade.fnTelefone,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Regime",
-			order			: "sdn_status_column",
-			mRender 		: pgsi.pages.entidade.fnRegime,
 			sDefaultContent : "",
 			bSortable 		: false
 		},
@@ -149,10 +142,10 @@ $(document).ready(function()
 
 			</sec:authorize>
 
-			oActionSummary = $('<div><div><a href="location/view?tab=info&locationId=' + aData.id + '" title="View '+aData.name+'" id="update" class="icon-nav icon-pencil alist icon-small-button"></a>'
+			oActionSummary = $('<div><div><a href="filial/view?tab=info&filialId=' + aData.id + '" title="View '+aData.name+'" id="update" class="icon-nav icon-pencil alist icon-small-button"></a>'
 				+ sButtonStatus
 				+ sButtonDelete
-				+pgsi.util.page.fnInsertButtonSDNSAR(aData,"location")+"</div></div>");
+				+pgsi.util.page.fnInsertButtonSDNSAR(aData,"filial")+"</div></div>");
 
 			oActionSummary.find('a.deleteDialog, a.active, a.deactivate ,a.sarDialog').click(function (e) {
 				e.preventDefault();
@@ -167,7 +160,7 @@ $(document).ready(function()
 
 						// Validations for change pagination when delete one or more groups of last page.
 						var iStart;
-						var oSettings = pgsi.pages.location.empresaTable.fnSettings();
+						var oSettings = pgsi.pages.filial.filialTable.fnSettings();
 
 							// If exist just one group at last page and this group is deleted, the pagination back to previous page.
 							if (((oSettings._iRecordsDisplay - 1) % $('.dataTables_length').find('select').val() === 0)) {
@@ -175,7 +168,7 @@ $(document).ready(function()
 							}
 
 						$.pgsi.table.reloadTable({
-							table 		: pgsi.pages.location.empresaTable,
+							table 		: pgsi.pages.filial.filialTable,
 							iStart 		: iStart
 						});
 					}else{
@@ -187,30 +180,30 @@ $(document).ready(function()
 				if($(this).hasClass('deleteDialog'))
 				{
 					// Launch Delete Dialog
-					var oRequest = new LocationMaintenanceRequest({location : {id : aData.id, name: aData.name }});
+					var oRequest = new LocationMaintenanceRequest({filial : {id : aData.id, name: aData.name }});
 
 					pgsi.util.actiondialog.launchActionDialog(
 						"deleteDialog",
 						 pgsi.pages.business.dialogSettings.deleteDialog(
-						 	"api/location/delete",
+						 	"api/filial/delete",
 						 	 oRequest,
-						 	 $.pgsi.locale.get("pages.location.dialog.title", oRequest.location.name),
+						 	 $.pgsi.locale.get("pages.filial.dialog.title", oRequest.filial.name),
 						 	 fnCallBack,
-						 	 $.pgsi.locale.get("commons.pages.erroView", $.pgsi.locale.get("commons.pages.location"))
+						 	 $.pgsi.locale.get("commons.pages.erroView", $.pgsi.locale.get("commons.pages.filial"))
 						 ));
 
 				}else if($(this).hasClass('active')){
 
-					pgsi.util.page.fnUpdateStatus('api/location/fetch',parseInt(aData.id,10),'location',1,fnCallBack,"Activate Location for "+ aData.name, "<span>"+$.pgsi.locale.get("pages.person.dialog.status.question",$.pgsi.locale.get("pages.view.activate"),"Location")+"<br>" +$.pgsi.locale.get("pages.person.dialog.status.information",$.pgsi.locale.get("pages.view.activate"))+"<span>",true);
+					pgsi.util.page.fnUpdateStatus('api/filial/fetch',parseInt(aData.id,10),'filial',1,fnCallBack,"Activate Location for "+ aData.name, "<span>"+$.pgsi.locale.get("pages.person.dialog.status.question",$.pgsi.locale.get("pages.view.activate"),"Location")+"<br>" +$.pgsi.locale.get("pages.person.dialog.status.information",$.pgsi.locale.get("pages.view.activate"))+"<span>",true);
 				}else if($(this).hasClass('deactivate')){
-					pgsi.util.page.fnUpdateStatus('api/location/fetch',parseInt(aData.id,10),'location',2,fnCallBack,"Deactivate Location for "+ aData.name, "<span>"+$.pgsi.locale.get("pages.person.dialog.status.question",$.pgsi.locale.get("pages.view.deactivate"),"Location")+"<br>" +$.pgsi.locale.get("pages.person.dialog.status.information",$.pgsi.locale.get("pages.view.deactivate"))+"<span>",true);
+					pgsi.util.page.fnUpdateStatus('api/filial/fetch',parseInt(aData.id,10),'filial',2,fnCallBack,"Deactivate Location for "+ aData.name, "<span>"+$.pgsi.locale.get("pages.person.dialog.status.question",$.pgsi.locale.get("pages.view.deactivate"),"Location")+"<br>" +$.pgsi.locale.get("pages.person.dialog.status.information",$.pgsi.locale.get("pages.view.deactivate"))+"<span>",true);
 				}else if($(this).hasClass('sarDialog')){
 					pgsi.util.actiondialog.launchActionDialog(
 							"dialogSARDetail",
 							 pgsi.pages.sar.dialogSettings.dialogSARDetail(
 								 $.pgsi.locale.get("commons.title.table.SAR"),
 								 aData.id,
-								 "location",
+								 "filial",
 								 aData.name,
 								 aData.key
 							 ));
@@ -243,7 +236,7 @@ $(document).ready(function()
 			});
 
 			$.pgsi.listener.notify({
-				eventName 	: "locationList",
+				eventName 	: "filialList",
 				arguments 	: ["table"]
 			});
 		}
@@ -262,7 +255,7 @@ $(document).ready(function()
 				element			: ".filter",
 				tagsDiv			: ".filter-results-container div.first",
 				title			: $.pgsi.locale.get("commons.pages.filterTitle"),
-				table 			:  pgsi.pages.location.empresaTable,
+				table 			:  pgsi.pages.filial.filialTable,
 				filters 		: oResponse
 			});
 		});
@@ -272,14 +265,14 @@ $(document).ready(function()
 	$("#clear-all").on("click", function(e)
 	{
 		$.address.parameter("organization","");
-		$.address.parameter("location","");
-		pgsi.util.page.fnReloadTable(pgsi.pages.location.empresaTable);
+		$.address.parameter("filial","");
+		pgsi.util.page.fnReloadTable(pgsi.pages.filial.filialTable);
 	});
 	$("#buttonInsert").on("click", function(e)
 	{
 		e.preventDefault();
 		$.pgsi.ajax.post({
-			sUrl 		: "api/empresa/add",
+			sUrl 		: "api/filial/add",
 			oRequest 	: {},
 			fnCallback  : function(oResponse) {
 				console.log('dd')
