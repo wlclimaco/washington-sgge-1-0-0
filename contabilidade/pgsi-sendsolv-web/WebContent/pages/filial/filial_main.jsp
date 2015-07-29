@@ -37,17 +37,6 @@
 				<!-- /.nav-second-level -->
 			</li>
 			<li>
-				<a href="#"><i class="fa fa-files-o fa-fw"></i>Regime<span class="fa arrow"></span></a>
-				<ul class="nav nav-second-level">
-					<li>
-						<jsp:include page="../filtro/regime_form.jsp"></jsp:include>
-
-					</li>
-				</ul>
-				<!-- /.nav-second-level -->
-
-			</li>
-			<li>
 				<a href="#"><i class="fa fa-files-o fa-fw"></i>Estado<span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li>
