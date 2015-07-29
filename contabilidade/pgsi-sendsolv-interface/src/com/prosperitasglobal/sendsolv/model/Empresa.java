@@ -1,5 +1,7 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import java.util.List;
+
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -7,6 +9,14 @@ package com.prosperitasglobal.sendsolv.model;
 @SuppressWarnings("serial")
 public class Empresa extends Entidade
 {
+
+	private List<Plano> planoList;
+
+	private Integer qntFilial;
+
+	private Integer qntDeposito;
+
+	private List<Socio> socios;
 
 	public Empresa()
 	{
@@ -18,6 +28,70 @@ public class Empresa extends Entidade
 		setId(id);
 	}
 
+	/**
+	 * @return the planoList
+	 */
+	public List<Plano> getPlanoList()
+	{
+		return planoList;
+	}
+
+	/**
+	 * @param planoList the planoList to set
+	 */
+	public void setPlanoList(List<Plano> planoList)
+	{
+		this.planoList = planoList;
+	}
+
+	/**
+	 * @return the qntFilial
+	 */
+	public Integer getQntFilial()
+	{
+		return qntFilial;
+	}
+
+	/**
+	 * @param qntFilial the qntFilial to set
+	 */
+	public void setQntFilial(Integer qntFilial)
+	{
+		this.qntFilial = qntFilial;
+	}
+
+	/**
+	 * @return the qntDeposito
+	 */
+	public Integer getQntDeposito()
+	{
+		return qntDeposito;
+	}
+
+	/**
+	 * @param qntDeposito the qntDeposito to set
+	 */
+	public void setQntDeposito(Integer qntDeposito)
+	{
+		this.qntDeposito = qntDeposito;
+	}
+
+	/**
+	 * @return the socios
+	 */
+	public List<Socio> getSocios()
+	{
+		return socios;
+	}
+
+	/**
+	 * @param socios the socios to set
+	 */
+	public void setSocios(List<Socio> socios)
+	{
+		this.socios = socios;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -25,18 +99,19 @@ public class Empresa extends Entidade
 	@Override
 	public String toString()
 	{
-		return "Empresa [getEntidadeEnumValue()=" + getEntidadeEnumValue() + ", getId()=" + getId() + ", getNome()="
+		return "Empresa [getPlanoList()=" + getPlanoList() + ", getQntFilial()=" + getQntFilial()
+				+ ", getQntDeposito()=" + getQntDeposito() + ", getSocios()=" + getSocios()
+				+ ", getEntidadeEnumValue()=" + getEntidadeEnumValue() + ", getId()=" + getId() + ", getNome()="
 				+ getNome() + ", getEnderecos()=" + getEnderecos() + ", getDocumentos()=" + getDocumentos()
-				+ ", getEmails()=" + getEmails() + ", getTelefones()=" + getTelefones() + ", getSocios()="
-				+ getSocios() + ", getCnaes()=" + getCnaes() + ", getRegime()=" + getRegime() + ", getEntidadeEnum()="
-				+ getEntidadeEnum() + ", getConfiguracao()=" + getConfiguracao() + ", getFilialList()="
-				+ getFilialList() + ", getDepositoList()=" + getDepositoList() + ", getEntidadeId()=" + getEntidadeId()
-				+ ", toString()=" + super.toString() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
-				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
-				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
-				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
-				+ getEmprId() + ", getSite()=" + getSite() + ", getProcessId()=" + getProcessId() + ", getUserId()="
-				+ getUserId() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getEmails()=" + getEmails() + ", getTelefones()=" + getTelefones() + ", getCnaes()=" + getCnaes()
+				+ ", getRegime()=" + getRegime() + ", getEntidadeEnum()=" + getEntidadeEnum() + ", getConfiguracao()="
+				+ getConfiguracao() + ", getEntidadeId()=" + getEntidadeId() + ", toString()=" + super.toString()
+				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId() + ", getNotes()=" + getNotes()
+				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
 				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
 				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
 				+ hashCode() + "]";
