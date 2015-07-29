@@ -34,6 +34,8 @@ import com.qat.framework.model.SortExpression.Direction;
 @RequestMapping("/empresa")
 public class EmpresaViewController extends EmpresaBaseController
 {
+	private static final String FILIAL = "filial";
+
 	private static final String CDSTATUS = "CDSTATUS";
 
 	/** The URL mapping constants. */
@@ -252,7 +254,7 @@ public class EmpresaViewController extends EmpresaBaseController
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "filial", method = RequestMethod.GET)
+	@RequestMapping(value = FILIAL, method = RequestMethod.GET)
 	public ModelAndView loadFilial(HttpServletRequest request)
 	{
 		ModelAndView modelAndView = new ModelAndView(VIEW_FILIAL_MAIN);
@@ -264,7 +266,6 @@ public class EmpresaViewController extends EmpresaBaseController
 		}
 
 		FilialInquiryRequest pagedInquiryRequest = new FilialInquiryRequest();
-
 		pagedInquiryRequest.setStartPage(START_PAGE_NUMBER);
 		pagedInquiryRequest.setPageSize(INITIAL_PAGE_SIZE);
 		pagedInquiryRequest.setPreQueryCount(true);
