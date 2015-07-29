@@ -8,15 +8,32 @@ import org.slf4j.LoggerFactory;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.bac.IEmpresaBAC;
 import com.prosperitasglobal.sendsolv.bai.IEmpresaBAI;
+import com.prosperitasglobal.sendsolv.model.Cidade;
+import com.prosperitasglobal.sendsolv.model.Classificacao;
+import com.prosperitasglobal.sendsolv.model.Cnae;
+import com.prosperitasglobal.sendsolv.model.Deposito;
 import com.prosperitasglobal.sendsolv.model.Empresa;
+import com.prosperitasglobal.sendsolv.model.Filial;
+import com.prosperitasglobal.sendsolv.model.Plano;
+import com.prosperitasglobal.sendsolv.model.Regime;
 import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ClassificacaoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.DepositoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.DepositoMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.FilialInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FilialMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.PlanoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.RegimeInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.response.CidadeResponse;
+import com.prosperitasglobal.sendsolv.model.response.ClassificacaoResponse;
 import com.prosperitasglobal.sendsolv.model.response.CnaeResponse;
+import com.prosperitasglobal.sendsolv.model.response.DepositoResponse;
 import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
+import com.prosperitasglobal.sendsolv.model.response.FilialResponse;
+import com.prosperitasglobal.sendsolv.model.response.PlanoResponse;
 import com.prosperitasglobal.sendsolv.model.response.RegimeResponse;
 import com.qat.framework.model.Message.MessageLevel;
 import com.qat.framework.model.Message.MessageSeverity;
@@ -262,35 +279,6 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 	}
 
 	/**
-	 * Process.
-	 *
-	 * @param indicator the indicator
-	 * @param persistType the persist type
-	 * @param request the request
-	 * @return the empresa response
-	 */
-	private EmpresaResponse process(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
-			EmpresaMaintenanceRequest request)
-	{
-		EmpresaResponse response = new EmpresaResponse();
-		InternalResponse internalResponse = null;
-
-		// Validate. Notice that BusinessValidator will in turn use additional validators depending on the type
-		ValidationContext context =
-				new ValidationContext(Empresa.class.getSimpleName(), request.getEmpresa(), indicator);
-		context.putObjectToBeValidated(UserContext.class.getSimpleName(), request.getUserContext());
-
-		if (getValidationController().validate(context))
-		{
-			// Persist
-			internalResponse = doPersistance(request, persistType);
-		}
-
-		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (EmpresaResponse)handleReturn(response, internalResponse, context.getMessages(), true);
-	}
-
-	/**
 	 * Handle return.
 	 *
 	 * @param response the response
@@ -347,22 +335,592 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 	@Override
 	public CnaeResponse fetchCnaeByRequest(CnaeInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		CnaeResponse response = new CnaeResponse();
+		try
+		{
+			fetchPagedCnae(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.bai.IEmpresaBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
+	 * RiskMaintenanceRequest)
+	 */
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchPagedCnae(CnaeInquiryRequest request, CnaeResponse response)
+	{
+		InternalResultsResponse<Cnae> internalResponse = new InternalResultsResponse<Cnae>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getEmpresaBAC().fetchCnaeByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
 	@Override
 	public RegimeResponse fetchRegimeByRequest(RegimeInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		RegimeResponse response = new RegimeResponse();
+		try
+		{
+			fetchPagedRegime(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.bai.IEmpresaBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
+	 * RiskMaintenanceRequest)
+	 */
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchPagedRegime(RegimeInquiryRequest request, RegimeResponse response)
+	{
+		InternalResultsResponse<Regime> internalResponse = new InternalResultsResponse<Regime>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getEmpresaBAC().fetchRegimeByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
 	@Override
 	public CidadeResponse fetchCidadeByRequest(CidadeInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
+		CidadeResponse response = new CidadeResponse();
+		try
+		{
+			fetchPagedCidade(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.bai.IEmpresaBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
+	 * RiskMaintenanceRequest)
+	 */
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchPagedCidade(CidadeInquiryRequest request, CidadeResponse response)
+	{
+		InternalResultsResponse<Cidade> internalResponse = new InternalResultsResponse<Cidade>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getEmpresaBAC().fetchCidadeByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	@Override
+	public FilialResponse insertFilial(FilialMaintenanceRequest request)
+	{
+		FilialResponse response = new FilialResponse();
+		try
+		{
+			response = processFilial(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public FilialResponse updateFilial(FilialMaintenanceRequest request)
+	{
+		FilialResponse response = new FilialResponse();
+		try
+		{
+			response = processFilial(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public FilialResponse deleteFilial(FilialMaintenanceRequest request)
+	{
+		FilialResponse response = new FilialResponse();
+		try
+		{
+			response = processFilial(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public FilialResponse fetchFilialById(FetchByIdRequest request)
+	{
+		FilialResponse response = new FilialResponse();
+		try
+		{
+			InternalResponse internalResponse = new InternalResponse();
+			// validate fetchId field
+			if (ValidationUtil.isNull(request.getId()) && ValidationUtil.isNullOrEmpty(request.getStringId()))
+			{
+				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
+			}
+			else
+			{
+				internalResponse = getEmpresaBAC().fetchFilialById(request);
+			}
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public FilialResponse fetchFilialByRequest(FilialInquiryRequest request)
+	{
+		FilialResponse response = new FilialResponse();
+		try
+		{
+			fetchPagedFilial(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.bai.IEmpresaBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
+	 * RiskMaintenanceRequest)
+	 */
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchPagedFilial(FilialInquiryRequest request, FilialResponse response)
+	{
+		InternalResultsResponse<Filial> internalResponse = new InternalResultsResponse<Filial>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getEmpresaBAC().fetchFilialByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	@Override
+	public DepositoResponse insertDeposito(DepositoMaintenanceRequest request)
+	{
+		DepositoResponse response = new DepositoResponse();
+		try
+		{
+			response = processDeposito(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public DepositoResponse updateDeposito(DepositoMaintenanceRequest request)
+	{
+		DepositoResponse response = new DepositoResponse();
+		try
+		{
+			response = processDeposito(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public DepositoResponse deleteDeposito(DepositoMaintenanceRequest request)
+	{
+		DepositoResponse response = new DepositoResponse();
+		try
+		{
+			response = processDeposito(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public DepositoResponse fetchDepositoById(FetchByIdRequest request)
+	{
+		DepositoResponse response = new DepositoResponse();
+		try
+		{
+			InternalResponse internalResponse = new InternalResponse();
+			// validate fetchId field
+			if (ValidationUtil.isNull(request.getId()) && ValidationUtil.isNullOrEmpty(request.getStringId()))
+			{
+				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
+			}
+			else
+			{
+				internalResponse = getEmpresaBAC().fetchDepositoById(request);
+			}
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public DepositoResponse fetchDepositoByRequest(DepositoInquiryRequest request)
+	{
+		DepositoResponse response = new DepositoResponse();
+		try
+		{
+			fetchPagedDeposito(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsoDepositoIDepositoBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
+	 * RiskMaintenanceRequest)
+	 */
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchPagedDeposito(DepositoInquiryRequest request, DepositoResponse response)
+	{
+		InternalResultsResponse<Deposito> internalResponse = new InternalResultsResponse<Deposito>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getEmpresaBAC().fetchDepositoByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	@Override
+	public PlanoResponse fetchPlanoByRequest(PlanoInquiryRequest request)
+	{
+		PlanoResponse response = new PlanoResponse();
+		try
+		{
+			fetchPagedPlano(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.bai.IEmpresaBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
+	 * RiskMaintenanceRequest)
+	 */
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchPagedPlano(PlanoInquiryRequest request, PlanoResponse response)
+	{
+		InternalResultsResponse<Plano> internalResponse = new InternalResultsResponse<Plano>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getEmpresaBAC().fetchPlanoByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	@Override
+	public ClassificacaoResponse fetchClassificacaoByRequest(ClassificacaoInquiryRequest request)
+	{
+		ClassificacaoResponse response = new ClassificacaoResponse();
+		try
+		{
+			fetchPagedClassificacao(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.bai.IEmpresaBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
+	 * RiskMaintenanceRequest)
+	 */
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchPagedClassificacao(ClassificacaoInquiryRequest request, ClassificacaoResponse response)
+	{
+		InternalResultsResponse<Classificacao> internalResponse = new InternalResultsResponse<Classificacao>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getEmpresaBAC().fetchClassificacaoByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	private InternalResponse doPersistanceFilial(FilialMaintenanceRequest request, PersistanceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			case INSERT:
+				return getEmpresaBAC().insertFilial(request);
+
+			case UPDATE:
+				return getEmpresaBAC().updateFilial(request);
+
+			case DELETE:
+				return getEmpresaBAC().deleteFilial(request);
+
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
+		}
 		return null;
+	}
+
+	private InternalResponse doPersistanceDeposito(DepositoMaintenanceRequest request, PersistanceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			case INSERT:
+				return getEmpresaBAC().insertDeposito(request);
+
+			case UPDATE:
+				return getEmpresaBAC().updateDeposito(request);
+
+			case DELETE:
+				return getEmpresaBAC().deleteDeposito(request);
+
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
+		}
+		return null;
+	}
+
+	/**
+	 * Process.
+	 *
+	 * @param indicator the indicator
+	 * @param persistType the persist type
+	 * @param request the request
+	 * @return the empresa response
+	 */
+	private EmpresaResponse process(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
+			EmpresaMaintenanceRequest request)
+	{
+		EmpresaResponse response = new EmpresaResponse();
+		InternalResponse internalResponse = null;
+
+		// Validate. Notice that BusinessValidator will in turn use additional validators depending on the type
+		ValidationContext context =
+				new ValidationContext(Empresa.class.getSimpleName(), request.getEmpresa(), indicator);
+		context.putObjectToBeValidated(UserContext.class.getSimpleName(), request.getUserContext());
+
+		if (getValidationController().validate(context))
+		{
+			// Persist
+			internalResponse = doPersistance(request, persistType);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		return (EmpresaResponse)handleReturn(response, internalResponse, context.getMessages(), true);
+	}
+
+	/**
+	 * Process.
+	 *
+	 * @param indicator the indicator
+	 * @param persistType the persist type
+	 * @param request the request
+	 * @return the empresa response
+	 */
+	private FilialResponse processFilial(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
+			FilialMaintenanceRequest request)
+	{
+		FilialResponse response = new FilialResponse();
+		InternalResponse internalResponse = null;
+
+		// Validate. Notice that BusinessValidator will in turn use additional validators depending on the type
+		ValidationContext context =
+				new ValidationContext(Filial.class.getSimpleName(), request.getFilial(), indicator);
+		context.putObjectToBeValidated(UserContext.class.getSimpleName(), request.getUserContext());
+
+		if (getValidationController().validate(context))
+		{
+			// Persist
+			internalResponse = doPersistanceFilial(request, persistType);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		return (FilialResponse)handleReturn(response, internalResponse, context.getMessages(), true);
+	}
+
+	/**
+	 * Process.
+	 *
+	 * @param indicator the indicator
+	 * @param persistType the persist type
+	 * @param request the request
+	 * @return the empresa response
+	 */
+	private DepositoResponse processDeposito(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
+			DepositoMaintenanceRequest request)
+	{
+		DepositoResponse response = new DepositoResponse();
+		InternalResponse internalResponse = null;
+
+		// Validate. Notice that BusinessValidator will in turn use additional validators depending on the type
+		ValidationContext context =
+				new ValidationContext(Deposito.class.getSimpleName(), request.getDeposito(), indicator);
+		context.putObjectToBeValidated(UserContext.class.getSimpleName(), request.getUserContext());
+
+		if (getValidationController().validate(context))
+		{
+			// Persist
+			internalResponse = doPersistanceDeposito(request, persistType);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		return (DepositoResponse)handleReturn(response, internalResponse, context.getMessages(), true);
 	}
 
 }
