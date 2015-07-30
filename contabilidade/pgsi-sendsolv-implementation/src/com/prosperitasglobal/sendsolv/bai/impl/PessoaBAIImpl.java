@@ -13,6 +13,7 @@ import com.prosperitasglobal.sendsolv.model.Beneficios;
 import com.prosperitasglobal.sendsolv.model.Cidade;
 import com.prosperitasglobal.sendsolv.model.Cliente;
 import com.prosperitasglobal.sendsolv.model.Conta;
+import com.prosperitasglobal.sendsolv.model.Contador;
 import com.prosperitasglobal.sendsolv.model.Contato;
 import com.prosperitasglobal.sendsolv.model.Convenio;
 import com.prosperitasglobal.sendsolv.model.Estado;
@@ -29,6 +30,8 @@ import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ClienteMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.ContaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ContadorInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ContadorMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.ContatoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ConvenioInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EstadoInquiryRequest;
@@ -46,6 +49,7 @@ import com.prosperitasglobal.sendsolv.model.response.BeneficiosResponse;
 import com.prosperitasglobal.sendsolv.model.response.CidadeResponse;
 import com.prosperitasglobal.sendsolv.model.response.ClienteResponse;
 import com.prosperitasglobal.sendsolv.model.response.ContaResponse;
+import com.prosperitasglobal.sendsolv.model.response.ContadorResponse;
 import com.prosperitasglobal.sendsolv.model.response.ContatoResponse;
 import com.prosperitasglobal.sendsolv.model.response.ConvenioResponse;
 import com.prosperitasglobal.sendsolv.model.response.EstadoResponse;
@@ -1156,5 +1160,221 @@ public class PessoaBAIImpl implements IPessoaBAI
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	// =======Contador
+	// =================================Contador==========================
+	/**
+	 * Insert transportador.
+	 *
+	 * @param request the request
+	 * @return the transportador response
+	 */
+	@Override
+	public ContadorResponse insertContador(ContadorMaintenanceRequest request)
+	{
+		ContadorResponse response = new ContadorResponse();
+		try
+		{
+			response = processContador(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/**
+	 * Update transportador.
+	 *
+	 * @param request the request
+	 * @return the transportador response
+	 */
+	@Override
+	public ContadorResponse updateContador(ContadorMaintenanceRequest request)
+	{
+		ContadorResponse response = new ContadorResponse();
+		try
+		{
+			response = processContador(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/**
+	 * Delete transportador.
+	 *
+	 * @param request the request
+	 * @return the transportador response
+	 */
+	@Override
+	public ContadorResponse deleteContador(ContadorMaintenanceRequest request)
+	{
+		ContadorResponse response = new ContadorResponse();
+		try
+		{
+			response = processContador(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/**
+	 * Fetch transportador by id.
+	 *
+	 * @param request the request
+	 * @return the transportador response
+	 */
+	@Override
+	public ContadorResponse fetchContadorById(FetchByIdRequest request)
+	{
+		ContadorResponse response = new ContadorResponse();
+		try
+		{
+			InternalResponse internalResponse = new InternalResponse();
+			// validate fetchId field
+			if (ValidationUtil.isNull(request.getId()) && ValidationUtil.isNullOrEmpty(request.getStringId()))
+			{
+				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
+			}
+			else
+			{
+				internalResponse = getPessoaBAC().fetchContadorById(request);
+			}
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/**
+	 * Fetch transportador by request.
+	 *
+	 * @param request the request
+	 * @return the transportador response
+	 */
+	@Override
+	public ContadorResponse fetchContadorByRequest(ContadorInquiryRequest request)
+	{
+		ContadorResponse response = new ContadorResponse();
+		try
+		{
+			fetchContador(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/**
+	 * Fetch transportador.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchContador(ContadorInquiryRequest request, ContadorResponse response)
+	{
+		InternalResultsResponse<Contador> internalResponse = new InternalResultsResponse<Contador>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchContadorByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	/**
+	 * Process.
+	 *
+	 * @param indicator the indicator
+	 * @param persistType the persist type
+	 * @param request the request
+	 * @return the empresa response
+	 */
+	private ContadorResponse processContador(ValidationContextIndicator indicator,
+			PersistanceActionEnum persistType,
+			ContadorMaintenanceRequest request)
+	{
+		ContadorResponse response = new ContadorResponse();
+		InternalResponse internalResponse = null;
+
+		// Persist
+		internalResponse = doPersistanceContador(request, persistType);
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		return handleReturn(response, internalResponse, null, true);
+	}
+
+	/**
+	 * Handle return.
+	 *
+	 * @param response the response
+	 * @param internalResponse the internal response
+	 * @param messages the messages
+	 * @param copyOver the copy over
+	 * @return the response
+	 */
+	private ContadorResponse handleReturn(ContadorResponse response, InternalResponse internalResponse,
+			List<MessageInfo> messages, boolean copyOver)
+	{
+
+		QATInterfaceUtil.handleOperationStatusAndMessages(response,
+				internalResponse, messages, copyOver);
+		return response;
+	}
+
+	/**
+	 * Do persistance.
+	 *
+	 * @param request the request
+	 * @param updateType the update type
+	 * @return the internal response
+	 */
+	private InternalResponse doPersistanceContador(ContadorMaintenanceRequest request,
+			PersistanceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			case INSERT:
+				return getPessoaBAC().insertContador(request);
+
+			case UPDATE:
+				return getPessoaBAC().updateContador(request);
+
+			case DELETE:
+				return getPessoaBAC().deleteContador(request);
+
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
+		}
+		return null;
 	}
 }

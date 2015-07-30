@@ -8,6 +8,8 @@ import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ClienteMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.ContaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ContadorInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ContadorMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.ContatoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ConvenioInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EstadoInquiryRequest;
@@ -25,6 +27,7 @@ import com.prosperitasglobal.sendsolv.model.response.BeneficiosResponse;
 import com.prosperitasglobal.sendsolv.model.response.CidadeResponse;
 import com.prosperitasglobal.sendsolv.model.response.ClienteResponse;
 import com.prosperitasglobal.sendsolv.model.response.ContaResponse;
+import com.prosperitasglobal.sendsolv.model.response.ContadorResponse;
 import com.prosperitasglobal.sendsolv.model.response.ContatoResponse;
 import com.prosperitasglobal.sendsolv.model.response.ConvenioResponse;
 import com.prosperitasglobal.sendsolv.model.response.EstadoResponse;
@@ -166,6 +169,48 @@ public interface IPessoaBAI
 	public TransportadorResponse fetchTransportadorByRequest(TransportadorInquiryRequest request);
 
 	// ==========
+
+	// ==========
+
+	/**
+	 * Insert transportador.
+	 *
+	 * @param request the request
+	 * @return the transportador response
+	 */
+	public ContadorResponse insertContador(ContadorMaintenanceRequest request);
+
+	/**
+	 * Update transportador.
+	 *
+	 * @param request the request
+	 * @return the transportador response
+	 */
+	public ContadorResponse updateContador(ContadorMaintenanceRequest request);
+
+	/**
+	 * Delete transportador.
+	 *
+	 * @param request the request
+	 * @return the transportador response
+	 */
+	public ContadorResponse deleteContador(ContadorMaintenanceRequest request);
+
+	/**
+	 * Fetch transportador by id.
+	 *
+	 * @param request the request
+	 * @return the transportador response
+	 */
+	public ContadorResponse fetchContadorById(FetchByIdRequest request);
+
+	/**
+	 * Fetch transportador by request.
+	 *
+	 * @param request the request
+	 * @return the transportador response
+	 */
+	public ContadorResponse fetchContadorByRequest(ContadorInquiryRequest request);
 
 	/**
 	 * Fetch profissao by request.
