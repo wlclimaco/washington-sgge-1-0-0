@@ -7,6 +7,7 @@ import com.prosperitasglobal.sendsolv.model.Beneficios;
 import com.prosperitasglobal.sendsolv.model.Cidade;
 import com.prosperitasglobal.sendsolv.model.Cliente;
 import com.prosperitasglobal.sendsolv.model.Conta;
+import com.prosperitasglobal.sendsolv.model.Contador;
 import com.prosperitasglobal.sendsolv.model.Contato;
 import com.prosperitasglobal.sendsolv.model.Convenio;
 import com.prosperitasglobal.sendsolv.model.Estado;
@@ -23,6 +24,8 @@ import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ClienteMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.ContaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ContadorInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ContadorMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.ContatoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ConvenioInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EstadoInquiryRequest;
@@ -76,6 +79,20 @@ public interface IPessoaBAC
 	public InternalResultsResponse<Transportador> fetchTransportadorById(FetchByIdRequest request);
 
 	public InternalResultsResponse<Transportador> fetchTransportadorByRequest(TransportadorInquiryRequest request);
+
+	// ====================
+
+	public InternalResultsResponse<Contador> insertContador(ContadorMaintenanceRequest request);
+
+	public InternalResultsResponse<Contador> updateContador(ContadorMaintenanceRequest request);
+
+	public InternalResponse deleteContador(ContadorMaintenanceRequest request);
+
+	public InternalResultsResponse<Contador> fetchContadorById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Contador> fetchContadorByRequest(ContadorInquiryRequest request);
+
+	// ==============
 
 	public InternalResultsResponse<Profissao> fetchProfissaoByRequest(ProfissaoInquiryRequest request);
 

@@ -26,7 +26,7 @@
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
 	<association property="produto"    column="produto" select="ProdutoMap.fetchProdutoById"  />
-	<collection property="precoList" column="id" select="TabPrecoMap.fetchTabPrecoByPlano"/>
+	<collection property="preco" column="produto" select="TabPrecoMap.fetchTabPrecoByPlano"/>
   </resultMap>
 
   <!--

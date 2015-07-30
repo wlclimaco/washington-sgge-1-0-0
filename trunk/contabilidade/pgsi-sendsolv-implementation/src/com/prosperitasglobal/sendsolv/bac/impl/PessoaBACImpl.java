@@ -9,6 +9,7 @@ import com.prosperitasglobal.sendsolv.model.Beneficios;
 import com.prosperitasglobal.sendsolv.model.Cidade;
 import com.prosperitasglobal.sendsolv.model.Cliente;
 import com.prosperitasglobal.sendsolv.model.Conta;
+import com.prosperitasglobal.sendsolv.model.Contador;
 import com.prosperitasglobal.sendsolv.model.Contato;
 import com.prosperitasglobal.sendsolv.model.Convenio;
 import com.prosperitasglobal.sendsolv.model.Estado;
@@ -25,6 +26,8 @@ import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ClienteInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ClienteMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.ContaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ContadorInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.ContadorMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.ContatoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ConvenioInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EstadoInquiryRequest;
@@ -179,6 +182,45 @@ public class PessoaBACImpl implements IPessoaBAC
 	public InternalResultsResponse<Transportador> fetchTransportadorByRequest(TransportadorInquiryRequest request)
 	{
 		return getPessoaDAC().fetchTransportadorByRequest(request);
+	}
+
+	// ========================================
+	@Override
+	public InternalResultsResponse<Contador> insertContador(ContadorMaintenanceRequest request)
+	{
+		InternalResultsResponse<Contador> response = new InternalResultsResponse<Contador>();
+
+		response = getPessoaDAC().insertContador(request.getContador());
+
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Contador> updateContador(ContadorMaintenanceRequest request)
+	{
+		InternalResultsResponse<Contador> response = new InternalResultsResponse<Contador>();
+
+		response = getPessoaDAC().updateContador(request.getContador());
+
+		return response;
+	}
+
+	@Override
+	public InternalResponse deleteContador(ContadorMaintenanceRequest request)
+	{
+		return getPessoaDAC().deleteContador(request.getContador());
+	}
+
+	@Override
+	public InternalResultsResponse<Contador> fetchContadorById(FetchByIdRequest request)
+	{
+		return getPessoaDAC().fetchContadorById(request);
+	}
+
+	@Override
+	public InternalResultsResponse<Contador> fetchContadorByRequest(ContadorInquiryRequest request)
+	{
+		return getPessoaDAC().fetchContadorByRequest(request);
 	}
 
 	@Override

@@ -23,7 +23,9 @@ public enum PessoaTypeEnum implements IIntegerEnum, II18nEnum
 	FUNCIONARIO(3, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
 
 	/** The unknown. */
-	TRANSPORTADOR(4, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
+	TRANSPORTADOR(4, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
+
+	CONTADOR(5, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
 
 	/** The code. */
 	private Integer code;
