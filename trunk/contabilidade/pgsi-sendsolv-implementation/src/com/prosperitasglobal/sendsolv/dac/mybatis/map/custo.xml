@@ -32,7 +32,7 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allCustoColumns">
-		,b.idcustoItens
+		 b.idcustoItens
 		,b.valor
 		,b.prodId
    		,b.emprId
@@ -124,14 +124,10 @@
   </select>
 
   <select id="fetchCustoByProduto" parameterType="Integer" resultMap="custoResult">
-	  	SELECT F.*
+	  	SELECT b.id,<include refid="allCustoColumns" />
+        FROM custo b
+     WHERE   b.prodId=#{id}
 
-		  FROM custoProd AS C
-
-		  INNER JOIN custo AS F
-
-		    ON F.id like C.Custoid
-		where  c.prodId = #{id}
   </select>
 
 

@@ -23,9 +23,11 @@ import com.prosperitasglobal.sendsolv.model.EntidadeTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Estado;
 import com.prosperitasglobal.sendsolv.model.Filial;
 import com.prosperitasglobal.sendsolv.model.Plano;
+import com.prosperitasglobal.sendsolv.model.PrecoTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Produto;
 import com.prosperitasglobal.sendsolv.model.Regime;
 import com.prosperitasglobal.sendsolv.model.Socio;
+import com.prosperitasglobal.sendsolv.model.TabPreco;
 import com.prosperitasglobal.sendsolv.model.Telefone;
 import com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.DepositoInquiryRequest;
@@ -452,6 +454,49 @@ public class EmpresaAPIController extends EmpresaBaseController
 		return socioList;
 	}
 
+	public List<TabPreco> mockPreco(PersistanceActionEnum model)
+	{
+		List<TabPreco> precoList = new ArrayList<TabPreco>();
+
+		TabPreco preco = new TabPreco();
+		preco.setId(1);
+		preco.setDataMarcacao(new Long("14327833577780"));
+		preco.setPrecoTypeEnum(PrecoTypeEnum.PLANO);
+		preco.setValor(new Double(10.90));
+		preco.setDataProInicial(new Long("14327833577780"));
+		preco.setDataProFinal(new Long("14327833577780"));
+		precoList.add(preco);
+
+		preco = new TabPreco();
+		preco.setId(1);
+		preco.setDataMarcacao(new Long("14327833577780"));
+		preco.setPrecoTypeEnum(PrecoTypeEnum.PLANO);
+		preco.setValor(new Double(10.90));
+		preco.setDataProInicial(new Long("14327833577780"));
+		preco.setDataProFinal(new Long("14327833577780"));
+		precoList.add(preco);
+
+		preco = new TabPreco();
+		preco.setId(1);
+		preco.setDataMarcacao(new Long("14327833577780"));
+		preco.setPrecoTypeEnum(PrecoTypeEnum.PLANO);
+		preco.setValor(new Double(10.90));
+		preco.setDataProInicial(new Long("14327833577780"));
+		preco.setDataProFinal(new Long("14327833577780"));
+		precoList.add(preco);
+
+		preco = new TabPreco();
+		preco.setId(1);
+		preco.setDataMarcacao(new Long("14327833577780"));
+		preco.setPrecoTypeEnum(PrecoTypeEnum.PLANO);
+		preco.setValor(new Double(10.90));
+		preco.setDataProInicial(new Long("14327833577780"));
+		preco.setDataProFinal(new Long("14327833577780"));
+		precoList.add(preco);
+
+		return precoList;
+	}
+
 	public List<Plano> insertPlano(PersistanceActionEnum modelAction)
 	{
 		List<Plano> planoList = new ArrayList<Plano>();
@@ -461,7 +506,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 		plano.setId(1);
 		plano.setDataInicio(a.getTime() - 10000000);
 		plano.setDataFinal(a.getTime());
-		plano.setDesconto(new Double(5));
+		plano.setPreco(mockPreco(modelAction));
 		plano.setProduto(new Produto(1));
 		planoList.add(plano);
 
@@ -471,7 +516,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 		plano.setId(1);
 		plano.setDataInicio(a.getTime() - 10000000);
 		plano.setDataFinal(a.getTime());
-		plano.setDesconto(new Double(5));
+		plano.setPreco(mockPreco(modelAction));
 		plano.setProduto(new Produto(2));
 		planoList.add(plano);
 

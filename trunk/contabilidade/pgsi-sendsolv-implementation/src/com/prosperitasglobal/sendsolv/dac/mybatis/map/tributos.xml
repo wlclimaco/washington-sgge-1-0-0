@@ -152,14 +152,11 @@
   </select>
 
   <select id="fetchTributacaoByProduto" parameterType="Integer" resultMap="tributosResult">
-	  	SELECT F.*
+	  	SELECT b.id,<include refid="allTributacaoColumns" />
+        FROM tributacao b
+     WHERE 1 = 1
+		  AND b.prodId = #{id}
 
-		  FROM tributosProd AS C
-
-		  INNER JOIN tributacao AS F
-
-		    ON F.id like C.tributosId
-		where  c.prodId = #{id}
   </select>
 
 

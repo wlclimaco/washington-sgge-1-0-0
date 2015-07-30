@@ -1,5 +1,6 @@
 package com.prosperitasglobal.sendsolv.model;
 
+import java.util.List;
 
 /**
  * The Class Document represents a generic formal business or personal document, such as driver's license or bylaws.
@@ -15,7 +16,7 @@ public class Plano extends ModelCosmeDamiao
 
 	private Long dataFinal;
 
-	private Double desconto;
+	private List<TabPreco> preco;
 
 	private Integer numeroContrato;
 
@@ -84,22 +85,6 @@ public class Plano extends ModelCosmeDamiao
 	}
 
 	/**
-	 * @return the desconto
-	 */
-	public Double getDesconto()
-	{
-		return desconto;
-	}
-
-	/**
-	 * @param desconto the desconto to set
-	 */
-	public void setDesconto(Double desconto)
-	{
-		this.desconto = desconto;
-	}
-
-	/**
 	 * @return the numeroContrato
 	 */
 	public Integer getNumeroContrato()
@@ -131,6 +116,22 @@ public class Plano extends ModelCosmeDamiao
 		this.produto = produto;
 	}
 
+	/**
+	 * @return the preco
+	 */
+	public List<TabPreco> getPreco()
+	{
+		return preco;
+	}
+
+	/**
+	 * @param preco the preco to set
+	 */
+	public void setPreco(List<TabPreco> preco)
+	{
+		this.preco = preco;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -139,17 +140,16 @@ public class Plano extends ModelCosmeDamiao
 	public String toString()
 	{
 		return "Plano [getId()=" + getId() + ", getDataInicio()=" + getDataInicio() + ", getDataFinal()="
-				+ getDataFinal() + ", getDesconto()=" + getDesconto() + ", getNumeroContrato()=" + getNumeroContrato()
-				+ ", getProduto()=" + getProduto() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
-				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
-				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
-				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
-				+ getEmprId() + ", getSite()=" + getSite() + ", getProcessId()=" + getProcessId() + ", getUserId()="
-				+ getUserId() + ", getNotes()=" + getNotes() + ", toString()=" + super.toString()
-				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
-				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
-				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + "]";
+				+ getDataFinal() + ", getNumeroContrato()=" + getNumeroContrato() + ", getProduto()=" + getProduto()
+				+ ", getPreco()=" + getPreco() + ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()="
+				+ getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId()
+				+ ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()="
+				+ getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId()
+				+ ", getSite()=" + getSite() + ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId()
+				+ ", getNotes()=" + getNotes() + ", toString()=" + super.toString() + ", getModelAction()="
+				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
+				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
+				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }

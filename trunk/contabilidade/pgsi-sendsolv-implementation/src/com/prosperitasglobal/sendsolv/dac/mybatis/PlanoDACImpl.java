@@ -3,8 +3,13 @@ package com.prosperitasglobal.sendsolv.dac.mybatis;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
+import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IPlanoDAC;
+import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
+import com.prosperitasglobal.sendsolv.dac.ITabPrecoDAC;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.PrecoDACD;
 import com.prosperitasglobal.sendsolv.model.Plano;
+import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.request.PlanoInquiryRequest;
 import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResultsResponse;
@@ -31,6 +36,58 @@ public class PlanoDACImpl extends SqlSessionDaoSupport implements IPlanoDAC
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(PlanoDACImpl.class);
 
+	private ITabPrecoDAC tabPrecoDAC;
+	private IHistoricoDAC historicoDAC;
+	private IStatusDAC statusDAC;
+
+	/**
+	 * @return the tabPrecoDAC
+	 */
+	public ITabPrecoDAC getTabPrecoDAC()
+	{
+		return tabPrecoDAC;
+	}
+
+	/**
+	 * @param tabPrecoDAC the tabPrecoDAC to set
+	 */
+	public void setTabPrecoDAC(ITabPrecoDAC tabPrecoDAC)
+	{
+		this.tabPrecoDAC = tabPrecoDAC;
+	}
+
+	/**
+	 * @return the historicoDAC
+	 */
+	public IHistoricoDAC getHistoricoDAC()
+	{
+		return historicoDAC;
+	}
+
+	/**
+	 * @param historicoDAC the historicoDAC to set
+	 */
+	public void setHistoricoDAC(IHistoricoDAC historicoDAC)
+	{
+		this.historicoDAC = historicoDAC;
+	}
+
+	/**
+	 * @return the statusDAC
+	 */
+	public IStatusDAC getStatusDAC()
+	{
+		return statusDAC;
+	}
+
+	/**
+	 * @param statusDAC the statusDAC to set
+	 */
+	public void setStatusDAC(IStatusDAC statusDAC)
+	{
+		this.statusDAC = statusDAC;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see
@@ -43,6 +100,12 @@ public class PlanoDACImpl extends SqlSessionDaoSupport implements IPlanoDAC
 		Integer insertCount = 0;
 		// First insert the root plano data
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), PLANO_STMT_INSERT, plano, response);
+
+		insertCount +=
+				PrecoDACD.maintainTabPrecoAssociations(plano.getPreco(), response, insertCount, null,
+						null,
+						null, getTabPrecoDAC(), getStatusDAC(), getHistoricoDAC(), plano.getId(),
+						plano.getCreateUser(), plano.getProcessId());
 
 		return insertCount;
 	}
@@ -68,6 +131,12 @@ public class PlanoDACImpl extends SqlSessionDaoSupport implements IPlanoDAC
 			{
 				plano.setModelAction(QATModel.PersistanceActionEnum.NONE);
 			}
+
+			updateCount +=
+					PrecoDACD.maintainTabPrecoAssociations(plano.getPreco(), response, plano.getId(), null,
+							null,
+							TabelaEnum.PLANO, getTabPrecoDAC(), getStatusDAC(), getHistoricoDAC(), plano.getId(),
+							plano.getCreateUser(), plano.getProcessId());
 		}
 
 		return updateCount;

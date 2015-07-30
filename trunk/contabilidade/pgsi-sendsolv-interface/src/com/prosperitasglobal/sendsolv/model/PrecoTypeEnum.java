@@ -23,7 +23,9 @@ public enum PrecoTypeEnum implements IIntegerEnum, II18nEnum
 	VENDA(3, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
 
 	/** The unknown. */
-	PROMOCAO(4, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
+	PROMOCAO(4, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
+
+	PLANO(5, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
 
 	/** The code. */
 	private Integer code;

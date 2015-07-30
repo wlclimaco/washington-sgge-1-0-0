@@ -33,7 +33,7 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allRentabilidadeColumns">
-		,b.prodId
+		 b.prodId
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -114,14 +114,10 @@
   </select>
 
   <select id="fetchRentabilidadeByProduto" parameterType="Integer" resultMap="rentabilidadeResult">
-	  	SELECT F.*
+	  	SELECT b.id,<include refid="allRentabilidadeColumns" />
+        FROM rentabilidade b
+     WHERE  b.prodid = #{id}
 
-		  FROM rentabilidadeProd AS C
-
-		  INNER JOIN rentabilidade AS F
-
-		    ON F.id like C.Rentabilidadeid
-		where  c.prodId = #{id}
   </select>
 
 
