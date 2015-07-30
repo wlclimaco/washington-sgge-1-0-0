@@ -362,6 +362,9 @@
 
  	<bean id="planoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.PlanoDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 		<property name="historicoDAC" ref="historicoDACTarget" />
+ 		<property name="statusDAC" ref="statusDACTarget" />
+ 		<property name="tabPrecoDAC" ref="tabPrecoDACTarget" />
  	</bean>
 
  	<bean id="porcaoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.PorcaoDACImpl">

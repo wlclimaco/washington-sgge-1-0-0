@@ -32,7 +32,7 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allEstoqueColumns">
-		,b.estoqueTypeEnum
+		 b.estoqueTypeEnum
 		,b.ultimoMov
 		,b.quant
       	,b.create_date
@@ -119,14 +119,9 @@
   </select>
 
   <select id="fetchEstoqueByProduto" parameterType="Integer" resultMap="estoqueResult">
-	  	SELECT F.*
-
-		  FROM estoqueProd AS C
-
-		  INNER JOIN estoque AS F
-
-		    ON F.id like C.Estoqueid
-		where  c.prodId = #{id}
+	  	SELECT b.id,<include refid="allEstoqueColumns" />
+        FROM estoque b
+     	WHERE b.prodId = #{id}
   </select>
 
 

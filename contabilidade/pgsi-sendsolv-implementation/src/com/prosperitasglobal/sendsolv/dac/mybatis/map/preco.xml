@@ -146,15 +146,18 @@
   </select>
 
   <select id="fetchTabPrecoByProduto" parameterType="Integer" resultMap="tabPrecoResult">
-	  	SELECT F.*
-
-		  FROM tabPrecoProd AS C
-
-		  INNER JOIN tabPreco AS F
-
-		    ON F.id like C.TabPrecoid
-		where  c.prodId = #{id}
+	  SELECT b.id,<include refid="allTabPrecoColumns" />
+        FROM tabPreco b
+     WHERE  b.prodId=#{id}
   </select>
+
+  <select id="fetchTabPrecoByPlano " parameterType="Integer" resultMap="tabPrecoResult">
+	  SELECT b.id,<include refid="allTabPrecoColumns" />
+        FROM tabPreco
+     WHERE  b.prodId=#{id} and b.precoTypeEnum = 5
+  </select>
+
+
 
 
 </mapper>

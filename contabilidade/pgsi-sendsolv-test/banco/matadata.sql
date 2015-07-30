@@ -912,7 +912,7 @@ CONSTRAINT [pk_subgrupo_id] PRIMARY KEY CLUSTERED
 
 /** ---------------------------------------------------------------*/
 
-DROP TABLE [dbo].[subgrupoGrupo];
+DROP TABLE [dbo].[subgrupoProd];
 CREATE TABLE [dbo].[subgrupoGrupo](
 	[id]           [int] identity(1,1) NOT NULL,
 	[grupoId]      [int] NOT NULL,
@@ -1021,7 +1021,7 @@ CONSTRAINT [pk_incidencia_id] PRIMARY KEY CLUSTERED
 
 DROP TABLE [dbo].[tributacao];
 CREATE TABLE [dbo].[tributacao](
-	[id]             [int] identity(1,1) NOT NULL,
+	[id]           [int] identity(1,1) NOT NULL,
 	[prodId]       [int] NOT NULL,
 	[cstId]        [int] NOT NULL,
 	[processId]    [int] NULL,
@@ -1088,10 +1088,10 @@ DROP TABLE [dbo].[estoque];
 CREATE TABLE [dbo].[estoque](
 	[id]              [int] identity(1,1) NOT NULL,
 	[entidadeId]      [int]  NULL,
-	[empId]      [int]  NULL,
+	[empId]           [int]  NULL,
 	[prodId]          [int] NOT NULL,
 	[estoqueTypeEnum] [int] NOT NULL,
-	[processId]    [int] NULL,
+	[processId]       [int] NULL,
 	[ultimoMov]       [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	[quant]           [real] NOT NULL,
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1106,11 +1106,11 @@ CONSTRAINT [pk_estoque_id] PRIMARY KEY CLUSTERED
 
 /** ---------------------------------------------------------------*/
 
-DROP TABLE [dbo].[preco];
-CREATE TABLE [dbo].[preco](
-	[id]             [int] identity(1,1) NOT NULL,
+DROP TABLE [dbo].[tabPreco];
+CREATE TABLE [dbo].[tabPreco](
+	[id]              [int] identity(1,1) NOT NULL,
 	[prodId]          [int] NOT NULL,
-	[empId]           [int] NOT NULL,
+	[emprId]           [int] NOT NULL,
 	[entidadeId]      [int] NULL,
 	[precoTypeEnum]   [int] NOT NULL,
 	[dataMarcacao]    [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1122,7 +1122,7 @@ CREATE TABLE [dbo].[preco](
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,
-CONSTRAINT [pk_preco_id] PRIMARY KEY CLUSTERED
+CONSTRAINT [pk_preco_id1] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -1154,6 +1154,8 @@ CREATE TABLE [dbo].[custo](
 	[prodId]          [int] NOT NULL,
 	[idcustoItens]    [int] NOT NULL,
 	[valor]           [real] NOT NULL,
+	[entidadeId]    [int] NULL,
+	[emprId]    [int] NULL,
 	[processId]    [int] NULL,
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
@@ -1164,7 +1166,6 @@ CONSTRAINT [pk_custo_id] PRIMARY KEY CLUSTERED
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
-
 /** ---------------------------------------------------------------*/
 
 DROP TABLE [dbo].[porcao];
@@ -1173,6 +1174,7 @@ CREATE TABLE [dbo].[porcao](
 	[prodId]          [int] NOT NULL,
 	[valor]           [real] NOT NULL,
 	[processId]    [int] NULL,
+	[idporcaoItens]    [int] NULL,
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,
     [modify_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -1207,7 +1209,7 @@ CONSTRAINT [pk_porcaoItens_id] PRIMARY KEY CLUSTERED
 DROP TABLE [dbo].[rentabilidade];
 CREATE TABLE [dbo].[rentabilidade](
 	[id]                    [int] identity(1,1) NOT NULL,
-	[idprod]                [int] NOT NULL,
+	[prodId]                [int] NOT NULL,
 	[processId]    [int] NULL,
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [create_user]  [varchar](50) NULL,

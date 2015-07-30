@@ -160,7 +160,9 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 
 	DEPOSITO(51, "sendsolv.base.model.risklevelenum.medium"),
 
-	FILIAL(52, "sendsolv.base.model.risklevelenum.medium");
+	FILIAL(52, "sendsolv.base.model.risklevelenum.medium"),
+
+	PLANO(53, "sendsolv.base.model.risklevelenum.medium");
 
 	/** The code. */
 	private Integer code;
