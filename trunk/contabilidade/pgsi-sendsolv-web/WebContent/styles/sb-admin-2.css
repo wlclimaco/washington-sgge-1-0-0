@@ -639,3 +639,10 @@ section.view div.container {
 #tabs section div.small-box .links a:nth-child(3) {
 	margin-right: 5px;
 }
+.filial .box{
+width:353px!Important;
+}
+
+#selection .row{
+	height : 117px;
+}

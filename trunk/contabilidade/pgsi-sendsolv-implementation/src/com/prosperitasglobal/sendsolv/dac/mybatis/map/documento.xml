@@ -101,7 +101,7 @@
      SELECT
      <include refid="allDocumentoColumns" />
         FROM documento b
-     WHERE b.tabela = 1 and b.parentId = #{id}
+     WHERE b.tabela in(1,51,52) and b.parentId = #{id}
 
   </select>
 

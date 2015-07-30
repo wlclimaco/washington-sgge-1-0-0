@@ -94,7 +94,7 @@
  	-->
   <select id="fetchTelefoneByEmpresa" parameterType="Integer" resultMap="telefoneResult">
      SELECT * FROM telefone
-     WHERE tabela = 1 and parentId = #{id}
+     WHERE tabela in(1,51,52) and parentId = #{id}
   </select>
 
   <select id="fetchTelefoneByFuncionario" parameterType="Integer" resultMap="telefoneResult">

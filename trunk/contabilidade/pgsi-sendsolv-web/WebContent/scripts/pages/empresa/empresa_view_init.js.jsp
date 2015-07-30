@@ -11,42 +11,17 @@
     </c:otherwise>
 </c:choose>
 
-if (!$.pgsi.isNullOrUndefined(oPreLoadResponse)) {
-	pgsi.pages.empresa.view.fnFillEmpresa(oPreLoadResponse);
-}
-
-//Attach event to add location link
-$("#tabs").find(".add_loc_link").on('click', function(){
-	var iOrganizationId = oPreLoadResponse.locationList[0].parentOrganizationId;
-	var sOrganizationName = oPreLoadResponse.locationList[0].parentOrganizationName;
-	$.pgsi.pageLoader.load({
-		url: "location/add?organizationId=" + iOrganizationId + "&organizationName=" + sOrganizationName,
-		$content: $("#load"),
-		bStartProgressBar : false
-	});
-});
-
-$('#edit-business').click(function(e)
-{
-	var nBusinessType= parseInt($("#business-type").val());
-
-	// Check for Organization or Location
-
-	e.preventDefault();
-
-
-	pgsi.util.actiondialog.launchActionDialog (
-		"insert",
-		pgsi.pages.empresa.dialogSettings.insert(
-			$('#business-id').val(),
-			$('#company-name-field').text(),
-			nBusinessType)
-	);
-
-});
-
-
-$("section.contact").parent().css( {"border":"none"} );
+	if (!$.pgsi.isNullOrUndefined(oPreLoadResponse)) {
+		pgsi.pages.empresa.view.fnFillEmpresa(oPreLoadResponse);
+	}else{
+		$.pgsi.ajax.post({
+			sUrl 		: "api/empresa/fetch",
+			oRequest 	: {id:parseInt($.address.parameter("locationId"),10)},
+			fnCallback  : function(oResponse) {
+				pgsi.pages.empresa.view.fnFillEmpresa(oResponse);
+			}
+		});
+	}
 
 $.pgsi.progressBar.stopGlobal();
 </script>

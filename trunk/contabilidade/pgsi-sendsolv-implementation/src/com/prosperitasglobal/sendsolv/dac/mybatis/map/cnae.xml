@@ -150,7 +150,7 @@
     	SELECT
 			<include refid="allCnaeEmpresaColumns" />
 		    FROM cnaePorRelacionamento b
-		   where b.tabela = 1 and  b.parentid = #{id}
+		   where b.tabela in (1,51,52) and  b.parentid = #{id}
     </select>
 
 	<!--

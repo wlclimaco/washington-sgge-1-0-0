@@ -107,7 +107,7 @@
  <select id="fetchAllEmailsByEmpresa" parameterType="Integer" resultMap="emailResult">
 	 SELECT
 	<include refid="allEmailColumns" />
-    FROM email b where b.tabela = 1 and b.parentId= #{id} ORDER BY b.id ASC
+    FROM email b where b.tabela in(1,51,52) and b.parentId= #{id} ORDER BY b.id ASC
  </select>
 
  <select id="fetchAllEmailsByFuncionario" parameterType="Integer" resultMap="emailResult">

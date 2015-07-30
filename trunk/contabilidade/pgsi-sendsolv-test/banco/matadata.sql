@@ -878,8 +878,8 @@ CONSTRAINT [pk_grupo_id] PRIMARY KEY CLUSTERED
 
 DROP TABLE [dbo].[grupoProd];
 CREATE TABLE [dbo].[grupoProd](
-	[id]             [int] identity(1,1) NOT NULL,
-	[grupoId]     [int] NOT NULL,
+	[id]           [int] identity(1,1) NOT NULL,
+	[grupoId]      [int] NOT NULL,
 	[prodId]       [int] NOT NULL,
 	[processId]    [int] NULL,
 	[create_date]  [bigint]  NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
@@ -914,7 +914,7 @@ CONSTRAINT [pk_subgrupo_id] PRIMARY KEY CLUSTERED
 
 DROP TABLE [dbo].[subgrupoGrupo];
 CREATE TABLE [dbo].[subgrupoGrupo](
-	[id]             [int] identity(1,1) NOT NULL,
+	[id]           [int] identity(1,1) NOT NULL,
 	[grupoId]      [int] NOT NULL,
 	[subGrupoId]   [int] NOT NULL,
 	[processId]    [int] NULL,

@@ -19,7 +19,6 @@ import com.prosperitasglobal.sendsolv.model.Documento;
 import com.prosperitasglobal.sendsolv.model.Email;
 import com.prosperitasglobal.sendsolv.model.Empresa;
 import com.prosperitasglobal.sendsolv.model.Endereco;
-import com.prosperitasglobal.sendsolv.model.Entidade;
 import com.prosperitasglobal.sendsolv.model.EntidadeTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Estado;
 import com.prosperitasglobal.sendsolv.model.Filial;
@@ -214,7 +213,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 	@ResponseBody
 	public FilialResponse editFilial(@RequestBody FilialMaintenanceRequest empresaRequest)
 	{
-		empresaRequest.setFilial((Filial)insertMockEntidade(PersistanceActionEnum.INSERT));
+		empresaRequest.setFilial(insertMockFilial(PersistanceActionEnum.INSERT));
 		return edit(empresaRequest);
 
 	}
@@ -229,7 +228,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 	@ResponseBody
 	public FilialResponse deleteFilial(@RequestBody FilialMaintenanceRequest empresaRequest)
 	{
-		empresaRequest.setFilial((Filial)insertMockEntidade(PersistanceActionEnum.INSERT));
+		empresaRequest.setFilial(insertMockFilial(PersistanceActionEnum.INSERT));
 		return delete(empresaRequest);
 
 	}
@@ -244,7 +243,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 	@ResponseBody
 	public FilialResponse insertFilial(@RequestBody FilialMaintenanceRequest empresaRequest)
 	{
-		empresaRequest.setFilial((Filial)insertMockEntidade(PersistanceActionEnum.INSERT));
+		empresaRequest.setFilial(insertMockFilial(PersistanceActionEnum.INSERT));
 		return insert(empresaRequest);
 
 	}
@@ -284,7 +283,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 	@ResponseBody
 	public DepositoResponse editDeposito(@RequestBody DepositoMaintenanceRequest empresaRequest)
 	{
-		empresaRequest.setDeposito((Deposito)insertMockEntidade(PersistanceActionEnum.INSERT));
+		empresaRequest.setDeposito(insertMockDeposito(PersistanceActionEnum.INSERT));
 		return edit(empresaRequest);
 
 	}
@@ -299,7 +298,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 	@ResponseBody
 	public DepositoResponse deleteDeposito(@RequestBody DepositoMaintenanceRequest empresaRequest)
 	{
-		empresaRequest.setDeposito((Deposito)insertMockEntidade(PersistanceActionEnum.INSERT));
+		empresaRequest.setDeposito(insertMockDeposito(PersistanceActionEnum.INSERT));
 		return delete(empresaRequest);
 
 	}
@@ -314,7 +313,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 	@ResponseBody
 	public DepositoResponse insertDeposito(@RequestBody DepositoMaintenanceRequest empresaRequest)
 	{
-		empresaRequest.setDeposito((Deposito)insertMockEntidade(PersistanceActionEnum.INSERT));
+		empresaRequest.setDeposito(insertMockDeposito(PersistanceActionEnum.INSERT));
 		return insert(empresaRequest);
 
 	}
@@ -479,16 +478,38 @@ public class EmpresaAPIController extends EmpresaBaseController
 		return planoList;
 	}
 
-	public Entidade insertMockEntidade(PersistanceActionEnum modelAction)
+	public Filial insertMockFilial(PersistanceActionEnum modelAction)
 	{
-		Entidade empresa = new Entidade();
+		Filial empresa = new Filial();
 
 		empresa.setId(1);
 		empresa.setModelAction(modelAction);
 		empresa.setEmprId(1);
 		empresa.setNome("Cosme e damiao Contabiliadade");
 		empresa.setRegime(new Regime(1));
-		empresa.setEntidadeEnum(EntidadeTypeEnum.EMPRESA);
+		empresa.setEntidadeEnum(EntidadeTypeEnum.FILIAL);
+		empresa.setEnderecos(insertEndereco(modelAction));
+		empresa.setDocumentos(insertDocumento(modelAction));
+		empresa.setEmails(insertEmail(modelAction));
+		empresa.setTelefones(insertTelefone(modelAction));
+		empresa.setCnaes(insertCnae(modelAction));
+
+		empresa.setUserId("WASHINGTON");
+		return empresa;
+
+	}
+
+	public Deposito insertMockDeposito(PersistanceActionEnum modelAction)
+	{
+		Deposito empresa = new Deposito();
+
+		empresa.setId(1);
+		empresa.setModelAction(modelAction);
+		empresa.setEmprId(4);
+		empresa.setEntidadeId(7);
+		empresa.setNome("Cosme e damiao Contabiliadade");
+		empresa.setRegime(new Regime(1));
+		empresa.setEntidadeEnum(EntidadeTypeEnum.DEPOSITO);
 		empresa.setEnderecos(insertEndereco(modelAction));
 		empresa.setDocumentos(insertDocumento(modelAction));
 		empresa.setEmails(insertEmail(modelAction));

@@ -73,8 +73,9 @@
 					<div id="email-container"></div>
 				</div>
 			</div>
+		<div id="selection">
 			<div class="row">
-				<div class="col-md-8">
+				<div class="col-md-12">
 					<section class="notes view">
 						<div class="col-title">
 							<h4 class="ui-subtitle"><s:message code="pages.view.notes" text="default text" /></h4>
@@ -93,7 +94,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-12">
 					<section class="contact view">
 						<div class="col-title links">
 							<h4 class="ui-subtitle ">Plano</h4>
@@ -112,7 +113,7 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-12">
 					<section class="cnae view">
 						<div class="col-title links">
 							<h4 class="ui-subtitle ">Cnae</h4>
@@ -130,8 +131,8 @@
 				</div>
 			</div>
 			<div class="row organization last">
-				<div class="col-md-4">
-					<section class="documents view">
+				<div class="col-md-12">
+					<section class="filial view">
 						<div class="col-title">
 							<h4 class="ui-subtitle">Filial</h4>
 							<div class="links">
@@ -148,7 +149,7 @@
 
 			<div class="row organization last">
 				<div class="col-md-4">
-					<section class="documents view">
+					<section class="deposito view">
 						<div class="col-title">
 							<h4 class="ui-subtitle">Deposito</h4>
 							<div class="links">
@@ -162,7 +163,7 @@
 					</section>
 				</div>
 			</div>
-
+		</div>
 		</div>
 	</div>
 </div>

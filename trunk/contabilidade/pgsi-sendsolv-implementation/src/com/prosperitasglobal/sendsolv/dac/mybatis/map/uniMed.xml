@@ -184,7 +184,7 @@
 	SELECT b.id,
 	<include refid="allUniMedProdColumns" />
     FROM unimedProd b
-    where parentId = #{id}
+    where prodId = #{id}
     ORDER BY id ASC
   </select>
 
