@@ -115,7 +115,7 @@
 
 	    SELECT
 		<include refid="allStatusColumns" />
-	    FROM status b where b.tabelaEnum = 1 and b.parentId = #{id}
+	    FROM status b where b.tabelaEnum in(1,51,52) and b.parentId = #{id}
 
 	    ORDER BY dataStatus DESC
   </select>

@@ -32,7 +32,7 @@ $(document).ready(function()
 	pgsi.pages.deposito.depositoTable = $('#data_list').dataTable($.pgsi.table.setTable(
 	{
 		id 			: "#data_list",
-		sAjaxSource : "api/empresa/fetchall/deposito",
+		sAjaxSource : "api/empresa/fetch/deposito",
 		bPreLoad	: true,
 
 		ajax :
@@ -272,7 +272,7 @@ $(document).ready(function()
 	{
 		e.preventDefault();
 		$.pgsi.ajax.post({
-			sUrl 		: "api/deposito/add",
+			sUrl 		: "api/empresa/deposito/add",
 			oRequest 	: {},
 			fnCallback  : function(oResponse) {
 				console.log('dd')

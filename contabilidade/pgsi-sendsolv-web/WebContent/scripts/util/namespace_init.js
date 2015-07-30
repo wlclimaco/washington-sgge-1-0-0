@@ -17,6 +17,11 @@ var pgsi = {
 			view : {}
 		},
 
+		empresa : {
+			form : {},
+			view : {}
+		},
+
 		batches : {
 			view : {}
 		},

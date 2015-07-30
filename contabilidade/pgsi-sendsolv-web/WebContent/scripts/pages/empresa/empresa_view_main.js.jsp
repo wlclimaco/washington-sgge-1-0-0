@@ -21,30 +21,273 @@ pgsi.pages.empresa.view = {
 			var $container = $("section.cnae").find("div.container");
 
 			$("section.cnae").find(".col-title").find('a').unbind("click");
+			if (!$.pgsi.isNullOrUndefined(oCnaeList)){
+				if (!$.pgsi.isNullOrUndefined(oCnaeList[0].idCnae)){
+					for (var i=0; i < oCnaeList.length; i++) {
+						oCnae = oCnaeList[i].idCnae;
 
-			for (var i=0; i < oCnaeList.length; i++) {
-				oCnae = oCnaeList[i];
+						sUser = oCnae.createUser;
 
-				sUser = oCnae.createUser;
+						if (!$.pgsi.isNullOrUndefined(oCnae.modifyDateUTC)) {
+							sDate = $.pgsi.date.format(new Date(oCnae.modifyDateUTC), "mm/dd/yy h:i A", true);
+						}
 
-				if (!$.pgsi.isNullOrUndefined(oCnae.modifyDateUTC)) {
-					sDate = $.pgsi.date.format(new Date(oCnae.modifyDateUTC), "mm/dd/yy h:i A", true);
+						else {
+							sDate = $.pgsi.date.format(new Date(oCnae.createDateUTC), "mm/dd/yy h:i A", true);
+						}
+
+						sNoteText = oCnae.descricao;
+						iNoteId = oCnae.id;
+						sCnaeNumber = oCnae.codigo + "      Cnae :"+ oCnae.cnae;
+
+
+						sDelUpdLinks = "<div class='small-box'><div class='links viewNote'><a href='"+iNoteId+"'  class='ui-subtitle edit' title='" + $.pgsi.locale.get('commons.pages.edit') + "'> <span class='icon-small-button icon-nav icon-pencil edit'></span> <span>" + $.pgsi.locale.get('commons.pages.edit') +"</span></a><a href='"+iNoteId+"'  class='ui-subtitle delete' title='" + $.pgsi.locale.get('commons.pages.delete') + "'> <span class='icon-small-button icon-nav icon-trash-bin delete'></span> <span>"+$.pgsi.locale.get('commons.pages.delete')+"</span></a></div></div>";
+
+
+
+						sNoteList = sNoteList + "<div class='outer-box'><div class='box note'>" + sDelUpdLinks + "<span class='bold'>" + sUser + "</span><span class='date'>" + sDate +"</span><p class='full-text hide'>" +sCnaeNumber+ "<br>" + sNoteText + "</p><p></p><div class='text_here'><span class='ellipsis_text'>" +sCnaeNumber+ "<br>" + sNoteText + "</span></div></div></div>";
+					}
 				}
+			}
 
-				else {
-					sDate = $.pgsi.date.format(new Date(oCnae.createDateUTC), "mm/dd/yy h:i A", true);
+			// Removes content from the session
+			$container.empty();
+
+			if (sNoteList.length > 0) {
+				$container.append(sNoteList);
+				// Limiting content
+				// Configuring the initial settings to use
+				$container.find('.text_here').ThreeDots({max_rows:4});
+			}
+
+			else {
+				$("section.notes").find('div.container').append("<p class='empty'>" + $.pgsi.locale.get("page.business.view.note.empty") + "</p>");
+			}
+
+			// Attach add/edit/delete events
+			$("section.notes.view  a").click(function(event)
+			{
+
+			});
+		},
+
+		fillFilial : function(oFilialList) {
+
+			var oFilial = null;
+			var sNoteList = "";
+			var sDelUpdLinks = "";
+
+			var sDate;
+			var sUser;
+			var sNoteText;
+			var sFilialNumber="";
+			var sCnpj="";
+			var $container = $("section.filial").find("div.container");
+
+			$("section.filial").find(".col-title").find('a').unbind("click");
+			if (!$.pgsi.isNullOrUndefined(oFilialList)){
+				if (!$.pgsi.isNullOrUndefined(oFilialList)){
+					for (var i=0; i < oFilialList.length; i++) {
+						oFilial = oFilialList[i];
+
+						sUser = oFilial.nome;
+
+						if (!$.pgsi.isNullOrUndefined(oFilial.modifyDateUTC)) {
+							sDate = $.pgsi.date.format(new Date(oFilial.modifyDateUTC), "mm/dd/yy h:i A", true);
+						}
+
+						else {
+							sDate = $.pgsi.date.format(new Date(oFilial.createDateUTC), "mm/dd/yy h:i A", true);
+						}
+
+						sNoteText = oFilial.nome;
+						iNoteId = oFilial.id;
+
+						if (!$.pgsi.isNullOrUndefined(oFilial.enderecos)){
+							for (var y=0; y < oFilial.enderecos.length; y++) {
+								var endereco = oFilial.enderecos[y];
+								sFilialNumber = sFilialNumber + "("+endereco.cep + ") "+ endereco.logradouro +" "+endereco.numero+ " "+endereco.cidade.nome+" "+endereco.estado.abreviacao+" <br>";
+							}
+						}
+
+						if (!$.pgsi.isNullOrUndefined(oFilial.documentos)){
+							for (var y=0; y < oFilial.documentos.length; y++) {
+								var endereco = oFilial.documentos[y];
+								if(endereco.description === "CNPJ"){
+									sCnpj = endereco.numero;
+								}
+							}
+						}
+
+						sDelUpdLinks = "<div class='small-box'><div class='links viewNote'><a href='"+iNoteId+"'  class='ui-subtitle edit' title='" + $.pgsi.locale.get('commons.pages.edit') + "'> <span class='icon-small-button icon-nav icon-pencil edit'></span> <span>" + $.pgsi.locale.get('commons.pages.edit') +"</span></a><a href='"+iNoteId+"'  class='ui-subtitle delete' title='" + $.pgsi.locale.get('commons.pages.delete') + "'> <span class='icon-small-button icon-nav icon-trash-bin delete'></span> <span>"+$.pgsi.locale.get('commons.pages.delete')+"</span></a></div></div>";
+
+
+
+						sNoteList = sNoteList + "<div class='outer-box'><div class='box note'>" + sDelUpdLinks + "<span class='bold'>" + sUser + "</span><span class='date'>" + sDate +"</span><p class='full-text hide'>" +sFilialNumber+ "<br>" + sNoteText + "</p><p></p><div class='text_here'><span class='ellipsis_text'>" +sFilialNumber+ "<br>" + sCnpj + "</span></div></div></div>";
+						sFilialNumber = "";
+						sCnpj = "";
+					}
 				}
+			}
 
-				sNoteText = oCnae.description;
-				iNoteId = oCnae.id;
-				sCnaeNumber = oCnae.number;
+			// Removes content from the session
+			$container.empty();
+
+			if (sNoteList.length > 0) {
+				$container.append(sNoteList);
+				// Limiting content
+				// Configuring the initial settings to use
+				$container.find('.text_here').ThreeDots({max_rows:4});
+			}
+
+			else {
+				$("section.notes").find('div.container').append("<p class='empty'>" + $.pgsi.locale.get("page.business.view.note.empty") + "</p>");
+			}
+
+			// Attach add/edit/delete events
+			$("section.notes.view  a").click(function(event)
+			{
+
+			});
+		},
+
+		fillDeposito : function(oFilialList) {
+
+			var oFilial = null;
+			var sNoteList = "";
+			var sDelUpdLinks = "";
+
+			var sDate;
+			var sUser;
+			var sNoteText;
+			var sFilialNumber="";
+			var sCnpj="";
+			var $container = $("section.deposito").find("div.container");
+
+			$("section.deposito").find(".col-title").find('a').unbind("click");
+			if (!$.pgsi.isNullOrUndefined(oFilialList)){
+				if (!$.pgsi.isNullOrUndefined(oFilialList)){
+					for (var i=0; i < oFilialList.length; i++) {
+						oFilial = oFilialList[i];
+
+						sUser = oFilial.nome;
+
+						if (!$.pgsi.isNullOrUndefined(oFilial.modifyDateUTC)) {
+							sDate = $.pgsi.date.format(new Date(oFilial.modifyDateUTC), "mm/dd/yy h:i A", true);
+						}
+
+						else {
+							sDate = $.pgsi.date.format(new Date(oFilial.createDateUTC), "mm/dd/yy h:i A", true);
+						}
+
+						sNoteText = oFilial.nome;
+						iNoteId = oFilial.id;
+
+						if (!$.pgsi.isNullOrUndefined(oFilial.enderecos)){
+							for (var y=0; y < oFilial.enderecos.length; y++) {
+								var endereco = oFilial.enderecos[y];
+								sFilialNumber = sFilialNumber + "("+endereco.cep + ") "+ endereco.logradouro +" "+endereco.numero+ " "+endereco.cidade.nome+" "+endereco.estado.abreviacao+" <br>";
+							}
+						}
+
+						if (!$.pgsi.isNullOrUndefined(oFilial.documentos)){
+							for (var y=0; y < oFilial.documentos.length; y++) {
+								var endereco = oFilial.documentos[y];
+								if(endereco.description === "CNPJ"){
+									sCnpj = endereco.numero;
+								}
+							}
+						}
+
+						sDelUpdLinks = "<div class='small-box'><div class='links viewNote'><a href='"+iNoteId+"'  class='ui-subtitle edit' title='" + $.pgsi.locale.get('commons.pages.edit') + "'> <span class='icon-small-button icon-nav icon-pencil edit'></span> <span>" + $.pgsi.locale.get('commons.pages.edit') +"</span></a><a href='"+iNoteId+"'  class='ui-subtitle delete' title='" + $.pgsi.locale.get('commons.pages.delete') + "'> <span class='icon-small-button icon-nav icon-trash-bin delete'></span> <span>"+$.pgsi.locale.get('commons.pages.delete')+"</span></a></div></div>";
 
 
-				sDelUpdLinks = "<div class='small-box'><div class='links viewNote'><a href='"+iNoteId+"'  class='ui-subtitle edit' title='" + $.pgsi.locale.get('commons.pages.edit') + "'> <span class='icon-small-button icon-nav icon-pencil edit'></span> <span>" + $.pgsi.locale.get('commons.pages.edit') +"</span></a><a href='"+iNoteId+"'  class='ui-subtitle delete' title='" + $.pgsi.locale.get('commons.pages.delete') + "'> <span class='icon-small-button icon-nav icon-trash-bin delete'></span> <span>"+$.pgsi.locale.get('commons.pages.delete')+"</span></a></div></div>";
+
+						sNoteList = sNoteList + "<div class='outer-box'><div class='box note'>" + sDelUpdLinks + "<span class='bold'>" + sUser + "</span><span class='date'>" + sDate +"</span><p class='full-text hide'>" +sFilialNumber+ "<br>" + sNoteText + "</p><p></p><div class='text_here'><span class='ellipsis_text'>" +sFilialNumber+ "<br>" + sCnpj + "</span></div></div></div>";
+						sFilialNumber = "";
+						sCnpj = "";
+					}
+				}
+			}
+
+			// Removes content from the session
+			$container.empty();
+
+			if (sNoteList.length > 0) {
+				$container.append(sNoteList);
+				// Limiting content
+				// Configuring the initial settings to use
+				$container.find('.text_here').ThreeDots({max_rows:4});
+			}
+
+			else {
+				$("section.notes").find('div.container').append("<p class='empty'>" + $.pgsi.locale.get("page.business.view.note.empty") + "</p>");
+			}
+
+			// Attach add/edit/delete events
+			$("section.notes.view  a").click(function(event)
+			{
+
+			});
+		},
+
+		fillPlano : function(oFilialList) {
+
+			var oFilial = null;
+			var sNoteList = "";
+			var sDelUpdLinks = "";
+
+			var sDate;
+			var sUser;
+			var sNoteText;
+			var sFilialNumber="";
+			var sCnpj="";
+			var $container = $("section.deposito").find("div.container");
+
+			$("section.deposito").find(".col-title").find('a').unbind("click");
+			if (!$.pgsi.isNullOrUndefined(oFilialList)){
+				if (!$.pgsi.isNullOrUndefined(oFilialList)){
+					for (var i=0; i < oFilialList.length; i++) {
+						oFilial = oFilialList[i];
+
+						sUser = oFilial.nome;
+
+						if (!$.pgsi.isNullOrUndefined(oFilial.modifyDateUTC)) {
+							sDate = $.pgsi.date.format(new Date(oFilial.modifyDateUTC), "mm/dd/yy h:i A", true);
+						}
+
+						else {
+							sDate = $.pgsi.date.format(new Date(oFilial.createDateUTC), "mm/dd/yy h:i A", true);
+						}
+
+						sNoteText = oFilial.nome;
+						iNoteId = oFilial.id;
+
+						if (!$.pgsi.isNullOrUndefined(oFilial.enderecos)){
+							for (var y=0; y < oFilial.enderecos.length; y++) {
+								var endereco = oFilial.enderecos[y];
+								sFilialNumber = sFilialNumber + "("+endereco.cep + ") "+ endereco.logradouro +" "+endereco.numero+ " "+endereco.cidade.nome+" "+endereco.estado.abreviacao+" <br>";
+							}
+						}
+
+						if (!$.pgsi.isNullOrUndefined(oFilial.documentos)){
+							for (var y=0; y < oFilial.documentos.length; y++) {
+								var endereco = oFilial.documentos[y];
+								if(endereco.description === "CNPJ"){
+									sCnpj = endereco.numero;
+								}
+							}
+						}
+
+						sDelUpdLinks = "<div class='small-box'><div class='links viewNote'><a href='"+iNoteId+"'  class='ui-subtitle edit' title='" + $.pgsi.locale.get('commons.pages.edit') + "'> <span class='icon-small-button icon-nav icon-pencil edit'></span> <span>" + $.pgsi.locale.get('commons.pages.edit') +"</span></a><a href='"+iNoteId+"'  class='ui-subtitle delete' title='" + $.pgsi.locale.get('commons.pages.delete') + "'> <span class='icon-small-button icon-nav icon-trash-bin delete'></span> <span>"+$.pgsi.locale.get('commons.pages.delete')+"</span></a></div></div>";
 
 
 
-				sNoteList = sNoteList + "<div class='outer-box'><div class='box note'>" + sDelUpdLinks + "<span class='bold'>" + sUser + "</span><span class='date'>" + sDate +"</span><p class='full-text hide'>" +sCnaeNumber+ "<br>" + sNoteText + "</p><p></p><div class='text_here'><span class='ellipsis_text'>" +sCnaeNumber+ "<br>" + sNoteText + "</span></div></div></div>";
+						sNoteList = sNoteList + "<div class='outer-box'><div class='box note'>" + sDelUpdLinks + "<span class='bold'>" + sUser + "</span><span class='date'>" + sDate +"</span><p class='full-text hide'>" +sFilialNumber+ "<br>" + sNoteText + "</p><p></p><div class='text_here'><span class='ellipsis_text'>" +sFilialNumber+ "<br>" + sCnpj + "</span></div></div></div>";
+						sFilialNumber = "";
+						sCnpj = "";
+					}
+				}
 			}
 
 			// Removes content from the session
@@ -101,7 +344,11 @@ console.log(oEmpresa)
 				}
 				$('#phone-container').append(sEmail);
 
-				pgsi.pages.empresa.view.fillCnae(oEmpresa.cnaes)
+				pgsi.pages.empresa.view.fillCnae(oEmpresa.cnaes);
+
+				pgsi.pages.empresa.view.fillFilial(oEmpresa.filialList);
+
+				pgsi.pages.empresa.view.fillDeposito(oEmpresa.depositoList);
 
 		// Sets the page title
 	//	$.pgsi.pageLoader.title(oLocation.name, true);

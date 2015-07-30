@@ -879,19 +879,11 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 		FilialResponse response = new FilialResponse();
 		InternalResponse internalResponse = null;
 
-		// Validate. Notice that BusinessValidator will in turn use additional validators depending on the type
-		ValidationContext context =
-				new ValidationContext(Filial.class.getSimpleName(), request.getFilial(), indicator);
-		context.putObjectToBeValidated(UserContext.class.getSimpleName(), request.getUserContext());
-
-		if (getValidationController().validate(context))
-		{
-			// Persist
-			internalResponse = doPersistanceFilial(request, persistType);
-		}
+		// Persist
+		internalResponse = doPersistanceFilial(request, persistType);
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (FilialResponse)handleReturn(response, internalResponse, context.getMessages(), true);
+		return (FilialResponse)handleReturn(response, internalResponse, null, true);
 	}
 
 	/**
@@ -908,19 +900,11 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 		DepositoResponse response = new DepositoResponse();
 		InternalResponse internalResponse = null;
 
-		// Validate. Notice that BusinessValidator will in turn use additional validators depending on the type
-		ValidationContext context =
-				new ValidationContext(Deposito.class.getSimpleName(), request.getDeposito(), indicator);
-		context.putObjectToBeValidated(UserContext.class.getSimpleName(), request.getUserContext());
-
-		if (getValidationController().validate(context))
-		{
-			// Persist
-			internalResponse = doPersistanceDeposito(request, persistType);
-		}
+		// Persist
+		internalResponse = doPersistanceDeposito(request, persistType);
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		return (DepositoResponse)handleReturn(response, internalResponse, context.getMessages(), true);
+		return (DepositoResponse)handleReturn(response, internalResponse, null, true);
 	}
 
 }

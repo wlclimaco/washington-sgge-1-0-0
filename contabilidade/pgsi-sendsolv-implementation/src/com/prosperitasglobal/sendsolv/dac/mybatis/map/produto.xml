@@ -59,7 +59,7 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<association property="classificacao"    column="classificacao" select="ClassificaMap.fetchClassificacaoById"  />
+<!-- 	<association property="classificacao"    column="classificacao" select="ClassificaMap.fetchClassificacaoById"  /> -->
 	<association property="uniMed"    column="uniMed" select="UniMedMap.fetchUniMedByProduto"  />
 	<association property="grupo"    column="grupo" select="GrupoMap.fetchGrupoByProduto"  />
 	<association property="subGrupo"    column="subGrupo" select="SubGrupoMap.fetchSubGrupoByProduto"  />

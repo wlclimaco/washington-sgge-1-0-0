@@ -150,7 +150,7 @@ pgsi.pages.entidade = {
 			return val;
 		}
 		var sStatus ="";
-		if (!$.pgsi.isNullOrUndefined(full.statusList)) {
+		if (!$.pgsi.isNullOrUndefined(full.statusList[0])) {
 			sStatus = // $.pgsi.enums.internationalizeByLabel("com.prosperitasglobal.sendsolv.model.CdStatusTypeEnum",full.statusList[0].status);
 			sStatus = full.statusList[0].status;
 		}

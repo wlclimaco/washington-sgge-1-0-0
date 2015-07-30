@@ -25,6 +25,7 @@
     <result property="nome" column="nome" />
     <result property="processId" column="processId" />
     <result property="entidadeId" column="entidadeId" />
+    <result property="emprId" column="emprId" />
 	<result property="entidadeEnumValue" column="entidadeEnum" />
     <result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
@@ -35,7 +36,6 @@
 	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByEmpresaId"/>
 	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByEmpresa"/>
 	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByEmpresa"/>
-	<collection property="socios" column="id" select="SocioMap.fetchSocioByEmpresaId"/>
 	<collection property="cnaes" column="id" select="CnaeMap.fetchAllCnaesByEmpresa"/>
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
   </resultMap>
@@ -49,6 +49,7 @@
 		,b.processId
 		,b.entidadeId
 		,b.entidadeEnum
+		,b.emprId
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -61,6 +62,7 @@
   		#{processId},
   		#{entidadeId},
   		#{entidadeEnumValue},
+  		#{emprId},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 

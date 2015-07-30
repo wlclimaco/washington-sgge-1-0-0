@@ -10,6 +10,9 @@
 					<li class="active">
 						Data
 					</li>
+					<li class="rigth">
+						Data
+					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li>

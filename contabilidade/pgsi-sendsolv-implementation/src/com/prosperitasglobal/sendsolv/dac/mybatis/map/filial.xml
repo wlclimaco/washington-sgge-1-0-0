@@ -30,6 +30,7 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allFilialColumns">
+
 			<include refid="EntidadeMap.allEntidadeColumns"/>
   </sql>
 
@@ -40,7 +41,7 @@
   <select id="fetchFilialRowCount" parameterType="FilialInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM entidade
-        where entidadeEnum = entidadeEnumValue
+        where entidadeEnum = 2
 
   </select>
 
@@ -78,7 +79,7 @@
     						<include refid="allFilialColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM entidade b
-						where b.entidadeEnum = entidadeEnum
+						where b.entidadeEnum = 2
 					<if test="parentId != null">
 						AND b.id = #{id}
 					</if>

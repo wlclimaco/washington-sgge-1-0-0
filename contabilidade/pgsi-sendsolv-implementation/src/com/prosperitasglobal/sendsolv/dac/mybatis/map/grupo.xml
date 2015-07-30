@@ -185,7 +185,7 @@
 	SELECT b.id,
 	<include refid="allGrupoProdColumns" />
     FROM grupoProd b
-    where parentId = #{id}
+    where prodId = #{id}
     ORDER BY id ASC
   </select>
 
