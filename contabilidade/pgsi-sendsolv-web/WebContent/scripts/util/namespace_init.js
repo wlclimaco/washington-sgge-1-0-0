@@ -16,6 +16,10 @@ var pgsi = {
 			form : {},
 			view : {}
 		},
+		note : {
+			form : {},
+			view : {}
+		},
 
 		empresa : {
 			form : {},
