@@ -95,7 +95,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<section class="contact view">
+					<section class="plano view">
 						<div class="col-title links">
 							<h4 class="ui-subtitle ">Plano</h4>
 							<a href="0" class="ui-subtitle buttonContact add" id="add-contact" title='<s:message code="commons.pages.addnew" text="default text" />'>
@@ -171,4 +171,5 @@
 <jsp:include page="../../scripts/pages/phone/phone_main.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/address/address_main.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/empresa/empresa_view_main.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/entidade/entidade_actions.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/empresa/empresa_view_init.js.jsp" flush="true" />

@@ -23,5 +23,17 @@
 		});
 	}
 
+	$('#add-note').click(function(e)
+{
+
+	e.preventDefault();
+	pgsi.util.actiondialog.launchActionDialog (
+		"insert",
+		pgsi.pages.note.dialogSettings.insert(
+			$('#business-id').val(),
+			$('#company-name-field').text(),
+			1)
+	);
+});
 $.pgsi.progressBar.stopGlobal();
 </script>

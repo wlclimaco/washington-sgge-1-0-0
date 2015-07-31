@@ -144,7 +144,13 @@
 							<div class="btn-group">
 
 								<button class="btn btn-default">
-									Action
+									<div id="refresh-content" class="right">
+										<div id="refresh-page" class="left">
+											<div>
+												<span class="ui-icon loading"></span>
+											</div>
+										</div>
+									</div>
 								</button>
 								<button data-toggle="dropdown" class="btn btn-default dropdown-toggle">
 									<span class="caret"></span>

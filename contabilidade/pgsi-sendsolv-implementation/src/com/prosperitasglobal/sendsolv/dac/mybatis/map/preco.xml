@@ -145,10 +145,10 @@
 	 </if>
   </select>
 
-  <select id="fetchTabPrecoByProduto" parameterType="Integer" resultMap="tabPrecoResult">
+  <select id="fetchTabPrecoByProduto" resultMap="tabPrecoResult">
 	  SELECT b.id,<include refid="allTabPrecoColumns" />
         FROM tabPreco b
-     WHERE  b.prodId=#{id}
+     WHERE  b.prodId=#{id} and entidadeId=#{entidadeId}
   </select>
 
   <select id="fetchTabPrecoByPlano " parameterType="Integer" resultMap="tabPrecoResult">

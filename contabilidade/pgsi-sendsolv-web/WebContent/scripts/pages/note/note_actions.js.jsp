@@ -4,14 +4,14 @@
 <sec:authorize access="hasAnyRole('ROLE_DOMAIN ADMIN', 'ROLE_ADMIN', 'ROLE_CSR')">
 
 <script type="text/javascript">
-	pgsi.pages.entidade.dialogSettings = {
+	pgsi.pages.note.dialogSettings = {
 
 		insert : function (iId, sName,sModelAction) {
 
 			return {
-				title : $.pgsi.locale.get("commons.dialog.insert.title"),
-				width : 800,
-				height: 600,
+				title : Inserir Note,
+				width : 445,
+				height: 140,
 
 				close : function () {},
 
@@ -31,7 +31,7 @@
 						{
 							sUrl = "api/entidade/update"
 						}
-						pgsi.pages.entidade.form.ajaxCall(sUrl,sModelAction);
+						pgsi.pages.note.form.fnAjaxCallInsertUpdateNote(sUrl,sModelAction);
 
 					};
 
@@ -46,7 +46,7 @@
 
 				action : function (actionDialog) {
 
-					actionDialog.load("empresa/editView?userId=" + pgsi.settings.userContext.userId+"&locationId=2", function() {
+					actionDialog.load("note/create", function() {
 
 						$('#selected', actionDialog).removeClass("hide").append(""+sName+"");
 

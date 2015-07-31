@@ -68,6 +68,8 @@
 	<mvc:view-controller path="/sistema/reports"     view-name="/bootstrap/reports"/>
 	<mvc:view-controller path="/sistema/shortcodes"  view-name="/bootstrap/shortcodes"/>
 	<mvc:view-controller path="/sistema/signup"      view-name="/bootstrap/signup"/>
+	<mvc:view-controller path="/note/create"      	 view-name="/note/note_create"/>
+	<mvc:view-controller path="/cnae/create"     	 view-name="/cnae/cnae_main"/>
 
 	<!-- Resolves view names to protected .jsp resources within the /WEB-INF
 		directory -->

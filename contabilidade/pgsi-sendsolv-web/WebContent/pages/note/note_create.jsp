@@ -2,17 +2,20 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
 
-<div class="small-dialog-container" id="create-note">
-	<form id="create-note-form" name="createNoteForm" method="post" action="#" >
-    	<input type="hidden" name="contactId" id="contact-id" tabindex="0" value="" />
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<form role="form">
+				<div class="form-group">
 
-		<div class="row-form">
-			<div class="col-note">
-				<label for="contact-pep"><s:message code="pages.document.form.label.note" text="PEP" /></label>
-				<textarea id="note" class="note required" minlength="5" maxlength="255" placeholder="*"></textarea>
-			</div>
+					<label for="exampleInputEmail1">
+						Note
+					</label>
+					 <textarea class="form-control" rows="3"></textarea>
+				</div>
+			</form>
 		</div>
-	</form>
+	</div>
 </div>
 <jsp:include page="../../scripts/pages/note/note_main.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/note/note_init.js.jsp" flush="true" />
