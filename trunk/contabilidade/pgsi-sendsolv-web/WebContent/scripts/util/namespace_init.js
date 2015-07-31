@@ -22,6 +22,11 @@ var pgsi = {
 			view : {}
 		},
 
+		entidade : {
+			form : {},
+			view : {}
+		},
+
 		batches : {
 			view : {}
 		},

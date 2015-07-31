@@ -54,6 +54,8 @@
 	<result property="porcao" column="porcao" />
 	<result property="pesoBruto" column="pesoBruto" />
 	<result property="pesoLiquido" column="pesoLiquido" />
+	<result property="parentId" column="entidadeId" />
+	<result property="processId" column="processId" />
 	<result property="modoUso" column="modoUso" />
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
@@ -66,7 +68,8 @@
 	<association property="marca"    column="marca" select="MarcaMap.fetchMarcaByProduto"  />
 	<association property="tributacao"    column="tributacao" select="TributosMap.fetchTributacaoByProduto"  />
 	<collection property="estoqueList" column="id" select="EstoqueMap.fetchEstoqueByProduto"/>
-	<collection property="precoList" column="id" select="TabPrecoMap.fetchTabPrecoByProduto"/>
+<!-- 	<collection property="precoList" column="{countryCode=recipient_country_code, code=recipient_state_province_region_id}" select="countryMap.fetchStateProvinceRegionByCountryCodeAndCode"/> -->
+	<collection property="precoList" column="{id=id,entidadeId=entidadeId}" select="TabPrecoMap.fetchTabPrecoByProduto"/>
 	<collection property="custoList" column="id" select="CustoMap.fetchCustoByProduto"/>
 	<collection property="porcaoList" column="id" select="PorcaoMap.fetchPorcaoByProduto"/>
 	<collection property="rentabilidadeList" column="id" select="RentabilidadeMap.fetchRentabilidadeByProduto"/>
@@ -124,6 +127,8 @@
 		,b.grupo
 		,b.subGrupo
 		,b.marca
+		,b.processId
+		,b.entidadeId
 		,b.tributacao
       	,b.create_date
       	,b.create_user
@@ -151,6 +156,8 @@
 		#{subGrupo.id},
 		#{marca.id},
 		#{tributacao.id},
+		#{processId},
+		#{parentId},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 

@@ -231,61 +231,73 @@ pgsi.pages.empresa.view = {
 			});
 		},
 
-		fillPlano : function(oFilialList) {
+		fillDocumento : function(oDocumentoList,description) {
+			var iNumber=0;
 
-			var oFilial = null;
+			if (!$.pgsi.isNullOrUndefined(oDocumentoList)){
+				for (var y=0; y < oDocumentoList.length; y++) {
+					if(oDocumentoList[y].description == description){
+						iNumber = oDocumentoList[y].numero;
+					}
+				}
+			}
+
+			return iNumber;
+		},
+
+		fillPlano : function(oPlanoList) {
+
+			var oPlano = null;
 			var sNoteList = "";
 			var sDelUpdLinks = "";
 
 			var sDate;
 			var sUser;
 			var sNoteText;
-			var sFilialNumber="";
+			var sPlanoNumber="";
 			var sCnpj="";
-			var $container = $("section.deposito").find("div.container");
+			var fValor = 0;
+			var $container = $("section.plano").find("div.container");
 
-			$("section.deposito").find(".col-title").find('a').unbind("click");
-			if (!$.pgsi.isNullOrUndefined(oFilialList)){
-				if (!$.pgsi.isNullOrUndefined(oFilialList)){
-					for (var i=0; i < oFilialList.length; i++) {
-						oFilial = oFilialList[i];
+			$("section.plano").find(".col-title").find('a').unbind("click");
+			if (!$.pgsi.isNullOrUndefined(oPlanoList)){
+				if (!$.pgsi.isNullOrUndefined(oPlanoList)){
+					for (var i=0; i < oPlanoList.length; i++) {
+						oPlano = oPlanoList[i];
 
-						sUser = oFilial.nome;
 
-						if (!$.pgsi.isNullOrUndefined(oFilial.modifyDateUTC)) {
-							sDate = $.pgsi.date.format(new Date(oFilial.modifyDateUTC), "mm/dd/yy h:i A", true);
+						if (!$.pgsi.isNullOrUndefined(oPlano.modifyDateUTC)) {
+							sDate = $.pgsi.date.format(new Date(oPlano.modifyDateUTC), "mm/dd/yy h:i A", true);
 						}
 
 						else {
-							sDate = $.pgsi.date.format(new Date(oFilial.createDateUTC), "mm/dd/yy h:i A", true);
+							sDate = $.pgsi.date.format(new Date(oPlano.createDateUTC), "mm/dd/yy h:i A", true);
 						}
-
-						sNoteText = oFilial.nome;
-						iNoteId = oFilial.id;
-
-						if (!$.pgsi.isNullOrUndefined(oFilial.enderecos)){
-							for (var y=0; y < oFilial.enderecos.length; y++) {
-								var endereco = oFilial.enderecos[y];
-								sFilialNumber = sFilialNumber + "("+endereco.cep + ") "+ endereco.logradouro +" "+endereco.numero+ " "+endereco.cidade.nome+" "+endereco.estado.abreviacao+" <br>";
-							}
-						}
-
-						if (!$.pgsi.isNullOrUndefined(oFilial.documentos)){
-							for (var y=0; y < oFilial.documentos.length; y++) {
-								var endereco = oFilial.documentos[y];
-								if(endereco.description === "CNPJ"){
-									sCnpj = endereco.numero;
+						if (!$.pgsi.isNullOrUndefined(oPlano.produto)){
+							sUser = oPlano.produto.produto;
+							//debugger
+							if (!$.pgsi.isNullOrUndefined(oPlano.produto.precoList)){
+								for (var y=0; y < oPlano.produto.precoList.length; y++) {
+									if(oPlano.produto.precoList[y].precoTypeEnum == "PLANO"){
+										fValor = oPlano.produto.precoList[y].valor;
+									}
 								}
 							}
 						}
 
+							sNoteText = $.pgsi.date.format(new Date(oPlano.dataInicio), "mm/dd/yy h:i A", true)+" - "+$.pgsi.date.format(new Date(oPlano.dataFinal), "mm/dd/yy h:i A", true);
+							iNoteId = oPlano.id;
+							sCnpj = oPlano.numeroContrato || "0000-00";
+
+
+
 						sDelUpdLinks = "<div class='small-box'><div class='links viewNote'><a href='"+iNoteId+"'  class='ui-subtitle edit' title='" + $.pgsi.locale.get('commons.pages.edit') + "'> <span class='icon-small-button icon-nav icon-pencil edit'></span> <span>" + $.pgsi.locale.get('commons.pages.edit') +"</span></a><a href='"+iNoteId+"'  class='ui-subtitle delete' title='" + $.pgsi.locale.get('commons.pages.delete') + "'> <span class='icon-small-button icon-nav icon-trash-bin delete'></span> <span>"+$.pgsi.locale.get('commons.pages.delete')+"</span></a></div></div>";
-
-
-
-						sNoteList = sNoteList + "<div class='outer-box'><div class='box note'>" + sDelUpdLinks + "<span class='bold'>" + sUser + "</span><span class='date'>" + sDate +"</span><p class='full-text hide'>" +sFilialNumber+ "<br>" + sNoteText + "</p><p></p><div class='text_here'><span class='ellipsis_text'>" +sFilialNumber+ "<br>" + sCnpj + "</span></div></div></div>";
-						sFilialNumber = "";
+						sNoteList = sNoteList + "<div class='outer-box'><div class='box note'>" + sDelUpdLinks + "<span class='bold'>" + sUser + "</span><span class='date'>" + sDate +"</span><p class='full-text hide'>" +fValor+ "<br>" + sNoteText + "</p><p></p><div class='text_here'><span class='ellipsis_text'><span>"+fValor+"</span><br><sup>" +sNoteText+ "<br>" + sCnpj + "</sup></span></div></div></div>";
+						sNoteText = "";
 						sCnpj = "";
+						iNoteId = "";
+						sUser = "";
+						fValor = 0;
 					}
 				}
 			}
@@ -322,17 +334,17 @@ console.log(oEmpresa)
 
 	//			<span class="label">CNPJ</span>
 
-				for(var i=0;i<oEmpresa.documentos.length;i++){
-					if(oEmpresa.documentos[i].type == "CNPJ"){
-						$("#cnpj-field").text(oEmpresa.documentos[i].numero);
-					}else if(oEmpresa.documentos[i].type == "IM") {
-						$("#im-field").text(oEmpresa.documentos[i].numero);
-					}else if(oEmpresa.documentos[i].type == "IE") {
-						$("#IE-field").text(oEmpresa.documentos[i].numero);
-					}
-				}
 
-				$("#regime-field").text(oEmpresa.regime);
+
+				$("#cnpj-field").text(pgsi.pages.empresa.view.fillDocumento(oEmpresa.documentos,"CNPJ"));
+
+				$("#im-field").text(pgsi.pages.empresa.view.fillDocumento(oEmpresa.documentos,"IM"));
+
+				$("#IE-field").text(pgsi.pages.empresa.view.fillDocumento(oEmpresa.documentos,"IE"));
+
+
+
+				$("#regime-field").text(oEmpresa.regime.descricao);
 
 				pgsi.pages.phone.view.fillFields(oEmpresa.telefones);
 
@@ -349,6 +361,8 @@ console.log(oEmpresa)
 				pgsi.pages.empresa.view.fillFilial(oEmpresa.filialList);
 
 				pgsi.pages.empresa.view.fillDeposito(oEmpresa.depositoList);
+
+				pgsi.pages.empresa.view.fillPlano(oEmpresa.planoList);
 
 		// Sets the page title
 	//	$.pgsi.pageLoader.title(oLocation.name, true);

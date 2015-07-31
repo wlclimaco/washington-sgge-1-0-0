@@ -93,7 +93,7 @@ pgsi.pages.note = {
 			},
 
 			fnAjaxCallInsertUpdateNote : function(oRequest,sUrl,fnCallBack){
-
+debugger
 				var bValidForm = pgsi.pages.note.form.validator.form();
 				if(bValidForm){
 					var fnCallBack = function(oResponse) {

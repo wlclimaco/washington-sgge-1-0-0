@@ -21,39 +21,20 @@
 <div id="tabs">
 	<ul>
 		<li>
-			<a href="#" id="infoTab" data-tab="info" title='<s:message code="commons.organization.view.locationinfo" text="default text" />' data-title='<s:message code="commons.organization.view.locationinfo" text="default text" />'>
-				<s:message code="commons.organization.view.locationinfo" text="Location Info" />
+			<a href="#" id="infoTab" class="alist" data-tab="info" title='<s:message code="commons.organization.view.locationinfo" text="default text" />' data-title='<s:message code="commons.organization.view.locationinfo" text="default text" />'>
+				Informacao
 			</a>
 		</li>
 		</li>
 		<li>
-			<a href="#" id="funcionarioTab" data-tab="funcionario" title='Funcionarios' data-title='Funcionarios'>
-				Funcionarios
+			<a href="#" id="funcionarioTab" class="alist" data-tab="funcionario" title='Funcionarios' data-title='Funcionarios'>
+				Contador
 			</a>
 		</li>
 		<li>
-			<a href="#" id="produtoTab" data-tab="produto" title='Produtos' data-title='Produtos'>
-				Produtos
-			</a>
-		</li>
-		<li>
-			<a href="#" id="documentoTab" data-tab="documento" title='Documentos' data-title='Documentos'>
-				Documentos
-			</a>
-		</li>
-		<li>
-			<a href="#" id="xmlTab" data-tab="xml" title='XMLs' data-title='XMLs'>
+			<a href="#" id="xmlTab" class="alist" data-tab="xml" title='XMLs' data-title='XMLs'>
 				XMLs
 			</a>
-		</li>
-		<li>
-			<a href="#" id="pricingTab" data-tab="pricing" title='Historico' data-title='Historico'>
-				Historico
-			</a>
-		</li>
-		<li class="add_loc_link" title="<s:message code="commons.pages.addanotherlocation" text="default text" />">
-			<span class="icon-nav icon-plus icon-small-button"></span>
-			<s:message code="commons.pages.addanotherlocation" text="default text" />
 		</li>
 	</ul>
 </div>
