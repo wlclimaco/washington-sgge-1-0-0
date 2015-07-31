@@ -53,6 +53,7 @@ public final class PlanoDACD extends SqlSessionDaoSupport
 		{
 			// Make sure we set the parent key
 			plano.setParentId(parentId);
+			plano.setEmprId(empId);
 
 			if (ValidationUtil.isNull(plano.getModelAction()))
 			{
@@ -81,9 +82,9 @@ public final class PlanoDACD extends SqlSessionDaoSupport
 					{
 						count =
 								StatusDACD
-										.maintainStatusAssociations(plano.getStatusList(), response, plano.getId(),
-												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.SOCIO, statusDAC,
-												historicoDAC, processId, historicoId);
+								.maintainStatusAssociations(plano.getStatusList(), response, plano.getId(),
+										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.SOCIO, statusDAC,
+										historicoDAC, processId, historicoId);
 					}
 					break;
 				case DELETE:
