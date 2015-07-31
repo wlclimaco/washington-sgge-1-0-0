@@ -60,8 +60,6 @@
 						<li id="resetFilter"><label><button class="btn btn-default" type="button"><i class="fa fa-search"></i>  Limpar Filtros</label></li>
                     </ul>
                 </div>
-
-
                 <!-- /.sidebar-collapse -->
             </div>
 

@@ -54,6 +54,8 @@ public final class PrecoDACD extends SqlSessionDaoSupport
 		{
 			// Make sure we set the parent key
 			tabPreco.setParentId(parentId);
+			tabPreco.setEmprId(empId);
+			tabPreco.setProcessId(processId);
 
 			if (ValidationUtil.isNull(tabPreco.getModelAction()))
 			{

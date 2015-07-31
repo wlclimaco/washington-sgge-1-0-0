@@ -465,6 +465,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 		preco.setValor(new Double(10.90));
 		preco.setDataProInicial(new Long("14327833577780"));
 		preco.setDataProFinal(new Long("14327833577780"));
+		preco.setModelAction(PersistanceActionEnum.INSERT);
 		precoList.add(preco);
 
 		preco = new TabPreco();
@@ -474,6 +475,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 		preco.setValor(new Double(10.90));
 		preco.setDataProInicial(new Long("14327833577780"));
 		preco.setDataProFinal(new Long("14327833577780"));
+		preco.setModelAction(PersistanceActionEnum.INSERT);
 		precoList.add(preco);
 
 		preco = new TabPreco();
@@ -483,6 +485,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 		preco.setValor(new Double(10.90));
 		preco.setDataProInicial(new Long("14327833577780"));
 		preco.setDataProFinal(new Long("14327833577780"));
+		preco.setModelAction(PersistanceActionEnum.INSERT);
 		precoList.add(preco);
 
 		preco = new TabPreco();
@@ -492,6 +495,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 		preco.setValor(new Double(10.90));
 		preco.setDataProInicial(new Long("14327833577780"));
 		preco.setDataProFinal(new Long("14327833577780"));
+		preco.setModelAction(PersistanceActionEnum.INSERT);
 		precoList.add(preco);
 
 		return precoList;

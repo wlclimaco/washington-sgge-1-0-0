@@ -104,7 +104,7 @@ public class PlanoDACImpl extends SqlSessionDaoSupport implements IPlanoDAC
 		insertCount +=
 				PrecoDACD.maintainTabPrecoAssociations(plano.getPreco(), response, insertCount, null,
 						null,
-						null, getTabPrecoDAC(), getStatusDAC(), getHistoricoDAC(), plano.getId(),
+						null, getTabPrecoDAC(), getStatusDAC(), getHistoricoDAC(), plano.getEmprId(),
 						plano.getCreateUser(), plano.getProcessId());
 
 		return insertCount;

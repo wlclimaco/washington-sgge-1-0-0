@@ -72,7 +72,6 @@
 	<collection property="rentabilidadeList" column="id" select="RentabilidadeMap.fetchRentabilidadeByProduto"/>
 	<collection property="cfopList" column="id" select="CfopMap.fetchCfopByProd"/>
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByProduto"/>
-
   </resultMap>
 
    <resultMap id="produtoPessoaResult" type="ProdutoPessoa" >
