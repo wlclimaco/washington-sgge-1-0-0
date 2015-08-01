@@ -145,7 +145,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 	@ResponseBody
 	public EmpresaResponse editEmpresa(@RequestBody EmpresaMaintenanceRequest empresaRequest)
 	{
-		empresaRequest.setEmpresa(insertMockEmpresa(PersistanceActionEnum.INSERT));
+		// empresaRequest.setEmpresa(insertMockEmpresa(PersistanceActionEnum.INSERT));
 		return edit(empresaRequest);
 
 	}
@@ -175,7 +175,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 	@ResponseBody
 	public EmpresaResponse insertEmpresa(@RequestBody EmpresaMaintenanceRequest empresaRequest)
 	{
-		empresaRequest.setEmpresa(insertMockEmpresa(PersistanceActionEnum.INSERT));
+		// empresaRequest.setEmpresa(insertMockEmpresa(PersistanceActionEnum.INSERT));
 		return insert(empresaRequest);
 
 	}

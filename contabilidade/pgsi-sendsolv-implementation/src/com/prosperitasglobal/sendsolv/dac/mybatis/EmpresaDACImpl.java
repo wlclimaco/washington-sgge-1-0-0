@@ -7,6 +7,7 @@ import java.util.Map;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
+import com.prosperitasglobal.cbof.dac.INoteDAC;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
 import com.prosperitasglobal.sendsolv.dac.IDocumentoDAC;
@@ -23,6 +24,7 @@ import com.prosperitasglobal.sendsolv.dacd.mybatis.DocumentosDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.EmailDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.EnderecoDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.HistoricoDACD;
+import com.prosperitasglobal.sendsolv.dacd.mybatis.NotesDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PlanoDACD;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.SociosDACD;
@@ -50,6 +52,7 @@ import com.prosperitasglobal.sendsolv.model.request.FilialInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.PlanoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.RegimeInquiryRequest;
 import com.qat.framework.model.QATModel;
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
@@ -111,6 +114,8 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 	IStatusDAC statusDAC;
 
 	IPlanoDAC planoDAC;
+
+	INoteDAC noteDAC;
 
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(EmpresaDACImpl.class);
@@ -194,6 +199,22 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 	public IEnderecoDAC getEnderecoDAC()
 	{
 		return enderecoDAC;
+	}
+
+	/**
+	 * @return the noteDAC
+	 */
+	public INoteDAC getNoteDAC()
+	{
+		return noteDAC;
+	}
+
+	/**
+	 * @param noteDAC the noteDAC to set
+	 */
+	public void setNoteDAC(INoteDAC noteDAC)
+	{
+		this.noteDAC = noteDAC;
 	}
 
 	/**
@@ -370,16 +391,23 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 	public InternalResultsResponse<Empresa> insertEmpresa(Empresa empresa)
 	{
 		Integer insertCount = 0;
+		Integer historicoId = 0;
 		InternalResultsResponse<Empresa> response = new InternalResultsResponse<Empresa>();
+		if (empresa.getModelAction() == PersistanceActionEnum.INSERT)
+		{
+			// First insert the root
+			// Is successful the unique-id will be populated back into the object.
+			insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, empresa, response);
 
-		// First insert the root
-		// Is successful the unique-id will be populated back into the object.
-		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, empresa, response);
+			historicoId =
+					HistoricoDACD.inserthistorico(empresa.getId(), empresa.getId(), empresa.getUserId(), response,
+							TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoDAC);
+		}
+		else
+		{
 
-		Integer historicoId =
-				HistoricoDACD.inserthistorico(empresa.getId(), empresa.getId(), empresa.getUserId(), response,
-						TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoDAC);
-
+			historicoId = empresa.getProcessId();
+		}
 		insertCount +=
 				SociosDACD.maintainSocioAssociations(empresa.getSocios(), response, empresa.getId(), null, null,
 						TabelaEnum.EMPRESA, getSocioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
@@ -479,10 +507,10 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, empresa.getId(),
-								null, AcaoEnum.DELETE,
-								empresa.getCreateUser(), empresa.getId(), TabelaEnum.EMPRESA, getStatusDAC(),
-								getHistoricoDAC(), empresa.getProcessId(), null);
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, empresa.getId(),
+						null, AcaoEnum.DELETE,
+						empresa.getCreateUser(), empresa.getId(), TabelaEnum.EMPRESA, getStatusDAC(),
+						getHistoricoDAC(), empresa.getProcessId(), null);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -609,10 +637,10 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, filial.getId(),
-								null, AcaoEnum.DELETE,
-								filial.getCreateUser(), filial.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
-								getHistoricoDAC(), filial.getProcessId(), null);
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, filial.getId(),
+						null, AcaoEnum.DELETE,
+						filial.getCreateUser(), filial.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
+						getHistoricoDAC(), filial.getProcessId(), null);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -730,10 +758,10 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, deposito.getId(),
-								null, AcaoEnum.DELETE,
-								deposito.getCreateUser(), deposito.getEmprId(), TabelaEnum.DEPOSITO, getStatusDAC(),
-								getHistoricoDAC(), deposito.getProcessId(), null);
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, deposito.getId(),
+						null, AcaoEnum.DELETE,
+						deposito.getCreateUser(), deposito.getEmprId(), TabelaEnum.DEPOSITO, getStatusDAC(),
+						getHistoricoDAC(), deposito.getProcessId(), null);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -878,6 +906,12 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 				DocumentosDACD.maintainDocumentoAssociations(empresa.getDocumentos(), response, empresa.getId(), null,
 						null,
 						tabela, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+						empresa.getCreateUser(), processId, historicoId);
+
+		insertCount +=
+				NotesDACD.maintainNoteAssociations(empresa.getNotes(), response, empresa.getId(), null,
+						null,
+						tabela, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getEmprId(),
 						empresa.getCreateUser(), processId, historicoId);
 
 		if (insertCount > 0)
