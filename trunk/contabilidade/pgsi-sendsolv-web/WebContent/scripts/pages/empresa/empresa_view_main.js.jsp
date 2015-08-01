@@ -375,7 +375,7 @@ console.log(oEmpresa)
 //		pgsi.version.versionBusiness = oLocation.version;
 
 		// fill notes
-//		pgsi.pages.note.view.fill(oLocation.noteList, oLocation);
+		pgsi.pages.note.view.fill(oEmpresa.notes, "");
 
 	},
 

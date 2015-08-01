@@ -117,7 +117,7 @@
 					<section class="cnae view">
 						<div class="col-title links">
 							<h4 class="ui-subtitle ">Cnae</h4>
-							<a href="0" class="ui-subtitle buttonContact add" id="add-contact" title='<s:message code="commons.pages.addnew" text="default text" />'>
+							<a href="0" class="ui-subtitle buttonContact add" id="add-cnae" title='<s:message code="commons.pages.addnew" text="default text" />'>
 								<span class="icon-small-button icon-nav icon-pencil add"></span>
 								<span>Add Cnae</span>
 							</a>
@@ -171,5 +171,8 @@
 <jsp:include page="../../scripts/pages/phone/phone_main.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/address/address_main.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/empresa/empresa_view_main.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/note/note_main.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/note/note_actions.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/entidade/entidade_actions.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/cnae/cnae_actions.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/empresa/empresa_view_init.js.jsp" flush="true" />

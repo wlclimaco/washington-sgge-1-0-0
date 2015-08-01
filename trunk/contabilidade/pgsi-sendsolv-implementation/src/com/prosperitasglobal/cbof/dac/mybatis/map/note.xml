@@ -109,6 +109,14 @@
 		WHERE b.parentId = #{id} and b.tabela = 46
 	</select>
 
+	<select id="fetchNoteByNotes" parameterType="Integer" resultMap="noteResult">
+		SELECT
+			b.id,
+			<include refid="allNoteColumns" />
+		FROM note1 b
+		WHERE b.parentId = #{id} and b.tabela in(1,51,52)
+	</select>
+
 
 
 </mapper>

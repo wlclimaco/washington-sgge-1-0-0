@@ -5,13 +5,13 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<form role="form">
+			<form role="form" id="create-note-form">
 				<div class="form-group">
 
 					<label for="exampleInputEmail1">
 						Note
 					</label>
-					 <textarea class="form-control" rows="3"></textarea>
+					 <textarea class="form-control required" id="noteText" rows="3" placeholder="*"></textarea>
 				</div>
 			</form>
 		</div>

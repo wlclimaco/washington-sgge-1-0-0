@@ -24,16 +24,29 @@
 	}
 
 	$('#add-note').click(function(e)
-{
+	{
 
-	e.preventDefault();
-	pgsi.util.actiondialog.launchActionDialog (
-		"insert",
-		pgsi.pages.note.dialogSettings.insert(
-			$('#business-id').val(),
-			$('#company-name-field').text(),
-			1)
-	);
-});
+		e.preventDefault();
+		pgsi.util.actiondialog.launchActionDialog (
+			"insert",
+			pgsi.pages.note.dialogSettings.insert(
+				$('#business-id').val(),
+				$('#company-name-field').text(),
+				1)
+		);
+	});
+
+	$('#add-cnae').click(function(e)
+			{
+
+				e.preventDefault();
+				pgsi.util.actiondialog.launchActionDialog (
+					"insert",
+					pgsi.pages.cnae.dialogSettings.insert(
+						$('#business-id').val(),
+						$('#company-name-field').text(),
+						1)
+				);
+			});
 $.pgsi.progressBar.stopGlobal();
 </script>

@@ -49,16 +49,7 @@ pgsi.pages.note = {
 
 				var fnCallBackFetch = function(oResponseFetch) {
 					if (oResponseFetch.operationSuccess == true) {
-						if (parseInt($('#business-type').val()) == 1) {
-							pgsi.pages.note.view.fill(oResponseFetch.organizationList[0].noteList, oResponseFetch.organizationList[0]);
-						}
-						else if(parseInt($('#business-type').val()) == 2){
-							pgsi.pages.note.view.fill(oResponseFetch.locationList[0].noteList, oResponseFetch.locationList[0]);
-						} else if(parseInt($('#business-type').val()) == 3){
-							pgsi.pages.note.view.fill(oResponseFetch.memberList[0].noteList, oResponseFetch.memberList[0]);
-						} else if (parseInt($('#business-type').val()) == 5){
-							pgsi.pages.note.view.fill(oResponseFetch.recipientList[0].noteList, oResponseFetch.recipientList[0]);
-						}
+						pgsi.pages.empresa.view.fnFillEmpresa(oResponseFetch);
 
 						$("#action-dialog").dialog('close');
 					}
@@ -68,32 +59,16 @@ pgsi.pages.note = {
 					$.pgsi.progressBar.stop();
 				}
 
-				if(parseInt($('#business-type').val()) == 1){
-					sPurl = "api/organization/fetch";
-					iId   = parseInt($('#business-id').val(),10);
-				}
-				else if(parseInt($('#business-type').val()) == 2){
-					sPurl = "api/location/fetch";
-					iId   = parseInt($('#business-id').val(),10);
-				}
-				else if(parseInt($('#business-type').val()) == 3){
-					sPurl = "api/member/fetch";
-					iId   = parseInt($('#member-id').val(),10);
-				}
-				else if(parseInt($('#business-type').val()) == 5){
-					sPurl = "api/recipient/fetch";
-					iId   = parseInt($('#recipient-id').val(),10);
-				}
 
 				$.pgsi.ajax.post({
-					 sUrl       : sPurl,
-					 oRequest   : {id:iId},
+					 sUrl       : "api/empresa/fetch",
+					 oRequest   : {id:parseInt($.address.parameter("locationId"),10)},
 					 fnCallback : fnCallBackFetch
 				});
 			},
 
 			fnAjaxCallInsertUpdateNote : function(oRequest,sUrl,fnCallBack){
-debugger
+//debugger
 				var bValidForm = pgsi.pages.note.form.validator.form();
 				if(bValidForm){
 					var fnCallBack = function(oResponse) {
@@ -108,10 +83,11 @@ debugger
 							pgsi.pages.sendsolv.fnDialogMessageError("",{},oResponse,null,$.pgsi.locale.get("commons.dialog.error.title"),true);
 						}
 					}
-					oRequest.note.noteText = $('#note').val();
+
+					//oRequest.note.noteText = $('#note').val();
 					$.pgsi.ajax.post({
-						 sUrl 		: sUrl,
-						 oRequest 	: oRequest,
+						 sUrl 		: "api/empresa/add",
+						 oRequest 	: {empresa:{id: parseInt($.address.parameter("locationId"),10) ,modelAction :"NONE", notes:[{noteText:"teste teste",modelAction:"INSERT"}]}},
 						 fnCallback : fnCallBack
 					});
 				}

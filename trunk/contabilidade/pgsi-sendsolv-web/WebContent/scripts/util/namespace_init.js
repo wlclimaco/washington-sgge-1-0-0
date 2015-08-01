@@ -21,6 +21,11 @@ var pgsi = {
 			view : {}
 		},
 
+		cnae : {
+			form : {},
+			view : {}
+		},
+
 		empresa : {
 			form : {},
 			view : {}

@@ -243,6 +243,7 @@
  		<property name="historicoDAC" ref="historicoDACTarget" />
  		<property name="statusDAC" ref="statusDACTarget" />
  		<property name="planoDAC" ref="planoDACTarget" />
+ 		<property name="noteDAC" ref="noteDACTarget" />
  	</bean>
 
 
