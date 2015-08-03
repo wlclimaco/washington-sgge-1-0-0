@@ -9,7 +9,7 @@
 		insert : function (iId, sName,sModelAction) {
 
 			return {
-				title : "Adicionar CNAE a empresa.",
+				title : "Adicionar CNAE",
 				width : 1024,
 				height: 400,
 
@@ -34,6 +34,8 @@
 
 								aCnaeRel = new CnaeRel();
 								aCnaeRel.idCnae = aCnae;
+								aCnaeRel.parentId = parseInt($.address.parameter("locationId"),10)
+								aCnaeRel.modelAction = 'INSERT';
 								oCnae.push(aCnaeRel);
 							  }
 
