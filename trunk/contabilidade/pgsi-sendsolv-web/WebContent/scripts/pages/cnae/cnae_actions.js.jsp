@@ -9,9 +9,9 @@
 		insert : function (iId, sName,sModelAction) {
 
 			return {
-				title : $.pgsi.locale.get("commons.dialog.insert.title"),
-				width : 800,
-				height: 600,
+				title : "Adicionar CNAE a empresa.",
+				width : 1024,
+				height: 400,
 
 				close : function () {},
 
@@ -21,17 +21,29 @@
 
 					// Confirm Button
 					oButtons[$.pgsi.locale.get("commons.dialog.insert")] = function () {
+						debugger
+					var oCnae = [];
+						$.each( $('#mytable tbody').find('input'), function( i, val ) {
 
-						var sUrl = "";
-						if(sModelAction == "insert")
-						{
-							sUrl = "api/entidade/insert"
-						}
-						else
-						{
-							sUrl = "api/entidade/update"
-						}
-						pgsi.pages.entidade.form.ajaxCall(sUrl,sModelAction);
+							  if ($(this).is(":checked")) {
+								aCnae = new Cnae();
+								aCnae.id = $(this).attr('id');
+								aCnae.emprId = parseInt($.address.parameter("locationId"),10)
+								aCnae.parentId = parseInt($.address.parameter("locationId"),10)
+								aCnae.modelAction = 'INSERT'
+
+								aCnaeRel = new CnaeRel();
+								aCnaeRel.idCnae = aCnae;
+								oCnae.push(aCnaeRel);
+							  }
+
+						});
+
+						$.pgsi.ajax.post({
+							sUrl 		: "api/empresa/add",
+							oRequest 	: {empresa:{id: parseInt($.address.parameter("locationId"),10) ,modelAction :"NONE", cnaes:oCnae}},
+							fnCallback  : null
+					   });
 
 					};
 

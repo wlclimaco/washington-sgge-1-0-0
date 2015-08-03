@@ -37,6 +37,8 @@
 
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"rel="stylesheet">
 
+	<link href="thirdparty/bootstrap-table/src/bootstrap-table.css" rel="stylesheet">
+
 <!--<link rel="stylesheet" href="styles/preload.css" />-->
 <!-- <link rel="stylesheet" href="styles/pgsi-common.css" /> -->
 <!--<link href="styles/bootstrap.min.css" rel="stylesheet">-->
@@ -126,6 +128,8 @@ head.load("thirdparty/jquery/jquery-1.11.1.min.js",
 					"scripts/excanvas.min.js",
 					"scripts/chart.min.js",
 					"scripts/base.js",
+					"thirdparty/jquery/custom/tableExport.js",
+					"thirdparty/bootstrap-table/src/bootstrap-table.js",
 				    "scripts/pages/pgsi_main.js");
 </script>
 
