@@ -10,7 +10,18 @@
  */
 pgsi.pages.cnae = {
 
-	fnCreateRequest function(){
+	fnTable : function(oResponse) {
+
+		tbory = "";
+		for(var i = 0;i < oResponse.cnaeList.length;i++ ){
+			var oCnae = oResponse.cnaeList[i];
+			tbory = tbory + '<tr><td><input type="checkbox" class="checkthis" id="'+oCnae.id+'" /></td><td>'+oCnae.id+'</td><td>'+oCnae.codigo+'</td><td>'+oCnae.cnae+'</td><td>'+oCnae.descricao+'</td><tr>';
+		}
+
+		return tbory;
+	},
+
+	fnCreateRequest : function(){
 
 
 	}

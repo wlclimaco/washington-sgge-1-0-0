@@ -180,21 +180,12 @@
   <select id="fetchAllCnaesByRequest" parameterType="PagedInquiryRequest" resultMap="cnaeResult">
     SELECT * FROM
     			(
-    				SELECT
+    				SELECT b.id,
     						<include refid="allCnaeColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.codigo) AS RowNumber
     				FROM cnae b
 					WHERE 2 = 2
-					<if test="codigo != null">
-						AND b.codigo = #{codigo}
-					</if>
-					 <if test="cnaeList != null and !cnaeList.isEmpty()">
-					     AND b.cnae IN
-					     <foreach item="item" index="index" collection="cnaeList"
-						     open="(" separator="," close=")">
-						   	 #{item.value}
-						 </foreach>
-					 </if>
+
     			) LIST
 				<choose>
 					<when test="pageSize != null and pageSize > 0">

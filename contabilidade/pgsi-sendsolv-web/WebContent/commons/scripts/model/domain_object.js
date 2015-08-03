@@ -508,6 +508,20 @@ var Cnae = function(oParam) {
 Cnae.prototype = new ModelCosmeDamiao();
 
 
+var CnaeRel = function(oParam) {
+
+	ModelCosmeDamiao.call(this, oParam);
+
+	if (oParam) {
+		this.id				= oParam.id;
+		this.idCnae			= oParam.idCnae;
+		this.modelAction 	= oParam.modelAction;
+
+	}
+};
+CnaeRel.prototype = new ModelCosmeDamiao();
+
+
 var Socio = function(oParam) {
 
 	ModelCosmeDamiao.call(this, oParam);
@@ -542,4 +556,4 @@ var Empresa = function(oParam) {
 
 	}
 };
-Endereco.prototype = new ModelCosmeDamiao();
+Empresa.prototype = new ModelCosmeDamiao();
