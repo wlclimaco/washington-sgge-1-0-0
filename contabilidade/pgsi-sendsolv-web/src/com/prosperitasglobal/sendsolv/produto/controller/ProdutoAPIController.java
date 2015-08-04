@@ -29,11 +29,6 @@ import com.prosperitasglobal.sendsolv.model.response.UniMedResponse;
 @RequestMapping("/api/produto")
 public class ProdutoAPIController extends ProdutoBaseController
 {
-
-	/** The Constant FETCH_SIC_NAICS. */
-	private static final String FETCH_SIC_NAICS = "fetchSicNaics";
-	/** The Constant FETCH_ORGANIZATION_BYLOCATION. */
-	private static final String FETCH_ORGANIZATION_BYLOCATION = "fetchOrganizationBylocation";
 	/** The URL mapping constants. */
 	private static final String DELETE_LOCATION = "/delete";
 
@@ -60,8 +55,7 @@ public class ProdutoAPIController extends ProdutoBaseController
 
 	/** The Constant FETCH. */
 	private static final String FETCH = "/fetch";
-	/** The Constant APPLY. */
-	private static final String APPLY = "/applyStatus";
+
 	/** The Constant LOG. */
 	private static final Logger LOG = LoggerFactory.getLogger(ProdutoAPIController.class);
 

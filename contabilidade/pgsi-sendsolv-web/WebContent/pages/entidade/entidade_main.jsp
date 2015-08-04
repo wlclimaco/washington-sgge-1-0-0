@@ -11,12 +11,12 @@
                             <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Id</a>
 							<li class="">
 							   <div class="form-group input-group">
-									<input type="text" class="form-control">
-									<span class="input-group-btn">
-										<button class="btn btn-default" type="button"><i class="fa fa-search"></i>
-										</button>
-									</span>
-								</div>
+												<input type="text" class="form-control">
+												<span class="input-group-btn">
+													<button class="btn btn-default" type="button"><i class="fa fa-search"></i>
+													</button>
+												</span>
+											</div>
 								<!-- /input-group -->
 							</li>
                         </li>

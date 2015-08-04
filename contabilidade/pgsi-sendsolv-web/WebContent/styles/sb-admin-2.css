@@ -904,3 +904,12 @@ width:353px!Important;
 	margin: 0;
 	padding-bottom: 0;
 }
+
+.ui-dialog  .form-group {
+    margin-left: 30px;
+}
+
+.ui-datepicker table{
+	background :#FFFFFF;
+	border : #CCCCCC solid 1px;
+}

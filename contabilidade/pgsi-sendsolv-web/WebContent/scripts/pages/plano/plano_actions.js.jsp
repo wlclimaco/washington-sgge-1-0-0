@@ -4,14 +4,14 @@
 <sec:authorize access="hasAnyRole('ROLE_DOMAIN ADMIN', 'ROLE_ADMIN', 'ROLE_CSR')">
 
 <script type="text/javascript">
-	pgsi.pages.entidade.dialogSettings = {
+	pgsi.pages.plano.dialogSettings = {
 
 		insert : function (iId, sName,sModelAction) {
 
 			return {
-				title : $.pgsi.locale.get("commons.dialog.insert.title"),
-				width : 800,
-				height: 600,
+				title : "Adicionar Plano",
+				width : 600,
+				height: 400,
 
 				close : function () {},
 
@@ -22,16 +22,7 @@
 					// Confirm Button
 					oButtons[$.pgsi.locale.get("commons.dialog.insert")] = function () {
 
-						var sUrl = "";
-						if(sModelAction == "insert")
-						{
-							sUrl = "api/entidade/insert"
-						}
-						else
-						{
-							sUrl = "api/entidade/update"
-						}
-						pgsi.pages.entidade.form.ajaxCall(sUrl,sModelAction);
+						pgsi.pages.plano.fnRequest();
 
 					};
 
@@ -46,7 +37,7 @@
 
 				action : function (actionDialog) {
 
-					actionDialog.load("entidade/create", function() {
+					actionDialog.load("plano/create", function() {
 
 						$('#selected', actionDialog).removeClass("hide").append(""+sName+"");
 

@@ -323,7 +323,30 @@ pgsi.pages.empresa.view = {
 			});
 		},
 
-	fnFillEmpresa : function(oResponse) {
+		fnCallbackRefleshPageEmpresa : function() {
+
+			var fnCallBackFetch = function(oResponseFetch) {
+				if (oResponseFetch.operationSuccess == true) {
+					pgsi.pages.empresa.view.fnFillEmpresa(oResponseFetch);
+
+					$("#action-dialog").dialog('close');
+				}
+				else{
+					pgsi.pages.sendsolv.fnDialogMessageError("",{},oResponseFetch,null,$.pgsi.locale.get("commons.dialog.error.title"),true);
+				}
+				$.pgsi.progressBar.stop();
+			}
+
+
+			$.pgsi.ajax.post({
+				 sUrl       : "api/empresa/fetch",
+				 oRequest   : {id:parseInt($.address.parameter("locationId"),10)},
+				 fnCallback : fnCallBackFetch
+			});
+
+		},
+
+		fnFillEmpresa : function(oResponse) {
 
 		var oEmpresa = oResponse.empresaList[0];
 

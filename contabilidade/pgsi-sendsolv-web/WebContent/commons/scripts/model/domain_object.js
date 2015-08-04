@@ -537,6 +537,36 @@ var Socio = function(oParam) {
 };
 Socio.prototype = new ModelCosmeDamiao();
 
+var Plano = function(oParam) {
+
+	ModelCosmeDamiao.call(this, oParam);
+
+	if (oParam) {
+		this.id				= oParam.id;
+		this.dataInicio		= oParam.dataInicio;
+		this.dataFinal		= oParam.dataFinal;
+		this.numeroContrato	= oParam.numeroContrato;
+		this.produto		= oParam.produto;
+		this.modelAction 	= oParam.modelAction;
+
+	}
+};
+Plano.prototype = new ModelCosmeDamiao();
+
+var Produto = function(oParam) {
+
+	ModelCosmeDamiao.call(this, oParam);
+
+	if (oParam) {
+		this.id				= oParam.id;
+		this.produto		= oParam.produto;
+		this.cdBarra		= oParam.cdBarra;
+		this.modelAction 	= oParam.modelAction;
+
+	}
+};
+Produto.prototype = new ModelCosmeDamiao();
+
 
 var Empresa = function(oParam) {
 

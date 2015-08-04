@@ -172,6 +172,14 @@
   </insert>
 
 
+  <insert id="insertProdutoPessoa" parameterType="ProdutoPessoa" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO produtoPessoa (
+		<include refid="allProdutoPessoaColumns" />
+      )
+    VALUES (<include refid="allProdutoPessoaValues" /> )
+  </insert>
+
+
 	<!--
 		SQL Update Statements.
  	-->
@@ -251,6 +259,13 @@
   </select>
 
     <select id="fetchProdutoByPessoa" parameterType="Integer" resultMap="produtoPessoaResult">
+	 SELECT b.id,<include refid="allProdutoPessoaColumns" />
+        FROM produtoPessoa b
+     WHERE 1 = 1
+		  AND b.parentid = #{id}
+  </select>
+
+  <select id="fetchAllProdutoByPlano" parameterType="Integer" resultMap="produtoPessoaResult">
 	 SELECT b.id,<include refid="allProdutoPessoaColumns" />
         FROM produtoPessoa b
      WHERE 1 = 1

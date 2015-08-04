@@ -37,16 +37,55 @@
 	});
 
 	$('#add-cnae').click(function(e)
-			{
+	{
 
-				e.preventDefault();
-				pgsi.util.actiondialog.launchActionDialog (
-					"insert",
-					pgsi.pages.cnae.dialogSettings.insert(
-						$('#business-id').val(),
-						$('#company-name-field').text(),
-						1)
-				);
-			});
+		e.preventDefault();
+		pgsi.util.actiondialog.launchActionDialog (
+			"insert",
+			pgsi.pages.cnae.dialogSettings.insert(
+				$('#business-id').val(),
+				$('#company-name-field').text(),
+				1)
+		);
+	});
+
+	$('#add-plano').click(function(e)
+	{
+
+		e.preventDefault();
+		pgsi.util.actiondialog.launchActionDialog (
+			"insert",
+			pgsi.pages.plano.dialogSettings.insert(
+				$('#business-id').val(),
+				$('#company-name-field').text(),
+				1)
+		);
+	});
+
+	$('#add-filial').click(function(e)
+	{
+
+		e.preventDefault();
+		pgsi.util.actiondialog.launchActionDialog (
+			"insert",
+			pgsi.pages.entidade.dialogSettings.insert(
+				$('#business-id').val(),
+				$('#company-name-field').text(),
+				1)
+		);
+	});
+
+	$('#add-deposito').click(function(e)
+	{
+
+		e.preventDefault();
+		pgsi.util.actiondialog.launchActionDialog (
+			"insert",
+			pgsi.pages.entidade.dialogSettings.insert(
+				$('#business-id').val(),
+				$('#company-name-field').text(),
+				1)
+		);
+	});
 $.pgsi.progressBar.stopGlobal();
 </script>

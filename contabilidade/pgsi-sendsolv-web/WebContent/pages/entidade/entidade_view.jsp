@@ -136,7 +136,7 @@
 						<div class="col-title">
 							<h4 class="ui-subtitle">Filial</h4>
 							<div class="links">
-								<a href="javascript:;" class="ui-subtitle" id="add-filial" title='<s:message code="commons.pages.addnew" text="default text" />'>
+								<a href="javascript:;" class="ui-subtitle" id="add-document" title='<s:message code="commons.pages.addnew" text="default text" />'>
 									<span class="icon-small-button icon-nav icon-plus"></span>
 									<span>Inserir nova Filial</span>
 								</a>
@@ -153,7 +153,7 @@
 						<div class="col-title">
 							<h4 class="ui-subtitle">Deposito</h4>
 							<div class="links">
-								<a href="javascript:;" class="ui-subtitle" id="add-deposito" title='<s:message code="commons.pages.addnew" text="default text" />'>
+								<a href="javascript:;" class="ui-subtitle" id="add-document" title='<s:message code="commons.pages.addnew" text="default text" />'>
 									<span class="icon-small-button icon-nav icon-plus"></span>
 									<span>Inserir novo Deposito</span>
 								</a>
