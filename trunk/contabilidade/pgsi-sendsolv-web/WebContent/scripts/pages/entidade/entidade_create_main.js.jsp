@@ -91,7 +91,7 @@
 				var oEmpresa = new Empresa(
 						id 			: parseInt($('#codigo').val(),10),
 						nome		: $('#nome').val(),
-						regine  	: pgsi.pages.regime.fnCreateRequest(sModelAction),
+						regine  	: {id : parseInt($('#regime').val(),10)},
 						enderecos   : pgsi.pages.endereco.fnCreateRequest(sModelAction),
 						documentos	: pgsi.pages.documento.fnCreateRequest(sModelAction),
 						emails		: pgsi.pages.email.fnCreateRequest(sModelAction),

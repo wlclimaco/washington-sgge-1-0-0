@@ -21,6 +21,11 @@ var pgsi = {
 			view : {}
 		},
 
+		plano : {
+			form : {},
+			view : {}
+		},
+
 		cnae : {
 			form : {},
 			view : {}

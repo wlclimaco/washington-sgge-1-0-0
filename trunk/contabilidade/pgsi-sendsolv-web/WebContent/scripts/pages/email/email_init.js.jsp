@@ -18,29 +18,46 @@ $(document).ready(function()
 		}
 	}
 	// Fill email dropdown
-	$("#email-template").find(".email-type").fnLoadDropDownList(oEmailEnums);
+	//$("#email-template").find(".email-type").fnLoadDropDownList(oEmailEnums);
 
 	pgsi.util.page.email.form.setFieldSizes();
 
 	// Multiple emails functionality
 	$("#add-email").on("click", function() {
 
-		// Create new node
-		var sCopy = pgsi.util.page.email.form.createNewNode();
+		var t = $(".test").length;
+		var sTop = $(".test:eq("+(t-1)+")").css('top')
+		if(sTop == "auto"){
+			sTop ="0px"
+		}
+		sTop = (parseInt(sTop.replace("px",""),10)+30);
 
-		$("#email-template").find(".container").append(sCopy);
+			s = '<div class="email test" style="position:absolute;left:0px;top:'+sTop+'px;width:500px;height:27px;z-index:40;">'
+				+'<label for="email-type" style="margin-right: 10px;">'
+					+'Email tipo'
+				+'</label>'
+				+'<select name="emailType" class="email-type" maxlength="254" style="position:absolute;width:94px;height:27px;line-height:27px;z-index:4;" name="cnae" value="">'
+					+'<option>Comercial</option>'
+					+'<option>Compras</option>'
+					+'<option>SAC</option>'
+					+'<option>NFE</option>'
+				+'</select>'
+				+'<div style="position:absolute;left:300px;top:0px;width:500px;height:27px;z-index:40;">'
+					+'<label for="emailAddress">'
+						+'Email</label>'
+					+'<input type="text" class="email-address email" name="emailAddress" style="position:absolute;width:300px;height:27px;line-height:27px;z-index:4;" value="">'
+					+'<div class="close-button-form">'
+						+'<span class="icon-small-button icon-nav icon-remove" title="remove"></span>'
+					+'</div>'
+				+'</div>'
+			+'</div>'
 
-		var $emailTemplate = $("#email-template");
+		$('#emails').append(s);
 
-		$newNode =  $emailTemplate.find(".container").find(".row-form:last-child");
-		pgsi.util.page.form.fnInitSelectmenu($newNode.find("select"));
-
-		pgsi.util.page.email.form.setFieldSizes();
-
-		$newNode.find('span').first().focus();
 
 		var ii = parseInt($('#wb_Form3').css('top').replace("px",""),10)+40;
 		$('#wb_Form3').attr({'style':'position:absolute;left:0px;top:'+ii+'px;'})
+		$('#add-email').attr({'style':'position:absolute;left:195px;top:'+(ii+10)+'px;width:500px;height:16px;z-index:28;'})
 
 	});
 

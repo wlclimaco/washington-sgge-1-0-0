@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IPlanoDAC;
+import com.prosperitasglobal.sendsolv.dac.IProdutoDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
 import com.prosperitasglobal.sendsolv.dac.ITabPrecoDAC;
 import com.prosperitasglobal.sendsolv.dacd.mybatis.PrecoDACD;
@@ -39,6 +40,23 @@ public class PlanoDACImpl extends SqlSessionDaoSupport implements IPlanoDAC
 	private ITabPrecoDAC tabPrecoDAC;
 	private IHistoricoDAC historicoDAC;
 	private IStatusDAC statusDAC;
+	private IProdutoDAC produtoDAC;
+
+	/**
+	 * @return the produtoDAC
+	 */
+	public IProdutoDAC getProdutoDAC()
+	{
+		return produtoDAC;
+	}
+
+	/**
+	 * @param produtoDAC the produtoDAC to set
+	 */
+	public void setProdutoDAC(IProdutoDAC produtoDAC)
+	{
+		this.produtoDAC = produtoDAC;
+	}
 
 	/**
 	 * @return the tabPrecoDAC
@@ -100,6 +118,18 @@ public class PlanoDACImpl extends SqlSessionDaoSupport implements IPlanoDAC
 		Integer insertCount = 0;
 		// First insert the root plano data
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), PLANO_STMT_INSERT, plano, response);
+
+		// ProdutoPessoa pessoa = new ProdutoPessoa();
+		//
+		// pessoa.setParentId(plano.getId());
+		// pessoa.setProcessId(plano.getProcessId());
+		// pessoa.setProdId(plano.getProduto());
+		// Date a = new Date();
+		// pessoa.setCreateDateUTC(a.getTime());
+		// pessoa.setCreateUser(plano.getUserId());
+		//
+		// insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), "ProdutoMap.insertProdutoPessoa", pessoa,
+		// response);
 
 		insertCount +=
 				PrecoDACD.maintainTabPrecoAssociations(plano.getPreco(), response, insertCount, null,
