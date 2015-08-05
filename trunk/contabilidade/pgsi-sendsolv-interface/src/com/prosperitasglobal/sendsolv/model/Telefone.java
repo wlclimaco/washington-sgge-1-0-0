@@ -16,7 +16,7 @@ public class Telefone extends ModelCosmeDamiao
 	/** The description. */
 	private String numero;
 
-	private String descricao;
+	private TelefoneTypeEnum telefoneTypeEnum;
 
 	/**
 	 * Default constructor.
@@ -26,20 +26,18 @@ public class Telefone extends ModelCosmeDamiao
 		super();
 	}
 
-	/**
-	 * @return the descricao
-	 */
-	public String getDescricao()
+	public Integer getTelefoneTypeEnumValue()
 	{
-		return descricao;
+		if (telefoneTypeEnum != null)
+		{
+			return telefoneTypeEnum.getValue();
+		}
+		return null;
 	}
 
-	/**
-	 * @param descricao the descricao to set
-	 */
-	public void setDescricao(String descricao)
+	public void setTelefoneTypeEnumValue(Integer acaoTypeValue)
 	{
-		this.descricao = descricao;
+		telefoneTypeEnum = TelefoneTypeEnum.enumForValue(acaoTypeValue);
 	}
 
 	/**
@@ -94,6 +92,22 @@ public class Telefone extends ModelCosmeDamiao
 		this.numero = numero;
 	}
 
+	/**
+	 * @return the telefoneTypeEnum
+	 */
+	public TelefoneTypeEnum getTelefoneTypeEnum()
+	{
+		return telefoneTypeEnum;
+	}
+
+	/**
+	 * @param telefoneTypeEnum the telefoneTypeEnum to set
+	 */
+	public void setTelefoneTypeEnum(TelefoneTypeEnum telefoneTypeEnum)
+	{
+		this.telefoneTypeEnum = telefoneTypeEnum;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -101,16 +115,17 @@ public class Telefone extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Telefone [getDescricao()=" + getDescricao() + ", getId()=" + getId() + ", getDdd()=" + getDdd()
-				+ ", getNumero()=" + getNumero() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
-				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
-				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
-				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
-				+ getEmprId() + ", getSite()=" + getSite() + ", getProcessId()=" + getProcessId() + ", getUserId()="
-				+ getUserId() + ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction()
-				+ ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC()
-				+ ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
+		return "Telefone [getTelefoneTypeEnumValue()=" + getTelefoneTypeEnumValue() + ", getId()=" + getId()
+				+ ", getDdd()=" + getDdd() + ", getNumero()=" + getNumero() + ", getTelefoneTypeEnum()="
+				+ getTelefoneTypeEnum() + ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()="
+				+ getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId()
+				+ ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()="
+				+ getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId()
+				+ ", getSite()=" + getSite() + ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId()
+				+ ", getNotes()=" + getNotes() + ", toString()=" + super.toString() + ", getModelAction()="
+				+ getModelAction() + ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()="
+				+ getCreateDateUTC() + ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()="
+				+ getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }

@@ -12,7 +12,7 @@ public class Documento extends ModelCosmeDamiao
 	private Integer id;
 
 	/** The description. */
-	private String description;
+	private DocumentoTypeEnum documentoType;
 
 	/** The numero. */
 	private String numero;
@@ -22,6 +22,20 @@ public class Documento extends ModelCosmeDamiao
 
 	/** The estado. */
 	private Estado estado;
+
+	public Integer getDocumentoTypeEnumValue()
+	{
+		if (documentoType != null)
+		{
+			return documentoType.getValue();
+		}
+		return null;
+	}
+
+	public void setDocumentoTypeEnumValue(Integer acaoTypeValue)
+	{
+		documentoType = DocumentoTypeEnum.enumForValue(acaoTypeValue);
+	}
 
 	/**
 	 * Default constructor.
@@ -52,23 +66,19 @@ public class Documento extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the description.
-	 *
-	 * @return the description
+	 * @return the documentoType
 	 */
-	public String getDescription()
+	public DocumentoTypeEnum getDocumentoType()
 	{
-		return description;
+		return documentoType;
 	}
 
 	/**
-	 * Sets the description.
-	 *
-	 * @param description the description to set
+	 * @param documentoType the documentoType to set
 	 */
-	public void setDescription(String description)
+	public void setDocumentoType(DocumentoTypeEnum documentoType)
 	{
-		this.description = description;
+		this.documentoType = documentoType;
 	}
 
 	/**
@@ -138,11 +148,15 @@ public class Documento extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Documento [getId()=" + getId() + ", getDescription()=" + getDescription() + ", getNumero()="
-				+ getNumero() + ", getData()=" + getData() + ", getEstado()=" + getEstado() + ", getParentId()="
-				+ getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
-				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", toString()="
-				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+		return "Documento [getDocumentoTypeEnumValue()=" + getDocumentoTypeEnumValue() + ", getId()=" + getId()
+				+ ", getDocumentoType()=" + getDocumentoType() + ", getNumero()=" + getNumero() + ", getData()="
+				+ getData() + ", getEstado()=" + getEstado() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
+				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
+				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
+				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
+				+ getEmprId() + ", getSite()=" + getSite() + ", getProcessId()=" + getProcessId() + ", getUserId()="
+				+ getUserId() + ", getNotes()=" + getNotes() + ", toString()=" + super.toString()
+				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
 				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
 				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
 				+ hashCode() + "]";

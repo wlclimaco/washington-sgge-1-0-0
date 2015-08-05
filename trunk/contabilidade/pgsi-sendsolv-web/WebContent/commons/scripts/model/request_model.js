@@ -335,7 +335,16 @@ var PayerCountryInquiryRequest  = function(oParam){
 
 PayerCountryInquiryRequest.prototype = new Request();
 
+var EmpresaMaintenanceRequest = function(oParam) {
 
+	MaintenanceRequest.call(this, oParam);
+
+	if (oParam) {
+		this.empresa = oParam.empresa;
+	}
+};
+
+EmpresaMaintenanceRequest.prototype = new MaintenanceRequest();
 
 var PayerStateProvinceRegionInquiryRequest  = function(oParam){
 

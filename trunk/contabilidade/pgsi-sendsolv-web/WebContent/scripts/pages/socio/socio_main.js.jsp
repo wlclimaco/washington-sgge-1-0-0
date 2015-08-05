@@ -10,10 +10,20 @@
  */
 pgsi.pages.socio = {
 
-		 fnCreateRequest function(){
+		fnCreateRequest : function(sModelAction){
 
-
+			oSocio = [];
+			for(var i=0;i< parseInt($('.socio').length,10);i++){
+				aSocio = new Socio();
+				aSocio.nome =    $('.socio :eq('+i+')').val();
+				aSocio.cota =    $('.cota :eq('+i+')').val();
+				aSocio.porcentagem =    $('.porcentagem :eq('+i+')').val();
+				aSocio.modelAction 	 = sModelAction;
+				oSocio.push(aSocio);
 			}
+
+			return oSocio;
+		}
 }
 </script>
 

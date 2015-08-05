@@ -16,10 +16,10 @@
 					<s:message code="pages.contacts.form.label.emailtype" text="default text" />
 				</label>
 				<select name="emailType" class="email-type" maxlength="254" style="position:absolute;width:94px;height:27px;line-height:27px;z-index:4;" name="cnae" value="">
-					<option>Comercial</option>
-					<option>Compras</option>
-					<option>SAC</option>
-					<option>NFE</option>
+					<option value="1">Comercial</option>
+					<option value="2">Compras</option>
+					<option value="3">SAC</option>
+					<option value="4">NFE</option>
 				</select>
 				<div style="position:absolute;left:300px;top:0px;width:500px;height:27px;z-index:40;">
 					<label for="emailAddress">

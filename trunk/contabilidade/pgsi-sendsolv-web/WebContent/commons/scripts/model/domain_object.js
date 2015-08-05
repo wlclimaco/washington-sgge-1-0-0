@@ -553,6 +553,22 @@ var Plano = function(oParam) {
 };
 Plano.prototype = new ModelCosmeDamiao();
 
+var Documento = function(oParam) {
+
+	ModelCosmeDamiao.call(this, oParam);
+
+	if (oParam) {
+		this.id				= oParam.id;
+		this.documentoType  = oParam.documentoType;
+		this.numero         = oParam.numero;
+		this.data           = oParam.data;
+		this.estado         = oParam.estado;
+	}
+};
+Documento.prototype = new ModelCosmeDamiao();
+
+
+
 var Produto = function(oParam) {
 
 	ModelCosmeDamiao.call(this, oParam);

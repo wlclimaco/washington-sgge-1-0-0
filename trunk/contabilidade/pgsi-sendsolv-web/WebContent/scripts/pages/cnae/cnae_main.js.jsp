@@ -21,9 +21,17 @@ pgsi.pages.cnae = {
 		return tbory;
 	},
 
-	fnCreateRequest : function(){
+	fnCreateRequest : function(sModelAction){
 
+		oCnae = [];
+		for(var i=0;i< parseInt($('.cnaeId').length,10);i++){
+			aCnae = new Cnae();
+			aCnae.idCnae =    {id : $('.cnaeId:eq('+i+')').val(),modelAction:"INSERT"};
+			aCnae.modelAction 	 = sModelAction;
+			oCnae.push(aCnae);
+		}
 
+		return oCnae;
 	}
 }
 </script>

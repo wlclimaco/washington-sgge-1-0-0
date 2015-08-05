@@ -21,6 +21,8 @@
    	<result property="tabelaEnumValue" column="tabela"/>
 	<result property="ddd" column="ddd"/>
 	<result property="numero" column="telefone" />
+	<result property="telefoneTypeEnumValue" column="telefoneType" />
+	<result property="precessId" column="processId" />
    <result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -38,6 +40,8 @@
 		,b.tabela
 		,b.ddd
 		,b.telefone
+		,b.telefoneType
+		,b.processId
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -50,6 +54,8 @@
     	#{tabelaEnumValue},
     	#{ddd},
     	#{numero},
+    	#{telefoneTypeEnumValue},
+    	#{processId},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
