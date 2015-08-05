@@ -10,10 +10,20 @@
  */
 pgsi.pages.email = {
 
-		 fnCreateRequest function(){
+		 fnCreateRequest : function(sModelAction){
 
+			oEmail = [];
 
+			for(var i=0;i< parseInt($('.email-type').length,10);i++){
+				aEmail = new Email();
+				aEmail.email = $('.email-address:eq('+i+')').val();
+				aEmail.emailTypeEnumValue = $('.email-type:eq('+i+')').val();
+				aEmail.modelAction 	 = sModelAction;
+				oEmail.push(aEmail);
 			}
+
+			return oEmail;
+		 }
 }
 </script>
 

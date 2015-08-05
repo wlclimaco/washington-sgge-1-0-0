@@ -10,10 +10,20 @@
  */
 pgsi.pages.telefone = {
 
-		 fnCreateRequest function(){
+		fnCreateRequest : function(sModelAction){
 
-
+			oTelefone = [];
+			for(var i=0;i< parseInt($('.Editbox9').length,10);i++){
+				aTelefone = new Telefone();
+				aTelefone.ddd =    $('.ddd:eq('+i+')').val();
+				aTelefone.numero = $('.telefone:eq('+i+')').val();
+				aTelefone.telefoneTypeEnumValue = $('.Editbox9:eq('+i+')').val();
+				aTelefone.modelAction 	 = sModelAction;
+				oTelefone.push(aTelefone);
 			}
+
+			return oTelefone;
+		}
 }
 </script>
 

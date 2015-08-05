@@ -45,15 +45,15 @@
 			ajaxCall : function(sUrlAdress, mainModelAction) {
 
 				// Remove input masks
-				pgsi.util.page.business.form.maskFields.fnUnmask();
+			//	pgsi.util.page.business.form.maskFields.fnUnmask();
 				// Validate the form
-				var bValidForm = pgsi.pages.entidade.form.validator.form();
+				//var bValidForm = pgsi.pages.entidade.form.validator.form();
 
-				if (!bValidForm)
-				{
-					pgsi.util.page.business.form.maskFields.fnMask();
-					return false;
-				}
+				//if (!bValidForm)
+				//{
+				//	pgsi.util.page.business.form.maskFields.fnMask();
+				//	return false;
+				//}
 
 				var request = pgsi.pages.entidade.form.fnFillRequestObject(mainModelAction);
 
@@ -77,7 +77,7 @@
 
 				// Insert the Location
 				$.pgsi.ajax.post({
-					sUrl : sUrlAdress,
+					sUrl : 'api/empresa/add',
 					oRequest : request,
 					fnCallback : fnCallback
 				});
@@ -85,21 +85,23 @@
 
 			fnFillEmpresa : function(data,sModelAction) {
 
-				pgsi.util.page.form.fnInitForm();
-
+				//pgsi.util.page.form.fnInitForm();
+				sModelAction = "INSERT"
 				// fill location-specific fields
-				var oEmpresa = new Empresa(
-						id 			: parseInt($('#codigo').val(),10),
-						nome		: $('#nome').val(),
-						regine  	: {id : parseInt($('#regime').val(),10)},
-						enderecos   : pgsi.pages.endereco.fnCreateRequest(sModelAction),
-						documentos	: pgsi.pages.documento.fnCreateRequest(sModelAction),
-						emails		: pgsi.pages.email.fnCreateRequest(sModelAction),
-						Telefones	: pgsi.pages.telefone.fnCreateRequest(sModelAction),
-						socios		: pgsi.pages.socio.fnCreateRequest(sModelAction),
-						cnaes		: pgsi.pages.cnae.fnCreateRequest(sModelAction),
-						sModelAction: sModelAction
-				)
+				var oEmpresa = new Empresa();
+						oEmpresa.id 		= parseInt($('#codigo').val(),10);
+						oEmpresa.nome		= $('#nome').val();
+						oEmpresa.regime  	= {id : parseInt($('#regime').val(),10)};
+						oEmpresa.enderecos  = [pgsi.pages.endereco.fnCreateRequest(sModelAction)];
+						oEmpresa.documentos	= pgsi.pages.documento.fnCreateRequest(sModelAction);
+						oEmpresa.emails		= pgsi.pages.email.fnCreateRequest(sModelAction);
+						oEmpresa.telefones	= pgsi.pages.telefone.fnCreateRequest(sModelAction);
+						oEmpresa.socios		= pgsi.pages.socio.fnCreateRequest(sModelAction);
+						oEmpresa.cnaes		= pgsi.pages.cnae.fnCreateRequest(sModelAction);
+						oEmpresa.modelAction = sModelAction;
+
+
+
 				return oEmpresa;
 			},
 
@@ -107,7 +109,7 @@
 				var request = new EmpresaMaintenanceRequest();
 
 				// fill common location fields - method returns basic business objects (i.e things locations and orgs have in common)
-				request.entidade = pgsi.pages.entidade.form.fnFillEmpresa(sModelAction);
+				request.empresa = pgsi.pages.entidade.form.fnFillEmpresa(sModelAction);
 
 
 				return request;

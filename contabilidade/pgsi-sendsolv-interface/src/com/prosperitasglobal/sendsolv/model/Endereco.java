@@ -28,12 +28,28 @@ public class Endereco extends ModelCosmeDamiao
 	/** The cep. */
 	private String cep;
 
+	private EnderecoTypeEnum enderecoType;
+
 	/**
 	 * Default constructor.
 	 */
 	public Endereco()
 	{
 		super();
+	}
+
+	public Integer getEnderecoTypeEnumValue()
+	{
+		if (enderecoType != null)
+		{
+			return enderecoType.getValue();
+		}
+		return null;
+	}
+
+	public void setEnderecoTypeEnumValue(Integer acaoTypeValue)
+	{
+		enderecoType = EnderecoTypeEnum.enumForValue(acaoTypeValue);
 	}
 
 	/**
@@ -183,10 +199,18 @@ public class Endereco extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Endereco [getId()=" + getId() + ", getLogradouro()=" + getLogradouro() + ", getCidade()=" + getCidade()
-				+ ", getEstado()=" + getEstado() + ", getBairro()=" + getBairro() + ", getNumero()=" + getNumero()
-				+ ", getCep()=" + getCep() + ", toString()="
-				+ super.toString() + "]";
+		return "Endereco [getEnderecoTypeEnumValue()=" + getEnderecoTypeEnumValue() + ", getId()=" + getId()
+				+ ", getLogradouro()=" + getLogradouro() + ", getCidade()=" + getCidade() + ", getEstado()="
+				+ getEstado() + ", getBairro()=" + getBairro() + ", getNumero()=" + getNumero() + ", getCep()="
+				+ getCep() + ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId() + ", getNotes()=" + getNotes()
+				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
+				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
+				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }

@@ -29,7 +29,7 @@ public class Entidade extends ModelCosmeDamiao
 
 	private List<Email> emails;
 
-	private List<Telefone> Telefones;
+	private List<Telefone> telefones;
 
 	private List<CnaeEmpresa> cnaes;
 
@@ -140,7 +140,7 @@ public class Entidade extends ModelCosmeDamiao
 	 */
 	public List<Telefone> getTelefones()
 	{
-		return Telefones;
+		return telefones;
 	}
 
 	/**
@@ -148,7 +148,7 @@ public class Entidade extends ModelCosmeDamiao
 	 */
 	public void setTelefones(List<Telefone> telefones)
 	{
-		Telefones = telefones;
+		this.telefones = telefones;
 	}
 
 	/**

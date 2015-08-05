@@ -23,6 +23,7 @@
 	<result property="bairro" column="bairro"/>
 	<result property="numero" column="numero"/>
 	<result property="cep" column="cep"/>
+	<result property="enderecoTypeEnumValue" column="enderecoType"/>
 	<result property="processId" column="processId"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
@@ -47,6 +48,7 @@
 		,b.numero
 		,b.cep
 		,b.processId
+		,b.enderecoType
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -64,6 +66,7 @@
 		#{numero},
 		#{cep},
 		#{processId},
+		#{enderecoTypeEnumValue},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 

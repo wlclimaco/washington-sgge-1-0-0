@@ -19,9 +19,10 @@
     <result property="tabelaEnumValue" column="tabela" />
    	<result property="parentId" column="parentId"/>
 	<result property="typeValue" column="type"/>
-	<result property="description" column="description" />
+	<result property="documentoTypeEnumValue" column="documentoType" />
     <result property="numero" column="numero" />
    	<result property="data" column="data"/>
+   	<result property="processId" column="processId"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -37,10 +38,11 @@
 		 b.tabela
 		,b.parentId
 		,b.type
-		,b.description
 		,b.numero
 		,b.data
 		,b.estado
+		,b.documentoType
+		,b.processId
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -51,10 +53,11 @@
   		#{tabelaEnumValue},
     	#{parentId},
     	#{typeValue},
-    	#{description},
     	#{numero},
     	#{data},
     	#{estado.id},
+    	#{documentoTypeEnumValue},
+    	#{processId},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 

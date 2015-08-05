@@ -18,7 +18,7 @@
 		  <div id="wb_Text3" class="test" style="position:absolute;left:30px;top:58px;width:55px;height:16px;z-index:3;text-align:left;">
 			 <span style="color:#000000;font-family:Arial;font-size:13px;">CNAE :</span>
 		  </div>
-		  <input type="text" id="Editbox1" style="position:absolute;left:99px;top:53px;width:94px;height:27px;line-height:27px;z-index:4;" name="cnae" value="">
+		  <input type="text" id="Editbox1" class="cnaeId" style="position:absolute;left:99px;top:53px;width:94px;height:27px;line-height:27px;z-index:4;" name="cnae" value="">
 		  <input type="text" id="Editbox2" style="position:absolute;left:334px;top:53px;width:381px;height:27px;line-height:27px;z-index:5;" name="descricao" value="">
 		  <div id="wb_Text4" style="position:absolute;left:261px;top:58px;width:130px;height:16px;z-index:6;text-align:left;">
 			 <span style="color:#000000;font-family:Arial;font-size:13px;">Descrição :</span>
@@ -62,11 +62,11 @@
       <div id="wb_Text9" style="position:absolute;left:224px;top:121px;width:51px;height:16px;z-index:16;text-align:left;">
          <span style="color:#000000;font-family:Arial;font-size:13px;">CNPJ :</span>
       </div>
-      <input type="text" id="Editbox6" style="position:absolute;left:275px;top:116px;width:176px;height:27px;line-height:27px;z-index:17;" name="cnpj" value="">
+      <input type="text" id="cnpj" style="position:absolute;left:275px;top:116px;width:176px;height:27px;line-height:27px;z-index:17;" name="cnpj" value="">
       <div id="wb_Text10" style="position:absolute;left:457px;top:121px;width:129px;height:16px;z-index:18;text-align:left;">
          <span style="color:#000000;font-family:Arial;font-size:13px;">Inscrição Estadual :</span>
       </div>
-      <input type="text" id="Editbox7" style="position:absolute;left:586px;top:116px;width:175px;height:27px;line-height:27px;z-index:19;" name="IE" value="">
+      <input type="text" id="ie" style="position:absolute;left:586px;top:116px;width:175px;height:27px;line-height:27px;z-index:19;" name="IE" value="">
 	  <div style="position:absolute;left:0px;top:148px;width:129px;height:16px;z-index:38;text-align:left;">
 			<div id="wb_Text19" style="position:absolute;text-align:left; left:10px;width:180px;height:200px;">
 				 <span style="color:#000000;font-family:Arial;font-size:13px;">Regime Tributario :</span>
@@ -82,16 +82,16 @@
          <span style="color:#000000;font-family:Arial;font-size:13px;">Type :</span>
       </div>
 	  <select name="emailType" class="Editbox9" maxlength="254" style="position:absolute;left:99px;top:190px;width:74px;height:27px;line-height:27px;z-index:24;" name="nome" value="">
-					<option>Comercial</option>
-					<option>Compras</option>
-					<option>SAC</option>
-					<option>NFE</option>
+				<option value="1">Sac</option>
+				<option value="2">Contato</option>
+				<option value="3">Representante</option>
+				<option value="4">Outros</option>
 				</select>
 
      <div id="wb_Text12" style="position:absolute;left:322px;top:192px;width:40px;height:16px;z-index:23;text-align:left;">
          <span style="color:#000000;font-family:Arial;font-size:13px;">DDD :</span>
       </div>
-      <input type="text" id="Editboxd9" style="position:absolute;left:374px;top:190px;width:74px;height:27px;line-height:27px;z-index:24;" name="nome" value="">
+      <input type="text" id="Editboxd9" class="ddd" style="position:absolute;left:374px;top:190px;width:74px;height:27px;line-height:27px;z-index:24;" name="nome" value="">
 
 	 <input type="button" id="Button3" name="" value="+" style="position:absolute;left:702px;top:190px;width:34px;height:23px;z-index:25;">
 
@@ -99,28 +99,28 @@
          <span style="color:#000000;font-family:Arial;font-size:13px;">Telefone :</span>
       </div>
 
-      <input type="text" id="Editbox10" style="position:absolute;left:523px;top:190px;width:157px;height:27px;line-height:27px;z-index:27;" name="nome" value="">
+      <input type="text" id="Editbox10" class="telefone" style="position:absolute;left:523px;top:190px;width:157px;height:27px;line-height:27px;z-index:27;" name="nome" value="">
 	  <div id="wb_Text18" style="position:absolute;left:457px;top:159px;width:129px;height:16px;z-index:36;text-align:left;">
 			 <span style="color:#000000;font-family:Arial;font-size:13px;">Inscrição Municipal :</span>
 		  </div>
-		  <input type="text" id="Editbox15" style="position:absolute;left:586px;top:154px;width:175px;height:27px;line-height:27px;z-index:37;" name="IM" value="">
+		  <input type="text" id="im" style="position:absolute;left:586px;top:154px;width:175px;height:27px;line-height:27px;z-index:37;" name="IM" value="">
 		<div class="test001" style="position:absolute;left:0px;top:51px;"></div>
 		<div id="telefones"  style="position:absolute;left:0px;top:133px;"></div>
 		<div id="wb_Text24"  style="position:absolute;left:0px;top:0px;">
 		  <div id="wb_Text14" style="position:absolute;left:30px;top:232px;width:55px;height:16px;z-index:29;text-align:left;">
 			 <span style="color:#000000;font-family:Arial;font-size:13px;">Socio :</span>
 		  </div>
-		  <input type="text" id="Editbox11" style="position:absolute;left:99px;top:227px;width:270px;height:27px;line-height:27px;z-index:30;" name="nome" value="">
+		  <input type="text" id="Editbox11" class="socio" style="position:absolute;left:99px;top:227px;width:270px;height:27px;line-height:27px;z-index:30;" name="nome" value="">
 		   <button class="btn btn-default" type="button" style="position:absolute;left:369px;top:227px;width:29px;height:27px;z-index:40;"><i class="fa fa-search"></i></button>
 		  <div id="wb_Text15" style="position:absolute;left:411px;top:232px;width:80px;height:16px;z-index:31;text-align:left;">
 			 <span style="color:#000000;font-family:Arial;font-size:13px;">Cota :</span>
 		  </div>
-		  <input type="text" id="Editbox12" style="position:absolute;left:453px;top:227px;width:57px;height:27px;line-height:27px;z-index:32;" name="nome" value="">
+		  <input type="text" id="Editbox12" class="cota" style="position:absolute;left:453px;top:227px;width:57px;height:27px;line-height:27px;z-index:32;" name="nome" value="">
 		  <input type="button" id="Button4" name="" value="+" style="position:absolute;left:695px;top:223px;width:34px;height:25px;z-index:33;">
 		  <div id="wb_Text16" style="position:absolute;left:528px;top:232px;width:80px;height:32px;z-index:34;text-align:left;">
 			 <span style="color:#000000;font-family:Arial;font-size:13px;">Porcentagem :</span>
 		  </div>
-		  <input type="text" id="Editbox13" style="position:absolute;left:619px;top:227px;width:57px;height:27px;line-height:27px;z-index:35;" name="nome" value="">
+		  <input type="text" id="Editbox13" class="porcentagem" style="position:absolute;left:619px;top:227px;width:57px;height:27px;line-height:27px;z-index:35;" name="nome" value="">
 
 		  <div class="test002" style="position:absolute;left:0px;top:51px;"></div>
 		  <div id="socios"  style="position:absolute;left:0px;top:172px;"></div>
@@ -133,4 +133,11 @@
 	</div>
 </div>
 
+<jsp:include page="../../scripts/pages/cnae/cnae_main.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/email/email_main.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/telefone/telefone_main.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/endereco/endereco_main.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/document/document_main.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/socio/socio_main.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/entidade/entidade_create_main.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/empresa/empresa_create_init.js.jsp" flush="true" />

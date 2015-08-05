@@ -14,7 +14,7 @@ public class Email extends ModelCosmeDamiao
 	private String email;
 
 	/** The description. */
-	private String description;
+	private EmailTypeEnum emailType;
 
 	/**
 	 * Default constructor.
@@ -22,6 +22,20 @@ public class Email extends ModelCosmeDamiao
 	public Email()
 	{
 		super();
+	}
+
+	public Integer getEmailTypeEnumValue()
+	{
+		if (emailType != null)
+		{
+			return emailType.getValue();
+		}
+		return null;
+	}
+
+	public void setEmailTypeEnumValue(Integer acaoTypeValue)
+	{
+		emailType = EmailTypeEnum.enumForValue(acaoTypeValue);
 	}
 
 	/**
@@ -61,31 +75,39 @@ public class Email extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the description.
-	 *
-	 * @return the description
+	 * @return the emailType
 	 */
-	public String getDescription()
+	public EmailTypeEnum getEmailType()
 	{
-		return description;
+		return emailType;
 	}
 
 	/**
-	 * Sets the description.
-	 *
-	 * @param description the description to set
+	 * @param emailType the emailType to set
 	 */
-	public void setDescription(String description)
+	public void setEmailType(EmailTypeEnum emailType)
 	{
-		this.description = description;
+		this.emailType = emailType;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString()
 	{
-		return "Email [getId()=" + getId() + ", getEmail()=" + getEmail() + ", getDescription()=" + getDescription()
-				+ ", getType()=" + getType() + ", getParentId()=" + getParentId() + ", toString()="
-				+ super.toString() + "]";
+		return "Email [getEmailTypeEnumValue()=" + getEmailTypeEnumValue() + ", getId()=" + getId() + ", getEmail()="
+				+ getEmail() + ", getEmailType()=" + getEmailType() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
+				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
+				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
+				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
+				+ getEmprId() + ", getSite()=" + getSite() + ", getProcessId()=" + getProcessId() + ", getUserId()="
+				+ getUserId() + ", getNotes()=" + getNotes() + ", toString()=" + super.toString()
+				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
 
 }

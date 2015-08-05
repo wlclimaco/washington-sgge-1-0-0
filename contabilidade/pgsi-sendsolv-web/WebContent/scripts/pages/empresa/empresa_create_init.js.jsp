@@ -115,17 +115,17 @@ $(document).ready(function()
 		s = '<div id="wb_Text14" class="test002" style="position:absolute;left:30px;top:'+sTop+'px;width:55px;height:16px;z-index:29;text-align:left;">'
 			+'<span style="color:#000000;font-family:Arial;font-size:13px;">Socio :</span>'
 			+'</div>'
-			+'<input type="text" id="Editbox11" style="position:absolute;left:99px;top:'+sTop+'px;width:270px;height:27px;line-height:27px;z-index:30;" name="nome" value="">'
+			+'<input type="text" id="Editbox11" class="socio" style="position:absolute;left:99px;top:'+sTop+'px;width:270px;height:27px;line-height:27px;z-index:30;" name="nome" value="">'
 		    +'<button class="btn btn-default" type="button" style="position:absolute;left:369px;top:'+sTop+'px;width:29px;height:27px;z-index:40;"><i class="fa fa-search"></i></button>'
 			+'<div id="wb_Text15" style="position:absolute;left:411px;top:'+sTop+'px;width:80px;height:16px;z-index:31;text-align:left;">'
 			+'<span style="color:#000000;font-family:Arial;font-size:13px;">Cota :</span>'
 			+'</div>'
-			+'<input type="text" id="Editbox12" style="position:absolute;left:453px;top:'+sTop+'px;width:57px;height:27px;line-height:27px;z-index:32;" name="nome" value="">'
+			+'<input type="text" id="Editbox12" class="cota" style="position:absolute;left:453px;top:'+sTop+'px;width:57px;height:27px;line-height:27px;z-index:32;" name="nome" value="">'
 			+'<input type="button" id="Button4" name="" value="+" style="position:absolute;left:695px;top:'+sTop+'px;width:34px;height:25px;z-index:33;">'
 			+'<div id="wb_Text16" style="position:absolute;left:528px;top:'+sTop+'px;width:80px;height:32px;z-index:34;text-align:left;">'
 			+'<span style="color:#000000;font-family:Arial;font-size:13px;">Porcentagem :</span>'
 			+'</div>'
-			+'<input type="text" id="Editbox13" style="position:absolute;left:627px;top:'+sTop+'px;width:57px;height:27px;line-height:27px;z-index:35;" name="nome" value="">'
+			+'<input type="text" id="Editbox13" class="porcentagem" style="position:absolute;left:627px;top:'+sTop+'px;width:57px;height:27px;line-height:27px;z-index:35;" name="nome" value="">'
 
 		$('#socios').append(s);
 		var ii = parseInt($('#wb_Text25').css('top').replace("px",""),10)+40;

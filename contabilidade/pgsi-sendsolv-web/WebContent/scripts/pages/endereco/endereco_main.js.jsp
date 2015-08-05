@@ -9,12 +9,12 @@
  * @fileoverview The main namespace for the Location List Page.
  */
 pgsi.pages.endereco = {
-		 fnCreateRequest function(sModelAction){
+		 fnCreateRequest : function(sModelAction){
 			 var oEndereco = new Endereco({
 				id				: $('#enderecoId').val(),
 				logradouro		: $('#logradouro').val(),
-				cidade			: $('#cidade').val(),
-				estado			: $('#estado').val(),
+				cidade			: {nome: $('#cidade').val(),modelAction : "NONE"},
+				estado			: {abreviacao: $('#estado').val(),modelAction : "NONE"},
 				bairro			: $('#bairro').val(),
 				numero			: $('#numero').val(),
 				cep				: $('#cep').val(),
