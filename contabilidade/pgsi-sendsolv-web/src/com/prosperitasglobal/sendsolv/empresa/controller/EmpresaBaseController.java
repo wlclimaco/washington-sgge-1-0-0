@@ -1,30 +1,12 @@
 package com.prosperitasglobal.sendsolv.empresa.controller;
 
 import java.util.Calendar;
+import java.util.concurrent.Future;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.LoggerFactory;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
-import com.prosperitasglobal.sendsolv.bai.IEmpresaBAI;
-import com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.DepositoInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.DepositoMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.FilialInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.FilialMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.RegimeInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.response.CnaeResponse;
-import com.prosperitasglobal.sendsolv.model.response.DepositoResponse;
-import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
-import com.prosperitasglobal.sendsolv.model.response.FilialResponse;
-import com.prosperitasglobal.sendsolv.model.response.RegimeResponse;
-import com.qat.framework.validation.ValidationUtil;
+import com.prosperitasglobal.sendsolv.common.util.IAsyncDMFacade;
 
 public class EmpresaBaseController extends UtilControllerD
 {
@@ -43,6 +25,19 @@ public class EmpresaBaseController extends UtilControllerD
 
 	/** The Empresa BAI. */
 	private IEmpresaBAI empresaBAI;
+
+	private IAsyncDMFacade asyncDMFacade;
+
+	public IAsyncDMFacade getAsyncDMFacade()
+	{
+		return asyncDMFacade;
+	}
+
+	@Resource
+	public void setAsyncDMFacade(IAsyncDMFacade asyncDMFacade)
+	{
+		this.asyncDMFacade = asyncDMFacade;
+	}
 
 	/**
 	 * Gets the empresa bai.
@@ -426,39 +421,28 @@ public class EmpresaBaseController extends UtilControllerD
 
 	}
 
-	public FilialResponse edit(FilialMaintenanceRequest locationRequest)
+	public Future<CustomizationResponse> loadColumns(DeviceCategoryEnum deviceCategoryEnum,
+			InquiryPaginationRequest inquiryPaginationRequest, AreaTypeEnum areaTypeEnum)
 	{
-		FilialResponse locationResponse = new FilialResponse();
-		try
+		CustomizationRequest customSearchRequest =
+				new CustomizationRequest(new Customization());
+
+		customSearchRequest.getCustomization().setCustomizationTypeEnum(CustomizationTypeEnum.COLUMN);
+
+		if (!ValidationUtil.isNull(deviceCategoryEnum))
 		{
-
-			locationResponse = getEmpresaBAI().updateFilial(locationRequest);
-
+			customSearchRequest.getCustomization().setDeviceCategory(deviceCategoryEnum);
 		}
-		catch (Exception e)
+
+		if (!ValidationUtil.isNull(areaTypeEnum))
 		{
-			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			locationResponse = null;
+			customSearchRequest.getCustomization().setAreaType(areaTypeEnum);
 		}
-		return locationResponse;
 
-	}
+		addUserContextToRequest(customSearchRequest, inquiryPaginationRequest);
 
-	public DepositoResponse edit(DepositoMaintenanceRequest locationRequest)
-	{
-		DepositoResponse locationResponse = new DepositoResponse();
-		try
-		{
-
-			locationResponse = getEmpresaBAI().updateDeposito(locationRequest);
-
-		}
-		catch (Exception e)
-		{
-			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-			locationResponse = null;
-		}
-		return locationResponse;
+		return getAsyncDMFacade().<CustomizationResponse> callAsyncMethod(getCustomSearchBCF(), "fetchAllColumns",
+				customSearchRequest, null);
 
 	}
 
