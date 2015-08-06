@@ -282,7 +282,7 @@ pgsi.pages.empresa.view = {
 						}
 						if (!$.pgsi.isNullOrUndefined(oPlano.produto)){
 							sUser = oPlano.produto.produto;
-							//debugger
+
 							if (!$.pgsi.isNullOrUndefined(oPlano.produto.precoList)){
 								for (var y=0; y < oPlano.produto.precoList.length; y++) {
 									if(oPlano.produto.precoList[y].precoTypeEnum == "PLANO"){

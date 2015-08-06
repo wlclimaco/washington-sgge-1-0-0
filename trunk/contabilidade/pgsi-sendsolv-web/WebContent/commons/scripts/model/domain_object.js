@@ -604,6 +604,7 @@ var Entidade = function(oParam) {
 
 	if (oParam) {
 		this.id				= oParam.id;
+		this.entidadeId		= oParam.entidadeId;
 		this.nome			= oParam.nome;
 		this.regime			= oParam.regime;
 		this.enderecos		= oParam.enderecos;

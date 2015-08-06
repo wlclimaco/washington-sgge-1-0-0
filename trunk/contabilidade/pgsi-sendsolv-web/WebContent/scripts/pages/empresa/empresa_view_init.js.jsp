@@ -11,6 +11,15 @@
     </c:otherwise>
 </c:choose>
 
+<c:choose>
+	<c:when test="${empty cidadeResponse}">
+       var oCidadeResponse = null;
+    </c:when>
+    <c:otherwise>
+    	var oCidadeResponse = ${cidadeResponse};
+    </c:otherwise>
+</c:choose>
+console.log(oCidadeResponse);
 	if (!$.pgsi.isNullOrUndefined(oPreLoadResponse)) {
 		pgsi.pages.empresa.view.fnFillEmpresa(oPreLoadResponse);
 	}else{
