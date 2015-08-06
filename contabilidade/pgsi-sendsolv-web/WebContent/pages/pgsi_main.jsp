@@ -37,7 +37,7 @@
 
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"rel="stylesheet">
 
-	<link href="thirdparty/bootstrap-table/src/bootstrap-table.css" rel="stylesheet">
+	<link href="styles/bootstrap-select.css" rel="stylesheet">
 
 <!--<link rel="stylesheet" href="styles/preload.css" />-->
 <!-- <link rel="stylesheet" href="styles/pgsi-common.css" /> -->
@@ -86,6 +86,8 @@
 <script>
 head.load("thirdparty/jquery/jquery-1.11.1.min.js",
 					"thirdparty/jquery/jquery-ui-1.11.0.min.js",
+					"bootstrap/js/bootstrap.js",
+					"bootstrap/js/bootstrap-select.js",
 					"scripts/util/namespace_init.js",
 					"thirdparty/jquery/custom/jquery.i18n.properties.custom.js",
 					"thirdparty/jquery/custom/jquery.ui.datepicker-locale.js",
@@ -119,9 +121,6 @@ head.load("thirdparty/jquery/jquery-1.11.1.min.js",
 					"commons/widget-ui/widget_highcharts_1.0.js",
 					"commons/widget-ui/widget_summary.js",
 					"scripts/util/page.js",
-				    "thirdparty/jquery/custom/jquery.combobox.js",
-				    "bootstrap/js/bootstrap.js",
-				    "thirdparty/knockout/knockout-3.3.0.js",
 				    "scripts/util/checkbox.js",
 				    "scripts/util/combobox.js",
 				    "scripts/util/filter_util.js",

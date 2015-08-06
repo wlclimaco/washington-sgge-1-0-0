@@ -23,22 +23,18 @@
 					oButtons[$.pgsi.locale.get("commons.dialog.insert")] = function () {
 
 						var sUrl = "";
-						if(sModelAction == "insert")
-						{
-							sUrl = "api/entidade/insert"
-						}
-						else
-						{
-							sUrl = "api/entidade/update"
-						}
+						if(sType == 1){sUrl = "api/empresa/add"}else if(sType == 2){sUrl = "api/empresa/filial/add"}else{sUrl = "api/empresa/deposito/add"}
+
 						pgsi.pages.entidade.form.ajaxCall(sUrl,iId,sType,sModelAction);
+
+						$(this).dialog('close');
 
 					};
 
 					// Cancel Button
 					oButtons[$.pgsi.locale.get("commons.dialog.cancel")] = function() {
 
-						$(this).dialog('close');
+
 					};
 
 					return oButtons;

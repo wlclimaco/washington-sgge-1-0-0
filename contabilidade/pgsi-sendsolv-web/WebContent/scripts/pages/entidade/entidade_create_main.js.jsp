@@ -77,9 +77,9 @@
 
 				// Insert the Location
 				$.pgsi.ajax.post({
-					sUrl : 'api/empresa/add',
+					sUrl : sUrlAdress,
 					oRequest : request,
-					fnCallback : fnCallback
+					fnCallback : pgsi.pages.empresa.view.fnCallbackRefleshPageEmpresa
 				});
 			},
 
@@ -88,7 +88,14 @@
 				//pgsi.util.page.form.fnInitForm();
 				sModelAction = "INSERT"
 				// fill location-specific fields
-				var oEmpresa = new Empresa();
+				if(sType == 1){
+					var oEmpresa = new Empresa();
+					oEmpresa.socios		= pgsi.pages.socio.fnCreateRequest(sModelAction);
+				}else if(sType == 2){
+					var oEmpresa = new Filial();
+				}else{
+					var oEmpresa = new Deposito();
+				}
 						if(sType != 1){
 							oEmpresa.entidadeId = iId;
 							oEmpresa.entidadeEnumValue = sType;
@@ -100,7 +107,6 @@
 						oEmpresa.documentos	= pgsi.pages.documento.fnCreateRequest(sModelAction);
 						oEmpresa.emails		= pgsi.pages.email.fnCreateRequest(sModelAction);
 						oEmpresa.telefones	= pgsi.pages.telefone.fnCreateRequest(sModelAction);
-						oEmpresa.socios		= pgsi.pages.socio.fnCreateRequest(sModelAction);
 						oEmpresa.cnaes		= pgsi.pages.cnae.fnCreateRequest(sModelAction);
 						oEmpresa.modelAction = sModelAction;
 

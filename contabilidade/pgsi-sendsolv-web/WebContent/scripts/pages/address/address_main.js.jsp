@@ -296,10 +296,17 @@ pgsi.pages.address = {
 			fillFields : function(oContactList){
 //debugger
 				var oAddress = oContactList;
-				var Shtml="";
+				var Shtml="",sCidade="",sEstado="";
+
 				for (var i = 0; i < oContactList.length; i++) {
-					Shtml = oAddress[i].logradouro +" "+oAddress[i].numero +" "+oAddress[i].bairro
-					+'<br>'+oAddress[i].cidade+" "+oAddress[i].estado+" "+oAddress[i].cep+" "+oAddress[i].complemento;
+					if (!$.pgsi.isNullOrUndefined(oAddress[i].cidade)) {
+						sCidade = oAddress[i].cidade.nome;
+					}
+					if (!$.pgsi.isNullOrUndefined(oAddress[i].estado)) {
+						sEstado = "- "+oAddress[i].estado.abreviacao;
+					}
+					Shtml = oAddress[i].enderecoType +" "+oAddress[i].logradouro +" "+oAddress[i].numero +" "+oAddress[i].bairro
+					+'<br>'+sCidade+" "+sEstado+" "+oAddress[i].cep;
 
 				}
 				$("#street-address-line-"+(i + 1)+"-field").text("");

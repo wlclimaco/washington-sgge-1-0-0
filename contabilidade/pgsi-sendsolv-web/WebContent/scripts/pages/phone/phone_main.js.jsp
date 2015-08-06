@@ -306,7 +306,7 @@ pgsi.pages.phone = {
 			for (var i = 0; i < oPhoneList.length; i++) {
 				oPhone = oPhoneList[i];
 
-				sPhoneList += '<div class="primary"><span> +'+ oPhone.type+' </span><span>('  + oPhone.ddd + ')<span"> '+oPhone.numero+'</span></div>';
+				sPhoneList += '<div class="primary"><span> +'+ oPhone.telefoneTypeEnum+' </span><span>('  + oPhone.ddd + ')<span"> '+oPhone.numero+'</span></div>';
 			}
 
 			$("#phone-container").append(sPhoneList);

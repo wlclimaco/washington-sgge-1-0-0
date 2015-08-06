@@ -4,6 +4,18 @@
  *
  */
 
+ var QATModel = function(oParam) {
+
+	var date = new Date();
+	if (oParam) {
+		this.createUser		= pgsi.settings.userContext.userId;
+		this.modifyUser		= pgsi.settings.userContext.userId;
+		this.createDateUTC	= date.getTime();
+		this.modifyDateUTC  = date.getTime();
+	}
+};
+
+
 var Business = function(oParam) {
 	if (oParam)
 	{
@@ -421,6 +433,8 @@ var SuspiciousActivity = function(oParam) {
 
 var ModelCosmeDamiao = function(oParam){
 
+	QATModel.call(this, oParam);
+
 	if (oParam) {
 		this.parentId    = oParam.parentId;
 		this.type        = oParam.type;
@@ -429,6 +443,7 @@ var ModelCosmeDamiao = function(oParam){
 		this.statusList  = [ oParam.statusList ];
 	}
 };
+ModelCosmeDamiao.prototype = new QATModel();
 
 TransferParticipant.prototype = new Person();
 
@@ -583,8 +598,7 @@ var Produto = function(oParam) {
 };
 Produto.prototype = new ModelCosmeDamiao();
 
-
-var Empresa = function(oParam) {
+var Entidade = function(oParam) {
 
 	ModelCosmeDamiao.call(this, oParam);
 
@@ -596,10 +610,34 @@ var Empresa = function(oParam) {
 		this.documentos		= oParam.documentos;
 		this.emails			= oParam.emails;
 		this.Telefones		= oParam.Telefones;
-		this.socios			= oParam.socios;
 		this.cnaes			= oParam.cnaes;
 		this.modelAction 	= oParam.modelAction;
 
 	}
 };
-Empresa.prototype = new ModelCosmeDamiao();
+Entidade.prototype = new ModelCosmeDamiao();
+
+
+var Empresa = function(oParam) {
+
+	Entidade.call(this, oParam);
+
+	if (oParam) {
+		this.socios			= oParam.socios;
+	}
+};
+Empresa.prototype = new Entidade();
+
+var Filial = function(oParam) {
+
+	Entidade.call(this, oParam);
+
+};
+Filial.prototype = new Entidade();
+
+var Deposito = function(oParam) {
+
+	Entidade.call(this, oParam);
+
+};
+Deposito.prototype = new Entidade();

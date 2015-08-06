@@ -4,7 +4,7 @@ import java.util.concurrent.Future;
 
 import org.springframework.security.core.Authentication;
 
-import com.sensus.common.model.request.Request;
+import com.qat.framework.model.request.Request;
 
 public interface IAsyncDMFacade
 {

@@ -344,7 +344,6 @@ public class EmpresaAPIController extends EmpresaBaseController
 		Email email = new Email();
 		email.setId(1);
 		email.setEmail("wlclimaco@gmail.com");
-		email.setDescription("Casa");
 		email.setModelAction(modelAction);
 		emailList.add(email);
 
@@ -383,7 +382,6 @@ public class EmpresaAPIController extends EmpresaBaseController
 		telefone.setId(1);
 		telefone.setDdd("34");
 		telefone.setNumero("91782776");
-		telefone.setDescricao("Casa");
 		telefoneList.add(telefone);
 
 		telefone = new Telefone();
@@ -391,7 +389,6 @@ public class EmpresaAPIController extends EmpresaBaseController
 		telefone.setId(1);
 		telefone.setDdd("34");
 		telefone.setNumero("91782776");
-		telefone.setDescricao("Trabalho");
 		telefoneList.add(telefone);
 
 		telefone = new Telefone();
@@ -399,7 +396,6 @@ public class EmpresaAPIController extends EmpresaBaseController
 		telefone.setId(1);
 		telefone.setDdd("34");
 		telefone.setNumero("91782776");
-		telefone.setDescricao("Celular");
 		telefoneList.add(telefone);
 
 		return telefoneList;
@@ -411,21 +407,18 @@ public class EmpresaAPIController extends EmpresaBaseController
 		Documento documento = new Documento();
 		documento.setModelAction(modelAction);
 		documento.setId(1);
-		documento.setDescription("CNPJ");
 		documento.setNumero("111111111000001");
 		documentoList.add(documento);
 
 		documento = new Documento();
 		documento.setModelAction(modelAction);
 		documento.setId(1);
-		documento.setDescription("IM");
 		documento.setNumero("111111111000001");
 		documentoList.add(documento);
 
 		documento = new Documento();
 		documento.setModelAction(modelAction);
 		documento.setId(1);
-		documento.setDescription("IE");
 		documento.setNumero("111111111000001");
 		documentoList.add(documento);
 

@@ -96,7 +96,7 @@ pgsi.pages.entidade.view = {
 				var sEmail = "";
 
 				for (var i = 0; i < oEmpresa.emails.length; i++) {
-					sEmail = sEmail + oEmpresa.emails[i].description + " " +oEmpresa.emails[i].email +"<br>"
+					sEmail = sEmail + oEmpresa.emails[i].emailType + " " +oEmpresa.emails[i].email +"<br>"
 				}
 				$('#phone-container').append(sEmail);
 

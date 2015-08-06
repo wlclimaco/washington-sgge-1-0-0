@@ -11,12 +11,11 @@ pgsi.pages.documento = {
 
 		aDocumento = [];
 
-		var documento = new Documento();
-
 		dDate = new Date();
 
 		if (!$.pgsi.isNullOrUndefined($('#cnpj').val())) {
 
+			var documento = new Documento();
 			documento.documentoType  = "CNPJ";
 			documento.numero         = $('#cnpj').val();
 			documento.data           = dDate.getTime();
@@ -26,6 +25,7 @@ pgsi.pages.documento = {
 		}
 		if (!$.pgsi.isNullOrUndefined($('#ie').val())) {
 
+			var documento = new Documento();
 			documento.documentoType  = "IE";
 			documento.numero         = $('#ie').val();
 			documento.data           = dDate.getTime();
@@ -35,6 +35,7 @@ pgsi.pages.documento = {
 		}
 		if (!$.pgsi.isNullOrUndefined($('#im').val())) {
 
+			var documento = new Documento();
 			documento.documentoType  = "IM";
 			documento.numero         = $('#im').val();
 			documento.data           = dDate.getTime();

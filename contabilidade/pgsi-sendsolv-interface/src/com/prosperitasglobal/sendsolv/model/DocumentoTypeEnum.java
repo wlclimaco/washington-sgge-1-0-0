@@ -31,8 +31,10 @@ public enum DocumentoTypeEnum implements IIntegerEnum, II18nEnum
 
 	CERTIDAONEGATIVA(7, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
 
+	IE(8, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
+
 	/** The unknown. */
-	CERTIDADONASCIMENTO(8, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
+	CERTIDADONASCIMENTO(9, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
 
 	/** The code. */
 	private Integer code;
