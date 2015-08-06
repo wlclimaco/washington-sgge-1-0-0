@@ -4,9 +4,31 @@ import java.util.Calendar;
 import java.util.concurrent.Future;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
+import com.prosperitasglobal.sendsolv.bai.IEmpresaBAI;
 import com.prosperitasglobal.sendsolv.common.util.IAsyncDMFacade;
+import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.DepositoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.DepositoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.EmpresaInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EmpresaMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.FilialInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.FilialMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.request.RegimeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.CidadeResponse;
+import com.prosperitasglobal.sendsolv.model.response.CnaeResponse;
+import com.prosperitasglobal.sendsolv.model.response.DepositoResponse;
+import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
+import com.prosperitasglobal.sendsolv.model.response.FilialResponse;
+import com.prosperitasglobal.sendsolv.model.response.RegimeResponse;
+import com.qat.framework.validation.ValidationUtil;
 
 public class EmpresaBaseController extends UtilControllerD
 {
@@ -82,6 +104,9 @@ public class EmpresaBaseController extends UtilControllerD
 			}
 			if (!ValidationUtil.isNullOrZero(empresaId))
 			{
+
+				modelAndView.addObject("cidadeResponse", getMapper()
+						.writeValueAsString(loadColumns(new CidadeInquiryRequest())));
 
 				modelAndView.addObject(RESPONSE,
 						getMapper().writeValueAsString(fetchEmpresaById(new FetchByIdRequest(empresaId))));
@@ -421,29 +446,49 @@ public class EmpresaBaseController extends UtilControllerD
 
 	}
 
-	public Future<CustomizationResponse> loadColumns(DeviceCategoryEnum deviceCategoryEnum,
-			InquiryPaginationRequest inquiryPaginationRequest, AreaTypeEnum areaTypeEnum)
+	public FilialResponse edit(FilialMaintenanceRequest locationRequest)
 	{
-		CustomizationRequest customSearchRequest =
-				new CustomizationRequest(new Customization());
-
-		customSearchRequest.getCustomization().setCustomizationTypeEnum(CustomizationTypeEnum.COLUMN);
-
-		if (!ValidationUtil.isNull(deviceCategoryEnum))
+		FilialResponse locationResponse = new FilialResponse();
+		try
 		{
-			customSearchRequest.getCustomization().setDeviceCategory(deviceCategoryEnum);
-		}
 
-		if (!ValidationUtil.isNull(areaTypeEnum))
+			locationResponse = getEmpresaBAI().updateFilial(locationRequest);
+
+		}
+		catch (Exception e)
 		{
-			customSearchRequest.getCustomization().setAreaType(areaTypeEnum);
+			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			locationResponse = null;
 		}
-
-		addUserContextToRequest(customSearchRequest, inquiryPaginationRequest);
-
-		return getAsyncDMFacade().<CustomizationResponse> callAsyncMethod(getCustomSearchBCF(), "fetchAllColumns",
-				customSearchRequest, null);
+		return locationResponse;
 
 	}
+
+	public DepositoResponse edit(DepositoMaintenanceRequest locationRequest)
+	{
+		DepositoResponse locationResponse = new DepositoResponse();
+		try
+		{
+
+			locationResponse = getEmpresaBAI().updateDeposito(locationRequest);
+
+		}
+		catch (Exception e)
+		{
+			LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			locationResponse = null;
+		}
+		return locationResponse;
+
+	}
+
+	public Future<CidadeResponse> loadColumns(
+			CidadeInquiryRequest inquiryPaginationRequest)
+			{
+
+		return getAsyncDMFacade().<CidadeResponse> callAsyncMethod(getEmpresaBAI(), "fetchCidadeByRequest",
+				inquiryPaginationRequest, null);
+
+			}
 
 }

@@ -12,10 +12,9 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.ReflectionUtils;
 
-import com.sensus.common.model.request.Request;
-import com.sensus.common.util.SensusInterfaceUtil;
-import com.sensus.common.validation.ValidationUtil;
-import com.sensus.dm.common.tenant.model.response.TenantResponse;
+import com.prosperitasglobal.sendsolv.tenant.model.response.TenantResponse;
+import com.qat.framework.model.request.Request;
+import com.qat.framework.validation.ValidationUtil;
 
 public class AsyncDMFacadeImpl implements IAsyncDMFacade
 {
@@ -29,7 +28,7 @@ public class AsyncDMFacadeImpl implements IAsyncDMFacade
 	@Async("dmExecutor")
 	public <Response> Future<Response> callAsyncMethod(Object service, String methodtoCall, Request request,
 			Authentication authentication)
-	{
+			{
 
 		try
 		{
@@ -46,9 +45,9 @@ public class AsyncDMFacadeImpl implements IAsyncDMFacade
 		catch (Exception ex)
 		{
 			TenantResponse response = new TenantResponse();
-			SensusInterfaceUtil.handleException(LOG, response, ex, DEFAULT_ASYNC_FACADE_EXCEPTION_MSG);
+			// SensusInterfaceUtil.handleException(LOG, response, ex, DEFAULT_ASYNC_FACADE_EXCEPTION_MSG);
 			return new AsyncResult<Response>((Response)response);
 		}
 
-	}
+			}
 }

@@ -71,7 +71,7 @@
 			<div id="wb_Text19" style="position:absolute;text-align:left; left:10px;width:180px;height:200px;">
 				 <span style="color:#000000;font-family:Arial;font-size:13px;">Regime Tributario :</span>
 			  </div>
-			  <select name="regime" size="1" id="regime" style="position:absolute;z-index:39;left:125px;width:235px;height:27px;">
+			  <select name="regime" size="1" class="selectpicker" id="regime" data-live-search="true" style="position:absolute;z-index:39;left:125px;width:235px;height:27px;">
 				<option value="1">Simples Nacional</option>
 				<option value="2">Lucro Real</option>
 				<option value="3">MEI</option>
@@ -81,7 +81,7 @@
       <div id="wb_Text12"  style="position:absolute;left:45px;top:192px;width:40px;height:16px;z-index:23;text-align:left;">
          <span style="color:#000000;font-family:Arial;font-size:13px;">Type :</span>
       </div>
-	  <select name="emailType" class="Editbox9" maxlength="254" style="position:absolute;left:99px;top:190px;width:74px;height:27px;line-height:27px;z-index:24;" name="nome" value="">
+	  <select id="lunch" class="selectpicker Editbox9" data-live-search="true" title="Please select a lunch ..." maxlength="254" style="position:absolute;left:99px;top:190px;width:74px;height:27px;line-height:27px;z-index:24;">
 				<option value="1">Sac</option>
 				<option value="2">Contato</option>
 				<option value="3">Representante</option>

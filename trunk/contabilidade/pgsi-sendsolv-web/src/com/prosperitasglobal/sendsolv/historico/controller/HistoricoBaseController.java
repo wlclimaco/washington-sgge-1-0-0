@@ -10,7 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.controller.delegate.UtilControllerD;
 import com.prosperitasglobal.sendsolv.bai.IHistoricoBAI;
+import com.prosperitasglobal.sendsolv.model.request.AlertasInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.HistoricoInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.AlertasResponse;
 import com.prosperitasglobal.sendsolv.model.response.HistoricoResponse;
 import com.qat.framework.validation.ValidationUtil;
 
@@ -115,6 +117,28 @@ public class HistoricoBaseController extends UtilControllerD
 
 			// historicoResponse = Mock();
 			historicoResponse = getHistoricoBAI().fetchHistoricoByRequest(pagedInquiryRequest);
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+			}
+		}
+
+		return historicoResponse;
+	}
+
+	public AlertasResponse fetchAllAlertas(AlertasInquiryRequest pagedInquiryRequest)
+	{
+
+		AlertasResponse historicoResponse = new AlertasResponse();
+		try
+		{
+
+			// historicoResponse = Mock();
+			historicoResponse = getHistoricoBAI().fetchAlertasByRequest(pagedInquiryRequest);
 
 		}
 		catch (Exception e)

@@ -44,7 +44,7 @@
 						$.pgsi.ajax.post({
 							sUrl 		: "api/empresa/add",
 							oRequest 	: {empresa:{id: parseInt($.address.parameter("locationId"),10) ,modelAction :"NONE", cnaes:oCnae}},
-							fnCallback  : null
+							fnCallback  : pgsi.pages.empresa.view.fnCallbackRefleshPageEmpresa
 					   });
 
 					};

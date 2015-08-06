@@ -17,6 +17,10 @@ public class Alertas extends ModelCosmeDamiao
 
 	private Integer qntEmpr;
 
+	private Integer qntFil;
+
+	private Integer qntDep;
+
 	private Integer qntProd;
 
 	private Integer qntSugs;
@@ -161,6 +165,38 @@ public class Alertas extends ModelCosmeDamiao
 		this.qntFaleCom = qntFaleCom;
 	}
 
+	/**
+	 * @return the qntFil
+	 */
+	public Integer getQntFil()
+	{
+		return qntFil;
+	}
+
+	/**
+	 * @param qntFil the qntFil to set
+	 */
+	public void setQntFil(Integer qntFil)
+	{
+		this.qntFil = qntFil;
+	}
+
+	/**
+	 * @return the qntDep
+	 */
+	public Integer getQntDep()
+	{
+		return qntDep;
+	}
+
+	/**
+	 * @param qntDep the qntDep to set
+	 */
+	public void setQntDep(Integer qntDep)
+	{
+		this.qntDep = qntDep;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -171,15 +207,16 @@ public class Alertas extends ModelCosmeDamiao
 		return "Alertas [getId()=" + getId() + ", getEntidadeId()=" + getEntidadeId() + ", getQntOs()=" + getQntOs()
 				+ ", getQntEmpr()=" + getQntEmpr() + ", getQntProd()=" + getQntProd() + ", getQntSugs()="
 				+ getQntSugs() + ", getQntRecl()=" + getQntRecl() + ", getQntFaleCom()=" + getQntFaleCom()
-				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
-				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
-				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
-				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
-				+ ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId() + ", getNotes()=" + getNotes()
-				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
-				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
-				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + "]";
+				+ ", getQntFil()=" + getQntFil() + ", getQntDep()=" + getQntDep() + ", getTabelaEnumValue()="
+				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
+				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
+				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
+				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", getProcessId()="
+				+ getProcessId() + ", getUserId()=" + getUserId() + ", getNotes()=" + getNotes() + ", toString()="
+				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
+				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
+				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
 
 }

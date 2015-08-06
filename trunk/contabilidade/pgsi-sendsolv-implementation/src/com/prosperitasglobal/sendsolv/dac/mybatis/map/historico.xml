@@ -52,6 +52,19 @@
 	<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
+  <resultMap id="alertaResult" type="Alerta" >
+ 	<result property="id" column="id" />
+	<result property="entidadeId" column="entidadeId" />
+	<result property="qntOs" column="qntOs" />
+	<result property="qntEmpr" column="qntEmpr" />
+	<result property="qntFil" column="qntFil" />
+	<result property="qntDep" column="qntDep" />
+	<result property="qntProd" column="qntProd" />
+	<result property="qntSugs" column="qntSugs" />
+	<result property="qntRecl" column="qntRecl" />
+	<result property="qntFaleCom" column="qntFaleCom" />
+  </resultMap>
+
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
@@ -183,30 +196,33 @@
      WHERE 2 = 2
   </select>
 
-   <select id="fetchAllAlertasByRequest" parameterType="AlertasInquiryRequest" resultMap="historicoResult">
-		SELECT * FROM
-    			(
-    				SELECT b.id,
-    						<include refid="allHistoricoColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
-    				FROM historico b
-					WHERE 2 = 2
-					<if test="criteria.id != null">
-						AND b.id = #{criteria.id}
-					</if>
-    			) LIST
-				<choose>
-					<when test="pageSize != null and pageSize > 0">
-					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
-					        LOWER: startRow + 1 and
-					        UPPER: startRow + pageSize -->
-					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
-					</when>
-					<otherwise>
-					 	WHERE RowNumber BETWEEN 1 AND RowNumber
-					 	ORDER BY RowNumber
-					</otherwise>
-				</choose>
+   <select id="fetchAllAlertasByRequest" parameterType="AlertasInquiryRequest" resultMap="alertaResult">
+		select
+			(	select count(e.id) as qntEmpr from entidade e
+			LEFT JOIN (SELECT status,parentId ,MAX(s.Id) AS MaxId from status s ,entidade ee where ee.id = s.parentId and s.tabelaEnum in(1) group by s.status,s.parentId) max ON max.status = 5
+
+			where max.parentId = e.id and e.entidadeEnum = 1) as qntEmpr,
+
+			(select count(e.id) as qntEmpr from entidade e
+			LEFT JOIN (SELECT status,parentId ,MAX(s.Id) AS MaxId from status s ,entidade ee where ee.id = s.parentId and s.tabelaEnum in(51) group by s.status,s.parentId) max ON max.status = 5
+
+			where max.parentId = e.id and e.entidadeEnum = 2) as qntFil,
+
+			(	select count(e.id) as qntEmpr from entidade e
+			LEFT JOIN (SELECT status,parentId ,MAX(s.Id) AS MaxId from status s ,entidade ee where ee.id = s.parentId and s.tabelaEnum in(52) group by s.status,s.parentId) max ON max.status = 5
+
+			where max.parentId = e.id and e.entidadeEnum = 3) as qntDep,
+
+
+			(select count(e.id) as qntEmpr from produto e
+			LEFT JOIN (SELECT status,parentId ,MAX(s.Id) AS MaxId from status s ,entidade ee where ee.id = s.parentId and s.tabelaEnum in(45) group by s.status,s.parentId) max ON max.status = 5
+
+			where max.parentId = e.id ) as qntProd,
+
+			(	select count(e.id) as qntEmpr from ordemServico e
+			LEFT JOIN (SELECT status,parentId ,MAX(s.Id) AS MaxId from status s ,entidade ee where ee.id = s.parentId and s.tabelaEnum in(34) group by s.status,s.parentId) max ON max.status = 5
+
+			where max.parentId = e.id ) as qntOs
   </select>
 
 

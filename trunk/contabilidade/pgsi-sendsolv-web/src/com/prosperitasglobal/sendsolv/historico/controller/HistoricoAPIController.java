@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.model.request.AlertasInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.HistoricoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.HistoricoMaintenanceRequest;
+import com.prosperitasglobal.sendsolv.model.response.AlertasResponse;
 import com.prosperitasglobal.sendsolv.model.response.HistoricoResponse;
 
 /**
@@ -25,6 +27,8 @@ import com.prosperitasglobal.sendsolv.model.response.HistoricoResponse;
 @RequestMapping("/api/historico")
 public class HistoricoAPIController extends HistoricoBaseController
 {
+
+	private static final String FETCH_ALERTAS = "fetch/alertas";
 
 	/** The URL mapping constants. */
 	private static final String DELETE_HISTORICO = "/delete";
@@ -156,6 +160,14 @@ public class HistoricoAPIController extends HistoricoBaseController
 		}
 
 		return historicoResponse;
+
+	}
+
+	@RequestMapping(value = FETCH_ALERTAS, method = RequestMethod.POST)
+	@ResponseBody
+	public AlertasResponse fetchAlerts(@RequestBody AlertasInquiryRequest historicoRequest)
+	{
+		return fetchAllAlertas(historicoRequest);
 
 	}
 
