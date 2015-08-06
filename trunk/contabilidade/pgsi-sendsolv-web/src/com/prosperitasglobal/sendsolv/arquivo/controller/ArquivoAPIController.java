@@ -1,6 +1,7 @@
 package com.prosperitasglobal.sendsolv.arquivo.controller;
 
 import java.util.Calendar;
+import java.util.concurrent.Future;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,14 @@ import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
 import com.prosperitasglobal.sendsolv.model.request.ArquivoMaintenanceRequest;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.response.ArquivoResponse;
+import com.sensus.cbof.model.DeviceCategoryEnum;
+import com.sensus.common.validation.ValidationUtil;
+import com.sensus.dm.common.base.model.request.InquiryPaginationRequest;
+import com.sensus.dm.common.device.model.AreaTypeEnum;
+import com.sensus.dm.common.device.model.Customization;
+import com.sensus.dm.common.device.model.CustomizationTypeEnum;
+import com.sensus.dm.common.device.model.request.CustomizationRequest;
+import com.sensus.dm.common.device.model.response.CustomizationResponse;
 
 /**
  * The ArquivoAPIController Class.
@@ -51,6 +60,27 @@ public class ArquivoAPIController extends ArquivoBaseController
 
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
 	private static final String CONTROLLER_EXCEPTION_MSG = "ArquivoAPIController";
+
+//
+//	public Future<CustomizationResponse> loadFilters(DeviceCategoryEnum deviceCategoryEnum,
+//			InquiryPaginationRequest inquiryPaginationRequest, AreaTypeEnum areaTypeEnum)
+//	{
+//		CustomizationRequest customSearchRequest =
+//				new CustomizationRequest(new Customization(CustomizationTypeEnum.FILTER, deviceCategoryEnum));
+//
+//		if (!ValidationUtil.isNull(areaTypeEnum))
+//		{
+//			customSearchRequest.getCustomization().setAreaType(areaTypeEnum);
+//		}
+//		addUserContextToRequest(customSearchRequest, inquiryPaginationRequest);
+//
+//		return getAsyncDMFacade().<CustomizationResponse> callAsyncMethod(getCustomSearchBCF(), "fetchAllFilters",
+//				customSearchRequest, null);
+//
+	}
+
+
+
 
 	/**
 	 * Fetch all Arquivos.
