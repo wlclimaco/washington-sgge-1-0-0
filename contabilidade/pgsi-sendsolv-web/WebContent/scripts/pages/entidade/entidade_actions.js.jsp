@@ -24,7 +24,6 @@
 
 						var sUrl = "";
 						if(sType == 1){sUrl = "api/empresa/add"}else if(sType == 2){sUrl = "api/empresa/filial/add"}else{sUrl = "api/empresa/deposito/add"}
-
 						pgsi.pages.entidade.form.ajaxCall(sUrl,iId,sType,sModelAction);
 
 						$(this).dialog('close');

@@ -93,6 +93,7 @@
 					oEmpresa.socios		= pgsi.pages.socio.fnCreateRequest(sModelAction);
 				}else if(sType == 2){
 					var oEmpresa = new Filial();
+
 				}else{
 					var oEmpresa = new Deposito();
 				}
@@ -119,7 +120,15 @@
 				var request = new EmpresaMaintenanceRequest();
 
 				// fill common location fields - method returns basic business objects (i.e things locations and orgs have in common)
-				request.empresa = pgsi.pages.entidade.form.fnFillEmpresa(iId,sType,sModelAction);
+
+
+				if(sType == 1){
+					request.empresa = pgsi.pages.entidade.form.fnFillEmpresa(iId,sType,sModelAction);
+				}else if(sType == 2){
+					request.filial = pgsi.pages.entidade.form.fnFillEmpresa(iId,sType,sModelAction);
+				}else{
+					request.deposito = pgsi.pages.entidade.form.fnFillEmpresa(iId,sType,sModelAction);
+				}
 
 
 				return request;
