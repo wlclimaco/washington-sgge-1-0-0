@@ -102,11 +102,18 @@ pgsi.pages.empresa.view = {
 
 						sNoteText = oFilial.nome;
 						iNoteId = oFilial.id;
-
+						var cidade = "";
+						var estado = "";
 						if (!$.pgsi.isNullOrUndefined(oFilial.enderecos)){
 							for (var y=0; y < oFilial.enderecos.length; y++) {
 								var endereco = oFilial.enderecos[y];
-								sFilialNumber = sFilialNumber + "("+endereco.cep + ") "+ endereco.logradouro +" "+endereco.numero+ " "+endereco.cidade.nome+" "+endereco.estado.abreviacao+" <br>";
+								if (!$.pgsi.isNullOrUndefined(endereco.cidade)){
+									cidade = endereco.cidade.nome
+								}
+								if (!$.pgsi.isNullOrUndefined(endereco.estado)){
+									estado = endereco.estado.abreviacao
+								}
+								sFilialNumber = sFilialNumber + "("+endereco.cep + ") "+ endereco.logradouro +" "+endereco.numero+ " "+cidade+" "+estado+" <br>";
 							}
 						}
 

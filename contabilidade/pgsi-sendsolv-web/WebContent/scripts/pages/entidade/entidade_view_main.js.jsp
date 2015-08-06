@@ -72,7 +72,6 @@ pgsi.pages.entidade.view = {
 
 		var oEmpresa = oResponse.entidadeList[0];
 
-console.log(oEmpresa)
 
 	//	<span class="label">Nome/Fantasia</span>
 				$("#nome-field").text(oEmpresa.nome);
@@ -80,11 +79,11 @@ console.log(oEmpresa)
 	//			<span class="label">CNPJ</span>
 
 				for(var i=0;i<oEmpresa.documentos.length;i++){
-					if(oEmpresa.documentos[i].type == "CNPJ"){
+					if(oEmpresa.documentos[i].documentoType == "CNPJ"){
 						$("#cnpj-field").text(oEmpresa.documentos[i].numero);
-					}else if(oEmpresa.documentos[i].type == "IM") {
+					}else if(oEmpresa.documentos[i].documentoType == "IM") {
 						$("#im-field").text(oEmpresa.documentos[i].numero);
-					}else if(oEmpresa.documentos[i].type == "IE") {
+					}else if(oEmpresa.documentos[i].documentoType == "IE") {
 						$("#IE-field").text(oEmpresa.documentos[i].numero);
 					}
 				}

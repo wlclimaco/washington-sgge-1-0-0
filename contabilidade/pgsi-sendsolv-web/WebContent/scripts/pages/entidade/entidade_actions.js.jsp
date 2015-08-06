@@ -6,7 +6,7 @@
 <script type="text/javascript">
 	pgsi.pages.entidade.dialogSettings = {
 
-		insert : function (iId, sName,sModelAction) {
+		insert : function (iId, sType,sModelAction) {
 
 			return {
 				title : $.pgsi.locale.get("commons.dialog.insert.title"),
@@ -31,7 +31,7 @@
 						{
 							sUrl = "api/entidade/update"
 						}
-						pgsi.pages.entidade.form.ajaxCall(sUrl,sModelAction);
+						pgsi.pages.entidade.form.ajaxCall(sUrl,iId,sType,sModelAction);
 
 					};
 
@@ -48,7 +48,7 @@
 
 					actionDialog.load("entidade/create", function() {
 
-						$('#selected', actionDialog).removeClass("hide").append(""+sName+"");
+						//$('#selected', actionDialog).removeClass("hide").append(""+sName+"");
 
 						actionDialog.dialog('open');
 					});

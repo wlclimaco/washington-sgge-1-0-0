@@ -42,7 +42,7 @@
 			 * @param {String} sMessage
 			 * 			Message that will display after the ajax call
 			 */
-			ajaxCall : function(sUrlAdress, mainModelAction) {
+			ajaxCall : function(sUrlAdress,iId,sType, mainModelAction) {
 
 				// Remove input masks
 			//	pgsi.util.page.business.form.maskFields.fnUnmask();
@@ -55,7 +55,7 @@
 				//	return false;
 				//}
 
-				var request = pgsi.pages.entidade.form.fnFillRequestObject(mainModelAction);
+				var request = pgsi.pages.entidade.form.fnFillRequestObject(iId,sType,mainModelAction);
 
 				var fnCallback = function (oResponse){
 					if (oResponse.operationSuccess == true) {
@@ -83,12 +83,16 @@
 				});
 			},
 
-			fnFillEmpresa : function(data,sModelAction) {
+			fnFillEmpresa : function(iId,sType,sModelAction) {
 
 				//pgsi.util.page.form.fnInitForm();
 				sModelAction = "INSERT"
 				// fill location-specific fields
 				var oEmpresa = new Empresa();
+						if(sType != 1){
+							oEmpresa.entidadeId = iId;
+							oEmpresa.entidadeEnumValue = sType;
+						}
 						oEmpresa.id 		= parseInt($('#codigo').val(),10);
 						oEmpresa.nome		= $('#nome').val();
 						oEmpresa.regime  	= {id : parseInt($('#regime').val(),10)};
@@ -105,11 +109,11 @@
 				return oEmpresa;
 			},
 
-			fnFillRequestObject : function(sModelAction){
+			fnFillRequestObject : function(iId,sType,sModelAction){
 				var request = new EmpresaMaintenanceRequest();
 
 				// fill common location fields - method returns basic business objects (i.e things locations and orgs have in common)
-				request.empresa = pgsi.pages.entidade.form.fnFillEmpresa(sModelAction);
+				request.empresa = pgsi.pages.entidade.form.fnFillEmpresa(iId,sType,sModelAction);
 
 
 				return request;
