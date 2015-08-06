@@ -69,9 +69,9 @@
 		pgsi.util.actiondialog.launchActionDialog (
 			"insert",
 			pgsi.pages.entidade.dialogSettings.insert(
-				$('#business-id').val(),
-				$('#company-name-field').text(),
-				1)
+				parseInt($.address.parameter("locationId"),10),
+				2,
+				'INSERT')
 		);
 	});
 
@@ -82,9 +82,9 @@
 		pgsi.util.actiondialog.launchActionDialog (
 			"insert",
 			pgsi.pages.entidade.dialogSettings.insert(
-				$('#business-id').val(),
-				$('#company-name-field').text(),
-				1)
+					parseInt($.address.parameter("locationId"),10),
+				3,
+				'INSERT')
 		);
 	});
 $.pgsi.progressBar.stopGlobal();

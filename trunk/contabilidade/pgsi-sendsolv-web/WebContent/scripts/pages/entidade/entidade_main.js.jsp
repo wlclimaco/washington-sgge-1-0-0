@@ -24,7 +24,7 @@ pgsi.pages.entidade = {
 		}
 		if (!$.pgsi.isNullOrUndefined(full.documentos)) {
 			for(var i=0;i<full.documentos.length;i++){
-				if((full.documentos[i].description == "CNPJ")||(full.documentos[i].description == "CPF")){
+				if((full.documentos[i].documentoType == "CNPJ")||(full.documentos[i].documentoType == "CPF")){
 					sCnpj = full.documentos[i].numero;
 				}
 			}
@@ -136,7 +136,7 @@ pgsi.pages.entidade = {
 		var sDocumentos ="";
 		if (!$.pgsi.isNullOrUndefined(full.documentos)) {
 			for(var i=0;i<full.documentos.length;i++){
-				sDocumentos = sDocumentos +  full.documentos[i].description+ " - "+full.documentos[i].numero + "<br>";
+				sDocumentos = sDocumentos +  full.documentos[i].documentoType + " - "+full.documentos[i].numero + "<br>";
 			}
 		}
 

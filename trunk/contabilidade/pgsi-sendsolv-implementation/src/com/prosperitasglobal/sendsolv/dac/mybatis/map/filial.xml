@@ -69,7 +69,7 @@
     			   SELECT
 					b.id,	<include refid="allFilialColumns" />
  				   FROM entidade b
-					where b.emprId = #{id} and entidadeEnum = 2
+					where b.entidadeId = #{id} and entidadeEnum = 2
   </select>
 
 
