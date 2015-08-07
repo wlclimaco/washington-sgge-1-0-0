@@ -1,4 +1,4 @@
-package com.journaldev.spring.controller;
+package com.prosperitasglobal.sendsolv.common.util;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -17,7 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
  * Handles requests for the application file upload requests
  */
 @Controller
-public class FileUploadController {
+public class FileUploadController
+{
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(FileUploadController.class);
@@ -26,19 +27,23 @@ public class FileUploadController {
 	 * Upload single file using Spring Controller
 	 */
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-	public @ResponseBody
-	String uploadFileHandler(@RequestParam("name") String name,
-			@RequestParam("file") MultipartFile file) {
+	public @ResponseBody String uploadFileHandler(@RequestParam("name") String name,
+			@RequestParam("file") MultipartFile file)
+	{
 
-		if (!file.isEmpty()) {
-			try {
+		if (!file.isEmpty())
+		{
+			try
+			{
 				byte[] bytes = file.getBytes();
 
 				// Creating the directory to store file
 				String rootPath = System.getProperty("catalina.home");
 				File dir = new File(rootPath + File.separator + "tmpFiles");
 				if (!dir.exists())
+				{
 					dir.mkdirs();
+				}
 
 				// Create the file on server
 				File serverFile = new File(dir.getAbsolutePath()
@@ -52,10 +57,14 @@ public class FileUploadController {
 						+ serverFile.getAbsolutePath());
 
 				return "You successfully uploaded file=" + name;
-			} catch (Exception e) {
+			}
+			catch (Exception e)
+			{
 				return "You failed to upload " + name + " => " + e.getMessage();
 			}
-		} else {
+		}
+		else
+		{
 			return "You failed to upload " + name
 					+ " because the file was empty.";
 		}
@@ -65,25 +74,31 @@ public class FileUploadController {
 	 * Upload multiple file using Spring Controller
 	 */
 	@RequestMapping(value = "/uploadMultipleFile", method = RequestMethod.POST)
-	public @ResponseBody
-	String uploadMultipleFileHandler(@RequestParam("name") String[] names,
-			@RequestParam("file") MultipartFile[] files) {
+	public @ResponseBody String uploadMultipleFileHandler(@RequestParam("name") String[] names,
+			@RequestParam("file") MultipartFile[] files)
+	{
 
 		if (files.length != names.length)
+		{
 			return "Mandatory information missing";
+		}
 
 		String message = "";
-		for (int i = 0; i < files.length; i++) {
+		for (int i = 0; i < files.length; i++)
+		{
 			MultipartFile file = files[i];
 			String name = names[i];
-			try {
+			try
+			{
 				byte[] bytes = file.getBytes();
 
 				// Creating the directory to store file
 				String rootPath = System.getProperty("catalina.home");
 				File dir = new File(rootPath + File.separator + "tmpFiles");
 				if (!dir.exists())
+				{
 					dir.mkdirs();
+				}
 
 				// Create the file on server
 				File serverFile = new File(dir.getAbsolutePath()
@@ -98,7 +113,9 @@ public class FileUploadController {
 
 				message = message + "You successfully uploaded file=" + name
 						+ "<br />";
-			} catch (Exception e) {
+			}
+			catch (Exception e)
+			{
 				return "You failed to upload " + name + " => " + e.getMessage();
 			}
 		}

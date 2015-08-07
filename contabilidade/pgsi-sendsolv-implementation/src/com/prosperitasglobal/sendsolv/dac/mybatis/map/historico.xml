@@ -197,21 +197,21 @@
   </select>
 
    <select id="fetchAllAlertasByRequest" parameterType="AlertasInquiryRequest" resultMap="alertaResult">
-		select
+select
 			(	select count(e.id) as qntEmpr from entidade e
-			LEFT JOIN (SELECT status,parentId ,MAX(s.Id) AS MaxId from status s ,entidade ee where ee.id = s.parentId and s.tabelaEnum in(1) group by s.status,s.parentId) max ON max.status = 5
+			LEFT JOIN (SELECT status,parentId ,MAX(s.Id) AS MaxId from status s ,entidade ee where ee.id = s.parentId and s.tabelaEnum in(52) group by s.status,s.parentId) max on 1=1
 
-			where max.parentId = e.id and e.entidadeEnum = 1) as qntEmpr,
+			where max.parentId = e.id and e.entidadeEnum = 2 and max.status = 5) as qntEmpr,
 
 			(select count(e.id) as qntEmpr from entidade e
-			LEFT JOIN (SELECT status,parentId ,MAX(s.Id) AS MaxId from status s ,entidade ee where ee.id = s.parentId and s.tabelaEnum in(51) group by s.status,s.parentId) max ON max.status = 5
+			LEFT JOIN (SELECT status,parentId ,MAX(s.Id) AS MaxId from status s ,entidade ee where ee.id = s.parentId and s.tabelaEnum in(52) group by s.status,s.parentId) max on 1=1
 
-			where max.parentId = e.id and e.entidadeEnum = 2) as qntFil,
+			where max.parentId = e.id and e.entidadeEnum = 2 and max.status = 5) as qntFil,
 
 			(	select count(e.id) as qntEmpr from entidade e
-			LEFT JOIN (SELECT status,parentId ,MAX(s.Id) AS MaxId from status s ,entidade ee where ee.id = s.parentId and s.tabelaEnum in(52) group by s.status,s.parentId) max ON max.status = 5
+			LEFT JOIN (SELECT status,parentId ,MAX(s.Id) AS MaxId from status s ,entidade ee where ee.id = s.parentId and s.tabelaEnum in(51) group by s.status,s.parentId) max on 1=1
 
-			where max.parentId = e.id and e.entidadeEnum = 3) as qntDep,
+			where max.parentId = e.id and e.entidadeEnum = 3 and max.status = 5) as qntDep,
 
 
 			(select count(e.id) as qntEmpr from produto e
