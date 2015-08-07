@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FormValidation demo</title>
+
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../dist/css/formValidation.css"/>
+	<link rel="stylesheet" href="../dist/css/select2.css"/>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css"/>
+	
+
+    <script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../dist/js/select2.min.js"></script>
+                                       
+
+    <script type="text/javascript" src="../dist/js/formValidation.js"></script>
+    <script type="text/javascript" src="../dist/js/framework/bootstrap.js"></script>
+		
+	
+</head>
+<body>
+ <form id="bookForm" method="post" class="form-horizontal">
+<div class="container">
+	<label class="col-xs-1 control-label">Cnae</label>
+	<div class="col-xs-6">
+		<select id="mySel" name="cnae" class="form-control">
+			<option> teste 001</option>
+			<option> teste 002</option>
+			<option> teste 003</option>
+			<option> teste 004</option>
+			<option> teste 005</option>
+			  
+		</select><br>
+	</div>
+	<div class="col-xs-1">
+		<button type="button" class="btn btn-default addButton1"><i class="fa fa-plus"></i></button>
+	</div>
+	
+	<div class="form-group hide" id="bookTemplate1">
+        <label class="col-xs-1 control-label">Cnae</label>
+		<div class="col-xs-6">
+			<select id="mySel" class="form-control">
+				<option> teste 001</option>
+				<option> teste 002</option>
+				<option> teste 003</option>
+				<option> teste 004</option>
+				<option> teste 005</option>
+				  
+			</select>
+		</div>
+        <div class="col-xs-1">
+            <button type="button" class="btn btn-default removeButton1"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
+</div>	
+</form>
+<script>
+$(document).ready(function() {	
+
+ var titleValidators = {
+            row: '.col-xs-4',   // The title is placed inside a <div class="col-xs-4"> element
+            validators: {
+                notEmpty: {
+                    message: 'The title is required'
+                }
+            }
+        },
+        isbnValidators = {
+            row: '.col-xs-4',
+            validators: {
+                notEmpty: {
+                    message: 'The ISBN is required'
+                },
+                isbn: {
+                    message: 'The ISBN is not valid'
+                }
+            }
+        },
+        priceValidators = {
+            row: '.col-xs-2',
+            validators: {
+                notEmpty: {
+                    message: 'The price is required'
+                },
+                numeric: {
+                    message: 'The price must be a numeric number'
+                }
+            }
+        },
+        bookIndex = 0;
+
+    $('#bookForm')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                'book[0].title': titleValidators,
+                'book[0].isbn': isbnValidators,
+                'book[0].price': priceValidators,
+				'book[0].cnae': priceValidators
+            }
+        }).on('click', '.addButton1', function() {
+            bookIndex++;
+            var $template = $('#bookTemplate1'),
+                $clone    = $template
+                                .clone()
+                                .removeClass('hide')
+                                .removeAttr('id')
+                                .attr('data-book-index', bookIndex)
+                                .insertBefore($template);
+
+            // Update the name attributes
+            $clone
+                .find('[name="cnae"]').attr('name', 'book[' + bookIndex + '].cnae').end();
+
+            // Add new fields
+            // Note that we also pass the validator rules for new field as the third parameter
+            $('#bookForm')
+                .formValidation('addField', 'book[' + bookIndex + '].cnae', priceValidators);
+        })
+
+        // Remove button click handler
+        .on('click', '.removeButton1', function() {
+            var $row  = $(this).parents('.form-group'),
+                index = $row.attr('data-book-index');
+
+            // Remove fields
+            $('#bookForm')
+                .formValidation('removeField', $row.find('[name="book[' + index + '].cnae"]'));
+
+            // Remove element containing the fields
+            $row.remove();
+        });
+		$("select").select2({
+		  placeholder: "Select a state",
+		  allowClear: true
+		});
+ });
+</script>
+</body>
+</html>

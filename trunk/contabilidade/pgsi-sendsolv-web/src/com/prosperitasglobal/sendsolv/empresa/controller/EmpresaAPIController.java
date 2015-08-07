@@ -1,9 +1,5 @@
 package com.prosperitasglobal.sendsolv.empresa.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,24 +7,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.Cidade;
-import com.prosperitasglobal.sendsolv.model.Cnae;
-import com.prosperitasglobal.sendsolv.model.CnaeEmpresa;
-import com.prosperitasglobal.sendsolv.model.Deposito;
-import com.prosperitasglobal.sendsolv.model.Documento;
-import com.prosperitasglobal.sendsolv.model.Email;
-import com.prosperitasglobal.sendsolv.model.Empresa;
-import com.prosperitasglobal.sendsolv.model.Endereco;
-import com.prosperitasglobal.sendsolv.model.EntidadeTypeEnum;
-import com.prosperitasglobal.sendsolv.model.Estado;
-import com.prosperitasglobal.sendsolv.model.Filial;
-import com.prosperitasglobal.sendsolv.model.Plano;
-import com.prosperitasglobal.sendsolv.model.PrecoTypeEnum;
-import com.prosperitasglobal.sendsolv.model.Produto;
-import com.prosperitasglobal.sendsolv.model.Regime;
-import com.prosperitasglobal.sendsolv.model.Socio;
-import com.prosperitasglobal.sendsolv.model.TabPreco;
-import com.prosperitasglobal.sendsolv.model.Telefone;
 import com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.DepositoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.DepositoMaintenanceRequest;
@@ -42,7 +20,6 @@ import com.prosperitasglobal.sendsolv.model.response.DepositoResponse;
 import com.prosperitasglobal.sendsolv.model.response.EmpresaResponse;
 import com.prosperitasglobal.sendsolv.model.response.FilialResponse;
 import com.prosperitasglobal.sendsolv.model.response.RegimeResponse;
-import com.qat.framework.model.QATModel.PersistanceActionEnum;
 
 @Controller
 @RequestMapping("/api/empresa")
@@ -160,7 +137,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 	@ResponseBody
 	public EmpresaResponse deleteEmpresa(@RequestBody EmpresaMaintenanceRequest empresaRequest)
 	{
-		empresaRequest.setEmpresa(insertMockEmpresa(PersistanceActionEnum.INSERT));
+		// empresaRequest.setEmpresa(insertMockEmpresa(PersistanceActionEnum.INSERT));
 		return delete(empresaRequest);
 
 	}
@@ -215,7 +192,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 	@ResponseBody
 	public FilialResponse editFilial(@RequestBody FilialMaintenanceRequest empresaRequest)
 	{
-		empresaRequest.setFilial(insertMockFilial(PersistanceActionEnum.INSERT));
+		// empresaRequest.setFilial(insertMockFilial(PersistanceActionEnum.INSERT));
 		return edit(empresaRequest);
 
 	}
@@ -230,7 +207,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 	@ResponseBody
 	public FilialResponse deleteFilial(@RequestBody FilialMaintenanceRequest empresaRequest)
 	{
-		empresaRequest.setFilial(insertMockFilial(PersistanceActionEnum.INSERT));
+		// empresaRequest.setFilial(insertMockFilial(PersistanceActionEnum.INSERT));
 		return delete(empresaRequest);
 
 	}
@@ -245,7 +222,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 	@ResponseBody
 	public FilialResponse insertFilial(@RequestBody FilialMaintenanceRequest empresaRequest)
 	{
-		empresaRequest.setFilial(insertMockFilial(PersistanceActionEnum.INSERT));
+		// empresaRequest.setFilial(insertMockFilial(PersistanceActionEnum.INSERT));
 		return insert(empresaRequest);
 
 	}
@@ -285,7 +262,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 	@ResponseBody
 	public DepositoResponse editDeposito(@RequestBody DepositoMaintenanceRequest empresaRequest)
 	{
-		empresaRequest.setDeposito(insertMockDeposito(PersistanceActionEnum.INSERT));
+		// empresaRequest.setDeposito(insertMockDeposito(PersistanceActionEnum.INSERT));
 		return edit(empresaRequest);
 
 	}
@@ -300,7 +277,7 @@ public class EmpresaAPIController extends EmpresaBaseController
 	@ResponseBody
 	public DepositoResponse deleteDeposito(@RequestBody DepositoMaintenanceRequest empresaRequest)
 	{
-		empresaRequest.setDeposito(insertMockDeposito(PersistanceActionEnum.INSERT));
+		// empresaRequest.setDeposito(insertMockDeposito(PersistanceActionEnum.INSERT));
 		return delete(empresaRequest);
 
 	}
@@ -315,275 +292,275 @@ public class EmpresaAPIController extends EmpresaBaseController
 	@ResponseBody
 	public DepositoResponse insertDeposito(@RequestBody DepositoMaintenanceRequest empresaRequest)
 	{
-		empresaRequest.setDeposito(insertMockDeposito(PersistanceActionEnum.INSERT));
+		// empresaRequest.setDeposito(insertMockDeposito(PersistanceActionEnum.INSERT));
 		return insert(empresaRequest);
 
 	}
 
-	public List<Endereco> insertEndereco(PersistanceActionEnum modelAction)
-	{
-		List<Endereco> enderecoList = new ArrayList<Endereco>();
-		Endereco endereco = new Endereco();
-
-		endereco.setModelAction(modelAction);
-		endereco.setId(1);
-		endereco.setLogradouro("R: Maria Conceição silva");
-		endereco.setCidade(new Cidade(1));
-		endereco.setEstado(new Estado(1));
-		endereco.setBairro("Mangueiras");
-		endereco.setNumero("686");
-		endereco.setCep("38082-243");
-		enderecoList.add(endereco);
-		return enderecoList;
-	}
-
-	public List<Email> insertEmail(PersistanceActionEnum modelAction)
-	{
-
-		List<Email> emailList = new ArrayList<Email>();
-		Email email = new Email();
-		email.setId(1);
-		email.setEmail("wlclimaco@gmail.com");
-		email.setModelAction(modelAction);
-		emailList.add(email);
-
-		return emailList;
-	}
-
-	public List<CnaeEmpresa> insertCnae(PersistanceActionEnum modelAction)
-	{
-		List<CnaeEmpresa> cnaeList = new ArrayList<CnaeEmpresa>();
-		CnaeEmpresa cnae = new CnaeEmpresa();
-		cnae.setModelAction(PersistanceActionEnum.INSERT);
-		cnae.setIdCnae(new Cnae(1, PersistanceActionEnum.NONE));
-		cnae.setId(1);
-		cnaeList.add(cnae);
-
-		cnae = new CnaeEmpresa();
-		cnae.setModelAction(PersistanceActionEnum.INSERT);
-		cnae.setIdCnae(new Cnae(1, PersistanceActionEnum.NONE));
-		cnae.setId(1);
-		cnaeList.add(cnae);
-
-		cnae = new CnaeEmpresa();
-		cnae.setModelAction(PersistanceActionEnum.INSERT);
-		cnae.setIdCnae(new Cnae(1, PersistanceActionEnum.NONE));
-		cnae.setId(1);
-		cnaeList.add(cnae);
-
-		return cnaeList;
-	}
-
-	public List<Telefone> insertTelefone(PersistanceActionEnum modelAction)
-	{
-		List<Telefone> telefoneList = new ArrayList<Telefone>();
-		Telefone telefone = new Telefone();
-		telefone.setModelAction(modelAction);
-		telefone.setId(1);
-		telefone.setDdd("34");
-		telefone.setNumero("91782776");
-		telefoneList.add(telefone);
-
-		telefone = new Telefone();
-		telefone.setModelAction(modelAction);
-		telefone.setId(1);
-		telefone.setDdd("34");
-		telefone.setNumero("91782776");
-		telefoneList.add(telefone);
-
-		telefone = new Telefone();
-		telefone.setModelAction(modelAction);
-		telefone.setId(1);
-		telefone.setDdd("34");
-		telefone.setNumero("91782776");
-		telefoneList.add(telefone);
-
-		return telefoneList;
-	}
-
-	public List<Documento> insertDocumento(PersistanceActionEnum modelAction)
-	{
-		List<Documento> documentoList = new ArrayList<Documento>();
-		Documento documento = new Documento();
-		documento.setModelAction(modelAction);
-		documento.setId(1);
-		documento.setNumero("111111111000001");
-		documentoList.add(documento);
-
-		documento = new Documento();
-		documento.setModelAction(modelAction);
-		documento.setId(1);
-		documento.setNumero("111111111000001");
-		documentoList.add(documento);
-
-		documento = new Documento();
-		documento.setModelAction(modelAction);
-		documento.setId(1);
-		documento.setNumero("111111111000001");
-		documentoList.add(documento);
-
-		return documentoList;
-	}
-
-	public List<Socio> insertSocio(PersistanceActionEnum modelAction)
-	{
-		List<Socio> socioList = new ArrayList<Socio>();
-		Socio socio = new Socio();
-		socio.setModelAction(PersistanceActionEnum.INSERT);
-		socio.setId(1);
-		socio.setNome("Washington Luis");
-		socio.setCota("1");
-		socio.setPorcentagem("50");
-		socioList.add(socio);
-
-		socio = new Socio();
-		socio.setModelAction(modelAction);
-		socio.setId(1);
-		socio.setNome("Washington Climaco");
-		socio.setCota("1");
-		socio.setPorcentagem("50");
-		socioList.add(socio);
-
-		return socioList;
-	}
-
-	public List<TabPreco> mockPreco(PersistanceActionEnum model)
-	{
-		List<TabPreco> precoList = new ArrayList<TabPreco>();
-
-		TabPreco preco = new TabPreco();
-		preco.setId(1);
-		preco.setDataMarcacao(new Long("14327833577780"));
-		preco.setPrecoTypeEnum(PrecoTypeEnum.PLANO);
-		preco.setValor(new Double(10.90));
-		preco.setDataProInicial(new Long("14327833577780"));
-		preco.setDataProFinal(new Long("14327833577780"));
-		preco.setModelAction(PersistanceActionEnum.INSERT);
-		precoList.add(preco);
-
-		preco = new TabPreco();
-		preco.setId(1);
-		preco.setDataMarcacao(new Long("14327833577780"));
-		preco.setPrecoTypeEnum(PrecoTypeEnum.PLANO);
-		preco.setValor(new Double(10.90));
-		preco.setDataProInicial(new Long("14327833577780"));
-		preco.setDataProFinal(new Long("14327833577780"));
-		preco.setModelAction(PersistanceActionEnum.INSERT);
-		precoList.add(preco);
-
-		preco = new TabPreco();
-		preco.setId(1);
-		preco.setDataMarcacao(new Long("14327833577780"));
-		preco.setPrecoTypeEnum(PrecoTypeEnum.PLANO);
-		preco.setValor(new Double(10.90));
-		preco.setDataProInicial(new Long("14327833577780"));
-		preco.setDataProFinal(new Long("14327833577780"));
-		preco.setModelAction(PersistanceActionEnum.INSERT);
-		precoList.add(preco);
-
-		preco = new TabPreco();
-		preco.setId(1);
-		preco.setDataMarcacao(new Long("14327833577780"));
-		preco.setPrecoTypeEnum(PrecoTypeEnum.PLANO);
-		preco.setValor(new Double(10.90));
-		preco.setDataProInicial(new Long("14327833577780"));
-		preco.setDataProFinal(new Long("14327833577780"));
-		preco.setModelAction(PersistanceActionEnum.INSERT);
-		precoList.add(preco);
-
-		return precoList;
-	}
-
-	public List<Plano> insertPlano(PersistanceActionEnum modelAction)
-	{
-		List<Plano> planoList = new ArrayList<Plano>();
-		Plano plano = new Plano();
-		Date a = new Date();
-		plano.setModelAction(PersistanceActionEnum.INSERT);
-		plano.setId(1);
-		plano.setDataInicio(a.getTime() - 10000000);
-		plano.setDataFinal(a.getTime());
-		plano.setPreco(mockPreco(modelAction));
-		plano.setProduto(new Produto(1));
-		planoList.add(plano);
-
-		plano = new Plano();
-		a = new Date();
-		plano.setModelAction(PersistanceActionEnum.INSERT);
-		plano.setId(1);
-		plano.setDataInicio(a.getTime() - 10000000);
-		plano.setDataFinal(a.getTime());
-		plano.setPreco(mockPreco(modelAction));
-		plano.setProduto(new Produto(2));
-		planoList.add(plano);
-
-		return planoList;
-	}
-
-	public Filial insertMockFilial(PersistanceActionEnum modelAction)
-	{
-		Filial empresa = new Filial();
-
-		empresa.setId(1);
-		empresa.setModelAction(modelAction);
-		empresa.setEmprId(1);
-		empresa.setNome("Cosme e damiao Contabiliadade");
-		empresa.setRegime(new Regime(1));
-		empresa.setEntidadeEnum(EntidadeTypeEnum.FILIAL);
-		empresa.setEnderecos(insertEndereco(modelAction));
-		empresa.setDocumentos(insertDocumento(modelAction));
-		empresa.setEmails(insertEmail(modelAction));
-		empresa.setTelefones(insertTelefone(modelAction));
-		empresa.setCnaes(insertCnae(modelAction));
-
-		empresa.setUserId("WASHINGTON");
-		return empresa;
-
-	}
-
-	public Deposito insertMockDeposito(PersistanceActionEnum modelAction)
-	{
-		Deposito empresa = new Deposito();
-
-		empresa.setId(1);
-		empresa.setModelAction(modelAction);
-		empresa.setEmprId(4);
-		empresa.setEntidadeId(7);
-		empresa.setNome("Cosme e damiao Contabiliadade");
-		empresa.setRegime(new Regime(1));
-		empresa.setEntidadeEnum(EntidadeTypeEnum.DEPOSITO);
-		empresa.setEnderecos(insertEndereco(modelAction));
-		empresa.setDocumentos(insertDocumento(modelAction));
-		empresa.setEmails(insertEmail(modelAction));
-		empresa.setTelefones(insertTelefone(modelAction));
-		empresa.setCnaes(insertCnae(modelAction));
-
-		empresa.setUserId("WASHINGTON");
-		return empresa;
-
-	}
-
-	public Empresa insertMockEmpresa(PersistanceActionEnum modelAction)
-	{
-		Empresa empresa = new Empresa();
-
-		empresa.setId(1);
-		empresa.setModelAction(modelAction);
-		empresa.setEmprId(1);
-		empresa.setNome("Cosme e damiao Contabiliadade");
-		empresa.setRegime(new Regime(1));
-		empresa.setEntidadeEnum(EntidadeTypeEnum.EMPRESA);
-		// empresa.setConfiguracao(new Configuracao(1));
-		empresa.setEnderecos(insertEndereco(modelAction));
-		empresa.setDocumentos(insertDocumento(modelAction));
-		empresa.setEmails(insertEmail(modelAction));
-		empresa.setTelefones(insertTelefone(modelAction));
-		empresa.setSocios(insertSocio(modelAction));
-		empresa.setCnaes(insertCnae(modelAction));
-		empresa.setPlanoList(insertPlano(modelAction));
-
-		empresa.setUserId("WASHINGTON");
-		return empresa;
-
-	}
+	// public List<Endereco> insertEndereco(PersistanceActionEnum modelAction)
+	// {
+	// List<Endereco> enderecoList = new ArrayList<Endereco>();
+	// Endereco endereco = new Endereco();
+	//
+	// endereco.setModelAction(modelAction);
+	// endereco.setId(1);
+	// endereco.setLogradouro("R: Maria Conceição silva");
+	// endereco.setCidade(new Cidade(1));
+	// endereco.setEstado(new Estado(1));
+	// endereco.setBairro("Mangueiras");
+	// endereco.setNumero("686");
+	// endereco.setCep("38082-243");
+	// enderecoList.add(endereco);
+	// return enderecoList;
+	// }
+	//
+	// public List<Email> insertEmail(PersistanceActionEnum modelAction)
+	// {
+	//
+	// List<Email> emailList = new ArrayList<Email>();
+	// Email email = new Email();
+	// email.setId(1);
+	// email.setEmail("wlclimaco@gmail.com");
+	// email.setModelAction(modelAction);
+	// emailList.add(email);
+	//
+	// return emailList;
+	// }
+	//
+	// public List<CnaeEmpresa> insertCnae(PersistanceActionEnum modelAction)
+	// {
+	// List<CnaeEmpresa> cnaeList = new ArrayList<CnaeEmpresa>();
+	// CnaeEmpresa cnae = new CnaeEmpresa();
+	// cnae.setModelAction(PersistanceActionEnum.INSERT);
+	// cnae.setIdCnae(new Cnae(1, PersistanceActionEnum.NONE));
+	// cnae.setId(1);
+	// cnaeList.add(cnae);
+	//
+	// cnae = new CnaeEmpresa();
+	// cnae.setModelAction(PersistanceActionEnum.INSERT);
+	// cnae.setIdCnae(new Cnae(1, PersistanceActionEnum.NONE));
+	// cnae.setId(1);
+	// cnaeList.add(cnae);
+	//
+	// cnae = new CnaeEmpresa();
+	// cnae.setModelAction(PersistanceActionEnum.INSERT);
+	// cnae.setIdCnae(new Cnae(1, PersistanceActionEnum.NONE));
+	// cnae.setId(1);
+	// cnaeList.add(cnae);
+	//
+	// return cnaeList;
+	// }
+	//
+	// public List<Telefone> insertTelefone(PersistanceActionEnum modelAction)
+	// {
+	// List<Telefone> telefoneList = new ArrayList<Telefone>();
+	// Telefone telefone = new Telefone();
+	// telefone.setModelAction(modelAction);
+	// telefone.setId(1);
+	// telefone.setDdd("34");
+	// telefone.setNumero("91782776");
+	// telefoneList.add(telefone);
+	//
+	// telefone = new Telefone();
+	// telefone.setModelAction(modelAction);
+	// telefone.setId(1);
+	// telefone.setDdd("34");
+	// telefone.setNumero("91782776");
+	// telefoneList.add(telefone);
+	//
+	// telefone = new Telefone();
+	// telefone.setModelAction(modelAction);
+	// telefone.setId(1);
+	// telefone.setDdd("34");
+	// telefone.setNumero("91782776");
+	// telefoneList.add(telefone);
+	//
+	// return telefoneList;
+	// }
+	//
+	// public List<Documento> insertDocumento(PersistanceActionEnum modelAction)
+	// {
+	// List<Documento> documentoList = new ArrayList<Documento>();
+	// Documento documento = new Documento();
+	// documento.setModelAction(modelAction);
+	// documento.setId(1);
+	// documento.setNumero("111111111000001");
+	// documentoList.add(documento);
+	//
+	// documento = new Documento();
+	// documento.setModelAction(modelAction);
+	// documento.setId(1);
+	// documento.setNumero("111111111000001");
+	// documentoList.add(documento);
+	//
+	// documento = new Documento();
+	// documento.setModelAction(modelAction);
+	// documento.setId(1);
+	// documento.setNumero("111111111000001");
+	// documentoList.add(documento);
+	//
+	// return documentoList;
+	// }
+	//
+	// public List<Socio> insertSocio(PersistanceActionEnum modelAction)
+	// {
+	// List<Socio> socioList = new ArrayList<Socio>();
+	// Socio socio = new Socio();
+	// socio.setModelAction(PersistanceActionEnum.INSERT);
+	// socio.setId(1);
+	// socio.setNome("Washington Luis");
+	// socio.setCota("1");
+	// socio.setPorcentagem("50");
+	// socioList.add(socio);
+	//
+	// socio = new Socio();
+	// socio.setModelAction(modelAction);
+	// socio.setId(1);
+	// socio.setNome("Washington Climaco");
+	// socio.setCota("1");
+	// socio.setPorcentagem("50");
+	// socioList.add(socio);
+	//
+	// return socioList;
+	// }
+	//
+	// public List<TabPreco> mockPreco(PersistanceActionEnum model)
+	// {
+	// List<TabPreco> precoList = new ArrayList<TabPreco>();
+	//
+	// TabPreco preco = new TabPreco();
+	// preco.setId(1);
+	// preco.setDataMarcacao(new Long("14327833577780"));
+	// preco.setPrecoTypeEnum(PrecoTypeEnum.PLANO);
+	// preco.setValor(new Double(10.90));
+	// preco.setDataProInicial(new Long("14327833577780"));
+	// preco.setDataProFinal(new Long("14327833577780"));
+	// preco.setModelAction(PersistanceActionEnum.INSERT);
+	// precoList.add(preco);
+	//
+	// preco = new TabPreco();
+	// preco.setId(1);
+	// preco.setDataMarcacao(new Long("14327833577780"));
+	// preco.setPrecoTypeEnum(PrecoTypeEnum.PLANO);
+	// preco.setValor(new Double(10.90));
+	// preco.setDataProInicial(new Long("14327833577780"));
+	// preco.setDataProFinal(new Long("14327833577780"));
+	// preco.setModelAction(PersistanceActionEnum.INSERT);
+	// precoList.add(preco);
+	//
+	// preco = new TabPreco();
+	// preco.setId(1);
+	// preco.setDataMarcacao(new Long("14327833577780"));
+	// preco.setPrecoTypeEnum(PrecoTypeEnum.PLANO);
+	// preco.setValor(new Double(10.90));
+	// preco.setDataProInicial(new Long("14327833577780"));
+	// preco.setDataProFinal(new Long("14327833577780"));
+	// preco.setModelAction(PersistanceActionEnum.INSERT);
+	// precoList.add(preco);
+	//
+	// preco = new TabPreco();
+	// preco.setId(1);
+	// preco.setDataMarcacao(new Long("14327833577780"));
+	// preco.setPrecoTypeEnum(PrecoTypeEnum.PLANO);
+	// preco.setValor(new Double(10.90));
+	// preco.setDataProInicial(new Long("14327833577780"));
+	// preco.setDataProFinal(new Long("14327833577780"));
+	// preco.setModelAction(PersistanceActionEnum.INSERT);
+	// precoList.add(preco);
+	//
+	// return precoList;
+	// }
+	//
+	// public List<Plano> insertPlano(PersistanceActionEnum modelAction)
+	// {
+	// List<Plano> planoList = new ArrayList<Plano>();
+	// Plano plano = new Plano();
+	// Date a = new Date();
+	// plano.setModelAction(PersistanceActionEnum.INSERT);
+	// plano.setId(1);
+	// plano.setDataInicio(a.getTime() - 10000000);
+	// plano.setDataFinal(a.getTime());
+	// plano.setPreco(mockPreco(modelAction));
+	// plano.setProduto(new Produto(1));
+	// planoList.add(plano);
+	//
+	// plano = new Plano();
+	// a = new Date();
+	// plano.setModelAction(PersistanceActionEnum.INSERT);
+	// plano.setId(1);
+	// plano.setDataInicio(a.getTime() - 10000000);
+	// plano.setDataFinal(a.getTime());
+	// plano.setPreco(mockPreco(modelAction));
+	// plano.setProduto(new Produto(2));
+	// planoList.add(plano);
+	//
+	// return planoList;
+	// }
+	//
+	// public Filial insertMockFilial(PersistanceActionEnum modelAction)
+	// {
+	// Filial empresa = new Filial();
+	//
+	// empresa.setId(1);
+	// empresa.setModelAction(modelAction);
+	// empresa.setEmprId(1);
+	// empresa.setNome("Cosme e damiao Contabiliadade");
+	// empresa.setRegime(new Regime(1));
+	// empresa.setEntidadeEnum(EntidadeTypeEnum.FILIAL);
+	// empresa.setEnderecos(insertEndereco(modelAction));
+	// empresa.setDocumentos(insertDocumento(modelAction));
+	// empresa.setEmails(insertEmail(modelAction));
+	// empresa.setTelefones(insertTelefone(modelAction));
+	// empresa.setCnaes(insertCnae(modelAction));
+	//
+	// empresa.setUserId("WASHINGTON");
+	// return empresa;
+	//
+	// }
+	//
+	// public Deposito insertMockDeposito(PersistanceActionEnum modelAction)
+	// {
+	// Deposito empresa = new Deposito();
+	//
+	// empresa.setId(1);
+	// empresa.setModelAction(modelAction);
+	// empresa.setEmprId(4);
+	// empresa.setEntidadeId(7);
+	// empresa.setNome("Cosme e damiao Contabiliadade");
+	// empresa.setRegime(new Regime(1));
+	// empresa.setEntidadeEnum(EntidadeTypeEnum.DEPOSITO);
+	// empresa.setEnderecos(insertEndereco(modelAction));
+	// empresa.setDocumentos(insertDocumento(modelAction));
+	// empresa.setEmails(insertEmail(modelAction));
+	// empresa.setTelefones(insertTelefone(modelAction));
+	// empresa.setCnaes(insertCnae(modelAction));
+	//
+	// empresa.setUserId("WASHINGTON");
+	// return empresa;
+	//
+	// }
+	//
+	// public Empresa insertMockEmpresa(PersistanceActionEnum modelAction)
+	// {
+	// Empresa empresa = new Empresa();
+	//
+	// empresa.setId(1);
+	// empresa.setModelAction(modelAction);
+	// empresa.setEmprId(1);
+	// empresa.setNome("Cosme e damiao Contabiliadade");
+	// empresa.setRegime(new Regime(1));
+	// empresa.setEntidadeEnum(EntidadeTypeEnum.EMPRESA);
+	// // empresa.setConfiguracao(new Configuracao(1));
+	// empresa.setEnderecos(insertEndereco(modelAction));
+	// empresa.setDocumentos(insertDocumento(modelAction));
+	// empresa.setEmails(insertEmail(modelAction));
+	// empresa.setTelefones(insertTelefone(modelAction));
+	// empresa.setSocios(insertSocio(modelAction));
+	// empresa.setCnaes(insertCnae(modelAction));
+	// empresa.setPlanoList(insertPlano(modelAction));
+	//
+	// empresa.setUserId("WASHINGTON");
+	// return empresa;
+	//
+	// }
 }

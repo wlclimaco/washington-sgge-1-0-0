@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FormValidation demo</title>
+
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../dist/css/formValidation.css"/>
+	<link rel="stylesheet" href="../dist/css/select2.css"/>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css"/>
+	
+
+    <script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../dist/js/select2.min.js"></script>
+                                       
+
+    <script type="text/javascript" src="../dist/js/formValidation.js"></script>
+    <script type="text/javascript" src="../dist/js/framework/bootstrap.js"></script>
+		
+	
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <!-- form: -->
+        <section>
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="page-header">
+                    <h2>Dynamic fields</h2>
+                </div>
+
+                <form id="bookForm" method="post" class="form-horizontal">
+				
+				 <!-- inicio: -->
+					<div class="form-group">
+						<label class="col-xs-1 control-label">Codigo</label>
+						<div class="col-xs-2">
+							<input type="text" class="form-control disabled" name="codigo" placeholder="" />
+						</div>
+						<label class="col-xs-1 control-label">Nome *</label>
+						<div class="col-xs-6">
+							<input type="text" class="form-control" name="nome" placeholder="ISBN" />
+						</div>
+					</div>
+
+					 
+	
+					 
+				
+					<div class="panel-group" id="accordion">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">1 - Cadastro Cnae</a>
+								</h4>
+							</div>
+							<div id="collapseOne" class="panel-collapse collapse in">
+								<div class="panel-body">
+														 <!-- cnae: -->
+									<div class="form-group">
+										<label class="col-xs-1 control-label">Cnae</label>
+										<div class="col-xs-6">
+											<select id="mySel" name="cnae" class="">
+												<option> teste 001</option>
+												<option> teste 002</option>
+												<option> teste 003</option>
+												<option> teste 004</option>
+												<option> teste 005</option>
+												  
+											</select><br>
+										</div>
+										<div class="col-xs-1">
+											<button type="button" class="btn btn-default addButton1"><i class="fa fa-plus"></i></button>
+										</div>			
+									</div>
+									
+									<div class="form-group hide" id="bookTemplate1">
+										<label class="col-xs-1 control-label">Cnae</label>
+										<div class="col-xs-6">
+											<select id="mySel" class="">
+												<option> teste 001</option>
+												<option> teste 002</option>
+												<option> teste 003</option>
+												<option> teste 004</option>
+												<option> teste 005</option>
+												  
+											</select>
+										</div>
+										<div class="col-xs-1">
+											<button type="button" class="btn btn-default removeButton1"><i class="fa fa-minus"></i></button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">2 - Cadastro Emails</a>
+								</h4>
+							</div>
+							<div id="collapseTwo" class="panel-collapse collapse">
+								<div class="panel-body">
+									<!-- email: -->
+									<div class="form-group">
+										<label class="col-xs-1 control-label">Email tipo</label>
+										<div class="col-xs-4">
+											<select id="mySel" name="book[0].emailTipo" class="">
+												<option> teste 001</option>
+												<option> teste 002</option>
+												<option> teste 003</option>
+												<option> teste 004</option>
+												<option> teste 005</option>
+												  
+											</select><br>
+										</div>
+										<label class="col-xs-1 control-label">Email</label>
+										<div class="col-xs-4">
+											<input type="text" class="form-control" name="book[0].email" placeholder="ISBN" />
+										</div>
+										<div class="col-xs-1">
+											<button type="button" class="btn btn-default addButton2"><i class="fa fa-plus"></i></button>
+										</div>			
+									</div>
+									
+									<div class="form-group hide" id="bookTemplate2">
+										<label class="col-xs-1 control-label">Email tipo</label>
+										<div class="col-xs-4">
+											<select id="mySel" name="book[0].emailTipo" class="">
+												<option> teste 001</option>
+												<option> teste 002</option>
+												<option> teste 003</option>
+												<option> teste 004</option>
+												<option> teste 005</option>
+												  
+											</select>
+										</div>
+										<label class="col-xs-1 control-label">Email</label>
+										<div class="col-xs-4">
+											<input type="text" class="form-control" name="book[0].email" placeholder="ISBN" />
+										</div>
+										<div class="col-xs-1">
+											<button type="button" class="btn btn-default removeButton2"><i class="fa fa-minus"></i></button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">3 - Enderecos</a>
+								</h4>
+							</div>
+							<div id="collapseThree" class="panel-collapse collapse">
+								<div class="panel-body">
+									<!-- endereco: -->
+									<div class="form-group">					
+										<div class="row">
+											<label class="col-xs-1 control-label">Tipo</label>
+											<div class="col-xs-3">
+												<select id="mySel" name="book[0].emailTipo" class="">
+													<option>Cobranca</option>
+													<option>Entrega</option>
+													<option>Particular</option>
+													<option>Outros</option>						  
+												</select>
+											</div>
+											<label class="col-xs-1 control-label">Cep</label>
+											<div class="col-xs-2">
+												<select id="mySel" name="book[0].emailTipo" class="">
+													<option>38082-243</option>
+													<option>38082-243</option>
+													<option>38082-243</option>
+													<option>38082-243</option>
+													<option>38082-243</option>								  
+												</select>
+											</div>
+											<label class="col-xs-1 control-label">Logradouro</label>
+											<div class="col-xs-3">
+												<input type="text" class="form-control" name="book[0].isbn" placeholder="ISBN" />
+											</div>
+											<label class="col-xs-1 control-label">N</label>
+											<div class="col-xs-1">
+												<input type="text" class="form-control" name="book[0].price" placeholder="Price" />
+											</div>
+										</div>
+										<div class="row">
+											<label class="col-xs-1 control-label">Estado</label>
+											<div class="col-xs-4">
+												<select id="mySel" name="book[0].emailTipo" class="form-control">
+													<option>Minas Gerais</option>
+													<option>São Paulo</option>
+													<option>Maranhao</option>							  
+												</select>
+											</div>
+											<label class="col-xs-1 control-label">Cidade</label>
+											<div class="col-xs-4">
+												<select id="mySel" name="book[0].emailTipo" class="form-control">
+													<option>Minas Gerais</option>
+													<option>São Paulo</option>
+													<option>Maranhao</option>							  
+												</select>
+											</div>
+											<div class="col-xs-1">
+												<button type="button" class="btn btn-default addButton3"><i class="fa fa-plus"></i></button>
+											</div>
+										</div>
+									</div>
+									
+									<!-- endereco templete -->
+									<div class="form-group hide" id="bookTemplate3">				
+										<div class="row">
+											<label class="col-xs-1 control-label">Tipo</label>
+											<div class="col-xs-3">
+												<select id="mySel" name="book[0].emailTipo" class="form-control">
+													<option>Cobranca</option>
+													<option>Entrega</option>
+													<option>Particular</option>
+													<option>Outros</option>						  
+												</select>
+											</div>
+											<label class="col-xs-1 control-label">Cep</label>
+											<div class="col-xs-2">
+												<select id="mySel" name="book[0].emailTipo" class="">
+													<option>38082-243</option>
+													<option>38082-243</option>
+													<option>38082-243</option>
+													<option>38082-243</option>
+													<option>38082-243</option>								  
+												</select>
+											</div>
+											<label class="col-xs-1 control-label">Logradouro</label>
+											<div class="col-xs-3">
+												<input type="text" class="form-control" name="book[0].isbn" placeholder="ISBN" />
+											</div>
+											<label class="col-xs-1 control-label">N</label>
+											<div class="col-xs-1">
+												<input type="text" class="form-control" name="book[0].price" placeholder="Price" />
+											</div>
+										</div>
+										<div class="row">
+											<label class="col-xs-1 control-label">Estado</label>
+											<div class="col-xs-4">
+												<select id="mySel" name="book[0].emailTipo" class="form-control">
+													<option>Minas Gerais</option>
+													<option>São Paulo</option>
+													<option>Maranhao</option>							  
+												</select>
+											</div>
+											<label class="col-xs-1 control-label">Cidade</label>
+											<div class="col-xs-4">
+												<select id="mySel" name="book[0].emailTipo" class="form-control">
+													<option>Minas Gerais</option>
+													<option>São Paulo</option>
+													<option>Maranhao</option>							  
+												</select>
+											</div>
+											<div class="col-xs-1">
+												<button type="button" class="btn btn-default addButton3"><i class="fa fa-plus"></i></button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+					 <!-- form: -->
+					 
+					 <div class="form-group">
+						<label class="col-xs-1 control-label">Book</label>
+						<div class="col-xs-4">
+							<input type="text" class="form-control" name="book[0].title" placeholder="Title" />
+						</div>
+						<div class="col-xs-4">
+							<input type="text" class="form-control" name="book[0].isbn" placeholder="ISBN" />
+						</div>
+						<div class="col-xs-2">
+							<input type="text" class="form-control" name="book[0].price" placeholder="Price" />
+						</div>
+						<div class="col-xs-1">
+							<button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+						</div>
+					</div>
+
+    <!-- The template for adding new field -->
+    <div class="form-group hide" id="bookTemplate">
+        <div class="col-xs-4 col-xs-offset-1">
+            <input type="text" class="form-control" name="title" placeholder="Title" />
+        </div>
+        <div class="col-xs-4">
+            <input type="text" class="form-control" name="isbn" placeholder="ISBN" />
+        </div>
+        <div class="col-xs-2">
+            <input type="text" class="form-control" name="price" placeholder="Price" />
+        </div>
+        <div class="col-xs-1">
+            <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-5 col-xs-offset-1">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </div>
+</form>
+            </div>
+        </section>
+        <!-- :form -->
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+	
+ var titleValidators = {
+            row: '.col-xs-4',   // The title is placed inside a <div class="col-xs-4"> element
+            validators: {
+                notEmpty: {
+                    message: 'The title is required'
+                }
+            }
+        },
+        isbnValidators = {
+            row: '.col-xs-4',
+            validators: {
+                notEmpty: {
+                    message: 'The ISBN is required'
+                },
+                isbn: {
+                    message: 'The ISBN is not valid'
+                }
+            }
+        },
+        priceValidators = {
+            row: '.col-xs-2',
+            validators: {
+                notEmpty: {
+                    message: 'The price is required'
+                },
+                numeric: {
+                    message: 'The price must be a numeric number'
+                }
+            }
+        },
+        bookIndex = 0;
+
+    $('#bookForm')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                'book[0].title': titleValidators,
+                'book[0].isbn': isbnValidators,
+                'book[0].price': priceValidators,
+				'book[0].cnae': priceValidators,
+				'book[0].email': priceValidators
+            }
+        })
+
+        // Add button click handler
+        .on('click', '.addButton', function() {
+            bookIndex++;
+            var $template = $('#bookTemplate'),
+                $clone    = $template
+                                .clone()
+                                .removeClass('hide')
+                                .removeAttr('id')
+                                .attr('data-book-index', bookIndex)
+                                .insertBefore($template);
+
+            // Update the name attributes
+            $clone
+                .find('[name="title"]').attr('name', 'book[' + bookIndex + '].title').end()
+                .find('[name="isbn"]').attr('name', 'book[' + bookIndex + '].isbn').end()
+                .find('[name="price"]').attr('name', 'book[' + bookIndex + '].price').end();
+
+            // Add new fields
+            // Note that we also pass the validator rules for new field as the third parameter
+            $('#bookForm')
+                .formValidation('addField', 'book[' + bookIndex + '].title', titleValidators)
+                .formValidation('addField', 'book[' + bookIndex + '].isbn', isbnValidators)
+                .formValidation('addField', 'book[' + bookIndex + '].price', priceValidators);
+        })
+
+        // Remove button click handler
+        .on('click', '.removeButton', function() {
+            var $row  = $(this).parents('.form-group'),
+                index = $row.attr('data-book-index');
+
+            // Remove fields
+            $('#bookForm')
+                .formValidation('removeField', $row.find('[name="book[' + index + '].title"]'))
+                .formValidation('removeField', $row.find('[name="book[' + index + '].isbn"]'))
+                .formValidation('removeField', $row.find('[name="book[' + index + '].price"]'));
+
+            // Remove element containing the fields
+            $row.remove();
+        });
+		$('#bookForm').on('click', '.addButton1', function() {
+            bookIndex++;
+            var $template = $('#bookTemplate1'),
+                $clone    = $template
+                                .clone()
+                                .removeClass('hide')
+                                .removeAttr('id')
+                                .attr('data-book-index', bookIndex)
+                                .insertBefore($template);
+
+            // Update the name attributes
+            $clone
+                .find('[name="cnae"]').attr('name', 'book[' + bookIndex + '].cnae').end();
+
+            // Add new fields
+            // Note that we also pass the validator rules for new field as the third parameter
+            $('#bookForm')
+                .formValidation('addField', 'book[' + bookIndex + '].cnae', priceValidators);
+        })
+
+        // Remove button click handler
+        .on('click', '.removeButton1', function() {
+            var $row  = $(this).parents('.form-group'),
+                index1 = $row.attr('data-book-index');
+
+            // Remove fields
+            $('#bookForm')
+                .formValidation('removeField', $row.find('[name="book[' + index1 + '].cnae"]'));
+
+            // Remove element containing the fields
+            $row.remove();
+        });
+		$('#bookForm').on('click', '.addButton2', function() {
+            bookIndex++;
+            var $template = $('#bookTemplate2'),
+                $clone    = $template
+                                .clone()
+                                .removeClass('hide')
+                                .removeAttr('id')
+                                .attr('data-book-index', bookIndex)
+                                .insertBefore($template);
+
+            // Update the name attributes
+            $clone
+				.find('[name="email"]').attr('name', 'book[' + bookIndex + '].emailTipo').end()
+                .find('[name="email"]').attr('name', 'book[' + bookIndex + '].email').end();
+
+            // Add new fields
+            // Note that we also pass the validator rules for new field as the third parameter
+            $('#bookForm')
+				.formValidation('addField', 'book[' + bookIndex + '].emailTipo', priceValidators)
+                .formValidation('addField', 'book[' + bookIndex + '].email', priceValidators);
+        })
+
+        // Remove button click handler
+        .on('click', '.removeButton2', function() {
+            var $row  = $(this).parents('.form-group'),
+                index2 = $row.attr('data-book-index');
+
+            // Remove fields
+            $('#bookForm')
+				.formValidation('removeField', $row.find('[name="book[' + index2 + '].emailTipo"]'))
+                .formValidation('removeField', $row.find('[name="book[' + index2 + '].email"]'));
+
+            // Remove element containing the fields
+            $row.remove();
+        });
+		
+		//endereco
+		$('#bookForm').on('click', '.addButton3', function() {
+            bookIndex++;
+            var $template = $('#bookTemplate3'),
+                $clone    = $template
+                                .clone()
+                                .removeClass('hide')
+                                .removeAttr('id')
+                                .attr('data-book-index', bookIndex)
+                                .insertBefore($template);
+
+            // Update the name attributes
+            $clone
+				.find('[name="tipo"]').attr('name', 'book[' + bookIndex + '].tipo').end()
+				.find('[name="cep"]').attr('name', 'book[' + bookIndex + '].cep').end()
+				.find('[name="logradouro"]').attr('name', 'book[' + bookIndex + '].logradouro').end()
+				.find('[name="numero"]').attr('name', 'book[' + bookIndex + '].numero').end()
+				.find('[name="estado"]').attr('name', 'book[' + bookIndex + '].estado').end()
+                .find('[name="cidade"]').attr('name', 'book[' + bookIndex + '].cidade').end();
+
+            // Add new fields
+            // Note that we also pass the validator rules for new field as the third parameter
+            $('#bookForm')
+				.formValidation('addField', 'book[' + bookIndex + '].tipo', priceValidators)
+				.formValidation('addField', 'book[' + bookIndex + '].cep', priceValidators)
+				.formValidation('addField', 'book[' + bookIndex + '].logradouro', priceValidators)
+				.formValidation('addField', 'book[' + bookIndex + '].numero', priceValidators)
+				.formValidation('addField', 'book[' + bookIndex + '].estado', priceValidators)
+                .formValidation('addField', 'book[' + bookIndex + '].cidade', priceValidators);
+        })
+
+        // Remove button click handler
+        .on('click', '.removeButton3', function() {
+            var $row  = $(this).parents('.form-group'),
+                index3 = $row.attr('data-book-index');
+
+            // Remove fields
+            $('#bookForm')
+				.formValidation('removeField', $row.find('[name="book[' + index3 + '].tipo"]'))
+				.formValidation('removeField', $row.find('[name="book[' + index3 + '].cep"]'))
+				.formValidation('removeField', $row.find('[name="book[' + index3 + '].logradouro"]'))
+				.formValidation('removeField', $row.find('[name="book[' + index3 + '].numero"]'))
+				.formValidation('removeField', $row.find('[name="book[' + index3 + '].estado"]'))
+                .formValidation('removeField', $row.find('[name="book[' + index3 + '].cidade"]'));
+
+            // Remove element containing the fields
+            $row.remove();
+        });
+		$("select").select2({
+		  placeholder: "Select a state",
+		  allowClear: true
+		});
+	
+});
+</script>
+</body>
+</html>
