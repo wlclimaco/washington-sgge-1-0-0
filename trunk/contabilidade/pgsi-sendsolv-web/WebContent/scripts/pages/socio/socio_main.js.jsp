@@ -13,12 +13,26 @@ pgsi.pages.socio = {
 		fnCreateRequest : function(sModelAction){
 
 			oSocio = [];
-			for(var i=0;i< parseInt($('.socio').length,10);i++){
-				aSocio = new Socio();
-				aSocio.nome =    $('.socio :eq('+i+')').val();
-				aSocio.cota =    $('.cota :eq('+i+')').val();
-				aSocio.porcentagem =    $('.porcentagem :eq('+i+')').val();
-				aSocio.modelAction 	 = sModelAction;
+			var dDate = new Date();
+			for(var i=0;i< (parseInt($('.socios .form-group').length,10)-1);i++){
+				aSocio = new Socio({
+					nome               : $('#bookForm').find('[name="book['+i+'].email"]').val(),
+					documentos         : [ new Documento({
+						documentoType  : "CPF",
+						numero         : $('#bookForm').find('[name="book['+i+'].email"]').val(),
+						data           : dDate.getTime(),
+						modelAction    : sModelAction
+					}),
+					new Documento({
+						documentoType  : "RG",
+						numero         : $('#bookForm').find('[name="book['+i+'].email"]').val(),
+						data           : dDate.getTime(),
+						modelAction    : sModelAction
+					})]
+					cota 			   : $('#bookForm').find('[name="book['+i+'].email"]').val(),
+					porcentagem        : $('#bookForm').find('[name="book['+i+'].email"]').val(),
+					modelAction 	   : sModelAction
+				});
 				oSocio.push(aSocio);
 			}
 

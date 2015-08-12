@@ -10,17 +10,22 @@
  */
 pgsi.pages.endereco = {
 		 fnCreateRequest : function(sModelAction){
-			 var oEndereco = new Endereco({
-				id				: $('#enderecoId').val(),
-				logradouro		: $('#logradouro').val(),
-				cidade			: {nome: $('#cidade').val(),modelAction : "NONE"},
-				estado			: {abreviacao: $('#estado').val(),modelAction : "NONE"},
-				bairro			: $('#bairro').val(),
-				numero			: $('#numero').val(),
-				cep				: $('#cep').val(),
-				modelAction 	: sModelAction
-			 })
-			 return oEndereco;
+			 aEndereco = [];
+			for(var i=0;i< (parseInt($('.endereco .form-group').length,10)-1);i++){
+				 var oEndereco = new Endereco({
+					id						: $('#bookForm').find('[name="book['+i+'].id"]').val(),
+					enderecoTypeEnumValue   : $('#bookForm').find('[name="book['+i+'].emailTipo"]').val(),
+					logradouro				: $('#bookForm').find('[name="book['+i+'].logradouro"]').val(),
+					cidade					: {nome: $('#bookForm').find('[name="book['+i+'].cidade"]').val(),modelAction : "NONE"},
+					estado					: {abreviacao: $('#bookForm').find('[name="book['+i+'].estado"]').val(),modelAction : "NONE"},
+					bairro					: $('#bookForm').find('[name="book['+i+'].bairro"]').val(),
+					numero					: $('#bookForm').find('[name="book['+i+'].numero"]').val(),
+					cep						: $('#bookForm').find('[name="book['+i+'].cep"]').val(),
+					modelAction 			: sModelAction
+				 })
+				 aEndereco.push(oEndereco);
+			}
+			 return aEndereco;
 		 }
 
 }

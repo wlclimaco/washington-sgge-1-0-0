@@ -913,3 +913,23 @@ width:353px!Important;
 	background :#FFFFFF;
 	border : #CCCCCC solid 1px;
 }
+
+.teste .form-horizontal .control-label {
+	width: auto!important;
+}
+
+.teste  .row{
+	margin-top :5px!important;
+}
+
+table .checkObj{
+	margin-left :5px!important;
+}
+
+table .checkbox, .radio{
+	margin-top	:0px!important;
+}
+
+table thead .checkObj{
+	margin-left :-5px!important;
+}

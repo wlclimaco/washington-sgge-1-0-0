@@ -1,6 +1,9 @@
 package com.prosperitasglobal.sendsolv.model.criteria;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.prosperitasglobal.sendsolv.model.CdStatusTypeEnum;
 
 /**
  * The Class MemberCriteria.
@@ -16,7 +19,7 @@ public class EmpresaCriteria implements Serializable
 	private Integer emprId;
 
 	/** The recipient id. */
-	private Integer Id;
+	private Integer id;
 
 	/** The location name. */
 	private String cidade;
@@ -24,7 +27,7 @@ public class EmpresaCriteria implements Serializable
 	private Integer entidadeEnum;
 
 	/** The organization name. */
-	private String status;
+	private List<CdStatusTypeEnum> status;
 
 	/** The primary phone number. */
 	private String regime;
@@ -88,7 +91,7 @@ public class EmpresaCriteria implements Serializable
 	/**
 	 * @return the status
 	 */
-	public String getStatus()
+	public List<CdStatusTypeEnum> getStatus()
 	{
 		return status;
 	}
@@ -96,7 +99,7 @@ public class EmpresaCriteria implements Serializable
 	/**
 	 * @param status the status to set
 	 */
-	public void setStatus(String status)
+	public void setStatus(List<CdStatusTypeEnum> status)
 	{
 		this.status = status;
 	}
@@ -106,7 +109,7 @@ public class EmpresaCriteria implements Serializable
 	 */
 	public Integer getId()
 	{
-		return Id;
+		return id;
 	}
 
 	/**
@@ -114,7 +117,7 @@ public class EmpresaCriteria implements Serializable
 	 */
 	public void setId(Integer id)
 	{
-		Id = id;
+		this.id = id;
 	}
 
 	/**

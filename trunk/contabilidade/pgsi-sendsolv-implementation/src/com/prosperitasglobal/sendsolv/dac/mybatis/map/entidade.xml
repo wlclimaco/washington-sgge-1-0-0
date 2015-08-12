@@ -41,6 +41,27 @@
 	<collection property="notes" column="id" select="NoteMap.fetchNoteByNotes"/>
   </resultMap>
 
+
+  <resultMap id="entidadeTableResult" type="Entidade">
+    <result property="id" column="id" />
+    <result property="nome" column="nome" />
+    <result property="processId" column="processId" />
+    <result property="entidadeId" column="entidadeId" />
+    <result property="emprId" column="emprId" />
+	<result property="entidadeEnumValue" column="entidadeEnum" />
+    <result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+    <association property="regime"    column="regime" select="RegimeMap.fetchRegimeByEmpresa"  />
+   	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByEmpresaId"/>
+	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByEmpresa"/>
+	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByEmpresa"/>
+	<collection property="cnaes" column="id" select="CnaeMap.fetchAllCnaesByEmpresa"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
+  </resultMap>
+
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->

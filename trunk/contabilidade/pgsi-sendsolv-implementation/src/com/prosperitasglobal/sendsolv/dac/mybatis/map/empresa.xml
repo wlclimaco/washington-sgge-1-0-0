@@ -27,6 +27,8 @@
 	<collection property="depositoList" column="id" select="DepositoMap.fetchAllDepositoByEntidade"/>
   </resultMap>
 
+   <resultMap id="empresaTableResult" type="Empresa" extends="EntidadeMap.entidadeTableResult">
+	</resultMap>
 
 
   <!--
@@ -47,7 +49,7 @@
 
   </select>
 
-  <select id="fetchAllEmpresas" resultMap="empresaResult">
+  <select id="fetchAllEmpresas" resultMap="empresaTableResult">
     SELECT
 	<include refid="allEmpresaColumns" />
     FROM entidade ORDER BY nome ASC
@@ -72,17 +74,26 @@
     						<include refid="allEmpresaColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM entidade b
-						where b.entidadeEnum = 1
-					<if test="parentId != null">
-						AND b.id = #{id}
-					</if>
-					 <if test="statusList != null and !statusList.isEmpty()">
-					     AND b.PGSI_status IN
-					     <foreach item="item" index="index" collection="statusList"
+
+					 <if test="criteria.status != null and !criteria.status.isEmpty()">
+					     LEFT JOIN (SELECT status,parentId ,MAX(s.Id) AS MaxId from status s ,entidade ee where ee.id = s.parentId and s.tabelaEnum in(1) group by s.status,s.parentId) max on 1=1
+							where max.parentId = b.id and b.entidadeEnum = 1 and max.status IN
+					     <foreach item="item" index="index" collection="criteria.status"
 						     open="(" separator="," close=")">
 						   	 #{item.value}
 						 </foreach>
+						<if test="criteria.id != null">
+							AND b.id = #{criteria.id}
+						</if>
 					 </if>
+
+					<if test="criteria.id != null">
+						 <if test="criteria.status == null and criteria.status.isEmpty()">
+						  	where b.entidadeEnum = 1
+								AND b.id = #{criteria.id}
+						 </if>
+						 AND b.id = #{criteria.id}
+					</if>
     			) LIST
 				<choose>
 					<when test="pageSize != null and pageSize > 0">

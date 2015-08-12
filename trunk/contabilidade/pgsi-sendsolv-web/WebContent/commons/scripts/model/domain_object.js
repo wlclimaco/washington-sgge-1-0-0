@@ -83,17 +83,6 @@ var Phone = function(oParam) {
 Phone.prototype = new Contact();
 
 
-
-var Email = function(oParam) {
-	Contact.call(this, oParam);
-	if (oParam)
-	{
-		this.emailAddress   = oParam.emailAddress;
-		this.version   = oParam.version;
-	}
-};
-Email.prototype = new Contact();
-
 var Address = function(oParam) {
 	Contact.call(this, oParam);
 	if (oParam)
@@ -471,6 +460,7 @@ var Endereco = function(oParam) {
 		this.bairro			= oParam.bairro;
 		this.numero			= oParam.numero;
 		this.cep			= oParam.cep;
+		this.enderecoTypeEnumValue = oParam.enderecoTypeEnumValue;
 		this.modelAction 	= oParam.modelAction;
 
 	}
@@ -485,6 +475,7 @@ var Telefone = function(oParam) {
 		this.id				= oParam.id;
 		this.ddd			= oParam.ddd;
 		this.numero			= oParam.numero;
+		this.telefoneTypeEnumValue	= oParam.telefoneTypeEnumValue;
 		this.modelAction 	= oParam.modelAction;
 
 	}
@@ -496,10 +487,12 @@ var Email = function(oParam) {
 	ModelCosmeDamiao.call(this, oParam);
 
 	if (oParam) {
-		this.id				= oParam.id;
-		this.email			= oParam.email;
-		this.description	= oParam.description;
-		this.modelAction 	= oParam.modelAction;
+		this.id					= oParam.id;
+		this.email				= oParam.email;
+		this.emailType			= oParam.emailType;
+		this.emailTypeEnumValue = oParam.emailTypeEnumValue;
+		this.description		= oParam.description;
+		this.modelAction 		= oParam.modelAction;
 
 	}
 };
@@ -536,21 +529,49 @@ var CnaeRel = function(oParam) {
 };
 CnaeRel.prototype = new ModelCosmeDamiao();
 
-
-var Socio = function(oParam) {
+var Pessoa = function(oParam) {
 
 	ModelCosmeDamiao.call(this, oParam);
 
 	if (oParam) {
 		this.id				= oParam.id;
 		this.nome			= oParam.nome;
+		this.nomePai		= oParam.nomePai;
+		this.nomeMae		= oParam.nomeMae;
+		this.nomeConjugue	= oParam.nomeConjugue;
+		this.estadoCivil	= oParam.estadoCivil;
+		this.datanasc		= oParam.datanasc;
+		this.foto;		    = oParam.foto;
+		this.pessoaTypeEnum	= oParam.pessoaTypeEnum;
+		this.sexo		    = oParam.sexo;
+		this.enderecos		= oParam.enderecos;
+		this.documentos		= oParam.documentos;
+		this.emails		    = oParam.emails;
+		this.Telefones		= oParam.Telefones;
+		this.bancos		    = oParam.bancos;
+		this.formaPagamentoList		= oParam.formaPagamentoList;
+		this.condPagList		    = oParam.condPagList;
+		this.contatoList		    = oParam.contatoList;
+		this.oParam.modelAction		= oParam.modelAction;
+
+	}
+};
+Pessoa.prototype = new ModelCosmeDamiao();
+
+
+var Socio = function(oParam) {
+
+	Pessoa.call(this, oParam);
+
+	if (oParam) {
+		this.cota			= oParam.cota;
 		this.cota			= oParam.cota;
 		this.porcentagem	= oParam.porcentagem;
 		this.modelAction 	= oParam.modelAction;
 
 	}
 };
-Socio.prototype = new ModelCosmeDamiao();
+Socio.prototype = new Pessoa();
 
 var Plano = function(oParam) {
 

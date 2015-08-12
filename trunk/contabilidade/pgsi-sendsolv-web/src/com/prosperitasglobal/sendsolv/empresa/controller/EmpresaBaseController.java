@@ -42,9 +42,6 @@ public class EmpresaBaseController extends UtilControllerD
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
 	private static final String CONTROLLER_EXCEPTION_MSG = "EmpresaBaseController";
 
-	/** The Constant ENROLLED_MEMBERS. */
-	private static final String ENROLLED_MEMBERS = "enrolled_members";
-
 	/** The Empresa BAI. */
 	private IEmpresaBAI empresaBAI;
 
@@ -66,6 +63,7 @@ public class EmpresaBaseController extends UtilControllerD
 	 *
 	 * @return the empresa bai
 	 */
+	@Override
 	public IEmpresaBAI getEmpresaBAI()
 	{
 		return empresaBAI;
@@ -76,6 +74,7 @@ public class EmpresaBaseController extends UtilControllerD
 	 *
 	 * @param empresaBAI the empresa bai
 	 */
+	@Override
 	@Resource
 	public void setEmpresaBAI(IEmpresaBAI empresaBAI)
 	{
@@ -100,7 +99,7 @@ public class EmpresaBaseController extends UtilControllerD
 
 			if (isSelect)
 			{
-				// modelAndView = listSelectBusiness(modelAndView, request);
+				modelAndView = listSelectBusiness(modelAndView, request);
 			}
 			if (!ValidationUtil.isNullOrZero(empresaId))
 			{
@@ -484,11 +483,11 @@ public class EmpresaBaseController extends UtilControllerD
 
 	public Future<CidadeResponse> loadColumns(
 			CidadeInquiryRequest inquiryPaginationRequest)
-			{
+	{
 
 		return getAsyncDMFacade().<CidadeResponse> callAsyncMethod(getEmpresaBAI(), "fetchCidadeByRequest",
 				inquiryPaginationRequest, null);
 
-			}
+	}
 
 }

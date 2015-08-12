@@ -29,8 +29,7 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allRegimeColumns">
-		 b.id
-		,b.nome
+		 b.nome
 		,b.descricao
       	,b.create_date
       	,b.create_user
@@ -90,6 +89,30 @@
   <select id="fetchRegimeByFuncionario" parameterType="Integer" resultMap="regimeResult">
      SELECT * FROM regime
      WHERE id = #{id}
+  </select>
+
+  <select id="fetchAllRegimeByRequest" parameterType="PagedInquiryRequest" resultMap="regimeResult">
+    SELECT * FROM
+    			(
+    				SELECT b.id,
+    						<include refid="allRegimeColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM regime b
+					WHERE 2 = 2
+
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
   </select>
 
 

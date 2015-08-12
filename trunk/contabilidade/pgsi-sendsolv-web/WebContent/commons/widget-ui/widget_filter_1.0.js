@@ -225,7 +225,7 @@ $.widget("sc.filters",
 
 	_createCombobox : function()
 	{
-		$("select.listcombobox").combobox();
+		//$("select.listcombobox").combobox();
 
 		var filters 		= this.options.filters;
 		var aux 			= this.options;

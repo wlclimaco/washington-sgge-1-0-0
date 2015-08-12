@@ -76,7 +76,7 @@ public class EmpresaViewController extends EmpresaBaseController
 	private static final String VIEW_EMPRESA_TABS = "/empresa/empresa_tabs";
 
 	/** The Constant VIEW_EMPRESA_DIALOG_ADD. */
-	private static final String VIEW_EMPRESA_DIALOG_ADD = "/empresa/empresa_dialog_create";
+	private static final String VIEW_EMPRESA_DIALOG_ADD = "/entidade/entidade_dialog_create";
 
 	/** The Constant ORGANIZATION_BY_EMPRESA_MAIN. */
 	private static final String ORGANIZATION_BY_EMPRESA_MAIN = "/organization/organizationBylocation_main";
@@ -152,10 +152,6 @@ public class EmpresaViewController extends EmpresaBaseController
 			modelAndView.addObject(RESPONSE, getMapper()
 					.writeValueAsString(fetchEmpresaByRequest(pagedInquiryRequest)));
 
-			FiltersResponse filtersResponse = new FiltersResponse();
-			getFilterFactory().configureFilter(CDSTATUS, null, filtersResponse);
-
-			modelAndView.addObject(FILTERS, getMapper().writeValueAsString(filtersResponse));
 		}
 
 		catch (Exception e)
@@ -374,7 +370,7 @@ public class EmpresaViewController extends EmpresaBaseController
 	public ModelAndView loadView(@RequestParam(value = EMPRESA_ID, required = true) Integer locationId,
 			HttpServletRequest request)
 	{
-		return empresaEditMAV(locationId, VIEW_EMPRESA_VIEW, true, request);
+		return empresaEditMAV(locationId, VIEW_EMPRESA_VIEW, false, request);
 	}
 
 	/**

@@ -1,143 +1,262 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-<div id="wb_Form1" style="position:absolute;left:0px;top:0px;width:782px;height:365px;z-index:0;">
-   <form name="Form1" method="post" action="" enctype="text/plain" id="Form1">
+<%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt' %>
+<style>
+.teste .form-horizontal .control-label {
+	width: auto!important;
+}
+</style>
+	<div class="teste" style="width:100%;">
+	<form id="bookForm" method="post" class="form-horizontal">
+	<div class="page-header"></div>
 
-	  <div class="form-group">
-		  <div id="wb_Text1" style="position:absolute;left:30px;top:26px;width:55px;z-index:0;text-align:left;">
-			 <span style="color:#000000;font-family:Arial;font-size:13px;">Codigo :</span>
-		  </div>
-		  <input type="text" id="codigo" style="position:absolute;left:99px;top:21px;width:94px;height:27px;line-height:27px;z-index:1;" name="codigo" value="">
-		  <input type="text" id="nome" style="position:absolute;left:334px;top:21px;width:427px;height:27px;line-height:27px;z-index:2;" name="nome" value="">
-	  </div>
-
-	  <div id="cnae" style="z-index:400;">
-		  <div id="wb_Text3" class="test" style="position:absolute;left:30px;top:58px;width:55px;height:16px;z-index:3;text-align:left;">
-			 <span style="color:#000000;font-family:Arial;font-size:13px;">CNAE :</span>
-		  </div>
-		  <input type="text" id="Editbox1" class="cnaeId" style="position:absolute;left:99px;top:53px;width:94px;height:27px;line-height:27px;z-index:4;" name="cnae" value="">
-		  <input type="text" id="Editbox2" style="position:absolute;left:334px;top:53px;width:381px;height:27px;line-height:27px;z-index:5;" name="descricao" value="">
-		  <div id="wb_Text4" style="position:absolute;left:261px;top:58px;width:130px;height:16px;z-index:6;text-align:left;">
-			 <span style="color:#000000;font-family:Arial;font-size:13px;">Descrição :</span>
-		  </div>
-		  <button class="btn btn-default" type="button" style="position:absolute;left:195px;top:53px;width:29px;height:23px;z-index:40;"><i class="fa fa-search"></i></button>
-		  <div id="wb_Text2" style="position:absolute;left:204px;top:26px;width:130px;height:16px;z-index:28;text-align:left;">
-			 <span style="color:#000000;font-family:Arial;font-size:13px;">Nome/Razão Social :</span>
-		  </div>
-
-		<a title="Adicionar Cnae" id="Button1" href="javascript:;" style="position:absolute;left:204px;top:81px;width:130px;height:16px;z-index:9999;text-align:left;"><span class="icon-small-button icon-nav icon-plus"></span>Adicionar Cnae</a>
-	    </div>
-		<div id="cnae"></div>
-	 </div>
-
-
-	 <div id="wb_Form2" style="position:absolute;left:0px;top:110px;width:782px;height:365px;z-index:42;">
-
-	  <jsp:include page="../email/email_main.jsp" flush="true" />
-
-	  <div id="emails" style="position:absolute;left:0px;top:-58px;width:782px;height:365px;z-index:0;"></div>
-
-	  <div id="wb_Form3" style="position:absolute;left:0px;top:0px;">
-	  <input type="text" id="enderecoId" class="hide">
-      <input type="text" id="logradouro" style="position:absolute;left:99px;top:88px;width:286px;height:27px;line-height:27px;z-index:8;" name="logradouro" value="">
-      <div id="wb_Text5" style="position:absolute;left:11px;top:93px;width:88px;height:16px;z-index:9;text-align:left;">
-         <span style="color:#000000;font-family:Arial;font-size:13px;">Logradouro :</span>
-      </div>
-      <div id="wb_Text6" style="position:absolute;left:399px;top:93px;width:58px;height:16px;z-index:10;text-align:left;">
-         <span style="color:#000000;font-family:Arial;font-size:13px;">Cidade :</span>
-      </div>
-      <input type="text" id="cidade" style="position:absolute;left:453px;top:88px;width:173px;height:27px;line-height:27px;z-index:11;" name="cidade" value="">
-      <div id="wb_Text7" style="position:absolute;left:637px;top:93px;width:58px;height:16px;z-index:12;text-align:left;">
-         <span style="color:#000000;font-family:Arial;font-size:13px;">Estado :</span>
-      </div>
-      <select name="estado" size="1" id="estado" style="position:absolute;left:695px;top:88px;width:68px;height:21px;z-index:13;">
-      </select>
-      <input type="text" id="cep" style="position:absolute;left:99px;top:116px;width:103px;height:27px;line-height:27px;z-index:14;" name="cep" value="">
-      <div id="wb_Text8" style="position:absolute;left:45px;top:121px;width:40px;height:16px;z-index:15;text-align:left;">
-         <span style="color:#000000;font-family:Arial;font-size:13px;">CEP :</span>
-      </div>
-      <div id="wb_Text9" style="position:absolute;left:224px;top:121px;width:51px;height:16px;z-index:16;text-align:left;">
-         <span style="color:#000000;font-family:Arial;font-size:13px;">CNPJ :</span>
-      </div>
-      <input type="text" id="cnpj" style="position:absolute;left:275px;top:116px;width:176px;height:27px;line-height:27px;z-index:17;" name="cnpj" value="">
-      <div id="wb_Text10" style="position:absolute;left:457px;top:121px;width:129px;height:16px;z-index:18;text-align:left;">
-         <span style="color:#000000;font-family:Arial;font-size:13px;">Inscrição Estadual :</span>
-      </div>
-      <input type="text" id="ie" style="position:absolute;left:586px;top:116px;width:175px;height:27px;line-height:27px;z-index:19;" name="IE" value="">
-	  <div style="position:absolute;left:0px;top:148px;width:129px;height:16px;z-index:38;text-align:left;">
-			<div id="wb_Text19" style="position:absolute;text-align:left; left:10px;width:180px;height:200px;">
-				 <span style="color:#000000;font-family:Arial;font-size:13px;">Regime Tributario :</span>
-			  </div>
-			  <select name="regime" size="1" class="selectpicker" id="regime" data-live-search="true" style="position:absolute;z-index:39;left:125px;width:235px;height:27px;">
-				<option value="1">Simples Nacional</option>
-				<option value="2">Lucro Real</option>
-				<option value="3">MEI</option>
-				<option value="4">Lucro Presumido</option>
-			</select>
+	<!-- inicio: -->
+	<div class="form-group">
+		<div class="row">
+			<label class="col-xs-1 control-label">Codigo</label>
+			<div class="col-xs-2">
+				<input type="text" class="form-control disabled" id="codigo" name="codigo" placeholder="" />
+			</div>
+			<label class="col-xs-1 control-label">Nome *</label>
+			<div class="col-xs-6">
+				<input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" />
+			</div>
 		</div>
-      <div id="wb_Text12"  style="position:absolute;left:45px;top:192px;width:40px;height:16px;z-index:23;text-align:left;">
-         <span style="color:#000000;font-family:Arial;font-size:13px;">Type :</span>
-      </div>
-	  <select id="lunch" class="selectpicker Editbox9" data-live-search="true" title="Please select a lunch ..." maxlength="254" style="position:absolute;left:99px;top:190px;width:74px;height:27px;line-height:27px;z-index:24;">
-				<option value="1">Sac</option>
-				<option value="2">Contato</option>
-				<option value="3">Representante</option>
-				<option value="4">Outros</option>
-				</select>
+		<div class="row">
+		</div>
+		<label class="col-xs-1 control-label">Regime</label>
+		<div class="col-xs-8">
+			<select id="mySel" name="regime" class="regime" style="width: 80%;">
 
-     <div id="wb_Text12" style="position:absolute;left:322px;top:192px;width:40px;height:16px;z-index:23;text-align:left;">
-         <span style="color:#000000;font-family:Arial;font-size:13px;">DDD :</span>
-      </div>
-      <input type="text" id="Editboxd9" class="ddd" style="position:absolute;left:374px;top:190px;width:74px;height:27px;line-height:27px;z-index:24;" name="nome" value="">
-
-	 <input type="button" id="Button3" name="" value="+" style="position:absolute;left:702px;top:190px;width:34px;height:23px;z-index:25;">
-
-	  <div id="wb_Text13" style="position:absolute;left:457px;top:192px;width:80px;height:16px;z-index:26;text-align:left;">
-         <span style="color:#000000;font-family:Arial;font-size:13px;">Telefone :</span>
-      </div>
-
-      <input type="text" id="Editbox10" class="telefone" style="position:absolute;left:523px;top:190px;width:157px;height:27px;line-height:27px;z-index:27;" name="nome" value="">
-	  <div id="wb_Text18" style="position:absolute;left:457px;top:159px;width:129px;height:16px;z-index:36;text-align:left;">
-			 <span style="color:#000000;font-family:Arial;font-size:13px;">Inscrição Municipal :</span>
-		  </div>
-		  <input type="text" id="im" style="position:absolute;left:586px;top:154px;width:175px;height:27px;line-height:27px;z-index:37;" name="IM" value="">
-		<div class="test001" style="position:absolute;left:0px;top:51px;"></div>
-		<div id="telefones"  style="position:absolute;left:0px;top:133px;"></div>
-		<div id="wb_Text24"  style="position:absolute;left:0px;top:0px;">
-		  <div id="wb_Text14" style="position:absolute;left:30px;top:232px;width:55px;height:16px;z-index:29;text-align:left;">
-			 <span style="color:#000000;font-family:Arial;font-size:13px;">Socio :</span>
-		  </div>
-		  <input type="text" id="Editbox11" class="socio" style="position:absolute;left:99px;top:227px;width:270px;height:27px;line-height:27px;z-index:30;" name="nome" value="">
-		   <button class="btn btn-default" type="button" style="position:absolute;left:369px;top:227px;width:29px;height:27px;z-index:40;"><i class="fa fa-search"></i></button>
-		  <div id="wb_Text15" style="position:absolute;left:411px;top:232px;width:80px;height:16px;z-index:31;text-align:left;">
-			 <span style="color:#000000;font-family:Arial;font-size:13px;">Cota :</span>
-		  </div>
-		  <input type="text" id="Editbox12" class="cota" style="position:absolute;left:453px;top:227px;width:57px;height:27px;line-height:27px;z-index:32;" name="nome" value="">
-		  <input type="button" id="Button4" name="" value="+" style="position:absolute;left:695px;top:223px;width:34px;height:25px;z-index:33;">
-		  <div id="wb_Text16" style="position:absolute;left:528px;top:232px;width:80px;height:32px;z-index:34;text-align:left;">
-			 <span style="color:#000000;font-family:Arial;font-size:13px;">Porcentagem :</span>
-		  </div>
-		  <input type="text" id="Editbox13" class="porcentagem" style="position:absolute;left:619px;top:227px;width:57px;height:27px;line-height:27px;z-index:35;" name="nome" value="">
-
-		  <div class="test002" style="position:absolute;left:0px;top:51px;"></div>
-		  <div id="socios"  style="position:absolute;left:0px;top:172px;"></div>
-		  <div id="wb_Text25"  style="position:absolute;left:0px;top:0px;">	</div>
-
-	   </div>
-	  </div>
-   </form>
+			</select><br>
 		</div>
 	</div>
-</div>
+	<div class="panel-group" id="accordion">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">1 - Cadastro Cnae</a>
+				</h4>
+			</div>
+			<div id="collapseOne" class="panel-collapse collapse in">
+				<div class="panel-body">
+					<jsp:include page="../cnae/cnae_create_main.jsp" flush="true" />
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">2 - Cadastro Emails</a>
+			</h4>
+		</div>
+		<div id="collapseTwo" class="panel-collapse collapse">
+			<div class="panel-body">
+				<!-- email: -->
+	<jsp:include page="../email/email_main.jsp" flush="true" />
+			</div>
+		</div>
+	</div>
 
-<jsp:include page="../../scripts/pages/cnae/cnae_main.js.jsp" flush="true" />
-<jsp:include page="../../scripts/pages/email/email_main.js.jsp" flush="true" />
-<jsp:include page="../../scripts/pages/telefone/telefone_main.js.jsp" flush="true" />
-<jsp:include page="../../scripts/pages/endereco/endereco_main.js.jsp" flush="true" />
-<jsp:include page="../../scripts/pages/document/document_main.js.jsp" flush="true" />
-<jsp:include page="../../scripts/pages/socio/socio_main.js.jsp" flush="true" />
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">3 - Telefone</a>
+			</h4>
+		</div>
+		<div id="collapseFour" class="panel-collapse collapse">
+			<div class="panel-body">
+				<!-- Telefone: -->
+	<jsp:include page="../phone/phone_main.jsp" flush="true" />
+			</div>
+		</div>
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">5 - Enderecos</a>
+			</h4>
+		</div>
+		<div id="collapseThree" class="panel-collapse collapse">
+			<div class="panel-body">
+				<!-- endereco: -->
+	<jsp:include page="../address/address_main.jsp" flush="true" />
+			</div>
+		</div>
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">6 - Documentos</a>
+			</h4>
+		</div>
+		<div id="collapseFive" class="panel-collapse collapse">
+			<div class="panel-body">
+				<!-- documentos: -->
+	<jsp:include page="../document/document_main.jsp" flush="true" />
+			</div>
+		</div>
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#collapseEith">7 - Socios</a>
+			</h4>
+		</div>
+		<div id="collapseEith" class="panel-collapse collapse">
+			<div class="panel-body">
+				<!-- endereco: -->
+					<jsp:include page="../socios/socios_create_main.jsp" flush="true" />
+				</div>
+			</div>
+		</div>
+	</div>
+	</form>
+	</div>
+
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	<c:choose>
+	<c:when test="${empty response}">
+    	var oPreLoadResponse = null;
+    </c:when>
+    <c:otherwise>
+    	var oPreLoadResponse = ${response};
+    </c:otherwise>
+</c:choose>
+
+<c:choose>
+	<c:when test="${empty regime}">
+    	var oRegime = null;
+    </c:when>
+    <c:otherwise>
+    	var oRegime = ${regime};
+    </c:otherwise>
+</c:choose>
+
+<c:choose>
+	<c:when test="${empty cnae}">
+    	var oCnae = null;
+    </c:when>
+    <c:otherwise>
+    	var oCnae = ${cnae};
+    </c:otherwise>
+</c:choose>
+
+	console.log(oCnae);
+	sCnaeoption = "";
+	for(var i = 0;i < oCnae.length;i++){
+		sCnaeoption = sCnaeoption + '<option value="'+oCnae[i].key+'">'+oCnae[i].value+'</option>';
+	}
+	$('.cnaeId').append(sCnaeoption);
+	sCnaeoption = "";
+	for(var i = 0;i < oRegime.length;i++){
+		sCnaeoption = sCnaeoption + '<option value="'+oRegime[i].key+'">'+oRegime[i].value+'</option>';
+	}
+	$('.regime').append(sCnaeoption);
+
+ var titleValidators = {
+            row: '.col-xs-4',   // The title is placed inside a <div class="col-xs-4"> element
+            validators: {
+                notEmpty: {
+                    message: 'The title is required'
+                }
+            }
+        },
+        isbnValidators = {
+            row: '.col-xs-4',
+            validators: {
+                notEmpty: {
+                    message: 'The ISBN is required'
+                },
+                isbn: {
+                    message: 'The ISBN is not valid'
+                }
+            }
+        },
+        priceValidators = {
+            row: '.col-xs-2',
+            validators: {
+                notEmpty: {
+                    message: 'The price is required'
+                },
+                numeric: {
+                    message: 'The price must be a numeric number'
+                }
+            }
+        },
+        bookIndex = 0;
+
+    $('#bookForm')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                'book[0].title': titleValidators,
+                'book[0].isbn': isbnValidators,
+                'book[0].price': priceValidators,
+				'book[0].cnae': priceValidators,
+				'book[0].email': priceValidators
+            }
+        })
+
+        // Add button click handler
+        .on('click', '.addButton', function() {
+            bookIndex++;
+            var $template = $('#bookTemplate'),
+                $clone    = $template
+                                .clone()
+                                .removeClass('hide')
+                                .removeAttr('id')
+                                .attr('data-book-index', bookIndex)
+                                .insertBefore($template);
+
+            // Update the name attributes
+            $clone
+                .find('[name="title"]').attr('name', 'book[' + bookIndex + '].title').end()
+                .find('[name="isbn"]').attr('name', 'book[' + bookIndex + '].isbn').end()
+                .find('[name="price"]').attr('name', 'book[' + bookIndex + '].price').end();
+
+            // Add new fields
+            // Note that we also pass the validator rules for new field as the third parameter
+            $('#bookForm')
+                .formValidation('addField', 'book[' + bookIndex + '].title', titleValidators)
+                .formValidation('addField', 'book[' + bookIndex + '].isbn', isbnValidators)
+                .formValidation('addField', 'book[' + bookIndex + '].price', priceValidators);
+        })
+
+        // Remove button click handler
+        .on('click', '.removeButton', function() {
+            var $row  = $(this).parents('.form-group'),
+                index = $row.attr('data-book-index');
+
+            // Remove fields
+            $('#bookForm')
+                .formValidation('removeField', $row.find('[name="book[' + index + '].title"]'))
+                .formValidation('removeField', $row.find('[name="book[' + index + '].isbn"]'))
+                .formValidation('removeField', $row.find('[name="book[' + index + '].price"]'));
+
+            // Remove element containing the fields
+            $row.remove();
+        });
+
+		$("select").select2({
+		  placeholder: "Select a state",
+		  allowClear: true
+		});
+
+
+});
+</script>
+
 <jsp:include page="../../scripts/pages/entidade/entidade_create_main.js.jsp" flush="true" />
-<jsp:include page="../../scripts/pages/empresa/empresa_create_init.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/empresa/empresa_main.js.jsp" flush="true" />
