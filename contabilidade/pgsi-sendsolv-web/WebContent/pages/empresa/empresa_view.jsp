@@ -4,6 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags'%>
 
+<style>
+	.botoes {
+		float: right;
+		margin-top: -5px;
+	}
+</style>
 
     <div class="container-fluid">
 	<div class="row">
@@ -17,6 +23,23 @@
 				</li>
 				<li class="active">
 					Data
+				</li>
+				<li class="botoes">
+					<div class="btn-group">
+
+						<button class="btn btn-default" type="button">
+							<em class="glyphicon glyphicon-align-left"></em> Deletar
+						</button>
+						<button class="btn btn-default" type="button">
+							<em class="glyphicon glyphicon-align-center"></em> Ativar
+						</button>
+						<button class="btn btn-default" type="button">
+							<em class="glyphicon glyphicon-align-right"></em> Atualizar
+						</button>
+						<button class="btn btn-default" type="button">
+							<em class="glyphicon glyphicon-align-justify"></em> editar
+						</button>
+					</div>
 				</li>
 			</ul>
 			<div class="page-header">
