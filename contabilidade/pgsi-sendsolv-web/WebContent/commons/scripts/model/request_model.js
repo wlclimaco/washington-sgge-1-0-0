@@ -63,6 +63,17 @@ var RecipientInquiryRequest = function(oParam) {
 
 RecipientInquiryRequest.prototype = new PagedInquiryRequest();
 
+
+var EmpresaInquiryRequest = function(oParam) {
+	PagedInquiryRequest.call(this, oParam);
+
+	if (oParam) {
+		this.criteria = oParam.criteria;
+	}
+};
+
+EmpresaInquiryRequest.prototype = new PagedInquiryRequest();
+
 var MemberInquiryRequest = function(oParam){
 	PagedInquiryRequest.call(this, oParam);
 

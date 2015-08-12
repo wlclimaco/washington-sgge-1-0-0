@@ -3,42 +3,90 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib prefix='sec'
 	uri='http://www.springframework.org/security/tags'%>
+<div class="email">
+	<div class="form-group">
+		<label class="col-xs-1 control-label">Email tipo</label>
+		<div class="col-xs-3">
+			<select id="mySel" name="book[0].emailTipo" class="email-type">
+				<option value="1"> teste 001</option>
+				<option value="2"> teste 002</option>
+				<option value="3"> teste 003</option>
+				<option value="4"> teste 004</option>
+				<option value="5"> teste 005</option>
 
-<div class="group-inputs" id="email-template" style="position:absolute;top:0px z-index:142">
-	<div class="container">
-		<div class="row-form">
-			<input type="hidden" name="emailId" class="email-id">
-			<input type="hidden" name="modelAction" class="model-action">
-			<input type="hidden" name="emailVersion" class="email-version">
-
-			<div class="email" style="position:absolute;left:0px;top:0px;width:500px;height:27px;z-index:40;">
-				<label for="email-type" style="margin-right: 10px;">
-					<s:message code="pages.contacts.form.label.emailtype" text="default text" />
-				</label>
-				<select name="emailType" class="email-type" maxlength="254" style="position:absolute;width:94px;height:27px;line-height:27px;z-index:4;" name="cnae" value="">
-					<option value="1">Comercial</option>
-					<option value="2">Compras</option>
-					<option value="3">SAC</option>
-					<option value="4">NFE</option>
-				</select>
-				<div style="position:absolute;left:300px;top:0px;width:500px;height:27px;z-index:40;">
-					<label for="emailAddress">
-						<s:message code="pages.contacts.form.label.emailaddress" text="default text" /></label>
-					<input type="text" class="email-address email" name="emailAddress" style="position:absolute;width:300px;height:27px;line-height:27px;z-index:4;" value="">
-					<div class="close-button-form hide">
-						<span class="icon-small-button icon-nav icon-remove" title='<s:message code="commons.pages.delete" text="default text" />'></span>
-					</div>
-				</div>
-			</div>
+			</select><br>
 		</div>
+		<label class="col-xs-1 control-label">Email</label>
+		<div class="col-xs-5">
+			<input type="text" class="form-control email-address" name="book[0].email"  placeholder="exemplo@exemplo.com" />
+		</div>
+		<div class="col-xs-1">
+			<button type="button" class="btn btn-default addButton2"><i class="fa fa-plus"></i></button>
+		</div>
+	</div>
 
-	<a href="javascript:;" id="add-email" title='<s:message code="pages.form.label.addemail" text="default text" />' style="position:absolute;left:195px;top:30px;width:500px;height:27px;z-index:40;">
-		<span class="icon-small-button icon-nav icon-plus"></span>
-		<s:message code="pages.form.label.addemail" text="default text" />
-	</a>
-
+	<div class="form-group hide" id="bookTemplate2">
+		<label class="col-xs-1 control-label">Email tipo</label>
+		<div class="col-xs-3">
+			<select id="mySel" name="emailTipo" class="email-type">
+				<option value="1"> teste 001</option>
+				<option value="2"> teste 002</option>
+				<option value="3"> teste 003</option>
+				<option value="4"> teste 004</option>
+				<option value="5"> teste 005</option>
+			</select>
+		</div>
+		<label class="col-xs-1 control-label">Email</label>
+		<div class="col-xs-5">
+			<input type="text" class="form-control email-address" name="email"  placeholder="exemplo@exemplo.com" />
+		</div>
+		<div class="col-xs-1">
+			<button type="button" class="btn btn-default removeButton2"><i class="fa fa-minus"></i></button>
+		</div>
+	</div>
 </div>
-</div>
+<script type="text/javascript">
+$(document).ready(function() {
 
-<jsp:include page="../../scripts/pages/email/email_init.js.jsp" flush="true" />
+	var bookIndex = 0;
 
+	$('#bookForm').on('click', '.addButton2', function() {
+		bookIndex++;
+		var $template = $('#bookTemplate2'),
+			$clone    = $template
+							.clone()
+							.removeClass('hide')
+							.removeAttr('id')
+							.attr('data-book-index', bookIndex)
+							.insertBefore($template);
+
+		// Update the name attributes
+		$clone
+			.find('[name="emailTipo"]').attr('name', 'book[' + bookIndex + '].emailTipo').end()
+			.find('[name="email"]').attr('name', 'book[' + bookIndex + '].email').end();
+
+		// Add new fields
+		// Note that we also pass the validator rules for new field as the third parameter
+		$('#bookForm')
+			.formValidation('addField', 'book[' + bookIndex + '].emailTipo', priceValidators)
+			.formValidation('addField', 'book[' + bookIndex + '].email', priceValidators);
+	})
+
+	// Remove button click handler
+	.on('click', '.removeButton2', function() {
+		var $row  = $(this).parents('.form-group'),
+			index2 = $row.attr('data-book-index');
+
+		// Remove fields
+		$('#bookForm')
+			.formValidation('removeField', $row.find('[name="book[' + index2 + '].emailTipo"]'))
+			.formValidation('removeField', $row.find('[name="book[' + index2 + '].email"]'));
+
+		// Remove element containing the fields
+		$row.remove();
+	});
+
+});
+</script>
+
+<jsp:include page="../../scripts/pages/email/email_main.js.jsp" flush="true" />

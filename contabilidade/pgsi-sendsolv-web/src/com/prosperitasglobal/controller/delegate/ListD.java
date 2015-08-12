@@ -26,15 +26,19 @@ import com.prosperitasglobal.cbof.model.response.CountryResponse;
 import com.prosperitasglobal.cbof.model.response.LanguageResponse;
 import com.prosperitasglobal.cbof.model.response.RangeResponse;
 import com.prosperitasglobal.cbof.model.response.StateProvinceRegionResponse;
+import com.prosperitasglobal.sendsolv.bai.IEmpresaBAI;
+import com.prosperitasglobal.sendsolv.model.Cnae;
+import com.prosperitasglobal.sendsolv.model.Regime;
+import com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.RegimeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.response.CnaeResponse;
+import com.prosperitasglobal.sendsolv.model.response.RegimeResponse;
 import com.qat.framework.model.UserContext;
 import com.qat.framework.validation.ValidationUtil;
 
 public final class ListD
 {
-
-	/** The Constant SOCIAL_SECURITY_NUMBER. */
-	private static final String SOCIAL_SECURITY_NUMBER = "Social Security Number";
 
 	/**
 	 * The Constructor.
@@ -42,6 +46,51 @@ public final class ListD
 	private ListD()
 	{
 	}
+
+	public static List<Map<String, String>> fetchAllCnaes(IEmpresaBAI empresaBAI,
+			UserContext userContext)
+			{
+		CnaeInquiryRequest cnaeRequest = new CnaeInquiryRequest();
+		cnaeRequest.setUserContext(userContext);
+		cnaeRequest.setPageSize(0);
+		CnaeResponse cnaeResponse = empresaBAI.fetchCnaeByRequest(cnaeRequest);
+
+		Map<String, String> mapObject;
+		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+
+		for (Cnae cnae : cnaeResponse.getCnaeList())
+		{
+			mapObject = new TreeMap<String, String>();
+			mapObject.put("key", cnae.getId().toString());
+			mapObject.put("value", cnae.getDescricao());
+			list.add(mapObject);
+
+		}
+
+		return list;
+			}
+
+	public static List<Map<String, String>> fetchAllRegime(IEmpresaBAI empresaBAI,
+			UserContext userContext)
+			{
+		RegimeInquiryRequest regimeInquiryRequest = new RegimeInquiryRequest();
+		regimeInquiryRequest.setUserContext(userContext);
+		RegimeResponse regimeResponse = empresaBAI.fetchRegimeByRequest(regimeInquiryRequest);
+
+		Map<String, String> mapObject;
+		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+
+		for (Regime range : regimeResponse.getRegimeList())
+		{
+			mapObject = new TreeMap<String, String>();
+			mapObject.put("key", range.getId().toString());
+			mapObject.put("value", range.getNome());
+			list.add(mapObject);
+
+		}
+
+		return list;
+			}
 
 	/**
 	 * Returns a collection of Range pair values for the rangeType provided.
@@ -53,7 +102,7 @@ public final class ListD
 	 */
 	public static List<Map<String, String>> fetchRange(RangeEnum rangeType, IRangeBAI rangeBAI,
 			UserContext userContext)
-	{
+			{
 		RangeRequest rangeRequest = new RangeRequest();
 		rangeRequest.setRangeType(rangeType);
 		rangeRequest.setUserContext(userContext);
@@ -72,7 +121,7 @@ public final class ListD
 		}
 
 		return list;
-	}
+			}
 
 	/**
 	 * Returns a collection of Country pair values.
@@ -85,7 +134,7 @@ public final class ListD
 	 */
 	public static List<Map<String, String>> fetchAllCountries(ICountryBAI countryBAI,
 			UserContext userContext) throws Exception
-			{
+	{
 		FetchByCodeRequest fetchByCodeRequest = new FetchByCodeRequest();
 		fetchByCodeRequest.setUserContext(userContext);
 		CountryResponse countryResponse = countryBAI.fetchAllCountry(fetchByCodeRequest);
@@ -102,7 +151,7 @@ public final class ListD
 		}
 
 		return list;
-			}
+	}
 
 	/**
 	 * Returns a collection of all known country pair values.
@@ -115,7 +164,7 @@ public final class ListD
 	 */
 	public static List<Map<String, String>> fetchAllKnownCountries(ICountryBAI countryBAI,
 			UserContext userContext) throws Exception
-			{
+	{
 		FetchByCodeRequest fetchByCodeRequest = new FetchByCodeRequest();
 		fetchByCodeRequest.setUserContext(userContext);
 		CountryResponse countryResponse = countryBAI.fetchAllKnownCountry(fetchByCodeRequest);
@@ -132,7 +181,7 @@ public final class ListD
 		}
 
 		return list;
-			}
+	}
 
 	/**
 	 * Returns a collection of Phone Codes pair values.
@@ -144,7 +193,7 @@ public final class ListD
 	 */
 	public static List<Map<String, String>> fetchAllPhoneCodes(ICountryBAI countryBAI,
 			UserContext userContext) throws Exception
-			{
+	{
 		FetchByCodeRequest fetchByCodeRequest = new FetchByCodeRequest();
 		fetchByCodeRequest.setUserContext(userContext);
 		CountryResponse countryResponse = countryBAI.fetchAllKnownCountry(fetchByCodeRequest);
@@ -161,7 +210,7 @@ public final class ListD
 		}
 
 		return list;
-			}
+	}
 
 	/**
 	 * Returns a collection of StateProvinceRegion pair values.
@@ -174,7 +223,7 @@ public final class ListD
 	public static List<Map<String, String>> fetchStateProvinceRegionByCountryCode(
 			ICountryBAI countryBAI,
 			UserContext userContext, String code)
-			{
+	{
 		FetchByCodeRequest fetchByCodeRequest = new FetchByCodeRequest();
 		fetchByCodeRequest.setCode(code);
 		fetchByCodeRequest.setUserContext(userContext);
@@ -195,7 +244,7 @@ public final class ListD
 
 		return list;
 
-			}
+	}
 
 	// /**
 	// * Fetch s document type by code.
@@ -274,7 +323,7 @@ public final class ListD
 	public static List<Map<String, String>> fetchSLanguageByCode(
 			ILanguageBAI languageBAI,
 			UserContext userContext)
-			{
+	{
 
 		LanguageResponse languageResponse =
 				languageBAI.fetchLanguageByRequest(new PagedInquiryRequest());
@@ -292,7 +341,7 @@ public final class ListD
 
 		return list;
 
-			}
+	}
 
 	/**
 	 * Fetch prefix suffix.
@@ -305,7 +354,7 @@ public final class ListD
 	public static List<Map<String, String>> fetchPrefixSuffix(CodeValueEnum codeValueEnum,
 			INameSupplementBAI nameSupplementBAI,
 			UserContext userContext)
-			{
+	{
 		CodeValueRequest codeValueRequest = new CodeValueRequest();
 		codeValueRequest.setUserContext(userContext);
 
@@ -335,7 +384,7 @@ public final class ListD
 		}
 
 		return list;
-			}
+	}
 
 	/**
 	 * Fetch sic naics.
@@ -348,7 +397,7 @@ public final class ListD
 	public static List<Map<String, String>> fetchSicNaics(CodeValueEnum codeValueEnum,
 			ICodeValueBAI codeValueBAI,
 			UserContext userContext)
-			{
+	{
 		CodeValueRequest codeValueRequest = new CodeValueRequest();
 		codeValueRequest.setUserContext(userContext);
 
@@ -378,7 +427,7 @@ public final class ListD
 		}
 
 		return list;
-			}
+	}
 
 	/**
 	 * Fetch product plan.
@@ -436,7 +485,7 @@ public final class ListD
 	 */
 	public static List<Map<String, String>> fetchAllCountriesBAI(ICountryBAI countryBAI,
 			UserContext userContext, String code) throws Exception
-			{
+	{
 		FetchByCodeRequest fetchByCodeRequest = new FetchByCodeRequest();
 		fetchByCodeRequest.setCode(code);
 		fetchByCodeRequest.setUserContext(userContext);
@@ -457,7 +506,7 @@ public final class ListD
 		}
 
 		return list;
-			}
+	}
 
 	/**
 	 * Fetch payer.

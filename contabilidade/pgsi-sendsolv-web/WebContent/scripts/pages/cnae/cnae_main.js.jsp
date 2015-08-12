@@ -25,9 +25,10 @@ pgsi.pages.cnae = {
 
 		oCnae = [];
 		for(var i=0;i< parseInt($('.cnaeId').length,10);i++){
-			aCnae = new Cnae();
-			aCnae.idCnae =    {id : $('.cnaeId:eq('+i+')').val(),modelAction:"INSERT"};
-			aCnae.modelAction 	 = sModelAction;
+			aCnae = new Cnae({
+				idCnae 		:    {id : $('.cnaeId:eq('+i+')').val(),modelAction:"INSERT"},
+				modelAction :    sModelAction
+			});
 			oCnae.push(aCnae);
 		}
 

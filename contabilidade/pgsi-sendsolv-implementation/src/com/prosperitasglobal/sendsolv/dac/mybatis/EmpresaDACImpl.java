@@ -146,7 +146,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 
 	private static final String REGIME_STMT_FETCH_COUNT = "RegimeMap.fetchRegimeRowCount";;
 
-	private static final String REGIME_STMT_FETCH_ALL_BY_REQUEST = "RegimeMap.fetchAllRegimesByRequest";
+	private static final String REGIME_STMT_FETCH_ALL_BY_REQUEST = "RegimeMap.fetchAllRegimeByRequest";
 
 	private static final String CIDADE_STMT_FETCH_COUNT = "CidadeMap.fetchCidadeRowCount";;
 
@@ -507,10 +507,10 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, empresa.getId(),
-								null, AcaoEnum.DELETE,
-								empresa.getCreateUser(), empresa.getId(), TabelaEnum.EMPRESA, getStatusDAC(),
-								getHistoricoDAC(), empresa.getProcessId(), null);
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, empresa.getId(),
+						null, AcaoEnum.DELETE,
+						empresa.getCreateUser(), empresa.getId(), TabelaEnum.EMPRESA, getStatusDAC(),
+						getHistoricoDAC(), empresa.getProcessId(), null);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -637,10 +637,10 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, filial.getId(),
-								null, AcaoEnum.DELETE,
-								filial.getCreateUser(), filial.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
-								getHistoricoDAC(), filial.getProcessId(), null);
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, filial.getId(),
+						null, AcaoEnum.DELETE,
+						filial.getCreateUser(), filial.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
+						getHistoricoDAC(), filial.getProcessId(), null);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -758,10 +758,10 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, deposito.getId(),
-								null, AcaoEnum.DELETE,
-								deposito.getCreateUser(), deposito.getEmprId(), TabelaEnum.DEPOSITO, getStatusDAC(),
-								getHistoricoDAC(), deposito.getProcessId(), null);
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, deposito.getId(),
+						null, AcaoEnum.DELETE,
+						deposito.getCreateUser(), deposito.getEmprId(), TabelaEnum.DEPOSITO, getStatusDAC(),
+						getHistoricoDAC(), deposito.getProcessId(), null);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)

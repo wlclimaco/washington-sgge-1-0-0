@@ -14,11 +14,12 @@ pgsi.pages.email = {
 
 			oEmail = [];
 
-			for(var i=0;i< parseInt($('.email-type').length,10);i++){
-				aEmail = new Email();
-				aEmail.email = $('.email-address:eq('+i+')').val();
-				aEmail.emailTypeEnumValue = $('.email-type:eq('+i+')').val();
-				aEmail.modelAction 	 = sModelAction;
+			for(var i=0;i< (parseInt($('.email .form-group').length,10)-1);i++){
+				aEmail = new Email({
+				email 				: $('#bookForm').find('[name="book['+i+'].email"]').val(),
+				emailTypeEnumValue  : $('#bookForm').find('[name="book['+i+'].emailTipo"]').val(),
+				modelAction 	    : sModelAction
+				})
 				oEmail.push(aEmail);
 			}
 

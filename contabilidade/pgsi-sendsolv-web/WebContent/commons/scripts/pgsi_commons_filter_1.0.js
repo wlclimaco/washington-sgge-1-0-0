@@ -1034,7 +1034,7 @@ $(document).ready(function()
 		//	Create combobox
 		var _createCombobox = function (options)
 		{
-			$("select.listcombobox").combobox();
+		//	$("select.listcombobox").combobox();
 			var filters 		= options.filters;
 			var firstOptions 	= options.firstOptions;
 			$(this.element).find("input.ui-autocomplete-input").each(function()

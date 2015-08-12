@@ -16,7 +16,7 @@ pgsi.pages.entidade = {
 
 	// Returns link for edit view
 	fnCreateEmpresaNameLink : function (val, type, full)
-	{console.log(full)
+	{
 	var sCnpj="";
 		if (type !== "display")
 		{
@@ -155,6 +155,57 @@ pgsi.pages.entidade = {
 			sStatus = full.statusList[0].status;
 		}
 		return sStatus;
+	},
+
+	fnRequestFilter : function(){
+		var oParam = {};
+
+		// filter empresa id
+		if (!$.pgsi.isNullOrUndefined($('#idFilter').val())) {
+			sessionStorage.filterId = $('#idFilter').val()
+			$.address.parameter('id',$('#idFilter').val())
+		}
+
+		// filter empresa Status
+		var iIds = '',oIds = [];
+
+		if (!$.pgsi.isNullOrUndefined($('.statusFilter'))) {
+			$.each($('.statusFilter').find('input'), function( i, elem ) {
+				if($(this).prop('checked') == true){
+					iIds = iIds + "|" + $(this).val();
+				}
+
+			});
+
+console.log(iIds);
+			sessionStorage.statusId = iIds;
+			$.address.parameter('status',iIds)
+
+			var sIds = $.address.parameter('status');
+			console.log(sIds)
+			if (!$.pgsi.isNullOrUndefined(sIds)) {
+				aIds = sIds.split('|');
+				console.log(aIds);
+				for(var i = 0; i < aIds.length;i++){
+
+					if (!$.pgsi.isNullOrUndefined(aIds[i])) {
+						if (aIds[i] !="") {
+							oIds.push(aIds[i]);
+						}
+					}
+				}
+
+			}
+		}
+		oParam.criteria = {
+				id     : $.address.parameter('id'),
+				status : oIds
+		}
+
+
+
+		return oParam;
+
 	}
 }
 </script>

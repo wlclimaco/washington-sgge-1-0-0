@@ -5,9 +5,7 @@
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags'%>
 
 <nav class="secondary">
-		<a class="alist" href="organization">
-			<span><s:message code="commons.pages.customers" text="Customers" /></span>
-		</a>
+
 		<span class="icon-nav icon-angle-right"></span>
 		<a class="alist" href="view?organizationId=" id="parent-organization-link">
 
@@ -25,15 +23,19 @@
 				Informacao
 			</a>
 		</li>
-		</li>
 		<li>
-			<a href="#" id="funcionarioTab" class="alist" data-tab="funcionario" title='Funcionarios' data-title='Funcionarios'>
+			<a href="#" id="contadorTab" class="alist" data-tab="Contador" title='Contador' data-title='Contador'>
 				Contador
 			</a>
 		</li>
 		<li>
 			<a href="#" id="xmlTab" class="alist" data-tab="xml" title='XMLs' data-title='XMLs'>
 				XMLs
+			</a>
+		</li>
+		<li>
+			<a href="#" id="xmlTab" class="alist" data-tab="socios" title='Socios' data-title='Socios'>
+				Socios
 			</a>
 		</li>
 	</ul>

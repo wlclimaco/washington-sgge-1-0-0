@@ -15,31 +15,34 @@ pgsi.pages.documento = {
 
 		if (!$.pgsi.isNullOrUndefined($('#cnpj').val())) {
 
-			var documento = new Documento();
-			documento.documentoType  = "CNPJ";
-			documento.numero         = $('#cnpj').val();
-			documento.data           = dDate.getTime();
-			documento.modelAction 	 = sModelAction
+			var documento = new Documento({
+				documentoType  : "CNPJ",
+				numero         : $('#cnpj').val(),
+				data           : dDate.getTime(),
+				modelAction    : sModelAction
+			});
 			aDocumento.push(documento);
 
 		}
 		if (!$.pgsi.isNullOrUndefined($('#ie').val())) {
 
-			var documento = new Documento();
-			documento.documentoType  = "IE";
-			documento.numero         = $('#ie').val();
-			documento.data           = dDate.getTime();
-			documento.modelAction 	 = sModelAction
+			var documento = new Documento({
+				documentoType  : "IE",
+				numero         : $('#ie').val(),
+				data           : dDate.getTime(),
+				modelAction    : sModelAction
+			});
 			aDocumento.push(documento);
 
 		}
 		if (!$.pgsi.isNullOrUndefined($('#im').val())) {
 
-			var documento = new Documento();
-			documento.documentoType  = "IM";
-			documento.numero         = $('#im').val();
-			documento.data           = dDate.getTime();
-			documento.modelAction 	 = sModelAction
+			var documento = new Documento({
+				documentoType  : "IM",
+				numero         : $('#im').val(),
+				data           : dDate.getTime(),
+				modelAction    : sModelAction
+			});
 			aDocumento.push(documento);
 
 		}

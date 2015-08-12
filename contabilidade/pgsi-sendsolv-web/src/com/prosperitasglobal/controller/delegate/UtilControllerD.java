@@ -1,30 +1,17 @@
 package com.prosperitasglobal.controller.delegate;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.prosperitasglobal.sendsolv.bai.IEmpresaBAI;
 import com.prosperitasglobal.sendsolv.common.controller.BaseController;
 
 public class UtilControllerD extends BaseController
 {
-
-	/** The Constant SECURITY_QUESTION. */
-	private static final String SECURITY_QUESTION = "security_question";
-
-	/** The Constant COUNTRY_BAI. */
-	private static final String COUNTRY_BAI = "countryBAI";
-
-	/** The Constant SUFFIX. */
-	private static final String SUFFIX = "suffix";
-
-	/** The Constant PREFIX. */
-	private static final String PREFIX = "prefix";
-
-	public static final String COUNTRIES = "countries";
-	private static final String KNOWN_COUNTRIES = "known_countries";
 
 	/** The Constant RESPONSE. */
 	public static final String RESPONSE = "response";
@@ -56,220 +43,24 @@ public class UtilControllerD extends BaseController
 	/** The Constant CONTROLLER_EXCEPTION_MSG. */
 	private static final String CONTROLLER_EXCEPTION_MSG = "UtilControllerD";
 
-	/** The Constant USA. */
-	private static final String USA = "USA";
+	private IEmpresaBAI empresaBAI;
 
-	/** The Constant START_PAGE_NUMBER. */
-	private static final int START_PAGE_NUMBER = 0;
+	/**
+	 * @return the empresaBAI
+	 */
+	public IEmpresaBAI getEmpresaBAI()
+	{
+		return empresaBAI;
+	}
 
-	/** The Constant INITIAL_PAGE_SIZE. */
-	private static final int INITIAL_PAGE_SIZE = 0;
-
-	// /**
-	// * @return the securityQuestion
-	// */
-	// public ISecurityQuestionBAI getSecurityQuestion()
-	// {
-	// return securityQuestion;
-	// }
-	//
-	// /**
-	// * @param securityQuestion the securityQuestion to set
-	// */
-	// @Resource
-	// public void setSecurityQuestion(ISecurityQuestionBAI securityQuestion)
-	// {
-	// this.securityQuestion = securityQuestion;
-	// }
-	//
-	// /**
-	// * Gets the member BAI.
-	// *
-	// * @return the member BAI
-	// */
-	// public IMemberBAI getMemberBAI()
-	// {
-	// return memberBAI;
-	// }
-	//
-	// /**
-	// * Sets the member bai.
-	// *
-	// * @param memberBAI the member bai
-	// */
-	// @Resource
-	// public void setMemberBAI(IMemberBAI memberBAI)
-	// {
-	// this.memberBAI = memberBAI;
-	// }
-	//
-	// /**
-	// * Gets the product plan bai.
-	// *
-	// * @return the product plan bai
-	// */
-	// public IProductPlanBAI getProductPlanBAI()
-	// {
-	// return productPlanBAI;
-	// }
-	//
-	// /**
-	// * Sets the product plan bai.
-	// *
-	// * @param productPlanBAI the product plan bai
-	// */
-	// @Resource
-	// public void setProductPlanBAI(IProductPlanBAI productPlanBAI)
-	// {
-	// this.productPlanBAI = productPlanBAI;
-	// }
-	//
-	// /**
-	// * Gets the code value bai.
-	// *
-	// * @return the code value bai
-	// */
-	// public ICodeValueBAI getCodeValueBAI()
-	// {
-	// return codeValueBAI;
-	// }
-	//
-	// /**
-	// * Sets the code value bai.
-	// *
-	// * @param codeValueBAI the code value bai
-	// */
-	// @Resource
-	// public void setCodeValueBAI(ICodeValueBAI codeValueBAI)
-	// {
-	// this.codeValueBAI = codeValueBAI;
-	// }
-	//
-	// /**
-	// * Gets the language bai.
-	// *
-	// * @return the language bai
-	// */
-	// public ILanguageBAI getLanguageBAI()
-	// {
-	// return languageBAI;
-	// }
-	//
-	// /**
-	// * Sets the language bai.
-	// *
-	// * @param languageBAI the language bai
-	// */
-	// @Resource
-	// public void setLanguageBAI(ILanguageBAI languageBAI)
-	// {
-	// this.languageBAI = languageBAI;
-	// }
-	//
-	// /**
-	// * Gets the document type bai.
-	// *
-	// * @return the document type bai
-	// */
-	// public IDocumentTypeBAI getDocumentTypeBAI()
-	// {
-	// return documentTypeBAI;
-	// }
-	//
-	// /**
-	// * Sets the document type bai.
-	// *
-	// * @param documentTypeBAI the document type bai
-	// */
-	// @Resource
-	// public void setDocumentTypeBAI(IDocumentTypeBAI documentTypeBAI)
-	// {
-	// this.documentTypeBAI = documentTypeBAI;
-	// }
-	//
-	// /**
-	// * Gets the name supplement bai.
-	// *
-	// * @return the name supplement bai
-	// */
-	// public INameSupplementBAI getNameSupplementBAI()
-	// {
-	// return nameSupplementBAI;
-	// }
-	//
-	// /**
-	// * Sets the name supplement bai.
-	// *
-	// * @param nameSupplementBAI the name supplement bai
-	// */
-	// @Resource
-	// public void setNameSupplementBAI(INameSupplementBAI nameSupplementBAI)
-	// {
-	// this.nameSupplementBAI = nameSupplementBAI;
-	// }
-	//
-	// /**
-	// * Sets the country bai.
-	// *
-	// * @param countryBAI the country bai
-	// */
-	// @Resource
-	// public void setCountryBAI(ICountryBAI countryBAI)
-	// {
-	// this.countryBAI = countryBAI;
-	// }
-	//
-	// /**
-	// * Sets the ranger.
-	// *
-	// * @param range the ranger
-	// */
-	// @Resource
-	// public void setRanger(IRangeBAI range)
-	// {
-	// this.range = range;
-	// }
-	//
-	// /**
-	// * Gets the range.
-	// *
-	// * @return the range
-	// */
-	// public IRangeBAI getRange()
-	// {
-	// return range;
-	// }
-	//
-	// /**
-	// * Gets the industry classification bai.
-	// *
-	// * @return the industry classification bai
-	// */
-	// public IIndustryClassificationBAI getIndustryClassificationBAI()
-	// {
-	// return industryClassificationBAI;
-	// }
-	//
-	// /**
-	// * Gets the country bai.
-	// *
-	// * @return the country bai
-	// */
-	// public ICountryBAI getCountryBAI()
-	// {
-	// return countryBAI;
-	// }
-	//
-	// /**
-	// * Sets the industry classification bai.
-	// *
-	// * @param industryClassificationBAI the industry classification bai
-	// */
-	// @Resource
-	// public void setIndustryClassificationBAI(IIndustryClassificationBAI industryClassificationBAI)
-	// {
-	// this.industryClassificationBAI = industryClassificationBAI;
-	// }
+	/**
+	 * @param empresaBAI the empresaBAI to set
+	 */
+	@Resource
+	public void setEmpresaBAI(IEmpresaBAI empresaBAI)
+	{
+		this.empresaBAI = empresaBAI;
+	}
 
 	/**
 	 * County mav.
@@ -279,52 +70,33 @@ public class UtilControllerD extends BaseController
 	 */
 	protected ModelAndView listSelectBusiness(ModelAndView modelAndView, HttpServletRequest request)
 	{
-		//
-		// try
-		// {
-		// modelAndView
-		// .addObject(
-		// COUNTRIES,
-		// getMapper().writeValueAsString(
-		// ListD.fetchAllCountries(countryBAI, fetchUserContext(request))));
-		//
-		// modelAndView
-		// .addObject(
-		// KNOWN_COUNTRIES,
-		// getMapper().writeValueAsString(
-		// ListD.fetchAllKnownCountries(countryBAI, fetchUserContext(request))));
-		// modelAndView
-		// .addObject(
-		// PHONE_CODES,
-		// getMapper().writeValueAsString(
-		// ListD.fetchAllPhoneCodes(countryBAI, fetchUserContext(request))));
-		//
-		// modelAndView
-		// .addObject(
-		// NUMBER_OF_EMPLOYEES,
-		// getMapper().writeValueAsString(
-		// ListD.fetchRange(RangeEnum.NUMBER_OF_EMPLOYEES, range,
-		// fetchUserContext(request))));
-		//
-		// modelAndView
-		// .addObject(
-		// NUMBER_OF_MIGRANT_WORKERS,
-		// getMapper().writeValueAsString(
-		// ListD.fetchRange(RangeEnum.NUMBER_OF_MIGRANT_WORKERS, range,
-		// fetchUserContext(request))));
-		//
-		// return modelAndView;
-		//
-		// }
-		// catch (Exception e)
-		// {
-		// if (LOG.isErrorEnabled())
-		// {
-		// LOG.error(CONTROLLER_EXCEPTION_MSG, e);
-		// modelAndView.addObject(RESPONSE, null);
-		// }
-		// }
-		//
+
+		try
+		{
+			modelAndView
+			.addObject(
+					"cnae",
+					getMapper().writeValueAsString(
+							ListD.fetchAllCnaes(getEmpresaBAI(), fetchUserContext(request))));
+
+			modelAndView
+			.addObject(
+					"regime",
+					getMapper().writeValueAsString(
+							ListD.fetchAllRegime(getEmpresaBAI(), fetchUserContext(request))));
+
+			return modelAndView;
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
 		return new ModelAndView();
 	}
 

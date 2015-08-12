@@ -13,12 +13,13 @@ pgsi.pages.telefone = {
 		fnCreateRequest : function(sModelAction){
 
 			oTelefone = [];
-			for(var i=0;i< parseInt($('.Editbox9').length,10);i++){
-				aTelefone = new Telefone();
-				aTelefone.ddd =    $('.ddd:eq('+i+')').val();
-				aTelefone.numero = $('.telefone:eq('+i+')').val();
-				aTelefone.telefoneTypeEnumValue = $('.Editbox9:eq('+i+')').val();
-				aTelefone.modelAction 	 = sModelAction;
+			for(var i=0;i< (parseInt($('.telefone .form-group').length,10)-1);i++){
+				aTelefone = new Telefone({
+					ddd 				  : $('#bookForm').find('[name="book['+i+'].ddd"]').val(),
+					numero 				  : $('#bookForm').find('[name="book['+i+'].telefone"]').val(),
+					telefoneTypeEnumValue : $('#bookForm').find('[name="book['+i+'].telefoneType"]').val(),
+					modelAction 	 	  :	sModelAction
+				});
 				oTelefone.push(aTelefone);
 			}
 

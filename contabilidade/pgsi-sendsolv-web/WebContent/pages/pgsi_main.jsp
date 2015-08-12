@@ -11,33 +11,25 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
 	<link rel="stylesheet" href="styles/jquery-ui.min.css" />
-
 	<link href="styles/bootstrap.css" rel="stylesheet">
-
 	<link href="styles/bootstrap-responsive.min.css" rel="stylesheet">
-
     <!-- MetisMenu CSS -->
     <link href="styles/metisMenu.min.css" rel="stylesheet">
-
     <!-- DataTables CSS -->
     <link href="styles/dataTables.bootstrap.css" rel="stylesheet">
-
     <!-- DataTables Responsive CSS -->
     <link href="styles/dataTables.responsive.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="styles/sb-admin-2.css" rel="stylesheet">
-
     <!-- Custom Fonts -->
     <link href="styles/font-awesome.min.css" rel="stylesheet" type="text/css">
-
 	<link rel="stylesheet" href="styles/preload.css" />
-
 	<link href="styles/style.css" rel="stylesheet">
-
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"rel="stylesheet">
-
 	<link href="styles/bootstrap-select.css" rel="stylesheet">
+	<link rel="stylesheet" href="styles/formValidation.css"/>
+	<link rel="stylesheet" href="styles/select2.css"/>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css"/>
 
 <!--<link rel="stylesheet" href="styles/preload.css" />-->
 <!-- <link rel="stylesheet" href="styles/pgsi-common.css" /> -->
@@ -88,6 +80,10 @@ head.load("thirdparty/jquery/jquery-1.11.1.min.js",
 					"thirdparty/jquery/jquery-ui-1.11.0.min.js",
 					"bootstrap/js/bootstrap.js",
 					"bootstrap/js/bootstrap-select.js",
+
+					"thirdparty/formvalidation-master/dist/js/select2.min.js",
+					"thirdparty/formvalidation-master/dist/js/formValidation.js",
+					"thirdparty/formvalidation-master/dist/js/framework/bootstrap.js",
 					"scripts/util/namespace_init.js",
 					"thirdparty/jquery/custom/jquery.i18n.properties.custom.js",
 					"thirdparty/jquery/custom/jquery.ui.datepicker-locale.js",
@@ -122,7 +118,6 @@ head.load("thirdparty/jquery/jquery-1.11.1.min.js",
 					"commons/widget-ui/widget_summary.js",
 					"scripts/util/page.js",
 				    "scripts/util/checkbox.js",
-				    "scripts/util/combobox.js",
 				    "scripts/util/filter_util.js",
 					"scripts/excanvas.min.js",
 					"scripts/chart.min.js",

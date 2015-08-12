@@ -10,16 +10,8 @@
                         <li>
                             <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Id</a>
 							<li class="">
-							   <div class="form-group input-group">
-									<input type="text" class="form-control">
-									<span class="input-group-btn">
-										<button class="btn btn-default" type="button"><i class="fa fa-search"></i>
-										</button>
-									</span>
-								</div>
-								<!-- /input-group -->
-							</li>
-                        </li>
+								<jsp:include page="../filtro/id_form.jsp"></jsp:include>
+                        	</li>
                         <li>
                              <jsp:include page="../filtro/status_form.jsp"></jsp:include>
                         </li>
@@ -55,7 +47,9 @@
                             <!-- /.nav-second-level -->
 
                         </li>
-						<li id="resetFilter"><label><button class="btn btn-default" type="button"><i class="fa fa-search"></i>  Limpar Filtros</label></li>
+						<li id="resetFilter"><span class="input-group-btn"><button class="btn btn-default buscar" type="button"><i class="fa fa-search">Buscar</i></button></span>
+											 <label><button class="btn btn-default reset" type="button"><i class="fa fa-search"></i>Limpar</button></label>
+						</li>
                     </ul>
                 </div>
 

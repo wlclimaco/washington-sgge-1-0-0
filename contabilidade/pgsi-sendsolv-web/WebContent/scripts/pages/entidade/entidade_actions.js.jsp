@@ -41,7 +41,7 @@
 
 				action : function (actionDialog) {
 
-					actionDialog.load("entidade/create", function() {
+					actionDialog.load("empresa/editView?locationId="+iId+"&userId=" + pgsi.settings.userContext.userId, function() {
 
 						//$('#selected', actionDialog).removeClass("hide").append(""+sName+"");
 

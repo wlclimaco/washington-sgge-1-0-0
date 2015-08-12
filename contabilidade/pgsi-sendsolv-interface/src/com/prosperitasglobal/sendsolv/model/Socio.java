@@ -1,18 +1,12 @@
 package com.prosperitasglobal.sendsolv.model;
 
-
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
  */
 @SuppressWarnings("serial")
-public class Socio extends ModelCosmeDamiao
+public class Socio extends Pessoa
 {
-	/** The SendSolv id for the account. */
-	private Integer id;
-
-	/** The type of an account. */
-	private String nome;
 
 	/** The description. */
 	private String cota;
@@ -26,46 +20,6 @@ public class Socio extends ModelCosmeDamiao
 	public Socio()
 	{
 		super();
-	}
-
-	/**
-	 * Gets the id.
-	 *
-	 * @return the id
-	 */
-	public Integer getId()
-	{
-		return id;
-	}
-
-	/**
-	 * Sets the id.
-	 *
-	 * @param id the id to set
-	 */
-	public void setId(Integer id)
-	{
-		this.id = id;
-	}
-
-	/**
-	 * Gets the nome.
-	 *
-	 * @return the nome
-	 */
-	public String getNome()
-	{
-		return nome;
-	}
-
-	/**
-	 * Sets the nome.
-	 *
-	 * @param nome the nome to set
-	 */
-	public void setNome(String nome)
-	{
-		this.nome = nome;
 	}
 
 	/**
@@ -115,8 +69,24 @@ public class Socio extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Socio [getId()=" + getId() + ", getNome()=" + getNome() + ", getCota()=" + getCota()
-				+ ", getPorcentagem()=" + getPorcentagem() + ", toString()=" + super.toString() + "]";
+		return "Socio [getCota()=" + getCota() + ", getPorcentagem()=" + getPorcentagem()
+				+ ", getPessoaTypeEnumValue()=" + getPessoaTypeEnumValue() + ", getId()=" + getId() + ", getNome()="
+				+ getNome() + ", getNomePai()=" + getNomePai() + ", getNomeMae()=" + getNomeMae()
+				+ ", getNomeConjugue()=" + getNomeConjugue() + ", getEstadoCivil()=" + getEstadoCivil()
+				+ ", getDatanasc()=" + getDatanasc() + ", getFoto()=" + getFoto() + ", getPessoaTypeEnum()="
+				+ getPessoaTypeEnum() + ", getContatoList()=" + getContatoList() + ", getSexo()=" + getSexo()
+				+ ", getEnderecos()=" + getEnderecos() + ", getDocumentos()=" + getDocumentos() + ", getEmails()="
+				+ getEmails() + ", getTelefones()=" + getTelefones() + ", getBancos()=" + getBancos()
+				+ ", getFormaPagamentoList()=" + getFormaPagamentoList() + ", getCondPagList()=" + getCondPagList()
+				+ ", toString()=" + super.toString() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
+				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
+				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
+				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
+				+ getEmprId() + ", getSite()=" + getSite() + ", getProcessId()=" + getProcessId() + ", getUserId()="
+				+ getUserId() + ", getNotes()=" + getNotes() + ", getModelAction()=" + getModelAction()
+				+ ", getCreateUser()=" + getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC()
+				+ ", getModifyUser()=" + getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }
