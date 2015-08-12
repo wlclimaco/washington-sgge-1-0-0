@@ -103,8 +103,8 @@
 						}
 						oEmpresa.id 		= parseInt($('#codigo').val(),10);
 						oEmpresa.nome		= $('#nome').val();
-						oEmpresa.regime  	= {id : parseInt($('#regime').val(),10)};
-						oEmpresa.enderecos  = [pgsi.pages.endereco.fnCreateRequest(sModelAction)];
+						oEmpresa.regime  	= pgsi.pages.regime.fnCreateRequest(sModelAction),
+						oEmpresa.enderecos  = pgsi.pages.endereco.fnCreateRequest(sModelAction);
 						oEmpresa.documentos	= pgsi.pages.documento.fnCreateRequest(sModelAction);
 						oEmpresa.emails		= pgsi.pages.email.fnCreateRequest(sModelAction);
 						oEmpresa.telefones	= pgsi.pages.telefone.fnCreateRequest(sModelAction);

@@ -31,7 +31,8 @@ pgsi.pages.socio = {
 					})]
 					cota 			   : $('#bookForm').find('[name="book['+i+'].email"]').val(),
 					porcentagem        : $('#bookForm').find('[name="book['+i+'].email"]').val(),
-					modelAction 	   : sModelAction
+					modelAction 	   : sModelAction,
+					pessoaTypeEnumValue: 6
 				});
 				oSocio.push(aSocio);
 			}
