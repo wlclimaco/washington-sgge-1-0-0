@@ -24,9 +24,9 @@ pgsi.pages.cnae = {
 	fnCreateRequest : function(sModelAction){
 
 		oCnae = [];
-		for(var i=0;i< parseInt($('.cnaeId').length,10);i++){
-			aCnae = new Cnae({
-				idCnae 		:    {id : $('.cnaeId:eq('+i+')').val(),modelAction:"INSERT"},
+		for(var i=0;i< (parseInt($('.cnae .form-group').length,10)-1);i++){
+			aCnae = new CnaeRel({
+				idCnae 		:    new Cnae({id : $('#bookForm').find('[name="book['+i+'].cnae"]').val(),modelAction:"INSERT"}),
 				modelAction :    sModelAction
 			});
 			oCnae.push(aCnae);

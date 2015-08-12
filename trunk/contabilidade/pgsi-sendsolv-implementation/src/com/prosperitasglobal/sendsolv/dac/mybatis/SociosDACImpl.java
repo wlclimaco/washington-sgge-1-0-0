@@ -39,7 +39,7 @@ public class SociosDACImpl extends SqlSessionDaoSupport implements ISociosDAC
 	private static final String CONTACT_STMT_DELETE_PERSON_CONTACT = CONTACT_NAMESPACE + "deletePersonSocio";
 
 	/** The Constant CONTACT_STMT_INSERT. */
-	private static final String CONTACT_STMT_INSERT = CONTACT_NAMESPACE + "insertSocio";
+	private static final String CONTACT_STMT_INSERT = "PessoaMap.insertPessoa";
 
 	/** The Constant CONTACT_STMT_INSERT_PHONE. */
 	private static final String CONTACT_STMT_INSERT_PHONE = CONTACT_NAMESPACE + "insertPhone";

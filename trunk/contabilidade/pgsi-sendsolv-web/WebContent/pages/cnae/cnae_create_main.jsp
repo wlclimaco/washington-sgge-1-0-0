@@ -3,25 +3,27 @@
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
 
 <!-- cnae: -->
-<div class="form-group">
-	<label class="col-xs-1 control-label">Cnae</label>
-	<div class="col-xs-8">
-		<select id="mySel" name="cnae" class="cnaeId" style="width: 80%;">
-		</select><br>
+<div class="cnae">
+	<div class="form-group">
+		<label class="col-xs-1 control-label">Cnae</label>
+		<div class="col-xs-8">
+			<select id="mySel" name="book[0].cnae" class="cnaeId" style="width: 80%;">
+			</select><br>
+		</div>
+		<div class="col-xs-1">
+			<button type="button" class="btn btn-default addButton1"><i class="fa fa-plus"></i></button>
+		</div>
 	</div>
-	<div class="col-xs-1">
-		<button type="button" class="btn btn-default addButton1"><i class="fa fa-plus"></i></button>
-	</div>
-</div>
 
-<div class="form-group hide" id="bookTemplate1">
-	<label class="col-xs-1 control-label">Cnae</label>
-	<div class="col-xs-8">
-		<select id="mySel" name="cnae" class="cnaeId" style="width: 80%;">
-		</select>
-	</div>
-	<div class="col-xs-1">
-		<button type="button" class="btn btn-default removeButton1"><i class="fa fa-minus"></i></button>
+	<div class="form-group hide" id="bookTemplate1">
+		<label class="col-xs-1 control-label">Cnae</label>
+		<div class="col-xs-8">
+			<select id="mySel" name="cnae" class="cnaeId" style="width: 80%;">
+			</select>
+		</div>
+		<div class="col-xs-1">
+			<button type="button" class="btn btn-default removeButton1"><i class="fa fa-minus"></i></button>
+		</div>
 	</div>
 </div>
 <script type="text/javascript">

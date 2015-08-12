@@ -260,3 +260,5 @@ $(document).ready(function() {
 
 <jsp:include page="../../scripts/pages/entidade/entidade_create_main.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/empresa/empresa_main.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/regime/regime_main.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/empresa/empresa_view_main.js.jsp" flush="true" />

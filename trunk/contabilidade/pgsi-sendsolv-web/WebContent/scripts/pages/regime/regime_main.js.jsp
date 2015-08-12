@@ -9,11 +9,10 @@
  * @fileoverview The main namespace for the Location List Page.
  */
 pgsi.pages.regime = {
-		 fnCreateRequest function(sModelAction){
+		 fnCreateRequest : function(sModelAction){
 
 			 oRegime = new Regime({
-				 id 		  : parseInt($('#regime').val(),10),
-				 nome 		  : $('#regime').val(),
+				 id 		  : parseInt($('.regime:eq(1)').val(),10),
 				 sModelAction : sModelAction
 			 })
 			return oRegime;
