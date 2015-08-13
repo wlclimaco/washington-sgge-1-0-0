@@ -125,6 +125,10 @@ $(document).ready(function()
 
 		fnInitComplete: function (oSettings, json)
 		{
+			$('.dataTables_paginate:eq(0)').addClass('hide')
+			$('.dataTables_info:eq(0)').addClass('hide')
+			$('.dataTables_length:eq(0)').addClass('hide')
+			
 			$(".dataTables_length select").outerWidth(62).selectmenu({
 				appendTo: ".content.list",
   				change: function( event, ui ) {

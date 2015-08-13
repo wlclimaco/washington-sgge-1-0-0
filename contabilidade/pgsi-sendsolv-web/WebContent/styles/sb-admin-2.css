@@ -933,3 +933,13 @@ table .checkbox, .radio{
 table thead .checkObj{
 	margin-left :-5px!important;
 }
+
+.breadcrumb {
+	width: 50%!important;
+	float: left!important;
+	background-color : #fcfcfc!important;
+}
+
+.navbar .nav > li > a {
+	color : #000000 !important;
+}
