@@ -2,62 +2,128 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
 
-<div id="wrapper">
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="col-md-12">
+				<jsp:include page="../produto/produto_inf.jsp" flush="true" />
+			</div>
+			<div class="tabbable" id="tabs-310655">
+				<ul class="nav nav-tabs">
+					<li>
+						<a href="#panel-1" data-toggle="tab">Cadastro</a>
+					</li>
+					<li class="active">
+						<a href="#panel-2" data-toggle="tab">Calculo Preço</a>
+					</li>
+					<li class="">
+						<a href="#panel-3" data-toggle="tab">Grade</a>
+					</li>
+					<li class="">
+						<a href="#panel-4" data-toggle="tab">Seriais</a>
+					</li>
+					<li class="">
+						<a href="#panel-5" data-toggle="tab">Composição</a>
+					</li>
+					<li class="">
+						<a href="#panel-6" data-toggle="tab">Inf Nutricionais</a>
+					</li>
+					<li class="">
+						<a href="#panel-7" data-toggle="tab">Foto</a>
+					</li>
+					<li class="">
+						<a href="#panel-8" data-toggle="tab">Rentabilidade</a>
+					</li>
+					<li class="">
+						<a href="#panel-9" data-toggle="tab">Tabela Preço</a>
+					</li>
+					<li class="">
+						<a href="#panel-10" data-toggle="tab">Inf Estoque</a>
+					</li>
+					<li class="">
+						<a href="#panel-11" data-toggle="tab">CFOPs</a>
+					</li>
 
-<nav class="secondary">
-	<a class="alist" href="organization" title='<s:message code="commons.pages.customers" text="default text" />'>
-		<span><s:message code="commons.pages.customers" text="default text" /></span>
-	</a>
-	<span class="icon-nav icon-angle-right add-business">
-		<span>
-			<s:message code="commons.pages.organizationfind" text="default text" />
-		</span>
-	</span>
-	<span id="company-name"></span>
-</nav>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane" id="panel-1">
+						<div class="col-md-12">
+							<jsp:include page="../produto/produto_cadastro.jsp" flush="true" />
+						</div>
+					</div>
+					<div class="tab-pane active" id="panel-2">
+						<div class="row">
+							<div class="col-md-12">
 
-<h2 class="list"><s:message code="commons.pages.organizationfind" text="default text" /></h2>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane active" id="panel-3">
+						<div class="row">
+							<div class="col-md-12">
 
-<a href="organization/add" class="add-business alist" title='<s:message code="commons.pages.organizationadd" text="default text" />'>
-	<span class="icon-nav icon-plus icon-small-button"></span>
-	<s:message code="commons.pages.organizationadd" text="default text" />
-</a>
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="filter">
-					<form id="filterForm"></form>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane active" id="panel-4">
+						<div class="row">
+							<div class="col-md-12">
+
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane active" id="panel-5">
+						<div class="row">
+							<div class="col-md-12">
+
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane active" id="panel-6">
+						<div class="row">
+							<div class="col-md-12">
+
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane active" id="panel-7">
+						<div class="row">
+							<div class="col-md-12">
+
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane active" id="panel-8">
+						<div class="row">
+							<div class="col-md-12">
+
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane active" id="panel-9">
+						<div class="row">
+							<div class="col-md-12">
+
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane active" id="panel-10">
+						<div class="row">
+							<div class="col-md-12">
+
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane active" id="panel-11">
+						<div class="row">
+							<div class="col-md-12">
+
+							</div>
+						</div>
+					</div>
 				</div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
+			</div>
 
-        <div id="page-wrapper">
-            <div class="row">
-
-                <div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="table-responsive table-bordered">
-                                <table class="table" id="data_list">
-
-                                </table>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-            <!-- /.row -->
-            <!-- /.row -->
-        </div>
-        <!-- /#page-wrapper -->
-
-    </div>
-
-<jsp:include page="../../scripts/pages/cnae/cnae_main.js.jsp" flush="true" />
-<jsp:include page="../../scripts/pages/cnae/cnae_actions.js.jsp" flush="true" />
-<jsp:include page="../../scripts/pages/cnae/cnae_init.js.jsp" flush="true" />
-
+		</div>
+	</div>
+</div>
