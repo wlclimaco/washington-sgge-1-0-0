@@ -2,128 +2,47 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
 
+
+<style>
+
+</style>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="col-md-12">
 				<jsp:include page="../produto/produto_inf.jsp" flush="true" />
 			</div>
-			<div class="tabbable" id="tabs-310655">
-				<ul class="nav nav-tabs">
-					<li>
-						<a href="#panel-1" data-toggle="tab">Cadastro</a>
-					</li>
-					<li class="active">
-						<a href="#panel-2" data-toggle="tab">Calculo Preço</a>
-					</li>
-					<li class="">
-						<a href="#panel-3" data-toggle="tab">Grade</a>
-					</li>
-					<li class="">
-						<a href="#panel-4" data-toggle="tab">Seriais</a>
-					</li>
-					<li class="">
-						<a href="#panel-5" data-toggle="tab">Composição</a>
-					</li>
-					<li class="">
-						<a href="#panel-6" data-toggle="tab">Inf Nutricionais</a>
-					</li>
-					<li class="">
-						<a href="#panel-7" data-toggle="tab">Foto</a>
-					</li>
-					<li class="">
-						<a href="#panel-8" data-toggle="tab">Rentabilidade</a>
-					</li>
-					<li class="">
-						<a href="#panel-9" data-toggle="tab">Tabela Preço</a>
-					</li>
-					<li class="">
-						<a href="#panel-10" data-toggle="tab">Inf Estoque</a>
-					</li>
-					<li class="">
-						<a href="#panel-11" data-toggle="tab">CFOPs</a>
-					</li>
+			 <div class="col-xs-3"> <!-- required for floating -->
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs tabs-left">
+            <li class="active"><a href="#home" data-toggle="tab">Cadastro</a></li>
+            <li><a href="#profile" data-toggle="tab">Calculo de preco</a></li>
+            <li><a href="#messages" data-toggle="tab">Messages</a></li>
+            <li><a href="#settings" data-toggle="tab">Settings</a></li>
+          </ul>
+        </div>
 
-				</ul>
-				<div class="tab-content">
-					<div class="tab-pane" id="panel-1">
-						<div class="col-md-12">
-							<jsp:include page="../produto/produto_cadastro.jsp" flush="true" />
-						</div>
-					</div>
-					<div class="tab-pane active" id="panel-2">
-						<div class="row">
-							<div class="col-md-12">
+        <div class="col-xs-9">
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div class="tab-pane active"  style="background:#F3EEEE;" id="home"><jsp:include page="../produto/produto_cadastro.jsp" flush="true" /></div>
+            <div class="tab-pane" id="profile"><jsp:include page="../produto/produto_preco.jsp" flush="true" /></div>
+            <div class="tab-pane" id="messages">Messages Tab.</div>
+            <div class="tab-pane" id="settings">Settings Tab.</div>
+          </div>
+        </div>
 
-							</div>
-						</div>
-					</div>
-					<div class="tab-pane active" id="panel-3">
-						<div class="row">
-							<div class="col-md-12">
+        <div class="clearfix"></div>
 
-							</div>
-						</div>
-					</div>
-					<div class="tab-pane active" id="panel-4">
-						<div class="row">
-							<div class="col-md-12">
-
-							</div>
-						</div>
-					</div>
-					<div class="tab-pane active" id="panel-5">
-						<div class="row">
-							<div class="col-md-12">
-
-							</div>
-						</div>
-					</div>
-					<div class="tab-pane active" id="panel-6">
-						<div class="row">
-							<div class="col-md-12">
-
-							</div>
-						</div>
-					</div>
-					<div class="tab-pane active" id="panel-7">
-						<div class="row">
-							<div class="col-md-12">
-
-							</div>
-						</div>
-					</div>
-					<div class="tab-pane active" id="panel-8">
-						<div class="row">
-							<div class="col-md-12">
-
-							</div>
-						</div>
-					</div>
-					<div class="tab-pane active" id="panel-9">
-						<div class="row">
-							<div class="col-md-12">
-
-							</div>
-						</div>
-					</div>
-					<div class="tab-pane active" id="panel-10">
-						<div class="row">
-							<div class="col-md-12">
-
-							</div>
-						</div>
-					</div>
-					<div class="tab-pane active" id="panel-11">
-						<div class="row">
-							<div class="col-md-12">
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	console.log('ff')
+	$.pgsi.progressBar.stopGlobal()
+});
+</script>
