@@ -2,6 +2,10 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
 
+
+<style>
+
+</style>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -9,7 +13,7 @@
 				<jsp:include page="../produto/produto_inf.jsp" flush="true" />
 			</div>
 			<div class="tabbable" id="tabs-310655">
-				<ul class="nav nav-tabs">
+				 <ul class="nav nav-tabs tabs-left">
 					<li>
 						<a href="#panel-1" data-toggle="tab">Cadastro</a>
 					</li>
