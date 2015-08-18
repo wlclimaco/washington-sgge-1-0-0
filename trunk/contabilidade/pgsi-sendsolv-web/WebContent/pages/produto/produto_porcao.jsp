@@ -10,27 +10,32 @@
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h3 class="panel-title">
-								Panel title
+								Porção
 							</h3>
 						</div>
 						<div class="panel-body">
-							Panel content
-						</div>
-						<div class="panel-footer">
-							Panel footer
+							<input type="email" class="form-control" id="exampleInputEmail1" />
 						</div>
 					</div>
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title">
-								Panel title
-							</h3>
 						</div>
-						<div class="panel-body">
-							Panel content
-						</div>
-						<div class="panel-footer">
-							Panel footer
+						<div class="panel-body" style="margin-left: 30px;">
+							<div class="row">
+								<label for="exampleInputEmail1">
+									65533 - Menor que 5g
+								</label>
+							</div>
+							<div class="row">
+								<label for="exampleInputEmail1">
+									65534 - Maior que 5g
+								</label>
+							</div>
+							<div class="row">
+								<label for="exampleInputEmail1">
+									65535 - Quantidade Não Signativa
+								</label>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -39,88 +44,128 @@
 						<thead>
 							<tr>
 								<th>
-									#
+									Informação
 								</th>
 								<th>
-									Product
+									Porção
 								</th>
 								<th>
-									Payment Taken
-								</th>
-								<th>
-									Status
+									%VD
 								</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>
-									1
+									Valor Calorico
 								</td>
 								<td>
-									TB - Monthly
+										<input type="email" class="form-control" id="exampleInputEmail1" />
+										<label for="exampleInputEmail1">
+											Kcal
+										</label>
 								</td>
 								<td>
-									01/04/2012
-								</td>
-								<td>
-									Default
-								</td>
-							</tr>
-							<tr class="active">
-								<td>
-									1
-								</td>
-								<td>
-									TB - Monthly
-								</td>
-								<td>
-									01/04/2012
-								</td>
-								<td>
-									Approved
+									<input type="email" class="form-control" id="exampleInputEmail1" />
 								</td>
 							</tr>
-							<tr class="success">
+							<tr class="">
 								<td>
-									2
+									Carboidratos
 								</td>
 								<td>
-									TB - Monthly
+									<input type="email" class="form-control" id="exampleInputEmail1" />
 								</td>
 								<td>
-									02/04/2012
-								</td>
-								<td>
-									Declined
+									<input type="email" class="form-control" id="exampleInputEmail1" />
 								</td>
 							</tr>
-							<tr class="warning">
+							<tr class="">
 								<td>
-									3
+									Proteinas
 								</td>
 								<td>
-									TB - Monthly
+									<input type="email" class="form-control" id="exampleInputEmail1" />
 								</td>
 								<td>
-									03/04/2012
-								</td>
-								<td>
-									Pending
+									<input type="email" class="form-control" id="exampleInputEmail1" />
 								</td>
 							</tr>
-							<tr class="danger">
+							<tr class="">
 								<td>
-									4
+									Gorduras Totais
 								</td>
 								<td>
-									TB - Monthly
+									<input type="email" class="form-control" id="exampleInputEmail1" />
 								</td>
 								<td>
-									04/04/2012
+									<input type="email" class="form-control" id="exampleInputEmail1" />
+								</td>
+							</tr>
+							<tr class="">
+								<td>
+									Gorduras Saturadas
 								</td>
 								<td>
-									Call in to confirm
+									<input type="email" class="form-control" id="exampleInputEmail1" />
+								</td>
+								<td>
+									<input type="email" class="form-control" id="exampleInputEmail1" />
+								</td>
+							</tr>
+							<tr class="">
+								<td>
+									Colasterol
+								</td>
+								<td>
+									<input type="email" class="form-control" id="exampleInputEmail1" />
+								</td>
+								<td>
+									<input type="email" class="form-control" id="exampleInputEmail1" />
+								</td>
+							</tr>
+							<tr class="">
+								<td>
+									Fibra Alimentar
+								</td>
+								<td>
+									<input type="email" class="form-control" id="exampleInputEmail1" />
+								</td>
+								<td>
+									<input type="email" class="form-control" id="exampleInputEmail1" />
+								</td>
+							</tr>
+							<tr class="">
+								<td>
+									Calcio
+								</td>
+								<td>
+									<input type="email" class="form-control" id="exampleInputEmail1" />
+								</td>
+								<td>
+									<input type="email" class="form-control" id="exampleInputEmail1" />
+								</td>
+							</tr>
+							<tr class="">
+								<td>
+									Ferro
+								</td>
+								<td>
+									<input type="email" class="form-control" id="exampleInputEmail1" />
+								</td>
+								<td>
+									<input type="email" class="form-control" id="exampleInputEmail1" />
+								</td>
+							</tr>
+							<tr class="">
+								<td>
+									Sodio
+								</td>
+								<td>
+									<input type="email" class="form-control" id="exampleInputEmail1" />
+								</td>
+								<td>
+									<input type="email" class="form-control" id="exampleInputEmail1" />
 								</td>
 							</tr>
 						</tbody>
