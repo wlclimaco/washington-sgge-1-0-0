@@ -18,29 +18,32 @@
 							</div>
 						</div>
 				</div>
+				<div class="col-md-3">
+						<div class="form-group">
+
+							<label for="inputEmail3" class="col-sm-2 control-label">
+								Pessoa
+							</label>
+							<div class="col-sm-10">
+								<select id="mySel" name="regime" class="regime" style="width: 80%;">
+									<option value="1"> Fisica</option>
+									<option value="2"> Juridica</option>
+								</select>
+							</div>
+						</div>
+				</div>
 				<div class="col-md-4">
 						<div class="form-group">
 
 							<label for="inputEmail3" class="col-sm-2 control-label">
-								Cod Barra
+								Nome
 							</label>
 							<div class="col-sm-10">
 								<input type="" class="form-control" id="cdbarra" />
 							</div>
 						</div>
 				</div>
-				<div class="col-md-3">
-						<div class="form-group">
 
-							<label for="inputEmail3" class="col-sm-2 control-label">
-								Classificação
-							</label>
-							<div class="col-sm-10">
-								<select id="mySel" name="regime" class="regime" style="width: 80%;">
-								</select>
-							</div>
-						</div>
-				</div>
 				<div class="col-md-2">
 						<div class="form-group">
 

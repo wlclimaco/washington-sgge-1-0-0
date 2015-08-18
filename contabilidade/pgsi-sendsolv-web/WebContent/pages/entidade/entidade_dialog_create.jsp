@@ -53,7 +53,7 @@
 		<div id="collapseTwo" class="panel-collapse collapse">
 			<div class="panel-body">
 				<!-- email: -->
-	<jsp:include page="../email/email_main.jsp" flush="true" />
+				<jsp:include page="../email/email_main.jsp" flush="true" />
 			</div>
 		</div>
 	</div>
@@ -67,7 +67,7 @@
 		<div id="collapseFour" class="panel-collapse collapse">
 			<div class="panel-body">
 				<!-- Telefone: -->
-	<jsp:include page="../phone/phone_main.jsp" flush="true" />
+				<jsp:include page="../phone/phone_main.jsp" flush="true" />
 			</div>
 		</div>
 	</div>

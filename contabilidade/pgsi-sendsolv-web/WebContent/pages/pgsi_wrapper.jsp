@@ -85,7 +85,7 @@
         </li>
 		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Fiscal</span> <b class="caret"></b></a>
 		<ul class="dropdown-menu">
-            <li><a href="produto/cfop" class="alist" data-title='Cidade'>CFOP</a></li>
+            <li><a href="produto/fetch/cfop" class="alist" data-title='Cidade'>CFOP</a></li>
 			<li><a href="empresa/cnae" class="alist" data-title='Cidade'>CNAE</a></li>
 			<li><a href="empresa/regime" class="alist" data-title='Cidade'>Regime</a></li>
 			<li><a href="produto/classificacao" class="alist" data-title='Cidade'>Classificacao</a></li>

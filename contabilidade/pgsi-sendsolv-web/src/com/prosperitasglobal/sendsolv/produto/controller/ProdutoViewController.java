@@ -339,7 +339,7 @@ public class ProdutoViewController extends ProdutoBaseController
 	@RequestMapping(value = FETCH_LIST_CFOP, method = RequestMethod.GET)
 	public ModelAndView loadListCfop(HttpServletRequest request)
 	{
-		ModelAndView modelAndView = new ModelAndView("cfop/cfop_main");
+		ModelAndView modelAndView = new ModelAndView("pessoa/pessoa_main");
 
 		// Check whether has initial load or not
 		if (!isInitialLoad(request, modelAndView))
