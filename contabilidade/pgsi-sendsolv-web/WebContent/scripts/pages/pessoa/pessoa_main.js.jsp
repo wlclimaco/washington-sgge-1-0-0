@@ -9,7 +9,6 @@
  * @fileoverview The main namespace for the Location List Page.
  */
 pgsi.pages.pessoa = {
-
 	/**
 	* Set of functions used by the datatables plugin to customize field values
 	*/
@@ -22,14 +21,15 @@ pgsi.pages.pessoa = {
 		{
 			return val;
 		}
-
 		if (!$.pgsi.isNullOrUndefined(full.documentos)) {
 			for(var i=0;i<full.documentos.length;i++){
-				if((full.documentos[i].description == "CNPJ")||(full.documentos[i].description == "CPF")){
+				if((full.documentos[i].documentoType == "CNPJ")||(full.documentos[i].documentoType == "CPF")){
 					sCnpj = full.documentos[i].numero;
 				}
 			}
-			returno = '<a title="View/Edit ' + sCnpj + '" href="#/pessoa/view?tab=info&pessoaId=' + full.id + '" class="edit_link">' + sCnpj + '</a>';
+			return '<a title="View/Edit ' + sCnpj + '" href="#/cliente/view?tab=info&clienteId=' + full.id + '" class="edit_link">' + sCnpj + '</a>';
+		}else{
+			return '';
 		}
 		return returno;
 	},
@@ -41,7 +41,7 @@ pgsi.pages.pessoa = {
 			return val;
 		}
 
-		return '<a title="View/Edit ' + full.nome + '" href="#/pessoa/view?tab=info&pessoaId=' + full.id + '" class="edit_link">' + full.nome + '</a>';
+		return '<a title="View/Edit ' + full.nome + '" href="#/cliente/view?tab=info&clienteId=' + full.id + '" class="edit_link">' + full.nome + '</a>';
 
 	},
 	fnProfissao: function (val, type, full)

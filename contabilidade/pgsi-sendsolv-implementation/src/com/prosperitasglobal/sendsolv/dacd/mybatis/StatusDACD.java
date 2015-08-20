@@ -45,7 +45,7 @@ public final class StatusDACD extends SqlSessionDaoSupport
 	{
 		Integer count = 0;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(statusList))
+		if ((ValidationUtil.isNullOrEmpty(statusList)) || (ValidationUtil.isNull(statusList.get(0))))
 		{
 			return count;
 		}
@@ -72,34 +72,44 @@ public final class StatusDACD extends SqlSessionDaoSupport
 							"insertStatus", response);
 					if (count > 0)
 					{
-						historicoItens = new HistoricoItens();
-						historicoItens.setIdHist(historicoId);
-						historicoItens.setProcessId(processId);
-						historicoItens.setTabelaEnum(tabelaEnum);
-						historicoItens.setParentId(parentId);
-						historicoItens.setAcaoType(AcaoEnum.INSERT);
-						historicoDAC.insertHistoricoItens(historicoItens, "insertHistorico", response);
+
+						if (!ValidationUtil.isNullOrZero(historicoId))
+						{
+							historicoItens = new HistoricoItens();
+							historicoItens.setIdHist(historicoId);
+							historicoItens.setProcessId(processId);
+							historicoItens.setTabelaEnum(tabelaEnum);
+							historicoItens.setParentId(parentId);
+							historicoItens.setAcaoType(AcaoEnum.INSERT);
+							historicoDAC.insertHistoricoItens(historicoItens, "insertHistorico", response);
+						}
 					}
 					break;
 				case UPDATE:
 					count = statusDAC.updateStatus(status, response);
 					if (count > 0)
 					{
+						if (!ValidationUtil.isNullOrZero(historicoId))
+						{
+							historicoItens = new HistoricoItens();
+							historicoItens.setIdHist(historicoId);
+							historicoItens.setProcessId(processId);
+							historicoItens.setTabelaEnum(tabelaEnum);
+							historicoItens.setAcaoType(AcaoEnum.UPDATE);
+							historicoDAC.insertHistoricoItens(historicoItens, "insertHistorico", response);
+						}
+					}
+					break;
+				case DELETE:
+					if (!ValidationUtil.isNullOrZero(historicoId))
+					{
 						historicoItens = new HistoricoItens();
 						historicoItens.setIdHist(historicoId);
 						historicoItens.setProcessId(processId);
 						historicoItens.setTabelaEnum(tabelaEnum);
-						historicoItens.setAcaoType(AcaoEnum.UPDATE);
+						historicoItens.setAcaoType(AcaoEnum.DELETE);
 						historicoDAC.insertHistoricoItens(historicoItens, "insertHistorico", response);
 					}
-					break;
-				case DELETE:
-					historicoItens = new HistoricoItens();
-					historicoItens.setIdHist(historicoId);
-					historicoItens.setProcessId(processId);
-					historicoItens.setTabelaEnum(tabelaEnum);
-					historicoItens.setAcaoType(AcaoEnum.DELETE);
-					historicoDAC.insertHistoricoItens(historicoItens, "insertHistorico", response);
 
 					break;
 			}

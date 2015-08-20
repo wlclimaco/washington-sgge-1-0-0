@@ -34,6 +34,7 @@ $(document).ready(function()
 		id 			: "#data_list",
 		sAjaxSource : "api/cliente/fetchall",
 		bPreLoad	: true,
+		sCheckbox   : "id",
 
 		ajax :
 		{
@@ -269,18 +270,18 @@ $(document).ready(function()
 		pgsi.util.page.fnReloadTable(pgsi.pages.pessoa.clienteTable);
 	});
 
-
-	$("#insertPessoa").on("click", function(e)
+	$("#add").text('Adicionar Cliente')
+	$("#add").on("click", function(e)
 	{
 		e.preventDefault();
-		$.pgsi.ajax.post({
-			sUrl 		: "api/cliente/add",
-			oRequest 	: {},
-			fnCallback  : function(oResponse) {
-				console.log(oResponse)
-				$.pgsi.progressBar.stop();
-			}
-		});
+		pgsi.util.actiondialog.launchActionDialog (
+				"insert",
+				pgsi.pages.pessoa.dialogSettings.insertCliente(
+					0,
+					1,
+					'INSERT'
+				)
+			);
 	});
 	$.pgsi.progressBar.stopGlobal();
 });

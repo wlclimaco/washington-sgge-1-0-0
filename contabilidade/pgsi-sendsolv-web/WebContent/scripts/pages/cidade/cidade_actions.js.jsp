@@ -10,8 +10,8 @@
 
 			return {
 				title : $.pgsi.locale.get("commons.dialog.insert.title"),
-				width : 800,
-				height: 600,
+				width : 600,
+				height: 450,
 
 				close : function () {},
 
@@ -22,16 +22,13 @@
 					// Confirm Button
 					oButtons[$.pgsi.locale.get("commons.dialog.insert")] = function () {
 
-						var sUrl = "";
-						if(sModelAction == "insert")
-						{
-							sUrl = "api/cidade/insert"
+
+						if(iId == 0 ){
+							pgsi.pages.cidade.fnRequestCidade('INSERT');
+						}else{
+							pgsi.pages.cidade.fnRequestCidade('UPDATE');
 						}
-						else
-						{
-							sUrl = "api/cidade/update"
-						}
-						pgsi.pages.cidade.form.ajaxCall(sUrl,sModelAction);
+						$(this).dialog('close');
 
 					};
 
@@ -46,9 +43,50 @@
 
 				action : function (actionDialog) {
 
-					actionDialog.load("cidade/editView?userId=" + pgsi.settings.userContext.userId+"&locationId=2", function() {
+					actionDialog.load("cliente/view/cidade?userId=" + pgsi.settings.userContext.userId+"&cidadeId="+iId, function() {
 
 						$('#selected', actionDialog).removeClass("hide").append(""+sName+"");
+
+						actionDialog.dialog('open');
+					});
+				}
+			}
+		},
+
+		delete : function (iId, sName,sModelAction) {
+
+			return {
+				title : "Deletar Cidade",
+				width : 400,
+				height: 400,
+
+				close : function () {},
+
+				buttons : (function () {
+
+					var oButtons = {};
+
+					// Confirm Button
+					oButtons["Deletar"] = function () {
+
+						pgsi.pages.cidade.fnDeleteCidade(iId);
+
+						$(this).dialog('close');
+
+					};
+
+					// Cancel Button
+					oButtons[$.pgsi.locale.get("commons.dialog.cancel")] = function() {
+
+						$(this).dialog('close');
+					};
+
+					return oButtons;
+				})(),
+
+				action : function (actionDialog) {
+
+					actionDialog.load("cidade/delete", function() {
 
 						actionDialog.dialog('open');
 					});

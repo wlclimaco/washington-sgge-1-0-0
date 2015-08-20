@@ -8,119 +8,87 @@
 
 pgsi.pages.pessoa.view = {
 
-	fillCnae : function(oCnaeList) {
+		fillDocumento : function(oDocumentoList,description) {
+			var iNumber=0;
 
-			var oCnae = null;
-			var sNoteList = "";
-			var sDelUpdLinks = "";
-
-			var sDate;
-			var sUser;
-			var sNoteText;
-
-			var $container = $("section.cnae").find("div.container");
-
-			$("section.cnae").find(".col-title").find('a').unbind("click");
-
-			for (var i=0; i < oCnaeList.length; i++) {
-				oCnae = oCnaeList[i];
-
-				sUser = oCnae.createUser;
-
-				if (!$.pgsi.isNullOrUndefined(oCnae.modifyDateUTC)) {
-					sDate = $.pgsi.date.format(new Date(oCnae.modifyDateUTC), "mm/dd/yy h:i A", true);
+			if (!$.pgsi.isNullOrUndefined(oDocumentoList)){
+				for (var y=0; y < oDocumentoList.length; y++) {
+					if(oDocumentoList[y].description == description){
+						iNumber = oDocumentoList[y].numero;
+					}
 				}
+			}
 
-				else {
-					sDate = $.pgsi.date.format(new Date(oCnae.createDateUTC), "mm/dd/yy h:i A", true);
+			return iNumber;
+		},
+
+
+		fnCallbackRefleshPageCliente : function() {
+
+			var fnCallBackFetch = function(oResponseFetch) {
+				if (oResponseFetch.operationSuccess == true) {
+					pgsi.pages.cliente.view.fnFillCliente(oResponseFetch);
+
+					$("#action-dialog").dialog('close');
 				}
-
-				sNoteText = oCnae.description;
-				iNoteId = oCnae.id;
-				sCnaeNumber = oCnae.number;
-
-				<sec:authorize access="hasAnyRole('ROLE_DOMAIN ADMIN', 'ROLE_ADMIN')">
-				sDelUpdLinks = "<div class='small-box'><div class='links viewNote'><a href='"+iNoteId+"'  class='ui-subtitle edit' title='" + $.pgsi.locale.get('commons.pages.edit') + "'> <span class='icon-small-button icon-nav icon-pencil edit'></span> <span>" + $.pgsi.locale.get('commons.pages.edit') +"</span></a><a href='"+iNoteId+"'  class='ui-subtitle delete' title='" + $.pgsi.locale.get('commons.pages.delete') + "'> <span class='icon-small-button icon-nav icon-trash-bin delete'></span> <span>"+$.pgsi.locale.get('commons.pages.delete')+"</span></a></div></div>";
-				</sec:authorize>
-
-
-				sNoteList = sNoteList + "<div class='outer-box'><div class='box note'>" + sDelUpdLinks + "<span class='bold'>" + sUser + "</span><span class='date'>" + sDate +"</span><p class='full-text hide'>" +sCnaeNumber+ "<br>" + sNoteText + "</p><p></p><div class='text_here'><span class='ellipsis_text'>" +sCnaeNumber+ "<br>" + sNoteText + "</span></div></div></div>";
+				else{
+					pgsi.pages.sendsolv.fnDialogMessageError("",{},oResponseFetch,null,$.pgsi.locale.get("commons.dialog.error.title"),true);
+				}
+				$.pgsi.progressBar.stop();
 			}
 
-			// Removes content from the session
-			$container.empty();
 
-			if (sNoteList.length > 0) {
-				$container.append(sNoteList);
-				// Limiting content
-				// Configuring the initial settings to use
-				$container.find('.text_here').ThreeDots({max_rows:4});
-			}
-
-			else {
-				$("section.notes").find('div.container').append("<p class='empty'>" + $.pgsi.locale.get("page.business.view.note.empty") + "</p>");
-			}
-
-			// Attach add/edit/delete events
-			$("section.notes.view  a").click(function(event)
-			{
-
+			$.pgsi.ajax.post({
+				 sUrl       : "api/cliente/fetch",
+				 oRequest   : {id:parseInt($.address.parameter("locationId"),10)},
+				 fnCallback : fnCallBackFetch
 			});
+
 		},
 
 	fnFillCliente : function(oResponse) {
 
-		var oCliente = oResponse.pessoaList[0];
+		var oCliente = oResponse.clienteList[0];
 
 console.log(oCliente)
 
-	//	<span class="label">Nome/Fantasia</span>
-				$("#nome-field").text(oCliente.nome);
+		$("#nome-field").text(oCliente.nome);
 
-	//			<span class="label">CNPJ</span>
+		if(oCliente.tipoPessoa == 2){
+			$("#cnpj-field").text(pgsi.pages.pessoa.view.fillDocumento(oCliente.documentos,"CNPJ"));
 
-				for(var i=0;i<oCliente.documentos.length;i++){
-					if(oCliente.documentos[i].type == "CNPJ"){
-						$("#cnpj-field").text(oCliente.documentos[i].numero);
-					}else if(oCliente.documentos[i].type == "IM") {
-						$("#im-field").text(oCliente.documentos[i].numero);
-					}else if(oCliente.documentos[i].type == "IE") {
-						$("#IE-field").text(oCliente.documentos[i].numero);
-					}
-				}
+			$("#im-field").text(pgsi.pages.pessoa.view.fillDocumento(oCliente.documentos,"IM"));
 
-				$("#regime-field").text(oCliente.regime);
+			$("#IE-field").text(pgsi.pages.pessoa.view.fillDocumento(oCliente.documentos,"IE"));
+		}else{
+			$("#cnpj").text('CPF')
+			$("#cnpj-field").text(pgsi.pages.pessoa.view.fillDocumento(oCliente.documentos,"CPF"));
 
-				pgsi.pages.phone.view.fillFields(oCliente.telefones);
+			$("#im").text('Identidade')
+			$("#im-field").text(pgsi.pages.pessoa.view.fillDocumento(oCliente.documentos,"RG"));
 
-				pgsi.pages.address.view.fillFields(oCliente.enderecos);
-				var sEmail = "";
+			$("#ie").text("");
+		}
 
-				for (var i = 0; i < oCliente.emails.length; i++) {
-					sEmail = sEmail + oCliente.emails[i].description + " " +oCliente.emails[i].email +"<br>"
-				}
-				$('#phone-container').append(sEmail);
 
-				pgsi.pages.pessoa.view.fillCnae(oCliente.cnaes)
+		if(oCliente.tipoPessoa == 2){
+			$("#pessoa-tipo-field").text("Juridica");
+		}else{
+			$("#pessoa-tipo-field").text("Fisica");
+		}
+		pgsi.pages.phone.view.fillFields(oCliente.telefones);
 
-		// Sets the page title
-	//	$.pgsi.pageLoader.title(oLocation.name, true);
+		pgsi.pages.address.view.fillFields(oCliente.enderecos);
+		var sEmail = "";
 
-		// fill phone fields
-//		pgsi.pages.phone.view.fillFields(oLocation.contactList);
-		// fill address fields
-//		pgsi.pages.address.view.fillFields(oLocation.contactList);
-
-//		pgsi.version.versionBusiness = oLocation.version;
+		for (var i = 0; i < oCliente.emails.length; i++) {
+			sEmail = sEmail + oCliente.emails[i].description + " " +oCliente.emails[i].email +"<br>"
+		}
+		$('#phone-container').append(sEmail);
 
 		// fill notes
-//		pgsi.pages.note.view.fill(oLocation.noteList, oLocation);
+		pgsi.pages.note.view.fill(oCliente.notes, "");
 
-	},
-
-	displayLocationFields : function(){
-		$("#business-view").find('.location').removeClass("hide");
-		$("#business-view").find('.organization').addClass("hide");
 	}
 
 }

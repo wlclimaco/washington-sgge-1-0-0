@@ -244,10 +244,15 @@
  		<property name="statusDAC" ref="statusDACTarget" />
  		<property name="planoDAC" ref="planoDACTarget" />
  		<property name="noteDAC" ref="noteDACTarget" />
+ 		<property name="cidadeDAC" ref="cidadeDACTarget" />
  	</bean>
 
 
  	<bean id="enderecoDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.EnderecoDACImpl">
+ 		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
+ 	</bean>
+
+ 	<bean id="cidadeDACTarget" class="com.prosperitasglobal.sendsolv.dac.mybatis.CidadeDACImpl">
  		<property name="sqlSessionFactory" ref="pgsi-sqlSessionFactory" />
  	</bean>
 

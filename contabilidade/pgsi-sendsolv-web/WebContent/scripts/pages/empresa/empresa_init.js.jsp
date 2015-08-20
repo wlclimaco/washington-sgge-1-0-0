@@ -128,7 +128,7 @@ $(document).ready(function()
 			$('.dataTables_paginate:eq(0)').addClass('hide')
 			$('.dataTables_info:eq(0)').addClass('hide')
 			$('.dataTables_length:eq(0)').addClass('hide')
-			
+
 			$(".dataTables_length select").outerWidth(62).selectmenu({
 				appendTo: ".content.list",
   				change: function( event, ui ) {
@@ -159,6 +159,25 @@ $(document).ready(function()
 		//pgsi.pages.entidade.fnRequestFilter();
 		pgsi.util.page.fnReloadTable(pgsi.pages.empresa.empresaTable);
 	});
+	$("#atualizar").on("click", function(e)
+	{
+		e.preventDefault();
+		pgsi.util.page.fnReloadTable(pgsi.pages.empresa.empresaTable);
+	});
+
+	$("#add").on("click", function(e)
+	{
+		e.preventDefault();
+		pgsi.util.actiondialog.launchActionDialog (
+			"insert",
+			pgsi.pages.entidade.dialogSettings.insert(
+				0,
+				1,
+				'INSERT'
+			)
+		);
+	});
+
 
 });
 </script>

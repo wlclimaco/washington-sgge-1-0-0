@@ -614,10 +614,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
-								null, AcaoEnum.DELETE,
-								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.CLIENTE, getStatusDAC(),
-								getHistoricoDAC(), pessoa.getProcessId(), null);
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+						null, AcaoEnum.DELETE,
+						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.CLIENTE, getStatusDAC(),
+						getHistoricoDAC(), pessoa.getProcessId(), null);
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
 		{
@@ -825,10 +825,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
-								null, AcaoEnum.DELETE,
-								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.FORNECEDOR, getStatusDAC(),
-								getHistoricoDAC(), pessoa.getProcessId(), null);
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+						null, AcaoEnum.DELETE,
+						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.FORNECEDOR, getStatusDAC(),
+						getHistoricoDAC(), pessoa.getProcessId(), null);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -1023,10 +1023,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
-								null, AcaoEnum.DELETE,
-								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.TRANSPORTADOR, getStatusDAC(),
-								getHistoricoDAC(), pessoa.getProcessId(), null);
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+						null, AcaoEnum.DELETE,
+						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.TRANSPORTADOR, getStatusDAC(),
+						getHistoricoDAC(), pessoa.getProcessId(), null);
 		return response;
 	}
 
@@ -1217,10 +1217,10 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
-								null, AcaoEnum.DELETE,
-								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.TRANSPORTADOR, getStatusDAC(),
-								getHistoricoDAC(), pessoa.getProcessId(), null);
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+						null, AcaoEnum.DELETE,
+						pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.TRANSPORTADOR, getStatusDAC(),
+						getHistoricoDAC(), pessoa.getProcessId(), null);
 		return response;
 	}
 
@@ -1260,7 +1260,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		insertCount +=
 				EnderecoDACD.maintainEnderecoAssociations(pessoa.getEnderecos(), response, pessoa.getId(), null, null,
 						TabelaEnum.PESSOA, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser(), processId, historicoId);
+						pessoa.getCreateUser(), processId, historicoId, null);
 
 		insertCount +=
 				EmailDACD.maintainEmailAssociations(pessoa.getEmails(), response, pessoa.getId(), null, null,
@@ -1515,12 +1515,12 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response,
-								funcionario.getId(),
-								null, AcaoEnum.DELETE,
-								funcionario.getCreateUser(), funcionario.getEmprId(), TabelaEnum.TRANSPORTADOR,
-								getStatusDAC(),
-								getHistoricoDAC(), funcionario.getProcessId(), null);
+				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response,
+						funcionario.getId(),
+						null, AcaoEnum.DELETE,
+						funcionario.getCreateUser(), funcionario.getEmprId(), TabelaEnum.TRANSPORTADOR,
+						getStatusDAC(),
+						getHistoricoDAC(), funcionario.getProcessId(), null);
 		return response;
 	}
 

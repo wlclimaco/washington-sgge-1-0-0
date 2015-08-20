@@ -4,20 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags'%>
 
-<nav class="secondary">
-		<a class="alist" href="organization">
-			<span><s:message code="commons.pages.customers" text="Customers" /></span>
-		</a>
-		<span class="icon-nav icon-angle-right"></span>
-		<a class="alist" href="view?organizationId=" id="parent-organization-link">
-
-		</a>
-		<span class="icon-nav icon-angle-right"></span>
-		<span id="company-name"></span>
-</nav>
-
-<h2 id="company-name-field"></h2>
-
 <div id="tabs">
 	<ul>
 		<li>
@@ -33,18 +19,13 @@
 		</li>
 		<li>
 			<a href="#" id="pricingTab" data-tab="pricing" title='Contatos' data-title='Contatos'>
-				historico Compras
+				Historico Compras
 			</a>
 		</li>
 		<li>
 			<a href="#" id="pricingTab" data-tab="pricing" title='Contatos' data-title='Contatos'>
-				Convenios
+				Titulos Pagar
 			</a>
-		</li>
-
-		<li class="add_loc_link" title="<s:message code="commons.pages.addanotherlocation" text="default text" />">
-			<span class="icon-nav icon-plus icon-small-button"></span>
-			<s:message code="commons.pages.addanotherlocation" text="default text" />
 		</li>
 	</ul>
 </div>

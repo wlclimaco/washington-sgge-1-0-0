@@ -70,6 +70,7 @@
 
 
 <jsp:include page="../../scripts/pages/entidade/entidade_main.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/entidade/entidade_actions.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/deposito/deposito_main.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/deposito/deposito_init.js.jsp" flush="true" />
 

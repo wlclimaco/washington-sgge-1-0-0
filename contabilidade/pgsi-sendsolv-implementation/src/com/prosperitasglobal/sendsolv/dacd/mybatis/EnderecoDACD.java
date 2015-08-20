@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import com.prosperitasglobal.sendsolv.dac.ICidadeDAC;
 import com.prosperitasglobal.sendsolv.dac.IEnderecoDAC;
 import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
 import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
@@ -37,7 +38,7 @@ public final class EnderecoDACD extends SqlSessionDaoSupport
 	public static Integer maintainEnderecoAssociations(List<Endereco> enderecoList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IEnderecoDAC enderecoDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
-			Integer empId, String UserId, Integer processId, Integer historicoId)
+			Integer empId, String UserId, Integer processId, Integer historicoId, ICidadeDAC cidadeDAC)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -98,6 +99,11 @@ public final class EnderecoDACD extends SqlSessionDaoSupport
 							StatusDACD.maintainStatusAssociations(statusList, response, endereco.getId(), null,
 									AcaoEnum.DELETE, UserId, empId, TabelaEnum.ENDERECO, statusDAC, historicoDAC,
 									processId, historicoId);
+
+					break;
+				case NONE:
+					CidadeDACD.maintainCidadeAssociations(endereco.getCidade(), response, parentId, type, acaoType,
+							tabelaEnum, cidadeDAC, statusDAC, historicoDAC, empId, UserId, processId, historicoId);
 
 					break;
 				default:

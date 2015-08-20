@@ -27,12 +27,16 @@ import com.prosperitasglobal.cbof.model.response.LanguageResponse;
 import com.prosperitasglobal.cbof.model.response.RangeResponse;
 import com.prosperitasglobal.cbof.model.response.StateProvinceRegionResponse;
 import com.prosperitasglobal.sendsolv.bai.IEmpresaBAI;
+import com.prosperitasglobal.sendsolv.bai.IPessoaBAI;
 import com.prosperitasglobal.sendsolv.model.Cnae;
+import com.prosperitasglobal.sendsolv.model.Estado;
 import com.prosperitasglobal.sendsolv.model.Regime;
 import com.prosperitasglobal.sendsolv.model.request.CnaeInquiryRequest;
+import com.prosperitasglobal.sendsolv.model.request.EstadoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.RegimeInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.response.CnaeResponse;
+import com.prosperitasglobal.sendsolv.model.response.EstadoResponse;
 import com.prosperitasglobal.sendsolv.model.response.RegimeResponse;
 import com.qat.framework.model.UserContext;
 import com.qat.framework.validation.ValidationUtil;
@@ -69,6 +73,29 @@ public final class ListD
 
 		return list;
 			}
+
+	public static List<Map<String, String>> fetchAllEstado(IPessoaBAI pessoaBAI,
+			UserContext userContext)
+	{
+		EstadoInquiryRequest cnaeRequest = new EstadoInquiryRequest();
+		cnaeRequest.setUserContext(userContext);
+		cnaeRequest.setPageSize(0);
+		EstadoResponse cnaeResponse = pessoaBAI.fetchEstadoByRequest(cnaeRequest);
+
+		Map<String, String> mapObject;
+		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+
+		for (Estado cnae : cnaeResponse.getEstadoList())
+		{
+			mapObject = new TreeMap<String, String>();
+			mapObject.put("key", cnae.getId().toString());
+			mapObject.put("value", cnae.getNome());
+			list.add(mapObject);
+
+		}
+
+		return list;
+	}
 
 	public static List<Map<String, String>> fetchAllRegime(IEmpresaBAI empresaBAI,
 			UserContext userContext)

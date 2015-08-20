@@ -448,6 +448,24 @@ var Regime = function(oParam) {
 };
 Regime.prototype = new ModelCosmeDamiao();
 
+
+var Cidade = function(oParam) {
+
+	ModelCosmeDamiao.call(this, oParam);
+
+	if (oParam) {
+		this.id 			= oParam.id;
+		this.codigo 		= oParam.codigo;
+		this.nome 			= oParam.nome;
+		this.cdIBGE 		= oParam.cdIBGE;
+		this.estado 		= oParam.estado;
+		this.cep 			= oParam.cep;
+		this.municipio 		= oParam.municipio;
+		this.modelAction 	= oParam.modelAction;
+	}
+};
+Cidade.prototype = new ModelCosmeDamiao();
+
 var Endereco = function(oParam) {
 
 	ModelCosmeDamiao.call(this, oParam);

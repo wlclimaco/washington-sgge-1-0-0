@@ -17,6 +17,7 @@
 	<result property="nomeMae" column="nomeMae"/>
 	<result property="nomeConjugue" column="nomeConjugue"/>
 	<result property="estadoCivil" column="estadoCivil"/>
+	<result property="tipoPessoa" column="tipoPessoa"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -47,6 +48,7 @@
 		,b.nomeMae
 		,b.nomeConjugue
 		,b.estadoCivil
+		,b.tipoPessoa
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -63,6 +65,7 @@
   		#{nomeMae},
   		#{nomeConjugue},
   		#{estadoCivil},
+  		#{tipoPessoa},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 

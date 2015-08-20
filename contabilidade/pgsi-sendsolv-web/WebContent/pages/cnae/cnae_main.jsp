@@ -52,11 +52,7 @@
 			</div>
 		<div class="panel-footer">
 				<div style="float: right;">
-					<div class="row">
-						<button type="button" class="btn btn-primary">Gravar</button>
-						<button type="button" class="btn btn-primary">Cancelar</button>
-						<button type="button" class="btn btn-primary">Deletar</button>
-					</div>
+					<div class="row"><button type="button" class="btn btn-primary">Gravar</button><button type="button" class="btn btn-primary">Cancelar</button><button type="button" class="btn btn-primary">Deletar</button></div>
 				</div>
 			</div>
 		</div>
