@@ -52,8 +52,8 @@
   		#{codigo},
   		#{cdIBGE},
     	#{estado.id},
-    	#{municipio}
-    	#{cep}
+    	#{municipio},
+    	#{cep},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -78,6 +78,7 @@
     		<if test="codigo!= null">codigo = #{codigo},</if>
 	    	<if test="cdIBGE!= null"> IBGE=#{cdIBGE},</if>
 	    	<if test="estado.id!= null"> estado=#{estado.id},</if>
+	    	<if test="cep!= null"> cep=#{cep},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
@@ -121,6 +122,9 @@
     						<include refid="allCidadeColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM cidade b
+    				<if test="criteria.id != null">
+							where b.id = #{criteria.id}
+					</if>
 
     			) LIST
 				<choose>

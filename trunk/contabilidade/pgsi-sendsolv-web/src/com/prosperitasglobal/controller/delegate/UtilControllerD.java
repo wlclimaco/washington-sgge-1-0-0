@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.prosperitasglobal.sendsolv.bai.IEmpresaBAI;
+import com.prosperitasglobal.sendsolv.bai.IPessoaBAI;
 import com.prosperitasglobal.sendsolv.common.controller.BaseController;
 
 public class UtilControllerD extends BaseController
@@ -45,6 +46,8 @@ public class UtilControllerD extends BaseController
 
 	private IEmpresaBAI empresaBAI;
 
+	private IPessoaBAI pessoaBAI;
+
 	/**
 	 * @return the empresaBAI
 	 */
@@ -63,6 +66,23 @@ public class UtilControllerD extends BaseController
 	}
 
 	/**
+	 * @return the pessoaBAI
+	 */
+	public IPessoaBAI getPessoaBAI()
+	{
+		return pessoaBAI;
+	}
+
+	/**
+	 * @param pessoaBAI the pessoaBAI to set
+	 */
+	@Resource
+	public void setPessoaBAI(IPessoaBAI pessoaBAI)
+	{
+		this.pessoaBAI = pessoaBAI;
+	}
+
+	/**
 	 * County mav.
 	 *
 	 * @param modelAndView the model and view
@@ -74,16 +94,42 @@ public class UtilControllerD extends BaseController
 		try
 		{
 			modelAndView
-			.addObject(
-					"cnae",
-					getMapper().writeValueAsString(
-							ListD.fetchAllCnaes(getEmpresaBAI(), fetchUserContext(request))));
+					.addObject(
+							"cnae",
+							getMapper().writeValueAsString(
+									ListD.fetchAllCnaes(getEmpresaBAI(), fetchUserContext(request))));
 
 			modelAndView
-			.addObject(
-					"regime",
-					getMapper().writeValueAsString(
-							ListD.fetchAllRegime(getEmpresaBAI(), fetchUserContext(request))));
+					.addObject(
+							"regime",
+							getMapper().writeValueAsString(
+									ListD.fetchAllRegime(getEmpresaBAI(), fetchUserContext(request))));
+
+			return modelAndView;
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return new ModelAndView();
+	}
+
+	protected ModelAndView listSelectCidade(ModelAndView modelAndView, HttpServletRequest request)
+	{
+
+		try
+		{
+			modelAndView
+					.addObject(
+							"estado",
+							getMapper().writeValueAsString(
+									ListD.fetchAllEstado(getPessoaBAI(), fetchUserContext(request))));
 
 			return modelAndView;
 

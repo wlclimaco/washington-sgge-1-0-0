@@ -21,6 +21,11 @@ var pgsi = {
 			view : {}
 		},
 
+		pessoa : {
+			form : {},
+			view : {}
+		},
+
 		plano : {
 			form : {},
 			view : {}

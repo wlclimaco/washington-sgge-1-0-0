@@ -263,7 +263,7 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 				EnderecoDACD.maintainEnderecoAssociations(funcionario.getEnderecos(), response, insertCount, null,
 						null,
 						null, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), funcionario.getEmprId(),
-						funcionario.getCreateUser(), processId, null);
+						funcionario.getCreateUser(), processId, null, null);
 
 		insertCount +=
 				EmailDACD.maintainEmailAssociations(funcionario.getEmails(), response, insertCount, null, null,
@@ -362,7 +362,7 @@ public class FuncionarioDACImpl extends SqlSessionDaoSupport implements IFuncion
 				EnderecoDACD.maintainEnderecoAssociations(funcionario.getEnderecos(), response, updateCount, null,
 						null,
 						null, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), funcionario.getEmprId(),
-						funcionario.getCreateUser(), processId, null);
+						funcionario.getCreateUser(), processId, null, null);
 
 		updateCount +=
 				EmailDACD.maintainEmailAssociations(funcionario.getEmails(), response, updateCount, null, null,

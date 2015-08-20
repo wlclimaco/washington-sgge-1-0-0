@@ -48,23 +48,22 @@ public class ClienteViewController extends ClienteBaseController
 	/** The Constant FETCH_VIEW. */
 	private static final String FETCH_VIEW_TABS = "/view";
 
+	private static final String FETCH_VIEW_CIDADE = "/view/cidade";
+
 	/** The Constant FETCH_VIEW_INFO. */
 	private static final String FETCH_VIEW = "/view/info";
 
 	/** The Constant EDIT_VIEW. */
 	private static final String EDIT_VIEW = "/editView";
 
-	/** The Constant FETCH_ORGANIZATION_BYCLIENTE. */
-	private static final String FETCH_ORGANIZATION_BYCLIENTE = "fetchOrganizationBycliente";
-
 	/** The view mapping constants . */
 	private static final String VIEW_CLIENTE_MAIN = "/cliente/cliente_main";
 
 	/** The Constant VIEW_CLIENTE_ADD. */
-	private static final String VIEW_CLIENTE_ADD = "/cliente/cliente_create";
+	private static final String VIEW_CLIENTE_ADD = "/pessoa/pessoa_main";
 
 	/** The Constant VIEW_CLIENTE_VIEW. */
-	private static final String VIEW_CLIENTE_VIEW = "/cliente/cliente_view";
+	private static final String VIEW_CLIENTE_VIEW = "/pessoa/pessoa_view";
 
 	private static final String VIEW_CLIENTE_TABS = "/cliente/cliente_tabs";
 
@@ -380,6 +379,14 @@ public class ClienteViewController extends ClienteBaseController
 	 * @param clienteId the cliente id
 	 * @return the model and view
 	 */
+	@RequestMapping(value = FETCH_VIEW_CIDADE, method = RequestMethod.GET)
+	public ModelAndView loadUpdateCidade(@RequestParam(value = "cidadeId", required = false) Integer cidadeId,
+			HttpServletRequest request)
+	{
+
+		return cidadeEditMAV(cidadeId, "/cidade/cidade_dialog_create", true, request);
+	}
+
 	@RequestMapping(value = {FETCH_ADD, FETCH_EDIT}, method = RequestMethod.GET)
 	public ModelAndView loadUpdate(@RequestParam(value = CLIENTE_ID, required = false) Integer clienteId,
 			HttpServletRequest request)

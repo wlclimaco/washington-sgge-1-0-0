@@ -72,6 +72,7 @@
 	<mvc:view-controller path="/cnae/create"     	 view-name="/cnae/cnae_dialog_create"/>
 	<mvc:view-controller path="/plano/create"     	 view-name="/plano/plano_dialog_create"/>
 	<mvc:view-controller path="/entidade/create"     view-name="/entidade/entidade_dialog_create"/>
+	<mvc:view-controller path="/cidade/delete"     	 view-name="/cidade/delete"/>
 
 	<!-- Resolves view names to protected .jsp resources within the /WEB-INF
 		directory -->

@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import com.prosperitasglobal.cbof.dac.INoteDAC;
 import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
+import com.prosperitasglobal.sendsolv.dac.ICidadeDAC;
 import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
 import com.prosperitasglobal.sendsolv.dac.IDocumentoDAC;
 import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
@@ -91,6 +92,8 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 
 	/** The endereco dac. */
 	IEnderecoDAC enderecoDAC;
+
+	ICidadeDAC cidadeDAC;
 
 	/** The telefone dac. */
 	ITelefoneDAC telefoneDAC;
@@ -199,6 +202,22 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 	public IEnderecoDAC getEnderecoDAC()
 	{
 		return enderecoDAC;
+	}
+
+	/**
+	 * @return the cidadeDAC
+	 */
+	public ICidadeDAC getCidadeDAC()
+	{
+		return cidadeDAC;
+	}
+
+	/**
+	 * @param cidadeDAC the cidadeDAC to set
+	 */
+	public void setCidadeDAC(ICidadeDAC cidadeDAC)
+	{
+		this.cidadeDAC = cidadeDAC;
 	}
 
 	/**
@@ -507,10 +526,10 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, empresa.getId(),
-						null, AcaoEnum.DELETE,
-						empresa.getCreateUser(), empresa.getId(), TabelaEnum.EMPRESA, getStatusDAC(),
-						getHistoricoDAC(), empresa.getProcessId(), null);
+						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, empresa.getId(),
+								null, AcaoEnum.DELETE,
+								empresa.getCreateUser(), empresa.getId(), TabelaEnum.EMPRESA, getStatusDAC(),
+								getHistoricoDAC(), empresa.getProcessId(), null);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -637,10 +656,10 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, filial.getId(),
-						null, AcaoEnum.DELETE,
-						filial.getCreateUser(), filial.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
-						getHistoricoDAC(), filial.getProcessId(), null);
+						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, filial.getId(),
+								null, AcaoEnum.DELETE,
+								filial.getCreateUser(), filial.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
+								getHistoricoDAC(), filial.getProcessId(), null);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -758,10 +777,10 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-				.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, deposito.getId(),
-						null, AcaoEnum.DELETE,
-						deposito.getCreateUser(), deposito.getEmprId(), TabelaEnum.DEPOSITO, getStatusDAC(),
-						getHistoricoDAC(), deposito.getProcessId(), null);
+						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, deposito.getId(),
+								null, AcaoEnum.DELETE,
+								deposito.getCreateUser(), deposito.getEmprId(), TabelaEnum.DEPOSITO, getStatusDAC(),
+								getHistoricoDAC(), deposito.getProcessId(), null);
 
 		// Finally, if something was updated then add the Person to the result.
 		if (updateCount > 0)
@@ -884,7 +903,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 				EnderecoDACD.maintainEnderecoAssociations(empresa.getEnderecos(), response, empresa.getId(), null,
 						null,
 						tabela, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-						empresa.getCreateUser(), processId, historicoId);
+						empresa.getCreateUser(), processId, historicoId, getCidadeDAC());
 
 		insertCount +=
 				CnaeDACD.maintainCnaeAssociations(empresa.getCnaes(), response, empresa.getId(), null, null,

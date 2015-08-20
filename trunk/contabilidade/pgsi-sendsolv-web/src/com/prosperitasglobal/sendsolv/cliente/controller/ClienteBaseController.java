@@ -29,6 +29,7 @@ import com.prosperitasglobal.sendsolv.model.PessoaTypeEnum;
 import com.prosperitasglobal.sendsolv.model.Profissao;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.Telefone;
+import com.prosperitasglobal.sendsolv.model.criteria.CidadeCriteria;
 import com.prosperitasglobal.sendsolv.model.request.AgenciaInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.BancoInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.CidadeInquiryRequest;
@@ -106,6 +107,46 @@ public class ClienteBaseController extends UtilControllerD
 
 				modelAndView.addObject(RESPONSE,
 						getMapper().writeValueAsString(fetchClienteById(new FetchByIdRequest(clienteId))));
+
+				return modelAndView;
+			}
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return modelAndView;
+	}
+
+	protected ModelAndView cidadeEditMAV(Integer clienteId, String returnViewName, Boolean isSelect,
+			HttpServletRequest request)
+	{
+		ModelAndView modelAndView = new ModelAndView(returnViewName);
+
+		try
+		{
+
+			if (isSelect)
+			{
+				modelAndView = listSelectCidade(modelAndView, request);
+			}
+			if (!ValidationUtil.isNullOrZero(clienteId))
+			{
+
+				CidadeInquiryRequest cidadeRequest = new CidadeInquiryRequest();
+				CidadeCriteria criteria = new CidadeCriteria();
+
+				criteria.setId(clienteId);
+				cidadeRequest.setCriteria(criteria);
+
+				modelAndView.addObject(RESPONSE,
+						getMapper().writeValueAsString(fetchCidadeRequest(cidadeRequest)));
 
 				return modelAndView;
 			}

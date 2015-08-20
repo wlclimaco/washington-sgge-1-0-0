@@ -34,6 +34,7 @@ $(document).ready(function()
 		id 			: "#data_list",
 		sAjaxSource : "api/empresa/fetchall/filial",
 		bPreLoad	: true,
+		sCheckbox   : "id",
 
 		ajax :
 		{
@@ -150,16 +151,24 @@ $(document).ready(function()
 		$.address.parameter("filial","");
 		pgsi.util.page.fnReloadTable(pgsi.pages.filial.filialTable);
 	});
-	$("#buttonInsert").on("click", function(e)
+	$("#atualizar").on("click", function(e)
 	{
 		e.preventDefault();
-		$.pgsi.ajax.post({
-			sUrl 		: "api/empresa/filial/add",
-			oRequest 	: {},
-			fnCallback  : function(oResponse) {
-				console.log('dd')
-			}
-		});
+		pgsi.util.page.fnReloadTable(pgsi.pages.filial.filialTable);
+	});
+
+	$("#add").text('Adicionar Filial')
+	$("#add").on("click", function(e)
+	{
+		e.preventDefault();
+		pgsi.util.actiondialog.launchActionDialog (
+			"insert",
+			pgsi.pages.entidade.dialogSettings.insert(
+				0,
+				2,
+				'INSERT'
+			)
+		);
 	});
 
 });

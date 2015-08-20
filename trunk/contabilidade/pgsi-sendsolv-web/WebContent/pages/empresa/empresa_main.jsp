@@ -64,6 +64,7 @@
 
 
 <jsp:include page="../../scripts/pages/entidade/entidade_main.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/entidade/entidade_actions.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/empresa/empresa_main.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/empresa/empresa_init.js.jsp" flush="true" />
 

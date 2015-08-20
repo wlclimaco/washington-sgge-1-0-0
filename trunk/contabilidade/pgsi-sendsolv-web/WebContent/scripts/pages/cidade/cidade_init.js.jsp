@@ -10,255 +10,81 @@
 
 $(document).ready(function()
 {
-	<c:choose>
-		<c:when test="${not empty refresh}">
-			var oFilterPreLoad = "refresh";
-		</c:when>
-		<c:when test="${empty filters}">
-			var	oFilterPreLoad = null;
-		</c:when>
-		<c:otherwise>
-			var	oFilterPreLoad = ${filters};
-		</c:otherwise>
-	</c:choose>
-console.log()
-	$.pgsi.listener.wait({
-		eventName 	: "locationList",
-		arguments 	: ["table"],
-		fnCallback 	: $.pgsi.progressBar.stopGlobal
-	});
+	pgsi.pages.cidade.fnInitCidade();
 
-	/** * jQuery dataTable setup ** */
-	pgsi.pages.cidade.locationTable = $('#data_list').dataTable($.pgsi.table.setTable(
-	{
-		id 			: "#data_list",
-		sAjaxSource : "api/cliente/fetch/cidade",
-		bPreLoad	: true,
+    $('.filterable .btn-filter').click(function(){
+        var $panel = $(this).parents('.filterable'),
+        $filters = $panel.find('.filters input'),
+        $tbody = $panel.find('.table tbody');
+        if ($filters.prop('disabled') == true) {
+            $filters.prop('disabled', false);
+            $filters.first().focus();
+        } else {
+            $filters.val('').prop('disabled', true);
+            $tbody.find('.no-result').remove();
+            $tbody.find('tr').show();
+        }
+    });
 
-		ajax :
-		{
-			sObj		: "cidadeList",
-			oRequest	: PagedInquiryRequest,
-			fnRequest 	: function(){}
-		},
+    $('.filterable .filters input').keyup(function(e){
+        /* Ignore tab key */
+        var code = e.keyCode || e.which;
+        if (code == '9') return;
+        /* Useful DOM data and selectors */
+        var $input = $(this),
+        inputContent = $input.val().toLowerCase(),
+        $panel = $input.parents('.filterable'),
+        column = $panel.find('.filters th').index($input.parents('th')),
+        $table = $panel.find('.table'),
+        $rows = $table.find('tbody tr');
+        /* Dirtiest filter function ever ;) */
+        var $filteredRows = $rows.filter(function(){
+            var value = $(this).find('td').eq(column).text().toLowerCase();
+            return value.indexOf(inputContent) === -1;
+        });
+        /* Clean previous no-result if exist */
+        $table.find('tbody .no-result').remove();
+        /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+        $rows.show();
+        $filteredRows.hide();
+        /* Prepend no-result row if all rows are filtered */
+        if ($filteredRows.length === $rows.length) {
+            $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">No result found</td></tr>'));
+        }
+    });
 
-		aoColumns :
-		[
-		{
-			headerData 		: "Cidade",
-			order			: "name",
-			mRender         : pgsi.pages.cidade.fnCreateNomeLink,
-			sDefaultContent : "",
-			bSortable 		: false,
-			sClass          : "name-col"
-		},
-		{
-			headerData 		: "Estado",
-			order			: "organization_column",
-			mRender 		: pgsi.pages.cidade.fnEstado,
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "UF",
-			order			: "city_column",
-			mRender 		: pgsi.pages.cidade.fnUf,
-			mData	 		: "null",
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Codigo",
-			order			: "state_column",
-			mData 		    : "codigo",
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		{
-			headerData 		: "Codigo IBGE",
-			order			: "country_column",
-			mData 		    : "cdIBGE",
-			sDefaultContent : "",
-			bSortable 		: false
-		},
-		],
+	$("#mytable #checkall").click(function () {
+        if ($("#mytable #checkall").is(':checked')) {
+            $("#mytable input[type=checkbox]").each(function () {
+                $(this).prop("checked", true);
+            });
 
-		<c:choose>
-			<c:when test="${not empty refresh}">
-				aaData : "refresh",
-			</c:when>
-			<c:when test="${empty response}">
-				aaData : null,
-		    </c:when>
-		    <c:otherwise>
-		    	aaData : ${response},
-		    </c:otherwise>
-		</c:choose>
+        } else {
+            $("#mytable input[type=checkbox]").each(function () {
+                $(this).prop("checked", false);
+            });
+        }
+    });
 
-		oSettings :
-		{
-			sortEnum      	: "",
-			iDefaultCol   	: 0
-		},
+    $("[data-toggle=tooltip]").tooltip();
 
-		rowCallback : function(nRow, aData, iDisplayIndex, oColumn) {
-
-			var oActionSummary = "";
-			var sButtonStatus = "";
-			var sButtonDelete = "";
-
-			<sec:authorize access="hasAnyRole('ROLE_DOMAIN ADMIN', 'ROLE_ADMIN')">
-
-				if (aData.statusValue === 1) {
-					sButtonStatus = '<a href="#" class="deactivate"><span class="icon-small-button deactivate icon-nav icon-minus-circle" title="Disable ' + aData.name + '"></a>';
-				}
-
-				else if ((aData.statusValue === 2)||(aData.statusValue === 3)|| (aData.statusValue === 4)){
-					sButtonStatus = '<a href="#" class="active"><span class="icon-small-button active icon-nav icon-check-mark" title="' + $.pgsi.locale.get("pages.view.activate") + ' ' + aData.name + '"></span></a>';
-				}
-
-				sButtonDelete = '<a href="#"  class="icon-nav icon-trash-bin deleteDialog icon-small-button" title="' + $.pgsi.locale.get("commons.pages.delete") + ' ' + aData.name + '"></a>';
-
-			</sec:authorize>
-
-			oActionSummary = $('<div><div><a href="location/view?tab=info&locationId=' + aData.id + '" title="View '+aData.name+'" id="update" class="icon-nav icon-pencil alist icon-small-button"></a>'
-				+ sButtonStatus
-				+ sButtonDelete
-				+pgsi.util.page.fnInsertButtonSDNSAR(aData,"location")+"</div></div>");
-
-			oActionSummary.find('a.deleteDialog, a.active, a.deactivate ,a.sarDialog').click(function (e) {
-				e.preventDefault();
-
-				if (pgsi.util.page.fnIsSDNFlagged(aData.sdnstatus)) {
-					return;
-				}
-
-				var fnCallBack = function(oResponse) {
-
-					if (oResponse.operationSuccess == true) {
-
-						// Validations for change pagination when delete one or more groups of last page.
-						var iStart;
-						var oSettings = pgsi.pages.location.locationTable.fnSettings();
-
-							// If exist just one group at last page and this group is deleted, the pagination back to previous page.
-							if (((oSettings._iRecordsDisplay - 1) % $('.dataTables_length').find('select').val() === 0)) {
-								iStart = (oSettings._iRecordsDisplay - 1) - oSettings._iDisplayLength;
-							}
-
-						$.pgsi.table.reloadTable({
-							table 		: pgsi.pages.location.locationTable,
-							iStart 		: iStart
-						});
-					}else{
-						pgsi.pages.sendsolv.fnDialogMessageError("",{},oResponse,null,$.pgsi.locale.get("commons.dialog.error.title"),true);
-					}
-				}
-
-
-				if($(this).hasClass('deleteDialog'))
-				{
-					// Launch Delete Dialog
-					var oRequest = new LocationMaintenanceRequest({location : {id : aData.id, name: aData.name }});
-
-					pgsi.util.actiondialog.launchActionDialog(
-						"deleteDialog",
-						 pgsi.pages.business.dialogSettings.deleteDialog(
-						 	"api/location/delete",
-						 	 oRequest,
-						 	 $.pgsi.locale.get("pages.location.dialog.title", oRequest.location.name),
-						 	 fnCallBack,
-						 	 $.pgsi.locale.get("commons.pages.erroView", $.pgsi.locale.get("commons.pages.location"))
-						 ));
-
-				}else if($(this).hasClass('active')){
-
-					pgsi.util.page.fnUpdateStatus('api/location/fetch',parseInt(aData.id,10),'location',1,fnCallBack,"Activate Location for "+ aData.name, "<span>"+$.pgsi.locale.get("pages.person.dialog.status.question",$.pgsi.locale.get("pages.view.activate"),"Location")+"<br>" +$.pgsi.locale.get("pages.person.dialog.status.information",$.pgsi.locale.get("pages.view.activate"))+"<span>",true);
-				}else if($(this).hasClass('deactivate')){
-					pgsi.util.page.fnUpdateStatus('api/location/fetch',parseInt(aData.id,10),'location',2,fnCallBack,"Deactivate Location for "+ aData.name, "<span>"+$.pgsi.locale.get("pages.person.dialog.status.question",$.pgsi.locale.get("pages.view.deactivate"),"Location")+"<br>" +$.pgsi.locale.get("pages.person.dialog.status.information",$.pgsi.locale.get("pages.view.deactivate"))+"<span>",true);
-				}else if($(this).hasClass('sarDialog')){
-					pgsi.util.actiondialog.launchActionDialog(
-							"dialogSARDetail",
-							 pgsi.pages.sar.dialogSettings.dialogSARDetail(
-								 $.pgsi.locale.get("commons.title.table.SAR"),
-								 aData.id,
-								 "location",
-								 aData.name,
-								 aData.key
-							 ));
-				}
-			});
-
-			$('td:eq(0)', nRow).hover (
-				function ()
-				{
-					$(this).find('.icon-nav').removeClass('hide');
-					$(this).append(oActionSummary);
-				},
-
-				function ()
-				{
-					$(this).find('.icon-nav').addClass('hide');
-				}
-			);
-		},
-
-		fnInitComplete: function (oSettings, json)
-		{
-			$(".dataTables_length select").outerWidth(62).selectmenu({
-				appendTo: ".content.list",
-  				change: function( event, ui ) {
-  					$('#data_list_length').find("select").val(ui.item.value);
-  					$("#data_list_length").find("select").trigger("change");
-  					$("#load").find(".dataTables_length").find("select").selectmenu("refresh" );
-  				}
-			});
-
-			$.pgsi.listener.notify({
-				eventName 	: "locationList",
-				arguments 	: ["table"]
-			});
-		}
-	}
-	));
-
-	if (!$.pgsi.isNullOrUndefined(oFilterPreLoad)) {
-		// Filters
-		var aFilters = ['status'];
-
-		var filters = pgsi.util.filter.filterArrayToObject(aFilters);
-		pgsi.util.filter.init(oFilterPreLoad, filters, function(oResponse)
-		{
-			$.pgsi.filter.create(
-			{
-				element			: ".filter",
-				tagsDiv			: ".filter-results-container div.first",
-				title			: $.pgsi.locale.get("commons.pages.filterTitle"),
-				table 			:  pgsi.pages.location.locationTable,
-				filters 		: oResponse
-			});
-		});
-	}
-
-	//clear all Filter TODO
-	$("#clear-all").on("click", function(e)
-	{
-		$.address.parameter("organization","");
-		$.address.parameter("location","");
-		pgsi.util.page.fnReloadTable(pgsi.pages.location.locationTable);
-	});
-	$(".add-business").on("click", function(e)
+    $("#add").text('Adicionar Cidade')
+    $("#add").on("click", function(e)
 	{
 		e.preventDefault();
-		$.pgsi.ajax.post({
-			sUrl 		: "api/cidade/add",
-			oRequest 	: {},
-			fnCallback  : function(oResponse) {
-				console.log('dd')
-			}
-		});
+		pgsi.util.actiondialog.launchActionDialog (
+			"insert",
+			pgsi.pages.cidade.dialogSettings.insert(
+				0,
+				1,
+				'INSERT'
+			)
+		);
 	});
 
+
+
+	$.pgsi.progressBar.stopGlobal();
 });
 </script>
 </sec:authorize>

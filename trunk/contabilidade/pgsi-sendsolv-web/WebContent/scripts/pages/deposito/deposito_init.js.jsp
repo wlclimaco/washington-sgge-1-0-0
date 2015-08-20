@@ -34,6 +34,7 @@ $(document).ready(function()
 		id 			: "#data_list",
 		sAjaxSource : "api/empresa/fetch/deposito",
 		bPreLoad	: true,
+		sCheckbox   : "id",
 
 		ajax :
 		{
@@ -268,17 +269,23 @@ $(document).ready(function()
 		$.address.parameter("deposito","");
 		pgsi.util.page.fnReloadTable(pgsi.pages.deposito.depositoTable);
 	});
-	$("#buttonInsert").on("click", function(e)
+	$("#atualizar").on("click", function(e)
 	{
 		e.preventDefault();
-		$.pgsi.ajax.post({
-			sUrl 		: "api/empresa/deposito/add",
-			oRequest 	: {},
-			fnCallback  : function(oResponse) {
-				console.log('dd')
-			}
-		});
+		pgsi.util.page.fnReloadTable(pgsi.pages.deposito.depositoTable);
 	});
+	$("#add").text('Adicionar Deposito')
+	$("#add").on("click", function(e)
+	{
+		e.preventDefault();
+		pgsi.util.actiondialog.launchActionDialog (
+			"insert",
+			pgsi.pages.entidade.dialogSettings.insert(
+				0,
+				3,
+				'INSERT')
+		)
+	}y);
 
 });
 </script>

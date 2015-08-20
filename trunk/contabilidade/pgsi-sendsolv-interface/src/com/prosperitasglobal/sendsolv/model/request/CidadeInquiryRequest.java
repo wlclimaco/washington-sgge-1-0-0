@@ -1,6 +1,6 @@
 package com.prosperitasglobal.sendsolv.model.request;
 
-import com.prosperitasglobal.sendsolv.model.criteria.ArquivoCriteria;
+import com.prosperitasglobal.sendsolv.model.criteria.CidadeCriteria;
 
 /**
  * The Class ProdutoInquiryRequest.
@@ -9,18 +9,18 @@ public class CidadeInquiryRequest extends PagedInquiryRequest
 {
 
 	/** The criteria. */
-	private ArquivoCriteria criteria;
+	private CidadeCriteria criteria;
 
 	/**
 	 * Gets the criteria.
 	 *
 	 * @return the criteria
 	 */
-	public ArquivoCriteria getCriteria()
+	public CidadeCriteria getCriteria()
 	{
 		if (criteria == null)
 		{
-			criteria = new ArquivoCriteria();
+			criteria = new CidadeCriteria();
 		}
 		return criteria;
 	}
@@ -30,7 +30,7 @@ public class CidadeInquiryRequest extends PagedInquiryRequest
 	 *
 	 * @param criteria the criteria
 	 */
-	public void setCriteria(ArquivoCriteria criteria)
+	public void setCriteria(CidadeCriteria criteria)
 	{
 		this.criteria = criteria;
 	}

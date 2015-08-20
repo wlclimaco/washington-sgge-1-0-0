@@ -64,16 +64,16 @@
 												</ul>
 												<ul class="nav navbar-nav navbar-right">
 													<li>
-														<a href="javascript:;">Atualizar</a>
+														<a href="javascript:;" id="atualizar">Atualizar</a>
 													</li>
 													<li class="dropdown">
-														<a href="javascript:;">Importar</a>
+														<a href="javascript:;" id="importar">Importar</a>
 													</li>
 													<li class="dropdown">
-														<a href="javascript:;">Exportar</a>
+														<a href="javascript:;" id="exportar">Exportar</a>
 													</li>
 													<li class="dropdown">
-														<a href="javascript:;" class="add">Adicionar Empresa</a>
+														<a href="javascript:;" id="add" class="add">Adicionar Empresa</a>
 													</li>
 												</ul>
 											</div>
