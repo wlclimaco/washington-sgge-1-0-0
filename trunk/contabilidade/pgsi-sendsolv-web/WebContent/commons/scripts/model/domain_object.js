@@ -570,7 +570,7 @@ var Pessoa = function(oParam) {
 		this.formaPagamentoList		= oParam.formaPagamentoList;
 		this.condPagList		    = oParam.condPagList;
 		this.contatoList		    = oParam.contatoList;
-		this.oParam.modelAction		= oParam.modelAction;
+		this.modelAction			= oParam.modelAction;
 
 	}
 };
@@ -590,6 +590,23 @@ var Socio = function(oParam) {
 	}
 };
 Socio.prototype = new Pessoa();
+
+var Funcionario = function(oParam) {
+
+	Pessoa.call(this, oParam);
+
+	if (oParam) {
+		this.matricula   = oParam.matricula;
+		this.dataAdm     = oParam.dataAdm;
+		this.salarios    = oParam.salarios;
+		this.horarios    = oParam.horarios;
+		this.beneficios  = oParam.beneficios;
+		this.eventosList = oParam.eventosList;
+		this.modelAction = oParam.modelAction;
+
+	}
+};
+Funcionario.prototype = new Pessoa();
 
 var Plano = function(oParam) {
 
@@ -657,6 +674,40 @@ var Entidade = function(oParam) {
 };
 Entidade.prototype = new ModelCosmeDamiao();
 
+var EventoPessoa = function(oParam) {
+
+	ModelCosmeDamiao.call(this, oParam);
+
+	if (oParam) {
+		this.id				= oParam.id;
+		this.data		   	= oParam.data;
+		this.idEvent       	= oParam.idEvent;
+		this.idFunc 		= oParam.idFunc;
+		this.modelAction 	= oParam.modelAction;
+	}
+};
+EventoPessoa.prototype = new ModelCosmeDamiao();
+
+var Eventos = function(oParam) {
+
+	ModelCosmeDamiao.call(this, oParam);
+
+	if (oParam) {
+		this.id				= oParam.id;
+		this.dataList		= oParam.dataList;
+		this.descricao		= oParam.descricao;
+		this.codigo			= oParam.codigo;
+		this.Tipo			= oParam.Tipo;
+		this.valor			= oParam.valor;
+		this.porcentagem	= oParam.porcentagem;
+		this.isMensal		= oParam.isMensal;
+		this.isSistema		= oParam.isSistema;
+		this.noteText		= oParam.noteText;
+		this.modelAction 	= oParam.modelAction;
+	}
+};
+Eventos.prototype = new ModelCosmeDamiao();
+
 
 var Empresa = function(oParam) {
 
@@ -667,6 +718,8 @@ var Empresa = function(oParam) {
 	}
 };
 Empresa.prototype = new Entidade();
+
+
 
 var Filial = function(oParam) {
 

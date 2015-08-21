@@ -55,22 +55,38 @@ pgsi.pages.eventos = {
 		tbory = "";
 		for(var i = 0;i < oResponse.eventosList.length;i++ ){
 			var oCnae = oResponse.eventosList[i];
-			tbory = tbory + '<tr><td><input type="checkbox" class="checkthis" id="'+oCnae.id+'" /></td><td>'+oCnae.id+'</td><td>'+oCnae.nome+'</td><td>'+oCnae.estado.nome +'</td><td>'+oCnae.estado.abreviacao +'</td><td>'+oCnae.codigo +'</td><td>'+oCnae.cdIBGE+'</td><td>'+oCnae.municipio+'</td><td><div class="row"><button type="button" id="'+oCnae.id+'" class="btn btn-primary editar">Editar</button><button type="button" id="'+oCnae.id+'" class="btn btn-primary delete">Deletar</button></div></td><tr>';
+			var fValor = 0;
+
+			if(oCnae.valor > 0){
+				fValor = 'R$ ' + oCnae.valor;
+			}else{
+				fValor = oCnae.porcentagem + " %"
+			}
+			tbory = tbory + '<tr><td><input type="checkbox" class="checkthis" id="'+oCnae.id+'" /></td><td>'+oCnae.id+'</td><td>'+oCnae.codigo+'</td><td>'+oCnae.descricao +'</td><td>'+oCnae.Tipo +'</td><td>'+ fValor +'</td><td>'+oCnae.isMensal+'</td><td>'+oCnae.noteText+'</td><td><div class="row"><button type="button" id="'+oCnae.id+'" class="btn btn-primary editar">Editar</button><button type="button" id="'+oCnae.id+'" class="btn btn-primary delete">Deletar</button></div></td><tr>';
 		}
 
 		return tbory;
 	},
 	fnFillEventos : function(oResponse) {
-
+debugger;
 		if (!$.pgsi.isNullOrUndefined(oResponse)) {
 			if (!$.pgsi.isNullOrUndefined(oResponse.eventosList)) {
 				$('#id').val(oResponse.eventosList[0].id);
-				$('#eventos').val(oResponse.eventosList[0].nome);
-				$('#estado').val(oResponse.eventosList[0].estado.id);
-				$('#cep').val(oResponse.eventosList[0].cep);
-				$('#codigo').val(oResponse.eventosList[0].codigo);
-				$('#ibge').val(oResponse.eventosList[0].cdIBGE);
-				$('#municipal').val(oResponse.eventosList[0].municipio);
+				$('#descricao').val(oResponse.eventosList[0].descricao);
+				$('#tipo').val(oResponse.eventosList[0].tipo);
+				$('#valor').val(oResponse.eventosList[0].valor);
+				$('#porcentagem').val(oResponse.eventosList[0].porcentagem);
+				if(oResponse.eventosList[0].isMensal){
+					$('#isMensal').prop('checked', true);
+				}else{
+					$('#isMensal').prop('checked', false);
+				}
+				if(oResponse.eventosList[0].isAutomatico){
+					$('#isAutomatico').prop('checked', false);
+				}else{
+					$('#isAutomatico').prop('checked', false);
+				}
+				$('#observacao').val(oResponse.eventosList[0].noteText);
 			}
 		}
 
@@ -78,12 +94,12 @@ pgsi.pages.eventos = {
 
 	fnInitEventos : function() {
 		$.pgsi.ajax.post({
-			sUrl 		: "api/cliente/fetch/eventos",
+			sUrl 		: "api/funcionario/eventos",
 			oRequest 	: {"userContext":{"userId":"washington","id":null,"userRole":null,"localeString":null,"tenant":null,"authorities":null},"sortExpressions":[],"preQueryCount":true,"startPage":0,"pageSize":9999},
-			fnCallback  : function(oResponse) {
-
+			fnCallback  : function(oResponsea) {
+console.log(oResponsea)
 				$('#mytable tbody').empty();
-				$('#mytable tbody').append(pgsi.pages.eventos.fnTable(oResponse));
+				$('#mytable tbody').append(pgsi.pages.eventos.fnTable(oResponsea));
 
 				$(".editar").on("click", function(e)
 				{
@@ -116,34 +132,40 @@ pgsi.pages.eventos = {
 
 	fnRequestEventos : function(sModelAction) {
 
+		var isMensal 	 = 1;
+		var isAutomatico = 1;
+
+			//$('#isMensal').is(":checked")),
+			//$('#isAutomatico').is(":checked"));
 		oEventos = new Eventos({
-			id			: $('#id').val(),
-			codigo		: $('#codigo').val(),
-			nome		: $('#eventos').val(),
-			cdIBGE		: $('#ibge').val(),
-			estado		: {id:$('#estado').val()},
-			cep			: $('#cep').val(),
-			municipio   : $('#municipal').val(),
-			modelAction : sModelAction
+			id 				: $('#id').val(),
+			descricao 		: $('#descricao').val(),
+			tipo 			: $('#tipo').val(),
+			valor 			: $('#valor').val(),
+			porcentagem		: $('#porcentagem').val(),
+			isMensal 		: isMensal,
+			isSistema   	: isAutomatico,
+			noteText 		: $('#observacao').val(),
+			modelAction 	: sModelAction
 
 		})
 
-		oEndereco = new Endereco({
-			eventos 		: oEventos,
+		oEventoPessoa = new EventoPessoa({
+			idEvent 	: oEventos,
 			modelAction : "NONE"
 		})
 
-		oEmpresa = new Empresa({
-			enderecos	: [oEndereco],
+		oFuncionario = new Funcionario({
+			eventosList	: [oEventoPessoa],
 			modelAction : "NONE"
 		})
 
-		var request = new EmpresaMaintenanceRequest();
+		var request = new FuncionarioMaintenanceRequest();
 
-		request.empresa = oEmpresa;
+		request.funcionario = oFuncionario;
 
 		$.pgsi.ajax.post({
-			sUrl : "api/empresa/add",
+			sUrl : "api/funcionario/add",
 			oRequest : request,
 			fnCallback : function(oResponse){
 				pgsi.pages.eventos.fnInitEventos();

@@ -32,10 +32,6 @@ import com.prosperitasglobal.sendsolv.model.response.HorarioFuncResponse;
 public class FuncionarioAPIController extends FuncionarioBaseController
 {
 
-	/** The Constant FETCH_SIC_NAICS. */
-	private static final String FETCH_SIC_NAICS = "fetchSicNaics";
-	/** The Constant FETCH_ORGANIZATION_BYLOCATION. */
-	private static final String FETCH_ORGANIZATION_BYLOCATION = "fetchOrganizationBylocation";
 	/** The URL mapping constants. */
 	private static final String DELETE_LOCATION = "/delete";
 

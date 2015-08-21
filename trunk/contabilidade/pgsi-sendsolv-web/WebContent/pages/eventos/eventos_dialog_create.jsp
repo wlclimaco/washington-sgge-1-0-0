@@ -15,56 +15,58 @@
 						<div class="col-sm-2">
 							<input type="" class="form-control" id="id" />
 						</div>
-
-						<label for="inputEmail3" class="col-sm-1 control-label" style="margin-left:20px;">
-						Eventos
-						</label>
-						<div class="col-sm-5">
-							<input type="" class="form-control" id="cidade" />
-						</div>
-					</div>
-					<div class="row">
-						<label for="inputEmail3" class=" col-sm-2 control-label" style="margin-left:3%;">Evento</label>
-						<select id="evento" name="evento" class="evento" style="width:50%!Important;margin-left:3%;"></select>
-						<button type="button" class="btn btn-default addButton3" style="margin-left:2px;"><i class="fa fa-plus"></i></button>
 					</div>
 
 					<div class="row">
 						<label for="inputEmail3" class="col-sm-2 control-label" style="margin-left:20px;">
-						CEP
+						Descrição
 						</label>
 						<div class="col-sm-8">
-							<input type="" class="form-control" id="cep" />
+							<input type="" class="form-control" id="descricao" />
+						</div>
+					</div>
+
+					<div class="row">
+						<label for="inputEmail3" class=" col-sm-2 control-label" style="margin-left:3%;">Tipo</label>
+						<select id="tipo" name="evento" class="evento" style="width:16%!Important;margin-left:2%!Important">
+							<option value="1">Desconto  ( - )</option>
+							<option value="2">Acrescimo ( + )</option>
+						</select>
+					</div>
+
+					<div class="row">
+						<label class="col-xs-2 control-label" style="margin-left:20px;">Valor</label>
+						<div class="col-xs-3">
+							<input type="text" class="form-control" name="valor" id="valor"  placeholder="R$0.00" />
+						</div>
+						<label class="col-xs-2 control-label">Porcentagem</label>
+						<div class="col-xs-2">
+							<input type="text" class="form-control" name="porcentagem" id="porcentagem" placeholder="10.0%" />
+						</div>
+					</div>
+
+					<div class="row"     style="margin-left: 16%;">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" id="isMensal" /> Mensal
+							</label>
+						</div>
+
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" id="isAutomatico" /> Automatico
+							</label>
 						</div>
 					</div>
 
 					<div class="row">
 						<label for="inputEmail3" class="col-sm-2 control-label" style="margin-left:20px;">
-						Codigo
+						Observação
 						</label>
 						<div class="col-sm-8">
-							<input type="" class="form-control" id="codigo" />
+							<input type="" class="form-control" id="observacao" />
 						</div>
 					</div>
-
-					<div class="row">
-						<label for="inputEmail3" class="col-sm-2 control-label" style="margin-left:20px;">
-						Codigo IBGE
-						</label>
-						<div class="col-sm-8">
-							<input type="" class="form-control" id="ibge" />
-						</div>
-					</div>
-
-					<div class="row">
-						<label for="inputEmail3" class="col-sm-2 control-label" style="margin-left:20px;">
-						Codigo Municipal
-						</label>
-						<div class="col-sm-8">
-							<input type="" class="form-control" id="municipal" />
-						</div>
-					</div>
-
 				</div>
 			</div>
 		</div>
@@ -88,7 +90,7 @@ $(document).ready(function()
 		  placeholder: "Select a state",
 		  allowClear: true
 		});
-
-	pgsi.pages.cidade.fnFillEventos(oPreLoadResponse)
+console.log(oPreLoadResponse)
+	pgsi.pages.eventos.fnFillEventos(oPreLoadResponse)
 });
 </script>

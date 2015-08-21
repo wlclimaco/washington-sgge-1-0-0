@@ -135,12 +135,12 @@
 									<tr class="filters">
 										<th><input type="checkbox" id="checkall" /></th>
 										<th><input type="text" class="form-control" placeholder="#" disabled></th>
-										<th><input type="text" class="form-control" placeholder="Cidade" disabled></th>
-										<th><input type="text" class="form-control" placeholder="Estado" disabled></th>
-										<th><input type="text" class="form-control" placeholder="UF" disabled></th>
 										<th><input type="text" class="form-control" placeholder="Codigo" disabled></th>
-										<th><input type="text" class="form-control" placeholder="Codigo IBGE" disabled></th>
-										<th><input type="text" class="form-control" placeholder="Codigo Municipal" disabled></th>
+										<th><input type="text" class="form-control" placeholder="Descrição" disabled></th>
+										<th><input type="text" class="form-control" placeholder="Tipo" disabled></th>
+										<th><input type="text" class="form-control" placeholder="Valor" disabled></th>
+										<th><input type="text" class="form-control" placeholder="Mensal" disabled></th>
+										<th><input type="text" class="form-control" placeholder="Observação" disabled></th>
 									</tr>
 								</thead>
 								<tbody>

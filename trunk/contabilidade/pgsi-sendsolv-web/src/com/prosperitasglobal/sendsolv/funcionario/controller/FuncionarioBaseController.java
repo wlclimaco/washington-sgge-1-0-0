@@ -37,6 +37,7 @@ import com.prosperitasglobal.sendsolv.model.Profissao;
 import com.prosperitasglobal.sendsolv.model.Salario;
 import com.prosperitasglobal.sendsolv.model.TabelaEnum;
 import com.prosperitasglobal.sendsolv.model.Telefone;
+import com.prosperitasglobal.sendsolv.model.criteria.EventoCriteria;
 import com.prosperitasglobal.sendsolv.model.request.BeneficiosInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.ConvenioInquiryRequest;
 import com.prosperitasglobal.sendsolv.model.request.EventoInquiryRequest;
@@ -82,6 +83,7 @@ public class FuncionarioBaseController extends UtilControllerD
 	/**
 	 * @return the pessoaBAI
 	 */
+	@Override
 	public IPessoaBAI getPessoaBAI()
 	{
 		return pessoaBAI;
@@ -90,6 +92,7 @@ public class FuncionarioBaseController extends UtilControllerD
 	/**
 	 * @param pessoaBAI the pessoaBAI to set
 	 */
+	@Override
 	@Resource
 	public void setPessoaBAI(IPessoaBAI pessoaBAI)
 	{
@@ -138,6 +141,41 @@ public class FuncionarioBaseController extends UtilControllerD
 
 				modelAndView.addObject(RESPONSE,
 						getMapper().writeValueAsString(fetchFuncionarioById(new FetchByIdRequest(locationId))));
+
+				return modelAndView;
+			}
+
+		}
+		catch (Exception e)
+		{
+			if (LOG.isErrorEnabled())
+			{
+				LOG.error(CONTROLLER_EXCEPTION_MSG, e);
+				modelAndView.addObject(RESPONSE, null);
+			}
+		}
+
+		return modelAndView;
+	}
+
+	protected ModelAndView eventosEditMAV(Integer locationId, String returnViewName, Boolean isSelect,
+			HttpServletRequest request)
+	{
+		ModelAndView modelAndView = new ModelAndView(returnViewName);
+
+		try
+		{
+			if (!ValidationUtil.isNullOrZero(locationId))
+			{
+				EventoInquiryRequest eventoRequest = new EventoInquiryRequest();
+
+				EventoCriteria criteria = new EventoCriteria();
+				criteria.setId(locationId);
+
+				eventoRequest.setCriteria(criteria);
+
+				modelAndView.addObject(RESPONSE,
+						getMapper().writeValueAsString(fetchEventoByRequest(eventoRequest)));
 
 				return modelAndView;
 			}

@@ -100,11 +100,11 @@ public final class EventosDACD extends SqlSessionDaoSupport
 					break;
 				case NONE:
 					count =
-					maintainBancoAssociationsA(evento.getIdEvent(), response, parentId, null,
-									null,
-									TabelaEnum.PESSOA, eventoDac, statusDAC, historicoDAC,
-									evento.getEmprId(),
-									evento.getCreateUser(), processId, HistoriId);
+							maintainBancoAssociationsA(evento.getIdEvent(), response, parentId, null,
+							null,
+							TabelaEnum.PESSOA, eventoDac, statusDAC, historicoDAC,
+							evento.getEmprId(),
+							evento.getCreateUser(), processId, HistoriId);
 					break;
 			}
 		}
@@ -151,9 +151,9 @@ public final class EventosDACD extends SqlSessionDaoSupport
 				{
 					count =
 							StatusDACD
-									.maintainStatusAssociations(evento.getStatusList(), response, evento.getId(),
-											null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-											historicoDAC, processId, historicoId);
+							.maintainStatusAssociations(evento.getStatusList(), response, evento.getId(),
+									null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+									historicoDAC, processId, historicoId);
 				}
 				break;
 			case DELETE:
