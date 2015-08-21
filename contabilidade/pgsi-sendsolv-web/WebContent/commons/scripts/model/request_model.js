@@ -357,6 +357,17 @@ var EmpresaMaintenanceRequest = function(oParam) {
 
 EmpresaMaintenanceRequest.prototype = new MaintenanceRequest();
 
+var FuncionarioMaintenanceRequest = function(oParam) {
+
+	MaintenanceRequest.call(this, oParam);
+
+	if (oParam) {
+		this.funcionario = oParam.funcionario;
+	}
+};
+
+FuncionarioMaintenanceRequest.prototype = new MaintenanceRequest();
+
 var PayerStateProvinceRegionInquiryRequest  = function(oParam){
 
 	Request.call(this, oParam);

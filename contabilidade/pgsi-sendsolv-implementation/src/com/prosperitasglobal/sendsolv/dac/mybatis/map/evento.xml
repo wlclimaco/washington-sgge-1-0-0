@@ -155,7 +155,7 @@
  	-->
 
   <select id="fetchAllEventos" resultMap="eventoResult">
-    SELECT
+    SELECT b.id,
 	<include refid="allEventoColumns" />
     FROM business ORDER BY name ASC
   </select>
@@ -191,13 +191,16 @@
   <select id="fetchAllEventosByRequest" parameterType="EventoInquiryRequest" resultMap="eventoResult">
     SELECT * FROM
     			(
-    				SELECT
+    				SELECT b.id,
     						<include refid="allEventoColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM evento b
 					WHERE 2 = 2
 					<if test="criteria.emprId != null">
 						AND b.emprId = #{criteria.emprId}
+					</if>
+					<if test="criteria.id != null">
+						AND b.id = #{criteria.id}
 					</if>
     			) LIST
 				<choose>

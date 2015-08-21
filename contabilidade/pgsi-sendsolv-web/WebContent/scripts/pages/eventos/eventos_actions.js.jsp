@@ -11,7 +11,7 @@
 			return {
 				title : $.pgsi.locale.get("commons.dialog.insert.title"),
 				width : 800,
-				height: 600,
+				height: 450,
 
 				close : function () {},
 
@@ -22,16 +22,12 @@
 					// Confirm Button
 					oButtons[$.pgsi.locale.get("commons.dialog.insert")] = function () {
 
-						var sUrl = "";
-						if(sModelAction == "insert")
-						{
-							sUrl = "api/eventos/insert"
+						if(iId == 0 ){
+							pgsi.pages.eventos.fnRequestEventos('INSERT');
+						}else{
+							pgsi.pages.eventos.fnRequestEventos('UPDATE');
 						}
-						else
-						{
-							sUrl = "api/eventos/update"
-						}
-						pgsi.pages.eventos.form.ajaxCall(sUrl,sModelAction);
+						$(this).dialog('close');
 
 					};
 
@@ -46,9 +42,8 @@
 
 				action : function (actionDialog) {
 
-					actionDialog.load("eventos/editView?userId=" + pgsi.settings.userContext.userId+"&locationId=2", function() {
+					actionDialog.load("funcionario/eventos/view?userId=" + pgsi.settings.userContext.userId+"&eventosId="+iId, function() {
 
-						$('#selected', actionDialog).removeClass("hide").append(""+sName+"");
 
 						actionDialog.dialog('open');
 					});

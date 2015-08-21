@@ -34,6 +34,8 @@ public class FuncionarioViewController extends FuncionarioBaseController
 
 	private static final String FETCH_LIST_EVENTO = "/eventos";
 
+	private static final String FETCH_LIST_EVENTO_VIEW = "/eventos/view";
+
 	private static final String FETCH_LIST_BENEFICIOS = "/beneficios";
 
 	private static final String FETCH_LIST_CONVENIO = "/convenio";
@@ -55,9 +57,6 @@ public class FuncionarioViewController extends FuncionarioBaseController
 	/** The Constant EDIT_VIEW. */
 	private static final String EDIT_VIEW = "/editView";
 
-	/** The Constant FETCH_ORGANIZATION_BYFUNCIONARIO. */
-	private static final String FETCH_ORGANIZATION_BYFUNCIONARIO = "fetchOrganizationBylocation";
-
 	/** The view mapping constants . */
 	private static final String VIEW_FUNCIONARIO_MAIN = "/funcionario/funcionario_main";
 
@@ -71,6 +70,8 @@ public class FuncionarioViewController extends FuncionarioBaseController
 
 	/** The Constant VIEW_FUNCIONARIO_DIALOG_ADD. */
 	private static final String VIEW_FUNCIONARIO_DIALOG_ADD = "/funcionario/funcionario_dialog_create";
+
+	private static final String VIEW_EVENTOS_DIALOG_ADD = "/eventos/eventos_dialog_create";
 
 	/** The PagedInquiryRequest Constants. */
 	private static final int START_PAGE_NUMBER = 0;
@@ -390,6 +391,14 @@ public class FuncionarioViewController extends FuncionarioBaseController
 	{
 
 		return locationEditMAV(locationId, VIEW_FUNCIONARIO_DIALOG_ADD, true, request);
+	}
+
+	@RequestMapping(value = {FETCH_LIST_EVENTO_VIEW}, method = RequestMethod.GET)
+	public ModelAndView loadViewEventos(@RequestParam(value = "eventosId", required = false) Integer eventosId,
+			HttpServletRequest request)
+	{
+
+		return eventosEditMAV(eventosId, VIEW_EVENTOS_DIALOG_ADD, false, request);
 	}
 
 }
