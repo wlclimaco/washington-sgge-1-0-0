@@ -341,7 +341,6 @@ public class FuncionarioBaseController extends UtilControllerD
 
 		try
 		{
-			locationRequest.setFuncionario(insertMockCliente(PersistanceActionEnum.INSERT));
 			locationRequest.getFuncionario().setCreateDateUTC(Calendar.getInstance().getTimeInMillis());
 			locationResponse = getFuncionarioBAI().insertFuncionario(locationRequest);
 		}

@@ -695,6 +695,7 @@ var Eventos = function(oParam) {
 	if (oParam) {
 		this.id				= oParam.id;
 		this.dataList		= oParam.dataList;
+		this.nome		    = oParam.nome;
 		this.descricao		= oParam.descricao;
 		this.codigo			= oParam.codigo;
 		this.Tipo			= oParam.Tipo;

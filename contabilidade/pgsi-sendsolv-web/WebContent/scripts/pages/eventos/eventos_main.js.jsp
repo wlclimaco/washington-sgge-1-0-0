@@ -56,19 +56,28 @@ pgsi.pages.eventos = {
 		for(var i = 0;i < oResponse.eventosList.length;i++ ){
 			var oCnae = oResponse.eventosList[i];
 			var fValor = 0;
+			var isAutomatico = "Sim"
+			var isMensal = "Sim"
+			if(oCnae.isMensal == false){
+				isMensal = "Não"
+			}
+			if(oCnae.isSistema == false){
+				isAutomatico = "Não"
+			}
 
 			if(oCnae.valor > 0){
 				fValor = 'R$ ' + oCnae.valor;
 			}else{
 				fValor = oCnae.porcentagem + " %"
 			}
-			tbory = tbory + '<tr><td><input type="checkbox" class="checkthis" id="'+oCnae.id+'" /></td><td>'+oCnae.id+'</td><td>'+oCnae.codigo+'</td><td>'+oCnae.descricao +'</td><td>'+oCnae.Tipo +'</td><td>'+ fValor +'</td><td>'+oCnae.isMensal+'</td><td>'+oCnae.noteText+'</td><td><div class="row"><button type="button" id="'+oCnae.id+'" class="btn btn-primary editar">Editar</button><button type="button" id="'+oCnae.id+'" class="btn btn-primary delete">Deletar</button></div></td><tr>';
+
+			tbory = tbory + '<tr><td><input type="checkbox" class="checkthis" id="'+oCnae.id+'" /></td><td>'+oCnae.id+'</td><td>'+oCnae.codigo+'</td><td>'+oCnae.descricao +'</td><td>'+oCnae.tipo +'</td><td>'+ fValor +'</td><td>'+isMensal+'</td><td>'+isAutomatico+'</td><td>'+oCnae.noteText+'</td><td><div class="row"><button type="button" id="'+oCnae.id+'" class="btn btn-primary editar">Editar</button><button type="button" id="'+oCnae.id+'" class="btn btn-primary delete">Deletar</button></div></td><tr>';
 		}
 
 		return tbory;
 	},
 	fnFillEventos : function(oResponse) {
-debugger;
+
 		if (!$.pgsi.isNullOrUndefined(oResponse)) {
 			if (!$.pgsi.isNullOrUndefined(oResponse.eventosList)) {
 				$('#id').val(oResponse.eventosList[0].id);
@@ -82,7 +91,7 @@ debugger;
 					$('#isMensal').prop('checked', false);
 				}
 				if(oResponse.eventosList[0].isAutomatico){
-					$('#isAutomatico').prop('checked', false);
+					$('#isAutomatico').prop('checked', true);
 				}else{
 					$('#isAutomatico').prop('checked', false);
 				}
@@ -97,7 +106,6 @@ debugger;
 			sUrl 		: "api/funcionario/eventos",
 			oRequest 	: {"userContext":{"userId":"washington","id":null,"userRole":null,"localeString":null,"tenant":null,"authorities":null},"sortExpressions":[],"preQueryCount":true,"startPage":0,"pageSize":9999},
 			fnCallback  : function(oResponsea) {
-console.log(oResponsea)
 				$('#mytable tbody').empty();
 				$('#mytable tbody').append(pgsi.pages.eventos.fnTable(oResponsea));
 
@@ -132,14 +140,18 @@ console.log(oResponsea)
 
 	fnRequestEventos : function(sModelAction) {
 
-		var isMensal 	 = 1;
-		var isAutomatico = 1;
+		var isMensal 	 = false;
+		var isAutomatico = false;
+		if($('#isMensal').prop('checked')){
+			isMensal 	 = true;
+		}
+		if($('#isAutomatico').prop('checked')){
+			isAutomatico = true;
+		}
 
-			//$('#isMensal').is(":checked")),
-			//$('#isAutomatico').is(":checked"));
 		oEventos = new Eventos({
 			id 				: $('#id').val(),
-			descricao 		: $('#descricao').val(),
+			nome 		    : $('#descricao').val(),
 			tipo 			: $('#tipo').val(),
 			valor 			: $('#valor').val(),
 			porcentagem		: $('#porcentagem').val(),

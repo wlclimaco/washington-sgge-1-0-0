@@ -12,6 +12,8 @@ public class Eventos extends ModelCosmeDamiao
 	/** Attributes. */
 	private Integer id;
 
+	private String nome;
+
 	/** The parent key type. */
 	private List<EventoMesApp> dataList;
 
@@ -64,6 +66,22 @@ public class Eventos extends ModelCosmeDamiao
 	public void setId(Integer id)
 	{
 		this.id = id;
+	}
+
+	/**
+	 * @return the nome
+	 */
+	public String getNome()
+	{
+		return nome;
+	}
+
+	/**
+	 * @param nome the nome to set
+	 */
+	public void setNome(String nome)
+	{
+		this.nome = nome;
 	}
 
 	/**
@@ -217,18 +235,19 @@ public class Eventos extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Eventos [getId()=" + getId() + ", getDataList()=" + getDataList() + ", getCodigo()=" + getCodigo()
-				+ ", getDescricao()=" + getDescricao() + ", getTipo()=" + getTipo() + ", getValor()=" + getValor()
-				+ ", getPorcentagem()=" + getPorcentagem() + ", getIsMensal()=" + getIsMensal() + ", getIsSistema()="
-				+ getIsSistema() + ", getNoteText()=" + getNoteText() + ", getTabelaEnumValue()="
-				+ getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()="
-				+ getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()=" + getType()
-				+ ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()="
-				+ getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite() + ", toString()="
-				+ super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
-				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
-				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + "]";
+		return "Eventos [getId()=" + getId() + ", getNome()=" + getNome() + ", getDataList()=" + getDataList()
+				+ ", getCodigo()=" + getCodigo() + ", getDescricao()=" + getDescricao() + ", getTipo()=" + getTipo()
+				+ ", getValor()=" + getValor() + ", getPorcentagem()=" + getPorcentagem() + ", getIsMensal()="
+				+ getIsMensal() + ", getIsSistema()=" + getIsSistema() + ", getNoteText()=" + getNoteText()
+				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
+				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
+				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
+				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
+				+ ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId() + ", getNotes()=" + getNotes()
+				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
+				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
+				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }
