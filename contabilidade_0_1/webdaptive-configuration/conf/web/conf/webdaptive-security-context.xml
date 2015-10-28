@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:sec="http://www.springframework.org/schema/security"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<sec:global-method-security pre-post-annotations="enabled">	</sec:global-method-security>
+	<sec:http pattern="/index.jsp*" security="none" />
+	<sec:http pattern="/timeout.jsp*" security="none" />
+	<sec:http auto-config="true" use-expressions="true">
+		<sec:intercept-url pattern="/**/**"/>
+		<sec:form-login login-page="/index.jsp?Please Login."
+			authentication-failure-url="/index.jsp?Login failed!"
+			always-use-default-target="true" default-target-url="/pages/wd_main.jsp" />
+		<sec:logout invalidate-session="false" logout-success-url="/timeout.jsp?Successful Logout." />
+		<sec:access-denied-handler error-page="/timeout.jsp" />
+		<sec:session-management invalid-session-url="/timeout.jsp?Invalid Session.">
+			<sec:concurrency-control max-sessions="1"
+				error-if-maximum-exceeded="true" />
+		</sec:session-management>
+	</sec:http>
+
+	<!-- Usernames/Passwords are rod/koala dianne/emu scott/wombat peter/opal  -->
+	<sec:authentication-manager erase-credentials="false">
+		<sec:authentication-provider>
+			<sec:user-service>
+				<sec:user name="rod" password="koala" authorities="ROLE_DOMAIN ADMINS" />
+				<sec:user name="washington" password="koala" authorities="ROLE_DOMAIN ADMINS" />
+				<sec:user name="kessius" password="kessius123" authorities="ROLE_DOMAIN ADMINS" />
+				<sec:user name="cesar" password="cesar123" authorities="ROLE_DOMAIN ADMINS" />
+				<sec:user name="graziane" password="graziane123" authorities="ROLE_DOMAIN ADMINS" />
+				<sec:user name="damiao" password="damiao123" authorities="ROLE_DOMAIN ADMINS" />
+				<sec:user name="dianne" password="emu"	authorities="ROLE_GUEST" />
+				<sec:user name="scott" password="wombat" authorities="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS" />
+				<sec:user name="peter" password="opal" authorities="ROLE_DOMAIN USERS" />
+				<sec:user name="baduser" password="baduser" authorities="ROLE_BAD" />
+			</sec:user-service>
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+
+	<!-- BEGIN EXPLICIT LDAP/MS ACTIVE DIRECTORY CONFIGURATION. -->
+
+<!--	<sec:authentication-manager alias="authenticationManager" erase-credentials="false">-->
+<!--			<sec:authentication-provider ref="ldapAuthProvider">-->
+<!--			</sec:authentication-provider>-->
+<!--	</sec:authentication-manager>-->
+<!---->
+<!--	<bean id="ldapAuthProvider" class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">-->
+<!--		<constructor-arg>-->
+<!--			<bean id="bindAuthenticator" class="org.springframework.security.ldap.authentication.BindAuthenticator">-->
+<!--				<constructor-arg ref="contextSource" />-->
+<!--				<property name="userSearch" ref="userSearch" />-->
+<!--			</bean>-->
+<!--		</constructor-arg>-->
+<!--		<constructor-arg>-->
+<!--			<bean class="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator">-->
+<!--				<constructor-arg ref="contextSource" />-->
+<!--				<constructor-arg value="cn=Users" />-->
+<!--				<property name="searchSubtree" value="true" />-->
+<!--					<property name="defaultRole" value="ROLE_DOMAIN USERS" />-->
+<!--				<property name="ignorePartialResultException" value="true" />-->
+<!--			</bean>-->
+<!--		</constructor-arg>-->
+<!--	</bean>-->
+<!---->
+<!--	<bean id="userSearch"	class="org.springframework.security.ldap.search.FilterBasedLdapUserSearch">-->
+<!--		<constructor-arg index="0" value="cn=Users" />-->
+<!--		<constructor-arg index="1" value="(sAMAccountName={0})" />-->
+<!--		<constructor-arg index="2" ref="contextSource" />-->
+<!--		<property name="searchSubtree" value="true" />-->
+<!--	</bean>-->
+<!---->
+<!--	<bean id="contextSource" class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">-->
+<!--		<constructor-arg value="ldap://192.168.1.6:389/dc=omaha,dc=qat,dc=com" />-->
+<!--		<property name="userDn" value="cn=QATTEST,cn=Users,dc=omaha,dc=qat,dc=com" />-->
+<!--		<property name="password" value="QATomaHA01$" />-->
+<!--	</bean>-->
+	<!-- END LDAP/MS ACTIVE DIRECTORY CONFIGURATION -->
+</beans>
