@@ -1,0 +1,2 @@
+//com.springsource.sts.config.flow.coordinates\:http\://www.springframework.org/schema/batch\:/sysmgmt-batch/src/com/qat/samples/sysmgmt/batch/job/qat-sysmgmt-d-load-01-job.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<graph>\r\n<element clazz\="JobModelElement" type\="job">\r\n<structure end\="3842" endstart\="3830" start\="1610" startend\="1700"/>\r\n<bounds height\="368" width\="199" x\="15" y\="17"/>\r\n</element>\r\n</graph>
+eclipse.preferences.version=1
