@@ -1,0 +1,16 @@
+INSERT INTO cadastro(cadastroid, descricao, nome, acao, controleid) values(10,'UN1DESC','NOME01',1,1);
+INSERT INTO cadastro(cadastroid, descricao, nome, acao, controleid) values(11,'UN1DESC','NOME01',1,1);
+INSERT INTO cadastro(cadastroid, descricao, nome, acao, controleid) values(12,'UN1DESC','NOME01',2,1);
+INSERT INTO cadastro(cadastroid, descricao, nome, acao, controleid) values(13,'UN1DESC','NOME01',3,1);
+INSERT INTO cadastro(cadastroid, descricao, nome, acao, controleid) values(14,'UN1DESC','NOME01',4,1);
+INSERT INTO cadastro(cadastroid, descricao, nome, acao, controleid) values(15,'UN1DESC','NOME01',5,1);
+INSERT INTO cadastro(cadastroid, descricao, nome, acao, controleid) values(16,'UN1DESC','NOME01',1,1);
+INSERT INTO cadastro(cadastroid, descricao, nome, acao, controleid) values(17,'UN1DESC','NOME01',2,1);
+INSERT INTO cadastro(cadastroid, descricao, nome, acao, controleid) values(18,'UN1DESC','NOME01',3,1);
+INSERT INTO cadastro(cadastroid, descricao, nome, acao, controleid) values(19,'UN1DESC','NOME01',4,1);
+INSERT INTO cadastro(cadastroid, descricao, nome, acao, controleid) values(20,'UN1DESC','NOME01',5,1);
+INSERT INTO cadastro(cadastroid, descricao, nome, acao, controleid) values(21,'UN1DESC','NOME01',1,1);
+INSERT INTO cadastro(cadastroid, descricao, nome, acao, controleid) values(22,'UN1DESC','NOME01',2,1);
+INSERT INTO controle(controleid, data, usuarioid, acao, idAcao, tableType) values(10,'10/10/2013:21:59:59', 1,2,2,1);
+INSERT INTO controle(controleid, data, usuarioid, acao, idAcao, tableType) values(12,'10/10/2013:21:59:59', 1,2,2,1);
+INSERT INTO controle(controleid, data, usuarioid, acao, idAcao, tableType) values(13,'10/10/2013:21:59:59', 1,2,2,1);

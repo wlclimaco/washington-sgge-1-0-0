@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="QATAppContext" class="com.qat.framework.util.QATAppContext"/>
+	<bean id="procedureBAS" class="com.qat.samples.sysmgmt.bas.ws.ProcedureBAS">
+		<property name="procedureBAI" ref="procedureBAITarget"/>
+	</bean>
+	
+	<bean id="procedureBAITarget" class="com.qat.samples.sysmgmt.base.unittest.bas.ws.ProcedureBASTest$MockProcedureBAI">
+	</bean>
+</beans>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="QATAppContext" class="com.qat.framework.util.QATAppContext" />
+
+	<bean id="drugBAS" class="com.qat.samples.sysmgmt.bas.ws.DrugBAS">
+		<property name="drugBAI" ref="drugBAI" />
+	</bean>
+
+	<bean id="drugBAI" class="com.qat.samples.sysmgmt.bai.impl.DrugBAIImpl">
+		<property name="drugBAC" ref="drugBACTarget" />
+		<property name="validationController" ref="drugValidationController" />
+	</bean>
+
+	<bean id="drugBACTarget" class="com.qat.samples.sysmgmt.unittest.bas.ws.DrugBASImplTest$MockDrugBAC" />
+</beans>
