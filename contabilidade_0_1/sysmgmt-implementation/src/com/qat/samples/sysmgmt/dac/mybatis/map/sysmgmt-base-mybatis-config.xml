@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+ 	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+
+  	<typeAliases>
+  		<typeAlias alias="County" type="com.qat.samples.sysmgmt.model.County"/>
+  		<typeAlias alias="Drug" type="com.qat.samples.sysmgmt.model.Drug"/>
+  		<typeAlias alias="DrugPrice" type="com.qat.samples.sysmgmt.model.DrugPrice"/>
+  		<typeAlias alias="Procedure" type="com.qat.samples.sysmgmt.model.Procedure"/>
+  		<typeAlias alias="Bundle" type="com.qat.samples.sysmgmt.model.Bundle"/>
+  		<typeAlias alias="PagedInquiryRequest" type="com.qat.samples.sysmgmt.model.request.PagedInquiryRequest"/>
+<!--   		<typeAlias alias="CadastroInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest"/> -->
+  		<typeAlias alias="ProdutoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest"/>
+<!--   		<typeAlias alias="CidadeInquiryRequest" type="com.qat.samples.sysmgmt.cidade.model.request.CidadeInquiryRequest"/> -->
+<!--   		<typeAlias alias="Cidade" type="com.qat.samples.sysmgmt.cidade.model.Cidade"/> -->
+  		<typeAlias alias="Produto" type="com.qat.samples.sysmgmt.produto.model.Produto"/>
+<!--   		<typeAlias alias="Cadastro" type="com.qat.samples.sysmgmt.produto.model.Cadastro"/> -->
+<!--   		<typeAlias alias="ControleAcess" type="com.qat.samples.sysmgmt.util.ControleAcess"/> -->
+<!--   		<typeAlias alias="Documento" type="com.qat.samples.sysmgmt.documento.model.Documento"/> -->
+<!--   		<typeAlias alias="Endereco" type="com.qat.samples.sysmgmt.endereco.model.Endereco"/> -->
+<!--   		<typeAlias alias="Supermercado" type="com.qat.samples.sysmgmt.supermercado.model.Supermercado"/> -->
+<!--   		<typeAlias alias="Tabelapreco" type="com.qat.samples.sysmgmt.produto.model.Tabelapreco"/> -->
+<!--   		<typeAlias alias="Cliente" type="com.qat.samples.sysmgmt.cliente.model.Cliente"/> -->
+<!--   		<typeAlias alias="Controle" type="com.qat.samples.sysmgmt.controle.model.Controle"/> -->
+<!--   		<typeAlias alias="AcessosInquiryRequest" type="com.qat.samples.sysmgmt.controle.model.request.AcessosInquiryRequest"/> -->
+<!--   		<typeAlias alias="ControleInquiryRequest" type="com.qat.samples.sysmgmt.controle.model.request.ControleInquiryRequest"/> -->
+<!--   		<typeAlias alias="UniMed"    type="com.qat.samples.sysmgmt.produto.model.UniMed"/> -->
+<!--   		<typeAlias alias="Embalagem" type="com.qat.samples.sysmgmt.produto.model.Embalagem"/> -->
+
+  	</typeAliases>
+
+ 	<mappers>
+    	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/county.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/drug.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/procedure.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/bundle.xml"/>
+<!--      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/preco.xml"/> -->
+<!--      	<mapper resource="com/qat/samples/sysmgmt/cidade/dac/mybatis/map/cidade.xml"/> -->
+<!--      	<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/produto.xml"/> -->
+<!--      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/controleAcess.xml"/> -->
+<!--      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/endereco.xml"/> -->
+<!--      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/documento.xml"/> -->
+<!--      	<mapper resource="com/qat/samples/sysmgmt/supermercado/dac/mybatis/map/supermercado.xml"/> -->
+<!--      	<mapper resource="com/qat/samples/sysmgmt/cliente/dac/mybatis/map/cliente.xml"/> -->
+<!--      	<mapper resource="com/qat/samples/sysmgmt/controle/dac/mybatis/map/controle.xml"/> -->
+    </mappers>
+
+</configuration>

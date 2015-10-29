@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EnderecoMap">
+
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="EnderecoResult" type="Endereco">
+    <result property="enderecoid" column="enderecoid"/>
+    <result property="id" column="id"/>
+    <result property="logradouro" column="logradouro"/>
+    <result property="bairro" column="bairro"/>
+    <result property="estado" column="estado"/>
+    <result property="cidade" column="cidade"/>
+    <result property="numero" column="numero"/>
+    <result property="cep" column="cep"/>
+    <result property="cep" column="nome"/>
+    <result property="complemento" column="complemento"/>
+    <result property="tableTypeValue" column="acao"/>
+    <collection property="acessos" column="enderecoid" select="ControleAcessMap.fetchControleAcessByAcao" />
+  </resultMap>
+
+	  <sql id="allEnderecoColumns">
+       enderecoid, id, logradouro, bairro, estado, cidade, numero, cep,nome, complemento, acao
+ 	  </sql>
+
+  <sql id="allEnderecoColumnsWithQualifier">
+		p.enderecoid, p.id, p.logradouro, p.bairro, p.estado, p.cidade, p.numero, p.cep,p.nome, p.complemento, p.acao
+  </sql>
+   <select id="fetchAllEnderecoBySupermercado" resultMap="EnderecoResult">
+   		 SELECT <include refid="allEnderecoColumns" /> FROM ENDERECO WHERE ACAO = 1 AND ID = #{ID}
+   </select>
+
+ <select id="fetchAllEnderecosBySupermercado" parameterType="Integer" resultMap="EnderecoResult">
+  SELECT
+    <include refid="allEnderecoColumns" />
+    FROM ENDERECO where id = #{id} and acao = 1 ORDER BY enderecoid ASC
+  </select>
+
+  <select id="fetchAllEnderecosByCliente" parameterType="Integer" resultMap="EnderecoResult">
+  SELECT
+    <include refid="allEnderecoColumns" />
+    FROM ENDERECO where id = #{id} and acao = 8 ORDER BY enderecoid ASC
+  </select>
+
+  <select id="fetchAllEnderecos" resultMap="EnderecoResult">
+    SELECT
+    <include refid="allEnderecoColumns" />
+    FROM ENDERECO ORDER BY enderecoid ASC
+  </select>
+
+  <select id="fetchAllEnderecosPagedBatch" resultMap="EnderecoResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT <include refid="allEnderecoColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM ENDERECO p ORDER BY enderecoid ASC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{_page} * #{_pagesize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{_pagesize}mo
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT <include refid="allEnderecoColumns" />
+   		  FROM ENDERECO ORDER BY enderecoid ASC
+		  OFFSET ( #{_page} * #{_pagesize} )
+		  LIMIT #{_pagesize}
+    </if>
+  </select>
+
+  <select id="fetchEnderecoRowCount" resultType="Integer">
+      <if test="_databaseId == 'PostgreSQL'">
+			SELECT COUNT(*) AS RECORD_COUNT FROM ENDERECO WHERE enderecoid IS NOT NULL
+      </if>
+
+   	  <if test="_databaseId == 'Oracle'">
+		 	SELECT COUNT(enderecoid) AS RECORD_COUNT FROM ENDERECO
+      </if>
+  </select>
+
+  <select id="fetchAllEnderecosRequest" parameterType="PagedInquiryRequest" resultMap="EnderecoResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT <include refid="allEnderecoColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM ENDERECO p ORDER BY enderecoid ASC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{startPage} * #{pageSize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{pageSize}
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT <include refid="allEnderecoColumns" />
+   		  FROM ENDERECO ORDER BY enderecoid ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+    </if>
+  </select>
+
+  <select id="fetchEnderecoById" parameterType="Integer" resultMap="EnderecoResult">
+    SELECT
+   <include refid="allEnderecoColumns" />
+    FROM ENDERECO WHERE enderecoid = #{fetchid}
+  </select>
+
+  <select id="fetchVersionNumber" parameterType="Endereco" resultType="int">
+	SELECT VERSN_LOCK_NUM FROM ENDERECO WHERE enderecoid = #{id}
+  </select>
+
+  <select id="insertEndereco" parameterType="Endereco" resultType="int" statementType="CALLABLE">
+        { call ins_endereco(#{id},  #{logradouro}, #{bairro}, #{estado},  #{cidade},  #{numero}, #{cep} , #{nome}, #{complemento}, #{tableTypeValue}, #{userId}) }
+  </select>
+
+
+  <select id="updateEndereco" parameterType="Endereco" resultType="int" statementType="CALLABLE">
+        { call ins_endereco(#{enderecoid},#{id},  #{logradouro}, #{bairro}, #{estado},  #{cidade},  #{numero}, #{cep}, #{nome}, #{complemento}, #{tableTypeValue}, #{userId}) }
+  </select>
+
+  <delete id="deleteEnderecoById" parameterType="Endereco">
+    DELETE FROM ENDERECO WHERE enderecoid = #{id}
+  </delete>
+
+  <delete id="deleteAllEnderecos">
+	DELETE FROM ENDERECO
+  </delete>
+</mapper>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SupermercadoMap">
+
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="SupermercadoResult" type="Supermercado">
+    <result property="superId" column="supermercadoid"/>
+    <result property="usuario" column="usuario"/>
+    <result property="senha" column="senha"/>
+    <result property="site" column="site"/>
+    <result property="email" column="email"/>
+    <association property="produtos" column="supermercadoid" javaType="Integer" select="fetchCountPreco"/>
+    <collection property="documentos" column="supermercadoid" select="DocumentoMap.fetchAllDocumentosBySupermercado" />
+    <collection property="enderecos" column="supermercadoid" select="EnderecoMap.fetchAllEnderecosBySupermercado" />
+    <collection property="acessos" column="supermercadoid" select="ControleAcessMap.fetchAllControleBySupermercado" />
+  </resultMap>
+
+  <sql id="allSupermercadoColumns">
+		 supermercadoid, usuario, email, site, controleid, senha
+  </sql>
+
+  <sql id="allSupermercadoColumnsWithQualifier">
+		p.supermercadoid, p.usuario, p.email, p.site, p.controleid, p.senha
+  </sql>
+
+  <select id="fetchCountPreco" parameterType="Integer" resultType="Integer">
+    select count(*) as Total from tabpreco t where t.supermercadoid = #{id}
+  </select>
+
+  <select id="fetchAllSupermercados" resultMap="SupermercadoResult">
+    SELECT
+    <include refid="allSupermercadoColumns" />
+    FROM SUPERMERCADO ORDER BY SUPERMERCADOID ASC
+  </select>
+
+  <select id="fetchAllSupermercadosPagedBatch" resultMap="SupermercadoResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT <include refid="allSupermercadoColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM SUPERMERCADO p ORDER BY SUPERMERCADOID ASC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{_page} * #{_pagesize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{_pagesize}mo
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT <include refid="allSupermercadoColumns" />
+   		  FROM SUPERMERCADO ORDER BY SUPERMERCADOID ASC
+		  OFFSET ( #{_page} * #{_pagesize} )
+		  LIMIT #{_pagesize}
+    </if>
+  </select>
+
+  <select id="fetchSupermercadoRowCount" resultType="Integer">
+      <if test="_databaseId == 'PostgreSQL'">
+			SELECT COUNT(*) AS RECORD_COUNT FROM SUPERMERCADO WHERE SUPERMERCADOID IS NOT NULL
+      </if>
+
+   	  <if test="_databaseId == 'Oracle'">
+		 	SELECT COUNT(SUPERMERCADOID) AS RECORD_COUNT FROM SUPERMERCADO
+      </if>
+  </select>
+
+  <select id="fetchAllSupermercadosRequest" parameterType="PagedInquiryRequest" resultMap="SupermercadoResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT <include refid="allSupermercadoColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM SUPERMERCADO p ORDER BY SUPERMERCADOID ASC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{startPage} * #{pageSize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{pageSize}
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT <include refid="allSupermercadoColumns" />
+   		  FROM SUPERMERCADO ORDER BY SUPERMERCADOID ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+    </if>
+  </select>
+
+  <select id="fetchSupermercadoById" parameterType="Integer" resultMap="SupermercadoResult">
+    SELECT
+   <include refid="allSupermercadoColumns" />
+    FROM SUPERMERCADO WHERE SUPERMERCADOID = #{fetchid}
+  </select>
+
+  <select id="fetchVersionNumber" parameterType="Supermercado" resultType="int">
+	SELECT VERSN_LOCK_NUM FROM SUPERMERCADO WHERE SUPERMERCADOID = #{id}
+  </select>
+
+  <select id="insertSupermercado" parameterType="Supermercado" resultType="int" statementType="CALLABLE">
+        { call ins_supermercado( #{usuario}, #{email},#{site},#{senha},#{logradouro},  #{bairro}, #{estado}, #{cidade}, #{numero}, #{cep}, #{nome}, #{complemento},#{usuarioid}, #{rginscmuni},  #{cpfcnpj}, #{razao}) }
+
+  </select>
+
+   <select id="updateSupermercado" parameterType="Supermercado" resultType="int" statementType="CALLABLE">
+        { call upd_supermercado( #{supermercadoid},#{usuario}, #{email},#{site},#{senha},#{enderecoid},#{id},#{logradouro},  #{bairro}, #{estado}, #{cidade}, #{numero}, #{cep}, #{nome}, #{complemento},#{documentoid},#{usuarioid}, #{rginscmuni},  #{cpfcnpj}, #{razao}) }
+  </select>
+
+  <select id="deleteSupermercadoById" parameterType="Supermercado" resultType="int" statementType="CALLABLE">
+        { call del_supermercado( #{superId},#{userId} ) }
+
+  </select>
+
+  <delete id="deleteAllSupermercados">
+	DELETE FROM SUPERMERCADO
+  </delete>
+</mapper>

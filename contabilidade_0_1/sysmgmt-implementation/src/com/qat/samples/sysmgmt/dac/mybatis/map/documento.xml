@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DocumentoMap">
+
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="DocumentoResult" type="Documento">
+    <result property="documentoid" column="documentoid"/>
+    <result property="id" column="id"/>
+    <result property="rgInc" column="rginscmuni"/>
+    <result property="cpfCnpj" column="cpfcnpj"/>
+    <result property="razao" column="razao"/>
+    <result property="tableTypeValue" column="tabela"/>
+    <collection property="acessos" column="documentoid" select="ControleAcessMap.fetchControleAcessByAcao" />
+  </resultMap>
+
+	  <sql id="allDocumentoColumns">
+            documentoid,id,rginscmuni, cpfcnpj, nome, razao,tabela
+  </sql>
+
+  <sql id="allDocumentoColumnsWithQualifier">
+		p.documentoid,p.id, p.rginscmuni, p.cpfcnpj, p.nome, p.razao,p.tabela
+  </sql>
+
+   <select id="fetchAllDocumentosBySupermercado" resultMap="DocumentoResult">
+         SELECT <include refid="allDocumentoColumns" /> FROM DOCUMENTOS WHERE TABELA = 1 AND ID = #{ID}
+   </select>
+
+   <select id="fetchAllDocumentosByCliente" resultMap="DocumentoResult">
+         SELECT <include refid="allDocumentoColumns" /> FROM DOCUMENTOS WHERE TABELA = 8 AND ID = #{ID}
+   </select>
+
+  <select id="fetchAllDocumentos" resultMap="DocumentoResult">
+    SELECT
+    <include refid="allDocumentoColumns" />
+    FROM DOCUMENTOS ORDER BY documentoid ASC
+  </select>
+
+  <select id="fetchAllDocumentosPagedBatch" resultMap="DocumentoResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT <include refid="allDocumentoColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM DOCUMENTOS p ORDER BY documentoid ASC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{_page} * #{_pagesize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{_pagesize}mo
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT <include refid="allDocumentoColumns" />
+   		  FROM DOCUMENTOS ORDER BY documentoid ASC
+		  OFFSET ( #{_page} * #{_pagesize} )
+		  LIMIT #{_pagesize}
+    </if>
+  </select>
+
+  <select id="fetchDocumentoRowCount" resultType="Integer">
+      <if test="_databaseId == 'PostgreSQL'">
+			SELECT COUNT(*) AS RECORD_COUNT FROM DOCUMENTOS WHERE documentoid IS NOT NULL
+      </if>
+
+   	  <if test="_databaseId == 'Oracle'">
+		 	SELECT COUNT(documentoid) AS RECORD_COUNT FROM DOCUMENTOS
+      </if>
+  </select>
+
+  <select id="fetchAllDocumentosRequest" parameterType="PagedInquiryRequest" resultMap="DocumentoResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT <include refid="allDocumentoColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM DOCUMENTOS p ORDER BY documentoid ASC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{startPage} * #{pageSize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{pageSize}
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT <include refid="allDocumentoColumns" />
+   		  FROM DOCUMENTOS ORDER BY documentoid ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+    </if>
+  </select>
+
+  <select id="fetchDocumentoById" parameterType="Integer" resultMap="DocumentoResult">
+    SELECT
+   <include refid="allDocumentoColumns" />
+    FROM DOCUMENTOS WHERE documentoid = #{fetchid}
+  </select>
+
+  <select id="fetchVersionNumber" parameterType="Documento" resultType="int">
+	SELECT VERSN_LOCK_NUM FROM DOCUMENTOS WHERE documentoid = #{id}
+  </select>
+
+   	<select id="insertDocumento" parameterType="Documento" resultType="int" statementType="CALLABLE">
+        { call ins_documento(#{id},  #{rgInc}, #{cpfCnpj}, #{nome},  #{razao},  #{tableTypeValue}, #{userId}) }
+    </select>
+
+  	<select id="updateDocumento" parameterType="Documento" resultType="int" statementType="CALLABLE">
+        { call ins_documento(#{documentoid},#{id},  #{rgInc}, #{cpfCnpj}, #{nome},  #{razao},  #{tableTypeValue}, #{userId}) }
+    </select>
+
+  <delete id="deleteDocumentoById" parameterType="Documento">
+    DELETE FROM DOCUMENTOS WHERE documentoid = #{id}
+  </delete>
+
+</mapper>

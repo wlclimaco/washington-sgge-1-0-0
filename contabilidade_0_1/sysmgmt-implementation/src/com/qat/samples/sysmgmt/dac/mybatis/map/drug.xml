@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DrugMap">
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="DrugResult" type="Drug">
+    <result property="code" column="NDC_CODE"/>
+    <result property="description" column="NDC_DESC"/>
+	<collection property="drugPrices" resultMap="DrugPriceResult"/>
+  </resultMap>
+
+  <resultMap id="DrugPriceResult" type="DrugPrice">
+    <result property="parentKey" column="PARENT_KEY"/>
+    <result property="priceSexIndicatorValue" column="NDC_SEX_IND"/>
+   	<result property="price" column="NDC_PRICE"/>
+   	<result property="effectiveDate" column="EFFECTIVEDATE"/>
+  </resultMap>
+
+  <sql id="allDrugColumns">
+		NDC_CODE, NDC_DESC
+  </sql>
+
+  <sql id="allDrugPriceColumns">
+		PARENT_KEY, NDC_SEX_IND, NDC_PRICE, EFFECTIVEDATE
+  </sql>
+
+   <sql id="allDrugColumnsWithQualifier">
+		d.NDC_CODE, d.NDC_DESC
+  </sql>
+
+  <sql id="allDrugPriceColumnsWithQualifier">
+		d.PARENT_KEY, d.NDC_SEX_IND, d.NDC_PRICE, d.EFFECTIVEDATE
+  </sql>
+
+  <select id="fetchAllNDCs" resultMap="DrugResult">
+    SELECT
+    <include refid="allDrugColumns" />
+    ,
+    <include refid="allDrugPriceColumns" />
+    FROM DRUG
+	LEFT OUTER JOIN DRUG_PRICE
+	ON NDC_CODE = PARENT_KEY
+	ORDER BY NDC_CODE ASC
+  </select>
+
+  <select id="fetchDrugByNDC" parameterType="String" resultMap="DrugResult">
+    SELECT
+    <include refid="allDrugColumns" />
+    ,
+    <include refid="allDrugPriceColumns" />
+    FROM DRUG
+	LEFT OUTER JOIN DRUG_PRICE
+	ON NDC_CODE = PARENT_KEY
+    WHERE NDC_CODE = #{drugCode}
+  </select>
+
+  <select id="fetchDrugRowCount" resultType="Integer">
+      <if test="_databaseId == 'PostgreSQL'">
+			SELECT COUNT(*) AS RECORD_COUNT FROM DRUG WHERE NDC_CODE IS NOT NULL
+      </if>
+
+   	  <if test="_databaseId == 'Oracle'">
+		 	SELECT COUNT(NDC_CODE) AS RECORD_COUNT FROM DRUG
+      </if>
+  </select>
+
+  <select id="fetchAllDrugsRequest" parameterType="PagedInquiryRequest" resultMap="DrugResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT
+		  <include refid="allDrugColumnsWithQualifier" />
+		  ,
+		  <include refid="allDrugPriceColumnsWithQualifier" />,ROWNUM ROWNUM_
+		  FROM DRUG d
+			LEFT OUTER JOIN DRUG_PRICE
+			ON NDC_CODE = PARENT_KEY
+			ORDER BY NDC_CODE ASC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{startPage} * #{pageSize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{pageSize}
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT
+		  <include refid="allDrugColumns" />
+		  ,
+		  <include refid="allDrugPriceColumns" />
+		  FROM DRUG
+			LEFT OUTER JOIN DRUG_PRICE
+			ON NDC_CODE = PARENT_KEY
+			ORDER BY NDC_CODE ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+    </if>
+  </select>
+
+  <insert id="insertNDC" parameterType="Drug">
+  	INSERT INTO DRUG (
+    <include refid="allDrugColumns" />
+      )
+    VALUES ( #{code} , #{description} )
+  </insert>
+
+  <update id="updateNDC" parameterType="Drug">
+	UPDATE DRUG SET	NDC_DESC = #{description}
+	WHERE NDC_CODE = #{code}
+  </update>
+
+  <delete id="deleteDrugByNDC" parameterType="Drug">
+    DELETE FROM DRUG WHERE NDC_CODE = #{code}
+  </delete>
+
+  <delete id="deleteAllDrugs">
+	DELETE FROM DRUG
+  </delete>
+
+  <select id="fetchDrugPricesByNDC" resultMap="DrugPriceResult">
+    SELECT
+    <include refid="allDrugPriceColumns" />
+    FROM DRUG_PRICE dp WHERE dp.PARENT_KEY = #{value}
+  </select>
+
+  <insert id="insertNDCPrice" parameterType="DrugPrice">
+  	INSERT INTO DRUG_PRICE (
+    <include refid="allDrugPriceColumns" />
+      )
+    VALUES ( #{parentKey} , #{priceSexIndicatorValue}, #{drugPrice}, #{effectiveDate} )
+  </insert>
+
+  <update id="updateNDCPrice" parameterType="DrugPrice">
+	UPDATE DRUG_PRICE SET
+	NDC_PRICE = #{price},
+	EFFECTIVEDATE = #{effectiveDate}
+	WHERE PARENT_KEY = #{parentKey} AND NDC_SEX_IND = #{priceSexIndicatorValue}
+  </update>
+
+  <delete id="deleteNDCPriceBySexInd" parameterType="DrugPrice">
+    DELETE FROM DRUG_PRICE WHERE PARENT_KEY = #{parentKey} AND NDC_SEX_IND = #{priceSexIndicatorValue}
+  </delete>
+
+  <delete id="deleteNDCPriceByNDC" parameterType="DrugPrice">
+    DELETE FROM DRUG_PRICE WHERE PARENT_KEY =  #{parentKey}
+  </delete>
+
+  <delete id="deleteAllDrugPrices">
+	DELETE FROM DRUG_PRICE
+   </delete>
+</mapper>
