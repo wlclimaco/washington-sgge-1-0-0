@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- ========================= BAC DEFINITIONS ======================== -->
+
+<!-- 	<bean id="procedureBACTarget" class="com.qat.samples.sysmgmt.bac.impl.ProcedureBACImpl"> -->
+<!-- 		<property name="procedureDAC" ref="procedureDACTarget"/> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="countyBACTarget" class="com.qat.samples.sysmgmt.bac.impl.CountyBACImpl"> -->
+<!-- 		<property name="countyDAC" ref="countyDACTarget"/> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="drugBACTarget" class="com.qat.samples.sysmgmt.bac.impl.DrugBACImpl"> -->
+<!-- 		<property name="drugDAC" ref="drugDACTarget"/> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="bundleBACTarget" class="com.qat.samples.sysmgmt.bac.impl.BundleBACImpl"> -->
+<!-- 		<property name="bundleDAC" ref="bundleDACTarget"/> -->
+<!-- 	</bean> -->
+	<!-- ========================= ASPECT CONFIGURATION ======================== -->
+
+	<bean id="produtoBACTarget" class="com.qat.samples.sysmgmt.produto.bac.impl.ProdutoBACImpl">
+		<property name="produtoDAC" ref="produtoDACTarget"/>
+	</bean>
+
+	<bean id="empresaBACTarget" class="com.qat.samples.sysmgmt.entidade.bac.impl.EmpresaBACImpl">
+		<property name="empresaDAC" ref="empresaDACTarget"/>
+	</bean>
+
+	<bean id="siteBACTarget" class="com.qat.samples.sysmgmt.site.bac.impl.SiteBACImpl">
+		<property name="siteDAC" ref="siteDACTarget"/>
+	</bean>
+
+<!-- 	<bean id="supermercadoBACTarget" class="com.qat.samples.sysmgmt.supermercado.bac.impl.SupermercadoBACImpl"> -->
+<!-- 		<property name="supermercadoDAC" ref="supermercadoDACTarget"/> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="controleBACTarget" class="com.qat.samples.sysmgmt.controle.bac.impl.ControleBACImpl"> -->
+<!-- 		<property name="controleDAC" ref="controleDACTarget"/> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="clienteBACTarget" class="com.qat.samples.sysmgmt.cliente.bac.impl.ClienteBACImpl"> -->
+<!-- 		<property name="clienteDAC" ref="clienteDACTarget"/> -->
+<!-- 		<property name="enderecoDAC" ref="enderecoDACTarget"/> -->
+<!-- 		<property name="documentoDAC" ref="documentoDACTarget"/> -->
+<!-- 	</bean> -->
+
+</beans>

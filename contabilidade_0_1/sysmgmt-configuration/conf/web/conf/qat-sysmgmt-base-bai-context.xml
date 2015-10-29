@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- ========================= BAI DEFINITIONS ======================== -->
+	<!-- this bean implements procedure bai methods -->
+<!-- 	<bean id="procedureBAI" class="com.qat.samples.sysmgmt.bai.impl.ProcedureBAIImpl"> -->
+<!-- 		<property name="procedureBAC" ref="procedureBACTarget"/> -->
+<!-- 		<property name="validationController" ref="procedureValidationController"/> -->
+<!-- 	</bean> -->
+
+	<!-- this bean implements county bai methods -->
+<!-- 	<bean id="countyBAI" class="com.qat.samples.sysmgmt.bai.impl.CountyBAIImpl"> -->
+<!-- 		<property name="countyBAC" ref="countyBACTarget"/> -->
+<!-- 		<property name="validationController" ref="countyValidationController"/> -->
+<!-- 	</bean> -->
+
+	<!-- this bean implements drug bai methods -->
+<!-- 	<bean id="drugBAI" class="com.qat.samples.sysmgmt.bai.impl.DrugBAIImpl"> -->
+<!-- 		<property name="drugBAC" ref="drugBACTarget"/> -->
+<!-- 		<property name="validationController" ref="drugValidationController"/> -->
+<!-- 	</bean> -->
+
+		<!-- this bean implements drug bai methods -->
+<!-- 	<bean id="bundleBAI" class="com.qat.samples.sysmgmt.bai.impl.BundleBAIImpl"> -->
+<!-- 		<property name="bundleBAC" ref="bundleBACTarget"/> -->
+<!-- 		<property name="validationController" ref="bundleValidationController"/> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="cidadeBAI" class="com.qat.samples.sysmgmt.cidade.bai.impl.CidadeBAIImpl"> -->
+<!-- 		<property name="cidadeBAC" ref="cidadeBACTarget"/> -->
+<!-- 		<property name="validationController" ref="cidadeValidationController"/> -->
+<!-- 	</bean> -->
+
+	<bean id="empresaBAI" class="com.qat.samples.sysmgmt.entidade.bai.impl.EmpresaBAIImpl">
+		<property name="empresaBAC" ref="empresaBACTarget"/>
+		<property name="validationController" ref="empresaValidationController"/>
+	</bean>
+
+<!-- 	<bean id="supermercadoBAI" class="com.qat.samples.sysmgmt.supermercado.bai.impl.SupermercadoBAIImpl"> -->
+<!-- 		<property name="supermercadoBAC" ref="supermercadoBACTarget"/> -->
+<!-- 		<property name="validationController" ref="supermercadoValidationController"/> -->
+<!-- 	</bean> -->
+
+	<bean id="produtoBAI" class="com.qat.samples.sysmgmt.produto.bai.impl.ProdutoBAIImpl">
+		<property name="produtoBAC" ref="produtoBACTarget"/>
+<!-- 		<property name="validationController" ref="produtoValidationController"/> -->
+	</bean>
+
+	<bean id="siteBAI" class="com.qat.samples.sysmgmt.site.bai.impl.SiteBAIImpl">
+		<property name="siteBAC" ref="siteBACTarget"/>
+		<property name="validationController" ref="siteValidationController"/>
+	</bean>
+
+<!-- 	<bean id="clienteBAI" class="com.qat.samples.sysmgmt.cliente.bai.impl.ClienteBAIImpl"> -->
+<!-- 		<property name="clienteBAC" ref="clienteBACTarget"/> -->
+<!-- 		<property name="validationController" ref="clienteValidationController"/> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="controleBAI" class="com.qat.samples.sysmgmt.controle.bai.impl.ControleBAIImpl"> -->
+<!-- 		<property name="controleBAC" ref="controleBACTarget"/> -->
+<!-- 	</bean> -->
+
+
+</beans>

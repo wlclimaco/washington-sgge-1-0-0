@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:sec="http://www.springframework.org/schema/security"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<!-- ========================= Web Services Authorization & Authentication ======================== -->
+    <bean id="wsAuthenticationInterceptor" class="com.qat.framework.util.WSAuthenticationInInterceptor">
+        <constructor-arg index="0">
+            <map key-type="java.lang.String" value-type="java.lang.Object">
+                <entry key="action" value="UsernameToken" />
+                <entry key="passwordType" value="PasswordText" />
+                <entry key="passwordCallbackClass" value="com.qat.framework.util.ServerPasswordCallback" />
+            </map>
+        </constructor-arg>
+        <property name="authenticationManager" ref="authenticationManager"/>
+ 		<property name="allowedWSRoles" value="*"/>
+    </bean>
+
+	<bean id="wsAuthorizationInterceptor" class="com.qat.framework.util.WSAuthorizationInInterceptor">
+   		<property name="methodRolesMap">
+      		<map>
+        		<entry key="fetchAllCounties" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchCountyById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchCountiesByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteCounty" value="ROLE_DOMAIN ADMINS"/>
+        		<entry key="insertCounty" value="ROLE_DOMAIN ADMINS"/>
+        		<entry key="updateCounty" value="ROLE_DOMAIN ADMINS"/>
+        		<entry key="refreshCounties" value="ROLE_DOMAIN ADMINS"/>
+        		<entry key="fetchAllProcedures" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchProcedureById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchProceduresByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteProcedure" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertProcedure" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="updateProcedure" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="refreshProcedures" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="fetchAllBundles" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchBundleById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchBundlesByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteBundle" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertBundle" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="updateBundle" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="refreshBundles" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+
+        		<entry key="fetchAllCidades" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchCidadeById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchCidadesByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteCidade" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertCidade" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="updateCidade" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="refreshCidades" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+
+        		<entry key="fetchAllEmpresas" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchEmpresaById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchEmpresaByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteEmpresa" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertEmpresa" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="updateEmpresa" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+
+
+        		<entry key="fetchAllClientes" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchClienteById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchClientesByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteCliente" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertCliente" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="updateCliente" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+
+        		<entry key="fetchAllSites" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchSiteById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchSitesByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteSite" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertSite" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="updateSite" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+
+        		<entry key="fetchAllSupermercados" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchSupermercadoById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchSupermercadosByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteSupermercado" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertSupermercado" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="updateSupermercado" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="refreshSupermercados" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+
+
+        		<entry key="fetchAllProdutos" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchProdutoById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchProdutosByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteProduto" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertProduto" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="updateProduto" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="refreshProdutos" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+
+
+        		<entry key="fetchAllCadastros" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchCadastroById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchCadastrosByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteCadastro" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertCadastro" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertFoto" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="updateCadastro" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="refreshCadastros" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+
+        		<entry key="fetchAllEmbalagems" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteEmbalagem" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertEmbalagem" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="updateEmbalagem" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+
+        		<entry key="fetchAllUniMeds" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteUniMed" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertUniMed" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="updateUniMed" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+
+
+
+        		<entry key="fetchAllControles" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchAllAcessos" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchControleByPage" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchControlesByRequest" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="fetchControleByAction" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+      		</map>
+   		</property>
+	</bean>
+	<!-- ========================= Spring Security Settings for Web Services ======================== -->
+    <bean id="springSecurityFilterChain" class="org.springframework.security.web.FilterChainProxy">
+        <sec:filter-chain-map>
+            <sec:filter-chain pattern="/services/ws/**" filters="contextIntegrationFilter"/>
+        </sec:filter-chain-map>
+    </bean>
+    	<bean id="contextIntegrationFilter" class="org.springframework.security.web.context.SecurityContextPersistenceFilter">
+    </bean>
+
+	<!-- ========================= REST Services Authorization & Authentication ======================== -->
+    <sec:global-method-security secured-annotations="enabled">
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.bas.rest.CountyBAS.fetchAllCounties(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.bas.rest.CountyBAS.fetchCountiesByRequest(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.bas.rest.CountyBAS.fetchCountyById(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.bas.rest.CountyBAS.deleteCounty(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.bas.rest.CountyBAS.insertCounty(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.bas.rest.CountyBAS.updateCounty(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.bas.rest.CountyBAS.refreshCounties(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+
+
+        <!-- =====================================
+        <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.cidade.bas.rest.CidadeBAS.fetchAllCidades(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.cidade.bas.rest.CidadeBAS.fetchCidadesByRequest(*))"
+        access=""/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.cidade.bas.rest.CidadeBAS.fetchCidadeById(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.cidade.bas.rest.CidadeBAS.deleteCidade(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.cidade.bas.rest.CidadeBAS.insertCidade(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.cidade.bas.rest.CidadeBAS.updateCidade(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.cidade.bas.rest.CidadeBAS.refreshCidades(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+
+         ===================================== -->
+        <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.entidade.bas.rest.EmpresaBAS.fetchAllEmpresas(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+        <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.entidade.bas.rest.EmpresaBAS.fetchEmpresaByRequest(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.entidade.bas.rest.EmpresaBAS.fetchEmpresaById(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.entidade.bas.rest.EmpresaBAS.deleteEmpresa(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.entidade.bas.rest.EmpresaBAS.insertEmpresa(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.entidade.bas.rest.EmpresaBAS.updateEmpresa(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+
+              <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.fetchAllProdutos(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.fetchProdutosByRequest(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.fetchProdutoById(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.deleteProduto(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.insertProduto(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.updateProduto(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+
+         <!-- ===================================== -->
+
+                  <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.site.bas.rest.SiteBAS.fetchAllSites(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.site.bas.rest.SiteBAS.fetchSitesByRequest(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.site.bas.rest.SiteBAS.fetchSiteById(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.site.bas.rest.SiteBAS.deleteSite(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.site.bas.rest.SiteBAS.insertSite(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.site.bas.rest.SiteBAS.updateSite(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+
+         <!-- ===================================== -->
+
+         <!-- =====================================
+        <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.cliente.bas.rest.ClienteBAS.fetchAllClientes(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.cliente.bas.rest.ClienteBAS.fetchClientesByRequest(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.cliente.bas.rest.ClienteBAS.fetchClienteById(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.cliente.bas.rest.ClienteBAS.deleteCliente(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.cliente.bas.rest.ClienteBAS.insertCliente(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.cliente.bas.rest.ClienteBAS.updateCliente(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.cliente.bas.rest.ClienteBAS.refreshClientes(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+
+
+        <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.supermercado.bas.rest.SupermercadoBAS.fetchAllSupermercados(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.supermercado.bas.rest.SupermercadoBAS.fetchSupermercadosByRequest(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.supermercado.bas.rest.SupermercadoBAS.fetchSupermercadoById(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.supermercado.bas.rest.SupermercadoBAS.deleteSupermercado(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.supermercado.bas.rest.SupermercadoBAS.insertSupermercado(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.supermercado.bas.rest.SupermercadoBAS.updateSupermercado(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.supermercado.bas.rest.SupermercadoBAS.refreshSupermercados(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+
+
+
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.refreshProdutos(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+
+
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.fetchAllCadastros(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.fetchCadastrosByRequest(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.fetchCadastroById(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.deleteCadastro(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.insertCadastro(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.updateCadastro(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.refreshCadastros(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+       <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.insertFoto(*))"
+         access="ROLE_DOMAIN ADMINS"/>
+
+
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.controle.bas.rest.ControleBAS.fetchAllControles(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+
+         <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.controle.bas.rest.ControleBAS.fetchAllAcessos(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+
+         <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.controle.bas.rest.ControleBAS.fetchControleByPage(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+
+         <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.controle.bas.rest.ControleBAS.fetchControlesByRequest(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+
+         <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.controle.bas.rest.ControleBAS.fetchControleByAction(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+===================================== -->
+  	</sec:global-method-security>
+
+ 	<!-- ========================= Spring Security Settings for REST Services ======================== -->
+ 	<sec:http pattern="/services/ws/**" security="none" />
+	<sec:http auto-config="true" use-expressions="true">
+		<sec:intercept-url pattern="/services/rest/**" access="hasAnyRole('ROLE_DOMAIN ADMINS', 'ROLE_DOMAIN USERS', 'ROLE_GUEST')" />
+		<sec:http-basic />
+	</sec:http>
+
+ 	<!-- ========================= Authentication Manager for Spring Security REST & Web Services ======================== -->
+	<!-- Usernames/Passwords are rod/koala dianne/emu scott/wombat peter/opal  -->
+	<sec:authentication-manager alias="authenticationManager">
+		<sec:authentication-provider>
+			<sec:user-service>
+				<sec:user name="rod" password="koala" authorities="ROLE_DOMAIN ADMINS" />
+				<sec:user name="washington" password="koala" authorities="ROLE_DOMAIN ADMINS" />
+				<sec:user name="kessius" password="kessius123" authorities="ROLE_DOMAIN ADMINS" />
+				<sec:user name="cesar" password="cesar123" authorities="ROLE_DOMAIN ADMINS" />
+				<sec:user name="graziane" password="graziane123" authorities="ROLE_DOMAIN ADMINS" />
+				<sec:user name="damiao" password="damiao123" authorities="ROLE_DOMAIN ADMINS" />
+				<sec:user name="dianne" password="koala"	authorities="ROLE_GUEST" />
+				<sec:user name="scott" password="koala" authorities="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS" />
+				<sec:user name="peter" password="koala" authorities="ROLE_DOMAIN USERS" />
+			</sec:user-service>
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+	<!-- BEGIN EXPLICIT LDAP/MS ACTIVE DIRECTORY CONFIGURATION. -->
+<!--	<sec:authentication-manager alias="authenticationManager">-->
+<!--			<sec:authentication-provider ref="ldapAuthProvider">-->
+<!--			</sec:authentication-provider>-->
+<!--	</sec:authentication-manager>-->
+<!---->
+<!--	<bean id="ldapAuthProvider" class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">-->
+<!--		<constructor-arg>-->
+<!--			<bean id="bindAuthenticator" class="org.springframework.security.ldap.authentication.BindAuthenticator">-->
+<!--				<constructor-arg ref="contextSource" />-->
+<!--				<property name="userSearch" ref="userSearch" />-->
+<!--			</bean>-->
+<!--		</constructor-arg>-->
+<!--		<constructor-arg>-->
+<!--			<bean class="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator">-->
+<!--				<constructor-arg ref="contextSource" />-->
+<!--				<constructor-arg value="cn=Users" />-->
+<!--				<property name="searchSubtree" value="true" />-->
+<!--					<property name="defaultRole" value="ROLE_DOMAIN USERS" />-->
+<!--				<property name="ignorePartialResultException" value="true" />-->
+<!--			</bean>-->
+<!--		</constructor-arg>-->
+<!--	</bean>-->
+<!---->
+<!--	<bean id="userSearch"	class="org.springframework.security.ldap.search.FilterBasedLdapUserSearch">-->
+<!--		<constructor-arg index="0" value="cn=Users" />-->
+<!--		<constructor-arg index="1" value="(sAMAccountName={0})" />-->
+<!--		<constructor-arg index="2" ref="contextSource" />-->
+<!--		<property name="searchSubtree" value="true" />-->
+<!--	</bean>-->
+<!---->
+<!--	<bean id="contextSource" class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">-->
+<!--		<constructor-arg value="ldap://192.168.1.6:389/dc=omaha,dc=qat,dc=com" />-->
+<!--		<property name="userDn" value="cn=QATTEST,cn=Users,dc=omaha,dc=qat,dc=com" />-->
+<!--		<property name="password" value="QATomaHA01$" />-->
+<!--	</bean>-->
+	<!-- END LDAP/MS ACTIVE DIRECTORY CONFIGURATION -->
+</beans>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<bean id="CountyValidator" class="com.qat.samples.sysmgmt.validation.CountyValidator">
+		<property name="descriptionLength" value="50" />
+	</bean>
+
+	<bean id="countyValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="CountyValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="ProcedureValidator" class="com.qat.samples.sysmgmt.validation.ProcedureValidator" />
+
+	<bean id="procedureValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="ProcedureValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="drugValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="DrugValidator" />
+				<ref bean="DrugPriceValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="DrugValidator" class="com.qat.samples.sysmgmt.validation.DrugValidator" />
+
+	<bean id="DrugPriceValidator" class="com.qat.samples.sysmgmt.validation.DrugPriceValidator" />
+
+	<bean id="BundleValidator" class="com.qat.samples.sysmgmt.validation.BundleValidator" />
+
+	<bean id="bundleValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="BundleValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="CidadeValidator" class="com.qat.samples.sysmgmt.validation.CidadeValidator" />
+
+	<bean id="cidadeValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="CidadeValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="EmpresaValidator" class="com.qat.samples.sysmgmt.validation.EmpresaValidator" />
+
+	<bean id="empresaValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="EmpresaValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="SupermercadoValidator" class="com.qat.samples.sysmgmt.validation.SupermercadoValidator" />
+
+	<bean id="supermercadoValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="SupermercadoValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="ProdutoValidator" class="com.qat.samples.sysmgmt.validation.ProdutoValidator" />
+
+	<bean id="produtoValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="ProdutoValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="CadastroValidator" class="com.qat.samples.sysmgmt.validation.CadastroValidator" />
+
+	<bean id="cadastroValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="CadastroValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="ClienteValidator" class="com.qat.samples.sysmgmt.validation.ClienteValidator" />
+
+	<bean id="clienteValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="ClienteValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="SiteValidator" class="com.qat.samples.sysmgmt.validation.SiteValidator" />
+
+	<bean id="siteValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="SiteValidator" />
+			</list>
+		</property>
+	</bean>
+</beans>

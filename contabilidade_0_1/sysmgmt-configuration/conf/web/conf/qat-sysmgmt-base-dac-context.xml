@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Application context definition for the QAT business area data access layer.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Setup for mybatis Database Layer -->
+  	<bean id="sysMgmt-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<property name="configLocation" value="classpath:com/qat/samples/sysmgmt/dac/mybatis/map/sysmgmt-base-mybatis-config.xml" />
+    	<property name="dataSource" ref="qatDataSource" />
+  	</bean>
+
+	<!-- ========================= DAC DEFINITIONS================================= -->
+  	<bean id="countyDACTarget" class="com.qat.samples.sysmgmt.dac.mybatis.CountyDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="drugDACTarget" class="com.qat.samples.sysmgmt.dac.mybatis.DrugDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="procedureDACTarget" class="com.qat.samples.sysmgmt.dac.mybatis.ProcedureDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="bundleDACTarget" class="com.qat.samples.sysmgmt.dac.mybatis.BundleDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+<!--   	<bean id="contoleAcessDACTarget" class="com.qat.samples.sysmgmt.dac.mybatis.ControleAcessDACImpl"> -->
+<!-- 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" /> -->
+<!--   	</bean> -->
+
+  	<bean id="enderecoDACTarget" class="com.qat.samples.sysmgmt.util.dac.mybatis.EnderecoDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+<!--   	<bean id="supermercadoDACTarget" class="com.qat.samples.sysmgmt.supermercado.dac.mybatis.SupermercadoDACImpl"> -->
+<!-- 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" /> -->
+<!--   	</bean> -->
+
+  	<bean id="produtoDACTarget" class="com.qat.samples.sysmgmt.produto.dac.mybatis.ProdutoDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="siteDACTarget" class="com.qat.samples.sysmgmt.site.dac.mybatis.SiteDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+<!-- 	<bean id="clienteDACTarget" class="com.qat.samples.sysmgmt.cliente.dac.mybatis.ClienteDACImpl"> -->
+<!-- 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" /> -->
+<!--   	</bean> -->
+
+<!--   	<bean id="precoDACTarget" class="com.qat.samples.sysmgmt.dac.mybatis.PrecoDACImpl"> -->
+<!-- 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" /> -->
+<!--   	</bean> -->
+
+<!--   	<bean id="controleDACTarget" class="com.qat.samples.sysmgmt.controle.dac.mybatis.ControleDACImpl"> -->
+<!-- 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" /> -->
+<!--   	</bean> -->
+
+  	<bean id="cidadeDACTarget" class="com.qat.samples.sysmgmt.util.dac.mybatis.CidadeDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="telefoneDACTarget" class="com.qat.samples.sysmgmt.util.dac.mybatis.TelefoneDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="emailDACTarget" class="com.qat.samples.sysmgmt.util.dac.mybatis.EmailDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="socioDACTarget" class="com.qat.samples.sysmgmt.util.dac.mybatis.SociosDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="cnaeDACTarget" class="com.qat.samples.sysmgmt.util.dac.mybatis.CnaeDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="documentoDACTarget" class="com.qat.samples.sysmgmt.util.dac.mybatis.DocumentoDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="historicoDACTarget" class="com.qat.samples.sysmgmt.util.dac.mybatis.HistoricoDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="statusDACTarget" class="com.qat.samples.sysmgmt.util.dac.mybatis.StatusDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="planoDACTarget" class="com.qat.samples.sysmgmt.util.dac.mybatis.PlanoDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+<!--   	<bean id="noteDACTarget" class="com.qat.samples.sysmgmt.util.dac.mybatis.NoteDACImpl"> -->
+<!-- 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" /> -->
+<!--   	</bean> -->
+
+
+  	<bean id="empresaDACTarget" class="com.qat.samples.sysmgmt.entidade.dac.mybatis.EmpresaDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+		<property name="enderecoDAC" ref="enderecoDACTarget"/>
+		<property name="cidadeDAC" ref="cidadeDACTarget"/>
+		<property name="telefoneDAC" ref="telefoneDACTarget"/>
+		<property name="emailDAC" ref="emailDACTarget"/>
+		<property name="socioDAC" ref="socioDACTarget"/>
+		<property name="cnaeDAC" ref="cnaeDACTarget"/>
+		<property name="documentoDAC" ref="documentoDACTarget"/>
+		<property name="historicoDAC" ref="historicoDACTarget"/>
+		<property name="statusDAC" ref="statusDACTarget"/>
+		<property name="planoDAC" ref="planoDACTarget"/>
+<!-- 		<property name="noteDAC" ref="noteDACTarget"/> -->
+  	</bean>
+</beans>
