@@ -3,6 +3,7 @@ package com.qat.samples.sysmgmt.agencia.model.response;
 import java.util.Collection;
 import java.util.List;
 
+import com.qat.framework.model.response.InquiryResponse;
 import com.qat.samples.sysmgmt.agencia.Agencia;
 
 public class AgenciaResponse extends InquiryResponse

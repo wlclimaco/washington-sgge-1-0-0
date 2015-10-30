@@ -1,14 +1,14 @@
 package com.qat.samples.sysmgmt.arquivo.bai;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.request.ArquivoInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.ArquivoMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.response.ArquivoResponse;
+import com.qat.samples.sysmgmt.arquivo.model.request.ArquivoInquiryRequest;
+import com.qat.samples.sysmgmt.arquivo.model.request.ArquivoMaintenanceRequest;
+import com.qat.samples.sysmgmt.arquivo.model.response.ArquivoResponse;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Interface IArquivoBAI.
- *
+ * 
  * @author abarros
  * @version 1.0
  * @created 22-Jul-2014 10:24:55 AM
@@ -18,7 +18,7 @@ public interface IArquivoBAI
 
 	/**
 	 * Insert location.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the location response
 	 */
@@ -26,7 +26,7 @@ public interface IArquivoBAI
 
 	/**
 	 * Update location.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the location response
 	 */
@@ -34,7 +34,7 @@ public interface IArquivoBAI
 
 	/**
 	 * Delete location.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the location response
 	 */
@@ -42,7 +42,7 @@ public interface IArquivoBAI
 
 	/**
 	 * Fetch location by id.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the location response
 	 */
@@ -50,7 +50,7 @@ public interface IArquivoBAI
 
 	/**
 	 * Fetch location by request.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the location response
 	 */

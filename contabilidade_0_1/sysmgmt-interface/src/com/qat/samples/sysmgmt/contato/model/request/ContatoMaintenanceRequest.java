@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.contato.model.request;
 
+import com.qat.framework.model.request.MaintenanceRequest;
 import com.qat.samples.sysmgmt.contato.Contato;
 
 public class ContatoMaintenanceRequest extends MaintenanceRequest

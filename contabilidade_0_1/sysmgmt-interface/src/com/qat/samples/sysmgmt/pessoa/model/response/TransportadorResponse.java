@@ -3,8 +3,8 @@ package com.qat.samples.sysmgmt.pessoa.model.response;
 import java.util.Collection;
 import java.util.List;
 
-import com.prosperitasglobal.sendsolv.model.Transportador;
 import com.qat.framework.model.response.InquiryResponse;
+import com.qat.samples.sysmgmt.pessoa.Transportador;
 
 public class TransportadorResponse extends InquiryResponse
 {

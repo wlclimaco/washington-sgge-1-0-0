@@ -1,6 +1,7 @@
 package com.qat.samples.sysmgmt.dp.model.request;
 
-import com.prosperitasglobal.sendsolv.model.criteria.HoraFuncCriteria;
+import com.qat.samples.sysmgmt.dp.model.criteria.HoraFuncCriteria;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 
 /**
  * The Class ProdutoInquiryRequest.
@@ -13,7 +14,7 @@ public class HoraFuncInquiryRequest extends PagedInquiryRequest
 
 	/**
 	 * Gets the criteria.
-	 *
+	 * 
 	 * @return the criteria
 	 */
 	public HoraFuncCriteria getCriteria()
@@ -27,7 +28,7 @@ public class HoraFuncInquiryRequest extends PagedInquiryRequest
 
 	/**
 	 * Sets the criteria.
-	 *
+	 * 
 	 * @param criteria the criteria
 	 */
 	public void setCriteria(HoraFuncCriteria criteria)

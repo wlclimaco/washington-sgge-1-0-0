@@ -4,6 +4,8 @@ import javax.jws.WebMethod;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 
+import org.apache.cxf.annotations.WSDLDocumentation;
+
 import com.qat.samples.sysmgmt.financeiro.model.request.FinanceiroInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.FinanceiroMaintenanceRequest;
 import com.qat.samples.sysmgmt.financeiro.model.response.FinanceiroResponse;

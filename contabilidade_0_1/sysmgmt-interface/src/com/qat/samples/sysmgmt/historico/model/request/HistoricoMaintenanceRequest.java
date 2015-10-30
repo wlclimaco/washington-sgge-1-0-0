@@ -1,7 +1,7 @@
 package com.qat.samples.sysmgmt.historico.model.request;
 
-import com.prosperitasglobal.sendsolv.model.Historico;
 import com.qat.framework.model.request.MaintenanceRequest;
+import com.qat.samples.sysmgmt.historico.Historico;
 
 public class HistoricoMaintenanceRequest extends MaintenanceRequest
 {
@@ -19,7 +19,7 @@ public class HistoricoMaintenanceRequest extends MaintenanceRequest
 
 	/**
 	 * Gets the historico.
-	 *
+	 * 
 	 * @return the historico
 	 */
 	public Historico getHistorico()
@@ -29,7 +29,7 @@ public class HistoricoMaintenanceRequest extends MaintenanceRequest
 
 	/**
 	 * Sets the historico.
-	 *
+	 * 
 	 * @param historico the historico
 	 */
 	public void setHistorico(Historico historico)

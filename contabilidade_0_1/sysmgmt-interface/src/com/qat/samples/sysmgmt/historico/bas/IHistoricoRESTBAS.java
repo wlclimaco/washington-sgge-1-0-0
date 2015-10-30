@@ -1,5 +1,10 @@
 package com.qat.samples.sysmgmt.historico.bas;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+
 import com.qat.samples.sysmgmt.historico.model.request.HistoricoInquiryRequest;
 import com.qat.samples.sysmgmt.historico.model.request.HistoricoMaintenanceRequest;
 import com.qat.samples.sysmgmt.historico.model.response.HistoricoResponse;

@@ -1,6 +1,7 @@
 package com.qat.samples.sysmgmt.pessoa.model.request;
 
-import com.prosperitasglobal.sendsolv.model.criteria.TransportadorCriteria;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.criteria.TransportadorCriteria;
 
 /**
  * The Class ProdutoInquiryRequest.
@@ -13,7 +14,7 @@ public class TransportadorInquiryRequest extends PagedInquiryRequest
 
 	/**
 	 * Gets the criteria.
-	 *
+	 * 
 	 * @return the criteria
 	 */
 	public TransportadorCriteria getCriteria()
@@ -27,7 +28,7 @@ public class TransportadorInquiryRequest extends PagedInquiryRequest
 
 	/**
 	 * Sets the criteria.
-	 *
+	 * 
 	 * @param criteria the criteria
 	 */
 	public void setCriteria(TransportadorCriteria criteria)

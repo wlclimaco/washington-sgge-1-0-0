@@ -2,7 +2,7 @@ package com.qat.samples.sysmgmt.dp.model.criteria;
 
 import java.io.Serializable;
 
-import com.prosperitasglobal.sendsolv.model.Beneficios;
+import com.qat.samples.sysmgmt.beneficios.Beneficios;
 
 /**
  * The Class MemberCriteria.

@@ -3,8 +3,8 @@ package com.qat.samples.sysmgmt.beneficios.model.response;
 import java.util.Collection;
 import java.util.List;
 
-import com.prosperitasglobal.sendsolv.model.Beneficios;
 import com.qat.framework.model.response.InquiryResponse;
+import com.qat.samples.sysmgmt.beneficios.Beneficios;
 
 public class BeneficiosResponse extends InquiryResponse
 {

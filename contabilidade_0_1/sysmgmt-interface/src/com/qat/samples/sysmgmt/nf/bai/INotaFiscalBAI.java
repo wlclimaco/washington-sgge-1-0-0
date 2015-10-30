@@ -1,24 +1,7 @@
 package com.qat.samples.sysmgmt.nf.bai;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.request.CaixaInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.CondPgInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.ContasInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.ContasMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.NotaFiscalEntradaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.NotaFiscalSaidaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.OrcamentoInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.OrcamentoMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.PedidoComprasInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.PedidoComprasMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.response.CaixaResponse;
-import com.prosperitasglobal.sendsolv.model.response.CondPgResponse;
-import com.prosperitasglobal.sendsolv.model.response.ContasResponse;
-import com.prosperitasglobal.sendsolv.model.response.NotaFiscalEntradaResponse;
-import com.prosperitasglobal.sendsolv.model.response.NotaFiscalSaidaResponse;
-import com.prosperitasglobal.sendsolv.model.response.OrcamentoResponse;
-import com.prosperitasglobal.sendsolv.model.response.PedidoComprasResponse;
+import com.qat.samples.sysmgmt.condpag.model.request.CondPgInquiryRequest;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 
 // TODO: Auto-generated Javadoc
 /**

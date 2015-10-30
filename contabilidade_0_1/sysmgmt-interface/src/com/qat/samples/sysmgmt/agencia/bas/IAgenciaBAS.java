@@ -4,6 +4,8 @@ import javax.jws.WebMethod;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 
+import org.apache.cxf.annotations.WSDLDocumentation;
+
 import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
 import com.qat.samples.sysmgmt.agencia.model.request.AgenciaMaintenanceRequest;
 import com.qat.samples.sysmgmt.agencia.model.response.AgenciaResponse;

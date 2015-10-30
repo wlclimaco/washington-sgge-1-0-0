@@ -1,12 +1,12 @@
 package com.qat.samples.sysmgmt.dp.model.request;
 
-import com.prosperitasglobal.sendsolv.model.Funcionario;
 import com.qat.framework.model.request.MaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.Funcionario;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class LocationMaintenanceRequest.
- *
+ * 
  * @author abarros
  * @version 1.0
  * @created 22-Jul-2014 10:26:49 AM
@@ -27,7 +27,7 @@ public class FuncionarioMaintenanceRequest extends MaintenanceRequest
 
 	/**
 	 * Gets the funcionario.
-	 *
+	 * 
 	 * @return the funcionario
 	 */
 	public Funcionario getFuncionario()
@@ -37,7 +37,7 @@ public class FuncionarioMaintenanceRequest extends MaintenanceRequest
 
 	/**
 	 * Sets the funcionario.
-	 *
+	 * 
 	 * @param funcionario the funcionario to set
 	 */
 	public void setFuncionario(Funcionario funcionario)

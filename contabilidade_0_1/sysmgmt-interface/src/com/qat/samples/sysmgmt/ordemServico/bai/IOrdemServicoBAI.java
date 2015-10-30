@@ -1,9 +1,6 @@
 package com.qat.samples.sysmgmt.ordemServico.bai;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.request.OrdemServicoInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.OrdemServicoMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.response.OrdemServicoResponse;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 
 /**
  * The Interface IOrdemServicoBAI.
@@ -13,7 +10,7 @@ public interface IOrdemServicoBAI
 
 	/**
 	 * Insert ordem servico.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the ordem servico response
 	 */
@@ -21,7 +18,7 @@ public interface IOrdemServicoBAI
 
 	/**
 	 * Update ordem servico.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the ordem servico response
 	 */
@@ -29,7 +26,7 @@ public interface IOrdemServicoBAI
 
 	/**
 	 * Delete ordem servico.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the ordem servico response
 	 */
@@ -37,7 +34,7 @@ public interface IOrdemServicoBAI
 
 	/**
 	 * Fetch ordem servico by id.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the ordem servico response
 	 */
@@ -45,7 +42,7 @@ public interface IOrdemServicoBAI
 
 	/**
 	 * Fetch ordem servico by request.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the ordem servico response
 	 */

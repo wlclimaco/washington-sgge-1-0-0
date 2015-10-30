@@ -3,8 +3,8 @@ package com.qat.samples.sysmgmt.historico.model.response;
 import java.util.Collection;
 import java.util.List;
 
-import com.prosperitasglobal.sendsolv.model.Historico;
 import com.qat.framework.model.response.InquiryResponse;
+import com.qat.samples.sysmgmt.historico.Historico;
 
 public class HistoricoResponse extends InquiryResponse
 {

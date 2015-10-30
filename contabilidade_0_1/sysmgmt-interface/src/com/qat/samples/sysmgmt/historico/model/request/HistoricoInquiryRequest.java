@@ -1,6 +1,7 @@
 package com.qat.samples.sysmgmt.historico.model.request;
 
-import com.prosperitasglobal.sendsolv.model.criteria.ProdutoCriteria;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.criteria.ProdutoCriteria;
 
 /**
  * The Class ProdutoInquiryRequest.
@@ -13,7 +14,7 @@ public class HistoricoInquiryRequest extends PagedInquiryRequest
 
 	/**
 	 * Gets the criteria.
-	 *
+	 * 
 	 * @return the criteria
 	 */
 	public ProdutoCriteria getCriteria()
@@ -27,7 +28,7 @@ public class HistoricoInquiryRequest extends PagedInquiryRequest
 
 	/**
 	 * Sets the criteria.
-	 *
+	 * 
 	 * @param criteria the criteria
 	 */
 	public void setCriteria(ProdutoCriteria criteria)

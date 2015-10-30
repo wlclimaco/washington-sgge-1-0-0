@@ -1,7 +1,7 @@
 package com.qat.samples.sysmgmt.pessoa.model.request;
 
-import com.prosperitasglobal.sendsolv.model.Transportador;
 import com.qat.framework.model.request.MaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.Transportador;
 
 public class TransportadorMaintenanceRequest extends MaintenanceRequest
 {

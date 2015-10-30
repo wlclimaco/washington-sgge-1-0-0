@@ -3,13 +3,13 @@ package com.qat.samples.sysmgmt.dp.bai;
 import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest;
 import com.qat.samples.sysmgmt.beneficios.model.response.BeneficiosResponse;
 import com.qat.samples.sysmgmt.dp.model.request.EventoInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioMaintenanceRequest;
 import com.qat.samples.sysmgmt.dp.model.request.HoraFuncInquiryRequest;
 import com.qat.samples.sysmgmt.dp.model.response.EventoResponse;
 import com.qat.samples.sysmgmt.dp.model.response.FuncionarioResponse;
 import com.qat.samples.sysmgmt.dp.model.response.HorarioFuncResponse;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.pessoa.model.request.FuncionarioInquiryRequest;
-import com.qat.samples.sysmgmt.pessoa.model.request.FuncionarioMaintenanceRequest;
 
 /**
  * The Interface IFuncionarioBAI.
@@ -19,7 +19,7 @@ public interface IFuncionarioBAI
 
 	/**
 	 * Insert funcionario.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the funcionario response
 	 */
@@ -27,7 +27,7 @@ public interface IFuncionarioBAI
 
 	/**
 	 * Update funcionario.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the funcionario response
 	 */
@@ -35,7 +35,7 @@ public interface IFuncionarioBAI
 
 	/**
 	 * Delete funcionario.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the funcionario response
 	 */
@@ -43,7 +43,7 @@ public interface IFuncionarioBAI
 
 	/**
 	 * Fetch funcionario by id.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the funcionario response
 	 */
@@ -51,7 +51,7 @@ public interface IFuncionarioBAI
 
 	/**
 	 * Fetch funcionario by request.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the funcionario response
 	 */
@@ -59,7 +59,7 @@ public interface IFuncionarioBAI
 
 	/**
 	 * Fetch beneficios by request.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the beneficios response
 	 */
@@ -67,7 +67,7 @@ public interface IFuncionarioBAI
 
 	/**
 	 * Fetch hora func by request.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the hora func response
 	 */
@@ -75,7 +75,7 @@ public interface IFuncionarioBAI
 
 	/**
 	 * Fetch evento by request.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the evento response
 	 */

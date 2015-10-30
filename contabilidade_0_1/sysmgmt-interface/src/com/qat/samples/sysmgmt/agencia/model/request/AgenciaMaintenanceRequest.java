@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.agencia.model.request;
 
+import com.qat.framework.model.request.MaintenanceRequest;
 import com.qat.samples.sysmgmt.agencia.Agencia;
 
 public class AgenciaMaintenanceRequest extends MaintenanceRequest

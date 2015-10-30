@@ -3,8 +3,8 @@ package com.qat.samples.sysmgmt.dp.model.response;
 import java.util.Collection;
 import java.util.List;
 
-import com.prosperitasglobal.sendsolv.model.HorarioFunc;
 import com.qat.framework.model.response.InquiryResponse;
+import com.qat.samples.sysmgmt.dp.HorarioFunc;
 
 public class HorarioFuncResponse extends InquiryResponse
 {

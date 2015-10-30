@@ -3,8 +3,8 @@ package com.qat.samples.sysmgmt.historico.model.response;
 import java.util.Collection;
 import java.util.List;
 
-import com.prosperitasglobal.sendsolv.model.Alertas;
 import com.qat.framework.model.response.InquiryResponse;
+import com.qat.samples.sysmgmt.alerta.Alertas;
 
 public class AlertasResponse extends InquiryResponse
 {
