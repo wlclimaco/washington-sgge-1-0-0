@@ -1,7 +1,7 @@
 package com.qat.samples.sysmgmt.util.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.nf.HistoricoNF;
+import com.qat.samples.sysmgmt.nf.model.HistoricoNF;
 
 public interface IHistoricoNFDAC
 {

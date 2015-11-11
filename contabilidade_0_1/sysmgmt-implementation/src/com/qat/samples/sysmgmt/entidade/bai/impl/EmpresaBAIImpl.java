@@ -28,6 +28,7 @@ import com.qat.samples.sysmgmt.entidade.Empresa;
 import com.qat.samples.sysmgmt.entidade.Filial;
 import com.qat.samples.sysmgmt.entidade.bac.IEmpresaBAC;
 import com.qat.samples.sysmgmt.entidade.bai.IEmpresaBAI;
+import com.qat.samples.sysmgmt.entidade.model.request.CidadeMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
@@ -937,6 +938,27 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 	@Override
 	public UsuarioResponse fetchUsuarioByRequest(UsuarioInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CidadeResponse insertCidade(CidadeMaintenanceRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CidadeResponse updateCidade(CidadeMaintenanceRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CidadeResponse deleteCidade(CidadeMaintenanceRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;

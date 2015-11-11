@@ -52,6 +52,11 @@
         	<ref bean="wss4jOutInterceptor"/>
  		</jaxws:outInterceptors>
      </jaxws:client>
+
+     <jaxws:client id="empresaBASClientTarget"
+                  serviceClass="com.qat.samples.sysmgmt.entidade.bas.IEmpresaBAS"
+                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/EntidadeService">
+     </jaxws:client>
 <!--
      <jaxws:client id="entidadeBASClientTarget"
                   serviceClass="com.qat.samples.sysmgmt.entidade.bas.IEmpresaBAS"
@@ -93,7 +98,7 @@
         	<map>
             	<entry key="action" value="UsernameToken" />
             	<entry key="user" value="rod"/>
-            	<entry key="passwordType" value="koala" />
+            	<entry key="passwordType" value="PasswordText" />
 				<entry key="passwordCallbackClass" value="com.qat.samples.sysmgmt.bas.ws.client.ClientPasswordCallback" />
         	</map>
     	</property>

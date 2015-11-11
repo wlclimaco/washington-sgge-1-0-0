@@ -6,6 +6,7 @@ import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
 import com.qat.samples.sysmgmt.cnae.model.response.CnaeResponse;
 import com.qat.samples.sysmgmt.entidade.bai.IEmpresaBAI;
 import com.qat.samples.sysmgmt.entidade.bas.IEmpresaBAS;
+import com.qat.samples.sysmgmt.entidade.model.request.CidadeMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
@@ -200,8 +201,7 @@ public class EmpresaBAS implements IEmpresaBAS
 	@Override
 	public CidadeResponse fetchCidadeByRequest(CidadeInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getEmpresaBAI().fetchCidadeByRequest(request);
 	}
 
 	@Override
@@ -251,6 +251,24 @@ public class EmpresaBAS implements IEmpresaBAS
 	{
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public CidadeResponse insertCidade(CidadeMaintenanceRequest request)
+	{
+		return getEmpresaBAI().insertCidade(request);
+	}
+
+	@Override
+	public CidadeResponse updateCidade(CidadeMaintenanceRequest request)
+	{
+		return getEmpresaBAI().updateCidade(request);
+	}
+
+	@Override
+	public CidadeResponse deleteCidade(CidadeMaintenanceRequest request)
+	{
+		return getEmpresaBAI().deleteCidade(request);
 	}
 
 }

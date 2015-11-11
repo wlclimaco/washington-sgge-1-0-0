@@ -8,6 +8,7 @@ import org.apache.cxf.annotations.WSDLDocumentation;
 
 import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
 import com.qat.samples.sysmgmt.cnae.model.response.CnaeResponse;
+import com.qat.samples.sysmgmt.entidade.model.request.CidadeMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
@@ -123,6 +124,21 @@ public interface IEmpresaBAS
 	@WebResult(name = "fetchRegimeByRequestReturn")
 	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
 	public RegimeResponse fetchRegimeByRequest(RegimeInquiryRequest request);
+
+	@WebMethod(action = "insertCidade")
+	@WebResult(name = "insertCidadeReturn")
+	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
+	public CidadeResponse insertCidade(CidadeMaintenanceRequest request);
+
+	@WebMethod(action = "updateCidade")
+	@WebResult(name = "updateCidadeReturn")
+	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
+	public CidadeResponse updateCidade(CidadeMaintenanceRequest request);
+
+	@WebMethod(action = "deleteCidade")
+	@WebResult(name = "deleteCidadeReturn")
+	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
+	public CidadeResponse deleteCidade(CidadeMaintenanceRequest request);
 
 	@WebMethod(action = "fetchCidadeByRequest")
 	@WebResult(name = "fetchCidadeByRequestReturn")

@@ -2,6 +2,7 @@ package com.qat.samples.sysmgmt.entidade.bai;
 
 import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
 import com.qat.samples.sysmgmt.cnae.model.response.CnaeResponse;
+import com.qat.samples.sysmgmt.entidade.model.request.CidadeMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
@@ -66,6 +67,12 @@ public interface IEmpresaBAI
 	public CnaeResponse fetchCnaeByRequest(CnaeInquiryRequest request);
 
 	public RegimeResponse fetchRegimeByRequest(RegimeInquiryRequest request);
+
+	public CidadeResponse insertCidade(CidadeMaintenanceRequest request);
+
+	public CidadeResponse updateCidade(CidadeMaintenanceRequest request);
+
+	public CidadeResponse deleteCidade(CidadeMaintenanceRequest request);
 
 	public CidadeResponse fetchCidadeByRequest(CidadeInquiryRequest request);
 
