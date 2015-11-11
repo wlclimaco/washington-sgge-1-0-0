@@ -390,7 +390,7 @@
                                             <a href="#">Documentos</a>
                                         </li>
 										<li>
-                                            <a href="#">Cidade</a>
+                                            <a href="../cidade/fetchCidadesByRequestBAS">Cidade</a>
                                         </li>
 										<li>
                                             <a href="#">Estados</a>
@@ -1036,7 +1036,7 @@
 		   "../thirdparty/jquery/custom/jquery.ez-pinned-footer.js",
 		   "../thirdparty/jquery/custom/jquery.menu.js",
 		   "../thirdparty/jquery/custom/jquery.validate.min.js",
-		 //  "../scripts/util/base.js",
+		   "../scripts/util/base.js",
 		   "../commons/scripts/util/wd_core_3.0.0.js",
 		   "../commons/scripts/model/user_context.js",
            "../commons/scripts/model/request_objects.js",
