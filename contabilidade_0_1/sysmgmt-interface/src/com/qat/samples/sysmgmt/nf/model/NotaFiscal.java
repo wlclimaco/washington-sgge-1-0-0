@@ -4,10 +4,9 @@ import java.util.List;
 
 import com.qat.samples.sysmgmt.cfop.Cfop;
 import com.qat.samples.sysmgmt.condpag.FormaPgPessoa;
+import com.qat.samples.sysmgmt.conta.Conta;
 import com.qat.samples.sysmgmt.entidade.Entidade;
 import com.qat.samples.sysmgmt.fiscal.Tributacao;
-import com.qat.samples.sysmgmt.nf.ConhecimentoTransporte;
-import com.qat.samples.sysmgmt.nf.HistoricoNF;
 import com.qat.samples.sysmgmt.pessoa.Pessoa;
 import com.qat.samples.sysmgmt.pessoa.Transportador;
 import com.qat.samples.sysmgmt.produto.model.ItensEspeciais;
@@ -63,7 +62,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 	private List<Note> noteList;
 
 	/** The contaspagar list. */
-	private List<Contas> contasList;
+	private List<Conta> contasList;
 
 	/** The itens especiais. */
 	private List<ItensEspeciais> itensEspeciais;
@@ -370,7 +369,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 	 * 
 	 * @return the contaspagarList
 	 */
-	public List<Contas> getContaspagarList()
+	public List<Conta> getContaspagarList()
 	{
 		return contasList;
 	}
@@ -380,7 +379,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 	 * 
 	 * @param contaspagarList the contaspagarList to set
 	 */
-	public void setContaspagarList(List<Contas> contaspagarList)
+	public void setContaspagarList(List<Conta> contaspagarList)
 	{
 		contasList = contaspagarList;
 	}
@@ -616,7 +615,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 	/**
 	 * @return the contasList
 	 */
-	public List<Contas> getContasList()
+	public List<Conta> getContasList()
 	{
 		return contasList;
 	}
@@ -624,40 +623,26 @@ public class NotaFiscal extends ModelCosmeDamiao
 	/**
 	 * @param contasList the contasList to set
 	 */
-	public void setContasList(List<Contas> contasList)
+	public void setContasList(List<Conta> contasList)
 	{
 		this.contasList = contasList;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString()
 	{
-		return "NotaFiscal [getId()=" + getId() + ", getSerie()=" + getSerie()
-				+ ", getOrdem()=" + getOrdem() + ", getNumero()=" + getNumero() + ", getTipo()=" + getTipo()
-				+ ", getNfValor()=" + getNfValor() + ", getTransportador()=" + getTransportador()
-				+ ", getConhecimentoTransporte()=" + getConhecimentoTransporte() + ", getEmpresa()=" + getEmpresa()
-				+ ", getTributosList()=" + getTributosList() + ", getFormaPagList()=" + getFormaPagList()
-				+ ", getNotaFiscalItens()=" + getNotaFiscalItens() + ", getNoteList()=" + getNoteList()
-				+ ", getContaspagarList()=" + getContaspagarList() + ", getItensEspeciais()=" + getItensEspeciais()
-				+ ", getDataEmissao()=" + getDataEmissao() + ", getDataSaida()=" + getDataSaida()
-				+ ", getDataEntrada()=" + getDataEntrada() + ", getModelo()=" + getModelo() + ", getCfop()="
-				+ getCfop() + ", getBxEstoque()=" + getBxEstoque() + ", getDescItens()=" + getDescItens()
-				+ ", getPcCusto()=" + getPcCusto() + ", getNfStatusList()=" + getNfStatusList()
-				+ ", getHistoricoNFList()=" + getHistoricoNFList() + ", getPessoa()=" + getPessoa()
-				+ ", getContasList()=" + getContasList() + ", getTabelaEnumValue()=" + getTabelaEnumValue()
-				+ ", getTypeValue()=" + getTypeValue() + ", getAcaoEnumValue()=" + getAcaoEnumValue()
-				+ ", getParentId()=" + getParentId() + ", getType()=" + getType() + ", getAcaoType()=" + getAcaoType()
-				+ ", getTabelaEnum()=" + getTabelaEnum() + ", getStatusList()=" + getStatusList() + ", getEmprId()="
-				+ getEmprId() + ", getSite()=" + getSite() + ", getProcessId()=" + getProcessId() + ", getUserId()="
-				+ getUserId() + ", getNotes()=" + getNotes() + ", toString()=" + super.toString()
-				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
-				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
-				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + "]";
+		return "NotaFiscal [getId()=" + getId() + ", getSerie()=" + getSerie() + ", getOrdem()=" + getOrdem()
+				+ ", getNumero()=" + getNumero() + ", getTipo()=" + getTipo() + ", getNfValor()=" + getNfValor()
+				+ ", getTransportador()=" + getTransportador() + ", getConhecimentoTransporte()="
+				+ getConhecimentoTransporte() + ", getEmpresa()=" + getEmpresa() + ", getTributosList()="
+				+ getTributosList() + ", getFormaPagList()=" + getFormaPagList() + ", getNotaFiscalItens()="
+				+ getNotaFiscalItens() + ", getNoteList()=" + getNoteList() + ", getContaspagarList()="
+				+ getContaspagarList() + ", getItensEspeciais()=" + getItensEspeciais() + ", getDataEmissao()="
+				+ getDataEmissao() + ", getDataSaida()=" + getDataSaida() + ", getDataEntrada()=" + getDataEntrada()
+				+ ", getModelo()=" + getModelo() + ", getCfop()=" + getCfop() + ", getBxEstoque()=" + getBxEstoque()
+				+ ", getDescItens()=" + getDescItens() + ", getPcCusto()=" + getPcCusto() + ", getNfStatusList()="
+				+ getNfStatusList() + ", getHistoricoNFList()=" + getHistoricoNFList() + ", getPessoa()=" + getPessoa()
+				+ ", getContasList()=" + getContasList() + ", toString()=" + super.toString() + "]";
 	}
 
 }

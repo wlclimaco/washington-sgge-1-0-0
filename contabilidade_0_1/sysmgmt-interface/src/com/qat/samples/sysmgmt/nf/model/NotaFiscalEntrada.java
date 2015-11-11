@@ -1,4 +1,6 @@
-package com.prosperitasglobal.sendsolv.model;
+package com.qat.samples.sysmgmt.nf.model;
+
+import com.qat.samples.sysmgmt.pessoa.Fornecedor;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -26,35 +28,10 @@ public class NotaFiscalEntrada extends NotaFiscal
 		this.fornecedor = fornecedor;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString()
 	{
-		return "NotaFiscalEntrada [getFornecedor()=" + getFornecedor() + ", getId()=" + getId() + ", getSerie()="
-				+ getSerie() + ", getOrdem()=" + getOrdem() + ", getNumero()="
-				+ getNumero() + ", getTipo()=" + getTipo() + ", getNfValor()=" + getNfValor() + ", getTransportador()="
-				+ getTransportador() + ", getConhecimentoTransporte()=" + getConhecimentoTransporte()
-				+ ", getEmpresa()=" + getEmpresa() + ", getTributosList()=" + getTributosList()
-				+ ", getFormaPagList()=" + getFormaPagList() + ", getNotaFiscalItens()=" + getNotaFiscalItens()
-				+ ", getNoteList()=" + getNoteList() + ", getContaspagarList()=" + getContaspagarList()
-				+ ", getItensEspeciais()=" + getItensEspeciais()
-				+ ", getDataEmissao()=" + getDataEmissao() + ", getDataSaida()=" + getDataSaida()
-				+ ", getDataEntrada()=" + getDataEntrada() + ", getModelo()=" + getModelo() + ", getCfop()="
-				+ getCfop() + ", getBxEstoque()=" + getBxEstoque() + ", getDescItens()=" + getDescItens()
-				+ ", getPcCusto()=" + getPcCusto() + ", getNfStatusList()=" + getNfStatusList()
-				+ ", getHistoricoNFList()=" + getHistoricoNFList() + ", toString()=" + super.toString()
-				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
-				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
-				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
-				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
-				+ ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId() + ", getNotes()=" + getNotes()
-				+ ", getModelAction()=" + getModelAction() + ", getCreateUser()=" + getCreateUser()
-				+ ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()=" + getModifyUser()
-				+ ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + "]";
+		return "NotaFiscalEntrada [getFornecedor()=" + getFornecedor() + ", toString()=" + super.toString() + "]";
 	}
 
 }

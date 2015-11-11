@@ -1,10 +1,10 @@
-package com.prosperitasglobal.sendsolv.model.response;
+package com.qat.samples.sysmgmt.nf.model.response;
 
 import java.util.Collection;
 import java.util.List;
 
-import com.prosperitasglobal.sendsolv.model.Arquivo;
 import com.qat.framework.model.response.InquiryResponse;
+import com.qat.samples.sysmgmt.arquivo.Arquivo;
 
 public class NotaFiscalSaidaResponse extends InquiryResponse
 {

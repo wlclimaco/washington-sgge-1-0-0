@@ -1,6 +1,13 @@
-package com.prosperitasglobal.sendsolv.model;
+package com.qat.samples.sysmgmt.nf.model;
 
 import java.util.List;
+
+import com.qat.samples.sysmgmt.cfop.Cfop;
+import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Cst;
+import com.qat.samples.sysmgmt.fiscal.Tributacao;
+import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -199,10 +206,6 @@ public class NotaFiscalItens extends ModelCosmeDamiao
 		this.tributosList = tributosList;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString()
 	{
@@ -210,14 +213,7 @@ public class NotaFiscalItens extends ModelCosmeDamiao
 				+ getProduto() + ", getQnt()=" + getQnt() + ", getVrUnitario()=" + getVrUnitario()
 				+ ", getVrDesconto()=" + getVrDesconto() + ", getCfop()=" + getCfop() + ", getCrt()=" + getCrt()
 				+ ", getClassificacao()=" + getClassificacao() + ", getTributosList()=" + getTributosList()
-				+ ", getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
-				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
-				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
-				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
-				+ ", toString()=" + super.toString() + ", getModelAction()=" + getModelAction() + ", getCreateUser()="
-				+ getCreateUser() + ", getCreateDateUTC()=" + getCreateDateUTC() + ", getModifyUser()="
-				+ getModifyUser() + ", getModifyDateUTC()=" + getModifyDateUTC() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + "]";
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

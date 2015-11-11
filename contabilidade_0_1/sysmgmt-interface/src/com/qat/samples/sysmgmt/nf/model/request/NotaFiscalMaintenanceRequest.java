@@ -1,7 +1,7 @@
-package com.prosperitasglobal.sendsolv.model.request;
+package com.qat.samples.sysmgmt.nf.model.request;
 
-import com.prosperitasglobal.sendsolv.model.NotaFiscal;
 import com.qat.framework.model.request.MaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.NotaFiscal;
 
 public class NotaFiscalMaintenanceRequest extends MaintenanceRequest
 {

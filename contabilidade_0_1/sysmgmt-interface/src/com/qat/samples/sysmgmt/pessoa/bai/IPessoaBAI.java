@@ -2,10 +2,8 @@ package com.qat.samples.sysmgmt.pessoa.bai;
 
 import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
 import com.qat.samples.sysmgmt.arquivo.model.response.ArquivoResponse;
-import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
 import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest;
 import com.qat.samples.sysmgmt.beneficios.model.response.BeneficiosResponse;
-import com.qat.samples.sysmgmt.condpag.model.request.FormaPgInquiryRequest;
 import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
 import com.qat.samples.sysmgmt.contato.model.response.ContatoResponse;
 import com.qat.samples.sysmgmt.dp.model.request.EventoInquiryRequest;
@@ -40,7 +38,7 @@ public interface IPessoaBAI
 
 	/**
 	 * Insert cliente.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the cliente response
 	 */
@@ -48,7 +46,7 @@ public interface IPessoaBAI
 
 	/**
 	 * Update cliente.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the cliente response
 	 */
@@ -56,7 +54,7 @@ public interface IPessoaBAI
 
 	/**
 	 * Delete cliente.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the cliente response
 	 */
@@ -64,7 +62,7 @@ public interface IPessoaBAI
 
 	/**
 	 * Fetch cliente by id.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the cliente response
 	 */
@@ -72,7 +70,7 @@ public interface IPessoaBAI
 
 	/**
 	 * Fetch cliente by request.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the cliente response
 	 */
@@ -82,7 +80,7 @@ public interface IPessoaBAI
 
 	/**
 	 * Insert fornecedor.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the fornecedor response
 	 */
@@ -90,7 +88,7 @@ public interface IPessoaBAI
 
 	/**
 	 * Update fornecedor.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the fornecedor response
 	 */
@@ -98,7 +96,7 @@ public interface IPessoaBAI
 
 	/**
 	 * Delete fornecedor.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the fornecedor response
 	 */
@@ -106,7 +104,7 @@ public interface IPessoaBAI
 
 	/**
 	 * Fetch fornecedor by id.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the fornecedor response
 	 */
@@ -114,7 +112,7 @@ public interface IPessoaBAI
 
 	/**
 	 * Fetch fornecedor by request.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the fornecedor response
 	 */
@@ -124,7 +122,7 @@ public interface IPessoaBAI
 
 	/**
 	 * Insert transportador.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the transportador response
 	 */
@@ -132,7 +130,7 @@ public interface IPessoaBAI
 
 	/**
 	 * Update transportador.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the transportador response
 	 */
@@ -140,7 +138,7 @@ public interface IPessoaBAI
 
 	/**
 	 * Delete transportador.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the transportador response
 	 */
@@ -148,7 +146,7 @@ public interface IPessoaBAI
 
 	/**
 	 * Fetch transportador by id.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the transportador response
 	 */
@@ -156,7 +154,7 @@ public interface IPessoaBAI
 
 	/**
 	 * Fetch transportador by request.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the transportador response
 	 */
@@ -168,7 +166,7 @@ public interface IPessoaBAI
 
 	/**
 	 * Insert transportador.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the transportador response
 	 */
@@ -176,7 +174,7 @@ public interface IPessoaBAI
 
 	/**
 	 * Update transportador.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the transportador response
 	 */
@@ -184,7 +182,7 @@ public interface IPessoaBAI
 
 	/**
 	 * Delete transportador.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the transportador response
 	 */
@@ -192,7 +190,7 @@ public interface IPessoaBAI
 
 	/**
 	 * Fetch transportador by id.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the transportador response
 	 */
@@ -200,7 +198,7 @@ public interface IPessoaBAI
 
 	/**
 	 * Fetch transportador by request.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the transportador response
 	 */
@@ -208,49 +206,23 @@ public interface IPessoaBAI
 
 	/**
 	 * Fetch profissao by request.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the profissao response
 	 */
 	public ProfissaoResponse fetchProfissaoByRequest(ProfissaoInquiryRequest request);
 
 	/**
-	 * Fetch convenio by request.
-	 *
-	 * @param request the request
-	 * @return the convenio response
-	 */
-	public ConvenioResponse fetchConvenioByRequest(ConvenioInquiryRequest request);
-
-	/**
 	 * Fetch contato by request.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the contato response
 	 */
 	public ContatoResponse fetchContatoByRequest(ContatoInquiryRequest request);
 
-	/**
-	 * Fetch banco by request.
-	 *
-	 * @param request the request
-	 * @return the banco response
-	 */
-	public BancoResponse fetchBancoByRequest(BancoInquiryRequest request);
-
 	public ArquivoResponse fetchAgenciaByRequest(AgenciaInquiryRequest request);
 
-	public ContaResponse fetchContaByRequest(ContaInquiryRequest request);
-
 	public EstadoResponse fetchEstadoByRequest(EstadoInquiryRequest request);
-
-	/**
-	 * Fetch forma pg by request.
-	 *
-	 * @param request the request
-	 * @return the forma pg response
-	 */
-	public FormaPgResponse fetchFormaPgByRequest(FormaPgInquiryRequest request);
 
 	public CidadeResponse fetchCidadeRequest(CidadeInquiryRequest request);
 

@@ -3,36 +3,36 @@ package com.qat.samples.sysmgmt.nf.model.response;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.nf.model.NotaFiscalEntrada;
+import com.qat.samples.sysmgmt.nf.model.PedidoCompras;
 
-public class NotaFiscalEntradaResponse extends InquiryResponse
+public class PedidoComprasResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<NotaFiscalEntrada> notaFiscalList;
+	private List<PedidoCompras> pedidoComprasList;
 
 	/**
 	 * The Constructor.
 	 */
-	public NotaFiscalEntradaResponse()
+	public PedidoComprasResponse()
 	{
 
 	}
 
 	/**
-	 * @return the notaFiscalList
+	 * @return the pedidoComprasList
 	 */
-	public List<NotaFiscalEntrada> getNotaFiscalList()
+	public List<PedidoCompras> getPedidoComprasList()
 	{
-		return notaFiscalList;
+		return pedidoComprasList;
 	}
 
 	/**
-	 * @param notaFiscalList the notaFiscalList to set
+	 * @param pedidoComprasList the pedidoComprasList to set
 	 */
-	public void setNotaFiscalList(List<NotaFiscalEntrada> notaFiscalList)
+	public void setPedidoComprasList(List<PedidoCompras> pedidoComprasList)
 	{
-		this.notaFiscalList = notaFiscalList;
+		this.pedidoComprasList = pedidoComprasList;
 	}
 
 	/*
@@ -42,7 +42,7 @@ public class NotaFiscalEntradaResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "NotaFiscalEntradaResponse [getNotaFiscalList()=" + getNotaFiscalList() + ", getResultsSetInfo()="
+		return "PedidoComprasResponse [getPedidoComprasList()=" + getPedidoComprasList() + ", getResultsSetInfo()="
 				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
 				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
 				+ isOperationSuccess() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="

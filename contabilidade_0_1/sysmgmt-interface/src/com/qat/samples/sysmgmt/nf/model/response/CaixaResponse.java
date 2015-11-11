@@ -4,36 +4,36 @@ import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.nf.model.NotaFiscal;
+import com.qat.samples.sysmgmt.banco.Banco;
 
-public class NotaFiscalResponse extends InquiryResponse
+public class CaixaResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<NotaFiscal> notaFiscalList;
+	private List<Banco> bancoList;
 
 	/**
 	 * The Constructor.
 	 */
-	public NotaFiscalResponse()
+	public CaixaResponse()
 	{
 
 	}
 
 	/**
-	 * @return the notaFiscalList
+	 * @return the bancoList
 	 */
-	public List<NotaFiscal> getNotaFiscalList()
+	public List<Banco> getBancoList()
 	{
-		return notaFiscalList;
+		return bancoList;
 	}
 
 	/**
-	 * @param notaFiscalList the notaFiscalList to set
+	 * @param bancoList the bancoList to set
 	 */
-	public void setNotaFiscalList(List<NotaFiscal> notaFiscalList)
+	public void setBancoList(List<Banco> bancoList)
 	{
-		this.notaFiscalList = notaFiscalList;
+		this.bancoList = bancoList;
 	}
 
 	/*
@@ -44,7 +44,7 @@ public class NotaFiscalResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setNotaFiscalList((List<NotaFiscal>)coll);
+		setBancoList((List<Banco>)coll);
 	}
 
 	/*
@@ -54,7 +54,7 @@ public class NotaFiscalResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "LocationResponse [getLocationList()=" + getNotaFiscalList() + ", getResultsSetInfo()="
+		return "LocationResponse [getLocationList()=" + getBancoList() + ", getResultsSetInfo()="
 				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
 				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
 				+ isOperationSuccess() + "]";

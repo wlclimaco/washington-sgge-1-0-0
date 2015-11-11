@@ -1,27 +1,27 @@
 package com.qat.samples.sysmgmt.nf.model.request;
 
+import com.qat.samples.sysmgmt.arquivo.model.criteria.ArquivoCriteria;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
-import com.qat.samples.sysmgmt.nf.model.criteria.NotaFiscalCriteria;
 
 /**
- * The Class NotaFiscalInquiryRequest.
+ * The Class ProdutoInquiryRequest.
  */
-public class NotaFiscalInquiryRequest extends PagedInquiryRequest
+public class ContasInquiryRequest extends PagedInquiryRequest
 {
 
 	/** The criteria. */
-	private NotaFiscalCriteria criteria;
+	private ArquivoCriteria criteria;
 
 	/**
 	 * Gets the criteria.
 	 * 
 	 * @return the criteria
 	 */
-	public NotaFiscalCriteria getCriteria()
+	public ArquivoCriteria getCriteria()
 	{
 		if (criteria == null)
 		{
-			criteria = new NotaFiscalCriteria();
+			criteria = new ArquivoCriteria();
 		}
 		return criteria;
 	}
@@ -31,7 +31,7 @@ public class NotaFiscalInquiryRequest extends PagedInquiryRequest
 	 * 
 	 * @param criteria the criteria
 	 */
-	public void setCriteria(NotaFiscalCriteria criteria)
+	public void setCriteria(ArquivoCriteria criteria)
 	{
 		this.criteria = criteria;
 	}
@@ -43,7 +43,7 @@ public class NotaFiscalInquiryRequest extends PagedInquiryRequest
 	@Override
 	public String toString()
 	{
-		return "NotaFiscalInquiryRequest [getCriteria()=" + getCriteria() + ", toString()=" + super.toString() + "]";
+		return "ArquivoInquiryRequest [getCriteria()=" + getCriteria() + ", toString()=" + super.toString() + "]";
 	}
 
 }

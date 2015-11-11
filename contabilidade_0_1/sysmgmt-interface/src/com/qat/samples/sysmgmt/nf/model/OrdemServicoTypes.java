@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.nf;
+package com.qat.samples.sysmgmt.nf.model;
 
 import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
 

@@ -1,11 +1,11 @@
-package com.prosperitasglobal.sendsolv.model;
+package com.qat.samples.sysmgmt.nf.model;
 
 import com.qat.framework.model.II18nEnum;
 import com.qat.framework.model.IIntegerEnum;
 
 /**
  * The Enum PayrollTypeEnum details the different options a payroll can have inside of SendSolv
- *
+ * 
  * @author abarros
  * @version 1.0
  * @created 21-Jul-2014 10:00:07 AM
@@ -33,7 +33,7 @@ public enum NotaFiscalTypeEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * The Constructor.
-	 *
+	 * 
 	 * @param value the value
 	 * @param labelKeyParam the label key param
 	 */
@@ -45,7 +45,7 @@ public enum NotaFiscalTypeEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * Gets the value.
-	 *
+	 * 
 	 * @return the value
 	 */
 	@Override
@@ -56,7 +56,7 @@ public enum NotaFiscalTypeEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * Enum for value.
-	 *
+	 * 
 	 * @param value the value
 	 * @return the process status enum
 	 */
@@ -75,7 +75,7 @@ public enum NotaFiscalTypeEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * Gets the valid values.
-	 *
+	 * 
 	 * @return the valid values
 	 */
 	public static String getValidValues()

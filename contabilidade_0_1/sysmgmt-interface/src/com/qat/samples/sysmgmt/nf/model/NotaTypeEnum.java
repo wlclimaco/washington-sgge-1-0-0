@@ -1,4 +1,4 @@
-package com.prosperitasglobal.sendsolv.model;
+package com.qat.samples.sysmgmt.nf.model;
 
 import com.qat.framework.model.II18nEnum;
 import com.qat.framework.model.IIntegerEnum;
@@ -30,7 +30,7 @@ public enum NotaTypeEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * The Constructor.
-	 *
+	 * 
 	 * @param value the value
 	 * @param labelKeyParam the label key param
 	 */
@@ -42,7 +42,7 @@ public enum NotaTypeEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * Gets the value.
-	 *
+	 * 
 	 * @return the value
 	 */
 	@Override
@@ -53,7 +53,7 @@ public enum NotaTypeEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * Enum for value.
-	 *
+	 * 
 	 * @param value the value
 	 * @return the process status enum
 	 */
@@ -72,7 +72,7 @@ public enum NotaTypeEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * Gets the valid values.
-	 *
+	 * 
 	 * @return the valid values
 	 */
 	public static String getValidValues()

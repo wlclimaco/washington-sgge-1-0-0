@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.nf;
+package com.qat.samples.sysmgmt.nf.model;
 
 /**
  * The Class Document represents a generic formal business or personal document, such as driver's license or bylaws.

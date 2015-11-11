@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.nf;
+package com.qat.samples.sysmgmt.nf.model;
 
 import java.util.List;
 

@@ -2,7 +2,6 @@ package com.qat.samples.sysmgmt.nf.model;
 
 import java.sql.Blob;
 
-import com.qat.samples.sysmgmt.nf.StatusNF;
 import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
 
 /**

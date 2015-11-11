@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.nf;
+package com.qat.samples.sysmgmt.ordemServico.model;
 
 import java.util.List;
 

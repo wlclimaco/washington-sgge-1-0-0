@@ -1,42 +1,27 @@
-package com.qat.samples.sysmgmt.nf;
+package com.qat.samples.sysmgmt.ordemServico.model;
 
 import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
 
+// TODO: Auto-generated Javadoc
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
  */
 @SuppressWarnings("serial")
-public class StatusNF extends ModelCosmeDamiao
+public class OrdemServicoTypes extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
 
 	/** The type of an account. */
-	private String value;
+	private Integer typeServico;
 
 	/**
 	 * Default constructor.
 	 */
-	public StatusNF()
+	public OrdemServicoTypes()
 	{
 		super();
-	}
-
-	public StatusNF(String value)
-	{
-		super();
-		this.value = value;
-	}
-
-	public String getValue()
-	{
-		return value;
-	}
-
-	public void setValue(String value)
-	{
-		this.value = value;
 	}
 
 	/**
@@ -52,21 +37,34 @@ public class StatusNF extends ModelCosmeDamiao
 	/**
 	 * Sets the id.
 	 * 
-	 * @param id the new id
+	 * @param id the id to set
 	 */
 	public void setId(Integer id)
 	{
 		this.id = id;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * @return the typeServico
 	 */
+	public Integer getTypeServico()
+	{
+		return typeServico;
+	}
+
+	/**
+	 * @param typeServico the typeServico to set
+	 */
+	public void setTypeServico(Integer typeServico)
+	{
+		this.typeServico = typeServico;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "StatusNF [getId()=" + getId() + ", toString()=" + super.toString() + "]";
+		return "OrdemServicoTypes [getId()=" + getId() + ", getTypeServico()=" + getTypeServico() + ", toString()="
+				+ super.toString() + "]";
 	}
 
 }

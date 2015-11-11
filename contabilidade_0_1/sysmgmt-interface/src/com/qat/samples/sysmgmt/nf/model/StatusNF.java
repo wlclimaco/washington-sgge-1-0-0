@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.nf;
+package com.qat.samples.sysmgmt.nf.model;
 
 import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
 
@@ -7,7 +7,7 @@ import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
  * setting.
  */
 @SuppressWarnings("serial")
-public class ServicoItens extends ModelCosmeDamiao
+public class StatusNF extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
@@ -18,9 +18,25 @@ public class ServicoItens extends ModelCosmeDamiao
 	/**
 	 * Default constructor.
 	 */
-	public ServicoItens()
+	public StatusNF()
 	{
 		super();
+	}
+
+	public StatusNF(String value)
+	{
+		super();
+		this.value = value;
+	}
+
+	public String getValue()
+	{
+		return value;
+	}
+
+	public void setValue(String value)
+	{
+		this.value = value;
 	}
 
 	/**
@@ -43,22 +59,6 @@ public class ServicoItens extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	/**
-	 * @return the value
-	 */
-	public String getValue()
-	{
-		return value;
-	}
-
-	/**
-	 * @param value the value to set
-	 */
-	public void setValue(String value)
-	{
-		this.value = value;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -66,8 +66,7 @@ public class ServicoItens extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "ServicoItens [getId()=" + getId() + ", getValue()=" + getValue() + ", toString()=" + super.toString()
-				+ "]";
+		return "StatusNF [getId()=" + getId() + ", toString()=" + super.toString() + "]";
 	}
 
 }

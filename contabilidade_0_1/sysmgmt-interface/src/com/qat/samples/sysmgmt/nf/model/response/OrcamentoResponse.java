@@ -4,36 +4,36 @@ import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.nf.model.NotaFiscal;
+import com.qat.samples.sysmgmt.nf.model.Orcamento;
 
-public class NotaFiscalResponse extends InquiryResponse
+public class OrcamentoResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<NotaFiscal> notaFiscalList;
+	private List<Orcamento> orcamentoList;
 
 	/**
 	 * The Constructor.
 	 */
-	public NotaFiscalResponse()
+	public OrcamentoResponse()
 	{
 
 	}
 
 	/**
-	 * @return the notaFiscalList
+	 * @return the orcamentoList
 	 */
-	public List<NotaFiscal> getNotaFiscalList()
+	public List<Orcamento> getOrcamentoList()
 	{
-		return notaFiscalList;
+		return orcamentoList;
 	}
 
 	/**
-	 * @param notaFiscalList the notaFiscalList to set
+	 * @param orcamentoList the orcamentoList to set
 	 */
-	public void setNotaFiscalList(List<NotaFiscal> notaFiscalList)
+	public void setOrcamentoList(List<Orcamento> orcamentoList)
 	{
-		this.notaFiscalList = notaFiscalList;
+		this.orcamentoList = orcamentoList;
 	}
 
 	/*
@@ -44,7 +44,7 @@ public class NotaFiscalResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setNotaFiscalList((List<NotaFiscal>)coll);
+		setOrcamentoList((List<Orcamento>)coll);
 	}
 
 	/*
@@ -54,7 +54,7 @@ public class NotaFiscalResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "LocationResponse [getLocationList()=" + getNotaFiscalList() + ", getResultsSetInfo()="
+		return "LocationResponse [getLocationList()=" + getOrcamentoList() + ", getResultsSetInfo()="
 				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
 				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
 				+ isOperationSuccess() + "]";

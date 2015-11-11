@@ -2,6 +2,23 @@ package com.qat.samples.sysmgmt.nf.bai;
 
 import com.qat.samples.sysmgmt.condpag.model.request.CondPgInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.nf.model.request.CaixaInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.ContasInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.ContasMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalEntradaMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalSaidaMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.OrcamentoMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.request.PedidoComprasInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.PedidoComprasMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.response.CaixaResponse;
+import com.qat.samples.sysmgmt.nf.model.response.CondPgResponse;
+import com.qat.samples.sysmgmt.nf.model.response.ContasResponse;
+import com.qat.samples.sysmgmt.nf.model.response.NotaFiscalEntradaResponse;
+import com.qat.samples.sysmgmt.nf.model.response.NotaFiscalSaidaResponse;
+import com.qat.samples.sysmgmt.nf.model.response.OrcamentoResponse;
+import com.qat.samples.sysmgmt.nf.model.response.PedidoComprasResponse;
 
 // TODO: Auto-generated Javadoc
 /**

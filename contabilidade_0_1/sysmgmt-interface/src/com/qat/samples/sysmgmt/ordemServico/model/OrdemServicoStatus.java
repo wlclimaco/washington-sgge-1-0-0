@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.nf;
+package com.qat.samples.sysmgmt.ordemServico.model;
 
 import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
 
@@ -41,12 +41,6 @@ public class OrdemServicoStatus extends ModelCosmeDamiao
 	public void setId(Integer id)
 	{
 		this.id = id;
-	}
-
-	@Override
-	public String toString()
-	{
-		return "OrdemServicoStatus [getId()=" + getId() + ", toString()=" + super.toString() + "]";
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.nf.model.criteria;
+package com.qat.samples.sysmgmt.ordemServico.model.criteria;
 
 import java.io.Serializable;
 
@@ -6,7 +6,7 @@ import java.io.Serializable;
  * The Class MemberCriteria.
  */
 @SuppressWarnings("serial")
-public class NotaFiscalCriteria implements Serializable
+public class OrdemServicoCriteria implements Serializable
 {
 
 	/** The member. */
@@ -14,8 +14,6 @@ public class NotaFiscalCriteria implements Serializable
 
 	/** The business id. */
 	private Integer emprId;
-
-	private Integer id;
 
 	/** The recipient id. */
 	private Integer type;
@@ -29,7 +27,7 @@ public class NotaFiscalCriteria implements Serializable
 	/**
 	 * The Constructor.
 	 */
-	public NotaFiscalCriteria()
+	public OrdemServicoCriteria()
 	{
 		super();
 	}
@@ -103,7 +101,7 @@ public class NotaFiscalCriteria implements Serializable
 	@Override
 	public String toString()
 	{
-		return "ProdutoCriteria [getNome()=" + getNome() + ", getEmprId()=" + getEmprId() + ", getType()="
+		return "OrdemServicoCriteria [getNome()=" + getNome() + ", getEmprId()=" + getEmprId() + ", getType()="
 				+ getType() + ", getAssunto()=" + getAssunto() + ", getStatus()=" + getStatus() + ", toString()="
 				+ super.toString() + "]";
 	}

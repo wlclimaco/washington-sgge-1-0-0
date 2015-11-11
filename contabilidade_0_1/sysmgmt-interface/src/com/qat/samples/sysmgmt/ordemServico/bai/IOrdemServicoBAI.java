@@ -1,6 +1,9 @@
 package com.qat.samples.sysmgmt.ordemServico.bai;
 
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.response.OrdemServicoResponse;
 
 /**
  * The Interface IOrdemServicoBAI.
