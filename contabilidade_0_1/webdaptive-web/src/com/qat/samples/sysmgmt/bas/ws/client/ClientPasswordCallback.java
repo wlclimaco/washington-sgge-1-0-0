@@ -26,6 +26,6 @@ public class ClientPasswordCallback implements CallbackHandler
 		// this seems ridiculous, but is necessary for passing authentication on to Spring-Security.
 		// we're essentially bypassing CXF's WSS4JInterceptor by ensuring that the password callback always matches the
 		// client password.
-		callback.setPassword("wombat");
+		callback.setPassword("koala");
 	}
 }

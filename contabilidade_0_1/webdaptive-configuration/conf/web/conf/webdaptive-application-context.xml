@@ -56,6 +56,9 @@
      <jaxws:client id="empresaBASClientTarget"
                   serviceClass="com.qat.samples.sysmgmt.entidade.bas.IEmpresaBAS"
                  address="http://localhost:8080/qat-sysmgmt-sample/services/ws/EntidadeService">
+    	<jaxws:outInterceptors>
+        	<ref bean="wss4jOutInterceptor"/>
+ 		</jaxws:outInterceptors>
      </jaxws:client>
 <!--
      <jaxws:client id="entidadeBASClientTarget"

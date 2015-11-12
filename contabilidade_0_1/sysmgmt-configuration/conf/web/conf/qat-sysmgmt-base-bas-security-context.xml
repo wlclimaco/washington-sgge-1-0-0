@@ -11,6 +11,7 @@
         <constructor-arg index="0">
             <map key-type="java.lang.String" value-type="java.lang.Object">
                 <entry key="action" value="UsernameToken" />
+                <entry key="user" value="rod"/>
                 <entry key="passwordType" value="PasswordText" />
                 <entry key="passwordCallbackClass" value="com.qat.framework.util.ServerPasswordCallback" />
             </map>
@@ -185,35 +186,38 @@
         <sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.entidade.bas.rest.EmpresaBAS.fetchEmpresaByRequest(*))"
         access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
-      <sec:protect-pointcut
+        <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.entidade.bas.rest.EmpresaBAS.fetchCidadeByRequest(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      	<sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.entidade.bas.rest.EmpresaBAS.fetchEmpresaById(*))"
         access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
-      <sec:protect-pointcut
+      	<sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.entidade.bas.rest.EmpresaBAS.deleteEmpresa(*))"
         access="ROLE_DOMAIN ADMINS"/>
-      <sec:protect-pointcut
+      	<sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.entidade.bas.rest.EmpresaBAS.insertEmpresa(*))"
         access="ROLE_DOMAIN ADMINS"/>
-      <sec:protect-pointcut
+      	<sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.entidade.bas.rest.EmpresaBAS.updateEmpresa(*))"
         access="ROLE_DOMAIN ADMINS"/>
 
-              <sec:protect-pointcut
+        <sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.fetchAllProdutos(*))"
         access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
-      <sec:protect-pointcut
+      	<sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.fetchProdutosByRequest(*))"
         access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
-      <sec:protect-pointcut
+      	<sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.fetchProdutoById(*))"
         access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
-      <sec:protect-pointcut
+      	<sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.deleteProduto(*))"
         access="ROLE_DOMAIN ADMINS"/>
-      <sec:protect-pointcut
+      	<sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.insertProduto(*))"
         access="ROLE_DOMAIN ADMINS"/>
-      <sec:protect-pointcut
+      	<sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.produto.bas.rest.ProdutoBAS.updateProduto(*))"
         access="ROLE_DOMAIN ADMINS"/>
 
@@ -360,7 +364,7 @@
 				<sec:user name="graziane" password="graziane123" authorities="ROLE_DOMAIN ADMINS" />
 				<sec:user name="damiao" password="damiao123" authorities="ROLE_DOMAIN ADMINS" />
 				<sec:user name="dianne" password="koala"	authorities="ROLE_GUEST" />
-				<sec:user name="scott" password="koala" authorities="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS" />
+				<sec:user name="scott" password="wombat" authorities="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS" />
 				<sec:user name="peter" password="koala" authorities="ROLE_DOMAIN USERS" />
 			</sec:user-service>
 		</sec:authentication-provider>

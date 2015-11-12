@@ -19,8 +19,8 @@
   <resultMap id="cidadeResult" type="Cidade">
     <result property="id" column="id" />
     <result property="codigo" column="CODIGO" />
-    <result property="nome" column="CIDADE" />
-   	<result property="cdIBGE" column="IBGE"/>
+    <result property="nome" column="nome" />
+   	<result property="cdIBGE" column="cdIBGE"/>
    	<result property="cep" column="CEP" />
    	<result property="municipio" column="MUNICIPIO"/>
 <!--	<result property="createUser" column="create_user"/>
@@ -32,19 +32,27 @@
   </resultMap>
 
   <!--
+
+  id integer NOT NULL DEFAULT nextval('cidade_id_seq1'::regclass),
+  codigo character varying(10) NOT NULL,
+  nome character varying(50),
+  versn_lock_num integer,
+  controleid integer,
+  estado integer,
+  cep character varying(12),
+  municipio character varying(10),
+  "cdIBGE" character varying(10),
+  CONSTRAINT cidade_pkey PRIMARY KEY (id),
+  CONSTRAINT cidade_estado_key UNIQUE (codigo)
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allCidadeColumns">
-		 b.cidade
+		 b.nome
 		,b.codigo
-      	,b.IBGE
+      	,b.cdIBGE
       	,b.estado
       	,b.municipio
       	,b.cep
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
   </sql>
 
   <sql id="allCidadeValues">
@@ -53,8 +61,8 @@
   		#{cdIBGE},
     	#{estado.id},
     	#{municipio},
-    	#{cep},
-    	<include refid="CBOFMap.changeControlFields"/>
+    	#{cep}
+    	 <!--<include refid="CBOFMap.changeControlFields"/>-->
   </sql>
 
   <!--

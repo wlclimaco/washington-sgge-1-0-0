@@ -109,10 +109,10 @@
  <!-- Bundle Cache -->
   <aop:config>
 	<!-- Pointcuts -->
-	<aop:pointcut id="cidadeCacheObject" expression="bean(cidadeDACTarget) and execution(* fetch*(..)) and !execution(* fetchCidadesByRequest(..))" />
-	<aop:pointcut id="cidadeFlushInsert" expression="bean(cidadeDACTarget) and execution(* insert*(..))" />
-	<aop:pointcut id="cidadeFlushUpdate" expression="bean(cidadeDACTarget) and execution(* update*(..))" />
-	<aop:pointcut id="cidadeFlushDelete" expression="bean(cidadeDACTarget) and execution(* delete*(..))" />
+	<aop:pointcut id="cidadeCacheObject" expression="bean(empresaDACTarget) and execution(* fetch*(..)) and !execution(* fetchCidadeByRequest(..))" />
+	<aop:pointcut id="cidadeFlushInsert" expression="bean(empresaDACTarget) and execution(* insert*(..))" />
+	<aop:pointcut id="cidadeFlushUpdate" expression="bean(empresaDACTarget) and execution(* update*(..))" />
+	<aop:pointcut id="cidadeFlushDelete" expression="bean(empresaDACTarget) and execution(* delete*(..))" />
 	<!-- Aspects -->
 	<aop:aspect id="procedureCacheAspects" ref="procedureCacheAspect">
 		<aop:around pointcut-ref="cidadeCacheObject" method="cacheObject"/>
