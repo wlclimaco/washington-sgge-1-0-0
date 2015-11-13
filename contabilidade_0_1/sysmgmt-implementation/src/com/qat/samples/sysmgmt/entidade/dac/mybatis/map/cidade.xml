@@ -19,7 +19,7 @@
   <resultMap id="cidadeResult" type="Cidade">
     <result property="id" column="id" />
     <result property="codigo" column="CODIGO" />
-    <result property="nome" column="nome" />
+    <result property="nome" column="cidade" />
    	<result property="cdIBGE" column="cdIBGE"/>
    	<result property="cep" column="CEP" />
    	<result property="municipio" column="MUNICIPIO"/>
@@ -35,7 +35,7 @@
 
   id integer NOT NULL DEFAULT nextval('cidade_id_seq1'::regclass),
   codigo character varying(10) NOT NULL,
-  nome character varying(50),
+  cidade character varying(50),
   versn_lock_num integer,
   controleid integer,
   estado integer,
@@ -47,7 +47,7 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allCidadeColumns">
-		 b.nome
+		 b.cidade
 		,b.codigo
       	,b.cdIBGE
       	,b.estado
