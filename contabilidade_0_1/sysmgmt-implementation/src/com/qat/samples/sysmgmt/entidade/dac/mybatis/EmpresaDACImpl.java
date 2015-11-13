@@ -949,4 +949,28 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		return insertCount;
 	}
 
+	@Override
+	public InternalResultsResponse<Cidade> insertCidade(Cidade cidade)
+	{
+		InternalResultsResponse<Cidade> response = new InternalResultsResponse<Cidade>();
+		QATMyBatisDacHelper.doInsert(getSqlSession(), "CidadeMap.insertCidade", cidade, response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Cidade> updateCidade(Cidade cidade)
+	{
+		InternalResultsResponse<Cidade> response = new InternalResultsResponse<Cidade>();
+		QATMyBatisDacHelper.doUpdate(getSqlSession(), "CidadeMap.updateCidade", cidade, response);
+		return response;
+	}
+
+	@Override
+	public InternalResponse deleteCidade(Cidade cidade)
+	{
+		InternalResponse response = new InternalResponse();
+		QATMyBatisDacHelper.doRemove(getSqlSession(), "CidadeMap.deleteCidadeById", cidade, response);
+		return response;
+	}
+
 }

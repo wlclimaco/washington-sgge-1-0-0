@@ -97,7 +97,7 @@
    <!--
 		SQL Delete Statements.
    -->
-  <delete id="deleteCidadeById" parameterType="Integer">
+  <delete id="deleteCidadeById" parameterType="Cidade">
     	DELETE FROM cidade WHERE id = #{id}
   </delete>
 

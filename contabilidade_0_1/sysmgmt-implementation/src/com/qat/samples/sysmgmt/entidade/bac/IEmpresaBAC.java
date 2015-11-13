@@ -8,6 +8,7 @@ import com.qat.samples.sysmgmt.contabilidade.Plano;
 import com.qat.samples.sysmgmt.entidade.Deposito;
 import com.qat.samples.sysmgmt.entidade.Empresa;
 import com.qat.samples.sysmgmt.entidade.Filial;
+import com.qat.samples.sysmgmt.entidade.model.request.CidadeMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
@@ -67,6 +68,12 @@ public interface IEmpresaBAC
 	public InternalResultsResponse<Regime> fetchRegimeByRequest(RegimeInquiryRequest request);
 
 	public InternalResultsResponse<Cidade> fetchCidadeByRequest(CidadeInquiryRequest request);
+
+	public InternalResultsResponse<Cidade> insertCidade(CidadeMaintenanceRequest request);
+
+	public InternalResultsResponse<Cidade> updateCidade(CidadeMaintenanceRequest request);
+
+	public InternalResponse deleteCidade(CidadeMaintenanceRequest request);
 
 	public InternalResultsResponse<Plano> fetchPlanoByRequest(PlanoInquiryRequest request);
 

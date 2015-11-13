@@ -10,6 +10,7 @@ import com.qat.samples.sysmgmt.entidade.Empresa;
 import com.qat.samples.sysmgmt.entidade.Filial;
 import com.qat.samples.sysmgmt.entidade.bac.IEmpresaBAC;
 import com.qat.samples.sysmgmt.entidade.dac.IEmpresaDAC;
+import com.qat.samples.sysmgmt.entidade.model.request.CidadeMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
@@ -217,5 +218,35 @@ public class EmpresaBACImpl implements IEmpresaBAC
 	public InternalResultsResponse<Classificacao> fetchClassificacaoByRequest(ClassificacaoInquiryRequest request)
 	{
 		return getEmpresaDAC().fetchClassificacaoByRequest(request);
+	}
+
+	@Override
+	public InternalResultsResponse<Cidade> insertCidade(CidadeMaintenanceRequest request)
+	{
+		InternalResultsResponse<Cidade> response = new InternalResultsResponse<Cidade>();
+
+		response = getEmpresaDAC().insertCidade(request.getCidade());
+
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Cidade> updateCidade(CidadeMaintenanceRequest request)
+	{
+		InternalResultsResponse<Cidade> response = new InternalResultsResponse<Cidade>();
+
+		response = getEmpresaDAC().updateCidade(request.getCidade());
+
+		return response;
+	}
+
+	@Override
+	public InternalResponse deleteCidade(CidadeMaintenanceRequest request)
+	{
+		InternalResponse response = new InternalResponse();
+
+		response = getEmpresaDAC().deleteCidade(request.getCidade());
+
+		return response;
 	}
 }

@@ -837,6 +837,29 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 		return null;
 	}
 
+	private InternalResponse doPersistanceCidade(CidadeMaintenanceRequest request, PersistanceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			case INSERT:
+				return getEmpresaBAC().insertCidade(request);
+
+			case UPDATE:
+				return getEmpresaBAC().updateCidade(request);
+
+			case DELETE:
+				return getEmpresaBAC().deleteCidade(request);
+
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
+		}
+		return null;
+	}
+
 	/**
 	 * Process.
 	 * 
@@ -885,6 +908,19 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
 		return (FilialResponse)handleReturn(response, internalResponse, null, true);
+	}
+
+	private CidadeResponse processCidade(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
+			CidadeMaintenanceRequest request)
+	{
+		CidadeResponse response = new CidadeResponse();
+		InternalResponse internalResponse = null;
+
+		// Persist
+		internalResponse = doPersistanceCidade(request, persistType);
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		return (CidadeResponse)handleReturn(response, internalResponse, null, true);
 	}
 
 	/**
@@ -946,22 +982,49 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 	@Override
 	public CidadeResponse insertCidade(CidadeMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		CidadeResponse response = new CidadeResponse();
+		try
+		{
+			response = processCidade(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
 	}
 
 	@Override
 	public CidadeResponse updateCidade(CidadeMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		CidadeResponse response = new CidadeResponse();
+		try
+		{
+			response = processCidade(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
 	}
 
 	@Override
 	public CidadeResponse deleteCidade(CidadeMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		CidadeResponse response = new CidadeResponse();
+		try
+		{
+			response = processCidade(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
 	}
 
 }

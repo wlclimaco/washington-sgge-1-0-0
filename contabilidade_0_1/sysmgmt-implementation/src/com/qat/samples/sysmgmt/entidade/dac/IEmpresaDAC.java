@@ -95,6 +95,12 @@ public interface IEmpresaDAC
 
 	public InternalResultsResponse<Cidade> fetchCidadeByRequest(CidadeInquiryRequest cidade);
 
+	public InternalResultsResponse<Cidade> insertCidade(Cidade cidade);
+
+	public InternalResultsResponse<Cidade> updateCidade(Cidade cidade);
+
+	public InternalResponse deleteCidade(Cidade cidade);
+
 	public InternalResultsResponse<Plano> fetchPlanoByRequest(PlanoInquiryRequest plano);
 
 	public InternalResultsResponse<Classificacao> fetchClassificacaoByRequest(ClassificacaoInquiryRequest classificacao);
