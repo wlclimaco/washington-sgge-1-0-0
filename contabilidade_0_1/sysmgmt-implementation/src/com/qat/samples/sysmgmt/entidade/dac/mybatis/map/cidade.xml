@@ -20,7 +20,7 @@
     <result property="id" column="id" />
     <result property="codigo" column="CODIGO" />
     <result property="nome" column="cidade" />
-   	<result property="cdIBGE" column="cdIBGE"/>
+   	<result property="cdIBGE" column="IBGE"/>
    	<result property="cep" column="CEP" />
    	<result property="municipio" column="MUNICIPIO"/>
 <!--	<result property="createUser" column="create_user"/>
@@ -41,7 +41,7 @@
   estado integer,
   cep character varying(12),
   municipio character varying(10),
-  "cdIBGE" character varying(10),
+  "IBGE" character varying(10),
   CONSTRAINT cidade_pkey PRIMARY KEY (id),
   CONSTRAINT cidade_estado_key UNIQUE (codigo)
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
@@ -49,7 +49,7 @@
   <sql id="allCidadeColumns">
 		 b.cidade
 		,b.codigo
-      	,b.cdIBGE
+      	,b.IBGE
       	,b.estado
       	,b.municipio
       	,b.cep
