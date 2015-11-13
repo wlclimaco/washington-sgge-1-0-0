@@ -15,9 +15,9 @@ public class ClientPasswordCallback implements CallbackHandler
 	public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException
 	{
 		WSPasswordCallback callback = (WSPasswordCallback)callbacks[0];
-		if (callback.getIdentifier().equals("scott"))
+		if (callback.getIdentifier().equals("rod"))
 		{
-			callback.setPassword("wombat");
+			callback.setPassword("koala");
 		}
 	}
 }

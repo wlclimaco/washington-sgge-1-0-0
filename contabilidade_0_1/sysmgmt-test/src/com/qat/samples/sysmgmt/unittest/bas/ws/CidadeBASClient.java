@@ -2,9 +2,9 @@ package com.qat.samples.sysmgmt.unittest.bas.ws;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.qat.samples.sysmgmt.cidade.bas.ICidadeBAS;
-import com.qat.samples.sysmgmt.cidade.model.response.CidadeResponse;
-import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.entidade.bas.IEmpresaBAS;
+import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.response.CidadeResponse;
 
 public final class CidadeBASClient
 {
@@ -17,9 +17,9 @@ public final class CidadeBASClient
 		ClassPathXmlApplicationContext context =
 				new ClassPathXmlApplicationContext(
 						new String[] {"classpath:com/qat/samples/sysmgmt/unittest/conf/qat-sysmgmt-base-bas-client-context.xml"});
-		ICidadeBAS client = (ICidadeBAS)context.getBean("cidadeBASClientTarget");
-		FetchAllRequest request = new FetchAllRequest();
-		CidadeResponse response = client.fetchAllCidades(request);
+		IEmpresaBAS client = (IEmpresaBAS)context.getBean("empresaBASClientTarget");
+		CidadeInquiryRequest request = new CidadeInquiryRequest();
+		CidadeResponse response = client.fetchCidadeByRequest(request);
 		System.out.println("Response: " + response);
 		System.exit(0);
 	}
