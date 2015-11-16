@@ -269,7 +269,7 @@ function cadastro_fill_data(procResponse,data2)
 
 function cidade_fill_data(procResponse,data2)
 {
-
+debugger
 	data2[0] =
 	{
 		cellno: 0,
@@ -292,10 +292,10 @@ function cidade_fill_data(procResponse,data2)
 	}
 
 	//make sure return is an array
-	if ($.isArray(procResponse.cidades))
+	if ($.isArray(procResponse.cidadeList))
 	{
 		var oi = 0;
-		var tmpLength = procResponse.cidades.length;
+		var tmpLength = procResponse.cidadeList.length;
 		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
 		for (var i=1; i <= tmpLength; i++)
 		</sec:authorize>
@@ -303,39 +303,23 @@ function cidade_fill_data(procResponse,data2)
 		for (var i=0; i < tmpLength; i++)
 		</sec:authorize>
 		{
-				if (procResponse.cidades[oi].acessos != null){
-					var count = procResponse.cidades[oi].acessos.length;
-					if(procResponse.cidades[oi].acessos[count-1] != null){
-						var b =     procResponse.cidades[oi].acessos[count-1].userId
-					}else{
-						var b= "";
-					}
-					if(procResponse.cidades[oi].acessos[count-1] != null){
-						var c =    convertData(procResponse.cidades[oi].acessos[count-1].data)
-
-					}else{
-						var c= "";
-					}
-				}else{
-					var b= "";
-					var c= "";
-				}
-
 			data2[i] =
 			{
 				cellno:     i,
 				<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-				action: 	"<a href='#' onclick='javascript:ploader.callDeleteWS(" + procResponse.cidades[oi].cidadeId +");'>Delete</a>",
+				action: 	"<a href='#' onclick='javascript:ploader.callDeleteWS(" + procResponse.cidadeList[oi].id +");'>Delete</a>",
 				</sec:authorize>
 				<sec:authorize ifAllGranted="ROLE_GUEST">
 				action: 'None',
 				</sec:authorize>
-				pid: 		procResponse.cidades[oi].cidadeId,
-				pqntsup:	procResponse.cidades[oi].cidadeId,
-				pcidade:	procResponse.cidades[oi].cidade,
-				pestado:  	procResponse.cidades[oi].estado,
-				pdata :c,
-				puser :b
+				pid: 		procResponse.cidadeList[oi].id,
+				pcidade:	procResponse.cidadeList[oi].nome,
+				pmunicipio:	procResponse.cidadeList[oi].municipio,
+				pestado:  	procResponse.cidadeList[oi].estado,
+				pibge:  	procResponse.cidadeList[oi].cdIBGE,
+				pcodigo:  	procResponse.cidadeList[oi].codigo,
+				pdata :"rod",
+				puser :"rod"
 
 			}
 			oi++;

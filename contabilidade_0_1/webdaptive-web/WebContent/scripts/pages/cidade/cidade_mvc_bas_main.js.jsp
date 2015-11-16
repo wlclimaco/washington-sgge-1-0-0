@@ -26,8 +26,10 @@ var columns = [
 	{id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML},
     {id:"pid", name: procedure.grid.psak.title, field:"pid", resizable:false, cssClass:"cell-center", width:75},
 	{id:"pcidade", name: cidade.grid.pcidade.title, field:"pcidade", editor:Slick.Editors.Text},
+	{id:"pmunicipio", name: cidade.grid.pcidade.title, field:"pmunicipio", editor:Slick.Editors.Text},
 	{id:"pestado", name: cidade.grid.pestado.title, field:"pestado", editor:Slick.Editors.Text},
-	{id:"pqntsup", name: cidade.grid.pqntsup.title, field:"pqntsup", editable:true},
+	{id:"pibge", name: cidade.grid.pqntsup.title, field:"pibge", editable:true},
+	{id:"pcodigo", name: cidade.grid.pqntsup.title, field:"pcodigo", editable:true},
 	{id:"pdata", name: cidade.grid.pdata.title, field:"pdata", editable:true},
 	{id:"puser", name: cidade.grid.puser.title, field:"puser", editable:true}
 ];
@@ -111,6 +113,7 @@ var options =
 		function callPagedFetchWS(_iPageSize, _iStartPage)
 		{
 		    onProcDataLoading.notify({});
+		    debugger
 		    //if viewLOaddedObject filled by controller don't make a ajax call
 			if (viewLoadedObject == null)
 			{
