@@ -269,15 +269,19 @@ function cadastro_fill_data(procResponse,data2)
 
 function cidade_fill_data(procResponse,data2)
 {
-debugger
 	data2[0] =
 	{
 		cellno: 0,
 		action: "<span>Novo>>></span>",
 		pid: 1,
-		pqntsup: 0,
-		pcidade: null,
-		pestado: null,
+		</sec:authorize>
+		pid: 		null,
+		pcidade:	null,
+		pmunicipio:	null,
+		pestado:  	null,
+		pibge:  	null,
+		pcodigo:  	null,
+		pcep:  		null,
 		pdata :null,
 		puser :null
 	};
@@ -318,6 +322,7 @@ debugger
 				pestado:  	procResponse.cidadeList[oi].estado,
 				pibge:  	procResponse.cidadeList[oi].cdIBGE,
 				pcodigo:  	procResponse.cidadeList[oi].codigo,
+				pcep:  		procResponse.cidadeList[oi].cep,
 				pdata :"rod",
 				puser :"rod"
 

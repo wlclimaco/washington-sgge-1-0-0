@@ -69,7 +69,7 @@
 		SQL Insert Statements.
  	-->
   <insert id="insertCidade" parameterType="Cidade" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO cidade (
+  	INSERT INTO cidade b(
 		<include refid="allCidadeColumns" />
       )
     VALUES (<include refid="allCidadeValues" /> )

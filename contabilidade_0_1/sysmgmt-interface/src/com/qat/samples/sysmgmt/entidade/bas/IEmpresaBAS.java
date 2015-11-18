@@ -18,6 +18,8 @@ import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.response.DepositoResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.EmpresaResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.FilialResponse;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest;
+import com.qat.samples.sysmgmt.estado.model.response.EstadoResponse;
 import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
@@ -144,6 +146,8 @@ public interface IEmpresaBAS
 	@WebResult(name = "fetchCidadeByRequestReturn")
 	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
 	public CidadeResponse fetchCidadeByRequest(CidadeInquiryRequest request);
+
+	public EstadoResponse fetchEstadoByRequest(EstadoInquiryRequest request);
 
 	@WebMethod(action = "fetchPlanoByRequest")
 	@WebResult(name = "fetchPlanoByRequestReturn")

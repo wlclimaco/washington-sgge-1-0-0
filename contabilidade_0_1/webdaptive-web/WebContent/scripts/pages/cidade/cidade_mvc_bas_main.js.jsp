@@ -58,8 +58,18 @@ var options =
 		function callInsertWS()
 		{
 			onProcDataLoading.notify({});
-			var oData = new qat.model.reqCidade(null, new qat.model.cidade(1,data[0].pcidade,data[0].pestado),true,true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/insertCidade', oData, fill_data, process_error);
+			var oData = new qat.model.reqCidade(null,{
+				id 			: 1,
+				codigo 		: data[0].pcodigo,
+				nome 		: data[0].pcidade,
+				cdIBGE 		: data[0].pibge,
+				estado 		: {id : 1},
+				cep 		: data[0].pcep,
+				municipio 	: data[0].pmunicipio,
+				modelAction : "INSERT"
+			});
+			rest_post_call('qat-webdaptive/cidade/api/insertBAS', oData, fill_data, process_error);
+		//	rest_post_call('qat-sysmgmt-sample/cidade/api/insertBAS', oData, fill_data, process_error);
 		//	var oData = new qat.model.pagedInquiryRequest(null, 20, 0, true);
 		//	rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/fetchAllCidades', {}, fill_data, process_error);
 
@@ -97,7 +107,7 @@ var options =
 			onProcDataLoading.notify({});
 			var oData = new qat.model.reqCidade(null, new qat.model.cidade(_procId,null,null),true,true);
 		  //  var oData = new qat.model.reqProc(null, new qat.model.procedure(0,_procId,"","",0.0),true,true);
-			rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/deleteCidade', oData, fill_data, process_error);
+			rest_post_call('qat-sysmgmt-sample/cidade/api/rest/CidadeService/deleteCidade', oData, fill_data, process_error);
 			var oData = new qat.model.pagedInquiryRequest(null, 20, 0, true);
 			rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/fetchAllCidades', {}, fill_data, process_error);
 		}
@@ -113,7 +123,6 @@ var options =
 		function callPagedFetchWS(_iPageSize, _iStartPage)
 		{
 		    onProcDataLoading.notify({});
-		    debugger
 		    //if viewLOaddedObject filled by controller don't make a ajax call
 			if (viewLoadedObject == null)
 			{

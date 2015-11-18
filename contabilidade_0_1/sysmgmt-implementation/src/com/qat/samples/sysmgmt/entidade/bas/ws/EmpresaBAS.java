@@ -16,6 +16,8 @@ import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.response.DepositoResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.EmpresaResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.FilialResponse;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest;
+import com.qat.samples.sysmgmt.estado.model.response.EstadoResponse;
 import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
@@ -269,6 +271,13 @@ public class EmpresaBAS implements IEmpresaBAS
 	public CidadeResponse deleteCidade(CidadeMaintenanceRequest request)
 	{
 		return getEmpresaBAI().deleteCidade(request);
+	}
+
+	@Override
+	public EstadoResponse fetchEstadoByRequest(EstadoInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
