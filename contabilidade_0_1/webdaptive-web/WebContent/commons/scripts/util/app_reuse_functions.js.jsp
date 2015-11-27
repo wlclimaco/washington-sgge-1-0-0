@@ -274,7 +274,6 @@ function cidade_fill_data(procResponse,data2)
 		cellno: 0,
 		action: "<span>Novo>>></span>",
 		pid: 1,
-		</sec:authorize>
 		pid: 		null,
 		pcidade:	null,
 		pmunicipio:	null,
