@@ -195,8 +195,7 @@ public class EmpresaBAS implements IEmpresaBAS
 	@Override
 	public RegimeResponse fetchRegimeByRequest(RegimeInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getEmpresaBAI().fetchRegimeByRequest(request);
 	}
 
 	@Override

@@ -78,7 +78,10 @@
  	-->
   <insert id="insertCnae" parameterType="Cnae" useGeneratedKeys="true" keyProperty="id">
   	INSERT INTO cnae (
-		<include refid="allCnaeColumns" />
+		 codigo,
+		 cnae,
+      	 descricao,
+      	 abreviado
       )
     VALUES (<include refid="allCnaeValues" /> )
   </insert>

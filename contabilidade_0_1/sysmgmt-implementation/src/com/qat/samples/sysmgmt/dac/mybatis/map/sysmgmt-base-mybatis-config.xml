@@ -16,7 +16,8 @@
   		<typeAlias alias="Procedure" type="com.qat.samples.sysmgmt.model.Procedure"/>
   		<typeAlias alias="Bundle" type="com.qat.samples.sysmgmt.model.Bundle"/>
   		<typeAlias alias="QATModels" type="com.qat.samples.sysmgmt.util.QATModels"/>
-  		<typeAlias alias="FetchByIdRequest" type="com.qat.samples.sysmgmt.model.FetchByIdRequest"/>
+  		<typeAlias alias="FetchByIdRequest" type="com.qat.samples.sysmgmt.model.request.FetchByIdRequest"/>
+  		<typeAlias alias="Entidade" type="com.qat.samples.sysmgmt.entidade.Entidade"/>
 
   		<typeAlias alias="PagedInquiryRequest" type="com.qat.samples.sysmgmt.model.request.PagedInquiryRequest"/>
 <!--   		<typeAlias alias="CadastroInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest"/> -->
