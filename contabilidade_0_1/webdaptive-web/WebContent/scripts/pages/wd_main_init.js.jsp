@@ -132,7 +132,7 @@ head(function()
 								},
 								{title: wdtree.node3.title, isFolder: true, expand: true, tooltip: wdtree.node2.tooltip,
 									children: [
-										{title: wdtree.node3.child1.title, key: 'qatmvctabsSup', url: "qat_sup_tabs.jsp"},
+										{title: wdtree.node3.child1.title, key: 'qatmvctabsCnae', url: "qat_cnae_tabs.jsp"},
 									]
 								},
 								{title: wdtree.node4.title, isFolder: true, expand: true, tooltip: wdtree.node2.tooltip,

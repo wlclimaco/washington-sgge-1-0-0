@@ -24,6 +24,10 @@
 
   		<typeAlias alias="Cidade" type="com.qat.samples.sysmgmt.util.Cidade"/>
   		<typeAlias alias="CidadeInquiryRequest" type="com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest"/>
+
+  		<typeAlias alias="Cnae" type="com.qat.samples.sysmgmt.cnae.Cnae"/>
+  		<typeAlias alias="CnaeInquiryRequest" type="com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest"/>
+  		<typeAlias alias="CnaeEmpresa" type="com.qat.samples.sysmgmt.cnae.CnaeEmpresa"/>
 <!--   		<typeAlias alias="Cadastro" type="com.qat.samples.sysmgmt.produto.model.Cadastro"/> -->
 <!--   		<typeAlias alias="ControleAcess" type="com.qat.samples.sysmgmt.util.ControleAcess"/> -->
 <!--   		<typeAlias alias="Documento" type="com.qat.samples.sysmgmt.documento.model.Documento"/> -->
@@ -45,6 +49,7 @@
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/procedure.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/bundle.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/cidade.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/cnae.xml"/>
 <!--      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/preco.xml"/> -->
 <!--      	<mapper resource="com/qat/samples/sysmgmt/cidade/dac/mybatis/map/cidade.xml"/> -->
 <!--      	<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/produto.xml"/> -->

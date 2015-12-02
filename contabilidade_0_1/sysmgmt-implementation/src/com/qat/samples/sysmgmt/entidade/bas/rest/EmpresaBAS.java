@@ -180,8 +180,7 @@ public class EmpresaBAS implements IEmpresaRESTBAS
 	@Override
 	public CnaeResponse fetchCnaeByRequest(CnaeInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getEmpresaBAI().fetchCnaeByRequest(request);
 	}
 
 	@Override

@@ -37,7 +37,7 @@ function convertData(_time){
 
 //Common routine to process reponse & grid data
 function reuse_fill_data(response,data2,gridProcess)
-{
+{debugger
 	//Successful Return and got some type of object back
 	if (response != null && wd.core.isTrue(response.operationSuccess))
 	{
@@ -69,6 +69,10 @@ function reuse_fill_data(response,data2,gridProcess)
 		else if (gridProcess === "cidade" )
 		{
 			data2 = cidade_fill_data(response,data2);
+		}
+		else if (gridProcess === "cnae" )
+		{
+			data2 = cnae_fill_data(response,data2);
 		}
 		else if (gridProcess === "supermercado" )
 		{
@@ -322,6 +326,74 @@ function cidade_fill_data(procResponse,data2)
 				pibge:  	procResponse.cidadeList[oi].cdIBGE,
 				pcodigo:  	procResponse.cidadeList[oi].codigo,
 				pcep:  		procResponse.cidadeList[oi].cep,
+				pdata :"rod",
+				puser :"rod"
+
+			}
+			oi++;
+		}
+	}
+	return data2;
+};
+
+//=========================================================
+
+//============================CIDADE=======================
+
+function cnae_fill_data(procResponse,data2)
+{debugger
+//codigo, cnae, descricao, abreviado, status
+	data2[0] =
+	{
+		cellno: 0,
+		action: "<span>Novo>>></span>",
+		pid: 1,
+		pid: 		null,
+		pcodigo:	null,
+		pcnae:	null,
+		pdescricao:  	null,
+		pabreviado:  	null,
+		pstatus:  	null,
+		pdata :null,
+		puser :null
+	};
+
+	//Fill paging data
+	if (procResponse.resultsSetInfo != undefined)
+	{
+	 	pagingData.pageSize =  parseInt(procResponse.resultsSetInfo.pageSize);
+	 	pagingData.startPage =  parseInt(procResponse.resultsSetInfo.startPage);
+	 	pagingData.moreRowsAvailable =  procResponse.resultsSetInfo.moreRowsAvailable;
+	 	pagingData.totalRowsAvailable =  parseInt(procResponse.resultsSetInfo.totalRowsAvailable);
+	}
+
+	//make sure return is an array
+	if ($.isArray(procResponse.cnaeList))
+	{
+		var oi = 0;
+		var tmpLength = procResponse.cnaeList.length;
+		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+		for (var i=1; i <= tmpLength; i++)
+		</sec:authorize>
+		<sec:authorize  access="hasRole('ROLE_GUEST')">
+		for (var i=0; i < tmpLength; i++)
+		</sec:authorize>
+		{
+			data2[i] =
+			{
+				cellno:     i,
+				<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+				action: 	"<a href='#' onclick='javascript:ploader.callDeleteWS(" + procResponse.cnaeList[oi].id +");'>Delete</a>",
+				</sec:authorize>
+				<sec:authorize ifAllGranted="ROLE_GUEST">
+				action: 'None',
+				</sec:authorize>
+				pcodigo:		procResponse.cnaeList[oi].codigo,
+				pcnae:			procResponse.cnaeList[oi].cnae,
+				pdescricao:  	procResponse.cnaeList[oi].descricao,
+				pabreviado:  	procResponse.cnaeList[oi].abreviado,
+				pstatus:  		procResponse.cnaeList[oi].status,
+				pid: 			procResponse.cnaeList[oi].id,
 				pdata :"rod",
 				puser :"rod"
 

@@ -8,6 +8,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
 import com.qat.framework.util.QATAppContext;
 import com.qat.framework.util.QATInterfaceUtil;
+import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
+import com.qat.samples.sysmgmt.cnae.model.response.CnaeResponse;
 import com.qat.samples.sysmgmt.entidade.bas.IEmpresaBAS;
 import com.qat.samples.sysmgmt.entidade.model.request.CidadeMaintenanceRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
@@ -43,6 +45,22 @@ public class CidadeBaseController
 		try
 		{
 			modelAndView.addObject(PROCEDURE_RESPONSE, mapper.writeValueAsString(cidadeFetchByRequest(request)));
+		}
+		catch (Exception ex)
+		{
+			LOG.error(DEFAULT_EXCEPTION_MSG + ":" + ex);
+			modelAndView.addObject(PROCEDURE_RESPONSE, null);
+		}
+		return modelAndView;
+	}
+
+	protected ModelAndView cnaeMAV(CnaeInquiryRequest request, String returnViewName)
+	{
+		ModelAndView modelAndView = new ModelAndView(returnViewName);
+		ObjectMapper mapper = new ObjectMapper();
+		try
+		{
+			modelAndView.addObject("cnaeResponse", mapper.writeValueAsString(cnaeFetchByRequest(request)));
 		}
 		catch (Exception ex)
 		{
@@ -127,6 +145,21 @@ public class CidadeBaseController
 		{
 			IEmpresaBAS client = (IEmpresaBAS)QATAppContext.getBean("empresaBASClientTarget");
 			response = client.fetchCidadeByRequest(request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
+		}
+		return response;
+	}
+
+	protected CnaeResponse cnaeFetchByRequest(CnaeInquiryRequest request)
+	{
+		CnaeResponse response = new CnaeResponse();
+		try
+		{
+			IEmpresaBAS client = (IEmpresaBAS)QATAppContext.getBean("empresaBASClientTarget");
+			response = client.fetchCnaeByRequest(request);
 		}
 		catch (Exception ex)
 		{

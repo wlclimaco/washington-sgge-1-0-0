@@ -48,6 +48,7 @@
         		<entry key="fetchAllCidades" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
         		<entry key="fetchCidadeById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
         		<entry key="fetchCidadeByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchCnaeByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
         		<entry key="deleteCidade" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
         		<entry key="insertCidade" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
         		<entry key="updateCidade" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
@@ -188,6 +189,9 @@
         access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
         <sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.entidade.bas.rest.EmpresaBAS.fetchCidadeByRequest(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+        <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.entidade.bas.rest.EmpresaBAS.fetchCnaeByRequest(*))"
         access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
       	<sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.entidade.bas.rest.EmpresaBAS.fetchEmpresaById(*))"
