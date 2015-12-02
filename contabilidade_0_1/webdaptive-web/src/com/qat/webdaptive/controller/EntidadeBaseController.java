@@ -1,5 +1,15 @@
 package com.qat.webdaptive.controller;
 
+import org.codehaus.jackson.map.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.qat.framework.util.QATAppContext;
+import com.qat.framework.util.QATInterfaceUtil;
+import com.qat.samples.sysmgmt.entidade.bas.IEmpresaBAS;
+import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.response.ClassificacaoResponse;
 
 /**
  * The Class CountyBaseController.
@@ -7,12 +17,14 @@ package com.qat.webdaptive.controller;
 public class EntidadeBaseController
 {
 
-	// /** The Constant LOG. */
-	// private static final Logger LOG = LoggerFactory.getLogger(CadastroBaseController.class);
-	//
-	// /** The Constant DEFAULT_EXCEPTION_MSG. */
-	// private static final String DEFAULT_EXCEPTION_MSG = "webdaptive.controller.supermercado.defaultexception";
-	//
+	/** The Constant LOG. */
+	private static final Logger LOG = LoggerFactory.getLogger(CadastroBaseController.class);
+
+	/** The Constant DEFAULT_EXCEPTION_MSG. */
+	private static final String DEFAULT_EXCEPTION_MSG = "webdaptive.controller.supermercado.defaultexception";
+
+	private static final String PROCEDURE_RESPONSE = null;
+
 	// /** The Constant SUPERMERCADO_RESPONSE. */
 	// private static final String SUPERMERCADO_RESPONSE = "cadastroResponse";
 	//
@@ -202,4 +214,36 @@ public class EntidadeBaseController
 	// }
 	// return response;
 	// }
+
+	// classificação
+	protected ModelAndView classificacaoMAV(ClassificacaoInquiryRequest request, String returnViewName)
+	{
+		ModelAndView modelAndView = new ModelAndView(returnViewName);
+		ObjectMapper mapper = new ObjectMapper();
+		try
+		{
+			modelAndView.addObject("classificacaoList", mapper.writeValueAsString(classificaFetchByRequest(request)));
+		}
+		catch (Exception ex)
+		{
+			LOG.error(DEFAULT_EXCEPTION_MSG + ":" + ex);
+			modelAndView.addObject(PROCEDURE_RESPONSE, null);
+		}
+		return modelAndView;
+	}
+
+	protected ClassificacaoResponse classificaFetchByRequest(ClassificacaoInquiryRequest request)
+	{
+		ClassificacaoResponse response = new ClassificacaoResponse();
+		try
+		{
+			IEmpresaBAS client = (IEmpresaBAS)QATAppContext.getBean("empresaBASClientTarget");
+			response = client.fetchClassificacaoByRequest(request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
+		}
+		return response;
+	}
 }

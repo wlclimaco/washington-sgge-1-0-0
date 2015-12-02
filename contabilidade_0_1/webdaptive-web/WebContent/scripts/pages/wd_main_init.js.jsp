@@ -122,7 +122,8 @@ head(function()
 										{title: wdtree.node1.child1.submenu, key: 'qatmvctabsSub',  url: "qat_sub_tabs.jsp"},
 										{title: wdtree.node1.child1.trimenu, key: 'qatmvctabsTri',  url: "qat_tri_tabs.jsp"},
 										{title: wdtree.node1.child1.unimed, key: 'qatmvctabsUnimed',url: "qat_unimed_tabs.jsp"},
-										{title: wdtree.node1.child1.produto, key: 'qatmvctabsProd', url: "qat_prod_tabs.jsp"}
+										{title: wdtree.node1.child1.produto, key: 'qatmvctabsProd', url: "qat_class_tabs.jsp"},
+										{title: wdtree.node1.child1.produto, key: 'qatmvctabsClass', url: "qat_prod_tabs.jsp"}
 									]
 								},
 								{title: wdtree.node2.title, isFolder: true, expand: true, tooltip: wdtree.node2.tooltip,

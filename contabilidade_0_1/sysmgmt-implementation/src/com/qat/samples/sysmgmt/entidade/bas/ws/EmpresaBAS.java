@@ -215,8 +215,7 @@ public class EmpresaBAS implements IEmpresaBAS
 	@Override
 	public ClassificacaoResponse fetchClassificacaoByRequest(ClassificacaoInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getEmpresaBAI().fetchClassificacaoByRequest(request);
 	}
 
 	@Override
