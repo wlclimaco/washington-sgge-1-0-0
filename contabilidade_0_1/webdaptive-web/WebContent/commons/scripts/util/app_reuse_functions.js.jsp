@@ -37,7 +37,7 @@ function convertData(_time){
 
 //Common routine to process reponse & grid data
 function reuse_fill_data(response,data2,gridProcess)
-{debugger
+{
 	//Successful Return and got some type of object back
 	if (response != null && wd.core.isTrue(response.operationSuccess))
 	{
@@ -341,7 +341,7 @@ function cidade_fill_data(procResponse,data2)
 //============================CIDADE=======================
 
 function cnae_fill_data(procResponse,data2)
-{debugger
+{
 //codigo, cnae, descricao, abreviado, status
 	data2[0] =
 	{

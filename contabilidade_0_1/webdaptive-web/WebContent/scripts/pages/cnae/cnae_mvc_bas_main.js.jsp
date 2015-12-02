@@ -26,7 +26,10 @@ var columns = [
 	{id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30},
 	{id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML},
     {id:"pid", name: procedure.grid.psak.title, field:"pid", resizable:false, cssClass:"cell-center", width:75},
-
+	{id:"pcnae", name: cidade.grid.pcidade.title, field:"pcnae", editor:Slick.Editors.Text},
+	{id:"pdescricao", name: cidade.grid.pcidade.title, field:"pdescricao", editor:Slick.Editors.Text},
+	{id:"pabreviado", name: cidade.grid.pcidade.title, field:"pabreviado", editor:Slick.Editors.Text},
+	{id:"pstatus", name: cidade.grid.pcidade.title, field:"pstatus", editor:Slick.Editors.Text},
 	{id:"pdata", name: cidade.grid.pdata.title, field:"pdata", editable:true},
 	{id:"puser", name: cidade.grid.puser.title, field:"puser", editable:true}
 ];
@@ -65,10 +68,34 @@ var options =
 				municipio 	: data[0].pmunicipio,
 				modelAction : "INSERT"
 			});
-			rest_post_call('qat-webdaptive/cidade/api/insertBAS', oData, fill_data, process_error);
+			oEmpresa = new qat.model.Empresa();
+			oEmpresa.id = 1
+
+
+			oCnae = new qat.model.CnaeRel({
+
+				//id				= oParam.id;
+				idCnae	: new  qat.model.Cnae({
+					codigo		: data[0].pcodigo,
+					cnae		: data[0].cnae,
+					descricao	: data[0].descricao,
+					abreviado	: data[0].abreviado,
+					modelAction : "INSERT"
+				}),
+				modelAction : "NONE"
+
+			});
+
+
+
+		    oEmpresa.cnaes = [oCnae]
+			oEmpresa.modelAction = "NONE";
+			console.log(oEmpresa)
+			var oData = new qat.model.reqEmpresa(null,oEmpresa);
+	//		rest_post_call('qat-webdaptive/cidade/api/insertBAS', oData, fill_data, process_error);
 		//	rest_post_call('qat-sysmgmt-sample/cidade/api/insertBAS', oData, fill_data, process_error);
 		//	var oData = new qat.model.pagedInquiryRequest(null, 20, 0, true);
-		//	rest_post_call('qat-sysmgmt-sample/services/rest/CidadeService/fetchAllCidades', {}, fill_data, process_error);
+			rest_post_call('qat-sysmgmt-sample/services/rest/EntidadeService/insertEmpresa', oData, fill_data, process_error);
 
 		}
 

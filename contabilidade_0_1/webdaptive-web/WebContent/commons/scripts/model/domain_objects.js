@@ -176,6 +176,89 @@
 		this.userRole = userContext.userRole;
 	};
 
+	 qat.model.QATModel = function(oParam) {
+
+	var date = new Date();
+	if (oParam) {
+	//	this.createUser		= pgsi.settings.userContext.userId;
+	//	this.modifyUser		= pgsi.settings.userContext.userId;
+		this.createDateUTC	= date.getTime();
+		this.modifyDateUTC  = date.getTime();
+	}
+};
+qat.model.ModelCosmeDamiao = function(oParam){
+
+	qat.model.QATModel.call(this, oParam);
+
+	if (oParam) {
+		this.parentId    = oParam.parentId;
+		this.type        = oParam.type;
+		this.acaoType    = oParam.acaoType;
+		this.tabelaEnum  = oParam.tabelaEnum;
+		this.statusList  = [ oParam.statusList ];
+	}
+};
+qat.model.ModelCosmeDamiao.prototype = new qat.model.QATModel();
+
+qat.model.Entidade = function(oParam) {
+
+	qat.model.ModelCosmeDamiao.call(this, oParam);
+
+	if (oParam) {
+		this.id				= oParam.id;
+		this.entidadeId		= oParam.entidadeId;
+		this.nome			= oParam.nome;
+		this.regime			= oParam.regime;
+		this.enderecos		= oParam.enderecos;
+		this.documentos		= oParam.documentos;
+		this.emails			= oParam.emails;
+		this.Telefones		= oParam.Telefones;
+		this.cnaes			= oParam.cnaes;
+		this.modelAction 	= oParam.modelAction;
+
+	}
+};
+qat.model.Entidade.prototype = new qat.model.ModelCosmeDamiao();
+
+ qat.model.Empresa = function(oParam) {
+
+	qat.model.Entidade.call(this, oParam);
+
+	if (oParam) {
+		this.socios			= oParam.socios;
+	}
+};
+qat.model.Empresa.prototype = new qat.model.Entidade();
+
+ qat.model.Cnae = function(oParam) {
+
+	qat.model.ModelCosmeDamiao.call(this, oParam);
+
+	if (oParam) {
+		this.id				= oParam.id;
+		this.codigo			= oParam.codigo;
+		this.cnae			= oParam.cnae;
+		this.descricao		= oParam.descricao;
+		this.abreviado		= oParam.abreviado;
+		this.modelAction 	= oParam.modelAction;
+
+	}
+};
+qat.model.Cnae.prototype = new qat.model.ModelCosmeDamiao();
+
+ qat.model.CnaeRel = function(oParam) {
+
+	qat.model.ModelCosmeDamiao.call(this, oParam);
+
+	if (oParam) {
+		this.id				= oParam.id;
+		this.idCnae			= oParam.idCnae;
+		this.modelAction 	= oParam.modelAction;
+
+	}
+};
+qat.model.CnaeRel.prototype = new qat.model.ModelCosmeDamiao();
+
 
 	//==========================novo
 
