@@ -427,16 +427,20 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 
 			historicoId = empresa.getProcessId();
 		}
-		insertCount +=
-				SociosDACD.maintainSocioAssociations(empresa.getSocios(), response, empresa.getId(), null, null,
-						TabelaEnum.EMPRESA, getSocioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-						empresa.getCreateUser(), historicoId, historicoId);
-
-		insertCount +=
-				PlanoDACD.maintainPlanoAssociations(empresa.getPlanoList(), response, empresa.getId(), null, null,
-						TabelaEnum.EMPRESA, getPlanoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-						empresa.getCreateUser(), historicoId, historicoId);
-
+		if (!ValidationUtil.isNullOrEmpty(empresa.getSocios()))
+		{
+			insertCount +=
+					SociosDACD.maintainSocioAssociations(empresa.getSocios(), response, empresa.getId(), null, null,
+							TabelaEnum.EMPRESA, getSocioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							empresa.getCreateUser(), historicoId, historicoId);
+		}
+		if (!ValidationUtil.isNullOrEmpty(empresa.getPlanoList()))
+		{
+			insertCount +=
+					PlanoDACD.maintainPlanoAssociations(empresa.getPlanoList(), response, empresa.getId(), null, null,
+							TabelaEnum.EMPRESA, getPlanoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							empresa.getCreateUser(), historicoId, historicoId);
+		}
 		insertCount += insertAssociations(empresa, historicoId, historicoId, TabelaEnum.EMPRESA, response);
 
 		if (response.isInError())
@@ -899,39 +903,53 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 			InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		insertCount +=
-				EnderecoDACD.maintainEnderecoAssociations(empresa.getEnderecos(), response, empresa.getId(), null,
-						null,
-						tabela, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-						empresa.getCreateUser(), processId, historicoId, getCidadeDAC());
-
-		insertCount +=
-				CnaeDACD.maintainCnaeAssociations(empresa.getCnaes(), response, empresa.getId(), null, null,
-						tabela, getCnaeDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-						empresa.getCreateUser(), processId, historicoId);
-
-		insertCount +=
-				EmailDACD.maintainEmailAssociations(empresa.getEmails(), response, empresa.getId(), null, null,
-						tabela, getEmailDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-						empresa.getCreateUser(), processId, historicoId);
-
-		insertCount +=
-				TelefoneDACD.maintainTelefoneAssociations(empresa.getTelefones(), response, empresa.getId(), null,
-						null,
-						tabela, getTelefoneDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-						empresa.getCreateUser(), processId, historicoId);
-
-		insertCount +=
-				DocumentosDACD.maintainDocumentoAssociations(empresa.getDocumentos(), response, empresa.getId(), null,
-						null,
-						tabela, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-						empresa.getCreateUser(), processId, historicoId);
-
-		insertCount +=
-				NotesDACD.maintainNoteAssociations(empresa.getNotes(), response, empresa.getId(), null,
-						null,
-						tabela, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getEmprId(),
-						empresa.getCreateUser(), processId, historicoId);
+		if (!ValidationUtil.isNullOrEmpty(empresa.getEnderecos()))
+		{
+			insertCount +=
+					EnderecoDACD.maintainEnderecoAssociations(empresa.getEnderecos(), response, empresa.getId(), null,
+							null,
+							tabela, getEnderecoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							empresa.getCreateUser(), processId, historicoId, getCidadeDAC());
+		}
+		if (!ValidationUtil.isNullOrEmpty(empresa.getCnaes()))
+		{
+			insertCount +=
+					CnaeDACD.maintainCnaeAssociations(empresa.getCnaes(), response, empresa.getId(), null, null,
+							tabela, getCnaeDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							empresa.getCreateUser(), processId, historicoId);
+		}
+		if (!ValidationUtil.isNullOrEmpty(empresa.getEmails()))
+		{
+			insertCount +=
+					EmailDACD.maintainEmailAssociations(empresa.getEmails(), response, empresa.getId(), null, null,
+							tabela, getEmailDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							empresa.getCreateUser(), processId, historicoId);
+		}
+		if (!ValidationUtil.isNullOrEmpty(empresa.getTelefones()))
+		{
+			insertCount +=
+					TelefoneDACD.maintainTelefoneAssociations(empresa.getTelefones(), response, empresa.getId(), null,
+							null,
+							tabela, getTelefoneDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							empresa.getCreateUser(), processId, historicoId);
+		}
+		if (!ValidationUtil.isNullOrEmpty(empresa.getDocumentos()))
+		{
+			insertCount +=
+					DocumentosDACD.maintainDocumentoAssociations(empresa.getDocumentos(), response, empresa.getId(),
+							null,
+							null,
+							tabela, getDocumentoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							empresa.getCreateUser(), processId, historicoId);
+		}
+		if (!ValidationUtil.isNullOrEmpty(empresa.getNotes()))
+		{
+			insertCount +=
+					NotesDACD.maintainNoteAssociations(empresa.getNotes(), response, empresa.getId(), null,
+							null,
+							tabela, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getEmprId(),
+							empresa.getCreateUser(), processId, historicoId);
+		}
 
 		if (insertCount > 0)
 		{

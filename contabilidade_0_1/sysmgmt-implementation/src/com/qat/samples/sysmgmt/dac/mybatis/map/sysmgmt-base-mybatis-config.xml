@@ -15,6 +15,9 @@
   		<typeAlias alias="DrugPrice" type="com.qat.samples.sysmgmt.model.DrugPrice"/>
   		<typeAlias alias="Procedure" type="com.qat.samples.sysmgmt.model.Procedure"/>
   		<typeAlias alias="Bundle" type="com.qat.samples.sysmgmt.model.Bundle"/>
+  		<typeAlias alias="QATModels" type="com.qat.samples.sysmgmt.util.QATModels"/>
+  		<typeAlias alias="FetchByIdRequest" type="com.qat.samples.sysmgmt.model.FetchByIdRequest"/>
+
   		<typeAlias alias="PagedInquiryRequest" type="com.qat.samples.sysmgmt.model.request.PagedInquiryRequest"/>
 <!--   		<typeAlias alias="CadastroInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest"/> -->
   		<typeAlias alias="ProdutoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest"/>
@@ -24,6 +27,18 @@
 
   		<typeAlias alias="Cidade" type="com.qat.samples.sysmgmt.util.Cidade"/>
   		<typeAlias alias="CidadeInquiryRequest" type="com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest"/>
+
+  		<typeAlias alias="Classificacao" type="com.qat.samples.sysmgmt.fiscal.Classificacao"/>
+  		<typeAlias alias="ClassificacaoInquiryRequest" type="com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest"/>
+
+  		<typeAlias alias="Deposito" type="com.qat.samples.sysmgmt.entidade.Deposito"/>
+  		<typeAlias alias="DepositoInquiryRequest" type="com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest"/>
+
+  		<typeAlias alias="Empresa" type="com.qat.samples.sysmgmt.entidade.Empresa"/>
+  		<typeAlias alias="EmpresaInquiryRequest" type="com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest"/>
+
+  		<typeAlias alias="Filial" type="com.qat.samples.sysmgmt.entidade.Filial"/>
+  		<typeAlias alias="FilialInquiryRequest" type="com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest"/>
 
   		<typeAlias alias="Cnae" type="com.qat.samples.sysmgmt.cnae.Cnae"/>
   		<typeAlias alias="CnaeInquiryRequest" type="com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest"/>
@@ -44,12 +59,18 @@
   	</typeAliases>
 
  	<mappers>
+ 		<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/cbof.xml"/>
     	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/county.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/drug.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/procedure.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/bundle.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/cidade.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/cnae.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/classificacao.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/deposito.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/empresa.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/entidade.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/filial.xml"/>
 <!--      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/preco.xml"/> -->
 <!--      	<mapper resource="com/qat/samples/sysmgmt/cidade/dac/mybatis/map/cidade.xml"/> -->
 <!--      	<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/produto.xml"/> -->
