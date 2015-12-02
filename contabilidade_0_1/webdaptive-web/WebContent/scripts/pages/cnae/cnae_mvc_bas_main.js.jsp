@@ -27,6 +27,7 @@ var columns = [
 	{id:"action", name: procedure.grid.act.title, field:"action", resizable:false, cssClass:"cell-center", width:65, formatter:Slick.Formatters.HTML},
     {id:"pid", name: procedure.grid.psak.title, field:"pid", resizable:false, cssClass:"cell-center", width:75},
 	{id:"pcnae", name: cidade.grid.pcidade.title, field:"pcnae", editor:Slick.Editors.Text},
+	{id:"pcodigo", name: cidade.grid.pcidade.title, field:"pcodigo", editor:Slick.Editors.Text},
 	{id:"pdescricao", name: cidade.grid.pcidade.title, field:"pdescricao", editor:Slick.Editors.Text},
 	{id:"pabreviado", name: cidade.grid.pcidade.title, field:"pabreviado", editor:Slick.Editors.Text},
 	{id:"pstatus", name: cidade.grid.pcidade.title, field:"pstatus", editor:Slick.Editors.Text},
@@ -58,16 +59,7 @@ var options =
 		function callInsertWS()
 		{
 			onProcDataLoading.notify({});
-			var oData = new qat.model.reqCidade(null,{
-				id 			: 1,
-				codigo 		: data[0].pcodigo,
-				nome 		: data[0].pcidade,
-				cdIBGE 		: data[0].pibge,
-				estado 		: {id : 1},
-				cep 		: data[0].pcep,
-				municipio 	: data[0].pmunicipio,
-				modelAction : "INSERT"
-			});
+
 			oEmpresa = new qat.model.Empresa();
 			oEmpresa.id = 1
 
