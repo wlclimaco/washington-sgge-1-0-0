@@ -12,9 +12,17 @@ import com.qat.framework.validation.ValidationContext;
 import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.contato.Contato;
+import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
+import com.qat.samples.sysmgmt.contato.model.request.ContatoMaintenanceRequest;
+import com.qat.samples.sysmgmt.contato.model.response.ContatoResponse;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.response.OrdemServicoResponse;
 import com.qat.samples.sysmgmt.site.Site;
 import com.qat.samples.sysmgmt.site.bac.ISiteBAC;
 import com.qat.samples.sysmgmt.site.model.request.SiteMaintenanceRequest;
@@ -98,6 +106,96 @@ public final class SiteBAID
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, context.getMessages(), false);
 	}
 
+	public static void maintainContato(ISiteBAC supermercadoBAC,
+			ValidationContextIndicator validationIndicator,
+			ValidationController controller,
+			PersistanceActionEnum persistType, ContatoMaintenanceRequest request, ContatoResponse response)
+	{
+		ValidationContext context =
+				new ValidationContext(Site.class.getSimpleName(), request.getContato(),
+						validationIndicator);
+
+		InternalResponse internalResponse = new InternalResponse();
+		if (controller.validate(context))
+		{
+			// perform persistence
+			switch (persistType)
+			{
+				case INSERT:
+					internalResponse = supermercadoBAC.insertContato(request.getContato());
+					break;
+				case UPDATE:
+					internalResponse = supermercadoBAC.updateContato(request.getContato());
+					break;
+				case DELETE:
+					internalResponse = supermercadoBAC.deleteContato(request.getContato());
+					break;
+				default:
+					if (LOG.isDebugEnabled())
+					{
+						LOG.debug("persistType missing! Setting Unspecified Error status.");
+					}
+					internalResponse.setStatus(InternalResponse.Status.UnspecifiedError);
+					break;
+			}
+
+			// If the persistence worked
+			if (internalResponse.getStatus() == Status.OperationSuccess)
+			{
+				// Call maintain to see if we need to return the county list and if so whether it should be paged or not
+				// maintainReturnList(request.getReturnList(), request.getReturnListPaged(), response, supermercadoBAC);
+			}
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, context.getMessages(), false);
+	}
+
+	public static void maintainOS(ISiteBAC supermercadoBAC,
+			ValidationContextIndicator validationIndicator,
+			ValidationController controller,
+			PersistanceActionEnum persistType, OrdemServicoMaintenanceRequest request, OrdemServicoResponse response)
+	{
+		ValidationContext context =
+				new ValidationContext(Site.class.getSimpleName(), request.getOrdemServico(),
+						validationIndicator);
+
+		InternalResponse internalResponse = new InternalResponse();
+		if (controller.validate(context))
+		{
+			// perform persistence
+			switch (persistType)
+			{
+				case INSERT:
+					internalResponse = supermercadoBAC.insertOrdemServico(request.getOrdemServico());
+					break;
+				case UPDATE:
+					internalResponse = supermercadoBAC.updateOrdemServico(request.getOrdemServico());
+					break;
+				case DELETE:
+					internalResponse = supermercadoBAC.deleteOrdemServico(request.getOrdemServico());
+					break;
+				default:
+					if (LOG.isDebugEnabled())
+					{
+						LOG.debug("persistType missing! Setting Unspecified Error status.");
+					}
+					internalResponse.setStatus(InternalResponse.Status.UnspecifiedError);
+					break;
+			}
+
+			// If the persistence worked
+			if (internalResponse.getStatus() == Status.OperationSuccess)
+			{
+				// Call maintain to see if we need to return the county list and if so whether it should be paged or not
+				// maintainReturnList(request.getReturnList(), request.getReturnListPaged(), response, supermercadoBAC);
+			}
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, context.getMessages(), false);
+	}
+
 	/**
 	 * Refresh supermercados.
 	 * 
@@ -152,6 +250,32 @@ public final class SiteBAID
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
+	public static void fetchContatosPaged(ISiteBAC supermercadoBAC, ContatoInquiryRequest request,
+			ContatoResponse response)
+	{
+		InternalResultsResponse<Contato> internalResponse = supermercadoBAC.fetchContatosByRequest(request);
+		if (internalResponse.getStatus() != Status.OperationSuccess)
+		{
+			response.addOperationFailedMessage(DEFAULT_BUNDLE_BAID_EXCEPTION_MSG, new Object[] {internalResponse
+					.getStatus().toString()});
+		}
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	public static void fetchOrdemServicosPaged(ISiteBAC supermercadoBAC, OrdemServicoInquiryRequest request,
+			OrdemServicoResponse response)
+	{
+		InternalResultsResponse<OrdemServico> internalResponse = supermercadoBAC.fetchOrdemServicosByRequest(request);
+		if (internalResponse.getStatus() != Status.OperationSuccess)
+		{
+			response.addOperationFailedMessage(DEFAULT_BUNDLE_BAID_EXCEPTION_MSG, new Object[] {internalResponse
+					.getStatus().toString()});
+		}
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
 	/**
 	 * Fetch supermercado by id.
 	 * 
@@ -171,6 +295,40 @@ public final class SiteBAID
 		else
 		{
 			internalResponse = supermercadoBAC.fetchSiteById(request);
+		}
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	public static void fetchContatoById(ISiteBAC supermercadoBAC, FetchByIdRequest request,
+			ContatoResponse response)
+	{
+		InternalResultsResponse<Contato> internalResponse = new InternalResultsResponse<Contato>();
+		// validate fetchId field
+		if (ValidationUtil.isNull(request.getFetchId()))
+		{
+			internalResponse.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
+		}
+		else
+		{
+			internalResponse = supermercadoBAC.fetchContatoById(request);
+		}
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	public static void fetchOrdemServicoById(ISiteBAC supermercadoBAC, FetchByIdRequest request,
+			OrdemServicoResponse response)
+	{
+		InternalResultsResponse<OrdemServico> internalResponse = new InternalResultsResponse<OrdemServico>();
+		// validate fetchId field
+		if (ValidationUtil.isNull(request.getFetchId()))
+		{
+			internalResponse.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
+		}
+		else
+		{
+			internalResponse = supermercadoBAC.fetchOrdemServicoById(request);
 		}
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);

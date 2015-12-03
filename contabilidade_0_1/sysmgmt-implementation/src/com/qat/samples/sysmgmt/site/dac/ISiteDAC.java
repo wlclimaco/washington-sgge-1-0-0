@@ -1,11 +1,13 @@
 package com.qat.samples.sysmgmt.site.dac;
 
-import java.util.List;
-
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.contato.Contato;
+import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
 import com.qat.samples.sysmgmt.site.Site;
 
 /**
@@ -14,61 +16,43 @@ import com.qat.samples.sysmgmt.site.Site;
 public interface ISiteDAC
 {
 
-	/**
-	 * Insert site.
-	 * 
-	 * @param site the site
-	 * @return the internal response
-	 */
 	public InternalResponse insertSite(Site site);
 
-	/**
-	 * Update site.
-	 * 
-	 * @param site the site
-	 * 
-	 * @return the internal response
-	 */
 	public InternalResponse updateSite(Site site);
 
-	/**
-	 * Delete site.
-	 * 
-	 * @param site the site
-	 * 
-	 * @return the internal response
-	 */
 	public InternalResponse deleteSite(Site site);
 
-	/**
-	 * Delete all sites.
-	 * 
-	 * @return the internal response
-	 */
-	public InternalResponse deleteAllSites();
+	public InternalResultsResponse<Site> fetchAllSites();
 
-	/**
-	 * Fetch all sites.
-	 * 
-	 * @return the list< site>
-	 */
-	public List<Site> fetchAllSites();
+	public InternalResultsResponse<Site> fetchSiteById(FetchByIdRequest request);
 
-	/**
-	 * Fetch county by id.
-	 * 
-	 * @param request the request
-	 * @return the cached results response
-	 */
-
-	public Site fetchSiteById(FetchByIdRequest request);
-
-	/**
-	 * Fetch sites by request.
-	 * 
-	 * @param request the request
-	 * @return the internal results response
-	 */
 	public InternalResultsResponse<Site> fetchSitesByRequest(PagedInquiryRequest request);
+
+	// Contato
+	public InternalResponse insertContato(Contato contato);
+
+	public InternalResponse updateContato(Contato site);
+
+	public InternalResponse deleteContato(Contato site);
+
+	public InternalResultsResponse<Contato> fetchAllContatos();
+
+	public InternalResultsResponse<Contato> fetchContatoById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Contato> fetchContatosByRequest(ContatoInquiryRequest request);
+
+	// OS
+
+	public InternalResponse insertOrdemServico(OrdemServico site);
+
+	public InternalResponse updateOrdemServico(OrdemServico site);
+
+	public InternalResponse deleteOrdemServico(OrdemServico site);
+
+	public InternalResultsResponse<OrdemServico> fetchAllOrdemServicos();
+
+	public InternalResultsResponse<OrdemServico> fetchOrdemServicoById(FetchByIdRequest request);
+
+	public InternalResultsResponse<OrdemServico> fetchOrdemServicosByRequest(OrdemServicoInquiryRequest request);
 
 }

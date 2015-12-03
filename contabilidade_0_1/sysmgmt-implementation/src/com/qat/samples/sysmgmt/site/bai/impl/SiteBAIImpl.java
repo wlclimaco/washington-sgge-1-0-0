@@ -7,8 +7,16 @@ import com.qat.framework.model.QATModel.PersistanceActionEnum;
 import com.qat.framework.util.QATInterfaceUtil;
 import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
+import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
+import com.qat.samples.sysmgmt.contato.model.request.ContatoMaintenanceRequest;
+import com.qat.samples.sysmgmt.contato.model.response.ContatoResponse;
+import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.model.request.RefreshRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.response.OrdemServicoResponse;
 import com.qat.samples.sysmgmt.site.bac.ISiteBAC;
 import com.qat.samples.sysmgmt.site.bai.ISiteBAI;
 import com.qat.samples.sysmgmt.site.baid.SiteBAID;
@@ -224,5 +232,209 @@ public class SiteBAIImpl implements ISiteBAI
 			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
 		}
 		return response;
+	}
+
+	@Override
+	public SiteResponse refreshSites(RefreshRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SiteResponse fetchAllSites(FetchAllRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ContatoResponse insertContato(ContatoMaintenanceRequest request)
+	{
+		ContatoResponse response = new ContatoResponse();
+		try
+		{
+			SiteBAID.maintainContato(getSiteBAC(), ValidationContextIndicator.INSERT,
+					getValidationController(),
+					PersistanceActionEnum.INSERT, request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public ContatoResponse updateContato(ContatoMaintenanceRequest request)
+	{
+		ContatoResponse response = new ContatoResponse();
+		try
+		{
+			SiteBAID.maintainContato(getSiteBAC(), ValidationContextIndicator.UPDATE,
+					getValidationController(),
+					PersistanceActionEnum.UPDATE, request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public ContatoResponse deleteContato(ContatoMaintenanceRequest request)
+	{
+		ContatoResponse response = new ContatoResponse();
+		try
+		{
+			SiteBAID.maintainContato(getSiteBAC(), ValidationContextIndicator.DELETE,
+					getValidationController(),
+					PersistanceActionEnum.DELETE, request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public ContatoResponse fetchContatoById(FetchByIdRequest request)
+	{
+		ContatoResponse response = new ContatoResponse();
+		try
+		{
+			SiteBAID.fetchContatoById(getSiteBAC(), request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public ContatoResponse fetchContatosByRequest(ContatoInquiryRequest request)
+	{
+		ContatoResponse response = new ContatoResponse();
+		try
+		{
+			SiteBAID.fetchContatosPaged(getSiteBAC(), request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public ContatoResponse refreshContatos(RefreshRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ContatoResponse fetchAllContatos(FetchAllRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public OrdemServicoResponse insertOrdemServico(OrdemServicoMaintenanceRequest request)
+	{
+		OrdemServicoResponse response = new OrdemServicoResponse();
+		try
+		{
+			SiteBAID.maintainOS(getSiteBAC(), ValidationContextIndicator.INSERT,
+					getValidationController(),
+					PersistanceActionEnum.INSERT, request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public OrdemServicoResponse updateOrdemServico(OrdemServicoMaintenanceRequest request)
+	{
+		OrdemServicoResponse response = new OrdemServicoResponse();
+		try
+		{
+			SiteBAID.maintainOS(getSiteBAC(), ValidationContextIndicator.UPDATE,
+					getValidationController(),
+					PersistanceActionEnum.UPDATE, request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public OrdemServicoResponse deleteOrdemServico(OrdemServicoMaintenanceRequest request)
+	{
+		OrdemServicoResponse response = new OrdemServicoResponse();
+		try
+		{
+			SiteBAID.maintainOS(getSiteBAC(), ValidationContextIndicator.DELETE,
+					getValidationController(),
+					PersistanceActionEnum.DELETE, request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public OrdemServicoResponse fetchOrdemServicoById(FetchByIdRequest request)
+	{
+		OrdemServicoResponse response = new OrdemServicoResponse();
+		try
+		{
+			SiteBAID.fetchOrdemServicoById(getSiteBAC(), request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public OrdemServicoResponse fetchOrdemServicosByRequest(OrdemServicoInquiryRequest request)
+	{
+		OrdemServicoResponse response = new OrdemServicoResponse();
+		try
+		{
+			SiteBAID.fetchOrdemServicosPaged(getSiteBAC(), request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public OrdemServicoResponse refreshOrdemServicos(RefreshRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public OrdemServicoResponse fetchAllOrdemServicos(FetchAllRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

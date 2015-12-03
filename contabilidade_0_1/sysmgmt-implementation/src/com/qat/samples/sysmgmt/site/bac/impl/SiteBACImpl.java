@@ -2,8 +2,12 @@ package com.qat.samples.sysmgmt.site.bac.impl;
 
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.contato.Contato;
+import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
 import com.qat.samples.sysmgmt.site.Site;
 import com.qat.samples.sysmgmt.site.bac.ISiteBAC;
 import com.qat.samples.sysmgmt.site.dac.ISiteDAC;
@@ -35,43 +39,124 @@ public class SiteBACImpl implements ISiteBAC
 	@Override
 	public InternalResponse updateSite(Site site)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getSiteDAC().insertSite(site);
 	}
 
 	@Override
 	public InternalResponse deleteSite(Site site)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getSiteDAC().insertSite(site);
 	}
 
 	@Override
 	public void refreshSites(Integer refreshNumber)
 	{
-		// TODO Auto-generated method stub
+		// return null;// getSiteDAC().refreshSites(refreshNumber);
 
 	}
 
 	@Override
 	public InternalResultsResponse<Site> fetchSiteById(FetchByIdRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return null; // getSiteDAC().fetchSiteById(request);
 	}
 
 	@Override
 	public InternalResultsResponse<Site> fetchAllSites()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getSiteDAC().fetchAllSites();
 	}
 
 	@Override
 	public InternalResultsResponse<Site> fetchSitesByRequest(PagedInquiryRequest request)
 	{
+		return getSiteDAC().fetchSitesByRequest(request);
+	}
+
+	@Override
+	public InternalResponse insertContato(Contato procedure)
+	{
+		return getSiteDAC().insertContato(procedure);
+	}
+
+	@Override
+	public InternalResponse updateContato(Contato procedure)
+	{
+		return getSiteDAC().updateContato(procedure);
+	}
+
+	@Override
+	public InternalResponse deleteContato(Contato procedure)
+	{
+		return getSiteDAC().deleteContato(procedure);
+	}
+
+	@Override
+	public InternalResultsResponse<Contato> fetchContatoById(FetchByIdRequest request)
+	{
+		return getSiteDAC().fetchContatoById(request);
+	}
+
+	@Override
+	public InternalResultsResponse<Contato> fetchAllContatos()
+	{
+		return getSiteDAC().fetchAllContatos();
+	}
+
+	@Override
+	public InternalResultsResponse<Contato> fetchContatosByRequest(ContatoInquiryRequest request)
+	{
+		return getSiteDAC().fetchContatosByRequest(request);
+	}
+
+	@Override
+	public InternalResponse insertOrdemServico(OrdemServico ordemServico)
+	{
+		return getSiteDAC().insertOrdemServico(ordemServico);
+	}
+
+	@Override
+	public InternalResponse updateOrdemServico(OrdemServico procedure)
+	{
+		return getSiteDAC().updateOrdemServico(procedure);
+	}
+
+	@Override
+	public InternalResponse deleteOrdemServico(OrdemServico procedure)
+	{
+		return getSiteDAC().deleteOrdemServico(procedure);
+	}
+
+	@Override
+	public InternalResultsResponse<OrdemServico> fetchOrdemServicoById(FetchByIdRequest request)
+	{
+		return getSiteDAC().fetchOrdemServicoById(request);
+	}
+
+	@Override
+	public InternalResultsResponse<OrdemServico> fetchAllOrdemServicos()
+	{
+		return getSiteDAC().fetchAllOrdemServicos();
+	}
+
+	@Override
+	public InternalResultsResponse<OrdemServico> fetchOrdemServicosByRequest(OrdemServicoInquiryRequest request)
+	{
+		return getSiteDAC().fetchOrdemServicosByRequest(request);
+	}
+
+	@Override
+	public void refreshContatos(Integer refreshNumber)
+	{
 		// TODO Auto-generated method stub
-		return null;
+
+	}
+
+	@Override
+	public void refreshOrdemServicos(Integer refreshNumber)
+	{
+		// TODO Auto-generated method stub
+
 	}
 
 	// /** The Constant REFRESH_SEED. */

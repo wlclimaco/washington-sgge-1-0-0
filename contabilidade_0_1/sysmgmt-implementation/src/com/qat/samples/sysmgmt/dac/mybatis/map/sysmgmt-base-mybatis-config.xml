@@ -32,6 +32,10 @@
   		<typeAlias alias="Classificacao" type="com.qat.samples.sysmgmt.fiscal.Classificacao"/>
   		<typeAlias alias="ClassificacaoInquiryRequest" type="com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest"/>
 
+  		<typeAlias alias="Regime" type="com.qat.samples.sysmgmt.fiscal.Regime"/>
+  		<typeAlias alias="RegimeInquiryRequest" type="com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest"/>
+
+
   		<typeAlias alias="Deposito" type="com.qat.samples.sysmgmt.entidade.Deposito"/>
   		<typeAlias alias="DepositoInquiryRequest" type="com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest"/>
 
@@ -44,6 +48,14 @@
   		<typeAlias alias="Cnae" type="com.qat.samples.sysmgmt.cnae.Cnae"/>
   		<typeAlias alias="CnaeInquiryRequest" type="com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest"/>
   		<typeAlias alias="CnaeEmpresa" type="com.qat.samples.sysmgmt.cnae.CnaeEmpresa"/>
+
+  		<typeAlias alias="OrdemServicoTypes" type="com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoTypes"/>
+  		<typeAlias alias="OrdemServico" type="com.qat.samples.sysmgmt.ordemServico.model.OrdemServico"/>
+  		<typeAlias alias="OrdemServicoInquiryRequest" type="com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest"/>
+  		<typeAlias alias="OrdemServicoStatus" type="com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoStatus"/>
+  		<typeAlias alias="OrdemServicoItens" type="com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoItens"/>
+
+
 <!--   		<typeAlias alias="Cadastro" type="com.qat.samples.sysmgmt.produto.model.Cadastro"/> -->
 <!--   		<typeAlias alias="ControleAcess" type="com.qat.samples.sysmgmt.util.ControleAcess"/> -->
 <!--   		<typeAlias alias="Documento" type="com.qat.samples.sysmgmt.documento.model.Documento"/> -->
@@ -72,6 +84,7 @@
      	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/empresa.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/entidade.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/filial.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/regime.xml"/>
 <!--      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/preco.xml"/> -->
 <!--      	<mapper resource="com/qat/samples/sysmgmt/cidade/dac/mybatis/map/cidade.xml"/> -->
 <!--      	<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/produto.xml"/> -->

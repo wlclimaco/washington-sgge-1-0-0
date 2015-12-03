@@ -2,8 +2,12 @@ package com.qat.samples.sysmgmt.site.bac;
 
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.contato.Contato;
+import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
 import com.qat.samples.sysmgmt.site.Site;
 
 /**
@@ -12,61 +16,47 @@ import com.qat.samples.sysmgmt.site.Site;
 public interface ISiteBAC
 {
 
-	/**
-	 * Insert procedure.
-	 * 
-	 * @param procedure the procedure
-	 * 
-	 * @return the internal response
-	 */
 	public InternalResponse insertSite(Site procedure);
 
-	/**
-	 * Update procedure.
-	 * 
-	 * @param procedure the procedure
-	 * 
-	 * @return the internal response
-	 */
 	public InternalResponse updateSite(Site procedure);
 
-	/**
-	 * Delete procedure.
-	 * 
-	 * @param procedure the procedure
-	 * 
-	 * @return the internal response
-	 */
 	public InternalResponse deleteSite(Site procedure);
 
-	/**
-	 * Refresh procedures.
-	 * 
-	 * @param refreshNumber the value of the number of procedures you want refreshed
-	 * 
-	 */
 	public void refreshSites(Integer refreshNumber);
 
-	/**
-	 * Fetch procedure by id.
-	 * 
-	 * @param request the request
-	 * @return the internal results response
-	 */
 	public InternalResultsResponse<Site> fetchSiteById(FetchByIdRequest request);
 
-	/**
-	 * Fetch all procedures.
-	 * 
-	 * @return the internal results response< procedure>
-	 */
 	public InternalResultsResponse<Site> fetchAllSites();
 
-	/**
-	 * Fetch procedures by request.
-	 * 
-	 * @param request the request
-	 * @return the internal results response
-	 */
 	public InternalResultsResponse<Site> fetchSitesByRequest(PagedInquiryRequest request);
+
+	// Contato
+	public InternalResponse insertContato(Contato procedure);
+
+	public InternalResponse updateContato(Contato procedure);
+
+	public InternalResponse deleteContato(Contato procedure);
+
+	public void refreshContatos(Integer refreshNumber);
+
+	public InternalResultsResponse<Contato> fetchContatoById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Contato> fetchAllContatos();
+
+	public InternalResultsResponse<Contato> fetchContatosByRequest(ContatoInquiryRequest request);
+
+	// OS
+	public InternalResponse insertOrdemServico(OrdemServico ordemServico);
+
+	public InternalResponse updateOrdemServico(OrdemServico procedure);
+
+	public InternalResponse deleteOrdemServico(OrdemServico procedure);
+
+	public void refreshOrdemServicos(Integer refreshNumber);
+
+	public InternalResultsResponse<OrdemServico> fetchOrdemServicoById(FetchByIdRequest request);
+
+	public InternalResultsResponse<OrdemServico> fetchAllOrdemServicos();
+
+	public InternalResultsResponse<OrdemServico> fetchOrdemServicosByRequest(OrdemServicoInquiryRequest request);
 }

@@ -2,10 +2,16 @@ package com.qat.samples.sysmgmt.site.bas.ws;
 
 import javax.jws.WebService;
 
+import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
+import com.qat.samples.sysmgmt.contato.model.request.ContatoMaintenanceRequest;
+import com.qat.samples.sysmgmt.contato.model.response.ContatoResponse;
 import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.response.OrdemServicoResponse;
 import com.qat.samples.sysmgmt.site.bai.ISiteBAI;
 import com.qat.samples.sysmgmt.site.bas.ISiteBAS;
 import com.qat.samples.sysmgmt.site.model.request.SiteMaintenanceRequest;
@@ -132,15 +138,97 @@ public class SiteBAS implements ISiteBAS
 	@Override
 	public SiteResponse fetchAllSites(FetchAllRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getSiteBAI().fetchAllSites(request);
 	}
 
 	@Override
 	public SiteResponse refreshSites(RefreshRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getSiteBAI().refreshSites(request);
+	}
+
+	@Override
+	public ContatoResponse insertContato(ContatoMaintenanceRequest request)
+	{
+		return getSiteBAI().insertContato(request);
+	}
+
+	@Override
+	public ContatoResponse updateContato(ContatoMaintenanceRequest request)
+	{
+		return getSiteBAI().updateContato(request);
+	}
+
+	@Override
+	public ContatoResponse deleteContato(ContatoMaintenanceRequest request)
+	{
+		return getSiteBAI().deleteContato(request);
+	}
+
+	@Override
+	public ContatoResponse fetchAllContatos(FetchAllRequest request)
+	{
+		return getSiteBAI().fetchAllContatos(request);
+	}
+
+	@Override
+	public ContatoResponse fetchContatoById(FetchByIdRequest request)
+	{
+		return getSiteBAI().fetchContatoById(request);
+	}
+
+	@Override
+	public ContatoResponse refreshContatos(RefreshRequest request)
+	{
+		return getSiteBAI().refreshContatos(request);
+	}
+
+	@Override
+	public ContatoResponse fetchContatosByRequest(ContatoInquiryRequest request)
+	{
+		return getSiteBAI().fetchContatosByRequest(request);
+	}
+
+	@Override
+	public OrdemServicoResponse insertOrdemServico(OrdemServicoMaintenanceRequest request)
+	{
+		return getSiteBAI().insertOrdemServico(request);
+	}
+
+	@Override
+	public OrdemServicoResponse updateOrdemServico(OrdemServicoMaintenanceRequest request)
+	{
+		return getSiteBAI().updateOrdemServico(request);
+	}
+
+	@Override
+	public OrdemServicoResponse deleteOrdemServico(OrdemServicoMaintenanceRequest request)
+	{
+		return getSiteBAI().deleteOrdemServico(request);
+	}
+
+	@Override
+	public OrdemServicoResponse fetchAllOrdemServicos(FetchAllRequest request)
+	{
+		return getSiteBAI().fetchAllOrdemServicos(request);
+	}
+
+	@Override
+	public OrdemServicoResponse fetchOrdemServicoById(FetchByIdRequest request)
+	{
+		return getSiteBAI().fetchOrdemServicoById(request);
+	}
+
+	@Override
+	public OrdemServicoResponse refreshOrdemServicos(RefreshRequest request)
+	{
+		return getSiteBAI().refreshOrdemServicos(request);
+	}
+
+	@Override
+	public OrdemServicoResponse fetchOrdemServicosByRequest(OrdemServicoInquiryRequest request)
+	{
+		return getSiteBAI().fetchOrdemServicosByRequest(request);
 	}
 
 }
