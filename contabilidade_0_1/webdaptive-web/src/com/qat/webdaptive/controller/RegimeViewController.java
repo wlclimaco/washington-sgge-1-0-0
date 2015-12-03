@@ -5,18 +5,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 
 /**
  * The Class CidadeViewController.
  */
 @Controller
-@RequestMapping("/classificacao")
-public class ClassificacaoViewController extends EntidadeBaseController
+@RequestMapping("/regime")
+public class RegimeViewController extends EntidadeBaseController
 {
 
 	/** The Constant PROCEDURE_MVC_BAS_RETURN. */
-	private static final String PROCEDURE_MVC_BAS_RETURN = "/classificacao/classificacao_mvc_bas";
+	private static final String PROCEDURE_MVC_BAS_RETURN = "/regime/regime_mvc_bas";
 
 	/** The Constant ZERO. */
 	private static final int ZERO = 0;
@@ -29,15 +29,15 @@ public class ClassificacaoViewController extends EntidadeBaseController
 	 * 
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/fetchClassificacaoByRequestBAS", method = RequestMethod.GET)
-	public ModelAndView fetchClassificacaobyRequestBAS()
+	@RequestMapping(value = "/fetchRegimeByRequestBAS", method = RequestMethod.GET)
+	public ModelAndView fetchRegimebyRequestBAS()
 	{
-		ClassificacaoInquiryRequest request = new ClassificacaoInquiryRequest();
+		RegimeInquiryRequest request = new RegimeInquiryRequest();
 		// we will be paging so set the default values
 		request.setStartPage(ZERO);
 		request.setPageSize(TWENTY);
 		request.setPreQueryCount(true);
-		return classificacaoMAV(request, PROCEDURE_MVC_BAS_RETURN);
+		return regimeMAV(request, PROCEDURE_MVC_BAS_RETURN);
 	}
 
 }

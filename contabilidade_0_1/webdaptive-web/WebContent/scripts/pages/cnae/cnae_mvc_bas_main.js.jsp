@@ -20,7 +20,7 @@ var viewLoadedObject;
     </c:otherwise>
 </c:choose>
 console.log(viewLoadedObject);
-debugger
+
 //columns & column settings for the grid
 var columns = [
 	{id:"cellno", name: "#", field:"cellno", resizable:false, cssClass:"cell-center", width:30},

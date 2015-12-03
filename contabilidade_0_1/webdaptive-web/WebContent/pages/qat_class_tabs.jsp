@@ -13,12 +13,17 @@
 <div id="qatmvctabsClass">
 	<ul>
 		<sec:authorize access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-	       <li><a href="../classificacao/fetchClassificacaoByRequestBAS" title="qatmvctab-1"><span>Classificacao</span></a></li>
+	       <li><a href="../regime/fetchRegimeByRequestBAS" title="qatmvctab-2"><span>Regime</span></a></li>
+		</sec:authorize>
+		<sec:authorize access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+
+		   <li><a href="../classificacao/fetchClassificacaoByRequestBAS" title="qatmvctab-1"><span>Classificacao</span></a></li>
 		</sec:authorize>
 	</ul>
 	<div class="tabscontent">
 		<sec:authorize access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
 			<div id="qatmvctab-1"></div>
+			<div id="qatmvctab-2"></div>
 		</sec:authorize>
 	</div>
 </div>

@@ -9,7 +9,9 @@ import com.qat.framework.util.QATAppContext;
 import com.qat.framework.util.QATInterfaceUtil;
 import com.qat.samples.sysmgmt.entidade.bas.IEmpresaBAS;
 import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.response.ClassificacaoResponse;
+import com.qat.samples.sysmgmt.fiscal.model.response.RegimeResponse;
 
 /**
  * The Class CountyBaseController.
@@ -232,6 +234,22 @@ public class EntidadeBaseController
 		return modelAndView;
 	}
 
+	protected ModelAndView regimeMAV(RegimeInquiryRequest request, String returnViewName)
+	{
+		ModelAndView modelAndView = new ModelAndView(returnViewName);
+		ObjectMapper mapper = new ObjectMapper();
+		try
+		{
+			modelAndView.addObject("regimeList", mapper.writeValueAsString(regimeFetchByRequest(request)));
+		}
+		catch (Exception ex)
+		{
+			LOG.error(DEFAULT_EXCEPTION_MSG + ":" + ex);
+			modelAndView.addObject(PROCEDURE_RESPONSE, null);
+		}
+		return modelAndView;
+	}
+
 	protected ClassificacaoResponse classificaFetchByRequest(ClassificacaoInquiryRequest request)
 	{
 		ClassificacaoResponse response = new ClassificacaoResponse();
@@ -239,6 +257,21 @@ public class EntidadeBaseController
 		{
 			IEmpresaBAS client = (IEmpresaBAS)QATAppContext.getBean("empresaBASClientTarget");
 			response = client.fetchClassificacaoByRequest(request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
+		}
+		return response;
+	}
+
+	protected RegimeResponse regimeFetchByRequest(RegimeInquiryRequest request)
+	{
+		RegimeResponse response = new RegimeResponse();
+		try
+		{
+			IEmpresaBAS client = (IEmpresaBAS)QATAppContext.getBean("empresaBASClientTarget");
+			response = client.fetchRegimeByRequest(request);
 		}
 		catch (Exception ex)
 		{
