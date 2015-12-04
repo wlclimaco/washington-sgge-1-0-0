@@ -131,20 +131,25 @@ head(function()
 										{title: wdtree.node2.child1.title, key: 'qatmvctabsCli', url: "qat_cli_tabs.jsp"},
 									]
 								},
-								{title: wdtree.node3.title, isFolder: true, expand: true, tooltip: wdtree.node2.tooltip,
+								{title:'Fiscal', isFolder: true, expand: true, tooltip: wdtree.node2.tooltip,
 									children: [
-										{title: wdtree.node3.child1.title, key: 'qatmvctabsCnae', url: "qat_cnae_tabs.jsp"},
+										{title: 'Produtos', key: 'qatmvctabsCnae', url: "qat_cnae_tabs.jsp"},
+										{title: 'Nota Fiscal Entrada', key: 'qatmvctabsCnae', url: "qat_cnae_tabs.jsp"},
+										{title: 'Nota Fiscal Saida', key: 'qatmvctabsCnae', url: "qat_cnae_tabs.jsp"},
 									]
 								},
-								{title: wdtree.node4.title, isFolder: true, expand: true, tooltip: wdtree.node2.tooltip,
+								{title: 'Financeiro', isFolder: true, expand: true, tooltip: wdtree.node2.tooltip,
 									children: [
-										{title: wdtree.node4.child1.title, key: 'qatmvctabsCid', url: "qat_cid_tabs.jsp"},
+										{title: 'Contas Pagar', key: 'qatmvctabsCid', url: "qat_cid_tabs.jsp"},
+										{title: 'Contas Receber', key: 'qatmvctabsCid', url: "qat_cid_tabs.jsp"},
+										{title: 'Caixa', key: 'qatmvctabsCid', url: "qat_cid_tabs.jsp"},
 									]
 								},
 						        <sec:authorize ifAllGranted="ROLE_DOMAIN ADMINS">
-								{title: wdtree.node5.title, isFolder: true, expand: true, tooltip: wdtree.node3.tooltip,
+								{title: 'Departamento Pessoal', isFolder: true, expand: true, tooltip: wdtree.node3.tooltip,
 									children: [
-										{title: wdtree.node4.child1.title, key: 'qatmvctabsGer', url: "qat_ger_tabs.jsp"},
+										{title: 'Funcionario', key: 'qatmvctabsFun', url: "qat_func_tabs.jsp"},
+
 									]
 								},
 								{title: 'Cadastros', isFolder: true, expand: true, tooltip: wdtree.node2.tooltip,
@@ -153,9 +158,20 @@ head(function()
 										{title: 'Cnae', key: 'qatmvctabsCnae', url: "qat_cnae_tabs.jsp"},
 										{title: 'Classificacao', key: 'qatmvctabsClass', url: "qat_class_tabs.jsp"},
 										{title: 'Regime', key: 'qatmvctabsRegi', url: "qat_regi_tabs.jsp"},
+										{title: 'Empresa', key: 'qatmvctabsEmp', url: "qat_emp_tabs.jsp"},
+										{title: 'Cfop', key: 'qatmvctabsCFOP', url: "qat_cfop_tabs.jsp"},
+										{title: 'Clientes', key: 'qatmvctabsCFOP', url: "qat_cfop_tabs.jsp"},
+										{title: 'Fornecedores', key: 'qatmvctabsCFOP', url: "qat_cfop_tabs.jsp"},
+										{title: 'Transportador', key: 'qatmvctabsCFOP', url: "qat_cfop_tabs.jsp"},
+									]
+								},
+								{title: 'Site', isFolder: true, expand: true, tooltip: wdtree.node3.tooltip,
+									children: [
+										{title: 'Serviços', key: 'qatmvctabsFun', url: "qat_func_tabs.jsp"},
+										{title: 'Planos', key: 'qatmvctabsFun', url: "qat_func_tabs.jsp"},
 										{title: 'Contato', key: 'qatmvctabsContat', url: "qat_contat_tabs.jsp"},
 										{title: 'Ordem Servico', key: 'qatmvctabsOS', url: "qat_OS_tabs.jsp"},
-										{title: 'Empresa', key: 'qatmvctabsEmp', url: "qat_emp_tabs.jsp"},
+
 									]
 								},
 								</sec:authorize>
