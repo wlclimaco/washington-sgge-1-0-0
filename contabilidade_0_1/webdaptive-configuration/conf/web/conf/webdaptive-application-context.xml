@@ -60,6 +60,14 @@
         	<ref bean="wss4jOutInterceptor"/>
  		</jaxws:outInterceptors>
      </jaxws:client>
+
+     <jaxws:client id="siteBASClientTarget"
+                  serviceClass="com.qat.samples.sysmgmt.site.bas.ISiteBAS"
+                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/SiteService">
+    	<jaxws:outInterceptors>
+        	<ref bean="wss4jOutInterceptor"/>
+ 		</jaxws:outInterceptors>
+     </jaxws:client>
 <!--
      <jaxws:client id="entidadeBASClientTarget"
                   serviceClass="com.qat.samples.sysmgmt.entidade.bas.IEmpresaBAS"
