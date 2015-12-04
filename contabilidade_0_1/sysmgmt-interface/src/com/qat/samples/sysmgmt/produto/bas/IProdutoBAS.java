@@ -7,16 +7,16 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.fiscal.model.request.PlanoInquiryRequest;
-import com.qat.samples.sysmgmt.fiscal.model.response.PlanoResponse;
 import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
+import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ServicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.response.PlanoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ServicoResponse;
 

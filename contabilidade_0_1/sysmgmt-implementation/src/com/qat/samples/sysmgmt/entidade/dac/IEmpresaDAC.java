@@ -14,9 +14,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.Classificacao;
 import com.qat.samples.sysmgmt.fiscal.Regime;
 import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
-import com.qat.samples.sysmgmt.fiscal.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.util.Cidade;
 import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 

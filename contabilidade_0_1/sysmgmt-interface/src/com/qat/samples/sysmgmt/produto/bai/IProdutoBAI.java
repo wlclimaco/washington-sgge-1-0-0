@@ -3,6 +3,7 @@ package com.qat.samples.sysmgmt.produto.bai;
 import com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.response.ClassificacaoResponse;
+import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.GrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest;
@@ -45,6 +46,8 @@ public interface IProdutoBAI
 	public ProdutoResponse fetchProdutoById(FetchByIdRequest request);
 
 	public ProdutoResponse fetchProdutoByRequest(ProdutoInquiryRequest request);
+
+	public ProdutoResponse fetchAllProdutos(FetchAllRequest request);
 
 	public UniMedResponse fetchUniMedByRequest(UniMedInquiryRequest request);
 

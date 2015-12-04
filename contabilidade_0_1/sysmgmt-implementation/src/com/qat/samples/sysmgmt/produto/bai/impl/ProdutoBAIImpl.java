@@ -17,29 +17,38 @@ import com.qat.framework.validation.ValidationController;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.cfop.Cfop;
 import com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest;
+import com.qat.samples.sysmgmt.contabilidade.Plano;
 import com.qat.samples.sysmgmt.fiscal.Classificacao;
 import com.qat.samples.sysmgmt.fiscal.Tributacao;
 import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.response.ClassificacaoResponse;
+import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.bac.IProdutoBAC;
 import com.qat.samples.sysmgmt.produto.bai.IProdutoBAI;
 import com.qat.samples.sysmgmt.produto.model.Grupo;
 import com.qat.samples.sysmgmt.produto.model.Marca;
 import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.produto.model.SubGrupo;
 import com.qat.samples.sysmgmt.produto.model.UniMed;
 import com.qat.samples.sysmgmt.produto.model.request.GrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.PlanoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.response.CfopResponse;
 import com.qat.samples.sysmgmt.produto.model.response.GrupoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.MarcaResponse;
+import com.qat.samples.sysmgmt.produto.model.response.PlanoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
+import com.qat.samples.sysmgmt.produto.model.response.ServicoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.SubGrupoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.TributacaoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.UniMedResponse;
@@ -282,6 +291,40 @@ public class ProdutoBAIImpl implements IProdutoBAI
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
 	}
 
+	private void fetchPagedServico(ServicoInquiryRequest request, ServicoResponse response)
+	{
+		InternalResultsResponse<Servico> internalResponse = new InternalResultsResponse<Servico>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getProdutoBAC().fetchServicoByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	private void fetchPagedPlano(PlanoInquiryRequest request, PlanoResponse response)
+	{
+		InternalResultsResponse<Plano> internalResponse = new InternalResultsResponse<Plano>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getProdutoBAC().fetchPlanoByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
 	/**
 	 * Process.
 	 * 
@@ -303,6 +346,32 @@ public class ProdutoBAIImpl implements IProdutoBAI
 		return handleReturn(response, internalResponse, null, true);
 	}
 
+	private ServicoResponse processServico(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
+			ServicoMaintenanceRequest request)
+	{
+		ServicoResponse response = new ServicoResponse();
+		InternalResponse internalResponse = null;
+
+		// Persist
+		internalResponse = doPersistanceServico(request, persistType);
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		return handleReturnServico(response, internalResponse, null, true);
+	}
+
+	private PlanoResponse processPlano(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
+			PlanoMaintenanceRequest request)
+	{
+		PlanoResponse response = new PlanoResponse();
+		InternalResponse internalResponse = null;
+
+		// Persist
+		internalResponse = doPersistancePlano(request, persistType);
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		return handleReturnPlano(response, internalResponse, null, true);
+	}
+
 	/**
 	 * Handle return.
 	 * 
@@ -313,6 +382,36 @@ public class ProdutoBAIImpl implements IProdutoBAI
 	 * @return the response
 	 */
 	private ProdutoResponse handleReturn(ProdutoResponse response, InternalResponse internalResponse,
+			List<MessageInfo> messages, boolean copyOver)
+	{
+		// In the case there was an Optimistic Locking error, add the specific message
+		if (!ValidationUtil.isNull(internalResponse) && !ValidationUtil.isNull(internalResponse.getStatus())
+				&& Status.OptimisticLockingError.equals(internalResponse.getStatus()))
+		{
+			messages.add(new MessageInfo(PROSPERITASGLOBAL_BASE_OL_ERROR, MessageSeverity.Error,
+					MessageLevel.Object));
+		}
+
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, messages, copyOver);
+		return response;
+	}
+
+	private PlanoResponse handleReturnPlano(PlanoResponse response, InternalResponse internalResponse,
+			List<MessageInfo> messages, boolean copyOver)
+	{
+		// In the case there was an Optimistic Locking error, add the specific message
+		if (!ValidationUtil.isNull(internalResponse) && !ValidationUtil.isNull(internalResponse.getStatus())
+				&& Status.OptimisticLockingError.equals(internalResponse.getStatus()))
+		{
+			messages.add(new MessageInfo(PROSPERITASGLOBAL_BASE_OL_ERROR, MessageSeverity.Error,
+					MessageLevel.Object));
+		}
+
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, messages, copyOver);
+		return response;
+	}
+
+	private ServicoResponse handleReturnServico(ServicoResponse response, InternalResponse internalResponse,
 			List<MessageInfo> messages, boolean copyOver)
 	{
 		// In the case there was an Optimistic Locking error, add the specific message
@@ -346,6 +445,52 @@ public class ProdutoBAIImpl implements IProdutoBAI
 
 			case DELETE:
 				return getProdutoBAC().deleteProduto(request);
+
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
+		}
+		return null;
+	}
+
+	private InternalResponse doPersistanceServico(ServicoMaintenanceRequest request, PersistanceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			case INSERT:
+				return getProdutoBAC().insertServico(request);
+
+			case UPDATE:
+				return getProdutoBAC().updateServico(request);
+
+			case DELETE:
+				return getProdutoBAC().deleteServico(request);
+
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
+		}
+		return null;
+	}
+
+	private InternalResponse doPersistancePlano(PlanoMaintenanceRequest request, PersistanceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			case INSERT:
+				return getProdutoBAC().insertPlano(request);
+
+			case UPDATE:
+				return getProdutoBAC().updatePlano(request);
+
+			case DELETE:
+				return getProdutoBAC().deletePlano(request);
 
 			default:
 				if (LOG.isDebugEnabled())
@@ -663,6 +808,193 @@ public class ProdutoBAIImpl implements IProdutoBAI
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	@Override
+	public ServicoResponse insertServico(ServicoMaintenanceRequest request)
+	{
+		ServicoResponse response = new ServicoResponse();
+		try
+		{
+			response = processServico(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public ServicoResponse updateServico(ServicoMaintenanceRequest request)
+	{
+		ServicoResponse response = new ServicoResponse();
+		try
+		{
+			response = processServico(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public ServicoResponse deleteServico(ServicoMaintenanceRequest request)
+	{
+		ServicoResponse response = new ServicoResponse();
+		try
+		{
+			response = processServico(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public ServicoResponse fetchServicoById(FetchByIdRequest request)
+	{
+		ServicoResponse response = new ServicoResponse();
+		try
+		{
+			InternalResponse internalResponse = new InternalResponse();
+			// validate fetchId field
+			if (ValidationUtil.isNull(request.getFetchId()))
+			{
+				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
+			}
+			else
+			{
+				internalResponse = getProdutoBAC().fetchServicoById(request);
+			}
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public ServicoResponse fetchServicoByRequest(ServicoInquiryRequest request)
+	{
+		ServicoResponse response = new ServicoResponse();
+		try
+		{
+			fetchPagedServico(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public PlanoResponse insertPlano(PlanoMaintenanceRequest request)
+	{
+		PlanoResponse response = new PlanoResponse();
+		try
+		{
+			response = processPlano(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public PlanoResponse updatePlano(PlanoMaintenanceRequest request)
+	{
+		PlanoResponse response = new PlanoResponse();
+		try
+		{
+			response = processPlano(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public PlanoResponse deletePlano(PlanoMaintenanceRequest request)
+	{
+		PlanoResponse response = new PlanoResponse();
+		try
+		{
+			response = processPlano(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public PlanoResponse fetchPlanoById(FetchByIdRequest request)
+	{
+		PlanoResponse response = new PlanoResponse();
+		try
+		{
+			InternalResponse internalResponse = new InternalResponse();
+			// validate fetchId field
+			if (ValidationUtil.isNull(request.getFetchId()))
+			{
+				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
+			}
+			else
+			{
+				internalResponse = getProdutoBAC().fetchPlanoById(request);
+			}
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public PlanoResponse fetchPlanoByRequest(PlanoInquiryRequest request)
+	{
+		PlanoResponse response = new PlanoResponse();
+		try
+		{
+			fetchPagedPlano(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	@Override
+	public ProdutoResponse fetchAllProdutos(FetchAllRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

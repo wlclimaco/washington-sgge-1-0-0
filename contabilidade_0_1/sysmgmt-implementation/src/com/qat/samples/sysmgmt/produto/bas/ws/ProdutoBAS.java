@@ -4,12 +4,18 @@ import javax.jws.WebService;
 
 import com.qat.samples.sysmgmt.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 import com.qat.samples.sysmgmt.produto.bai.IProdutoBAI;
 import com.qat.samples.sysmgmt.produto.bas.IProdutoBAS;
+import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.PlanoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.response.PlanoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
+import com.qat.samples.sysmgmt.produto.model.response.ServicoResponse;
 
 /**
  * Standard implementation of a BAS where the operations are delegated to a BAI.
@@ -45,50 +51,94 @@ public class ProdutoBAS implements IProdutoBAS
 	@Override
 	public ProdutoResponse insertProduto(ProdutoMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getProdutoBAI().insertProduto(request);
 	}
 
 	@Override
 	public ProdutoResponse updateProduto(ProdutoMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getProdutoBAI().updateProduto(request);
+
 	}
 
 	@Override
 	public ProdutoResponse deleteProduto(ProdutoMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getProdutoBAI().deleteProduto(request);
 	}
 
 	@Override
 	public ProdutoResponse fetchAllProdutos(FetchAllRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getProdutoBAI().fetchAllProdutos(request);
 	}
 
 	@Override
 	public ProdutoResponse fetchProdutoById(FetchByIdRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getProdutoBAI().fetchProdutoById(request);
+
 	}
 
 	@Override
 	public ProdutoResponse refreshProdutos(RefreshRequest request)
 	{
-		// TODO Auto-generated method stub
 		return null;
+
 	}
 
 	@Override
-	public ProdutoResponse fetchProdutosByRequest(PagedInquiryRequest request)
+	public ProdutoResponse fetchProdutosByRequest(ProdutoInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getProdutoBAI().fetchProdutoByRequest(request);
+	}
+
+	@Override
+	public ServicoResponse insertServico(ServicoMaintenanceRequest request)
+	{
+		return getProdutoBAI().insertServico(request);
+	}
+
+	@Override
+	public ServicoResponse updateServico(ServicoMaintenanceRequest request)
+	{
+		return getProdutoBAI().updateServico(request);
+	}
+
+	@Override
+	public ServicoResponse deleteServico(ServicoMaintenanceRequest request)
+	{
+		return getProdutoBAI().deleteServico(request);
+	}
+
+	@Override
+	public ServicoResponse fetchServicosByRequest(ServicoInquiryRequest request)
+	{
+		return getProdutoBAI().fetchServicoByRequest(request);
+	}
+
+	@Override
+	public PlanoResponse insertPlano(PlanoMaintenanceRequest request)
+	{
+		return getProdutoBAI().insertPlano(request);
+	}
+
+	@Override
+	public PlanoResponse updatePlano(PlanoMaintenanceRequest request)
+	{
+		return getProdutoBAI().updatePlano(request);
+	}
+
+	@Override
+	public PlanoResponse deletePlano(PlanoMaintenanceRequest request)
+	{
+		return getProdutoBAI().deletePlano(request);
+	}
+
+	@Override
+	public PlanoResponse fetchPlanosByRequest(PlanoInquiryRequest request)
+	{
+		return getProdutoBAI().fetchPlanoByRequest(request);
 	}
 
 	// /*

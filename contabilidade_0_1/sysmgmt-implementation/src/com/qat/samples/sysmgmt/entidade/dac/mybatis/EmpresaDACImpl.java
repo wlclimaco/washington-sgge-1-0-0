@@ -39,9 +39,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.Classificacao;
 import com.qat.samples.sysmgmt.fiscal.Regime;
 import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
-import com.qat.samples.sysmgmt.fiscal.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.util.AcaoEnum;
 import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.Cidade;
@@ -990,5 +990,4 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		QATMyBatisDacHelper.doRemove(getSqlSession(), "CidadeMap.deleteCidadeById", cidade, response);
 		return response;
 	}
-
 }

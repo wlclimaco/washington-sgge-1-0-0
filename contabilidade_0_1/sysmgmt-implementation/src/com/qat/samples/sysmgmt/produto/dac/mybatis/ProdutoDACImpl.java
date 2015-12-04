@@ -15,6 +15,7 @@ import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.cfop.Cfop;
 import com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest;
+import com.qat.samples.sysmgmt.contabilidade.Plano;
 import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
 import com.qat.samples.sysmgmt.entidade.dacd.ClassificacaoDACD;
 import com.qat.samples.sysmgmt.entidade.dacd.StatusDACD;
@@ -49,11 +50,16 @@ import com.qat.samples.sysmgmt.produto.dacd.mybatis.UniMedDACD;
 import com.qat.samples.sysmgmt.produto.model.Grupo;
 import com.qat.samples.sysmgmt.produto.model.Marca;
 import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.produto.model.SubGrupo;
 import com.qat.samples.sysmgmt.produto.model.UniMed;
 import com.qat.samples.sysmgmt.produto.model.request.GrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.PlanoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest;
@@ -918,5 +924,75 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "ClassificacaoMap.fetchClassificacaoRowCount",
 				"ClassificacaoMap.fetchAllClassificacaosByRequest", response);
 		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Servico> insertServico(ServicoMaintenanceRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Servico> updateServico(ServicoMaintenanceRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResponse deleteServico(ServicoMaintenanceRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Servico> fetchServicoById(FetchByIdRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Servico> fetchServicoByRequest(ServicoInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Plano> insertPlano(PlanoMaintenanceRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Plano> updatePlano(PlanoMaintenanceRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResponse deletePlano(PlanoMaintenanceRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Plano> fetchPlanoById(FetchByIdRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Plano> fetchPlanoByRequest(PlanoInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

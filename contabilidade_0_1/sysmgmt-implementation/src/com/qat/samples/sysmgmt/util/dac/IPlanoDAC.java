@@ -2,7 +2,7 @@ package com.qat.samples.sysmgmt.util.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.contabilidade.Plano;
-import com.qat.samples.sysmgmt.fiscal.model.request.PlanoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
 
 /**
  * The Interface IPlanoDAC.
