@@ -174,6 +174,15 @@ head(function()
 
 									]
 								},
+								{title: 'Sistema', isFolder: true, expand: true, tooltip: wdtree.node3.tooltip,
+									children: [
+										{title: 'Site', key: 'qatmvctabsFun', url: "qat_func_tabs.jsp"},
+										{title: 'Estados', key: 'qatmvctabsFun', url: "qat_func_tabs.jsp"},
+										{title: 'Tipo OS', key: 'qatmvctabsContat', url: "qat_contat_tabs.jsp"},
+										{title: 'Lista Atividades', key: 'qatmvctabsOS', url: "qat_OS_tabs.jsp"},
+
+									]
+								},
 								</sec:authorize>
 					]
 					,
