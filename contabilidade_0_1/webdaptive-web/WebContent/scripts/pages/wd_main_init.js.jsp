@@ -147,6 +147,17 @@ head(function()
 										{title: wdtree.node4.child1.title, key: 'qatmvctabsGer', url: "qat_ger_tabs.jsp"},
 									]
 								},
+								{title: 'Cadastros', isFolder: true, expand: true, tooltip: wdtree.node2.tooltip,
+									children: [
+										{title: 'Cidade', key: 'qatmvctabsCid', url: "qat_cid_tabs.jsp"},
+										{title: 'Cnae', key: 'qatmvctabsCnae', url: "qat_cnae_tabs.jsp"},
+										{title: 'Classificacao', key: 'qatmvctabsClass', url: "qat_class_tabs.jsp"},
+										{title: 'Regime', key: 'qatmvctabsRegi', url: "qat_regi_tabs.jsp"},
+										{title: 'Contato', key: 'qatmvctabsContat', url: "qat_contat_tabs.jsp"},
+										{title: 'Ordem Servico', key: 'qatmvctabsOS', url: "qat_OS_tabs.jsp"},
+										{title: 'Empresa', key: 'qatmvctabsEmp', url: "qat_emp_tabs.jsp"},
+									]
+								},
 								</sec:authorize>
 					]
 					,

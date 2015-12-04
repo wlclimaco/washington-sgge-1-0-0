@@ -6,15 +6,21 @@ import com.qat.samples.sysmgmt.fiscal.model.response.ClassificacaoResponse;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.GrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.PlanoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.response.CfopResponse;
 import com.qat.samples.sysmgmt.produto.model.response.GrupoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.MarcaResponse;
+import com.qat.samples.sysmgmt.produto.model.response.PlanoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
+import com.qat.samples.sysmgmt.produto.model.response.ServicoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.SubGrupoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.TributacaoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.UniMedResponse;
@@ -30,94 +36,52 @@ import com.qat.samples.sysmgmt.produto.model.response.UniMedResponse;
 public interface IProdutoBAI
 {
 
-	/**
-	 * Insert location.
-	 * 
-	 * @param request the request
-	 * @return the location response
-	 */
 	public ProdutoResponse insertProduto(ProdutoMaintenanceRequest request);
 
-	/**
-	 * Update location.
-	 * 
-	 * @param request the request
-	 * @return the location response
-	 */
 	public ProdutoResponse updateProduto(ProdutoMaintenanceRequest request);
 
-	/**
-	 * Delete location.
-	 * 
-	 * @param request the request
-	 * @return the location response
-	 */
 	public ProdutoResponse deleteProduto(ProdutoMaintenanceRequest request);
 
-	/**
-	 * Fetch location by id.
-	 * 
-	 * @param request the request
-	 * @return the location response
-	 */
 	public ProdutoResponse fetchProdutoById(FetchByIdRequest request);
 
-	/**
-	 * Fetch location by request.
-	 * 
-	 * @param request the request
-	 * @return the location response
-	 */
 	public ProdutoResponse fetchProdutoByRequest(ProdutoInquiryRequest request);
 
-	/**
-	 * Fetch uni med by request.
-	 * 
-	 * @param request the request
-	 * @return the uni med response
-	 */
 	public UniMedResponse fetchUniMedByRequest(UniMedInquiryRequest request);
 
-	/**
-	 * Fetch grupo by request.
-	 * 
-	 * @param request the request
-	 * @return the grupo response
-	 */
 	public GrupoResponse fetchGrupoByRequest(GrupoInquiryRequest request);
 
-	/**
-	 * Fetch sub grupo by request.
-	 * 
-	 * @param request the request
-	 * @return the sub grupo response
-	 */
 	public SubGrupoResponse fetchSubGrupoByRequest(SubGrupoInquiryRequest request);
 
-	/**
-	 * Fetch marca by request.
-	 * 
-	 * @param request the request
-	 * @return the marca response
-	 */
 	public MarcaResponse fetchMarcaByRequest(MarcaInquiryRequest request);
 
-	/**
-	 * Fetch tributacao by request.
-	 * 
-	 * @param request the request
-	 * @return the tributacao response
-	 */
 	public TributacaoResponse fetchTributacaoByRequest(TributacaoInquiryRequest request);
 
-	/**
-	 * Fetch cfop by request.
-	 * 
-	 * @param request the request
-	 * @return the cfop response
-	 */
 	public CfopResponse fetchCfopByRequest(CfopInquiryRequest request);
 
 	public ClassificacaoResponse fetchClassificacaoByRequest(ClassificacaoInquiryRequest request);
+
+	// Serviço
+
+	public ServicoResponse insertServico(ServicoMaintenanceRequest request);
+
+	public ServicoResponse updateServico(ServicoMaintenanceRequest request);
+
+	public ServicoResponse deleteServico(ServicoMaintenanceRequest request);
+
+	public ServicoResponse fetchServicoById(FetchByIdRequest request);
+
+	public ServicoResponse fetchServicoByRequest(ServicoInquiryRequest request);
+
+	// Plano
+
+	public PlanoResponse insertPlano(PlanoMaintenanceRequest request);
+
+	public PlanoResponse updatePlano(PlanoMaintenanceRequest request);
+
+	public PlanoResponse deletePlano(PlanoMaintenanceRequest request);
+
+	public PlanoResponse fetchPlanoById(FetchByIdRequest request);
+
+	public PlanoResponse fetchPlanoByRequest(PlanoInquiryRequest request);
 
 }

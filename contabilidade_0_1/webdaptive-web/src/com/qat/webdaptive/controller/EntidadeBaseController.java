@@ -8,6 +8,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.qat.framework.util.QATAppContext;
 import com.qat.framework.util.QATInterfaceUtil;
 import com.qat.samples.sysmgmt.entidade.bas.IEmpresaBAS;
+import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.response.EmpresaResponse;
 import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.response.ClassificacaoResponse;
@@ -217,6 +219,23 @@ public class EntidadeBaseController
 	// return response;
 	// }
 
+	// empresa
+	protected ModelAndView empresaMAV(EmpresaInquiryRequest request, String returnViewName)
+	{
+		ModelAndView modelAndView = new ModelAndView(returnViewName);
+		ObjectMapper mapper = new ObjectMapper();
+		try
+		{
+			modelAndView.addObject("classificacaoList", mapper.writeValueAsString(empresaFetchByRequest(request)));
+		}
+		catch (Exception ex)
+		{
+			LOG.error(DEFAULT_EXCEPTION_MSG + ":" + ex);
+			modelAndView.addObject(PROCEDURE_RESPONSE, null);
+		}
+		return modelAndView;
+	}
+
 	// classificação
 	protected ModelAndView classificacaoMAV(ClassificacaoInquiryRequest request, String returnViewName)
 	{
@@ -248,6 +267,21 @@ public class EntidadeBaseController
 			modelAndView.addObject(PROCEDURE_RESPONSE, null);
 		}
 		return modelAndView;
+	}
+
+	protected EmpresaResponse empresaFetchByRequest(EmpresaInquiryRequest request)
+	{
+		EmpresaResponse response = new EmpresaResponse();
+		try
+		{
+			IEmpresaBAS client = (IEmpresaBAS)QATAppContext.getBean("empresaBASClientTarget");
+			response = client.fetchEmpresaByRequest(request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
+		}
+		return response;
 	}
 
 	protected ClassificacaoResponse classificaFetchByRequest(ClassificacaoInquiryRequest request)

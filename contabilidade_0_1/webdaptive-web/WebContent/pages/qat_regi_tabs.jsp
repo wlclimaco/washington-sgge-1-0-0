@@ -10,10 +10,10 @@
 <head>
 </head>
 <body>
-<div id="qatmvctabsClass">
+<div id="qatmvctabsRegi">
 	<ul>
 		<sec:authorize access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-		   <li><a href="../classificacao/fetchClassificacaoByRequestBAS" title="qatmvctab-1"><span>Classificacao</span></a></li>
+	        <li><a href="../regime/fetchRegimeByRequestBAS" title="qatmvctab-2"><span>Regime</span></a></li>
 		</sec:authorize>
 	</ul>
 	<div class="tabscontent">

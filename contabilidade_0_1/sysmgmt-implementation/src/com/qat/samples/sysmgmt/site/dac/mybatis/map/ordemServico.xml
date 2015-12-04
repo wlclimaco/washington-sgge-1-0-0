@@ -36,7 +36,7 @@
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
 	<association property="typeId"    column="typeId" select="fetchTypeByOrdem"  />
-	 <!--<collection property="ordemStatusList" column="id" select="OrdemServicoItensMap.fetchAllOrdemServicoItensByOrdemServico"/>-->
+	<collection property="ordemStatusList" column="id" select="OrdemServicoItensMap.fetchAllOrdemServicoItensByOrdemServico"/>
   </resultMap>
 
   <!--
