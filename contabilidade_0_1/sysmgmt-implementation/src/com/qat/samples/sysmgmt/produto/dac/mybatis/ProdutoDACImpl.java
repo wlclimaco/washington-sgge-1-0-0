@@ -957,8 +957,17 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	@Override
 	public InternalResultsResponse<Servico> fetchServicoByRequest(ServicoInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResultsResponse<Servico> response = new InternalResultsResponse<Servico>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "ServicoMap.fetchServicoRowCount",
+				"ServicoMap.fetchAllServicosByRequest", response);
+		return response;
 	}
 
 	@Override
@@ -992,7 +1001,16 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	@Override
 	public InternalResultsResponse<Plano> fetchPlanoByRequest(PlanoInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResultsResponse<Plano> response = new InternalResultsResponse<Plano>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "PlanoMap.fetchPlanoRowCount",
+				"PlanoMap.fetchAllPlanosByRequest", response);
+		return response;
 	}
 }

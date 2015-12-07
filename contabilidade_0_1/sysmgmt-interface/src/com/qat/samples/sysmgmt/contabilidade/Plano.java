@@ -2,8 +2,9 @@ package com.qat.samples.sysmgmt.contabilidade;
 
 import java.util.List;
 
-import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.produto.model.TabPreco;
+import com.qat.samples.sysmgmt.util.Imagem;
 import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
 
 /**
@@ -13,7 +14,6 @@ import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
 public class Plano extends ModelCosmeDamiao
 {
 
-	/** Attributes. */
 	private Integer id;
 
 	private Long dataInicio;
@@ -24,12 +24,17 @@ public class Plano extends ModelCosmeDamiao
 
 	private Integer numeroContrato;
 
-	private Produto produto;
+	private List<Servico> servicos;
+
+	private List<Imagem> imagens;
+
+	private String descricao;
+
+	private String titulo;
 
 	public Plano(Integer id)
 	{
 		super();
-		this.id = id;
 	}
 
 	/**
@@ -38,22 +43,6 @@ public class Plano extends ModelCosmeDamiao
 	public Plano()
 	{
 
-	}
-
-	/**
-	 * @return the id
-	 */
-	public Integer getId()
-	{
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Integer id)
-	{
-		this.id = id;
 	}
 
 	/**
@@ -104,20 +93,14 @@ public class Plano extends ModelCosmeDamiao
 		this.numeroContrato = numeroContrato;
 	}
 
-	/**
-	 * @return the produto
-	 */
-	public Produto getProduto()
+	public List<Servico> getServicos()
 	{
-		return produto;
+		return servicos;
 	}
 
-	/**
-	 * @param produto the produto to set
-	 */
-	public void setProduto(Produto produto)
+	public void setServicos(List<Servico> servicos)
 	{
-		this.produto = produto;
+		this.servicos = servicos;
 	}
 
 	/**
@@ -136,12 +119,53 @@ public class Plano extends ModelCosmeDamiao
 		this.preco = preco;
 	}
 
+	public List<Imagem> getImagens()
+	{
+		return imagens;
+	}
+
+	public void setImagens(List<Imagem> imagens)
+	{
+		this.imagens = imagens;
+	}
+
+	public String getDescricao()
+	{
+		return descricao;
+	}
+
+	public void setDescricao(String descricao)
+	{
+		this.descricao = descricao;
+	}
+
+	public String getTitulo()
+	{
+		return titulo;
+	}
+
+	public void setTitulo(String titulo)
+	{
+		this.titulo = titulo;
+	}
+
+	public Integer getId()
+	{
+		return id;
+	}
+
+	public void setId(Integer id)
+	{
+		this.id = id;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "Plano [getId()=" + getId() + ", getDataInicio()=" + getDataInicio() + ", getDataFinal()="
-				+ getDataFinal() + ", getNumeroContrato()=" + getNumeroContrato() + ", getProduto()=" + getProduto()
-				+ ", getPreco()=" + getPreco() + ", toString()=" + super.toString() + "]";
+		return "Plano [getDataInicio()=" + getDataInicio() + ", getDataFinal()=" + getDataFinal()
+				+ ", getNumeroContrato()=" + getNumeroContrato() + ", getServicos()=" + getServicos() + ", getPreco()="
+				+ getPreco() + ", getImagens()=" + getImagens() + ", getDescricao()=" + getDescricao()
+				+ ", getTitulo()=" + getTitulo() + ", getId()=" + getId() + ", toString()=" + super.toString() + "]";
 	}
 
 }

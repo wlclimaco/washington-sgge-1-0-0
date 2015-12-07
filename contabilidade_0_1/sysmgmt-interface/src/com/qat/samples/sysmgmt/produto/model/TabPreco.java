@@ -27,6 +27,8 @@ public class TabPreco extends ModelCosmeDamiao
 
 	private Long dataProFinal;
 
+	private Integer maxVendProd;
+
 	/**
 	 * Default constructor.
 	 */
@@ -165,14 +167,24 @@ public class TabPreco extends ModelCosmeDamiao
 		this.entidadeId = entidadeId;
 	}
 
+	public Integer getMaxVendProd()
+	{
+		return maxVendProd;
+	}
+
+	public void setMaxVendProd(Integer maxVendProd)
+	{
+		this.maxVendProd = maxVendProd;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "TabPreco [getPrecoTypeEnumValue()=" + getPrecoTypeEnumValue() + ", getId()=" + getId()
 				+ ", getDataMarcacao()=" + getDataMarcacao() + ", getPrecoTypeEnum()=" + getPrecoTypeEnum()
 				+ ", getValor()=" + getValor() + ", getDataProInicial()=" + getDataProInicial()
-				+ ", getDataProFinal()=" + getDataProFinal() + ", getEntidadeId()=" + getEntidadeId() + ", toString()="
-				+ super.toString() + "]";
+				+ ", getDataProFinal()=" + getDataProFinal() + ", getEntidadeId()=" + getEntidadeId()
+				+ ", getMaxVendProd()=" + getMaxVendProd() + ", toString()=" + super.toString() + "]";
 	}
 
 }

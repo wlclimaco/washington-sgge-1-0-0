@@ -25,6 +25,8 @@ public class Imagem extends Util
 	/** The table enum. */
 	private TableTypeEnum tableEnum;
 
+	private Boolean principal;
+
 	/**
 	 * Instantiates a new imagem.
 	 */
@@ -183,16 +185,22 @@ public class Imagem extends Util
 		tableEnum = TableTypeEnum.enumForValue(cadastroTypeValue);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.util.Util#toString()
-	 */
+	public Boolean getPrincipal()
+	{
+		return principal;
+	}
+
+	public void setPrincipal(Boolean principal)
+	{
+		this.principal = principal;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "Imagem [getLocal()=" + getLocal() + ", getNome()=" + getNome() + ", getFotoId()=" + getFotoId()
-				+ ", getId()=" + getId() + ", getTableEnum()=" + getTableEnum() + ", toString()=" + super.toString()
-				+ "]";
+				+ ", getId()=" + getId() + ", getTableEnum()=" + getTableEnum() + ", getTableTypeValue()="
+				+ getTableTypeValue() + ", getPrincipal()=" + getPrincipal() + ", toString()=" + super.toString() + "]";
 	}
 
 }
