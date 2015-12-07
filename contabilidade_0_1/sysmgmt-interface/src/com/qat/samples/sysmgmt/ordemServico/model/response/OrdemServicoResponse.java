@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.nf.model.OrdemServico;
+import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
 
 /**
  * The Class OrdemServicoResponse.

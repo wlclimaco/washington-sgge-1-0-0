@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
 
-	<info organisation="ftosta" module="qat-sample-sysmgmt-interface" revision="0.2.0" status="release" publication="20151016091218"/>
+	<info organisation="ftosta" module="qat-sample-sysmgmt-interface" revision="0.2.0" status="release" publication="20151207175105"/>
 
 	<publications>
 		<artifact name="qat-sample-sysmgmt-interface" type="jar" ext="jar"/>

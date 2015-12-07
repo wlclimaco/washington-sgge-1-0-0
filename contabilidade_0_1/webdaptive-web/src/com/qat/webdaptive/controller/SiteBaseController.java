@@ -13,7 +13,9 @@ import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryReq
 import com.qat.samples.sysmgmt.ordemServico.model.response.OrdemServicoResponse;
 import com.qat.samples.sysmgmt.produto.bas.IProdutoBAS;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.response.PlanoResponse;
+import com.qat.samples.sysmgmt.produto.model.response.ServicoResponse;
 import com.qat.samples.sysmgmt.site.bas.ISiteBAS;
 
 /**
@@ -29,6 +31,22 @@ public class SiteBaseController
 	private static final String DEFAULT_EXCEPTION_MSG = "webdaptive.controller.supermercado.defaultexception";
 
 	private static final String PROCEDURE_RESPONSE = null;
+
+	protected ModelAndView servicoMAV(ServicoInquiryRequest request, String returnViewName)
+	{
+		ModelAndView modelAndView = new ModelAndView(returnViewName);
+		ObjectMapper mapper = new ObjectMapper();
+		try
+		{
+			modelAndView.addObject("servicoList", mapper.writeValueAsString(servicoFetchByRequest(request)));
+		}
+		catch (Exception ex)
+		{
+			LOG.error(DEFAULT_EXCEPTION_MSG + ":" + ex);
+			modelAndView.addObject(PROCEDURE_RESPONSE, null);
+		}
+		return modelAndView;
+	}
 
 	protected ModelAndView ordemServicoMAV(OrdemServicoInquiryRequest request, String returnViewName)
 	{
@@ -99,6 +117,21 @@ public class SiteBaseController
 		{
 			IProdutoBAS client = (IProdutoBAS)QATAppContext.getBean("produtoBASClientTarget");
 			response = client.fetchPlanosByRequest(request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
+		}
+		return response;
+	}
+
+	protected ServicoResponse servicoFetchByRequest(ServicoInquiryRequest request)
+	{
+		ServicoResponse response = new ServicoResponse();
+		try
+		{
+			IProdutoBAS client = (IProdutoBAS)QATAppContext.getBean("produtoBASClientTarget");
+			response = client.fetchServicosByRequest(request);
 		}
 		catch (Exception ex)
 		{
