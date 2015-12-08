@@ -1,0 +1,209 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "actions";
+  src:url("../fonts/actions.eot");
+  src:url("../fonts/actions.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/actions.woff") format("woff"),
+    url("../fonts/actions.ttf") format("truetype"),
+    url("../fonts/actions.svg#actions") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+.icon-action:before {
+  font-family: "actions" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-world:before {
+  content: "a";
+}
+.icon-pin-map:before {
+  content: "b";
+}
+.icon-male-female:before {
+  content: "c";
+}
+.icon-group:before {
+  content: "d";
+}
+.icon-user:before {
+  content: "e";
+}
+.icon-calendar:before {
+  content: "f";
+}
+.icon-calendar-1:before {
+  content: "g";
+}
+.icon-dollar:before {
+  content: "h";
+}
+.icon-dollar-1:before {
+  content: "i";
+}
+.icon-bank-notes:before {
+  content: "j";
+}
+.icon-money-banknote:before {
+  content: "k";
+}
+.icon-search-find:before {
+  content: "l";
+}
+.icon-gears-setting:before {
+  content: "m";
+}
+.icon-cog-gear:before {
+  content: "n";
+}
+.icon-skull:before {
+  content: "o";
+}
+.icon-chart-pie:before {
+  content: "p";
+}
+.icon-chart-line:before {
+  content: "q";
+}
+.icon-chart-bar:before {
+  content: "r";
+}
+.icon-chart-area:before {
+  content: "s";
+}
+.icon-bar-chart:before {
+  content: "t";
+}
+.icon-graph-trend:before {
+  content: "u";
+}
+.icon-network:before {
+  content: "v";
+}
+.icon-vcard:before {
+  content: "w";
+}
+.icon-calendar-2:before {
+  content: "x";
+}
+.icon-clipboard-notes:before {
+  content: "D";
+}
+.icon-clipboard-pencil:before {
+  content: "E";
+}
+.icon-comments:before {
+  content: "F";
+}
+.icon-graph-bar:before {
+  content: "G";
+}
+.icon-graph-horizontal:before {
+  content: "H";
+}
+.icon-graph-pie:before {
+  content: "I";
+}
+.icon-member-details:before {
+  content: "K";
+}
+.icon-shuffle:before {
+  content: "L";
+}
+.icon-web:before {
+  content: "N";
+}
+.icon-sdn-case:before {
+  content: "C";
+}
+.icon-archive:before {
+  content: "O";
+}
+.icon-bell:before {
+  content: "P";
+}
+.icon-bell-two:before {
+  content: "Q";
+}
+.icon-flag-1:before {
+  content: "R";
+}
+.icon-flag-2:before {
+  content: "S";
+}
+.icon-flag-3:before {
+  content: "T";
+}
+.icon-home:before {
+  content: "B";
+}
+.icon-law:before {
+  content: "U";
+}
+.icon-pulse:before {
+  content: "V";
+}
+.icon-price-tag:before {
+  content: "X";
+}
+.icon-pricetag-multiple:before {
+  content: "Y";
+}
+.icon-shield:before {
+  content: "Z";
+}
+.icon-torso:before {
+  content: "0";
+}
+.icon-torsos-all:before {
+  content: "1";
+}
+.icon-widget:before {
+  content: "2";
+}
+.icon-columns:before {
+  content: "3";
+}
+.icon-eye-slash-close:before {
+  content: "4";
+}
+.icon-eye:before {
+  content: "5";
+}
+.icon-globe-world:before {
+  content: "6";
+}
+.icon-legal:before {
+  content: "7";
+}
+.icon-paper-clip:before {
+  content: "8";
+}
+.icon-pencil:before {
+  content: "W";
+}
+.icon-stackoverflow:before {
+  content: "9";
+}
+.icon-newspaper:before {
+  content: "M";
+}
+.icon-list:before {
+  content: "!";
+}
+.icon-lightbulb:before {
+  content: "y";
+}
+.icon-shield-1:before {
+  content: "z";
+}

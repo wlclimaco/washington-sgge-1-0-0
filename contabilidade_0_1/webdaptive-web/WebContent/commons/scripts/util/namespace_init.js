@@ -10,5 +10,8 @@ var qat = {
 	model 	: {},
 	base 	: {
 		model : {}
+	},
+	pages :{
+		servico : {}
 	}
 };

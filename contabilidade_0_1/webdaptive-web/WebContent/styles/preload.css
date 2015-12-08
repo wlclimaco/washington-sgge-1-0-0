@@ -1,0 +1,31 @@
+@charset "utf-8";
+
+div.fullscreen {display: none;}
+
+#preload {
+	background:#FFFFFF;
+	height:100%;
+	width:100%;
+	position:absolute;
+	z-index : 9999;
+}
+
+#preload div {
+	width:157px;
+	height:157px;
+	background:url(../images/ajax-loader.gif) no-repeat;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:.7em;
+	text-align:center;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin-top:-78.5px;
+	margin-left:-78.5px;
+}
+
+#preload div span {
+	position:relative;
+	top:100px;
+	color:#9fb2d9;
+}
