@@ -56,6 +56,13 @@
   		<typeAlias alias="OrdemServicoItens" type="com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoItens"/>
 
 
+  		<typeAlias alias="Servico" type="com.qat.samples.sysmgmt.produto.model.Servico"/>
+  		<typeAlias alias="ServicoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest"/>
+
+  		<typeAlias alias="TabPreco" type="com.qat.samples.sysmgmt.produto.model.TabPreco"/>
+
+
+
 <!--   		<typeAlias alias="Cadastro" type="com.qat.samples.sysmgmt.produto.model.Cadastro"/> -->
 <!--   		<typeAlias alias="ControleAcess" type="com.qat.samples.sysmgmt.util.ControleAcess"/> -->
 <!--   		<typeAlias alias="Documento" type="com.qat.samples.sysmgmt.documento.model.Documento"/> -->
@@ -85,6 +92,8 @@
      	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/entidade.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/filial.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/regime.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/servico.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/preco.xml"/>
 <!--      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/preco.xml"/> -->
 <!--      	<mapper resource="com/qat/samples/sysmgmt/cidade/dac/mybatis/map/cidade.xml"/> -->
 <!--      	<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/produto.xml"/> -->

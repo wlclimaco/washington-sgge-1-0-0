@@ -24,7 +24,7 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<collection property="preco" column="id" select="PrecoMap.fetchPrecoByProduto" />
+	<collection property="preco" column="{id=id,emprId= emprId}" select="TabPrecoMap.fetchTabPrecoByProduto" />
   </resultMap>
 
   <sql id="allServicoColumns">
@@ -90,7 +90,7 @@
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchServicoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+  <select id="fetchServicoRowCount" parameterType="ServicoInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM servico
 
@@ -111,12 +111,12 @@
 
   </select>
 
-  <select id="fetchAllServicosByRequest" parameterType="PagedInquiryRequest" resultMap="servicoResult">
+  <select id="fetchAllServicosByRequest" parameterType="ServicoInquiryRequest" resultMap="servicoResult">
     SELECT * FROM
     			(
     				SELECT b.id,
     						<include refid="allServicoColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY b.codigo) AS RowNumber
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM servico b
 					WHERE 2 = 2
 

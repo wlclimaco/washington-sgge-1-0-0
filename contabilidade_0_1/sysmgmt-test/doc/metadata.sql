@@ -3116,10 +3116,11 @@ CREATE TABLE plano(
 	dataInicio     timestamp without time zone,
 	desconto       real  NULL,
 	numeroContrato integer  NULL,
-	produto        integer  NULL,
 	processId      integer  NULL,
+	descricao  	   character varying(250) NULL,
+	titulo  	   character varying(100) NULL,
 	create_date    timestamp without time zone,
-    create_user  	 character varying(50) NULL,
+    create_user    character varying(50) NULL,
     modify_date    timestamp without time zone,
     modify_user    character varying(50) NULL,
 CONSTRAINT plano_pkey PRIMARY KEY (id)
@@ -3128,4 +3129,69 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE plano
+  OWNER TO postgres;
+
+/*-----------------------------------*/
+DROP SEQUENCE servico_id_seq;
+
+CREATE SEQUENCE servico_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE servico_id_seq
+  OWNER TO postgres;
+
+
+DROP TABLE  servico;
+
+CREATE TABLE servico(
+    id           integer NOT NULL DEFAULT nextval('servico_id_seq'::regclass),
+    nome         character varying(100) NULL,
+    descricao    character varying(250) NULL,
+    emprId     	 integer NOT NULL,
+    status 	     integer NOT NULL,
+	create_date  timestamp without time zone,
+    create_user  character varying(50) NULL,
+    modify_date  timestamp without time zone,
+    modify_user  character varying(50) NULL,
+CONSTRAINT servico_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE servico
+  OWNER TO postgres;
+
+/*-----------------------------------*/
+
+DROP SEQUENCE planoServ_id_seq;
+
+CREATE SEQUENCE planoServ_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE planoServ_id_seq
+  OWNER TO postgres;
+
+DROP TABLE planoServ;
+CREATE TABLE planoServ(
+	id             integer NOT NULL DEFAULT nextval('planoServ_id_seq'::regclass),
+	servId         integer  NULL,
+	planoId        integer  NULL,
+	processId      integer  NULL,
+	status         integer  NULL,
+	create_date    timestamp without time zone,
+    create_user    character varying(50) NULL,
+    modify_date    timestamp without time zone,
+    modify_user    character varying(50) NULL,
+CONSTRAINT planoServ_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE planoServ
   OWNER TO postgres;

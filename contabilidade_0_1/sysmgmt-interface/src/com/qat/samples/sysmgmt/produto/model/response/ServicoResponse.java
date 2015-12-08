@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.Servico;
 
 /**
  * The Class ProdutoResponse.
@@ -17,26 +17,16 @@ public class ServicoResponse extends InquiryResponse
 {
 
 	/** Attributes. */
-	private List<Produto> produtoList;
+	private List<Servico> servicoList;
 
-	/**
-	 * Gets the produto list.
-	 * 
-	 * @return the produto list
-	 */
-	public List<Produto> getProdutoList()
+	public List<Servico> getServicoList()
 	{
-		return produtoList;
+		return servicoList;
 	}
 
-	/**
-	 * Sets the produto list.
-	 * 
-	 * @param produtoList the produto list
-	 */
-	public void setProdutoList(List<Produto> produtoList)
+	public void setServicoList(List<Servico> servicoList)
 	{
-		this.produtoList = produtoList;
+		this.servicoList = servicoList;
 	}
 
 	/*
@@ -47,7 +37,7 @@ public class ServicoResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setProdutoList((List<Produto>)coll);
+		setServicoList((List<Servico>)coll);
 	}
 
 	/*
@@ -57,7 +47,7 @@ public class ServicoResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "ProdutoResponse [getProdutoList()=" + getProdutoList() + ", getResultsSetInfo()=" + getResultsSetInfo()
+		return "ProdutoResponse [getProdutoList()=" + getServicoList() + ", getResultsSetInfo()=" + getResultsSetInfo()
 				+ ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()=" + getMessageList()
 				+ ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()=" + isOperationSuccess()
 				+ "]";

@@ -372,14 +372,31 @@
 		   "../commons/scripts/util/namespace_init.js",
 		   "../commons/scripts/util/wd_log.js",
 		   "../scripts/config/wd_config.js",
+
+		   <!--teste-->
+		    "thirdparty/formvalidation-master/dist/js/select2.min.js",
+			"thirdparty/formvalidation-master/dist/js/formValidation.js",
+			"thirdparty/jquery/jquery.inputmask.js",
+			"thirdparty/jquery/jquery.inputmask.date.extensions.js",
+			"thirdparty/jquery/jquery.inputmask.extensions.js",
+			"thirdparty/jquery/jquery.inputmask.numeric.extensions.js",
+			"thirdparty/jquery/jquery.inputmask.regex.extensions.js",
+			"thirdparty/jquery/jstorage.min.js",
+			"thirdparty/timezone-js/date.custom.js",
+			"thirdparty/jquery/jquery.ThreeDots.min.js",
+			"thirdparty/jquery/custom/jquery.dataTables.custom.js",
+			"thirdparty/jquery/jquery.datatable.fnReloadAjax.js",
+			"thirdparty/jquery/jquery.datatable.fnStartingRedraw.js",
+			"scripts/excanvas.min.js",
+			"scripts/chart.min.js",
+			"thirdparty/jquery/custom/tableExport.js",
+			"thirdparty/bootstrap-table/src/bootstrap-table.js",
+		   <!--teste-->
 		       <!-- jQuery -->
 			//"../thirdparty/components/jquery/dist/jquery.min.js",
 			"../thirdparty/jquery/jquery-1.10.2.min.js",
 				"../thirdparty/jquery/jquery.address-1.6.min.js",
-
-
 		   "../thirdparty/jquery/jquery.layout-latest.js",
-
 		   "../thirdparty/jquery/custom/jquery.i18n.properties.js",
 		   "../thirdparty/jquery/custom/jquery.format-1.2.js",
 		   "../thirdparty/jquery/jquery.cookie.js",

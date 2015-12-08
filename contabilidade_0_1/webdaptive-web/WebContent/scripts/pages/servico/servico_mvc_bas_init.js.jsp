@@ -1,61 +1,80 @@
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt' %>
+
+<sec:authorize access="hasAnyRole('ROLE_DOMAIN ADMIN', 'ROLE_ADMIN', 'ROLE_CSR')">
 <script type="text/javascript">
-var ploader = new Slick.Data.RemoteModel();
-$(document).ready(function ()
+/**
+ * @namespace qat.pages.location
+ * @description The init namespace for the Location Page.
+ */
+
+$(document).ready(function()
 {
-	//initializes statusbar
-	$('#StatusBar').jnotifyInizialize({
-        oneAtTime: true
-    });
 
-	//sets up initial grid ...no data yet...but binds to the object that will fill it
-	pgrid = new Slick.Grid($("#cidGrid"), ploader.data, columns, options);
-	pgrid.setSelectionModel(new Slick.CellSelectionModel());
-	gridPager = new Slick.Controls.Pager(ploader, $("#pager"));
-	gridPager.init();
-	setTimeout('pgrid.init()', 250);
+	/** * jQuery dataTable setup ** */
+	qat.pages.servico.servicoTable = $('#data_list').dataTable($.qat.table.setTable(
+	{
+		id 			: "#data_list",
+		sAjaxSource : "api/produto/fetchall",
+		bPreLoad	: true,
+		sCheckbox : "id",
 
-	//this events fires to blockui while the data is retrieved
-	ploader.onProcDataLoading.subscribe(function()
-	{
-		wd.core.blockUIMessage('div.ui-layout-center',true,true,wdloading.title,wdloading.msg);
-	});
-
-	//this events fires to unblockui when the data is retruned and fills the grid
-	ploader.onProcDataLoaded.subscribe(function()
-	{
-		aRowChg.length=0;
-		pgrid.invalidateAllRows();
-		pgrid.updateRowCount();
-		pgrid.setSelectedRows([]);
-		pgrid.resetActiveCell();
-		pgrid.render();
-		<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-		pgrid.gotoCell(0,3,true);
-		</sec:authorize>
-		//load grid pager control
-		gridPager.setPagingOptions({totalRows: pagingData.totalRowsAvailable, pageSize: pagingData.pageSize, pageNum: pagingData.startPage});
-		gridPager.updatePager(gridPager.getPagingInfo());
-		$.address.value('wdtree?id=' + id + '&tab=' + $('#'+ id).tabs( "option", "active" ));
-		wd.core.unblockUIMessage('div.ui-layout-center');
-	});
-	<sec:authorize  access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-	//checks & stores any rows numbers that change
-    pgrid.onCellChange.subscribe(function (e, args)
-	{
-		rowChg = args.row;
-		if (args.row != 0)
+		ajax :
 		{
-			var arrLength = aRowChg.length;
-			if (!wd.core.containsValue(aRowChg, args.row))
-			{
-				aRowChg[arrLength] = [args.row];
-			}
-		}
-    });
-	</sec:authorize>
+			sObj		: "servicoList",
+			oRequest	: ServicoInquiryRequest,
+			fnRequest 	: qat.pages.entidade.fnRequestFilter
+		},
 
-	// load the Grid first time
-	ploader.callPagedFetchWS(20,0);
+		aoColumns :
+		[
+		{
+			headerData 		: "CNPJ",
+			order			: "name",
+			//mRender         : qat.pages.entidade.fnCreateEmpresaNameLink,
+			mData           : nome
+			sDefaultContent : "",
+			bSortable 		: false,
+			sClass          : "name-col"
+		},
+		{
+			headerData 		: "Nome Empresa",
+			order			: "organization_column",
+			//mRender 		: qat.pages.entidade.fnCreateNomeLink,
+			mData           : descricao
+			sDefaultContent : "",
+			bSortable 		: false
+		},
+		],
+
+		<c:choose>
+			<c:when test="${not empty refresh}">
+				aaData : "refresh",
+			</c:when>
+			<c:when test="${empty response}">
+				aaData : null,
+		    </c:when>
+		    <c:otherwise>
+		    	aaData : ${response},
+		    </c:otherwise>
+		</c:choose>
+
+		oSettings :
+		{
+			sortEnum      	: "",
+			iDefaultCol   	: 0
+		},
+
+		rowCallback : function(nRow, aData, iDisplayIndex, oColumn) {
+
+		},
+
+		fnInitComplete: function (oSettings, json)
+		{
+
+		}
+	}
+	));
 });
 </script>
+</sec:authorize>

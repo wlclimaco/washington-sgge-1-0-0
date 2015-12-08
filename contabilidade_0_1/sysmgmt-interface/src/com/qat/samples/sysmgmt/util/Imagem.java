@@ -1,13 +1,10 @@
 package com.qat.samples.sysmgmt.util;
 
-import javax.xml.bind.annotation.XmlType;
-
 /**
  * The Model Object Procedure.
  */
 @SuppressWarnings("serial")
-@XmlType(name = "Imagem", propOrder = {"local", "nome", "fotoId", "id", "tableEnum"})
-public class Imagem extends Util
+public class Imagem extends ModelCosmeDamiao
 {
 
 	/** The local. */
