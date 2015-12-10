@@ -61,6 +61,13 @@
 
   		<typeAlias alias="TabPreco" type="com.qat.samples.sysmgmt.produto.model.TabPreco"/>
 
+  		<typeAlias alias="Historico" type="com.qat.samples.sysmgmt.historico.model.Historico"/>
+  		<typeAlias alias="Status" type="com.qat.samples.sysmgmt.util.Status"/>
+  		<typeAlias alias="HistoricoItens" type="com.qat.samples.sysmgmt.historico.model.HistoricoItens"/>
+  		<typeAlias alias="HistoricoInquiryRequest" type="com.qat.samples.sysmgmt.historico.model.request.HistoricoInquiryRequest"/>
+
+  		<typeAlias alias="TabPreco" type="com.qat.samples.sysmgmt.produto.model.TabPreco"/>
+
 
 
 <!--   		<typeAlias alias="Cadastro" type="com.qat.samples.sysmgmt.produto.model.Cadastro"/> -->
@@ -94,6 +101,8 @@
      	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/regime.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/servico.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/preco.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/historico/dac/mybatis/map/historico.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/util/dac/mybatis/map/status.xml"/>
 <!--      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/preco.xml"/> -->
 <!--      	<mapper resource="com/qat/samples/sysmgmt/cidade/dac/mybatis/map/cidade.xml"/> -->
 <!--      	<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/produto.xml"/> -->

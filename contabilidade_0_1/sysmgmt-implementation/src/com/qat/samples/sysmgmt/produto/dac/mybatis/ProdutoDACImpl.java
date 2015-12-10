@@ -23,8 +23,8 @@ import com.qat.samples.sysmgmt.entidade.dacd.TributacaoDACD;
 import com.qat.samples.sysmgmt.fiscal.Classificacao;
 import com.qat.samples.sysmgmt.fiscal.Tributacao;
 import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
-import com.qat.samples.sysmgmt.historico.Historico;
-import com.qat.samples.sysmgmt.historico.HistoricoItens;
+import com.qat.samples.sysmgmt.historico.model.Historico;
+import com.qat.samples.sysmgmt.historico.model.HistoricoItens;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.dac.ICfopDAC;
 import com.qat.samples.sysmgmt.produto.dac.ICustoDAC;
@@ -929,8 +929,73 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	@Override
 	public InternalResultsResponse<Servico> insertServico(ServicoMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer insertCount = 0;
+		InternalResultsResponse<Servico> response = new InternalResultsResponse<Servico>();
+		Historico historico = new Historico();
+		historico.setEmprId(request.getServico().getEmprId());
+		historico.setUserId(request.getServico().getUserId());
+		historico.setProcessId(0);
+		Date a = new Date();
+		historico.setData(a.getTime());
+
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistorico", historico, response);
+
+		Integer historicoId = historico.getId();
+
+		request.getServico().setProcessId(historicoId);
+
+		// First insert the root
+		// Is successful the unique-id will be populated back into the object.
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "ServicoMap.insertServico", request.getServico(),
+						response);
+
+		HistoricoItens historicoItens = new HistoricoItens();
+		historicoItens.setIdHist(historicoId);
+		historicoItens.setProcessId(0);
+		historicoItens.setParentId(response.getFirstResult().getId());
+		historicoItens.setTabelaEnum(TabelaEnum.SERVICO);
+		historicoItens.setAcaoType(AcaoEnum.INSERT);
+
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistoricoItens", historicoItens,
+						response);
+
+		if (response.isInError())
+		{
+			return response;
+		}
+		// Next traverse the object graph and "maintain" the associations
+
+		insertCount +=
+				PrecoDACD.maintainTabPrecoAssociations(request.getServico().getPreco(), response, insertCount,
+						null,
+						null,
+						null, getTabPrecoDAC(), getStatusDAC(), getHistoricoDAC(), response.getFirstResult().getId(),
+						response.getFirstResult().getCreateUser(), historicoId);
+
+		if (insertCount > 0)
+		{
+			Status status = new Status();
+			status.setStatus(CdStatusTypeEnum.ATIVO);
+			List<Status> statusList = new ArrayList<Status>();
+			insertCount =
+					StatusDACD.maintainStatusAssociations(statusList, response, response.getFirstResult().getId(),
+							null, AcaoEnum.INSERT,
+							request.getServico().getCreateUser(), request.getServico().getEmprId(), TabelaEnum.SERVICO,
+							getStatusDAC(),
+							getHistoricoDAC(), historicoId, historicoId);
+
+		}
+
+		// Finally, if something was inserted then add the Produto to the result.
+		if (insertCount > 0)
+		{
+			response.addResult(response.getFirstResult());
+		}
+
+		return response;
 	}
 
 	@Override

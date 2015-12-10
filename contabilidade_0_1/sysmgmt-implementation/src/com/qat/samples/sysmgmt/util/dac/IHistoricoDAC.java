@@ -3,8 +3,8 @@ package com.qat.samples.sysmgmt.util.dac;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.alerta.Alertas;
 import com.qat.samples.sysmgmt.alerta.model.request.AlertasInquiryRequest;
-import com.qat.samples.sysmgmt.historico.Historico;
-import com.qat.samples.sysmgmt.historico.HistoricoItens;
+import com.qat.samples.sysmgmt.historico.model.Historico;
+import com.qat.samples.sysmgmt.historico.model.HistoricoItens;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 
 /**

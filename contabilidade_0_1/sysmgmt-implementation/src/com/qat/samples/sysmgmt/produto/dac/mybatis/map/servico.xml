@@ -31,6 +31,7 @@
 		 b.nome
 		,b.descricao
       	,b.emprId
+      	,b.status
       	,b.create_date
       	,b.create_user
       	,b.modify_date
@@ -42,6 +43,7 @@
   		#{nome},
   		#{descricao},
     	#{emprId},
+    	#{status},
     	<include refid="CBOFMap.changeControlFields"/>
 
   </sql>
@@ -54,6 +56,7 @@
 		  nome
 		,descricao
       	,emprId
+      	,status
       	,create_date
       	,create_user
       	,modify_date

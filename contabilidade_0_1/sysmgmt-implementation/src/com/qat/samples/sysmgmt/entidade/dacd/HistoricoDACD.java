@@ -7,8 +7,8 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.historico.Historico;
-import com.qat.samples.sysmgmt.historico.HistoricoItens;
+import com.qat.samples.sysmgmt.historico.model.Historico;
+import com.qat.samples.sysmgmt.historico.model.HistoricoItens;
 import com.qat.samples.sysmgmt.util.AcaoEnum;
 import com.qat.samples.sysmgmt.util.TabelaEnum;
 import com.qat.samples.sysmgmt.util.TypeEnum;
