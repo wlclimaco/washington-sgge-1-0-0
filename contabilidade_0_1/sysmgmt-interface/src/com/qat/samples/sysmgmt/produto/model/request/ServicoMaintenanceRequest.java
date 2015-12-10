@@ -1,13 +1,13 @@
 package com.qat.samples.sysmgmt.produto.model.request;
 
 import com.qat.framework.model.request.MaintenanceRequest;
-import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.Servico;
 
 public class ServicoMaintenanceRequest extends MaintenanceRequest
 {
 
 	/** Attributes. */
-	private Produto produto;
+	private Servico servico;
 
 	/**
 	 * The Constructor.
@@ -18,23 +18,23 @@ public class ServicoMaintenanceRequest extends MaintenanceRequest
 	}
 
 	/**
-	 * Gets the produto.
+	 * Gets the servico.
 	 * 
-	 * @return the produto
+	 * @return the servico
 	 */
-	public Produto getProduto()
+	public Servico getServico()
 	{
-		return produto;
+		return servico;
 	}
 
 	/**
-	 * Sets the produto.
+	 * Sets the servico.
 	 * 
-	 * @param produto the produto
+	 * @param servico the servico
 	 */
-	public void setProduto(Produto produto)
+	public void setServico(Servico servico)
 	{
-		this.produto = produto;
+		this.servico = servico;
 	}
 
 	/*
@@ -44,7 +44,7 @@ public class ServicoMaintenanceRequest extends MaintenanceRequest
 	@Override
 	public String toString()
 	{
-		return "ProdutoMaintenanceRequest [getProduto()=" + getProduto() + ", getUserContext()="
+		return "ServicoMaintenanceRequest [getServico()=" + getServico() + ", getUserContext()="
 				+ getUserContext() + "]";
 	}
 }

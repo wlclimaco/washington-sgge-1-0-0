@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.ordemServico;
+package com.qat.samples.sysmgmt.historico.model;
 
 import java.util.List;
 

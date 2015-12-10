@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.historico.Historico;
+import com.qat.samples.sysmgmt.historico.model.Historico;
 
 public class HistoricoResponse extends InquiryResponse
 {

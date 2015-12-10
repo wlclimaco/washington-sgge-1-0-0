@@ -1,7 +1,7 @@
 package com.qat.samples.sysmgmt.historico.model.request;
 
 import com.qat.framework.model.request.MaintenanceRequest;
-import com.qat.samples.sysmgmt.historico.Historico;
+import com.qat.samples.sysmgmt.historico.model.Historico;
 
 public class HistoricoMaintenanceRequest extends MaintenanceRequest
 {

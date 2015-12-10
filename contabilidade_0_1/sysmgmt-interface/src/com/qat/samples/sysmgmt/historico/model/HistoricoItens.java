@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.historico;
+package com.qat.samples.sysmgmt.historico.model;
 
 import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
 
