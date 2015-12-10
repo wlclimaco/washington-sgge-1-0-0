@@ -937,6 +937,8 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		historico.setProcessId(0);
 		Date a = new Date();
 		historico.setData(a.getTime());
+		historico.setTabelaEnum(TabelaEnum.SERVICO);
+		historico.setAcaoType(AcaoEnum.INSERT);
 
 		insertCount =
 				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistorico", historico, response);

@@ -69,16 +69,16 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allHistoricoColumns">
-		 b.data
-		,b.userId
-      	,b.emprId
-      	,b.acao
-      	,b.tabela
-      	,b.processId
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+		 data
+		,userId
+      	,emprId
+      	,acao
+      	,tabela
+      	,processId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
   </sql>
 
   <sql id="allHistoricoValues">
@@ -92,15 +92,15 @@
   </sql>
 
     <sql id="allHistoricoItensColumns">
-		 b.idHist
-		,b.processId
-      	,b.type
-      	,b.tabela
-      	,b.parentId
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+		 idHist
+		,processId
+      	,type
+      	,tabela
+      	,parentId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
   </sql>
 
   <sql id="allHistoricoItensValues">
@@ -160,13 +160,13 @@
   <select id="fetchAllHistoricosByRequest" parameterType="HistoricoInquiryRequest" resultMap="historicoResult">
 		SELECT * FROM
     			(
-    				SELECT b.id,
+    				SELECT id,
     						<include refid="allHistoricoColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
-    				FROM historico b
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM historico
 					WHERE 2 = 2
 					<if test="criteria.id != null">
-						AND b.id = #{criteria.id}
+						AND id = #{criteria.id}
 					</if>
     			) LIST
 				<choose>
