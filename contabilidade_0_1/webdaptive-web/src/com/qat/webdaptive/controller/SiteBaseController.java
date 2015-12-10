@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.qat.framework.model.QATModel.PersistanceActionEnum;
 import com.qat.framework.util.QATAppContext;
 import com.qat.framework.util.QATInterfaceUtil;
 import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
@@ -14,6 +15,7 @@ import com.qat.samples.sysmgmt.ordemServico.model.response.OrdemServicoResponse;
 import com.qat.samples.sysmgmt.produto.bas.IProdutoBAS;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.PlanoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ServicoResponse;
 import com.qat.samples.sysmgmt.site.bas.ISiteBAS;
@@ -28,7 +30,7 @@ public class SiteBaseController
 	private static final Logger LOG = LoggerFactory.getLogger(CadastroBaseController.class);
 
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
-	private static final String DEFAULT_EXCEPTION_MSG = "webdaptive.controller.supermercado.defaultexception";
+	private static final String DEFAULT_EXCEPTION_MSG = "webdaptive.controller.servico.defaultexception";
 
 	private static final String PROCEDURE_RESPONSE = null;
 
@@ -46,6 +48,41 @@ public class SiteBaseController
 			modelAndView.addObject(PROCEDURE_RESPONSE, null);
 		}
 		return modelAndView;
+	}
+
+	protected ServicoResponse maintainServico(ServicoMaintenanceRequest request,
+			PersistanceActionEnum persistType)
+	{
+		ServicoResponse response = new ServicoResponse();
+		try
+		{
+			IProdutoBAS client = (IProdutoBAS)QATAppContext.getBean("produtoBASClientTarget");
+			switch (persistType)
+			{
+				case INSERT:
+					response = client.insertServico(request);
+					break;
+				case UPDATE:
+					response = client.updateServico(request);
+					break;
+				case DELETE:
+					response = client.deleteServico(request);
+					break;
+				default:
+					if (LOG.isDebugEnabled())
+					{
+						LOG.debug("persistType missing! Setting Unspecified Error status.");
+					}
+					response.addOperationFailedMessage(DEFAULT_EXCEPTION_MSG);
+					break;
+			}
+
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
+		}
+		return response;
 	}
 
 	protected ModelAndView ordemServicoMAV(OrdemServicoInquiryRequest request, String returnViewName)
