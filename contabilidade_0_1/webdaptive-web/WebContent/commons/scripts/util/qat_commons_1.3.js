@@ -174,15 +174,15 @@
 					}
 				}
 
-				if(qat.settings.appRoot)
+				if(WDHost)
 				{
-					oCallConfig.sUrl = qat.settings.appRoot + "/" + oCallConfig.sUrl;
+					oCallConfig.sUrl = "/" + oCallConfig.sUrl;
 					oCallConfig.sUrl = _util.replaceAll("//", "/", oCallConfig.sUrl);
 				}
 
 				oCallConfig.oResponse = null;
 
-				if (qat.util.page.fnCheckXSS(oData))
+				if (_util.fnCheckXSS(oData))
 				{
 					if ((_util.isNullOrUndefined(oCallConfig.bBlockScreen) || !oCallConfig.bBlockScreen) && (!oCallConfig.bHideProgressBar))
 					{
@@ -694,6 +694,18 @@
 				});
 			};
 
+			var _fnCheckXSS = function(value) {
+				var bReturn;
+
+				try {
+					bReturn = decodeURI(value).match(/(<([^>]+)>)/ig);
+				} catch (e) {
+					bReturn = null;
+				}
+
+				return bReturn;
+			};
+
 			/**
 			 * Set Strong
 			 *
@@ -758,6 +770,7 @@
 				nTruncate			: _nTruncate,
 				replaceAll			: _replaceAll,
 				savePropertyProfile : _savePropertyProfile,
+				fnCheckXSS 			: _fnCheckXSS,
 				setStrong			: _setStrong,
 				_capitalize			: _capitalize
 			};

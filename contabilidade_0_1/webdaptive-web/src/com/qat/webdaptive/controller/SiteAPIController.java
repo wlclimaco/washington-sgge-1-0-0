@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
-import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ServicoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.ServicoResponse;
 
@@ -25,7 +25,7 @@ public class SiteAPIController extends SiteBaseController
 	 * @param request the request
 	 * @return the procedure response
 	 */
-	@RequestMapping(value = "/insertBAS", method = RequestMethod.POST)
+	@RequestMapping(value = "/insertServico", method = RequestMethod.POST)
 	@ResponseBody
 	public ServicoResponse insertBAS(@RequestBody ServicoMaintenanceRequest request)
 	{
@@ -66,8 +66,8 @@ public class SiteAPIController extends SiteBaseController
 	 */
 	@RequestMapping(value = "/fetchByRequestBAS", method = RequestMethod.POST)
 	@ResponseBody
-	public ServicoResponse fetchByRequestBAS(@RequestBody PagedInquiryRequest request)
+	public ServicoResponse fetchByRequestBAS(@RequestBody ServicoInquiryRequest request)
 	{
-		return supermercadoFetchByRequest(request);
+		return servicoFetchByRequest(request);
 	}
 }

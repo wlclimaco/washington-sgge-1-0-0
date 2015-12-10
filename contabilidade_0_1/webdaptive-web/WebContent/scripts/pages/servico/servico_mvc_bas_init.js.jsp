@@ -118,5 +118,38 @@ $(document).ready(function()
 		}
 	}
 	));
+
+	$("#buttonInsert").on("click", function(e)
+	{
+		e.preventDefault();
+		a = new Date();
+		oServico = new qat.model.Servico({
+			id				: 1,
+			nome			:'Washington',
+			descricao		:'descricao 123',
+			modelAction 	: 'INSERT',
+			preco 			: new qat.model.TabPreco({
+				id				: 1 ,
+				entidadeId 		: 1 ,
+				dataMarcacao  	:	a.getTime(),
+				precoTypeEnum 	:'PLANO',
+				valor 			:1.99,
+				dataProInicial 	:	a.getTime(),
+				dataProFinal 	:	a.getTime(),
+				maxVendProd 	:10,
+				modelAction 	: 'INSERT'
+
+			})
+		})
+
+		oRequest = new qat.model.reqServico(null,oServico,null,null)
+		$.qat.ajax.post({
+			sUrl : "qat-webdaptive/site/api/insertServico",
+			oRequest : oRequest,
+			fnCallback : function(oResponse){
+				console.log(oResponse)
+			}
+		});
+	});
 });
 </script>

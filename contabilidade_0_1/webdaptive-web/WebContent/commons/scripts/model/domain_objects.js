@@ -260,6 +260,43 @@ qat.model.Cnae.prototype = new qat.model.ModelCosmeDamiao();
 qat.model.CnaeRel.prototype = new qat.model.ModelCosmeDamiao();
 
 
+ qat.model.TabPreco = function(oParam) {
+
+	qat.model.ModelCosmeDamiao.call(this, oParam);
+
+	if (oParam) {
+		this.id				= oParam.id;
+		this.entidadeId 	= oParam.entidadeId;
+		this.dataMarcacao 	= oParam.dataMarcacao;
+		this.precoTypeEnum 	= oParam.precoTypeEnum;
+		this.valor 			= oParam.valor;
+		this.dataProInicial = oParam.dataProInicial;
+		this.dataProFinal 	= oParam.dataProFinal;
+		this.maxVendProd 	= oParam.maxVendProd;
+		this.modelAction 	= oParam.modelAction;
+
+	}
+};
+qat.model.TabPreco.prototype = new qat.model.ModelCosmeDamiao();
+
+
+
+
+//==========
+ qat.model.Servico = function(oParam) {
+
+	qat.model.ModelCosmeDamiao.call(this, oParam);
+
+	if (oParam) {
+		this.id				= oParam.id;
+		this.nome			= oParam.nome;
+		this.descricao		= oParam.descricao;
+		this.preco			= [oParam.preco];
+		this.modelAction 	= oParam.modelAction;
+	}
+};
+qat.model.Servico.prototype = new qat.model.ModelCosmeDamiao();
+
 	//==========================novo
 
 /*

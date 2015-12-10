@@ -52,7 +52,7 @@
 	<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
-  <resultMap id="alertaResult" type="Alerta" >
+  <!--<resultMap id="alertaResult" type="Alerta" >
  	<result property="id" column="id" />
 	<result property="entidadeId" column="entidadeId" />
 	<result property="qntOs" column="qntOs" />
@@ -65,7 +65,7 @@
 	<result property="qntFaleCom" column="qntFaleCom" />
   </resultMap>
 
-  <!--
+
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allHistoricoColumns">
@@ -189,7 +189,7 @@
 		  FROM historicoItens
 		where  idHist = #{id}
   </select>
-
+<!--
   <select id="fetchAlertasRowCount" parameterType="AlertasInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM historico
@@ -224,6 +224,6 @@ select
 
 			where max.parentId = e.id ) as qntOs
   </select>
-
+ -->
 
 </mapper>
