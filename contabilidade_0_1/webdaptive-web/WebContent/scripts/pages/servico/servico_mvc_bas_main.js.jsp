@@ -17,10 +17,12 @@ qat.pages.servico = {
 		{
 			return val;
 		}
-		if(full.preco.length > 0){
-			return full.preco[full.preco.length - 1].valor;
-		}
 
+		if(full.preco != null){
+			if(full.preco.length > 0){
+				return full.preco[full.preco.length - 1].valor;
+			}
+		}
 	},
 
 	fnStatus : function (val, type, full)
@@ -30,9 +32,14 @@ qat.pages.servico = {
 		{
 			return val;
 		}
+		if(full.statusList != null){
+			if(full.statusList.length > 0){
+				return full.statusList[full.statusList.length - 1].status;
+			}
+		}else{
+			return "";
+		}
 
-
-		return 'aaaa'
 	},
 
 	fnUsuario : function (val, type, full)

@@ -180,8 +180,8 @@
 
 	var date = new Date();
 	if (oParam) {
-	//	this.createUser		= pgsi.settings.userContext.userId;
-	//	this.modifyUser		= pgsi.settings.userContext.userId;
+	//	this.createUser		= qat.settings.userContext.userId;
+	//	this.modifyUser		= qat.settings.userContext.userId;
 		this.createDateUTC	= date.getTime();
 		this.modifyDateUTC  = date.getTime();
 	}
@@ -193,6 +193,7 @@ qat.model.ModelCosmeDamiao = function(oParam){
 	if (oParam) {
 		this.parentId    = oParam.parentId;
 		this.type        = oParam.type;
+		this.emprId      = oParam.emprId;
 		this.acaoType    = oParam.acaoType;
 		this.tabelaEnum  = oParam.tabelaEnum;
 		this.statusList  = [ oParam.statusList ];
