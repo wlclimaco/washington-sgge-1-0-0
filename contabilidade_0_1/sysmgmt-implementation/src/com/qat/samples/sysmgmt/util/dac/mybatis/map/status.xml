@@ -38,25 +38,25 @@
     <result property="tabelaEnumValue" column="tabelaEnum" />
     <result property="note" column="note" />
     <result property="createUser" column="create_user"/>
-	<result property="createDate" column="create_date"/>
+	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDate" column="modify_date"/>
+	<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allStatusColumns">
-		 b.dataStatus
-		,b.parentId
-		,b.status
-		,b.acaoType
-		,b.tabelaEnum
-		,b.note
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+		 dataStatus
+		,parentId
+		,status
+		,acaoType
+		,tabelaEnum
+		,note
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
   </sql>
 
   <sql id="allStatusValues">
@@ -236,7 +236,7 @@
   <select id="fetchStatusByParentId" resultMap="statusResult">
 	  SELECT id,<include refid="allStatusColumns" />
         FROM status
-     WHERE  parentId=#{id} and tabelaenum=#{table}
+     WHERE  parentId=#{id} and tabelaenum=53
   </select>
 
   <select id="fetchAllStatussByRequest" parameterType="PagedInquiryRequest" resultMap="statusResult">

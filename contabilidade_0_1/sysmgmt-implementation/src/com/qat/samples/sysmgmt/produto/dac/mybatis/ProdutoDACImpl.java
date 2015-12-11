@@ -169,178 +169,84 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	/** The valid sort fields for an produto inquiry. Will be injected by Spring. */
 	private Map<String, String> produtoInquiryValidSortFields;
 
-	public IPlanoDAC getPlanoDAC()
-	{
-		return planoDAC;
-	}
-
-	public void setPlanoDAC(IPlanoDAC planoDAC)
-	{
-		this.planoDAC = planoDAC;
-	}
-
-	/**
-	 * @return the historicoDAC
-	 */
-	public IHistoricoDAC getHistoricoDAC()
-	{
-		return historicoDAC;
-	}
-
-	/**
-	 * @param historicoDAC the historicoDAC to set
-	 */
-	public void setHistoricoDAC(IHistoricoDAC historicoDAC)
-	{
-		historicoDAC = historicoDAC;
-	}
-
-	/**
-	 * @return the statusDAC
-	 */
-	public IStatusDAC getStatusDAC()
-	{
-		return statusDAC;
-	}
-
-	/**
-	 * @param statusDAC the statusDAC to set
-	 */
-	public void setStatusDAC(IStatusDAC statusDAC)
-	{
-		statusDAC = statusDAC;
-	}
-
-	/**
-	 * Gets the produto dac.
-	 * 
-	 * @return the produto dac
-	 */
 	public IProdutoDAC getProdutoDAC()
 	{
 		return produtoDAC;
 	}
 
-	/**
-	 * Sets the produto dac.
-	 * 
-	 * @param produtoDAC the produto dac
-	 */
 	public void setProdutoDAC(IProdutoDAC produtoDAC)
 	{
-		produtoDAC = produtoDAC;
+		this.produtoDAC = produtoDAC;
 	}
 
-	/**
-	 * @return the classificacaoDAC
-	 */
 	public IClassificacaoDAC getClassificacaoDAC()
 	{
 		return classificacaoDAC;
 	}
 
-	/**
-	 * @param classificacaoDAC the classificacaoDAC to set
-	 */
 	public void setClassificacaoDAC(IClassificacaoDAC classificacaoDAC)
 	{
-		classificacaoDAC = classificacaoDAC;
+		this.classificacaoDAC = classificacaoDAC;
 	}
 
-	/**
-	 * @return the uniMedDAC
-	 */
 	public IUniMedDAC getUniMedDAC()
 	{
 		return uniMedDAC;
 	}
 
-	/**
-	 * @param uniMedDAC the uniMedDAC to set
-	 */
 	public void setUniMedDAC(IUniMedDAC uniMedDAC)
 	{
-		uniMedDAC = uniMedDAC;
+		this.uniMedDAC = uniMedDAC;
 	}
 
-	/**
-	 * @return the grupoDAC
-	 */
 	public IGrupoDAC getGrupoDAC()
 	{
 		return grupoDAC;
 	}
 
-	/**
-	 * @param grupoDAC the grupoDAC to set
-	 */
 	public void setGrupoDAC(IGrupoDAC grupoDAC)
 	{
-		grupoDAC = grupoDAC;
+		this.grupoDAC = grupoDAC;
 	}
 
-	/**
-	 * @return the subGrupoDAC
-	 */
 	public ISubGrupoDAC getSubGrupoDAC()
 	{
 		return subGrupoDAC;
 	}
 
-	/**
-	 * @param subGrupoDAC the subGrupoDAC to set
-	 */
 	public void setSubGrupoDAC(ISubGrupoDAC subGrupoDAC)
 	{
-		subGrupoDAC = subGrupoDAC;
+		this.subGrupoDAC = subGrupoDAC;
 	}
 
-	/**
-	 * @return the marcaDAC
-	 */
 	public IMarcaDAC getMarcaDAC()
 	{
 		return marcaDAC;
 	}
 
-	/**
-	 * @param marcaDAC the marcaDAC to set
-	 */
 	public void setMarcaDAC(IMarcaDAC marcaDAC)
 	{
-		marcaDAC = marcaDAC;
+		this.marcaDAC = marcaDAC;
 	}
 
-	/**
-	 * @return the tributacaoDAC
-	 */
 	public ITributacaoDAC getTributacaoDAC()
 	{
 		return tributacaoDAC;
 	}
 
-	/**
-	 * @param tributacaoDAC the tributacaoDAC to set
-	 */
 	public void setTributacaoDAC(ITributacaoDAC tributacaoDAC)
 	{
-		tributacaoDAC = tributacaoDAC;
+		this.tributacaoDAC = tributacaoDAC;
 	}
 
-	/**
-	 * @return the estoqueDAC
-	 */
 	public IEstoqueDAC getEstoqueDAC()
 	{
 		return estoqueDAC;
 	}
 
-	/**
-	 * @param estoqueDAC the estoqueDAC to set
-	 */
 	public void setEstoqueDAC(IEstoqueDAC estoqueDAC)
 	{
-		estoqueDAC = estoqueDAC;
+		this.estoqueDAC = estoqueDAC;
 	}
 
 	public ITabPrecoDAC getTabPrecoDAC()
@@ -353,68 +259,74 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		this.tabPrecoDAC = tabPrecoDAC;
 	}
 
-	/**
-	 * @return the custoDAC
-	 */
 	public ICustoDAC getCustoDAC()
 	{
 		return custoDAC;
 	}
 
-	/**
-	 * @param custoDAC the custoDAC to set
-	 */
 	public void setCustoDAC(ICustoDAC custoDAC)
 	{
-		custoDAC = custoDAC;
+		this.custoDAC = custoDAC;
 	}
 
-	/**
-	 * @return the porcaoDAC
-	 */
 	public IPorcaoDAC getPorcaoDAC()
 	{
 		return porcaoDAC;
 	}
 
-	/**
-	 * @param porcaoDAC the porcaoDAC to set
-	 */
 	public void setPorcaoDAC(IPorcaoDAC porcaoDAC)
 	{
-		porcaoDAC = porcaoDAC;
+		this.porcaoDAC = porcaoDAC;
 	}
 
-	/**
-	 * @return the rentabilidadeDAC
-	 */
 	public IRentabilidadeDAC getRentabilidadeDAC()
 	{
 		return rentabilidadeDAC;
 	}
 
-	/**
-	 * @param rentabilidadeDAC the rentabilidadeDAC to set
-	 */
 	public void setRentabilidadeDAC(IRentabilidadeDAC rentabilidadeDAC)
 	{
-		rentabilidadeDAC = rentabilidadeDAC;
+		this.rentabilidadeDAC = rentabilidadeDAC;
 	}
 
-	/**
-	 * @return the cfopDAC
-	 */
 	public ICfopDAC getCfopDAC()
 	{
 		return cfopDAC;
 	}
 
-	/**
-	 * @param cfopDAC the cfopDAC to set
-	 */
 	public void setCfopDAC(ICfopDAC cfopDAC)
 	{
-		cfopDAC = cfopDAC;
+		this.cfopDAC = cfopDAC;
+	}
+
+	public IPlanoDAC getPlanoDAC()
+	{
+		return planoDAC;
+	}
+
+	public void setPlanoDAC(IPlanoDAC planoDAC)
+	{
+		this.planoDAC = planoDAC;
+	}
+
+	public IHistoricoDAC getHistoricoDAC()
+	{
+		return historicoDAC;
+	}
+
+	public void setHistoricoDAC(IHistoricoDAC historicoDAC)
+	{
+		this.historicoDAC = historicoDAC;
+	}
+
+	public IStatusDAC getStatusDAC()
+	{
+		return statusDAC;
+	}
+
+	public void setStatusDAC(IStatusDAC statusDAC)
+	{
+		this.statusDAC = statusDAC;
 	}
 
 	/**

@@ -19,6 +19,12 @@
   		<typeAlias alias="FetchByIdRequest" type="com.qat.samples.sysmgmt.model.request.FetchByIdRequest"/>
   		<typeAlias alias="Entidade" type="com.qat.samples.sysmgmt.entidade.Entidade"/>
 
+
+  		<typeAlias alias="TabelaEnum" type="com.qat.samples.sysmgmt.util.TabelaEnum"/>
+  		<typeAlias alias="AcaoEnum" type="com.qat.samples.sysmgmt.util.AcaoEnum"/>
+  		<typeAlias alias="CdStatusTypeEnum" type="com.qat.samples.sysmgmt.util.CdStatusTypeEnum"/>
+
+
   		<typeAlias alias="PagedInquiryRequest" type="com.qat.samples.sysmgmt.model.request.PagedInquiryRequest"/>
 <!--   		<typeAlias alias="CadastroInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest"/> -->
   		<typeAlias alias="ProdutoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest"/>

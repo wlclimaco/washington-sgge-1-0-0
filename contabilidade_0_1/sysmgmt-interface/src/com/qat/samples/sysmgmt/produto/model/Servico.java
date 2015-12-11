@@ -83,7 +83,8 @@ public class Servico extends ModelCosmeDamiao
 	public String toString()
 	{
 		return "Servico [getId()=" + getId() + ", getNome()=" + getNome() + ", getDescricao()=" + getDescricao()
-				+ ", getPreco()=" + getPreco() + ", toString()=" + super.toString() + "]";
+				+ ", getPreco()=" + getPreco() + ", getStatusList()=" + getStatusList() + ", toString()="
+				+ super.toString() + "]";
 	}
 
 }
