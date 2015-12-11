@@ -128,6 +128,7 @@ $(document).ready(function()
 			nome			:'Washington',
 			descricao		:'descricao 123',
 			modelAction 	: 'INSERT',
+			emprId          : 1,
 			preco 			: new qat.model.TabPreco({
 				id				: 1 ,
 				entidadeId 		: 1 ,

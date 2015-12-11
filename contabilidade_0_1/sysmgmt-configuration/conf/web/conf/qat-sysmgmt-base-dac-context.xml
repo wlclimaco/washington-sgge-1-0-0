@@ -43,6 +43,14 @@
 
   	<bean id="produtoDACTarget" class="com.qat.samples.sysmgmt.produto.dac.mybatis.ProdutoDACImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+		<property name="historicoDAC" ref="historicoDACTarget"/>
+		<property name="statusDAC" ref="statusDACTarget"/>
+		<property name="planoDAC" ref="planoDACTarget"/>
+		<property name="tabPrecoDAC" ref="tabPrecoDACTarget"/>
+  	</bean>
+
+  	<bean id="tabPrecoDACTarget" class="com.qat.samples.sysmgmt.produto.dacd.mybatis.TabPrecoDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
   	</bean>
 
   	<bean id="siteDACTarget" class="com.qat.samples.sysmgmt.site.dac.mybatis.SiteDACImpl">

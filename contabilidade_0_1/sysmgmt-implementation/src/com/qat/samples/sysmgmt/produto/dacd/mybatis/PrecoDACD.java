@@ -11,6 +11,7 @@ import com.qat.samples.sysmgmt.entidade.dacd.StatusDACD;
 import com.qat.samples.sysmgmt.produto.dac.ITabPrecoDAC;
 import com.qat.samples.sysmgmt.produto.model.TabPreco;
 import com.qat.samples.sysmgmt.util.AcaoEnum;
+import com.qat.samples.sysmgmt.util.AcaoTypeEnum;
 import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.Status;
 import com.qat.samples.sysmgmt.util.TabelaEnum;
@@ -39,7 +40,7 @@ public final class PrecoDACD extends SqlSessionDaoSupport
 	 */
 	@SuppressWarnings("unchecked")
 	public static Integer maintainTabPrecoAssociations(List<TabPreco> tabPrecoList,
-			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoTypeEnum insert,
 			TabelaEnum tabelaEnum, ITabPrecoDAC tabPrecoDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
 			Integer empId,
 			String UserId, Integer processId)

@@ -2,14 +2,12 @@ package com.qat.samples.sysmgmt.util;
 
 import java.util.List;
 
-import com.qat.framework.model.QATModel;
-
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
  */
 @SuppressWarnings("serial")
-public class ModelCosmeDamiao extends QATModel
+public class ModelCosmeDamiao extends QATModel1
 {
 	/** The SendSolv id for the account. */
 	private Integer parentId;

@@ -64,11 +64,14 @@ import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest;
 import com.qat.samples.sysmgmt.util.AcaoEnum;
+import com.qat.samples.sysmgmt.util.AcaoTypeEnum;
 import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.Status;
 import com.qat.samples.sysmgmt.util.TabelaEnum;
+import com.qat.samples.sysmgmt.util.TypeEnum;
 import com.qat.samples.sysmgmt.util.dac.IClassificacaoDAC;
 import com.qat.samples.sysmgmt.util.dac.IHistoricoDAC;
+import com.qat.samples.sysmgmt.util.dac.IPlanoDAC;
 import com.qat.samples.sysmgmt.util.dac.IStatusDAC;
 import com.qat.samples.sysmgmt.util.dac.ITributacaoDAC;
 
@@ -156,6 +159,8 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 
 	private ICfopDAC cfopDAC;
 
+	private IPlanoDAC planoDAC;
+
 	// private IPessoaDAC fornecedorDAC;
 
 	private IHistoricoDAC historicoDAC;
@@ -163,6 +168,16 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 
 	/** The valid sort fields for an produto inquiry. Will be injected by Spring. */
 	private Map<String, String> produtoInquiryValidSortFields;
+
+	public IPlanoDAC getPlanoDAC()
+	{
+		return planoDAC;
+	}
+
+	public void setPlanoDAC(IPlanoDAC planoDAC)
+	{
+		this.planoDAC = planoDAC;
+	}
 
 	/**
 	 * @return the historicoDAC
@@ -328,20 +343,14 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		estoqueDAC = estoqueDAC;
 	}
 
-	/**
-	 * @return the tabPrecoDAC
-	 */
 	public ITabPrecoDAC getTabPrecoDAC()
 	{
 		return tabPrecoDAC;
 	}
 
-	/**
-	 * @param tabPrecoDAC the tabPrecoDAC to set
-	 */
 	public void setTabPrecoDAC(ITabPrecoDAC tabPrecoDAC)
 	{
-		tabPrecoDAC = tabPrecoDAC;
+		this.tabPrecoDAC = tabPrecoDAC;
 	}
 
 	/**
@@ -940,6 +949,9 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		historico.setTabelaEnum(TabelaEnum.SERVICO);
 		historico.setAcaoType(AcaoEnum.INSERT);
 
+		Servico servico = new Servico();
+
+		servico = request.getServico();
 		insertCount =
 				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistorico", historico, response);
 
@@ -950,13 +962,13 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
 		insertCount =
-				QATMyBatisDacHelper.doInsert(getSqlSession(), "ServicoMap.insertServico", request.getServico(),
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "ServicoMap.insertServico", servico,
 						response);
 
 		HistoricoItens historicoItens = new HistoricoItens();
 		historicoItens.setIdHist(historicoId);
 		historicoItens.setProcessId(0);
-		historicoItens.setParentId(response.getFirstResult().getId());
+		historicoItens.setParentId(servico.getId());
 		historicoItens.setTabelaEnum(TabelaEnum.SERVICO);
 		historicoItens.setAcaoType(AcaoEnum.INSERT);
 
@@ -971,21 +983,22 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		// Next traverse the object graph and "maintain" the associations
 
 		insertCount +=
-				PrecoDACD.maintainTabPrecoAssociations(request.getServico().getPreco(), response, insertCount,
-						null,
-						null,
-						null, getTabPrecoDAC(), getStatusDAC(), getHistoricoDAC(), response.getFirstResult().getId(),
-						response.getFirstResult().getCreateUser(), historicoId);
+				PrecoDACD.maintainTabPrecoAssociations(request.getServico().getPreco(), response, servico.getId(),
+						TypeEnum.MEDIUM,
+						AcaoTypeEnum.INSERT,
+						TabelaEnum.SERVICO, getTabPrecoDAC(), getStatusDAC(), getHistoricoDAC(), servico.getEmprId(),
+						servico.getCreateUser(), historicoId);
 
 		if (insertCount > 0)
 		{
 			Status status = new Status();
 			status.setStatus(CdStatusTypeEnum.ATIVO);
 			List<Status> statusList = new ArrayList<Status>();
+			statusList.add(status);
 			insertCount =
-					StatusDACD.maintainStatusAssociations(statusList, response, response.getFirstResult().getId(),
+					StatusDACD.maintainStatusAssociations(statusList, response, servico.getId(),
 							null, AcaoEnum.INSERT,
-							request.getServico().getCreateUser(), request.getServico().getEmprId(), TabelaEnum.SERVICO,
+							servico.getCreateUser(), request.getServico().getEmprId(), TabelaEnum.SERVICO,
 							getStatusDAC(),
 							getHistoricoDAC(), historicoId, historicoId);
 

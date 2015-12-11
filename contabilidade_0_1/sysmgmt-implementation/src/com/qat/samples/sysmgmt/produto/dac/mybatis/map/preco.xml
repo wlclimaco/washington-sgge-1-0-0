@@ -48,18 +48,18 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allTabPrecoColumns">
-		 b.dataMarcacao
-		,b.precoTypeEnum
-		,b.valor
-		,b.dataProInicial
-		,b.dataProFinal
-		,b.prodId
-      	,b.emprId
-      	,b.entidadeId
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+		 dataMarcacao
+		,precoTypeEnum
+		,valor
+		,dataProInicial
+		,dataProFinal
+		,prodId
+      	,emprId
+      	,entidadeId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
   </sql>
 
   <sql id="allTabPrecoValues">
@@ -129,32 +129,32 @@
   </select>
 
   <select id="fetchTabPrecoById" parameterType="FetchByIdRequest" resultMap="tabPrecoResult">
-	SELECT b.id,
+	SELECT id,
 	<include refid="allTabPrecoColumns" />
-    FROM tabPreco b
+    FROM tabPreco
     where id = #{id}
     ORDER BY id ASC
   </select>
 
   <select id="fetchAllTabPrecosByRequest" parameterType="PagedInquiryRequest" resultMap="tabPrecoResult">
-	 SELECT b.id,<include refid="allTabPrecoColumns" />
-        FROM tabPreco b
+	 SELECT id,<include refid="allTabPrecoColumns" />
+        FROM tabPreco
      WHERE 1 = 1
      <if test="id != null">
-		  AND b.id = #{id}
+		  AND id = #{id}
 	 </if>
   </select>
 
   <select id="fetchTabPrecoByProduto" resultMap="tabPrecoResult">
-	  SELECT b.id,<include refid="allTabPrecoColumns" />
-        FROM tabPreco b
-     WHERE  b.prodId=#{id} and emprId=#{emprId}
+	  SELECT id,<include refid="allTabPrecoColumns" />
+        FROM tabPreco
+     WHERE  prodId=#{id} and emprId=#{emprId}
   </select>
 
   <select id="fetchTabPrecoByPlano " parameterType="Integer" resultMap="tabPrecoResult">
-	  SELECT b.id,<include refid="allTabPrecoColumns" />
-        FROM tabPreco b
-     WHERE  b.prodId=#{id} and b.precoTypeEnum = 5
+	  SELECT id,<include refid="allTabPrecoColumns" />
+        FROM tabPreco
+     WHERE  prodId=#{id} and precoTypeEnum = 5
   </select>
 
 

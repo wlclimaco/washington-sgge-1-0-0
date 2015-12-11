@@ -38,9 +38,9 @@
     <result property="tabelaEnumValue" column="tabelaEnum" />
     <result property="note" column="note" />
     <result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDate" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDate" column="modify_date"/>
   </resultMap>
 
   <!--
@@ -231,6 +231,12 @@
 				    		</when>
 				    	 </choose>
 				  </where>
+  </select>
+
+  <select id="fetchStatusByParentId" resultMap="statusResult">
+	  SELECT id,<include refid="allStatusColumns" />
+        FROM status
+     WHERE  parentId=#{id} and tabelaenum=#{table}
   </select>
 
   <select id="fetchAllStatussByRequest" parameterType="PagedInquiryRequest" resultMap="statusResult">

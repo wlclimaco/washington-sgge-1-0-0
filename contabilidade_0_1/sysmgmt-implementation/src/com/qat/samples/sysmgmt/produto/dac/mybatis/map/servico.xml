@@ -24,7 +24,8 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<collection property="preco" column="{id=id,emprId= emprId}" select="TabPrecoMap.fetchTabPrecoByProduto" />
+	<collection property="preco" column="{id=id,emprId=emprId}" select="TabPrecoMap.fetchTabPrecoByProduto" />
+    <collection property="statusList" column="{id=id,table=53}" select="StatusMap.fetchStatusByParentId"/>
   </resultMap>
 
   <sql id="allServicoColumns">
