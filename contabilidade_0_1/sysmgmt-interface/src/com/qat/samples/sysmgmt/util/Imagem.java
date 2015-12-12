@@ -19,9 +19,6 @@ public class Imagem extends ModelCosmeDamiao
 	/** The id. */
 	private Integer id;
 
-	/** The table enum. */
-	private TableTypeEnum tableEnum;
-
 	private Boolean principal;
 
 	/**
@@ -140,48 +137,6 @@ public class Imagem extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	/**
-	 * Gets the table enum.
-	 * 
-	 * @return the table enum
-	 */
-	public TableTypeEnum getTableEnum()
-	{
-		return tableEnum;
-	}
-
-	/**
-	 * Sets the table enum.
-	 * 
-	 * @param tableEnum the new table enum
-	 */
-	public void setTableEnum(TableTypeEnum tableEnum)
-	{
-		this.tableEnum = tableEnum;
-	}
-
-	/**
-	 * Methods that follow the naming pattern get.....Value() provide convenience for returning the primitive value of
-	 * an enum. For example, database mapping of an enum to a database column could make use of this method.
-	 * 
-	 * @return the table type value
-	 */
-	public Integer getTableTypeValue()
-	{
-		return tableEnum.getValue();
-	}
-
-	/**
-	 * Methods that follow the naming pattern set.....Value(argValue) provide convenience for assigning the primitive
-	 * value of an enum. For example, database mapping of an database column to an enum could make use of this method.
-	 * 
-	 * @param cadastroTypeValue the new table type value
-	 */
-	public void setTableTypeValue(Integer cadastroTypeValue)
-	{
-		tableEnum = TableTypeEnum.enumForValue(cadastroTypeValue);
-	}
-
 	public Boolean getPrincipal()
 	{
 		return principal;
@@ -196,8 +151,8 @@ public class Imagem extends ModelCosmeDamiao
 	public String toString()
 	{
 		return "Imagem [getLocal()=" + getLocal() + ", getNome()=" + getNome() + ", getFotoId()=" + getFotoId()
-				+ ", getId()=" + getId() + ", getTableEnum()=" + getTableEnum() + ", getTableTypeValue()="
-				+ getTableTypeValue() + ", getPrincipal()=" + getPrincipal() + ", toString()=" + super.toString() + "]";
+				+ ", getId()=" + getId() + ", getPrincipal()=" + getPrincipal() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
 }

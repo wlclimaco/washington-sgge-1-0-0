@@ -298,6 +298,47 @@ qat.model.TabPreco.prototype = new qat.model.ModelCosmeDamiao();
 };
 qat.model.Servico.prototype = new qat.model.ModelCosmeDamiao();
 
+//==========
+qat.model.Plano = function(oParam) {
+
+	qat.model.ModelCosmeDamiao.call(this, oParam);
+
+	if (oParam) {
+		this.id				= oParam.id;
+		this.dataInicio		= oParam.dataInicio;
+		this.dataFinal		= oParam.dataFinal;
+		this.preco			= oParam.preco;
+		this.numeroContrato	= oParam.numeroContrato;
+		this.servicos		= oParam.servicos;
+		this.imagens		= oParam.imagens;
+		this.descricao		= oParam.descricao;
+		this.titulo			= oParam.titulo;
+		this.modelAction 	= oParam.modelAction;
+	}
+};
+qat.model.Plano.prototype = new qat.model.ModelCosmeDamiao();
+
+
+//==========
+qat.model.Imagem = function(oParam) {
+
+	qat.model.ModelCosmeDamiao.call(this, oParam);
+
+	if (oParam) {
+		this.id				= oParam.id;
+		this.dataInicio		= oParam.dataInicio;
+		this.dataFinal		= oParam.dataFinal;
+		this.preco			= oParam.preco;
+		this.numeroContrato	= oParam.numeroContrato;
+		this.servicos		= oParam.servicos;
+		this.imagens		= oParam.imagens;
+		this.descricao		= oParam.descricao;
+		this.titulo			= oParam.titulo;
+		this.modelAction 	= oParam.modelAction;
+	}
+};
+qat.model.Plano.prototype = new qat.model.ModelCosmeDamiao();
+
 	//==========================novo
 
 /*

@@ -168,7 +168,7 @@ head(function()
 								{title: 'Site', isFolder: true, expand: true, tooltip: wdtree.node3.tooltip,
 									children: [
 										{title: 'Serviços', key: 'qatmvctabsFun', url: "servico/qat_serv_tabs.jsp"},
-										{title: 'Planos', key: 'qatmvctabsFun', url: "qat_func_tabs.jsp"},
+										{title: 'Planos', key: 'qatmvctabsFun', url: "plano/qat_plano_tabs.jsp"},
 										{title: 'Contato', key: 'qatmvctabsContat', url: "qat_contat_tabs.jsp"},
 										{title: 'Ordem Servico', key: 'qatmvctabsOS', url: "qat_OS_tabs.jsp"},
 

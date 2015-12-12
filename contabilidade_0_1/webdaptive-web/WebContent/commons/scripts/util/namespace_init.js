@@ -12,6 +12,7 @@ var qat = {
 		model : {}
 	},
 	pages :{
-		servico : {}
+		servico : {},
+		plano : {}
 	}
 };

@@ -50,6 +50,22 @@ public class SiteBaseController
 		return modelAndView;
 	}
 
+	protected ModelAndView planoMAV(PlanoInquiryRequest request, String returnViewName)
+	{
+		ModelAndView modelAndView = new ModelAndView(returnViewName);
+		ObjectMapper mapper = new ObjectMapper();
+		try
+		{
+			modelAndView.addObject("planoList", mapper.writeValueAsString(planoFetchByRequest(request)));
+		}
+		catch (Exception ex)
+		{
+			LOG.error(DEFAULT_EXCEPTION_MSG + ":" + ex);
+			modelAndView.addObject(PROCEDURE_RESPONSE, null);
+		}
+		return modelAndView;
+	}
+
 	protected ServicoResponse maintainServico(ServicoMaintenanceRequest request,
 			PersistanceActionEnum persistType)
 	{

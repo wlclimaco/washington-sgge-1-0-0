@@ -40,8 +40,8 @@
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
     <collection property="preco" column="id" select="PrecoMap.fetchPrecoByProduto" />
-    <collection property="servicos" column="id" select="ControleAcessMap.fetchControleAcessByProduto" />
-    <collection property="imagens" column="id" select="ControleAcessMap.fetchControleAcessByProduto" />
+    <collection property="servicos" column="id" select="ServicoMap.fetchPlanoByServico" />
+    <collection property="imagens" column="id" select="ImagemMap.fetchImagemByPlano" />
   </resultMap>
 
 
@@ -49,16 +49,16 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allPlanoColumns">
-		 b.dataInicio
-		,b.dataFinal
-		,b.numeroContrato
-		,b.descricao
-		,b.titulo
-		,b.emprId
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+		 dataInicio
+		,dataFinal
+		,numeroContrato
+		,descricao
+		,titulo
+		,emprId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
   </sql>
 
   <sql id="allPlanoValues">
@@ -118,7 +118,7 @@
   <delete id="deletePlanoById" parameterType="Integer">
     	DELETE FROM plano WHERE id = #{id}
   </delete>
-  <select id="fetchAllPlanos" resultMap="planoTableResult">
+  <select id="fetchAllPlanos" resultMap="planoResult">
     SELECT
 	<include refid="allPlanoColumns" />
     FROM plano ORDER BY id ASC
@@ -126,19 +126,19 @@
 
   <select id="fetchPlanoById" parameterType="FetchByIdRequest" resultMap="planoResult">
     			   SELECT
-					b.id,	<include refid="allPlanoColumns" />
- 				   FROM plano b
-					where b.id = #{id}
+					id,	<include refid="allPlanoColumns" />
+ 				   FROM plano
+					where id = #{id}
   </select>
 
 
- <select id="fetchAllPlanosByRequest" parameterType="PagedInquiryRequest" resultMap="cnaeResult">
+ <select id="fetchAllPlanosByRequest" parameterType="PagedInquiryRequest" resultMap="planoResult">
     SELECT * FROM
     			(
-    				SELECT b.id,
+    				SELECT id,
     						<include refid="allPlanoColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
-    				FROM plano b
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM plano
 					WHERE 2 = 2
 
     			) LIST

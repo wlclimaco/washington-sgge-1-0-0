@@ -6,14 +6,16 @@
 
 <mapper namespace="ServicoMap">
 
-	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+ <resultMap id="planoByServicoResult" type="PlanoByServico">
+    <result property="id" column="id" />
+    <result property="planoId" column="planoId" />
+	<result property="servicoId" column="servicoId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
 
-  	<!--private Integer id;
-	/** The type of an account. */
-	private String nome;
-	private String descricao;
-	private List<TabPreco> preco; -->
+  </resultMap>
 
   <resultMap id="servicoResult" type="Servico">
     <result property="id" column="id" />
@@ -29,14 +31,38 @@
 
   </resultMap>
 
+  <sql id="allPlanoByServicoColumns">
+		 planoId
+		,servicoId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+
+  </sql>
+
+    <sql id="allPlanoByServicoValues">
+  		#{planoId},
+  		#{servicoId},
+    	<include refid="CBOFMap.changeControlFields"/>
+
+  </sql>
+
+  <insert id="insertPlanoByServico" parameterType="PlanoByServico" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO servico (
+		  <include refid="allPlanoByServicoColumns" />
+      )
+    VALUES (<include refid="allPlanoByServicoValues" /> )
+  </insert>
+
   <sql id="allServicoColumns">
-		 b.nome
-		,b.descricao
-      	,b.emprId
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+		 nome
+		,descricao
+      	,emprId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
 
   </sql>
 
@@ -105,21 +131,30 @@
   </select>
 
   <select id="fetchServicoById" parameterType="Integer" resultMap="servicoResult">
-    			   SELECT b.id,
+    			   SELECT id,
 						<include refid="allServicoColumns" />
- 				   FROM servico b where
+ 				   FROM servico  where
 
-								b.id = #{id}
+								id = #{id}
+
+  </select>
+
+    <select id="fetchPlanoByServico"  resultMap="servicoResult">
+    			   SELECT id,
+						<include refid="allServicoColumns" />
+ 				   FROM servico  where
+
+								id = #{id}
 
   </select>
 
   <select id="fetchAllServicosByRequest" parameterType="ServicoInquiryRequest" resultMap="servicoResult">
     SELECT * FROM
     			(
-    				SELECT b.id,
+    				SELECT id,
     						<include refid="allServicoColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
-    				FROM servico b
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM servico
 					WHERE 2 = 2
 
     			) LIST
