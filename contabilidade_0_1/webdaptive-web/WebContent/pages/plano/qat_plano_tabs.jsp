@@ -13,7 +13,7 @@
 <div id="qatmvctabsCli">
 	<ul>
 		<sec:authorize access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-	        <li><a href="../servico/fetchServicosByRequestBAS" title="qatmvctab-1"><span>Serviços</span></a></li>
+	        <li><a href="../plano/planosByRequestBAS" title="qatmvctab-1"><span>Planos</span></a></li>
 		</sec:authorize>
 	</ul>
 	<div class="tabscontent">

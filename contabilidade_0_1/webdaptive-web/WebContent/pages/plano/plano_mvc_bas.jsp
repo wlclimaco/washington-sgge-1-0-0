@@ -42,7 +42,7 @@
             <!-- /.row -->
         </div>
 
-<jsp:include page="../../scripts/pages/servico/servico_mvc_bas_main.js.jsp" flush="true"/>
-<jsp:include page="../../scripts/pages/servico/servico_mvc_bas_init.js.jsp" flush="true"/>
+<jsp:include page="../../scripts/pages/plano/plano_mvc_bas_main.js.jsp" flush="true"/>
+<jsp:include page="../../scripts/pages/plano/plano_mvc_bas_init.js.jsp" flush="true"/>
 </body>
 </html>
