@@ -21,7 +21,6 @@ import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
-import com.qat.samples.sysmgmt.produto.model.request.ServicoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest;
@@ -95,11 +94,11 @@ public interface IProdutoDAC
 
 	public InternalResultsResponse<Classificacao> fetchClassificacaoByRequest(ClassificacaoInquiryRequest request);
 
-	public InternalResultsResponse<Servico> insertServico(ServicoMaintenanceRequest request);
+	public InternalResultsResponse<Servico> insertServico(Servico request);
 
-	public InternalResultsResponse<Servico> updateServico(ServicoMaintenanceRequest request);
+	public InternalResultsResponse<Servico> updateServico(Servico request);
 
-	public InternalResponse deleteServico(ServicoMaintenanceRequest request);
+	public InternalResponse deleteServico(Servico request);
 
 	public InternalResultsResponse<Servico> fetchServicoById(FetchByIdRequest request);
 

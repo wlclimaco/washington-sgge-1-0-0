@@ -27,7 +27,7 @@ $(document).ready(function()
 
 		ajax :
 		{
-			sObj		: "planoList",
+			sObj		: "produtoList",
 			oRequest	: null,
 			fnRequest 	: null
 		},
@@ -121,15 +121,35 @@ $(document).ready(function()
 
 	$("#buttonInsert").on("click", function(e)
 	{
+
 		e.preventDefault();
 		a = new Date();
-		oServico = new qat.model.Servico({
-			id				: 1,
-			nome			:'Washington',
-			descricao		:'descricao 123',
-			modelAction 	: 'INSERT',
-			emprId          : 1,
-			preco 			: new qat.model.TabPreco({
+
+		oServico = new qat.model.PlanoByServico({
+			id					:1,
+			planoId			:1,
+			servicoId		:1,
+			processId		:1,
+			modelAction 	:"INSERT"
+		});
+
+
+		oImagem = new qat.model.Imagem({
+			local				:"c:/imagems/principal",
+			tabelaEnum			: "PLANO",
+			nome				: "IMAGEM0001",
+			fotoId				: 1,
+			principal			: true,
+			emprId				: 1,
+			modelAction 	:"INSERT"
+		});
+		a = new Date();
+
+		oPlano = new qat.model.Plano({
+
+			dataInicio		: a.getTime(),
+			dataFinal		: a.getTime(),
+			preco			: new qat.model.TabPreco({
 				id				: 1 ,
 				entidadeId 		: 1 ,
 				dataMarcacao  	:	a.getTime(),
@@ -140,12 +160,18 @@ $(document).ready(function()
 				maxVendProd 	:10,
 				modelAction 	: 'INSERT'
 
-			})
+			}),
+			numeroContrato	: 201542,
+			servicos		: oServico,
+			imagens			: oImagem,
+			descricao		: "Descricao 000225415454444444444444444",
+			titulo			: "Titulo Titulo",
+			modelAction 	:"INSERT"
 		})
 
-		oRequest = new qat.model.reqServico(null,oServico,null,null)
+		oRequest = new qat.model.reqPlano(null,oPlano,null,null)
 		$.qat.ajax.post({
-			sUrl : "qat-webdaptive/site/api/insertServico",
+			sUrl : "qat-webdaptive/site/api/insertPlano",
 			oRequest : oRequest,
 			fnCallback : function(oResponse){
 				console.log(oResponse)

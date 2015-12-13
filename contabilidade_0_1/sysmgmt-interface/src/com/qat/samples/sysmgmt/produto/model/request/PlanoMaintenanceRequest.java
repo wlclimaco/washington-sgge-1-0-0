@@ -1,13 +1,13 @@
 package com.qat.samples.sysmgmt.produto.model.request;
 
 import com.qat.framework.model.request.MaintenanceRequest;
-import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.contabilidade.Plano;
 
 public class PlanoMaintenanceRequest extends MaintenanceRequest
 {
 
 	/** Attributes. */
-	private Produto produto;
+	private Plano plano;
 
 	/**
 	 * The Constructor.
@@ -18,23 +18,23 @@ public class PlanoMaintenanceRequest extends MaintenanceRequest
 	}
 
 	/**
-	 * Gets the produto.
+	 * Gets the plano.
 	 * 
-	 * @return the produto
+	 * @return the plano
 	 */
-	public Produto getProduto()
+	public Plano getPlano()
 	{
-		return produto;
+		return plano;
 	}
 
 	/**
-	 * Sets the produto.
+	 * Sets the plano.
 	 * 
-	 * @param produto the produto
+	 * @param plano the plano
 	 */
-	public void setProduto(Produto produto)
+	public void setPlano(Plano plano)
 	{
-		this.produto = produto;
+		this.plano = plano;
 	}
 
 	/*
@@ -44,7 +44,7 @@ public class PlanoMaintenanceRequest extends MaintenanceRequest
 	@Override
 	public String toString()
 	{
-		return "ProdutoMaintenanceRequest [getProduto()=" + getProduto() + ", getUserContext()="
+		return "PlanoMaintenanceRequest [getPlano()=" + getPlano() + ", getUserContext()="
 				+ getUserContext() + "]";
 	}
 }

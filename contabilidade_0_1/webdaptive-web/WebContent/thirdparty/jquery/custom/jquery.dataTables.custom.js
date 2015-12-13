@@ -2048,22 +2048,24 @@
 			}
 
 			var aData = _fnGetObjectDataFn( oSettings.sAjaxDataProp )( json );
-			for ( var i=0, iLen=aData.length ; i<iLen ; i++ )
-			{
-				if ( bReOrder )
+			if(aData != null){
+				for ( var i=0, iLen=aData.length ; i<iLen ; i++ )
 				{
-					/* If we need to re-order, then create a new array with the correct order and add it */
-					var aDataSorted = [];
-					for ( var j=0, jLen=oSettings.aoColumns.length ; j<jLen ; j++ )
+					if ( bReOrder )
 					{
-						aDataSorted.push( aData[i][ aiIndex[j] ] );
+						/* If we need to re-order, then create a new array with the correct order and add it */
+						var aDataSorted = [];
+						for ( var j=0, jLen=oSettings.aoColumns.length ; j<jLen ; j++ )
+						{
+							aDataSorted.push( aData[i][ aiIndex[j] ] );
+						}
+						_fnAddData( oSettings, aDataSorted );
 					}
-					_fnAddData( oSettings, aDataSorted );
-				}
-				else
-				{
-					/* No re-order required, sever got it "right" - just straight add */
-					_fnAddData( oSettings, aData[i] );
+					else
+					{
+						/* No re-order required, sever got it "right" - just straight add */
+						_fnAddData( oSettings, aData[i] );
+					}
 				}
 			}
 			oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();

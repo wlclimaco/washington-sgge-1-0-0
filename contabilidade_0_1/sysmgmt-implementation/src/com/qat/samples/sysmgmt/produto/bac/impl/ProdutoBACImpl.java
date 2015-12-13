@@ -162,19 +162,19 @@ public class ProdutoBACImpl implements IProdutoBAC
 	@Override
 	public InternalResultsResponse<Servico> insertServico(ServicoMaintenanceRequest request)
 	{
-		return getProdutoDAC().insertServico(request);
+		return getProdutoDAC().insertServico(request.getServico());
 	}
 
 	@Override
 	public InternalResultsResponse<Servico> updateServico(ServicoMaintenanceRequest request)
 	{
-		return getProdutoDAC().updateServico(request);
+		return getProdutoDAC().updateServico(request.getServico());
 	}
 
 	@Override
 	public InternalResponse deleteServico(ServicoMaintenanceRequest request)
 	{
-		return getProdutoDAC().deleteServico(request);
+		return getProdutoDAC().deleteServico(request.getServico());
 	}
 
 	@Override

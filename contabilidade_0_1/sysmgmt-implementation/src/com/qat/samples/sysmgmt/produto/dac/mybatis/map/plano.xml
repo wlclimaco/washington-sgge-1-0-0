@@ -29,8 +29,8 @@
 
   <resultMap id="planoResult" type="Plano" >
 	<result property="id" column="id"/>
-	<result property="dataInicio" jdbcType="TIMESTAMP" column="dataInicio"/>
-	<result property="dataFinal" jdbcType="TIMESTAMP" column="dataFinal"/>
+	<result property="dataInicio" column="dataInicio"/>
+	<result property="dataFinal"  column="dataFinal"/>
     <result property="numeroContrato" column="numeroContrato"/>
     <result property="descricao" column="descricao"/>
     <result property="titulo" column="titulo"/>
@@ -39,7 +39,7 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-    <collection property="preco" column="id" select="PrecoMap.fetchPrecoByProduto" />
+    <collection property="preco" column="{id=id,emprId=emprId}" select="TabPrecoMap.fetchTabPrecoByProduto" />
     <collection property="servicos" column="id" select="ServicoMap.fetchPlanoByServico" />
     <collection property="imagens" column="id" select="ImagemMap.fetchImagemByPlano" />
   </resultMap>

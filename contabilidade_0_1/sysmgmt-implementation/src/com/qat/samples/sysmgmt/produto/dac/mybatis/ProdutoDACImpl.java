@@ -30,10 +30,12 @@ import com.qat.samples.sysmgmt.produto.dac.ICfopDAC;
 import com.qat.samples.sysmgmt.produto.dac.ICustoDAC;
 import com.qat.samples.sysmgmt.produto.dac.IEstoqueDAC;
 import com.qat.samples.sysmgmt.produto.dac.IGrupoDAC;
+import com.qat.samples.sysmgmt.produto.dac.IImagemDAC;
 import com.qat.samples.sysmgmt.produto.dac.IMarcaDAC;
 import com.qat.samples.sysmgmt.produto.dac.IPorcaoDAC;
 import com.qat.samples.sysmgmt.produto.dac.IProdutoDAC;
 import com.qat.samples.sysmgmt.produto.dac.IRentabilidadeDAC;
+import com.qat.samples.sysmgmt.produto.dac.IServicoDAC;
 import com.qat.samples.sysmgmt.produto.dac.ISubGrupoDAC;
 import com.qat.samples.sysmgmt.produto.dac.ITabPrecoDAC;
 import com.qat.samples.sysmgmt.produto.dac.IUniMedDAC;
@@ -41,10 +43,12 @@ import com.qat.samples.sysmgmt.produto.dacd.mybatis.CfopDACD;
 import com.qat.samples.sysmgmt.produto.dacd.mybatis.CustoDACD;
 import com.qat.samples.sysmgmt.produto.dacd.mybatis.EstoqueDACD;
 import com.qat.samples.sysmgmt.produto.dacd.mybatis.GrupoDACD;
+import com.qat.samples.sysmgmt.produto.dacd.mybatis.ImagemDACD;
 import com.qat.samples.sysmgmt.produto.dacd.mybatis.MarcaDACD;
 import com.qat.samples.sysmgmt.produto.dacd.mybatis.PorcaoDACD;
 import com.qat.samples.sysmgmt.produto.dacd.mybatis.PrecoDACD;
 import com.qat.samples.sysmgmt.produto.dacd.mybatis.RentabilidadeDACD;
+import com.qat.samples.sysmgmt.produto.dacd.mybatis.ServicoDACD;
 import com.qat.samples.sysmgmt.produto.dacd.mybatis.SubGrupoDACD;
 import com.qat.samples.sysmgmt.produto.dacd.mybatis.UniMedDACD;
 import com.qat.samples.sysmgmt.produto.model.Grupo;
@@ -59,7 +63,6 @@ import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
-import com.qat.samples.sysmgmt.produto.model.request.ServicoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest;
@@ -161,6 +164,10 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 
 	private IPlanoDAC planoDAC;
 
+	private IServicoDAC servicoDAC;
+
+	private IImagemDAC imagemDAC;
+
 	// private IPessoaDAC fornecedorDAC;
 
 	private IHistoricoDAC historicoDAC;
@@ -168,6 +175,26 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 
 	/** The valid sort fields for an produto inquiry. Will be injected by Spring. */
 	private Map<String, String> produtoInquiryValidSortFields;
+
+	public IServicoDAC getServicoDAC()
+	{
+		return servicoDAC;
+	}
+
+	public void setServicoDAC(IServicoDAC servicoDAC)
+	{
+		this.servicoDAC = servicoDAC;
+	}
+
+	public IImagemDAC getImagemDAC()
+	{
+		return imagemDAC;
+	}
+
+	public void setImagemDAC(IImagemDAC imagemDAC)
+	{
+		this.imagemDAC = imagemDAC;
+	}
 
 	public IProdutoDAC getProdutoDAC()
 	{
@@ -848,39 +875,36 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	}
 
 	@Override
-	public InternalResultsResponse<Servico> insertServico(ServicoMaintenanceRequest request)
+	public InternalResultsResponse<Servico> insertServico(Servico request)
 	{
 		Integer insertCount = 0;
 		InternalResultsResponse<Servico> response = new InternalResultsResponse<Servico>();
 		Historico historico = new Historico();
-		historico.setEmprId(request.getServico().getEmprId());
-		historico.setUserId(request.getServico().getUserId());
+		historico.setEmprId(request.getEmprId());
+		historico.setUserId(request.getUserId());
 		historico.setProcessId(0);
 		Date a = new Date();
 		historico.setData(a.getTime());
 		historico.setTabelaEnum(TabelaEnum.SERVICO);
 		historico.setAcaoType(AcaoEnum.INSERT);
 
-		Servico servico = new Servico();
-
-		servico = request.getServico();
 		insertCount =
 				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistorico", historico, response);
 
 		Integer historicoId = historico.getId();
 
-		request.getServico().setProcessId(historicoId);
+		request.setProcessId(historicoId);
 
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
 		insertCount =
-				QATMyBatisDacHelper.doInsert(getSqlSession(), "ServicoMap.insertServico", servico,
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "ServicoMap.insertServico", request,
 						response);
 
 		HistoricoItens historicoItens = new HistoricoItens();
 		historicoItens.setIdHist(historicoId);
 		historicoItens.setProcessId(0);
-		historicoItens.setParentId(servico.getId());
+		historicoItens.setParentId(request.getId());
 		historicoItens.setTabelaEnum(TabelaEnum.SERVICO);
 		historicoItens.setAcaoType(AcaoEnum.INSERT);
 
@@ -895,11 +919,11 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		// Next traverse the object graph and "maintain" the associations
 
 		insertCount +=
-				PrecoDACD.maintainTabPrecoAssociations(request.getServico().getPreco(), response, servico.getId(),
+				PrecoDACD.maintainTabPrecoAssociations(request.getPreco(), response, request.getId(),
 						TypeEnum.MEDIUM,
 						AcaoTypeEnum.INSERT,
-						TabelaEnum.SERVICO, getTabPrecoDAC(), getStatusDAC(), getHistoricoDAC(), servico.getEmprId(),
-						servico.getCreateUser(), historicoId);
+						TabelaEnum.SERVICO, getTabPrecoDAC(), getStatusDAC(), getHistoricoDAC(), request.getEmprId(),
+						request.getCreateUser(), historicoId);
 
 		if (insertCount > 0)
 		{
@@ -908,9 +932,9 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 			List<Status> statusList = new ArrayList<Status>();
 			statusList.add(status);
 			insertCount =
-					StatusDACD.maintainStatusAssociations(statusList, response, servico.getId(),
+					StatusDACD.maintainStatusAssociations(statusList, response, request.getId(),
 							null, AcaoEnum.INSERT,
-							servico.getCreateUser(), request.getServico().getEmprId(), TabelaEnum.SERVICO,
+							request.getCreateUser(), request.getEmprId(), TabelaEnum.SERVICO,
 							getStatusDAC(),
 							getHistoricoDAC(), historicoId, historicoId);
 
@@ -926,14 +950,14 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	}
 
 	@Override
-	public InternalResultsResponse<Servico> updateServico(ServicoMaintenanceRequest request)
+	public InternalResultsResponse<Servico> updateServico(Servico request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public InternalResponse deleteServico(ServicoMaintenanceRequest request)
+	public InternalResponse deleteServico(Servico request)
 	{
 		// TODO Auto-generated method stub
 		return null;
@@ -965,8 +989,93 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	@Override
 	public InternalResultsResponse<Plano> insertPlano(PlanoMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer insertCount = 0;
+		InternalResultsResponse<Plano> response = new InternalResultsResponse<Plano>();
+		Historico historico = new Historico();
+		historico.setEmprId(request.getPlano().getEmprId());
+		historico.setUserId(request.getPlano().getUserId());
+		historico.setProcessId(0);
+		Date a = new Date();
+		historico.setData(a.getTime());
+		historico.setTabelaEnum(TabelaEnum.SERVICO);
+		historico.setAcaoType(AcaoEnum.INSERT);
+
+		Plano servico = new Plano();
+
+		servico = request.getPlano();
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistorico", historico, response);
+
+		Integer historicoId = historico.getId();
+
+		request.getPlano().setProcessId(historicoId);
+
+		// First insert the root
+		// Is successful the unique-id will be populated back into the object.
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "PlanoMap.insertPlano", servico,
+						response);
+
+		HistoricoItens historicoItens = new HistoricoItens();
+		historicoItens.setIdHist(historicoId);
+		historicoItens.setProcessId(0);
+		historicoItens.setParentId(servico.getId());
+		historicoItens.setTabelaEnum(TabelaEnum.SERVICO);
+		historicoItens.setAcaoType(AcaoEnum.INSERT);
+
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistoricoItens", historicoItens,
+						response);
+
+		if (response.isInError())
+		{
+			return response;
+		}
+		// Next traverse the object graph and "maintain" the associations
+
+		insertCount +=
+				PrecoDACD.maintainTabPrecoAssociations(request.getPlano().getPreco(), response, servico.getId(),
+						TypeEnum.MEDIUM,
+						AcaoTypeEnum.INSERT,
+						TabelaEnum.SERVICO, getTabPrecoDAC(), getStatusDAC(), getHistoricoDAC(), servico.getEmprId(),
+						servico.getCreateUser(), historicoId);
+
+		insertCount +=
+				ServicoDACD.maintainServicoAssociations(request.getPlano().getServicos(), response, servico.getId(),
+						TypeEnum.MEDIUM,
+						AcaoTypeEnum.INSERT,
+						TabelaEnum.PLANO, getServicoDAC(), getStatusDAC(), getHistoricoDAC(), servico.getEmprId(),
+						servico.getCreateUser(), historicoId);
+
+		insertCount +=
+				ImagemDACD.maintainImagemAssociations(request.getPlano().getImagens(), response, servico.getId(),
+						TypeEnum.MEDIUM,
+						AcaoTypeEnum.INSERT,
+						TabelaEnum.SERVICO, getImagemDAC(), getStatusDAC(), getHistoricoDAC(), servico.getEmprId(),
+						servico.getCreateUser(), historicoId);
+
+		if (insertCount > 0)
+		{
+			Status status = new Status();
+			status.setStatus(CdStatusTypeEnum.ATIVO);
+			List<Status> statusList = new ArrayList<Status>();
+			statusList.add(status);
+			insertCount =
+					StatusDACD.maintainStatusAssociations(statusList, response, servico.getId(),
+							null, AcaoEnum.INSERT,
+							servico.getCreateUser(), request.getPlano().getEmprId(), TabelaEnum.SERVICO,
+							getStatusDAC(),
+							getHistoricoDAC(), historicoId, historicoId);
+
+		}
+
+		// Finally, if something was inserted then add the Produto to the result.
+		if (insertCount > 0)
+		{
+			response.addResult(response.getFirstResult());
+		}
+
+		return response;
 	}
 
 	@Override

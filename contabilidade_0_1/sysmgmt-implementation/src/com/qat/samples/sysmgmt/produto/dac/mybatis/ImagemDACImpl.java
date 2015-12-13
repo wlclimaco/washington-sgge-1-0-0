@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.produto.dacd.mybatis;
+package com.qat.samples.sysmgmt.produto.dac.mybatis;
 
 import java.util.List;
 
@@ -9,19 +9,19 @@ import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.produto.dac.ITabPrecoDAC;
-import com.qat.samples.sysmgmt.produto.model.TabPreco;
+import com.qat.samples.sysmgmt.produto.dac.IImagemDAC;
+import com.qat.samples.sysmgmt.util.Imagem;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
  */
-public class TabPrecoDACImpl extends SqlSessionDaoSupport implements ITabPrecoDAC
+public class ImagemDACImpl extends SqlSessionDaoSupport implements IImagemDAC
 {
 	/** The Constant CONTACT_NAMESPACE. */
-	private static final String CONTACT_NAMESPACE = "TabPrecoMap.";
+	private static final String CONTACT_NAMESPACE = "ImagemMap.";
 
 	/** The Constant CONTACT_STMT_UPDATE. */
-	private static final String CONTACT_STMT_UPDATE = CONTACT_NAMESPACE + "updateTabPreco";
+	private static final String CONTACT_STMT_UPDATE = CONTACT_NAMESPACE + "updateImagem";
 
 	/** The Constant CONTACT_STMT_UPDATE_PHONE. */
 	private static final String CONTACT_STMT_UPDATE_PHONE = CONTACT_NAMESPACE + "updatePhone";
@@ -33,13 +33,13 @@ public class TabPrecoDACImpl extends SqlSessionDaoSupport implements ITabPrecoDA
 	private static final String CONTACT_STMT_UPDATE_ADDRESS = CONTACT_NAMESPACE + "updateAddress";
 
 	/** The Constant CONTACT_STMT_DELETE_BUSINESS_CONTACT. */
-	private static final String CONTACT_STMT_DELETE_BUSINESS_CONTACT = CONTACT_NAMESPACE + "deleteBusinessTabPreco";
+	private static final String CONTACT_STMT_DELETE_BUSINESS_CONTACT = CONTACT_NAMESPACE + "deleteBusinessImagem";
 
 	/** The Constant CONTACT_STMT_DELETE_PERSON_CONTACT. */
-	private static final String CONTACT_STMT_DELETE_PERSON_CONTACT = CONTACT_NAMESPACE + "deletePersonTabPreco";
+	private static final String CONTACT_STMT_DELETE_PERSON_CONTACT = CONTACT_NAMESPACE + "deletePersonImagem";
 
 	/** The Constant CONTACT_STMT_INSERT. */
-	private static final String CONTACT_STMT_INSERT = CONTACT_NAMESPACE + "insertTabPreco";
+	private static final String CONTACT_STMT_INSERT = CONTACT_NAMESPACE + "insertImagem";
 
 	/** The Constant CONTACT_STMT_INSERT_PHONE. */
 	private static final String CONTACT_STMT_INSERT_PHONE = CONTACT_NAMESPACE + "insertPhone";
@@ -51,13 +51,13 @@ public class TabPrecoDACImpl extends SqlSessionDaoSupport implements ITabPrecoDA
 	private static final String CONTACT_STMT_INSERT_ADDRESS = CONTACT_NAMESPACE + "insertAddress";
 
 	/** The Constant CONTACT_STMT_FETCH_BY_BUSINESS_ID. */
-	private static final String CONTACT_STMT_FETCH_BY_BUSINESS_ID = CONTACT_NAMESPACE + "fetchTabPrecosByBusinessId";
+	private static final String CONTACT_STMT_FETCH_BY_BUSINESS_ID = CONTACT_NAMESPACE + "fetchImagemsByBusinessId";
 
 	/** The Constant CONTACT_STMT_FETCH_BY_PERSON_ID. */
-	private static final String CONTACT_STMT_FETCH_BY_PERSON_ID = CONTACT_NAMESPACE + "fetchTabPrecosByPersonId";
+	private static final String CONTACT_STMT_FETCH_BY_PERSON_ID = CONTACT_NAMESPACE + "fetchImagemsByPersonId";
 
 	/** The Constant CONTACT_STMT_FETCH_BY_ID. */
-	private static final String CONTACT_STMT_FETCH_BY_ID = CONTACT_NAMESPACE + "fetchTabPrecosById";
+	private static final String CONTACT_STMT_FETCH_BY_ID = CONTACT_NAMESPACE + "fetchImagemsById";
 
 	/** The Constant CONTACT_STMT_FETCH_EMAIL_VERSION. */
 	private static final String CONTACT_STMT_FETCH_EMAIL_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberEmail";
@@ -69,17 +69,17 @@ public class TabPrecoDACImpl extends SqlSessionDaoSupport implements ITabPrecoDA
 	private static final String CONTACT_STMT_FETCH_ADDRESS_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberAddress";
 
 	/** The Constant LOG. */
-	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(TabPrecoDACImpl.class);
+	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(ImagemDACImpl.class);
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#insertTabPreco(com.prosperitasglobal.cbof.model.TabPreco
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#insertImagem(com.prosperitasglobal.cbof.model.Imagem
 	 * ,
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer insertTabPreco(TabPreco tabPreco, String statementName, InternalResultsResponse<?> response)
+	public Integer insertImagem(Imagem tabPreco, String statementName, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
 		// First insert the root tabPreco data
@@ -91,11 +91,11 @@ public class TabPrecoDACImpl extends SqlSessionDaoSupport implements ITabPrecoDA
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.ITabPrecoDAC#deleteBusinessTabPreco(com.prosperitasglobal.cbof.model.TabPreco,
+	 * com.prosperitasglobal.cbof.dac.IImagemDAC#deleteBusinessImagem(com.prosperitasglobal.cbof.model.Imagem,
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer deleteTabPreco(TabPreco tabPreco, InternalResultsResponse<?> response)
+	public Integer deleteImagem(Imagem tabPreco, InternalResultsResponse<?> response)
 	{
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, tabPreco, response);
 	}
@@ -103,12 +103,12 @@ public class TabPrecoDACImpl extends SqlSessionDaoSupport implements ITabPrecoDA
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateTabPreco(com.prosperitasglobal.cbof.model.TabPreco
+	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateImagem(com.prosperitasglobal.cbof.model.Imagem
 	 * ,
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer updateTabPreco(TabPreco tabPreco, InternalResultsResponse<?> response)
+	public Integer updateImagem(Imagem tabPreco, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
 
@@ -132,22 +132,22 @@ public class TabPrecoDACImpl extends SqlSessionDaoSupport implements ITabPrecoDA
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ITabPrecoDAC#maintainTabPrecoAssociations(java.util.List,
+	 * @see com.prosperitasglobal.cbof.dac.IImagemDAC#maintainImagemAssociations(java.util.List,
 	 * java.lang.Integer,
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
-	public Integer maintainTabPrecoAssociations(List<TabPreco> tabPrecoList, Integer parentId,
+	public Integer maintainImagemAssociations(List<Imagem> tabPrecoList, Integer parentId,
 			String associateStatement,
 			InternalResultsResponse<?> response)
 	{
 		Integer count = 0;
-		// First Maintain TabPrecos
+		// First Maintain Imagems
 		if (ValidationUtil.isNullOrEmpty(tabPrecoList))
 		{
 			return count;
 		}
-		// For Each TabPreco...
-		for (TabPreco tabPreco : tabPrecoList)
+		// For Each Imagem...
+		for (Imagem tabPreco : tabPrecoList)
 		{
 			// Make sure we set the parent key
 			tabPreco.setParentId(parentId);
@@ -159,13 +159,13 @@ public class TabPrecoDACImpl extends SqlSessionDaoSupport implements ITabPrecoDA
 			switch (tabPreco.getModelAction())
 			{
 				case INSERT:
-					count += insertTabPreco(tabPreco, associateStatement, response);
+					count += insertImagem(tabPreco, associateStatement, response);
 					break;
 				case UPDATE:
-					count += updateTabPreco(tabPreco, response);
+					count += updateImagem(tabPreco, response);
 					break;
 				case DELETE:
-					count += deleteTabPreco(tabPreco, response);
+					count += deleteImagem(tabPreco, response);
 					break;
 				default:
 					if (LOG.isDebugEnabled())
@@ -179,7 +179,7 @@ public class TabPrecoDACImpl extends SqlSessionDaoSupport implements ITabPrecoDA
 	}
 
 	@Override
-	public InternalResultsResponse<TabPreco> fetchTabPrecoById(Integer id)
+	public InternalResultsResponse<Imagem> fetchImagemById(Integer id)
 	{
 		// TODO Auto-generated method stub
 		return null;

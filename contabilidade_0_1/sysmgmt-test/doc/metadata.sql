@@ -14,15 +14,15 @@ DROP TABLE  status;
 
 CREATE TABLE status(
     id           integer NOT NULL DEFAULT nextval('status_id_seq'::regclass),
-    dataStatus   timestamp without time zone,
+    dataStatus   bigint,
     parentId     integer NOT NULL,
     status 	     integer NOT NULL,
     acaoType     integer NOT NULL,
     tabelaEnum   integer NOT NULL,
     note    	 character varying(50) NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT status_pkey PRIMARY KEY (id)
 )
@@ -50,9 +50,9 @@ CREATE TABLE regime(
 	nome         character varying(100) NULL,
 	descricao    character varying(200) NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT pk_regime_id PRIMARY KEY  (id)
 )
@@ -84,9 +84,9 @@ CREATE TABLE entidade (
 	processId    integer NULL,
 	entidadeId   integer NULL,
 	entidadeEnum integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT pk_entidade_id  PRIMARY KEY (id)
 )
@@ -119,11 +119,11 @@ CREATE TABLE documento(
 	processId    integer NULL,
 	documentoType integer NULL,
 	numero       character varying(50) NULL,
-	data         timestamp without time zone,
+	data         bigint,
 	estado       integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT pk_documento_id PRIMARY KEY (id)
 )
@@ -154,9 +154,9 @@ CREATE TABLE email(
 	processId    integer NULL,
 	email        character varying(100)  NULL,
 	emailType    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 
 CONSTRAINT pk_email_id PRIMARY KEY (id)
@@ -194,9 +194,9 @@ CREATE TABLE endereco(
 	numero       character varying(10)  NULL,
 	cep			 character varying(15)  NULL,
 	enderecoType		 integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50)  NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50)  NULL,
 CONSTRAINT pk_endereco_id PRIMARY KEY (id)
 )
@@ -229,9 +229,9 @@ CREATE TABLE telefone (
 	telefonetype integer NULL,
 	ddd 		   character varying(5) NULL,
 	telefone     character varying(15) NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT pk_telefone_id PRIMARY KEY (id)
 )
@@ -261,9 +261,9 @@ CREATE TABLE socio(
 	cota         real NULL,
 	porcentagem  real NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 
 CONSTRAINT pk_socios_id PRIMARY KEY (id)
@@ -291,14 +291,14 @@ DROP TABLE historico;
 
 CREATE TABLE historico (
 	id           integer NOT NULL DEFAULT nextval('historico_id_seq'::regclass),
-	data	       timestamp without time zone,
+	data	       bigint,
 	userId	   character varying(20) NULL,
 	emprId       integer NULL,
 	tabela 	   integer NOT NULL,
 	acao 		   integer NOT NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT pk_historico_id PRIMARY KEY (id)
 )
@@ -329,9 +329,9 @@ CREATE TABLE CNAE (
     DESCRICAO  character varying(100) NULL,
     ABREVIADO  character varying(50) NULL,
     status       integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT pk_cnae_id PRIMARY KEY (id)
 )
@@ -358,9 +358,9 @@ CREATE TABLE CSOSN (
     CODIGO     character varying(3) NOT NULL,
     DESCRICAO  character varying(200) NULL,
     status       integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT CSOSN_pkey PRIMARY KEY (id)
 )
@@ -388,9 +388,9 @@ CREATE TABLE NCM (
     DESCRICAO  character varying(100) NULL,
     UNIDADE    character varying(2) NULL,
     status       integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT NCM_pkey PRIMARY KEY (id)
 )
@@ -424,9 +424,9 @@ CREATE TABLE CIDADE(
     processId  integer NULL,
     IBGE       character varying(40) NULL,
     status       integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT cidade_pkey PRIMARY KEY (id)
 )
@@ -455,9 +455,9 @@ CREATE TABLE cnaePorRelacionamento(
     parentId integer NOT NULL,
     tabela     integer NOT NULL,
     processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT cnaePorRelacionamento_pkey PRIMARY KEY (id)
 )
@@ -485,10 +485,10 @@ CREATE TABLE Salario(
 	parentId     integer NULL,
 	valor        real NULL,
 	processId    integer NULL,
-	data         timestamp without time zone,
-	create_date  timestamp without time zone,
+	data         bigint,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT Salario_pkey PRIMARY KEY (id)
 )
@@ -520,9 +520,9 @@ CREATE TABLE Beneficio(
 	porcentagem  real NULL,
 	processId    integer NULL,
 	tipo		   character varying(10) NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT Beneficio_pkey PRIMARY KEY (id)
 )
@@ -550,9 +550,9 @@ CREATE TABLE BeneficioFunc(
 	idFunc       integer NOT NULL,
 	idBenef      integer NOT NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT BeneficioFunc_pkey PRIMARY KEY (id)
 )
@@ -577,12 +577,12 @@ ALTER TABLE BeneficioMesApp_id_seq
 DROP TABLE BeneficioMesApp;
 CREATE TABLE BeneficioMesApp(
 	id             integer NOT NULL DEFAULT nextval('BeneficioMesApp_id_seq'::regclass),
-	data         timestamp without time zone,
+	data         bigint,
 	idFuncBenef integer NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT BeneficioMesApp_pkey PRIMARY KEY (id)
 )
@@ -607,7 +607,7 @@ ALTER TABLE Evento_id_seq
 DROP TABLE Evento;
 CREATE TABLE Evento(
 	id             integer NOT NULL DEFAULT nextval('Evento_id_seq'::regclass),
-	data         timestamp without time zone,
+	data         bigint,
 	nome         character varying(50) NULL,
 	descricao    character varying(50) NULL,
 	tipo         character varying(50) NULL,
@@ -618,9 +618,9 @@ CREATE TABLE Evento(
 	isMensal     bit NULL,
 	isSistema    bit NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT Evento_pkey PRIMARY KEY (id)
 )
@@ -645,13 +645,13 @@ ALTER TABLE EventoFunc_id_seq
 DROP TABLE EventoFunc;
 CREATE TABLE EventoFunc(
 	id           integer NOT NULL DEFAULT nextval('EventoFunc_id_seq'::regclass),
-	data         timestamp without time zone,
+	data         bigint,
 	idFunc	   integer NULL,
 	idEvent	   integer NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT EventoFunc_pkey PRIMARY KEY (id)
 )
@@ -676,12 +676,12 @@ ALTER TABLE EventoMesApp_id_seq
 DROP TABLE EventoMesApp;
 CREATE TABLE EventoMesApp(
 	id             integer NOT NULL DEFAULT nextval('EventoMesApp_id_seq'::regclass),
-	data         timestamp without time zone,
+	data         bigint,
 	idFuncEnvent integer NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT EventoMesApp_pkey PRIMARY KEY (id)
 )
@@ -710,17 +710,17 @@ CREATE TABLE Pessoa(
 	cdEmpr 	   integer NOT NULL,
 	sexo 		   integer NULL,
 	type         integer NOT NULL,
-	dataNasc     timestamp without time zone,
-	dataAdmin    timestamp without time zone,
+	dataNasc     bigint,
+	dataAdmin    bigint,
 	nomePai 	   character varying(200) NULL,
 	nomeMae      character varying(200) NULL,
 	nomeConjugue character varying(200) NULL,
 	estadoCivil  integer NULL,
 	processId    integer NULL,
 	matricula	   character varying(50) NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT Pessoa_pkey PRIMARY KEY (id)
 )
@@ -746,14 +746,14 @@ DROP TABLE horarios;
 CREATE TABLE horarios(
 	id           integer NOT NULL DEFAULT nextval('horarios_id_seq'::regclass),
 	parentId     integer NULL,
-	data         timestamp without time zone,
-	horarioEntr  timestamp without time zone,
-	horarioSair  timestamp without time zone,
-	create_date  timestamp without time zone,
+	data         bigint,
+	horarioEntr  bigint,
+	horarioSair  bigint,
+	create_date  bigint,
 	tipo     	   character varying(50) NULL,
 	processId    integer NULL,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT horarios_pkey PRIMARY KEY (id)
 )
@@ -781,11 +781,11 @@ CREATE TABLE Profissao(
 	parentId     	 integer NOT NULL,
 	profissao 	 character varying(100) NULL,
 	renda 		 real NULL,
-	dataAdmissao   timestamp without time zone,
+	dataAdmissao   bigint,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT Profissao_pkey PRIMARY KEY (id)
 )
@@ -811,14 +811,14 @@ DROP TABLE Convenio;
 CREATE TABLE Convenio(
 	id          	 integer NOT NULL DEFAULT nextval('Convenio_id_seq'::regclass),
 	nome 	 		 character varying(100) NULL,
-	dataini   	 timestamp without time zone,
-	dataFin   	 timestamp without time zone,
+	dataini   	 bigint,
+	dataFin   	 bigint,
 	porcentagem 	 real NULL,
 	valor 		 real NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT Convenio_pkey PRIMARY KEY (id)
 )
@@ -843,13 +843,13 @@ ALTER TABLE ConvenioPessoa_id_seq
 DROP TABLE ConvenioPessoa;
 CREATE TABLE ConvenioPessoa(
 	id          	 integer NOT NULL DEFAULT nextval('ConvenioPessoa_id_seq'::regclass),
-	data  timestamp without time zone,
+	data  bigint,
 	parentId 	 	 integer NOT NULL,
 	convId   	 integer NOT NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT ConvenioPessoa_pkey PRIMARY KEY (id)
 )
@@ -875,14 +875,14 @@ DROP TABLE CondPag;
 CREATE TABLE CondPag(
 	id          	 integer NOT NULL DEFAULT nextval('CondPag_id_seq'::regclass),
 	nome 	 		 character varying(100) NULL,
-	dataini   	 timestamp without time zone,
-	dataFin   	 timestamp without time zone,
+	dataini   	 bigint,
+	dataFin   	 bigint,
 	porcentagem 	 real NULL,
 	valor 		 real NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT CondPag_pkey PRIMARY KEY (id)
 )
@@ -910,9 +910,9 @@ CREATE TABLE CondPagPessoa(
 	parentId 	 	 integer NOT NULL,
 	condPagId   	 integer NOT NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT CondPagPessoa_pkey PRIMARY KEY (id)
 )
@@ -940,9 +940,9 @@ CREATE TABLE TipoPag(
 	id          	integer NOT NULL DEFAULT nextval('TipoPag_id_seq'::regclass),
 	descricao 	 character varying(100) NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT TipoPag_pkey PRIMARY KEY (id)
 )
@@ -972,9 +972,9 @@ CREATE TABLE TipoPagReg(
 	tipoPagId          	 integer NOT NULL,
 	tabela          	     integer NOT NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT TipoPagReg_pkey PRIMARY KEY (id)
 )
@@ -1002,9 +1002,9 @@ CREATE TABLE banco(
 	nome          	 	 character varying(50) NULL,
 	logo          	 	 character varying(50) NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT banco_pkey PRIMARY KEY (id)
 )
@@ -1035,9 +1035,9 @@ CREATE TABLE agencia(
 	gerente          	 	 character varying(50) NULL,
 	responsavelConta          	 	 character varying(50) NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT agencia_pkey PRIMARY KEY (id)
 )
@@ -1069,9 +1069,9 @@ CREATE TABLE BancoPessoa(
 	processId    			 integer NULL,
 	agenciaId    			 integer NULL,
 	tabela    			 integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT bancoPessoa_pkey PRIMARY KEY (id)
 )
@@ -1099,10 +1099,10 @@ CREATE TABLE contato(
 	parentId     integer NOT NULL,
 	motivo       integer NULL,
 	processId    integer NULL,
-	dataContato timestamp without time zone,
-	create_date  timestamp without time zone,
+	dataContato bigint,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT contato_pkey PRIMARY KEY (id)
 )
@@ -1130,9 +1130,9 @@ CREATE TABLE contatoItens(
 	parentId     integer NOT NULL,
 	texto        character varying(250) NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT contatoItens_pkey PRIMARY KEY (id)
 )
@@ -1160,13 +1160,13 @@ CREATE TABLE ordemServico(
 	emprId       integer NOT NULL,
 	userId       character varying(50) NULL,
 	nome         character varying(100) NULL,
-	data    	   timestamp without time zone,
+	data    	   bigint,
 	typeId       integer NOT NULL,
 	assunto      character varying(100) NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT ordemServico_pkey PRIMARY KEY (id)
 )
@@ -1193,12 +1193,12 @@ CREATE TABLE ordemServicoItens(
 	id             integer NOT NULL DEFAULT nextval('ordemServicoItens_id_seq'::regclass),
 	idOrdemServico integer NOT NULL,
 	status       	 integer NOT NULL,
-	data    	     timestamp without time zone,
+	data    	     bigint,
 	texto          character varying(255) NULL,
 	processId      integer  NULL,
-	create_date    timestamp without time zone,
+	create_date    bigint,
     create_user    character varying(50) NULL,
-    modify_date    timestamp without time zone,
+    modify_date    bigint,
     modify_user    character varying(50) NULL,
 CONSTRAINT ordemServicoItens_pkey PRIMARY KEY (id)
 )
@@ -1225,9 +1225,9 @@ CREATE TABLE ordemServicoTypes(
 	id             integer NOT NULL DEFAULT nextval('ordemServicoTypes_id_seq'::regclass),
 	type         character varying(100) NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT ordemServicoTypes_pkey PRIMARY KEY (id)
 )
@@ -1254,9 +1254,9 @@ CREATE TABLE ordemServicoStatus(
 	id             integer NOT NULL DEFAULT nextval('ordemServicoStatus_id_seq'::regclass),
 	status       character varying(100) NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT ordemServicoStatus_pkey PRIMARY KEY (id)
 )
@@ -1283,9 +1283,9 @@ CREATE TABLE tabela(
 	id             integer NOT NULL DEFAULT nextval('tabela_id_seq'::regclass),
 	nome         character varying(50) NOT NULL,
 	descricao    character varying(250) NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT tabela_pkey PRIMARY KEY (id)
 )
@@ -1318,9 +1318,9 @@ CREATE TABLE atributos(
 	chaveSecundaria  integer NOT NULL,
 	tabelaSecundaria  integer NOT NULL,
 	type  integer NOT NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT atributos_pkey PRIMARY KEY (id)
 )
@@ -1348,9 +1348,9 @@ CREATE TABLE unimed(
 	unimed       character varying(100) NOT NULL,
 	sigla        character varying(5) NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT unimed_pkey PRIMARY KEY (id)
 )
@@ -1379,9 +1379,9 @@ CREATE TABLE unimedProd(
 	unimedId     integer NOT NULL,
 	prodId       integer NOT NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT unimedProd_pkey PRIMARY KEY (id)
 )
@@ -1409,9 +1409,9 @@ CREATE TABLE grupo(
 	grupo        character varying(100) NOT NULL,
 	descricao    character varying(250) NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT grupo_pkey PRIMARY KEY (id)
 )
@@ -1439,9 +1439,9 @@ CREATE TABLE grupoProd(
 	grupoId      integer NOT NULL,
 	prodId       integer NOT NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT grupoProd_pkey PRIMARY KEY (id)
 )
@@ -1469,9 +1469,9 @@ CREATE TABLE subgrupo(
 	subgrupo     character varying(100) NOT NULL,
 	descricao    character varying(250) NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT subgrupo_pkey PRIMARY KEY (id)
 )
@@ -1499,9 +1499,9 @@ CREATE TABLE subgrupoGrupo(
 	grupoId      integer NOT NULL,
 	subGrupoId   integer NOT NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT subgrupoProd_pkey PRIMARY KEY (id)
 )
@@ -1529,9 +1529,9 @@ CREATE TABLE marca(
 	marca        character varying(100) NOT NULL,
 	fabricante   character varying(100) NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT marca_pkey PRIMARY KEY (id)
 )
@@ -1559,9 +1559,9 @@ CREATE TABLE marcaProd(
 	marcaId      integer NOT NULL,
 	prodId       integer NOT NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT marcaProd_pkey PRIMARY KEY (id)
 )
@@ -1589,9 +1589,9 @@ CREATE TABLE cst(
 	nome         character varying(150) NULL,
 	descricao    character varying(150) NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT cst_pkey PRIMARY KEY (id)
 )
@@ -1619,9 +1619,9 @@ CREATE TABLE csosnProd(
 	csosnId      integer NOT NULL,
 	prodId       integer NOT NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT csosnProd_pkey PRIMARY KEY (id)
 )
@@ -1648,9 +1648,9 @@ CREATE TABLE incidencia(
 	codigo       character varying(50) NULL,
 	texto        character varying(150) NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT incidencia_pkey PRIMARY KEY (id)
 )
@@ -1688,9 +1688,9 @@ CREATE TABLE tributacao(
 	pisconfins   integer NULL,
 	parentId   integer NULL,
 	incidencia integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT tributacao_pkey PRIMARY KEY (id)
 )
@@ -1720,9 +1720,9 @@ CREATE TABLE classificacao(
 	codigo       character varying(50) NULL,
 	descricao    character varying(150) NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT classificacao_pkey PRIMARY KEY (id)
 )
@@ -1751,9 +1751,9 @@ CREATE TABLE classificacaoProd(
 	classificacaoId integer NOT NULL,
 	prodId       integer NOT NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT classificacaoProd_pkey PRIMARY KEY (id)
 )
@@ -1784,11 +1784,11 @@ CREATE TABLE estoque(
 	prodId          integer NOT NULL,
 	estoqueTypeEnum integer NOT NULL,
 	processId       integer NULL,
-	ultimoMov       timestamp without time zone,
+	ultimoMov       bigint,
 	quant           real NOT NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT estoque_pkey PRIMARY KEY (id)
 )
@@ -1818,14 +1818,14 @@ CREATE TABLE tabPreco(
 	emprId           integer NOT NULL,
 	entidadeId      integer NULL,
 	precoTypeEnum   integer NOT NULL,
-	dataMarcacao    timestamp without time zone,
+	dataMarcacao    bigint,
 	valor           real NOT NULL,
-	dataProInicial  timestamp without time zone,
-	dataProFinal    timestamp without time zone,
+	dataProInicial  bigint,
+	dataProFinal    bigint,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT tabPreco_pkey PRIMARY KEY (id)
 )
@@ -1854,9 +1854,9 @@ CREATE TABLE custoItens(
 	custo   		   character varying(50) NULL,
 	custoDesp        integer NOT NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT custoItens_pkey PRIMARY KEY (id)
 )
@@ -1888,9 +1888,9 @@ CREATE TABLE custo(
 	entidadeId    integer NULL,
 	emprId    integer NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT custo_pkey PRIMARY KEY (id)
 )
@@ -1919,9 +1919,9 @@ CREATE TABLE porcao(
 	valor           real NOT NULL,
 	processId    integer NULL,
 	idporcaoItens    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT porcao_pkey PRIMARY KEY (id)
 )
@@ -1953,9 +1953,9 @@ CREATE TABLE porcaoItens(
 	vd   		       real NULL,
 	nome   		   character varying(150) NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT porcaoItens_pkey PRIMARY KEY (id)
 )
@@ -1982,9 +1982,9 @@ CREATE TABLE rentabilidade(
 	id                    integer NOT NULL DEFAULT nextval('rentabilidade_id_seq'::regclass),
 	prodId                integer NOT NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT rentabilidade_pkey PRIMARY KEY (id)
 )
@@ -2014,9 +2014,9 @@ CREATE TABLE rentabilidadeProdutos(
 	valor                 real NOT NULL,
 	rentabilidadeTypeEnum integer NOT NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT rentabilidadeProdutos_pkey PRIMARY KEY (id)
 )
@@ -2053,9 +2053,9 @@ CREATE TABLE cfop(
 	classFiscal     real  NULL,
 	observacao      character varying(250) NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT cfop_pkey PRIMARY KEY (id)
 )
@@ -2084,9 +2084,9 @@ CREATE TABLE CfopParentId(
 	idCfop          integer NOT NULL,
 	parentId		  integer NOT NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT CfopParentId_pkey PRIMARY KEY (id)
 )
@@ -2115,9 +2115,9 @@ CREATE TABLE ForneProd(
 	idForn       integer NOT NULL,
 	prodId	   integer NOT NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT ForneProd_pkey PRIMARY KEY (id)
 )
@@ -2158,7 +2158,7 @@ CREATE TABLE produto(
 	id             integer NOT NULL DEFAULT nextval('produto_id_seq'::regclass),
 	codigo       character varying(50) NOT NULL,
 	cdBarras     character varying(50) NULL,
-	dataCreate   timestamp without time zone,
+	dataCreate   bigint,
 	produto  	   character varying(250) NOT NULL,
 	modoUso  	   character varying(250) NULL,
 	aplicacao    character varying(250) NULL,
@@ -2176,9 +2176,9 @@ CREATE TABLE produto(
 	unimed    integer NULL,
 	tributacao    integer NULL,
 	classificacao    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT produto_pkey PRIMARY KEY (id)
 )
@@ -2218,9 +2218,9 @@ CREATE TABLE conhecimentoTransporte(
 	pesoLiquido  			real  NULL,
 	volume  				real  NULL,
 	processId    			integer NOT NULL,
-	create_date  			timestamp without time zone,
+	create_date  			bigint,
     create_user  			character varying(50) NULL,
-    modify_date  			timestamp without time zone,
+    modify_date  			bigint,
     modify_user  			character varying(50) NULL,
 CONSTRAINT conhecimentoTransporte_pkey PRIMARY KEY (id)
 )
@@ -2253,9 +2253,9 @@ CREATE TABLE notaFiscalItens(
 	cfop 			integer NOT NULL,
 	classificacao integer NOT NULL,
 	processId     integer  NULL,
-	create_date  			timestamp without time zone,
+	create_date  			bigint,
     create_user  			character varying(50) NULL,
-    modify_date  			timestamp without time zone,
+    modify_date  			bigint,
     modify_user  			character varying(50) NULL,
 CONSTRAINT notaFiscalItens_pkey PRIMARY KEY (id)
 )
@@ -2289,8 +2289,8 @@ CREATE TABLE contas(
 	numeroParc 	integer  NULL,
 	parcela    	integer  NULL,
 	valorOriginal	real  NULL,
-	dataVencimento timestamp without time zone,
-	dataGeracao    timestamp without time zone,
+	dataVencimento bigint,
+	dataGeracao    bigint,
 	dataPagamento  integer NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	juros			 real  NULL,
 	taxa           real  NULL,
@@ -2298,9 +2298,9 @@ CREATE TABLE contas(
 	baixaUser		 integer  NULL,
 	baixaDateUTC	 integer NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
 	processId      integer NULL,
-	create_date  			timestamp without time zone,
+	create_date  			bigint,
     create_user  			character varying(50) NULL,
-    modify_date  			timestamp without time zone,
+    modify_date  			bigint,
     modify_user  			character varying(50) NULL,
 CONSTRAINT contas_pkey PRIMARY KEY (id)
 )
@@ -2334,9 +2334,9 @@ CREATE TABLE itensEspeciais(
 	aliguotaICMS	real  NULL,
 	valorICMS     real  NULL,
 	processId     integer  NULL,
-	create_date  	timestamp without time zone,
+	create_date  	bigint,
     create_user  	character varying(50) NULL,
-    modify_date  	timestamp without time zone,
+    modify_date  	bigint,
     modify_user  	character varying(50) NULL,
 CONSTRAINT itensEspeciais_pkey PRIMARY KEY (id)
 )
@@ -2364,11 +2364,11 @@ CREATE TABLE nFStatus(
 	id            integer NOT NULL DEFAULT nextval('nFStatus_id_seq'::regclass),
 	IdNota		integer  NULL,
 	status        integer  NULL,
-	dataMudanca  	timestamp without time zone,
+	dataMudanca  	bigint,
 	processId     integer  NULL,
-	create_date  	timestamp without time zone,
+	create_date  	bigint,
     create_user  	character varying(50) NULL,
-    modify_date  	timestamp without time zone,
+    modify_date  	bigint,
     modify_user  	character varying(50) NULL,
 CONSTRAINT nFStatus_pkey PRIMARY KEY (id)
 )
@@ -2399,9 +2399,9 @@ CREATE TABLE notaFiscal(
 	numero  	     integer NOT NULL,
 	tipo  	     character varying(50) NULL,
     nfValor  	     real NOT NULL,
-    dataEmissao  	 timestamp without time zone,
-    dataSaida      timestamp without time zone,
-	dataEntrada	 timestamp without time zone,
+    dataEmissao  	 bigint,
+    dataSaida      bigint,
+	dataEntrada	 bigint,
 	modelo         character varying(50) NULL,
 	bxEstoque  	 integer NULL,
 	descItens  	 integer NULL,
@@ -2414,9 +2414,9 @@ CREATE TABLE notaFiscal(
     empresa  	    integer NULL,
     pessoa    integer NULL,
     processId     integer  NULL,
-	create_date   timestamp without time zone,
+	create_date   bigint,
     create_user  	character varying(50) NULL,
-    modify_date  	timestamp without time zone,
+    modify_date  	bigint,
     modify_user  	character varying(50) NULL,
 CONSTRAINT notaFiscal_pkey PRIMARY KEY (id)
 )
@@ -2445,10 +2445,10 @@ CREATE TABLE process(
 	tabelaEnum	 integer NOT NULL,
 	acaoEnum		 integer NOT NULL,
 	empId 		 integer NOT NULL,
-    data  	     timestamp without time zone,
-	create_date  	timestamp without time zone,
+    data  	     bigint,
+	create_date  	bigint,
     create_user  	character varying(50) NULL,
-    modify_date  	timestamp without time zone,
+    modify_date  	bigint,
     modify_user  	character varying(50) NULL,
 CONSTRAINT process_pkey PRIMARY KEY (id)
 )
@@ -2480,10 +2480,10 @@ CREATE TABLE historicoItens(
 	type 		     integer NOT NULL,
 	tabela 		 integer NOT NULL,
 	parentId 		 integer NOT NULL,
-    data  	     timestamp without time zone,
-	create_date  	 timestamp without time zone,
+    data  	     bigint,
+	create_date  	 bigint,
     create_user  	 character varying(50) NULL,
-    modify_date  	 timestamp without time zone,
+    modify_date  	 bigint,
     modify_user    character varying(50) NULL,
 CONSTRAINT historicoItens_pkey PRIMARY KEY (id)
 )
@@ -2546,9 +2546,9 @@ CREATE TABLE estado(
 	id             integer NOT NULL DEFAULT nextval('estado_id_seq'::regclass),
 	nome		 character varying(50) NULL,
 	abreviacao  character varying(50) NULL,
-	create_date  	timestamp without time zone,
+	create_date  	bigint,
     create_user  	character varying(50) NULL,
-    modify_date  	timestamp without time zone,
+    modify_date  	bigint,
     modify_user  	character varying(50) NULL,
 CONSTRAINT estado_pkey PRIMARY KEY (id)
 )
@@ -2573,11 +2573,11 @@ ALTER TABLE contato_id_seq
 DROP TABLE contato;
 CREATE TABLE contato(
 	id          	         integer NOT NULL DEFAULT nextval('contato_id_seq'::regclass),
-	dataContato         	 timestamp without time zone,
+	dataContato         	 bigint,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT contato_pkey PRIMARY KEY (id)
 )
@@ -2605,12 +2605,12 @@ CREATE TABLE contatoItens(
 	id          	     integer NOT NULL DEFAULT nextval('contatoItens_id_seq'::regclass),
 	parentId         	 integer NULL,
 	motivo         	 character varying(250) NULL,
-	dataContato      	 timestamp without time zone,
+	dataContato      	 bigint,
 	nomeContato        character varying(50) NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT contatoItens_pkey PRIMARY KEY (id)
 )
@@ -2640,9 +2640,9 @@ CREATE TABLE note1(
 	note_text          character varying(250) NULL,
 	tabela        	 integer NULL,
 	processId    integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT note1_pkey PRIMARY KEY (id)
 )
@@ -2670,9 +2670,9 @@ CREATE TABLE produtoFornecedor(
 	id          	     integer NOT NULL DEFAULT nextval('produtoFornecedor_id_seq'::regclass),
 	prodId         	 integer NULL,
 	fornecId         	 integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT produtoFornecedor_pkey PRIMARY KEY (id)
 )
@@ -2702,9 +2702,9 @@ CREATE TABLE formaPg(
 	diasPg         	integer NULL,
 	entrada          integer NULL,
 	processId         	 integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT formaPg_pkey PRIMARY KEY (id)
 )
@@ -2733,9 +2733,9 @@ CREATE TABLE formaPgPessoa(
 	parentId         	integer NULL,
 	formaPgId         integer NULL,
 	processId         integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT formaPgPessoa_pkey PRIMARY KEY (id)
 )
@@ -2767,9 +2767,9 @@ CREATE TABLE condPag(
 	valorFin          real  NULL,
 	parcelas         	integer NULL,
 	processId         integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT condPag_pkey PRIMARY KEY (id)
 )
@@ -2797,9 +2797,9 @@ CREATE TABLE tipoPag(
 	id          	    integer NOT NULL DEFAULT nextval('tipoPag_id_seq'::regclass),
 	descricao         character varying(150) NULL,
 	processId         integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT tipoPag_pkey PRIMARY KEY (id)
 )
@@ -2828,9 +2828,9 @@ CREATE TABLE condPagPessoa(
 	parentId         	integer NULL,
 	condPagId         integer NULL,
 	processId         integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT condPagPessoa_pkey PRIMARY KEY (id)
 )
@@ -2859,9 +2859,9 @@ CREATE TABLE produtoPessoa(
 	parentId         	integer NULL,
 	prodId            integer NULL,
 	processId         integer NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT produtoPessoa_pkey PRIMARY KEY (id)
 )
@@ -2939,12 +2939,12 @@ DROP TABLE historicoNF;
 CREATE TABLE historicoNF(
 	id             integer NOT NULL DEFAULT nextval('historicoNF_id_seq'::regclass),
 	notaId         integer  NULL,
-	data           timestamp without time zone,
+	data           bigint,
 	notaTypeEnum   integer NOT NULL,
     processId      integer  NULL,
-	create_date    timestamp without time zone,
+	create_date    bigint,
     create_user  	 character varying(50) NULL,
-    modify_date    timestamp without time zone,
+    modify_date    bigint,
     modify_user    character varying(50) NULL,
 CONSTRAINT historicoNF_pkey PRIMARY KEY (id)
 )
@@ -2972,12 +2972,12 @@ CREATE TABLE tela(
 	type           integer  NULL,
 	description    character varying(250) NULL,
 	help           character varying(250) NULL,
-	data   		 timestamp without time zone,
+	data   		 bigint,
 	desenvolvida   character varying(50) NULL,
     processId      integer  NULL,
-	create_date    timestamp without time zone,
+	create_date    bigint,
     create_user  	 character varying(50) NULL,
-    modify_date    timestamp without time zone,
+    modify_date    bigint,
     modify_user    character varying(50) NULL,
 CONSTRAINT tela_pkey PRIMARY KEY (id)
 )
@@ -3007,9 +3007,9 @@ CREATE TABLE tabs(
 	description    character varying(250) NULL,
 	nome   		 character varying(50) NULL,
     processId      integer  NULL,
-	create_date    timestamp without time zone,
+	create_date    bigint,
     create_user  	 character varying(50) NULL,
-    modify_date    timestamp without time zone,
+    modify_date    bigint,
     modify_user    character varying(50) NULL,
 CONSTRAINT tabs_pkey PRIMARY KEY (id)
 )
@@ -3052,9 +3052,9 @@ CREATE TABLE field(
 	size   		 integer  NULL,
     busca      	 integer  NULL,
     processId      integer  NULL,
-	create_date    timestamp without time zone,
+	create_date    bigint,
     create_user  	 character varying(50) NULL,
-    modify_date    timestamp without time zone,
+    modify_date    bigint,
     modify_user    character varying(50) NULL,
 CONSTRAINT field_pkey PRIMARY KEY (id)
 )
@@ -3083,9 +3083,9 @@ CREATE TABLE fieldBusca(
 	fieldId        integer  NULL,
 	tabela         integer  NULL,
 	processId      integer  NULL,
-	create_date    timestamp without time zone,
+	create_date    bigint,
     create_user  	 character varying(50) NULL,
-    modify_date    timestamp without time zone,
+    modify_date    bigint,
     modify_user    character varying(50) NULL,
 CONSTRAINT fieldBusca_pkey PRIMARY KEY (id)
 )
@@ -3112,16 +3112,16 @@ DROP TABLE plano;
 CREATE TABLE plano(
 	id             integer NOT NULL DEFAULT nextval('plano_id_seq'::regclass),
 	emprId         integer  NULL,
-	dataFinal      timestamp without time zone,
-	dataInicio     timestamp without time zone,
+	dataFinal      bigint,
+	dataInicio     bigint,
 	desconto       real  NULL,
 	numeroContrato integer  NULL,
 	processId      integer  NULL,
 	descricao  	   character varying(250) NULL,
 	titulo  	   character varying(100) NULL,
-	create_date    timestamp without time zone,
+	create_date    bigint,
     create_user    character varying(50) NULL,
-    modify_date    timestamp without time zone,
+    modify_date    bigint,
     modify_user    character varying(50) NULL,
 CONSTRAINT plano_pkey PRIMARY KEY (id)
 )
@@ -3152,9 +3152,9 @@ CREATE TABLE servico(
     descricao    character varying(250) NULL,
     emprId     	 integer NOT NULL,
     status 	     integer NOT NULL,
-	create_date  timestamp without time zone,
+	create_date  bigint,
     create_user  character varying(50) NULL,
-    modify_date  timestamp without time zone,
+    modify_date  bigint,
     modify_user  character varying(50) NULL,
 CONSTRAINT servico_pkey PRIMARY KEY (id)
 )
@@ -3184,9 +3184,9 @@ CREATE TABLE planoServ(
 	planoId        integer  NULL,
 	processId      integer  NULL,
 	status         integer  NULL,
-	create_date    timestamp without time zone,
+	create_date    bigint,
     create_user    character varying(50) NULL,
-    modify_date    timestamp without time zone,
+    modify_date    bigint,
     modify_user    character varying(50) NULL,
 CONSTRAINT planoServ_pkey PRIMARY KEY (id)
 )
@@ -3194,4 +3194,191 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE planoServ
+  OWNER TO postgres;
+
+
+   DROP TABLE horarios;
+
+CREATE TABLE horarios
+(
+  id integer NOT NULL DEFAULT nextval('horarios_id_seq'::regclass),
+  parentid integer,
+  data bigint,
+  horarioentr bigint,
+  horariosair bigint,
+  create_date bigint,
+  tipo character varying(50),
+  processid integer,
+  create_user character varying(50),
+  modify_date bigint,
+  modify_user character varying(50),
+  CONSTRAINT horarios_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE horarios
+  OWNER TO postgres;
+ DROP TABLE historico;
+
+CREATE TABLE historico
+(
+  id integer NOT NULL DEFAULT nextval('historico_id_seq'::regclass),
+  data bigint,
+  userid character varying(20),
+  emprid integer,
+  tabela integer NOT NULL,
+  acao integer NOT NULL,
+  create_date bigint,
+  create_user character varying(50),
+  modify_date bigint,
+  modify_user character varying(50),
+  CONSTRAINT pk_historico_id PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE historico
+  OWNER TO postgres;
+
+-- Table: historicoitens
+
+ DROP TABLE historicoitens;
+
+CREATE TABLE historicoitens
+(
+  id integer NOT NULL DEFAULT nextval('historicoitens_id_seq'::regclass),
+  idhist integer NOT NULL,
+  processid integer NOT NULL,
+  type integer NOT NULL,
+  tabela integer NOT NULL,
+  parentid integer NOT NULL,
+  data bigint,
+  create_date bigint,
+  create_user character varying(50),
+  modify_date bigint,
+  modify_user character varying(50),
+  CONSTRAINT historicoitens_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE historicoitens
+  OWNER TO postgres;
+-- Table: tabpreco
+
+ DROP TABLE tabpreco;
+
+CREATE TABLE tabpreco
+(
+  id integer NOT NULL DEFAULT nextval('tabpreco_id_seq'::regclass),
+  prodid integer NOT NULL,
+  emprid integer ,
+  entidadeid integer,
+  precotypeenum integer NOT NULL,
+  datamarcacao bigint,
+  valor real NOT NULL,
+  dataproinicial bigint,
+  dataprofinal bigint,
+  processid integer,
+  create_date bigint,
+  create_user character varying(50),
+  modify_date bigint,
+  modify_user character varying(50),
+  CONSTRAINT tabpreco_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE tabpreco
+  OWNER TO postgres;
+
+
+  DROP SEQUENCE imagem_id_seq;
+
+CREATE SEQUENCE imagem_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE imagem_id_seq
+  OWNER TO postgres;
+
+ DROP TABLE imagem;
+
+CREATE TABLE imagem
+(
+	id integer NOT NULL DEFAULT nextval('imagem_id_seq'::regclass),
+	local character varying(50),
+	tabelaEnum integer,
+	nome character varying(50),
+	fotoId integer,
+	principal integer,
+	emprId integer,
+	parentId integer,
+	processId integer,
+	create_user character varying(50),
+	create_date bigint,
+	modify_user bigint,
+	modify_date character varying(50),
+  CONSTRAINT imagem_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE imagem
+  OWNER TO postgres;
+
+DROP SEQUENCE planobyservico_id_seq;
+
+CREATE SEQUENCE planobyservico_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE planobyservico_id_seq
+  OWNER TO postgres;
+
+ DROP TABLE planobyservico;
+
+CREATE TABLE planobyservico
+(
+	id integer NOT NULL DEFAULT nextval('planobyservico_id_seq'::regclass),
+	planoId integer,
+	servicoId integer,
+	processId integer,
+	create_user character varying(50),
+	create_date bigint,
+	modify_user bigint,
+	modify_date character varying(50),
+  CONSTRAINT planobyservico_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE planobyservico
+  OWNER TO postgres;
+
+
+ DROP TABLE servico;
+
+CREATE TABLE servico
+(
+  id integer NOT NULL DEFAULT nextval('servico_id_seq'::regclass),
+  nome character varying(100),
+  descricao character varying(250),
+  emprid integer ,
+  status integer ,
+  create_date bigint,
+  create_user character varying(50),
+  modify_date bigint,
+  modify_user character varying(50),
+  CONSTRAINT servico_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE servico
   OWNER TO postgres;

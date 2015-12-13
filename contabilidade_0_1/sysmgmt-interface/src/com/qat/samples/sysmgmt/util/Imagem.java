@@ -19,7 +19,7 @@ public class Imagem extends ModelCosmeDamiao
 	/** The id. */
 	private Integer id;
 
-	private Boolean principal;
+	private Integer principal;
 
 	/**
 	 * Instantiates a new imagem.
@@ -137,12 +137,12 @@ public class Imagem extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	public Boolean getPrincipal()
+	public Integer getPrincipal()
 	{
 		return principal;
 	}
 
-	public void setPrincipal(Boolean principal)
+	public void setPrincipal(Integer principal)
 	{
 		this.principal = principal;
 	}

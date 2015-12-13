@@ -14,6 +14,7 @@ import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryReq
 import com.qat.samples.sysmgmt.ordemServico.model.response.OrdemServicoResponse;
 import com.qat.samples.sysmgmt.produto.bas.IProdutoBAS;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.PlanoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ServicoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.PlanoResponse;
@@ -185,6 +186,42 @@ public class SiteBaseController
 		{
 			IProdutoBAS client = (IProdutoBAS)QATAppContext.getBean("produtoBASClientTarget");
 			response = client.fetchServicosByRequest(request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
+		}
+		return response;
+	}
+
+	// PLANO
+	protected PlanoResponse maintainPlano(PlanoMaintenanceRequest request,
+			PersistanceActionEnum persistType)
+	{
+		PlanoResponse response = new PlanoResponse();
+		try
+		{
+			IProdutoBAS client = (IProdutoBAS)QATAppContext.getBean("produtoBASClientTarget");
+			switch (persistType)
+			{
+				case INSERT:
+					response = client.insertPlano(request);
+					break;
+				case UPDATE:
+					response = client.updatePlano(request);
+					break;
+				case DELETE:
+					response = client.deletePlano(request);
+					break;
+				default:
+					if (LOG.isDebugEnabled())
+					{
+						LOG.debug("persistType missing! Setting Unspecified Error status.");
+					}
+					response.addOperationFailedMessage(DEFAULT_EXCEPTION_MSG);
+					break;
+			}
+
 		}
 		catch (Exception ex)
 		{

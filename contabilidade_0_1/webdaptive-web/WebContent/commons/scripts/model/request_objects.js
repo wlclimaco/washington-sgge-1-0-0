@@ -235,3 +235,19 @@
 //		this.returnList      = _bList;
 	//	this.returnListPaged = _bPagedList;
 	};
+
+
+	qat.model.reqPlano = function(_oUC, _oEmbalagem, _bList, _bPagedList)
+	{
+		if (_oUC == null)
+		{
+			this.userContext = new qat.base.model.userContext();
+		}
+		else
+		{
+			this.userContext = _oUC;
+		}
+		this.plano       = _oEmbalagem;
+//		this.returnList      = _bList;
+	//	this.returnListPaged = _bPagedList;
+	};
