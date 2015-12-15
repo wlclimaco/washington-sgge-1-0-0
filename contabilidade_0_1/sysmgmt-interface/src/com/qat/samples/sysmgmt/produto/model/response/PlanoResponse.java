@@ -4,10 +4,10 @@ import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.contabilidade.Plano;
 
 /**
- * The Class ProdutoResponse.
+ * The Class PlanoResponse.
  * 
  * @author aporto
  * @version 1.0
@@ -17,26 +17,26 @@ public class PlanoResponse extends InquiryResponse
 {
 
 	/** Attributes. */
-	private List<Produto> produtoList;
+	private List<Plano> planoList;
 
 	/**
-	 * Gets the produto list.
+	 * Gets the plano list.
 	 * 
-	 * @return the produto list
+	 * @return the plano list
 	 */
-	public List<Produto> getProdutoList()
+	public List<Plano> getPlanoList()
 	{
-		return produtoList;
+		return planoList;
 	}
 
 	/**
-	 * Sets the produto list.
+	 * Sets the plano list.
 	 * 
-	 * @param produtoList the produto list
+	 * @param planoList the plano list
 	 */
-	public void setProdutoList(List<Produto> produtoList)
+	public void setPlanoList(List<Plano> planoList)
 	{
-		this.produtoList = produtoList;
+		this.planoList = planoList;
 	}
 
 	/*
@@ -47,7 +47,7 @@ public class PlanoResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setProdutoList((List<Produto>)coll);
+		setPlanoList((List<Plano>)coll);
 	}
 
 	/*
@@ -57,7 +57,7 @@ public class PlanoResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "ProdutoResponse [getProdutoList()=" + getProdutoList() + ", getResultsSetInfo()=" + getResultsSetInfo()
+		return "PlanoResponse [getPlanoList()=" + getPlanoList() + ", getResultsSetInfo()=" + getResultsSetInfo()
 				+ ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()=" + getMessageList()
 				+ ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()=" + isOperationSuccess()
 				+ "]";

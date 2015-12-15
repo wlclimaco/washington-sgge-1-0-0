@@ -3382,3 +3382,26 @@ WITH (
 );
 ALTER TABLE servico
   OWNER TO postgres;
+
+ DROP TABLE historico;
+
+CREATE TABLE historico
+(
+  id integer NOT NULL DEFAULT nextval('historico_id_seq'::regclass),
+  data bigint,
+  userid character varying(20),
+  emprid integer,
+  tabela integer,
+  acao integer,
+  processId integer,
+  create_date bigint,
+  create_user character varying(50),
+  modify_date bigint,
+  modify_user character varying(50),
+  CONSTRAINT pk_historico_id PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE historico
+  OWNER TO postgres;

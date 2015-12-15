@@ -139,7 +139,7 @@ $(document).ready(function()
 			tabelaEnum			: "PLANO",
 			nome				: "IMAGEM0001",
 			fotoId				: 1,
-			principal			: true,
+			principal			: 1,
 			emprId				: 1,
 			modelAction 	:"INSERT"
 		});

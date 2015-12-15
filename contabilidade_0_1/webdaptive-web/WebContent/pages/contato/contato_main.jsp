@@ -42,6 +42,6 @@
             <!-- /.row -->
         </div>
 
-<jsp:include page="../../scripts/pages/ordemServico/ordemServico_main.js.jsp" flush="true" />
-<jsp:include page="../../scripts/pages/ordemServico/ordemServico_init.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/contato/contato_main.js.jsp" flush="true" />
+<jsp:include page="../../scripts/pages/contato/contato_init.js.jsp" flush="true" />
 
