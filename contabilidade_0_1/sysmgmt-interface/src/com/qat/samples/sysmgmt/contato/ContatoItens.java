@@ -1,7 +1,5 @@
 package com.qat.samples.sysmgmt.contato;
 
-import java.util.List;
-
 import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
 import com.qat.samples.sysmgmt.util.Note;
 
@@ -16,9 +14,11 @@ public class ContatoItens extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	private String texto;
+	private Long dataAlt;
 
-	private List<Note> noteList;
+	private ContatoStatusEnum contatoStatus;
+
+	private Note note;
 
 	/**
 	 * Default constructor.
@@ -28,63 +28,71 @@ public class ContatoItens extends ModelCosmeDamiao
 		super();
 	}
 
-	/**
-	 * Gets the id.
-	 * 
-	 * @return the id
-	 */
 	public Integer getId()
 	{
 		return id;
 	}
 
-	/**
-	 * Sets the id.
-	 * 
-	 * @param id the new id
-	 */
 	public void setId(Integer id)
 	{
 		this.id = id;
 	}
 
-	/**
-	 * @return the noteList
-	 */
-	public List<Note> getNoteList()
+	public Long getDataAlt()
 	{
-		return noteList;
+		return dataAlt;
+	}
+
+	public void setDataAlt(Long dataAlt)
+	{
+		this.dataAlt = dataAlt;
+	}
+
+	public ContatoStatusEnum getContatoStatus()
+	{
+		return contatoStatus;
+	}
+
+	public void setContatoStatus(ContatoStatusEnum contatoStatus)
+	{
+		this.contatoStatus = contatoStatus;
+	}
+
+	public Integer getContatoStatusValue()
+	{
+		if (contatoStatus != null)
+		{
+			return contatoStatus.getValue();
+		}
+		return null;
 	}
 
 	/**
-	 * @param noteList the noteList to set
+	 * Sets the motivo value.
+	 * 
+	 * @param acaoTypeValue the new motivo value
 	 */
-	public void setNoteList(List<Note> noteList)
+	public void setContatoStatusValue(Integer acaoTypeValue)
 	{
-		this.noteList = noteList;
+		contatoStatus = ContatoStatusEnum.enumForValue(acaoTypeValue);
 	}
 
-	/**
-	 * @return the texto
-	 */
-	public String getTexto()
+	public Note getNote()
 	{
-		return texto;
+		return note;
 	}
 
-	/**
-	 * @param texto the texto to set
-	 */
-	public void setTexto(String texto)
+	public void setNote(Note note)
 	{
-		this.texto = texto;
+		this.note = note;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "ContatoItens [getId()=" + getId() + ", getNoteList()=" + getNoteList() + ", getTexto()=" + getTexto()
-				+ ", toString()=" + super.toString() + "]";
+		return "ContatoItens [getId()=" + getId() + ", getDataAlt()=" + getDataAlt() + ", getContatoStatus()="
+				+ getContatoStatus() + ", getContatoStatusValue()=" + getContatoStatusValue() + ", getNote()="
+				+ getNote() + ", toString()=" + super.toString() + "]";
 	}
 
 }

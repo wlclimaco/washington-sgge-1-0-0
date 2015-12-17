@@ -24,6 +24,9 @@ import com.qat.samples.sysmgmt.site.dac.ISiteDAC;
 public class SiteDACImpl extends SqlSessionDaoSupport implements ISiteDAC
 {
 
+	private static final String CIDADE_STMT_FETCH_COUNT = "C";
+	private static final String CIDADE_STMT_FETCH_ALL_BY_REQUEST = null;
+
 	@Override
 	public InternalResponse insertSite(Site site)
 	{
@@ -155,8 +158,8 @@ public class SiteDACImpl extends SqlSessionDaoSupport implements ISiteDAC
 		 */
 		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
 
-		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "CIDADE_STMT_FETCH_COUNT",
-				"CIDADE_STMT_FETCH_ALL_BY_REQUEST", response);
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, CIDADE_STMT_FETCH_COUNT,
+				CIDADE_STMT_FETCH_ALL_BY_REQUEST, response);
 		return response;
 	}
 

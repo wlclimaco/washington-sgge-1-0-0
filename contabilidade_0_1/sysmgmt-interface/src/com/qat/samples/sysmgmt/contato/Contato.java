@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
 
+// TODO: Auto-generated Javadoc
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -14,10 +15,28 @@ public class Contato extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
+	/** The data contato. */
 	private Long dataContato;
 
+	/** The nome. */
+	private String nome;
+
+	/** The email. */
+	private String email;
+
+	/** The telefone. */
+	private String telefone;
+
+	/** The motivo. */
 	private ContatoTypeEnum motivo;
 
+	private List<ContatoItens> contatoItensList;
+
+	/**
+	 * Gets the motivo value.
+	 * 
+	 * @return the motivo value
+	 */
 	public Integer getMotivoValue()
 	{
 		if (motivo != null)
@@ -27,12 +46,19 @@ public class Contato extends ModelCosmeDamiao
 		return null;
 	}
 
+	/**
+	 * Sets the motivo value.
+	 * 
+	 * @param acaoTypeValue the new motivo value
+	 */
 	public void setMotivoValue(Integer acaoTypeValue)
 	{
 		motivo = ContatoTypeEnum.enumForValue(acaoTypeValue);
 	}
 
 	/**
+	 * Gets the motivo.
+	 * 
 	 * @return the motivo
 	 */
 	public ContatoTypeEnum getMotivo()
@@ -41,14 +67,14 @@ public class Contato extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Sets the motivo.
+	 * 
 	 * @param motivo the motivo to set
 	 */
 	public void setMotivo(ContatoTypeEnum motivo)
 	{
 		this.motivo = motivo;
 	}
-
-	private List<ContatoItens> contatoItensList;
 
 	/**
 	 * Default constructor.
@@ -79,6 +105,8 @@ public class Contato extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Gets the data contato.
+	 * 
 	 * @return the dataContato
 	 */
 	public Long getDataContato()
@@ -87,6 +115,8 @@ public class Contato extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Sets the data contato.
+	 * 
 	 * @param dataContato the dataContato to set
 	 */
 	public void setDataContato(Long dataContato)
@@ -94,17 +124,41 @@ public class Contato extends ModelCosmeDamiao
 		this.dataContato = dataContato;
 	}
 
-	/**
-	 * @return the contatoItensList
-	 */
+	public String getNome()
+	{
+		return nome;
+	}
+
+	public void setNome(String nome)
+	{
+		this.nome = nome;
+	}
+
+	public String getEmail()
+	{
+		return email;
+	}
+
+	public void setEmail(String email)
+	{
+		this.email = email;
+	}
+
+	public String getTelefone()
+	{
+		return telefone;
+	}
+
+	public void setTelefone(String telefone)
+	{
+		this.telefone = telefone;
+	}
+
 	public List<ContatoItens> getContatoItensList()
 	{
 		return contatoItensList;
 	}
 
-	/**
-	 * @param contatoItensList the contatoItensList to set
-	 */
 	public void setContatoItensList(List<ContatoItens> contatoItensList)
 	{
 		this.contatoItensList = contatoItensList;
@@ -114,8 +168,9 @@ public class Contato extends ModelCosmeDamiao
 	public String toString()
 	{
 		return "Contato [getMotivoValue()=" + getMotivoValue() + ", getMotivo()=" + getMotivo() + ", getId()="
-				+ getId() + ", getDataContato()=" + getDataContato() + ", getContatoItensList()="
-				+ getContatoItensList() + ", toString()=" + super.toString() + "]";
+				+ getId() + ", getDataContato()=" + getDataContato() + ", getNome()=" + getNome() + ", getEmail()="
+				+ getEmail() + ", getTelefone()=" + getTelefone() + ", getContatoItensList()=" + getContatoItensList()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }
