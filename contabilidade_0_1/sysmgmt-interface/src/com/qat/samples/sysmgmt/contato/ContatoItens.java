@@ -18,7 +18,9 @@ public class ContatoItens extends ModelCosmeDamiao
 
 	private ContatoStatusEnum contatoStatus;
 
-	private Note note;
+	private String note;
+
+	private String titulo;
 
 	/**
 	 * Default constructor.

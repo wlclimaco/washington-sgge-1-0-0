@@ -21,12 +21,12 @@
 
   <resultMap id="contatoResult" type="Contato" >
     <result property="id" column="id" />
-<result property="dataContato" column="id" />
-<result property="nome" column="id" />
-<result property="email" column="id" />
-<result property="telefone" column="id" />
-<result property="motivo" column="id" />
-<result property="createUser" column="create_user"/>
+	<result property="dataContato" column="dataContato" />
+	<result property="nome" column="nome" />
+	<result property="email" column="email" />
+	<result property="telefone" column="telefone" />
+	<result property="motivoValue" column="motivo" />
+	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
@@ -37,21 +37,22 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allContatoColumns">
-  		 b.parentId
-  		,b.processId
-  		,b.motivo
-		,b.dataContato
-      	,b.create_date
+  		 dataContato
+  		,nome
+  		,email
+		,telefone
+      	,motivo
       	,b.create_user
       	,b.modify_date
       	,b.modify_user
   </sql>
 
   <sql id="allContatoValues">
-  		#{parentId},
-  		#{processId},
-  		#{motivoValue},
   		#{dataContato},
+  		#{nome},
+  		#{email},
+  		#{telefone},
+  		#{motivoValue},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -74,6 +75,10 @@
     UPDATE contato
     	<set>
     		<if test="dataContato!= null">dataContato = #{dataContato},</if>
+    		<if test="nome!= null">nome = #{nome},</if>
+    		<if test="email!= null">email = #{email},</if>
+    		<if test="telefone!= null">telefone = #{telefone},</if>
+    		<if test="motivoValue!= null">motivo = #{motivoValue},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
@@ -98,7 +103,7 @@
   </select>
 
   <select id="fetchAllContatos" resultMap="contatoResult">
-    SELECT b.id,
+    SELECT id,
 	<include refid="allContatoColumns" />
     FROM contato b ORDER BY b.id ASC
   </select>
@@ -110,16 +115,30 @@
      WHERE 1=1
   </select>
 
-  <select id="fetchAllContatosByRequest" parameterType="PagedInquiryRequest" resultMap="contatoResult">
-		 SELECT b.id
-		<include refid="allContatoColumns" />
-	    FROM contato b ORDER BY b.id ASC
-  </select>
 
-  <select id="fetchContatoByPessoa" parameterType="Integer" resultMap="contatoResult">
-	SELECT b.id,
-		<include refid="allContatoColumns" />
-		FROM contato b where b.parentId = #{id} ORDER BY b.id ASC
+
+   <select id="fetchAllContatosByRequest" parameterType="ContatoInquiryRequest" resultMap="contatoResult">
+    SELECT * FROM
+    			(
+    				SELECT id,
+    						<include refid="allContatoColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY dataContato) AS RowNumber
+    				FROM contato
+					WHERE 2 = 2
+
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
   </select>
 
 
