@@ -1095,11 +1095,12 @@ ALTER TABLE contato_id_seq
 
 DROP TABLE contato;
 CREATE TABLE contato(
-	id             integer NOT NULL DEFAULT nextval('contato_id_seq'::regclass),
-	parentId     integer NOT NULL,
-	motivo       integer NULL,
-	processId    integer NULL,
-	dataContato bigint,
+	id           integer NOT NULL DEFAULT nextval('contato_id_seq'::regclass),
+	dataContato  bigint  NULL,
+	nome         character varying(50) NULL,
+	email         character varying(50) NULL,
+	telefone         character varying(50) NULL,
+	motivo    integer NULL,
 	create_date  bigint,
     create_user  character varying(50) NULL,
     modify_date  bigint,
@@ -1115,6 +1116,7 @@ ALTER TABLE contato
 /* ---------------------------------------------------------------*/
 DROP SEQUENCE contatoItens_id_seq;
 
+
 CREATE SEQUENCE contatoItens_id_seq
   INCREMENT 1
   MINVALUE 1
@@ -1128,7 +1130,7 @@ DROP TABLE contatoItens;
 CREATE TABLE contatoItens(
 	id             integer NOT NULL DEFAULT nextval('contatoItens_id_seq'::regclass),
 	parentId     integer NOT NULL,
-	texto        character varying(250) NULL,
+	note         character varying(250) NULL,
 	processId    integer NULL,
 	create_date  bigint,
     create_user  character varying(50) NULL,

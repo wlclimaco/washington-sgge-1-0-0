@@ -24,8 +24,8 @@ import com.qat.samples.sysmgmt.site.dac.ISiteDAC;
 public class SiteDACImpl extends SqlSessionDaoSupport implements ISiteDAC
 {
 
-	private static final String CIDADE_STMT_FETCH_COUNT = "C";
-	private static final String CIDADE_STMT_FETCH_ALL_BY_REQUEST = null;
+	private static final String CIDADE_STMT_FETCH_COUNT = "ContatoMap.fetchContatoRowCount";
+	private static final String CIDADE_STMT_FETCH_ALL_BY_REQUEST = "ContatoMap.fetchAllContatosByRequest";
 
 	@Override
 	public InternalResponse insertSite(Site site)

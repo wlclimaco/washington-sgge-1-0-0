@@ -1,8 +1,8 @@
 package com.qat.samples.sysmgmt.contato;
 
 import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
-import com.qat.samples.sysmgmt.util.Note;
 
+// TODO: Auto-generated Javadoc
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -14,12 +14,16 @@ public class ContatoItens extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
+	/** The data alt. */
 	private Long dataAlt;
 
+	/** The contato status. */
 	private ContatoStatusEnum contatoStatus;
 
-	private String note;
+	/** The note. */
+	private String texto;
 
+	/** The titulo. */
 	private String titulo;
 
 	/**
@@ -30,36 +34,71 @@ public class ContatoItens extends ModelCosmeDamiao
 		super();
 	}
 
+	/**
+	 * Gets the SendSolv id for the account.
+	 * 
+	 * @return the SendSolv id for the account
+	 */
 	public Integer getId()
 	{
 		return id;
 	}
 
+	/**
+	 * Sets the SendSolv id for the account.
+	 * 
+	 * @param id the new SendSolv id for the account
+	 */
 	public void setId(Integer id)
 	{
 		this.id = id;
 	}
 
+	/**
+	 * Gets the data alt.
+	 * 
+	 * @return the data alt
+	 */
 	public Long getDataAlt()
 	{
 		return dataAlt;
 	}
 
+	/**
+	 * Sets the data alt.
+	 * 
+	 * @param dataAlt the new data alt
+	 */
 	public void setDataAlt(Long dataAlt)
 	{
 		this.dataAlt = dataAlt;
 	}
 
+	/**
+	 * Gets the contato status.
+	 * 
+	 * @return the contato status
+	 */
 	public ContatoStatusEnum getContatoStatus()
 	{
 		return contatoStatus;
 	}
 
+	/**
+	 * Sets the contato status.
+	 * 
+	 * @param contatoStatus the new contato status
+	 */
 	public void setContatoStatus(ContatoStatusEnum contatoStatus)
 	{
 		this.contatoStatus = contatoStatus;
 	}
 
+	/**
+	 * Gets the contato status value.
+	 * 
+	 * @return the contato status value
+	 */
 	public Integer getContatoStatusValue()
 	{
 		if (contatoStatus != null)
@@ -79,22 +118,42 @@ public class ContatoItens extends ModelCosmeDamiao
 		contatoStatus = ContatoStatusEnum.enumForValue(acaoTypeValue);
 	}
 
-	public Note getNote()
+	public String getTexto()
 	{
-		return note;
+		return texto;
 	}
 
-	public void setNote(Note note)
+	public void setTexto(String texto)
 	{
-		this.note = note;
+		this.texto = texto;
+	}
+
+	/**
+	 * Gets the titulo.
+	 * 
+	 * @return the titulo
+	 */
+	public String getTitulo()
+	{
+		return titulo;
+	}
+
+	/**
+	 * Sets the titulo.
+	 * 
+	 * @param titulo the new titulo
+	 */
+	public void setTitulo(String titulo)
+	{
+		this.titulo = titulo;
 	}
 
 	@Override
 	public String toString()
 	{
 		return "ContatoItens [getId()=" + getId() + ", getDataAlt()=" + getDataAlt() + ", getContatoStatus()="
-				+ getContatoStatus() + ", getContatoStatusValue()=" + getContatoStatusValue() + ", getNote()="
-				+ getNote() + ", toString()=" + super.toString() + "]";
+				+ getContatoStatus() + ", getContatoStatusValue()=" + getContatoStatusValue() + ", getTexto()="
+				+ getTexto() + ", getTitulo()=" + getTitulo() + ", toString()=" + super.toString() + "]";
 	}
 
 }

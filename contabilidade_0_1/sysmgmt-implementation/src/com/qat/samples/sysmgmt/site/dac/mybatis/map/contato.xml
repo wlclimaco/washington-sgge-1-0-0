@@ -42,9 +42,9 @@
   		,email
 		,telefone
       	,motivo
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+      	,create_user
+      	,modify_date
+      	,modify_user
   </sql>
 
   <sql id="allContatoValues">
@@ -156,26 +156,27 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<collection property="notes" column="id" select="NoteMap.fetchNoteByContato"/>
+
   </resultMap>
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allContatoItensColumns">
-		 b.parentId
-		,b.texto
-		,b.processId
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+		 parentId
+		,processId
+		,texto
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+
   </sql>
 
   <sql id="allContatoItensValues">
   		#{parentId},
-  		#{texto},
   		#{processId},
+  		#{texto},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -235,18 +236,18 @@
   <select id="fetchContatoItensById" parameterType="FetchByIdRequest" resultMap="contatoItensResult">
 	SELECT
 		<include refid="allContatoItensColumns" />
-        FROM contatoItens b
+        FROM contatoItens
      WHERE 1=1
      <if test="id != null">
-		  AND b.id = #{id}
+		  AND id = #{id}
 	 </if>
   </select>
 
   <select id="fetchContatoItensByContatos" parameterType="Integer" resultMap="contatoItensResult">
-	SELECT b.id,
+	SELECT id,
 		<include refid="allContatoItensColumns" />
-        FROM contatoItens b
-     WHERE b.parentId = #{id}
+        FROM contatoItens
+     WHERE parentId = #{id}
   </select>
 
   <select id="fetchAllContatoItenssByRequest" parameterType="PagedInquiryRequest" resultMap="contatoItensResult">

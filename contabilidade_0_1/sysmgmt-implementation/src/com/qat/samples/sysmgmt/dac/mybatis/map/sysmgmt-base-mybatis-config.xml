@@ -48,6 +48,10 @@
   		<typeAlias alias="Empresa" type="com.qat.samples.sysmgmt.entidade.Empresa"/>
   		<typeAlias alias="EmpresaInquiryRequest" type="com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest"/>
 
+  		<typeAlias alias="Contato" type="com.qat.samples.sysmgmt.contato.Contato"/>
+  		<typeAlias alias="ContatoItens" type="com.qat.samples.sysmgmt.contato.ContatoItens"/>
+  		<typeAlias alias="ContatoInquiryRequest" type="com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest"/>
+
   		<typeAlias alias="Filial" type="com.qat.samples.sysmgmt.entidade.Filial"/>
   		<typeAlias alias="FilialInquiryRequest" type="com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest"/>
 
@@ -117,6 +121,7 @@
      	<mapper resource="com/qat/samples/sysmgmt/util/dac/mybatis/map/status.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/imagens.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/plano.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/site/dac/mybatis/map/contato.xml"/>
 <!--      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/preco.xml"/> -->
 <!--      	<mapper resource="com/qat/samples/sysmgmt/cidade/dac/mybatis/map/cidade.xml"/> -->
 <!--      	<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/produto.xml"/> -->
