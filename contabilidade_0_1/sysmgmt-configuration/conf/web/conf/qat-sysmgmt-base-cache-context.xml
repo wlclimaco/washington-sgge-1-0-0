@@ -127,7 +127,7 @@
  <!-- Bundle Cache -->
   <aop:config>
 	<!-- Pointcuts -->
-	<aop:pointcut id="controleCacheObject" expression="bean(controleDACTarget) and execution(* fetch*(..)) and !execution(* fetchCadastrosByRequest(..))" />
+	<aop:pointcut id="controleCacheObject" expression="bean(controleDACTarget) and execution(* fetch*(..)) and !execution(* fetchCadastrosByRequest(..)) and !execution(* fetchContatosByRequest(..))" />
 	<aop:pointcut id="controleFlushInsert" expression="bean(controleDACTarget) and execution(* insert*(..))" />
 	<aop:pointcut id="controleFlushUpdate" expression="bean(controleDACTarget) and execution(* update*(..))" />
 	<aop:pointcut id="controleFlushDelete" expression="bean(controleDACTarget) and execution(* delete*(..))" />

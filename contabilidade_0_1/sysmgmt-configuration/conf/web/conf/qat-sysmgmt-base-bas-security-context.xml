@@ -55,6 +55,7 @@
         		<entry key="insertCidade" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
         		<entry key="updateCidade" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
         		<entry key="refreshCidades" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="fetchContatosByRequest" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
 
         		<entry key="fetchAllEmpresas" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
         		<entry key="fetchEmpresaById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
@@ -220,6 +221,11 @@
          <sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.entidade.bas.rest.EmpresaBAS.fetchRegimeByRequest(*))"
         access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+
+        <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.site.bas.rest.SiteBAS.fetchContatosByRequest(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+
       	<sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.entidade.bas.rest.EmpresaBAS.fetchEmpresaById(*))"
         access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
