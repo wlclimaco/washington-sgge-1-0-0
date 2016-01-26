@@ -16,7 +16,7 @@ public class ContatoViewController extends SiteBaseController
 {
 
 	/** The Constant PROCEDURE_MVC_BAS_RETURN. */
-	private static final String PROCEDURE_MVC_BAS_RETURN = "/contato/contato_main.jsp";
+	private static final String PROCEDURE_MVC_BAS_RETURN = "/contato/contato_main";
 
 	/** The Constant ZERO. */
 	private static final int ZERO = 0;

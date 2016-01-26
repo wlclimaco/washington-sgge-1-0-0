@@ -43,16 +43,16 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allOrdemServicoColumns">
-		 b.emprId
-		,b.userId
-		,b.nome
-      	,b.data
-      	,b.typeId
-      	,b.assunto
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+		 emprId
+		,userId
+		,nome
+      	,data
+      	,typeId
+      	,assunto
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
   </sql>
 
   <sql id="allOrdemServicoValues">
@@ -125,10 +125,10 @@
   </select>
 
   <select id="fetchAllOrdemServicosByRequest" parameterType="OrdemServicoInquiryRequest" resultMap="ordemServicoResult">
-	       SELECT * FROM ( SELECT b.id,
+	       SELECT * FROM ( SELECT id,
     						<include refid="allOrdemServicoColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
-    				FROM ordemservico b
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM ordemservico
     			) LIST
 				<choose>
 					<when test="pageSize != null and pageSize > 0">

@@ -122,6 +122,7 @@
      	<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/imagens.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/plano.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/site/dac/mybatis/map/contato.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/site/dac/mybatis/map/ordemServico.xml"/>
 <!--      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/preco.xml"/> -->
 <!--      	<mapper resource="com/qat/samples/sysmgmt/cidade/dac/mybatis/map/cidade.xml"/> -->
 <!--      	<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/produto.xml"/> -->

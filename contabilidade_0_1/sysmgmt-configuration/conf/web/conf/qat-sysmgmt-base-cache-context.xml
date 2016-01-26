@@ -156,6 +156,23 @@
 	</aop:aspect>
  </aop:config>
 
+
+ <!-- Contato Cache -->
+  <aop:config>
+	<!-- Pointcuts -->
+	<aop:pointcut id="contatoCacheObject" expression="bean(siteDACTarget) and execution(* fetch*(..)) and !execution(* fetchContatosByRequest(..))" />
+	<aop:pointcut id="contatoFlushInsert" expression="bean(siteDACTarget) and execution(* insert*(..))" />
+	<aop:pointcut id="contatoFlushUpdate" expression="bean(siteDACTarget) and execution(* update*(..))" />
+	<aop:pointcut id="contatoFlushDelete" expression="bean(siteDACTarget) and execution(* delete*(..))" />
+	<!-- Aspects -->
+	<aop:aspect id="procedureCacheAspects" ref="procedureCacheAspect">
+		<aop:around pointcut-ref="contatoCacheObject" method="cacheObject"/>
+		<aop:after pointcut-ref="contatoFlushInsert" method="flushCache" />
+		<aop:after pointcut-ref="contatoFlushUpdate" method="flushCache" />
+		<aop:after pointcut-ref="contatoFlushDelete" method="flushCache" />
+	</aop:aspect>
+ </aop:config>
+
  <!-- Cliente Cache -->
   <aop:config>
 	<!-- Pointcuts -->

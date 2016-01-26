@@ -16,7 +16,7 @@ public class Contato extends ModelCosmeDamiao
 	private Integer id;
 
 	/** The data contato. */
-	private Long dataContato;
+	private Integer dataContato;
 
 	/** The nome. */
 	private String nome;
@@ -109,7 +109,7 @@ public class Contato extends ModelCosmeDamiao
 	 * 
 	 * @return the dataContato
 	 */
-	public Long getDataContato()
+	public Integer getDataContato()
 	{
 		return dataContato;
 	}
@@ -119,7 +119,7 @@ public class Contato extends ModelCosmeDamiao
 	 * 
 	 * @param dataContato the dataContato to set
 	 */
-	public void setDataContato(Long dataContato)
+	public void setDataContato(Integer dataContato)
 	{
 		this.dataContato = dataContato;
 	}

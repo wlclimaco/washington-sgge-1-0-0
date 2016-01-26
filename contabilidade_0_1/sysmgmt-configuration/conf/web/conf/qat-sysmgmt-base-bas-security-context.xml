@@ -109,7 +109,6 @@
         		<entry key="fetchAllPlanos" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
         		<entry key="fetchPlanoById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
         		<entry key="fetchPlanosByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
-        		<entry key="fetchPlanosByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
         		<entry key="deletePlano" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
         		<entry key="insertPlano" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
         		<entry key="updatePlano" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
@@ -302,6 +301,27 @@
 
          <!-- ===================================== -->
 
+
+         <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.site.bas.rest.SiteBAS.fetchAllContatos(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      	<sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.site.bas.rest.SiteBAS.fetchContatosByRequest(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      	<sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.site.bas.rest.SiteBAS.fetchContatoById(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      	<sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.site.bas.rest.SiteBAS.deleteContato(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      	<sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.site.bas.rest.SiteBAS.insertContato(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      	<sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.site.bas.rest.SiteBAS.updateContato(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+
+         <!-- ===================================== -->
 
 
 

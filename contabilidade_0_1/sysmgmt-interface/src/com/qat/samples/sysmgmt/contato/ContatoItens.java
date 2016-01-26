@@ -17,9 +17,6 @@ public class ContatoItens extends ModelCosmeDamiao
 	/** The data alt. */
 	private Long dataAlt;
 
-	/** The contato status. */
-	private ContatoStatusEnum contatoStatus;
-
 	/** The note. */
 	private String texto;
 
@@ -31,7 +28,6 @@ public class ContatoItens extends ModelCosmeDamiao
 	 */
 	public ContatoItens()
 	{
-		super();
 	}
 
 	/**
@@ -74,50 +70,6 @@ public class ContatoItens extends ModelCosmeDamiao
 		this.dataAlt = dataAlt;
 	}
 
-	/**
-	 * Gets the contato status.
-	 * 
-	 * @return the contato status
-	 */
-	public ContatoStatusEnum getContatoStatus()
-	{
-		return contatoStatus;
-	}
-
-	/**
-	 * Sets the contato status.
-	 * 
-	 * @param contatoStatus the new contato status
-	 */
-	public void setContatoStatus(ContatoStatusEnum contatoStatus)
-	{
-		this.contatoStatus = contatoStatus;
-	}
-
-	/**
-	 * Gets the contato status value.
-	 * 
-	 * @return the contato status value
-	 */
-	public Integer getContatoStatusValue()
-	{
-		if (contatoStatus != null)
-		{
-			return contatoStatus.getValue();
-		}
-		return null;
-	}
-
-	/**
-	 * Sets the motivo value.
-	 * 
-	 * @param acaoTypeValue the new motivo value
-	 */
-	public void setContatoStatusValue(Integer acaoTypeValue)
-	{
-		contatoStatus = ContatoStatusEnum.enumForValue(acaoTypeValue);
-	}
-
 	public String getTexto()
 	{
 		return texto;
@@ -151,9 +103,8 @@ public class ContatoItens extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "ContatoItens [getId()=" + getId() + ", getDataAlt()=" + getDataAlt() + ", getContatoStatus()="
-				+ getContatoStatus() + ", getContatoStatusValue()=" + getContatoStatusValue() + ", getTexto()="
-				+ getTexto() + ", getTitulo()=" + getTitulo() + ", toString()=" + super.toString() + "]";
+		return "ContatoItens [getId()=" + getId() + ", getDataAlt()=" + getDataAlt() + ", getTexto()=" + getTexto()
+				+ ", getTitulo()=" + getTitulo() + ", toString()=" + super.toString() + "]";
 	}
 
 }

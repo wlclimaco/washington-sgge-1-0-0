@@ -226,8 +226,8 @@ public class SiteDACImpl extends SqlSessionDaoSupport implements ISiteDAC
 		 */
 		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
 
-		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "CIDADE_STMT_FETCH_COUNT",
-				"CIDADE_STMT_FETCH_ALL_BY_REQUEST", response);
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "OrdemServicoMap.fetchOrdemServicoRowCount",
+				"OrdemServicoMap.fetchAllOrdemServicosByRequest", response);
 		return response;
 	}
 
