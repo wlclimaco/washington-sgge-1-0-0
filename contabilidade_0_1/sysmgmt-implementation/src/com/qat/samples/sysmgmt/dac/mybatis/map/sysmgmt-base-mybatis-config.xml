@@ -85,6 +85,13 @@
   		<typeAlias alias="TabPreco" type="com.qat.samples.sysmgmt.produto.model.TabPreco"/>
   		<typeAlias alias="Socio" type="com.qat.samples.sysmgmt.pessoa.Socio"/>
 
+  		<typeAlias alias="Endereco" type="com.qat.samples.sysmgmt.util.Endereco"/>
+  		<typeAlias alias="Email" type="com.qat.samples.sysmgmt.util.Email"/>
+  		<typeAlias alias="Telefone" type="com.qat.samples.sysmgmt.util.Telefone"/>
+  		<typeAlias alias="Documento" type="com.qat.samples.sysmgmt.util.Documento"/>
+  		<typeAlias alias="Estado" type="com.qat.samples.sysmgmt.estado.Estado"/>
+
+
 
 
 <!--   		<typeAlias alias="Cadastro" type="com.qat.samples.sysmgmt.produto.model.Cadastro"/> -->
@@ -130,6 +137,7 @@
       	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/documento.xml"/>
       	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/email.xml"/>
       	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/telefone.xml"/>
+      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/estado.xml"/>
 
     </mappers>
 
