@@ -29,8 +29,8 @@ public class EmpresaViewController extends EntidadeBaseController
 	 * 
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/fetchEmpresaByRequestBAS", method = RequestMethod.GET)
-	public ModelAndView fetchRegimebyRequestBAS()
+	@RequestMapping(value = "/fetchEmpresasByRequestBAS", method = RequestMethod.GET)
+	public ModelAndView fetchEmpresabyRequestBAS()
 	{
 		EmpresaInquiryRequest request = new EmpresaInquiryRequest();
 		// we will be paging so set the default values

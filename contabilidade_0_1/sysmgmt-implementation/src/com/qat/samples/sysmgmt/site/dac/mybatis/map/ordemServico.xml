@@ -36,6 +36,7 @@
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
 	<association property="typeId"    column="typeId" select="fetchTypeByOrdem"  />
+	<association property="status"    column="status" select="OrdemServicoItensMap.fetchStatusByOrdem"  />
 	<collection property="ordemStatusList" column="id" select="OrdemServicoItensMap.fetchAllOrdemServicoItensByOrdemServico"/>
   </resultMap>
 
@@ -49,6 +50,7 @@
       	,data
       	,typeId
       	,assunto
+      	,status
       	,create_date
       	,create_user
       	,modify_date
@@ -62,6 +64,7 @@
     	#{data},
     	#{typeServico.id},
     	#{assunto},
+    	#{status.id},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -115,13 +118,13 @@
   <select id="fetchAllOrdemServicos" resultMap="ordemServicoResult">
     SELECT
 	<include refid="allOrdemServicoColumns" />
-    FROM ordemServico ORDER BY data ASC
+    FROM ordemServico ORDER BY id ASC
   </select>
 
   <select id="fetchOrdemServicoById" parameterType="FetchByIdRequest" resultMap="ordemServicoResult">
 		 SELECT
 			<include refid="allOrdemServicoColumns" />
-		    FROM ordemServico where id= #{id} ORDER BY data ASC
+		    FROM ordemServico where id= #{id} ORDER BY id ASC
   </select>
 
   <select id="fetchAllOrdemServicosByRequest" parameterType="OrdemServicoInquiryRequest" resultMap="ordemServicoResult">
@@ -147,7 +150,7 @@
 
 <select id="fetchTypeByOrdem" parameterType="Integer" resultMap="ordemServicoTypeResult">
 		 SELECT *
-		    FROM ordemServicoTypes where id= #{id} ORDER BY data ASC
+		    FROM ordemServicoTypes where id= #{id} ORDER BY id ASC
   </select>
 
 

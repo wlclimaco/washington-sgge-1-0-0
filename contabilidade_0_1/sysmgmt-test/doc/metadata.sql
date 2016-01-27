@@ -1166,6 +1166,7 @@ CREATE TABLE ordemServico(
 	typeId       integer NOT NULL,
 	assunto      character varying(100) NULL,
 	processId    integer NULL,
+	status       integer  NULL,
 	create_date  bigint,
     create_user  character varying(50) NULL,
     modify_date  bigint,
@@ -1194,7 +1195,6 @@ DROP TABLE ordemServicoItens;
 CREATE TABLE ordemServicoItens(
 	id             integer NOT NULL DEFAULT nextval('ordemServicoItens_id_seq'::regclass),
 	idOrdemServico integer NOT NULL,
-	status       	 integer NOT NULL,
 	data    	     bigint,
 	texto          character varying(255) NULL,
 	processId      integer  NULL,

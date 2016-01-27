@@ -16,9 +16,6 @@ public class OrdemServicoItens extends ModelCosmeDamiao
 	/** The type of an account. */
 	private Integer idOrdemServico;
 
-	/** The description. */
-	private OrdemServicoStatus status;
-
 	/** The estado. */
 	private Long data;
 
@@ -109,28 +106,11 @@ public class OrdemServicoItens extends ModelCosmeDamiao
 		this.idOrdemServico = idOrdemServico;
 	}
 
-	/**
-	 * @return the status
-	 */
-	public OrdemServicoStatus getStatus()
-	{
-		return status;
-	}
-
-	/**
-	 * @param status the status to set
-	 */
-	public void setStatus(OrdemServicoStatus status)
-	{
-		this.status = status;
-	}
-
 	@Override
 	public String toString()
 	{
 		return "OrdemServicoItens [getId()=" + getId() + ", getData()=" + getData() + ", getTexto()=" + getTexto()
-				+ ", getIdOrdemServico()=" + getIdOrdemServico() + ", getStatus()=" + getStatus() + ", toString()="
-				+ super.toString() + "]";
+				+ ", getIdOrdemServico()=" + getIdOrdemServico() + ", toString()=" + super.toString() + "]";
 	}
 
 }

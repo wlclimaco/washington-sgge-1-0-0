@@ -226,7 +226,7 @@ public class EntidadeBaseController
 		ObjectMapper mapper = new ObjectMapper();
 		try
 		{
-			modelAndView.addObject("classificacaoList", mapper.writeValueAsString(empresaFetchByRequest(request)));
+			modelAndView.addObject("empresaList", mapper.writeValueAsString(empresaFetchByRequest(request)));
 		}
 		catch (Exception ex)
 		{

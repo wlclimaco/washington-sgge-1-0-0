@@ -112,43 +112,37 @@ public class EmpresaBAS implements IEmpresaBAS
 	@Override
 	public EmpresaResponse fetchEmpresaByRequest(EmpresaInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getEmpresaBAI().fetchEmpresaByRequest(request);
 	}
 
 	@Override
 	public FilialResponse insertFilial(FilialMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getEmpresaBAI().insertFilial(request);
 	}
 
 	@Override
 	public FilialResponse updateFilial(FilialMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getEmpresaBAI().updateFilial(request);
 	}
 
 	@Override
 	public FilialResponse deleteFilial(FilialMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getEmpresaBAI().deleteFilial(request);
 	}
 
 	@Override
 	public FilialResponse fetchFilialById(FetchByIdRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getEmpresaBAI().fetchFilialById(request);
 	}
 
 	@Override
 	public FilialResponse fetchFilialByRequest(FilialInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getEmpresaBAI().fetchFilialByRequest(request);
 	}
 
 	@Override

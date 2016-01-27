@@ -13,7 +13,7 @@ public class OrdemServicoStatus extends ModelCosmeDamiao
 	private Integer id;
 
 	/** The type of an account. */
-	private Integer nome;
+	private String nome;
 
 	/**
 	 * Default constructor.
@@ -41,6 +41,23 @@ public class OrdemServicoStatus extends ModelCosmeDamiao
 	public void setId(Integer id)
 	{
 		this.id = id;
+	}
+
+	public String getNome()
+	{
+		return nome;
+	}
+
+	public void setNome(String nome)
+	{
+		this.nome = nome;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "OrdemServicoStatus [getId()=" + getId() + ", getNome()=" + getNome() + ", toString()="
+				+ super.toString() + "]";
 	}
 
 }

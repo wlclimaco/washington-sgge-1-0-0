@@ -14,7 +14,7 @@ public class OrdemServicoTypes extends ModelCosmeDamiao
 	private Integer id;
 
 	/** The type of an account. */
-	private Integer typeServico;
+	private String typeServico;
 
 	/**
 	 * Default constructor.
@@ -47,7 +47,7 @@ public class OrdemServicoTypes extends ModelCosmeDamiao
 	/**
 	 * @return the typeServico
 	 */
-	public Integer getTypeServico()
+	public String getTypeServico()
 	{
 		return typeServico;
 	}
@@ -55,7 +55,7 @@ public class OrdemServicoTypes extends ModelCosmeDamiao
 	/**
 	 * @param typeServico the typeServico to set
 	 */
-	public void setTypeServico(Integer typeServico)
+	public void setTypeServico(String typeServico)
 	{
 		this.typeServico = typeServico;
 	}

@@ -23,7 +23,7 @@
 
   <resultMap id="ordemServicoStatusResult" type="OrdemServicoStatus" >
     <result property="id" column="id" />
-    <result property="status" column="status" />
+    <result property="nome" column="status" />
     <result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -39,26 +39,23 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<association property="status"    column="status" select="fetchStatusByOrdem"  />
   </resultMap>
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allOrdemServicoItensColumns">
-		 b.idOrdemServico
-		,b.status
-		,b.data
-      	,b.texto
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+		idOrdemServico
+		,data
+      	,texto
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
   </sql>
 
   <sql id="allOrdemServicoItensValues">
   		#{idOrdemServico},
-  		#{status.id},
   		#{data},
     	#{texto},
     	<include refid="CBOFMap.changeControlFields"/>
@@ -118,15 +115,15 @@
   </select>
 
   <select id="fetchAllOrdemServicoItens" resultMap="ordemServicoItensResult">
-    SELECT b.id
+    SELECT id
 	<include refid="allOrdemServicoItensColumns" />
-    FROM ordemServicoItens b ORDER BY b.data ASC
+    FROM ordemServicoItens  ORDER BY id ASC
   </select>
 
   <select id="fetchOrdemServicoItensById" parameterType="FetchByIdRequest" resultMap="ordemServicoItensResult">
-		 SELECT b.id
+		 SELECT id
 			<include refid="allOrdemServicoItensColumns" />
-		    FROM ordemServicoItens b  where b.id= #{id} ORDER BY b.data ASC
+		    FROM ordemServicoItens   where id= #{id} ORDER BY id ASC
   </select>
 
   <select id="fetchAllOrdemServicoItenssByRequest" parameterType="OrdemServicoInquiryRequest" resultMap="ordemServicoItensResult">
@@ -142,12 +139,12 @@
 
   <select id="fetchAllOrdemServicoItensByOrdemServico" parameterType="Integer" resultMap="ordemServicoItensResult">
 	     SELECT * FROM ordemServicoItens
-		     WHERE idOrdemServico = #{id} order by data
+		     WHERE idOrdemServico = #{id} order by id
   </select>
 
 <select id="fetchStatusByOrdem" parameterType="Integer" resultMap="ordemServicoStatusResult">
 		 SELECT *
-		    FROM ordemServicoStatus where id= #{id} ORDER BY data ASC
+		    FROM ordemServicoStatus where id= #{id} ORDER BY id ASC
   </select>
 
 

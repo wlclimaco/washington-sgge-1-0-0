@@ -16,7 +16,7 @@ public class OrdemServicoViewController extends SiteBaseController
 {
 
 	/** The Constant PROCEDURE_MVC_BAS_RETURN. */
-	private static final String PROCEDURE_MVC_BAS_RETURN = "/ordemServico/ordemServico_mvc_bas";
+	private static final String PROCEDURE_MVC_BAS_RETURN = "/ordemServico/ordemServico_main";
 
 	/** The Constant ZERO. */
 	private static final int ZERO = 0;

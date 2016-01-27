@@ -156,5 +156,11 @@
 				</choose>
   </select>
 
+ <select id="fetchPlanoByEmpresa"  parameterType="Integer" resultMap="planoResult">
+    SELECT
+	<include refid="allPlanoColumns" />
+    FROM plano  where emprId = #{id}
+  </select>
+
 
 </mapper>

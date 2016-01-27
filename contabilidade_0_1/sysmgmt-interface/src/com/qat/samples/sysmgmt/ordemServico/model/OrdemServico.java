@@ -30,6 +30,9 @@ public class OrdemServico extends ModelCosmeDamiao
 	/** The tipo endereco. */
 	private List<OrdemServicoItens> ordemStatusList;
 
+	/** The description. */
+	private OrdemServicoStatus status;
+
 	/**
 	 * Default constructor.
 	 */
@@ -138,12 +141,22 @@ public class OrdemServico extends ModelCosmeDamiao
 		this.ordemStatusList = ordemStatusList;
 	}
 
+	public OrdemServicoStatus getStatus()
+	{
+		return status;
+	}
+
+	public void setStatus(OrdemServicoStatus status)
+	{
+		this.status = status;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "OrdemServico [getId()=" + getId() + ", getNome()=" + getNome() + ", getData()=" + getData()
 				+ ", getTypeId()=" + getTypeId() + ", getAssunto()=" + getAssunto() + ", getOrdemStatusList()="
-				+ getOrdemStatusList() + ", toString()=" + super.toString() + "]";
+				+ getOrdemStatusList() + ", getStatus()=" + getStatus() + ", toString()=" + super.toString() + "]";
 	}
 
 }
