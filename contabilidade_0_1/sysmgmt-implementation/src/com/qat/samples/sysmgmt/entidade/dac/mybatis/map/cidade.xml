@@ -47,12 +47,12 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allCidadeColumns">
-		 b.cidade
-		,b.codigo
-      	,b.IBGE
-      	,b.estado
-      	,b.municipio
-      	,b.cep
+		 cidade
+		,codigo
+      	,IBGE
+      	,estado
+      	,municipio
+      	,cep
   </sql>
 
   <sql id="allCidadeValues">
@@ -123,9 +123,9 @@
   </select>
 
   <select id="fetchCidadeById" parameterType="Integer" resultMap="cidadeResult">
-    			   SELECT b.id,
+    			   SELECT id,
 						<include refid="allCidadeColumns" />
-					FROM cidade b where b.id= #{id} ORDER BY b.id ASC
+					FROM cidade where id= #{id} ORDER BY id ASC
   </select>
 
 
@@ -133,18 +133,18 @@
   <select id="fetchCidadeByEmpresa" parameterType="Integer" resultMap="cidadeResult">
     			   SELECT id,
 						<include refid="allCidadeColumns" />
-					FROM cidade  where parentId= #{id} ORDER BY id ASC
+					FROM cidade  where id= #{id} ORDER BY id ASC
   </select>
 
   <select id="fetchAllCidadesByRequest" parameterType="CidadeInquiryRequest" resultMap="cidadeResult">
     SELECT * FROM
     			(
-    				SELECT b.id,
+    				SELECT id,
     						<include refid="allCidadeColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
     				FROM cidade b
     				<if test="criteria.id != null">
-							where b.id = #{criteria.id}
+							where id = #{criteria.id}
 					</if>
 
     			) LIST

@@ -38,7 +38,7 @@
 	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByEmpresa"/>
 	<collection property="cnaes" column="id" select="CnaeMap.fetchAllCnaesByEmpresa"/>
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
-	<collection property="notes" column="id" select="NoteMap.fetchNoteByNotes"/>
+	<!--  <collection property="notes" column="id" select="NoteMap.fetchNoteByNotes"/>-->
   </resultMap>
 
 
