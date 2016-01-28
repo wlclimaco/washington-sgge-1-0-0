@@ -100,6 +100,13 @@
     FROM estado b where id= #{id} ORDER BY id ASC
  </select>
 
+
+ <select id="fetchEstadoByEmpresa" parameterType="Integer" resultMap="estadoResult">
+	 SELECT id
+	<include refid="allEstadoColumns" />
+    FROM estado  where parentId= #{id} ORDER BY id ASC
+ </select>
+
   <select id="fetchAllEstadoByRequest" parameterType="EstadoInquiryRequest" resultMap="estadoResult">
      SELECT * FROM ( SELECT id
     						<include refid="allEstadoColumns" />,

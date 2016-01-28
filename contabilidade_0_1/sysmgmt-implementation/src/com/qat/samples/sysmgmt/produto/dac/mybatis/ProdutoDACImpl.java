@@ -73,6 +73,7 @@ import com.qat.samples.sysmgmt.util.Status;
 import com.qat.samples.sysmgmt.util.TabelaEnum;
 import com.qat.samples.sysmgmt.util.TypeEnum;
 import com.qat.samples.sysmgmt.util.dac.IClassificacaoDAC;
+import com.qat.samples.sysmgmt.util.dac.IEstadoDAC;
 import com.qat.samples.sysmgmt.util.dac.IHistoricoDAC;
 import com.qat.samples.sysmgmt.util.dac.IPlanoDAC;
 import com.qat.samples.sysmgmt.util.dac.IStatusDAC;
@@ -173,8 +174,20 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	private IHistoricoDAC historicoDAC;
 	private IStatusDAC statusDAC;
 
+	private IEstadoDAC estadoDAC;
+
 	/** The valid sort fields for an produto inquiry. Will be injected by Spring. */
 	private Map<String, String> produtoInquiryValidSortFields;
+
+	public IEstadoDAC getEstadoDAC()
+	{
+		return estadoDAC;
+	}
+
+	public void setEstadoDAC(IEstadoDAC estadoDAC)
+	{
+		this.estadoDAC = estadoDAC;
+	}
 
 	public IServicoDAC getServicoDAC()
 	{

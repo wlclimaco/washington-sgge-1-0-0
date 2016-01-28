@@ -90,7 +90,7 @@
   		<typeAlias alias="Telefone" type="com.qat.samples.sysmgmt.util.Telefone"/>
   		<typeAlias alias="Documento" type="com.qat.samples.sysmgmt.util.Documento"/>
   		<typeAlias alias="Estado" type="com.qat.samples.sysmgmt.estado.Estado"/>
-
+		<typeAlias alias="EstadoInquiryRequest" type="com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest"/>
 
 
 
@@ -115,6 +115,7 @@
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/drug.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/procedure.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/bundle.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/estado.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/cidade.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/cnae.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/classificacao.xml"/>
@@ -133,11 +134,12 @@
      	<mapper resource="com/qat/samples/sysmgmt/site/dac/mybatis/map/ordemServico.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/site/dac/mybatis/map/ordemServicoItens.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/socios.xml"/>
-      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/endereco.xml"/>
+
       	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/documento.xml"/>
       	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/email.xml"/>
       	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/telefone.xml"/>
-      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/estado.xml"/>
+      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/endereco.xml"/>
+
 
     </mappers>
 

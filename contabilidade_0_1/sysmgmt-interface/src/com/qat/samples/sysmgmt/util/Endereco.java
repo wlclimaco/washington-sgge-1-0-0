@@ -40,7 +40,7 @@ public class Endereco extends ModelCosmeDamiao
 		super();
 	}
 
-	public Integer getEnderecoTypeEnumValue()
+	public Integer getEnderecoTypeValue()
 	{
 		if (enderecoType != null)
 		{
@@ -49,7 +49,7 @@ public class Endereco extends ModelCosmeDamiao
 		return null;
 	}
 
-	public void setEnderecoTypeEnumValue(Integer acaoTypeValue)
+	public void setEnderecoTypeValue(Integer acaoTypeValue)
 	{
 		enderecoType = EnderecoTypeEnum.enumForValue(acaoTypeValue);
 	}
@@ -197,7 +197,7 @@ public class Endereco extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Endereco [getEnderecoTypeEnumValue()=" + getEnderecoTypeEnumValue() + ", getId()=" + getId()
+		return "Endereco [getEnderecoTypeEnumValue()=" + getEnderecoTypeValue() + ", getId()=" + getId()
 				+ ", getLogradouro()=" + getLogradouro() + ", getCidade()=" + getCidade() + ", getEstado()="
 				+ getEstado() + ", getBairro()=" + getBairro() + ", getNumero()=" + getNumero() + ", getCep()="
 				+ getCep() + ", toString()=" + super.toString() + "]";

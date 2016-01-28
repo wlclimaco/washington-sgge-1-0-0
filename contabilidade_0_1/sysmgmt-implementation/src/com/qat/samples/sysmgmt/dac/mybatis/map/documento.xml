@@ -18,7 +18,6 @@
     <result property="cpfCnpj" column="cpfcnpj"/>
     <result property="razao" column="razao"/>
     <result property="tableTypeValue" column="tabela"/>
-    <collection property="acessos" column="documentoid" select="ControleAcessMap.fetchControleAcessByAcao" />
   </resultMap>
 
 	  <sql id="allDocumentoColumns">
@@ -29,8 +28,8 @@
 		p.documentoid,p.id, p.rginscmuni, p.cpfcnpj, p.nome, p.razao,p.tabela
   </sql>
 
-   <select id="fetchAllDocumentosBySupermercado" resultMap="DocumentoResult">
-         SELECT <include refid="allDocumentoColumns" /> FROM DOCUMENTOS WHERE TABELA = 1 AND ID = #{ID}
+   <select id="fetchDocumentoByEmpresa" parameterType="Integer" resultMap="DocumentoResult">
+         SELECT * FROM DOCUMENTOS WHERE TABELA = 1 AND ID = #{ID}
    </select>
 
    <select id="fetchAllDocumentosByCliente" resultMap="DocumentoResult">

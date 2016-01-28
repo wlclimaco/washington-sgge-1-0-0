@@ -32,15 +32,15 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allEmailColumns">
-		 b.tabela
-		,b.parentId
-		,b.type
-		,b.email
-		,b.emailType
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+		 tabela
+		,parentId
+		,type
+		,email
+		,emailType
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
   </sql>
 
   <sql id="allEmailValues">
@@ -107,24 +107,24 @@
  <select id="fetchAllEmailsByEmpresa" parameterType="Integer" resultMap="emailResult">
 	 SELECT
 	<include refid="allEmailColumns" />
-    FROM email b where b.tabela in(1,51,52) and b.parentId= #{id} ORDER BY b.id ASC
+    FROM email  where tabela in(1,51,52) and parentId= #{id} ORDER BY id ASC
  </select>
 
  <select id="fetchAllEmailsByFuncionario" parameterType="Integer" resultMap="emailResult">
 	 SELECT
 	<include refid="allEmailColumns" />
-    FROM email b where b.tabela = 16 and b.parentId= #{id} ORDER BY b.id ASC
+    FROM email where tabela = 16 and parentId= #{id} ORDER BY id ASC
  </select>
 
  <select id="fetchAllEmailsByPessoaId" parameterType="Integer" resultMap="emailResult">
 	 SELECT
 	<include refid="allEmailColumns" />
-    FROM email b where b.tabela = 23 and b.parentId= #{id} ORDER BY b.id ASC
+    FROM email where tabela = 23 and parentId= #{id} ORDER BY id ASC
  </select>
 
  <select id="fetchAllEmailsByMarca" parameterType="Integer" resultMap="emailResult">
 	 SELECT
 	<include refid="allEmailColumns" />
-    FROM email b where b.tabela = 50 and b.parentId= #{id} ORDER BY b.id ASC
+    FROM email where tabela = 50 and parentId= #{id} ORDER BY id ASC
  </select>
 </mapper>

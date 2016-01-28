@@ -23,12 +23,12 @@
    	<result property="cdIBGE" column="IBGE"/>
    	<result property="cep" column="CEP" />
    	<result property="municipio" column="MUNICIPIO"/>
-<!--	<result property="createUser" column="create_user"/>
+	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
 	<association property="estado"    column="estado" select="EstadoMap.fetchEstadoById"  />
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEndereco"/>-->
+	 <!--<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEndereco"/>-->
   </resultMap>
 
   <!--
@@ -126,6 +126,14 @@
     			   SELECT b.id,
 						<include refid="allCidadeColumns" />
 					FROM cidade b where b.id= #{id} ORDER BY b.id ASC
+  </select>
+
+
+
+  <select id="fetchCidadeByEmpresa" parameterType="Integer" resultMap="cidadeResult">
+    			   SELECT id,
+						<include refid="allCidadeColumns" />
+					FROM cidade  where parentId= #{id} ORDER BY id ASC
   </select>
 
   <select id="fetchAllCidadesByRequest" parameterType="CidadeInquiryRequest" resultMap="cidadeResult">
