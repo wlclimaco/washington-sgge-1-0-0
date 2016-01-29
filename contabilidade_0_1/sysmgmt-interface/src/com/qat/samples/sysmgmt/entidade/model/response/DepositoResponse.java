@@ -47,17 +47,10 @@ public class DepositoResponse extends InquiryResponse
 		setDepositoList((List<Deposito>)coll);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString()
 	{
-		return "LocationResponse [getLocationList()=" + getDepositoList() + ", getResultsSetInfo()="
-				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
-				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
-				+ isOperationSuccess() + "]";
+		return "DepositoResponse [getDepositoList()=" + getDepositoList() + ", toString()=" + super.toString() + "]";
 	}
 
 }

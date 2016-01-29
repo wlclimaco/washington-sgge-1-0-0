@@ -149,18 +149,12 @@ public class DepositoCriteria implements Serializable
 		this.entidadeEnum = entidadeEnum;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString()
 	{
-		return "EmprIdCriteria [getNome()=" + getNome()
-				+ ", getEmprId()=" + getEmprId() + ", getCidade()=" + getCidade() + ", getStatus()=" + getStatus()
-				+ ", getId()=" + getId() + ", getRegime()=" + getRegime() + ", getEntidadeEnum()=" + getEntidadeEnum()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+		return "DepositoCriteria [getNome()=" + getNome() + ", getEmprId()=" + getEmprId() + ", getCidade()="
+				+ getCidade() + ", getStatus()=" + getStatus() + ", getId()=" + getId() + ", getRegime()="
+				+ getRegime() + ", getEntidadeEnum()=" + getEntidadeEnum() + ", toString()=" + super.toString() + "]";
 	}
 
 }

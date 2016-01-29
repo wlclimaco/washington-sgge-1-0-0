@@ -47,17 +47,10 @@ public class FilialResponse extends InquiryResponse
 		setFilialList((List<Filial>)coll);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString()
 	{
-		return "LocationResponse [getLocationList()=" + getFilialList() + ", getResultsSetInfo()="
-				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
-				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
-				+ isOperationSuccess() + "]";
+		return "FilialResponse [getFilialList()=" + getFilialList() + ", toString()=" + super.toString() + "]";
 	}
 
 }

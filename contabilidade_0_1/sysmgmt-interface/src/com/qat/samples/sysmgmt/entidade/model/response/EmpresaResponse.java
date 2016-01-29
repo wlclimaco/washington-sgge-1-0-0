@@ -7,7 +7,7 @@ import com.qat.framework.model.response.InquiryResponse;
 import com.qat.samples.sysmgmt.entidade.Empresa;
 
 /**
- * The Class LocationResponse.
+ * The Class EmpresaResponse.
  * 
  * @author abarros
  * @version 1.0
@@ -54,17 +54,10 @@ public class EmpresaResponse extends InquiryResponse
 		setEmpresaList((List<Empresa>)coll);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString()
 	{
-		return "LocationResponse [getLocationList()=" + getEmpresaList() + ", getResultsSetInfo()="
-				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
-				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
-				+ isOperationSuccess() + "]";
+		return "EmpresaResponse [getEmpresaList()=" + getEmpresaList() + ", toString()=" + super.toString() + "]";
 	}
 
 }

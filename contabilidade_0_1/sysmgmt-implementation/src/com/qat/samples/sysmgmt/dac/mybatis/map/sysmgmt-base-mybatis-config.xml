@@ -116,12 +116,13 @@
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/procedure.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/bundle.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/estado.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/entidade.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/cidade.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/cnae.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/classificacao.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/deposito.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/empresa.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/entidade.xml"/>
+
      	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/filial.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/entidade/dac/mybatis/map/regime.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/servico.xml"/>
