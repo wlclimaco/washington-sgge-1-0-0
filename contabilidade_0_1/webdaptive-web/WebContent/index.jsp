@@ -193,6 +193,7 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="startbootstrap/js/bootstrap.min.js"></script>
     <script src="startbootstrap/js/init.js"></script>
+     <script src="knockout/knockout.js"></script>
 
 </body>
 

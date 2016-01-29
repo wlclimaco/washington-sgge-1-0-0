@@ -12,6 +12,8 @@
 <link type="text/css" href="../styles/slick.pager.css" rel="stylesheet" />
 </head>
 <body>
+<p>First name: <strong>todo</strong></p>
+<p>Last name: <strong>todo</strong></p>
 	<div style="width:100%;height:100%;float:left;">
 		<div class="grid-header" style="width:100%">
 		    <span id="listcid" style="float:left; width: 16px; height: 16px; background-image:url('../images/text_list.png')" title="List Procedures"></span>

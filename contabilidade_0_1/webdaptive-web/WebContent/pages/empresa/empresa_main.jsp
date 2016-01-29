@@ -3,7 +3,9 @@
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
 
     <div id="wrapper">
-               <div class="navbar-default sidebar" role="navigation">
+		<div class="col-lg-12">
+			<div class="col-lg-3">
+               <div class="navbar-default sidebar" role="navigation" style="width:200px!important">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
 
@@ -56,10 +58,12 @@
 
                 <!-- /.sidebar-collapse -->
             </div>
-
+		</div>
+		<div class="col-lg-9">
 			<jsp:include page="../model/model_main.jsp"></jsp:include>
         <!-- /#page-wrapper -->
-
+		</div>
+		</div>
     </div>
 
 

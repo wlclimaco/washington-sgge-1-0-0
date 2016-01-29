@@ -635,6 +635,7 @@
 			"../scripts/chart.min.js",
 			"../thirdparty/jquery/custom/tableExport.js",
 			"../thirdparty/bootstrap-table/src/bootstrap-table.js",
+			"../thirdparty/knockout/knockout-3.3.0.js",
 
 		   <!--teste-->
 

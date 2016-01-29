@@ -3,6 +3,16 @@
 var ploader = new Slick.Data.RemoteModel();
 $(document).ready(function ()
 {
+
+	// This is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
+	function AppViewModel() {
+	    this.firstName = "Bert";
+	    this.lastName = "Bertington";
+	}
+
+	// Activates knockout.js
+	ko.applyBindings(new AppViewModel());
+
 	//initializes statusbar
 	$('#StatusBar').jnotifyInizialize({
         oneAtTime: true

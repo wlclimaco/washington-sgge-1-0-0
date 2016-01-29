@@ -16,7 +16,7 @@ public class EmpresaViewController extends EntidadeBaseController
 {
 
 	/** The Constant PROCEDURE_MVC_BAS_RETURN. */
-	private static final String PROCEDURE_MVC_BAS_RETURN = "/empresa/empresa_mvc_bas";
+	private static final String PROCEDURE_MVC_BAS_RETURN = "/empresa/empresa_main";
 
 	/** The Constant ZERO. */
 	private static final int ZERO = 0;
