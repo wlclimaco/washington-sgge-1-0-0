@@ -2,11 +2,9 @@
 	uri='http://www.springframework.org/security/tags'%>
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt'%>
 
-<sec:authorize access="hasAnyRole('ROLE_DOMAIN ADMIN', 'ROLE_ADMIN', 'ROLE_CSR')">
-
 	<script type="text/javascript">
 /**
- * @namespace pgsi.pages.location
+ * @namespace qat.pages.location
  * @fileoverview The init namespace for the Location Create Page.
  */
 	//Receives preloaded data
@@ -39,8 +37,6 @@
 
 $(document).ready(function()
 {
-	$.pgsi.progressBar.stopGlobal();
+	$.qat.progressBar.stopGlobal();
 });
 </script>
-
-</sec:authorize>

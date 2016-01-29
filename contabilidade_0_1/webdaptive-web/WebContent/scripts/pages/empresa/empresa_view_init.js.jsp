@@ -20,14 +20,14 @@
     </c:otherwise>
 </c:choose>
 console.log(oCidadeResponse);
-	if (!$.pgsi.isNullOrUndefined(oPreLoadResponse)) {
-		pgsi.pages.empresa.view.fnFillEmpresa(oPreLoadResponse);
+	if (!$.qat.isNullOrUndefined(oPreLoadResponse)) {
+		qat.pages.empresa.view.fnFillEmpresa(oPreLoadResponse);
 	}else{
-		$.pgsi.ajax.post({
+		$.qat.ajax.post({
 			sUrl 		: "api/empresa/fetch",
 			oRequest 	: {id:parseInt($.address.parameter("locationId"),10)},
 			fnCallback  : function(oResponse) {
-				pgsi.pages.empresa.view.fnFillEmpresa(oResponse);
+				qat.pages.empresa.view.fnFillEmpresa(oResponse);
 			}
 		});
 	}
@@ -36,9 +36,9 @@ console.log(oCidadeResponse);
 	{
 
 		e.preventDefault();
-		pgsi.util.actiondialog.launchActionDialog (
+		qat.util.actiondialog.launchActionDialog (
 			"insert",
-			pgsi.pages.note.dialogSettings.insert(
+			qat.pages.note.dialogSettings.insert(
 				$('#business-id').val(),
 				$('#company-name-field').text(),
 				1)
@@ -49,9 +49,9 @@ console.log(oCidadeResponse);
 	{
 
 		e.preventDefault();
-		pgsi.util.actiondialog.launchActionDialog (
+		qat.util.actiondialog.launchActionDialog (
 			"insert",
-			pgsi.pages.cnae.dialogSettings.insert(
+			qat.pages.cnae.dialogSettings.insert(
 				$('#business-id').val(),
 				$('#company-name-field').text(),
 				1)
@@ -62,9 +62,9 @@ console.log(oCidadeResponse);
 	{
 
 		e.preventDefault();
-		pgsi.util.actiondialog.launchActionDialog (
+		qat.util.actiondialog.launchActionDialog (
 			"insert",
-			pgsi.pages.plano.dialogSettings.insert(
+			qat.pages.plano.dialogSettings.insert(
 				$('#business-id').val(),
 				$('#company-name-field').text(),
 				1)
@@ -75,9 +75,9 @@ console.log(oCidadeResponse);
 	{
 
 		e.preventDefault();
-		pgsi.util.actiondialog.launchActionDialog (
+		qat.util.actiondialog.launchActionDialog (
 			"insert",
-			pgsi.pages.entidade.dialogSettings.insert(
+			qat.pages.entidade.dialogSettings.insert(
 				parseInt($.address.parameter("locationId"),10),
 				2,
 				'INSERT')
@@ -88,13 +88,13 @@ console.log(oCidadeResponse);
 	{
 
 		e.preventDefault();
-		pgsi.util.actiondialog.launchActionDialog (
+		qat.util.actiondialog.launchActionDialog (
 			"insert",
-			pgsi.pages.entidade.dialogSettings.insert(
+			qat.pages.entidade.dialogSettings.insert(
 					parseInt($.address.parameter("locationId"),10),
 				3,
 				'INSERT')
 		);
 	});
-$.pgsi.progressBar.stopGlobal();
+$.qat.progressBar.stopGlobal();
 </script>

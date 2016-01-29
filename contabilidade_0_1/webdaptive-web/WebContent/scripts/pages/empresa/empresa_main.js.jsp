@@ -5,7 +5,7 @@
 
 <script type="text/javascript">
 /**
- * @namespace pgsi.pages.location
+ * @namespace qat.pages.location
  * @fileoverview The main namespace for the Location List Page.
  */
 qat.pages.empresa = {

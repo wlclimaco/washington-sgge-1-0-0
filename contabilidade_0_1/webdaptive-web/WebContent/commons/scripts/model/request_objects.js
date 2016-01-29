@@ -136,6 +136,25 @@
 		this.maxPreQueryCount = 0;
 	};
 
+
+	qat.model.EmpresaInquiryRequest = function (_oUC, _iPageSize, _iStartPage, _bCount,_bCrit)
+	{
+		if (_oUC == null)
+		{
+			this.userContext = new qat.base.model.userContext();
+		}
+		else
+		{
+			this.userContext = _oUC;
+		}
+		this.pageSize = _iPageSize;
+		this.startPage = _iStartPage;
+		this.sortExpressions = null;
+		this.preQueryCount = _bCount;
+		this.maxPreQueryCount = 0;
+		this.criteria = _bCrit;
+	};
+
 	//PageData Object
 	qat.model.pageData = function(_pageSize, _startPage, _bRowsAvailable, _totalRows)
 	{
@@ -235,6 +254,8 @@
 //		this.returnList      = _bList;
 	//	this.returnListPaged = _bPagedList;
 	};
+
+	EmpresaInquiryRequest
 
 
 	qat.model.reqPlano = function(_oUC, _oEmbalagem, _bList, _bPagedList)

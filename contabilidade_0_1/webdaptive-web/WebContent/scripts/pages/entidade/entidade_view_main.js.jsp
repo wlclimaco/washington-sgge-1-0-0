@@ -1,12 +1,10 @@
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt' %>
 
-<sec:authorize access="hasAnyRole('ROLE_DOMAIN ADMIN', 'ROLE_ADMIN', 'ROLE_CSR')">
-
 <script type="text/javascript">
 
 
-pgsi.pages.entidade.view = {
+qat.pages.entidade.view = {
 
 	fillCnae : function(oCnaeList) {
 
@@ -27,12 +25,12 @@ pgsi.pages.entidade.view = {
 
 				sUser = oCnae.createUser;
 
-				if (!$.pgsi.isNullOrUndefined(oCnae.modifyDateUTC)) {
-					sDate = $.pgsi.date.format(new Date(oCnae.modifyDateUTC), "mm/dd/yy h:i A", true);
+				if (!$.qat.isNullOrUndefined(oCnae.modifyDateUTC)) {
+					sDate = $.qat.date.format(new Date(oCnae.modifyDateUTC), "mm/dd/yy h:i A", true);
 				}
 
 				else {
-					sDate = $.pgsi.date.format(new Date(oCnae.createDateUTC), "mm/dd/yy h:i A", true);
+					sDate = $.qat.date.format(new Date(oCnae.createDateUTC), "mm/dd/yy h:i A", true);
 				}
 
 				sNoteText = oCnae.description;
@@ -40,7 +38,7 @@ pgsi.pages.entidade.view = {
 				sCnaeNumber = oCnae.number;
 
 
-				sDelUpdLinks = "<div class='small-box'><div class='links viewNote'><a href='"+iNoteId+"'  class='ui-subtitle edit' title='" + $.pgsi.locale.get('commons.pages.edit') + "'> <span class='icon-small-button icon-nav icon-pencil edit'></span> <span>" + $.pgsi.locale.get('commons.pages.edit') +"</span></a><a href='"+iNoteId+"'  class='ui-subtitle delete' title='" + $.pgsi.locale.get('commons.pages.delete') + "'> <span class='icon-small-button icon-nav icon-trash-bin delete'></span> <span>"+$.pgsi.locale.get('commons.pages.delete')+"</span></a></div></div>";
+				sDelUpdLinks = "<div class='small-box'><div class='links viewNote'><a href='"+iNoteId+"'  class='ui-subtitle edit' title='" + $.qat.locale.get('commons.pages.edit') + "'> <span class='icon-small-button icon-nav icon-pencil edit'></span> <span>" + $.qat.locale.get('commons.pages.edit') +"</span></a><a href='"+iNoteId+"'  class='ui-subtitle delete' title='" + $.qat.locale.get('commons.pages.delete') + "'> <span class='icon-small-button icon-nav icon-trash-bin delete'></span> <span>"+$.qat.locale.get('commons.pages.delete')+"</span></a></div></div>";
 
 
 
@@ -58,7 +56,7 @@ pgsi.pages.entidade.view = {
 			}
 
 			else {
-				$("section.notes").find('div.container').append("<p class='empty'>" + $.pgsi.locale.get("page.business.view.note.empty") + "</p>");
+				$("section.notes").find('div.container').append("<p class='empty'>" + $.qat.locale.get("page.business.view.note.empty") + "</p>");
 			}
 
 			// Attach add/edit/delete events
@@ -90,9 +88,9 @@ pgsi.pages.entidade.view = {
 
 				$("#regime-field").text(oEmpresa.regime);
 
-				pgsi.pages.phone.view.fillFields(oEmpresa.telefones);
+				qat.pages.phone.view.fillFields(oEmpresa.telefones);
 
-				pgsi.pages.address.view.fillFields(oEmpresa.enderecos);
+				qat.pages.address.view.fillFields(oEmpresa.enderecos);
 				var sEmail = "";
 
 				for (var i = 0; i < oEmpresa.emails.length; i++) {
@@ -100,20 +98,20 @@ pgsi.pages.entidade.view = {
 				}
 				$('#phone-container').append(sEmail);
 
-				pgsi.pages.entidade.view.fillCnae(oEmpresa.cnaes)
+				qat.pages.entidade.view.fillCnae(oEmpresa.cnaes)
 
 		// Sets the page title
-	//	$.pgsi.pageLoader.title(oLocation.name, true);
+	//	$.qat.pageLoader.title(oLocation.name, true);
 
 		// fill phone fields
-//		pgsi.pages.phone.view.fillFields(oLocation.contactList);
+//		qat.pages.phone.view.fillFields(oLocation.contactList);
 		// fill address fields
-//		pgsi.pages.address.view.fillFields(oLocation.contactList);
+//		qat.pages.address.view.fillFields(oLocation.contactList);
 
-//		pgsi.version.versionBusiness = oLocation.version;
+//		qat.version.versionBusiness = oLocation.version;
 
 		// fill notes
-//		pgsi.pages.note.view.fill(oLocation.noteList, oLocation);
+//		qat.pages.note.view.fill(oLocation.noteList, oLocation);
 
 	},
 
@@ -124,5 +122,3 @@ pgsi.pages.entidade.view = {
 
 }
 </script>
-
-</sec:authorize>

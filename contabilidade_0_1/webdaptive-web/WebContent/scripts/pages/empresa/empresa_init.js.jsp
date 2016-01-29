@@ -1,7 +1,6 @@
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt' %>
 
-<sec:authorize access="hasAnyRole('ROLE_DOMAIN ADMIN', 'ROLE_ADMIN', 'ROLE_CSR')">
 <script type="text/javascript">
 /**
  * @namespace qat.pages.location
@@ -17,6 +16,15 @@ $(document).ready(function()
 		fnCallback 	: $.qat.progressBar.stopGlobal
 	});
 
+	<c:choose>
+	<c:when test="${empty empresaList}">
+    	var oPreLoadResponse = null;
+    </c:when>
+    <c:otherwise>
+    	var oPreLoadResponse = ${empresaList};
+    </c:otherwise>
+</c:choose>
+console.log(oPreLoadResponse)
 	/** * jQuery dataTable setup ** */
 	qat.pages.empresa.empresaTable = $('#data_list').dataTable($.qat.table.setTable(
 	{
@@ -28,7 +36,7 @@ $(document).ready(function()
 		ajax :
 		{
 			sObj		: "empresaList",
-			oRequest	: EmpresaInquiryRequest,
+			oRequest	: qat.model.EmpresaInquiryRequest,
 			fnRequest 	: qat.pages.entidade.fnRequestFilter
 		},
 
@@ -181,4 +189,3 @@ $(document).ready(function()
 
 });
 </script>
-</sec:authorize>

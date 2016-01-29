@@ -2,10 +2,9 @@
 	uri='http://www.springframework.org/security/tags'%>
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt'%>
 
-<sec:authorize access="hasAnyRole('ROLE_DOMAIN ADMIN', 'ROLE_ADMIN', 'ROLE_CSR')">
 
 	<script type="text/javascript">
-		pgsi.pages.empresa.form = {
+		qat.pages.empresa.form = {
 
 
 
@@ -45,24 +44,24 @@
 			ajaxCall : function(sUrlAdress, mainModelAction) {
 
 				// Remove input masks
-				pgsi.util.page.business.form.maskFields.fnUnmask();
+				qat.util.page.business.form.maskFields.fnUnmask();
 				// Validate the form
-				var bValidForm = pgsi.pages.empresa.form.validator.form();
+				var bValidForm = qat.pages.empresa.form.validator.form();
 
 				if (!bValidForm)
 				{
-					pgsi.util.page.business.form.maskFields.fnMask();
+					qat.util.page.business.form.maskFields.fnMask();
 					return false;
 				}
 
-				var request = pgsi.pages.empresa.form.fnFillRequestObject(mainModelAction);
+				var request = qat.pages.empresa.form.fnFillRequestObject(mainModelAction);
 
 				var fnCallback = function (oResponse){
 					if (oResponse.operationSuccess == true) {
 						$(this).dialog('close');
-						if (!$.pgsi.isNullOrUndefined(oResponse.empresaList[0]) && !$.pgsi.isNullOrUndefined(oResponse.empresaList[0].id)){
+						if (!$.qat.isNullOrUndefined(oResponse.empresaList[0]) && !$.qat.isNullOrUndefined(oResponse.empresaList[0].id)){
 							var nLocationId = oResponse.empresaList[0].id;
-							$.pgsi.pageLoader.load({
+							$.qat.pageLoader.load({
 								url: "empresa/view?locationId=" + nLocationId,
 								$content: $("#load"),
 								bStartProgressBar : false
@@ -70,13 +69,13 @@
 						}
 					}
 					else {
-						pgsi.pages.sendsolv.fnDialogMessageError("",{},oResponse,null,$.pgsi.locale.get("commons.dialog.error.title"),true);
+						qat.pages.sendsolv.fnDialogMessageError("",{},oResponse,null,$.qat.locale.get("commons.dialog.error.title"),true);
 					}
 
 				};
 
 				// Insert the Location
-				$.pgsi.ajax.post({
+				$.qat.ajax.post({
 					sUrl : sUrlAdress,
 					oRequest : request,
 					fnCallback : fnCallback
@@ -85,19 +84,19 @@
 
 			fnFillEmpresa : function(data,sModelAction) {
 
-				pgsi.util.page.form.fnInitForm();
+				qat.util.page.form.fnInitForm();
 
 				// fill location-specific fields
 				var oEmpresa = new Empresa(
 						id 			: parseInt($('#codigo').val(),10),
 						nome		: $('#nome').val(),
-						regine  	: pgsi.pages.regime.fnCreateRequest(sModelAction),
-						enderecos   : pgsi.pages.endereco.fnCreateRequest(sModelAction),
-						documentos	: pgsi.pages.documento.fnCreateRequest(sModelAction),
-						emails		: pgsi.pages.email.fnCreateRequest(sModelAction),
-						Telefones	: pgsi.pages.telefone.fnCreateRequest(sModelAction),
-						socios		: pgsi.pages.socio.fnCreateRequest(sModelAction),
-						cnaes		: pgsi.pages.cnae.fnCreateRequest(sModelAction),
+						regine  	: qat.pages.regime.fnCreateRequest(sModelAction),
+						enderecos   : qat.pages.endereco.fnCreateRequest(sModelAction),
+						documentos	: qat.pages.documento.fnCreateRequest(sModelAction),
+						emails		: qat.pages.email.fnCreateRequest(sModelAction),
+						Telefones	: qat.pages.telefone.fnCreateRequest(sModelAction),
+						socios		: qat.pages.socio.fnCreateRequest(sModelAction),
+						cnaes		: qat.pages.cnae.fnCreateRequest(sModelAction),
 						sModelAction: sModelAction
 				)
 				return oEmpresa;
@@ -107,7 +106,7 @@
 				var request = new EmpresaMaintenanceRequest();
 
 				// fill common location fields - method returns basic business objects (i.e things locations and orgs have in common)
-				request.empresa = pgsi.pages.empresa.form.fnFillEmpresa(sModelAction);
+				request.empresa = qat.pages.empresa.form.fnFillEmpresa(sModelAction);
 
 
 				return request;
@@ -115,5 +114,3 @@
 
 		};
 	</script>
-
-</sec:authorize>

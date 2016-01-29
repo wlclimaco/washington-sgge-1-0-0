@@ -1,12 +1,11 @@
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt' %>
 
-<sec:authorize access="hasAnyRole('ROLE_DOMAIN ADMIN', 'ROLE_ADMIN', 'ROLE_CSR')">
 
 <script type="text/javascript">
 
 
-pgsi.pages.empresa.view = {
+qat.pages.empresa.view = {
 
 	fillCnae : function(oCnaeList) {
 
@@ -21,19 +20,19 @@ pgsi.pages.empresa.view = {
 			var $container = $("section.cnae").find("div.container");
 
 			$("section.cnae").find(".col-title").find('a').unbind("click");
-			if (!$.pgsi.isNullOrUndefined(oCnaeList)){
-				if (!$.pgsi.isNullOrUndefined(oCnaeList[0].idCnae)){
+			if (!$.qat.isNullOrUndefined(oCnaeList)){
+				if (!$.qat.isNullOrUndefined(oCnaeList[0].idCnae)){
 					for (var i=0; i < oCnaeList.length; i++) {
 						oCnae = oCnaeList[i].idCnae;
 
 						sUser = oCnae.createUser;
 
-						if (!$.pgsi.isNullOrUndefined(oCnae.modifyDateUTC)) {
-							sDate = $.pgsi.date.format(new Date(oCnae.modifyDateUTC), "mm/dd/yy h:i A", true);
+						if (!$.qat.isNullOrUndefined(oCnae.modifyDateUTC)) {
+							sDate = $.qat.date.format(new Date(oCnae.modifyDateUTC), "mm/dd/yy h:i A", true);
 						}
 
 						else {
-							sDate = $.pgsi.date.format(new Date(oCnae.createDateUTC), "mm/dd/yy h:i A", true);
+							sDate = $.qat.date.format(new Date(oCnae.createDateUTC), "mm/dd/yy h:i A", true);
 						}
 
 						sNoteText = oCnae.descricao;
@@ -41,7 +40,7 @@ pgsi.pages.empresa.view = {
 						sCnaeNumber = oCnae.codigo + "      Cnae :"+ oCnae.cnae;
 
 
-						sDelUpdLinks = "<div class='small-box'><div class='links viewNote'><a href='"+iNoteId+"'  class='ui-subtitle edit' title='" + $.pgsi.locale.get('commons.pages.edit') + "'> <span class='icon-small-button icon-nav icon-pencil edit'></span> <span>" + $.pgsi.locale.get('commons.pages.edit') +"</span></a><a href='"+iNoteId+"'  class='ui-subtitle delete' title='" + $.pgsi.locale.get('commons.pages.delete') + "'> <span class='icon-small-button icon-nav icon-trash-bin delete'></span> <span>"+$.pgsi.locale.get('commons.pages.delete')+"</span></a></div></div>";
+						sDelUpdLinks = "<div class='small-box'><div class='links viewNote'><a href='"+iNoteId+"'  class='ui-subtitle edit' title='" + $.qat.locale.get('commons.pages.edit') + "'> <span class='icon-small-button icon-nav icon-pencil edit'></span> <span>" + $.qat.locale.get('commons.pages.edit') +"</span></a><a href='"+iNoteId+"'  class='ui-subtitle delete' title='" + $.qat.locale.get('commons.pages.delete') + "'> <span class='icon-small-button icon-nav icon-trash-bin delete'></span> <span>"+$.qat.locale.get('commons.pages.delete')+"</span></a></div></div>";
 
 
 
@@ -61,7 +60,7 @@ pgsi.pages.empresa.view = {
 			}
 
 			else {
-				$("section.notes").find('div.container').append("<p class='empty'>" + $.pgsi.locale.get("page.business.view.note.empty") + "</p>");
+				$("section.notes").find('div.container').append("<p class='empty'>" + $.qat.locale.get("page.business.view.note.empty") + "</p>");
 			}
 
 			// Attach add/edit/delete events
@@ -85,39 +84,39 @@ pgsi.pages.empresa.view = {
 			var $container = $("section.filial").find("div.container");
 
 			$("section.filial").find(".col-title").find('a').unbind("click");
-			if (!$.pgsi.isNullOrUndefined(oFilialList)){
-				if (!$.pgsi.isNullOrUndefined(oFilialList)){
+			if (!$.qat.isNullOrUndefined(oFilialList)){
+				if (!$.qat.isNullOrUndefined(oFilialList)){
 					for (var i=0; i < oFilialList.length; i++) {
 						oFilial = oFilialList[i];
 
 						sUser = oFilial.nome;
 
-						if (!$.pgsi.isNullOrUndefined(oFilial.modifyDateUTC)) {
-							sDate = $.pgsi.date.format(new Date(oFilial.modifyDateUTC), "mm/dd/yy h:i A", true);
+						if (!$.qat.isNullOrUndefined(oFilial.modifyDateUTC)) {
+							sDate = $.qat.date.format(new Date(oFilial.modifyDateUTC), "mm/dd/yy h:i A", true);
 						}
 
 						else {
-							sDate = $.pgsi.date.format(new Date(oFilial.createDateUTC), "mm/dd/yy h:i A", true);
+							sDate = $.qat.date.format(new Date(oFilial.createDateUTC), "mm/dd/yy h:i A", true);
 						}
 
 						sNoteText = oFilial.nome;
 						iNoteId = oFilial.id;
 						var cidade = "";
 						var estado = "";
-						if (!$.pgsi.isNullOrUndefined(oFilial.enderecos)){
+						if (!$.qat.isNullOrUndefined(oFilial.enderecos)){
 							for (var y=0; y < oFilial.enderecos.length; y++) {
 								var endereco = oFilial.enderecos[y];
-								if (!$.pgsi.isNullOrUndefined(endereco.cidade)){
+								if (!$.qat.isNullOrUndefined(endereco.cidade)){
 									cidade = endereco.cidade.nome
 								}
-								if (!$.pgsi.isNullOrUndefined(endereco.estado)){
+								if (!$.qat.isNullOrUndefined(endereco.estado)){
 									estado = endereco.estado.abreviacao
 								}
 								sFilialNumber = sFilialNumber + "("+endereco.cep + ") "+ endereco.logradouro +" "+endereco.numero+ " "+cidade+" "+estado+" <br>";
 							}
 						}
 
-						if (!$.pgsi.isNullOrUndefined(oFilial.documentos)){
+						if (!$.qat.isNullOrUndefined(oFilial.documentos)){
 							for (var y=0; y < oFilial.documentos.length; y++) {
 								var endereco = oFilial.documentos[y];
 								if(endereco.description === "CNPJ"){
@@ -126,7 +125,7 @@ pgsi.pages.empresa.view = {
 							}
 						}
 
-						sDelUpdLinks = "<div class='small-box'><div class='links viewNote'><a href='"+iNoteId+"'  class='ui-subtitle edit' title='" + $.pgsi.locale.get('commons.pages.edit') + "'> <span class='icon-small-button icon-nav icon-pencil edit'></span> <span>" + $.pgsi.locale.get('commons.pages.edit') +"</span></a><a href='"+iNoteId+"'  class='ui-subtitle delete' title='" + $.pgsi.locale.get('commons.pages.delete') + "'> <span class='icon-small-button icon-nav icon-trash-bin delete'></span> <span>"+$.pgsi.locale.get('commons.pages.delete')+"</span></a></div></div>";
+						sDelUpdLinks = "<div class='small-box'><div class='links viewNote'><a href='"+iNoteId+"'  class='ui-subtitle edit' title='" + $.qat.locale.get('commons.pages.edit') + "'> <span class='icon-small-button icon-nav icon-pencil edit'></span> <span>" + $.qat.locale.get('commons.pages.edit') +"</span></a><a href='"+iNoteId+"'  class='ui-subtitle delete' title='" + $.qat.locale.get('commons.pages.delete') + "'> <span class='icon-small-button icon-nav icon-trash-bin delete'></span> <span>"+$.qat.locale.get('commons.pages.delete')+"</span></a></div></div>";
 
 
 
@@ -148,7 +147,7 @@ pgsi.pages.empresa.view = {
 			}
 
 			else {
-				$("section.notes").find('div.container').append("<p class='empty'>" + $.pgsi.locale.get("page.business.view.note.empty") + "</p>");
+				$("section.notes").find('div.container').append("<p class='empty'>" + $.qat.locale.get("page.business.view.note.empty") + "</p>");
 			}
 
 			// Attach add/edit/delete events
@@ -172,32 +171,32 @@ pgsi.pages.empresa.view = {
 			var $container = $("section.deposito").find("div.container");
 
 			$("section.deposito").find(".col-title").find('a').unbind("click");
-			if (!$.pgsi.isNullOrUndefined(oFilialList)){
-				if (!$.pgsi.isNullOrUndefined(oFilialList)){
+			if (!$.qat.isNullOrUndefined(oFilialList)){
+				if (!$.qat.isNullOrUndefined(oFilialList)){
 					for (var i=0; i < oFilialList.length; i++) {
 						oFilial = oFilialList[i];
 
 						sUser = oFilial.nome;
 
-						if (!$.pgsi.isNullOrUndefined(oFilial.modifyDateUTC)) {
-							sDate = $.pgsi.date.format(new Date(oFilial.modifyDateUTC), "mm/dd/yy h:i A", true);
+						if (!$.qat.isNullOrUndefined(oFilial.modifyDateUTC)) {
+							sDate = $.qat.date.format(new Date(oFilial.modifyDateUTC), "mm/dd/yy h:i A", true);
 						}
 
 						else {
-							sDate = $.pgsi.date.format(new Date(oFilial.createDateUTC), "mm/dd/yy h:i A", true);
+							sDate = $.qat.date.format(new Date(oFilial.createDateUTC), "mm/dd/yy h:i A", true);
 						}
 
 						sNoteText = oFilial.nome;
 						iNoteId = oFilial.id;
 
-						if (!$.pgsi.isNullOrUndefined(oFilial.enderecos)){
+						if (!$.qat.isNullOrUndefined(oFilial.enderecos)){
 							for (var y=0; y < oFilial.enderecos.length; y++) {
 								var endereco = oFilial.enderecos[y];
 								sFilialNumber = sFilialNumber + "("+endereco.cep + ") "+ endereco.logradouro +" "+endereco.numero+ " "+endereco.cidade.nome+" "+endereco.estado.abreviacao+" <br>";
 							}
 						}
 
-						if (!$.pgsi.isNullOrUndefined(oFilial.documentos)){
+						if (!$.qat.isNullOrUndefined(oFilial.documentos)){
 							for (var y=0; y < oFilial.documentos.length; y++) {
 								var endereco = oFilial.documentos[y];
 								if(endereco.description === "CNPJ"){
@@ -206,7 +205,7 @@ pgsi.pages.empresa.view = {
 							}
 						}
 
-						sDelUpdLinks = "<div class='small-box'><div class='links viewNote'><a href='"+iNoteId+"'  class='ui-subtitle edit' title='" + $.pgsi.locale.get('commons.pages.edit') + "'> <span class='icon-small-button icon-nav icon-pencil edit'></span> <span>" + $.pgsi.locale.get('commons.pages.edit') +"</span></a><a href='"+iNoteId+"'  class='ui-subtitle delete' title='" + $.pgsi.locale.get('commons.pages.delete') + "'> <span class='icon-small-button icon-nav icon-trash-bin delete'></span> <span>"+$.pgsi.locale.get('commons.pages.delete')+"</span></a></div></div>";
+						sDelUpdLinks = "<div class='small-box'><div class='links viewNote'><a href='"+iNoteId+"'  class='ui-subtitle edit' title='" + $.qat.locale.get('commons.pages.edit') + "'> <span class='icon-small-button icon-nav icon-pencil edit'></span> <span>" + $.qat.locale.get('commons.pages.edit') +"</span></a><a href='"+iNoteId+"'  class='ui-subtitle delete' title='" + $.qat.locale.get('commons.pages.delete') + "'> <span class='icon-small-button icon-nav icon-trash-bin delete'></span> <span>"+$.qat.locale.get('commons.pages.delete')+"</span></a></div></div>";
 
 
 
@@ -228,7 +227,7 @@ pgsi.pages.empresa.view = {
 			}
 
 			else {
-				$("section.notes").find('div.container').append("<p class='empty'>" + $.pgsi.locale.get("page.business.view.note.empty") + "</p>");
+				$("section.notes").find('div.container').append("<p class='empty'>" + $.qat.locale.get("page.business.view.note.empty") + "</p>");
 			}
 
 			// Attach add/edit/delete events
@@ -241,7 +240,7 @@ pgsi.pages.empresa.view = {
 		fillDocumento : function(oDocumentoList,description) {
 			var iNumber=0;
 
-			if (!$.pgsi.isNullOrUndefined(oDocumentoList)){
+			if (!$.qat.isNullOrUndefined(oDocumentoList)){
 				for (var y=0; y < oDocumentoList.length; y++) {
 					if(oDocumentoList[y].description == description){
 						iNumber = oDocumentoList[y].numero;
@@ -267,23 +266,23 @@ pgsi.pages.empresa.view = {
 			var $container = $("section.plano").find("div.container");
 
 			$("section.plano").find(".col-title").find('a').unbind("click");
-			if (!$.pgsi.isNullOrUndefined(oPlanoList)){
-				if (!$.pgsi.isNullOrUndefined(oPlanoList)){
+			if (!$.qat.isNullOrUndefined(oPlanoList)){
+				if (!$.qat.isNullOrUndefined(oPlanoList)){
 					for (var i=0; i < oPlanoList.length; i++) {
 						oPlano = oPlanoList[i];
 
 
-						if (!$.pgsi.isNullOrUndefined(oPlano.modifyDateUTC)) {
-							sDate = $.pgsi.date.format(new Date(oPlano.modifyDateUTC), "mm/dd/yy h:i A", true);
+						if (!$.qat.isNullOrUndefined(oPlano.modifyDateUTC)) {
+							sDate = $.qat.date.format(new Date(oPlano.modifyDateUTC), "mm/dd/yy h:i A", true);
 						}
 
 						else {
-							sDate = $.pgsi.date.format(new Date(oPlano.createDateUTC), "mm/dd/yy h:i A", true);
+							sDate = $.qat.date.format(new Date(oPlano.createDateUTC), "mm/dd/yy h:i A", true);
 						}
-						if (!$.pgsi.isNullOrUndefined(oPlano.produto)){
+						if (!$.qat.isNullOrUndefined(oPlano.produto)){
 							sUser = oPlano.produto.produto;
 
-							if (!$.pgsi.isNullOrUndefined(oPlano.produto.precoList)){
+							if (!$.qat.isNullOrUndefined(oPlano.produto.precoList)){
 								for (var y=0; y < oPlano.produto.precoList.length; y++) {
 									if(oPlano.produto.precoList[y].precoTypeEnum == "PLANO"){
 										fValor = oPlano.produto.precoList[y].valor;
@@ -292,13 +291,13 @@ pgsi.pages.empresa.view = {
 							}
 						}
 
-							sNoteText = $.pgsi.date.format(new Date(oPlano.dataInicio), "mm/dd/yy h:i A", true)+" - "+$.pgsi.date.format(new Date(oPlano.dataFinal), "mm/dd/yy h:i A", true);
+							sNoteText = $.qat.date.format(new Date(oPlano.dataInicio), "mm/dd/yy h:i A", true)+" - "+$.qat.date.format(new Date(oPlano.dataFinal), "mm/dd/yy h:i A", true);
 							iNoteId = oPlano.id;
 							sCnpj = oPlano.numeroContrato || "0000-00";
 
 
 
-						sDelUpdLinks = "<div class='small-box'><div class='links viewNote'><a href='"+iNoteId+"'  class='ui-subtitle edit' title='" + $.pgsi.locale.get('commons.pages.edit') + "'> <span class='icon-small-button icon-nav icon-pencil edit'></span> <span>" + $.pgsi.locale.get('commons.pages.edit') +"</span></a><a href='"+iNoteId+"'  class='ui-subtitle delete' title='" + $.pgsi.locale.get('commons.pages.delete') + "'> <span class='icon-small-button icon-nav icon-trash-bin delete'></span> <span>"+$.pgsi.locale.get('commons.pages.delete')+"</span></a></div></div>";
+						sDelUpdLinks = "<div class='small-box'><div class='links viewNote'><a href='"+iNoteId+"'  class='ui-subtitle edit' title='" + $.qat.locale.get('commons.pages.edit') + "'> <span class='icon-small-button icon-nav icon-pencil edit'></span> <span>" + $.qat.locale.get('commons.pages.edit') +"</span></a><a href='"+iNoteId+"'  class='ui-subtitle delete' title='" + $.qat.locale.get('commons.pages.delete') + "'> <span class='icon-small-button icon-nav icon-trash-bin delete'></span> <span>"+$.qat.locale.get('commons.pages.delete')+"</span></a></div></div>";
 						sNoteList = sNoteList + "<div class='outer-box'><div class='box note'>" + sDelUpdLinks + "<span class='bold'>" + sUser + "</span><span class='date'>" + sDate +"</span><p class='full-text hide'>" +fValor+ "<br>" + sNoteText + "</p><p></p><div class='text_here'><span class='ellipsis_text'><span>"+fValor+"</span><br><sup>" +sNoteText+ "<br>" + sCnpj + "</sup></span></div></div></div>";
 						sNoteText = "";
 						sCnpj = "";
@@ -320,7 +319,7 @@ pgsi.pages.empresa.view = {
 			}
 
 			else {
-				$("section.notes").find('div.container').append("<p class='empty'>" + $.pgsi.locale.get("page.business.view.note.empty") + "</p>");
+				$("section.notes").find('div.container').append("<p class='empty'>" + $.qat.locale.get("page.business.view.note.empty") + "</p>");
 			}
 
 			// Attach add/edit/delete events
@@ -334,18 +333,18 @@ pgsi.pages.empresa.view = {
 
 			var fnCallBackFetch = function(oResponseFetch) {
 				if (oResponseFetch.operationSuccess == true) {
-					pgsi.pages.empresa.view.fnFillEmpresa(oResponseFetch);
+					qat.pages.empresa.view.fnFillEmpresa(oResponseFetch);
 
 					$("#action-dialog").dialog('close');
 				}
 				else{
-					pgsi.pages.sendsolv.fnDialogMessageError("",{},oResponseFetch,null,$.pgsi.locale.get("commons.dialog.error.title"),true);
+					qat.pages.sendsolv.fnDialogMessageError("",{},oResponseFetch,null,$.qat.locale.get("commons.dialog.error.title"),true);
 				}
-				$.pgsi.progressBar.stop();
+				$.qat.progressBar.stop();
 			}
 
 
-			$.pgsi.ajax.post({
+			$.qat.ajax.post({
 				 sUrl       : "api/empresa/fetch",
 				 oRequest   : {id:parseInt($.address.parameter("locationId"),10)},
 				 fnCallback : fnCallBackFetch
@@ -366,19 +365,19 @@ console.log(oEmpresa)
 
 
 
-				$("#cnpj-field").text(pgsi.pages.empresa.view.fillDocumento(oEmpresa.documentos,"CNPJ"));
+				$("#cnpj-field").text(qat.pages.empresa.view.fillDocumento(oEmpresa.documentos,"CNPJ"));
 
-				$("#im-field").text(pgsi.pages.empresa.view.fillDocumento(oEmpresa.documentos,"IM"));
+				$("#im-field").text(qat.pages.empresa.view.fillDocumento(oEmpresa.documentos,"IM"));
 
-				$("#IE-field").text(pgsi.pages.empresa.view.fillDocumento(oEmpresa.documentos,"IE"));
+				$("#IE-field").text(qat.pages.empresa.view.fillDocumento(oEmpresa.documentos,"IE"));
 
 
 
 				$("#regime-field").text(oEmpresa.regime.descricao);
 
-				pgsi.pages.phone.view.fillFields(oEmpresa.telefones);
+				qat.pages.phone.view.fillFields(oEmpresa.telefones);
 
-				pgsi.pages.address.view.fillFields(oEmpresa.enderecos);
+				qat.pages.address.view.fillFields(oEmpresa.enderecos);
 				var sEmail = "";
 
 				for (var i = 0; i < oEmpresa.emails.length; i++) {
@@ -386,26 +385,26 @@ console.log(oEmpresa)
 				}
 				$('#phone-container').append(sEmail);
 
-				pgsi.pages.empresa.view.fillCnae(oEmpresa.cnaes);
+				qat.pages.empresa.view.fillCnae(oEmpresa.cnaes);
 
-				pgsi.pages.empresa.view.fillFilial(oEmpresa.filialList);
+				qat.pages.empresa.view.fillFilial(oEmpresa.filialList);
 
-				pgsi.pages.empresa.view.fillDeposito(oEmpresa.depositoList);
+				qat.pages.empresa.view.fillDeposito(oEmpresa.depositoList);
 
-				pgsi.pages.empresa.view.fillPlano(oEmpresa.planoList);
+				qat.pages.empresa.view.fillPlano(oEmpresa.planoList);
 
 		// Sets the page title
-	//	$.pgsi.pageLoader.title(oLocation.name, true);
+	//	$.qat.pageLoader.title(oLocation.name, true);
 
 		// fill phone fields
-//		pgsi.pages.phone.view.fillFields(oLocation.contactList);
+//		qat.pages.phone.view.fillFields(oLocation.contactList);
 		// fill address fields
-//		pgsi.pages.address.view.fillFields(oLocation.contactList);
+//		qat.pages.address.view.fillFields(oLocation.contactList);
 
-//		pgsi.version.versionBusiness = oLocation.version;
+//		qat.version.versionBusiness = oLocation.version;
 
 		// fill notes
-		pgsi.pages.note.view.fill(oEmpresa.notes, "");
+		qat.pages.note.view.fill(oEmpresa.notes, "");
 
 	},
 
@@ -416,5 +415,3 @@ console.log(oEmpresa)
 
 }
 </script>
-
-</sec:authorize>
