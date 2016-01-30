@@ -28,7 +28,6 @@ import com.qat.samples.sysmgmt.entidade.dacd.DocumentosDACD;
 import com.qat.samples.sysmgmt.entidade.dacd.EmailDACD;
 import com.qat.samples.sysmgmt.entidade.dacd.EnderecoDACD;
 import com.qat.samples.sysmgmt.entidade.dacd.HistoricoDACD;
-import com.qat.samples.sysmgmt.entidade.dacd.NotesDACD;
 import com.qat.samples.sysmgmt.entidade.dacd.PlanoDACD;
 import com.qat.samples.sysmgmt.entidade.dacd.SociosDACD;
 import com.qat.samples.sysmgmt.entidade.dacd.StatusDACD;
@@ -52,7 +51,6 @@ import com.qat.samples.sysmgmt.util.dac.ICnaeDAC;
 import com.qat.samples.sysmgmt.util.dac.IDocumentoDAC;
 import com.qat.samples.sysmgmt.util.dac.IEmailDAC;
 import com.qat.samples.sysmgmt.util.dac.IHistoricoDAC;
-import com.qat.samples.sysmgmt.util.dac.INoteDAC;
 import com.qat.samples.sysmgmt.util.dac.IPlanoDAC;
 import com.qat.samples.sysmgmt.util.dac.ISociosDAC;
 import com.qat.samples.sysmgmt.util.dac.IStatusDAC;
@@ -118,7 +116,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 
 	IPlanoDAC planoDAC;
 
-	INoteDAC noteDAC;
+	// INoteDAC noteDAC;
 
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(EmpresaDACImpl.class);
@@ -223,18 +221,18 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 	/**
 	 * @return the noteDAC
 	 */
-	public INoteDAC getNoteDAC()
-	{
-		return noteDAC;
-	}
-
-	/**
-	 * @param noteDAC the noteDAC to set
-	 */
-	public void setNoteDAC(INoteDAC noteDAC)
-	{
-		this.noteDAC = noteDAC;
-	}
+	// public INoteDAC getNoteDAC()
+	// {
+	// return noteDAC;
+	// }
+	//
+	// /**
+	// * @param noteDAC the noteDAC to set
+	// */
+	// public void setNoteDAC(INoteDAC noteDAC)
+	// {
+	// this.noteDAC = noteDAC;
+	// }
 
 	/**
 	 * @return the planoDAC
@@ -944,11 +942,11 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		}
 		if (!ValidationUtil.isNullOrEmpty(empresa.getNotes()))
 		{
-			insertCount +=
-					NotesDACD.maintainNoteAssociations(empresa.getNotes(), response, empresa.getId(), null,
-							null,
-							tabela, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getEmprId(),
-							empresa.getCreateUser(), processId, historicoId);
+			// insertCount +=
+			// NotesDACD.maintainNoteAssociations(empresa.getNotes(), response, empresa.getId(), null,
+			// null,
+			// tabela, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getEmprId(),
+			// empresa.getCreateUser(), processId, historicoId);
 		}
 
 		if (insertCount > 0)

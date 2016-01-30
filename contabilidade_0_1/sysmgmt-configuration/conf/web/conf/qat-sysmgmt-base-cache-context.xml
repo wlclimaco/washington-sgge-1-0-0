@@ -109,7 +109,7 @@
  <!-- Bundle Cache -->
   <aop:config>
 	<!-- Pointcuts fetchRegimeByRequest-->
-	<aop:pointcut id="cidadeCacheObject" expression="bean(empresaDACTarget) and execution(* fetch*(..)) and !execution(* fetchRegimeByRequest(..)) and !execution(* fetchCidadeByRequest(..)) and !execution(* fetchClassificacaoByRequest(..)) and !execution(* fetchCnaeByRequest(..))" />
+	<aop:pointcut id="cidadeCacheObject" expression="bean(empresaDACTarget) and execution(* fetch*(..)) and !execution(* fetchRegimeByRequest(..)) and !execution(* fetchCidadeByRequest(..)) and !execution(* fetchClassificacaoByRequest(..)) and !execution(* fetchCnaeByRequest(..)) and !execution(* fetchEmpresaByRequest(..))" />
 	<aop:pointcut id="cidadeFlushInsert" expression="bean(empresaDACTarget) and execution(* insert*(..))" />
 	<aop:pointcut id="cidadeFlushUpdate" expression="bean(empresaDACTarget) and execution(* update*(..))" />
 	<aop:pointcut id="cidadeFlushDelete" expression="bean(empresaDACTarget) and execution(* delete*(..))" />
@@ -201,22 +201,6 @@
 		<aop:after pointcut-ref="produtoFlushInsert" method="flushCache" />
 		<aop:after pointcut-ref="produtoFlushUpdate" method="flushCache" />
 		<aop:after pointcut-ref="produtoFlushDelete" method="flushCache" />
-	</aop:aspect>
- </aop:config>
-
-
-    <aop:config>
-	<!-- Pointcuts -->
-	<aop:pointcut id="empresaCacheObject" expression="bean(empresaDACTarget) and execution(* fetch*(..)) and !execution(* fetch*ByRequest(..))" />
-	<aop:pointcut id="empresaFlushInsert" expression="bean(empresaDACTarget) and execution(* insert*(..))" />
-	<aop:pointcut id="empresaFlushUpdate" expression="bean(empresaDACTarget) and execution(* update*(..))" />
-	<aop:pointcut id="empresaFlushDelete" expression="bean(empresaDACTarget) and execution(* delete*(..))" />
-	<!-- Aspects -->
-	<aop:aspect id="procedureCacheAspects" ref="procedureCacheAspect">
-		<aop:around pointcut-ref="empresaCacheObject" method="cacheObject"/>
-		<aop:after pointcut-ref="empresaFlushInsert" method="flushCache" />
-		<aop:after pointcut-ref="empresaFlushUpdate" method="flushCache" />
-		<aop:after pointcut-ref="empresaFlushDelete" method="flushCache" />
 	</aop:aspect>
  </aop:config>
 
