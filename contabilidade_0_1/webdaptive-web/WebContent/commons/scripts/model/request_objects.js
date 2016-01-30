@@ -255,9 +255,6 @@
 	//	this.returnListPaged = _bPagedList;
 	};
 
-	EmpresaInquiryRequest
-
-
 	qat.model.reqPlano = function(_oUC, _oEmbalagem, _bList, _bPagedList)
 	{
 		if (_oUC == null)

@@ -2,23 +2,114 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
 
-<nav class="secondary">
-	<a class="alist" href="organization" title='<s:message code="commons.pages.customers" text="default text" />'>
-		<span><s:message code="commons.pages.customers" text="default text" /></span>
-	</a>
-	<span class="icon-nav icon-angle-right add-business">
-		<span class="add-business">
-			<s:message code="commons.pages.organizationadd" text="default text" />
-		</span>
-	</span>
-	<span id="company-name"></span>
-</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<form role="form">
+				<div class="form-group">
 
-<h2 id="title-create-organization">
-	<s:message code="commons.pages.organizationadd" text="default" />
-</h2>
+					<label for="exampleInputEmail1">
+						Email address
+					</label>
+					<input type="email" class="form-control" id="exampleInputEmail1" />
+				</div>
+				<div class="form-group">
 
-<jsp:include page="../business/business_create.jsp" flush="true" />
+					<label for="exampleInputPassword1">
+						Password
+					</label>
+					<input type="password" class="form-control" id="exampleInputPassword1" />
+				</div>
+				<div class="form-group">
 
-<jsp:include page="../../scripts/pages/organization/organization_create_main.js.jsp" flush="true" />
-<jsp:include page="../../scripts/pages/organization/organization_create_init.js.jsp" flush="true" />
+					<label for="exampleInputFile">
+						File input
+					</label>
+					<input type="file" id="exampleInputFile" />
+					<p class="help-block">
+						Example block-level help text here.
+					</p>
+				</div>
+				<div class="checkbox">
+
+					<label>
+						<input type="checkbox" /> Check me out
+					</label>
+				</div>
+				<button type="submit" class="btn btn-default">
+					Submit
+				</button>
+			</form>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Panel title
+					</h3>
+				</div>
+				<div class="panel-body">
+					Panel content
+				</div>
+				<div class="panel-footer">
+					Panel footer
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Panel title
+					</h3>
+				</div>
+				<div class="panel-body">
+					Panel content
+				</div>
+				<div class="panel-footer">
+					Panel footer
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Panel title
+					</h3>
+				</div>
+				<div class="panel-body">
+					Panel content
+				</div>
+				<div class="panel-footer">
+					Panel footer
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
+			<ul class="pagination">
+				<li>
+					<a href="#">Prev</a>
+				</li>
+				<li>
+					<a href="#">1</a>
+				</li>
+				<li>
+					<a href="#">2</a>
+				</li>
+				<li>
+					<a href="#">3</a>
+				</li>
+				<li>
+					<a href="#">4</a>
+				</li>
+				<li>
+					<a href="#">5</a>
+				</li>
+				<li>
+					<a href="#">Next</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

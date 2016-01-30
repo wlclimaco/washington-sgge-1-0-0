@@ -1,5 +1,6 @@
 package com.qat.webdaptive.controller;
 
+import org.apache.http.HttpRequest;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -220,7 +221,8 @@ public class EntidadeBaseController
 	// }
 
 	// empresa
-	protected ModelAndView empresaMAV(EmpresaInquiryRequest request, String returnViewName)
+	protected ModelAndView empresaMAV(EmpresaInquiryRequest request, String returnViewName, boolean b,
+			HttpRequest requestt)
 	{
 		ModelAndView modelAndView = new ModelAndView(returnViewName);
 		ObjectMapper mapper = new ObjectMapper();

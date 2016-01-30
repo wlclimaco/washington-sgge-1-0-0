@@ -11,10 +11,23 @@ var qat = {
 	base 	: {
 		model : {}
 	},
+	util :{
+		actiondialog :{
+			launchActionDialog : {}
+		}
+	},
 	pages :{
 		servico : {},
 		plano : {},
-		entidade : {},
-		empresa : {}
+		entidade : {
+			dialogSettings:{}
+		},
+		empresa : {},
+		error :{}
+	},
+	settings :{
+		userContext: {
+			userId : "rod"
+		}
 	}
 };

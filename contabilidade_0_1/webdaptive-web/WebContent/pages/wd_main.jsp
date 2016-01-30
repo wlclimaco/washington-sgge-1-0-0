@@ -647,7 +647,8 @@
 
 		   "../commons/scripts/model/domain_objects.js",
            "../commons/scripts/widget/slick.pager.js",
-"../thirdparty/jquery/jquery.dynatree.min.js"
+"../thirdparty/jquery/jquery.dynatree.min.js",
+"../scripts/util/actiondialog.js"
 		//   "../scripts/util/base.js"
 	);
 </script>
