@@ -16,9 +16,19 @@
 	        <li><a href="../empresa/fetchEmpresasByRequestBAS" title="qatmvctab-1"><span>Empresa</span></a></li>
 		</sec:authorize>
 	</ul>
+	<ul>
+		<sec:authorize access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+	        <li><a href="../empresa/addEmpresasByRequestBAS" title="qatmvctab-2"><span>add Empresa</span></a></li>
+		</sec:authorize>
+	</ul>
 	<div class="tabscontent">
 		<sec:authorize access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
 			<div id="qatmvctab-1"></div>
+		</sec:authorize>
+	</div>
+	<div class="tabscontent">
+		<sec:authorize access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
+			<div id="qatmvctab-2"></div>
 		</sec:authorize>
 	</div>
 </div>

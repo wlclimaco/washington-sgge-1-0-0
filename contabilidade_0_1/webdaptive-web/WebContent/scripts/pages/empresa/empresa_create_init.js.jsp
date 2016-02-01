@@ -3,40 +3,64 @@
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt'%>
 
 	<script type="text/javascript">
-/**
- * @namespace qat.pages.location
- * @fileoverview The init namespace for the Location Create Page.
- */
-	//Receives preloaded data
-	<c:choose>
-		<c:when test="${empty response}">
-	    	var oPreLoadResponse = null;
-	    </c:when>
-	    <c:otherwise>
-	    	var oPreLoadResponse = ${response};
-	    </c:otherwise>
-	</c:choose>
-
-	<c:choose>
-		<c:when test="${empty regime}">
-	    	var oRegime = null;
-	    </c:when>
-	    <c:otherwise>
-	    	var oRegime = ${regime};
-	    </c:otherwise>
-	</c:choose>
-
-	<c:choose>
-		<c:when test="${empty cnae}">
-	    	var oCnae = null;
-	    </c:when>
-	    <c:otherwise>
-	    	var oCnae = ${cnae};
-	    </c:otherwise>
-	</c:choose>
 
 $(document).ready(function()
 {
-	$.qat.progressBar.stopGlobal();
+
+	var initialData = [
+    { firstName: "Danny", lastName: "LaRusso", phones: [
+        { type: "Mobile", number: "(555) 121-2121" },
+        { type: "Home", number: "(555) 123-4567"}]
+    },
+    { firstName: "Sensei", lastName: "Miyagi", phones: [
+        { type: "Mobile", number: "(555) 444-2222" },
+        { type: "Home", number: "(555) 999-1212"}]
+    },
+	{phones: [
+        { type: "Mobile", number: "(555) 121-2121" },
+        { type: "Home", number: "(555) 123-4567"}]
+    },
+	{ socios :[
+		{nome:"washington",cpf:"057.901.676-59",cota:"80"},
+		{nome:"livia",cpf:"058.900.600-60",cota:"20"}
+	]
+
+	}
+];
+
+var ContactsModel = function(contacts) {
+    var self = this;
+
+    phones = ko.observableArray([{type: "",number: ""}])
+	socios = ko.observableArray([{nome: "",cpf: "",cota: ""}])
+
+    self.addPhone = function() {
+        phones.push({
+            type: "",
+            number: ""
+        });
+    };
+
+    self.removePhone = function(phone) {
+        $.each(self.phones, function() { this.phones.remove(phone) })
+    };
+	self.addSocio = function() {
+        socios.push({
+            nome: "",
+            cpf: "",
+			cota: ""
+        });
+    };
+
+    self.removePhone = function(phone) {
+        $.each(self.phones, function() { this.phones.remove(phone) })
+    };
+
+	self.removePhone = function(socio) {
+        $.each(self.socios, function() { this.socios.remove(socio) })
+    };
+};
+
+ko.applyBindings(new ContactsModel(initialData));
 });
 </script>

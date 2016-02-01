@@ -58,4 +58,11 @@ public class EmpresaViewController extends EntidadeBaseController
 		return empresaMAV(requestEmpresa, VIEW_EMPRESA_DIALOG_ADD, true, request);
 	}
 
+	@RequestMapping(value = "/addEmpresasByRequestBAS", method = RequestMethod.GET)
+	public ModelAndView addEmpresasByRequestBAS()
+	{
+
+		return new ModelAndView("/empresa/empresa_create");
+	}
+
 }

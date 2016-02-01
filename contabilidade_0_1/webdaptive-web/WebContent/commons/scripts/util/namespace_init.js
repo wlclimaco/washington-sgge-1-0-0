@@ -22,7 +22,9 @@ var qat = {
 		entidade : {
 			dialogSettings:{}
 		},
-		empresa : {},
+		empresa : {
+			form:{}
+		},
 		error :{}
 	},
 	settings :{
