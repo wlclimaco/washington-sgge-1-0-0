@@ -15,7 +15,29 @@ $(document).ready(function()
 
 
 };
+				self.addPhone = function() {
+					debugger
+					viewModel.empresa.telefone().push({
+						ddd: "",
+						numero:"",
+						telefoneTypeEnumValue:""
+					})
+				};
 
+				self.removePhone = function(phone) {
+
+				};
+				self.addSocio = function() {
+
+				};
+
+				self.removePhone = function(phone) {
+
+				};
+
+				self.removePhone = function(socio) {
+
+				};
 
 			ko.applyBindings(viewModel);
 			debugger
