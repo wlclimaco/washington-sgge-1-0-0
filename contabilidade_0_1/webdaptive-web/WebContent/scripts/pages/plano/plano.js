@@ -24,7 +24,7 @@ var planoModule = (function () {
 			self.servicos = ko.observable( plano ? (new servico.SERVICO(plano.servico) || {}: {});
 			self.imagens = ko.observable( plano ? (new imagem.IMAGEM(plano.imagem) || {}: {});
         } catch (e) {
-            JL(settings.jsFile).fatalException('Exception!', e);
+
         }
     }
 

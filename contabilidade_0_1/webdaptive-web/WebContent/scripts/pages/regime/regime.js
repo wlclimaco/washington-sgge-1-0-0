@@ -7,7 +7,7 @@ var regimeModule = (function () {
 
     //Request Regime default structure
     function REGIME(regime) {
-        try {
+    	try {
             var self = this;
             self.id = ko.observable( regime ? (regime.id || 0) : 0);
             self.nome = ko.observable( regime ? (regime.nome || "") : "");
@@ -16,8 +16,8 @@ var regimeModule = (function () {
         	self.createDateUTC = ko.observable( regime ? (regime.create_date || "") : "");
         	self.modifyUser = ko.observable( regime ? (regime.modify_user || "") : "");
         	self.modifyDateUTC = ko.observable( regime ? (regime.modify_date || "") : "");
-        } catch (e) {
-            JL(settings.jsFile).fatalException('Exception!', e);
+    	} catch (e) {
+        	console.log(e);
         }
     }
 
