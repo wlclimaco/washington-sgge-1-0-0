@@ -42,6 +42,8 @@ public class Entidade extends ModelCosmeDamiao
 
 	private List<CnaeEmpresa> cnaes;
 
+	private List<Usuario> usuarios;
+
 	/**
 	 * Default constructor.
 	 */

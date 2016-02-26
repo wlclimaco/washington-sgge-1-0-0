@@ -20,11 +20,11 @@ var planoModule = (function () {
         	self.createDateUTC = ko.observable( plano ? (plano.create_date || "") : "");
         	self.modifyUser = ko.observable( plano ? (plano.modify_user || "") : "");
         	self.modifyDateUTC = ko.observable( plano ? (plano.modify_date || "") : "");
-        	self.preco = ko.observable( plano ? (new preco.PRECO(plano.preco) || {}: {});
-			self.servicos = ko.observable( plano ? (new servico.SERVICO(plano.servico) || {}: {});
-			self.imagens = ko.observable( plano ? (new imagem.IMAGEM(plano.imagem) || {}: {});
+        	//self.preco = ko.observable( plano ? (new preco.PRECO(plano.preco) || {}: {});
+			//self.servicos = ko.observable( plano ? (new servicoModule.SERVICO(plano.servico) || {}: {});
+			//self.imagens = ko.observable( plano ? (new imagem.IMAGEM(plano.imagem) || {}: {});
         } catch (e) {
-
+console.log(e)
         }
     }
 

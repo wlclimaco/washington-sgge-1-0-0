@@ -27,6 +27,8 @@ public class Empresa extends Entidade
 
 	private List<Deposito> depositoList;
 
+	private List<Usuario> usuarioList;
+
 	public Empresa()
 	{
 		super();
@@ -143,13 +145,23 @@ public class Empresa extends Entidade
 		this.qntSocios = qntSocios;
 	}
 
+	public List<Usuario> getUsuarioList()
+	{
+		return usuarioList;
+	}
+
+	public void setUsuarioList(List<Usuario> usuarioList)
+	{
+		this.usuarioList = usuarioList;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "Empresa [getPlanoList()=" + getPlanoList() + ", getQntFilial()=" + getQntFilial()
 				+ ", getQntDeposito()=" + getQntDeposito() + ", getSocios()=" + getSocios() + ", getFilialList()="
 				+ getFilialList() + ", getDepositoList()=" + getDepositoList() + ", getQntSocios()=" + getQntSocios()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", getUsuarioList()=" + getUsuarioList() + ", toString()=" + super.toString() + "]";
 	}
 
 }

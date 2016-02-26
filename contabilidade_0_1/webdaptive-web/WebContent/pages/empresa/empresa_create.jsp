@@ -139,15 +139,16 @@
 							Atividade principal da empresa
 						</label>
 						<table>
-							<tbody data-bind="foreach: phones">
+							<tbody data-bind="foreach: empresa().telefones()">
 								<tr>
-									<td><input data-bind='value: type' /></td>
-									<td><input data-bind='value: number' /></td>
+									<td><input data-bind='value: ddd' /></td>
+									<td><input data-bind='value: numero' /></td>
+									<td><input data-bind='value: telefoneTypeEnumValue' /></td>
 									<td><a href='#' data-bind='click: $root.removePhone'>Delete</a></td>
 								</tr>
 							</tbody>
 						</table>
-						<a href='#' data-bind='click: $root.addPhone'>Add number</a>
+						<a href='#' data-bind='click: $root.addPhone'>Add Telefone</a>
 					</div>
 
 				</div>
@@ -160,7 +161,7 @@
 				</div>
 				<div class="panel-body">
 					<table>
-							<tbody data-bind="foreach: socios">
+							<tbody data-bind="foreach: empresa().socios()">
 								<tr>
 									<td><input data-bind='value: nome' /></td>
 									<td><input data-bind='value: cpf' /></td>

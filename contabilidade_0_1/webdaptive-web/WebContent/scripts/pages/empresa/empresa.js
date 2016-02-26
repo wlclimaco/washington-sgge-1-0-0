@@ -9,7 +9,6 @@ var empresaModule = (function () {
     function EMPRESA(empresa) {
     	try {
             var self = this;
-
             self.id 				= ko.observable( empresa ? (empresa.id || 0) : 0);
             self.nome 				= ko.observable( empresa ? (empresa.nome || "") : "");
             self.processId 			= ko.observable( empresa ? (empresa.processId || 0) : 0);
@@ -24,7 +23,7 @@ var empresaModule = (function () {
            	self.documentos 		= ko.observable( empresa ? (new documentoModule.DOCUMENTO(empresa.documentos) || {}) : {});
         	self.enderecos 			= ko.observable( empresa ? (new enderecoModule.ENDERECO(empresa.enderecos || {})) : {});
         	self.emails 			= ko.observable( empresa ? (new emailModule.EMAIL(empresa.emails || {})) : {});
-        	self.telefones 			= ko.observable( empresa ? (new telefoneModule.TELEFONE(empresa.telefones || {})) : {});
+			self.telefones 			= ko.observableArray([ new telefoneModule.TELEFONE(empresa.telefones)]);
         	self.cnaes 				= ko.observable( empresa ? (new cnaeModule.CNAE(empresa.cnaes || {})) : {});
         	self.statusList 		= ko.observable( empresa ? (new statusModule.STATUS(empresa.statusList || {})) : {});
         	self.notes 				= ko.observable( empresa ? (new noteModule.NOTE(empresa.notes || {})) : {});

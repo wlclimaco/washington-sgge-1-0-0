@@ -648,7 +648,21 @@
 		   "../commons/scripts/model/domain_objects.js",
            "../commons/scripts/widget/slick.pager.js",
 "../thirdparty/jquery/jquery.dynatree.min.js",
-"../scripts/util/actiondialog.js"
+"../scripts/util/actiondialog.js",
+"../scripts/pages/empresa/empresa.js",
+"../scripts/pages/regime/regime.js",
+"../scripts/pages/documento/documento.js",
+"../scripts/pages/endereco/endereco.js",
+"../scripts/pages/email/email.js",
+"../scripts/pages/phone/telefone.js",
+"../scripts/pages/cnae/cnae.js",
+"../scripts/pages/status/status.js",
+"../scripts/pages/note/note.js",
+"../scripts/pages/socios/socios.js",
+"../scripts/pages/plano/plano.js",
+"../scripts/pages/filial/filial.js",
+"../scripts/pages/deposito/deposito.js"
+
 		//   "../scripts/util/base.js"
 	);
 </script>
