@@ -10,7 +10,7 @@ import com.qat.samples.sysmgmt.pessoa.Pessoa;
 public class Usuario extends Pessoa
 {
 
-	private String usuario;
+	private String login;
 
 	private String senha;
 
@@ -19,16 +19,6 @@ public class Usuario extends Pessoa
 	private String role;
 
 	private String language;
-
-	public String getUsuario()
-	{
-		return usuario;
-	}
-
-	public void setUsuario(String usuario)
-	{
-		this.usuario = usuario;
-	}
 
 	public String getSenha()
 	{
@@ -70,11 +60,21 @@ public class Usuario extends Pessoa
 		this.language = language;
 	}
 
+	public String getLogin()
+	{
+		return login;
+	}
+
+	public void setLogin(String login)
+	{
+		this.login = login;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "Usuario [getUsuario()=" + getUsuario() + ", getSenha()=" + getSenha() + ", getPergunta()="
-				+ getPergunta() + ", getRole()=" + getRole() + ", getLanguage()=" + getLanguage() + ", toString()="
+		return "Usuario [getSenha()=" + getSenha() + ", getPergunta()=" + getPergunta() + ", getRole()=" + getRole()
+				+ ", getLanguage()=" + getLanguage() + ", getLogin()=" + getLogin() + ", toString()="
 				+ super.toString() + "]";
 	}
 

@@ -6,43 +6,82 @@
 
 $(document).ready(function()
 {
+	var GiftModel = function(empresa) {
+    var self = this;
+
+    self.empresa = ko.observable(empresa);
+
+    self.addGift = function() {
+        self.empresa().telefones.push( new telefoneModule.TELEFONE({
+            id: "",
+            ddd: ""
+        }));
+    };
+
+	self.addEmail = function() {
+        self.empresa().emails.push( new emailModule.EMAIL({
+            id: "",
+            emailTypeEnumValue: "",
+			email: ""
+        }));
+    };
 
 
-		var viewModel = {
+	self.addEndereco = function() {
+        self.empresa().enderecos.push( new enderecoModule.ENDERECO({
+			id : "",
+            typeValue : "",
+            processId : "",
+            logradouro : "",
+			cep : "",
+            bairro : "",
+            numero : "",
+			complemento : "",
+            enderecoTypeValue : "",
+            createUser : "",
+        	createDateUTC : "",
+        	modifyUser : "",
+        	modifyDateUTC : "",
+        	cidade : ""
+		}));
+	};
 
-				empresa :  ko.observable(new empresaModule.EMPRESA({}))
+    self.removeGift = function(gift) {
+        $.ajax({
+			type		: "POST",
+			dataType    : 'json',
+			url			: WDHost + "qat-webdaptive/api/empresa/add",
+			username	: wd.session.userId,
+			password	: wd.session.userPassword,
+			data		: $.toJSON(ko.toJSON("empresa :"+self.empresa())),
+			contentType : "application/json; charset=utf-8",
+			//timeout		: 5000,
+			async		: true,
+			success		: function(retur){console.log(retur)},
+			error		: function(retur){console.log(retur)},
+ 	});
+    };
 
-
-
+    $.ajax({
+			type		: "POST",
+			dataType    : 'json',
+			url			: WDHost + "qat-webdaptive/api/empresa/add",
+			username	: wd.session.userId,
+			password	: wd.session.userPassword,
+			data		: $.toJSON({"empresa" : ko.toJSON(self.empresa())}),
+			contentType : "application/json; charset=utf-8",
+			//timeout		: 5000,
+			async		: true,
+			success		: function(retur){console.log(retur)},
+			error		: function(retur){console.log(retur)},
+ 	});
 };
-				self.addPhone = function() {
-					debugger
-					viewModel.empresa.telefone().push({
-						ddd: "",
-						numero:"",
-						telefoneTypeEnumValue:""
-					})
-				};
 
-				self.removePhone = function(phone) {
+var viewModel = new GiftModel(new empresaModule.EMPRESA({}));
+ko.applyBindings(viewModel);
 
-				};
-				self.addSocio = function() {
-
-				};
-
-				self.removePhone = function(phone) {
-
-				};
-
-				self.removePhone = function(socio) {
-
-				};
-
-			ko.applyBindings(viewModel);
-			debugger
-			console.log(viewModel)
-
+// Activate jQuery Validation
+$("form").validate({ submitHandler: viewModel.save });
 
 
 

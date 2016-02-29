@@ -2,6 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib prefix='sec' uri='http://www.springframework.org/security/tags' %>
 
+
 <div class="container-fluid" id="createEmpresa">
 	<div class="row">
 		<div class="col-md-12">
@@ -11,50 +12,72 @@
 					Submit
 				</button>
 			</form>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						Usuario.
-					</h3>
-				</div>
-				<div class="panel-body">
+			<ul data-bind="foreach: empresa().usuarioList()">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							Usuario.
+						</h3>
+					</div>
+					<div class="panel-body">
+					<li>
+						<div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">
+								Nome Completo
+							</label>
+							<input type="nome" class="form-control" id="nome" data-bind='value: nome' />
+						</div>
+					</div>
+					</li>
+					<li>
+					<div>
 					<div class="form-group">
 
-					<label for="exampleInputEmail1">
-						Nome Completo
-					</label>
-					<input type="email" class="form-control" id="exampleInputEmail1" />
-				</div>
-				<div class="form-group">
+						<label for="exampleInputEmail1">
+							Login
+						</label>
+						<input type="email" class="form-control" id="exampleInputEmail1" data-bind='value: login'/>
+					</div>
+					</div>
+						</li>
+						<li>
+							<div>
+					<div class="form-group">
 
-					<label for="exampleInputEmail1">
-						CPF
-					</label>
-					<input type="email" class="form-control" id="exampleInputEmail1" />
-				</div>
-				<div class="form-group">
+						<table data-bind='visible: emails().length > 0'>
+							<thead>
+								<tr>
+									<th>Email</th>
+									<th />
+								</tr>
+							</thead>
+							<tbody data-bind="foreach: emails()">
+								<tr>
+									<td><input class='required email form-control' data-bind='value: email, uniqueName: true' /></td>
+									<td><a href='#' data-bind='click: $root.removeGift'>Delete</a></td>
+								</tr>
+							</tbody>
+						</table>
+						<a href='#' data-bind='click: $root.addEmail'>Add Email</a>
+					</div>
+					</div>
+						</li>
+						<li>
+							<div>
+					<div class="form-group">
 
-					<label for="exampleInputEmail1">
-						Telefone
-					</label>
-					<input type="email" class="form-control" id="exampleInputEmail1" />
-				</div>
-				<div class="form-group">
+						<label for="exampleInputPassword1">
+							Defina Sua Senha
+						</label>
+						<input type="password" class="form-control" id="exampleInputPassword1" data-bind='value: senha'/>
+					</div>
+					</div>
+						</li>
 
-					<label for="exampleInputEmail1">
-						Email
-					</label>
-					<input type="email" class="form-control" id="exampleInputEmail1" />
+					</div>
 				</div>
-				<div class="form-group">
-
-					<label for="exampleInputPassword1">
-						Defina Sua Senha
-					</label>
-					<input type="password" class="form-control" id="exampleInputPassword1" />
-				</div>
-				</div>
-			</div>
+			</ul>
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">
@@ -72,13 +95,13 @@
 						<label for="exampleInputEmail1">
 							Informe a Razão social
 						</label>
-						<input type="email" class="form-control" id="exampleInputEmail1" />
+						<input type="email" class="form-control" id="exampleInputEmail1" data-bind='value: empresa().nome' />
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">
-							Natureza jurídica
+							CNPJ
 						</label>
-						<input type="email" class="form-control" id="exampleInputEmail1" />
+						<input type="" class="form-control" id="documento" data-bind='value: empresa().documentos()[0].cpfCnpj' />
 						<label for="exampleInputEmail1">
 							Sua empresa está ativa?
 						</label>
@@ -91,67 +114,131 @@
 					</div>
 
 					<div class="form-group">
-						<label for="exampleInputEmail1">
-							Informe o CEP da sua empresa
-						</label>
-						<input type="email" class="form-control" id="exampleInputEmail1" />
-					</div>
-					<div class="form-group">
-						<label for="exampleInputEmail1">
-							Logradouro
-						</label>
-						<input type="email" class="form-control" id="exampleInputEmail1" />
-					</div>
-					<div class="form-group">
-						<label for="exampleInputEmail1">
-							Número
-						</label>
-						<input type="email" class="form-control" id="exampleInputEmail1" />
-					</div>
-					<div class="form-group">
-						<label for="exampleInputEmail1">
-							Complemento
-						</label>
-						<input type="email" class="form-control" id="exampleInputEmail1" />
-					</div>
-					<div class="form-group">
-						<label for="exampleInputEmail1">
-							Bairro
-						</label>
-						<input type="email" class="form-control" id="exampleInputEmail1" />
-					</div>
-					<div class="form-group">
-						<label for="exampleInputEmail1">
-							Estado
-						</label>
-						<div class="select2 input-sm" style="width: 99.9%;">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="exampleInputEmail1">
-							Município
-						</label>
-						<div class="select2 input-sm" style="width: 99.9%;">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="exampleInputEmail1">
-							Atividade principal da empresa
-						</label>
-						<table>
-							<tbody data-bind="foreach: empresa().telefones()">
-								<tr>
-									<td><input data-bind='value: ddd' /></td>
-									<td><input data-bind='value: numero' /></td>
-									<td><input data-bind='value: telefoneTypeEnumValue' /></td>
-									<td><a href='#' data-bind='click: $root.removePhone'>Delete</a></td>
-								</tr>
-							</tbody>
-						</table>
-						<a href='#' data-bind='click: $root.addPhone'>Add Telefone</a>
-					</div>
 
+
+					<ul data-bind="foreach: empresa().enderecos()">
+					<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							Endereco
+						</h3>
+					</div>
+					<div class="panel-body">
+						<li>
+							<div>
+								<div class="form-group">
+									<label for="exampleInputEmail1">
+										Id
+									</label>
+									<input class='required form-control' data-bind='value: typeValue, uniqueName: true' />
+								</div>
+							</div>
+						</li>
+						<li>
+							<div>
+								<div class="form-group">
+									<label for="exampleInputEmail1">
+										Informe o CEP da sua empresa
+									</label>
+									<input class='required form-control' data-bind='value: cep, uniqueName: true' />
+								</div>
+							</div>
+						</li>
+						<li>
+							<div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">
+									Logradouro
+								</label>
+								<input class='required form-control' data-bind='value: logradouro, uniqueName: true' />
+							</div>
+						</div>
+						</li>
+						<li>
+							<div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">
+									Número
+								</label>
+								<input class='required form-control' data-bind='value: numero, uniqueName: true' />
+							</div>
+							</div>
+						</li>
+						<li>
+							<div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">
+									Complemento
+								</label>
+								<input class='required form-control' data-bind='value: complemento, uniqueName: true' />
+							</div>
+							</div>
+						</li>
+						<li>
+							<div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">
+									Bairro
+								</label>
+								<input class='required form-control' data-bind='value: bairro, uniqueName: true' />
+							</div>
+							</div>
+						</li>
+						<li>
+							<div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">
+									Estado
+								</label>
+								<input class='required email form-control' data-bind='value: cidade().estado, uniqueName: true' />
+								</div>
+							</div>
+						</li>
+						<li>
+							<div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">
+									Município
+								</label>
+								<input class='required number form-control' data-bind='value: cidade().nome, uniqueName: true' />
+							</div>
+							</div>
+						</li>
+						</div>
+					</ul>
+					<a href='#' data-bind='click: $root.addEndereco'>Add Endereco</a>
+						</div>
+
+						<div class="form-group">
+
+					<table data-bind='visible: empresa().telefones().length > 0'>
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>DDD</th>
+								<th>Numero</th>
+								<th />
+							</tr>
+						</thead>
+						<tbody data-bind="foreach: empresa().telefones()">
+							<tr>
+								<td><input class='required form-control' data-bind='value: id, uniqueName: true' /></td>
+								<td><input class='required number form-control' data-bind='value: ddd, uniqueName: true' /></td>
+								<td><input class='required number form-control' data-bind='value: numero, uniqueName: true' /></td>
+								<td><a href='#' data-bind='click: $root.removeGift'>Delete</a></td>
+							</tr>
+						</tbody>
+					</table>
+					<a href='#' data-bind='click: $root.addGift'>Add Telefone</a>
 				</div>
+
+						<div class="form-group">
+							<label for="exampleInputEmail1">
+								Atividade principal da empresa
+							</label>
+						</div>
+
+
 			</div>
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -171,7 +258,7 @@
 							</tbody>
 						</table>
 						<a href='#' data-bind='click: $root.addSocio'>Add Socio</a>
-				</div
+				</div>
 			</div>
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -211,6 +298,7 @@
 			</ul>
 		</div>
 	</div>
+
 </div>
 <jsp:include page="../../scripts/pages/empresa/empresa_create_main.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/empresa/empresa_create_init.js.jsp" flush="true" />

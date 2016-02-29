@@ -68,19 +68,13 @@
 
 
 <div id="dialog-form" title="Create new user" style="background:aliceblue">
-  <p class="validateTips">All form fields are required.</p>
-
   <form>
     <fieldset>
       <jsp:include page="../empresa/empresa_create.jsp"></jsp:include>
 
-      <!-- Allow form submission with keyboard without duplicating the dialog button -->
-      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
     </fieldset>
   </form>
 </div>
-<button id="create-user">Create new user</button>
-
 
 <jsp:include page="../../scripts/pages/entidade/entidade_main.js.jsp" flush="true" />
 <jsp:include page="../../scripts/pages/entidade/entidade_actions.js.jsp" flush="true" />

@@ -14,6 +14,7 @@ var socioModule = (function () {
             self.parentId = ko.observable( socio ? (socio.parentId || 0) : 0);
            	self.nome = ko.observable( socio ? (socio.nome || "") : "");
         	self.cota = ko.observable( socio ? (socio.cota || "") : "");
+			self.cpf = ko.observable( socio ? (socio.cpf || "") : "");
         	self.porcentagem = ko.observable( socio ? (socio.porcentagem || "") : "");
         	self.createUser = ko.observable( socio ? (socio.create_user || "") : "");
         	self.createDateUTC = ko.observable( socio ? (socio.create_date || "") : "");
