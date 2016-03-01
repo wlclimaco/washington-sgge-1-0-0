@@ -21,7 +21,8 @@ var usuarioModule = (function () {
         	self.createDateUTC = ko.observable( usuario ? (usuario.create_date || 0) : 0);
         	self.modifyUser = ko.observable( usuario ? (usuario.modify_user || "system") : "system");
         	self.modifyDateUTC = ko.observable( usuario ? (usuario.modify_date || 0) : 0);
-			self.emails 	= ko.observableArray([new emailModule.EMAIL(usuario.emails)]);
+			self.emails 	= ko.observableArray( usuario ? [(new emailModule.EMAIL(usuario.emails)) || {}] : [{}]);
+			self.modelAction		= ko.observable( usuario ? (usuario.modelAction || "INSERT") : "INSERT");
 
         } catch (e) {
 			debugger

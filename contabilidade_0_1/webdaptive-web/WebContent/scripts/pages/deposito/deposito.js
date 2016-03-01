@@ -23,6 +23,7 @@ var depositoModule = (function () {
 			self.enderecos 			= ko.observableArray([new enderecoModule.ENDERECO(deposito.enderecos)]);
 			self.emails 			= ko.observableArray([new emailModule.EMAIL(deposito.emails)]);
 			self.telefones 			= ko.observableArray([new telefoneModule.TELEFONE(deposito.telefones)]);
+			self.modelAction		= ko.observable( deposito ? (deposito.modelAction || "INSERT") : "INSERT");
 
         } catch (e) {
 

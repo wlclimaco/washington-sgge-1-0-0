@@ -44,22 +44,10 @@
 						<li>
 							<div>
 					<div class="form-group">
-
-						<table data-bind='visible: emails().length > 0'>
-							<thead>
-								<tr>
-									<th>Email</th>
-									<th />
-								</tr>
-							</thead>
-							<tbody data-bind="foreach: emails()">
-								<tr>
-									<td><input class='required email form-control' data-bind='value: email, uniqueName: true' /></td>
-									<td><a href='#' data-bind='click: $root.removeGift'>Delete</a></td>
-								</tr>
-							</tbody>
-						</table>
-						<a href='#' data-bind='click: $root.addEmail'>Add Email</a>
+						<label for="exampleInputEmail1">
+							Email
+						</label>
+						<input type="email" class="form-control" id="exampleInputEmail1" data-bind='value: emails().email'/>
 					</div>
 					</div>
 						</li>
@@ -130,7 +118,7 @@
 									<label for="exampleInputEmail1">
 										Id
 									</label>
-									<input class='required form-control' data-bind='value: typeValue, uniqueName: true' />
+									<input class='required form-control' data-bind='value: id, uniqueName: true' />
 								</div>
 							</div>
 						</li>
@@ -251,7 +239,7 @@
 							<tbody data-bind="foreach: empresa().socios()">
 								<tr>
 									<td><input data-bind='value: nome' /></td>
-									<td><input data-bind='value: cpf' /></td>
+									<td><input data-bind='value: documentos()[0].numero' /></td>
 									<td><input data-bind='value: cota' /></td>
 									<td><a href='#' data-bind='click: $root.removeSocio'>Delete</a></td>
 								</tr>

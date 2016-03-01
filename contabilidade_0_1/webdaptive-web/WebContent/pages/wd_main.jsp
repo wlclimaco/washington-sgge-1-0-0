@@ -663,6 +663,7 @@
 "../scripts/pages/filial/filial.js",
 "../scripts/pages/cidade/cidade.js",
 "../scripts/pages/usuario/usuario.js",
+"../scripts/pages/estado/estado.js",
 "../scripts/pages/deposito/deposito.js"
 
 		//   "../scripts/util/base.js"

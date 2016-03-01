@@ -20,6 +20,7 @@ var telefoneModule = (function () {
         	self.createDateUTC = ko.observable( telefone ? (telefone.create_date || 0 ) : 0);
         	self.modifyUser = ko.observable( telefone ? (telefone.modify_user || "system" ) : "system");
         	self.modifyDateUTC = ko.observable( telefone ? (telefone.modify_date || 0 ) : 0);
+			self.modelAction		= ko.observable( telefone ? (telefone.modelAction || "INSERT") : "INSERT");
 
         } catch (e) {
         	console.log(e);

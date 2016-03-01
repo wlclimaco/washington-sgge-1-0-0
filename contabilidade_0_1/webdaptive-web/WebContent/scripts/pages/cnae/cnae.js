@@ -19,6 +19,7 @@ var cnaeModule = (function () {
         	self.createDateUTC = ko.observable( cnae ? (cnae.create_date || 0 ) : 0);
         	self.modifyUser = ko.observable( cnae ? (cnae.modify_user || "system" ) : "system");
         	self.modifyDateUTC = ko.observable( cnae ? (cnae.modify_date || 0 ) : 0);
+			self.modelAction		= ko.observable( cnae ? (cnae.modelAction || "INSERT") : "INSERT");
 
         } catch (e) {
         	console.log(e);
@@ -35,6 +36,7 @@ var cnaeModule = (function () {
         	self.createDateUTC = ko.observable( cnae ? (cnae.create_date || 0 ) : 0);
         	self.modifyUser = ko.observable( cnae ? (cnae.modify_user || "system" ) : "system");
         	self.modifyDateUTC = ko.observable( cnae ? (cnae.modify_date || 0 ) : 0);
+			self.modelAction= ko.observable( cnae ? (cnae.modelAction || "INSERT") : "INSERT");
 
         } catch (e) {
         	console.log(e);

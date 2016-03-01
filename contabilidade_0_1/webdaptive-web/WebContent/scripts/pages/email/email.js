@@ -20,6 +20,7 @@ var emailModule = (function () {
         	self.createDateUTC = ko.observable( email ? (email.create_date || 0) : 0);
         	self.modifyUser = ko.observable( email ? (email.modify_user || "") : "");
         	self.modifyDateUTC = ko.observable( email ? (email.modify_date || "") : "");
+			self.modelAction		= ko.observable( email ? (email.modelAction || "INSERT") : "INSERT");
 
         } catch (e) {
         	console.log(e);

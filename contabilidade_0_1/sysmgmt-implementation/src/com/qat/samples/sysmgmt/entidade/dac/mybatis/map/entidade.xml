@@ -66,16 +66,16 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allEntidadeColumns">
-		 b.nome
-		,b.regime
-		,b.processId
-		,b.entidadeId
-		,b.entidadeEnum
-		,b.emprId
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+		 nome
+		,regime
+		,processId
+		,entidadeId
+		,entidadeEnum
+		,emprId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
   </sql>
 
   <sql id="allEntidadeValues">

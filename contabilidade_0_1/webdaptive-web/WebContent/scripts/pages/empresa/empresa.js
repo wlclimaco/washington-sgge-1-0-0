@@ -19,6 +19,7 @@ var empresaModule = (function () {
 			        	self.createDateUTC 		= ko.observable( empresa ? (empresa.create_date || 0) : 0);
 			        	self.modifyUser 		= ko.observable( empresa ? (empresa.modify_user || "") : "");
 			        	self.modifyDateUTC 		= ko.observable( empresa ? (empresa.modify_date || 0) : 0);
+						self.modelAction		= ko.observable( empresa ? (empresa.modelAction || "INSERT") : "INSERT");
 			            self.regime				= ko.observable( empresa ? (new regimeModule.REGIME(empresa.regime) || {}) : {});
 			           	self.documentos 		= ko.observableArray([new documentoModule.DOCUMENTO(empresa.documentos)]);
 			        	self.enderecos 			= ko.observableArray([new enderecoModule.ENDERECO(empresa.enderecos)]);

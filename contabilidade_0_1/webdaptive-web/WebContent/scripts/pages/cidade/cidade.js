@@ -21,6 +21,7 @@ var cidadeModule = (function () {
         	self.modifyUser = ko.observable( cidade ? (cidade.modify_user || "") : "");
         	self.modifyDateUTC = ko.observable( cidade ? (cidade.modify_date || 0) : 0);
         	self.estado = ko.observable( cidade ? (new estadoModule(cidade.estado || {})) : {});
+			self.modelAction		= ko.observable( cidade ? (cidade.modelAction || "INSERT") : "INSERT");
 
         } catch (e) {
         	console.log(e);

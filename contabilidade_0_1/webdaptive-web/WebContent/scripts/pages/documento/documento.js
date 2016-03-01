@@ -15,6 +15,7 @@ var documentoModule = (function () {
 			self.numero  = ko.observable( documento ? (documento.numero || "" ) : "");
 			self.data  = ko.observable( documento ? (documento.data || 0) : 0);
 			self.estado = ko.observable( documento ? (new estadoModule.ESTADO(documento.estado) || {}) : {});
+			self.modelAction		= ko.observable( documento ? (documento.modelAction || "INSERT") : "INSERT");
 
         } catch (e) {
 debugger

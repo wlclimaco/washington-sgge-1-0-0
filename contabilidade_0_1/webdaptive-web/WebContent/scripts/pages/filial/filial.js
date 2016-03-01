@@ -26,6 +26,7 @@ var filialModule = (function () {
 			self.telefones 			= ko.observableArray([new telefoneModule.TELEFONE(filial.telefones)]);
 			self.cnaes 				= ko.observableArray([new cnaeModule.CNAEPESSOA(filial.cnaes)]);
 			self.usuarioList		= ko.observableArray([new usuarioModule.USUARIO(filial.usuarioList)]);
+			self.modelAction		= ko.observable( deposito ? (deposito.modelAction || "INSERT") : "INSERT");
         } catch (e) {
         	console.log(e);
         }
