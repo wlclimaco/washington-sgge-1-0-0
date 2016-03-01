@@ -9,14 +9,15 @@ var documentoModule = (function () {
     function DOCUMENTO(documento) {
         try {
             var self = this;
-            self.documentoid = ko.observable( documento ? (documento.documentoid || 0) : 0);
-            self.id = ko.observable( documento ? (documento.id || 0) : 0);
-            self.rgInc = ko.observable( documento ? (documento.rginscmuni || "") : "");
-            self.cpfCnpj = ko.observable( documento ? (documento.cpfcnpj || "") : "");
-            self.razao = ko.observable( documento ? (documento.razao || "") : "");
-            self.tableTypeValue = ko.observable( documento ? (documento.tabela || 0) : 0);
-        } catch (e) {
 
+			self.id = ko.observable( documento ? (documento.id || 0) : 0);
+			self.documentoTypeEnumValue  = ko.observable( documento ? (documento.documentoTypeEnumValue || 0) : 0);
+			self.numero  = ko.observable( documento ? (documento.numero || "" ) : "");
+			self.data  = ko.observable( documento ? (documento.data || 0) : 0);
+			self.estado = ko.observable( documento ? (new estadoModule.ESTADO(documento.estado) || {}) : {});
+
+        } catch (e) {
+debugger
         }
     }
 

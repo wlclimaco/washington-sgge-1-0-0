@@ -1,23 +1,28 @@
-var estadoModule = (function () {
+var enderecoModule = (function () {
 
     //Setup settings
     var settings = {
-        jsFile: 'Estado.js'
+        jsFile: 'Deposito.js'
     };
 
-    //Request Estado default structure
-    function ESTADO(estado) {
+    //Request Deposito default structure
+    function ENDERECO(endereco) {
         try {
             var self = this;
 
-            self.id = ko.observable( estado ? (estado.id || 0) : 0);
-            self.nome = ko.observable( estado ? (estado.nome || "") : "");
-           	self.abreviacao = ko.observable( estado ? (estado.abreviacao || "") : "");
-        	self.createUser = ko.observable( estado ? (estado.create_user || "") : "");
-        	self.createDateUTC = ko.observable( estado ? (estado.create_date || 0) : 0);
-        	self.modifyUser = ko.observable( estado ? (estado.modify_user || "") : "");
-        	self.modifyDateUTC = ko.observable( estado ? (estado.modify_date || 0) : 0);
-
+            self.id = ko.observable( endereco ? (endereco.id || 0) : 0);
+            self.processId = ko.observable( endereco ? (endereco.processId || 0) : 0);
+            self.logradouro = ko.observable( endereco ? (endereco.logradouro || "") : "");
+			self.cep = ko.observable( endereco ? (endereco.cep || "") : "");
+            self.bairro = ko.observable( endereco ? (endereco.bairro || "") : "");
+            self.numero = ko.observable( endereco ? (endereco.numero || "") : "");
+			self.complemento = ko.observable( endereco ? (endereco.complemento || "") : "");
+            self.enderecoTypeValue = ko.observable( endereco ? (endereco.enderecoTypeValue || 0) : 0);
+            self.createUser = ko.observable( endereco ? (endereco.create_user || "system") : "system");
+        	self.createDateUTC = ko.observable( endereco ? (endereco.create_date || 0) : 0);
+        	self.modifyUser = ko.observable( endereco ? (endereco.modify_user || "system") : "system");
+        	self.modifyDateUTC = ko.observable( endereco ? (endereco.modify_date || 0) : 0);
+        	self.cidade = ko.observable( endereco ? (new cidadeModule(endereco.cidade) || {}) : {});
         } catch (e) {
         	console.log(e);
         }
@@ -25,7 +30,7 @@ var estadoModule = (function () {
 
     //Default constructor
     return {
-        ESTADO: ESTADO
+        ENDERECO: ENDERECO
     }
 
 })();

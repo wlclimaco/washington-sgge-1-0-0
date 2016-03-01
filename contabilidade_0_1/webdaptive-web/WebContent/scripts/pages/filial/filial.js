@@ -9,24 +9,23 @@ var filialModule = (function () {
     function FILIAL(filial) {
         try {
             var self = this;
-            self.id = ko.observable( filial ? (filial.id || 0) : 0);
-            self.nome = ko.observable( filial ? (filial.nome || "") : "");
-            self.processId = ko.observable( filial ? (filial.processId || 0) : 0);
-            self.entidadeId = ko.observable( filial ? (filial.entidadeId || 0) : 0);
-            self.emprId = ko.observable( filial ? (filial.emprId || 0) : 0);
-        	self.entidadeEnumValue = ko.observable( filial ? (filial.entidadeEnum || 0) : 0);
-            self.createUser = ko.observable( filial ? (filial.create_user || "") : "");
-        	self.createDateUTC = ko.observable( filial ? (filial.create_date || "") : "");
-        	self.modifyUser = ko.observable( filial ? (filial.modify_user || "") : "");
-        	self.modifyDateUTC = ko.observable( filial ? (filial.modify_date || "") : "");
-        	self.regime = ko.observable( filial ? (filial.regime || {}) : {});
-        	self.documentos = ko.observable( filial ? (filial.documentos || {}) : {});
-        	self.enderecos = ko.observable( filial ? (filial.enderecos || {}) : {});
-        	self.emails = ko.observable( filial ? (filial.emails || {}) : {});
-        	self.telefones = ko.observable( filial ? (filial.telefones || {}) : {});
-        	self.cnaes = ko.observable( filial ? (filial.cnaes || {}) : {});
-        	self.statusList = ko.observable( filial ? (filial.statusList || {}) : {});
-        	self.notes = ko.observable( filial ? (filial.notes || {}) : {});
+            self.id 				= ko.observable( filial ? (filial.id || 0) : 0);
+			self.nome 				= ko.observable( filial ? (filial.nome || "teste") : "teste");
+			self.processId 			= ko.observable( filial ? (filial.processId || 0) : 0);
+			self.entidadeId 		= ko.observable( filial ? (filial.entidadeId || 0) : 0);
+			self.emprId 			= ko.observable( filial ? (filial.emprId || 0) : 0);
+			self.entidadeEnumValue 	= ko.observable( filial ? (filial.entidadeEnum || 2) : 2);
+			self.createUser 		= ko.observable( filial ? (filial.create_user || "system") : "system");
+			self.createDateUTC 		= ko.observable( filial ? (filial.create_date || 0) : 0);
+			self.modifyUser 		= ko.observable( filial ? (filial.modify_user || "") : "");
+			self.modifyDateUTC 		= ko.observable( filial ? (filial.modify_date || 0) : 0);
+			self.regime				= ko.observable( filial ? (new regimeModule.REGIME(filial.regime) || {}) : {});
+			self.documentos 		= ko.observableArray([new documentoModule.DOCUMENTO(filial.documentos)]);
+			self.enderecos 			= ko.observableArray([new enderecoModule.ENDERECO(filial.enderecos)]);
+			self.emails 			= ko.observableArray([new emailModule.EMAIL(filial.emails)]);
+			self.telefones 			= ko.observableArray([new telefoneModule.TELEFONE(filial.telefones)]);
+			self.cnaes 				= ko.observableArray([new cnaeModule.CNAEPESSOA(filial.cnaes)]);
+			self.usuarioList		= ko.observableArray([new usuarioModule.USUARIO(filial.usuarioList)]);
         } catch (e) {
         	console.log(e);
         }

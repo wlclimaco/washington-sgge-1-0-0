@@ -30,6 +30,8 @@ public class Endereco extends ModelCosmeDamiao
 	/** The cep. */
 	private String cep;
 
+	private String complemento;
+
 	private EnderecoTypeEnum enderecoType;
 
 	/**
@@ -194,13 +196,34 @@ public class Endereco extends ModelCosmeDamiao
 		this.cep = cep;
 	}
 
+	public String getComplemento()
+	{
+		return complemento;
+	}
+
+	public void setComplemento(String complemento)
+	{
+		this.complemento = complemento;
+	}
+
+	public EnderecoTypeEnum getEnderecoType()
+	{
+		return enderecoType;
+	}
+
+	public void setEnderecoType(EnderecoTypeEnum enderecoType)
+	{
+		this.enderecoType = enderecoType;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "Endereco [getEnderecoTypeEnumValue()=" + getEnderecoTypeValue() + ", getId()=" + getId()
+		return "Endereco [getEnderecoTypeValue()=" + getEnderecoTypeValue() + ", getId()=" + getId()
 				+ ", getLogradouro()=" + getLogradouro() + ", getCidade()=" + getCidade() + ", getEstado()="
 				+ getEstado() + ", getBairro()=" + getBairro() + ", getNumero()=" + getNumero() + ", getCep()="
-				+ getCep() + ", toString()=" + super.toString() + "]";
+				+ getCep() + ", getComplemento()=" + getComplemento() + ", getEnderecoType()=" + getEnderecoType()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

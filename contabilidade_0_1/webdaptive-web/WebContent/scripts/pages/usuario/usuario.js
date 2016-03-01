@@ -11,17 +11,17 @@ var usuarioModule = (function () {
             var self = this;
 
             self.id = ko.observable( usuario ? (usuario.id || 0) : 0);
-            self.login = ko.observable( usuario ? (usuario.login || 0) : 0);
-            self.senha = ko.observable( usuario ? (usuario.senha || 0) : 0);
-            self.pergunta = ko.observable( usuario ? (usuario.pergunta || 0) : 0);
-            self.role = ko.observable( usuario ? (usuario.role || 0) : 0);
-            self.language = ko.observable( usuario ? (usuario.language || 0) : 0);
-            self.nome = ko.observable( usuario ? (usuario.nome || 0) : 0);
-            self.createUser = ko.observable( usuario ? (usuario.create_user || 0) : 0);
+            self.login = ko.observable( usuario ? (usuario.login || "") : "");
+            self.senha = ko.observable( usuario ? (usuario.senha || "") : "");
+            self.pergunta = ko.observable( usuario ? (usuario.pergunta || "") : "");
+            self.role = ko.observable( usuario ? (usuario.role || "") : "");
+            self.language = ko.observable( usuario ? (usuario.language || "") : "");
+            self.nome = ko.observable( usuario ? (usuario.nome || "") : "");
+            self.createUser = ko.observable( usuario ? (usuario.create_user || "system") : "system");
         	self.createDateUTC = ko.observable( usuario ? (usuario.create_date || 0) : 0);
-        	self.modifyUser = ko.observable( usuario ? (usuario.modify_user || 0) : 0);
+        	self.modifyUser = ko.observable( usuario ? (usuario.modify_user || "system") : "system");
         	self.modifyDateUTC = ko.observable( usuario ? (usuario.modify_date || 0) : 0);
-			self.emails = ko.observableArray(usuario ? [new emailModule.EMAIL(usuario.emails)]|| [{email : ""}] : [{email : ""}]);
+			self.emails 	= ko.observableArray([new emailModule.EMAIL(usuario.emails)]);
 
         } catch (e) {
 			debugger
