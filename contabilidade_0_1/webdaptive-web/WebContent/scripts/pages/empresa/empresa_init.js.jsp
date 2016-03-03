@@ -113,11 +113,11 @@ console.log(oPreLoadResponse)
 			<c:when test="${not empty refresh}">
 				aaData : "refresh",
 			</c:when>
-			<c:when test="${empty response}">
+			<c:when test="${empty empresaList}">
 				aaData : null,
 		    </c:when>
 		    <c:otherwise>
-		    	aaData : ${response},
+		    	aaData : ${empresaList},
 		    </c:otherwise>
 		</c:choose>
 

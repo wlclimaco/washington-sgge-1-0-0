@@ -32,13 +32,13 @@
 							complemento :"COMPLEMENTO",
 							enderecoTypeValue : 1,
 							modelAction : "INSERT",
-							cidade : {id:1}
+							cidade : {id:1},
 						}],
-			        	emails : [{email : "email001@gmail.com",emailTypeEnumValue:1},{email : "email002@gmail.com",emailTypeEnumValue:2},{email : "email003@gmail.com",emailTypeEnumValue:3}],
-						telefones:[{ddd :"034",numero:"3315-8065",telefoneTypeEnumValue : 1},{ddd :"034",numero:"3315-8065",telefoneTypeEnumValue : 2}],
+			        	emails : [{email : "email001@gmail.com",modelAction : "INSERT",emailTypeEnumValue:1},{email : "email002@gmail.com",modelAction : "INSERT",emailTypeEnumValue:2},{email : "email003@gmail.com",modelAction : "INSERT",emailTypeEnumValue:3}],
+						telefones:[{ddd :"034",numero:"3315-8065",modelAction : "INSERT",telefoneTypeEnumValue : 1},{ddd :"034",numero:"3315-8065",modelAction : "INSERT",telefoneTypeEnumValue : 2}],
 			        	cnaes:[{idCnae:{id:1}},{idCnae:{id:2}},{idCnae:{id:3}}],
-			        	socios:[{cota:"1",porcentagem:"30",documentos : [{documentoTypeEnumValue : 1 , numero: "10101010"}]}],
-			        	planoList: [{id:1}],
+			        	socios:[{cota:"1",porcentagem:"30",documentos : [{documentoTypeEnumValue : 1 , numero: "10101010",modelAction : "INSERT"}]}],
+			        	planoList: [{id:37}],
 			        	usuarioList:[{
 							login : "lala",
 							senha :"123456789",
@@ -47,7 +47,7 @@
 							language :"pt",
 							nome : "LAERCIO",
 							modelAction : "INSERT",
-							emails :[{email : "email001@gmail.com",emailTypeEnumValue:1},{email : "email002@gmail.com",emailTypeEnumValue:2},{email : "email003@gmail.com",emailTypeEnumValue:3}]
+							emails :[{email : "email001@gmail.com",modelAction : "INSERT",emailTypeEnumValue:1},{email : "email002@gmail.com",modelAction : "INSERT",emailTypeEnumValue:2},{email : "email003@gmail.com",modelAction : "INSERT",emailTypeEnumValue:3}]
 						}]}
 		}
 

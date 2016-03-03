@@ -22,9 +22,10 @@ var enderecoModule = (function () {
         	self.createDateUTC = ko.observable( endereco ? (endereco.create_date || 0) : 0);
         	self.modifyUser = ko.observable( endereco ? (endereco.modify_user || "system") : "system");
         	self.modifyDateUTC = ko.observable( endereco ? (endereco.modify_date || 0) : 0);
-        	self.cidade = ko.observable( endereco ? (new cidadeModule(endereco.cidade) || {}) : {});
-			self.modelAction		= ko.observable( endereco ? (endereco.modelAction || "INSERT") : "INSERT");
+        	self.cidade = ko.observable( endereco ? (new cidadeModule.CIDADE(endereco.cidade) || {}) : {});
+			self.modelAction		= ko.observable( endereco ? (endereco.modelAction || "") : "");
         } catch (e) {
+			debugger
         	console.log(e);
         }
     }

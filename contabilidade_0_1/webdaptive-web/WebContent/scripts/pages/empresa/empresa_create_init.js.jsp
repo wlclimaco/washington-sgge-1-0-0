@@ -44,7 +44,7 @@ $(document).ready(function()
 	for(var i = 0 ; i< empresa.usuarioList.length;i++){
 		self.empresa().usuarioList.push(new usuarioModule.USUARIO(empresa.usuarioList[i]));
 	}
-	debugger
+
 
 
     self.addGift = function() {
