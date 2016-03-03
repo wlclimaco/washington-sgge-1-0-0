@@ -62,6 +62,7 @@ import com.qat.samples.sysmgmt.pessoa.dac.IHoraFuncDAC;
 import com.qat.samples.sysmgmt.pessoa.dac.IPessoaDAC;
 import com.qat.samples.sysmgmt.pessoa.dac.IProfissaoDAC;
 import com.qat.samples.sysmgmt.pessoa.dac.ISalariosDAC;
+import com.qat.samples.sysmgmt.pessoa.dac.IUsuarioDAC;
 import com.qat.samples.sysmgmt.pessoa.dacd.BancoDACD;
 import com.qat.samples.sysmgmt.pessoa.dacd.BeneficiosDACD;
 import com.qat.samples.sysmgmt.pessoa.dacd.ContatoDACD;
@@ -140,6 +141,17 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 	IEventosDAC eventosDAC;
 	IHoraFuncDAC horaFuncDAC;
 	IProfissaoDAC profissaoDAC;
+	IUsuarioDAC usuarioDAC;
+
+	public IUsuarioDAC getUsuarioDAC()
+	{
+		return usuarioDAC;
+	}
+
+	public void setUsuarioDAC(IUsuarioDAC usuarioDAC)
+	{
+		this.usuarioDAC = usuarioDAC;
+	}
 
 	/**
 	 * @return the profissaoDAC
