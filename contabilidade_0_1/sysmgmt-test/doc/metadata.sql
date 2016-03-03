@@ -179,32 +179,35 @@ CREATE SEQUENCE endereco_id_seq
   CACHE 1;
 ALTER TABLE endereco_id_seq
   OWNER TO postgres;
-
 DROP TABLE endereco;
-CREATE TABLE endereco(
-	id             integer NOT NULL DEFAULT nextval('endereco_id_seq'::regclass),
-	tabela		 integer  NULL,
-	parentId	 integer  NULL,
-	type         integer  NULL,
-	processId    integer NULL,
-	logradouro	 character varying(200)  NULL,
-	cidade		 integer NULL,
-	estado		 integer NULL,
-	bairro		 character varying(50)  NULL,
-	numero       character varying(10)  NULL,
-	cep			 character varying(15)  NULL,
-	enderecoType		 integer NULL,
-	create_date  bigint,
-    create_user  character varying(50)  NULL,
-    modify_date  bigint,
-    modify_user  character varying(50)  NULL,
-CONSTRAINT pk_endereco_id PRIMARY KEY (id)
+
+CREATE TABLE endereco
+(
+  id integer NOT NULL DEFAULT nextval('endereco_id_seq'::regclass),
+  tabela integer,
+  parentid integer,
+  type integer,
+  processid integer,
+  logradouro character varying(200),
+  cidade integer,
+  estado integer,
+  bairro character varying(50),
+  numero character varying(10),
+  cep character varying(15),
+  enderecotype integer,
+complemento character varying(50),
+  create_date bigint,
+  create_user character varying(50),
+  modify_date bigint,
+  modify_user character varying(50),
+  CONSTRAINT pk_endereco_id PRIMARY KEY (id)
 )
 WITH (
   OIDS=FALSE
 );
 ALTER TABLE endereco
   OWNER TO postgres;
+
 
 /* ---------------------------------------------------------------*/
 
@@ -253,20 +256,20 @@ CREATE SEQUENCE socio_id_seq
 ALTER TABLE socio_id_seq
   OWNER TO postgres;
 
-DROP TABLE socio;
-CREATE TABLE socio(
-	id             integer NOT NULL DEFAULT nextval('socio_id_seq'::regclass),
-	parentId	   integer NULL,
-	nome         character varying(200) NULL,
-	cota         real NULL,
-	porcentagem  real NULL,
-	processId    integer NULL,
-	create_date  bigint,
-    create_user  character varying(50) NULL,
-    modify_date  bigint,
-    modify_user  character varying(50) NULL,
-
-CONSTRAINT pk_socios_id PRIMARY KEY (id)
+DROP TABLE socio
+CREATE TABLE socio
+(
+  id integer NOT NULL DEFAULT nextval('socio_id_seq'::regclass),
+  parentid integer,
+  nome character varying(200),
+  cota character varying(200),
+  porcentagem character varying(200),
+  processid integer,
+  create_date bigint,
+  create_user character varying(50),
+  modify_date bigint,
+  modify_user character varying(50),
+  CONSTRAINT pk_socios_id PRIMARY KEY (id)
 )
 WITH (
   OIDS=FALSE
@@ -728,6 +731,42 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE Pessoa
+  OWNER TO postgres;
+
+/* ---------------------------------------------------------------*/
+DROP SEQUENCE usuario_id_seq;
+
+CREATE SEQUENCE usuario_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE usuario_id_seq
+  OWNER TO postgres;
+
+DROP TABLE usuario;
+
+CREATE TABLE usuario(
+	id            integer NOT NULL DEFAULT nextval('usuario_id_seq'::regclass),
+	login         character varying(200) NULL,
+	senha         character varying(200) NULL,
+	pergunta         character varying(200) NULL,
+	role         character varying(200) NULL,
+	role         character varying(200) NULL,
+	language 	  integer NULL,
+	ultAcessi    bigint,
+	processId    integer NULL,
+	create_date  bigint,
+    create_user  character varying(50) NULL,
+    modify_date  bigint,
+    modify_user  character varying(50) NULL,
+CONSTRAINT Pessoa_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE usuario
   OWNER TO postgres;
 
 /* ---------------------------------------------------------------*/

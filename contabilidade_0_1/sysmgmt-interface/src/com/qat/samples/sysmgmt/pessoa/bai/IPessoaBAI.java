@@ -1,15 +1,21 @@
 package com.qat.samples.sysmgmt.pessoa.bai;
 
 import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
-import com.qat.samples.sysmgmt.arquivo.model.response.ArquivoResponse;
+import com.qat.samples.sysmgmt.agencia.model.response.AgenciaResponse;
+import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
 import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest;
 import com.qat.samples.sysmgmt.beneficios.model.response.BeneficiosResponse;
+import com.qat.samples.sysmgmt.condpag.model.request.FormaPgInquiryRequest;
 import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
 import com.qat.samples.sysmgmt.contato.model.response.ContatoResponse;
 import com.qat.samples.sysmgmt.dp.model.request.EventoInquiryRequest;
 import com.qat.samples.sysmgmt.dp.model.request.HoraFuncInquiryRequest;
 import com.qat.samples.sysmgmt.dp.model.request.ProfissaoInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.response.BancoResponse;
+import com.qat.samples.sysmgmt.dp.model.response.ContaResponse;
+import com.qat.samples.sysmgmt.dp.model.response.ConvenioResponse;
 import com.qat.samples.sysmgmt.dp.model.response.EventoResponse;
+import com.qat.samples.sysmgmt.dp.model.response.FormaPgResponse;
 import com.qat.samples.sysmgmt.dp.model.response.HorarioFuncResponse;
 import com.qat.samples.sysmgmt.dp.model.response.ProfissaoResponse;
 import com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest;
@@ -17,8 +23,10 @@ import com.qat.samples.sysmgmt.estado.model.response.EstadoResponse;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.request.ClienteMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ContaInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.request.ContadorInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.request.ContadorMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ConvenioInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorMaintenanceRequest;
 import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorInquiryRequest;
@@ -220,7 +228,7 @@ public interface IPessoaBAI
 	 */
 	public ContatoResponse fetchContatoByRequest(ContatoInquiryRequest request);
 
-	public ArquivoResponse fetchAgenciaByRequest(AgenciaInquiryRequest request);
+	public AgenciaResponse fetchAgenciaByRequest(AgenciaInquiryRequest request);
 
 	public EstadoResponse fetchEstadoByRequest(EstadoInquiryRequest request);
 
@@ -231,5 +239,13 @@ public interface IPessoaBAI
 	public BeneficiosResponse fetchBeneficiosRequest(BeneficiosInquiryRequest request);
 
 	public HorarioFuncResponse fetchHorarioFuncsRequest(HoraFuncInquiryRequest request);
+
+	public ConvenioResponse fetchConvenioByRequest(ConvenioInquiryRequest request);
+
+	public BancoResponse fetchBancoByRequest(BancoInquiryRequest request);
+
+	public FormaPgResponse fetchFormaPgByRequest(FormaPgInquiryRequest request);
+
+	public ContaResponse fetchContaByRequest(ContaInquiryRequest request);
 
 }

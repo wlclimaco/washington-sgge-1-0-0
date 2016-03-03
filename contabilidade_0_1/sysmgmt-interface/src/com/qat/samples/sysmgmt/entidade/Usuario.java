@@ -20,6 +20,8 @@ public class Usuario extends Pessoa
 
 	private String language;
 
+	private Long ultAcesso;
+
 	public String getSenha()
 	{
 		return senha;
@@ -70,12 +72,22 @@ public class Usuario extends Pessoa
 		this.login = login;
 	}
 
+	public Long getUltAcesso()
+	{
+		return ultAcesso;
+	}
+
+	public void setUltAcesso(Long ultAcesso)
+	{
+		this.ultAcesso = ultAcesso;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "Usuario [getSenha()=" + getSenha() + ", getPergunta()=" + getPergunta() + ", getRole()=" + getRole()
-				+ ", getLanguage()=" + getLanguage() + ", getLogin()=" + getLogin() + ", toString()="
-				+ super.toString() + "]";
+				+ ", getLanguage()=" + getLanguage() + ", getLogin()=" + getLogin() + ", getUltAcesso()="
+				+ getUltAcesso() + ", toString()=" + super.toString() + "]";
 	}
 
 }
