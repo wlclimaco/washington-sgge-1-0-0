@@ -13,18 +13,20 @@
        exactly. -->
   <resultMap id="enderecoResult" type="Endereco">
     <result property="id" column="id"/>
-    <result property="typeValue" column="type"/>
+    <result property="parentId" column="parentId"/>
+    <result property="tabelaEnumValue" column="tabela"/>
     <result property="processId" column="processId"/>
     <result property="logradouro" column="logradouro"/>
     <result property="bairro" column="bairro"/>
     <result property="numero" column="numero"/>
     <result property="enderecoTypeValue" column="enderecoType"/>
+    <result property="cep" column="cep"/>
+    <result property="complemento" column="complemento"/>
     <result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
 	<association property="cidade"    column="cidade" select="CidadeMap.fetchCidadeByEmpresa"  />
-	<association property="endereco"    column="endereco" select="EnderecoMap.fetchEnderecoByEmpresa"  />
   </resultMap>
 
   <!--
@@ -48,33 +50,33 @@
 	-->
   <sql id="allEnderecoColumns">
 		 parentId
-		,type
+		,tabela
 		,processId
       	,logradouro
-      	,cidade
-      	,endereco
       	,bairro
       	,numero
+     	,enderecoType
       	,cep
-      	,enderecoType
+      	,complemento
       	,create_date
       	,create_user
       	,modify_date
       	,modify_user
+      	,cidade
   </sql>
 
   <sql id="allEnderecoValues">
   		#{parentId},
-		#{typeValue},
+  		#{tabelaEnumValue},
 		#{processId},
       	#{logradouro},
-      	#{cidade.id},
-      	#{endereco.id},
       	#{bairro},
       	#{numero},
-      	#{cep},
       	#{enderecoTypeValue},
-    	<include refid="CBOFMap.changeControlFields"/>
+      	#{cep},
+      	#{complemento},
+    	<include refid="CBOFMap.changeControlFields"/>,
+    	#{cidade.id}
   </sql>
 
 

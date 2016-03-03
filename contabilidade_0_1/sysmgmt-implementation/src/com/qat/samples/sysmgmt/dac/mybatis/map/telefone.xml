@@ -22,7 +22,7 @@
 	<result property="ddd" column="ddd"/>
 	<result property="numero" column="telefone" />
 	<result property="telefoneTypeEnumValue" column="telefoneType" />
-	<result property="precessId" column="processId" />
+	<result property="processId" column="processId" />
    <result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -35,17 +35,17 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allTelefoneColumns">
-		 b.type
-		,b.parentId
-		,b.tabela
-		,b.ddd
-		,b.telefone
-		,b.telefoneType
-		,b.processId
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+		 type
+		,parentId
+		,tabela
+		,ddd
+		,telefone
+		,telefoneType
+		,processId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
   </sql>
 
   <sql id="allTelefoneValues">

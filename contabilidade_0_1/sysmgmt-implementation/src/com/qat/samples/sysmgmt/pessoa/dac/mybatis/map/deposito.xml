@@ -4,7 +4,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="FilialMap">
+<mapper namespace="DepositoMap">
 
 	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
@@ -20,8 +20,8 @@
     [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,-->
 
-  <resultMap id="filialResult" type="Filial" extends="EntidadeMap.entidadeResult">
-	<collection property="depositoList" column="emprId" select="DepositoMap.fetchAllDepositoByEntidade"/>
+  <resultMap id="depositoResult" type="Deposito" extends="EntidadeMap.entidadeResult">
+
   </resultMap>
 
 
@@ -29,62 +29,52 @@
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
-  <sql id="allFilialColumns">
-
+  <sql id="allDepositoColumns">
 			<include refid="EntidadeMap.allEntidadeColumns"/>
   </sql>
 
-  <sql id="allFilialValues">
+  <sql id="allDepositoValues">
   			<include refid="EntidadeMap.allEntidadeValues"/>
   </sql>
 
-  <select id="fetchFilialRowCount" parameterType="FilialInquiryRequest" resultType="Integer">
+  <select id="fetchDepositoRowCount" parameterType="DepositoInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM entidade
-        where entidadeEnum = 2
+        where entidadeEnum = 3
 
   </select>
 
-  <select id="fetchAllFilials" resultMap="filialResult">
+  <select id="fetchAllDepositos" resultMap="depositoResult">
     SELECT
-	<include refid="allFilialColumns" />
+	<include refid="allDepositoColumns" />
     FROM entidade ORDER BY nome ASC
   </select>
 
-  <select id="fetchFilialById" parameterType="FetchByIdRequest" resultMap="filialResult">
+  <select id="fetchDepositoById" parameterType="FetchByIdRequest" resultMap="depositoResult">
     			   SELECT
-					id,	<include refid="allFilialColumns" />
+					b.id,	<include refid="allDepositoColumns" />
  				   FROM entidade b
-					where id = #{id}
+					where b.id = #{id}
   </select>
 
-    <select id="fetchFilialByNota" parameterType="Integer" resultMap="filialResult">
+    <select id="fetchDepositoByNota" parameterType="Integer" resultMap="depositoResult">
     			   SELECT
-					id,	<include refid="allFilialColumns" />
+					b.id,	<include refid="allDepositoColumns" />
  				   FROM entidade b
-					where id = #{id}
+					where b.id = #{id}
   </select>
 
-  <select id="fetchAllFilialByEntidade" parameterType="Integer" resultMap="filialResult">
-    			   SELECT
-					id,	<include refid="allFilialColumns" />
- 				   FROM entidade b
-					where entidadeId = #{id} and entidadeEnum = 2
-  </select>
-
-
-
-  <select id="fetchAllFilialsByRequest" parameterType="FilialInquiryRequest" resultMap="filialResult">
-     SELECT * FROM ( SELECT id,
-    						<include refid="allFilialColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+  <select id="fetchAllDepositosByRequest" parameterType="DepositoInquiryRequest" resultMap="depositoResult">
+     SELECT * FROM ( SELECT b.id,
+    						<include refid="allDepositoColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM entidade b
-						where entidadeEnum = 2
+						where b.entidadeEnum = 3
 					<if test="parentId != null">
-						AND id = #{id}
+						AND b.id = #{id}
 					</if>
 					 <if test="statusList != null and !statusList.isEmpty()">
-					     AND PGSI_status IN
+					     AND b.PGSI_status IN
 					     <foreach item="item" index="index" collection="statusList"
 						     open="(" separator="," close=")">
 						   	 #{item.value}
@@ -105,6 +95,12 @@
 				</choose>
   </select>
 
+    <select id="fetchAllDepositoByEntidade" parameterType="Integer" resultMap="depositoResult">
+    			   SELECT
+					b.id,	<include refid="allDepositoColumns" />
+ 				   FROM entidade b
+					where b.emprId = #{id} and entidadeEnum = 3
+  </select>
 
 
 </mapper>

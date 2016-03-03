@@ -32,7 +32,7 @@ public class SociosDACImpl extends SqlSessionDaoSupport implements ISociosDAC
 	private static final String CONTACT_STMT_DELETE_PERSON_CONTACT = CONTACT_NAMESPACE + "deletePersonSocio";
 
 	/** The Constant CONTACT_STMT_INSERT. */
-	private static final String CONTACT_STMT_INSERT = "PessoaMap.insertPessoa";
+	private static final String CONTACT_STMT_INSERT = "SocioMap.insertSocio";
 
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(SociosDACImpl.class);

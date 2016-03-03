@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.entidade.dacd;
+package com.qat.samples.sysmgmt.pessoa.dacd;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,22 +7,22 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.pessoa.Socio;
+import com.qat.samples.sysmgmt.dp.Salario;
+import com.qat.samples.sysmgmt.entidade.dacd.StatusDACD;
+import com.qat.samples.sysmgmt.pessoa.dac.ISalariosDAC;
 import com.qat.samples.sysmgmt.util.AcaoEnum;
 import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.Status;
 import com.qat.samples.sysmgmt.util.TabelaEnum;
 import com.qat.samples.sysmgmt.util.TypeEnum;
-import com.qat.samples.sysmgmt.util.dac.IDocumentoDAC;
 import com.qat.samples.sysmgmt.util.dac.IHistoricoDAC;
-import com.qat.samples.sysmgmt.util.dac.ISociosDAC;
 import com.qat.samples.sysmgmt.util.dac.IStatusDAC;
 
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
  */
-public final class SociosDACD extends SqlSessionDaoSupport
+public final class SalarioDACD extends SqlSessionDaoSupport
 {
 
 	/** The Constant ZERO. */
@@ -38,79 +38,66 @@ public final class SociosDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainSocioAssociations(List<Socio> socioList,
+	public static Integer maintainSalarioAssociations(List<Salario> salarioList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, ISociosDAC socioDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
-			Integer empId, String UserId, Integer processId, Integer historicoId, IDocumentoDAC documentoDAC)
+			TabelaEnum tabelaEnum, ISalariosDAC salarioDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
+			Integer empId, String UserId, Integer processId, Integer historiaId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(socioList))
+		if (ValidationUtil.isNullOrEmpty(salarioList))
 		{
 			return count;
 		}
 		// For Each Contact...
-		for (Socio socio : socioList)
+		for (Salario salario : salarioList)
 		{
 			// Make sure we set the parent key
-			socio.setParentId(parentId);
+			salario.setParentId(parentId);
 
-			if (ValidationUtil.isNull(socio.getModelAction()))
+			if (ValidationUtil.isNull(salario.getModelAction()))
 			{
 				continue;
 			}
-			switch (socio.getModelAction())
+			switch (salario.getModelAction())
 			{
 				case INSERT:
-					count = socioDAC.insertSocio(socio,
-							"insertSocio", response);
+					count = salarioDAC.insertSalario(salario,
+							"insertSalario", response);
 					if (count > 0)
 					{
 						Status status = new Status();
 						status.setStatus(CdStatusTypeEnum.ATIVO);
 						List<Status> statusList = new ArrayList<Status>();
-						statusList.add(status);
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.SOCIO, statusDAC, historicoDAC,
-										processId, historicoId);
+										AcaoEnum.INSERT, UserId, empId, TabelaEnum.SALARIO, statusDAC, historicoDAC,
+										processId, historiaId);
 					}
 					break;
 				case UPDATE:
-					count = socioDAC.updateSocio(socio, response);
+					count = salarioDAC.updateSalario(salario, response);
 					if (count > 0)
 					{
 						count =
-								StatusDACD
-										.maintainStatusAssociations(socio.getStatusList(), response, socio.getId(),
-												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.SOCIO, statusDAC,
-												historicoDAC, processId, historicoId);
+								StatusDACD.maintainStatusAssociations(salario.getStatusList(), response,
+										salario.getId(), null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.SALARIO,
+										statusDAC, historicoDAC, processId, historiaId);
 					}
 					break;
 				case DELETE:
-
 					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.ATIVO);
+					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
 					count =
-							StatusDACD.maintainStatusAssociations(statusList, response, socio.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.SOCIO, statusDAC, historicoDAC,
-									processId, historicoId);
-
+							StatusDACD.maintainStatusAssociations(statusList, response, salario.getId(), null,
+									AcaoEnum.DELETE, UserId, empId, TabelaEnum.SALARIO, statusDAC, historicoDAC,
+									processId, historiaId);
 					break;
-			}
 
-			if (!ValidationUtil.isNullOrEmpty(socio.getDocumentos()))
-			{
-				DocumentosDACD.maintainDocumentoAssociations(socio.getDocumentos(), response, socio.getId(),
-						null,
-						null,
-						TabelaEnum.SOCIO, documentoDAC, statusDAC, historicoDAC, empId,
-						socio.getCreateUser(), processId, historicoId);
 			}
-
 		}
+
 		return count;
 	}
 }

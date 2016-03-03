@@ -4,7 +4,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="FilialMap">
+<mapper namespace="EmpresaMap">
 
 	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
@@ -20,76 +20,62 @@
     [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,-->
 
-  <resultMap id="filialResult" type="Filial" extends="EntidadeMap.entidadeResult">
-	<collection property="depositoList" column="emprId" select="DepositoMap.fetchAllDepositoByEntidade"/>
+  <resultMap id="empresaResult" type="Empresa" extends="EntidadeMap.entidadeResult">
+	<collection property="socios" column="id" select="SocioMap.fetchSocioByEmpresaId"/>
+	<collection property="planoList" column="id" select="PlanoMap.fetchPlanoByEmpresa"/>
+	<collection property="filialList" column="id" select="FilialMap.fetchAllFilialByEntidade"/>
+	<collection property="depositoList" column="id" select="DepositoMap.fetchAllDepositoByEntidade"/>
   </resultMap>
 
+   <resultMap id="empresaTableResult" type="Empresa" extends="EntidadeMap.entidadeTableResult">
+	</resultMap>
 
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
-  <sql id="allFilialColumns">
-
+  <sql id="allEmpresaColumns">
 			<include refid="EntidadeMap.allEntidadeColumns"/>
   </sql>
 
-  <sql id="allFilialValues">
+  <sql id="allEmpresaValues">
   			<include refid="EntidadeMap.allEntidadeValues"/>
   </sql>
 
-  <select id="fetchFilialRowCount" parameterType="FilialInquiryRequest" resultType="Integer">
+  <select id="fetchEmpresaRowCount" parameterType="EmpresaInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM entidade
-        where entidadeEnum = 2
+        where entidadeEnum = 1
 
   </select>
 
-  <select id="fetchAllFilials" resultMap="filialResult">
+  <select id="fetchAllEmpresas" resultMap="empresaTableResult">
     SELECT
-	<include refid="allFilialColumns" />
+	<include refid="allEmpresaColumns" />
     FROM entidade ORDER BY nome ASC
   </select>
 
-  <select id="fetchFilialById" parameterType="FetchByIdRequest" resultMap="filialResult">
+  <select id="fetchEmpresaById" parameterType="FetchByIdRequest" resultMap="empresaResult">
     			   SELECT
-					id,	<include refid="allFilialColumns" />
+					b.id,	<include refid="allEmpresaColumns" />
  				   FROM entidade b
-					where id = #{id}
+					where b.id = #{id}
   </select>
 
-    <select id="fetchFilialByNota" parameterType="Integer" resultMap="filialResult">
+    <select id="fetchEmpresaByNota" parameterType="Integer" resultMap="empresaResult">
     			   SELECT
-					id,	<include refid="allFilialColumns" />
+					b.id,	<include refid="allEmpresaColumns" />
  				   FROM entidade b
-					where id = #{id}
+					where b.id = #{id}
   </select>
 
-  <select id="fetchAllFilialByEntidade" parameterType="Integer" resultMap="filialResult">
-    			   SELECT
-					id,	<include refid="allFilialColumns" />
- 				   FROM entidade b
-					where entidadeId = #{id} and entidadeEnum = 2
-  </select>
-
-
-
-  <select id="fetchAllFilialsByRequest" parameterType="FilialInquiryRequest" resultMap="filialResult">
-     SELECT * FROM ( SELECT id,
-    						<include refid="allFilialColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+  <select id="fetchAllEmpresasByRequest" parameterType="EmpresaInquiryRequest" resultMap="empresaResult">
+     SELECT * FROM ( SELECT b.id,
+    						<include refid="allEmpresaColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM entidade b
-						where entidadeEnum = 2
-					<if test="parentId != null">
-						AND id = #{id}
-					</if>
-					 <if test="statusList != null and !statusList.isEmpty()">
-					     AND PGSI_status IN
-					     <foreach item="item" index="index" collection="statusList"
-						     open="(" separator="," close=")">
-						   	 #{item.value}
-						 </foreach>
-					 </if>
+
+
     			) LIST
 				<choose>
 					<when test="pageSize != null and pageSize > 0">
@@ -104,7 +90,6 @@
 					</otherwise>
 				</choose>
   </select>
-
 
 
 </mapper>

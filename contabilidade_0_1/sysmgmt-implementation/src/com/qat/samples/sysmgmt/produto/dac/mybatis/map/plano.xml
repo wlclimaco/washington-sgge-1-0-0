@@ -39,9 +39,9 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-    <collection property="preco" column="{id=id,emprId=emprId}" select="TabPrecoMap.fetchTabPrecoByProduto" />
+  <!--  <collection property="preco" column="{id=id,emprId=emprId}" select="TabPrecoMap.fetchTabPrecoByProduto" />
     <collection property="servicos" column="id" select="ServicoMap.fetchPlanoByServico" />
-    <collection property="imagens" column="id" select="ImagemMap.fetchImagemByPlano" />
+    <collection property="imagens" column="id" select="ImagemMap.fetchImagemByPlano" /> -->
   </resultMap>
 
 

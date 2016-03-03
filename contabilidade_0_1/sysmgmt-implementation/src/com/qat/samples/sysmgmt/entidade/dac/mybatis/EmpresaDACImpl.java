@@ -430,7 +430,8 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 			insertCount +=
 					SociosDACD.maintainSocioAssociations(empresa.getSocios(), response, empresa.getId(), null, null,
 							TabelaEnum.EMPRESA, getSocioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-							empresa.getCreateUser(), historicoId, historicoId);
+							empresa.getCreateUser(), historicoId, historicoId, getDocumentoDAC());
+
 		}
 		if (!ValidationUtil.isNullOrEmpty(empresa.getPlanoList()))
 		{
@@ -487,7 +488,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		updateCount +=
 				SociosDACD.maintainSocioAssociations(empresa.getSocios(), response, empresa.getId(), null, null,
 						TabelaEnum.EMPRESA, getSocioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-						empresa.getCreateUser(), historicoId, historicoId);
+						empresa.getCreateUser(), historicoId, historicoId, getDocumentoDAC());
 
 		updateCount +=
 				PlanoDACD.maintainPlanoAssociations(empresa.getPlanoList(), response, empresa.getId(), null, null,
