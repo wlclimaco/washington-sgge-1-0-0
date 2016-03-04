@@ -1,249 +1,323 @@
 package com.qat.samples.sysmgmt.pessoa.bas.rest;
 
-import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
-import com.qat.samples.sysmgmt.cnae.model.response.CnaeResponse;
-import com.qat.samples.sysmgmt.entidade.bai.IEmpresaBAI;
-import com.qat.samples.sysmgmt.entidade.bas.IEmpresaRESTBAS;
-import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.DepositoMaintenanceRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.EmpresaMaintenanceRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
-import com.qat.samples.sysmgmt.entidade.model.response.DepositoResponse;
-import com.qat.samples.sysmgmt.entidade.model.response.EmpresaResponse;
-import com.qat.samples.sysmgmt.entidade.model.response.FilialResponse;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
-import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
-import com.qat.samples.sysmgmt.fiscal.model.response.ClassificacaoResponse;
-import com.qat.samples.sysmgmt.fiscal.model.response.RegimeResponse;
+import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
+import com.qat.samples.sysmgmt.agencia.model.response.AgenciaResponse;
+import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
+import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest;
+import com.qat.samples.sysmgmt.beneficios.model.response.BeneficiosResponse;
+import com.qat.samples.sysmgmt.condpag.model.request.FormaPgInquiryRequest;
+import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
+import com.qat.samples.sysmgmt.contato.model.response.ContatoResponse;
+import com.qat.samples.sysmgmt.dp.model.request.EventoInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioMaintenanceRequest;
+import com.qat.samples.sysmgmt.dp.model.request.HoraFuncInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.ProfissaoInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.response.BancoResponse;
+import com.qat.samples.sysmgmt.dp.model.response.ContaResponse;
+import com.qat.samples.sysmgmt.dp.model.response.ConvenioResponse;
+import com.qat.samples.sysmgmt.dp.model.response.EventoResponse;
+import com.qat.samples.sysmgmt.dp.model.response.FormaPgResponse;
+import com.qat.samples.sysmgmt.dp.model.response.FuncionarioResponse;
+import com.qat.samples.sysmgmt.dp.model.response.HorarioFuncResponse;
+import com.qat.samples.sysmgmt.dp.model.response.ProfissaoResponse;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest;
+import com.qat.samples.sysmgmt.estado.model.response.EstadoResponse;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
-import com.qat.samples.sysmgmt.produto.model.response.PlanoResponse;
+import com.qat.samples.sysmgmt.pessoa.bai.IPessoaBAI;
+import com.qat.samples.sysmgmt.pessoa.bas.IPessoaRESTBAS;
+import com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ClienteMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ContaInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ContadorInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ContadorMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ConvenioInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.response.ClienteResponse;
+import com.qat.samples.sysmgmt.pessoa.model.response.ContadorResponse;
+import com.qat.samples.sysmgmt.pessoa.model.response.FornecedorResponse;
+import com.qat.samples.sysmgmt.pessoa.model.response.TransportadorResponse;
 import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
-import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
-import com.qat.samples.sysmgmt.util.model.request.UsuarioMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.response.CidadeResponse;
-import com.qat.samples.sysmgmt.util.model.response.UsuarioResponse;
 
 /**
  * Standard implementation of a BAS where the operations are delegated to a BAI.
  * Note the BAI is injected by Spring.
  */
-public class PessoaBAS implements IEmpresaRESTBAS
+public class PessoaBAS implements IPessoaRESTBAS
 {
 
 	/** The empresa bai. */
-	private IEmpresaBAI empresaBAI; // injected by Spring through setter
+	private IPessoaBAI pessoaBAI; // injected by Spring through setter
 
-	/**
-	 * Sets the empresa bai.
-	 * 
-	 * @param empresaBAI the new empresa bai
-	 */
-	public void setEmpresaBAI(IEmpresaBAI empresaBAI)
+	public IPessoaBAI getPessoaBAI()
 	{
-		this.empresaBAI = empresaBAI;
+		return pessoaBAI;
 	}
 
-	/**
-	 * Gets the empresa bai.
-	 * 
-	 * @return the empresa bai
-	 */
-	public IEmpresaBAI getEmpresaBAI()
+	public void setPessoaBAI(IPessoaBAI pessoaBAI)
 	{
-		return empresaBAI;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.IEmpresaRESTBAS#insertEmpresa(com.qat.samples.sysmgmt.model.request.
-	 * EmpresaMaintenanceRequest)
-	 */
-	@Override
-	public EmpresaResponse insertEmpresa(EmpresaMaintenanceRequest request)
-	{
-		return getEmpresaBAI().insertEmpresa(request);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.IEmpresaRESTBAS#updateEmpresa(com.qat.samples.sysmgmt.model.request.
-	 * EmpresaMaintenanceRequest)
-	 */
-	@Override
-	public EmpresaResponse updateEmpresa(EmpresaMaintenanceRequest request)
-	{
-		return getEmpresaBAI().updateEmpresa(request);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bas.IEmpresaRESTBAS#deleteEmpresa(com.qat.samples.sysmgmt.model.request.
-	 * EmpresaMaintenanceRequest)
-	 */
-	@Override
-	public EmpresaResponse deleteEmpresa(EmpresaMaintenanceRequest request)
-	{
-		return getEmpresaBAI().deleteEmpresa(request);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.qat.samples.sysmgmt.bas.IEmpresaRESTBAS#fetchEmpresaById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
-	 * )
-	 */
-	@Override
-	public EmpresaResponse fetchEmpresaById(FetchByIdRequest request)
-	{
-		return getEmpresaBAI().fetchEmpresaById(request);
+		this.pessoaBAI = pessoaBAI;
 	}
 
 	@Override
-	public EmpresaResponse fetchEmpresaByRequest(EmpresaInquiryRequest request)
+	public ClienteResponse insertCliente(ClienteMaintenanceRequest request)
 	{
-		return getEmpresaBAI().fetchEmpresaByRequest(request);
+		return getPessoaBAI().insertCliente(request);
 	}
 
 	@Override
-	public FilialResponse insertFilial(FilialMaintenanceRequest request)
+	public ClienteResponse updateCliente(ClienteMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getPessoaBAI().updateCliente(request);
+
 	}
 
 	@Override
-	public FilialResponse updateFilial(FilialMaintenanceRequest request)
+	public ClienteResponse deleteCliente(ClienteMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getPessoaBAI().deleteCliente(request);
+
 	}
 
 	@Override
-	public FilialResponse deleteFilial(FilialMaintenanceRequest request)
+	public ClienteResponse fetchClienteById(FetchByIdRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getPessoaBAI().fetchClienteById(request);
+
 	}
 
 	@Override
-	public FilialResponse fetchFilialById(FetchByIdRequest request)
+	public ClienteResponse fetchClienteByRequest(ClienteInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getPessoaBAI().fetchClienteByRequest(request);
+
 	}
 
 	@Override
-	public FilialResponse fetchFilialByRequest(FilialInquiryRequest request)
+	public FornecedorResponse insertFornecedor(FornecedorMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getPessoaBAI().insertFornecedor(request);
+
 	}
 
 	@Override
-	public DepositoResponse insertDeposito(DepositoMaintenanceRequest request)
+	public FornecedorResponse updateFornecedor(FornecedorMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getPessoaBAI().updateFornecedor(request);
+
 	}
 
 	@Override
-	public DepositoResponse updateDeposito(DepositoMaintenanceRequest request)
+	public FornecedorResponse deleteFornecedor(FornecedorMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getPessoaBAI().deleteFornecedor(request);
+
 	}
 
 	@Override
-	public DepositoResponse deleteDeposito(DepositoMaintenanceRequest request)
+	public FornecedorResponse fetchFornecedorById(FetchByIdRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getPessoaBAI().fetchFornecedorById(request);
+
 	}
 
 	@Override
-	public DepositoResponse fetchDepositoById(FetchByIdRequest request)
+	public FornecedorResponse fetchFornecedorByRequest(FornecedorInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getPessoaBAI().fetchFornecedorByRequest(request);
+
 	}
 
 	@Override
-	public DepositoResponse fetchDepositoByRequest(DepositoInquiryRequest request)
+	public FuncionarioResponse insertFuncionario(FuncionarioMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getPessoaBAI().insertFuncionario(request);
+
 	}
 
 	@Override
-	public CnaeResponse fetchCnaeByRequest(CnaeInquiryRequest request)
+	public FuncionarioResponse updateFuncionario(FuncionarioMaintenanceRequest request)
 	{
-		return getEmpresaBAI().fetchCnaeByRequest(request);
+		return getPessoaBAI().updateFuncionario(request);
+
 	}
 
 	@Override
-	public RegimeResponse fetchRegimeByRequest(RegimeInquiryRequest request)
+	public FuncionarioResponse deleteFuncionario(FuncionarioMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getPessoaBAI().deleteFuncionario(request);
+
 	}
 
 	@Override
-	public CidadeResponse fetchCidadeByRequest(CidadeInquiryRequest request)
+	public FuncionarioResponse fetchFuncionarioById(FetchByIdRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getPessoaBAI().fetchFuncionarioById(request);
+
 	}
 
 	@Override
-	public PlanoResponse fetchPlanoByRequest(PlanoInquiryRequest request)
+	public FuncionarioResponse fetchFuncionarioByRequest(FuncionarioInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getPessoaBAI().fetchFuncionarioByRequest(request);
+
 	}
 
 	@Override
-	public ClassificacaoResponse fetchClassificacaoByRequest(ClassificacaoInquiryRequest request)
+	public TransportadorResponse insertTransportador(TransportadorMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getPessoaBAI().insertTransportador(request);
+
 	}
 
 	@Override
-	public UsuarioResponse insertUsuario(UsuarioMaintenanceRequest request)
+	public TransportadorResponse updateTransportador(TransportadorMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getPessoaBAI().updateTransportador(request);
+
 	}
 
 	@Override
-	public UsuarioResponse updateUsuario(UsuarioMaintenanceRequest request)
+	public TransportadorResponse deleteTransportador(TransportadorMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getPessoaBAI().deleteTransportador(request);
+
 	}
 
 	@Override
-	public UsuarioResponse deleteUsuario(UsuarioMaintenanceRequest request)
+	public TransportadorResponse fetchTransportadorById(FetchByIdRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getPessoaBAI().fetchTransportadorById(request);
+
 	}
 
 	@Override
-	public UsuarioResponse fetchUsuarioById(FetchByIdRequest request)
+	public TransportadorResponse fetchTransportadorByRequest(TransportadorInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getPessoaBAI().fetchTransportadorByRequest(request);
+
 	}
 
 	@Override
-	public UsuarioResponse fetchUsuarioByRequest(UsuarioInquiryRequest request)
+	public ContadorResponse insertContador(ContadorMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getPessoaBAI().insertContador(request);
+
 	}
 
+	@Override
+	public ContadorResponse updateContador(ContadorMaintenanceRequest request)
+	{
+		return getPessoaBAI().updateContador(request);
+
+	}
+
+	@Override
+	public ContadorResponse deleteContador(ContadorMaintenanceRequest request)
+	{
+		return getPessoaBAI().deleteContador(request);
+
+	}
+
+	@Override
+	public ContadorResponse fetchContadorById(FetchByIdRequest request)
+	{
+		return getPessoaBAI().fetchContadorById(request);
+
+	}
+
+	@Override
+	public ContadorResponse fetchContadorByRequest(ContadorInquiryRequest request)
+	{
+		return getPessoaBAI().fetchContadorByRequest(request);
+
+	}
+
+	@Override
+	public ProfissaoResponse fetchProfissaoByRequest(ProfissaoInquiryRequest request)
+	{
+		return getPessoaBAI().fetchProfissaoByRequest(request);
+
+	}
+
+	@Override
+	public ContatoResponse fetchContatoByRequest(ContatoInquiryRequest request)
+	{
+		return getPessoaBAI().fetchContatoByRequest(request);
+
+	}
+
+	@Override
+	public AgenciaResponse fetchAgenciaByRequest(AgenciaInquiryRequest request)
+	{
+		return getPessoaBAI().fetchAgenciaByRequest(request);
+
+	}
+
+	@Override
+	public EstadoResponse fetchEstadoByRequest(EstadoInquiryRequest request)
+	{
+		return getPessoaBAI().fetchEstadoByRequest(request);
+
+	}
+
+	@Override
+	public CidadeResponse fetchCidadeRequest(CidadeInquiryRequest request)
+	{
+		return getPessoaBAI().fetchCidadeRequest(request);
+
+	}
+
+	@Override
+	public EventoResponse fetchEventosRequest(EventoInquiryRequest request)
+	{
+		return getPessoaBAI().fetchEventosRequest(request);
+
+	}
+
+	@Override
+	public BeneficiosResponse fetchBeneficiosRequest(BeneficiosInquiryRequest request)
+	{
+		return getPessoaBAI().fetchBeneficiosRequest(request);
+
+	}
+
+	@Override
+	public HorarioFuncResponse fetchHorarioFuncsRequest(HoraFuncInquiryRequest request)
+	{
+		return getPessoaBAI().fetchHorarioFuncsRequest(request);
+
+	}
+
+	@Override
+	public ConvenioResponse fetchConvenioByRequest(ConvenioInquiryRequest request)
+	{
+		return getPessoaBAI().fetchConvenioByRequest(request);
+
+	}
+
+	@Override
+	public BancoResponse fetchBancoByRequest(BancoInquiryRequest request)
+	{
+		return getPessoaBAI().fetchBancoByRequest(request);
+
+	}
+
+	@Override
+	public FormaPgResponse fetchFormaPgByRequest(FormaPgInquiryRequest request)
+	{
+		return getPessoaBAI().fetchFormaPgByRequest(request);
+
+	}
+
+	@Override
+	public ContaResponse fetchContaByRequest(ContaInquiryRequest request)
+	{
+		return getPessoaBAI().fetchContaByRequest(request);
+
+	}
 }

@@ -5,29 +5,46 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
-import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
-import com.qat.samples.sysmgmt.cnae.model.response.CnaeResponse;
-import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.DepositoMaintenanceRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.EmpresaMaintenanceRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
-import com.qat.samples.sysmgmt.entidade.model.response.DepositoResponse;
-import com.qat.samples.sysmgmt.entidade.model.response.EmpresaResponse;
-import com.qat.samples.sysmgmt.entidade.model.response.FilialResponse;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
-import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
-import com.qat.samples.sysmgmt.fiscal.model.response.ClassificacaoResponse;
-import com.qat.samples.sysmgmt.fiscal.model.response.RegimeResponse;
+import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
+import com.qat.samples.sysmgmt.agencia.model.response.AgenciaResponse;
+import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
+import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest;
+import com.qat.samples.sysmgmt.beneficios.model.response.BeneficiosResponse;
+import com.qat.samples.sysmgmt.condpag.model.request.FormaPgInquiryRequest;
+import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
+import com.qat.samples.sysmgmt.contato.model.response.ContatoResponse;
+import com.qat.samples.sysmgmt.dp.model.request.EventoInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioMaintenanceRequest;
+import com.qat.samples.sysmgmt.dp.model.request.HoraFuncInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.ProfissaoInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.response.BancoResponse;
+import com.qat.samples.sysmgmt.dp.model.response.ContaResponse;
+import com.qat.samples.sysmgmt.dp.model.response.ConvenioResponse;
+import com.qat.samples.sysmgmt.dp.model.response.EventoResponse;
+import com.qat.samples.sysmgmt.dp.model.response.FormaPgResponse;
+import com.qat.samples.sysmgmt.dp.model.response.FuncionarioResponse;
+import com.qat.samples.sysmgmt.dp.model.response.HorarioFuncResponse;
+import com.qat.samples.sysmgmt.dp.model.response.ProfissaoResponse;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest;
+import com.qat.samples.sysmgmt.estado.model.response.EstadoResponse;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
-import com.qat.samples.sysmgmt.produto.model.response.PlanoResponse;
+import com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ClienteMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ContaInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ContadorInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ContadorMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ConvenioInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.response.ClienteResponse;
+import com.qat.samples.sysmgmt.pessoa.model.response.ContadorResponse;
+import com.qat.samples.sysmgmt.pessoa.model.response.FornecedorResponse;
+import com.qat.samples.sysmgmt.pessoa.model.response.TransportadorResponse;
 import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
-import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
-import com.qat.samples.sysmgmt.util.model.request.UsuarioMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.response.CidadeResponse;
-import com.qat.samples.sysmgmt.util.model.response.UsuarioResponse;
 
 /**
  * The Interface ISupermercadoRESTBAS. (Business Area Service - BAS)
@@ -38,106 +55,161 @@ public interface IPessoaRESTBAS
 {
 
 	@POST
-	@Path("/insertEmpresa/")
-	public EmpresaResponse insertEmpresa(EmpresaMaintenanceRequest request);
+	@Path("/insertCliente/")
+	public ClienteResponse insertCliente(ClienteMaintenanceRequest request);
 
 	@POST
-	@Path("/updateEmpresa/")
-	public EmpresaResponse updateEmpresa(EmpresaMaintenanceRequest request);
+	@Path("/updateCliente/")
+	public ClienteResponse updateCliente(ClienteMaintenanceRequest request);
 
 	@POST
-	@Path("/deleteEmpresa/")
-	public EmpresaResponse deleteEmpresa(EmpresaMaintenanceRequest request);
+	@Path("/deleteCliente/")
+	public ClienteResponse deleteCliente(ClienteMaintenanceRequest request);
 
 	@POST
-	@Path("/fetchEmpresaById/")
-	public EmpresaResponse fetchEmpresaById(FetchByIdRequest request);
+	@Path("/fetchClienteById/")
+	public ClienteResponse fetchClienteById(FetchByIdRequest request);
 
 	@POST
-	@Path("/fetchEmpresaByRequest/")
-	public EmpresaResponse fetchEmpresaByRequest(EmpresaInquiryRequest request);
+	@Path("/fetchClienteByRequest/")
+	public ClienteResponse fetchClienteByRequest(ClienteInquiryRequest request);
 
-	// filial
-	@POST
-	@Path("/insertFilial/")
-	public FilialResponse insertFilial(FilialMaintenanceRequest request);
+	// ===========
 
 	@POST
-	@Path("/updateFilial/")
-	public FilialResponse updateFilial(FilialMaintenanceRequest request);
+	@Path("/insertFornecedor/")
+	public FornecedorResponse insertFornecedor(FornecedorMaintenanceRequest request);
 
 	@POST
-	@Path("/deleteFilial/")
-	public FilialResponse deleteFilial(FilialMaintenanceRequest request);
+	@Path("/updateFornecedor/")
+	public FornecedorResponse updateFornecedor(FornecedorMaintenanceRequest request);
 
 	@POST
-	@Path("/fetchFilialById/")
-	public FilialResponse fetchFilialById(FetchByIdRequest request);
+	@Path("/deleteFornecedor/")
+	public FornecedorResponse deleteFornecedor(FornecedorMaintenanceRequest request);
 
 	@POST
-	@Path("/fetchFilialByRequest/")
-	public FilialResponse fetchFilialByRequest(FilialInquiryRequest request);
-
-	// deposito
-	@POST
-	@Path("/insertDeposito/")
-	public DepositoResponse insertDeposito(DepositoMaintenanceRequest request);
+	@Path("/fetchFornecedorById/")
+	public FornecedorResponse fetchFornecedorById(FetchByIdRequest request);
 
 	@POST
-	@Path("/updateDeposito/")
-	public DepositoResponse updateDeposito(DepositoMaintenanceRequest request);
+	@Path("/fetchFornecedorByRequest/")
+	public FornecedorResponse fetchFornecedorByRequest(FornecedorInquiryRequest request);
+
+	// ==========
 
 	@POST
-	@Path("/deleteDeposito/")
-	public DepositoResponse deleteDeposito(DepositoMaintenanceRequest request);
+	@Path("/insertFuncionario/")
+	public FuncionarioResponse insertFuncionario(FuncionarioMaintenanceRequest request);
 
 	@POST
-	@Path("/fetchDepositoById/")
-	public DepositoResponse fetchDepositoById(FetchByIdRequest request);
+	@Path("/updateFuncionario/")
+	public FuncionarioResponse updateFuncionario(FuncionarioMaintenanceRequest request);
 
 	@POST
-	@Path("/fetchDepositoByRequest/")
-	public DepositoResponse fetchDepositoByRequest(DepositoInquiryRequest request);
-
-	// outros
-	@POST
-	@Path("/fetchCnaeByRequest/")
-	public CnaeResponse fetchCnaeByRequest(CnaeInquiryRequest request);
+	@Path("/deleteFuncionario/")
+	public FuncionarioResponse deleteFuncionario(FuncionarioMaintenanceRequest request);
 
 	@POST
-	@Path("/fetchRegimeByRequest/")
-	public RegimeResponse fetchRegimeByRequest(RegimeInquiryRequest request);
+	@Path("/fetchFuncionarioById/")
+	public FuncionarioResponse fetchFuncionarioById(FetchByIdRequest request);
 
 	@POST
-	@Path("/fetchCidadeByRequest/")
-	public CidadeResponse fetchCidadeByRequest(CidadeInquiryRequest request);
+	@Path("/fetchFuncionarioByRequest/")
+	public FuncionarioResponse fetchFuncionarioByRequest(FuncionarioInquiryRequest request);
+
+	// ==========
 
 	@POST
-	@Path("/fetchPlanoByRequest/")
-	public PlanoResponse fetchPlanoByRequest(PlanoInquiryRequest request);
+	@Path("/insertTransportador/")
+	public TransportadorResponse insertTransportador(TransportadorMaintenanceRequest request);
 
 	@POST
-	@Path("/fetchClassificacaoByRequest/")
-	public ClassificacaoResponse fetchClassificacaoByRequest(ClassificacaoInquiryRequest request);
-
-	// Usuario
-	@POST
-	@Path("/insertUsuario/")
-	public UsuarioResponse insertUsuario(UsuarioMaintenanceRequest request);
+	@Path("/updateTransportador/")
+	public TransportadorResponse updateTransportador(TransportadorMaintenanceRequest request);
 
 	@POST
-	@Path("/updateUsuario/")
-	public UsuarioResponse updateUsuario(UsuarioMaintenanceRequest request);
+	@Path("/deleteTransportador/")
+	public TransportadorResponse deleteTransportador(TransportadorMaintenanceRequest request);
 
 	@POST
-	@Path("/deleteUsuario/")
-	public UsuarioResponse deleteUsuario(UsuarioMaintenanceRequest request);
+	@Path("/fetchTransportadorById/")
+	public TransportadorResponse fetchTransportadorById(FetchByIdRequest request);
 
 	@POST
-	@Path("/fetchUsuarioById/")
-	public UsuarioResponse fetchUsuarioById(FetchByIdRequest request);
+	@Path("/fetchTransportadorByRequest/")
+	public TransportadorResponse fetchTransportadorByRequest(TransportadorInquiryRequest request);
+
+	// ==========
+
+	// ==========
 
 	@POST
-	@Path("/fetchUsuarioByRequest/")
-	public UsuarioResponse fetchUsuarioByRequest(UsuarioInquiryRequest request);
+	@Path("/insertContador/")
+	public ContadorResponse insertContador(ContadorMaintenanceRequest request);
+
+	@POST
+	@Path("/updateContador/")
+	public ContadorResponse updateContador(ContadorMaintenanceRequest request);
+
+	@POST
+	@Path("/deleteContador/")
+	public ContadorResponse deleteContador(ContadorMaintenanceRequest request);
+
+	@POST
+	@Path("/fetchContadorById/")
+	public ContadorResponse fetchContadorById(FetchByIdRequest request);
+
+	@POST
+	@Path("/fetchContadorByRequest/")
+	public ContadorResponse fetchContadorByRequest(ContadorInquiryRequest request);
+
+	@POST
+	@Path("/fetchProfissaoByRequest/")
+	public ProfissaoResponse fetchProfissaoByRequest(ProfissaoInquiryRequest request);
+
+	@POST
+	@Path("/fetchContatoByRequest/")
+	public ContatoResponse fetchContatoByRequest(ContatoInquiryRequest request);
+
+	@POST
+	@Path("/fetchAgenciaByRequest/")
+	public AgenciaResponse fetchAgenciaByRequest(AgenciaInquiryRequest request);
+
+	@POST
+	@Path("/fetchEstadoByRequest/")
+	public EstadoResponse fetchEstadoByRequest(EstadoInquiryRequest request);
+
+	@POST
+	@Path("/fetchCidadeRequest/")
+	public CidadeResponse fetchCidadeRequest(CidadeInquiryRequest request);
+
+	@POST
+	@Path("/fetchEventosRequest/")
+	public EventoResponse fetchEventosRequest(EventoInquiryRequest request);
+
+	@POST
+	@Path("/fetchBeneficiosRequest/")
+	public BeneficiosResponse fetchBeneficiosRequest(BeneficiosInquiryRequest request);
+
+	@POST
+	@Path("/fetchHorarioFuncsRequest/")
+	public HorarioFuncResponse fetchHorarioFuncsRequest(HoraFuncInquiryRequest request);
+
+	@POST
+	@Path("/fetchConvenioByRequest/")
+	public ConvenioResponse fetchConvenioByRequest(ConvenioInquiryRequest request);
+
+	@POST
+	@Path("/fetchBancoByRequest/")
+	public BancoResponse fetchBancoByRequest(BancoInquiryRequest request);
+
+	@POST
+	@Path("/fetchFormaPgByRequest/")
+	public FormaPgResponse fetchFormaPgByRequest(FormaPgInquiryRequest request);
+
+	@POST
+	@Path("/fetchContaByRequest/")
+	public ContaResponse fetchContaByRequest(ContaInquiryRequest request);
+
 }

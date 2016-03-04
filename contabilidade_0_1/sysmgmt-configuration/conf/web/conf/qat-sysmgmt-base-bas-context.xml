@@ -289,6 +289,10 @@
 		<property name="siteBAI" ref="siteBAI"/>
 	</bean>
 
+	<bean id="pessoaRESTBAS" class="com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS">
+		<property name="pessoaBAI" ref="pessoaBAI"/>
+	</bean>
+
 
 
 <!-- 	<bean id="supermercadoRESTBAS" class="com.qat.samples.sysmgmt.supermercado.bas.rest.SupermercadoBAS"> -->
