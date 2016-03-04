@@ -1,8 +1,5 @@
 package com.qat.samples.sysmgmt.banco;
 
-import java.util.List;
-
-import com.qat.samples.sysmgmt.agencia.Agencia;
 import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
 
 /**
@@ -16,8 +13,6 @@ public class Banco extends ModelCosmeDamiao
 	private Integer id;
 
 	private String nome;
-
-	private List<Agencia> agenciaList;
 
 	public Banco(Integer id)
 	{
@@ -69,26 +64,10 @@ public class Banco extends ModelCosmeDamiao
 		this.nome = nome;
 	}
 
-	/**
-	 * @return the agenciaList
-	 */
-	public List<Agencia> getAgenciaList()
-	{
-		return agenciaList;
-	}
-
-	/**
-	 * @param agenciaList the agenciaList to set
-	 */
-	public void setAgenciaList(List<Agencia> agenciaList)
-	{
-		this.agenciaList = agenciaList;
-	}
-
 	@Override
 	public String toString()
 	{
-		return "Banco [getId()=" + getId() + ", getNome()=" + getNome() + ", getAgenciaList()=" + getAgenciaList()
+		return "Banco [getId()=" + getId() + ", getNome()=" + getNome()
 				+ ", toString()=" + super.toString() + "]";
 	}
 
