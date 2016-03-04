@@ -148,7 +148,7 @@ head(function()
 						        <sec:authorize ifAllGranted="ROLE_DOMAIN ADMINS">
 								{title: 'Departamento Pessoal', isFolder: true, expand: true, tooltip: wdtree.node3.tooltip,
 									children: [
-										{title: 'Funcionario', key: 'qatmvctabsFun', url: "qat_func_tabs.jsp"},
+										{title: 'Funcionario', key: 'qatmvctabsFuncionario', url: "qat_func_tabs.jsp"},
 
 									]
 								},

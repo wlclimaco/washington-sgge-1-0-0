@@ -44,6 +44,7 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 public interface IPessoaDAC
 {
 
+	// ================================
 	public InternalResultsResponse<Cliente> updateCliente(Cliente cnae);
 
 	public InternalResultsResponse<Cliente> insertCliente(Cliente cnae);

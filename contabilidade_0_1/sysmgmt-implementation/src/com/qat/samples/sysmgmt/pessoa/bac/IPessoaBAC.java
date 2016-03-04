@@ -18,6 +18,8 @@ import com.qat.samples.sysmgmt.dp.Eventos;
 import com.qat.samples.sysmgmt.dp.HorarioFunc;
 import com.qat.samples.sysmgmt.dp.Profissao;
 import com.qat.samples.sysmgmt.dp.model.request.EventoInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioMaintenanceRequest;
 import com.qat.samples.sysmgmt.dp.model.request.HoraFuncInquiryRequest;
 import com.qat.samples.sysmgmt.dp.model.request.ProfissaoInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
@@ -26,6 +28,7 @@ import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.pessoa.Cliente;
 import com.qat.samples.sysmgmt.pessoa.Contador;
 import com.qat.samples.sysmgmt.pessoa.Fornecedor;
+import com.qat.samples.sysmgmt.pessoa.Funcionario;
 import com.qat.samples.sysmgmt.pessoa.Transportador;
 import com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.request.ClienteMaintenanceRequest;
@@ -45,6 +48,18 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
  */
 public interface IPessoaBAC
 {
+
+	public InternalResultsResponse<Funcionario> insertFuncionario(FuncionarioMaintenanceRequest request);
+
+	public InternalResultsResponse<Funcionario> updateFuncionario(FuncionarioMaintenanceRequest request);
+
+	public InternalResponse deleteFuncionario(FuncionarioMaintenanceRequest request);
+
+	public InternalResultsResponse<Funcionario> fetchFuncionarioById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Funcionario> fetchFuncionarioByRequest(FuncionarioInquiryRequest request);
+
+	// =============================
 
 	public InternalResultsResponse<Cliente> insertCliente(ClienteMaintenanceRequest request);
 

@@ -85,12 +85,10 @@ import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.Cidade;
 import com.qat.samples.sysmgmt.util.Status;
 import com.qat.samples.sysmgmt.util.TabelaEnum;
-import com.qat.samples.sysmgmt.util.dac.ICnaeDAC;
 import com.qat.samples.sysmgmt.util.dac.IDocumentoDAC;
 import com.qat.samples.sysmgmt.util.dac.IEmailDAC;
 import com.qat.samples.sysmgmt.util.dac.IHistoricoDAC;
 import com.qat.samples.sysmgmt.util.dac.INoteDAC;
-import com.qat.samples.sysmgmt.util.dac.ISociosDAC;
 import com.qat.samples.sysmgmt.util.dac.IStatusDAC;
 import com.qat.samples.sysmgmt.util.dac.ITelefoneDAC;
 import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
@@ -125,8 +123,6 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 	IEnderecoDAC enderecoDAC;
 	ITelefoneDAC telefoneDAC;
 	IEmailDAC emailDAC;
-	ISociosDAC socioDAC;
-	ICnaeDAC cnaeDAC;
 	IDocumentoDAC documentoDAC;
 	IHistoricoDAC historicoDAC;
 	IStatusDAC statusDAC;
@@ -305,38 +301,6 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 	public void setEmailDAC(IEmailDAC emailDAC)
 	{
 		this.emailDAC = emailDAC;
-	}
-
-	/**
-	 * @return the socioDAC
-	 */
-	public ISociosDAC getSocioDAC()
-	{
-		return socioDAC;
-	}
-
-	/**
-	 * @param socioDAC the socioDAC to set
-	 */
-	public void setSocioDAC(ISociosDAC socioDAC)
-	{
-		this.socioDAC = socioDAC;
-	}
-
-	/**
-	 * @return the cnaeDAC
-	 */
-	public ICnaeDAC getCnaeDAC()
-	{
-		return cnaeDAC;
-	}
-
-	/**
-	 * @param cnaeDAC the cnaeDAC to set
-	 */
-	public void setCnaeDAC(ICnaeDAC cnaeDAC)
-	{
-		this.cnaeDAC = cnaeDAC;
 	}
 
 	/**

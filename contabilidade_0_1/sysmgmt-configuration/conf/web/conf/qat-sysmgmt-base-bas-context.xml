@@ -251,6 +251,10 @@
 		<property name="siteBAI" ref="siteBAI"/>
 	</bean>
 
+	<bean id="pessoaBAS" class="com.qat.samples.sysmgmt.pessoa.bas.ws.PessoaBAS">
+		<property name="pessoaBAI" ref="pessoaBAI"/>
+	</bean>
+
 <!-- 	<bean id="supermercadoBAS" class="com.qat.samples.sysmgmt.supermercado.bas.ws.SupermercadoBAS"> -->
 <!-- 		<property name="supermercadoBAI" ref="supermercadoBAI"/> -->
 <!-- 	</bean> -->

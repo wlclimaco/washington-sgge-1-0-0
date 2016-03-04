@@ -35,6 +35,10 @@
 		<property name="siteDAC" ref="siteDACTarget"/>
 	</bean>
 
+	<bean id="pessoaBACTarget" class="com.qat.samples.sysmgmt.pessoa.bac.impl.PessoaBACImpl">
+		<property name="pessoaDAC" ref="pessoaDACTarget"/>
+	</bean>
+
 <!-- 	<bean id="supermercadoBACTarget" class="com.qat.samples.sysmgmt.supermercado.bac.impl.SupermercadoBACImpl"> -->
 <!-- 		<property name="supermercadoDAC" ref="supermercadoDACTarget"/> -->
 <!-- 	</bean> -->

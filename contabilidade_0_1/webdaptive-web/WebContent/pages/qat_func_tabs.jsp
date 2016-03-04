@@ -10,10 +10,10 @@
 <head>
 </head>
 <body>
-<div id="qatmvctabsMarca">
+<div id="qatmvctabsFuncionario">
 	<ul>
 		<sec:authorize access="hasAnyRole('ROLE_DOMAIN USERS', 'ROLE_DOMAIN ADMINS')">
-	        <li><a href="../cadastro/fetchMarcasByRequestBAS" title="qatmvctab-1"><span>Marca</span></a></li>
+	        <li><a href="../funcionario/fetchFuncionariosByRequestBAS" title="qatmvctab-1"><span>Funcionario</span></a></li>
 		</sec:authorize>
 	</ul>
 	<div class="tabscontent">

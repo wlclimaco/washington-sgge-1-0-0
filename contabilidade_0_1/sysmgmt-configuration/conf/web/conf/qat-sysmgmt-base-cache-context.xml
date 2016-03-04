@@ -176,16 +176,16 @@
  <!-- Cliente Cache -->
   <aop:config>
 	<!-- Pointcuts -->
-	<aop:pointcut id="clienteCacheObject" expression="bean(clienteDACTarget) and execution(* fetch*(..)) and !execution(* fetchClientesByRequest(..))" />
-	<aop:pointcut id="clienteFlushInsert" expression="bean(clienteDACTarget) and execution(* insert*(..))" />
-	<aop:pointcut id="clienteFlushUpdate" expression="bean(clienteDACTarget) and execution(* update*(..))" />
-	<aop:pointcut id="clienteFlushDelete" expression="bean(clienteDACTarget) and execution(* delete*(..))" />
+	<aop:pointcut id="pessoaCacheObject" expression="bean(pessoaDACTarget) and execution(* fetch*(..)) and !execution(* fetch*ByRequest(..))" />
+	<aop:pointcut id="pessoaFlushInsert" expression="bean(pessoaDACTarget) and execution(* insert*(..))" />
+	<aop:pointcut id="pessoaFlushUpdate" expression="bean(pessoaDACTarget) and execution(* update*(..))" />
+	<aop:pointcut id="pessoaFlushDelete" expression="bean(pessoaDACTarget) and execution(* delete*(..))" />
 	<!-- Aspects -->
 	<aop:aspect id="procedureCacheAspects" ref="procedureCacheAspect">
-		<aop:around pointcut-ref="clienteCacheObject" method="cacheObject"/>
-		<aop:after pointcut-ref="clienteFlushInsert" method="flushCache" />
-		<aop:after pointcut-ref="clienteFlushUpdate" method="flushCache" />
-		<aop:after pointcut-ref="clienteFlushDelete" method="flushCache" />
+		<aop:around pointcut-ref="pessoaCacheObject" method="cacheObject"/>
+		<aop:after pointcut-ref="pessoaFlushInsert" method="flushCache" />
+		<aop:after pointcut-ref="pessoaFlushUpdate" method="flushCache" />
+		<aop:after pointcut-ref="pessoaFlushDelete" method="flushCache" />
 	</aop:aspect>
  </aop:config>
 

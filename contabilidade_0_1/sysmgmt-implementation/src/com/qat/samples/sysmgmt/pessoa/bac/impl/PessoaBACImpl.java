@@ -18,6 +18,8 @@ import com.qat.samples.sysmgmt.dp.Eventos;
 import com.qat.samples.sysmgmt.dp.HorarioFunc;
 import com.qat.samples.sysmgmt.dp.Profissao;
 import com.qat.samples.sysmgmt.dp.model.request.EventoInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioMaintenanceRequest;
 import com.qat.samples.sysmgmt.dp.model.request.HoraFuncInquiryRequest;
 import com.qat.samples.sysmgmt.dp.model.request.ProfissaoInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
@@ -26,6 +28,7 @@ import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.pessoa.Cliente;
 import com.qat.samples.sysmgmt.pessoa.Contador;
 import com.qat.samples.sysmgmt.pessoa.Fornecedor;
+import com.qat.samples.sysmgmt.pessoa.Funcionario;
 import com.qat.samples.sysmgmt.pessoa.Transportador;
 import com.qat.samples.sysmgmt.pessoa.bac.IPessoaBAC;
 import com.qat.samples.sysmgmt.pessoa.dac.IPessoaDAC;
@@ -293,5 +296,35 @@ public class PessoaBACImpl implements IPessoaBAC
 	public InternalResultsResponse<HorarioFunc> fetchHorarioFuncsRequest(HoraFuncInquiryRequest request)
 	{
 		return getPessoaDAC().fetchHorarioFuncsRequest(request);
+	}
+
+	@Override
+	public InternalResultsResponse<Funcionario> insertFuncionario(FuncionarioMaintenanceRequest request)
+	{
+		return getPessoaDAC().insertFuncionario(request.getFuncionario());
+	}
+
+	@Override
+	public InternalResultsResponse<Funcionario> updateFuncionario(FuncionarioMaintenanceRequest request)
+	{
+		return getPessoaDAC().updateFuncionario(request.getFuncionario());
+	}
+
+	@Override
+	public InternalResponse deleteFuncionario(FuncionarioMaintenanceRequest request)
+	{
+		return getPessoaDAC().deleteFuncionario(request.getFuncionario());
+	}
+
+	@Override
+	public InternalResultsResponse<Funcionario> fetchFuncionarioById(FetchByIdRequest request)
+	{
+		return getPessoaDAC().fetchFuncionarioById(request);
+	}
+
+	@Override
+	public InternalResultsResponse<Funcionario> fetchFuncionarioByRequest(FuncionarioInquiryRequest request)
+	{
+		return getPessoaDAC().fetchFuncionarioByRequest(request);
 	}
 }

@@ -61,9 +61,9 @@ var condPgModule = (function () {
 
     //Default constructor
     return {
-        FORMAPG: FORMAPG,
+    	CONDPG: CONDPG,
         TIPOPG: TIPOPG,
-        FORMAPGPESSOA : FORMAPGPESSOA
+        CONDPGPESSOA : CONDPGPESSOA
     }
 
 })();

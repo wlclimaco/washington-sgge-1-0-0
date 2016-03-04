@@ -124,9 +124,9 @@
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
   	</bean>
 
-<!--   	<bean id="noteDACTarget" class="com.qat.samples.sysmgmt.util.dac.mybatis.NoteDACImpl"> -->
-<!-- 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" /> -->
-<!--   	</bean> -->
+   	<bean id="noteDACTarget" class="com.qat.samples.sysmgmt.util.dac.mybatis.NoteDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+   	</bean>
 
 
   	<bean id="empresaDACTarget" class="com.qat.samples.sysmgmt.entidade.dac.mybatis.EmpresaDACImpl">
@@ -143,4 +143,71 @@
 		<property name="planoDAC" ref="planoDACTarget"/>
  		<property name="usuarioDAC" ref="usuarioDACTarget"/>
   	</bean>
+
+  	<bean id="convenioDACTarget" class="com.qat.samples.sysmgmt.pessoa.dac.mybatis.ConvenioDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="bancoDACTarget" class="com.qat.samples.sysmgmt.pessoa.dac.mybatis.BancoDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="contatoDACTarget" class="com.qat.samples.sysmgmt.pessoa.dac.mybatis.ContatoDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="cfopDACTarget" class="com.qat.samples.sysmgmt.pessoa.dac.mybatis.CfopDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="formaPgDACTarget" class="com.qat.samples.sysmgmt.pessoa.dac.mybatis.FormaPgDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="salarioDACTarget" class="com.qat.samples.sysmgmt.pessoa.dac.mybatis.SalarioDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="beneficiosDACTarget" class="com.qat.samples.sysmgmt.pessoa.dac.mybatis.BeneficiosDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="eventosDACTarget" class="com.qat.samples.sysmgmt.pessoa.dac.mybatis.EventosDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="horaFuncDACTarget" class="com.qat.samples.sysmgmt.pessoa.dac.mybatis.HoraFuncDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+   	<bean id="profissaoDACTarget" class="com.qat.samples.sysmgmt.pessoa.dac.mybatis.ProfissaoDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+   	</bean>
+
+
+
+  	<bean id="pessoaDACTarget" class="com.qat.samples.sysmgmt.pessoa.dac.mybatis.PessoaDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+		<property name="enderecoDAC" ref="enderecoDACTarget"/>
+		<property name="telefoneDAC" ref="telefoneDACTarget"/>
+		<property name="emailDAC" ref="emailDACTarget"/>
+		<property name="documentoDAC" ref="documentoDACTarget"/>
+		<property name="historicoDAC" ref="historicoDACTarget"/>
+		<property name="statusDAC" ref="statusDACTarget"/>
+		<property name="usuarioDAC" ref="usuarioDACTarget"/>
+		<property name="convenioDAC" ref="convenioDACTarget"/>
+ 		<property name="bancoDAC" ref="bancoDACTarget"/>
+ 		<property name="contatoDAC" ref="contatoDACTarget"/>
+ 		<property name="noteDAC" ref="noteDACTarget"/>
+ 		<property name="cfopDAC" ref="cfopDACTarget"/>
+ 		<property name="formaPgDAC" ref="formaPgDACTarget"/>
+ 		<property name="salarioDAC" ref="salarioDACTarget"/>
+ 		<property name="beneficiosDAC" ref="beneficiosDACTarget"/>
+ 		<property name="eventosDAC" ref="eventosDACTarget"/>
+ 		<property name="horaFuncDAC" ref="horaFuncDACTarget"/>
+ 		<property name="profissaoDAC" ref="profissaoDACTarget"/>
+
+  	</bean>
 </beans>
+
+

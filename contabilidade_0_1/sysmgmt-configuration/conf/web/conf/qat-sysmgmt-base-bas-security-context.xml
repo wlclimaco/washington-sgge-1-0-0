@@ -141,6 +141,29 @@
         		<entry key="fetchControleByPage" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
         		<entry key="fetchControlesByRequest" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
         		<entry key="fetchControleByAction" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+
+
+
+        		<entry key="fetchAllFuncionarios" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchFuncionarioById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchFuncionariosByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteFuncionario" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertFuncionario" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="updateFuncionario" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+
+        		<entry key="fetchAllTransportadors" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchTransportadorById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchTransportadorsByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteTransportador" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertTransportador" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="updateTransportador" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+
+        		<entry key="fetchAllFornecedors" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchFornecedorById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchFornecedorsByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteFornecedor" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertFornecedor" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="updateFornecedor" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
       		</map>
    		</property>
 	</bean>
@@ -175,6 +198,72 @@
         access="ROLE_DOMAIN ADMINS"/>
       <sec:protect-pointcut
         expression="execution(* com.qat.samples.sysmgmt.bas.rest.CountyBAS.refreshCounties(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+
+        <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS.fetchAllFuncionarios(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS.fetchFuncionariosByRequest(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS.fetchFuncionarioById(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS.deleteFuncionario(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS.insertFuncionario(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS.updateFuncionario(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS.refreshFuncionarios(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+
+        <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS.fetchAllClientes(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS.fetchClientesByRequest(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS.fetchClienteById(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS.deleteCliente(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS.insertCliente(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS.updateCliente(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS.refreshClientes(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+
+        <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS.fetchAllFornecedors(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS.fetchFornecedorsByRequest(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS.fetchFornecedorById(*))"
+        access="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS.deleteFornecedor(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS.insertFornecedor(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS.updateFornecedor(*))"
+        access="ROLE_DOMAIN ADMINS"/>
+      <sec:protect-pointcut
+        expression="execution(* com.qat.samples.sysmgmt.pessoa.bas.rest.PessoaBAS.refreshFornecedor(*))"
         access="ROLE_DOMAIN ADMINS"/>
 
 

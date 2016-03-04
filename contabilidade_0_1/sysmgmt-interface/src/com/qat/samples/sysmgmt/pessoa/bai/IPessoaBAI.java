@@ -9,6 +9,8 @@ import com.qat.samples.sysmgmt.condpag.model.request.FormaPgInquiryRequest;
 import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
 import com.qat.samples.sysmgmt.contato.model.response.ContatoResponse;
 import com.qat.samples.sysmgmt.dp.model.request.EventoInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioMaintenanceRequest;
 import com.qat.samples.sysmgmt.dp.model.request.HoraFuncInquiryRequest;
 import com.qat.samples.sysmgmt.dp.model.request.ProfissaoInquiryRequest;
 import com.qat.samples.sysmgmt.dp.model.response.BancoResponse;
@@ -16,6 +18,7 @@ import com.qat.samples.sysmgmt.dp.model.response.ContaResponse;
 import com.qat.samples.sysmgmt.dp.model.response.ConvenioResponse;
 import com.qat.samples.sysmgmt.dp.model.response.EventoResponse;
 import com.qat.samples.sysmgmt.dp.model.response.FormaPgResponse;
+import com.qat.samples.sysmgmt.dp.model.response.FuncionarioResponse;
 import com.qat.samples.sysmgmt.dp.model.response.HorarioFuncResponse;
 import com.qat.samples.sysmgmt.dp.model.response.ProfissaoResponse;
 import com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest;
@@ -125,6 +128,48 @@ public interface IPessoaBAI
 	 * @return the fornecedor response
 	 */
 	public FornecedorResponse fetchFornecedorByRequest(FornecedorInquiryRequest request);
+
+	// ==========
+
+	/**
+	 * Insert fornecedor.
+	 * 
+	 * @param request the request
+	 * @return the fornecedor response
+	 */
+	public FuncionarioResponse insertFuncionario(FuncionarioMaintenanceRequest request);
+
+	/**
+	 * Update fornecedor.
+	 * 
+	 * @param request the request
+	 * @return the fornecedor response
+	 */
+	public FuncionarioResponse updateFuncionario(FuncionarioMaintenanceRequest request);
+
+	/**
+	 * Delete fornecedor.
+	 * 
+	 * @param request the request
+	 * @return the fornecedor response
+	 */
+	public FuncionarioResponse deleteFuncionario(FuncionarioMaintenanceRequest request);
+
+	/**
+	 * Fetch fornecedor by id.
+	 * 
+	 * @param request the request
+	 * @return the fornecedor response
+	 */
+	public FuncionarioResponse fetchFuncionarioById(FetchByIdRequest request);
+
+	/**
+	 * Fetch fornecedor by request.
+	 * 
+	 * @param request the request
+	 * @return the fornecedor response
+	 */
+	public FuncionarioResponse fetchFuncionarioByRequest(FuncionarioInquiryRequest request);
 
 	// ==========
 

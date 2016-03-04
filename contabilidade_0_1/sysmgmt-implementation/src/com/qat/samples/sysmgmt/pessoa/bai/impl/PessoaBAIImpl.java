@@ -31,6 +31,8 @@ import com.qat.samples.sysmgmt.dp.Eventos;
 import com.qat.samples.sysmgmt.dp.HorarioFunc;
 import com.qat.samples.sysmgmt.dp.Profissao;
 import com.qat.samples.sysmgmt.dp.model.request.EventoInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioMaintenanceRequest;
 import com.qat.samples.sysmgmt.dp.model.request.HoraFuncInquiryRequest;
 import com.qat.samples.sysmgmt.dp.model.request.ProfissaoInquiryRequest;
 import com.qat.samples.sysmgmt.dp.model.response.BancoResponse;
@@ -38,6 +40,7 @@ import com.qat.samples.sysmgmt.dp.model.response.ContaResponse;
 import com.qat.samples.sysmgmt.dp.model.response.ConvenioResponse;
 import com.qat.samples.sysmgmt.dp.model.response.EventoResponse;
 import com.qat.samples.sysmgmt.dp.model.response.FormaPgResponse;
+import com.qat.samples.sysmgmt.dp.model.response.FuncionarioResponse;
 import com.qat.samples.sysmgmt.dp.model.response.HorarioFuncResponse;
 import com.qat.samples.sysmgmt.dp.model.response.ProfissaoResponse;
 import com.qat.samples.sysmgmt.estado.Estado;
@@ -47,6 +50,7 @@ import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.pessoa.Cliente;
 import com.qat.samples.sysmgmt.pessoa.Contador;
 import com.qat.samples.sysmgmt.pessoa.Fornecedor;
+import com.qat.samples.sysmgmt.pessoa.Funcionario;
 import com.qat.samples.sysmgmt.pessoa.Transportador;
 import com.qat.samples.sysmgmt.pessoa.bac.IPessoaBAC;
 import com.qat.samples.sysmgmt.pessoa.bai.IPessoaBAI;
@@ -1377,4 +1381,216 @@ public class PessoaBAIImpl implements IPessoaBAI
 		}
 		return null;
 	}
+
+	// FUNCIONARIO
+	/**
+	 * Insert cliente.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	@Override
+	public FuncionarioResponse insertFuncionario(FuncionarioMaintenanceRequest request)
+	{
+		FuncionarioResponse response = new FuncionarioResponse();
+		try
+		{
+			response = processFuncionario(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/** The Funcionario response. */
+	@Override
+	public FuncionarioResponse updateFuncionario(FuncionarioMaintenanceRequest request)
+	{
+		FuncionarioResponse response = new FuncionarioResponse();
+		try
+		{
+			response = processFuncionario(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/**
+	 * Delete cliente.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	@Override
+	public FuncionarioResponse deleteFuncionario(FuncionarioMaintenanceRequest request)
+	{
+		FuncionarioResponse response = new FuncionarioResponse();
+		try
+		{
+			response = processFuncionario(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/**
+	 * Fetch cliente by id.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	@Override
+	public FuncionarioResponse fetchFuncionarioById(FetchByIdRequest request)
+	{
+		FuncionarioResponse response = new FuncionarioResponse();
+		try
+		{
+			InternalResponse internalResponse = new InternalResponse();
+			// validate fetchId field
+			if (ValidationUtil.isNull(request.getFetchId()))
+			{
+				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
+			}
+			else
+			{
+				internalResponse = getPessoaBAC().fetchFuncionarioById(request);
+			}
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/**
+	 * Fetch cliente by request.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	@Override
+	public FuncionarioResponse fetchFuncionarioByRequest(FuncionarioInquiryRequest request)
+	{
+		FuncionarioResponse response = new FuncionarioResponse();
+		try
+		{
+			fetchFuncionario(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/**
+	 * Fetch cliente.
+	 * 
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchFuncionario(FuncionarioInquiryRequest request, FuncionarioResponse response)
+	{
+		InternalResultsResponse<Funcionario> internalResponse = new InternalResultsResponse<Funcionario>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchFuncionarioByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	/**
+	 * Process.
+	 * 
+	 * @param indicator the indicator
+	 * @param persistType the persist type
+	 * @param request the request
+	 * @return the empresa response
+	 */
+	private FuncionarioResponse processFuncionario(ValidationContextIndicator indicator,
+			PersistanceActionEnum persistType,
+			FuncionarioMaintenanceRequest request)
+	{
+		FuncionarioResponse response = new FuncionarioResponse();
+		InternalResponse internalResponse = null;
+
+		// Persist
+		internalResponse = doPersistanceFuncionario(request, persistType);
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		return handleReturnFuncionario(response, internalResponse, null, true);
+	}
+
+	/**
+	 * Handle return.
+	 * 
+	 * @param response the response
+	 * @param internalResponse the internal response
+	 * @param messages the messages
+	 * @param copyOver the copy over
+	 * @return the response
+	 */
+	private FuncionarioResponse handleReturnFuncionario(FuncionarioResponse response,
+			InternalResponse internalResponse,
+			List<MessageInfo> messages, boolean copyOver)
+	{
+
+		QATInterfaceUtil.handleOperationStatusAndMessages(response,
+				internalResponse, messages, copyOver);
+		return response;
+	}
+
+	/**
+	 * Do persistance.
+	 * 
+	 * @param request the request
+	 * @param updateType the update type
+	 * @return the internal response
+	 */
+	private InternalResponse doPersistanceFuncionario(FuncionarioMaintenanceRequest request,
+			PersistanceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			case INSERT:
+				return getPessoaBAC().insertFuncionario(request);
+
+			case UPDATE:
+				return getPessoaBAC().updateFuncionario(request);
+
+			case DELETE:
+				return getPessoaBAC().deleteFuncionario(request);
+
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
+		}
+		return null;
+	}
+
 }
