@@ -256,7 +256,7 @@ CREATE SEQUENCE socio_id_seq
 ALTER TABLE socio_id_seq
   OWNER TO postgres;
 
-DROP TABLE socio
+DROP TABLE socio;
 CREATE TABLE socio
 (
   id integer NOT NULL DEFAULT nextval('socio_id_seq'::regclass),
@@ -753,15 +753,16 @@ CREATE TABLE usuario(
 	senha         character varying(200) NULL,
 	pergunta         character varying(200) NULL,
 	role         character varying(200) NULL,
-	role         character varying(200) NULL,
-	language 	  integer NULL,
-	ultAcessi    bigint,
+	language 	 character varying(5) NULL,
+	ultAcesso    bigint,
 	processId    integer NULL,
+	tabela    integer NULL,
+	parentId integer NULL,
 	create_date  bigint,
     create_user  character varying(50) NULL,
     modify_date  bigint,
     modify_user  character varying(50) NULL,
-CONSTRAINT Pessoa_pkey PRIMARY KEY (id)
+CONSTRAINT Usuario_pkey PRIMARY KEY (id)
 )
 WITH (
   OIDS=FALSE

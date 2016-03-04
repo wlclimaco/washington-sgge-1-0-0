@@ -110,6 +110,12 @@
     FROM email  where tabela in(1,51,52) and parentId= #{id} ORDER BY id ASC
  </select>
 
+  <select id="fetchAllEmailsByUsuario" parameterType="Integer" resultMap="emailResult">
+	 SELECT
+	<include refid="allEmailColumns" />
+    FROM email  where tabela = 55 and parentId= #{id} ORDER BY id ASC
+ </select>
+
  <select id="fetchAllEmailsByFuncionario" parameterType="Integer" resultMap="emailResult">
 	 SELECT
 	<include refid="allEmailColumns" />

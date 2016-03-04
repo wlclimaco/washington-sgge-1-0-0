@@ -92,6 +92,9 @@
   		<typeAlias alias="Estado" type="com.qat.samples.sysmgmt.estado.Estado"/>
 		<typeAlias alias="EstadoInquiryRequest" type="com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest"/>
 
+		<typeAlias alias="Usuario" type="com.qat.samples.sysmgmt.entidade.Usuario"/>
+  		<typeAlias alias="UsuarioInquiryRequest" type="com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest"/>
+
 
 
 <!--   		<typeAlias alias="Cadastro" type="com.qat.samples.sysmgmt.produto.model.Cadastro"/> -->
@@ -140,6 +143,7 @@
       	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/email.xml"/>
       	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/telefone.xml"/>
       	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/endereco.xml"/>
+      	<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/usuario.xml"/>
 
 
     </mappers>

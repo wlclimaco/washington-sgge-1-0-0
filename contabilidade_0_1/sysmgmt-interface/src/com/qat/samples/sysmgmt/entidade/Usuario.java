@@ -1,6 +1,9 @@
 package com.qat.samples.sysmgmt.entidade;
 
+import java.util.List;
+
 import com.qat.samples.sysmgmt.pessoa.Pessoa;
+import com.qat.samples.sysmgmt.util.Email;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -21,6 +24,8 @@ public class Usuario extends Pessoa
 	private String language;
 
 	private Long ultAcesso;
+
+	private List<Email> emails;
 
 	public String getSenha()
 	{
@@ -83,11 +88,23 @@ public class Usuario extends Pessoa
 	}
 
 	@Override
+	public List<Email> getEmails()
+	{
+		return emails;
+	}
+
+	@Override
+	public void setEmails(List<Email> emails)
+	{
+		this.emails = emails;
+	}
+
+	@Override
 	public String toString()
 	{
 		return "Usuario [getSenha()=" + getSenha() + ", getPergunta()=" + getPergunta() + ", getRole()=" + getRole()
 				+ ", getLanguage()=" + getLanguage() + ", getLogin()=" + getLogin() + ", getUltAcesso()="
-				+ getUltAcesso() + ", toString()=" + super.toString() + "]";
+				+ getUltAcesso() + ", getEmails()=" + getEmails() + ", toString()=" + super.toString() + "]";
 	}
 
 }

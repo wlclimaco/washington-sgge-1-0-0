@@ -57,7 +57,9 @@ public class EmpresaResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "EmpresaResponse [getEmpresaList()=" + getEmpresaList() + ", toString()=" + super.toString() + "]";
+		return "EmpresaResponse [getEmpresaList()=" + getEmpresaList() + ", getResultsSetInfo()="
+				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
+				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
+				+ isOperationSuccess() + "]";
 	}
-
 }

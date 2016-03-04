@@ -12,6 +12,11 @@ public class EmpresaInquiryRequest extends PagedInquiryRequest
 	/** The criteria. */
 	private EmpresaCriteria criteria;
 
+	public EmpresaInquiryRequest()
+	{
+		super();
+	}
+
 	/**
 	 * Gets the criteria.
 	 * 

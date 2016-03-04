@@ -40,6 +40,8 @@ import com.qat.samples.sysmgmt.fiscal.Regime;
 import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.pessoa.dac.IUsuarioDAC;
+import com.qat.samples.sysmgmt.pessoa.dacd.UsuarioDACD;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.util.AcaoEnum;
 import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
@@ -115,6 +117,8 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 	IStatusDAC statusDAC;
 
 	IPlanoDAC planoDAC;
+
+	IUsuarioDAC usuarioDAC;
 
 	// INoteDAC noteDAC;
 
@@ -200,6 +204,16 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 	public IEnderecoDAC getEnderecoDAC()
 	{
 		return enderecoDAC;
+	}
+
+	public IUsuarioDAC getUsuarioDAC()
+	{
+		return usuarioDAC;
+	}
+
+	public void setUsuarioDAC(IUsuarioDAC usuarioDAC)
+	{
+		this.usuarioDAC = usuarioDAC;
 	}
 
 	/**
@@ -438,6 +452,15 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 			insertCount +=
 					PlanoDACD.maintainPlanoAssociations(empresa.getPlanoList(), response, empresa.getId(), null, null,
 							TabelaEnum.EMPRESA, getPlanoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							empresa.getCreateUser(), historicoId, historicoId);
+		}
+
+		if (!ValidationUtil.isNullOrEmpty(empresa.getUsuarioList()))
+		{
+			insertCount +=
+					UsuarioDACD.maintainUsuarioAssociations(empresa.getUsuarioList(), response, empresa.getId(), null,
+							null,
+							TabelaEnum.EMPRESA, getUsuarioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
 							empresa.getCreateUser(), historicoId, historicoId);
 		}
 		insertCount += insertAssociations(empresa, historicoId, historicoId, TabelaEnum.EMPRESA, response);

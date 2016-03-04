@@ -6,164 +6,237 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
-import com.qat.samples.sysmgmt.cnae.model.response.CnaeResponse;
-import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.DepositoMaintenanceRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.EmpresaMaintenanceRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
-import com.qat.samples.sysmgmt.entidade.model.response.DepositoResponse;
-import com.qat.samples.sysmgmt.entidade.model.response.EmpresaResponse;
-import com.qat.samples.sysmgmt.entidade.model.response.FilialResponse;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
-import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
-import com.qat.samples.sysmgmt.fiscal.model.response.ClassificacaoResponse;
-import com.qat.samples.sysmgmt.fiscal.model.response.RegimeResponse;
+import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
+import com.qat.samples.sysmgmt.agencia.model.response.AgenciaResponse;
+import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
+import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest;
+import com.qat.samples.sysmgmt.beneficios.model.response.BeneficiosResponse;
+import com.qat.samples.sysmgmt.condpag.model.request.FormaPgInquiryRequest;
+import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
+import com.qat.samples.sysmgmt.contato.model.response.ContatoResponse;
+import com.qat.samples.sysmgmt.dp.model.request.EventoInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioMaintenanceRequest;
+import com.qat.samples.sysmgmt.dp.model.request.HoraFuncInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.ProfissaoInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.response.BancoResponse;
+import com.qat.samples.sysmgmt.dp.model.response.ContaResponse;
+import com.qat.samples.sysmgmt.dp.model.response.ConvenioResponse;
+import com.qat.samples.sysmgmt.dp.model.response.EventoResponse;
+import com.qat.samples.sysmgmt.dp.model.response.FormaPgResponse;
+import com.qat.samples.sysmgmt.dp.model.response.FuncionarioResponse;
+import com.qat.samples.sysmgmt.dp.model.response.HorarioFuncResponse;
+import com.qat.samples.sysmgmt.dp.model.response.ProfissaoResponse;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest;
+import com.qat.samples.sysmgmt.estado.model.response.EstadoResponse;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
-import com.qat.samples.sysmgmt.produto.model.response.PlanoResponse;
+import com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ClienteMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ContaInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ContadorInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ContadorMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ConvenioInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.response.ClienteResponse;
+import com.qat.samples.sysmgmt.pessoa.model.response.ContadorResponse;
+import com.qat.samples.sysmgmt.pessoa.model.response.FornecedorResponse;
+import com.qat.samples.sysmgmt.pessoa.model.response.TransportadorResponse;
 import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
-import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
-import com.qat.samples.sysmgmt.util.model.request.UsuarioMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.response.CidadeResponse;
-import com.qat.samples.sysmgmt.util.model.response.UsuarioResponse;
 
 /**
  * The Interface IEntidadeBAS. (Business Area Service - BAS)
  */
-@WebService(serviceName = "EntidadeService", targetNamespace = "http://qat.com/sysmgmt", portName = "EntidadeServicePort")
+@WebService(serviceName = "PessoaService", targetNamespace = "http://qat.com/sysmgmt", portName = "PessoaServicePort")
 public interface IPessoaBAS
 {
-	@WebMethod(action = "insertEmpresa")
-	@WebResult(name = "insertEmpresaReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public EmpresaResponse insertEmpresa(EmpresaMaintenanceRequest request);
 
-	@WebMethod(action = "updateEmpresa")
-	@WebResult(name = "updateEmpresaReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public EmpresaResponse updateEmpresa(EmpresaMaintenanceRequest request);
+	@WebMethod(action = "insertCliente")
+	@WebResult(name = "insertClienteReturn")
+	@WSDLDocumentation(value = "Insert a Usuario record and optionally returns a list of Usuarios.")
+	public ClienteResponse insertCliente(ClienteMaintenanceRequest request);
 
-	@WebMethod(action = "deleteEmpresa")
-	@WebResult(name = "deleteEmpresaReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public EmpresaResponse deleteEmpresa(EmpresaMaintenanceRequest request);
+	@WebMethod(action = "updateCliente")
+	@WebResult(name = "updateClienteReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public ClienteResponse updateCliente(ClienteMaintenanceRequest request);
 
-	@WebMethod(action = "fetchEmpresaById")
-	@WebResult(name = "fetchEmpresaByIdReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public EmpresaResponse fetchEmpresaById(FetchByIdRequest request);
+	@WebMethod(action = "deleteCliente")
+	@WebResult(name = "deleteClienteReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public ClienteResponse deleteCliente(ClienteMaintenanceRequest request);
 
-	@WebMethod(action = "fetchEmpresaByRequest")
-	@WebResult(name = "fetchEmpresaByRequestReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public EmpresaResponse fetchEmpresaByRequest(EmpresaInquiryRequest request);
+	@WebMethod(action = "fetchClienteById")
+	@WebResult(name = "fetchClienteByIdReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public ClienteResponse fetchClienteById(FetchByIdRequest request);
 
-	// filial
+	@WebMethod(action = "fetchClienteByRequest")
+	@WebResult(name = "fetchClienteByRequestReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public ClienteResponse fetchClienteByRequest(ClienteInquiryRequest request);
 
-	@WebMethod(action = "insertFilial")
-	@WebResult(name = "insertFilialReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public FilialResponse insertFilial(FilialMaintenanceRequest request);
+	@WebMethod(action = "insertFornecedor")
+	@WebResult(name = "insertFornecedorReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public FornecedorResponse insertFornecedor(FornecedorMaintenanceRequest request);
 
-	@WebMethod(action = "updateFilial")
-	@WebResult(name = "updateFilialReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public FilialResponse updateFilial(FilialMaintenanceRequest request);
+	@WebMethod(action = "updateFornecedor")
+	@WebResult(name = "updateFornecedorReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public FornecedorResponse updateFornecedor(FornecedorMaintenanceRequest request);
 
-	@WebMethod(action = "deleteFilial")
-	@WebResult(name = "deleteFilialReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public FilialResponse deleteFilial(FilialMaintenanceRequest request);
+	@WebMethod(action = "deleteFornecedor")
+	@WebResult(name = "deleteFornecedorReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public FornecedorResponse deleteFornecedor(FornecedorMaintenanceRequest request);
 
-	@WebMethod(action = "fetchFilialById")
-	@WebResult(name = "fetchFilialByIdReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public FilialResponse fetchFilialById(FetchByIdRequest request);
+	@WebMethod(action = "fetchFornecedorById")
+	@WebResult(name = "fetchFornecedorByIdReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public FornecedorResponse fetchFornecedorById(FetchByIdRequest request);
 
-	@WebMethod(action = "fetchFilialByRequest")
-	@WebResult(name = "fetchFilialByRequestReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public FilialResponse fetchFilialByRequest(FilialInquiryRequest request);
+	@WebMethod(action = "fetchFornecedorByRequest")
+	@WebResult(name = "fetchFornecedorByRequestReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public FornecedorResponse fetchFornecedorByRequest(FornecedorInquiryRequest request);
 
-	// deposito
+	@WebMethod(action = "insertTransportador")
+	@WebResult(name = "insertTransportadorReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public TransportadorResponse insertTransportador(TransportadorMaintenanceRequest request);
 
-	@WebMethod(action = "insertDeposito")
-	@WebResult(name = "insertDepositoReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public DepositoResponse insertDeposito(DepositoMaintenanceRequest request);
+	@WebMethod(action = "updateTransportador")
+	@WebResult(name = "updateTransportadorReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public TransportadorResponse updateTransportador(TransportadorMaintenanceRequest request);
 
-	public DepositoResponse updateDeposito(DepositoMaintenanceRequest request);
+	@WebMethod(action = "deleteTransportador")
+	@WebResult(name = "deleteTransportadorReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public TransportadorResponse deleteTransportador(TransportadorMaintenanceRequest request);
 
-	@WebMethod(action = "deleteDeposito")
-	@WebResult(name = "deleteDepositoReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public DepositoResponse deleteDeposito(DepositoMaintenanceRequest request);
+	@WebMethod(action = "fetchTransportadorById")
+	@WebResult(name = "fetchTransportadorByIdReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public TransportadorResponse fetchTransportadorById(FetchByIdRequest request);
 
-	@WebMethod(action = "fetchDepositoById")
-	@WebResult(name = "fetchDepositoByIdReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public DepositoResponse fetchDepositoById(FetchByIdRequest request);
+	@WebMethod(action = "fetchTransportadorByRequest")
+	@WebResult(name = "fetchTransportadorByRequestReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public TransportadorResponse fetchTransportadorByRequest(TransportadorInquiryRequest request);
 
-	@WebMethod(action = "fetchDepositoByRequest")
-	@WebResult(name = "fetchDepositoByRequestReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public DepositoResponse fetchDepositoByRequest(DepositoInquiryRequest request);
+	@WebMethod(action = "insertContador")
+	@WebResult(name = "insertContadorReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public ContadorResponse insertContador(ContadorMaintenanceRequest request);
 
-	// outros
+	@WebMethod(action = "updateContador")
+	@WebResult(name = "updateContadorReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public ContadorResponse updateContador(ContadorMaintenanceRequest request);
 
-	@WebMethod(action = "fetchCnaeByRequest")
-	@WebResult(name = "fetchCnaeByRequestReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public CnaeResponse fetchCnaeByRequest(CnaeInquiryRequest request);
+	@WebMethod(action = "deleteContador")
+	@WebResult(name = "deleteContadorReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public ContadorResponse deleteContador(ContadorMaintenanceRequest request);
 
-	@WebMethod(action = "fetchRegimeByRequest")
-	@WebResult(name = "fetchRegimeByRequestReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public RegimeResponse fetchRegimeByRequest(RegimeInquiryRequest request);
+	@WebMethod(action = "fetchContadorById")
+	@WebResult(name = "fetchContadorByIdReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public ContadorResponse fetchContadorById(FetchByIdRequest request);
 
-	@WebMethod(action = "fetchCidadeByRequest")
-	@WebResult(name = "fetchCidadeByRequestReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public CidadeResponse fetchCidadeByRequest(CidadeInquiryRequest request);
+	@WebMethod(action = "fetchContadorByRequest")
+	@WebResult(name = "fetchContadorByRequestReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public ContadorResponse fetchContadorByRequest(ContadorInquiryRequest request);
 
-	@WebMethod(action = "fetchPlanoByRequest")
-	@WebResult(name = "fetchPlanoByRequestReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public PlanoResponse fetchPlanoByRequest(PlanoInquiryRequest request);
+	@WebMethod(action = "fetchProfissaoByRequest")
+	@WebResult(name = "fetchProfissaoByRequestReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public ProfissaoResponse fetchProfissaoByRequest(ProfissaoInquiryRequest request);
 
-	@WebMethod(action = "fetchClassificacaoByRequest")
-	@WebResult(name = "fetchClassificacaoByRequestReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public ClassificacaoResponse fetchClassificacaoByRequest(ClassificacaoInquiryRequest request);
+	@WebMethod(action = "fetchConvenioByRequest")
+	@WebResult(name = "fetchConvenioByRequestReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public ConvenioResponse fetchConvenioByRequest(ConvenioInquiryRequest request);
 
-	// Usuario
+	@WebMethod(action = "fetchContatoByRequest")
+	@WebResult(name = "fetchContatoByRequestReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public ContatoResponse fetchContatoByRequest(ContatoInquiryRequest request);
 
-	@WebMethod(action = "insertUsuario")
-	@WebResult(name = "insertUsuarioReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public UsuarioResponse insertUsuario(UsuarioMaintenanceRequest request);
+	@WebMethod(action = "fetchBancoByRequest")
+	@WebResult(name = "fetchBancoByRequestReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public BancoResponse fetchBancoByRequest(BancoInquiryRequest request);
 
-	@WebMethod(action = "updateUsuario")
-	@WebResult(name = "updateUsuarioReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public UsuarioResponse updateUsuario(UsuarioMaintenanceRequest request);
+	@WebMethod(action = "fetchAgenciaByRequest")
+	@WebResult(name = "fetchAgenciaByRequestReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public AgenciaResponse fetchAgenciaByRequest(AgenciaInquiryRequest request);
 
-	@WebMethod(action = "deleteUsuario")
-	@WebResult(name = "deleteUsuarioReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public UsuarioResponse deleteUsuario(UsuarioMaintenanceRequest request);
+	@WebMethod(action = "fetchContaByRequest")
+	@WebResult(name = "fetchContaByRequestReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public ContaResponse fetchContaByRequest(ContaInquiryRequest request);
 
-	@WebMethod(action = "fetchUsuarioById")
-	@WebResult(name = "fetchUsuarioByIdReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public UsuarioResponse fetchUsuarioById(FetchByIdRequest request);
+	@WebMethod(action = "fetchEstadoByRequest")
+	@WebResult(name = "fetchEstadoByRequestReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public EstadoResponse fetchEstadoByRequest(EstadoInquiryRequest request);
 
-	@WebMethod(action = "fetchUsuarioByRequest")
-	@WebResult(name = "fetchUsuarioByRequestReturn")
-	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
-	public UsuarioResponse fetchUsuarioByRequest(UsuarioInquiryRequest request);
+	@WebMethod(action = "fetchFormaPgByRequest")
+	@WebResult(name = "fetchFormaPgByRequestReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public FormaPgResponse fetchFormaPgByRequest(FormaPgInquiryRequest request);
+
+	@WebMethod(action = "fetchCidadeRequest")
+	@WebResult(name = "fetchCidadeRequestReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public CidadeResponse fetchCidadeRequest(CidadeInquiryRequest request);
+
+	@WebMethod(action = "fetchEventosRequest")
+	@WebResult(name = "fetchEventosRequestReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public EventoResponse fetchEventosRequest(EventoInquiryRequest request);
+
+	@WebMethod(action = "fetchBeneficiosRequest")
+	@WebResult(name = "fetchBeneficiosRequestReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public BeneficiosResponse fetchBeneficiosRequest(BeneficiosInquiryRequest request);
+
+	@WebMethod(action = "fetchHorarioFuncsRequest")
+	@WebResult(name = "fetchHorarioFuncsRequestReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public HorarioFuncResponse fetchHorarioFuncsRequest(HoraFuncInquiryRequest request);
+
+	@WebMethod(action = "insertFuncionario")
+	@WebResult(name = "insertFuncionarioReturn")
+	@WSDLDocumentation(value = "Insert a Usuario record and optionally returns a list of Usuarios.")
+	public FuncionarioResponse insertFuncionario(FuncionarioMaintenanceRequest request);
+
+	@WebMethod(action = "updateFuncionario")
+	@WebResult(name = "updateFuncionarioReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public FuncionarioResponse updateFuncionario(FuncionarioMaintenanceRequest request);
+
+	@WebMethod(action = "deleteFuncionario")
+	@WebResult(name = "deleteFuncionarioReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public FuncionarioResponse deleteFuncionario(FuncionarioMaintenanceRequest request);
+
+	@WebMethod(action = "fetchFuncionarioById")
+	@WebResult(name = "fetchFuncionarioByIdReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public FuncionarioResponse fetchFuncionarioById(FetchByIdRequest request);
+
+	@WebMethod(action = "fetchFuncionarioByRequest")
+	@WebResult(name = "fetchFuncionarioByRequestReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public FuncionarioResponse fetchFuncionarioByRequest(FuncionarioInquiryRequest request);
 
 }

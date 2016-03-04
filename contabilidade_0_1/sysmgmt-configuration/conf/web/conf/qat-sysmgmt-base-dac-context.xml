@@ -120,6 +120,10 @@
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
   	</bean>
 
+  	<bean id="usuarioDACTarget" class="com.qat.samples.sysmgmt.pessoa.dac.mybatis.UsuarioDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
 <!--   	<bean id="noteDACTarget" class="com.qat.samples.sysmgmt.util.dac.mybatis.NoteDACImpl"> -->
 <!-- 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" /> -->
 <!--   	</bean> -->
@@ -137,6 +141,6 @@
 		<property name="historicoDAC" ref="historicoDACTarget"/>
 		<property name="statusDAC" ref="statusDACTarget"/>
 		<property name="planoDAC" ref="planoDACTarget"/>
-<!-- 		<property name="noteDAC" ref="noteDACTarget"/> -->
+ 		<property name="usuarioDAC" ref="usuarioDACTarget"/>
   	</bean>
 </beans>

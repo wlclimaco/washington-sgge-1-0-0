@@ -86,6 +86,17 @@
 		</jaxws:properties>
 	</jaxws:endpoint>
 
+	<jaxws:endpoint id="pessoaBASWS" implementor="#pessoaBAS" address="/ws/PessoaService" >
+		<jaxws:inInterceptors>
+        	<ref bean="wsAuthenticationInterceptor"/>
+   			<ref bean="wsAuthorizationInterceptor"/>
+ 		</jaxws:inInterceptors>
+		<jaxws:properties>
+			<entry key="set-jaxb-validation-event-handler" value="false" />
+			<entry key="ws-security.validate.token" value="false" />
+		</jaxws:properties>
+	</jaxws:endpoint>
+
 <!-- 	<jaxws:endpoint id="supermercadoBASWS" implementor="#supermercadoBAS" address="/ws/SupermercadoService" > -->
 <!-- 		<jaxws:inInterceptors> -->
 <!--         	<ref bean="wsAuthenticationInterceptor"/> -->
@@ -158,6 +169,13 @@
 
   	<jaxrs:server id="entidadeBASREST" address="/rest/EntidadeService">
   		<jaxrs:serviceBeans><ref bean="entidadeRESTBAS"/></jaxrs:serviceBeans>
+  		<jaxrs:providers>
+			<ref bean='jsonProvider' />
+		</jaxrs:providers>
+  	</jaxrs:server>
+
+  	<jaxrs:server id="pessoaBASREST" address="/rest/PessoaService">
+  		<jaxrs:serviceBeans><ref bean="pessoaRESTBAS"/></jaxrs:serviceBeans>
   		<jaxrs:providers>
 			<ref bean='jsonProvider' />
 		</jaxrs:providers>
