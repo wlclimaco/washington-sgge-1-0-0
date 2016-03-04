@@ -664,7 +664,18 @@
 "../scripts/pages/cidade/cidade.js",
 "../scripts/pages/usuario/usuario.js",
 "../scripts/pages/estado/estado.js",
-"../scripts/pages/deposito/deposito.js"
+"../scripts/pages/deposito/deposito.js",
+
+"../scripts/pages/agencia/agencia.js",
+"../scripts/pages/banco/banco.js",
+"../scripts/pages/beneficios/beneficio.js",
+"../scripts/pages/condpg/condPg.js",
+"../scripts/pages/contato/contato.js",
+"../scripts/pages/eventos/evento.js",
+"../scripts/pages/formaPg/formaPg.js",
+"../scripts/pages/salario/salario.js",
+"../scripts/pages/horaFunc/horario.js",
+"../scripts/pages/funcionario/funcionario.js"
 
 		//   "../scripts/util/base.js"
 	);

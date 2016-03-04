@@ -1,7 +1,9 @@
 package com.qat.webdaptive.controller;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.qat.framework.util.QATAppContext;
 import com.qat.framework.util.QATInterfaceUtil;
@@ -57,213 +59,21 @@ public class PessoaBaseController
 
 	private static final String PROCEDURE_RESPONSE = null;
 
-	// /** The Constant SUPERMERCADO_RESPONSE. */
-	// private static final String SUPERMERCADO_RESPONSE = "cadastroResponse";
-	//
-	// /** The county bai. */
-	// private IProdutoBAI produtoBAI; // injected by @Resource
-	//
-	// public IProdutoBAI getProdutoBAI()
-	// {
-	// return produtoBAI;
-	// }
-	//
-	// public void setProdutoBAI(IProdutoBAI produtoBAI)
-	// {
-	// this.produtoBAI = produtoBAI;
-	// }
-	//
-	// /**
-	// * Pessoa mav.
-	// *
-	// * @param request the request
-	// * @param returnViewName the return view name
-	// * @return the model and view
-	// */
-	// protected ModelAndView cadastroMAV(PessoaInquiryRequest request, String returnViewName)
-	// {
-	// ModelAndView modelAndView = new ModelAndView(returnViewName);
-	// ObjectMapper mapper = new ObjectMapper();
-	// try
-	// {
-	// modelAndView.addObject(SUPERMERCADO_RESPONSE,
-	// mapper.writeValueAsString(cadastroFetchByRequest(request)));
-	// }
-	// catch (Exception ex)
-	// {
-	// LOG.error(DEFAULT_EXCEPTION_MSG + ":" + ex);
-	// modelAndView.addObject(SUPERMERCADO_RESPONSE, null);
-	// }
-	// return modelAndView;
-	// }
-	//
-	// /**
-	// * Refresh cadastros.
-	// *
-	// * @param request the request
-	// * @return the cadastro response
-	// */
-	// protected PessoaResponse refreshPessoa(RefreshRequest request)
-	// {
-	// PessoaResponse response = new PessoaResponse();
-	// try
-	// {
-	// IProdutoBAS client = (IProdutoBAS)QATAppContext.getBean("produtoBASClientTarget");
-	// response = client.refreshPessoas(request);
-	// }
-	// catch (Exception ex)
-	// {
-	// QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
-	// }
-	// return response;
-	// }
-	//
-	// /**
-	// * Maintain supermercados.
-	// *
-	// * @param request the request
-	// * @param persistType the persist type
-	// * @return the supermercado response
-	// */
-	// protected PessoaResponse maintainPessoa(PessoaMaintenanceRequest request,
-	// PersistanceActionEnum persistType)
-	// {
-	// PessoaResponse response = new PessoaResponse();
-	// try
-	// {
-	// IProdutoBAS client = (IProdutoBAS)QATAppContext.getBean("produtoBASClientTarget");
-	// switch (persistType)
-	// {
-	// case INSERT:
-	// response = client.insertPessoa(request);
-	// break;
-	// case UPDATE:
-	// response = client.updatePessoa(request);
-	// break;
-	// case DELETE:
-	// response = client.deletePessoa(request);
-	// break;
-	// default:
-	// if (LOG.isDebugEnabled())
-	// {
-	// LOG.debug("persistType missing! Setting Unspecified Error status.");
-	// }
-	// response.addOperationFailedMessage(DEFAULT_EXCEPTION_MSG);
-	// break;
-	// }
-	//
-	// }
-	// catch (Exception ex)
-	// {
-	// QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
-	// }
-	// return response;
-	// }
-	//
-	// /**
-	// * Pessoa fetch by request.
-	// *
-	// * @param request the request
-	// * @return the supermercado response
-	// */
-	// protected PessoaResponse cadastroFetchByRequest(PessoaInquiryRequest request)
-	// {
-	// PessoaResponse response = new PessoaResponse();
-	// try
-	// {
-	// IProdutoBAS client = (IProdutoBAS)QATAppContext.getBean("produtoBASClientTarget");
-	// response = client.fetchPessoasByRequest(request);
-	// }
-	// catch (Exception ex)
-	// {
-	// QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
-	// }
-	// return response;
-	// }
-	//
-	// protected PessoaResponse cadastroBEFetchAll(boolean useBAI, PessoaInquiryRequest request)
-	// {
-	// PessoaResponse response = new PessoaResponse();
-	// try
-	// {
-	// // IProdutoBAS client = (IProdutoBAS)QATAppContext.getBean("produtoBASClientTarget");
-	// // response = client.fetchAllPessoas(request);
-	//
-	// response = getProdutoBAI().fetchAllPessoas(request);
-	//
-	// }
-	// catch (Exception ex)
-	// {
-	// QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
-	// }
-	// return response;
-	// }
-	//
-	// protected EmbalagemResponse uniMedBEFetchAll(boolean useBAI, EmbalagemInquiryRequest request)
-	// {
-	// EmbalagemResponse response = new EmbalagemResponse();
-	// try
-	// {
-	// IProdutoBAS client = (IProdutoBAS)QATAppContext.getBean("produtoBASClientTarget");
-	// response = client.fetchAllUniMeds(request);
-	//
-	// }
-	// catch (Exception ex)
-	// {
-	// QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
-	// }
-	// return response;
-	// }
-	//
-	// protected EmbalagemResponse embalagemBEFetchAll(boolean useBAI, EmbalagemInquiryRequest request)
-	// {
-	// EmbalagemResponse response = new EmbalagemResponse();
-	// try
-	// {
-	// IProdutoBAS client = (IProdutoBAS)QATAppContext.getBean("produtoBASClientTarget");
-	// response = client.fetchAllEmbalagems(request);
-	//
-	// }
-	// catch (Exception ex)
-	// {
-	// QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
-	// }
-	// return response;
-	// }
-	//
-	// protected ProdutoResponse produtoBEFetchAll(boolean useBAI, ProdutoInquiryRequest request)
-	// {
-	// ProdutoResponse response = new ProdutoResponse();
-	// try
-	// {
-	// IProdutoBAS client = (IProdutoBAS)QATAppContext.getBean("produtoBASClientTarget");
-	// response = client.fetchAllProdutos(request);
-	//
-	// }
-	// catch (Exception ex)
-	// {
-	// QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
-	// }
-	// return response;
-	// }
-
-	// pessoa
-	// protected ModelAndView pessoaMAV(PessoaInquiryRequest request, String returnViewName, boolean b,
-	// HttpRequest requestt)
-	// {
-	// ModelAndView modelAndView = new ModelAndView(returnViewName);
-	// ObjectMapper mapper = new ObjectMapper();
-	// try
-	// {
-	// modelAndView.addObject("pessoaList", mapper.writeValueAsString(pessoaFetchByRequest(request)));
-	// }
-	// catch (Exception ex)
-	// {
-	// LOG.error(DEFAULT_EXCEPTION_MSG + ":" + ex);
-	// modelAndView.addObject(PROCEDURE_RESPONSE, null);
-	// }
-	// return modelAndView;
-	// }
+	protected ModelAndView funcionarioMAV(FuncionarioInquiryRequest request, String returnViewName)
+	{
+		ModelAndView modelAndView = new ModelAndView(returnViewName);
+		ObjectMapper mapper = new ObjectMapper();
+		try
+		{
+			modelAndView.addObject("funcionarioList", mapper.writeValueAsString(fetchFuncionarioByRequest(request)));
+		}
+		catch (Exception ex)
+		{
+			LOG.error(DEFAULT_EXCEPTION_MSG + ":" + ex);
+			modelAndView.addObject(PROCEDURE_RESPONSE, null);
+		}
+		return modelAndView;
+	}
 
 	protected AgenciaResponse fetchAgenciaByRequest(AgenciaInquiryRequest request)
 	{
