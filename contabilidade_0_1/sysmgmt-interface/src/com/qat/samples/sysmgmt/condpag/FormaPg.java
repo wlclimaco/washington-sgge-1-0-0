@@ -93,11 +93,21 @@ public class FormaPg extends ModelCosmeDamiao
 		this.diasPg = diasPg;
 	}
 
+	public Integer getEntrada()
+	{
+		return entrada;
+	}
+
+	public void setEntrada(Integer entrada)
+	{
+		this.entrada = entrada;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "FormaPg [getId()=" + getId() + ", getDescricao()=" + getDescricao() + ", getDiasPg()=" + getDiasPg()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", getEntrada()=" + getEntrada() + ", toString()=" + super.toString() + "]";
 	}
 
 }

@@ -12,9 +12,9 @@ var agenciaModule = (function () {
 
             self.id 				= ko.observable( agencia ? (agencia.id || 0) : 0);
             self.nome 				= ko.observable( agencia ? (agencia.nome || "system") : "system");
-            self.enderecos 			= ko.observableArray([new enderecoModule.ENDERECO(agencia.enderecos)]);
+            self.enderecos 			= ko.observableArray( agencia ? [(new enderecoModule.ENDERECO(agencia.enderecos)) || {}] : [{}]);
 			self.emails 			= ko.observableArray( agencia ? [(new emailModule.EMAIL(agencia.emails)) || {}] : [{}]);
-			self.telefones 			= ko.observableArray([new telefoneModule.TELEFONE(agencia.telefones)]);
+			self.telefones 			= ko.observableArray( agencia ? [(new telefoneModule.TELEFONE(agencia.telefones)) || {}] : [{}]);
 			self.gerente			= ko.observable( agencia ? (agencia.gerente || "") : "");
 			self.responsavelConta	= ko.observable( agencia ? (agencia.responsavelConta || "") : "");
 			self.numeroConta		= ko.observable( agencia ? (agencia.numeroConta || "") : "");

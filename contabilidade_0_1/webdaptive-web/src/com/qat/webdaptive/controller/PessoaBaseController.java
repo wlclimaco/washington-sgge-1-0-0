@@ -510,7 +510,7 @@ public class PessoaBaseController
 		return response;
 	}
 
-	protected FuncionarioResponse insertFuncionario(FuncionarioMaintenanceRequest request)
+	protected FuncionarioResponse insertFunc(FuncionarioMaintenanceRequest request)
 	{
 		FuncionarioResponse response = new FuncionarioResponse();
 		try

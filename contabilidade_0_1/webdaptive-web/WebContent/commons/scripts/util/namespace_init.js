@@ -25,6 +25,7 @@ var qat = {
 		empresa : {
 			form:{}
 		},
+		pessoa :{},
 		error :{}
 	},
 	settings :{

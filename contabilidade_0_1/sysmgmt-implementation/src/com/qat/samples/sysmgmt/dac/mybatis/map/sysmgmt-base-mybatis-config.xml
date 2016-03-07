@@ -96,6 +96,46 @@
   		<typeAlias alias="UsuarioInquiryRequest" type="com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest"/>
 
 
+  		<typeAlias alias="Agencia" type="com.qat.samples.sysmgmt.agencia.Agencia"/>
+  		<typeAlias alias="AgenciaInquiryRequest" type="com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest"/>
+
+  		<typeAlias alias="Banco" type="com.qat.samples.sysmgmt.banco.Banco"/>
+  		<typeAlias alias="BancoPessoa" type="com.qat.samples.sysmgmt.banco.BancoPessoa"/>
+  		<typeAlias alias="BancoInquiryRequest" type="com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest"/>
+
+  		<typeAlias alias="Beneficios" type="com.qat.samples.sysmgmt.beneficios.Beneficios"/>
+  		<typeAlias alias="BeneficioPessoa" type="com.qat.samples.sysmgmt.beneficios.BeneficioPessoa"/>
+  		<typeAlias alias="BeneficioMesApp" type="com.qat.samples.sysmgmt.beneficios.BeneficioMesApp"/>
+  		<typeAlias alias="BeneficiosInquiryRequest" type="com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest"/>
+
+  		<typeAlias alias="Cliente" type="com.qat.samples.sysmgmt.pessoa.Cliente"/>
+  		<typeAlias alias="ClienteInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest"/>
+
+  		<typeAlias alias="Cliente" type="com.qat.samples.sysmgmt.pessoa.Cliente"/>
+  		<typeAlias alias="ClienteInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest"/>
+
+  		<typeAlias alias="Contato" type="com.qat.samples.sysmgmt.contato.Contato"/>
+  		<typeAlias alias="ContatoItens" type="com.qat.samples.sysmgmt.contato.ContatoItens"/>
+  		<typeAlias alias="ContatoInquiryRequest" type="com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest"/>
+
+  		<typeAlias alias="Eventos" type="com.qat.samples.sysmgmt.dp.Eventos"/>
+  		<typeAlias alias="EventoPessoa" type="com.qat.samples.sysmgmt.dp.EventoPessoa"/>
+  		<typeAlias alias="EventoInquiryRequest" type="com.qat.samples.sysmgmt.dp.model.request.EventoInquiryRequest"/>
+
+  		<typeAlias alias="Fornecedor" type="com.qat.samples.sysmgmt.pessoa.Fornecedor"/>
+  		<typeAlias alias="FornecedorInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.FornecedorInquiryRequest"/>
+
+  		<typeAlias alias="Funcionario" type="com.qat.samples.sysmgmt.pessoa.Funcionario"/>
+  		<typeAlias alias="FuncionarioInquiryRequest" type="com.qat.samples.sysmgmt.dp.model.request.FuncionarioInquiryRequest"/>
+
+  		<typeAlias alias="Pessoa" type="com.qat.samples.sysmgmt.pessoa.Pessoa"/>
+
+  		<typeAlias alias="Transportador" type="com.qat.samples.sysmgmt.pessoa.Transportador"/>
+  		<typeAlias alias="TransportadorInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.TransportadorInquiryRequest"/>
+
+
+
+
 
 <!--   		<typeAlias alias="Cadastro" type="com.qat.samples.sysmgmt.produto.model.Cadastro"/> -->
 <!--   		<typeAlias alias="ControleAcess" type="com.qat.samples.sysmgmt.util.ControleAcess"/> -->
@@ -144,7 +184,16 @@
       	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/telefone.xml"/>
       	<mapper resource="com/qat/samples/sysmgmt/dac/mybatis/map/endereco.xml"/>
       	<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/usuario.xml"/>
-
+      	<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/agencia.xml"/>
+      	<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/banco.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/beneficios.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/cliente.xml"/>
+	<!--	<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/contato.xml"/>-->
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/evento.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/fornecedor.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/funcionario.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/pessoa.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/transportador.xml"/>
 
     </mappers>
 
