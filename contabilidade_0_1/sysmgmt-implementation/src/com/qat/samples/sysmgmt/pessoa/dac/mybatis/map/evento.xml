@@ -45,10 +45,10 @@
    	<result property="idFuncBenef" column="idFuncBenef"/>
   </resultMap>
 
-  <resultMap id="eventoMesAppResult" type="EventoPessoa">
+  <resultMap id="eventoPessoa" type="EventoPessoa">
     <result property="int" column="FK_evento_id" />
     <result property="data" column="data" />
-   	<result property="idEvent" column="idEvent"/>
+   	<result property="idEvent.id" column="idEvent"/>
    	<result property="idFunc" column="idFunc"/>
   </resultMap>
 
@@ -85,7 +85,7 @@
 
   <sql id="allEventoAppplyColumns">
 		 data
-		,idEvent
+		,idEvent.id
 		,idFunc
       	,processId
       	,create_user
