@@ -52,6 +52,7 @@ import com.qat.samples.sysmgmt.pessoa.Fornecedor;
 import com.qat.samples.sysmgmt.pessoa.Funcionario;
 import com.qat.samples.sysmgmt.pessoa.Pessoa;
 import com.qat.samples.sysmgmt.pessoa.Transportador;
+import com.qat.samples.sysmgmt.pessoa.dac.IAgenciaDAC;
 import com.qat.samples.sysmgmt.pessoa.dac.IBancoDAC;
 import com.qat.samples.sysmgmt.pessoa.dac.IBeneficiosDAC;
 import com.qat.samples.sysmgmt.pessoa.dac.IContatoDAC;
@@ -65,7 +66,6 @@ import com.qat.samples.sysmgmt.pessoa.dac.ISalariosDAC;
 import com.qat.samples.sysmgmt.pessoa.dac.IUsuarioDAC;
 import com.qat.samples.sysmgmt.pessoa.dacd.BancoDACD;
 import com.qat.samples.sysmgmt.pessoa.dacd.BeneficiosDACD;
-import com.qat.samples.sysmgmt.pessoa.dacd.ContatoDACD;
 import com.qat.samples.sysmgmt.pessoa.dacd.ConvenioDACD;
 import com.qat.samples.sysmgmt.pessoa.dacd.EventosDACD;
 import com.qat.samples.sysmgmt.pessoa.dacd.FormaPagamentoDACD;
@@ -138,6 +138,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 	IHoraFuncDAC horaFuncDAC;
 	IProfissaoDAC profissaoDAC;
 	IUsuarioDAC usuarioDAC;
+	IAgenciaDAC agenciaDAC;
 
 	public IUsuarioDAC getUsuarioDAC()
 	{
@@ -285,6 +286,16 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 	public void setTelefoneDAC(ITelefoneDAC telefoneDAC)
 	{
 		this.telefoneDAC = telefoneDAC;
+	}
+
+	public IAgenciaDAC getAgenciaDAC()
+	{
+		return agenciaDAC;
+	}
+
+	public void setAgenciaDAC(IAgenciaDAC agenciaDAC)
+	{
+		this.agenciaDAC = agenciaDAC;
 	}
 
 	/**
@@ -1258,13 +1269,13 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 				BancoDACD.maintainBancoAssociations(pessoa.getBancos(), response, insertCount, null,
 						null,
 						TabelaEnum.PESSOA, getBancoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser(), processId, historicoId);
+						pessoa.getCreateUser(), processId, historicoId, getAgenciaDAC());
 
-		insertCount +=
-				ContatoDACD.maintainContatoAssociations(pessoa.getContatoList(), response, insertCount, null,
-						null,
-						TabelaEnum.PESSOA, getContatoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser(), processId, historicoId);
+		// insertCount +=
+		// ContatoDACD.maintainContatoAssociations(pessoa.getContatoList(), response, insertCount, null,
+		// null,
+		// TabelaEnum.PESSOA, getContatoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+		// pessoa.getCreateUser(), processId, historicoId);
 
 		return insertCount;
 

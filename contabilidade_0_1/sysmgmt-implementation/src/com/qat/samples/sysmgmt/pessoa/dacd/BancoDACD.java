@@ -10,6 +10,7 @@ import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.banco.Banco;
 import com.qat.samples.sysmgmt.banco.BancoPessoa;
 import com.qat.samples.sysmgmt.entidade.dacd.StatusDACD;
+import com.qat.samples.sysmgmt.pessoa.dac.IAgenciaDAC;
 import com.qat.samples.sysmgmt.pessoa.dac.IBancoDAC;
 import com.qat.samples.sysmgmt.util.AcaoEnum;
 import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
@@ -42,7 +43,7 @@ public final class BancoDACD extends SqlSessionDaoSupport
 	public static Integer maintainBancoAssociations(List<BancoPessoa> bancoList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IBancoDAC bancoDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC, Integer empId,
-			String UserId, Integer processId, Integer historicoId)
+			String UserId, Integer processId, Integer historicoId, IAgenciaDAC agenciaDAC)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -106,6 +107,12 @@ public final class BancoDACD extends SqlSessionDaoSupport
 							banco.getCreateUser(), processId, historicoId);
 					break;
 			}
+
+			AgenciaDACD.maintainAgenciaAssociations(banco.getAgenciaId(), response, 0,
+					null,
+					null,
+					TabelaEnum.PESSOA, agenciaDAC, statusDAC, historicoDAC, empId,
+					banco.getCreateUser(), processId, historicoId);
 		}
 
 		return count;

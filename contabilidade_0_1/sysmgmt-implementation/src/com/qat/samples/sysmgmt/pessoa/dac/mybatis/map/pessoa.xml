@@ -18,6 +18,8 @@
 	<result property="nomeConjugue" column="nomeConjugue"/>
 	<result property="estadoCivil" column="estadoCivil"/>
 	<result property="tipoPessoa" column="tipoPessoa"/>
+	<result property="matricula" column="matricula"/>
+   	<result property="dataAdm" column="dataAdmin"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>

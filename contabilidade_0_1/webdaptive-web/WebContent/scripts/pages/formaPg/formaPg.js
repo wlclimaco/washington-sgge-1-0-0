@@ -16,7 +16,7 @@ var formaPgModule = (function () {
         	self.createDateUTC = ko.observable( formaPg ? (formaPg.create_date || 0) : 0);
         	self.modifyUser = ko.observable( formaPg ? (formaPg.modify_user || "") : "");
         	self.modifyDateUTC = ko.observable( formaPg ? (formaPg.modify_date || 0) : 0);
-			self.modelAction		= ko.observable( formaPg ? (formaPg.modelAction || "INSERT") : "INSERT");
+			self.modelAction		= ko.observable( formaPg ? (formaPg.modelAction || "NONE") : "NONE");
 
         } catch (e) {
         	console.log(e);
@@ -34,7 +34,7 @@ var formaPgModule = (function () {
         	self.createDateUTC	= ko.observable( formaPg ? (formaPg.create_date || 0) : 0);
         	self.modifyUser 	= ko.observable( formaPg ? (formaPg.modify_user || "") : "");
         	self.modifyDateUTC 	= ko.observable( formaPg ? (formaPg.modify_date || 0) : 0);
-			self.modelAction	= ko.observable( formaPg ? (formaPg.modelAction || "INSERT") : "INSERT");
+			self.modelAction	= ko.observable( formaPg ? (formaPg.modelAction || "NONE") : "NONE");
 
         } catch (e) {
         	console.log(e);

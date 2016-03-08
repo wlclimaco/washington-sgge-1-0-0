@@ -26,6 +26,7 @@ var qat = {
 			form:{}
 		},
 		pessoa :{},
+		funcionario :{},
 		error :{}
 	},
 	settings :{

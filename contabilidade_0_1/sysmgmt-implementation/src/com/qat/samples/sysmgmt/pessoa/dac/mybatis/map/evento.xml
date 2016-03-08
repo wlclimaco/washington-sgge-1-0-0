@@ -65,6 +65,7 @@
       	,isSistema
       	,isMensal
       	,processId
+      	,create_date
       	,create_user
       	,modify_date
       	,modify_user
@@ -85,9 +86,10 @@
 
   <sql id="allEventoAppplyColumns">
 		 data
-		,idEvent.id
+		,idEvent
 		,idFunc
       	,processId
+      	,create_date
       	,create_user
       	,modify_date
       	,modify_user

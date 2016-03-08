@@ -12,6 +12,8 @@ public class BeneficioPessoa extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
+	private Integer idFunc;
+
 	/** The description. */
 	private Beneficios benefId;
 
@@ -59,10 +61,20 @@ public class BeneficioPessoa extends ModelCosmeDamiao
 		this.benefId = benefId;
 	}
 
+	public Integer getIdFunc()
+	{
+		return idFunc;
+	}
+
+	public void setIdFunc(Integer idFunc)
+	{
+		this.idFunc = idFunc;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "BeneficioPessoa [getId()=" + getId() + ", getBenefId()=" + getBenefId() + ", toString()="
-				+ super.toString() + "]";
+		return "BeneficioPessoa [getId()=" + getId() + ", getBenefId()=" + getBenefId() + ", getIdFunc()="
+				+ getIdFunc() + ", toString()=" + super.toString() + "]";
 	}
 }

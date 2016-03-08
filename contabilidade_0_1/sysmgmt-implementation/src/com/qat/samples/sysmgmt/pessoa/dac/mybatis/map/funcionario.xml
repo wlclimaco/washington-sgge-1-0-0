@@ -16,8 +16,6 @@
        -->
 
    <resultMap id="funcionarioResult" type="Funcionario" extends="PessoaMap.PessoaResult">
-   	<result property="matricula" column="matricula"/>
-   	<result property="dataAdm" column="dataAdmin"/>
 	<collection property="salarios" column="id" select="SalarioMap.fetchSalarioById"/>
 	<collection property="horarios" column="id" select="HoraFuncMap.fetchHoraFuncById"/>
 	<collection property="beneficios" column="id" select="BeneficiosMap.fetchFuncByBeneficios"/>

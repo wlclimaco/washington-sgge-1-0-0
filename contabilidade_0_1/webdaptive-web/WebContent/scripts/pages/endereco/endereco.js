@@ -23,7 +23,7 @@ var enderecoModule = (function () {
         	self.modifyUser = ko.observable( endereco ? (endereco.modify_user || "system") : "system");
         	self.modifyDateUTC = ko.observable( endereco ? (endereco.modify_date || 0) : 0);
         	self.cidade = ko.observable( endereco ? (new cidadeModule.CIDADE(endereco.cidade) || {}) : {});
-			self.modelAction		= ko.observable( endereco ? (endereco.modelAction || "") : "");
+			self.modelAction		= ko.observable( endereco ? (endereco.modelAction || "NONE") : "NONE");
         } catch (e) {
 			debugger
         	console.log(e);

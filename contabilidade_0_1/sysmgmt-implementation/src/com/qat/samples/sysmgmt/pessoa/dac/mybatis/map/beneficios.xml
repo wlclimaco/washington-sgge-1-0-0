@@ -37,16 +37,15 @@
 
   </resultMap>
 
-  <resultMap id="beneficioMesAppResult" type="BeneficioPessoa">
+  <resultMap id="beneficioPessoaResult" type="BeneficioPessoa">
     <result property="id" column="id" />
-    <result property="data" column="data" />
-   	<result property="idFuncBenef" column="idFuncBenef"/>
+    <result property="idFunc" column="idFunc" />
    	<result property="processId" column="processId"/>
    	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-   	<association property="idFuncBenef"    column="idBenef" select="fetchBeneficiosById"  />
+   	<association property="benefId"    column="idBenef" select="fetchBeneficiosById"  />
   </resultMap>
 
   <!--
@@ -60,6 +59,7 @@
       	,porcentagem
       	,tipo
       	,processId
+      	,create_date
       	,create_user
       	,modify_date
       	,modify_user
@@ -80,13 +80,14 @@
 		 idFunc
 		,idBenef
       	,processId
+      	,create_date
       	,create_user
       	,modify_date
       	,modify_user
   </sql>
 
   <sql id="allBeneficiosApplyValues">
-  		#{pessoaId},
+  		#{idFunc},
   		#{benefId.id},
     	#{processId},
     	<include refid="CBOFMap.changeControlFields"/>

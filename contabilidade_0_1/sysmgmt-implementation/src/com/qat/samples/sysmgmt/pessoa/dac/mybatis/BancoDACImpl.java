@@ -364,6 +364,11 @@ public class BancoDACImpl extends SqlSessionDaoSupport implements IBancoDAC
 
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "BancoMap.insertBanco", banco.getBancoId(), response);
+
+		// First insert the root
+		// Is successful the unique-id will be populated back into the object.
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), "BancoMap.insertBancoPessoa", banco, response);
 
 		if (response.isInError())

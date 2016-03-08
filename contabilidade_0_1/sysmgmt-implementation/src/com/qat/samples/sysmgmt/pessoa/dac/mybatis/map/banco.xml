@@ -106,9 +106,9 @@
 
     <insert id="insertBancoPessoa" parameterType="BancoPessoa" useGeneratedKeys="true" keyProperty="id">
   	INSERT INTO BancoPessoa (
-		<include refid="allBancoColumns" />
+		<include refid="allBancoPessoaColumns" />
       )
-    VALUES (<include refid="allBancoValues" /> )
+    VALUES (<include refid="allBancoPessoaValues" /> )
   </insert>
 
     <update id="updateBancoPessoa" parameterType="Banco">

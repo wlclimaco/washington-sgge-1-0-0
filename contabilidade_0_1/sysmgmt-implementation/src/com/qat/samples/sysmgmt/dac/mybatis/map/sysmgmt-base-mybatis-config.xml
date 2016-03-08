@@ -119,6 +119,7 @@
   		<typeAlias alias="ContatoInquiryRequest" type="com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest"/>
 
   		<typeAlias alias="Eventos" type="com.qat.samples.sysmgmt.dp.Eventos"/>
+  		<typeAlias alias="Salario" type="com.qat.samples.sysmgmt.dp.Salario"/>
   		<typeAlias alias="EventoPessoa" type="com.qat.samples.sysmgmt.dp.EventoPessoa"/>
   		<typeAlias alias="EventoInquiryRequest" type="com.qat.samples.sysmgmt.dp.model.request.EventoInquiryRequest"/>
 
@@ -132,6 +133,9 @@
 
   		<typeAlias alias="Transportador" type="com.qat.samples.sysmgmt.pessoa.Transportador"/>
   		<typeAlias alias="TransportadorInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.TransportadorInquiryRequest"/>
+
+  		<typeAlias alias="Agencia" type="com.qat.samples.sysmgmt.agencia.Agencia"/>
+  		<typeAlias alias="AgenciaInquiryRequest" type="com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest"/>
 
 
 
@@ -194,6 +198,8 @@
 		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/funcionario.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/pessoa.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/transportador.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/agencia.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/salarios.xml"/>
 
     </mappers>
 

@@ -19,6 +19,7 @@ qat.pages.pessoa = {
 							return {id:0,
 				            nome:"TESTE0001",
 				            nomePai:"nomePai",
+							emprId : 9,
 				            nomeMae :"nomeMae",
 				            nomeConjugue:"nomeConjugue",
 				            estadoCivil:0,
@@ -49,14 +50,98 @@ qat.pages.pessoa = {
 							}],
 				        	emails : [{email : "email001@gmail.com",modelAction : "INSERT",emailTypeEnumValue:1},{email : "email002@gmail.com",modelAction : "INSERT",emailTypeEnumValue:2},{email : "email003@gmail.com",modelAction : "INSERT",emailTypeEnumValue:3}],
 							telefones:[{ddd :"034",numero:"3315-8065",modelAction : "INSERT",telefoneTypeEnumValue : 1},{ddd :"034",numero:"3315-8065",modelAction : "INSERT",telefoneTypeEnumValue : 2}],
-							bancos:[{}],
+							bancos:[{
+								id:0,
+								modelAction : "INSERT",
+								numCont:"123456789",
+								saldo:1.99,
+								bancoId :{
+									id:0,
+									modelAction : "INSERT",
+									nome:"BANCO DO BRASIL",
+								},
+								agenciaId:{
+									id:0,
+									modelAction : "INSERT",
+									nome:"AGENCIA NOME",
+									enderecos:[{
+										logradouro : "Logradouro",
+										cep :"CEP",
+										bairro : "BAIRRO",
+										numero : "NUMERO",
+										complemento :"COMPLEMENTO",
+										enderecoTypeValue : 1,
+										modelAction : "INSERT",
+										cidade : {id:1},
+									}],
+									emails : [{email : "email001@gmail.com",modelAction : "INSERT",emailTypeEnumValue:1},{email : "email002@gmail.com",modelAction : "INSERT",emailTypeEnumValue:2},{email : "email003@gmail.com",modelAction : "INSERT",emailTypeEnumValue:3}],
+									telefones:[{ddd :"034",numero:"3315-8065",modelAction : "INSERT",telefoneTypeEnumValue : 1},{ddd :"034",numero:"3315-8065",modelAction : "INSERT",telefoneTypeEnumValue : 2}],
+									gerente:"gerento",
+									responsavelConta:"responsavelConta",
+									numeroConta:"123456"
+								}
+							}],
 				        	formaPagamentoList:[{}],
 				        	condPagList:[{}],
 				        	contatoList:[{}],
-				        	salarios:[{}],
+				        	salarios:[{
+								id :0,
+								data:qat.pages.pessoa.nowDate(),
+								valor:1999.99,
+								modelAction : "INSERT"
+							}],
+
 				        	horarios:[{}],
-				        	beneficios:[{}],
-				        	eventosList:[{}]
+				        	beneficios:{
+								id:0,
+								benefId : {
+									id : 0,
+									nome : "VALE TRANSPORTE",
+									codigo : "0001",
+									descricao :"DESCRICAO",
+									valor 	:1.99,
+									porcentagem: 10,
+									tipo: "1" ,
+									createUser:"system",
+									createDateUTC:qat.pages.pessoa.nowDate(),
+									modifyUser:"",
+									modifyDateUTC:0,
+									modelAction: "INSERT"
+								},
+								idFunc : 1,
+								createUser : "system",
+								createDateUTC:qat.pages.pessoa.nowDate(),
+								modifyUser:"",
+								modifyDateUTC:0,
+								modelAction:"INSERT"
+							},
+				        	eventosList:[{
+								id:0,
+								idEvent : {
+
+									isMensal : true,
+									isSistema : true,
+									noteText:"NOTE TEXT",
+									id : 0,
+									nome : "VALE TRANSPORTE",
+									codigo : "0001",
+									descricao :"DESCRICAO",
+									valor 	:1.99,
+									porcentagem: 10,
+									tipo: "1" ,
+									createUser:"system",
+									createDateUTC:qat.pages.pessoa.nowDate(),
+									modifyUser:"",
+									modifyDateUTC:0,
+									modelAction: "INSERT"
+								},
+							    idFunc : 1,
+								createUser : "system",
+								createDateUTC:qat.pages.pessoa.nowDate(),
+								modifyUser:"",
+								modifyDateUTC:0,
+								modelAction:"INSERT"
+							}]
 							}
 
 							} catch (e) {

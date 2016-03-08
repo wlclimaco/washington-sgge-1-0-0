@@ -184,6 +184,9 @@
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
    	</bean>
 
+   	<bean id="agenciaDACTarget" class="com.qat.samples.sysmgmt.pessoa.dac.mybatis.AgenciaDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+   	</bean>
 
 
   	<bean id="pessoaDACTarget" class="com.qat.samples.sysmgmt.pessoa.dac.mybatis.PessoaDACImpl">
@@ -206,6 +209,7 @@
  		<property name="eventosDAC" ref="eventosDACTarget"/>
  		<property name="horaFuncDAC" ref="horaFuncDACTarget"/>
  		<property name="profissaoDAC" ref="profissaoDACTarget"/>
+ 		<property name="agenciaDAC" ref="agenciaDACTarget"/>
 
   	</bean>
 </beans>

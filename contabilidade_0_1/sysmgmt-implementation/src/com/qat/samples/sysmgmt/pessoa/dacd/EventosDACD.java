@@ -8,7 +8,6 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.dp.EventoPessoa;
-import com.qat.samples.sysmgmt.dp.Eventos;
 import com.qat.samples.sysmgmt.entidade.dacd.StatusDACD;
 import com.qat.samples.sysmgmt.pessoa.dac.IEventosDAC;
 import com.qat.samples.sysmgmt.util.AcaoEnum;
@@ -64,6 +63,7 @@ public final class EventosDACD extends SqlSessionDaoSupport
 			switch (evento.getModelAction())
 			{
 				case INSERT:
+					count = eventoDac.insertEvento(evento.getIdEvent());
 					count = eventoDac.insertEventoPessoa(evento);
 					if (count > 0)
 					{
@@ -78,6 +78,7 @@ public final class EventosDACD extends SqlSessionDaoSupport
 
 					break;
 				case UPDATE:
+					count = eventoDac.updateEvento(evento.getIdEvent());
 					count = eventoDac.updateEventoPessoa(evento);
 					if (count > 0)
 					{
@@ -100,73 +101,17 @@ public final class EventosDACD extends SqlSessionDaoSupport
 
 					break;
 				case NONE:
-					count =
-							maintainBancoAssociationsA(evento.getIdEvent(), response, parentId, null,
-									null,
-									TabelaEnum.PESSOA, eventoDac, statusDAC, historicoDAC,
-									evento.getEmprId(),
-									evento.getCreateUser(), processId, HistoriId);
+
+					count = eventoDac.insertEventoPessoa(evento);
+					if (count > 0)
+					{
+						count =
+								StatusDACD.maintainStatusAssociations(evento.getStatusList(), response, evento.getId(),
+										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.EVENTOS, statusDAC,
+										historicoDAC, processId, HistoriId);
+					}
 					break;
 			}
-		}
-
-		return count;
-	}
-
-	public static Integer maintainBancoAssociationsA(Eventos evento,
-			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IEventosDAC eventoDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
-			Integer empId,
-			String UserId, Integer processId, Integer historicoId)
-	{
-
-		Integer count = 0;
-		// First Maintain Empresa
-		if (ValidationUtil.isNull(evento))
-		{
-			return count;
-		}
-
-		// Make sure we set the parent key
-		evento.setParentId(parentId);
-		evento.setProcessId(processId);
-
-		switch (evento.getModelAction())
-		{
-			case INSERT:
-				count = eventoDAC.insertEvento(evento);
-				if (count > 0)
-				{
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.ATIVO);
-					List<Status> statusList = new ArrayList<Status>();
-					count =
-							StatusDACD.maintainStatusAssociations(statusList, response, count, null,
-									AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
-									processId, historicoId);
-				}
-				break;
-			case UPDATE:
-				count = eventoDAC.updateEvento(evento);
-				if (count > 0)
-				{
-					count =
-							StatusDACD
-									.maintainStatusAssociations(evento.getStatusList(), response, evento.getId(),
-											null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-											historicoDAC, processId, historicoId);
-				}
-				break;
-			case DELETE:
-				Status status = new Status();
-				status.setStatus(CdStatusTypeEnum.DELETADO);
-				List<Status> statusList = new ArrayList<Status>();
-				count =
-						StatusDACD.maintainStatusAssociations(statusList, response, evento.getId(), null,
-								AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
-								processId, historicoId);
-
-				break;
 		}
 
 		return count;

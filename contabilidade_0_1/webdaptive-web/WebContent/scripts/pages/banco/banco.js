@@ -20,7 +20,7 @@ var bancoModule = (function () {
         	self.createDateUTC 	= ko.observable( banco ? (banco.create_date || 0) : 0);
         	self.modifyUser 	= ko.observable( banco ? (banco.modify_user || "") : "");
         	self.modifyDateUTC 	= ko.observable( banco ? (banco.modify_date || "") : "");
-			self.modelAction	= ko.observable( banco ? (banco.modelAction || "INSERT") : "INSERT");
+			self.modelAction	= ko.observable( banco ? (banco.modelAction || "NONE") : "NONE");
 
         } catch (e) {
 			debugger
@@ -37,7 +37,7 @@ var bancoModule = (function () {
         	self.createDateUTC 	= ko.observable( banco ? (banco.create_date || 0) : 0);
         	self.modifyUser 	= ko.observable( banco ? (banco.modify_user || "") : "");
         	self.modifyDateUTC 	= ko.observable( banco ? (banco.modify_date || "") : "");
-			self.modelAction	= ko.observable( banco ? (banco.modelAction || "INSERT") : "INSERT");
+			self.modelAction	= ko.observable( banco ? (banco.modelAction || "NONE") : "NONE");
 
         } catch (e) {
 			debugger

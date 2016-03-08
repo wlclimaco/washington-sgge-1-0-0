@@ -19,7 +19,7 @@ var horarioModule = (function () {
         	self.createDateUTC = ko.observable( horario ? (horario.create_date || 0) : 0);
         	self.modifyUser = ko.observable( horario ? (horario.modify_user || "system") : "system");
         	self.modifyDateUTC = ko.observable( horario ? (horario.modify_date || 0) : 0);
-			self.modelAction		= ko.observable( horario ? (horario.modelAction || "INSERT") : "INSERT");
+			self.modelAction		= ko.observable( horario ? (horario.modelAction || "NONE") : "NONE");
 
         } catch (e) {
 			debugger

@@ -9,9 +9,9 @@ var funcionarioModule = (function () {
     function FUNCIONARIO(funcionario) {
         try {
             var self = this;
-
             self.id  					= ko.observable( funcionario ? (funcionario.id || 0 ) : 0);
-            self.nome 					= ko.observable( funcionario ? (funcionario.nome || "" ) : "");
+			self.nome 					= ko.observable( funcionario ? (funcionario.nome || "" ) : "");
+            self.emprId 				= ko.observable( funcionario ? (funcionario.emprId || 0 ) : 0);
             self.nomePai 				= ko.observable( funcionario ? (funcionario.nomePai || "" ) : "");
             self.nomeMae 				= ko.observable( funcionario ? (funcionario.nomeMae || "" ) : "");
             self.nomeConjugue 			= ko.observable( funcionario ? (funcionario.nomeConjugue || "" ) : "");

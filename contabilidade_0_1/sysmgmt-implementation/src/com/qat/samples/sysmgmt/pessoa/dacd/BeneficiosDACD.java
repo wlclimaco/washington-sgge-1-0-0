@@ -56,6 +56,7 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 		{
 			// Make sure we set the parent key
 			beneficioPessoa.setParentId(parentId);
+			beneficioPessoa.setIdFunc(parentId);
 			beneficioPessoa.setProcessId(processId);
 
 			if (ValidationUtil.isNull(beneficioPessoa.getModelAction()))

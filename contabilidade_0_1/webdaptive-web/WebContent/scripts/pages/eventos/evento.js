@@ -18,9 +18,10 @@ var eventoModule = (function () {
         	self.createDateUTC 	= ko.observable( evento ? (evento.create_date || 0) : 0);
         	self.modifyUser 	= ko.observable( evento ? (evento.modify_user || "") : "");
         	self.modifyDateUTC 	= ko.observable( evento ? (evento.modify_date || 0) : 0);
-			self.modelAction	= ko.observable( evento ? (evento.modelAction || "INSERT") : "INSERT");
+			self.modelAction	= ko.observable( evento ? (evento.modelAction || "NONE") : "NONE");
 
         } catch (e) {
+			debugger
         	console.log(e);
         }
     }
@@ -30,10 +31,10 @@ var eventoModule = (function () {
             var self = this;
             self.id 			= ko.observable( evento ? (evento.id || 0) : 0);
             self.nome			= ko.observable( evento ? (evento.nome || "") : "");
-            self.dataList 		= ko.observableArray([new eventoModule.EVENTOMESAPP(evento.dataList)]);
+          //  self.dataList 		= ko.observableArray([new eventoModule.EVENTOMESAPP(evento.dataList)]);
         	self.descricao		= ko.observable( evento ? (evento.descricao || "") : "");
         	self.codigo			= ko.observable( evento ? (evento.codigo || "") : "");
-        	self.Tipo			= ko.observable( evento ? (evento.Tipo || "") : "");
+        	self.tipo			= ko.observable( evento ? (evento.tipo || "") : "");
         	self.valor			= ko.observable( evento ? (evento.valor || 0) : 0);
         	self.porcentagem	= ko.observable( evento ? (evento.porcentagem || 0) : 0);
         	self.isMensal		= ko.observable( evento ? (evento.isMensal || false) : false);
@@ -43,9 +44,10 @@ var eventoModule = (function () {
         	self.createDateUTC	= ko.observable( evento ? (evento.create_date || 0) : 0);
         	self.modifyUser 	= ko.observable( evento ? (evento.modify_user || "") : "");
         	self.modifyDateUTC 	= ko.observable( evento ? (evento.modify_date || 0) : 0);
-			self.modelAction	= ko.observable( evento ? (evento.modelAction || "INSERT") : "INSERT");
+			self.modelAction	= ko.observable( evento ? (evento.modelAction || "NONE") : "NONE");
 
         } catch (e) {
+			debugger
         	console.log(e);
         }
     }
