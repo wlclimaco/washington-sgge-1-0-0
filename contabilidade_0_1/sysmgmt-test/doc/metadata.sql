@@ -618,8 +618,8 @@ CREATE TABLE Evento(
     noteText     character varying(200) NULL,
 	valor        real NULL,
 	porcentagem  real NULL,
-	isMensal     bit NULL,
-	isSistema    bit NULL,
+	isMensal     boolean NULL,
+	isSistema    boolean NULL,
 	processId    integer NULL,
 	create_date  bigint,
     create_user  character varying(50) NULL,
@@ -709,7 +709,7 @@ ALTER TABLE Pessoa_id_seq
 DROP TABLE Pessoa;
 CREATE TABLE Pessoa(
 	id             integer NOT NULL DEFAULT nextval('Pessoa_id_seq'::regclass),
-	nome         character varying(200) NULL,
+	nome         	character varying(200) NULL,
 	cdEmpr 	   integer NOT NULL,
 	sexo 		   integer NULL,
 	type         integer NOT NULL,
@@ -719,6 +719,7 @@ CREATE TABLE Pessoa(
 	nomeMae      character varying(200) NULL,
 	nomeConjugue character varying(200) NULL,
 	estadoCivil  integer NULL,
+	tipoPessoa  integer NULL,
 	processId    integer NULL,
 	matricula	   character varying(50) NULL,
 	create_date  bigint,
@@ -1070,7 +1071,6 @@ DROP TABLE agencia;
 CREATE TABLE agencia(
 	id          	         integer NOT NULL DEFAULT nextval('agencia_id_seq'::regclass),
 	nome          	 	 character varying(50) NULL,
-	parentId          	 integer NOT NULL,
 	numeroConta          	 	 character varying(50) NULL,
 	gerente          	 	 character varying(50) NULL,
 	responsavelConta          	 	 character varying(50) NULL,
