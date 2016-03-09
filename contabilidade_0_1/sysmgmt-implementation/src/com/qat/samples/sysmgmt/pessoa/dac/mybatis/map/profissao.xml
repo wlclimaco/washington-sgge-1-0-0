@@ -30,9 +30,9 @@
     <result property="renda" column="renda" />
     <result property="dataAdmissao" column="dataAdmissao" />
     <result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
   </resultMap>
 
   <!--
@@ -76,7 +76,7 @@
     		<if test="profissao!= null">profissao = #{profissao},</if>
 	    	<if test="renda!= null"> renda=#{renda},</if>
 	    	<if test="dataAdmissao!= null"> dataAdmissao=#{dataAdmissao},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE

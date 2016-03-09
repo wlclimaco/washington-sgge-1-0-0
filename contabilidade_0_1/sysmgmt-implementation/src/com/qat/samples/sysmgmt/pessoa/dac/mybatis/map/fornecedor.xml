@@ -26,9 +26,9 @@
 	<result property="nomeConjugue" column="nomeConjugue"/>
 	<result property="estadoCivil" column="estadoCivil"/>
 	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
 	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByPessoaId"/>
 	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByPessoaId"/>
 	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByPessoaId"/>

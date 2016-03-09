@@ -38,9 +38,9 @@
     <result property="tabelaEnumValue" column="tabelaEnum" />
     <result property="note" column="note" />
     <result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
   </resultMap>
 
   <!--
@@ -88,7 +88,7 @@
     UPDATE status
     	<set>
     		<if test="statusValue!= null">status = #{statusValue},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE
@@ -115,7 +115,7 @@
 
 	    SELECT
 		<include refid="allStatusColumns" />
-	    FROM status b where b.tabelaEnum in(1,51,52) and b.parentId = #{id}
+	    FROM status b where tabelaEnum in(1,51,52) and parentId = #{id}
 
 	    ORDER BY dataStatus DESC
   </select>
@@ -124,7 +124,7 @@
 
 	    SELECT
 		<include refid="allStatusColumns" />
-	    FROM status b where b.tabelaEnum = 2 and b.parentId = #{id}
+	    FROM status b where tabelaEnum = 2 and parentId = #{id}
 
 	    ORDER BY dataStatus ASC
   </select>
@@ -133,7 +133,7 @@
 
 	    SELECT
 		<include refid="allStatusColumns" />
-	    FROM status b where b.tabelaEnum = 3 and b.parentId = #{id}
+	    FROM status b where tabelaEnum = 3 and parentId = #{id}
 
 	    ORDER BY dataStatus ASC
   </select>
@@ -143,7 +143,7 @@
 
 	    SELECT
 		<include refid="allStatusColumns" />
-	    FROM status b where b.tabelaEnum = 4 and b.parentId = #{id}
+	    FROM status b where tabelaEnum = 4 and parentId = #{id}
 
 	    ORDER BY dataStatus ASC
   </select>
@@ -152,7 +152,7 @@
 
 	    SELECT
 		<include refid="allStatusColumns" />
-	    FROM status b where b.tabelaEnum = 5 and b.parentId = #{id}
+	    FROM status b where tabelaEnum = 5 and parentId = #{id}
 
 	    ORDER BY dataStatus ASC
   </select>
@@ -161,7 +161,7 @@
 
 	    SELECT
 		<include refid="allStatusColumns" />
-	    FROM status b where b.tabelaEnum = 6 and b.parentId = #{id}
+	    FROM status b where tabelaEnum = 6 and parentId = #{id}
 
 	    ORDER BY dataStatus ASC
   </select>
@@ -170,7 +170,7 @@
 
 	    SELECT
 		<include refid="allStatusColumns" />
-	    FROM status b where b.tabelaEnum = 16 and b.parentId = #{id}
+	    FROM status b where tabelaEnum = 16 and parentId = #{id}
 
 	    ORDER BY dataStatus ASC
   </select>
@@ -180,7 +180,7 @@
 
 	    SELECT
 		<include refid="allStatusColumns" />
-	    FROM status b where b.tabelaEnum = 23 and b.parentId = #{id}
+	    FROM status b where tabelaEnum = 23 and parentId = #{id}
 
 	    ORDER BY dataStatus ASC
   </select>
@@ -190,7 +190,7 @@
 
 	    SELECT
 		<include refid="allStatusColumns" />
-	    FROM status b where b.tabelaEnum = 45 and b.parentId = #{id}
+	    FROM status b where tabelaEnum = 45 and parentId = #{id}
 
 	    ORDER BY dataStatus ASC
   </select>
@@ -199,7 +199,7 @@
 
 	    SELECT
 		<include refid="allStatusColumns" />
-	    FROM status b where b.tabelaEnum = 32 and b.parentId = #{id}
+	    FROM status b where tabelaEnum = 32 and parentId = #{id}
 
 	    ORDER BY dataStatus ASC
   </select>
@@ -208,7 +208,7 @@
 
 	    SELECT
 		<include refid="allStatusColumns" />
-	    FROM status b where b.tabelaEnum = 32 and b.parentId = #{id}
+	    FROM status b where tabelaEnum = 32 and parentId = #{id}
 
 	    ORDER BY dataStatus ASC
   </select>
@@ -227,7 +227,7 @@
 					<where>
 				  		 <choose>
 							<when test="id != null and id != ''">
-								b.business_id = #{id}
+								business_id = #{id}
 				    		</when>
 				    	 </choose>
 				  </where>
@@ -244,14 +244,14 @@
     			(
 
     						<include refid="allStatusColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY b.nome) AS RowNumber
+    						ROW_NUMBER() OVER(ORDER BY nome) AS RowNumber
     				FROM status b
 						where a = a
 					<if test="parentId != null">
-						AND b.id = #{id}
+						AND id = #{id}
 					</if>
 					 <if test="statusList != null and !statusList.isEmpty()">
-					     AND b.PGSI_status IN
+					     AND PGSI_status IN
 					     <foreach item="item" index="index" collection="statusList"
 						     open="(" separator="," close=")">
 						   	 #{item.value}

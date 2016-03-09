@@ -25,10 +25,10 @@
 		<result property="saldo" column="saldo" />
 		<result property="tabelaEnumValue" column="tabela" />
 		<result property="processId" column="processId" />
-		<result property="create_date" column="create_date" />
-      	<result property="create_user" column="create_user" />
-      	<result property="modify_date" column="modify_date" />
-      	<result property="modify_user" column="modify_user" />
+	   	<result property="createUser" column="create_user"/>
+		<result property="createDataUTC" column="create_date"/>
+		<result property="modifyUser" column="modify_user"/>
+		<result property="modifyDataUTC" column="modify_date"/>
       	<association property="bancoId"    column="bancoId" select="fetchBancoByBancoId"  />
       	<association property="agenciaId"  column="agenciaId" select="AgenciaMap.fetchAgenciaById"  />
       </resultMap>
@@ -37,9 +37,9 @@
     <result property="id" column="id" />
     <result property="nome" column="nome" />
    	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
 	<collection property="agenciaList" column="id" select="AgenciaMap.fetchAgenciaByBanco"/>
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByPessoaId"/>
   </resultMap>
@@ -48,9 +48,9 @@
     <result property="id" column="id" />
     <result property="nome" column="nome" />
    	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByPessoaId"/>
   </resultMap>
 
@@ -115,7 +115,7 @@
     UPDATE BancoPessoa
     	<set>
     		<if test="saldo!= null">saldo = #{saldo},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE
@@ -131,7 +131,7 @@
     UPDATE banco
     	<set>
     		<if test="nome!= null">nome = #{nome},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE
@@ -168,9 +168,7 @@
 		<include refid="allBancoColumns" />
         FROM banco b
      WHERE 1=1
-     <if test="criteria.id != null">
-		  AND id = #{criteria.id}
-	 </if>
+
   </select>
 
    <select id="fetchBancoByBancoId" parameterType="Integer" resultMap="bancoAResult">
@@ -178,9 +176,7 @@
 		<include refid="allBancoColumns" />
         FROM banco b
      WHERE 1=1
-     <if test="criteria.id != null">
-		  AND id = #{criteria.id}
-	 </if>
+
   </select>
 
   <select id="fetchAllBancosByRequest" parameterType="BancoInquiryRequest" resultMap="bancoResult">

@@ -216,6 +216,7 @@
 		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/salarios.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/profissao.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/util/dac/mybatis/map/note.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/condpag.xml"/>
 
     </mappers>
 

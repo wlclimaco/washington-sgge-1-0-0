@@ -6,6 +6,7 @@ import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.dp.Profissao;
 import com.qat.samples.sysmgmt.entidade.dacd.StatusDACD;
 import com.qat.samples.sysmgmt.pessoa.dac.IProfissaoDAC;
@@ -44,6 +45,11 @@ public final class ProfissaoDACD extends SqlSessionDaoSupport
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Integer count = 0;
+
+		if (ValidationUtil.isNull(profissao))
+		{
+			return count;
+		}
 
 		// Make sure we set the parent key
 		profissao.setParentId(parentId);

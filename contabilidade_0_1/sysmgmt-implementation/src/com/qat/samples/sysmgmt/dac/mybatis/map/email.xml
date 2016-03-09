@@ -22,9 +22,9 @@
 	<result property="email" column="email" />
     <result property="emailTypeEnumValue" column="emailType" />
 	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmail"/>
   </resultMap>
 
@@ -72,7 +72,7 @@
     	<set>
     		<if test="email!= null">email = #{email},</if>
 	    	<if test="emailTypeEnumValue!= null"> emailType=#{emailTypeEnumValue},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE
@@ -119,7 +119,7 @@
  <select id="fetchAllEmailsByFuncionario" parameterType="Integer" resultMap="emailResult">
 	 SELECT
 	<include refid="allEmailColumns" />
-    FROM email where tabela in (16,17,18,19,20) and parentId= #{id} ORDER BY id ASC
+    FROM email where tabela in (16,17,18,19,23) and parentId= #{id} ORDER BY id ASC
  </select>
 
  <select id="fetchAllEmailsByPessoaId" parameterType="Integer" resultMap="emailResult">

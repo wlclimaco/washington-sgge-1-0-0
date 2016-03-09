@@ -33,9 +33,9 @@
     <result property="acaoEnumValue" column="acao" />
     <result property="processId" column="processId" />
 	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
 	<collection property="historicoItensList" column="id" select="fetchAllHistoricoItensByhistorico"/>
   </resultMap>
 
@@ -47,9 +47,9 @@
    	<result property="tabelaEnumValue" column="tabela"/>
    	<result property="parentId" column="parentId"/>
 	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
   </resultMap>
 
   <!--<resultMap id="alertaResult" type="Alerta" >

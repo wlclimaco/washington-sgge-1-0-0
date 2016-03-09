@@ -28,9 +28,9 @@
    	<result property="ultAcesso" column="ultAcesso"/>
    	<result property="tabelaEnumValue" column="tabela"/>
     <result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
 	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByUsuario"/>
   </resultMap>
 
@@ -101,7 +101,7 @@ private String login;
 	    	<if test="cdIBGE!= null"> IBGE=#{cdIBGE},</if>
 	    	<if test="estado.id!= null"> estado=#{estado.id},</if>
 	    	<if test="cep!= null"> cep=#{cep},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE

@@ -26,9 +26,9 @@
      <result property="motivoValue" column="motivo" />
     <result property="dataContato" column="dataContato" />
    	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
 	<collection property="contatoItensList" column="id" select="fetchContatoItensByContatos"/>
   </resultMap>
 
@@ -73,7 +73,7 @@
     UPDATE contato
     	<set>
     		<if test="dataContato!= null">dataContato = #{dataContato},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE
@@ -133,9 +133,9 @@
     <result property="texto" column="texto" />
     <result property="processId" column="processId" />
    	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
 	<collection property="notes" column="id" select="NoteMap.fetchNoteByContato"/>
   </resultMap>
 
@@ -180,7 +180,7 @@
     		<if test="motivoValue!= null">motivoValue = #{motivoValue},</if>
     		<if test="dataContato!= null">dataContato = #{dataContato},</if>
     		<if test="nomeContato!= null">nomeContato = #{nomeContato},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE

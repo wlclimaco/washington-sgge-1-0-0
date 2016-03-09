@@ -28,9 +28,9 @@
     <result property="emprId" column="emprId" />
 	<result property="entidadeEnumValue" column="entidadeEnum" />
     <result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
     <association property="regime"    column="regime" select="RegimeMap.fetchRegimeByEmpresa"  />
    	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
 	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByEmpresaId"/>
@@ -50,9 +50,9 @@
     <result property="emprId" column="emprId" />
 	<result property="entidadeEnumValue" column="entidadeEnum" />
     <result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
     <association property="regime"    column="regime" select="RegimeMap.fetchRegimeByEmpresa"  />
    	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
 	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByEmpresaId"/>
@@ -107,7 +107,7 @@
 	    	<if test="regime.id!= null"> regime=#{regime.id},</if>
 	    	<if test="entidadeId!= null">entidadeId = #{entidadeId},</if>
 	    	<if test="entidadeEnumValue!= null"> entidadeEnum=#{entidadeEnumValue},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE

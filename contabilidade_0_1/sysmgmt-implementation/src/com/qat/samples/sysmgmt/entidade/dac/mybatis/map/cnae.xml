@@ -21,9 +21,9 @@
 	<result property="descricao" column="descricao"/>
 	<result property="abreviado" column="abreviado"/>
 	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
   </resultMap>
 
 
@@ -33,9 +33,9 @@
     <result property="tabelaEnumValue" column="tabela" />
     <result property="processId" column="processId"/>
 	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
 	 <association property="idCnae"    column="idCnae" select="fetchCnaeById"  />
   </resultMap>
 
@@ -104,7 +104,7 @@
 	    	<if test="cnae!= null"> cnae=#{cnae},</if>
 	    	<if test="descricao!= null"> descricao=#{descricao},</if>
 	    	<if test="abreviado!= null"> abreviado=#{abreviado},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE
@@ -117,7 +117,7 @@
     		<if test="idCnae.id!= null">idCnae = #{idCnae.id},</if>
 	    	<if test="tabelaEnumValue!= null"> tabela=#{tabelaEnumValue},</if>
 	    	<if test="parentId!= null"> parentId=#{parentId},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE

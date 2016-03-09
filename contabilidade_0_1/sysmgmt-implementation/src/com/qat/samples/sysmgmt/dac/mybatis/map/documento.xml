@@ -20,9 +20,9 @@
     <result property="numero" column="numero"/>
     <result property="data" column="data"/>
     <result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
 	<association property="estado"    column="estado" select="EstadoMap.fetchEstadoById"  />
   </resultMap>
 
@@ -51,9 +51,9 @@
 		#{numero},
 		#{data},
 		#{createUser},
-		#{createDateUTC},
+		#{createDataUTC},
 		#{modifyUser},
-		#{modifyDateUTC},
+		#{modifyDataUTC},
 		#{estado.id}
   </sql>
 
@@ -65,21 +65,21 @@
   </insert>
 
    <select id="fetchDocumentoByEmpresa" parameterType="Integer" resultMap="DocumentoResult">
-         SELECT * FROM DOCUMENTOS WHERE TABELA = 1 AND ID = #{ID}
+         SELECT * FROM documento WHERE TABELA = 1 AND ID = #{ID}
    </select>
 
    <select id="fetchDocumentoByPessoaId" parameterType="Integer" resultMap="DocumentoResult">
-         SELECT * FROM DOCUMENTOS WHERE TABELA in (16,17,18,19,23) AND ID = #{ID}
+         SELECT * FROM documento WHERE TABELA in (16,17,18,19,23) AND PARENTID = #{ID}
    </select>
 
    <select id="fetchAllDocumentosByCliente" resultMap="DocumentoResult">
-         SELECT <include refid="allDocumentoColumns" /> FROM DOCUMENTOS WHERE TABELA = 8 AND ID = #{ID}
+         SELECT <include refid="allDocumentoColumns" /> FROM documento WHERE TABELA = 8 AND ID = #{ID}
    </select>
 
   <select id="fetchAllDocumentos" resultMap="DocumentoResult">
     SELECT
     <include refid="allDocumentoColumns" />
-    FROM DOCUMENTOS ORDER BY documentoid ASC
+    FROM documento ORDER BY documentoid ASC
   </select>
 
   <select id="fetchAllDocumentosPagedBatch" resultMap="DocumentoResult">
@@ -87,7 +87,7 @@
 		SELECT * FROM (
 		SELECT * FROM (
 		SELECT <include refid="allDocumentoColumnsWithQualifier" />,
-		ROWNUM ROWNUM_ FROM DOCUMENTOS p ORDER BY documentoid ASC
+		ROWNUM ROWNUM_ FROM documento p ORDER BY documentoid ASC
 		) WHERE ROWNUM_ <![CDATA[ > ]]>
 		( #{_page} * #{_pagesize} )
 		) WHERE ROWNUM <![CDATA[ <= ]]>
@@ -96,7 +96,7 @@
 
    	 <if test="_databaseId == 'PostgreSQL'">
 		SELECT <include refid="allDocumentoColumns" />
-   		  FROM DOCUMENTOS ORDER BY documentoid ASC
+   		  FROM documento ORDER BY documentoid ASC
 		  OFFSET ( #{_page} * #{_pagesize} )
 		  LIMIT #{_pagesize}
     </if>
@@ -107,7 +107,7 @@
   <select id="fetchDocumentoById" parameterType="Integer" resultMap="DocumentoResult">
     SELECT
    <include refid="allDocumentoColumns" />
-    FROM DOCUMENTOS WHERE documentoid = #{fetchid}
+    FROM documento WHERE documentoid = #{fetchid}
   </select>
 
 

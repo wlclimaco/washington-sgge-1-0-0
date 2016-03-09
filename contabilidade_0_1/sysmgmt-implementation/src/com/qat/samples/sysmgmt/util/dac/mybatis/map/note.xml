@@ -16,9 +16,9 @@
 		<result property="parentId" column="parentId" />
 		<result property="noteText" column="note_text" />
 		<result property="tabelaEnumValue" column="tabela" />
-		<result property="createDateUTC" column="create_date" />
+		<result property="createDataUTC" column="create_date" />
 		<result property="createUser" column="create_user" />
-		<result property="modifyDateUTC" column="modify_date" />
+		<result property="modifyDataUTC" column="modify_date" />
 		<result property="modifyUser" column="modify_user" />
 	</resultMap>
 
@@ -58,7 +58,7 @@
 		UPDATE Note1
 		<set>
 			<if test="noteText != null">note_text = #{noteText},</if>
-			modify_date = #{modifyDateUTC},
+			modify_date = #{modifyDataUTC},
 			modify_user = #{modifyUser}
 		</set>
 		WHERE id = #{id}

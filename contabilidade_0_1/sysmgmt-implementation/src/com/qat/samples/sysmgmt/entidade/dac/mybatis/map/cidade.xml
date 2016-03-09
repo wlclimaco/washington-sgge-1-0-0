@@ -24,9 +24,9 @@
    	<result property="cep" column="CEP" />
    	<result property="municipio" column="MUNICIPIO"/>
 	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
 	<association property="estado"    column="estado" select="EstadoMap.fetchEstadoById"  />
 	 <!--<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEndereco"/>-->
   </resultMap>
@@ -92,7 +92,7 @@
 	    	<if test="cdIBGE!= null"> IBGE=#{cdIBGE},</if>
 	    	<if test="estado.id!= null"> estado=#{estado.id},</if>
 	    	<if test="cep!= null"> cep=#{cep},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE

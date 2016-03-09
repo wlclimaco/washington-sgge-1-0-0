@@ -1265,7 +1265,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 						pessoa.getCreateUser(), processId, historicoId);
 
 		insertCount +=
-				BancoDACD.maintainBancoAssociations(pessoa.getBancos(), response, insertCount, null,
+				BancoDACD.maintainBancoAssociations(pessoa.getBancos(), response, pessoa.getId(), null,
 						null,
 						TabelaEnum.PESSOA, getBancoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 						pessoa.getCreateUser(), processId, historicoId, getAgenciaDAC());
@@ -1371,6 +1371,8 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 			Historico historico = new Historico();
 			historico.setEmprId(pessoa.getId());
 			historico.setUserId(pessoa.getUserId());
+			historico.setAcaoEnumValue(1);
+			historico.setTabelaEnum(TabelaEnum.FUNCIONARIO);
 			historico.setProcessId(0);
 			Date a = new Date();
 			historico.setData(a.getTime());

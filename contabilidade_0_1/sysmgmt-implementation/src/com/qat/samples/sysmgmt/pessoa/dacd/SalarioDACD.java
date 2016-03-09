@@ -60,6 +60,11 @@ public final class SalarioDACD extends SqlSessionDaoSupport
 			{
 				continue;
 			}
+			ProfissaoDACD.maintainProfissaoAssociations(salario.getProfissao(), response, empId,
+					null,
+					null,
+					null, profissaoDAC, statusDAC, historicoDAC, empId,
+					UserId, processId, historiaId);
 			switch (salario.getModelAction())
 			{
 				case INSERT:
@@ -98,11 +103,6 @@ public final class SalarioDACD extends SqlSessionDaoSupport
 
 			}
 
-			ProfissaoDACD.maintainProfissaoAssociations(salario.getProfissao(), response, empId,
-					null,
-					null,
-					null, profissaoDAC, statusDAC, historicoDAC, empId,
-					UserId, processId, historiaId);
 		}
 
 		return count;

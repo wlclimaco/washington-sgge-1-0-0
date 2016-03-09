@@ -30,9 +30,9 @@
 	<result property="tipo" column="tipo"/>
 	<result property="processId" column="processId"/>
 	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
 <!-- 	<association property="dataList"    column="id" select="BeneficiosMap.fetchFuncByData"  /> -->
 
   </resultMap>
@@ -42,9 +42,9 @@
     <result property="idFunc" column="idFunc" />
    	<result property="processId" column="processId"/>
    	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
    	<association property="benefId"    column="idBenef" select="fetchBeneficiosById"  />
   </resultMap>
 
@@ -125,7 +125,7 @@
 	    	<if test="valor!= null"> valor=#{valor},</if>
 	    	<if test="porcentagem!= null"> porcentagem=#{porcentagem},</if>
 	    	<if test="tipo!= null"> tipo=#{tipo},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE
@@ -137,7 +137,7 @@
     	<set>
     		<if test="pessoaId!= null">idFunc = #{pessoaId},</if>
 	    	<if test="benefId!= null"> idBenef=#{benefId.id},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE
@@ -192,11 +192,6 @@
 <select id="fetchBeneficiosRowCount" parameterType="BeneficiosInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM beneficio WHERE 2 = 2
-					<if test="criteria.emprId != null">
-						AND emprId = #{criteria.emprId}
-					</if>
-
-
   </select>
 
   <select id="fetchAllBeneficiosByRequest" parameterType="BeneficiosInquiryRequest" resultMap="beneficioResult">
@@ -207,9 +202,6 @@
     						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
     				FROM beneficio b
 					WHERE 2 = 2
-					<if test="criteria.emprId != null">
-						AND emprId = #{criteria.emprId}
-					</if>
 
     			) LIST
 				<choose>

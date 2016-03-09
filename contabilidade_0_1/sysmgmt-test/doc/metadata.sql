@@ -820,7 +820,7 @@ ALTER TABLE Profissao_id_seq
 DROP TABLE Profissao;
 CREATE TABLE Profissao(
 	id          	 integer NOT NULL DEFAULT nextval('Profissao_id_seq'::regclass),
-	parentId     	 integer NOT NULL,
+	parentId     	 integer  NULL,
 	profissao 	 character varying(100) NULL,
 	renda 		 real NULL,
 	dataAdmissao   bigint,
@@ -917,8 +917,9 @@ DROP TABLE CondPag;
 CREATE TABLE CondPag(
 	id          	 integer NOT NULL DEFAULT nextval('CondPag_id_seq'::regclass),
 	nome 	 		 character varying(100) NULL,
-	dataini   	 bigint,
-	dataFin   	 bigint,
+	valorini   	 integer,
+	valorFin   	 integer,
+	parcelas   	 integer,
 	porcentagem 	 real NULL,
 	valor 		 real NULL,
 	processId    integer NULL,
