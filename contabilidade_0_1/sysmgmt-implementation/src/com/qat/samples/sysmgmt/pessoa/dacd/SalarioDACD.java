@@ -9,6 +9,7 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.dp.Salario;
 import com.qat.samples.sysmgmt.entidade.dacd.StatusDACD;
+import com.qat.samples.sysmgmt.pessoa.dac.IProfissaoDAC;
 import com.qat.samples.sysmgmt.pessoa.dac.ISalariosDAC;
 import com.qat.samples.sysmgmt.util.AcaoEnum;
 import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
@@ -41,7 +42,7 @@ public final class SalarioDACD extends SqlSessionDaoSupport
 	public static Integer maintainSalarioAssociations(List<Salario> salarioList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, ISalariosDAC salarioDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
-			Integer empId, String UserId, Integer processId, Integer historiaId)
+			Integer empId, String UserId, Integer processId, Integer historiaId, IProfissaoDAC profissaoDAC)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
@@ -96,6 +97,12 @@ public final class SalarioDACD extends SqlSessionDaoSupport
 					break;
 
 			}
+
+			ProfissaoDACD.maintainProfissaoAssociations(salario.getProfissao(), response, empId,
+					null,
+					null,
+					null, profissaoDAC, statusDAC, historicoDAC, empId,
+					UserId, processId, historiaId);
 		}
 
 		return count;

@@ -6,7 +6,6 @@ import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.dp.Profissao;
 import com.qat.samples.sysmgmt.entidade.dacd.StatusDACD;
 import com.qat.samples.sysmgmt.pessoa.dac.IProfissaoDAC;
@@ -38,68 +37,56 @@ public final class ProfissaoDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainProfissaoAssociations(List<Profissao> profissaoList,
+	public static Integer maintainProfissaoAssociations(Profissao profissao,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IProfissaoDAC profissaoDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
 			Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Integer count = 0;
-		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(profissaoList))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (Profissao profissao : profissaoList)
-		{
-			// Make sure we set the parent key
-			profissao.setParentId(parentId);
-			profissao.setProcessId(processId);
 
-			if (ValidationUtil.isNull(profissao.getModelAction()))
-			{
-				continue;
-			}
-			switch (profissao.getModelAction())
-			{
-				case INSERT:
-					count = profissaoDAC.insertProfissao(profissao,
-							"insertProfissao", response);
-					if (count > 0)
-					{
-						Status status = new Status();
-						status.setStatus(CdStatusTypeEnum.ATIVO);
-						List<Status> statusList = new ArrayList<Status>();
-						count =
-								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.PROFISSAO, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
-					break;
-				case UPDATE:
-					count = profissaoDAC.updateProfissao(profissao, response);
-					if (count > 0)
-					{
-						count =
-								StatusDACD.maintainStatusAssociations(profissao.getStatusList(), response,
-										profissao.getId(),
-										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.PROFISSAO, statusDAC,
-										historicoDAC, processId, historicoId);
-					}
-					break;
-				case DELETE:
+		// Make sure we set the parent key
+		profissao.setParentId(parentId);
+		profissao.setProcessId(processId);
 
+		switch (profissao.getModelAction())
+		{
+			case INSERT:
+				count = profissaoDAC.insertProfissao(profissao,
+						"insertProfissao", response);
+				if (count > 0)
+				{
 					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.DELETADO);
+					status.setStatus(CdStatusTypeEnum.ATIVO);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
-							StatusDACD.maintainStatusAssociations(statusList, response, profissao.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.PROFISSAO, statusDAC, historicoDAC,
+							StatusDACD.maintainStatusAssociations(statusList, response, count, null,
+									AcaoEnum.INSERT, UserId, empId, TabelaEnum.PROFISSAO, statusDAC, historicoDAC,
 									processId, historicoId);
+				}
+				break;
+			case UPDATE:
+				count = profissaoDAC.updateProfissao(profissao, response);
+				if (count > 0)
+				{
+					count =
+							StatusDACD.maintainStatusAssociations(profissao.getStatusList(), response,
+									profissao.getId(),
+									null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.PROFISSAO, statusDAC,
+									historicoDAC, processId, historicoId);
+				}
+				break;
+			case DELETE:
 
-					break;
-			}
+				Status status = new Status();
+				status.setStatus(CdStatusTypeEnum.DELETADO);
+				List<Status> statusList = new ArrayList<Status>();
+				count =
+						StatusDACD.maintainStatusAssociations(statusList, response, profissao.getId(), null,
+								AcaoEnum.DELETE, UserId, empId, TabelaEnum.PROFISSAO, statusDAC, historicoDAC,
+								processId, historicoId);
+
+				break;
 		}
 
 		return count;

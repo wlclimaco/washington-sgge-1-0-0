@@ -18,7 +18,7 @@ qat.pages.funcionario = {
 	},
 
 
-	empresaTable: {
+	funcionarioTable: {
 
 	}
 }

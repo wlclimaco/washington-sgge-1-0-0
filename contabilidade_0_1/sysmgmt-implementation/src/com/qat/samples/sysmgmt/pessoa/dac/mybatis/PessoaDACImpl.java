@@ -70,7 +70,6 @@ import com.qat.samples.sysmgmt.pessoa.dacd.ConvenioDACD;
 import com.qat.samples.sysmgmt.pessoa.dacd.EventosDACD;
 import com.qat.samples.sysmgmt.pessoa.dacd.FormaPagamentoDACD;
 import com.qat.samples.sysmgmt.pessoa.dacd.HorarioDACD;
-import com.qat.samples.sysmgmt.pessoa.dacd.ProfissaoDACD;
 import com.qat.samples.sysmgmt.pessoa.dacd.SalarioDACD;
 import com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.request.ContaInquiryRequest;
@@ -475,11 +474,11 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 
 		insertCount += insertPerson(pessoa, processId, historicoId, response);
 
-		insertCount +=
-				ProfissaoDACD.maintainProfissaoAssociations(pessoa.getProfissao(), response, insertCount, null,
-						null,
-						null, getProfissaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser(), processId, historicoId);
+		// insertCount +=
+		// ProfissaoDACD.maintainProfissaoAssociations(pessoa.getProfissao(), response, insertCount, null,
+		// null,
+		// null, getProfissaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+		// pessoa.getCreateUser(), processId, historicoId);
 
 		insertCount +=
 				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, insertCount, null,
@@ -546,11 +545,11 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		updateCount += insertPerson(pessoa, historicoId, historicoId, response);
 		// Next traverse the object graph and "maintain" the associations
 
-		updateCount +=
-				ProfissaoDACD.maintainProfissaoAssociations(pessoa.getProfissao(), response, pessoa.getId(), null,
-						null,
-						null, getProfissaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser(), historicoId, historicoId);
+		// updateCount +=
+		// ProfissaoDACD.maintainProfissaoAssociations(pessoa.getProfissao(), response, pessoa.getId(), null,
+		// null,
+		// null, getProfissaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+		// pessoa.getCreateUser(), historicoId, historicoId, getProfissaoDAC());
 
 		updateCount +=
 				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, pessoa.getId(), null,
@@ -1318,7 +1317,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		updateCount +=
 				SalarioDACD.maintainSalarioAssociations(pessoa.getSalarios(), response, pessoa.getId(), null, null,
 						null, getSalarioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser(), pessoa.getProcessId(), pessoa.getProcessId());
+						pessoa.getCreateUser(), pessoa.getProcessId(), pessoa.getProcessId(), getProfissaoDAC());
 
 		updateCount +=
 				BeneficiosDACD.maintainBeneficiosAssociations(pessoa.getBeneficios(), response, pessoa.getId(), null,
@@ -1413,7 +1412,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		insertCount +=
 				SalarioDACD.maintainSalarioAssociations(pessoa.getSalarios(), response, pessoa.getId(), null, null,
 						null, getSalarioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser(), processId, historicoId);
+						pessoa.getCreateUser(), processId, historicoId, getProfissaoDAC());
 
 		insertCount +=
 				BeneficiosDACD.maintainBeneficiosAssociations(pessoa.getBeneficios(), response, pessoa.getId(), null,

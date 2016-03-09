@@ -110,7 +110,7 @@
 
   <select id="fetchTelefoneByPessoaId" parameterType="Integer" resultMap="telefoneResult">
      SELECT * FROM telefone
-     WHERE tabela = 16 and parentId = #{id}
+     WHERE tabela in (16,17,18,19,23) and parentId = #{id}
   </select>
 
   <select id="fetchTelefoneByMarca" parameterType="Integer" resultMap="telefoneResult">

@@ -126,7 +126,7 @@
 
   <select id="fetchEnderecoByPessoaId" parameterType="Integer" resultMap="enderecoResult">
      SELECT * FROM endereco
-     WHERE tabela = 16 and id = #{id}
+     WHERE tabela in(16,17,18,19,23) and id = #{id}
   </select>
 
   <select id="fetchEnderecoByEmpresaId" parameterType="Integer" resultMap="enderecoResult">

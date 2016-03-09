@@ -12,6 +12,8 @@ public class Salario extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
+	private Profissao profissao;
+
 	/** The type of an account. */
 	private Long data;
 
@@ -78,6 +80,16 @@ public class Salario extends ModelCosmeDamiao
 		return valor;
 	}
 
+	public Profissao getProfissao()
+	{
+		return profissao;
+	}
+
+	public void setProfissao(Profissao profissao)
+	{
+		this.profissao = profissao;
+	}
+
 	/**
 	 * @param valor the valor to set
 	 */
@@ -86,15 +98,11 @@ public class Salario extends ModelCosmeDamiao
 		this.valor = valor;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString()
 	{
 		return "Salario [getId()=" + getId() + ", getData()=" + getData() + ", getValor()=" + getValor()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", getProfissao()=" + getProfissao() + ", toString()=" + super.toString() + "]";
 	}
 
 }

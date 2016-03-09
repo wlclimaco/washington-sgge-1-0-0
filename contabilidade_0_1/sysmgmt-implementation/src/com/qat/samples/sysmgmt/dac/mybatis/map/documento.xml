@@ -69,7 +69,7 @@
    </select>
 
    <select id="fetchDocumentoByPessoaId" parameterType="Integer" resultMap="DocumentoResult">
-         SELECT * FROM DOCUMENTOS WHERE TABELA = 16 AND ID = #{ID}
+         SELECT * FROM DOCUMENTOS WHERE TABELA in (16,17,18,19,23) AND ID = #{ID}
    </select>
 
    <select id="fetchAllDocumentosByCliente" resultMap="DocumentoResult">

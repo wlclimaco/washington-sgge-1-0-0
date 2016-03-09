@@ -9,6 +9,142 @@
 
 $(document).ready(function()
 {
+
+		qat.pages.funcionario.funcionarioTable = $('#data_list').dataTable($.qat.table.setTable(
+	{
+		id 			: "#data_list",
+		sAjaxSource : "api/funcionario/fetchall",
+		bPreLoad	: true,
+		sCheckbox : "id",
+
+		ajax :
+		{
+			sObj		: "funcionarioList",
+			oRequest	: qat.model.EmpresaInquiryRequest,
+			fnRequest 	: {}
+		},
+
+		aoColumns :
+		[
+		{
+			headerData 		: "CPF",
+			order			: "name",
+			mRender         : qat.pages.pessoa.fnCreateEmpresaNameLink,
+			sDefaultContent : "",
+			bSortable 		: false,
+			sClass          : "name-col"
+		},
+		{
+			headerData 		: "Nome funcionario",
+			order			: "organization_column",
+			mRender 		: qat.pages.pessoa.fnCreateNomeLink,
+			sDefaultContent : "",
+			bSortable 		: false
+		},
+		{
+			headerData 		: "Endereco",
+			order			: "phone_column",
+			mRender 		: qat.pages.pessoa.fnEndereco,
+			sDefaultContent : "",
+			bSortable 		: false
+		},
+		{
+			headerData 		: "Email",
+			order			: "state_column",
+			mRender 		: qat.pages.pessoa.fnEmail,
+			sDefaultContent : "",
+			bSortable 		: false
+		},
+		{
+			headerData 		: "Telefone",
+			order			: "country_column",
+			mRender 		: qat.pages.pessoa.fnTelefone,
+			sDefaultContent : "",
+			bSortable 		: false
+		},
+		{
+			headerData 		: "Profissão",
+			order			: "city_column",
+			mRender 		: qat.pages.pessoa.fnProfissao,
+			mData	 		: "null",
+			sDefaultContent : "",
+			bSortable 		: false
+		},
+		{
+			headerData 		: "Salario",
+			order			: "sdn_status_column",
+			mRender 		: qat.pages.pessoa.fnSalario,
+			sDefaultContent : "",
+			bSortable 		: false
+		},
+		{
+			headerData 		: "Eventos",
+			order			: "phone_column",
+			mRender 		: qat.pages.pessoa.fnEventos,
+			sDefaultContent : "",
+			bSortable 		: false
+		},
+		{
+			headerData 		: "Beneficios",
+			order			: "phone_column",
+			mRender 		: qat.pages.pessoa.fnBeneficios,
+			sDefaultContent : "",
+			bSortable 		: false
+		},
+		{
+			headerData 		: "Status",
+			order			: "phone_column",
+			mRender 		: qat.pages.pessoa.fnStatus,
+			sDefaultContent : "",
+			bSortable 		: false
+		},
+		],
+
+		<c:choose>
+			<c:when test="${not empty refresh}">
+				aaData : "refresh",
+			</c:when>
+			<c:when test="${empty funcionarioList}">
+				aaData : null,
+		    </c:when>
+		    <c:otherwise>
+		    	aaData : ${funcionarioList},
+		    </c:otherwise>
+		</c:choose>
+
+		oSettings :
+		{
+			sortEnum      	: "",
+			iDefaultCol   	: 0
+		},
+
+		rowCallback : function(nRow, aData, iDisplayIndex, oColumn) {
+
+		},
+
+		fnInitComplete: function (oSettings, json)
+		{
+			$('.dataTables_paginate:eq(0)').addClass('hide')
+			$('.dataTables_info:eq(0)').addClass('hide')
+			$('.dataTables_length:eq(0)').addClass('hide')
+
+			$(".dataTables_length select").outerWidth(62).selectmenu({
+				appendTo: ".content.list",
+  				change: function( event, ui ) {
+  					$('#data_list_length').find("select").val(ui.item.value);
+  					$("#data_list_length").find("select").trigger("change");
+  					$("#load").find(".dataTables_length").find("select").selectmenu("refresh" );
+  				}
+			});
+
+			$.qat.listener.notify({
+				eventName 	: "locationList",
+				arguments 	: ["table"]
+			});
+		}
+	}
+	));
+
 	var GiftModel = function(funcionario) {
 	    var self = this;
 
@@ -97,9 +233,9 @@ $(document).ready(function()
 	        });
 
 		/**
-			$.ajax(WDHost + "qat-webdaptive/api/empresa/add", {
+			$.ajax(WDHost + "qat-webdaptive/api/funcionario/add", {
 	        data: {
-	            empresa: ko.toJSON(self.empresa())
+	            funcionario: ko.toJSON(self.funcionario())
 	        },
 	        type: "POST",
 	        dataType: 'json',

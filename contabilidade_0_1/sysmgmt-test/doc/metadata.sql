@@ -488,6 +488,7 @@ CREATE TABLE Salario(
 	parentId     integer NULL,
 	valor        real NULL,
 	processId    integer NULL,
+	profissao    integer NULL,
 	data         bigint,
 	create_date  bigint,
     create_user  character varying(50) NULL,

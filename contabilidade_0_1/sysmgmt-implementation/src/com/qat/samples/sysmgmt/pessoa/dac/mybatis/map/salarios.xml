@@ -23,6 +23,7 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
+	<association property="profissao"  column="profissao" select="ProfissaoMap.fetchProfissaoById"  />
   </resultMap>
 
   <!--
@@ -32,6 +33,7 @@
 		 parentId
 		,valor
       	,data
+      	,profissao
       	,create_date
       	,create_user
       	,modify_date
@@ -42,6 +44,7 @@
   		#{parentId},
   		#{valor},
     	#{data},
+    	#{profissao.id},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 

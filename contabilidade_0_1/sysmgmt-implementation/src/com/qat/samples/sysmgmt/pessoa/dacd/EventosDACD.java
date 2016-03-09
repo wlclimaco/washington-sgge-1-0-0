@@ -55,6 +55,7 @@ public final class EventosDACD extends SqlSessionDaoSupport
 		{
 			// Make sure we set the parent key
 			evento.setParentId(parentId);
+			evento.setIdFunc(parentId);
 
 			if (ValidationUtil.isNull(evento.getModelAction()))
 			{

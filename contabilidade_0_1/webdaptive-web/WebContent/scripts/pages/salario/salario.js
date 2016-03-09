@@ -18,7 +18,7 @@ var salarioModule = (function () {
         	self.modifyUser 	= ko.observable( salario ? (salario.modify_user || "system") : "system");
         	self.modifyDateUTC 	= ko.observable( salario ? (salario.modify_date || 0) : 0);
 			self.modelAction	= ko.observable( salario ? (salario.modelAction || "NONE") : "NONE");
-
+			self.profissao		= ko.observable( salario ? (new profissaoModule.PROFISSAO(salario.profissao) || {}) : {});
         } catch (e) {
 			debugger
         	console.log(e);

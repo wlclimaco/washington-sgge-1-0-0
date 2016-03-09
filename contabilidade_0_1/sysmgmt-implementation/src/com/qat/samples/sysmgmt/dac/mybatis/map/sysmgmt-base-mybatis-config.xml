@@ -103,6 +103,16 @@
   		<typeAlias alias="BancoPessoa" type="com.qat.samples.sysmgmt.banco.BancoPessoa"/>
   		<typeAlias alias="BancoInquiryRequest" type="com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest"/>
 
+  		<typeAlias alias="CondPagPessoa" type="com.qat.samples.sysmgmt.condpag.CondPagPessoa"/>
+  		<typeAlias alias="CondPag" type="com.qat.samples.sysmgmt.condpag.CondPag"/>
+  		<typeAlias alias="TipoPag" type="com.qat.samples.sysmgmt.condpag.TipoPag"/>
+
+
+
+  		<typeAlias alias="FormaPg" type="com.qat.samples.sysmgmt.condpag.FormaPg"/>
+  		<typeAlias alias="FormaPgPessoa" type="com.qat.samples.sysmgmt.condpag.FormaPgPessoa"/>
+  		<typeAlias alias="FormaPgInquiryRequest" type="com.qat.samples.sysmgmt.condpag.model.request.FormaPgInquiryRequest"/>
+
   		<typeAlias alias="Beneficios" type="com.qat.samples.sysmgmt.beneficios.Beneficios"/>
   		<typeAlias alias="BeneficioPessoa" type="com.qat.samples.sysmgmt.beneficios.BeneficioPessoa"/>
   		<typeAlias alias="BeneficioMesApp" type="com.qat.samples.sysmgmt.beneficios.BeneficioMesApp"/>
@@ -137,6 +147,10 @@
   		<typeAlias alias="Agencia" type="com.qat.samples.sysmgmt.agencia.Agencia"/>
   		<typeAlias alias="AgenciaInquiryRequest" type="com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest"/>
 
+  		<typeAlias alias="Profissao" type="com.qat.samples.sysmgmt.dp.Profissao"/>
+  		<typeAlias alias="ProfissaoInquiryRequest" type="com.qat.samples.sysmgmt.dp.model.request.ProfissaoInquiryRequest"/>
+
+  		<typeAlias alias="Note" type="com.qat.samples.sysmgmt.util.Note"/>
 
 
 
@@ -200,6 +214,8 @@
 		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/transportador.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/agencia.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/salarios.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/profissao.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/util/dac/mybatis/map/note.xml"/>
 
     </mappers>
 
