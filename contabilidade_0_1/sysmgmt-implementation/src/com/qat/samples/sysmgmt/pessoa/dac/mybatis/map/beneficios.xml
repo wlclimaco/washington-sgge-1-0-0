@@ -171,7 +171,7 @@
     FROM Beneficio b ORDER BY id ASC
   </select>
 
-
+<!--
   <select id="fetchFuncByData" parameterType="Integer" resultMap="BeneficioMesApp">
 	SELECT c.*
 
@@ -180,7 +180,7 @@
 		  INNER JOIN beneficioFunc AS F ON F.id like c.id
 		where  f.idFunc = #{id}
   </select>
-
+-->
   <select id="fetchFuncByBeneficios" parameterType="Integer" resultMap="beneficioPessoaResult">
 	SELECT id,
 	<include refid="allBeneficiosAppplyColumns" />
