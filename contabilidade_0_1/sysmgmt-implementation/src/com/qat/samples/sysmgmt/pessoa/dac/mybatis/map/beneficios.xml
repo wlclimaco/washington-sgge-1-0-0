@@ -172,7 +172,7 @@
   </select>
 
 
-  <select id="fetchFuncByData" parameterType="Integer" resultType="BeneficioMesApp">
+  <select id="fetchFuncByData" parameterType="Integer" resultMap="BeneficioMesApp">
 	SELECT c.*
 
 		  FROM BeneficioMesApp AS C
@@ -181,13 +181,12 @@
 		where  f.idFunc = #{id}
   </select>
 
-  <select id="fetchFuncByBeneficios" parameterType="Integer" resultType="Beneficios">
-	SELECT c.*
+  <select id="fetchFuncByBeneficios" parameterType="Integer" resultMap="beneficioPessoaResult">
+	SELECT id,
+	<include refid="allBeneficiosAppplyColumns" />
 
-		  FROM beneficio AS C
-
-		  INNER JOIN beneficioFunc AS F ON c.id like f.idBenef
-		where  f.idFunc =  #{id}
+		  FROM beneficioFunc
+		where  idFunc =  #{id}
   </select>
 
 <select id="fetchBeneficiosRowCount" parameterType="BeneficiosInquiryRequest" resultType="Integer">

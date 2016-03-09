@@ -68,6 +68,10 @@
          SELECT * FROM DOCUMENTOS WHERE TABELA = 1 AND ID = #{ID}
    </select>
 
+   <select id="fetchDocumentoByPessoaId" parameterType="Integer" resultMap="DocumentoResult">
+         SELECT * FROM DOCUMENTOS WHERE TABELA = 16 AND ID = #{ID}
+   </select>
+
    <select id="fetchAllDocumentosByCliente" resultMap="DocumentoResult">
          SELECT <include refid="allDocumentoColumns" /> FROM DOCUMENTOS WHERE TABELA = 8 AND ID = #{ID}
    </select>

@@ -119,7 +119,14 @@
 -->
   <select id="fetchEnderecoByEmpresa" parameterType="Integer" resultMap="enderecoResult">
      SELECT * FROM endereco
-     WHERE id = #{id}
+     WHERE tabela = 1 and id = #{id}
+  </select>
+
+
+
+  <select id="fetchEnderecoByPessoaId" parameterType="Integer" resultMap="enderecoResult">
+     SELECT * FROM endereco
+     WHERE tabela = 16 and id = #{id}
   </select>
 
   <select id="fetchEnderecoByEmpresaId" parameterType="Integer" resultMap="enderecoResult">

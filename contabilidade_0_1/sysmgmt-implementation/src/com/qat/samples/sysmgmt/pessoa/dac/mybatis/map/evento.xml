@@ -35,7 +35,7 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<association property="dataList"    column="id" select="EventoMap.fetchFuncByData"  />
+	<!--  <association property="dataList"    column="id" select="EventoMap.fetchFuncByData"  />-->
 
   </resultMap>
 
@@ -45,11 +45,11 @@
    	<result property="idFuncBenef" column="idFuncBenef"/>
   </resultMap>
 
-  <resultMap id="eventoPessoa" type="EventoPessoa">
+  <resultMap id="eventoPessoaResult" type="EventoPessoa">
     <result property="int" column="FK_evento_id" />
     <result property="data" column="data" />
-   	<result property="idEvent.id" column="idEvent"/>
    	<result property="idFunc" column="idFunc"/>
+   	<association property="idEvent"    column="idEvent" select="fetchEventoById"  />
   </resultMap>
 
   <!--
@@ -181,7 +181,7 @@
   </select>
 
   <select id="fetchEventoById" parameterType="FetchByIdRequest" resultMap="eventoResult">
-
+		select * from evento where id = #{id}
   </select>
 
   <select id="fetchFuncByData" parameterType="Integer" resultMap="eventoMesAppResult">
@@ -193,13 +193,12 @@
 		where  f.idFunc = #{id}
   </select>
 
-  <select id="fetchFuncByEvento" parameterType="Integer" resultMap="eventoResult">
-	SELECT c.*
+  <select id="fetchFuncByEvento" parameterType="Integer" resultMap="eventoPessoaResult">
+	SELECT
+	<include refid="allEventoAppplyColumns" />
 
-		  FROM evento AS C
-
-		  INNER JOIN eventoFunc AS F ON c.id = f.idEvent
-		where  f.idFunc =  #{id}
+		  FROM eventoFunc
+		where  idFunc =  #{id}
   </select>
 
   <select id="fetchEventoRowCount" parameterType="EventoInquiryRequest" resultType="Integer">

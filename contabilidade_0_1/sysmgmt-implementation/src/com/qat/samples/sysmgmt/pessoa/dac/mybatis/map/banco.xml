@@ -212,7 +212,7 @@
   <select id="fetchBancoByPessoa" parameterType="Integer" resultMap="bancoPessoaResult">
 	SELECT id,
 		<include refid="allBancoPessoaColumns" />
-		FROM bancoPessoa b where parentId = #{id} and tabela = 23 ORDER BY id ASC
+		FROM bancoPessoa b where parentId = #{id} and tabela in(23,16) ORDER BY id ASC
   </select>
 
 

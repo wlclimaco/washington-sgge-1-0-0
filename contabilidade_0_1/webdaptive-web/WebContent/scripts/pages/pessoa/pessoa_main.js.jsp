@@ -28,7 +28,7 @@ qat.pages.pessoa = {
 				            foto:"foto",
 				            matricula:"matricula",
 				            dataAdm :qat.pages.pessoa.nowDate(),
-				            pessoaTypeEnumValue:1,
+				            pessoaTypeEnumValue:3,
 				            sexo:1,
 							modelAction : "INSERT",
 				           	documentos:[{

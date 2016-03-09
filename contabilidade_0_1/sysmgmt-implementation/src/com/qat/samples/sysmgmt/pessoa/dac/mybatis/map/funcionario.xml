@@ -17,7 +17,7 @@
 
    <resultMap id="funcionarioResult" type="Funcionario" extends="PessoaMap.PessoaResult">
 	<collection property="salarios" column="id" select="SalarioMap.fetchSalarioById"/>
-	<collection property="horarios" column="id" select="HoraFuncMap.fetchHoraFuncById"/>
+<!--	<collection property="horarios" column="id" select="HoraFuncMap.fetchHoraFuncById"/>-->
 	<collection property="beneficios" column="id" select="BeneficiosMap.fetchFuncByBeneficios"/>
 	<collection property="eventosList" column="id" select="EventoMap.fetchFuncByEvento"/>
   </resultMap>
@@ -126,13 +126,6 @@
 					<if test="criteria.emprId != null">
 						AND b.cdEmpr = #{criteria.emprId}
 					</if>
-					 <if test="statusList != null and !statusList.isEmpty()">
-					     AND b.PGSI_status IN
-					     <foreach item="item" index="index" collection="statusList"
-						     open="(" separator="," close=")">
-						   	 #{item.value}
-						 </foreach>
-					 </if>
     			) LIST
 				<choose>
 					<when test="pageSize != null and pageSize > 0">

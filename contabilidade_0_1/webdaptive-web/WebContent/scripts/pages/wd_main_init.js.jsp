@@ -149,6 +149,10 @@ head(function()
 								{title: 'Departamento Pessoal', isFolder: true, expand: true, tooltip: wdtree.node3.tooltip,
 									children: [
 										{title: 'Funcionario', key: 'qatmvctabsFuncionario', url: "qat_func_tabs.jsp"},
+										{title: 'Insert Funcionario', key: 'qatmvctabsFuncionario', url: "qat_func_tabs.jsp"},
+										{title: 'Eventos', key: 'qatmvctabsFuncionario', url: "qat_func_tabs.jsp"},
+										{title: 'Beneficios', key: 'qatmvctabsFuncionario', url: "qat_func_tabs.jsp"},
+										{title: 'Lançar horas diarias', key: 'qatmvctabsFuncionario', url: "qat_func_tabs.jsp"},
 
 									]
 								},
@@ -159,6 +163,7 @@ head(function()
 										{title: 'Classificacao', key: 'qatmvctabsClass', url: "qat_class_tabs.jsp"},
 										{title: 'Regime', key: 'qatmvctabsRegi', url: "qat_regi_tabs.jsp"},
 										{title: 'Empresa', key: 'qatmvctabsEmp', url: "qat_emp_tabs.jsp"},
+										{title: 'Inserir Empresa', key: 'qatmvctabsEmp', url: "qat_emp_tabs.jsp"},
 										{title: 'Cfop', key: 'qatmvctabsCFOP', url: "qat_cfop_tabs.jsp"},
 										{title: 'Clientes', key: 'qatmvctabsCFOP', url: "qat_cfop_tabs.jsp"},
 										{title: 'Fornecedores', key: 'qatmvctabsCFOP', url: "qat_cfop_tabs.jsp"},

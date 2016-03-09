@@ -26,14 +26,14 @@
 	<result property="modifyDateUTC" column="modify_date"/>
 	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByPessoaId"/>
 	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByPessoaId"/>
-	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByPessoaId"/>
+	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByFuncionario"/>
 	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByPessoaId"/>
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByPessoaId"/>
+	<!--<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByPessoaId"/> -->
 	<collection property="bancos" column="id" select="BancoMap.fetchBancoByPessoa"/>
-	<collection property="contatoList" column="id" select="ContatoMap.fetchContatoByPessoa"/>
+	<!--  <collection property="contatoList" column="id" select="ContatoMap.fetchContatoByPessoa"/>
 	<collection property="notes" column="id" select="NoteMap.fetchNoteByPessoa"/>
 	<collection property="formaPagamentoList" column="id" select="FormaPgMap.fetchFormaPgByPessoa"/>
-	<collection property="condPagList" column="id" select="CondPagMap.fetchCondPagByPessoa"/>
+	<collection property="condPagList" column="id" select="CondPagMap.fetchCondPagByPessoa"/>-->
 
   </resultMap>
 
