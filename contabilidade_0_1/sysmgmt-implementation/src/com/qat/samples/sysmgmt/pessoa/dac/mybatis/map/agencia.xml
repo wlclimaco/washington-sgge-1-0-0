@@ -121,10 +121,7 @@
 	SELECT
 		<include refid="allAgenciaColumns" />
         FROM agencia b
-     WHERE 1=1
-     <if test="id != null">
-		  AND id = #{id}
-	 </if>
+     WHERE 1=1  AND id = #{id}
   </select>
 
   <select id="fetchAllAgenciasByRequest" parameterType="AgenciaInquiryRequest" resultMap="agenciaResult">

@@ -19,10 +19,36 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.agencia.Agencia;
+import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
+import com.qat.samples.sysmgmt.banco.Banco;
+import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
+import com.qat.samples.sysmgmt.beneficios.Beneficios;
+import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest;
+import com.qat.samples.sysmgmt.condpag.FormaPg;
+import com.qat.samples.sysmgmt.condpag.model.request.FormaPgInquiryRequest;
+import com.qat.samples.sysmgmt.conta.Conta;
+import com.qat.samples.sysmgmt.convenio.Convenio;
+import com.qat.samples.sysmgmt.dp.Eventos;
+import com.qat.samples.sysmgmt.dp.HorarioFunc;
+import com.qat.samples.sysmgmt.dp.Profissao;
+import com.qat.samples.sysmgmt.dp.model.request.EventoInquiryRequest;
 import com.qat.samples.sysmgmt.dp.model.request.FuncionarioInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.HoraFuncInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.ProfissaoInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.Cliente;
+import com.qat.samples.sysmgmt.pessoa.Contador;
+import com.qat.samples.sysmgmt.pessoa.Fornecedor;
 import com.qat.samples.sysmgmt.pessoa.Funcionario;
 import com.qat.samples.sysmgmt.pessoa.PessoaTypeEnum;
+import com.qat.samples.sysmgmt.pessoa.Transportador;
 import com.qat.samples.sysmgmt.pessoa.dac.IPessoaDAC;
+import com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ContaInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ContadorInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ConvenioInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorInquiryRequest;
 
 @ContextConfiguration(locations = {
 		"classpath:com/qat/samples/sysmgmt/unittest/conf/unittest-datasource-txn-context.xml",
@@ -203,7 +229,7 @@ public class PessoaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	}
 
 	@Test
-	public void testFetchProceduresByRequest() throws Exception
+	public void testFetchFuncionariosByRequest() throws Exception
 	{
 		// check for valid and precount
 		FuncionarioInquiryRequest request = new FuncionarioInquiryRequest();
@@ -211,7 +237,175 @@ public class PessoaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		request.setStartPage(0);
 		request.setPageSize(4);
 		InternalResultsResponse<Funcionario> response = getPessoaDAC().fetchFuncionarioByRequest(request);
-		assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	@Test
+	public void testFetchClientesByRequest() throws Exception
+	{
+		// check for valid and precount
+		ClienteInquiryRequest request = new ClienteInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<Cliente> response = getPessoaDAC().fetchClienteByRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	@Test
+	public void testFetchFornecedorsByRequest() throws Exception
+	{
+		// check for valid and precount
+		FornecedorInquiryRequest request = new FornecedorInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<Fornecedor> response = getPessoaDAC().fetchFornecedorByRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	@Test
+	public void testFetchTransportadorsByRequest() throws Exception
+	{
+		// check for valid and precount
+		TransportadorInquiryRequest request = new TransportadorInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<Transportador> response = getPessoaDAC().fetchTransportadorByRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	@Test
+	public void testFetchContadorsByRequest() throws Exception
+	{
+		// check for valid and precount
+		ContadorInquiryRequest request = new ContadorInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<Contador> response = getPessoaDAC().fetchContadorByRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	@Test
+	public void testFetchAgenciaByRequest() throws Exception
+	{
+		// check for valid and precount
+		AgenciaInquiryRequest request = new AgenciaInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<Agencia> response = getPessoaDAC().fetchAgenciaByRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	@Test
+	public void testFetchBancoByRequest() throws Exception
+	{
+		// check for valid and precount
+		BancoInquiryRequest request = new BancoInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<Banco> response = getPessoaDAC().fetchBancoByRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	@Test
+	public void testFetchBeneficiosRequest() throws Exception
+	{
+		// check for valid and precount
+		BeneficiosInquiryRequest request = new BeneficiosInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<Beneficios> response = getPessoaDAC().fetchBeneficiosRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	@Test
+	public void testFetchContaByRequest() throws Exception
+	{
+		// check for valid and precount
+		ContaInquiryRequest request = new ContaInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<Conta> response = getPessoaDAC().fetchContaByRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	@Test
+	public void testFetchConveniosByRequest() throws Exception
+	{
+		// check for valid and precount
+		ConvenioInquiryRequest request = new ConvenioInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<Convenio> response = getPessoaDAC().fetchConvenioByRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	@Test
+	public void testFetchEventosByRequest() throws Exception
+	{
+		// check for valid and precount
+		EventoInquiryRequest request = new EventoInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<Eventos> response = getPessoaDAC().fetchEventosRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	@Test
+	public void testFetchFormaPgByRequest() throws Exception
+	{
+		// check for valid and precount
+		FormaPgInquiryRequest request = new FormaPgInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<FormaPg> response = getPessoaDAC().fetchFormaPgByRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	@Test
+	public void testFetchHorarioFuncsByRequest() throws Exception
+	{
+		// check for valid and precount
+		HoraFuncInquiryRequest request = new HoraFuncInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<HorarioFunc> response = getPessoaDAC().fetchHorarioFuncsRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	@Test
+	public void testFetchProfissaoByRequest() throws Exception
+	{
+		// check for valid and precount
+		ProfissaoInquiryRequest request = new ProfissaoInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<Profissao> response = getPessoaDAC().fetchProfissaoByRequest(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}

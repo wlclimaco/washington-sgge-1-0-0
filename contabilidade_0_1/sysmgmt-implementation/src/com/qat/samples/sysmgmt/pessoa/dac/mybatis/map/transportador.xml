@@ -63,16 +63,7 @@
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM pessoa b
 						where b.type = 4
-					<if test="parentId != null">
-						AND b.id = #{id}
-					</if>
-					 <if test="statusList != null and !statusList.isEmpty()">
-					     AND b.PGSI_status IN
-					     <foreach item="item" index="index" collection="statusList"
-						     open="(" separator="," close=")">
-						   	 #{item.value}
-						 </foreach>
-					 </if>
+
     			) LIST
 				<choose>
 					<when test="pageSize != null and pageSize > 0">

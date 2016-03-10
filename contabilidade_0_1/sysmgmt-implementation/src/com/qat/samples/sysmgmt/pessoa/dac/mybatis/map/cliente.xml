@@ -8,7 +8,7 @@
 
   <resultMap id="clienteResult" type="Cliente" extends="PessoaMap.PessoaResult">
 	<collection property="profissao" column="id" select="ProfissaoMap.fetchProfissaoById"/>
-	<collection property="convenioList" column="id" select="ConvenioMap.fetchConvenioByPerson"/>
+	<!--  <collection property="convenioList" column="id" select="ConvenioMap.fetchConvenioByPerson"/>-->
   </resultMap>
 
   <!--
@@ -78,16 +78,7 @@
     						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
     				FROM pessoa b
 						where type = 1
-					<if test="parentId != null">
-						AND id = #{id}
-					</if>
-					 <if test="statusList != null and !statusList.isEmpty()">
-					     AND PGSI_status IN
-					     <foreach item="item" index="index" collection="statusList"
-						     open="(" separator="," close=")">
-						   	 #{item.value}
-						 </foreach>
-					 </if>
+
     			) LIST
 				<choose>
 					<when test="pageSize != null and pageSize > 0">

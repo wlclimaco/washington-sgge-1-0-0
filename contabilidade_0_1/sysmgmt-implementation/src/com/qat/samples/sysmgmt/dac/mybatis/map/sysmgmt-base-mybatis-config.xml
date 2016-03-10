@@ -139,6 +139,8 @@
   		<typeAlias alias="Funcionario" type="com.qat.samples.sysmgmt.pessoa.Funcionario"/>
   		<typeAlias alias="FuncionarioInquiryRequest" type="com.qat.samples.sysmgmt.dp.model.request.FuncionarioInquiryRequest"/>
 
+		<typeAlias alias="Contador" type="com.qat.samples.sysmgmt.pessoa.Contador"/>
+
   		<typeAlias alias="Pessoa" type="com.qat.samples.sysmgmt.pessoa.Pessoa"/>
 
   		<typeAlias alias="Transportador" type="com.qat.samples.sysmgmt.pessoa.Transportador"/>
@@ -217,6 +219,7 @@
 		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/profissao.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/util/dac/mybatis/map/note.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/condpag.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/contador.xml"/>
 
     </mappers>
 

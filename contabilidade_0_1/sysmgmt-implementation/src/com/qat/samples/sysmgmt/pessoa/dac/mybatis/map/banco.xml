@@ -172,10 +172,10 @@
   </select>
 
    <select id="fetchBancoByBancoId" parameterType="Integer" resultMap="bancoAResult">
-	SELECT
+	SELECT id,
 		<include refid="allBancoColumns" />
         FROM banco b
-     WHERE 1=1
+     WHERE id = #{id}
 
   </select>
 

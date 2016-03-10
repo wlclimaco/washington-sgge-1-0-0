@@ -12,6 +12,8 @@ public class ClienteCriteria extends ComumCriteria
 	/** The member. */
 	private String nome;
 
+	private Integer parentId;
+
 	/**
 	 * The Constructor.
 	 */
@@ -36,16 +38,21 @@ public class ClienteCriteria extends ComumCriteria
 		this.nome = nome;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	public Integer getParentId()
+	{
+		return parentId;
+	}
+
+	public void setParentId(Integer parentId)
+	{
+		this.parentId = parentId;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "ClienteCriteria [getNome()=" + getNome() + ", getEmprId()=" + getEmprId() + ", getId()=" + getId()
-				+ ", toString()=" + super.toString() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ "]";
+		return "ClienteCriteria [getNome()=" + getNome() + ", getParentId()=" + getParentId() + ", toString()="
+				+ super.toString() + "]";
 	}
 
 }
