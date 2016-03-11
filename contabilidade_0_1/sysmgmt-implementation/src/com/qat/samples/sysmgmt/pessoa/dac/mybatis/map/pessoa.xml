@@ -31,9 +31,9 @@
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByPessoaId"/>
 	<collection property="bancos" column="id" select="BancoMap.fetchBancoByPessoa"/>
 	<collection property="notes" column="id" select="NoteMap.fetchNoteByPessoa"/>
-	<!-- <collection property="contatoList" column="id" select="ContatoMap.fetchContatoByPessoa"/>
+	<!-- <collection property="contatoList" column="id" select="ContatoMap.fetchContatoByPessoa"/>-->
 
-	<collection property="formaPagamentoList" column="id" select="FormaPgMap.fetchFormaPgByPessoa"/>-->
+	<collection property="formaPagamentoList" column="id" select="FormaPgMap.fetchFormaPgByPessoa"/>
 	<collection property="condPagList" column="id" select="CondPagMap.fetchCondPagByPessoa"/>
 
   </resultMap>

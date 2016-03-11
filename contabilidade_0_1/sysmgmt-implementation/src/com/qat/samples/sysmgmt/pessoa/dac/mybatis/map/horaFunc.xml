@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="HoraFuncMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly.
+
+       [id] [int] NOT NULL,
+	[parentId] [int] NULL,
+	[data] [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[horarioEntr] [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[horarioSair] [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[create_date] [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[tipo] [varchar](50) NULL, -->
+
+  <resultMap id="horaFuncResult" type="HorarioFunc" >
+    <result property="id" column="id" />
+    <result property="parentId" column="parentId" />
+    <result property="data" column="data"/>
+   	<result property="horarioEntr" column="horarioEntr"/>
+	<result property="horarioSair" column="horarioSair"/>
+	<result property="tipo" column="tipo"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allHoraFuncColumns">
+		 b.parentId
+      	,b.data
+		,b.horarioEntr
+		,b.horarioSair
+		,b.tipo
+      	,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allHoraFuncValues">
+  		#{parentId},
+  		#{data},
+    	#{horarioEntr},
+    	#{horarioSair},
+  		#{tipo},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertHoraFunc" parameterType="HorarioFunc" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO horarios (
+		<include refid="allHoraFuncColumns" />
+      )
+    VALUES (<include refid="allHoraFuncValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.#{parentId},
+  		#{data},
+    	#{horarioEntr},
+    	#{horarioSair},
+  		#{tipo},
+ 	-->
+
+  <update id="updateHoraFunc" parameterType="HorarioFunc">
+    UPDATE horarios
+    	<set>
+    		<if test="data!= null">data = #{data},</if>
+	    	<if test="horarioEntr!= null"> horarioEntr=#{horarioEntr},</if>
+	    	<if test="horarioSair!= null">horarioSair = #{horarioSair},</if>
+	    	<if test="tipo!= null"> tipo=#{tipo},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteHoraFuncById" parameterType="Integer">
+    	DELETE FROM horarios WHERE id = #{id}
+  </delete>
+
+  <select id="fetchHoraFuncById" parameterType="Integer" resultMap="horaFuncResult">
+    			   SELECT
+					b.id,	<include refid="allHoraFuncColumns" />
+ 				   FROM horarios b
+					where b.parentId = #{id}
+					order by b.data
+  </select>
+
+
+  <select id="fetchHoraFuncRowCount" parameterType="HoraFuncInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM horarios
+        	WHERE 2 = 2
+		<if test="criteria.id != null">
+			AND parentId = #{criteria.id}
+		</if>
+		<if test="criteria.emprId != null">
+			AND emprId = #{criteria.emprId}
+		</if>
+
+  </select>
+
+  <select id="fetchAllHoraFuncByRequest" parameterType="HoraFuncInquiryRequest" resultMap="horaFuncResult">
+    SELECT * FROM
+    			(
+    				SELECT
+    						<include refid="allHoraFuncColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM horarios b
+					WHERE 2 = 2
+					<if test="criteria.id != null">
+						AND b.parentId = #{criteria.id}
+					</if>
+					<if test="criteria.emprId != null">
+						AND b.emprId = #{criteria.emprId}
+					</if>
+
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+</mapper>

@@ -133,6 +133,9 @@
   		<typeAlias alias="EventoPessoa" type="com.qat.samples.sysmgmt.dp.EventoPessoa"/>
   		<typeAlias alias="EventoInquiryRequest" type="com.qat.samples.sysmgmt.dp.model.request.EventoInquiryRequest"/>
 
+  		<typeAlias alias="HorarioFunc" type="com.qat.samples.sysmgmt.dp.HorarioFunc"/>
+  		<typeAlias alias="HoraFuncInquiryRequest" type="com.qat.samples.sysmgmt.dp.model.request.HoraFuncInquiryRequest"/>
+
   		<typeAlias alias="Fornecedor" type="com.qat.samples.sysmgmt.pessoa.Fornecedor"/>
   		<typeAlias alias="FornecedorInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.FornecedorInquiryRequest"/>
 
@@ -153,6 +156,8 @@
   		<typeAlias alias="ProfissaoInquiryRequest" type="com.qat.samples.sysmgmt.dp.model.request.ProfissaoInquiryRequest"/>
 
   		<typeAlias alias="Note" type="com.qat.samples.sysmgmt.util.Note"/>
+
+
 
 
 
@@ -220,6 +225,7 @@
 		<mapper resource="com/qat/samples/sysmgmt/util/dac/mybatis/map/note.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/condpag.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/contador.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/horaFunc.xml"/>
 
     </mappers>
 

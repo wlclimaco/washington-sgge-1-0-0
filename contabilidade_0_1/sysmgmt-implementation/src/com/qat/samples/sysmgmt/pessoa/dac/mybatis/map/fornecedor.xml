@@ -15,9 +15,9 @@
 	-->
 
 	<resultMap id="fornecedorResult" type="Fornecedor" extends="PessoaMap.PessoaResult">
-	  <!--  	<collection property="listCfops" column="id" select="CfopMap.fetchCfopByPessoa"/>
+ 		<collection property="listCfops" column="id" select="CfopMap.fetchCfopByPessoa"/>
     	<collection property="listProdutos" column="id" select="ProdutoMap.fetchProdutoByPessoa"/>
--->
+
   </resultMap>
 
 

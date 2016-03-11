@@ -8,7 +8,7 @@
 
   <resultMap id="clienteResult" type="Cliente" extends="PessoaMap.PessoaResult">
 	<collection property="profissao" column="id" select="ProfissaoMap.fetchProfissaoById"/>
-	<!--  <collection property="convenioList" column="id" select="ConvenioMap.fetchConvenioByPerson"/>-->
+    <collection property="convenioList" column="id" select="ConvenioMap.fetchConvenioByPerson"/>
   </resultMap>
 
   <!--
