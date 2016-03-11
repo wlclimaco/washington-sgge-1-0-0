@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.util;
 
+
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -22,6 +23,15 @@ public class Email extends ModelCosmeDamiao
 	public Email()
 	{
 		super();
+	}
+
+	public Email(Integer id, String email, EmailTypeEnum emailType, PersistanceActionEnum modelAction)
+	{
+		super();
+		this.id = id;
+		this.email = email;
+		this.emailType = emailType;
+		setModelAction(modelAction);
 	}
 
 	public Integer getEmailTypeEnumValue()

@@ -31,8 +31,7 @@
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByPessoaId"/>
 	<collection property="bancos" column="id" select="BancoMap.fetchBancoByPessoa"/>
 	<collection property="notes" column="id" select="NoteMap.fetchNoteByPessoa"/>
-	<!-- <collection property="contatoList" column="id" select="ContatoMap.fetchContatoByPessoa"/>-->
-
+    <collection property="contatoList" column="id" select="ContatoMap.fetchContatoByPessoa"/>
 	<collection property="formaPagamentoList" column="id" select="FormaPgMap.fetchFormaPgByPessoa"/>
 	<collection property="condPagList" column="id" select="CondPagMap.fetchCondPagByPessoa"/>
 
@@ -85,6 +84,16 @@
 
 	<!--
 		SQL Update Statements.
+ 	#{emprId},
+  		#{nome},
+  		#{pessoaTypeEnumValue},
+  		#{sexo},
+  		#{datanasc},
+  		#{nomePai},
+  		#{nomeMae},
+  		#{nomeConjugue},
+  		#{estadoCivil},
+  		#{tipoPessoa},
  	-->
 
   <update id="updatePessoa" parameterType="Pessoa">
@@ -99,6 +108,7 @@
 	  		<if test="nomeMae!= null">nomeMae = #{nomeMae},</if>
 	  		<if test="nomeConjugue!= null">nomeConjugue = #{nomeConjugue},</if>
 	  		<if test="estadoCivil!= null">estadoCivil = #{estadoCivil},</if>
+	  		<if test="tipoPessoa!= null">tipoPessoa = #{tipoPessoa},</if>
 			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>

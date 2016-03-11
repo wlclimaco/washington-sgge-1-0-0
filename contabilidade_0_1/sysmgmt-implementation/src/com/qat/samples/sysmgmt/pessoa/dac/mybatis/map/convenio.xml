@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ConvenioMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  <resultMap id="convenioResult" type="Convenio" >
+    <result property="id" column="id" />
+    <result property="nome" column="nome" />
+   	<result property="dataini" column="dataini"/>
+	<result property="dataFin" column="dataFin"/>
+	<result property="porcentagem" column="porcentagem"/>
+	<result property="valor" column="valor"/>
+   <result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<collection property="notes" column="id" select="NoteMap.fetchNoteById"/>
+	<collection property="listCondPag" column="id" select="CondPagMap.fetchCondPagByConvenioId"/>
+  </resultMap>
+
+    <resultMap id="convenioPessoaResult" type="ConvenioPessoa" >
+    <result property="id" column="id" />
+    <result property="parentId" column="parentId" />
+   	<result property="data" column="data"/>
+    <result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<association property="convId"    column="convId" select="fetchConvenioById"  />
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allConvenioColumns">
+		 nome
+		,dataini
+      	,dataFin
+      	,porcentagem
+      	,valor
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allConvenioValues">
+  		#{nome},
+  		#{dataini},
+    	#{dataFin},
+    	#{porcentagem},
+    	#{valor},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+  <sql id="allConvenioPessoaColumns">
+	 data
+	,parentId
+	,convId
+	,processId
+	,create_date
+  	,create_user
+  	,modify_date
+  	,modify_user
+  </sql>
+
+  <sql id="allConvenioPessoaValues">
+	#{data},
+	#{parentId},
+	#{convId.id},
+	#{processId},
+	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertConvenio" parameterType="Convenio" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO convenio (
+		<include refid="allConvenioColumns" />
+      )
+    VALUES (<include refid="allConvenioValues" /> )
+  </insert>
+
+  <insert id="insertConvenioPessoa" parameterType="ConvenioPessoa" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO convenioPessoa (
+		<include refid="allConvenioPessoaColumns" />
+      )
+    VALUES (<include refid="allConvenioPessoaValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateConvenio" parameterType="Convenio">
+    UPDATE convenio
+    	<set>
+    		<if test="nome!= null">nome = #{nome},</if>
+	    	<if test="dataini!= null"> dataini=#{dataini},</if>
+	    	<if test="dataFin!= null"> dataFin=#{dataFin},</if>
+	    	<if test="porcentagem!= null"> porcentagem=#{porcentagem},</if>
+	    	<if test="valor!= null"> valor=#{valor},</if>
+	    	<if test="country.code!= null"> FK_country_code=#{country.code},</if>
+			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+    <update id="updateConvenioPessoa" parameterType="ConvenioPessoa">
+    UPDATE convenioPessoa
+    	<set>
+    		<if test="parentId!= null">parentId = #{parentId},</if>
+	    	<if test="convId.id!= null"> convId=#{convId.id},</if>
+			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteConvenioById" parameterType="Integer">
+    	DELETE FROM convenio WHERE business_id = #{id}
+  </delete>
+
+    <delete id="deleteConvenioPessoa" parameterType="Integer">
+    	DELETE FROM convenioPessoa WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchConvenioRowCount" parameterType="ConvenioInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM convenio
+     WHERE 1=1
+     <if test="criteria.id != null">
+		AND id = #{criteria.id}
+	</if>
+  </select>
+
+  <select id="fetchAllConvenios" resultMap="convenioResult">
+    SELECT
+	<include refid="allConvenioColumns" />
+    FROM convenio ORDER BY id ASC
+  </select>
+
+  <select id="fetchConvenioById" parameterType="FetchByIdRequest" resultMap="convenioResult">
+	 SELECT
+	<include refid="allConvenioColumns" />
+    FROM convenio ORDER BY id ASC
+  </select>
+
+  <select id="fetchAllConveniosByRequest" parameterType="ConvenioInquiryRequest" resultMap="convenioResult">
+   SELECT * FROM ( SELECT id,
+    						<include refid="allConvenioColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM convenio b
+						where 1 = 1
+					<if test="criteria.id != null">
+						AND id = #{criteria.id}
+					</if>
+
+					 <if test="statusList != null and !statusList.isEmpty()">
+					     AND PGSI_status IN
+					     <foreach item="item" index="index" collection="statusList"
+						     open="(" separator="," close=")">
+						   	 #{item.value}
+						 </foreach>
+					 </if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+<select id="fetchConvenioByPerson" parameterType="Integer" resultMap="convenioPessoaResult">
+	 SELECT id,
+	<include refid="allConvenioPessoaColumns" />
+    FROM convenioPessoa b where parentId = #{id} ORDER BY id ASC
+  </select>
+
+
+</mapper>

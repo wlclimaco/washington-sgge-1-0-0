@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.util;
 
+
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -24,6 +25,17 @@ public class Telefone extends ModelCosmeDamiao
 	public Telefone()
 	{
 		super();
+	}
+
+	public Telefone(Integer id, String ddd, String numero, TelefoneTypeEnum telefoneTypeEnum,
+			PersistanceActionEnum modelAction)
+	{
+		super();
+		this.id = id;
+		this.ddd = ddd;
+		this.numero = numero;
+		this.telefoneTypeEnum = telefoneTypeEnum;
+		setModelAction(modelAction);
 	}
 
 	public Integer getTelefoneTypeEnumValue()

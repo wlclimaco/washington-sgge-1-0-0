@@ -28,6 +28,16 @@ public class FormaPg extends ModelCosmeDamiao
 		setModelAction(modelAction);
 	}
 
+	public FormaPg(Integer id, String descricao, Integer diasPg, Integer entrada, PersistanceActionEnum modelAction)
+	{
+		super();
+		this.id = id;
+		this.descricao = descricao;
+		this.diasPg = diasPg;
+		this.entrada = entrada;
+		setModelAction(modelAction);
+	}
+
 	public FormaPg()
 	{
 		super();

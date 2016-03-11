@@ -47,6 +47,25 @@ public class Cfop extends ModelCosmeDamiao
 		setModelAction(modelAction);
 	}
 
+	public Cfop(Integer id, String cfop, String natureza, String simplificado, CfopTypeEnum cfopTypeEnum, Double icms,
+			Double icmsReduzido, Double margemAgregadaST, Double cstPrincipal, Double classFiscal, String observacao,
+			PersistanceActionEnum modelAction)
+	{
+		super();
+		this.id = id;
+		this.cfop = cfop;
+		this.natureza = natureza;
+		this.simplificado = simplificado;
+		this.cfopTypeEnum = cfopTypeEnum;
+		this.icms = icms;
+		this.icmsReduzido = icmsReduzido;
+		this.margemAgregadaST = margemAgregadaST;
+		this.cstPrincipal = cstPrincipal;
+		this.classFiscal = classFiscal;
+		this.observacao = observacao;
+		setModelAction(modelAction);
+	}
+
 	public Integer getCfopTypeEnumValue()
 	{
 		if (cfopTypeEnum != null)

@@ -48,6 +48,25 @@ public class Eventos extends ModelCosmeDamiao
 
 	}
 
+	public Eventos(Integer id, String nome, List<EventoMesApp> dataList, String descricao, String codigo, String tipo,
+			Double valor, Double porcentagem, Boolean isMensal, Boolean isSistema, String noteText,
+			PersistanceActionEnum modelAction)
+	{
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.dataList = dataList;
+		this.descricao = descricao;
+		this.codigo = codigo;
+		Tipo = tipo;
+		this.valor = valor;
+		this.porcentagem = porcentagem;
+		this.isMensal = isMensal;
+		this.isSistema = isSistema;
+		this.noteText = noteText;
+		setModelAction(modelAction);
+	}
+
 	public Eventos(Integer id)
 	{
 		super();

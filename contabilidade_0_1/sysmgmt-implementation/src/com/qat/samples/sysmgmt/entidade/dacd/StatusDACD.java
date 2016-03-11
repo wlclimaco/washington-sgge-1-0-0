@@ -115,11 +115,6 @@ public final class StatusDACD extends SqlSessionDaoSupport
 			}
 
 		}
-
-		if (response.isInError())
-		{
-			return 0;
-		}
 		return count;
 	}
 }

@@ -59,6 +59,13 @@
   		<typeAlias alias="CnaeInquiryRequest" type="com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest"/>
   		<typeAlias alias="CnaeEmpresa" type="com.qat.samples.sysmgmt.cnae.CnaeEmpresa"/>
 
+
+  		<typeAlias alias="Convenio" type="com.qat.samples.sysmgmt.convenio.Convenio"/>
+  		<typeAlias alias="ConvenioPessoa" type="com.qat.samples.sysmgmt.convenio.ConvenioPessoa"/>
+  		<typeAlias alias="ConvenioInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.ConvenioInquiryRequest"/>
+
+
+
   		<typeAlias alias="OrdemServicoTypes" type="com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoTypes"/>
   		<typeAlias alias="OrdemServico" type="com.qat.samples.sysmgmt.ordemServico.model.OrdemServico"/>
   		<typeAlias alias="OrdemServicoInquiryRequest" type="com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest"/>
@@ -128,6 +135,10 @@
   		<typeAlias alias="ContatoItens" type="com.qat.samples.sysmgmt.contato.ContatoItens"/>
   		<typeAlias alias="ContatoInquiryRequest" type="com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest"/>
 
+  		<typeAlias alias="Cfop" type="com.qat.samples.sysmgmt.cfop.Cfop"/>
+  		<typeAlias alias="CfopPessoa" type="com.qat.samples.sysmgmt.cfop.CfopPessoa"/>
+  		<typeAlias alias="CfopInquiryRequest" type="com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest"/>
+
   		<typeAlias alias="Eventos" type="com.qat.samples.sysmgmt.dp.Eventos"/>
   		<typeAlias alias="Salario" type="com.qat.samples.sysmgmt.dp.Salario"/>
   		<typeAlias alias="EventoPessoa" type="com.qat.samples.sysmgmt.dp.EventoPessoa"/>
@@ -156,6 +167,9 @@
   		<typeAlias alias="ProfissaoInquiryRequest" type="com.qat.samples.sysmgmt.dp.model.request.ProfissaoInquiryRequest"/>
 
   		<typeAlias alias="Note" type="com.qat.samples.sysmgmt.util.Note"/>
+
+
+  		<typeAlias alias="AgenciaInquiryRequest" type="com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest"/>
 
 
 
@@ -226,6 +240,9 @@
 		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/condpag.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/contador.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/horaFunc.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/formapg.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/convenio.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/cfop.xml"/>
 
     </mappers>
 

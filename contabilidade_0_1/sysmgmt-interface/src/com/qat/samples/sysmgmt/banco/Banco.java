@@ -28,6 +28,14 @@ public class Banco extends ModelCosmeDamiao
 
 	}
 
+	public Banco(Integer id, String nome, PersistanceActionEnum modelAction)
+	{
+		super();
+		this.id = id;
+		this.nome = nome;
+		setModelAction(modelAction);
+	}
+
 	/**
 	 * Gets the id.
 	 * 

@@ -30,6 +30,16 @@ public class ContatoItens extends ModelCosmeDamiao
 	{
 	}
 
+	public ContatoItens(Integer id, Long dataAlt, String texto, String titulo, PersistanceActionEnum modelAction)
+	{
+		super();
+		this.id = id;
+		this.dataAlt = dataAlt;
+		this.texto = texto;
+		this.titulo = titulo;
+		setModelAction(modelAction);
+	}
+
 	/**
 	 * Gets the SendSolv id for the account.
 	 * 

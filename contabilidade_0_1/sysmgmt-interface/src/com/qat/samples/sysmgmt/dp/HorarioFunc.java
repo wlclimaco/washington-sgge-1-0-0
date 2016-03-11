@@ -40,7 +40,8 @@ public class HorarioFunc extends ModelCosmeDamiao
 	 * @param horarioSair the horario sair
 	 * @param tipo the tipo
 	 */
-	public HorarioFunc(Integer id, Long data, Long horarioEntr, Long horarioSair, String tipo)
+	public HorarioFunc(Integer id, Long data, Long horarioEntr, Long horarioSair, String tipo,
+			PersistanceActionEnum modelAction)
 	{
 		super();
 		this.id = id;
@@ -48,6 +49,7 @@ public class HorarioFunc extends ModelCosmeDamiao
 		this.horarioEntr = horarioEntr;
 		this.horarioSair = horarioSair;
 		this.tipo = tipo;
+		setModelAction(modelAction);
 	}
 
 	/**

@@ -42,6 +42,22 @@ public class Endereco extends ModelCosmeDamiao
 		super();
 	}
 
+	public Endereco(Integer id, String logradouro, Cidade cidade, Estado estado, String bairro, String numero,
+			String cep, String complemento, EnderecoTypeEnum enderecoType, PersistanceActionEnum modelAction)
+	{
+		super();
+		this.id = id;
+		this.logradouro = logradouro;
+		this.cidade = cidade;
+		this.estado = estado;
+		this.bairro = bairro;
+		this.numero = numero;
+		this.cep = cep;
+		this.complemento = complemento;
+		this.enderecoType = enderecoType;
+		setModelAction(modelAction);
+	}
+
 	public Integer getEnderecoTypeValue()
 	{
 		if (enderecoType != null)

@@ -21,6 +21,7 @@
 
   <resultMap id="contatoResult" type="Contato" >
     <result property="id" column="id" />
+    <result property="parentId" column="parentId" />
 	<result property="dataContato" column="dataContato" />
 	<result property="nome" column="nome" />
 	<result property="email" column="email" />
@@ -39,9 +40,11 @@
   <sql id="allContatoColumns">
   		 dataContato
   		,nome
+  		,parentId
   		,email
 		,telefone
       	,motivo
+      	,create_date
       	,create_user
       	,modify_date
       	,modify_user
@@ -50,6 +53,7 @@
   <sql id="allContatoValues">
   		#{dataContato},
   		#{nome},
+  		#{parentId},
   		#{email},
   		#{telefone},
   		#{motivoValue},
@@ -105,7 +109,7 @@
   <select id="fetchAllContatos" resultMap="contatoResult">
     SELECT id,
 	<include refid="allContatoColumns" />
-    FROM contato b ORDER BY b.id ASC
+    FROM contato  ORDER BY id ASC
   </select>
 
   <select id="fetchContatoById" parameterType="FetchByIdRequest" resultMap="contatoResult">
@@ -145,13 +149,26 @@
 
     <!--
 		================================= CONTATO ITENS =========================================================
+    private Integer id;
+
+	/** The data alt. */
+	private Long dataAlt;
+
+	/** The note. */
+	private String texto;
+
+	/** The titulo. */
+	private String titulo;
+
+
      -->
 
   <resultMap id="contatoItensResult" type="ContatoItens" >
     <result property="id" column="id" />
     <result property="parentId" column="parentId" />
+    <result property="dataAlt" column="dataContato" />
     <result property="texto" column="texto" />
-    <result property="processId" column="processId" />
+    <result property="titulo" column="titulo" />
    	<result property="createUser" column="create_user"/>
 	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -164,8 +181,9 @@
 	-->
   <sql id="allContatoItensColumns">
 		 parentId
-		,processId
+		,dataContato
 		,texto
+		,titulo
       	,create_date
       	,create_user
       	,modify_date
@@ -175,8 +193,9 @@
 
   <sql id="allContatoItensValues">
   		#{parentId},
-  		#{processId},
+  		#{dataAlt},
   		#{texto},
+  		#{titulo},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -228,9 +247,9 @@
   </select>
 
   <select id="fetchAllContatoItens" resultMap="contatoItensResult">
-    SELECT b.id
+    SELECT id
 	<include refid="allContatoItensColumns" />
-    FROM contatoItens b ORDER BY b.id ASC
+    FROM contatoItens ORDER BY id ASC
   </select>
 
   <select id="fetchContatoItensById" parameterType="FetchByIdRequest" resultMap="contatoItensResult">
@@ -251,16 +270,22 @@
   </select>
 
   <select id="fetchAllContatoItenssByRequest" parameterType="PagedInquiryRequest" resultMap="contatoItensResult">
-		 SELECT b.id
+		 SELECT id
 		<include refid="allContatoItensColumns" />
-	    FROM contatoItens b ORDER BY b.id ASC
+	    FROM contatoItens ORDER BY id ASC
   </select>
 
   <select id="fetchContatoItensByPessoa" parameterType="ContatoItens" resultType="int">
-	SELECT b.id
+	SELECT id
 		<include refid="allContatoItensColumns" />
-		FROM contatoItens b ORDER BY b.id ASC
+		FROM contatoItens ORDER BY id ASC
   </select>
 
+
+<select id="fetchContatoByPessoa" resultMap="contatoResult" resultType="int">
+	SELECT id
+		<include refid="allContatoColumns" />
+		FROM contato where parentId = #{id} ORDER BY id ASC
+  </select>
 
 </mapper>

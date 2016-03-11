@@ -33,6 +33,19 @@ public class CondPag extends ModelCosmeDamiao
 
 	}
 
+	public CondPag(Integer id, String nome, double valorIni, double valorFin, Integer parcelas,
+			List<TipoPag> listTipoPag, PersistanceActionEnum modelAction)
+	{
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.valorIni = valorIni;
+		this.valorFin = valorFin;
+		this.parcelas = parcelas;
+		this.listTipoPag = listTipoPag;
+		setModelAction(modelAction);
+	}
+
 	/**
 	 * @return the id
 	 */

@@ -47,6 +47,18 @@ public class Documento extends ModelCosmeDamiao
 		super();
 	}
 
+	public Documento(Integer id, DocumentoTypeEnum documentoType, String numero, Long data, Estado estado,
+			PersistanceActionEnum modelAction)
+	{
+		super();
+		this.id = id;
+		this.documentoType = documentoType;
+		this.numero = numero;
+		this.data = data;
+		this.estado = estado;
+		setModelAction(modelAction);
+	}
+
 	/**
 	 * Gets the id.
 	 * 

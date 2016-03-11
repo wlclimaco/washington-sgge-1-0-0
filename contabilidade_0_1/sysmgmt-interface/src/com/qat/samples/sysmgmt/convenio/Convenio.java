@@ -18,9 +18,9 @@ public class Convenio extends ModelCosmeDamiao
 
 	private String nome;
 
-	private Long dataini;
+	private Integer dataini;
 
-	private Long dataFin;
+	private Integer dataFin;
 
 	private Double porcentagem;
 
@@ -36,6 +36,21 @@ public class Convenio extends ModelCosmeDamiao
 	public Convenio()
 	{
 
+	}
+
+	public Convenio(Integer id, String nome, Integer dataini, Integer dataFin, Double porcentagem, Double valor,
+			List<CondPag> listCondPag, List<TipoPag> listTipoPag, PersistanceActionEnum modelAction)
+	{
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.dataini = dataini;
+		this.dataFin = dataFin;
+		this.porcentagem = porcentagem;
+		this.valor = valor;
+		this.listCondPag = listCondPag;
+		this.listTipoPag = listTipoPag;
+		setModelAction(modelAction);
 	}
 
 	public Convenio(Integer id)
@@ -83,7 +98,7 @@ public class Convenio extends ModelCosmeDamiao
 	/**
 	 * @return the dataini
 	 */
-	public Long getDataini()
+	public Integer getDataini()
 	{
 		return dataini;
 	}
@@ -91,7 +106,7 @@ public class Convenio extends ModelCosmeDamiao
 	/**
 	 * @param dataini the dataini to set
 	 */
-	public void setDataini(Long dataini)
+	public void setDataini(Integer dataini)
 	{
 		this.dataini = dataini;
 	}
@@ -99,7 +114,7 @@ public class Convenio extends ModelCosmeDamiao
 	/**
 	 * @return the dataFin
 	 */
-	public Long getDataFin()
+	public Integer getDataFin()
 	{
 		return dataFin;
 	}
@@ -107,7 +122,7 @@ public class Convenio extends ModelCosmeDamiao
 	/**
 	 * @param dataFin the dataFin to set
 	 */
-	public void setDataFin(Long dataFin)
+	public void setDataFin(Integer dataFin)
 	{
 		this.dataFin = dataFin;
 	}

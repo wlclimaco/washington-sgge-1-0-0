@@ -32,6 +32,20 @@ public class Contato extends ModelCosmeDamiao
 
 	private List<ContatoItens> contatoItensList;
 
+	public Contato(Integer id, Integer dataContato, String nome, String email, String telefone, ContatoTypeEnum motivo,
+			List<ContatoItens> contatoItensList, PersistanceActionEnum modelAction)
+	{
+		super();
+		this.id = id;
+		this.dataContato = dataContato;
+		this.nome = nome;
+		this.email = email;
+		this.telefone = telefone;
+		this.motivo = motivo;
+		this.contatoItensList = contatoItensList;
+		setModelAction(modelAction);
+	}
+
 	/**
 	 * Gets the motivo value.
 	 * 

@@ -29,6 +29,16 @@ public class Profissao extends ModelCosmeDamiao
 
 	}
 
+	public Profissao(Integer id, String profissao, Double renda, Long dataAdmissao, PersistanceActionEnum modelAction)
+	{
+		super();
+		this.id = id;
+		this.profissao = profissao;
+		this.renda = renda;
+		this.dataAdmissao = dataAdmissao;
+		setModelAction(modelAction);
+	}
+
 	/**
 	 * @return the id
 	 */

@@ -1138,6 +1138,7 @@ ALTER TABLE contato_id_seq
 DROP TABLE contato;
 CREATE TABLE contato(
 	id           integer NOT NULL DEFAULT nextval('contato_id_seq'::regclass),
+	parentId   	integer NULL,
 	dataContato  bigint  NULL,
 	nome         character varying(50) NULL,
 	email         character varying(50) NULL,
@@ -1172,8 +1173,9 @@ DROP TABLE contatoItens;
 CREATE TABLE contatoItens(
 	id             integer NOT NULL DEFAULT nextval('contatoItens_id_seq'::regclass),
 	parentId     integer NOT NULL,
-	note         character varying(250) NULL,
-	processId    integer NULL,
+	dataContato     integer  NULL,
+	texto         character varying(250) NULL,
+	titulo    		character varying(100) NULL,
 	create_date  bigint,
     create_user  character varying(50) NULL,
     modify_date  bigint,

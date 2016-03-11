@@ -13,9 +13,9 @@
 
   	<resultMap id="changeControlMapping" type="QATModels">
   		<result property="createUser" column="create_user"/>
-		<result property="createDateUTC" column="create_date"/>
+		<result property="createDataUTC" column="create_date"/>
 		<result property="modifyUser" column="modify_user"/>
-		<result property="modifyDateUTC" column="modify_date"/>
+		<result property="modifyDataUTC" column="modify_date"/>
 	</resultMap>
 
 	<!--
@@ -29,9 +29,9 @@
   	</sql>
 
   	  <sql id="changeControlFields">
-    	#{createDateUTC},
+    	#{createDataUTC},
 		#{createUser},
-		#{modifyDateUTC},
+		#{modifyDataUTC},
 		#{modifyUser}
      </sql>
 

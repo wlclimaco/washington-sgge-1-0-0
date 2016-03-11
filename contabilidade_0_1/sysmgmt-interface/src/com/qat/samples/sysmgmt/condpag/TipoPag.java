@@ -33,6 +33,14 @@ public class TipoPag extends ModelCosmeDamiao
 		return id;
 	}
 
+	public TipoPag(Integer id, String descricao, PersistanceActionEnum modelAction)
+	{
+		super();
+		this.id = id;
+		this.descricao = descricao;
+		setModelAction(modelAction);
+	}
+
 	/**
 	 * Sets the id.
 	 * 

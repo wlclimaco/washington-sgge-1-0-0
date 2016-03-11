@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FormaPgMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. 		private Integer id;
+	private String descricao;
+	private Integer diasPg;
+	private Integer entrada;
+-->
+
+  <resultMap id="formaPgResult" type="FormaPg">
+    <result property="id" column="id" />
+    <result property="descricao" column="descricao" />
+	<result property="diasPg" column="diasPg"/>
+	<result property="entrada" column="entrada"/>
+	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
+
+    <resultMap id="formaPgPessoaResult" type="FormaPgPessoa">
+    <result property="id" column="id" />
+	<result property="parentId" column="parentId"/>
+	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<association property="formaPgId"    column="formaPgId" select="fetchFormaPgById"  />
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allFormaPgColumns">
+		 descricao
+		,diasPg
+		,entrada
+		,processId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allFormaPgValues">
+  		 #{descricao},
+		 #{diasPg},
+		 #{entrada},
+		 #{processId},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+    <sql id="allFormaPgPessoaColumns">
+		 parentId
+		,processId
+		,formaPgId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allFormaPgPessoaValues">
+  		 #{parentId},
+		 #{processId},
+		 #{formaPgId.id},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertFormaPg" parameterType="FormaPg" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO formaPg (
+		<include refid="allFormaPgColumns" />
+      )
+    VALUES (<include refid="allFormaPgValues" /> )
+  </insert>
+
+    <insert id="insertFormaPgPessoa" parameterType="FormaPgPessoa" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO formaPgPessoa (
+		<include refid="allFormaPgPessoaColumns" />
+      )
+    VALUES (<include refid="allFormaPgPessoaValues" /> )
+  </insert>
+
+ <update id="updateFormaPgPessoa" parameterType="FormaPgPessoa">
+    UPDATE formaPg
+    	<set>
+    		<if test="parentId!= null">parentId = #{parentId},</if>
+	    	<if test="formaPgId.id!= null"> formaPgId=#{formaPgId.id},</if>
+			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateFormaPg" parameterType="FormaPg">
+    UPDATE formaPg
+    	<set>
+    		<if test="descricao!= null">descricao = #{descricao},</if>
+	    	<if test="diasPg!= null"> diasPg=#{diasPg},</if>
+	    	<if test="entrada!= null"> entrada=#{entrada},</if>
+			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteFormaPgById" parameterType="Integer">
+    	DELETE FROM formaPg WHERE id = #{id}
+  </delete>
+
+  <delete id="deleteFormaPgByIdPessoa" parameterType="Integer">
+    	DELETE FROM formaPgPessoa WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchFormaPgRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM formaPg
+     WHERE 2 = 2
+     <if test="criteria.id != null">
+		  AND id = #{criteria.id}
+	 </if>
+  </select>
+
+  <select id="fetchAllFormaPgsByRequest" parameterType="PagedInquiryRequest" resultMap="formaPgResult">
+	    SELECT * FROM
+    			(
+    				SELECT
+    						<include refid="allFormaPgColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM formapg b
+					WHERE 2 = 2
+					<if test="criteria.id != null">
+						AND id = #{criteria.id}
+					</if>
+					 <if test="cidadeList != null and !cidadeList.isEmpty()">
+					     AND cidade IN
+					     <foreach item="item" index="index" collection="cidadeList"
+						     open="(" separator="," close=")">
+						   	 #{item.value}
+						 </foreach>
+					 </if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+  <select id="fetchAllFormaPgs" resultMap="formaPgResult">
+    SELECT
+	<include refid="allFormaPgColumns" />
+    FROM formaPg b ORDER BY name ASC
+  </select>
+
+    <select id="fetchAllFormaPgByNota" resultMap="formaPgResult">
+    SELECT
+	<include refid="allFormaPgColumns" />
+    FROM formaPg b where id=#{id}  ORDER BY id ASC
+  </select>
+
+  <select id="fetchFormaPgByPessoa" parameterType="Integer" resultMap="formaPgPessoaResult">
+    SELECT id,
+	<include refid="allFormaPgPessoaColumns" />
+    FROM formaPgPessoa b where parentId= #{id}  ORDER BY id ASC
+  </select>
+
+  <select id="fetchFormaPgById" parameterType="Integer" resultMap="formaPgResult">
+    SELECT id,
+	<include refid="allFormaPgColumns" />
+    FROM formaPg  where id= #{id}  ORDER BY id ASC
+  </select>
+
+
+</mapper>

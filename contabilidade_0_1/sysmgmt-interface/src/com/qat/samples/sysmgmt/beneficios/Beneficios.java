@@ -44,6 +44,20 @@ public class Beneficios extends ModelCosmeDamiao
 		this.id = id;
 	}
 
+	public Beneficios(Integer id, String nome, String codigo, String descricao, double valor, double porcentagem,
+			String tipo, PersistanceActionEnum modelAction)
+	{
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.codigo = codigo;
+		this.descricao = descricao;
+		this.valor = valor;
+		this.porcentagem = porcentagem;
+		this.tipo = tipo;
+		setModelAction(modelAction);
+	}
+
 	/**
 	 * Gets the id.
 	 * 
