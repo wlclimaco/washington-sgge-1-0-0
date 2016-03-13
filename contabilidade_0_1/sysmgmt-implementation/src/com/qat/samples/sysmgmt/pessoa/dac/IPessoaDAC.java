@@ -8,6 +8,16 @@ import com.qat.samples.sysmgmt.banco.Banco;
 import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
 import com.qat.samples.sysmgmt.beneficios.Beneficios;
 import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.Consulta;
+import com.qat.samples.sysmgmt.clinica.Especialidade;
+import com.qat.samples.sysmgmt.clinica.Exame;
+import com.qat.samples.sysmgmt.clinica.PlanoSaude;
+import com.qat.samples.sysmgmt.clinica.model.request.ConsultaInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.EspecializacaoInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.ExameInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.MedicoInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.PacienteInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.PlanoSaudeInquiryRequest;
 import com.qat.samples.sysmgmt.condpag.FormaPg;
 import com.qat.samples.sysmgmt.condpag.model.request.FormaPgInquiryRequest;
 import com.qat.samples.sysmgmt.conta.Conta;
@@ -28,6 +38,8 @@ import com.qat.samples.sysmgmt.pessoa.Cliente;
 import com.qat.samples.sysmgmt.pessoa.Contador;
 import com.qat.samples.sysmgmt.pessoa.Fornecedor;
 import com.qat.samples.sysmgmt.pessoa.Funcionario;
+import com.qat.samples.sysmgmt.pessoa.Medico;
+import com.qat.samples.sysmgmt.pessoa.Paciente;
 import com.qat.samples.sysmgmt.pessoa.Transportador;
 import com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.request.ContaInquiryRequest;
@@ -125,5 +137,35 @@ public interface IPessoaDAC
 	public InternalResultsResponse<Beneficios> fetchBeneficiosRequest(BeneficiosInquiryRequest request);
 
 	public InternalResultsResponse<HorarioFunc> fetchHorarioFuncsRequest(HoraFuncInquiryRequest request);
+
+	// ================================
+	public InternalResultsResponse<Medico> updateMedico(Medico cnae);
+
+	public InternalResultsResponse<Medico> insertMedico(Medico cnae);
+
+	public InternalResponse deleteMedico(Medico cnae);
+
+	public InternalResultsResponse<Medico> fetchMedicoById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Medico> fetchMedicoByRequest(MedicoInquiryRequest request);
+
+	// ================================
+	public InternalResultsResponse<Paciente> updatePaciente(Paciente cnae);
+
+	public InternalResultsResponse<Paciente> insertPaciente(Paciente cnae);
+
+	public InternalResponse deletePaciente(Paciente cnae);
+
+	public InternalResultsResponse<Paciente> fetchPacienteById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Paciente> fetchPacienteByRequest(PacienteInquiryRequest request);
+
+	public InternalResultsResponse<Consulta> fetchConsultaByRequest(ConsultaInquiryRequest request);
+
+	public InternalResultsResponse<Especialidade> fetchEspecialidadeRequest(EspecializacaoInquiryRequest request);
+
+	public InternalResultsResponse<Exame> fetchExameRequest(ExameInquiryRequest request);
+
+	public InternalResultsResponse<PlanoSaude> fetchPlanoSaudeRequest(PlanoSaudeInquiryRequest request);
 
 }

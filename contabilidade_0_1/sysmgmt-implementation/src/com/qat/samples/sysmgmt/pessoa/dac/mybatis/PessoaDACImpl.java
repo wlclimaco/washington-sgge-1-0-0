@@ -20,6 +20,16 @@ import com.qat.samples.sysmgmt.banco.Banco;
 import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
 import com.qat.samples.sysmgmt.beneficios.Beneficios;
 import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.Consulta;
+import com.qat.samples.sysmgmt.clinica.Especialidade;
+import com.qat.samples.sysmgmt.clinica.Exame;
+import com.qat.samples.sysmgmt.clinica.PlanoSaude;
+import com.qat.samples.sysmgmt.clinica.model.request.ConsultaInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.EspecializacaoInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.ExameInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.MedicoInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.PacienteInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.PlanoSaudeInquiryRequest;
 import com.qat.samples.sysmgmt.condpag.FormaPg;
 import com.qat.samples.sysmgmt.condpag.model.request.FormaPgInquiryRequest;
 import com.qat.samples.sysmgmt.conta.Conta;
@@ -45,11 +55,14 @@ import com.qat.samples.sysmgmt.estado.Estado;
 import com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest;
 import com.qat.samples.sysmgmt.historico.model.Historico;
 import com.qat.samples.sysmgmt.historico.model.HistoricoItens;
+import com.qat.samples.sysmgmt.histotico.dacd.HistoricoDACD;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.pessoa.Cliente;
 import com.qat.samples.sysmgmt.pessoa.Contador;
 import com.qat.samples.sysmgmt.pessoa.Fornecedor;
 import com.qat.samples.sysmgmt.pessoa.Funcionario;
+import com.qat.samples.sysmgmt.pessoa.Medico;
+import com.qat.samples.sysmgmt.pessoa.Paciente;
 import com.qat.samples.sysmgmt.pessoa.Pessoa;
 import com.qat.samples.sysmgmt.pessoa.Transportador;
 import com.qat.samples.sysmgmt.pessoa.dac.IAgenciaDAC;
@@ -452,35 +465,19 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 
 		pessoaa = pessoa;
 		pessoa = (Cliente)pessoaa;
-		Historico historico = new Historico();
-		historico.setEmprId(pessoa.getEmprId());
-		historico.setUserId(pessoa.getUserId());
-		historico.setProcessId(0);
 
-		Date a = new Date();
+		Integer historicoId = HistoricoDACD.maintainHistoricoAssociations(pessoa.getId(), pessoa.getCreateUser(), 0,
+				TabelaEnum.FUNCIONARIO, getHistoricoDAC());
 
-		insertCount =
-				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistorico", historico, response);
-
-		Integer historicoId = historico.getId();
-		Integer processId = historico.getId();
+		Integer processId = historicoId;
 		pessoaa.setProcessId(historicoId);
 
 		insertCount =
 				QATMyBatisDacHelper.doInsert(getSqlSession(), "PessoaMap.insertPessoa", pessoaa, response);
 
-		HistoricoItens historicoItens = new HistoricoItens();
-		historicoItens.setIdHist(historicoId);
-		historicoItens.setProcessId(historicoId);
-		historicoItens.setParentId(pessoaa.getId());
-		historicoItens.setTabelaEnum(TabelaEnum.CLIENTE);
-		historicoItens.setAcaoType(AcaoEnum.INSERT);
-
-		insertCount =
-				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistoricoItens", historicoItens,
-						response);
-
-		pessoa.setProcessId(historicoId);
+		historicoId = HistoricoDACD.maintainHistoricoItensAssociations(historicoId, pessoa.getId(), pessoa.getUserId(),
+				historicoId,
+				TabelaEnum.FUNCIONARIO, AcaoEnum.INSERT, getHistoricoDAC());
 
 		if (response.isInError())
 		{
@@ -1719,5 +1716,103 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "HoraFuncMap.fetchHoraFuncRowCount",
 				"HoraFuncMap.fetchAllHoraFuncByRequest", response);
 		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Medico> updateMedico(Medico cnae)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Medico> insertMedico(Medico cnae)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResponse deleteMedico(Medico cnae)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Medico> fetchMedicoById(FetchByIdRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Medico> fetchMedicoByRequest(MedicoInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Paciente> updatePaciente(Paciente cnae)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Paciente> insertPaciente(Paciente cnae)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResponse deletePaciente(Paciente cnae)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Paciente> fetchPacienteById(FetchByIdRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Paciente> fetchPacienteByRequest(PacienteInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Consulta> fetchConsultaByRequest(ConsultaInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Especialidade> fetchEspecialidadeRequest(EspecializacaoInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Exame> fetchExameRequest(ExameInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<PlanoSaude> fetchPlanoSaudeRequest(PlanoSaudeInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
