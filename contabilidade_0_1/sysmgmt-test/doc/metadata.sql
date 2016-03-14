@@ -3340,7 +3340,7 @@ ALTER TABLE tabpreco
   OWNER TO postgres;
 
 
-  DROP SEQUENCE imagem_id_seq;
+DROP SEQUENCE imagem_id_seq;
 
 CREATE SEQUENCE imagem_id_seq
   INCREMENT 1
@@ -3450,4 +3450,210 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE historico
+  OWNER TO postgres;
+
+
+/* ---------------------------------------------------------------*/
+DROP SEQUENCE especialidadePessoa_id_seq;
+
+CREATE SEQUENCE especialidadePessoa_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE especialidadePessoa_id_seq
+  OWNER TO postgres;
+
+ DROP TABLE especialidadePessoa;
+
+CREATE TABLE especialidadePessoa
+(
+	id integer NOT NULL DEFAULT nextval('especialidadePessoa_id_seq'::regclass),
+	parentId integer,
+	especialidade integer,
+	processId integer,
+	create_user character varying(50),
+	create_date bigint,
+	modify_user bigint,
+	modify_date character varying(50),
+  CONSTRAINT especialidadePessoa_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE especialidadePessoa
+  OWNER TO postgres;
+
+/* ---------------------------------------------------------------*/
+DROP SEQUENCE especialidade_id_seq;
+
+CREATE SEQUENCE especialidade_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE especialidade_id_seq
+  OWNER TO postgres;
+
+ DROP TABLE especialidade;
+
+CREATE TABLE especialidade
+(
+	id integer NOT NULL DEFAULT nextval('especialidade_id_seq'::regclass),
+	parentId integer,
+	nome character varying(100),
+	processId integer,
+	create_user character varying(50),
+	create_date bigint,
+	modify_user bigint,
+	modify_date character varying(50),
+  CONSTRAINT especialidade_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE especialidade
+  OWNER TO postgres;
+
+  /* ---------------------------------------------------------------*/
+DROP SEQUENCE planoSaudePessoa_id_seq;
+
+CREATE SEQUENCE planoSaudePessoa_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE planoSaudePessoa_id_seq
+  OWNER TO postgres;
+
+ DROP TABLE planoSaudePessoa;
+
+CREATE TABLE planoSaudePessoa
+(
+	id integer NOT NULL DEFAULT nextval('planoSaudePessoa_id_seq'::regclass),
+	parentId integer,
+	planoId integer,
+	dataValidade bigint,
+	numeroCartao character varying(50),
+	plano character varying(50),
+	processId integer,
+	create_user character varying(50),
+	create_date bigint,
+	modify_user bigint,
+	modify_date character varying(50),
+  CONSTRAINT planoSaudePessoa_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE planoSaudePessoa
+  OWNER TO postgres;
+
+
+  /* ---------------------------------------------------------------*/
+DROP SEQUENCE planoSaude_id_seq;
+
+CREATE SEQUENCE planoSaude_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE planoSaude_id_seq
+  OWNER TO postgres;
+
+ DROP TABLE planoSaude;
+
+CREATE TABLE planoSaude
+(
+	id integer NOT NULL DEFAULT nextval('planoSaude_id_seq'::regclass),
+	nome character varying(50),
+	processId integer,
+	create_user character varying(50),
+	create_date bigint,
+	modify_user bigint,
+	modify_date character varying(50),
+  CONSTRAINT planoSaude_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE planoSaude
+  OWNER TO postgres;
+
+
+   /* ---------------------------------------------------------------
+    */
+DROP SEQUENCE consulta_id_seq;
+
+CREATE SEQUENCE consulta_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE consulta_id_seq
+  OWNER TO postgres;
+
+ DROP TABLE consulta;
+
+CREATE TABLE consulta
+(
+	id integer NOT NULL DEFAULT nextval('consulta_id_seq'::regclass),
+	dataConsulta  bigint,
+	valor float,
+	dataMarcacao  bigint,
+	medico integer,
+	paciente integer,
+	planoSaude integer,
+	processId integer,
+	create_user character varying(50),
+	create_date bigint,
+	modify_user bigint,
+	modify_date character varying(50),
+  CONSTRAINT consulta_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE consulta
+  OWNER TO postgres;
+
+
+  /* ---------------------------------------------------------------
+    */
+DROP SEQUENCE exame_id_seq;
+
+CREATE SEQUENCE exame_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE exame_id_seq
+  OWNER TO postgres;
+
+ DROP TABLE exame;
+
+CREATE TABLE exame
+(
+	id integer NOT NULL DEFAULT nextval('exame_id_seq'::regclass),
+	nome character varying(50),
+	dataExame  bigint,
+	medicoResponsavel character varying(50),
+	laboratorio character varying(50),
+	processId integer,
+	create_user character varying(50),
+	create_date bigint,
+	modify_user bigint,
+	modify_date character varying(50),
+  CONSTRAINT exame_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE exame
   OWNER TO postgres;

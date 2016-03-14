@@ -78,11 +78,19 @@
   <update id="updateFuncionario" parameterType="Funcionario">
     UPDATE pessoa
     	<set>
-    		<if test="cdEmpr!= null">cdEmpr = #{cdEmpr},</if>
-	    	<if test="nome!= null"> nome =#{nome},</if>
-	    	<if test="sexo!= null"> sexo=#{sexo},</if>
-	    	<if test="dataAdm!= null"> dataAdm=#{dataAdm},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+    		<if test="emprId!= null">emprId = #{emprId},</if>
+	  		<if test="nome!= null">nome = #{nome},</if>
+	  		<if test="pessoaTypeEnumValue!= null">type = #{pessoaTypeEnumValue},</if>
+	  		<if test="sexo!= null">sexo = #{sexo},</if>
+	  		<if test="datanasc!= null">datanasc = #{datanasc},</if>
+	  		<if test="nomePai!= null">nomePai = #{nomePai},</if>
+	  		<if test="nomeMae!= null">nomeMae = #{nomeMae},</if>
+	  		<if test="nomeConjugue!= null">nomeConjugue = #{nomeConjugue},</if>
+	  		<if test="estadoCivil!= null">estadoCivil = #{estadoCivil},</if>
+	  		<if test="tipoPessoa!= null">tipoPessoa = #{tipoPessoa},</if>
+	  		<if test="matricula!= null">matricula = #{matricula},</if>
+	  		<if test="dataAdm!= null">dataAdm = #{dataAdm},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE

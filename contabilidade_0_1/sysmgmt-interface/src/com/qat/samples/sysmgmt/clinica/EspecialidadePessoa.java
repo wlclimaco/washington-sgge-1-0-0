@@ -12,9 +12,6 @@ public class EspecialidadePessoa extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	/** The type of an account. */
-	private Integer idFunc;
-
 	private Especialidade especialidade;
 
 	public EspecialidadePessoa()
@@ -38,16 +35,6 @@ public class EspecialidadePessoa extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	public Integer getIdFunc()
-	{
-		return idFunc;
-	}
-
-	public void setIdFunc(Integer idFunc)
-	{
-		this.idFunc = idFunc;
-	}
-
 	public Especialidade getEspecialidade()
 	{
 		return especialidade;
@@ -61,8 +48,8 @@ public class EspecialidadePessoa extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "EspecialidadePessoa [getId()=" + getId() + ", getIdFunc()=" + getIdFunc() + ", getEspecialidade()="
-				+ getEspecialidade() + ", toString()=" + super.toString() + "]";
+		return "EspecialidadePessoa [getId()=" + getId() + ", getEspecialidade()=" + getEspecialidade()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

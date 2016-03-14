@@ -15,9 +15,11 @@ public class PlanoSaudePessoa extends ModelCosmeDamiao
 	/** The type of an account. */
 	private PlanoSaude planoId;
 
-	private Integer pacienteId;
-
 	private Integer dataValidade;
+
+	private Integer numeroCartao;
+
+	private String plano;
 
 	public PlanoSaudePessoa()
 	{
@@ -50,14 +52,14 @@ public class PlanoSaudePessoa extends ModelCosmeDamiao
 		this.planoId = planoId;
 	}
 
-	public Integer getPacienteId()
+	public Integer getNumeroCartao()
 	{
-		return pacienteId;
+		return numeroCartao;
 	}
 
-	public void setPacienteId(Integer pacienteId)
+	public void setNumeroCartao(Integer numeroCartao)
 	{
-		this.pacienteId = pacienteId;
+		this.numeroCartao = numeroCartao;
 	}
 
 	public Integer getDataValidade()
@@ -70,12 +72,22 @@ public class PlanoSaudePessoa extends ModelCosmeDamiao
 		this.dataValidade = dataValidade;
 	}
 
+	public String getPlano()
+	{
+		return plano;
+	}
+
+	public void setPlano(String plano)
+	{
+		this.plano = plano;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "PlanoSaudePessoa [getId()=" + getId() + ", getPlanoId()=" + getPlanoId() + ", getPacienteId()="
-				+ getPacienteId() + ", getDataValidade()=" + getDataValidade() + ", toString()=" + super.toString()
-				+ "]";
+		return "PlanoSaudePessoa [getId()=" + getId() + ", getPlanoId()=" + getPlanoId() + ", getNumeroCartao()="
+				+ getNumeroCartao() + ", getDataValidade()=" + getDataValidade() + ", getPlano()=" + getPlano()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

@@ -27,7 +27,7 @@ public class Consulta extends ModelCosmeDamiao
 
 	private Paciente paciente;
 
-	private List<Exame> exameList;
+	private List<ExamePessoa> exameList;
 
 	private List<Resultado> resultadoList;
 
@@ -94,12 +94,12 @@ public class Consulta extends ModelCosmeDamiao
 		this.paciente = paciente;
 	}
 
-	public List<Exame> getExameList()
+	public List<ExamePessoa> getExameList()
 	{
 		return exameList;
 	}
 
-	public void setExameList(List<Exame> exameList)
+	public void setExameList(List<ExamePessoa> exameList)
 	{
 		this.exameList = exameList;
 	}

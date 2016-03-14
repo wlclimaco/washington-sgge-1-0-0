@@ -27,7 +27,11 @@ public enum PessoaTypeEnum implements IIntegerEnum, II18nEnum
 
 	CONTADOR(5, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
 
-	SOCIO(6, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
+	SOCIO(6, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
+
+	MEDICO(7, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
+
+	PACIENTE(8, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
 
 	/** The code. */
 	private Integer code;

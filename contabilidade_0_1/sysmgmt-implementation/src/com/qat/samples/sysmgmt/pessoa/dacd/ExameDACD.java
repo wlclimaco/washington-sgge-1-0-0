@@ -7,11 +7,10 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.banco.Banco;
-import com.qat.samples.sysmgmt.banco.BancoPessoa;
+import com.qat.samples.sysmgmt.clinica.Exame;
+import com.qat.samples.sysmgmt.clinica.ExamePessoa;
 import com.qat.samples.sysmgmt.entidade.dacd.StatusDACD;
-import com.qat.samples.sysmgmt.pessoa.dac.IAgenciaDAC;
-import com.qat.samples.sysmgmt.pessoa.dac.IBancoDAC;
+import com.qat.samples.sysmgmt.pessoa.dac.IExameDAC;
 import com.qat.samples.sysmgmt.util.AcaoEnum;
 import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.Status;
@@ -40,33 +39,33 @@ public final class ExameDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainBancoAssociations(List<BancoPessoa> bancoList,
+	public static Integer maintainExameAssociations(List<ExamePessoa> exameList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IBancoDAC bancoDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC, Integer empId,
-			String UserId, Integer processId, Integer historicoId, IAgenciaDAC agenciaDAC)
+			TabelaEnum tabelaEnum, IExameDAC exameDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC, Integer empId,
+			String UserId, Integer processId, Integer historicoId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(bancoList))
+		if (ValidationUtil.isNullOrEmpty(exameList))
 		{
 			return count;
 		}
 		// For Each Contact...
-		for (BancoPessoa banco : bancoList)
+		for (ExamePessoa exame : exameList)
 		{
 			// Make sure we set the parent key
-			banco.setParentId(parentId);
-			banco.setProcessId(processId);
-			banco.setTabelaEnum(tabelaEnum);
+			exame.setParentId(parentId);
+			exame.setProcessId(processId);
+			exame.setTabelaEnum(tabelaEnum);
 
-			if (ValidationUtil.isNull(banco.getModelAction()))
+			if (ValidationUtil.isNull(exame.getModelAction()))
 			{
 				continue;
 			}
-			switch (banco.getModelAction())
+			switch (exame.getModelAction())
 			{
 				case INSERT:
-					count = bancoDAC.insertBancoPessoa(banco);
+					count = exameDAC.insertExamePessoa(exame);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -79,66 +78,56 @@ public final class ExameDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
-					count = bancoDAC.updateBancoPessoa(banco);
+					count = exameDAC.updateExamePessoa(exame);
 					if (count > 0)
 					{
 						count =
 								StatusDACD
-										.maintainStatusAssociations(banco.getStatusList(), response, banco.getId(),
+										.maintainStatusAssociations(exame.getStatusList(), response, exame.getId(),
 												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
 												historicoDAC, processId, historicoId);
 					}
 					break;
 				case DELETE:
-					count = bancoDAC.deleteBancoPessoa(banco);
+					count = exameDAC.deleteExamePessoa(exame);
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
-							StatusDACD.maintainStatusAssociations(statusList, response, banco.getId(), null,
+							StatusDACD.maintainStatusAssociations(statusList, response, exame.getId(), null,
 									AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
 									processId, historicoId);
 
 					break;
 				case NONE:
-					count = maintainBancoAssociationsA(banco.getBancoId(), response, null, null,
-							null,
-							TabelaEnum.PESSOA, bancoDAC, statusDAC, historicoDAC, banco.getEmprId(),
-							banco.getCreateUser(), processId, historicoId);
+					count =
+							maintainExameAssociationsA(exame.getExame(), response, exame.getPaciente().getId(), null,
+									AcaoEnum.INSERT, TabelaEnum.CONSULTA, exameDAC, statusDAC, historicoDAC, empId,
+									UserId, processId, historicoId);
 					break;
 			}
 
-			AgenciaDACD.maintainAgenciaAssociations(banco.getAgenciaId(), response, 0,
-					null,
-					null,
-					TabelaEnum.PESSOA, agenciaDAC, statusDAC, historicoDAC, empId,
-					banco.getCreateUser(), processId, historicoId);
 		}
 
 		return count;
 	}
 
-	public static Integer maintainBancoAssociationsA(Banco banco,
+	public static Integer maintainExameAssociationsA(Exame exame2,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IBancoDAC bancoDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC, Integer empId,
+			TabelaEnum tabelaEnum, IExameDAC exameDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
-
 		Integer count = 0;
-		// First Maintain Empresa
-		if (ValidationUtil.isNull(banco))
+		if (ValidationUtil.isNull(exame2))
 		{
 			return count;
 		}
+		// For Each Contact...
 
-		// Make sure we set the parent key
-		banco.setParentId(parentId);
-		banco.setProcessId(processId);
-
-		switch (banco.getModelAction())
+		switch (exame2.getModelAction())
 		{
 			case INSERT:
-				count = bancoDAC.insertBanco(banco);
+				count = exameDAC.insertExame(exame2);
 				if (count > 0)
 				{
 					Status status = new Status();
@@ -151,23 +140,23 @@ public final class ExameDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
-				count = bancoDAC.updateBanco(banco);
+				count = exameDAC.updateExame(exame2);
 				if (count > 0)
 				{
 					count =
 							StatusDACD
-									.maintainStatusAssociations(banco.getStatusList(), response, banco.getId(),
+									.maintainStatusAssociations(exame2.getStatusList(), response, exame2.getId(),
 											null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
 											historicoDAC, processId, historicoId);
 				}
 				break;
 			case DELETE:
-				count = bancoDAC.deleteBanco(banco);
+				count = exameDAC.deleteExame(exame2);
 				Status status = new Status();
 				status.setStatus(CdStatusTypeEnum.DELETADO);
 				List<Status> statusList = new ArrayList<Status>();
 				count =
-						StatusDACD.maintainStatusAssociations(statusList, response, banco.getId(), null,
+						StatusDACD.maintainStatusAssociations(statusList, response, exame2.getId(), null,
 								AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
 								processId, historicoId);
 

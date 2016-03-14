@@ -165,8 +165,13 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	SERVICO(53, "sendsolv.base.model.risklevelenum.medium"),
 
 	PLANO(54, "sendsolv.base.model.risklevelenum.medium"),
+	MEDICO(55, "sendsolv.base.model.risklevelenum.medium"),
+	PACIENTE(56, "sendsolv.base.model.risklevelenum.medium"),
+	EXAME(57, "sendsolv.base.model.risklevelenum.medium"),
+	PLANOSAUDE(58, "sendsolv.base.model.risklevelenum.medium"),
+	CONSULTA(59, "sendsolv.base.model.risklevelenum.medium"),
 
-	USUARIO(55, "sendsolv.base.model.risklevelenum.medium");
+	USUARIO(60, "sendsolv.base.model.risklevelenum.medium");
 
 	/** The code. */
 	private Integer code;

@@ -69,23 +69,30 @@ import com.qat.samples.sysmgmt.pessoa.dac.IAgenciaDAC;
 import com.qat.samples.sysmgmt.pessoa.dac.IBancoDAC;
 import com.qat.samples.sysmgmt.pessoa.dac.IBeneficiosDAC;
 import com.qat.samples.sysmgmt.pessoa.dac.ICondPagDAC;
+import com.qat.samples.sysmgmt.pessoa.dac.IConsultaDAC;
 import com.qat.samples.sysmgmt.pessoa.dac.IContatoDAC;
 import com.qat.samples.sysmgmt.pessoa.dac.IConvenioDAC;
+import com.qat.samples.sysmgmt.pessoa.dac.IEspecialidadeDAC;
 import com.qat.samples.sysmgmt.pessoa.dac.IEventosDAC;
+import com.qat.samples.sysmgmt.pessoa.dac.IExameDAC;
 import com.qat.samples.sysmgmt.pessoa.dac.IFormaPagamentoDAC;
 import com.qat.samples.sysmgmt.pessoa.dac.IHoraFuncDAC;
 import com.qat.samples.sysmgmt.pessoa.dac.IPessoaDAC;
+import com.qat.samples.sysmgmt.pessoa.dac.IPlanoSaudeDAC;
 import com.qat.samples.sysmgmt.pessoa.dac.IProfissaoDAC;
 import com.qat.samples.sysmgmt.pessoa.dac.ISalariosDAC;
 import com.qat.samples.sysmgmt.pessoa.dac.IUsuarioDAC;
 import com.qat.samples.sysmgmt.pessoa.dacd.BancoDACD;
 import com.qat.samples.sysmgmt.pessoa.dacd.BeneficiosDACD;
 import com.qat.samples.sysmgmt.pessoa.dacd.CondPagDACD;
+import com.qat.samples.sysmgmt.pessoa.dacd.ConsultaDACD;
 import com.qat.samples.sysmgmt.pessoa.dacd.ContatoDACD;
 import com.qat.samples.sysmgmt.pessoa.dacd.ConvenioDACD;
+import com.qat.samples.sysmgmt.pessoa.dacd.EspecialidadeDACD;
 import com.qat.samples.sysmgmt.pessoa.dacd.EventosDACD;
 import com.qat.samples.sysmgmt.pessoa.dacd.FormaPagamentoDACD;
 import com.qat.samples.sysmgmt.pessoa.dacd.HorarioDACD;
+import com.qat.samples.sysmgmt.pessoa.dacd.PlanoSaudeDACD;
 import com.qat.samples.sysmgmt.pessoa.dacd.ProfissaoDACD;
 import com.qat.samples.sysmgmt.pessoa.dacd.SalarioDACD;
 import com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest;
@@ -97,10 +104,12 @@ import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorInquiryRequest;
 import com.qat.samples.sysmgmt.produto.dac.ICfopDAC;
 import com.qat.samples.sysmgmt.produto.dacd.mybatis.CfopDACD;
 import com.qat.samples.sysmgmt.util.AcaoEnum;
+import com.qat.samples.sysmgmt.util.AcaoTypeEnum;
 import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.Cidade;
 import com.qat.samples.sysmgmt.util.Status;
 import com.qat.samples.sysmgmt.util.TabelaEnum;
+import com.qat.samples.sysmgmt.util.TypeEnum;
 import com.qat.samples.sysmgmt.util.dac.IDocumentoDAC;
 import com.qat.samples.sysmgmt.util.dac.IEmailDAC;
 import com.qat.samples.sysmgmt.util.dac.IHistoricoDAC;
@@ -156,6 +165,50 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 	IUsuarioDAC usuarioDAC;
 	IAgenciaDAC agenciaDAC;
 	ICondPagDAC condPagDAC;
+	IConsultaDAC consultaDAC;
+	IEspecialidadeDAC especialidadeDAC;
+	IExameDAC exameDAC;
+	IPlanoSaudeDAC planoSaudeDAC;
+
+	public IPlanoSaudeDAC getPlanoSaudeDAC()
+	{
+		return planoSaudeDAC;
+	}
+
+	public void setPlanoSaudeDAC(IPlanoSaudeDAC planoSaudeDAC)
+	{
+		this.planoSaudeDAC = planoSaudeDAC;
+	}
+
+	public IConsultaDAC getConsultaDAC()
+	{
+		return consultaDAC;
+	}
+
+	public void setConsultaDAC(IConsultaDAC consultaDAC)
+	{
+		this.consultaDAC = consultaDAC;
+	}
+
+	public IEspecialidadeDAC getEspecialidadeDAC()
+	{
+		return especialidadeDAC;
+	}
+
+	public void setEspecialidadeDAC(IEspecialidadeDAC especialidadeDAC)
+	{
+		this.especialidadeDAC = especialidadeDAC;
+	}
+
+	public IExameDAC getExameDAC()
+	{
+		return exameDAC;
+	}
+
+	public void setExameDAC(IExameDAC exameDAC)
+	{
+		this.exameDAC = exameDAC;
+	}
 
 	public ICondPagDAC getCondPagDAC()
 	{
@@ -816,7 +869,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+						.maintainStatusAssociations(statusList, null, pessoa.getId(),
 								null, AcaoEnum.DELETE,
 								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.FORNECEDOR, getStatusDAC(),
 								getHistoricoDAC(), pessoa.getProcessId(), null);
@@ -1009,7 +1062,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+						.maintainStatusAssociations(statusList, null, pessoa.getId(),
 								null, AcaoEnum.DELETE,
 								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.TRANSPORTADOR, getStatusDAC(),
 								getHistoricoDAC(), pessoa.getProcessId(), null);
@@ -1024,7 +1077,8 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 	public InternalResultsResponse<Transportador> fetchTransportadorById(FetchByIdRequest request)
 	{
 		InternalResultsResponse<Transportador> response = new InternalResultsResponse<Transportador>();
-		QATMyBatisDacHelper.doQueryForList(getSqlSession(), EMPRESA_STMT_FETCH_BY_ID, request, response);
+		QATMyBatisDacHelper.doQueryForList(getSqlSession(), "TransportadorMap.fetchTransportadorById", request,
+				response);
 		return response;
 	}
 
@@ -1198,7 +1252,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		List<Status> statusList = new ArrayList<Status>();
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, pessoa.getId(),
+						.maintainStatusAssociations(statusList, null, pessoa.getId(),
 								null, AcaoEnum.DELETE,
 								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.TRANSPORTADOR, getStatusDAC(),
 								getHistoricoDAC(), pessoa.getProcessId(), null);
@@ -1719,100 +1773,417 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 	}
 
 	@Override
-	public InternalResultsResponse<Medico> updateMedico(Medico cnae)
+	public InternalResultsResponse<Medico> updateMedico(Medico pessoa)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer updateCount = 0;
+		InternalResultsResponse<Medico> response = new InternalResultsResponse<Medico>();
+
+		Integer historicoId = HistoricoDACD.maintainHistoricoAssociations(pessoa.getId(), pessoa.getCreateUser(), 0,
+				TabelaEnum.MEDICO, getHistoricoDAC());
+
+		Integer processId = historicoId;
+		pessoa.setProcessId(historicoId);
+
+		updateCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "MedicoMap.updateMedico", pessoa, response);
+
+		historicoId = HistoricoDACD.maintainHistoricoItensAssociations(historicoId, pessoa.getId(), pessoa.getUserId(),
+				historicoId,
+				TabelaEnum.MEDICO, AcaoEnum.UPDATE, getHistoricoDAC());
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		updateCount += insertPerson(pessoa, processId, historicoId, response);
+
+		updateCount +=
+				EspecialidadeDACD.maintainEspecialidadeAssociations(
+						pessoa.getEspecialidadeList(), response, pessoa.getId(), TypeEnum.HIGH, AcaoTypeEnum.UPDATE,
+						TabelaEnum.MEDICO, getEspecialidadeDAC(), getStatusDAC(), getHistoricoDAC(),
+						pessoa.getEmprId(), pessoa.getUserId(), pessoa.getProcessId(), historicoId);
+
+		updateCount +=
+				ConsultaDACD.maintainConsultaAssociations(
+						pessoa.getConsultaList(), response, pessoa.getId(), TypeEnum.HIGH, AcaoTypeEnum.UPDATE,
+						TabelaEnum.MEDICO, getConsultaDAC(), getStatusDAC(), getHistoricoDAC(),
+						pessoa.getEmprId(), pessoa.getUserId(), pessoa.getProcessId(), historicoId, getExameDAC());
+
+		updateCount +=
+				HorarioDACD.maintainHorarioFuncAssociations(pessoa.getHorarioList(), response, pessoa.getId(), null,
+						null,
+						null, getHoraFuncDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser(), processId, historicoId);
+
+		if (updateCount > 0)
+		{
+
+			updateCount +=
+					StatusDACD.maintainStatusAssociations(pessoa.getStatusList(), response, pessoa.getId(), null,
+							AcaoEnum.UPDATE,
+							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.FUNCIONARIO, getStatusDAC(),
+							getHistoricoDAC(), pessoa.getProcessId(), null);
+
+		}
+
+		// Next traverse the object graph and "maintain" the associations
+
+		// Finally, if something was inserted then add the Cliente to the result.
+		if (updateCount > 0)
+		{
+			response.addResult(pessoa);
+		}
+
+		return response;
+
 	}
 
 	@Override
-	public InternalResultsResponse<Medico> insertMedico(Medico cnae)
+	public InternalResultsResponse<Medico> insertMedico(Medico pessoa)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer insertCount = 0;
+		InternalResultsResponse<Medico> response = new InternalResultsResponse<Medico>();
+
+		Integer historicoId = HistoricoDACD.maintainHistoricoAssociations(pessoa.getId(), pessoa.getCreateUser(), 0,
+				TabelaEnum.MEDICO, getHistoricoDAC());
+
+		Integer processId = historicoId;
+		pessoa.setProcessId(historicoId);
+
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "MedicoMap.insertMedico", pessoa, response);
+
+		historicoId = HistoricoDACD.maintainHistoricoItensAssociations(historicoId, pessoa.getId(), pessoa.getUserId(),
+				historicoId,
+				TabelaEnum.MEDICO, AcaoEnum.INSERT, getHistoricoDAC());
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		insertCount += insertPerson(pessoa, processId, historicoId, response);
+
+		insertCount +=
+				EspecialidadeDACD.maintainEspecialidadeAssociations(
+						pessoa.getEspecialidadeList(), response, pessoa.getId(), TypeEnum.HIGH, AcaoTypeEnum.INSERT,
+						TabelaEnum.MEDICO, getEspecialidadeDAC(), getStatusDAC(), getHistoricoDAC(),
+						pessoa.getEmprId(), pessoa.getUserId(), pessoa.getProcessId(), historicoId);
+
+		insertCount +=
+				ConsultaDACD.maintainConsultaAssociations(
+						pessoa.getConsultaList(), response, pessoa.getId(), TypeEnum.HIGH, AcaoTypeEnum.INSERT,
+						TabelaEnum.MEDICO, getConsultaDAC(), getStatusDAC(), getHistoricoDAC(),
+						pessoa.getEmprId(), pessoa.getUserId(), pessoa.getProcessId(), historicoId, getExameDAC());
+
+		insertCount +=
+				HorarioDACD.maintainHorarioFuncAssociations(pessoa.getHorarioList(), response, pessoa.getId(), null,
+						null,
+						null, getHoraFuncDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser(), processId, historicoId);
+
+		if (insertCount > 0)
+		{
+			Status status = new Status();
+			status.setStatus(CdStatusTypeEnum.ANALISANDO);
+			List<Status> statusList = new ArrayList<Status>();
+			insertCount =
+					StatusDACD.maintainStatusAssociations(statusList, response, pessoa.getId(), null, AcaoEnum.INSERT,
+							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
+							getHistoricoDAC(), processId, null);
+
+		}
+
+		// Next traverse the object graph and "maintain" the associations
+
+		// Finally, if something was inserted then add the Cliente to the result.
+		if (insertCount > 0)
+		{
+			response.addResult(pessoa);
+		}
+
+		return response;
 	}
 
 	@Override
-	public InternalResponse deleteMedico(Medico cnae)
+	public InternalResponse deleteMedico(Medico pessoa)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer updateCount = 0;
+		InternalResponse response = new InternalResponse();
+
+		HistoricoDACD.maintainHistoricoItensAssociations(pessoa.getProcessId(), pessoa.getId(),
+				pessoa.getUserId(),
+				pessoa.getProcessId(),
+				TabelaEnum.MEDICO, AcaoEnum.DELETE, getHistoricoDAC());
+
+		Status status = new Status();
+		status.setStatus(CdStatusTypeEnum.DELETADO);
+		List<Status> statusList = new ArrayList<Status>();
+		statusList.add(status);
+		updateCount +=
+				StatusDACD
+						.maintainStatusAssociations(statusList, null, pessoa.getId(),
+								null, AcaoEnum.DELETE,
+								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.CLIENTE, getStatusDAC(),
+								getHistoricoDAC(), pessoa.getProcessId(), null);
+
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<Medico> fetchMedicoById(FetchByIdRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResultsResponse<Medico> response = new InternalResultsResponse<Medico>();
+		QATMyBatisDacHelper.doQueryForList(getSqlSession(), "MedicoMap.fetchMedicoById", request, response);
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<Medico> fetchMedicoByRequest(MedicoInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResultsResponse<Medico> response = new InternalResultsResponse<Medico>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "MedicoMap.fetchMedicoRowCount",
+				"MedicoMap.fetchAllMedicoByRequest", response);
+		return response;
 	}
 
 	@Override
-	public InternalResultsResponse<Paciente> updatePaciente(Paciente cnae)
+	public InternalResultsResponse<Paciente> updatePaciente(Paciente pessoa)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer updateCount = 0;
+		InternalResultsResponse<Paciente> response = new InternalResultsResponse<Paciente>();
+
+		Integer historicoId = HistoricoDACD.maintainHistoricoAssociations(pessoa.getId(), pessoa.getCreateUser(), 0,
+				TabelaEnum.PACIENTE, getHistoricoDAC());
+
+		Integer processId = historicoId;
+		pessoa.setProcessId(historicoId);
+
+		updateCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "PacienteMap.updatePaciente", pessoa, response);
+
+		historicoId = HistoricoDACD.maintainHistoricoItensAssociations(historicoId, pessoa.getId(), pessoa.getUserId(),
+				historicoId,
+				TabelaEnum.PACIENTE, AcaoEnum.UPDATE, getHistoricoDAC());
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		updateCount += insertPerson(pessoa, processId, historicoId, response);
+
+		updateCount += PlanoSaudeDACD.maintainPlanoSaudeAssociations(
+				pessoa.getPlanoSaudeList(), response, pessoa.getId(), TypeEnum.HIGH, AcaoTypeEnum.UPDATE,
+				TabelaEnum.PACIENTE, getPlanoSaudeDAC(), getStatusDAC(), getHistoricoDAC(),
+				pessoa.getEmprId(), pessoa.getUserId(), pessoa.getProcessId(), historicoId);
+
+		updateCount +=
+				ConsultaDACD.maintainConsultaAssociations(
+						pessoa.getConsultaList(), response, pessoa.getId(), TypeEnum.HIGH, AcaoTypeEnum.UPDATE,
+						TabelaEnum.PACIENTE, getConsultaDAC(), getStatusDAC(), getHistoricoDAC(),
+						pessoa.getEmprId(), pessoa.getUserId(), pessoa.getProcessId(), historicoId, getExameDAC());
+
+		if (updateCount > 0)
+		{
+
+			updateCount +=
+					StatusDACD.maintainStatusAssociations(pessoa.getStatusList(), response, pessoa.getId(), null,
+							AcaoEnum.UPDATE,
+							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.PACIENTE, getStatusDAC(),
+							getHistoricoDAC(), pessoa.getProcessId(), null);
+
+		}
+
+		// Next traverse the object graph and "maintain" the associations
+
+		// Finally, if something was inserted then add the Cliente to the result.
+		if (updateCount > 0)
+		{
+			response.addResult(pessoa);
+		}
+
+		return response;
 	}
 
 	@Override
-	public InternalResultsResponse<Paciente> insertPaciente(Paciente cnae)
+	public InternalResultsResponse<Paciente> insertPaciente(Paciente pessoa)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer insertCount = 0;
+		InternalResultsResponse<Paciente> response = new InternalResultsResponse<Paciente>();
+
+		Integer historicoId = HistoricoDACD.maintainHistoricoAssociations(pessoa.getId(), pessoa.getCreateUser(), 0,
+				TabelaEnum.PACIENTE, getHistoricoDAC());
+
+		Integer processId = historicoId;
+		pessoa.setProcessId(historicoId);
+
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "PacienteMap.insertPaciente", pessoa, response);
+
+		historicoId = HistoricoDACD.maintainHistoricoItensAssociations(historicoId, pessoa.getId(), pessoa.getUserId(),
+				historicoId,
+				TabelaEnum.PACIENTE, AcaoEnum.INSERT, getHistoricoDAC());
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		insertCount += insertPerson(pessoa, processId, historicoId, response);
+
+		insertCount += PlanoSaudeDACD.maintainPlanoSaudeAssociations(
+				pessoa.getPlanoSaudeList(), response, pessoa.getId(), TypeEnum.HIGH, AcaoTypeEnum.UPDATE,
+				TabelaEnum.PACIENTE, getPlanoSaudeDAC(), getStatusDAC(), getHistoricoDAC(),
+				pessoa.getEmprId(), pessoa.getUserId(), pessoa.getProcessId(), historicoId);
+
+		insertCount +=
+				ConsultaDACD.maintainConsultaAssociations(
+						pessoa.getConsultaList(), response, pessoa.getId(), TypeEnum.HIGH, AcaoTypeEnum.UPDATE,
+						TabelaEnum.PACIENTE, getConsultaDAC(), getStatusDAC(), getHistoricoDAC(),
+						pessoa.getEmprId(), pessoa.getUserId(), pessoa.getProcessId(), historicoId, getExameDAC());
+
+		if (insertCount > 0)
+		{
+			Status status = new Status();
+			status.setStatus(CdStatusTypeEnum.ANALISANDO);
+			List<Status> statusList = new ArrayList<Status>();
+			insertCount =
+					StatusDACD.maintainStatusAssociations(statusList, response, pessoa.getId(), null, AcaoEnum.INSERT,
+							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.PACIENTE, getStatusDAC(),
+							getHistoricoDAC(), processId, null);
+
+		}
+
+		// Next traverse the object graph and "maintain" the associations
+
+		// Finally, if something was inserted then add the Cliente to the result.
+		if (insertCount > 0)
+		{
+			response.addResult(pessoa);
+		}
+
+		return response;
 	}
 
 	@Override
-	public InternalResponse deletePaciente(Paciente cnae)
+	public InternalResponse deletePaciente(Paciente pessoa)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Integer updateCount = 0;
+		InternalResponse response = new InternalResponse();
+
+		HistoricoDACD.maintainHistoricoItensAssociations(pessoa.getProcessId(), pessoa.getId(),
+				pessoa.getUserId(),
+				pessoa.getProcessId(),
+				TabelaEnum.PACIENTE, AcaoEnum.DELETE, getHistoricoDAC());
+
+		Status status = new Status();
+		status.setStatus(CdStatusTypeEnum.DELETADO);
+		List<Status> statusList = new ArrayList<Status>();
+		statusList.add(status);
+		updateCount +=
+				StatusDACD
+						.maintainStatusAssociations(statusList, null, pessoa.getId(),
+								null, AcaoEnum.DELETE,
+								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.PACIENTE, getStatusDAC(),
+								getHistoricoDAC(), pessoa.getProcessId(), null);
+
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<Paciente> fetchPacienteById(FetchByIdRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResultsResponse<Paciente> response = new InternalResultsResponse<Paciente>();
+		QATMyBatisDacHelper.doQueryForList(getSqlSession(), "PacienteMap.fetchPacienteById", request, response);
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<Paciente> fetchPacienteByRequest(PacienteInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResultsResponse<Paciente> response = new InternalResultsResponse<Paciente>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "PacienteMap.fetchPacienteRowCount",
+				"PacienteMap.fetchAllPacientesByRequest", response);
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<Consulta> fetchConsultaByRequest(ConsultaInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResultsResponse<Consulta> response = new InternalResultsResponse<Consulta>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "ConsultaMap.fetchConsultaRowCount",
+				"ConsultaMap.fetchAllConsultaByRequest", response);
+		return response;
 	}
 
 	@Override
-	public InternalResultsResponse<Especialidade> fetchEspecialidadeRequest(EspecializacaoInquiryRequest request)
+	public InternalResultsResponse<Especialidade> fetchEspecialidadeByRequest(EspecializacaoInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResultsResponse<Especialidade> response = new InternalResultsResponse<Especialidade>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "EspecialidadeMap.fetchEspecialidadeRowCount",
+				"EspecialidadeMap.fetchAllEspecialidadesByRequest", response);
+		return response;
 	}
 
 	@Override
-	public InternalResultsResponse<Exame> fetchExameRequest(ExameInquiryRequest request)
+	public InternalResultsResponse<Exame> fetchExameByRequest(ExameInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResultsResponse<Exame> response = new InternalResultsResponse<Exame>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "ExameMap.fetchExameRowCount",
+				"ExameMap.fetchAllExameByRequest", response);
+		return response;
 	}
 
 	@Override
 	public InternalResultsResponse<PlanoSaude> fetchPlanoSaudeRequest(PlanoSaudeInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		InternalResultsResponse<PlanoSaude> response = new InternalResultsResponse<PlanoSaude>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "PlanoSaudeMap.fetchPlanoSaudeRowCount",
+				"PlanoSaudeMap.fetchAllPlanoSaudeByRequest", response);
+		return response;
 	}
 }

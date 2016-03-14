@@ -171,8 +171,24 @@
 
   		<typeAlias alias="AgenciaInquiryRequest" type="com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest"/>
 
+		<typeAlias alias="Consulta" type="com.qat.samples.sysmgmt.clinica.Consulta"/>
+  		<typeAlias alias="ConsultaInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.ConsultaInquiryRequest"/>
 
+		<typeAlias alias="Especialidade" type="com.qat.samples.sysmgmt.clinica.Especialidade"/>
+  		<typeAlias alias="EspecialidadePessoa" type="com.qat.samples.sysmgmt.clinica.EspecialidadePessoa"/>
 
+		<typeAlias alias="Exame" type="com.qat.samples.sysmgmt.clinica.Exame"/>
+  		<typeAlias alias="ExameInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.ExameInquiryRequest"/>
+
+		<typeAlias alias="Medico" type="com.qat.samples.sysmgmt.pessoa.Medico"/>
+  		<typeAlias alias="MedicoInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.MedicoInquiryRequest"/>
+
+		<typeAlias alias="Paciente" type="com.qat.samples.sysmgmt.pessoa.Paciente"/>
+  		<typeAlias alias="PacienteInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.PacienteInquiryRequest"/>
+
+		<typeAlias alias="PlanoSaude" type="com.qat.samples.sysmgmt.clinica.PlanoSaude"/>
+  		<typeAlias alias="PlanoSaudePessoa" type="com.qat.samples.sysmgmt.clinica.PlanoSaudePessoa"/>
+  		<typeAlias alias="PlanoSaudeInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.PlanoSaudeInquiryRequest"/>
 
 
 
@@ -243,6 +259,13 @@
 		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/formapg.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/convenio.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/cfop.xml"/>
+
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/consulta.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/especialidade.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/exame.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/medico.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/paciente.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/planoSaude.xml"/>
 
     </mappers>
 

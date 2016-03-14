@@ -34,6 +34,16 @@ import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest
 import com.qat.samples.sysmgmt.cfop.Cfop;
 import com.qat.samples.sysmgmt.cfop.CfopPessoa;
 import com.qat.samples.sysmgmt.cfop.CfopTypeEnum;
+import com.qat.samples.sysmgmt.clinica.Consulta;
+import com.qat.samples.sysmgmt.clinica.Especialidade;
+import com.qat.samples.sysmgmt.clinica.Exame;
+import com.qat.samples.sysmgmt.clinica.PlanoSaude;
+import com.qat.samples.sysmgmt.clinica.model.request.ConsultaInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.EspecializacaoInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.ExameInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.MedicoInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.PacienteInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.PlanoSaudeInquiryRequest;
 import com.qat.samples.sysmgmt.condpag.CondPag;
 import com.qat.samples.sysmgmt.condpag.CondPagPessoa;
 import com.qat.samples.sysmgmt.condpag.FormaPg;
@@ -62,6 +72,8 @@ import com.qat.samples.sysmgmt.pessoa.Cliente;
 import com.qat.samples.sysmgmt.pessoa.Contador;
 import com.qat.samples.sysmgmt.pessoa.Fornecedor;
 import com.qat.samples.sysmgmt.pessoa.Funcionario;
+import com.qat.samples.sysmgmt.pessoa.Medico;
+import com.qat.samples.sysmgmt.pessoa.Paciente;
 import com.qat.samples.sysmgmt.pessoa.PessoaTypeEnum;
 import com.qat.samples.sysmgmt.pessoa.Transportador;
 import com.qat.samples.sysmgmt.pessoa.dac.IPessoaDAC;
@@ -251,8 +263,7 @@ public class PessoaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Cliente funcionario = new Cliente();
 		funcionario = insertCliente(PersistanceActionEnum.DELETE);
 		InternalResponse funcionarioResponse = getPessoaDAC().deleteCliente(funcionario);
-		assertEquals(funcionarioResponse, null);
-		getPessoaDAC().deleteCliente(funcionario);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -263,8 +274,7 @@ public class PessoaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Fornecedor funcionario = new Fornecedor();
 		funcionario = insertFornecedor(PersistanceActionEnum.DELETE);
 		InternalResponse funcionarioResponse = getPessoaDAC().deleteFornecedor(funcionario);
-		assertEquals(funcionarioResponse, null);
-		getPessoaDAC().deleteFornecedor(funcionario);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -275,8 +285,7 @@ public class PessoaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Transportador funcionario = new Transportador();
 		funcionario = insertTransportador(PersistanceActionEnum.DELETE);
 		InternalResponse funcionarioResponse = getPessoaDAC().deleteTransportador(funcionario);
-		assertEquals(funcionarioResponse, null);
-		getPessoaDAC().deleteTransportador(funcionario);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -287,8 +296,7 @@ public class PessoaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Contador funcionario = new Contador();
 		funcionario = insertContador(PersistanceActionEnum.DELETE);
 		InternalResponse funcionarioResponse = getPessoaDAC().deleteContador(funcionario);
-		assertEquals(funcionarioResponse, null);
-		getPessoaDAC().deleteContador(funcionario);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -528,6 +536,177 @@ public class PessoaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	// ================================
+	@Test
+	public void testupdateMedico() throws Exception
+	{
+
+		Medico funcionario = new Medico();
+		funcionario = insertMedico(PersistanceActionEnum.UPDATE);
+
+		InternalResultsResponse<Medico> funcionarioResponse = getPessoaDAC().updateMedico(funcionario);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+
+	}
+
+	@Test
+	public void testinsertMedico() throws Exception
+	{
+
+		Medico funcionario = new Medico();
+		funcionario = insertMedico(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Medico> funcionarioResponse = getPessoaDAC().insertMedico(funcionario);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+
+	}
+
+	@Test
+	public void testdeleteMedico() throws Exception
+	{
+
+		Medico funcionario = new Medico();
+		funcionario = insertMedico(PersistanceActionEnum.DELETE);
+		InternalResponse funcionarioResponse = getPessoaDAC().deleteMedico(funcionario);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+
+	}
+
+	@Test
+	public void testfetchMedicoById() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(1);
+		InternalResultsResponse<Medico> response = getPessoaDAC().fetchMedicoById(request);
+		assertTrue(response.getResultsList().size() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchMedicoByRequest() throws Exception
+	{
+		// check for valid and precount
+		MedicoInquiryRequest request = new MedicoInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<Medico> response = getPessoaDAC().fetchMedicoByRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	// ================================
+	@Test
+	public void testupdatePaciente() throws Exception
+	{
+
+		Transportador funcionario = new Transportador();
+		funcionario = insertTransportador(PersistanceActionEnum.UPDATE);
+
+		InternalResultsResponse<Transportador> funcionarioResponse = getPessoaDAC().updateTransportador(funcionario);
+		assertEquals(funcionarioResponse, null);
+		getPessoaDAC().updateTransportador(funcionario);
+
+	}
+
+	@Test
+	public void testinsertPaciente() throws Exception
+	{
+
+		Paciente funcionario = new Paciente();
+		funcionario = insertPaciente(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Paciente> funcionarioResponse = getPessoaDAC().insertPaciente(funcionario);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+
+	}
+
+	@Test
+	public void testdeletePaciente() throws Exception
+	{
+
+		Paciente funcionario = new Paciente();
+		funcionario = insertPaciente(PersistanceActionEnum.DELETE);
+		InternalResponse funcionarioResponse = getPessoaDAC().deletePaciente(funcionario);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+
+	}
+
+	@Test
+	public void testfetchPacienteById() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(1);
+		InternalResultsResponse<Paciente> response = getPessoaDAC().fetchPacienteById(request);
+		assertTrue(response.getResultsList().size() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchPacienteByRequest() throws Exception
+	{
+		// check for valid and precount
+		PacienteInquiryRequest request = new PacienteInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<Paciente> response = getPessoaDAC().fetchPacienteByRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	@Test
+	public void testfetchConsultaByRequest() throws Exception
+	{
+		// check for valid and precount
+		ConsultaInquiryRequest request = new ConsultaInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<Consulta> response = getPessoaDAC().fetchConsultaByRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	@Test
+	public void testfetchEspecialidadeRequest() throws Exception
+	{
+		// check for valid and precount
+		EspecializacaoInquiryRequest request = new EspecializacaoInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<Especialidade> response = getPessoaDAC().fetchEspecialidadeByRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	@Test
+	public void testfetchExameRequest() throws Exception
+	{
+		// check for valid and precount
+		ExameInquiryRequest request = new ExameInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<Exame> response = getPessoaDAC().fetchExameByRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	@Test
+	public void testfetchPlanoSaudeRequest() throws Exception
+	{
+		// check for valid and precount
+		PlanoSaudeInquiryRequest request = new PlanoSaudeInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<PlanoSaude> response = getPessoaDAC().fetchPlanoSaudeRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
 	@Before
 	public void setup()
 	{
@@ -536,6 +715,7 @@ public class PessoaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBeneficios.sql", false);
 		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertCondPag.sql", false);
 		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertHorario.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertEspecialidade.sql", false);
 	}
 
 	public List<Endereco> enderecoList(PersistanceActionEnum action)
@@ -947,6 +1127,68 @@ public class PessoaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	public Contador insertContador(PersistanceActionEnum action)
 	{
 		Contador pessoa = new Contador();
+		Date a = new Date();
+		pessoa.setId(1);
+		pessoa.setNome("TESTE0001");
+		pessoa.setNomePai("nomePai");
+		pessoa.setEmprId(9);
+		pessoa.setNomeMae("nomeMae");
+		pessoa.setNomeConjugue("nomeConjugue");
+		pessoa.setEstadoCivil(0);
+		pessoa.setTipoPessoa(1);
+		pessoa.setDatanasc(a.getTime());
+		pessoa.setFoto("foto");
+		pessoa.setPessoaTypeEnum(PessoaTypeEnum.FUNCIONARIO);
+		pessoa.setSexo(1);
+		pessoa.setModelAction(action);
+		pessoa.setDocumentos(documentoList(action));
+		pessoa.setTelefones(telefoneList(action));
+		pessoa.setEmails(emailList(action));
+		pessoa.setEnderecos(enderecoList(action));
+		pessoa.setBancos(bancoList(action));
+		pessoa.setNotes(noteList(action));
+		pessoa.setContatoList(contatoList(action));
+		pessoa.setFormaPagamentoList(formaPagamentoList(action));
+		pessoa.setCondPagList(condPagList(action));
+		pessoa.setProcessId(1);
+
+		return pessoa;
+	}
+
+	public Medico insertMedico(PersistanceActionEnum action)
+	{
+		Medico pessoa = new Medico();
+		Date a = new Date();
+		pessoa.setId(1);
+		pessoa.setNome("TESTE0001");
+		pessoa.setNomePai("nomePai");
+		pessoa.setEmprId(9);
+		pessoa.setNomeMae("nomeMae");
+		pessoa.setNomeConjugue("nomeConjugue");
+		pessoa.setEstadoCivil(0);
+		pessoa.setTipoPessoa(1);
+		pessoa.setDatanasc(a.getTime());
+		pessoa.setFoto("foto");
+		pessoa.setPessoaTypeEnum(PessoaTypeEnum.FUNCIONARIO);
+		pessoa.setSexo(1);
+		pessoa.setModelAction(action);
+		pessoa.setDocumentos(documentoList(action));
+		pessoa.setTelefones(telefoneList(action));
+		pessoa.setEmails(emailList(action));
+		pessoa.setEnderecos(enderecoList(action));
+		pessoa.setBancos(bancoList(action));
+		pessoa.setNotes(noteList(action));
+		pessoa.setContatoList(contatoList(action));
+		pessoa.setFormaPagamentoList(formaPagamentoList(action));
+		pessoa.setCondPagList(condPagList(action));
+		pessoa.setProcessId(1);
+
+		return pessoa;
+	}
+
+	public Paciente insertPaciente(PersistanceActionEnum action)
+	{
+		Paciente pessoa = new Paciente();
 		Date a = new Date();
 		pessoa.setId(1);
 		pessoa.setNome("TESTE0001");

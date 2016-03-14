@@ -192,6 +192,22 @@
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
    	</bean>
 
+   	<bean id="consultaDACTarget" class="com.qat.samples.sysmgmt.pessoa.dac.mybatis.ConsultaDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+   	</bean>
+
+   	<bean id="especialidadeDACTarget" class="com.qat.samples.sysmgmt.pessoa.dac.mybatis.EspecialidadeDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+   	</bean>
+
+   	<bean id="exameDACTarget" class="com.qat.samples.sysmgmt.pessoa.dac.mybatis.ExameDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+   	</bean>
+
+   	<bean id="planoSaudeDACTarget" class="com.qat.samples.sysmgmt.pessoa.dac.mybatis.PlanoSaudeDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+   	</bean>
+
 
   	<bean id="pessoaDACTarget" class="com.qat.samples.sysmgmt.pessoa.dac.mybatis.PessoaDACImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
@@ -215,6 +231,10 @@
  		<property name="profissaoDAC" ref="profissaoDACTarget"/>
  		<property name="agenciaDAC" ref="agenciaDACTarget"/>
  		<property name="condPagDAC" ref="condPagDACTarget"/>
+ 		<property name="consultaDAC" ref="consultaDACTarget"/>
+ 		<property name="especialidadeDAC" ref="especialidadeDACTarget"/>
+ 		<property name="exameDAC" ref="exameDACTarget"/>
+ 		<property name="planoSaudeDAC" ref="planoSaudeDACTarget"/>
 
   	</bean>
 </beans>

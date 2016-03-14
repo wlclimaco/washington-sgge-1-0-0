@@ -4,7 +4,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="TransportadorMap">
+<mapper namespace="MedicoMap">
 
 		<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
@@ -14,55 +14,57 @@
        necessary if the columns (or aliases) match to the properties
 	-->
 
-   <resultMap id="transportadorResult" type="Transportador" extends="PessoaMap.PessoaResult">
-
+   <resultMap id="medicoResult" type="Medico" extends="PessoaMap.PessoaResult">
+		<collection property="especialidadeList" column="id" select="EspecialidadeMap.fetchEspecialidadeByPessoa"/>
+		<collection property="consultaList" column="id" select="ConsultaMap.fetchAllConsultaByMedico"/>
+		<collection property="horarioList" column="id" select="HoraFuncMap.fetchHoraFuncById"/>
   </resultMap>
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
-  <sql id="allTransportadorColumns">
+  <sql id="allMedicoColumns">
 		<include refid="PessoaMap.allPessoaColumns"/>
   </sql>
 
-  <sql id="allTransportadorValues">
+  <sql id="allMedicoValues">
   		<include refid="PessoaMap.allPessoaValues"/>
   </sql>
 	<!--
 		SQL Fetch Statements.
  	-->
-  <select id="fetchTransportadorRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+  <select id="fetchMedicoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
-        FROM pessoa where type = 4
+        FROM pessoa where type = 7
 
   </select>
 
-  <select id="fetchAllTransportadors" resultMap="transportadorResult">
+  <select id="fetchAllMedicos" resultMap="medicoResult">
     SELECT
-	<include refid="allTransportadorColumns" />
+	<include refid="allMedicoColumns" />
     FROM pessoa ORDER BY nome ASC
   </select>
 
-  <select id="fetchTransportadorById" parameterType="FetchByIdRequest" resultMap="transportadorResult">
+  <select id="fetchMedicoById" parameterType="FetchByIdRequest" resultMap="medicoResult">
     			   SELECT
-					b.id,	<include refid="allTransportadorColumns" />
- 				   FROM pessoa b
-					where b.id = #{fetchId}
+					id,	<include refid="allMedicoColumns" />
+ 				   FROM pessoa
+					where id = #{fetchId}
   </select>
 
-   <select id="fetchTransportadorByNota" parameterType="Integer" resultMap="transportadorResult">
+   <select id="fetchMedicoByNota" parameterType="Integer" resultMap="medicoResult">
     			   SELECT
-					b.id,	<include refid="allTransportadorColumns" />
- 				   FROM pessoa b
-					where b.id = #{id}
+					id,	<include refid="allMedicoColumns" />
+ 				   FROM pessoa
+					where id = #{id}
   </select>
 
-  <select id="fetchAllTransportadorsByRequest" parameterType="PagedInquiryRequest" resultMap="transportadorResult">
-     SELECT * FROM ( SELECT b.id,
-    						<include refid="allTransportadorColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
-    				FROM pessoa b
-						where b.type = 4
+  <select id="fetchAllMedicoByRequest" parameterType="PagedInquiryRequest" resultMap="medicoResult">
+     SELECT * FROM ( SELECT id,
+    						<include refid="allMedicoColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM pessoa
+						where type = 7
 
     			) LIST
 				<choose>

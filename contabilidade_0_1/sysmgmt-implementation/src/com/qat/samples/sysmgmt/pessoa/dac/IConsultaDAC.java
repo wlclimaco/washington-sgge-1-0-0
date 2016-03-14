@@ -58,28 +58,4 @@ public interface IConsultaDAC
 	 */
 	public InternalResultsResponse<Consulta> fetchConsultaByRequest(PagedInquiryRequest request);
 
-	/**
-	 * Update consulta.
-	 * 
-	 * @param consulta the consulta
-	 * @return the internal results response< consulta>
-	 */
-	public Integer updateConsultaPessoa(ConsultaPessoa consulta);
-
-	/**
-	 * Insert consulta.
-	 * 
-	 * @param consulta the consulta
-	 * @return the internal results response< consulta>
-	 */
-	public Integer insertConsultaPessoa(ConsultaPessoa consulta);
-
-	/**
-	 * Delete consulta.
-	 * 
-	 * @param consulta the consulta
-	 * @return the internal response
-	 */
-	public Integer deleteConsultaPessoa(ConsultaPessoa consulta);
-
 }

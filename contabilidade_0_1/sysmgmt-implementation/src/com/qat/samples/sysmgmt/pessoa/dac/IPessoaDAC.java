@@ -162,9 +162,9 @@ public interface IPessoaDAC
 
 	public InternalResultsResponse<Consulta> fetchConsultaByRequest(ConsultaInquiryRequest request);
 
-	public InternalResultsResponse<Especialidade> fetchEspecialidadeRequest(EspecializacaoInquiryRequest request);
+	public InternalResultsResponse<Especialidade> fetchEspecialidadeByRequest(EspecializacaoInquiryRequest request);
 
-	public InternalResultsResponse<Exame> fetchExameRequest(ExameInquiryRequest request);
+	public InternalResultsResponse<Exame> fetchExameByRequest(ExameInquiryRequest request);
 
 	public InternalResultsResponse<PlanoSaude> fetchPlanoSaudeRequest(PlanoSaudeInquiryRequest request);
 

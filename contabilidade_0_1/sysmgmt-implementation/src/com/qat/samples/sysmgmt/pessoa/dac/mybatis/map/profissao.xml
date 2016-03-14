@@ -112,22 +112,13 @@
 					where id = #{id} order by dataAdmissao ASC
   </select>
 
-  <select id="fetchAllProfissaosByRequest" parameterType="PagedInquiryRequest" resultMap="profissaoResult">
+  <select id="fetchAllProfissaosByRequest" parameterType="ProfissaoInquiryRequest" resultMap="profissaoResult">
      SELECT * FROM ( SELECT id,
     						<include refid="allProfissaoColumns" />,
     						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
     				FROM profissao b
 						where 1 = 1
-					<if test="parentId != null">
-						AND id = #{id}
-					</if>
-					 <if test="statusList != null and !statusList.isEmpty()">
-					     AND PGSI_status IN
-					     <foreach item="item" index="index" collection="statusList"
-						     open="(" separator="," close=")">
-						   	 #{item.value}
-						 </foreach>
-					 </if>
+
     			) LIST
 				<choose>
 					<when test="pageSize != null and pageSize > 0">
