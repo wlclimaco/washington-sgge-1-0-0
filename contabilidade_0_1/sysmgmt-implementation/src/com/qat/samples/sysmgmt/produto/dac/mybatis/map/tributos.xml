@@ -26,9 +26,9 @@
     <result property="iat" column="iat" />
     <result property="ippt" column="ippt" />
 	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
 	<association property="incidencia"    column="incidencia" select="IncidenciaMap.fetchById"  />
   </resultMap>
 
@@ -86,7 +86,7 @@
     	<set>
     		<if test="codigo!= null">codigo = #{codigo},</if>
 	    	<if test="texto!= null">texto=#{texto},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE

@@ -27,9 +27,9 @@
    	<result property="porcao" column="porcao"/>
    	<result property="vd" column="vd"/>
 	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
 	<association property="unimed"    column="unimed" select="UniMedMap.fetchUniMedById"  />
   </resultMap>
 
@@ -77,7 +77,7 @@
 	    	<if test="porcao!= null">porcao=#{porcao},</if>
 	    	<if test="vd!= null">vd = #{vd},</if>
 	    	<if test="unimed.id!= null">unimed=#{unimed.id},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE

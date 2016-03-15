@@ -20,27 +20,27 @@ public class QATModel1 extends QATModel
 {
 
 	/** The create date. */
-	private Integer createDataUTC;
+	private Long createDataUTC;
 
 	/** The modify date. */
-	private Integer modifyDataUTC;
+	private Long modifyDataUTC;
 
-	public Integer getCreateDataUTC()
+	public Long getCreateDataUTC()
 	{
 		return createDataUTC;
 	}
 
-	public void setCreateDataUTC(Integer createDataUTC)
+	public void setCreateDataUTC(Long createDataUTC)
 	{
 		this.createDataUTC = createDataUTC;
 	}
 
-	public Integer getModifyDataUTC()
+	public Long getModifyDataUTC()
 	{
 		return modifyDataUTC;
 	}
 
-	public void setModifyDataUTC(Integer modifyDataUTC)
+	public void setModifyDataUTC(Long modifyDataUTC)
 	{
 		this.modifyDataUTC = modifyDataUTC;
 	}

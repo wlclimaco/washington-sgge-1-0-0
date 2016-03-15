@@ -36,9 +36,9 @@
     <result property="titulo" column="titulo"/>
     <result property="emprId" column="emprId"/>
    	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
   <!--  <collection property="preco" column="{id=id,emprId=emprId}" select="TabPrecoMap.fetchTabPrecoByProduto" />
     <collection property="servicos" column="id" select="ServicoMap.fetchPlanoByServico" />
     <collection property="imagens" column="id" select="ImagemMap.fetchImagemByPlano" /> -->
@@ -105,7 +105,7 @@
 	    	<if test="dataFinal!= null"> dataFinal=#{dataFinal},</if>
 	    	<if test="descricao!= null"> descricao=#{descricao},</if>
 	    	<if test="numeroContrato!= null"> numeroContrato=#{numeroContrato},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE

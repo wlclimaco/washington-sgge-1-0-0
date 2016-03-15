@@ -3657,3 +3657,92 @@ WITH (
 );
 ALTER TABLE exame
   OWNER TO postgres;
+
+  /* ---------------------------------------------------------------*/
+DROP SEQUENCE tributos_id_seq;
+
+CREATE SEQUENCE tributos_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE tributos_id_seq
+  OWNER TO postgres;
+
+DROP TABLE tributos;
+CREATE TABLE tributos(
+	id             integer NOT NULL DEFAULT nextval('tributos_id_seq'::regclass),
+	parentId		integer NULL,
+	cstId			integer NULL,
+	icms			float null,
+	st				float null,
+	mva				float null,
+	csosnId			integer NULL,
+	ipi				float null,
+	iat				float null,
+	ippt			float null,
+	incidencia		integer NULL,
+	processId    integer NULL,
+	create_date  bigint,
+    create_user  character varying(50) NULL,
+    modify_date  bigint,
+    modify_user  character varying(50) NULL,
+CONSTRAINT tributos_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE tributos
+  OWNER TO postgres;
+
+/* ---------------------------------------------------------------*/
+    /* ---------------------------------------------------------------*/
+DROP SEQUENCE produto_id_seq;
+
+CREATE SEQUENCE produto_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE produto_id_seq
+  OWNER TO postgres;
+
+DROP TABLE produto;
+CREATE TABLE produto(
+	id             integer NOT NULL DEFAULT nextval('produto_id_seq'::regclass),
+	codigo character varying(50) NULL,
+	cdBarras  character varying(50) NULL,
+	classificacao integer NULL,
+	dataCreate bigint,
+	produto character varying(50) NULL,
+	aplicacao character varying(50) NULL,
+	localizacao character varying(50) NULL,
+	dataValidade bigint,
+	comissao character varying(50) NULL,
+	fracao character varying(50) NULL,
+	uniMed integer NULL,
+	grupo integer NULL,
+	subGrupo integer NULL,
+	marca integer NULL,
+	porcao integer null,
+	pesoBruto real NULL,
+	pesoLiquido real NULL,
+	modoUso character varying(50) NULL,
+	tributacao integer NULL,
+	processId    integer NULL,
+	emprId integer NULL,
+	create_date  bigint,
+    create_user  character varying(50) NULL,
+    modify_date  bigint,
+    modify_user  character varying(50) NULL,
+CONSTRAINT produto_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE produto
+  OWNER TO postgres;
+
+/* ---------------------------------------------------------------*/

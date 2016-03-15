@@ -39,9 +39,9 @@
    	<result property="emprId" column="emprId"/>
    	<result property="entidadeId" column="entidadeId"/>
 	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
   </resultMap>
 
   <!--
@@ -96,7 +96,7 @@
 	    	<if test="valor!= null"> valor=#{valor},</if>
 	    	<if test="dataProInicial!= null"> dataProInicial=#{dataProInicial},</if>
 	    	<if test="dataProFinal!= null"> dataProFinal=#{dataProFinal},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE

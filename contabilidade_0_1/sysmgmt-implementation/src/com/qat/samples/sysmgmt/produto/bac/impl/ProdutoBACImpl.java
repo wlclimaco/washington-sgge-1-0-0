@@ -192,19 +192,19 @@ public class ProdutoBACImpl implements IProdutoBAC
 	@Override
 	public InternalResultsResponse<Plano> insertPlano(PlanoMaintenanceRequest request)
 	{
-		return getProdutoDAC().insertPlano(request);
+		return getProdutoDAC().insertPlano(request.getPlano());
 	}
 
 	@Override
 	public InternalResultsResponse<Plano> updatePlano(PlanoMaintenanceRequest request)
 	{
-		return getProdutoDAC().updatePlano(request);
+		return getProdutoDAC().updatePlano(request.getPlano());
 	}
 
 	@Override
 	public InternalResponse deletePlano(PlanoMaintenanceRequest request)
 	{
-		return getProdutoDAC().deletePlano(request);
+		return getProdutoDAC().deletePlano(request.getPlano());
 	}
 
 	@Override

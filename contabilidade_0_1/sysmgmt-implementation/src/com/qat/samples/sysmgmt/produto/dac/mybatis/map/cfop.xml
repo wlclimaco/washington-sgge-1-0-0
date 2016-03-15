@@ -37,9 +37,9 @@
    	<result property="classFiscal" column="classFiscal"/>
 	<result property="observacao" column="observacao"/>
 	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
   </resultMap>
 
    <resultMap id="cfopPessoaResult" type="CfopPessoa" >
@@ -47,9 +47,9 @@
 	<result property="parentId" column="parentId" />
 	<result property="processId" column="processId" />
 	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
 	<association property="idCfop"    column="idCfop" select="fetchCfopById"  />
   </resultMap>
   <!--
@@ -135,7 +135,7 @@
 	    	<if test="cstPrincipal!= null"> cstPrincipal=#{cstPrincipal},</if>
 	    	<if test="classFiscal != null"> classFiscal= #{classFiscal},</if>
 	    	<if test="observacao!= null"> observacao=#{observacao},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE

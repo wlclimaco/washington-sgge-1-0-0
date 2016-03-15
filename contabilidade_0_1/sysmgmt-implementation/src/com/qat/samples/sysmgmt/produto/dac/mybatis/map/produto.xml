@@ -6,380 +6,273 @@
 
 <mapper namespace="ProdutoMap">
 
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
 
-  <!-- Result maps describe the mapping between the columns returned
-       from a query, and the class properties.  A result map isn't
-       necessary if the columns (or aliases) match to the properties
-       exactly. produtoid, codbarra, nome, marca, menu, submenu, trimenu, unimed,
-            precoid, controleid, foto, supermercadoid-->
-  <resultMap id="ProdutoResult" type="Produto">
-    <result property="id" column="produtoid"/>
-    <result property="codBarra" column="codbarra"/>
-    <result property="nome" column="nome"/>
-    <result property="descricao" column="descricao"/>
-    <result property="foto" column="foto"/>
-    <association property="marca" column="marca" javaType="Cadastro" select="fetchMarcaByCode" />
-    <association property="menu" column="menu" javaType="Cadastro" select="fetchMenuByCode" />
-    <association property="embalagem" column="embalagem" javaType="Embalagem" select="fetchUniMedByEmbalagem" />
-    <collection property="precos" column="produtoid" select="PrecoMap.fetchPrecoByProduto" />
-    <collection property="acessos" column="produtoid" select="ControleAcessMap.fetchControleAcessByProduto" />
+  	<!--
+/** The SendSolv id for the account. */
+	private Integer id;
+	private String codigo;
+	private String cdBarras;
+	private Classificacao classificacao;
+	private Long dataCreate;
+	private String produto;
+	private String aplicacao;
+	private String localizacao;
+	private Long dataValidade;
+	private String comissao;
+	private String fracao;
+	private UniMed uniMed;
+	private Grupo grupo;
+	private SubGrupo subGrupo;
+	private Marca marca;
+	private Double porcao;
+	private Double pesoBruto;
+	private Double pesoLiquido;
+	private String modoUso;
+	private Tributacao tributacao;
+	private List<Estoque> estoqueList;
+	private List<TabPreco> precoList;
+	private List<Custo> custoList;
+	private List<Porcao> porcaoList;
+	private List<Rentabilidade> rentabilidadeList;
+	private List<Cfop> cfopList;
+	private List<Fornecedor> fornecedorList;
+       -->
+
+  <resultMap id="produtoResult" type="Produto" >
+  	<result property="id" column="id" />
+	<result property="codigo" column="codigo" />
+	<result property="cdBarras" column="cdBarras" />
+	<result property="dataCreate" column="dataCreate" />
+	<result property="produto" column="produto" />
+	<result property="aplicacao" column="aplicacao" />
+	<result property="localizacao" column="localizacao" />
+	<result property="dataValidade" column="dataValidade" />
+	<result property="comissao" column="comissao" />
+	<result property="fracao" column="fracao" />
+	<result property="porcao" column="porcao" />
+	<result property="pesoBruto" column="pesoBruto" />
+	<result property="pesoLiquido" column="pesoLiquido" />
+	<result property="emprId" column="emprId" />
+	<result property="processId" column="processId" />
+	<result property="modoUso" column="modoUso" />
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+<!-- 	<association property="classificacao"    column="classificacao" select="ClassificaMap.fetchClassificacaoById"  /> -->
+	<association property="uniMed"    column="uniMed" select="UniMedMap.fetchUniMedByProduto"  />
+	<association property="grupo"    column="grupo" select="GrupoMap.fetchGrupoByProduto"  />
+	<association property="subGrupo"    column="subGrupo" select="SubGrupoMap.fetchSubGrupoByProduto"  />
+	<association property="marca"    column="marca" select="MarcaMap.fetchMarcaByProduto"  />
+	<association property="tributacao"    column="tributacao" select="TributosMap.fetchTributacaoByProduto"  />
+	<collection property="estoqueList" column="id" select="EstoqueMap.fetchEstoqueByProduto"/>
+<!-- 	<collection property="precoList" column="{countryCode=recipient_country_code, code=recipient_state_province_region_id}" select="countryMap.fetchStateProvinceRegionByCountryCodeAndCode"/> -->
+	<collection property="precoList" column="{id=id,entidadeId=entidadeId}" select="TabPrecoMap.fetchTabPrecoByProduto"/>
+	<collection property="custoList" column="id" select="CustoMap.fetchCustoByProduto"/>
+	<collection property="porcaoList" column="id" select="PorcaoMap.fetchPorcaoByProduto"/>
+	<collection property="rentabilidadeList" column="id" select="RentabilidadeMap.fetchRentabilidadeByProduto"/>
+	<collection property="cfopList" column="id" select="CfopMap.fetchCfopByProd"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByProduto"/>
   </resultMap>
 
-  <resultMap id="ProdutoResult2" type="Produto">
-    <result property="id" column="produtoid"/>
-    <result property="codBarra" column="codbarra"/>
-    <result property="nome" column="nome"/>
-    <result property="descricao" column="descricao"/>
-    <result property="foto" column="foto"/>
-    <association property="marca" column="marca" javaType="Cadastro" select="fetchMarcaByCode" />
-    <association property="menu" column="menu" javaType="Cadastro" select="fetchMenuByCode" />
-    <association property="embalagem" column="embalagem" javaType="Embalagem" select="fetchUniMedByEmbalagem" />
-    <collection property="acessos" column="produtoid" select="ControleAcessMap.fetchControleAcessByProduto" />
+   <resultMap id="produtoPessoaResult" type="ProdutoPessoa" >
+  	<result property="id" column="id" />
+	<result property="parentId" column="parentId" />
+	<result property="processId" column="processId" />
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	<association property="prodId"    column="prodId" select="ClassificaMap.fetchClassificacaoById"  />
   </resultMap>
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
 
-   <resultMap id="CadastroResult" type="Cadastro">
-    <result property="id" column="cadastroid"/>
-    <result property="tableTypeEnumValue" column="acao"/>
-    <result property="nome" column="nome"/>
-    <result property="descricao" column="descricao"/>
-    <result property="controleid" column="controleid"/>
-    <association property="produtos" column="cadastroid" javaType="Integer" select="fetchCountProduto"/>
-    <collection property="acessos" column="cadastroid" select="ControleAcessMap.fetchControleAcessByCadastro" />
-  </resultMap>
-
-  <resultMap id="CadastroResults" type="Cadastro">
-    <result property="id" column="cadastroid"/>
-    <result property="tableTypeEnumValue" column="acao"/>
-    <result property="nome" column="nome"/>
-    <result property="descricao" column="descricao"/>
-    <result property="controleid" column="controleid"/>
-    <collection property="acessos" column="cadastroid" select="ControleAcessMap.fetchControleAcessByProduto" />
-  </resultMap>
-
-  <resultMap id="EmbalagemResult" type="Embalagem">
-    <result property="id" column="id"/>
-    <result property="nome" column="nome"/>
-    <result property="qnt" column="qnt"/>
-    <association property="produtos" column="id" javaType="Integer" select="fetchCountEmbalagem"/>
-    <association property="unimedid" column="unimedid" javaType="UniMed" select="fetchUniMedByCode" />
-    <collection property="acessos" column="id" select="ControleAcessMap.fetchAllControleByEmbalagem" />
-  </resultMap>
-
-  <resultMap id="UniMedResult" type="UniMed">
-    <result property="id" column="id"/>
-    <result property="nome" column="nome"/>
-    <result property="sigla" column="sigla"/>
-    <collection property="acessos" column="id" select="ControleAcessMap.fetchAllControleByUnimed" />
-  </resultMap>
-
-
-
-  <select id="fetchUniMedByEmbalagem" parameterType="int" resultMap="EmbalagemResult">
-	    SELECT
-	    <include refid="allEmbalagemColumns" />
-	    FROM embalagem where id = #{id} order by nome,qnt
-    </select>
-
-  <select id="fetchCountProduto" parameterType="Integer" resultType="Integer">
-    select count(*) as Total from produto t where t.menu = #{id}
-  </select>
-
-   <sql id="allEmbalagemColumns">
-		id, nome, qnt, unimedid
-   </sql>
-
-   <sql id="allUniMedColumns">
-		id, sigla, nome
-   </sql>
-
- <select id="fetchCountEmbalagem" parameterType="Integer" resultType="Integer">
-   select count(*) as total from produto p ,embalagem e where p.embalagem = e.id and p.embalagem = #{id}
-  </select>
-
-
-  <sql id="allCadastroColumns">
-		cadastroid, acao, nome,descricao
+ <sql id="allProdutoPessoaColumns">
+		 parentId
+		,processId
+		,prodId
+		,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
   </sql>
 
-  <sql id="allCadastroColumnsWithQualifier">
-		p.cadastroid, p.acao, p.nome,p.descricao
+<sql id="allProdutoPessoaValues">
+  		#{parentId},
+		#{processId},
+		#{prodId.id},
+		<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
-<sql id="allProdutoColumns">
-		PRODUTOID, CODBARRA,EMBALAGEM, NOME, MARCA, MENU,DESCRICAO SUBMENU, TRIMENU, UNIMED,PRECOID, CONTROLEID, FOTO, SUPERMERCADOID
+  <sql id="allProdutoColumns">
+		 codigo
+		,cdBarras
+		,dataCreate
+		,produto
+		,aplicacao
+		,localizacao
+		,dataValidade
+		,comissao
+		,fracao
+		,porcao
+		,pesoBruto
+		,pesoLiquido
+		,modoUso
+		,classificacao
+		,uniMed
+		,grupo
+		,subGrupo
+		,marca
+		,processId
+		,tributacao
+		,emprId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
   </sql>
 
-  <sql id="allProdutoColumnsWithQualifier">
-		p.PRODUTOID,p.Embalagem, p.CODBARRA, p.NOME,p.DESCRICAO, p.MARCA, p.MENU, p.SUBMENU, p.TRIMENU, p.UNIMED,
-            p.PRECOID, p.CONTROLEID, p.FOTO, p.SUPERMERCADOID
+  <sql id="allProdutoValues">
+  		#{codigo},
+		#{cdBarras},
+		#{dataCreate},
+		#{produto},
+		#{aplicacao},
+		#{localizacao},
+		#{dataValidade},
+		#{comissao},
+		#{fracao},
+		#{porcao.id},
+		#{pesoBruto},
+		#{pesoLiquido},
+		#{modoUso},
+		#{classificacao.id},
+		#{uniMed.id},
+		#{grupo.id},
+		#{subGrupo.id},
+		#{marca.id},
+		#{processId},
+		#{tributacao.id},
+		#{emprId},
+    	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertProduto" parameterType="Produto" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO produto (
+		<include refid="allProdutoColumns" />
+      )
+    VALUES (<include refid="allProdutoValues" /> )
+  </insert>
 
-  <select id="fetchAllProdutosBySupermercado" parameterType="int" resultMap="ProdutoResult2">
-	select p.* from produto p,tabpreco t where p.produtoid = t.produtoid and t.supermercadoid = #{id}
-	order by p.nome
-    </select>
 
-    <select id="fetchMarcaByCode" parameterType="int" resultMap="CadastroResults">
-	    SELECT
-	    <include refid="allCadastroColumns" />
-	    FROM cadastro where acao = 3 and cadastroid = #{id}  ORDER BY nome ASC
-    </select>
+  <insert id="insertProdutoPessoa" parameterType="ProdutoPessoa" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO produtoPessoa (
+		<include refid="allProdutoPessoaColumns" />
+      )
+    VALUES (<include refid="allProdutoPessoaValues" /> )
+  </insert>
 
-    <select id="fetchProdutosByMenu" parameterType="int" resultMap="ProdutoResult">
-	    SELECT
-	    <include refid="allProdutoColumns" />
-	    FROM produto where menu = #{id}  ORDER BY nome ASC
-    </select>
 
-     <select id="fetchProdutosByMarca" parameterType="int" resultMap="ProdutoResult">
-	    SELECT
-	    <include refid="allProdutoColumns" />
-	    FROM produto where marca = #{id} or
-	    				   MENU = #{id} or
-	    				   UNIMED = #{id}
-	    				 ORDER BY nome ASC
-    </select>
+	<!--
+		SQL Update Statements.
+ 	-->
 
-     <select id="fetchProdutosBySubMenu" parameterType="int" resultMap="ProdutoResult">
-	    SELECT
-	    <include refid="allProdutoColumns" />
-	    FROM produto where submenu = #{id}  ORDER BY nome ASC
-    </select>
+  <update id="updateProduto" parameterType="Produto">
+    UPDATE produto
+    	<set>
+	    	<if test="codigo!= null">codigo = #{codigo},</if>
+			<if test="cdBarras!= null">cdBarras = #{cdBarras},</if>
+			<if test="dataCreate!= null">dataCreate = #{dataCreate},</if>
+			<if test="produto!= null">produto = #{produto},</if>
+			<if test="aplicacao!= null">aplicacao = #{aplicacao},</if>
+			<if test="localizacao!= null">localizacao = #{localizacao},</if>
+			<if test="dataValidade!= null">dataValidade = #{dataValidade},</if>
+			<if test="comissao!= null">comissao = #{comissao},</if>
+			<if test="fracao!= null">fracao = #{fracao},</if>
+			<if test="porcao!= null">porcao = #{porcao},</if>
+			<if test="pesoBruto!= null">pesoBruto = #{pesoBruto},</if>
+			<if test="pesoLiquido!= null">pesoLiquido = #{pesoLiquido},</if>
+			<if test="modoUso!= null">modoUso = #{modoUso},</if>
+			<if test="classificacao.id!= null">classificacao = #{classificacao.id},</if>
+			<if test="uniMed.id!= null">uniMed = #{uniMed.id},</if>
+			<if test="grupo.id!= null">grupo = #{grupo.id},</if>
+			<if test="subGrupo.id!= null">subGrupo = #{subGrupo.id},</if>
+			<if test="marca.id!= null">marca = #{marca.id},</if>
+			<if test="tributacao.id!= null">tributacao = #{tributacao.id},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
 
-    <select id="fetchProdutosByTriMenu" parameterType="int" resultMap="ProdutoResult">
-	    SELECT
-	    <include refid="allProdutoColumns" />
-	    FROM produto where trimenu = #{id}  ORDER BY nome ASC
-    </select>
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteProdutoById" parameterType="Integer">
+    	DELETE FROM produto WHERE id = #{id}
+  </delete>
 
-    <select id="fetchProdutosByUnimed" parameterType="int" resultMap="ProdutoResult">
-	    SELECT
-	    <include refid="allProdutoColumns" />
-	    FROM produto where unimed = #{id}  ORDER BY nome ASC
-    </select>
-
-    <select id="fetchMenuByCode" parameterType="int" resultMap="CadastroResults">
-	    SELECT
-	    <include refid="allCadastroColumns" />
-	    FROM cadastro where acao in(4,5,6) and cadastroid = #{id}  ORDER BY nome ASC
-    </select>
-
-    <select id="fetchMenuByProduto" parameterType="int" resultMap="CadastroResults">
-	    SELECT
-	    <include refid="allCadastroColumns" />
-	    FROM cadastro where acao in(4,5,6)  ORDER BY nome ASC
-    </select>
-
-    <select id="fetchSubMenuByCode" parameterType="int" resultMap="CadastroResult">
-	    SELECT
-	    <include refid="allCadastroColumns" />
-	    FROM cadastro where acao = 3 and cadastroid = #{id}  ORDER BY nome ASC
-    </select>
-
-    <select id="fetchTriMenuByCode" parameterType="int" resultMap="CadastroResult">
-	    SELECT
-	    <include refid="allCadastroColumns" />
-	    FROM cadastro where acao = 4 and cadastroid = #{id}  ORDER BY nome ASC
-    </select>
-
-    <select id="fetchUniMedByCode" parameterType="int" resultMap="UniMedResult">
-	    SELECT
-	    <include refid="allUniMedColumns" />
-	    FROM unimed where id = #{id}  ORDER BY nome DESC
-    </select>
-
-  <select id="fetchAllCadastro" parameterType="Cadastro" resultMap="CadastroResult">
-    SELECT
-    <include refid="allCadastroColumns" />
-    FROM cadastro where acao = #{tableTypeEnumValue}} ORDER BY nome ASC
-  </select>
-
-   <select id="fetchAllProduto" parameterType="Produto" resultMap="ProdutoResult">
-    SELECT
-    <include refid="allProdutoColumns" />
-    FROM produto  ORDER BY nome ASC
-  </select>
-
-  <select id="fetchAllCadastroPagedBatch" parameterType="Cadastro" resultMap="CadastroResult">
-
-		SELECT <include refid="allCadastroColumns" />
-   		  FROM cadastro where acao =  #{tableTypeEnumValue} ORDER BY cadastroid ASC
-		  OFFSET ( #{_page} * #{_pagesize} )
-		  LIMIT #{_pagesize}
-  </select>
-
-   <select id="fetchAllProdutoPagedBatch" parameterType="Produto" resultMap="ProdutoResult">
-
-		SELECT <include refid="allProdutoColumns" />
-   		  FROM produto  ORDER BY produtoid ASC
-		  OFFSET ( #{_page} * #{_pagesize} )
-		  LIMIT #{_pagesize}
-  </select>
-
-  <select id="fetchCadastroRowCount" parameterType="CadastroInquiryRequest" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM CADASTRO WHERE ACAO =  #{cadastro.tableTypeEnumValue}
-  </select>
-
+	<!--
+		SQL Fetch Statements.
+ 	-->
   <select id="fetchProdutoRowCount" parameterType="ProdutoInquiryRequest" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM PRODUTO
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM produto
   </select>
 
-  <select id="fetchAllCadastrosRequest" parameterType="CadastroInquiryRequest" resultMap="CadastroResult">
-		SELECT <include refid="allCadastroColumns" />
-   		  FROM cadastro where acao =  #{cadastro.tableTypeEnumValue} ORDER BY cadastroid ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
-  </select>
-
-  <select id="fetchAllProdutosRequest" parameterType="ProdutoInquiryRequest" resultMap="ProdutoResult">
-		SELECT <include refid="allProdutoColumns" />
-   		  FROM PRODUTO ORDER BY produtoid ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
-  </select>
-
-  <select id="fetchAllProdutos" parameterType="ProdutoInquiryRequest" resultMap="ProdutoResult">
-		SELECT <include refid="allProdutoColumns" />
-   		  FROM PRODUTO
-   		  ORDER BY nome ASC
-  </select>
-
-   <select id="fetchAllProdutosSupermercado" parameterType="ProdutoInquiryRequest" resultMap="ProdutoResult">
-		SELECT <include refid="allProdutoColumns" />
-   		  FROM PRODUTO
-   		  <where>
-			<if test="produto.marca.id != null">and marca = #{produto.marca.id}</if>
-			<if test="produto.menu.id != null">and menu = #{produto.menu.id}</if>
-			<if test="produto.codBarra != null">and codBarra = #{produto.codBarra}</if>
-			<if test="produto.nome != null">AND nome = #{produto.nome}</if>
-			<if test="produto.unimed.id != null">AND unimed = #{produto.unimed.id}</if>
-		</where>
-   		  ORDER BY nome ASC
-  </select>
-
-  <select id="fetchAllCadastros" parameterType="Cadastro" resultMap="CadastroResult">
-		SELECT <include refid="allCadastroColumns" />
-   		  FROM Cadastro
-		<where>
-			<if test="tableTypeEnumValue != 1">acao = #{tableTypeEnumValue}</if>
-			<if test="descricao != null">and descricao = #{descricao}</if>
-			<if test="nome != null">AND nome = #{nome}</if>
-
-		</where>
-   		  ORDER BY nome ASC
-  </select>
-
-  <select id="fetchAllCadastrosTotal" parameterType="Cadastro" resultMap="CadastroResult">
-		SELECT <include refid="allCadastroColumns" />
-   		  FROM Cadastro
-   		  ORDER BY cadastroid ASC
-  </select>
-
-  <select id="fetchCadastroById" parameterType="Cadastro" resultMap="CadastroResult">
+  <select id="fetchAllProdutos" resultMap="produtoResult">
     SELECT
-   <include refid="allCadastroColumns" />
-     FROM cadastro where acao =  #{tableTypeEnumValue} AND cadastroid = #{id}
+	<include refid="allProdutoColumns" />
+    FROM produto ORDER BY id ASC
   </select>
 
-   <select id="fetchProdutoById" parameterType="Produto" resultMap="ProdutoResult">
-    SELECT
-   <include refid="allProdutoColumns" />
-     FROM PRODUTO where produtoid = #{id}
-  </select>
-  <select id="fetchProdutoByIdInt" parameterType="int" resultMap="ProdutoResult">
-    SELECT
-   <include refid="allProdutoColumns" />
-     FROM PRODUTO where produtoid = #{id}
+  <select id="fetchProdutoById" parameterType="FetchByIdRequest" resultMap="produtoResult">
+	SELECT id,
+	<include refid="allProdutoColumns" />
+    FROM produto
+    where id = #{fetchId}
+    ORDER BY id ASC
   </select>
 
-
-  <select id="insertCadastro" parameterType="Cadastro" resultType="int" statementType="CALLABLE">
-        { call ins_cadastro( #{descricao}, #{nome},#{tableTypeEnumValue},#{userId} ) }
-
+  <select id="fetchAllProdutosByRequest" parameterType="ProdutoInquiryRequest" resultMap="produtoResult">
+	 SELECT id,<include refid="allProdutoColumns" />
+        FROM produto
   </select>
 
-  <select id="insertProduto" parameterType="HashMap" resultType="int" statementType="CALLABLE">
-        { call ins_produto( #{produtoid} , #{codbarra} , #{nome} , #{marca} , #{menu}, #{unimed} , #{foto} ,#{descricao} ,  #{usuarioid} ) }
+  <select id="fetchProdutoByProduto" parameterType="Integer" resultMap="produtoResult">
+	  	SELECT F.*
+
+		  FROM produtoProd AS C
+
+		  INNER JOIN produto AS F
+
+		    ON F.id like C.Produtoid
+		where  c.prodId = #{id}
   </select>
 
-
-  <select id="updateCadastro" parameterType="Cadastro" resultType="int" statementType="CALLABLE">
-     { call upd_cadastro(  #{id},#{descricao}, #{nome},#{tableTypeEnumValue},#{userId} ) }
+    <select id="fetchProdutoByPessoa" parameterType="Integer" resultMap="produtoPessoaResult">
+	 SELECT id,<include refid="allProdutoPessoaColumns" />
+        FROM produtoPessoa
+     WHERE 1 = 1
+		  AND parentid = #{id}
   </select>
 
-  <select id="updateProduto" parameterType="HashMap" resultType="int" statementType="CALLABLE">
-	{ call upd_produto( #{produtoid} , #{codbarra} , #{nome} , #{marca} , #{menu}, #{unimed} , #{foto} ,#{descricao} ,  #{usuarioid} ) }
-  </select>
-
-  <select id="deleteCadastroById" parameterType="Cadastro" resultType="int" statementType="CALLABLE">
-        { call del_cadastro( #{id} , #{tableTypeEnumValue}, #{userId} ) }
-
-  </select>
-
-  <delete id="deleteAllCadastros">
-	DELETE FROM cADASTRO
-  </delete>
-
-   <select id="deleteProdutoById" parameterType="Produto" resultType="int" statementType="CALLABLE">
-   { call del_produto( #{id} , #{userId} ) }
-  </select>
-
-  <delete id="deleteAllProdutos">
-	DELETE FROM PRODUTO
-  </delete>
-
-
-    <select id="insertEmbalagem" parameterType="Embalagem" resultType="int" statementType="CALLABLE">
-        { call ins_embalagem( #{nome} , #{qnt} , #{unimedid.id},  #{userId} ) }
-
-  </select>
-
-  <select id="insertUniMed" parameterType="UniMed" resultType="int" statementType="CALLABLE">
-        { call ins_unimed( #{sigla},#{nome},  #{userId} ) }
+  <select id="fetchAllProdutoByPlano" parameterType="Integer" resultMap="produtoPessoaResult">
+	 SELECT id,<include refid="allProdutoPessoaColumns" />
+        FROM produtoPessoa
+     WHERE 1 = 1
+		  AND parentid = #{id}
   </select>
 
 
-  <select id="updateEmbalagem" parameterType="Embalagem" resultType="int" statementType="CALLABLE">
-     { call upd_embalagem(  #{id}, #{nome} , #{qnt} , #{unimedid.id},  #{userId} ) }
-  </select>
 
-  <select id="updateUniMed" parameterType="UniMed" resultType="int" statementType="CALLABLE">
-	{ call upd_unimed( #{id}, #{sigla}, #{nome},  #{userId} ) }
-  </select>
-
-  <select id="deleteEmbalagemById" parameterType="Embalagem" resultType="int" statementType="CALLABLE">
-        { call del_embalagem( #{id} , #{userId} ) }
-  </select>
-
-   <select id="deleteUniMedById" parameterType="UniMed" resultType="int" statementType="CALLABLE">
-        { call del_unimed( #{id} ,  #{userId} ) }
-  </select>
-
-  <select id="fetchAllEmbalagems" parameterType="Embalagem" resultMap="EmbalagemResult">
-		SELECT <include refid="allEmbalagemColumns" />
-   		  FROM Embalagem
-		<where>
-			<if test="id !=null">id is not null</if>
-			<if test="id !=null">and id = #{id}</if>
-			<if test="nome != null">and nome = #{nome}</if>
-			<if test="qnt != null">and qnt = #{qnt}</if>
-
-		</where>
-   		  ORDER BY qnt ASC
-  </select>
-
-  <select id="fetchAllUniMeds" parameterType="UniMed" resultMap="UniMedResult">
-		SELECT <include refid="allUniMedColumns" />
-   		  FROM unimed
-		<where>
-			<if test="id !=null">id is not null</if>
-			<if test="id !=null">and id = #{id}</if>
-			<if test="nome != null">nome = #{nome}</if>
-			<if test="sigla != null">and sigla = #{sigla}</if>
-
-		</where>
-   		  ORDER BY id DESC
-  </select>
 
 </mapper>

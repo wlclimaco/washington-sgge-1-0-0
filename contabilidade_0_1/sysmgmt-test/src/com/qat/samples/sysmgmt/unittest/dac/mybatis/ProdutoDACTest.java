@@ -124,7 +124,7 @@ public class ProdutoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 	public void testfetchProdutoById() throws Exception
 	{
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(2);
+		request.setFetchId(1000);
 		InternalResultsResponse<Produto> response = getProdutoDAC().fetchProdutoById(request);
 		assertTrue(response.getResultsList().size() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
@@ -823,7 +823,7 @@ public class ProdutoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertCadastro.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertProduto.sql", false);
 	}
 
 }

@@ -41,6 +41,46 @@
 <!-- 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" /> -->
 <!--   	</bean> -->
 
+	<bean id="classificacaoDACTarget" class="com.qat.samples.sysmgmt.util.dac.mybatis.ClassificacaoDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="uniMedDACTarget" class="com.qat.samples.sysmgmt.produto.dac.mybatis.UniMedDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="grupoDACTarget" class="com.qat.samples.sysmgmt.produto.dac.mybatis.GrupoDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="subGrupoDACTarget" class="com.qat.samples.sysmgmt.produto.dac.mybatis.SubGrupoDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="marcaDACTarget" class="com.qat.samples.sysmgmt.produto.dac.mybatis.MarcaDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="tributacaoDACTarget" class="com.qat.samples.sysmgmt.produto.dac.mybatis.TributacaoDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="estoqueDACTarget" class="com.qat.samples.sysmgmt.produto.dac.mybatis.EstoqueDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="custoDACTarget" class="com.qat.samples.sysmgmt.produto.dac.mybatis.CustoDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="porcaoDACTarget" class="com.qat.samples.sysmgmt.produto.dac.mybatis.PorcaoDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
+  	<bean id="rentabilidadeDACTarget" class="com.qat.samples.sysmgmt.produto.dac.mybatis.RentabilidadeDACImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+  	</bean>
+
   	<bean id="produtoDACTarget" class="com.qat.samples.sysmgmt.produto.dac.mybatis.ProdutoDACImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 		<property name="historicoDAC" ref="historicoDACTarget"/>
@@ -50,6 +90,18 @@
 		<property name="imagemDAC" ref="imagemDACTarget"/>
 		<property name="servicoDAC" ref="servicoDACTarget"/>
 		<property name="estadoDAC" ref="estadoDACTarget"/>
+		<property name="classificacaoDAC" ref="classificacaoDACTarget"/>
+		<property name="uniMedDAC" ref="uniMedDACTarget"/>
+		<property name="grupoDAC" ref="grupoDACTarget"/>
+		<property name="subGrupoDAC" ref="subGrupoDACTarget"/>
+		<property name="marcaDAC" ref="marcaDACTarget"/>
+		<property name="tributacaoDAC" ref="tributacaoDACTarget"/>
+		<property name="estoqueDAC" ref="estoqueDACTarget"/>
+		<property name="custoDAC" ref="custoDACTarget"/>
+		<property name="porcaoDAC" ref="porcaoDACTarget"/>
+		<property name="rentabilidadeDAC" ref="rentabilidadeDACTarget"/>
+		<property name="cfopDAC" ref="cfopDACTarget"/>
+
   	</bean>
 
   	<bean id="estadoDACTarget" class="com.qat.samples.sysmgmt.util.dac.mybatis.EstadoDACImpl">
