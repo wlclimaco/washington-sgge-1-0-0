@@ -69,7 +69,7 @@
 	<association property="tributacao"    column="tributacao" select="TributosMap.fetchTributacaoByProduto"  />
 	<collection property="estoqueList" column="id" select="EstoqueMap.fetchEstoqueByProduto"/>
 <!-- 	<collection property="precoList" column="{countryCode=recipient_country_code, code=recipient_state_province_region_id}" select="countryMap.fetchStateProvinceRegionByCountryCodeAndCode"/> -->
-	<collection property="precoList" column="{id=id,entidadeId=entidadeId}" select="TabPrecoMap.fetchTabPrecoByProduto"/>
+	<collection property="precoList" column="{id=id,entidadeId=emprId}" select="TabPrecoMap.fetchTabPrecoByProduto"/>
 	<collection property="custoList" column="id" select="CustoMap.fetchCustoByProduto"/>
 	<collection property="porcaoList" column="id" select="PorcaoMap.fetchPorcaoByProduto"/>
 	<collection property="rentabilidadeList" column="id" select="RentabilidadeMap.fetchRentabilidadeByProduto"/>

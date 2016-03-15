@@ -134,6 +134,12 @@
      WHERE tabela in(16,17,18,19,23) and PARENTID = #{id}
   </select>
 
+
+  <select id="fetchEnderecoByMarcaId" parameterType="Integer" resultMap="enderecoResult">
+     SELECT * FROM endereco
+     WHERE tabela in(50) and PARENTID = #{id}
+  </select>
+
   <select id="fetchEnderecoByEmpresaId" parameterType="Integer" resultMap="enderecoResult">
      SELECT * FROM endereco
      WHERE id = #{id}

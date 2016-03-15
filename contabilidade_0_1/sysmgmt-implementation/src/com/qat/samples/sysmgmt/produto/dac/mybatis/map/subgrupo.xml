@@ -40,13 +40,13 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
 	 <sql id="allSubGrupoProdColumns">
-		 b.prodId
-		,b.processId
-		,b.subGrupoId
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+		 prodId
+		,processId
+		,subGrupoId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
   </sql>
 
   <sql id="allSubGrupoProdValues">
@@ -57,12 +57,12 @@
   </sql>
 
   <sql id="allSubGrupoColumns">
-		 b.descricao
-		,b.subGrupo
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+		 descricao
+		,subGrupo
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
   </sql>
 
   <sql id="allSubGrupoValues">
@@ -147,7 +147,7 @@
   </select>
 
   <select id="fetchSubGrupoById" parameterType="FetchByIdRequest" resultMap="subGrupoResult">
-	SELECT b.id,
+	SELECT id,
 	<include refid="allSubGrupoColumns" />
     FROM subGrupo b
     where id = #{id}
@@ -157,13 +157,13 @@
   <select id="fetchAllSubGruposByRequest" parameterType="SubGrupoInquiryRequest" resultMap="subGrupoResult">
       SELECT * FROM
     			(
-    				SELECT b.id,
+    				SELECT id,
     						<include refid="allSubGrupoColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
     				FROM subgrupo b
 					WHERE 2 = 2
 					<if test="criteria.id != null">
-						AND b.id = #{criteria.id}
+						AND id = #{criteria.id}
 					</if>
     			) LIST
 				<choose>
@@ -181,7 +181,7 @@
   </select>
 
   <select id="fetchSubGrupoByProduto" parameterType="Integer" resultMap="subGrupoProdResult">
-	SELECT b.id,
+	SELECT id,
 	<include refid="allSubGrupoProdColumns" />
     FROM subGrupoProd b
     where prodId = #{id}

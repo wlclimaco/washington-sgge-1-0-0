@@ -15,8 +15,6 @@ public class Estoque extends ModelCosmeDamiao
 	/** The type of an account. */
 	private EstoqueTypeEnum estoqueTypeEnum;
 
-	private Integer entidadeId;
-
 	/** The description. */
 	private Long ultimoMov;
 
@@ -112,28 +110,12 @@ public class Estoque extends ModelCosmeDamiao
 		this.quant = quant;
 	}
 
-	/**
-	 * @return the entidadeId
-	 */
-	public Integer getEntidadeId()
-	{
-		return entidadeId;
-	}
-
-	/**
-	 * @param entidadeId the entidadeId to set
-	 */
-	public void setEntidadeId(Integer entidadeId)
-	{
-		this.entidadeId = entidadeId;
-	}
-
 	@Override
 	public String toString()
 	{
 		return "Estoque [getEstoqueTypeEnumValue()=" + getEstoqueTypeEnumValue() + ", getId()=" + getId()
 				+ ", getEstoqueTypeEnum()=" + getEstoqueTypeEnum() + ", getUltimoMov()=" + getUltimoMov()
-				+ ", getQuant()=" + getQuant() + ", getEntidadeId()=" + getEntidadeId() + ", toString()="
+				+ ", getQuant()=" + getQuant() + ", toString()="
 				+ super.toString() + "]";
 	}
 

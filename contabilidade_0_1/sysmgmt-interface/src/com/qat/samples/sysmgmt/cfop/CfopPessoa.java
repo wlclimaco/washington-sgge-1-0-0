@@ -30,6 +30,15 @@ public class CfopPessoa extends ModelCosmeDamiao
 		setModelAction(mode);
 	}
 
+	public CfopPessoa(Integer id, Cfop idCfop, Integer parentId, PersistanceActionEnum mode)
+	{
+		super();
+		this.id = id;
+		this.idCfop = idCfop;
+		setModelAction(mode);
+		setParentId(parentId);
+	}
+
 	/**
 	 * Gets the id.
 	 * 

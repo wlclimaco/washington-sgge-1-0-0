@@ -25,6 +25,7 @@ import com.qat.framework.model.response.InternalResponse.Status;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.cfop.Cfop;
 import com.qat.samples.sysmgmt.cfop.CfopPessoa;
+import com.qat.samples.sysmgmt.cfop.CfopTypeEnum;
 import com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest;
 import com.qat.samples.sysmgmt.contabilidade.Plano;
 import com.qat.samples.sysmgmt.fiscal.Classificacao;
@@ -107,6 +108,14 @@ public class ProdutoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		produto = mockProduto(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Produto> response = getProdutoDAC().insertProduto(produto);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(11);
+		InternalResultsResponse<Produto> responseA = getProdutoDAC().fetchProdutoById(request);
+		assertTrue(responseA.getResultsList().size() == 1);
+		assertTrue(responseA.getResultsList().get(0).getCfopList().size() == produto.getCfopList().size());
+		assertTrue(responseA.getResultsList().get(0).getClassificacao().getDescricao() == produto.getClassificacao()
+				.getDescricao());
+		assertTrue(responseA.getResultsList().get(0).getCustoList().size() == produto.getCustoList().size());
 
 	}
 
@@ -581,8 +590,7 @@ public class ProdutoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		produto.setCustoList(mockCusto(model));
 		produto.setPorcaoList(mockPorcao(model));
 		produto.setRentabilidadeList(mockRentabilidade(model));
-		produto.setCfopList(new ArrayList<CfopPessoa>());
-		produto.getCfopList().add(new CfopPessoa(1, PersistanceActionEnum.NONE));
+		produto.setCfopList(cfopList(model));
 		produto.setFornecedorList(new ArrayList<Fornecedor>());
 		produto.getFornecedorList().add(new Fornecedor());
 		produto.setModelAction(model);
@@ -641,6 +649,21 @@ public class ProdutoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		estoqueList.add(estoque);
 
 		return estoqueList;
+	}
+
+	public List<CfopPessoa> cfopList(PersistanceActionEnum action)
+	{
+		List<CfopPessoa> documentoList = new ArrayList<CfopPessoa>();
+		CfopPessoa documento = new CfopPessoa();
+		documento.setModelAction(action);
+		documento.setProcessId(1);
+		documento.setIdCfop(new Cfop(0, "cfop", "natureza", "simplificado", CfopTypeEnum.ENTRADA, 0.39, 0.15, 0.54,
+				0.9, 0.1, "observacao", action));
+		documento.setParentId(1);
+
+		documentoList.add(documento);
+		return documentoList;
+
 	}
 
 	public List<TabPreco> mockPreco(PersistanceActionEnum model)

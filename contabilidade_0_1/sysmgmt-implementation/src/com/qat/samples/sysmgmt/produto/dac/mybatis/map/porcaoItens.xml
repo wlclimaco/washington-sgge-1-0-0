@@ -37,7 +37,7 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allPorcaoItemColumns">
-		,b.nome
+		 b.nome
 		,b.porcao
       	,b.vd
       	,b.unimed
@@ -59,7 +59,7 @@
 		SQL Insert Statements.
  	-->
   <insert id="insertPorcaoItem" parameterType="PorcaoItem" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO porcaoItem (
+  	INSERT INTO porcaoItens (
 		<include refid="allPorcaoItemColumns" />
       )
     VALUES (<include refid="allPorcaoItemValues" /> )
@@ -71,7 +71,7 @@
  	-->
 
   <update id="updatePorcaoItem" parameterType="PorcaoItem">
-    UPDATE porcaoItem
+    UPDATE porcaoItens
     	<set>
     		<if test="nome!= null">nome = #{nome},</if>
 	    	<if test="porcao!= null">porcao=#{porcao},</if>
@@ -88,7 +88,7 @@
 		SQL Delete Statements.
    -->
   <delete id="deletePorcaoItemById" parameterType="Integer">
-    	DELETE FROM porcaoItem WHERE id = #{id}
+    	DELETE FROM porcaoItens WHERE id = #{id}
   </delete>
 
 	<!--
@@ -96,7 +96,7 @@
  	-->
   <select id="fetchPorcaoItemRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
-        FROM porcaoItem
+        FROM porcaoItens
      WHERE 1 = 1
      <if test="id != null">
 		  AND id = #{id}
@@ -106,35 +106,29 @@
   <select id="fetchAllPorcaoItems" resultMap="porcaoItemResult">
     SELECT
 	<include refid="allPorcaoItemColumns" />
-    FROM porcaoItem ORDER BY id ASC
+    FROM porcaoItens ORDER BY id ASC
   </select>
 
   <select id="fetchPorcaoItemById" parameterType="FetchByIdRequest" resultMap="porcaoItemResult">
 	SELECT b.id,
 	<include refid="allPorcaoItemColumns" />
-    FROM porcaoItem b
+    FROM porcaoItens b
     where id = #{id}
     ORDER BY id ASC
   </select>
 
   <select id="fetchAllPorcaoItemsByRequest" parameterType="PagedInquiryRequest" resultMap="porcaoItemResult">
 	 SELECT b.id,<include refid="allPorcaoItemColumns" />
-        FROM porcaoItem b
+        FROM porcaoItens b
      WHERE 1 = 1
-     <if test="id != null">
-		  AND b.id = #{id}
-	 </if>
+
   </select>
 
-  <select id="fetchPorcaoItemByPorcao" parameterType="Integer" resultMap="porcaoItemResult">
-	  	SELECT F.*
-
-		  FROM porcaoItemProd AS C
-
-		  INNER JOIN porcaoItem AS F
-
-		    ON F.id like C.PorcaoItemid
-		where  c.prodId = #{id}
+  <select id="fetchPorcaoItemByPorcao" parameterType="PagedInquiryRequest" resultMap="porcaoItemResult">
+	 SELECT b.id,<include refid="allPorcaoItemColumns" />
+        FROM porcaoItens b
+     WHERE 1 = 1 and
+ 	b.id = #{id}
   </select>
 
 

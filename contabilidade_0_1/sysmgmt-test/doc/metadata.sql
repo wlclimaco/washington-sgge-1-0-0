@@ -1539,23 +1539,25 @@ CREATE SEQUENCE subgrupoProd_id_seq
 ALTER TABLE subgrupoProd_id_seq
   OWNER TO postgres;
 
-DROP TABLE subgrupoProd;
-CREATE TABLE subgrupoGrupo(
+DROP TABLE subGrupoProd;
+CREATE TABLE subGrupoProd(
 	id           integer NOT NULL DEFAULT nextval('subgrupoProd_id_seq'::regclass),
 	grupoId      integer NOT NULL,
 	subGrupoId   integer NOT NULL,
+	prodId    integer NULL,
 	processId    integer NULL,
 	create_date  bigint,
     create_user  character varying(50) NULL,
     modify_date  bigint,
     modify_user  character varying(50) NULL,
-CONSTRAINT subgrupoProd_pkey PRIMARY KEY (id)
+CONSTRAINT subgrupoProd2_pkey PRIMARY KEY (id)
 )
 WITH (
   OIDS=FALSE
 );
 ALTER TABLE subgrupoProd
   OWNER TO postgres;
+
 
 /* ---------------------------------------------------------------*/
 DROP SEQUENCE marca_id_seq;
@@ -1827,11 +1829,11 @@ CREATE TABLE estoque(
 	id              integer NOT NULL DEFAULT nextval('estoque_id_seq'::regclass),
 	entidadeId      integer  NULL,
 	empId           integer  NULL,
-	prodId          integer NOT NULL,
-	estoqueTypeEnum integer NOT NULL,
+	prodId          integer  NULL,
+	estoqueTypeEnum integer  NULL,
 	processId       integer NULL,
 	ultimoMov       bigint,
-	quant           real NOT NULL,
+	quant           real  NULL,
 	create_date  bigint,
     create_user  character varying(50) NULL,
     modify_date  bigint,

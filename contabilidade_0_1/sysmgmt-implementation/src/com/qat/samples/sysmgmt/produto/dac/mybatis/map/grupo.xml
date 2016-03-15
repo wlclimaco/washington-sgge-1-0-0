@@ -41,13 +41,13 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
 	 <sql id="allGrupoProdColumns">
-		 b.prodId
-		,b.processId
-		,b.grupoId
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+		 prodId
+		,processId
+		,grupoId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
   </sql>
 
   <sql id="allGrupoProdValues">
@@ -58,12 +58,12 @@
   </sql>
 
   <sql id="allGrupoColumns">
-		 b.descricao
-		,b.grupo
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+		 descricao
+		,grupo
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
   </sql>
 
   <sql id="allGrupoValues">
@@ -148,7 +148,7 @@
   </select>
 
   <select id="fetchGrupoById" parameterType="FetchByIdRequest" resultMap="grupoResult">
-	SELECT b.id,
+	SELECT id,
 	<include refid="allGrupoColumns" />
     FROM grupo b
     where id = #{id}
@@ -160,11 +160,11 @@
     			(
     				SELECT
     						<include refid="allGrupoColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
     				FROM grupo b
 					WHERE 2 = 2
 					<if test="criteria.id != null">
-						AND b.id = #{criteria.id}
+						AND id = #{criteria.id}
 					</if>
     			) LIST
 				<choose>
@@ -182,7 +182,7 @@
   </select>
 
   <select id="fetchGrupoByProduto" parameterType="Integer" resultMap="grupoProdResult">
-	SELECT b.id,
+	SELECT id,
 	<include refid="allGrupoProdColumns" />
     FROM grupoProd b
     where prodId = #{id}

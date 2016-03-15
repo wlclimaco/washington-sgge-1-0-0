@@ -20,8 +20,6 @@
    	<result property="ultimoMov" column="ultimoMov"/>
    	<result property="quant" column="quant"/>
    	<result property="parentId" column="prodId" />
-   	<result property="emprId" column="emprId"/>
-   	<result property="entidadeId" column="entidadeId"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -32,19 +30,21 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allEstoqueColumns">
-		 b.estoqueTypeEnum
-		,b.ultimoMov
-		,b.quant
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+		 estoqueTypeEnum
+		,ultimoMov
+		,quant
+		,prodId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
   </sql>
 
   <sql id="allEstoqueValues">
   		#{estoqueTypeEnumValue},
   		#{ultimoMov},
   		#{quant},
+  		#{parentId},
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -90,9 +90,7 @@
      SELECT COUNT(id) AS RECORD_COUNT
         FROM estoque
      WHERE 1 = 1
-     <if test="id != null">
-		  AND id = #{id}
-	 </if>
+
   </select>
 
   <select id="fetchAllEstoques" resultMap="estoqueResult">
@@ -102,26 +100,23 @@
   </select>
 
   <select id="fetchEstoqueById" parameterType="FetchByIdRequest" resultMap="estoqueResult">
-	SELECT b.id,
+	SELECT id,
 	<include refid="allEstoqueColumns" />
-    FROM estoque b
+    FROM estoque
     where id = #{id}
     ORDER BY id ASC
   </select>
 
   <select id="fetchAllEstoquesByRequest" parameterType="PagedInquiryRequest" resultMap="estoqueResult">
-	 SELECT b.id,<include refid="allEstoqueColumns" />
-        FROM estoque b
+	 SELECT id,<include refid="allEstoqueColumns" />
+        FROM estoque
      WHERE 1 = 1
-     <if test="id != null">
-		  AND b.id = #{id}
-	 </if>
   </select>
 
   <select id="fetchEstoqueByProduto" parameterType="Integer" resultMap="estoqueResult">
-	  	SELECT b.id,<include refid="allEstoqueColumns" />
-        FROM estoque b
-     	WHERE b.prodId = #{id}
+	  	SELECT id,<include refid="allEstoqueColumns" />
+        FROM estoque
+     	WHERE prodId = #{id}
   </select>
 
 
