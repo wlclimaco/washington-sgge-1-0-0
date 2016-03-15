@@ -60,7 +60,6 @@ import com.qat.samples.sysmgmt.produto.model.UniMed;
 import com.qat.samples.sysmgmt.produto.model.request.GrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
-import com.qat.samples.sysmgmt.produto.model.request.PlanoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
@@ -1000,39 +999,36 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	}
 
 	@Override
-	public InternalResultsResponse<Plano> insertPlano(PlanoMaintenanceRequest request)
+	public InternalResultsResponse<Plano> insertPlano(Plano plano)
 	{
 		Integer insertCount = 0;
 		InternalResultsResponse<Plano> response = new InternalResultsResponse<Plano>();
 		Historico historico = new Historico();
-		historico.setEmprId(request.getPlano().getEmprId());
-		historico.setUserId(request.getPlano().getUserId());
+		historico.setEmprId(plano.getEmprId());
+		historico.setUserId(plano.getUserId());
 		historico.setProcessId(0);
 		Date a = new Date();
 		historico.setData(a.getTime());
 		historico.setTabelaEnum(TabelaEnum.SERVICO);
 		historico.setAcaoType(AcaoEnum.INSERT);
 
-		Plano servico = new Plano();
-
-		servico = request.getPlano();
 		insertCount =
 				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistorico", historico, response);
 
 		Integer historicoId = historico.getId();
 
-		request.getPlano().setProcessId(historicoId);
+		plano.setProcessId(historicoId);
 
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
 		insertCount =
-				QATMyBatisDacHelper.doInsert(getSqlSession(), "PlanoMap.insertPlano", servico,
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "PlanoMap.insertPlano", plano,
 						response);
 
 		HistoricoItens historicoItens = new HistoricoItens();
 		historicoItens.setIdHist(historicoId);
 		historicoItens.setProcessId(0);
-		historicoItens.setParentId(servico.getId());
+		historicoItens.setParentId(plano.getId());
 		historicoItens.setTabelaEnum(TabelaEnum.SERVICO);
 		historicoItens.setAcaoType(AcaoEnum.INSERT);
 
@@ -1047,25 +1043,25 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 		// Next traverse the object graph and "maintain" the associations
 
 		insertCount +=
-				PrecoDACD.maintainTabPrecoAssociations(request.getPlano().getPreco(), response, servico.getId(),
+				PrecoDACD.maintainTabPrecoAssociations(plano.getPreco(), response, plano.getId(),
 						TypeEnum.MEDIUM,
 						AcaoTypeEnum.INSERT,
-						TabelaEnum.SERVICO, getTabPrecoDAC(), getStatusDAC(), getHistoricoDAC(), servico.getEmprId(),
-						servico.getCreateUser(), historicoId);
+						TabelaEnum.SERVICO, getTabPrecoDAC(), getStatusDAC(), getHistoricoDAC(), plano.getEmprId(),
+						plano.getCreateUser(), historicoId);
 
 		insertCount +=
-				ServicoDACD.maintainServicoAssociations(request.getPlano().getServicos(), response, servico.getId(),
+				ServicoDACD.maintainServicoAssociations(plano.getServicos(), response, plano.getId(),
 						TypeEnum.MEDIUM,
 						AcaoTypeEnum.INSERT,
-						TabelaEnum.PLANO, getServicoDAC(), getStatusDAC(), getHistoricoDAC(), servico.getEmprId(),
-						servico.getCreateUser(), historicoId);
+						TabelaEnum.PLANO, getServicoDAC(), getStatusDAC(), getHistoricoDAC(), plano.getEmprId(),
+						plano.getCreateUser(), historicoId);
 
 		insertCount +=
-				ImagemDACD.maintainImagemAssociations(request.getPlano().getImagens(), response, servico.getId(),
+				ImagemDACD.maintainImagemAssociations(plano.getImagens(), response, plano.getId(),
 						TypeEnum.MEDIUM,
 						AcaoTypeEnum.INSERT,
-						TabelaEnum.SERVICO, getImagemDAC(), getStatusDAC(), getHistoricoDAC(), servico.getEmprId(),
-						servico.getCreateUser(), historicoId);
+						TabelaEnum.SERVICO, getImagemDAC(), getStatusDAC(), getHistoricoDAC(), plano.getEmprId(),
+						plano.getCreateUser(), historicoId);
 
 		if (insertCount > 0)
 		{
@@ -1074,9 +1070,9 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 			List<Status> statusList = new ArrayList<Status>();
 			statusList.add(status);
 			insertCount =
-					StatusDACD.maintainStatusAssociations(statusList, response, servico.getId(),
+					StatusDACD.maintainStatusAssociations(statusList, response, plano.getId(),
 							null, AcaoEnum.INSERT,
-							servico.getCreateUser(), request.getPlano().getEmprId(), TabelaEnum.SERVICO,
+							plano.getCreateUser(), plano.getEmprId(), TabelaEnum.SERVICO,
 							getStatusDAC(),
 							getHistoricoDAC(), historicoId, historicoId);
 
@@ -1092,14 +1088,14 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 	}
 
 	@Override
-	public InternalResultsResponse<Plano> updatePlano(PlanoMaintenanceRequest request)
+	public InternalResultsResponse<Plano> updatePlano(Plano request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public InternalResponse deletePlano(PlanoMaintenanceRequest request)
+	public InternalResponse deletePlano(Plano request)
 	{
 		// TODO Auto-generated method stub
 		return null;

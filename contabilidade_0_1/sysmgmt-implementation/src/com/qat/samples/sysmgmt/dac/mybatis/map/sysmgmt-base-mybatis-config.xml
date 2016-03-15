@@ -191,6 +191,52 @@
   		<typeAlias alias="PlanoSaudeInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.PlanoSaudeInquiryRequest"/>
 
 
+<!-- Produtos -->
+		<typeAlias alias="Cfop" type="com.qat.samples.sysmgmt.cfop.Cfop"/>
+		<typeAlias alias="CfopPessoa" type="com.qat.samples.sysmgmt.cfop.CfopPessoa"/>
+  		<typeAlias alias="CfopInquiryRequest" type="com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest"/>
+
+		<typeAlias alias="Classificacao" type="com.qat.samples.sysmgmt.fiscal.Classificacao"/>
+  		<typeAlias alias="ClassificacaoInquiryRequest" type="com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest"/>
+
+		<typeAlias alias="Cst" type="com.qat.samples.sysmgmt.fiscal.Cst"/>
+
+		<typeAlias alias="Custo" type="com.qat.samples.sysmgmt.produto.model.Custo"/>
+
+<!--
+		<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/custoItens.xml"/>
+		<typeAlias alias="CustoItens" type="com.qat.samples.sysmgmt.pessoa.Medico"/>
+  		<typeAlias alias="MedicoInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.MedicoInquiryRequest"/>
+-->
+		<typeAlias alias="Estoque" type="com.qat.samples.sysmgmt.produto.model.Estoque"/>
+
+		<typeAlias alias="Grupo" type="com.qat.samples.sysmgmt.produto.model.Grupo"/>
+  		<typeAlias alias="GrupoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.GrupoInquiryRequest"/>
+
+		<typeAlias alias="Marca" type="com.qat.samples.sysmgmt.produto.model.Marca"/>
+  		<typeAlias alias="MarcaInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest"/>
+
+		<typeAlias alias="Porcao" type="com.qat.samples.sysmgmt.produto.model.Porcao"/>
+
+	<!--	<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/porcaoItens.xml"/>
+	  	<typeAlias alias="PorcaoItens" type="com.qat.samples.sysmgmt.pessoa.Medico"/>
+  		<typeAlias alias="MedicoInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.MedicoInquiryRequest"/>-->
+
+		<typeAlias alias="Rentabilidade" type="com.qat.samples.sysmgmt.produto.model.Rentabilidade"/>
+
+
+		<!-- <typeAlias alias="RentabilidadeItens" type="com.qat.samples.sysmgmt.produto.RentabilidadeItens"/> -->
+
+		<typeAlias alias="SubGrupo" type="com.qat.samples.sysmgmt.produto.model.SubGrupo"/>
+  		<typeAlias alias="SubGrupoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest"/>
+
+		<typeAlias alias="Tributacao" type="com.qat.samples.sysmgmt.fiscal.Tributacao"/>
+  		<typeAlias alias="TributacaoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest"/>
+
+
+		<typeAlias alias="UniMed" type="com.qat.samples.sysmgmt.produto.model.UniMed"/>
+  		<typeAlias alias="UniMedInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest"/>
+
 
 <!--   		<typeAlias alias="Cadastro" type="com.qat.samples.sysmgmt.produto.model.Cadastro"/> -->
 <!--   		<typeAlias alias="ControleAcess" type="com.qat.samples.sysmgmt.util.ControleAcess"/> -->
@@ -266,6 +312,27 @@
 		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/medico.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/paciente.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/planoSaude.xml"/>
+
+
+		<!-- Produtos -->
+		<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/cfop.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/classificacao.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/cst.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/custo.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/custoItens.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/estoque.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/grupo.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/marca.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/porcao.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/porcaoItens.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/rentabilidade.xml"/>
+		<!-- <mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/rentabilidadeItens.xml"/> -->
+		<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/subgrupo.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/tributacao.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/tributos.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/uniMed.xml"/>
+
+
 
     </mappers>
 
