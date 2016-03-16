@@ -118,6 +118,14 @@
   </insert>
 
 
+   <insert id="insertCfopPessoa" parameterType="CfopPessoa" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO cfopPessoa (
+		<include refid="allCfopPessoaColumns" />
+      )
+    VALUES (<include refid="allCfopPessoaValues" /> )
+  </insert>
+
+
 	<!--
 		SQL Update Statements.
  	-->

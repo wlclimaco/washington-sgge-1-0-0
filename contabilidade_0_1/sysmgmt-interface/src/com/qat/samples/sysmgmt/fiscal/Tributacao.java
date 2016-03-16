@@ -20,7 +20,7 @@ public class Tributacao extends ModelCosmeDamiao
 	private Double icms;
 
 	/** The estado. */
-	private Integer st;
+	private Double st;
 
 	private Double mva;
 
@@ -28,11 +28,11 @@ public class Tributacao extends ModelCosmeDamiao
 
 	private Double ipi;
 
-	private Integer iat;
+	private Double iat;
 
-	private Integer ippt;
+	private Double ippt;
 
-	private Integer pisconfins;
+	private Double pisconfins;
 
 	private Incidencia incidencia;
 
@@ -99,7 +99,7 @@ public class Tributacao extends ModelCosmeDamiao
 	/**
 	 * @return the st
 	 */
-	public Integer getSt()
+	public Double getSt()
 	{
 		return st;
 	}
@@ -107,7 +107,7 @@ public class Tributacao extends ModelCosmeDamiao
 	/**
 	 * @param st the st to set
 	 */
-	public void setSt(Integer st)
+	public void setSt(Double st)
 	{
 		this.st = st;
 	}
@@ -163,7 +163,7 @@ public class Tributacao extends ModelCosmeDamiao
 	/**
 	 * @return the iat
 	 */
-	public Integer getIat()
+	public Double getIat()
 	{
 		return iat;
 	}
@@ -171,7 +171,7 @@ public class Tributacao extends ModelCosmeDamiao
 	/**
 	 * @param iat the iat to set
 	 */
-	public void setIat(Integer iat)
+	public void setIat(Double iat)
 	{
 		this.iat = iat;
 	}
@@ -179,7 +179,7 @@ public class Tributacao extends ModelCosmeDamiao
 	/**
 	 * @return the ippt
 	 */
-	public Integer getIppt()
+	public Double getIppt()
 	{
 		return ippt;
 	}
@@ -187,7 +187,7 @@ public class Tributacao extends ModelCosmeDamiao
 	/**
 	 * @param ippt the ippt to set
 	 */
-	public void setIppt(Integer ippt)
+	public void setIppt(Double ippt)
 	{
 		this.ippt = ippt;
 	}
@@ -195,7 +195,7 @@ public class Tributacao extends ModelCosmeDamiao
 	/**
 	 * @return the pisconfins
 	 */
-	public Integer getPisconfins()
+	public Double getPisconfins()
 	{
 		return pisconfins;
 	}
@@ -203,7 +203,7 @@ public class Tributacao extends ModelCosmeDamiao
 	/**
 	 * @param pisconfins the pisconfins to set
 	 */
-	public void setPisconfins(Integer pisconfins)
+	public void setPisconfins(Double pisconfins)
 	{
 		this.pisconfins = pisconfins;
 	}

@@ -109,7 +109,7 @@ public class ProdutoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		InternalResultsResponse<Produto> response = getProdutoDAC().insertProduto(produto);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(11);
+		request.setFetchId(22);
 		InternalResultsResponse<Produto> responseA = getProdutoDAC().fetchProdutoById(request);
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertTrue(responseA.getResultsList().get(0).getCfopList().size() == produto.getCfopList().size());
@@ -611,6 +611,7 @@ public class ProdutoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		tributacao.setCsosn(new Csosn(1));
 		tributacao.setIpi(50.99);
 		tributacao.setIat(1);
+		tributacao.setModelAction(model);
 		// tributacao.setTributacao.setpisconfins(1);
 		tributacao.setIncidencia(new Incidencia());
 		return tributacao;
@@ -625,6 +626,7 @@ public class ProdutoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		estoque.setEstoqueTypeEnum(EstoqueTypeEnum.MINIMO);
 		estoque.setUltimoMov(new Long("14327833577780"));
 		estoque.setQuant(new Double(10));
+		estoque.setModelAction(model);
 		estoqueList.add(estoque);
 
 		estoque = new Estoque();
@@ -632,6 +634,7 @@ public class ProdutoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		estoque.setEstoqueTypeEnum(EstoqueTypeEnum.MAXIMO);
 		estoque.setUltimoMov(new Long("14327833577780"));
 		estoque.setQuant(new Double(100));
+		estoque.setModelAction(model);
 		estoqueList.add(estoque);
 
 		estoque = new Estoque();
@@ -639,6 +642,7 @@ public class ProdutoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		estoque.setEstoqueTypeEnum(EstoqueTypeEnum.INICIAL);
 		estoque.setUltimoMov(new Long("14327833577780"));
 		estoque.setQuant(new Double(1));
+		estoque.setModelAction(model);
 		estoqueList.add(estoque);
 
 		estoque = new Estoque();
@@ -646,6 +650,7 @@ public class ProdutoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		estoque.setEstoqueTypeEnum(EstoqueTypeEnum.ATUAL);
 		estoque.setUltimoMov(new Long("14327833577780"));
 		estoque.setQuant(new Double(16));
+		estoque.setModelAction(model);
 		estoqueList.add(estoque);
 
 		return estoqueList;
@@ -677,6 +682,7 @@ public class ProdutoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		preco.setValor(new Double(10.90));
 		preco.setDataProInicial(new Long("14327833577780"));
 		preco.setDataProFinal(new Long("14327833577780"));
+		preco.setModelAction(model);
 		precoList.add(preco);
 
 		preco = new TabPreco();
@@ -686,6 +692,7 @@ public class ProdutoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		preco.setValor(new Double(10.90));
 		preco.setDataProInicial(new Long("14327833577780"));
 		preco.setDataProFinal(new Long("14327833577780"));
+		preco.setModelAction(model);
 		precoList.add(preco);
 
 		preco = new TabPreco();
@@ -695,6 +702,7 @@ public class ProdutoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		preco.setValor(new Double(10.90));
 		preco.setDataProInicial(new Long("14327833577780"));
 		preco.setDataProFinal(new Long("14327833577780"));
+		preco.setModelAction(model);
 		precoList.add(preco);
 
 		preco = new TabPreco();
@@ -704,6 +712,7 @@ public class ProdutoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		preco.setValor(new Double(10.90));
 		preco.setDataProInicial(new Long("14327833577780"));
 		preco.setDataProFinal(new Long("14327833577780"));
+		preco.setModelAction(model);
 		precoList.add(preco);
 
 		return precoList;
@@ -717,24 +726,28 @@ public class ProdutoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		custo.setId(1);
 		custo.setCusto(new CustoItem(1));
 		custo.setValor((double)10);
+		custo.setModelAction(model);
 		custoList.add(custo);
 
 		custo = new Custo();
 		custo.setId(2);
 		custo.setCusto(new CustoItem(2));
 		custo.setValor((double)20);
+		custo.setModelAction(model);
 		custoList.add(custo);
 
 		custo = new Custo();
 		custo.setId(3);
 		custo.setCusto(new CustoItem(3));
 		custo.setValor((double)30);
+		custo.setModelAction(model);
 		custoList.add(custo);
 
 		custo = new Custo();
 		custo.setId(4);
 		custo.setCusto(new CustoItem(4));
 		custo.setValor((double)40);
+		custo.setModelAction(model);
 		custoList.add(custo);
 
 		return custoList;

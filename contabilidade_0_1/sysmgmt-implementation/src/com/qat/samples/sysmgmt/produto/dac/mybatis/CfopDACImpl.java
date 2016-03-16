@@ -112,7 +112,7 @@ public class CfopDACImpl extends SqlSessionDaoSupport implements ICfopDAC
 		Integer insertCount = 0;
 		InternalResultsResponse<CfopPessoa> response = new InternalResultsResponse<CfopPessoa>();
 		// First insert the root cfop data
-		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT, cfop, response);
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), "CfopMap.insertCfopPessoa", cfop, response);
 
 		return insertCount;
 	}

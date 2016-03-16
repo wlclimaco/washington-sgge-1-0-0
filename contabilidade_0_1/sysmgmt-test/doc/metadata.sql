@@ -3685,6 +3685,7 @@ CREATE TABLE tributos(
 	iat				float null,
 	ippt			float null,
 	incidencia		integer NULL,
+	pisconfins integer NULL,
 	processId    integer NULL,
 	create_date  bigint,
     create_user  character varying(50) NULL,
@@ -3745,6 +3746,38 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE produto
+  OWNER TO postgres;
+
+/* ---------------------------------------------------------------*/
+  /* ---------------------------------------------------------------*/
+
+DROP SEQUENCE cfopPessoa_id_seq;
+
+CREATE SEQUENCE cfopPessoa_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE cfopPessoa_id_seq
+  OWNER TO postgres;
+
+DROP TABLE cfopPessoa;
+CREATE TABLE cfopPessoa(
+	id            integer NOT NULL DEFAULT nextval('cfopPessoa_id_seq'::regclass),
+	idCfop        integer NULL,
+	parentId      integer NULL,
+	processId    integer NULL,
+	create_date  bigint,
+    create_user  character varying(50) NULL,
+    modify_date  bigint,
+    modify_user  character varying(50) NULL,
+CONSTRAINT cfopPessoa_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE cfopPessoa
   OWNER TO postgres;
 
 /* ---------------------------------------------------------------*/

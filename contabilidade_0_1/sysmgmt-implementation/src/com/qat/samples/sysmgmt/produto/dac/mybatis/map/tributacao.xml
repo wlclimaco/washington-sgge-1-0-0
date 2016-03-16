@@ -30,39 +30,43 @@
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDataUTC" column="modify_date"/>
 	<association property="incidencia"    column="incidencia" select="IncidenciaMap.fetchById"  />
+	<!--<association property="cstId"    column="cstId" select="fetchById"  />
+	<association property="csosn"    column="cstId" select="fetchById"  />-->
   </resultMap>
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allTributacaoColumns">
-		 b.parentId
-		,b.cstId
-		,b.icms
-		,b.st
-		,b.mva
-		,b.csosnId
-		,b.ipi
-		,b.iat
-		,b.ippt
-		,b.incidencia
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+		 parentId
+		,cstId
+		,icms
+		,st
+		,mva
+		,csosnId
+		,ipi
+		,iat
+		,ippt
+		,incidencia
+		,pisconfins
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
   </sql>
 
   <sql id="allTributacaoValues">
   		 #{parentId}
-		,#{cstId}
+		,#{cst.id}
 		,#{icms}
 		,#{st}
 		,#{mva}
-		,#{csosnId}
+		,#{csosn.id}
 		,#{ipi}
 		,#{iat}
 		,#{ippt}
 		,#{incidencia.id}
+		,#{pisconfins}
     	<include refid="CBOFMap.changeControlFields"/>
   </sql>
 
@@ -119,25 +123,25 @@
   </select>
 
   <select id="fetchTributacaoById" parameterType="FetchByIdRequest" resultMap="tributosResult">
-	SELECT b.id,
+	SELECT id,
 	<include refid="allTributacaoColumns" />
-    FROM tributos b
+    FROM tributos
     where id = #{id}
     ORDER BY id ASC
   </select>
 
   <select id="fetchTributosById" parameterType="FetchByIdRequest" resultMap="tributosResult">
-	SELECT b.id,
+	SELECT id,
 	<include refid="allTributacaoColumns" />
-    FROM tributos b
+    FROM tributos
     where id = #{id}
     ORDER BY id ASC
   </select>
 
    <select id="fetchTributacaoByNota" parameterType="Integer" resultMap="tributosResult">
-	SELECT b.id,
+	SELECT id,
 	<include refid="allTributacaoColumns" />
-    FROM tributos b
+    FROM tributos
     where id = #{parentId}
     ORDER BY id ASC
   </select>
@@ -147,11 +151,11 @@
     			(
     				SELECT
     						<include refid="allTributacaoColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
-    				FROM tributacao b
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM tributacao
 					WHERE 2 = 2
 					<if test="criteria.id != null">
-						AND b.id = #{criteria.id}
+						AND id = #{criteria.id}
 					</if>
     			) LIST
 				<choose>
