@@ -17,6 +17,8 @@ public class Regime extends ModelCosmeDamiao
 
 	/** The description. */
 	private String descricao;
+	
+	private List<Tarefa> listTarefa;
 
 	/**
 	 * Default constructor.

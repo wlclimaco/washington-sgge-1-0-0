@@ -28,6 +28,8 @@ public class Empresa extends Entidade
 	private List<Deposito> depositoList;
 
 	private List<Usuario> usuarioList;
+	
+	private List<ContaCorrente> contaCorrenteList;
 
 	public Empresa()
 	{
