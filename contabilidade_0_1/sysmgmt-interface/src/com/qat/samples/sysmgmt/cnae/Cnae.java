@@ -32,10 +32,13 @@ public class Cnae extends ModelCosmeDamiao
 		super();
 	}
 
-	public Cnae(Integer id, PersistanceActionEnum mode)
+	public Cnae(Integer id,Strig cnae,String descricao,String abreviacao, PersistanceActionEnum mode)
 	{
 		super();
 		this.id = id;
+		this.cnae = cnae;
+		this.descricao = descricao;
+		this.abreviacao = abreviacao;
 		setModelAction(mode);
 	}
 

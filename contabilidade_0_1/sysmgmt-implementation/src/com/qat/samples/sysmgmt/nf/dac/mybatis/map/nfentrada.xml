@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NotaFiscalEntradaMap">
+
+  <resultMap id="notaFiscalEntradaResult" type="NotaFiscalEntrada" extends="NotaFiscalMap.NotaFiscalResult">
+
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allNotaFiscalEntradaColumns">
+
+      	<include refid="NotaFiscalMap.allNotaFiscalColumns"/>
+  </sql>
+
+  <sql id="allNotaFiscalEntradaValues">
+    	<include refid="NotaFiscalMap.allNotaFiscalValues"/>
+  </sql>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchNotaFiscalEntradaRowCount" parameterType="NotaFiscalInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM notafiscal
+
+  </select>
+
+  <select id="fetchAllNotaFiscalEntradas" resultMap="notaFiscalEntradaResult">
+    SELECT
+	<include refid="allNotaFiscalEntradaColumns" />
+    FROM notafiscal ORDER BY id ASC
+  </select>
+
+  <select id="fetchNotaFiscalEntradaById" parameterType="FetchByIdRequest" resultMap="notaFiscalEntradaResult">
+    			   SELECT
+					id,	<include refid="allNotaFiscalEntradaColumns" />
+ 				   FROM notaFiscal b
+					where  id = #{id}
+  </select>
+
+
+  <select id="fetchAllNotaFiscalEntradasByRequest" parameterType="NotaFiscalInquiryRequest" resultMap="notaFiscalEntradaResult">
+     SELECT * FROM ( SELECT id,
+    						<include refid="allNotaFiscalEntradaColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM notafiscal b
+						where 1 = 1
+					<if test="parentId != null">
+						AND id = #{id}
+					</if>
+					 <if test="statusList != null and !statusList.isEmpty()">
+					     AND PGSI_status IN
+					     <foreach item="item" index="index" collection="statusList"
+						     open="(" separator="," close=")">
+						   	 #{item.value}
+						 </foreach>
+					 </if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+</mapper>

@@ -13,11 +13,13 @@ public class CnaeEmpresa extends ModelCosmeDamiao
 	private Integer id;
 	private Cnae idCnae;
 
-	public CnaeEmpresa(Integer id, PersistanceActionEnum mode)
+	public CnaeEmpresa(Integer id,Integer parentId, PersistanceActionEnum mode ,Cnae cnae)
 	{
 		super();
 		this.id = id;
+		this.idCnae = cnae;
 		setModelAction(mode);
+		setParentId(parentId);
 	}
 
 	/**

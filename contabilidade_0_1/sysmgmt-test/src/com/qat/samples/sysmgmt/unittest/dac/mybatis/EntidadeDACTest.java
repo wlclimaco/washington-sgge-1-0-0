@@ -68,21 +68,21 @@ import com.qat.samples.sysmgmt.dp.model.request.HoraFuncInquiryRequest;
 import com.qat.samples.sysmgmt.dp.model.request.ProfissaoInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.pessoa.Cliente;
-import com.qat.samples.sysmgmt.pessoa.Contador;
-import com.qat.samples.sysmgmt.pessoa.Fornecedor;
-import com.qat.samples.sysmgmt.pessoa.Funcionario;
-import com.qat.samples.sysmgmt.pessoa.Medico;
-import com.qat.samples.sysmgmt.pessoa.Paciente;
-import com.qat.samples.sysmgmt.pessoa.PessoaTypeEnum;
-import com.qat.samples.sysmgmt.pessoa.Transportador;
-import com.qat.samples.sysmgmt.pessoa.dac.IPessoaDAC;
-import com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest;
-import com.qat.samples.sysmgmt.pessoa.model.request.ContaInquiryRequest;
-import com.qat.samples.sysmgmt.pessoa.model.request.ContadorInquiryRequest;
-import com.qat.samples.sysmgmt.pessoa.model.request.ConvenioInquiryRequest;
-import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorInquiryRequest;
-import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorInquiryRequest;
+import com.qat.samples.sysmgmt.Entidade.Cliente;
+import com.qat.samples.sysmgmt.Entidade.Contador;
+import com.qat.samples.sysmgmt.Entidade.Fornecedor;
+import com.qat.samples.sysmgmt.Entidade.Funcionario;
+import com.qat.samples.sysmgmt.Entidade.Medico;
+import com.qat.samples.sysmgmt.Entidade.Paciente;
+import com.qat.samples.sysmgmt.Entidade.PessoaTypeEnum;
+import com.qat.samples.sysmgmt.Entidade.Transportador;
+import com.qat.samples.sysmgmt.Entidade.dac.IPessoaDAC;
+import com.qat.samples.sysmgmt.Entidade.model.request.ClienteInquiryRequest;
+import com.qat.samples.sysmgmt.Entidade.model.request.ContaInquiryRequest;
+import com.qat.samples.sysmgmt.Entidade.model.request.ContadorInquiryRequest;
+import com.qat.samples.sysmgmt.Entidade.model.request.ConvenioInquiryRequest;
+import com.qat.samples.sysmgmt.Entidade.model.request.FornecedorInquiryRequest;
+import com.qat.samples.sysmgmt.Entidade.model.request.TransportadorInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.ProdutoPessoa;
 import com.qat.samples.sysmgmt.util.Cidade;
 import com.qat.samples.sysmgmt.util.Documento;
@@ -106,603 +106,295 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(EntidadeDACTest.class);
-	private IPessoaDAC pessoaDAC; // injected by Spring through setter @resource
+	private IEntidadeDAC entidadeDAC; // injected by Spring through setter @resource
 
 	// below
 
-	public IPessoaDAC getPessoaDAC()
+	public IEntidadeDAC getEntidadeDAC()
 	{
-		return pessoaDAC;
+		return entidadeDAC;
 	}
 
 	@Resource
-	public void setPessoaDAC(IPessoaDAC pessoaDAC)
+	public void setEntidadeDAC(IEntidadeDAC entidadeDAC)
 	{
-		this.pessoaDAC = pessoaDAC;
+		this.entidadeDAC = entidadeDAC;
 	}
-
+	
 	@Test
-	public void testInsertFunction() throws Exception
+	public void testupdateEmpresa() throws Exception
 	{
 
-		Funcionario funcionario = new Funcionario();
-		funcionario = insertFuncionario(PersistanceActionEnum.INSERT);
+		Empresa funcionario = new Empresa();
+		funcionario = insertEmpresa(PersistanceActionEnum.UPDATE);
 
-		InternalResultsResponse<Funcionario> funcionarioResponse = getPessoaDAC().insertFuncionario(funcionario);
+		InternalResultsResponse<Empresa> funcionarioResponse = getEntidadeDAC().updateEmpresa(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
 	@Test
-	public void testInsertClientes() throws Exception
+	public void testinsertEmpresa() throws Exception
 	{
 
-		Cliente funcionario = new Cliente();
-		funcionario = insertCliente(PersistanceActionEnum.INSERT);
-		InternalResultsResponse<Cliente> funcionarioResponse = getPessoaDAC().insertCliente(funcionario);
+		Empresa funcionario = new Empresa();
+		funcionario = insertEmpresa(PersistanceActionEnum.INSERT);
+
+		InternalResultsResponse<Empresa> funcionarioResponse = getEntidadeDAC().insertEmpresa(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
 	@Test
-	public void testInsertFornecedor() throws Exception
+	public void testdeleteEmpresa() throws Exception
 	{
 
-		Fornecedor funcionario = new Fornecedor();
-		funcionario = insertFornecedor(PersistanceActionEnum.INSERT);
-		InternalResultsResponse<Fornecedor> funcionarioResponse = getPessoaDAC().insertFornecedor(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-
-	}
-
-	@Test
-	public void testInsertTransportador() throws Exception
-	{
-
-		Transportador funcionario = new Transportador();
-		funcionario = insertTransportador(PersistanceActionEnum.INSERT);
-		InternalResultsResponse<Transportador> funcionarioResponse = getPessoaDAC().insertTransportador(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-
-	}
-
-	@Test
-	public void testInsertContador() throws Exception
-	{
-
-		Contador funcionario = new Contador();
-		funcionario = insertContador(PersistanceActionEnum.INSERT);
-		InternalResultsResponse<Contador> funcionarioResponse = getPessoaDAC().insertContador(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-
-	}
-
-	@Test
-	public void testUpdateFunction() throws Exception
-	{
-
-		Funcionario funcionario = new Funcionario();
-		funcionario = insertFuncionario(PersistanceActionEnum.INSERT);
-		InternalResultsResponse<Funcionario> funcionarioResponse = getPessoaDAC().updateFuncionario(funcionario);
-		assertEquals(funcionarioResponse, null);
-		getPessoaDAC().updateFuncionario(funcionario);
-
-	}
-
-	@Test
-	public void testUpdateClientes() throws Exception
-	{
-
-		Cliente funcionario = new Cliente();
-		funcionario = insertCliente(PersistanceActionEnum.UPDATE);
-		Date a = new Date();
-
-		InternalResultsResponse<Cliente> funcionarioResponse = getPessoaDAC().updateCliente(funcionario);
-		assertEquals(funcionarioResponse, null);
-		getPessoaDAC().updateCliente(funcionario);
-
-	}
-
-	@Test
-	public void testUpdateFornecedor() throws Exception
-	{
-
-		Fornecedor funcionario = new Fornecedor();
-		funcionario = insertFornecedor(PersistanceActionEnum.UPDATE);
-		Date a = new Date();
-
-		InternalResultsResponse<Fornecedor> funcionarioResponse = getPessoaDAC().updateFornecedor(funcionario);
-		assertEquals(funcionarioResponse, null);
-		getPessoaDAC().updateFornecedor(funcionario);
-
-	}
-
-	@Test
-	public void testUpdateTransportador() throws Exception
-	{
-
-		Transportador funcionario = new Transportador();
-		funcionario = insertTransportador(PersistanceActionEnum.UPDATE);
-		Date a = new Date();
-
-		InternalResultsResponse<Transportador> funcionarioResponse = getPessoaDAC().updateTransportador(funcionario);
-		assertEquals(funcionarioResponse, null);
-		getPessoaDAC().updateTransportador(funcionario);
-
-	}
-
-	@Test
-	public void testUpdateContador() throws Exception
-	{
-
-		Contador funcionario = new Contador();
-		funcionario = insertContador(PersistanceActionEnum.UPDATE);
-		Date a = new Date();
-
-		InternalResultsResponse<Contador> funcionarioResponse = getPessoaDAC().updateContador(funcionario);
-		assertEquals(funcionarioResponse, null);
-		getPessoaDAC().updateContador(funcionario);
-
-	}
-
-	@Test
-	public void testDeleteFunction() throws Exception
-	{
-
-		Funcionario funcionario = new Funcionario();
+		Empresa funcionario = new Empresa();
 		funcionario.setId(1);
-		funcionario = insertFuncionario(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getPessoaDAC().deleteFuncionario(funcionario);
+		funcionario = insertEmpresa(PersistanceActionEnum.DELETE);
+		InternalResponse funcionarioResponse = getEntidadeDAC().deleteEmpresa(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testDeleteClientes() throws Exception
-	{
-
-		Cliente funcionario = new Cliente();
-		funcionario = insertCliente(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getPessoaDAC().deleteCliente(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-
-	}
-
-	@Test
-	public void testDeleteFornecedor() throws Exception
-	{
-
-		Fornecedor funcionario = new Fornecedor();
-		funcionario = insertFornecedor(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getPessoaDAC().deleteFornecedor(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-
-	}
-
-	@Test
-	public void testDeleteTransportador() throws Exception
-	{
-
-		Transportador funcionario = new Transportador();
-		funcionario = insertTransportador(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getPessoaDAC().deleteTransportador(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-
-	}
-
-	@Test
-	public void testDeleteContador() throws Exception
-	{
-
-		Contador funcionario = new Contador();
-		funcionario = insertContador(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getPessoaDAC().deleteContador(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-
-	}
-
-	@Test
-	public void testFetchFuncionariosByRequest() throws Exception
-	{
-		// check for valid and precount
-		FuncionarioInquiryRequest request = new FuncionarioInquiryRequest();
-		request.setPreQueryCount(true);
-		request.setStartPage(0);
-		request.setPageSize(4);
-		InternalResultsResponse<Funcionario> response = getPessoaDAC().fetchFuncionarioByRequest(request);
-		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
-		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-	}
-
-	@Test
-	public void testFetchClientesByRequest() throws Exception
-	{
-		// check for valid and precount
-		ClienteInquiryRequest request = new ClienteInquiryRequest();
-		request.setPreQueryCount(true);
-		request.setStartPage(0);
-		request.setPageSize(4);
-		InternalResultsResponse<Cliente> response = getPessoaDAC().fetchClienteByRequest(request);
-		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
-		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-	}
-
-	@Test
-	public void testFetchFornecedorsByRequest() throws Exception
-	{
-		// check for valid and precount
-		FornecedorInquiryRequest request = new FornecedorInquiryRequest();
-		request.setPreQueryCount(true);
-		request.setStartPage(0);
-		request.setPageSize(4);
-		InternalResultsResponse<Fornecedor> response = getPessoaDAC().fetchFornecedorByRequest(request);
-		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
-		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-	}
-
-	@Test
-	public void testFetchTransportadorsByRequest() throws Exception
-	{
-		// check for valid and precount
-		TransportadorInquiryRequest request = new TransportadorInquiryRequest();
-		request.setPreQueryCount(true);
-		request.setStartPage(0);
-		request.setPageSize(4);
-		InternalResultsResponse<Transportador> response = getPessoaDAC().fetchTransportadorByRequest(request);
-		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
-		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-	}
-
-	@Test
-	public void testFetchContadorsByRequest() throws Exception
-	{
-		// check for valid and precount
-		ContadorInquiryRequest request = new ContadorInquiryRequest();
-		request.setPreQueryCount(true);
-		request.setStartPage(0);
-		request.setPageSize(4);
-		InternalResultsResponse<Contador> response = getPessoaDAC().fetchContadorByRequest(request);
-		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
-		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-	}
-
-	@Test
-	public void testFetchFuncionariosById() throws Exception
-	{
-		// check for valid and precount
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(2);
-		InternalResultsResponse<Funcionario> response = getPessoaDAC().fetchFuncionarioById(request);
-		assertTrue(response.getResultsList().size() == 1);
-		assertEquals(response.getStatus(), Status.OperationSuccess);
-	}
-
-	@Test
-	public void testFetchClientesById() throws Exception
+	public void testfetchEmpresaById() throws Exception
 	{
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
-		InternalResultsResponse<Cliente> response = getPessoaDAC().fetchClienteById(request);
+		InternalResultsResponse<Cliente> response = getEntidadeDAC().fetchClienteById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+	
+	@Test
+	public void testfetchEmpresaByRequest() throws Exception
+	{
+		// check for valid and precount
+		EmpresaInquiryRequest request = new EmpresaInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<Empresa> response = getEntidadeDAC().fetchEmpresaByRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	@Test
+	public void testinsertFilial() throws Exception
+	{
+
+		Filial funcionario = new Filial();
+		funcionario = insertFilial(PersistanceActionEnum.INSERT);
+
+		InternalResultsResponse<Filial> funcionarioResponse = getEntidadeDAC().insertFilial(funcionario);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+
+	}
+
+	@Test
+	public void testupdateFilial() throws Exception
+	{
+
+		Filial funcionario = new Filial();
+		funcionario = insertFilial(PersistanceActionEnum.UPDATE);
+
+		InternalResultsResponse<Filial> funcionarioResponse = getEntidadeDAC().insertFilial(funcionario);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+
+	}
+
+	@Test
+	public void testdeleteFilial() throws Exception
+	{
+
+		Filial funcionario = new Filial();
+		funcionario.setId(1);
+		funcionario = insertFilial(PersistanceActionEnum.DELETE);
+		InternalResponse funcionarioResponse = getEntidadeDAC().deleteFilial(funcionario);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchFilialById() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Cliente> response = getEntidadeDAC().fetchClienteById(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testFetchFornecedorsById() throws Exception
+	public void testfetchFilialByRequest() throws Exception
 	{
 		// check for valid and precount
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
-		InternalResultsResponse<Fornecedor> response = getPessoaDAC().fetchFornecedorById(request);
-		assertEquals(response.getStatus(), Status.OperationSuccess);
-	}
-
-	@Test
-	public void testFetchTransportadorsById() throws Exception
-	{
-		// check for valid and precount
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
-		InternalResultsResponse<Transportador> response = getPessoaDAC().fetchTransportadorById(request);
-		assertTrue(response.getResultsList().size() == 1);
-		assertEquals(response.getStatus(), Status.OperationSuccess);
-	}
-
-	@Test
-	public void testFetchContadorsById() throws Exception
-	{
-		// check for valid and precount
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
-		InternalResultsResponse<Contador> response = getPessoaDAC().fetchContadorById(request);
-		assertTrue(response.getResultsList().size() == 1);
-		assertEquals(response.getStatus(), Status.OperationSuccess);
-	}
-
-	@Test
-	public void testFetchAgenciaByRequest() throws Exception
-	{
-		// check for valid and precount
-		AgenciaInquiryRequest request = new AgenciaInquiryRequest();
+		FilialInquiryRequest request = new FilialInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(4);
-		InternalResultsResponse<Agencia> response = getPessoaDAC().fetchAgenciaByRequest(request);
+		InternalResultsResponse<Filial> response = getEntidadeDAC().fetchFilialByRequest(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
 	@Test
-	public void testFetchBancoByRequest() throws Exception
-	{
-		// check for valid and precount
-		BancoInquiryRequest request = new BancoInquiryRequest();
-		request.setPreQueryCount(true);
-		request.setStartPage(0);
-		request.setPageSize(4);
-		InternalResultsResponse<Banco> response = getPessoaDAC().fetchBancoByRequest(request);
-		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
-		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-	}
-
-	@Test
-	public void testFetchBeneficiosRequest() throws Exception
-	{
-		// check for valid and precount
-		BeneficiosInquiryRequest request = new BeneficiosInquiryRequest();
-		request.setPreQueryCount(true);
-		request.setStartPage(0);
-		request.setPageSize(4);
-		InternalResultsResponse<Beneficios> response = getPessoaDAC().fetchBeneficiosRequest(request);
-		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
-		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-	}
-
-	@Test
-	public void testFetchContaByRequest() throws Exception
-	{
-		// check for valid and precount
-		ContaInquiryRequest request = new ContaInquiryRequest();
-		request.setPreQueryCount(true);
-		request.setStartPage(0);
-		request.setPageSize(4);
-		InternalResultsResponse<Conta> response = getPessoaDAC().fetchContaByRequest(request);
-		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
-		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-	}
-
-	@Test
-	public void testFetchConveniosByRequest() throws Exception
-	{
-		// check for valid and precount
-		ConvenioInquiryRequest request = new ConvenioInquiryRequest();
-		request.setPreQueryCount(true);
-		request.setStartPage(0);
-		request.setPageSize(4);
-		InternalResultsResponse<Convenio> response = getPessoaDAC().fetchConvenioByRequest(request);
-		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
-		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-	}
-
-	@Test
-	public void testFetchEventosByRequest() throws Exception
-	{
-		// check for valid and precount
-		EventoInquiryRequest request = new EventoInquiryRequest();
-		request.setPreQueryCount(true);
-		request.setStartPage(0);
-		request.setPageSize(4);
-		InternalResultsResponse<Eventos> response = getPessoaDAC().fetchEventosRequest(request);
-		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
-		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-	}
-
-	@Test
-	public void testFetchFormaPgByRequest() throws Exception
-	{
-		// check for valid and precount
-		FormaPgInquiryRequest request = new FormaPgInquiryRequest();
-		request.setPreQueryCount(true);
-		request.setStartPage(0);
-		request.setPageSize(4);
-		InternalResultsResponse<FormaPg> response = getPessoaDAC().fetchFormaPgByRequest(request);
-		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
-		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-	}
-
-	@Test
-	public void testFetchHorarioFuncsByRequest() throws Exception
-	{
-		// check for valid and precount
-		HoraFuncInquiryRequest request = new HoraFuncInquiryRequest();
-		request.setPreQueryCount(true);
-		request.setStartPage(0);
-		request.setPageSize(4);
-		InternalResultsResponse<HorarioFunc> response = getPessoaDAC().fetchHorarioFuncsRequest(request);
-		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
-		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-	}
-
-	@Test
-	public void testFetchProfissaoByRequest() throws Exception
-	{
-		// check for valid and precount
-		ProfissaoInquiryRequest request = new ProfissaoInquiryRequest();
-		request.setPreQueryCount(true);
-		request.setStartPage(0);
-		request.setPageSize(4);
-		InternalResultsResponse<Profissao> response = getPessoaDAC().fetchProfissaoByRequest(request);
-		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
-		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-	}
-
-	// ================================
-	@Test
-	public void testupdateMedico() throws Exception
+	public void testinsertDeposito() throws Exception
 	{
 
-		Medico funcionario = new Medico();
-		funcionario = insertMedico(PersistanceActionEnum.UPDATE);
+		Deposito funcionario = new Deposito();
+		funcionario = insertDeposito(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Medico> funcionarioResponse = getPessoaDAC().updateMedico(funcionario);
+		InternalResultsResponse<Deposito> funcionarioResponse = getEntidadeDAC().insertDeposito(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
 	@Test
-	public void testinsertMedico() throws Exception
+	public void testupdateDeposito() throws Exception
 	{
 
-		Medico funcionario = new Medico();
-		funcionario = insertMedico(PersistanceActionEnum.INSERT);
-		InternalResultsResponse<Medico> funcionarioResponse = getPessoaDAC().insertMedico(funcionario);
+		Deposito funcionario = new Deposito();
+		funcionario = insertDeposito(PersistanceActionEnum.INSERT);
+
+		InternalResultsResponse<Deposito> funcionarioResponse = getEntidadeDAC().insertDeposito(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
+	
 
 	@Test
-	public void testdeleteMedico() throws Exception
+	public void testdeleteDeposito() throws Exception
 	{
 
-		Medico funcionario = new Medico();
-		funcionario = insertMedico(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getPessoaDAC().deleteMedico(funcionario);
+		Deposito funcionario = new Deposito();
+		funcionario.setId(1);
+		funcionario = insertDeposito(PersistanceActionEnum.DELETE);
+		InternalResponse funcionarioResponse = getEntidadeDAC().deleteDeposito(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-
 	}
 
 	@Test
-	public void testfetchMedicoById() throws Exception
+	public void testfetchDepositoById() throws Exception
 	{
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
-		InternalResultsResponse<Medico> response = getPessoaDAC().fetchMedicoById(request);
-		assertTrue(response.getResultsList().size() == 1);
+		request.setFetchId(3);
+		InternalResultsResponse<Cliente> response = getEntidadeDAC().fetchClienteById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testfetchMedicoByRequest() throws Exception
+	public void testfetchDepositoByRequest() throws Exception
 	{
 		// check for valid and precount
-		MedicoInquiryRequest request = new MedicoInquiryRequest();
+		DepositoInquiryRequest request = new DepositoInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(4);
-		InternalResultsResponse<Medico> response = getPessoaDAC().fetchMedicoByRequest(request);
+		InternalResultsResponse<Deposito> response = getEntidadeDAC().fetchDepositoByRequest(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
-	// ================================
 	@Test
-	public void testupdatePaciente() throws Exception
+	public void testfetchCnaeByRequest() throws Exception
 	{
-
-		Transportador funcionario = new Transportador();
-		funcionario = insertTransportador(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Transportador> funcionarioResponse = getPessoaDAC().updateTransportador(funcionario);
-		assertEquals(funcionarioResponse, null);
-		getPessoaDAC().updateTransportador(funcionario);
-
+		// check for valid and precount
+		CnaeInquiryRequest request = new CnaeInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<Cnae> response = getEntidadeDAC().fetchCnaeByRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
 	@Test
-	public void testinsertPaciente() throws Exception
+	public void testfetchRegimeByRequest() throws Exception
+	{
+		// check for valid and precount
+		RegimeInquiryRequest request = new RegimeInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<Regime> response = getEntidadeDAC().fetchRegimeByRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	@Test
+	public void testfetchCidadeByRequest() throws Exception
+	{
+		// check for valid and precount
+		CidadeInquiryRequest request = new CidadeInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(4);
+		InternalResultsResponse<Cidade> response = getEntidadeDAC().fetchCidadeByRequest(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
+		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	@Test
+	public void testinsertCidade() throws Exception
 	{
 
-		Paciente funcionario = new Paciente();
-		funcionario = insertPaciente(PersistanceActionEnum.INSERT);
-		InternalResultsResponse<Paciente> funcionarioResponse = getPessoaDAC().insertPaciente(funcionario);
+		Cidade funcionario = new Cidade();
+		funcionario = insertCidade(PersistanceActionEnum.INSERT);
+
+		InternalResultsResponse<Cidade> funcionarioResponse = getEntidadeDAC().insertCidade(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
 	@Test
-	public void testdeletePaciente() throws Exception
+	public void testupdateCidade() throws Exception
 	{
 
-		Paciente funcionario = new Paciente();
-		funcionario = insertPaciente(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getPessoaDAC().deletePaciente(funcionario);
+		Cidade funcionario = new Cidade();
+		funcionario = insertCidade(PersistanceActionEnum.INSERT);
+
+		InternalResultsResponse<Cidade> funcionarioResponse = getEntidadeDAC().insertCidade(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
 	@Test
-	public void testfetchPacienteById() throws Exception
+	public void testdeleteCidade() throws Exception
 	{
-		// check for valid and precount
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
-		InternalResultsResponse<Paciente> response = getPessoaDAC().fetchPacienteById(request);
-		assertTrue(response.getResultsList().size() == 1);
-		assertEquals(response.getStatus(), Status.OperationSuccess);
+
+		Cidade funcionario = new Cidade();
+		funcionario.setId(1);
+		funcionario = insertCidade(PersistanceActionEnum.DELETE);
+		InternalResponse funcionarioResponse = getEntidadeDAC().deleteCidade(funcionario);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testfetchPacienteByRequest() throws Exception
+	public void testfetchPlanoByRequest() throws Exception
 	{
 		// check for valid and precount
-		PacienteInquiryRequest request = new PacienteInquiryRequest();
+		PlanoInquiryRequest request = new PlanoInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(4);
-		InternalResultsResponse<Paciente> response = getPessoaDAC().fetchPacienteByRequest(request);
+		InternalResultsResponse<Plano> response = getEntidadeDAC().fetchPlanoByRequest(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
 	@Test
-	public void testfetchConsultaByRequest() throws Exception
+	public void testfetchClassificacaoByRequest() throws Exception
 	{
 		// check for valid and precount
-		ConsultaInquiryRequest request = new ConsultaInquiryRequest();
+		ClassificacaoInquiryRequest request = new ClassificacaoInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(4);
-		InternalResultsResponse<Consulta> response = getPessoaDAC().fetchConsultaByRequest(request);
-		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
-		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-	}
-
-	@Test
-	public void testfetchEspecialidadeRequest() throws Exception
-	{
-		// check for valid and precount
-		EspecializacaoInquiryRequest request = new EspecializacaoInquiryRequest();
-		request.setPreQueryCount(true);
-		request.setStartPage(0);
-		request.setPageSize(4);
-		InternalResultsResponse<Especialidade> response = getPessoaDAC().fetchEspecialidadeByRequest(request);
-		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
-		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-	}
-
-	@Test
-	public void testfetchExameRequest() throws Exception
-	{
-		// check for valid and precount
-		ExameInquiryRequest request = new ExameInquiryRequest();
-		request.setPreQueryCount(true);
-		request.setStartPage(0);
-		request.setPageSize(4);
-		InternalResultsResponse<Exame> response = getPessoaDAC().fetchExameByRequest(request);
-		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
-		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-	}
-
-	@Test
-	public void testfetchPlanoSaudeRequest() throws Exception
-	{
-		// check for valid and precount
-		PlanoSaudeInquiryRequest request = new PlanoSaudeInquiryRequest();
-		request.setPreQueryCount(true);
-		request.setStartPage(0);
-		request.setPageSize(4);
-		InternalResultsResponse<PlanoSaude> response = getPessoaDAC().fetchPlanoSaudeRequest(request);
+		InternalResultsResponse<Classificacao> response = getEntidadeDAC().fetchClassificacaoByRequest(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
@@ -710,7 +402,7 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertPessoa.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertEntidade.sql", false);
 		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBeneficios.sql", false);
 		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertCondPag.sql", false);
@@ -795,10 +487,10 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 
 	}
 
-	public List<BancoPessoa> bancoList(PersistanceActionEnum action)
+	public List<BancoEntidade> bancoList(PersistanceActionEnum action)
 	{
-		List<BancoPessoa> documentoList = new ArrayList<BancoPessoa>();
-		BancoPessoa documento = new BancoPessoa();
+		List<BancoEntidade> documentoList = new ArrayList<BancoEntidade>();
+		BancoEntidade documento = new BancoEntidade();
 		documento.setModelAction(action);
 		documento.setBancoId(new Banco(0, "ITAU", action));
 		documento.setProcessId(1);
@@ -807,178 +499,18 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		return documentoList;
 
 	}
+	
 
-	public List<FormaPgPessoa> formaPagamentoList(PersistanceActionEnum action)
+	public List<CfopEntidade> cfopList(PersistanceActionEnum action)
 	{
-		List<FormaPgPessoa> documentoList = new ArrayList<FormaPgPessoa>();
-		FormaPgPessoa documento = new FormaPgPessoa();
-		documento.setModelAction(action);
-		documento.setFormaPgId(new FormaPg(0, "descricao", 12345678, 123456789, action));
-		documento.setProcessId(1);
-		documentoList.add(documento);
-		return documentoList;
-
-	}
-
-	public List<CondPagPessoa> condPagList(PersistanceActionEnum action)
-	{
-		List<CondPagPessoa> documentoList = new ArrayList<CondPagPessoa>();
-		CondPagPessoa documento = new CondPagPessoa();
-		documento.setModelAction(action);
-		documento.setCondPagId(condPagsList(action).get(0));
-		documento.setProcessId(1);
-		documentoList.add(documento);
-		return documentoList;
-
-	}
-
-	public List<CondPag> condPagsList(PersistanceActionEnum action)
-	{
-		List<CondPag> documentoList = new ArrayList<CondPag>();
-		CondPag documento = new CondPag(0, "nome", 11111111, 2222222, 2, tipoPagList(action), action);
-		documento.setProcessId(1);
-		documentoList.add(documento);
-		return documentoList;
-
-	}
-
-	public List<TipoPag> tipoPagList(PersistanceActionEnum action)
-	{
-		List<TipoPag> documentoList = new ArrayList<TipoPag>();
-		TipoPag documento = new TipoPag(0, "descricao", action);
-		documento.setProcessId(1);
-		documentoList.add(documento);
-		return documentoList;
-
-	}
-
-	public List<Contato> contatoList(PersistanceActionEnum action)
-	{
-		List<Contato> documentoList = new ArrayList<Contato>();
-		List<ContatoItens> contatoItensList = new ArrayList<ContatoItens>();
-		contatoItensList.add(new ContatoItens(0, (long)123456789, "texto", "titulo", action));
-		contatoItensList.add(new ContatoItens(0, (long)123456789, "texto", "titulo", action));
-		Contato documento =
-				new Contato(0, 123456789, "nome", "email", "telefone", ContatoTypeEnum.COBRANCA, contatoItensList,
-						action);
-
-		documentoList.add(documento);
-		return documentoList;
-
-	}
-
-	public List<Salario> salarioList(PersistanceActionEnum action)
-	{
-		List<Salario> salarioList = new ArrayList<Salario>();
-		Salario salario = new Salario();
-
-		salario.setId(0);
-		salario.setProfissao(profissaoList(action).get(0));
-		salario.setData((long)123456789);
-		salario.setValor(1.99);
-		salario.setProcessId(1);
-		salario.setModelAction(action);
-
-		salarioList.add(salario);
-		return salarioList;
-
-	}
-
-	public List<HorarioFunc> horarioList(PersistanceActionEnum action)
-	{
-		List<HorarioFunc> documentoList = new ArrayList<HorarioFunc>();
-		HorarioFunc documento = new HorarioFunc();
-		documento.setHorarioEntr((long)123456789);
-		documento.setModelAction(action);
-		documento.setProcessId(1);
-		documentoList.add(documento);
-		return documentoList;
-
-	}
-
-	public List<BeneficioPessoa> beneficioList(PersistanceActionEnum action)
-	{
-		List<BeneficioPessoa> documentoList = new ArrayList<BeneficioPessoa>();
-		BeneficioPessoa documento = new BeneficioPessoa();
-		documento.setModelAction(action);
-		documento.setBenefId(new Beneficios(0, "nome", "codigo", "descricao", 1.98, 10, "tipo", action));
-		documento.setProcessId(1);
-		documento.setIdFunc(1);
-		documentoList.add(documento);
-		return documentoList;
-
-	}
-
-	public List<EventoPessoa> eventosList(PersistanceActionEnum action)
-	{
-		List<EventoPessoa> documentoList = new ArrayList<EventoPessoa>();
-		List<EventoMesApp> eventoMesAppList = new ArrayList<EventoMesApp>();
-		EventoMesApp eventoMesApp = new EventoMesApp();
-		for (Integer i = 0; i < 5; i++)
-		{
-			eventoMesApp = new EventoMesApp();
-			eventoMesApp.setId(i);
-			eventoMesApp.setData((long)1457547231);
-			eventoMesAppList.add(eventoMesApp);
-
-		}
-		EventoPessoa documento = new EventoPessoa();
-		documento.setModelAction(action);
-		documento.setProcessId(1);
-		documento.setIdEvent(new Eventos(0, "nome", eventoMesAppList, "descricao", "codigo", "tipo",
-				0.99, (double)10, true, true, "noteText", action));
-
-		documentoList.add(documento);
-		return documentoList;
-
-	}
-
-	public List<Profissao> profissaoList(PersistanceActionEnum action)
-	{
-		List<Profissao> documentoList = new ArrayList<Profissao>();
-		Profissao documento = new Profissao();
-		documento.setModelAction(action);
-		documento.setProcessId(1);
-		documentoList.add(documento);
-		return documentoList;
-
-	}
-
-	public List<ConvenioPessoa> convenioList(PersistanceActionEnum action)
-	{
-		List<ConvenioPessoa> documentoList = new ArrayList<ConvenioPessoa>();
-		ConvenioPessoa documento = new ConvenioPessoa();
-		documento.setModelAction(action);
-		documento.setProcessId(1);
-		documento.setConvId(new Convenio(0, "nome", 12334567, 1234567, 0.55, 1.99,
-				condPagsList(action), tipoPagList(action), action));
-
-		documentoList.add(documento);
-		return documentoList;
-
-	}
-
-	public List<CfopPessoa> cfopList(PersistanceActionEnum action)
-	{
-		List<CfopPessoa> documentoList = new ArrayList<CfopPessoa>();
-		CfopPessoa documento = new CfopPessoa();
+		List<CfopEntidade> documentoList = new ArrayList<CfopEntidade>();
+		CfopEntidade documento = new CfopEntidade();
 		documento.setModelAction(action);
 		documento.setProcessId(1);
 		documento.setIdCfop(new Cfop(0, "cfop", "natureza", "simplificado", CfopTypeEnum.ENTRADA, 0.39, 0.15, 0.54,
 				0.9, 0.1, "observacao", action));
 		documento.setParentId(1);
 
-		documentoList.add(documento);
-		return documentoList;
-
-	}
-
-	public List<ProdutoPessoa> produtoList(PersistanceActionEnum action)
-	{
-		List<ProdutoPessoa> documentoList = new ArrayList<ProdutoPessoa>();
-		ProdutoPessoa documento = new ProdutoPessoa();
-		documento.setModelAction(action);
-		documento.setProcessId(1);
 		documentoList.add(documento);
 		return documentoList;
 
@@ -996,224 +528,113 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		return documentoList;
 
 	}
-
-	public Funcionario insertFuncionario(PersistanceActionEnum action)
+	
+	public List<CnaePessoa> cnaeList(PersistanceActionEnum action)
 	{
-		Funcionario pessoa = new Funcionario();
-		Date a = new Date();
-		pessoa.setId(1);
-		pessoa.setMatricula("matricula");
-		pessoa.setDataAdm(a.getTime());
-		pessoa.setNome("TESTE0001");
-		pessoa.setNomePai("nomePai");
-		pessoa.setEmprId(9);
-		pessoa.setNomeMae("nomeMae");
-		pessoa.setNomeConjugue("nomeConjugue");
-		pessoa.setEstadoCivil(0);
-		pessoa.setTipoPessoa(1);
-		pessoa.setDatanasc(a.getTime());
-		pessoa.setFoto("foto");
-		pessoa.setPessoaTypeEnum(PessoaTypeEnum.FUNCIONARIO);
-		pessoa.setSexo(1);
-		pessoa.setModelAction(action);
-		pessoa.setDocumentos(documentoList(action));
-		pessoa.setTelefones(telefoneList(action));
-		pessoa.setEmails(emailList(action));
-		pessoa.setEnderecos(enderecoList(action));
-		pessoa.setBancos(bancoList(action));
-		pessoa.setNotes(noteList(action));
-		pessoa.setContatoList(contatoList(action));
-		pessoa.setFormaPagamentoList(formaPagamentoList(action));
-		pessoa.setCondPagList(condPagList(action));
-		pessoa.setBeneficios(beneficioList(action));
-		pessoa.setProcessId(1);
+		List<CnaePessoa> cnaeList = new ArrayList<CnaePessoa>();
+		cnaeList.add(new CnaePessoa(1,1, action ,new Cnae(0,"CNAE","DESCRICAO","ABREV", action)))));
+		cnaeList.add(new CnaePessoa(1,1, action ,new Cnae(0,"CNAE","DESCRICAO","ABREV", action)))));
+		cnaeList.add(new CnaePessoa(1,1, action ,new Cnae(0,"CNAE","DESCRICAO","ABREV", action)))));
+		cnaeList.add(new CnaePessoa(1,1, action ,new Cnae(0,"CNAE","DESCRICAO","ABREV", action)))));
+		cnaeList.add(new CnaePessoa(1,1, action ,new Cnae(0,"CNAE","DESCRICAO","ABREV", action)))));
+		return documentoList;
 
-		return pessoa;
+	}
+	
+	public Regime insertRegime(PersistanceActionEnum action){
+		
+		Regime regime = new Regime();		
+		regime.setId(1);
+		regime.setNome("NOME");
+		regime.setDescricao("DESCRICAO");
+		regime.setModelAction(action);
+		
+	}
+	
+	public Usuario insertUsuario(PersistanceActionEnum action){
+		Date a = new Date();
+		Usuario usuario = new Usuario();		
+		usuario.setId(1);
+		usuario.setlogin("LOGIN")
+		usuario.setSenha("SENHA")
+		usuario.setPergunta("PERGUNTA")
+		usuario.setRole("ROLE")
+		usuario.setLanguage("LANGUAGEM");
+		usuario.setUltAcesso(a.getTime())
+		usuario.setEmails(emailList(action));
+		
 	}
 
-	public Cliente insertCliente(PersistanceActionEnum action)
+	public Empresa insertEmpresa(PersistanceActionEnum action)
 	{
-		Cliente pessoa = new Cliente();
+		Empresa funcionario = new Empresa();
 		Date a = new Date();
-		pessoa.setId(1);
-		pessoa.setNome("TESTE0001");
-		pessoa.setNomePai("nomePai");
-		pessoa.setEmprId(9);
-		pessoa.setNomeMae("nomeMae");
-		pessoa.setNomeConjugue("nomeConjugue");
-		pessoa.setEstadoCivil(0);
-		pessoa.setTipoPessoa(1);
-		pessoa.setDatanasc(a.getTime());
-		pessoa.setFoto("foto");
-		pessoa.setPessoaTypeEnum(PessoaTypeEnum.FUNCIONARIO);
-		pessoa.setSexo(1);
-		pessoa.setModelAction(action);
-		pessoa.setDocumentos(documentoList(action));
-		pessoa.setTelefones(telefoneList(action));
-		pessoa.setEmails(emailList(action));
-		pessoa.setEnderecos(enderecoList(action));
-		pessoa.setBancos(bancoList(action));
-		pessoa.setNotes(noteList(action));
-		pessoa.setContatoList(contatoList(action));
-		pessoa.setFormaPagamentoList(formaPagamentoList(action));
-		pessoa.setCondPagList(condPagList(action));
-		pessoa.setProcessId(1);
+		
+		funcionario.setId(1);
+		funcionario.setNome("NOME");
+		funcionario.setRegime(insertRegime(action));
+		funcionario.setEntidadeId(1);
+		funcionario.setEntidadeEnum(EntidadeTypeEnum.EMPRESA);
+		funcionario.setConfiguracao(new Configuracao());
+		funcionario.setCnaes(cnaeList(action));
+		funcionario.setUsuarios(insertUsuario(action));
+		funcionario.setProcessId(1);
+		funcionario.setDocumentos(documentoList(action));
+		funcionario.setTelefones(telefoneList(action));
+		funcionario.setEmails(emailList(action));
+		funcionario.setEnderecos(enderecoList(action));
+		funcionario.setBancos(bancoList(action));
+		funcionario.setNotes(noteList(action));
 
-		return pessoa;
+		return funcionario;
 	}
 
-	public Fornecedor insertFornecedor(PersistanceActionEnum action)
+	public Filial insertFilial(PersistanceActionEnum action)
 	{
-		Fornecedor pessoa = new Fornecedor();
-		pessoa.setId(1);
+		Filial funcionario = new Filial();
 		Date a = new Date();
-		pessoa.setNome("TESTE0001");
-		pessoa.setNomePai("nomePai");
-		pessoa.setEmprId(9);
-		pessoa.setNomeMae("nomeMae");
-		pessoa.setNomeConjugue("nomeConjugue");
-		pessoa.setEstadoCivil(0);
-		pessoa.setTipoPessoa(1);
-		pessoa.setDatanasc(a.getTime());
-		pessoa.setFoto("foto");
-		pessoa.setPessoaTypeEnum(PessoaTypeEnum.FUNCIONARIO);
-		pessoa.setSexo(1);
-		pessoa.setModelAction(action);
-		pessoa.setDocumentos(documentoList(action));
-		pessoa.setTelefones(telefoneList(action));
-		pessoa.setEmails(emailList(action));
-		pessoa.setEnderecos(enderecoList(action));
-		pessoa.setBancos(bancoList(action));
-		pessoa.setNotes(noteList(action));
-		pessoa.setContatoList(contatoList(action));
-		pessoa.setFormaPagamentoList(formaPagamentoList(action));
-		pessoa.setCondPagList(condPagList(action));
-		pessoa.setProcessId(1);
+		
+		funcionario.setId(1);
+		funcionario.setNome("NOME");
+		funcionario.setRegime(insertRegime(action));
+		funcionario.setEntidadeId(1);
+		funcionario.setEntidadeEnum(EntidadeTypeEnum.FILIAL);
+		funcionario.setConfiguracao(new Configuracao());
+		funcionario.setCnaes(cnaeList(action));
+		funcionario.setUsuarios(insertUsuario(action));
+		funcionario.setProcessId(1);
+		funcionario.setDocumentos(documentoList(action));
+		funcionario.setTelefones(telefoneList(action));
+		funcionario.setEmails(emailList(action));
+		funcionario.setEnderecos(enderecoList(action));
+		funcionario.setBancos(bancoList(action));
+		funcionario.setNotes(noteList(action));
 
-		return pessoa;
+		return funcionario;
 	}
 
-	public Transportador insertTransportador(PersistanceActionEnum action)
+	public Deposito insertDeposito(PersistanceActionEnum action)
 	{
-		Transportador pessoa = new Transportador();
+		Deposito funcionario = new Deposito();
 		Date a = new Date();
-		pessoa.setId(1);
-		pessoa.setNome("TESTE0001");
-		pessoa.setNomePai("nomePai");
-		pessoa.setEmprId(9);
-		pessoa.setNomeMae("nomeMae");
-		pessoa.setNomeConjugue("nomeConjugue");
-		pessoa.setEstadoCivil(0);
-		pessoa.setTipoPessoa(1);
-		pessoa.setDatanasc(a.getTime());
-		pessoa.setFoto("foto");
-		pessoa.setPessoaTypeEnum(PessoaTypeEnum.FUNCIONARIO);
-		pessoa.setSexo(1);
-		pessoa.setModelAction(action);
-		pessoa.setDocumentos(documentoList(action));
-		pessoa.setTelefones(telefoneList(action));
-		pessoa.setEmails(emailList(action));
-		pessoa.setEnderecos(enderecoList(action));
-		pessoa.setBancos(bancoList(action));
-		pessoa.setNotes(noteList(action));
-		pessoa.setContatoList(contatoList(action));
-		pessoa.setFormaPagamentoList(formaPagamentoList(action));
-		pessoa.setCondPagList(condPagList(action));
-		pessoa.setProcessId(1);
+		
+		funcionario.setId(1);
+		funcionario.setNome("NOME");
+		funcionario.setRegime(insertRegime(action));
+		funcionario.setEntidadeId(1);
+		funcionario.setEntidadeEnum(EntidadeTypeEnum.DEPOSITO);
+		funcionario.setConfiguracao(new Configuracao());
+		funcionario.setCnaes(cnaeList(action));
+		funcionario.setUsuarios(insertUsuario(action));
+		funcionario.setProcessId(1);
+		funcionario.setDocumentos(documentoList(action));
+		funcionario.setTelefones(telefoneList(action));
+		funcionario.setEmails(emailList(action));
+		funcionario.setEnderecos(enderecoList(action));
+		funcionario.setBancos(bancoList(action));
+		funcionario.setNotes(noteList(action));
 
-		return pessoa;
+		return funcionario;
 	}
 
-	public Contador insertContador(PersistanceActionEnum action)
-	{
-		Contador pessoa = new Contador();
-		Date a = new Date();
-		pessoa.setId(1);
-		pessoa.setNome("TESTE0001");
-		pessoa.setNomePai("nomePai");
-		pessoa.setEmprId(9);
-		pessoa.setNomeMae("nomeMae");
-		pessoa.setNomeConjugue("nomeConjugue");
-		pessoa.setEstadoCivil(0);
-		pessoa.setTipoPessoa(1);
-		pessoa.setDatanasc(a.getTime());
-		pessoa.setFoto("foto");
-		pessoa.setPessoaTypeEnum(PessoaTypeEnum.FUNCIONARIO);
-		pessoa.setSexo(1);
-		pessoa.setModelAction(action);
-		pessoa.setDocumentos(documentoList(action));
-		pessoa.setTelefones(telefoneList(action));
-		pessoa.setEmails(emailList(action));
-		pessoa.setEnderecos(enderecoList(action));
-		pessoa.setBancos(bancoList(action));
-		pessoa.setNotes(noteList(action));
-		pessoa.setContatoList(contatoList(action));
-		pessoa.setFormaPagamentoList(formaPagamentoList(action));
-		pessoa.setCondPagList(condPagList(action));
-		pessoa.setProcessId(1);
-
-		return pessoa;
-	}
-
-	public Medico insertMedico(PersistanceActionEnum action)
-	{
-		Medico pessoa = new Medico();
-		Date a = new Date();
-		pessoa.setId(1);
-		pessoa.setNome("TESTE0001");
-		pessoa.setNomePai("nomePai");
-		pessoa.setEmprId(9);
-		pessoa.setNomeMae("nomeMae");
-		pessoa.setNomeConjugue("nomeConjugue");
-		pessoa.setEstadoCivil(0);
-		pessoa.setTipoPessoa(1);
-		pessoa.setDatanasc(a.getTime());
-		pessoa.setFoto("foto");
-		pessoa.setPessoaTypeEnum(PessoaTypeEnum.FUNCIONARIO);
-		pessoa.setSexo(1);
-		pessoa.setModelAction(action);
-		pessoa.setDocumentos(documentoList(action));
-		pessoa.setTelefones(telefoneList(action));
-		pessoa.setEmails(emailList(action));
-		pessoa.setEnderecos(enderecoList(action));
-		pessoa.setBancos(bancoList(action));
-		pessoa.setNotes(noteList(action));
-		pessoa.setContatoList(contatoList(action));
-		pessoa.setFormaPagamentoList(formaPagamentoList(action));
-		pessoa.setCondPagList(condPagList(action));
-		pessoa.setProcessId(1);
-
-		return pessoa;
-	}
-
-	public Paciente insertPaciente(PersistanceActionEnum action)
-	{
-		Paciente pessoa = new Paciente();
-		Date a = new Date();
-		pessoa.setId(1);
-		pessoa.setNome("TESTE0001");
-		pessoa.setNomePai("nomePai");
-		pessoa.setEmprId(9);
-		pessoa.setNomeMae("nomeMae");
-		pessoa.setNomeConjugue("nomeConjugue");
-		pessoa.setEstadoCivil(0);
-		pessoa.setTipoPessoa(1);
-		pessoa.setDatanasc(a.getTime());
-		pessoa.setFoto("foto");
-		pessoa.setPessoaTypeEnum(PessoaTypeEnum.FUNCIONARIO);
-		pessoa.setSexo(1);
-		pessoa.setModelAction(action);
-		pessoa.setDocumentos(documentoList(action));
-		pessoa.setTelefones(telefoneList(action));
-		pessoa.setEmails(emailList(action));
-		pessoa.setEnderecos(enderecoList(action));
-		pessoa.setBancos(bancoList(action));
-		pessoa.setNotes(noteList(action));
-		pessoa.setContatoList(contatoList(action));
-		pessoa.setFormaPagamentoList(formaPagamentoList(action));
-		pessoa.setCondPagList(condPagList(action));
-		pessoa.setProcessId(1);
-
-		return pessoa;
-	}
 }
