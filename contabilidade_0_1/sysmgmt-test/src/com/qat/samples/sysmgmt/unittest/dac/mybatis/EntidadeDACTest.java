@@ -108,6 +108,18 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 
 		InternalResultsResponse<Empresa> funcionarioResponse = getEntidadeDAC().insertEmpresa(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(22);
+		InternalResultsResponse<Produto> responseA = getPessoaDAC().fetchFuncionarioById(request);
+		assertTrue(responseA.getResultsList().size() == 1);
+		assertTrue(responseA.getResultsList().get(0).getRegime().getNome() == funcionario.getRegime().getNome());
+		assertTrue(responseA.getResultsList().get(0).getDocumentos().size() == funcionario.getDocumentos().size());
+		assertTrue(responseA.getResultsList().get(0).getEnderecos().size() == funcionario.getEnderecos().size());
+		assertTrue(responseA.getResultsList().get(0).getEmails().size() == funcionario.getEmails().size());
+		assertTrue(responseA.getResultsList().get(0).getTelefones().size() == funcionario.getTelefones().size());
+		assertTrue(responseA.getResultsList().get(0).getCnaes().size() == funcionario.getCnaes().size());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertTrue(responseA.getResultsList().get(0).getNotes().size() == funcionario.getNotes().size());
 
 	}
 
@@ -155,6 +167,18 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 
 		InternalResultsResponse<Filial> funcionarioResponse = getEntidadeDAC().insertFilial(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(22);
+		InternalResultsResponse<Produto> responseA = getPessoaDAC().fetchFuncionarioById(request);
+		assertTrue(responseA.getResultsList().size() == 1);
+		assertTrue(responseA.getResultsList().get(0).getRegime().getNome() == funcionario.getRegime().getNome());
+		assertTrue(responseA.getResultsList().get(0).getDocumentos().size() == funcionario.getDocumentos().size());
+		assertTrue(responseA.getResultsList().get(0).getEnderecos().size() == funcionario.getEnderecos().size());
+		assertTrue(responseA.getResultsList().get(0).getEmails().size() == funcionario.getEmails().size());
+		assertTrue(responseA.getResultsList().get(0).getTelefones().size() == funcionario.getTelefones().size());
+		assertTrue(responseA.getResultsList().get(0).getCnaes().size() == funcionario.getCnaes().size());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertTrue(responseA.getResultsList().get(0).getNotes().size() == funcionario.getNotes().size());
 
 	}
 
@@ -214,6 +238,18 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 
 		InternalResultsResponse<Deposito> funcionarioResponse = getEntidadeDAC().insertDeposito(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(22);
+		InternalResultsResponse<Produto> responseA = getPessoaDAC().fetchFuncionarioById(request);
+		assertTrue(responseA.getResultsList().size() == 1);
+		assertTrue(responseA.getResultsList().get(0).getRegime().getNome() == funcionario.getRegime().getNome());
+		assertTrue(responseA.getResultsList().get(0).getDocumentos().size() == funcionario.getDocumentos().size());
+		assertTrue(responseA.getResultsList().get(0).getEnderecos().size() == funcionario.getEnderecos().size());
+		assertTrue(responseA.getResultsList().get(0).getEmails().size() == funcionario.getEmails().size());
+		assertTrue(responseA.getResultsList().get(0).getTelefones().size() == funcionario.getTelefones().size());
+		assertTrue(responseA.getResultsList().get(0).getCnaes().size() == funcionario.getCnaes().size());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertTrue(responseA.getResultsList().get(0).getNotes().size() == funcionario.getNotes().size());
 
 	}
 
