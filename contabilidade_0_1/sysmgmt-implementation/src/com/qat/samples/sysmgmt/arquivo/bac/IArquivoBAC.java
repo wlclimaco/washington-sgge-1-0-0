@@ -1,11 +1,11 @@
-package com.prosperitasglobal.sendsolv.bac;
+package com.qat.samples.sysmgmt.arquivo.bac;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.Arquivo;
-import com.prosperitasglobal.sendsolv.model.request.ArquivoInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.ArquivoMaintenanceRequest;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.arquivo.Arquivo;
+import com.qat.samples.sysmgmt.arquivo.model.request.ArquivoInquiryRequest;
+import com.qat.samples.sysmgmt.arquivo.model.request.ArquivoMaintenanceRequest;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -16,7 +16,7 @@ public interface IArquivoBAC
 
 	/**
 	 * Insert arquivo.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the internal results response
 	 */
@@ -24,7 +24,7 @@ public interface IArquivoBAC
 
 	/**
 	 * Update arquivo.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the internal results response
 	 */
@@ -32,7 +32,7 @@ public interface IArquivoBAC
 
 	/**
 	 * Delete arquivo.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the internal response
 	 */
@@ -40,7 +40,7 @@ public interface IArquivoBAC
 
 	/**
 	 * Fetch arquivo by id.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the internal results response
 	 */
@@ -48,7 +48,7 @@ public interface IArquivoBAC
 
 	/**
 	 * Fetch arquivo by request.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the internal results response
 	 */

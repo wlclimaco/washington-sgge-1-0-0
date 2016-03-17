@@ -1,18 +1,18 @@
-package com.prosperitasglobal.sendsolv.bac;
+package com.qat.samples.sysmgmt.nf.bac;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.OrdemServico;
-import com.prosperitasglobal.sendsolv.model.request.OrdemServicoInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.OrdemServicoMaintenanceRequest;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoMaintenanceRequest;
 
 public interface IOrdemServicoBAC
 {
 
 	/**
 	 * Insert member.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the internal results response< member>
 	 */
@@ -20,7 +20,7 @@ public interface IOrdemServicoBAC
 
 	/**
 	 * Update member.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the internal results response< member>
 	 */
@@ -28,7 +28,7 @@ public interface IOrdemServicoBAC
 
 	/**
 	 * Delete member.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the internal response
 	 */
@@ -36,7 +36,7 @@ public interface IOrdemServicoBAC
 
 	/**
 	 * Fetch member by id.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the internal results response< member>
 	 */
@@ -44,7 +44,7 @@ public interface IOrdemServicoBAC
 
 	/**
 	 * Fetch member by request.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the internal results response< member>
 	 */

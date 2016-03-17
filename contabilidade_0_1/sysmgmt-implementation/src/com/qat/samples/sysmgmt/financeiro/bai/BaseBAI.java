@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.pessoa.bai;
+package com.qat.samples.sysmgmt.financeiro.bai;
 
 import java.util.List;
 

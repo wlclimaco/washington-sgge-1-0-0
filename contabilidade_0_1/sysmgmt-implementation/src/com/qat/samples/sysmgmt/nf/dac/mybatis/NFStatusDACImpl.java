@@ -1,18 +1,18 @@
-package com.prosperitasglobal.sendsolv.dac.mybatis;
+package com.qat.samples.sysmgmt.nf.dac.mybatis;
 
 import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
-import com.prosperitasglobal.sendsolv.dac.INFStatusDAC;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
-import com.prosperitasglobal.sendsolv.model.NFStatus;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.nf.dac.INFStatusDAC;
+import com.qat.samples.sysmgmt.nf.model.NFStatus;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -47,7 +47,7 @@ public class NFStatusDACImpl extends SqlSessionDaoSupport implements INFStatusDA
 		// Associate with parent using statement name passed as parameter
 		insertCount +=
 				QATMyBatisDacHelper
-				.doInsert(getSqlSession(), statementName, nFStatus, response);
+						.doInsert(getSqlSession(), statementName, nFStatus, response);
 
 		return insertCount;
 	}
@@ -86,7 +86,7 @@ public class NFStatusDACImpl extends SqlSessionDaoSupport implements INFStatusDA
 		{
 			updateCount =
 					QATMyBatisDacHelper
-					.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, nFStatus, response);
+							.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, nFStatus, response);
 
 			if (updateCount == 1)
 			{
@@ -106,7 +106,7 @@ public class NFStatusDACImpl extends SqlSessionDaoSupport implements INFStatusDA
 	@Override
 	public InternalResultsResponse<NFStatus> fetchNFStatusByRequest(
 			PagedInquiryRequest request)
-			{
+	{
 		InternalResultsResponse<NFStatus> response =
 				new InternalResultsResponse<NFStatus>();
 
@@ -120,7 +120,7 @@ public class NFStatusDACImpl extends SqlSessionDaoSupport implements INFStatusDA
 				EMPRESA_STMT_FETCH_COUNT,
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
 		return response;
-			}
+	}
 
 	/*
 	 * (non-Javadoc)

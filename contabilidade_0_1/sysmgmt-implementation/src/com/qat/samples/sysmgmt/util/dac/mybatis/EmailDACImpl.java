@@ -21,50 +21,11 @@ public class EmailDACImpl extends SqlSessionDaoSupport implements IEmailDAC
 	/** The Constant CONTACT_STMT_UPDATE. */
 	private static final String CONTACT_STMT_UPDATE = CONTACT_NAMESPACE + "updateEmail";
 
-	/** The Constant CONTACT_STMT_UPDATE_PHONE. */
-	private static final String CONTACT_STMT_UPDATE_PHONE = CONTACT_NAMESPACE + "updatePhone";
-
-	/** The Constant CONTACT_STMT_UPDATE_EMAIL. */
-	private static final String CONTACT_STMT_UPDATE_EMAIL = CONTACT_NAMESPACE + "updateEmail";
-
-	/** The Constant CONTACT_STMT_UPDATE_ADDRESS. */
-	private static final String CONTACT_STMT_UPDATE_ADDRESS = CONTACT_NAMESPACE + "updateAddress";
-
 	/** The Constant CONTACT_STMT_DELETE_BUSINESS_CONTACT. */
 	private static final String CONTACT_STMT_DELETE_BUSINESS_CONTACT = CONTACT_NAMESPACE + "deleteBusinessEmail";
 
-	/** The Constant CONTACT_STMT_DELETE_PERSON_CONTACT. */
-	private static final String CONTACT_STMT_DELETE_PERSON_CONTACT = CONTACT_NAMESPACE + "deletePersonEmail";
-
 	/** The Constant CONTACT_STMT_INSERT. */
 	private static final String CONTACT_STMT_INSERT = CONTACT_NAMESPACE + "insertEmail";
-
-	/** The Constant CONTACT_STMT_INSERT_PHONE. */
-	private static final String CONTACT_STMT_INSERT_PHONE = CONTACT_NAMESPACE + "insertPhone";
-
-	/** The Constant CONTACT_STMT_INSERT_EMAIL. */
-	private static final String CONTACT_STMT_INSERT_EMAIL = CONTACT_NAMESPACE + "insertEmail";
-
-	/** The Constant CONTACT_STMT_INSERT_ADDRESS. */
-	private static final String CONTACT_STMT_INSERT_ADDRESS = CONTACT_NAMESPACE + "insertAddress";
-
-	/** The Constant CONTACT_STMT_FETCH_BY_BUSINESS_ID. */
-	private static final String CONTACT_STMT_FETCH_BY_BUSINESS_ID = CONTACT_NAMESPACE + "fetchEmailsByBusinessId";
-
-	/** The Constant CONTACT_STMT_FETCH_BY_PERSON_ID. */
-	private static final String CONTACT_STMT_FETCH_BY_PERSON_ID = CONTACT_NAMESPACE + "fetchEmailsByPersonId";
-
-	/** The Constant CONTACT_STMT_FETCH_BY_ID. */
-	private static final String CONTACT_STMT_FETCH_BY_ID = CONTACT_NAMESPACE + "fetchEmailsById";
-
-	/** The Constant CONTACT_STMT_FETCH_EMAIL_VERSION. */
-	private static final String CONTACT_STMT_FETCH_EMAIL_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberEmail";
-
-	/** The Constant CONTACT_STMT_FETCH_PHONE_VERSION. */
-	private static final String CONTACT_STMT_FETCH_PHONE_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberPhone";
-
-	/** The Constant CONTACT_STMT_FETCH_ADDRESS_VERSION. */
-	private static final String CONTACT_STMT_FETCH_ADDRESS_VERSION = CONTACT_NAMESPACE + "fetchVersionNumberAddress";
 
 	/** The Constant LOG. */
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(EmailDACImpl.class);
@@ -124,9 +85,6 @@ public class EmailDACImpl extends SqlSessionDaoSupport implements IEmailDAC
 				cnae.setModelAction(QATModel.PersistanceActionEnum.NONE);
 			}
 		}
-
-		updateCount +=
-				QATMyBatisDacHelper.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE_PHONE, cnae, response);
 
 		return updateCount;
 	}

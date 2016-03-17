@@ -2,6 +2,7 @@ package com.qat.samples.sysmgmt.entidade;
 
 import java.util.List;
 
+import com.qat.samples.sysmgmt.conta.ContaCorrente;
 import com.qat.samples.sysmgmt.contabilidade.Plano;
 import com.qat.samples.sysmgmt.pessoa.Socio;
 
@@ -28,7 +29,7 @@ public class Empresa extends Entidade
 	private List<Deposito> depositoList;
 
 	private List<Usuario> usuarioList;
-	
+
 	private List<ContaCorrente> contaCorrenteList;
 
 	public Empresa()
@@ -157,13 +158,24 @@ public class Empresa extends Entidade
 		this.usuarioList = usuarioList;
 	}
 
+	public List<ContaCorrente> getContaCorrenteList()
+	{
+		return contaCorrenteList;
+	}
+
+	public void setContaCorrenteList(List<ContaCorrente> contaCorrenteList)
+	{
+		this.contaCorrenteList = contaCorrenteList;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "Empresa [getPlanoList()=" + getPlanoList() + ", getQntFilial()=" + getQntFilial()
 				+ ", getQntDeposito()=" + getQntDeposito() + ", getSocios()=" + getSocios() + ", getFilialList()="
 				+ getFilialList() + ", getDepositoList()=" + getDepositoList() + ", getQntSocios()=" + getQntSocios()
-				+ ", getUsuarioList()=" + getUsuarioList() + ", toString()=" + super.toString() + "]";
+				+ ", getUsuarioList()=" + getUsuarioList() + ", getContaCorrenteList()=" + getContaCorrenteList()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

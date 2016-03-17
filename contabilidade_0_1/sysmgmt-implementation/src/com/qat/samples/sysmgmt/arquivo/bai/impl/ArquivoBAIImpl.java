@@ -1,16 +1,9 @@
-package com.prosperitasglobal.sendsolv.bai.impl;
+package com.qat.samples.sysmgmt.arquivo.bai.impl;
 
 import java.util.List;
 
 import org.slf4j.LoggerFactory;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.bac.IArquivoBAC;
-import com.prosperitasglobal.sendsolv.bai.IArquivoBAI;
-import com.prosperitasglobal.sendsolv.model.Arquivo;
-import com.prosperitasglobal.sendsolv.model.request.ArquivoInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.ArquivoMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.response.ArquivoResponse;
 import com.qat.framework.model.Message.MessageLevel;
 import com.qat.framework.model.Message.MessageSeverity;
 import com.qat.framework.model.MessageInfo;
@@ -24,6 +17,13 @@ import com.qat.framework.validation.ValidationContext;
 import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.arquivo.Arquivo;
+import com.qat.samples.sysmgmt.arquivo.bac.IArquivoBAC;
+import com.qat.samples.sysmgmt.arquivo.bai.IArquivoBAI;
+import com.qat.samples.sysmgmt.arquivo.model.request.ArquivoInquiryRequest;
+import com.qat.samples.sysmgmt.arquivo.model.request.ArquivoMaintenanceRequest;
+import com.qat.samples.sysmgmt.arquivo.model.response.ArquivoResponse;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 
 /**
  * The Class ArquivoBAIImpl.
@@ -59,7 +59,7 @@ public class ArquivoBAIImpl implements IArquivoBAI
 
 	/**
 	 * Get arquivo validation controller.
-	 *
+	 * 
 	 * @return the validation controller
 	 */
 	public ValidationController getValidationController()
@@ -69,7 +69,7 @@ public class ArquivoBAIImpl implements IArquivoBAI
 
 	/**
 	 * Spring sets the arquivo validation controller.
-	 *
+	 * 
 	 * @param arquivoValidationController the new validation controller
 	 */
 	public void setValidationController(ValidationController arquivoValidationController)
@@ -79,7 +79,7 @@ public class ArquivoBAIImpl implements IArquivoBAI
 
 	/**
 	 * Spring Sets the arquivo bac.
-	 *
+	 * 
 	 * @param arquivoBAC the new arquivo bac
 	 */
 	public void setArquivoBAC(IArquivoBAC arquivoBAC)
@@ -89,7 +89,7 @@ public class ArquivoBAIImpl implements IArquivoBAI
 
 	/**
 	 * Gets the arquivo bac.
-	 *
+	 * 
 	 * @return the arquivo bac
 	 */
 	public IArquivoBAC getArquivoBAC()
@@ -184,7 +184,7 @@ public class ArquivoBAIImpl implements IArquivoBAI
 		{
 			InternalResponse internalResponse = new InternalResponse();
 			// validate fetchId field
-			if (ValidationUtil.isNull(request.getId()) && ValidationUtil.isNullOrEmpty(request.getStringId()))
+			if (ValidationUtil.isNull(request.getFetchId()))
 			{
 				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
 			}
@@ -232,7 +232,7 @@ public class ArquivoBAIImpl implements IArquivoBAI
 
 	/**
 	 * Fetch paged.
-	 *
+	 * 
 	 * @param request the request
 	 * @param response the response
 	 */
@@ -255,7 +255,7 @@ public class ArquivoBAIImpl implements IArquivoBAI
 
 	/**
 	 * Process.
-	 *
+	 * 
 	 * @param indicator the indicator
 	 * @param persistType the persist type
 	 * @param request the request
@@ -284,7 +284,7 @@ public class ArquivoBAIImpl implements IArquivoBAI
 
 	/**
 	 * Handle return.
-	 *
+	 * 
 	 * @param response the response
 	 * @param internalResponse the internal response
 	 * @param messages the messages
@@ -308,7 +308,7 @@ public class ArquivoBAIImpl implements IArquivoBAI
 
 	/**
 	 * Do persistance.
-	 *
+	 * 
 	 * @param request the request
 	 * @param updateType the update type
 	 * @return the internal response

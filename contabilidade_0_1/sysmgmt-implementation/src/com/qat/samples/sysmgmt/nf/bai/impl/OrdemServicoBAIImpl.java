@@ -1,4 +1,4 @@
-package com.prosperitasglobal.sendsolv.bai.impl;
+package com.qat.samples.sysmgmt.nf.bai.impl;
 
 import java.util.List;
 
@@ -6,13 +6,6 @@ import javax.xml.ws.Response;
 
 import org.slf4j.LoggerFactory;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.bac.IOrdemServicoBAC;
-import com.prosperitasglobal.sendsolv.bai.IOrdemServicoBAI;
-import com.prosperitasglobal.sendsolv.model.OrdemServico;
-import com.prosperitasglobal.sendsolv.model.request.OrdemServicoInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.OrdemServicoMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.response.OrdemServicoResponse;
 import com.qat.framework.model.Message.MessageLevel;
 import com.qat.framework.model.Message.MessageSeverity;
 import com.qat.framework.model.MessageInfo;
@@ -26,6 +19,13 @@ import com.qat.framework.validation.ValidationContext;
 import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.nf.bac.IOrdemServicoBAC;
+import com.qat.samples.sysmgmt.ordemServico.bai.IOrdemServicoBAI;
+import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.response.OrdemServicoResponse;
 
 /**
  * The Class OrdemServicoBAIImpl.
@@ -65,7 +65,7 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 
 	/**
 	 * Get ordemServico validation controller.
-	 *
+	 * 
 	 * @return the validation controller
 	 */
 	public ValidationController getValidationController()
@@ -75,7 +75,7 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 
 	/**
 	 * Spring sets the ordemServico validation controller.
-	 *
+	 * 
 	 * @param ordemServicoValidationController the new validation controller
 	 */
 	public void setValidationController(ValidationController ordemServicoValidationController)
@@ -85,7 +85,7 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 
 	/**
 	 * Spring Sets the ordemServico bac.
-	 *
+	 * 
 	 * @param ordemServicoBAC the new ordemServico bac
 	 */
 	public void setOrdemServicoBAC(IOrdemServicoBAC ordemServicoBAC)
@@ -95,7 +95,7 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 
 	/**
 	 * Gets the ordemServico bac.
-	 *
+	 * 
 	 * @return the ordemServico bac
 	 */
 	public IOrdemServicoBAC getOrdemServicoBAC()
@@ -193,7 +193,7 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 		{
 			InternalResponse internalResponse = new InternalResponse();
 			// validate fetchId field
-			if (ValidationUtil.isNull(request.getId()) && ValidationUtil.isNullOrEmpty(request.getStringId()))
+			if (ValidationUtil.isNull(request.getFetchId()))
 			{
 				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
 			}
@@ -243,7 +243,7 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 
 	/**
 	 * Fetch paged.
-	 *
+	 * 
 	 * @param request the request
 	 * @param response the response
 	 */
@@ -266,7 +266,7 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 
 	/**
 	 * Process.
-	 *
+	 * 
 	 * @param indicator the indicator
 	 * @param persistType the persist type
 	 * @param request the request
@@ -295,7 +295,7 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 
 	/**
 	 * Handle return.
-	 *
+	 * 
 	 * @param response the response
 	 * @param internalResponse the internal response
 	 * @param messages the messages
@@ -320,7 +320,7 @@ public class OrdemServicoBAIImpl implements IOrdemServicoBAI
 
 	/**
 	 * Do persistance.
-	 *
+	 * 
 	 * @param request the request
 	 * @param updateType the update type
 	 * @return the internal response

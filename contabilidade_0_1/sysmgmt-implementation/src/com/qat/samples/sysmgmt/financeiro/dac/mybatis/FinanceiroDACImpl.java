@@ -1,20 +1,20 @@
-package com.prosperitasglobal.sendsolv.dac.mybatis;
+package com.qat.samples.sysmgmt.financeiro.dac.mybatis;
 
 import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.dac.IFinanceiroDAC;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
-import com.prosperitasglobal.sendsolv.model.Financeiro;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
+import com.qat.samples.sysmgmt.financeiro.Financeiro;
+import com.qat.samples.sysmgmt.financeiro.dac.IFinanceiroDAC;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 
 /**
  * The Class FinanceiroDACImpl.
@@ -78,7 +78,7 @@ public class FinanceiroDACImpl extends SqlSessionDaoSupport implements IFinancei
 
 	/**
 	 * Get the valid sort fields for the cnae inquiry. Attribute injected by Spring.
-	 *
+	 * 
 	 * @return The valid sort fields for the cnae inquiry.
 	 */
 	public Map<String, String> getFinanceiroInquiryValidSortFields()
@@ -88,7 +88,7 @@ public class FinanceiroDACImpl extends SqlSessionDaoSupport implements IFinancei
 
 	/**
 	 * Set the valid sort fields for the cnae inquiry. Attribute injected by Spring.
-	 *
+	 * 
 	 * @param cnaeInquiryValidSortFields The valid sort fields for the cnae inquiry to set.
 	 */
 	public void setFinanceiroInquiryValidSortFields(Map<String, String> cnaeInquiryValidSortFields)
@@ -207,7 +207,7 @@ public class FinanceiroDACImpl extends SqlSessionDaoSupport implements IFinancei
 		 * Helper method to translation from the user friendly" sort field names to the
 		 * actual database column names.
 		 */
-		QATMyBatisDacHelper.translateSortFields(request, getFinanceiroInquiryValidSortFields());
+		// QATMyBatisDacHelper.translateSortFields(request, getFinanceiroInquiryValidSortFields());
 
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
@@ -216,7 +216,7 @@ public class FinanceiroDACImpl extends SqlSessionDaoSupport implements IFinancei
 
 	/**
 	 * Maintain cnae associations.
-	 *
+	 * 
 	 * @param cnae the cnae
 	 * @param response the response
 	 * @return the integer

@@ -1,8 +1,8 @@
-package com.prosperitasglobal.sendsolv.dac;
+package com.qat.samples.sysmgmt.nf.dac;
 
-import com.prosperitasglobal.sendsolv.model.ConhecimentoTransporte;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.ConhecimentoTransporte;
 
 /**
  * The Interface IConhecimentoTransporteDAC.
@@ -12,7 +12,7 @@ public interface IConhecimentoTransporteDAC
 
 	/**
 	 * Update evento.
-	 *
+	 * 
 	 * @param conhecimentoTransporte the conhecimento transporte
 	 * @param response the response
 	 * @return the integer
@@ -22,7 +22,7 @@ public interface IConhecimentoTransporteDAC
 
 	/**
 	 * Insert ConhecimentoTransporte.
-	 *
+	 * 
 	 * @param conhecimentoTransporte the conhecimento transporte
 	 * @param statementName the statement name
 	 * @param response the response
@@ -33,7 +33,7 @@ public interface IConhecimentoTransporteDAC
 
 	/**
 	 * Delete business ConhecimentoTransporte.
-	 *
+	 * 
 	 * @param conhecimentoTransporte the conhecimento transporte
 	 * @param response the response
 	 * @return the integer
@@ -43,7 +43,7 @@ public interface IConhecimentoTransporteDAC
 
 	/**
 	 * Fetch conhecimento transporte by request.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the internal results response
 	 */

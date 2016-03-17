@@ -1,4 +1,4 @@
-package com.prosperitasglobal.sendsolv.bai.impl;
+package com.qat.samples.sysmgmt.nf.bai.impl;
 
 import java.util.List;
 
@@ -6,34 +6,6 @@ import javax.xml.ws.Response;
 
 import org.slf4j.LoggerFactory;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.bac.INotaFiscalBAC;
-import com.prosperitasglobal.sendsolv.bai.INotaFiscalBAI;
-import com.prosperitasglobal.sendsolv.model.Caixa;
-import com.prosperitasglobal.sendsolv.model.CondPag;
-import com.prosperitasglobal.sendsolv.model.Contas;
-import com.prosperitasglobal.sendsolv.model.NotaFiscalEntrada;
-import com.prosperitasglobal.sendsolv.model.NotaFiscalSaida;
-import com.prosperitasglobal.sendsolv.model.Orcamento;
-import com.prosperitasglobal.sendsolv.model.PedidoCompras;
-import com.prosperitasglobal.sendsolv.model.request.CaixaInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.CondPgInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.ContasInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.ContasMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.NotaFiscalEntradaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.NotaFiscalSaidaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.OrcamentoInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.OrcamentoMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.PedidoComprasInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.PedidoComprasMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.response.CaixaResponse;
-import com.prosperitasglobal.sendsolv.model.response.CondPgResponse;
-import com.prosperitasglobal.sendsolv.model.response.ContasResponse;
-import com.prosperitasglobal.sendsolv.model.response.NotaFiscalEntradaResponse;
-import com.prosperitasglobal.sendsolv.model.response.NotaFiscalSaidaResponse;
-import com.prosperitasglobal.sendsolv.model.response.OrcamentoResponse;
-import com.prosperitasglobal.sendsolv.model.response.PedidoComprasResponse;
 import com.qat.framework.model.Message.MessageLevel;
 import com.qat.framework.model.Message.MessageSeverity;
 import com.qat.framework.model.MessageInfo;
@@ -45,6 +17,33 @@ import com.qat.framework.util.QATInterfaceUtil;
 import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.condpag.model.request.CondPgInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.Caixa;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.nf.bac.INotaFiscalBAC;
+import com.qat.samples.sysmgmt.nf.bai.INotaFiscalBAI;
+import com.qat.samples.sysmgmt.nf.model.Contas;
+import com.qat.samples.sysmgmt.nf.model.NotaFiscalEntrada;
+import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
+import com.qat.samples.sysmgmt.nf.model.Orcamento;
+import com.qat.samples.sysmgmt.nf.model.PedidoCompras;
+import com.qat.samples.sysmgmt.nf.model.request.CaixaInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.ContasInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.ContasMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalEntradaMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalSaidaMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.OrcamentoMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.request.PedidoComprasInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.PedidoComprasMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.response.CaixaResponse;
+import com.qat.samples.sysmgmt.nf.model.response.CondPgResponse;
+import com.qat.samples.sysmgmt.nf.model.response.ContasResponse;
+import com.qat.samples.sysmgmt.nf.model.response.NotaFiscalEntradaResponse;
+import com.qat.samples.sysmgmt.nf.model.response.NotaFiscalSaidaResponse;
+import com.qat.samples.sysmgmt.nf.model.response.OrcamentoResponse;
+import com.qat.samples.sysmgmt.nf.model.response.PedidoComprasResponse;
 
 /**
  * The Class NotaFiscalBAIImpl.
@@ -80,7 +79,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 
 	/**
 	 * Get notaFiscal validation controller.
-	 *
+	 * 
 	 * @return the validation controller
 	 */
 	public ValidationController getValidationController()
@@ -90,7 +89,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 
 	/**
 	 * Spring sets the notaFiscal validation controller.
-	 *
+	 * 
 	 * @param notaFiscalValidationController the new validation controller
 	 */
 	public void setValidationController(ValidationController notaFiscalValidationController)
@@ -100,7 +99,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 
 	/**
 	 * Spring Sets the notaFiscal bac.
-	 *
+	 * 
 	 * @param notaFiscalBAC the new notaFiscal bac
 	 */
 	public void setNotaFiscalBAC(INotaFiscalBAC notaFiscalBAC)
@@ -110,7 +109,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 
 	/**
 	 * Gets the notaFiscal bac.
-	 *
+	 * 
 	 * @return the notaFiscal bac
 	 */
 	public INotaFiscalBAC getNotaFiscalBAC()
@@ -174,7 +173,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 		{
 			InternalResponse internalResponse = new InternalResponse();
 			// validate fetchId field
-			if (ValidationUtil.isNull(request.getId()) && ValidationUtil.isNullOrEmpty(request.getStringId()))
+			if (ValidationUtil.isNull(request.getFetchId()))
 			{
 				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
 			}
@@ -264,7 +263,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 		{
 			InternalResponse internalResponse = new InternalResponse();
 			// validate fetchId field
-			if (ValidationUtil.isNull(request.getId()) && ValidationUtil.isNullOrEmpty(request.getStringId()))
+			if (ValidationUtil.isNull(request.getFetchId()))
 			{
 				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
 			}
@@ -354,7 +353,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 		{
 			InternalResponse internalResponse = new InternalResponse();
 			// validate fetchId field
-			if (ValidationUtil.isNull(request.getId()) && ValidationUtil.isNullOrEmpty(request.getStringId()))
+			if (ValidationUtil.isNull(request.getFetchId()))
 			{
 				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
 			}
@@ -444,7 +443,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 		{
 			InternalResponse internalResponse = new InternalResponse();
 			// validate fetchId field
-			if (ValidationUtil.isNull(request.getId()) && ValidationUtil.isNullOrEmpty(request.getStringId()))
+			if (ValidationUtil.isNull(request.getFetchId()))
 			{
 				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
 			}
@@ -549,7 +548,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 		{
 			InternalResponse internalResponse = new InternalResponse();
 			// validate fetchId field
-			if (ValidationUtil.isNull(request.getId()) && ValidationUtil.isNullOrEmpty(request.getStringId()))
+			if (ValidationUtil.isNull(request.getFetchId()))
 			{
 				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
 			}
@@ -570,7 +569,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 
 	/**
 	 * Process.
-	 *
+	 * 
 	 * @param indicator the indicator
 	 * @param persistType the persist type
 	 * @param request the request
@@ -606,7 +605,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 
 	/**
 	 * Fetch paged.
-	 *
+	 * 
 	 * @param request the request
 	 * @param response the response
 	 */
@@ -629,7 +628,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 
 	/**
 	 * Do persistance.
-	 *
+	 * 
 	 * @param request the request
 	 * @param updateType the update type
 	 * @return the internal response
@@ -660,7 +659,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 
 	/**
 	 * Fetch paged.
-	 *
+	 * 
 	 * @param request the request
 	 * @param response the response
 	 */
@@ -683,7 +682,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 
 	/**
 	 * Handle return.
-	 *
+	 * 
 	 * @param response the response
 	 * @param internalResponse the internal response
 	 * @param messages the messages
@@ -725,7 +724,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 
 	/**
 	 * Do persistance.
-	 *
+	 * 
 	 * @param request the request
 	 * @param updateType the update type
 	 * @return the internal response
@@ -756,7 +755,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 
 	/**
 	 * Process.
-	 *
+	 * 
 	 * @param indicator the indicator
 	 * @param persistType the persist type
 	 * @param request the request
@@ -778,7 +777,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 
 	/**
 	 * Fetch paged.
-	 *
+	 * 
 	 * @param request the request
 	 * @param response the response
 	 */
@@ -825,7 +824,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 
 	/**
 	 * Process.
-	 *
+	 * 
 	 * @param indicator the indicator
 	 * @param persistType the persist type
 	 * @param request the request
@@ -846,7 +845,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 
 	/**
 	 * Fetch paged.
-	 *
+	 * 
 	 * @param request the request
 	 * @param response the response
 	 */
@@ -893,7 +892,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 
 	/**
 	 * Process.
-	 *
+	 * 
 	 * @param indicator the indicator
 	 * @param persistType the persist type
 	 * @param request the request
@@ -914,7 +913,7 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 
 	/**
 	 * Fetch paged.
-	 *
+	 * 
 	 * @param request the request
 	 * @param response the response
 	 */
@@ -973,38 +972,6 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 		return response;
 	}
 
-	@Override
-	public CondPgResponse fetchCondPgByRequest(CondPgInquiryRequest request)
-	{
-		CondPgResponse response = new CondPgResponse();
-		try
-		{
-			fetchPagedCondPg(request, response);
-		}
-		catch (Exception ex)
-		{
-			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	private void fetchPagedCondPg(CondPgInquiryRequest request, CondPgResponse response)
-	{
-		InternalResultsResponse<CondPag> internalResponse = new InternalResultsResponse<CondPag>();
-
-		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
-		{
-			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
-		}
-		else
-		{
-			internalResponse = getNotaFiscalBAC().fetchCondPgByRequest(request);
-		}
-
-		// Handle the processing for all previous methods regardless of them failing or succeeding.
-		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
-	}
-
 	private void fetchPagedCaixa(CaixaInquiryRequest request, CaixaResponse response)
 	{
 		InternalResultsResponse<Caixa> internalResponse = new InternalResultsResponse<Caixa>();
@@ -1020,6 +987,13 @@ public class NotaFiscalBAIImpl implements INotaFiscalBAI
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	@Override
+	public CondPgResponse fetchCondPgByRequest(CondPgInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

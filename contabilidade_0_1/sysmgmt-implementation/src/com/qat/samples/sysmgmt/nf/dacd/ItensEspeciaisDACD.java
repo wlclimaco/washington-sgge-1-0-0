@@ -8,8 +8,8 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.entidade.dacd.StatusDACD;
-import com.qat.samples.sysmgmt.nf.dac.IConhecimentoTransporteDAC;
-import com.qat.samples.sysmgmt.nf.model.ConhecimentoTransporte;
+import com.qat.samples.sysmgmt.produto.dac.IItensEspeciaisDAC;
+import com.qat.samples.sysmgmt.produto.model.ItensEspeciais;
 import com.qat.samples.sysmgmt.util.AcaoEnum;
 import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.Status;
@@ -22,7 +22,7 @@ import com.qat.samples.sysmgmt.util.dac.IStatusDAC;
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
  */
-public final class ConhecimentoTransporteDACD extends SqlSessionDaoSupport
+public final class ItensEspeciaisDACD extends SqlSessionDaoSupport
 {
 
 	/** The Constant ZERO. */
@@ -38,31 +38,33 @@ public final class ConhecimentoTransporteDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainConecimentoTransporteAssociations(ConhecimentoTransporte conhecimentoTransporte,
+	public static Integer maintainItensEspeciaisAssociations(List<ItensEspeciais> itensEspeciaisList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IConhecimentoTransporteDAC conecimentoTransporteDAC, IStatusDAC statusDAC,
-			IHistoricoDAC historicoDAC,
-			Integer empId,
-			String UserId, Integer processId, Integer historicoId)
+			TabelaEnum tabelaEnum, IItensEspeciaisDAC itensEspeciaisDAC, IStatusDAC statusDAC,
+			IHistoricoDAC historicoDAC, Integer empId,
+			String UserId, Integer processId)
 	{
 		Integer count = 0;
 		// First Maintain Empresa
-		if (ValidationUtil.isNull(conhecimentoTransporte))
+		if (ValidationUtil.isNullOrEmpty(itensEspeciaisList))
 		{
 			return count;
 		}
-		else
+		// For Each Contact...
+		for (ItensEspeciais itensEspeciais : itensEspeciaisList)
 		{
 			// Make sure we set the parent key
-			conhecimentoTransporte.setParentId(parentId);
-			conhecimentoTransporte.setProcessId(processId);
-			conhecimentoTransporte.setIdNota(parentId);
+			itensEspeciais.setParentId(parentId);
 
-			switch (conhecimentoTransporte.getModelAction())
+			if (ValidationUtil.isNull(itensEspeciais.getModelAction()))
+			{
+				continue;
+			}
+			switch (itensEspeciais.getModelAction())
 			{
 				case INSERT:
-					count = conecimentoTransporteDAC.insertConhecimentoTransporte(conhecimentoTransporte,
-							"insertConhecimentoTransporte", response);
+					count = itensEspeciaisDAC.insertItensEspeciais(itensEspeciais,
+							"insertItensEspeciais", response);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -70,19 +72,19 @@ public final class ConhecimentoTransporteDACD extends SqlSessionDaoSupport
 						List<Status> statusList = new ArrayList<Status>();
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.PROFISSAO, statusDAC, historicoDAC,
-										processId, historicoId);
+										AcaoEnum.INSERT, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
+										processId, null);
 					}
 					break;
 				case UPDATE:
-					count = conecimentoTransporteDAC.updateConhecimentoTransporte(conhecimentoTransporte, response);
+					count = itensEspeciaisDAC.updateItensEspeciais(itensEspeciais, response);
 					if (count > 0)
 					{
 						count =
-								StatusDACD.maintainStatusAssociations(conhecimentoTransporte.getStatusList(), response,
-										conhecimentoTransporte.getId(),
-										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.PROFISSAO, statusDAC,
-										historicoDAC, processId, historicoId);
+								StatusDACD.maintainStatusAssociations(itensEspeciais.getStatusList(), response,
+										itensEspeciais.getId(),
+										null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
+										processId, null);
 					}
 					break;
 				case DELETE:
@@ -91,10 +93,10 @@ public final class ConhecimentoTransporteDACD extends SqlSessionDaoSupport
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
-							StatusDACD.maintainStatusAssociations(statusList, response, conhecimentoTransporte.getId(),
-									null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.PROFISSAO, statusDAC, historicoDAC,
-									processId, historicoId);
+							StatusDACD
+									.maintainStatusAssociations(statusList, response, itensEspeciais.getId(), null,
+											AcaoEnum.DELETE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
+											processId, null);
 
 					break;
 			}

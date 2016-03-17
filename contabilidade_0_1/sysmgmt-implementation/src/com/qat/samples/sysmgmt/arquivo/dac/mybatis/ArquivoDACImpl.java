@@ -1,26 +1,26 @@
-package com.prosperitasglobal.sendsolv.dac.mybatis;
+package com.qat.samples.sysmgmt.arquivo.dac.mybatis;
 
 import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.dac.IArquivoDAC;
-import com.prosperitasglobal.sendsolv.dac.ICnaeDAC;
-import com.prosperitasglobal.sendsolv.dac.IEmailDAC;
-import com.prosperitasglobal.sendsolv.dac.IEnderecoDAC;
-import com.prosperitasglobal.sendsolv.dac.IEventosDAC;
-import com.prosperitasglobal.sendsolv.dac.ISociosDAC;
-import com.prosperitasglobal.sendsolv.dac.ITelefoneDAC;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
-import com.prosperitasglobal.sendsolv.model.Arquivo;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.arquivo.Arquivo;
+import com.qat.samples.sysmgmt.arquivo.dac.IArquivoDAC;
+import com.qat.samples.sysmgmt.dac.IEnderecoDAC;
+import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.dac.IEventosDAC;
+import com.qat.samples.sysmgmt.util.dac.ICnaeDAC;
+import com.qat.samples.sysmgmt.util.dac.IEmailDAC;
+import com.qat.samples.sysmgmt.util.dac.ISociosDAC;
+import com.qat.samples.sysmgmt.util.dac.ITelefoneDAC;
 
 /**
  * The Class ArquivoDACImpl.
@@ -192,7 +192,7 @@ public class ArquivoDACImpl extends SqlSessionDaoSupport implements IArquivoDAC
 
 	/**
 	 * Get the valid sort fields for the arquivo inquiry. Attribute injected by Spring.
-	 *
+	 * 
 	 * @return The valid sort fields for the arquivo inquiry.
 	 */
 	public Map<String, String> getArquivoInquiryValidSortFields()
@@ -202,7 +202,7 @@ public class ArquivoDACImpl extends SqlSessionDaoSupport implements IArquivoDAC
 
 	/**
 	 * Set the valid sort fields for the arquivo inquiry. Attribute injected by Spring.
-	 *
+	 * 
 	 * @param arquivoInquiryValidSortFields The valid sort fields for the arquivo inquiry to set.
 	 */
 	public void setArquivoInquiryValidSortFields(Map<String, String> arquivoInquiryValidSortFields)
@@ -321,7 +321,7 @@ public class ArquivoDACImpl extends SqlSessionDaoSupport implements IArquivoDAC
 		 * Helper method to translation from the user friendly" sort field names to the
 		 * actual database column names.
 		 */
-		QATMyBatisDacHelper.translateSortFields(request, getArquivoInquiryValidSortFields());
+		// QATMyBatisDacHelper.translateSortFields(request, getArquivoInquiryValidSortFields());
 
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
@@ -330,7 +330,7 @@ public class ArquivoDACImpl extends SqlSessionDaoSupport implements IArquivoDAC
 
 	/**
 	 * Maintain arquivo associations.
-	 *
+	 * 
 	 * @param arquivo the arquivo
 	 * @param response the response
 	 * @return the integer

@@ -1,7 +1,7 @@
 package com.qat.samples.sysmgmt.nf.model.request;
 
-import com.qat.samples.sysmgm.notafiscal.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.banco.model.criteria.BancoCriteria;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 
 /**
  * The Class ProdutoInquiryRequest.

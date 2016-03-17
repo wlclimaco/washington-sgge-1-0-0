@@ -23,7 +23,7 @@ public class TelefoneDACImpl extends SqlSessionDaoSupport implements ITelefoneDA
 	private static final String CONTACT_STMT_UPDATE = CONTACT_NAMESPACE + "updateTelefone";
 
 	/** The Constant CONTACT_STMT_UPDATE_PHONE. */
-	private static final String CONTACT_STMT_UPDATE_PHONE = CONTACT_NAMESPACE + "updatePhone";
+	private static final String CONTACT_STMT_UPDATE_PHONE = CONTACT_NAMESPACE + "updateTelefone";
 
 	/** The Constant CONTACT_STMT_UPDATE_EMAIL. */
 	private static final String CONTACT_STMT_UPDATE_EMAIL = CONTACT_NAMESPACE + "updateTelefone";

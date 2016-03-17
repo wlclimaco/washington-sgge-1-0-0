@@ -1,21 +1,22 @@
-package com.prosperitasglobal.sendsolv.dacd.mybatis;
+package com.qat.samples.sysmgmt.nf.dacd;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
-import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
-import com.prosperitasglobal.sendsolv.dac.INFStatusDAC;
-import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
-import com.prosperitasglobal.sendsolv.model.AcaoEnum;
-import com.prosperitasglobal.sendsolv.model.CdStatusTypeEnum;
-import com.prosperitasglobal.sendsolv.model.NFStatus;
-import com.prosperitasglobal.sendsolv.model.Status;
-import com.prosperitasglobal.sendsolv.model.TabelaEnum;
-import com.prosperitasglobal.sendsolv.model.TypeEnum;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.entidade.dacd.StatusDACD;
+import com.qat.samples.sysmgmt.nf.dac.INFStatusDAC;
+import com.qat.samples.sysmgmt.nf.model.NFStatus;
+import com.qat.samples.sysmgmt.util.AcaoEnum;
+import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
+import com.qat.samples.sysmgmt.util.Status;
+import com.qat.samples.sysmgmt.util.TabelaEnum;
+import com.qat.samples.sysmgmt.util.TypeEnum;
+import com.qat.samples.sysmgmt.util.dac.IHistoricoDAC;
+import com.qat.samples.sysmgmt.util.dac.IStatusDAC;
 
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
@@ -29,7 +30,7 @@ public final class NFstatusDACD extends SqlSessionDaoSupport
 
 	/**
 	 * Fetch objects by request.
-	 *
+	 * 
 	 * @param sqlSession the sql session
 	 * @param request the request
 	 * @param countStatement the count statement
@@ -92,9 +93,9 @@ public final class NFstatusDACD extends SqlSessionDaoSupport
 					List<Status> statusList = new ArrayList<Status>();
 					count =
 							StatusDACD
-							.maintainStatusAssociations(statusList, response, nFStatus.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
-									processId, null);
+									.maintainStatusAssociations(statusList, response, nFStatus.getId(), null,
+											AcaoEnum.DELETE, UserId, empId, TabelaEnum.CNAE, statusDAC, historicoDAC,
+											processId, null);
 
 					break;
 			}

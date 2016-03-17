@@ -2,6 +2,7 @@ package com.qat.samples.sysmgmt.entidade;
 
 import java.util.List;
 
+import com.qat.samples.sysmgmt.banco.BancoPessoa;
 import com.qat.samples.sysmgmt.cnae.CnaeEmpresa;
 import com.qat.samples.sysmgmt.fiscal.Regime;
 import com.qat.samples.sysmgmt.util.Configuracao;
@@ -43,6 +44,28 @@ public class Entidade extends ModelCosmeDamiao
 	private List<CnaeEmpresa> cnaes;
 
 	private List<Usuario> usuarios;
+
+	private List<BancoPessoa> bancos;
+
+	public List<Usuario> getUsuarios()
+	{
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios)
+	{
+		this.usuarios = usuarios;
+	}
+
+	public List<BancoPessoa> getBancos()
+	{
+		return bancos;
+	}
+
+	public void setBancos(List<BancoPessoa> bancos)
+	{
+		this.bancos = bancos;
+	}
 
 	/**
 	 * Default constructor.
@@ -245,7 +268,8 @@ public class Entidade extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Entidade [getEntidadeEnumValue()=" + getEntidadeEnumValue() + ", getId()=" + getId() + ", getNome()="
+		return "Entidade [getUsuarios()=" + getUsuarios() + ", getBancos()=" + getBancos()
+				+ ", getEntidadeEnumValue()=" + getEntidadeEnumValue() + ", getId()=" + getId() + ", getNome()="
 				+ getNome() + ", getEnderecos()=" + getEnderecos() + ", getDocumentos()=" + getDocumentos()
 				+ ", getEmails()=" + getEmails() + ", getTelefones()=" + getTelefones() + ", getCnaes()=" + getCnaes()
 				+ ", getRegime()=" + getRegime() + ", getEntidadeEnum()=" + getEntidadeEnum() + ", getConfiguracao()="

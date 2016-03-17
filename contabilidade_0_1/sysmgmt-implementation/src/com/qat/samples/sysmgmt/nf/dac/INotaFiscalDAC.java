@@ -1,21 +1,21 @@
-package com.prosperitasglobal.sendsolv.dac;
+package com.qat.samples.sysmgmt.nf.dac;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.Caixa;
-import com.prosperitasglobal.sendsolv.model.CondPag;
-import com.prosperitasglobal.sendsolv.model.Contas;
-import com.prosperitasglobal.sendsolv.model.NotaFiscalEntrada;
-import com.prosperitasglobal.sendsolv.model.NotaFiscalSaida;
-import com.prosperitasglobal.sendsolv.model.Orcamento;
-import com.prosperitasglobal.sendsolv.model.PedidoCompras;
-import com.prosperitasglobal.sendsolv.model.request.CaixaInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.CondPgInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.ContasInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.OrcamentoInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.PedidoComprasInquiryRequest;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.condpag.CondPag;
+import com.qat.samples.sysmgmt.condpag.model.request.CondPgInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.Caixa;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.nf.model.Contas;
+import com.qat.samples.sysmgmt.nf.model.NotaFiscalEntrada;
+import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
+import com.qat.samples.sysmgmt.nf.model.Orcamento;
+import com.qat.samples.sysmgmt.nf.model.PedidoCompras;
+import com.qat.samples.sysmgmt.nf.model.request.CaixaInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.ContasInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.PedidoComprasInquiryRequest;
 
 /**
  * The Interface INotaFiscalDAC.

@@ -1,18 +1,18 @@
-package com.prosperitasglobal.sendsolv.dac.mybatis;
+package com.qat.samples.sysmgmt.nf.dac.mybatis;
 
 import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
-import com.prosperitasglobal.sendsolv.dac.INotaFiscalItensDAC;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
-import com.prosperitasglobal.sendsolv.model.NotaFiscalItens;
-import com.prosperitasglobal.sendsolv.model.request.PagedInquiryRequest;
 import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.nf.dac.INotaFiscalItensDAC;
+import com.qat.samples.sysmgmt.nf.model.NotaFiscalItens;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.

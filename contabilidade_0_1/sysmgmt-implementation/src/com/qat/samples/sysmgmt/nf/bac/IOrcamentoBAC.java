@@ -1,11 +1,11 @@
-package com.prosperitasglobal.sendsolv.bac;
+package com.qat.samples.sysmgmt.nf.bac;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.Orcamento;
-import com.prosperitasglobal.sendsolv.model.request.OrcamentoInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.OrcamentoMaintenanceRequest;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.nf.model.Orcamento;
+import com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.OrcamentoMaintenanceRequest;
 
 /**
  * The Interface IOrcamentoBAC.

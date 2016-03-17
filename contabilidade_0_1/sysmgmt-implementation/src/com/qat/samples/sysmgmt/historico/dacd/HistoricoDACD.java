@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.histotico.dacd;
+package com.qat.samples.sysmgmt.historico.dacd;
 
 import java.util.Date;
 
@@ -42,7 +42,7 @@ public final class HistoricoDACD extends SqlSessionDaoSupport
 		historico.setUserId(userId);
 		historico.setProcessId(processId);
 		historico.setTabelaEnum(tabela);
-		historico.setCreateDataUTC((int)a.getTime());
+		historico.setCreateDataUTC(a.getTime());
 
 		historicoDAC.insertHistorico(historico, "", response);
 

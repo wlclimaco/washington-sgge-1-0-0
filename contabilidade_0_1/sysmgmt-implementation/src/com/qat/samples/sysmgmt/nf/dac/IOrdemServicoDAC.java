@@ -1,10 +1,10 @@
-package com.prosperitasglobal.sendsolv.dac;
+package com.qat.samples.sysmgmt.nf.dac;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.OrdemServico;
-import com.prosperitasglobal.sendsolv.model.request.OrdemServicoInquiryRequest;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
 
 /**
  * The Interface IOrdemServicoDAC.
@@ -14,7 +14,7 @@ public interface IOrdemServicoDAC
 
 	/**
 	 * Update ordemServico.
-	 *
+	 * 
 	 * @param ordemServico the ordemServico
 	 * @return the internal results response< ordemServico>
 	 */
@@ -22,7 +22,7 @@ public interface IOrdemServicoDAC
 
 	/**
 	 * Insert ordemServico.
-	 *
+	 * 
 	 * @param ordemServico the ordemServico
 	 * @return the internal results response< ordemServico>
 	 */
@@ -30,7 +30,7 @@ public interface IOrdemServicoDAC
 
 	/**
 	 * Delete ordemServico.
-	 *
+	 * 
 	 * @param ordemServico the ordemServico
 	 * @return the internal response
 	 */
@@ -38,7 +38,7 @@ public interface IOrdemServicoDAC
 
 	/**
 	 * Fetch ordemServico by id.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the internal results response
 	 */
@@ -46,14 +46,14 @@ public interface IOrdemServicoDAC
 
 	/**
 	 * Fetch all ordemServicos.
-	 *
+	 * 
 	 * @return the internal results response< ordemServico>
 	 */
 	public InternalResultsResponse<OrdemServico> fetchAllOrdemServicos();
 
 	/**
 	 * Fetch ordemServico by request.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the internal results response< ordemServico>
 	 */

@@ -1,13 +1,13 @@
-package com.prosperitasglobal.sendsolv.bac.impl;
+package com.qat.samples.sysmgmt.financeiro.bac.impl;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.bac.IFinanceiroBAC;
-import com.prosperitasglobal.sendsolv.dac.IFinanceiroDAC;
-import com.prosperitasglobal.sendsolv.model.Financeiro;
-import com.prosperitasglobal.sendsolv.model.request.FinanceiroInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.FinanceiroMaintenanceRequest;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.financeiro.Financeiro;
+import com.qat.samples.sysmgmt.financeiro.bac.IFinanceiroBAC;
+import com.qat.samples.sysmgmt.financeiro.dac.IFinanceiroDAC;
+import com.qat.samples.sysmgmt.financeiro.model.request.FinanceiroInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.FinanceiroMaintenanceRequest;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 
 /**
  * The Class FinanceiroBACImpl.

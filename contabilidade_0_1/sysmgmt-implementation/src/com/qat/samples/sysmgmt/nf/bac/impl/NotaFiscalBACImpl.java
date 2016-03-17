@@ -1,28 +1,28 @@
-package com.prosperitasglobal.sendsolv.bac.impl;
+package com.qat.samples.sysmgmt.nf.bac.impl;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.bac.INotaFiscalBAC;
-import com.prosperitasglobal.sendsolv.dac.INotaFiscalDAC;
-import com.prosperitasglobal.sendsolv.model.Caixa;
-import com.prosperitasglobal.sendsolv.model.CondPag;
-import com.prosperitasglobal.sendsolv.model.Contas;
-import com.prosperitasglobal.sendsolv.model.NotaFiscalEntrada;
-import com.prosperitasglobal.sendsolv.model.NotaFiscalSaida;
-import com.prosperitasglobal.sendsolv.model.Orcamento;
-import com.prosperitasglobal.sendsolv.model.PedidoCompras;
-import com.prosperitasglobal.sendsolv.model.request.CaixaInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.CondPgInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.ContasInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.ContasMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.NotaFiscalEntradaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.NotaFiscalSaidaMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.OrcamentoInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.OrcamentoMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.request.PedidoComprasInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.PedidoComprasMaintenanceRequest;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.condpag.CondPag;
+import com.qat.samples.sysmgmt.condpag.model.request.CondPgInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.Caixa;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.nf.bac.INotaFiscalBAC;
+import com.qat.samples.sysmgmt.nf.dac.INotaFiscalDAC;
+import com.qat.samples.sysmgmt.nf.model.Contas;
+import com.qat.samples.sysmgmt.nf.model.NotaFiscalEntrada;
+import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
+import com.qat.samples.sysmgmt.nf.model.Orcamento;
+import com.qat.samples.sysmgmt.nf.model.PedidoCompras;
+import com.qat.samples.sysmgmt.nf.model.request.CaixaInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.ContasInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.ContasMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalEntradaMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalSaidaMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.OrcamentoMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.request.PedidoComprasInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.PedidoComprasMaintenanceRequest;
 
 /**
  * The Class NotaFiscalBACImpl.

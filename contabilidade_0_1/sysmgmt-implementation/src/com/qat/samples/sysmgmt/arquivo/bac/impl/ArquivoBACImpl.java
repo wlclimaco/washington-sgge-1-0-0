@@ -1,13 +1,13 @@
-package com.prosperitasglobal.sendsolv.bac.impl;
+package com.qat.samples.sysmgmt.arquivo.bac.impl;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.bac.IArquivoBAC;
-import com.prosperitasglobal.sendsolv.dac.IArquivoDAC;
-import com.prosperitasglobal.sendsolv.model.Arquivo;
-import com.prosperitasglobal.sendsolv.model.request.ArquivoInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.ArquivoMaintenanceRequest;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.arquivo.Arquivo;
+import com.qat.samples.sysmgmt.arquivo.bac.IArquivoBAC;
+import com.qat.samples.sysmgmt.arquivo.dac.IArquivoDAC;
+import com.qat.samples.sysmgmt.arquivo.model.request.ArquivoInquiryRequest;
+import com.qat.samples.sysmgmt.arquivo.model.request.ArquivoMaintenanceRequest;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 
 /**
  * The Class ArquivoBACImpl.

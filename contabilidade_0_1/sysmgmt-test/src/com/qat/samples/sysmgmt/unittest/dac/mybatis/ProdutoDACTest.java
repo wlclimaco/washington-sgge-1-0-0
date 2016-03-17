@@ -606,11 +606,11 @@ public class ProdutoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		tributacao.setId(1);
 		tributacao.setCst(new Cst(1));
 		tributacao.setIcms(new Double(10.60));
-		tributacao.setSt(10);
+		tributacao.setSt((double)10);
 		tributacao.setMva(new Double(10.60));
 		tributacao.setCsosn(new Csosn(1));
 		tributacao.setIpi(50.99);
-		tributacao.setIat(1);
+		tributacao.setIat((double)1);
 		tributacao.setModelAction(model);
 		// tributacao.setTributacao.setpisconfins(1);
 		tributacao.setIncidencia(new Incidencia());

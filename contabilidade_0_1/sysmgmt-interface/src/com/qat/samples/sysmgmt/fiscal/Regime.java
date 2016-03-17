@@ -1,6 +1,9 @@
 package com.qat.samples.sysmgmt.fiscal;
 
+import java.util.List;
+
 import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
+import com.qat.samples.sysmgmt.util.Tarefa;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -17,7 +20,7 @@ public class Regime extends ModelCosmeDamiao
 
 	/** The description. */
 	private String descricao;
-	
+
 	private List<Tarefa> listTarefa;
 
 	/**
@@ -64,11 +67,21 @@ public class Regime extends ModelCosmeDamiao
 		this.descricao = descricao;
 	}
 
+	public List<Tarefa> getListTarefa()
+	{
+		return listTarefa;
+	}
+
+	public void setListTarefa(List<Tarefa> listTarefa)
+	{
+		this.listTarefa = listTarefa;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "Regime [getId()=" + getId() + ", getNome()=" + getNome() + ", getDescricao()=" + getDescricao()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", getListTarefa()=" + getListTarefa() + ", toString()=" + super.toString() + "]";
 	}
 
 }

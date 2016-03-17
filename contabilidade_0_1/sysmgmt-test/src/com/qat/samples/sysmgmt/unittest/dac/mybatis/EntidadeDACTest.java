@@ -23,68 +23,33 @@ import com.qat.framework.model.QATModel.PersistanceActionEnum;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.Status;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.agencia.Agencia;
-import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
 import com.qat.samples.sysmgmt.banco.Banco;
 import com.qat.samples.sysmgmt.banco.BancoPessoa;
-import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
-import com.qat.samples.sysmgmt.beneficios.BeneficioPessoa;
-import com.qat.samples.sysmgmt.beneficios.Beneficios;
-import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest;
 import com.qat.samples.sysmgmt.cfop.Cfop;
 import com.qat.samples.sysmgmt.cfop.CfopPessoa;
 import com.qat.samples.sysmgmt.cfop.CfopTypeEnum;
-import com.qat.samples.sysmgmt.clinica.Consulta;
-import com.qat.samples.sysmgmt.clinica.Especialidade;
-import com.qat.samples.sysmgmt.clinica.Exame;
-import com.qat.samples.sysmgmt.clinica.PlanoSaude;
-import com.qat.samples.sysmgmt.clinica.model.request.ConsultaInquiryRequest;
-import com.qat.samples.sysmgmt.clinica.model.request.EspecializacaoInquiryRequest;
-import com.qat.samples.sysmgmt.clinica.model.request.ExameInquiryRequest;
-import com.qat.samples.sysmgmt.clinica.model.request.MedicoInquiryRequest;
-import com.qat.samples.sysmgmt.clinica.model.request.PacienteInquiryRequest;
-import com.qat.samples.sysmgmt.clinica.model.request.PlanoSaudeInquiryRequest;
-import com.qat.samples.sysmgmt.condpag.CondPag;
-import com.qat.samples.sysmgmt.condpag.CondPagPessoa;
-import com.qat.samples.sysmgmt.condpag.FormaPg;
-import com.qat.samples.sysmgmt.condpag.FormaPgPessoa;
-import com.qat.samples.sysmgmt.condpag.TipoPag;
-import com.qat.samples.sysmgmt.condpag.model.request.FormaPgInquiryRequest;
-import com.qat.samples.sysmgmt.conta.Conta;
-import com.qat.samples.sysmgmt.contato.Contato;
-import com.qat.samples.sysmgmt.contato.ContatoItens;
-import com.qat.samples.sysmgmt.contato.ContatoTypeEnum;
-import com.qat.samples.sysmgmt.convenio.Convenio;
-import com.qat.samples.sysmgmt.convenio.ConvenioPessoa;
-import com.qat.samples.sysmgmt.dp.EventoMesApp;
-import com.qat.samples.sysmgmt.dp.EventoPessoa;
-import com.qat.samples.sysmgmt.dp.Eventos;
-import com.qat.samples.sysmgmt.dp.HorarioFunc;
-import com.qat.samples.sysmgmt.dp.Profissao;
-import com.qat.samples.sysmgmt.dp.Salario;
-import com.qat.samples.sysmgmt.dp.model.request.EventoInquiryRequest;
-import com.qat.samples.sysmgmt.dp.model.request.FuncionarioInquiryRequest;
-import com.qat.samples.sysmgmt.dp.model.request.HoraFuncInquiryRequest;
-import com.qat.samples.sysmgmt.dp.model.request.ProfissaoInquiryRequest;
+import com.qat.samples.sysmgmt.cnae.Cnae;
+import com.qat.samples.sysmgmt.cnae.CnaeEmpresa;
+import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
+import com.qat.samples.sysmgmt.contabilidade.Plano;
+import com.qat.samples.sysmgmt.entidade.Deposito;
+import com.qat.samples.sysmgmt.entidade.Empresa;
+import com.qat.samples.sysmgmt.entidade.EntidadeTypeEnum;
+import com.qat.samples.sysmgmt.entidade.Filial;
+import com.qat.samples.sysmgmt.entidade.Usuario;
+import com.qat.samples.sysmgmt.entidade.dac.IEmpresaDAC;
+import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
+import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Regime;
+import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.Entidade.Cliente;
-import com.qat.samples.sysmgmt.Entidade.Contador;
-import com.qat.samples.sysmgmt.Entidade.Fornecedor;
-import com.qat.samples.sysmgmt.Entidade.Funcionario;
-import com.qat.samples.sysmgmt.Entidade.Medico;
-import com.qat.samples.sysmgmt.Entidade.Paciente;
-import com.qat.samples.sysmgmt.Entidade.PessoaTypeEnum;
-import com.qat.samples.sysmgmt.Entidade.Transportador;
-import com.qat.samples.sysmgmt.Entidade.dac.IPessoaDAC;
-import com.qat.samples.sysmgmt.Entidade.model.request.ClienteInquiryRequest;
-import com.qat.samples.sysmgmt.Entidade.model.request.ContaInquiryRequest;
-import com.qat.samples.sysmgmt.Entidade.model.request.ContadorInquiryRequest;
-import com.qat.samples.sysmgmt.Entidade.model.request.ConvenioInquiryRequest;
-import com.qat.samples.sysmgmt.Entidade.model.request.FornecedorInquiryRequest;
-import com.qat.samples.sysmgmt.Entidade.model.request.TransportadorInquiryRequest;
-import com.qat.samples.sysmgmt.produto.model.ProdutoPessoa;
+import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.util.Cidade;
+import com.qat.samples.sysmgmt.util.Configuracao;
 import com.qat.samples.sysmgmt.util.Documento;
 import com.qat.samples.sysmgmt.util.DocumentoTypeEnum;
 import com.qat.samples.sysmgmt.util.Email;
@@ -94,6 +59,7 @@ import com.qat.samples.sysmgmt.util.EnderecoTypeEnum;
 import com.qat.samples.sysmgmt.util.Note;
 import com.qat.samples.sysmgmt.util.Telefone;
 import com.qat.samples.sysmgmt.util.TelefoneTypeEnum;
+import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 
 @ContextConfiguration(locations = {
 		"classpath:com/qat/samples/sysmgmt/unittest/conf/unittest-datasource-txn-context.xml",
@@ -106,21 +72,21 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(EntidadeDACTest.class);
-	private IEntidadeDAC entidadeDAC; // injected by Spring through setter @resource
+	private IEmpresaDAC entidadeDAC; // injected by Spring through setter @resource
 
 	// below
 
-	public IEntidadeDAC getEntidadeDAC()
+	public IEmpresaDAC getEntidadeDAC()
 	{
 		return entidadeDAC;
 	}
 
 	@Resource
-	public void setEntidadeDAC(IEntidadeDAC entidadeDAC)
+	public void setEntidadeDAC(IEmpresaDAC entidadeDAC)
 	{
 		this.entidadeDAC = entidadeDAC;
 	}
-	
+
 	@Test
 	public void testupdateEmpresa() throws Exception
 	{
@@ -162,11 +128,11 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
-		InternalResultsResponse<Cliente> response = getEntidadeDAC().fetchClienteById(request);
+		InternalResultsResponse<Empresa> response = getEntidadeDAC().fetchEmpresaById(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
-	
+
 	@Test
 	public void testfetchEmpresaByRequest() throws Exception
 	{
@@ -221,7 +187,7 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
-		InternalResultsResponse<Cliente> response = getEntidadeDAC().fetchClienteById(request);
+		InternalResultsResponse<Filial> response = getEntidadeDAC().fetchFilialById(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -262,7 +228,6 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
-	
 
 	@Test
 	public void testdeleteDeposito() throws Exception
@@ -281,7 +246,7 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
-		InternalResultsResponse<Cliente> response = getEntidadeDAC().fetchClienteById(request);
+		InternalResultsResponse<Deposito> response = getEntidadeDAC().fetchDepositoById(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -487,10 +452,10 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 
 	}
 
-	public List<BancoEntidade> bancoList(PersistanceActionEnum action)
+	public List<BancoPessoa> bancoList(PersistanceActionEnum action)
 	{
-		List<BancoEntidade> documentoList = new ArrayList<BancoEntidade>();
-		BancoEntidade documento = new BancoEntidade();
+		List<BancoPessoa> documentoList = new ArrayList<BancoPessoa>();
+		BancoPessoa documento = new BancoPessoa();
 		documento.setModelAction(action);
 		documento.setBancoId(new Banco(0, "ITAU", action));
 		documento.setProcessId(1);
@@ -499,12 +464,11 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		return documentoList;
 
 	}
-	
 
-	public List<CfopEntidade> cfopList(PersistanceActionEnum action)
+	public List<CfopPessoa> cfopList(PersistanceActionEnum action)
 	{
-		List<CfopEntidade> documentoList = new ArrayList<CfopEntidade>();
-		CfopEntidade documento = new CfopEntidade();
+		List<CfopPessoa> documentoList = new ArrayList<CfopPessoa>();
+		CfopPessoa documento = new CfopPessoa();
 		documento.setModelAction(action);
 		documento.setProcessId(1);
 		documento.setIdCfop(new Cfop(0, "cfop", "natureza", "simplificado", CfopTypeEnum.ENTRADA, 0.39, 0.15, 0.54,
@@ -528,48 +492,57 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		return documentoList;
 
 	}
-	
-	public List<CnaePessoa> cnaeList(PersistanceActionEnum action)
+
+	public List<CnaeEmpresa> cnaeList(PersistanceActionEnum action)
 	{
-		List<CnaePessoa> cnaeList = new ArrayList<CnaePessoa>();
-		cnaeList.add(new CnaePessoa(1,1, action ,new Cnae(0,"CNAE","DESCRICAO","ABREV", action)))));
-		cnaeList.add(new CnaePessoa(1,1, action ,new Cnae(0,"CNAE","DESCRICAO","ABREV", action)))));
-		cnaeList.add(new CnaePessoa(1,1, action ,new Cnae(0,"CNAE","DESCRICAO","ABREV", action)))));
-		cnaeList.add(new CnaePessoa(1,1, action ,new Cnae(0,"CNAE","DESCRICAO","ABREV", action)))));
-		cnaeList.add(new CnaePessoa(1,1, action ,new Cnae(0,"CNAE","DESCRICAO","ABREV", action)))));
-		return documentoList;
+		List<CnaeEmpresa> cnaeList = new ArrayList<CnaeEmpresa>();
+		cnaeList.add(new CnaeEmpresa(1, 1, action, new Cnae(0, "CNAE", "DESCRICAO", "ABREV", action)));
+		cnaeList.add(new CnaeEmpresa(1, 1, action, new Cnae(0, "CNAE", "DESCRICAO", "ABREV", action)));
+		cnaeList.add(new CnaeEmpresa(1, 1, action, new Cnae(0, "CNAE", "DESCRICAO", "ABREV", action)));
+		cnaeList.add(new CnaeEmpresa(1, 1, action, new Cnae(0, "CNAE", "DESCRICAO", "ABREV", action)));
+		cnaeList.add(new CnaeEmpresa(1, 1, action, new Cnae(0, "CNAE", "DESCRICAO", "ABREV", action)));
+		return cnaeList;
 
 	}
-	
-	public Regime insertRegime(PersistanceActionEnum action){
-		
-		Regime regime = new Regime();		
+
+	public Regime insertRegime(PersistanceActionEnum action)
+	{
+
+		Regime regime = new Regime();
 		regime.setId(1);
 		regime.setNome("NOME");
 		regime.setDescricao("DESCRICAO");
 		regime.setModelAction(action);
-		
+		return regime;
 	}
-	
-	public Usuario insertUsuario(PersistanceActionEnum action){
+
+	public List<Usuario> insertUsuario(PersistanceActionEnum action)
+	{
+		List<Usuario> list = new ArrayList<Usuario>();
 		Date a = new Date();
-		Usuario usuario = new Usuario();		
-		usuario.setId(1);
-		usuario.setlogin("LOGIN")
-		usuario.setSenha("SENHA")
-		usuario.setPergunta("PERGUNTA")
-		usuario.setRole("ROLE")
-		usuario.setLanguage("LANGUAGEM");
-		usuario.setUltAcesso(a.getTime())
-		usuario.setEmails(emailList(action));
-		
+		for (Integer i = 0; i < 10; i++)
+		{
+			Usuario usuario = new Usuario();
+			usuario.setId(1);
+			usuario.setLogin("LOGIN");
+			usuario.setSenha("SENHA");
+			usuario.setPergunta("PERGUNTA");
+			usuario.setRole("ROLE");
+			usuario.setLanguage("LANGUAGEM");
+			usuario.setUltAcesso(a.getTime());
+			usuario.setEmails(emailList(action));
+			usuario.setModelAction(action);
+			list.add(usuario);
+		}
+		return list;
+
 	}
 
 	public Empresa insertEmpresa(PersistanceActionEnum action)
 	{
 		Empresa funcionario = new Empresa();
 		Date a = new Date();
-		
+
 		funcionario.setId(1);
 		funcionario.setNome("NOME");
 		funcionario.setRegime(insertRegime(action));
@@ -577,7 +550,7 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		funcionario.setEntidadeEnum(EntidadeTypeEnum.EMPRESA);
 		funcionario.setConfiguracao(new Configuracao());
 		funcionario.setCnaes(cnaeList(action));
-		funcionario.setUsuarios(insertUsuario(action));
+		funcionario.setUsuarioList(insertUsuario(action));
 		funcionario.setProcessId(1);
 		funcionario.setDocumentos(documentoList(action));
 		funcionario.setTelefones(telefoneList(action));
@@ -585,6 +558,7 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		funcionario.setEnderecos(enderecoList(action));
 		funcionario.setBancos(bancoList(action));
 		funcionario.setNotes(noteList(action));
+		funcionario.setModelAction(action);
 
 		return funcionario;
 	}
@@ -593,7 +567,7 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 	{
 		Filial funcionario = new Filial();
 		Date a = new Date();
-		
+
 		funcionario.setId(1);
 		funcionario.setNome("NOME");
 		funcionario.setRegime(insertRegime(action));
@@ -601,14 +575,13 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		funcionario.setEntidadeEnum(EntidadeTypeEnum.FILIAL);
 		funcionario.setConfiguracao(new Configuracao());
 		funcionario.setCnaes(cnaeList(action));
-		funcionario.setUsuarios(insertUsuario(action));
 		funcionario.setProcessId(1);
 		funcionario.setDocumentos(documentoList(action));
 		funcionario.setTelefones(telefoneList(action));
 		funcionario.setEmails(emailList(action));
 		funcionario.setEnderecos(enderecoList(action));
-		funcionario.setBancos(bancoList(action));
 		funcionario.setNotes(noteList(action));
+		funcionario.setModelAction(action);
 
 		return funcionario;
 	}
@@ -617,7 +590,7 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 	{
 		Deposito funcionario = new Deposito();
 		Date a = new Date();
-		
+
 		funcionario.setId(1);
 		funcionario.setNome("NOME");
 		funcionario.setRegime(insertRegime(action));
@@ -625,16 +598,31 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		funcionario.setEntidadeEnum(EntidadeTypeEnum.DEPOSITO);
 		funcionario.setConfiguracao(new Configuracao());
 		funcionario.setCnaes(cnaeList(action));
-		funcionario.setUsuarios(insertUsuario(action));
 		funcionario.setProcessId(1);
 		funcionario.setDocumentos(documentoList(action));
 		funcionario.setTelefones(telefoneList(action));
 		funcionario.setEmails(emailList(action));
 		funcionario.setEnderecos(enderecoList(action));
-		funcionario.setBancos(bancoList(action));
 		funcionario.setNotes(noteList(action));
+		funcionario.setModelAction(action);
 
 		return funcionario;
 	}
 
+	public Cidade insertCidade(PersistanceActionEnum action)
+	{
+		Cidade cidade = new Cidade();
+		Date a = new Date();
+
+		cidade.setId(1);
+		cidade.setCodigo("CODIGO");
+		cidade.setNome("NOME");
+		cidade.setCdIBGE("CDIBGE");
+		cidade.setEstado(new Estado(1));
+		cidade.setCep("CEP");
+		cidade.setMunicipio("MUNICIO");
+		cidade.setNotes(noteList(action));
+
+		return cidade;
+	}
 }

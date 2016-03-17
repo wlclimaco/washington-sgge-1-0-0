@@ -1,4 +1,4 @@
-package com.prosperitasglobal.sendsolv.dac.mybatis;
+package com.qat.samples.sysmgmt.nf.dac.mybatis;
 
 import java.util.Date;
 import java.util.Map;
@@ -6,53 +6,53 @@ import java.util.Map;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
-import com.prosperitasglobal.cbof.dac.INoteDAC;
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.dac.ICfopDAC;
-import com.prosperitasglobal.sendsolv.dac.IConhecimentoTransporteDAC;
-import com.prosperitasglobal.sendsolv.dac.IContasDAC;
-import com.prosperitasglobal.sendsolv.dac.IFormaPagamentoDAC;
-import com.prosperitasglobal.sendsolv.dac.IHistoricoDAC;
-import com.prosperitasglobal.sendsolv.dac.IHistoricoNFDAC;
-import com.prosperitasglobal.sendsolv.dac.IItensEspeciaisDAC;
-import com.prosperitasglobal.sendsolv.dac.INFStatusDAC;
-import com.prosperitasglobal.sendsolv.dac.INotaFiscalDAC;
-import com.prosperitasglobal.sendsolv.dac.INotaFiscalItensDAC;
-import com.prosperitasglobal.sendsolv.dac.IServicoItensDAC;
-import com.prosperitasglobal.sendsolv.dac.IStatusDAC;
-import com.prosperitasglobal.sendsolv.dac.ITributacaoDAC;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.ConhecimentoTransporteDACD;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.ContasDACD;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.FormaPagamentoDACD;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.HistoricoNFDACD;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.ItensEspeciaisDACD;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.NFstatusDACD;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.NotaFiscalItensDACD;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.NotesDACD;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.TributacaoDACD;
-import com.prosperitasglobal.sendsolv.model.AcaoEnum;
-import com.prosperitasglobal.sendsolv.model.Caixa;
-import com.prosperitasglobal.sendsolv.model.CondPag;
-import com.prosperitasglobal.sendsolv.model.Contas;
-import com.prosperitasglobal.sendsolv.model.Historico;
-import com.prosperitasglobal.sendsolv.model.HistoricoItens;
-import com.prosperitasglobal.sendsolv.model.NotaFiscal;
-import com.prosperitasglobal.sendsolv.model.NotaFiscalEntrada;
-import com.prosperitasglobal.sendsolv.model.NotaFiscalSaida;
-import com.prosperitasglobal.sendsolv.model.Orcamento;
-import com.prosperitasglobal.sendsolv.model.PedidoCompras;
-import com.prosperitasglobal.sendsolv.model.TabelaEnum;
-import com.prosperitasglobal.sendsolv.model.request.CaixaInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.CondPgInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.ContasInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.NotaFiscalInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.OrcamentoInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.PedidoComprasInquiryRequest;
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
+import com.qat.samples.sysmgmt.condpag.CondPag;
+import com.qat.samples.sysmgmt.condpag.model.request.CondPgInquiryRequest;
+import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
+import com.qat.samples.sysmgmt.entidade.dacd.NotesDACD;
+import com.qat.samples.sysmgmt.entidade.dacd.TributacaoDACD;
+import com.qat.samples.sysmgmt.financeiro.Caixa;
+import com.qat.samples.sysmgmt.historico.model.Historico;
+import com.qat.samples.sysmgmt.historico.model.HistoricoItens;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.nf.dac.IConhecimentoTransporteDAC;
+import com.qat.samples.sysmgmt.nf.dac.IContasDAC;
+import com.qat.samples.sysmgmt.nf.dac.INFStatusDAC;
+import com.qat.samples.sysmgmt.nf.dac.INotaFiscalDAC;
+import com.qat.samples.sysmgmt.nf.dac.INotaFiscalItensDAC;
+import com.qat.samples.sysmgmt.nf.dac.IServicoItensDAC;
+import com.qat.samples.sysmgmt.nf.dacd.ConhecimentoTransporteDACD;
+import com.qat.samples.sysmgmt.nf.dacd.ContasDACD;
+import com.qat.samples.sysmgmt.nf.dacd.HistoricoNFDACD;
+import com.qat.samples.sysmgmt.nf.dacd.ItensEspeciaisDACD;
+import com.qat.samples.sysmgmt.nf.dacd.NFstatusDACD;
+import com.qat.samples.sysmgmt.nf.dacd.NotaFiscalItensDACD;
+import com.qat.samples.sysmgmt.nf.model.Contas;
+import com.qat.samples.sysmgmt.nf.model.NotaFiscal;
+import com.qat.samples.sysmgmt.nf.model.NotaFiscalEntrada;
+import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
+import com.qat.samples.sysmgmt.nf.model.Orcamento;
+import com.qat.samples.sysmgmt.nf.model.PedidoCompras;
+import com.qat.samples.sysmgmt.nf.model.request.CaixaInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.ContasInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.PedidoComprasInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.dac.IFormaPagamentoDAC;
+import com.qat.samples.sysmgmt.pessoa.dacd.FormaPagamentoDACD;
+import com.qat.samples.sysmgmt.produto.dac.ICfopDAC;
+import com.qat.samples.sysmgmt.produto.dac.IItensEspeciaisDAC;
+import com.qat.samples.sysmgmt.util.AcaoEnum;
+import com.qat.samples.sysmgmt.util.TabelaEnum;
+import com.qat.samples.sysmgmt.util.dac.IHistoricoDAC;
+import com.qat.samples.sysmgmt.util.dac.IHistoricoNFDAC;
+import com.qat.samples.sysmgmt.util.dac.INoteDAC;
+import com.qat.samples.sysmgmt.util.dac.IStatusDAC;
+import com.qat.samples.sysmgmt.util.dac.ITributacaoDAC;
 
 /**
  * The Class NotaFiscalDACImpl.
@@ -315,7 +315,7 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 
 	/**
 	 * Get the valid sort fields for the cnae inquiry. Attribute injected by Spring.
-	 *
+	 * 
 	 * @return The valid sort fields for the cnae inquiry.
 	 */
 	public Map<String, String> getNotaFiscalInquiryValidSortFields()
@@ -325,7 +325,7 @@ public class NotaFiscalDACImpl extends SqlSessionDaoSupport implements INotaFisc
 
 	/**
 	 * Set the valid sort fields for the cnae inquiry. Attribute injected by Spring.
-	 *
+	 * 
 	 * @param cnaeInquiryValidSortFields The valid sort fields for the cnae inquiry to set.
 	 */
 	public void setNotaFiscalInquiryValidSortFields(Map<String, String> cnaeInquiryValidSortFields)

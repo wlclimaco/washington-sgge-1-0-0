@@ -8,7 +8,7 @@ import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
  * setting.
  */
 @SuppressWarnings("serial")
-public class Conta extends ModelCosmeDamiao
+public class ContaCorrente extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
@@ -20,7 +20,7 @@ public class Conta extends ModelCosmeDamiao
 
 	private double saldo;
 
-	public Conta()
+	public ContaCorrente()
 	{
 
 	}

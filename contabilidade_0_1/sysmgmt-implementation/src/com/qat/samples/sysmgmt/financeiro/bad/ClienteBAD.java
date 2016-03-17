@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.pessoa.bad;
+package com.qat.samples.sysmgmt.financeiro.bad;
 
 import java.math.BigDecimal;
 import java.util.Random;

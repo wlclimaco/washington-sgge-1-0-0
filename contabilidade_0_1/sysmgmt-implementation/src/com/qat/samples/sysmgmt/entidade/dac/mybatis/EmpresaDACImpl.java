@@ -88,7 +88,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 	private static final String EMPRESA_STMT_INSERT = ENTIDADE_NAMESPACE + "insertEntidade";
 
 	/** The Constant EMPRESA_STMT_UPDATE. */
-	private static final String EMPRESA_STMT_UPDATE = ENTIDADE_NAMESPACE + "updateEmpresa";
+	private static final String EMPRESA_STMT_UPDATE = ENTIDADE_NAMESPACE + "updateEntidade";
 
 	/** The endereco dac. */
 	IEnderecoDAC enderecoDAC;

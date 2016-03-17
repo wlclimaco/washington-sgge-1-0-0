@@ -1,13 +1,13 @@
-package com.prosperitasglobal.sendsolv.bac.impl;
+package com.qat.samples.sysmgmt.nf.bac.impl;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.bac.IOrdemServicoBAC;
-import com.prosperitasglobal.sendsolv.dac.IOrdemServicoDAC;
-import com.prosperitasglobal.sendsolv.model.OrdemServico;
-import com.prosperitasglobal.sendsolv.model.request.OrdemServicoInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.OrdemServicoMaintenanceRequest;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.nf.bac.IOrdemServicoBAC;
+import com.qat.samples.sysmgmt.nf.dac.IOrdemServicoDAC;
+import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoMaintenanceRequest;
 
 /**
  * The Class OrdemServicoBACImpl.

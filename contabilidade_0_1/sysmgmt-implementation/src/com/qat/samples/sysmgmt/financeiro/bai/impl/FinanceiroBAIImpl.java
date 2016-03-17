@@ -1,16 +1,9 @@
-package com.prosperitasglobal.sendsolv.bai.impl;
+package com.qat.samples.sysmgmt.financeiro.bai.impl;
 
 import java.util.List;
 
 import org.slf4j.LoggerFactory;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.bac.IFinanceiroBAC;
-import com.prosperitasglobal.sendsolv.bai.IFinanceiroBAI;
-import com.prosperitasglobal.sendsolv.model.Financeiro;
-import com.prosperitasglobal.sendsolv.model.request.FinanceiroInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.FinanceiroMaintenanceRequest;
-import com.prosperitasglobal.sendsolv.model.response.FinanceiroResponse;
 import com.qat.framework.model.Message.MessageLevel;
 import com.qat.framework.model.Message.MessageSeverity;
 import com.qat.framework.model.MessageInfo;
@@ -24,6 +17,13 @@ import com.qat.framework.validation.ValidationContext;
 import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.financeiro.Financeiro;
+import com.qat.samples.sysmgmt.financeiro.bac.IFinanceiroBAC;
+import com.qat.samples.sysmgmt.financeiro.bai.IFinanceiroBAI;
+import com.qat.samples.sysmgmt.financeiro.model.request.FinanceiroInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.FinanceiroMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.response.FinanceiroResponse;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 
 /**
  * The Class FinanceiroBAIImpl.
@@ -59,7 +59,7 @@ public class FinanceiroBAIImpl implements IFinanceiroBAI
 
 	/**
 	 * Get empresa validation controller.
-	 *
+	 * 
 	 * @return the validation controller
 	 */
 	public ValidationController getValidationController()
@@ -69,7 +69,7 @@ public class FinanceiroBAIImpl implements IFinanceiroBAI
 
 	/**
 	 * Spring sets the empresa validation controller.
-	 *
+	 * 
 	 * @param empresaValidationController the new validation controller
 	 */
 	public void setValidationController(ValidationController empresaValidationController)
@@ -79,7 +79,7 @@ public class FinanceiroBAIImpl implements IFinanceiroBAI
 
 	/**
 	 * Spring Sets the empresa bac.
-	 *
+	 * 
 	 * @param empresaBAC the new empresa bac
 	 */
 	public void setFinanceiroBAC(IFinanceiroBAC empresaBAC)
@@ -89,7 +89,7 @@ public class FinanceiroBAIImpl implements IFinanceiroBAI
 
 	/**
 	 * Gets the empresa bac.
-	 *
+	 * 
 	 * @return the empresa bac
 	 */
 	public IFinanceiroBAC getFinanceiroBAC()
@@ -184,7 +184,7 @@ public class FinanceiroBAIImpl implements IFinanceiroBAI
 		{
 			InternalResponse internalResponse = new InternalResponse();
 			// validate fetchId field
-			if (ValidationUtil.isNull(request.getId()) && ValidationUtil.isNullOrEmpty(request.getStringId()))
+			if (ValidationUtil.isNull(request.getFetchId()))
 			{
 				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
 			}
@@ -232,7 +232,7 @@ public class FinanceiroBAIImpl implements IFinanceiroBAI
 
 	/**
 	 * Fetch paged.
-	 *
+	 * 
 	 * @param request the request
 	 * @param response the response
 	 */
@@ -255,7 +255,7 @@ public class FinanceiroBAIImpl implements IFinanceiroBAI
 
 	/**
 	 * Process.
-	 *
+	 * 
 	 * @param indicator the indicator
 	 * @param persistType the persist type
 	 * @param request the request
@@ -284,7 +284,7 @@ public class FinanceiroBAIImpl implements IFinanceiroBAI
 
 	/**
 	 * Handle return.
-	 *
+	 * 
 	 * @param response the response
 	 * @param internalResponse the internal response
 	 * @param messages the messages
@@ -308,7 +308,7 @@ public class FinanceiroBAIImpl implements IFinanceiroBAI
 
 	/**
 	 * Do persistance.
-	 *
+	 * 
 	 * @param request the request
 	 * @param updateType the update type
 	 * @return the internal response

@@ -1,20 +1,20 @@
-package com.prosperitasglobal.sendsolv.dac.mybatis;
+package com.qat.samples.sysmgmt.nf.dac.mybatis;
 
 import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.dac.IOrdemServicoDAC;
-import com.prosperitasglobal.sendsolv.dacd.mybatis.PagedResultsDACD;
-import com.prosperitasglobal.sendsolv.model.OrdemServico;
-import com.prosperitasglobal.sendsolv.model.request.OrdemServicoInquiryRequest;
 import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.nf.dac.IOrdemServicoDAC;
+import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
 
 /**
  * The Class OrdemServicoDACImpl.
@@ -57,7 +57,7 @@ public class OrdemServicoDACImpl extends SqlSessionDaoSupport implements IOrdemS
 
 	/**
 	 * Gets the ordemServico dac.
-	 *
+	 * 
 	 * @return the ordemServico dac
 	 */
 	public IOrdemServicoDAC getOrdemServicoDAC()
@@ -67,7 +67,7 @@ public class OrdemServicoDACImpl extends SqlSessionDaoSupport implements IOrdemS
 
 	/**
 	 * Sets the ordemServico dac.
-	 *
+	 * 
 	 * @param ordemServicoDAC the ordemServico dac
 	 */
 	public void setOrdemServicoDAC(IOrdemServicoDAC ordemServicoDAC)
@@ -77,7 +77,7 @@ public class OrdemServicoDACImpl extends SqlSessionDaoSupport implements IOrdemS
 
 	/**
 	 * Get the valid sort fields for the ordemServico inquiry. Attribute injected by Spring.
-	 *
+	 * 
 	 * @return The valid sort fields for the ordemServico inquiry.
 	 */
 	public Map<String, String> getOrdemServicoInquiryValidSortFields()
@@ -87,7 +87,7 @@ public class OrdemServicoDACImpl extends SqlSessionDaoSupport implements IOrdemS
 
 	/**
 	 * Set the valid sort fields for the ordemServico inquiry. Attribute injected by Spring.
-	 *
+	 * 
 	 * @param ordemServicoInquiryValidSortFields The valid sort fields for the ordemServico inquiry to set.
 	 */
 	public void setOrdemServicoInquiryValidSortFields(Map<String, String> ordemServicoInquiryValidSortFields)
@@ -214,7 +214,7 @@ public class OrdemServicoDACImpl extends SqlSessionDaoSupport implements IOrdemS
 
 	/**
 	 * Maintain ordemServico associations.
-	 *
+	 * 
 	 * @param ordemServico the ordemServico
 	 * @param response the response
 	 * @return the integer

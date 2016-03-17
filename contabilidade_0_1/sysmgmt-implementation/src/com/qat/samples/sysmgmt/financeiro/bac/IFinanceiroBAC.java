@@ -1,11 +1,11 @@
-package com.prosperitasglobal.sendsolv.bac;
+package com.qat.samples.sysmgmt.financeiro.bac;
 
-import com.prosperitasglobal.cbof.model.request.FetchByIdRequest;
-import com.prosperitasglobal.sendsolv.model.Financeiro;
-import com.prosperitasglobal.sendsolv.model.request.FinanceiroInquiryRequest;
-import com.prosperitasglobal.sendsolv.model.request.FinanceiroMaintenanceRequest;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.financeiro.Financeiro;
+import com.qat.samples.sysmgmt.financeiro.model.request.FinanceiroInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.FinanceiroMaintenanceRequest;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 
 /**
  * The Interface IFinanceiroBAC.
@@ -15,7 +15,7 @@ public interface IFinanceiroBAC
 
 	/**
 	 * Insert location.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the internal results response< location>
 	 */
@@ -23,7 +23,7 @@ public interface IFinanceiroBAC
 
 	/**
 	 * Update location.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the internal results response< location>
 	 */
@@ -31,7 +31,7 @@ public interface IFinanceiroBAC
 
 	/**
 	 * Delete location.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the internal response
 	 */
@@ -39,7 +39,7 @@ public interface IFinanceiroBAC
 
 	/**
 	 * Fetch location by id.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the internal results response< location>
 	 */
@@ -47,7 +47,7 @@ public interface IFinanceiroBAC
 
 	/**
 	 * Fetch location by request.
-	 *
+	 * 
 	 * @param request the request
 	 * @return the internal results response< location>
 	 */
