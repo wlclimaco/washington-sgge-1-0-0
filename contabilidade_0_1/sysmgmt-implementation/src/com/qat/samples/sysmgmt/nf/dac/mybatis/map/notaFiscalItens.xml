@@ -41,9 +41,9 @@
     <result property="vrDesconto" column="vrDesconto" />
      <result property="processId" column="processId" />
    	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
     <association property="produto"    column="produto" select="ProdutoMap.fetchProdutoById"  />
     <association property="cfop"    column="cfop" select="CfopMap.fetchCfopById"  />
     <association property="classificacao"    column="classificacao" select="ClassificacaoMap.fetchClassificacaoById"  />
@@ -103,7 +103,7 @@
 	    	<if test="vrDesconto!= null"> vrDesconto=#{vrDesconto},</if>
 	    	<if test="cfop.id!= null"> cfop=#{cfop.id},</if>
 	    	<if test="classificacao.id!= null"> classificacao=#{classificacao.id},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE

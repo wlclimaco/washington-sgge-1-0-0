@@ -29,9 +29,9 @@
 		<result property="descItens" column="descItens" />
 		<result property="pcCusto" column="pcCusto" />
 		<result property="createUser" column="create_user"/>
-		<result property="createDateUTC" column="create_date"/>
+		<result property="createDataUTC" column="create_date"/>
 		<result property="modifyUser" column="modify_user"/>
-		<result property="modifyDateUTC" column="modify_date"/>
+		<result property="modifyDataUTC" column="modify_date"/>
 		<association property="cfop"    column="cfop" select="CfopMap.fetchCfopById"  />
 		<association property="transportador"    column="transportador" select="TransportadorMap.fetchTransportadorByNota"  />
 		<association property="conhecimentoTransporte"    column="id" select="ConhecimentoTransporteMap.fetchAllConhecimentoTransportesByNotaFiscalId"  />
@@ -133,7 +133,7 @@
 			<if test="conhecimentoTransporte.id!= null"> conhecimentotransporte=#{conhecimentoTransporte.id},</if>
 			<if test="empresa.id!= null"> entidade=#{empresa.id},</if>
 			<if test="pessoa.id!= null"> pessoa=#{pessoa.id},</if>
-			<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE

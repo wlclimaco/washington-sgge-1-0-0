@@ -25,6 +25,8 @@
 	<collection property="planoList" column="id" select="PlanoMap.fetchPlanoByEmpresa"/>
 	<collection property="filialList" column="id" select="FilialMap.fetchAllFilialByEntidade"/>
 	<collection property="depositoList" column="id" select="DepositoMap.fetchAllDepositoByEntidade"/>
+	<collection property="contaCorrenteList" column="id" select="ContaCorrenteMap.fetchAllDepositoByEntidade"/>
+	<collection property="tarefaList" column="id" select="TarefaMap.fetchAllDepositoByEntidade"/>
   </resultMap>
 
    <resultMap id="empresaTableResult" type="Empresa" extends="EntidadeMap.entidadeTableResult">

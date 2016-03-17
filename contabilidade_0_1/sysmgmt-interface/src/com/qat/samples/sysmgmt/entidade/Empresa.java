@@ -31,6 +31,8 @@ public class Empresa extends Entidade
 	private List<Usuario> usuarioList;
 
 	private List<ContaCorrente> contaCorrenteList;
+	
+	private List<TarefaEnt> tarefaList;
 
 	public Empresa()
 	{

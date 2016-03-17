@@ -27,9 +27,9 @@
 	<result property="pesoLiquido" column="pesoLiquido"/>
 	<result property="pesoBruto" column="pesoBruto"/>
 	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
+	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="modifyDataUTC" column="modify_date"/>
 	<association property="transportador"    column="transportador" select="PessoaMap.fetchPessoaById"  />
 	<association property="marca"    column="marca" select="MarcaMap.fetchMarcaById"  />
 	<association property="estado"    column="estado" select="EstadoMap.fetchEstadoById"  />
@@ -105,7 +105,7 @@
 	    	<if test="transportador.id != null"> transportador=#{transportador.id},</if>
 	    	<if test="marca.id != null">marca = #{marca.id},</if>
 	    	<if test="estado.id != null"> estado=#{estado.id},</if>
-			<if test="modifyDateUTC != null"> modify_date=#{modifyDateUTC},</if>
+			<if test="modifyDataUTC != null"> modify_date=#{modifyDataUTC},</if>
 			<if test="modifyUser != null"> modify_user=#{modifyUser}</if>
 		</set>
     WHERE
