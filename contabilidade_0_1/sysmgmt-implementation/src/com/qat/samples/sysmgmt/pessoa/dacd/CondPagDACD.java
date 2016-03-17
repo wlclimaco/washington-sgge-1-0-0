@@ -67,6 +67,12 @@ public final class CondPagDACD extends SqlSessionDaoSupport
 			switch (condPag.getModelAction())
 			{
 				case INSERT:
+				
+				count = maintainCondPagAssociationsA(condPag.getCondPagId(), response, null, null,
+							null,
+							TabelaEnum.PESSOA, condPagDAC, statusDAC, historicoDAC, condPag.getEmprId(),
+							condPag.getCreateUser(), processId, historicoId);
+							
 					count = condPagDAC.insertCondPagPessoa(condPag);
 					if (count > 0)
 					{
@@ -80,6 +86,11 @@ public final class CondPagDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
+					count = maintainCondPagAssociationsA(condPag.getCondPagId(), response, null, null,
+							null,
+							TabelaEnum.PESSOA, condPagDAC, statusDAC, historicoDAC, condPag.getEmprId(),
+							condPag.getCreateUser(), processId, historicoId);
+							
 					count = condPagDAC.updateCondPagPessoa(condPag);
 					if (count > 0)
 					{
@@ -102,10 +113,17 @@ public final class CondPagDACD extends SqlSessionDaoSupport
 
 					break;
 				case NONE:
-					count = maintainCondPagAssociationsA(condPag.getCondPagId(), response, null, null,
-							null,
-							TabelaEnum.PESSOA, condPagDAC, statusDAC, historicoDAC, condPag.getEmprId(),
-							condPag.getCreateUser(), processId, historicoId);
+					count = condPagDAC.insertCondPagPessoa(condPag);
+					if (count > 0)
+					{
+						Status status = new Status();
+						status.setStatus(CdStatusTypeEnum.ATIVO);
+						List<Status> statusList = new ArrayList<Status>();
+						count =
+								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
+										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
+										processId, historicoId);
+					}
 					break;
 			}
 		}

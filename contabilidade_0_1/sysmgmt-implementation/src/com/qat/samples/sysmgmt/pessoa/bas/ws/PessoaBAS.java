@@ -74,6 +74,43 @@ public class PessoaBAS implements IPessoaBAS
 	}
 
 	@Override
+	public AdvogadoResponse insertAdvogado(AdvogadoMaintenanceRequest request)
+	{
+		return getPessoaBAI().insertAdvogado(request);
+
+	}
+
+	@Override
+	public AdvogadoResponse updateAdvogado(AdvogadoMaintenanceRequest request)
+	{
+		return getPessoaBAI().updateAdvogado(request);
+
+	}
+
+	@Override
+	public AdvogadoResponse deleteAdvogado(AdvogadoMaintenanceRequest request)
+	{
+		return getPessoaBAI().deleteAdvogado(request);
+
+	}
+
+	@Override
+	public AdvogadoResponse fetchAdvogadoById(FetchByIdRequest request)
+	{
+		return getPessoaBAI().fetchAdvogadoById(request);
+
+	}
+
+	@Override
+	public AdvogadoResponse fetchAdvogadoByRequest(AdvogadoInquiryRequest request)
+	{
+		return getPessoaBAI().fetchAdvogadoByRequest(request);
+
+	}
+	
+	//==================================
+	
+	@Override
 	public ClienteResponse insertCliente(ClienteMaintenanceRequest request)
 	{
 		return getPessoaBAI().insertCliente(request);
@@ -107,6 +144,8 @@ public class PessoaBAS implements IPessoaBAS
 		return getPessoaBAI().fetchClienteByRequest(request);
 
 	}
+	
+	//==================================
 
 	@Override
 	public FornecedorResponse insertFornecedor(FornecedorMaintenanceRequest request)

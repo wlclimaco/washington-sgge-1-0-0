@@ -1497,6 +1497,115 @@ public class PessoaBAIImpl implements IPessoaBAI
 		}
 		return response;
 	}
+	
+	@Override
+	public ClienteResponse insertAdvogado(AdvogadoMaintenanceRequest request)
+	{
+		AdvogadoResponse response = new AdvogadoResponse();
+		try
+		{
+			response = processAdvogado(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/** The Advogado response. */
+	@Override
+	public AdvogadoResponse updateAdvogado(AdvogadoMaintenanceRequest request)
+	{
+		AdvogadoResponse response = new AdvogadoResponse();
+		try
+		{
+			response = processAdvogado(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/**
+	 * Delete cliente.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	@Override
+	public AdvogadoResponse deleteAdvogado(AdvogadoMaintenanceRequest request)
+	{
+		AdvogadoResponse response = new AdvogadoResponse();
+		try
+		{
+			response = processAdvogado(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/**
+	 * Fetch cliente by id.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	@Override
+	public AdvogadoResponse fetchAdvogadoById(FetchByIdRequest request)
+	{
+		AdvogadoResponse response = new AdvogadoResponse();
+		try
+		{
+			InternalResponse internalResponse = new InternalResponse();
+			// validate fetchId field
+			if (ValidationUtil.isNull(request.getFetchId()))
+			{
+				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
+			}
+			else
+			{
+				internalResponse = getPessoaBAC().fetchAdvogadoById(request);
+			}
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/**
+	 * Fetch cliente by request.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	@Override
+	public AdvogadoResponse fetchAdvogadoByRequest(AdvogadoInquiryRequest request)
+	{
+		AdvogadoResponse response = new AdvogadoResponse();
+		try
+		{
+			fetchAdvogado(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
 
 	/**
 	 * Fetch cliente.

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TransportadorMap">
+
+		<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+	-->
+
+   <resultMap id="advogadoResult" type="Advogado" extends="PessoaMap.PessoaResult">
+
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allAdvogadoColumns">
+		<include refid="PessoaMap.allPessoaColumns"/>
+  </sql>
+
+  <sql id="allAdvogadoValues">
+  		<include refid="PessoaMap.allPessoaValues"/>
+  </sql>
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchAdvogadoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM pessoa where type = 4
+
+  </select>
+
+  <select id="fetchAllAdvogados" resultMap="advogadoResult">
+    SELECT
+	<include refid="allAdvogadoColumns" />
+    FROM pessoa ORDER BY nome ASC
+  </select>
+
+  <select id="fetchAdvogadoById" parameterType="FetchByIdRequest" resultMap="advogadoResult">
+    			   SELECT
+					b.id,	<include refid="allAdvogadoColumns" />
+ 				   FROM pessoa b
+					where b.id = #{fetchId}
+  </select>
+
+   <select id="fetchAdvogadoByNota" parameterType="Integer" resultMap="advogadoResult">
+    			   SELECT
+					b.id,	<include refid="allAdvogadoColumns" />
+ 				   FROM pessoa b
+					where b.id = #{id}
+  </select>
+
+  <select id="fetchAllAdvogadosByRequest" parameterType="PagedInquiryRequest" resultMap="advogadoResult">
+     SELECT * FROM ( SELECT b.id,
+    						<include refid="allAdvogadoColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM pessoa b
+						where b.type = 4
+
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+</mapper>

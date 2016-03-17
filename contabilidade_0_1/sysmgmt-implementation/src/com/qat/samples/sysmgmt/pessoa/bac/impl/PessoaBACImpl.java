@@ -71,6 +71,46 @@ public class PessoaBACImpl implements IPessoaBAC
 	}
 
 	@Override
+	public InternalResultsResponse<Advogado> insertAdvogado(AdvogadoMaintenanceRequest request)
+	{
+		InternalResultsResponse<Advogado> response = new InternalResultsResponse<Advogado>();
+
+		response = getPessoaDAC().insertAdvogado(request.getAdvogado());
+
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Advogado> updateAdvogado(AdvogadoMaintenanceRequest request)
+	{
+		InternalResultsResponse<Advogado> response = new InternalResultsResponse<Advogado>();
+
+		response = getPessoaDAC().updateAdvogado(request.getAdvogado());
+
+		return response;
+	}
+
+	@Override
+	public InternalResponse deleteAdvogado(AdvogadoMaintenanceRequest request)
+	{
+		return getPessoaDAC().deleteAdvogado(request.getAdvogado());
+	}
+
+	@Override
+	public InternalResultsResponse<Advogado> fetchAdvogadoById(FetchByIdRequest request)
+	{
+		return getPessoaDAC().fetchAdvogadoById(request);
+	}
+
+	@Override
+	public InternalResultsResponse<Advogado> fetchAdvogadoByRequest(AdvogadoInquiryRequest request)
+	{
+		return getPessoaDAC().fetchAdvogadoByRequest(request);
+	}
+
+	// =================================
+	
+	@Override
 	public InternalResultsResponse<Cliente> insertCliente(ClienteMaintenanceRequest request)
 	{
 		InternalResultsResponse<Cliente> response = new InternalResultsResponse<Cliente>();
@@ -109,6 +149,7 @@ public class PessoaBACImpl implements IPessoaBAC
 	}
 
 	// =================================
+
 
 	@Override
 	public InternalResultsResponse<Fornecedor> insertFornecedor(FornecedorMaintenanceRequest request)

@@ -38,7 +38,7 @@ public final class GrupoDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainGrupoAssociations(GrupoProd grupo,
+	public static Integer maintainGrupoProdAssociations(GrupoProd grupo,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IGrupoDAC grupoDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC, Integer empId,
 			String UserId, Integer processId)
@@ -56,6 +56,14 @@ public final class GrupoDACD extends SqlSessionDaoSupport
 		switch (grupo.getModelAction())
 		{
 			case INSERT:
+			
+				count =
+				maintainSubGrupoAssociations(Grupo.getIdCnae(), response, null, null,
+					null,
+					TabelaEnum.PRODUTO, cnaeDAC, statusDAC, historicoDAC,
+					cnae.getEmprId(),
+					cnae.getCreateUser(), processId, historicoId);
+			
 				count = grupoDAC.insertGrupoProd(grupo,
 						"insertGrupo", response);
 				if (count > 0)
@@ -70,7 +78,89 @@ public final class GrupoDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
+			count =
+				maintainSubGrupoAssociations(Grupo.getIdCnae(), response, null, null,
+					null,
+					TabelaEnum.PRODUTO, cnaeDAC, statusDAC, historicoDAC,
+					cnae.getEmprId(),
+					cnae.getCreateUser(), processId, historicoId);
+					
 				count = grupoDAC.updateGrupoProd(grupo, response);
+				if (count > 0)
+				{
+					count =
+							StatusDACD
+									.maintainStatusAssociations(grupo.getStatusList(), response, grupo.getId(),
+											null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
+											historicoDAC, processId, null);
+				}
+				break;
+			case DELETE:
+				count = grupoDAC.deleteGrupoProd(grupo, response);
+				Status status = new Status();
+				status.setStatus(CdStatusTypeEnum.DELETADO);
+				List<Status> statusList = new ArrayList<Status>();
+				count =
+						StatusDACD.maintainStatusAssociations(statusList, response, grupo.getId(), null,
+								AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC, processId,
+								null);
+
+				break;
+			case NOME:
+			
+				count = grupoDAC.insertGrupoProd(grupo,
+						"insertGrupo", response);
+						
+				if (count > 0)
+				{
+					Status status = new Status();
+					status.setStatus(CdStatusTypeEnum.ATIVO);
+					List<Status> statusList = new ArrayList<Status>();
+					count =
+							StatusDACD.maintainStatusAssociations(statusList, response, count, null,
+									AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
+									processId, null);
+				}
+				break;
+		}
+
+		return count;
+	}
+	
+	public static Integer maintainGrupoAssociations(Grupo grupo,
+			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			TabelaEnum tabelaEnum, IGrupoDAC grupoDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC, Integer empId,
+			String UserId, Integer processId)
+	{
+		Integer count = 0;
+		// First Maintain Empresa
+		if (ValidationUtil.isNull(grupo))
+		{
+			return count;
+		}
+
+		// Make sure we set the parent key
+		grupo.setParentId(parentId);
+
+		switch (grupo.getModelAction())
+		{
+			case INSERT:
+					
+				count = grupoDAC.insertGrupo(grupo,
+						"insertGrupo", response);
+				if (count > 0)
+				{
+					Status status = new Status();
+					status.setStatus(CdStatusTypeEnum.ATIVO);
+					List<Status> statusList = new ArrayList<Status>();
+					count =
+							StatusDACD.maintainStatusAssociations(statusList, response, count, null,
+									AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
+									processId, null);
+				}
+				break;
+			case UPDATE:
+				count = grupoDAC.updateGrupo(grupo, response);
 				if (count > 0)
 				{
 					count =

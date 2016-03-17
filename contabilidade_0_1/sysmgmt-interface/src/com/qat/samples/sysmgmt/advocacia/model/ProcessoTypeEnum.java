@@ -1,26 +1,33 @@
-package com.qat.samples.sysmgmt.nf;
+package com.qat.samples.sysmgmt.pessoa;
 
 import com.qat.framework.model.II18nEnum;
 import com.qat.framework.model.IIntegerEnum;
 
-public enum NotaTypeEnum implements IIntegerEnum, II18nEnum
+/**
+ * The Enum PayrollTypeEnum details the different options a payroll can have inside of SendSolv
+ * 
+ * @author abarros
+ * @version 1.0
+ * @created 21-Jul-2014 10:00:07 AM
+ */
+public enum ProcessoTypeEnum implements IIntegerEnum, II18nEnum
 {
 
 	/** The centralized. */
-	ENTRADA(1, "com.prosperitasglobal.sendsolv.model.payrolltype.centralized"),
+	INICIAL(1, "com.prosperitasglobal.sendsolv.model.payrolltype.centralized"),
 
 	/** The not centralized. */
-	SAIDA(2, "com.prosperitasglobal.sendsolv.model.payrolltype.not_centralized"),
+	PARALISADO(2, "com.prosperitasglobal.sendsolv.model.payrolltype.not_centralized"),
 
 	/** The mixed. */
-	TRANSPORTE(3, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
+	ANDAMENTO(3, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
 
 	/** The unknown. */
-	SERVICO(4, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
+	INTERROMPIDO(4, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
 
-	ORCAMENTO(5, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
+	FINALIZADO(5, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
 
-	PEDIDOCOMPRAS(6, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
+	AGUARDANDODOCUMENTOS(6, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
 
 	/** The code. */
 	private Integer code;
@@ -34,7 +41,7 @@ public enum NotaTypeEnum implements IIntegerEnum, II18nEnum
 	 * @param value the value
 	 * @param labelKeyParam the label key param
 	 */
-	private NotaTypeEnum(Integer value, String labelKeyParam)
+	private ProcessoTypeEnum(Integer value, String labelKeyParam)
 	{
 		code = value;
 		labelKey = labelKeyParam;
@@ -57,9 +64,9 @@ public enum NotaTypeEnum implements IIntegerEnum, II18nEnum
 	 * @param value the value
 	 * @return the process status enum
 	 */
-	public static NotaTypeEnum enumForValue(Integer value)
+	public static ProcessoTypeEnum enumForValue(Integer value)
 	{
-		for (NotaTypeEnum e : values())
+		for (ProcessoTypeEnum e : values())
 		{
 			if (e.getValue().equals(value))
 			{
@@ -80,7 +87,7 @@ public enum NotaTypeEnum implements IIntegerEnum, II18nEnum
 		String comma = "";
 		StringBuilder enumValue = new StringBuilder();
 
-		for (NotaTypeEnum i : NotaTypeEnum.class.getEnumConstants())
+		for (ProcessoTypeEnum i : ProcessoTypeEnum.class.getEnumConstants())
 		{
 			enumValue.append(comma).append(i.getValue());
 			comma = ", ";

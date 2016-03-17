@@ -57,6 +57,17 @@ public interface IPessoaDAC
 {
 
 	// ================================
+	public InternalResultsResponse<Advogado> updateAdvogado(Advogado cnae);
+
+	public InternalResultsResponse<Advogado> insertAdvogado(Advogado cnae);
+
+	public InternalResponse deleteAdvogado(Advogado cnae);
+
+	public InternalResultsResponse<Advogado> fetchAdvogadoById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Advogado> fetchAdvogadoByRequest(AdvogadoInquiryRequest request);
+	
+	// ================================
 	public InternalResultsResponse<Cliente> updateCliente(Cliente cnae);
 
 	public InternalResultsResponse<Cliente> insertCliente(Cliente cnae);

@@ -48,6 +48,17 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
  */
 public interface IPessoaBAC
 {
+	public InternalResultsResponse<Advogado> insertAdvogado(AdvogadoMaintenanceRequest request);
+
+	public InternalResultsResponse<Advogado> updateAdvogado(AdvogadoMaintenanceRequest request);
+
+	public InternalResponse deleteAdvogado(AdvogadoMaintenanceRequest request);
+
+	public InternalResultsResponse<Advogado> fetchAdvogadoById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Advogado> fetchAdvogadoByRequest(AdvogadoInquiryRequest request);
+
+	// =============================
 
 	public InternalResultsResponse<Funcionario> insertFuncionario(FuncionarioMaintenanceRequest request);
 
@@ -60,6 +71,8 @@ public interface IPessoaBAC
 	public InternalResultsResponse<Funcionario> fetchFuncionarioByRequest(FuncionarioInquiryRequest request);
 
 	// =============================
+	
+	
 
 	public InternalResultsResponse<Cliente> insertCliente(ClienteMaintenanceRequest request);
 
