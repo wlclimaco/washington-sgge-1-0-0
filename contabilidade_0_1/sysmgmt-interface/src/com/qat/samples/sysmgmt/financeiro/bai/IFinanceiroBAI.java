@@ -17,5 +17,7 @@ public interface IFinanceiroBAI
 	public FinanceiroResponse fetchFinanceiroById(FetchByIdRequest request);
 
 	public FinanceiroResponse fetchFinanceiroByRequest(FinanceiroInquiryRequest request);
+	
+
 
 }

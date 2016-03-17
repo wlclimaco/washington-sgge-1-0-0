@@ -441,6 +441,10 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 			historicoId =
 					HistoricoDACD.inserthistoricoItens(empresa.getId(), empresa.getUserId(), response,
 							TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoId, getHistoricoDAC());
+							
+			EmailDACD.maintainEmailEnviar();	
+			GerarTarefaDACD.maintainGerarTarefas();
+			GerarFinanceiroDACD.maintainGerarFinanceiro();			
 
 		}
 		else

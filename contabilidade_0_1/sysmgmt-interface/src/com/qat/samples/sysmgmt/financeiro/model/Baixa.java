@@ -11,27 +11,21 @@ public class Financeiro extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
-
-	/** The type of an account. */
-	private String logradouro;
-
-	/** The description. */
-	private String cidade;
-
-	/** The estado. */
-	private String estado;
-
-	/** The bairro. */
-	private String bairro;
-
-	/** The numero. */
-	private String numero;
-
-	/** The cep. */
-	private String cep;
+	
+	private Integer finanId;
+	
+	private Long dataBaixa;
 
 	/** The tipo endereco. */
-	private String tipoEndereco;
+	private String observacao;
+	
+	private Double Valor;
+	
+	private Double juros;
+	
+	private Double multa;
+	
+	private TipoBaixa tipoBaixa;
 
 	/**
 	 * Default constructor.
