@@ -10,11 +10,11 @@ import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.agencia.Agencia;
+import com.qat.samples.sysmgmt.advocacia.model.Processo;
+import com.qat.samples.sysmgmt.advocacia.model.request.ProcessoInquiryRequest;
 import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
-import com.qat.samples.sysmgmt.pessoa.dac.IAgenciaDAC;
+import com.qat.samples.sysmgmt.pessoa.dac.IProcessoDAC;
 
 /**
  * The Class AgenciaDACImpl.

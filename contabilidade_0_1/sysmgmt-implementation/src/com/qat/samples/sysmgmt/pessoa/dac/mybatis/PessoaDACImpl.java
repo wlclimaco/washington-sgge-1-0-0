@@ -14,6 +14,8 @@ import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.advocacia.model.Advogado;
+import com.qat.samples.sysmgmt.advocacia.model.request.AdvogadoInquiryRequest;
 import com.qat.samples.sysmgmt.agencia.Agencia;
 import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
 import com.qat.samples.sysmgmt.banco.Banco;
@@ -699,9 +701,9 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 				"ClienteMap.fetchAllClientesByRequest", response);
 		return response;
 	}
-	
-	//=========================Advogado=========================
-	
+
+	// =========================Advogado=========================
+
 	@Override
 	public InternalResultsResponse<Advogado> insertAdvogado(Advogado pessoa)
 	{
@@ -893,7 +895,6 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 				"AdvogadoMap.fetchAllAdvogadosByRequest", response);
 		return response;
 	}
-
 
 	// ========================Fornecedor=======================
 	@Override

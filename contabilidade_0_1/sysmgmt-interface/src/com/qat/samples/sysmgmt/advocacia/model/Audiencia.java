@@ -1,147 +1,78 @@
-package com.qat.samples.sysmgmt.clinica;
+package com.qat.samples.sysmgmt.advocacia.model;
 
 import java.util.List;
 
-import com.qat.samples.sysmgmt.pessoa.Medico;
-import com.qat.samples.sysmgmt.pessoa.Paciente;
 import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
+import com.qat.samples.sysmgmt.util.Note;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
  */
 @SuppressWarnings("serial")
-public class Consulta extends ModelCosmeDamiao
+public class Audiencia extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
 
 	/** The type of an account. */
-	private Integer dataConsulta;
+	private Integer dataAudiencia;
 
-	private Double valor;
+	private String descricao;
 
-	private Integer dataMarcacao;
+	private List<Note> noteLIst;
 
-	private Medico medico;
-
-	private Paciente paciente;
-
-	private List<ExamePessoa> exameList;
-
-	private List<Resultado> resultadoList;
-
-	private PlanoSaudePessoa planoSaude;
-
-	public Consulta()
+	public Audiencia()
 	{
-
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @return the id
-	 */
 	public Integer getId()
 	{
 		return id;
 	}
 
-	/**
-	 * @param id the id to set
-	 */
 	public void setId(Integer id)
 	{
 		this.id = id;
 	}
 
-	public Integer getDataConsulta()
+	public Integer getDataAudiencia()
 	{
-		return dataConsulta;
+		return dataAudiencia;
 	}
 
-	public void setDataConsulta(Integer dataConsulta)
+	public void setDataAudiencia(Integer dataAudiencia)
 	{
-		this.dataConsulta = dataConsulta;
+		this.dataAudiencia = dataAudiencia;
 	}
 
-	public Integer getDataMarcacao()
+	public String getDescricao()
 	{
-		return dataMarcacao;
+		return descricao;
 	}
 
-	public void setDataMarcacao(Integer dataMarcacao)
+	public void setDescricao(String descricao)
 	{
-		this.dataMarcacao = dataMarcacao;
+		this.descricao = descricao;
 	}
 
-	public Medico getMedico()
+	public List<Note> getNoteLIst()
 	{
-		return medico;
+		return noteLIst;
 	}
 
-	public void setMedico(Medico medico)
+	public void setNoteLIst(List<Note> noteLIst)
 	{
-		this.medico = medico;
-	}
-
-	public Paciente getPaciente()
-	{
-		return paciente;
-	}
-
-	public void setPaciente(Paciente paciente)
-	{
-		this.paciente = paciente;
-	}
-
-	public List<ExamePessoa> getExameList()
-	{
-		return exameList;
-	}
-
-	public void setExameList(List<ExamePessoa> exameList)
-	{
-		this.exameList = exameList;
-	}
-
-	public List<Resultado> getResultadoList()
-	{
-		return resultadoList;
-	}
-
-	public void setResultadoList(List<Resultado> resultadoList)
-	{
-		this.resultadoList = resultadoList;
-	}
-
-	public PlanoSaudePessoa getPlanoSaude()
-	{
-		return planoSaude;
-	}
-
-	public void setPlanoSaude(PlanoSaudePessoa planoSaude)
-	{
-		this.planoSaude = planoSaude;
-	}
-
-	public Double getValor()
-	{
-		return valor;
-	}
-
-	public void setValor(Double valor)
-	{
-		this.valor = valor;
+		this.noteLIst = noteLIst;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "Consulta [getId()=" + getId() + ", getDataConsulta()=" + getDataConsulta() + ", getDataMarcacao()="
-				+ getDataMarcacao() + ", getMedico()=" + getMedico() + ", getPaciente()=" + getPaciente()
-				+ ", getExameList()=" + getExameList() + ", getResultadoList()=" + getResultadoList()
-				+ ", getPlanoSaude()=" + getPlanoSaude() + ", getValor()=" + getValor() + ", toString()="
-				+ super.toString() + "]";
+		return "Audiencia [getId()=" + getId() + ", getDataAudiencia()=" + getDataAudiencia() + ", getDescricao()="
+				+ getDescricao() + ", getNoteLIst()=" + getNoteLIst() + ", toString()=" + super.toString() + "]";
 	}
 
 }

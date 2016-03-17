@@ -449,13 +449,13 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 						produto.getCreateUser(), processId);
 
 		insertCount +=
-				GrupoDACD.maintainGrupoAssociations(produto.getGrupo(), response, insertCount, null,
+				GrupoDACD.maintainGrupoProdAssociations(produto.getGrupo(), response, insertCount, null,
 						null,
 						null, getGrupoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
 						produto.getCreateUser(), processId);
 
 		insertCount +=
-				SubGrupoDACD.maintainSubGrupoAssociations(produto.getSubGrupo(), response, insertCount, null,
+				SubGrupoDACD.maintainSubGrupoProdAssociations(produto.getSubGrupo(), response, insertCount, null,
 						null,
 						null, getSubGrupoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
 						produto.getCreateUser(), processId);
@@ -588,13 +588,13 @@ public class ProdutoDACImpl extends SqlSessionDaoSupport implements IProdutoDAC
 						produto.getCreateUser(), processId);
 
 		updateCount +=
-				GrupoDACD.maintainGrupoAssociations(produto.getGrupo(), response, produto.getId(), null,
+				GrupoDACD.maintainGrupoProdAssociations(produto.getGrupo(), response, produto.getId(), null,
 						null,
 						null, getGrupoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
 						produto.getCreateUser(), processId);
 
 		updateCount +=
-				SubGrupoDACD.maintainSubGrupoAssociations(produto.getSubGrupo(), response, produto.getId(), null,
+				SubGrupoDACD.maintainSubGrupoProdAssociations(produto.getSubGrupo(), response, produto.getId(), null,
 						null,
 						null, getSubGrupoDAC(), getStatusDAC(), getHistoricoDAC(), produto.getId(),
 						produto.getCreateUser(), processId);

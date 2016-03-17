@@ -1,39 +1,39 @@
-package com.qat.samples.sysmgmt.clinica.model.response;
+package com.qat.samples.sysmgmt.advocacia.model.response;
 
 import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.clinica.Consulta;
+import com.qat.samples.sysmgmt.advocacia.model.Processo;
 
-public class ConsultaResponse extends InquiryResponse
+public class ProcessoResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<Consulta> consultaList;
+	private List<Processo> ProcessoList;
 
 	/**
 	 * The Constructor.
 	 */
-	public ConsultaResponse()
+	public ProcessoResponse()
 	{
 
 	}
 
 	/**
-	 * @return the consultaList
+	 * @return the ProcessoList
 	 */
-	public List<Consulta> getConsultaList()
+	public List<Processo> getProcessoList()
 	{
-		return consultaList;
+		return ProcessoList;
 	}
 
 	/**
-	 * @param consultaList the consultaList to set
+	 * @param ProcessoList the ProcessoList to set
 	 */
-	public void setConsultaList(List<Consulta> consultaList)
+	public void setProcessoList(List<Processo> ProcessoList)
 	{
-		this.consultaList = consultaList;
+		this.ProcessoList = ProcessoList;
 	}
 
 	/*
@@ -44,7 +44,7 @@ public class ConsultaResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setConsultaList((List<Consulta>)coll);
+		setProcessoList((List<Processo>)coll);
 	}
 
 	/*
@@ -54,7 +54,7 @@ public class ConsultaResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "LocationResponse [getLocationList()=" + getConsultaList() + ", getResultsSetInfo()="
+		return "LocationResponse [getLocationList()=" + getProcessoList() + ", getResultsSetInfo()="
 				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
 				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
 				+ isOperationSuccess() + "]";

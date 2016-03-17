@@ -1,9 +1,8 @@
-package com.qat.samples.sysmgmt.clinica;
+package com.qat.samples.sysmgmt.advocacia.model;
 
 import java.util.List;
 
-import com.qat.samples.sysmgmt.pessoa.Medico;
-import com.qat.samples.sysmgmt.pessoa.Paciente;
+import com.qat.samples.sysmgmt.pessoa.Cliente;
 import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
 
 /**
@@ -11,7 +10,7 @@ import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
  * setting.
  */
 @SuppressWarnings("serial")
-public class Process extends ModelCosmeDamiao
+public class Processo extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
@@ -29,22 +28,17 @@ public class Process extends ModelCosmeDamiao
 
 	private List<ProcessoStatus> processoStatusList;
 
-	public Process()
+	public Processo()
 	{
+		super();
 
 	}
 
-	/**
-	 * @return the id
-	 */
 	public Integer getId()
 	{
 		return id;
 	}
 
-	/**
-	 * @param id the id to set
-	 */
 	public void setId(Integer id)
 	{
 		this.id = id;
@@ -60,66 +54,6 @@ public class Process extends ModelCosmeDamiao
 		this.dataProcess = dataProcess;
 	}
 
-	public Integer getDataMarcacao()
-	{
-		return dataMarcacao;
-	}
-
-	public void setDataMarcacao(Integer dataMarcacao)
-	{
-		this.dataMarcacao = dataMarcacao;
-	}
-
-	public Medico getMedico()
-	{
-		return medico;
-	}
-
-	public void setMedico(Medico medico)
-	{
-		this.medico = medico;
-	}
-
-	public Paciente getPaciente()
-	{
-		return paciente;
-	}
-
-	public void setPaciente(Paciente paciente)
-	{
-		this.paciente = paciente;
-	}
-
-	public List<ExamePessoa> getExameList()
-	{
-		return exameList;
-	}
-
-	public void setExameList(List<ExamePessoa> exameList)
-	{
-		this.exameList = exameList;
-	}
-
-	public List<Resultado> getResultadoList()
-	{
-		return resultadoList;
-	}
-
-	public void setResultadoList(List<Resultado> resultadoList)
-	{
-		this.resultadoList = resultadoList;
-	}
-
-	public PlanoSaudePessoa getPlanoSaude()
-	{
-		return planoSaude;
-	}
-
-	public void setPlanoSaude(PlanoSaudePessoa planoSaude)
-	{
-		this.planoSaude = planoSaude;
-	}
-
 	public Double getValor()
 	{
 		return valor;
@@ -130,14 +64,53 @@ public class Process extends ModelCosmeDamiao
 		this.valor = valor;
 	}
 
+	public List<Advogado> getAdvogadoLIst()
+	{
+		return advogadoLIst;
+	}
+
+	public void setAdvogadoLIst(List<Advogado> advogadoLIst)
+	{
+		this.advogadoLIst = advogadoLIst;
+	}
+
+	public List<Cliente> getClienteList()
+	{
+		return clienteList;
+	}
+
+	public void setClienteList(List<Cliente> clienteList)
+	{
+		this.clienteList = clienteList;
+	}
+
+	public List<Audiencia> getAudienciaList()
+	{
+		return audienciaList;
+	}
+
+	public void setAudienciaList(List<Audiencia> audienciaList)
+	{
+		this.audienciaList = audienciaList;
+	}
+
+	public List<ProcessoStatus> getProcessoStatusList()
+	{
+		return processoStatusList;
+	}
+
+	public void setProcessoStatusList(List<ProcessoStatus> processoStatusList)
+	{
+		this.processoStatusList = processoStatusList;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "Process [getId()=" + getId() + ", getDataProcess()=" + getDataProcess() + ", getDataMarcacao()="
-				+ getDataMarcacao() + ", getMedico()=" + getMedico() + ", getPaciente()=" + getPaciente()
-				+ ", getExameList()=" + getExameList() + ", getResultadoList()=" + getResultadoList()
-				+ ", getPlanoSaude()=" + getPlanoSaude() + ", getValor()=" + getValor() + ", toString()="
-				+ super.toString() + "]";
+		return "Processo [getId()=" + getId() + ", getDataProcess()=" + getDataProcess() + ", getValor()=" + getValor()
+				+ ", getAdvogadoLIst()=" + getAdvogadoLIst() + ", getClienteList()=" + getClienteList()
+				+ ", getAudienciaList()=" + getAudienciaList() + ", getProcessoStatusList()=" + getProcessoStatusList()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

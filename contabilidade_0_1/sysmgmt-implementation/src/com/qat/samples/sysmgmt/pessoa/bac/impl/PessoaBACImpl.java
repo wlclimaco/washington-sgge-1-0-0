@@ -2,6 +2,9 @@ package com.qat.samples.sysmgmt.pessoa.bac.impl;
 
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.advocacia.model.Advogado;
+import com.qat.samples.sysmgmt.advocacia.model.request.AdvogadoInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.model.request.AdvogadoMaintenanceRequest;
 import com.qat.samples.sysmgmt.agencia.Agencia;
 import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
 import com.qat.samples.sysmgmt.banco.Banco;
@@ -109,7 +112,7 @@ public class PessoaBACImpl implements IPessoaBAC
 	}
 
 	// =================================
-	
+
 	@Override
 	public InternalResultsResponse<Cliente> insertCliente(ClienteMaintenanceRequest request)
 	{
@@ -149,7 +152,6 @@ public class PessoaBACImpl implements IPessoaBAC
 	}
 
 	// =================================
-
 
 	@Override
 	public InternalResultsResponse<Fornecedor> insertFornecedor(FornecedorMaintenanceRequest request)

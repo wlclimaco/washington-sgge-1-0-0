@@ -12,6 +12,8 @@ import com.qat.framework.util.QATInterfaceUtil;
 import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.advocacia.model.request.AdvogadoInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.model.response.AdvogadoResponse;
 import com.qat.samples.sysmgmt.agencia.Agencia;
 import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
 import com.qat.samples.sysmgmt.agencia.model.response.AgenciaResponse;
@@ -1497,7 +1499,7 @@ public class PessoaBAIImpl implements IPessoaBAI
 		}
 		return response;
 	}
-	
+
 	@Override
 	public ClienteResponse insertAdvogado(AdvogadoMaintenanceRequest request)
 	{

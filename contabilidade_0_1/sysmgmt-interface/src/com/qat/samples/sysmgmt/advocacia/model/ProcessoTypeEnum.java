@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.pessoa;
+package com.qat.samples.sysmgmt.advocacia.model;
 
 import com.qat.framework.model.II18nEnum;
 import com.qat.framework.model.IIntegerEnum;

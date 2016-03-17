@@ -9,6 +9,7 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.entidade.dacd.StatusDACD;
 import com.qat.samples.sysmgmt.produto.dac.IGrupoDAC;
+import com.qat.samples.sysmgmt.produto.model.Grupo;
 import com.qat.samples.sysmgmt.produto.model.GrupoProd;
 import com.qat.samples.sysmgmt.util.AcaoEnum;
 import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
@@ -56,14 +57,14 @@ public final class GrupoDACD extends SqlSessionDaoSupport
 		switch (grupo.getModelAction())
 		{
 			case INSERT:
-			
+
 				count =
-				maintainSubGrupoAssociations(Grupo.getIdCnae(), response, null, null,
-					null,
-					TabelaEnum.PRODUTO, cnaeDAC, statusDAC, historicoDAC,
-					cnae.getEmprId(),
-					cnae.getCreateUser(), processId, historicoId);
-			
+						maintainSubGrupoAssociations(grupo.getGrupoId(), response, null, null,
+								null,
+								TabelaEnum.PRODUTO, cnaeDAC, statusDAC, historicoDAC,
+								cnae.getEmprId(),
+								cnae.getCreateUser(), processId, historicoId);
+
 				count = grupoDAC.insertGrupoProd(grupo,
 						"insertGrupo", response);
 				if (count > 0)
@@ -78,13 +79,13 @@ public final class GrupoDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
-			count =
-				maintainSubGrupoAssociations(Grupo.getIdCnae(), response, null, null,
-					null,
-					TabelaEnum.PRODUTO, cnaeDAC, statusDAC, historicoDAC,
-					cnae.getEmprId(),
-					cnae.getCreateUser(), processId, historicoId);
-					
+				count =
+						maintainSubGrupoAssociations(Grupo.getIdCnae(), response, null, null,
+								null,
+								TabelaEnum.PRODUTO, cnaeDAC, statusDAC, historicoDAC,
+								cnae.getEmprId(),
+								cnae.getCreateUser(), processId, historicoId);
+
 				count = grupoDAC.updateGrupoProd(grupo, response);
 				if (count > 0)
 				{
@@ -107,10 +108,10 @@ public final class GrupoDACD extends SqlSessionDaoSupport
 
 				break;
 			case NOME:
-			
+
 				count = grupoDAC.insertGrupoProd(grupo,
 						"insertGrupo", response);
-						
+
 				if (count > 0)
 				{
 					Status status = new Status();
@@ -126,7 +127,7 @@ public final class GrupoDACD extends SqlSessionDaoSupport
 
 		return count;
 	}
-	
+
 	public static Integer maintainGrupoAssociations(Grupo grupo,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IGrupoDAC grupoDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC, Integer empId,
@@ -145,7 +146,7 @@ public final class GrupoDACD extends SqlSessionDaoSupport
 		switch (grupo.getModelAction())
 		{
 			case INSERT:
-					
+
 				count = grupoDAC.insertGrupo(grupo,
 						"insertGrupo", response);
 				if (count > 0)

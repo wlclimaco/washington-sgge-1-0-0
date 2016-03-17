@@ -65,11 +65,11 @@ public final class FormaPagamentoDACD extends SqlSessionDaoSupport
 			switch (formaPg.getModelAction())
 			{
 				case INSERT:
-				count = maintainBancoAssociationsA(formaPg.getFormaPgId(), response, null, null,
+					count = maintainBancoAssociationsA(formaPg.getFormaPgId(), response, null, null,
 							null,
 							TabelaEnum.PESSOA, formaPgDAC, statusDAC, historicoDAC, formaPg.getEmprId(),
 							formaPg.getCreateUser(), processId, historicoId);
-							
+
 					count = formaPgDAC.insertFormaPgPessoa(formaPg);
 					if (count > 0)
 					{
@@ -83,11 +83,11 @@ public final class FormaPagamentoDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
-				count = maintainBancoAssociationsA(formaPg.getFormaPgId(), response, null, null,
+					count = maintainBancoAssociationsA(formaPg.getFormaPgId(), response, null, null,
 							null,
 							TabelaEnum.PESSOA, formaPgDAC, statusDAC, historicoDAC, formaPg.getEmprId(),
 							formaPg.getCreateUser(), processId, historicoId);
-							
+
 					count = formaPgDAC.updateFormaPgPessoa(formaPg);
 					if (count > 0)
 					{
@@ -113,9 +113,9 @@ public final class FormaPagamentoDACD extends SqlSessionDaoSupport
 					count = formaPgDAC.insertFormaPgPessoa(formaPg);
 					if (count > 0)
 					{
-						Status status = new Status();
+						status = new Status();
 						status.setStatus(CdStatusTypeEnum.ATIVO);
-						List<Status> statusList = new ArrayList<Status>();
+						statusList = new ArrayList<Status>();
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,

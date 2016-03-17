@@ -23,7 +23,7 @@ import com.qat.samples.sysmgmt.util.dac.IStatusDAC;
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
  */
-public final class ExameDACD extends SqlSessionDaoSupport
+public final class ProcessoDACD extends SqlSessionDaoSupport
 {
 
 	/** The Constant ZERO. */

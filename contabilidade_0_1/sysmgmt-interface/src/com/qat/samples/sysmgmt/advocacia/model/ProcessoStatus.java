@@ -1,10 +1,7 @@
-package com.qat.samples.sysmgmt.clinica;
+package com.qat.samples.sysmgmt.advocacia.model;
 
-import java.util.List;
-
-import com.qat.samples.sysmgmt.pessoa.Medico;
-import com.qat.samples.sysmgmt.pessoa.Paciente;
 import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
+import com.qat.samples.sysmgmt.util.Note;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -20,118 +17,59 @@ public class ProcessoStatus extends ModelCosmeDamiao
 	private Integer dataProcesso;
 
 	private Note note;
-	
-	private ProcessTypeEnum statusProcess;
+
+	private ProcessoTypeEnum statusProcess;
 
 	public ProcessoStatus()
 	{
 
 	}
 
-	/**
-	 * @return the id
-	 */
 	public Integer getId()
 	{
 		return id;
 	}
 
-	/**
-	 * @param id the id to set
-	 */
 	public void setId(Integer id)
 	{
 		this.id = id;
 	}
 
-	public Integer getDataProcessoStatus()
+	public Integer getDataProcesso()
 	{
-		return dataProcessoStatus;
+		return dataProcesso;
 	}
 
-	public void setDataProcessoStatus(Integer dataProcessoStatus)
+	public void setDataProcesso(Integer dataProcesso)
 	{
-		this.dataProcessoStatus = dataProcessoStatus;
+		this.dataProcesso = dataProcesso;
 	}
 
-	public Integer getDataMarcacao()
+	public Note getNote()
 	{
-		return dataMarcacao;
+		return note;
 	}
 
-	public void setDataMarcacao(Integer dataMarcacao)
+	public void setNote(Note note)
 	{
-		this.dataMarcacao = dataMarcacao;
+		this.note = note;
 	}
 
-	public Medico getMedico()
+	public ProcessoTypeEnum getStatusProcess()
 	{
-		return medico;
+		return statusProcess;
 	}
 
-	public void setMedico(Medico medico)
+	public void setStatusProcess(ProcessoTypeEnum statusProcess)
 	{
-		this.medico = medico;
-	}
-
-	public Paciente getPaciente()
-	{
-		return paciente;
-	}
-
-	public void setPaciente(Paciente paciente)
-	{
-		this.paciente = paciente;
-	}
-
-	public List<ExamePessoa> getExameList()
-	{
-		return exameList;
-	}
-
-	public void setExameList(List<ExamePessoa> exameList)
-	{
-		this.exameList = exameList;
-	}
-
-	public List<Resultado> getResultadoList()
-	{
-		return resultadoList;
-	}
-
-	public void setResultadoList(List<Resultado> resultadoList)
-	{
-		this.resultadoList = resultadoList;
-	}
-
-	public PlanoSaudePessoa getPlanoSaude()
-	{
-		return planoSaude;
-	}
-
-	public void setPlanoSaude(PlanoSaudePessoa planoSaude)
-	{
-		this.planoSaude = planoSaude;
-	}
-
-	public Double getValor()
-	{
-		return valor;
-	}
-
-	public void setValor(Double valor)
-	{
-		this.valor = valor;
+		this.statusProcess = statusProcess;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "ProcessoStatus [getId()=" + getId() + ", getDataProcessoStatus()=" + getDataProcessoStatus() + ", getDataMarcacao()="
-				+ getDataMarcacao() + ", getMedico()=" + getMedico() + ", getPaciente()=" + getPaciente()
-				+ ", getExameList()=" + getExameList() + ", getResultadoList()=" + getResultadoList()
-				+ ", getPlanoSaude()=" + getPlanoSaude() + ", getValor()=" + getValor() + ", toString()="
-				+ super.toString() + "]";
+		return "ProcessoStatus [getId()=" + getId() + ", getDataProcesso()=" + getDataProcesso() + ", getNote()="
+				+ getNote() + ", getStatusProcess()=" + getStatusProcess() + ", toString()=" + super.toString() + "]";
 	}
 
 }

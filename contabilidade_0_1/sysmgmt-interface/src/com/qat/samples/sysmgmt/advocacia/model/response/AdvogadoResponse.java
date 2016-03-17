@@ -1,39 +1,39 @@
-package com.qat.samples.sysmgmt.clinica.model.response;
+package com.qat.samples.sysmgmt.advocacia.model.response;
 
 import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.pessoa.Medico;
+import com.qat.samples.sysmgmt.advocacia.model.Advogado;
 
-public class MedicoResponse extends InquiryResponse
+public class AdvogadoResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<Medico> medicoList;
+	private List<Advogado> AdvogadoList;
 
 	/**
 	 * The Constructor.
 	 */
-	public MedicoResponse()
+	public AdvogadoResponse()
 	{
 
 	}
 
 	/**
-	 * @return the medicoList
+	 * @return the AdvogadoList
 	 */
-	public List<Medico> getMedicoList()
+	public List<Advogado> getAdvogadoList()
 	{
-		return medicoList;
+		return AdvogadoList;
 	}
 
 	/**
-	 * @param medicoList the medicoList to set
+	 * @param AdvogadoList the AdvogadoList to set
 	 */
-	public void setMedicoList(List<Medico> medicoList)
+	public void setAdvogadoList(List<Advogado> AdvogadoList)
 	{
-		this.medicoList = medicoList;
+		this.AdvogadoList = AdvogadoList;
 	}
 
 	/*
@@ -44,7 +44,7 @@ public class MedicoResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setMedicoList((List<Medico>)coll);
+		setAdvogadoList((List<Advogado>)coll);
 	}
 
 	/*
@@ -54,7 +54,7 @@ public class MedicoResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "LocationResponse [getLocationList()=" + getMedicoList() + ", getResultsSetInfo()="
+		return "LocationResponse [getLocationList()=" + getAdvogadoList() + ", getResultsSetInfo()="
 				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
 				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
 				+ isOperationSuccess() + "]";

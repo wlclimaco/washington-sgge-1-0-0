@@ -66,14 +66,14 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 			switch (beneficioPessoa.getModelAction())
 			{
 				case INSERT:
-				
+
 					count =
 							maintainBeneficioAssociationsA(beneficioPessoa.getBenefId(), response, null, null,
 									null,
 									TabelaEnum.PESSOA, beneficioPessoaDAC, statusDAC, historicoDAC,
 									beneficioPessoa.getEmprId(),
 									beneficioPessoa.getCreateUser(), processId, historiId);
-				
+
 					count = beneficioPessoaDAC.insertBeneficioPessoa(beneficioPessoa);
 					if (count > 0)
 					{
@@ -88,8 +88,8 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 
 					break;
 				case UPDATE:
-				
-				count =
+
+					count =
 							maintainBeneficioAssociationsA(beneficioPessoa.getBenefId(), response, null, null,
 									null,
 									TabelaEnum.PESSOA, beneficioPessoaDAC, statusDAC, historicoDAC,
@@ -119,12 +119,12 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 					break;
 				case NONE:
 
-							count = beneficioPessoaDAC.insertBeneficioPessoa(beneficioPessoa);
+					count = beneficioPessoaDAC.insertBeneficioPessoa(beneficioPessoa);
 					if (count > 0)
 					{
-						Status status = new Status();
+						status = new Status();
 						status.setStatus(CdStatusTypeEnum.ATIVO);
-						List<Status> statusList = new ArrayList<Status>();
+						statusList = new ArrayList<Status>();
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BENEFICIOS, statusDAC, historicoDAC,

@@ -1,9 +1,9 @@
 package com.qat.samples.sysmgmt.pessoa.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.agencia.Agencia;
+import com.qat.samples.sysmgmt.advocacia.model.Processo;
+import com.qat.samples.sysmgmt.advocacia.model.request.ProcessoInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 
 /**
  * The Interface IAgenciaDAC.
@@ -56,6 +56,6 @@ public interface IProcessoDAC
 	 * @param request the request
 	 * @return the internal results response< processo>
 	 */
-	public InternalResultsResponse<Processo> fetchProcessoByRequest(ProcessInquiryRequest request);
+	public InternalResultsResponse<Processo> fetchProcessoByRequest(ProcessoInquiryRequest request);
 
 }

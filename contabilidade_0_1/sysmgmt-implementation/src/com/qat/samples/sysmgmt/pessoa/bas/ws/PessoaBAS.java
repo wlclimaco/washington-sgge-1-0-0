@@ -2,6 +2,9 @@ package com.qat.samples.sysmgmt.pessoa.bas.ws;
 
 import javax.jws.WebService;
 
+import com.qat.samples.sysmgmt.advocacia.model.request.AdvogadoInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.model.request.AdvogadoMaintenanceRequest;
+import com.qat.samples.sysmgmt.advocacia.model.response.AdvogadoResponse;
 import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
 import com.qat.samples.sysmgmt.agencia.model.response.AgenciaResponse;
 import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
@@ -107,9 +110,9 @@ public class PessoaBAS implements IPessoaBAS
 		return getPessoaBAI().fetchAdvogadoByRequest(request);
 
 	}
-	
-	//==================================
-	
+
+	// ==================================
+
 	@Override
 	public ClienteResponse insertCliente(ClienteMaintenanceRequest request)
 	{
@@ -144,8 +147,8 @@ public class PessoaBAS implements IPessoaBAS
 		return getPessoaBAI().fetchClienteByRequest(request);
 
 	}
-	
-	//==================================
+
+	// ==================================
 
 	@Override
 	public FornecedorResponse insertFornecedor(FornecedorMaintenanceRequest request)

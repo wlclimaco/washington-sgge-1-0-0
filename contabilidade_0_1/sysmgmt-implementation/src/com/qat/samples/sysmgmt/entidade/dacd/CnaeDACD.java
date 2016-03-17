@@ -70,7 +70,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 									TabelaEnum.PESSOA, cnaeDAC, statusDAC, historicoDAC,
 									cnae.getEmprId(),
 									cnae.getCreateUser(), processId, historicoId);
-									
+
 					count = cnaeDAC.insertCnaeEmpresa(cnae);
 					if (count > 0)
 					{
@@ -84,14 +84,14 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
-					
+
 					count =
 							maintainCnaeAssociationsA(cnae.getIdCnae(), response, null, null,
 									null,
 									TabelaEnum.PESSOA, cnaeDAC, statusDAC, historicoDAC,
 									cnae.getEmprId(),
 									cnae.getCreateUser(), processId, historicoId);
-									
+
 					count = cnaeDAC.updateCnaeEmpresa(cnae);
 					if (count > 0)
 					{
@@ -117,9 +117,9 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 					count = cnaeDAC.insertCnaeEmpresa(cnae);
 					if (count > 0)
 					{
-						Status status = new Status();
+						status = new Status();
 						status.setStatus(CdStatusTypeEnum.ATIVO);
-						List<Status> statusList = new ArrayList<Status>();
+						statusList = new ArrayList<Status>();
 						count =
 								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,

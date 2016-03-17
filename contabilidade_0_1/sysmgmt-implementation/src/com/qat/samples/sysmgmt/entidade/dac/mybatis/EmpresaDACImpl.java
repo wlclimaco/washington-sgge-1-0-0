@@ -433,14 +433,14 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 			historicoId =
 					HistoricoDACD.inserthistorico(empresa.getId(), empresa.getId(), empresa.getUserId(), response,
 							TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoDAC);
-							
+
 			empresa.setProcessId(historicoId);
-							
+
 			insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, empresa, response);
-			
-				historicoId = HistoricoDACD.maintainHistoricoItensAssociations(historicoId, pessoa.getId(), pessoa.getUserId(),
-				historicoId,
-				TabelaEnum.EMPRESA, AcaoEnum.INSERT, getHistoricoDAC());
+
+			historicoId =
+					HistoricoDACD.inserthistoricoItens(empresa.getId(), empresa.getUserId(), response,
+							TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoId, getHistoricoDAC());
 
 		}
 		else

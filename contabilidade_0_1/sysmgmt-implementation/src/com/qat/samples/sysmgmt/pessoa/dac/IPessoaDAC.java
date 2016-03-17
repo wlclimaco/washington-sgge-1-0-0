@@ -2,6 +2,8 @@ package com.qat.samples.sysmgmt.pessoa.dac;
 
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.advocacia.model.Advogado;
+import com.qat.samples.sysmgmt.advocacia.model.request.AdvogadoInquiryRequest;
 import com.qat.samples.sysmgmt.agencia.Agencia;
 import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
 import com.qat.samples.sysmgmt.banco.Banco;
@@ -66,7 +68,7 @@ public interface IPessoaDAC
 	public InternalResultsResponse<Advogado> fetchAdvogadoById(FetchByIdRequest request);
 
 	public InternalResultsResponse<Advogado> fetchAdvogadoByRequest(AdvogadoInquiryRequest request);
-	
+
 	// ================================
 	public InternalResultsResponse<Cliente> updateCliente(Cliente cnae);
 

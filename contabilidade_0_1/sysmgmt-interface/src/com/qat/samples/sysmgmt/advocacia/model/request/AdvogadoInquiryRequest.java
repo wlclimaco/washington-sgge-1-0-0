@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.clinica.model.request;
+package com.qat.samples.sysmgmt.advocacia.model.request;
 
 import com.qat.samples.sysmgmt.banco.model.criteria.BancoCriteria;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
@@ -7,7 +7,7 @@ import com.qat.samples.sysmgmt.util.model.criteria.ComumCriteria;
 /**
  * The Class ProdutoInquiryRequest.
  */
-public class ConsultaInquiryRequest extends PagedInquiryRequest
+public class AdvogadoInquiryRequest extends PagedInquiryRequest
 {
 
 	/** The criteria. */
