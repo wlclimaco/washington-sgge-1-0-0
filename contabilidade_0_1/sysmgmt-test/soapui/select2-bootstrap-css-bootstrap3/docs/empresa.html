@@ -1,0 +1,521 @@
+<!doctype html>
+<html class="demo">
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>select2-bootstrap-css</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="select2.css">
+	<link rel="stylesheet" href="css/select2-bootstrap.css">
+	<link rel="stylesheet" href="css/gh-pages.css">
+	<!--[if lt IE 9]>
+		<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="js/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+	<body>
+<form class="form-horizontal">
+<fieldset>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Dados Empresa
+					</h3>
+				</div>
+				<div class="panel-body">
+				
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="cnpj">CNPJ:</label>  
+  <div class="col-md-5">
+  <input id="cnpj" name="cnpj" type="text" placeholder="__.___.___/____-__" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="col-md-12">
+<div class="form-group">
+  <label class="col-md-4 control-label" for="RSocial">Razão Social</label>  
+  <div class="col-md-8">
+  <input id="RSocial" name="RSocial" type="text" placeholder="Razão Social" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="funcionarios">Numero Funcionarios</label>  
+  <div class="col-md-2">
+  <input id="funcionarios" name="funcionarios" type="text" placeholder="0" class="form-control input-md" required="">
+    
+  </div>
+</div>
+</div>
+<div class="form-group">
+  <label class="col-md-4 control-label" for="funcionarios">Email</label>  
+  <div class="col-md-2">
+  <input id="email" name="email" type="text" placeholder="teste@teste.com.br" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Multiple Radios (inline) -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="status">Sua empresa esta Ativa?</label>
+  <div class="col-md-4"> 
+    <label class="radio-inline" for="status-0">
+      <input type="radio" name="status" id="status-0" value="1" checked="checked">
+      Sim
+    </label> 
+    <label class="radio-inline" for="status-1">
+      <input type="radio" name="status" id="status-1" value="2">
+      Não
+    </label>
+  </div>
+</div>
+
+<!-- Multiple Radios (inline) -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="regime">Selecione o Regime Tributario Atual</label>
+  <div class="col-md-4"> 
+    <label class="radio-inline" for="regime-0">
+      <input type="radio" name="regime" id="regime-0" value="1" checked="checked">
+      Simples Nacional
+    </label> 
+    <label class="radio-inline" for="regime-1">
+      <input type="radio" name="regime" id="regime-1" value="2">
+      Lucro Real
+    </label> 
+    <label class="radio-inline" for="regime-2">
+      <input type="radio" name="regime" id="regime-2" value="3">
+      Lucro Presumido
+    </label>
+  </div>
+</div>
+
+<!-- Select Multiple -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="atividade">Atividades da Empresa (CNAE)</label>
+  <div class="col-md-5">
+					<div class="input-group has-warning select2-bootstrap-prepend">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" data-select2-open="select2-input-group-append">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+						<select id="select2-input-group-append" class="form-control select2-multiple" multiple>
+							<optgroup label="Alaskan/Hawaiian Time Zone">
+								<option value="AK">Alaska</option>
+								<option value="HI">Hawaii</option>
+							</optgroup>
+							<optgroup label="Pacific Time Zone">
+								<option value="CA">California</option>
+								<option value="NV">Nevada</option>
+								<option value="OR">Oregon</option>
+								<option value="WA">Washington</option>
+							</optgroup>
+							<optgroup label="Mountain Time Zone">
+								<option value="AZ">Arizona</option>
+								<option value="CO">Colorado</option>
+								<option value="ID">Idaho</option>
+								<option value="MT">Montana</option><option value="NE">Nebraska</option>
+								<option value="NM">New Mexico</option>
+								<option value="ND">North Dakota</option>
+								<option value="UT">Utah</option>
+								<option value="WY">Wyoming</option>
+							</optgroup>
+							<optgroup label="Central Time Zone">
+								<option value="AL">Alabama</option>
+								<option value="AR">Arkansas</option>
+								<option value="IL">Illinois</option>
+								<option value="IA">Iowa</option>
+								<option value="KS">Kansas</option>
+								<option value="KY">Kentucky</option>
+								<option value="LA">Louisiana</option>
+								<option value="MN">Minnesota</option>
+								<option value="MS">Mississippi</option>
+								<option value="MO">Missouri</option>
+								<option value="OK">Oklahoma</option>
+								<option value="SD">South Dakota</option>
+								<option value="TX">Texas</option>
+								<option value="TN">Tennessee</option>
+								<option value="WI">Wisconsin</option>
+							</optgroup>
+							<optgroup label="Eastern Time Zone">
+								<option value="CT">Connecticut</option>
+								<option value="DE">Delaware</option>
+								<option value="FL">Florida</option>
+								<option value="GA">Georgia</option>
+								<option value="IN">Indiana</option>
+								<option value="ME">Maine</option>
+								<option value="MD">Maryland</option>
+								<option value="MA">Massachusetts</option>
+								<option value="MI">Michigan</option>
+								<option value="NH">New Hampshire</option><option value="NJ">New Jersey</option>
+								<option value="NY">New York</option>
+								<option value="NC">North Carolina</option>
+								<option value="OH">Ohio</option>
+								<option value="PA">Pennsylvania</option><option value="RI">Rhode Island</option><option value="SC">South Carolina</option>
+								<option value="VT">Vermont</option><option value="VA">Virginia</option>
+								<option value="WV">West Virginia</option>
+							</optgroup>
+
+						</select>
+					</div>
+				</div>
+</div>
+
+<!-- Search input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="cep">Cep</label>
+  <div class="col-md-4">
+    <input id="cep" name="cep" type="search" placeholder="00.000-000" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="logradouro">Logradouro</label>  
+  <div class="col-md-5">
+  <input id="logradouro" name="logradouro" type="text" placeholder="Logradouro" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="numero">Numero</label>  
+  <div class="col-md-2">
+  <input id="numero" name="numero" type="text" placeholder="Numero" class="form-control input-md">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="bairro">Bairro</label>  
+  <div class="col-md-4">
+  <input id="bairro" name="bairro" type="text" placeholder="Bairro" class="form-control input-md">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="cidade">Cidade</label>  
+  <div class="col-md-4">
+  <input id="cidade" name="cidade" type="text" placeholder="Cidade" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="estado">Estado</label>
+  <div class="col-md-7">
+		<div class="input-group select2-bootstrap-prepend">
+			<div class="input-group-btn">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					Action <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a href="#">Action</a></li>
+					<li><a href="#">Another action</a></li>
+					<li><a href="#">Something else here</a></li>
+					<li class="divider"></li>
+					<li><a href="#">Separated link</a></li>
+				</ul>
+			</div>
+			<input id="select2-button-addons-single-input-group" type="hidden" class="form-control select2-remote">
+		</div>
+	</div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="Complemento">Complemento</label>  
+  <div class="col-md-4">
+  <input id="Complemento" name="Complemento" type="text" placeholder="Complemento" class="form-control input-md">
+    
+  </div>
+</div>
+
+</fieldset>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Socios
+					</h3>
+				</div>
+				<div class="panel-body">
+<fieldset>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="cpf">CPF Socio</label>  
+  <div class="col-md-4">
+  <input id="cpf" name="cpf" type="text" placeholder="000.000.000-00" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="nome">Nome Socio</label>  
+  <div class="col-md-5">
+  <input id="nome" name="nome" type="text" placeholder="Socio" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Multiple Radios (inline) -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="socioAdm">Socio Administrador</label>
+  <div class="col-md-4"> 
+    <label class="radio-inline" for="socioAdm-0">
+      <input type="radio" name="socioAdm" id="socioAdm-0" value="1" checked="checked">
+      Sim
+    </label> 
+    <label class="radio-inline" for="socioAdm-1">
+      <input type="radio" name="socioAdm" id="socioAdm-1" value="2">
+      Não
+    </label>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="cota">Cota</label>  
+  <div class="col-md-2">
+  <input id="cota" name="cota" type="text" placeholder="Cota" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+</fieldset>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Contrato Social
+					</h3>
+				</div>
+				<div class="panel-body">
+<fieldset>
+<!-- File Button --> 
+<div class="form-group">
+  <label class="col-md-4 control-label" for="contratoSocial">Favor Enviar uma foto do Contrato Social </label>
+  <div class="col-md-4">
+    <input id="contratoSocial" name="contratoSocial" class="input-file" type="file">
+  </div>
+</div>
+
+</fieldset>
+</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Data de Inicio
+					</h3>
+				</div>
+				<div class="panel-body">
+<fieldset>
+
+<!-- Select Basic -->
+<label class="col-md-4 control-label" for="contratoSocial">Favor Informar o Mês e o Ano que vamos Começar </label>
+<div class="form-group">
+<div class="row">
+  <label class="col-md-4 control-label" for="mes">Mês</label>
+  <div class="col-md-2">
+    <select id="mes" name="mes" class="form-control">
+      <option value="1">Janeiro</option>
+      <option value="2">Fevereiro</option>
+    </select>
+  </div>
+</div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="ano">Ano</label>
+  <div class="col-md-2">
+    <select id="ano" name="ano" class="form-control">
+      <option value="1">2016</option>
+      <option value="2">2017</option>
+    </select>
+  </div>
+</div>
+
+</fieldset>
+</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Plano
+					</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-8">
+								</div>
+								<div class="col-md-4">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+		<script src="jquery.js"></script>
+		<script src="select2.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="knockout-3.4.0.js"></script>
+		<script>
+			var placeholder = "Select a State";
+
+			$( ".select2, .select2-multiple" ).select2( { placeholder: placeholder } );
+			$( ".select2-allow-clear" ).select2( { allowClear: true, placeholder: placeholder } );
+
+			// @see https://github.com/ivaynberg/select2/commit/6661e3
+			function repoFormatResult( repo ) {
+				var markup = "<div class='select2-result-repository clearfix'>" +
+					"<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url + "' /></div>" +
+					"<div class='select2-result-repository__meta'>" +
+						"<div class='select2-result-repository__title'>" + repo.full_name + "</div>";
+
+				if ( repo.description ) {
+					markup += "<div class='select2-result-repository__description'>" + repo.description + "</div>";
+				}
+
+				markup += "<div class='select2-result-repository__statistics'>" + 
+							"<div class='select2-result-repository__forks'><span class='glyphicon glyphicon-flash'></span> " + repo.forks_count + " Forks</div>" +
+							"<div class='select2-result-repository__stargazers'><span class='glyphicon glyphicon-star'></span> " + repo.stargazers_count + " Stars</div>" +
+							"<div class='select2-result-repository__watchers'><span class='glyphicon glyphicon-eye-open'></span> " + repo.watchers_count + " Watchers</div>" +
+						"</div>" +
+					"</div></div>";
+
+				return markup;
+			}
+
+			function repoFormatSelection( repo ) {
+				return repo.full_name;
+			}
+
+			$( ".select2-remote" ).select2({
+				placeholder: "Search for a GitHub Repository",
+				minimumInputLength: 1,
+				// instead of writing the function to execute the request we use Select2's convenient helper
+				ajax: {
+					url: "https://api.github.com/search/repositories",
+					dataType: "json",
+					quietMillis: 250,
+					data: function( term, page ) {
+						return {
+							// search term
+							q: term
+						};
+					},
+					results: function( data, page ) {
+							// parse the results into the format expected by Select2.
+							// since we are using custom formatting functions we do not need to alter the remote JSON data
+							return { results: data.items };
+					},
+					cache: true
+				},
+				initSelection: function( element, callback ) {
+					// the input tag has a value attribute preloaded that points to a preselected repository's id
+					// this function resolves that id attribute to an object that select2 can render
+					// using its formatResult renderer - that way the repository name is shown preselected
+					var id = $( element ).val();
+
+					if ( id !== "" ) {
+						$.ajax( "https://api.github.com/repositories/" + id, {
+							dataType: "json"
+						}).done( function( data ) {
+							callback( data );
+						});
+					}
+				},
+				formatResult: repoFormatResult,
+				formatSelection: repoFormatSelection,
+				// apply css that makes the dropdown taller
+				dropdownCssClass: "bigdrop",
+				// we do not want to escape markup since we are displaying html in results
+				escapeMarkup: function( m ) {
+					return m;
+				}
+			});
+
+			$( "button[data-select2-open]" ).click( function() {
+				$( "#" + $( this ).data( "select2-open" ) ).select2( "open" );
+			});
+
+			
+				var select2OpenEventName = "select2-open";
+
+				$( ":checkbox" ).on( "click", function() {
+					$( this ).parent().nextAll( "select" ).select2( "enable", this.checked );
+				});
+			
+
+			$( ".select2, .select2-multiple, .select2-allow-clear, .select2-remote" ).on( select2OpenEventName, function() {
+				if ( $( this ).parents( "[class*='has-']" ).length ) {
+					var classNames = $( this ).parents( "[class*='has-']" )[ 0 ].className.split( /\s+/ );
+
+					for ( var i = 0; i < classNames.length; ++i ) {
+						if ( classNames[ i ].match( "has-" ) ) {
+							$( "#select2-drop" ).addClass( classNames[ i ] );
+						}
+					}
+				}
+			});
+
+		</script>
+	</body>
+</html>
