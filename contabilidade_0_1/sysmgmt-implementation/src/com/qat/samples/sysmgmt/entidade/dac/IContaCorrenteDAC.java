@@ -1,71 +1,73 @@
-package com.qat.samples.sysmgmt.util.dac;
+package com.qat.samples.sysmgmt.entidade.dac;
 
 import java.util.List;
 
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.util.Cidade;
+import com.qat.samples.sysmgmt.conta.ContaCorrente;
 
 /**
- * The Interface ICidadeDAC.
+ * The Interface IContaCorrenteDAC.
  */
-public interface ICidadeDAC
+public interface IContaCorrenteDAC
 {
 
 	/**
-	 * Update cidade.
+	 * Update contaCorrente.
 	 * 
-	 * @param cidade the cidade
+	 * @param contaCorrente the contaCorrente
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer updateCidade(Cidade cidade, InternalResultsResponse<?> response);
+	public Integer updateContaCorrente(ContaCorrente contaCorrente, InternalResultsResponse<?> response);
 
 	/**
-	 * Insert cidade.
+	 * Insert contaCorrente.
 	 * 
-	 * @param cidade the cidade
+	 * @param contaCorrente the contaCorrente
 	 * @param statementName the statement name
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer insertCidade(Cidade cidade, String statementName, InternalResultsResponse<?> response);
+	public Integer insertContaCorrente(ContaCorrente contaCorrente, String statementName,
+			InternalResultsResponse<?> response);
 
 	/**
-	 * Delete business cidade.
+	 * Delete business contaCorrente.
 	 * 
-	 * @param cidade the cidade
+	 * @param contaCorrente the contaCorrente
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer deleteBusinessCidade(Cidade cidade, InternalResultsResponse<?> response);
+	public Integer deleteBusinessContaCorrente(ContaCorrente contaCorrente, InternalResultsResponse<?> response);
 
 	/**
-	 * Delete person cidade.
+	 * Delete person contaCorrente.
 	 * 
-	 * @param cidade the cidade
+	 * @param contaCorrente the contaCorrente
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer deleteCidade(Cidade cidade, InternalResultsResponse<?> response);
+	public Integer deleteContaCorrente(ContaCorrente contaCorrente, InternalResultsResponse<?> response);
 
 	/**
-	 * Fetch cidade by id.
+	 * Fetch contaCorrente by id.
 	 * 
 	 * @param id the id
-	 * @return the internal results response< cidade>
+	 * @return the internal results response< contaCorrente>
 	 */
-	public InternalResultsResponse<Cidade> fetchCidadeById(Integer id);
+	public InternalResultsResponse<ContaCorrente> fetchContaCorrenteById(Integer id);
 
 	/**
-	 * Maintain cidade associations.
+	 * Maintain contaCorrente associations.
 	 * 
-	 * @param cidadeList the cidade list
+	 * @param contaCorrenteList the contaCorrente list
 	 * @param parentId the parent id
 	 * @param associateStatement the associate statement
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer maintainCidadeAssociations(List<Cidade> cidadeList, Integer parentId, String associateStatement,
+	public Integer maintainContaCorrenteAssociations(List<ContaCorrente> contaCorrenteList, Integer parentId,
+			String associateStatement,
 			InternalResultsResponse<?> response);
 
 }

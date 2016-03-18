@@ -1,6 +1,8 @@
 package com.qat.samples.sysmgmt.entidade;
 
-import java.util.List;
+import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
+import com.qat.samples.sysmgmt.util.Note;
+import com.qat.samples.sysmgmt.util.Tarefa;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -12,39 +14,56 @@ public class TarefaEnt extends ModelCosmeDamiao
 	private Long mes;
 
 	private Tarefa tarefa;
-	
+
 	private Note note;
-	
+
 	private boolean completo;
 
-	/**
-	 * @return the depositoList
-	 */
-	public List<Deposito> getDepositoList()
+	public Long getMes()
 	{
-		return depositoList;
+		return mes;
 	}
 
-	/**
-	 * @param depositoList the depositoList to set
-	 */
-	public void setDepositoList(List<Deposito> depositoList)
+	public void setMes(Long mes)
 	{
-		this.depositoList = depositoList;
+		this.mes = mes;
 	}
 
-	/**
-	 * Default constructor.
-	 */
-	public TarefaEnt()
+	public Tarefa getTarefa()
 	{
-		super();
+		return tarefa;
+	}
+
+	public void setTarefa(Tarefa tarefa)
+	{
+		this.tarefa = tarefa;
+	}
+
+	public Note getNote()
+	{
+		return note;
+	}
+
+	public void setNote(Note note)
+	{
+		this.note = note;
+	}
+
+	public boolean isCompleto()
+	{
+		return completo;
+	}
+
+	public void setCompleto(boolean completo)
+	{
+		this.completo = completo;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "TarefaEnt [getDepositoList()=" + getDepositoList() + ", toString()=" + super.toString() + "]";
+		return "TarefaEnt [getMes()=" + getMes() + ", getTarefa()=" + getTarefa() + ", getNote()=" + getNote()
+				+ ", isCompleto()=" + isCompleto() + ", toString()=" + super.toString() + "]";
 	}
 
 }

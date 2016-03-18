@@ -11,8 +11,8 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
-import com.qat.samples.sysmgmt.financeiro.Financeiro;
 import com.qat.samples.sysmgmt.financeiro.dac.IFinanceiroDAC;
+import com.qat.samples.sysmgmt.financeiro.model.Financeiro;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 

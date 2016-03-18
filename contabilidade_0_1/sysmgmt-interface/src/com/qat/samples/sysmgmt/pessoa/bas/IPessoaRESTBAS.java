@@ -5,6 +5,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import com.qat.samples.sysmgmt.advocacia.model.request.AdvogadoInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.model.request.AdvogadoMaintenanceRequest;
+import com.qat.samples.sysmgmt.advocacia.model.response.AdvogadoResponse;
 import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
 import com.qat.samples.sysmgmt.agencia.model.response.AgenciaResponse;
 import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
@@ -73,6 +76,28 @@ public interface IPessoaRESTBAS
 	@POST
 	@Path("/fetchClienteByRequest/")
 	public ClienteResponse fetchClienteByRequest(ClienteInquiryRequest request);
+
+	// ===========
+
+	@POST
+	@Path("/insertAdvogado/")
+	public AdvogadoResponse insertAdvogado(AdvogadoMaintenanceRequest request);
+
+	@POST
+	@Path("/updateAdvogado/")
+	public AdvogadoResponse updateAdvogado(AdvogadoMaintenanceRequest request);
+
+	@POST
+	@Path("/deleteAdvogado/")
+	public AdvogadoResponse deleteAdvogado(AdvogadoMaintenanceRequest request);
+
+	@POST
+	@Path("/fetchAdvogadoById/")
+	public AdvogadoResponse fetchAdvogadoById(FetchByIdRequest request);
+
+	@POST
+	@Path("/fetchAdvogadoByRequest/")
+	public AdvogadoResponse fetchAdvogadoByRequest(AdvogadoInquiryRequest request);
 
 	// ===========
 

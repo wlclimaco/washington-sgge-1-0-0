@@ -44,18 +44,12 @@ public class SubGrupoProd extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	/**
-	 * @return the subGrupoId
-	 */
-	public SubGrupo getUnimedId()
+	public SubGrupo getSubGrupoId()
 	{
 		return subGrupoId;
 	}
 
-	/**
-	 * @param subGrupoId the subGrupoId to set
-	 */
-	public void setUnimedId(SubGrupo subGrupoId)
+	public void setSubGrupoId(SubGrupo subGrupoId)
 	{
 		this.subGrupoId = subGrupoId;
 	}
@@ -63,7 +57,7 @@ public class SubGrupoProd extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "SubGrupoProd [getId()=" + getId() + ", getUnimedId()=" + getUnimedId() + ", toString()="
+		return "SubGrupoProd [getId()=" + getId() + ", getSubGrupoId()=" + getSubGrupoId() + ", toString()="
 				+ super.toString() + "]";
 	}
 

@@ -1,5 +1,8 @@
 package com.qat.samples.sysmgmt.pessoa.bai;
 
+import com.qat.samples.sysmgmt.advocacia.model.request.AdvogadoInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.model.request.AdvogadoMaintenanceRequest;
+import com.qat.samples.sysmgmt.advocacia.model.response.AdvogadoResponse;
 import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
 import com.qat.samples.sysmgmt.agencia.model.response.AgenciaResponse;
 import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
@@ -86,6 +89,42 @@ public interface IPessoaBAI
 	 * @return the cliente response
 	 */
 	public ClienteResponse fetchClienteByRequest(ClienteInquiryRequest request);
+
+	// ===========
+
+	public AdvogadoResponse insertAdvogado(AdvogadoMaintenanceRequest request);
+
+	/**
+	 * Update cliente.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	public AdvogadoResponse updateAdvogado(AdvogadoMaintenanceRequest request);
+
+	/**
+	 * Delete cliente.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	public AdvogadoResponse deleteAdvogado(AdvogadoMaintenanceRequest request);
+
+	/**
+	 * Fetch cliente by id.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	public AdvogadoResponse fetchAdvogadoById(FetchByIdRequest request);
+
+	/**
+	 * Fetch cliente by request.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	public AdvogadoResponse fetchAdvogadoByRequest(AdvogadoInquiryRequest request);
 
 	// ===========
 

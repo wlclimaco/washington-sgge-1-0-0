@@ -1,71 +1,71 @@
-package com.qat.samples.sysmgmt.util.dac;
+package com.qat.samples.sysmgmt.entidade.dac;
 
 import java.util.List;
 
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.util.Cidade;
+import com.qat.samples.sysmgmt.util.Tarefa;
 
 /**
- * The Interface ICidadeDAC.
+ * The Interface ITarefaDAC.
  */
-public interface ICidadeDAC
+public interface ITarefaDAC
 {
 
 	/**
-	 * Update cidade.
+	 * Update tarefa.
 	 * 
-	 * @param cidade the cidade
+	 * @param tarefa the tarefa
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer updateCidade(Cidade cidade, InternalResultsResponse<?> response);
+	public Integer updateTarefa(Tarefa tarefa, InternalResultsResponse<?> response);
 
 	/**
-	 * Insert cidade.
+	 * Insert tarefa.
 	 * 
-	 * @param cidade the cidade
+	 * @param tarefa the tarefa
 	 * @param statementName the statement name
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer insertCidade(Cidade cidade, String statementName, InternalResultsResponse<?> response);
+	public Integer insertTarefa(Tarefa tarefa, String statementName, InternalResultsResponse<?> response);
 
 	/**
-	 * Delete business cidade.
+	 * Delete business tarefa.
 	 * 
-	 * @param cidade the cidade
+	 * @param tarefa the tarefa
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer deleteBusinessCidade(Cidade cidade, InternalResultsResponse<?> response);
+	public Integer deleteBusinessTarefa(Tarefa tarefa, InternalResultsResponse<?> response);
 
 	/**
-	 * Delete person cidade.
+	 * Delete person tarefa.
 	 * 
-	 * @param cidade the cidade
+	 * @param tarefa the tarefa
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer deleteCidade(Cidade cidade, InternalResultsResponse<?> response);
+	public Integer deleteTarefa(Tarefa tarefa, InternalResultsResponse<?> response);
 
 	/**
-	 * Fetch cidade by id.
+	 * Fetch tarefa by id.
 	 * 
 	 * @param id the id
-	 * @return the internal results response< cidade>
+	 * @return the internal results response< tarefa>
 	 */
-	public InternalResultsResponse<Cidade> fetchCidadeById(Integer id);
+	public InternalResultsResponse<Tarefa> fetchTarefaById(Integer id);
 
 	/**
-	 * Maintain cidade associations.
+	 * Maintain tarefa associations.
 	 * 
-	 * @param cidadeList the cidade list
+	 * @param tarefaList the tarefa list
 	 * @param parentId the parent id
 	 * @param associateStatement the associate statement
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer maintainCidadeAssociations(List<Cidade> cidadeList, Integer parentId, String associateStatement,
+	public Integer maintainTarefaAssociations(List<Tarefa> tarefaList, Integer parentId, String associateStatement,
 			InternalResultsResponse<?> response);
 
 }

@@ -2,9 +2,9 @@ package com.qat.samples.sysmgmt.financeiro.bac.impl;
 
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.financeiro.Financeiro;
 import com.qat.samples.sysmgmt.financeiro.bac.IFinanceiroBAC;
 import com.qat.samples.sysmgmt.financeiro.dac.IFinanceiroDAC;
+import com.qat.samples.sysmgmt.financeiro.model.Financeiro;
 import com.qat.samples.sysmgmt.financeiro.model.request.FinanceiroInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.FinanceiroMaintenanceRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;

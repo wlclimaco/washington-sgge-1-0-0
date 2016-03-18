@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.financeiro;
+package com.qat.samples.sysmgmt.financeiro.model;
 
 import com.qat.samples.sysmgmt.conta.ContasTypeEnum;
 import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;

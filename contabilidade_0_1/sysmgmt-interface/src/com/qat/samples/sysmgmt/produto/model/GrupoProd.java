@@ -44,18 +44,12 @@ public class GrupoProd extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	/**
-	 * @return the grupoId
-	 */
-	public Grupo getUnimedId()
+	public Grupo getGrupoId()
 	{
 		return grupoId;
 	}
 
-	/**
-	 * @param grupoId the grupoId to set
-	 */
-	public void setUnimedId(Grupo grupoId)
+	public void setGrupoId(Grupo grupoId)
 	{
 		this.grupoId = grupoId;
 	}
@@ -63,8 +57,8 @@ public class GrupoProd extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "GrupoProd [getId()=" + getId() + ", getUnimedId()=" + getUnimedId() + ", toString()="
-				+ super.toString() + "]";
+		return "GrupoProd [getId()=" + getId() + ", getGrupoId()=" + getGrupoId() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
 }

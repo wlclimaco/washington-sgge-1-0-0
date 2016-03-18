@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.contato;
+package com.qat.samples.sysmgmt.financeiro.model;
 
 import com.qat.framework.model.II18nEnum;
 import com.qat.framework.model.IIntegerEnum;
@@ -10,7 +10,7 @@ import com.qat.framework.model.IIntegerEnum;
  * @version 1.0
  * @created 21-Jul-2014 10:00:07 AM
  */
-public enum ContatoStatusEnum implements IIntegerEnum, II18nEnum
+public enum FinanceiroStatusEnum implements IIntegerEnum, II18nEnum
 {
 
 	/** The centralized. */
@@ -39,7 +39,7 @@ public enum ContatoStatusEnum implements IIntegerEnum, II18nEnum
 	 * @param value the value
 	 * @param labelKeyParam the label key param
 	 */
-	private ContatoStatusEnum(Integer value, String labelKeyParam)
+	private FinanceiroStatusEnum(Integer value, String labelKeyParam)
 	{
 		code = value;
 		labelKey = labelKeyParam;
@@ -62,9 +62,9 @@ public enum ContatoStatusEnum implements IIntegerEnum, II18nEnum
 	 * @param value the value
 	 * @return the process status enum
 	 */
-	public static ContatoStatusEnum enumForValue(Integer value)
+	public static FinanceiroStatusEnum enumForValue(Integer value)
 	{
-		for (ContatoStatusEnum e : values())
+		for (FinanceiroStatusEnum e : values())
 		{
 			if (e.getValue().equals(value))
 			{
@@ -85,7 +85,7 @@ public enum ContatoStatusEnum implements IIntegerEnum, II18nEnum
 		String comma = "";
 		StringBuilder enumValue = new StringBuilder();
 
-		for (ContatoStatusEnum i : ContatoStatusEnum.class.getEnumConstants())
+		for (FinanceiroStatusEnum i : FinanceiroStatusEnum.class.getEnumConstants())
 		{
 			enumValue.append(comma).append(i.getValue());
 			comma = ", ";

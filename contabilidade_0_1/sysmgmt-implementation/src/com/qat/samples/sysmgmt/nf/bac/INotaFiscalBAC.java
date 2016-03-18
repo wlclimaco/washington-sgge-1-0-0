@@ -4,7 +4,7 @@ import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.condpag.CondPag;
 import com.qat.samples.sysmgmt.condpag.model.request.CondPgInquiryRequest;
-import com.qat.samples.sysmgmt.financeiro.Caixa;
+import com.qat.samples.sysmgmt.financeiro.model.Caixa;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.nf.model.Contas;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscalEntrada;

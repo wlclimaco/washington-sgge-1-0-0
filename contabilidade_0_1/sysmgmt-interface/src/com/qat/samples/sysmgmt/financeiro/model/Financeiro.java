@@ -1,5 +1,11 @@
-package com.qat.samples.sysmgmt.financeiro;
+package com.qat.samples.sysmgmt.financeiro.model;
 
+import java.util.List;
+
+import com.qat.samples.sysmgmt.nf.model.NotaFiscalEntrada;
+import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
+import com.qat.samples.sysmgmt.pessoa.Cliente;
+import com.qat.samples.sysmgmt.pessoa.Fornecedor;
 import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
 
 /**
@@ -11,9 +17,9 @@ public class Financeiro extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
-	
+
 	private String numero;
-	
+
 	private Integer parcela;
 
 	/** The type of an account. */
@@ -33,16 +39,16 @@ public class Financeiro extends ModelCosmeDamiao
 
 	/** The cep. */
 	private NotaFiscalEntrada notaFiscalEntrada;
-	
+
 	private NotaFiscalSaida notaFiscalSaida;
 
 	/** The tipo endereco. */
 	private String observacao;
-	
+
 	private Double valor;
-	
-	private FinanceiroTypeEnum financeiroEnum;
-	
+
+	private FinanceiroStatusEnum financeiroEnum;
+
 	private List<Baixa> listBaixa;
 
 	/**
@@ -73,157 +79,146 @@ public class Financeiro extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	/**
-	 * Gets the logradouro.
-	 * 
-	 * @return the logradouro
-	 */
-	public String getLogradouro()
-	{
-		return logradouro;
-	}
-
-	/**
-	 * Sets the logradouro.
-	 * 
-	 * @param logradouro the logradouro to set
-	 */
-	public void setLogradouro(String logradouro)
-	{
-		this.logradouro = logradouro;
-	}
-
-	/**
-	 * Gets the cidade.
-	 * 
-	 * @return the cidade
-	 */
-	public String getCidade()
-	{
-		return cidade;
-	}
-
-	/**
-	 * Sets the cidade.
-	 * 
-	 * @param cidade the cidade to set
-	 */
-	public void setCidade(String cidade)
-	{
-		this.cidade = cidade;
-	}
-
-	/**
-	 * Gets the estado.
-	 * 
-	 * @return the estado
-	 */
-	public String getEstado()
-	{
-		return estado;
-	}
-
-	/**
-	 * Sets the estado.
-	 * 
-	 * @param estado the estado to set
-	 */
-	public void setEstado(String estado)
-	{
-		this.estado = estado;
-	}
-
-	/**
-	 * Gets the bairro.
-	 * 
-	 * @return the bairro
-	 */
-	public String getBairro()
-	{
-		return bairro;
-	}
-
-	/**
-	 * Sets the bairro.
-	 * 
-	 * @param bairro the bairro to set
-	 */
-	public void setBairro(String bairro)
-	{
-		this.bairro = bairro;
-	}
-
-	/**
-	 * Gets the numero.
-	 * 
-	 * @return the numero
-	 */
 	public String getNumero()
 	{
 		return numero;
 	}
 
-	/**
-	 * Sets the numero.
-	 * 
-	 * @param numero the numero to set
-	 */
 	public void setNumero(String numero)
 	{
 		this.numero = numero;
 	}
 
-	/**
-	 * Gets the cep.
-	 * 
-	 * @return the cep
-	 */
-	public String getCep()
+	public Integer getParcela()
 	{
-		return cep;
+		return parcela;
 	}
 
-	/**
-	 * Sets the cep.
-	 * 
-	 * @param cep the cep to set
-	 */
-	public void setCep(String cep)
+	public void setParcela(Integer parcela)
 	{
-		this.cep = cep;
+		this.parcela = parcela;
 	}
 
-	/**
-	 * Gets the tipo endereco.
-	 * 
-	 * @return the tipoEndereco
-	 */
-	public String getTipoEndereco()
+	public Fornecedor getFornecedor()
 	{
-		return tipoEndereco;
+		return fornecedor;
 	}
 
-	/**
-	 * Sets the tipo endereco.
-	 * 
-	 * @param tipoEndereco the tipoEndereco to set
-	 */
-	public void setTipoEndereco(String tipoEndereco)
+	public void setFornecedor(Fornecedor fornecedor)
 	{
-		this.tipoEndereco = tipoEndereco;
+		this.fornecedor = fornecedor;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	public Cliente getCliente()
+	{
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente)
+	{
+		this.cliente = cliente;
+	}
+
+	public Long getDataEmissao()
+	{
+		return dataEmissao;
+	}
+
+	public void setDataEmissao(Long dataEmissao)
+	{
+		this.dataEmissao = dataEmissao;
+	}
+
+	public Long getDataVencimento()
+	{
+		return dataVencimento;
+	}
+
+	public void setDataVencimento(Long dataVencimento)
+	{
+		this.dataVencimento = dataVencimento;
+	}
+
+	public Integer getDocId()
+	{
+		return docId;
+	}
+
+	public void setDocId(Integer docId)
+	{
+		this.docId = docId;
+	}
+
+	public NotaFiscalEntrada getNotaFiscalEntrada()
+	{
+		return notaFiscalEntrada;
+	}
+
+	public void setNotaFiscalEntrada(NotaFiscalEntrada notaFiscalEntrada)
+	{
+		this.notaFiscalEntrada = notaFiscalEntrada;
+	}
+
+	public NotaFiscalSaida getNotaFiscalSaida()
+	{
+		return notaFiscalSaida;
+	}
+
+	public void setNotaFiscalSaida(NotaFiscalSaida notaFiscalSaida)
+	{
+		this.notaFiscalSaida = notaFiscalSaida;
+	}
+
+	public String getObservacao()
+	{
+		return observacao;
+	}
+
+	public void setObservacao(String observacao)
+	{
+		this.observacao = observacao;
+	}
+
+	public Double getValor()
+	{
+		return valor;
+	}
+
+	public void setValor(Double valor)
+	{
+		this.valor = valor;
+	}
+
+	public FinanceiroStatusEnum getFinanceiroEnum()
+	{
+		return financeiroEnum;
+	}
+
+	public void setFinanceiroEnum(FinanceiroStatusEnum financeiroEnum)
+	{
+		this.financeiroEnum = financeiroEnum;
+	}
+
+	public List<Baixa> getListBaixa()
+	{
+		return listBaixa;
+	}
+
+	public void setListBaixa(List<Baixa> listBaixa)
+	{
+		this.listBaixa = listBaixa;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "Endereco [getId()=" + getId() + ", getLogradouro()=" + getLogradouro() + ", getCidade()=" + getCidade()
-				+ ", getEstado()=" + getEstado() + ", getBairro()=" + getBairro() + ", getNumero()=" + getNumero()
-				+ ", getCep()=" + getCep() + ", getTipoEndereco()=" + getTipoEndereco() + ", toString()="
-				+ super.toString() + "]";
+		return "Financeiro [getId()=" + getId() + ", getNumero()=" + getNumero() + ", getParcela()=" + getParcela()
+				+ ", getFornecedor()=" + getFornecedor() + ", getCliente()=" + getCliente() + ", getDataEmissao()="
+				+ getDataEmissao() + ", getDataVencimento()=" + getDataVencimento() + ", getDocId()=" + getDocId()
+				+ ", getNotaFiscalEntrada()=" + getNotaFiscalEntrada() + ", getNotaFiscalSaida()="
+				+ getNotaFiscalSaida() + ", getObservacao()=" + getObservacao() + ", getValor()=" + getValor()
+				+ ", getFinanceiroEnum()=" + getFinanceiroEnum() + ", getListBaixa()=" + getListBaixa()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

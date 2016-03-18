@@ -7,14 +7,13 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.cnae.Cnae;
-import com.qat.samples.sysmgmt.cnae.CnaeEmpresa;
+import com.qat.samples.sysmgmt.conta.ContaCorrente;
+import com.qat.samples.sysmgmt.entidade.dac.IContaCorrenteDAC;
 import com.qat.samples.sysmgmt.util.AcaoEnum;
 import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.Status;
 import com.qat.samples.sysmgmt.util.TabelaEnum;
 import com.qat.samples.sysmgmt.util.TypeEnum;
-import com.qat.samples.sysmgmt.util.dac.ICnaeDAC;
 import com.qat.samples.sysmgmt.util.dac.IHistoricoDAC;
 import com.qat.samples.sysmgmt.util.dac.IStatusDAC;
 
@@ -38,122 +37,29 @@ public final class ContaCorrenteDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainContaCorrenteAssociations(List<ContaCorrenteEmpresa> cnaeList,
+	public static Integer maintainContaCorrenteAssociationsA(ContaCorrente contaCorrente,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IContaCorrenteDAC cnaeDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC, Integer empId,
-			String UserId, Integer processId, Integer historicoId)
-	{
-		Integer count = 0;
-		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(cnaeList))
-		{
-			return count;
-		}
-		// For Each Contact...
-		for (ContaCorrenteEmpresa cnae : cnaeList)
-		{
-			// Make sure we set the parent key
-			cnae.setParentId(parentId);
-			cnae.setProcessId(processId);
-			cnae.setTabelaEnum(tabelaEnum);
-
-			if (ValidationUtil.isNull(cnae.getModelAction()))
-			{
-				continue;
-			}
-			switch (cnae.getModelAction())
-			{
-				case INSERT:
-					count =
-							maintainContaCorrenteAssociationsA(cnae.getIdContaCorrente(), response, null, null,
-									null,
-									TabelaEnum.PESSOA, cnaeDAC, statusDAC, historicoDAC,
-									cnae.getEmprId(),
-									cnae.getCreateUser(), processId, historicoId);
-
-					count = cnaeDAC.insertContaCorrenteEmpresa(cnae);
-					if (count > 0)
-					{
-						Status status = new Status();
-						status.setStatus(CdStatusTypeEnum.ATIVO);
-						List<Status> statusList = new ArrayList<Status>();
-						count =
-								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
-					break;
-				case UPDATE:
-
-					count =
-							maintainContaCorrenteAssociationsA(cnae.getIdContaCorrente(), response, null, null,
-									null,
-									TabelaEnum.PESSOA, cnaeDAC, statusDAC, historicoDAC,
-									cnae.getEmprId(),
-									cnae.getCreateUser(), processId, historicoId);
-
-					count = cnaeDAC.updateContaCorrenteEmpresa(cnae);
-					if (count > 0)
-					{
-						count =
-								StatusDACD
-										.maintainStatusAssociations(cnae.getStatusList(), response, cnae.getId(),
-												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
-												historicoDAC, processId, historicoId);
-					}
-					break;
-				case DELETE:
-					count = cnaeDAC.deleteContaCorrenteEmpresa(cnae);
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.DELETADO);
-					List<Status> statusList = new ArrayList<Status>();
-					count =
-							StatusDACD.maintainStatusAssociations(statusList, response, cnae.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
-									processId, historicoId);
-
-					break;
-				case NONE:
-					count = cnaeDAC.insertContaCorrenteEmpresa(cnae);
-					if (count > 0)
-					{
-						status = new Status();
-						status.setStatus(CdStatusTypeEnum.ATIVO);
-						statusList = new ArrayList<Status>();
-						count =
-								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
-					break;
-			}
-		}
-
-		return count;
-	}
-
-	public static Integer maintainContaCorrenteAssociationsA(ContaCorrente cnae,
-			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IContaCorrenteDAC cnaeDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
+			TabelaEnum tabelaEnum, IContaCorrenteDAC contaCorrenteDAC, IStatusDAC statusDAC,
+			IHistoricoDAC historicoDAC,
 			Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 
 		Integer count = 0;
 		// First Maintain Empresa
-		if (ValidationUtil.isNull(cnae))
+		if (ValidationUtil.isNull(contaCorrente))
 		{
 			return count;
 		}
 
 		// Make sure we set the parent key
-		cnae.setParentId(parentId);
-		cnae.setProcessId(processId);
+		contaCorrente.setParentId(parentId);
+		contaCorrente.setProcessId(processId);
 
-		switch (cnae.getModelAction())
+		switch (contaCorrente.getModelAction())
 		{
 			case INSERT:
-				count = cnaeDAC.insertContaCorrente(cnae);
+				count = contaCorrenteDAC.insertContaCorrente(contaCorrente, UserId, response);
 				if (count > 0)
 				{
 					Status status = new Status();
@@ -166,23 +72,24 @@ public final class ContaCorrenteDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
-				count = cnaeDAC.updateContaCorrente(cnae);
+				count = contaCorrenteDAC.updateContaCorrente(contaCorrente, response);
 				if (count > 0)
 				{
 					count =
 							StatusDACD
-									.maintainStatusAssociations(cnae.getStatusList(), response, cnae.getId(),
+									.maintainStatusAssociations(contaCorrente.getStatusList(), response,
+											contaCorrente.getId(),
 											null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
 											historicoDAC, processId, historicoId);
 				}
 				break;
 			case DELETE:
-				count = cnaeDAC.deleteContaCorrente(cnae);
+				count = contaCorrenteDAC.deleteContaCorrente(contaCorrente, response);
 				Status status = new Status();
 				status.setStatus(CdStatusTypeEnum.DELETADO);
 				List<Status> statusList = new ArrayList<Status>();
 				count =
-						StatusDACD.maintainStatusAssociations(statusList, response, cnae.getId(), null,
+						StatusDACD.maintainStatusAssociations(statusList, response, contaCorrente.getId(), null,
 								AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
 								processId, historicoId);
 

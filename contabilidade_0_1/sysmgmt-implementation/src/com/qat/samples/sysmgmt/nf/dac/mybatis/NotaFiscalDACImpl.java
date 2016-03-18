@@ -15,7 +15,7 @@ import com.qat.samples.sysmgmt.condpag.model.request.CondPgInquiryRequest;
 import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
 import com.qat.samples.sysmgmt.entidade.dacd.NotesDACD;
 import com.qat.samples.sysmgmt.entidade.dacd.TributacaoDACD;
-import com.qat.samples.sysmgmt.financeiro.Caixa;
+import com.qat.samples.sysmgmt.financeiro.model.Caixa;
 import com.qat.samples.sysmgmt.historico.model.Historico;
 import com.qat.samples.sysmgmt.historico.model.HistoricoItens;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;

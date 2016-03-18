@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.financeiro;
+package com.qat.samples.sysmgmt.financeiro.model;
 
 import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
 
@@ -7,30 +7,30 @@ import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
  * setting.
  */
 @SuppressWarnings("serial")
-public class Financeiro extends ModelCosmeDamiao
+public class Baixa extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
-	
+
 	private Integer finanId;
-	
+
 	private Long dataBaixa;
 
 	/** The tipo endereco. */
 	private String observacao;
-	
+
 	private Double Valor;
-	
+
 	private Double juros;
-	
+
 	private Double multa;
-	
+
 	private TipoBaixa tipoBaixa;
 
 	/**
 	 * Default constructor.
 	 */
-	public Financeiro()
+	public Baixa()
 	{
 		super();
 	}
@@ -55,156 +55,82 @@ public class Financeiro extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	/**
-	 * Gets the logradouro.
-	 * 
-	 * @return the logradouro
-	 */
-	public String getLogradouro()
+	public Integer getFinanId()
 	{
-		return logradouro;
+		return finanId;
 	}
 
-	/**
-	 * Sets the logradouro.
-	 * 
-	 * @param logradouro the logradouro to set
-	 */
-	public void setLogradouro(String logradouro)
+	public void setFinanId(Integer finanId)
 	{
-		this.logradouro = logradouro;
+		this.finanId = finanId;
 	}
 
-	/**
-	 * Gets the cidade.
-	 * 
-	 * @return the cidade
-	 */
-	public String getCidade()
+	public Long getDataBaixa()
 	{
-		return cidade;
+		return dataBaixa;
 	}
 
-	/**
-	 * Sets the cidade.
-	 * 
-	 * @param cidade the cidade to set
-	 */
-	public void setCidade(String cidade)
+	public void setDataBaixa(Long dataBaixa)
 	{
-		this.cidade = cidade;
+		this.dataBaixa = dataBaixa;
 	}
 
-	/**
-	 * Gets the estado.
-	 * 
-	 * @return the estado
-	 */
-	public String getEstado()
+	public String getObservacao()
 	{
-		return estado;
+		return observacao;
 	}
 
-	/**
-	 * Sets the estado.
-	 * 
-	 * @param estado the estado to set
-	 */
-	public void setEstado(String estado)
+	public void setObservacao(String observacao)
 	{
-		this.estado = estado;
+		this.observacao = observacao;
 	}
 
-	/**
-	 * Gets the bairro.
-	 * 
-	 * @return the bairro
-	 */
-	public String getBairro()
+	public Double getValor()
 	{
-		return bairro;
+		return Valor;
 	}
 
-	/**
-	 * Sets the bairro.
-	 * 
-	 * @param bairro the bairro to set
-	 */
-	public void setBairro(String bairro)
+	public void setValor(Double valor)
 	{
-		this.bairro = bairro;
+		Valor = valor;
 	}
 
-	/**
-	 * Gets the numero.
-	 * 
-	 * @return the numero
-	 */
-	public String getNumero()
+	public Double getJuros()
 	{
-		return numero;
+		return juros;
 	}
 
-	/**
-	 * Sets the numero.
-	 * 
-	 * @param numero the numero to set
-	 */
-	public void setNumero(String numero)
+	public void setJuros(Double juros)
 	{
-		this.numero = numero;
+		this.juros = juros;
 	}
 
-	/**
-	 * Gets the cep.
-	 * 
-	 * @return the cep
-	 */
-	public String getCep()
+	public Double getMulta()
 	{
-		return cep;
+		return multa;
 	}
 
-	/**
-	 * Sets the cep.
-	 * 
-	 * @param cep the cep to set
-	 */
-	public void setCep(String cep)
+	public void setMulta(Double multa)
 	{
-		this.cep = cep;
+		this.multa = multa;
 	}
 
-	/**
-	 * Gets the tipo endereco.
-	 * 
-	 * @return the tipoEndereco
-	 */
-	public String getTipoEndereco()
+	public TipoBaixa getTipoBaixa()
 	{
-		return tipoEndereco;
+		return tipoBaixa;
 	}
 
-	/**
-	 * Sets the tipo endereco.
-	 * 
-	 * @param tipoEndereco the tipoEndereco to set
-	 */
-	public void setTipoEndereco(String tipoEndereco)
+	public void setTipoBaixa(TipoBaixa tipoBaixa)
 	{
-		this.tipoEndereco = tipoEndereco;
+		this.tipoBaixa = tipoBaixa;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString()
 	{
-		return "Endereco [getId()=" + getId() + ", getLogradouro()=" + getLogradouro() + ", getCidade()=" + getCidade()
-				+ ", getEstado()=" + getEstado() + ", getBairro()=" + getBairro() + ", getNumero()=" + getNumero()
-				+ ", getCep()=" + getCep() + ", getTipoEndereco()=" + getTipoEndereco() + ", toString()="
+		return "Baixa [getId()=" + getId() + ", getFinanId()=" + getFinanId() + ", getDataBaixa()=" + getDataBaixa()
+				+ ", getObservacao()=" + getObservacao() + ", getValor()=" + getValor() + ", getJuros()=" + getJuros()
+				+ ", getMulta()=" + getMulta() + ", getTipoBaixa()=" + getTipoBaixa() + ", toString()="
 				+ super.toString() + "]";
 	}
 

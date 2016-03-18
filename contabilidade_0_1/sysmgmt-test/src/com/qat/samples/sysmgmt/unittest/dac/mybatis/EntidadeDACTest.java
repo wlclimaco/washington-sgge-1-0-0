@@ -47,7 +47,9 @@ import com.qat.samples.sysmgmt.fiscal.Regime;
 import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.produto.model.Produto;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
+import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.Cidade;
 import com.qat.samples.sysmgmt.util.Configuracao;
 import com.qat.samples.sysmgmt.util.Documento;
@@ -57,6 +59,7 @@ import com.qat.samples.sysmgmt.util.EmailTypeEnum;
 import com.qat.samples.sysmgmt.util.Endereco;
 import com.qat.samples.sysmgmt.util.EnderecoTypeEnum;
 import com.qat.samples.sysmgmt.util.Note;
+import com.qat.samples.sysmgmt.util.StatusEnum;
 import com.qat.samples.sysmgmt.util.Telefone;
 import com.qat.samples.sysmgmt.util.TelefoneTypeEnum;
 import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
@@ -110,7 +113,7 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(22);
-		InternalResultsResponse<Produto> responseA = getPessoaDAC().fetchFuncionarioById(request);
+		InternalResultsResponse<Empresa> responseA = getEntidadeDAC().fetchEmpresaById(request);
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertTrue(responseA.getResultsList().get(0).getRegime().getNome() == funcionario.getRegime().getNome());
 		assertTrue(responseA.getResultsList().get(0).getDocumentos().size() == funcionario.getDocumentos().size());
@@ -118,7 +121,7 @@ public class EntidadeDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		assertTrue(responseA.getResultsList().get(0).getEmails().size() == funcionario.getEmails().size());
 		assertTrue(responseA.getResultsList().get(0).getTelefones().size() == funcionario.getTelefones().size());
 		assertTrue(responseA.getResultsList().get(0).getCnaes().size() == funcionario.getCnaes().size());
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.ANALISANDO);
 		assertTrue(responseA.getResultsList().get(0).getNotes().size() == funcionario.getNotes().size());
 
 	}

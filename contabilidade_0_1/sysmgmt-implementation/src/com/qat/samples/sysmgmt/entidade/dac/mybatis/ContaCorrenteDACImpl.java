@@ -1,169 +1,219 @@
-package com.qat.samples.sysmgmt.util.dac.mybatis;
+package com.qat.samples.sysmgmt.entidade.dac.mybatis;
+
+import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.slf4j.LoggerFactory;
 
-import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.QATMyBatisDacHelper;
-import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.cnae.Cnae;
-import com.qat.samples.sysmgmt.cnae.CnaeEmpresa;
-import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
-import com.qat.samples.sysmgmt.util.dac.ICnaeDAC;
+import com.qat.samples.sysmgmt.conta.ContaCorrente;
+import com.qat.samples.sysmgmt.entidade.dac.IContaCorrenteDAC;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
  */
-public class CnaeDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
+public class ContaCorrenteDACImpl extends SqlSessionDaoSupport implements IContaCorrenteDAC
 {
-	/** The Constant CONTACT_NAMESPACE. */
-	private static final String CONTACT_NAMESPACE = "CnaeMap.";
+	// /** The Constant CONTACORRENTE_NAMESPACE. */
+	// private static final String CONTACORRENTE_NAMESPACE = "ContaCorrenteMap.";
+	//
+	// /** The Constant CONTACORRENTE_STMT_UPDATE. */
+	// private static final String CONTACORRENTE_STMT_UPDATE = CONTACORRENTE_NAMESPACE + "updateContaCorrente";
+	//
+	// /** The Constant CONTACORRENTE_STMT_DELETE_BUSINESS_CONTACORRENTE. */
+	// private static final String CONTACORRENTE_STMT_DELETE_BUSINESS_CONTACORRENTE = CONTACORRENTE_NAMESPACE
+	// + "deleteBusinessContaCorrente";
+	//
+	// /** The Constant CONTACORRENTE_STMT_INSERT. */
+	// private static final String CONTACORRENTE_STMT_INSERT = CONTACORRENTE_NAMESPACE + "insertContaCorrente";
+	//
+	// /** The Constant CONTACORRENTE_STMT_FETCH_BY_ID. */
+	// private static final String CONTACORRENTE_STMT_FETCH_BY_ID = CONTACORRENTE_NAMESPACE + "fetchContaCorrentesById";
+	//
+	// /** The Constant LOG. */
+	// private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(ContaCorrenteDACImpl.class);
+	//
+	// private static final String CNAE_EMPRESA_STMT_UPDATE = CONTACORRENTE_NAMESPACE + "updateContaCorrenteEmpresa";
+	//
+	// private static final String CNAE_EMPRESA_STMT_DELETE = CONTACORRENTE_NAMESPACE +
+	// "deleteContaCorrenteEmpresaById";
+	//
+	// private static final String CNAE_EMPRESA_STMT_INSERT = CONTACORRENTE_NAMESPACE + "insertContaCorrenteEmpresa";
+	//
+	// /*
+	// * (non-Javadoc)
+	// * @see
+	// * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#insertContaCorrente(com.prosperitasglobal.cbof.model.
+	// * ContaCorrente,
+	// * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
+	// */
+	// @Override
+	// public Integer insertContaCorrente(ContaCorrente contaCorrente)
+	// {
+	// InternalResultsResponse<ContaCorrente> response = new InternalResultsResponse<ContaCorrente>();
+	// Integer insertCount = 0;
+	// // First insert the root contaCorrente data
+	// insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACORRENTE_STMT_INSERT, contaCorrente, response);
+	//
+	// return insertCount;
+	// }
+	//
+	// /*
+	// * (non-Javadoc)
+	// * @see
+	// * com.prosperitasglobal.cbof.dac.IContaCorrenteDAC#deleteBusinessContaCorrente(com.prosperitasglobal.cbof.model.
+	// * ContaCorrente,
+	// * com.qat.framework.model.response.InternalResultsResponse)
+	// */
+	// @Override
+	// public Integer deleteContaCorrente(ContaCorrente contaCorrente)
+	// {
+	// InternalResponse response = new InternalResponse();
+	// return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACORRENTE_STMT_DELETE_BUSINESS_CONTACORRENTE,
+	// contaCorrente,
+	// response);
+	// }
+	//
+	// /*
+	// * (non-Javadoc)
+	// * @see
+	// * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateContaCorrente(com.prosperitasglobal.cbof.model.
+	// * ContaCorrente,
+	// * com.qat.framework.model.response.InternalResultsResponse)
+	// */
+	// @Override
+	// public Integer updateContaCorrente(ContaCorrente contaCorrente)
+	// {
+	// Integer updateCount = 0;
+	// InternalResultsResponse<ContaCorrente> response = new InternalResultsResponse<ContaCorrente>();
+	// // First update the root if necessary.
+	// if (!ValidationUtil.isNull(contaCorrente.getModelAction())
+	// && (contaCorrente.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+	// {
+	// updateCount =
+	// QATMyBatisDacHelper.doUpdate(getSqlSession(), CONTACORRENTE_STMT_UPDATE, contaCorrente, response);
+	//
+	// if (updateCount == 1)
+	// {
+	// contaCorrente.setModelAction(QATModel.PersistanceActionEnum.NONE);
+	// }
+	// }
+	//
+	// return updateCount;
+	// }
+	//
+	// /*
+	// * (non-Javadoc)
+	// * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchContaCorrenteById(java.lang.Integer)
+	// */
+	// @Override
+	// public InternalResultsResponse<ContaCorrente> fetchContaCorrenteById(Integer id)
+	// {
+	// InternalResultsResponse<ContaCorrente> response = new InternalResultsResponse<ContaCorrente>();
+	//
+	// QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACORRENTE_STMT_FETCH_BY_ID, id, response);
+	//
+	// return response;
+	// }
+	//
+	// @Override
+	// public Integer insertContaCorrenteEmpresa(ContaCorrenteEmpresa contaCorrente)
+	// {
+	// Integer insertCount = 0;
+	// InternalResultsResponse<ContaCorrenteEmpresa> response = new InternalResultsResponse<ContaCorrenteEmpresa>();
+	// // First insert the root contaCorrente data
+	// insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CNAE_EMPRESA_STMT_INSERT, contaCorrente, response);
+	//
+	// return insertCount;
+	// }
+	//
+	// /*
+	// * (non-Javadoc)
+	// * @see
+	// * com.prosperitasglobal.cbof.dac.IContaCorrenteDAC#deleteBusinessContaCorrente(com.prosperitasglobal.cbof.model.
+	// * ContaCorrente,
+	// * com.qat.framework.model.response.InternalResultsResponse)
+	// */
+	// @Override
+	// public Integer deleteContaCorrenteEmpresa(ContaCorrenteEmpresa contaCorrente)
+	// {
+	// InternalResponse response = new InternalResponse();
+	// return QATMyBatisDacHelper.doRemove(getSqlSession(), CNAE_EMPRESA_STMT_DELETE, contaCorrente, response);
+	// }
+	//
+	// /*
+	// * (non-Javadoc)
+	// * @see
+	// * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateContaCorrente(com.prosperitasglobal.cbof.model.
+	// * ContaCorrente,
+	// * com.qat.framework.model.response.InternalResultsResponse)
+	// */
+	// @Override
+	// public Integer updateContaCorrenteEmpresa(ContaCorrenteEmpresa contaCorrente)
+	// {
+	// Integer updateCount = 0;
+	// InternalResultsResponse<ContaCorrenteEmpresa> response = new InternalResultsResponse<ContaCorrenteEmpresa>();
+	// // First update the root if necessary.
+	// if (!ValidationUtil.isNull(contaCorrente.getModelAction())
+	// && (contaCorrente.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+	// {
+	// updateCount =
+	// QATMyBatisDacHelper.doUpdate(getSqlSession(), CNAE_EMPRESA_STMT_UPDATE, contaCorrente, response);
+	//
+	// if (updateCount == 1)
+	// {
+	// contaCorrente.setModelAction(QATModel.PersistanceActionEnum.NONE);
+	// }
+	// }
+	//
+	// return updateCount;
+	// }
+	//
+	// @Override
+	// public InternalResultsResponse<ContaCorrente> fetchContaCorrenteByRequest(PagedInquiryRequest request)
+	// {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
 
-	/** The Constant CONTACT_STMT_UPDATE. */
-	private static final String CONTACT_STMT_UPDATE = CONTACT_NAMESPACE + "updateCnae";
-
-	/** The Constant CONTACT_STMT_DELETE_BUSINESS_CONTACT. */
-	private static final String CONTACT_STMT_DELETE_BUSINESS_CONTACT = CONTACT_NAMESPACE + "deleteBusinessCnae";
-
-	/** The Constant CONTACT_STMT_INSERT. */
-	private static final String CONTACT_STMT_INSERT = CONTACT_NAMESPACE + "insertCnae";
-
-	/** The Constant CONTACT_STMT_FETCH_BY_ID. */
-	private static final String CONTACT_STMT_FETCH_BY_ID = CONTACT_NAMESPACE + "fetchCnaesById";
-
-	/** The Constant LOG. */
-	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(CnaeDACImpl.class);
-
-	private static final String CNAE_EMPRESA_STMT_UPDATE = CONTACT_NAMESPACE + "updateCnaeEmpresa";
-
-	private static final String CNAE_EMPRESA_STMT_DELETE = CONTACT_NAMESPACE + "deleteCnaeEmpresaById";
-
-	private static final String CNAE_EMPRESA_STMT_INSERT = CONTACT_NAMESPACE + "insertCnaeEmpresa";
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#insertCnae(com.prosperitasglobal.cbof.model.Cnae,
-	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
-	 */
 	@Override
-	public Integer insertCnae(Cnae cnae)
+	public Integer maintainContaCorrenteAssociations(List<ContaCorrente> contaCorrenteList, Integer parentId,
+			String associateStatement, InternalResultsResponse<?> response)
 	{
-		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
-		Integer insertCount = 0;
-		// First insert the root cnae data
-		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT, cnae, response);
-
-		return insertCount;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.cbof.dac.ICnaeDAC#deleteBusinessCnae(com.prosperitasglobal.cbof.model.Cnae,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
 	@Override
-	public Integer deleteCnae(Cnae cnae)
+	public Integer updateContaCorrente(ContaCorrente contaCorrente, InternalResultsResponse<?> response)
 	{
-		InternalResponse response = new InternalResponse();
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, cnae, response);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateCnae(com.prosperitasglobal.cbof.model.Cnae,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer updateCnae(Cnae cnae)
-	{
-		Integer updateCount = 0;
-		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
-		// First update the root if necessary.
-		if (!ValidationUtil.isNull(cnae.getModelAction())
-				&& (cnae.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
-		{
-			updateCount = QATMyBatisDacHelper.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, cnae, response);
-
-			if (updateCount == 1)
-			{
-				cnae.setModelAction(QATModel.PersistanceActionEnum.NONE);
-			}
-		}
-
-		return updateCount;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchCnaeById(java.lang.Integer)
-	 */
-	@Override
-	public InternalResultsResponse<Cnae> fetchCnaeById(Integer id)
-	{
-		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
-
-		QATMyBatisDacHelper.doQueryForList(getSqlSession(), CONTACT_STMT_FETCH_BY_ID, id, response);
-
-		return response;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public Integer insertCnaeEmpresa(CnaeEmpresa cnae)
+	public Integer insertContaCorrente(ContaCorrente contaCorrente, String statementName,
+			InternalResultsResponse<?> response)
 	{
-		Integer insertCount = 0;
-		InternalResultsResponse<CnaeEmpresa> response = new InternalResultsResponse<CnaeEmpresa>();
-		// First insert the root cnae data
-		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CNAE_EMPRESA_STMT_INSERT, cnae, response);
-
-		return insertCount;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.cbof.dac.ICnaeDAC#deleteBusinessCnae(com.prosperitasglobal.cbof.model.Cnae,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer deleteCnaeEmpresa(CnaeEmpresa cnae)
-	{
-		InternalResponse response = new InternalResponse();
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CNAE_EMPRESA_STMT_DELETE, cnae, response);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateCnae(com.prosperitasglobal.cbof.model.Cnae,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer updateCnaeEmpresa(CnaeEmpresa cnae)
-	{
-		Integer updateCount = 0;
-		InternalResultsResponse<CnaeEmpresa> response = new InternalResultsResponse<CnaeEmpresa>();
-		// First update the root if necessary.
-		if (!ValidationUtil.isNull(cnae.getModelAction())
-				&& (cnae.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
-		{
-			updateCount = QATMyBatisDacHelper.doUpdate(getSqlSession(), CNAE_EMPRESA_STMT_UPDATE, cnae, response);
-
-			if (updateCount == 1)
-			{
-				cnae.setModelAction(QATModel.PersistanceActionEnum.NONE);
-			}
-		}
-
-		return updateCount;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public InternalResultsResponse<Cnae> fetchCnaeByRequest(PagedInquiryRequest request)
+	public Integer deleteBusinessContaCorrente(ContaCorrente contaCorrente, InternalResultsResponse<?> response)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer deleteContaCorrente(ContaCorrente contaCorrente, InternalResultsResponse<?> response)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<ContaCorrente> fetchContaCorrenteById(Integer id)
 	{
 		// TODO Auto-generated method stub
 		return null;

@@ -6,6 +6,9 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
+import com.qat.samples.sysmgmt.advocacia.model.request.AdvogadoInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.model.request.AdvogadoMaintenanceRequest;
+import com.qat.samples.sysmgmt.advocacia.model.response.AdvogadoResponse;
 import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
 import com.qat.samples.sysmgmt.agencia.model.response.AgenciaResponse;
 import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
@@ -78,6 +81,35 @@ public interface IPessoaBAS
 	@WebResult(name = "fetchClienteByRequestReturn")
 	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
 	public ClienteResponse fetchClienteByRequest(ClienteInquiryRequest request);
+
+	// =========================
+
+	@WebMethod(action = "insertAdvogado")
+	@WebResult(name = "insertAdvogadoReturn")
+	@WSDLDocumentation(value = "Insert a Usuario record and optionally returns a list of Usuarios.")
+	public AdvogadoResponse insertAdvogado(AdvogadoMaintenanceRequest request);
+
+	@WebMethod(action = "updateAdvogado")
+	@WebResult(name = "updateAdvogadoReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public AdvogadoResponse updateAdvogado(AdvogadoMaintenanceRequest request);
+
+	@WebMethod(action = "deleteAdvogado")
+	@WebResult(name = "deleteAdvogadoReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public AdvogadoResponse deleteAdvogado(AdvogadoMaintenanceRequest request);
+
+	@WebMethod(action = "fetchAdvogadoById")
+	@WebResult(name = "fetchAdvogadoByIdReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public AdvogadoResponse fetchAdvogadoById(FetchByIdRequest request);
+
+	@WebMethod(action = "fetchAdvogadoByRequest")
+	@WebResult(name = "fetchAdvogadoByRequestReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public AdvogadoResponse fetchAdvogadoByRequest(AdvogadoInquiryRequest request);
+
+	// =========================
 
 	@WebMethod(action = "insertFornecedor")
 	@WebResult(name = "insertFornecedorReturn")

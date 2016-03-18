@@ -12,7 +12,9 @@ import com.qat.framework.util.QATInterfaceUtil;
 import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.advocacia.model.Advogado;
 import com.qat.samples.sysmgmt.advocacia.model.request.AdvogadoInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.model.request.AdvogadoMaintenanceRequest;
 import com.qat.samples.sysmgmt.advocacia.model.response.AdvogadoResponse;
 import com.qat.samples.sysmgmt.agencia.Agencia;
 import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
@@ -286,6 +288,29 @@ public class PessoaBAIImpl implements IPessoaBAI
 	}
 
 	/**
+	 * Fetch cliente.
+	 * 
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchAdvogado(AdvogadoInquiryRequest request, AdvogadoResponse response)
+	{
+		InternalResultsResponse<Advogado> internalResponse = new InternalResultsResponse<Advogado>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchAdvogadoByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	/**
 	 * Process.
 	 * 
 	 * @param indicator the indicator
@@ -306,6 +331,19 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return handleReturnCliente(response, internalResponse, null, true);
 	}
 
+	private AdvogadoResponse processAdvogado(ValidationContextIndicator indicator, PersistanceActionEnum persistType,
+			AdvogadoMaintenanceRequest request)
+	{
+		AdvogadoResponse response = new AdvogadoResponse();
+		InternalResponse internalResponse = null;
+
+		// Persist
+		internalResponse = doPersistanceAdvogado(request, persistType);
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		return handleReturnAdvogado(response, internalResponse, null, true);
+	}
+
 	/**
 	 * Handle return.
 	 * 
@@ -316,6 +354,15 @@ public class PessoaBAIImpl implements IPessoaBAI
 	 * @return the response
 	 */
 	private ClienteResponse handleReturnCliente(ClienteResponse response, InternalResponse internalResponse,
+			List<MessageInfo> messages, boolean copyOver)
+	{
+
+		QATInterfaceUtil.handleOperationStatusAndMessages(response,
+				internalResponse, messages, copyOver);
+		return response;
+	}
+
+	private AdvogadoResponse handleReturnAdvogado(AdvogadoResponse response, InternalResponse internalResponse,
 			List<MessageInfo> messages, boolean copyOver)
 	{
 
@@ -343,6 +390,29 @@ public class PessoaBAIImpl implements IPessoaBAI
 
 			case DELETE:
 				return getPessoaBAC().deleteCliente(request);
+
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
+		}
+		return null;
+	}
+
+	private InternalResponse doPersistanceAdvogado(AdvogadoMaintenanceRequest request, PersistanceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			case INSERT:
+				return getPessoaBAC().insertAdvogado(request);
+
+			case UPDATE:
+				return getPessoaBAC().updateAdvogado(request);
+
+			case DELETE:
+				return getPessoaBAC().deleteAdvogado(request);
 
 			default:
 				if (LOG.isDebugEnabled())
@@ -1501,7 +1571,7 @@ public class PessoaBAIImpl implements IPessoaBAI
 	}
 
 	@Override
-	public ClienteResponse insertAdvogado(AdvogadoMaintenanceRequest request)
+	public AdvogadoResponse insertAdvogado(AdvogadoMaintenanceRequest request)
 	{
 		AdvogadoResponse response = new AdvogadoResponse();
 		try

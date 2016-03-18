@@ -9,6 +9,7 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.entidade.dacd.StatusDACD;
 import com.qat.samples.sysmgmt.produto.dac.ISubGrupoDAC;
+import com.qat.samples.sysmgmt.produto.model.SubGrupo;
 import com.qat.samples.sysmgmt.produto.model.SubGrupoProd;
 import com.qat.samples.sysmgmt.util.AcaoEnum;
 import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
@@ -57,13 +58,13 @@ public final class SubGrupoDACD extends SqlSessionDaoSupport
 		switch (subGrupo.getModelAction())
 		{
 			case INSERT:
-			count =
-				maintainSubGrupoAssociations(subGrupo.getIdCnae(), response, null, null,
-					null,
-					TabelaEnum.PRODUTO, cnaeDAC, statusDAC, historicoDAC,
-					cnae.getEmprId(),
-					cnae.getCreateUser(), processId, historicoId);
-									
+				count =
+						maintainSubGrupoAssociations(subGrupo.getSubGrupoId(), response, null, null,
+								null,
+								TabelaEnum.PRODUTO, subGrupoDAC, statusDAC, historicoDAC,
+								subGrupo.getEmprId(),
+								subGrupo.getCreateUser(), processId);
+
 				count = subGrupoDAC.insertSubGrupoProd(subGrupo,
 						"insertSubGrupo", response);
 				if (count > 0)
@@ -78,14 +79,14 @@ public final class SubGrupoDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
-			
+
 				count =
-					maintainSubGrupoAssociations(subGrupo.getIdCnae(), response, null, null,
-					null,
-					TabelaEnum.PRODUTO, cnaeDAC, statusDAC, historicoDAC,
-					cnae.getEmprId(),
-					cnae.getCreateUser(), processId, historicoId);
-					
+						maintainSubGrupoAssociations(subGrupo.getSubGrupoId(), response, null, null,
+								null,
+								TabelaEnum.PRODUTO, subGrupoDAC, statusDAC, historicoDAC,
+								subGrupo.getEmprId(),
+								subGrupo.getCreateUser(), processId);
+
 				count = subGrupoDAC.updateSubGrupoProd(subGrupo, response);
 				if (count > 0)
 				{
@@ -113,9 +114,9 @@ public final class SubGrupoDACD extends SqlSessionDaoSupport
 						"insertSubGrupo", response);
 				if (count > 0)
 				{
-					Status status = new Status();
+					status = new Status();
 					status.setStatus(CdStatusTypeEnum.ATIVO);
-					List<Status> statusList = new ArrayList<Status>();
+					statusList = new ArrayList<Status>();
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 									AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
@@ -126,7 +127,7 @@ public final class SubGrupoDACD extends SqlSessionDaoSupport
 
 		return count;
 	}
-	
+
 	public static Integer maintainSubGrupoAssociations(SubGrupo subGrupo,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, ISubGrupoDAC subGrupoDAC, IStatusDAC statusDAC, IHistoricoDAC historicoDAC,
@@ -186,5 +187,5 @@ public final class SubGrupoDACD extends SqlSessionDaoSupport
 
 		return count;
 	}
-	
+
 }

@@ -2,7 +2,7 @@ package com.qat.samples.sysmgmt.financeiro.dac;
 
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.financeiro.Financeiro;
+import com.qat.samples.sysmgmt.financeiro.model.Financeiro;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 

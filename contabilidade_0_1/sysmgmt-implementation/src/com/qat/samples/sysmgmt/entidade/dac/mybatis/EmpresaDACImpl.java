@@ -57,6 +57,9 @@ import com.qat.samples.sysmgmt.util.dac.IPlanoDAC;
 import com.qat.samples.sysmgmt.util.dac.ISociosDAC;
 import com.qat.samples.sysmgmt.util.dac.IStatusDAC;
 import com.qat.samples.sysmgmt.util.dac.ITelefoneDAC;
+import com.qat.samples.sysmgmt.util.dacd.mybatis.EmailUtilDACD;
+import com.qat.samples.sysmgmt.util.dacd.mybatis.GerarFinanceiroDACD;
+import com.qat.samples.sysmgmt.util.dacd.mybatis.GerarTarefaDACD;
 import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 
 /**
@@ -441,10 +444,10 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 			historicoId =
 					HistoricoDACD.inserthistoricoItens(empresa.getId(), empresa.getUserId(), response,
 							TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoId, getHistoricoDAC());
-							
-			EmailDACD.maintainEmailEnviar();	
+
+			EmailUtilDACD.maintainEmailEnviar();
 			GerarTarefaDACD.maintainGerarTarefas();
-			GerarFinanceiroDACD.maintainGerarFinanceiro();			
+			GerarFinanceiroDACD.maintainGerarFinanceiro();
 
 		}
 		else

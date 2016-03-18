@@ -1,7 +1,7 @@
 package com.qat.samples.sysmgmt.financeiro.model.request;
 
 import com.qat.framework.model.request.MaintenanceRequest;
-import com.qat.samples.sysmgmt.financeiro.Financeiro;
+import com.qat.samples.sysmgmt.financeiro.model.Financeiro;
 
 public class FinanceiroMaintenanceRequest extends MaintenanceRequest
 {

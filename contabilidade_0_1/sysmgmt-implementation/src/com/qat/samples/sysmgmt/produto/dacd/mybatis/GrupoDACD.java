@@ -59,11 +59,11 @@ public final class GrupoDACD extends SqlSessionDaoSupport
 			case INSERT:
 
 				count =
-						maintainSubGrupoAssociations(grupo.getGrupoId(), response, null, null,
+						maintainGrupoAssociations(grupo.getGrupoId(), response, null, null,
 								null,
-								TabelaEnum.PRODUTO, cnaeDAC, statusDAC, historicoDAC,
-								cnae.getEmprId(),
-								cnae.getCreateUser(), processId, historicoId);
+								TabelaEnum.PRODUTO, grupoDAC, statusDAC, historicoDAC,
+								grupo.getEmprId(),
+								grupo.getCreateUser(), processId);
 
 				count = grupoDAC.insertGrupoProd(grupo,
 						"insertGrupo", response);
@@ -80,11 +80,11 @@ public final class GrupoDACD extends SqlSessionDaoSupport
 				break;
 			case UPDATE:
 				count =
-						maintainSubGrupoAssociations(Grupo.getIdCnae(), response, null, null,
+						maintainGrupoAssociations(grupo.getGrupoId(), response, null, null,
 								null,
-								TabelaEnum.PRODUTO, cnaeDAC, statusDAC, historicoDAC,
-								cnae.getEmprId(),
-								cnae.getCreateUser(), processId, historicoId);
+								TabelaEnum.PRODUTO, grupoDAC, statusDAC, historicoDAC,
+								grupo.getEmprId(),
+								grupo.getCreateUser(), processId);
 
 				count = grupoDAC.updateGrupoProd(grupo, response);
 				if (count > 0)
@@ -107,16 +107,16 @@ public final class GrupoDACD extends SqlSessionDaoSupport
 								null);
 
 				break;
-			case NOME:
+			case NONE:
 
 				count = grupoDAC.insertGrupoProd(grupo,
 						"insertGrupo", response);
 
 				if (count > 0)
 				{
-					Status status = new Status();
+					status = new Status();
 					status.setStatus(CdStatusTypeEnum.ATIVO);
-					List<Status> statusList = new ArrayList<Status>();
+					statusList = new ArrayList<Status>();
 					count =
 							StatusDACD.maintainStatusAssociations(statusList, response, count, null,
 									AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
@@ -170,17 +170,6 @@ public final class GrupoDACD extends SqlSessionDaoSupport
 											null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
 											historicoDAC, processId, null);
 				}
-				break;
-			case DELETE:
-				count = grupoDAC.deleteGrupoProd(grupo, response);
-				Status status = new Status();
-				status.setStatus(CdStatusTypeEnum.DELETADO);
-				List<Status> statusList = new ArrayList<Status>();
-				count =
-						StatusDACD.maintainStatusAssociations(statusList, response, grupo.getId(), null,
-								AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC, processId,
-								null);
-
 				break;
 		}
 

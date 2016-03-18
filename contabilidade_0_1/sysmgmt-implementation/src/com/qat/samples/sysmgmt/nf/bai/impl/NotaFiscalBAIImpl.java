@@ -18,7 +18,7 @@ import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.condpag.model.request.CondPgInquiryRequest;
-import com.qat.samples.sysmgmt.financeiro.Caixa;
+import com.qat.samples.sysmgmt.financeiro.model.Caixa;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.nf.bac.INotaFiscalBAC;
 import com.qat.samples.sysmgmt.nf.bai.INotaFiscalBAI;

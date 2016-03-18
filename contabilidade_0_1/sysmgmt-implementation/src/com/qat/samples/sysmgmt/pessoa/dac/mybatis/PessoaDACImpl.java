@@ -735,18 +735,6 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 
 		insertCount += insertPerson(pessoa, processId, historicoId, response);
 
-		insertCount +=
-				ProfissaoDACD.maintainProfissaoAssociationsList(pessoa.getProfissao(), response, insertCount, null,
-						null,
-						null, getProfissaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser(), processId, historicoId);
-
-		insertCount +=
-				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, insertCount, null,
-						null,
-						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser(), processId, historicoId);
-
 		if (insertCount > 0)
 		{
 			Status status = new Status();
@@ -804,19 +792,6 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		}
 
 		updateCount += insertPerson(pessoa, historicoId, historicoId, response);
-		// Next traverse the object graph and "maintain" the associations
-
-		// updateCount +=
-		// ProfissaoDACD.maintainProfissaoAssociations(pessoa.getProfissao(), response, pessoa.getId(), null,
-		// null,
-		// null, getProfissaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-		// pessoa.getCreateUser(), historicoId, historicoId, getProfissaoDAC());
-
-		updateCount +=
-				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, pessoa.getId(), null,
-						null,
-						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser(), historicoId, historicoId);
 
 		if (updateCount > 0)
 		{

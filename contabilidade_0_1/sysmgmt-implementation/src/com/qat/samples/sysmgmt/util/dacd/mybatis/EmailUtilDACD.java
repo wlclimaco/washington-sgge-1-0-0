@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.entidade.dacd;
+package com.qat.samples.sysmgmt.util.dacd.mybatis;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import com.qat.samples.sysmgmt.util.dac.IStatusDAC;
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
  */
-public final class EmailDACD extends SqlSessionDaoSupport
+public final class EmailUtilDACD extends SqlSessionDaoSupport
 {
 
 	/** The Constant ZERO. */
