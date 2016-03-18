@@ -33,7 +33,6 @@
 		<result property="modifyUser" column="modify_user"/>
 		<result property="modifyDataUTC" column="modify_date"/>
 		<association property="cfop"    column="cfop" select="CfopMap.fetchCfopById"  />
-		<association property="transportador"    column="transportador" select="TransportadorMap.fetchTransportadorByNota"  />
 		<association property="conhecimentoTransporte"    column="id" select="ConhecimentoTransporteMap.fetchAllConhecimentoTransportesByNotaFiscalId"  />
 		<association property="empresa"    column="empresa" select="EmpresaMap.fetchEmpresaById"  />
 		<association property="pessoa"    column="pessoa" select="PessoaMap.fetchPessoaById"  />
