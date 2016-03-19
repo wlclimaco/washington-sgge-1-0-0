@@ -194,6 +194,7 @@
 		<property name="statusDAC" ref="statusDACTarget"/>
 		<property name="planoDAC" ref="planoDACTarget"/>
  		<property name="usuarioDAC" ref="usuarioDACTarget"/>
+ 		<property name="noteDAC" ref="noteDACTarget"/>
   	</bean>
 
   	<bean id="convenioDACTarget" class="com.qat.samples.sysmgmt.pessoa.dac.mybatis.ConvenioDACImpl">

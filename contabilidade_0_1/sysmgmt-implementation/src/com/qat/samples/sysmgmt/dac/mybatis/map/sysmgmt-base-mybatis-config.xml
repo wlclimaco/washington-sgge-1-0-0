@@ -244,6 +244,9 @@
 		<typeAlias alias="UniMedProd" type="com.qat.samples.sysmgmt.produto.model.UniMedProd"/>
   		<typeAlias alias="UniMedInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest"/>
 
+  		<typeAlias alias="Advogado" type="com.qat.samples.sysmgmt.advocacia.model.Advogado"/>
+  		<typeAlias alias="AdvogadoInquiryRequest" type="com.qat.samples.sysmgmt.advocacia.model.request.AdvogadoInquiryRequest"/>
+
 
 <!--   		<typeAlias alias="Cadastro" type="com.qat.samples.sysmgmt.produto.model.Cadastro"/> -->
 <!--   		<typeAlias alias="ControleAcess" type="com.qat.samples.sysmgmt.util.ControleAcess"/> -->
@@ -337,6 +340,9 @@
 		<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/tributos.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/uniMed.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/produto.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/advogado.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/exame.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/consulta.xml"/>
 
 
 

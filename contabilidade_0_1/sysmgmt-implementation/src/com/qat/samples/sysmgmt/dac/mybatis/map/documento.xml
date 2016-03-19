@@ -64,8 +64,23 @@
     VALUES (<include refid="allDocumentoColumnsWithQualifier" /> )
   </insert>
 
+
+  <update id="updateDocumento" parameterType="Documento">
+    UPDATE documento
+    	<set>
+    		<if test="tabelaEnumValue!= null">tabela = #{tabelaEnumValue},</if>
+	    	<if test="documentoTypeEnumValue!= null"> documentotype=#{documentoTypeEnumValue},</if>
+	    	<if test="numero!= null">numero = #{numero},</if>
+	    	<if test="data!= null"> data=#{data},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
    <select id="fetchDocumentoByEmpresa" parameterType="Integer" resultMap="DocumentoResult">
-         SELECT * FROM documento WHERE TABELA = 1 AND ID = #{ID}
+         SELECT * FROM documento WHERE TABELA in(1,51,52) AND PARENTID = #{ID}
    </select>
 
    <select id="fetchDocumentoByPessoaId" parameterType="Integer" resultMap="DocumentoResult">

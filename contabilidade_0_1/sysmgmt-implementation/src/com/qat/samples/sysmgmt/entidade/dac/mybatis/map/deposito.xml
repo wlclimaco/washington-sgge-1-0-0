@@ -52,9 +52,9 @@
 
   <select id="fetchDepositoById" parameterType="FetchByIdRequest" resultMap="depositoResult">
     			   SELECT
-					b.id,	<include refid="allDepositoColumns" />
- 				   FROM entidade b
-					where b.id = #{id}
+					id,	<include refid="allDepositoColumns" />
+ 				   FROM entidade
+					where id = #{fetchId}
   </select>
 
     <select id="fetchDepositoByNota" parameterType="Integer" resultMap="depositoResult">

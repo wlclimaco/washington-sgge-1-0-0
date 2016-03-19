@@ -104,7 +104,7 @@
     UPDATE entidade
     	<set>
     		<if test="nome!= null">nome = #{nome},</if>
-	    	<if test="regime.id!= null"> regime=#{regime.id},</if>
+	    	<if test="regime!= null"> regime=#{regime.id},</if>
 	    	<if test="entidadeId!= null">entidadeId = #{entidadeId},</if>
 	    	<if test="entidadeEnumValue!= null"> entidadeEnum=#{entidadeEnumValue},</if>
 			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>

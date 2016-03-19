@@ -142,7 +142,7 @@
 
   <select id="fetchEnderecoByEmpresaId" parameterType="Integer" resultMap="enderecoResult">
      SELECT * FROM endereco
-     WHERE id = #{id}
+     WHERE parentId = #{id} and tabela in (1,51,52);
   </select>
 
   <select id="fetchEnderecoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">

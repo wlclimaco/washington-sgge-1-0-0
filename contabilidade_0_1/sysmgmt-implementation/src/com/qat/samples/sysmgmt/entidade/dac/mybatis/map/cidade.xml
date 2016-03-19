@@ -69,12 +69,9 @@
 		SQL Insert Statements.
  	-->
   <insert id="insertCidade" parameterType="Cidade" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO cidade (cidade
-		,codigo
-      	,IBGE
-      	,estado
-      	,municipio
-      	,cep
+  	INSERT INTO cidade (
+  	
+  		<include refid="allCidadeColumns" />
 
       )
     VALUES (<include refid="allCidadeValues" /> )

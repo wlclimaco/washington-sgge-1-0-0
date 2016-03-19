@@ -40,10 +40,10 @@
   </resultMap>
 
   <sql id="allCnaeEmpresaColumns">
-		 b.parentId
-		,b.tabela
-      	,b.processId
-      	,b.idCnae
+		 parentId
+		,tabela
+      	,processId
+      	,idCnae
 
   </sql>
 
@@ -59,10 +59,10 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allCnaeColumns">
-		 b.codigo
-		,b.cnae
-      	,b.descricao
-      	,b.abreviado
+		 codigo
+		,cnae
+      	,descricao
+      	,abreviado
   </sql>
 
   <sql id="allCnaeValues">
@@ -146,7 +146,7 @@
     	SELECT
 			<include refid="allCnaeEmpresaColumns" />
 		    FROM cnaePorRelacionamento b
-		   where b.tabela in (1,51,52) and  b.parentid = #{id}
+		   where tabela in (1,51,52) and  parentid = #{id}
     </select>
 
 	<!--
@@ -165,20 +165,20 @@
   </select>
 
   <select id="fetchCnaeById" parameterType="Integer" resultMap="cnaeResult">
-    			   SELECT b.id,
+    			   SELECT id,
 						<include refid="allCnaeColumns" />
  				   FROM cnae b where
 
-								b.id = #{id}
+								id = #{id}
 
   </select>
 
   <select id="fetchAllCnaesByRequest" parameterType="PagedInquiryRequest" resultMap="cnaeResult">
     SELECT * FROM
     			(
-    				SELECT b.id,
+    				SELECT id,
     						<include refid="allCnaeColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY b.codigo) AS RowNumber
+    						ROW_NUMBER() OVER(ORDER BY codigo) AS RowNumber
     				FROM cnae b
 					WHERE 2 = 2
 

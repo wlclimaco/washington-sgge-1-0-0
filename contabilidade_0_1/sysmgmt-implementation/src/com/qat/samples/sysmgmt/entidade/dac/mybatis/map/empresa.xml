@@ -25,8 +25,8 @@
 	<collection property="planoList" column="id" select="PlanoMap.fetchPlanoByEmpresa"/>
 	<collection property="filialList" column="id" select="FilialMap.fetchAllFilialByEntidade"/>
 	<collection property="depositoList" column="id" select="DepositoMap.fetchAllDepositoByEntidade"/>
-	<collection property="contaCorrenteList" column="id" select="ContaCorrenteMap.fetchAllDepositoByEntidade"/>
-	<collection property="tarefaList" column="id" select="TarefaMap.fetchAllDepositoByEntidade"/>
+	<!--  <collection property="contaCorrenteList" column="id" select="ContaCorrenteMap.fetchAllDepositoByEntidade"/>
+	<collection property="tarefaList" column="id" select="TarefaMap.fetchAllDepositoByEntidade"/>-->
   </resultMap>
 
    <resultMap id="empresaTableResult" type="Empresa" extends="EntidadeMap.entidadeTableResult">
@@ -59,9 +59,9 @@
 
   <select id="fetchEmpresaById" parameterType="FetchByIdRequest" resultMap="empresaResult">
     			   SELECT
-					b.id,	<include refid="allEmpresaColumns" />
- 				   FROM entidade b
-					where b.id = #{id}
+					id,	<include refid="allEmpresaColumns" />
+ 				   FROM entidade
+					where id = #{fetchId}
   </select>
 
     <select id="fetchEmpresaByNota" parameterType="Integer" resultMap="empresaResult">

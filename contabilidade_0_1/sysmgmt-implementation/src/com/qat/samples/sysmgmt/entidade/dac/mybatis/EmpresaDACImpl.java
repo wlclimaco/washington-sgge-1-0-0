@@ -28,6 +28,7 @@ import com.qat.samples.sysmgmt.entidade.dacd.DocumentosDACD;
 import com.qat.samples.sysmgmt.entidade.dacd.EmailDACD;
 import com.qat.samples.sysmgmt.entidade.dacd.EnderecoDACD;
 import com.qat.samples.sysmgmt.entidade.dacd.HistoricoDACD;
+import com.qat.samples.sysmgmt.entidade.dacd.NotesDACD;
 import com.qat.samples.sysmgmt.entidade.dacd.PlanoDACD;
 import com.qat.samples.sysmgmt.entidade.dacd.SociosDACD;
 import com.qat.samples.sysmgmt.entidade.dacd.StatusDACD;
@@ -53,6 +54,7 @@ import com.qat.samples.sysmgmt.util.dac.ICnaeDAC;
 import com.qat.samples.sysmgmt.util.dac.IDocumentoDAC;
 import com.qat.samples.sysmgmt.util.dac.IEmailDAC;
 import com.qat.samples.sysmgmt.util.dac.IHistoricoDAC;
+import com.qat.samples.sysmgmt.util.dac.INoteDAC;
 import com.qat.samples.sysmgmt.util.dac.IPlanoDAC;
 import com.qat.samples.sysmgmt.util.dac.ISociosDAC;
 import com.qat.samples.sysmgmt.util.dac.IStatusDAC;
@@ -123,6 +125,8 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 
 	IUsuarioDAC usuarioDAC;
 
+	INoteDAC noteDAC;
+
 	// INoteDAC noteDAC;
 
 	/** The Constant LOG. */
@@ -134,7 +138,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 
 	private static final String FILIAL_STMT_FETCH_BY_ID = FILIAL_NAMESPACE + "fetchFilialById";
 
-	private static final String DEPOSITO_STMT_FETCH_BY_ID = DEPOSITO_NAMESPACE + "fetchFilialById";
+	private static final String DEPOSITO_STMT_FETCH_BY_ID = DEPOSITO_NAMESPACE + "fetchDepositoById";
 
 	private static final String FILIAL_STMT_FETCH_COUNT = FILIAL_NAMESPACE + "fetchFilialRowCount";
 
@@ -417,6 +421,16 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		this.statusDAC = statusDAC;
 	}
 
+	public INoteDAC getNoteDAC()
+	{
+		return noteDAC;
+	}
+
+	public void setNoteDAC(INoteDAC noteDAC)
+	{
+		this.noteDAC = noteDAC;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.prosperitasglobal.sendsolv.dac.IEmpresaDAC#insertEmpresa(com.prosperitasglobal.sendsolv.model.Empresa)
@@ -479,6 +493,16 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 							TabelaEnum.EMPRESA, getUsuarioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
 							empresa.getCreateUser(), historicoId, historicoId);
 		}
+
+		if (!ValidationUtil.isNullOrEmpty(empresa.getContaCorrenteList()))
+		{
+			insertCount +=
+					UsuarioDACD.maintainUsuarioAssociations(empresa.getUsuarioList(), response, empresa.getId(), null,
+							null,
+							TabelaEnum.EMPRESA, getUsuarioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							empresa.getCreateUser(), historicoId, historicoId);
+		}
+
 		insertCount += insertAssociations(empresa, historicoId, historicoId, TabelaEnum.EMPRESA, response);
 
 		if (response.isInError())
@@ -524,16 +548,20 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 					HistoricoDACD.inserthistorico(empresa.getId(), empresa.getId(), empresa.getUserId(), response,
 							TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoDAC);
 		}
-		updateCount +=
-				SociosDACD.maintainSocioAssociations(empresa.getSocios(), response, empresa.getId(), null, null,
-						TabelaEnum.EMPRESA, getSocioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-						empresa.getCreateUser(), historicoId, historicoId, getDocumentoDAC());
-
-		updateCount +=
-				PlanoDACD.maintainPlanoAssociations(empresa.getPlanoList(), response, empresa.getId(), null, null,
-						TabelaEnum.EMPRESA, getPlanoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-						empresa.getCreateUser(), historicoId, historicoId);
-
+		if (ValidationUtil.isNullOrEmpty(empresa.getSocios()))
+		{
+			updateCount +=
+					SociosDACD.maintainSocioAssociations(empresa.getSocios(), response, empresa.getId(), null, null,
+							TabelaEnum.EMPRESA, getSocioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							empresa.getCreateUser(), historicoId, historicoId, getDocumentoDAC());
+		}
+		if (ValidationUtil.isNullOrEmpty(empresa.getPlanoList()))
+		{
+			updateCount +=
+					PlanoDACD.maintainPlanoAssociations(empresa.getPlanoList(), response, empresa.getId(), null, null,
+							TabelaEnum.EMPRESA, getPlanoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							empresa.getCreateUser(), historicoId, historicoId);
+		}
 		updateCount += insertAssociations(empresa, historicoId, historicoId, TabelaEnum.EMPRESA, response);
 
 		if (response.isInError())
@@ -566,18 +594,13 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		Status status = new Status();
 		status.setStatus(CdStatusTypeEnum.DELETADO);
 		List<Status> statusList = new ArrayList<Status>();
+		statusList.add(status);
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, empresa.getId(),
+						.maintainStatusAssociations(statusList, null, empresa.getId(),
 								null, AcaoEnum.DELETE,
 								empresa.getCreateUser(), empresa.getId(), TabelaEnum.EMPRESA, getStatusDAC(),
 								getHistoricoDAC(), empresa.getProcessId(), null);
-
-		// Finally, if something was updated then add the Person to the result.
-		if (updateCount > 0)
-		{
-			((InternalResultsResponse<Empresa>)response).addResult(empresa);
-		}
 
 		return response;
 	}
@@ -696,18 +719,13 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		Status status = new Status();
 		status.setStatus(CdStatusTypeEnum.DELETADO);
 		List<Status> statusList = new ArrayList<Status>();
+		statusList.add(status);
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, filial.getId(),
+						.maintainStatusAssociations(statusList, null, filial.getId(),
 								null, AcaoEnum.DELETE,
 								filial.getCreateUser(), filial.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
 								getHistoricoDAC(), filial.getProcessId(), null);
-
-		// Finally, if something was updated then add the Person to the result.
-		if (updateCount > 0)
-		{
-			((InternalResultsResponse<Filial>)response).addResult(filial);
-		}
 
 		return response;
 	}
@@ -817,18 +835,13 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		Status status = new Status();
 		status.setStatus(CdStatusTypeEnum.DELETADO);
 		List<Status> statusList = new ArrayList<Status>();
+		statusList.add(status);
 		updateCount =
 				StatusDACD
-						.maintainStatusAssociations(statusList, (InternalResultsResponse<?>)response, deposito.getId(),
+						.maintainStatusAssociations(statusList, null, deposito.getId(),
 								null, AcaoEnum.DELETE,
 								deposito.getCreateUser(), deposito.getEmprId(), TabelaEnum.DEPOSITO, getStatusDAC(),
 								getHistoricoDAC(), deposito.getProcessId(), null);
-
-		// Finally, if something was updated then add the Person to the result.
-		if (updateCount > 0)
-		{
-			((InternalResultsResponse<Deposito>)response).addResult(deposito);
-		}
 
 		return response;
 	}
@@ -982,11 +995,11 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 		}
 		if (!ValidationUtil.isNullOrEmpty(empresa.getNotes()))
 		{
-			// insertCount +=
-			// NotesDACD.maintainNoteAssociations(empresa.getNotes(), response, empresa.getId(), null,
-			// null,
-			// tabela, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getEmprId(),
-			// empresa.getCreateUser(), processId, historicoId);
+			insertCount +=
+					NotesDACD.maintainNoteAssociations(empresa.getNotes(), response, empresa.getId(), null,
+							null,
+							tabela, getNoteDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getEmprId(),
+							empresa.getCreateUser(), processId, historicoId);
 		}
 
 		if (insertCount > 0)

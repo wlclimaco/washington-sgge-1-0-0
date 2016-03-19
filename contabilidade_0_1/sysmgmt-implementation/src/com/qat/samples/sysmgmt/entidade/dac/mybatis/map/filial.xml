@@ -55,7 +55,7 @@
     			   SELECT
 					id,	<include refid="allFilialColumns" />
  				   FROM entidade b
-					where id = #{id}
+					where id = #{fetchId}
   </select>
 
     <select id="fetchFilialByNota" parameterType="Integer" resultMap="filialResult">

@@ -23,6 +23,8 @@ import com.qat.framework.model.QATModel.PersistanceActionEnum;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.Status;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.advocacia.model.Advogado;
+import com.qat.samples.sysmgmt.advocacia.model.request.AdvogadoInquiryRequest;
 import com.qat.samples.sysmgmt.agencia.Agencia;
 import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
 import com.qat.samples.sysmgmt.banco.Banco;
@@ -84,6 +86,7 @@ import com.qat.samples.sysmgmt.pessoa.model.request.ConvenioInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.ProdutoPessoa;
+import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.Cidade;
 import com.qat.samples.sysmgmt.util.Documento;
 import com.qat.samples.sysmgmt.util.DocumentoTypeEnum;
@@ -131,18 +134,15 @@ public class PessoaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		InternalResultsResponse<Funcionario> funcionarioResponse = getPessoaDAC().insertFuncionario(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Produto> responseA = getPessoaDAC().fetchFuncionarioById(request);
+		request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Funcionario> responseA = getPessoaDAC().fetchFuncionarioById(request);
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getRegime().getNome() == funcionario.getRegime().getNome());
 		assertTrue(responseA.getResultsList().get(0).getDocumentos().size() == funcionario.getDocumentos().size());
 		assertTrue(responseA.getResultsList().get(0).getEnderecos().size() == funcionario.getEnderecos().size());
 		assertTrue(responseA.getResultsList().get(0).getEmails().size() == funcionario.getEmails().size());
 		assertTrue(responseA.getResultsList().get(0).getTelefones().size() == funcionario.getTelefones().size());
-		assertTrue(responseA.getResultsList().get(0).getCnaes().size() == funcionario.getCnaes().size());
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.ANALISANDO);
 		assertTrue(responseA.getResultsList().get(0).getNotes().size() == funcionario.getNotes().size());
-
 
 	}
 
@@ -155,20 +155,18 @@ public class PessoaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		InternalResultsResponse<Cliente> funcionarioResponse = getPessoaDAC().insertCliente(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Produto> responseA = getPessoaDAC().fetchFuncionarioById(request);
+		request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Cliente> responseA = getPessoaDAC().fetchClienteById(request);
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getRegime().getNome() == funcionario.getRegime().getNome());
 		assertTrue(responseA.getResultsList().get(0).getDocumentos().size() == funcionario.getDocumentos().size());
 		assertTrue(responseA.getResultsList().get(0).getEnderecos().size() == funcionario.getEnderecos().size());
 		assertTrue(responseA.getResultsList().get(0).getEmails().size() == funcionario.getEmails().size());
 		assertTrue(responseA.getResultsList().get(0).getTelefones().size() == funcionario.getTelefones().size());
-		assertTrue(responseA.getResultsList().get(0).getCnaes().size() == funcionario.getCnaes().size());
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.ANALISANDO);
 		assertTrue(responseA.getResultsList().get(0).getNotes().size() == funcionario.getNotes().size());
 
 	}
-	
+
 	@Test
 	public void testInsertAdvogados() throws Exception
 	{
@@ -178,16 +176,14 @@ public class PessoaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		InternalResultsResponse<Advogado> funcionarioResponse = getPessoaDAC().insertAdvogado(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Produto> responseA = getPessoaDAC().fetchFuncionarioById(request);
+		request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Advogado> responseA = getPessoaDAC().fetchAdvogadoById(request);
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getRegime().getNome() == funcionario.getRegime().getNome());
 		assertTrue(responseA.getResultsList().get(0).getDocumentos().size() == funcionario.getDocumentos().size());
 		assertTrue(responseA.getResultsList().get(0).getEnderecos().size() == funcionario.getEnderecos().size());
 		assertTrue(responseA.getResultsList().get(0).getEmails().size() == funcionario.getEmails().size());
 		assertTrue(responseA.getResultsList().get(0).getTelefones().size() == funcionario.getTelefones().size());
-		assertTrue(responseA.getResultsList().get(0).getCnaes().size() == funcionario.getCnaes().size());
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.ANALISANDO);
 		assertTrue(responseA.getResultsList().get(0).getNotes().size() == funcionario.getNotes().size());
 
 	}
@@ -201,16 +197,14 @@ public class PessoaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		InternalResultsResponse<Fornecedor> funcionarioResponse = getPessoaDAC().insertFornecedor(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Produto> responseA = getPessoaDAC().fetchFuncionarioById(request);
+		request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Fornecedor> responseA = getPessoaDAC().fetchFornecedorById(request);
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getRegime().getNome() == funcionario.getRegime().getNome());
 		assertTrue(responseA.getResultsList().get(0).getDocumentos().size() == funcionario.getDocumentos().size());
 		assertTrue(responseA.getResultsList().get(0).getEnderecos().size() == funcionario.getEnderecos().size());
 		assertTrue(responseA.getResultsList().get(0).getEmails().size() == funcionario.getEmails().size());
 		assertTrue(responseA.getResultsList().get(0).getTelefones().size() == funcionario.getTelefones().size());
-		assertTrue(responseA.getResultsList().get(0).getCnaes().size() == funcionario.getCnaes().size());
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.ANALISANDO);
 		assertTrue(responseA.getResultsList().get(0).getNotes().size() == funcionario.getNotes().size());
 
 	}
@@ -224,16 +218,14 @@ public class PessoaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		InternalResultsResponse<Transportador> funcionarioResponse = getPessoaDAC().insertTransportador(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Produto> responseA = getPessoaDAC().fetchFuncionarioById(request);
+		request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Transportador> responseA = getPessoaDAC().fetchTransportadorById(request);
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getRegime().getNome() == funcionario.getRegime().getNome());
 		assertTrue(responseA.getResultsList().get(0).getDocumentos().size() == funcionario.getDocumentos().size());
 		assertTrue(responseA.getResultsList().get(0).getEnderecos().size() == funcionario.getEnderecos().size());
 		assertTrue(responseA.getResultsList().get(0).getEmails().size() == funcionario.getEmails().size());
 		assertTrue(responseA.getResultsList().get(0).getTelefones().size() == funcionario.getTelefones().size());
-		assertTrue(responseA.getResultsList().get(0).getCnaes().size() == funcionario.getCnaes().size());
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.ANALISANDO);
 		assertTrue(responseA.getResultsList().get(0).getNotes().size() == funcionario.getNotes().size());
 
 	}
@@ -247,16 +239,14 @@ public class PessoaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		InternalResultsResponse<Contador> funcionarioResponse = getPessoaDAC().insertContador(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Produto> responseA = getPessoaDAC().fetchFuncionarioById(request);
+		request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Contador> responseA = getPessoaDAC().fetchContadorById(request);
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getRegime().getNome() == funcionario.getRegime().getNome());
 		assertTrue(responseA.getResultsList().get(0).getDocumentos().size() == funcionario.getDocumentos().size());
 		assertTrue(responseA.getResultsList().get(0).getEnderecos().size() == funcionario.getEnderecos().size());
 		assertTrue(responseA.getResultsList().get(0).getEmails().size() == funcionario.getEmails().size());
 		assertTrue(responseA.getResultsList().get(0).getTelefones().size() == funcionario.getTelefones().size());
-		assertTrue(responseA.getResultsList().get(0).getCnaes().size() == funcionario.getCnaes().size());
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.ANALISANDO);
 		assertTrue(responseA.getResultsList().get(0).getNotes().size() == funcionario.getNotes().size());
 
 	}
@@ -267,9 +257,14 @@ public class PessoaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 
 		Funcionario funcionario = new Funcionario();
 		funcionario = insertFuncionario(PersistanceActionEnum.INSERT);
-		InternalResultsResponse<Funcionario> funcionarioResponse = getPessoaDAC().updateFuncionario(funcionario);
-		assertEquals(funcionarioResponse, null);
-		getPessoaDAC().updateFuncionario(funcionario);
+
+		InternalResultsResponse<Funcionario> funcionarioResponse = getPessoaDAC().insertFuncionario(funcionario);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionarioResponse = getPessoaDAC().updateFuncionario(funcionario);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -286,7 +281,7 @@ public class PessoaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		getPessoaDAC().updateCliente(funcionario);
 
 	}
-	
+
 	@Test
 	public void testUpdateAdvogados() throws Exception
 	{
@@ -353,6 +348,7 @@ public class PessoaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		InternalResponse funcionarioResponse = getPessoaDAC().deleteFuncionario(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 	}
+
 	@Test
 	public void testDeleteClientes() throws Exception
 	{
@@ -433,7 +429,7 @@ public class PessoaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
-	
+
 	@Test
 	public void testFetchAdvogadosByRequest() throws Exception
 	{
@@ -507,7 +503,7 @@ public class PessoaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
-	
+
 	@Test
 	public void testFetchAdvogadosById() throws Exception
 	{
@@ -1162,7 +1158,7 @@ public class PessoaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 
 		return pessoa;
 	}
-	
+
 	public Advogado insertAdvogado(PersistanceActionEnum action)
 	{
 		Advogado pessoa = new Advogado();
