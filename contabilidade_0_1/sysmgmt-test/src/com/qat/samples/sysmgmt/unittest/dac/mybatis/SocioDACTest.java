@@ -54,8 +54,8 @@ import com.qat.samples.sysmgmt.util.Documento;
 import com.qat.samples.sysmgmt.util.DocumentoTypeEnum;
 import com.qat.samples.sysmgmt.util.Email;
 import com.qat.samples.sysmgmt.util.EmailTypeEnum;
-import com.qat.samples.sysmgmt.util.Endereco;
-import com.qat.samples.sysmgmt.util.EnderecoTypeEnum;
+import com.qat.samples.sysmgmt.util.Socio;
+import com.qat.samples.sysmgmt.util.SocioTypeEnum;
 import com.qat.samples.sysmgmt.util.Note;
 import com.qat.samples.sysmgmt.util.Telefone;
 import com.qat.samples.sysmgmt.util.TelefoneTypeEnum;
@@ -68,85 +68,85 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 @Transactional
 @ActiveProfiles("postgres")
-public class EnderecoDACTest extends AbstractTransactionalJUnit4SpringContextTests
+public class SocioDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
-	private static final Logger LOG = LoggerFactory.getLogger(EnderecoDACTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SocioDACTest.class);
 	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
 
 	// below
 
-	public IEnderecoDAC getEnderecoDAC()
+	public ISocioDAC getSocioDAC()
 	{
 		return enderecoDAC;
 	}
 
 	@Resource
-	public void setEnderecoDAC(IEnderecoDAC enderecoDAC)
+	public void setSocioDAC(ISocioDAC enderecoDAC)
 	{
 		this.enderecoDAC = enderecoDAC;
 	}
 
 	@Test
-	public void testupdateEndereco() throws Exception
+	public void testupdateSocio() throws Exception
 	{
 
-		Endereco funcionario = new Endereco();
-		funcionario = insertEndereco(PersistanceActionEnum.UPDATE);
+		Socio funcionario = new Socio();
+		funcionario = insertSocio(PersistanceActionEnum.UPDATE);
 
-		InternalResultsResponse<Endereco> funcionarioResponse = getEnderecoDAC().updateEndereco(funcionario);
+		InternalResultsResponse<Socio> funcionarioResponse = getSocioDAC().updateSocio(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
 	@Test
-	public void testinsertEndereco() throws Exception
+	public void testinsertSocio() throws Exception
 	{
 
-		Endereco funcionario = new Endereco();
-		funcionario = insertEndereco(PersistanceActionEnum.INSERT);
+		Socio funcionario = new Socio();
+		funcionario = insertSocio(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Endereco> funcionarioResponse = getEnderecoDAC().insertEndereco(funcionario);
+		InternalResultsResponse<Socio> funcionarioResponse = getSocioDAC().insertSocio(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(22);
-		InternalResultsResponse<Endereco> responseA = getEnderecoDAC().fetchEnderecoById(request);
+		InternalResultsResponse<Socio> responseA = getSocioDAC().fetchSocioById(request);
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
 
 	}
 
 	@Test
-	public void testdeleteEndereco() throws Exception
+	public void testdeleteSocio() throws Exception
 	{
 
-		Endereco funcionario = new Endereco();
+		Socio funcionario = new Socio();
 		funcionario.setId(1);
-		funcionario = insertEndereco(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getEnderecoDAC().deleteEndereco(funcionario);
+		funcionario = insertSocio(PersistanceActionEnum.DELETE);
+		InternalResponse funcionarioResponse = getSocioDAC().deleteSocio(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testfetchEnderecoById() throws Exception
+	public void testfetchSocioById() throws Exception
 	{
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
-		InternalResultsResponse<Endereco> response = getEnderecoDAC().fetchEnderecoById(request);
+		InternalResultsResponse<Socio> response = getSocioDAC().fetchSocioById(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testfetchEnderecoByRequest() throws Exception
+	public void testfetchSocioByRequest() throws Exception
 	{
 		// check for valid and precount
-		EnderecoInquiryRequest request = new EnderecoInquiryRequest();
+		SocioInquiryRequest request = new SocioInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(4);
-		InternalResultsResponse<Endereco> response = getEnderecoDAC().fetchEnderecoByRequest(request);
+		InternalResultsResponse<Socio> response = getSocioDAC().fetchSocioByRequest(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
@@ -154,6 +154,6 @@ public class EnderecoDACTest extends AbstractTransactionalJUnit4SpringContextTes
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertEndereco.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertSocio.sql", false);
 	}
 }

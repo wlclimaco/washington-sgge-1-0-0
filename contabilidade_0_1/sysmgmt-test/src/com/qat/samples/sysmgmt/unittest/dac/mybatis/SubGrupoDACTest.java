@@ -54,8 +54,8 @@ import com.qat.samples.sysmgmt.util.Documento;
 import com.qat.samples.sysmgmt.util.DocumentoTypeEnum;
 import com.qat.samples.sysmgmt.util.Email;
 import com.qat.samples.sysmgmt.util.EmailTypeEnum;
-import com.qat.samples.sysmgmt.util.Endereco;
-import com.qat.samples.sysmgmt.util.EnderecoTypeEnum;
+import com.qat.samples.sysmgmt.util.SubGrupo;
+import com.qat.samples.sysmgmt.util.SubGrupoTypeEnum;
 import com.qat.samples.sysmgmt.util.Note;
 import com.qat.samples.sysmgmt.util.Telefone;
 import com.qat.samples.sysmgmt.util.TelefoneTypeEnum;
@@ -68,85 +68,85 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 @Transactional
 @ActiveProfiles("postgres")
-public class EnderecoDACTest extends AbstractTransactionalJUnit4SpringContextTests
+public class SubGrupoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
-	private static final Logger LOG = LoggerFactory.getLogger(EnderecoDACTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SubGrupoDACTest.class);
 	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
 
 	// below
 
-	public IEnderecoDAC getEnderecoDAC()
+	public ISubGrupoDAC getSubGrupoDAC()
 	{
 		return enderecoDAC;
 	}
 
 	@Resource
-	public void setEnderecoDAC(IEnderecoDAC enderecoDAC)
+	public void setSubGrupoDAC(ISubGrupoDAC enderecoDAC)
 	{
 		this.enderecoDAC = enderecoDAC;
 	}
 
 	@Test
-	public void testupdateEndereco() throws Exception
+	public void testupdateSubGrupo() throws Exception
 	{
 
-		Endereco funcionario = new Endereco();
-		funcionario = insertEndereco(PersistanceActionEnum.UPDATE);
+		SubGrupo funcionario = new SubGrupo();
+		funcionario = insertSubGrupo(PersistanceActionEnum.UPDATE);
 
-		InternalResultsResponse<Endereco> funcionarioResponse = getEnderecoDAC().updateEndereco(funcionario);
+		InternalResultsResponse<SubGrupo> funcionarioResponse = getSubGrupoDAC().updateSubGrupo(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
 	@Test
-	public void testinsertEndereco() throws Exception
+	public void testinsertSubGrupo() throws Exception
 	{
 
-		Endereco funcionario = new Endereco();
-		funcionario = insertEndereco(PersistanceActionEnum.INSERT);
+		SubGrupo funcionario = new SubGrupo();
+		funcionario = insertSubGrupo(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Endereco> funcionarioResponse = getEnderecoDAC().insertEndereco(funcionario);
+		InternalResultsResponse<SubGrupo> funcionarioResponse = getSubGrupoDAC().insertSubGrupo(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(22);
-		InternalResultsResponse<Endereco> responseA = getEnderecoDAC().fetchEnderecoById(request);
+		InternalResultsResponse<SubGrupo> responseA = getSubGrupoDAC().fetchSubGrupoById(request);
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
 
 	}
 
 	@Test
-	public void testdeleteEndereco() throws Exception
+	public void testdeleteSubGrupo() throws Exception
 	{
 
-		Endereco funcionario = new Endereco();
+		SubGrupo funcionario = new SubGrupo();
 		funcionario.setId(1);
-		funcionario = insertEndereco(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getEnderecoDAC().deleteEndereco(funcionario);
+		funcionario = insertSubGrupo(PersistanceActionEnum.DELETE);
+		InternalResponse funcionarioResponse = getSubGrupoDAC().deleteSubGrupo(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testfetchEnderecoById() throws Exception
+	public void testfetchSubGrupoById() throws Exception
 	{
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
-		InternalResultsResponse<Endereco> response = getEnderecoDAC().fetchEnderecoById(request);
+		InternalResultsResponse<SubGrupo> response = getSubGrupoDAC().fetchSubGrupoById(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testfetchEnderecoByRequest() throws Exception
+	public void testfetchSubGrupoByRequest() throws Exception
 	{
 		// check for valid and precount
-		EnderecoInquiryRequest request = new EnderecoInquiryRequest();
+		SubGrupoInquiryRequest request = new SubGrupoInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(4);
-		InternalResultsResponse<Endereco> response = getEnderecoDAC().fetchEnderecoByRequest(request);
+		InternalResultsResponse<SubGrupo> response = getSubGrupoDAC().fetchSubGrupoByRequest(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
@@ -154,6 +154,6 @@ public class EnderecoDACTest extends AbstractTransactionalJUnit4SpringContextTes
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertEndereco.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertSubGrupo.sql", false);
 	}
 }

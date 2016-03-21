@@ -68,85 +68,85 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 @Transactional
 @ActiveProfiles("postgres")
-public class EnderecoDACTest extends AbstractTransactionalJUnit4SpringContextTests
+public class UtilDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
-	private static final Logger LOG = LoggerFactory.getLogger(EnderecoDACTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(UtilDACTest.class);
 	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
 
 	// below
 
-	public IEnderecoDAC getEnderecoDAC()
+	public IUtilDAC getUtilDAC()
 	{
 		return enderecoDAC;
 	}
 
 	@Resource
-	public void setEnderecoDAC(IEnderecoDAC enderecoDAC)
+	public void setUtilDAC(IUtilDAC enderecoDAC)
 	{
 		this.enderecoDAC = enderecoDAC;
 	}
 
 	@Test
-	public void testupdateEndereco() throws Exception
+	public void testupdateUtil() throws Exception
 	{
 
-		Endereco funcionario = new Endereco();
-		funcionario = insertEndereco(PersistanceActionEnum.UPDATE);
+		Util funcionario = new Util();
+		funcionario = insertUtil(PersistanceActionEnum.UPDATE);
 
-		InternalResultsResponse<Endereco> funcionarioResponse = getEnderecoDAC().updateEndereco(funcionario);
+		InternalResultsResponse<Util> funcionarioResponse = getUtilDAC().updateUtil(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
 	@Test
-	public void testinsertEndereco() throws Exception
+	public void testinsertUtil() throws Exception
 	{
 
-		Endereco funcionario = new Endereco();
-		funcionario = insertEndereco(PersistanceActionEnum.INSERT);
+		Util funcionario = new Util();
+		funcionario = insertUtil(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Endereco> funcionarioResponse = getEnderecoDAC().insertEndereco(funcionario);
+		InternalResultsResponse<Util> funcionarioResponse = getUtilDAC().insertUtil(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(22);
-		InternalResultsResponse<Endereco> responseA = getEnderecoDAC().fetchEnderecoById(request);
+		InternalResultsResponse<Util> responseA = getUtilDAC().fetchUtilById(request);
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
 
 	}
 
 	@Test
-	public void testdeleteEndereco() throws Exception
+	public void testdeleteUtil() throws Exception
 	{
 
-		Endereco funcionario = new Endereco();
+		Util funcionario = new Util();
 		funcionario.setId(1);
-		funcionario = insertEndereco(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getEnderecoDAC().deleteEndereco(funcionario);
+		funcionario = insertUtil(PersistanceActionEnum.DELETE);
+		InternalResponse funcionarioResponse = getUtilDAC().deleteUtil(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testfetchEnderecoById() throws Exception
+	public void testfetchUtilById() throws Exception
 	{
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
-		InternalResultsResponse<Endereco> response = getEnderecoDAC().fetchEnderecoById(request);
+		InternalResultsResponse<Util> response = getUtilDAC().fetchUtilById(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testfetchEnderecoByRequest() throws Exception
+	public void testfetchUtilByRequest() throws Exception
 	{
 		// check for valid and precount
-		EnderecoInquiryRequest request = new EnderecoInquiryRequest();
+		UtilInquiryRequest request = new UtilInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(4);
-		InternalResultsResponse<Endereco> response = getEnderecoDAC().fetchEnderecoByRequest(request);
+		InternalResultsResponse<Util> response = getUtilDAC().fetchUtilByRequest(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
@@ -154,6 +154,6 @@ public class EnderecoDACTest extends AbstractTransactionalJUnit4SpringContextTes
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertEndereco.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertUtil.sql", false);
 	}
 }
