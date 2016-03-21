@@ -147,6 +147,80 @@ public class PessoaBAS implements IPessoaBAS
 		return getPessoaBAI().fetchClienteByRequest(request);
 
 	}
+	
+		// ==================================
+
+	@Override
+	public InquilinoResponse insertInquilino(InquilinoMaintenanceRequest request)
+	{
+		return getPessoaBAI().insertInquilino(request);
+
+	}
+
+	@Override
+	public InquilinoResponse updateInquilino(InquilinoMaintenanceRequest request)
+	{
+		return getPessoaBAI().updateInquilino(request);
+
+	}
+
+	@Override
+	public InquilinoResponse deleteInquilino(InquilinoMaintenanceRequest request)
+	{
+		return getPessoaBAI().deleteInquilino(request);
+
+	}
+
+	@Override
+	public InquilinoResponse fetchInquilinoById(FetchByIdRequest request)
+	{
+		return getPessoaBAI().fetchInquilinoById(request);
+
+	}
+
+	@Override
+	public InquilinoResponse fetchInquilinoByRequest(InquilinoInquiryRequest request)
+	{
+		return getPessoaBAI().fetchInquilinoByRequest(request);
+
+	}
+	
+		// ==================================
+
+	@Override
+	public SindicoResponse insertSindico(SindicoMaintenanceRequest request)
+	{
+		return getPessoaBAI().insertSindico(request);
+
+	}
+
+	@Override
+	public SindicoResponse updateSindico(SindicoMaintenanceRequest request)
+	{
+		return getPessoaBAI().updateSindico(request);
+
+	}
+
+	@Override
+	public SindicoResponse deleteSindico(SindicoMaintenanceRequest request)
+	{
+		return getPessoaBAI().deleteSindico(request);
+
+	}
+
+	@Override
+	public SindicoResponse fetchSindicoById(FetchByIdRequest request)
+	{
+		return getPessoaBAI().fetchSindicoById(request);
+
+	}
+
+	@Override
+	public SindicoResponse fetchSindicoByRequest(SindicoInquiryRequest request)
+	{
+		return getPessoaBAI().fetchSindicoByRequest(request);
+
+	}
 
 	// ==================================
 

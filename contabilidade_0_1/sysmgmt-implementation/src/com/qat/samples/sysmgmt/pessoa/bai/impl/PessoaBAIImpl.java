@@ -1678,6 +1678,232 @@ public class PessoaBAIImpl implements IPessoaBAI
 		}
 		return response;
 	}
+	
+//==================Inquilino
+	@Override
+	public InquilinoResponse insertInquilino(InquilinoMaintenanceRequest request)
+	{
+		InquilinoResponse response = new InquilinoResponse();
+		try
+		{
+			response = processInquilino(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/** The Inquilino response. */
+	@Override
+	public InquilinoResponse updateInquilino(InquilinoMaintenanceRequest request)
+	{
+		InquilinoResponse response = new InquilinoResponse();
+		try
+		{
+			response = processInquilino(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/**
+	 * Delete cliente.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	@Override
+	public InquilinoResponse deleteInquilino(InquilinoMaintenanceRequest request)
+	{
+		InquilinoResponse response = new InquilinoResponse();
+		try
+		{
+			response = processInquilino(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/**
+	 * Fetch cliente by id.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	@Override
+	public InquilinoResponse fetchInquilinoById(FetchByIdRequest request)
+	{
+		InquilinoResponse response = new InquilinoResponse();
+		try
+		{
+			InternalResponse internalResponse = new InternalResponse();
+			// validate fetchId field
+			if (ValidationUtil.isNull(request.getFetchId()))
+			{
+				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
+			}
+			else
+			{
+				internalResponse = getPessoaBAC().fetchInquilinoById(request);
+			}
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/**
+	 * Fetch cliente by request.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	@Override
+	public InquilinoResponse fetchInquilinoByRequest(InquilinoInquiryRequest request)
+	{
+		InquilinoResponse response = new InquilinoResponse();
+		try
+		{
+			fetchInquilino(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+
+
+//Sindico	
+
+	@Override
+	public SindicoResponse insertSindico(SindicoMaintenanceRequest request)
+	{
+		SindicoResponse response = new SindicoResponse();
+		try
+		{
+			response = processSindico(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/** The Sindico response. */
+	@Override
+	public SindicoResponse updateSindico(SindicoMaintenanceRequest request)
+	{
+		SindicoResponse response = new SindicoResponse();
+		try
+		{
+			response = processSindico(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/**
+	 * Delete cliente.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	@Override
+	public SindicoResponse deleteSindico(SindicoMaintenanceRequest request)
+	{
+		SindicoResponse response = new SindicoResponse();
+		try
+		{
+			response = processSindico(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/**
+	 * Fetch cliente by id.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	@Override
+	public SindicoResponse fetchSindicoById(FetchByIdRequest request)
+	{
+		SindicoResponse response = new SindicoResponse();
+		try
+		{
+			InternalResponse internalResponse = new InternalResponse();
+			// validate fetchId field
+			if (ValidationUtil.isNull(request.getFetchId()))
+			{
+				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
+			}
+			else
+			{
+				internalResponse = getPessoaBAC().fetchSindicoById(request);
+			}
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/**
+	 * Fetch cliente by request.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	@Override
+	public SindicoResponse fetchSindicoByRequest(SindicoInquiryRequest request)
+	{
+		SindicoResponse response = new SindicoResponse();
+		try
+		{
+			fetchSindico(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+//===================================
+	
 
 	/**
 	 * Fetch cliente.

@@ -1026,5 +1026,216 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 		return response;
 	}
+	
+	//Condominio
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.prosperitasglobal.sendsolv.bai.ILocaationBAI#insertLocaation(com.prosperitasglobal.sendsolv.model
+	 * .request.LocaationRequest)
+	 * Leveraging the common process method to perform the "real" work.
+	 * Wrapped in a try-catch to ensure we never return an exception from this operation.
+	 */
+	@Override
+	public CondominioResponse insertCondominio(CondominioMaintenanceRequest request)
+	{
+		CondominioResponse response = new CondominioResponse();
+		try
+		{
+			response = processCondominio(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.prosperitasglobal.sendsolv.bai.ILocaationBAI#updateLocaation(com.prosperitasglobal.sendsolv.model
+	 * .request.LocaationRequest)
+	 * Leveraging the common process method to perform the "real" work.
+	 * Wrapped in a try-catch to ensure we never return an exception from this operation.
+	 */
+	@Override
+	public CondominioResponse updateCondominio(CondominioMaintenanceRequest request)
+	{
+		CondominioResponse response = new CondominioResponse();
+		try
+		{
+			response = processCondominio(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.prosperitasglobal.sendsolv.bai.ILocaationBAI#deleteLocaation(com.prosperitasglobal.sendsolv.model
+	 * .request.LocaationRequest)
+	 * Leveraging the common process method to perform the "real" work.
+	 * Wrapped in a try-catch to ensure we never return an exception from this operation.
+	 */
+	@Override
+	public CondominioResponse deleteCondominio(CondominioMaintenanceRequest request)
+	{
+		CondominioResponse response = new CondominioResponse();
+		try
+		{
+			response = processCondominio(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.prosperitasglobal.sendsolv.bai.ILocaationBAI#fetchLocaationById(com.prosperitasglobal.sendsolv.model.
+	 * request
+	 * .CountyRequest)
+	 */
+	@Override
+	public CondominioResponse fetchCondominioById(FetchByIdRequest request)
+	{
+		CondominioResponse response = new CondominioResponse();
+		try
+		{
+			InternalResponse internalResponse = new InternalResponse();
+			// validate fetchId field
+			if (ValidationUtil.isNull(request.getFetchId()) && ValidationUtil.isNull(request.getFetchId()))
+			{
+				internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_LOCATIONVALIDATOR_ID_REQUIRED);
+			}
+			else
+			{
+				internalResponse = getCondominioBAC().fetchCondominioById(request);
+			}
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.prosperitasglobal.sendsolv.bai.ICondominioBAI#fetchCondominioByRequest(com.prosperitasglobal.sendsolv.model
+	 * .request.PagedInquiryRequest)
+	 */
+	@Override
+	public CondominioResponse fetchCondominioByRequest(CondominioInquiryRequest request)
+	{
+		CondominioResponse response = new EmpresaResponse();
+		try
+		{
+			fetchPagedCondominio(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.bai.ICondominioBAI#updateRisk(com.prosperitasglobal.sendsolv.model.request.
+	 * RiskMaintenanceRequest)
+	 */
+
+	/**
+	 * Fetch paged.
+	 * 
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchPagedCondominio(CondominioInquiryRequest request, CondominioResponse response)
+	{
+		InternalResultsResponse<Condominio> internalResponse = new InternalResultsResponse<Condominio>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getEmpresaBAC().fetchCondominioByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	/**
+	 * Handle return.
+	 * 
+	 * @param response the response
+	 * @param internalResponse the internal response
+	 * @param messages the messages
+	 * @param copyOver the copy over
+	 * @return the response
+	 */
+	private Response handleReturn(Response response, InternalResponse internalResponse,
+			List<MessageInfo> messages, boolean copyOver)
+	{
+		// In the case there was an Optimistic Locking error, add the specific message
+		if (!ValidationUtil.isNull(internalResponse) && !ValidationUtil.isNull(internalResponse.getStatus())
+				&& Status.OptimisticLockingError.equals(internalResponse.getStatus()))
+		{
+			messages.add(new MessageInfo(PROSPERITASGLOBAL_BASE_OL_ERROR, MessageSeverity.Error,
+					MessageLevel.Object));
+		}
+
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, messages, copyOver);
+		return response;
+	}
+
+	/**
+	 * Do persistance.
+	 * 
+	 * @param request the request
+	 * @param updateType the update type
+	 * @return the internal response
+	 */
+	private InternalResponse doPersistanceCondominio(CondominioMaintenanceRequest request, PersistanceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			case INSERT:
+				return getEmpresaBAC().insertCondominio(request);
+
+			case UPDATE:
+				return getEmpresaBAC().updateCondominio(request);
+
+			case DELETE:
+				return getEmpresaBAC().deleteCondominio(request);
+
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
+		}
+		return null;
+	}
 
 }

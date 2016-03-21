@@ -638,7 +638,218 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
 		return response;
 	}
+//Condominio
+/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.dac.IEmpresaDAC#insertEmpresa(com.prosperitasglobal.sendsolv.model.Empresa)
+	 */
+	@Override
+	public InternalResultsResponse<Condominio> insertCondominio(Condominio empresa)
+	{
+		Integer insertCount = 0;
+		Integer historicoId = 0;
+		InternalResultsResponse<Condominio> response = new InternalResultsResponse<Condominio>();
+		if (empresa.getModelAction() == PersistanceActionEnum.INSERT)
+		{
+			// First insert the root
+			// Is successful the unique-id will be populated back into the object.
+			insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, empresa, response);
 
+			historicoId =
+					HistoricoDACD.inserthistorico(empresa.getId(), empresa.getId(), empresa.getUserId(), response,
+							TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoDAC);
+
+			empresa.setProcessId(historicoId);
+
+			insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, empresa, response);
+
+			historicoId =
+					HistoricoDACD.inserthistoricoItens(empresa.getId(), empresa.getUserId(), response,
+							TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoId, getHistoricoDAC());
+
+			EmailUtilDACD.maintainEmailEnviar();
+			GerarTarefaDACD.maintainGerarTarefas();
+			GerarFinanceiroDACD.maintainGerarFinanceiro();
+
+		}
+		else
+		{
+
+			historicoId = empresa.getProcessId();
+		}
+		if (!ValidationUtil.isNullOrEmpty(empresa.getSocios()))
+		{
+			insertCount +=
+					SociosDACD.maintainSocioAssociations(empresa.getSocios(), response, empresa.getId(), null, null,
+							TabelaEnum.EMPRESA, getSocioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							empresa.getCreateUser(), historicoId, historicoId, getDocumentoDAC());
+
+		}
+		if (!ValidationUtil.isNullOrEmpty(empresa.getPlanoList()))
+		{
+			insertCount +=
+					PlanoDACD.maintainPlanoAssociations(empresa.getPlanoList(), response, empresa.getId(), null, null,
+							TabelaEnum.EMPRESA, getPlanoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							empresa.getCreateUser(), historicoId, historicoId);
+		}
+
+		if (!ValidationUtil.isNullOrEmpty(empresa.getUsuarioList()))
+		{
+			insertCount +=
+					UsuarioDACD.maintainUsuarioAssociations(empresa.getUsuarioList(), response, empresa.getId(), null,
+							null,
+							TabelaEnum.EMPRESA, getUsuarioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							empresa.getCreateUser(), historicoId, historicoId);
+		}
+
+		if (!ValidationUtil.isNullOrEmpty(empresa.getContaCorrenteList()))
+		{
+			insertCount +=
+					UsuarioDACD.maintainUsuarioAssociations(empresa.getUsuarioList(), response, empresa.getId(), null,
+							null,
+							TabelaEnum.EMPRESA, getUsuarioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							empresa.getCreateUser(), historicoId, historicoId);
+		}
+
+		insertCount += insertAssociations(empresa, historicoId, historicoId, TabelaEnum.EMPRESA, response);
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		// Finally, if something was inserted then add the Condominio to the result.
+		if (insertCount > 0)
+		{
+			response.addResult(empresa);
+		}
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.prosperitasglobal.sendsolv.dac.ICondominioDAC#updateCondominio(com.prosperitasglobal.sendsolv.model
+	 * .Condominio)
+	 */
+	@Override
+	public InternalResultsResponse<Condominio> updateCondominio(Condominio empresa)
+	{
+		Integer updateCount = 0;
+		Integer historicoId = 0;
+		InternalResultsResponse<Condominio> response = new InternalResultsResponse<Condominio>();
+
+		// First update the root if necessary.
+		if (!ValidationUtil.isNull(empresa.getModelAction())
+				&& (empresa.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		{
+			updateCount =
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), EMPRESA_STMT_UPDATE, empresa,
+							response);
+			historicoId = empresa.getProcessId();
+		}
+		else
+		{
+
+			historicoId =
+					HistoricoDACD.inserthistorico(empresa.getId(), empresa.getId(), empresa.getUserId(), response,
+							TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoDAC);
+		}
+		if (ValidationUtil.isNullOrEmpty(empresa.getSocios()))
+		{
+			updateCount +=
+					SociosDACD.maintainSocioAssociations(empresa.getSocios(), response, empresa.getId(), null, null,
+							TabelaEnum.EMPRESA, getSocioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							empresa.getCreateUser(), historicoId, historicoId, getDocumentoDAC());
+		}
+		if (ValidationUtil.isNullOrEmpty(empresa.getPlanoList()))
+		{
+			updateCount +=
+					PlanoDACD.maintainPlanoAssociations(empresa.getPlanoList(), response, empresa.getId(), null, null,
+							TabelaEnum.EMPRESA, getPlanoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							empresa.getCreateUser(), historicoId, historicoId);
+		}
+		updateCount += insertAssociations(empresa, historicoId, historicoId, TabelaEnum.EMPRESA, response);
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		// Finally,processId,nullocessId,nulls updated then add the Person to the result.
+		if (updateCount > 0)
+		{
+			response.addResult(empresa);
+		}
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.prosperitasglobal.sendsolv.dac.ICondominioDAC#deleteCondominio(com.prosperitasglobal.sendsolv.model
+	 * .Condominio)
+	 */
+	@Override
+	public InternalResponse deleteCondominio(Condominio empresa)
+	{
+		InternalResponse response = new InternalResponse();
+
+		Integer updateCount;
+
+		Status status = new Status();
+		status.setStatus(CdStatusTypeEnum.DELETADO);
+		List<Status> statusList = new ArrayList<Status>();
+		statusList.add(status);
+		updateCount =
+				StatusDACD
+						.maintainStatusAssociations(statusList, null, empresa.getId(),
+								null, AcaoEnum.DELETE,
+								empresa.getCreateUser(), empresa.getId(), TabelaEnum.EMPRESA, getStatusDAC(),
+								getHistoricoDAC(), empresa.getProcessId(), null);
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.dac.ICondominioDAC#fetchCondominioById(FetchByIdRequest)
+	 */
+	@Override
+	public InternalResultsResponse<Condominio> fetchCondominioById(FetchByIdRequest request)
+	{
+		InternalResultsResponse<Condominio> response = new InternalResultsResponse<Condominio>();
+		QATMyBatisDacHelper.doQueryForList(getSqlSession(), EMPRESA_STMT_FETCH_BY_ID, request, response);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.prosperitasglobal.sendsolv.dac.ICondominioDAC#fetchCondominioByRequest(com.prosperitasglobal.sendsolv
+	 * .model.request.PagedInquiryRequest)
+	 */
+	@Override
+	public InternalResultsResponse<Condominio> fetchCondominioByRequest(CondominioInquiryRequest request)
+	{
+		InternalResultsResponse<Condominio> response = new InternalResultsResponse<Condominio>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getCondominioInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, EMPRESA_STMT_FETCH_COUNT,
+				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
+		return response;
+	}
+	
+	
+	
+//Filial
 	@Override
 	public InternalResultsResponse<Filial> insertFilial(Filial filial)
 	{
@@ -660,7 +871,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 			return response;
 		}
 
-		// Finally, if something was inserted then add the Empresa to the result.
+		// Finally, if something was inserted then add the Condominio to the result.
 		if (insertCount > 0)
 		{
 			response.addResult(filial);

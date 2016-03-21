@@ -111,6 +111,86 @@ public class PessoaBACImpl implements IPessoaBAC
 		return getPessoaDAC().fetchAdvogadoByRequest(request);
 	}
 
+	// ================================= 
+	
+	@Override
+	public InternalResultsResponse<Sindico> insertSindico(SindicoMaintenanceRequest request)
+	{
+		InternalResultsResponse<Sindico> response = new InternalResultsResponse<Sindico>();
+
+		response = getPessoaDAC().insertSindico(request.getSindico());
+
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Sindico> updateSindico(SindicoMaintenanceRequest request)
+	{
+		InternalResultsResponse<Sindico> response = new InternalResultsResponse<Sindico>();
+
+		response = getPessoaDAC().updateSindico(request.getSindico());
+
+		return response;
+	}
+
+	@Override
+	public InternalResponse deleteSindico(SindicoMaintenanceRequest request)
+	{
+		return getPessoaDAC().deleteSindico(request.getSindico());
+	}
+
+	@Override
+	public InternalResultsResponse<Sindico> fetchSindicoById(FetchByIdRequest request)
+	{
+		return getPessoaDAC().fetchSindicoById(request);
+	}
+
+	@Override
+	public InternalResultsResponse<Sindico> fetchSindicoByRequest(SindicoInquiryRequest request)
+	{
+		return getPessoaDAC().fetchSindicoByRequest(request);
+	}
+
+	// =================================
+	
+	@Override
+	public InternalResultsResponse<Inquilino> insertInquilino(InquilinoMaintenanceRequest request)
+	{
+		InternalResultsResponse<Inquilino> response = new InternalResultsResponse<Inquilino>();
+
+		response = getPessoaDAC().insertInquilino(request.getInquilino());
+
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Inquilino> updateInquilino(InquilinoMaintenanceRequest request)
+	{
+		InternalResultsResponse<Inquilino> response = new InternalResultsResponse<Inquilino>();
+
+		response = getPessoaDAC().updateInquilino(request.getInquilino());
+
+		return response;
+	}
+
+	@Override
+	public InternalResponse deleteInquilino(InquilinoMaintenanceRequest request)
+	{
+		return getPessoaDAC().deleteInquilino(request.getInquilino());
+	}
+
+	@Override
+	public InternalResultsResponse<Inquilino> fetchInquilinoById(FetchByIdRequest request)
+	{
+		return getPessoaDAC().fetchInquilinoById(request);
+	}
+
+	@Override
+	public InternalResultsResponse<Inquilino> fetchInquilinoByRequest(InquilinoInquiryRequest request)
+	{
+		return getPessoaDAC().fetchInquilinoByRequest(request);
+	}
+
 	// =================================
 
 	@Override

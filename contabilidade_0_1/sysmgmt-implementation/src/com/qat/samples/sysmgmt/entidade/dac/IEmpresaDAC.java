@@ -65,6 +65,17 @@ public interface IEmpresaDAC
 	 * @return the internal results response< empresa>
 	 */
 	public InternalResultsResponse<Empresa> fetchEmpresaByRequest(EmpresaInquiryRequest request);
+	
+	//Condominio
+	public InternalResultsResponse<Condominio> insertCondominio(Condominio filial);
+
+	public InternalResultsResponse<Condominio> updateCondominio(Condominio filial);
+
+	public InternalResponse deleteCondominio(Condominio filial);
+
+	public InternalResultsResponse<Condominio> fetchCondominioById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Condominio> fetchCondominioByRequest(CondominioInquiryRequest request);
 
 	// filial
 	public InternalResultsResponse<Filial> insertFilial(Filial filial);

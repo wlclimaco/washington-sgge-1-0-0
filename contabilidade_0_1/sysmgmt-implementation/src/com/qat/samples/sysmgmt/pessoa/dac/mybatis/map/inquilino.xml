@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PessoaMap">
+
+	<resultMap id="PessoaResult" type="Pessoa">
+    <result property="id" column="id" />
+    <result property="emprId" column="cdEmpr" />
+   	<result property="nome" column="nome"/>
+	<result property="pessoaTypeEnumValue" column="type"/>
+	<result property="sexo" column="sexo"/>
+	<result property="datanasc" column="datanasc"/>
+	<result property="nomePai" column="nomePai"/>
+	<result property="nomeMae" column="nomeMae"/>
+	<result property="nomeConjugue" column="nomeConjugue"/>
+	<result property="estadoCivil" column="estadoCivil"/>
+	<result property="tipoPessoa" column="tipoPessoa"/>
+	<result property="matricula" column="matricula"/>
+   	<result property="dataAdm" column="dataAdmin"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByPessoaId"/>
+	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByPessoaId"/>
+	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByFuncionario"/>
+	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByPessoaId"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByPessoaId"/>
+	<collection property="bancos" column="id" select="BancoMap.fetchBancoByPessoa"/>
+	<collection property="notes" column="id" select="NoteMap.fetchNoteByPessoa"/>
+    <collection property="contatoList" column="id" select="ContatoMap.fetchContatoByPessoa"/>
+	<collection property="formaPagamentoList" column="id" select="FormaPgMap.fetchFormaPgByPessoa"/>
+	<collection property="condPagList" column="id" select="CondPagMap.fetchCondPagByPessoa"/>
+
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allPessoaColumns">
+		 cdEmpr
+		,nome
+		,type
+		,sexo
+		,datanasc
+		,nomePai
+		,nomeMae
+		,nomeConjugue
+		,estadoCivil
+		,tipoPessoa
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allPessoaValues">
+  		#{emprId},
+  		#{nome},
+  		#{pessoaTypeEnumValue},
+  		#{sexo},
+  		#{datanasc},
+  		#{nomePai},
+  		#{nomeMae},
+  		#{nomeConjugue},
+  		#{estadoCivil},
+  		#{tipoPessoa},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertPessoa" parameterType="Pessoa" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO pessoa (
+		<include refid="allPessoaColumns" />
+      )
+    VALUES (<include refid="allPessoaValues" /> )
+  </insert>
+
+
+	<!--
+	 <result property="emprId" column="cdEmpr" />
+   	<result property="nome" column="nome"/>
+	<result property="pessoaTypeEnumValue" column="type"/>
+	<result property="sexo" column="sexo"/>
+	<result property="datanasc" column="datanasc"/>
+	<result property="nomePai" column="nomePai"/>
+	<result property="nomeMae" column="nomeMae"/>
+	<result property="nomeConjugue" column="nomeConjugue"/>
+	<result property="estadoCivil" column="estadoCivil"/>
+	<result property="tipoPessoa" column="tipoPessoa"/>
+	<result property="matricula" column="matricula"/>
+   	<result property="dataAdm" column="dataAdmin"/>
+ 	-->
+
+  <update id="updatePessoa" parameterType="Pessoa">
+    UPDATE pessoa
+    	<set>
+    		<if test="emprId!= null">cdempr = #{emprId},</if>
+	  		<if test="nome!= null">nome = #{nome},</if>
+	  		<if test="pessoaTypeEnumValue!= null">type = #{pessoaTypeEnumValue},</if>
+	  		<if test="sexo!= null">sexo = #{sexo},</if>
+	  		<if test="datanasc!= null">datanasc = #{datanasc},</if>
+	  		<if test="nomePai!= null">nomePai = #{nomePai},</if>
+	  		<if test="nomeMae!= null">nomeMae = #{nomeMae},</if>
+	  		<if test="nomeConjugue!= null">nomeConjugue = #{nomeConjugue},</if>
+	  		<if test="estadoCivil!= null">estadoCivil = #{estadoCivil},</if>
+	  		<if test="tipoPessoa!= null">tipoPessoa = #{tipoPessoa},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deletePessoaById" parameterType="Integer">
+    	DELETE FROM pessoa WHERE id = #{id}
+  </delete>
+
+     <select id="fetchPessoaById" parameterType="Integer" resultMap="PessoaResult">
+    			   SELECT
+					id,	<include refid="allPessoaColumns" />
+ 				   FROM pessoa b
+					where id = #{id}
+  </select>
+
+
+</mapper>

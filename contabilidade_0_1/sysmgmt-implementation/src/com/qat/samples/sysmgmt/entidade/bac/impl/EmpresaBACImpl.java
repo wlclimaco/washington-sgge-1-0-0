@@ -113,6 +113,73 @@ public class EmpresaBACImpl implements IEmpresaBAC
 	{
 		return getEmpresaDAC().fetchEmpresaByRequest(request);
 	}
+	
+	//Condominio
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.bac.IEmpresaBAC#insertEmpresa(EmpresaRequest)
+	 */
+	@Override
+	public InternalResultsResponse<Condominio> insertCondominio(CondominioMaintenanceRequest request)
+	{
+		InternalResultsResponse<Condominio> response = new InternalResultsResponse<Condominio>();
+
+		response = getCondominioDAC().insertCondominio(request.getCondominio());
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.bac.ICondominioBAC#updateCondominio(CondominioRequest)
+	 */
+	@Override
+	public InternalResultsResponse<Condominio> updateCondominio(CondominioMaintenanceRequest request)
+	{
+		InternalResultsResponse<Condominio> response = new InternalResultsResponse<Condominio>();
+
+		response = getEmpresaDAC().updateCondominio(request.getCondominio());
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.prosperitasglobal.sendsolv.bac.ICondominioBAC#deleteCondominio
+	 * (com.prosperitasglobal.sendsolv.model.request.CondominioRequest
+	 * )
+	 */
+	@Override
+	public InternalResponse deleteCondominio(CondominioMaintenanceRequest request)
+	{
+		return getEmpresaDAC().deleteCondominio(request.getCondominio());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.bac.ICondominioBAC#fetchCondominioById(FetchByIdRequest)
+	 */
+	@Override
+	public InternalResultsResponse<Condominio> fetchCondominioById(FetchByIdRequest request)
+	{
+		return getEmpresaDAC().fetchCondominioById(request);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.prosperitasglobal.sendsolv.bac.ICondominioBAC#fetchCondominioByRequest(com.prosperitasglobal.sendsolv.model.request
+	 * .CondominioInquiryRequest)
+	 */
+	@Override
+	public InternalResultsResponse<Condominio> fetchCondominioByRequest(CondominioInquiryRequest request)
+	{
+		return getEmpresaDAC().fetchCondominioByRequest(request);
+	}
+	
+	
+	//FIlial
 
 	@Override
 	public InternalResultsResponse<Filial> insertFilial(FilialMaintenanceRequest request)

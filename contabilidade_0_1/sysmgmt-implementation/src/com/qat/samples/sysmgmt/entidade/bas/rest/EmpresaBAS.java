@@ -106,7 +106,58 @@ public class EmpresaBAS implements IEmpresaRESTBAS
 	{
 		return getEmpresaBAI().fetchEmpresaByRequest(request);
 	}
+	//condominio
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.bas.IEmpresaRESTBAS#insertEmpresa(com.qat.samples.sysmgmt.model.request.
+	 * EmpresaMaintenanceRequest)
+	 */
+	@Override
+	public CondominioResponse insertCondominio(CondominioMaintenanceRequest request)
+	{
+		return getCondominioBAI().insertCondominio(request);
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.bas.ICondominioRESTBAS#updateCondominio(com.qat.samples.sysmgmt.model.request.
+	 * CondominioMaintenanceRequest)
+	 */
+	@Override
+	public CondominioResponse updateCondominio(CondominioMaintenanceRequest request)
+	{
+		return getEmpresaBAI().updateCondominio(request);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.bas.ICondominioRESTBAS#deleteCondominio(com.qat.samples.sysmgmt.model.request.
+	 * CondominioMaintenanceRequest)
+	 */
+	@Override
+	public CondominioResponse deleteCondominio(CondominioMaintenanceRequest request)
+	{
+		return getEmpresaBAI().deleteCondominio(request);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bas.ICondominioRESTBAS#fetchCondominioById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+	 * )
+	 */
+	@Override
+	public CondominioResponse fetchCondominioById(FetchByIdRequest request)
+	{
+		return getEmpresaBAI().fetchCondominioById(request);
+	}
+
+	@Override
+	public CondominioResponse fetchCondominioByRequest(CondominioInquiryRequest request)
+	{
+		return getEmpresaBAI().fetchCondominioByRequest(request);
+	}
+//filial
 	@Override
 	public FilialResponse insertFilial(FilialMaintenanceRequest request)
 	{

@@ -70,6 +70,28 @@ public interface IPessoaDAC
 	public InternalResultsResponse<Advogado> fetchAdvogadoByRequest(AdvogadoInquiryRequest request);
 
 	// ================================
+	public InternalResultsResponse<Sindico> updateSindico(Sindico cnae);
+
+	public InternalResultsResponse<Sindico> insertSindico(Sindico cnae);
+
+	public InternalResponse deleteSindico(Sindico cnae);
+
+	public InternalResultsResponse<Sindico> fetchSindicoById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Sindico> fetchSindicoByRequest(SindicoInquiryRequest request);
+
+	// ================================
+	public InternalResultsResponse<Inquilino> updateInquilino(Inquilino cnae);
+
+	public InternalResultsResponse<Inquilino> insertInquilino(Inquilino cnae);
+
+	public InternalResponse deleteInquilino(Inquilino cnae);
+
+	public InternalResultsResponse<Inquilino> fetchInquilinoById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Inquilino> fetchInquilinoByRequest(InquilinoInquiryRequest request);
+
+	// ================================
 	public InternalResultsResponse<Cliente> updateCliente(Cliente cnae);
 
 	public InternalResultsResponse<Cliente> insertCliente(Cliente cnae);

@@ -701,6 +701,392 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 				"ClienteMap.fetchAllClientesByRequest", response);
 		return response;
 	}
+	//==========================Sindico==========================
+	@Override
+	public InternalResultsResponse<Sindico> insertSindico(Sindico pessoa)
+	{
+		Integer insertCount = 0;
+		InternalResultsResponse<Sindico> response = new InternalResultsResponse<Sindico>();
+
+		Pessoa pessoaa = new Pessoa();
+
+		pessoaa = pessoa;
+		pessoa = (Sindico)pessoaa;
+
+		Integer historicoId = HistoricoDACD.maintainHistoricoAssociations(pessoa.getId(), pessoa.getCreateUser(), 0,
+				TabelaEnum.FUNCIONARIO, getHistoricoDAC());
+
+		Integer processId = historicoId;
+		pessoaa.setProcessId(historicoId);
+
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "PessoaMap.insertPessoa", pessoaa, response);
+
+		historicoId = HistoricoDACD.maintainHistoricoItensAssociations(historicoId, pessoa.getId(), pessoa.getUserId(),
+				historicoId,
+				TabelaEnum.FUNCIONARIO, AcaoEnum.INSERT, getHistoricoDAC());
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		insertCount += insertPerson(pessoa, processId, historicoId, response);
+
+		insertCount +=
+				ProfissaoDACD.maintainProfissaoAssociationsList(pessoa.getProfissao(), response, insertCount, null,
+						null,
+						null, getProfissaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser(), processId, historicoId);
+
+		insertCount +=
+				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, insertCount, null,
+						null,
+						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser(), processId, historicoId);
+
+		if (insertCount > 0)
+		{
+			Status status = new Status();
+			status.setStatus(CdStatusTypeEnum.ANALISANDO);
+			List<Status> statusList = new ArrayList<Status>();
+			insertCount =
+					StatusDACD.maintainStatusAssociations(statusList, response, pessoa.getId(), null, AcaoEnum.INSERT,
+							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
+							getHistoricoDAC(), processId, null);
+
+		}
+
+		// Next traverse the object graph and "maintain" the associations
+
+		// Finally, if something was inserted then add the Sindico to the result.
+		if (insertCount > 0)
+		{
+			response.addResult(pessoa);
+		}
+
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Sindico> updateSindico(Sindico pessoa)
+	{
+		Integer updateCount = 0;
+		InternalResultsResponse<Sindico> response = new InternalResultsResponse<Sindico>();
+
+		// First update the root if necessary.
+		if (!ValidationUtil.isNull(pessoa.getModelAction())
+				&& (pessoa.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		{
+			updateCount =
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), "PessoaMap.updatePessoa", pessoa,
+							response);
+		}
+
+		Integer historicoId = pessoa.getProcessId();
+
+		HistoricoItens historicoItens = new HistoricoItens();
+		historicoItens.setIdHist(historicoId);
+		historicoItens.setProcessId(historicoId);
+		historicoItens.setParentId(pessoa.getId());
+		historicoItens.setTabelaEnum(TabelaEnum.PESSOA);
+		historicoItens.setAcaoType(AcaoEnum.UPDATE);
+
+		updateCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistoricoItens", historicoItens,
+						response);
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		updateCount += insertPerson(pessoa, historicoId, historicoId, response);
+		// Next traverse the object graph and "maintain" the associations
+
+		// updateCount +=
+		// ProfissaoDACD.maintainProfissaoAssociations(pessoa.getProfissao(), response, pessoa.getId(), null,
+		// null,
+		// null, getProfissaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+		// pessoa.getCreateUser(), historicoId, historicoId, getProfissaoDAC());
+
+		updateCount +=
+				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, pessoa.getId(), null,
+						null,
+						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser(), historicoId, historicoId);
+
+		if (updateCount > 0)
+		{
+			updateCount =
+					StatusDACD.maintainStatusAssociations(pessoa.getStatusList(), response, pessoa.getId(), null,
+							AcaoEnum.UPDATE,
+							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.CLIENTE, getStatusDAC(),
+							getHistoricoDAC(), historicoId, null);
+
+		}
+
+		// Finally, if something was updated then add the Person to the result.
+		if (updateCount > 0)
+		{
+			response.addResult(pessoa);
+		}
+
+		return response;
+	}
+
+	@Override
+	public InternalResponse deleteSindico(Sindico pessoa)
+	{
+		Integer updateCount = 0;
+		InternalResponse response = new InternalResponse();
+
+		HistoricoItens historicoItens = new HistoricoItens();
+		historicoItens.setIdHist(pessoa.getProcessId());
+		historicoItens.setProcessId(pessoa.getProcessId());
+		historicoItens.setParentId(pessoa.getId());
+		historicoItens.setTabelaEnum(TabelaEnum.PESSOA);
+		historicoItens.setAcaoType(AcaoEnum.DELETE);
+
+		updateCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistoricoItens", historicoItens,
+						response);
+
+		Status status = new Status();
+		status.setStatus(CdStatusTypeEnum.DELETADO);
+		List<Status> statusList = new ArrayList<Status>();
+		statusList.add(status);
+		updateCount +=
+				StatusDACD
+						.maintainStatusAssociations(statusList, null, pessoa.getId(),
+								null, AcaoEnum.DELETE,
+								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.CLIENTE, getStatusDAC(),
+								getHistoricoDAC(), pessoa.getProcessId(), null);
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.dac.ISindicoDAC#fetchSindicoById(FetchByIdRequest)
+	 */
+	@Override
+	public InternalResultsResponse<Sindico> fetchSindicoById(FetchByIdRequest request)
+	{
+		InternalResultsResponse<Sindico> response = new InternalResultsResponse<Sindico>();
+		QATMyBatisDacHelper.doQueryForList(getSqlSession(), "SindicoMap.fetchSindicoById", request, response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Sindico> fetchSindicoByRequest(SindicoInquiryRequest request)
+	{
+		InternalResultsResponse<Sindico> response = new InternalResultsResponse<Sindico>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getSindicoInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "SindicoMap.fetchSindicoRowCount",
+				"SindicoMap.fetchAllSindicosByRequest", response);
+		return response;
+	}
+	
+	//=========================Inquilino=========================
+	
+	@Override
+	public InternalResultsResponse<Inquilino> insertInquilino(Inquilino pessoa)
+	{
+		Integer insertCount = 0;
+		InternalResultsResponse<Inquilino> response = new InternalResultsResponse<Inquilino>();
+
+		Pessoa pessoaa = new Pessoa();
+
+		pessoaa = pessoa;
+		pessoa = (Inquilino)pessoaa;
+
+		Integer historicoId = HistoricoDACD.maintainHistoricoAssociations(pessoa.getId(), pessoa.getCreateUser(), 0,
+				TabelaEnum.FUNCIONARIO, getHistoricoDAC());
+
+		Integer processId = historicoId;
+		pessoaa.setProcessId(historicoId);
+
+		insertCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "PessoaMap.insertPessoa", pessoaa, response);
+
+		historicoId = HistoricoDACD.maintainHistoricoItensAssociations(historicoId, pessoa.getId(), pessoa.getUserId(),
+				historicoId,
+				TabelaEnum.FUNCIONARIO, AcaoEnum.INSERT, getHistoricoDAC());
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		insertCount += insertPerson(pessoa, processId, historicoId, response);
+
+		insertCount +=
+				ProfissaoDACD.maintainProfissaoAssociationsList(pessoa.getProfissao(), response, insertCount, null,
+						null,
+						null, getProfissaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser(), processId, historicoId);
+
+		insertCount +=
+				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, insertCount, null,
+						null,
+						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser(), processId, historicoId);
+
+		if (insertCount > 0)
+		{
+			Status status = new Status();
+			status.setStatus(CdStatusTypeEnum.ANALISANDO);
+			List<Status> statusList = new ArrayList<Status>();
+			insertCount =
+					StatusDACD.maintainStatusAssociations(statusList, response, pessoa.getId(), null, AcaoEnum.INSERT,
+							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.EMPRESA, getStatusDAC(),
+							getHistoricoDAC(), processId, null);
+
+		}
+
+		// Next traverse the object graph and "maintain" the associations
+
+		// Finally, if something was inserted then add the Inquilino to the result.
+		if (insertCount > 0)
+		{
+			response.addResult(pessoa);
+		}
+
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Inquilino> updateInquilino(Inquilino pessoa)
+	{
+		Integer updateCount = 0;
+		InternalResultsResponse<Inquilino> response = new InternalResultsResponse<Inquilino>();
+
+		// First update the root if necessary.
+		if (!ValidationUtil.isNull(pessoa.getModelAction())
+				&& (pessoa.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		{
+			updateCount =
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), "PessoaMap.updatePessoa", pessoa,
+							response);
+		}
+
+		Integer historicoId = pessoa.getProcessId();
+
+		HistoricoItens historicoItens = new HistoricoItens();
+		historicoItens.setIdHist(historicoId);
+		historicoItens.setProcessId(historicoId);
+		historicoItens.setParentId(pessoa.getId());
+		historicoItens.setTabelaEnum(TabelaEnum.PESSOA);
+		historicoItens.setAcaoType(AcaoEnum.UPDATE);
+
+		updateCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistoricoItens", historicoItens,
+						response);
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		updateCount += insertPerson(pessoa, historicoId, historicoId, response);
+		// Next traverse the object graph and "maintain" the associations
+
+		// updateCount +=
+		// ProfissaoDACD.maintainProfissaoAssociations(pessoa.getProfissao(), response, pessoa.getId(), null,
+		// null,
+		// null, getProfissaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+		// pessoa.getCreateUser(), historicoId, historicoId, getProfissaoDAC());
+
+		updateCount +=
+				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, pessoa.getId(), null,
+						null,
+						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+						pessoa.getCreateUser(), historicoId, historicoId);
+
+		if (updateCount > 0)
+		{
+			updateCount =
+					StatusDACD.maintainStatusAssociations(pessoa.getStatusList(), response, pessoa.getId(), null,
+							AcaoEnum.UPDATE,
+							pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.CLIENTE, getStatusDAC(),
+							getHistoricoDAC(), historicoId, null);
+
+		}
+
+		// Finally, if something was updated then add the Person to the result.
+		if (updateCount > 0)
+		{
+			response.addResult(pessoa);
+		}
+
+		return response;
+	}
+
+	@Override
+	public InternalResponse deleteInquilino(Inquilino pessoa)
+	{
+		Integer updateCount = 0;
+		InternalResponse response = new InternalResponse();
+
+		HistoricoItens historicoItens = new HistoricoItens();
+		historicoItens.setIdHist(pessoa.getProcessId());
+		historicoItens.setProcessId(pessoa.getProcessId());
+		historicoItens.setParentId(pessoa.getId());
+		historicoItens.setTabelaEnum(TabelaEnum.PESSOA);
+		historicoItens.setAcaoType(AcaoEnum.DELETE);
+
+		updateCount =
+				QATMyBatisDacHelper.doInsert(getSqlSession(), "HistoricoMap.insertHistoricoItens", historicoItens,
+						response);
+
+		Status status = new Status();
+		status.setStatus(CdStatusTypeEnum.DELETADO);
+		List<Status> statusList = new ArrayList<Status>();
+		statusList.add(status);
+		updateCount +=
+				StatusDACD
+						.maintainStatusAssociations(statusList, null, pessoa.getId(),
+								null, AcaoEnum.DELETE,
+								pessoa.getCreateUser(), pessoa.getEmprId(), TabelaEnum.CLIENTE, getStatusDAC(),
+								getHistoricoDAC(), pessoa.getProcessId(), null);
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.prosperitasglobal.sendsolv.dac.IInquilinoDAC#fetchInquilinoById(FetchByIdRequest)
+	 */
+	@Override
+	public InternalResultsResponse<Inquilino> fetchInquilinoById(FetchByIdRequest request)
+	{
+		InternalResultsResponse<Inquilino> response = new InternalResultsResponse<Inquilino>();
+		QATMyBatisDacHelper.doQueryForList(getSqlSession(), "InquilinoMap.fetchInquilinoById", request, response);
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Inquilino> fetchInquilinoByRequest(InquilinoInquiryRequest request)
+	{
+		InternalResultsResponse<Inquilino> response = new InternalResultsResponse<Inquilino>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getInquilinoInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "InquilinoMap.fetchInquilinoRowCount",
+				"InquilinoMap.fetchAllInquilinosByRequest", response);
+		return response;
+	}
 
 	// =========================Advogado=========================
 
@@ -1712,7 +2098,7 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		 * Helper method to translation from the user friendly" sort field names to the
 		 * actual database column names.
 		 */
-		// QATMyBatisDacHelper.translateSortFields(request, getClienteInquiryValidSortFields());
+		// QATMyBatisDacHelper.translateSortFields(request, getInquilinoInquiryValidSortFields());
 
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "FuncionarioMap.fetchFuncionarioRowCount",
 				"FuncionarioMap.fetchAllFuncionariosByRequest", response);

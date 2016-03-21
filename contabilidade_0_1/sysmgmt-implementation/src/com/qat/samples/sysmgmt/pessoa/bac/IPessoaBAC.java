@@ -62,6 +62,30 @@ public interface IPessoaBAC
 	public InternalResultsResponse<Advogado> fetchAdvogadoByRequest(AdvogadoInquiryRequest request);
 
 	// =============================
+	
+	public InternalResultsResponse<Sindico> insertSindico(SindicoMaintenanceRequest request);
+
+	public InternalResultsResponse<Sindico> updateSindico(SindicoMaintenanceRequest request);
+
+	public InternalResponse deleteSindico(SindicoMaintenanceRequest request);
+
+	public InternalResultsResponse<Sindico> fetchSindicoById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Sindico> fetchSindicoByRequest(SindicoInquiryRequest request);
+
+	// =============================
+	
+	public InternalResultsResponse<Inquilino> insertInquilino(InquilinoMaintenanceRequest request);
+
+	public InternalResultsResponse<Inquilino> updateInquilino(InquilinoMaintenanceRequest request);
+
+	public InternalResponse deleteInquilino(InquilinoMaintenanceRequest request);
+
+	public InternalResultsResponse<Inquilino> fetchInquilinoById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Inquilino> fetchInquilinoByRequest(InquilinoInquiryRequest request);
+
+	// =============================
 
 	public InternalResultsResponse<Funcionario> insertFuncionario(FuncionarioMaintenanceRequest request);
 

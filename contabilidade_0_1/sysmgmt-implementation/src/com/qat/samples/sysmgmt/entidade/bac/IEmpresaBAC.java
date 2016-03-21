@@ -39,6 +39,17 @@ public interface IEmpresaBAC
 	public InternalResultsResponse<Empresa> fetchEmpresaById(FetchByIdRequest request);
 
 	public InternalResultsResponse<Empresa> fetchEmpresaByRequest(EmpresaInquiryRequest request);
+	
+	//condominio
+	public InternalResultsResponse<Condominio> insertCondominio(CondominioMaintenanceRequest request);
+
+	public InternalResultsResponse<Condominio> updateCondominio(CondominioMaintenanceRequest request);
+
+	public InternalResponse deleteCondominio(CondominioMaintenanceRequest request);
+
+	public InternalResultsResponse<Condominio> fetchCondominioById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Condominio> fetchCondominioByRequest(CondominioInquiryRequest request);
 
 	// filial
 	public InternalResultsResponse<Filial> insertFilial(FilialMaintenanceRequest request);
