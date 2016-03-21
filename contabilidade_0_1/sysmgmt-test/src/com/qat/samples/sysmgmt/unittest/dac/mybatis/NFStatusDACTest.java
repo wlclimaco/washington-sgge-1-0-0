@@ -3,8 +3,8 @@ package com.qat.samples.sysmgmt.unittest.dac.mybatis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -23,51 +23,43 @@ import com.qat.framework.model.QATModel.PersistanceActionEnum;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.Status;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.banco.Banco;
+import com.qat.samples.sysmgmt.banco.BancoPessoa;
 import com.qat.samples.sysmgmt.cfop.Cfop;
 import com.qat.samples.sysmgmt.cfop.CfopPessoa;
 import com.qat.samples.sysmgmt.cfop.CfopTypeEnum;
-import com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest;
+import com.qat.samples.sysmgmt.cnae.Cnae;
+import com.qat.samples.sysmgmt.cnae.CnaeEmpresa;
+import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
 import com.qat.samples.sysmgmt.contabilidade.Plano;
+import com.qat.samples.sysmgmt.entidade.Deposito;
+import com.qat.samples.sysmgmt.entidade.Empresa;
+import com.qat.samples.sysmgmt.entidade.EntidadeTypeEnum;
+import com.qat.samples.sysmgmt.entidade.Filial;
+import com.qat.samples.sysmgmt.entidade.Usuario;
+import com.qat.samples.sysmgmt.entidade.dac.IEmpresaDAC;
+import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
+import com.qat.samples.sysmgmt.estado.Estado;
 import com.qat.samples.sysmgmt.fiscal.Classificacao;
-import com.qat.samples.sysmgmt.fiscal.Csosn;
-import com.qat.samples.sysmgmt.fiscal.Cst;
-import com.qat.samples.sysmgmt.fiscal.Tributacao;
+import com.qat.samples.sysmgmt.fiscal.Regime;
 import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.pessoa.Fornecedor;
-import com.qat.samples.sysmgmt.produto.dac.IProdutoDAC;
-import com.qat.samples.sysmgmt.produto.model.Custo;
-import com.qat.samples.sysmgmt.produto.model.CustoItem;
-import com.qat.samples.sysmgmt.produto.model.Estoque;
-import com.qat.samples.sysmgmt.produto.model.EstoqueTypeEnum;
-import com.qat.samples.sysmgmt.produto.model.Grupo;
-import com.qat.samples.sysmgmt.produto.model.GrupoProd;
-import com.qat.samples.sysmgmt.produto.model.Incidencia;
-import com.qat.samples.sysmgmt.produto.model.Marca;
-import com.qat.samples.sysmgmt.produto.model.MarcaProd;
-import com.qat.samples.sysmgmt.produto.model.PlanoByServico;
-import com.qat.samples.sysmgmt.produto.model.Porcao;
-import com.qat.samples.sysmgmt.produto.model.PorcaoItem;
-import com.qat.samples.sysmgmt.produto.model.PrecoTypeEnum;
-import com.qat.samples.sysmgmt.produto.model.Produto;
-import com.qat.samples.sysmgmt.produto.model.Rentabilidade;
-import com.qat.samples.sysmgmt.produto.model.RentabilidadeItens;
-import com.qat.samples.sysmgmt.produto.model.RentabilidadeTypeEnum;
-import com.qat.samples.sysmgmt.produto.model.Servico;
-import com.qat.samples.sysmgmt.produto.model.SubGrupo;
-import com.qat.samples.sysmgmt.produto.model.SubGrupoProd;
-import com.qat.samples.sysmgmt.produto.model.TabPreco;
-import com.qat.samples.sysmgmt.produto.model.UniMed;
-import com.qat.samples.sysmgmt.produto.model.UniMedProd;
-import com.qat.samples.sysmgmt.produto.model.request.GrupoInquiryRequest;
-import com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
-import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
-import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
-import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
-import com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest;
-import com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest;
-import com.qat.samples.sysmgmt.util.Imagem;
+import com.qat.samples.sysmgmt.util.Cidade;
+import com.qat.samples.sysmgmt.util.Configuracao;
+import com.qat.samples.sysmgmt.util.Documento;
+import com.qat.samples.sysmgmt.util.DocumentoTypeEnum;
+import com.qat.samples.sysmgmt.util.Email;
+import com.qat.samples.sysmgmt.util.EmailTypeEnum;
+import com.qat.samples.sysmgmt.util.NFStatus;
+import com.qat.samples.sysmgmt.util.NFStatusTypeEnum;
+import com.qat.samples.sysmgmt.util.Note;
+import com.qat.samples.sysmgmt.util.Telefone;
+import com.qat.samples.sysmgmt.util.TelefoneTypeEnum;
+import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 
 @ContextConfiguration(locations = {
 		"classpath:com/qat/samples/sysmgmt/unittest/conf/unittest-datasource-txn-context.xml",
@@ -78,56 +70,71 @@ import com.qat.samples.sysmgmt.util.Imagem;
 @ActiveProfiles("postgres")
 public class NFStatusDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
+
 	private static final Logger LOG = LoggerFactory.getLogger(NFStatusDACTest.class);
-	private INFStatusDAC nfStatusDAC; // injected by Spring through setter below
+	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+
+	// below
 
 	public INFStatusDAC getNFStatusDAC()
 	{
-		return nfStatusDAC;
+		return enderecoDAC;
 	}
 
 	@Resource
-	public void setNFStatusDAC(INFStatusDAC newValue)
+	public void setNFStatusDAC(INFStatusDAC enderecoDAC)
 	{
-		nfStatusDAC = newValue;
+		this.enderecoDAC = enderecoDAC;
 	}
 
-	
-	
 	@Test
 	public void testupdateNFStatus() throws Exception
 	{
-		NFStatus nfStatus = new NFStatus();
-		nfStatus = mockNFStatus(PersistanceActionEnum.UPDATE);
-		InternalResultsResponse<NFStatus> response = getNFStatusDAC().updateNFStatus(nfStatus);
-		assertEquals(response.getStatus(), Status.OperationSuccess);
+
+		NFStatus funcionario = new NFStatus();
+		funcionario = insertNFStatus(PersistanceActionEnum.UPDATE);
+
+		InternalResultsResponse<NFStatus> funcionarioResponse = getNFStatusDAC().updateNFStatus(funcionario);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+
 	}
 
 	@Test
 	public void testinsertNFStatus() throws Exception
 	{
-		NFStatus nfStatus = new NFStatus();
-		nfStatus = mockNFStatus(PersistanceActionEnum.INSERT);
-		InternalResultsResponse<NFStatus> response = getNFStatusDAC().insertNFStatus(nfStatus);
-		assertEquals(response.getStatus(), Status.OperationSuccess);
+
+		NFStatus funcionario = new NFStatus();
+		funcionario = insertNFStatus(PersistanceActionEnum.INSERT);
+
+		InternalResultsResponse<NFStatus> funcionarioResponse = getNFStatusDAC().insertNFStatus(funcionario);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(22);
 		InternalResultsResponse<NFStatus> responseA = getNFStatusDAC().fetchNFStatusById(request);
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getCfopList().size() == nfStatus.getCfopList().size());
-		assertTrue(responseA.getResultsList().get(0).getClassificacao().getDescricao() == nfStatus.getClassificacao()
-				.getDescricao());
-		assertTrue(responseA.getResultsList().get(0).getCustoList().size() == nfStatus.getCustoList().size());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
 
 	}
 
 	@Test
 	public void testdeleteNFStatus() throws Exception
 	{
-		NFStatus nfStatus = new NFStatus();
-		nfStatus.setId(1);
-		nfStatus = mockNFStatus(PersistanceActionEnum.DELETE);
-		InternalResponse response = getNFStatusDAC().deleteNFStatus(nfStatus);
+
+		NFStatus funcionario = new NFStatus();
+		funcionario.setId(1);
+		funcionario = insertNFStatus(PersistanceActionEnum.DELETE);
+		InternalResponse funcionarioResponse = getNFStatusDAC().deleteNFStatus(funcionario);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchNFStatusById() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<NFStatus> response = getNFStatusDAC().fetchNFStatusById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
 
@@ -142,14 +149,11 @@ public class NFStatusDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		InternalResultsResponse<NFStatus> response = getNFStatusDAC().fetchNFStatusByRequest(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-
 	}
-	
 
 	@Before
 	public void setup()
 	{
 		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertNFStatus.sql", false);
 	}
-
 }

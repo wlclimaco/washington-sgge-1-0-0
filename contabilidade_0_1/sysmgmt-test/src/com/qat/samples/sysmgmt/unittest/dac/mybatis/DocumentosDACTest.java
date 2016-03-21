@@ -54,8 +54,8 @@ import com.qat.samples.sysmgmt.util.Documento;
 import com.qat.samples.sysmgmt.util.DocumentoTypeEnum;
 import com.qat.samples.sysmgmt.util.Email;
 import com.qat.samples.sysmgmt.util.EmailTypeEnum;
-import com.qat.samples.sysmgmt.util.Financeiro;
-import com.qat.samples.sysmgmt.util.FinanceiroTypeEnum;
+import com.qat.samples.sysmgmt.util.Documento;
+import com.qat.samples.sysmgmt.util.DocumentoTypeEnum;
 import com.qat.samples.sysmgmt.util.Note;
 import com.qat.samples.sysmgmt.util.Telefone;
 import com.qat.samples.sysmgmt.util.TelefoneTypeEnum;
@@ -68,85 +68,85 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 @Transactional
 @ActiveProfiles("postgres")
-public class FinanceiroDACTest extends AbstractTransactionalJUnit4SpringContextTests
+public class DocumentoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
-	private static final Logger LOG = LoggerFactory.getLogger(FinanceiroDACTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DocumentoDACTest.class);
 	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
 
 	// below
 
-	public IFinanceiroDAC getFinanceiroDAC()
+	public IDocumentoDAC getDocumentoDAC()
 	{
 		return enderecoDAC;
 	}
 
 	@Resource
-	public void setFinanceiroDAC(IFinanceiroDAC enderecoDAC)
+	public void setDocumentoDAC(IDocumentoDAC enderecoDAC)
 	{
 		this.enderecoDAC = enderecoDAC;
 	}
 
 	@Test
-	public void testupdateFinanceiro() throws Exception
+	public void testupdateDocumento() throws Exception
 	{
 
-		Financeiro funcionario = new Financeiro();
-		funcionario = insertFinanceiro(PersistanceActionEnum.UPDATE);
+		Documento funcionario = new Documento();
+		funcionario = insertDocumento(PersistanceActionEnum.UPDATE);
 
-		InternalResultsResponse<Financeiro> funcionarioResponse = getFinanceiroDAC().updateFinanceiro(funcionario);
+		InternalResultsResponse<Documento> funcionarioResponse = getDocumentoDAC().updateDocumento(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
 	@Test
-	public void testinsertFinanceiro() throws Exception
+	public void testinsertDocumento() throws Exception
 	{
 
-		Financeiro funcionario = new Financeiro();
-		funcionario = insertFinanceiro(PersistanceActionEnum.INSERT);
+		Documento funcionario = new Documento();
+		funcionario = insertDocumento(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Financeiro> funcionarioResponse = getFinanceiroDAC().insertFinanceiro(funcionario);
+		InternalResultsResponse<Documento> funcionarioResponse = getDocumentoDAC().insertDocumento(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(22);
-		InternalResultsResponse<Financeiro> responseA = getFinanceiroDAC().fetchFinanceiroById(request);
+		InternalResultsResponse<Documento> responseA = getDocumentoDAC().fetchDocumentoById(request);
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
 
 	}
 
 	@Test
-	public void testdeleteFinanceiro() throws Exception
+	public void testdeleteDocumento() throws Exception
 	{
 
-		Financeiro funcionario = new Financeiro();
+		Documento funcionario = new Documento();
 		funcionario.setId(1);
-		funcionario = insertFinanceiro(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getFinanceiroDAC().deleteFinanceiro(funcionario);
+		funcionario = insertDocumento(PersistanceActionEnum.DELETE);
+		InternalResponse funcionarioResponse = getDocumentoDAC().deleteDocumento(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testfetchFinanceiroById() throws Exception
+	public void testfetchDocumentoById() throws Exception
 	{
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
-		InternalResultsResponse<Financeiro> response = getFinanceiroDAC().fetchFinanceiroById(request);
+		InternalResultsResponse<Documento> response = getDocumentoDAC().fetchDocumentoById(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testfetchFinanceiroByRequest() throws Exception
+	public void testfetchDocumentoByRequest() throws Exception
 	{
 		// check for valid and precount
-		FinanceiroInquiryRequest request = new FinanceiroInquiryRequest();
+		DocumentoInquiryRequest request = new DocumentoInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(4);
-		InternalResultsResponse<Financeiro> response = getFinanceiroDAC().fetchFinanceiroByRequest(request);
+		InternalResultsResponse<Documento> response = getDocumentoDAC().fetchDocumentoByRequest(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
@@ -154,6 +154,6 @@ public class FinanceiroDACTest extends AbstractTransactionalJUnit4SpringContextT
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertFinanceiro.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertDocumento.sql", false);
 	}
 }

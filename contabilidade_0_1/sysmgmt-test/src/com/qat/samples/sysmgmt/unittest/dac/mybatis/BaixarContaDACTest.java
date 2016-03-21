@@ -72,19 +72,19 @@ public class FinanceiroDACTest extends AbstractTransactionalJUnit4SpringContextT
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(FinanceiroDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private IEmpresaDAC financeiroDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public IFinanceiroDAC getFinanceiroDAC()
 	{
-		return enderecoDAC;
+		return financeiroDAC;
 	}
 
 	@Resource
-	public void setFinanceiroDAC(IFinanceiroDAC enderecoDAC)
+	public void setFinanceiroDAC(IFinanceiroDAC financeiroDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.financeiroDAC = financeiroDAC;
 	}
 
 	@Test
