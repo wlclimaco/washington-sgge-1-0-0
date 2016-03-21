@@ -54,8 +54,8 @@ import com.qat.samples.sysmgmt.util.Documento;
 import com.qat.samples.sysmgmt.util.DocumentoTypeEnum;
 import com.qat.samples.sysmgmt.util.Email;
 import com.qat.samples.sysmgmt.util.EmailTypeEnum;
-import com.qat.samples.sysmgmt.util.ConhecimentoTransporte;
-import com.qat.samples.sysmgmt.util.ConhecimentoTransporteTypeEnum;
+import com.qat.samples.sysmgmt.util.Banco;
+import com.qat.samples.sysmgmt.util.BancoTypeEnum;
 import com.qat.samples.sysmgmt.util.Note;
 import com.qat.samples.sysmgmt.util.Telefone;
 import com.qat.samples.sysmgmt.util.TelefoneTypeEnum;
@@ -68,85 +68,85 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 @Transactional
 @ActiveProfiles("postgres")
-public class ConhecimentoTransporteDACTest extends AbstractTransactionalJUnit4SpringContextTests
+public class BancoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
-	private static final Logger LOG = LoggerFactory.getLogger(ConhecimentoTransporteDACTest.class);
-	private IEmpresaDAC condPagDAC; // injected by Spring through setter @resource
+	private static final Logger LOG = LoggerFactory.getLogger(BancoDACTest.class);
+	private IEmpresaDAC bancoDAC; // injected by Spring through setter @resource
 
 	// below
 
-	public IConhecimentoTransporteDAC getConhecimentoTransporteDAC()
+	public IBancoDAC getBancoDAC()
 	{
-		return condPagDAC;
+		return bancoDAC;
 	}
 
 	@Resource
-	public void setConhecimentoTransporteDAC(IConhecimentoTransporteDAC condPagDAC)
+	public void setBancoDAC(IBancoDAC bancoDAC)
 	{
-		this.condPagDAC = condPagDAC;
+		this.bancoDAC = bancoDAC;
 	}
 
 	@Test
-	public void testupdateConhecimentoTransporte() throws Exception
+	public void testupdateBanco() throws Exception
 	{
 
-		ConhecimentoTransporte funcionario = new ConhecimentoTransporte();
-		funcionario = insertConhecimentoTransporte(PersistanceActionEnum.UPDATE);
+		Banco funcionario = new Banco();
+		funcionario = insertBanco(PersistanceActionEnum.UPDATE);
 
-		InternalResultsResponse<ConhecimentoTransporte> funcionarioResponse = getConhecimentoTransporteDAC().updateConhecimentoTransporte(funcionario);
+		InternalResultsResponse<Banco> funcionarioResponse = getBancoDAC().updateBanco(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
 	@Test
-	public void testinsertConhecimentoTransporte() throws Exception
+	public void testinsertBanco() throws Exception
 	{
 
-		ConhecimentoTransporte funcionario = new ConhecimentoTransporte();
-		funcionario = insertConhecimentoTransporte(PersistanceActionEnum.INSERT);
+		Banco funcionario = new Banco();
+		funcionario = insertBanco(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<ConhecimentoTransporte> funcionarioResponse = getConhecimentoTransporteDAC().insertConhecimentoTransporte(funcionario);
+		InternalResultsResponse<Banco> funcionarioResponse = getBancoDAC().insertBanco(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(22);
-		InternalResultsResponse<ConhecimentoTransporte> responseA = getConhecimentoTransporteDAC().fetchConhecimentoTransporteById(request);
+		InternalResultsResponse<Banco> responseA = getBancoDAC().fetchBancoById(request);
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
 
 	}
 
 	@Test
-	public void testdeleteConhecimentoTransporte() throws Exception
+	public void testdeleteBanco() throws Exception
 	{
 
-		ConhecimentoTransporte funcionario = new ConhecimentoTransporte();
+		Banco funcionario = new Banco();
 		funcionario.setId(1);
-		funcionario = insertConhecimentoTransporte(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getConhecimentoTransporteDAC().deleteConhecimentoTransporte(funcionario);
+		funcionario = insertBanco(PersistanceActionEnum.DELETE);
+		InternalResponse funcionarioResponse = getBancoDAC().deleteBanco(funcionario);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testfetchConhecimentoTransporteById() throws Exception
+	public void testfetchBancoById() throws Exception
 	{
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
-		InternalResultsResponse<ConhecimentoTransporte> response = getConhecimentoTransporteDAC().fetchConhecimentoTransporteById(request);
+		InternalResultsResponse<Banco> response = getBancoDAC().fetchBancoById(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testfetchConhecimentoTransporteByRequest() throws Exception
+	public void testfetchBancoByRequest() throws Exception
 	{
 		// check for valid and precount
-		ConhecimentoTransporteInquiryRequest request = new ConhecimentoTransporteInquiryRequest();
+		BancoInquiryRequest request = new BancoInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(4);
-		InternalResultsResponse<ConhecimentoTransporte> response = getConhecimentoTransporteDAC().fetchConhecimentoTransporteByRequest(request);
+		InternalResultsResponse<Banco> response = getBancoDAC().fetchBancoByRequest(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
@@ -154,6 +154,6 @@ public class ConhecimentoTransporteDACTest extends AbstractTransactionalJUnit4Sp
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertConhecimentoTransporte.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }
