@@ -3,9 +3,7 @@ package com.qat.samples.sysmgmt.unittest.dac.mybatis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -20,46 +18,12 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.Status;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.banco.Banco;
-import com.qat.samples.sysmgmt.banco.BancoPessoa;
-import com.qat.samples.sysmgmt.cfop.Cfop;
-import com.qat.samples.sysmgmt.cfop.CfopPessoa;
-import com.qat.samples.sysmgmt.cfop.CfopTypeEnum;
-import com.qat.samples.sysmgmt.cnae.Cnae;
-import com.qat.samples.sysmgmt.cnae.CnaeEmpresa;
-import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
-import com.qat.samples.sysmgmt.contabilidade.Plano;
-import com.qat.samples.sysmgmt.entidade.Deposito;
-import com.qat.samples.sysmgmt.entidade.Empresa;
-import com.qat.samples.sysmgmt.entidade.EntidadeTypeEnum;
-import com.qat.samples.sysmgmt.entidade.Filial;
-import com.qat.samples.sysmgmt.entidade.Usuario;
-import com.qat.samples.sysmgmt.entidade.dac.IEmpresaDAC;
-import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
-import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
-import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
-import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.Avisos;
+import com.qat.samples.sysmgmt.condominio.model.request.AvisoInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
-import com.qat.samples.sysmgmt.util.Cidade;
-import com.qat.samples.sysmgmt.util.Configuracao;
-import com.qat.samples.sysmgmt.util.Documento;
-import com.qat.samples.sysmgmt.util.DocumentoTypeEnum;
-import com.qat.samples.sysmgmt.util.Email;
-import com.qat.samples.sysmgmt.util.EmailTypeEnum;
-import com.qat.samples.sysmgmt.util.Banco;
-import com.qat.samples.sysmgmt.util.BancoTypeEnum;
-import com.qat.samples.sysmgmt.util.Note;
-import com.qat.samples.sysmgmt.util.Telefone;
-import com.qat.samples.sysmgmt.util.TelefoneTypeEnum;
-import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
+import com.qat.samples.sysmgmt.util.dac.IAvisosDAC;
 
 @ContextConfiguration(locations = {
 		"classpath:com/qat/samples/sysmgmt/unittest/conf/unittest-datasource-txn-context.xml",
@@ -68,87 +32,96 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 @Transactional
 @ActiveProfiles("postgres")
-public class BancoDACTest extends AbstractTransactionalJUnit4SpringContextTests
+public class AvisoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
-	private static final Logger LOG = LoggerFactory.getLogger(BancoDACTest.class);
-	private IEmpresaDAC bancoDAC; // injected by Spring through setter @resource
+	private static final Logger LOG = LoggerFactory.getLogger(AvisoDACTest.class);
+	private IAvisosDAC avisosDAC; // injected by Spring through setter @resource
 
 	// below
 
-	public IBancoDAC getBancoDAC()
+	public IAvisosDAC getAvisoDAC()
 	{
-		return bancoDAC;
+		return avisosDAC;
 	}
 
 	@Resource
-	public void setBancoDAC(IBancoDAC bancoDAC)
+	public void setAvisoDAC(IAvisosDAC avisosDAC)
 	{
-		this.bancoDAC = bancoDAC;
+		this.avisosDAC = avisosDAC;
 	}
 
 	@Test
-	public void testupdateBanco() throws Exception
+	public void testupdateAviso() throws Exception
 	{
 
-		Banco funcionario = new Banco();
-		funcionario = insertBanco(PersistanceActionEnum.UPDATE);
+		Avisos funcionario = new Avisos();
+		funcionario = insertAviso(PersistanceActionEnum.UPDATE);
 
-		InternalResultsResponse<Banco> funcionarioResponse = getBancoDAC().updateBanco(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-
-	}
-
-	@Test
-	public void testinsertBanco() throws Exception
-	{
-
-		Banco funcionario = new Banco();
-		funcionario = insertBanco(PersistanceActionEnum.INSERT);
-
-		InternalResultsResponse<Banco> funcionarioResponse = getBancoDAC().insertBanco(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Banco> responseA = getBancoDAC().fetchBancoById(request);
-		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		InternalResultsResponse<Avisos> response = new InternalResultsResponse<Avisos>();
+		Integer a = getAvisoDAC().updateAvisos(funcionario, response);
 
 	}
 
 	@Test
-	public void testdeleteBanco() throws Exception
+	public void testinsertAviso() throws Exception
 	{
 
-		Banco funcionario = new Banco();
+		Avisos funcionario = new Avisos();
+		funcionario = insertAviso(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Avisos> response = new InternalResultsResponse<Avisos>();
+		Integer a = getAvisoDAC().insertAvisos(funcionario, "insert", response);
+
+	}
+
+	@Test
+	public void testdeleteAviso() throws Exception
+	{
+
+		Avisos funcionario = new Avisos();
 		funcionario.setId(1);
-		funcionario = insertBanco(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getBancoDAC().deleteBanco(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertAviso(PersistanceActionEnum.DELETE);
+		InternalResultsResponse<Avisos> response = new InternalResultsResponse<Avisos>();
+		Integer a = getAvisoDAC().deleteAvisos(funcionario, response);
+
 	}
 
 	@Test
-	public void testfetchBancoById() throws Exception
+	public void testfetchAvisoById() throws Exception
 	{
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
-		InternalResultsResponse<Banco> response = getBancoDAC().fetchBancoById(request);
+		InternalResultsResponse<Avisos> response = getAvisoDAC().fetchAvisosById(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testfetchBancoByRequest() throws Exception
+	public void testfetchAvisoByRequest() throws Exception
 	{
 		// check for valid and precount
-		BancoInquiryRequest request = new BancoInquiryRequest();
+		AvisoInquiryRequest request = new AvisoInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(4);
-		InternalResultsResponse<Banco> response = getBancoDAC().fetchBancoByRequest(request);
+		InternalResultsResponse<Avisos> response = getAvisoDAC().fetchAvisoByRequest(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	public Avisos insertAviso(PersistanceActionEnum action)
+	{
+		Avisos exame = new Avisos();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataAviso((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
 	}
 
 	@Before

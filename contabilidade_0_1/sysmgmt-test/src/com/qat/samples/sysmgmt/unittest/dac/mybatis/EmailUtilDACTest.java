@@ -3,9 +3,7 @@ package com.qat.samples.sysmgmt.unittest.dac.mybatis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -20,46 +18,11 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.Status;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.banco.Banco;
-import com.qat.samples.sysmgmt.banco.BancoPessoa;
-import com.qat.samples.sysmgmt.cfop.Cfop;
-import com.qat.samples.sysmgmt.cfop.CfopPessoa;
-import com.qat.samples.sysmgmt.cfop.CfopTypeEnum;
-import com.qat.samples.sysmgmt.cnae.Cnae;
-import com.qat.samples.sysmgmt.cnae.CnaeEmpresa;
-import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
-import com.qat.samples.sysmgmt.contabilidade.Plano;
-import com.qat.samples.sysmgmt.entidade.Deposito;
-import com.qat.samples.sysmgmt.entidade.Empresa;
-import com.qat.samples.sysmgmt.entidade.EntidadeTypeEnum;
-import com.qat.samples.sysmgmt.entidade.Filial;
-import com.qat.samples.sysmgmt.entidade.Usuario;
-import com.qat.samples.sysmgmt.entidade.dac.IEmpresaDAC;
-import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
-import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
-import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
-import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.Avisos;
+import com.qat.samples.sysmgmt.condominio.model.request.AvisoInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
-import com.qat.samples.sysmgmt.util.Cidade;
-import com.qat.samples.sysmgmt.util.Configuracao;
-import com.qat.samples.sysmgmt.util.Documento;
-import com.qat.samples.sysmgmt.util.DocumentoTypeEnum;
-import com.qat.samples.sysmgmt.util.Email;
-import com.qat.samples.sysmgmt.util.EmailTypeEnum;
-import com.qat.samples.sysmgmt.util.Email;
-import com.qat.samples.sysmgmt.util.EmailTypeEnum;
-import com.qat.samples.sysmgmt.util.Note;
-import com.qat.samples.sysmgmt.util.Telefone;
-import com.qat.samples.sysmgmt.util.TelefoneTypeEnum;
-import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 
 @ContextConfiguration(locations = {
 		"classpath:com/qat/samples/sysmgmt/unittest/conf/unittest-datasource-txn-context.xml",
@@ -71,89 +34,96 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 public class EmailDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
-	private static final Logger LOG = LoggerFactory.getLogger(EmailDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private static final Logger LOG = LoggerFactory.getLogger(AvisoDACTest.class);
+	private IAvisosDAC avisosDAC; // injected by Spring through setter @resource
 
 	// below
 
-	public IEmailDAC getEmailDAC()
+	public IAvisoDAC getAvisoDAC()
 	{
-		return enderecoDAC;
+		return avisosDAC;
 	}
 
 	@Resource
-	public void setEmailDAC(IEmailDAC enderecoDAC)
+	public void setAvisoDAC(IAvisoDAC avisosDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.avisosDAC = avisosDAC;
 	}
 
 	@Test
-	public void testupdateEmail() throws Exception
+	public void testupdateAviso() throws Exception
 	{
 
-		Email funcionario = new Email();
-		funcionario = insertEmail(PersistanceActionEnum.UPDATE);
+		Aviso funcionario = new Aviso();
+		funcionario = insertAviso(PersistanceActionEnum.UPDATE);
 
-		InternalResultsResponse<Email> funcionarioResponse = getEmailDAC().updateEmail(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-
-	}
-
-	@Test
-	public void testinsertEmail() throws Exception
-	{
-
-		Email funcionario = new Email();
-		funcionario = insertEmail(PersistanceActionEnum.INSERT);
-
-		InternalResultsResponse<Email> funcionarioResponse = getEmailDAC().insertEmail(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Email> responseA = getEmailDAC().fetchEmailById(request);
-		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		Integer a = getAvisoDAC().updateAviso(funcionario);
 
 	}
 
 	@Test
-	public void testdeleteEmail() throws Exception
+	public void testinsertAviso() throws Exception
 	{
 
-		Email funcionario = new Email();
+		Aviso funcionario = new Aviso();
+		funcionario = insertAviso(PersistanceActionEnum.INSERT);
+
+		Integer a = getAvisoDAC().insertAviso(funcionario);
+
+	}
+
+	@Test
+	public void testdeleteAviso() throws Exception
+	{
+
+		Aviso funcionario = new Aviso();
 		funcionario.setId(1);
-		funcionario = insertEmail(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getEmailDAC().deleteEmail(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertAviso(PersistanceActionEnum.DELETE);
+		Integer a = getAvisoDAC().deleteAviso(funcionario);
+
 	}
 
 	@Test
-	public void testfetchEmailById() throws Exception
+	public void testfetchAvisoById() throws Exception
 	{
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
-		InternalResultsResponse<Email> response = getEmailDAC().fetchEmailById(request);
+		InternalResultsResponse<Aviso> response = getAvisoDAC().fetchAvisoById(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testfetchEmailByRequest() throws Exception
+	public void testfetchAvisoByRequest() throws Exception
 	{
 		// check for valid and precount
-		EmailInquiryRequest request = new EmailInquiryRequest();
+		AvisoInquiryRequest request = new AvisoInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(4);
-		InternalResultsResponse<Email> response = getEmailDAC().fetchEmailByRequest(request);
+		InternalResultsResponse<Aviso> response = getAvisoDAC().fetchAvisoByRequest(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	public Avisos insertAviso(PersistanceActionEnum action)
+	{
+		Avisos exame = new Avisos();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataAviso((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
 	}
 
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertEmail.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

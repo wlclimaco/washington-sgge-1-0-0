@@ -3,9 +3,7 @@ package com.qat.samples.sysmgmt.unittest.dac.mybatis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -20,46 +18,12 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.Status;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.banco.Banco;
-import com.qat.samples.sysmgmt.banco.BancoPessoa;
-import com.qat.samples.sysmgmt.cfop.Cfop;
-import com.qat.samples.sysmgmt.cfop.CfopPessoa;
-import com.qat.samples.sysmgmt.cfop.CfopTypeEnum;
-import com.qat.samples.sysmgmt.cnae.Cnae;
-import com.qat.samples.sysmgmt.cnae.CnaeEmpresa;
-import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
-import com.qat.samples.sysmgmt.contabilidade.Plano;
-import com.qat.samples.sysmgmt.entidade.Deposito;
-import com.qat.samples.sysmgmt.entidade.Empresa;
-import com.qat.samples.sysmgmt.entidade.EntidadeTypeEnum;
-import com.qat.samples.sysmgmt.entidade.Filial;
-import com.qat.samples.sysmgmt.entidade.Usuario;
-import com.qat.samples.sysmgmt.entidade.dac.IEmpresaDAC;
-import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
-import com.qat.samples.sysmgmt.estado.Estado;
 import com.qat.samples.sysmgmt.fiscal.Classificacao;
-import com.qat.samples.sysmgmt.fiscal.Regime;
 import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
-import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
-import com.qat.samples.sysmgmt.util.Cidade;
-import com.qat.samples.sysmgmt.util.Configuracao;
-import com.qat.samples.sysmgmt.util.Documento;
-import com.qat.samples.sysmgmt.util.DocumentoTypeEnum;
-import com.qat.samples.sysmgmt.util.Email;
-import com.qat.samples.sysmgmt.util.EmailTypeEnum;
-import com.qat.samples.sysmgmt.util.Classificacao;
-import com.qat.samples.sysmgmt.util.ClassificacaoTypeEnum;
-import com.qat.samples.sysmgmt.util.Note;
-import com.qat.samples.sysmgmt.util.Telefone;
-import com.qat.samples.sysmgmt.util.TelefoneTypeEnum;
-import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
+import com.qat.samples.sysmgmt.util.dac.IClassificacaoDAC;
 
 @ContextConfiguration(locations = {
 		"classpath:com/qat/samples/sysmgmt/unittest/conf/unittest-datasource-txn-context.xml",
@@ -72,19 +36,19 @@ public class ClassificacaoDACTest extends AbstractTransactionalJUnit4SpringConte
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ClassificacaoDACTest.class);
-	private IEmpresaDAC classificacaoDAC; // injected by Spring through setter @resource
+	private IClassificacaoDAC avisosDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public IClassificacaoDAC getClassificacaoDAC()
 	{
-		return classificacaoDAC;
+		return avisosDAC;
 	}
 
 	@Resource
-	public void setClassificacaoDAC(IClassificacaoDAC classificacaoDAC)
+	public void setClassificacaoDAC(IClassificacaoDAC avisosDAC)
 	{
-		this.classificacaoDAC = classificacaoDAC;
+		this.avisosDAC = avisosDAC;
 	}
 
 	@Test
@@ -94,8 +58,9 @@ public class ClassificacaoDACTest extends AbstractTransactionalJUnit4SpringConte
 		Classificacao funcionario = new Classificacao();
 		funcionario = insertClassificacao(PersistanceActionEnum.UPDATE);
 
-		InternalResultsResponse<Classificacao> funcionarioResponse = getClassificacaoDAC().updateClassificacao(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		InternalResultsResponse<Classificacao> response = new InternalResultsResponse<Classificacao>();
+
+		Integer a = getClassificacaoDAC().updateClassificacao(funcionario, response);
 
 	}
 
@@ -106,13 +71,9 @@ public class ClassificacaoDACTest extends AbstractTransactionalJUnit4SpringConte
 		Classificacao funcionario = new Classificacao();
 		funcionario = insertClassificacao(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Classificacao> funcionarioResponse = getClassificacaoDAC().insertClassificacao(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Classificacao> responseA = getClassificacaoDAC().fetchClassificacaoById(request);
-		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		InternalResultsResponse<Classificacao> response = new InternalResultsResponse<Classificacao>();
+
+		Integer a = getClassificacaoDAC().insertClassificacao(funcionario, "", response);
 
 	}
 
@@ -123,8 +84,10 @@ public class ClassificacaoDACTest extends AbstractTransactionalJUnit4SpringConte
 		Classificacao funcionario = new Classificacao();
 		funcionario.setId(1);
 		funcionario = insertClassificacao(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getClassificacaoDAC().deleteClassificacao(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		InternalResultsResponse<Classificacao> response = new InternalResultsResponse<Classificacao>();
+
+		Integer a = getClassificacaoDAC().deleteClassificacao(funcionario, response);
+
 	}
 
 	@Test
@@ -134,6 +97,17 @@ public class ClassificacaoDACTest extends AbstractTransactionalJUnit4SpringConte
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Classificacao> response = getClassificacaoDAC().fetchClassificacaoById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchClassificacaoById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Classificacao> response = getClassificacaoDAC().fetchClassificacaoById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +125,23 @@ public class ClassificacaoDACTest extends AbstractTransactionalJUnit4SpringConte
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public Classificacao insertClassificacao(PersistanceActionEnum action)
+	{
+		Classificacao exame = new Classificacao();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataClassificacao((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertClassificacao.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

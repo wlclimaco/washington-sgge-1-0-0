@@ -1,0 +1,2 @@
+INSERT INTO exame(nome, dataexame, medicoresponsavel, laboratorio, processid,create_user, create_date, modify_user, modify_date)
+    VALUES      ('NOME',123456789, 'RESPONSAVEL',     'LABORATORIO', 1,       'rod'     ,123456789   ,'ROD'       ,11111111);

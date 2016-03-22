@@ -3650,8 +3650,8 @@ CREATE TABLE exame
 	processId integer,
 	create_user character varying(50),
 	create_date bigint,
-	modify_user bigint,
-	modify_date character varying(50),
+	modify_user character varying(50),
+	modify_date bigint,
   CONSTRAINT exame_pkey PRIMARY KEY (id)
 )
 WITH (

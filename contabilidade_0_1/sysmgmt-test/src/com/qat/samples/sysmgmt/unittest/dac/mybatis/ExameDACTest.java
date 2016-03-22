@@ -3,9 +3,7 @@ package com.qat.samples.sysmgmt.unittest.dac.mybatis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -20,46 +18,12 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.Status;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.banco.Banco;
-import com.qat.samples.sysmgmt.banco.BancoPessoa;
-import com.qat.samples.sysmgmt.cfop.Cfop;
-import com.qat.samples.sysmgmt.cfop.CfopPessoa;
-import com.qat.samples.sysmgmt.cfop.CfopTypeEnum;
-import com.qat.samples.sysmgmt.cnae.Cnae;
-import com.qat.samples.sysmgmt.cnae.CnaeEmpresa;
-import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
-import com.qat.samples.sysmgmt.contabilidade.Plano;
-import com.qat.samples.sysmgmt.entidade.Deposito;
-import com.qat.samples.sysmgmt.entidade.Empresa;
-import com.qat.samples.sysmgmt.entidade.EntidadeTypeEnum;
-import com.qat.samples.sysmgmt.entidade.Filial;
-import com.qat.samples.sysmgmt.entidade.Usuario;
-import com.qat.samples.sysmgmt.entidade.dac.IEmpresaDAC;
-import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
-import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
-import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
-import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.Exame;
+import com.qat.samples.sysmgmt.clinica.model.request.ExameInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
-import com.qat.samples.sysmgmt.util.Cidade;
-import com.qat.samples.sysmgmt.util.Configuracao;
-import com.qat.samples.sysmgmt.util.Documento;
-import com.qat.samples.sysmgmt.util.DocumentoTypeEnum;
-import com.qat.samples.sysmgmt.util.Email;
-import com.qat.samples.sysmgmt.util.EmailTypeEnum;
-import com.qat.samples.sysmgmt.util.Exame;
-import com.qat.samples.sysmgmt.util.ExameTypeEnum;
-import com.qat.samples.sysmgmt.util.Note;
-import com.qat.samples.sysmgmt.util.Telefone;
-import com.qat.samples.sysmgmt.util.TelefoneTypeEnum;
-import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.dac.IExameDAC;
 
 @ContextConfiguration(locations = {
 		"classpath:com/qat/samples/sysmgmt/unittest/conf/unittest-datasource-txn-context.xml",
@@ -72,7 +36,7 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ExameDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private IExameDAC enderecoDAC; // injected by Spring through setter @resource
 
 	// below
 
@@ -94,8 +58,7 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Exame funcionario = new Exame();
 		funcionario = insertExame(PersistanceActionEnum.UPDATE);
 
-		InternalResultsResponse<Exame> funcionarioResponse = getExameDAC().updateExame(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		Integer a = getExameDAC().updateExame(funcionario);
 
 	}
 
@@ -106,13 +69,7 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Exame funcionario = new Exame();
 		funcionario = insertExame(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Exame> funcionarioResponse = getExameDAC().insertExame(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Exame> responseA = getExameDAC().fetchExameById(request);
-		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		Integer a = getExameDAC().insertExame(funcionario);
 
 	}
 
@@ -123,8 +80,8 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Exame funcionario = new Exame();
 		funcionario.setId(1);
 		funcionario = insertExame(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getExameDAC().deleteExame(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		Integer a = getExameDAC().deleteExame(funcionario);
+
 	}
 
 	@Test
@@ -149,6 +106,19 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		InternalResultsResponse<Exame> response = getExameDAC().fetchExameByRequest(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	public Exame insertExame(PersistanceActionEnum action)
+	{
+		Exame exame = new Exame();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setNome("Nome");
+		// exame.setDataExame((int)a.getTime());
+		exame.setMedicoResponsavel("Resposnsavel");
+		exame.setLaboratorio("Laboratorio");
+
+		return exame;
 	}
 
 	@Before
