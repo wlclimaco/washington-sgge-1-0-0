@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.advocacia.model.request;
+package com.qat.samples.sysmgmt.condominio.model.request;
 
 import com.qat.samples.sysmgmt.banco.model.criteria.BancoCriteria;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;

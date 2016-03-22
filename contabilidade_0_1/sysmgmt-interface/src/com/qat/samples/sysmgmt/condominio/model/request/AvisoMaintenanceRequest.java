@@ -1,13 +1,13 @@
-package com.qat.samples.sysmgmt.advocacia.model.request;
+package com.qat.samples.sysmgmt.condominio.model.request;
 
 import com.qat.framework.model.request.MaintenanceRequest;
-import com.qat.samples.sysmgmt.advocacia.model.Aviso;
+import com.qat.samples.sysmgmt.condominio.model.Avisos;
 
 public class AvisoMaintenanceRequest extends MaintenanceRequest
 {
 
 	/** Attributes */
-	private Aviso Aviso;
+	private Avisos Aviso;
 
 	/**
 	 * The Constructor.
@@ -20,7 +20,7 @@ public class AvisoMaintenanceRequest extends MaintenanceRequest
 	/**
 	 * @return the Aviso
 	 */
-	public Aviso getAviso()
+	public Avisos getAviso()
 	{
 		return Aviso;
 	}
@@ -28,7 +28,7 @@ public class AvisoMaintenanceRequest extends MaintenanceRequest
 	/**
 	 * @param Aviso the Aviso to set
 	 */
-	public void setAviso(Aviso Aviso)
+	public void setAviso(Avisos Aviso)
 	{
 		this.Aviso = Aviso;
 	}

@@ -8,6 +8,9 @@ import org.apache.cxf.annotations.WSDLDocumentation;
 
 import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
 import com.qat.samples.sysmgmt.cnae.model.response.CnaeResponse;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.response.CondominioResponse;
 import com.qat.samples.sysmgmt.entidade.model.request.CidadeMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoMaintenanceRequest;
@@ -63,6 +66,33 @@ public interface IEmpresaBAS
 	@WebResult(name = "fetchEmpresaByRequestReturn")
 	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
 	public EmpresaResponse fetchEmpresaByRequest(EmpresaInquiryRequest request);
+
+	// Condominio
+
+	@WebMethod(action = "insertCondominio")
+	@WebResult(name = "insertCondominioReturn")
+	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
+	public CondominioResponse insertCondominio(CondominioMaintenanceRequest request);
+
+	@WebMethod(action = "updateCondominio")
+	@WebResult(name = "updateCondominioReturn")
+	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
+	public CondominioResponse updateCondominio(CondominioMaintenanceRequest request);
+
+	@WebMethod(action = "deleteCondominio")
+	@WebResult(name = "deleteCondominioReturn")
+	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
+	public CondominioResponse deleteCondominio(CondominioMaintenanceRequest request);
+
+	@WebMethod(action = "fetchCondominioById")
+	@WebResult(name = "fetchCondominioByIdReturn")
+	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
+	public CondominioResponse fetchCondominioById(FetchByIdRequest request);
+
+	@WebMethod(action = "fetchCondominioByRequest")
+	@WebResult(name = "fetchCondominioByRequestReturn")
+	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
+	public CondominioResponse fetchCondominioByRequest(CondominioInquiryRequest request);
 
 	// filial
 

@@ -19,7 +19,7 @@ public class Exame extends ModelCosmeDamiao
 	/** The type of an account. */
 	private String nome;
 
-	private Integer dataExame;
+	private Long dataExame;
 
 	private String medicoResponsavel;
 
@@ -86,12 +86,12 @@ public class Exame extends ModelCosmeDamiao
 		this.imagemList = imagemList;
 	}
 
-	public Integer getDataExame()
+	public Long getDataExame()
 	{
 		return dataExame;
 	}
 
-	public void setDataExame(Integer dataExame)
+	public void setDataExame(Long dataExame)
 	{
 		this.dataExame = dataExame;
 	}

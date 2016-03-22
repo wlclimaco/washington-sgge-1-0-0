@@ -2,6 +2,9 @@ package com.qat.samples.sysmgmt.entidade.bai;
 
 import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
 import com.qat.samples.sysmgmt.cnae.model.response.CnaeResponse;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.response.CondominioResponse;
 import com.qat.samples.sysmgmt.entidade.model.request.CidadeMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoMaintenanceRequest;
@@ -40,6 +43,16 @@ public interface IEmpresaBAI
 	public EmpresaResponse fetchEmpresaById(FetchByIdRequest request);
 
 	public EmpresaResponse fetchEmpresaByRequest(EmpresaInquiryRequest request);
+
+	public CondominioResponse insertCondominio(CondominioMaintenanceRequest request);
+
+	public CondominioResponse updateCondominio(CondominioMaintenanceRequest request);
+
+	public CondominioResponse deleteCondominio(CondominioMaintenanceRequest request);
+
+	public CondominioResponse fetchCondominioById(FetchByIdRequest request);
+
+	public CondominioResponse fetchCondominioByRequest(CondominioInquiryRequest request);
 
 	// filial
 	public FilialResponse insertFilial(FilialMaintenanceRequest request);

@@ -1,10 +1,10 @@
-package com.qat.samples.sysmgmt.entidade;
+package com.qat.samples.sysmgmt.condominio.model;
 
 import java.util.List;
 
 import com.qat.samples.sysmgmt.conta.ContaCorrente;
-import com.qat.samples.sysmgmt.contabilidade.Plano;
-import com.qat.samples.sysmgmt.pessoa.Socio;
+import com.qat.samples.sysmgmt.entidade.Entidade;
+import com.qat.samples.sysmgmt.entidade.TarefaEnt;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -15,9 +15,9 @@ public class Condominio extends Entidade
 {
 
 	private List<ContaCorrente> contaCorrenteList;
-	
+
 	private List<TarefaEnt> tarefaList;
-	
+
 	private List<Sindico> sindicoList;
 
 	public Condominio()
@@ -30,120 +30,24 @@ public class Condominio extends Entidade
 		setId(id);
 	}
 
-	/**
-	 * @return the planoList
-	 */
-	public List<Plano> getPlanoList()
+	public List<TarefaEnt> getTarefaList()
 	{
-		return planoList;
+		return tarefaList;
 	}
 
-	/**
-	 * @param planoList the planoList to set
-	 */
-	public void setPlanoList(List<Plano> planoList)
+	public void setTarefaList(List<TarefaEnt> tarefaList)
 	{
-		this.planoList = planoList;
+		this.tarefaList = tarefaList;
 	}
 
-	/**
-	 * @return the qntFilial
-	 */
-	public Integer getQntFilial()
+	public List<Sindico> getSindicoList()
 	{
-		return qntFilial;
+		return sindicoList;
 	}
 
-	/**
-	 * @param qntFilial the qntFilial to set
-	 */
-	public void setQntFilial(Integer qntFilial)
+	public void setSindicoList(List<Sindico> sindicoList)
 	{
-		this.qntFilial = qntFilial;
-	}
-
-	/**
-	 * @return the qntDeposito
-	 */
-	public Integer getQntDeposito()
-	{
-		return qntDeposito;
-	}
-
-	/**
-	 * @param qntDeposito the qntDeposito to set
-	 */
-	public void setQntDeposito(Integer qntDeposito)
-	{
-		this.qntDeposito = qntDeposito;
-	}
-
-	/**
-	 * @return the socios
-	 */
-	public List<Socio> getSocios()
-	{
-		return socios;
-	}
-
-	/**
-	 * @param socios the socios to set
-	 */
-	public void setSocios(List<Socio> socios)
-	{
-		this.socios = socios;
-	}
-
-	/**
-	 * @return the filialList
-	 */
-	public List<Filial> getFilialList()
-	{
-		return filialList;
-	}
-
-	/**
-	 * @param filialList the filialList to set
-	 */
-	public void setFilialList(List<Filial> filialList)
-	{
-		this.filialList = filialList;
-	}
-
-	/**
-	 * @return the depositoList
-	 */
-	public List<Deposito> getDepositoList()
-	{
-		return depositoList;
-	}
-
-	/**
-	 * @param depositoList the depositoList to set
-	 */
-	public void setDepositoList(List<Deposito> depositoList)
-	{
-		this.depositoList = depositoList;
-	}
-
-	public Integer getQntSocios()
-	{
-		return qntSocios;
-	}
-
-	public void setQntSocios(Integer qntSocios)
-	{
-		this.qntSocios = qntSocios;
-	}
-
-	public List<Usuario> getUsuarioList()
-	{
-		return usuarioList;
-	}
-
-	public void setUsuarioList(List<Usuario> usuarioList)
-	{
-		this.usuarioList = usuarioList;
+		this.sindicoList = sindicoList;
 	}
 
 	public List<ContaCorrente> getContaCorrenteList()
@@ -159,11 +63,8 @@ public class Condominio extends Entidade
 	@Override
 	public String toString()
 	{
-		return "Condominio [getPlanoList()=" + getPlanoList() + ", getQntFilial()=" + getQntFilial()
-				+ ", getQntDeposito()=" + getQntDeposito() + ", getSocios()=" + getSocios() + ", getFilialList()="
-				+ getFilialList() + ", getDepositoList()=" + getDepositoList() + ", getQntSocios()=" + getQntSocios()
-				+ ", getUsuarioList()=" + getUsuarioList() + ", getContaCorrenteList()=" + getContaCorrenteList()
-				+ ", toString()=" + super.toString() + "]";
+		return "Condominio [getTarefaList()=" + getTarefaList() + ", getSindicoList()=" + getSindicoList()
+				+ ", getContaCorrenteList()=" + getContaCorrenteList() + ", toString()=" + super.toString() + "]";
 	}
 
 }

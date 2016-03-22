@@ -1,16 +1,16 @@
-package com.qat.samples.sysmgmt.advocacia.model.response;
+package com.qat.samples.sysmgmt.condominio.model.response;
 
 import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.advocacia.model.Advogado;
+import com.qat.samples.sysmgmt.condominio.model.Avisos;
 
 public class AvisoResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<Aviso> AvisoList;
+	private List<Avisos> AvisoList;
 
 	/**
 	 * The Constructor.
@@ -23,7 +23,7 @@ public class AvisoResponse extends InquiryResponse
 	/**
 	 * @return the AvisoList
 	 */
-	public List<Aviso> getAvisoList()
+	public List<Avisos> getAvisoList()
 	{
 		return AvisoList;
 	}
@@ -31,7 +31,7 @@ public class AvisoResponse extends InquiryResponse
 	/**
 	 * @param AvisoList the AvisoList to set
 	 */
-	public void setAvisoList(List<Aviso> AvisoList)
+	public void setAvisoList(List<Avisos> AvisoList)
 	{
 		this.AvisoList = AvisoList;
 	}
@@ -44,7 +44,7 @@ public class AvisoResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setAvisoList((List<Aviso>)coll);
+		setAvisoList((List<Avisos>)coll);
 	}
 
 	/*
@@ -54,7 +54,7 @@ public class AvisoResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "LocationResponse [getLocationList()=" + getAvisoList() + ", getResultsSetInfo()="
+		return "AvisoResponse [getAvisoList()=" + getAvisoList() + ", getResultsSetInfo()="
 				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
 				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
 				+ isOperationSuccess() + "]";

@@ -8,6 +8,12 @@ import com.qat.samples.sysmgmt.agencia.model.response.AgenciaResponse;
 import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
 import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest;
 import com.qat.samples.sysmgmt.beneficios.model.response.BeneficiosResponse;
+import com.qat.samples.sysmgmt.condominio.model.request.InquilinoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.InquilinoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.SindicoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.SindicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.response.InquilinoResponse;
+import com.qat.samples.sysmgmt.condominio.model.response.SindicoResponse;
 import com.qat.samples.sysmgmt.condpag.model.request.FormaPgInquiryRequest;
 import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
 import com.qat.samples.sysmgmt.contato.model.response.ContatoResponse;
@@ -89,6 +95,90 @@ public interface IPessoaBAI
 	 * @return the cliente response
 	 */
 	public ClienteResponse fetchClienteByRequest(ClienteInquiryRequest request);
+
+	// ======================== Sindico==================
+
+	/**
+	 * Insert cliente.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	public SindicoResponse insertSindico(SindicoMaintenanceRequest request);
+
+	/**
+	 * Update cliente.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	public SindicoResponse updateSindico(SindicoMaintenanceRequest request);
+
+	/**
+	 * Delete cliente.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	public SindicoResponse deleteSindico(SindicoMaintenanceRequest request);
+
+	/**
+	 * Fetch cliente by id.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	public SindicoResponse fetchSindicoById(FetchByIdRequest request);
+
+	/**
+	 * Fetch cliente by request.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	public SindicoResponse fetchSindicoByRequest(SindicoInquiryRequest request);
+
+	// ======================== Inquilino================
+
+	/**
+	 * Insert cliente.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	public InquilinoResponse insertInquilino(InquilinoMaintenanceRequest request);
+
+	/**
+	 * Update cliente.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	public InquilinoResponse updateInquilino(InquilinoMaintenanceRequest request);
+
+	/**
+	 * Delete cliente.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	public InquilinoResponse deleteInquilino(InquilinoMaintenanceRequest request);
+
+	/**
+	 * Fetch cliente by id.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	public InquilinoResponse fetchInquilinoById(FetchByIdRequest request);
+
+	/**
+	 * Fetch cliente by request.
+	 * 
+	 * @param request the request
+	 * @return the cliente response
+	 */
+	public InquilinoResponse fetchInquilinoByRequest(InquilinoInquiryRequest request);
 
 	// ===========
 

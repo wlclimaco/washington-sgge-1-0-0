@@ -1,7 +1,7 @@
-package com.qat.samples.sysmgmt.advocacia.model.request;
+package com.qat.samples.sysmgmt.condominio.model.request;
 
 import com.qat.framework.model.request.MaintenanceRequest;
-import com.qat.samples.sysmgmt.advocacia.model.Inquilino;
+import com.qat.samples.sysmgmt.condominio.model.Inquilino;
 
 public class InquilinoMaintenanceRequest extends MaintenanceRequest
 {
@@ -40,7 +40,8 @@ public class InquilinoMaintenanceRequest extends MaintenanceRequest
 	@Override
 	public String toString()
 	{
-		return "InquilinoMaintenanceRequest [getInquilino()=" + getInquilino() + ", getUserContext()=" + getUserContext()
+		return "InquilinoMaintenanceRequest [getInquilino()=" + getInquilino() + ", getUserContext()="
+				+ getUserContext()
 				+ "]";
 	}
 

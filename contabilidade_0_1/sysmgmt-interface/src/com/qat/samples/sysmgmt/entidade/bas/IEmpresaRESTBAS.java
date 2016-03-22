@@ -7,6 +7,9 @@ import javax.ws.rs.Produces;
 
 import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
 import com.qat.samples.sysmgmt.cnae.model.response.CnaeResponse;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.response.CondominioResponse;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
@@ -56,6 +59,26 @@ public interface IEmpresaRESTBAS
 	@POST
 	@Path("/fetchEmpresaByRequest/")
 	public EmpresaResponse fetchEmpresaByRequest(EmpresaInquiryRequest request);
+
+	@POST
+	@Path("/insertCondominio/")
+	public CondominioResponse insertCondominio(CondominioMaintenanceRequest request);
+
+	@POST
+	@Path("/updateCondominio/")
+	public CondominioResponse updateCondominio(CondominioMaintenanceRequest request);
+
+	@POST
+	@Path("/deleteCondominio/")
+	public CondominioResponse deleteCondominio(CondominioMaintenanceRequest request);
+
+	@POST
+	@Path("/fetchCondominioById/")
+	public CondominioResponse fetchCondominioById(FetchByIdRequest request);
+
+	@POST
+	@Path("/fetchCondominioByRequest/")
+	public CondominioResponse fetchCondominioByRequest(CondominioInquiryRequest request);
 
 	// filial
 	@POST

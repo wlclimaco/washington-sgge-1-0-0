@@ -1,4 +1,6 @@
-package com.qat.samples.sysmgmt.advocacia.model;
+package com.qat.samples.sysmgmt.condominio.model;
+
+import java.util.List;
 
 import com.qat.samples.sysmgmt.pessoa.Pessoa;
 
@@ -10,17 +12,28 @@ import com.qat.samples.sysmgmt.pessoa.Pessoa;
 public class Inquilino extends Pessoa
 {
 
-	List<InquilinoRes>  inquilinoResList;
+	private List<InquilinoRes> inquilinoResList;
+
 	public Inquilino()
 	{
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	public List<InquilinoRes> getInquilinoResList()
+	{
+		return inquilinoResList;
+	}
+
+	public void setInquilinoResList(List<InquilinoRes> inquilinoResList)
+	{
+		this.inquilinoResList = inquilinoResList;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "Inquilino [toString()=" + super.toString() + "]";
+		return "Inquilino [getInquilinoResList()=" + getInquilinoResList() + ", toString()=" + super.toString() + "]";
 	}
 
 }

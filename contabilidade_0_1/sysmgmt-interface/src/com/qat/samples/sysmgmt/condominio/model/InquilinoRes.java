@@ -1,8 +1,5 @@
-package com.qat.samples.sysmgmt.advocacia.model;
+package com.qat.samples.sysmgmt.condominio.model;
 
-import java.util.List;
-
-import com.qat.samples.sysmgmt.pessoa.Cliente;
 import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
 
 /**
@@ -15,7 +12,7 @@ public class InquilinoRes extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-		private String bloco;
+	private String bloco;
 	private String apartamento;
 
 	public InquilinoRes()
@@ -34,73 +31,31 @@ public class InquilinoRes extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	public Integer getDataProcess()
+	public String getBloco()
 	{
-		return dataProcess;
+		return bloco;
 	}
 
-	public void setDataProcess(Integer dataProcess)
+	public void setBloco(String bloco)
 	{
-		this.dataProcess = dataProcess;
+		this.bloco = bloco;
 	}
 
-	public Double getValor()
+	public String getApartamento()
 	{
-		return valor;
+		return apartamento;
 	}
 
-	public void setValor(Double valor)
+	public void setApartamento(String apartamento)
 	{
-		this.valor = valor;
-	}
-
-	public List<Advogado> getAdvogadoLIst()
-	{
-		return advogadoLIst;
-	}
-
-	public void setAdvogadoLIst(List<Advogado> advogadoLIst)
-	{
-		this.advogadoLIst = advogadoLIst;
-	}
-
-	public List<Cliente> getClienteList()
-	{
-		return clienteList;
-	}
-
-	public void setClienteList(List<Cliente> clienteList)
-	{
-		this.clienteList = clienteList;
-	}
-
-	public List<Audiencia> getAudienciaList()
-	{
-		return audienciaList;
-	}
-
-	public void setAudienciaList(List<Audiencia> audienciaList)
-	{
-		this.audienciaList = audienciaList;
-	}
-
-	public List<InquilinoResStatus> getInquilinoResStatusList()
-	{
-		return processoStatusList;
-	}
-
-	public void setInquilinoResStatusList(List<InquilinoResStatus> processoStatusList)
-	{
-		this.processoStatusList = processoStatusList;
+		this.apartamento = apartamento;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "InquilinoRes [getId()=" + getId() + ", getDataProcess()=" + getDataProcess() + ", getValor()=" + getValor()
-				+ ", getAdvogadoLIst()=" + getAdvogadoLIst() + ", getClienteList()=" + getClienteList()
-				+ ", getAudienciaList()=" + getAudienciaList() + ", getInquilinoResStatusList()=" + getInquilinoResStatusList()
-				+ ", toString()=" + super.toString() + "]";
+		return "InquilinoRes [getId()=" + getId() + ", getBloco()=" + getBloco() + ", getApartamento()="
+				+ getApartamento() + ", toString()=" + super.toString() + "]";
 	}
 
 }

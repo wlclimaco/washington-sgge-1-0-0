@@ -1,16 +1,16 @@
-package com.qat.samples.sysmgmt.advocacia.model;
+package com.qat.samples.sysmgmt.condominio.model;
 
 import java.util.List;
 
-import com.qat.samples.sysmgmt.pessoa.Cliente;
 import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
+import com.qat.samples.sysmgmt.util.Note;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
  */
 @SuppressWarnings("serial")
-public class Processo extends ModelCosmeDamiao
+public class Avisos extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
@@ -20,7 +20,7 @@ public class Processo extends ModelCosmeDamiao
 
 	private List<Note> noteList;
 
-	public Processo()
+	public Avisos()
 	{
 		super();
 
@@ -36,72 +36,30 @@ public class Processo extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	public Integer getDataProcess()
+	public Long getDataAviso()
 	{
-		return dataProcess;
+		return dataAviso;
 	}
 
-	public void setDataProcess(Integer dataProcess)
+	public void setDataAviso(Long dataAviso)
 	{
-		this.dataProcess = dataProcess;
+		this.dataAviso = dataAviso;
 	}
 
-	public Double getValor()
+	public List<Note> getNoteList()
 	{
-		return valor;
+		return noteList;
 	}
 
-	public void setValor(Double valor)
+	public void setNoteList(List<Note> noteList)
 	{
-		this.valor = valor;
-	}
-
-	public List<Advogado> getAdvogadoLIst()
-	{
-		return advogadoLIst;
-	}
-
-	public void setAdvogadoLIst(List<Advogado> advogadoLIst)
-	{
-		this.advogadoLIst = advogadoLIst;
-	}
-
-	public List<Cliente> getClienteList()
-	{
-		return clienteList;
-	}
-
-	public void setClienteList(List<Cliente> clienteList)
-	{
-		this.clienteList = clienteList;
-	}
-
-	public List<Audiencia> getAudienciaList()
-	{
-		return audienciaList;
-	}
-
-	public void setAudienciaList(List<Audiencia> audienciaList)
-	{
-		this.audienciaList = audienciaList;
-	}
-
-	public List<ProcessoStatus> getProcessoStatusList()
-	{
-		return processoStatusList;
-	}
-
-	public void setProcessoStatusList(List<ProcessoStatus> processoStatusList)
-	{
-		this.processoStatusList = processoStatusList;
+		this.noteList = noteList;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "Processo [getId()=" + getId() + ", getDataProcess()=" + getDataProcess() + ", getValor()=" + getValor()
-				+ ", getAdvogadoLIst()=" + getAdvogadoLIst() + ", getClienteList()=" + getClienteList()
-				+ ", getAudienciaList()=" + getAudienciaList() + ", getProcessoStatusList()=" + getProcessoStatusList()
+		return "Avisos [getId()=" + getId() + ", getDataAviso()=" + getDataAviso() + ", getNoteList()=" + getNoteList()
 				+ ", toString()=" + super.toString() + "]";
 	}
 

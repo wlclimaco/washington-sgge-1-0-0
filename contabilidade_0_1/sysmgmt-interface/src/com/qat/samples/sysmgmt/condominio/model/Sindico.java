@@ -1,7 +1,8 @@
-package com.qat.samples.sysmgmt.advocacia.model;
+package com.qat.samples.sysmgmt.condominio.model;
 
-import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
-import com.qat.samples.sysmgmt.util.Note;
+import java.util.List;
+
+import com.qat.samples.sysmgmt.pessoa.Pessoa;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -10,59 +11,42 @@ import com.qat.samples.sysmgmt.util.Note;
 @SuppressWarnings("serial")
 public class Sindico extends Pessoa
 {
+	private Integer id;
 	/** The SendSolv id for the account. */
-	private List<Mandato> mandatoList;
+	private List<Mandado> mandatoList;
 
 	public Sindico()
 	{
 
 	}
 
+	@Override
 	public Integer getId()
 	{
 		return id;
 	}
 
+	@Override
 	public void setId(Integer id)
 	{
 		this.id = id;
 	}
 
-	public Integer getDataProcesso()
+	public List<Mandado> getMandatoList()
 	{
-		return dataProcesso;
+		return mandatoList;
 	}
 
-	public void setDataProcesso(Integer dataProcesso)
+	public void setMandatoList(List<Mandado> mandatoList)
 	{
-		this.dataProcesso = dataProcesso;
-	}
-
-	public Note getNote()
-	{
-		return note;
-	}
-
-	public void setNote(Note note)
-	{
-		this.note = note;
-	}
-
-	public ProcessoTypeEnum getStatusProcess()
-	{
-		return statusProcess;
-	}
-
-	public void setStatusProcess(ProcessoTypeEnum statusProcess)
-	{
-		this.statusProcess = statusProcess;
+		this.mandatoList = mandatoList;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "Sindico [getId()=" + getId() + ", getDataProcesso()=" + getDataProcesso() + ", getNote()="
-				+ getNote() + ", getStatusProcess()=" + getStatusProcess() + ", toString()=" + super.toString() + "]";
+		return "Sindico [getId()=" + getId() + ", getMandatoList()=" + getMandatoList() + ", toString()="
+				+ super.toString() + "]";
 	}
 
 }

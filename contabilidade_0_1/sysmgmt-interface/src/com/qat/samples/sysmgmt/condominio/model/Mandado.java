@@ -1,9 +1,9 @@
-package com.qat.samples.sysmgmt.advocacia.model;
+package com.qat.samples.sysmgmt.condominio.model;
 
 import java.util.List;
 
+import com.qat.samples.sysmgmt.dp.Salario;
 import com.qat.samples.sysmgmt.util.ModelCosmeDamiao;
-import com.qat.samples.sysmgmt.util.Note;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -17,10 +17,10 @@ public class Mandado extends ModelCosmeDamiao
 
 	/** The type of an account. */
 	private Long dataInicio;
-	
+
 	private Long dataFim;
 
-	private List<Salario>
+	private List<Salario> salarioList;
 
 	public Mandado()
 	{
@@ -38,41 +38,41 @@ public class Mandado extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	public Integer getDataMandado()
+	public Long getDataInicio()
 	{
-		return dataMandado;
+		return dataInicio;
 	}
 
-	public void setDataMandado(Integer dataMandado)
+	public void setDataInicio(Long dataInicio)
 	{
-		this.dataMandado = dataMandado;
+		this.dataInicio = dataInicio;
 	}
 
-	public String getDescricao()
+	public Long getDataFim()
 	{
-		return descricao;
+		return dataFim;
 	}
 
-	public void setDescricao(String descricao)
+	public void setDataFim(Long dataFim)
 	{
-		this.descricao = descricao;
+		this.dataFim = dataFim;
 	}
 
-	public List<Note> getNoteLIst()
+	public List<Salario> getSalarioList()
 	{
-		return noteLIst;
+		return salarioList;
 	}
 
-	public void setNoteLIst(List<Note> noteLIst)
+	public void setSalarioList(List<Salario> salarioList)
 	{
-		this.noteLIst = noteLIst;
+		this.salarioList = salarioList;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "Mandado [getId()=" + getId() + ", getDataMandado()=" + getDataMandado() + ", getDescricao()="
-				+ getDescricao() + ", getNoteLIst()=" + getNoteLIst() + ", toString()=" + super.toString() + "]";
+		return "Mandado [getId()=" + getId() + ", getDataInicio()=" + getDataInicio() + ", getDataFim()="
+				+ getDataFim() + ", getSalarioList()=" + getSalarioList() + ", toString()=" + super.toString() + "]";
 	}
 
 }

@@ -1,10 +1,10 @@
-package com.qat.samples.sysmgmt.advocacia.model.response;
+package com.qat.samples.sysmgmt.condominio.model.response;
 
 import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.advocacia.model.Processo;
+import com.qat.samples.sysmgmt.condominio.model.Sindico;
 
 public class SindicoResponse extends InquiryResponse
 {

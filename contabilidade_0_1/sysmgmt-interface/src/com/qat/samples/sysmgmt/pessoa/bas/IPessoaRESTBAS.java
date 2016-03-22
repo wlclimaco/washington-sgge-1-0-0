@@ -13,6 +13,12 @@ import com.qat.samples.sysmgmt.agencia.model.response.AgenciaResponse;
 import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
 import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest;
 import com.qat.samples.sysmgmt.beneficios.model.response.BeneficiosResponse;
+import com.qat.samples.sysmgmt.condominio.model.request.InquilinoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.InquilinoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.SindicoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.SindicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.response.InquilinoResponse;
+import com.qat.samples.sysmgmt.condominio.model.response.SindicoResponse;
 import com.qat.samples.sysmgmt.condpag.model.request.FormaPgInquiryRequest;
 import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
 import com.qat.samples.sysmgmt.contato.model.response.ContatoResponse;
@@ -78,6 +84,50 @@ public interface IPessoaRESTBAS
 	public ClienteResponse fetchClienteByRequest(ClienteInquiryRequest request);
 
 	// ===========
+
+	// ========================Sindico
+
+	@POST
+	@Path("/insertSindico/")
+	public SindicoResponse insertSindico(SindicoMaintenanceRequest request);
+
+	@POST
+	@Path("/updateSindico/")
+	public SindicoResponse updateSindico(SindicoMaintenanceRequest request);
+
+	@POST
+	@Path("/deleteSindico/")
+	public SindicoResponse deleteSindico(SindicoMaintenanceRequest request);
+
+	@POST
+	@Path("/fetchSindicoById/")
+	public SindicoResponse fetchSindicoById(FetchByIdRequest request);
+
+	@POST
+	@Path("/fetchSindicoByRequest/")
+	public SindicoResponse fetchSindicoByRequest(SindicoInquiryRequest request);
+
+	// ==========================Inquilino
+
+	@POST
+	@Path("/insertInquilino/")
+	public InquilinoResponse insertInquilino(InquilinoMaintenanceRequest request);
+
+	@POST
+	@Path("/updateInquilino/")
+	public InquilinoResponse updateInquilino(InquilinoMaintenanceRequest request);
+
+	@POST
+	@Path("/deleteInquilino/")
+	public InquilinoResponse deleteInquilino(InquilinoMaintenanceRequest request);
+
+	@POST
+	@Path("/fetchInquilinoById/")
+	public InquilinoResponse fetchInquilinoById(FetchByIdRequest request);
+
+	@POST
+	@Path("/fetchInquilinoByRequest/")
+	public InquilinoResponse fetchInquilinoByRequest(InquilinoInquiryRequest request);
 
 	@POST
 	@Path("/insertAdvogado/")

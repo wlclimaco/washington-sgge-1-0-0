@@ -14,6 +14,12 @@ import com.qat.samples.sysmgmt.agencia.model.response.AgenciaResponse;
 import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
 import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest;
 import com.qat.samples.sysmgmt.beneficios.model.response.BeneficiosResponse;
+import com.qat.samples.sysmgmt.condominio.model.request.InquilinoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.InquilinoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.SindicoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.SindicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.response.InquilinoResponse;
+import com.qat.samples.sysmgmt.condominio.model.response.SindicoResponse;
 import com.qat.samples.sysmgmt.condpag.model.request.FormaPgInquiryRequest;
 import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
 import com.qat.samples.sysmgmt.contato.model.response.ContatoResponse;
@@ -81,6 +87,62 @@ public interface IPessoaBAS
 	@WebResult(name = "fetchClienteByRequestReturn")
 	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
 	public ClienteResponse fetchClienteByRequest(ClienteInquiryRequest request);
+
+	// =========================
+
+	// ===================Inquilimo
+
+	@WebMethod(action = "insertInquilino")
+	@WebResult(name = "insertInquilinoReturn")
+	@WSDLDocumentation(value = "Insert a Usuario record and optionally returns a list of Usuarios.")
+	public InquilinoResponse insertInquilino(InquilinoMaintenanceRequest request);
+
+	@WebMethod(action = "updateInquilino")
+	@WebResult(name = "updateInquilinoReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public InquilinoResponse updateInquilino(InquilinoMaintenanceRequest request);
+
+	@WebMethod(action = "deleteInquilino")
+	@WebResult(name = "deleteInquilinoReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public InquilinoResponse deleteInquilino(InquilinoMaintenanceRequest request);
+
+	@WebMethod(action = "fetchInquilinoById")
+	@WebResult(name = "fetchInquilinoByIdReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public InquilinoResponse fetchInquilinoById(FetchByIdRequest request);
+
+	@WebMethod(action = "fetchInquilinoByRequest")
+	@WebResult(name = "fetchInquilinoByRequestReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public InquilinoResponse fetchInquilinoByRequest(InquilinoInquiryRequest request);
+
+	// =========================
+	// ==========================Sindico
+	@WebMethod(action = "insertSindico")
+	@WebResult(name = "insertSindicoReturn")
+	@WSDLDocumentation(value = "Insert a Usuario record and optionally returns a list of Usuarios.")
+	public SindicoResponse insertSindico(SindicoMaintenanceRequest request);
+
+	@WebMethod(action = "updateSindico")
+	@WebResult(name = "updateSindicoReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public SindicoResponse updateSindico(SindicoMaintenanceRequest request);
+
+	@WebMethod(action = "deleteSindico")
+	@WebResult(name = "deleteSindicoReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public SindicoResponse deleteSindico(SindicoMaintenanceRequest request);
+
+	@WebMethod(action = "fetchSindicoById")
+	@WebResult(name = "fetchSindicoByIdReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public SindicoResponse fetchSindicoById(FetchByIdRequest request);
+
+	@WebMethod(action = "fetchSindicoByRequest")
+	@WebResult(name = "fetchSindicoByRequestReturn")
+	@WSDLDocumentation(value = "Insert a usuarios record and optionally returns a list of usuarios.")
+	public SindicoResponse fetchSindicoByRequest(SindicoInquiryRequest request);
 
 	// =========================
 

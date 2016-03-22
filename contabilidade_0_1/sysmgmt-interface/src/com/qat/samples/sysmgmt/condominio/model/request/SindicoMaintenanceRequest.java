@@ -1,9 +1,9 @@
-package com.qat.samples.sysmgmt.advocacia.model.request;
+package com.qat.samples.sysmgmt.condominio.model.request;
 
 import com.qat.framework.model.request.MaintenanceRequest;
-import com.qat.samples.sysmgmt.advocacia.model.Advogado;
+import com.qat.samples.sysmgmt.condominio.model.Sindico;
 
-public class AdvogadoMaintenanceRequest extends MaintenanceRequest
+public class SindicoMaintenanceRequest extends MaintenanceRequest
 {
 
 	/** Attributes */
