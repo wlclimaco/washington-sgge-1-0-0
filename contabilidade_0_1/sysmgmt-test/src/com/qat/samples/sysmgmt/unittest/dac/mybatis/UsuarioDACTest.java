@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Usuario;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.UsuarioInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -72,19 +72,19 @@ public class UsuarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(UsuarioDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private IUsuarioDAC usuarioDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public IUsuarioDAC getUsuarioDAC()
 	{
-		return enderecoDAC;
+		return usuarioDAC;
 	}
 
 	@Resource
-	public void setUsuarioDAC(IUsuarioDAC enderecoDAC)
+	public void setUsuarioDAC(IUsuarioDAC usuarioDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.usuarioDAC = usuarioDAC;
 	}
 
 	@Test
@@ -92,9 +92,17 @@ public class UsuarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 	{
 
 		Usuario funcionario = new Usuario();
-		funcionario = insertUsuario(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Usuario> funcionarioResponse = getUsuarioDAC().updateUsuario(funcionario);
+		funcionario = insertUsuario(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Usuario> response = new InternalResultsResponse<Usuario>();
+		Integer a = getEntidadeDAC().insertUsuario(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Usuario>();
+		
+		a = getEntidadeDAC().updateUsuario(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +114,24 @@ public class UsuarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		Usuario funcionario = new Usuario();
 		funcionario = insertUsuario(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Usuario> funcionarioResponse = getUsuarioDAC().insertUsuario(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Usuario> responseA = getUsuarioDAC().fetchUsuarioById(request);
+		InternalResultsResponse<Usuario> response = new InternalResultsResponse<Usuario>();
+
+		Integer a = getUsuarioDAC().insertUsuario(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Usuario funcionario = new Usuario();
+		funcionario = insertUsuario(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Usuario> response = new InternalResultsResponse<Usuario>();
+
+		Integer a = getEntidadeDAC().insertUsuario(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Usuario> responseA = getEntidadeDAC().fetchUsuarioById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +140,20 @@ public class UsuarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 	{
 
 		Usuario funcionario = new Usuario();
-		funcionario.setId(1);
-		funcionario = insertUsuario(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getUsuarioDAC().deleteUsuario(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertUsuario(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Usuario> response = new InternalResultsResponse<Usuario>();
+		Integer a = getEntidadeDAC().insertUsuario(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Usuario>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteUsuario(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchUsuarioById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +163,17 @@ public class UsuarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Usuario> response = getUsuarioDAC().fetchUsuarioById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchUsuarioById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Usuario> response = getUsuarioDAC().fetchUsuarioById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +191,23 @@ public class UsuarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public Usuario insertUsuario(PersistanceActionEnum action)
+	{
+		Usuario exame = new Usuario();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataUsuario((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertUsuario.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Convenio;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.ConvenioInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -72,7 +72,7 @@ public class ConvenioDACTest extends AbstractTransactionalJUnit4SpringContextTes
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ConvenioDACTest.class);
-	private IEmpresaDAC convenioDAC; // injected by Spring through setter @resource
+	private IConvenioDAC convenioDAC; // injected by Spring through setter @resource
 
 	// below
 
@@ -92,9 +92,17 @@ public class ConvenioDACTest extends AbstractTransactionalJUnit4SpringContextTes
 	{
 
 		Convenio funcionario = new Convenio();
-		funcionario = insertConvenio(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Convenio> funcionarioResponse = getConvenioDAC().updateConvenio(funcionario);
+		funcionario = insertConvenio(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Convenio> response = new InternalResultsResponse<Convenio>();
+		Integer a = getEntidadeDAC().insertConvenio(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Convenio>();
+		
+		a = getEntidadeDAC().updateConvenio(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +114,24 @@ public class ConvenioDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		Convenio funcionario = new Convenio();
 		funcionario = insertConvenio(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Convenio> funcionarioResponse = getConvenioDAC().insertConvenio(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Convenio> responseA = getConvenioDAC().fetchConvenioById(request);
+		InternalResultsResponse<Convenio> response = new InternalResultsResponse<Convenio>();
+
+		Integer a = getConvenioDAC().insertConvenio(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Convenio funcionario = new Convenio();
+		funcionario = insertConvenio(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Convenio> response = new InternalResultsResponse<Convenio>();
+
+		Integer a = getEntidadeDAC().insertConvenio(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Convenio> responseA = getEntidadeDAC().fetchConvenioById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +140,20 @@ public class ConvenioDACTest extends AbstractTransactionalJUnit4SpringContextTes
 	{
 
 		Convenio funcionario = new Convenio();
-		funcionario.setId(1);
-		funcionario = insertConvenio(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getConvenioDAC().deleteConvenio(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertConvenio(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Convenio> response = new InternalResultsResponse<Convenio>();
+		Integer a = getEntidadeDAC().insertConvenio(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Convenio>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteConvenio(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchConvenioById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +163,17 @@ public class ConvenioDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Convenio> response = getConvenioDAC().fetchConvenioById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchConvenioById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Convenio> response = getConvenioDAC().fetchConvenioById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +191,23 @@ public class ConvenioDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public Convenio insertConvenio(PersistanceActionEnum action)
+	{
+		Convenio exame = new Convenio();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataConvenio((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertConvenio.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

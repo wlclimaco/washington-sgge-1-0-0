@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Socio;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.SocioInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -72,19 +72,19 @@ public class SocioDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(SocioDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private ISocioDAC socioDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public ISocioDAC getSocioDAC()
 	{
-		return enderecoDAC;
+		return socioDAC;
 	}
 
 	@Resource
-	public void setSocioDAC(ISocioDAC enderecoDAC)
+	public void setSocioDAC(ISocioDAC socioDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.socioDAC = socioDAC;
 	}
 
 	@Test
@@ -92,9 +92,17 @@ public class SocioDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Socio funcionario = new Socio();
-		funcionario = insertSocio(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Socio> funcionarioResponse = getSocioDAC().updateSocio(funcionario);
+		funcionario = insertSocio(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Socio> response = new InternalResultsResponse<Socio>();
+		Integer a = getEntidadeDAC().insertSocio(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Socio>();
+		
+		a = getEntidadeDAC().updateSocio(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +114,24 @@ public class SocioDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Socio funcionario = new Socio();
 		funcionario = insertSocio(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Socio> funcionarioResponse = getSocioDAC().insertSocio(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Socio> responseA = getSocioDAC().fetchSocioById(request);
+		InternalResultsResponse<Socio> response = new InternalResultsResponse<Socio>();
+
+		Integer a = getSocioDAC().insertSocio(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Socio funcionario = new Socio();
+		funcionario = insertSocio(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Socio> response = new InternalResultsResponse<Socio>();
+
+		Integer a = getEntidadeDAC().insertSocio(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Socio> responseA = getEntidadeDAC().fetchSocioById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +140,20 @@ public class SocioDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Socio funcionario = new Socio();
-		funcionario.setId(1);
-		funcionario = insertSocio(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getSocioDAC().deleteSocio(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertSocio(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Socio> response = new InternalResultsResponse<Socio>();
+		Integer a = getEntidadeDAC().insertSocio(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Socio>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteSocio(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchSocioById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +163,17 @@ public class SocioDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Socio> response = getSocioDAC().fetchSocioById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchSocioById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Socio> response = getSocioDAC().fetchSocioById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +191,23 @@ public class SocioDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public Socio insertSocio(PersistanceActionEnum action)
+	{
+		Socio exame = new Socio();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataSocio((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertSocio.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

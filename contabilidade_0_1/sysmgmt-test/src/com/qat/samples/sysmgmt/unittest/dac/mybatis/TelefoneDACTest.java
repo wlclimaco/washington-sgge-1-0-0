@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Telefone;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.TelefoneInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -71,20 +71,21 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 public class TelefoneDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
+	
 	private static final Logger LOG = LoggerFactory.getLogger(TelefoneDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private ITelefoneDAC telefoneDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public ITelefoneDAC getTelefoneDAC()
 	{
-		return enderecoDAC;
+		return telefoneDAC;
 	}
 
 	@Resource
-	public void setTelefoneDAC(ITelefoneDAC enderecoDAC)
+	public void setTelefoneDAC(ITelefoneDAC telefoneDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.telefoneDAC = telefoneDAC;
 	}
 
 	@Test
@@ -92,9 +93,17 @@ public class TelefoneDACTest extends AbstractTransactionalJUnit4SpringContextTes
 	{
 
 		Telefone funcionario = new Telefone();
-		funcionario = insertTelefone(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Telefone> funcionarioResponse = getTelefoneDAC().updateTelefone(funcionario);
+		funcionario = insertTelefone(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Telefone> response = new InternalResultsResponse<Telefone>();
+		Integer a = getEntidadeDAC().insertTelefone(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Telefone>();
+		
+		a = getEntidadeDAC().updateTelefone(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +115,24 @@ public class TelefoneDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		Telefone funcionario = new Telefone();
 		funcionario = insertTelefone(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Telefone> funcionarioResponse = getTelefoneDAC().insertTelefone(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Telefone> responseA = getTelefoneDAC().fetchTelefoneById(request);
+		InternalResultsResponse<Telefone> response = new InternalResultsResponse<Telefone>();
+
+		Integer a = getTelefoneDAC().insertTelefone(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Telefone funcionario = new Telefone();
+		funcionario = insertTelefone(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Telefone> response = new InternalResultsResponse<Telefone>();
+
+		Integer a = getEntidadeDAC().insertTelefone(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Telefone> responseA = getEntidadeDAC().fetchTelefoneById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +141,20 @@ public class TelefoneDACTest extends AbstractTransactionalJUnit4SpringContextTes
 	{
 
 		Telefone funcionario = new Telefone();
-		funcionario.setId(1);
-		funcionario = insertTelefone(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getTelefoneDAC().deleteTelefone(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertTelefone(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Telefone> response = new InternalResultsResponse<Telefone>();
+		Integer a = getEntidadeDAC().insertTelefone(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Telefone>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteTelefone(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchTelefoneById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +164,17 @@ public class TelefoneDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Telefone> response = getTelefoneDAC().fetchTelefoneById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchTelefoneById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Telefone> response = getTelefoneDAC().fetchTelefoneById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +192,23 @@ public class TelefoneDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public Telefone insertTelefone(PersistanceActionEnum action)
+	{
+		Telefone exame = new Telefone();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataTelefone((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertTelefone.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

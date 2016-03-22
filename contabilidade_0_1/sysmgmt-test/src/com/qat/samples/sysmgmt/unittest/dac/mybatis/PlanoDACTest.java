@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Plano;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -72,19 +72,19 @@ public class PlanoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(PlanoDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private IPlanoDAC planoDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public IPlanoDAC getPlanoDAC()
 	{
-		return enderecoDAC;
+		return planoDAC;
 	}
 
 	@Resource
-	public void setPlanoDAC(IPlanoDAC enderecoDAC)
+	public void setPlanoDAC(IPlanoDAC planoDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.planoDAC = planoDAC;
 	}
 
 	@Test
@@ -92,9 +92,17 @@ public class PlanoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Plano funcionario = new Plano();
-		funcionario = insertPlano(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Plano> funcionarioResponse = getPlanoDAC().updatePlano(funcionario);
+		funcionario = insertPlano(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Plano> response = new InternalResultsResponse<Plano>();
+		Integer a = getEntidadeDAC().insertPlano(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Plano>();
+		
+		a = getEntidadeDAC().updatePlano(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +114,24 @@ public class PlanoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Plano funcionario = new Plano();
 		funcionario = insertPlano(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Plano> funcionarioResponse = getPlanoDAC().insertPlano(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Plano> responseA = getPlanoDAC().fetchPlanoById(request);
+		InternalResultsResponse<Plano> response = new InternalResultsResponse<Plano>();
+
+		Integer a = getPlanoDAC().insertPlano(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Plano funcionario = new Plano();
+		funcionario = insertPlano(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Plano> response = new InternalResultsResponse<Plano>();
+
+		Integer a = getEntidadeDAC().insertPlano(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Plano> responseA = getEntidadeDAC().fetchPlanoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +140,20 @@ public class PlanoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Plano funcionario = new Plano();
-		funcionario.setId(1);
-		funcionario = insertPlano(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getPlanoDAC().deletePlano(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertPlano(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Plano> response = new InternalResultsResponse<Plano>();
+		Integer a = getEntidadeDAC().insertPlano(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Plano>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deletePlano(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchPlanoById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +163,17 @@ public class PlanoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Plano> response = getPlanoDAC().fetchPlanoById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchPlanoById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Plano> response = getPlanoDAC().fetchPlanoById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +191,23 @@ public class PlanoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public Plano insertPlano(PersistanceActionEnum action)
+	{
+		Plano exame = new Plano();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataPlano((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertPlano.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.FormaPagamento;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.FormaPagamentoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -72,19 +72,19 @@ public class FormaPagamentoDACTest extends AbstractTransactionalJUnit4SpringCont
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(FormaPagamentoDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private IFormaPagamentoDAC formapagamentoDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public IFormaPagamentoDAC getFormaPagamentoDAC()
 	{
-		return enderecoDAC;
+		return formapagamentoDAC;
 	}
 
 	@Resource
-	public void setFormaPagamentoDAC(IFormaPagamentoDAC enderecoDAC)
+	public void setFormaPagamentoDAC(IFormaPagamentoDAC formapagamentoDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.formapagamentoDAC = formapagamentoDAC;
 	}
 
 	@Test
@@ -92,9 +92,17 @@ public class FormaPagamentoDACTest extends AbstractTransactionalJUnit4SpringCont
 	{
 
 		FormaPagamento funcionario = new FormaPagamento();
-		funcionario = insertFormaPagamento(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<FormaPagamento> funcionarioResponse = getFormaPagamentoDAC().updateFormaPagamento(funcionario);
+		funcionario = insertFormaPagamento(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<FormaPagamento> response = new InternalResultsResponse<FormaPagamento>();
+		Integer a = getEntidadeDAC().insertFormaPagamento(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<FormaPagamento>();
+		
+		a = getEntidadeDAC().updateFormaPagamento(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +114,24 @@ public class FormaPagamentoDACTest extends AbstractTransactionalJUnit4SpringCont
 		FormaPagamento funcionario = new FormaPagamento();
 		funcionario = insertFormaPagamento(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<FormaPagamento> funcionarioResponse = getFormaPagamentoDAC().insertFormaPagamento(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<FormaPagamento> responseA = getFormaPagamentoDAC().fetchFormaPagamentoById(request);
+		InternalResultsResponse<FormaPagamento> response = new InternalResultsResponse<FormaPagamento>();
+
+		Integer a = getFormaPagamentoDAC().insertFormaPagamento(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		FormaPagamento funcionario = new FormaPagamento();
+		funcionario = insertFormaPagamento(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<FormaPagamento> response = new InternalResultsResponse<FormaPagamento>();
+
+		Integer a = getEntidadeDAC().insertFormaPagamento(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<FormaPagamento> responseA = getEntidadeDAC().fetchFormaPagamentoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +140,20 @@ public class FormaPagamentoDACTest extends AbstractTransactionalJUnit4SpringCont
 	{
 
 		FormaPagamento funcionario = new FormaPagamento();
-		funcionario.setId(1);
-		funcionario = insertFormaPagamento(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getFormaPagamentoDAC().deleteFormaPagamento(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertFormaPagamento(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<FormaPagamento> response = new InternalResultsResponse<FormaPagamento>();
+		Integer a = getEntidadeDAC().insertFormaPagamento(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<FormaPagamento>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteFormaPagamento(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchFormaPagamentoById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +163,17 @@ public class FormaPagamentoDACTest extends AbstractTransactionalJUnit4SpringCont
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<FormaPagamento> response = getFormaPagamentoDAC().fetchFormaPagamentoById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchFormaPagamentoById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<FormaPagamento> response = getFormaPagamentoDAC().fetchFormaPagamentoById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +191,23 @@ public class FormaPagamentoDACTest extends AbstractTransactionalJUnit4SpringCont
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public FormaPagamento insertFormaPagamento(PersistanceActionEnum action)
+	{
+		FormaPagamento exame = new FormaPagamento();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataFormaPagamento((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertFormaPagamento.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

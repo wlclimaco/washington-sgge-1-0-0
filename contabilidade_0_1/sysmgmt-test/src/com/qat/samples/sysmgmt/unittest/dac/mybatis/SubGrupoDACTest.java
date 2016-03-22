@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.SubGrupo;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.SubGrupoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -71,20 +71,21 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 public class SubGrupoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
+	
 	private static final Logger LOG = LoggerFactory.getLogger(SubGrupoDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private ISubGrupoDAC subGrupoDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public ISubGrupoDAC getSubGrupoDAC()
 	{
-		return enderecoDAC;
+		return subGrupoDAC;
 	}
 
 	@Resource
-	public void setSubGrupoDAC(ISubGrupoDAC enderecoDAC)
+	public void setSubGrupoDAC(ISubGrupoDAC subGrupoDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.subGrupoDAC = subGrupoDAC;
 	}
 
 	@Test
@@ -92,9 +93,17 @@ public class SubGrupoDACTest extends AbstractTransactionalJUnit4SpringContextTes
 	{
 
 		SubGrupo funcionario = new SubGrupo();
-		funcionario = insertSubGrupo(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<SubGrupo> funcionarioResponse = getSubGrupoDAC().updateSubGrupo(funcionario);
+		funcionario = insertSubGrupo(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<SubGrupo> response = new InternalResultsResponse<SubGrupo>();
+		Integer a = getEntidadeDAC().insertSubGrupo(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<SubGrupo>();
+		
+		a = getEntidadeDAC().updateSubGrupo(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +115,24 @@ public class SubGrupoDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		SubGrupo funcionario = new SubGrupo();
 		funcionario = insertSubGrupo(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<SubGrupo> funcionarioResponse = getSubGrupoDAC().insertSubGrupo(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<SubGrupo> responseA = getSubGrupoDAC().fetchSubGrupoById(request);
+		InternalResultsResponse<SubGrupo> response = new InternalResultsResponse<SubGrupo>();
+
+		Integer a = getSubGrupoDAC().insertSubGrupo(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		SubGrupo funcionario = new SubGrupo();
+		funcionario = insertSubGrupo(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<SubGrupo> response = new InternalResultsResponse<SubGrupo>();
+
+		Integer a = getEntidadeDAC().insertSubGrupo(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<SubGrupo> responseA = getEntidadeDAC().fetchSubGrupoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +141,20 @@ public class SubGrupoDACTest extends AbstractTransactionalJUnit4SpringContextTes
 	{
 
 		SubGrupo funcionario = new SubGrupo();
-		funcionario.setId(1);
-		funcionario = insertSubGrupo(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getSubGrupoDAC().deleteSubGrupo(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertSubGrupo(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<SubGrupo> response = new InternalResultsResponse<SubGrupo>();
+		Integer a = getEntidadeDAC().insertSubGrupo(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<SubGrupo>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteSubGrupo(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchSubGrupoById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +164,17 @@ public class SubGrupoDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<SubGrupo> response = getSubGrupoDAC().fetchSubGrupoById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchSubGrupoById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<SubGrupo> response = getSubGrupoDAC().fetchSubGrupoById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +192,23 @@ public class SubGrupoDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public SubGrupo insertSubGrupo(PersistanceActionEnum action)
+	{
+		SubGrupo exame = new SubGrupo();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataSubGrupo((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertSubGrupo.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

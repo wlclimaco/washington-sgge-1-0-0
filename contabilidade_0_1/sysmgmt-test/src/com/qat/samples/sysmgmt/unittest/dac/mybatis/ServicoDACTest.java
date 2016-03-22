@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Servico;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.ServicoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -71,20 +71,21 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 public class ServicoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
+
 	private static final Logger LOG = LoggerFactory.getLogger(ServicoDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private IServicoDAC servicoDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public IServicoDAC getServicoDAC()
 	{
-		return enderecoDAC;
+		return servicoDAC;
 	}
 
 	@Resource
-	public void setServicoDAC(IServicoDAC enderecoDAC)
+	public void setServicoDAC(IServicoDAC servicoDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.servicoDAC = servicoDAC;
 	}
 
 	@Test
@@ -92,9 +93,17 @@ public class ServicoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 	{
 
 		Servico funcionario = new Servico();
-		funcionario = insertServico(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Servico> funcionarioResponse = getServicoDAC().updateServico(funcionario);
+		funcionario = insertServico(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Servico> response = new InternalResultsResponse<Servico>();
+		Integer a = getEntidadeDAC().insertServico(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Servico>();
+		
+		a = getEntidadeDAC().updateServico(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +115,24 @@ public class ServicoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		Servico funcionario = new Servico();
 		funcionario = insertServico(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Servico> funcionarioResponse = getServicoDAC().insertServico(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Servico> responseA = getServicoDAC().fetchServicoById(request);
+		InternalResultsResponse<Servico> response = new InternalResultsResponse<Servico>();
+
+		Integer a = getServicoDAC().insertServico(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Servico funcionario = new Servico();
+		funcionario = insertServico(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Servico> response = new InternalResultsResponse<Servico>();
+
+		Integer a = getEntidadeDAC().insertServico(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Servico> responseA = getEntidadeDAC().fetchServicoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +141,20 @@ public class ServicoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 	{
 
 		Servico funcionario = new Servico();
-		funcionario.setId(1);
-		funcionario = insertServico(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getServicoDAC().deleteServico(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertServico(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Servico> response = new InternalResultsResponse<Servico>();
+		Integer a = getEntidadeDAC().insertServico(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Servico>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteServico(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchServicoById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +164,17 @@ public class ServicoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Servico> response = getServicoDAC().fetchServicoById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchServicoById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Servico> response = getServicoDAC().fetchServicoById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +192,23 @@ public class ServicoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public Servico insertServico(PersistanceActionEnum action)
+	{
+		Servico exame = new Servico();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataServico((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertServico.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

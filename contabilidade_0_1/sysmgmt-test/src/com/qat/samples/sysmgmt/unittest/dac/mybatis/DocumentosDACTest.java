@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Documento;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.DocumentoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -72,19 +72,19 @@ public class DocumentoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(DocumentoDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private IDocumentoDAC documentoDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public IDocumentoDAC getDocumentoDAC()
 	{
-		return enderecoDAC;
+		return documentoDAC;
 	}
 
 	@Resource
-	public void setDocumentoDAC(IDocumentoDAC enderecoDAC)
+	public void setDocumentoDAC(IDocumentoDAC documentoDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.documentoDAC = documentoDAC;
 	}
 
 	@Test
@@ -92,9 +92,17 @@ public class DocumentoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 	{
 
 		Documento funcionario = new Documento();
-		funcionario = insertDocumento(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Documento> funcionarioResponse = getDocumentoDAC().updateDocumento(funcionario);
+		funcionario = insertDocumento(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Documento> response = new InternalResultsResponse<Documento>();
+		Integer a = getEntidadeDAC().insertDocumento(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Documento>();
+		
+		a = getEntidadeDAC().updateDocumento(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +114,24 @@ public class DocumentoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 		Documento funcionario = new Documento();
 		funcionario = insertDocumento(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Documento> funcionarioResponse = getDocumentoDAC().insertDocumento(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Documento> responseA = getDocumentoDAC().fetchDocumentoById(request);
+		InternalResultsResponse<Documento> response = new InternalResultsResponse<Documento>();
+
+		Integer a = getDocumentoDAC().insertDocumento(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Documento funcionario = new Documento();
+		funcionario = insertDocumento(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Documento> response = new InternalResultsResponse<Documento>();
+
+		Integer a = getEntidadeDAC().insertDocumento(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Documento> responseA = getEntidadeDAC().fetchDocumentoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +140,20 @@ public class DocumentoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 	{
 
 		Documento funcionario = new Documento();
-		funcionario.setId(1);
-		funcionario = insertDocumento(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getDocumentoDAC().deleteDocumento(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertDocumento(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Documento> response = new InternalResultsResponse<Documento>();
+		Integer a = getEntidadeDAC().insertDocumento(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Documento>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteDocumento(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchDocumentoById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +163,17 @@ public class DocumentoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Documento> response = getDocumentoDAC().fetchDocumentoById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchDocumentoById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Documento> response = getDocumentoDAC().fetchDocumentoById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +191,23 @@ public class DocumentoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public Documento insertDocumento(PersistanceActionEnum action)
+	{
+		Documento exame = new Documento();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataDocumento((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertDocumento.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

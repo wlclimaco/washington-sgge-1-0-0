@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Salario;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.SalarioInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -71,20 +71,21 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 public class SalarioDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
+
 	private static final Logger LOG = LoggerFactory.getLogger(SalarioDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private ISalarioDAC salarioDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public ISalarioDAC getSalarioDAC()
 	{
-		return enderecoDAC;
+		return salarioDAC;
 	}
 
 	@Resource
-	public void setSalarioDAC(ISalarioDAC enderecoDAC)
+	public void setSalarioDAC(ISalarioDAC salarioDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.salarioDAC = salarioDAC;
 	}
 
 	@Test
@@ -92,9 +93,17 @@ public class SalarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 	{
 
 		Salario funcionario = new Salario();
-		funcionario = insertSalario(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Salario> funcionarioResponse = getSalarioDAC().updateSalario(funcionario);
+		funcionario = insertSalario(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Salario> response = new InternalResultsResponse<Salario>();
+		Integer a = getEntidadeDAC().insertSalario(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Salario>();
+		
+		a = getEntidadeDAC().updateSalario(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +115,24 @@ public class SalarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		Salario funcionario = new Salario();
 		funcionario = insertSalario(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Salario> funcionarioResponse = getSalarioDAC().insertSalario(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Salario> responseA = getSalarioDAC().fetchSalarioById(request);
+		InternalResultsResponse<Salario> response = new InternalResultsResponse<Salario>();
+
+		Integer a = getSalarioDAC().insertSalario(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Salario funcionario = new Salario();
+		funcionario = insertSalario(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Salario> response = new InternalResultsResponse<Salario>();
+
+		Integer a = getEntidadeDAC().insertSalario(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Salario> responseA = getEntidadeDAC().fetchSalarioById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +141,20 @@ public class SalarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 	{
 
 		Salario funcionario = new Salario();
-		funcionario.setId(1);
-		funcionario = insertSalario(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getSalarioDAC().deleteSalario(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertSalario(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Salario> response = new InternalResultsResponse<Salario>();
+		Integer a = getEntidadeDAC().insertSalario(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Salario>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteSalario(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchSalarioById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +164,17 @@ public class SalarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Salario> response = getSalarioDAC().fetchSalarioById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchSalarioById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Salario> response = getSalarioDAC().fetchSalarioById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +192,23 @@ public class SalarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public Salario insertSalario(PersistanceActionEnum action)
+	{
+		Salario exame = new Salario();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataSalario((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertSalario.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

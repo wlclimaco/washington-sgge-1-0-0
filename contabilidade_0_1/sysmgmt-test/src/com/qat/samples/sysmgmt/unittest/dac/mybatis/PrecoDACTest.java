@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Preco;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.PrecoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -71,89 +71,144 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 public class EnderecoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
-	private static final Logger LOG = LoggerFactory.getLogger(EnderecoDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	
+	private static final Logger LOG = LoggerFactory.getLogger(PrecoDACTest.class);
+	private IPrecoDAC precoDAC; // injected by Spring through setter @resource
 
 	// below
 
-	public IEnderecoDAC getEnderecoDAC()
+	public IPrecoDAC getPrecoDAC()
 	{
-		return enderecoDAC;
+		return precoDAC;
 	}
 
 	@Resource
-	public void setEnderecoDAC(IEnderecoDAC enderecoDAC)
+	public void setPrecoDAC(IPrecoDAC precoDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.precoDAC = precoDAC;
 	}
 
 	@Test
-	public void testupdateEndereco() throws Exception
+	public void testupdatePreco() throws Exception
 	{
 
-		Endereco funcionario = new Endereco();
-		funcionario = insertEndereco(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Endereco> funcionarioResponse = getEnderecoDAC().updateEndereco(funcionario);
+		Preco funcionario = new Preco();
+		funcionario = insertPreco(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Preco> response = new InternalResultsResponse<Preco>();
+		Integer a = getEntidadeDAC().insertPreco(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Preco>();
+		
+		a = getEntidadeDAC().updatePreco(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
 	@Test
-	public void testinsertEndereco() throws Exception
+	public void testinsertPreco() throws Exception
 	{
 
-		Endereco funcionario = new Endereco();
-		funcionario = insertEndereco(PersistanceActionEnum.INSERT);
+		Preco funcionario = new Preco();
+		funcionario = insertPreco(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Endereco> funcionarioResponse = getEnderecoDAC().insertEndereco(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Endereco> responseA = getEnderecoDAC().fetchEnderecoById(request);
+		InternalResultsResponse<Preco> response = new InternalResultsResponse<Preco>();
+
+		Integer a = getPrecoDAC().insertPreco(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Preco funcionario = new Preco();
+		funcionario = insertPreco(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Preco> response = new InternalResultsResponse<Preco>();
+
+		Integer a = getEntidadeDAC().insertPreco(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Preco> responseA = getEntidadeDAC().fetchPrecoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
 	@Test
-	public void testdeleteEndereco() throws Exception
+	public void testdeletePreco() throws Exception
 	{
 
-		Endereco funcionario = new Endereco();
-		funcionario.setId(1);
-		funcionario = insertEndereco(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getEnderecoDAC().deleteEndereco(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		Preco funcionario = new Preco();
+		funcionario = insertPreco(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Preco> response = new InternalResultsResponse<Preco>();
+		Integer a = getEntidadeDAC().insertPreco(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Preco>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deletePreco(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchPrecoById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
-	public void testfetchEnderecoById() throws Exception
+	public void testfetchPrecoById() throws Exception
 	{
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
-		InternalResultsResponse<Endereco> response = getEnderecoDAC().fetchEnderecoById(request);
+		InternalResultsResponse<Preco> response = getPrecoDAC().fetchPrecoById(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testfetchEnderecoByRequest() throws Exception
+	public void testfetchPrecoById2() throws Exception
 	{
 		// check for valid and precount
-		EnderecoInquiryRequest request = new EnderecoInquiryRequest();
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Preco> response = getPrecoDAC().fetchPrecoById(1);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchPrecoByRequest() throws Exception
+	{
+		// check for valid and precount
+		PrecoInquiryRequest request = new PrecoInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(4);
-		InternalResultsResponse<Endereco> response = getEnderecoDAC().fetchEnderecoByRequest(request);
+		InternalResultsResponse<Preco> response = getPrecoDAC().fetchPrecoByRequest(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	public Preco insertPreco(PersistanceActionEnum action)
+	{
+		Preco exame = new Preco();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataPreco((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
 	}
 
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertEndereco.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

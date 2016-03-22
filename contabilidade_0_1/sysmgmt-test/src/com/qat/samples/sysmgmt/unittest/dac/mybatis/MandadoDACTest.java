@@ -68,87 +68,142 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 @Transactional
 @ActiveProfiles("postgres")
-public class BancoDACTest extends AbstractTransactionalJUnit4SpringContextTests
+public class MandadoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
-	private static final Logger LOG = LoggerFactory.getLogger(BancoDACTest.class);
-	private IEmpresaDAC bancoDAC; // injected by Spring through setter @resource
+
+	private static final Logger LOG = LoggerFactory.getLogger(MandadoDACTest.class);
+	private IMandadoDAC mandadoDAC; // injected by Spring through setter @resource
 
 	// below
 
-	public IBancoDAC getBancoDAC()
+	public IMandadoDAC getMandadoDAC()
 	{
-		return bancoDAC;
+		return mandadoDAC;
 	}
 
 	@Resource
-	public void setBancoDAC(IBancoDAC bancoDAC)
+	public void setMandadoDAC(IMandadoDAC mandadoDAC)
 	{
-		this.bancoDAC = bancoDAC;
+		this.mandadoDAC = mandadoDAC;
 	}
 
 	@Test
-	public void testupdateBanco() throws Exception
+	public void testupdateMandado() throws Exception
 	{
 
-		Banco funcionario = new Banco();
-		funcionario = insertBanco(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Banco> funcionarioResponse = getBancoDAC().updateBanco(funcionario);
+		Mandado funcionario = new Mandado();
+		funcionario = insertMandado(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Mandado> response = new InternalResultsResponse<Mandado>();
+		Integer a = getEntidadeDAC().insertMandado(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Mandado>();
+		
+		a = getEntidadeDAC().updateMandado(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
 	@Test
-	public void testinsertBanco() throws Exception
+	public void testinsertMandado() throws Exception
 	{
 
-		Banco funcionario = new Banco();
-		funcionario = insertBanco(PersistanceActionEnum.INSERT);
+		Mandado funcionario = new Mandado();
+		funcionario = insertMandado(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Banco> funcionarioResponse = getBancoDAC().insertBanco(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Banco> responseA = getBancoDAC().fetchBancoById(request);
+		InternalResultsResponse<Mandado> response = new InternalResultsResponse<Mandado>();
+
+		Integer a = getMandadoDAC().insertMandado(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Mandado funcionario = new Mandado();
+		funcionario = insertMandado(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Mandado> response = new InternalResultsResponse<Mandado>();
+
+		Integer a = getEntidadeDAC().insertMandado(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Mandado> responseA = getEntidadeDAC().fetchMandadoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
 	@Test
-	public void testdeleteBanco() throws Exception
+	public void testdeleteMandado() throws Exception
 	{
 
-		Banco funcionario = new Banco();
-		funcionario.setId(1);
-		funcionario = insertBanco(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getBancoDAC().deleteBanco(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		Mandado funcionario = new Mandado();
+		funcionario = insertMandado(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Mandado> response = new InternalResultsResponse<Mandado>();
+		Integer a = getEntidadeDAC().insertMandado(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Mandado>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteMandado(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchMandadoById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
-	public void testfetchBancoById() throws Exception
+	public void testfetchMandadoById() throws Exception
 	{
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
-		InternalResultsResponse<Banco> response = getBancoDAC().fetchBancoById(request);
+		InternalResultsResponse<Mandado> response = getMandadoDAC().fetchMandadoById(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testfetchBancoByRequest() throws Exception
+	public void testfetchMandadoById2() throws Exception
 	{
 		// check for valid and precount
-		BancoInquiryRequest request = new BancoInquiryRequest();
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Mandado> response = getMandadoDAC().fetchMandadoById(1);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchMandadoByRequest() throws Exception
+	{
+		// check for valid and precount
+		MandadoInquiryRequest request = new MandadoInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(4);
-		InternalResultsResponse<Banco> response = getBancoDAC().fetchBancoByRequest(request);
+		InternalResultsResponse<Mandado> response = getMandadoDAC().fetchMandadoByRequest(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	public Mandado insertMandado(PersistanceActionEnum action)
+	{
+		Mandado exame = new Mandado();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataMandado((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
 	}
 
 	@Before

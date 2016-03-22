@@ -34,87 +34,134 @@ import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 public class EnderecoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
-	private static final Logger LOG = LoggerFactory.getLogger(AvisoDACTest.class);
-	private IAvisosDAC avisosDAC; // injected by Spring through setter @resource
+	private static final Logger LOG = LoggerFactory.getLogger(EmailDACTest.class);
+	private IEmailDAC emailDAC; // injected by Spring through setter @resource
 
 	// below
 
-	public IAvisoDAC getAvisoDAC()
+	public IEmailDAC getEmailDAC()
 	{
-		return avisosDAC;
+		return emailDAC;
 	}
 
 	@Resource
-	public void setAvisoDAC(IAvisoDAC avisosDAC)
+	public void setEmailDAC(IEmailDAC emailDAC)
 	{
-		this.avisosDAC = avisosDAC;
+		this.emailDAC = emailDAC;
 	}
 
 	@Test
-	public void testupdateAviso() throws Exception
+	public void testupdateEmail() throws Exception
 	{
 
-		Aviso funcionario = new Aviso();
-		funcionario = insertAviso(PersistanceActionEnum.UPDATE);
-
-		Integer a = getAvisoDAC().updateAviso(funcionario);
-
-	}
-
-	@Test
-	public void testinsertAviso() throws Exception
-	{
-
-		Aviso funcionario = new Aviso();
-		funcionario = insertAviso(PersistanceActionEnum.INSERT);
-
-		Integer a = getAvisoDAC().insertAviso(funcionario);
-
-	}
-
-	@Test
-	public void testdeleteAviso() throws Exception
-	{
-
-		Aviso funcionario = new Aviso();
-		funcionario.setId(1);
-		funcionario = insertAviso(PersistanceActionEnum.DELETE);
-		Integer a = getAvisoDAC().deleteAviso(funcionario);
+		Email funcionario = new Email();
+		funcionario = insertEmail(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Email> response = new InternalResultsResponse<Email>();
+		Integer a = getEntidadeDAC().insertEmail(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Email>();
+		
+		a = getEntidadeDAC().updateEmail(funcionario, response);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
 	@Test
-	public void testfetchAvisoById() throws Exception
+	public void testinsertEmail() throws Exception
+	{
+
+		Email funcionario = new Email();
+		funcionario = insertEmail(PersistanceActionEnum.INSERT);
+
+		InternalResultsResponse<Email> response = new InternalResultsResponse<Email>();
+
+		Integer a = getEmailDAC().insertEmail(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Email funcionario = new Email();
+		funcionario = insertEmail(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Email> response = new InternalResultsResponse<Email>();
+
+		Integer a = getEntidadeDAC().insertEmail(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Email> responseA = getEntidadeDAC().fetchEmailById(response.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().size() == 1);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
+
+	}
+
+	@Test
+	public void testdeleteEmail() throws Exception
+	{
+
+		Email funcionario = new Email();
+		funcionario = insertEmail(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Email> response = new InternalResultsResponse<Email>();
+		Integer a = getEntidadeDAC().insertEmail(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Email>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteEmail(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchEmailById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
+	}
+
+	@Test
+	public void testfetchEmailById() throws Exception
 	{
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
-		InternalResultsResponse<Aviso> response = getAvisoDAC().fetchAvisoById(request);
+		InternalResultsResponse<Email> response = getEmailDAC().fetchEmailById(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testfetchAvisoByRequest() throws Exception
+	public void testfetchEmailById2() throws Exception
 	{
 		// check for valid and precount
-		AvisoInquiryRequest request = new AvisoInquiryRequest();
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Email> response = getEmailDAC().fetchEmailById(1);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchEmailByRequest() throws Exception
+	{
+		// check for valid and precount
+		EmailInquiryRequest request = new EmailInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(4);
-		InternalResultsResponse<Aviso> response = getAvisoDAC().fetchAvisoByRequest(request);
+		InternalResultsResponse<Email> response = getEmailDAC().fetchEmailByRequest(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
-	public Avisos insertAviso(PersistanceActionEnum action)
+	public Email insertEmail(PersistanceActionEnum action)
 	{
-		Avisos exame = new Avisos();
+		Email exame = new Email();
 		Date a = new Date();
 		exame.setId(1);
 		exame.setModelAction(action);
 		// exame.setNome("Nome");
-		// exame.setDataAviso((int)a.getTime());
+		// exame.setDataEmail((int)a.getTime());
 		// exame.setMedicoResponsavel("Resposnsavel");
 		// exame.setLaboratorio("Laboratorio");
 

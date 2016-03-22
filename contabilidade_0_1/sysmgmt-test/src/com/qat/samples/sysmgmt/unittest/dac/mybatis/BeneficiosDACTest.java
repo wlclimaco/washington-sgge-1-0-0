@@ -32,20 +32,21 @@ import com.qat.samples.sysmgmt.pessoa.dac.IBeneficiosDAC;
 public class BeneficiosDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
+	
 	private static final Logger LOG = LoggerFactory.getLogger(BeneficiosDACTest.class);
-	private IBeneficiosDAC avisosDAC; // injected by Spring through setter @resource
+	private IBeneficiosDAC beneficiosDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public IBeneficiosDAC getBeneficiosDAC()
 	{
-		return avisosDAC;
+		return beneficiosDAC;
 	}
 
 	@Resource
-	public void setBeneficiosDAC(IBeneficiosDAC avisosDAC)
+	public void setBeneficiosDAC(IBeneficiosDAC beneficiosDAC)
 	{
-		this.avisosDAC = avisosDAC;
+		this.beneficiosDAC = beneficiosDAC;
 	}
 
 	@Test
@@ -53,9 +54,18 @@ public class BeneficiosDACTest extends AbstractTransactionalJUnit4SpringContextT
 	{
 
 		Beneficios funcionario = new Beneficios();
-		funcionario = insertBeneficios(PersistanceActionEnum.UPDATE);
-
-		Integer a = getBeneficiosDAC().updateBeneficios(funcionario);
+		funcionario = insertBeneficios(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Beneficios> response = new InternalResultsResponse<Beneficios>();
+		Integer a = getEntidadeDAC().insertBeneficios(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Beneficios>();
+		
+		a = getEntidadeDAC().updateBeneficios(funcionario, response);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -66,7 +76,24 @@ public class BeneficiosDACTest extends AbstractTransactionalJUnit4SpringContextT
 		Beneficios funcionario = new Beneficios();
 		funcionario = insertBeneficios(PersistanceActionEnum.INSERT);
 
-		Integer a = getBeneficiosDAC().insertBeneficios(funcionario);
+		InternalResultsResponse<Beneficios> response = new InternalResultsResponse<Beneficios>();
+
+		Integer a = getBeneficiosDAC().insertBeneficios(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Beneficios funcionario = new Beneficios();
+		funcionario = insertBeneficios(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Beneficios> response = new InternalResultsResponse<Beneficios>();
+
+		Integer a = getEntidadeDAC().insertBeneficios(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Beneficios> responseA = getEntidadeDAC().fetchBeneficiosById(response.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().size() == 1);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -75,9 +102,19 @@ public class BeneficiosDACTest extends AbstractTransactionalJUnit4SpringContextT
 	{
 
 		Beneficios funcionario = new Beneficios();
-		funcionario.setId(1);
-		funcionario = insertBeneficios(PersistanceActionEnum.DELETE);
-		Integer a = getBeneficiosDAC().deleteBeneficios(funcionario);
+		funcionario = insertBeneficios(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Beneficios> response = new InternalResultsResponse<Beneficios>();
+		Integer a = getEntidadeDAC().insertBeneficios(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Beneficios>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteBeneficios(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchBeneficiosById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}
 
@@ -85,11 +122,22 @@ public class BeneficiosDACTest extends AbstractTransactionalJUnit4SpringContextT
 	public void testfetchBeneficiosById() throws Exception
 	{
 		// check for valid and precount
-		// FetchByIdRequest request = new FetchByIdRequest();
-		// request.setFetchId(3);
-		// InternalResultsResponse<Beneficios> response = getBeneficiosDAC().fetchBeneficiosByRequest(request)
-		// assertTrue(response.getResultsSetInfo().getPageSize() == 1);
-		// assertEquals(response.getStatus(), Status.OperationSuccess);
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Beneficios> response = getBeneficiosDAC().fetchBeneficiosById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchBeneficiosById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Beneficios> response = getBeneficiosDAC().fetchBeneficiosById(1);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test

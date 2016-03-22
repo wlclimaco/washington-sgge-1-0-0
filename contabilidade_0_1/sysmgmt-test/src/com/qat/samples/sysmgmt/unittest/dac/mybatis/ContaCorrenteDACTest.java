@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.ContaCorrente;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.ContaCorrenteInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -72,7 +72,7 @@ public class ContaCorrenteDACTest extends AbstractTransactionalJUnit4SpringConte
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ContaCorrenteDACTest.class);
-	private IEmpresaDAC contaCorrenteDAC; // injected by Spring through setter @resource
+	private IContaCorrenteDAC contaCorrenteDAC; // injected by Spring through setter @resource
 
 	// below
 
@@ -92,9 +92,17 @@ public class ContaCorrenteDACTest extends AbstractTransactionalJUnit4SpringConte
 	{
 
 		ContaCorrente funcionario = new ContaCorrente();
-		funcionario = insertContaCorrente(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<ContaCorrente> funcionarioResponse = getContaCorrenteDAC().updateContaCorrente(funcionario);
+		funcionario = insertContaCorrente(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<ContaCorrente> response = new InternalResultsResponse<ContaCorrente>();
+		Integer a = getEntidadeDAC().insertContaCorrente(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<ContaCorrente>();
+		
+		a = getEntidadeDAC().updateContaCorrente(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +114,24 @@ public class ContaCorrenteDACTest extends AbstractTransactionalJUnit4SpringConte
 		ContaCorrente funcionario = new ContaCorrente();
 		funcionario = insertContaCorrente(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<ContaCorrente> funcionarioResponse = getContaCorrenteDAC().insertContaCorrente(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<ContaCorrente> responseA = getContaCorrenteDAC().fetchContaCorrenteById(request);
+		InternalResultsResponse<ContaCorrente> response = new InternalResultsResponse<ContaCorrente>();
+
+		Integer a = getContaCorrenteDAC().insertContaCorrente(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		ContaCorrente funcionario = new ContaCorrente();
+		funcionario = insertContaCorrente(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<ContaCorrente> response = new InternalResultsResponse<ContaCorrente>();
+
+		Integer a = getEntidadeDAC().insertContaCorrente(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<ContaCorrente> responseA = getEntidadeDAC().fetchContaCorrenteById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +140,20 @@ public class ContaCorrenteDACTest extends AbstractTransactionalJUnit4SpringConte
 	{
 
 		ContaCorrente funcionario = new ContaCorrente();
-		funcionario.setId(1);
-		funcionario = insertContaCorrente(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getContaCorrenteDAC().deleteContaCorrente(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertContaCorrente(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<ContaCorrente> response = new InternalResultsResponse<ContaCorrente>();
+		Integer a = getEntidadeDAC().insertContaCorrente(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<ContaCorrente>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteContaCorrente(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchContaCorrenteById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +163,17 @@ public class ContaCorrenteDACTest extends AbstractTransactionalJUnit4SpringConte
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<ContaCorrente> response = getContaCorrenteDAC().fetchContaCorrenteById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchContaCorrenteById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<ContaCorrente> response = getContaCorrenteDAC().fetchContaCorrenteById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +191,23 @@ public class ContaCorrenteDACTest extends AbstractTransactionalJUnit4SpringConte
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public ContaCorrente insertContaCorrente(PersistanceActionEnum action)
+	{
+		ContaCorrente exame = new ContaCorrente();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataContaCorrente((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertContaCorrente.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

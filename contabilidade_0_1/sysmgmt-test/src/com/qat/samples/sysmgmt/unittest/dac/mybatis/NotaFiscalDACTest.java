@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.NotaFiscal;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.NotaFiscalInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -71,20 +71,21 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 public class NotaFiscalDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
+	
 	private static final Logger LOG = LoggerFactory.getLogger(NotaFiscalDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private INotaFiscalDAC notaFiscalDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public INotaFiscalDAC getNotaFiscalDAC()
 	{
-		return enderecoDAC;
+		return notaFiscalDAC;
 	}
 
 	@Resource
-	public void setNotaFiscalDAC(INotaFiscalDAC enderecoDAC)
+	public void setNotaFiscalDAC(INotaFiscalDAC notaFiscalDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.notaFiscalDAC = notaFiscalDAC;
 	}
 
 	@Test
@@ -92,9 +93,17 @@ public class NotaFiscalDACTest extends AbstractTransactionalJUnit4SpringContextT
 	{
 
 		NotaFiscal funcionario = new NotaFiscal();
-		funcionario = insertNotaFiscal(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<NotaFiscal> funcionarioResponse = getNotaFiscalDAC().updateNotaFiscal(funcionario);
+		funcionario = insertNotaFiscal(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<NotaFiscal> response = new InternalResultsResponse<NotaFiscal>();
+		Integer a = getEntidadeDAC().insertNotaFiscal(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<NotaFiscal>();
+		
+		a = getEntidadeDAC().updateNotaFiscal(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +115,24 @@ public class NotaFiscalDACTest extends AbstractTransactionalJUnit4SpringContextT
 		NotaFiscal funcionario = new NotaFiscal();
 		funcionario = insertNotaFiscal(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<NotaFiscal> funcionarioResponse = getNotaFiscalDAC().insertNotaFiscal(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<NotaFiscal> responseA = getNotaFiscalDAC().fetchNotaFiscalById(request);
+		InternalResultsResponse<NotaFiscal> response = new InternalResultsResponse<NotaFiscal>();
+
+		Integer a = getNotaFiscalDAC().insertNotaFiscal(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		NotaFiscal funcionario = new NotaFiscal();
+		funcionario = insertNotaFiscal(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<NotaFiscal> response = new InternalResultsResponse<NotaFiscal>();
+
+		Integer a = getEntidadeDAC().insertNotaFiscal(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<NotaFiscal> responseA = getEntidadeDAC().fetchNotaFiscalById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +141,20 @@ public class NotaFiscalDACTest extends AbstractTransactionalJUnit4SpringContextT
 	{
 
 		NotaFiscal funcionario = new NotaFiscal();
-		funcionario.setId(1);
-		funcionario = insertNotaFiscal(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getNotaFiscalDAC().deleteNotaFiscal(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertNotaFiscal(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<NotaFiscal> response = new InternalResultsResponse<NotaFiscal>();
+		Integer a = getEntidadeDAC().insertNotaFiscal(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<NotaFiscal>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteNotaFiscal(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchNotaFiscalById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +164,17 @@ public class NotaFiscalDACTest extends AbstractTransactionalJUnit4SpringContextT
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<NotaFiscal> response = getNotaFiscalDAC().fetchNotaFiscalById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchNotaFiscalById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<NotaFiscal> response = getNotaFiscalDAC().fetchNotaFiscalById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +192,23 @@ public class NotaFiscalDACTest extends AbstractTransactionalJUnit4SpringContextT
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public NotaFiscal insertNotaFiscal(PersistanceActionEnum action)
+	{
+		NotaFiscal exame = new NotaFiscal();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataNotaFiscal((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertNotaFiscal.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

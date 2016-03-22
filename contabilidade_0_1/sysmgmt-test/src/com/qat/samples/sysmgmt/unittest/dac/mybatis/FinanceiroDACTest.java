@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Financeiro;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.FinanceiroInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -72,19 +72,19 @@ public class FinanceiroDACTest extends AbstractTransactionalJUnit4SpringContextT
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(FinanceiroDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private IFinanceiroDAC financeiroDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public IFinanceiroDAC getFinanceiroDAC()
 	{
-		return enderecoDAC;
+		return financeiroDAC;
 	}
 
 	@Resource
-	public void setFinanceiroDAC(IFinanceiroDAC enderecoDAC)
+	public void setFinanceiroDAC(IFinanceiroDAC financeiroDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.financeiroDAC = financeiroDAC;
 	}
 
 	@Test
@@ -92,9 +92,17 @@ public class FinanceiroDACTest extends AbstractTransactionalJUnit4SpringContextT
 	{
 
 		Financeiro funcionario = new Financeiro();
-		funcionario = insertFinanceiro(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Financeiro> funcionarioResponse = getFinanceiroDAC().updateFinanceiro(funcionario);
+		funcionario = insertFinanceiro(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Financeiro> response = new InternalResultsResponse<Financeiro>();
+		Integer a = getEntidadeDAC().insertFinanceiro(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Financeiro>();
+		
+		a = getEntidadeDAC().updateFinanceiro(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +114,24 @@ public class FinanceiroDACTest extends AbstractTransactionalJUnit4SpringContextT
 		Financeiro funcionario = new Financeiro();
 		funcionario = insertFinanceiro(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Financeiro> funcionarioResponse = getFinanceiroDAC().insertFinanceiro(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Financeiro> responseA = getFinanceiroDAC().fetchFinanceiroById(request);
+		InternalResultsResponse<Financeiro> response = new InternalResultsResponse<Financeiro>();
+
+		Integer a = getFinanceiroDAC().insertFinanceiro(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Financeiro funcionario = new Financeiro();
+		funcionario = insertFinanceiro(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Financeiro> response = new InternalResultsResponse<Financeiro>();
+
+		Integer a = getEntidadeDAC().insertFinanceiro(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Financeiro> responseA = getEntidadeDAC().fetchFinanceiroById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +140,20 @@ public class FinanceiroDACTest extends AbstractTransactionalJUnit4SpringContextT
 	{
 
 		Financeiro funcionario = new Financeiro();
-		funcionario.setId(1);
-		funcionario = insertFinanceiro(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getFinanceiroDAC().deleteFinanceiro(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertFinanceiro(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Financeiro> response = new InternalResultsResponse<Financeiro>();
+		Integer a = getEntidadeDAC().insertFinanceiro(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Financeiro>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteFinanceiro(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchFinanceiroById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +163,17 @@ public class FinanceiroDACTest extends AbstractTransactionalJUnit4SpringContextT
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Financeiro> response = getFinanceiroDAC().fetchFinanceiroById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchFinanceiroById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Financeiro> response = getFinanceiroDAC().fetchFinanceiroById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +191,23 @@ public class FinanceiroDACTest extends AbstractTransactionalJUnit4SpringContextT
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public Financeiro insertFinanceiro(PersistanceActionEnum action)
+	{
+		Financeiro exame = new Financeiro();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataFinanceiro((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertFinanceiro.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

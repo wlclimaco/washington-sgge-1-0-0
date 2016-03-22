@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Conta;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.ContaInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -72,7 +72,7 @@ public class ContaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ContaDACTest.class);
-	private IEmpresaDAC contaDAC; // injected by Spring through setter @resource
+	private IContaDAC contaDAC; // injected by Spring through setter @resource
 
 	// below
 
@@ -92,9 +92,17 @@ public class ContaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Conta funcionario = new Conta();
-		funcionario = insertConta(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Conta> funcionarioResponse = getContaDAC().updateConta(funcionario);
+		funcionario = insertConta(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Conta> response = new InternalResultsResponse<Conta>();
+		Integer a = getEntidadeDAC().insertConta(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Conta>();
+		
+		a = getEntidadeDAC().updateConta(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +114,24 @@ public class ContaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Conta funcionario = new Conta();
 		funcionario = insertConta(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Conta> funcionarioResponse = getContaDAC().insertConta(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Conta> responseA = getContaDAC().fetchContaById(request);
+		InternalResultsResponse<Conta> response = new InternalResultsResponse<Conta>();
+
+		Integer a = getContaDAC().insertConta(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Conta funcionario = new Conta();
+		funcionario = insertConta(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Conta> response = new InternalResultsResponse<Conta>();
+
+		Integer a = getEntidadeDAC().insertConta(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Conta> responseA = getEntidadeDAC().fetchContaById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +140,20 @@ public class ContaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Conta funcionario = new Conta();
-		funcionario.setId(1);
-		funcionario = insertConta(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getContaDAC().deleteConta(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertConta(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Conta> response = new InternalResultsResponse<Conta>();
+		Integer a = getEntidadeDAC().insertConta(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Conta>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteConta(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchContaById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +163,17 @@ public class ContaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Conta> response = getContaDAC().fetchContaById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchContaById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Conta> response = getContaDAC().fetchContaById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +191,23 @@ public class ContaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public Conta insertConta(PersistanceActionEnum action)
+	{
+		Conta exame = new Conta();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataConta((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertConta.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

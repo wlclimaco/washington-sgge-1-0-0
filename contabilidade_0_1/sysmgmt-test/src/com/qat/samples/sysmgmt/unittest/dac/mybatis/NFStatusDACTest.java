@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.NFStatus;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.NFStatusInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -71,20 +71,21 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 public class NFStatusDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
+	
 	private static final Logger LOG = LoggerFactory.getLogger(NFStatusDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private INFStatusDAC nfStatusDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public INFStatusDAC getNFStatusDAC()
 	{
-		return enderecoDAC;
+		return nfStatusDAC;
 	}
 
 	@Resource
-	public void setNFStatusDAC(INFStatusDAC enderecoDAC)
+	public void setNFStatusDAC(INFStatusDAC nfStatusDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.nfStatusDAC = nfStatusDAC;
 	}
 
 	@Test
@@ -92,9 +93,17 @@ public class NFStatusDACTest extends AbstractTransactionalJUnit4SpringContextTes
 	{
 
 		NFStatus funcionario = new NFStatus();
-		funcionario = insertNFStatus(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<NFStatus> funcionarioResponse = getNFStatusDAC().updateNFStatus(funcionario);
+		funcionario = insertNFStatus(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<NFStatus> response = new InternalResultsResponse<NFStatus>();
+		Integer a = getEntidadeDAC().insertNFStatus(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<NFStatus>();
+		
+		a = getEntidadeDAC().updateNFStatus(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +115,24 @@ public class NFStatusDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		NFStatus funcionario = new NFStatus();
 		funcionario = insertNFStatus(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<NFStatus> funcionarioResponse = getNFStatusDAC().insertNFStatus(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<NFStatus> responseA = getNFStatusDAC().fetchNFStatusById(request);
+		InternalResultsResponse<NFStatus> response = new InternalResultsResponse<NFStatus>();
+
+		Integer a = getNFStatusDAC().insertNFStatus(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		NFStatus funcionario = new NFStatus();
+		funcionario = insertNFStatus(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<NFStatus> response = new InternalResultsResponse<NFStatus>();
+
+		Integer a = getEntidadeDAC().insertNFStatus(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<NFStatus> responseA = getEntidadeDAC().fetchNFStatusById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +141,20 @@ public class NFStatusDACTest extends AbstractTransactionalJUnit4SpringContextTes
 	{
 
 		NFStatus funcionario = new NFStatus();
-		funcionario.setId(1);
-		funcionario = insertNFStatus(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getNFStatusDAC().deleteNFStatus(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertNFStatus(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<NFStatus> response = new InternalResultsResponse<NFStatus>();
+		Integer a = getEntidadeDAC().insertNFStatus(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<NFStatus>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteNFStatus(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchNFStatusById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +164,17 @@ public class NFStatusDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<NFStatus> response = getNFStatusDAC().fetchNFStatusById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchNFStatusById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<NFStatus> response = getNFStatusDAC().fetchNFStatusById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +192,23 @@ public class NFStatusDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public NFStatus insertNFStatus(PersistanceActionEnum action)
+	{
+		NFStatus exame = new NFStatus();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataNFStatus((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertNFStatus.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

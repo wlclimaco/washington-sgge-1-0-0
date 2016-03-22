@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Marca;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.MarcaInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -71,20 +71,21 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 public class MarcaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
+	
 	private static final Logger LOG = LoggerFactory.getLogger(MarcaDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private IMarcaDAC marcaDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public IMarcaDAC getMarcaDAC()
 	{
-		return enderecoDAC;
+		return marcaDAC;
 	}
 
 	@Resource
-	public void setMarcaDAC(IMarcaDAC enderecoDAC)
+	public void setMarcaDAC(IMarcaDAC marcaDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.marcaDAC = marcaDAC;
 	}
 
 	@Test
@@ -92,9 +93,17 @@ public class MarcaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Marca funcionario = new Marca();
-		funcionario = insertMarca(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Marca> funcionarioResponse = getMarcaDAC().updateMarca(funcionario);
+		funcionario = insertMarca(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Marca> response = new InternalResultsResponse<Marca>();
+		Integer a = getEntidadeDAC().insertMarca(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Marca>();
+		
+		a = getEntidadeDAC().updateMarca(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +115,24 @@ public class MarcaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Marca funcionario = new Marca();
 		funcionario = insertMarca(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Marca> funcionarioResponse = getMarcaDAC().insertMarca(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Marca> responseA = getMarcaDAC().fetchMarcaById(request);
+		InternalResultsResponse<Marca> response = new InternalResultsResponse<Marca>();
+
+		Integer a = getMarcaDAC().insertMarca(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Marca funcionario = new Marca();
+		funcionario = insertMarca(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Marca> response = new InternalResultsResponse<Marca>();
+
+		Integer a = getEntidadeDAC().insertMarca(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Marca> responseA = getEntidadeDAC().fetchMarcaById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +141,20 @@ public class MarcaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Marca funcionario = new Marca();
-		funcionario.setId(1);
-		funcionario = insertMarca(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getMarcaDAC().deleteMarca(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertMarca(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Marca> response = new InternalResultsResponse<Marca>();
+		Integer a = getEntidadeDAC().insertMarca(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Marca>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteMarca(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchMarcaById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +164,17 @@ public class MarcaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Marca> response = getMarcaDAC().fetchMarcaById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchMarcaById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Marca> response = getMarcaDAC().fetchMarcaById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +192,23 @@ public class MarcaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public Marca insertMarca(PersistanceActionEnum action)
+	{
+		Marca exame = new Marca();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataMarca((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertMarca.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

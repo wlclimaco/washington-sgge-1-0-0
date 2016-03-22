@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Tributacao;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.TributacaoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -71,20 +71,21 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 public class TributacaoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
+	
 	private static final Logger LOG = LoggerFactory.getLogger(TributacaoDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private ITributacaoDAC tributacaoDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public ITributacaoDAC getTributacaoDAC()
 	{
-		return enderecoDAC;
+		return tributacaoDAC;
 	}
 
 	@Resource
-	public void setTributacaoDAC(ITributacaoDAC enderecoDAC)
+	public void setTributacaoDAC(ITributacaoDAC tributacaoDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.tributacaoDAC = tributacaoDAC;
 	}
 
 	@Test
@@ -92,9 +93,17 @@ public class TributacaoDACTest extends AbstractTransactionalJUnit4SpringContextT
 	{
 
 		Tributacao funcionario = new Tributacao();
-		funcionario = insertTributacao(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Tributacao> funcionarioResponse = getTributacaoDAC().updateTributacao(funcionario);
+		funcionario = insertTributacao(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Tributacao> response = new InternalResultsResponse<Tributacao>();
+		Integer a = getEntidadeDAC().insertTributacao(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Tributacao>();
+		
+		a = getEntidadeDAC().updateTributacao(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +115,24 @@ public class TributacaoDACTest extends AbstractTransactionalJUnit4SpringContextT
 		Tributacao funcionario = new Tributacao();
 		funcionario = insertTributacao(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Tributacao> funcionarioResponse = getTributacaoDAC().insertTributacao(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Tributacao> responseA = getTributacaoDAC().fetchTributacaoById(request);
+		InternalResultsResponse<Tributacao> response = new InternalResultsResponse<Tributacao>();
+
+		Integer a = getTributacaoDAC().insertTributacao(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Tributacao funcionario = new Tributacao();
+		funcionario = insertTributacao(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Tributacao> response = new InternalResultsResponse<Tributacao>();
+
+		Integer a = getEntidadeDAC().insertTributacao(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Tributacao> responseA = getEntidadeDAC().fetchTributacaoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +141,20 @@ public class TributacaoDACTest extends AbstractTransactionalJUnit4SpringContextT
 	{
 
 		Tributacao funcionario = new Tributacao();
-		funcionario.setId(1);
-		funcionario = insertTributacao(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getTributacaoDAC().deleteTributacao(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertTributacao(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Tributacao> response = new InternalResultsResponse<Tributacao>();
+		Integer a = getEntidadeDAC().insertTributacao(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Tributacao>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteTributacao(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchTributacaoById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +164,17 @@ public class TributacaoDACTest extends AbstractTransactionalJUnit4SpringContextT
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Tributacao> response = getTributacaoDAC().fetchTributacaoById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchTributacaoById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Tributacao> response = getTributacaoDAC().fetchTributacaoById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +192,23 @@ public class TributacaoDACTest extends AbstractTransactionalJUnit4SpringContextT
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public Tributacao insertTributacao(PersistanceActionEnum action)
+	{
+		Tributacao exame = new Tributacao();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataTributacao((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertTributacao.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

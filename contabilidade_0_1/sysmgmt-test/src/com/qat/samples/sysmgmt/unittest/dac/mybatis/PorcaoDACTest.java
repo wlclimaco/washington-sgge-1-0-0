@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Porcao;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.PorcaoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -71,20 +71,21 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 public class PorcaoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
+	
 	private static final Logger LOG = LoggerFactory.getLogger(PorcaoDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private IPorcaoDAC porcaoDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public IPorcaoDAC getPorcaoDAC()
 	{
-		return enderecoDAC;
+		return porcaoDAC;
 	}
 
 	@Resource
-	public void setPorcaoDAC(IPorcaoDAC enderecoDAC)
+	public void setPorcaoDAC(IPorcaoDAC porcaoDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.porcaoDAC = porcaoDAC;
 	}
 
 	@Test
@@ -92,9 +93,17 @@ public class PorcaoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Porcao funcionario = new Porcao();
-		funcionario = insertPorcao(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Porcao> funcionarioResponse = getPorcaoDAC().updatePorcao(funcionario);
+		funcionario = insertPorcao(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Porcao> response = new InternalResultsResponse<Porcao>();
+		Integer a = getEntidadeDAC().insertPorcao(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Porcao>();
+		
+		a = getEntidadeDAC().updatePorcao(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +115,24 @@ public class PorcaoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Porcao funcionario = new Porcao();
 		funcionario = insertPorcao(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Porcao> funcionarioResponse = getPorcaoDAC().insertPorcao(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Porcao> responseA = getPorcaoDAC().fetchPorcaoById(request);
+		InternalResultsResponse<Porcao> response = new InternalResultsResponse<Porcao>();
+
+		Integer a = getPorcaoDAC().insertPorcao(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Porcao funcionario = new Porcao();
+		funcionario = insertPorcao(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Porcao> response = new InternalResultsResponse<Porcao>();
+
+		Integer a = getEntidadeDAC().insertPorcao(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Porcao> responseA = getEntidadeDAC().fetchPorcaoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +141,20 @@ public class PorcaoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Porcao funcionario = new Porcao();
-		funcionario.setId(1);
-		funcionario = insertPorcao(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getPorcaoDAC().deletePorcao(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertPorcao(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Porcao> response = new InternalResultsResponse<Porcao>();
+		Integer a = getEntidadeDAC().insertPorcao(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Porcao>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deletePorcao(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchPorcaoById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +164,17 @@ public class PorcaoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Porcao> response = getPorcaoDAC().fetchPorcaoById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchPorcaoById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Porcao> response = getPorcaoDAC().fetchPorcaoById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +192,23 @@ public class PorcaoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public Porcao insertPorcao(PersistanceActionEnum action)
+	{
+		Porcao exame = new Porcao();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataPorcao((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertPorcao.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

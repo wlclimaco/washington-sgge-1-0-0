@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Horario;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.HorarioInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -71,20 +71,21 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 public class HorarioDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
+
 	private static final Logger LOG = LoggerFactory.getLogger(HorarioDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private IHorarioDAC horarioDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public IHorarioDAC getHorarioDAC()
 	{
-		return enderecoDAC;
+		return horarioDAC;
 	}
 
 	@Resource
-	public void setHorarioDAC(IHorarioDAC enderecoDAC)
+	public void setHorarioDAC(IHorarioDAC horarioDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.horarioDAC = horarioDAC;
 	}
 
 	@Test
@@ -92,9 +93,17 @@ public class HorarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 	{
 
 		Horario funcionario = new Horario();
-		funcionario = insertHorario(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Horario> funcionarioResponse = getHorarioDAC().updateHorario(funcionario);
+		funcionario = insertHorario(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Horario> response = new InternalResultsResponse<Horario>();
+		Integer a = getEntidadeDAC().insertHorario(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Horario>();
+		
+		a = getEntidadeDAC().updateHorario(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +115,24 @@ public class HorarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		Horario funcionario = new Horario();
 		funcionario = insertHorario(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Horario> funcionarioResponse = getHorarioDAC().insertHorario(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Horario> responseA = getHorarioDAC().fetchHorarioById(request);
+		InternalResultsResponse<Horario> response = new InternalResultsResponse<Horario>();
+
+		Integer a = getHorarioDAC().insertHorario(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Horario funcionario = new Horario();
+		funcionario = insertHorario(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Horario> response = new InternalResultsResponse<Horario>();
+
+		Integer a = getEntidadeDAC().insertHorario(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Horario> responseA = getEntidadeDAC().fetchHorarioById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +141,20 @@ public class HorarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 	{
 
 		Horario funcionario = new Horario();
-		funcionario.setId(1);
-		funcionario = insertHorario(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getHorarioDAC().deleteHorario(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertHorario(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Horario> response = new InternalResultsResponse<Horario>();
+		Integer a = getEntidadeDAC().insertHorario(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Horario>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteHorario(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchHorarioById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +164,17 @@ public class HorarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Horario> response = getHorarioDAC().fetchHorarioById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchHorarioById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Horario> response = getHorarioDAC().fetchHorarioById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +192,23 @@ public class HorarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public Horario insertHorario(PersistanceActionEnum action)
+	{
+		Horario exame = new Horario();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataHorario((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertHorario.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

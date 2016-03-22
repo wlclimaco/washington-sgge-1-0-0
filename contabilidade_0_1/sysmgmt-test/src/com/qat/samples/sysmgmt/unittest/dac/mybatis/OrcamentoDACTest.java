@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Orcamento;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.OrcamentoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -71,20 +71,21 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 public class OrcamentoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
+	
 	private static final Logger LOG = LoggerFactory.getLogger(OrcamentoDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private IOrcamentoDAC orcamentoDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public IOrcamentoDAC getOrcamentoDAC()
 	{
-		return enderecoDAC;
+		return orcamentoDAC;
 	}
 
 	@Resource
-	public void setOrcamentoDAC(IOrcamentoDAC enderecoDAC)
+	public void setOrcamentoDAC(IOrcamentoDAC orcamentoDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.orcamentoDAC = orcamentoDAC;
 	}
 
 	@Test
@@ -92,9 +93,17 @@ public class OrcamentoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 	{
 
 		Orcamento funcionario = new Orcamento();
-		funcionario = insertOrcamento(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Orcamento> funcionarioResponse = getOrcamentoDAC().updateOrcamento(funcionario);
+		funcionario = insertOrcamento(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Orcamento> response = new InternalResultsResponse<Orcamento>();
+		Integer a = getEntidadeDAC().insertOrcamento(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Orcamento>();
+		
+		a = getEntidadeDAC().updateOrcamento(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +115,24 @@ public class OrcamentoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 		Orcamento funcionario = new Orcamento();
 		funcionario = insertOrcamento(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Orcamento> funcionarioResponse = getOrcamentoDAC().insertOrcamento(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Orcamento> responseA = getOrcamentoDAC().fetchOrcamentoById(request);
+		InternalResultsResponse<Orcamento> response = new InternalResultsResponse<Orcamento>();
+
+		Integer a = getOrcamentoDAC().insertOrcamento(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Orcamento funcionario = new Orcamento();
+		funcionario = insertOrcamento(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Orcamento> response = new InternalResultsResponse<Orcamento>();
+
+		Integer a = getEntidadeDAC().insertOrcamento(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Orcamento> responseA = getEntidadeDAC().fetchOrcamentoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +141,20 @@ public class OrcamentoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 	{
 
 		Orcamento funcionario = new Orcamento();
-		funcionario.setId(1);
-		funcionario = insertOrcamento(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getOrcamentoDAC().deleteOrcamento(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertOrcamento(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Orcamento> response = new InternalResultsResponse<Orcamento>();
+		Integer a = getEntidadeDAC().insertOrcamento(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Orcamento>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteOrcamento(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchOrcamentoById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +164,17 @@ public class OrcamentoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Orcamento> response = getOrcamentoDAC().fetchOrcamentoById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchOrcamentoById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Orcamento> response = getOrcamentoDAC().fetchOrcamentoById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +192,23 @@ public class OrcamentoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public Orcamento insertOrcamento(PersistanceActionEnum action)
+	{
+		Orcamento exame = new Orcamento();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataOrcamento((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertOrcamento.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

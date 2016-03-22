@@ -36,19 +36,19 @@ public class CnaeDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(CnaeDACTest.class);
-	private ICnaeDAC avisosDAC; // injected by Spring through setter @resource
+	private ICnaeDAC cnaeDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public ICnaeDAC getCnaeDAC()
 	{
-		return avisosDAC;
+		return cnaeDAC;
 	}
 
 	@Resource
-	public void setCnaeDAC(ICnaeDAC avisosDAC)
+	public void setCnaeDAC(ICnaeDAC cnaeDAC)
 	{
-		this.avisosDAC = avisosDAC;
+		this.cnaeDAC = cnaeDAC;
 	}
 
 	@Test
@@ -56,9 +56,18 @@ public class CnaeDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Cnae funcionario = new Cnae();
-		funcionario = insertCnae(PersistanceActionEnum.UPDATE);
-
-		Integer a = getCnaeDAC().updateCnae(funcionario);
+		funcionario = insertCnae(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
+		Integer a = getEntidadeDAC().insertCnae(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Cnae>();
+		
+		a = getEntidadeDAC().updateCnae(funcionario, response);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -69,7 +78,24 @@ public class CnaeDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Cnae funcionario = new Cnae();
 		funcionario = insertCnae(PersistanceActionEnum.INSERT);
 
-		Integer a = getCnaeDAC().insertCnae(funcionario);
+		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
+
+		Integer a = getCnaeDAC().insertCnae(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Cnae funcionario = new Cnae();
+		funcionario = insertCnae(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
+
+		Integer a = getEntidadeDAC().insertCnae(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Cnae> responseA = getEntidadeDAC().fetchCnaeById(response.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().size() == 1);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -78,9 +104,19 @@ public class CnaeDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Cnae funcionario = new Cnae();
-		funcionario.setId(1);
-		funcionario = insertCnae(PersistanceActionEnum.DELETE);
-		Integer a = getCnaeDAC().deleteCnae(funcionario);
+		funcionario = insertCnae(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
+		Integer a = getEntidadeDAC().insertCnae(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Cnae>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteCnae(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchCnaeById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}
 
@@ -91,6 +127,17 @@ public class CnaeDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Cnae> response = getCnaeDAC().fetchCnaeById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchCnaeById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Cnae> response = getCnaeDAC().fetchCnaeById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}

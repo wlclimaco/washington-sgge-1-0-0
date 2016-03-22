@@ -36,19 +36,19 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ExameDACTest.class);
-	private IExameDAC enderecoDAC; // injected by Spring through setter @resource
+	private IExameDAC exameDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public IExameDAC getExameDAC()
 	{
-		return enderecoDAC;
+		return exameDAC;
 	}
 
 	@Resource
-	public void setExameDAC(IExameDAC enderecoDAC)
+	public void setExameDAC(IExameDAC exameDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.exameDAC = exameDAC;
 	}
 
 	@Test
@@ -56,9 +56,18 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Exame funcionario = new Exame();
-		funcionario = insertExame(PersistanceActionEnum.UPDATE);
-
-		Integer a = getExameDAC().updateExame(funcionario);
+		funcionario = insertExame(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Exame> response = new InternalResultsResponse<Exame>();
+		Integer a = getEntidadeDAC().insertExame(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Exame>();
+		
+		a = getEntidadeDAC().updateExame(funcionario, response);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -69,7 +78,24 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Exame funcionario = new Exame();
 		funcionario = insertExame(PersistanceActionEnum.INSERT);
 
-		Integer a = getExameDAC().insertExame(funcionario);
+		InternalResultsResponse<Exame> response = new InternalResultsResponse<Exame>();
+
+		Integer a = getExameDAC().insertExame(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Exame funcionario = new Exame();
+		funcionario = insertExame(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Exame> response = new InternalResultsResponse<Exame>();
+
+		Integer a = getEntidadeDAC().insertExame(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Exame> responseA = getEntidadeDAC().fetchExameById(response.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().size() == 1);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -78,9 +104,19 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Exame funcionario = new Exame();
-		funcionario.setId(1);
-		funcionario = insertExame(PersistanceActionEnum.DELETE);
-		Integer a = getExameDAC().deleteExame(funcionario);
+		funcionario = insertExame(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Exame> response = new InternalResultsResponse<Exame>();
+		Integer a = getEntidadeDAC().insertExame(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Exame>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteExame(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchExameById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}
 
@@ -91,6 +127,17 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Exame> response = getExameDAC().fetchExameById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchExameById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Exame> response = getExameDAC().fetchExameById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -113,10 +160,11 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Exame exame = new Exame();
 		Date a = new Date();
 		exame.setId(1);
-		exame.setNome("Nome");
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
 		// exame.setDataExame((int)a.getTime());
-		exame.setMedicoResponsavel("Resposnsavel");
-		exame.setLaboratorio("Laboratorio");
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
 
 		return exame;
 	}
@@ -124,6 +172,6 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertExame.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

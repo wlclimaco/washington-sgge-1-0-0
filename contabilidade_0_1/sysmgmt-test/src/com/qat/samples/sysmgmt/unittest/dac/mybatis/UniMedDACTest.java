@@ -71,20 +71,20 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 public class UniMedDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
-	private static final Logger LOG = LoggerFactory.getLogger(UniMedDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private static final Logger LOG = LoggerFactory.getLogger(ClassificacaoDACTest.class);
+	private IUniMedDAC unimedDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public IUniMedDAC getUniMedDAC()
 	{
-		return enderecoDAC;
+		return unimedDAC;
 	}
 
 	@Resource
-	public void setUniMedDAC(IUniMedDAC enderecoDAC)
+	public void setUniMedDAC(IUniMedDAC unimedDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.unimedDAC = unimedDAC;
 	}
 
 	@Test
@@ -92,9 +92,17 @@ public class UniMedDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		UniMed funcionario = new UniMed();
-		funcionario = insertUniMed(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<UniMed> funcionarioResponse = getUniMedDAC().updateUniMed(funcionario);
+		funcionario = insertUniMed(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<UniMed> response = new InternalResultsResponse<UniMed>();
+		Integer a = getEntidadeDAC().insertUniMed(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<UniMed>();
+		
+		a = getEntidadeDAC().updateUniMed(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +114,24 @@ public class UniMedDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		UniMed funcionario = new UniMed();
 		funcionario = insertUniMed(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<UniMed> funcionarioResponse = getUniMedDAC().insertUniMed(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<UniMed> responseA = getUniMedDAC().fetchUniMedById(request);
+		InternalResultsResponse<UniMed> response = new InternalResultsResponse<UniMed>();
+
+		Integer a = getUniMedDAC().insertUniMed(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		UniMed funcionario = new UniMed();
+		funcionario = insertUniMed(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<UniMed> response = new InternalResultsResponse<UniMed>();
+
+		Integer a = getEntidadeDAC().insertUniMed(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<UniMed> responseA = getEntidadeDAC().fetchUniMedById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +140,20 @@ public class UniMedDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		UniMed funcionario = new UniMed();
-		funcionario.setId(1);
-		funcionario = insertUniMed(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getUniMedDAC().deleteUniMed(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertUniMed(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<UniMed> response = new InternalResultsResponse<UniMed>();
+		Integer a = getEntidadeDAC().insertUniMed(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<UniMed>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteUniMed(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchUniMedById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +163,17 @@ public class UniMedDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<UniMed> response = getUniMedDAC().fetchUniMedById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchUniMedById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<UniMed> response = getUniMedDAC().fetchUniMedById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +191,23 @@ public class UniMedDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public UniMed insertUniMed(PersistanceActionEnum action)
+	{
+		UniMed exame = new UniMed();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataUniMed((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertUniMed.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

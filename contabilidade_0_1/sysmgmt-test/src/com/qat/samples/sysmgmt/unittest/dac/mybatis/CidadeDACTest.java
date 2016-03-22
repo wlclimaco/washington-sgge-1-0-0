@@ -36,19 +36,19 @@ public class CidadeDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(CidadeDACTest.class);
-	private ICidadeDAC avisosDAC; // injected by Spring through setter @resource
+	private ICidadeDAC cidadeDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public ICidadeDAC getCidadeDAC()
 	{
-		return avisosDAC;
+		return cidadeDAC;
 	}
 
 	@Resource
-	public void setCidadeDAC(ICidadeDAC avisosDAC)
+	public void setCidadeDAC(ICidadeDAC cidadeDAC)
 	{
-		this.avisosDAC = avisosDAC;
+		this.cidadeDAC = cidadeDAC;
 	}
 
 	@Test
@@ -56,10 +56,18 @@ public class CidadeDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Cidade funcionario = new Cidade();
-		funcionario = insertCidade(PersistanceActionEnum.UPDATE);
-
+		funcionario = insertCidade(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Cidade> response = new InternalResultsResponse<Cidade>();
-		Integer a = getCidadeDAC().updateCidade(funcionario, response);
+		Integer a = getEntidadeDAC().insertCidade(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Cidade>();
+		
+		a = getEntidadeDAC().updateCidade(funcionario, response);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -71,7 +79,23 @@ public class CidadeDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		funcionario = insertCidade(PersistanceActionEnum.INSERT);
 
 		InternalResultsResponse<Cidade> response = new InternalResultsResponse<Cidade>();
-		Integer a = getCidadeDAC().insertCidade(funcionario, "", response);
+
+		Integer a = getCidadeDAC().insertCidade(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Cidade funcionario = new Cidade();
+		funcionario = insertCidade(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Cidade> response = new InternalResultsResponse<Cidade>();
+
+		Integer a = getEntidadeDAC().insertCidade(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Cidade> responseA = getEntidadeDAC().fetchCidadeById(response.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().size() == 1);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -80,10 +104,19 @@ public class CidadeDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Cidade funcionario = new Cidade();
-		funcionario.setId(1);
-		funcionario = insertCidade(PersistanceActionEnum.DELETE);
+		funcionario = insertCidade(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Cidade> response = new InternalResultsResponse<Cidade>();
-		Integer a = getCidadeDAC().deleteCidade(funcionario, response);
+		Integer a = getEntidadeDAC().insertCidade(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Cidade>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteCidade(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchCidadeById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}
 
@@ -94,6 +127,17 @@ public class CidadeDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Cidade> response = getCidadeDAC().fetchCidadeById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchCidadeById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Cidade> response = getCidadeDAC().fetchCidadeById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}

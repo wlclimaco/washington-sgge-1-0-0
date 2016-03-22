@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Eventos;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.EventosInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -71,89 +71,144 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 public class EventoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
-	private static final Logger LOG = LoggerFactory.getLogger(EventoDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	
+	private static final Logger LOG = LoggerFactory.getLogger(EventosDACTest.class);
+	private IEventosDAC eventosDAC; // injected by Spring through setter @resource
 
 	// below
 
-	public IEventoDAC getEventoDAC()
+	public IEventosDAC getEventosDAC()
 	{
-		return enderecoDAC;
+		return eventosDAC;
 	}
 
 	@Resource
-	public void setEventoDAC(IEventoDAC enderecoDAC)
+	public void setEventosDAC(IEventosDAC eventosDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.eventosDAC = eventosDAC;
 	}
 
 	@Test
-	public void testupdateEvento() throws Exception
+	public void testupdateEventos() throws Exception
 	{
 
-		Evento funcionario = new Evento();
-		funcionario = insertEvento(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Evento> funcionarioResponse = getEventoDAC().updateEvento(funcionario);
+		Eventos funcionario = new Eventos();
+		funcionario = insertEventos(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Eventos> response = new InternalResultsResponse<Eventos>();
+		Integer a = getEntidadeDAC().insertEventos(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Eventos>();
+		
+		a = getEntidadeDAC().updateEventos(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
 	@Test
-	public void testinsertEvento() throws Exception
+	public void testinsertEventos() throws Exception
 	{
 
-		Evento funcionario = new Evento();
-		funcionario = insertEvento(PersistanceActionEnum.INSERT);
+		Eventos funcionario = new Eventos();
+		funcionario = insertEventos(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Evento> funcionarioResponse = getEventoDAC().insertEvento(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Evento> responseA = getEventoDAC().fetchEventoById(request);
+		InternalResultsResponse<Eventos> response = new InternalResultsResponse<Eventos>();
+
+		Integer a = getEventosDAC().insertEventos(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Eventos funcionario = new Eventos();
+		funcionario = insertEventos(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Eventos> response = new InternalResultsResponse<Eventos>();
+
+		Integer a = getEntidadeDAC().insertEventos(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Eventos> responseA = getEntidadeDAC().fetchEventosById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
 	@Test
-	public void testdeleteEvento() throws Exception
+	public void testdeleteEventos() throws Exception
 	{
 
-		Evento funcionario = new Evento();
-		funcionario.setId(1);
-		funcionario = insertEvento(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getEventoDAC().deleteEvento(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		Eventos funcionario = new Eventos();
+		funcionario = insertEventos(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Eventos> response = new InternalResultsResponse<Eventos>();
+		Integer a = getEntidadeDAC().insertEventos(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Eventos>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteEventos(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchEventosById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
-	public void testfetchEventoById() throws Exception
+	public void testfetchEventosById() throws Exception
 	{
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
-		InternalResultsResponse<Evento> response = getEventoDAC().fetchEventoById(request);
+		InternalResultsResponse<Eventos> response = getEventosDAC().fetchEventosById(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testfetchEventoByRequest() throws Exception
+	public void testfetchEventosById2() throws Exception
 	{
 		// check for valid and precount
-		EventoInquiryRequest request = new EventoInquiryRequest();
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Eventos> response = getEventosDAC().fetchEventosById(1);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchEventosByRequest() throws Exception
+	{
+		// check for valid and precount
+		EventosInquiryRequest request = new EventosInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(4);
-		InternalResultsResponse<Evento> response = getEventoDAC().fetchEventoByRequest(request);
+		InternalResultsResponse<Eventos> response = getEventosDAC().fetchEventosByRequest(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+	}
+
+	public Eventos insertEventos(PersistanceActionEnum action)
+	{
+		Eventos exame = new Eventos();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataEventos((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
 	}
 
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertEvento.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

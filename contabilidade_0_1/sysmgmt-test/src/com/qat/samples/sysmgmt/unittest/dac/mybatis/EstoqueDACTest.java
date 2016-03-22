@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Estoque;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.EstoqueInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -72,19 +72,19 @@ public class EstoqueDACTest extends AbstractTransactionalJUnit4SpringContextTest
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(EstoqueDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private IEstoqueDAC estoqueDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public IEstoqueDAC getEstoqueDAC()
 	{
-		return enderecoDAC;
+		return estoqueDAC;
 	}
 
 	@Resource
-	public void setEstoqueDAC(IEstoqueDAC enderecoDAC)
+	public void setEstoqueDAC(IEstoqueDAC estoqueDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.estoqueDAC = estoqueDAC;
 	}
 
 	@Test
@@ -92,9 +92,17 @@ public class EstoqueDACTest extends AbstractTransactionalJUnit4SpringContextTest
 	{
 
 		Estoque funcionario = new Estoque();
-		funcionario = insertEstoque(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Estoque> funcionarioResponse = getEstoqueDAC().updateEstoque(funcionario);
+		funcionario = insertEstoque(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Estoque> response = new InternalResultsResponse<Estoque>();
+		Integer a = getEntidadeDAC().insertEstoque(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Estoque>();
+		
+		a = getEntidadeDAC().updateEstoque(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +114,24 @@ public class EstoqueDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		Estoque funcionario = new Estoque();
 		funcionario = insertEstoque(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Estoque> funcionarioResponse = getEstoqueDAC().insertEstoque(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Estoque> responseA = getEstoqueDAC().fetchEstoqueById(request);
+		InternalResultsResponse<Estoque> response = new InternalResultsResponse<Estoque>();
+
+		Integer a = getEstoqueDAC().insertEstoque(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Estoque funcionario = new Estoque();
+		funcionario = insertEstoque(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Estoque> response = new InternalResultsResponse<Estoque>();
+
+		Integer a = getEntidadeDAC().insertEstoque(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Estoque> responseA = getEntidadeDAC().fetchEstoqueById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +140,20 @@ public class EstoqueDACTest extends AbstractTransactionalJUnit4SpringContextTest
 	{
 
 		Estoque funcionario = new Estoque();
-		funcionario.setId(1);
-		funcionario = insertEstoque(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getEstoqueDAC().deleteEstoque(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertEstoque(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Estoque> response = new InternalResultsResponse<Estoque>();
+		Integer a = getEntidadeDAC().insertEstoque(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Estoque>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteEstoque(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchEstoqueById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +163,17 @@ public class EstoqueDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Estoque> response = getEstoqueDAC().fetchEstoqueById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchEstoqueById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Estoque> response = getEstoqueDAC().fetchEstoqueById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +191,23 @@ public class EstoqueDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public Estoque insertEstoque(PersistanceActionEnum action)
+	{
+		Estoque exame = new Estoque();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataEstoque((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertEstoque.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Historico;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.HistoricoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -72,19 +72,19 @@ public class HistoricoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(HistoricoDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private IHistoricoDAC historicoDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public IHistoricoDAC getHistoricoDAC()
 	{
-		return enderecoDAC;
+		return historicoDAC;
 	}
 
 	@Resource
-	public void setHistoricoDAC(IHistoricoDAC enderecoDAC)
+	public void setHistoricoDAC(IHistoricoDAC historicoDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.historicoDAC = historicoDAC;
 	}
 
 	@Test
@@ -92,9 +92,17 @@ public class HistoricoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 	{
 
 		Historico funcionario = new Historico();
-		funcionario = insertHistorico(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Historico> funcionarioResponse = getHistoricoDAC().updateHistorico(funcionario);
+		funcionario = insertHistorico(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Historico> response = new InternalResultsResponse<Historico>();
+		Integer a = getEntidadeDAC().insertHistorico(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Historico>();
+		
+		a = getEntidadeDAC().updateHistorico(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +114,24 @@ public class HistoricoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 		Historico funcionario = new Historico();
 		funcionario = insertHistorico(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Historico> funcionarioResponse = getHistoricoDAC().insertHistorico(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Historico> responseA = getHistoricoDAC().fetchHistoricoById(request);
+		InternalResultsResponse<Historico> response = new InternalResultsResponse<Historico>();
+
+		Integer a = getHistoricoDAC().insertHistorico(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Historico funcionario = new Historico();
+		funcionario = insertHistorico(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Historico> response = new InternalResultsResponse<Historico>();
+
+		Integer a = getEntidadeDAC().insertHistorico(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Historico> responseA = getEntidadeDAC().fetchHistoricoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +140,20 @@ public class HistoricoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 	{
 
 		Historico funcionario = new Historico();
-		funcionario.setId(1);
-		funcionario = insertHistorico(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getHistoricoDAC().deleteHistorico(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertHistorico(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Historico> response = new InternalResultsResponse<Historico>();
+		Integer a = getEntidadeDAC().insertHistorico(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Historico>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteHistorico(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchHistoricoById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +163,17 @@ public class HistoricoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Historico> response = getHistoricoDAC().fetchHistoricoById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchHistoricoById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Historico> response = getHistoricoDAC().fetchHistoricoById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +191,23 @@ public class HistoricoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public Historico insertHistorico(PersistanceActionEnum action)
+	{
+		Historico exame = new Historico();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataHistorico((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertHistorico.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

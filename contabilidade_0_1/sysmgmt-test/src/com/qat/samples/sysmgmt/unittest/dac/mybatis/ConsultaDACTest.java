@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Consulta;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.ConsultaInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -72,7 +72,7 @@ public class ConsultaDACTest extends AbstractTransactionalJUnit4SpringContextTes
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ConsultaDACTest.class);
-	private IEmpresaDAC consultaDAC; // injected by Spring through setter @resource
+	private IConsultaDAC consultaDAC; // injected by Spring through setter @resource
 
 	// below
 
@@ -92,9 +92,17 @@ public class ConsultaDACTest extends AbstractTransactionalJUnit4SpringContextTes
 	{
 
 		Consulta funcionario = new Consulta();
-		funcionario = insertConsulta(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Consulta> funcionarioResponse = getConsultaDAC().updateConsulta(funcionario);
+		funcionario = insertConsulta(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Consulta> response = new InternalResultsResponse<Consulta>();
+		Integer a = getEntidadeDAC().insertConsulta(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Consulta>();
+		
+		a = getEntidadeDAC().updateConsulta(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +114,24 @@ public class ConsultaDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		Consulta funcionario = new Consulta();
 		funcionario = insertConsulta(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Consulta> funcionarioResponse = getConsultaDAC().insertConsulta(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Consulta> responseA = getConsultaDAC().fetchConsultaById(request);
+		InternalResultsResponse<Consulta> response = new InternalResultsResponse<Consulta>();
+
+		Integer a = getConsultaDAC().insertConsulta(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Consulta funcionario = new Consulta();
+		funcionario = insertConsulta(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Consulta> response = new InternalResultsResponse<Consulta>();
+
+		Integer a = getEntidadeDAC().insertConsulta(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Consulta> responseA = getEntidadeDAC().fetchConsultaById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +140,20 @@ public class ConsultaDACTest extends AbstractTransactionalJUnit4SpringContextTes
 	{
 
 		Consulta funcionario = new Consulta();
-		funcionario.setId(1);
-		funcionario = insertConsulta(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getConsultaDAC().deleteConsulta(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertConsulta(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Consulta> response = new InternalResultsResponse<Consulta>();
+		Integer a = getEntidadeDAC().insertConsulta(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Consulta>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteConsulta(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchConsultaById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +163,17 @@ public class ConsultaDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Consulta> response = getConsultaDAC().fetchConsultaById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchConsultaById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Consulta> response = getConsultaDAC().fetchConsultaById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +191,23 @@ public class ConsultaDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public Consulta insertConsulta(PersistanceActionEnum action)
+	{
+		Consulta exame = new Consulta();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataConsulta((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertConsulta.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

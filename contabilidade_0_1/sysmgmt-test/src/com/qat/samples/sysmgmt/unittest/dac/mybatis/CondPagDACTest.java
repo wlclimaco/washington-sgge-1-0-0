@@ -36,19 +36,19 @@ public class CondPagDACTest extends AbstractTransactionalJUnit4SpringContextTest
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(CondPagDACTest.class);
-	private ICondPagDAC avisosDAC; // injected by Spring through setter @resource
+	private ICondPagDAC condPagDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public ICondPagDAC getCondPagDAC()
 	{
-		return avisosDAC;
+		return condPagDAC;
 	}
 
 	@Resource
-	public void setCondPagDAC(ICondPagDAC avisosDAC)
+	public void setCondPagDAC(ICondPagDAC condPagDAC)
 	{
-		this.avisosDAC = avisosDAC;
+		this.condPagDAC = condPagDAC;
 	}
 
 	@Test
@@ -56,9 +56,18 @@ public class CondPagDACTest extends AbstractTransactionalJUnit4SpringContextTest
 	{
 
 		CondPag funcionario = new CondPag();
-		funcionario = insertCondPag(PersistanceActionEnum.UPDATE);
-
-		Integer a = getCondPagDAC().updateCondPag(funcionario);
+		funcionario = insertCondPag(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<CondPag> response = new InternalResultsResponse<CondPag>();
+		Integer a = getEntidadeDAC().insertCondPag(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<CondPag>();
+		
+		a = getEntidadeDAC().updateCondPag(funcionario, response);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -69,7 +78,24 @@ public class CondPagDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		CondPag funcionario = new CondPag();
 		funcionario = insertCondPag(PersistanceActionEnum.INSERT);
 
-		Integer a = getCondPagDAC().insertCondPag(funcionario);
+		InternalResultsResponse<CondPag> response = new InternalResultsResponse<CondPag>();
+
+		Integer a = getCondPagDAC().insertCondPag(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		CondPag funcionario = new CondPag();
+		funcionario = insertCondPag(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<CondPag> response = new InternalResultsResponse<CondPag>();
+
+		Integer a = getEntidadeDAC().insertCondPag(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<CondPag> responseA = getEntidadeDAC().fetchCondPagById(response.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().size() == 1);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -78,9 +104,19 @@ public class CondPagDACTest extends AbstractTransactionalJUnit4SpringContextTest
 	{
 
 		CondPag funcionario = new CondPag();
-		funcionario.setId(1);
-		funcionario = insertCondPag(PersistanceActionEnum.DELETE);
-		Integer a = getCondPagDAC().deleteCondPag(funcionario);
+		funcionario = insertCondPag(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<CondPag> response = new InternalResultsResponse<CondPag>();
+		Integer a = getEntidadeDAC().insertCondPag(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<CondPag>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteCondPag(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchCondPagById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}
 
@@ -96,10 +132,21 @@ public class CondPagDACTest extends AbstractTransactionalJUnit4SpringContextTest
 	}
 
 	@Test
+	public void testfetchCondPagById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<CondPag> response = getCondPagDAC().fetchCondPagById(1);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
 	public void testfetchCondPagByRequest() throws Exception
 	{
 		// check for valid and precount
-		PagedInquiryRequest request = new PagedInquiryRequest();
+		CondPagInquiryRequest request = new CondPagInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(4);

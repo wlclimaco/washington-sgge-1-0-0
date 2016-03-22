@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Rentabilidade;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.RentabilidadeInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -71,20 +71,21 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 public class RentabilidadeDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
+
 	private static final Logger LOG = LoggerFactory.getLogger(RentabilidadeDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private IRentabilidadeDAC rentabilidadeDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public IRentabilidadeDAC getRentabilidadeDAC()
 	{
-		return enderecoDAC;
+		return rentabilidadeDAC;
 	}
 
 	@Resource
-	public void setRentabilidadeDAC(IRentabilidadeDAC enderecoDAC)
+	public void setRentabilidadeDAC(IRentabilidadeDAC rentabilidadeDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.rentabilidadeDAC = rentabilidadeDAC;
 	}
 
 	@Test
@@ -92,9 +93,17 @@ public class RentabilidadeDACTest extends AbstractTransactionalJUnit4SpringConte
 	{
 
 		Rentabilidade funcionario = new Rentabilidade();
-		funcionario = insertRentabilidade(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Rentabilidade> funcionarioResponse = getRentabilidadeDAC().updateRentabilidade(funcionario);
+		funcionario = insertRentabilidade(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Rentabilidade> response = new InternalResultsResponse<Rentabilidade>();
+		Integer a = getEntidadeDAC().insertRentabilidade(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Rentabilidade>();
+		
+		a = getEntidadeDAC().updateRentabilidade(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +115,24 @@ public class RentabilidadeDACTest extends AbstractTransactionalJUnit4SpringConte
 		Rentabilidade funcionario = new Rentabilidade();
 		funcionario = insertRentabilidade(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Rentabilidade> funcionarioResponse = getRentabilidadeDAC().insertRentabilidade(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Rentabilidade> responseA = getRentabilidadeDAC().fetchRentabilidadeById(request);
+		InternalResultsResponse<Rentabilidade> response = new InternalResultsResponse<Rentabilidade>();
+
+		Integer a = getRentabilidadeDAC().insertRentabilidade(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Rentabilidade funcionario = new Rentabilidade();
+		funcionario = insertRentabilidade(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Rentabilidade> response = new InternalResultsResponse<Rentabilidade>();
+
+		Integer a = getEntidadeDAC().insertRentabilidade(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Rentabilidade> responseA = getEntidadeDAC().fetchRentabilidadeById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +141,20 @@ public class RentabilidadeDACTest extends AbstractTransactionalJUnit4SpringConte
 	{
 
 		Rentabilidade funcionario = new Rentabilidade();
-		funcionario.setId(1);
-		funcionario = insertRentabilidade(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getRentabilidadeDAC().deleteRentabilidade(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertRentabilidade(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Rentabilidade> response = new InternalResultsResponse<Rentabilidade>();
+		Integer a = getEntidadeDAC().insertRentabilidade(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Rentabilidade>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteRentabilidade(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchRentabilidadeById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +164,17 @@ public class RentabilidadeDACTest extends AbstractTransactionalJUnit4SpringConte
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Rentabilidade> response = getRentabilidadeDAC().fetchRentabilidadeById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchRentabilidadeById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Rentabilidade> response = getRentabilidadeDAC().fetchRentabilidadeById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +192,23 @@ public class RentabilidadeDACTest extends AbstractTransactionalJUnit4SpringConte
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public Rentabilidade insertRentabilidade(PersistanceActionEnum action)
+	{
+		Rentabilidade exame = new Rentabilidade();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataRentabilidade((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertRentabilidade.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

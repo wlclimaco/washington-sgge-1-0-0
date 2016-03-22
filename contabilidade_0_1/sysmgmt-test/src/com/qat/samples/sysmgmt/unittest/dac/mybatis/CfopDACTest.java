@@ -32,20 +32,21 @@ import com.qat.samples.sysmgmt.produto.dac.ICfopDAC;
 public class CfopDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
+
 	private static final Logger LOG = LoggerFactory.getLogger(CfopDACTest.class);
-	private ICfopDAC avisosDAC; // injected by Spring through setter @resource
+	private ICfopDAC cfopDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public ICfopDAC getCfopDAC()
 	{
-		return avisosDAC;
+		return cfopDAC;
 	}
 
 	@Resource
-	public void setCfopDAC(ICfopDAC avisosDAC)
+	public void setCfopDAC(ICfopDAC cfopDAC)
 	{
-		this.avisosDAC = avisosDAC;
+		this.cfopDAC = cfopDAC;
 	}
 
 	@Test
@@ -53,9 +54,18 @@ public class CfopDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Cfop funcionario = new Cfop();
-		funcionario = insertCfop(PersistanceActionEnum.UPDATE);
-
-		Integer a = getCfopDAC().updateCfop(funcionario);
+		funcionario = insertCfop(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Cfop> response = new InternalResultsResponse<Cfop>();
+		Integer a = getEntidadeDAC().insertCfop(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Cfop>();
+		
+		a = getEntidadeDAC().updateCfop(funcionario, response);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -66,7 +76,24 @@ public class CfopDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Cfop funcionario = new Cfop();
 		funcionario = insertCfop(PersistanceActionEnum.INSERT);
 
-		Integer a = getCfopDAC().insertCfop(funcionario);
+		InternalResultsResponse<Cfop> response = new InternalResultsResponse<Cfop>();
+
+		Integer a = getCfopDAC().insertCfop(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Cfop funcionario = new Cfop();
+		funcionario = insertCfop(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Cfop> response = new InternalResultsResponse<Cfop>();
+
+		Integer a = getEntidadeDAC().insertCfop(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Cfop> responseA = getEntidadeDAC().fetchCfopById(response.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().size() == 1);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -75,9 +102,19 @@ public class CfopDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Cfop funcionario = new Cfop();
-		funcionario.setId(1);
-		funcionario = insertCfop(PersistanceActionEnum.DELETE);
-		Integer a = getCfopDAC().deleteCfop(funcionario);
+		funcionario = insertCfop(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Cfop> response = new InternalResultsResponse<Cfop>();
+		Integer a = getEntidadeDAC().insertCfop(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Cfop>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteCfop(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchCfopById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}
 
@@ -85,11 +122,22 @@ public class CfopDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	public void testfetchCfopById() throws Exception
 	{
 		// check for valid and precount
-		// FetchByIdRequest request = new FetchByIdRequest();
-		// request.setFetchId(3);
-		// InternalResultsResponse<Cfop> response = getCfopDAC().fetchCfopById(request);
-		// assertTrue(response.getResultsSetInfo().getPageSize() == 1);
-		// assertEquals(response.getStatus(), Status.OperationSuccess);
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Cfop> response = getCfopDAC().fetchCfopById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchCfopById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Cfop> response = getCfopDAC().fetchCfopById(1);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test

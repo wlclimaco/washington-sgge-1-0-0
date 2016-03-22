@@ -42,9 +42,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.Grupo;
 import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.GrupoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
@@ -72,19 +72,19 @@ public class GrupoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(GrupoDACTest.class);
-	private IEmpresaDAC enderecoDAC; // injected by Spring through setter @resource
+	private IGrupoDAC grupoDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public IGrupoDAC getGrupoDAC()
 	{
-		return enderecoDAC;
+		return grupoDAC;
 	}
 
 	@Resource
-	public void setGrupoDAC(IGrupoDAC enderecoDAC)
+	public void setGrupoDAC(IGrupoDAC grupoDAC)
 	{
-		this.enderecoDAC = enderecoDAC;
+		this.grupoDAC = grupoDAC;
 	}
 
 	@Test
@@ -92,9 +92,17 @@ public class GrupoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Grupo funcionario = new Grupo();
-		funcionario = insertGrupo(PersistanceActionEnum.UPDATE);
-
-		InternalResultsResponse<Grupo> funcionarioResponse = getGrupoDAC().updateGrupo(funcionario);
+		funcionario = insertGrupo(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Grupo> response = new InternalResultsResponse<Grupo>();
+		Integer a = getEntidadeDAC().insertGrupo(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Grupo>();
+		
+		a = getEntidadeDAC().updateGrupo(funcionario, response);
 		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
@@ -106,13 +114,24 @@ public class GrupoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Grupo funcionario = new Grupo();
 		funcionario = insertGrupo(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<Grupo> funcionarioResponse = getGrupoDAC().insertGrupo(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(22);
-		InternalResultsResponse<Grupo> responseA = getGrupoDAC().fetchGrupoById(request);
+		InternalResultsResponse<Grupo> response = new InternalResultsResponse<Grupo>();
+
+		Integer a = getGrupoDAC().insertGrupo(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Grupo funcionario = new Grupo();
+		funcionario = insertGrupo(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Grupo> response = new InternalResultsResponse<Grupo>();
+
+		Integer a = getEntidadeDAC().insertGrupo(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Grupo> responseA = getEntidadeDAC().fetchGrupoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == StatusEnum.ANALIZANDO);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -121,10 +140,20 @@ public class GrupoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Grupo funcionario = new Grupo();
-		funcionario.setId(1);
-		funcionario = insertGrupo(PersistanceActionEnum.DELETE);
-		InternalResponse funcionarioResponse = getGrupoDAC().deleteGrupo(funcionario);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		funcionario = insertGrupo(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Grupo> response = new InternalResultsResponse<Grupo>();
+		Integer a = getEntidadeDAC().insertGrupo(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Grupo>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteGrupo(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchGrupoById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
+
 	}
 
 	@Test
@@ -134,6 +163,17 @@ public class GrupoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Grupo> response = getGrupoDAC().fetchGrupoById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchGrupoById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Grupo> response = getGrupoDAC().fetchGrupoById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -151,9 +191,23 @@ public class GrupoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
+	public Grupo insertGrupo(PersistanceActionEnum action)
+	{
+		Grupo exame = new Grupo();
+		Date a = new Date();
+		exame.setId(1);
+		exame.setModelAction(action);
+		// exame.setNome("Nome");
+		// exame.setDataGrupo((int)a.getTime());
+		// exame.setMedicoResponsavel("Resposnsavel");
+		// exame.setLaboratorio("Laboratorio");
+
+		return exame;
+	}
+
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertGrupo.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
 	}
 }

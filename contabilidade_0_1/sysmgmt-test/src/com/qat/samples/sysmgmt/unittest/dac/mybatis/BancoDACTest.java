@@ -36,19 +36,19 @@ public class BancoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
 	private static final Logger LOG = LoggerFactory.getLogger(BancoDACTest.class);
-	private IBancoDAC avisosDAC; // injected by Spring through setter @resource
+	private IBancoDAC bancoDAC; // injected by Spring through setter @resource
 
 	// below
 
 	public IBancoDAC getBancoDAC()
 	{
-		return avisosDAC;
+		return bancoDAC;
 	}
 
 	@Resource
-	public void setBancoDAC(IBancoDAC avisosDAC)
+	public void setBancoDAC(IBancoDAC bancoDAC)
 	{
-		this.avisosDAC = avisosDAC;
+		this.bancoDAC = bancoDAC;
 	}
 
 	@Test
@@ -56,9 +56,18 @@ public class BancoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Banco funcionario = new Banco();
-		funcionario = insertBanco(PersistanceActionEnum.UPDATE);
-
-		Integer a = getBancoDAC().updateBanco(funcionario);
+		funcionario = insertBanco(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Banco> response = new InternalResultsResponse<Banco>();
+		Integer a = getEntidadeDAC().insertBanco(funcionario,"", response);
+		
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = funcionarioResponse.getFirstResult();
+		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
+		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		response = new InternalResultsResponse<Banco>();
+		
+		a = getEntidadeDAC().updateBanco(funcionario, response);
+		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -69,7 +78,24 @@ public class BancoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Banco funcionario = new Banco();
 		funcionario = insertBanco(PersistanceActionEnum.INSERT);
 
-		Integer a = getBancoDAC().insertBanco(funcionario);
+		InternalResultsResponse<Banco> response = new InternalResultsResponse<Banco>();
+
+		Integer a = getBancoDAC().insertBanco(funcionario, "INSERT", response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		
+		
+		Banco funcionario = new Banco();
+		funcionario = insertBanco(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Banco> response = new InternalResultsResponse<Banco>();
+
+		Integer a = getEntidadeDAC().insertBanco(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	//	FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Banco> responseA = getEntidadeDAC().fetchBancoById(response.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().size() == 1);
+		assertEquals(responseA.getStatus(), Status.OperationSuccess);
+
 
 	}
 
@@ -78,9 +104,19 @@ public class BancoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Banco funcionario = new Banco();
-		funcionario.setId(1);
-		funcionario = insertBanco(PersistanceActionEnum.DELETE);
-		Integer a = getBancoDAC().deleteBanco(funcionario);
+		funcionario = insertBanco(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<Banco> response = new InternalResultsResponse<Banco>();
+		Integer a = getEntidadeDAC().insertBanco(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		funcionario = response.getFirstResult();
+		response = new InternalResultsResponse<Banco>();
+		funcionario.setModelAction(PersistanceActionEnum.DELETE);
+		Integer b = getEntidadeDAC().deleteBanco(funcionario,response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+		//FetchByIdRequest request = new FetchByIdRequest();
+	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchBancoById(funcionarioResponse.getFirstResult().getId());
+		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}
 
@@ -91,6 +127,17 @@ public class BancoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
 		InternalResultsResponse<Banco> response = getBancoDAC().fetchBancoById(request);
+		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
+	}
+
+	@Test
+	public void testfetchBancoById2() throws Exception
+	{
+		// check for valid and precount
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(3);
+		InternalResultsResponse<Banco> response = getBancoDAC().fetchBancoById(1);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
