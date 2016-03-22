@@ -3,7 +3,9 @@ package com.qat.samples.sysmgmt.util.dac;
 import java.util.List;
 
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.Cidade;
+import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 
 /**
  * The Interface ICidadeDAC.
@@ -51,10 +53,10 @@ public interface ICidadeDAC
 	/**
 	 * Fetch cidade by id.
 	 * 
-	 * @param id the id
+	 * @param request the id
 	 * @return the internal results response< cidade>
 	 */
-	public InternalResultsResponse<Cidade> fetchCidadeById(Integer id);
+	public InternalResultsResponse<Cidade> fetchCidadeById(FetchByIdRequest request);
 
 	/**
 	 * Maintain cidade associations.
@@ -67,5 +69,7 @@ public interface ICidadeDAC
 	 */
 	public Integer maintainCidadeAssociations(List<Cidade> cidadeList, Integer parentId, String associateStatement,
 			InternalResultsResponse<?> response);
+
+	public InternalResultsResponse<Cidade> fetchCidadeByRequest(CidadeInquiryRequest request);
 
 }

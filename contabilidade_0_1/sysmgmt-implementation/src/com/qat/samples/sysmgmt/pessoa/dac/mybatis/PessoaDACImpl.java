@@ -32,6 +32,10 @@ import com.qat.samples.sysmgmt.clinica.model.request.ExameInquiryRequest;
 import com.qat.samples.sysmgmt.clinica.model.request.MedicoInquiryRequest;
 import com.qat.samples.sysmgmt.clinica.model.request.PacienteInquiryRequest;
 import com.qat.samples.sysmgmt.clinica.model.request.PlanoSaudeInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.Inquilino;
+import com.qat.samples.sysmgmt.condominio.model.Sindico;
+import com.qat.samples.sysmgmt.condominio.model.request.InquilinoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.SindicoInquiryRequest;
 import com.qat.samples.sysmgmt.condpag.FormaPg;
 import com.qat.samples.sysmgmt.condpag.model.request.FormaPgInquiryRequest;
 import com.qat.samples.sysmgmt.conta.Conta;
@@ -701,7 +705,8 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 				"ClienteMap.fetchAllClientesByRequest", response);
 		return response;
 	}
-	//==========================Sindico==========================
+
+	// ==========================Sindico==========================
 	@Override
 	public InternalResultsResponse<Sindico> insertSindico(Sindico pessoa)
 	{
@@ -733,17 +738,17 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 
 		insertCount += insertPerson(pessoa, processId, historicoId, response);
 
-		insertCount +=
-				ProfissaoDACD.maintainProfissaoAssociationsList(pessoa.getProfissao(), response, insertCount, null,
-						null,
-						null, getProfissaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser(), processId, historicoId);
-
-		insertCount +=
-				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, insertCount, null,
-						null,
-						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser(), processId, historicoId);
+		// insertCount +=
+		// ProfissaoDACD.maintainProfissaoAssociationsList(pessoa.getProfissao(), response, insertCount, null,
+		// null,
+		// null, getProfissaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+		// pessoa.getCreateUser(), processId, historicoId);
+		//
+		// insertCount +=
+		// ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, insertCount, null,
+		// null,
+		// null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+		// pessoa.getCreateUser(), processId, historicoId);
 
 		if (insertCount > 0)
 		{
@@ -810,11 +815,11 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		// null, getProfissaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 		// pessoa.getCreateUser(), historicoId, historicoId, getProfissaoDAC());
 
-		updateCount +=
-				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, pessoa.getId(), null,
-						null,
-						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser(), historicoId, historicoId);
+		// updateCount +=
+		// ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, pessoa.getId(), null,
+		// null,
+		// null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+		// pessoa.getCreateUser(), historicoId, historicoId);
 
 		if (updateCount > 0)
 		{
@@ -893,9 +898,9 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 				"SindicoMap.fetchAllSindicosByRequest", response);
 		return response;
 	}
-	
-	//=========================Inquilino=========================
-	
+
+	// =========================Inquilino=========================
+
 	@Override
 	public InternalResultsResponse<Inquilino> insertInquilino(Inquilino pessoa)
 	{
@@ -927,17 +932,17 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 
 		insertCount += insertPerson(pessoa, processId, historicoId, response);
 
-		insertCount +=
-				ProfissaoDACD.maintainProfissaoAssociationsList(pessoa.getProfissao(), response, insertCount, null,
-						null,
-						null, getProfissaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser(), processId, historicoId);
-
-		insertCount +=
-				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, insertCount, null,
-						null,
-						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser(), processId, historicoId);
+		// insertCount +=
+		// ProfissaoDACD.maintainProfissaoAssociationsList(pessoa.getProfissao(), response, insertCount, null,
+		// null,
+		// null, getProfissaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+		// pessoa.getCreateUser(), processId, historicoId);
+		//
+		// insertCount +=
+		// ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, insertCount, null,
+		// null,
+		// null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+		// pessoa.getCreateUser(), processId, historicoId);
 
 		if (insertCount > 0)
 		{
@@ -1004,11 +1009,11 @@ public class PessoaDACImpl extends SqlSessionDaoSupport implements IPessoaDAC
 		// null, getProfissaoDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
 		// pessoa.getCreateUser(), historicoId, historicoId, getProfissaoDAC());
 
-		updateCount +=
-				ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, pessoa.getId(), null,
-						null,
-						null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
-						pessoa.getCreateUser(), historicoId, historicoId);
+		// updateCount +=
+		// ConvenioDACD.maintainConvenioAssociations(pessoa.getConvenioList(), response, pessoa.getId(), null,
+		// null,
+		// null, getConvenioDAC(), getStatusDAC(), getHistoricoDAC(), pessoa.getEmprId(),
+		// pessoa.getCreateUser(), historicoId, historicoId);
 
 		if (updateCount > 0)
 		{

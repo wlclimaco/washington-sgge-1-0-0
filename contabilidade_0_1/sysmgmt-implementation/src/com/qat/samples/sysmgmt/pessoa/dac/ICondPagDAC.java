@@ -4,6 +4,7 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.condpag.CondPag;
 import com.qat.samples.sysmgmt.condpag.CondPagPessoa;
 import com.qat.samples.sysmgmt.condpag.TipoPag;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 
 /**
@@ -39,10 +40,10 @@ public interface ICondPagDAC
 	/**
 	 * Fetch forma pg by id.
 	 * 
-	 * @param id the id
+	 * @param request the id
 	 * @return the internal results response
 	 */
-	public InternalResultsResponse<CondPag> fetchCondPagById(Integer id);
+	public InternalResultsResponse<CondPag> fetchCondPagById(FetchByIdRequest request);
 
 	/**
 	 * Fetch forma pg by request.

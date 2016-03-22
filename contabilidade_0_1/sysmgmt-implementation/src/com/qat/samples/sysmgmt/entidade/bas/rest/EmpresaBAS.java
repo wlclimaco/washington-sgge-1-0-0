@@ -2,6 +2,9 @@ package com.qat.samples.sysmgmt.entidade.bas.rest;
 
 import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
 import com.qat.samples.sysmgmt.cnae.model.response.CnaeResponse;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.response.CondominioResponse;
 import com.qat.samples.sysmgmt.entidade.bai.IEmpresaBAI;
 import com.qat.samples.sysmgmt.entidade.bas.IEmpresaRESTBAS;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
@@ -106,7 +109,8 @@ public class EmpresaBAS implements IEmpresaRESTBAS
 	{
 		return getEmpresaBAI().fetchEmpresaByRequest(request);
 	}
-	//condominio
+
+	// condominio
 	/*
 	 * (non-Javadoc)
 	 * @see com.qat.samples.sysmgmt.bas.IEmpresaRESTBAS#insertEmpresa(com.qat.samples.sysmgmt.model.request.
@@ -115,7 +119,7 @@ public class EmpresaBAS implements IEmpresaRESTBAS
 	@Override
 	public CondominioResponse insertCondominio(CondominioMaintenanceRequest request)
 	{
-		return getCondominioBAI().insertCondominio(request);
+		return getEmpresaBAI().insertCondominio(request);
 	}
 
 	/*
@@ -143,7 +147,8 @@ public class EmpresaBAS implements IEmpresaRESTBAS
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.qat.samples.sysmgmt.bas.ICondominioRESTBAS#fetchCondominioById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+	 * com.qat.samples.sysmgmt.bas.ICondominioRESTBAS#fetchCondominioById(com.qat.samples.sysmgmt.model.request.
+	 * FetchByIdRequest
 	 * )
 	 */
 	@Override
@@ -157,7 +162,8 @@ public class EmpresaBAS implements IEmpresaRESTBAS
 	{
 		return getEmpresaBAI().fetchCondominioByRequest(request);
 	}
-//filial
+
+	// filial
 	@Override
 	public FilialResponse insertFilial(FilialMaintenanceRequest request)
 	{

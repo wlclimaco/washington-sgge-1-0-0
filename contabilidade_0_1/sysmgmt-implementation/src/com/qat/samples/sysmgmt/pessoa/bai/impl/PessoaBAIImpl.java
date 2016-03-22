@@ -24,6 +24,14 @@ import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
 import com.qat.samples.sysmgmt.beneficios.Beneficios;
 import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest;
 import com.qat.samples.sysmgmt.beneficios.model.response.BeneficiosResponse;
+import com.qat.samples.sysmgmt.condominio.model.Inquilino;
+import com.qat.samples.sysmgmt.condominio.model.Sindico;
+import com.qat.samples.sysmgmt.condominio.model.request.InquilinoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.InquilinoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.SindicoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.SindicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.response.InquilinoResponse;
+import com.qat.samples.sysmgmt.condominio.model.response.SindicoResponse;
 import com.qat.samples.sysmgmt.condpag.FormaPg;
 import com.qat.samples.sysmgmt.condpag.model.request.FormaPgInquiryRequest;
 import com.qat.samples.sysmgmt.conta.Conta;
@@ -1678,8 +1686,8 @@ public class PessoaBAIImpl implements IPessoaBAI
 		}
 		return response;
 	}
-	
-//==================Inquilino
+
+	// ==================Inquilino
 	@Override
 	public InquilinoResponse insertInquilino(InquilinoMaintenanceRequest request)
 	{
@@ -1789,9 +1797,7 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
-
-
-//Sindico	
+	// Sindico
 
 	@Override
 	public SindicoResponse insertSindico(SindicoMaintenanceRequest request)
@@ -1902,8 +1908,7 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return response;
 	}
 
-//===================================
-	
+	// ===================================
 
 	/**
 	 * Fetch cliente.
@@ -1922,6 +1927,40 @@ public class PessoaBAIImpl implements IPessoaBAI
 		else
 		{
 			internalResponse = getPessoaBAC().fetchFuncionarioByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	private void fetchSindico(SindicoInquiryRequest request, SindicoResponse response)
+	{
+		InternalResultsResponse<Sindico> internalResponse = new InternalResultsResponse<Sindico>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchSindicoByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+
+	private void fetchInquilino(InquilinoInquiryRequest request, InquilinoResponse response)
+	{
+		InternalResultsResponse<Inquilino> internalResponse = new InternalResultsResponse<Inquilino>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getPessoaBAC().fetchInquilinoByRequest(request);
 		}
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
@@ -1950,6 +1989,34 @@ public class PessoaBAIImpl implements IPessoaBAI
 		return handleReturnFuncionario(response, internalResponse, null, true);
 	}
 
+	private InquilinoResponse processInquilino(ValidationContextIndicator indicator,
+			PersistanceActionEnum persistType,
+			InquilinoMaintenanceRequest request)
+	{
+		InquilinoResponse response = new InquilinoResponse();
+		InternalResponse internalResponse = null;
+
+		// Persist
+		internalResponse = doPersistanceInquilino(request, persistType);
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		return handleReturnInquilino(response, internalResponse, null, true);
+	}
+
+	private SindicoResponse processSindico(ValidationContextIndicator indicator,
+			PersistanceActionEnum persistType,
+			SindicoMaintenanceRequest request)
+	{
+		SindicoResponse response = new SindicoResponse();
+		InternalResponse internalResponse = null;
+
+		// Persist
+		internalResponse = doPersistanceSindico(request, persistType);
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		return handleReturnSindico(response, internalResponse, null, true);
+	}
+
 	/**
 	 * Handle return.
 	 * 
@@ -1960,6 +2027,26 @@ public class PessoaBAIImpl implements IPessoaBAI
 	 * @return the response
 	 */
 	private FuncionarioResponse handleReturnFuncionario(FuncionarioResponse response,
+			InternalResponse internalResponse,
+			List<MessageInfo> messages, boolean copyOver)
+	{
+
+		QATInterfaceUtil.handleOperationStatusAndMessages(response,
+				internalResponse, messages, copyOver);
+		return response;
+	}
+
+	private InquilinoResponse handleReturnInquilino(InquilinoResponse response,
+			InternalResponse internalResponse,
+			List<MessageInfo> messages, boolean copyOver)
+	{
+
+		QATInterfaceUtil.handleOperationStatusAndMessages(response,
+				internalResponse, messages, copyOver);
+		return response;
+	}
+
+	private SindicoResponse handleReturnSindico(SindicoResponse response,
 			InternalResponse internalResponse,
 			List<MessageInfo> messages, boolean copyOver)
 	{
@@ -1989,6 +2076,68 @@ public class PessoaBAIImpl implements IPessoaBAI
 
 			case DELETE:
 				return getPessoaBAC().deleteFuncionario(request);
+
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
+		}
+		return null;
+	}
+
+	/**
+	 * Do persistance.
+	 * 
+	 * @param request the request
+	 * @param updateType the update type
+	 * @return the internal response
+	 */
+	private InternalResponse doPersistanceSindico(SindicoMaintenanceRequest request,
+			PersistanceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			case INSERT:
+				return getPessoaBAC().insertSindico(request);
+
+			case UPDATE:
+				return getPessoaBAC().updateSindico(request);
+
+			case DELETE:
+				return getPessoaBAC().deleteSindico(request);
+
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
+		}
+		return null;
+	}
+
+	/**
+	 * Do persistance.
+	 * 
+	 * @param request the request
+	 * @param updateType the update type
+	 * @return the internal response
+	 */
+	private InternalResponse doPersistanceInquilino(InquilinoMaintenanceRequest request,
+			PersistanceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			case INSERT:
+				return getPessoaBAC().insertInquilino(request);
+
+			case UPDATE:
+				return getPessoaBAC().updateInquilino(request);
+
+			case DELETE:
+				return getPessoaBAC().deleteInquilino(request);
 
 			default:
 				if (LOG.isDebugEnabled())

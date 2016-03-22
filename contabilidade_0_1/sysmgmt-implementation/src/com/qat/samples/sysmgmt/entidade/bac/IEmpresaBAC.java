@@ -4,6 +4,9 @@ import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.cnae.Cnae;
 import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.Condominio;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioMaintenanceRequest;
 import com.qat.samples.sysmgmt.contabilidade.Plano;
 import com.qat.samples.sysmgmt.entidade.Deposito;
 import com.qat.samples.sysmgmt.entidade.Empresa;
@@ -39,8 +42,8 @@ public interface IEmpresaBAC
 	public InternalResultsResponse<Empresa> fetchEmpresaById(FetchByIdRequest request);
 
 	public InternalResultsResponse<Empresa> fetchEmpresaByRequest(EmpresaInquiryRequest request);
-	
-	//condominio
+
+	// condominio
 	public InternalResultsResponse<Condominio> insertCondominio(CondominioMaintenanceRequest request);
 
 	public InternalResultsResponse<Condominio> updateCondominio(CondominioMaintenanceRequest request);

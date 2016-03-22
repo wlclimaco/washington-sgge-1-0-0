@@ -4,6 +4,9 @@ import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.cnae.Cnae;
 import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.Condominio;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioMaintenanceRequest;
 import com.qat.samples.sysmgmt.contabilidade.Plano;
 import com.qat.samples.sysmgmt.entidade.Deposito;
 import com.qat.samples.sysmgmt.entidade.Empresa;
@@ -113,8 +116,8 @@ public class EmpresaBACImpl implements IEmpresaBAC
 	{
 		return getEmpresaDAC().fetchEmpresaByRequest(request);
 	}
-	
-	//Condominio
+
+	// Condominio
 	/*
 	 * (non-Javadoc)
 	 * @see com.prosperitasglobal.sendsolv.bac.IEmpresaBAC#insertEmpresa(EmpresaRequest)
@@ -124,7 +127,7 @@ public class EmpresaBACImpl implements IEmpresaBAC
 	{
 		InternalResultsResponse<Condominio> response = new InternalResultsResponse<Condominio>();
 
-		response = getCondominioDAC().insertCondominio(request.getCondominio());
+		response = getEmpresaDAC().insertCondominio(request.getCondominio());
 
 		return response;
 	}
@@ -169,7 +172,8 @@ public class EmpresaBACImpl implements IEmpresaBAC
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.sendsolv.bac.ICondominioBAC#fetchCondominioByRequest(com.prosperitasglobal.sendsolv.model.request
+	 * com.prosperitasglobal.sendsolv.bac.ICondominioBAC#fetchCondominioByRequest(com.prosperitasglobal.sendsolv.model.
+	 * request
 	 * .CondominioInquiryRequest)
 	 */
 	@Override
@@ -177,9 +181,8 @@ public class EmpresaBACImpl implements IEmpresaBAC
 	{
 		return getEmpresaDAC().fetchCondominioByRequest(request);
 	}
-	
-	
-	//FIlial
+
+	// FIlial
 
 	@Override
 	public InternalResultsResponse<Filial> insertFilial(FilialMaintenanceRequest request)

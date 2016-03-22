@@ -22,6 +22,10 @@ import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.cnae.Cnae;
 import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
 import com.qat.samples.sysmgmt.cnae.model.response.CnaeResponse;
+import com.qat.samples.sysmgmt.condominio.model.Condominio;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.response.CondominioResponse;
 import com.qat.samples.sysmgmt.contabilidade.Plano;
 import com.qat.samples.sysmgmt.entidade.Deposito;
 import com.qat.samples.sysmgmt.entidade.Empresa;
@@ -277,30 +281,6 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 		// Handle the processing for all previous methods regardless of them failing or succeeding.
 		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
-	}
-
-	/**
-	 * Handle return.
-	 * 
-	 * @param response the response
-	 * @param internalResponse the internal response
-	 * @param messages the messages
-	 * @param copyOver the copy over
-	 * @return the response
-	 */
-	private Response handleReturn(Response response, InternalResponse internalResponse,
-			List<MessageInfo> messages, boolean copyOver)
-	{
-		// In the case there was an Optimistic Locking error, add the specific message
-		if (!ValidationUtil.isNull(internalResponse) && !ValidationUtil.isNull(internalResponse.getStatus())
-				&& Status.OptimisticLockingError.equals(internalResponse.getStatus()))
-		{
-			messages.add(new MessageInfo(PROSPERITASGLOBAL_BASE_OL_ERROR, MessageSeverity.Error,
-					MessageLevel.Object));
-		}
-
-		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, messages, copyOver);
-		return response;
 	}
 
 	/**
@@ -923,6 +903,20 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 		return (CidadeResponse)handleReturn(response, internalResponse, null, true);
 	}
 
+	private CondominioResponse processCondominio(ValidationContextIndicator indicator,
+			PersistanceActionEnum persistType,
+			CondominioMaintenanceRequest request)
+	{
+		CondominioResponse response = new CondominioResponse();
+		InternalResponse internalResponse = null;
+
+		// Persist
+		internalResponse = doPersistanceCondominio(request, persistType);
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		return (CondominioResponse)handleReturn(response, internalResponse, null, true);
+	}
+
 	/**
 	 * Process.
 	 * 
@@ -1026,8 +1020,8 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 		return response;
 	}
-	
-	//Condominio
+
+	// Condominio
 	/*
 	 * (non-Javadoc)
 	 * @see
@@ -1121,7 +1115,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 			}
 			else
 			{
-				internalResponse = getCondominioBAC().fetchCondominioById(request);
+				internalResponse = getEmpresaBAC().fetchCondominioById(request);
 			}
 			// Handle the processing for all previous methods regardless of them failing or succeeding.
 			QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
@@ -1143,7 +1137,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 	@Override
 	public CondominioResponse fetchCondominioByRequest(CondominioInquiryRequest request)
 	{
-		CondominioResponse response = new EmpresaResponse();
+		CondominioResponse response = new CondominioResponse();
 		try
 		{
 			fetchPagedCondominio(request, response);
@@ -1215,7 +1209,8 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistanceCondominio(CondominioMaintenanceRequest request, PersistanceActionEnum updateType)
+	private InternalResponse doPersistanceCondominio(CondominioMaintenanceRequest request,
+			PersistanceActionEnum updateType)
 	{
 		switch (updateType)
 		{

@@ -4,6 +4,8 @@ import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.cnae.Cnae;
 import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.Condominio;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
 import com.qat.samples.sysmgmt.contabilidade.Plano;
 import com.qat.samples.sysmgmt.entidade.Deposito;
 import com.qat.samples.sysmgmt.entidade.Empresa;
@@ -65,8 +67,8 @@ public interface IEmpresaDAC
 	 * @return the internal results response< empresa>
 	 */
 	public InternalResultsResponse<Empresa> fetchEmpresaByRequest(EmpresaInquiryRequest request);
-	
-	//Condominio
+
+	// Condominio
 	public InternalResultsResponse<Condominio> insertCondominio(Condominio filial);
 
 	public InternalResultsResponse<Condominio> updateCondominio(Condominio filial);

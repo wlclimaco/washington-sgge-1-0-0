@@ -11,6 +11,12 @@ import com.qat.samples.sysmgmt.banco.Banco;
 import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
 import com.qat.samples.sysmgmt.beneficios.Beneficios;
 import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.Inquilino;
+import com.qat.samples.sysmgmt.condominio.model.Sindico;
+import com.qat.samples.sysmgmt.condominio.model.request.InquilinoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.InquilinoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.SindicoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.SindicoMaintenanceRequest;
 import com.qat.samples.sysmgmt.condpag.FormaPg;
 import com.qat.samples.sysmgmt.condpag.model.request.FormaPgInquiryRequest;
 import com.qat.samples.sysmgmt.conta.Conta;
@@ -62,7 +68,7 @@ public interface IPessoaBAC
 	public InternalResultsResponse<Advogado> fetchAdvogadoByRequest(AdvogadoInquiryRequest request);
 
 	// =============================
-	
+
 	public InternalResultsResponse<Sindico> insertSindico(SindicoMaintenanceRequest request);
 
 	public InternalResultsResponse<Sindico> updateSindico(SindicoMaintenanceRequest request);
@@ -74,7 +80,7 @@ public interface IPessoaBAC
 	public InternalResultsResponse<Sindico> fetchSindicoByRequest(SindicoInquiryRequest request);
 
 	// =============================
-	
+
 	public InternalResultsResponse<Inquilino> insertInquilino(InquilinoMaintenanceRequest request);
 
 	public InternalResultsResponse<Inquilino> updateInquilino(InquilinoMaintenanceRequest request);

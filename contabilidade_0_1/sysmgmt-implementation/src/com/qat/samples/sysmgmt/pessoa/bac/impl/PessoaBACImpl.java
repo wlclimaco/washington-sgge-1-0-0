@@ -11,6 +11,12 @@ import com.qat.samples.sysmgmt.banco.Banco;
 import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
 import com.qat.samples.sysmgmt.beneficios.Beneficios;
 import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.Inquilino;
+import com.qat.samples.sysmgmt.condominio.model.Sindico;
+import com.qat.samples.sysmgmt.condominio.model.request.InquilinoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.InquilinoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.SindicoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.SindicoMaintenanceRequest;
 import com.qat.samples.sysmgmt.condpag.FormaPg;
 import com.qat.samples.sysmgmt.condpag.model.request.FormaPgInquiryRequest;
 import com.qat.samples.sysmgmt.conta.Conta;
@@ -111,8 +117,8 @@ public class PessoaBACImpl implements IPessoaBAC
 		return getPessoaDAC().fetchAdvogadoByRequest(request);
 	}
 
-	// ================================= 
-	
+	// =================================
+
 	@Override
 	public InternalResultsResponse<Sindico> insertSindico(SindicoMaintenanceRequest request)
 	{
@@ -152,7 +158,7 @@ public class PessoaBACImpl implements IPessoaBAC
 	}
 
 	// =================================
-	
+
 	@Override
 	public InternalResultsResponse<Inquilino> insertInquilino(InquilinoMaintenanceRequest request)
 	{

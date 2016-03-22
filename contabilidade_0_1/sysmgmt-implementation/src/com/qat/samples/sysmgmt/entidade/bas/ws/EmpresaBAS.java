@@ -4,6 +4,9 @@ import javax.jws.WebService;
 
 import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
 import com.qat.samples.sysmgmt.cnae.model.response.CnaeResponse;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.response.CondominioResponse;
 import com.qat.samples.sysmgmt.entidade.bai.IEmpresaBAI;
 import com.qat.samples.sysmgmt.entidade.bas.IEmpresaBAS;
 import com.qat.samples.sysmgmt.entidade.model.request.CidadeMaintenanceRequest;
@@ -114,8 +117,9 @@ public class EmpresaBAS implements IEmpresaBAS
 	{
 		return getEmpresaBAI().fetchEmpresaByRequest(request);
 	}
-	//Condominio
-		/*
+
+	// Condominio
+	/*
 	 * (non-Javadoc)
 	 * @see
 	 * com.qat.samples.sysmgmt.bas.IEmpresaBAS#insertEmpresa(com.qat.samples.sysmgmt.model.request.EmpresaMaintenanceRequest
@@ -130,7 +134,8 @@ public class EmpresaBAS implements IEmpresaBAS
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.qat.samples.sysmgmt.bas.ICondominioBAS#updateCondominio(com.qat.samples.sysmgmt.model.request.CondominioMaintenanceRequest
+	 * com.qat.samples.sysmgmt.bas.ICondominioBAS#updateCondominio(com.qat.samples.sysmgmt.model.request.
+	 * CondominioMaintenanceRequest
 	 * )
 	 */
 	@Override
@@ -142,7 +147,8 @@ public class EmpresaBAS implements IEmpresaBAS
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.qat.samples.sysmgmt.bas.ICondominioBAS#deleteCondominio(com.qat.samples.sysmgmt.model.request.CondominioMaintenanceRequest
+	 * com.qat.samples.sysmgmt.bas.ICondominioBAS#deleteCondominio(com.qat.samples.sysmgmt.model.request.
+	 * CondominioMaintenanceRequest
 	 * )
 	 */
 	@Override
@@ -154,7 +160,8 @@ public class EmpresaBAS implements IEmpresaBAS
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.qat.samples.sysmgmt.bas.ICondominioBAS#fetchCondominioById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+	 * com.qat.samples.sysmgmt.bas.ICondominioBAS#fetchCondominioById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+	 * )
 	 */
 	@Override
 	public CondominioResponse fetchCondominioById(FetchByIdRequest request)
@@ -167,7 +174,8 @@ public class EmpresaBAS implements IEmpresaBAS
 	{
 		return getEmpresaBAI().fetchCondominioByRequest(request);
 	}
-//filial
+
+	// filial
 	@Override
 	public FilialResponse insertFilial(FilialMaintenanceRequest request)
 	{

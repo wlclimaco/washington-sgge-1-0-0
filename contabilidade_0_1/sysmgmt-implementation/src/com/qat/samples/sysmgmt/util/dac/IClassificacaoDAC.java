@@ -2,6 +2,8 @@ package com.qat.samples.sysmgmt.util.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 
 /**
  * The Interface IClassificacaoDAC.
@@ -45,5 +47,9 @@ public interface IClassificacaoDAC
 	 * @return the internal results response< classificacao>
 	 */
 	public InternalResultsResponse<Classificacao> fetchClassificacaoById(Integer id);
+
+	public InternalResultsResponse<Classificacao> fetchClassificacaoById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Classificacao> fetchClassificacaoByRequest(ClassificacaoInquiryRequest request);
 
 }

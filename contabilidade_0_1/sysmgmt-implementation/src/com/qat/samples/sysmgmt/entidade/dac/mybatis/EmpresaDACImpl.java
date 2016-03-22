@@ -15,6 +15,8 @@ import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.cnae.Cnae;
 import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.Condominio;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
 import com.qat.samples.sysmgmt.contabilidade.Plano;
 import com.qat.samples.sysmgmt.dac.IEnderecoDAC;
 import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
@@ -638,8 +640,9 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
 		return response;
 	}
-//Condominio
-/*
+
+	// Condominio
+	/*
 	 * (non-Javadoc)
 	 * @see com.prosperitasglobal.sendsolv.dac.IEmpresaDAC#insertEmpresa(com.prosperitasglobal.sendsolv.model.Empresa)
 	 */
@@ -677,38 +680,15 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 
 			historicoId = empresa.getProcessId();
 		}
-		if (!ValidationUtil.isNullOrEmpty(empresa.getSocios()))
-		{
-			insertCount +=
-					SociosDACD.maintainSocioAssociations(empresa.getSocios(), response, empresa.getId(), null, null,
-							TabelaEnum.EMPRESA, getSocioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-							empresa.getCreateUser(), historicoId, historicoId, getDocumentoDAC());
-
-		}
-		if (!ValidationUtil.isNullOrEmpty(empresa.getPlanoList()))
-		{
-			insertCount +=
-					PlanoDACD.maintainPlanoAssociations(empresa.getPlanoList(), response, empresa.getId(), null, null,
-							TabelaEnum.EMPRESA, getPlanoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-							empresa.getCreateUser(), historicoId, historicoId);
-		}
-
-		if (!ValidationUtil.isNullOrEmpty(empresa.getUsuarioList()))
-		{
-			insertCount +=
-					UsuarioDACD.maintainUsuarioAssociations(empresa.getUsuarioList(), response, empresa.getId(), null,
-							null,
-							TabelaEnum.EMPRESA, getUsuarioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-							empresa.getCreateUser(), historicoId, historicoId);
-		}
 
 		if (!ValidationUtil.isNullOrEmpty(empresa.getContaCorrenteList()))
 		{
-			insertCount +=
-					UsuarioDACD.maintainUsuarioAssociations(empresa.getUsuarioList(), response, empresa.getId(), null,
-							null,
-							TabelaEnum.EMPRESA, getUsuarioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-							empresa.getCreateUser(), historicoId, historicoId);
+			// insertCount +=
+			// UsuarioDACD.maintainUsuarioAssociations(empresa.getContaCorrenteList(), response, empresa.getId(),
+			// null,
+			// null,
+			// TabelaEnum.EMPRESA, getUsuarioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+			// empresa.getCreateUser(), historicoId, historicoId);
 		}
 
 		insertCount += insertAssociations(empresa, historicoId, historicoId, TabelaEnum.EMPRESA, response);
@@ -756,20 +736,7 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 					HistoricoDACD.inserthistorico(empresa.getId(), empresa.getId(), empresa.getUserId(), response,
 							TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoDAC);
 		}
-		if (ValidationUtil.isNullOrEmpty(empresa.getSocios()))
-		{
-			updateCount +=
-					SociosDACD.maintainSocioAssociations(empresa.getSocios(), response, empresa.getId(), null, null,
-							TabelaEnum.EMPRESA, getSocioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-							empresa.getCreateUser(), historicoId, historicoId, getDocumentoDAC());
-		}
-		if (ValidationUtil.isNullOrEmpty(empresa.getPlanoList()))
-		{
-			updateCount +=
-					PlanoDACD.maintainPlanoAssociations(empresa.getPlanoList(), response, empresa.getId(), null, null,
-							TabelaEnum.EMPRESA, getPlanoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-							empresa.getCreateUser(), historicoId, historicoId);
-		}
+
 		updateCount += insertAssociations(empresa, historicoId, historicoId, TabelaEnum.EMPRESA, response);
 
 		if (response.isInError())
@@ -846,10 +813,8 @@ public class EmpresaDACImpl extends SqlSessionDaoSupport implements IEmpresaDAC
 				EMPRESA_STMT_FETCH_ALL_BY_REQUEST, response);
 		return response;
 	}
-	
-	
-	
-//Filial
+
+	// Filial
 	@Override
 	public InternalResultsResponse<Filial> insertFilial(Filial filial)
 	{

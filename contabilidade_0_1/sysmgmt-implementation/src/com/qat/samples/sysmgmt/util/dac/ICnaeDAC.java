@@ -3,6 +3,7 @@ package com.qat.samples.sysmgmt.util.dac;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.cnae.Cnae;
 import com.qat.samples.sysmgmt.cnae.CnaeEmpresa;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 
 // TODO: Auto-generated Javadoc
@@ -78,5 +79,7 @@ public interface ICnaeDAC
 	 * @return the integer
 	 */
 	public Integer deleteCnaeEmpresa(CnaeEmpresa cnae);
+
+	public InternalResultsResponse<Cnae> fetchCnaeById(FetchByIdRequest request);
 
 }

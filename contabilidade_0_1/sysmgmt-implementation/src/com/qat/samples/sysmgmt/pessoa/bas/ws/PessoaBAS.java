@@ -10,6 +10,12 @@ import com.qat.samples.sysmgmt.agencia.model.response.AgenciaResponse;
 import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
 import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest;
 import com.qat.samples.sysmgmt.beneficios.model.response.BeneficiosResponse;
+import com.qat.samples.sysmgmt.condominio.model.request.InquilinoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.InquilinoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.SindicoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.SindicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.response.InquilinoResponse;
+import com.qat.samples.sysmgmt.condominio.model.response.SindicoResponse;
 import com.qat.samples.sysmgmt.condpag.model.request.FormaPgInquiryRequest;
 import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
 import com.qat.samples.sysmgmt.contato.model.response.ContatoResponse;
@@ -147,8 +153,8 @@ public class PessoaBAS implements IPessoaBAS
 		return getPessoaBAI().fetchClienteByRequest(request);
 
 	}
-	
-		// ==================================
+
+	// ==================================
 
 	@Override
 	public InquilinoResponse insertInquilino(InquilinoMaintenanceRequest request)
@@ -184,8 +190,8 @@ public class PessoaBAS implements IPessoaBAS
 		return getPessoaBAI().fetchInquilinoByRequest(request);
 
 	}
-	
-		// ==================================
+
+	// ==================================
 
 	@Override
 	public SindicoResponse insertSindico(SindicoMaintenanceRequest request)
