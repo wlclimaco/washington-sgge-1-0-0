@@ -43,9 +43,9 @@ public class CfopDACImpl extends SqlSessionDaoSupport implements ICfopDAC
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer insertCfop(Cfop cfop)
+	public Integer insertCfop(Cfop cfop, String string, InternalResultsResponse<?> response)
 	{
-		InternalResultsResponse<Cfop> response = new InternalResultsResponse<Cfop>();
+		response = new InternalResultsResponse<Cfop>();
 		Integer insertCount = 0;
 		// First insert the root cfop data
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT, cfop, response);
@@ -62,7 +62,6 @@ public class CfopDACImpl extends SqlSessionDaoSupport implements ICfopDAC
 	@Override
 	public Integer deleteCfop(Cfop cfop)
 	{
-		InternalResponse response = new InternalResponse();
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, cfop, response);
 	}
 
@@ -73,10 +72,10 @@ public class CfopDACImpl extends SqlSessionDaoSupport implements ICfopDAC
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer updateCfop(Cfop cfop)
+	public Integer updateCfop(Cfop cfop, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<Cfop> response = new InternalResultsResponse<Cfop>();
+		response = new InternalResultsResponse<Cfop>();
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(cfop.getModelAction())
 				&& (cfop.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
@@ -107,10 +106,10 @@ public class CfopDACImpl extends SqlSessionDaoSupport implements ICfopDAC
 	}
 
 	@Override
-	public Integer insertCfopPessoa(CfopPessoa cfop)
+	public Integer insertCfopPessoa(CfopPessoa cfop, String string, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<CfopPessoa> response = new InternalResultsResponse<CfopPessoa>();
+		response = new InternalResultsResponse<CfopPessoa>();
 		// First insert the root cfop data
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), "CfopMap.insertCfopPessoa", cfop, response);
 
@@ -124,7 +123,7 @@ public class CfopDACImpl extends SqlSessionDaoSupport implements ICfopDAC
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer deleteCfopPessoa(CfopPessoa cfop)
+	public Integer deleteCfopPessoa(CfopPessoa cfop, InternalResultsResponse<?> response)
 	{
 		InternalResponse response = new InternalResponse();
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, cfop, response);
@@ -137,7 +136,7 @@ public class CfopDACImpl extends SqlSessionDaoSupport implements ICfopDAC
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer updateCfopPessoa(CfopPessoa cfop)
+	public Integer updateCfopPessoa(CfopPessoa cfop, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
 		InternalResultsResponse<CfopPessoa> response = new InternalResultsResponse<CfopPessoa>();
@@ -147,10 +146,6 @@ public class CfopDACImpl extends SqlSessionDaoSupport implements ICfopDAC
 		{
 			updateCount = QATMyBatisDacHelper.doUpdate(getSqlSession(), CONTACT_STMT_UPDATE, cfop, response);
 
-			if (updateCount == 1)
-			{
-				cfop.setModelAction(QATModel.PersistanceActionEnum.NONE);
-			}
 		}
 
 		return updateCount;

@@ -79,7 +79,7 @@ public class UsuarioDACImpl extends SqlSessionDaoSupport implements IUsuarioDAC
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer insertUsuario(Usuario usuario)
+	public Integer insertUsuario(Usuario usuario,String string, InternalResultsResponse<?> response)
 	{
 		InternalResponse response = new InternalResponse();
 		Integer insertCount = 0;
@@ -96,7 +96,7 @@ public class UsuarioDACImpl extends SqlSessionDaoSupport implements IUsuarioDAC
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer deleteUsuario(Usuario usuario)
+	public Integer deleteUsuario(Usuario usuario, InternalResultsResponse<?> response)
 	{
 		InternalResponse response = new InternalResponse();
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, usuario, response);
@@ -109,7 +109,7 @@ public class UsuarioDACImpl extends SqlSessionDaoSupport implements IUsuarioDAC
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer updateUsuario(Usuario usuario)
+	public Integer updateUsuario(Usuario usuario, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
 		InternalResultsResponse<Usuario> response = new InternalResultsResponse<Usuario>();

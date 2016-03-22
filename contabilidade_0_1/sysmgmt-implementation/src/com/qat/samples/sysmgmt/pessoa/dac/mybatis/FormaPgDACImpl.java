@@ -52,10 +52,10 @@ public class FormaPgDACImpl extends SqlSessionDaoSupport implements IFormaPagame
 	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(FormaPgDACImpl.class);
 
 	@Override
-	public Integer updateFormaPg(FormaPg formaPg)
+	public Integer updateFormaPg(FormaPg formaPg, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<FormaPg> response = new InternalResultsResponse<FormaPg>();
+		response = new InternalResultsResponse<FormaPg>();
 
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(formaPg.getModelAction())
@@ -73,10 +73,10 @@ public class FormaPgDACImpl extends SqlSessionDaoSupport implements IFormaPagame
 	}
 
 	@Override
-	public Integer insertFormaPg(FormaPg formaPg)
+	public Integer insertFormaPg(FormaPg formaPg, String string,InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<FormaPg> response = new InternalResultsResponse<FormaPg>();
+		response = new InternalResultsResponse<FormaPg>();
 		// First insert the root contato data
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), FORMAPG_STMT_INSERT, formaPg, response);
 
@@ -84,9 +84,8 @@ public class FormaPgDACImpl extends SqlSessionDaoSupport implements IFormaPagame
 	}
 
 	@Override
-	public Integer deleteFormaPg(FormaPg formaPg)
+	public Integer deleteFormaPg(FormaPg formaPg, InternalResultsResponse<?> response)
 	{
-		InternalResponse response = new InternalResponse();
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), FORMAPG_STMT_DELETE_PERSON_FORMAPG, formaPg, response);
 	}
 
@@ -115,7 +114,7 @@ public class FormaPgDACImpl extends SqlSessionDaoSupport implements IFormaPagame
 	}
 
 	@Override
-	public Integer updateFormaPgPessoa(FormaPgPessoa formaPg)
+	public Integer updateFormaPgPessoa(FormaPgPessoa formaPg, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
 		InternalResultsResponse<FormaPgPessoa> response = new InternalResultsResponse<FormaPgPessoa>();
@@ -136,10 +135,10 @@ public class FormaPgDACImpl extends SqlSessionDaoSupport implements IFormaPagame
 	}
 
 	@Override
-	public Integer insertFormaPgPessoa(FormaPgPessoa formaPg)
+	public Integer insertFormaPgPessoa(FormaPgPessoa formaPg,String string, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<FormaPgPessoa> response = new InternalResultsResponse<FormaPgPessoa>();
+		response = new InternalResultsResponse<FormaPgPessoa>();
 		// First insert the root contato data
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), FORMAPG_PESSOA_STMT_INSERT, formaPg, response);
 
@@ -147,7 +146,7 @@ public class FormaPgDACImpl extends SqlSessionDaoSupport implements IFormaPagame
 	}
 
 	@Override
-	public Integer deleteFormaPgPessoa(FormaPgPessoa formaPg)
+	public Integer deleteFormaPgPessoa(FormaPgPessoa formaPg, InternalResultsResponse<?> response)
 	{
 		InternalResponse response = new InternalResponse();
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), FORMAPG_PESSOA_STMT_DELETE, formaPg, response);

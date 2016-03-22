@@ -77,10 +77,10 @@ public class ProcessoDACImpl extends SqlSessionDaoSupport implements IProcessoDA
 	 * .Processo)
 	 */
 	@Override
-	public Integer insertProcesso(Processo agencia)
+	public Integer insertProcesso(Processo agencia,String string, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<Processo> response = new InternalResultsResponse<Processo>();
+		response = new InternalResultsResponse<Processo>();
 
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
@@ -89,12 +89,6 @@ public class ProcessoDACImpl extends SqlSessionDaoSupport implements IProcessoDA
 		if (response.isInError())
 		{
 			return null;
-		}
-
-		// Finally, if something was inserted then add the Processo to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(agencia);
 		}
 
 		return insertCount;
@@ -107,7 +101,7 @@ public class ProcessoDACImpl extends SqlSessionDaoSupport implements IProcessoDA
 	 * .Processo)
 	 */
 	@Override
-	public Integer updateProcesso(Processo agencia)
+	public Integer updateProcesso(Processo agencia, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
 		InternalResultsResponse<Processo> response = new InternalResultsResponse<Processo>();
@@ -142,9 +136,8 @@ public class ProcessoDACImpl extends SqlSessionDaoSupport implements IProcessoDA
 	 * .Processo)
 	 */
 	@Override
-	public Integer deleteProcesso(Processo agencia)
+	public Integer deleteProcesso(Processo agencia, InternalResultsResponse<?> response)
 	{
-		InternalResponse response = new InternalResponse();
 		QATMyBatisDacHelper.doRemove(getSqlSession(), PROCESSO_STMT_DELETE, agencia, response);
 		if (response.isInError())
 		{

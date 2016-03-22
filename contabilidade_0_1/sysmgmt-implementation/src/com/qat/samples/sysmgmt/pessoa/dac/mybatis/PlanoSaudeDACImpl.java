@@ -78,10 +78,10 @@ public class PlanoSaudeDACImpl extends SqlSessionDaoSupport implements IPlanoSau
 	 * .PlanoSaude)
 	 */
 	@Override
-	public Integer insertPlanoSaude(PlanoSaude planoSaude)
+	public Integer insertPlanoSaude(PlanoSaude planoSaude, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<PlanoSaude> response = new InternalResultsResponse<PlanoSaude>();
+		response = new InternalResultsResponse<PlanoSaude>();
 
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
@@ -90,12 +90,6 @@ public class PlanoSaudeDACImpl extends SqlSessionDaoSupport implements IPlanoSau
 		if (response.isInError())
 		{
 			return null;
-		}
-
-		// Finally, if something was inserted then add the PlanoSaude to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(planoSaude);
 		}
 
 		return insertCount;
@@ -108,10 +102,10 @@ public class PlanoSaudeDACImpl extends SqlSessionDaoSupport implements IPlanoSau
 	 * .PlanoSaude)
 	 */
 	@Override
-	public Integer updatePlanoSaude(PlanoSaude planoSaude)
+	public Integer updatePlanoSaude(PlanoSaude planoSaude, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<PlanoSaude> response = new InternalResultsResponse<PlanoSaude>();
+		response = new InternalResultsResponse<PlanoSaude>();
 
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(planoSaude.getModelAction())
@@ -127,12 +121,6 @@ public class PlanoSaudeDACImpl extends SqlSessionDaoSupport implements IPlanoSau
 			return null;
 		}
 
-		// Finally, if something was updated then add the Person to the result.
-		if (updateCount > 0)
-		{
-			response.addResult(planoSaude);
-		}
-
 		return updateCount;
 	}
 
@@ -143,9 +131,8 @@ public class PlanoSaudeDACImpl extends SqlSessionDaoSupport implements IPlanoSau
 	 * .PlanoSaude)
 	 */
 	@Override
-	public Integer deletePlanoSaude(PlanoSaude planoSaude)
+	public Integer deletePlanoSaude(PlanoSaude planoSaude, InternalResultsResponse<?> response)
 	{
-		InternalResponse response = new InternalResponse();
 		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, planoSaude, response);
 		if (response.isInError())
 		{
@@ -191,20 +178,6 @@ public class PlanoSaudeDACImpl extends SqlSessionDaoSupport implements IPlanoSau
 		return response;
 	}
 
-	/**
-	 * Maintain planoSaude associations.
-	 * 
-	 * @param planoSaude the planoSaude
-	 * @param response the response
-	 * @return the integer
-	 */
-	private Integer maintainPlanoSaudeAssociations(PlanoSaude planoSaude,
-			InternalResultsResponse<PlanoSaude> response)
-	{
-		Integer count = 0;
-
-		return count;
-	}
 
 	@Override
 	public InternalResultsResponse<PlanoSaude> fetchAllPlanoSaudes()
@@ -214,10 +187,10 @@ public class PlanoSaudeDACImpl extends SqlSessionDaoSupport implements IPlanoSau
 	}
 
 	@Override
-	public Integer updatePlanoSaudePessoa(PlanoSaudePessoa planoSaude)
+	public Integer updatePlanoSaudePessoa(PlanoSaudePessoa planoSaude, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<PlanoSaudePessoa> response = new InternalResultsResponse<PlanoSaudePessoa>();
+		response = new InternalResultsResponse<PlanoSaudePessoa>();
 
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(planoSaude.getModelAction())
@@ -233,20 +206,14 @@ public class PlanoSaudeDACImpl extends SqlSessionDaoSupport implements IPlanoSau
 			return null;
 		}
 
-		// Finally, if something was updated then add the Person to the result.
-		if (updateCount > 0)
-		{
-			response.addResult(planoSaude);
-		}
-
 		return updateCount;
 	}
 
 	@Override
-	public Integer insertPlanoSaudePessoa(PlanoSaudePessoa planoSaude)
+	public Integer insertPlanoSaudePessoa(PlanoSaudePessoa planoSaude,String string, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<PlanoSaudePessoa> response = new InternalResultsResponse<PlanoSaudePessoa>();
+		response = new InternalResultsResponse<PlanoSaudePessoa>();
 
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
@@ -264,19 +231,14 @@ public class PlanoSaudeDACImpl extends SqlSessionDaoSupport implements IPlanoSau
 		{
 			return null;
 		}
-		// Finally, if something was inserted then add the PlanoSaude to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(planoSaude);
-		}
 
 		return insertCount;
 	}
 
 	@Override
-	public Integer deletePlanoSaudePessoa(PlanoSaudePessoa planoSaude)
+	public Integer deletePlanoSaudePessoa(PlanoSaudePessoa planoSaude, InternalResultsResponse<?> response)
 	{
-		InternalResponse response = new InternalResponse();
+
 		QATMyBatisDacHelper.doRemove(getSqlSession(), "PlanoSaudeMap.deletePlanoSaudePessoa", planoSaude, response);
 		if (response.isInError())
 		{
