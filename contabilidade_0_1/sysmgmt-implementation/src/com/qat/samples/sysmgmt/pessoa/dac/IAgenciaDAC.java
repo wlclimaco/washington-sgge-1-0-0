@@ -17,7 +17,7 @@ public interface IAgenciaDAC
 	 * @param agencia the agencia
 	 * @return the internal results response< agencia>
 	 */
-	public Integer updateAgencia(Agencia agencia);
+	public Integer updateAgencia(Agencia agencia, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert agencia.
@@ -25,7 +25,7 @@ public interface IAgenciaDAC
 	 * @param agencia the agencia
 	 * @return the internal results response< agencia>
 	 */
-	public Integer insertAgencia(Agencia agencia);
+	public Integer insertAgencia(Agencia agencia, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete agencia.
@@ -33,7 +33,7 @@ public interface IAgenciaDAC
 	 * @param agencia the agencia
 	 * @return the internal response
 	 */
-	public Integer deleteAgencia(Agencia agencia);
+	public Integer deleteAgencia(Agencia agencia, InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch agencia by id.

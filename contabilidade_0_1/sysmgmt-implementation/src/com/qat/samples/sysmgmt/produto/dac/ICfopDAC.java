@@ -18,7 +18,7 @@ public interface ICfopDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer updateCfop(Cfop cfop);
+	public Integer updateCfop(Cfop cfop, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert cfop.
@@ -28,7 +28,7 @@ public interface ICfopDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer insertCfop(Cfop cfop);
+	public Integer insertCfop(Cfop cfop, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete business cfop.
@@ -37,7 +37,7 @@ public interface ICfopDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer deleteCfop(Cfop cfop);
+	public Integer deleteCfop(Cfop cfop, InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch cfop by id.
@@ -61,7 +61,7 @@ public interface ICfopDAC
 	 * @param cfop the cfop
 	 * @return the integer
 	 */
-	public Integer updateCfopPessoa(CfopPessoa cfop);
+	public Integer updateCfopPessoa(CfopPessoa cfop, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert cfop.
@@ -69,7 +69,7 @@ public interface ICfopDAC
 	 * @param cfop the cfop
 	 * @return the integer
 	 */
-	public Integer insertCfopPessoa(CfopPessoa cfop);
+	public Integer insertCfopPessoa(CfopPessoa cfop, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete business cfop.
@@ -77,6 +77,6 @@ public interface ICfopDAC
 	 * @param cfop the cfop
 	 * @return the integer
 	 */
-	public Integer deleteCfopPessoa(CfopPessoa cfop);
+	public Integer deleteCfopPessoa(CfopPessoa cfop, InternalResultsResponse<?> response);
 
 }

@@ -17,7 +17,7 @@ public interface IUsuarioDAC
 	 * @param usuario the usuario
 	 * @return the internal results response< usuario>
 	 */
-	public Integer updateUsuario(Usuario usuario);
+	public Integer updateUsuario(Usuario usuario, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert usuario.
@@ -25,7 +25,7 @@ public interface IUsuarioDAC
 	 * @param usuario the usuario
 	 * @return the internal results response< usuario>
 	 */
-	public Integer insertUsuario(Usuario usuario);
+	public Integer insertUsuario(Usuario usuario, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete usuario.
@@ -33,7 +33,7 @@ public interface IUsuarioDAC
 	 * @param usuario the usuario
 	 * @return the internal response
 	 */
-	public Integer deleteUsuario(Usuario usuario);
+	public Integer deleteUsuario(Usuario usuario, InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch usuario by id.

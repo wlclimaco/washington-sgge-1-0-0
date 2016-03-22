@@ -36,6 +36,6 @@ public interface IEnderecoDAC
 	 * 
 	 * @return the internal response
 	 */
-	public Integer deleteEndereco(Endereco endereco);
+	public Integer deleteEndereco(Endereco endereco, InternalResultsResponse<?> response);
 
 }

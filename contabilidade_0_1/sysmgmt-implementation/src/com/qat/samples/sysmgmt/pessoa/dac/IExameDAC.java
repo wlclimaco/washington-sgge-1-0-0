@@ -18,7 +18,7 @@ public interface IExameDAC
 	 * @param exame the exame
 	 * @return the internal results response< exame>
 	 */
-	public Integer updateExame(Exame exame);
+	public Integer updateExame(Exame exame, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert exame.
@@ -26,7 +26,7 @@ public interface IExameDAC
 	 * @param exame the exame
 	 * @return the internal results response< exame>
 	 */
-	public Integer insertExame(Exame exame);
+	public Integer insertExame(Exame exame, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete exame.
@@ -34,7 +34,7 @@ public interface IExameDAC
 	 * @param exame the exame
 	 * @return the internal response
 	 */
-	public Integer deleteExame(Exame exame);
+	public Integer deleteExame(Exame exame, InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch exame by id.
@@ -65,7 +65,7 @@ public interface IExameDAC
 	 * @param exame the exame
 	 * @return the internal results response< exame>
 	 */
-	public Integer updateExamePessoa(ExamePessoa exame);
+	public Integer updateExamePessoa(ExamePessoa exame, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert exame.
@@ -73,7 +73,7 @@ public interface IExameDAC
 	 * @param exame the exame
 	 * @return the internal results response< exame>
 	 */
-	public Integer insertExamePessoa(ExamePessoa exame);
+	public Integer insertExamePessoa(ExamePessoa exame, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete exame.
@@ -81,6 +81,6 @@ public interface IExameDAC
 	 * @param exame the exame
 	 * @return the internal response
 	 */
-	public Integer deleteExamePessoa(ExamePessoa exame);
+	public Integer deleteExamePessoa(ExamePessoa exame, InternalResultsResponse<?> response);
 
 }

@@ -22,7 +22,7 @@ public interface INoteDAC
 	 * @param note the note
 	 * @return the internal results response< note>
 	 */
-	public Integer insertNote(Note note);
+	public Integer insertNote(Note note, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete note.
@@ -30,7 +30,7 @@ public interface INoteDAC
 	 * @param note the note
 	 * @return the internal response
 	 */
-	public Integer deleteNote(Note note);
+	public Integer deleteNote(Note note, InternalResultsResponse<?> response);
 
 	/**
 	 * Update note.
@@ -38,6 +38,6 @@ public interface INoteDAC
 	 * @param note the note
 	 * @return the internal results response< note>
 	 */
-	public Integer updateNote(Note note);
+	public Integer updateNote(Note note, InternalResultsResponse<?> response);
 
 }

@@ -17,7 +17,7 @@ public interface IConvenioDAC
 	 * @param convenio the convenio
 	 * @return the integer
 	 */
-	public Integer updateConvenio(Convenio convenio);
+	public Integer updateConvenio(Convenio convenio, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert convenio.
@@ -25,7 +25,7 @@ public interface IConvenioDAC
 	 * @param convenio the convenio
 	 * @return the integer
 	 */
-	public Integer insertConvenio(Convenio convenio);
+	public Integer insertConvenio(Convenio convenio, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete convenio.
@@ -33,7 +33,7 @@ public interface IConvenioDAC
 	 * @param convenio the convenio
 	 * @return the integer
 	 */
-	public Integer deleteConvenio(Convenio convenio);
+	public Integer deleteConvenio(Convenio convenio, InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch empresa by request.
@@ -57,7 +57,7 @@ public interface IConvenioDAC
 	 * @param convenio the convenio
 	 * @return the integer
 	 */
-	public Integer insertConvenioPessoa(ConvenioPessoa convenio);
+	public Integer insertConvenioPessoa(ConvenioPessoa convenio, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete convenio pessoa.
@@ -65,7 +65,7 @@ public interface IConvenioDAC
 	 * @param convenio the convenio
 	 * @return the integer
 	 */
-	public Integer deleteConvenioPessoa(ConvenioPessoa convenio);
+	public Integer deleteConvenioPessoa(ConvenioPessoa convenio, InternalResultsResponse<?> response);
 
 	/**
 	 * Update convenio pessoa.
@@ -73,5 +73,5 @@ public interface IConvenioDAC
 	 * @param convenio the convenio
 	 * @return the integer
 	 */
-	public Integer updateConvenioPessoa(ConvenioPessoa convenio);
+	public Integer updateConvenioPessoa(ConvenioPessoa convenio, InternalResultsResponse<?> response);
 }

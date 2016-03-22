@@ -18,7 +18,7 @@ public interface IEventosDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer updateEvento(Eventos evento);
+	public Integer updateEvento(Eventos evento, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert evento.
@@ -28,7 +28,7 @@ public interface IEventosDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer insertEvento(Eventos evento);
+	public Integer insertEvento(Eventos evento, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete evento.
@@ -37,7 +37,7 @@ public interface IEventosDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer deleteEvento(Eventos evento);
+	public Integer deleteEvento(Eventos evento, InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch eventos by request.
@@ -53,7 +53,7 @@ public interface IEventosDAC
 	 * @param evento the evento
 	 * @return the integer
 	 */
-	public Integer updateEventoPessoa(EventoPessoa evento);
+	public Integer updateEventoPessoa(EventoPessoa evento, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert evento pessoa.
@@ -61,7 +61,7 @@ public interface IEventosDAC
 	 * @param evento the evento
 	 * @return the integer
 	 */
-	public Integer insertEventoPessoa(EventoPessoa evento);
+	public Integer insertEventoPessoa(EventoPessoa evento, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete evento pessoa.
@@ -69,6 +69,6 @@ public interface IEventosDAC
 	 * @param evento the evento
 	 * @return the integer
 	 */
-	public Integer deleteEventoPessoa(EventoPessoa evento);
+	public Integer deleteEventoPessoa(EventoPessoa evento, InternalResultsResponse<?> response);
 
 }

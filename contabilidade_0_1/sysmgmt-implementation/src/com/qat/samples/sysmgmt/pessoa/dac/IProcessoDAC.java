@@ -17,7 +17,7 @@ public interface IProcessoDAC
 	 * @param agencia the agencia
 	 * @return the internal results response< agencia>
 	 */
-	public Integer updateProcesso(Processo processo);
+	public Integer updateProcesso(Processo processo,InternalResultsResponse<?> response);
 
 	/**
 	 * Insert processo.
@@ -25,7 +25,7 @@ public interface IProcessoDAC
 	 * @param processo the processo
 	 * @return the internal results response< processo>
 	 */
-	public Integer insertProcesso(Processo processo);
+	public Integer insertProcesso(Processo processo, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete processo.
@@ -33,7 +33,7 @@ public interface IProcessoDAC
 	 * @param processo the processo
 	 * @return the internal response
 	 */
-	public Integer deleteProcesso(Processo processo);
+	public Integer deleteProcesso(Processo processo,InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch processo by id.

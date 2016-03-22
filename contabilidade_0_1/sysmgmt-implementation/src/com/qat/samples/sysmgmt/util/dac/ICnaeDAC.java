@@ -19,7 +19,7 @@ public interface ICnaeDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer updateCnae(Cnae cnae);
+	public Integer updateCnae(Cnae cnae, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert cnae.
@@ -29,7 +29,7 @@ public interface ICnaeDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer insertCnae(Cnae cnae);
+	public Integer insertCnae(Cnae cnae, String statementName,InternalResultsResponse<?> response);
 
 	/**
 	 * Delete business cnae.
@@ -38,7 +38,7 @@ public interface ICnaeDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer deleteCnae(Cnae cnae);
+	public Integer deleteCnae(Cnae cnae, InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch cnae by id.
@@ -62,7 +62,7 @@ public interface ICnaeDAC
 	 * @param cnae the cnae
 	 * @return the integer
 	 */
-	public Integer updateCnaeEmpresa(CnaeEmpresa cnae);
+	public Integer updateCnaeEmpresa(CnaeEmpresa cnae, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert cnae.
@@ -70,7 +70,7 @@ public interface ICnaeDAC
 	 * @param cnae the cnae
 	 * @return the integer
 	 */
-	public Integer insertCnaeEmpresa(CnaeEmpresa cnae);
+	public Integer insertCnaeEmpresa(CnaeEmpresa cnae, String statementName,InternalResultsResponse<?> response);
 
 	/**
 	 * Delete business cnae.
@@ -78,7 +78,7 @@ public interface ICnaeDAC
 	 * @param cnae the cnae
 	 * @return the integer
 	 */
-	public Integer deleteCnaeEmpresa(CnaeEmpresa cnae);
+	public Integer deleteCnaeEmpresa(CnaeEmpresa cnae, InternalResultsResponse<?> response);
 
 	public InternalResultsResponse<Cnae> fetchCnaeById(FetchByIdRequest request);
 

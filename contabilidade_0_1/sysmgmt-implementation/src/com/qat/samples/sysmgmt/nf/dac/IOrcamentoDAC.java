@@ -18,7 +18,7 @@ public interface IOrcamentoDAC
 	 * @param orcamento the orcamento
 	 * @return the internal results response< orcamento>
 	 */
-	public InternalResultsResponse<Orcamento> updateOrcamento(Orcamento orcamento);
+	public InternalResultsResponse<Orcamento> updateOrcamento(Orcamento orcamento, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert orcamento.
@@ -26,7 +26,9 @@ public interface IOrcamentoDAC
 	 * @param orcamento the orcamento
 	 * @return the internal results response< orcamento>
 	 */
-	public InternalResultsResponse<Orcamento> insertOrcamento(Orcamento orcamento);
+	public InternalResultsResponse<Orcamento> insertOrcamento(Orcamento orcamento, String statementName,
+			InternalResultsResponse<?> response);
+
 
 	/**
 	 * Delete orcamento.
@@ -34,7 +36,7 @@ public interface IOrcamentoDAC
 	 * @param orcamento the orcamento
 	 * @return the internal response
 	 */
-	public InternalResponse deleteOrcamento(Orcamento orcamento);
+	public InternalResponse deleteOrcamento(Orcamento orcamento, InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch orcamento by id.

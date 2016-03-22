@@ -17,7 +17,7 @@ public interface IConsultaDAC
 	 * @param consulta the consulta
 	 * @return the internal results response< consulta>
 	 */
-	public Integer updateConsulta(Consulta consulta);
+	public Integer updateConsulta(Consulta consulta, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert consulta.
@@ -25,7 +25,7 @@ public interface IConsultaDAC
 	 * @param consulta the consulta
 	 * @return the internal results response< consulta>
 	 */
-	public Integer insertConsulta(Consulta consulta);
+	public Integer insertConsulta(Consulta consulta, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete consulta.
@@ -33,7 +33,7 @@ public interface IConsultaDAC
 	 * @param consulta the consulta
 	 * @return the internal response
 	 */
-	public Integer deleteConsulta(Consulta consulta);
+	public Integer deleteConsulta(Consulta consulta, InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch consulta by id.

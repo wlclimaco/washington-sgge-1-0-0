@@ -18,7 +18,7 @@ public interface IEspecialidadeDAC
 	 * @param especialidade the especialidade
 	 * @return the internal results response< especialidade>
 	 */
-	public Integer updateEspecialidade(Especialidade especialidade);
+	public Integer updateEspecialidade(Especialidade especialidade, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert especialidade.
@@ -26,7 +26,7 @@ public interface IEspecialidadeDAC
 	 * @param especialidade the especialidade
 	 * @return the internal results response< especialidade>
 	 */
-	public Integer insertEspecialidade(Especialidade especialidade);
+	public Integer insertEspecialidade(Especialidade especialidade, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete especialidade.
@@ -34,7 +34,7 @@ public interface IEspecialidadeDAC
 	 * @param especialidade the especialidade
 	 * @return the internal response
 	 */
-	public Integer deleteEspecialidade(Especialidade especialidade);
+	public Integer deleteEspecialidade(Especialidade especialidade, InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch especialidade by id.
@@ -65,7 +65,7 @@ public interface IEspecialidadeDAC
 	 * @param especialidade the especialidade
 	 * @return the internal results response< especialidade>
 	 */
-	public Integer updateEspecialidadePessoa(EspecialidadePessoa especialidade);
+	public Integer updateEspecialidadePessoa(EspecialidadePessoa especialidade, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert especialidade.
@@ -73,7 +73,7 @@ public interface IEspecialidadeDAC
 	 * @param especialidade the especialidade
 	 * @return the internal results response< especialidade>
 	 */
-	public Integer insertEspecialidadePessoa(EspecialidadePessoa especialidade);
+	public Integer insertEspecialidadePessoa(EspecialidadePessoa especialidade, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete especialidade.
@@ -81,6 +81,6 @@ public interface IEspecialidadeDAC
 	 * @param especialidade the especialidade
 	 * @return the internal response
 	 */
-	public Integer deleteEspecialidadePessoa(EspecialidadePessoa especialidade);
+	public Integer deleteEspecialidadePessoa(EspecialidadePessoa especialidade, InternalResultsResponse<?> response);
 
 }

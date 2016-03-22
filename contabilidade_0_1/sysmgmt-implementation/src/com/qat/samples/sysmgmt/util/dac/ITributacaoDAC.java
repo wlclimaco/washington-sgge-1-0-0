@@ -17,7 +17,7 @@ public interface ITributacaoDAC
 	 * @param tributacao the tributacao
 	 * @return the internal results response< tributacao>
 	 */
-	public Integer updateTributacao(Tributacao tributacao);
+	public Integer updateTributacao(Tributacao tributacao, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert tributacao.
@@ -25,7 +25,7 @@ public interface ITributacaoDAC
 	 * @param tributacao the tributacao
 	 * @return the internal results response< tributacao>
 	 */
-	public Integer insertTributacao(Tributacao tributacao);
+	public Integer insertTributacao(Tributacao tributacao, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete tributacao.
@@ -33,7 +33,7 @@ public interface ITributacaoDAC
 	 * @param tributacao the tributacao
 	 * @return the internal response
 	 */
-	public Integer deleteTributacao(Tributacao tributacao);
+	public Integer deleteTributacao(Tributacao tributacao, InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch tributacao by id.

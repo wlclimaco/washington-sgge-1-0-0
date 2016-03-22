@@ -18,7 +18,7 @@ public interface IPlanoSaudeDAC
 	 * @param planoSaude the planoSaude
 	 * @return the internal results response< planoSaude>
 	 */
-	public Integer updatePlanoSaude(PlanoSaude planoSaude);
+	public Integer updatePlanoSaude(PlanoSaude planoSaude,InternalResultsResponse<?> response);
 
 	/**
 	 * Insert planoSaude.
@@ -26,7 +26,7 @@ public interface IPlanoSaudeDAC
 	 * @param planoSaude the planoSaude
 	 * @return the internal results response< planoSaude>
 	 */
-	public Integer insertPlanoSaude(PlanoSaude planoSaude);
+	public Integer insertPlanoSaude(PlanoSaude planoSaude, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete planoSaude.
@@ -34,7 +34,7 @@ public interface IPlanoSaudeDAC
 	 * @param planoSaude the planoSaude
 	 * @return the internal response
 	 */
-	public Integer deletePlanoSaude(PlanoSaude planoSaude);
+	public Integer deletePlanoSaude(PlanoSaude planoSaude,InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch planoSaude by id.
@@ -65,7 +65,7 @@ public interface IPlanoSaudeDAC
 	 * @param planoSaude the planoSaude
 	 * @return the internal results response< planoSaude>
 	 */
-	public Integer updatePlanoSaudePessoa(PlanoSaudePessoa planoSaude);
+	public Integer updatePlanoSaudePessoa(PlanoSaudePessoa planoSaude,InternalResultsResponse<?> response);
 
 	/**
 	 * Insert planoSaude.
@@ -73,7 +73,7 @@ public interface IPlanoSaudeDAC
 	 * @param planoSaude the planoSaude
 	 * @return the internal results response< planoSaude>
 	 */
-	public Integer insertPlanoSaudePessoa(PlanoSaudePessoa planoSaude);
+	public Integer insertPlanoSaudePessoa(PlanoSaudePessoa planoSaude, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete planoSaude.
@@ -81,6 +81,6 @@ public interface IPlanoSaudeDAC
 	 * @param planoSaude the planoSaude
 	 * @return the internal response
 	 */
-	public Integer deletePlanoSaudePessoa(PlanoSaudePessoa planoSaude);
+	public Integer deletePlanoSaudePessoa(PlanoSaudePessoa planoSaude,InternalResultsResponse<?> response);
 
 }

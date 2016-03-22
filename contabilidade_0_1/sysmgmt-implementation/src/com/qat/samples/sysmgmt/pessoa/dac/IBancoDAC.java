@@ -18,7 +18,7 @@ public interface IBancoDAC
 	 * @param banco the banco
 	 * @return the internal results response< banco>
 	 */
-	public Integer updateBanco(Banco banco);
+	public Integer updateBanco(Banco banco, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert banco.
@@ -26,7 +26,7 @@ public interface IBancoDAC
 	 * @param banco the banco
 	 * @return the internal results response< banco>
 	 */
-	public Integer insertBanco(Banco banco);
+	public Integer insertBanco(Banco banco, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete banco.
@@ -34,7 +34,7 @@ public interface IBancoDAC
 	 * @param banco the banco
 	 * @return the internal response
 	 */
-	public Integer deleteBanco(Banco banco);
+	public Integer deleteBanco(Banco banco, InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch banco by id.
@@ -65,7 +65,7 @@ public interface IBancoDAC
 	 * @param banco the banco
 	 * @return the internal results response< banco>
 	 */
-	public Integer updateBancoPessoa(BancoPessoa banco);
+	public Integer updateBancoPessoa(BancoPessoa banco, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert banco.
@@ -73,7 +73,7 @@ public interface IBancoDAC
 	 * @param banco the banco
 	 * @return the internal results response< banco>
 	 */
-	public Integer insertBancoPessoa(BancoPessoa banco);
+	public Integer insertBancoPessoa(BancoPessoa banco, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete banco.
@@ -81,6 +81,6 @@ public interface IBancoDAC
 	 * @param banco the banco
 	 * @return the internal response
 	 */
-	public Integer deleteBancoPessoa(BancoPessoa banco);
+	public Integer deleteBancoPessoa(BancoPessoa banco, InternalResultsResponse<?> response);
 
 }

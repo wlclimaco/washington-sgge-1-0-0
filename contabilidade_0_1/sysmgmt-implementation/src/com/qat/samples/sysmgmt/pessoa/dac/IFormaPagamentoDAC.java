@@ -19,7 +19,7 @@ public interface IFormaPagamentoDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer updateFormaPg(FormaPg formaPg);
+	public Integer updateFormaPg(FormaPg formaPg, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert formaPg.
@@ -29,7 +29,7 @@ public interface IFormaPagamentoDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer insertFormaPg(FormaPg formaPg);
+	public Integer insertFormaPg(FormaPg formaPg, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete business formaPg.
@@ -38,7 +38,7 @@ public interface IFormaPagamentoDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer deleteFormaPg(FormaPg formaPg);
+	public Integer deleteFormaPg(FormaPg formaPg, InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch formaPg by id.
@@ -55,7 +55,7 @@ public interface IFormaPagamentoDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer updateFormaPgPessoa(FormaPgPessoa formaPg);
+	public Integer updateFormaPgPessoa(FormaPgPessoa formaPg, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert formaPg.
@@ -65,7 +65,7 @@ public interface IFormaPagamentoDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer insertFormaPgPessoa(FormaPgPessoa formaPg);
+	public Integer insertFormaPgPessoa(FormaPgPessoa formaPg, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete business formaPg.
@@ -74,7 +74,7 @@ public interface IFormaPagamentoDAC
 	 * @param response the response
 	 * @return the integer
 	 */
-	public Integer deleteFormaPgPessoa(FormaPgPessoa formaPg);
+	public Integer deleteFormaPgPessoa(FormaPgPessoa formaPg, InternalResultsResponse<?> response);
 
 	public InternalResultsResponse<FormaPg> fetchFormaPgByRequest(PagedInquiryRequest request);
 }

@@ -18,7 +18,7 @@ public interface IBeneficiosDAC
 	 * @param beneficios the beneficios
 	 * @return the internal results response< beneficios>
 	 */
-	public Integer updateBeneficios(Beneficios beneficios);
+	public Integer updateBeneficios(Beneficios beneficios, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert beneficios.
@@ -26,7 +26,7 @@ public interface IBeneficiosDAC
 	 * @param beneficios the beneficios
 	 * @return the internal results response< beneficios>
 	 */
-	public Integer insertBeneficios(Beneficios beneficios);
+	public Integer insertBeneficios(Beneficios beneficios, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete beneficios.
@@ -34,7 +34,7 @@ public interface IBeneficiosDAC
 	 * @param beneficios the beneficios
 	 * @return the internal response
 	 */
-	public Integer deleteBeneficios(Beneficios beneficios);
+	public Integer deleteBeneficios(Beneficios beneficios, InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch beneficios by request.
@@ -50,7 +50,7 @@ public interface IBeneficiosDAC
 	 * @param beneficios the beneficios
 	 * @return the integer
 	 */
-	public Integer updateBeneficioPessoa(BeneficioPessoa beneficios);
+	public Integer updateBeneficioPessoa(BeneficioPessoa beneficios, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert beneficio pessoa.
@@ -58,7 +58,7 @@ public interface IBeneficiosDAC
 	 * @param beneficios the beneficios
 	 * @return the integer
 	 */
-	public Integer insertBeneficioPessoa(BeneficioPessoa beneficios);
+	public Integer insertBeneficioPessoa(BeneficioPessoa beneficios, String statementName, InternalResultsResponse<?> response);
 
 	/**
 	 * Delete beneficio pessoa.
@@ -66,6 +66,6 @@ public interface IBeneficiosDAC
 	 * @param beneficios the beneficios
 	 * @return the integer
 	 */
-	public Integer deleteBeneficioPessoa(BeneficioPessoa beneficios);
+	public Integer deleteBeneficioPessoa(BeneficioPessoa beneficios, InternalResultsResponse<?> response);
 
 }
