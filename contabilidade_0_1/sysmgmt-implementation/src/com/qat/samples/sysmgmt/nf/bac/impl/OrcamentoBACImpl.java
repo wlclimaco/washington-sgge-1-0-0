@@ -43,7 +43,7 @@ public class OrcamentoBACImpl implements IOrcamentoBAC
 	{
 		InternalResultsResponse<Orcamento> response = new InternalResultsResponse<Orcamento>();
 
-		response = getOrcamentoDAC().insertOrcamento(request.getOrcamento());
+		response = getOrcamentoDAC().insertOrcamento(request.getOrcamento(), null, null);
 
 		return response;
 	}
@@ -57,7 +57,7 @@ public class OrcamentoBACImpl implements IOrcamentoBAC
 	{
 		InternalResultsResponse<Orcamento> response = new InternalResultsResponse<Orcamento>();
 
-		response = getOrcamentoDAC().updateOrcamento(request.getOrcamento());
+		response = getOrcamentoDAC().updateOrcamento(request.getOrcamento(), null);
 
 		return response;
 	}
@@ -72,7 +72,7 @@ public class OrcamentoBACImpl implements IOrcamentoBAC
 	@Override
 	public InternalResponse deleteOrcamento(OrcamentoMaintenanceRequest request)
 	{
-		return getOrcamentoDAC().deleteOrcamento(request.getOrcamento());
+		return getOrcamentoDAC().deleteOrcamento(request.getOrcamento(), null);
 	}
 
 	/*

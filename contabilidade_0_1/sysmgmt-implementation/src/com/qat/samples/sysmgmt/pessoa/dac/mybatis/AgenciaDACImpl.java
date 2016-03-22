@@ -6,7 +6,6 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
 import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
@@ -72,92 +71,6 @@ public class AgenciaDACImpl extends SqlSessionDaoSupport implements IAgenciaDAC
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IAgenciaDAC#insertAgencia(com.prosperitasglobal.sendsolv.model
-	 * .Agencia)
-	 */
-	@Override
-	public Integer insertAgencia(Agencia agencia)
-	{
-		Integer insertCount = 0;
-		InternalResultsResponse<Agencia> response = new InternalResultsResponse<Agencia>();
-
-		// First insert the root
-		// Is successful the unique-id will be populated back into the object.
-		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), AGENCIA_STMT_INSERT, agencia, response);
-
-		if (response.isInError())
-		{
-			return null;
-		}
-
-		// Finally, if something was inserted then add the Agencia to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(agencia);
-		}
-
-		return insertCount;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IAgenciaDAC#updateAgencia(com.prosperitasglobal.sendsolv.model
-	 * .Agencia)
-	 */
-	@Override
-	public Integer updateAgencia(Agencia agencia)
-	{
-		Integer updateCount = 0;
-		InternalResultsResponse<Agencia> response = new InternalResultsResponse<Agencia>();
-
-		// First update the root if necessary.
-		if (!ValidationUtil.isNull(agencia.getModelAction())
-				&& (agencia.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
-		{
-			updateCount =
-					QATMyBatisDacHelper.doUpdate(getSqlSession(), AGENCIA_STMT_UPDATE, agencia,
-							response);
-		}
-
-		if (response.isInError())
-		{
-			return null;
-		}
-
-		// Finally, if something was updated then add the Person to the result.
-		if (updateCount > 0)
-		{
-			response.addResult(agencia);
-		}
-
-		return updateCount;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IAgenciaDAC#deleteAgencia(com.prosperitasglobal.sendsolv.model
-	 * .Agencia)
-	 */
-	@Override
-	public Integer deleteAgencia(Agencia agencia)
-	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), AGENCIA_STMT_DELETE, agencia, response);
-		if (response.isInError())
-		{
-			return null;
-		}
-		else
-		{
-			return 1;
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see com.prosperitasglobal.sendsolv.dac.IAgenciaDAC#fetchAgenciaById(FetchByIdRequest)
 	 */
 	@Override
@@ -195,6 +108,60 @@ public class AgenciaDACImpl extends SqlSessionDaoSupport implements IAgenciaDAC
 	{
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Integer insertAgencia(Agencia agencia, String statementName, InternalResultsResponse<?> response)
+	{
+		Integer insertCount = 0;
+
+		// First insert the root
+		// Is successful the unique-id will be populated back into the object.
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), AGENCIA_STMT_INSERT, agencia, response);
+
+		if (response.isInError())
+		{
+			return null;
+		}
+
+		return insertCount;
+	}
+
+	@Override
+	public Integer updateAgencia(Agencia agencia, InternalResultsResponse<?> response)
+	{
+		Integer updateCount = 0;
+		response = new InternalResultsResponse<Agencia>();
+
+		// First update the root if necessary.
+		if (!ValidationUtil.isNull(agencia.getModelAction())
+				&& (agencia.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		{
+			updateCount =
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), AGENCIA_STMT_UPDATE, agencia,
+							response);
+		}
+
+		if (response.isInError())
+		{
+			return null;
+		}
+
+		return updateCount;
+	}
+
+	@Override
+	public Integer deleteAgencia(Agencia agencia, InternalResultsResponse<?> response)
+	{
+		QATMyBatisDacHelper.doRemove(getSqlSession(), AGENCIA_STMT_DELETE, agencia, response);
+		if (response.isInError())
+		{
+			return null;
+		}
+		else
+		{
+			return 1;
+		}
 	}
 
 }

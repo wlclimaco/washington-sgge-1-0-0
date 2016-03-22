@@ -6,7 +6,6 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
 import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
@@ -77,10 +76,10 @@ public class ConsultaDACImpl extends SqlSessionDaoSupport implements IConsultaDA
 	 * .Consulta)
 	 */
 	@Override
-	public Integer insertConsulta(Consulta consulta)
+	public Integer insertConsulta(Consulta consulta, String string, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<Consulta> response = new InternalResultsResponse<Consulta>();
+		response = new InternalResultsResponse<Consulta>();
 
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
@@ -90,13 +89,7 @@ public class ConsultaDACImpl extends SqlSessionDaoSupport implements IConsultaDA
 		{
 			return null;
 		}
-
-		// Finally, if something was inserted then add the Consulta to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(consulta);
-		}
-
+		// response.addResults((List<?>)consulta);
 		return insertCount;
 	}
 
@@ -107,10 +100,10 @@ public class ConsultaDACImpl extends SqlSessionDaoSupport implements IConsultaDA
 	 * .Consulta)
 	 */
 	@Override
-	public Integer updateConsulta(Consulta consulta)
+	public Integer updateConsulta(Consulta consulta, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<Consulta> response = new InternalResultsResponse<Consulta>();
+		response = new InternalResultsResponse<Consulta>();
 
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(consulta.getModelAction())
@@ -127,10 +120,10 @@ public class ConsultaDACImpl extends SqlSessionDaoSupport implements IConsultaDA
 		}
 
 		// Finally, if something was updated then add the Person to the result.
-		if (updateCount > 0)
-		{
-			response.addResult(consulta);
-		}
+		// if (updateCount > 0)
+		// {
+		// response.addResult(consulta);
+		// }
 
 		return updateCount;
 	}
@@ -142,9 +135,9 @@ public class ConsultaDACImpl extends SqlSessionDaoSupport implements IConsultaDA
 	 * .Consulta)
 	 */
 	@Override
-	public Integer deleteConsulta(Consulta consulta)
+	public Integer deleteConsulta(Consulta consulta, InternalResultsResponse<?> response)
 	{
-		InternalResponse response = new InternalResponse();
+
 		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, consulta, response);
 		if (response.isInError())
 		{

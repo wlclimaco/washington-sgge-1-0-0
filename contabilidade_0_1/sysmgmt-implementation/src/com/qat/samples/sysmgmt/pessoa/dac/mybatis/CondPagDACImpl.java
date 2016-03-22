@@ -4,7 +4,6 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
 import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
@@ -12,6 +11,7 @@ import com.qat.samples.sysmgmt.condpag.CondPag;
 import com.qat.samples.sysmgmt.condpag.CondPagPessoa;
 import com.qat.samples.sysmgmt.condpag.TipoPag;
 import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.dac.ICondPagDAC;
 
@@ -59,10 +59,10 @@ public class CondPagDACImpl extends SqlSessionDaoSupport implements ICondPagDAC
 	private static final String TIPOPAG_PESSOA_STMT_DELETE = FORMAPG_NAMESPACE + "deleteTipoPagById";
 
 	@Override
-	public Integer updateCondPag(CondPag condPag)
+	public Integer updateCondPag(CondPag condPag, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<CondPag> response = new InternalResultsResponse<CondPag>();
+		response = new InternalResultsResponse<CondPag>();
 
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(condPag.getModelAction())
@@ -80,10 +80,10 @@ public class CondPagDACImpl extends SqlSessionDaoSupport implements ICondPagDAC
 	}
 
 	@Override
-	public Integer insertCondPag(CondPag condPag)
+	public Integer insertCondPag(CondPag condPag, String string, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<CondPag> response = new InternalResultsResponse<CondPag>();
+		response = new InternalResultsResponse<CondPag>();
 		// First insert the root contato data
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), FORMAPG_STMT_INSERT, condPag, response);
 
@@ -91,14 +91,13 @@ public class CondPagDACImpl extends SqlSessionDaoSupport implements ICondPagDAC
 	}
 
 	@Override
-	public Integer deleteCondPag(CondPag condPag)
+	public Integer deleteCondPag(CondPag condPag, InternalResultsResponse<?> response)
 	{
-		InternalResponse response = new InternalResponse();
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), FORMAPG_STMT_DELETE_PERSON_FORMAPG, condPag, response);
 	}
 
 	@Override
-	public InternalResultsResponse<CondPag> fetchCondPagById(Integer id)
+	public InternalResultsResponse<CondPag> fetchCondPagById(FetchByIdRequest id)
 	{
 		InternalResultsResponse<CondPag> response = new InternalResultsResponse<CondPag>();
 		QATMyBatisDacHelper.doQueryForList(getSqlSession(), FORMAPG_STMT_FETCH_BY_ID, id, response);
@@ -122,10 +121,9 @@ public class CondPagDACImpl extends SqlSessionDaoSupport implements ICondPagDAC
 	}
 
 	@Override
-	public Integer updateCondPagPessoa(CondPagPessoa condPag)
+	public Integer updateCondPagPessoa(CondPagPessoa condPag, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<CondPagPessoa> response = new InternalResultsResponse<CondPagPessoa>();
 
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(condPag.getModelAction())
@@ -143,10 +141,10 @@ public class CondPagDACImpl extends SqlSessionDaoSupport implements ICondPagDAC
 	}
 
 	@Override
-	public Integer insertCondPagPessoa(CondPagPessoa condPag)
+	public Integer insertCondPagPessoa(CondPagPessoa condPag, String string, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<CondPagPessoa> response = new InternalResultsResponse<CondPagPessoa>();
+		response = new InternalResultsResponse<CondPagPessoa>();
 		// First insert the root contato data
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), FORMAPG_PESSOA_STMT_INSERT, condPag, response);
 
@@ -154,17 +152,16 @@ public class CondPagDACImpl extends SqlSessionDaoSupport implements ICondPagDAC
 	}
 
 	@Override
-	public Integer deleteCondPagPessoa(CondPagPessoa condPag)
+	public Integer deleteCondPagPessoa(CondPagPessoa condPag, InternalResultsResponse<?> response)
 	{
-		InternalResponse response = new InternalResponse();
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), FORMAPG_PESSOA_STMT_DELETE, condPag, response);
 	}
 
 	@Override
-	public Integer updateTipoPag(TipoPag tipoPag)
+	public Integer updateTipoPag(TipoPag tipoPag, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<TipoPag> response = new InternalResultsResponse<TipoPag>();
+		response = new InternalResultsResponse<TipoPag>();
 
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(tipoPag.getModelAction())
@@ -182,10 +179,10 @@ public class CondPagDACImpl extends SqlSessionDaoSupport implements ICondPagDAC
 	}
 
 	@Override
-	public Integer insertTipoPag(TipoPag tipoPag)
+	public Integer insertTipoPag(TipoPag tipoPag, String string, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<TipoPag> response = new InternalResultsResponse<TipoPag>();
+		response = new InternalResultsResponse<TipoPag>();
 		// First insert the root contato data
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), TIPOPAG_STMT_INSERT, tipoPag, response);
 
@@ -193,9 +190,8 @@ public class CondPagDACImpl extends SqlSessionDaoSupport implements ICondPagDAC
 	}
 
 	@Override
-	public Integer deleteTipoPag(TipoPag tipoPag)
+	public Integer deleteTipoPag(TipoPag tipoPag, InternalResultsResponse<?> response)
 	{
-		InternalResponse response = new InternalResponse();
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), TIPOPAG_PESSOA_STMT_DELETE, tipoPag, response);
 	}
 

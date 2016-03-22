@@ -59,7 +59,7 @@ public final class NotesDACD extends SqlSessionDaoSupport
 			switch (note.getModelAction())
 			{
 				case INSERT:
-					count = noteDAC.insertNote(note);
+					count = noteDAC.insertNote(note, null, null);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -72,7 +72,7 @@ public final class NotesDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
-					count = noteDAC.updateNote(note);
+					count = noteDAC.updateNote(note, null);
 					if (count > 0)
 					{
 						count =

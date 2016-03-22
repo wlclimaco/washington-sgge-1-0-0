@@ -1,7 +1,7 @@
 package com.qat.samples.sysmgmt.pessoa.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.dp.Salario;
+import com.qat.samples.sysmgmt.condominio.model.Mandado;
 
 public interface IMandadoDAC
 {

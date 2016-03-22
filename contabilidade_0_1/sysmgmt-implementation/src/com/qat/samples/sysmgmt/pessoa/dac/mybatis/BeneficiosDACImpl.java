@@ -6,7 +6,6 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
 import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
@@ -74,10 +73,10 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 	 * .Beneficios)
 	 */
 	@Override
-	public Integer insertBeneficios(Beneficios beneficios)
+	public Integer insertBeneficios(Beneficios beneficios, String string, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<Beneficios> response = new InternalResultsResponse<Beneficios>();
+		response = new InternalResultsResponse<Beneficios>();
 
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
@@ -86,12 +85,6 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 		if (response.isInError())
 		{
 			return null;
-		}
-
-		// Finally, if something was inserted then add the Beneficios to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(beneficios);
 		}
 
 		return insertCount;
@@ -104,10 +97,10 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 	 * .Beneficios)
 	 */
 	@Override
-	public Integer updateBeneficios(Beneficios beneficios)
+	public Integer updateBeneficios(Beneficios beneficios, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<Beneficios> response = new InternalResultsResponse<Beneficios>();
+		response = new InternalResultsResponse<Beneficios>();
 
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(beneficios.getModelAction())
@@ -123,12 +116,6 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 			return null;
 		}
 
-		// Finally, if something was updated then add the Person to the result.
-		if (updateCount > 0)
-		{
-			response.addResult(beneficios);
-		}
-
 		return updateCount;
 	}
 
@@ -139,9 +126,9 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 	 * .Beneficios)
 	 */
 	@Override
-	public Integer deleteBeneficios(Beneficios beneficios)
+	public Integer deleteBeneficios(Beneficios beneficios, InternalResultsResponse<?> response)
 	{
-		InternalResponse response = new InternalResponse();
+
 		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, beneficios, response);
 		if (response.isInError())
 		{
@@ -176,10 +163,10 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 	}
 
 	@Override
-	public Integer updateBeneficioPessoa(BeneficioPessoa beneficios)
+	public Integer updateBeneficioPessoa(BeneficioPessoa beneficios, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<BeneficioPessoa> response = new InternalResultsResponse<BeneficioPessoa>();
+		response = new InternalResultsResponse<BeneficioPessoa>();
 
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(beneficios.getModelAction())
@@ -195,20 +182,14 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 			return null;
 		}
 
-		// Finally, if something was updated then add the Person to the result.
-		if (updateCount > 0)
-		{
-			response.addResult(beneficios);
-		}
-
 		return updateCount;
 	}
 
 	@Override
-	public Integer insertBeneficioPessoa(BeneficioPessoa beneficios)
+	public Integer insertBeneficioPessoa(BeneficioPessoa beneficios, String string, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<BeneficioPessoa> response = new InternalResultsResponse<BeneficioPessoa>();
+		response = new InternalResultsResponse<BeneficioPessoa>();
 
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
@@ -216,19 +197,13 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 				QATMyBatisDacHelper.doInsert(getSqlSession(), "BeneficiosMap.insertBeneficioPerson", beneficios,
 						response);
 
-		// Finally, if something was inserted then add the Beneficios to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(beneficios);
-		}
-
 		return insertCount;
 	}
 
 	@Override
-	public Integer deleteBeneficioPessoa(BeneficioPessoa beneficios)
+	public Integer deleteBeneficioPessoa(BeneficioPessoa beneficios, InternalResultsResponse<?> response)
 	{
-		InternalResponse response = new InternalResponse();
+
 		QATMyBatisDacHelper.doRemove(getSqlSession(), "BeneficiosMap.deleteBeneficioPerson", beneficios, response);
 		if (response.isInError())
 		{

@@ -71,7 +71,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 									cnae.getEmprId(),
 									cnae.getCreateUser(), processId, historicoId);
 
-					count = cnaeDAC.insertCnaeEmpresa(cnae);
+					count = cnaeDAC.insertCnaeEmpresa(cnae, null, null);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -92,7 +92,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 									cnae.getEmprId(),
 									cnae.getCreateUser(), processId, historicoId);
 
-					count = cnaeDAC.updateCnaeEmpresa(cnae);
+					count = cnaeDAC.updateCnaeEmpresa(cnae, null);
 					if (count > 0)
 					{
 						count =
@@ -103,7 +103,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case DELETE:
-					count = cnaeDAC.deleteCnaeEmpresa(cnae);
+					count = cnaeDAC.deleteCnaeEmpresa(cnae, null);
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
@@ -114,7 +114,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 
 					break;
 				case NONE:
-					count = cnaeDAC.insertCnaeEmpresa(cnae);
+					count = cnaeDAC.insertCnaeEmpresa(cnae, null, null);
 					if (count > 0)
 					{
 						status = new Status();
@@ -153,7 +153,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 		switch (cnae.getModelAction())
 		{
 			case INSERT:
-				count = cnaeDAC.insertCnae(cnae);
+				count = cnaeDAC.insertCnae(cnae, null, null);
 				if (count > 0)
 				{
 					Status status = new Status();
@@ -166,7 +166,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
-				count = cnaeDAC.updateCnae(cnae);
+				count = cnaeDAC.updateCnae(cnae, null);
 				if (count > 0)
 				{
 					count =
@@ -177,7 +177,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case DELETE:
-				count = cnaeDAC.deleteCnae(cnae);
+				count = cnaeDAC.deleteCnae(cnae, null);
 				Status status = new Status();
 				status.setStatus(CdStatusTypeEnum.DELETADO);
 				List<Status> statusList = new ArrayList<Status>();

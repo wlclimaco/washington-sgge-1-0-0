@@ -6,7 +6,6 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
 import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
@@ -192,10 +191,10 @@ public class EspecialidadeDACImpl extends SqlSessionDaoSupport implements IEspec
 	 * .Especialidade)
 	 */
 	@Override
-	public Integer insertEspecialidade(Especialidade banco)
+	public Integer insertEspecialidade(Especialidade banco, String string, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<Especialidade> response = new InternalResultsResponse<Especialidade>();
+		response = new InternalResultsResponse<Especialidade>();
 
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
@@ -207,10 +206,10 @@ public class EspecialidadeDACImpl extends SqlSessionDaoSupport implements IEspec
 		}
 
 		// Finally, if something was inserted then add the Especialidade to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(banco);
-		}
+		// if (insertCount > 0)
+		// {
+		// response.addResult(banco);
+		// }
 
 		return insertCount;
 	}
@@ -222,10 +221,10 @@ public class EspecialidadeDACImpl extends SqlSessionDaoSupport implements IEspec
 	 * .Especialidade)
 	 */
 	@Override
-	public Integer updateEspecialidade(Especialidade banco)
+	public Integer updateEspecialidade(Especialidade banco, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<Especialidade> response = new InternalResultsResponse<Especialidade>();
+		response = new InternalResultsResponse<Especialidade>();
 
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(banco.getModelAction())
@@ -241,12 +240,6 @@ public class EspecialidadeDACImpl extends SqlSessionDaoSupport implements IEspec
 			return null;
 		}
 
-		// Finally, if something was updated then add the Person to the result.
-		if (updateCount > 0)
-		{
-			response.addResult(banco);
-		}
-
 		return updateCount;
 	}
 
@@ -257,9 +250,8 @@ public class EspecialidadeDACImpl extends SqlSessionDaoSupport implements IEspec
 	 * .Especialidade)
 	 */
 	@Override
-	public Integer deleteEspecialidade(Especialidade banco)
+	public Integer deleteEspecialidade(Especialidade banco, InternalResultsResponse<?> response)
 	{
-		InternalResponse response = new InternalResponse();
 		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, banco, response);
 		if (response.isInError())
 		{
@@ -313,10 +305,10 @@ public class EspecialidadeDACImpl extends SqlSessionDaoSupport implements IEspec
 	}
 
 	@Override
-	public Integer updateEspecialidadePessoa(EspecialidadePessoa banco)
+	public Integer updateEspecialidadePessoa(EspecialidadePessoa banco, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<EspecialidadePessoa> response = new InternalResultsResponse<EspecialidadePessoa>();
+		response = new InternalResultsResponse<EspecialidadePessoa>();
 
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(banco.getModelAction())
@@ -332,20 +324,15 @@ public class EspecialidadeDACImpl extends SqlSessionDaoSupport implements IEspec
 			return null;
 		}
 
-		// Finally, if something was updated then add the Person to the result.
-		if (updateCount > 0)
-		{
-			response.addResult(banco);
-		}
-
 		return updateCount;
 	}
 
 	@Override
-	public Integer insertEspecialidadePessoa(EspecialidadePessoa banco)
+	public Integer insertEspecialidadePessoa(EspecialidadePessoa banco, String string,
+			InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<EspecialidadePessoa> response = new InternalResultsResponse<EspecialidadePessoa>();
+		response = new InternalResultsResponse<EspecialidadePessoa>();
 
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
@@ -363,19 +350,14 @@ public class EspecialidadeDACImpl extends SqlSessionDaoSupport implements IEspec
 		{
 			return null;
 		}
-		// Finally, if something was inserted then add the Especialidade to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(banco);
-		}
 
 		return insertCount;
 	}
 
 	@Override
-	public Integer deleteEspecialidadePessoa(EspecialidadePessoa banco)
+	public Integer deleteEspecialidadePessoa(EspecialidadePessoa banco, InternalResultsResponse<?> response)
 	{
-		InternalResponse response = new InternalResponse();
+
 		QATMyBatisDacHelper.doRemove(getSqlSession(), "EspecialidadeMap.deleteEspecialidadePessoa", banco, response);
 		if (response.isInError())
 		{

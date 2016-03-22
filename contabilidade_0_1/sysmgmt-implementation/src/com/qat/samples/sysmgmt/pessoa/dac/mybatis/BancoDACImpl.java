@@ -6,7 +6,6 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
 import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
@@ -187,92 +186,6 @@ public class BancoDACImpl extends SqlSessionDaoSupport implements IBancoDAC
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IBancoDAC#insertBanco(com.prosperitasglobal.sendsolv.model
-	 * .Banco)
-	 */
-	@Override
-	public Integer insertBanco(Banco banco)
-	{
-		Integer insertCount = 0;
-		InternalResultsResponse<Banco> response = new InternalResultsResponse<Banco>();
-
-		// First insert the root
-		// Is successful the unique-id will be populated back into the object.
-		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, banco, response);
-
-		if (response.isInError())
-		{
-			return null;
-		}
-
-		// Finally, if something was inserted then add the Banco to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(banco);
-		}
-
-		return insertCount;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IBancoDAC#updateBanco(com.prosperitasglobal.sendsolv.model
-	 * .Banco)
-	 */
-	@Override
-	public Integer updateBanco(Banco banco)
-	{
-		Integer updateCount = 0;
-		InternalResultsResponse<Banco> response = new InternalResultsResponse<Banco>();
-
-		// First update the root if necessary.
-		if (!ValidationUtil.isNull(banco.getModelAction())
-				&& (banco.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
-		{
-			updateCount =
-					QATMyBatisDacHelper.doUpdate(getSqlSession(), EMPRESA_STMT_UPDATE, banco,
-							response);
-		}
-
-		if (response.isInError())
-		{
-			return null;
-		}
-
-		// Finally, if something was updated then add the Person to the result.
-		if (updateCount > 0)
-		{
-			response.addResult(banco);
-		}
-
-		return updateCount;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.dac.IBancoDAC#deleteBanco(com.prosperitasglobal.sendsolv.model
-	 * .Banco)
-	 */
-	@Override
-	public Integer deleteBanco(Banco banco)
-	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, banco, response);
-		if (response.isInError())
-		{
-			return null;
-		}
-		else
-		{
-			return 1;
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see com.prosperitasglobal.sendsolv.dac.IBancoDAC#fetchBancoById(FetchByIdRequest)
 	 */
 	@Override
@@ -305,21 +218,6 @@ public class BancoDACImpl extends SqlSessionDaoSupport implements IBancoDAC
 		return response;
 	}
 
-	/**
-	 * Maintain banco associations.
-	 * 
-	 * @param banco the banco
-	 * @param response the response
-	 * @return the integer
-	 */
-	private Integer maintainBancoAssociations(Banco banco,
-			InternalResultsResponse<Banco> response)
-	{
-		Integer count = 0;
-
-		return count;
-	}
-
 	@Override
 	public InternalResultsResponse<Banco> fetchAllBancos()
 	{
@@ -328,10 +226,10 @@ public class BancoDACImpl extends SqlSessionDaoSupport implements IBancoDAC
 	}
 
 	@Override
-	public Integer updateBancoPessoa(BancoPessoa banco)
+	public Integer updateBancoPessoa(BancoPessoa banco, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<BancoPessoa> response = new InternalResultsResponse<BancoPessoa>();
+		response = new InternalResultsResponse<BancoPessoa>();
 
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(banco.getModelAction())
@@ -347,20 +245,14 @@ public class BancoDACImpl extends SqlSessionDaoSupport implements IBancoDAC
 			return null;
 		}
 
-		// Finally, if something was updated then add the Person to the result.
-		if (updateCount > 0)
-		{
-			response.addResult(banco);
-		}
-
 		return updateCount;
 	}
 
 	@Override
-	public Integer insertBancoPessoa(BancoPessoa banco)
+	public Integer insertBancoPessoa(BancoPessoa banco, String statementName, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<BancoPessoa> response = new InternalResultsResponse<BancoPessoa>();
+		response = new InternalResultsResponse<BancoPessoa>();
 
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
@@ -375,20 +267,69 @@ public class BancoDACImpl extends SqlSessionDaoSupport implements IBancoDAC
 		{
 			return null;
 		}
-		// Finally, if something was inserted then add the Banco to the result.
-		if (insertCount > 0)
+
+		return insertCount;
+	}
+
+	@Override
+	public Integer deleteBancoPessoa(BancoPessoa banco, InternalResultsResponse<?> response)
+	{
+
+		QATMyBatisDacHelper.doRemove(getSqlSession(), "BancoMap.deleteBancoPessoa", banco, response);
+		if (response.isInError())
 		{
-			response.addResult(banco);
+			return null;
+		}
+		else
+		{
+			return 1;
+		}
+	}
+
+	@Override
+	public Integer updateBanco(Banco banco, InternalResultsResponse<?> response)
+	{
+		Integer updateCount = 0;
+
+		// First update the root if necessary.
+		if (!ValidationUtil.isNull(banco.getModelAction())
+				&& (banco.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
+		{
+			updateCount =
+					QATMyBatisDacHelper.doUpdate(getSqlSession(), EMPRESA_STMT_UPDATE, banco,
+							response);
+		}
+
+		if (response.isInError())
+		{
+			return null;
+		}
+
+		return updateCount;
+	}
+
+	@Override
+	public Integer insertBanco(Banco banco, String statementName, InternalResultsResponse<?> response)
+	{
+		Integer insertCount = 0;
+
+		// First insert the root
+		// Is successful the unique-id will be populated back into the object.
+		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, banco, response);
+
+		if (response.isInError())
+		{
+			return null;
 		}
 
 		return insertCount;
 	}
 
 	@Override
-	public Integer deleteBancoPessoa(BancoPessoa banco)
+	public Integer deleteBanco(Banco banco, InternalResultsResponse<?> response)
 	{
-		InternalResponse response = new InternalResponse();
-		QATMyBatisDacHelper.doRemove(getSqlSession(), "BancoMap.deleteBancoPessoa", banco, response);
+
+		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, banco, response);
 		if (response.isInError())
 		{
 			return null;
