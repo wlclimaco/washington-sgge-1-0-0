@@ -95,16 +95,16 @@ public class ProcessoDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		Processo funcionario = new Processo();
 		funcionario = insertProcesso(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Processo> response = new InternalResultsResponse<Processo>();
-		Integer a = getEntidadeDAC().insertProcesso(funcionario,"", response);
+		Integer a = getProcessoDAC().insertProcesso(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Processo>();
 		
-		a = getEntidadeDAC().updateProcesso(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getProcessoDAC().updateProcesso(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -125,11 +125,11 @@ public class ProcessoDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		funcionario = insertProcesso(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Processo> response = new InternalResultsResponse<Processo>();
 
-		Integer a = getEntidadeDAC().insertProcesso(funcionario, response);
+		Integer a = getProcessoDAC().insertProcesso(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Processo> responseA = getEntidadeDAC().fetchProcessoById(response.getFirstResult().getId());
+		InternalResultsResponse<Processo> responseA = getProcessoDAC().fetchProcessoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -143,16 +143,16 @@ public class ProcessoDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		Processo funcionario = new Processo();
 		funcionario = insertProcesso(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Processo> response = new InternalResultsResponse<Processo>();
-		Integer a = getEntidadeDAC().insertProcesso(funcionario,response);
+		Integer a = getProcessoDAC().insertProcesso(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Processo>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteProcesso(funcionario,response);
+		Integer b = getProcessoDAC().deleteProcesso(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchProcessoById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getProcessoDAC().fetchProcessoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

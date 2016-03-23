@@ -95,16 +95,16 @@ public class TelefoneDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		Telefone funcionario = new Telefone();
 		funcionario = insertTelefone(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Telefone> response = new InternalResultsResponse<Telefone>();
-		Integer a = getEntidadeDAC().insertTelefone(funcionario,"", response);
+		Integer a = getTelefoneDAC().insertTelefone(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Telefone>();
 		
-		a = getEntidadeDAC().updateTelefone(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getTelefoneDAC().updateTelefone(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -125,11 +125,11 @@ public class TelefoneDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		funcionario = insertTelefone(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Telefone> response = new InternalResultsResponse<Telefone>();
 
-		Integer a = getEntidadeDAC().insertTelefone(funcionario, response);
+		Integer a = getTelefoneDAC().insertTelefone(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Telefone> responseA = getEntidadeDAC().fetchTelefoneById(response.getFirstResult().getId());
+		InternalResultsResponse<Telefone> responseA = getTelefoneDAC().fetchTelefoneById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -143,16 +143,16 @@ public class TelefoneDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		Telefone funcionario = new Telefone();
 		funcionario = insertTelefone(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Telefone> response = new InternalResultsResponse<Telefone>();
-		Integer a = getEntidadeDAC().insertTelefone(funcionario,response);
+		Integer a = getTelefoneDAC().insertTelefone(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Telefone>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteTelefone(funcionario,response);
+		Integer b = getTelefoneDAC().deleteTelefone(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchTelefoneById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getTelefoneDAC().fetchTelefoneById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

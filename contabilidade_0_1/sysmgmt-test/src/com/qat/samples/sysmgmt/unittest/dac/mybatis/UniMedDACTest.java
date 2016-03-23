@@ -94,16 +94,16 @@ public class UniMedDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		UniMed funcionario = new UniMed();
 		funcionario = insertUniMed(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<UniMed> response = new InternalResultsResponse<UniMed>();
-		Integer a = getEntidadeDAC().insertUniMed(funcionario,"", response);
+		Integer a = getUniMedDAC().insertUniMed(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<UniMed>();
 		
-		a = getEntidadeDAC().updateUniMed(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getUniMedDAC().updateUniMed(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -124,11 +124,11 @@ public class UniMedDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		funcionario = insertUniMed(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<UniMed> response = new InternalResultsResponse<UniMed>();
 
-		Integer a = getEntidadeDAC().insertUniMed(funcionario, response);
+		Integer a = getUniMedDAC().insertUniMed(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<UniMed> responseA = getEntidadeDAC().fetchUniMedById(response.getFirstResult().getId());
+		InternalResultsResponse<UniMed> responseA = getUniMedDAC().fetchUniMedById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -142,16 +142,16 @@ public class UniMedDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		UniMed funcionario = new UniMed();
 		funcionario = insertUniMed(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<UniMed> response = new InternalResultsResponse<UniMed>();
-		Integer a = getEntidadeDAC().insertUniMed(funcionario,response);
+		Integer a = getUniMedDAC().insertUniMed(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<UniMed>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteUniMed(funcionario,response);
+		Integer b = getUniMedDAC().deleteUniMed(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchUniMedById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getUniMedDAC().fetchUniMedById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

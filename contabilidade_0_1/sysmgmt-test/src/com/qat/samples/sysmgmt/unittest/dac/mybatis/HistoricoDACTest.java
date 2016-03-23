@@ -94,16 +94,16 @@ public class HistoricoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 		Historico funcionario = new Historico();
 		funcionario = insertHistorico(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Historico> response = new InternalResultsResponse<Historico>();
-		Integer a = getEntidadeDAC().insertHistorico(funcionario,"", response);
+		Integer a = getHistoricoDAC().insertHistorico(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Historico>();
 		
-		a = getEntidadeDAC().updateHistorico(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getHistoricoDAC().updateHistorico(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -124,11 +124,11 @@ public class HistoricoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 		funcionario = insertHistorico(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Historico> response = new InternalResultsResponse<Historico>();
 
-		Integer a = getEntidadeDAC().insertHistorico(funcionario, response);
+		Integer a = getHistoricoDAC().insertHistorico(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Historico> responseA = getEntidadeDAC().fetchHistoricoById(response.getFirstResult().getId());
+		InternalResultsResponse<Historico> responseA = getHistoricoDAC().fetchHistoricoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -142,16 +142,16 @@ public class HistoricoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 		Historico funcionario = new Historico();
 		funcionario = insertHistorico(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Historico> response = new InternalResultsResponse<Historico>();
-		Integer a = getEntidadeDAC().insertHistorico(funcionario,response);
+		Integer a = getHistoricoDAC().insertHistorico(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Historico>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteHistorico(funcionario,response);
+		Integer b = getHistoricoDAC().deleteHistorico(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchHistoricoById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getHistoricoDAC().fetchHistoricoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

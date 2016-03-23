@@ -95,16 +95,16 @@ public class NoteDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Note funcionario = new Note();
 		funcionario = insertNote(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Note> response = new InternalResultsResponse<Note>();
-		Integer a = getEntidadeDAC().insertNote(funcionario,"", response);
+		Integer a = getNoteDAC().insertNote(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Note>();
 		
-		a = getEntidadeDAC().updateNote(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getNoteDAC().updateNote(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -125,11 +125,11 @@ public class NoteDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		funcionario = insertNote(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Note> response = new InternalResultsResponse<Note>();
 
-		Integer a = getEntidadeDAC().insertNote(funcionario, response);
+		Integer a = getNoteDAC().insertNote(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Note> responseA = getEntidadeDAC().fetchNoteById(response.getFirstResult().getId());
+		InternalResultsResponse<Note> responseA = getNoteDAC().fetchNoteById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -143,16 +143,16 @@ public class NoteDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Note funcionario = new Note();
 		funcionario = insertNote(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Note> response = new InternalResultsResponse<Note>();
-		Integer a = getEntidadeDAC().insertNote(funcionario,response);
+		Integer a = getNoteDAC().insertNote(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Note>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteNote(funcionario,response);
+		Integer b = getNoteDAC().deleteNote(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchNoteById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getNoteDAC().fetchNoteById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

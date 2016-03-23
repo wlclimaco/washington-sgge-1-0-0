@@ -95,16 +95,16 @@ public class SiteDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Site funcionario = new Site();
 		funcionario = insertSite(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Site> response = new InternalResultsResponse<Site>();
-		Integer a = getEntidadeDAC().insertSite(funcionario,"", response);
+		Integer a = getSiteDAC().insertSite(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Site>();
 		
-		a = getEntidadeDAC().updateSite(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getSiteDAC().updateSite(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -125,11 +125,11 @@ public class SiteDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		funcionario = insertSite(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Site> response = new InternalResultsResponse<Site>();
 
-		Integer a = getEntidadeDAC().insertSite(funcionario, response);
+		Integer a = getSiteDAC().insertSite(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Site> responseA = getEntidadeDAC().fetchSiteById(response.getFirstResult().getId());
+		InternalResultsResponse<Site> responseA = getSiteDAC().fetchSiteById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -143,16 +143,16 @@ public class SiteDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Site funcionario = new Site();
 		funcionario = insertSite(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Site> response = new InternalResultsResponse<Site>();
-		Integer a = getEntidadeDAC().insertSite(funcionario,response);
+		Integer a = getSiteDAC().insertSite(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Site>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteSite(funcionario,response);
+		Integer b = getSiteDAC().deleteSite(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchSiteById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getSiteDAC().fetchSiteById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

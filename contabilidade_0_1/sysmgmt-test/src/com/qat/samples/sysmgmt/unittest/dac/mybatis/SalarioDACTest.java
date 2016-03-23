@@ -95,16 +95,16 @@ public class SalarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		Salario funcionario = new Salario();
 		funcionario = insertSalario(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Salario> response = new InternalResultsResponse<Salario>();
-		Integer a = getEntidadeDAC().insertSalario(funcionario,"", response);
+		Integer a = getSalarioDAC().insertSalario(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Salario>();
 		
-		a = getEntidadeDAC().updateSalario(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getSalarioDAC().updateSalario(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -125,11 +125,11 @@ public class SalarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		funcionario = insertSalario(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Salario> response = new InternalResultsResponse<Salario>();
 
-		Integer a = getEntidadeDAC().insertSalario(funcionario, response);
+		Integer a = getSalarioDAC().insertSalario(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Salario> responseA = getEntidadeDAC().fetchSalarioById(response.getFirstResult().getId());
+		InternalResultsResponse<Salario> responseA = getSalarioDAC().fetchSalarioById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -143,16 +143,16 @@ public class SalarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		Salario funcionario = new Salario();
 		funcionario = insertSalario(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Salario> response = new InternalResultsResponse<Salario>();
-		Integer a = getEntidadeDAC().insertSalario(funcionario,response);
+		Integer a = getSalarioDAC().insertSalario(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Salario>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteSalario(funcionario,response);
+		Integer b = getSalarioDAC().deleteSalario(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchSalarioById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getSalarioDAC().fetchSalarioById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

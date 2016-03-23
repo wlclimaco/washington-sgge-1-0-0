@@ -94,16 +94,16 @@ public class FormaPagamentoDACTest extends AbstractTransactionalJUnit4SpringCont
 		FormaPagamento funcionario = new FormaPagamento();
 		funcionario = insertFormaPagamento(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<FormaPagamento> response = new InternalResultsResponse<FormaPagamento>();
-		Integer a = getEntidadeDAC().insertFormaPagamento(funcionario,"", response);
+		Integer a = getFormaPagamentoDAC().insertFormaPagamento(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<FormaPagamento>();
 		
-		a = getEntidadeDAC().updateFormaPagamento(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getFormaPagamentoDAC().updateFormaPagamento(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -124,11 +124,11 @@ public class FormaPagamentoDACTest extends AbstractTransactionalJUnit4SpringCont
 		funcionario = insertFormaPagamento(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<FormaPagamento> response = new InternalResultsResponse<FormaPagamento>();
 
-		Integer a = getEntidadeDAC().insertFormaPagamento(funcionario, response);
+		Integer a = getFormaPagamentoDAC().insertFormaPagamento(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<FormaPagamento> responseA = getEntidadeDAC().fetchFormaPagamentoById(response.getFirstResult().getId());
+		InternalResultsResponse<FormaPagamento> responseA = getFormaPagamentoDAC().fetchFormaPagamentoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -142,16 +142,16 @@ public class FormaPagamentoDACTest extends AbstractTransactionalJUnit4SpringCont
 		FormaPagamento funcionario = new FormaPagamento();
 		funcionario = insertFormaPagamento(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<FormaPagamento> response = new InternalResultsResponse<FormaPagamento>();
-		Integer a = getEntidadeDAC().insertFormaPagamento(funcionario,response);
+		Integer a = getFormaPagamentoDAC().insertFormaPagamento(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<FormaPagamento>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteFormaPagamento(funcionario,response);
+		Integer b = getFormaPagamentoDAC().deleteFormaPagamento(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchFormaPagamentoById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getFormaPagamentoDAC().fetchFormaPagamentoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

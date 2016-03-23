@@ -95,16 +95,16 @@ public class MandadoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		Mandado funcionario = new Mandado();
 		funcionario = insertMandado(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Mandado> response = new InternalResultsResponse<Mandado>();
-		Integer a = getEntidadeDAC().insertMandado(funcionario,"", response);
+		Integer a = getMandadoDAC().insertMandado(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Mandado>();
 		
-		a = getEntidadeDAC().updateMandado(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getMandadoDAC().updateMandado(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -125,11 +125,11 @@ public class MandadoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		funcionario = insertMandado(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Mandado> response = new InternalResultsResponse<Mandado>();
 
-		Integer a = getEntidadeDAC().insertMandado(funcionario, response);
+		Integer a = getMandadoDAC().insertMandado(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Mandado> responseA = getEntidadeDAC().fetchMandadoById(response.getFirstResult().getId());
+		InternalResultsResponse<Mandado> responseA = getMandadoDAC().fetchMandadoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -143,16 +143,16 @@ public class MandadoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		Mandado funcionario = new Mandado();
 		funcionario = insertMandado(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Mandado> response = new InternalResultsResponse<Mandado>();
-		Integer a = getEntidadeDAC().insertMandado(funcionario,response);
+		Integer a = getMandadoDAC().insertMandado(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Mandado>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteMandado(funcionario,response);
+		Integer b = getMandadoDAC().deleteMandado(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchMandadoById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getMandadoDAC().fetchMandadoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

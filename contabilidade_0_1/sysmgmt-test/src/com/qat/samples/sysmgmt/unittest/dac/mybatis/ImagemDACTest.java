@@ -95,16 +95,16 @@ public class ImagemDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Imagem funcionario = new Imagem();
 		funcionario = insertImagem(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Imagem> response = new InternalResultsResponse<Imagem>();
-		Integer a = getEntidadeDAC().insertImagem(funcionario,"", response);
+		Integer a = getImagemDAC().insertImagem(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Imagem>();
 		
-		a = getEntidadeDAC().updateImagem(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getImagemDAC().updateImagem(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -125,11 +125,11 @@ public class ImagemDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		funcionario = insertImagem(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Imagem> response = new InternalResultsResponse<Imagem>();
 
-		Integer a = getEntidadeDAC().insertImagem(funcionario, response);
+		Integer a = getImagemDAC().insertImagem(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Imagem> responseA = getEntidadeDAC().fetchImagemById(response.getFirstResult().getId());
+		InternalResultsResponse<Imagem> responseA = getImagemDAC().fetchImagemById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -143,16 +143,16 @@ public class ImagemDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Imagem funcionario = new Imagem();
 		funcionario = insertImagem(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Imagem> response = new InternalResultsResponse<Imagem>();
-		Integer a = getEntidadeDAC().insertImagem(funcionario,response);
+		Integer a = getImagemDAC().insertImagem(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Imagem>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteImagem(funcionario,response);
+		Integer b = getImagemDAC().deleteImagem(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchImagemById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getImagemDAC().fetchImagemById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

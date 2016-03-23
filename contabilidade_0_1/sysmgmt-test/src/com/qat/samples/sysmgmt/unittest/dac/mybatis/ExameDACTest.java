@@ -58,16 +58,16 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Exame funcionario = new Exame();
 		funcionario = insertExame(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Exame> response = new InternalResultsResponse<Exame>();
-		Integer a = getEntidadeDAC().insertExame(funcionario,"", response);
+		Integer a = getExameDAC().insertExame(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Exame>();
 		
-		a = getEntidadeDAC().updateExame(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getExameDAC().updateExame(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -88,11 +88,11 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		funcionario = insertExame(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Exame> response = new InternalResultsResponse<Exame>();
 
-		Integer a = getEntidadeDAC().insertExame(funcionario, response);
+		Integer a = getExameDAC().insertExame(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Exame> responseA = getEntidadeDAC().fetchExameById(response.getFirstResult().getId());
+		InternalResultsResponse<Exame> responseA = getExameDAC().fetchExameById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -106,16 +106,16 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Exame funcionario = new Exame();
 		funcionario = insertExame(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Exame> response = new InternalResultsResponse<Exame>();
-		Integer a = getEntidadeDAC().insertExame(funcionario,response);
+		Integer a = getExameDAC().insertExame(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Exame>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteExame(funcionario,response);
+		Integer b = getExameDAC().deleteExame(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchExameById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getExameDAC().fetchExameById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

@@ -57,16 +57,16 @@ public class EnderecoDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		Email funcionario = new Email();
 		funcionario = insertEmail(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Email> response = new InternalResultsResponse<Email>();
-		Integer a = getEntidadeDAC().insertEmail(funcionario,"", response);
+		Integer a = getEmailDAC().insertEmail(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Email>();
 		
-		a = getEntidadeDAC().updateEmail(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getEmailDAC().updateEmail(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -87,11 +87,11 @@ public class EnderecoDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		funcionario = insertEmail(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Email> response = new InternalResultsResponse<Email>();
 
-		Integer a = getEntidadeDAC().insertEmail(funcionario, response);
+		Integer a = getEmailDAC().insertEmail(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Email> responseA = getEntidadeDAC().fetchEmailById(response.getFirstResult().getId());
+		InternalResultsResponse<Email> responseA = getEmailDAC().fetchEmailById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -105,16 +105,16 @@ public class EnderecoDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		Email funcionario = new Email();
 		funcionario = insertEmail(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Email> response = new InternalResultsResponse<Email>();
-		Integer a = getEntidadeDAC().insertEmail(funcionario,response);
+		Integer a = getEmailDAC().insertEmail(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Email>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteEmail(funcionario,response);
+		Integer b = getEmailDAC().deleteEmail(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchEmailById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEmailDAC().fetchEmailById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

@@ -94,16 +94,16 @@ public class EnderecoDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		Endereco funcionario = new Endereco();
 		funcionario = insertEndereco(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Endereco> response = new InternalResultsResponse<Endereco>();
-		Integer a = getEntidadeDAC().insertEndereco(funcionario,"", response);
+		Integer a = getEnderecoDAC().insertEndereco(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Endereco>();
 		
-		a = getEntidadeDAC().updateEndereco(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getEnderecoDAC().updateEndereco(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -124,11 +124,11 @@ public class EnderecoDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		funcionario = insertEndereco(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Endereco> response = new InternalResultsResponse<Endereco>();
 
-		Integer a = getEntidadeDAC().insertEndereco(funcionario, response);
+		Integer a = getEnderecoDAC().insertEndereco(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Endereco> responseA = getEntidadeDAC().fetchEnderecoById(response.getFirstResult().getId());
+		InternalResultsResponse<Endereco> responseA = getEnderecoDAC().fetchEnderecoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -142,16 +142,16 @@ public class EnderecoDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		Endereco funcionario = new Endereco();
 		funcionario = insertEndereco(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Endereco> response = new InternalResultsResponse<Endereco>();
-		Integer a = getEntidadeDAC().insertEndereco(funcionario,response);
+		Integer a = getEnderecoDAC().insertEndereco(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Endereco>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteEndereco(funcionario,response);
+		Integer b = getEnderecoDAC().deleteEndereco(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchEnderecoById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEnderecoDAC().fetchEnderecoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

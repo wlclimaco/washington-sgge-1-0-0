@@ -94,16 +94,16 @@ public class FinanceiroDACTest extends AbstractTransactionalJUnit4SpringContextT
 		Financeiro funcionario = new Financeiro();
 		funcionario = insertFinanceiro(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Financeiro> response = new InternalResultsResponse<Financeiro>();
-		Integer a = getEntidadeDAC().insertFinanceiro(funcionario,"", response);
+		Integer a = getFinanceiroDAC().insertFinanceiro(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Financeiro>();
 		
-		a = getEntidadeDAC().updateFinanceiro(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getFinanceiroDAC().updateFinanceiro(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -124,11 +124,11 @@ public class FinanceiroDACTest extends AbstractTransactionalJUnit4SpringContextT
 		funcionario = insertFinanceiro(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Financeiro> response = new InternalResultsResponse<Financeiro>();
 
-		Integer a = getEntidadeDAC().insertFinanceiro(funcionario, response);
+		Integer a = getFinanceiroDAC().insertFinanceiro(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Financeiro> responseA = getEntidadeDAC().fetchFinanceiroById(response.getFirstResult().getId());
+		InternalResultsResponse<Financeiro> responseA = getFinanceiroDAC().fetchFinanceiroById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -142,16 +142,16 @@ public class FinanceiroDACTest extends AbstractTransactionalJUnit4SpringContextT
 		Financeiro funcionario = new Financeiro();
 		funcionario = insertFinanceiro(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Financeiro> response = new InternalResultsResponse<Financeiro>();
-		Integer a = getEntidadeDAC().insertFinanceiro(funcionario,response);
+		Integer a = getFinanceiroDAC().insertFinanceiro(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Financeiro>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteFinanceiro(funcionario,response);
+		Integer b = getFinanceiroDAC().deleteFinanceiro(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchFinanceiroById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getFinanceiroDAC().fetchFinanceiroById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

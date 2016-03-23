@@ -95,16 +95,16 @@ public class PlanoSaudeDACTest extends AbstractTransactionalJUnit4SpringContextT
 		PlanoSaude funcionario = new PlanoSaude();
 		funcionario = insertPlanoSaude(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<PlanoSaude> response = new InternalResultsResponse<PlanoSaude>();
-		Integer a = getEntidadeDAC().insertPlanoSaude(funcionario,"", response);
+		Integer a = getPlanoSaudeDAC().insertPlanoSaude(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<PlanoSaude>();
 		
-		a = getEntidadeDAC().updatePlanoSaude(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getPlanoSaudeDAC().updatePlanoSaude(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -125,11 +125,11 @@ public class PlanoSaudeDACTest extends AbstractTransactionalJUnit4SpringContextT
 		funcionario = insertPlanoSaude(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<PlanoSaude> response = new InternalResultsResponse<PlanoSaude>();
 
-		Integer a = getEntidadeDAC().insertPlanoSaude(funcionario, response);
+		Integer a = getPlanoSaudeDAC().insertPlanoSaude(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<PlanoSaude> responseA = getEntidadeDAC().fetchPlanoSaudeById(response.getFirstResult().getId());
+		InternalResultsResponse<PlanoSaude> responseA = getPlanoSaudeDAC().fetchPlanoSaudeById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -143,16 +143,16 @@ public class PlanoSaudeDACTest extends AbstractTransactionalJUnit4SpringContextT
 		PlanoSaude funcionario = new PlanoSaude();
 		funcionario = insertPlanoSaude(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<PlanoSaude> response = new InternalResultsResponse<PlanoSaude>();
-		Integer a = getEntidadeDAC().insertPlanoSaude(funcionario,response);
+		Integer a = getPlanoSaudeDAC().insertPlanoSaude(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<PlanoSaude>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deletePlanoSaude(funcionario,response);
+		Integer b = getPlanoSaudeDAC().deletePlanoSaude(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchPlanoSaudeById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getPlanoSaudeDAC().fetchPlanoSaudeById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

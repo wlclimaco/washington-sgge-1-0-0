@@ -95,16 +95,16 @@ public class NFStatusDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		NFStatus funcionario = new NFStatus();
 		funcionario = insertNFStatus(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<NFStatus> response = new InternalResultsResponse<NFStatus>();
-		Integer a = getEntidadeDAC().insertNFStatus(funcionario,"", response);
+		Integer a = getNFStatusDAC().insertNFStatus(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<NFStatus>();
 		
-		a = getEntidadeDAC().updateNFStatus(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getNFStatusDAC().updateNFStatus(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -125,11 +125,11 @@ public class NFStatusDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		funcionario = insertNFStatus(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<NFStatus> response = new InternalResultsResponse<NFStatus>();
 
-		Integer a = getEntidadeDAC().insertNFStatus(funcionario, response);
+		Integer a = getNFStatusDAC().insertNFStatus(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<NFStatus> responseA = getEntidadeDAC().fetchNFStatusById(response.getFirstResult().getId());
+		InternalResultsResponse<NFStatus> responseA = getNFStatusDAC().fetchNFStatusById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -143,16 +143,16 @@ public class NFStatusDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		NFStatus funcionario = new NFStatus();
 		funcionario = insertNFStatus(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<NFStatus> response = new InternalResultsResponse<NFStatus>();
-		Integer a = getEntidadeDAC().insertNFStatus(funcionario,response);
+		Integer a = getNFStatusDAC().insertNFStatus(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<NFStatus>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteNFStatus(funcionario,response);
+		Integer b = getNFStatusDAC().deleteNFStatus(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchNFStatusById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getNFStatusDAC().fetchNFStatusById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

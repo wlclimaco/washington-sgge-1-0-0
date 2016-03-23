@@ -95,16 +95,16 @@ public class OrcamentoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 		Orcamento funcionario = new Orcamento();
 		funcionario = insertOrcamento(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Orcamento> response = new InternalResultsResponse<Orcamento>();
-		Integer a = getEntidadeDAC().insertOrcamento(funcionario,"", response);
+		Integer a = getOrcamentoDAC().insertOrcamento(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Orcamento>();
 		
-		a = getEntidadeDAC().updateOrcamento(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getOrcamentoDAC().updateOrcamento(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -125,11 +125,11 @@ public class OrcamentoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 		funcionario = insertOrcamento(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Orcamento> response = new InternalResultsResponse<Orcamento>();
 
-		Integer a = getEntidadeDAC().insertOrcamento(funcionario, response);
+		Integer a = getOrcamentoDAC().insertOrcamento(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Orcamento> responseA = getEntidadeDAC().fetchOrcamentoById(response.getFirstResult().getId());
+		InternalResultsResponse<Orcamento> responseA = getOrcamentoDAC().fetchOrcamentoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -143,16 +143,16 @@ public class OrcamentoDACTest extends AbstractTransactionalJUnit4SpringContextTe
 		Orcamento funcionario = new Orcamento();
 		funcionario = insertOrcamento(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Orcamento> response = new InternalResultsResponse<Orcamento>();
-		Integer a = getEntidadeDAC().insertOrcamento(funcionario,response);
+		Integer a = getOrcamentoDAC().insertOrcamento(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Orcamento>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteOrcamento(funcionario,response);
+		Integer b = getOrcamentoDAC().deleteOrcamento(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchOrcamentoById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getOrcamentoDAC().fetchOrcamentoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

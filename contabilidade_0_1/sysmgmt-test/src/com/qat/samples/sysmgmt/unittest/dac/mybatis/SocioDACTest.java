@@ -94,16 +94,16 @@ public class SocioDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Socio funcionario = new Socio();
 		funcionario = insertSocio(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Socio> response = new InternalResultsResponse<Socio>();
-		Integer a = getEntidadeDAC().insertSocio(funcionario,"", response);
+		Integer a = getSocioDAC().insertSocio(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Socio>();
 		
-		a = getEntidadeDAC().updateSocio(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getSocioDAC().updateSocio(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -124,11 +124,11 @@ public class SocioDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		funcionario = insertSocio(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Socio> response = new InternalResultsResponse<Socio>();
 
-		Integer a = getEntidadeDAC().insertSocio(funcionario, response);
+		Integer a = getSocioDAC().insertSocio(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Socio> responseA = getEntidadeDAC().fetchSocioById(response.getFirstResult().getId());
+		InternalResultsResponse<Socio> responseA = getSocioDAC().fetchSocioById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -142,16 +142,16 @@ public class SocioDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Socio funcionario = new Socio();
 		funcionario = insertSocio(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Socio> response = new InternalResultsResponse<Socio>();
-		Integer a = getEntidadeDAC().insertSocio(funcionario,response);
+		Integer a = getSocioDAC().insertSocio(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Socio>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteSocio(funcionario,response);
+		Integer b = getSocioDAC().deleteSocio(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchSocioById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getSocioDAC().fetchSocioById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

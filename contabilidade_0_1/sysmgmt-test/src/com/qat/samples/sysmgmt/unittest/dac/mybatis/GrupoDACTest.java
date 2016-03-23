@@ -94,16 +94,16 @@ public class GrupoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Grupo funcionario = new Grupo();
 		funcionario = insertGrupo(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Grupo> response = new InternalResultsResponse<Grupo>();
-		Integer a = getEntidadeDAC().insertGrupo(funcionario,"", response);
+		Integer a = getGrupoDAC().insertGrupo(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Grupo>();
 		
-		a = getEntidadeDAC().updateGrupo(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getGrupoDAC().updateGrupo(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -124,11 +124,11 @@ public class GrupoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		funcionario = insertGrupo(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Grupo> response = new InternalResultsResponse<Grupo>();
 
-		Integer a = getEntidadeDAC().insertGrupo(funcionario, response);
+		Integer a = getGrupoDAC().insertGrupo(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Grupo> responseA = getEntidadeDAC().fetchGrupoById(response.getFirstResult().getId());
+		InternalResultsResponse<Grupo> responseA = getGrupoDAC().fetchGrupoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -142,16 +142,16 @@ public class GrupoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Grupo funcionario = new Grupo();
 		funcionario = insertGrupo(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Grupo> response = new InternalResultsResponse<Grupo>();
-		Integer a = getEntidadeDAC().insertGrupo(funcionario,response);
+		Integer a = getGrupoDAC().insertGrupo(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Grupo>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteGrupo(funcionario,response);
+		Integer b = getGrupoDAC().deleteGrupo(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchGrupoById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getGrupoDAC().fetchGrupoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

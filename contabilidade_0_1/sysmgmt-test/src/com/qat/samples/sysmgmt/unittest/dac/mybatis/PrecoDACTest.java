@@ -95,16 +95,16 @@ public class EnderecoDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		Preco funcionario = new Preco();
 		funcionario = insertPreco(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Preco> response = new InternalResultsResponse<Preco>();
-		Integer a = getEntidadeDAC().insertPreco(funcionario,"", response);
+		Integer a = getPrecoDAC().insertPreco(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Preco>();
 		
-		a = getEntidadeDAC().updatePreco(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getPrecoDAC().updatePreco(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -125,11 +125,11 @@ public class EnderecoDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		funcionario = insertPreco(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Preco> response = new InternalResultsResponse<Preco>();
 
-		Integer a = getEntidadeDAC().insertPreco(funcionario, response);
+		Integer a = getPrecoDAC().insertPreco(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Preco> responseA = getEntidadeDAC().fetchPrecoById(response.getFirstResult().getId());
+		InternalResultsResponse<Preco> responseA = getPrecoDAC().fetchPrecoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -143,16 +143,16 @@ public class EnderecoDACTest extends AbstractTransactionalJUnit4SpringContextTes
 		Preco funcionario = new Preco();
 		funcionario = insertPreco(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Preco> response = new InternalResultsResponse<Preco>();
-		Integer a = getEntidadeDAC().insertPreco(funcionario,response);
+		Integer a = getPrecoDAC().insertPreco(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Preco>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deletePreco(funcionario,response);
+		Integer b = getPrecoDAC().deletePreco(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchPrecoById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getPrecoDAC().fetchPrecoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

@@ -95,16 +95,16 @@ public class EventoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Eventos funcionario = new Eventos();
 		funcionario = insertEventos(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Eventos> response = new InternalResultsResponse<Eventos>();
-		Integer a = getEntidadeDAC().insertEventos(funcionario,"", response);
+		Integer a = getEventosDAC().insertEventos(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Eventos>();
 		
-		a = getEntidadeDAC().updateEventos(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getEventosDAC().updateEventos(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -125,11 +125,11 @@ public class EventoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		funcionario = insertEventos(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Eventos> response = new InternalResultsResponse<Eventos>();
 
-		Integer a = getEntidadeDAC().insertEventos(funcionario, response);
+		Integer a = getEventosDAC().insertEventos(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Eventos> responseA = getEntidadeDAC().fetchEventosById(response.getFirstResult().getId());
+		InternalResultsResponse<Eventos> responseA = getEventosDAC().fetchEventosById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -143,16 +143,16 @@ public class EventoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Eventos funcionario = new Eventos();
 		funcionario = insertEventos(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Eventos> response = new InternalResultsResponse<Eventos>();
-		Integer a = getEntidadeDAC().insertEventos(funcionario,response);
+		Integer a = getEventosDAC().insertEventos(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Eventos>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteEventos(funcionario,response);
+		Integer b = getEventosDAC().deleteEventos(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchEventosById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEventosDAC().fetchEventosById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

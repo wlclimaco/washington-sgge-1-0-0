@@ -95,16 +95,16 @@ public class TarefaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Tarefa funcionario = new Tarefa();
 		funcionario = insertTarefa(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Tarefa> response = new InternalResultsResponse<Tarefa>();
-		Integer a = getEntidadeDAC().insertTarefa(funcionario,"", response);
+		Integer a = getTarefaDAC().insertTarefa(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Tarefa>();
 		
-		a = getEntidadeDAC().updateTarefa(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getTarefaDAC().updateTarefa(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -125,11 +125,11 @@ public class TarefaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		funcionario = insertTarefa(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Tarefa> response = new InternalResultsResponse<Tarefa>();
 
-		Integer a = getEntidadeDAC().insertTarefa(funcionario, response);
+		Integer a = getTarefaDAC().insertTarefa(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Tarefa> responseA = getEntidadeDAC().fetchTarefaById(response.getFirstResult().getId());
+		InternalResultsResponse<Tarefa> responseA = getTarefaDAC().fetchTarefaById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -143,16 +143,16 @@ public class TarefaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Tarefa funcionario = new Tarefa();
 		funcionario = insertTarefa(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Tarefa> response = new InternalResultsResponse<Tarefa>();
-		Integer a = getEntidadeDAC().insertTarefa(funcionario,response);
+		Integer a = getTarefaDAC().insertTarefa(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Tarefa>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteTarefa(funcionario,response);
+		Integer b = getTarefaDAC().deleteTarefa(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchTarefaById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getTarefaDAC().fetchTarefaById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

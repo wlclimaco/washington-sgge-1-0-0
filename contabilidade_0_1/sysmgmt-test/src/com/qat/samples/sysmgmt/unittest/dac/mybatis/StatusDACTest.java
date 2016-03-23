@@ -95,16 +95,16 @@ public class StatusDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Status funcionario = new Status();
 		funcionario = insertStatus(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Status> response = new InternalResultsResponse<Status>();
-		Integer a = getEntidadeDAC().insertStatus(funcionario,"", response);
+		Integer a = getStatusDAC().insertStatus(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Status>();
 		
-		a = getEntidadeDAC().updateStatus(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getStatusDAC().updateStatus(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -125,11 +125,11 @@ public class StatusDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		funcionario = insertStatus(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Status> response = new InternalResultsResponse<Status>();
 
-		Integer a = getEntidadeDAC().insertStatus(funcionario, response);
+		Integer a = getStatusDAC().insertStatus(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Status> responseA = getEntidadeDAC().fetchStatusById(response.getFirstResult().getId());
+		InternalResultsResponse<Status> responseA = getStatusDAC().fetchStatusById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -143,16 +143,16 @@ public class StatusDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Status funcionario = new Status();
 		funcionario = insertStatus(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Status> response = new InternalResultsResponse<Status>();
-		Integer a = getEntidadeDAC().insertStatus(funcionario,response);
+		Integer a = getStatusDAC().insertStatus(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Status>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteStatus(funcionario,response);
+		Integer b = getStatusDAC().deleteStatus(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchStatusById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getStatusDAC().fetchStatusById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

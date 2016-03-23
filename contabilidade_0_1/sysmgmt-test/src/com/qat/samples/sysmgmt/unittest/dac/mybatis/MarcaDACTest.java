@@ -95,16 +95,16 @@ public class MarcaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Marca funcionario = new Marca();
 		funcionario = insertMarca(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Marca> response = new InternalResultsResponse<Marca>();
-		Integer a = getEntidadeDAC().insertMarca(funcionario,"", response);
+		Integer a = getMarcaDAC().insertMarca(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Marca>();
 		
-		a = getEntidadeDAC().updateMarca(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getMarcaDAC().updateMarca(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -125,11 +125,11 @@ public class MarcaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		funcionario = insertMarca(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Marca> response = new InternalResultsResponse<Marca>();
 
-		Integer a = getEntidadeDAC().insertMarca(funcionario, response);
+		Integer a = getMarcaDAC().insertMarca(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Marca> responseA = getEntidadeDAC().fetchMarcaById(response.getFirstResult().getId());
+		InternalResultsResponse<Marca> responseA = getMarcaDAC().fetchMarcaById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -143,16 +143,16 @@ public class MarcaDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Marca funcionario = new Marca();
 		funcionario = insertMarca(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Marca> response = new InternalResultsResponse<Marca>();
-		Integer a = getEntidadeDAC().insertMarca(funcionario,response);
+		Integer a = getMarcaDAC().insertMarca(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Marca>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteMarca(funcionario,response);
+		Integer b = getMarcaDAC().deleteMarca(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchMarcaById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getMarcaDAC().fetchMarcaById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

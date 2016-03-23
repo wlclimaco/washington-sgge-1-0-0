@@ -95,16 +95,16 @@ public class EspecialidadeDACTest extends AbstractTransactionalJUnit4SpringConte
 		Especialidade funcionario = new Especialidade();
 		funcionario = insertEspecialidade(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Especialidade> response = new InternalResultsResponse<Especialidade>();
-		Integer a = getEntidadeDAC().insertEspecialidade(funcionario,"", response);
+		Integer a = getEspecialidadeDAC().insertEspecialidade(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Especialidade>();
 		
-		a = getEntidadeDAC().updateEspecialidade(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getEspecialidadeDAC().updateEspecialidade(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -125,11 +125,11 @@ public class EspecialidadeDACTest extends AbstractTransactionalJUnit4SpringConte
 		funcionario = insertEspecialidade(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Especialidade> response = new InternalResultsResponse<Especialidade>();
 
-		Integer a = getEntidadeDAC().insertEspecialidade(funcionario, response);
+		Integer a = getEspecialidadeDAC().insertEspecialidade(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Especialidade> responseA = getEntidadeDAC().fetchEspecialidadeById(response.getFirstResult().getId());
+		InternalResultsResponse<Especialidade> responseA = getEspecialidadeDAC().fetchEspecialidadeById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -143,16 +143,16 @@ public class EspecialidadeDACTest extends AbstractTransactionalJUnit4SpringConte
 		Especialidade funcionario = new Especialidade();
 		funcionario = insertEspecialidade(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Especialidade> response = new InternalResultsResponse<Especialidade>();
-		Integer a = getEntidadeDAC().insertEspecialidade(funcionario,response);
+		Integer a = getEspecialidadeDAC().insertEspecialidade(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Especialidade>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteEspecialidade(funcionario,response);
+		Integer b = getEspecialidadeDAC().deleteEspecialidade(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchEspecialidadeById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getEspecialidadeDAC().fetchEspecialidadeById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

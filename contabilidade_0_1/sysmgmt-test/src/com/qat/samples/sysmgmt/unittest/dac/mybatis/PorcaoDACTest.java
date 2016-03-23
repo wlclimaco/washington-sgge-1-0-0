@@ -95,16 +95,16 @@ public class PorcaoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Porcao funcionario = new Porcao();
 		funcionario = insertPorcao(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Porcao> response = new InternalResultsResponse<Porcao>();
-		Integer a = getEntidadeDAC().insertPorcao(funcionario,"", response);
+		Integer a = getPorcaoDAC().insertPorcao(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Porcao>();
 		
-		a = getEntidadeDAC().updatePorcao(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getPorcaoDAC().updatePorcao(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -125,11 +125,11 @@ public class PorcaoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		funcionario = insertPorcao(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Porcao> response = new InternalResultsResponse<Porcao>();
 
-		Integer a = getEntidadeDAC().insertPorcao(funcionario, response);
+		Integer a = getPorcaoDAC().insertPorcao(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Porcao> responseA = getEntidadeDAC().fetchPorcaoById(response.getFirstResult().getId());
+		InternalResultsResponse<Porcao> responseA = getPorcaoDAC().fetchPorcaoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -143,16 +143,16 @@ public class PorcaoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Porcao funcionario = new Porcao();
 		funcionario = insertPorcao(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Porcao> response = new InternalResultsResponse<Porcao>();
-		Integer a = getEntidadeDAC().insertPorcao(funcionario,response);
+		Integer a = getPorcaoDAC().insertPorcao(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Porcao>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deletePorcao(funcionario,response);
+		Integer b = getPorcaoDAC().deletePorcao(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchPorcaoById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getPorcaoDAC().fetchPorcaoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

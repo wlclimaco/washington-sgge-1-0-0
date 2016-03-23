@@ -95,16 +95,16 @@ public class ServicoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		Servico funcionario = new Servico();
 		funcionario = insertServico(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Servico> response = new InternalResultsResponse<Servico>();
-		Integer a = getEntidadeDAC().insertServico(funcionario,"", response);
+		Integer a = getServicoDAC().insertServico(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Servico>();
 		
-		a = getEntidadeDAC().updateServico(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getServicoDAC().updateServico(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -125,11 +125,11 @@ public class ServicoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		funcionario = insertServico(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Servico> response = new InternalResultsResponse<Servico>();
 
-		Integer a = getEntidadeDAC().insertServico(funcionario, response);
+		Integer a = getServicoDAC().insertServico(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Servico> responseA = getEntidadeDAC().fetchServicoById(response.getFirstResult().getId());
+		InternalResultsResponse<Servico> responseA = getServicoDAC().fetchServicoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -143,16 +143,16 @@ public class ServicoDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		Servico funcionario = new Servico();
 		funcionario = insertServico(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Servico> response = new InternalResultsResponse<Servico>();
-		Integer a = getEntidadeDAC().insertServico(funcionario,response);
+		Integer a = getServicoDAC().insertServico(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Servico>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteServico(funcionario,response);
+		Integer b = getServicoDAC().deleteServico(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchServicoById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getServicoDAC().fetchServicoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

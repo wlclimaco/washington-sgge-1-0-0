@@ -95,16 +95,16 @@ public class HorarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		Horario funcionario = new Horario();
 		funcionario = insertHorario(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Horario> response = new InternalResultsResponse<Horario>();
-		Integer a = getEntidadeDAC().insertHorario(funcionario,"", response);
+		Integer a = getHorarioDAC().insertHorario(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Horario>();
 		
-		a = getEntidadeDAC().updateHorario(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getHorarioDAC().updateHorario(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -125,11 +125,11 @@ public class HorarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		funcionario = insertHorario(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Horario> response = new InternalResultsResponse<Horario>();
 
-		Integer a = getEntidadeDAC().insertHorario(funcionario, response);
+		Integer a = getHorarioDAC().insertHorario(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Horario> responseA = getEntidadeDAC().fetchHorarioById(response.getFirstResult().getId());
+		InternalResultsResponse<Horario> responseA = getHorarioDAC().fetchHorarioById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -143,16 +143,16 @@ public class HorarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		Horario funcionario = new Horario();
 		funcionario = insertHorario(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Horario> response = new InternalResultsResponse<Horario>();
-		Integer a = getEntidadeDAC().insertHorario(funcionario,response);
+		Integer a = getHorarioDAC().insertHorario(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Horario>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteHorario(funcionario,response);
+		Integer b = getHorarioDAC().deleteHorario(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchHorarioById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getHorarioDAC().fetchHorarioById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

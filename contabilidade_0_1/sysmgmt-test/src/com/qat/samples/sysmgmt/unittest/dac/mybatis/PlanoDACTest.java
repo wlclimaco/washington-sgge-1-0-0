@@ -94,16 +94,16 @@ public class PlanoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Plano funcionario = new Plano();
 		funcionario = insertPlano(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Plano> response = new InternalResultsResponse<Plano>();
-		Integer a = getEntidadeDAC().insertPlano(funcionario,"", response);
+		Integer a = getPlanoDAC().insertPlano(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Plano>();
 		
-		a = getEntidadeDAC().updatePlano(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getPlanoDAC().updatePlano(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -124,11 +124,11 @@ public class PlanoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		funcionario = insertPlano(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Plano> response = new InternalResultsResponse<Plano>();
 
-		Integer a = getEntidadeDAC().insertPlano(funcionario, response);
+		Integer a = getPlanoDAC().insertPlano(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Plano> responseA = getEntidadeDAC().fetchPlanoById(response.getFirstResult().getId());
+		InternalResultsResponse<Plano> responseA = getPlanoDAC().fetchPlanoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -142,16 +142,16 @@ public class PlanoDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Plano funcionario = new Plano();
 		funcionario = insertPlano(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Plano> response = new InternalResultsResponse<Plano>();
-		Integer a = getEntidadeDAC().insertPlano(funcionario,response);
+		Integer a = getPlanoDAC().insertPlano(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Plano>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deletePlano(funcionario,response);
+		Integer b = getPlanoDAC().deletePlano(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchPlanoById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getPlanoDAC().fetchPlanoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

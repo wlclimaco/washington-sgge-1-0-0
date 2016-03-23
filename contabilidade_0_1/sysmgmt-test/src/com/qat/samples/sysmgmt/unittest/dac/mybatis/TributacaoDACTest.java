@@ -95,16 +95,16 @@ public class TributacaoDACTest extends AbstractTransactionalJUnit4SpringContextT
 		Tributacao funcionario = new Tributacao();
 		funcionario = insertTributacao(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Tributacao> response = new InternalResultsResponse<Tributacao>();
-		Integer a = getEntidadeDAC().insertTributacao(funcionario,"", response);
+		Integer a = getTributacaoDAC().insertTributacao(funcionario,"", response);
 		
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Tributacao>();
 		
-		a = getEntidadeDAC().updateTributacao(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+		a = getTributacaoDAC().updateTributacao(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -125,11 +125,11 @@ public class TributacaoDACTest extends AbstractTransactionalJUnit4SpringContextT
 		funcionario = insertTributacao(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Tributacao> response = new InternalResultsResponse<Tributacao>();
 
-		Integer a = getEntidadeDAC().insertTributacao(funcionario, response);
+		Integer a = getTributacaoDAC().insertTributacao(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	//	FetchByIdRequest request = new FetchByIdRequest();
 	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Tributacao> responseA = getEntidadeDAC().fetchTributacaoById(response.getFirstResult().getId());
+		InternalResultsResponse<Tributacao> responseA = getTributacaoDAC().fetchTributacaoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
@@ -143,16 +143,16 @@ public class TributacaoDACTest extends AbstractTransactionalJUnit4SpringContextT
 		Tributacao funcionario = new Tributacao();
 		funcionario = insertTributacao(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Tributacao> response = new InternalResultsResponse<Tributacao>();
-		Integer a = getEntidadeDAC().insertTributacao(funcionario,response);
+		Integer a = getTributacaoDAC().insertTributacao(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Tributacao>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteTributacao(funcionario,response);
+		Integer b = getTributacaoDAC().deleteTributacao(funcionario,response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchTributacaoById(funcionarioResponse.getFirstResult().getId());
+	//	request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classicacao> responseA = getTributacaoDAC().fetchTributacaoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}
