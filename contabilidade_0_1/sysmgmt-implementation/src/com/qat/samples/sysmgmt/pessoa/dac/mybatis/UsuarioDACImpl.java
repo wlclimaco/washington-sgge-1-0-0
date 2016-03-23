@@ -4,7 +4,6 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
 import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
@@ -79,9 +78,8 @@ public class UsuarioDACImpl extends SqlSessionDaoSupport implements IUsuarioDAC
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer insertUsuario(Usuario usuario,String string, InternalResultsResponse<?> response)
+	public Integer insertUsuario(Usuario usuario, String string, InternalResultsResponse<?> response)
 	{
-		InternalResponse response = new InternalResponse();
 		Integer insertCount = 0;
 		// First insert the root usuario data
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT, usuario, response);
@@ -98,7 +96,6 @@ public class UsuarioDACImpl extends SqlSessionDaoSupport implements IUsuarioDAC
 	@Override
 	public Integer deleteUsuario(Usuario usuario, InternalResultsResponse<?> response)
 	{
-		InternalResponse response = new InternalResponse();
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, usuario, response);
 	}
 
@@ -112,7 +109,7 @@ public class UsuarioDACImpl extends SqlSessionDaoSupport implements IUsuarioDAC
 	public Integer updateUsuario(Usuario usuario, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<Usuario> response = new InternalResultsResponse<Usuario>();
+		response = new InternalResultsResponse<Usuario>();
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(usuario.getModelAction())
 				&& (usuario.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))

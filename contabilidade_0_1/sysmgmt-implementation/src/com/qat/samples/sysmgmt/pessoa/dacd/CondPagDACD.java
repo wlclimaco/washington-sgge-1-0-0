@@ -73,7 +73,7 @@ public final class CondPagDACD extends SqlSessionDaoSupport
 							TabelaEnum.PESSOA, condPagDAC, statusDAC, historicoDAC, condPag.getEmprId(),
 							condPag.getCreateUser(), processId, historicoId);
 
-					count = condPagDAC.insertCondPagPessoa(condPag);
+					count = condPagDAC.insertCondPagPessoa(condPag, null, null);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -91,7 +91,7 @@ public final class CondPagDACD extends SqlSessionDaoSupport
 							TabelaEnum.PESSOA, condPagDAC, statusDAC, historicoDAC, condPag.getEmprId(),
 							condPag.getCreateUser(), processId, historicoId);
 
-					count = condPagDAC.updateCondPagPessoa(condPag);
+					count = condPagDAC.updateCondPagPessoa(condPag, null);
 					if (count > 0)
 					{
 						count =
@@ -102,7 +102,7 @@ public final class CondPagDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case DELETE:
-					count = condPagDAC.deleteCondPagPessoa(condPag);
+					count = condPagDAC.deleteCondPagPessoa(condPag, null);
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
@@ -113,7 +113,7 @@ public final class CondPagDACD extends SqlSessionDaoSupport
 
 					break;
 				case NONE:
-					count = condPagDAC.insertCondPagPessoa(condPag);
+					count = condPagDAC.insertCondPagPessoa(condPag, null, null);
 					if (count > 0)
 					{
 						status = new Status();
@@ -152,7 +152,7 @@ public final class CondPagDACD extends SqlSessionDaoSupport
 		switch (condPag.getModelAction())
 		{
 			case INSERT:
-				count = condPagDAC.insertCondPag(condPag);
+				count = condPagDAC.insertCondPag(condPag, null, null);
 				if (count > 0)
 				{
 					Status status = new Status();
@@ -165,7 +165,7 @@ public final class CondPagDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
-				count = condPagDAC.updateCondPag(condPag);
+				count = condPagDAC.updateCondPag(condPag, null);
 				if (count > 0)
 				{
 					count =
@@ -176,7 +176,7 @@ public final class CondPagDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case DELETE:
-				count = condPagDAC.deleteCondPag(condPag);
+				count = condPagDAC.deleteCondPag(condPag, null);
 				Status status = new Status();
 				status.setStatus(CdStatusTypeEnum.DELETADO);
 				List<Status> statusList = new ArrayList<Status>();
@@ -221,7 +221,7 @@ public final class CondPagDACD extends SqlSessionDaoSupport
 			switch (condPag.getModelAction())
 			{
 				case INSERT:
-					count = condPagDAC.insertTipoPag(condPag);
+					count = condPagDAC.insertTipoPag(condPag, null, null);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -234,7 +234,7 @@ public final class CondPagDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
-					count = condPagDAC.updateTipoPag(condPag);
+					count = condPagDAC.updateTipoPag(condPag, null);
 					if (count > 0)
 					{
 						count =
@@ -245,7 +245,7 @@ public final class CondPagDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case DELETE:
-					count = condPagDAC.deleteTipoPag(condPag);
+					count = condPagDAC.deleteTipoPag(condPag, null);
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();

@@ -1,6 +1,7 @@
 package com.qat.samples.sysmgmt.produto.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.Custo;
 
 /**
@@ -44,5 +45,7 @@ public interface ICustoDAC
 	 * @return the internal results response< custo>
 	 */
 	public InternalResultsResponse<Custo> fetchCustoById(Integer id);
+
+	public InternalResultsResponse<Custo> fetchCustoByRequest(PagedInquiryRequest request);
 
 }

@@ -9,8 +9,10 @@ import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.Cidade;
 import com.qat.samples.sysmgmt.util.dac.ICidadeDAC;
+import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -139,9 +141,17 @@ public class CidadeDACImpl extends SqlSessionDaoSupport implements ICidadeDAC
 	}
 
 	@Override
-	public InternalResultsResponse<Cidade> fetchCidadeById(Integer id)
+	public InternalResultsResponse<Cidade> fetchCidadeById(FetchByIdRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public InternalResultsResponse<Cidade> fetchCidadeByRequest(CidadeInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

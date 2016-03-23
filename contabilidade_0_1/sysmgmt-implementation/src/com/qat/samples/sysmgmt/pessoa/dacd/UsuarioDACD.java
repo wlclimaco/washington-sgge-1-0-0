@@ -60,7 +60,7 @@ public final class UsuarioDACD extends SqlSessionDaoSupport
 			switch (contato.getModelAction())
 			{
 				case INSERT:
-					count = contatoDAC.insertUsuario(contato);
+					count = contatoDAC.insertUsuario(contato, null, null);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -73,7 +73,7 @@ public final class UsuarioDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
-					count = contatoDAC.updateUsuario(contato);
+					count = contatoDAC.updateUsuario(contato, null);
 					if (count > 0)
 					{
 						count =

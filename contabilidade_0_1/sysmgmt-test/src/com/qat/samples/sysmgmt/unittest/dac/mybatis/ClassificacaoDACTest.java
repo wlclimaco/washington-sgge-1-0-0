@@ -23,6 +23,7 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.fiscal.Classificacao;
 import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.dac.IClassificacaoDAC;
 
 @ContextConfiguration(locations = {
@@ -58,16 +59,16 @@ public class ClassificacaoDACTest extends AbstractTransactionalJUnit4SpringConte
 		Classificacao funcionario = new Classificacao();
 		funcionario = insertClassificacao(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Classificacao> response = new InternalResultsResponse<Classificacao>();
-		Integer a = getEntidadeDAC().insertClassificacao(funcionario,"", response);
-		
+		Integer a = getClassificacaoDAC().insertClassificacao(funcionario, "", response);
+
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Classificacao>();
-		
-		a = getEntidadeDAC().updateClassificacao(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+
+		a = getClassificacaoDAC().updateClassificacao(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -82,20 +83,19 @@ public class ClassificacaoDACTest extends AbstractTransactionalJUnit4SpringConte
 
 		Integer a = getClassificacaoDAC().insertClassificacao(funcionario, "INSERT", response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		
-		
-		Classificacao funcionario = new Classificacao();
-		funcionario = insertClassificacao(PersistanceActionEnum.INSERT);
-		InternalResultsResponse<Classificacao> response = new InternalResultsResponse<Classificacao>();
 
-		Integer a = getEntidadeDAC().insertClassificacao(funcionario, response);
+		funcionario = new Classificacao();
+		funcionario = insertClassificacao(PersistanceActionEnum.INSERT);
+		response = new InternalResultsResponse<Classificacao>();
+
+		a = getClassificacaoDAC().insertClassificacao(funcionario, null, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-	//	FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Classificacao> responseA = getEntidadeDAC().fetchClassificacaoById(response.getFirstResult().getId());
+		// FetchByIdRequest request = new FetchByIdRequest();
+		// request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classificacao> responseA =
+				getClassificacaoDAC().fetchClassificacaoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
-
 
 	}
 
@@ -106,16 +106,17 @@ public class ClassificacaoDACTest extends AbstractTransactionalJUnit4SpringConte
 		Classificacao funcionario = new Classificacao();
 		funcionario = insertClassificacao(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Classificacao> response = new InternalResultsResponse<Classificacao>();
-		Integer a = getEntidadeDAC().insertClassificacao(funcionario,response);
+		Integer a = getClassificacaoDAC().insertClassificacao(funcionario, null, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Classificacao>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteClassificacao(funcionario,response);
+		Integer b = getClassificacaoDAC().deleteClassificacao(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchClassificacaoById(funcionarioResponse.getFirstResult().getId());
+		// FetchByIdRequest request = new FetchByIdRequest();
+		// request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Classificacao> responseA =
+				getClassificacaoDAC().fetchClassificacaoById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

@@ -2,6 +2,7 @@ package com.qat.samples.sysmgmt.pessoa.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.contato.Contato;
+import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
 
 /**
  * The Interface IContatoDAC.
@@ -44,5 +45,7 @@ public interface IContatoDAC
 	 * @return the internal results response< contato>
 	 */
 	public InternalResultsResponse<Contato> fetchContatoById(Integer id);
+
+	public InternalResultsResponse<Contato> fetchContatoByRequest(ContatoInquiryRequest request);
 
 }

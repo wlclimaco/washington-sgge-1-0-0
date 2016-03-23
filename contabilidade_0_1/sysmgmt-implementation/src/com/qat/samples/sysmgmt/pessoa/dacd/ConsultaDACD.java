@@ -67,7 +67,7 @@ public final class ConsultaDACD extends SqlSessionDaoSupport
 			switch (consulta.getModelAction())
 			{
 				case INSERT:
-					count = consultaDAC.insertConsulta(consulta);
+					count = consultaDAC.insertConsulta(consulta, null, null);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -80,7 +80,7 @@ public final class ConsultaDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
-					count = consultaDAC.updateConsulta(consulta);
+					count = consultaDAC.updateConsulta(consulta, null);
 					if (count > 0)
 					{
 						count =
@@ -92,7 +92,7 @@ public final class ConsultaDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case DELETE:
-					count = consultaDAC.deleteConsulta(consulta);
+					count = consultaDAC.deleteConsulta(consulta, null);
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();

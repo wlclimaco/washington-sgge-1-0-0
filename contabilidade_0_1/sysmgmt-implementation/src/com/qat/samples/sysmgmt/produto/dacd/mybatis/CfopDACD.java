@@ -64,7 +64,7 @@ public final class CfopDACD extends SqlSessionDaoSupport
 			switch (cfop.getModelAction())
 			{
 				case INSERT:
-					count = cfopDAC.insertCfopPessoa(cfop);
+					count = cfopDAC.insertCfopPessoa(cfop, null, null);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -77,7 +77,7 @@ public final class CfopDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
-					count = cfopDAC.updateCfopPessoa(cfop);
+					count = cfopDAC.updateCfopPessoa(cfop, null);
 					if (count > 0)
 					{
 						count =
@@ -88,7 +88,7 @@ public final class CfopDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case DELETE:
-					count = cfopDAC.deleteCfopPessoa(cfop);
+					count = cfopDAC.deleteCfopPessoa(cfop, null);
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
@@ -133,7 +133,7 @@ public final class CfopDACD extends SqlSessionDaoSupport
 		switch (cfop.getModelAction())
 		{
 			case INSERT:
-				count = cfopDAC.insertCfop(cfop);
+				count = cfopDAC.insertCfop(cfop, null, null);
 				if (count > 0)
 				{
 					Status status = new Status();
@@ -146,7 +146,7 @@ public final class CfopDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
-				count = cfopDAC.updateCfop(cfop);
+				count = cfopDAC.updateCfop(cfop, null);
 				if (count > 0)
 				{
 					count =
@@ -157,7 +157,7 @@ public final class CfopDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case DELETE:
-				count = cfopDAC.deleteCfop(cfop);
+				count = cfopDAC.deleteCfop(cfop, null);
 				Status status = new Status();
 				status.setStatus(CdStatusTypeEnum.DELETADO);
 				List<Status> statusList = new ArrayList<Status>();

@@ -65,7 +65,7 @@ public final class ExameDACD extends SqlSessionDaoSupport
 			switch (exame.getModelAction())
 			{
 				case INSERT:
-					count = exameDAC.insertExamePessoa(exame);
+					count = exameDAC.insertExamePessoa(exame, null, null);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -78,7 +78,7 @@ public final class ExameDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
-					count = exameDAC.updateExamePessoa(exame);
+					count = exameDAC.updateExamePessoa(exame, null);
 					if (count > 0)
 					{
 						count =
@@ -89,7 +89,7 @@ public final class ExameDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case DELETE:
-					count = exameDAC.deleteExamePessoa(exame);
+					count = exameDAC.deleteExamePessoa(exame, null);
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
@@ -127,7 +127,7 @@ public final class ExameDACD extends SqlSessionDaoSupport
 		switch (exame2.getModelAction())
 		{
 			case INSERT:
-				count = exameDAC.insertExame(exame2);
+				count = exameDAC.insertExame(exame2, null, null);
 				if (count > 0)
 				{
 					Status status = new Status();
@@ -140,7 +140,7 @@ public final class ExameDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
-				count = exameDAC.updateExame(exame2);
+				count = exameDAC.updateExame(exame2, null);
 				if (count > 0)
 				{
 					count =
@@ -151,7 +151,7 @@ public final class ExameDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case DELETE:
-				count = exameDAC.deleteExame(exame2);
+				count = exameDAC.deleteExame(exame2, null);
 				Status status = new Status();
 				status.setStatus(CdStatusTypeEnum.DELETADO);
 				List<Status> statusList = new ArrayList<Status>();

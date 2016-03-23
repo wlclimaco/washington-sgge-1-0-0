@@ -6,7 +6,6 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
 import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
@@ -77,7 +76,7 @@ public class ProcessoDACImpl extends SqlSessionDaoSupport implements IProcessoDA
 	 * .Processo)
 	 */
 	@Override
-	public Integer insertProcesso(Processo agencia,String string, InternalResultsResponse<?> response)
+	public Integer insertProcesso(Processo agencia, String string, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
 		response = new InternalResultsResponse<Processo>();
@@ -104,7 +103,7 @@ public class ProcessoDACImpl extends SqlSessionDaoSupport implements IProcessoDA
 	public Integer updateProcesso(Processo agencia, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<Processo> response = new InternalResultsResponse<Processo>();
+		response = new InternalResultsResponse<Processo>();
 
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(agencia.getModelAction())
@@ -118,12 +117,6 @@ public class ProcessoDACImpl extends SqlSessionDaoSupport implements IProcessoDA
 		if (response.isInError())
 		{
 			return null;
-		}
-
-		// Finally, if something was updated then add the Person to the result.
-		if (updateCount > 0)
-		{
-			response.addResult(agencia);
 		}
 
 		return updateCount;

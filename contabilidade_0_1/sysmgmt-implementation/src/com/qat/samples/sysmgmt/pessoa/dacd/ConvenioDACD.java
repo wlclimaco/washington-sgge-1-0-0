@@ -63,7 +63,7 @@ public final class ConvenioDACD extends SqlSessionDaoSupport
 			switch (convenio.getModelAction())
 			{
 				case INSERT:
-					count = convenioDAC.insertConvenioPessoa(convenio);
+					count = convenioDAC.insertConvenioPessoa(convenio, null, null);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -76,7 +76,7 @@ public final class ConvenioDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
-					count = convenioDAC.updateConvenioPessoa(convenio);
+					count = convenioDAC.updateConvenioPessoa(convenio, null);
 					if (count > 0)
 					{
 						count =
@@ -87,7 +87,7 @@ public final class ConvenioDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case DELETE:
-					count = convenioDAC.deleteConvenioPessoa(convenio);
+					count = convenioDAC.deleteConvenioPessoa(convenio, null);
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();

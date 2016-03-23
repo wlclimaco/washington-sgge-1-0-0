@@ -52,9 +52,8 @@ public class EnderecoDACImpl extends SqlSessionDaoSupport implements IEnderecoDA
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer deleteEndereco(Endereco endereco)
+	public Integer deleteEndereco(Endereco endereco, InternalResultsResponse<?> response)
 	{
-		InternalResultsResponse<?> response = new InternalResultsResponse();
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, endereco, response);
 	}
 

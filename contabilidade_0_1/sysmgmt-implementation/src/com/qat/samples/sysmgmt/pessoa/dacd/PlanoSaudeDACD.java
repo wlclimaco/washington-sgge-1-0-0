@@ -67,7 +67,7 @@ public final class PlanoSaudeDACD extends SqlSessionDaoSupport
 			switch (planoSaude.getModelAction())
 			{
 				case INSERT:
-					count = planoSaudeDAC.insertPlanoSaudePessoa(planoSaude);
+					count = planoSaudeDAC.insertPlanoSaudePessoa(planoSaude, null, null);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -80,7 +80,7 @@ public final class PlanoSaudeDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
-					count = planoSaudeDAC.updatePlanoSaudePessoa(planoSaude);
+					count = planoSaudeDAC.updatePlanoSaudePessoa(planoSaude, null);
 					if (count > 0)
 					{
 						count =
@@ -92,7 +92,7 @@ public final class PlanoSaudeDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case DELETE:
-					count = planoSaudeDAC.deletePlanoSaudePessoa(planoSaude);
+					count = planoSaudeDAC.deletePlanoSaudePessoa(planoSaude, null);
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
@@ -136,7 +136,7 @@ public final class PlanoSaudeDACD extends SqlSessionDaoSupport
 		switch (planoSaude.getModelAction())
 		{
 			case INSERT:
-				count = planoSaudeDAC.insertPlanoSaude(planoSaude);
+				count = planoSaudeDAC.insertPlanoSaude(planoSaude, null, null);
 				if (count > 0)
 				{
 					Status status = new Status();
@@ -149,7 +149,7 @@ public final class PlanoSaudeDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
-				count = planoSaudeDAC.updatePlanoSaude(planoSaude);
+				count = planoSaudeDAC.updatePlanoSaude(planoSaude, null);
 				if (count > 0)
 				{
 					count =
@@ -161,7 +161,7 @@ public final class PlanoSaudeDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case DELETE:
-				count = planoSaudeDAC.deletePlanoSaude(planoSaude);
+				count = planoSaudeDAC.deletePlanoSaude(planoSaude, null);
 				Status status = new Status();
 				status.setStatus(CdStatusTypeEnum.DELETADO);
 				List<Status> statusList = new ArrayList<Status>();

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.conta.ContaCorrente;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 
 /**
  * The Interface IContaCorrenteDAC.
@@ -69,5 +70,7 @@ public interface IContaCorrenteDAC
 	public Integer maintainContaCorrenteAssociations(List<ContaCorrente> contaCorrenteList, Integer parentId,
 			String associateStatement,
 			InternalResultsResponse<?> response);
+
+	public InternalResultsResponse<ContaCorrente> fetchContaCorrenteByRequest(PagedInquiryRequest request);
 
 }

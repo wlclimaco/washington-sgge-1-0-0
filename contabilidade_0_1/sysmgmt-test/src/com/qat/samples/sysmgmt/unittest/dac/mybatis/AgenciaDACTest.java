@@ -68,7 +68,7 @@ public class AgenciaDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		Integer a = 0;
 		funcionario = insertAgencia(PersistanceActionEnum.UPDATE);
 
-		a = getAgenciaDAC().updateAgencia(funcionario);
+		a = getAgenciaDAC().updateAgencia(funcionario, null);
 
 	}
 
@@ -80,7 +80,7 @@ public class AgenciaDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		Integer a = 0;
 		funcionario = insertAgencia(PersistanceActionEnum.INSERT);
 
-		a = getAgenciaDAC().insertAgencia(funcionario);
+		a = getAgenciaDAC().insertAgencia(funcionario, null, null);
 
 	}
 
@@ -92,7 +92,7 @@ public class AgenciaDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		funcionario.setId(1);
 		Integer a = 0;
 		funcionario = insertAgencia(PersistanceActionEnum.DELETE);
-		a = getAgenciaDAC().deleteAgencia(funcionario);
+		a = getAgenciaDAC().deleteAgencia(funcionario, null);
 
 	}
 

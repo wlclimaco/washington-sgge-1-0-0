@@ -6,7 +6,6 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
 import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
@@ -77,10 +76,10 @@ public class TributacaoDACImpl extends SqlSessionDaoSupport implements ITributac
 	 * .Tributacao)
 	 */
 	@Override
-	public Integer insertTributacao(Tributacao tributacao)
+	public Integer insertTributacao(Tributacao tributacao, String string, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<Tributacao> response = new InternalResultsResponse<Tributacao>();
+		response = new InternalResultsResponse<Tributacao>();
 
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
@@ -89,12 +88,6 @@ public class TributacaoDACImpl extends SqlSessionDaoSupport implements ITributac
 		if (response.isInError())
 		{
 			return null;
-		}
-
-		// Finally, if something was inserted then add the Tributacao to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(tributacao);
 		}
 
 		return insertCount;
@@ -107,10 +100,10 @@ public class TributacaoDACImpl extends SqlSessionDaoSupport implements ITributac
 	 * .Tributacao)
 	 */
 	@Override
-	public Integer updateTributacao(Tributacao tributacao)
+	public Integer updateTributacao(Tributacao tributacao, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<Tributacao> response = new InternalResultsResponse<Tributacao>();
+		response = new InternalResultsResponse<Tributacao>();
 
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(tributacao.getModelAction())
@@ -126,12 +119,6 @@ public class TributacaoDACImpl extends SqlSessionDaoSupport implements ITributac
 			return null;
 		}
 
-		// Finally, if something was updated then add the Person to the result.
-		if (updateCount > 0)
-		{
-			response.addResult(tributacao);
-		}
-
 		return updateCount;
 	}
 
@@ -142,9 +129,9 @@ public class TributacaoDACImpl extends SqlSessionDaoSupport implements ITributac
 	 * .Tributacao)
 	 */
 	@Override
-	public Integer deleteTributacao(Tributacao tributacao)
+	public Integer deleteTributacao(Tributacao tributacao, InternalResultsResponse<?> response)
 	{
-		InternalResponse response = new InternalResponse();
+
 		QATMyBatisDacHelper.doRemove(getSqlSession(), EMPRESA_STMT_DELETE, tributacao, response);
 		if (response.isInError())
 		{

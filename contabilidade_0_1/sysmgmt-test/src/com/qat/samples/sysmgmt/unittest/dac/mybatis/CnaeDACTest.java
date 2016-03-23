@@ -23,6 +23,7 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.cnae.Cnae;
 import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.dac.ICnaeDAC;
 
 @ContextConfiguration(locations = {
@@ -58,16 +59,16 @@ public class CnaeDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Cnae funcionario = new Cnae();
 		funcionario = insertCnae(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
-		Integer a = getEntidadeDAC().insertCnae(funcionario,"", response);
-		
+		Integer a = getCnaeDAC().insertCnae(funcionario, "", response);
+
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = funcionarioResponse.getFirstResult();
+		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(funcionarioResponse.getFirstResult().getId());
+		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Cnae>();
-		
-		a = getEntidadeDAC().updateCnae(funcionario, response);
-		assertEquals(funcionarioResponse.getStatus(), Status.OperationSuccess);
+
+		a = getCnaeDAC().updateCnae(funcionario, response);
+		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
@@ -82,20 +83,18 @@ public class CnaeDACTest extends AbstractTransactionalJUnit4SpringContextTests
 
 		Integer a = getCnaeDAC().insertCnae(funcionario, "INSERT", response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		
-		
-		Cnae funcionario = new Cnae();
-		funcionario = insertCnae(PersistanceActionEnum.INSERT);
-		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
 
-		Integer a = getEntidadeDAC().insertCnae(funcionario, response);
+		funcionario = new Cnae();
+		funcionario = insertCnae(PersistanceActionEnum.INSERT);
+		response = new InternalResultsResponse<Cnae>();
+
+		a = getCnaeDAC().insertCnae(funcionario, null, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-	//	FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Cnae> responseA = getEntidadeDAC().fetchCnaeById(response.getFirstResult().getId());
+		// FetchByIdRequest request = new FetchByIdRequest();
+		// request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Cnae> responseA = getCnaeDAC().fetchCnaeById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
-
 
 	}
 
@@ -106,16 +105,17 @@ public class CnaeDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Cnae funcionario = new Cnae();
 		funcionario = insertCnae(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
-		Integer a = getEntidadeDAC().insertCnae(funcionario,response);
+		Integer a = getCnaeDAC().insertCnae(funcionario, null, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Cnae>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEntidadeDAC().deleteCnae(funcionario,response);
+		Integer b = getCnaeDAC().deleteCnae(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(funcionarioResponse.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEntidadeDAC().fetchCnaeById(funcionarioResponse.getFirstResult().getId());
+		// FetchByIdRequest request = new FetchByIdRequest();
+		// request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Cnae> responseA =
+				getCnaeDAC().fetchCnaeById(response.getFirstResult().getId());
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}

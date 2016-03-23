@@ -6,7 +6,6 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
 import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
@@ -78,7 +77,7 @@ public class PlanoSaudeDACImpl extends SqlSessionDaoSupport implements IPlanoSau
 	 * .PlanoSaude)
 	 */
 	@Override
-	public Integer insertPlanoSaude(PlanoSaude planoSaude, InternalResultsResponse<?> response)
+	public Integer insertPlanoSaude(PlanoSaude planoSaude, String string, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
 		response = new InternalResultsResponse<PlanoSaude>();
@@ -178,7 +177,6 @@ public class PlanoSaudeDACImpl extends SqlSessionDaoSupport implements IPlanoSau
 		return response;
 	}
 
-
 	@Override
 	public InternalResultsResponse<PlanoSaude> fetchAllPlanoSaudes()
 	{
@@ -210,7 +208,8 @@ public class PlanoSaudeDACImpl extends SqlSessionDaoSupport implements IPlanoSau
 	}
 
 	@Override
-	public Integer insertPlanoSaudePessoa(PlanoSaudePessoa planoSaude,String string, InternalResultsResponse<?> response)
+	public Integer insertPlanoSaudePessoa(PlanoSaudePessoa planoSaude, String string,
+			InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
 		response = new InternalResultsResponse<PlanoSaudePessoa>();

@@ -63,7 +63,7 @@ public final class AgenciaDACD extends SqlSessionDaoSupport
 		switch (agencia.getModelAction())
 		{
 			case INSERT:
-				count = agenciaDAC.insertAgencia(agencia);
+				count = agenciaDAC.insertAgencia(agencia, null, null);
 				if (count > 0)
 				{
 					Status status = new Status();
@@ -76,7 +76,7 @@ public final class AgenciaDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
-				count = agenciaDAC.updateAgencia(agencia);
+				count = agenciaDAC.updateAgencia(agencia, null);
 				if (count > 0)
 				{
 					count =
@@ -87,7 +87,7 @@ public final class AgenciaDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case DELETE:
-				count = agenciaDAC.deleteAgencia(agencia);
+				count = agenciaDAC.deleteAgencia(agencia, null);
 				Status status = new Status();
 				status.setStatus(CdStatusTypeEnum.DELETADO);
 				List<Status> statusList = new ArrayList<Status>();

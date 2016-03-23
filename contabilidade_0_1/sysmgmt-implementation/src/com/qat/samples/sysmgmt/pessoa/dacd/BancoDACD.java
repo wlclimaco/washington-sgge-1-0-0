@@ -66,7 +66,7 @@ public final class BancoDACD extends SqlSessionDaoSupport
 			switch (banco.getModelAction())
 			{
 				case INSERT:
-					count = bancoDAC.insertBancoPessoa(banco);
+					count = bancoDAC.insertBancoPessoa(banco, null, null);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -79,7 +79,7 @@ public final class BancoDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
-					count = bancoDAC.updateBancoPessoa(banco);
+					count = bancoDAC.updateBancoPessoa(banco, null);
 					if (count > 0)
 					{
 						count =
@@ -90,7 +90,7 @@ public final class BancoDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case DELETE:
-					count = bancoDAC.deleteBancoPessoa(banco);
+					count = bancoDAC.deleteBancoPessoa(banco, null);
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
@@ -138,7 +138,7 @@ public final class BancoDACD extends SqlSessionDaoSupport
 		switch (banco.getModelAction())
 		{
 			case INSERT:
-				count = bancoDAC.insertBanco(banco);
+				count = bancoDAC.insertBanco(banco, null, null);
 				if (count > 0)
 				{
 					Status status = new Status();
@@ -151,7 +151,7 @@ public final class BancoDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
-				count = bancoDAC.updateBanco(banco);
+				count = bancoDAC.updateBanco(banco, null);
 				if (count > 0)
 				{
 					count =
@@ -162,7 +162,7 @@ public final class BancoDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case DELETE:
-				count = bancoDAC.deleteBanco(banco);
+				count = bancoDAC.deleteBanco(banco, null);
 				Status status = new Status();
 				status.setStatus(CdStatusTypeEnum.DELETADO);
 				List<Status> statusList = new ArrayList<Status>();

@@ -68,7 +68,7 @@ public final class EspecialidadeDACD extends SqlSessionDaoSupport
 			switch (especialidade.getModelAction())
 			{
 				case INSERT:
-					count = especialidadeDAC.insertEspecialidadePessoa(especialidade);
+					count = especialidadeDAC.insertEspecialidadePessoa(especialidade, null, null);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -81,7 +81,7 @@ public final class EspecialidadeDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
-					count = especialidadeDAC.updateEspecialidadePessoa(especialidade);
+					count = especialidadeDAC.updateEspecialidadePessoa(especialidade, null);
 					if (count > 0)
 					{
 						count =
@@ -93,7 +93,7 @@ public final class EspecialidadeDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case DELETE:
-					count = especialidadeDAC.deleteEspecialidadePessoa(especialidade);
+					count = especialidadeDAC.deleteEspecialidadePessoa(especialidade, null);
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
@@ -137,7 +137,7 @@ public final class EspecialidadeDACD extends SqlSessionDaoSupport
 		switch (especialidade.getModelAction())
 		{
 			case INSERT:
-				count = especialidadeDAC.insertEspecialidade(especialidade);
+				count = especialidadeDAC.insertEspecialidade(especialidade, null, null);
 				if (count > 0)
 				{
 					Status status = new Status();
@@ -150,7 +150,7 @@ public final class EspecialidadeDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
-				count = especialidadeDAC.updateEspecialidade(especialidade);
+				count = especialidadeDAC.updateEspecialidade(especialidade, null);
 				if (count > 0)
 				{
 					count =
@@ -162,7 +162,7 @@ public final class EspecialidadeDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case DELETE:
-				count = especialidadeDAC.deleteEspecialidade(especialidade);
+				count = especialidadeDAC.deleteEspecialidade(especialidade, null);
 				Status status = new Status();
 				status.setStatus(CdStatusTypeEnum.DELETADO);
 				List<Status> statusList = new ArrayList<Status>();

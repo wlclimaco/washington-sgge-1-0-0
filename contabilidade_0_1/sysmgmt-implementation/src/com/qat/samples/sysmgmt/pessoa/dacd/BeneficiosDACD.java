@@ -74,7 +74,7 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 									beneficioPessoa.getEmprId(),
 									beneficioPessoa.getCreateUser(), processId, historiId);
 
-					count = beneficioPessoaDAC.insertBeneficioPessoa(beneficioPessoa);
+					count = beneficioPessoaDAC.insertBeneficioPessoa(beneficioPessoa, null, null);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -95,7 +95,7 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 									TabelaEnum.PESSOA, beneficioPessoaDAC, statusDAC, historicoDAC,
 									beneficioPessoa.getEmprId(),
 									beneficioPessoa.getCreateUser(), processId, historiId);
-					count = beneficioPessoaDAC.updateBeneficioPessoa(beneficioPessoa);
+					count = beneficioPessoaDAC.updateBeneficioPessoa(beneficioPessoa, null);
 					if (count > 0)
 					{
 						count =
@@ -107,7 +107,7 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 
 					break;
 				case DELETE:
-					count = beneficioPessoaDAC.deleteBeneficioPessoa(beneficioPessoa);
+					count = beneficioPessoaDAC.deleteBeneficioPessoa(beneficioPessoa, null);
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
@@ -119,7 +119,7 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 					break;
 				case NONE:
 
-					count = beneficioPessoaDAC.insertBeneficioPessoa(beneficioPessoa);
+					count = beneficioPessoaDAC.insertBeneficioPessoa(beneficioPessoa, null, null);
 					if (count > 0)
 					{
 						status = new Status();
@@ -159,7 +159,7 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 		switch (beneficio.getModelAction())
 		{
 			case INSERT:
-				count = beneficioDAC.insertBeneficios(beneficio);
+				count = beneficioDAC.insertBeneficios(beneficio, null, null);
 				if (count > 0)
 				{
 					Status status = new Status();
@@ -172,7 +172,7 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
-				count = beneficioDAC.updateBeneficios(beneficio);
+				count = beneficioDAC.updateBeneficios(beneficio, null);
 				if (count > 0)
 				{
 					count =
@@ -183,7 +183,7 @@ public final class BeneficiosDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case DELETE:
-				count = beneficioDAC.deleteBeneficios(beneficio);
+				count = beneficioDAC.deleteBeneficios(beneficio, null);
 				Status status = new Status();
 				status.setStatus(CdStatusTypeEnum.DELETADO);
 				List<Status> statusList = new ArrayList<Status>();

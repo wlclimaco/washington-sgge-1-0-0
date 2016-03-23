@@ -3,6 +3,7 @@ package com.qat.samples.sysmgmt.pessoa.dac;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.beneficios.BeneficioPessoa;
 import com.qat.samples.sysmgmt.beneficios.Beneficios;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 
 // TODO: Auto-generated Javadoc
@@ -58,7 +59,8 @@ public interface IBeneficiosDAC
 	 * @param beneficios the beneficios
 	 * @return the integer
 	 */
-	public Integer insertBeneficioPessoa(BeneficioPessoa beneficios, String statementName, InternalResultsResponse<?> response);
+	public Integer insertBeneficioPessoa(BeneficioPessoa beneficios, String statementName,
+			InternalResultsResponse<?> response);
 
 	/**
 	 * Delete beneficio pessoa.
@@ -67,5 +69,7 @@ public interface IBeneficiosDAC
 	 * @return the integer
 	 */
 	public Integer deleteBeneficioPessoa(BeneficioPessoa beneficios, InternalResultsResponse<?> response);
+
+	public InternalResultsResponse<Beneficios> fetchBeneficiosById(FetchByIdRequest request);
 
 }

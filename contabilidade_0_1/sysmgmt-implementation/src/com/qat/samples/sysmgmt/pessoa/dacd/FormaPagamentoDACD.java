@@ -70,7 +70,7 @@ public final class FormaPagamentoDACD extends SqlSessionDaoSupport
 							TabelaEnum.PESSOA, formaPgDAC, statusDAC, historicoDAC, formaPg.getEmprId(),
 							formaPg.getCreateUser(), processId, historicoId);
 
-					count = formaPgDAC.insertFormaPgPessoa(formaPg);
+					count = formaPgDAC.insertFormaPgPessoa(formaPg, null, null);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -88,7 +88,7 @@ public final class FormaPagamentoDACD extends SqlSessionDaoSupport
 							TabelaEnum.PESSOA, formaPgDAC, statusDAC, historicoDAC, formaPg.getEmprId(),
 							formaPg.getCreateUser(), processId, historicoId);
 
-					count = formaPgDAC.updateFormaPgPessoa(formaPg);
+					count = formaPgDAC.updateFormaPgPessoa(formaPg, null);
 					if (count > 0)
 					{
 						count =
@@ -99,7 +99,7 @@ public final class FormaPagamentoDACD extends SqlSessionDaoSupport
 					}
 					break;
 				case DELETE:
-					count = formaPgDAC.deleteFormaPgPessoa(formaPg);
+					count = formaPgDAC.deleteFormaPgPessoa(formaPg, null);
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
@@ -110,7 +110,7 @@ public final class FormaPagamentoDACD extends SqlSessionDaoSupport
 
 					break;
 				case NONE:
-					count = formaPgDAC.insertFormaPgPessoa(formaPg);
+					count = formaPgDAC.insertFormaPgPessoa(formaPg, null, null);
 					if (count > 0)
 					{
 						status = new Status();
@@ -149,7 +149,7 @@ public final class FormaPagamentoDACD extends SqlSessionDaoSupport
 		switch (formaPg.getModelAction())
 		{
 			case INSERT:
-				count = formaPgDAC.insertFormaPg(formaPg);
+				count = formaPgDAC.insertFormaPg(formaPg, null, null);
 				if (count > 0)
 				{
 					Status status = new Status();
@@ -162,7 +162,7 @@ public final class FormaPagamentoDACD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
-				count = formaPgDAC.updateFormaPg(formaPg);
+				count = formaPgDAC.updateFormaPg(formaPg, null);
 				if (count > 0)
 				{
 					count =

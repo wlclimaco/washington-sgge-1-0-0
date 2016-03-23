@@ -4,12 +4,12 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
 import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.cnae.Cnae;
 import com.qat.samples.sysmgmt.cnae.CnaeEmpresa;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.dac.ICnaeDAC;
 
@@ -49,9 +49,10 @@ public class CnaeDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 	 * java.lang.String, com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer insertCnae(Cnae cnae)
+	public Integer insertCnae(Cnae cnae, String statementName,
+			InternalResultsResponse<?> response)
 	{
-		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
+		response = new InternalResultsResponse<Cnae>();
 		Integer insertCount = 0;
 		// First insert the root cnae data
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CONTACT_STMT_INSERT, cnae, response);
@@ -66,9 +67,8 @@ public class CnaeDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer deleteCnae(Cnae cnae)
+	public Integer deleteCnae(Cnae cnae, InternalResultsResponse<?> response)
 	{
-		InternalResponse response = new InternalResponse();
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, cnae, response);
 	}
 
@@ -79,10 +79,10 @@ public class CnaeDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer updateCnae(Cnae cnae)
+	public Integer updateCnae(Cnae cnae, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<Cnae> response = new InternalResultsResponse<Cnae>();
+		response = new InternalResultsResponse<Cnae>();
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(cnae.getModelAction())
 				&& (cnae.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
@@ -113,10 +113,10 @@ public class CnaeDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 	}
 
 	@Override
-	public Integer insertCnaeEmpresa(CnaeEmpresa cnae)
+	public Integer insertCnaeEmpresa(CnaeEmpresa cnae, String statementName, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
-		InternalResultsResponse<CnaeEmpresa> response = new InternalResultsResponse<CnaeEmpresa>();
+		response = new InternalResultsResponse<CnaeEmpresa>();
 		// First insert the root cnae data
 		insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), CNAE_EMPRESA_STMT_INSERT, cnae, response);
 
@@ -130,9 +130,8 @@ public class CnaeDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer deleteCnaeEmpresa(CnaeEmpresa cnae)
+	public Integer deleteCnaeEmpresa(CnaeEmpresa cnae, InternalResultsResponse<?> response)
 	{
-		InternalResponse response = new InternalResponse();
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CNAE_EMPRESA_STMT_DELETE, cnae, response);
 	}
 
@@ -143,10 +142,10 @@ public class CnaeDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
 	@Override
-	public Integer updateCnaeEmpresa(CnaeEmpresa cnae)
+	public Integer updateCnaeEmpresa(CnaeEmpresa cnae, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<CnaeEmpresa> response = new InternalResultsResponse<CnaeEmpresa>();
+		response = new InternalResultsResponse<CnaeEmpresa>();
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(cnae.getModelAction())
 				&& (cnae.getModelAction() == QATModel.PersistanceActionEnum.UPDATE))
@@ -164,6 +163,13 @@ public class CnaeDACImpl extends SqlSessionDaoSupport implements ICnaeDAC
 
 	@Override
 	public InternalResultsResponse<Cnae> fetchCnaeByRequest(PagedInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Cnae> fetchCnaeById(FetchByIdRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;

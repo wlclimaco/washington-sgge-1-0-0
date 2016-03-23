@@ -10,6 +10,8 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.fiscal.Classificacao;
+import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.dac.IClassificacaoDAC;
 
 /**
@@ -180,6 +182,20 @@ public class ClassificacaoDACImpl extends SqlSessionDaoSupport implements IClass
 
 	@Override
 	public InternalResultsResponse<Classificacao> fetchClassificacaoById(Integer id)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Classificacao> fetchClassificacaoById(FetchByIdRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Classificacao> fetchClassificacaoByRequest(ClassificacaoInquiryRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;

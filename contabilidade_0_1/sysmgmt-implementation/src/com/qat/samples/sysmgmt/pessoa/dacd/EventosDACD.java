@@ -64,8 +64,8 @@ public final class EventosDACD extends SqlSessionDaoSupport
 			switch (evento.getModelAction())
 			{
 				case INSERT:
-					count = eventoDac.insertEvento(evento.getIdEvent());
-					count = eventoDac.insertEventoPessoa(evento);
+					count = eventoDac.insertEvento(evento.getIdEvent(), null, null);
+					count = eventoDac.insertEventoPessoa(evento, null, null);
 					if (count > 0)
 					{
 						Status status = new Status();
@@ -79,8 +79,8 @@ public final class EventosDACD extends SqlSessionDaoSupport
 
 					break;
 				case UPDATE:
-					count = eventoDac.updateEvento(evento.getIdEvent());
-					count = eventoDac.updateEventoPessoa(evento);
+					count = eventoDac.updateEvento(evento.getIdEvent(), null);
+					count = eventoDac.updateEventoPessoa(evento, null);
 					if (count > 0)
 					{
 						count =
@@ -91,7 +91,7 @@ public final class EventosDACD extends SqlSessionDaoSupport
 					break;
 				case DELETE:
 
-					count = eventoDac.deleteEventoPessoa(evento);
+					count = eventoDac.deleteEventoPessoa(evento, null);
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
@@ -103,7 +103,7 @@ public final class EventosDACD extends SqlSessionDaoSupport
 					break;
 				case NONE:
 
-					count = eventoDac.insertEventoPessoa(evento);
+					count = eventoDac.insertEventoPessoa(evento, null, null);
 					if (count > 0)
 					{
 						count =

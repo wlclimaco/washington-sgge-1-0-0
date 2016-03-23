@@ -4,7 +4,6 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
 import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
@@ -73,7 +72,7 @@ public class FormaPgDACImpl extends SqlSessionDaoSupport implements IFormaPagame
 	}
 
 	@Override
-	public Integer insertFormaPg(FormaPg formaPg, String string,InternalResultsResponse<?> response)
+	public Integer insertFormaPg(FormaPg formaPg, String string, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
 		response = new InternalResultsResponse<FormaPg>();
@@ -117,7 +116,7 @@ public class FormaPgDACImpl extends SqlSessionDaoSupport implements IFormaPagame
 	public Integer updateFormaPgPessoa(FormaPgPessoa formaPg, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<FormaPgPessoa> response = new InternalResultsResponse<FormaPgPessoa>();
+		response = new InternalResultsResponse<FormaPgPessoa>();
 
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(formaPg.getModelAction())
@@ -135,7 +134,7 @@ public class FormaPgDACImpl extends SqlSessionDaoSupport implements IFormaPagame
 	}
 
 	@Override
-	public Integer insertFormaPgPessoa(FormaPgPessoa formaPg,String string, InternalResultsResponse<?> response)
+	public Integer insertFormaPgPessoa(FormaPgPessoa formaPg, String string, InternalResultsResponse<?> response)
 	{
 		Integer insertCount = 0;
 		response = new InternalResultsResponse<FormaPgPessoa>();
@@ -148,7 +147,6 @@ public class FormaPgDACImpl extends SqlSessionDaoSupport implements IFormaPagame
 	@Override
 	public Integer deleteFormaPgPessoa(FormaPgPessoa formaPg, InternalResultsResponse<?> response)
 	{
-		InternalResponse response = new InternalResponse();
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), FORMAPG_PESSOA_STMT_DELETE, formaPg, response);
 	}
 

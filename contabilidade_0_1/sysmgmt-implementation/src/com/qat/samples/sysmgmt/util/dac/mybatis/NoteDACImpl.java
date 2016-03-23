@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.qat.framework.model.QATModel;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
@@ -80,11 +79,11 @@ public class NoteDACImpl extends SqlSessionDaoSupport implements INoteDAC
 	 * java.lang.String)
 	 */
 	@Override
-	public Integer insertNote(Note note)
+	public Integer insertNote(Note note, String string, InternalResultsResponse<?> response)
 	{
 
 		Integer insertCount = 0;
-		InternalResultsResponse<Note> response = new InternalResultsResponse<Note>();
+		response = new InternalResultsResponse<Note>();
 
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
@@ -95,12 +94,6 @@ public class NoteDACImpl extends SqlSessionDaoSupport implements INoteDAC
 			return null;
 		}
 
-		// Finally, if something was inserted then add the Banco to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(note);
-		}
-
 		return insertCount;
 	}
 
@@ -109,10 +102,10 @@ public class NoteDACImpl extends SqlSessionDaoSupport implements INoteDAC
 	 * @see com.prosperitasglobal.cbof.dac.INoteDAC#updateNote(com.prosperitasglobal.sendsolve.model.Note)
 	 */
 	@Override
-	public Integer updateNote(Note note)
+	public Integer updateNote(Note note, InternalResultsResponse<?> response)
 	{
 		Integer updateCount = 0;
-		InternalResultsResponse<Note> response = new InternalResultsResponse<Note>();
+		response = new InternalResultsResponse<Note>();
 
 		// First update the root if necessary.
 		if (!ValidationUtil.isNull(note.getModelAction())
@@ -128,12 +121,6 @@ public class NoteDACImpl extends SqlSessionDaoSupport implements INoteDAC
 			return null;
 		}
 
-		// Finally, if something was updated then add the Person to the result.
-		if (updateCount > 0)
-		{
-			response.addResult(note);
-		}
-
 		return updateCount;
 	}
 
@@ -142,9 +129,8 @@ public class NoteDACImpl extends SqlSessionDaoSupport implements INoteDAC
 	 * @see com.prosperitasglobal.cbof.dac.INoteDAC#deleteNote(com.prosperitasglobal.sendsolve.model.Note)
 	 */
 	@Override
-	public Integer deleteNote(Note note)
+	public Integer deleteNote(Note note, InternalResultsResponse<?> response)
 	{
-		InternalResponse response = new InternalResponse();
 		QATMyBatisDacHelper.doRemove(getSqlSession(), NOTE_STMT_DELETE, note, response);
 		if (response.isInError())
 		{
