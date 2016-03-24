@@ -455,85 +455,113 @@
       </aside><!-- /.control-sidebar -->
       <!-- Add the sidebar's background. This div must be placed
            immediately after the control sidebar -->
-      <div class="control-sidebar-bg"></div>
-
-	<div class="ui-layout-west">
-			<div id="west-accordion">
-				<h3><a href="#SampleApp" rel="address:#SampleApp">Sample Apps</a></h3>
-				<div id="tree"></div>
-
-				<h3><a href="#Doco" rel="address:#Doco">Documentation</a></h3>
-				<div>
-					<p>WebDaptive is based on the open source jQuery Javascript Library. The following are the links to the open source components:</p>
-					<ul>
-						<li><a href="http://headjs.com/" target="_blank">Script Loader (Read)</a></li>
-						<li><a href="https://github.com/mde/timezone-js" target="_blank">TimezoneJS Date (Read)</a></li>
-						<li><a href="http://jquery.com/" target="_blank">jQuery Core</a></li>
-						<li><a href="http://jqueryui.com/" target="_blank">jQuery UI</a></li>
-						<li><a href="http://layout.jquery-dev.net/" target="_blank">Layout (jQuery Plug-in)</a></li>
-						<li><a href="http://code.google.com/p/dynatree/" target="_blank">Dynatree (jQuery Plug-in)</a></li>
-						<li><a href="http://github.com/mleibman/SlickGrid" target="_blank">SlickGrid (jQuery Plug-in)</a></li>
-						<li><a href="http://datatables.net/" target="_blank">DataTables (jQuery Plug-in)</a></li>
-						<li><a href="http://jnotify.codeplex.com/" target="_blank">jNotify (jQuery Plug-in)</a></li>
-						<li><a href="http://malsup.com/jquery/block/" target="_blank">BlockUI (jQuery Plug-in)</a></li>
-						<li><a href="http://www.asual.com/jquery/format/" target="_blank">Format (jQuery Plug-in)</a></li>
-						<li><a href="http://www.asual.com/jquery/address/" target="_blank">Address (jQuery Plug-in)</a></li>
-						<li><a href="https://github.com/ehynds/jquery-idle-timeout" target="_blank">Idle Timeout (jQuery Plug-in)</a></li>
-						<li><a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/" target="_blank">Validation (jQuery Plug-in)</a></li>
-						<li><a href="http://code.google.com/p/jquery-json/" target="_blank">JSON (jQuery Plug-in)</a></li>
-					</ul>
-				</div>
-
-				<h3><a href="#Training" rel="address:#Training">Training</a></h3>
-				<div>
-					<p>Javascript & jQuery Training, including exercises and solutions.</p>
-					<ul>
-						<li><a href="../training/jqfundamentals/book/jquery-fundamentals-book.pdf" target="_blank">jQuery Fundamentals</a></li>
-						<li><a href="https://secure.qat.com/share/page/site/java-knowledgebase/documentlibrary" target="_blank">WebDaptive Overview & Standards</a></li>
-						<li><a href="#" onclick="$('#content').load('wd_arch.jsp');">WebDaptive Architecture</a></li>
-					</ul>
-				</div>
-
-				<h3><a href="#Maps" rel="address:#Maps">QAT Global Facilities</a></h3>
-				<div>
-					<p>Maps  &amp; Directions to QAT Global Facilities.</p>
-					<ul>
-						<li><a href="http://goo.gl/maps/afLzb" target="_blank">QAT Global Headquarters</a></li>
-						<li><a href="http://goo.gl/maps/WfXD8" target="_blank">QAT Global Brazil Office</a></li>
-					</ul>
-				</div>
-
-				<h3><a href="#Async" rel="address:#Async">Live Messages</a></h3>
-				<div>
-					<p>Live Messages pushed from Back-end</p>
-					<table>
-						<tr>
-							<td colspan="2">
-								<textarea cols="27" rows="10" id="txtaMessages"></textarea>&nbsp;
-							</td>
-						</tr>
-						<tr>
-							<td>Send Msg:</td>
-							<td><input type="text" id="txtMessage"/></td>
-						</tr>
-						<tr>
-							<td colspan="2"><button id="send_async" value="Send"/></td>
-						</tr>
-					</table>
-				</div>
-			</div>
-	</div>
-
-	<div class="ui-layout-center">
-		<div id="StatusBar" style="height: 8px;"></div><br/>
-		<div id="content" class="ui-layout-content"><img src="../images/WebDaptiveHLA.png" alt="" border="0"/></div>
-	</div>
-
-	<div class="ui-layout-south">
-		<div id="footer" class="ui-layout-south-content"></div>
+    <div class="control-sidebar-bg"></div>
+	<div class="subnavbar">
+  <div class="subnavbar-inner">
+    <div class="container">
+      <ul class="mainnav">
+        <li class="active"><a href="dashboard"><i class="icon-dashboard alist" data-title='Dashboard'></i><span>Pagina Inicial</span> </a> </li>
+        <li><a href="reports.html"><i class="icon-list-alt"></i><span>Relatorio</span> </a> </li>
+         <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Cadastros</span> <b class="caret"></b></a>
+		 <ul class="dropdown-menu">
+            <li><a href="empresa" class="alist" data-title='Empresa'>Empresa</a></li>
+            <li><a href="empresa/filial" class="alist" data-title='Filial'>Filial</a></li>
+            <li><a href="empresa/deposito" class="alist" data-title='Deposito'>Deposito</a></li>
+			<li><a href="pricing.html">Documentos</a></li>
+			<li><a href="cliente" class="alist" data-title='Empresa'>Cliente</a></li>
+            <li><a href="fornecedor" class="alist" data-title='Empresa'>Fornecedor</a></li>
+            <li><a href="transportador" class="alist" data-title='Empresa'>Transportador</a></li>
+            <li><a href="cliente/cidade" class="alist" data-title='Cidade'>Cidade</a></li>
+             <li><a href="cliente/estado" class="alist" data-title='Cidade'>Estado</a></li>
+          </ul>
+        </li>
+		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Departamento Pessoal</span> <b class="caret"></b></a>
+		 <ul class="dropdown-menu">
+            <li><a href="funcionario" class="alist" data-title='Funcionario'>Funcionario</a></li>
+            <li><a href="funcionario/eventos" class="alist" data-title='Cidade'>Eventos</a></li>
+            <li><a href="funcionario/beneficios" class="alist" data-title='Cidade'>Beneficios</a></li>
+			<li><a href="funcionario/convenio" class="alist" data-title='Cidade'>Convenio</a></li>
+			<li><a href="funcionario/funcPonto" class="alist" data-title='Cidade'>Ponto Funcionario</a></li>
+          </ul>
+        </li>
+		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Produtos</span> <b class="caret"></b></a>
+		 <ul class="dropdown-menu">
+            <li><a href="produto" class="alist" data-title='Produto'>Produto</a></li>
+            <li><a href="produto/fetch/unimed" class="alist" data-title='Cidade'>Unidade Medida</a></li>
+            <li><a href="produto/fetch/grupo" class="alist" data-title='Cidade'>Grupo</a></li>
+			<li><a href="produto/fetch/subgrupo" class="alist" data-title='Cidade'>Sub Grupo</a></li>
+			<li><a href="produto/fetch/marca" class="alist" data-title='Cidade'>Marca</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Financeiro</span> <b class="caret"></b></a>
+		 <ul class="dropdown-menu">
+            <li><a href="notafiscal/fetch/contaspagar" class="alist" data-title='Cidade'>Contas Pagar</a></li>
+            <li><a href="notafiscal/fetch/contasreceber" class="alist" data-title='Cidade'>Contas Receber</a></li>
+            <li><a href="notafiscal/fetch/caixa" class="alist" data-title='Cidade'>Caixa</a></li>
+			<li><a href="notafiscal/fetch/condpg" class="alist" data-title='Cidade'>Condicao Pagamento</a></li>
+			<li><a href="cliente/banco" class="alist" data-title='Cidade'>Banco</a></li>
+			<li><a href="cliente/agencia" class="alist" data-title='Cidade'>Agencia</a></li>
+			<li><a href="cliente/conta" class="alist" data-title='Cidade'>Conta</a></li>
+          </ul>
+        </li>
+		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Fiscal</span> <b class="caret"></b></a>
+		<ul class="dropdown-menu">
+            <li><a href="produto/fetch/cfop" class="alist" data-title='Cidade'>CFOP</a></li>
+			<li><a href="empresa/cnae" class="alist" data-title='Cidade'>CNAE</a></li>
+			<li><a href="empresa/regime" class="alist" data-title='Cidade'>Regime</a></li>
+			<li><a href="produto/classificacao" class="alist" data-title='Cidade'>Classificacao</a></li>
+          </ul>
+        </li>
+		<li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Compras/vendas</span> <b class="caret"></b></a>
+		<ul class="dropdown-menu">
+            <li><a href="notafiscal/fetch/entrada" class="alist" data-title='Nota Entrada'>Nota Entrada</a></li>
+            <li><a href="notafiscal/fetch/saida" class="alist" data-title='Nota Saida'>Nota Saida</a></li>
+            <li><a href="notafiscal/fetch/orcamento" class="alist" data-title='Orcamento'>Orçamento</a></li>
+			<li><a href="notafiscal/fetch/pdcompras" class="alist" data-title='Pedido de Compras'>Pedido de Compras</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Sistema</span> <b class="caret"></b></a>
+		<ul class="dropdown-menu">
+            <li><a href="tela" class="alist" data-title='Nota Entrada'>Tela</a></li>
+            <li><a href="historico" class="alist" data-title='Nota Entrada'>Historico</a></li>
+            <li><a href="ordemservico" class="alist" data-title='Nota Entrada'>Ordem Servico</a></li>
+            <li><a href="sistema/icons" class="alist" data-title='Nota Entrada'>Incones</a></li>
+			<li><a href="sistema/reports" class="alist" data-title='Nota Entrada'>Relatorios</a></li>
+			<li><a href="sistema/chats" class="alist" data-title='Nota Entrada'>Graficos</a></li>
+			<li><a href="sistema/pricing" class="alist" data-title='Nota Entrada'>pricing</a></li>
+			<li><a href="sistema/shortcodes" class="alist" data-title='Nota Entrada'>shortCodes</a></li>
+			<li><a href="sistema/faq" class="alist" data-title='Nota Entrada'>Faq</a></li>
+			<li><a href="sistema/guidely" class="alist" data-title='Nota Entrada'>Guidely</a></li>
+          </ul>
+        </li>
+		</ul>
+    </div>
+    <!-- /container -->
+  </div>
+  <!-- /subnavbar-inner -->
+</div>
+<body>
+<div id="preload">
+	<div>
+		<span></span>
 	</div>
 </div>
-<script type="text/javascript" src="../thirdparty/head.min.js"></script>
+
+<div id="idletimeout" style="display:none;">
+	<a href="#"></a>.
+</div>
+
+
+<div class="fullscreen"></div>
+<div id="loading" style="display: none;">
+	<h5></h5>
+	<div id="progress-bar"></div>
+</div>
+<div id="action-dialog" style="display: none"></div>
+<div id="action-dialog-Error" style="display: none"></div>
+<jsp:include page="../scripts/pages/wd_wrapper.js.jsp" flush="true" />
+<script type="text/javascript" src="thirdparty/head.min.js"></script>
+
 <script>
 
 
