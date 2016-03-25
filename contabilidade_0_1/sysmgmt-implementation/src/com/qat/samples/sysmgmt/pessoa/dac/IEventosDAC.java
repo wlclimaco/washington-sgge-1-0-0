@@ -3,6 +3,7 @@ package com.qat.samples.sysmgmt.pessoa.dac;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.dp.EventoPessoa;
 import com.qat.samples.sysmgmt.dp.Eventos;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 
 /**
@@ -70,5 +71,7 @@ public interface IEventosDAC
 	 * @return the integer
 	 */
 	public Integer deleteEventoPessoa(EventoPessoa evento, InternalResultsResponse<?> response);
+
+	public InternalResultsResponse<Eventos> fetchEventosById(FetchByIdRequest request);
 
 }

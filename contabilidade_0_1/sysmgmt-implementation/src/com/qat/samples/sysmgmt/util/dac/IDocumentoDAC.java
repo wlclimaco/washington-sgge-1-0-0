@@ -3,6 +3,7 @@ package com.qat.samples.sysmgmt.util.dac;
 import java.util.List;
 
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.Documento;
 
 public interface IDocumentoDAC
@@ -63,4 +64,8 @@ public interface IDocumentoDAC
 	public Integer maintainDocumentoAssociations(List<Documento> documentoList, Integer parentId,
 			String associateStatement,
 			InternalResultsResponse<?> response);
+
+	public Integer deleteDocumento(Documento funcionario, InternalResultsResponse<Documento> response);
+
+	public InternalResultsResponse<Documento> fetchDocumentoByRequest(PagedInquiryRequest request);
 }

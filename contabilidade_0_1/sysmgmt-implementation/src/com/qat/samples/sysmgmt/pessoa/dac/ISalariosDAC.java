@@ -2,6 +2,8 @@ package com.qat.samples.sysmgmt.pessoa.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.dp.Salario;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 
 public interface ISalariosDAC
 {
@@ -32,5 +34,9 @@ public interface ISalariosDAC
 	 * @return the integer
 	 */
 	public Integer deleteSalario(Salario salarios, InternalResultsResponse<?> response);
+
+	public InternalResultsResponse<Salario> fetchSalarioById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Salario> fetchSalarioByRequest(PagedInquiryRequest request);
 
 }

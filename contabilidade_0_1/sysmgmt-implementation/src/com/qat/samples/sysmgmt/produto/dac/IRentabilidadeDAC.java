@@ -1,6 +1,7 @@
 package com.qat.samples.sysmgmt.produto.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.Rentabilidade;
 
 /**
@@ -45,5 +46,7 @@ public interface IRentabilidadeDAC
 	 * @return the internal results response< rentabilidade>
 	 */
 	public InternalResultsResponse<Rentabilidade> fetchRentabilidadeById(Integer id);
+
+	public InternalResultsResponse<Rentabilidade> fetchRentabilidadeByRequest(PagedInquiryRequest request);
 
 }

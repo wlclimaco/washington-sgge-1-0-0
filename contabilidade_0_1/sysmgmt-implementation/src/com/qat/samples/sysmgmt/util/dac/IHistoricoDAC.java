@@ -5,6 +5,7 @@ import com.qat.samples.sysmgmt.alerta.Alertas;
 import com.qat.samples.sysmgmt.alerta.model.request.AlertasInquiryRequest;
 import com.qat.samples.sysmgmt.historico.model.Historico;
 import com.qat.samples.sysmgmt.historico.model.HistoricoItens;
+import com.qat.samples.sysmgmt.historico.model.request.HistoricoInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 
 /**
@@ -61,5 +62,7 @@ public interface IHistoricoDAC
 	// public InternalResultsResponse<Historico> fetchHistoricoByRequest(HistoricoInquiryRequest request);
 
 	public InternalResultsResponse<Alertas> fetchAlertasByRequest(AlertasInquiryRequest request);
+
+	public InternalResultsResponse<Historico> fetchHistoricoByRequest(HistoricoInquiryRequest request);
 
 }

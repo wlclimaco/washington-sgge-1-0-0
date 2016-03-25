@@ -1,6 +1,7 @@
 package com.qat.samples.sysmgmt.produto.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.TabPreco;
 
 /**
@@ -44,5 +45,7 @@ public interface ITabPrecoDAC
 	 * @return the internal results response< tabPreco>
 	 */
 	public InternalResultsResponse<TabPreco> fetchTabPrecoById(Integer id);
+
+	public InternalResultsResponse<TabPreco> fetchTabPrecoByRequest(PagedInquiryRequest request);
 
 }

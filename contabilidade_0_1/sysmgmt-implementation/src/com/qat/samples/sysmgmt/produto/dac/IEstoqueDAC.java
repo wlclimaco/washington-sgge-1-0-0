@@ -1,6 +1,7 @@
 package com.qat.samples.sysmgmt.produto.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.Estoque;
 
 /**
@@ -44,5 +45,7 @@ public interface IEstoqueDAC
 	 * @return the internal results response< estoque>
 	 */
 	public InternalResultsResponse<Estoque> fetchEstoqueById(Integer id);
+
+	public InternalResultsResponse<Estoque> fetchEstoqueByRequest(PagedInquiryRequest request);
 
 }

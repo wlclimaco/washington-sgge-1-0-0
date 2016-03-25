@@ -2,6 +2,8 @@ package com.qat.samples.sysmgmt.pessoa.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.condominio.model.Mandado;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 
 public interface IMandadoDAC
 {
@@ -32,5 +34,9 @@ public interface IMandadoDAC
 	 * @return the integer
 	 */
 	public Integer deleteMandado(Mandado mandado, InternalResultsResponse<?> response);
+
+	public InternalResultsResponse<Mandado> fetchMandadoById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Mandado> fetchMandadoByRequest(PagedInquiryRequest request);
 
 }

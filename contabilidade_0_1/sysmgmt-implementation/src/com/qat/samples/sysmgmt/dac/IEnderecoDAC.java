@@ -1,6 +1,8 @@
 package com.qat.samples.sysmgmt.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.Endereco;
 
 /**
@@ -37,5 +39,9 @@ public interface IEnderecoDAC
 	 * @return the internal response
 	 */
 	public Integer deleteEndereco(Endereco endereco, InternalResultsResponse<?> response);
+
+	public InternalResultsResponse<Endereco> fetchEnderecoById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Endereco> fetchEnderecoByRequest(PagedInquiryRequest request);
 
 }

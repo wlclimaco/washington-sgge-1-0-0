@@ -1,6 +1,7 @@
 package com.qat.samples.sysmgmt.nf.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscalItens;
 
@@ -46,5 +47,7 @@ public interface INotaFiscalItensDAC
 	 * @return the internal results response
 	 */
 	public InternalResultsResponse<NotaFiscalItens> fetchNotaFiscalItensByRequest(PagedInquiryRequest request);
+
+	public InternalResultsResponse<NotaFiscalItens> fetchNotaFiscalItensById(FetchByIdRequest request);
 
 }

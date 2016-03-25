@@ -30,24 +30,6 @@ public interface ITelefoneDAC
 	public Integer insertTelefone(Telefone email, String statementName, InternalResultsResponse<?> response);
 
 	/**
-	 * Delete business Telefone.
-	 * 
-	 * @param email the email
-	 * @param response the response
-	 * @return the integer
-	 */
-	public Integer deleteBusinessTelefone(Telefone email, InternalResultsResponse<?> response);
-
-	/**
-	 * Delete person Telefone.
-	 * 
-	 * @param email the email
-	 * @param response the response
-	 * @return the integer
-	 */
-	public Integer deletePersonTelefone(Telefone email, InternalResultsResponse<?> response);
-
-	/**
 	 * Fetch Telefone by id.
 	 * 
 	 * @param id the id
@@ -62,4 +44,6 @@ public interface ITelefoneDAC
 	 * @return the internal results response
 	 */
 	public InternalResultsResponse<Telefone> fetchTelefoneByRequest(PagedInquiryRequest request);
+
+	public Integer deleteTelefone(Telefone funcionario, InternalResultsResponse<Telefone> response);
 }

@@ -1,8 +1,7 @@
 package com.qat.samples.sysmgmt.entidade.dac;
 
-import java.util.List;
-
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.Tarefa;
 
 /**
@@ -56,16 +55,6 @@ public interface ITarefaDAC
 	 */
 	public InternalResultsResponse<Tarefa> fetchTarefaById(Integer id);
 
-	/**
-	 * Maintain tarefa associations.
-	 * 
-	 * @param tarefaList the tarefa list
-	 * @param parentId the parent id
-	 * @param associateStatement the associate statement
-	 * @param response the response
-	 * @return the integer
-	 */
-	public Integer maintainTarefaAssociations(List<Tarefa> tarefaList, Integer parentId, String associateStatement,
-			InternalResultsResponse<?> response);
+	public InternalResultsResponse<Tarefa> fetchTarefaByRequest(PagedInquiryRequest request);
 
 }

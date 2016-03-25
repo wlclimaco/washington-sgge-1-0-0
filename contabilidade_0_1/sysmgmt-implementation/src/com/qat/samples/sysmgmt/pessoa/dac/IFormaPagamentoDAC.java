@@ -3,6 +3,7 @@ package com.qat.samples.sysmgmt.pessoa.dac;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.condpag.FormaPg;
 import com.qat.samples.sysmgmt.condpag.FormaPgPessoa;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 
 // TODO: Auto-generated Javadoc
@@ -43,10 +44,10 @@ public interface IFormaPagamentoDAC
 	/**
 	 * Fetch formaPg by id.
 	 * 
-	 * @param id the id
+	 * @param request the id
 	 * @return the internal results response< formaPg>
 	 */
-	public InternalResultsResponse<FormaPg> fetchFormaPgById(Integer id);
+	public InternalResultsResponse<FormaPg> fetchFormaPgById(FetchByIdRequest request);
 
 	/**
 	 * Update forma pg pessoa.

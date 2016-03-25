@@ -1,6 +1,7 @@
 package com.qat.samples.sysmgmt.nf.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.nf.model.NFStatus;
 
@@ -45,5 +46,7 @@ public interface INFStatusDAC
 	 * @return the internal results response
 	 */
 	public InternalResultsResponse<NFStatus> fetchNFStatusByRequest(PagedInquiryRequest request);
+
+	public InternalResultsResponse<NFStatus> fetchNFStatusById(FetchByIdRequest request);
 
 }

@@ -3,9 +3,7 @@ package com.qat.samples.sysmgmt.unittest.dac.mybatis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -20,46 +18,13 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.Status;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.banco.Banco;
-import com.qat.samples.sysmgmt.banco.BancoPessoa;
-import com.qat.samples.sysmgmt.cfop.Cfop;
-import com.qat.samples.sysmgmt.cfop.CfopPessoa;
-import com.qat.samples.sysmgmt.cfop.CfopTypeEnum;
-import com.qat.samples.sysmgmt.cnae.Cnae;
-import com.qat.samples.sysmgmt.cnae.CnaeEmpresa;
-import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
-import com.qat.samples.sysmgmt.contabilidade.Plano;
-import com.qat.samples.sysmgmt.entidade.Deposito;
-import com.qat.samples.sysmgmt.entidade.Empresa;
-import com.qat.samples.sysmgmt.entidade.EntidadeTypeEnum;
-import com.qat.samples.sysmgmt.entidade.Filial;
-import com.qat.samples.sysmgmt.entidade.Usuario;
-import com.qat.samples.sysmgmt.entidade.dac.IEmpresaDAC;
-import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
-import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Especialidade;
-import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.EspecialidadeInquiryRequest;
-import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.Especialidade;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
-import com.qat.samples.sysmgmt.util.Cidade;
-import com.qat.samples.sysmgmt.util.Configuracao;
-import com.qat.samples.sysmgmt.util.Documento;
-import com.qat.samples.sysmgmt.util.DocumentoTypeEnum;
-import com.qat.samples.sysmgmt.util.Email;
-import com.qat.samples.sysmgmt.util.EmailTypeEnum;
-import com.qat.samples.sysmgmt.util.Especialidade;
-import com.qat.samples.sysmgmt.util.EspecialidadeTypeEnum;
-import com.qat.samples.sysmgmt.util.Note;
-import com.qat.samples.sysmgmt.util.Telefone;
-import com.qat.samples.sysmgmt.util.TelefoneTypeEnum;
-import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.dac.IEspecialidadeDAC;
+import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
 
 @ContextConfiguration(locations = {
 		"classpath:com/qat/samples/sysmgmt/unittest/conf/unittest-datasource-txn-context.xml",
@@ -71,7 +36,6 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 public class EspecialidadeDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
-	
 	private static final Logger LOG = LoggerFactory.getLogger(EspecialidadeDACTest.class);
 	private IEspecialidadeDAC especialidadeDAC; // injected by Spring through setter @resource
 
@@ -95,14 +59,14 @@ public class EspecialidadeDACTest extends AbstractTransactionalJUnit4SpringConte
 		Especialidade funcionario = new Especialidade();
 		funcionario = insertEspecialidade(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Especialidade> response = new InternalResultsResponse<Especialidade>();
-		Integer a = getEspecialidadeDAC().insertEspecialidade(funcionario,"", response);
-		
+		Integer a = getEspecialidadeDAC().insertEspecialidade(funcionario, "", response);
+
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
 		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Especialidade>();
-		
+
 		a = getEspecialidadeDAC().updateEspecialidade(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 
@@ -119,20 +83,19 @@ public class EspecialidadeDACTest extends AbstractTransactionalJUnit4SpringConte
 
 		Integer a = getEspecialidadeDAC().insertEspecialidade(funcionario, "INSERT", response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		
-		
-		Especialidade funcionario = new Especialidade();
-		funcionario = insertEspecialidade(PersistanceActionEnum.INSERT);
-		InternalResultsResponse<Especialidade> response = new InternalResultsResponse<Especialidade>();
 
-		Integer a = getEspecialidadeDAC().insertEspecialidade(funcionario, response);
+		funcionario = new Especialidade();
+		funcionario = insertEspecialidade(PersistanceActionEnum.INSERT);
+		response = new InternalResultsResponse<Especialidade>();
+
+		a = getEspecialidadeDAC().insertEspecialidade(funcionario, "", response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-	//	FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Especialidade> responseA = getEspecialidadeDAC().fetchEspecialidadeById(response.getFirstResult().getId());
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Especialidade> responseA =
+				getEspecialidadeDAC().fetchEspecialidadeById(request);
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
-
 
 	}
 
@@ -143,16 +106,17 @@ public class EspecialidadeDACTest extends AbstractTransactionalJUnit4SpringConte
 		Especialidade funcionario = new Especialidade();
 		funcionario = insertEspecialidade(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Especialidade> response = new InternalResultsResponse<Especialidade>();
-		Integer a = getEspecialidadeDAC().insertEspecialidade(funcionario,response);
+		Integer a = getEspecialidadeDAC().insertEspecialidade(funcionario, "", response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Especialidade>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getEspecialidadeDAC().deleteEspecialidade(funcionario,response);
+		Integer b = getEspecialidadeDAC().deleteEspecialidade(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getEspecialidadeDAC().fetchEspecialidadeById(response.getFirstResult().getId());
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Especialidade> responseA =
+				getEspecialidadeDAC().fetchEspecialidadeById(request);
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}
@@ -174,7 +138,7 @@ public class EspecialidadeDACTest extends AbstractTransactionalJUnit4SpringConte
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
-		InternalResultsResponse<Especialidade> response = getEspecialidadeDAC().fetchEspecialidadeById(1);
+		InternalResultsResponse<Especialidade> response = getEspecialidadeDAC().fetchEspecialidadeById(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
@@ -183,7 +147,7 @@ public class EspecialidadeDACTest extends AbstractTransactionalJUnit4SpringConte
 	public void testfetchEspecialidadeByRequest() throws Exception
 	{
 		// check for valid and precount
-		EspecialidadeInquiryRequest request = new EspecialidadeInquiryRequest();
+		PagedInquiryRequest request = new PagedInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(4);

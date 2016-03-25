@@ -2,6 +2,7 @@ package com.qat.samples.sysmgmt.pessoa.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.dp.Profissao;
+import com.qat.samples.sysmgmt.dp.model.request.ProfissaoInquiryRequest;
 
 /**
  * The Interface IProfissaoDAC.
@@ -44,5 +45,7 @@ public interface IProfissaoDAC
 	 * @return the internal results response< profissao>
 	 */
 	public InternalResultsResponse<Profissao> fetchProfissaoById(Integer id);
+
+	public InternalResultsResponse<Profissao> fetchProfissaoByRequest(ProfissaoInquiryRequest request);
 
 }

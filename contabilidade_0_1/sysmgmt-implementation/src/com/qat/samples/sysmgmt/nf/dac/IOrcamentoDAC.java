@@ -1,6 +1,5 @@
 package com.qat.samples.sysmgmt.nf.dac;
 
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
@@ -18,7 +17,7 @@ public interface IOrcamentoDAC
 	 * @param orcamento the orcamento
 	 * @return the internal results response< orcamento>
 	 */
-	public InternalResultsResponse<Orcamento> updateOrcamento(Orcamento orcamento, InternalResultsResponse<?> response);
+	public Integer updateOrcamento(Orcamento orcamento, InternalResultsResponse<?> response);
 
 	/**
 	 * Insert orcamento.
@@ -26,9 +25,8 @@ public interface IOrcamentoDAC
 	 * @param orcamento the orcamento
 	 * @return the internal results response< orcamento>
 	 */
-	public InternalResultsResponse<Orcamento> insertOrcamento(Orcamento orcamento, String statementName,
+	public Integer insertOrcamento(Orcamento orcamento, String statementName,
 			InternalResultsResponse<?> response);
-
 
 	/**
 	 * Delete orcamento.
@@ -36,7 +34,7 @@ public interface IOrcamentoDAC
 	 * @param orcamento the orcamento
 	 * @return the internal response
 	 */
-	public InternalResponse deleteOrcamento(Orcamento orcamento, InternalResultsResponse<?> response);
+	public Integer deleteOrcamento(Orcamento orcamento, InternalResultsResponse<?> response);
 
 	/**
 	 * Fetch orcamento by id.

@@ -2,6 +2,8 @@ package com.qat.samples.sysmgmt.pessoa.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.dp.HorarioFunc;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -30,5 +32,9 @@ public interface IHoraFuncDAC
 	 * @return the integer
 	 */
 	public Integer deleteHorarioFunc(HorarioFunc horarioFunc, InternalResultsResponse<?> response);
+
+	public InternalResultsResponse<HorarioFunc> fetchHorarioFuncById(FetchByIdRequest request);
+
+	public InternalResultsResponse<HorarioFunc> fetchHorarioFuncByRequest(PagedInquiryRequest request);
 
 }

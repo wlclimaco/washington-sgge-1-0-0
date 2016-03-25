@@ -1,6 +1,8 @@
 package com.qat.samples.sysmgmt.util.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.Email;
 
 /**
@@ -29,4 +31,8 @@ public interface IEmailDAC
 	 * @return the integer
 	 */
 	public Integer deleteEmail(Email email, InternalResultsResponse<?> response);
+
+	public InternalResultsResponse<Email> fetchEmailById(FetchByIdRequest request);
+
+	public InternalResultsResponse<Email> fetchEmailByRequest(PagedInquiryRequest request);
 }

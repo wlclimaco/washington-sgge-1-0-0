@@ -3,9 +3,7 @@ package com.qat.samples.sysmgmt.unittest.dac.mybatis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -23,43 +21,11 @@ import com.qat.framework.model.QATModel.PersistanceActionEnum;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.Status;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.banco.Banco;
-import com.qat.samples.sysmgmt.banco.BancoPessoa;
-import com.qat.samples.sysmgmt.cfop.Cfop;
-import com.qat.samples.sysmgmt.cfop.CfopPessoa;
-import com.qat.samples.sysmgmt.cfop.CfopTypeEnum;
-import com.qat.samples.sysmgmt.cnae.Cnae;
-import com.qat.samples.sysmgmt.cnae.CnaeEmpresa;
-import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
-import com.qat.samples.sysmgmt.contabilidade.Plano;
-import com.qat.samples.sysmgmt.entidade.Deposito;
-import com.qat.samples.sysmgmt.entidade.Empresa;
-import com.qat.samples.sysmgmt.entidade.EntidadeTypeEnum;
-import com.qat.samples.sysmgmt.entidade.Filial;
-import com.qat.samples.sysmgmt.entidade.Usuario;
-import com.qat.samples.sysmgmt.entidade.dac.IEmpresaDAC;
-import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
-import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.NotaFiscal;
-import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.NotaFiscalInquiryRequest;
-import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
-import com.qat.samples.sysmgmt.util.Cidade;
-import com.qat.samples.sysmgmt.util.Configuracao;
-import com.qat.samples.sysmgmt.util.Documento;
-import com.qat.samples.sysmgmt.util.DocumentoTypeEnum;
-import com.qat.samples.sysmgmt.util.Email;
-import com.qat.samples.sysmgmt.util.EmailTypeEnum;
-import com.qat.samples.sysmgmt.util.NotaFiscal;
-import com.qat.samples.sysmgmt.util.NotaFiscalTypeEnum;
-import com.qat.samples.sysmgmt.util.Note;
-import com.qat.samples.sysmgmt.util.Telefone;
-import com.qat.samples.sysmgmt.util.TelefoneTypeEnum;
-import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
+import com.qat.samples.sysmgmt.nf.dac.INotaFiscalDAC;
+import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
+import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
 
 @ContextConfiguration(locations = {
 		"classpath:com/qat/samples/sysmgmt/unittest/conf/unittest-datasource-txn-context.xml",
@@ -71,135 +37,136 @@ import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 public class NotaFiscalDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
-	
 	private static final Logger LOG = LoggerFactory.getLogger(NotaFiscalDACTest.class);
 	private INotaFiscalDAC notaFiscalDAC; // injected by Spring through setter @resource
 
 	// below
 
-	public INotaFiscalDAC getNotaFiscalDAC()
+	public INotaFiscalDAC getNotaFiscalSaidaDAC()
 	{
 		return notaFiscalDAC;
 	}
 
 	@Resource
-	public void setNotaFiscalDAC(INotaFiscalDAC notaFiscalDAC)
+	public void setNotaFiscalSaidaDAC(INotaFiscalDAC notaFiscalDAC)
 	{
 		this.notaFiscalDAC = notaFiscalDAC;
 	}
 
 	@Test
-	public void testupdateNotaFiscal() throws Exception
+	public void testupdateNotaFiscalSaida() throws Exception
 	{
 
-		NotaFiscal funcionario = new NotaFiscal();
-		funcionario = insertNotaFiscal(PersistanceActionEnum.INSERT);
-		InternalResultsResponse<NotaFiscal> response = new InternalResultsResponse<NotaFiscal>();
-		Integer a = getNotaFiscalDAC().insertNotaFiscal(funcionario,"", response);
-		
+		NotaFiscalSaida funcionario = new NotaFiscalSaida();
+		funcionario = insertNotaFiscalSaida(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<NotaFiscalSaida> response = new InternalResultsResponse<NotaFiscalSaida>();
+		response = getNotaFiscalSaidaDAC().insertNotaFiscalSaida(funcionario);
+
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
 		funcionario.setId(response.getFirstResult().getId());
-		response = new InternalResultsResponse<NotaFiscal>();
-		
-		a = getNotaFiscalDAC().updateNotaFiscal(funcionario, response);
+		response = new InternalResultsResponse<NotaFiscalSaida>();
+
+		response = getNotaFiscalSaidaDAC().updateNotaFiscalSaida(funcionario);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
 
 	@Test
-	public void testinsertNotaFiscal() throws Exception
+	public void testinsertNotaFiscalSaida() throws Exception
 	{
 
-		NotaFiscal funcionario = new NotaFiscal();
-		funcionario = insertNotaFiscal(PersistanceActionEnum.INSERT);
+		NotaFiscalSaida funcionario = new NotaFiscalSaida();
+		funcionario = insertNotaFiscalSaida(PersistanceActionEnum.INSERT);
 
-		InternalResultsResponse<NotaFiscal> response = new InternalResultsResponse<NotaFiscal>();
+		InternalResultsResponse<NotaFiscalSaida> response = new InternalResultsResponse<NotaFiscalSaida>();
 
-		Integer a = getNotaFiscalDAC().insertNotaFiscal(funcionario, "INSERT", response);
+		response = getNotaFiscalSaidaDAC().insertNotaFiscalSaida(funcionario);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		
-		
-		NotaFiscal funcionario = new NotaFiscal();
-		funcionario = insertNotaFiscal(PersistanceActionEnum.INSERT);
-		InternalResultsResponse<NotaFiscal> response = new InternalResultsResponse<NotaFiscal>();
 
-		Integer a = getNotaFiscalDAC().insertNotaFiscal(funcionario, response);
+		funcionario = new NotaFiscalSaida();
+		funcionario = insertNotaFiscalSaida(PersistanceActionEnum.INSERT);
+		response = new InternalResultsResponse<NotaFiscalSaida>();
+
+		response = getNotaFiscalSaidaDAC().insertNotaFiscalSaida(funcionario);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-	//	FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<NotaFiscal> responseA = getNotaFiscalDAC().fetchNotaFiscalById(response.getFirstResult().getId());
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<NotaFiscalSaida> responseA =
+				getNotaFiscalSaidaDAC().fetchNotaFiscalSaidaById(request);
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
 
-
 	}
 
 	@Test
-	public void testdeleteNotaFiscal() throws Exception
+	public void testdeleteNotaFiscalSaida() throws Exception
 	{
 
-		NotaFiscal funcionario = new NotaFiscal();
-		funcionario = insertNotaFiscal(PersistanceActionEnum.INSERT);
-		InternalResultsResponse<NotaFiscal> response = new InternalResultsResponse<NotaFiscal>();
-		Integer a = getNotaFiscalDAC().insertNotaFiscal(funcionario,response);
+		NotaFiscalSaida funcionario = new NotaFiscalSaida();
+		funcionario = insertNotaFiscalSaida(PersistanceActionEnum.INSERT);
+		InternalResultsResponse<NotaFiscalSaida> response = new InternalResultsResponse<NotaFiscalSaida>();
+		response = getNotaFiscalSaidaDAC().insertNotaFiscalSaida(funcionario);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
-		response = new InternalResultsResponse<NotaFiscal>();
+		response = new InternalResultsResponse<NotaFiscalSaida>();
+		InternalResponse internal = new InternalResponse();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getNotaFiscalDAC().deleteNotaFiscal(funcionario,response);
-		assertEquals(response.getStatus(), Status.OperationSuccess);
-		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getNotaFiscalDAC().fetchNotaFiscalById(response.getFirstResult().getId());
+		internal = getNotaFiscalSaidaDAC().deleteNotaFiscalSaida(funcionario);
+		assertEquals(internal.getStatus(), Status.OperationSuccess);
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<NotaFiscalSaida> responseA =
+				getNotaFiscalSaidaDAC().fetchNotaFiscalSaidaById(request);
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}
 
 	@Test
-	public void testfetchNotaFiscalById() throws Exception
+	public void testfetchNotaFiscalSaidaById() throws Exception
 	{
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
-		InternalResultsResponse<NotaFiscal> response = getNotaFiscalDAC().fetchNotaFiscalById(request);
+		InternalResultsResponse<NotaFiscalSaida> response = getNotaFiscalSaidaDAC().fetchNotaFiscalSaidaById(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testfetchNotaFiscalById2() throws Exception
+	public void testfetchNotaFiscalSaidaById2() throws Exception
 	{
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
-		InternalResultsResponse<NotaFiscal> response = getNotaFiscalDAC().fetchNotaFiscalById(1);
+		InternalResultsResponse<NotaFiscalSaida> response = getNotaFiscalSaidaDAC().fetchNotaFiscalSaidaById(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
 
 	@Test
-	public void testfetchNotaFiscalByRequest() throws Exception
+	public void testfetchNotaFiscalSaidaByRequest() throws Exception
 	{
 		// check for valid and precount
 		NotaFiscalInquiryRequest request = new NotaFiscalInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(4);
-		InternalResultsResponse<NotaFiscal> response = getNotaFiscalDAC().fetchNotaFiscalByRequest(request);
+		InternalResultsResponse<NotaFiscalSaida> response =
+				getNotaFiscalSaidaDAC().fetchNotaFiscalSaidaByRequest(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 4);
 		assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 	}
 
-	public NotaFiscal insertNotaFiscal(PersistanceActionEnum action)
+	public NotaFiscalSaida insertNotaFiscalSaida(PersistanceActionEnum action)
 	{
-		NotaFiscal exame = new NotaFiscal();
+		NotaFiscalSaida exame = new NotaFiscalSaida();
 		Date a = new Date();
 		exame.setId(1);
 		exame.setModelAction(action);
 		// exame.setNome("Nome");
-		// exame.setDataNotaFiscal((int)a.getTime());
+		// exame.setDataNotaFiscalSaida((int)a.getTime());
 		// exame.setMedicoResponsavel("Resposnsavel");
 		// exame.setLaboratorio("Laboratorio");
 

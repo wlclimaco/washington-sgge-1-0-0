@@ -1,6 +1,7 @@
 package com.qat.samples.sysmgmt.util.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.Note;
 
 /**
@@ -39,5 +40,7 @@ public interface INoteDAC
 	 * @return the internal results response< note>
 	 */
 	public Integer updateNote(Note note, InternalResultsResponse<?> response);
+
+	public InternalResultsResponse<Note> fetchNoteByRequest(PagedInquiryRequest request);
 
 }

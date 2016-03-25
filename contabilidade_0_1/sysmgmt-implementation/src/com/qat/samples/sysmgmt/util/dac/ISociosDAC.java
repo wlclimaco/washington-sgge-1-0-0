@@ -23,24 +23,6 @@ public interface ISociosDAC
 	public Integer insertSocio(Socio Socio, String statementName, InternalResultsResponse<?> response);
 
 	/**
-	 * Delete business Socio.
-	 * 
-	 * @param Socio the Socio
-	 * @param response the response
-	 * @return the integer
-	 */
-	public Integer deleteBusinessSocio(Socio Socio, InternalResultsResponse<?> response);
-
-	/**
-	 * Delete person Socio.
-	 * 
-	 * @param Socio the Socio
-	 * @param response the response
-	 * @return the integer
-	 */
-	public Integer deletePersonSocio(Socio Socio, InternalResultsResponse<?> response);
-
-	/**
 	 * Fetch Socio by id.
 	 * 
 	 * @param id the id
@@ -49,5 +31,7 @@ public interface ISociosDAC
 	public InternalResultsResponse<Socio> fetchSocioById(Integer id);
 
 	public InternalResultsResponse<Socio> fetchSocioByRequest(PagedInquiryRequest request);
+
+	public Integer deleteSocio(Socio funcionario, InternalResultsResponse<Socio> response);
 
 }

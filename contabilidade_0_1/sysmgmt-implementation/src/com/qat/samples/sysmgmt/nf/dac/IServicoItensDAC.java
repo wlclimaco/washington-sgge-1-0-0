@@ -1,6 +1,7 @@
 package com.qat.samples.sysmgmt.nf.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.nf.model.ServicoItens;
 
@@ -46,5 +47,7 @@ public interface IServicoItensDAC
 	 * @return the internal results response
 	 */
 	public InternalResultsResponse<ServicoItens> fetchServicoItensByRequest(PagedInquiryRequest request);
+
+	public InternalResultsResponse<ServicoItens> fetchServicoItensById(FetchByIdRequest request);
 
 }

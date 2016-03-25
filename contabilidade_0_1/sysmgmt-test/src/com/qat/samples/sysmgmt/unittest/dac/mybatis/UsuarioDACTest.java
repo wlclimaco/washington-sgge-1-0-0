@@ -3,9 +3,7 @@ package com.qat.samples.sysmgmt.unittest.dac.mybatis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -20,46 +18,13 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.qat.framework.model.QATModel.PersistanceActionEnum;
-import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.Status;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.banco.Banco;
-import com.qat.samples.sysmgmt.banco.BancoPessoa;
-import com.qat.samples.sysmgmt.cfop.Cfop;
-import com.qat.samples.sysmgmt.cfop.CfopPessoa;
-import com.qat.samples.sysmgmt.cfop.CfopTypeEnum;
-import com.qat.samples.sysmgmt.cnae.Cnae;
-import com.qat.samples.sysmgmt.cnae.CnaeEmpresa;
-import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
-import com.qat.samples.sysmgmt.contabilidade.Plano;
-import com.qat.samples.sysmgmt.entidade.Deposito;
-import com.qat.samples.sysmgmt.entidade.Empresa;
-import com.qat.samples.sysmgmt.entidade.EntidadeTypeEnum;
-import com.qat.samples.sysmgmt.entidade.Filial;
 import com.qat.samples.sysmgmt.entidade.Usuario;
-import com.qat.samples.sysmgmt.entidade.dac.IEmpresaDAC;
-import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
-import com.qat.samples.sysmgmt.estado.Estado;
-import com.qat.samples.sysmgmt.fiscal.Usuario;
-import com.qat.samples.sysmgmt.fiscal.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.request.UsuarioInquiryRequest;
-import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
-import com.qat.samples.sysmgmt.util.Cidade;
-import com.qat.samples.sysmgmt.util.Configuracao;
-import com.qat.samples.sysmgmt.util.Documento;
-import com.qat.samples.sysmgmt.util.DocumentoTypeEnum;
-import com.qat.samples.sysmgmt.util.Email;
-import com.qat.samples.sysmgmt.util.EmailTypeEnum;
-import com.qat.samples.sysmgmt.util.Usuario;
-import com.qat.samples.sysmgmt.util.UsuarioTypeEnum;
-import com.qat.samples.sysmgmt.util.Note;
-import com.qat.samples.sysmgmt.util.Telefone;
-import com.qat.samples.sysmgmt.util.TelefoneTypeEnum;
-import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.dac.IUsuarioDAC;
+import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
+import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
 
 @ContextConfiguration(locations = {
 		"classpath:com/qat/samples/sysmgmt/unittest/conf/unittest-datasource-txn-context.xml",
@@ -94,14 +59,14 @@ public class UsuarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		Usuario funcionario = new Usuario();
 		funcionario = insertUsuario(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Usuario> response = new InternalResultsResponse<Usuario>();
-		Integer a = getUsuarioDAC().insertUsuario(funcionario,"", response);
-		
+		Integer a = getUsuarioDAC().insertUsuario(funcionario, "", response);
+
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
 		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Usuario>();
-		
+
 		a = getUsuarioDAC().updateUsuario(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 
@@ -118,20 +83,19 @@ public class UsuarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 
 		Integer a = getUsuarioDAC().insertUsuario(funcionario, "INSERT", response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		
-		
-		Usuario funcionario = new Usuario();
-		funcionario = insertUsuario(PersistanceActionEnum.INSERT);
-		InternalResultsResponse<Usuario> response = new InternalResultsResponse<Usuario>();
 
-		Integer a = getUsuarioDAC().insertUsuario(funcionario, response);
+		funcionario = new Usuario();
+		funcionario = insertUsuario(PersistanceActionEnum.INSERT);
+		response = new InternalResultsResponse<Usuario>();
+
+		a = getUsuarioDAC().insertUsuario(funcionario, "", response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-	//	FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Usuario> responseA = getUsuarioDAC().fetchUsuarioById(response.getFirstResult().getId());
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Usuario> responseA =
+				getUsuarioDAC().fetchUsuarioById(request);
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
-
 
 	}
 
@@ -142,16 +106,17 @@ public class UsuarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		Usuario funcionario = new Usuario();
 		funcionario = insertUsuario(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Usuario> response = new InternalResultsResponse<Usuario>();
-		Integer a = getUsuarioDAC().insertUsuario(funcionario,response);
+		Integer a = getUsuarioDAC().insertUsuario(funcionario, "", response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Usuario>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getUsuarioDAC().deleteUsuario(funcionario,response);
+		Integer b = getUsuarioDAC().deleteUsuario(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getUsuarioDAC().fetchUsuarioById(response.getFirstResult().getId());
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Usuario> responseA =
+				getUsuarioDAC().fetchUsuarioById(request);
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}
@@ -173,7 +138,7 @@ public class UsuarioDACTest extends AbstractTransactionalJUnit4SpringContextTest
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
-		InternalResultsResponse<Usuario> response = getUsuarioDAC().fetchUsuarioById(1);
+		InternalResultsResponse<Usuario> response = getUsuarioDAC().fetchUsuarioById(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}

@@ -1,6 +1,7 @@
 package com.qat.samples.sysmgmt.produto.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.Grupo;
 import com.qat.samples.sysmgmt.produto.model.GrupoProd;
@@ -42,10 +43,10 @@ public interface IGrupoDAC
 	/**
 	 * Fetch uni med by id.
 	 * 
-	 * @param id the id
+	 * @param request the id
 	 * @return the internal results response
 	 */
-	public InternalResultsResponse<Grupo> fetchGrupoById(Integer id);
+	public InternalResultsResponse<Grupo> fetchGrupoById(FetchByIdRequest request);
 
 	/**
 	 * Fetch uni med by request.

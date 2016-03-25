@@ -1,6 +1,7 @@
 package com.qat.samples.sysmgmt.produto.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.Porcao;
 
 /**
@@ -44,5 +45,7 @@ public interface IPorcaoDAC
 	 * @return the internal results response< porcao>
 	 */
 	public InternalResultsResponse<Porcao> fetchPorcaoById(Integer id);
+
+	public InternalResultsResponse<Porcao> fetchPorcaoByRequest(PagedInquiryRequest request);
 
 }

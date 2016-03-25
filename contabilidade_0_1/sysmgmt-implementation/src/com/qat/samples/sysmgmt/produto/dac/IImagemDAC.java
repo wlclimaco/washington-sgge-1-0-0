@@ -1,6 +1,7 @@
 package com.qat.samples.sysmgmt.produto.dac;
 
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.Imagem;
 
 /**
@@ -44,5 +45,7 @@ public interface IImagemDAC
 	 * @return the internal results response< imagem>
 	 */
 	public InternalResultsResponse<Imagem> fetchImagemById(Integer id);
+
+	public InternalResultsResponse<Imagem> fetchImagemByRequest(PagedInquiryRequest request);
 
 }

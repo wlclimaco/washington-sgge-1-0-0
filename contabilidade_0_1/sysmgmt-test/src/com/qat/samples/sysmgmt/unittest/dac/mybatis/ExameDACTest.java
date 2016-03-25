@@ -24,6 +24,7 @@ import com.qat.samples.sysmgmt.clinica.Exame;
 import com.qat.samples.sysmgmt.clinica.model.request.ExameInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.pessoa.dac.IExameDAC;
+import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
 
 @ContextConfiguration(locations = {
 		"classpath:com/qat/samples/sysmgmt/unittest/conf/unittest-datasource-txn-context.xml",
@@ -58,14 +59,14 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Exame funcionario = new Exame();
 		funcionario = insertExame(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Exame> response = new InternalResultsResponse<Exame>();
-		Integer a = getExameDAC().insertExame(funcionario,"", response);
-		
+		Integer a = getExameDAC().insertExame(funcionario, "", response);
+
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
 		funcionario.setId(response.getFirstResult().getId());
 		response = new InternalResultsResponse<Exame>();
-		
+
 		a = getExameDAC().updateExame(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 
@@ -82,20 +83,18 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 
 		Integer a = getExameDAC().insertExame(funcionario, "INSERT", response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		
-		
-		Exame funcionario = new Exame();
-		funcionario = insertExame(PersistanceActionEnum.INSERT);
-		InternalResultsResponse<Exame> response = new InternalResultsResponse<Exame>();
 
-		Integer a = getExameDAC().insertExame(funcionario, response);
+		funcionario = new Exame();
+		funcionario = insertExame(PersistanceActionEnum.INSERT);
+		response = new InternalResultsResponse<Exame>();
+
+		a = getExameDAC().insertExame(funcionario, "", response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-	//	FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Exame> responseA = getExameDAC().fetchExameById(response.getFirstResult().getId());
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Exame> responseA = getExameDAC().fetchExameById(request);
 		assertTrue(responseA.getResultsList().size() == 1);
 		assertEquals(responseA.getStatus(), Status.OperationSuccess);
-
 
 	}
 
@@ -106,16 +105,17 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Exame funcionario = new Exame();
 		funcionario = insertExame(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Exame> response = new InternalResultsResponse<Exame>();
-		Integer a = getExameDAC().insertExame(funcionario,response);
+		Integer a = getExameDAC().insertExame(funcionario, "", response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 		funcionario = response.getFirstResult();
 		response = new InternalResultsResponse<Exame>();
 		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getExameDAC().deleteExame(funcionario,response);
+		Integer b = getExameDAC().deleteExame(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		//FetchByIdRequest request = new FetchByIdRequest();
-	//	request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Classicacao> responseA = getExameDAC().fetchExameById(response.getFirstResult().getId());
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(response.getFirstResult().getId());
+		InternalResultsResponse<Exame> responseA =
+				getExameDAC().fetchExameById(request);
 		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}
@@ -137,7 +137,7 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(3);
-		InternalResultsResponse<Exame> response = getExameDAC().fetchExameById(1);
+		InternalResultsResponse<Exame> response = getExameDAC().fetchExameById(request);
 		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
