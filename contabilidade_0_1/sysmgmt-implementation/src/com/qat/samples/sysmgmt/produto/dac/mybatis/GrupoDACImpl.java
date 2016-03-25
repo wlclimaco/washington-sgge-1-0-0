@@ -7,6 +7,7 @@ import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.dac.IGrupoDAC;
 import com.qat.samples.sysmgmt.produto.model.Grupo;
@@ -103,20 +104,6 @@ public class GrupoDACImpl extends SqlSessionDaoSupport implements IGrupoDAC
 		return updateCount;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#fetchGrupoById(java.lang.Integer)
-	 */
-	@Override
-	public InternalResultsResponse<Grupo> fetchGrupoById(Integer id)
-	{
-		InternalResultsResponse<Grupo> response = new InternalResultsResponse<Grupo>();
-
-		QATMyBatisDacHelper.doQueryForList(getSqlSession(), UNIMED_STMT_FETCH_BY_ID, id, response);
-
-		return response;
-	}
-
 	@Override
 	public Integer deleteGrupoProd(GrupoProd grupo, InternalResultsResponse<?> response)
 	{
@@ -169,6 +156,16 @@ public class GrupoDACImpl extends SqlSessionDaoSupport implements IGrupoDAC
 	{
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Grupo> fetchGrupoById(FetchByIdRequest request)
+	{
+		InternalResultsResponse<Grupo> response = new InternalResultsResponse<Grupo>();
+
+		QATMyBatisDacHelper.doQueryForList(getSqlSession(), UNIMED_STMT_FETCH_BY_ID, request, response);
+
+		return response;
 	}
 
 }

@@ -8,6 +8,8 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.dp.Salario;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.dac.ISalariosDAC;
 
 /**
@@ -126,6 +128,20 @@ public class SalarioDACImpl extends SqlSessionDaoSupport implements ISalariosDAC
 		}
 
 		return updateCount;
+	}
+
+	@Override
+	public InternalResultsResponse<Salario> fetchSalarioById(FetchByIdRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Salario> fetchSalarioByRequest(PagedInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/*

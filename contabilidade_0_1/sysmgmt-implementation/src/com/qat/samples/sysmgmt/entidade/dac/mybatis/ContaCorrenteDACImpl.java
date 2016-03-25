@@ -7,6 +7,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.conta.ContaCorrente;
 import com.qat.samples.sysmgmt.entidade.dac.IContaCorrenteDAC;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -214,6 +215,13 @@ public class ContaCorrenteDACImpl extends SqlSessionDaoSupport implements IConta
 
 	@Override
 	public InternalResultsResponse<ContaCorrente> fetchContaCorrenteById(Integer id)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<ContaCorrente> fetchContaCorrenteByRequest(PagedInquiryRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;

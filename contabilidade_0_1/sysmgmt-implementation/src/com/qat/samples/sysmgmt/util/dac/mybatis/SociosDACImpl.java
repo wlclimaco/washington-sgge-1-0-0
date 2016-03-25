@@ -55,28 +55,6 @@ public class SociosDACImpl extends SqlSessionDaoSupport implements ISociosDAC
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ISocioDAC#deleteBusinessSocio(com.prosperitasglobal.cbof.model.Socio,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer deleteBusinessSocio(Socio cnae, InternalResultsResponse<?> response)
-	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, cnae, response);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ISocioDAC#deletePersonSocio(com.prosperitasglobal.cbof.model.Socio,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer deletePersonSocio(Socio cnae, InternalResultsResponse<?> response)
-	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_PERSON_CONTACT, cnae, response);
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see
 	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateSocio(com.prosperitasglobal.cbof.model.Socio,
 	 * com.qat.framework.model.response.InternalResultsResponse)
@@ -113,6 +91,13 @@ public class SociosDACImpl extends SqlSessionDaoSupport implements ISociosDAC
 
 	@Override
 	public InternalResultsResponse<Socio> fetchSocioByRequest(PagedInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer deleteSocio(Socio funcionario, InternalResultsResponse<Socio> response)
 	{
 		// TODO Auto-generated method stub
 		return null;

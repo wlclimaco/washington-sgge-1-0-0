@@ -10,6 +10,7 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.nf.dac.INFStatusDAC;
 import com.qat.samples.sysmgmt.nf.model.NFStatus;
@@ -170,5 +171,12 @@ public class NFStatusDACImpl extends SqlSessionDaoSupport implements INFStatusDA
 			}
 		}
 		return count;
+	}
+
+	@Override
+	public InternalResultsResponse<NFStatus> fetchNFStatusById(FetchByIdRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

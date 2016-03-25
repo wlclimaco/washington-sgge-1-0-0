@@ -7,6 +7,8 @@ import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.Email;
 import com.qat.samples.sysmgmt.util.dac.IEmailDAC;
 
@@ -87,6 +89,20 @@ public class EmailDACImpl extends SqlSessionDaoSupport implements IEmailDAC
 		}
 
 		return updateCount;
+	}
+
+	@Override
+	public InternalResultsResponse<Email> fetchEmailById(FetchByIdRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Email> fetchEmailByRequest(PagedInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

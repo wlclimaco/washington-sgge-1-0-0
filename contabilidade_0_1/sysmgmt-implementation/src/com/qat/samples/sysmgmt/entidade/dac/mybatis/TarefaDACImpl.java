@@ -1,13 +1,12 @@
 package com.qat.samples.sysmgmt.entidade.dac.mybatis;
 
-import java.util.List;
-
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.LoggerFactory;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.samples.sysmgmt.entidade.dac.ITarefaDAC;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.Tarefa;
 
 /**
@@ -192,15 +191,14 @@ public class TarefaDACImpl extends SqlSessionDaoSupport implements ITarefaDAC
 	}
 
 	@Override
-	public Integer maintainTarefaAssociations(List<Tarefa> tarefaList, Integer parentId, String associateStatement,
-			InternalResultsResponse<?> response)
+	public Integer updateTarefa(Tarefa tarefa, InternalResultsResponse<?> response)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Integer updateTarefa(Tarefa tarefa, InternalResultsResponse<?> response)
+	public InternalResultsResponse<Tarefa> fetchTarefaByRequest(PagedInquiryRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;

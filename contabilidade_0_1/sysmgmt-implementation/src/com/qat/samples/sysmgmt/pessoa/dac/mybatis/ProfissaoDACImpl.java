@@ -10,6 +10,7 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.dp.Profissao;
+import com.qat.samples.sysmgmt.dp.model.request.ProfissaoInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.dac.IProfissaoDAC;
 
 /**
@@ -144,6 +145,13 @@ public class ProfissaoDACImpl extends SqlSessionDaoSupport implements IProfissao
 
 	@Override
 	public InternalResultsResponse<Profissao> fetchProfissaoById(Integer id)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Profissao> fetchProfissaoByRequest(ProfissaoInquiryRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;

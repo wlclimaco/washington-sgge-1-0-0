@@ -43,7 +43,7 @@ public class OrcamentoBACImpl implements IOrcamentoBAC
 	{
 		InternalResultsResponse<Orcamento> response = new InternalResultsResponse<Orcamento>();
 
-		response = getOrcamentoDAC().insertOrcamento(request.getOrcamento(), null, null);
+		Integer a = getOrcamentoDAC().insertOrcamento(request.getOrcamento(), null, response);
 
 		return response;
 	}
@@ -57,22 +57,9 @@ public class OrcamentoBACImpl implements IOrcamentoBAC
 	{
 		InternalResultsResponse<Orcamento> response = new InternalResultsResponse<Orcamento>();
 
-		response = getOrcamentoDAC().updateOrcamento(request.getOrcamento(), null);
+		Integer a = getOrcamentoDAC().updateOrcamento(request.getOrcamento(), response);
 
 		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.prosperitasglobal.sendsolv.bac.IOrcamentoBAC#deleteOrcamento
-	 * (com.prosperitasglobal.sendsolv.model.request.OrcamentoRequest
-	 * )
-	 */
-	@Override
-	public InternalResponse deleteOrcamento(OrcamentoMaintenanceRequest request)
-	{
-		return getOrcamentoDAC().deleteOrcamento(request.getOrcamento(), null);
 	}
 
 	/*
@@ -95,5 +82,12 @@ public class OrcamentoBACImpl implements IOrcamentoBAC
 	public InternalResultsResponse<Orcamento> fetchOrcamentoByRequest(OrcamentoInquiryRequest request)
 	{
 		return getOrcamentoDAC().fetchOrcamentoByRequest(request);
+	}
+
+	@Override
+	public InternalResponse deleteOrcamento(OrcamentoMaintenanceRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

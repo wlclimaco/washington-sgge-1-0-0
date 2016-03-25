@@ -89,29 +89,6 @@ public class TelefoneDACImpl extends SqlSessionDaoSupport implements ITelefoneDA
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.prosperitasglobal.cbof.dac.ITelefoneDAC#deleteBusinessTelefone(com.prosperitasglobal.cbof.model.Telefone,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer deleteBusinessTelefone(Telefone cnae, InternalResultsResponse<?> response)
-	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, cnae, response);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.prosperitasglobal.cbof.dac.ITelefoneDAC#deletePersonTelefone(com.prosperitasglobal.cbof.model.Telefone,
-	 * com.qat.framework.model.response.InternalResultsResponse)
-	 */
-	@Override
-	public Integer deletePersonTelefone(Telefone cnae, InternalResultsResponse<?> response)
-	{
-		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_PERSON_CONTACT, cnae, response);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
 	 * com.prosperitasglobal.cbof.dac.ICommonBusinessObjectsDAC#updateTelefone(com.prosperitasglobal.cbof.model.Telefone,
 	 * com.qat.framework.model.response.InternalResultsResponse)
 	 */
@@ -147,6 +124,13 @@ public class TelefoneDACImpl extends SqlSessionDaoSupport implements ITelefoneDA
 
 	@Override
 	public InternalResultsResponse<Telefone> fetchTelefoneByRequest(PagedInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer deleteTelefone(Telefone funcionario, InternalResultsResponse<Telefone> response)
 	{
 		// TODO Auto-generated method stub
 		return null;

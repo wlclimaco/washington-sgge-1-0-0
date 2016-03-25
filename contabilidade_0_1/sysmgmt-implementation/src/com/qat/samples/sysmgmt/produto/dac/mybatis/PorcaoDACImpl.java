@@ -9,6 +9,7 @@ import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.dac.IPorcaoDAC;
 import com.qat.samples.sysmgmt.produto.model.Porcao;
 
@@ -144,6 +145,13 @@ public class PorcaoDACImpl extends SqlSessionDaoSupport implements IPorcaoDAC
 
 	@Override
 	public InternalResultsResponse<Porcao> fetchPorcaoById(Integer id)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Porcao> fetchPorcaoByRequest(PagedInquiryRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;

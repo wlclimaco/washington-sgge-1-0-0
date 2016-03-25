@@ -9,9 +9,10 @@ import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.dac.IServicoDAC;
 import com.qat.samples.sysmgmt.produto.model.PlanoByServico;
-import com.qat.samples.sysmgmt.produto.model.Servico;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
 
 /**
  * The Class CommonBusinessObjectsDACImpl.
@@ -143,7 +144,14 @@ public class ServicoDACImpl extends SqlSessionDaoSupport implements IServicoDAC
 	}
 
 	@Override
-	public InternalResultsResponse<Servico> fetchServicoById(Integer id)
+	public InternalResultsResponse<PlanoByServico> fetchServicoById(FetchByIdRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<PlanoByServico> fetchServicoByRequest(ServicoInquiryRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;

@@ -9,6 +9,7 @@ import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.dac.IEstoqueDAC;
 import com.qat.samples.sysmgmt.produto.model.Estoque;
 
@@ -171,5 +172,12 @@ public class EstoqueDACImpl extends SqlSessionDaoSupport implements IEstoqueDAC
 	public Integer deleteEstoque(Estoque estoque, InternalResultsResponse<?> response)
 	{
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, estoque, response);
+	}
+
+	@Override
+	public InternalResultsResponse<Estoque> fetchEstoqueByRequest(PagedInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

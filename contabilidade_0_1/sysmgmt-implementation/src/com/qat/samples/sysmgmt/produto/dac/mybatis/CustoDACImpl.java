@@ -9,6 +9,7 @@ import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.dac.ICustoDAC;
 import com.qat.samples.sysmgmt.produto.model.Custo;
 
@@ -135,5 +136,12 @@ public class CustoDACImpl extends SqlSessionDaoSupport implements ICustoDAC
 	public Integer deleteCusto(Custo custo, InternalResultsResponse<?> response)
 	{
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, custo, response);
+	}
+
+	@Override
+	public InternalResultsResponse<Custo> fetchCustoByRequest(PagedInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

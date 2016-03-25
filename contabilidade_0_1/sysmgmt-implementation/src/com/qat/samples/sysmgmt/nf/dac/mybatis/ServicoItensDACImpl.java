@@ -10,6 +10,7 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.nf.dac.IServicoItensDAC;
 import com.qat.samples.sysmgmt.nf.model.ServicoItens;
@@ -171,5 +172,12 @@ public class ServicoItensDACImpl extends SqlSessionDaoSupport implements IServic
 			}
 		}
 		return count;
+	}
+
+	@Override
+	public InternalResultsResponse<ServicoItens> fetchServicoItensById(FetchByIdRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -12,6 +12,7 @@ import com.qat.samples.sysmgmt.alerta.model.request.AlertasInquiryRequest;
 import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
 import com.qat.samples.sysmgmt.historico.model.Historico;
 import com.qat.samples.sysmgmt.historico.model.HistoricoItens;
+import com.qat.samples.sysmgmt.historico.model.request.HistoricoInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.dac.IHistoricoDAC;
 
@@ -138,6 +139,13 @@ public class HistoricoDACImpl extends SqlSessionDaoSupport implements IHistorico
 		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "HistoricoMap.fetchAlertasRowCount",
 				"HistoricoMap.fetchAllAlertasByRequest", response);
 		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Historico> fetchHistoricoByRequest(HistoricoInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

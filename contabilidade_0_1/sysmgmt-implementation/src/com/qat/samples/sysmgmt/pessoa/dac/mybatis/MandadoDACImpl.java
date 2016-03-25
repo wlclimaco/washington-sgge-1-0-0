@@ -10,6 +10,8 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.condominio.model.Mandado;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.dac.IMandadoDAC;
 
 /**
@@ -134,6 +136,20 @@ public class MandadoDACImpl extends SqlSessionDaoSupport implements IMandadoDAC
 			}
 		}
 		return count;
+	}
+
+	@Override
+	public InternalResultsResponse<Mandado> fetchMandadoById(FetchByIdRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Mandado> fetchMandadoByRequest(PagedInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

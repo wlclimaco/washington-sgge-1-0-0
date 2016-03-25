@@ -9,6 +9,7 @@ import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.dp.EventoPessoa;
 import com.qat.samples.sysmgmt.dp.Eventos;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.dac.IEventosDAC;
 
@@ -150,6 +151,13 @@ public class EventosDACImpl extends SqlSessionDaoSupport implements IEventosDAC
 		{
 			return 1;
 		}
+	}
+
+	@Override
+	public InternalResultsResponse<Eventos> fetchEventosById(FetchByIdRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

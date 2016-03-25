@@ -10,6 +10,7 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.contato.Contato;
+import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.dac.IContatoDAC;
 
 /**
@@ -135,5 +136,12 @@ public class ContatoDACImpl extends SqlSessionDaoSupport implements IContatoDAC
 	public Integer deleteContato(Contato contato, InternalResultsResponse<?> response)
 	{
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), CONTACT_STMT_DELETE_BUSINESS_CONTACT, contato, response);
+	}
+
+	@Override
+	public InternalResultsResponse<Contato> fetchContatoByRequest(ContatoInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

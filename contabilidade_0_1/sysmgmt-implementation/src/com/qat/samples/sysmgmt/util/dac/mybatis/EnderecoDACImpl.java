@@ -8,6 +8,8 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.dac.IEnderecoDAC;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.Endereco;
 
 /**
@@ -80,6 +82,20 @@ public class EnderecoDACImpl extends SqlSessionDaoSupport implements IEnderecoDA
 		}
 
 		return updateCount;
+	}
+
+	@Override
+	public InternalResultsResponse<Endereco> fetchEnderecoById(FetchByIdRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Endereco> fetchEnderecoByRequest(PagedInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

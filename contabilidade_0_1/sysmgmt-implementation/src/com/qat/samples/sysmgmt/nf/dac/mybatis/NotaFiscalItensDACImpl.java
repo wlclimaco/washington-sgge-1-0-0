@@ -10,6 +10,7 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.nf.dac.INotaFiscalItensDAC;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscalItens;
@@ -165,5 +166,12 @@ public class NotaFiscalItensDACImpl extends SqlSessionDaoSupport implements INot
 			}
 		}
 		return count;
+	}
+
+	@Override
+	public InternalResultsResponse<NotaFiscalItens> fetchNotaFiscalItensById(FetchByIdRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

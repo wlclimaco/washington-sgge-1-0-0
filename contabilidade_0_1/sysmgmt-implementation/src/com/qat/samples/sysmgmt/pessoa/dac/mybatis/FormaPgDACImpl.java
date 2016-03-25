@@ -10,6 +10,7 @@ import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.condpag.FormaPg;
 import com.qat.samples.sysmgmt.condpag.FormaPgPessoa;
 import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.dac.IFormaPagamentoDAC;
 
@@ -89,14 +90,6 @@ public class FormaPgDACImpl extends SqlSessionDaoSupport implements IFormaPagame
 	}
 
 	@Override
-	public InternalResultsResponse<FormaPg> fetchFormaPgById(Integer id)
-	{
-		InternalResultsResponse<FormaPg> response = new InternalResultsResponse<FormaPg>();
-		QATMyBatisDacHelper.doQueryForList(getSqlSession(), FORMAPG_STMT_FETCH_BY_ID, id, response);
-		return response;
-	}
-
-	@Override
 	public InternalResultsResponse<FormaPg> fetchFormaPgByRequest(PagedInquiryRequest request)
 	{
 		InternalResultsResponse<FormaPg> response = new InternalResultsResponse<FormaPg>();
@@ -148,6 +141,14 @@ public class FormaPgDACImpl extends SqlSessionDaoSupport implements IFormaPagame
 	public Integer deleteFormaPgPessoa(FormaPgPessoa formaPg, InternalResultsResponse<?> response)
 	{
 		return QATMyBatisDacHelper.doRemove(getSqlSession(), FORMAPG_PESSOA_STMT_DELETE, formaPg, response);
+	}
+
+	@Override
+	public InternalResultsResponse<FormaPg> fetchFormaPgById(FetchByIdRequest request)
+	{
+		InternalResultsResponse<FormaPg> response = new InternalResultsResponse<FormaPg>();
+		QATMyBatisDacHelper.doQueryForList(getSqlSession(), FORMAPG_STMT_FETCH_BY_ID, request, response);
+		return response;
 	}
 
 }

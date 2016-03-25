@@ -9,6 +9,7 @@ import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.Documento;
 import com.qat.samples.sysmgmt.util.dac.IDocumentoDAC;
 
@@ -200,5 +201,19 @@ public class DocumentoDACImpl extends SqlSessionDaoSupport implements IDocumento
 			}
 		}
 		return count;
+	}
+
+	@Override
+	public Integer deleteDocumento(Documento funcionario, InternalResultsResponse<Documento> response)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Documento> fetchDocumentoByRequest(PagedInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

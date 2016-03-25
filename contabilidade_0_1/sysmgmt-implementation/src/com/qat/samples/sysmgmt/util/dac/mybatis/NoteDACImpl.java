@@ -8,6 +8,7 @@ import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.Note;
 import com.qat.samples.sysmgmt.util.dac.INoteDAC;
 
@@ -140,6 +141,13 @@ public class NoteDACImpl extends SqlSessionDaoSupport implements INoteDAC
 		{
 			return 1;
 		}
+	}
+
+	@Override
+	public InternalResultsResponse<Note> fetchNoteByRequest(PagedInquiryRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

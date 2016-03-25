@@ -11,6 +11,8 @@ import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.banco.Banco;
 import com.qat.samples.sysmgmt.dp.HorarioFunc;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.dac.IHoraFuncDAC;
 
 /**
@@ -165,6 +167,20 @@ public class HoraFuncDACImpl extends SqlSessionDaoSupport implements IHoraFuncDA
 
 	@Override
 	public Integer deleteHorarioFunc(HorarioFunc horarioFunc, InternalResultsResponse<?> response)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<HorarioFunc> fetchHorarioFuncById(FetchByIdRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<HorarioFunc> fetchHorarioFuncByRequest(PagedInquiryRequest request)
 	{
 		// TODO Auto-generated method stub
 		return null;

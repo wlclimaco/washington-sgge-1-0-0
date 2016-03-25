@@ -12,6 +12,7 @@ import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.beneficios.BeneficioPessoa;
 import com.qat.samples.sysmgmt.beneficios.Beneficios;
 import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
+import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.dac.IBeneficiosDAC;
 
@@ -213,6 +214,13 @@ public class BeneficiosDACImpl extends SqlSessionDaoSupport implements IBenefici
 		{
 			return 1;
 		}
+	}
+
+	@Override
+	public InternalResultsResponse<Beneficios> fetchBeneficiosById(FetchByIdRequest request)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

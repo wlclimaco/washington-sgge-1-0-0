@@ -33,10 +33,10 @@ import com.qat.samples.sysmgmt.util.dac.INoteDAC;
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 @Transactional
 @ActiveProfiles("postgres")
-public class NoteDACTest extends AbstractTransactionalJUnit4SpringContextTests
+public class NotesDACTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 
-	private static final Logger LOG = LoggerFactory.getLogger(NoteDACTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(NotesDACTest.class);
 	private INoteDAC noteDAC; // injected by Spring through setter @resource
 
 	// below
