@@ -2379,7 +2379,7 @@
 
 			var _getStaticURL = function ()
 			{
-				return "/" + qat.settings.serviceType.toLowerCase() + "/";
+				return "/"
 			};
 
 			var _activeMenu = function ($menu, $item)
@@ -2442,6 +2442,7 @@
 			 */
 			var _currentPage = function (sCurrentPage)
 			{
+
 				if(_util.isNullOrUndefined(sCurrentPage))
 				{
 					if($.address.path() === _getStaticURL())
@@ -2450,8 +2451,11 @@
 					}
 					return $.address.path().split(_getStaticURL())[1];
 				}
+				a = sCurrentPage;
+				b = a.split('/')
+				console.log(b[b.length - 1])
 
-				$.address.value(_getStaticURL() + sCurrentPage);
+				$.address.value(_getStaticURL() + b[b.length - 1]);
 			};
 
 			var _load = function (oLoadConfig)
@@ -2678,7 +2682,7 @@
 				}
 
 				var _titlePrefix		= _locale.get(_oConfig.pageLoader.qatLabel);
-				var _titleService		= _locale.get(_oConfig.pageLoader.serviceLabel + qat.settings.serviceType.toLowerCase());
+				var _titleService		= _locale.get(_oConfig.pageLoader.serviceLabel + qat.settings.serviceType);
 				var _titleSeparator		= " - ";
 
 				$.address.title([_titlePrefix, _titleService, currentPage].join(_titleSeparator));

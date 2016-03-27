@@ -3781,3 +3781,19 @@ ALTER TABLE cfopPessoa
   OWNER TO postgres;
 
 /* ---------------------------------------------------------------*/
+CREATE TABLE user_roles
+(
+  id integer NOT NULL DEFAULT nextval('usuario_id_seq'::regclass),
+  login character varying(200),
+  role character varying(200),
+  create_date bigint,
+  create_user character varying(50),
+  modify_date bigint,
+  modify_user character varying(50),
+  CONSTRAINT user_roleskey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE user_roles
+  OWNER TO postgres;

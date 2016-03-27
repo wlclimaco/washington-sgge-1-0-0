@@ -24,6 +24,9 @@
 	</mvc:annotation-driven>
 
 	<!--  Maps directly to JSP pages-->
+	<!-- Maps directly to JSP pages -->
+	<mvc:view-controller path="/login" view-name="../login" />
+	<mvc:view-controller path="/" view-name="redirect:/login" />
 	<mvc:view-controller path="/index" view-name="/index"/>
 	<mvc:view-controller path="/wd_main" view-name="/wd_main"/>
 	<mvc:view-controller path="/wd_main.m" view-name="/wd_main.m"/>
@@ -36,7 +39,6 @@
 	<mvc:view-controller path="/wd_other_tabs" view-name="/wd_other_tabs"/>
 	<mvc:view-controller path="/counties_bas_rest" view-name="/counties_bas_rest"/>
 	<mvc:view-controller path="/stocks" view-name="/stocks"/>
-	<mvc:view-controller path="/" view-name="redirect:/index"/>
 
 	<!--  Static Content to bypass dispatcher-->
 	<mvc:resources mapping="/training/**" location="/training/"/>
@@ -61,6 +63,10 @@
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/pages/"/>
         <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean id="uiSettings" class="java.lang.String">
+    	<constructor-arg type="String" value="/WEB-INF/classes/qat-sysmgmt-system-configuration.properties"/>
     </bean>
 
 </beans>

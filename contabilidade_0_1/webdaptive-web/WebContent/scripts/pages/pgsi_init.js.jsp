@@ -1,7 +1,7 @@
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt' %>
 <script type="text/javascript">
 
-	head.ready("pgsi_main.js", function() {
+//	head.ready("pgsi_main.js", function() {
 
 		$(document).ready(function()
 		{
@@ -17,6 +17,6 @@
 
 			pgsi.pages.sendsolv.init(oSettingsResponse);
 		});
-	});
+//	});
 
 </script>

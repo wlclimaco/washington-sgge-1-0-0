@@ -117,12 +117,12 @@
   <select id="fetchExameById" parameterType="FetchByIdRequest" resultMap="exameResult">
 	SELECT
 		<include refid="allExameColumns" />
-        FROM exame b
-     WHERE 1=1
+        FROM exame
+     WHERE id = #{fetchId}
 
   </select>
 
-  <select id="fetchAllExameByRequest" parameterType="ExameInquiryRequest" resultMap="exameResult">
+  <select id="fetchAllExamesByRequest" parameterType="ExameInquiryRequest" resultMap="exameResult">
 	   SELECT * FROM
     			(
     				SELECT

@@ -77,10 +77,10 @@ public class ExameDACImpl extends SqlSessionDaoSupport implements IExameDAC
 	 * .Exame)
 	 */
 	@Override
-	public Integer insertExame(Exame banco, String string, InternalResultsResponse<?> response)
+	public Integer insertExame(Exame banco, String string, InternalResultsResponse<?> response1)
 	{
 		Integer insertCount = 0;
-		response = new InternalResultsResponse<Exame>();
+		InternalResultsResponse<Exame> response = new InternalResultsResponse<Exame>();
 
 		// First insert the root
 		// Is successful the unique-id will be populated back into the object.
@@ -92,11 +92,11 @@ public class ExameDACImpl extends SqlSessionDaoSupport implements IExameDAC
 		}
 
 		// Finally, if something was inserted then add the Exame to the result.
-		// if (insertCount > 0)
-		// {
-		// response.addResult(banco);
-		// }
-
+		if (insertCount > 0)
+		{
+			response.addResult(banco);
+		}
+		response1 = response;
 		return insertCount;
 	}
 

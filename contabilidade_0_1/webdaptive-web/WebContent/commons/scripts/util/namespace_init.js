@@ -17,6 +17,7 @@ var qat = {
 		}
 	},
 	pages :{
+		wd : {},
 		servico : {},
 		plano : {},
 		entidade : {

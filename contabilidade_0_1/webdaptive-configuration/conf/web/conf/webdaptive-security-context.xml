@@ -12,18 +12,21 @@
 	<sec:http pattern="/timeout.jsp*" security="none" />
 	<sec:http auto-config="true" use-expressions="true">
 		<sec:intercept-url pattern="/**/**"/>
-		<sec:form-login login-page="/index.jsp?Please Login."
-			authentication-failure-url="/index.jsp?Login failed!"
-			always-use-default-target="true" default-target-url="/pages/wd_main.jsp" />
-		<sec:logout invalidate-session="false" logout-success-url="/timeout.jsp?Successful Logout." />
-		<sec:access-denied-handler error-page="/timeout.jsp" />
-		<sec:session-management invalid-session-url="/timeout.jsp?Invalid Session.">
-			<sec:concurrency-control max-sessions="1"
+		<sec:form-login login-page="/login.jsp?Please Login." username-parameter="j_username"
+       password-parameter="j_password"
+			authentication-failure-url="/login.jsp?Login Failed."
+			default-target-url="/main"
+			always-use-default-target="true" />
+		<sec:logout invalidate-session="false" logout-success-url="/login.jsp?Successful Logout." />
+		<sec:access-denied-handler error-page="/login.jsp?Access Denied." />
+		<sec:session-management invalid-session-url="/login.jsp?Access Denied.">
+			<sec:concurrency-control max-sessions="5"
 				error-if-maximum-exceeded="true" />
 		</sec:session-management>
 	</sec:http>
 
-	<!-- Usernames/Passwords are rod/koala dianne/emu scott/wombat peter/opal  -->
+
+<!-- Usernames/Passwords are rod/koala dianne/emu scott/wombat peter/opal  -->
 	<sec:authentication-manager erase-credentials="false">
 		<sec:authentication-provider>
 			<sec:user-service>
@@ -31,7 +34,6 @@
 				<sec:user name="washington" password="koala" authorities="ROLE_DOMAIN ADMINS" />
 				<sec:user name="kessius" password="kessius123" authorities="ROLE_DOMAIN ADMINS" />
 				<sec:user name="cesar" password="cesar123" authorities="ROLE_DOMAIN ADMINS" />
-				<sec:user name="graziane" password="graziane123" authorities="ROLE_DOMAIN ADMINS" />
 				<sec:user name="damiao" password="damiao123" authorities="ROLE_DOMAIN ADMINS" />
 				<sec:user name="dianne" password="emu"	authorities="ROLE_GUEST" />
 				<sec:user name="scott" password="wombat" authorities="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS" />

@@ -24,7 +24,6 @@ import com.qat.samples.sysmgmt.clinica.Exame;
 import com.qat.samples.sysmgmt.clinica.model.request.ExameInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.pessoa.dac.IExameDAC;
-import com.qat.samples.sysmgmt.util.CdStatusTypeEnum;
 
 @ContextConfiguration(locations = {
 		"classpath:com/qat/samples/sysmgmt/unittest/conf/unittest-datasource-txn-context.xml",
@@ -57,17 +56,11 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 
 		Exame funcionario = new Exame();
-		funcionario = insertExame(PersistanceActionEnum.INSERT);
+		funcionario = insertExame(PersistanceActionEnum.UPDATE);
+		funcionario.setId(1);
 		InternalResultsResponse<Exame> response = new InternalResultsResponse<Exame>();
-		Integer a = getExameDAC().insertExame(funcionario, "", response);
 
-		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = response.getFirstResult();
-		funcionario.setModelAction(PersistanceActionEnum.UPDATE);
-		funcionario.setId(response.getFirstResult().getId());
-		response = new InternalResultsResponse<Exame>();
-
-		a = getExameDAC().updateExame(funcionario, response);
+		Integer a = getExameDAC().updateExame(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 
 	}
@@ -84,18 +77,6 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Integer a = getExameDAC().insertExame(funcionario, "INSERT", response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 
-		funcionario = new Exame();
-		funcionario = insertExame(PersistanceActionEnum.INSERT);
-		response = new InternalResultsResponse<Exame>();
-
-		a = getExameDAC().insertExame(funcionario, "", response);
-		assertEquals(response.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Exame> responseA = getExameDAC().fetchExameById(request);
-		assertTrue(responseA.getResultsList().size() == 1);
-		assertEquals(responseA.getStatus(), Status.OperationSuccess);
-
 	}
 
 	@Test
@@ -105,18 +86,8 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Exame funcionario = new Exame();
 		funcionario = insertExame(PersistanceActionEnum.INSERT);
 		InternalResultsResponse<Exame> response = new InternalResultsResponse<Exame>();
-		Integer a = getExameDAC().insertExame(funcionario, "", response);
+		Integer a = getExameDAC().deleteExame(funcionario, response);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
-		funcionario = response.getFirstResult();
-		response = new InternalResultsResponse<Exame>();
-		funcionario.setModelAction(PersistanceActionEnum.DELETE);
-		Integer b = getExameDAC().deleteExame(funcionario, response);
-		assertEquals(response.getStatus(), Status.OperationSuccess);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(response.getFirstResult().getId());
-		InternalResultsResponse<Exame> responseA =
-				getExameDAC().fetchExameById(request);
-		assertTrue(responseA.getResultsList().get(0).getStatusList().get(0).getStatus() == CdStatusTypeEnum.DELETADO);
 
 	}
 
@@ -125,9 +96,9 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(3);
+		request.setFetchId(1);
 		InternalResultsResponse<Exame> response = getExameDAC().fetchExameById(request);
-		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertTrue(response.getResultsList().size() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
 
@@ -136,9 +107,9 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	{
 		// check for valid and precount
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(3);
+		request.setFetchId(1);
 		InternalResultsResponse<Exame> response = getExameDAC().fetchExameById(request);
-		assertTrue(response.getResultsSetInfo().getPageSize() == 1);
+		assertTrue(response.getResultsList().size() == 1);
 		assertEquals(response.getStatus(), Status.OperationSuccess);
 	}
 
@@ -161,10 +132,10 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 		Date a = new Date();
 		exame.setId(1);
 		exame.setModelAction(action);
-		// exame.setNome("Nome");
-		// exame.setDataExame((int)a.getTime());
-		// exame.setMedicoResponsavel("Resposnsavel");
-		// exame.setLaboratorio("Laboratorio");
+		exame.setNome("Nome");
+		exame.setDataExame(a.getTime());
+		exame.setMedicoResponsavel("Resposnsavel");
+		exame.setLaboratorio("Laboratorio");
 
 		return exame;
 	}
@@ -172,6 +143,6 @@ public class ExameDACTest extends AbstractTransactionalJUnit4SpringContextTests
 	@Before
 	public void setup()
 	{
-		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertBanco.sql", false);
+		executeSqlScript("com/qat/samples/sysmgmt/unittest/conf/insertExame.sql", false);
 	}
 }
