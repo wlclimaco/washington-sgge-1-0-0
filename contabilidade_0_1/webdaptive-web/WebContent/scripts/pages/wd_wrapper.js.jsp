@@ -83,7 +83,7 @@ head.load("scripts/util/page.js")
 				}
 
 				$.qat.pageLoader.load({
-					url: url,
+					url: "/qat-webdaptive/"+url,
 					$content: $("#load"),
 					bUpdateUrl: false,
 					bInitialLoad : false,
