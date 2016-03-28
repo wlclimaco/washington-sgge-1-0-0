@@ -1,0 +1,56 @@
+<div class="page page-table" data-ng-controller="CountiesController as cc"  ng-if="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_DOMAIN_USERS') || hasRole('ROLE_GUEST')">
+	<div class="row">
+		<div class="col-md-6">	
+			<div class="panel panel-default">
+				<div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Counties Table </strong>&nbsp;<a href="javascript:;"  ng-show="hasRole('ROLE_DOMAIN_ADMINS')" data-ng-click="cc.refreshCounties(86)"><i class="fa fa-refresh" ng-class="{'fa-spin': cc.isActive}" ></i></a></div>
+				<div class="panel-body" style="text-align:center;">
+					<div ag-grid="cc.countyGridOptions" style="height:680px;width:100%;" class="ag-fresh"></div>
+				</div>	
+			</div>
+		</div>	
+		<div class="col-md-6" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_DOMAIN_USERS')" >	
+			<div class="panel panel-default">
+				<div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> County Maintenance </strong></div>
+				<div class="panel-body">
+					<form name="cc.form_county" class="form-validation">
+                        <fieldset>				
+							<div class="callout callout-warning">						
+								<div class="form-group">
+									<label for="cid" class="col-sm-2">Id</label>
+									<div class="col-sm-10">
+										<input type="number" name="cid" class="form-control input-primary" required data-min=1 data-max=9999 data-ng-model="cc.county.id">
+									</div>
+								</div>
+								<div class="space"></div>				
+								<div class="form-group">
+									<label for="cdesc" class="col-sm-2">Description</label>
+									<div class="col-sm-10">
+										<input type="text" name="cdesc" class="form-control input-info" required  data-ng-minlength=1 data-ng-maxlength=50 data-ng-model="cc.county.description">
+									</div>	
+									<div class="space"></div>							
+									<p>
+										<button type="button" ng-click="cc.processButtons('A')" ng-show="hasRole('ROLE_DOMAIN_ADMINS')" class="btn btn-success">Add</button>
+										<button type="button" ng-click="cc.processButtons('U')" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_DOMAIN_USERS')" class="btn btn-info">Update</button>
+										<button type="button" ng-click="cc.processButtons('D')" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_DOMAIN_USERS')" class="btn btn-warning">Delete</button>
+										<button type="button" ng-click="cc.processButtons('L')" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_DOMAIN_USERS')" class="btn btn-success">List</button>										
+										<button type="button" ng-click="cc.clearForm()" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_DOMAIN_USERS')" class="btn btn-danger">Clear</button>
+									</p>						
+								</div>
+							</div>
+                        </fieldset>	
+					</form>	
+				</div>	
+			</div>
+		</div>
+        <div class="col-md-6" ng-show="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_DOMAIN_USERS') || hasRole('ROLE_GUEST')">
+            <section class="panel panel-default">
+                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> JSON County Grid Output</strong></div>
+                <div class="panel-body">
+                    <pre class="text-muted pre-scrollable">{{cc.gList | json}}</pre>
+                </div>
+            </section> 
+        </div>	
+	</div>	
+	<div data-ui-footer></div>	
+</div>
+<div class="col-md-12 text-center" ng-hide="authToken"><h3>Unauthorized</h3><div data-ui-footer></div></div>
