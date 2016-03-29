@@ -1,9 +1,86 @@
-<div class="page page-table" data-ng-controller="StocksController as sc">
-    <div class="panel panel-default">
-        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Stocks Table </strong></div>
-		<div class="panel-body" style="height:450px;text-align:center;">
-			<div ag-grid="sc.stockGridOptions" style="width:100%;height:100%;" class="ag-fresh"></div>
-		</div>	
+<div class="page page-table" data-ng-controller="CountiesController as cc"  >
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Counties Table </strong>&nbsp;<a href="javascript:;"  ng-show="hasRole('ROLE_DOMAIN_ADMINS')" data-ng-click="cc.refreshCounties(86)"><i class="fa fa-refresh" ng-class="{'fa-spin': cc.isActive}" ></i></a></div>
+				<div class="panel-body" style="text-align:center;">
+					<div ag-grid="cc.countyGridOptions" style="height:680px;width:100%;" class="ag-fresh"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6" >
+			<div class="panel panel-default">
+				<div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> County Maintenance </strong></div>
+				<div class="panel-body">
+					<form name="cc.form_county" class="form-validation">
+                        <fieldset>
+							<div class="callout callout-warning">
+								<div class="form-group">
+									<label for="cid" class="col-sm-2">Id</label>
+									<div class="col-sm-10">
+										<input type="number" name="cid" class="form-control input-primary" required data-min=1 data-max=9999 data-ng-model="cc.county.id">
+									</div>
+								</div>
+								<div class="space"></div>
+								<div class="form-group">
+									<label for="cdesc" class="col-sm-2">Description</label>
+									<div class="col-sm-10">
+										<input type="text" name="cdesc" class="form-control input-info" required  data-ng-minlength=1 data-ng-maxlength=50 data-ng-model="cc.county.description">
+									</div>
+									<div class="space"></div>
+									<p>
+										<button type="button" ng-click="cc.processButtons('A')"  class="btn btn-success">Add</button>
+										<button type="button" ng-click="cc.processButtons('U')"  class="btn btn-info">Update</button>
+										<button type="button" ng-click="cc.processButtons('D')"  class="btn btn-warning">Delete</button>
+										<button type="button" ng-click="cc.processButtons('L')"  class="btn btn-success">List</button>
+										<button type="button" ng-click="cc.clearForm()" class="btn btn-danger">Clear</button>
+									</p>
+								</div>
+							</div>
+                        </fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+        <div class="col-md-6">
+            <section class="panel panel-default">
+                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> JSON County Grid Output</strong></div>
+                <div class="panel-body">
+<div ng-app="myApp">
+  <div ng-controller="demoController as demo">
+    <h2 class="page-header">Loading data - managed array</h2>
+    <div class="bs-callout bs-callout-info">
+      <h4>Overview</h4>
+      <p>When you have the <em>entire</em> dataset available in-memory you can hand this to <code>NgTableParams</code> to manage the filtering, sorting and paging of that array</p>
     </div>
-	<div data-ui-footer></div>	
+    <table ng-table="demo.tableParams" class="table table-condensed table-bordered table-striped">
+      <tr ng-repeat="row in $data">
+        <td data-title="'Name'" filter="{name: 'text'}" sortable="'name'">{{row.name}}</td>
+        <td data-title="'Age'" filter="{age: 'number'}" sortable="'age'">{{row.age}}</td>
+        <td data-title="'Money'" filter="{money: 'number'}" sortable="'money'">{{row.money}}</td>
+      </tr>
+    </table>
+  </div>
 </div>
+        </div>
+	</div>
+	<div data-ui-footer></div>
+</div>
+<div class="col-md-12 text-center" ng-hide="authToken"><h3>Unauthorized</h3><div data-ui-footer></div></div>
+<script>
+(function() {
+  "use strict";
+
+  var app = angular.module("myApp", ["ngTable", "ngTableDemos"]);
+
+  app.controller("demoController", demoController);
+  demoController.$inject = ["NgTableParams", "ngTableSimpleList"];
+
+  function demoController(NgTableParams, simpleList) {
+    var self = this;
+    self.tableParams = new NgTableParams({}, {
+      dataset: simpleList
+    });
+  }
+})();
+    </script>
