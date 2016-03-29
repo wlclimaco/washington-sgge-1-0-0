@@ -1,0 +1,424 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.css">
+    <!--[if lt IE 9]>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+	<script src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+    <script src="angular.min.js"></script>
+    <script src="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+</head>
+<style>
+.demoTable td:last-child {
+  min-width: 90px;
+}
+
+/** Editable table
+------------------------- */
+
+.editable-table > tbody > tr > td {
+  padding: 4px
+}
+.editable-text {
+  padding-left: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  display: inline-block;
+}
+.editable-table tbody > tr > td > .controls {
+  //width: 100%
+}
+.editable-input {
+  padding-left: 3px;
+}
+.editable-input.input-sm {
+  height: 30px;
+  font-size: 14px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+</style>
+<body>
+<div>
+<div ng-app="myApp" class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2 class="page-header">Showing and hiding columns</h2>
+      <div class="bs-callout bs-callout-info">
+        <h4>Overview</h4>
+        <p>Columns can be shown and hidden programmatically</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6" ng-controller="demoController as demo">
+      <h3>ngTable directive</h3>
+      <div style="margin-bottom: 20px">
+        <label class="checkbox-inline" ng-repeat="col in demo.cols">
+          <input type="checkbox" ng-model-options="{ getterSetter: true }" ng-model="col.show"/> {{col.title()}}
+        </label>
+      </div>
+      <table ng-table="demo.tableParams" class="table table-condensed table-bordered table-striped" ng-table-columns-binding="demo.cols">
+        <tr ng-repeat="row in $data">
+          <td data-title="'Name'">
+            <a ng-href="https://www.google.co.uk/search?q={{row.name}}" target="_blank"><em>{{row.name}}</em></a>
+          </td>
+          <td data-title="'Age'">
+            <em class="text-danger">{{ row.age | number:1}}</em>
+          </td>
+          <td data-title="'Money'">
+            {{row.money}}
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="col-md-6" ng-controller="dynamicDemoController as demo">
+      <h3>ngTableDynamic directive</h3>
+      <div style="margin-bottom: 20px">
+        <label class="checkbox-inline" ng-repeat="col in demo.cols">
+          <input type="checkbox" ng-model="col.show" /> {{col.title}}
+        </label>
+      </div>
+      <table ng-table-dynamic="demo.tableParams with demo.cols" 
+             class="table table-condensed table-bordered table-striped">
+        <tr ng-repeat="row in $data">
+          <td ng-repeat="col in $columns">{{row[col.field]}}</td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+</div>
+</div>
+    
+
+</div>
+
+
+</body>
+<script>
+angular.module("myApp", ["ngTable"]);
+
+(function() {
+  "use strict";
+
+  angular.module("myApp").controller("demoController", demoController);
+  
+  demoController.$inject = ["NgTableParams"];
+
+  function demoController(NgTableParams) {
+    var self = this;
+	var originalData = [{
+          "name": "aa",
+          "age": 55,
+          "money": "R$ 33"
+        },
+        {
+          "name": "aa",
+          "age": 55,
+          "money": "R$ 33"
+        },
+        {
+          "name": "aa",
+          "age": 55,
+          "money": "R$ 33"
+        },
+        {
+          "name": "aa",
+          "age": 55,
+          "money": "R$ 33"
+        },
+        {
+          "name": "aa",
+          "age": 55,
+          "money": "R$ 33"
+        },
+        {
+          "name": "aa",
+          "age": 55,
+          "money": "R$ 33"
+        }]
+
+    self.tableParams = new NgTableParams({}, {
+      filterDelay: 0,
+      sorting: { name: "asc" } ,
+      dataset: [{
+          "name": "aa",
+          "age": 55,
+          "money": "R$ 33"
+        },
+        {
+          "name": "aa",
+          "age": 55,
+          "money": "R$ 33"
+        },
+        {
+          "name": "aa",
+          "age": 55,
+          "money": "R$ 33"
+        },
+        {
+          "name": "aa",
+          "age": 55,
+          "money": "R$ 33"
+        },
+        {
+          "name": "aa",
+          "age": 55,
+          "money": "R$ 33"
+        },
+        {
+          "name": "aa",
+          "age": 55,
+          "money": "R$ 33"
+        }]
+    });
+
+    self.cancel = cancel;
+    self.del = del;
+    self.save = save;
+
+    //////////
+
+    function cancel(row, rowForm) {
+      var originalRow = resetRow(row, rowForm);
+      angular.extend(row, originalRow);
+    }
+
+    function del(row) {
+      _.remove(self.tableParams.settings().dataset, function(item) {
+        return row === item;
+      });
+      self.tableParams.reload().then(function(data) {
+        if (data.length === 0 && self.tableParams.total() > 0) {
+          self.tableParams.page(self.tableParams.page() - 1);
+          self.tableParams.reload();
+        }
+      });
+    }
+    
+    function resetRow(row, rowForm){
+      row.isEditing = false;
+      rowForm.$setPristine();
+      self.tableTracker.untrack(row);
+      return _.findWhere(originalData, function(r){
+        return r.id === row.id;
+      });
+    }
+
+    function save(row, rowForm) {
+      var originalRow = resetRow(row, rowForm);
+      angular.extend(originalRow, row);
+    }
+ 
+      
+
+  }
+})();
+
+(function() {
+  "use strict";
+
+  angular.module("myApp").run(configureDefaults);
+  configureDefaults.$inject = ["ngTableDefaults"];
+
+  function configureDefaults(ngTableDefaults) {
+    ngTableDefaults.params.count = 5;
+    ngTableDefaults.settings.counts = [];
+  }
+})();
+
+(function() {
+  angular.module("myApp").directive("demoTrackedTable", demoTrackedTable);
+
+  demoTrackedTable.$inject = [];
+
+  function demoTrackedTable() {
+    return {
+      restrict: "A",
+      priority: -1,
+      require: "ngForm",
+      controller: demoTrackedTableController
+    };
+  }
+
+  demoTrackedTableController.$inject = ["$scope", "$parse", "$attrs", "$element"];
+
+  function demoTrackedTableController($scope, $parse, $attrs, $element) {
+    var self = this;
+    var tableForm = $element.controller("form");
+    var dirtyCellsByRow = [];
+    var invalidCellsByRow = [];
+
+    init();
+
+    ////////
+
+    function init() {
+      var setter = $parse($attrs.demoTrackedTable).assign;
+      setter($scope, self);
+      $scope.$on("$destroy", function() {
+        setter(null);
+      });
+
+      self.reset = reset;
+      self.isCellDirty = isCellDirty;
+      self.setCellDirty = setCellDirty;
+      self.setCellInvalid = setCellInvalid;
+      self.untrack = untrack;
+    }
+
+    function getCellsForRow(row, cellsByRow) {
+      return _.find(cellsByRow, function(entry) {
+        return entry.row === row;
+      })
+    }
+
+    function isCellDirty(row, cell) {
+      var rowCells = getCellsForRow(row, dirtyCellsByRow);
+      return rowCells && rowCells.cells.indexOf(cell) !== -1;
+    }
+
+    function reset() {
+      dirtyCellsByRow = [];
+      invalidCellsByRow = [];
+      setInvalid(false);
+    }
+
+    function setCellDirty(row, cell, isDirty) {
+      setCellStatus(row, cell, isDirty, dirtyCellsByRow);
+    }
+
+    function setCellInvalid(row, cell, isInvalid) {
+      setCellStatus(row, cell, isInvalid, invalidCellsByRow);
+      setInvalid(invalidCellsByRow.length > 0);
+    }
+
+    function setCellStatus(row, cell, value, cellsByRow) {
+      var rowCells = getCellsForRow(row, cellsByRow);
+      if (!rowCells && !value) {
+        return;
+      }
+
+      if (value) {
+        if (!rowCells) {
+          rowCells = {
+            row: row,
+            cells: []
+          };
+          cellsByRow.push(rowCells);
+        }
+        if (rowCells.cells.indexOf(cell) === -1) {
+          rowCells.cells.push(cell);
+        }
+      } else {
+        _.remove(rowCells.cells, function(item) {
+          return cell === item;
+        });
+        if (rowCells.cells.length === 0) {
+          _.remove(cellsByRow, function(item) {
+            return rowCells === item;
+          });
+        }
+      }
+    }
+
+    function setInvalid(isInvalid) {
+      self.$invalid = isInvalid;
+      self.$valid = !isInvalid;
+    }
+
+    function untrack(row) {
+      _.remove(invalidCellsByRow, function(item) {
+        return item.row === row;
+      });
+      _.remove(dirtyCellsByRow, function(item) {
+        return item.row === row;
+      });
+      setInvalid(invalidCellsByRow.length > 0);
+    }
+  }
+})();
+
+
+(function() {
+  "use strict";
+
+  angular.module("myApp").controller("dynamicDemoController", dynamicDemoController);
+  dynamicDemoController.$inject = ["NgTableParams"];
+
+  function dynamicDemoController(NgTableParams) {
+    var self = this;
+    
+    self.cols = [
+      { field: "name", title: "Name", sortable: "name", filter: { name: "text" }, show: true  },
+      { field: "age", title: "Age", sortable: "age", filter: { age: "number" }, show: true },
+      { field: "money", title: "Money", sortable: "money", filter: { money: "number" }, show: true }
+    ];
+    self.tableParams = new NgTableParams({}, {
+      //dataset: simpleList
+      dataset: [
+        {
+          "name": "aa",
+          "age": 55,
+          "money": "R$ 33"
+        },
+        {
+          "name": "aa",
+          "age": 55,
+          "money": "R$ 33"
+        },
+        {
+          "name": "aa",
+          "age": 55,
+          "money": "R$ 33"
+        },
+        {
+          "name": "aa",
+          "age": 55,
+          "money": "R$ 33"
+        },
+        {
+          "name": "aa",
+          "age": 55,
+          "money": "R$ 33"
+        },
+        {
+          "name": "aa",
+          "age": 55,
+          "money": "R$ 33"
+        }
+      ]
+    });
+  }
+})();
+
+(function() {
+  "use strict";
+
+  angular.module("myApp").run(configureDefaults);
+  configureDefaults.$inject = ["ngTableDefaults"];
+
+  function configureDefaults(ngTableDefaults) {
+    ngTableDefaults.params.count = 5;
+    ngTableDefaults.settings.counts = [];
+  }
+})(); 
+</script>
+</html>
