@@ -1773,7 +1773,7 @@ $(document).ready(function()
 				            _iShowPages: iShowPages,
 				            _iShowPagesHalf: iShowPagesHalf,
 				        });
-
+						var i = 1;
 				        //	Add event click for numbers buttons
 				        oNumbers.off("click", "."+oClasses.sPageButton, { 'fnCallbackDraw': fnCallbackDraw, 'oSettings': oSettings, 'sPage': i - 1 }, that.fnClickHandler);
 				        oNumbers.on("click", "."+oClasses.sPageButton, { 'fnCallbackDraw': fnCallbackDraw, 'oSettings': oSettings, 'sPage': i - 1 }, that.fnClickHandler);

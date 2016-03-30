@@ -55,12 +55,15 @@
 		$.qat.progressBar.init();
 
 		// Load remaining js files that can depend on internationalization
-head.load("scripts/util/page.js")
+head.load("scripts/util/page.js","/qat-webdaptive/thirdparty/js/angular.js",
+"/qat-webdaptive/thirdparty/js/ng-table.js",
+"/qat-webdaptive/thirdparty/js/ng-table-export.src.js")
 
 		// Wait for final js files and then finish the app initialization
 		head.ready("qat_commons_table_1.0.js", function() {
 			var fnLoadCurrentPage = function()
 			{
+			debugger
 				var parameters 		= $.qat.pageLoader.getQueryString();
 				var page 			= $.qat.pageLoader.currentPage();
 				var url;
@@ -83,7 +86,7 @@ head.load("scripts/util/page.js")
 				}
 
 				$.qat.pageLoader.load({
-					url: "/qat-webdaptive/"+url,
+					url: url,
 					$content: $("#load"),
 					bUpdateUrl: false,
 					bInitialLoad : false,
@@ -96,7 +99,7 @@ head.load("scripts/util/page.js")
 			if(!$.qat.pageLoader.currentPage())
 			{
 				$.qat.pageLoader.load({
-					url: "../../qat-webdaptive/dashboard",
+					url: "dashboard",
 					$content: $("#load"),
 					$link: $("nav.primary a[href^='dashboard']"),
 					bStartProgressBar : false
@@ -135,16 +138,7 @@ head.load("scripts/util/page.js")
 
 	//	$("#userName").text(qat.settings.user.userName.charAt(0).toUpperCase() + qat.settings.user.userName.slice(1));
 
-		$(".suspicious").click(function(e) {
-			e.preventDefault();
-			qat.util.actiondialog.launchActionDialog(
-					"dialogSARDetail",
-					 qat.pages.sar.dialogSettings.dialogSARDetail(
-						 $.qat.locale.get("commons.title.table.SAR"),
-						 0,
-						 ""
-					 ));
-		});
+
 
 	});
 

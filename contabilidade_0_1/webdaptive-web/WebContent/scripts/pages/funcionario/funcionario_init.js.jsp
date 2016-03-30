@@ -9,6 +9,14 @@
 
 $(document).ready(function()
 {
+		<c:choose>
+	<c:when test="${empty funcionarioList}">
+    	var oPreLoadResponse = null;
+    </c:when>
+    <c:otherwise>
+    	var oPreLoadResponse = ${funcionarioList};
+    </c:otherwise>
+</c:choose>
 
 		qat.pages.funcionario.funcionarioTable = $('#data_list').dataTable($.qat.table.setTable(
 	{

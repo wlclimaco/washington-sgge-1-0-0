@@ -26,7 +26,7 @@ qat.pages.pessoa = {
 					sCnpj = full.documentos[i].numero;
 				}
 			}
-			return '<a title="View/Edit ' + sCnpj + '" href="#/empresa/view?tab=info&locationId=' + full.id + '" class="edit_link">' + sCnpj + '</a>';
+			return '<a title="View/Edit ' + sCnpj + '" href="#/funcionario/view?tab=info&locationId=' + full.id + '" class="edit_link">' + sCnpj + '</a>';
 		}else{
 			return '';
 		}

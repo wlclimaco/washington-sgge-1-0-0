@@ -2365,7 +2365,7 @@
 		 * Page Loader methods
 		 */
 		var _pageLoader = (function()
-		{
+		{debugger
 			var _oLoadDefaults =
 			{
 				url					: null,
@@ -2455,7 +2455,7 @@
 				b = a.split('/')
 				console.log(b[b.length - 1])
 
-				$.address.value(_getStaticURL() + b[b.length - 1]);
+				$.address.value(_getStaticURL() + sCurrentPage);
 			};
 
 			var _load = function (oLoadConfig)

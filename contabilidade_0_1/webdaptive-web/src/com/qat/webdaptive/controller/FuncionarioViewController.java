@@ -1,5 +1,7 @@
 package com.qat.webdaptive.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +33,11 @@ public class FuncionarioViewController extends PessoaBaseController
 
 	private static final String EMPRESA_ID = "locationId";
 
+	/** The Constant FETCH_VIEW. */
+	private static final String FETCH_VIEW_TABS = "/view";
+
+	private static final String VIEW_EMPRESA_TABS = "/funcionario/funcionario_tabs";
+
 	/** The Constant VIEW_EMPRESA_DIALOG_ADD. */
 	private static final String VIEW_EMPRESA_DIALOG_ADD = "/funcionario/funcionario_dialog_create";
 
@@ -39,7 +46,7 @@ public class FuncionarioViewController extends PessoaBaseController
 	 * 
 	 * @return the model and view
 	 */
-	@RequestMapping(value = "/fetchFuncionariosByRequestBAS", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView fetchFuncionariobyRequestBAS()
 	{
 		FuncionarioInquiryRequest request = new FuncionarioInquiryRequest();
@@ -63,6 +70,13 @@ public class FuncionarioViewController extends PessoaBaseController
 	{
 
 		return new ModelAndView("/empresa/empresa_create");
+	}
+
+	@RequestMapping(value = {FETCH_VIEW_TABS}, method = RequestMethod.GET)
+	public ModelAndView loadTabs(@RequestParam(value = EMPRESA_ID, required = true) Integer locationId,
+			HttpServletRequest request)
+	{
+		return new ModelAndView(VIEW_EMPRESA_TABS);
 	}
 
 }
