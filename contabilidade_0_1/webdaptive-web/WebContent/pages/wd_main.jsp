@@ -20,6 +20,8 @@
 		<link rel="stylesheet" href="thirdparty/angular/angular-csp.css">
 	    <link rel="stylesheet" href="styles/wd_main.css">
 		<link rel="stylesheet" href="thirdparty/angular-datatables-master/dist/plugins/bootstrap/datatables.bootstrap.css">
+		<link rel="stylesheet" href="thirdparty/AdminLTE-2.3.0/dist/css/skins/_all-skins.min.css">
+		 <link rel="stylesheet" href="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.css">
 
     </head>
 	<div class="loader" ng-hide="initialized">
@@ -48,8 +50,8 @@
         <!-- thirdparty libraries-->
 		<script src="http://maps.googleapis.com/maps/api/js?v=3&libraries=visualization"></script>
         <script src="thirdparty/jquery/jquery-2.2.2.min.js"></script>
-        <script src="thirdparty/angular-datatables-master/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
         <script src="thirdparty/angular/angular.min.js"></script>
+		<script src="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.js"></script>
         <script src="thirdparty/angular-route/angular-route.min.js"></script>
         <script src="thirdparty/angular-animate/angular-animate.min.js"></script>
         <script src="thirdparty/angular-bootstrap/ui-bootstrap-tpls-1.2.5.min.js"></script>
@@ -120,5 +122,9 @@
         <script src="scripts/apps/counties.controllers.js"></script>
         <script src="scripts/apps/procedures.controllers.js"></script>
         <script src="scripts/apps/sysmgmt.data.factory.js"></script>
+
+
+		<!-- EU -->
+		<script src="thirdparty/AdminLTE-2.3.0/dist/js/demo.js"></script>
     </body>
 </html>
