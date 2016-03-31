@@ -1,58 +1,14 @@
-angular.module("myApp", ["ngTable"]);
+angular.module("wdApp.apps.counties", ["ngTable"]);
+
 
 (function() {
   "use strict";
 
-  angular.module("myApp").controller("demoController", demoController,
+  angular.module("wdApp.apps.counties").controller("demoController", demoController,
   ['$scope', 'SysMgmtData', 'toastr', 'toastrConfig',
-	function($scope, SysMgmtData, toastr, toastrConfig,demoController) {
-	}
-  ])
-  demoController.$inject = ["NgTableParams"];
-
-  function demoController(NgTableParams, simpleList) {
-   // var self = this;
-
+	function(NgTableParams,$scope, SysMgmtData, toastr, toastrConfig,demoController) {
 	var cvm = this;
-		var initLoad =    true; //used to ensure not calling server multiple times
-		var fetch_url = "cidade/api/fetchByRequestBAS";
-		var refresh_url =  "qat-webdaptive/cidade/api/refreshBAS";
-		var create_url =  "qat-webdaptive/cidade/api/insertBAS";
-		var update_url =  "qat-webdaptive/cidade/api/updateBAS";
-		var delete_url =  "qat-webdaptive/cidade/api/deleteBAS";
-		cvm.isActive =    false;
-	//	toastrConfig.closeButton = true;
-
-		//form model data
-		cvm.county = {
-			id: '',
-			description: ''
-		};
-
-		//grid column defs
-		var countyColumnDefs = [
-			{headerName: "County Id", field: "id", width: 270},
-			{headerName: "County Description", field: "description", width: 450}
-		];
-
-		//grid row select function
-		function rowSelectedFunc(event) {
-			cvm.county.id = event.node.data.id;
-			cvm.county.description = event.node.data.description;
-		};
-
-		//grid options
-		cvm.countyGridOptions = {
-			columnDefs: countyColumnDefs,
-			rowSelection: 'single',
-			onRowSelected: rowSelectedFunc,
-			rowHeight: 30,
-			headerHeight: 30,
-			enableColResize: true
-		};
-
-		//reusable paging datasource grid
-		function createNewDatasource(resIn) {
+	function createNewDatasource(resIn) {
 			var countyDataSource = {
 				pageSize: 20, //using default paging of 20
 				getRows: function (params) {
@@ -68,12 +24,12 @@ angular.module("myApp", ["ngTable"]);
 					}
 					else{
 						//console.log('asking for ' + params.startRow + ' to ' + params.endRow);
-//						SysMgmtData.processPostPageData(fetch_url, new qat.model.pagedInquiryRequest(  params.startRow/20, true), function(res){
-//							var dataThisPage = res.counties;
-//							cvm.gList =  dataThisPage;
-//							var lastRow = res.resultsSetInfo.totalRowsAvailable;
-//							params.successCallback(dataThisPage, lastRow);
-//						});
+						SysMgmtData.processPostPageData(fetch_url, new qat.model.pagedInquiryRequest(  params.startRow/20, true), function(res){
+							var dataThisPage = res.counties;
+							cvm.gList =  dataThisPage;
+							var lastRow = res.resultsSetInfo.totalRowsAvailable;
+							params.successCallback(dataThisPage, lastRow);
+						});
 					}
 				}
 			};
@@ -81,7 +37,7 @@ angular.module("myApp", ["ngTable"]);
 		};
 
 		//initial data load
-	//	processPostData(fetch_url, new qat.model.pagedInquiryRequest( 0, true), false);
+		processPostData(fetch_url, new qat.model.pagedInquiryRequest( 0, true), false);
 
 		//reusable data methods
 		//reusable processGetData (refresh,delete)
@@ -89,16 +45,16 @@ angular.module("myApp", ["ngTable"]);
 		{
 			//console.log(_url);
 			cvm.countyGridOptions.api.showLoadingOverlay(true);
-//			SysMgmtData.processGetPageData(_url,  function(res){
-//				if (res){
-//					initLoad = true;
-//					createNewDatasource(res); //send Data
-//				}
-//				else{
-//					cvm.countyGridOptions.api.hideOverlay();
-//				}
-//
-//			});
+			SysMgmtData.processGetPageData(_url,  function(res){
+				if (res){
+					initLoad = true;
+					createNewDatasource(res); //send Data
+				}
+				else{
+					cvm.countyGridOptions.api.hideOverlay();
+				}
+
+			});
 		};
 
 		//reusable processGetData (insert, update, pagedFetch)
@@ -108,15 +64,15 @@ angular.module("myApp", ["ngTable"]);
 			if (_bLoading){
 				cvm.countyGridOptions.api.showLoadingOverlay(true);
 			}
-//			SysMgmtData.processPostPageData(_url, _req, function(res){
-//				if (res){
-//					initLoad = true;
-//					createNewDatasource(res); //send Data
-//				}
-//				else{
-//					cvm.countyGridOptions.api.hideOverlay();
-//				}
-//			});
+			SysMgmtData.processPostPageData(_url, _req, function(res){
+				if (res){
+					initLoad = true;
+					createNewDatasource(res); //send Data
+				}
+				else{
+					cvm.countyGridOptions.api.hideOverlay();
+				}
+			});
 		};
 
 		//refresh county function
@@ -148,7 +104,7 @@ angular.module("myApp", ["ngTable"]);
 				switch (_btnType) {
 				//Add Button
 				case 'A':
-					//processPostData(create_url,  new qat.model.reqCounty( new qat.model.county(cvm.county.id, cvm.county.description),true, true), true);
+					processPostData(create_url,  new qat.model.reqCounty( new qat.model.county(cvm.county.id, cvm.county.description),true, true), true);
 					break;
 				//Update Button
 				case 'U':
@@ -156,12 +112,12 @@ angular.module("myApp", ["ngTable"]);
 					break;
 				//Delete Button
 				case 'D':
-				//	var send_url = delete_url + "?countyId=" + cvm.county.id + "&retList=true&retPaged=true";
+					var send_url = delete_url + "?countyId=" + cvm.county.id + "&retList=true&retPaged=true";
 					processGetData(send_url);
 					break;
 				//List Button
 				case 'L':
-				//	processPostData(fetch_url, new qat.model.pagedInquiryRequest( 0, true), true);
+					processPostData(fetch_url, new qat.model.pagedInquiryRequest( 0, true), true);
 					break;
 				default:
 					console.log('Invalid button type: ' + _btnType);
@@ -171,7 +127,7 @@ angular.module("myApp", ["ngTable"]);
 			}
 			else{
 				if (_btnType == 'L'){
-				//	processPostData(fetch_url, new qat.model.pagedInquiryRequest( 0, true), true);
+					processPostData(fetch_url, new qat.model.pagedInquiryRequest( 0, true), true);
 					//clear the form
 					cvm.clearForm();
 				}
@@ -180,6 +136,53 @@ angular.module("myApp", ["ngTable"]);
 				}
 			}
 		};
+	}
+  ])
+  demoController.$inject = ["NgTableParams"];
+
+  function demoController(NgTableParams, simpleList) {
+   // var self = this;
+
+	var cvm = this;
+		var initLoad =    true; //used to ensure not calling server multiple times
+		var fetch_url = "cidade/api/fetchByRequestBAS";
+		var refresh_url =  "qat-webdaptive/cidade/api/refreshBAS";
+		var create_url =  "qat-webdaptive/cidade/api/insertBAS";
+		var update_url =  "qat-webdaptive/cidade/api/updateBAS";
+		var delete_url =  "qat-webdaptive/cidade/api/deleteBAS";
+		cvm.isActive =    false;
+		//toastrConfig.closeButton = true;
+
+		//form model data
+		cvm.county = {
+			id: '',
+			description: ''
+		};
+
+		//grid column defs
+		var countyColumnDefs = [
+			{headerName: "County Id", field: "id", width: 270},
+			{headerName: "County Description", field: "description", width: 450}
+		];
+
+		//grid row select function
+		function rowSelectedFunc(event) {
+			cvm.county.id = event.node.data.id;
+			cvm.county.description = event.node.data.description;
+		};
+
+		//grid options
+		cvm.countyGridOptions = {
+			columnDefs: countyColumnDefs,
+			rowSelection: 'single',
+			onRowSelected: rowSelectedFunc,
+			rowHeight: 30,
+			headerHeight: 30,
+			enableColResize: true
+		};
+
+		//reusable paging datasource grid
+
 
 		//var simpleList = processGetData("_url");
 		simpleList = [{
@@ -293,7 +296,7 @@ angular.module("myApp", ["ngTable"]);
 (function() {
   "use strict";
 
-  angular.module("myApp").run(configureDefaults);
+  angular.module("wdApp.apps.counties").run(configureDefaults);
   configureDefaults.$inject = ["ngTableDefaults"];
 
   function configureDefaults(ngTableDefaults) {
@@ -309,7 +312,7 @@ angular.module("myApp", ["ngTable"]);
 */
 
 (function() {
-  angular.module("myApp").directive("demoTrackedTable", demoTrackedTable);
+  angular.module("wdApp.apps.counties").directive("demoTrackedTable", demoTrackedTable);
 
   demoTrackedTable.$inject = [];
 
@@ -324,7 +327,7 @@ angular.module("myApp", ["ngTable"]);
 
   demoTrackedTableController.$inject = ["$scope", "$parse", "$attrs", "$element"];
 
-  function demoTrackedTableController($scope, $parse, $attrs, $element) {
+  function demoTrackedTableController($scope, $parse, $attrs, $element,demoController) {
     var self = this;
     var tableForm = $element.controller("form");
     var dirtyCellsByRow = [];
@@ -421,7 +424,7 @@ angular.module("myApp", ["ngTable"]);
 })();
 
 (function() {
-  angular.module("myApp").directive("demoTrackedTableRow", demoTrackedTableRow);
+  angular.module("wdApp.apps.counties").directive("demoTrackedTableRow", demoTrackedTableRow);
 
   demoTrackedTableRow.$inject = [];
 
@@ -461,7 +464,7 @@ angular.module("myApp", ["ngTable"]);
 })();
 
 (function() {
-  angular.module("myApp").directive("demoTrackedTableCell", demoTrackedTableCell);
+  angular.module("wdApp.apps.counties").directive("demoTrackedTableCell", demoTrackedTableCell,demoController);
 
   demoTrackedTableCell.$inject = [];
 
