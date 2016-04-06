@@ -1,9 +1,22 @@
 (function() {
   angular.module('wdApp.apps.procedures', []).controller('ProceduresController', ProceduresController,
-  ['$scope', 'SysMgmtData', 'toastr', 'toastrConfig',"NgTableParams",
-	function(NgTableParams,$scope, SysMgmtData, toastr, toastrConfig) {
+  ['$scope', 'SysMgmtData', 'toastr', 'toastrConfig',"NgTableParams"
+  ])
+
+  ProceduresController.$inject = ["NgTableParams",'$scope', 'SysMgmtData', 'toastr', 'toastrConfig'];
+
+  function ProceduresController(NgTableParams,$scope, SysMgmtData, toastr, toastrConfig)  // var self = this;
+  {
 	var cvm = this;
-	function createNewDatasource(resIn) {
+		var initLoad =    true; //used to ensure not calling server multiple times
+		var fetch_url = "cidade/api/fetchByRequestBAS";
+		var refresh_url =  "qat-webdaptive/cidade/api/refreshBAS";
+		var create_url =  "qat-webdaptive/cidade/api/insertBAS";
+		var update_url =  "qat-webdaptive/cidade/api/updateBAS";
+		var delete_url =  "qat-webdaptive/cidade/api/deleteBAS";
+		cvm.isActive =    false;
+		//toastrConfig.closeButton = true;
+function createNewDatasource(resIn) {
 			var countyDataSource = {
 				pageSize: 20, //using default paging of 20
 				getRows: function (params) {
@@ -65,7 +78,7 @@
 					createNewDatasource(res); //send Data
 				}
 				else{
-					cvm.countyGridOptions.api.hideOverlay();
+				//	cvm.countyGridOptions.api.hideOverlay();
 				}
 			});
 		};
@@ -131,22 +144,6 @@
 				}
 			}
 		};
-	}
-  ])
-
-  ProceduresController.$inject = ["NgTableParams",'$scope', 'SysMgmtData', 'toastr', 'toastrConfig'];
-
-  function ProceduresController(NgTableParams,$scope, SysMgmtData, toastr, toastrConfig)  // var self = this;
-  {
-	var cvm = this;
-		var initLoad =    true; //used to ensure not calling server multiple times
-		var fetch_url = "cidade/api/fetchByRequestBAS";
-		var refresh_url =  "qat-webdaptive/cidade/api/refreshBAS";
-		var create_url =  "qat-webdaptive/cidade/api/insertBAS";
-		var update_url =  "qat-webdaptive/cidade/api/updateBAS";
-		var delete_url =  "qat-webdaptive/cidade/api/deleteBAS";
-		cvm.isActive =    false;
-		//toastrConfig.closeButton = true;
 
 		//form model data
 		cvm.county = {
@@ -159,7 +156,7 @@
 			{headerName: "County Id", field: "id", width: 270},
 			{headerName: "County Description", field: "description", width: 450}
 		];
-
+processPostData(fetch_url, new qat.model.pagedInquiryRequest( 0, true), false);
 		//grid row select function
 		function rowSelectedFunc(event) {
 			cvm.county.id = event.node.data.id;
