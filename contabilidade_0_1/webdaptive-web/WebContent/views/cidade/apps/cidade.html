@@ -1,14 +1,13 @@
-<div class="page page-table" data-ng-controller="demoController as cc"  >
+<div class="page page-table" data-ng-controller="CidadeController as cc"  >
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-12">
 			<div class="panel panel-default">
-				<div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Counties Table </strong>&nbsp;<a href="javascript:;"  ng-show="hasRole('ROLE_DOMAIN_ADMINS')" data-ng-click="cc.refreshCounties(86)"><i class="fa fa-refresh" ng-class="{'fa-spin': cc.isActive}" ></i></a></div>
+				<div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Estados </strong>&nbsp;<a href="javascript:;"  ng-show="hasRole('ROLE_DOMAIN_ADMINS')" data-ng-click="cc.refreshCounties(86)"><i class="fa fa-refresh" ng-class="{'fa-spin': cc.isActive}" ></i></a></div>
 				<div class="panel-body" style="text-align:center;">
 					<div ng-app="wdApp.apps.counties" class="container-fluid">
 
   <div class="row">
-    <div class="col-md-6" ng-controller="demoController as demo">
-      <h3>ngTable directive</h3>
+    <div class="col-md-12" ng-controller="CidadeController as demo">
       <div class="brn-group pull-right">
         <button class="btn btn-default" ng-if="demo.isEditing" ng-click="demo.cancelChanges()">
           <span class="glyphicon glyphicon-remove"></span>
@@ -31,27 +30,29 @@
           <col width="5%" />
         </colgroup>
         <tr ng-repeat="row in $data" ng-form="rowForm" demo-tracked-table-row="row">
-          <td title="'Name'" filter="{name: 'text'}" sortable="'name'" ng-switch="demo.isEditing" ng-class="name.$dirty ? 'bg-warning' : ''" ng-form="name" demo-tracked-table-cell>
-            <span ng-switch-default class="editable-text">{{row.name}}</span>
-            <div class="controls" ng-class="name.$invalid && name.$dirty ? 'has-error' : ''" ng-switch-when="true">
-              <input type="text" name="name" ng-model="row.name" class="editable-input form-control input-sm" required />
+          <td title="'Id'" filter="{id: 'number'}" sortable="'id'" ng-switch="demo.isEditing" ng-class="id.$dirty ? 'bg-warning' : ''" ng-form="id" demo-tracked-table-cell>
+            <span ng-switch-default class="editable-text">{{row.id}}</span>
+            <div class="controls" ng-class="id.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="id" ng-model="row.id" class="editable-input form-control input-sm" required />
             </div>
           </td>
-          <td title="'Age'" filter="{age: 'number'}" sortable="'age'" ng-switch="demo.isEditing" ng-class="age.$dirty ? 'bg-warning' : ''" ng-form="age" demo-tracked-table-cell>
-            <span ng-switch-default class="editable-text">{{row.age}}</span>
-            <div class="controls" ng-class="age.$invalid && age.$dirty ? 'has-error' : ''" ng-switch-when="true">
-              <input type="number" name="age" ng-model="row.age" class="editable-input form-control input-sm" required/>
+          <td title="'nome'" filter="{nome: 'text'}" sortable="'nome'" ng-switch="demo.isEditing" ng-class="nome.$dirty ? 'bg-warning' : ''" ng-form="nome" demo-tracked-table-cell>
+            <span ng-switch-default class="editable-text">{{row.nome}}</span>
+            <div class="controls" ng-class="nome.$invalid && nome.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="number" name="nome" ng-model="row.nome" class="editable-input form-control input-sm" required/>
             </div>
           </td>
-          <td title="'Money'" filter="{money: 'number'}" sortable="'money'" ng-switch="demo.isEditing" ng-class="money.$dirty ? 'bg-warning' : ''" ng-form="money" demo-tracked-table-cell>
-            <span ng-switch-default class="editable-text">{{row.money}}</span>
-            <div class="controls" ng-class="money.$invalid && money.$dirty ? 'has-error' : ''" ng-switch-when="true">
-              <input type="number" name="money" ng-model="row.money" class="editable-input form-control input-sm" required/>
+          <td title="'Abreviacao'" filter="{abreviacao: 'text'}" sortable="'abreviacao'" ng-switch="demo.isEditing" ng-class="abreviacao.$dirty ? 'bg-warning' : ''" ng-form="abreviacao" demo-tracked-table-cell>
+            <span ng-switch-default class="editable-text">{{row.abreviacao}}</span>
+            <div class="controls" ng-class="abreviacao.$invalid && abreviacao.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="number" name="abreviacao" ng-model="row.abreviacao" class="editable-input form-control input-sm" required/>
             </div>
           </td>
-          <td>
-
-            <button class="btn btn-danger btn-sm" ng-click="demo.del(row)" ng-disabled="!demo.isEditing"><span class="glyphicon glyphicon-trash"></span></button>
+         <td>
+            <button class="btn btn-primary btn-sm" ng-click="demo.save(row, rowForm)" ng-if="row.isEditing" ng-disabled="rowForm.$pristine || rowForm.$invalid"><span class="glyphicon glyphicon-ok"></span></button>
+            <button class="btn btn-default btn-sm" ng-click="demo.cancel(row, rowForm)" ng-if="row.isEditing"><span class="glyphicon glyphicon-remove"></span></button>
+            <button class="btn btn-default btn-sm" ng-click="row.isEditing = true" ng-if="!row.isEditing"><span class="glyphicon glyphicon-pencil"></span></button>
+            <button class="btn btn-danger btn-sm" ng-click="demo.del(row)" ng-if="!row.isEditing"><span class="glyphicon glyphicon-trash"></span></button>
           </td>
         </tr>
       </table>
@@ -61,48 +62,6 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6" >
-			<div class="panel panel-default">
-				<div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> County Maintenance </strong></div>
-				<div class="panel-body">
-					<form name="cc.form_county" class="form-validation">
-                        <fieldset>
-							<div class="callout callout-warning">
-								<div class="form-group">
-									<label for="cid" class="col-sm-2">Id</label>
-									<div class="col-sm-10">
-										<input type="number" name="cid" class="form-control input-primary" required data-min=1 data-max=9999 data-ng-model="cc.county.id">
-									</div>
-								</div>
-								<div class="space"></div>
-								<div class="form-group">
-									<label for="cdesc" class="col-sm-2">Description</label>
-									<div class="col-sm-10">
-										<input type="text" name="cdesc" class="form-control input-info" required  data-ng-minlength=1 data-ng-maxlength=50 data-ng-model="cc.county.description">
-									</div>
-									<div class="space"></div>
-									<p>
-										<button type="button" ng-click="cc.processButtons('A')"  class="btn btn-success">Add</button>
-										<button type="button" ng-click="cc.processButtons('U')"  class="btn btn-info">Update</button>
-										<button type="button" ng-click="cc.processButtons('D')"  class="btn btn-warning">Delete</button>
-										<button type="button" ng-click="cc.processButtons('L')"  class="btn btn-success">List</button>
-										<button type="button" ng-click="cc.clearForm()" class="btn btn-danger">Clear</button>
-									</p>
-								</div>
-							</div>
-                        </fieldset>
-					</form>
-				</div>
-			</div>
-		</div>
-        <div class="col-md-6">
-            <section class="panel panel-default">
-                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> JSON County Grid Output</strong></div>
-                <div class="panel-body">
-
-        </div>
 	</div>
-	<div data-ui-footer></div>
 </div>
-<div class="col-md-12 text-center" ng-hide="authToken"><h3>Unauthorized</h3><div data-ui-footer></div></div>
-    </script>
+	<div data-ui-footer></div>
