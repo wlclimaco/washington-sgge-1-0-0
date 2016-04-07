@@ -16,6 +16,8 @@ import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.response.DepositoResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.EmpresaResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.FilialResponse;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoMaintenanceRequest;
+import com.qat.samples.sysmgmt.estado.model.response.EstadoResponse;
 import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.response.ClassificacaoResponse;
@@ -41,7 +43,7 @@ public class EmpresaBAS implements IEmpresaRESTBAS
 
 	/**
 	 * Sets the empresa bai.
-	 * 
+	 *
 	 * @param empresaBAI the new empresa bai
 	 */
 	public void setEmpresaBAI(IEmpresaBAI empresaBAI)
@@ -51,7 +53,7 @@ public class EmpresaBAS implements IEmpresaRESTBAS
 
 	/**
 	 * Gets the empresa bai.
-	 * 
+	 *
 	 * @return the empresa bai
 	 */
 	public IEmpresaBAI getEmpresaBAI()
@@ -299,6 +301,24 @@ public class EmpresaBAS implements IEmpresaRESTBAS
 	@Override
 	public UsuarioResponse fetchUsuarioByRequest(UsuarioInquiryRequest request)
 	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EstadoResponse insertEstado(EstadoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EstadoResponse updateEstado(EstadoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EstadoResponse deleteEstado(EstadoMaintenanceRequest request) {
 		// TODO Auto-generated method stub
 		return null;
 	}

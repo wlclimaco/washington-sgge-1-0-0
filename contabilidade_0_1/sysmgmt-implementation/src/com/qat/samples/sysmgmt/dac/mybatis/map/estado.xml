@@ -83,9 +83,7 @@
      SELECT COUNT(id) AS RECORD_COUNT
         FROM estado
      WHERE 2 = 2
-     <if test="parentId != null">
-		  AND id = #{parentId}
-	 </if>
+
   </select>
 
   <select id="fetchAllEstados" resultMap="estadoResult">
@@ -113,17 +111,7 @@
     						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
     				FROM estado b
 						where 1 = 1
-					<if test="parentId != null">
-						AND parentid = #{id}
-					</if>
 
-					 <if test="statusList != null and !statusList.isEmpty()">
-					     AND PGSI_status IN
-					     <foreach item="item" index="index" collection="statusList"
-						     open="(" separator="," close=")">
-						   	 #{item.value}
-						 </foreach>
-					 </if>
     			) LIST
 				<choose>
 					<when test="pageSize != null and pageSize > 0">

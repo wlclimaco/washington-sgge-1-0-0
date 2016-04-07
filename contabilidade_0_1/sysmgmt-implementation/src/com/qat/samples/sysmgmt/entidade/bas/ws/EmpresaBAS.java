@@ -20,6 +20,7 @@ import com.qat.samples.sysmgmt.entidade.model.response.DepositoResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.EmpresaResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.FilialResponse;
 import com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoMaintenanceRequest;
 import com.qat.samples.sysmgmt.estado.model.response.EstadoResponse;
 import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
@@ -47,7 +48,7 @@ public class EmpresaBAS implements IEmpresaBAS
 
 	/**
 	 * Spring Sets the bundle bai.
-	 * 
+	 *
 	 * @param bundleBAI the new bundle bai
 	 */
 	public void setEmpresaBAI(IEmpresaBAI bundleBAI)
@@ -57,7 +58,7 @@ public class EmpresaBAS implements IEmpresaBAS
 
 	/**
 	 * Gets the bundle bac.
-	 * 
+	 *
 	 * @return the bundle bac
 	 */
 	public IEmpresaBAI getEmpresaBAI()
@@ -275,36 +276,31 @@ public class EmpresaBAS implements IEmpresaBAS
 	@Override
 	public UsuarioResponse insertUsuario(UsuarioMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getEmpresaBAI().insertUsuario(request);
 	}
 
 	@Override
 	public UsuarioResponse updateUsuario(UsuarioMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getEmpresaBAI().updateUsuario(request);
 	}
 
 	@Override
 	public UsuarioResponse deleteUsuario(UsuarioMaintenanceRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getEmpresaBAI().deleteUsuario(request);
 	}
 
 	@Override
 	public UsuarioResponse fetchUsuarioById(FetchByIdRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getEmpresaBAI().fetchUsuarioById(request);
 	}
 
 	@Override
 	public UsuarioResponse fetchUsuarioByRequest(UsuarioInquiryRequest request)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getEmpresaBAI().fetchUsuarioByRequest(request);
 	}
 
 	@Override
@@ -328,8 +324,23 @@ public class EmpresaBAS implements IEmpresaBAS
 	@Override
 	public EstadoResponse fetchEstadoByRequest(EstadoInquiryRequest request)
 	{
+		return getEmpresaBAI().fetchEstadoByRequest(request);
+	}
+
+	@Override
+	public EstadoResponse insertEstado(EstadoMaintenanceRequest request) {
 		// TODO Auto-generated method stub
-		return null;
+		return getEmpresaBAI().insertEstado(request);
+	}
+
+	@Override
+	public EstadoResponse updateEstado(EstadoMaintenanceRequest request) {
+		return getEmpresaBAI().updateEstado(request);
+	}
+
+	@Override
+	public EstadoResponse deleteEstado(EstadoMaintenanceRequest request) {
+		return getEmpresaBAI().deleteEstado(request);
 	}
 
 }

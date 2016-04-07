@@ -29,6 +29,7 @@
 
 	<bean id="empresaBACTarget" class="com.qat.samples.sysmgmt.entidade.bac.impl.EmpresaBACImpl">
 		<property name="empresaDAC" ref="empresaDACTarget"/>
+		<property name="estadoDAC" ref="estadoDACTarget"/>
 	</bean>
 
 	<bean id="siteBACTarget" class="com.qat.samples.sysmgmt.site.bac.impl.SiteBACImpl">

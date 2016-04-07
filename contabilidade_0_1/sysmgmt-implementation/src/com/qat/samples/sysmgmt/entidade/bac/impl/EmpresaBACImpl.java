@@ -20,6 +20,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
+import com.qat.samples.sysmgmt.estado.Estado;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoMaintenanceRequest;
 import com.qat.samples.sysmgmt.fiscal.Classificacao;
 import com.qat.samples.sysmgmt.fiscal.Regime;
 import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
@@ -27,6 +30,7 @@ import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.util.Cidade;
+import com.qat.samples.sysmgmt.util.dac.IEstadoDAC;
 import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 
 /**
@@ -37,6 +41,8 @@ public class EmpresaBACImpl implements IEmpresaBAC
 
 	/** The person dac. */
 	private IEmpresaDAC empresaDAC;
+
+	private IEstadoDAC estadoDAC;
 
 	/**
 	 * @return the empresaDAC
@@ -52,6 +58,14 @@ public class EmpresaBACImpl implements IEmpresaBAC
 	public void setEmpresaDAC(IEmpresaDAC empresaDAC)
 	{
 		this.empresaDAC = empresaDAC;
+	}
+
+	public IEstadoDAC getEstadoDAC() {
+		return estadoDAC;
+	}
+
+	public void setEstadoDAC(IEstadoDAC estadoDAC) {
+		this.estadoDAC = estadoDAC;
 	}
 
 	/*
@@ -318,5 +332,37 @@ public class EmpresaBACImpl implements IEmpresaBAC
 		response = getEmpresaDAC().deleteCidade(request.getCidade());
 
 		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Estado> insertEstado(EstadoMaintenanceRequest request) {
+		InternalResultsResponse<Estado> response = new InternalResultsResponse<Estado>();
+
+		getEstadoDAC().insertEstado(request.getEstado(),"insert",response);
+
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Estado> updateEstado(EstadoMaintenanceRequest request) {
+		InternalResultsResponse<Estado> response = new InternalResultsResponse<Estado>();
+
+		getEstadoDAC().updateEstado(request.getEstado(),response);
+
+		return response;
+	}
+
+	@Override
+	public InternalResponse deleteEstado(EstadoMaintenanceRequest request) {
+		InternalResponse response = new InternalResponse();
+
+		getEstadoDAC().deleteEstado(request.getEstado(),null);
+
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Estado> fetchEstadoByRequest(EstadoInquiryRequest request) {
+		return getEstadoDAC().fetchEstadoByRequest(request);
 	}
 }

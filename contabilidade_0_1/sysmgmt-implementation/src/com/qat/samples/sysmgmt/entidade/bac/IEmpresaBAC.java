@@ -18,6 +18,9 @@ import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
+import com.qat.samples.sysmgmt.estado.Estado;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoMaintenanceRequest;
 import com.qat.samples.sysmgmt.fiscal.Classificacao;
 import com.qat.samples.sysmgmt.fiscal.Regime;
 import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
@@ -92,5 +95,15 @@ public interface IEmpresaBAC
 	public InternalResultsResponse<Plano> fetchPlanoByRequest(PlanoInquiryRequest request);
 
 	public InternalResultsResponse<Classificacao> fetchClassificacaoByRequest(ClassificacaoInquiryRequest request);
+
+
+	//=========
+	public InternalResultsResponse<Estado> insertEstado(EstadoMaintenanceRequest request);
+
+	public InternalResultsResponse<Estado> updateEstado(EstadoMaintenanceRequest request);
+
+	public InternalResponse deleteEstado(EstadoMaintenanceRequest request);
+
+	public InternalResultsResponse<Estado> fetchEstadoByRequest(EstadoInquiryRequest request);
 
 }

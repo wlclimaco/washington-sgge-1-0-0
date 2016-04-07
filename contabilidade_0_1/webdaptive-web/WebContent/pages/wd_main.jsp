@@ -122,6 +122,7 @@
         <script src="scripts/apps/counties.controllers.js"></script>
         <script src="scripts/apps/procedures.controllers.js"></script>
         <script src="scripts/apps/sysmgmt.data.factory.js"></script>
+        <script src="scripts/apps/estado/estado.controllers.js"></script>
 
 
 		<!-- EU -->

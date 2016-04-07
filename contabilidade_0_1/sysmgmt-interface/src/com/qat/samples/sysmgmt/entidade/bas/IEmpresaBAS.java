@@ -22,6 +22,7 @@ import com.qat.samples.sysmgmt.entidade.model.response.DepositoResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.EmpresaResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.FilialResponse;
 import com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoMaintenanceRequest;
 import com.qat.samples.sysmgmt.estado.model.response.EstadoResponse;
 import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
@@ -215,5 +216,21 @@ public interface IEmpresaBAS
 	@WebResult(name = "fetchUsuarioByRequestReturn")
 	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
 	public UsuarioResponse fetchUsuarioByRequest(UsuarioInquiryRequest request);
+
+
+	@WebMethod(action = "insertEstado")
+	@WebResult(name = "insertEstadoReturn")
+	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
+	public EstadoResponse insertEstado(EstadoMaintenanceRequest request);
+
+	@WebMethod(action = "updateEstado")
+	@WebResult(name = "updateEstadoReturn")
+	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
+	public EstadoResponse updateEstado(EstadoMaintenanceRequest request);
+
+	@WebMethod(action = "deleteEstado")
+	@WebResult(name = "deleteEstadoReturn")
+	@WSDLDocumentation(value = "Insert a supermercado record and optionally returns a list of supermercados.")
+	public EstadoResponse deleteEstado(EstadoMaintenanceRequest request);
 
 }

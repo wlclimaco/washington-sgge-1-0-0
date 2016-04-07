@@ -9,7 +9,10 @@ import com.qat.framework.model.QATModel;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.QATMyBatisDacHelper;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.dacd.mybatis.PagedResultsDACD;
+import com.qat.samples.sysmgmt.entidade.Empresa;
 import com.qat.samples.sysmgmt.estado.Estado;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest;
 import com.qat.samples.sysmgmt.util.dac.IEstadoDAC;
 
 /**
@@ -142,6 +145,21 @@ public class EstadoDACImpl extends SqlSessionDaoSupport implements IEstadoDAC
 	{
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Estado> fetchEstadoByRequest(EstadoInquiryRequest request) {
+		InternalResultsResponse<Estado> response = new InternalResultsResponse<Estado>();
+
+		/*
+		 * Helper method to translation from the user friendly" sort field names to the
+		 * actual database column names.
+		 */
+		// QATMyBatisDacHelper.translateSortFields(request, getEmpresaInquiryValidSortFields());
+
+		PagedResultsDACD.fetchObjectsByRequest(getSqlSession(), request, "EstadoMap.fetchEstadoRowCount",
+				"EstadoMap.fetchAllEstadoByRequest", response);
+		return response;
 	}
 
 }

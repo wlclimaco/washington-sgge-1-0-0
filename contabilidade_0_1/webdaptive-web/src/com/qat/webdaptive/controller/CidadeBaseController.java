@@ -12,6 +12,9 @@ import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
 import com.qat.samples.sysmgmt.cnae.model.response.CnaeResponse;
 import com.qat.samples.sysmgmt.entidade.bas.IEmpresaBAS;
 import com.qat.samples.sysmgmt.entidade.model.request.CidadeMaintenanceRequest;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoMaintenanceRequest;
+import com.qat.samples.sysmgmt.estado.model.response.EstadoResponse;
 import com.qat.samples.sysmgmt.model.request.RefreshRequest;
 import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.response.CidadeResponse;
@@ -33,7 +36,7 @@ public class CidadeBaseController
 
 	/**
 	 * Cidade mav.
-	 * 
+	 *
 	 * @param request the request
 	 * @param returnViewName the return view name
 	 * @return the model and view
@@ -72,7 +75,7 @@ public class CidadeBaseController
 
 	/**
 	 * Refresh cidades.
-	 * 
+	 *
 	 * @param request the request
 	 * @return the cidade response
 	 */
@@ -93,7 +96,7 @@ public class CidadeBaseController
 
 	/**
 	 * Maintain cidades.
-	 * 
+	 *
 	 * @param request the request
 	 * @param persistType the persist type
 	 * @return the cidade response
@@ -132,9 +135,51 @@ public class CidadeBaseController
 		return response;
 	}
 
+
+	/**
+	 * Maintain cidades.
+	 *
+	 * @param request the request
+	 * @param persistType the persist type
+	 * @return the cidade response
+	 */
+	protected EstadoResponse maintainEstados(EstadoMaintenanceRequest request, PersistanceActionEnum persistType)
+	{
+		EstadoResponse response = new EstadoResponse();
+		try
+		{
+			IEmpresaBAS client = (IEmpresaBAS)QATAppContext.getBean("empresaBASClientTarget");
+			switch (persistType)
+			{
+				case INSERT:
+					response = client.insertEstado(request);
+					break;
+				case UPDATE:
+					response = client.updateEstado(request);
+					break;
+				case DELETE:
+					response = client.deleteEstado(request);
+					break;
+				default:
+					if (LOG.isDebugEnabled())
+					{
+						LOG.debug("persistType missing! Setting Unspecified Error status.");
+					}
+					response.addOperationFailedMessage(DEFAULT_EXCEPTION_MSG);
+					break;
+			}
+
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
+		}
+		return response;
+	}
+
 	/**
 	 * Cidade fetch by request.
-	 * 
+	 *
 	 * @param request the request
 	 * @return the cidade response
 	 */
@@ -145,6 +190,21 @@ public class CidadeBaseController
 		{
 			IEmpresaBAS client = (IEmpresaBAS)QATAppContext.getBean("empresaBASClientTarget");
 			response = client.fetchCidadeByRequest(request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG);
+		}
+		return response;
+	}
+
+	protected EstadoResponse estadoFetchByRequest(EstadoInquiryRequest request)
+	{
+		EstadoResponse response = new EstadoResponse();
+		try
+		{
+			IEmpresaBAS client = (IEmpresaBAS)QATAppContext.getBean("empresaBASClientTarget");
+			response = client.fetchEstadoByRequest(request);
 		}
 		catch (Exception ex)
 		{

@@ -42,6 +42,10 @@ import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.response.DepositoResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.EmpresaResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.FilialResponse;
+import com.qat.samples.sysmgmt.estado.Estado;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoMaintenanceRequest;
+import com.qat.samples.sysmgmt.estado.model.response.EstadoResponse;
 import com.qat.samples.sysmgmt.fiscal.Classificacao;
 import com.qat.samples.sysmgmt.fiscal.Regime;
 import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
@@ -57,6 +61,7 @@ import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.UsuarioMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.response.CidadeResponse;
 import com.qat.samples.sysmgmt.util.model.response.UsuarioResponse;
+
 
 public class EmpresaBAIImpl implements IEmpresaBAI
 {
@@ -89,7 +94,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 	/**
 	 * Get empresa validation controller.
-	 * 
+	 *
 	 * @return the validation controller
 	 */
 	public ValidationController getValidationController()
@@ -99,7 +104,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 	/**
 	 * Spring sets the empresa validation controller.
-	 * 
+	 *
 	 * @param empresaValidationController the new validation controller
 	 */
 	public void setValidationController(ValidationController empresaValidationController)
@@ -109,7 +114,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 	/**
 	 * Spring Sets the empresa bac.
-	 * 
+	 *
 	 * @param empresaBAC the new empresa bac
 	 */
 	public void setEmpresaBAC(IEmpresaBAC empresaBAC)
@@ -119,7 +124,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 	/**
 	 * Gets the empresa bac.
-	 * 
+	 *
 	 * @return the empresa bac
 	 */
 	public IEmpresaBAC getEmpresaBAC()
@@ -262,7 +267,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 	/**
 	 * Fetch paged.
-	 * 
+	 *
 	 * @param request the request
 	 * @param response the response
 	 */
@@ -285,7 +290,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 	/**
 	 * Do persistance.
-	 * 
+	 *
 	 * @param request the request
 	 * @param updateType the update type
 	 * @return the internal response
@@ -336,7 +341,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 	/**
 	 * Fetch paged.
-	 * 
+	 *
 	 * @param request the request
 	 * @param response the response
 	 */
@@ -380,7 +385,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 	/**
 	 * Fetch paged.
-	 * 
+	 *
 	 * @param request the request
 	 * @param response the response
 	 */
@@ -424,7 +429,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 	/**
 	 * Fetch paged.
-	 * 
+	 *
 	 * @param request the request
 	 * @param response the response
 	 */
@@ -543,7 +548,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 	/**
 	 * Fetch paged.
-	 * 
+	 *
 	 * @param request the request
 	 * @param response the response
 	 */
@@ -662,7 +667,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 	/**
 	 * Fetch paged.
-	 * 
+	 *
 	 * @param request the request
 	 * @param response the response
 	 */
@@ -706,7 +711,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 	/**
 	 * Fetch paged.
-	 * 
+	 *
 	 * @param request the request
 	 * @param response the response
 	 */
@@ -750,7 +755,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 	/**
 	 * Fetch paged.
-	 * 
+	 *
 	 * @param request the request
 	 * @param response the response
 	 */
@@ -842,7 +847,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 	/**
 	 * Process.
-	 * 
+	 *
 	 * @param indicator the indicator
 	 * @param persistType the persist type
 	 * @param request the request
@@ -871,7 +876,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 	/**
 	 * Process.
-	 * 
+	 *
 	 * @param indicator the indicator
 	 * @param persistType the persist type
 	 * @param request the request
@@ -919,7 +924,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 	/**
 	 * Process.
-	 * 
+	 *
 	 * @param indicator the indicator
 	 * @param persistType the persist type
 	 * @param request the request
@@ -1157,7 +1162,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 	/**
 	 * Fetch paged.
-	 * 
+	 *
 	 * @param request the request
 	 * @param response the response
 	 */
@@ -1180,7 +1185,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 	/**
 	 * Handle return.
-	 * 
+	 *
 	 * @param response the response
 	 * @param internalResponse the internal response
 	 * @param messages the messages
@@ -1204,7 +1209,7 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 
 	/**
 	 * Do persistance.
-	 * 
+	 *
 	 * @param request the request
 	 * @param updateType the update type
 	 * @return the internal response
@@ -1233,4 +1238,122 @@ public class EmpresaBAIImpl implements IEmpresaBAI
 		return null;
 	}
 
+	@Override
+	public EstadoResponse insertEstado(EstadoMaintenanceRequest request) {
+		EstadoResponse response = new EstadoResponse();
+		try
+		{
+			response = processEstado(ValidationContextIndicator.INSERT, PersistanceActionEnum.INSERT, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public EstadoResponse updateEstado(EstadoMaintenanceRequest request) {
+		EstadoResponse response = new EstadoResponse();
+		try
+		{
+			response = processEstado(ValidationContextIndicator.UPDATE, PersistanceActionEnum.UPDATE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public EstadoResponse deleteEstado(EstadoMaintenanceRequest request) {
+		EstadoResponse response = new EstadoResponse();
+		try
+		{
+			response = processEstado(ValidationContextIndicator.DELETE, PersistanceActionEnum.DELETE, request);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+
+	@Override
+	public EstadoResponse fetchEstadoByRequest(EstadoInquiryRequest request) {
+		EstadoResponse response = new EstadoResponse();
+		try
+		{
+			fetchPagedEstado(request, response);
+		}
+		catch (Exception ex)
+		{
+			QATInterfaceUtil.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+		return response;
+	}
+
+	/**
+	 * Fetch paged.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private void fetchPagedEstado(EstadoInquiryRequest request, EstadoResponse response)
+	{
+		InternalResultsResponse<Estado> internalResponse = new InternalResultsResponse<Estado>();
+
+		if (ValidationUtil.isNull(request.getPageSize()) || ValidationUtil.isNull(request.getStartPage()))
+		{
+			internalResponse.addFieldErrorMessage(PROSPERITASGLOBAL_BASE_VALIDATOR_PAGING_PARAMETERS_REQUIRED);
+		}
+		else
+		{
+			internalResponse = getEmpresaBAC().fetchEstadoByRequest(request);
+		}
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		QATInterfaceUtil.handleOperationStatusAndMessages(response, internalResponse, true);
+	}
+	private InternalResponse doPersistanceEstado(EstadoMaintenanceRequest request,
+			PersistanceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			case INSERT:
+				return getEmpresaBAC().insertEstado(request);
+
+			case UPDATE:
+				return getEmpresaBAC().updateEstado(request);
+
+			case DELETE:
+				return getEmpresaBAC().deleteEstado(request);
+
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
+		}
+		return null;
+	}
+
+	private EstadoResponse processEstado(ValidationContextIndicator indicator,
+			PersistanceActionEnum persistType,
+			EstadoMaintenanceRequest request)
+	{
+		EstadoResponse response = new EstadoResponse();
+		InternalResponse internalResponse = null;
+
+		// Persist
+		internalResponse = doPersistanceEstado(request, persistType);
+
+		// Handle the processing for all previous methods regardless of them failing or succeeding.
+		return (EstadoResponse)handleReturn(response, internalResponse, null, true);
+	}
 }

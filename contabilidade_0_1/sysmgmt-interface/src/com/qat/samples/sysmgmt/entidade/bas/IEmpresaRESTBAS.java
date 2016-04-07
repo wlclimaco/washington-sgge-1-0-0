@@ -19,6 +19,8 @@ import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.response.DepositoResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.EmpresaResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.FilialResponse;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoMaintenanceRequest;
+import com.qat.samples.sysmgmt.estado.model.response.EstadoResponse;
 import com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.response.ClassificacaoResponse;
@@ -163,4 +165,17 @@ public interface IEmpresaRESTBAS
 	@POST
 	@Path("/fetchUsuarioByRequest/")
 	public UsuarioResponse fetchUsuarioByRequest(UsuarioInquiryRequest request);
+
+
+	@POST
+	@Path("/insertEstado/")
+	public EstadoResponse insertEstado(EstadoMaintenanceRequest request);
+
+	@POST
+	@Path("/updateEstado/")
+	public EstadoResponse updateEstado(EstadoMaintenanceRequest request);
+
+	@POST
+	@Path("/deleteEstado/")
+	public EstadoResponse deleteEstado(EstadoMaintenanceRequest request);
 }
