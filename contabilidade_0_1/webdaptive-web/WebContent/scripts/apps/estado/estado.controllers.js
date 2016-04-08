@@ -17,31 +17,29 @@
 		cvm.isActive =    false;
 		//toastrConfig.closeButton = true;
 		function createNewDatasource(resIn) {
-			var countyDataSource = {
-				pageSize: 20, //using default paging of 20
-				getRows: function (params) {
-					if (initLoad){
-						//console.log("getRows() initLoad=true: " + resIn);
-						initLoad=false;
-						cvm.isActive = false;
-						var dataThisPage = resIn.counties;
-						cvm.gList =  dataThisPage;
-						var lastRow = (resIn) ? resIn.resultsSetInfo.totalRowsAvailable : 0;
-						params.successCallback(dataThisPage, lastRow);
+			debugger
+			simpleList = [];
+			simpleList.push({
 
-					}
-					else{
-						//console.log('asking for ' + params.startRow + ' to ' + params.endRow);
-						SysMgmtData.processPostPageData(fetch_url, new qat.model.pagedInquiryRequest(  params.startRow/20, true), function(res){
-							var dataThisPage = res.counties;
-							cvm.gList =  dataThisPage;
-							var lastRow = res.resultsSetInfo.totalRowsAvailable;
-							params.successCallback(dataThisPage, lastRow);
-						});
-					}
-				}
-			};
-			cvm.countyGridOptions.api.setDatasource(countyDataSource);
+				 "createUser":null,
+				 "modifyUser":null,
+				 "createDateUTC":null,
+				 "modifyDateUTC":null,
+				 "createDataUTC":null,
+				 "modifyDataUTC":null,
+				 "id":null,
+				 "nome":null,
+				 "abreviacao":null
+			  });
+			for(x=0;x < resIn.estadoList.length ;x++){
+				simpleList.push(resIn.estadoList[x])
+			}
+
+
+		cvm.tableParams = new NgTableParams({}, {
+		  dataset: angular.copy(simpleList)
+		});
+
 		};
 
 		//initial data load
@@ -69,9 +67,10 @@
 		function processPostData(_url, _req, _bLoading)
 		{
 			//console.log(_url);
-			if (_bLoading){
-				cvm.countyGridOptions.api.showLoadingOverlay(true);
-			}
+		//	if (_bLoading){
+		//		cvm.countyGridOptions.api.showLoadingOverlay(true);
+		//	}
+
 			SysMgmtData.processPostPageData(_url, _req, function(res){
 				if (res){
 					initLoad = true;
@@ -157,7 +156,7 @@
 			{headerName: "County Description", field: "description", width: 450}
 		];
 
-		processPostData(fetch_url, new qat.model.pagedInquiryRequest( 0, true), false);
+
 		//grid row select function
 		function rowSelectedFunc(event) {
 			cvm.county.id = event.node.data.id;
@@ -178,39 +177,11 @@
 
 
 		//var simpleList = processGetData("_url");
-		simpleList = [{
-          "name": "aab",
-          "age": 5,
-          "money": 5
-        },
-        {
-          "name": "aac",
-          "age": 55,
-          "money": 0
-        },
-        {
-          "name": "aad",
-          "age": 555,
-          "money": 1
-        },
-        {
-          "name": "aae",
-          "age": 5555,
-          "money": 2
-        },
-        {
-          "name": "aaf",
-          "age": 55555,
-          "money": 3
-        },
-        {
-          "name": "aag",
-          "age": 555555,
-          "money": 4
-        }]
+		simpleList = [ ];
 		var originalData = angular.copy(simpleList);
 
 		cvm.tableParams = new NgTableParams({}, {
+		  filterDelay: 0,
 		  dataset: angular.copy(simpleList)
 		});
 
@@ -221,6 +192,44 @@
 		cvm.del = del;
 		cvm.hasChanges = hasChanges;
 		cvm.saveChanges = saveChanges;
+		cvm.cancel = cancel;
+		cvm.del = del;
+		cvm.save = save;
+
+		//////////
+
+		//////////
+
+    function cancel(row, rowForm) {
+      var originalRow = resetRow(row, rowForm);
+      angular.extend(row, originalRow);
+    }
+
+    function del(row) {
+      _.remove(self.tableParams.settings().dataset, function(item) {
+        return row === item;
+      });
+      self.tableParams.reload().then(function(data) {
+        if (data.length === 0 && self.tableParams.total() > 0) {
+          self.tableParams.page(self.tableParams.page() - 1);
+          self.tableParams.reload();
+        }
+      });
+    }
+
+    function resetRow(row, rowForm){
+      row.isEditing = false;
+      rowForm.$setPristine();
+      self.tableTracker.untrack(row);
+      return _.findWhere(originalData, function(r){
+        return r.id === row.id;
+      });
+    }
+
+    function save(row, rowForm) {
+      var originalRow = resetRow(row, rowForm);
+      angular.extend(originalRow, row);
+    }
 
 		//////////
 
