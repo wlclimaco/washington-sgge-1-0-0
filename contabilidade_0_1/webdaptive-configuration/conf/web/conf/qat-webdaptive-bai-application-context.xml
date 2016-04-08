@@ -7,7 +7,5 @@
 	<!-- ========================= BAI DEFINITIONS ======================== -->
 
 	<!-- this bean implements AsyncRespository bai methods -->
-	<bean id="asyncRepositoryBAI" class="com.qat.webdaptive.bai.impl.InMemoryAsyncRespositoryBAIImpl">
-	</bean>
 
 </beans>

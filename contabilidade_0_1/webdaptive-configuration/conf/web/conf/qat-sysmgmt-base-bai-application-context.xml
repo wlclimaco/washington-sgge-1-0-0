@@ -7,7 +7,6 @@
 	<!-- ========================= BAI DEFINITIONS ======================== -->
 
 	<!-- this bean implements county bai methods -->
-	<bean id="countyBAI" class="com.qat.webdaptive.bai.impl.InMemoryCountyBAIImpl">
-	</bean>
+
 
 </beans>

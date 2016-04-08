@@ -46,6 +46,7 @@
 	<mvc:resources mapping="/commons/**" location="/commons/"/>
 	<mvc:resources mapping="/scripts/**" location="/scripts/"/>
 	<mvc:resources mapping="/styles/**" location="/styles/"/>
+	<mvc:resources mapping="/views/**" location="/views/"/>
 	<mvc:resources mapping="/thirdparty/**" location="/thirdparty/"/>
 	<mvc:resources mapping="/thirdparty/components/bootstrap/dist/css/**" location="/thirdparty/components/bootstrap/dist/css/"/>
 	<mvc:resources mapping="/thirdparty/components/metisMenu/dist/**" location="/thirdparty/components/metisMenu/dist/"/>
