@@ -47,6 +47,8 @@ public class Entidade extends ModelCosmeDamiao
 
 	private List<BancoPessoa> bancos;
 
+	private List<NotificationPreferences> notificacoes;
+
 	public List<Usuario> getUsuarios()
 	{
 		return usuarios;
@@ -265,6 +267,16 @@ public class Entidade extends ModelCosmeDamiao
 		this.entidadeId = entidadeId;
 	}
 
+	public List<NotificationPreferences> getNotificacoes()
+	{
+		return notificacoes;
+	}
+
+	public void setNotificacoes(List<NotificationPreferences> notificacoes)
+	{
+		this.notificacoes = notificacoes;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -273,7 +285,8 @@ public class Entidade extends ModelCosmeDamiao
 				+ getNome() + ", getEnderecos()=" + getEnderecos() + ", getDocumentos()=" + getDocumentos()
 				+ ", getEmails()=" + getEmails() + ", getTelefones()=" + getTelefones() + ", getCnaes()=" + getCnaes()
 				+ ", getRegime()=" + getRegime() + ", getEntidadeEnum()=" + getEntidadeEnum() + ", getConfiguracao()="
-				+ getConfiguracao() + ", getEntidadeId()=" + getEntidadeId() + ", toString()=" + super.toString() + "]";
+				+ getConfiguracao() + ", getEntidadeId()=" + getEntidadeId() + ", getNotificacoes()="
+				+ getNotificacoes() + ", toString()=" + super.toString() + "]";
 	}
 
 }
