@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:cxf="http://cxf.apache.org/core"
+		xmlns:jaxws="http://cxf.apache.org/jaxws"
+		xmlns:task="http://www.springframework.org/schema/task"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xsi:schemaLocation="
+			http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+			http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<import resource="classpath:META-INF/cxf/cxf.xml"/>
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+
+    <cxf:bus>
+        <cxf:features>
+            <cxf:logging/>
+        </cxf:features>
+    </cxf:bus>
+
+	<bean id="QATAppContext" class="com.qat.framework.util.QATAppContext"></bean>
+	<!-- Scans the classpath for annotated components that will be auto-registered as Spring beans.
+	 For example @Controller and @Service. Make sure to set the correct base-package -->
+	<context:component-scan base-package="com.qat.webdaptive.controller" />
+	<bean id="qat-debug-loggingInterceptor" class="com.qat.framework.aop.QATDebugLoggingAOP"></bean>
+
+	<!--	 ========================= Web Service Client Definitions ======================== -->
+    <jaxws:client id="countyBASClientTarget"
+                  serviceClass="com.qat.samples.sysmgmt.bas.ICountyBAS"
+                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/CountyService">
+    	<jaxws:outInterceptors>
+        	<ref bean="wss4jOutInterceptor"/>
+ 		</jaxws:outInterceptors>
+     </jaxws:client>
+
+    <jaxws:client id="procedureBASClientTarget"
+                  serviceClass="com.qat.samples.sysmgmt.bas.IProcedureBAS"
+                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/ProcedureService">
+    	<jaxws:outInterceptors>
+        	<ref bean="wss4jOutInterceptor"/>
+ 		</jaxws:outInterceptors>
+     </jaxws:client>
+
+     <jaxws:client id="produtoBASClientTarget"
+                  serviceClass="com.qat.samples.sysmgmt.produto.bas.IProdutoBAS"
+                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/ProdutoService">
+    	<jaxws:outInterceptors>
+        	<ref bean="wss4jOutInterceptor"/>
+ 		</jaxws:outInterceptors>
+     </jaxws:client>
+
+     <jaxws:client id="empresaBASClientTarget"
+                  serviceClass="com.qat.samples.sysmgmt.entidade.bas.IEmpresaBAS"
+                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/EntidadeService">
+    	<jaxws:outInterceptors>
+        	<ref bean="wss4jOutInterceptor"/>
+ 		</jaxws:outInterceptors>
+     </jaxws:client>
+
+     <jaxws:client id="pessoaBASClientTarget"
+                  serviceClass="com.qat.samples.sysmgmt.pessoa.bas.IPessoaBAS"
+                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/PessoaService">
+    	<jaxws:outInterceptors>
+        	<ref bean="wss4jOutInterceptor"/>
+ 		</jaxws:outInterceptors>
+     </jaxws:client>
+
+     <jaxws:client id="siteBASClientTarget"
+                  serviceClass="com.qat.samples.sysmgmt.site.bas.ISiteBAS"
+                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/SiteService">
+    	<jaxws:outInterceptors>
+        	<ref bean="wss4jOutInterceptor"/>
+ 		</jaxws:outInterceptors>
+     </jaxws:client>
+<!--
+     <jaxws:client id="entidadeBASClientTarget"
+                  serviceClass="com.qat.samples.sysmgmt.entidade.bas.IEmpresaBAS"
+                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/entidadeService">
+     </jaxws:client>
+
+      <jaxws:client id="cidadeBASClientTarget"
+                  serviceClass="com.qat.samples.sysmgmt.cidade.bas.ICidadeBAS"
+                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/CidadeService">
+     </jaxws:client>
+
+     <jaxws:client id="clienteBASClientTarget"
+                  serviceClass="com.qat.samples.sysmgmt.cliente.bas.IClienteBAS"
+                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/ClienteService">
+    	<jaxws:outInterceptors>
+        	<ref bean="wss4jOutInterceptor"/>
+ 		</jaxws:outInterceptors>
+     </jaxws:client>
+
+      <jaxws:client id="supermercadoBASClientTarget"
+                  serviceClass="com.qat.samples.sysmgmt.supermercado.bas.ISupermercadoBAS"
+                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/SupermercadoService">
+    	<jaxws:outInterceptors>
+        	<ref bean="wss4jOutInterceptor"/>
+ 		</jaxws:outInterceptors>
+     </jaxws:client>
+
+
+      <jaxws:client id="controleBASClientTarget"
+                  serviceClass="com.qat.samples.sysmgmt.controle.bas.IControleBAS"
+                 address="http://localhost:8080/qat-sysmgmt-sample/services/ws/ControleService">
+    	<jaxws:outInterceptors>
+        	<ref bean="wss4jOutInterceptor"/>
+ 		</jaxws:outInterceptors>
+     </jaxws:client>
+-->
+	<bean id="wss4jOutInterceptor" class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
+    	<property name="properties">
+        	<map>
+            	<entry key="action" value="UsernameToken" />
+            	<entry key="user" value="rod"/>
+            	<entry key="passwordType" value="PasswordText" />
+				<entry key="passwordCallbackClass" value="com.qat.samples.sysmgmt.bas.ws.client.ClientPasswordCallback" />
+        	</map>
+    	</property>
+	</bean>
+
+	<task:scheduler id="taskScheduler" />
+	<task:executor id="taskExecutor" pool-size="2" />
+	<task:annotation-driven executor="taskExecutor" scheduler="taskScheduler" />
+
+ 	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<list>
+				<value>*BAS*</value>
+				<value>*BAI*</value>
+			</list>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>qat-debug-loggingInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>

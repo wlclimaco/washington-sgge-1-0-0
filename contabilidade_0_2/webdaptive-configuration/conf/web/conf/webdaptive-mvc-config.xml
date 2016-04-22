@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context
+	   		http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/mvc
+			http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- Activates various annotations to be detected in bean classes -->
+	<context:annotation-config />
+
+	<!-- Scans the classpath for annotated components that will be auto-registered as Spring beans.
+	 For example @Controller and @Service. Make sure to set the correct base-package -->
+	<context:component-scan base-package="com.qat.webdaptive.controller" />
+
+	<!-- Configures the annotation-driven Spring MVC Controller programming model. -->
+	<mvc:annotation-driven >
+	    <mvc:async-support default-timeout="3000"/>
+	</mvc:annotation-driven>
+
+	<!--  Maps directly to JSP pages-->
+	<!-- Maps directly to JSP pages -->
+	<mvc:view-controller path="/login" view-name="../login" />
+	<mvc:view-controller path="/" view-name="redirect:/login" />
+	<mvc:view-controller path="/index" view-name="/index"/>
+	<mvc:view-controller path="/wd_main" view-name="/wd_main"/>
+	<mvc:view-controller path="/wd_main.m" view-name="/wd_main.m"/>
+	<mvc:view-controller path="/keep_alive" view-name="/keep_alive"/>
+	<mvc:view-controller path="/user_info" view-name="/user_info"/>
+	<mvc:view-controller path="/wd_arch" view-name="/wd_arch"/>
+	<mvc:view-controller path="/timeout" view-name="/timeout"/>
+	<mvc:view-controller path="/qat_mvc_tabs" view-name="/qat_mvc_tabs"/>
+	<mvc:view-controller path="/qat_bas_tabs" view-name="/qat_bas_tabs"/>
+	<mvc:view-controller path="/wd_other_tabs" view-name="/wd_other_tabs"/>
+	<mvc:view-controller path="/counties_bas_rest" view-name="/counties_bas_rest"/>
+	<mvc:view-controller path="/stocks" view-name="/stocks"/>
+
+	<!--  Static Content to bypass dispatcher-->
+	<mvc:resources mapping="/training/**" location="/training/"/>
+	<mvc:resources mapping="/images/**" location="/images/"/>
+	<mvc:resources mapping="/commons/**" location="/commons/"/>
+	<mvc:resources mapping="/scripts/**" location="/scripts/"/>
+	<mvc:resources mapping="/styles/**" location="/styles/"/>
+	<mvc:resources mapping="/views/**" location="/views/"/>
+	<mvc:resources mapping="/thirdparty/**" location="/thirdparty/"/>
+	<mvc:resources mapping="/thirdparty/components/bootstrap/dist/css/**" location="/thirdparty/components/bootstrap/dist/css/"/>
+	<mvc:resources mapping="/thirdparty/components/metisMenu/dist/**" location="/thirdparty/components/metisMenu/dist/"/>
+	<mvc:resources mapping="/thirdparty/dist/css/**" location="/thirdparty/dist/css/"/>
+	<mvc:resources mapping="/thirdparty/dist/css/**" location="/thirdparty/dist/css/"/>
+	<mvc:resources mapping="/thirdparty/components/morrisjs/**" location="/thirdparty/components/morrisjs/"/>
+	<mvc:resources mapping="/thirdparty/components/font-awesome/css/**" location="/thirdparty/components/font-awesome/css/"/>
+	<mvc:resources mapping="/thirdparty/components/morrisjs/**" location="/thirdparty/components/morrisjs/"/>
+<!-- 	<mvc:resources mapping="/startbootstrap/css/*.*" location="/startbootstrap/css/"/> -->
+<!-- 	<mvc:resources mapping="/startbootstrap/fonts/*.*" location="/startbootstrap/fonts/"/> -->
+<!-- 	<mvc:resources mapping="/startbootstrap/js/*.*" location="/startbootstrap/js/"/> -->
+	<mvc:resources mapping="/startbootstrap/**" location="/startbootstrap/"/>
+
+    <!-- Resolves view names to protected .jsp resources within the /WEB-INF directory -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean id="uiSettings" class="java.lang.String">
+    	<constructor-arg type="String" value="/WEB-INF/classes/qat-sysmgmt-system-configuration.properties"/>
+    </bean>
+
+</beans>
