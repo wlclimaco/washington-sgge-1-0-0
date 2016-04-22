@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/jms
+            http://www.springframework.org/schema/jms/spring-jms.xsd">
+
+	<!--
+	A com/qat/config/qat-jms-context.properties file must be configured on the classpath at runtime.
+	The properties file is used because the variables under the property element of the jndiTemplate
+	will most likely be different depending on the environment of the JMS server.
+
+	The PropertyPlaceholderConfigurer below is configured to allow any and all properties to be missing
+	at deploy time, or to be wrong in the case of the location property.
+	 -->
+
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:qat-jms-context.properties" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="order" value="1" />
+	</bean>
+
+	<!-- ========================= JMS COnfigurations ======================== -->
+	<bean id="jndiTemplate" class="org.springframework.jndi.JndiTemplate" lazy-init="true">
+    	<property name="environment">
+       		<props>
+           		<prop key="java.naming.factory.initial">${jms.factory.initial}</prop>
+           		<prop key="java.naming.provider.url">${jms.provider.url}</prop>
+				<prop key="java.naming.security.principal">${jms.principal}</prop>
+				<prop key="java.naming.security.credentials">${jms.credentials}</prop>
+				<prop key="connectionFactoryNames">ConnectionFactory, QueueConnectionFactory, TopicConnectionFactry,jms/RemoteConnectionFactory</prop>
+				<prop key="queue.queue/SampRequest">queue/SampRequest</prop>
+				<prop key="queue.queue/SampReply">queue/SampReply</prop>
+				<prop key="queue.queue/Samp2Request">queue/Samp2Request</prop>
+				<prop key="queue.queue/Samp2Reply">queue/Samp2Reply</prop>
+				<prop key="queue.queue/Samp3Request">queue/Samp3Request</prop>
+				<prop key="queue.queue/Samp3Reply">queue/Samp3Reply</prop>
+				<prop key="queue.queue/Samp4Request">queue/Samp4Request</prop>
+				<prop key="queue.queue/Samp4Reply">queue/Samp4Reply</prop>
+				<prop key="topic.topic/SampTopic">topic/SampTopic</prop>
+				<prop key="topic.topic/Samp2Topic">topic/Samp2Topic</prop>
+ 			</props>
+    	</property>
+	</bean>
+
+	<beans profile="jboss">
+		<bean id="jndiServerTemplate" class="org.springframework.jndi.JndiTemplate" lazy-init="true"/>
+	</beans>
+
+	<beans profile="tomcat">
+		<bean id="jndiServerTemplate" parent="jndiTemplate" lazy-init="true"/>
+	</beans>
+
+</beans>

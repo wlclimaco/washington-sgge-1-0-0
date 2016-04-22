@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.qat.sysmgmt</groupId>
+        <artifactId>sysmgmt-parent-pom</artifactId>
+        <version>2.0.0</version>
+        <relativePath>../sysmgmt-parent-pom/pom.xml</relativePath>
+    </parent>
+
+    <artifactId>sysmgmt-service-jms-war</artifactId>
+    <packaging>war</packaging>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.qat.sysmgmt</groupId>
+            <artifactId>sysmgmt-implementation</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.qat.framework</groupId>
+            <artifactId>qat-framework-service-jms</artifactId>
+            <version>${qat.framework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.qat.framework</groupId>
+            <artifactId>qat-framework-service-cxf</artifactId>
+            <version>${qat.framework.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-client</artifactId>
+            <version>5.12.0</version>
+        </dependency>
+        <!--  if running ActiveMQ embedded in Tomcat, uncomment the following three dependencies -->
+        <!--
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-broker</artifactId>
+            <version>5.12.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-kahadb-store</artifactId>
+            <version>5.12.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-spring</artifactId>
+            <version>5.12.0</version>
+        </dependency>
+ -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>${cxf.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-jms</artifactId>
+            <version>${cxf.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--         <dependency> -->
+        <!--             <groupId>org.apache.cxf</groupId> -->
+        <!--             <artifactId>cxf-rt-transports-jms</artifactId> -->
+        <!--             <version>2.7.11</version> -->
+        <!--             <exclusions> -->
+        <!--                 <exclusion> -->
+        <!--                     <groupId>*</groupId> -->
+        <!--                     <artifactId>*</artifactId> -->
+        <!--                 </exclusion> -->
+        <!--             </exclusions> -->
+        <!--         </dependency> -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>${cxf.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-simple</artifactId>
+            <version>${cxf.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-wsdl</artifactId>
+            <version>${cxf.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-databinding-jaxb</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+            <version>${springframework.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${org.slf4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>2.4.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4-1204-jdbc42</version>
+        </dependency>
+
+        <!-- Testing dependencies -->
+        <!--  The javax.transaction dependency is marked for test because it is needed only for JBoss -->
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>jta</artifactId>
+            <version>1.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${springframework.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mockrunner</groupId>
+            <artifactId>mockrunner-jms</artifactId>
+            <version>1.0.10</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+    <build>
+
+        <finalName>qat-sysmgmt-sample-jms-service</finalName>
+        <!--         <resources> -->
+        <!--             <resource> -->
+        <!--                 <filtering>true</filtering> -->
+        <!--                 <directory>src/main/webapp</directory> -->
+        <!--             </resource> -->
+        <!--         </resources> -->
+
+        <plugins>
+
+            <!-- Enable variable substitution on the web.xml file. -->
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <packagingExcludes>WEB-INF/lib/cglib-2.2.2.jar</packagingExcludes>
+                    <webResources>
+                        <resource>
+                            <filtering>true</filtering>
+                            <directory>src/main/webapp</directory>
+                            <includes>
+                                <include>**/web.xml</include>
+                                <include>**/log4j2.xml</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                    <!-- <warSourceDirectory>src/main/webapp</warSourceDirectory> -->
+                    <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>default</id>
+            <properties>
+                <log4j.logdir>../logs</log4j.logdir>
+                <log4j.logfilename>qat-sysmgmt-sample-jms</log4j.logfilename>
+                <spring.active.profile>tomcat,postgres</spring.active.profile>
+                <!--  If running ActiveMQ embedded in Tomcat, comment the above line and uncomment the following line. -->
+                <!--  <spring.active.profile>tomcat,activemq_embedded</spring.active.profile> -->
+            </properties>
+        </profile>
+    </profiles>
+</project>

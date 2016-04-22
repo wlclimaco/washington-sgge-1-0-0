@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:jaxws="http://cxf.apache.org/jaxws"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+			http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+            http://www.springframework.org/schema/jms
+            http://www.springframework.org/schema/jms/spring-jms.xsd">
+
+	<import resource="classpath:META-INF/cxf/cxf.xml"/>
+<!-- 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/> -->
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+
+	<!-- ========================= BAS Client Definitions ======================== -->
+
+	<jaxws:client id="countyWSClientTarget" address="jms://" serviceClass="com.qat.samples.sysmgmt.service.ICountyWS">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+			<bean class="org.apache.cxf.transport.jms.JMSConfigFeature" p:jmsConfig-ref="jmsConfig" />
+		</jaxws:features>
+	</jaxws:client>
+
+	<!-- ========================= JMS Configurations ======================== -->
+
+	<bean id="jmsConfig" class="org.apache.cxf.transport.jms.JMSConfiguration"
+			p:connectionFactory-ref="jmsConnectionFactory"
+			p:destinationResolver-ref="jmsDestinationResolver"
+			p:targetDestination="queue/Samp3Request"
+			p:replyDestination="queue/Samp3Reply">
+	</bean>
+
+<!--
+	<bean id="jmsDestinationResolver" class="org.springframework.jms.support.destination.JndiDestinationResolver">
+		<property name="jndiTemplate">
+			<ref bean="jndiTemplate"/>
+		</property>
+	</bean>
+	 -->
+
+	<bean id="jmsDestinationResolver" class="org.apache.cxf.transport.jms.util.JMSDestinationResolver">
+		<property name="jndiTemplate">
+			<bean class="org.apache.cxf.transport.jms.util.JndiHelper">
+			<constructor-arg>
+       		<props>
+           		<prop key="java.naming.factory.initial">${jms.factory.initial}</prop>
+           		<prop key="java.naming.provider.url">${jms.provider.url}</prop>
+				<prop key="java.naming.security.principal">${jms.principal}</prop>
+				<prop key="java.naming.security.credentials">${jms.credentials}</prop>
+				<prop key="connectionFactoryNames">ConnectionFactory, QueueConnectionFactory, TopicConnectionFactry,jms/RemoteConnectionFactory</prop>
+				<prop key="queue.queue/SampRequest">queue/SampRequest</prop>
+				<prop key="queue.queue/SampReply">queue/SampReply</prop>
+				<prop key="queue.queue/Samp2Request">queue/Samp2Request</prop>
+				<prop key="queue.queue/Samp2Reply">queue/Samp2Reply</prop>
+				<prop key="queue.queue/Samp3Request">queue/Samp3Request</prop>
+				<prop key="queue.queue/Samp3Reply">queue/Samp3Reply</prop>
+				<prop key="queue.queue/Samp4Request">queue/Samp4Request</prop>
+				<prop key="queue.queue/Samp4Reply">queue/Samp4Reply</prop>
+				<prop key="topic.topic/SampTopic">topic/SampTopic</prop>
+				<prop key="topic.topic/Samp2Topic">topic/Samp2Topic</prop>
+ 			</props>
+    	    </constructor-arg>
+    	    </bean>
+
+		</property>
+	</bean>
+
+ 	<import resource="classpath:conf/qat-jms-client-context.xml"/>
+</beans>

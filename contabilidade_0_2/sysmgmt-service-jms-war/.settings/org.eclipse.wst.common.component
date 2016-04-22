@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="sysmgmt-service-jms-war">
+        <wb-resource deploy-path="/WEB-INF/web.xml" source-path="/src/main/webapp/WEB-INF/web.xml"/>
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="sysmgmt-implementation-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/sysmgmt-implementation/sysmgmt-implementation">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="sysmgmt-interface-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/sysmgmt-interface/sysmgmt-interface">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="qat-sysmgmt-sample-jms-service"/>
+        <property name="java-output-path" value="/sysmgmt-service-jms-war/target/classes"/>
+        <property name="component.exclusion.patterns" value="WEB-INF/lib/cglib-2.2.2.jar"/>
+    </wb-module>
+</project-modules>

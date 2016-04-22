@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- - Application context definition for QAT Backends. -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+	<!-- ========================= GENERAL DEFINITIONS ========================= -->
+
+	<!-- Configurer that replaces ${...} placeholders with values from properties files -->
+	<!-- (in this case, mail and JDBC related properties) <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations"> <list> <value>WEB-INF/mail.properties</value> <value>WEB-INF/jdbc.properties</value>
+		</list> </property> </bean> -->
+
+	<!-- =================== Spring Custom Property Editors===================== -->
+
+
+	<!-- ========================= QAT FRAMEWORK DEFINITIONS ======================== -->
+	<bean id="QATAppContext" class="com.qat.framework.util.AppContextHelper"></bean>
+	<bean id="qat-debug-loggingInterceptor" class="com.qat.framework.aop.DebugLoggingAOP"></bean>
+
+	<!-- - Build in timing profiler must have log4j in TRACE for this class. <bean id="timingLogger" class="org.springframework.aop.interceptor.PerformanceMonitorInterceptor"/> -->
+
+	<!-- ============ Parent PropertyPlaceholderConfigurer Bean Definitions =========== -->
+
+	<bean id="qatPropertyPlaceholderConfigurer" abstract="true"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<!-- <property name="location" value="classpath:To be specified by inheriting bean." /> -->
+		<property name="ignoreResourceNotFound" value="false" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="order" value="10000" />
+	</bean>
+
+	<!-- This configurer will insure there are no unresolved place holder variables in the context. It must -->
+	<!-- be last so all other PropertyPlaceholderConfigurer beans must have an order property less then Java -->
+	<!-- Integer.MAX_VALUE. Use the abstract qatPropertyPlaceholderConfigurer bean if you need to define -->
+	<!-- a property placeholder bean. Example below: -->
+	<!-- <bean parent="qatPropertyPlaceholderConfigurer" > -->
+	<!-- <property name="location" value="classpath:<full path to my properties file>" /> -->
+	<!-- </bean> -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="false" />
+	</bean>
+
+	<!-- ========================= ASPECT CONFIGURATIONS ======================== -->
+
+	<!-- Used for built-in timing interceptor <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames"> <list> <value>solutionBAC</value> </list> </property> <property name="interceptorNames">
+		<list> <value>timingLogger</value> </list> </property> </bean> -->
+
+	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<list>
+				<value>*BAR*</value>
+				<value>*BAC*</value>
+			</list>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>qat-debug-loggingInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<beans profile="tomcat,jboss">
+		<!-- - Transaction advice gets applied through the AOP configuration below. -->
+		<aop:config>
+			<!-- pointcut matches execution of service with expression -->
+			<!-- we have defined the pointcut expression to make the entire bas layer transactional -->
+			<aop:pointcut id="qat-samples-bacOperations" expression="execution(* com.qat.*.*.*.bac.*.*(..))" />
+			<!-- when match occurs, the advice defined by ‘txadvice’ will run -->
+			<aop:advisor advice-ref="qat-txAdvice" pointcut-ref="qat-samples-bacOperations" />
+		</aop:config>
+
+		<aop:config>
+			<!-- pointcut matches execution of service with expression -->
+			<!-- we have defined the pointcut expression to make the entire bas layer transactional -->
+			<aop:pointcut id="qat-bacOperations" expression="execution(* com.qat.*.*.bac.*.*(..))" />
+			<!-- when match occurs, the advice defined by ‘txadvice’ will run -->
+			<aop:advisor advice-ref="qat-txAdvice" pointcut-ref="qat-bacOperations" />
+		</aop:config>
+
+		<!-- Transaction advice definition, based on method name patterns. Defaults to PROPAGATION_REQUIRED
+			for all methods whose name starts with "*", and to PROPAGATION_REQUIRED with read-only hint for all whose
+			name starts with "fetch*". -->
+		<tx:advice id="qat-txAdvice" transaction-manager="transactionManager">
+			<tx:attributes>
+				<!-- all methods starting with 'get' are read-only -->
+				<tx:method name="fetch*" propagation="REQUIRED" read-only="true" />
+				<!-- other methods use the default transaction settings -->
+				<tx:method name="*" propagation="REQUIRED" />
+			</tx:attributes>
+		</tx:advice>
+	</beans>
+
+</beans>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/jms
+            http://www.springframework.org/schema/jms/spring-jms.xsd">
+
+
+	<!-- ========================= JMS COnfigurations ======================== -->
+	<!-- This client context file provides resources needed by JMS clients.  By importing
+	     this file into context files all that is needed is to define the specific
+	     Destination objects (beans) with ID requestDestination and, if applicable, replyDestination,
+	     for the Topic or Request the client needs to send messages.
+	     It is likely that this can be used in most client situations without modification. -->
+
+	<import resource="classpath:conf/qat-jms-context.xml"/>
+
+	<bean name="jmsConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean" lazy-init="true">
+    <property name="jndiTemplate" ref="jndiTemplate" />
+		<property name="jndiName" value="jms/RemoteConnectionFactory" />
+	</bean>
+
+	<bean name="simpleMessageConverter" class="org.springframework.jms.support.converter.SimpleMessageConverter"/>
+
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate" lazy-init="true">
+		 <property name="connectionFactory" ref="jmsConnectionFactory" />
+		 <property name="messageConverter" ref="simpleMessageConverter" />
+	</bean>
+
+	<bean id="jmsSender" class="com.qat.framework.service.jms.JMSSender" lazy-init="true">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="requestDestination" ref="requestDestination" />
+	</bean>
+
+	<bean id="jmsSenderWithReply" class="com.qat.framework.service.jms.JMSSender" lazy-init="true">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="requestDestination" ref="requestDestination" />
+		<property name="replyDestination" ref="replyDestination" />
+	</bean>
+
+		<bean id="jmsReceiver" class="com.qat.framework.service.jms.JMSReceiver" lazy-init="true">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="recvDestination" ref="replyDestination" />
+	</bean>
+
+</beans>

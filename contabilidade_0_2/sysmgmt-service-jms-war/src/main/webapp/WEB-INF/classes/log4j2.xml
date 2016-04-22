@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- If you need to debug the log4j configuration itself change debug="false" to debug="true"
+     The threshold attribute can be set to limit the threshold for the entire
+     configuration regardless of what level you set at the logger or root.  So
+     if you set threshold="warn", levels higher (info, debug, trace, all) will be ignored.
+
+     The monitorInterval specifies how often, in seconds, the config file will be reloaded.
+-->
+<Configuration debug="false" threshold="all" monitorInterval="30">
+
+  <!-- param elements correspond to properties in the appender class.
+       Use camel case when specifying them.
+       Put all params first.
+       ISO8601 format is yyyy-MM-DD HH:MM:SS,sss
+  -->
+  <Appenders>
+	<Console name="Console" target="SYSTEM_OUT">
+		<PatternLayout pattern="[%-5p][%t][%d{ISO8601}] %l - %m%n"/>
+	</Console>
+
+	<RollingFile name="FILE" fileName="${log4j.logdir}/${log4j.logfilename}.log"
+	filePattern="${log4j.logdir}/$${date:yyyy-MM}/${log4j.logfilename}-%d{MM-dd-yyyy}-%i.log.gz">
+		<PatternLayout pattern="[%-5p][%t][%d{ISO8601}] %l - %m%n"/>
+		<Policies>
+		  <SizeBasedTriggeringPolicy size="8MB" />
+		  <TimeBasedTriggeringPolicy />
+		</Policies>
+		<DefaultRolloverStrategy max="5" />
+	</RollingFile>
+
+  <!-- When using the AsyncAppender, by default, the location information
+       is set to false which means there will be no effort to extract the
+       location information related to the event.  However, when debugging, this
+       information will be needed, so set the locationInfo property to true on the
+       ASYNC_DEBUG appender
+  -->
+    <Async name="ASYNC_DEBUG" includeLocation="true">
+		<AppenderRef ref="FILE"/>
+	</Async>
+  </Appenders>
+  <Loggers>
+	<logger name="org.apache" additivity="false" level="error">
+		<AppenderRef ref="ASYNC_DEBUG"/>
+	</logger>
+
+	<logger name="org.apache.cxf" additivity="false" level="info">
+		<AppenderRef ref="ASYNC_DEBUG"/>
+	</logger>
+
+    <logger name="java.sql" additivity="false" level="trace">
+ 		<AppenderRef ref="ASYNC_DEBUG"/>
+    </logger>
+
+    <logger name="org.apache.ibatis" additivity="false" level="trace">
+		<AppenderRef ref="ASYNC_DEBUG"/>
+    </logger>
+
+    <logger name="net.sf.ehcache" additivity="false" level="warn">
+		<AppenderRef ref="ASYNC_DEBUG"/>
+    </logger>
+
+    <logger name="org.springframework" additivity="false" level="debug">
+		<AppenderRef ref="ASYNC_DEBUG"/>
+    </logger>
+
+    <logger name="com.zaxxer.hikari.pool" additivity="false" level="error">
+		<AppenderRef ref="ASYNC_DEBUG"/>
+    </logger>
+
+    <logger name="org.springframework.jms.listener" additivity="false" level="debug">
+		<AppenderRef ref="ASYNC_DEBUG"/>
+    </logger>
+
+	<!-- level and priority mean the same thing.  Since we have to use level on the loggers
+	     use level instead of priority on root.
+	-->
+	<root level="trace">
+		<AppenderRef ref="ASYNC_DEBUG"/>
+	</root>
+  </Loggers>
+</Configuration>

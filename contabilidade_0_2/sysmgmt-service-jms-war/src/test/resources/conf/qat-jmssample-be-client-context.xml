@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/jms
+            http://www.springframework.org/schema/jms/spring-jms.xsd">
+
+
+	<!-- ========================= JMS COnfigurations ======================== -->
+
+	<import resource="classpath:conf/qat-jms-client-context.xml"/>
+
+	<!-- By using the import above, all that is needed is to define a bean with Destination properties
+	     It is important that the bean name be requestDestination because the file imported has a
+	     reference to that name. -->
+
+	<bean name="requestDestination" class="org.springframework.jndi.JndiObjectFactoryBean" lazy-init="true">
+		<property name="jndiTemplate" ref="jndiTemplate" />
+		<property name="jndiName" value="queue/Samp2Request" />
+	</bean>
+
+</beans>

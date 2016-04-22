@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Application context definition for the QAT data access layer.
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:jee="http://www.springframework.org/schema/jee"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+
+	<!-- ========================= RESOURCE DEFINITIONS ========================= -->
+	<beans profile="tomcat">
+		<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="qatDataSource" />
+		</bean>
+	</beans>
+
+	<beans profile="jboss">
+		<tx:jta-transaction-manager/>
+	</beans>
+
+	<beans profile="oracle">
+		<bean id="qatDataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+		    <constructor-arg ref="oracleHikariConfig" />
+		</bean>
+		<bean id="oracleHikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		    <property name="maximumPoolSize" value="10" />
+		    <property name="minimumIdle" value="2" />
+		    <property name="dataSourceClassName" value="oracle.jdbc.driver.OracleDriver" />
+		    <property name="username" value="${user}" />
+		    <property name="password" value="${password}" />
+		    <property name="dataSourceProperties">
+		        <props>
+		            <prop key="URL">${jdbcurl}</prop>
+		        </props>
+		    </property>
+		</bean>
+
+		<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		    <property name="locations">
+		        <list>
+		            <value>classpath:oracle.properties</value>
+		        </list>
+		    </property>
+		</bean>
+	</beans>
+
+	<beans profile="postgres">
+		<bean id="qatDataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+		    <constructor-arg ref="pgHikariConfig" />
+		</bean>
+		<bean id="pgHikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		    <property name="maximumPoolSize" value="10" />
+		    <property name="minimumIdle" value="2" />
+		    <property name="dataSourceClassName" value="org.postgresql.ds.PGSimpleDataSource" />
+		    <property name="username" value="${user}" />
+		    <property name="password" value="${password}" />
+		    <property name="dataSourceProperties">
+		        <props>
+		            <prop key="serverName">${hostName}</prop>
+		            <prop key="databaseName">${dbName}</prop>
+		            <prop key="portNumber">${portNumber}</prop>
+		        </props>
+		    </property>
+		</bean>
+
+		<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		    <property name="locations">
+		        <list>
+		            <value>classpath:postgresql.properties</value>
+		        </list>
+		    </property>
+		</bean>
+	</beans>
+
+</beans>

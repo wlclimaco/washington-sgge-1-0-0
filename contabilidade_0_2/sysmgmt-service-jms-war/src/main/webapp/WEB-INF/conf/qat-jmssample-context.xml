@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:jaxws="http://cxf.apache.org/jaxws"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+			http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+            http://www.springframework.org/schema/jms
+            http://www.springframework.org/schema/jms/spring-jms.xsd">
+
+<!--
+	<import resource="classpath:META-INF/cxf/cxf.xml"/>
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+ -->
+	<import resource="qat-activemq.xml"/>
+
+
+	<!-- ========================= JMS Web Service Configurations ======================== -->
+	<!-- The next three major elements show the usage of JMS as a transport by the CXF Web Service
+	     framework.  The endpoint defines the implementor, countyBAS which references a regular
+	     BAS.  It also defines the JMSConfigFeature which references the JMS server resources.
+	     So, it serves as a container, wiring together the JMS resources and the application
+	     implementation. Whereas normally a JMS listener would need to be defined, CXF takes
+	     care of providing listener resources.  -->
+<!--
+	<jaxws:endpoint id="countyJMSWS" implementor="#countyWS" address="jms://">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature" />
+			<bean class="org.apache.cxf.transport.jms.JMSConfigFeature" p:jmsConfig-ref="jmsWSConfig" />
+		</jaxws:features>
+	</jaxws:endpoint>
+
+	<bean id="jmsWSConfig" class="org.apache.cxf.transport.jms.JMSConfiguration"
+			p:maxConcurrentConsumers="20"
+			p:destinationResolver-ref="jmsDestinationResolver"
+			p:connectionFactory-ref="jmsConnectionFactory"
+			p:targetDestination="queue/Samp3Request"
+			p:replyDestination="queue/Samp3Reply">
+	</bean>
+ -->
+	<!--  this bean implements county bas methods -->
+	<bean id="countyWS" class="com.qat.samples.sysmgmt.service.impl.CountyWSImpl">
+		<property name="countyBAC">
+			<bean class="com.qat.samples.sysmgmt.bac.impl.CountyBACImpl"/>
+		</property>
+	</bean>
+
+	<!-- ========================= JMS Configurations ======================== -->
+	<!-- This configuration section defines JMS resources in three categories:
+	     JMS Server resources, JMS Listener resources and JMS containers used to
+	     wire together Server and Listener resources.
+	     1) The JMS Server resources are defined by the JMS connection factory and
+	     JMS Destinations.  All of these have to be configured in the JEE application
+	     server supporting the application.
+	     2) The JMS Listener resources examples show the use os a MessageListenerAdapter
+	     which listens, converts messages and then delegates to a simple POJO custom
+	     application component. It also shows the use of more traditional JEE message
+	     drive bean type implementations which take care of converting their own
+	     messages.
+	     3) The containers show how JMS Server resources and JMS Listener resources
+	     are wired together.  -->
+
+  	<bean name="jmsConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean" lazy-init="true">
+    <property name="jndiTemplate" ref="jndiServerTemplate" />
+		<property name="jndiName" value="ConnectionFactory" />
+	</bean>
+
+	<bean id="jmsDestinationResolver" class="org.springframework.jms.support.destination.JndiDestinationResolver">
+    <property name="jndiTemplate" ref="jndiServerTemplate" />
+	</bean>
+
+	<bean name="queRequestDestination1" class="org.springframework.jndi.JndiObjectFactoryBean">
+    <property name="jndiTemplate" ref="jndiServerTemplate" />
+		<property name="jndiName" value="queue/SampRequest" />
+	</bean>
+
+	<bean name="queRequestDestination2" class="org.springframework.jndi.JndiObjectFactoryBean">
+    <property name="jndiTemplate" ref="jndiServerTemplate" />
+		<property name="jndiName" value="queue/Samp2Request" />
+	</bean>
+
+	<bean name="queRequestDestination4" class="org.springframework.jndi.JndiObjectFactoryBean">
+    <property name="jndiTemplate" ref="jndiServerTemplate" />
+		<property name="jndiName" value="queue/Samp4Request" />
+	</bean>
+
+	<bean name="topicDestination1" class="org.springframework.jndi.JndiObjectFactoryBean">
+    <property name="jndiTemplate" ref="jndiServerTemplate" />
+		<property name="jndiName" value="topic/SampTopic" />
+	</bean>
+
+	<bean name="topicDestination2" class="org.springframework.jndi.JndiObjectFactoryBean">
+    <property name="jndiTemplate" ref="jndiServerTemplate" />
+		<property name="jndiName" value="topic/Samp2Topic" />
+	</bean>
+
+ 	<bean id="topicBEMDPListener1" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+ 	   <constructor-arg>
+ 	   		<bean class="com.qat.samples.sysmgmt.service.impl.BEMDP1JMSImpl" />
+ 	   </constructor-arg>
+ 	   <property name="defaultListenerMethod" value="recvBizEvent" />
+	   <property name="messageConverter">
+	        <bean class="org.springframework.jms.support.converter.SimpleMessageConverter"></bean>
+	   </property>
+	</bean>
+
+ 	<bean id="topicBEMDPListener2" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+ 	   <constructor-arg>
+ 	   		<bean class="com.qat.samples.sysmgmt.service.impl.BEMDP2JMSImpl" />
+ 	   </constructor-arg>
+ 	   <property name="defaultListenerMethod" value="recvBizEvent" />
+	   <property name="messageConverter">
+	        <bean class="org.springframework.jms.support.converter.SimpleMessageConverter"></bean>
+	   </property>
+	</bean>
+
+ 	<bean id="topicTextMDPListener1" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+ 	   <constructor-arg>
+ 	   		<bean class="com.qat.samples.sysmgmt.service.impl.TextMDPJMSImpl" />
+ 	   </constructor-arg>
+ 	   <property name="defaultListenerMethod" value="recvText" />
+	   <property name="messageConverter">
+	        <bean class="org.springframework.jms.support.converter.SimpleMessageConverter"></bean>
+	   </property>
+	</bean>
+
+	<bean id="queTextMessageListener" class="com.qat.samples.sysmgmt.service.impl.JmsQueueTextJMSImpl" />
+
+	<bean id="queMapMessageListener" class="com.qat.samples.sysmgmt.service.impl.JmsQueueMapJMSImpl" />
+
+	<bean id="queObjectMessageListener" class="com.qat.samples.sysmgmt.service.impl.JmsQueueObjectJMSImpl" />
+
+	<bean id="queMessageListenerContainer1" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="concurrentConsumers" value="20"/>
+		<property name="connectionFactory" ref="jmsConnectionFactory"/>
+		<property name="destination" ref="queRequestDestination1"/>
+		<property name="messageListener" ref="queTextMessageListener"/>
+	</bean>
+
+	<bean id="queMessageListenerContainer2" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="concurrentConsumers" value="20"/>
+		<property name="connectionFactory" ref="jmsConnectionFactory"/>
+		<property name="destination" ref="queRequestDestination2"/>
+		<property name="messageListener" ref="queMapMessageListener"/>
+	</bean>
+
+	<bean id="queMessageListenerContainer4" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="concurrentConsumers" value="20"/>
+		<property name="connectionFactory" ref="jmsConnectionFactory"/>
+		<property name="destination" ref="queRequestDestination4"/>
+		<property name="messageListener" ref="queObjectMessageListener"/>
+	</bean>
+
+	<bean id="topic1MessageListenerContainer1" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsConnectionFactory"/>
+		<property name="destination" ref="topicDestination1"/>
+		<property name="messageListener" ref="topicBEMDPListener1"/>
+		<property name="sessionAcknowledgeModeName" value="AUTO_ACKNOWLEDGE"/>
+	</bean>
+
+	<bean id="topic1MessageListenerContainer2" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsConnectionFactory"/>
+		<property name="destination" ref="topicDestination1"/>
+		<property name="messageListener" ref="topicBEMDPListener2"/>
+		<property name="sessionAcknowledgeModeName" value="AUTO_ACKNOWLEDGE"/>
+	</bean>
+
+	<bean id="topic2MessageListenerContainer1" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsConnectionFactory"/>
+		<property name="destination" ref="topicDestination2"/>
+		<property name="messageListener" ref="topicTextMDPListener1"/>
+		<property name="sessionAcknowledgeModeName" value="AUTO_ACKNOWLEDGE"/>
+	</bean>
+</beans>
