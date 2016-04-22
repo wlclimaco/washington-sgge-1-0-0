@@ -1,0 +1,1024 @@
+//================ PROCESSO
+function ProcessModel() {
+	a = [];
+	
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({ field :{campo : "dataProcess", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "parentId", tipo :"Integer",requerid : true ,primaryKey:false,forenkey : false,model:false,xml:true}});
+	a.push({field :{campo : "valor", tipo :"Double",requerid : true ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "advogadoList", tipo :"List<Advogado>",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "clienteList", tipo :"List<Cliente>",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "audienciaList", tipo :"List<Audiencia>",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+
+	return a;
+}
+		 
+//================ Entidade
+function EntidadeModel() {
+	a = [];
+			 
+	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "nome", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "processId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "entidadeId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "emprId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "entidadeEnumValue", tipo :"EntidadeEnum",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "regime"   , tipo:"Regime",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "documentos" ,tipo:"List<Documento>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "enderecos", tipo:"List<Endereco>" ,requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "emails", tipo:"List<Email>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "telefones", tipo:"List<Telefone>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "cnaes" ,tipo:"List<CnaeEmpresa>" ,requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "statusList", tipo:"List<Status>" ,requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "notes" ,tipo:"List<Note>" ,requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	return a;
+}		 
+//================ AUDITORIA
+function AuditoriaModel() {
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "dataAudiencia", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "valor", tipo :"Double",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "descricao", tipo :"String",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "noteLIst", tipo :"List<Note>",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+
+return a;
+}	
+
+//================ Advogado	
+function PessoaModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "nome", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "nomePai", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "nomeMae", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "nomeConjugue", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "estadoCivil", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "tipoPessoa", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "datanasc", tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "foto", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "pessoaTypeEnum", tipo :"PessoaTypeEnum",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "sexo", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "enderecos", tipo :"List<Endereco>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "documentos", tipo :"List<Documento>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "emails", tipo :"List<Email>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "telefones", tipo :"List<Telefone>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "bancos", tipo :"List<BancoPessoa>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "formaPagamentoList", tipo :"List<FormaPgPessoa>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "condPagList", tipo :"List<CondPagPessoa>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "contatoList", tipo :"List<Contato>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+
+return a;
+}
+
+//================ Convenio	
+function ConvenioModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+function ConhecimentoTransporteModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "IdNota" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "remetente" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "vrTotalMercadorias" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "apCreIcms" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "fretePorConta" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "placa" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "especie" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "volume" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "pesoLiquido" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "pesoBruto", tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "transportador", tipo :"Transportador",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "marca", tipo :"Marca",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "estado" , tipo :"Estado",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	
+	return a;
+}
+//================ Cidade	
+function CidadeModel() {
+	
+	var a = [];
+
+	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "codigo", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "nome" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "cdIBGE" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "cep" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "municipio" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "estado"   , tipo :"Estado",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	
+	return a;
+}
+
+//================ Cidade	
+function NotaFiscalModel() {
+	
+	var a = [];
+
+	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "serie" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "ordem" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "numero" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "tipo" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "nfValor" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "dataEmissao" , tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "dataSaida" , tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "dataEntrada" , tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "modelo" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "bxEstoque" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "descItens" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "pcCusto" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "cfop"  , tipo :"Cfop",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "conhecimentoTransporte"    , tipo :"ConhecimentoTransporte",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "empresa"    , tipo :"Empresa",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "pessoa"    , tipo :"Pessoa",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "tributosList" , tipo :"List<Tributos>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "formaPagList" , tipo :"List<FormaPag>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "notaFiscalItens" , tipo :"List<NotaFiscalItens>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "noteList" , tipo :"List<Note>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "contasList", tipo :"List<ContasPagar>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "itensEspeciais" , tipo :"List<ItensEspeciais>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "nfStatusList", tipo :"List<NFStatus>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	return a;
+}
+//================ Cidade	
+function NotaFiscalModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "IdNota", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "qnt" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "vrUnitario" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "vrDesconto" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "produto"  , tipo :"Produto",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "cfop"    , tipo :"Cfop",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "classificacao"   , tipo :"Classificacao",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "tributosList" , tipo :"List<Tributos>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	
+return a;
+}
+//================ Estado	
+function EstadoModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Tarefa	
+function TarefaModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "nome" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "descricao", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Empresa	
+function EmpresaModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Consulta	
+function ConsultaModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "dataConsulta" , tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "valor" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "dataMarcacao" , tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "medico"    , tipo :"Medico",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "paciente" , tipo :"Paciente",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "planoSaude"  , tipo :"PlanoSaude",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "exameList" , tipo :"List<Exame>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ NotaFiscal	
+function NotaFiscalModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+
+//================ PedidoCompras	
+function PedidoComprasModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Cotacao	
+function CotacaoModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Exame	
+function ExameModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Avisos	
+function AvisosModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+
+//================ HoraFunc	
+function HoraFuncModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Beneficios	
+function BeneficiosModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Eventos	
+function EventosModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Usuario	
+function UsuarioModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ ContasPagar	
+function ContasPagarModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+
+//================ ContasReceber	
+function ContasReceberModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+
+//================ CondPag	
+function CondPagModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+
+//================ FormaPg	
+function FormaPgModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+
+//================ Banco	
+function BancoModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+
+//================ ContaCorrente	
+function ContaCorrenteModel() {
+	
+	var a = [];
+	 a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+ /*   a.push({field :{campo : "nome" column="nome" />
+    a.push({field :{campo : "descricao" column="descricao" />
+	a.push({field :{campo : "createUser" column="create_user"/>
+	a.push({field :{campo : "createDataUTC" column="create_date"/>
+	a.push({field :{campo : "modifyUser" column="modify_user"/>
+	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});*/
+	return a;
+}
+
+
+//================ Caixa	
+function CaixaModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Regime	
+function RegimeModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+   /* a.push({field :{campo : "nome" column="nome" />
+    a.push({field :{campo : "descricao" column="descricao" />
+	a.push({field :{campo : "createUser" column="create_user"/>
+	a.push({field :{campo : "createDataUTC" column="create_date"/>
+	a.push({field :{campo : "modifyUser" column="modify_user"/>
+	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});*/
+	return a;
+}
+
+//================ Cfop	
+function CfopModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Cnae	
+function CnaeModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+ /*   a.push({field :{campo : "codigo" column="codigo" />
+   	a.push({field :{campo : "cnae" column="cnae"/>
+	a.push({field :{campo : "descricao" column="descricao"/>
+	a.push({field :{campo : "abreviado" column="abreviado"/>
+	a.push({field :{campo : "createUser" column="create_user"/>
+	a.push({field :{campo : "createDataUTC" column="create_date"/>
+	a.push({field :{campo : "modifyUser" column="modify_user"/>
+	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});*/
+	return a;
+}
+
+//================ Cnae	Empresa
+function CnaeEmpresaModel() {
+	
+	var a = [];
+/*	a.push({field :{campo : "id" column="id"/>
+  /*  a.push({field :{campo : "parentId" column="parentId"/>
+    a.push({field :{campo : "tabelaEnumValue" column="tabela" />
+    a.push({field :{campo : "processId" column="processId"/>
+	a.push({field :{campo : "createUser" column="create_user"/>
+	a.push({field :{campo : "createDataUTC" column="create_date"/>
+	a.push({field :{campo : "modifyUser" column="modify_user"/>
+	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
+	 a.push({field :{campo : "idCnae"    column="idCnae" select="fetchCnaeById"  />
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});*/
+	return a;
+}
+
+//================ Produto	
+function ProdutoModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Marca	
+function MarcaModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Grupo	
+function GrupoModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Grupo	
+function SubGrupoModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Grupo	
+function UniMedModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Site	
+function SiteModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+
+//================ Contato	
+function ContatoModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+
+//================ OrdemServico	
+function OrdemServicoModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+
+//================ Plano	
+function PlanoModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Orcamento	
+function OrcamentoModel() {
+	
+	var a = [];
+	a = NotaFiscalModel();
+	return a;
+}
+
+//================ Orcamento	
+function EnderecoModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+//================ Orcamento	
+function EmailModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+//================ Orcamento	
+function TelefoneModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+//================ Orcamento	
+function ArquivoModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+//================ Orcamento	
+function ClassificacaoModel() {
+	
+	var a = [];
+/*	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "descricao" column="descricao" />
+   	a.push({field :{campo : "codigo" column="codigo"/>
+	a.push({field :{campo : "createUser" column="create_user"/>
+	a.push({field :{campo : "createDataUTC" column="create_date"/>
+	a.push({field :{campo : "modifyUser" column="modify_user"/>
+	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});*/
+	return a;
+}
+//================ Orcamento	
+function DocumentosModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+//================ Orcamento	
+function HistoricoModel() {
+	
+	var a = [];
+/*	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "data" column="data" />
+    a.push({field :{campo : "userId" column="userId" />
+    a.push({field :{campo : "emprId" column="emprId" />
+    a.push({field :{campo : "tabelaEnumValue" column="tabela" />
+    a.push({field :{campo : "acaoEnumValue" column="acao" />
+    a.push({field :{campo : "processId" column="processId" />
+	a.push({field :{campo : "createUser" column="create_user"/>
+	a.push({field :{campo : "createDataUTC" column="create_date"/>
+	a.push({field :{campo : "modifyUser" column="modify_user"/>
+	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
+	a.push({field :{campo : "historicoItensList" column="id" select="fetchAllHistoricoItensByhistorico"/>
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});*/
+	return a;
+}
+
+//================ Historico Itens	
+function HistoricoItensModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+  /*  a.push({field :{campo : "idHist" column="idHist" />
+    a.push({field :{campo : "processId" column="processId" />
+    a.push({field :{campo : "acaoEnumValue" column="type" />
+   	a.push({field :{campo : "tabelaEnumValue" column="tabela"/>
+   	a.push({field :{campo : "parentId" column="parentId"/>
+	a.push({field :{campo : "createUser" column="create_user"/>
+	a.push({field :{campo : "createDataUTC" column="create_date"/>
+	a.push({field :{campo : "modifyUser" column="modify_user"/>
+	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});*/
+	return a;
+}
+
+//================ Orcamento	
+function NoteModel() {
+	
+	var a = [];
+	/*a.push({field :{campo : "id" column="id"/>
+		a.push({field :{campo : "parentId" column="parentId" />
+		a.push({field :{campo : "noteText" column="note_text" />
+		a.push({field :{campo : "tabelaEnumValue" column="tabela" />
+		a.push({field :{campo : "createDataUTC" column="create_date" />
+		a.push({field :{campo : "createUser" column="create_user" />
+		a.push({field :{campo : "modifyDataUTC" column="modify_date" />
+		a.push({field :{campo : "modifyUser" column="modify_user" />*/
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Orcamento	
+function SocioModel() {
+	/* a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "parentId" column="parentId" />
+   	a.push({field :{campo : "nome" column="nome"/>
+	a.push({field :{campo : "cota" column="cota"/>
+	a.push({field :{campo : "porcentagem" column="porcentagem" />
+	a.push({field :{campo : "createUser" column="create_user"/>
+	a.push({field :{campo : "createDataUTC" column="create_date"/>
+	a.push({field :{campo : "modifyUser" column="modify_user"/>
+	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
+	var a = [];*/
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Ordem Servico Status	
+function OrdemServicoStatusModel() {
+	/* a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "parentId" column="parentId" />
+   	a.push({field :{campo : "nome" column="nome"/>
+	a.push({field :{campo : "cota" column="cota"/>
+	a.push({field :{campo : "porcentagem" column="porcentagem" />
+	a.push({field :{campo : "createUser" column="create_user"/>
+	a.push({field :{campo : "createDataUTC" column="create_date"/>
+	a.push({field :{campo : "modifyUser" column="modify_user"/>
+	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
+	var a = [];*/
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Ordem Servico Status	
+function OrdemServicoTypeModel() {
+	 a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+   /* a.push({field :{campo : "typeServico" column="type" />
+    a.push({field :{campo : "createUser" column="create_user"/>
+	a.push({field :{campo : "createDataUTC" column="create_date"/>
+	a.push({field :{campo : "modifyUser" column="modify_user"/>
+	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});*/
+	return a;
+}
+
+//================ Ordem Servico Status	
+function OrdemServicoModel() {
+	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+ /*   a.push({field :{campo : "emprId" column="emprId" />
+    a.push({field :{campo : "userId" column="userId" />
+   	a.push({field :{campo : "nome" column="nome"/>
+	a.push({field :{campo : "data" column="data"/>
+	a.push({field :{campo : "assunto" column="assunto"/>
+	a.push({field :{campo : "createUser" column="create_user"/>
+	a.push({field :{campo : "createDataUTC" column="create_date"/>
+	a.push({field :{campo : "modifyUser" column="modify_user"/>
+	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
+	a.push({field :{campo : "typeId"    column="typeId" select="fetchTypeByOrdem"  />
+	a.push({field :{campo : "ordemStatusList" column="id" select="OrdemServicoItensMap.fetchAllOrdemServicoItensByOrdemServico"/>
+	var a = [];*/
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Ordem Servico Itens
+function OrdemServicoItensModel() {
+	/* a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "parentId" column="parentId" />
+   	a.push({field :{campo : "nome" column="nome"/>
+	a.push({field :{campo : "cota" column="cota"/>
+	a.push({field :{campo : "porcentagem" column="porcentagem" />
+	a.push({field :{campo : "createUser" column="create_user"/>
+	a.push({field :{campo : "createDataUTC" column="create_date"/>
+	a.push({field :{campo : "modifyUser" column="modify_user"/>
+	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
+	var a = [];*/
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+//================ Orcamento	
+function SocioModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Orcamento	
+function StatusModel() {
+	
+	var a = [];
+	/*a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "dataStatus" column="dataStatus" />
+    a.push({field :{campo : "parentId" column="parentId" />
+    a.push({field :{campo : "statusValue" column="status" />
+    a.push({field :{campo : "acaoEnumValue" column="acaoType" />
+    a.push({field :{campo : "tabelaEnumValue" column="tabelaEnum" />
+    a.push({field :{campo : "note" column="note" />
+    a.push({field :{campo : "createUser" column="create_user"/>
+	a.push({field :{campo : "createDataUTC" column="create_date"/>
+	a.push({field :{campo : "modifyUser" column="modify_user"/>
+	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>*/
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Orcamento	
+function TributacaoModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Orcamento	
+function AgenciaModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Orcamento	
+function ProfissaoModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Orcamento	
+function SalarioModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Orcamento	
+function CustoModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Orcamento	
+function EstoqueModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Orcamento	
+function PorcaoModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Orcamento	
+function PrecoModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Orcamento	
+function RentabilidadeModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Orcamento	
+function ServicoModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Orcamento	
+function CondominioModel() {
+	
+	var a = [];
+	a = EntidadeModel();
+	return a;
+}
+
+//================ Orcamento	
+function DepositoModel() {
+	
+	var a = [];
+	a = EntidadeModel();
+	return a;
+}
+
+
+//================ Orcamento	
+function FilialModel() {
+	
+	var a = [];
+	a = EntidadeModel();
+	a.push({field :{campo : "depositoList", tipo :"Deposito",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+function EmpresaModel() {
+	
+	var a = [];
+	a = EntidadeModel();
+/*	a.push({field :{campo : "socios" column="id" select="SocioMap.fetchSocioByEmpresaId"/>
+	a.push({field :{campo : "planoList" column="id" select="PlanoMap.fetchPlanoByEmpresa"/>
+	a.push({field :{campo : "filialList" column="id" select="FilialMap.fetchAllFilialByEntidade"/>
+	a.push({field :{campo : "depositoList" column="id" select="DepositoMap.fetchAllDepositoByEntidade"/>*/
+	return a;
+}
+
+
+
+
+dataModel = function (){
+	
+	var oProjet = [];
+
+oProjet.push({
+	classes :[{classe : "advogado",model : PessoaModel()},{classe : "audiencia",model : AuditoriaModel()},{classe :"Processo" ,model :ProcessModel()}],
+	interfaces : "Advogado",
+	local : "Advocacia"
+})
+
+oProjet.push({
+	classes :[{classe : "Cliente",model : PessoaModel()},{classe :"Fornecedor",model : PessoaModel()},{classe :"Transportador",model : PessoaModel()},{classe :"Convenio",model : ConvenioModel()},{classe :"Cidade",model : CidadeModel()},{classe :"Estado",model : EstadoModel()},{classe :"Tarefa",model : TarefaModel()}],
+	interfaces : "Cadastros",
+	local : "Cadastros"
+})
+
+oProjet.push({
+	classes :[{classe : "Medico",model : PessoaModel()},{classe :"Paciente",model : PessoaModel()},{classe :"Consulta",model : ConsultaModel()},{classe :"Exame",model : ExameModel()}],
+	interfaces : "Clinica",
+	local : "Clinica"
+})
+
+oProjet.push({
+	classes :[{classe : "NotaFiscalEntrada",model : NotaFiscalModel()},{classe :"PedidoCompras",model : PedidoComprasModel()},{classe :"Cotacao",model : CotacaoModel()}],
+	interfaces : "Compras",
+	local : "Compras"
+})
+
+oProjet.push({
+	classes :[{classe : "Sindico",model : PessoaModel()},{classe :"Inquilino",model : PessoaModel()},{classe :"Avisos",model : AvisosModel()}],
+	interfaces : "Condominio",
+	local : "Condominio"
+})
+
+oProjet.push({
+	classes :[{classe : "Funcionario",model : PessoaModel()},{classe :"Eventos",model : EventosModel()},{classe :"Beneficios",model : BeneficiosModel()},{classe :"HoraFunc",model : HoraFuncModel()}],
+	interfaces : "Dp",
+	local :"Dp"
+})
+
+oProjet.push({
+	classes :[{classe : "empresa",model : EmpresaModel()},{classe :"filial",model : EmpresaModel()},{classe :"deposito",model : EmpresaModel()},{classe :"usuario",model : UsuarioModel()}],
+	interfaces : "Empresa",
+	local : "Empresa"
+})
+
+oProjet.push({
+	classes :[{classe : "ContasPagar",model : ContasPagarModel()},{classe :"ContasReceber",model : ContasReceberModel()},{classe :"CondPag",model : CondPagModel()},{classe :"FormaPg",model : FormaPgModel()},{classe :"Banco",model : BancoModel()},{classe :"ContaCorrente",model : ContaCorrenteModel()},{classe :"Caixa",model : CaixaModel()}],
+	interfaces : "Financeiro",
+	local :"Financeiro"
+})
+
+oProjet.push({
+	classes :[{classe : "Regime",model : RegimeModel()},{classe :"Cfop",model : CfopModel()},{classe :"Cnae",model : CnaeModel()},{classe :"CnaeEmpresa",model : CnaeEmpresaModel()}],
+	interfaces : "Fiscal",
+	local : "Fiscal"
+})
+
+oProjet.push({
+	classes :[{classe : "Produto",model : ProdutoModel()},{classe :"Marca",model : MarcaModel()},{classe :"Grupo",model : GrupoModel()},{classe :"SubGrupo",model : SubGrupoModel()},{classe :"UniMed",model : UniMedModel()}],
+	interfaces : "Produto",
+	local : "Produto"
+})
+
+oProjet.push({
+	classes :[{classe : "Site",model : SiteModel()},{classe :"Contato",model : ContatoModel()},{classe :"OrdemServico",model : OrdemServicoModel()},{classe :"Plano",model : PlanoModel()}],
+	interfaces : "Site",
+	local : "Site"
+})
+
+oProjet.push({
+	classes :[{classe : "NotaFiscalSaida",model : NotaFiscalModel()},{classe :"Orcamento",model : OrcamentoModel()},{classe :"OrdemServico",model : OrdemServicoModel()}],
+	interfaces : "Vendas",
+	local : "Vendas"
+})
+//============== DACD
+oProjet.push({
+	classes :[{classe : "Endereco",model : EnderecoModel()}],
+	interfaces : "Endereco",
+	local : "Endereco"
+})
+
+oProjet.push({
+	classes :[{classe : "Email",model : EmailModel()}],
+	interfaces : "Email",
+	local : "Email"
+})
+
+oProjet.push({
+	classes :[{classe : "Telefone",model : TelefoneModel()}],
+	interfaces : "Telefone",
+	local : "Telefone"
+})
+
+oProjet.push({
+	classes :[{classe : "Arquivo",model : ArquivoModel()}],
+	interfaces : "Arquivo",
+	local : "Arquivo"
+})
+
+oProjet.push({
+	classes :[{classe : "Classificacao",model : ClassificacaoModel()}],
+	interfaces : "Classificacao",
+	local : "Classificacao"
+})
+
+oProjet.push({
+	classes :[{classe : "Documento",model : DocumentosModel()}],
+	interfaces : "Documento",
+	local : "Documento"
+})
+
+oProjet.push({
+	classes :[{classe : "Historico",model : HistoricoModel()},{classe : "HistoricoItens",model : HistoricoItensModel()}],
+	interfaces : "Historico",
+	local : "Historico"
+})
+
+oProjet.push({
+	classes :[{classe : "Notes",model : NoteModel()}],
+	interfaces : "Notes",
+	local : "Notes"
+})
+
+oProjet.push({
+	classes :[{classe : "Socio",model : SocioModel()}],
+	interfaces : "Socios",
+	local : "Socios"
+})
+
+oProjet.push({
+	classes :[{classe : "OrdemServico",model : OrdemServicoModel()},{classe : "OrdemServicoType",model : OrdemServicoTypeModel()},{classe : "OrdemServicoStatus",model : OrdemServicoStatusModel()},{classe : "OrdemServicoItens",model : OrdemServicoItensModel()}],
+	interfaces : "OrdemServico",
+	local : "OrdemServico"
+})
+
+oProjet.push({
+	classes :[{classe : "Status",model : StatusModel()}],
+	interfaces : "Status",
+	local : "Status"
+})
+
+oProjet.push({
+	classes :[{classe : "Tributacao",model : TributacaoModel()}],
+	interfaces : "Tributacao",
+	local : "Tributacao"
+})
+
+oProjet.push({
+	classes :[{classe : "Agencia",model : AgenciaModel()}],
+	interfaces : "Agencia",
+	local : "Agencia"
+})
+
+oProjet.push({
+	classes :[{classe : "Profissao",model : ProfissaoModel()}],
+	interfaces : "Profissao",
+	local : "Profissao"
+})
+
+oProjet.push({
+	classes :[{classe : "Salario",model : SalarioModel()}],
+	interfaces : "Salario",
+	local : "Salario"
+})
+
+oProjet.push({
+	classes :[{classe : "Custo",model : CustoModel()}],
+	interfaces : "Custo",
+	local : "Custo"
+})
+
+oProjet.push({
+	classes :[{classe : "Estoque",model : EstoqueModel()}],
+	interfaces : "Estoque",
+	local : "Estoque"
+})
+
+oProjet.push({
+	classes :[{classe : "Porcao",model : PorcaoModel()}],
+	interfaces : "Porcao",
+	local : "Porcao"
+})
+
+oProjet.push({
+	classes :[{classe : "Preco",model : PrecoModel()}],
+	interfaces : "Preco",
+	local : "Preco"
+})
+
+oProjet.push({
+	classes :[{classe : "Rentabilidade",model : RentabilidadeModel()}],
+	interfaces : "Rentabilidade",
+	local : "Rentabilidade"
+})
+
+oProjet.push({
+	classes :[{classe : "Servico",model : ServicoModel()}],
+	interfaces : "Servico",
+	local : "Servico"
+})
+
+return oProjet;
+}
+		 
+		 
+
