@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="drugBAC" class="com.qat.samples.sysmgmt.bac.impl.DrugBACImpl">
+		<property name="drugBAR" ref="drugBARTarget" />
+		<property name="validationController" ref="drugValidationController" />
+	</bean>
+
+	<bean id="drugBARTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.qat.samples.sysmgmt.bar.IDrugBAR" />
+	</bean>
+
+	<bean id="drugValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="DrugValidator" />
+				<ref bean="DrugPriceValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="DrugValidator" class="com.qat.samples.sysmgmt.validation.DrugValidator" />
+
+	<bean id="DrugPriceValidator" class="com.qat.samples.sysmgmt.validation.DrugPriceValidator" />
+
+</beans>

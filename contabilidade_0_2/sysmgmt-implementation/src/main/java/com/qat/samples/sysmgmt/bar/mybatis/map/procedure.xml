@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProcedureMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="ProcedureResult" type="Procedure">
+    <result property="id" column="proc_id"/>
+    <result property="code" column="proc_code"/>
+    <result property="description" column="proc_desc"/>
+    <result property="price" column="proc_price"/>
+    <result property="version" column="versn_lock_num"/>
+  </resultMap>
+
+  <sql id="allProcedureColumns">
+		proc_id, proc_code, proc_desc,proc_price,versn_lock_num
+  </sql>
+
+  <sql id="allProcedureColumnsWithQualifier">
+		p.proc_id, p.proc_code, p.proc_desc, p.proc_price, p.versn_lock_num
+  </sql>
+
+  <select id="fetchAllProcedures" resultMap="ProcedureResult">
+    SELECT
+    <include refid="allProcedureColumns" />
+    FROM procedure ORDER BY proc_code ASC
+  </select>
+
+  <select id="fetchAllProceduresPagedBatch" resultMap="ProcedureResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT <include refid="allProcedureColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM procedure p ORDER BY proc_id ASC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{_page} * #{_pagesize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{_pagesize}mo
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT <include refid="allProcedureColumns" />
+   		  FROM procedure ORDER BY proc_id ASC
+		  OFFSET ( #{_page} * #{_pagesize} )
+		  LIMIT #{_pagesize}
+    </if>
+  </select>
+
+  <select id="fetchProcedureRowCount" resultType="Integer">
+      <if test="_databaseId == 'PostgreSQL'">
+			SELECT COUNT(*) AS RECORD_COUNT FROM procedure WHERE proc_code IS NOT NULL
+      </if>
+
+   	  <if test="_databaseId == 'Oracle'">
+		 	SELECT COUNT(proc_code) AS RECORD_COUNT FROM procedure
+      </if>
+  </select>
+
+  <select id="fetchAllProceduresRequest" parameterType="PagedInquiryRequest" resultMap="ProcedureResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT <include refid="allProcedureColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM procedure p ORDER BY proc_code ASC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{startPage} * #{pageSize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{pageSize}
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT <include refid="allProcedureColumns" />
+   		  FROM procedure ORDER BY proc_code ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+    </if>
+  </select>
+
+  <select id="fetchProcedureById" parameterType="Integer" resultMap="ProcedureResult">
+    SELECT
+   <include refid="allProcedureColumns" />
+    FROM procedure WHERE proc_id = #{fetchid}
+  </select>
+
+  <select id="fetchVersionNumber" parameterType="Procedure" resultType="int">
+	SELECT versn_lock_num FROM procedure WHERE proc_id = #{id}
+  </select>
+
+  <insert id="insertProcedure" parameterType="Procedure">
+   	<selectKey resultType="int" keyProperty="id" order="BEFORE">
+  	 	<if test="_databaseId == 'Oracle'">
+			SELECT proc_seq.nextval AS id FROM DUAL
+    	</if>
+  	 	<if test="_databaseId == 'PostgreSQL'">
+			SELECT nextval('procedure_proc_id_seq') AS id
+    	</if>
+	</selectKey>
+  	INSERT INTO procedure (
+      proc_id,
+      proc_code,
+      proc_desc,
+      proc_price )
+    VALUES ( #{id} , #{code} , #{description} , #{price} )
+  </insert>
+
+  <update id="updateProcedure" parameterType="Procedure">
+    UPDATE procedure SET
+      proc_code = #{code},
+      proc_desc = #{description},
+      proc_price = #{price}
+    WHERE
+      proc_id = #{id} AND versn_lock_num = #{version}
+  </update>
+
+  <delete id="deleteProcedureById" parameterType="Procedure">
+    DELETE FROM procedure WHERE proc_id = #{id}
+  </delete>
+
+  <delete id="deleteAllProcedures">
+	DELETE FROM procedure
+  </delete>
+</mapper>

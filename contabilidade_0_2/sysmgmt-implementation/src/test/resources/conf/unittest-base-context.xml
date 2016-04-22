@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- Miscellaneous beans -->
+	<bean id="QATAppContext" class="com.qat.framework.util.AppContextHelper"></bean>
+
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>qat-sysmgmt-base-exceptionmessages</value>
+				<value>qat-sysmgmt-base-validationmessages</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- DBMS related beans -->
+	<bean id="databaseIdProvider" class="org.apache.ibatis.mapping.VendorDatabaseIdProvider">
+		<property name="properties" ref="vendorProperties" />
+	</bean>
+
+	<bean id="vendorProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="properties">
+			<props>
+				<prop key="SQL Server">SqlServer</prop>
+				<prop key="Oracle">Oracle</prop>
+				<prop key="PostgreSQL">PostgreSQL</prop>
+				<prop key="MySQL">MySql</prop>
+				<prop key="DB2">Db2</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="qatDataSource" />
+	</bean>
+
+	<bean id="sysMgmt-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:com/qat/samples/sysmgmt/bar/mybatis/map/sysmgmt-base-mybatis-config.xml" />
+		<property name="dataSource" ref="qatDataSource" />
+		<property name="databaseIdProvider" ref="databaseIdProvider" />
+	</bean>
+
+	<beans profile="oracle">
+		<bean id="qatDataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+		    <constructor-arg ref="oracleHikariConfig" />
+		</bean>
+		<bean id="oracleHikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		    <property name="maximumPoolSize" value="10" />
+		    <property name="minimumIdle" value="2" />
+		    <property name="dataSourceClassName" value="oracle.jdbc.driver.OracleDriver" />
+		    <property name="username" value="${user}" />
+		    <property name="password" value="${password}" />
+		    <property name="dataSourceProperties">
+		        <props>
+		            <prop key="URL">${jdbcurl}</prop>
+		        </props>
+		    </property>
+		</bean>
+
+		<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		    <property name="locations">
+		        <list>
+		            <value>classpath:conf/oracle.properties</value>
+		        </list>
+		    </property>
+		</bean>
+	</beans>
+
+	<beans profile="postgres,default">
+		<bean id="qatDataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+		    <constructor-arg ref="pgHikariConfig" />
+		</bean>
+		<bean id="pgHikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		    <property name="maximumPoolSize" value="10" />
+		    <property name="minimumIdle" value="2" />
+		    <property name="dataSourceClassName" value="org.postgresql.ds.PGSimpleDataSource" />
+		    <property name="username" value="${user}" />
+		    <property name="password" value="${password}" />
+		    <property name="dataSourceProperties">
+		        <props>
+		            <prop key="serverName">${hostName}</prop>
+		            <prop key="databaseName">${dbName}</prop>
+		            <prop key="portNumber">${portNumber}</prop>
+		        </props>
+		    </property>
+		</bean>
+
+		<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		    <property name="locations">
+		        <list>
+		            <value>classpath:conf/postgresql.properties</value>
+		        </list>
+		    </property>
+		</bean>
+	</beans>
+
+</beans>

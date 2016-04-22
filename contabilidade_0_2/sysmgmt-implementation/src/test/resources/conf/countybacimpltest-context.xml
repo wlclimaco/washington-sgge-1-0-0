@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mockito="http://www.mockito.org/spring/mockito"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+					    http://www.mockito.org/spring/mockito http://www.mockito.org/spring/mockito.xsd">
+
+	<bean id="countyBAC" class="com.qat.samples.sysmgmt.bac.impl.CountyBACImpl">
+		<property name="countyBAR" ref="countyBARTarget" />
+		<property name="validationController" ref="countyValidationController" />
+	</bean>
+
+	<bean id="countyBARTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.qat.samples.sysmgmt.bar.ICountyBAR" />
+	</bean>
+
+	<bean id="CountyValidator" class="com.qat.samples.sysmgmt.validation.CountyValidator">
+		<property name="descriptionLength" value="50" />
+	</bean>
+
+	<bean id="countyValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="CountyValidator" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

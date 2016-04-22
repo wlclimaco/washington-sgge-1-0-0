@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mockito="http://www.mockito.org/spring/mockito"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+					    http://www.mockito.org/spring/mockito http://www.mockito.org/spring/mockito.xsd">
+
+	<!-- Miscellaneous beans -->
+	<bean id="QATAppContext" class="com.qat.framework.util.AppContextHelper"></bean>
+
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>qat-sysmgmt-base-exceptionmessages</value>
+				<value>qat-sysmgmt-base-validationmessages</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="procedureBACTarget" class="com.qat.samples.sysmgmt.bac.impl.ProcedureBACImpl">
+		<property name="procedureBAR" ref="procedureBARTarget" />
+		<property name="validationController" ref="procedureValidationController" />
+	</bean>
+
+	<bean id="procedureBARTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.qat.samples.sysmgmt.bar.IProcedureBAR" />
+	</bean>
+
+	<bean id="ProcedureValidator" class="com.qat.samples.sysmgmt.validation.ProcedureValidator" />
+
+	<bean id="procedureValidationController" class="com.qat.framework.validation.ValidationController">
+		<property name="validators">
+			<list>
+				<ref bean="ProcedureValidator" />
+			</list>
+		</property>
+	</bean>
+
+<!--
+	<bean id="statusCategoryXRef" class="com.qat.framework.util.StatusCategoryXRefImpl">
+		<property name="statusCategoryExtensionMap" ref="statusCategoryExtensionMap" />
+	</bean>
+	 -->
+	<bean id="statusCategoryExtensionMap" class="java.util.HashMap">
+		<constructor-arg>
+			<map key-type="java.lang.String" value-type="com.qat.framework.model.response.InternalResponse.StatusCategory">
+				<entry key="#{systemValidationEnumName}" value-ref="systemErrorEnumType" />
+				<entry key="#{noRowsFoundEnumName}" value-ref="systemErrorEnumType" />
+			</map>
+		</constructor-arg>
+	</bean>
+	<bean id="businessErrorEnumType" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.qat.framework.model.response.InternalResponse$StatusCategory.BusinessError"/>
+	</bean>
+	<bean id="systemErrorEnumType" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.qat.framework.model.response.InternalResponse$StatusCategory.SystemError"/>
+	</bean>
+	<bean id="notAnErrorEnumType" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.qat.framework.model.response.InternalResponse$StatusCategory.NotAnError"/>
+	</bean>
+
+	<bean id="businessValidationEnumType" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.qat.framework.model.response.InternalResponse$BusinessErrorCategory.BusinessValidation"/>
+	</bean>
+	<bean id="systemValidationEnumType" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.qat.framework.model.response.InternalResponse$SystemErrorCategory.SystemValidation"/>
+	</bean>
+	<bean id="systemValidationEnumName" factory-bean="systemValidationEnumType" factory-method="name" />
+	<bean id="noRowsFoundEnumType" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.qat.framework.model.response.InternalResponse$BusinessErrorCategory.NoRowsFound"/>
+	</bean>
+	<bean id="noRowsFoundEnumName" factory-bean="noRowsFoundEnumType" factory-method="name" />
+
+</beans>
