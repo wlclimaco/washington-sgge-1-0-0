@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.qat.sysmgmt</groupId>
+        <artifactId>sysmgmt-parent-pom</artifactId>
+        <version>2.0.0</version>
+        <relativePath>sysmgmt-parent-pom/pom.xml</relativePath>
+    </parent>
+
+    <artifactId>sysmgmt-multimodule</artifactId>
+    <packaging>pom</packaging>
+
+    <profiles>
+        <profile>
+            <id>exclude-jms</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>../sysmgmt-parent-pom</module>
+                <module>../sysmgmt-interface</module>
+                <module>../sysmgmt-implementation</module>
+                <module>../sysmgmt-batch</module>
+                <module>../sysmgmt-service-ws-war</module>
+                <module>../sysmgmt-controller-rest-war</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>jms-only</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <modules>
+                <module>../sysmgmt-parent-pom</module>
+                <module>../sysmgmt-interface</module>
+                <module>../sysmgmt-implementation</module>
+                <module>../sysmgmt-service-jms-war</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>all</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <modules>
+                <module>../sysmgmt-parent-pom</module>
+                <module>../sysmgmt-interface</module>
+                <module>../sysmgmt-implementation</module>
+                <module>../sysmgmt-batch</module>
+                <module>../sysmgmt-service-ws-war</module>
+                <module>../sysmgmt-service-jms-war</module>
+                <module>../sysmgmt-controller-rest-war</module>
+            </modules>
+        </profile>
+    </profiles>
+</project>
