@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mockito="http://www.mockito.org/spring/mockito"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/context
+	   					http://www.springframework.org/schema/context/spring-context.xsd
+					    http://www.mockito.org/spring/mockito http://www.mockito.org/spring/mockito.xsd">
+
+	<bean id="QATAppContext" class="com.qat.framework.util.AppContextHelper" />
+
+	<!-- Activates various annotations to be detected in bean classes -->
+	<context:annotation-config />
+
+	<!-- Scans the classpath for annotated components that will be auto-registered as Spring beans.
+	 For example @Controller and @Service. Make sure to set the correct base-package -->
+	<context:component-scan base-package="com.qat.samples.sysmgmt.controller">
+		<context:include-filter type="aspectj" expression="com.qat.samples.sysmgmt.controller.CountyAPIController"/>
+	</context:component-scan>
+
+	<!-- Configures the annotation-driven Spring MVC Controller programming model. -->
+	<mvc:annotation-driven >
+	    <mvc:message-converters>
+	        <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+	        <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+	    </mvc:message-converters>
+	    <mvc:async-support default-timeout="3000"/>
+	</mvc:annotation-driven>
+
+	<bean id="procedureBACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.qat.samples.sysmgmt.bac.IProcedureBAC" />
+	</bean>
+
+	<bean id="countyBACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.qat.samples.sysmgmt.bac.ICountyBAC" />
+	</bean>
+
+</beans>

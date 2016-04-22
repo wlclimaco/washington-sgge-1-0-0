@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[3.6.2.201410090854-RELEASE]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[false]]></enableImports>
+	<configs>
+		<config>src/main/webapp/WEB-INF/conf/qat-sysmgmt-base-bar-context.xml</config>
+	</configs>
+	<autoconfigs>
+		<config>src/main/webapp/WEB-INF/conf/qat-sysmgmt-base-resourcebundles-context.xml</config>
+		<config>src/main/webapp/WEB-INF/conf/qat-sysmgmt-base-validators-context.xml</config>
+		<config>src/main/webapp/WEB-INF/conf/qat-sysmgmt-base-bas-context.xml</config>
+		<config>src/main/webapp/WEB-INF/conf/qat-sysmgmt-base-bas-security-context.xml</config>
+		<config>src/main/webapp/WEB-INF/conf/qat-base-context.xml</config>
+		<config>src/main/webapp/WEB-INF/conf/qat-db-all-context.xml</config>
+		<config>src/main/webapp/WEB-INF/conf/qat-sysmgmt-base-bac-context.xml</config>
+	</autoconfigs>
+	<configSets>
+	</configSets>
+</beansProjectDescription>

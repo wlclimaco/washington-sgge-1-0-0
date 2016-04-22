@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:sec="http://www.springframework.org/schema/security"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<sec:global-method-security pre-post-annotations="enabled">	</sec:global-method-security>
+
+	<sec:http auto-config="true" use-expressions="true" disable-url-rewriting="false">
+		<sec:csrf disabled="true"/>
+		<sec:intercept-url pattern="/**/**"
+			access="hasAnyRole('ROLE_DOMAIN_ADMINS', 'ROLE_DOMAIN_USERS', 'ROLE_GUEST')" />
+	</sec:http>
+
+	<!-- Usernames/Passwords are rod/koala dianne/emu scott/wombat peter/opal  -->
+	<sec:authentication-manager erase-credentials="false">
+		<sec:authentication-provider>
+			<sec:user-service>
+				<sec:user name="rod" password="koala" authorities="ROLE_DOMAIN_ADMINS" />
+				<sec:user name="dianne" password="emu"	authorities="ROLE_GUEST" />
+				<sec:user name="scott" password="wombat" authorities="ROLE_DOMAIN USERS,ROLE_DOMAIN_ADMINS" />
+				<sec:user name="peter" password="opal" authorities="ROLE_DOMAIN_USERS" />
+				<sec:user name="baduser" password="baduser" authorities="ROLE_BAD" />
+			</sec:user-service>
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+
+
+</beans>
