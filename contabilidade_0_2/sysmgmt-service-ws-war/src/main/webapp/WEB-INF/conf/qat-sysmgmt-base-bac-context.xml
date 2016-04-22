@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- ========================= BAC DEFINITIONS ======================== -->
+
+	<bean id="procedureBACTarget" class="com.qat.samples.sysmgmt.bac.impl.ProcedureBACImpl">
+		<property name="procedureBAR" ref="procedureBARTarget"/>
+		<property name="validationController" ref="procedureValidationController"/>
+	</bean>
+
+	<bean id="countyBACTarget" class="com.qat.samples.sysmgmt.bac.impl.CountyBACImpl">
+		<property name="countyBAR" ref="countyBARTarget"/>
+		<property name="validationController" ref="countyValidationController"/>
+	</bean>
+
+	<bean id="drugBACTarget" class="com.qat.samples.sysmgmt.bac.impl.DrugBACImpl">
+		<property name="drugBAR" ref="drugBARTarget"/>
+		<property name="validationController" ref="drugValidationController"/>
+	</bean>
+	<!-- ========================= ASPECT CONFIGURATION ======================== -->
+
+	<!-- ========================= InternalResponse status categories ========== -->
+
+ 	<bean id="statusCategoryXRef" class="com.qat.framework.util.StatusCategoryXRefImpl" >
+		<property name="statusCategoryExtensionMap" ref="statusCategoryExtensionMap" />
+	</bean>
+
+    <!-- This mapping causes an Optimistic Locking error to be a System Error instead of a Business Error
+         This will cause an operation success check to result in false. -->
+	<bean id="statusCategoryExtensionMap" class="java.util.HashMap">
+		<constructor-arg>
+			<map key-type="java.lang.String" value-type="com.qat.framework.model.response.InternalResponse.StatusCategory">
+				<entry key="#{optimisticLockingEnumName}" value-ref="systemErrorEnumType" />
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<bean id="businessErrorEnumType" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.qat.framework.model.response.InternalResponse$StatusCategory.BusinessError"/>
+	</bean>
+	<bean id="systemErrorEnumType" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.qat.framework.model.response.InternalResponse$StatusCategory.SystemError"/>
+	</bean>
+	<bean id="notAnErrorEnumType" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.qat.framework.model.response.InternalResponse$StatusCategory.NotAnError"/>
+	</bean>
+
+	<bean id="noRowsFoundEnumType" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.qat.framework.model.response.InternalResponse$BusinessErrorCategory.NoRowsFound"/>
+	</bean>
+	<bean id="noRowsFoundEnumName" factory-bean="noRowsFoundEnumType" factory-method="name" />
+	<bean id="noRowsInsertedEnumType" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.qat.framework.model.response.InternalResponse$BusinessErrorCategory.NoRowsInserted"/>
+	</bean>
+	<bean id="noRowsInsertedEnumName" factory-bean="noRowsInsertedEnumType" factory-method="name" />
+	<bean id="noRowsRemovedEnumType" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.qat.framework.model.response.InternalResponse$BusinessErrorCategory.NoRowsRemoved"/>
+	</bean>
+	<bean id="noRowsRemovedEnumName" factory-bean="noRowsRemovedEnumType" factory-method="name" />
+	<bean id="noRowsUpdatedEnumType" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.qat.framework.model.response.InternalResponse$BusinessErrorCategory.NoRowsUpdated"/>
+	</bean>
+	<bean id="noRowsUpdatedEnumName" factory-bean="noRowsUpdatedEnumType" factory-method="name" />
+	<bean id="optimisticLockingEnumType" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.qat.framework.model.response.InternalResponse$BusinessErrorCategory.OptimisticLocking"/>
+	</bean>
+	<bean id="optimisticLockingEnumName" factory-bean="optimisticLockingEnumType" factory-method="name" />
+
+</beans>

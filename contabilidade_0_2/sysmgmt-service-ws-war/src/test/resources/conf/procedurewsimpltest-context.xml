@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mockito="http://www.mockito.org/spring/mockito"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+					    http://www.mockito.org/spring/mockito http://www.mockito.org/spring/mockito.xsd">
+
+	<bean id="QATAppContext" class="com.qat.framework.util.AppContextHelper" />
+
+	<bean id="procedureWS" class="com.qat.samples.sysmgmt.service.impl.ProcedureWSImpl">
+		<property name="procedureBAC" ref="procedureBACTarget" />
+	</bean>
+
+	<bean id="procedureBACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.qat.samples.sysmgmt.bac.IProcedureBAC" />
+	</bean>
+</beans>

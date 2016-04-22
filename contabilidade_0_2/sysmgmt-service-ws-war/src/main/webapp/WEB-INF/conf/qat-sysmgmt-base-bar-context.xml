@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- - Application context definition for the QAT business area data access layer. -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Setup for mybatis Database Layer -->
+	<bean id="sysMgmt-sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:com/qat/samples/sysmgmt/bar/mybatis/map/sysmgmt-base-mybatis-config.xml" />
+		<property name="dataSource" ref="qatDataSource" />
+		<property name="databaseIdProvider" ref="databaseIdProvider" />
+<!-- 		<property name="mapperLocations"> -->
+<!-- 			<list> -->
+<!-- 				<value>classpath*:com/qat/samples/sysmgmt/dac/mybatis/map/county.xml</value> -->
+<!-- 				<value>classpath*:com/qat/samples/sysmgmt/dac/mybatis/map/drug.xml</value> -->
+<!-- 				<value>classpath*:com/qat/samples/sysmgmt/dac/mybatis/map/procedure.xml</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+	</bean>
+
+	<!-- ========================= DAC DEFINITIONS================================= -->
+	<bean id="countyBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.CountyBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="drugBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.DrugBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="procedureBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.ProcedureBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+</beans>

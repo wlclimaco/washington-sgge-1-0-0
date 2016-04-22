@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     	xmlns:cxf="http://cxf.apache.org/core"
+		xmlns:jaxws="http://cxf.apache.org/jaxws"
+		xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+		xsi:schemaLocation="
+			http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+			http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<import resource="classpath:META-INF/cxf/cxf.xml"/>
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+
+    <cxf:bus>
+        <cxf:features>
+            <cxf:logging/>
+        </cxf:features>
+    </cxf:bus>
+
+<!--     <bean id="org.apache.cxf.management.InstrumentationManager" class="org.apache.cxf.management.jmx.InstrumentationManagerImpl"> -->
+<!--   		<property name="bus" ref="cxf" /> -->
+<!--   		<property name="enabled" value="true" /> -->
+<!--   		<property name="JMXServiceURL" value="service:jmx:rmi:///jndi/rmi://localhost:9962/jmxrmi" /> -->
+<!-- 	</bean> -->
+<!--  	<bean id="CounterRepository" class="org.apache.cxf.management.counters.CounterRepository"> -->
+<!--         <property name="bus" ref="cxf" />         -->
+<!--     </bean>	 -->
+
+	<!-- ========================= Web Service DEFINITIONS ======================== -->
+	<!-- creates web service URL and binds to name and spring bean implementation -->
+ 	<jaxws:endpoint id="procedureWS" implementor="#procedureWSImpl" address="/ws/ProcedureService" >
+    	<jaxws:inInterceptors>
+        	<ref bean="wsAuthenticationInterceptor"/>
+   			<ref bean="wsAuthorizationInterceptor"/>
+ 		</jaxws:inInterceptors>
+ 		<jaxws:properties>
+			<entry key="set-jaxb-validation-event-handler" value="false" />
+			<entry key="ws-security.validate.token" value="false" />
+<!-- The following entry is needed using the 2.7.11 version of CXF with Tomcat 8.
+Tomcat 8 insists that a resource starts with a "/".  The default code does not have the "/" in front of
+the cxf-ehcache.xml file reference, so Tomcat 8 doesn't find it. -->
+			<entry key="ws-security.cache.config.file" value="/cxf-ehcache.xml" />
+		</jaxws:properties>
+	</jaxws:endpoint>
+	<jaxws:endpoint id="countyWS" implementor="#countyWSImpl" address="/ws/CountyService" >
+    	<jaxws:inInterceptors>
+        	<ref bean="wsAuthenticationInterceptor"/>
+   			<ref bean="wsAuthorizationInterceptor"/>
+ 		</jaxws:inInterceptors>
+		<jaxws:properties>
+			<entry key="set-jaxb-validation-event-handler" value="false" />
+			<entry key="ws-security.validate.token" value="false" />
+<!-- The following entry is needed using the 2.7.11 version of CXF with Tomcat 8.
+Tomcat 8 insists that a resource starts with a "/".  The default code does not have the "/" in front of
+the cxf-ehcache.xml file reference, so Tomcat 8 doesn't find it. -->
+			<entry key="ws-security.cache.config.file" value="/cxf-ehcache.xml" />
+		</jaxws:properties>
+	</jaxws:endpoint>
+	<jaxws:endpoint id="drugWS" implementor="#drugWSImpl" address="/ws/DrugService" >
+		<jaxws:properties>
+			<entry key="set-jaxb-validation-event-handler" value="false" />
+			<entry key="ws-security.validate.token" value="false" />
+<!-- The following entry is needed using the 2.7.11 version of CXF with Tomcat 8.
+Tomcat 8 insists that a resource starts with a "/".  The default code does not have the "/" in front of
+the cxf-ehcache.xml file reference, so Tomcat 8 doesn't find it. -->
+			<entry key="ws-security.cache.config.file" value="/cxf-ehcache.xml" />
+		</jaxws:properties>
+	</jaxws:endpoint>
+
+	<!-- ========================= Web Service Bean DEFINITIONS ======================== -->
+
+	<!-- this bean implements procedure ws interface methods -->
+	<bean id="procedureWSImpl" class="com.qat.samples.sysmgmt.service.impl.ProcedureWSImpl">
+		<property name="procedureBAC" ref="procedureBACTarget"/>
+	</bean>
+
+	<!-- this bean implements county ws interface methods -->
+	<bean id="countyWSImpl" class="com.qat.samples.sysmgmt.service.impl.CountyWSImpl">
+		<property name="countyBAC" ref="countyBACTarget"/>
+	</bean>
+
+	<!-- this bean implements drug ws interface methods -->
+	<bean id="drugWSImpl" class="com.qat.samples.sysmgmt.service.impl.DrugWSImpl">
+		<property name="drugBAC" ref="drugBACTarget"/>
+	</bean>
+
+</beans>

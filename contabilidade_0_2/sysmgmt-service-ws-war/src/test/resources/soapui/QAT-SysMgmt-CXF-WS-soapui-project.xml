@@ -1,0 +1,2065 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="QAT-SysMgmt - CXF - JAX-WS" resourceRoot="" soapui-version="5.0.0" abortOnError="false" runType="SEQUENTIAL" activeEnvironment="Default" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="DrugWSImplServiceSoapBinding" type="wsdl" bindingName="{http://qat.com/sysmgmt}DrugWSImplServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/DrugService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/DrugService?wsdl"><con:part><con:url>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/DrugService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="DrugWSImplService" targetNamespace="http://qat.com/sysmgmt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://qat.com/sysmgmt" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://qat.com/sysmgmt" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="deleteDrug" type="tns:deleteDrug"/>
+      <xs:element name="deleteDrugResponse" type="tns:deleteDrugResponse"/>
+      <xs:element name="fetchAllDrugs" type="tns:fetchAllDrugs"/>
+      <xs:element name="fetchAllDrugsResponse" type="tns:fetchAllDrugsResponse"/>
+      <xs:element name="fetchDrugByCode" type="tns:fetchDrugByCode"/>
+      <xs:element name="fetchDrugByCodeResponse" type="tns:fetchDrugByCodeResponse"/>
+      <xs:element name="fetchDrugsByRequest" type="tns:fetchDrugsByRequest"/>
+      <xs:element name="fetchDrugsByRequestResponse" type="tns:fetchDrugsByRequestResponse"/>
+      <xs:element name="insertDrug" type="tns:insertDrug"/>
+      <xs:element name="insertDrugResponse" type="tns:insertDrugResponse"/>
+      <xs:element name="message" type="tns:message"/>
+      <xs:element name="messageInfo" type="tns:messageInfo"/>
+      <xs:element name="refreshDrugs" type="tns:refreshDrugs"/>
+      <xs:element name="refreshDrugsResponse" type="tns:refreshDrugsResponse"/>
+      <xs:element name="resultsSetInfo" type="tns:resultsSetInfo"/>
+      <xs:element name="updateDrug" type="tns:updateDrug"/>
+      <xs:element name="updateDrugResponse" type="tns:updateDrugResponse"/>
+      <xs:complexType name="insertDrug">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="tns:drugMaintenanceRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="drugMaintenanceRequest">
+        <xs:complexContent>
+          <xs:extension base="tns:request">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="drug" nillable="true" type="tns:Drug"/>
+              <xs:element minOccurs="0" name="returnList" nillable="true" type="xs:boolean"/>
+              <xs:element minOccurs="0" name="returnListPaged" nillable="true" type="xs:boolean"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="request">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="userContext" type="tns:userContext"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Drug">
+        <xs:complexContent>
+          <xs:extension base="tns:baseModel">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="code" type="xs:string"/>
+              <xs:element minOccurs="0" name="description" type="xs:string"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="drugPrices" nillable="true" type="tns:DrugPrice"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="baseModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="modelAction" nillable="true" type="tns:persistenceActionEnum"/>
+          <xs:element minOccurs="0" name="createUser" type="xs:string"/>
+          <xs:element minOccurs="0" name="modifyUser" type="xs:string"/>
+          <xs:element minOccurs="0" name="createDateUTC" type="xs:long"/>
+          <xs:element minOccurs="0" name="modifyDateUTC" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="DrugPrice">
+        <xs:complexContent>
+          <xs:extension base="tns:baseModel">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="parentKey" type="xs:string"/>
+              <xs:element minOccurs="0" name="sexIndicator" type="tns:sexIndEnum"/>
+              <xs:element minOccurs="0" name="price" type="xs:decimal"/>
+              <xs:element minOccurs="0" name="effectiveDateUTC" type="xs:long"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="userContext">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="userId" type="xs:string"/>
+          <xs:element minOccurs="0" name="userPrimaryRole" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="localeString" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="authorities" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="insertDrugResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="insertDrugReturn" type="tns:drugResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="drugResponse">
+        <xs:complexContent>
+          <xs:extension base="tns:inquiryResponse">
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="drugs" nillable="true" type="tns:Drug"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="inquiryResponse">
+        <xs:complexContent>
+          <xs:extension base="tns:response">
+            <xs:sequence>
+              <xs:element minOccurs="0" ref="tns:resultsSetInfo"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="response">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="messageList" nillable="true" type="tns:message"/>
+          <xs:element minOccurs="0" name="operationSuccess" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="resultsSetInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="moreRowsAvailable" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="pageSize" type="xs:int"/>
+          <xs:element minOccurs="0" name="startPage" type="xs:int"/>
+          <xs:element minOccurs="0" name="totalRowsAvailable" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="message">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="msgInfo" type="tns:messageInfo"/>
+          <xs:element minOccurs="0" name="text" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="messageInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="severity" type="tns:messageSeverity"/>
+          <xs:element minOccurs="0" name="level" type="tns:messageLevel"/>
+          <xs:element minOccurs="0" name="code" type="xs:string"/>
+          <xs:element minOccurs="0" name="relatedPropertyName" type="xs:string"/>
+          <xs:element minOccurs="0" name="createDateUTC" type="xs:long"/>
+          <xs:element minOccurs="0" name="traceInfo" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fetchDrugsByRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="tns:pagedInquiryRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="pagedInquiryRequest">
+        <xs:complexContent>
+          <xs:extension base="tns:inquiryRequest">
+            <xs:sequence/>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="inquiryRequest">
+        <xs:complexContent>
+          <xs:extension base="tns:request">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="pageSize" type="xs:int"/>
+              <xs:element minOccurs="0" name="startPage" type="xs:int"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="sortExpressions" nillable="true" type="tns:sortExpression"/>
+              <xs:element minOccurs="0" name="preQueryCount" type="xs:boolean"/>
+              <xs:element minOccurs="0" name="maxPreQueryCount" type="xs:int"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="sortExpression">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="columnName" type="xs:string"/>
+          <xs:element minOccurs="0" name="direction" type="tns:direction"/>
+          <xs:element minOccurs="0" name="field" type="xs:string"/>
+          <xs:element minOccurs="0" name="priority" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fetchDrugsByRequestResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="fetchDrugsByRequestReturn" type="tns:drugResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fetchAllDrugs">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="tns:fetchAllRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fetchAllRequest">
+        <xs:complexContent>
+          <xs:extension base="tns:request">
+            <xs:sequence/>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="fetchAllDrugsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="fetchAllDrugsReturn" type="tns:drugResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="refreshDrugs">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="tns:refreshRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="refreshRequest">
+        <xs:complexContent>
+          <xs:extension base="tns:request">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="refreshInt" nillable="true" type="xs:int"/>
+              <xs:element minOccurs="0" name="returnList" nillable="true" type="xs:boolean"/>
+              <xs:element minOccurs="0" name="returnListPaged" nillable="true" type="xs:boolean"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="refreshDrugsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="refreshDrugsReturn" type="tns:drugResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fetchDrugByCode">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="tns:fetchByCodeRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fetchByCodeRequest">
+        <xs:complexContent>
+          <xs:extension base="tns:request">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="fetchCode" nillable="true" type="xs:string"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="fetchDrugByCodeResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="fetchDrugByCodeReturn" type="tns:drugResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteDrug">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="tns:drugMaintenanceRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteDrugResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="deleteDrugReturn" type="tns:drugResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updateDrug">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="tns:drugMaintenanceRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updateDrugResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="updateDrugReturn" type="tns:drugResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="sexIndEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="MALE"/>
+          <xs:enumeration value="FEMALE"/>
+          <xs:enumeration value="BOTH"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="persistenceActionEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="NONE"/>
+          <xs:enumeration value="INSERT"/>
+          <xs:enumeration value="UPDATE"/>
+          <xs:enumeration value="DELETE"/>
+          <xs:enumeration value="ERROR"/>
+          <xs:enumeration value="FETCH"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="messageSeverity">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None"/>
+          <xs:enumeration value="Info"/>
+          <xs:enumeration value="Warning"/>
+          <xs:enumeration value="Error"/>
+          <xs:enumeration value="Fatal"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="messageLevel">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None"/>
+          <xs:enumeration value="Object"/>
+          <xs:enumeration value="Field"/>
+          <xs:enumeration value="FieldValidation"/>
+          <xs:enumeration value="Other"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="direction">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Ascending"/>
+          <xs:enumeration value="Descending"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="updateDrug">
+    <wsdl:part element="tns:updateDrug" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="insertDrugResponse">
+    <wsdl:part element="tns:insertDrugResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteDrug">
+    <wsdl:part element="tns:deleteDrug" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fetchDrugsByRequest">
+    <wsdl:part element="tns:fetchDrugsByRequest" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="refreshDrugsResponse">
+    <wsdl:part element="tns:refreshDrugsResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fetchDrugByCode">
+    <wsdl:part element="tns:fetchDrugByCode" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fetchDrugsByRequestResponse">
+    <wsdl:part element="tns:fetchDrugsByRequestResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fetchAllDrugs">
+    <wsdl:part element="tns:fetchAllDrugs" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteDrugResponse">
+    <wsdl:part element="tns:deleteDrugResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fetchDrugByCodeResponse">
+    <wsdl:part element="tns:fetchDrugByCodeResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fetchAllDrugsResponse">
+    <wsdl:part element="tns:fetchAllDrugsResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateDrugResponse">
+    <wsdl:part element="tns:updateDrugResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="insertDrug">
+    <wsdl:part element="tns:insertDrug" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="refreshDrugs">
+    <wsdl:part element="tns:refreshDrugs" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IDrugWS">
+    <wsdl:operation name="insertDrug">
+      <wsdl:documentation>Insert a drug record and optionally returns a list of drugs.</wsdl:documentation>
+      <wsdl:input message="tns:insertDrug" name="insertDrug"></wsdl:input>
+      <wsdl:output message="tns:insertDrugResponse" name="insertDrugResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fetchDrugsByRequest">
+      <wsdl:documentation>Returns a list of drugs paged.</wsdl:documentation>
+      <wsdl:input message="tns:fetchDrugsByRequest" name="fetchDrugsByRequest"></wsdl:input>
+      <wsdl:output message="tns:fetchDrugsByRequestResponse" name="fetchDrugsByRequestResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fetchAllDrugs">
+      <wsdl:documentation>Returns a complete list of all drugs.</wsdl:documentation>
+      <wsdl:input message="tns:fetchAllDrugs" name="fetchAllDrugs"></wsdl:input>
+      <wsdl:output message="tns:fetchAllDrugsResponse" name="fetchAllDrugsResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="refreshDrugs">
+      <wsdl:documentation>Used for demo purposes only, rebuilds the drug tables.</wsdl:documentation>
+      <wsdl:input message="tns:refreshDrugs" name="refreshDrugs"></wsdl:input>
+      <wsdl:output message="tns:refreshDrugsResponse" name="refreshDrugsResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fetchDrugByCode">
+      <wsdl:documentation>Returns the selected drug.</wsdl:documentation>
+      <wsdl:input message="tns:fetchDrugByCode" name="fetchDrugByCode"></wsdl:input>
+      <wsdl:output message="tns:fetchDrugByCodeResponse" name="fetchDrugByCodeResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteDrug">
+      <wsdl:documentation>Deletes a drug record and optionally returns a list of drugs.</wsdl:documentation>
+      <wsdl:input message="tns:deleteDrug" name="deleteDrug"></wsdl:input>
+      <wsdl:output message="tns:deleteDrugResponse" name="deleteDrugResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateDrug">
+      <wsdl:documentation>Updates the selected drug record and optionally returns a list of drugs.</wsdl:documentation>
+      <wsdl:input message="tns:updateDrug" name="updateDrug"></wsdl:input>
+      <wsdl:output message="tns:updateDrugResponse" name="updateDrugResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DrugWSImplServiceSoapBinding" type="tns:IDrugWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="fetchDrugsByRequest">
+      <soap:operation soapAction="fetchDrugsByRequest" style="document"/>
+      <wsdl:input name="fetchDrugsByRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="fetchDrugsByRequestResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertDrug">
+      <soap:operation soapAction="insertDrug" style="document"/>
+      <wsdl:input name="insertDrug">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="insertDrugResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fetchAllDrugs">
+      <soap:operation soapAction="fetchAllDrugs" style="document"/>
+      <wsdl:input name="fetchAllDrugs">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="fetchAllDrugsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="refreshDrugs">
+      <soap:operation soapAction="refreshDrugs" style="document"/>
+      <wsdl:input name="refreshDrugs">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="refreshDrugsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fetchDrugByCode">
+      <soap:operation soapAction="fetchDrugByCode" style="document"/>
+      <wsdl:input name="fetchDrugByCode">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="fetchDrugByCodeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteDrug">
+      <soap:operation soapAction="deleteDrug" style="document"/>
+      <wsdl:input name="deleteDrug">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteDrugResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateDrug">
+      <soap:operation soapAction="updateDrug" style="document"/>
+      <wsdl:input name="updateDrug">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateDrugResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DrugWSImplService">
+    <wsdl:port binding="tns:DrugWSImplServiceSoapBinding" name="DrugWSImplPort">
+      <soap:address location="http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/DrugService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7001/qat-sysmgmt-sample/services/EntityDrugService</con:endpoint><con:endpoint>http://localhost:7001/qat-sysmgmt-sample/services/EntityDrugService</con:endpoint><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/DrugService</con:endpoint><con:endpoint>http://localhost:8080/qat-sysmgmt-sample/services/DrugService</con:endpoint><con:endpoint>http://localhost:8080/qat-sysmgmt-sample/services/EntityDrugService</con:endpoint><con:endpoint>http://localhost:8080/qat-sysmgmt-sample/services/ws/DrugService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="deleteDrug" name="deleteDrug" bindingOperationName="deleteDrug" type="Request-Response" outputName="deleteDrugResponse" inputName="deleteDrug" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/DrugService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sys="http://qat.com/sysmgmt">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sys:deleteDrug>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <userContext>
+               <!--Optional:-->
+               <userId>?</userId>
+               <!--Optional:-->
+               <userPrimaryRole>?</userPrimaryRole>
+               <!--Optional:-->
+               <localeString>?</localeString>
+               <!--Zero or more repetitions:-->
+               <authorities>
+                  </authorities>
+            </userContext>
+            <!--Optional:-->
+            <drug>
+               <!--Optional:-->
+               <modelAction>?</modelAction>
+               <!--Optional:-->
+               <createUser>?</createUser>
+               <!--Optional:-->
+               <modifyUser>?</modifyUser>
+               <!--Optional:-->
+               <createDateUTC>?</createDateUTC>
+               <!--Optional:-->
+               <modifyDateUTC>?</modifyDateUTC>
+               <!--Optional:-->
+               <code>NDC102</code>
+               <!--Optional:-->
+               <description>?</description>
+               <!--Zero or more repetitions:-->
+               <drugPrices>
+                  <!--Optional:-->
+                  <modelAction>?</modelAction>
+                  <!--Optional:-->
+                  <createUser>?</createUser>
+                  <!--Optional:-->
+                  <modifyUser>?</modifyUser>
+                  <!--Optional:-->
+                  <createDateUTC>?</createDateUTC>
+                  <!--Optional:-->
+                  <modifyDateUTC>?</modifyDateUTC>
+                  <!--Optional:-->
+                  <parentKey>?</parentKey>
+                  <!--Optional:-->
+                  <sexIndicator>MALE</sexIndicator>
+                  <!--Optional:-->
+                  <price>?</price>
+                  <!--Optional:-->
+                  <effectiveDateUTC>?</effectiveDateUTC>
+               </drugPrices>
+            </drug>
+            <!--Optional:-->
+            <returnList>true</returnList>
+            <!--Optional:-->
+            <returnListPaged>true</returnListPaged>
+         </request>
+      </sys:deleteDrug>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="deleteDrug"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="fetchAllDrugs" name="fetchAllDrugs" bindingOperationName="fetchAllDrugs" type="Request-Response" outputName="fetchAllDrugsResponse" inputName="fetchAllDrugs" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" outgoingWss=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/DrugService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sys="http://qat.com/sysmgmt">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sys:fetchAllDrugs>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <userContext>
+               <!--Optional:-->
+               <userId>?</userId>
+               <!--Optional:-->
+               <userPrimaryRole>?</userPrimaryRole>
+               <!--Optional:-->
+               <localeString>?</localeString>
+               <!--Zero or more repetitions:-->
+               <authorities>
+                  </authorities>
+            </userContext>
+         </request>
+      </sys:fetchAllDrugs>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="fetchAllDrugs"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="insertDrug" name="insertDrug" bindingOperationName="insertDrug" type="Request-Response" outputName="insertDrugResponse" inputName="insertDrug" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/DrugService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sys="http://qat.com/sysmgmt">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sys:insertDrug>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <userContext>
+               <!--Optional:-->
+               <userId>?</userId>
+               <!--Optional:-->
+               <userPrimaryRole>?</userPrimaryRole>
+               <!--Optional:-->
+               <localeString>?</localeString>
+               <!--Zero or more repetitions:-->
+               <authorities>
+                  </authorities>
+            </userContext>
+            <!--Optional:-->
+            <drug>
+               <!--Optional:-->
+               <modelAction>?</modelAction>
+               <!--Optional:-->
+               <createUser>?</createUser>
+               <!--Optional:-->
+               <modifyUser>?</modifyUser>
+               <!--Optional:-->
+               <createDateUTC>?</createDateUTC>
+               <!--Optional:-->
+               <modifyDateUTC>?</modifyDateUTC>
+               <!--Optional:-->
+               <code>NDC000</code>
+               <!--Optional:-->
+               <description>DESC000</description>
+               <!--Zero or more repetitions:-->
+               <drugPrices>
+                  <!--Optional:-->
+                  <modelAction>?</modelAction>
+                  <!--Optional:-->
+                  <createUser>?</createUser>
+                  <!--Optional:-->
+                  <modifyUser>?</modifyUser>
+                  <!--Optional:-->
+                  <createDateUTC>?</createDateUTC>
+                  <!--Optional:-->
+                  <modifyDateUTC>?</modifyDateUTC>
+                  <!--Optional:-->
+                  <parentKey/>
+                  <!--Optional:-->
+                  <sexIndicator>FEMALE</sexIndicator>
+                  <!--Optional:-->
+                  <price>10.00</price>
+                  <!--Optional:-->
+                  <effectiveDateUTC>?</effectiveDateUTC>
+               </drugPrices>
+            </drug>
+            <!--Optional:-->
+            <returnList/>
+            <!--Optional:-->
+            <returnListPaged/>
+         </request>
+      </sys:insertDrug>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="insertDrug"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="refreshDrugs" name="refreshDrugs" bindingOperationName="refreshDrugs" type="Request-Response" outputName="refreshDrugsResponse" inputName="refreshDrugs" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/DrugService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sys="http://qat.com/sysmgmt">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sys:refreshDrugs>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <userContext>
+               <!--Optional:-->
+               <userId>?</userId>
+               <!--Optional:-->
+               <userPrimaryRole>?</userPrimaryRole>
+               <!--Optional:-->
+               <localeString>?</localeString>
+               <!--Zero or more repetitions:-->
+               <authorities>
+                  </authorities>
+            </userContext>
+            <!--Optional:-->
+            <refreshInt>30</refreshInt>
+            <!--Optional:-->
+            <returnList>true</returnList>
+            <!--Optional:-->
+            <returnListPaged/>
+         </request>
+      </sys:refreshDrugs>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="refreshDrugs"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="updateDrug" name="updateDrug" bindingOperationName="updateDrug" type="Request-Response" outputName="updateDrugResponse" inputName="updateDrug" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/DrugService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sys="http://qat.com/sysmgmt">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sys:updateDrug>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <userContext>
+               <!--Optional:-->
+               <userId>?</userId>
+               <!--Optional:-->
+               <userPrimaryRole>?</userPrimaryRole>
+               <!--Optional:-->
+               <localeString>?</localeString>
+               <!--Zero or more repetitions:-->
+               <authorities>
+                  </authorities>
+            </userContext>
+            <!--Optional:-->
+            <drug>
+               <!--Optional:-->
+               <modelAction>UPDATE</modelAction>
+               <!--Optional:-->
+               <createUser>?</createUser>
+               <!--Optional:-->
+               <modifyUser>?</modifyUser>
+               <!--Optional:-->
+               <createDateUTC>?</createDateUTC>
+               <!--Optional:-->
+               <modifyDateUTC>?</modifyDateUTC>
+               <!--Optional:-->
+               <code>NDC1</code>
+               <!--Optional:-->
+               <description>teset</description>
+               <!--Zero or more repetitions:-->
+               <drugPrices>
+                  <!--Optional:-->
+                  <modelAction>?</modelAction>
+                  <!--Optional:-->
+                  <createUser>?</createUser>
+                  <!--Optional:-->
+                  <modifyUser>?</modifyUser>
+                  <!--Optional:-->
+                  <createDateUTC>?</createDateUTC>
+                  <!--Optional:-->
+                  <modifyDateUTC>?</modifyDateUTC>
+                  <!--Optional:-->
+                  <parentKey>?</parentKey>
+                  <!--Optional:-->
+                  <sexIndicator>FEMALE</sexIndicator>
+                  <!--Optional:-->
+                  <price>123.00</price>
+                  <!--Optional:-->
+                  <effectiveDateUTC>?</effectiveDateUTC>
+               </drugPrices>
+            </drug>
+            <!--Optional:-->
+            <returnList/>
+            <!--Optional:-->
+            <returnListPaged/>
+         </request>
+      </sys:updateDrug>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="updateDrug"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="fetchDrugByCode" name="fetchDrugByCode" bindingOperationName="fetchDrugByCode" type="Request-Response" outputName="fetchDrugByCodeResponse" inputName="fetchDrugByCode" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/DrugService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sys="http://qat.com/sysmgmt">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sys:fetchDrugByCode>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <userContext>
+               <!--Optional:-->
+               <userId>?</userId>
+               <!--Optional:-->
+               <userPrimaryRole>?</userPrimaryRole>
+               <!--Optional:-->
+               <localeString>?</localeString>
+               <!--Zero or more repetitions:-->
+               <authorities>
+                  </authorities>
+            </userContext>
+            <!--Optional:-->
+            <fetchCode>NDC103</fetchCode>
+         </request>
+      </sys:fetchDrugByCode>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="fetchDrugByCode"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="fetchDrugsByRequest" name="fetchDrugsByRequest" bindingOperationName="fetchDrugsByRequest" type="Request-Response" outputName="fetchDrugsByRequestResponse" inputName="fetchDrugsByRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/DrugService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sys="http://qat.com/sysmgmt">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sys:fetchDrugsByRequest>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <userContext>
+               <!--Optional:-->
+               <userId>?</userId>
+               <!--Optional:-->
+               <userPrimaryRole>?</userPrimaryRole>
+               <!--Optional:-->
+               <localeString>?</localeString>
+               <!--Zero or more repetitions:-->
+               <authorities>
+                  </authorities>
+            </userContext>
+            <!--Optional:-->
+            <pageSize>20</pageSize>
+            <!--Optional:-->
+            <startPage>1</startPage>
+            <!--Zero or more repetitions:-->
+            <sortExpressions>
+               <!--Optional:-->
+               <columnName>?</columnName>
+               <!--Optional:-->
+               <direction>?</direction>
+               <!--Optional:-->
+               <field>?</field>
+               <!--Optional:-->
+               <priority>?</priority>
+            </sortExpressions>
+            <!--Optional:-->
+            <preQueryCount>true</preQueryCount>
+            <!--Optional:-->
+            <maxPreQueryCount>?</maxPreQueryCount>
+         </request>
+      </sys:fetchDrugsByRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="fetchDrugsByRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="ProcedureWSImplServiceSoapBinding" type="wsdl" bindingName="{http://qat.com/sysmgmt}ProcedureWSImplServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/ProcedureService?WSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/ProcedureService?WSDL"><con:part><con:url>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/ProcedureService?WSDL</con:url><con:content><![CDATA[<wsdl:definitions name="ProcedureWSImplService" targetNamespace="http://qat.com/sysmgmt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://qat.com/sysmgmt" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://qat.com/sysmgmt" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="deleteProcedure" type="tns:deleteProcedure"/>
+      <xs:element name="deleteProcedureResponse" type="tns:deleteProcedureResponse"/>
+      <xs:element name="fetchAllProcedures" type="tns:fetchAllProcedures"/>
+      <xs:element name="fetchAllProceduresResponse" type="tns:fetchAllProceduresResponse"/>
+      <xs:element name="fetchProcedureById" type="tns:fetchProcedureById"/>
+      <xs:element name="fetchProcedureByIdResponse" type="tns:fetchProcedureByIdResponse"/>
+      <xs:element name="fetchProceduresByRequest" type="tns:fetchProceduresByRequest"/>
+      <xs:element name="fetchProceduresByRequestResponse" type="tns:fetchProceduresByRequestResponse"/>
+      <xs:element name="insertProcedure" type="tns:insertProcedure"/>
+      <xs:element name="insertProcedureResponse" type="tns:insertProcedureResponse"/>
+      <xs:element name="refreshProcedures" type="tns:refreshProcedures"/>
+      <xs:element name="refreshProceduresResponse" type="tns:refreshProceduresResponse"/>
+      <xs:element name="resultsSetInfo" type="tns:resultsSetInfo"/>
+      <xs:element name="updateProcedure" type="tns:updateProcedure"/>
+      <xs:element name="updateProcedureResponse" type="tns:updateProcedureResponse"/>
+      <xs:complexType name="refreshProcedures">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="tns:refreshRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="refreshRequest">
+        <xs:complexContent>
+          <xs:extension base="tns:request">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="refreshInt" nillable="true" type="xs:int"/>
+              <xs:element minOccurs="0" name="returnList" nillable="true" type="xs:boolean"/>
+              <xs:element minOccurs="0" name="returnListPaged" nillable="true" type="xs:boolean"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="request">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="userContext" type="tns:userContext"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="userContext">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="userId" type="xs:string"/>
+          <xs:element minOccurs="0" name="userPrimaryRole" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="localeString" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="authorities" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="refreshProceduresResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="refreshProceduresReturn" type="tns:procedureResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="procedureResponse">
+        <xs:complexContent>
+          <xs:extension base="tns:inquiryResponse">
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="procedures" nillable="true" type="tns:Procedure"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="inquiryResponse">
+        <xs:complexContent>
+          <xs:extension base="tns:response">
+            <xs:sequence>
+              <xs:element minOccurs="0" ref="tns:resultsSetInfo"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="response">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="messageList" nillable="true" type="tns:message"/>
+          <xs:element minOccurs="0" name="operationSuccess" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Procedure">
+        <xs:complexContent>
+          <xs:extension base="tns:modelOL">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="id" type="xs:int"/>
+              <xs:element minOccurs="0" name="code" type="xs:string"/>
+              <xs:element minOccurs="0" name="description" type="xs:string"/>
+              <xs:element minOccurs="0" name="price" type="xs:decimal"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="modelOL">
+        <xs:complexContent>
+          <xs:extension base="tns:baseModel">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="version" type="xs:int"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="baseModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="modelAction" nillable="true" type="tns:persistenceActionEnum"/>
+          <xs:element minOccurs="0" name="createUser" type="xs:string"/>
+          <xs:element minOccurs="0" name="modifyUser" type="xs:string"/>
+          <xs:element minOccurs="0" name="createDateUTC" type="xs:long"/>
+          <xs:element minOccurs="0" name="modifyDateUTC" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="resultsSetInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="moreRowsAvailable" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="pageSize" type="xs:int"/>
+          <xs:element minOccurs="0" name="startPage" type="xs:int"/>
+          <xs:element minOccurs="0" name="totalRowsAvailable" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType final="extension restriction" name="message">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="fetchProcedureById">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="tns:fetchByIdRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fetchByIdRequest">
+        <xs:complexContent>
+          <xs:extension base="tns:request">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="fetchId" nillable="true" type="xs:int"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="fetchProcedureByIdResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="fetchProcedureByIdReturn" type="tns:procedureResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fetchAllProcedures">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="tns:fetchAllRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fetchAllRequest">
+        <xs:complexContent>
+          <xs:extension base="tns:request">
+            <xs:sequence/>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="fetchAllProceduresResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="fetchAllProceduresReturn" type="tns:procedureResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="insertProcedure">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="tns:procedureMaintenanceRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="procedureMaintenanceRequest">
+        <xs:complexContent>
+          <xs:extension base="tns:maintenanceRequest">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="procedure" nillable="true" type="tns:Procedure"/>
+              <xs:element minOccurs="0" name="returnList" nillable="true" type="xs:boolean"/>
+              <xs:element minOccurs="0" name="returnListPaged" nillable="true" type="xs:boolean"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="maintenanceRequest">
+        <xs:complexContent>
+          <xs:extension base="tns:request">
+            <xs:sequence/>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="insertProcedureResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="insertProcedureReturn" type="tns:procedureResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fetchProceduresByRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="tns:pagedInquiryRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="pagedInquiryRequest">
+        <xs:complexContent>
+          <xs:extension base="tns:inquiryRequest">
+            <xs:sequence/>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="inquiryRequest">
+        <xs:complexContent>
+          <xs:extension base="tns:request">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="pageSize" type="xs:int"/>
+              <xs:element minOccurs="0" name="startPage" type="xs:int"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="sortExpressions" nillable="true" type="tns:sortExpression"/>
+              <xs:element minOccurs="0" name="preQueryCount" type="xs:boolean"/>
+              <xs:element minOccurs="0" name="maxPreQueryCount" type="xs:int"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="sortExpression">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="columnName" type="xs:string"/>
+          <xs:element minOccurs="0" name="direction" type="tns:direction"/>
+          <xs:element minOccurs="0" name="field" type="xs:string"/>
+          <xs:element minOccurs="0" name="priority" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fetchProceduresByRequestResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="fetchProceduresByRequestReturn" type="tns:procedureResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updateProcedure">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="tns:procedureMaintenanceRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updateProcedureResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="updateProcedureReturn" type="tns:procedureResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteProcedure">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="tns:procedureMaintenanceRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteProcedureResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="deleteProcedureReturn" type="tns:procedureResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="persistenceActionEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="NONE"/>
+          <xs:enumeration value="INSERT"/>
+          <xs:enumeration value="UPDATE"/>
+          <xs:enumeration value="DELETE"/>
+          <xs:enumeration value="ERROR"/>
+          <xs:enumeration value="FETCH"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="direction">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Ascending"/>
+          <xs:enumeration value="Descending"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="fetchAllProceduresResponse">
+    <wsdl:part element="tns:fetchAllProceduresResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteProcedure">
+    <wsdl:part element="tns:deleteProcedure" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="refreshProceduresResponse">
+    <wsdl:part element="tns:refreshProceduresResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fetchProcedureById">
+    <wsdl:part element="tns:fetchProcedureById" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fetchAllProcedures">
+    <wsdl:part element="tns:fetchAllProcedures" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fetchProceduresByRequestResponse">
+    <wsdl:part element="tns:fetchProceduresByRequestResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="insertProcedure">
+    <wsdl:part element="tns:insertProcedure" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="refreshProcedures">
+    <wsdl:part element="tns:refreshProcedures" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fetchProceduresByRequest">
+    <wsdl:part element="tns:fetchProceduresByRequest" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteProcedureResponse">
+    <wsdl:part element="tns:deleteProcedureResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fetchProcedureByIdResponse">
+    <wsdl:part element="tns:fetchProcedureByIdResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateProcedure">
+    <wsdl:part element="tns:updateProcedure" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateProcedureResponse">
+    <wsdl:part element="tns:updateProcedureResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="insertProcedureResponse">
+    <wsdl:part element="tns:insertProcedureResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IProcedureWS">
+    <wsdl:operation name="refreshProcedures">
+      <wsdl:documentation>Used for demo purposes only, rebuilds the procedure table.</wsdl:documentation>
+      <wsdl:input message="tns:refreshProcedures" name="refreshProcedures"></wsdl:input>
+      <wsdl:output message="tns:refreshProceduresResponse" name="refreshProceduresResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fetchProcedureById">
+      <wsdl:documentation>Returns the desired procedure.</wsdl:documentation>
+      <wsdl:input message="tns:fetchProcedureById" name="fetchProcedureById"></wsdl:input>
+      <wsdl:output message="tns:fetchProcedureByIdResponse" name="fetchProcedureByIdResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fetchAllProcedures">
+      <wsdl:documentation>Returns a complete list of all procedures.</wsdl:documentation>
+      <wsdl:input message="tns:fetchAllProcedures" name="fetchAllProcedures"></wsdl:input>
+      <wsdl:output message="tns:fetchAllProceduresResponse" name="fetchAllProceduresResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertProcedure">
+      <wsdl:documentation>Insert a procedure record and optionally returns a list of procedures.</wsdl:documentation>
+      <wsdl:input message="tns:insertProcedure" name="insertProcedure"></wsdl:input>
+      <wsdl:output message="tns:insertProcedureResponse" name="insertProcedureResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fetchProceduresByRequest">
+      <wsdl:documentation>Returns the list of procedures in a paged list (start and ending rows).</wsdl:documentation>
+      <wsdl:input message="tns:fetchProceduresByRequest" name="fetchProceduresByRequest"></wsdl:input>
+      <wsdl:output message="tns:fetchProceduresByRequestResponse" name="fetchProceduresByRequestResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateProcedure">
+      <wsdl:documentation>Updates the selected procedure record and optionally returns a list of procedures.</wsdl:documentation>
+      <wsdl:input message="tns:updateProcedure" name="updateProcedure"></wsdl:input>
+      <wsdl:output message="tns:updateProcedureResponse" name="updateProcedureResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteProcedure">
+      <wsdl:documentation>Deletes the selected procedure record and optionally returns a list of procedures.</wsdl:documentation>
+      <wsdl:input message="tns:deleteProcedure" name="deleteProcedure"></wsdl:input>
+      <wsdl:output message="tns:deleteProcedureResponse" name="deleteProcedureResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ProcedureWSImplServiceSoapBinding" type="tns:IProcedureWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="refreshProcedures">
+      <soap:operation soapAction="refreshProcedures" style="document"/>
+      <wsdl:input name="refreshProcedures">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="refreshProceduresResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fetchProcedureById">
+      <soap:operation soapAction="fetchProcedureById" style="document"/>
+      <wsdl:input name="fetchProcedureById">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="fetchProcedureByIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fetchAllProcedures">
+      <soap:operation soapAction="fetchAllProcedures" style="document"/>
+      <wsdl:input name="fetchAllProcedures">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="fetchAllProceduresResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertProcedure">
+      <soap:operation soapAction="insertProcedure" style="document"/>
+      <wsdl:input name="insertProcedure">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="insertProcedureResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fetchProceduresByRequest">
+      <soap:operation soapAction="fetchProceduresByRequest" style="document"/>
+      <wsdl:input name="fetchProceduresByRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="fetchProceduresByRequestResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateProcedure">
+      <soap:operation soapAction="updateProcedure" style="document"/>
+      <wsdl:input name="updateProcedure">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateProcedureResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteProcedure">
+      <soap:operation soapAction="deleteProcedure" style="document"/>
+      <wsdl:input name="deleteProcedure">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteProcedureResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ProcedureWSImplService">
+    <wsdl:port binding="tns:ProcedureWSImplServiceSoapBinding" name="ProcedureWSImplPort">
+      <soap:address location="http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/ProcedureService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7001/qat-sysmgmt-sample/services/EntityProcedureService</con:endpoint><con:endpoint>http://localhost:7001/qat-sysmgmt-sample/services/EntityProcedureService</con:endpoint><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/ProcedureService</con:endpoint><con:endpoint>http://localhost:8080/qat-sysmgmt-sample/services/EntityProcedureService</con:endpoint><con:endpoint>http://localhost:8080/qat-sysmgmt-sample/services/ProcedureService</con:endpoint><con:endpoint>http://localhost:8080/qat-sysmgmt-sample/services/ws/ProcedureService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="deleteProcedure" name="deleteProcedure" bindingOperationName="deleteProcedure" type="Request-Response" outputName="deleteProcedureResponse" inputName="deleteProcedure" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" outgoingWss="Admin"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/ProcedureService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sys="http://qat.com/sysmgmt">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sys:deleteProcedure>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <userContext>
+               <!--Optional:-->
+               <userId>?</userId>
+               <!--Optional:-->
+               <userPrimaryRole>?</userPrimaryRole>
+               <!--Optional:-->
+               <localeString>?</localeString>
+               <!--Zero or more repetitions:-->
+               <authorities>
+                  </authorities>
+            </userContext>
+            <!--Optional:-->
+            <procedure>
+               <!--Optional:-->
+               <modelAction>?</modelAction>
+               <!--Optional:-->
+               <createUser>?</createUser>
+               <!--Optional:-->
+               <modifyUser>?</modifyUser>
+               <!--Optional:-->
+               <createDateUTC>?</createDateUTC>
+               <!--Optional:-->
+               <modifyDateUTC>?</modifyDateUTC>
+               <!--Optional:-->
+               <version>?</version>
+               <!--Optional:-->
+               <id>6696</id>
+               <!--Optional:-->
+               <code>pc3</code>
+               <!--Optional:-->
+               <description>?</description>
+               <!--Optional:-->
+               <price>?</price>
+            </procedure>
+            <!--Optional:-->
+            <returnList/>
+            <!--Optional:-->
+            <returnListPaged>true</returnListPaged>
+         </request>
+      </sys:deleteProcedure>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="deleteProcedure"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="fetchAllProcedures" name="fetchAllProcedures" bindingOperationName="fetchAllProcedures" type="Request-Response" outputName="fetchAllProceduresResponse" inputName="fetchAllProcedures" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" outgoingWss="Admin"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/ProcedureService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sys="http://qat.com/sysmgmt">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sys:fetchAllProcedures>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <userContext>
+               <!--Optional:-->
+               <userId>?</userId>
+               <!--Optional:-->
+               <userPrimaryRole>?</userPrimaryRole>
+               <!--Optional:-->
+               <localeString>?</localeString>
+               <!--Zero or more repetitions:-->
+               <authorities>
+                  </authorities>
+            </userContext>
+         </request>
+      </sys:fetchAllProcedures>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="fetchAllProcedures"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="fetchProcedureById" name="fetchProcedureById" bindingOperationName="fetchProcedureById" type="Request-Response" outputName="fetchProcedureByIdResponse" inputName="fetchProcedureById" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" outgoingWss="Admin"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/ProcedureService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sys="http://qat.com/sysmgmt">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sys:fetchProcedureById>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <userContext>
+               <!--Optional:-->
+               <userId>?</userId>
+               <!--Optional:-->
+               <userPrimaryRole>?</userPrimaryRole>
+               <!--Optional:-->
+               <localeString>?</localeString>
+               <!--Zero or more repetitions:-->
+               <authorities>
+                  </authorities>
+            </userContext>
+            <!--Optional:-->
+            <fetchId>6697</fetchId>
+         </request>
+      </sys:fetchProcedureById>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="fetchProcedureById"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="insertProcedure" name="insertProcedure" bindingOperationName="insertProcedure" type="Request-Response" outputName="insertProcedureResponse" inputName="insertProcedure" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" outgoingWss="Admin"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/ProcedureService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sys="http://qat.com/sysmgmt">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sys:insertProcedure>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <userContext>
+               <!--Optional:-->
+               <userId>?</userId>
+               <!--Optional:-->
+               <userPrimaryRole>?</userPrimaryRole>
+               <!--Optional:-->
+               <localeString>ensp</localeString>
+               <!--Zero or more repetitions:-->
+               <authorities>
+                  </authorities>
+            </userContext>
+            <!--Optional:-->
+            <procedure>
+               <!--Optional:-->
+               <modelAction>?</modelAction>
+               <!--Optional:-->
+               <createUser>?</createUser>
+               <!--Optional:-->
+               <modifyUser>?</modifyUser>
+               <!--Optional:-->
+               <createDateUTC>?</createDateUTC>
+               <!--Optional:-->
+               <modifyDateUTC>?</modifyDateUTC>
+               <!--Optional:-->
+               <version>?</version>
+               <!--Optional:-->
+               <id/>
+               <!--Optional:-->
+               <code>red569</code>
+               <!--Optional:-->
+               <description>red569desc</description>
+               <!--Optional:-->
+               <price/>
+            </procedure>
+            <!--Optional:-->
+            <returnList>true</returnList>
+            <!--Optional:-->
+            <returnListPaged>true</returnListPaged>
+         </request>
+      </sys:insertProcedure>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="insertProcedure"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="refreshProcedures" name="refreshProcedures" bindingOperationName="refreshProcedures" type="Request-Response" outputName="refreshProceduresResponse" inputName="refreshProcedures" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" outgoingWss="Admin"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/ProcedureService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sys="http://qat.com/sysmgmt">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sys:refreshProcedures>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <userContext>
+               <!--Optional:-->
+               <userId>?</userId>
+               <!--Optional:-->
+               <userPrimaryRole>?</userPrimaryRole>
+               <!--Optional:-->
+               <localeString>?</localeString>
+               <!--Zero or more repetitions:-->
+               <authorities>
+                  </authorities>
+            </userContext>
+            <!--Optional:-->
+            <refreshInt>80</refreshInt>
+            <!--Optional:-->
+            <returnList>true</returnList>
+            <!--Optional:-->
+            <returnListPaged/>
+         </request>
+      </sys:refreshProcedures>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="refreshProcedure"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="updateProcedure" name="updateProcedure" bindingOperationName="updateProcedure" type="Request-Response" outputName="updateProcedureResponse" inputName="updateProcedure" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" outgoingWss="Admin"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/ProcedureService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sys="http://qat.com/sysmgmt">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sys:updateProcedure>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <userContext>
+               <!--Optional:-->
+               <userId>?</userId>
+               <!--Optional:-->
+               <userPrimaryRole>?</userPrimaryRole>
+               <!--Optional:-->
+               <localeString>?</localeString>
+               <!--Zero or more repetitions:-->
+               <authorities>
+                  </authorities>
+            </userContext>
+            <!--Optional:-->
+            <procedure>
+               <!--Optional:-->
+               <modelAction>?</modelAction>
+               <!--Optional:-->
+               <createUser>?</createUser>
+               <!--Optional:-->
+               <modifyUser>?</modifyUser>
+               <!--Optional:-->
+               <createDateUTC>?</createDateUTC>
+               <!--Optional:-->
+               <modifyDateUTC>?</modifyDateUTC>
+               <!--Optional:-->
+               <version>0</version>
+               <!--Optional:-->
+               <id>9859</id>
+               <!--Optional:-->
+               <code>PC1</code>
+               <!--Optional:-->
+               <description>?sdtsuddee</description>
+               <!--Optional:-->
+               <price/>
+            </procedure>
+            <!--Optional:-->
+            <returnList>true</returnList>
+            <!--Optional:-->
+            <returnListPaged/>
+         </request>
+      </sys:updateProcedure>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="updateProcedure"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="fetchProceduresByRequest" name="fetchProceduresByRequest" bindingOperationName="fetchProceduresByRequest" type="Request-Response" outputName="fetchProceduresByRequestResponse" inputName="fetchProceduresByRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" outgoingWss="Admin"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/ProcedureService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sys="http://qat.com/sysmgmt">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sys:fetchProceduresByRequest>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <userContext>
+               <!--Optional:-->
+               <userId>?</userId>
+               <!--Optional:-->
+               <userPrimaryRole>?</userPrimaryRole>
+               <!--Optional:-->
+               <localeString>?</localeString>
+               <!--Zero or more repetitions:-->
+               <authorities>
+                  </authorities>
+            </userContext>
+            <!--Optional:-->
+            <pageSize>20</pageSize>
+            <!--Optional:-->
+            <startPage>3</startPage>
+            <!--Zero or more repetitions:-->
+            <sortExpressions>
+               <!--Optional:-->
+               <columnName>?</columnName>
+               <!--Optional:-->
+               <direction>?</direction>
+               <!--Optional:-->
+               <field>?</field>
+               <!--Optional:-->
+               <priority>?</priority>
+            </sortExpressions>
+            <!--Optional:-->
+            <preQueryCount>true</preQueryCount>
+            <!--Optional:-->
+            <maxPreQueryCount>?</maxPreQueryCount>
+         </request>
+      </sys:fetchProceduresByRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="fetchProceduresByRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="CountyWSImplServiceSoapBinding" type="wsdl" bindingName="{http://qat.com/sysmgmt}CountyWSImplServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/CountyService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/CountyService?wsdl"><con:part><con:url>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/CountyService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="CountyWSImplService" targetNamespace="http://qat.com/sysmgmt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://qat.com/sysmgmt" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://qat.com/sysmgmt" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="deleteCounty" type="tns:deleteCounty"/>
+      <xs:element name="deleteCountyResponse" type="tns:deleteCountyResponse"/>
+      <xs:element name="fetchAllCounties" type="tns:fetchAllCounties"/>
+      <xs:element name="fetchAllCountiesResponse" type="tns:fetchAllCountiesResponse"/>
+      <xs:element name="fetchCountiesByRequest" type="tns:fetchCountiesByRequest"/>
+      <xs:element name="fetchCountiesByRequestResponse" type="tns:fetchCountiesByRequestResponse"/>
+      <xs:element name="fetchCountyById" type="tns:fetchCountyById"/>
+      <xs:element name="fetchCountyByIdResponse" type="tns:fetchCountyByIdResponse"/>
+      <xs:element name="insertCounty" type="tns:insertCounty"/>
+      <xs:element name="insertCountyResponse" type="tns:insertCountyResponse"/>
+      <xs:element name="message" type="tns:message"/>
+      <xs:element name="messageInfo" type="tns:messageInfo"/>
+      <xs:element name="refreshCounties" type="tns:refreshCounties"/>
+      <xs:element name="refreshCountiesResponse" type="tns:refreshCountiesResponse"/>
+      <xs:element name="resultsSetInfo" type="tns:resultsSetInfo"/>
+      <xs:element name="updateCounty" type="tns:updateCounty"/>
+      <xs:element name="updateCountyResponse" type="tns:updateCountyResponse"/>
+      <xs:complexType name="refreshCounties">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="tns:refreshRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="refreshRequest">
+        <xs:complexContent>
+          <xs:extension base="tns:request">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="refreshInt" nillable="true" type="xs:int"/>
+              <xs:element minOccurs="0" name="returnList" nillable="true" type="xs:boolean"/>
+              <xs:element minOccurs="0" name="returnListPaged" nillable="true" type="xs:boolean"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="request">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="userContext" type="tns:userContext"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="userContext">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="userId" type="xs:string"/>
+          <xs:element minOccurs="0" name="userPrimaryRole" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="localeString" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="authorities" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="refreshCountiesResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="refreshCountiesReturn" type="tns:countyResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="countyResponse">
+        <xs:complexContent>
+          <xs:extension base="tns:inquiryResponse">
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="counties" nillable="true" type="tns:County"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="inquiryResponse">
+        <xs:complexContent>
+          <xs:extension base="tns:response">
+            <xs:sequence>
+              <xs:element minOccurs="0" ref="tns:resultsSetInfo"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="response">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="messageList" nillable="true" type="tns:message"/>
+          <xs:element minOccurs="0" name="operationSuccess" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="County">
+        <xs:complexContent>
+          <xs:extension base="tns:baseModel">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="id" type="xs:int"/>
+              <xs:element minOccurs="0" name="description" type="xs:string"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="baseModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="modelAction" nillable="true" type="tns:persistenceActionEnum"/>
+          <xs:element minOccurs="0" name="createUser" type="xs:string"/>
+          <xs:element minOccurs="0" name="modifyUser" type="xs:string"/>
+          <xs:element minOccurs="0" name="createDateUTC" type="xs:long"/>
+          <xs:element minOccurs="0" name="modifyDateUTC" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="resultsSetInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="moreRowsAvailable" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="pageSize" type="xs:int"/>
+          <xs:element minOccurs="0" name="startPage" type="xs:int"/>
+          <xs:element minOccurs="0" name="totalRowsAvailable" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="message">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="msgInfo" type="tns:messageInfo"/>
+          <xs:element minOccurs="0" name="text" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="messageInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="severity" type="tns:messageSeverity"/>
+          <xs:element minOccurs="0" name="level" type="tns:messageLevel"/>
+          <xs:element minOccurs="0" name="code" type="xs:string"/>
+          <xs:element minOccurs="0" name="relatedPropertyName" type="xs:string"/>
+          <xs:element minOccurs="0" name="createDateUTC" type="xs:long"/>
+          <xs:element minOccurs="0" name="traceInfo" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fetchAllCounties">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="tns:fetchAllRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fetchAllRequest">
+        <xs:complexContent>
+          <xs:extension base="tns:request">
+            <xs:sequence/>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="fetchAllCountiesResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="fetchAllCountiesReturn" type="tns:countyResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fetchCountyById">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="tns:fetchByIdRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fetchByIdRequest">
+        <xs:complexContent>
+          <xs:extension base="tns:request">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="fetchId" nillable="true" type="xs:int"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="fetchCountyByIdResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="fetchCountyByIdReturn" type="tns:countyResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fetchCountiesByRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="tns:pagedInquiryRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="pagedInquiryRequest">
+        <xs:complexContent>
+          <xs:extension base="tns:inquiryRequest">
+            <xs:sequence/>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="inquiryRequest">
+        <xs:complexContent>
+          <xs:extension base="tns:request">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="pageSize" type="xs:int"/>
+              <xs:element minOccurs="0" name="startPage" type="xs:int"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="sortExpressions" nillable="true" type="tns:sortExpression"/>
+              <xs:element minOccurs="0" name="preQueryCount" type="xs:boolean"/>
+              <xs:element minOccurs="0" name="maxPreQueryCount" type="xs:int"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="sortExpression">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="columnName" type="xs:string"/>
+          <xs:element minOccurs="0" name="direction" type="tns:direction"/>
+          <xs:element minOccurs="0" name="field" type="xs:string"/>
+          <xs:element minOccurs="0" name="priority" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fetchCountiesByRequestResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="fetchCountiesByRequestReturn" type="tns:countyResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="insertCounty">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="tns:countyMaintenanceRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="countyMaintenanceRequest">
+        <xs:complexContent>
+          <xs:extension base="tns:request">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="county" nillable="true" type="tns:County"/>
+              <xs:element minOccurs="0" name="returnList" nillable="true" type="xs:boolean"/>
+              <xs:element minOccurs="0" name="returnListPaged" nillable="true" type="xs:boolean"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="insertCountyResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="insertCountyReturn" type="tns:countyResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updateCounty">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="tns:countyMaintenanceRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updateCountyResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="updateCountyReturn" type="tns:countyResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteCounty">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="request" type="tns:countyMaintenanceRequest"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteCountyResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="deleteCountyReturn" type="tns:countyResponse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="persistenceActionEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="NONE"/>
+          <xs:enumeration value="INSERT"/>
+          <xs:enumeration value="UPDATE"/>
+          <xs:enumeration value="DELETE"/>
+          <xs:enumeration value="ERROR"/>
+          <xs:enumeration value="FETCH"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="messageSeverity">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None"/>
+          <xs:enumeration value="Info"/>
+          <xs:enumeration value="Warning"/>
+          <xs:enumeration value="Error"/>
+          <xs:enumeration value="Fatal"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="messageLevel">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None"/>
+          <xs:enumeration value="Object"/>
+          <xs:enumeration value="Field"/>
+          <xs:enumeration value="FieldValidation"/>
+          <xs:enumeration value="Other"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="direction">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Ascending"/>
+          <xs:enumeration value="Descending"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="updateCountyResponse">
+    <wsdl:part element="tns:updateCountyResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fetchAllCountiesResponse">
+    <wsdl:part element="tns:fetchAllCountiesResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fetchCountyByIdResponse">
+    <wsdl:part element="tns:fetchCountyByIdResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteCountyResponse">
+    <wsdl:part element="tns:deleteCountyResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fetchAllCounties">
+    <wsdl:part element="tns:fetchAllCounties" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="insertCounty">
+    <wsdl:part element="tns:insertCounty" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="refreshCountiesResponse">
+    <wsdl:part element="tns:refreshCountiesResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="refreshCounties">
+    <wsdl:part element="tns:refreshCounties" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fetchCountiesByRequestResponse">
+    <wsdl:part element="tns:fetchCountiesByRequestResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateCounty">
+    <wsdl:part element="tns:updateCounty" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteCounty">
+    <wsdl:part element="tns:deleteCounty" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fetchCountiesByRequest">
+    <wsdl:part element="tns:fetchCountiesByRequest" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fetchCountyById">
+    <wsdl:part element="tns:fetchCountyById" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="insertCountyResponse">
+    <wsdl:part element="tns:insertCountyResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ICountyWS">
+    <wsdl:operation name="refreshCounties">
+      <wsdl:documentation>Used for demo purposes only, rebuilds the county table.</wsdl:documentation>
+      <wsdl:input message="tns:refreshCounties" name="refreshCounties"></wsdl:input>
+      <wsdl:output message="tns:refreshCountiesResponse" name="refreshCountiesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fetchAllCounties">
+      <wsdl:documentation>Returns a complete list of all counties.</wsdl:documentation>
+      <wsdl:input message="tns:fetchAllCounties" name="fetchAllCounties"></wsdl:input>
+      <wsdl:output message="tns:fetchAllCountiesResponse" name="fetchAllCountiesResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fetchCountyById">
+      <wsdl:documentation>Returns the selected county record.</wsdl:documentation>
+      <wsdl:input message="tns:fetchCountyById" name="fetchCountyById"></wsdl:input>
+      <wsdl:output message="tns:fetchCountyByIdResponse" name="fetchCountyByIdResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fetchCountiesByRequest">
+      <wsdl:documentation>Returns the selected county records paged.</wsdl:documentation>
+      <wsdl:input message="tns:fetchCountiesByRequest" name="fetchCountiesByRequest"></wsdl:input>
+      <wsdl:output message="tns:fetchCountiesByRequestResponse" name="fetchCountiesByRequestResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertCounty">
+      <wsdl:documentation>Insert a county record and optionally returns a list of counties.</wsdl:documentation>
+      <wsdl:input message="tns:insertCounty" name="insertCounty"></wsdl:input>
+      <wsdl:output message="tns:insertCountyResponse" name="insertCountyResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateCounty">
+      <wsdl:documentation>Updates a county record and optionally returns a list of counties.</wsdl:documentation>
+      <wsdl:input message="tns:updateCounty" name="updateCounty"></wsdl:input>
+      <wsdl:output message="tns:updateCountyResponse" name="updateCountyResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteCounty">
+      <wsdl:documentation>Deletes a county record and optionally returns a list of counties.</wsdl:documentation>
+      <wsdl:input message="tns:deleteCounty" name="deleteCounty"></wsdl:input>
+      <wsdl:output message="tns:deleteCountyResponse" name="deleteCountyResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CountyWSImplServiceSoapBinding" type="tns:ICountyWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="fetchAllCounties">
+      <soap:operation soapAction="fetchAllCounties" style="document"/>
+      <wsdl:input name="fetchAllCounties">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="fetchAllCountiesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="refreshCounties">
+      <soap:operation soapAction="refreshCounties" style="document"/>
+      <wsdl:input name="refreshCounties">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="refreshCountiesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fetchCountiesByRequest">
+      <soap:operation soapAction="fetchCountiesByRequest" style="document"/>
+      <wsdl:input name="fetchCountiesByRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="fetchCountiesByRequestResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fetchCountyById">
+      <soap:operation soapAction="fetchCountyById" style="document"/>
+      <wsdl:input name="fetchCountyById">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="fetchCountyByIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertCounty">
+      <soap:operation soapAction="insertCounty" style="document"/>
+      <wsdl:input name="insertCounty">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="insertCountyResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateCounty">
+      <soap:operation soapAction="updateCounty" style="document"/>
+      <wsdl:input name="updateCounty">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateCountyResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteCounty">
+      <soap:operation soapAction="deleteCounty" style="document"/>
+      <wsdl:input name="deleteCounty">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteCountyResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CountyWSImplService">
+    <wsdl:port binding="tns:CountyWSImplServiceSoapBinding" name="CountyWSImplPort">
+      <soap:address location="http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/CountyService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/EntityCountyService</con:endpoint><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/CountyService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="deleteCounty" name="deleteCounty" bindingOperationName="deleteCounty" type="Request-Response" outputName="deleteCountyResponse" inputName="deleteCounty" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" outgoingWss="Admin"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/CountyService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sys="http://qat.com/sysmgmt">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sys:deleteCounty>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <userContext>
+               <!--Optional:-->
+               <userId>?</userId>
+               <!--Optional:-->
+               <userPrimaryRole>?</userPrimaryRole>
+               <!--Optional:-->
+               <localeString></localeString>
+               <!--Zero or more repetitions:-->
+               <authorities>
+                  </authorities>
+            </userContext>
+            <!--Optional:-->
+            <county>
+               <!--Optional:-->
+               <modelAction>?</modelAction>
+               <!--Optional:-->
+               <createUser>?</createUser>
+               <!--Optional:-->
+               <modifyUser>?</modifyUser>
+               <!--Optional:-->
+               <createDateUTC>?</createDateUTC>
+               <!--Optional:-->
+               <modifyDateUTC>?</modifyDateUTC>
+               <!--Optional:-->
+               <id>2</id>
+               <!--Optional:-->
+               <description/>
+            </county>
+            <!--Optional:-->
+            <returnList/>
+            <!--Optional:-->
+            <returnListPaged/>
+         </request>
+      </sys:deleteCounty>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="deleteCounty"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="fetchAllCounties" name="fetchAllCounties" bindingOperationName="fetchAllCounties" type="Request-Response" outputName="fetchAllCountiesResponse" inputName="fetchAllCounties" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" outgoingWss="Admin"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/CountyService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sys="http://qat.com/sysmgmt">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sys:fetchAllCounties>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <userContext>
+               <!--Optional:-->
+               <userId>?</userId>
+               <!--Optional:-->
+               <userPrimaryRole>?</userPrimaryRole>
+               <!--Optional:-->
+               <localeString>?</localeString>
+               <!--Zero or more repetitions:-->
+               <authorities>
+                  </authorities>
+            </userContext>
+         </request>
+      </sys:fetchAllCounties>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="fetchAllCounties"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="fetchCountyById" name="fetchCountyById" bindingOperationName="fetchCountyById" type="Request-Response" outputName="fetchCountyByIdResponse" inputName="fetchCountyById" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" outgoingWss="Admin"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/CountyService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sys="http://qat.com/sysmgmt">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sys:fetchCountyById>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <userContext>
+               <!--Optional:-->
+               <userId>?</userId>
+               <!--Optional:-->
+               <userPrimaryRole>?</userPrimaryRole>
+               <!--Optional:-->
+               <localeString></localeString>
+               <!--Zero or more repetitions:-->
+               <authorities>
+                  </authorities>
+            </userContext>
+            <!--Optional:-->
+            <fetchId>1</fetchId>
+         </request>
+      </sys:fetchCountyById>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="fetchCountyById"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="insertCounty" name="insertCounty" bindingOperationName="insertCounty" type="Request-Response" outputName="insertCountyResponse" inputName="insertCounty" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" outgoingWss="Admin"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/CountyService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sys="http://qat.com/sysmgmt">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sys:insertCounty>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <userContext>
+               <!--Optional:-->
+               <userId>?</userId>
+               <!--Optional:-->
+               <userPrimaryRole>?</userPrimaryRole>
+               <!--Optional:-->
+               <localeString>?</localeString>
+               <!--Zero or more repetitions:-->
+               <authorities>
+                  </authorities>
+            </userContext>
+            <!--Optional:-->
+            <county>
+               <!--Optional:-->
+               <modelAction/>
+               <!--Optional:-->
+               <createUser>?</createUser>
+               <!--Optional:-->
+               <modifyUser>?</modifyUser>
+               <!--Optional:-->
+               <createDateUTC>?</createDateUTC>
+               <!--Optional:-->
+               <modifyDateUTC>?</modifyDateUTC>
+               <!--Optional:-->
+               <id>8988</id>
+               <!--Optional:-->
+               <description>testadd</description>
+            </county>
+            <!--Optional:-->
+            <returnList>true</returnList>
+            <!--Optional:-->
+            <returnListPaged/>
+         </request>
+      </sys:insertCounty>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="insertCounty"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="refreshCounties" name="refreshCounties" bindingOperationName="refreshCounties" type="Request-Response" outputName="refreshCountiesResponse" inputName="refreshCounties" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" outgoingWss="Admin"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/CountyService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sys="http://qat.com/sysmgmt">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sys:refreshCounties>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <userContext>
+               <!--Optional:-->
+               <userId>?</userId>
+               <!--Optional:-->
+               <userPrimaryRole>?</userPrimaryRole>
+               <!--Optional:-->
+               <localeString>?</localeString>
+               <!--Zero or more repetitions:-->
+               <authorities>
+                  </authorities>
+            </userContext>
+            <!--Optional:-->
+            <refreshInt>30</refreshInt>
+            <!--Optional:-->
+            <returnList>true</returnList>
+            <!--Optional:-->
+            <returnListPaged>true</returnListPaged>
+         </request>
+      </sys:refreshCounties>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="refreshCounties"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="updateCounty" name="updateCounty" bindingOperationName="updateCounty" type="Request-Response" outputName="updateCountyResponse" inputName="updateCounty" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" outgoingWss="Admin"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/CountyService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sys="http://qat.com/sysmgmt">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sys:updateCounty>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <userContext>
+               <!--Optional:-->
+               <userId>?</userId>
+               <!--Optional:-->
+               <userPrimaryRole>?</userPrimaryRole>
+               <!--Optional:-->
+               <localeString></localeString>
+               <!--Zero or more repetitions:-->
+               <authorities>
+                  </authorities>
+            </userContext>
+            <!--Optional:-->
+            <county>
+               <!--Optional:-->
+               <modelAction>?</modelAction>
+               <!--Optional:-->
+               <createUser>?</createUser>
+               <!--Optional:-->
+               <modifyUser>?</modifyUser>
+               <!--Optional:-->
+               <createDateUTC>?</createDateUTC>
+               <!--Optional:-->
+               <modifyDateUTC>?</modifyDateUTC>
+               <!--Optional:-->
+               <id>8988</id>
+               <!--Optional:-->
+               <description>rrz5ppr6</description>
+            </county>
+            <!--Optional:-->
+            <returnList>true</returnList>
+            <!--Optional:-->
+            <returnListPaged/>
+         </request>
+      </sys:updateCounty>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="updateCounty"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="fetchCountiesByRequest" name="fetchCountiesByRequest" bindingOperationName="fetchCountiesByRequest" type="Request-Response" outputName="fetchCountiesByRequestResponse" inputName="fetchCountiesByRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" outgoingWss="Admin"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/CountyService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sys="http://qat.com/sysmgmt">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sys:fetchCountiesByRequest>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <userContext>
+               <!--Optional:-->
+               <userId>?</userId>
+               <!--Optional:-->
+               <userPrimaryRole>?</userPrimaryRole>
+               <!--Optional:-->
+               <localeString>?</localeString>
+               <!--Zero or more repetitions:-->
+               <authorities>
+                  </authorities>
+            </userContext>
+            <!--Optional:-->
+            <pageSize>20</pageSize>
+            <!--Optional:-->
+            <startPage>0</startPage>
+            <!--Zero or more repetitions:-->
+            <sortExpressions>
+               <!--Optional:-->
+               <columnName>?</columnName>
+               <!--Optional:-->
+               <direction>?</direction>
+               <!--Optional:-->
+               <field>?</field>
+               <!--Optional:-->
+               <priority>?</priority>
+            </sortExpressions>
+            <!--Optional:-->
+            <preQueryCount>true</preQueryCount>
+            <!--Optional:-->
+            <maxPreQueryCount>?</maxPreQueryCount>
+         </request>
+      </sys:fetchCountiesByRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username/><con:password/><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="fetchCountiesByRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer><con:outgoing mustUnderstand="false"><con:name>Admin</con:name><con:username>scott</con:username><con:password>wombat</con:password><con:entry type="Username" password="wombat"><con:configuration><addCreated>false</addCreated><addNonce>false</addNonce><passwordType>PasswordText</passwordType></con:configuration></con:entry></con:outgoing><con:outgoing><con:name>Invalid</con:name><con:username>fred</con:username><con:password>sdsdsd</con:password><con:entry type="Username"><con:configuration><addCreated>false</addCreated><addNonce>false</addNonce><passwordType>PasswordText</passwordType></con:configuration></con:entry></con:outgoing><con:outgoing><con:name>User</con:name><con:username>peter</con:username><con:password>opal</con:password><con:entry type="Username"><con:configuration><addCreated>false</addCreated><addNonce>false</addNonce><passwordType>PasswordText</passwordType></con:configuration></con:entry></con:outgoing><con:outgoing><con:name>Guest</con:name><con:username>dianne</con:username><con:password>emu</con:password><con:entry type="Username" password="emu"><con:configuration><addCreated>false</addCreated><addNonce>false</addNonce><passwordType>PasswordText</passwordType></con:configuration></con:entry></con:outgoing></con:wssContainer><con:oAuth2ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

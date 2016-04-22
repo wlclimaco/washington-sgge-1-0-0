@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:sec="http://www.springframework.org/schema/security"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<!-- ========================= Web Services Authorization & Authentication ======================== -->
+    <bean id="wsAuthenticationInterceptor" class="com.qat.framework.service.cxf.WSAuthenticationInInterceptor">
+        <constructor-arg index="0">
+            <map key-type="java.lang.String" value-type="java.lang.Object">
+                <entry key="action" value="UsernameToken" />
+                <entry key="passwordType" value="PasswordText" />
+                <entry key="passwordCallbackClass" value="com.qat.framework.service.cxf.ServerPasswordCallback" />
+            </map>
+        </constructor-arg>
+        <property name="authenticationManager" ref="authenticationManager"/>
+ 		<property name="allowedWSRoles" value="*"/>
+    </bean>
+
+	<bean id="wsAuthorizationInterceptor" class="com.qat.framework.service.cxf.WSAuthorizationInInterceptor">
+   		<property name="methodRolesMap">
+      		<map>
+        		<entry key="fetchAllCounties" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchCountyById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchCountiesByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteCounty" value="ROLE_DOMAIN ADMINS"/>
+        		<entry key="insertCounty" value="ROLE_DOMAIN ADMINS"/>
+        		<entry key="updateCounty" value="ROLE_DOMAIN ADMINS"/>
+        		<entry key="refreshCounties" value="ROLE_DOMAIN ADMINS"/>
+        		<entry key="fetchAllProcedures" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchProcedureById" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="fetchProceduresByRequest" value="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS,ROLE_GUEST"/>
+        		<entry key="deleteProcedure" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="insertProcedure" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="updateProcedure" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+        		<entry key="refreshProcedures" value="ROLE_DOMAIN ADMINS,ROLE_DOMAIN USERS"/>
+      		</map>
+   		</property>
+	</bean>
+	<!-- ========================= Spring Security Settings for Web Services ======================== -->
+    <bean id="springSecurityFilterChain" class="org.springframework.security.web.FilterChainProxy">
+        <sec:filter-chain-map>
+            <sec:filter-chain pattern="/services/ws/**" filters="contextIntegrationFilter"/>
+        </sec:filter-chain-map>
+    </bean>
+    	<bean id="contextIntegrationFilter" class="org.springframework.security.web.context.SecurityContextPersistenceFilter">
+    </bean>
+
+ 	<!-- ========================= Authentication Manager for Spring Security Web Services ======================== -->
+	<!-- Usernames/Passwords are rod/koala dianne/emu scott/wombat peter/opal  -->
+	<sec:authentication-manager alias="authenticationManager">
+		<sec:authentication-provider>
+			<sec:user-service>
+				<sec:user name="rod" password="koala" authorities="ROLE_DOMAIN ADMINS" />
+				<sec:user name="dianne" password="emu"	authorities="ROLE_GUEST" />
+				<sec:user name="scott" password="wombat" authorities="ROLE_DOMAIN USERS,ROLE_DOMAIN ADMINS" />
+				<sec:user name="peter" password="opal" authorities="ROLE_DOMAIN USERS" />
+			</sec:user-service>
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+	<!-- BEGIN EXPLICIT LDAP/MS ACTIVE DIRECTORY CONFIGURATION. -->
+<!--	<sec:authentication-manager alias="authenticationManager">-->
+<!--			<sec:authentication-provider ref="ldapAuthProvider">-->
+<!--			</sec:authentication-provider>-->
+<!--	</sec:authentication-manager>-->
+<!---->
+<!--	<bean id="ldapAuthProvider" class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">-->
+<!--		<constructor-arg>-->
+<!--			<bean id="bindAuthenticator" class="org.springframework.security.ldap.authentication.BindAuthenticator">-->
+<!--				<constructor-arg ref="contextSource" />-->
+<!--				<property name="userSearch" ref="userSearch" />-->
+<!--			</bean>-->
+<!--		</constructor-arg>-->
+<!--		<constructor-arg>-->
+<!--			<bean class="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator">-->
+<!--				<constructor-arg ref="contextSource" />-->
+<!--				<constructor-arg value="cn=Users" />-->
+<!--				<property name="searchSubtree" value="true" />-->
+<!--					<property name="defaultRole" value="ROLE_DOMAIN USERS" />-->
+<!--				<property name="ignorePartialResultException" value="true" />-->
+<!--			</bean>-->
+<!--		</constructor-arg>-->
+<!--	</bean>-->
+<!---->
+<!--	<bean id="userSearch"	class="org.springframework.security.ldap.search.FilterBasedLdapUserSearch">-->
+<!--		<constructor-arg index="0" value="cn=Users" />-->
+<!--		<constructor-arg index="1" value="(sAMAccountName={0})" />-->
+<!--		<constructor-arg index="2" ref="contextSource" />-->
+<!--		<property name="searchSubtree" value="true" />-->
+<!--	</bean>-->
+<!---->
+<!--	<bean id="contextSource" class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">-->
+<!--		<constructor-arg value="ldap://192.168.1.6:389/dc=omaha,dc=qat,dc=com" />-->
+<!--		<property name="userDn" value="cn=QATTEST,cn=Users,dc=omaha,dc=qat,dc=com" />-->
+<!--		<property name="password" value="QATomaHA01$" />-->
+<!--	</bean>-->
+	<!-- END LDAP/MS ACTIVE DIRECTORY CONFIGURATION -->
+</beans>

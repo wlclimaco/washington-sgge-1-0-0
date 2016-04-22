@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:cxf="http://cxf.apache.org/core"
+		xmlns:jaxws="http://cxf.apache.org/jaxws"
+		xsi:schemaLocation="
+			http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<import resource="classpath:META-INF/cxf/cxf.xml"/>
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+
+    <cxf:bus>
+        <cxf:features>
+            <cxf:logging/>
+        </cxf:features>
+    </cxf:bus>
+<!--	 ========================= BAS Client Definitions ======================== -->
+
+    <jaxws:client id="countyWSClientTarget"
+                  serviceClass="com.qat.samples.sysmgmt.service.ICountyWS"
+                 address="http://localhost:8080/qat-sysmgmt-sample-ws-service/services/ws/CountyService">
+    	<jaxws:outInterceptors>
+        	<ref bean="wss4jOutInterceptor"/>
+ 		</jaxws:outInterceptors>
+     </jaxws:client>
+
+	<bean id="wss4jOutInterceptor" class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
+    	<property name="properties">
+        	<map>
+            	<entry key="action" value="UsernameToken" />
+            	<entry key="user" value="scott"/>
+            	<entry key="passwordType" value="PasswordText" />
+				<entry key="passwordCallbackClass" value="com.qat.samples.sysmgmt.client.ClientPasswordCallback" />
+        	</map>
+    	</property>
+	</bean>
+</beans>
