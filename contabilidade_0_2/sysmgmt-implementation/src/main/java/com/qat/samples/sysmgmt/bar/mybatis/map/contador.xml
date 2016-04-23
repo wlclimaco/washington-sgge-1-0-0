@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ContadorMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+	-->
+
+	<resultMap id="contadorResult" type="Contador" extends="PessoaMap.PessoaResult">
+
+  </resultMap>
+
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allContadorColumns">
+		 b.cdEmpr
+		,b.nome
+		,b.type
+		,b.sexo
+		,b.dataNasc
+		,b.nomePai
+		,b.nomeMae
+		,b.nomeConjugue
+		,b.estadoCivil
+      	,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allContadorValues">
+  		#{emprId},
+  		#{nome},
+  		#{pessoaTypeEnumValue},
+  		#{sexo},
+  		#{dataNasc},
+  		#{nomePai},
+  		#{nomeMae},
+  		#{nomeConjugue},
+  		#{estadoCivil},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchContadorRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM pessoa
+
+  </select>
+
+  <select id="fetchAllContadors" resultMap="contadorResult">
+    SELECT
+	<include refid="allContadorColumns" />
+    FROM pessoa ORDER BY nome ASC
+  </select>
+
+  <select id="fetchContadorById" parameterType="FetchByIdRequest" resultMap="contadorResult">
+    			   SELECT
+					b.id,	<include refid="allContadorColumns" />
+ 				   FROM pessoa b
+					where b.id = #{id}
+  </select>
+
+    <select id="fetchContadorByNota" parameterType="Integer" resultMap="contadorResult">
+    			   SELECT
+					b.id,	<include refid="allContadorColumns" />
+ 				   FROM pessoa b
+					where b.id = #{id}
+  </select>
+
+  <select id="fetchAllContadorsByRequest" parameterType="PagedInquiryRequest" resultMap="contadorResult">
+     SELECT * FROM ( SELECT b.id,
+    						<include refid="allContadorColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM pessoa b
+						where 1 = 1
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+</mapper>

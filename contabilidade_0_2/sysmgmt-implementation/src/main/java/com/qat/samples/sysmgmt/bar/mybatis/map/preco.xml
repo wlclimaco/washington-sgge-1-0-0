@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TabPrecoMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. private Integer id;
+
+	/** The type of an account. */
+	private Long dataMarcacao;
+
+	/** The description. */
+	private PrecoTypeEnum precoTypeEnum;
+
+	/** The estado. */
+	private Double valor;
+
+	private Long dataProInicial;
+
+	private Long dataProFinal;
+       -->
+
+  <resultMap id="tabPrecoResult" type="TabPreco" >
+    <result property="id" column="id" />
+    <result property="dataMarcacao" column="dataMarcacao" />
+   	<result property="precoTypeEnumValue" column="precoTypeEnum"/>
+   	<result property="valor" column="valor"/>
+   	<result property="dataProInicial" column="dataProInicial"/>
+   	<result property="dataProFinal" column="dataProFinal"/>
+   	<result property="parentId" column="prodId" />
+   	<result property="emprId" column="emprId"/>
+   	<result property="entidadeId" column="entidadeId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allTabPrecoColumns">
+		 dataMarcacao
+		,precoTypeEnum
+		,valor
+		,dataProInicial
+		,dataProFinal
+		,prodId
+      	,emprId
+      	,entidadeId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allTabPrecoValues">
+  		#{dataMarcacao},
+  		#{precoTypeEnumValue},
+  		#{valor},
+  		#{dataProInicial},
+  		#{dataProFinal},
+  		#{parentId},
+      	#{emprId},
+      	#{entidadeId},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertTabPreco" parameterType="TabPreco" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO tabPreco (
+		<include refid="allTabPrecoColumns" />
+      )
+    VALUES (<include refid="allTabPrecoValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateTabPreco" parameterType="TabPreco">
+    UPDATE tabPreco
+    	<set>
+    		<if test="dataMarcacao!= null">dataMarcacao = #{dataMarcacao},</if>
+	    	<if test="valor!= null"> valor=#{valor},</if>
+	    	<if test="dataProInicial!= null"> dataProInicial=#{dataProInicial},</if>
+	    	<if test="dataProFinal!= null"> dataProFinal=#{dataProFinal},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteTabPrecoById" parameterType="Integer">
+    	DELETE FROM tabPreco WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchTabPrecoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM tabPreco
+     WHERE 1 = 1
+     <if test="id != null">
+		  AND id = #{id}
+	 </if>
+  </select>
+
+  <select id="fetchAllTabPrecos" resultMap="tabPrecoResult">
+    SELECT
+	<include refid="allTabPrecoColumns" />
+    FROM tabPreco ORDER BY id ASC
+  </select>
+
+  <select id="fetchTabPrecoById" parameterType="FetchByIdRequest" resultMap="tabPrecoResult">
+	SELECT id,
+	<include refid="allTabPrecoColumns" />
+    FROM tabPreco
+    where id = #{id}
+    ORDER BY id ASC
+  </select>
+
+  <select id="fetchAllTabPrecosByRequest" parameterType="PagedInquiryRequest" resultMap="tabPrecoResult">
+	 SELECT id,<include refid="allTabPrecoColumns" />
+        FROM tabPreco
+     WHERE 1 = 1
+     <if test="id != null">
+		  AND id = #{id}
+	 </if>
+  </select>
+
+  <select id="fetchTabPrecoByProduto" resultMap="tabPrecoResult">
+	  SELECT id,<include refid="allTabPrecoColumns" />
+        FROM tabPreco
+     WHERE  prodId=#{id} and emprId=#{emprId}
+  </select>
+
+  <select id="fetchTabPrecoByPlano " parameterType="Integer" resultMap="tabPrecoResult">
+	  SELECT id,<include refid="allTabPrecoColumns" />
+        FROM tabPreco
+     WHERE  prodId=#{id} and precoTypeEnum = 5
+  </select>
+
+
+
+
+</mapper>

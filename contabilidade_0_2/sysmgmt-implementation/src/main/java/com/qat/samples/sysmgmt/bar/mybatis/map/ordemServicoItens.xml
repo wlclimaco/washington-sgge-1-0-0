@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="OrdemServicoItensMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. private Integer id;
+
+       [id]             [int] NOT NULL,
+	[idOrdemServico] [int] NOT NULL,
+	[status]       	 [int] NOT NULL,
+	[data]    	     [bigint] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+	[texto]          [varchar](255) NULL,
+-->
+
+  <resultMap id="ordemServicoStatusResult" type="OrdemServicoStatus" >
+    <result property="id" column="id" />
+    <result property="nome" column="status" />
+    <result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+  </resultMap>
+
+  <resultMap id="ordemServicoItensResult" type="OrdemServicoItens" >
+    <result property="id" column="id" />
+    <result property="idOrdemServico" column="idOrdemServico" />
+   	<result property="data" column="data"/>
+	<result property="texto" column="texto"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allOrdemServicoItensColumns">
+		idOrdemServico
+		,data
+      	,texto
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allOrdemServicoItensValues">
+  		#{idOrdemServico},
+  		#{data},
+    	#{texto},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertOrdemServicoItens" parameterType="OrdemServicoItens" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO ordemServicoItens (
+		<include refid="allOrdemServicoItensColumns" />
+      )
+    VALUES (<include refid="allOrdemServicoItensValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateOrdemServicoItens" parameterType="OrdemServicoItens">
+    UPDATE ordemServicoItens
+    	<set>
+    		<if test="assunto!= null">assunto = #{assunto},</if>
+	    	<if test="emprId!= null"> emprId=#{emprId},</if>
+	    	<if test="userId!= null"> userId=#{userId},</if>
+	    	<if test="nome!= null"> nome=#{nome},</if>
+	    	<if test="data!= null"> data=#{data},</if>
+	    	<if test="typeId!= null"> typeId=#{typeId},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteOrdemServicoItensById" parameterType="Integer">
+    	DELETE FROM ordemServicoItens WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchOrdemServicoItensRowCount" parameterType="OrdemServicoInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM ordemServicoItens
+     WHERE 2 = 2
+     <if test="emprId != null">
+		  AND emprId = #{emprId}
+	 </if>
+	 <if test="userId != null">
+		  AND userId = #{userId}
+	 </if>
+  </select>
+
+  <select id="fetchAllOrdemServicoItens" resultMap="ordemServicoItensResult">
+    SELECT id
+	<include refid="allOrdemServicoItensColumns" />
+    FROM ordemServicoItens  ORDER BY id ASC
+  </select>
+
+  <select id="fetchOrdemServicoItensById" parameterType="FetchByIdRequest" resultMap="ordemServicoItensResult">
+		 SELECT id
+			<include refid="allOrdemServicoItensColumns" />
+		    FROM ordemServicoItens   where id= #{id} ORDER BY id ASC
+  </select>
+
+  <select id="fetchAllOrdemServicoItenssByRequest" parameterType="OrdemServicoInquiryRequest" resultMap="ordemServicoItensResult">
+	     SELECT * FROM ordemServicoItens
+		     WHERE 2 = 2
+			     <if test="emprId != null">
+					  AND emprId = #{emprId}
+				 </if>
+				 <if test="userId != null">
+					  AND userId = #{userId}
+				 </if>
+  </select>
+
+  <select id="fetchAllOrdemServicoItensByOrdemServico" parameterType="Integer" resultMap="ordemServicoItensResult">
+	     SELECT * FROM ordemServicoItens
+		     WHERE idOrdemServico = #{id} order by id
+  </select>
+
+<select id="fetchStatusByOrdem" parameterType="Integer" resultMap="ordemServicoStatusResult">
+		 SELECT *
+		    FROM ordemServicoStatus where id= #{id} ORDER BY id ASC
+  </select>
+
+
+</mapper>

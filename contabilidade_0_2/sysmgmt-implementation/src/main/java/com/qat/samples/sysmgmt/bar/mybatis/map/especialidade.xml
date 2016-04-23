@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EspecialidadeMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly.
+       private Integer id;
+
+	private String nome;
+
+	private List<Agencia> agenciaList;-->
+	  <resultMap id="especialidadePessoaResult" type="EspecialidadePessoa" >
+		<result property="id" column="id" />
+		<result property="parentId" column="parentId" />
+		<result property="processId" column="processId" />
+	   	<result property="createUser" column="create_user"/>
+		<result property="createDataUTC" column="create_date"/>
+		<result property="modifyUser" column="modify_user"/>
+		<result property="modifyDataUTC" column="modify_date"/>
+		<association property="especialidade"    column="especialidade" select="fetchEspecialidadeById"  />
+      </resultMap>
+
+  <resultMap id="especialidadeResult" type="Especialidade" >
+    <result property="id" column="id" />
+		<result property="parentId" column="parentId" />
+		<result property="nome" column="nome" />
+		<result property="processId" column="processId" />
+	   	<result property="createUser" column="create_user"/>
+		<result property="createDataUTC" column="create_date"/>
+		<result property="modifyUser" column="modify_user"/>
+		<result property="modifyDataUTC" column="modify_date"/>
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allEspecialidadeColumns">
+		nome,
+      	create_date,
+      	create_user,
+      	modify_date,
+      	modify_user
+  </sql>
+
+  <sql id="allEspecialidadeValues">
+  		#{nome},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <sql id="allEspecialidadePessoaColumns">
+		parentId,
+		especialidade,
+		create_date,
+      	create_user,
+      	modify_date,
+      	modify_user
+  </sql>
+
+  <sql id="allEspecialidadePessoaValues">
+  		#{parentId},
+		#{especialidade.id},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertEspecialidade" parameterType="Especialidade" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO especialidade (
+		<include refid="allEspecialidadeColumns" />
+      )
+    VALUES (<include refid="allEspecialidadeValues" /> )
+  </insert>
+
+    <insert id="insertEspecialidadePessoa" parameterType="EspecialidadePessoa" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO EspecialidadePessoa (
+		<include refid="allEspecialidadePessoaColumns" />
+      )
+    VALUES (<include refid="allEspecialidadePessoaValues" /> )
+  </insert>
+
+    <update id="updateEspecialidadePessoa" parameterType="Especialidade">
+    UPDATE EspecialidadePessoa
+    	<set>
+    		<if test="especialidade!= null">especialidade = #{especialidade.id},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateEspecialidade" parameterType="Especialidade">
+    UPDATE especialidade
+    	<set>
+    		<if test="nome!= null">nome = #{nome},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteEspecialidadeById" parameterType="Integer">
+    	DELETE FROM especialidade WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchEspecialidadeRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM especialidade
+     WHERE 1=1
+  </select>
+
+  <select id="fetchAllEspecialidades" resultMap="especialidadeResult">
+    SELECT id
+	<include refid="allEspecialidadeColumns" />
+    FROM especialidade b ORDER BY id ASC
+  </select>
+
+  <select id="fetchEspecialidadeById" parameterType="FetchByIdRequest" resultMap="especialidadeResult">
+	SELECT id,
+		<include refid="allEspecialidadeColumns" />
+        FROM especialidade b
+     WHERE 1=1 and id=#{id}
+
+  </select>
+
+
+  <select id="fetchAllEspecialidadesByRequest" parameterType="PagedInquiryRequest" resultMap="especialidadeResult">
+	   SELECT * FROM
+    			(
+    				SELECT id,
+    						<include refid="allEspecialidadeColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM especialidade b
+					WHERE 2 = 2
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+  <select id="fetchEspecialidadeByPessoa" parameterType="Integer" resultMap="especialidadePessoaResult">
+	SELECT id,
+		<include refid="allEspecialidadePessoaColumns" />
+		FROM especialidadePessoa  where parentId = #{id} ORDER BY id ASC
+  </select>
+
+
+</mapper>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CnaeMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. id codigo, cnae, descricao, abreviado -->
+
+  <resultMap id="cnaeResult" type="Cnae">
+    <result property="id" column="id" />
+    <result property="codigo" column="codigo" />
+   	<result property="cnae" column="cnae"/>
+	<result property="descricao" column="descricao"/>
+	<result property="abreviado" column="abreviado"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+  </resultMap>
+
+
+  <resultMap id="cnaeEmpresaResult" type="CnaeEmpresa">
+    <result property="id" column="id"/>
+    <result property="parentId" column="parentId"/>
+    <result property="tabelaEnumValue" column="tabela" />
+    <result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	 <association property="idCnae"    column="idCnae" select="fetchCnaeById"  />
+  </resultMap>
+
+  <sql id="allCnaeEmpresaColumns">
+		 parentId
+		,tabela
+      	,processId
+      	,idCnae
+
+  </sql>
+
+  <sql id="allCnaeEmpresaValues">
+  		#{parentId},
+  		#{tabelaEnumValue},
+    	#{processId},
+    	#{idCnae.id}
+
+  </sql>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allCnaeColumns">
+		 codigo
+		,cnae
+      	,descricao
+      	,abreviado
+  </sql>
+
+  <sql id="allCnaeValues">
+  		#{codigo},
+  		#{cnae},
+    	#{descricao},
+    	#{abreviado}
+
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertCnae" parameterType="Cnae" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO cnae (
+		 codigo,
+		 cnae,
+      	 descricao,
+      	 abreviado
+      )
+    VALUES (<include refid="allCnaeValues" /> )
+  </insert>
+
+   <insert id="insertCnaeEmpresa" parameterType="CnaeEmpresa" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO cnaePorRelacionamento (
+		<include refid="allCnaeEmpresaColumns" />
+      )
+    VALUES (<include refid="allCnaeEmpresaValues" /> )
+  </insert>
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateCnae" parameterType="Cnae">
+    UPDATE cnae
+    	<set>
+    		<if test="codigo!= null">codigo = #{codigo},</if>
+	    	<if test="cnae!= null"> cnae=#{cnae},</if>
+	    	<if test="descricao!= null"> descricao=#{descricao},</if>
+	    	<if test="abreviado!= null"> abreviado=#{abreviado},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+    id = #{id}
+  </update>
+
+   <update id="updateCnaeEmpresa" parameterType="CnaeEmpresa">
+    UPDATE cnaePorRelacionamento
+    	<set>
+    		<if test="idCnae.id!= null">idCnae = #{idCnae.id},</if>
+	    	<if test="tabelaEnumValue!= null"> tabela=#{tabelaEnumValue},</if>
+	    	<if test="parentId!= null"> parentId=#{parentId},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+    id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteCnaeById" parameterType="Integer">
+    	DELETE FROM cnae WHERE id = #{id}
+  </delete>
+
+  <delete id="deleteCnaeEmpresaById" parameterType="Integer">
+    	DELETE FROM cnaePorRelacionamento WHERE id = #{id}
+  </delete>
+
+    <select id="fetchAllCnaesByPerson" parameterType="Integer" resultMap="cnaeResult">
+    	SELECT
+			<include refid="allCnaeColumns" />
+		    FROM cnae c
+		    left join cnaePorRelacionamento r on r.tabela = 3 , c.id = r.idCnae, r.idParentId = #{id}
+    </select>
+
+   <select id="fetchAllCnaesByEmpresa" parameterType="Integer" resultMap="cnaeEmpresaResult">
+    	SELECT
+			<include refid="allCnaeEmpresaColumns" />
+		    FROM cnaePorRelacionamento b
+		   where tabela in (1,51,52) and  parentid = #{id}
+    </select>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchCnaeRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM cnae
+
+  </select>
+
+  <select id="fetchAllCnaes" resultMap="cnaeResult">
+    SELECT
+	<include refid="allCnaeColumns" />
+    FROM cnae ORDER BY name ASC
+  </select>
+
+  <select id="fetchCnaeById" parameterType="Integer" resultMap="cnaeResult">
+    			   SELECT id,
+						<include refid="allCnaeColumns" />
+ 				   FROM cnae b where
+
+								id = #{id}
+
+  </select>
+
+  <select id="fetchAllCnaesByRequest" parameterType="PagedInquiryRequest" resultMap="cnaeResult">
+    SELECT * FROM
+    			(
+    				SELECT id,
+    						<include refid="allCnaeColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY codigo) AS RowNumber
+    				FROM cnae b
+					WHERE 2 = 2
+
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+</mapper>

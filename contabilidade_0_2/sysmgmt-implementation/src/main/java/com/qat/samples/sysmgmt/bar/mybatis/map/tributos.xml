@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TributosMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+  <resultMap id="tributosResult" type="Tributacao" >
+    <result property="id" column="id" />
+    <result property="parentId" column="parentId" />
+    <result property="cstId" column="cstId" />
+    <result property="icms" column="icms" />
+    <result property="st" column="st" />
+    <result property="mva" column="mva" />
+    <result property="csosnId" column="csosnId" />
+    <result property="ipi" column="ipi" />
+    <result property="iat" column="iat" />
+    <result property="ippt" column="ippt" />
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	<association property="incidencia"    column="incidencia" select="IncidenciaMap.fetchById"  />
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allTributacaoColumns">
+		 b.parentId
+		,b.cstId
+		,b.icms
+		,b.st
+		,b.mva
+		,b.csosnId
+		,b.ipi
+		,b.iat
+		,b.ippt
+		,b.incidencia
+      	,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allTributacaoValues">
+  		 #{parentId}
+		,#{cstId}
+		,#{icms}
+		,#{st}
+		,#{mva}
+		,#{csosnId}
+		,#{ipi}
+		,#{iat}
+		,#{ippt}
+		,#{incidencia.id}
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertTributacao" parameterType="Tributacao" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO tributacao (
+		<include refid="allTributacaoColumns" />
+      )
+    VALUES (<include refid="allTributacaoValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateTributacao" parameterType="Tributacao">
+    UPDATE tributacao
+    	<set>
+    		<if test="codigo!= null">codigo = #{codigo},</if>
+	    	<if test="texto!= null">texto=#{texto},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteTributacaoById" parameterType="Integer">
+    	DELETE FROM tributacao WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchTributacaoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM tributacao
+     WHERE 1 = 1
+     <if test="id != null">
+		  AND id = #{id}
+	 </if>
+  </select>
+
+  <select id="fetchAllTributacaos" resultMap="tributosResult">
+    SELECT
+	<include refid="allTributacaoColumns" />
+    FROM tributacao ORDER BY id ASC
+  </select>
+
+  <select id="fetchTributacaoById" parameterType="FetchByIdRequest" resultMap="tributosResult">
+	SELECT b.id,
+	<include refid="allTributacaoColumns" />
+    FROM tributacao b
+    where id = #{id}
+    ORDER BY id ASC
+  </select>
+
+   <select id="fetchTributacaoByNota" parameterType="Integer" resultMap="tributosResult">
+	SELECT b.id,
+	<include refid="allTributacaoColumns" />
+    FROM tributacao b
+    where id = #{parentId}
+    ORDER BY id ASC
+  </select>
+
+  <select id="fetchTributosByNota" parameterType="Integer" resultMap="tributosResult">
+	SELECT b.id,
+	<include refid="allTributacaoColumns" />
+    FROM tributacao b
+    where id = #{parentId}
+    ORDER BY id ASC
+  </select>
+
+  <select id="fetchAllTributacaosByRequest" parameterType="PagedInquiryRequest" resultMap="tributosResult">
+	 SELECT b.id,<include refid="allTributacaoColumns" />
+        FROM tributacao b
+     WHERE 1 = 1
+     <if test="id != null">
+		  AND b.id = #{id}
+	 </if>
+  </select>
+
+  <select id="fetchTributacaoByProduto" parameterType="Integer" resultMap="tributosResult">
+	  	SELECT b.id,<include refid="allTributacaoColumns" />
+        FROM tributacao b
+     WHERE 1 = 1
+		  AND b.prodId = #{id}
+
+  </select>
+
+
+</mapper>

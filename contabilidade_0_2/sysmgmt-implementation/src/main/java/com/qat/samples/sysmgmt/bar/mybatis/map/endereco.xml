@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EnderecoMap">
+
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="enderecoResult" type="Endereco">
+    <result property="id" column="id"/>
+    <result property="parentId" column="parentId"/>
+    <result property="tabelaEnumValue" column="tabela"/>
+    <result property="processId" column="processId"/>
+    <result property="logradouro" column="logradouro"/>
+    <result property="bairro" column="bairro"/>
+    <result property="numero" column="numero"/>
+    <result property="enderecoTypeValue" column="enderecoType"/>
+    <result property="cep" column="cep"/>
+    <result property="complemento" column="complemento"/>
+    <result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	<association property="cidade"    column="cidade" select="CidadeMap.fetchCidadeByEmpresa"  />
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+		id             integer NOT NULL DEFAULT nextval('endereco_id_seq'::regclass),
+	tabela		 integer  NULL,
+	parentId	 integer  NULL,
+	type         integer  NULL,
+	processId    integer NULL,
+	logradouro	 character varying(200)  NULL,
+	cidade		 integer NULL,
+	endereco		 integer NULL,
+	bairro		 character varying(50)  NULL,
+	numero       character varying(10)  NULL,
+	cep			 character varying(15)  NULL,
+	enderecoType		 integer NULL,
+	create_date  bigint,
+    create_user  character varying(50)  NULL,
+    modify_date  bigint,
+    modify_user  character varying(50)  NULL,
+	-->
+  <sql id="allEnderecoColumns">
+		 parentId
+		,tabela
+		,processId
+      	,logradouro
+      	,bairro
+      	,numero
+     	,enderecoType
+      	,cep
+      	,complemento
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+      	,cidade
+  </sql>
+
+  <sql id="allEnderecoValues">
+  		#{parentId},
+  		#{tabelaEnumValue},
+		#{processId},
+      	#{logradouro},
+      	#{bairro},
+      	#{numero},
+      	#{enderecoTypeValue},
+      	#{cep},
+      	#{complemento},
+    	<include refid="CBOFMap.changeControlFields"/>,
+    	#{cidade.id}
+  </sql>
+
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertEndereco" parameterType="Endereco" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO endereco (
+		<include refid="allEnderecoColumns" />
+      )
+    VALUES (<include refid="allEnderecoValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateEndereco" parameterType="Endereco">
+    UPDATE endereco
+    	<set>
+    		<if test="logradouro!= null">logradouro = #{logradouro},</if>
+	    	<if test="bairro!= null"> bairro=#{bairro},</if>
+	    	<if test="numero!= null">numero = #{numero},</if>
+	    	<if test="enderecoTypeValue!= null"> enderecoType=#{enderecoTypeValue},</if>
+	    	<if test="cep!= null"> cep=#{cep},</if>
+	    	<if test="complemento!= null"> complemento=#{complemento},</if>
+	    	<if test="cidade.id!= null"> cidade=#{cidade.id},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteEnderecoById" parameterType="Integer">
+    	DELETE FROM endereco WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+-->
+  <select id="fetchEnderecoByEmpresa" parameterType="Integer" resultMap="enderecoResult">
+     SELECT * FROM endereco
+     WHERE tabela = 1 and id = #{id}
+  </select>
+
+
+
+  <select id="fetchEnderecoByPessoaId" parameterType="Integer" resultMap="enderecoResult">
+     SELECT * FROM endereco
+     WHERE tabela in(16,17,18,19,23) and PARENTID = #{id}
+  </select>
+
+
+  <select id="fetchEnderecoByMarcaId" parameterType="Integer" resultMap="enderecoResult">
+     SELECT * FROM endereco
+     WHERE tabela in(50) and PARENTID = #{id}
+  </select>
+
+  <select id="fetchEnderecoByEmpresaId" parameterType="Integer" resultMap="enderecoResult">
+     SELECT * FROM endereco
+     WHERE parentId = #{id} and tabela in (1,51,52);
+  </select>
+
+  <select id="fetchEnderecoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM endereco
+
+  </select>
+
+  <select id="fetchAllEnderecoByRequest" parameterType="PagedInquiryRequest" resultMap="enderecoResult">
+    SELECT * FROM
+    			(
+    				SELECT id,
+    						<include refid="allEnderecoColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM endereco
+					WHERE 2 = 2
+
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+
+</mapper>

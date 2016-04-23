@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ClassificacaoMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+  <resultMap id="classificacaoResult" type="Classificacao" >
+    <result property="id" column="id" />
+    <result property="descricao" column="descricao" />
+   	<result property="codigo" column="codigo"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	<association property="subClassificacao"    column="subClassificacaoId" select="SubClassificacaoMap.fetchSubClassificacaoByClassificacao"  />
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allClassificacaoColumns">
+		 b.descricao
+		,b.codigo
+      	,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allClassificacaoValues">
+  		#{descricao},
+  		#{codigo},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertClassificacao" parameterType="Classificacao" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO classificacao (
+		<include refid="allClassificacaoColumns" />
+      )
+    VALUES (<include refid="allClassificacaoValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateClassificacao" parameterType="Classificacao">
+    UPDATE classificacao
+    	<set>
+    		<if test="descricao!= null">descricao = #{descricao},</if>
+	    	<if test="codigo!= null"> codigo=#{codigo},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteClassificacaoById" parameterType="Integer">
+    	DELETE FROM classificacao WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchClassificacaoRowCount" parameterType="ClassificacaoInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM classificacao
+     WHERE 1 = 1
+     <if test="criteria.id != null">
+		  AND id = #{criteria.id}
+	 </if>
+  </select>
+
+  <select id="fetchAllClassificacaos" resultMap="classificacaoResult">
+    SELECT
+	<include refid="allClassificacaoColumns" />
+    FROM classificacao ORDER BY codigo ASC
+  </select>
+
+  <select id="fetchClassificacaoById" parameterType="FetchByIdRequest" resultMap="classificacaoResult">
+	SELECT b.id,
+	<include refid="allClassificacaoColumns" />
+    FROM classificacao b
+    where b.id = #{id}
+    ORDER BY id ASC
+  </select>
+
+  <select id="fetchAllClassificacaosByRequest" parameterType="ClassificacaoInquiryRequest" resultMap="classificacaoResult">
+     SELECT * FROM
+    			(
+    				SELECT
+    						<include refid="allClassificacaoColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM classificacao b
+					WHERE 2 = 2
+					<if test="criteria.id != null">
+						AND b.id = #{criteria.id}
+					</if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+  <select id="fetchClassificacaoByProduto" parameterType="Integer" resultMap="classificacaoResult">
+	SELECT b.id,
+	<include refid="allClassificacaoColumns" />
+    FROM classificacao b
+    where id = #{id}
+    ORDER BY codigo ASC
+  </select>
+
+
+</mapper>

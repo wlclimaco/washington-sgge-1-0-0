@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PlanoSaudeMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly.
+       private Integer id;
+
+	private String nome;
+
+	private List<Agencia> agenciaList;-->
+	  <resultMap id="planoSaudePessoaResult" type="PlanoSaudePessoa" >
+		<result property="id" column="id" />
+		<result property="parentId" column="parentId" />
+		<result property="dataValidade" column="dataValidade" />
+		<result property="numeroCartao" column="numeroCartao" />
+		<result property="plano" column="plano" />
+		<result property="processId" column="processId" />
+	   	<result property="createUser" column="create_user"/>
+		<result property="createDataUTC" column="create_date"/>
+		<result property="modifyUser" column="modify_user"/>
+		<result property="modifyDataUTC" column="modify_date"/>
+      	<association property="planoId"    column="planoId" select="fetchPlanoSaudeByPlanoSaudeId"  />
+      </resultMap>
+
+  <resultMap id="planoSaudeResult" type="PlanoSaude" >
+    <result property="id" column="id" />
+    <result property="nome" column="nome" />
+   	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+  </resultMap>
+
+
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allPlanoSaudeColumns">
+		nome,
+      	create_date,
+      	create_user,
+      	modify_date,
+      	modify_user
+  </sql>
+
+  <sql id="allPlanoSaudeValues">
+  		#{nome},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <sql id="allPlanoSaudePessoaColumns">
+		parentId,
+		dataValidade,
+		numeroCartao,
+		plano,
+		planoId,
+		create_date,
+      	create_user,
+      	modify_date,
+      	modify_user
+  </sql>
+
+  <sql id="allPlanoSaudePessoaValues">
+  		#{parentId},
+		#{dataValidade},
+		#{numeroCartao},
+		#{plano},
+		#{planoId.id},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertPlanoSaude" parameterType="PlanoSaude" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO planoSaude (
+		<include refid="allPlanoSaudeColumns" />
+      )
+    VALUES (<include refid="allPlanoSaudeValues" /> )
+  </insert>
+
+    <insert id="insertPlanoSaudePessoa" parameterType="PlanoSaudePessoa" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO PlanoSaudePessoa (
+		<include refid="allPlanoSaudePessoaColumns" />
+      )
+    VALUES (<include refid="allPlanoSaudePessoaValues" /> )
+  </insert>
+
+    <update id="updatePlanoSaudePessoa" parameterType="PlanoSaude">
+    UPDATE PlanoSaudePessoa
+    	<set>
+    		<if test="dataValidade!= null">dataValidade = #{dataValidade},</if>
+    		<if test="numeroCartao!= null">numeroCartao = #{numeroCartao},</if>
+    		<if test="plano!= null">plano = #{plano},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updatePlanoSaude" parameterType="PlanoSaude">
+    UPDATE planoSaude
+    	<set>
+    		<if test="nome!= null">nome = #{nome},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deletePlanoSaudeById" parameterType="Integer">
+    	DELETE FROM planoSaude WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchPlanoSaudeRowCount" parameterType="PlanoSaudeInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM planoSaude
+     WHERE 1=1
+     <if test="criteria.id != null">
+		  AND id = #{criteria.id}
+	 </if>
+  </select>
+
+  <select id="fetchAllPlanoSaudes" resultMap="planoSaudeResult">
+    SELECT id
+	<include refid="allPlanoSaudeColumns" />
+    FROM planoSaude b ORDER BY id ASC
+  </select>
+
+  <select id="fetchPlanoSaudeById" parameterType="FetchByIdRequest" resultMap="planoSaudeResult">
+	SELECT
+		<include refid="allPlanoSaudeColumns" />
+        FROM planoSaude b
+     WHERE 1=1
+
+  </select>
+
+  <select id="fetchAllPlanoSaudeByRequest" parameterType="PlanoSaudeInquiryRequest" resultMap="planoSaudeResult">
+	   SELECT * FROM
+    			(
+    				SELECT
+    						<include refid="allPlanoSaudeColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM planoSaude b
+					WHERE 2 = 2
+					<if test="criteria.id != null">
+						AND id = #{criteria.id}
+					</if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+  <select id="fetchPlanoSaudeByConsulta" parameterType="Integer" resultMap="planoSaudePessoaResult">
+	SELECT id,
+		<include refid="allPlanoSaudePessoaColumns" />
+		FROM planoSaudePessoa b where parentId = #{id}  ORDER BY id ASC
+  </select>
+
+ <select id="fetchPlanoSaudeByPessoa" parameterType="Integer" resultMap="planoSaudePessoaResult">
+	SELECT id,
+		<include refid="allPlanoSaudePessoaColumns" />
+		FROM planoSaudePessoa b where parentId = #{id}  ORDER BY id ASC
+  </select>
+
+</mapper>

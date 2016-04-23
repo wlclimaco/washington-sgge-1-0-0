@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BeneficiosMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. [id] [int] NOT NULL,
+	[nome] [varchar](50) NULL,
+	[codigo] [varchar](50) NULL,
+	[descricao] [varchar](50) NULL,
+	[valor] [real] NULL,
+	[porcentagem] [real] NULL,
+	[tipo] [varchar](10) NULL,-->
+
+  <resultMap id="beneficioResult" type="Beneficios">
+    <result property="id" column="id" />
+    <result property="nome" column="nome" />
+   	<result property="codigo" column="codigo"/>
+	<result property="descricao" column="descricao"/>
+	<result property="valor" column="valor" />
+   	<result property="porcentagem" column="porcentagem"/>
+	<result property="tipo" column="tipo"/>
+	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+<!-- 	<association property="dataList"    column="id" select="BeneficiosMap.fetchFuncByData"  /> -->
+
+  </resultMap>
+
+  <resultMap id="beneficioPessoaResult" type="BeneficioPessoa">
+    <result property="id" column="id" />
+    <result property="idFunc" column="idFunc" />
+   	<result property="processId" column="processId"/>
+   	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+   	<association property="benefId"    column="idBenef" select="fetchBeneficiosById"  />
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allBeneficiosColumns">
+		 nome
+		,codigo
+      	,descricao
+      	,valor
+      	,porcentagem
+      	,tipo
+      	,processId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allBeneficiosValues">
+  		#{nome},
+  		#{codigo},
+    	#{descricao},
+    	#{valor},
+    	#{porcentagem},
+    	#{tipo},
+    	#{processId},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+   <sql id="allBeneficiosAppplyColumns">
+		 idFunc
+		,idBenef
+      	,processId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allBeneficiosApplyValues">
+  		#{idFunc},
+  		#{benefId.id},
+    	#{processId},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertBeneficios" parameterType="Beneficios" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO beneficio (
+		<include refid="allBeneficiosColumns" />
+      )
+    VALUES (<include refid="allBeneficiosValues" /> )
+  </insert>
+
+  <insert id="insertBeneficioPerson" parameterType="BeneficioPessoa" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO BeneficioFunc (
+		<include refid="allBeneficiosAppplyColumns" />
+      )
+    VALUES (<include refid="allBeneficiosApplyValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+    <update id="updateBeneficios" parameterType="Beneficios">
+    UPDATE beneficio
+    	<set>
+    		<if test="nome!= null">nome = #{nome},</if>
+	    	<if test="codigo!= null"> codigo=#{codigo},</if>
+	    	<if test="descricao!= null">descricao = #{descricao},</if>
+	    	<if test="valor!= null"> valor=#{valor},</if>
+	    	<if test="porcentagem!= null"> porcentagem=#{porcentagem},</if>
+	    	<if test="tipo!= null"> tipo=#{tipo},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+    <update id="updateBeneficioPessoa" parameterType="BeneficioPessoa">
+    UPDATE BeneficioFunc
+    	<set>
+    		<if test="pessoaId!= null">idFunc = #{pessoaId},</if>
+	    	<if test="benefId!= null"> idBenef=#{benefId.id},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <delete id="deleteBeneficiosPessoaById" parameterType="Integer">
+    	DELETE FROM BeneficioFunc WHERE id = #{id}
+  </delete>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteBeneficiosById" parameterType="Integer">
+    	DELETE FROM business WHERE business_id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+
+  <select id="fetchAllBeneficioss" resultMap="beneficioResult">
+    SELECT
+	<include refid="allBeneficiosColumns" />
+    FROM business ORDER BY name ASC
+  </select>
+
+  <select id="fetchBeneficiosById" parameterType="Integer" resultMap="beneficioResult">
+	SELECT id,
+	<include refid="allBeneficiosColumns" />
+    FROM Beneficio b ORDER BY id ASC
+  </select>
+
+<!--
+  <select id="fetchFuncByData" parameterType="Integer" resultMap="BeneficioMesApp">
+	SELECT c.*
+
+		  FROM BeneficioMesApp AS C
+
+		  INNER JOIN beneficioFunc AS F ON F.id like c.id
+		where  f.idFunc = #{id}
+  </select>
+-->
+  <select id="fetchFuncByBeneficios" parameterType="Integer" resultMap="beneficioPessoaResult">
+	SELECT id,
+	<include refid="allBeneficiosAppplyColumns" />
+
+		  FROM beneficioFunc
+		where  idFunc =  #{id}
+  </select>
+
+<select id="fetchBeneficiosRowCount" parameterType="BeneficiosInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM beneficio WHERE 2 = 2
+  </select>
+
+  <select id="fetchAllBeneficiosByRequest" parameterType="BeneficiosInquiryRequest" resultMap="beneficioResult">
+    SELECT * FROM
+    			(
+    				SELECT id,
+    						<include refid="allBeneficiosColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM beneficio b
+					WHERE 2 = 2
+
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+</mapper>

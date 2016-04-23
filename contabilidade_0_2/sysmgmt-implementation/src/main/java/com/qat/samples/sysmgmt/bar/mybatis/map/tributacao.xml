@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TributacaoMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+  <resultMap id="tributosResult" type="Tributacao" >
+    <result property="id" column="id" />
+    <result property="parentId" column="parentId" />
+    <result property="cstId" column="cstId" />
+    <result property="icms" column="icms" />
+    <result property="st" column="st" />
+    <result property="mva" column="mva" />
+    <result property="csosnId" column="csosnId" />
+    <result property="ipi" column="ipi" />
+    <result property="iat" column="iat" />
+    <result property="ippt" column="ippt" />
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	<association property="incidencia"    column="incidencia" select="IncidenciaMap.fetchById"  />
+	<!--<association property="cstId"    column="cstId" select="fetchById"  />
+	<association property="csosn"    column="cstId" select="fetchById"  />-->
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allTributacaoColumns">
+		 parentId
+		,cstId
+		,icms
+		,st
+		,mva
+		,csosnId
+		,ipi
+		,iat
+		,ippt
+		,incidencia
+		,pisconfins
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allTributacaoValues">
+  		 #{parentId}
+		,#{cst.id}
+		,#{icms}
+		,#{st}
+		,#{mva}
+		,#{csosn.id}
+		,#{ipi}
+		,#{iat}
+		,#{ippt}
+		,#{incidencia.id}
+		,#{pisconfins}
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertTributacao" parameterType="Tributacao" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO tributos (
+		<include refid="allTributacaoColumns" />
+      )
+    VALUES (<include refid="allTributacaoValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateTributacao" parameterType="Tributacao">
+    UPDATE tributos
+    	<set>
+    		<if test="codigo!= null">codigo = #{codigo},</if>
+	    	<if test="texto!= null">texto=#{texto},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteTributacaoById" parameterType="Integer">
+    	DELETE FROM tributos WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchTributacaoRowCount" parameterType="TributacaoInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM tributos
+     WHERE 1 = 1
+     <if test="criteria.id != null">
+		  AND id = #{criteria.id}
+	 </if>
+  </select>
+
+  <select id="fetchAllTributacaos" resultMap="tributosResult">
+    SELECT
+	<include refid="allTributacaoColumns" />
+    FROM tributos ORDER BY id ASC
+  </select>
+
+  <select id="fetchTributacaoById" parameterType="FetchByIdRequest" resultMap="tributosResult">
+	SELECT id,
+	<include refid="allTributacaoColumns" />
+    FROM tributos
+    where id = #{id}
+    ORDER BY id ASC
+  </select>
+
+  <select id="fetchTributosById" parameterType="FetchByIdRequest" resultMap="tributosResult">
+	SELECT id,
+	<include refid="allTributacaoColumns" />
+    FROM tributos
+    where id = #{id}
+    ORDER BY id ASC
+  </select>
+
+   <select id="fetchTributacaoByNota" parameterType="Integer" resultMap="tributosResult">
+	SELECT id,
+	<include refid="allTributacaoColumns" />
+    FROM tributos
+    where id = #{parentId}
+    ORDER BY id ASC
+  </select>
+
+  <select id="fetchAllTributacaosByRequest" parameterType="TributacaoInquiryRequest" resultMap="tributosResult">
+    SELECT * FROM
+    			(
+    				SELECT
+    						<include refid="allTributacaoColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM tributacao
+					WHERE 2 = 2
+					<if test="criteria.id != null">
+						AND id = #{criteria.id}
+					</if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+  <select id="fetchTributacaoByProduto" parameterType="Integer" resultMap="tributosResult">
+	  	select * from tributacao c where c.prodId = #{id}
+  </select>
+
+
+</mapper>

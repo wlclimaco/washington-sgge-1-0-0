@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FilialMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. [id]           [int] NOT NULL,
+	[nome]         [varchar](100) NULL,
+	[regime]       [int] NULL,
+	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,-->
+
+  <resultMap id="filialResult" type="Filial" extends="EntidadeMap.entidadeResult">
+	<collection property="depositoList" column="emprId" select="DepositoMap.fetchAllDepositoByEntidade"/>
+  </resultMap>
+
+
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allFilialColumns">
+
+			<include refid="EntidadeMap.allEntidadeColumns"/>
+  </sql>
+
+  <sql id="allFilialValues">
+  			<include refid="EntidadeMap.allEntidadeValues"/>
+  </sql>
+
+  <select id="fetchFilialRowCount" parameterType="FilialInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM entidade
+        where entidadeEnum = 2
+
+  </select>
+
+  <select id="fetchAllFilials" resultMap="filialResult">
+    SELECT
+	<include refid="allFilialColumns" />
+    FROM entidade ORDER BY nome ASC
+  </select>
+
+  <select id="fetchFilialById" parameterType="FetchByIdRequest" resultMap="filialResult">
+    			   SELECT
+					id,	<include refid="allFilialColumns" />
+ 				   FROM entidade b
+					where id = #{fetchId}
+  </select>
+
+    <select id="fetchFilialByNota" parameterType="Integer" resultMap="filialResult">
+    			   SELECT
+					id,	<include refid="allFilialColumns" />
+ 				   FROM entidade b
+					where id = #{id}
+  </select>
+
+  <select id="fetchAllFilialByEntidade" parameterType="Integer" resultMap="filialResult">
+    			   SELECT
+					id,	<include refid="allFilialColumns" />
+ 				   FROM entidade b
+					where entidadeId = #{id} and entidadeEnum = 2
+  </select>
+
+
+
+  <select id="fetchAllFilialsByRequest" parameterType="FilialInquiryRequest" resultMap="filialResult">
+     SELECT * FROM ( SELECT id,
+    						<include refid="allFilialColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM entidade b
+						where entidadeEnum = 2
+					<if test="parentId != null">
+						AND id = #{id}
+					</if>
+					 <if test="statusList != null and !statusList.isEmpty()">
+					     AND PGSI_status IN
+					     <foreach item="item" index="index" collection="statusList"
+						     open="(" separator="," close=")">
+						   	 #{item.value}
+						 </foreach>
+					 </if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+
+</mapper>

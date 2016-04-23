@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CondPagMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. [id]           [int] NOT NULL,
+		private Integer id;
+
+	/** The type of an account. */
+	private String nome;
+
+	/** The description. */
+	private double valorIni;
+
+	private double valorFin;
+
+	/** The estado. */
+	private Integer parcelas;
+
+	/** The bairro. */
+	private List<TipoPag> listTipoPag;-->
+
+
+  <resultMap id="condPagPessoaResult" type="CondPagPessoa">
+    <result property="id" column="id" />
+    <result property="parentId" column="parentId" />
+    <result property="processId" column="processId" />
+    <result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+    <association property="condPagId"    column="condPagId" select="fetchCondPagById"  />
+  </resultMap>
+
+  <resultMap id="condPagResult" type="CondPag">
+    <result property="id" column="id" />
+    <result property="nome" column="nome" />
+    <result property="valorIni" column="valorIni" />
+    <result property="valorFin" column="valorFin" />
+    <result property="parcelas" column="parcelas" />
+    <result property="processId" column="processId" />
+    <result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+   	<collection property="listTipoPag" column="id" select="fetchTipoPagByCondPagId"/>
+  </resultMap>
+
+  <resultMap id="tipoPagResult" type="TipoPag">
+    <result property="id" column="id" />
+    <result property="descricao" column="descricao" />
+    <result property="processId" column="processId" />
+    <result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allCondPagColumns">
+		 nome
+		,valorIni
+		,valorFin
+		,parcelas
+		,processId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allCondPagValues">
+  		#{nome},
+  		#{valorIni},
+  		#{valorFin},
+  		#{parcelas},
+  		#{processId},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+    <sql id="allCondPagPessoaColumns">
+		 parentId
+		,condPagId
+		,processId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allCondPagPessoaValues">
+  		#{parentId},
+  		#{condPagId.id},
+  		#{processId},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertCondPag" parameterType="CondPag" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO condPag (
+		<include refid="allCondPagColumns" />
+      )
+    VALUES (<include refid="allCondPagValues" /> )
+  </insert>
+
+  <insert id="insertCondPagPessoa" parameterType="CondPagPessoa" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO condPagPessoa (
+		<include refid="allCondPagPessoaColumns" />
+      )
+    VALUES (<include refid="allCondPagPessoaValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateCondPag" parameterType="CondPag">
+    UPDATE condPag
+    	<set>
+    		<if test="nome!= null">nome = #{nome},</if>
+	    	<if test="valorIni!= null"> valorIni=#{valorIni},</if>
+	    	<if test="valorFin!= null">valorFin = #{valorFin},</if>
+	    	<if test="parcelas!= null"> parcelas=#{parcelas},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+    <update id="updateCondPagPessoa" parameterType="CondPagPessoa">
+    UPDATE condPagPessoa
+    	<set>
+    		<if test="parentId!= null">parentId = #{parentId},</if>
+	    	<if test="condPagId.id!= null"> condPagId=#{condPagId.id},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteCondPagById" parameterType="Integer">
+    	DELETE FROM condPag WHERE id = #{id}
+  </delete>
+
+  <delete id="deleteCondPagByIdPessoa" parameterType="Integer">
+    	DELETE FROM condPagPessoa WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchCondPagRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM condPag
+
+  </select>
+
+  <select id="fetchAllCondPags" resultMap="condPagResult">
+    SELECT
+	<include refid="allCondPagColumns" />
+    FROM condPag ORDER BY nome ASC
+  </select>
+
+  <select id="fetchCondPagById" parameterType="FetchByIdRequest" resultMap="condPagResult">
+    			   SELECT
+					id,	<include refid="allCondPagColumns" />
+ 				   FROM condPag b
+					where id = #{id}
+  </select>
+
+  <select id="fetchCondPagByConvenioId" parameterType="FetchByIdRequest" resultMap="condPagResult">
+    			   SELECT
+					*
+ 				   FROM condPag b
+					where id = #{id}
+  </select>
+
+  <select id="fetchAllCondPagsByRequest" parameterType="PagedInquiryRequest" resultMap="condPagResult">
+     SELECT * FROM ( SELECT id,
+    						<include refid="allCondPagColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM condPag b
+						where 1 = 1
+					<if test="parentId != null">
+						AND id = #{id}
+					</if>
+					 <if test="statusList != null and !statusList.isEmpty()">
+					     AND PGSI_status IN
+					     <foreach item="item" index="index" collection="statusList"
+						     open="(" separator="," close=")">
+						   	 #{item.value}
+						 </foreach>
+					 </if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+
+
+   <!--
+		=====================Tipo Pagamento=========================
+	-->
+  <sql id="allTipoPagColumns">
+		 descricao
+		,processId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allTipoPagValues">
+  		#{descricao},
+  		#{processId},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertTipoPag" parameterType="TipoPag" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO tipoPag (
+		<include refid="allTipoPagColumns" />
+      )
+    VALUES (<include refid="allTipoPagValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateTipoPag" parameterType="TipoPag">
+    UPDATE tipoPag
+    	<set>
+    		<if test="descricao!= null">descricao = #{descricao},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteTipoPagById" parameterType="Integer">
+    	DELETE FROM tipoPag WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchTipoPagRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM tipoPag
+
+  </select>
+
+  <select id="fetchAllTipoPags" resultMap="tipoPagResult">
+    SELECT
+	<include refid="allTipoPagColumns" />
+    FROM tipoPag ORDER BY nome ASC
+  </select>
+
+  <select id="fetchTipoPagById" parameterType="FetchByIdRequest" resultMap="tipoPagResult">
+    			   SELECT
+					id,	<include refid="allTipoPagColumns" />
+ 				   FROM tipoPag b
+					where id = #{id}
+  </select>
+
+  <select id="fetchTipoPagByCondPagId" parameterType="Integer" resultMap="tipoPagResult">
+    			   SELECT
+					*
+ 				   FROM tipoPag b
+					where id = #{id}
+  </select>
+
+  <select id="fetchAllTipoPagsByRequest" parameterType="PagedInquiryRequest" resultMap="tipoPagResult">
+     SELECT * FROM ( SELECT id,
+    						<include refid="allTipoPagColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM tipoPag b
+						where 1 = 1
+					<if test="parentId != null">
+						AND id = #{id}
+					</if>
+					 <if test="statusList != null and !statusList.isEmpty()">
+					     AND PGSI_status IN
+					     <foreach item="item" index="index" collection="statusList"
+						     open="(" separator="," close=")">
+						   	 #{item.value}
+						 </foreach>
+					 </if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+    <select id="fetchCondPagByPessoa" parameterType="Integer" resultMap="condPagPessoaResult">
+    SELECT id,
+	<include refid="allCondPagPessoaColumns" />
+    FROM condPagPessoa b where parentId= #{id}  ORDER BY id ASC
+  </select>
+
+
+</mapper>

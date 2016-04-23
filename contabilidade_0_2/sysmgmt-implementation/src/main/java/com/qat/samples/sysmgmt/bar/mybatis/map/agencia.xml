@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AgenciaMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly.
+       private Integer id;
+
+	/** The type of an account. */
+	private String nome;
+
+	private List<Endereco> enderecos;
+	private List<Email> emails;
+	private List<Telefone> telefones;
+
+	private String gerente;
+
+	private String responsavelConta;
+
+	private String numeroConta;;-->
+
+  <resultMap id="agenciaResult" type="Agencia" >
+    <result property="id" column="id" />
+    <result property="nome" column="nome" />
+    <result property="gerente" column="gerente" />
+    <result property="responsavelConta" column="responsavelConta" />
+    <result property="numeroConta" column="numeroConta" />
+   	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByPessoaId"/>
+	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByPessoaId"/>
+	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByPessoaId"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByPessoaId"/>
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allAgenciaColumns">
+		 nome
+		,gerente
+		,responsavelConta
+		,numeroConta
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allAgenciaValues">
+  		#{nome},
+  		#{gerente},
+  		#{responsavelConta},
+  		#{numeroConta},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertAgencia" parameterType="Agencia" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO agencia (
+		<include refid="allAgenciaColumns" />
+      )
+    VALUES (<include refid="allAgenciaValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateAgencia" parameterType="Agencia">
+    UPDATE agencia
+    	<set>
+    		<if test="nome!= null">nome = #{nome},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteAgenciaById" parameterType="Integer">
+    	DELETE FROM agencia WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchAgenciaRowCount" parameterType="AgenciaInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM agencia
+     WHERE 1=1
+     <if test="criteria.id != null">
+		  AND id = #{criteria.id}
+	 </if>
+  </select>
+
+  <select id="fetchAllAgencias" resultMap="agenciaResult">
+    SELECT id
+	<include refid="allAgenciaColumns" />
+    FROM agencia b ORDER BY id ASC
+  </select>
+
+  <select id="fetchAgenciaById" parameterType="FetchByIdRequest" resultMap="agenciaResult">
+	SELECT
+		<include refid="allAgenciaColumns" />
+        FROM agencia b
+     WHERE 1=1  AND id = #{id}
+  </select>
+
+  <select id="fetchAllAgenciasByRequest" parameterType="AgenciaInquiryRequest" resultMap="agenciaResult">
+	    SELECT * FROM
+    			(
+    				SELECT id,
+    						<include refid="allAgenciaColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM agencia b
+					WHERE 2 = 2
+					<if test="criteria.id != null">
+						AND id = #{criteria.id}
+					</if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+  <select id="fetchAgenciaByBanco" parameterType="Integer" resultMap="agenciaResult">
+	SELECT id,
+		<include refid="allAgenciaColumns" />
+		FROM agencia b where id = #{id} ORDER BY id ASC
+  </select>
+
+
+</mapper>

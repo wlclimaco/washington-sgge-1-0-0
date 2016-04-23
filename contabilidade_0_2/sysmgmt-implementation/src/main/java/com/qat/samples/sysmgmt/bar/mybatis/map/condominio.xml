@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CondominioMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. [id]           [int] NOT NULL,
+	[nome]         [varchar](100) NULL,
+	[regime]       [int] NULL,
+	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,-->
+
+  <resultMap id="condominioResult" type="Condominio" extends="EntidadeMap.entidadeResult">
+	<collection property="socios" column="id" select="SocioMap.fetchSocioByCondominioId"/>
+	<collection property="planoList" column="id" select="PlanoMap.fetchPlanoByCondominio"/>
+	<collection property="filialList" column="id" select="FilialMap.fetchAllFilialByEntidade"/>
+	<collection property="depositoList" column="id" select="DepositoMap.fetchAllDepositoByEntidade"/>
+	<!--  <collection property="contaCorrenteList" column="id" select="ContaCorrenteMap.fetchAllDepositoByEntidade"/>
+	<collection property="tarefaList" column="id" select="TarefaMap.fetchAllDepositoByEntidade"/>-->
+  </resultMap>
+
+   <resultMap id="condominioTableResult" type="Condominio" extends="EntidadeMap.entidadeTableResult">
+	</resultMap>
+
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allCondominioColumns">
+			<include refid="EntidadeMap.allEntidadeColumns"/>
+  </sql>
+
+  <sql id="allCondominioValues">
+  			<include refid="EntidadeMap.allEntidadeValues"/>
+  </sql>
+
+  <select id="fetchCondominioRowCount" parameterType="CondominioInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM entidade
+        where entidadeEnum = 1
+
+  </select>
+
+  <select id="fetchAllCondominios" resultMap="condominioTableResult">
+    SELECT
+	<include refid="allCondominioColumns" />
+    FROM entidade ORDER BY nome ASC
+  </select>
+
+  <select id="fetchCondominioById" parameterType="FetchByIdRequest" resultMap="condominioResult">
+    			   SELECT
+					id,	<include refid="allCondominioColumns" />
+ 				   FROM entidade
+					where id = #{fetchId}
+  </select>
+
+    <select id="fetchCondominioByNota" parameterType="Integer" resultMap="condominioResult">
+    			   SELECT
+					b.id,	<include refid="allCondominioColumns" />
+ 				   FROM entidade b
+					where b.id = #{id}
+  </select>
+
+  <select id="fetchAllCondominiosByRequest" parameterType="CondominioInquiryRequest" resultMap="condominioResult">
+     SELECT * FROM ( SELECT b.id,
+    						<include refid="allCondominioColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM entidade b
+
+
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+</mapper>

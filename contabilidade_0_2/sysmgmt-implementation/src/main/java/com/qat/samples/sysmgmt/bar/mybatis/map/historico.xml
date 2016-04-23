@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="HistoricoMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. private Integer id;
+	private String historico;
+	private String natureza;
+	private String simplificado;
+	private HistoricoTypeEnum historicoTypeEnum;
+	private Double icms;
+	private Double icmsReduzido;
+	private Double margemAgregadaST;
+	private Double cstPrincipal;
+	private Double classFiscal;
+	private String observacao;-->
+
+  <resultMap id="historicoResult" type="Historico" >
+    <result property="id" column="id" />
+    <result property="data" column="data" />
+    <result property="userId" column="userId" />
+    <result property="emprId" column="emprId" />
+    <result property="tabelaEnumValue" column="tabela" />
+    <result property="acaoEnumValue" column="acao" />
+    <result property="processId" column="processId" />
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	<collection property="historicoItensList" column="id" select="fetchAllHistoricoItensByhistorico"/>
+  </resultMap>
+
+   <resultMap id="historicoItensResult" type="HistoricoItens" >
+    <result property="id" column="id" />
+    <result property="idHist" column="idHist" />
+    <result property="processId" column="processId" />
+    <result property="acaoEnumValue" column="type" />
+   	<result property="tabelaEnumValue" column="tabela"/>
+   	<result property="parentId" column="parentId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+  </resultMap>
+
+  <!--<resultMap id="alertaResult" type="Alerta" >
+ 	<result property="id" column="id" />
+	<result property="entidadeId" column="entidadeId" />
+	<result property="qntOs" column="qntOs" />
+	<result property="qntEmpr" column="qntEmpr" />
+	<result property="qntFil" column="qntFil" />
+	<result property="qntDep" column="qntDep" />
+	<result property="qntProd" column="qntProd" />
+	<result property="qntSugs" column="qntSugs" />
+	<result property="qntRecl" column="qntRecl" />
+	<result property="qntFaleCom" column="qntFaleCom" />
+  </resultMap>
+
+
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allHistoricoColumns">
+		 data
+		,userId
+      	,emprId
+      	,acao
+      	,tabela
+      	,processId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allHistoricoValues">
+  		#{data},
+  		#{userId},
+    	#{emprId},
+    	#{acaoEnumValue},
+    	#{tabelaEnumValue},
+    	#{processId},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+    <sql id="allHistoricoItensColumns">
+		 idHist
+		,processId
+      	,type
+      	,tabela
+      	,parentId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allHistoricoItensValues">
+  		#{idHist},
+		#{processId},
+      	#{acaoEnumValue},
+      	#{tabelaEnumValue},
+      	#{parentId},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertHistorico" parameterType="Historico" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO historico (
+		<include refid="allHistoricoColumns" />
+      )
+    VALUES (<include refid="allHistoricoValues" /> )
+  </insert>
+
+   <insert id="insertHistoricoItens" parameterType="HistoricoItens" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO historicoItens (
+		<include refid="allHistoricoItensColumns" />
+      )
+    VALUES (<include refid="allHistoricoItensValues" /> )
+  </insert>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteHistoricoById" parameterType="Integer">
+    	DELETE FROM historico WHERE historico_id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchHistoricoRowCount" parameterType="HistoricoInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM historico
+     WHERE 2 = 2
+  </select>
+
+  <select id="fetchAllHistoricos" resultMap="historicoResult">
+    SELECT
+	<include refid="allHistoricoColumns" />
+    FROM historico ORDER BY id ASC
+  </select>
+
+  <select id="fetchHistoricoById" parameterType="Integer" resultMap="historicoResult">
+		SELECT *
+        FROM historico
+     WHERE id=#{id}
+  </select>
+
+  <select id="fetchAllHistoricosByRequest" parameterType="HistoricoInquiryRequest" resultMap="historicoResult">
+		SELECT * FROM
+    			(
+    				SELECT id,
+    						<include refid="allHistoricoColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM historico
+					WHERE 2 = 2
+					<if test="criteria.id != null">
+						AND id = #{criteria.id}
+					</if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+  <select id="fetchAllHistoricoItensByhistorico" parameterType="Integer" resultMap="historicoItensResult">
+	  	SELECT *
+
+		  FROM historicoItens
+		where  idHist = #{id}
+  </select>
+<!--
+  <select id="fetchAlertasRowCount" parameterType="AlertasInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM historico
+     WHERE 2 = 2
+  </select>
+
+   <select id="fetchAllAlertasByRequest" parameterType="AlertasInquiryRequest" resultMap="alertaResult">
+select
+			(	select count(e.id) as qntEmpr from entidade e
+			LEFT JOIN (SELECT status,parentId ,MAX(s.Id) AS MaxId from status s ,entidade ee where ee.id = s.parentId and s.tabelaEnum in(52) group by s.status,s.parentId) max on 1=1
+
+			where max.parentId = e.id and e.entidadeEnum = 2 and max.status = 5) as qntEmpr,
+
+			(select count(e.id) as qntEmpr from entidade e
+			LEFT JOIN (SELECT status,parentId ,MAX(s.Id) AS MaxId from status s ,entidade ee where ee.id = s.parentId and s.tabelaEnum in(52) group by s.status,s.parentId) max on 1=1
+
+			where max.parentId = e.id and e.entidadeEnum = 2 and max.status = 5) as qntFil,
+
+			(	select count(e.id) as qntEmpr from entidade e
+			LEFT JOIN (SELECT status,parentId ,MAX(s.Id) AS MaxId from status s ,entidade ee where ee.id = s.parentId and s.tabelaEnum in(51) group by s.status,s.parentId) max on 1=1
+
+			where max.parentId = e.id and e.entidadeEnum = 3 and max.status = 5) as qntDep,
+
+
+			(select count(e.id) as qntEmpr from produto e
+			LEFT JOIN (SELECT status,parentId ,MAX(s.Id) AS MaxId from status s ,entidade ee where ee.id = s.parentId and s.tabelaEnum in(45) group by s.status,s.parentId) max ON max.status = 5
+
+			where max.parentId = e.id ) as qntProd,
+
+			(	select count(e.id) as qntEmpr from ordemServico e
+			LEFT JOIN (SELECT status,parentId ,MAX(s.Id) AS MaxId from status s ,entidade ee where ee.id = s.parentId and s.tabelaEnum in(34) group by s.status,s.parentId) max ON max.status = 5
+
+			where max.parentId = e.id ) as qntOs
+  </select>
+ -->
+
+</mapper>

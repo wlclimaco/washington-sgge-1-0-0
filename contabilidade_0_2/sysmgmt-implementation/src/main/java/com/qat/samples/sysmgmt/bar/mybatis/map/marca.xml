@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MarcaMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+  <resultMap id="marcaResult" type="Marca" >
+    <result property="id" column="id" />
+    <result property="marca" column="sigla" />
+   	<result property="fabricante" column="fabricante"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	<collection property="enderecoList" column="id" select="EnderecoMap.fetchEnderecoByMarcaId"/>
+	<collection property="emailList" column="id" select="EmailMap.fetchAllEmailsByMarca"/>
+	<collection property="telefoneList" column="id" select="TelefoneMap.fetchTelefoneByMarca"/>
+  </resultMap>
+
+
+   <resultMap id="marcaProdResult" type="MarcaProd" >
+    <result property="id" column="id" />
+    <result property="parentId" column="prodId" />
+   	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	<association property="marcaId"    column="marcaId" select="fetchMarcaById"  />
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+	 <sql id="allMarcaProdColumns">
+		 b.prodId
+		,b.processId
+		,b.marcaId
+      	,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allMarcaProdValues">
+  		#{parentId},
+  		#{processId},
+  		#{marcaId.id},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <sql id="allMarcaColumns">
+		 b.fabricante
+		,b.marca
+      	,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allMarcaValues">
+  		#{fabricante},
+  		#{marca},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertMarca" parameterType="Marca" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO marca (
+		<include refid="allMarcaColumns" />
+      )
+    VALUES (<include refid="allMarcaValues" /> )
+  </insert>
+
+   <insert id="insertMarcaProd" parameterType="MarcaProd" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO marcaProd (
+		<include refid="allMarcaProdColumns" />
+      )
+    VALUES (<include refid="allMarcaProdValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateMarca" parameterType="Marca">
+    UPDATE marca
+    	<set>
+    		<if test="fabricante!= null">fabricante = #{fabricante},</if>
+	    	<if test="nome!= null"> nome=#{nome},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+  <update id="updateMarcaProd" parameterType="Marca">
+    UPDATE marcaProd
+    	<set>
+    		<if test="parentId!= null">prodId = #{parentId},</if>
+	    	<if test="marcaId.id!= null"> marcaId=#{marcaId.id},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteMarcaById" parameterType="Integer">
+    	DELETE FROM marca WHERE id = #{id}
+  </delete>
+
+  <delete id="deleteMarcaProdById" parameterType="Integer">
+    	DELETE FROM marcaProd WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchMarcaRowCount" parameterType="MarcaInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM marca
+     WHERE 1 = 1
+     <if test="criteria.id != null">
+		  AND id = #{criteria.id}
+	 </if>
+  </select>
+
+  <select id="fetchAllMarcas" resultMap="marcaResult">
+    SELECT
+	<include refid="allMarcaColumns" />
+    FROM marca ORDER BY fabricante ASC
+  </select>
+
+  <select id="fetchMarcaById" parameterType="FetchByIdRequest" resultMap="marcaResult">
+	SELECT b.id,
+	<include refid="allMarcaColumns" />
+    FROM marca b
+    where id = #{id}
+    ORDER BY fabricante ASC
+  </select>
+
+  <select id="fetchAllMarcasByRequest" parameterType="MarcaInquiryRequest" resultMap="marcaResult">
+     SELECT * FROM
+    			(
+    				SELECT
+    						<include refid="allMarcaColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM marca b
+					WHERE 2 = 2
+					<if test="criteria.id != null">
+						AND b.id = #{criteria.id}
+					</if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+  <select id="fetchMarcaByProduto" parameterType="Integer" resultMap="marcaProdResult">
+	SELECT b.id,
+	<include refid="allMarcaProdColumns" />
+    FROM marcaProd b
+    where prodId = #{id}
+    ORDER BY id ASC
+  </select>
+
+
+</mapper>

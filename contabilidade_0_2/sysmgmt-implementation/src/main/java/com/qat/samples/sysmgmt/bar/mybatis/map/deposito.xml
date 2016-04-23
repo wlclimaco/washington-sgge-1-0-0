@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DepositoMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. [id]           [int] NOT NULL,
+	[nome]         [varchar](100) NULL,
+	[regime]       [int] NULL,
+	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,-->
+
+  <resultMap id="depositoResult" type="Deposito" extends="EntidadeMap.entidadeResult">
+
+  </resultMap>
+
+
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allDepositoColumns">
+			<include refid="EntidadeMap.allEntidadeColumns"/>
+  </sql>
+
+  <sql id="allDepositoValues">
+  			<include refid="EntidadeMap.allEntidadeValues"/>
+  </sql>
+
+  <select id="fetchDepositoRowCount" parameterType="DepositoInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM entidade
+        where entidadeEnum = 3
+
+  </select>
+
+  <select id="fetchAllDepositos" resultMap="depositoResult">
+    SELECT
+	<include refid="allDepositoColumns" />
+    FROM entidade ORDER BY nome ASC
+  </select>
+
+  <select id="fetchDepositoById" parameterType="FetchByIdRequest" resultMap="depositoResult">
+    			   SELECT
+					id,	<include refid="allDepositoColumns" />
+ 				   FROM entidade
+					where id = #{fetchId}
+  </select>
+
+    <select id="fetchDepositoByNota" parameterType="Integer" resultMap="depositoResult">
+    			   SELECT
+					b.id,	<include refid="allDepositoColumns" />
+ 				   FROM entidade b
+					where b.id = #{id}
+  </select>
+
+  <select id="fetchAllDepositosByRequest" parameterType="DepositoInquiryRequest" resultMap="depositoResult">
+     SELECT * FROM ( SELECT b.id,
+    						<include refid="allDepositoColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM entidade b
+						where b.entidadeEnum = 3
+					<if test="parentId != null">
+						AND b.id = #{id}
+					</if>
+					 <if test="statusList != null and !statusList.isEmpty()">
+					     AND b.PGSI_status IN
+					     <foreach item="item" index="index" collection="statusList"
+						     open="(" separator="," close=")">
+						   	 #{item.value}
+						 </foreach>
+					 </if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+    <select id="fetchAllDepositoByEntidade" parameterType="Integer" resultMap="depositoResult">
+    			   SELECT
+					b.id,	<include refid="allDepositoColumns" />
+ 				   FROM entidade b
+					where b.emprId = #{id} and entidadeEnum = 3
+  </select>
+
+
+</mapper>

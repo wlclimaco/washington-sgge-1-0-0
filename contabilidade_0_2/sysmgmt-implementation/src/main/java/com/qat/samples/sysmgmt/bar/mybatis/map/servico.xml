@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ServicoMap">
+
+ <resultMap id="planoByServicoResult" type="PlanoByServico">
+    <result property="id" column="id" />
+    <result property="planoId" column="planoId" />
+	<result property="servicoId" column="servicoId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+
+  </resultMap>
+
+  <resultMap id="servicoResult" type="Servico">
+    <result property="id" column="id" />
+    <result property="nome" column="nome" />
+	<result property="emprId" column="emprId"/>
+	<result property="descricao" column="descricao"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchStatusByParentId"/>
+	<collection property="preco" column="{id=id,emprId=emprId}" select="TabPrecoMap.fetchTabPrecoByProduto" />
+
+  </resultMap>
+
+  <sql id="allPlanoByServicoColumns">
+		 planoId
+		,servicoId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+
+  </sql>
+
+    <sql id="allPlanoByServicoValues">
+  		#{planoId},
+  		#{servicoId},
+    	<include refid="CBOFMap.changeControlFields"/>
+
+  </sql>
+
+  <insert id="insertPlanoByServico" parameterType="PlanoByServico" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO planobyservico (
+		  <include refid="allPlanoByServicoColumns" />
+      )
+    VALUES (<include refid="allPlanoByServicoValues" /> )
+  </insert>
+
+  <sql id="allServicoColumns">
+		 nome
+		,descricao
+      	,emprId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+
+  </sql>
+
+  <sql id="allServicoValues">
+  		#{nome},
+  		#{descricao},
+    	#{emprId},
+    	<include refid="CBOFMap.changeControlFields"/>
+
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertServico" parameterType="Servico" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO servico (
+		  nome
+		,descricao
+      	,emprId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+      )
+    VALUES (<include refid="allServicoValues" /> )
+  </insert>
+
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateServico" parameterType="Servico">
+    UPDATE servico
+    	<set>
+    		<if test="nome!= null">nome = #{nome},</if>
+	    	<if test="descricao!= null"> descricao=#{descricao},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+    id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteServicoById" parameterType="Integer">
+    	DELETE FROM servico WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchServicoRowCount" parameterType="ServicoInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM servico
+
+  </select>
+
+  <select id="fetchAllServicos" resultMap="servicoResult">
+    SELECT
+	<include refid="allServicoColumns" />
+    FROM servico ORDER BY name ASC
+  </select>
+
+  <select id="fetchServicoById" parameterType="Integer" resultMap="servicoResult">
+    			   SELECT id,
+						<include refid="allServicoColumns" />
+ 				   FROM servico  where
+
+								id = #{id}
+
+  </select>
+
+    <select id="fetchPlanoByServico"  resultMap="servicoResult">
+    			   select servico.* from servico, planobyservico
+    			   		where planobyservico.servicoId =  servico.id
+    			   			and planobyservico.planoId = #{id}
+
+  </select>
+
+  <select id="fetchAllServicosByRequest" parameterType="ServicoInquiryRequest" resultMap="servicoResult">
+    SELECT * FROM
+    			(
+    				SELECT id,
+    						<include refid="allServicoColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM servico
+					WHERE 2 = 2
+
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+</mapper>

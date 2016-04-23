@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CfopMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. private Integer id;
+	private String cfop;
+	private String natureza;
+	private String simplificado;
+	private CfopTypeEnum cfopTypeEnum;
+	private Double icms;
+	private Double icmsReduzido;
+	private Double margemAgregadaST;
+	private Double cstPrincipal;
+	private Double classFiscal;
+	private String observacao;-->
+
+  <resultMap id="cfopResult" type="Cfop" >
+    <result property="id" column="id" />
+    <result property="cfop" column="cfop" />
+   	<result property="natureza" column="natureza"/>
+	<result property="simplificado" column="simplificado"/>
+	<result property="cfopTypeEnumValue" column="cfopTypeEnum" />
+    <result property="icms" column="icms" />
+   	<result property="icmsReduzido" column="icmsReduzido"/>
+	<result property="margemAgregadaST" column="margemAgregadaST"/>
+    <result property="cstPrincipal" column="cstPrincipal" />
+   	<result property="classFiscal" column="classFiscal"/>
+	<result property="observacao" column="observacao"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+  </resultMap>
+
+   <resultMap id="cfopPessoaResult" type="CfopPessoa" >
+  	<result property="id" column="id" />
+	<result property="parentId" column="parentId" />
+	<result property="processId" column="processId" />
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	<association property="idCfop"    column="idCfop" select="fetchCfopById"  />
+  </resultMap>
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+
+ <sql id="allCfopPessoaColumns">
+		 b.parentId
+		,b.processId
+		,b.idCfop
+		,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+<sql id="allCfopPessoaValues">
+  		#{parentId},
+		#{processId},
+		#{idCfop.id},
+		<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allCfopColumns">
+		 b.cfop
+		,b.natureza
+      	,b.simplificado
+      	,b.cfopTypeEnum
+      	,b.icms
+      	,b.icmsReduzido
+      	,b.margemAgregadaST
+      	,b.cstPrincipal
+      	,b.classFiscal
+      	,b.observacao
+      	,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allCfopValues">
+  		#{cfop},
+  		#{natureza},
+    	#{simplificado},
+    	#{cfopTypeEnumValue},
+    	#{icms},
+    	#{icmsReduzido},
+    	#{margemAgregadaST},
+    	#{cstPrincipal},
+    	#{classFiscal},
+    	#{observacao},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertCfop" parameterType="Cfop" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO cfop (
+		<include refid="allCfopColumns" />
+      )
+    VALUES (<include refid="allCfopValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateCfop" parameterType="Cfop">
+    UPDATE cfop
+    	<set>
+    		<if test="cfop!= null">cfop = #{cfop},</if>
+	    	<if test="natureza!= null"> natureza=#{natureza},</if>
+	    	<if test="simplificado!= null"> simplificado=#{simplificado},</if>
+	    	<if test="cfopTypeEnumValue!= null"> cfopTypeEnum=#{cfopTypeEnumValue},</if>
+	    	<if test="icms!= null"> icms=#{icms},</if>
+	    	<if test="icmsReduzido!= null"> icmsReduzido=#{icmsReduzido},</if>
+	    	<if test="margemAgregadaST!= null"> margemAgregadaST=#{margemAgregadaST},</if>
+	    	<if test="cstPrincipal!= null"> cstPrincipal=#{cstPrincipal},</if>
+	    	<if test="classFiscal != null"> classFiscal= #{classFiscal},</if>
+	    	<if test="observacao!= null"> observacao=#{observacao},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteCfopById" parameterType="Integer">
+    	DELETE FROM cfop WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchCfopRowCount" parameterType="CfopInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM cfop
+     WHERE 2 = 2
+     <if test="criteria.id != null">
+		  AND id = #{criteria.id}
+	 </if>
+  </select>
+
+  <select id="fetchAllCfops" resultMap="cfopResult">
+    SELECT
+	<include refid="allCfopColumns" />
+    FROM cfop ORDER BY name ASC
+  </select>
+
+  <select id="fetchCfopById" parameterType="Integer" resultMap="cfopResult">
+		SELECT *
+        FROM cfop
+     WHERE id=#{id}
+  </select>
+
+  <select id="fetchAllCfopsByRequest" parameterType="CfopInquiryRequest" resultMap="cfopResult">
+	SELECT * FROM
+    			(
+    				SELECT
+    						<include refid="allCfopColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM cfop b
+					WHERE 2 = 2
+					<if test="criteria.id != null">
+						AND b.id = #{criteria.id}
+					</if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+  <select id="fetchCfopByProduto" parameterType="Integer" resultMap="cfopResult">
+	  	SELECT F.*
+
+		  FROM porcaoProd AS C
+
+		  INNER JOIN porcao AS F
+
+		    ON F.id like C.Porcaoid
+		where  c.prodId = #{id}
+  </select>
+
+  <select id="fetchCfopByPessoa" parameterType="Integer" resultMap="cfopPessoaResult">
+	 SELECT b.id,<include refid="allCfopPessoaColumns" />
+        FROM CfopParentId b
+     WHERE 1 = 1
+		  AND b.parentid = #{id}
+  </select>
+
+    <select id="fetchCfopByProd" parameterType="Integer" resultMap="cfopPessoaResult">
+	 SELECT b.id,<include refid="allCfopPessoaColumns" />
+        FROM CfopParentId b
+     WHERE 1 = 1
+		  AND b.parentid = #{id}
+  </select>
+
+
+</mapper>

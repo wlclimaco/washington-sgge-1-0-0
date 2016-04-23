@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CstMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+  <resultMap id="cstResult" type="Cst" >
+    <result property="id" column="id" />
+    <result property="codigo" column="codigo" />
+   	<result property="descricao" column="descricao"/>
+   	<result property="valor" column="valor"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allCstColumns">
+		 b.codigo
+		,b.descricao
+		,b.valor
+      	,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allCstValues">
+  		#{codigo},
+  		#{descricao},
+  		#{valor},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertCst" parameterType="Cst" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO cst (
+		<include refid="allCstColumns" />
+      )
+    VALUES (<include refid="allCstValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateCst" parameterType="Cst">
+    UPDATE cst
+    	<set>
+    		<if test="codigo!= null">codigo = #{codigo},</if>
+	    	<if test="descricao!= null"> descricao=#{descricao},</if>
+	    	<if test="valor!= null"> valor=#{valor},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteCstById" parameterType="Integer">
+    	DELETE FROM cst WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchCstRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM cst
+     WHERE 1 = 1
+     <if test="id != null">
+		  AND id = #{id}
+	 </if>
+  </select>
+
+  <select id="fetchAllCsts" resultMap="cstResult">
+    SELECT
+	<include refid="allCstColumns" />
+    FROM cst ORDER BY id ASC
+  </select>
+
+  <select id="fetchCstById" parameterType="FetchByIdRequest" resultMap="cstResult">
+	SELECT b.id,
+	<include refid="allCstColumns" />
+    FROM cst b
+    where id = #{id}
+    ORDER BY id ASC
+  </select>
+
+  <select id="fetchAllCstsByRequest" parameterType="PagedInquiryRequest" resultMap="cstResult">
+	 SELECT b.id,<include refid="allCstColumns" />
+        FROM cst b
+     WHERE 1 = 1
+     <if test="id != null">
+		  AND b.id = #{id}
+	 </if>
+  </select>
+
+  <select id="fetchCstByProduto" parameterType="Integer" resultMap="cstResult">
+	  	SELECT F.*
+
+		  FROM cstProd AS C
+
+		  INNER JOIN cst AS F
+
+		    ON F.id like C.cstId
+		where  c.prodId = #{id}
+  </select>
+
+
+</mapper>

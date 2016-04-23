@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FuncionarioMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly.
+       -->
+
+   <resultMap id="funcionarioResult" type="Funcionario" extends="PessoaMap.PessoaResult">
+	<collection property="salarios" column="id" select="SalarioMap.fetchSalarioById"/>
+	<collection property="horarios" column="id" select="HoraFuncMap.fetchHoraFuncById"/>
+	<collection property="beneficios" column="id" select="BeneficiosMap.fetchFuncByBeneficios"/>
+	<collection property="eventosList" column="id" select="EventoMap.fetchFuncByEvento"/>
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allFuncionarioColumns">
+	     matricula
+      	,dataAdmin
+      	,cdEmpr
+		,nome
+		,type
+		,sexo
+		,dataNasc
+		,nomePai
+		,nomeMae
+		,nomeConjugue
+		,processId
+		,estadoCivil
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allFuncionarioValues">
+  		#{matricula},
+  		#{dataAdm},
+    	#{cdEmpr},
+    	#{nome},
+    	#{pessoaTypeEnumValue},
+    	#{sexo},
+    	#{dataNasc},
+  		#{nomePai},
+    	#{nomeMae},
+    	#{nomeConjugue},
+    	#{estadoCivil},
+    	#{processId},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertFuncionario" parameterType="Funcionario" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO pessoa (
+		<include refid="allFuncionarioColumns" />
+      )
+    VALUES (<include refid="allFuncionarioValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateFuncionario" parameterType="Funcionario">
+    UPDATE pessoa
+    	<set>
+    		<if test="emprId!= null">emprId = #{emprId},</if>
+	  		<if test="nome!= null">nome = #{nome},</if>
+	  		<if test="pessoaTypeEnumValue!= null">type = #{pessoaTypeEnumValue},</if>
+	  		<if test="sexo!= null">sexo = #{sexo},</if>
+	  		<if test="datanasc!= null">datanasc = #{datanasc},</if>
+	  		<if test="nomePai!= null">nomePai = #{nomePai},</if>
+	  		<if test="nomeMae!= null">nomeMae = #{nomeMae},</if>
+	  		<if test="nomeConjugue!= null">nomeConjugue = #{nomeConjugue},</if>
+	  		<if test="estadoCivil!= null">estadoCivil = #{estadoCivil},</if>
+	  		<if test="tipoPessoa!= null">tipoPessoa = #{tipoPessoa},</if>
+	  		<if test="matricula!= null">matricula = #{matricula},</if>
+	  		<if test="dataAdm!= null">dataAdm = #{dataAdm},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteFuncionarioById" parameterType="Integer">
+    	DELETE FROM pessoa WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchFuncionarioRowCount" parameterType="FuncionarioInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM pessoa where 1 = 1 and type = 3
+     <if test="criteria.emprId != null">
+		  AND cdEmpr = #{criteria.emprId}
+	 </if>
+  </select>
+
+  <select id="fetchAllFuncionarios" resultMap="funcionarioResult">
+    SELECT
+	<include refid="allFuncionarioColumns" />
+    FROM pessoa b where type = 3 ORDER BY id ASC
+  </select>
+
+  <select id="fetchFuncionarioById" parameterType="FetchByIdRequest" resultMap="funcionarioResult">
+	SELECT
+					id,	<include refid="allFuncionarioColumns" />
+ 				   FROM pessoa
+					where id = #{fetchId}
+  </select>
+
+  <select id="fetchAllFuncionariosByRequest" parameterType="FuncionarioInquiryRequest" resultMap="funcionarioResult">
+		SELECT * FROM ( SELECT id,
+    						<include refid="allFuncionarioColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM pessoa b
+						where  type = 3
+					<if test="criteria.emprId != null">
+						AND cdEmpr = #{criteria.emprId}
+					</if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+
+</mapper>

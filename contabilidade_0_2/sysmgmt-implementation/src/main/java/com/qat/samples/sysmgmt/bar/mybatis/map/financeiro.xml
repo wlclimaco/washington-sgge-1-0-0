@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FinanceiroMap">
+  <resultMap id="financeiroResult" type="Financeiro" >
+    <result property="id" column="id" />
+    <result property="numero" column="numero" />
+    <result property="parcela" column="parcela"/>
+	<result property="dataEmissao" column="dataEmissao"/>
+	<result property="dataVencimento" column="dataVencimento"/>
+	<result property="docId" column="docId"/>
+	<result property="observacao" column="observacao"/>
+	<result property="valor" column="valor"/>
+	<result property="emprId" column="emprId"/>
+	<result property="financeiroEnumValue" column="financeiroEnum"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	<association property="fornecedor"    column="fornecedor" select="RegimeMap.fetchRegimeByEmpresa"  />
+	<association property="cliente"    column="cliente" select="RegimeMap.fetchRegimeByEmpresa"  />
+	<association property="notaFiscalEntrada"    column="notaFiscalEntrada" select="RegimeMap.fetchRegimeByEmpresa"  />
+	<association property="notaFiscalSaida"    column="notaFiscalSaida" select="RegimeMap.fetchRegimeByEmpresa"  />
+	<collection property="listBaixa" column="id" select="NoteMap.fetchNoteByNotes"/>
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allFinanceiroColumns">
+		 numero
+		,parcela
+		,dataEmissao
+      	,dataVencimento
+		,docId
+		,observacao
+      	,valor
+		,emprId
+      	,financeiroEnum	
+		,fornecedor
+      	,cliente
+		,notaFiscalEntrada
+      	,notaFiscalSaida		
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allFinanceiroValues">
+  		#{numero},
+  		#{parcela},
+  		#{dataEmissao},
+    	#{dataVencimento},
+		#{docId},
+  		#{observacao},
+  		#{valor},
+    	#{emprId},
+		#{financeiroEnumValue},
+  		#{fornecedor.id},
+  		#{cliente.id},
+    	#{notaFiscalEntrada.id},
+		#{notaFiscalSaida.id},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertFinanceiro" parameterType="Financeiro" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO financeiro (
+		<include refid="allFinanceiroColumns" />
+      )
+    VALUES (<include refid="allFinanceiroValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateFinanceiro" parameterType="Financeiro">
+    UPDATE financeiro
+    	<set>
+			<if test="numero != null">numero = #{numero},</if>
+			<if test="parcela != null">parcela = #{parcela},</if>
+			<if test="dataEmissao != null">dataEmissao = #{dataEmissao},</if>
+			<if test="dataVencimento != null">dataVencimento = #{dataVencimento},</if>
+			<if test="docId != null">docId = #{docId},</if>
+			<if test="observacao != null">observacao = #{observacao},</if>
+			<if test="valor != null">valor = #{valor},</if>
+			<if test="emprId != null">emprId = #{emprId},</if>
+			<if test="financeiroEnumValue != null">financeiroEnum = #{financeiroEnumValue},</if>
+			<if test="fornecedor.id != null">fornecedor = #{fornecedor.id},</if>
+			<if test="cliente.id != null">cliente = #{cliente.id},</if>
+			<if test="notaFiscalEntrada.id != null">notaFiscalEntrada = #{notaFiscalEntrada.id},</if>
+			<if test="notaFiscalSaida.id != null">notaFiscalSaida = #{notaFiscalSaida.id},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteFinanceiroById" parameterType="Integer">
+    	DELETE FROM financeiro WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchFinanceiroRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM financeiro
+     WHERE 2 = 2
+     <if test="emprId != null">
+		  AND emprId = #{emprId}
+	 </if>
+	 <if test="userId != null">
+		  AND userId = #{userId}
+	 </if>
+  </select>
+
+  <select id="fetchAllFinanceiro" resultMap="financeiroResult">
+    SELECT id
+	<include refid="allFinanceiroColumns" />
+    FROM financeiro b ORDER BY data ASC
+  </select>
+
+  <select id="fetchFinanceiroById" parameterType="FetchByIdRequest" resultMap="financeiroResult">
+		 SELECT id
+			<include refid="allFinanceiroColumns" />
+		    FROM financeiro b  where id= #{id} ORDER BY data ASC
+  </select>
+
+  <select id="fetchAllFinanceirosByRequest" parameterType="PagedInquiryRequest" resultMap="financeiroResult">
+	     SELECT * FROM financeiro
+		     WHERE 2 = 2
+			     <if test="emprId != null">
+					  AND emprId = #{emprId}
+				 </if>
+				 <if test="userId != null">
+					  AND userId = #{userId}
+				 </if>
+  </select>
+
+  <select id="fetchAllFinanceiroByOrdemServico" parameterType="Integer" resultMap="financeiroResult">
+	     SELECT * FROM financeiro
+		     WHERE idOrdemServico = #{id} order by data
+  </select>
+
+<select id="fetchStatusByOrdem" parameterType="Integer" resultMap="ordemServicoStatusResult">
+		 SELECT *
+		    FROM ordemServicoStatus where id= #{id} ORDER BY data ASC
+  </select>
+
+</mapper>

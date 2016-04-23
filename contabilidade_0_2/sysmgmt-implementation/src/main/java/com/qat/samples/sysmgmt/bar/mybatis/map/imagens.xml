@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ImagemMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!--
+  	private String local;
+
+	private String nome;
+
+	private Integer fotoId;
+	 id;
+	private Boolean principal;
+	private TabelaEnum tabelaEnum;
+	private Integer emprId;
+	private Integer parentId;
+    -->
+
+  <resultMap id="imagemResult" type="Imagem" >
+	<result property="id" column="id"/>
+	<result property="local"  column="local"/>
+	 <result property="tabelaEnumValue" column="tabelaEnum" />
+    <result property="nome" column="nome"/>
+    <result property="fotoId" column="fotoId"/>
+    <result property="principal" column="principal"/>
+    <result property="emprId" column="emprId"/>
+    <result property="parentId" column="parentId"/>
+    <result property="processId" column="processId"/>
+   	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+  </resultMap>
+
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allImagemColumns">
+	local
+	,tabelaEnum
+    ,nome
+    ,fotoId
+    ,principal
+    ,emprId
+    ,parentId
+    ,processId
+   	,create_user
+	,create_date
+	,modify_user
+	,modify_date
+  </sql>
+
+  <sql id="allImagemValues">
+  		#{local},
+		#{tabelaEnumValue},
+    	#{nome},
+    	#{fotoId},
+   		#{principal},
+    	#{emprId},
+    	#{parentId},
+    	#{processId},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <select id="fetchImagemRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM imagem
+        where 1 = 1
+
+  </select>
+
+<insert id="insertImagem" parameterType="Imagem" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO imagem (
+		 <include refid="allImagemColumns" />
+      )
+    VALUES (<include refid="allImagemValues" /> )
+  </insert>
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateImagem" parameterType="Imagem">
+    UPDATE imagem
+    	<set>
+    		<if test="dataInicio!= null">dataInicio = #{dataInicio},</if>
+	    	<if test="dataFinal!= null"> dataFinal=#{dataFinal},</if>
+	    	<if test="descricao!= null"> descricao=#{descricao},</if>
+	    	<if test="numeroContrato!= null"> numeroContrato=#{numeroContrato},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+    id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteImagemById" parameterType="Integer">
+    	DELETE FROM imagem WHERE id = #{id}
+  </delete>
+  <select id="fetchAllImagems" resultMap="imagemResult">
+    SELECT
+	<include refid="allImagemColumns" />
+    FROM imagem ORDER BY id ASC
+  </select>
+
+  <select id="fetchImagemById" parameterType="FetchByIdRequest" resultMap="imagemResult">
+    			   SELECT
+					id,	<include refid="allImagemColumns" />
+ 				   FROM imagem
+					where id = #{id}
+  </select>
+
+    <select id="fetchImagemByPlano" resultMap="imagemResult">
+    			   SELECT
+					id,	<include refid="allImagemColumns" />
+ 				   FROM imagem
+					where parentId = #{id} and tabelaEnum = 53
+  </select>
+
+
+ <select id="fetchAllImagemsByRequest" parameterType="PagedInquiryRequest" resultMap="imagemResult">
+    SELECT * FROM
+    			(
+    				SELECT id,
+    						<include refid="allImagemColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM imagem
+					WHERE 2 = 2
+
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+</mapper>

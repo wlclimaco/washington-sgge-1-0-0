@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UsuarioMap">
+
+
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. id codigo, usuario, descricao, abreviado -->
+
+  <resultMap id="usuarioResult" type="Usuario">
+    <result property="id" column="id" />
+    <result property="parentId" column="parentId" />
+    <result property="processId" column="processId" />
+   	<result property="login" column="login"/>
+   	<result property="senha" column="senha" />
+   	<result property="pergunta" column="pergunta"/>
+   	<result property="role" column="role"/>
+   	<result property="language" column="language"/>
+   	<result property="ultAcesso" column="ultAcesso"/>
+   	<result property="tabelaEnumValue" column="tabela"/>
+    <result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByUsuario"/>
+  </resultMap>
+
+  <!--
+pare
+private String login;
+
+	private String senha;
+
+	private String pergunta;
+
+	private String role;
+
+	private String language;
+
+	private Long ultAcesso;
+
+	private List<Email> emails;
+	-->
+  <sql id="allUsuarioColumns">
+		parentId,
+		processId,
+		login,
+		senha,
+		pergunta,
+		role,
+		language,
+		ultAcesso,
+		tabela
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allUsuarioValues">
+  		#{parentId},
+		#{processId},
+		#{login},
+		#{senha},
+		#{pergunta},
+		#{role},
+		#{language},
+		#{ultAcesso},
+		#{tabelaEnumValue},
+		<include refid="CBOFMap.changeControlFields"/>
+
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertUsuario" parameterType="Usuario" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO usuario (<include refid="allUsuarioColumns" />
+      )
+    VALUES (<include refid="allUsuarioValues" /> )
+  </insert>
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateUsuario" parameterType="Usuario">
+    UPDATE usuario
+    	<set>
+    		<if test="nome!= null">usuario = #{nome},</if>
+    		<if test="codigo!= null">codigo = #{codigo},</if>
+	    	<if test="cdIBGE!= null"> IBGE=#{cdIBGE},</if>
+	    	<if test="estado.id!= null"> estado=#{estado.id},</if>
+	    	<if test="cep!= null"> cep=#{cep},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+    id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteUsuarioById" parameterType="Usuario">
+    	DELETE FROM usuario WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchUsuarioRowCount" parameterType="UsuarioInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM usuario
+
+
+  </select>
+
+  <select id="fetchAllUsuarios" resultMap="usuarioResult">
+    SELECT
+	<include refid="allUsuarioColumns" />
+    FROM usuario ORDER BY name ASC
+  </select>
+
+  <select id="fetchUsuarioById" parameterType="Integer" resultMap="usuarioResult">
+    			   SELECT id,
+						<include refid="allUsuarioColumns" />
+					FROM usuario where id= #{id} ORDER BY id ASC
+  </select>
+
+
+
+  <select id="fetchUsuarioByEmpresa" parameterType="Integer" resultMap="usuarioResult">
+    			   SELECT id,
+						<include refid="allUsuarioColumns" />
+					FROM usuario  where id= #{id} ORDER BY id ASC
+  </select>
+
+  <select id="fetchAllUsuariosByRequest" parameterType="UsuarioInquiryRequest" resultMap="usuarioResult">
+    SELECT * FROM
+    			(
+    				SELECT id,
+    						<include refid="allUsuarioColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM usuario b
+    				<if test="criteria.id != null">
+							where id = #{criteria.id}
+					</if>
+
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+</mapper>

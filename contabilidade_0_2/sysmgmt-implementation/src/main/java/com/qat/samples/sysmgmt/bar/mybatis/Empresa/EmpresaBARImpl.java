@@ -144,6 +144,40 @@ private static final String STMT_DELETE_USUARIO = NAMESPACE_USUARIO + "deleteUsu
 	private static final String STMT_FETCH_USUARIO_ALL_REQUEST = NAMESPACE_USUARIO + "fetchAllUsuariosRequest";
 
 //===================================### EMPRESA ####======================================
+
+/** The endereco dac. */
+	IEnderecoBAR enderecoBAR;
+
+	ICidadeBAR cidadeBAR;
+
+	/** The telefone dac. */
+	ITelefoneBAR telefoneBAR;
+
+	/** The email dac. */
+	IEmailBAR emailBAR;
+
+	/** The socio dac. */
+	ISociosBAR socioBAR;
+
+	/** The cnae dac. */
+	ICnaeBAR cnaeBAR;
+
+	/** The documento dac. */
+	IDocumentoBAR documentoBAR;
+
+	/** The historico dac. */
+	IHistoricoBAR historicoBAR;
+
+	/** The status dac. */
+	IStatusBAR statusBAR;
+
+	IPlanoBAR planoBAR;
+
+	IUsuarioBAR usuarioBAR;
+
+	INoteBAR noteBAR;
+	
+	
 	/**
 /*
  * (non-Javadoc)
@@ -152,8 +186,85 @@ private static final String STMT_DELETE_USUARIO = NAMESPACE_USUARIO + "deleteUsu
 @Override
 public InternalResponse insertEmpresa(Empresa county)
 {
+	Integer historicoId = 0;
+	Integer insertCount = 0;
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_EMPRESA, county, response);
+	
+	if (empresa.getModelAction() == PersistanceActionEnum.INSERT)
+		{
+			// First insert the root
+			// Is successful the unique-id will be populated back into the object.
+			insertCount = MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_EMPRESA, county, response);
+
+			historicoId =
+					HistoricoDACD.inserthistorico(empresa.getId(), empresa.getId(), empresa.getUserId(), response,
+							TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoDAC);
+
+			empresa.setProcessId(historicoId);
+
+			insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, empresa, response);
+
+			historicoId =
+					HistoricoDACD.inserthistoricoItens(empresa.getId(), empresa.getUserId(), response,
+							TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoId, getHistoricoDAC());
+
+			//EmailUtilDACD.maintainEmailEnviar();
+			//GerarTarefaDACD.maintainGerarTarefas();
+			//GerarFinanceiroDACD.maintainGerarFinanceiro();
+
+		}
+		else
+		{
+			historicoId = empresa.getProcessId();
+		}
+		if (!ValidationUtil.isNullOrEmpty(empresa.getSocios()))
+		{
+			insertCount +=
+					SociosDACD.maintainSocioAssociations(empresa.getSocios(), response, empresa.getId(), null, null,
+							TabelaEnum.EMPRESA, getSocioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							empresa.getCreateUser(), historicoId, historicoId, getDocumentoDAC());
+
+		}
+		if (!ValidationUtil.isNullOrEmpty(empresa.getPlanoList()))
+		{
+			insertCount +=
+					PlanoDACD.maintainPlanoAssociations(empresa.getPlanoList(), response, empresa.getId(), null, null,
+							TabelaEnum.EMPRESA, getPlanoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							empresa.getCreateUser(), historicoId, historicoId);
+		}
+
+		if (!ValidationUtil.isNullOrEmpty(empresa.getUsuarioList()))
+		{
+			insertCount +=
+					UsuarioDACD.maintainUsuarioAssociations(empresa.getUsuarioList(), response, empresa.getId(), null,
+							null,
+							TabelaEnum.EMPRESA, getUsuarioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							empresa.getCreateUser(), historicoId, historicoId);
+		}
+
+		if (!ValidationUtil.isNullOrEmpty(empresa.getContaCorrenteList()))
+		{
+			insertCount +=
+					ContaCorrenteBARD.maintainUsuarioAssociations(empresa.getUsuarioList(), response, empresa.getId(), null,
+							null,
+							TabelaEnum.EMPRESA, getUsuarioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							empresa.getCreateUser(), historicoId, historicoId);
+		}
+
+		insertCount += EmpresaBAR.maintainInsertEntidade(empresa, historicoId, historicoId, TabelaEnum.EMPRESA, response);
+
+		if (response.isInError())
+		{
+			return response;
+		}
+
+		// Finally, if something was inserted then add the Empresa to the result.
+		if (insertCount > 0)
+		{
+			response.addResult(empresa);
+		}
+
+		return response;
 	return response;
 }
 

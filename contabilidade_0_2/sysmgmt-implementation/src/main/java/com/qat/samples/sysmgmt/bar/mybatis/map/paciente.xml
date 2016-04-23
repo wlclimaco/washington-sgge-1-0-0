@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PacienteMap">
+
+		<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+	-->
+
+   <resultMap id="pacienteResult" type="Paciente" extends="PessoaMap.PessoaResult">
+		<collection property="planoSaudeList" column="id" select="PlanoSaudeMap.fetchPlanoSaudeByPessoa"/>
+		<collection property="consultaList" column="id" select="ConsultaMap.fetchAllConsultaByMedico"/>
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allPacienteColumns">
+		<include refid="PessoaMap.allPessoaColumns"/>
+  </sql>
+
+  <sql id="allPacienteValues">
+  		<include refid="PessoaMap.allPessoaValues"/>
+  </sql>
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchPacienteRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM pessoa where type = 8
+
+  </select>
+
+  <select id="fetchAllPacientes" resultMap="pacienteResult">
+    SELECT
+	<include refid="allPacienteColumns" />
+    FROM pessoa ORDER BY nome ASC
+  </select>
+
+  <select id="fetchPacienteById" parameterType="FetchByIdRequest" resultMap="pacienteResult">
+    			   SELECT
+					b.id,	<include refid="allPacienteColumns" />
+ 				   FROM pessoa b
+					where b.id = #{id}
+  </select>
+
+   <select id="fetchPacienteByNota" parameterType="Integer" resultMap="pacienteResult">
+    			   SELECT
+					b.id,	<include refid="allPacienteColumns" />
+ 				   FROM pessoa b
+					where b.id = #{id}
+  </select>
+
+  <select id="fetchAllPacientesByRequest" parameterType="PagedInquiryRequest" resultMap="pacienteResult">
+     SELECT * FROM ( SELECT b.id,
+    						<include refid="allPacienteColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM pessoa b
+						where b.type = 8
+
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+</mapper>

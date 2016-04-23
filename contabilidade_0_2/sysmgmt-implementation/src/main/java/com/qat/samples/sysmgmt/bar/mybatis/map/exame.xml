@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ExameMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- private Integer id;
+
+	/** The type of an account. */
+	private String nome;
+
+	private Integer dataExame;
+
+	private String medicoResponsavel;
+
+	private String laboratorio;
+
+	private List<Arquivo> arquivoList;
+
+	private List<Imagem> imagemList;-->
+	  <resultMap id="exameResult" type="Exame" >
+		<result property="id" column="id" />
+		<result property="nome" column="nome" />
+		<result property="dataExame" column="dataExame" />
+		<result property="medicoResponsavel" column="medicoResponsavel" />
+		<result property="laboratorio" column="laboratorio" />
+	   	<result property="createUser" column="create_user"/>
+		<result property="createDataUTC" column="create_date"/>
+		<result property="modifyUser" column="modify_user"/>
+		<result property="modifyDataUTC" column="modify_date"/>
+	<!--	<collection property="arquivoList" column="id" select="CnaeMap.fetchAllHorariosByMedico"/>
+		<collection property="imagemList" column="id" select="CnaeMap.fetchAllHorariosByMedico"/>-->
+      </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allExameColumns">
+		nome,
+		dataExame,
+		medicoResponsavel,
+		laboratorio,
+      	create_date,
+      	create_user,
+      	modify_date,
+      	modify_user
+  </sql>
+
+  <sql id="allExameValues">
+  		#{nome},
+  		#{dataExame},
+  		#{medicoResponsavel},
+  		#{laboratorio},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertExame" parameterType="Exame" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO exame (
+		<include refid="allExameColumns" />
+      )
+    VALUES (<include refid="allExameValues" /> )
+  </insert>
+
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateExame" parameterType="Exame">
+    UPDATE exame
+    	<set>
+    		<if test="nome!= null">nome = #{nome},</if>
+    		<if test="dataExame!= null">dataExame = #{dataExame},</if>
+    		<if test="medicoResponsavel!= null">medicoResponsavel = #{medicoResponsavel},</if>
+    		<if test="laboratorio!= null">laboratorio = #{laboratorio},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteExameById" parameterType="Integer">
+    	DELETE FROM exame WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchExameRowCount" parameterType="ExameInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM exame
+     WHERE 1=1
+     <if test="criteria.id != null">
+		  AND id = #{criteria.id}
+	 </if>
+  </select>
+
+  <select id="fetchAllExames" resultMap="exameResult">
+    SELECT id
+	<include refid="allExameColumns" />
+    FROM exame b ORDER BY id ASC
+  </select>
+
+  <select id="fetchExameById" parameterType="FetchByIdRequest" resultMap="exameResult">
+	SELECT
+		<include refid="allExameColumns" />
+        FROM exame
+     WHERE id = #{fetchId}
+
+  </select>
+
+  <select id="fetchAllExamesByRequest" parameterType="ExameInquiryRequest" resultMap="exameResult">
+	   SELECT * FROM
+    			(
+    				SELECT
+    						<include refid="allExameColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM exame b
+					WHERE 2 = 2
+					<if test="criteria.id != null">
+						AND id = #{criteria.id}
+					</if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+<select id="fetchAllExameByConsulta" parameterType="Integer" resultMap="exameResult">
+	SELECT
+		<include refid="allExameColumns" />
+        FROM exame
+     WHERE 1=1 and id= #{id}
+
+  </select>
+</mapper>

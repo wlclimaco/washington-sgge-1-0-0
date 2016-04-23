@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GrupoMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+ <resultMap id="grupoResult" type="Grupo" >
+    <result property="id" column="id" />
+    <result property="descricao" column="descricao" />
+   	<result property="grupo" column="grupo"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	<association property="subGrupo"    column="subGrupoId" select="SubGrupoMap.fetchSubGrupoByGrupo"  />
+  </resultMap>
+
+
+   <resultMap id="grupoProdResult" type="GrupoProd" >
+    <result property="id" column="id" />
+    <result property="parentId" column="prodId" />
+   	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	<association property="grupoId"    column="grupoId" select="fetchGrupoById"  />
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+	 <sql id="allGrupoProdColumns">
+		 prodId
+		,processId
+		,grupoId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allGrupoProdValues">
+  		#{parentId},
+  		#{processId},
+  		#{grupoId.id},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <sql id="allGrupoColumns">
+		 descricao
+		,grupo
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allGrupoValues">
+  		#{descricao},
+  		#{grupo},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertGrupo" parameterType="Grupo" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO grupo (
+		<include refid="allGrupoColumns" />
+      )
+    VALUES (<include refid="allGrupoValues" /> )
+  </insert>
+
+   <insert id="insertGrupoProd" parameterType="GrupoProd" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO grupoProd (
+		<include refid="allGrupoProdColumns" />
+      )
+    VALUES (<include refid="allGrupoProdValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateGrupo" parameterType="Grupo">
+    UPDATE grupo
+    	<set>
+    		<if test="descricao!= null">descricao = #{descricao},</if>
+	    	<if test="nome!= null"> nome=#{nome},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+  <update id="updateGrupoProd" parameterType="Grupo">
+    UPDATE grupoProd
+    	<set>
+    		<if test="parentId!= null">prodId = #{parentId},</if>
+	    	<if test="grupoId.id!= null"> grupoId=#{grupoId.id},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteGrupoById" parameterType="Integer">
+    	DELETE FROM grupo WHERE id = #{id}
+  </delete>
+
+  <delete id="deleteGrupoProdById" parameterType="Integer">
+    	DELETE FROM grupoProd WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchGrupoRowCount" parameterType="GrupoInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM grupo
+     WHERE 1 = 1
+     <if test="criteria.id != null">
+		  AND id = #{criteria.id}
+	 </if>
+  </select>
+
+  <select id="fetchAllGrupos" resultMap="grupoResult">
+    SELECT
+	<include refid="allGrupoColumns" />
+    FROM grupo ORDER BY grupo ASC
+  </select>
+
+  <select id="fetchGrupoById" parameterType="FetchByIdRequest" resultMap="grupoResult">
+	SELECT id,
+	<include refid="allGrupoColumns" />
+    FROM grupo b
+    where id = #{id}
+    ORDER BY grupo ASC
+  </select>
+
+  <select id="fetchAllGruposByRequest" parameterType="GrupoInquiryRequest" resultMap="grupoResult">
+	 SELECT * FROM
+    			(
+    				SELECT
+    						<include refid="allGrupoColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM grupo b
+					WHERE 2 = 2
+					<if test="criteria.id != null">
+						AND id = #{criteria.id}
+					</if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+  <select id="fetchGrupoByProduto" parameterType="Integer" resultMap="grupoProdResult">
+	SELECT id,
+	<include refid="allGrupoProdColumns" />
+    FROM grupoProd b
+    where prodId = #{id}
+    ORDER BY id ASC
+  </select>
+
+
+</mapper>

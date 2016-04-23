@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FornecedorMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+	-->
+
+	<resultMap id="fornecedorResult" type="Fornecedor" extends="PessoaMap.PessoaResult">
+ 		<collection property="listCfops" column="id" select="CfopMap.fetchCfopByPessoa"/>
+
+  </resultMap>
+
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allFornecedorColumns">
+		 cdEmpr
+		,nome
+		,type
+		,sexo
+		,dataNasc
+		,nomePai
+		,nomeMae
+		,nomeConjugue
+		,estadoCivil
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allFornecedorValues">
+  		#{emprId},
+  		#{nome},
+  		#{pessoaTypeEnumValue},
+  		#{sexo},
+  		#{dataNasc},
+  		#{nomePai},
+  		#{nomeMae},
+  		#{nomeConjugue},
+  		#{estadoCivil},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchFornecedorRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM pessoa
+
+  </select>
+
+  <select id="fetchAllFornecedors" resultMap="fornecedorResult">
+    SELECT
+	<include refid="allFornecedorColumns" />
+    FROM pessoa ORDER BY nome ASC
+  </select>
+
+  <select id="fetchFornecedorById" parameterType="FetchByIdRequest" resultMap="fornecedorResult">
+    			   SELECT
+					id,	<include refid="allFornecedorColumns" />
+ 				   FROM pessoa
+					where id = #{fetchId}
+  </select>
+
+    <select id="fetchFornecedorByNota" parameterType="Integer" resultMap="fornecedorResult">
+    			   SELECT
+					id,	<include refid="allFornecedorColumns" />
+ 				   FROM pessoa b
+					where id = #{id}
+  </select>
+
+  <select id="fetchAllFornecedorsByRequest" parameterType="PagedInquiryRequest" resultMap="fornecedorResult">
+     SELECT * FROM ( SELECT id,
+    						<include refid="allFornecedorColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM pessoa b
+						where 1 = 1
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+</mapper>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EntidadeMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. [id]           [int] NOT NULL,
+	[nome]         [varchar](100) NULL,
+	[regime]       [int] NULL,
+	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,-->
+
+  <resultMap id="entidadeResult" type="Entidade">
+    <result property="id" column="id" />
+    <result property="nome" column="nome" />
+    <result property="processId" column="processId" />
+    <result property="entidadeId" column="entidadeId" />
+    <result property="emprId" column="emprId" />
+	<result property="entidadeEnumValue" column="entidadeEnum" />
+    <result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+    <association property="regime"    column="regime" select="RegimeMap.fetchRegimeByEmpresa"  />
+   	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByEmpresaId"/>
+	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByEmpresa"/>
+	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByEmpresa"/>
+	<collection property="cnaes" column="id" select="CnaeMap.fetchAllCnaesByEmpresa"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
+	<collection property="notes" column="id" select="NoteMap.fetchNoteByNotes"/>
+  </resultMap>
+
+
+  <resultMap id="entidadeTableResult" type="Entidade">
+    <result property="id" column="id" />
+    <result property="nome" column="nome" />
+    <result property="processId" column="processId" />
+    <result property="entidadeId" column="entidadeId" />
+    <result property="emprId" column="emprId" />
+	<result property="entidadeEnumValue" column="entidadeEnum" />
+    <result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+    <association property="regime"    column="regime" select="RegimeMap.fetchRegimeByEmpresa"  />
+   	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByEmpresaId"/>
+	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByEmpresa"/>
+	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByEmpresa"/>
+	<collection property="cnaes" column="id" select="CnaeMap.fetchAllCnaesByEmpresa"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allEntidadeColumns">
+		 nome
+		,regime
+		,processId
+		,entidadeId
+		,entidadeEnum
+		,emprId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allEntidadeValues">
+  		#{nome},
+  		#{regime.id},
+  		#{processId},
+  		#{entidadeId},
+  		#{entidadeEnumValue},
+  		#{emprId},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+    <insert id="insertEntidade" parameterType="Entidade" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO entidade (
+		<include refid="allEntidadeColumns" />
+      )
+    VALUES (<include refid="allEntidadeValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateEntidade" parameterType="Entidade">
+    UPDATE entidade
+    	<set>
+    		<if test="nome!= null">nome = #{nome},</if>
+	    	<if test="regime!= null"> regime=#{regime.id},</if>
+	    	<if test="entidadeId!= null">entidadeId = #{entidadeId},</if>
+	    	<if test="entidadeEnumValue!= null"> entidadeEnum=#{entidadeEnumValue},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteEntidadeById" parameterType="Integer">
+    	DELETE FROM entidade WHERE id = #{id}
+  </delete>
+
+
+
+</mapper>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PorcaoMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- private Integer id;
+
+	private Integer idproduto;
+
+	/** The type of an account. */
+	private PorcaoItem porcaoItens;
+
+	private Double valor;
+       -->
+
+  <resultMap id="porcaoResult" type="Porcao" >
+    <result property="id" column="id" />
+    <result property="idproduto" column="prodId" />
+   	<result property="valor" column="valor"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+    <collection property="porcaoItens" column="id" select="PorcaoItemMap.fetchPorcaoItemByPorcao"/>
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allPorcaoColumns">
+		 b.prodId
+		,b.idporcaoItens
+		,b.valor
+      	,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allPorcaoValues">
+  		#{prodId},
+  		#{idporcaoItens},
+  		#{valor},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertPorcao" parameterType="Porcao" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO porcao (
+		<include refid="allPorcaoColumns" />
+      )
+    VALUES (<include refid="allPorcaoValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updatePorcao" parameterType="Porcao">
+    UPDATE porcao
+    	<set>
+    		<if test="prodId!= null">prodId = #{prodId},</if>
+	    	<if test="idporcaoItens!= null">idporcaoItens=#{idporcaoItens},</if>
+	    	<if test="valor!= null"> valor=#{valor},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deletePorcaoById" parameterType="Integer">
+    	DELETE FROM porcao WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchPorcaoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM porcao
+     WHERE 1 = 1
+     <if test="id != null">
+		  AND id = #{id}
+	 </if>
+  </select>
+
+  <select id="fetchAllPorcaos" resultMap="porcaoResult">
+    SELECT
+	<include refid="allPorcaoColumns" />
+    FROM porcao ORDER BY id ASC
+  </select>
+
+  <select id="fetchPorcaoById" parameterType="FetchByIdRequest" resultMap="porcaoResult">
+	SELECT b.id,
+	<include refid="allPorcaoColumns" />
+    FROM porcao b
+    where id = #{id}
+    ORDER BY id ASC
+  </select>
+
+  <select id="fetchAllPorcaosByRequest" parameterType="PagedInquiryRequest" resultMap="porcaoResult">
+	 SELECT b.id,<include refid="allPorcaoColumns" />
+        FROM porcao b
+     WHERE 1 = 1
+     <if test="id != null">
+		  AND b.id = #{id}
+	 </if>
+  </select>
+
+  <select id="fetchPorcaoByProduto" parameterType="Integer" resultMap="porcaoResult">
+	  	SELECT b.id,<include refid="allPorcaoColumns" />
+        FROM porcao b where b.prodId = #{id}
+  </select>
+
+
+</mapper>

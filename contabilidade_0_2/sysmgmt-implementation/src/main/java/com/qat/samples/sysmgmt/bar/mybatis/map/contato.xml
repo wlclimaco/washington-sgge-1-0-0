@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ContatoMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly.
+       private Integer id;
+
+	private String nome;
+
+	private List<Agencia> agenciaList;-->
+
+  <resultMap id="contatoResult" type="Contato" >
+    <result property="id" column="id" />
+    <result property="parentId" column="parentId" />
+	<result property="dataContato" column="dataContato" />
+	<result property="nome" column="nome" />
+	<result property="email" column="email" />
+	<result property="telefone" column="telefone" />
+	<result property="motivoValue" column="motivo" />
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	<collection property="contatoItensList" column="id" select="fetchContatoItensByContatos"/>
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allContatoColumns">
+  		 dataContato
+  		,nome
+  		,parentId
+  		,email
+		,telefone
+      	,motivo
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allContatoValues">
+  		#{dataContato},
+  		#{nome},
+  		#{parentId},
+  		#{email},
+  		#{telefone},
+  		#{motivoValue},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertContato" parameterType="Contato" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO contato (
+		<include refid="allContatoColumns" />
+      )
+    VALUES (<include refid="allContatoValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateContato" parameterType="Contato">
+    UPDATE contato
+    	<set>
+    		<if test="dataContato!= null">dataContato = #{dataContato},</if>
+    		<if test="nome!= null">nome = #{nome},</if>
+    		<if test="email!= null">email = #{email},</if>
+    		<if test="telefone!= null">telefone = #{telefone},</if>
+    		<if test="motivoValue!= null">motivo = #{motivoValue},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteContatoById" parameterType="Integer">
+    	DELETE FROM contato WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchContatoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM contato
+     WHERE 1=1
+  </select>
+
+  <select id="fetchAllContatos" resultMap="contatoResult">
+    SELECT id,
+	<include refid="allContatoColumns" />
+    FROM contato  ORDER BY id ASC
+  </select>
+
+  <select id="fetchContatoById" parameterType="FetchByIdRequest" resultMap="contatoResult">
+	SELECT
+		<include refid="allContatoColumns" />
+        FROM contato b
+     WHERE 1=1
+  </select>
+
+
+
+   <select id="fetchAllContatosByRequest" parameterType="ContatoInquiryRequest" resultMap="contatoResult">
+    SELECT * FROM
+    			(
+    				SELECT id,
+    						<include refid="allContatoColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY dataContato) AS RowNumber
+    				FROM contato
+					WHERE 2 = 2
+
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+
+    <!--
+		================================= CONTATO ITENS =========================================================
+    private Integer id;
+
+	/** The data alt. */
+	private Long dataAlt;
+
+	/** The note. */
+	private String texto;
+
+	/** The titulo. */
+	private String titulo;
+
+
+     -->
+
+  <resultMap id="contatoItensResult" type="ContatoItens" >
+    <result property="id" column="id" />
+    <result property="parentId" column="parentId" />
+    <result property="dataAlt" column="dataContato" />
+    <result property="texto" column="texto" />
+    <result property="titulo" column="titulo" />
+   	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allContatoItensColumns">
+		 parentId
+		,dataContato
+		,texto
+		,titulo
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+
+  </sql>
+
+  <sql id="allContatoItensValues">
+  		#{parentId},
+  		#{dataAlt},
+  		#{texto},
+  		#{titulo},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertContatoItens" parameterType="ContatoItens" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO contatoItens (
+		<include refid="allContatoItensColumns" />
+      )
+    VALUES (<include refid="allContatoItensValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateContatoItens" parameterType="ContatoItens">
+    UPDATE contatoItens
+    	<set>
+    		<if test="motivoValue!= null">motivoValue = #{motivoValue},</if>
+    		<if test="dataContato!= null">dataContato = #{dataContato},</if>
+    		<if test="nomeContato!= null">nomeContato = #{nomeContato},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteContatoItensById" parameterType="Integer">
+    	DELETE FROM contatoItens WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchContatoItensRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM contatoItens
+     WHERE 1=1
+     <if test="id != null">
+		  AND id = #{id}
+	 </if>
+  </select>
+
+  <select id="fetchAllContatoItens" resultMap="contatoItensResult">
+    SELECT id
+	<include refid="allContatoItensColumns" />
+    FROM contatoItens ORDER BY id ASC
+  </select>
+
+  <select id="fetchContatoItensById" parameterType="FetchByIdRequest" resultMap="contatoItensResult">
+	SELECT
+		<include refid="allContatoItensColumns" />
+        FROM contatoItens
+     WHERE 1=1
+     <if test="id != null">
+		  AND id = #{id}
+	 </if>
+  </select>
+
+  <select id="fetchContatoItensByContatos" parameterType="Integer" resultMap="contatoItensResult">
+	SELECT id,
+		<include refid="allContatoItensColumns" />
+        FROM contatoItens
+     WHERE parentId = #{id}
+  </select>
+
+  <select id="fetchAllContatoItenssByRequest" parameterType="PagedInquiryRequest" resultMap="contatoItensResult">
+		 SELECT id
+		<include refid="allContatoItensColumns" />
+	    FROM contatoItens ORDER BY id ASC
+  </select>
+
+  <select id="fetchContatoItensByPessoa" parameterType="ContatoItens" resultType="int">
+	SELECT id
+		<include refid="allContatoItensColumns" />
+		FROM contatoItens ORDER BY id ASC
+  </select>
+
+
+<select id="fetchContatoByPessoa" resultMap="contatoResult" resultType="int">
+	SELECT id
+		<include refid="allContatoColumns" />
+		FROM contato where parentId = #{id} ORDER BY id ASC
+  </select>
+
+</mapper>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EmpresaMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. [id]           [int] NOT NULL,
+	[nome]         [varchar](100) NULL,
+	[regime]       [int] NULL,
+	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,-->
+
+  <resultMap id="empresaResult" type="Empresa" extends="EntidadeMap.entidadeResult">
+	<collection property="socios" column="id" select="SocioMap.fetchSocioByEmpresaId"/>
+	<collection property="planoList" column="id" select="PlanoMap.fetchPlanoByEmpresa"/>
+	<collection property="filialList" column="id" select="FilialMap.fetchAllFilialByEntidade"/>
+	<collection property="depositoList" column="id" select="DepositoMap.fetchAllDepositoByEntidade"/>
+	<!--  <collection property="contaCorrenteList" column="id" select="ContaCorrenteMap.fetchAllDepositoByEntidade"/>
+	<collection property="tarefaList" column="id" select="TarefaMap.fetchAllDepositoByEntidade"/>-->
+  </resultMap>
+
+   <resultMap id="empresaTableResult" type="Empresa" extends="EntidadeMap.entidadeTableResult">
+	</resultMap>
+
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allEmpresaColumns">
+			<include refid="EntidadeMap.allEntidadeColumns"/>
+  </sql>
+
+  <sql id="allEmpresaValues">
+  			<include refid="EntidadeMap.allEntidadeValues"/>
+  </sql>
+
+  <select id="fetchEmpresaRowCount" parameterType="EmpresaInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM entidade
+        where entidadeEnum = 1
+
+  </select>
+
+  <select id="fetchAllEmpresas" resultMap="empresaTableResult">
+    SELECT
+	<include refid="allEmpresaColumns" />
+    FROM entidade ORDER BY nome ASC
+  </select>
+
+  <select id="fetchEmpresaById" parameterType="FetchByIdRequest" resultMap="empresaResult">
+    			   SELECT
+					id,	<include refid="allEmpresaColumns" />
+ 				   FROM entidade
+					where id = #{fetchId}
+  </select>
+
+    <select id="fetchEmpresaByNota" parameterType="Integer" resultMap="empresaResult">
+    			   SELECT
+					b.id,	<include refid="allEmpresaColumns" />
+ 				   FROM entidade b
+					where b.id = #{id}
+  </select>
+
+  <select id="fetchAllEmpresasByRequest" parameterType="EmpresaInquiryRequest" resultMap="empresaResult">
+     SELECT * FROM ( SELECT b.id,
+    						<include refid="allEmpresaColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM entidade b
+
+
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+</mapper>

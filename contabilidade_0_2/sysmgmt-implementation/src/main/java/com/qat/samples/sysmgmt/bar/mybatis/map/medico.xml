@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MedicoMap">
+
+		<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+	-->
+
+   <resultMap id="medicoResult" type="Medico" extends="PessoaMap.PessoaResult">
+		<collection property="especialidadeList" column="id" select="EspecialidadeMap.fetchEspecialidadeByPessoa"/>
+		<collection property="consultaList" column="id" select="ConsultaMap.fetchAllConsultaByMedico"/>
+		<collection property="horarioList" column="id" select="HoraFuncMap.fetchHoraFuncById"/>
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allMedicoColumns">
+		<include refid="PessoaMap.allPessoaColumns"/>
+  </sql>
+
+  <sql id="allMedicoValues">
+  		<include refid="PessoaMap.allPessoaValues"/>
+  </sql>
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchMedicoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM pessoa where type = 7
+
+  </select>
+
+  <select id="fetchAllMedicos" resultMap="medicoResult">
+    SELECT
+	<include refid="allMedicoColumns" />
+    FROM pessoa ORDER BY nome ASC
+  </select>
+
+  <select id="fetchMedicoById" parameterType="FetchByIdRequest" resultMap="medicoResult">
+    			   SELECT
+					id,	<include refid="allMedicoColumns" />
+ 				   FROM pessoa
+					where id = #{fetchId}
+  </select>
+
+   <select id="fetchMedicoByNota" parameterType="Integer" resultMap="medicoResult">
+    			   SELECT
+					id,	<include refid="allMedicoColumns" />
+ 				   FROM pessoa
+					where id = #{id}
+  </select>
+
+  <select id="fetchAllMedicoByRequest" parameterType="PagedInquiryRequest" resultMap="medicoResult">
+     SELECT * FROM ( SELECT id,
+    						<include refid="allMedicoColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM pessoa
+						where type = 7
+
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+</mapper>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DocumentoMap">
+
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="DocumentoResult" type="Documento">
+    <result property="id" column="id"/>
+    <result property="tabelaEnumValue" column="tabela"/>
+    <result property="parentId" column="parentId"/>
+    <result property="processId" column="processId"/>
+    <result property="documentoTypeEnumValue" column="documentotype"/>
+    <result property="numero" column="numero"/>
+    <result property="data" column="data"/>
+    <result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	<association property="estado"    column="estado" select="EstadoMap.fetchEstadoById"  />
+  </resultMap>
+
+
+
+	  <sql id="allDocumentoColumns">
+			 tabela
+			 ,parentId
+			 ,processId
+			 ,documentotype
+			 ,numero
+			 ,data
+			 ,create_user
+			,create_date
+			,modify_user
+			,modify_date
+			,estado
+  		</sql>
+
+  <sql id="allDocumentoColumnsWithQualifier">
+
+		#{tabelaEnumValue},
+		#{parentId},
+		#{processId},
+		#{documentoTypeEnumValue},
+		#{numero},
+		#{data},
+		#{createUser},
+		#{createDataUTC},
+		#{modifyUser},
+		#{modifyDataUTC},
+		#{estado.id}
+  </sql>
+
+<insert id="insertDocumento" parameterType="Documento" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO documento (
+		<include refid="allDocumentoColumns" />
+      )
+    VALUES (<include refid="allDocumentoColumnsWithQualifier" /> )
+  </insert>
+
+
+  <update id="updateDocumento" parameterType="Documento">
+    UPDATE documento
+    	<set>
+    		<if test="tabelaEnumValue!= null">tabela = #{tabelaEnumValue},</if>
+	    	<if test="documentoTypeEnumValue!= null"> documentotype=#{documentoTypeEnumValue},</if>
+	    	<if test="numero!= null">numero = #{numero},</if>
+	    	<if test="data!= null"> data=#{data},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <select id="fetchDocumentoByEmpresa" parameterType="Integer" resultMap="DocumentoResult">
+         SELECT * FROM documento WHERE TABELA in(1,51,52) AND PARENTID = #{ID}
+   </select>
+
+   <select id="fetchDocumentoByPessoaId" parameterType="Integer" resultMap="DocumentoResult">
+         SELECT * FROM documento WHERE TABELA in (16,17,18,19,23) AND PARENTID = #{ID}
+   </select>
+
+   <select id="fetchAllDocumentosByCliente" resultMap="DocumentoResult">
+         SELECT <include refid="allDocumentoColumns" /> FROM documento WHERE TABELA = 8 AND ID = #{ID}
+   </select>
+
+  <select id="fetchAllDocumentos" resultMap="DocumentoResult">
+    SELECT
+    <include refid="allDocumentoColumns" />
+    FROM documento ORDER BY documentoid ASC
+  </select>
+
+  <select id="fetchAllDocumentosPagedBatch" resultMap="DocumentoResult">
+  	<if test="_databaseId == 'Oracle'">
+		SELECT * FROM (
+		SELECT * FROM (
+		SELECT <include refid="allDocumentoColumnsWithQualifier" />,
+		ROWNUM ROWNUM_ FROM documento p ORDER BY documentoid ASC
+		) WHERE ROWNUM_ <![CDATA[ > ]]>
+		( #{_page} * #{_pagesize} )
+		) WHERE ROWNUM <![CDATA[ <= ]]>
+		#{_pagesize}mo
+    </if>
+
+   	 <if test="_databaseId == 'PostgreSQL'">
+		SELECT <include refid="allDocumentoColumns" />
+   		  FROM documento ORDER BY documentoid ASC
+		  OFFSET ( #{_page} * #{_pagesize} )
+		  LIMIT #{_pagesize}
+    </if>
+  </select>
+
+
+
+  <select id="fetchDocumentoById" parameterType="Integer" resultMap="DocumentoResult">
+    SELECT
+   <include refid="allDocumentoColumns" />
+    FROM documento WHERE documentoid = #{fetchid}
+  </select>
+
+
+
+</mapper>

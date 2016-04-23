@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ClienteMap">
+
+  <resultMap id="clienteResult" type="Cliente" extends="PessoaMap.PessoaResult">
+	<collection property="profissao" column="id" select="ProfissaoMap.fetchProfissaoById"/>
+    <collection property="convenioList" column="id" select="ConvenioMap.fetchConvenioByPerson"/>
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allClienteColumns">
+		 cdEmpr
+		,nome
+		,type
+		,sexo
+		,dataNasc
+		,nomePai
+		,nomeMae
+		,nomeConjugue
+		,estadoCivil
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allClienteValues">
+  		#{emprId},
+  		#{nome},
+  		#{pessoaTypeEnumValue},
+  		#{sexo},
+  		#{dataNasc},
+  		#{nomePai},
+  		#{nomeMae},
+  		#{nomeConjugue},
+  		#{estadoCivil},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchClienteRowCount" parameterType="ClienteInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM pessoa where type = 1
+
+  </select>
+
+  <select id="fetchAllClientes" resultMap="clienteResult">
+    SELECT
+	<include refid="allClienteColumns" />
+    FROM pessoa ORDER BY nome ASC
+  </select>
+
+  <select id="fetchClienteById" parameterType="FetchByIdRequest" resultMap="clienteResult">
+    			   SELECT
+					id,	<include refid="allClienteColumns" />
+ 				   FROM pessoa b
+					where id = #{id}
+  </select>
+
+   <select id="fetchClienteByNota" parameterType="Integer" resultMap="clienteResult">
+    			   SELECT
+					id,	<include refid="allClienteColumns" />
+ 				   FROM pessoa b
+					where id = #{id}
+  </select>
+
+  <select id="fetchAllClientesByRequest" parameterType="ClienteInquiryRequest" resultMap="clienteResult">
+     SELECT * FROM ( SELECT id,
+    						<include refid="allClienteColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM pessoa b
+						where type = 1
+
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+</mapper>

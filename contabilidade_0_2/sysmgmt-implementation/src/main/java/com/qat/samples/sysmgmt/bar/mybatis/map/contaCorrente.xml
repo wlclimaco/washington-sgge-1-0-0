@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ContaCorrenteMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+  <resultMap id="contaCorrenteResult" type="ContaCorrente">
+    <result property="id" column="id" />
+    <result property="nome" column="nome" />
+	<result property="saldo" column="saldo" />
+    <result property="descricao" column="descricao" />
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allContaCorrenteColumns">
+		 b.nome
+		,b.descricao
+      	,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allContaCorrenteValues">
+  		#{nome},
+    	#{descricao},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertContaCorrente" parameterType="ContaCorrente" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO contaCorrente (
+		<include refid="allContaCorrenteColumns" />
+      )
+    VALUES (<include refid="allContaCorrenteValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateContaCorrente" parameterType="ContaCorrente">
+    UPDATE contaCorrente
+    	<set>
+    		<if test="nome!= null">nome = #{nome},</if>
+	    	<if test="descricao!= null"> descricao=#{descricao},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteContaCorrenteById" parameterType="Integer">
+    	DELETE FROM contaCorrente WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchContaCorrenteByEmpresa" parameterType="Integer" resultMap="contaCorrenteResult">
+     SELECT * FROM contaCorrente
+     WHERE id = #{id}
+  </select>
+
+  <select id="fetchContaCorrenteByFuncionario" parameterType="Integer" resultMap="contaCorrenteResult">
+     SELECT * FROM contaCorrente
+     WHERE id = #{id}
+  </select>
+
+  <select id="fetchContaCorrenteRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM contaCorrente
+
+  </select>
+
+  <select id="fetchAllContaCorrenteByRequest" parameterType="PagedInquiryRequest" resultMap="contaCorrenteResult">
+    SELECT * FROM
+    			(
+    				SELECT b.id,
+    						<include refid="allContaCorrenteColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
+    				FROM contaCorrente b
+					WHERE 2 = 2
+
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+
+</mapper>

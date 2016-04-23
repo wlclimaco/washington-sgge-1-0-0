@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CustoMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- [id]              [int] NOT NULL,
+	[prodId]          [int] NOT NULL,
+	[idcustoItens]    [int] NOT NULL,
+	[valor]           [real] NOT NULL,
+       -->
+
+  <resultMap id="custoResult" type="Custo" >
+    <result property="id" column="id" />
+   	<result property="valor" column="valor"/>
+   	<result property="parentId" column="prodId" />
+   	<result property="emprId" column="emprId"/>
+   	<result property="entidadeId" column="entidadeId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+    <association property="idcustoItens"    column="idcustoItens" select="CustoItemMap.fetchCustoItemByCusto"  />
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allCustoColumns">
+		 b.idcustoItens
+		,b.valor
+		,b.prodId
+   		,b.emprId
+   		,b.entidadeId
+      	,b.create_date
+      	,b.create_user
+      	,b.modify_date
+      	,b.modify_user
+  </sql>
+
+  <sql id="allCustoValues">
+  		#{prodId},
+  		#{idcustoItens},
+  		#{valor},
+  		#{parentId},
+   		#{emprId},
+   		#{entidadeId},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertCusto" parameterType="Custo" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO custo (
+		<include refid="allCustoColumns" />
+      )
+    VALUES (<include refid="allCustoValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateCusto" parameterType="Custo">
+    UPDATE custo
+    	<set>
+    		<if test="prodId!= null">prodId = #{prodId},</if>
+	    	<if test="idcustoItens!= null">idcustoItens=#{idcustoItens},</if>
+	    	<if test="valor!= null"> valor=#{valor},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteCustoById" parameterType="Integer">
+    	DELETE FROM custo WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchCustoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM custo
+     WHERE 1 = 1
+     <if test="id != null">
+		  AND id = #{id}
+	 </if>
+  </select>
+
+  <select id="fetchAllCustos" resultMap="custoResult">
+    SELECT
+	<include refid="allCustoColumns" />
+    FROM custo ORDER BY id ASC
+  </select>
+
+  <select id="fetchCustoById" parameterType="FetchByIdRequest" resultMap="custoResult">
+	SELECT b.id,
+	<include refid="allCustoColumns" />
+    FROM custo b
+    where id = #{id}
+    ORDER BY id ASC
+  </select>
+
+  <select id="fetchAllCustosByRequest" parameterType="PagedInquiryRequest" resultMap="custoResult">
+	 SELECT b.id,<include refid="allCustoColumns" />
+        FROM custo b
+     WHERE 1 = 1
+     <if test="id != null">
+		  AND b.id = #{id}
+	 </if>
+  </select>
+
+  <select id="fetchCustoByProduto" parameterType="Integer" resultMap="custoResult">
+	  	SELECT b.id,<include refid="allCustoColumns" />
+        FROM custo b
+     WHERE   b.prodId=#{id}
+
+  </select>
+
+
+</mapper>

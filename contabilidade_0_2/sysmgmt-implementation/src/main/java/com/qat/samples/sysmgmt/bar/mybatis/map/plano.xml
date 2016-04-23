@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PlanoMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. [id]           [int] NOT NULL,
+	[nome]         [varchar](100) NULL,
+	[regime]       [int] NULL,
+	[create_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [create_user]  [varchar](50) NULL,
+    [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
+    [modify_user]  [varchar](50) NULL,
+    private Integer id;
+	private Long dataInicio;
+	private Long dataFinal;
+	private Integer numeroContrato;
+	private String descricao;
+	private String titulo;
+    -->
+
+  <resultMap id="planoResult" type="Plano" >
+	<result property="id" column="id"/>
+	<result property="dataInicio" column="dataInicio"/>
+	<result property="dataFinal"  column="dataFinal"/>
+    <result property="numeroContrato" column="numeroContrato"/>
+    <result property="descricao" column="descricao"/>
+    <result property="titulo" column="titulo"/>
+    <result property="emprId" column="emprId"/>
+   	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+  <!--  <collection property="preco" column="{id=id,emprId=emprId}" select="TabPrecoMap.fetchTabPrecoByProduto" />
+    <collection property="servicos" column="id" select="ServicoMap.fetchPlanoByServico" />
+    <collection property="imagens" column="id" select="ImagemMap.fetchImagemByPlano" /> -->
+  </resultMap>
+
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allPlanoColumns">
+		 dataInicio
+		,dataFinal
+		,numeroContrato
+		,descricao
+		,titulo
+		,emprId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allPlanoValues">
+  		#{dataInicio},
+  		#{dataFinal},
+  		#{numeroContrato},
+  		#{descricao},
+  		#{titulo},
+  		#{emprId},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <select id="fetchPlanoRowCount" parameterType="PlanoInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM plano
+        where 1 = 1
+
+  </select>
+
+<insert id="insertPlano" parameterType="Plano" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO plano (
+		 dataInicio
+		,dataFinal
+		,numeroContrato
+		,descricao
+		,titulo
+		,emprId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+      )
+    VALUES (<include refid="allPlanoValues" /> )
+  </insert>
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updatePlano" parameterType="Plano">
+    UPDATE plano
+    	<set>
+    		<if test="dataInicio!= null">dataInicio = #{dataInicio},</if>
+	    	<if test="dataFinal!= null"> dataFinal=#{dataFinal},</if>
+	    	<if test="descricao!= null"> descricao=#{descricao},</if>
+	    	<if test="numeroContrato!= null"> numeroContrato=#{numeroContrato},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+    id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deletePlanoById" parameterType="Integer">
+    	DELETE FROM plano WHERE id = #{id}
+  </delete>
+  <select id="fetchAllPlanos" resultMap="planoResult">
+    SELECT
+	<include refid="allPlanoColumns" />
+    FROM plano ORDER BY id ASC
+  </select>
+
+  <select id="fetchPlanoById" parameterType="FetchByIdRequest" resultMap="planoResult">
+    			   SELECT
+					id,	<include refid="allPlanoColumns" />
+ 				   FROM plano
+					where id = #{id}
+  </select>
+
+
+ <select id="fetchAllPlanosByRequest" parameterType="PagedInquiryRequest" resultMap="planoResult">
+    SELECT * FROM
+    			(
+    				SELECT id,
+    						<include refid="allPlanoColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM plano
+					WHERE 2 = 2
+
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+ <select id="fetchPlanoByEmpresa"  parameterType="Integer" resultMap="planoResult">
+    SELECT
+	<include refid="allPlanoColumns" />
+    FROM plano  where emprId = #{id}
+  </select>
+
+
+</mapper>

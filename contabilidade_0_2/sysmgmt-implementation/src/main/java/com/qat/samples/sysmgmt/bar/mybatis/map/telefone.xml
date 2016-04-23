@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TelefoneMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+  <resultMap id="telefoneResult" type="Telefone">
+    <result property="id" column="id" />
+    <result property="typeValue" column="type" />
+    <result property="parentId" column="parentId" />
+   	<result property="tabelaEnumValue" column="tabela"/>
+	<result property="ddd" column="ddd"/>
+	<result property="numero" column="telefone" />
+	<result property="telefoneTypeEnumValue" column="telefoneType" />
+	<result property="processId" column="processId" />
+   <result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByTelefone"/>
+
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allTelefoneColumns">
+		 type
+		,parentId
+		,tabela
+		,ddd
+		,telefone
+		,telefoneType
+		,processId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allTelefoneValues">
+    	#{typeValue},
+    	#{parentId},
+    	#{tabelaEnumValue},
+    	#{ddd},
+    	#{numero},
+    	#{telefoneTypeEnumValue},
+    	#{processId},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertTelefone" parameterType="Telefone" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO telefone (
+		<include refid="allTelefoneColumns" />
+      )
+    VALUES (<include refid="allTelefoneValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateTelefone" parameterType="Telefone">
+    UPDATE telefone
+    	<set>
+    		<if test="ddd!= null">ddd = #{ddd},</if>
+	    	<if test="typeValue!= null"> type=#{typeValue},</if>
+	    	<if test="numero!= null"> telefone=#{numero},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteTelefoneById" parameterType="Integer">
+    	DELETE FROM telefone WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchTelefoneByEmpresa" parameterType="Integer" resultMap="telefoneResult">
+     SELECT * FROM telefone
+     WHERE tabela in(1,51,52) and parentId = #{id}
+  </select>
+
+  <select id="fetchTelefoneByFuncionario" parameterType="Integer" resultMap="telefoneResult">
+     SELECT * FROM telefone
+     WHERE tabela = 16 and parentId = #{id}
+  </select>
+
+  <select id="fetchTelefoneByPessoaId" parameterType="Integer" resultMap="telefoneResult">
+     SELECT * FROM telefone
+     WHERE tabela in (16,17,18,19,23) and parentId = #{id}
+  </select>
+
+  <select id="fetchTelefoneByMarca" parameterType="Integer" resultMap="telefoneResult">
+     SELECT * FROM telefone
+     WHERE tabela = 50 and parentId = #{id}
+  </select>
+
+
+</mapper>

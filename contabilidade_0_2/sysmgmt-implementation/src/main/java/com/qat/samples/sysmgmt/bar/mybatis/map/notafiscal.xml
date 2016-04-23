@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NotaFiscalMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. -->
+
+  <resultMap id="NotaFiscalResult" type="NotaFiscal" >
+		<result property="id" column="id" />
+		<result property="serie" column="serie" />
+		<result property="ordem" column="ordem" />
+		<result property="numero" column="numero" />
+		<result property="tipo" column="tipo" />
+		<result property="nfValor" column="nfValor" />
+		<result property="dataEmissao" column="dataEmissao" />
+		<result property="dataSaida" column="dataSaida" />
+		<result property="dataEntrada" column="dataEntrada" />
+		<result property="modelo" column="modelo" />
+		<result property="bxEstoque" column="bxEstoque" />
+		<result property="descItens" column="descItens" />
+		<result property="pcCusto" column="pcCusto" />
+		<result property="createUser" column="create_user"/>
+		<result property="createDataUTC" column="create_date"/>
+		<result property="modifyUser" column="modify_user"/>
+		<result property="modifyDataUTC" column="modify_date"/>
+		<association property="cfop"    column="cfop" select="CfopMap.fetchCfopById"  />
+		<association property="conhecimentoTransporte"    column="id" select="ConhecimentoTransporteMap.fetchAllConhecimentoTransportesByNotaFiscalId"  />
+		<association property="empresa"    column="empresa" select="EmpresaMap.fetchEmpresaById"  />
+		<association property="pessoa"    column="pessoa" select="PessoaMap.fetchPessoaById"  />
+		<collection property="tributosList" column="id" select="TributosMap.fetchTributosByNota"/>
+		<collection property="formaPagList" column="id" select="FormaPgMap.fetchAllFormaPgByNota"/>
+		<collection property="notaFiscalItens" column="id" select="NotaFiscalItensMap.fetchAllNotaFiscalItensByNota"/>
+		<collection property="noteList" column="id" select="NoteMap.fetchNoteByNotaFiscalId"/>
+		<collection property="contasList" column="id" select="ContasMap.fetchContasPagarByNota"/>
+		<collection property="itensEspeciais" column="id" select="ItensEspeciaisMap.fetchItensEspeciaisByNota"/>
+		<collection property="nfStatusList" column="id" select="NFStatusMap.fetchAllNFStatussByNota"/>
+
+
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allNotaFiscalColumns">
+		 serie
+		,ordem
+		,numero
+		,tipo
+		,nfValor
+		,dataEmissao
+		,dataSaida
+		,dataEntrada
+		,modelo
+		,bxEstoque
+		,descItens
+		,pcCusto
+		,cfop
+		,transportador
+		,conhecimentoTransporte
+		,empresa
+		,pessoa
+		,processId
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allNotaFiscalValues">
+		#{serie},
+		#{ordem},
+		#{numero},
+		#{tipo},
+		#{nfValor},
+		#{dataEmissao},
+		#{dataSaida},
+		#{dataEntrada},
+		#{modelo},
+		#{bxEstoque},
+		#{descItens},
+		#{pcCusto},
+		#{cfop.id},
+		#{transportador.id},
+		#{conhecimentoTransporte.id},
+		#{empresa.id},
+		#{pessoa.id},
+		#{processId},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+   <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertNotaFiscal" parameterType="NotaFiscal" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO notaFiscal (
+		<include refid="allNotaFiscalColumns" />
+      )
+    VALUES (<include refid="allNotaFiscalValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateNotaFiscal" parameterType="NotaFiscal">
+    UPDATE notaFiscal
+    	<set>
+			<if test="serie!= null"> serie=#{serie},</if>
+			<if test="ordem!= null"> ordem=#{ordem},</if>
+			<if test="numero!= null"> numero=#{numero},</if>
+			<if test="tipo!= null"> tipo=#{tipo},</if>
+			<if test="nfValor!= null"> nfValor=#{nfValor},</if>
+			<if test="dataEmissao!= null"> dataEmissao=#{dataEmissao},</if>
+			<if test="dataSaida!= null"> dataSaida=#{dataSaida},</if>
+			<if test="dataEntrada!= null"> dataEntrada=#{dataEntrada},</if>
+			<if test="modelo!= null"> modelo=#{modelo},</if>
+			<if test="bxEstoque!= null"> bxEstoque=#{bxEstoque},</if>
+			<if test="descItens!= null"> descItens=#{descItens},</if>
+			<if test="pcCusto!= null"> pcCusto=#{pcCusto},</if>
+			<if test="cfop.id!= null"> cfop=#{cfop.id},</if>
+			<if test="transportador.id!= null"> transportador=#{transportador.id},</if>
+			<if test="conhecimentoTransporte.id!= null"> conhecimentotransporte=#{conhecimentoTransporte.id},</if>
+			<if test="empresa.id!= null"> entidade=#{empresa.id},</if>
+			<if test="pessoa.id!= null"> pessoa=#{pessoa.id},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+</mapper>

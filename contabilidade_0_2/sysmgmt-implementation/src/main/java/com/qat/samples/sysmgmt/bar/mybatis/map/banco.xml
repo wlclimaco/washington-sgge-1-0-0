@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BancoMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly.
+       private Integer id;
+
+	private String nome;
+
+	private List<Agencia> agenciaList;-->
+	  <resultMap id="bancoPessoaResult" type="BancoPessoa" >
+		<result property="id" column="id" />
+		<result property="parentId" column="parentId" />
+		<result property="numCont" column="numCont" />
+		<result property="saldo" column="saldo" />
+		<result property="tabelaEnumValue" column="tabela" />
+		<result property="processId" column="processId" />
+	   	<result property="createUser" column="create_user"/>
+		<result property="createDataUTC" column="create_date"/>
+		<result property="modifyUser" column="modify_user"/>
+		<result property="modifyDataUTC" column="modify_date"/>
+      	<association property="bancoId"    column="bancoId" select="fetchBancoByBancoId"  />
+      	<association property="agenciaId"  column="agenciaId" select="AgenciaMap.fetchAgenciaById"  />
+      </resultMap>
+
+  <resultMap id="bancoResult" type="Banco" >
+    <result property="id" column="id" />
+    <result property="nome" column="nome" />
+   	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	<collection property="agenciaList" column="id" select="AgenciaMap.fetchAgenciaByBanco"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByPessoaId"/>
+  </resultMap>
+
+  <resultMap id="bancoAResult" type="Banco" >
+    <result property="id" column="id" />
+    <result property="nome" column="nome" />
+   	<result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByPessoaId"/>
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allBancoColumns">
+		nome,
+      	create_date,
+      	create_user,
+      	modify_date,
+      	modify_user
+  </sql>
+
+  <sql id="allBancoValues">
+  		#{nome},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <sql id="allBancoPessoaColumns">
+		parentId,
+		bancoId,
+		numCont,
+		saldo,
+		processId,
+		tabela,
+		agenciaId,
+		create_date,
+      	create_user,
+      	modify_date,
+      	modify_user
+  </sql>
+
+  <sql id="allBancoPessoaValues">
+  		#{parentId},
+		#{bancoId.id},
+		#{numCont},
+		#{saldo},
+		#{processId},
+		#{tabelaEnumValue},
+		#{agenciaId.id},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertBanco" parameterType="Banco" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO banco (
+		<include refid="allBancoColumns" />
+      )
+    VALUES (<include refid="allBancoValues" /> )
+  </insert>
+
+    <insert id="insertBancoPessoa" parameterType="BancoPessoa" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO BancoPessoa (
+		<include refid="allBancoPessoaColumns" />
+      )
+    VALUES (<include refid="allBancoPessoaValues" /> )
+  </insert>
+
+    <update id="updateBancoPessoa" parameterType="Banco">
+    UPDATE BancoPessoa
+    	<set>
+    		<if test="saldo!= null">saldo = #{saldo},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateBanco" parameterType="Banco">
+    UPDATE banco
+    	<set>
+    		<if test="nome!= null">nome = #{nome},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteBancoById" parameterType="Integer">
+    	DELETE FROM banco WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchBancoRowCount" parameterType="BancoInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM banco
+     WHERE 1=1
+     <if test="criteria.id != null">
+		  AND id = #{criteria.id}
+	 </if>
+  </select>
+
+  <select id="fetchAllBancos" resultMap="bancoResult">
+    SELECT id
+	<include refid="allBancoColumns" />
+    FROM banco b ORDER BY id ASC
+  </select>
+
+  <select id="fetchBancoById" parameterType="FetchByIdRequest" resultMap="bancoResult">
+	SELECT
+		<include refid="allBancoColumns" />
+        FROM banco b
+     WHERE 1=1
+
+  </select>
+
+   <select id="fetchBancoByBancoId" parameterType="Integer" resultMap="bancoAResult">
+	SELECT id,
+		<include refid="allBancoColumns" />
+        FROM banco b
+     WHERE id = #{id}
+
+  </select>
+
+  <select id="fetchAllBancosByRequest" parameterType="BancoInquiryRequest" resultMap="bancoResult">
+	   SELECT * FROM
+    			(
+    				SELECT
+    						<include refid="allBancoColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM banco b
+					WHERE 2 = 2
+					<if test="criteria.id != null">
+						AND id = #{criteria.id}
+					</if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+  <select id="fetchBancoByPessoa" parameterType="Integer" resultMap="bancoPessoaResult">
+	SELECT id,
+		<include refid="allBancoPessoaColumns" />
+		FROM bancoPessoa b where parentId = #{id} and tabela in(23,16) ORDER BY id ASC
+  </select>
+
+
+</mapper>

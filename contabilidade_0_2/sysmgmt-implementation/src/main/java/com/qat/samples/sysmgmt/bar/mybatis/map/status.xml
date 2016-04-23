@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="StatusMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties
+       exactly. [id]           [int] NOT NULL,
+		private Integer id;
+
+	/** The parent key. */
+	private Integer dataStatus;
+
+	private Integer parentId;
+
+	/** The parent key type. */
+	private StatusEnum status;
+
+	private AcaoEnum acaoType;
+
+	private TabelaEnum tabelaEnum;
+
+	private String note;-->
+
+  <resultMap id="statusResult" type="Status">
+    <result property="id" column="id" />
+    <result property="dataStatus" column="dataStatus" />
+    <result property="parentId" column="parentId" />
+    <result property="statusValue" column="status" />
+    <result property="acaoEnumValue" column="acaoType" />
+    <result property="tabelaEnumValue" column="tabelaEnum" />
+    <result property="note" column="note" />
+    <result property="createUser" column="create_user"/>
+	<result property="createDataUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDataUTC" column="modify_date"/>
+  </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allStatusColumns">
+		 dataStatus
+		,parentId
+		,status
+		,acaoType
+		,tabelaEnum
+		,note
+      	,create_date
+      	,create_user
+      	,modify_date
+      	,modify_user
+  </sql>
+
+  <sql id="allStatusValues">
+  		#{dataStatus},
+  		#{parentId},
+  		#{statusValue},
+  		#{acaoEnumValue},
+  		#{tabelaEnumValue},
+  		#{note},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertStatus" parameterType="Status" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO status (
+		<include refid="allStatusColumns" />
+      )
+    VALUES (<include refid="allStatusValues" /> )
+  </insert>
+
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateStatus" parameterType="Status">
+    UPDATE status
+    	<set>
+    		<if test="statusValue!= null">status = #{statusValue},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteStatusById" parameterType="Integer">
+    	DELETE FROM status WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchStatusRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM status
+
+  </select>
+
+   <select id="fetchAllStatusByEmpresa" parameterType="Integer" resultMap="statusResult">
+
+	    SELECT
+		<include refid="allStatusColumns" />
+	    FROM status b where tabelaEnum in(1,51,52) and parentId = #{id}
+
+	    ORDER BY id DESC
+  </select>
+
+  <select id="fetchAllStatusByDocumento" parameterType="Integer" resultMap="statusResult">
+
+	    SELECT
+		<include refid="allStatusColumns" />
+	    FROM status b where tabelaEnum = 2 and parentId = #{id}
+
+	    ORDER BY dataStatus ASC
+  </select>
+
+  <select id="fetchAllStatusByEmail" parameterType="Integer" resultMap="statusResult">
+
+	    SELECT
+		<include refid="allStatusColumns" />
+	    FROM status b where tabelaEnum = 3 and parentId = #{id}
+
+	    ORDER BY dataStatus ASC
+  </select>
+
+
+  <select id="fetchAllStatusByEndereco" parameterType="Integer" resultMap="statusResult">
+
+	    SELECT
+		<include refid="allStatusColumns" />
+	    FROM status b where tabelaEnum = 4 and parentId = #{id}
+
+	    ORDER BY dataStatus ASC
+  </select>
+
+  <select id="fetchAllStatusByTelefone" parameterType="Integer" resultMap="statusResult">
+
+	    SELECT
+		<include refid="allStatusColumns" />
+	    FROM status b where tabelaEnum = 5 and parentId = #{id}
+
+	    ORDER BY dataStatus ASC
+  </select>
+
+  <select id="fetchAllStatusBySocio" parameterType="Integer" resultMap="statusResult">
+
+	    SELECT
+		<include refid="allStatusColumns" />
+	    FROM status b where tabelaEnum = 6 and parentId = #{id}
+
+	    ORDER BY dataStatus ASC
+  </select>
+
+     <select id="fetchAllStatusByFuncionario" parameterType="Integer" resultMap="statusResult">
+
+	    SELECT
+		<include refid="allStatusColumns" />
+	    FROM status b where tabelaEnum = 16 and parentId = #{id}
+
+	    ORDER BY dataStatus ASC
+  </select>
+
+
+  <select id="fetchAllStatusByPessoaId" parameterType="Integer" resultMap="statusResult">
+
+	    SELECT
+		<include refid="allStatusColumns" />
+	    FROM status b where tabelaEnum = 23 and parentId = #{id}
+
+	    ORDER BY dataStatus ASC
+  </select>
+
+
+<select id="fetchAllStatusByProduto" parameterType="Integer" resultMap="statusResult">
+
+	    SELECT
+		<include refid="allStatusColumns" />
+	    FROM status b where tabelaEnum = 45 and parentId = #{id}
+
+	    ORDER BY dataStatus ASC
+  </select>
+
+  <select id="fetchStatusByNota" parameterType="Integer" resultMap="statusResult">
+
+	    SELECT
+		<include refid="allStatusColumns" />
+	    FROM status b where tabelaEnum = 32 and parentId = #{id}
+
+	    ORDER BY dataStatus ASC
+  </select>
+
+  <select id="fetchAllStatusByContatoId" parameterType="Integer" resultMap="statusResult">
+
+	    SELECT
+		<include refid="allStatusColumns" />
+	    FROM status b where tabelaEnum = 32 and parentId = #{id}
+
+	    ORDER BY dataStatus ASC
+  </select>
+
+  <select id="fetchAllStatus" resultMap="statusResult">
+    SELECT
+	<include refid="allStatusColumns" />
+    FROM status ORDER BY nome ASC
+  </select>
+
+  <select id="fetchStatusById" parameterType="FetchByIdRequest" resultMap="statusResult">
+    			   SELECT
+						<include refid="allStatusColumns" />
+ 				   FROM status b
+
+					<where>
+				  		 <choose>
+							<when test="id != null and id != ''">
+								business_id = #{id}
+				    		</when>
+				    	 </choose>
+				  </where>
+  </select>
+
+  <select id="fetchStatusByParentId" resultMap="statusResult">
+	  SELECT id,<include refid="allStatusColumns" />
+        FROM status
+     WHERE  parentId=#{id} and tabelaenum=53
+  </select>
+
+  <select id="fetchAllStatussByRequest" parameterType="PagedInquiryRequest" resultMap="statusResult">
+    SELECT * FROM
+    			(
+
+    						<include refid="allStatusColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY nome) AS RowNumber
+    				FROM status b
+						where a = a
+					<if test="parentId != null">
+						AND id = #{id}
+					</if>
+					 <if test="statusList != null and !statusList.isEmpty()">
+					     AND PGSI_status IN
+					     <foreach item="item" index="index" collection="statusList"
+						     open="(" separator="," close=")">
+						   	 #{item.value}
+						 </foreach>
+					 </if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+
+</mapper>
