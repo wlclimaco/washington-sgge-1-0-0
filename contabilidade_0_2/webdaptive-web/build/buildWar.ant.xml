@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Build webdaptive-web" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<include file="${ivyConfigPath}\..\AntConfig\QAT-ant-common-targets.xml" optional="false" />
+
+	<target name="build">
+
+		<antcall target="QAT.mainBuildWar">
+			<param name="moduleName" value="webdaptive-web" />
+			<param name="configurationProjectName" value="webdaptive-configuration" />
+			<param name="coreConfigurationDir" value="../../qat-configuration-core" />
+			<param name="coreConfigurationSubDir" value="web-fe" />
+			<param name="noCopyOverCoreContextFiles" value="true" />
+			<param name="localWebContentDir" value="../WebContent" />
+			<param name="localClassesDir" value="../bin" />
+ 			<param name="logFile" value="qat-webdaptive.log" />
+ 			<param name="logDir" value="../logs" />
+			<param name="ivyUseCacheOnly" value="false" />
+			<param name="deleteFromWarLibList" value="javax.activation*.jar,javax.jms*.jar,javax.mail*.jar,ehcache*.jar" />
+		</antcall>
+
+		<!-- Quick fix to make sure the war file matches the old war file name. -->
+		<copy file="../dist/webdaptive-web-0.0.2.war" tofile="../dist/qat-webdaptive.war" overwrite="true" />
+
+	</target>
+
+</project>

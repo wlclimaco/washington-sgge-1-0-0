@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="Build webdaptive-web" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<include file="${ivyConfigPath}\..\AntConfig\QAT-ant-common-targets.xml" optional="false" />
+
+	<target name="build">
+		<antcall target="QAT.mainBuild">
+			<param name="moduleName" value="webdaptive-web" />
+		</antcall>
+	</target>
+
+</project>

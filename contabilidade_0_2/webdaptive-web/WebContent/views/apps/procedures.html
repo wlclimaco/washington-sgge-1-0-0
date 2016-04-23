@@ -1,0 +1,43 @@
+<div class="page page-table" data-ng-controller="ProceduresController as pc" ng-if="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_DOMAIN_USERS') || hasRole('ROLE_GUEST')">
+    <div class="col-md-12">	
+		<div class="panel panel-default">
+			<div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Procedures Table </strong>&nbsp;<a href="javascript:;" ng-if="hasRole('ROLE_DOMAIN_ADMINS')" data-ng-click="pc.refreshProcedures(96)" ><i class="fa fa-refresh" ng-class="{'fa-spin': pc.isActive}" ></i></a></div>
+			<div class="panel-body" >
+				<div class="row">
+					<div ag-grid="pc.procedureGridOptions" style="height:520px;" class="ag-fresh"></div>
+				</div>	
+				<div class="row" ng-if="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_DOMAIN_USERS')">	
+					<form name="pc.form_procedure" class="form-validation">
+                        <fieldset>					
+							<div class="callout callout-info">						
+								<div class="form-group">
+									<label for="pcode" class="col-sm-2">Code</label>
+									<div class="col-sm-10">
+										<input type="text" name="pcode" class="form-control input-primary" required data-ng-minlength=1	data-ng-maxlength=10 data-ng-model="pc.procedure.code">
+									</div>
+								</div>
+								<div class="space"></div>	
+								<div class="form-group">
+									<label for="pdesc" class="col-sm-2">Description</label>
+									<div class="col-sm-10">
+										<input type="text" name="pdesc" class="form-control input-primary" required data-ng-minlength=1 data-ng-maxlength=50 data-ng-model="pc.procedure.description">
+									</div>
+									<div class="space"></div>		
+									<p>
+										<button type="button" ng-click="pc.processButtons('A')" ng-if="hasRole('ROLE_DOMAIN_ADMINS')" class="btn btn-success">Add</button>
+										<button type="button" ng-click="pc.processButtons('U')" ng-if="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_DOMAIN_USERS')" class="btn btn-info">Update</button>
+										<button type="button" ng-click="pc.processButtons('D')" ng-if="hasRole('ROLE_DOMAIN_ADMINS')" class="btn btn-warning">Delete</button>
+										<button type="button" ng-click="pc.processButtons('L')" ng-if="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_DOMAIN_USERS')" class="btn btn-success">List</button>										
+										<button type="button" ng-click="pc.clearForm()" ng-if="hasRole('ROLE_DOMAIN_ADMINS') || hasRole('ROLE_DOMAIN_USERS')" class="btn btn-danger">Clear</button>
+									</p>							
+								</div>
+							</div>
+                        </fieldset>	
+					</form>								
+					<div data-ui-footer></div>						
+				</div>				
+			</div>	
+		</div>
+	</div>	
+</div>
+<div class="col-md-12 text-center" ng-hide="authToken"><h3>Unauthorized</h3><div data-ui-footer></div></div>

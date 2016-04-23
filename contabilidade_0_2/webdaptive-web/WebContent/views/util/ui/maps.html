@@ -1,0 +1,55 @@
+<div class="page">
+
+    <section>
+        <section class="panel panel-default">
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Google Map (With Traffic) - You are Here!</strong></div>
+            <div class="panel-body">
+				<map class="ui-map" center="current-location" zoom="14" scrollwheel="false"> 
+				  <marker visible="true" centered="true" position="current-location" title="You are Here!" animation="Animation.DROP"></marker>
+				  <traffic-layer></traffic-layer>					  
+				</map>				
+            </div>
+        </section>		
+	
+        <section class="panel panel-default">
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Google Map (With Traffic) - Omaha</strong></div>
+            <div class="panel-body">
+                <map class="ui-map"  zoom="11" center="[41.25, -95.95]" scrollwheel="false">
+                    <marker position="[41.258, -95.936]" title="QAT Global-Headquarters" animation="Animation.DROP"></marker>
+                    <marker position="[41.259, -95.970]" title="Drag Me" draggable="true"></marker>
+					<traffic-layer></traffic-layer>						
+                </map>
+            </div>
+        </section>
+		
+        <section class="panel panel-default">
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Google Map (With Traffic) - Uberaba Brazil</strong></div>
+            <div class="panel-body">
+                <map class="ui-map" zoom="14" center="[-19.7539784,-47.9349623]" scrollwheel="false">
+                    <marker position="[-19.7572729,-47.9481899]" title="QAT Global-Uberaba" animation="Animation.DROP"></marker>
+					<traffic-layer></traffic-layer>						
+                </map>
+            </div>
+        </section>		
+
+        <section class="panel panel-default">
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Google Map - Dynamic Map</strong></div>
+            <div class="panel-body" data-ng-controller="MapDemoController">
+                <map class="ui-map" zoom="13" center="[40.75918, -73.985122]" scrollwheel="false"></map>
+            </div>
+        </section>
+
+        <section class="panel panel-default">
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Google Map - Styled</strong></div>
+            <div class="panel-body">
+                <map class="ui-map" zoom="11" center="[41.25, -95.95]"
+                     scrollwheel="false"
+                     styles='[{"featureType": "all", "stylers": [{ "saturation": -100 } ] }]'>
+                    <marker position="[41.258, -95.936]" title="Drag Me" draggable="true"></marker>
+                </map>
+            </div>
+        </section>
+	
+    </section>
+	<div data-ui-footer></div>	
+</div>

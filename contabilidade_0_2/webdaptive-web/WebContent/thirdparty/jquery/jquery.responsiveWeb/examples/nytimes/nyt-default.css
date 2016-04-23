@@ -1,0 +1,34 @@
+.loadingDiv { background:#AAA url('../../img/loading.gif') no-repeat center center !important; }
+.debugDiv {	font-family:arial, helvetica, sans-serif;padding:2px; }
+
+body.w480 #shell, body.android #shell { margin: 15px auto;overflow: hidden;width: 452px; }
+body.w480 #page, body.android #page { padding: 2px;width: 445px; }
+body.w480 #branding, body.android #branding { clear: both;padding-top: 5px; }
+body.w480 #masthead, body.android #masthead { height: auto; }
+body.w480 #HPTopNav, body.android #HPTopNav,
+body.w480 #toolsHome, body.android #toolsHome,
+body.w480 #toolbar .inlineSearchControl, body.android #toolbar .inlineSearchControl { display: none; }
+body#home.w480 .baseLayout, body#home.w480 .baseLayoutBelowFold,
+body#home.android .baseLayout, body#home.android .baseLayoutBelowFold { width: 100%; }
+body#home.w480 .spanAB, body#home.w480 .spanABBelowFold,
+body#home.android .spanAB, body#home.android .spanABBelowFold,
+body#home.w480 .abColumn, body#home.android .abColumn { width: 445px; }
+body#home.w480 .baseLayout, body#home.android .baseLayout { background: transparent; }
+body#home.w480 #ledePackageRegion.noBackground, body#home.android #ledePackageRegion.noBackground { background: #e5e5e5 !important; }
+body#home.w480 #ledePackageRegion .aColumn, body#home.android #ledePackageRegion .aColumn { width: 250px; }
+body#home.w480 #ledePackageRegion .bColumn, body#home.android #ledePackageRegion .bColumn { width: 180px; }
+body#home.w480 .abColumn .wideB .aColumn, body#home.android .abColumn .wideB .aColumn { width: 180px; }
+body#home.w480 .abColumn .wideB .bColumn, body#home.android .abColumn .wideB .bColumn { width: 260px; }
+body#home.w480 .cColumn, body#home.android .cColumn { width: 445px; }
+body#home.w480 #globalCarousel, body#home.android #globalCarousel { width: 435px; }
+body#home.w480 #globalCarousel #carouselNav, body#home.android #globalCarousel #carouselNav { width: 430px; }
+body#home.w480 #globalCarousel #globalCarouselSlideContainer, body#home.android #globalCarousel #globalCarouselSlideContainer { width: 430px; }
+body#home.w480 .wideA .aColumn, body#home.android .wideA .aColumn { width: 435px; }
+body#home.w480 #wsod-container, body#home.android #wsod-container { margin: 0 auto; }
+body#home.w480 .baseLayoutBelowFold .nav, body#home.android .baseLayoutBelowFold .nav { display:none; }
+body#home.w480 #wellRegion .subColumn-3 .column, body#home.android #wellRegion .subColumn-3 .column { width:148px; } 
+body#home.w480 .baseLayoutBelowFold, body#home.android .baseLayoutBelowFold { background:transparent; }
+body#home.w480 .spanABBelowFold .singleAd div, body#home.android .spanABBelowFold .singleAd div { margin:0 auto; }
+body#home.w480 .moveThumbAlot .thumbnail, body#home.android .moveThumbAlot .thumbnail { margin-top: -12px; }
+body#home.w480 #globalCarousel li.carouselLi, body#home.android #globalCarousel li.carouselLi { width: 425px;background:transparent; }
+body#home.w480 #globalCarousel .subColumn-2 .column, body#home.android #globalCarousel .subColumn-2 .column { width: 212px; }
