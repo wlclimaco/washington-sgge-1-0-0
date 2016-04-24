@@ -36,7 +36,7 @@ public final class EmpresaBARD extends SqlSessionDaoSupport
 	public static Integer maintainInsertEntidade(Empresa empresa,Integer historicoId,TabelaEnum tabelaEnum,
 			InternalResultsResponse<?> response)
 	{
-		Integer count = 0;
+//		Integer count = 0;
 //		if (!ValidationUtil.isNullOrEmpty(empresa.getEnderecos()))
 //		{
 //			count +=
@@ -98,7 +98,7 @@ public final class EmpresaBARD extends SqlSessionDaoSupport
 //
 //		}
 
-		return count;
+		return 0;
 
 	}
 }

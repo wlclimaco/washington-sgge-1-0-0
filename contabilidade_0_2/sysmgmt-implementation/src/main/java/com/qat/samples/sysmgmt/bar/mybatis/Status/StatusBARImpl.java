@@ -9,6 +9,7 @@ import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.MyBatisBARHelper;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.PagedResultsBARD;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
@@ -38,19 +39,19 @@ private static final String STMT_UPDATE_STATUS = NAMESPACE_STATUS + "updateStatu
 private static final String STMT_DELETE_STATUS = NAMESPACE_STATUS + "deleteStatusById";
 
 	/** The Constant STMT_DELETE_STATUS_ALL. */
-	private static final String STMT_DELETE_STATUS_ALL = NAMESPACE_STATUS + "deleteAllStatuss";
+	private static final String STMT_DELETE_STATUS_ALL = NAMESPACE_STATUS + "deleteAllStatus";
 
 	/** The Constant STMT_FETCH_STATUS. */
 	private static final String STMT_FETCH_STATUS = NAMESPACE_STATUS + "fetchStatusById";
 
 	/** The Constant STMT_FETCH_STATUS_ALL. */
-	private static final String STMT_FETCH_STATUS_ALL = NAMESPACE_STATUS + "fetchAllStatuss";
+	private static final String STMT_FETCH_STATUS_ALL = NAMESPACE_STATUS + "fetchAllStatus";
 
 	/** The Constant STMT_FETCH_STATUS_COUNT. */
 	private static final String STMT_FETCH_STATUS_COUNT = NAMESPACE_STATUS + "fetchStatusRowCount";
 
 	/** The Constant STMT_FETCH_STATUS_ALL_REQUEST. */
-	private static final String STMT_FETCH_STATUS_ALL_REQUEST = NAMESPACE_STATUS + "fetchAllStatussRequest";
+	private static final String STMT_FETCH_STATUS_ALL_REQUEST = NAMESPACE_STATUS + "fetchAllStatusRequest";
 
 //===================================### STATUS ####======================================
 	/**
@@ -137,7 +138,7 @@ public InternalResultsResponse<Status> fetchAllStatus(Status status)
 public InternalResultsResponse<Status> fetchStatusByRequest(PagedInquiryRequest request)
 {
 	InternalResultsResponse<Status> response = new InternalResultsResponse<Status>();
-	fetchStatussByRequest(getSqlSession(), request, STMT_FETCH_STATUS_COUNT, STMT_FETCH_STATUS_ALL_REQUEST,
+	PagedResultsBARD.fetchObjectsByRequest(getSqlSession(), request, STMT_FETCH_STATUS_COUNT, STMT_FETCH_STATUS_ALL_REQUEST,
 			response);
 	return response;
 }
