@@ -5,11 +5,29 @@ import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.MyBatisBARHelper;
+import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.bar.Cadastros.ICadastrosBAR;
+import com.qat.samples.sysmgmt.bar.Documentos.IDocumentoBAR;
+import com.qat.samples.sysmgmt.bar.Email.IEmailBAR;
 import com.qat.samples.sysmgmt.bar.Empresa.IEmpresaBAR;
+import com.qat.samples.sysmgmt.bar.Endereco.IEnderecoBAR;
+import com.qat.samples.sysmgmt.bar.Fiscal.IFiscalBAR;
+import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
+import com.qat.samples.sysmgmt.bar.Notes.INotesBAR;
+import com.qat.samples.sysmgmt.bar.Site.ISiteBAR;
+import com.qat.samples.sysmgmt.bar.Socios.ISociosBAR;
+import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.ContaCorrenteBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.HistoricoBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.PlanoBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.SociosBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.UsuarioBARD;
 import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
@@ -17,6 +35,8 @@ import com.qat.samples.sysmgmt.entidade.model.Usuario;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.AcaoEnum;
+import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
 
@@ -143,12 +163,15 @@ private static final String STMT_DELETE_USUARIO = NAMESPACE_USUARIO + "deleteUsu
 	/** The Constant STMT_FETCH_USUARIO_ALL_REQUEST. */
 	private static final String STMT_FETCH_USUARIO_ALL_REQUEST = NAMESPACE_USUARIO + "fetchAllUsuariosRequest";
 
+
+	private static final String EMPRESA_STMT_INSERT = null;
+
 //===================================### EMPRESA ####======================================
 
 /** The endereco dac. */
 	IEnderecoBAR enderecoBAR;
 
-	ICidadeBAR cidadeBAR;
+	ICadastrosBAR cidadeBAR;
 
 	/** The telefone dac. */
 	ITelefoneBAR telefoneBAR;
@@ -160,7 +183,7 @@ private static final String STMT_DELETE_USUARIO = NAMESPACE_USUARIO + "deleteUsu
 	ISociosBAR socioBAR;
 
 	/** The cnae dac. */
-	ICnaeBAR cnaeBAR;
+	IFiscalBAR cnaeBAR;
 
 	/** The documento dac. */
 	IDocumentoBAR documentoBAR;
@@ -171,46 +194,144 @@ private static final String STMT_DELETE_USUARIO = NAMESPACE_USUARIO + "deleteUsu
 	/** The status dac. */
 	IStatusBAR statusBAR;
 
-	IPlanoBAR planoBAR;
+	ISiteBAR planoBAR;
 
-	IUsuarioBAR usuarioBAR;
+	IEmpresaBAR usuarioBAR;
 
-	INoteBAR noteBAR;
-	
-	
+	INotesBAR noteBAR;
+
+
+public IEnderecoBAR getEnderecoBAR() {
+		return enderecoBAR;
+	}
+
+	public void setEnderecoBAR(IEnderecoBAR enderecoBAR) {
+		this.enderecoBAR = enderecoBAR;
+	}
+
+	public ICadastrosBAR getCidadeBAR() {
+		return cidadeBAR;
+	}
+
+	public void setCidadeBAR(ICadastrosBAR cidadeBAR) {
+		this.cidadeBAR = cidadeBAR;
+	}
+
+	public ITelefoneBAR getTelefoneBAR() {
+		return telefoneBAR;
+	}
+
+	public void setTelefoneBAR(ITelefoneBAR telefoneBAR) {
+		this.telefoneBAR = telefoneBAR;
+	}
+
+	public IEmailBAR getEmailBAR() {
+		return emailBAR;
+	}
+
+	public void setEmailBAR(IEmailBAR emailBAR) {
+		this.emailBAR = emailBAR;
+	}
+
+	public ISociosBAR getSocioBAR() {
+		return socioBAR;
+	}
+
+	public void setSocioBAR(ISociosBAR socioBAR) {
+		this.socioBAR = socioBAR;
+	}
+
+	public IFiscalBAR getCnaeBAR() {
+		return cnaeBAR;
+	}
+
+	public void setCnaeBAR(IFiscalBAR cnaeBAR) {
+		this.cnaeBAR = cnaeBAR;
+	}
+
+	public IDocumentoBAR getDocumentoBAR() {
+		return documentoBAR;
+	}
+
+	public void setDocumentoBAR(IDocumentoBAR documentoBAR) {
+		this.documentoBAR = documentoBAR;
+	}
+
+	public IHistoricoBAR getHistoricoBAR() {
+		return historicoBAR;
+	}
+
+	public void setHistoricoBAR(IHistoricoBAR historicoBAR) {
+		this.historicoBAR = historicoBAR;
+	}
+
+	public IStatusBAR getStatusBAR() {
+		return statusBAR;
+	}
+
+	public void setStatusBAR(IStatusBAR statusBAR) {
+		this.statusBAR = statusBAR;
+	}
+
+	public ISiteBAR getPlanoBAR() {
+		return planoBAR;
+	}
+
+	public void setPlanoBAR(ISiteBAR planoBAR) {
+		this.planoBAR = planoBAR;
+	}
+
+	public IEmpresaBAR getUsuarioBAR() {
+		return usuarioBAR;
+	}
+
+	public void setUsuarioBAR(IEmpresaBAR usuarioBAR) {
+		this.usuarioBAR = usuarioBAR;
+	}
+
+	public INotesBAR getNoteBAR() {
+		return noteBAR;
+	}
+
+	public void setNoteBAR(INotesBAR noteBAR) {
+		this.noteBAR = noteBAR;
+	}
+
+
+
 	/**
 /*
  * (non-Javadoc)
  * @see com.qat.samples.sysmgmt.IEmailBAR.bar.IEmpresaBAR#insertEmpresa(com.qat.samples.sysmgmt.base.model.Empresa)
  */
 @Override
-public InternalResponse insertEmpresa(Empresa county)
+public InternalResponse insertEmpresa(Empresa empresa)
 {
 	Integer historicoId = 0;
 	Integer insertCount = 0;
 	InternalResponse response = new InternalResponse();
-	
-	if (empresa.getModelAction() == PersistanceActionEnum.INSERT)
+
+	if (empresa.getModelAction() == PersistenceActionEnum.INSERT)
 		{
 			// First insert the root
 			// Is successful the unique-id will be populated back into the object.
-			insertCount = MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_EMPRESA, county, response);
+			insertCount = MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_EMPRESA, empresa, response);
 
 			historicoId =
-					HistoricoDACD.inserthistorico(empresa.getId(), empresa.getId(), empresa.getUserId(), response,
-							TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoDAC);
+					HistoricoBARD.inserthistorico(empresa.getId(), empresa.getId(), empresa.getUserId(), (InternalResultsResponse<?>) response,
+							TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoBAR);
 
 			empresa.setProcessId(historicoId);
 
-			insertCount = QATMyBatisDacHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, empresa, response);
+			insertCount = MyBatisBARHelper.doInsert(getSqlSession(), EMPRESA_STMT_INSERT, empresa, response);
 
 			historicoId =
-					HistoricoDACD.inserthistoricoItens(empresa.getId(), empresa.getUserId(), response,
-							TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoId, getHistoricoDAC());
+					HistoricoBARD.inserthistoricoItens(empresa.getId(), empresa.getUserId(), (InternalResultsResponse<?>) response,
+							TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoId, getHistoricoBAR());
 
-			//EmailUtilDACD.maintainEmailEnviar();
-			//GerarTarefaDACD.maintainGerarTarefas();
-			//GerarFinanceiroDACD.maintainGerarFinanceiro();
+			//EmailUtilBARD.maintainEmailEnviar();
+			//GerarTarefaBARD.maintainGerarTarefas();
+			//GerarFinanceiroBARD.maintainGerarFinanceiro();
 
 		}
 		else
@@ -220,51 +341,45 @@ public InternalResponse insertEmpresa(Empresa county)
 		if (!ValidationUtil.isNullOrEmpty(empresa.getSocios()))
 		{
 			insertCount +=
-					SociosDACD.maintainSocioAssociations(empresa.getSocios(), response, empresa.getId(), null, null,
-							TabelaEnum.EMPRESA, getSocioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
-							empresa.getCreateUser(), historicoId, historicoId, getDocumentoDAC());
+					SociosBARD.maintainSocioAssociations(empresa.getSocios(), (InternalResultsResponse<?>) response, empresa.getId(), null, null,
+							TabelaEnum.EMPRESA, getSocioBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
+							empresa.getCreateUser(), historicoId, historicoId, getDocumentoBAR());
 
 		}
 		if (!ValidationUtil.isNullOrEmpty(empresa.getPlanoList()))
 		{
 			insertCount +=
-					PlanoDACD.maintainPlanoAssociations(empresa.getPlanoList(), response, empresa.getId(), null, null,
-							TabelaEnum.EMPRESA, getPlanoDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+					PlanoBARD.maintainPlanoAssociations(empresa.getPlanoList(), response, empresa.getId(), null, null,
+							TabelaEnum.EMPRESA, getPlanoBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
 							empresa.getCreateUser(), historicoId, historicoId);
 		}
 
 		if (!ValidationUtil.isNullOrEmpty(empresa.getUsuarioList()))
 		{
 			insertCount +=
-					UsuarioDACD.maintainUsuarioAssociations(empresa.getUsuarioList(), response, empresa.getId(), null,
+					UsuarioBARD.maintainUsuarioAssociations(empresa.getUsuarioList(), (InternalResultsResponse<?>) response, empresa.getId(), null,
 							null,
-							TabelaEnum.EMPRESA, getUsuarioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							TabelaEnum.EMPRESA, getUsuarioBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
 							empresa.getCreateUser(), historicoId, historicoId);
 		}
 
 		if (!ValidationUtil.isNullOrEmpty(empresa.getContaCorrenteList()))
 		{
 			insertCount +=
-					ContaCorrenteBARD.maintainUsuarioAssociations(empresa.getUsuarioList(), response, empresa.getId(), null,
+					ContaCorrenteBARD.maintainContaCorrenteAssociationsA(empresa.getContaCorrenteList(), response, empresa.getId(), null,
 							null,
-							TabelaEnum.EMPRESA, getUsuarioDAC(), getStatusDAC(), getHistoricoDAC(), empresa.getId(),
+							TabelaEnum.EMPRESA, getUsuarioBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
 							empresa.getCreateUser(), historicoId, historicoId);
 		}
 
-		insertCount += EmpresaBAR.maintainInsertEntidade(empresa, historicoId, historicoId, TabelaEnum.EMPRESA, response);
+	//	insertCount += EmpresaBARD.maintainInsertEntidade(empresa, historicoId, historicoId, TabelaEnum.EMPRESA, response);
 
 		if (response.isInError())
 		{
 			return response;
 		}
 
-		// Finally, if something was inserted then add the Empresa to the result.
-		if (insertCount > 0)
-		{
-			response.addResult(empresa);
-		}
 
-		return response;
 	return response;
 }
 

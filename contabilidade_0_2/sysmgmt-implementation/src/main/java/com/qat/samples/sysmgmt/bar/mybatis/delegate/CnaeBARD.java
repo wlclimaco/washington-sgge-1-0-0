@@ -22,7 +22,7 @@ import com.qat.samples.sysmgmt.util.model.TypeEnum;
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
  */
-public final class CnaeDACD extends SqlSessionDaoSupport
+public final class CnaeBARD extends SqlSessionDaoSupport
 {
 
 	/** The Constant ZERO. */
@@ -79,7 +79,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 						status.setStatus(CdStatusTypeEnum.ATIVO);
 						List<Status> statusList = new ArrayList<Status>();
 						countSucess =
-								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
+								StatusBARD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
 										processId, historicoId);
 					}
@@ -97,7 +97,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 					if (countSucess == true)
 					{
 						countSucess =
-								StatusDACD
+								StatusBARD
 										.maintainStatusAssociations(cnae.getStatusList(), response, cnae.getId(),
 												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
 												historicoDAC, processId, historicoId);
@@ -109,7 +109,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
 					countSucess =
-							StatusDACD.maintainStatusAssociations(statusList, response, cnae.getId(), null,
+							StatusBARD.maintainStatusAssociations(statusList, response, cnae.getId(), null,
 									AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
 									processId, historicoId);
 
@@ -122,7 +122,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 						status.setStatus(CdStatusTypeEnum.ATIVO);
 						statusList = new ArrayList<Status>();
 						countSucess =
-								StatusDACD.maintainStatusAssociations(statusList, response, count, null,
+								StatusBARD.maintainStatusAssociations(statusList, response, count, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
 										processId, historicoId);
 					}
@@ -161,7 +161,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 					status.setStatus(CdStatusTypeEnum.ATIVO);
 					List<Status> statusList = new ArrayList<Status>();
 					countSucess =
-							StatusDACD.maintainStatusAssociations(statusList, response, parentId, null,
+							StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
 									AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
 									processId, historicoId);
 				}
@@ -171,7 +171,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 				if (countSucess == true)
 				{
 					countSucess =
-							StatusDACD
+							StatusBARD
 									.maintainStatusAssociations(cnae.getStatusList(), response, cnae.getId(),
 											null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
 											historicoDAC, processId, historicoId);
@@ -183,7 +183,7 @@ public final class CnaeDACD extends SqlSessionDaoSupport
 				status.setStatus(CdStatusTypeEnum.DELETADO);
 				List<Status> statusList = new ArrayList<Status>();
 				countSucess =
-						StatusDACD.maintainStatusAssociations(statusList, response, cnae.getId(), null,
+						StatusBARD.maintainStatusAssociations(statusList, response, cnae.getId(), null,
 								AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
 								processId, historicoId);
 

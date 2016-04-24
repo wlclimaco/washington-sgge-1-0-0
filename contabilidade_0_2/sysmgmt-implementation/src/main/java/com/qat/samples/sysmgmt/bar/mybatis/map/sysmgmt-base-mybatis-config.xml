@@ -16,9 +16,9 @@
   		<typeAlias alias="DrugPrice" type="com.qat.samples.sysmgmt.model.DrugPrice"/>
   		<typeAlias alias="Procedure" type="com.qat.samples.sysmgmt.model.Procedure"/>
   		<typeAlias alias="PagedInquiryRequest" type="com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest"/>
-		
-		<typeAlias alias="QATModels" type="com.qat.samples.sysmgmt.util.model.QATModels1"/>
-  		<typeAlias alias="FetchByIdRequest" type="com.qat.samples.sysmgmt.model.request.FetchByIdRequest"/>
+
+		<typeAlias alias="QATModel1" type="com.qat.samples.sysmgmt.util.model.QATModel1"/>
+  		<typeAlias alias="FetchByIdRequest" type="com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest"/>
   		<typeAlias alias="Entidade" type="com.qat.samples.sysmgmt.entidade.model.Entidade"/>
 
 
@@ -27,7 +27,7 @@
   		<typeAlias alias="CdStatusTypeEnum" type="com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum"/>
 
 
-  		<typeAlias alias="PagedInquiryRequest" type="com.qat.samples.sysmgmt.model.request.PagedInquiryRequest"/>
+  		<typeAlias alias="PagedInquiryRequest" type="com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest"/>
 <!--   		<typeAlias alias="CadastroInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest"/> -->
   		<typeAlias alias="ProdutoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest"/>
 <!--   		<typeAlias alias="CidadeInquiryRequest" type="com.qat.samples.sysmgmt.cidade.model.request.CidadeInquiryRequest"/> -->
@@ -178,7 +178,7 @@
   		<typeAlias alias="ConsultaInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.ConsultaInquiryRequest"/>
 
 		<typeAlias alias="Especialidade" type="com.qat.samples.sysmgmt.clinica.model.Especialidade"/>
-  		<typeAlias alias="EspecialidadePessoa" type="com.qat.samples.sysmgmt.clinica.EspecialidadePessoa"/>
+  		<typeAlias alias="EspecialidadePessoa" type="com.qat.samples.sysmgmt.clinica.model.EspecialidadePessoa"/>
 
 		<typeAlias alias="Exame" type="com.qat.samples.sysmgmt.clinica.model.Exame"/>
   		<typeAlias alias="ExameInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.ExameInquiryRequest"/>
@@ -190,7 +190,7 @@
   		<typeAlias alias="PacienteInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.PacienteInquiryRequest"/>
 
 		<typeAlias alias="PlanoSaude" type="com.qat.samples.sysmgmt.clinica.model.PlanoSaude"/>
-  		<typeAlias alias="PlanoSaudePessoa" type="com.qat.samples.sysmgmt.clinica.PlanoSaudePessoa"/>
+  		<typeAlias alias="PlanoSaudePessoa" type="com.qat.samples.sysmgmt.clinica.model.PlanoSaudePessoa"/>
   		<typeAlias alias="PlanoSaudeInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.PlanoSaudeInquiryRequest"/>
 
 
@@ -246,10 +246,10 @@
 		<typeAlias alias="UniMedProd" type="com.qat.samples.sysmgmt.produto.model.UniMedProd"/>
   		<typeAlias alias="UniMedInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest"/>
 
-  		<typeAlias alias="Advogado" type="com.qat.samples.sysmgmt.advocacia.model.Advogado"/>
-  		<typeAlias alias="AdvogadoInquiryRequest" type="com.qat.samples.sysmgmt.advocacia.model.request.AdvogadoInquiryRequest"/>
-		
-		
+  		<typeAlias alias="Advogado" type="com.qat.samples.sysmgmt.advocacia.Advogado"/>
+  		<typeAlias alias="AdvogadoInquiryRequest" type="com.qat.samples.sysmgmt.advocacia.request.AdvogadoInquiryRequest"/>
+
+
   	</typeAliases>
 
  	<mappers>

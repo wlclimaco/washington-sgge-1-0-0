@@ -7,12 +7,12 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.bar.Email.IEmailBAR;
+import com.qat.samples.sysmgmt.bar.Empresa.IEmpresaBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.entidade.model.Usuario;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
@@ -21,7 +21,7 @@ import com.qat.samples.sysmgmt.util.model.TypeEnum;
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
  */
-public final class EmailDACD extends SqlSessionDaoSupport
+public final class UsuarioBARD extends SqlSessionDaoSupport
 {
 
 	/** The Constant ZERO. */
@@ -37,33 +37,33 @@ public final class EmailDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainEmailAssociations(List<Email> emailList,
+	public static Integer maintainUsuarioAssociations(List<Usuario> usuarioList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IEmailBAR emailDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
+			TabelaEnum tabelaEnum, IEmpresaBAR usuarioDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(emailList))
+		if (ValidationUtil.isNullOrEmpty(usuarioList))
 		{
 			return 0;
 		}
 		// For Each Contact...
-		for (Email email : emailList)
+		for (Usuario usuario : usuarioList)
 		{
 			// Make sure we set the parent key
-			email.setParentId(parentId);
-			email.setTabelaEnum(tabelaEnum);
-			email.setProcessId(processId);
+			usuario.setParentId(parentId);
+			usuario.setTabelaEnum(tabelaEnum);
+			usuario.setProcessId(processId);
 
-			if (ValidationUtil.isNull(email.getModelAction()))
+			if (ValidationUtil.isNull(usuario.getModelAction()))
 			{
 				continue;
 			}
-			switch (email.getModelAction())
+			switch (usuario.getModelAction())
 			{
 				case INSERT:
-					count = emailDAC.insertEmail(email).hasSystemError();
+					count = usuarioDAC.insertUsuario(usuario).hasSystemError();
 					if (count == true)
 					{
 						Status status = new Status();
@@ -71,30 +71,30 @@ public final class EmailDACD extends SqlSessionDaoSupport
 						List<Status> statusList = new ArrayList<Status>();
 						statusList.add(status);
 						count =
-								StatusDACD.maintainStatusAssociations(statusList, response, parentId, null,
+								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.EMAIL, statusDAC, historicoDAC,
 										processId, historicoId);
 					}
 					break;
 				case UPDATE:
-					count = emailDAC.updateEmail(email).hasSystemError();
+					count = usuarioDAC.updateUsuario(usuario).hasSystemError();
 					if (count == true)
 					{
 						count =
-								StatusDACD.maintainStatusAssociations(email.getStatusList(), response, email.getId(),
+								StatusBARD.maintainStatusAssociations(usuario.getStatusList(), response, usuario.getId(),
 										null,
 										AcaoEnum.UPDATE, UserId, empId, TabelaEnum.EMAIL, statusDAC, historicoDAC,
 										processId, historicoId);
 					}
 					break;
 				case DELETE:
-					count = emailDAC.deleteEmailById(email).hasSystemError();
+					count = usuarioDAC.deleteUsuarioById(usuario).hasSystemError();
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
 					statusList.add(status);
 					count =
-							StatusDACD.maintainStatusAssociations(statusList, response, email.getId(), null,
+							StatusBARD.maintainStatusAssociations(statusList, response, usuario.getId(), null,
 									AcaoEnum.DELETE, UserId, empId, TabelaEnum.EMAIL, statusDAC, historicoDAC,
 									processId, historicoId);
 

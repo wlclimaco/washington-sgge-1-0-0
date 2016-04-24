@@ -7,12 +7,12 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.bar.Email.IEmailBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
-import com.qat.samples.sysmgmt.bar.Notes.INotesBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.Note;
+import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
@@ -21,8 +21,12 @@ import com.qat.samples.sysmgmt.util.model.TypeEnum;
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
  */
-public final class NotesDACD extends SqlSessionDaoSupport
+public final class EmailBARD extends SqlSessionDaoSupport
 {
+
+	/** The Constant ZERO. */
+	private static final Integer ZERO = 0;
+
 	/**
 	 * Fetch objects by request.
 	 *
@@ -33,62 +37,65 @@ public final class NotesDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainNoteAssociations(List<Note> noteList,
+	public static Integer maintainEmailAssociations(List<Email> emailList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, INotesBAR noteDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC,
-			Integer empId, String UserId, Integer processId, Integer historicoId)
+			TabelaEnum tabelaEnum, IEmailBAR emailDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
+			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(noteList))
+		if (ValidationUtil.isNullOrEmpty(emailList))
 		{
 			return 0;
 		}
 		// For Each Contact...
-		for (Note note : noteList)
+		for (Email email : emailList)
 		{
 			// Make sure we set the parent key
-			note.setParentId(parentId);
-			note.setProcessId(processId);
-			note.setTabelaEnum(tabelaEnum);
+			email.setParentId(parentId);
+			email.setTabelaEnum(tabelaEnum);
+			email.setProcessId(processId);
 
-			if (ValidationUtil.isNull(note.getModelAction()))
+			if (ValidationUtil.isNull(email.getModelAction()))
 			{
 				continue;
 			}
-			switch (note.getModelAction())
+			switch (email.getModelAction())
 			{
 				case INSERT:
-					count = noteDAC.insertNotes(note).hasSystemError();
+					count = emailDAC.insertEmail(email).hasSystemError();
 					if (count == true)
 					{
 						Status status = new Status();
 						status.setStatus(CdStatusTypeEnum.ATIVO);
 						List<Status> statusList = new ArrayList<Status>();
+						statusList.add(status);
 						count =
-								StatusDACD.maintainStatusAssociations(statusList, response, parentId, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.NOTE, statusDAC, historicoDAC,
+								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
+										AcaoEnum.INSERT, UserId, empId, TabelaEnum.EMAIL, statusDAC, historicoDAC,
 										processId, historicoId);
 					}
 					break;
 				case UPDATE:
-					count = noteDAC.updateNotes(note).hasSystemError();
+					count = emailDAC.updateEmail(email).hasSystemError();
 					if (count == true)
 					{
 						count =
-								StatusDACD.maintainStatusAssociations(note.getStatusList(), response,
-										note.getId(), null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.NOTE,
-										statusDAC, historicoDAC, processId, historicoId);
+								StatusBARD.maintainStatusAssociations(email.getStatusList(), response, email.getId(),
+										null,
+										AcaoEnum.UPDATE, UserId, empId, TabelaEnum.EMAIL, statusDAC, historicoDAC,
+										processId, historicoId);
 					}
 					break;
 				case DELETE:
-					count = noteDAC.deleteNotesById(note).hasSystemError();
+					count = emailDAC.deleteEmailById(email).hasSystemError();
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
+					statusList.add(status);
 					count =
-							StatusDACD.maintainStatusAssociations(statusList, response, note.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.NOTE, statusDAC, historicoDAC,
+							StatusBARD.maintainStatusAssociations(statusList, response, email.getId(), null,
+									AcaoEnum.DELETE, UserId, empId, TabelaEnum.EMAIL, statusDAC, historicoDAC,
 									processId, historicoId);
 
 					break;

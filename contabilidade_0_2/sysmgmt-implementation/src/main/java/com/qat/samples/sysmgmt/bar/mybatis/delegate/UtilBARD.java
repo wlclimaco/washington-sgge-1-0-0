@@ -12,7 +12,7 @@ import com.qat.samples.sysmgmt.pessoa.model.Pessoa;
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
  */
-public final class UtilDACD extends SqlSessionDaoSupport
+public final class UtilBARD extends SqlSessionDaoSupport
 {
 
 	/** The Constant ZERO. */

@@ -11,12 +11,6 @@
        necessary if the columns (or aliases) match to the properties
        exactly. -->
 
-  	<resultMap id="changeControlMapping" type="QATModels">
-  		<result property="createUser" column="create_user"/>
-		<result property="createDataUTC" column="create_date"/>
-		<result property="modifyUser" column="modify_user"/>
-		<result property="modifyDataUTC" column="modify_date"/>
-	</resultMap>
 
 	<!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.

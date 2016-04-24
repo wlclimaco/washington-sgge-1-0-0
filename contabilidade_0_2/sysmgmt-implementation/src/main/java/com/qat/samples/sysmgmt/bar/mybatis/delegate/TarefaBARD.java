@@ -22,7 +22,7 @@ import com.qat.samples.sysmgmt.util.model.TypeEnum;
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
  */
-public final class TarefaDACD extends SqlSessionDaoSupport
+public final class TarefaBARD extends SqlSessionDaoSupport
 {
 
 	/** The Constant ZERO. */

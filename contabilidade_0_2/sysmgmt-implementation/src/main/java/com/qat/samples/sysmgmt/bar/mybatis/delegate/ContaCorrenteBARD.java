@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.bar.Empresa.IEmpresaBAR;
 import com.qat.samples.sysmgmt.bar.Financeiro.IFinanceiroBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
@@ -21,7 +23,7 @@ import com.qat.samples.sysmgmt.util.model.TypeEnum;
  * Delegate class for the SysMgmt BARs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
  */
-public final class ContaCorrenteDACD extends SqlSessionDaoSupport
+public final class ContaCorrenteBARD extends SqlSessionDaoSupport
 {
 
 	/** The Constant ZERO. */
@@ -37,9 +39,9 @@ public final class ContaCorrenteDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainContaCorrenteAssociationsA(ContaCorrente contaCorrente,
-			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IFinanceiroBAR contaCorrenteBAR, IStatusBAR statusBAR,
+	public static Integer maintainContaCorrenteAssociationsA(List<ContaCorrente> contaCorrenteList,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			TabelaEnum tabelaEnum, IEmpresaBAR iEmpresaBAR, IStatusBAR statusBAR,
 			IHistoricoBAR historicoBAR,
 			Integer empId,
 			String UserId, Integer processId, Integer historicoId)
@@ -47,11 +49,12 @@ public final class ContaCorrenteDACD extends SqlSessionDaoSupport
 
 		Boolean count = false;
 		// First Maintain Empresa
-		if (ValidationUtil.isNull(contaCorrente))
+		if (ValidationUtil.isNull(contaCorrenteList))
 		{
 			return 0;
 		}
-
+		for (ContaCorrente contaCorrente : contaCorrenteList)
+		{
 		// Make sure we set the parent key
 		contaCorrente.setParentId(parentId);
 		contaCorrente.setProcessId(processId);
@@ -59,43 +62,44 @@ public final class ContaCorrenteDACD extends SqlSessionDaoSupport
 		switch (contaCorrente.getModelAction())
 		{
 			case INSERT:
-				count = contaCorrenteBAR.insertContaCorrente(contaCorrente).hasSystemError();
+				count = ((IFinanceiroBAR) iEmpresaBAR).insertContaCorrente(contaCorrente).hasSystemError();
 				if (count == true)
 				{
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.ATIVO);
 					List<Status> statusList = new ArrayList<Status>();
 					count =
-							StatusDACD.maintainStatusAssociations(statusList, response, parentId, null,
+							StatusBARD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>) response, parentId, null,
 									AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusBAR, historicoBAR,
 									processId, historicoId);
 				}
 				break;
 			case UPDATE:
-				count = contaCorrenteBAR.updateContaCorrente(contaCorrente).hasSystemError();
+				count = ((IFinanceiroBAR) iEmpresaBAR).updateContaCorrente(contaCorrente).hasSystemError();
 				if (count == true)
 				{
 					count =
-							StatusDACD
-									.maintainStatusAssociations(contaCorrente.getStatusList(), response,
+							StatusBARD
+									.maintainStatusAssociations(contaCorrente.getStatusList(), (InternalResultsResponse<?>) response,
 											contaCorrente.getId(),
 											null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusBAR,
 											historicoBAR, processId, historicoId);
 				}
 				break;
 			case DELETE:
-				count = contaCorrenteBAR.deleteContaCorrenteById(contaCorrente).hasSystemError();
+				count = ((IFinanceiroBAR) iEmpresaBAR).deleteContaCorrenteById(contaCorrente).hasSystemError();
 				Status status = new Status();
 				status.setStatus(CdStatusTypeEnum.DELETADO);
 				List<Status> statusList = new ArrayList<Status>();
 				count =
-						StatusDACD.maintainStatusAssociations(statusList, response, contaCorrente.getId(), null,
+						StatusBARD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>) response, contaCorrente.getId(), null,
 								AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusBAR, historicoBAR,
 								processId, historicoId);
 
 				break;
 		}
-
+		}
 		return 1;
+
 	}
 }

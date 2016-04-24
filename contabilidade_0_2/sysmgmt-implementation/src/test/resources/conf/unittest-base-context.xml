@@ -77,7 +77,7 @@
 		</bean>
 		<bean id="pgHikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		    <property name="maximumPoolSize" value="10" />
-		    <property name="minimumIdle" value="2" />
+		    <property name="minimumIdle" value="5" />
 		    <property name="dataSourceClassName" value="org.postgresql.ds.PGSimpleDataSource" />
 		    <property name="username" value="${user}" />
 		    <property name="password" value="${password}" />

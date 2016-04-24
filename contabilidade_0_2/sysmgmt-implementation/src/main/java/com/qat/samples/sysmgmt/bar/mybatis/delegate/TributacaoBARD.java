@@ -7,10 +7,10 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.bar.Classificacao.IClassificacaoBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
-import com.qat.samples.sysmgmt.fiscal.model.Classificacao;
+import com.qat.samples.sysmgmt.bar.Tributacao.ITributacaoBAR;
+import com.qat.samples.sysmgmt.fiscal.model.Tributacao;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.model.Status;
@@ -21,7 +21,7 @@ import com.qat.samples.sysmgmt.util.model.TypeEnum;
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
  */
-public final class ClassificacaoDACD extends SqlSessionDaoSupport
+public final class TributacaoBARD extends SqlSessionDaoSupport
 {
 
 	/** The Constant ZERO. */
@@ -37,67 +37,54 @@ public final class ClassificacaoDACD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainClassificacaoAssociations(Classificacao classificacao,
+	public static Integer maintainTributacaoAssociations(Tributacao tributacao,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IClassificacaoBAR classificacaoDAC, IStatusBAR statusDAC,
-			IHistoricoBAR historicoDAC, Integer empId,
+			TabelaEnum tabelaEnum, ITributacaoBAR tributacaoDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC,
+			Integer empId,
 			String UserId, Integer processId)
 	{
-		Boolean countSucess = false;
-		Integer count = ZERO;
+		Boolean count = false;
 		// First Maintain Empresa
-		if (ValidationUtil.isNull(classificacao))
+		if (ValidationUtil.isNull(tributacao))
 		{
-			return count;
+			return 0;
 		}
-		// For Each Contact...
 		// Make sure we set the parent key
-		classificacao.setParentId(parentId);
+		tributacao.setParentId(parentId);
 
-		if (ValidationUtil.isNull(classificacao.getModelAction()))
-		{
-			return null;
-		}
-		switch (classificacao.getModelAction())
+		switch (tributacao.getModelAction())
 		{
 			case INSERT:
-				countSucess = classificacaoDAC.insertClassificacao(classificacao).hasSystemError();
-				if (count > 0)
+				count = tributacaoDAC.insertTributacao(tributacao).hasSystemError();
+				if (count == true)
 				{
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.ATIVO);
 					List<Status> statusList = new ArrayList<Status>();
-					countSucess =
-							StatusDACD.maintainStatusAssociations(statusList, response, count, null,
+					count =
+							StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
 									AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC,
 									processId, null);
 				}
 				break;
 			case UPDATE:
-				countSucess = classificacaoDAC.updateClassificacao(classificacao).hasSystemError();
-				if (count > 0)
+				count = tributacaoDAC.updateTributacao(tributacao).hasSystemError();
+				if (count == true)
 				{
-					countSucess =
-							StatusDACD
-									.maintainStatusAssociations(classificacao.getStatusList(), response,
-											classificacao.getId(),
+					count =
+							StatusBARD
+									.maintainStatusAssociations(tributacao.getStatusList(), response,
+											tributacao.getId(),
 											null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusDAC,
 											historicoDAC, processId, null);
 				}
 				break;
 			case DELETE:
-
-				Status status = new Status();
-				status.setStatus(CdStatusTypeEnum.DELETADO);
-				List<Status> statusList = new ArrayList<Status>();
-				countSucess =
-						StatusDACD.maintainStatusAssociations(statusList, response, classificacao.getId(), null,
-								AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusDAC, historicoDAC, processId,
-								null);
+				count = tributacaoDAC.deleteTributacaoById(tributacao).hasSystemError();
 
 				break;
 		}
 
-		return count;
+		return 1;
 	}
 }

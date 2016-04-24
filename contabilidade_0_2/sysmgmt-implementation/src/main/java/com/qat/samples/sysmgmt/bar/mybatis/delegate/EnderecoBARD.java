@@ -22,7 +22,7 @@ import com.qat.samples.sysmgmt.util.model.TypeEnum;
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
  */
-public final class EnderecoDACD extends SqlSessionDaoSupport
+public final class EnderecoBARD extends SqlSessionDaoSupport
 {
 
 	/**
@@ -69,7 +69,7 @@ public final class EnderecoDACD extends SqlSessionDaoSupport
 						List<Status> statusList = new ArrayList<Status>();
 						statusList.add(status);
 						count =
-								StatusDACD.maintainStatusAssociations(statusList, response, parentId, null,
+								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.ENDERECO, statusDAC, historicoDAC,
 										processId, historicoId);
 					}
@@ -83,7 +83,7 @@ public final class EnderecoDACD extends SqlSessionDaoSupport
 						List<Status> statusList = new ArrayList<Status>();
 						statusList.add(status);
 						count =
-								StatusDACD.maintainStatusAssociations(statusList, response,
+								StatusBARD.maintainStatusAssociations(statusList, response,
 										endereco.getId(), null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.ENDERECO,
 										statusDAC, historicoDAC, processId, historicoId);
 					}
@@ -95,7 +95,7 @@ public final class EnderecoDACD extends SqlSessionDaoSupport
 					List<Status> statusList = new ArrayList<Status>();
 					statusList.add(status);
 					count =
-							StatusDACD.maintainStatusAssociations(statusList, response, endereco.getId(), null,
+							StatusBARD.maintainStatusAssociations(statusList, response, endereco.getId(), null,
 									AcaoEnum.DELETE, UserId, empId, TabelaEnum.ENDERECO, statusDAC, historicoDAC,
 									processId, historicoId);
 

@@ -68,7 +68,7 @@ public final class CidadeBARD extends SqlSessionDaoSupport
 					List<Status> statusList = new ArrayList<Status>();
 					statusList.add(status);
 					countSucess =
-							StatusDACD.maintainStatusAssociations(cidadeList.getStatusList(), response,
+							StatusBARD.maintainStatusAssociations(cidadeList.getStatusList(), response,
 									cidadeList.getId(),
 									null,
 									AcaoEnum.INSERT, UserId, empId, TabelaEnum.CIDADE, statusDAC, historicoDAC,
@@ -81,7 +81,7 @@ public final class CidadeBARD extends SqlSessionDaoSupport
 				{
 					count = count + 1;
 					countSucess =
-							StatusDACD.maintainStatusAssociations(cidadeList.getStatusList(), response,
+							StatusBARD.maintainStatusAssociations(cidadeList.getStatusList(), response,
 									cidadeList.getId(),
 									null,
 									AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CIDADE, statusDAC, historicoDAC,
