@@ -82,9 +82,9 @@ for(i=0;i < oField.length;i++){
 		}
 	}
 }
-text = text + '		#{createDataUTC},\n';
+text = text + '		#{createDateUTC},\n';
 text = text + '		#{createUser},\n';
-text = text + '		#{modifyDataUTC},\n';
+text = text + '		#{modifyDateUTC},\n';
 text = text + '		#{modifyUser}\n';
 
 text = text + '  </sql>\n';
@@ -99,9 +99,9 @@ for(i=0;i < oField.length;i++){
 		}
 	}
 }
-text = text + '		c.createDataUTC,\n';
+text = text + '		c.createDateUTC,\n';
 text = text + '		c.createUser,\n';
-text = text + '		c.modifyDataUTC,\n';
+text = text + '		c.modifyDateUTC,\n';
 text = text + '		c.modifyUser\n';
  
  text = text + ' </sql>\n';
@@ -165,7 +165,7 @@ text = text + '\n';
 		}
 	}
 }
- text = text + '<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>\n';
+ text = text + '<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>\n';
  text = text + '<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>\n';
  text = text + '   WHERE\n';
   text = text + '    id = #{id}\n';

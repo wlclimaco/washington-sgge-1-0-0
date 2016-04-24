@@ -1,7 +1,7 @@
 //================ PROCESSO
 function ProcessModel() {
 	a = [];
-	
+
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	a.push({ field :{campo : "dataProcess", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "parentId", tipo :"Integer",requerid : true ,primaryKey:false,forenkey : false,model:false,xml:true}});
@@ -12,11 +12,11 @@ function ProcessModel() {
 
 	return a;
 }
-		 
+
 //================ Entidade
 function EntidadeModel() {
 	a = [];
-			 
+
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "nome", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "processId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -32,7 +32,7 @@ function EntidadeModel() {
 	a.push({field :{campo : "statusList", tipo:"List<Status>" ,requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "notes" ,tipo:"List<Note>" ,requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
-}		 
+}
 //================ AUDITORIA
 function AuditoriaModel() {
 	var a = [];
@@ -43,11 +43,11 @@ function AuditoriaModel() {
 	a.push({field :{campo : "noteLIst", tipo :"List<Note>",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 
 return a;
-}	
+}
 
-//================ Advogado	
+//================ Advogado
 function PessoaModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "nome", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -72,17 +72,40 @@ function PessoaModel() {
 return a;
 }
 
-//================ Convenio	
+//================ Convenio
 function ConvenioModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Telefone	
+//================ Convenio
+function ClasseModel() {
+
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Convenio
+function InterfaceModel() {
+
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Convenio
+function FieldModel() {
+
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+//================ Telefone
 function TelefoneModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "typeValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -95,7 +118,7 @@ function TelefoneModel() {
 	return a;
 }
 function ConhecimentoTransporteModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "IdNota" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -111,12 +134,12 @@ function ConhecimentoTransporteModel() {
 	a.push({field :{campo : "transportador", tipo :"Transportador",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "marca", tipo :"Marca",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "estado" , tipo :"Estado",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	
+
 	return a;
 }
-//================ Cidade	
+//================ Cidade
 function CidadeModel() {
-	
+
 	var a = [];
 
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
@@ -126,13 +149,13 @@ function CidadeModel() {
    	a.push({field :{campo : "cep" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
    	a.push({field :{campo : "municipio" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "estado"   , tipo :"Estado",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	
+
 	return a;
 }
 
-//================ Cidade	
+//================ Cidade
 function NotaFiscalModel() {
-	
+
 	var a = [];
 
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
@@ -161,9 +184,9 @@ function NotaFiscalModel() {
 		a.push({field :{campo : "nfStatusList", tipo :"List<NFStatus>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
-//================ Cidade	
+//================ Cidade
 function NotaFiscalModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "IdNota", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -174,12 +197,12 @@ function NotaFiscalModel() {
     a.push({field :{campo : "cfop"    , tipo :"Cfop",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "classificacao"   , tipo :"Classificacao",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "tributosList" , tipo :"List<Tributos>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	
+
 return a;
 }
-//================ Estado	
+//================ Estado
 function EstadoModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "nome", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -187,9 +210,9 @@ function EstadoModel() {
 	return a;
 }
 
-//================ Tarefa	
+//================ Tarefa
 function TarefaModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "nome" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -197,17 +220,17 @@ function TarefaModel() {
 	return a;
 }
 
-//================ Empresa	
+//================ Empresa
 function EmpresaModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Consulta	
+//================ Consulta
 function ConsultaModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "dataConsulta" , tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -220,75 +243,75 @@ function ConsultaModel() {
 	return a;
 }
 
-//================ NotaFiscal	
+//================ NotaFiscal
 function NotaFiscalModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
 
-//================ PedidoCompras	
+//================ PedidoCompras
 function PedidoComprasModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Cotacao	
+//================ Cotacao
 function CotacaoModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Exame	
+//================ Exame
 function ExameModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Avisos	
+//================ Avisos
 function AvisosModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
 
-//================ HoraFunc	
+//================ HoraFunc
 function HoraFuncModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Beneficios	
+//================ Beneficios
 function BeneficiosModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Eventos	
+//================ Eventos
 function EventosModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Usuario	
+//================ Usuario
 function UsuarioModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "emprId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -303,56 +326,56 @@ function UsuarioModel() {
 	return a;
 }
 
-//================ ContasPagar	
+//================ ContasPagar
 function ContasPagarModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
 
-//================ ContasReceber	
+//================ ContasReceber
 function ContasReceberModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
 
-//================ CondPag	
+//================ CondPag
 function CondPagModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
 
-//================ FormaPg	
+//================ FormaPg
 function FormaPgModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
 
-//================ Banco	
+//================ Banco
 function BancoModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
 
-//================ ContaCorrente	
+//================ ContaCorrente
 function ContaCorrenteModel() {
-	
+
 	var a = [];
-	
+
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "nome" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "saldo" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -361,17 +384,17 @@ function ContaCorrenteModel() {
 }
 
 
-//================ Caixa	
+//================ Caixa
 function CaixaModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Regime	
+//================ Regime
 function RegimeModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
    /* a.push({field :{campo : "nome" column="nome" />
@@ -384,17 +407,17 @@ function RegimeModel() {
 	return a;
 }
 
-//================ Cfop	
+//================ Cfop
 function CfopModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Cnae	
+//================ Cnae
 function CnaeModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "codigo" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -406,88 +429,88 @@ function CnaeModel() {
 
 //================ Cnae	Empresa
 function CnaeEmpresaModel() {
-	
+
 	var a = [];
-	
+
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "parentId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "tabelaEnumValue" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "processId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "idCnae" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	
+
 	return a;
 }
 
-//================ Produto	
+//================ Produto
 function ProdutoModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Marca	
+//================ Marca
 function MarcaModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Grupo	
+//================ Grupo
 function GrupoModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Grupo	
+//================ Grupo
 function SubGrupoModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Grupo	
+//================ Grupo
 function UniMedModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Site	
+//================ Site
 function SiteModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
 
-//================ Contato	
+//================ Contato
 function ContatoModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
 
-//================ OrdemServico	
+//================ OrdemServico
 function OrdemServicoModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
 
-//================ Plano	
+//================ Plano
 function PlanoModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "dataInicio", tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -499,17 +522,17 @@ function PlanoModel() {
 	return a;
 }
 
-//================ Orcamento	
+//================ Orcamento
 function OrcamentoModel() {
-	
+
 	var a = [];
 	a = NotaFiscalModel();
 	return a;
 }
 
-//================ Orcamento	
+//================ Orcamento
 function EnderecoModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "parentId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -524,9 +547,9 @@ function EnderecoModel() {
 	a.push({field :{campo : "cidade", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
-//================ Orcamento	
+//================ Orcamento
 function EmailModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "tabelaEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -537,16 +560,16 @@ function EmailModel() {
 	return a;
 }
 
-//================ Orcamento	
+//================ Orcamento
 function ArquivoModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
-//================ Orcamento	
+//================ Orcamento
 function ClassificacaoModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "descricao", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -554,9 +577,9 @@ function ClassificacaoModel() {
 
 	return a;
 }
-//================ Orcamento	
+//================ Orcamento
 function DocumentosModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "tabelaEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -567,9 +590,9 @@ function DocumentosModel() {
     a.push({field :{campo : "data", tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
-//================ Orcamento	
+//================ Orcamento
 function HistoricoModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "data", tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -582,9 +605,9 @@ function HistoricoModel() {
 	return a;
 }
 
-//================ Historico Itens	
+//================ Historico Itens
 function HistoricoItensModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "processId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -594,22 +617,22 @@ function HistoricoItensModel() {
 	return a;
 }
 
-//================ Orcamento	
+//================ Orcamento
 function NoteModel() {
-	
+
 	var a = [];
-	
+
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "parentId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "noteText", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "tabelaEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	
+
 	return a;
 }
 
-//================ Orcamento	
+//================ Orcamento
 function SocioModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "parentId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -619,11 +642,11 @@ function SocioModel() {
 	return a;
 }
 
-//================ Ordem Servico Status	
+//================ Ordem Servico Status
 function OrdemServicoStatusModel() {
-	
+
 	var a = [];
-	
+
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "parentId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
    	a.push({field :{campo : "nome", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -633,7 +656,7 @@ function OrdemServicoStatusModel() {
 	return a;
 }
 
-//================ Ordem Servico Status	
+//================ Ordem Servico Status
 function OrdemServicoTypeModel() {
 	 a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
    /* a.push({field :{campo : "typeServico" column="type" />
@@ -646,7 +669,7 @@ function OrdemServicoTypeModel() {
 	return a;
 }
 
-//================ Ordem Servico Status	
+//================ Ordem Servico Status
 function OrdemServicoModel() {
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
  /*   a.push({field :{campo : "emprId" column="emprId" />
@@ -681,9 +704,9 @@ function OrdemServicoItensModel() {
 	return a;
 }
 
-//================ Orcamento	
+//================ Orcamento
 function StatusModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "dataStatus" , tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -696,9 +719,9 @@ function StatusModel() {
 	return a;
 }
 
-//================ Orcamento	
+//================ Orcamento
 function TributacaoModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "parentId"  , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -714,98 +737,98 @@ function TributacaoModel() {
 	return a;
 }
 
-//================ Orcamento	
+//================ Orcamento
 function AgenciaModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Orcamento	
+//================ Orcamento
 function ProfissaoModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Orcamento	
+//================ Orcamento
 function SalarioModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Orcamento	
+//================ Orcamento
 function CustoModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Orcamento	
+//================ Orcamento
 function EstoqueModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Orcamento	
+//================ Orcamento
 function PorcaoModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Orcamento	
+//================ Orcamento
 function PrecoModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Orcamento	
+//================ Orcamento
 function RentabilidadeModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Orcamento	
+//================ Orcamento
 function ServicoModel() {
-	
+
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
-//================ Orcamento	
+//================ Orcamento
 function CondominioModel() {
-	
+
 	var a = [];
 	a = EntidadeModel();
 	return a;
 }
 
-//================ Orcamento	
+//================ Orcamento
 function DepositoModel() {
-	
+
 	var a = [];
 	a = EntidadeModel();
 	return a;
 }
 
 
-//================ Orcamento	
+//================ Orcamento
 function FilialModel() {
-	
+
 	var a = [];
 	a = EntidadeModel();
 	a.push({field :{campo : "depositoList", tipo :"Deposito",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -813,7 +836,7 @@ function FilialModel() {
 }
 
 function EmpresaModel() {
-	
+
 	var a = [];
 	a = EntidadeModel();
 /*	a.push({field :{campo : "socios" column="id" select="SocioMap.fetchSocioByEmpresaId"/>
@@ -827,7 +850,7 @@ function EmpresaModel() {
 
 
 dataModel = function (){
-	
+
 	var oProjet = [];
 
 oProjet.push({
@@ -1028,8 +1051,14 @@ oProjet.push({
 	local : "Servico"
 })
 
+oProjet.push({
+	classes :[{classe : "Classe",model : ClasseModel()},{classe : "Interface",model : InterfaceModel()},{classe : "Field",model : FieldModel()}],
+	interfaces : "Dicionario",
+	local : "Dicionario"
+})
+
 return oProjet;
 }
-		 
-		 
+
+
 

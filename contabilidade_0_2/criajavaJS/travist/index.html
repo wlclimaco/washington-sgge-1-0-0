@@ -62,6 +62,7 @@
 	<script type='text/javascript' src="../View.js"/></script>
 	<script type='text/javascript' src="../WAR-WS.js"/></script>
 	<script type='text/javascript' src="../WAR-WSImpl.js"/></script>
+	<script type='text/javascript' src="../functionUtil.js"/></script>
    
     <script type='text/javascript'>
       var maxDepth = 3;
@@ -213,8 +214,8 @@
 								<label>
 									<input id="b-create" type="checkbox" /> Create
 								</label>
-								<label>
-									<input type="text" class="" id="text-b-insert" placeholder="Quantidade"/>
+								<input type="text" class="" id="text-b-insert" placeholder="Quantidade"/>
+								<label>			
 									<input id="b-insert" type="checkbox" /> Insert
 								</label>
 								<label>
@@ -801,7 +802,7 @@ $('#checkeds').append(imputs);
 			if($('#b-create').prop('checked')){
 				for (var x = 0;x < oProjet[i].classes.length;x++){
 	
-					$("div#tabs").addTab(oProjet[i].classes[x].classe,b_Table(oProjet[i].classes[x].classe,oProjet[i].classes[x].model,$("#text-b-insert").val()));
+					$("div#tabs").addTab(oProjet[i].classes[x].classe,b_Table(oProjet[i].classes[x].classe,oProjet[i].classes[x].model));
 				}
 				
 			}	
