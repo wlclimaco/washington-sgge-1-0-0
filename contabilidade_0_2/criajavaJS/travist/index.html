@@ -205,19 +205,20 @@
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h3 class="panel-title">
-								Back-End Interface
+								Banco Dados
 							</h3>
 						</div>
 						<div class="panel-body">
 							<div class="checkbox">				 
 								<label>
-									<input id="Model" type="checkbox" /> Create
+									<input id="b-create" type="checkbox" /> Create
 								</label>
 								<label>
-									<input id="Request" type="checkbox" /> Insert
+									<input type="text" class="" id="text-b-insert" placeholder="Quantidade"/>
+									<input id="b-insert" type="checkbox" /> Insert
 								</label>
 								<label>
-									<input id="Response" type="checkbox" /> Update
+									<input id="b-update" type="checkbox" /> Update
 								</label>							
 							</div> 
 						</div>
@@ -669,6 +670,7 @@ view.addEventListener("unload", function() {
 // jQuery extension method
 $.fn.addTab = function (name,texto) {
 
+	//$('ul', this).clear();
     $('ul', this).append('<li><a href="#tab-' + name + '">' + name + '</a></li>');
     var a ="";
     a = "<div id='tab-" + name + "'><textarea  id="+name+" style={'width':100%;'height':500px}></textarea></div>"
@@ -794,6 +796,22 @@ $('#checkeds').append(imputs);
 				$("div#tabs").addTab(oProjet[i].interfaces,viewMain(oProjet[i].classes,oProjet[i].interfaces));
 			}	
 			if($('#domain').prop('checked')){
+				$("div#tabs").addTab(oProjet[i].interfaces,domain(oProjet[i].classes,oProjet[i].interfaces));
+			}	
+			if($('#b-create').prop('checked')){
+				for (var x = 0;x < oProjet[i].classes.length;x++){
+	
+					$("div#tabs").addTab(oProjet[i].classes[x].classe,b_Table(oProjet[i].classes[x].classe,oProjet[i].classes[x].model,$("#text-b-insert").val()));
+				}
+				
+			}	
+			if($('#b-insert').prop('checked')){
+				for (var x = 0;x < oProjet[i].classes.length;x++){
+	
+					$("div#tabs").addTab(oProjet[i].classes[x].classe,b_Insert(oProjet[i].classes[x].classe,oProjet[i].classes[x].model,$("#text-b-insert").val()));
+				}
+			}	
+			if($('#b-update').prop('checked')){
 				$("div#tabs").addTab(oProjet[i].interfaces,domain(oProjet[i].classes,oProjet[i].interfaces));
 			}	
 			}

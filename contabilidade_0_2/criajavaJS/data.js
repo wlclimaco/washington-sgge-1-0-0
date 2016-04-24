@@ -79,6 +79,21 @@ function ConvenioModel() {
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
+
+//================ Telefone	
+function TelefoneModel() {
+	
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "typeValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "parentId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "tabelaEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "ddd", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "numero", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "telefoneTypeEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "processId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	return a;
+}
 function ConhecimentoTransporteModel() {
 	
 	var a = [];
@@ -167,6 +182,8 @@ function EstadoModel() {
 	
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "nome", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "abreviacao", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
@@ -274,6 +291,15 @@ function UsuarioModel() {
 	
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "emprId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "processId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "email", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "senha" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "pergunta" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "role" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "language" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "ultAcesso", tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "tabelaEnumValue" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
@@ -326,14 +352,11 @@ function BancoModel() {
 function ContaCorrenteModel() {
 	
 	var a = [];
-	 a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
- /*   a.push({field :{campo : "nome" column="nome" />
-    a.push({field :{campo : "descricao" column="descricao" />
-	a.push({field :{campo : "createUser" column="create_user"/>
-	a.push({field :{campo : "createDataUTC" column="create_date"/>
-	a.push({field :{campo : "modifyUser" column="modify_user"/>
-	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
-	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});*/
+	
+	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "nome" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "saldo" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "descricao", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
@@ -374,15 +397,10 @@ function CnaeModel() {
 	
 	var a = [];
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
- /*   a.push({field :{campo : "codigo" column="codigo" />
-   	a.push({field :{campo : "cnae" column="cnae"/>
-	a.push({field :{campo : "descricao" column="descricao"/>
-	a.push({field :{campo : "abreviado" column="abreviado"/>
-	a.push({field :{campo : "createUser" column="create_user"/>
-	a.push({field :{campo : "createDataUTC" column="create_date"/>
-	a.push({field :{campo : "modifyUser" column="modify_user"/>
-	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
-	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});*/
+    a.push({field :{campo : "codigo" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "cnae" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "descricao" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "abreviado", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
@@ -390,16 +408,13 @@ function CnaeModel() {
 function CnaeEmpresaModel() {
 	
 	var a = [];
-/*	a.push({field :{campo : "id" column="id"/>
-  /*  a.push({field :{campo : "parentId" column="parentId"/>
-    a.push({field :{campo : "tabelaEnumValue" column="tabela" />
-    a.push({field :{campo : "processId" column="processId"/>
-	a.push({field :{campo : "createUser" column="create_user"/>
-	a.push({field :{campo : "createDataUTC" column="create_date"/>
-	a.push({field :{campo : "modifyUser" column="modify_user"/>
-	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
-	 a.push({field :{campo : "idCnae"    column="idCnae" select="fetchCnaeById"  />
-	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});*/
+	
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "parentId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "tabelaEnumValue" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "processId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "idCnae" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	
 	return a;
 }
 
@@ -475,6 +490,12 @@ function PlanoModel() {
 	
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "dataInicio", tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "dataFinal", tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "numeroContrato", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "descricao", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "titulo", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "emprId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
@@ -491,6 +512,16 @@ function EnderecoModel() {
 	
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "parentId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "tabelaEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "processId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "logradouro" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "bairro", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "numero", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "enderecoTypeValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "cep", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "complemento", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "cidade", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 //================ Orcamento	
@@ -498,15 +529,14 @@ function EmailModel() {
 	
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "tabelaEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "parentId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "typeValue" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "email", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "emailTypeEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
-//================ Orcamento	
-function TelefoneModel() {
-	
-	var a = [];
-	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-	return a;
-}
+
 //================ Orcamento	
 function ArquivoModel() {
 	
@@ -518,14 +548,10 @@ function ArquivoModel() {
 function ClassificacaoModel() {
 	
 	var a = [];
-/*	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-    a.push({field :{campo : "descricao" column="descricao" />
-   	a.push({field :{campo : "codigo" column="codigo"/>
-	a.push({field :{campo : "createUser" column="create_user"/>
-	a.push({field :{campo : "createDataUTC" column="create_date"/>
-	a.push({field :{campo : "modifyUser" column="modify_user"/>
-	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
-	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});*/
+	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "descricao", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "codigo", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+
 	return a;
 }
 //================ Orcamento	
@@ -533,25 +559,26 @@ function DocumentosModel() {
 	
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "tabelaEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "parentId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "processId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "documentoTypeEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "numero" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "data", tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 //================ Orcamento	
 function HistoricoModel() {
 	
 	var a = [];
-/*	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-    a.push({field :{campo : "data" column="data" />
-    a.push({field :{campo : "userId" column="userId" />
-    a.push({field :{campo : "emprId" column="emprId" />
-    a.push({field :{campo : "tabelaEnumValue" column="tabela" />
-    a.push({field :{campo : "acaoEnumValue" column="acao" />
-    a.push({field :{campo : "processId" column="processId" />
-	a.push({field :{campo : "createUser" column="create_user"/>
-	a.push({field :{campo : "createDataUTC" column="create_date"/>
-	a.push({field :{campo : "modifyUser" column="modify_user"/>
-	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
-	a.push({field :{campo : "historicoItensList" column="id" select="fetchAllHistoricoItensByhistorico"/>
-	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});*/
+	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "data", tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "userId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "emprId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "tabelaEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "acaoEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "processId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+
 	return a;
 }
 
@@ -560,16 +587,10 @@ function HistoricoItensModel() {
 	
 	var a = [];
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-  /*  a.push({field :{campo : "idHist" column="idHist" />
-    a.push({field :{campo : "processId" column="processId" />
-    a.push({field :{campo : "acaoEnumValue" column="type" />
-   	a.push({field :{campo : "tabelaEnumValue" column="tabela"/>
-   	a.push({field :{campo : "parentId" column="parentId"/>
-	a.push({field :{campo : "createUser" column="create_user"/>
-	a.push({field :{campo : "createDataUTC" column="create_date"/>
-	a.push({field :{campo : "modifyUser" column="modify_user"/>
-	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
-	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});*/
+    a.push({field :{campo : "processId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "acaoEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "tabelaEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "parentId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
@@ -577,47 +598,38 @@ function HistoricoItensModel() {
 function NoteModel() {
 	
 	var a = [];
-	/*a.push({field :{campo : "id" column="id"/>
-		a.push({field :{campo : "parentId" column="parentId" />
-		a.push({field :{campo : "noteText" column="note_text" />
-		a.push({field :{campo : "tabelaEnumValue" column="tabela" />
-		a.push({field :{campo : "createDataUTC" column="create_date" />
-		a.push({field :{campo : "createUser" column="create_user" />
-		a.push({field :{campo : "modifyDataUTC" column="modify_date" />
-		a.push({field :{campo : "modifyUser" column="modify_user" />*/
+	
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "parentId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "noteText", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "tabelaEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	
 	return a;
 }
 
 //================ Orcamento	
 function SocioModel() {
-	/* a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-    a.push({field :{campo : "parentId" column="parentId" />
-   	a.push({field :{campo : "nome" column="nome"/>
-	a.push({field :{campo : "cota" column="cota"/>
-	a.push({field :{campo : "porcentagem" column="porcentagem" />
-	a.push({field :{campo : "createUser" column="create_user"/>
-	a.push({field :{campo : "createDataUTC" column="create_date"/>
-	a.push({field :{campo : "modifyUser" column="modify_user"/>
-	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
-	var a = [];*/
-	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	
+	var a = [];
+	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "parentId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "nome", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "cota", tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "porcentagem" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
 //================ Ordem Servico Status	
 function OrdemServicoStatusModel() {
-	/* a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-    a.push({field :{campo : "parentId" column="parentId" />
-   	a.push({field :{campo : "nome" column="nome"/>
-	a.push({field :{campo : "cota" column="cota"/>
-	a.push({field :{campo : "porcentagem" column="porcentagem" />
-	a.push({field :{campo : "createUser" column="create_user"/>
-	a.push({field :{campo : "createDataUTC" column="create_date"/>
-	a.push({field :{campo : "modifyUser" column="modify_user"/>
-	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
-	var a = [];*/
-	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	
+	var a = [];
+	
+	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "parentId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "nome", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "cota", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "porcentagem", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+
 	return a;
 }
 
@@ -668,30 +680,19 @@ function OrdemServicoItensModel() {
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
-//================ Orcamento	
-function SocioModel() {
-	
-	var a = [];
-	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-	return a;
-}
 
 //================ Orcamento	
 function StatusModel() {
 	
 	var a = [];
-	/*a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-    a.push({field :{campo : "dataStatus" column="dataStatus" />
-    a.push({field :{campo : "parentId" column="parentId" />
-    a.push({field :{campo : "statusValue" column="status" />
-    a.push({field :{campo : "acaoEnumValue" column="acaoType" />
-    a.push({field :{campo : "tabelaEnumValue" column="tabelaEnum" />
-    a.push({field :{campo : "note" column="note" />
-    a.push({field :{campo : "createUser" column="create_user"/>
-	a.push({field :{campo : "createDataUTC" column="create_date"/>
-	a.push({field :{campo : "modifyUser" column="modify_user"/>
-	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>*/
-	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "dataStatus" , tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "parentId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "statusValue" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "acaoEnumValue" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "tabelaEnumValue" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "note" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+
 	return a;
 }
 
@@ -700,6 +701,16 @@ function TributacaoModel() {
 	
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "parentId"  , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "cstId"  , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "icms" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "st", tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "mva" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "csosnId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "ipi" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "iat" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "ippt" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "incidencia" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
