@@ -29,92 +29,253 @@ function titleize(text) {
 
 jms_WsImpl = function (teste,bar,local){
 
-	var text = "";
-text = text + "package com.qat.samples.sysmgmt.bac."+titleize(local)+";\n";
-text = text + "import com.qat.framework.model.response.InternalResultsResponse;\n";
-text = text + "import com.qat.samples.sysmgmt.model.County;\n";
-text = text + "import com.qat.samples.sysmgmt.model.request.CountyMaintenanceRequest;\n";
-text = text + "import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;\n";
-text = text + "import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;\n";
-text = text + "import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;\n";
-text = text + "\n";
-text = text + "/**\n";
-text = text + " * The Interface I"+bar+"BAC. (Business Area Component - BAC)\n";
-text = text + " */\n";
-text = text + "public interface I"+bar+"BAC\n";
-text = text + "{\n";
-text = text + "\n";
+var text = "";
+text = text + 'package com.qat.samples.sysmgmt.service.impl;\n';
 
-text = text + "\n";
+text = text + 'import javax.jws.WebService;\n';
+
+text = text + 'import org.slf4j.Logger;\n';
+text = text + 'import org.slf4j.LoggerFactory;\n';
+text = text + 'import org.springframework.stereotype.Service;\n';
+
+text = text + 'import com.qat.framework.model.response.InternalResultsResponse;\n';
+text = text + 'import com.qat.framework.util.ResponseHandler;\n';
+text = text + 'import com.qat.samples.sysmgmt.bac.I'+titleize(bar)+'BAC;\n';
+text = text + 'import com.qat.samples.sysmgmt.model.'+titleize(bar)+';\n';
+text = text + 'import com.qat.samples.sysmgmt.model.response.'+titleize(bar)+'Response;\n';
+text = text + 'import com.qat.samples.sysmgmt.service.I'+titleize(bar)+'WS;\n';
+text = text + 'import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;\n';
+text = text + 'import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;\n';
+
+text = text + '/**\n';
+text = text + ' * '+titleize(bar)+'WS used to provide WS interface. Delegates all calls to the I'+titleize(bar)+'BAC.\n';
+text = text + ' *\n';
+text = text + ' */\n';
+text = text + '@Service\n';
+text = text + '@WebService(targetNamespace = "http://qat.com/jms")\n';
+text = text + 'public class '+titleize(bar)+'WSImpl implements I'+titleize(bar)+'WS\n';
+text = text + '{\n';
+text = text + '	/** The Constant DEFAULT_EXCEPTION_MSG. */\n';
+text = text + '	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.'+bar.toLowerCase()+'jmswsimpl.defaultexception";\n';
+
+text = text + '	/** The Constant DEFAULT_ERROR_MSG. */\n';
+text = text + '	private static final String DEFAULT_ERROR_MSG = "sysmgmt.base.'+bar.toLowerCase()+'jmswsimpl.defaulterror";\n';
+
+text = text + '	/** The Constant CLASS_NAME. */\n';
+text = text + '	private static final String CLASS_NAME = '+titleize(bar)+'WSImpl.class.getName();\n';
+
+text = text + '	/** The Constant LOG. */\n';
+text = text + '	private static final Logger LOG = LoggerFactory.getLogger('+titleize(bar)+'WSImpl.class);\n';
+
+text = text + '	private I'+titleize(bar)+'BAC '+bar.toLowerCase()+'BAC;\n';
+
+text = text + '	/**\n';
+text = text + '	 * @return the '+bar.toLowerCase()+'BAC which is expected to provide the implementation.\n';
+text = text + '	 */\n';
+text = text + '	public I'+titleize(bar)+'BAC get'+titleize(bar)+'BAC()\n';
+text = text + '	{	\n';
+text = text + '		return '+bar.toLowerCase()+'BAC;\n';
+text = text + '	}\n';
 
 for(i=0;i < teste.length;i++){
-
 var nome = teste[i].classe.toLowerCase();
-nomeM = titleize(nome)
+nomeM = titleize(teste[i].classe)
 text = text + "\n";
 text = text + '//===================================### '+nomeM.toUpperCase()+' ####======================================\n';
-text = text + "	/**\n";
-text = text + "\n";
-text = text + "	/**\n";
-text = text + "	 * Insert "+nome+".\n";
-text = text + "	 *\n";
-text = text + "* @param request the "+nome+" maintenance request\n";
-text = text + "*\n";
-text = text + "* @return the internal results response\n";
-text = text + "*/\n";
-text = text + "	public InternalResultsResponse<"+nomeM+"> insert"+nomeM+"("+nomeM+"MaintenanceRequest request);\n";
-text = text + "\n";
-text = text + "	/**\n";
-text = text + "* Update "+nome+".\n";
-text = text + "*\n";
-text = text + "* @param request the "+nome+" maintenance request\n";
-text = text + "*\n";
-text = text + "* @return the internal results response\n";
-text = text + "*/\n";
-text = text + "	public InternalResultsResponse<"+nomeM+"> update"+nomeM+"("+nomeM+"MaintenanceRequest request);\n";
-text = text + "\n";
-text = text + "	/**\n";
-text = text + "* Delete "+nome+".\n";
-text = text + "*\n";
-text = text + "* @param request the "+nome+" maintenance request\n";
-text = text + "*\n";
-text = text + "* @return the internal results response\n";
-text = text + "*/\n";
-text = text + "	public InternalResultsResponse<"+nomeM+"> delete"+nomeM+"("+nomeM+"MaintenanceRequest request);\n";
-text = text + "\n";
-text = text + "	/**\n";
-text = text + "* Refresh "+nome+"s.\n";
-text = text + "*\n";
-text = text + "* @param request containing the number to refresh with and whether to return the result\n";
-text = text + "*/\n";
-text = text + "	public InternalResultsResponse<"+nomeM+"> refresh"+nomeM+"s(RefreshRequest request);\n";
-text = text + "\n";
-text = text + "	/**\n";
-text = text + "* Fetch "+nome+" by id.\n";
-text = text + "*\n";
-text = text + "* @param request the request\n";
-text = text + "* @return the internal results response\n";
-text = text + "*/\n";
-text = text + "	public InternalResultsResponse<"+nomeM+"> fetch"+nomeM+"ById(FetchByIdRequest request);\n";
-text = text + "\n";
-text = text + "	/**\n";
-text = text + "* Fetch all "+nome+"s.\n";
-text = text + "*\n";
-text = text + "* @return the internal results response< "+nome+">\n";
-text = text + "*/\n";
-text = text + "	public InternalResultsResponse<"+nomeM+"> fetchAll"+nomeM+"s("+nomeM+"  "+nome+");\n";
-text = text + "\n";
-text = text + "	/**\n";
-text = text + "* Fetch "+nome+"s by request.\n";
-text = text + "*\n";
-text = text + "* @param request the request\n";
-text = text + "* @return the internal results response\n";
-text = text + "*/\n";
-text = text + "	public InternalResultsResponse<"+nomeM+"> fetch"+nomeM+"sByRequest("+nomeM+"InquiryRequest request);\n";
+text = text + '\n';
 
-text = text + "\n";
+text = text + '	/**\n';
+text = text + '	 * Spring injection uses this method to inject an implementation of {@link I'+nomeM+'BAC}.\n';
+text = text + '	 *\n';
+text = text + '	 * @param '+nomeM.toLowerCase()+'BAC the '+nomeM.toLowerCase()+'BAC to set.\n';
+text = text + '	 */\n';
+text = text + '	public void set'+nomeM+'BAC(I'+nomeM+'BAC '+nomeM.toLowerCase()+'BAC)\n';
+text = text + '	{\n';
+text = text + '		this.'+nomeM.toLowerCase()+'BAC = '+nomeM.toLowerCase()+'BAC;\n';
+text = text + '	}\n';
+text = text + '	\n';
+text = text + '	/**\n';
+text = text + '	 * Delegates call to {@link I'+nomeM+'BAC}\n';
+text = text + '	 *\n';
+text = text + '	 * @param request a '+nomeM+'Request\n';
+text = text + '	 * @return '+nomeM+'Response\n';
+text = text + '	 */\n';
+text = text + '	@Override\n';
+text = text + '	public '+nomeM+'Response insert'+nomeM+'('+nomeM+'MaintenanceRequest request)\n';
+text = text + '	{\n';
+text = text + '		// This method is demo code only. Do not view this as a QAT Global Standard.\n';
+text = text + '		'+nomeM+'Response response = new '+nomeM+'Response();\n';
 
+text = text + '		try\n';
+text = text + '		{\n';
+text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+nomeM+'BAC().insert'+nomeM+'(request);\n';
+text = text + '			ResponseHandler\n';
+text = text + '					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());\n';
+text = text + '		}\n';
+text = text + '		catch (Exception ex)\n';
+text = text + '		{\n';
+text = text + '			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});\n';
+text = text + '		}\n';
+
+text = text + '		return response;\n';
+text = text + '	}\n';
+text = text + '	\n';
+text = text + '	/**\n';
+text = text + '	 * Delegates call to {@link I'+nomeM+'BAC}\n';
+text = text + '	 *\n';
+text = text + '	 * @param request a '+nomeM+'Request\n';
+text = text + '	 * @return '+nomeM+'Response\n';
+text = text + '	 */\n';
+text = text + '	@Override\n';
+text = text + '	public '+nomeM+'Response update'+nomeM+'('+nomeM+'MaintenanceRequest request)\n';
+text = text + '	{\n';
+text = text + '		// This method is demo code only. Do not view this as a QAT Global Standard.\n';
+text = text + '		'+nomeM+'Response response = new '+nomeM+'Response();\n';
+
+text = text + '		try\n';
+text = text + '		{\n';
+text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+nomeM+'BAC().update'+nomeM+'(request);\n';
+text = text + '			ResponseHandler\n';
+text = text + '					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());\n';
+text = text + '		}\n';
+text = text + '		catch (Exception ex)\n';
+text = text + '		{\n';
+text = text + '			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});\n';
+text = text + '		}\n';
+
+text = text + '		return response;\n';
+text = text + '	}\n';
+text = text + '	\n';
+text = text + '	/**\n';
+text = text + '	 * Delegates call to {@link I'+nomeM+'BAC}\n';
+text = text + '	 *\n';
+text = text + '	 * @param request a '+nomeM+'Request\n';
+text = text + '	 * @return '+nomeM+'Response\n';
+text = text + '	 */\n';
+text = text + '	@Override\n';
+text = text + '	public '+nomeM+'Response delete'+nomeM+'('+nomeM+'MaintenanceRequest request)\n';
+text = text + '	{\n';
+text = text + '		// This method is demo code only. Do not view this as a QAT Global Standard.\n';
+text = text + '		'+nomeM+'Response response = new '+nomeM+'Response();\n';
+
+text = text + '		try\n';
+text = text + '		{\n';
+text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+nomeM+'BAC().delete'+nomeM+'(request);\n';
+text = text + '			ResponseHandler\n';
+text = text + '					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());\n';
+text = text + '		}\n';
+text = text + '		catch (Exception ex)\n';
+text = text + '		{\n';
+text = text + '			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});\n';
+text = text + '		}\n';
+
+text = text + '		return response;\n';
+text = text + '	}\n';
+text = text + '	\n';
+text = text + '	/**\n';
+text = text + '	 * Delegates call to {@link I'+nomeM+'BAC}\n';
+text = text + '	 *\n';
+text = text + '	 * @param request a '+nomeM+'Request\n';
+text = text + '	 * @return '+nomeM+'Response\n';
+text = text + '	 */\n';
+text = text + '	@Override\n';
+text = text + '	public '+nomeM+'Response fetch'+nomeM+'ById(FetchByIdRequest request)\n';
+text = text + '	{\n';
+text = text + '		// This method is demo code only. Do not view this as a QAT Global Standard.\n';
+text = text + '		'+nomeM+'Response response = new '+nomeM+'Response();\n';
+
+text = text + '		try\n';
+text = text + '		{\n';
+text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+nomeM+'BAC().fetch'+nomeM+'ById(request);\n';
+text = text + '			ResponseHandler\n';
+text = text + '					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());\n';
+text = text + '		}\n';
+text = text + '		catch (Exception ex)\n';
+text = text + '		{\n';
+text = text + '			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});\n';
+text = text + '		}\n';
+
+text = text + '		return response;\n';
+text = text + '	}\n';
+text = text + '	\n';
+text = text + '	/**\n';
+text = text + '	 * Delegates call to {@link I'+nomeM+'BAC}\n';
+text = text + '	 *\n';
+text = text + '	 * @param request a '+nomeM+'Request\n';
+text = text + '	 * @return '+nomeM+'Response\n';
+text = text + '	 */\n';
+text = text + '	@Override\n';
+text = text + '	public '+nomeM+'Response fetch'+nomeM+'sByRequest('+nomeM+'InquiryRequest request)\n';
+text = text + '	{\n';
+text = text + '		// This method is demo code only. Do not view this as a QAT Global Standard.\n';
+text = text + '		'+nomeM+'Response response = new '+nomeM+'Response();\n';
+
+text = text + '		try\n';
+text = text + '		{\n';
+text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+nomeM+'BAC().fetch'+nomeM+'sByRequest(request);\n';
+text = text + '			ResponseHandler\n';
+text = text + '					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());\n';
+text = text + '		}\n';
+text = text + '		catch (Exception ex)\n';
+text = text + '		{\n';
+text = text + '			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});\n';
+text = text + '		}\n';
+
+text = text + '		return response;\n';
+text = text + '	}\n';
+
+text = text + '	/**\n';
+text = text + '	 * Delegates call to {@link I'+nomeM+'BAC}\n';
+text = text + '	 *\n';
+text = text + '	 * @param request a '+nomeM+'Request\n';
+text = text + '	 * @return '+nomeM+'Response\n';
+text = text + '	 */\n';
+text = text + '	@Override\n';
+text = text + '	public '+nomeM+'Response refresh'+nomeM+'s(RefreshRequest request)\n';
+text = text + '	{\n';
+text = text + '		// This method is demo code only. Do not view this as a QAT Global Standard.\n';
+text = text + '		'+nomeM+'Response response = new '+nomeM+'Response();\n';
+
+text = text + '		try\n';
+text = text + '		{\n';
+text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+nomeM+'BAC().refresh'+nomeM+'s(request);\n';
+text = text + '			ResponseHandler\n';
+text = text + '					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());\n';
+text = text + '		}\n';
+text = text + '		catch (Exception ex)\n';
+text = text + '		{\n';
+text = text + '			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});\n';
+text = text + '		}\n';
+
+text = text + '		return response;\n';
+text = text + '	}\n';
+
+text = text + '	/**\n';
+text = text + '	 * Delegates call to {@link I'+nomeM+'BAC}\n';
+text = text + '	 *\n';
+text = text + '	 * @param request a '+nomeM+'Request\n';
+text = text + '	 * @return '+nomeM+'Response\n';
+text = text + '	 */\n';
+text = text + '	@Override\n';
+text = text + '	public '+nomeM+'Response fetchAll'+nomeM+'s(FetchAllRequest request)\n';
+text = text + '	{\n';
+text = text + '		'+nomeM+'Response response = new '+nomeM+'Response();\n';
+
+text = text + '		try\n';
+text = text + '		{\n';
+text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+nomeM+'BAC().fetchAll'+nomeM+'s();\n';
+text = text + '			ResponseHandler\n';
+text = text + '					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());\n';
+text = text + '		}\n';
+text = text + '		catch (Exception ex)\n';
+text = text + '		{\n';
+text = text + '			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});\n';
+text = text + '		}\n';
+
+text = text + '		return response;\n';
+text = text + '	}\n';
 }
-text = text + "}\n";
+text = text + '}\n';
+
 return text;
 }
