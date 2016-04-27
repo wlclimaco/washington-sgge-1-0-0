@@ -727,7 +727,7 @@ $('#checkeds').append(imputs);
 			if($('#XML').prop('checked')){
 			//debugger
 				for (var x = 0;x< oProjet[i].classes.length;x++){
-					$("div#tabs").addTab(oProjet[i].interfaces,implXML(oProjet[i].classes[x].model,oProjet[i].interfaces));
+					$("div#tabs").addTab(oProjet[i].classes[x].classe,implXML(oProjet[i].classes[x].model,oProjet[i].classes[x].classe));
 				}
 			}	
 			if($('#Model').prop('checked')){
@@ -744,16 +744,16 @@ $('#checkeds').append(imputs);
 				$("div#tabs").addTab(oProjet[i].interfaces,criteria(oProjet[i].classes,oProjet[i].interfaces));
 			}	
 			if($('#WS').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces,war_ws(oProjet[i].classes,oProjet[i].interfaces));
+				$("div#tabs").addTab('I'+oProjet[i].interfaces+'_WS',war_ws(oProjet[i].classes,oProjet[i].interfaces));
 			}	
 			if($('#WSImpl').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces,war_WSImpl(oProjet[i].classes,oProjet[i].interfaces));
+				$("div#tabs").addTab(oProjet[i].interfaces+'Impl_ws',war_WSImpl(oProjet[i].classes,oProjet[i].interfaces));
 			}	
 			if($('#jms-WS').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces,jms_WS(oProjet[i].classes,oProjet[i].interfaces));
+				$("div#tabs").addTab('I'+oProjet[i].interfaces+'_JMS',jms_WS(oProjet[i].classes,oProjet[i].interfaces));
 			}	
 			if($('#jsm-WSImpl').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces,jms_WsImpl(oProjet[i].classes,oProjet[i].interfaces));
+				$("div#tabs").addTab(oProjet[i].interfaces+'Impl_JMS',jms_WsImpl(oProjet[i].classes,oProjet[i].interfaces));
 			}	
 			
 			if($('#BACIMPLTest').prop('checked')){

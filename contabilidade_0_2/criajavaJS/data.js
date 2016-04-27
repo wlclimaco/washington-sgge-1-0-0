@@ -85,6 +85,7 @@ function ClasseModel() {
 
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "nome", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
@@ -93,6 +94,21 @@ function InterfaceModel() {
 
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "nome", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "local", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Convenio
+function ForenKeyModel() {
+
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "tipo", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "requerid", tipo :"Boolean",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "primaryKey", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "forenkey", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "nome", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
@@ -101,6 +117,12 @@ function FieldModel() {
 
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "tipo", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "requerid", tipo :"Boolean",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "primaryKey", tipo :"Boolean",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "forenkey", tipo :"Boolean",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "model", tipo :"Boolean",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "xml", tipo :"Boolean",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 //================ Telefone
@@ -1052,7 +1074,7 @@ oProjet.push({
 })
 
 oProjet.push({
-	classes :[{classe : "Classe",model : ClasseModel()},{classe : "Interface",model : InterfaceModel()},{classe : "Field",model : FieldModel()}],
+	classes :[{classe : "Classes",model : ClasseModel()},{classe : "Interface",model : InterfaceModel()},{classe : "Field",model : FieldModel()}],
 	interfaces : "Dicionario",
 	local : "Dicionario"
 })

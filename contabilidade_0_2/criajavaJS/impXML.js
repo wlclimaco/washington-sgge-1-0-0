@@ -29,7 +29,8 @@ function titleize(text) {
 
 implXML = function (oField,name){
 
-	var text = "";
+var text = '/** create by system gera-java version 1.0.0 '+dataAtualFormatada()+'*/\n';
+text = text + '\n';
 	
 text = text + '<?xml version="1.0" encoding="UTF-8" ?>\n';
 text = text + '\n';

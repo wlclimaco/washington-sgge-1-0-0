@@ -54,6 +54,136 @@ public class CountyWSImpl implements ICountyWS
 	{
 		this.countyBAC = countyBAC;
 	}
+	
+	/**
+	 * Delegates call to {@link ICountyBAC}
+	 *
+	 * @param request a CountyRequest
+	 * @return CountyResponse
+	 */
+	@Override
+	public CountyResponse insertCounties(CountyMaintenanceRequest request)
+	{
+		// This method is demo code only. Do not view this as a QAT Global Standard.
+		CountyResponse response = new CountyResponse();
+
+		try
+		{
+			InternalResultsResponse<County> internalResponse = getCountyBAC().insertCounties(request);
+			ResponseHandler
+					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+	
+	/**
+	 * Delegates call to {@link ICountyBAC}
+	 *
+	 * @param request a CountyRequest
+	 * @return CountyResponse
+	 */
+	@Override
+	public CountyResponse updateCounties(CountyMaintenanceRequest request)
+	{
+		// This method is demo code only. Do not view this as a QAT Global Standard.
+		CountyResponse response = new CountyResponse();
+
+		try
+		{
+			InternalResultsResponse<County> internalResponse = getCountyBAC().updateCounties(request);
+			ResponseHandler
+					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+	
+	/**
+	 * Delegates call to {@link ICountyBAC}
+	 *
+	 * @param request a CountyRequest
+	 * @return CountyResponse
+	 */
+	@Override
+	public CountyResponse deleteCounties(CountyMaintenanceRequest request)
+	{
+		// This method is demo code only. Do not view this as a QAT Global Standard.
+		CountyResponse response = new CountyResponse();
+
+		try
+		{
+			InternalResultsResponse<County> internalResponse = getCountyBAC().deleteCounties(request);
+			ResponseHandler
+					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+	
+	/**
+	 * Delegates call to {@link ICountyBAC}
+	 *
+	 * @param request a CountyRequest
+	 * @return CountyResponse
+	 */
+	@Override
+	public CountyResponse fetchCountyById(FetchByIdRequest request)
+	{
+		// This method is demo code only. Do not view this as a QAT Global Standard.
+		CountyResponse response = new CountyResponse();
+
+		try
+		{
+			InternalResultsResponse<County> internalResponse = getCountyBAC().fetchCountyById(request);
+			ResponseHandler
+					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
+	
+	/**
+	 * Delegates call to {@link ICountyBAC}
+	 *
+	 * @param request a CountyRequest
+	 * @return CountyResponse
+	 */
+	@Override
+	public CountyResponse fetchCountiesByRequest(CountyInquiryRequest request)
+	{
+		// This method is demo code only. Do not view this as a QAT Global Standard.
+		CountyResponse response = new CountyResponse();
+
+		try
+		{
+			InternalResultsResponse<County> internalResponse = getCountyBAC().fetchCountiesByRequest(request);
+			ResponseHandler
+					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+		}
+
+		return response;
+	}
 
 	/**
 	 * Delegates call to {@link ICountyBAC}
