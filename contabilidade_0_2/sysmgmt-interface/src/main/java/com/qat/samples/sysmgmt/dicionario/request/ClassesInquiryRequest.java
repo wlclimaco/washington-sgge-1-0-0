@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.advocacia.request;
+package com.qat.samples.sysmgmt.dicionario.request;
 
 import com.qat.samples.sysmgmt.banco.model.criteria.BancoCriteria;
 import com.qat.samples.sysmgmt.util.model.criteria.ComumCriteria;

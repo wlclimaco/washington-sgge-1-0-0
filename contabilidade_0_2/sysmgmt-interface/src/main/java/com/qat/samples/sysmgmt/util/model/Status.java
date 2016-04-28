@@ -1,5 +1,7 @@
 package com.qat.samples.sysmgmt.util.model;
 
+import java.util.Date;
+
 /**
  * The Class Document represents a generic formal business or personal document, such as driver's license or bylaws.
  */
@@ -17,6 +19,16 @@ public class Status extends ModelCosmeDamiao
 	private CdStatusTypeEnum status;
 
 	private String note;
+
+	public Status(Integer id, Long dataStatus, CdStatusTypeEnum status, String note) {
+		super();
+		this.id = id;
+		this.dataStatus = dataStatus;
+		this.status = status;
+		this.note = note;
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
+	}
 
 	/**
 	 * The Constructor.

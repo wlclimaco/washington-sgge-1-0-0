@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.util.model;
 
+import java.util.Date;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -36,6 +37,8 @@ public class Telefone extends ModelCosmeDamiao
 		this.numero = numero;
 		this.telefoneTypeEnum = telefoneTypeEnum;
 		setModelAction(modelAction);
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	public Integer getTelefoneTypeEnumValue()

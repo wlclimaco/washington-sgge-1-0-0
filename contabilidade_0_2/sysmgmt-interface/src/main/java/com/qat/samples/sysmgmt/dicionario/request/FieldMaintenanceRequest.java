@@ -1,6 +1,6 @@
-package com.qat.samples.sysmgmt.advocacia.request;
+package com.qat.samples.sysmgmt.dicionario.request;
 
-import com.qat.samples.sysmgmt.advocacia.Field;
+import com.qat.samples.sysmgmt.dicionario.Field;
 import com.qat.samples.sysmgmt.util.model.request.UtilMaintenanceRequest;
 
 public class FieldMaintenanceRequest extends UtilMaintenanceRequest
@@ -17,26 +17,19 @@ public class FieldMaintenanceRequest extends UtilMaintenanceRequest
 
 	}
 
-	/**
-	 * @return the Field
-	 */
-	public Field getField()
-	{
+	public Field getField() {
 		return field;
 	}
 
-	/**
-	 * @param Field the Field to set
-	 */
-	public void setField(Field field)
-	{
-		this.Field = field;
+	public void setField(Field field) {
+		this.field = field;
 	}
 
 	@Override
 	public String toString() {
 		return "FieldMaintenanceRequest [getField()=" + getField() + ", toString()=" + super.toString() + "]";
 	}
+
 
 
 

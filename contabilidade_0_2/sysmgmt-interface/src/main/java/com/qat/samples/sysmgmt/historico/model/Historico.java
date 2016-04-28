@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.historico.model;
 
+import java.util.Date;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
@@ -18,6 +19,20 @@ public class Historico extends ModelCosmeDamiao
 	private Long data;
 
 	private List<HistoricoItens> historicoItensList;
+
+
+
+	public Historico() {
+		super();
+	}
+
+	public Historico(Integer id, Long data) {
+		super();
+		this.id = id;
+		this.data = data;
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
+	}
 
 	public Integer getId()
 	{

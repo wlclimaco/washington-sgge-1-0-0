@@ -1,10 +1,10 @@
-package com.qat.samples.sysmgmt.advocacia.response;
+package com.qat.samples.sysmgmt.dicionario.response;
 
 import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.advocacia.Classes;
+import com.qat.samples.sysmgmt.dicionario.Classes;
 
 public class ClassesResponse extends InquiryResponse
 {

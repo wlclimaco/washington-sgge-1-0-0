@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.bac.undefined;
+package com.qat.samples.sysmgmt.bac.Dicionario;
 
 
 import org.slf4j.Logger;
@@ -15,12 +15,17 @@ import com.qat.framework.validation.ValidationContext;
 import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.bac.IDicionarioBAC;
-import com.qat.samples.sysmgmt.bar.IComprasBAR;
-import com.qat.samples.sysmgmt.model.Dicionario;
-import com.qat.samples.sysmgmt.model.request.DicionarioMaintenanceRequest;
+import com.qat.samples.sysmgmt.bar.Dicionario.IDicionarioBAR;
+import com.qat.samples.sysmgmt.dicionario.Classes;
+import com.qat.samples.sysmgmt.dicionario.Field;
+import com.qat.samples.sysmgmt.dicionario.Interface;
+import com.qat.samples.sysmgmt.dicionario.request.ClassesInquiryRequest;
+import com.qat.samples.sysmgmt.dicionario.request.ClassesMaintenanceRequest;
+import com.qat.samples.sysmgmt.dicionario.request.FieldInquiryRequest;
+import com.qat.samples.sysmgmt.dicionario.request.FieldMaintenanceRequest;
+import com.qat.samples.sysmgmt.dicionario.request.InterfaceInquiryRequest;
+import com.qat.samples.sysmgmt.dicionario.request.InterfaceMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**

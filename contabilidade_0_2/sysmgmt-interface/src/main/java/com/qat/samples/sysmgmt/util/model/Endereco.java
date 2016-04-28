@@ -1,5 +1,7 @@
 package com.qat.samples.sysmgmt.util.model;
 
+import java.util.Date;
+
 import com.qat.samples.sysmgmt.estado.model.Estado;
 
 /**
@@ -36,11 +38,10 @@ public class Endereco extends ModelCosmeDamiao
 
 	/**
 	 * Default constructor.
+	 * @param string
+	 * @param i
 	 */
-	public Endereco()
-	{
-		super();
-	}
+
 
 	public Endereco(Integer id, String logradouro, Cidade cidade, Estado estado, String bairro, String numero,
 			String cep, String complemento, EnderecoTypeEnum enderecoType, PersistenceActionEnum modelAction)
@@ -56,6 +57,12 @@ public class Endereco extends ModelCosmeDamiao
 		this.complemento = complemento;
 		this.enderecoType = enderecoType;
 		setModelAction(modelAction);
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
+	}
+
+	public Endereco() {
+		super();
 	}
 
 	public Integer getEnderecoTypeValue()

@@ -23,31 +23,30 @@
   </resultMap>
 
   <sql id="allStatusColumns">
-create_date
-,create_user
-,modify_date
-,modify_user
-,id
-,dataStatus
-,parentId
-,statusValue
-,acaoEnumValue
-,tabelaEnumValue
-,note
+
+		dataStatus
+		,parentId
+		,statusValue
+		,acaoEnumValue
+		,tabelaEnumValue
+		,note
+		,create_date
+		,create_user
+		,modify_date
+		,modify_user
 
 </sql>
 <sql id="allStatusValues">
-#{id},
-#{dataStatus},
-#{parentId},
-#{statusValue},
-#{acaoEnumValue},
-#{tabelaEnumValue},
-#{note},
-		#{createDateUTC},
-		#{createUser},
-		#{modifyDateUTC},
-		#{modifyUser}
+	#{dataStatus},
+	#{parentId},
+	#{statusValue},
+	#{acaoEnumValue},
+	#{tabelaEnumValue},
+	#{note},
+	#{createDateUTC},
+	#{createUser},
+	#{modifyDateUTC},
+	#{modifyUser}
   </sql>
 
  <sql id="allStatusColumnsWithQualifier">

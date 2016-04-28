@@ -1,5 +1,7 @@
 package com.qat.samples.sysmgmt.historico.model;
 
+import java.util.Date;
+
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -17,6 +19,22 @@ public class HistoricoItens extends ModelCosmeDamiao
 
 	/** The numero. */
 	private Integer processId;
+
+
+
+
+	public HistoricoItens() {
+		super();
+	}
+
+	public HistoricoItens(Integer id, Integer idHist, Integer processId) {
+		super();
+		this.id = id;
+		this.idHist = idHist;
+		this.processId = processId;
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
+	}
 
 	public Integer getId()
 	{

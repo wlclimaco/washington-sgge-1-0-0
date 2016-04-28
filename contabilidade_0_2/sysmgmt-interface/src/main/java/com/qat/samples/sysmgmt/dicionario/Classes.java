@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.advocacia;
+package com.qat.samples.sysmgmt.dicionario;
 
 import java.util.List;
 
@@ -26,51 +26,35 @@ public class Classes extends ModelCosmeDamiao
 		// TODO Auto-generated constructor stub
 	}
 
-	public Integer getId()
-	{
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Integer id)
-	{
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Integer getDataAudiencia()
-	{
-		return dataAudiencia;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setDataAudiencia(Integer dataAudiencia)
-	{
-		this.dataAudiencia = dataAudiencia;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getDescricao()
-	{
-		return descricao;
+	public List<Field> getFieldList() {
+		return fieldList;
 	}
 
-	public void setDescricao(String descricao)
-	{
-		this.descricao = descricao;
-	}
-
-	public List<Note> getNoteLIst()
-	{
-		return noteLIst;
-	}
-
-	public void setNoteLIst(List<Note> noteLIst)
-	{
-		this.noteLIst = noteLIst;
+	public void setFieldList(List<Field> fieldList) {
+		this.fieldList = fieldList;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "Audiencia [getId()=" + getId() + ", getDataAudiencia()=" + getDataAudiencia() + ", getDescricao()="
-				+ getDescricao() + ", getNoteLIst()=" + getNoteLIst() + ", toString()=" + super.toString() + "]";
+	public String toString() {
+		return "Classes [getId()=" + getId() + ", getNome()=" + getNome() + ", getFieldList()=" + getFieldList()
+				+ ", toString()=" + super.toString() + "]";
 	}
+
 
 }

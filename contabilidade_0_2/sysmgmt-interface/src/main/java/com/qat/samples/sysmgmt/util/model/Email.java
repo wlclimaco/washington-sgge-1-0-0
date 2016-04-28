@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.util.model;
 
+import java.util.Date;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -32,6 +33,8 @@ public class Email extends ModelCosmeDamiao
 		this.email = email;
 		this.emailType = emailType;
 		setModelAction(modelAction);
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	public Integer getEmailTypeEnumValue()

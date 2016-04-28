@@ -1,4 +1,4 @@
-package com.qat.samples.sysmgmt.advocacia;
+package com.qat.samples.sysmgmt.dicionario;
 
 import java.util.List;
 
@@ -28,87 +28,42 @@ public class Interface extends ModelCosmeDamiao
 
 	}
 
-	public Processo(int i, String string) {
-		// TODO Auto-generated constructor stub
-	}
-
-	public Integer getId()
-	{
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Integer id)
-	{
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Integer getDataProcess()
-	{
-		return dataProcess;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setDataProcess(Integer dataProcess)
-	{
-		this.dataProcess = dataProcess;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public Double getValor()
-	{
-		return valor;
+	public String getLocal() {
+		return local;
 	}
 
-	public void setValor(Double valor)
-	{
-		this.valor = valor;
+	public void setLocal(String local) {
+		this.local = local;
 	}
 
-	public List<Advogado> getAdvogadoLIst()
-	{
-		return advogadoLIst;
+	public List<Classes> getClassesList() {
+		return classesList;
 	}
 
-	public void setAdvogadoLIst(List<Advogado> advogadoLIst)
-	{
-		this.advogadoLIst = advogadoLIst;
-	}
-
-	public List<Cliente> getClienteList()
-	{
-		return clienteList;
-	}
-
-	public void setClienteList(List<Cliente> clienteList)
-	{
-		this.clienteList = clienteList;
-	}
-
-	public List<Audiencia> getAudienciaList()
-	{
-		return audienciaList;
-	}
-
-	public void setAudienciaList(List<Audiencia> audienciaList)
-	{
-		this.audienciaList = audienciaList;
-	}
-
-	public List<ProcessoStatus> getProcessoStatusList()
-	{
-		return processoStatusList;
-	}
-
-	public void setProcessoStatusList(List<ProcessoStatus> processoStatusList)
-	{
-		this.processoStatusList = processoStatusList;
+	public void setClassesList(List<Classes> classesList) {
+		this.classesList = classesList;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "Processo [getId()=" + getId() + ", getDataProcess()=" + getDataProcess() + ", getValor()=" + getValor()
-				+ ", getAdvogadoLIst()=" + getAdvogadoLIst() + ", getClienteList()=" + getClienteList()
-				+ ", getAudienciaList()=" + getAudienciaList() + ", getProcessoStatusList()=" + getProcessoStatusList()
-				+ ", toString()=" + super.toString() + "]";
+	public String toString() {
+		return "Interface [getId()=" + getId() + ", getNome()=" + getNome() + ", getLocal()=" + getLocal()
+				+ ", getClassesList()=" + getClassesList() + ", toString()=" + super.toString() + "]";
 	}
 
 }

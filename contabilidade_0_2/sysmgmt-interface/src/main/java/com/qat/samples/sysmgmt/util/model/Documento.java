@@ -1,5 +1,7 @@
 package com.qat.samples.sysmgmt.util.model;
 
+import java.util.Date;
+
 import com.qat.samples.sysmgmt.estado.model.Estado;
 
 // TODO: Auto-generated Javadoc
@@ -57,6 +59,8 @@ public class Documento extends ModelCosmeDamiao
 		this.data = data;
 		this.estado = estado;
 		setModelAction(modelAction);
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	/**

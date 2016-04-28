@@ -1,6 +1,6 @@
-package com.qat.samples.sysmgmt.advocacia.request;
+package com.qat.samples.sysmgmt.dicionario.request;
 
-import com.qat.samples.sysmgmt.advocacia.Classes;
+import com.qat.samples.sysmgmt.dicionario.Classes;
 import com.qat.samples.sysmgmt.util.model.request.UtilMaintenanceRequest;
 
 public class ClassesMaintenanceRequest extends UtilMaintenanceRequest

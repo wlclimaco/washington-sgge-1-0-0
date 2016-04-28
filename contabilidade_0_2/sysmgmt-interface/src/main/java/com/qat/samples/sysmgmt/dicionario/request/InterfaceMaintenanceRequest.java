@@ -1,6 +1,6 @@
-package com.qat.samples.sysmgmt.advocacia.request;
+package com.qat.samples.sysmgmt.dicionario.request;
 
-import com.qat.samples.sysmgmt.advocacia.Interface;
+import com.qat.samples.sysmgmt.dicionario.Interface;
 import com.qat.samples.sysmgmt.util.model.request.UtilMaintenanceRequest;
 
 public class InterfaceMaintenanceRequest extends UtilMaintenanceRequest
