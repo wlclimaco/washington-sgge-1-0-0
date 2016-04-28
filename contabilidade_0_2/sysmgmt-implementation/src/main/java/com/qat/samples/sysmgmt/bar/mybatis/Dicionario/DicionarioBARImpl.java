@@ -1,16 +1,22 @@
-package com.qat.samples.sysmgmt.bar.mybatis.undefined;
+package com.qat.samples.sysmgmt.bar.mybatis.Dicionario;
 
 
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.qat.framework.model.response.InternalResponse;
+import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.MyBatisBARHelper;
-import com.qat.samples.sysmgmt.bar.IComprasBAR;
-import com.qat.samples.sysmgmt.bar.mybatis.delegate.PagedResultsBARD;
+import com.qat.samples.sysmgmt.bar.Dicionario.IDicionarioBAR;
+import com.qat.samples.sysmgmt.dicionario.Classes;
+import com.qat.samples.sysmgmt.dicionario.Field;
+import com.qat.samples.sysmgmt.dicionario.Interface;
+import com.qat.samples.sysmgmt.dicionario.request.ClassesInquiryRequest;
+import com.qat.samples.sysmgmt.dicionario.request.FieldInquiryRequest;
+import com.qat.samples.sysmgmt.dicionario.request.InterfaceInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
 /**
  * The Class CountyBARImpl. (Business Access Repository - BAR)
@@ -166,7 +172,7 @@ public InternalResponse deleteAllClassess()
 public Classes fetchClassesById(FetchByIdRequest request)
 {
 return (Classes)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CLASSES, request.getFetchId());
-	
+
 }
 
 /*
@@ -247,10 +253,10 @@ public static void fetchClassessByRequest(SqlSession sqlSession, ClassesInquiryR
  * @see com.qat.samples.sysmgmt.base.bar.IInterfaceBAR#insertInterface(com.qat.samples.sysmgmt.base.model.Interface)
  */
 @Override
-public InternalResponse insertInterface(Interface interface)
+public InternalResponse insertInterface(Interface interfaces)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_INTERFACE, interface, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_INTERFACE, interfaces, response);
 	return response;
 }
 
@@ -259,10 +265,10 @@ public InternalResponse insertInterface(Interface interface)
  * @see com.qat.samples.sysmgmt.base.bar.IInterfaceBAR#updateInterface(com.qat.samples.sysmgmt.base.model.Interface)
  */
 @Override
-public InternalResponse updateInterface(Interface interface)
+public InternalResponse updateInterface(Interface interfaces)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_INTERFACE, interface, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_INTERFACE, interfaces, response);
 	return response;
 }
 
@@ -271,10 +277,10 @@ public InternalResponse updateInterface(Interface interface)
  * @see com.qat.samples.sysmgmt.base.bar.IInterfaceBAR#deleteInterface(com.qat.samples.sysmgmt.base.model.Interface)
  */
 @Override
-public InternalResponse deleteInterfaceById(Interface interface)
+public InternalResponse deleteInterfaceById(Interface interfaces)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_INTERFACE, interface, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_INTERFACE, interfaces, response);
 	return response;
 }
 
@@ -299,7 +305,7 @@ public InternalResponse deleteAllInterfaces()
 public Interface fetchInterfaceById(FetchByIdRequest request)
 {
 return (Interface)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_INTERFACE, request.getFetchId());
-	
+
 }
 
 /*
@@ -307,7 +313,7 @@ return (Interface)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_
  * @see com.qat.samples.sysmgmt.base.bar.IInterfaceBAR#fetchAllInterfacesCache()
  */
 @Override
-public InternalResultsResponse<Interface> fetchAllInterfaces(Interface interface)
+public InternalResultsResponse<Interface> fetchAllInterfaces(Interface interfaces)
 {
 	InternalResultsResponse<Interface> response = new InternalResultsResponse<Interface>();
 	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_INTERFACE_ALL));
@@ -432,7 +438,7 @@ public InternalResponse deleteAllFields()
 public Field fetchFieldById(FetchByIdRequest request)
 {
 return (Field)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_FIELD, request.getFetchId());
-	
+
 }
 
 /*

@@ -16,18 +16,21 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
-import com.qat.samples.sysmgmt.util.model.Telefone;
-import com.qat.samples.sysmgmt.util.model.TelefoneTypeEnum;
+import com.qat.samples.sysmgmt.bar.Dicionario.IDicionarioBAR;
+import com.qat.samples.sysmgmt.dicionario.Classes;
+import com.qat.samples.sysmgmt.dicionario.Field;
+import com.qat.samples.sysmgmt.dicionario.Interface;
+import com.qat.samples.sysmgmt.dicionario.request.ClassesInquiryRequest;
+import com.qat.samples.sysmgmt.dicionario.request.FieldInquiryRequest;
+import com.qat.samples.sysmgmt.dicionario.request.InterfaceInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
 @ContextConfiguration(locations = {
 		"classpath:conf/unittest-base-context.xml",
-		"classpath:conf/telefonebartest-context.xml"
+		"classpath:conf/dicionariobartest-context.xml"
 })
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 @Transactional
@@ -35,78 +38,78 @@ import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 public class DicionarioBARTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 private static final Logger LOG = LoggerFactory.getLogger(DicionarioBARTest.class);
-private ITelefoneBAR telefoneBAR; // injected by Spring through @Resource
+private IDicionarioBAR dicionarioBAR; // injected by Spring through @Resource
 
 @Resource
-public void setTelefoneBAR(ITelefoneBAR telefoneBAR)
+public void setDicionarioBAR(IDicionarioBAR dicionarioBAR)
 {
-	this.telefoneBAR = telefoneBAR;
+	this.dicionarioBAR = dicionarioBAR;
 }
 
-public ITelefoneBAR getTelefoneBAR()
+public IDicionarioBAR getDicionarioBAR()
 {
-	return telefoneBAR;
+	return dicionarioBAR;
 }
 
 
-//===================================### TELEFONE ####======================================
+//===================================### CLASSES ####======================================
 
 
 @Test
-	public void testDeleteTelefone()
+	public void testDeleteClasses()
 	{
-		Telefone telefone = new Telefone(1,"034" ,"33158065", TelefoneTypeEnum.GERENTE, PersistenceActionEnum.NONE);
+		Classes classes = new Classes(999, "Classes_999");
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(999);
-		Telefone telefoneResponse = getTelefoneBAR().fetchTelefoneById(request);
-		Assert.assertEquals(telefoneResponse, null);
-		getTelefoneBAR().insertTelefone(telefone);
-		telefoneResponse = getTelefoneBAR().fetchTelefoneById(request);
-		Assert.assertEquals(telefone.getId(), telefoneResponse.getId());
-		getTelefoneBAR().deleteTelefoneById(telefone);
-		telefoneResponse = getTelefoneBAR().fetchTelefoneById(request);
-		Assert.assertEquals(telefoneResponse, null);
+		Classes classesResponse = getDicionarioBAR().fetchClassesById(request);
+		Assert.assertEquals(classesResponse, null);
+		getDicionarioBAR().insertClasses(classes);
+		classesResponse = getDicionarioBAR().fetchClassesById(request);
+		Assert.assertEquals(classes.getId(), classesResponse.getId());
+		getDicionarioBAR().deleteClassesById(classes);
+		classesResponse = getDicionarioBAR().fetchClassesById(request);
+		Assert.assertEquals(classesResponse, null);
 	}
 
 	@Test
-	public void testFetchAllTelefones()
+	public void testFetchAllClassess()
 	{
-	Telefone telefone = new Telefone();
-		List<Telefone> response = getTelefoneBAR().fetchAllTelefones(telefone).getResultsList();
+	Classes classes = new Classes();
+		List<Classes> response = getDicionarioBAR().fetchAllClassess(classes).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
 	@Test
-	public void testDeleteAllTelefones()
+	public void testDeleteAllClassess()
 	{
-		getTelefoneBAR().deleteAllTelefones();
-	Telefone telefone = new Telefone();
-		List<Telefone> response = getTelefoneBAR().fetchAllTelefones(new Telefone(1,"034" ,"33158065", TelefoneTypeEnum.GERENTE, PersistenceActionEnum.NONE)).getResultsList();
+		getDicionarioBAR().deleteAllClassess();
+	Classes classes = new Classes();
+		List<Classes> response = getDicionarioBAR().fetchAllClassess(classes).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
-	public void testUpdateTelefone()
+	public void testUpdateClasses()
 	{
-		Telefone telefone = new Telefone(1,"034" ,"33158065", TelefoneTypeEnum.GERENTE, PersistenceActionEnum.NONE);
+		Classes classes = new Classes(1234, "NATIVE INSERT UPDATE");
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1234);
-		Telefone telefoneResponse = getTelefoneBAR().fetchTelefoneById(request);
-		Assert.assertEquals(telefoneResponse.getNumero(), "NATIVE INSERT");
-		getTelefoneBAR().updateTelefone(telefone);
-		telefoneResponse = getTelefoneBAR().fetchTelefoneById(request);
-		Assert.assertEquals(telefoneResponse.getNumero(), "NATIVE INSERT UPDATE");
+		Classes classesResponse = getDicionarioBAR().fetchClassesById(request);
+		Assert.assertEquals(classesResponse.getNome(), "NATIVE INSERT");
+		getDicionarioBAR().updateClasses(classes);
+		classesResponse = getDicionarioBAR().fetchClassesById(request);
+		Assert.assertEquals(classesResponse.getNome(), "NATIVE INSERT UPDATE");
 	}
 
 	@Test
-	public void testFetchTelefonesByRequest() throws Exception
+	public void testFetchClassessByRequest() throws Exception
 	{
 		// check for valid and precount
-		PagedInquiryRequest request = new PagedInquiryRequest();
+		ClassesInquiryRequest request = new ClassesInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
-		InternalResultsResponse<Telefone> response = getTelefoneBAR().fetchTelefonesByRequest(request);
+		InternalResultsResponse<Classes> response = getDicionarioBAR().fetchClassessByRequest(request);
 		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
@@ -114,25 +117,204 @@ public ITelefoneBAR getTelefoneBAR()
 		request.setPreQueryCount(true);
 		request.setStartPage(1);
 		request.setPageSize(3);
-		response = getTelefoneBAR().fetchTelefonesByRequest(request);
+		response = getDicionarioBAR().fetchClassessByRequest(request);
 		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
 		// check for valid and no precount
-		PagedInquiryRequest request2 = new PagedInquiryRequest();
+		ClassesInquiryRequest request2 = new ClassesInquiryRequest();
 		request2.setPreQueryCount(false);
-		InternalResultsResponse<Telefone> response2 = getTelefoneBAR().fetchTelefonesByRequest(request2);
+		InternalResultsResponse<Classes> response2 = getDicionarioBAR().fetchClassessByRequest(request2);
 		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
 		// this is because we did not choose to precount
 		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
 
 		// check for zero rows
-		getTelefoneBAR().deleteAllTelefones();
-		PagedInquiryRequest request3 = new PagedInquiryRequest();
+		getDicionarioBAR().deleteAllClassess();
+		ClassesInquiryRequest request3 = new ClassesInquiryRequest();
 		request3.setPreQueryCount(true);
-		InternalResultsResponse<Telefone> response3 = getTelefoneBAR().fetchTelefonesByRequest(request3);
+		InternalResultsResponse<Classes> response3 = getDicionarioBAR().fetchClassessByRequest(request3);
+		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+
+	}
+
+
+
+//===================================### INTERFACE ####======================================
+
+
+@Test
+	public void testDeleteInterface()
+	{
+		Interface interfaces = new Interface(999, "Interface_999");
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(999);
+		Interface interfaceResponse = getDicionarioBAR().fetchInterfaceById(request);
+		Assert.assertEquals(interfaceResponse, null);
+		getDicionarioBAR().insertInterface(interfaces);
+		interfaceResponse = getDicionarioBAR().fetchInterfaceById(request);
+		Assert.assertEquals(interfaces.getId(), interfaceResponse.getId());
+		getDicionarioBAR().deleteInterfaceById(interfaces);
+		interfaceResponse = getDicionarioBAR().fetchInterfaceById(request);
+		Assert.assertEquals(interfaceResponse, null);
+	}
+
+	@Test
+	public void testFetchAllInterfaces()
+	{
+	Interface interfaces = new Interface();
+		List<Interface> response = getDicionarioBAR().fetchAllInterfaces(interfaces).getResultsList();
+		Assert.assertNotNull(response);
+	}
+
+	@Test
+	public void testDeleteAllInterfaces()
+	{
+		getDicionarioBAR().deleteAllInterfaces();
+	Interface interfaces = new Interface();
+		List<Interface> response = getDicionarioBAR().fetchAllInterfaces(interfaces).getResultsList();
+		Assert.assertEquals(response.size(), 0);
+	}
+
+	@Test
+	public void testUpdateInterface()
+	{
+		Interface interfaces = new Interface(1234, "NATIVE INSERT UPDATE");
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(1234);
+		Interface interfaceResponse = getDicionarioBAR().fetchInterfaceById(request);
+		Assert.assertEquals(interfaceResponse.getNome(), "NATIVE INSERT");
+		getDicionarioBAR().updateInterface(interfaces);
+		interfaceResponse = getDicionarioBAR().fetchInterfaceById(request);
+		Assert.assertEquals(interfaceResponse.getNome(), "NATIVE INSERT UPDATE");
+	}
+
+	@Test
+	public void testFetchInterfacesByRequest() throws Exception
+	{
+		// check for valid and precount
+		InterfaceInquiryRequest request = new InterfaceInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(3);
+		InternalResultsResponse<Interface> response = getDicionarioBAR().fetchInterfacesByRequest(request);
+		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+		// check for valid and precount and start 2nd page
+		request.setPreQueryCount(true);
+		request.setStartPage(1);
+		request.setPageSize(3);
+		response = getDicionarioBAR().fetchInterfacesByRequest(request);
+		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+
+		// check for valid and no precount
+		InterfaceInquiryRequest request2 = new InterfaceInquiryRequest();
+		request2.setPreQueryCount(false);
+		InternalResultsResponse<Interface> response2 = getDicionarioBAR().fetchInterfacesByRequest(request2);
+		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+		// this is because we did not choose to precount
+		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+		// check for zero rows
+		getDicionarioBAR().deleteAllInterfaces();
+		InterfaceInquiryRequest request3 = new InterfaceInquiryRequest();
+		request3.setPreQueryCount(true);
+		InternalResultsResponse<Interface> response3 = getDicionarioBAR().fetchInterfacesByRequest(request3);
+		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+
+	}
+
+
+//===================================### FIELD ####======================================
+
+
+@Test
+	public void testDeleteField()
+	{
+		Field field = new Field(999, "Field_999");
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(999);
+		Field fieldResponse = getDicionarioBAR().fetchFieldById(request);
+		Assert.assertEquals(fieldResponse, null);
+		getDicionarioBAR().insertField(field);
+		fieldResponse = getDicionarioBAR().fetchFieldById(request);
+		Assert.assertEquals(field.getId(), fieldResponse.getId());
+		getDicionarioBAR().deleteFieldById(field);
+		fieldResponse = getDicionarioBAR().fetchFieldById(request);
+		Assert.assertEquals(fieldResponse, null);
+	}
+
+	@Test
+	public void testFetchAllFields()
+	{
+	Field field = new Field();
+		List<Field> response = getDicionarioBAR().fetchAllFields(field).getResultsList();
+		Assert.assertNotNull(response);
+	}
+
+	@Test
+	public void testDeleteAllFields()
+	{
+		getDicionarioBAR().deleteAllFields();
+	Field field = new Field();
+		List<Field> response = getDicionarioBAR().fetchAllFields(field).getResultsList();
+		Assert.assertEquals(response.size(), 0);
+	}
+
+	@Test
+	public void testUpdateField()
+	{
+		Field field = new Field(1234, "NATIVE INSERT UPDATE");
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(1234);
+		Field fieldResponse = getDicionarioBAR().fetchFieldById(request);
+		Assert.assertEquals(fieldResponse.getTipo(), "NATIVE INSERT");
+		getDicionarioBAR().updateField(field);
+		fieldResponse = getDicionarioBAR().fetchFieldById(request);
+		Assert.assertEquals(fieldResponse.getTipo(), "NATIVE INSERT UPDATE");
+	}
+
+	@Test
+	public void testFetchFieldsByRequest() throws Exception
+	{
+		// check for valid and precount
+		FieldInquiryRequest request = new FieldInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(3);
+		InternalResultsResponse<Field> response = getDicionarioBAR().fetchFieldsByRequest(request);
+		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+		// check for valid and precount and start 2nd page
+		request.setPreQueryCount(true);
+		request.setStartPage(1);
+		request.setPageSize(3);
+		response = getDicionarioBAR().fetchFieldsByRequest(request);
+		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+
+		// check for valid and no precount
+		FieldInquiryRequest request2 = new FieldInquiryRequest();
+		request2.setPreQueryCount(false);
+		InternalResultsResponse<Field> response2 = getDicionarioBAR().fetchFieldsByRequest(request2);
+		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+		// this is because we did not choose to precount
+		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+		// check for zero rows
+		getDicionarioBAR().deleteAllFields();
+		FieldInquiryRequest request3 = new FieldInquiryRequest();
+		request3.setPreQueryCount(true);
+		InternalResultsResponse<Field> response3 = getDicionarioBAR().fetchFieldsByRequest(request3);
 		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 	}
@@ -140,7 +322,9 @@ public ITelefoneBAR getTelefoneBAR()
 	@Before
 	public void setup()
 	{
-		executeSqlScript("conf/insertTelefone.sql", false);
+		executeSqlScript("conf/insertClasses.sql", false);
+		executeSqlScript("conf/insertInterface.sql", false);
+		executeSqlScript("conf/insertField.sql", false);
 	}
 
 }

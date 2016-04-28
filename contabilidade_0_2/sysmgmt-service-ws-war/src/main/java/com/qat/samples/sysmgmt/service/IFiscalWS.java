@@ -10,11 +10,17 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.request.FiscalMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.FiscalResponse;
+import com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest;
+import com.qat.samples.sysmgmt.cfop.model.request.CfopMaintenanceRequest;
+import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
+import com.qat.samples.sysmgmt.cnae.model.request.CnaeMaintenanceRequest;
+import com.qat.samples.sysmgmt.cnae.model.response.CnaeResponse;
+import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.RegimeMaintenanceRequest;
+import com.qat.samples.sysmgmt.fiscal.model.response.RegimeResponse;
+import com.qat.samples.sysmgmt.produto.model.response.CfopResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.FiscalInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -281,91 +287,6 @@ public interface IFiscalWS
 	@WSDLDocumentation(value = "Returns the list of procedures in a paged list (start and ending rows).")
 	public CnaeResponse fetchCnaesByRequest(@WebParam(name = "request") CnaeInquiryRequest request);
 
-
-//===================================### CNAEEMPRESA ####======================================
-
-	/**
-	 * Insert procedure.
-	 *
-	 * @param request the request
-	 *
-	 * @return the procedure response
-	 */
-	@WebMethod(action = "insertCnaeEmpresa")
-	@WebResult(name = "insertCnaeEmpresaReturn")
-	@WSDLDocumentation(value = "Insert a procedure record and optionally returns a list of procedures.")
-	public CnaeEmpresaResponse insertCnaeEmpresa(@WebParam(name = "request") CnaeEmpresaMaintenanceRequest request);
-
-	/**
-	 * Update procedure.
-	 *
-	 * @param request the request
-	 *
-	 * @return the procedure response
-	 */
-	@WebMethod(action = "updateCnaeEmpresa")
-	@WebResult(name = "updateCnaeEmpresaReturn")
-	@WSDLDocumentation(value = "Updates the selected procedure record and optionally returns a list of procedures.")
-	public CnaeEmpresaResponse updateCnaeEmpresa(@WebParam(name = "request") CnaeEmpresaMaintenanceRequest request);
-
-	/**
-	 * Delete procedure.
-	 *
-	 * @param request the request
-	 *
-	 * @return the procedure response
-	 */
-	@WebMethod(action = "deleteCnaeEmpresa")
-	@WebResult(name = "deleteCnaeEmpresaReturn")
-	@WSDLDocumentation(value = "Deletes the selected procedure record and optionally returns a list of procedures.")
-	public CnaeEmpresaResponse deleteCnaeEmpresa(@WebParam(name = "request") CnaeEmpresaMaintenanceRequest request);
-
-	/**
-	 * Refresh procedures.
-	 *
-	 * @param request the request
-	 *
-	 * @return the procedure response
-	 */
-	@WebMethod(action = "refreshCnaeEmpresas")
-	@WebResult(name = "refreshCnaeEmpresasReturn")
-	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the procedure table.")
-	public CnaeEmpresaResponse refreshCnaeEmpresas(@WebParam(name = "request") RefreshRequest request);
-
-	/**
-	 * Fetch all procedures.
-	 *
-	 * @param request the request
-	 *
-	 * @return the procedure response
-	 */
-	@WebMethod(action = "fetchAllCnaeEmpresas")
-	@WebResult(name = "fetchAllCnaeEmpresasReturn")
-	@WSDLDocumentation(value = "Returns a complete list of all procedures.")
-	public CnaeEmpresaResponse fetchAllCnaeEmpresas(@WebParam(name = "request") FetchAllRequest request);
-
-	/**
-	 * Fetch procedure by id.
-	 *
-	 * @param request the request
-	 *
-	 * @return the procedure response
-	 */
-	@WebMethod(action = "fetchCnaeEmpresaById")
-	@WebResult(name = "fetchCnaeEmpresaByIdReturn")
-	@WSDLDocumentation(value = "Returns the desired procedure.")
-	public CnaeEmpresaResponse fetchCnaeEmpresaById(@WebParam(name = "request") FetchByIdRequest request);
-
-	/**
-	 * Fetch procedures by request.
-	 *
-	 * @param request the request
-	 * @return the procedure response
-	 */
-	@WebMethod(action = "fetchCnaeEmpresasByRequest")
-	@WebResult(name = "fetchCnaeEmpresasByRequestReturn")
-	@WSDLDocumentation(value = "Returns the list of procedures in a paged list (start and ending rows).")
-	public CnaeEmpresaResponse fetchCnaeEmpresasByRequest(@WebParam(name = "request") CnaeEmpresaInquiryRequest request);
 
 }
 

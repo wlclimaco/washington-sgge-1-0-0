@@ -10,6 +10,7 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 public class Field extends ModelCosmeDamiao
 {
 
+	private Integer id;
 	private String tipo;
 	private Integer tamanho;
 	private Boolean requerid;
@@ -22,6 +23,18 @@ public class Field extends ModelCosmeDamiao
 	{
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public Field(int i, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getTipo() {
@@ -82,9 +95,10 @@ public class Field extends ModelCosmeDamiao
 
 	@Override
 	public String toString() {
-		return "Field [getTipo()=" + getTipo() + ", getTamanho()=" + getTamanho() + ", getRequerid()=" + getRequerid()
-				+ ", getPrimaryKey()=" + getPrimaryKey() + ", getForenkey()=" + getForenkey() + ", getModel()="
-				+ getModel() + ", getXml()=" + getXml() + ", toString()=" + super.toString() + "]";
+		return "Field [getId()=" + getId() + ", getTipo()=" + getTipo() + ", getTamanho()=" + getTamanho()
+				+ ", getRequerid()=" + getRequerid() + ", getPrimaryKey()=" + getPrimaryKey() + ", getForenkey()="
+				+ getForenkey() + ", getModel()=" + getModel() + ", getXml()=" + getXml() + ", toString()="
+				+ super.toString() + "]";
 	}
 
 }

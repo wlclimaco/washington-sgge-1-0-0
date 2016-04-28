@@ -10,11 +10,20 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.request.ClinicaMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.ClinicaResponse;
+import com.qat.samples.sysmgmt.clinica.model.request.ConsultaInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.ConsultaMaintenanceRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.ExameInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.ExameMaintenanceRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.MedicoInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.MedicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.PacienteInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.PacienteMaintenanceRequest;
+import com.qat.samples.sysmgmt.clinica.model.response.ConsultaResponse;
+import com.qat.samples.sysmgmt.clinica.model.response.ExameResponse;
+import com.qat.samples.sysmgmt.clinica.model.response.MedicoResponse;
+import com.qat.samples.sysmgmt.clinica.model.response.PacienteResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.ClinicaInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**

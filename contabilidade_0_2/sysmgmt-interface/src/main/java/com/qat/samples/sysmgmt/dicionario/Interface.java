@@ -28,6 +28,10 @@ public class Interface extends ModelCosmeDamiao
 
 	}
 
+	public Interface(int i, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getId() {
 		return id;
 	}

@@ -10,11 +10,20 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.request.SiteMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.SiteResponse;
+import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
+import com.qat.samples.sysmgmt.contato.model.request.ContatoMaintenanceRequest;
+import com.qat.samples.sysmgmt.contato.model.response.ContatoResponse;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.response.OrdemServicoResponse;
+import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.PlanoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.response.PlanoResponse;
+import com.qat.samples.sysmgmt.site.model.request.SiteInquiryRequest;
+import com.qat.samples.sysmgmt.site.model.request.SiteMaintenanceRequest;
+import com.qat.samples.sysmgmt.site.model.response.SiteResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.SiteInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**

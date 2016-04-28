@@ -26,6 +26,10 @@ public class Classes extends ModelCosmeDamiao
 		// TODO Auto-generated constructor stub
 	}
 
+	public Classes(int i, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getId() {
 		return id;
 	}

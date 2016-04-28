@@ -10,12 +10,21 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.request.EmpresaMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.EmpresaResponse;
+import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.DepositoMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.EmpresaMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.response.DepositoResponse;
+import com.qat.samples.sysmgmt.entidade.model.response.EmpresaResponse;
+import com.qat.samples.sysmgmt.entidade.model.response.FilialResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
+import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.UsuarioMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.response.UsuarioResponse;
 
 /**
  * The Interface IEmpresaWS.

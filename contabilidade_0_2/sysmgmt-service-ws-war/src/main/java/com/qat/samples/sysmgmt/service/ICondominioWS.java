@@ -10,11 +10,17 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.request.CondominioMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.CondominioResponse;
+import com.qat.samples.sysmgmt.condominio.model.request.AvisoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.AvisoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.InquilinoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.InquilinoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.SindicoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.SindicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.response.AvisoResponse;
+import com.qat.samples.sysmgmt.condominio.model.response.InquilinoResponse;
+import com.qat.samples.sysmgmt.condominio.model.response.SindicoResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.CondominioInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -208,7 +214,7 @@ public interface ICondominioWS
 	@WebMethod(action = "insertAvisos")
 	@WebResult(name = "insertAvisosReturn")
 	@WSDLDocumentation(value = "Insert a procedure record and optionally returns a list of procedures.")
-	public AvisosResponse insertAvisos(@WebParam(name = "request") AvisosMaintenanceRequest request);
+	public AvisoResponse insertAvisos(@WebParam(name = "request") AvisoMaintenanceRequest request);
 
 	/**
 	 * Update procedure.
@@ -220,7 +226,7 @@ public interface ICondominioWS
 	@WebMethod(action = "updateAvisos")
 	@WebResult(name = "updateAvisosReturn")
 	@WSDLDocumentation(value = "Updates the selected procedure record and optionally returns a list of procedures.")
-	public AvisosResponse updateAvisos(@WebParam(name = "request") AvisosMaintenanceRequest request);
+	public AvisoResponse updateAvisos(@WebParam(name = "request") AvisoMaintenanceRequest request);
 
 	/**
 	 * Delete procedure.
@@ -232,7 +238,7 @@ public interface ICondominioWS
 	@WebMethod(action = "deleteAvisos")
 	@WebResult(name = "deleteAvisosReturn")
 	@WSDLDocumentation(value = "Deletes the selected procedure record and optionally returns a list of procedures.")
-	public AvisosResponse deleteAvisos(@WebParam(name = "request") AvisosMaintenanceRequest request);
+	public AvisoResponse deleteAvisos(@WebParam(name = "request") AvisoMaintenanceRequest request);
 
 	/**
 	 * Refresh procedures.
@@ -244,7 +250,7 @@ public interface ICondominioWS
 	@WebMethod(action = "refreshAvisoss")
 	@WebResult(name = "refreshAvisossReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the procedure table.")
-	public AvisosResponse refreshAvisoss(@WebParam(name = "request") RefreshRequest request);
+	public AvisoResponse refreshAvisoss(@WebParam(name = "request") RefreshRequest request);
 
 	/**
 	 * Fetch all procedures.
@@ -256,7 +262,7 @@ public interface ICondominioWS
 	@WebMethod(action = "fetchAllAvisoss")
 	@WebResult(name = "fetchAllAvisossReturn")
 	@WSDLDocumentation(value = "Returns a complete list of all procedures.")
-	public AvisosResponse fetchAllAvisoss(@WebParam(name = "request") FetchAllRequest request);
+	public AvisoResponse fetchAllAvisoss(@WebParam(name = "request") FetchAllRequest request);
 
 	/**
 	 * Fetch procedure by id.
@@ -268,7 +274,7 @@ public interface ICondominioWS
 	@WebMethod(action = "fetchAvisosById")
 	@WebResult(name = "fetchAvisosByIdReturn")
 	@WSDLDocumentation(value = "Returns the desired procedure.")
-	public AvisosResponse fetchAvisosById(@WebParam(name = "request") FetchByIdRequest request);
+	public AvisoResponse fetchAvisosById(@WebParam(name = "request") FetchByIdRequest request);
 
 	/**
 	 * Fetch procedures by request.
@@ -279,7 +285,7 @@ public interface ICondominioWS
 	@WebMethod(action = "fetchAvisossByRequest")
 	@WebResult(name = "fetchAvisossByRequestReturn")
 	@WSDLDocumentation(value = "Returns the list of procedures in a paged list (start and ending rows).")
-	public AvisosResponse fetchAvisossByRequest(@WebParam(name = "request") AvisosInquiryRequest request);
+	public AvisoResponse fetchAvisossByRequest(@WebParam(name = "request") AvisoInquiryRequest request);
 
 }
 

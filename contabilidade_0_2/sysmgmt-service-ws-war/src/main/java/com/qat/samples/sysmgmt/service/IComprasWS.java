@@ -10,11 +10,17 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.request.ComprasMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.ComprasResponse;
+import com.qat.samples.sysmgmt.cotacao.request.CotacaoInquiryRequest;
+import com.qat.samples.sysmgmt.cotacao.request.CotacaoMaintenanceRequest;
+import com.qat.samples.sysmgmt.cotacao.response.CotacaoResponse;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalEntradaMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.PedidoComprasInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.PedidoComprasMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.response.NotaFiscalEntradaResponse;
+import com.qat.samples.sysmgmt.nf.model.response.PedidoComprasResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.ComprasInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -107,7 +113,7 @@ public interface IComprasWS
 	@WebMethod(action = "fetchNotaFiscalEntradasByRequest")
 	@WebResult(name = "fetchNotaFiscalEntradasByRequestReturn")
 	@WSDLDocumentation(value = "Returns the list of procedures in a paged list (start and ending rows).")
-	public NotaFiscalEntradaResponse fetchNotaFiscalEntradasByRequest(@WebParam(name = "request") NotaFiscalEntradaInquiryRequest request);
+	public NotaFiscalEntradaResponse fetchNotaFiscalEntradasByRequest(@WebParam(name = "request") NotaFiscalInquiryRequest request);
 
 
 //===================================### PEDIDOCOMPRAS ####======================================

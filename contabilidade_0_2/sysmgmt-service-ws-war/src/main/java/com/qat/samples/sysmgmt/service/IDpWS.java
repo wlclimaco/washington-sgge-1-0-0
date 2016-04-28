@@ -10,11 +10,20 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.request.DpMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.DpResponse;
+import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest;
+import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosMaintenanceRequest;
+import com.qat.samples.sysmgmt.beneficios.model.response.BeneficiosResponse;
+import com.qat.samples.sysmgmt.dp.model.request.EventoInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.EventosMaintenanceRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioMaintenanceRequest;
+import com.qat.samples.sysmgmt.dp.model.request.HoraFuncInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.HoraFuncMaintenanceRequest;
+import com.qat.samples.sysmgmt.dp.model.response.EventoResponse;
+import com.qat.samples.sysmgmt.dp.model.response.FuncionarioResponse;
+import com.qat.samples.sysmgmt.dp.model.response.HorarioFuncResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.DpInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -122,7 +131,7 @@ public interface IDpWS
 	@WebMethod(action = "insertEventos")
 	@WebResult(name = "insertEventosReturn")
 	@WSDLDocumentation(value = "Insert a procedure record and optionally returns a list of procedures.")
-	public EventosResponse insertEventos(@WebParam(name = "request") EventosMaintenanceRequest request);
+	public EventoResponse insertEventos(@WebParam(name = "request") EventosMaintenanceRequest request);
 
 	/**
 	 * Update procedure.
@@ -134,7 +143,7 @@ public interface IDpWS
 	@WebMethod(action = "updateEventos")
 	@WebResult(name = "updateEventosReturn")
 	@WSDLDocumentation(value = "Updates the selected procedure record and optionally returns a list of procedures.")
-	public EventosResponse updateEventos(@WebParam(name = "request") EventosMaintenanceRequest request);
+	public EventoResponse updateEventos(@WebParam(name = "request") EventosMaintenanceRequest request);
 
 	/**
 	 * Delete procedure.
@@ -146,7 +155,7 @@ public interface IDpWS
 	@WebMethod(action = "deleteEventos")
 	@WebResult(name = "deleteEventosReturn")
 	@WSDLDocumentation(value = "Deletes the selected procedure record and optionally returns a list of procedures.")
-	public EventosResponse deleteEventos(@WebParam(name = "request") EventosMaintenanceRequest request);
+	public EventoResponse deleteEventos(@WebParam(name = "request") EventosMaintenanceRequest request);
 
 	/**
 	 * Refresh procedures.
@@ -158,7 +167,7 @@ public interface IDpWS
 	@WebMethod(action = "refreshEventoss")
 	@WebResult(name = "refreshEventossReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the procedure table.")
-	public EventosResponse refreshEventoss(@WebParam(name = "request") RefreshRequest request);
+	public EventoResponse refreshEventoss(@WebParam(name = "request") RefreshRequest request);
 
 	/**
 	 * Fetch all procedures.
@@ -170,7 +179,7 @@ public interface IDpWS
 	@WebMethod(action = "fetchAllEventoss")
 	@WebResult(name = "fetchAllEventossReturn")
 	@WSDLDocumentation(value = "Returns a complete list of all procedures.")
-	public EventosResponse fetchAllEventoss(@WebParam(name = "request") FetchAllRequest request);
+	public EventoResponse fetchAllEventoss(@WebParam(name = "request") FetchAllRequest request);
 
 	/**
 	 * Fetch procedure by id.
@@ -182,7 +191,7 @@ public interface IDpWS
 	@WebMethod(action = "fetchEventosById")
 	@WebResult(name = "fetchEventosByIdReturn")
 	@WSDLDocumentation(value = "Returns the desired procedure.")
-	public EventosResponse fetchEventosById(@WebParam(name = "request") FetchByIdRequest request);
+	public EventoResponse fetchEventosById(@WebParam(name = "request") FetchByIdRequest request);
 
 	/**
 	 * Fetch procedures by request.
@@ -193,7 +202,7 @@ public interface IDpWS
 	@WebMethod(action = "fetchEventossByRequest")
 	@WebResult(name = "fetchEventossByRequestReturn")
 	@WSDLDocumentation(value = "Returns the list of procedures in a paged list (start and ending rows).")
-	public EventosResponse fetchEventossByRequest(@WebParam(name = "request") EventosInquiryRequest request);
+	public EventoResponse fetchEventossByRequest(@WebParam(name = "request") EventoInquiryRequest request);
 
 
 //===================================### BENEFICIOS ####======================================
@@ -294,7 +303,7 @@ public interface IDpWS
 	@WebMethod(action = "insertHoraFunc")
 	@WebResult(name = "insertHoraFuncReturn")
 	@WSDLDocumentation(value = "Insert a procedure record and optionally returns a list of procedures.")
-	public HoraFuncResponse insertHoraFunc(@WebParam(name = "request") HoraFuncMaintenanceRequest request);
+	public HorarioFuncResponse insertHoraFunc(@WebParam(name = "request") HoraFuncMaintenanceRequest request);
 
 	/**
 	 * Update procedure.
@@ -306,7 +315,7 @@ public interface IDpWS
 	@WebMethod(action = "updateHoraFunc")
 	@WebResult(name = "updateHoraFuncReturn")
 	@WSDLDocumentation(value = "Updates the selected procedure record and optionally returns a list of procedures.")
-	public HoraFuncResponse updateHoraFunc(@WebParam(name = "request") HoraFuncMaintenanceRequest request);
+	public HorarioFuncResponse updateHoraFunc(@WebParam(name = "request") HoraFuncMaintenanceRequest request);
 
 	/**
 	 * Delete procedure.
@@ -318,7 +327,7 @@ public interface IDpWS
 	@WebMethod(action = "deleteHoraFunc")
 	@WebResult(name = "deleteHoraFuncReturn")
 	@WSDLDocumentation(value = "Deletes the selected procedure record and optionally returns a list of procedures.")
-	public HoraFuncResponse deleteHoraFunc(@WebParam(name = "request") HoraFuncMaintenanceRequest request);
+	public HorarioFuncResponse deleteHoraFunc(@WebParam(name = "request") HoraFuncMaintenanceRequest request);
 
 	/**
 	 * Refresh procedures.
@@ -330,7 +339,7 @@ public interface IDpWS
 	@WebMethod(action = "refreshHoraFuncs")
 	@WebResult(name = "refreshHoraFuncsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the procedure table.")
-	public HoraFuncResponse refreshHoraFuncs(@WebParam(name = "request") RefreshRequest request);
+	public HorarioFuncResponse refreshHoraFuncs(@WebParam(name = "request") RefreshRequest request);
 
 	/**
 	 * Fetch all procedures.
@@ -342,7 +351,7 @@ public interface IDpWS
 	@WebMethod(action = "fetchAllHoraFuncs")
 	@WebResult(name = "fetchAllHoraFuncsReturn")
 	@WSDLDocumentation(value = "Returns a complete list of all procedures.")
-	public HoraFuncResponse fetchAllHoraFuncs(@WebParam(name = "request") FetchAllRequest request);
+	public HorarioFuncResponse fetchAllHoraFuncs(@WebParam(name = "request") FetchAllRequest request);
 
 	/**
 	 * Fetch procedure by id.
@@ -354,7 +363,7 @@ public interface IDpWS
 	@WebMethod(action = "fetchHoraFuncById")
 	@WebResult(name = "fetchHoraFuncByIdReturn")
 	@WSDLDocumentation(value = "Returns the desired procedure.")
-	public HoraFuncResponse fetchHoraFuncById(@WebParam(name = "request") FetchByIdRequest request);
+	public HorarioFuncResponse fetchHoraFuncById(@WebParam(name = "request") FetchByIdRequest request);
 
 	/**
 	 * Fetch procedures by request.
@@ -365,7 +374,7 @@ public interface IDpWS
 	@WebMethod(action = "fetchHoraFuncsByRequest")
 	@WebResult(name = "fetchHoraFuncsByRequestReturn")
 	@WSDLDocumentation(value = "Returns the list of procedures in a paged list (start and ending rows).")
-	public HoraFuncResponse fetchHoraFuncsByRequest(@WebParam(name = "request") HoraFuncInquiryRequest request);
+	public HorarioFuncResponse fetchHoraFuncsByRequest(@WebParam(name = "request") HoraFuncInquiryRequest request);
 
 }
 

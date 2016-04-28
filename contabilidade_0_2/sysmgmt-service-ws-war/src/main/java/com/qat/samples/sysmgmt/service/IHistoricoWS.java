@@ -10,11 +10,11 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.request.HistoricoMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.HistoricoResponse;
+import com.qat.samples.sysmgmt.historico.model.request.HistoricoInquiryRequest;
+import com.qat.samples.sysmgmt.historico.model.request.HistoricoMaintenanceRequest;
+import com.qat.samples.sysmgmt.historico.model.response.HistoricoResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.HistoricoInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -110,90 +110,7 @@ public interface IHistoricoWS
 	public HistoricoResponse fetchHistoricosByRequest(@WebParam(name = "request") HistoricoInquiryRequest request);
 
 
-//===================================### HISTORICOITENS ####======================================
 
-	/**
-	 * Insert procedure.
-	 *
-	 * @param request the request
-	 *
-	 * @return the procedure response
-	 */
-	@WebMethod(action = "insertHistoricoItens")
-	@WebResult(name = "insertHistoricoItensReturn")
-	@WSDLDocumentation(value = "Insert a procedure record and optionally returns a list of procedures.")
-	public HistoricoItensResponse insertHistoricoItens(@WebParam(name = "request") HistoricoItensMaintenanceRequest request);
-
-	/**
-	 * Update procedure.
-	 *
-	 * @param request the request
-	 *
-	 * @return the procedure response
-	 */
-	@WebMethod(action = "updateHistoricoItens")
-	@WebResult(name = "updateHistoricoItensReturn")
-	@WSDLDocumentation(value = "Updates the selected procedure record and optionally returns a list of procedures.")
-	public HistoricoItensResponse updateHistoricoItens(@WebParam(name = "request") HistoricoItensMaintenanceRequest request);
-
-	/**
-	 * Delete procedure.
-	 *
-	 * @param request the request
-	 *
-	 * @return the procedure response
-	 */
-	@WebMethod(action = "deleteHistoricoItens")
-	@WebResult(name = "deleteHistoricoItensReturn")
-	@WSDLDocumentation(value = "Deletes the selected procedure record and optionally returns a list of procedures.")
-	public HistoricoItensResponse deleteHistoricoItens(@WebParam(name = "request") HistoricoItensMaintenanceRequest request);
-
-	/**
-	 * Refresh procedures.
-	 *
-	 * @param request the request
-	 *
-	 * @return the procedure response
-	 */
-	@WebMethod(action = "refreshHistoricoItenss")
-	@WebResult(name = "refreshHistoricoItenssReturn")
-	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the procedure table.")
-	public HistoricoItensResponse refreshHistoricoItenss(@WebParam(name = "request") RefreshRequest request);
-
-	/**
-	 * Fetch all procedures.
-	 *
-	 * @param request the request
-	 *
-	 * @return the procedure response
-	 */
-	@WebMethod(action = "fetchAllHistoricoItenss")
-	@WebResult(name = "fetchAllHistoricoItenssReturn")
-	@WSDLDocumentation(value = "Returns a complete list of all procedures.")
-	public HistoricoItensResponse fetchAllHistoricoItenss(@WebParam(name = "request") FetchAllRequest request);
-
-	/**
-	 * Fetch procedure by id.
-	 *
-	 * @param request the request
-	 *
-	 * @return the procedure response
-	 */
-	@WebMethod(action = "fetchHistoricoItensById")
-	@WebResult(name = "fetchHistoricoItensByIdReturn")
-	@WSDLDocumentation(value = "Returns the desired procedure.")
-	public HistoricoItensResponse fetchHistoricoItensById(@WebParam(name = "request") FetchByIdRequest request);
-
-	/**
-	 * Fetch procedures by request.
-	 *
-	 * @param request the request
-	 * @return the procedure response
-	 */
-	@WebMethod(action = "fetchHistoricoItenssByRequest")
-	@WebResult(name = "fetchHistoricoItenssByRequestReturn")
-	@WSDLDocumentation(value = "Returns the list of procedures in a paged list (start and ending rows).")
-	public HistoricoItensResponse fetchHistoricoItenssByRequest(@WebParam(name = "request") HistoricoItensInquiryRequest request);
 
 }
 

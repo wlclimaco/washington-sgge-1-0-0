@@ -79,7 +79,7 @@ for(i=0;i < teste.length;i++){
 	text = text + '\n';
 	text = text + '		try\n';
 	text = text + '		{\n';
-	text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+nomeM+'BAC().insert'+nomeM+'(request);\n';
+	text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+bar+'BAC().insert'+nomeM+'(request);\n';
 	text = text + '			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());\n';
 	text = text + '		}\n';
 	text = text + '		catch (Exception ex)\n';
@@ -98,7 +98,7 @@ for(i=0;i < teste.length;i++){
 	text = text + '\n';
 	text = text + '		try\n';
 	text = text + '		{\n';
-	text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+nomeM+'BAC().update'+nomeM+'(request);\n';
+	text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+bar+'BAC().update'+nomeM+'(request);\n';
 	text = text + '			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());\n';
 	text = text + '		}\n';
 	text = text + '		catch (Exception ex)\n';
@@ -117,7 +117,7 @@ for(i=0;i < teste.length;i++){
 	text = text + '\n';
 	text = text + '		try\n';
 	text = text + '		{\n';
-	text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+nomeM+'BAC().delete'+nomeM+'(request);\n';
+	text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+bar+'BAC().delete'+nomeM+'(request);\n';
 	text = text + '			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());\n';
 	text = text + '		}\n';
 	text = text + '		catch (Exception ex)\n';
@@ -137,7 +137,7 @@ for(i=0;i < teste.length;i++){
 	text = text + '\n';
 	text = text + '		try\n';
 	text = text + '		{\n';
-	text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+nomeM+'BAC().refresh'+nomeM+'s(request);\n';
+	text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+bar+'BAC().refresh'+nomeM+'s(request);\n';
 	text = text + '			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());\n';
 	text = text + '		}\n';
 	text = text + '		catch (Exception ex)\n';
@@ -156,7 +156,7 @@ for(i=0;i < teste.length;i++){
 	text = text + '\n';
 	text = text + '		try\n';
 	text = text + '		{\n';
-	text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+nomeM+'BAC().fetchAll'+nomeM+'s();\n';
+	text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+bar+'BAC().fetchAll'+nomeM+'s(new '+nomeM+'());\n';
 	text = text + '			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());\n';
 	text = text + '		}\n';
 	text = text + '		catch (Exception ex)\n';
@@ -182,7 +182,7 @@ for(i=0;i < teste.length;i++){
 	text = text + '		{\n';
 	text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = new InternalResultsResponse<'+nomeM+'>();\n';
 	text = text + '\n';
-	text = text + '			internalResponse = get'+nomeM+'BAC().fetch'+nomeM+'ById(request);\n';
+	text = text + '			internalResponse = get'+bar+'BAC().fetch'+nomeM+'ById(request);\n';
 	text = text + '			// Handle the processing for all previous methods regardless of them failing or succeeding.\n';
 	text = text + '			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);\n';
 	text = text + '		}\n';
@@ -202,7 +202,7 @@ for(i=0;i < teste.length;i++){
 	text = text + '\n';
 	text = text + '		try\n';
 	text = text + '		{\n';
-	text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+nomeM+'BAC().fetch'+nomeM+'sByRequest(request);\n';
+	text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+bar+'BAC().fetch'+nomeM+'sByRequest(request);\n';
 	text = text + '			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());\n';
 	text = text + '		}\n';
 	text = text + '		catch (Exception ex)\n';

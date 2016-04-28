@@ -10,11 +10,17 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.request.AdvogadoMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.AdvogadoResponse;
+import com.qat.samples.sysmgmt.advocacia.request.AdvogadoInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.request.AdvogadoMaintenanceRequest;
+import com.qat.samples.sysmgmt.advocacia.request.AudienciaInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.request.AudienciaMaintenanceRequest;
+import com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.request.ProcessoMaintenanceRequest;
+import com.qat.samples.sysmgmt.advocacia.response.AdvogadoResponse;
+import com.qat.samples.sysmgmt.advocacia.response.AudienciaResponse;
+import com.qat.samples.sysmgmt.advocacia.response.ProcessoResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.AdvogadoInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**

@@ -10,9 +10,12 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
 import com.qat.samples.sysmgmt.bac.ICountyBAC;
 import com.qat.samples.sysmgmt.model.County;
+import com.qat.samples.sysmgmt.model.request.CountyMaintenanceRequest;
 import com.qat.samples.sysmgmt.model.response.CountyResponse;
 import com.qat.samples.sysmgmt.service.ICountyWS;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -54,7 +57,7 @@ public class CountyWSImpl implements ICountyWS
 	{
 		this.countyBAC = countyBAC;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICountyBAC}
 	 *
@@ -69,7 +72,7 @@ public class CountyWSImpl implements ICountyWS
 
 		try
 		{
-			InternalResultsResponse<County> internalResponse = getCountyBAC().insertCounties(request);
+			InternalResultsResponse<County> internalResponse = getCountyBAC().insertCounty(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -80,7 +83,7 @@ public class CountyWSImpl implements ICountyWS
 
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICountyBAC}
 	 *
@@ -95,7 +98,7 @@ public class CountyWSImpl implements ICountyWS
 
 		try
 		{
-			InternalResultsResponse<County> internalResponse = getCountyBAC().updateCounties(request);
+			InternalResultsResponse<County> internalResponse = getCountyBAC().updateCounty(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -106,7 +109,7 @@ public class CountyWSImpl implements ICountyWS
 
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICountyBAC}
 	 *
@@ -121,7 +124,7 @@ public class CountyWSImpl implements ICountyWS
 
 		try
 		{
-			InternalResultsResponse<County> internalResponse = getCountyBAC().deleteCounties(request);
+			InternalResultsResponse<County> internalResponse = getCountyBAC().deleteCounty(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -132,7 +135,7 @@ public class CountyWSImpl implements ICountyWS
 
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICountyBAC}
 	 *
@@ -158,7 +161,7 @@ public class CountyWSImpl implements ICountyWS
 
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICountyBAC}
 	 *
@@ -166,7 +169,7 @@ public class CountyWSImpl implements ICountyWS
 	 * @return CountyResponse
 	 */
 	@Override
-	public CountyResponse fetchCountiesByRequest(CountyInquiryRequest request)
+	public CountyResponse fetchCountiesByRequest(PagedInquiryRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
 		CountyResponse response = new CountyResponse();

@@ -10,12 +10,30 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.request.CadastrosMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.CadastrosResponse;
+import com.qat.samples.sysmgmt.dp.model.response.ConvenioResponse;
+import com.qat.samples.sysmgmt.entidade.model.request.CidadeMaintenanceRequest;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoMaintenanceRequest;
+import com.qat.samples.sysmgmt.estado.model.response.EstadoResponse;
+import com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ClienteMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ConvenioInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.response.ClienteResponse;
+import com.qat.samples.sysmgmt.pessoa.model.response.FornecedorResponse;
+import com.qat.samples.sysmgmt.pessoa.model.response.TransportadorResponse;
+import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.ConvenioMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.CadastrosInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
+import com.qat.samples.sysmgmt.util.model.request.TarefaInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.TarefaMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.response.CidadeResponse;
+import com.qat.samples.sysmgmt.util.model.response.TarefaResponse;
 
 /**
  * The Interface ICadastrosWS.

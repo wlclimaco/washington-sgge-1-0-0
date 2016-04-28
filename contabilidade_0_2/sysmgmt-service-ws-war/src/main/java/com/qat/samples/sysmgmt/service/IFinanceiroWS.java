@@ -10,11 +10,29 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.request.FinanceiroMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.FinanceiroResponse;
+import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
+import com.qat.samples.sysmgmt.banco.model.request.BancoMaintenanceRequest;
+import com.qat.samples.sysmgmt.dp.model.response.BancoResponse;
+import com.qat.samples.sysmgmt.dp.model.response.FormaPgResponse;
+import com.qat.samples.sysmgmt.financeiro.model.request.CaixaInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.CaixaMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.CondPagInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.CondPagMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.FormaPgInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.FormaPgMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.response.CondPagResponse;
+import com.qat.samples.sysmgmt.financeiro.model.response.ContaCorrenteResponse;
+import com.qat.samples.sysmgmt.financeiro.model.response.ContasPagarResponse;
+import com.qat.samples.sysmgmt.financeiro.model.response.ContasReceberResponse;
+import com.qat.samples.sysmgmt.nf.model.response.CaixaResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.FinanceiroInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**

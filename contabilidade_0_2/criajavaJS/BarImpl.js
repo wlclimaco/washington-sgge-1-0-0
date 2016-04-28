@@ -7,13 +7,13 @@ function titleize(text) {
     for (var i = 0; i < text.length; i++) {
         if (text.charAt(i) ===" ") {
 
-            // Convertendo letra após o ESPAÇO em maiuscula
+            // Convertendo letra apï¿½s o ESPAï¿½O em maiuscula
             var charToUper = text.charAt(i+1).toUpperCase();
 
-            // Colocando texto de antes do ESPAÇO na variável
+            // Colocando texto de antes do ESPAï¿½O na variï¿½vel
             var sliceBegin = text.slice(0, (i+1));
 
-            // colocando o texto de depois do ESPAÇO na variável
+            // colocando o texto de depois do ESPAï¿½O na variï¿½vel
             var sliceEnd = text.slice(i + 2);
 
             // Juntando tudo
@@ -22,14 +22,14 @@ function titleize(text) {
         } else {
 
             // NAO CONSIGO PENSAR EM COMO TRANSFORMAR O RESTANTE DAS LETRAS EM MINUSCULA
-        }   
+        }
     }
     return text;
 }
 
 BarImpl = function (teste,bar,local){
-debugger
-	var text = "";
+
+var text = '/** create by system gera-java version 1.0.0 '+dataAtualFormatada()+'*/\n';
 text = text + "package com.qat.samples.sysmgmt.bar.mybatis."+titleize(local)+";\n";
 text = text + "\n";
 text = text + "\n";
@@ -49,13 +49,13 @@ text = text + " * The Class CountyBARImpl. (Business Access Repository - BAR)\n"
 text = text + " */\n";
 text = text + "@Repository\n";
 text = text + "public class "+bar+"BARImpl extends SqlSessionDaoSupport implements I"+bar+"BAR\n";
-text = text + "{\n";	
+text = text + "{\n";
 text = text + "\n";
 text = text + "/** The Constant ZERO. */\n";
 text = text + "	private static final int ZERO = 0;\n";
 text = text + "\n";
 for(i=0;i < teste.length;i++){
-	
+
 
 var nome = teste[i].classe.toLowerCase();
 nomeM = titleize(nome);

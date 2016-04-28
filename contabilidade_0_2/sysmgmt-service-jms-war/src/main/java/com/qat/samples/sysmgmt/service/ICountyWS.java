@@ -7,8 +7,11 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
+import com.qat.samples.sysmgmt.model.request.CountyMaintenanceRequest;
 import com.qat.samples.sysmgmt.model.response.CountyResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -30,7 +33,7 @@ public interface ICountyWS
 	@WebResult(name = "insertCountiesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CountyResponse insertCounties(@WebParam(name = "request") CountyMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Counties.
 	 *
@@ -42,7 +45,7 @@ public interface ICountyWS
 	@WebResult(name = "updateCountiesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CountyResponse updateCounties(@WebParam(name = "request") CountyMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Counties.
 	 *
@@ -54,7 +57,7 @@ public interface ICountyWS
 	@WebResult(name = "deleteCountiesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CountyResponse deleteCounties(@WebParam(name = "request") CountyMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Counties.
 	 *
@@ -66,7 +69,7 @@ public interface ICountyWS
 	@WebResult(name = "fetchCountyByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CountyResponse fetchCountyById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Counties.
 	 *
@@ -77,9 +80,9 @@ public interface ICountyWS
 	@WebMethod(action = "fetchCountiesByRequest")
 	@WebResult(name = "fetchCountiesByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
-	CountyResponse fetchCountiesByRequest(@WebParam(name = "request") CountyInquiryRequest request);
-	
-	
+	CountyResponse fetchCountiesByRequest(@WebParam(name = "request") PagedInquiryRequest request);
+
+
 	/**
 	 * Rebuild a list of Counties.
 	 *
@@ -91,7 +94,7 @@ public interface ICountyWS
 	@WebResult(name = "refreshCountiesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CountyResponse refreshCounties(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Counties.

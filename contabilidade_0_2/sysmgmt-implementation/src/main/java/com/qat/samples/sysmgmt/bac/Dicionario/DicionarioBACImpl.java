@@ -187,7 +187,7 @@ public InternalResultsResponse<Classes> fetchClassesById(FetchByIdRequest reques
 	}
 	else
 	{
-		response.getResultsList().add(getDicionarioBAR().fetchClassesById(request).getFirstResult());
+		response.getResultsList().add(getDicionarioBAR().fetchClassesById(request));
 	}
 
 	return response;
@@ -379,10 +379,10 @@ public InternalResultsResponse<Interface> refreshInterfaces(RefreshRequest reque
  * @see com.qat.samples.sysmgmt.bac.IInterfaceBAC#fetchAllInterfaces(Interface interface)
  */
 @Override
-public InternalResultsResponse<Interface> fetchAllInterfaces(Interface interface)
+public InternalResultsResponse<Interface> fetchAllInterfaces(Interface interfaces)
 {
 	InternalResultsResponse<Interface> response = new InternalResultsResponse<Interface>();
-	response.getResultsList().addAll(getDicionarioBAR().fetchAllInterfaces(interface).getResultsList());
+	response.getResultsList().addAll(getDicionarioBAR().fetchAllInterfaces(interfaces).getResultsList());
 	return response;
 }
 
@@ -404,7 +404,7 @@ public InternalResultsResponse<Interface> fetchInterfaceById(FetchByIdRequest re
 	}
 	else
 	{
-		response.getResultsList().add(getDicionarioBAR().fetchInterfaceById(request).getFirstResult());
+		response.getResultsList().add(getDicionarioBAR().fetchInterfaceById(request));
 	}
 
 	return response;
@@ -472,18 +472,18 @@ private InternalResultsResponse<Interface> processInterface(ValidationContextInd
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistenceInterface(Interface interface, PersistenceActionEnum updateType)
+	private InternalResponse doPersistenceInterface(Interface interfaces, PersistenceActionEnum updateType)
 	{
 		switch (updateType)
 		{
 			case INSERT:
-				return getDicionarioBAR().insertInterface(interface);
+				return getDicionarioBAR().insertInterface(interfaces);
 
 			case UPDATE:
-				return getDicionarioBAR().updateInterface(interface);
+				return getDicionarioBAR().updateInterface(interfaces);
 
 			case DELETE:
-				return getDicionarioBAR().deleteInterfaceById(interface);
+				return getDicionarioBAR().deleteInterfaceById(interfaces);
 			default:
 				if (LOG.isDebugEnabled())
 				{
@@ -501,7 +501,7 @@ private InternalResultsResponse<Interface> processInterface(ValidationContextInd
 	 * @param request the request
 	 * @param response the response
 	 */
-	private InternalResultsResponse<Interface> maintainReturnListInterface(Boolean listIndicator, Boolean pageListIndicator,Interface interface)
+	private InternalResultsResponse<Interface> maintainReturnListInterface(Boolean listIndicator, Boolean pageListIndicator,Interface interfaces)
 	{
 		// Fetch again if requested.
 		if (listIndicator)
@@ -516,7 +516,7 @@ private InternalResultsResponse<Interface> processInterface(ValidationContextInd
 			else
 			{
 				// otherwise return all rows not paged
-				return fetchAllInterfaces(interface);
+				return fetchAllInterfaces(interfaces);
 			}
 		}
 		else
@@ -621,7 +621,7 @@ public InternalResultsResponse<Field> fetchFieldById(FetchByIdRequest request)
 	}
 	else
 	{
-		response.getResultsList().add(getDicionarioBAR().fetchFieldById(request).getFirstResult());
+		response.getResultsList().add(getDicionarioBAR().fetchFieldById(request));
 	}
 
 	return response;

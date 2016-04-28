@@ -7,13 +7,13 @@ function titleize(text) {
     for (var i = 0; i < text.length; i++) {
         if (text.charAt(i) ===" ") {
 
-            // Convertendo letra após o ESPAÇO em maiuscula
+            // Convertendo letra apï¿½s o ESPAï¿½O em maiuscula
             var charToUper = text.charAt(i+1).toUpperCase();
 
-            // Colocando texto de antes do ESPAÇO na variável
+            // Colocando texto de antes do ESPAï¿½O na variï¿½vel
             var sliceBegin = text.slice(0, (i+1));
 
-            // colocando o texto de depois do ESPAÇO na variável
+            // colocando o texto de depois do ESPAï¿½O na variï¿½vel
             var sliceEnd = text.slice(i + 2);
 
             // Juntando tudo
@@ -22,15 +22,15 @@ function titleize(text) {
         } else {
 
             // NAO CONSIGO PENSAR EM COMO TRANSFORMAR O RESTANTE DAS LETRAS EM MINUSCULA
-        }   
+        }
     }
     return text;
 }
 
 barImplTest = function (teste,bar){
 
-	var text = "";
-	
+var text = '/** create by system gera-java version 1.0.0 '+dataAtualFormatada()+'*/\n';
+
 text = text + "package com.qat.samples.sysmgmt.bar.mybatis;	\n";
 text = text + "\n";
 text = text + "\n";
@@ -54,7 +54,7 @@ text = text + "import com.qat.framework.model.response.InternalResultsResponse;\
 text = text + "import com.qat.samples.sysmgmt.bar.I"+bar+"BAR;\n";
 text = text + "import com.qat.samples.sysmgmt.model."+bar+";\n";
 text = text + "import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;\n";
-text = text + "import com.qat.samples.sysmgmt.model.request.PagedInquiryRequest;\n";
+text = text + "import com.qat.samples.sysmgmt.model.request."+bar+"InquiryRequest;\n";
 text = text + "\n";
 text = text + "@ContextConfiguration(locations = {\n";
 text = text + '		"classpath:conf/unittest-base-context.xml",\n';
@@ -139,7 +139,7 @@ text = text + "	@Test\n";
 text = text + "	public void testFetch"+nomeM+"sByRequest() throws Exception\n";
 text = text + "	{\n";
 text = text + "		// check for valid and precount\n";
-text = text + "		PagedInquiryRequest request = new PagedInquiryRequest();\n";
+text = text + "		"+nomeM+"InquiryRequest request = new "+nomeM+"InquiryRequest();\n";
 text = text + "		request.setPreQueryCount(true);\n";
 text = text + "		request.setStartPage(0);\n";
 text = text + "		request.setPageSize(3);\n";
@@ -157,7 +157,7 @@ text = text + "		Assert.assertTrue(response.getResultsSetInfo().getPageSize() ==
 text = text + "		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);\n";
 text = text + "\n";
 text = text + "		// check for valid and no precount\n";
-text = text + "		PagedInquiryRequest request2 = new PagedInquiryRequest();\n";
+text = text + "		"+nomeM+"InquiryRequest request2 = new "+nomeM+"InquiryRequest();\n";
 text = text + "		request2.setPreQueryCount(false);\n";
 text = text + "		InternalResultsResponse<"+nomeM+"> response2 = get"+bar+"BAR().fetch"+nomeM+"sByRequest(request2);\n";
 text = text + "		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());\n";
@@ -167,7 +167,7 @@ text = text + "		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAva
 text = text + "\n";
 text = text + "		// check for zero rows\n";
 text = text + "		get"+bar+"BAR().deleteAll"+nomeM+"s();\n";
-text = text + "		PagedInquiryRequest request3 = new PagedInquiryRequest();\n";
+text = text + "		"+nomeM+"InquiryRequest request3 = new "+nomeM+"InquiryRequest();\n";
 text = text + "		request3.setPreQueryCount(true);\n";
 text = text + "		InternalResultsResponse<"+nomeM+"> response3 = get"+bar+"BAR().fetch"+nomeM+"sByRequest(request3);\n";
 text = text + "		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);\n";
