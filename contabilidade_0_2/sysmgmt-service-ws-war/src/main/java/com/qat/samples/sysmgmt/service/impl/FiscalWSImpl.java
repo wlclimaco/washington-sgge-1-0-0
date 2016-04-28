@@ -1,3 +1,5 @@
+/** create by system gera-java version 1.0.0 28/04/2016 14:31 : 5*/
+
 package com.qat.samples.sysmgmt.service.impl;
 
 import javax.jws.WebService;
@@ -8,13 +10,13 @@ import org.springframework.stereotype.Service;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IProcedureBAC;
-import com.qat.samples.sysmgmt.model.Procedure;
-import com.qat.samples.sysmgmt.model.request.ProcedureMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.ProcedureResponse;
+import com.qat.samples.sysmgmt.bac.IFiscalBAC;
+import com.qat.samples.sysmgmt.model.Fiscal;
+import com.qat.samples.sysmgmt.model.request.FiscalMaintenanceRequest;
+import com.qat.samples.sysmgmt.model.response.FiscalResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.FiscalInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -23,51 +25,53 @@ import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
  */
 @Service
 @WebService(targetNamespace = "http://qat.com/sysmgmt")
-public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedureWS
+public class FiscalWSImpl implements com.qat.samples.sysmgmt.service.IFiscalWS
 {
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
-	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.procedurewsimpl.defaultexception";
+	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.fiscalwsimpl.defaultexception";
 
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
-	private static final String DEFAULT_ERROR_MSG = "sysmgmt.base.procedurewsimpl.defaulterror";
+	private static final String DEFAULT_ERROR_MSG = "sysmgmt.base.fiscalwsimpl.defaulterror";
 
 	/** The Constant CLASS_NAME. */
-	private static final String CLASS_NAME = ProcedureWSImpl.class.getName();
+	private static final String CLASS_NAME = FiscalWSImpl.class.getName();
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(ProcedureWSImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(FiscalWSImpl.class);
 
-	/** The procedure BAC. */
-	private IProcedureBAC procedureBAC; // injected by Spring through setter
-
-	/**
-	 * Spring Sets the procedure BAC.
-	 *
-	 * @param procedureBAC the new procedure BAC
-	 */
-	public void setProcedureBAC(IProcedureBAC procedureBAC)
-	{
-		this.procedureBAC = procedureBAC;
-	}
+	/** The fiscal BAC. */
+	private IFiscalBAC fiscalBAC; // injected by Spring through setter
 
 	/**
-	 * Gets the procedure bac.
+	 * Spring Sets the fiscal BAC.
 	 *
-	 * @return the procedure bac
+	 * @param fiscalBAC the new fiscal BAC
 	 */
-	public IProcedureBAC getProcedureBAC()
+	public void setFiscalBAC(IFiscalBAC fiscalBAC)
 	{
-		return procedureBAC;
+		this.fiscalBAC = fiscalBAC;
 	}
 
-	@Override
-	public ProcedureResponse insertProcedure(ProcedureMaintenanceRequest request)
+	/**
+	 * Gets the fiscal bac.
+	 *
+	 * @return the fiscal bac
+	 */
+	public IFiscalBAC getFiscalBAC()
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		return fiscalBAC;
+	}
+
+
+//===================================### REGIME ####======================================
+	@Override
+	public RegimeResponse insertRegime(RegimeMaintenanceRequest request)
+	{
+		RegimeResponse response = new RegimeResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().insertProcedure(request);
+			InternalResultsResponse<Regime> internalResponse = getFiscalBAC().insertRegime(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -80,13 +84,13 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse updateProcedure(ProcedureMaintenanceRequest request)
+	public RegimeResponse updateRegime(RegimeMaintenanceRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		RegimeResponse response = new RegimeResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().updateProcedure(request);
+			InternalResultsResponse<Regime> internalResponse = getFiscalBAC().updateRegime(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -99,13 +103,13 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse deleteProcedure(ProcedureMaintenanceRequest request)
+	public RegimeResponse deleteRegime(RegimeMaintenanceRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		RegimeResponse response = new RegimeResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().deleteProcedure(request);
+			InternalResultsResponse<Regime> internalResponse = getFiscalBAC().deleteRegime(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -118,14 +122,14 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse refreshProcedures(RefreshRequest request)
+	public RegimeResponse refreshRegimes(RefreshRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		ProcedureResponse response = new ProcedureResponse();
+		RegimeResponse response = new RegimeResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().refreshProcedures(request);
+			InternalResultsResponse<Regime> internalResponse = getFiscalBAC().refreshRegimes(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -138,13 +142,13 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse fetchAllProcedures(FetchAllRequest request)
+	public RegimeResponse fetchAllRegimes(FetchAllRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		RegimeResponse response = new RegimeResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().fetchAllProcedures();
+			InternalResultsResponse<Regime> internalResponse = getFiscalBAC().fetchAllRegimes(new Regime());
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -158,19 +162,19 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.dapi.impl.IProcedureWS#fetchProcedureById(com.qat.samples.sysmgmt.model.request.
+	 * @see com.qat.samples.sysmgmt.dapi.impl.IRegimeWS#fetchRegimeById(com.qat.samples.sysmgmt.model.request.
 	 * FetchByIdRequest)
 	 */
 	@Override
-	public ProcedureResponse fetchProcedureById(FetchByIdRequest request)
+	public RegimeResponse fetchRegimeById(FetchByIdRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		RegimeResponse response = new RegimeResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = new InternalResultsResponse<Procedure>();
+			InternalResultsResponse<Regime> internalResponse = new InternalResultsResponse<Regime>();
 
-			internalResponse = getProcedureBAC().fetchProcedureById(request);
+			internalResponse = getFiscalBAC().fetchRegimeById(request);
 			// Handle the processing for all previous methods regardless of them failing or succeeding.
 			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
 		}
@@ -184,13 +188,442 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse fetchProceduresByRequest(PagedInquiryRequest request)
+	public RegimeResponse fetchRegimesByRequest(RegimeInquiryRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		RegimeResponse response = new RegimeResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().fetchProceduresByRequest(request);
+			InternalResultsResponse<Regime> internalResponse = getFiscalBAC().fetchRegimesByRequest(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+//===================================### CFOP ####======================================
+	@Override
+	public CfopResponse insertCfop(CfopMaintenanceRequest request)
+	{
+		CfopResponse response = new CfopResponse();
+
+		try
+		{
+			InternalResultsResponse<Cfop> internalResponse = getFiscalBAC().insertCfop(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public CfopResponse updateCfop(CfopMaintenanceRequest request)
+	{
+		CfopResponse response = new CfopResponse();
+
+		try
+		{
+			InternalResultsResponse<Cfop> internalResponse = getFiscalBAC().updateCfop(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public CfopResponse deleteCfop(CfopMaintenanceRequest request)
+	{
+		CfopResponse response = new CfopResponse();
+
+		try
+		{
+			InternalResultsResponse<Cfop> internalResponse = getFiscalBAC().deleteCfop(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public CfopResponse refreshCfops(RefreshRequest request)
+	{
+		// This method is demo code only. Do not view this as a QAT Global Standard.
+		CfopResponse response = new CfopResponse();
+
+		try
+		{
+			InternalResultsResponse<Cfop> internalResponse = getFiscalBAC().refreshCfops(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public CfopResponse fetchAllCfops(FetchAllRequest request)
+	{
+		CfopResponse response = new CfopResponse();
+
+		try
+		{
+			InternalResultsResponse<Cfop> internalResponse = getFiscalBAC().fetchAllCfops(new Cfop());
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.dapi.impl.ICfopWS#fetchCfopById(com.qat.samples.sysmgmt.model.request.
+	 * FetchByIdRequest)
+	 */
+	@Override
+	public CfopResponse fetchCfopById(FetchByIdRequest request)
+	{
+		CfopResponse response = new CfopResponse();
+
+		try
+		{
+			InternalResultsResponse<Cfop> internalResponse = new InternalResultsResponse<Cfop>();
+
+			internalResponse = getFiscalBAC().fetchCfopById(request);
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public CfopResponse fetchCfopsByRequest(CfopInquiryRequest request)
+	{
+		CfopResponse response = new CfopResponse();
+
+		try
+		{
+			InternalResultsResponse<Cfop> internalResponse = getFiscalBAC().fetchCfopsByRequest(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+//===================================### CNAE ####======================================
+	@Override
+	public CnaeResponse insertCnae(CnaeMaintenanceRequest request)
+	{
+		CnaeResponse response = new CnaeResponse();
+
+		try
+		{
+			InternalResultsResponse<Cnae> internalResponse = getFiscalBAC().insertCnae(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public CnaeResponse updateCnae(CnaeMaintenanceRequest request)
+	{
+		CnaeResponse response = new CnaeResponse();
+
+		try
+		{
+			InternalResultsResponse<Cnae> internalResponse = getFiscalBAC().updateCnae(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public CnaeResponse deleteCnae(CnaeMaintenanceRequest request)
+	{
+		CnaeResponse response = new CnaeResponse();
+
+		try
+		{
+			InternalResultsResponse<Cnae> internalResponse = getFiscalBAC().deleteCnae(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public CnaeResponse refreshCnaes(RefreshRequest request)
+	{
+		// This method is demo code only. Do not view this as a QAT Global Standard.
+		CnaeResponse response = new CnaeResponse();
+
+		try
+		{
+			InternalResultsResponse<Cnae> internalResponse = getFiscalBAC().refreshCnaes(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public CnaeResponse fetchAllCnaes(FetchAllRequest request)
+	{
+		CnaeResponse response = new CnaeResponse();
+
+		try
+		{
+			InternalResultsResponse<Cnae> internalResponse = getFiscalBAC().fetchAllCnaes(new Cnae());
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.dapi.impl.ICnaeWS#fetchCnaeById(com.qat.samples.sysmgmt.model.request.
+	 * FetchByIdRequest)
+	 */
+	@Override
+	public CnaeResponse fetchCnaeById(FetchByIdRequest request)
+	{
+		CnaeResponse response = new CnaeResponse();
+
+		try
+		{
+			InternalResultsResponse<Cnae> internalResponse = new InternalResultsResponse<Cnae>();
+
+			internalResponse = getFiscalBAC().fetchCnaeById(request);
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public CnaeResponse fetchCnaesByRequest(CnaeInquiryRequest request)
+	{
+		CnaeResponse response = new CnaeResponse();
+
+		try
+		{
+			InternalResultsResponse<Cnae> internalResponse = getFiscalBAC().fetchCnaesByRequest(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+//===================================### CNAEEMPRESA ####======================================
+	@Override
+	public CnaeEmpresaResponse insertCnaeEmpresa(CnaeEmpresaMaintenanceRequest request)
+	{
+		CnaeEmpresaResponse response = new CnaeEmpresaResponse();
+
+		try
+		{
+			InternalResultsResponse<CnaeEmpresa> internalResponse = getFiscalBAC().insertCnaeEmpresa(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public CnaeEmpresaResponse updateCnaeEmpresa(CnaeEmpresaMaintenanceRequest request)
+	{
+		CnaeEmpresaResponse response = new CnaeEmpresaResponse();
+
+		try
+		{
+			InternalResultsResponse<CnaeEmpresa> internalResponse = getFiscalBAC().updateCnaeEmpresa(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public CnaeEmpresaResponse deleteCnaeEmpresa(CnaeEmpresaMaintenanceRequest request)
+	{
+		CnaeEmpresaResponse response = new CnaeEmpresaResponse();
+
+		try
+		{
+			InternalResultsResponse<CnaeEmpresa> internalResponse = getFiscalBAC().deleteCnaeEmpresa(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public CnaeEmpresaResponse refreshCnaeEmpresas(RefreshRequest request)
+	{
+		// This method is demo code only. Do not view this as a QAT Global Standard.
+		CnaeEmpresaResponse response = new CnaeEmpresaResponse();
+
+		try
+		{
+			InternalResultsResponse<CnaeEmpresa> internalResponse = getFiscalBAC().refreshCnaeEmpresas(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public CnaeEmpresaResponse fetchAllCnaeEmpresas(FetchAllRequest request)
+	{
+		CnaeEmpresaResponse response = new CnaeEmpresaResponse();
+
+		try
+		{
+			InternalResultsResponse<CnaeEmpresa> internalResponse = getFiscalBAC().fetchAllCnaeEmpresas(new CnaeEmpresa());
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.dapi.impl.ICnaeEmpresaWS#fetchCnaeEmpresaById(com.qat.samples.sysmgmt.model.request.
+	 * FetchByIdRequest)
+	 */
+	@Override
+	public CnaeEmpresaResponse fetchCnaeEmpresaById(FetchByIdRequest request)
+	{
+		CnaeEmpresaResponse response = new CnaeEmpresaResponse();
+
+		try
+		{
+			InternalResultsResponse<CnaeEmpresa> internalResponse = new InternalResultsResponse<CnaeEmpresa>();
+
+			internalResponse = getFiscalBAC().fetchCnaeEmpresaById(request);
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public CnaeEmpresaResponse fetchCnaeEmpresasByRequest(CnaeEmpresaInquiryRequest request)
+	{
+		CnaeEmpresaResponse response = new CnaeEmpresaResponse();
+
+		try
+		{
+			InternalResultsResponse<CnaeEmpresa> internalResponse = getFiscalBAC().fetchCnaeEmpresasByRequest(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)

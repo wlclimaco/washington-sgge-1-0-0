@@ -1,3 +1,5 @@
+/** create by system gera-java version 1.0.0 28/04/2016 14:29 : 20*/
+
 package com.qat.samples.sysmgmt.service.impl;
 
 import javax.jws.WebService;
@@ -8,13 +10,13 @@ import org.springframework.stereotype.Service;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IProcedureBAC;
-import com.qat.samples.sysmgmt.model.Procedure;
-import com.qat.samples.sysmgmt.model.request.ProcedureMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.ProcedureResponse;
+import com.qat.samples.sysmgmt.bac.IComprasBAC;
+import com.qat.samples.sysmgmt.model.Compras;
+import com.qat.samples.sysmgmt.model.request.ComprasMaintenanceRequest;
+import com.qat.samples.sysmgmt.model.response.ComprasResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.ComprasInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -23,51 +25,53 @@ import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
  */
 @Service
 @WebService(targetNamespace = "http://qat.com/sysmgmt")
-public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedureWS
+public class ComprasWSImpl implements com.qat.samples.sysmgmt.service.IComprasWS
 {
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
-	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.procedurewsimpl.defaultexception";
+	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.compraswsimpl.defaultexception";
 
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
-	private static final String DEFAULT_ERROR_MSG = "sysmgmt.base.procedurewsimpl.defaulterror";
+	private static final String DEFAULT_ERROR_MSG = "sysmgmt.base.compraswsimpl.defaulterror";
 
 	/** The Constant CLASS_NAME. */
-	private static final String CLASS_NAME = ProcedureWSImpl.class.getName();
+	private static final String CLASS_NAME = ComprasWSImpl.class.getName();
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(ProcedureWSImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ComprasWSImpl.class);
 
-	/** The procedure BAC. */
-	private IProcedureBAC procedureBAC; // injected by Spring through setter
-
-	/**
-	 * Spring Sets the procedure BAC.
-	 *
-	 * @param procedureBAC the new procedure BAC
-	 */
-	public void setProcedureBAC(IProcedureBAC procedureBAC)
-	{
-		this.procedureBAC = procedureBAC;
-	}
+	/** The compras BAC. */
+	private IComprasBAC comprasBAC; // injected by Spring through setter
 
 	/**
-	 * Gets the procedure bac.
+	 * Spring Sets the compras BAC.
 	 *
-	 * @return the procedure bac
+	 * @param comprasBAC the new compras BAC
 	 */
-	public IProcedureBAC getProcedureBAC()
+	public void setComprasBAC(IComprasBAC comprasBAC)
 	{
-		return procedureBAC;
+		this.comprasBAC = comprasBAC;
 	}
 
-	@Override
-	public ProcedureResponse insertProcedure(ProcedureMaintenanceRequest request)
+	/**
+	 * Gets the compras bac.
+	 *
+	 * @return the compras bac
+	 */
+	public IComprasBAC getComprasBAC()
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		return comprasBAC;
+	}
+
+
+//===================================### NOTAFISCALENTRADA ####======================================
+	@Override
+	public NotaFiscalEntradaResponse insertNotaFiscalEntrada(NotaFiscalEntradaMaintenanceRequest request)
+	{
+		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().insertProcedure(request);
+			InternalResultsResponse<NotaFiscalEntrada> internalResponse = getComprasBAC().insertNotaFiscalEntrada(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -80,13 +84,13 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse updateProcedure(ProcedureMaintenanceRequest request)
+	public NotaFiscalEntradaResponse updateNotaFiscalEntrada(NotaFiscalEntradaMaintenanceRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().updateProcedure(request);
+			InternalResultsResponse<NotaFiscalEntrada> internalResponse = getComprasBAC().updateNotaFiscalEntrada(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -99,13 +103,13 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse deleteProcedure(ProcedureMaintenanceRequest request)
+	public NotaFiscalEntradaResponse deleteNotaFiscalEntrada(NotaFiscalEntradaMaintenanceRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().deleteProcedure(request);
+			InternalResultsResponse<NotaFiscalEntrada> internalResponse = getComprasBAC().deleteNotaFiscalEntrada(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -118,14 +122,14 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse refreshProcedures(RefreshRequest request)
+	public NotaFiscalEntradaResponse refreshNotaFiscalEntradas(RefreshRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		ProcedureResponse response = new ProcedureResponse();
+		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().refreshProcedures(request);
+			InternalResultsResponse<NotaFiscalEntrada> internalResponse = getComprasBAC().refreshNotaFiscalEntradas(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -138,13 +142,13 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse fetchAllProcedures(FetchAllRequest request)
+	public NotaFiscalEntradaResponse fetchAllNotaFiscalEntradas(FetchAllRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().fetchAllProcedures();
+			InternalResultsResponse<NotaFiscalEntrada> internalResponse = getComprasBAC().fetchAllNotaFiscalEntradas(new NotaFiscalEntrada());
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -158,19 +162,19 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.dapi.impl.IProcedureWS#fetchProcedureById(com.qat.samples.sysmgmt.model.request.
+	 * @see com.qat.samples.sysmgmt.dapi.impl.INotaFiscalEntradaWS#fetchNotaFiscalEntradaById(com.qat.samples.sysmgmt.model.request.
 	 * FetchByIdRequest)
 	 */
 	@Override
-	public ProcedureResponse fetchProcedureById(FetchByIdRequest request)
+	public NotaFiscalEntradaResponse fetchNotaFiscalEntradaById(FetchByIdRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = new InternalResultsResponse<Procedure>();
+			InternalResultsResponse<NotaFiscalEntrada> internalResponse = new InternalResultsResponse<NotaFiscalEntrada>();
 
-			internalResponse = getProcedureBAC().fetchProcedureById(request);
+			internalResponse = getComprasBAC().fetchNotaFiscalEntradaById(request);
 			// Handle the processing for all previous methods regardless of them failing or succeeding.
 			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
 		}
@@ -184,13 +188,299 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse fetchProceduresByRequest(PagedInquiryRequest request)
+	public NotaFiscalEntradaResponse fetchNotaFiscalEntradasByRequest(NotaFiscalEntradaInquiryRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().fetchProceduresByRequest(request);
+			InternalResultsResponse<NotaFiscalEntrada> internalResponse = getComprasBAC().fetchNotaFiscalEntradasByRequest(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+//===================================### PEDIDOCOMPRAS ####======================================
+	@Override
+	public PedidoComprasResponse insertPedidoCompras(PedidoComprasMaintenanceRequest request)
+	{
+		PedidoComprasResponse response = new PedidoComprasResponse();
+
+		try
+		{
+			InternalResultsResponse<PedidoCompras> internalResponse = getComprasBAC().insertPedidoCompras(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public PedidoComprasResponse updatePedidoCompras(PedidoComprasMaintenanceRequest request)
+	{
+		PedidoComprasResponse response = new PedidoComprasResponse();
+
+		try
+		{
+			InternalResultsResponse<PedidoCompras> internalResponse = getComprasBAC().updatePedidoCompras(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public PedidoComprasResponse deletePedidoCompras(PedidoComprasMaintenanceRequest request)
+	{
+		PedidoComprasResponse response = new PedidoComprasResponse();
+
+		try
+		{
+			InternalResultsResponse<PedidoCompras> internalResponse = getComprasBAC().deletePedidoCompras(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public PedidoComprasResponse refreshPedidoComprass(RefreshRequest request)
+	{
+		// This method is demo code only. Do not view this as a QAT Global Standard.
+		PedidoComprasResponse response = new PedidoComprasResponse();
+
+		try
+		{
+			InternalResultsResponse<PedidoCompras> internalResponse = getComprasBAC().refreshPedidoComprass(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public PedidoComprasResponse fetchAllPedidoComprass(FetchAllRequest request)
+	{
+		PedidoComprasResponse response = new PedidoComprasResponse();
+
+		try
+		{
+			InternalResultsResponse<PedidoCompras> internalResponse = getComprasBAC().fetchAllPedidoComprass(new PedidoCompras());
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.dapi.impl.IPedidoComprasWS#fetchPedidoComprasById(com.qat.samples.sysmgmt.model.request.
+	 * FetchByIdRequest)
+	 */
+	@Override
+	public PedidoComprasResponse fetchPedidoComprasById(FetchByIdRequest request)
+	{
+		PedidoComprasResponse response = new PedidoComprasResponse();
+
+		try
+		{
+			InternalResultsResponse<PedidoCompras> internalResponse = new InternalResultsResponse<PedidoCompras>();
+
+			internalResponse = getComprasBAC().fetchPedidoComprasById(request);
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public PedidoComprasResponse fetchPedidoComprassByRequest(PedidoComprasInquiryRequest request)
+	{
+		PedidoComprasResponse response = new PedidoComprasResponse();
+
+		try
+		{
+			InternalResultsResponse<PedidoCompras> internalResponse = getComprasBAC().fetchPedidoComprassByRequest(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+//===================================### COTACAO ####======================================
+	@Override
+	public CotacaoResponse insertCotacao(CotacaoMaintenanceRequest request)
+	{
+		CotacaoResponse response = new CotacaoResponse();
+
+		try
+		{
+			InternalResultsResponse<Cotacao> internalResponse = getComprasBAC().insertCotacao(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public CotacaoResponse updateCotacao(CotacaoMaintenanceRequest request)
+	{
+		CotacaoResponse response = new CotacaoResponse();
+
+		try
+		{
+			InternalResultsResponse<Cotacao> internalResponse = getComprasBAC().updateCotacao(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public CotacaoResponse deleteCotacao(CotacaoMaintenanceRequest request)
+	{
+		CotacaoResponse response = new CotacaoResponse();
+
+		try
+		{
+			InternalResultsResponse<Cotacao> internalResponse = getComprasBAC().deleteCotacao(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public CotacaoResponse refreshCotacaos(RefreshRequest request)
+	{
+		// This method is demo code only. Do not view this as a QAT Global Standard.
+		CotacaoResponse response = new CotacaoResponse();
+
+		try
+		{
+			InternalResultsResponse<Cotacao> internalResponse = getComprasBAC().refreshCotacaos(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public CotacaoResponse fetchAllCotacaos(FetchAllRequest request)
+	{
+		CotacaoResponse response = new CotacaoResponse();
+
+		try
+		{
+			InternalResultsResponse<Cotacao> internalResponse = getComprasBAC().fetchAllCotacaos(new Cotacao());
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.dapi.impl.ICotacaoWS#fetchCotacaoById(com.qat.samples.sysmgmt.model.request.
+	 * FetchByIdRequest)
+	 */
+	@Override
+	public CotacaoResponse fetchCotacaoById(FetchByIdRequest request)
+	{
+		CotacaoResponse response = new CotacaoResponse();
+
+		try
+		{
+			InternalResultsResponse<Cotacao> internalResponse = new InternalResultsResponse<Cotacao>();
+
+			internalResponse = getComprasBAC().fetchCotacaoById(request);
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public CotacaoResponse fetchCotacaosByRequest(CotacaoInquiryRequest request)
+	{
+		CotacaoResponse response = new CotacaoResponse();
+
+		try
+		{
+			InternalResultsResponse<Cotacao> internalResponse = getComprasBAC().fetchCotacaosByRequest(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)

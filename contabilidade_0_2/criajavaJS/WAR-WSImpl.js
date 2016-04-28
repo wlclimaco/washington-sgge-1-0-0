@@ -1,6 +1,8 @@
 
 war_WSImpl = function (teste,bar,local){
-
+	
+	var text =
+text = text + '\n';
 var text = '/** create by system gera-java version 1.0.0 '+dataAtualFormatada()+'*/\n';
 text = text + '\n';
 text = text + 'package com.qat.samples.sysmgmt.service.impl;\n';

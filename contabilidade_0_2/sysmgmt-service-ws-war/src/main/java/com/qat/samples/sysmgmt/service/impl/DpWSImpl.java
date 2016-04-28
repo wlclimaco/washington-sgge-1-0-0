@@ -1,3 +1,5 @@
+/** create by system gera-java version 1.0.0 28/04/2016 14:31 : 5*/
+
 package com.qat.samples.sysmgmt.service.impl;
 
 import javax.jws.WebService;
@@ -8,13 +10,13 @@ import org.springframework.stereotype.Service;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IProcedureBAC;
-import com.qat.samples.sysmgmt.model.Procedure;
-import com.qat.samples.sysmgmt.model.request.ProcedureMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.ProcedureResponse;
+import com.qat.samples.sysmgmt.bac.IDpBAC;
+import com.qat.samples.sysmgmt.model.Dp;
+import com.qat.samples.sysmgmt.model.request.DpMaintenanceRequest;
+import com.qat.samples.sysmgmt.model.response.DpResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.DpInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -23,51 +25,53 @@ import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
  */
 @Service
 @WebService(targetNamespace = "http://qat.com/sysmgmt")
-public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedureWS
+public class DpWSImpl implements com.qat.samples.sysmgmt.service.IDpWS
 {
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
-	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.procedurewsimpl.defaultexception";
+	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.dpwsimpl.defaultexception";
 
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
-	private static final String DEFAULT_ERROR_MSG = "sysmgmt.base.procedurewsimpl.defaulterror";
+	private static final String DEFAULT_ERROR_MSG = "sysmgmt.base.dpwsimpl.defaulterror";
 
 	/** The Constant CLASS_NAME. */
-	private static final String CLASS_NAME = ProcedureWSImpl.class.getName();
+	private static final String CLASS_NAME = DpWSImpl.class.getName();
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(ProcedureWSImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DpWSImpl.class);
 
-	/** The procedure BAC. */
-	private IProcedureBAC procedureBAC; // injected by Spring through setter
-
-	/**
-	 * Spring Sets the procedure BAC.
-	 *
-	 * @param procedureBAC the new procedure BAC
-	 */
-	public void setProcedureBAC(IProcedureBAC procedureBAC)
-	{
-		this.procedureBAC = procedureBAC;
-	}
+	/** The dp BAC. */
+	private IDpBAC dpBAC; // injected by Spring through setter
 
 	/**
-	 * Gets the procedure bac.
+	 * Spring Sets the dp BAC.
 	 *
-	 * @return the procedure bac
+	 * @param dpBAC the new dp BAC
 	 */
-	public IProcedureBAC getProcedureBAC()
+	public void setDpBAC(IDpBAC dpBAC)
 	{
-		return procedureBAC;
+		this.dpBAC = dpBAC;
 	}
 
-	@Override
-	public ProcedureResponse insertProcedure(ProcedureMaintenanceRequest request)
+	/**
+	 * Gets the dp bac.
+	 *
+	 * @return the dp bac
+	 */
+	public IDpBAC getDpBAC()
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		return dpBAC;
+	}
+
+
+//===================================### FUNCIONARIO ####======================================
+	@Override
+	public FuncionarioResponse insertFuncionario(FuncionarioMaintenanceRequest request)
+	{
+		FuncionarioResponse response = new FuncionarioResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().insertProcedure(request);
+			InternalResultsResponse<Funcionario> internalResponse = getDpBAC().insertFuncionario(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -80,13 +84,13 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse updateProcedure(ProcedureMaintenanceRequest request)
+	public FuncionarioResponse updateFuncionario(FuncionarioMaintenanceRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		FuncionarioResponse response = new FuncionarioResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().updateProcedure(request);
+			InternalResultsResponse<Funcionario> internalResponse = getDpBAC().updateFuncionario(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -99,13 +103,13 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse deleteProcedure(ProcedureMaintenanceRequest request)
+	public FuncionarioResponse deleteFuncionario(FuncionarioMaintenanceRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		FuncionarioResponse response = new FuncionarioResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().deleteProcedure(request);
+			InternalResultsResponse<Funcionario> internalResponse = getDpBAC().deleteFuncionario(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -118,14 +122,14 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse refreshProcedures(RefreshRequest request)
+	public FuncionarioResponse refreshFuncionarios(RefreshRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		ProcedureResponse response = new ProcedureResponse();
+		FuncionarioResponse response = new FuncionarioResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().refreshProcedures(request);
+			InternalResultsResponse<Funcionario> internalResponse = getDpBAC().refreshFuncionarios(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -138,13 +142,13 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse fetchAllProcedures(FetchAllRequest request)
+	public FuncionarioResponse fetchAllFuncionarios(FetchAllRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		FuncionarioResponse response = new FuncionarioResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().fetchAllProcedures();
+			InternalResultsResponse<Funcionario> internalResponse = getDpBAC().fetchAllFuncionarios(new Funcionario());
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -158,19 +162,19 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.dapi.impl.IProcedureWS#fetchProcedureById(com.qat.samples.sysmgmt.model.request.
+	 * @see com.qat.samples.sysmgmt.dapi.impl.IFuncionarioWS#fetchFuncionarioById(com.qat.samples.sysmgmt.model.request.
 	 * FetchByIdRequest)
 	 */
 	@Override
-	public ProcedureResponse fetchProcedureById(FetchByIdRequest request)
+	public FuncionarioResponse fetchFuncionarioById(FetchByIdRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		FuncionarioResponse response = new FuncionarioResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = new InternalResultsResponse<Procedure>();
+			InternalResultsResponse<Funcionario> internalResponse = new InternalResultsResponse<Funcionario>();
 
-			internalResponse = getProcedureBAC().fetchProcedureById(request);
+			internalResponse = getDpBAC().fetchFuncionarioById(request);
 			// Handle the processing for all previous methods regardless of them failing or succeeding.
 			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
 		}
@@ -184,13 +188,442 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse fetchProceduresByRequest(PagedInquiryRequest request)
+	public FuncionarioResponse fetchFuncionariosByRequest(FuncionarioInquiryRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		FuncionarioResponse response = new FuncionarioResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().fetchProceduresByRequest(request);
+			InternalResultsResponse<Funcionario> internalResponse = getDpBAC().fetchFuncionariosByRequest(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+//===================================### EVENTOS ####======================================
+	@Override
+	public EventosResponse insertEventos(EventosMaintenanceRequest request)
+	{
+		EventosResponse response = new EventosResponse();
+
+		try
+		{
+			InternalResultsResponse<Eventos> internalResponse = getDpBAC().insertEventos(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public EventosResponse updateEventos(EventosMaintenanceRequest request)
+	{
+		EventosResponse response = new EventosResponse();
+
+		try
+		{
+			InternalResultsResponse<Eventos> internalResponse = getDpBAC().updateEventos(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public EventosResponse deleteEventos(EventosMaintenanceRequest request)
+	{
+		EventosResponse response = new EventosResponse();
+
+		try
+		{
+			InternalResultsResponse<Eventos> internalResponse = getDpBAC().deleteEventos(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public EventosResponse refreshEventoss(RefreshRequest request)
+	{
+		// This method is demo code only. Do not view this as a QAT Global Standard.
+		EventosResponse response = new EventosResponse();
+
+		try
+		{
+			InternalResultsResponse<Eventos> internalResponse = getDpBAC().refreshEventoss(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public EventosResponse fetchAllEventoss(FetchAllRequest request)
+	{
+		EventosResponse response = new EventosResponse();
+
+		try
+		{
+			InternalResultsResponse<Eventos> internalResponse = getDpBAC().fetchAllEventoss(new Eventos());
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.dapi.impl.IEventosWS#fetchEventosById(com.qat.samples.sysmgmt.model.request.
+	 * FetchByIdRequest)
+	 */
+	@Override
+	public EventosResponse fetchEventosById(FetchByIdRequest request)
+	{
+		EventosResponse response = new EventosResponse();
+
+		try
+		{
+			InternalResultsResponse<Eventos> internalResponse = new InternalResultsResponse<Eventos>();
+
+			internalResponse = getDpBAC().fetchEventosById(request);
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public EventosResponse fetchEventossByRequest(EventosInquiryRequest request)
+	{
+		EventosResponse response = new EventosResponse();
+
+		try
+		{
+			InternalResultsResponse<Eventos> internalResponse = getDpBAC().fetchEventossByRequest(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+//===================================### BENEFICIOS ####======================================
+	@Override
+	public BeneficiosResponse insertBeneficios(BeneficiosMaintenanceRequest request)
+	{
+		BeneficiosResponse response = new BeneficiosResponse();
+
+		try
+		{
+			InternalResultsResponse<Beneficios> internalResponse = getDpBAC().insertBeneficios(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public BeneficiosResponse updateBeneficios(BeneficiosMaintenanceRequest request)
+	{
+		BeneficiosResponse response = new BeneficiosResponse();
+
+		try
+		{
+			InternalResultsResponse<Beneficios> internalResponse = getDpBAC().updateBeneficios(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public BeneficiosResponse deleteBeneficios(BeneficiosMaintenanceRequest request)
+	{
+		BeneficiosResponse response = new BeneficiosResponse();
+
+		try
+		{
+			InternalResultsResponse<Beneficios> internalResponse = getDpBAC().deleteBeneficios(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public BeneficiosResponse refreshBeneficioss(RefreshRequest request)
+	{
+		// This method is demo code only. Do not view this as a QAT Global Standard.
+		BeneficiosResponse response = new BeneficiosResponse();
+
+		try
+		{
+			InternalResultsResponse<Beneficios> internalResponse = getDpBAC().refreshBeneficioss(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public BeneficiosResponse fetchAllBeneficioss(FetchAllRequest request)
+	{
+		BeneficiosResponse response = new BeneficiosResponse();
+
+		try
+		{
+			InternalResultsResponse<Beneficios> internalResponse = getDpBAC().fetchAllBeneficioss(new Beneficios());
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.dapi.impl.IBeneficiosWS#fetchBeneficiosById(com.qat.samples.sysmgmt.model.request.
+	 * FetchByIdRequest)
+	 */
+	@Override
+	public BeneficiosResponse fetchBeneficiosById(FetchByIdRequest request)
+	{
+		BeneficiosResponse response = new BeneficiosResponse();
+
+		try
+		{
+			InternalResultsResponse<Beneficios> internalResponse = new InternalResultsResponse<Beneficios>();
+
+			internalResponse = getDpBAC().fetchBeneficiosById(request);
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public BeneficiosResponse fetchBeneficiossByRequest(BeneficiosInquiryRequest request)
+	{
+		BeneficiosResponse response = new BeneficiosResponse();
+
+		try
+		{
+			InternalResultsResponse<Beneficios> internalResponse = getDpBAC().fetchBeneficiossByRequest(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+//===================================### HORAFUNC ####======================================
+	@Override
+	public HoraFuncResponse insertHoraFunc(HoraFuncMaintenanceRequest request)
+	{
+		HoraFuncResponse response = new HoraFuncResponse();
+
+		try
+		{
+			InternalResultsResponse<HoraFunc> internalResponse = getDpBAC().insertHoraFunc(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public HoraFuncResponse updateHoraFunc(HoraFuncMaintenanceRequest request)
+	{
+		HoraFuncResponse response = new HoraFuncResponse();
+
+		try
+		{
+			InternalResultsResponse<HoraFunc> internalResponse = getDpBAC().updateHoraFunc(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public HoraFuncResponse deleteHoraFunc(HoraFuncMaintenanceRequest request)
+	{
+		HoraFuncResponse response = new HoraFuncResponse();
+
+		try
+		{
+			InternalResultsResponse<HoraFunc> internalResponse = getDpBAC().deleteHoraFunc(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public HoraFuncResponse refreshHoraFuncs(RefreshRequest request)
+	{
+		// This method is demo code only. Do not view this as a QAT Global Standard.
+		HoraFuncResponse response = new HoraFuncResponse();
+
+		try
+		{
+			InternalResultsResponse<HoraFunc> internalResponse = getDpBAC().refreshHoraFuncs(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public HoraFuncResponse fetchAllHoraFuncs(FetchAllRequest request)
+	{
+		HoraFuncResponse response = new HoraFuncResponse();
+
+		try
+		{
+			InternalResultsResponse<HoraFunc> internalResponse = getDpBAC().fetchAllHoraFuncs(new HoraFunc());
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.dapi.impl.IHoraFuncWS#fetchHoraFuncById(com.qat.samples.sysmgmt.model.request.
+	 * FetchByIdRequest)
+	 */
+	@Override
+	public HoraFuncResponse fetchHoraFuncById(FetchByIdRequest request)
+	{
+		HoraFuncResponse response = new HoraFuncResponse();
+
+		try
+		{
+			InternalResultsResponse<HoraFunc> internalResponse = new InternalResultsResponse<HoraFunc>();
+
+			internalResponse = getDpBAC().fetchHoraFuncById(request);
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public HoraFuncResponse fetchHoraFuncsByRequest(HoraFuncInquiryRequest request)
+	{
+		HoraFuncResponse response = new HoraFuncResponse();
+
+		try
+		{
+			InternalResultsResponse<HoraFunc> internalResponse = getDpBAC().fetchHoraFuncsByRequest(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)

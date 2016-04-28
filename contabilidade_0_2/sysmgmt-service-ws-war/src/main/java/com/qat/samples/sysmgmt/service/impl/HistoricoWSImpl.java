@@ -1,3 +1,5 @@
+/** create by system gera-java version 1.0.0 28/04/2016 14:31 : 5*/
+
 package com.qat.samples.sysmgmt.service.impl;
 
 import javax.jws.WebService;
@@ -8,13 +10,13 @@ import org.springframework.stereotype.Service;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IProcedureBAC;
-import com.qat.samples.sysmgmt.model.Procedure;
-import com.qat.samples.sysmgmt.model.request.ProcedureMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.ProcedureResponse;
+import com.qat.samples.sysmgmt.bac.IHistoricoBAC;
+import com.qat.samples.sysmgmt.model.Historico;
+import com.qat.samples.sysmgmt.model.request.HistoricoMaintenanceRequest;
+import com.qat.samples.sysmgmt.model.response.HistoricoResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.HistoricoInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -23,51 +25,53 @@ import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
  */
 @Service
 @WebService(targetNamespace = "http://qat.com/sysmgmt")
-public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedureWS
+public class HistoricoWSImpl implements com.qat.samples.sysmgmt.service.IHistoricoWS
 {
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
-	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.procedurewsimpl.defaultexception";
+	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.historicowsimpl.defaultexception";
 
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
-	private static final String DEFAULT_ERROR_MSG = "sysmgmt.base.procedurewsimpl.defaulterror";
+	private static final String DEFAULT_ERROR_MSG = "sysmgmt.base.historicowsimpl.defaulterror";
 
 	/** The Constant CLASS_NAME. */
-	private static final String CLASS_NAME = ProcedureWSImpl.class.getName();
+	private static final String CLASS_NAME = HistoricoWSImpl.class.getName();
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(ProcedureWSImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(HistoricoWSImpl.class);
 
-	/** The procedure BAC. */
-	private IProcedureBAC procedureBAC; // injected by Spring through setter
-
-	/**
-	 * Spring Sets the procedure BAC.
-	 *
-	 * @param procedureBAC the new procedure BAC
-	 */
-	public void setProcedureBAC(IProcedureBAC procedureBAC)
-	{
-		this.procedureBAC = procedureBAC;
-	}
+	/** The historico BAC. */
+	private IHistoricoBAC historicoBAC; // injected by Spring through setter
 
 	/**
-	 * Gets the procedure bac.
+	 * Spring Sets the historico BAC.
 	 *
-	 * @return the procedure bac
+	 * @param historicoBAC the new historico BAC
 	 */
-	public IProcedureBAC getProcedureBAC()
+	public void setHistoricoBAC(IHistoricoBAC historicoBAC)
 	{
-		return procedureBAC;
+		this.historicoBAC = historicoBAC;
 	}
 
-	@Override
-	public ProcedureResponse insertProcedure(ProcedureMaintenanceRequest request)
+	/**
+	 * Gets the historico bac.
+	 *
+	 * @return the historico bac
+	 */
+	public IHistoricoBAC getHistoricoBAC()
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		return historicoBAC;
+	}
+
+
+//===================================### HISTORICO ####======================================
+	@Override
+	public HistoricoResponse insertHistorico(HistoricoMaintenanceRequest request)
+	{
+		HistoricoResponse response = new HistoricoResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().insertProcedure(request);
+			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().insertHistorico(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -80,13 +84,13 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse updateProcedure(ProcedureMaintenanceRequest request)
+	public HistoricoResponse updateHistorico(HistoricoMaintenanceRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		HistoricoResponse response = new HistoricoResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().updateProcedure(request);
+			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().updateHistorico(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -99,13 +103,13 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse deleteProcedure(ProcedureMaintenanceRequest request)
+	public HistoricoResponse deleteHistorico(HistoricoMaintenanceRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		HistoricoResponse response = new HistoricoResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().deleteProcedure(request);
+			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().deleteHistorico(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -118,14 +122,14 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse refreshProcedures(RefreshRequest request)
+	public HistoricoResponse refreshHistoricos(RefreshRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		ProcedureResponse response = new ProcedureResponse();
+		HistoricoResponse response = new HistoricoResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().refreshProcedures(request);
+			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().refreshHistoricos(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -138,13 +142,13 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse fetchAllProcedures(FetchAllRequest request)
+	public HistoricoResponse fetchAllHistoricos(FetchAllRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		HistoricoResponse response = new HistoricoResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().fetchAllProcedures();
+			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().fetchAllHistoricos(new Historico());
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -158,19 +162,19 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.dapi.impl.IProcedureWS#fetchProcedureById(com.qat.samples.sysmgmt.model.request.
+	 * @see com.qat.samples.sysmgmt.dapi.impl.IHistoricoWS#fetchHistoricoById(com.qat.samples.sysmgmt.model.request.
 	 * FetchByIdRequest)
 	 */
 	@Override
-	public ProcedureResponse fetchProcedureById(FetchByIdRequest request)
+	public HistoricoResponse fetchHistoricoById(FetchByIdRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		HistoricoResponse response = new HistoricoResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = new InternalResultsResponse<Procedure>();
+			InternalResultsResponse<Historico> internalResponse = new InternalResultsResponse<Historico>();
 
-			internalResponse = getProcedureBAC().fetchProcedureById(request);
+			internalResponse = getHistoricoBAC().fetchHistoricoById(request);
 			// Handle the processing for all previous methods regardless of them failing or succeeding.
 			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
 		}
@@ -184,13 +188,156 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse fetchProceduresByRequest(PagedInquiryRequest request)
+	public HistoricoResponse fetchHistoricosByRequest(HistoricoInquiryRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		HistoricoResponse response = new HistoricoResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().fetchProceduresByRequest(request);
+			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().fetchHistoricosByRequest(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+//===================================### HISTORICOITENS ####======================================
+	@Override
+	public HistoricoItensResponse insertHistoricoItens(HistoricoItensMaintenanceRequest request)
+	{
+		HistoricoItensResponse response = new HistoricoItensResponse();
+
+		try
+		{
+			InternalResultsResponse<HistoricoItens> internalResponse = getHistoricoBAC().insertHistoricoItens(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public HistoricoItensResponse updateHistoricoItens(HistoricoItensMaintenanceRequest request)
+	{
+		HistoricoItensResponse response = new HistoricoItensResponse();
+
+		try
+		{
+			InternalResultsResponse<HistoricoItens> internalResponse = getHistoricoBAC().updateHistoricoItens(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public HistoricoItensResponse deleteHistoricoItens(HistoricoItensMaintenanceRequest request)
+	{
+		HistoricoItensResponse response = new HistoricoItensResponse();
+
+		try
+		{
+			InternalResultsResponse<HistoricoItens> internalResponse = getHistoricoBAC().deleteHistoricoItens(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public HistoricoItensResponse refreshHistoricoItenss(RefreshRequest request)
+	{
+		// This method is demo code only. Do not view this as a QAT Global Standard.
+		HistoricoItensResponse response = new HistoricoItensResponse();
+
+		try
+		{
+			InternalResultsResponse<HistoricoItens> internalResponse = getHistoricoBAC().refreshHistoricoItenss(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public HistoricoItensResponse fetchAllHistoricoItenss(FetchAllRequest request)
+	{
+		HistoricoItensResponse response = new HistoricoItensResponse();
+
+		try
+		{
+			InternalResultsResponse<HistoricoItens> internalResponse = getHistoricoBAC().fetchAllHistoricoItenss(new HistoricoItens());
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.dapi.impl.IHistoricoItensWS#fetchHistoricoItensById(com.qat.samples.sysmgmt.model.request.
+	 * FetchByIdRequest)
+	 */
+	@Override
+	public HistoricoItensResponse fetchHistoricoItensById(FetchByIdRequest request)
+	{
+		HistoricoItensResponse response = new HistoricoItensResponse();
+
+		try
+		{
+			InternalResultsResponse<HistoricoItens> internalResponse = new InternalResultsResponse<HistoricoItens>();
+
+			internalResponse = getHistoricoBAC().fetchHistoricoItensById(request);
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public HistoricoItensResponse fetchHistoricoItenssByRequest(HistoricoItensInquiryRequest request)
+	{
+		HistoricoItensResponse response = new HistoricoItensResponse();
+
+		try
+		{
+			InternalResultsResponse<HistoricoItens> internalResponse = getHistoricoBAC().fetchHistoricoItenssByRequest(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)

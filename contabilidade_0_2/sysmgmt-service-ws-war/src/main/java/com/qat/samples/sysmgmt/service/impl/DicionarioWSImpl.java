@@ -1,3 +1,5 @@
+/** create by system gera-java version 1.0.0 28/04/2016 14:31 : 5*/
+
 package com.qat.samples.sysmgmt.service.impl;
 
 import javax.jws.WebService;
@@ -8,13 +10,13 @@ import org.springframework.stereotype.Service;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IProcedureBAC;
-import com.qat.samples.sysmgmt.model.Procedure;
-import com.qat.samples.sysmgmt.model.request.ProcedureMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.ProcedureResponse;
+import com.qat.samples.sysmgmt.bac.IDicionarioBAC;
+import com.qat.samples.sysmgmt.model.Dicionario;
+import com.qat.samples.sysmgmt.model.request.DicionarioMaintenanceRequest;
+import com.qat.samples.sysmgmt.model.response.DicionarioResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.DicionarioInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -23,51 +25,53 @@ import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
  */
 @Service
 @WebService(targetNamespace = "http://qat.com/sysmgmt")
-public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedureWS
+public class DicionarioWSImpl implements com.qat.samples.sysmgmt.service.IDicionarioWS
 {
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
-	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.procedurewsimpl.defaultexception";
+	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.dicionariowsimpl.defaultexception";
 
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
-	private static final String DEFAULT_ERROR_MSG = "sysmgmt.base.procedurewsimpl.defaulterror";
+	private static final String DEFAULT_ERROR_MSG = "sysmgmt.base.dicionariowsimpl.defaulterror";
 
 	/** The Constant CLASS_NAME. */
-	private static final String CLASS_NAME = ProcedureWSImpl.class.getName();
+	private static final String CLASS_NAME = DicionarioWSImpl.class.getName();
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(ProcedureWSImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DicionarioWSImpl.class);
 
-	/** The procedure BAC. */
-	private IProcedureBAC procedureBAC; // injected by Spring through setter
-
-	/**
-	 * Spring Sets the procedure BAC.
-	 *
-	 * @param procedureBAC the new procedure BAC
-	 */
-	public void setProcedureBAC(IProcedureBAC procedureBAC)
-	{
-		this.procedureBAC = procedureBAC;
-	}
+	/** The dicionario BAC. */
+	private IDicionarioBAC dicionarioBAC; // injected by Spring through setter
 
 	/**
-	 * Gets the procedure bac.
+	 * Spring Sets the dicionario BAC.
 	 *
-	 * @return the procedure bac
+	 * @param dicionarioBAC the new dicionario BAC
 	 */
-	public IProcedureBAC getProcedureBAC()
+	public void setDicionarioBAC(IDicionarioBAC dicionarioBAC)
 	{
-		return procedureBAC;
+		this.dicionarioBAC = dicionarioBAC;
 	}
 
-	@Override
-	public ProcedureResponse insertProcedure(ProcedureMaintenanceRequest request)
+	/**
+	 * Gets the dicionario bac.
+	 *
+	 * @return the dicionario bac
+	 */
+	public IDicionarioBAC getDicionarioBAC()
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		return dicionarioBAC;
+	}
+
+
+//===================================### CLASSES ####======================================
+	@Override
+	public ClassesResponse insertClasses(ClassesMaintenanceRequest request)
+	{
+		ClassesResponse response = new ClassesResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().insertProcedure(request);
+			InternalResultsResponse<Classes> internalResponse = getDicionarioBAC().insertClasses(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -80,13 +84,13 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse updateProcedure(ProcedureMaintenanceRequest request)
+	public ClassesResponse updateClasses(ClassesMaintenanceRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		ClassesResponse response = new ClassesResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().updateProcedure(request);
+			InternalResultsResponse<Classes> internalResponse = getDicionarioBAC().updateClasses(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -99,13 +103,13 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse deleteProcedure(ProcedureMaintenanceRequest request)
+	public ClassesResponse deleteClasses(ClassesMaintenanceRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		ClassesResponse response = new ClassesResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().deleteProcedure(request);
+			InternalResultsResponse<Classes> internalResponse = getDicionarioBAC().deleteClasses(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -118,14 +122,14 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse refreshProcedures(RefreshRequest request)
+	public ClassesResponse refreshClassess(RefreshRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		ProcedureResponse response = new ProcedureResponse();
+		ClassesResponse response = new ClassesResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().refreshProcedures(request);
+			InternalResultsResponse<Classes> internalResponse = getDicionarioBAC().refreshClassess(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -138,13 +142,13 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse fetchAllProcedures(FetchAllRequest request)
+	public ClassesResponse fetchAllClassess(FetchAllRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		ClassesResponse response = new ClassesResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().fetchAllProcedures();
+			InternalResultsResponse<Classes> internalResponse = getDicionarioBAC().fetchAllClassess(new Classes());
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -158,19 +162,19 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.dapi.impl.IProcedureWS#fetchProcedureById(com.qat.samples.sysmgmt.model.request.
+	 * @see com.qat.samples.sysmgmt.dapi.impl.IClassesWS#fetchClassesById(com.qat.samples.sysmgmt.model.request.
 	 * FetchByIdRequest)
 	 */
 	@Override
-	public ProcedureResponse fetchProcedureById(FetchByIdRequest request)
+	public ClassesResponse fetchClassesById(FetchByIdRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		ClassesResponse response = new ClassesResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = new InternalResultsResponse<Procedure>();
+			InternalResultsResponse<Classes> internalResponse = new InternalResultsResponse<Classes>();
 
-			internalResponse = getProcedureBAC().fetchProcedureById(request);
+			internalResponse = getDicionarioBAC().fetchClassesById(request);
 			// Handle the processing for all previous methods regardless of them failing or succeeding.
 			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
 		}
@@ -184,13 +188,299 @@ public class ProcedureWSImpl implements com.qat.samples.sysmgmt.service.IProcedu
 	}
 
 	@Override
-	public ProcedureResponse fetchProceduresByRequest(PagedInquiryRequest request)
+	public ClassesResponse fetchClassessByRequest(ClassesInquiryRequest request)
 	{
-		ProcedureResponse response = new ProcedureResponse();
+		ClassesResponse response = new ClassesResponse();
 
 		try
 		{
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().fetchProceduresByRequest(request);
+			InternalResultsResponse<Classes> internalResponse = getDicionarioBAC().fetchClassessByRequest(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+//===================================### INTERFACE ####======================================
+	@Override
+	public InterfaceResponse insertInterface(InterfaceMaintenanceRequest request)
+	{
+		InterfaceResponse response = new InterfaceResponse();
+
+		try
+		{
+			InternalResultsResponse<Interface> internalResponse = getDicionarioBAC().insertInterface(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public InterfaceResponse updateInterface(InterfaceMaintenanceRequest request)
+	{
+		InterfaceResponse response = new InterfaceResponse();
+
+		try
+		{
+			InternalResultsResponse<Interface> internalResponse = getDicionarioBAC().updateInterface(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public InterfaceResponse deleteInterface(InterfaceMaintenanceRequest request)
+	{
+		InterfaceResponse response = new InterfaceResponse();
+
+		try
+		{
+			InternalResultsResponse<Interface> internalResponse = getDicionarioBAC().deleteInterface(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public InterfaceResponse refreshInterfaces(RefreshRequest request)
+	{
+		// This method is demo code only. Do not view this as a QAT Global Standard.
+		InterfaceResponse response = new InterfaceResponse();
+
+		try
+		{
+			InternalResultsResponse<Interface> internalResponse = getDicionarioBAC().refreshInterfaces(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public InterfaceResponse fetchAllInterfaces(FetchAllRequest request)
+	{
+		InterfaceResponse response = new InterfaceResponse();
+
+		try
+		{
+			InternalResultsResponse<Interface> internalResponse = getDicionarioBAC().fetchAllInterfaces(new Interface());
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.dapi.impl.IInterfaceWS#fetchInterfaceById(com.qat.samples.sysmgmt.model.request.
+	 * FetchByIdRequest)
+	 */
+	@Override
+	public InterfaceResponse fetchInterfaceById(FetchByIdRequest request)
+	{
+		InterfaceResponse response = new InterfaceResponse();
+
+		try
+		{
+			InternalResultsResponse<Interface> internalResponse = new InternalResultsResponse<Interface>();
+
+			internalResponse = getDicionarioBAC().fetchInterfaceById(request);
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public InterfaceResponse fetchInterfacesByRequest(InterfaceInquiryRequest request)
+	{
+		InterfaceResponse response = new InterfaceResponse();
+
+		try
+		{
+			InternalResultsResponse<Interface> internalResponse = getDicionarioBAC().fetchInterfacesByRequest(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+//===================================### FIELD ####======================================
+	@Override
+	public FieldResponse insertField(FieldMaintenanceRequest request)
+	{
+		FieldResponse response = new FieldResponse();
+
+		try
+		{
+			InternalResultsResponse<Field> internalResponse = getDicionarioBAC().insertField(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public FieldResponse updateField(FieldMaintenanceRequest request)
+	{
+		FieldResponse response = new FieldResponse();
+
+		try
+		{
+			InternalResultsResponse<Field> internalResponse = getDicionarioBAC().updateField(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public FieldResponse deleteField(FieldMaintenanceRequest request)
+	{
+		FieldResponse response = new FieldResponse();
+
+		try
+		{
+			InternalResultsResponse<Field> internalResponse = getDicionarioBAC().deleteField(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public FieldResponse refreshFields(RefreshRequest request)
+	{
+		// This method is demo code only. Do not view this as a QAT Global Standard.
+		FieldResponse response = new FieldResponse();
+
+		try
+		{
+			InternalResultsResponse<Field> internalResponse = getDicionarioBAC().refreshFields(request);
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public FieldResponse fetchAllFields(FetchAllRequest request)
+	{
+		FieldResponse response = new FieldResponse();
+
+		try
+		{
+			InternalResultsResponse<Field> internalResponse = getDicionarioBAC().fetchAllFields(new Field());
+			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.dapi.impl.IFieldWS#fetchFieldById(com.qat.samples.sysmgmt.model.request.
+	 * FetchByIdRequest)
+	 */
+	@Override
+	public FieldResponse fetchFieldById(FetchByIdRequest request)
+	{
+		FieldResponse response = new FieldResponse();
+
+		try
+		{
+			InternalResultsResponse<Field> internalResponse = new InternalResultsResponse<Field>();
+
+			internalResponse = getDicionarioBAC().fetchFieldById(request);
+			// Handle the processing for all previous methods regardless of them failing or succeeding.
+			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
+		}
+		catch (Exception ex)
+		{
+			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+					request.getRequestContext());
+		}
+
+		return response;
+	}
+
+	@Override
+	public FieldResponse fetchFieldsByRequest(FieldInquiryRequest request)
+	{
+		FieldResponse response = new FieldResponse();
+
+		try
+		{
+			InternalResultsResponse<Field> internalResponse = getDicionarioBAC().fetchFieldsByRequest(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
