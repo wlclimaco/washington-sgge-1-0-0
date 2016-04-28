@@ -8,8 +8,17 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.response.VendasResponse;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalSaidaMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.OrcamentoMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.response.NotaFiscalSaidaResponse;
+import com.qat.samples.sysmgmt.nf.model.response.OrcamentoResponse;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.response.OrdemServicoResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -32,7 +41,7 @@ public interface IVendasWS
 	@WebResult(name = "insertNotaFiscalSaidasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	NotaFiscalSaidaResponse insertNotaFiscalSaida(@WebParam(name = "request") NotaFiscalSaidaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of NotaFiscalSaidas.
 	 *
@@ -44,7 +53,7 @@ public interface IVendasWS
 	@WebResult(name = "updateNotaFiscalSaidasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	NotaFiscalSaidaResponse updateNotaFiscalSaida(@WebParam(name = "request") NotaFiscalSaidaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of NotaFiscalSaidas.
 	 *
@@ -56,7 +65,7 @@ public interface IVendasWS
 	@WebResult(name = "deleteNotaFiscalSaidasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	NotaFiscalSaidaResponse deleteNotaFiscalSaida(@WebParam(name = "request") NotaFiscalSaidaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of NotaFiscalSaidas.
 	 *
@@ -68,7 +77,7 @@ public interface IVendasWS
 	@WebResult(name = "fetchNotaFiscalSaidaByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	NotaFiscalSaidaResponse fetchNotaFiscalSaidaById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of NotaFiscalSaidas.
 	 *
@@ -79,9 +88,9 @@ public interface IVendasWS
 	@WebMethod(action = "fetchNotaFiscalSaidasByRequest")
 	@WebResult(name = "fetchNotaFiscalSaidasByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
-	NotaFiscalSaidaResponse fetchNotaFiscalSaidasByRequest(@WebParam(name = "request") NotaFiscalSaidaInquiryRequest request);
-	
-	
+	NotaFiscalSaidaResponse fetchNotaFiscalSaidasByRequest(@WebParam(name = "request") NotaFiscalInquiryRequest request);
+
+
 	/**
 	 * Rebuild a list of NotaFiscalSaidas.
 	 *
@@ -93,7 +102,7 @@ public interface IVendasWS
 	@WebResult(name = "refreshNotaFiscalSaidasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	NotaFiscalSaidaResponse refreshNotaFiscalSaidas(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all NotaFiscalSaidas.
@@ -122,7 +131,7 @@ public interface IVendasWS
 	@WebResult(name = "insertOrcamentosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	OrcamentoResponse insertOrcamento(@WebParam(name = "request") OrcamentoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Orcamentos.
 	 *
@@ -134,7 +143,7 @@ public interface IVendasWS
 	@WebResult(name = "updateOrcamentosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	OrcamentoResponse updateOrcamento(@WebParam(name = "request") OrcamentoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Orcamentos.
 	 *
@@ -146,7 +155,7 @@ public interface IVendasWS
 	@WebResult(name = "deleteOrcamentosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	OrcamentoResponse deleteOrcamento(@WebParam(name = "request") OrcamentoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Orcamentos.
 	 *
@@ -158,7 +167,7 @@ public interface IVendasWS
 	@WebResult(name = "fetchOrcamentoByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	OrcamentoResponse fetchOrcamentoById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Orcamentos.
 	 *
@@ -170,8 +179,8 @@ public interface IVendasWS
 	@WebResult(name = "fetchOrcamentosByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	OrcamentoResponse fetchOrcamentosByRequest(@WebParam(name = "request") OrcamentoInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Orcamentos.
 	 *
@@ -183,7 +192,7 @@ public interface IVendasWS
 	@WebResult(name = "refreshOrcamentosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	OrcamentoResponse refreshOrcamentos(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Orcamentos.
@@ -212,7 +221,7 @@ public interface IVendasWS
 	@WebResult(name = "insertOrdemServicosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	OrdemServicoResponse insertOrdemServico(@WebParam(name = "request") OrdemServicoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of OrdemServicos.
 	 *
@@ -224,7 +233,7 @@ public interface IVendasWS
 	@WebResult(name = "updateOrdemServicosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	OrdemServicoResponse updateOrdemServico(@WebParam(name = "request") OrdemServicoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of OrdemServicos.
 	 *
@@ -236,7 +245,7 @@ public interface IVendasWS
 	@WebResult(name = "deleteOrdemServicosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	OrdemServicoResponse deleteOrdemServico(@WebParam(name = "request") OrdemServicoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of OrdemServicos.
 	 *
@@ -248,7 +257,7 @@ public interface IVendasWS
 	@WebResult(name = "fetchOrdemServicoByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	OrdemServicoResponse fetchOrdemServicoById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of OrdemServicos.
 	 *
@@ -260,8 +269,8 @@ public interface IVendasWS
 	@WebResult(name = "fetchOrdemServicosByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	OrdemServicoResponse fetchOrdemServicosByRequest(@WebParam(name = "request") OrdemServicoInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of OrdemServicos.
 	 *
@@ -273,7 +282,7 @@ public interface IVendasWS
 	@WebResult(name = "refreshOrdemServicosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	OrdemServicoResponse refreshOrdemServicos(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all OrdemServicos.

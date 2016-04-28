@@ -8,8 +8,29 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.response.FinanceiroResponse;
+import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
+import com.qat.samples.sysmgmt.banco.model.request.BancoMaintenanceRequest;
+import com.qat.samples.sysmgmt.dp.model.response.BancoResponse;
+import com.qat.samples.sysmgmt.dp.model.response.FormaPgResponse;
+import com.qat.samples.sysmgmt.financeiro.model.request.CaixaInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.CaixaMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.CondPagInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.CondPagMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.FormaPgInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.FormaPgMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.response.CondPagResponse;
+import com.qat.samples.sysmgmt.financeiro.model.response.ContaCorrenteResponse;
+import com.qat.samples.sysmgmt.financeiro.model.response.ContasPagarResponse;
+import com.qat.samples.sysmgmt.financeiro.model.response.ContasReceberResponse;
+import com.qat.samples.sysmgmt.nf.model.response.CaixaResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -32,7 +53,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "insertContasPagarsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ContasPagarResponse insertContasPagar(@WebParam(name = "request") ContasPagarMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of ContasPagars.
 	 *
@@ -44,7 +65,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "updateContasPagarsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ContasPagarResponse updateContasPagar(@WebParam(name = "request") ContasPagarMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of ContasPagars.
 	 *
@@ -56,7 +77,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "deleteContasPagarsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ContasPagarResponse deleteContasPagar(@WebParam(name = "request") ContasPagarMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of ContasPagars.
 	 *
@@ -68,7 +89,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "fetchContasPagarByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ContasPagarResponse fetchContasPagarById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of ContasPagars.
 	 *
@@ -80,8 +101,8 @@ public interface IFinanceiroWS
 	@WebResult(name = "fetchContasPagarsByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ContasPagarResponse fetchContasPagarsByRequest(@WebParam(name = "request") ContasPagarInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of ContasPagars.
 	 *
@@ -93,7 +114,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "refreshContasPagarsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ContasPagarResponse refreshContasPagars(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all ContasPagars.
@@ -122,7 +143,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "insertContasRecebersReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ContasReceberResponse insertContasReceber(@WebParam(name = "request") ContasReceberMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of ContasRecebers.
 	 *
@@ -134,7 +155,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "updateContasRecebersReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ContasReceberResponse updateContasReceber(@WebParam(name = "request") ContasReceberMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of ContasRecebers.
 	 *
@@ -146,7 +167,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "deleteContasRecebersReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ContasReceberResponse deleteContasReceber(@WebParam(name = "request") ContasReceberMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of ContasRecebers.
 	 *
@@ -158,7 +179,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "fetchContasReceberByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ContasReceberResponse fetchContasReceberById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of ContasRecebers.
 	 *
@@ -170,8 +191,8 @@ public interface IFinanceiroWS
 	@WebResult(name = "fetchContasRecebersByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ContasReceberResponse fetchContasRecebersByRequest(@WebParam(name = "request") ContasReceberInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of ContasRecebers.
 	 *
@@ -183,7 +204,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "refreshContasRecebersReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ContasReceberResponse refreshContasRecebers(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all ContasRecebers.
@@ -212,7 +233,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "insertCondPagsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CondPagResponse insertCondPag(@WebParam(name = "request") CondPagMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of CondPags.
 	 *
@@ -224,7 +245,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "updateCondPagsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CondPagResponse updateCondPag(@WebParam(name = "request") CondPagMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of CondPags.
 	 *
@@ -236,7 +257,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "deleteCondPagsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CondPagResponse deleteCondPag(@WebParam(name = "request") CondPagMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of CondPags.
 	 *
@@ -248,7 +269,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "fetchCondPagByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CondPagResponse fetchCondPagById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of CondPags.
 	 *
@@ -260,8 +281,8 @@ public interface IFinanceiroWS
 	@WebResult(name = "fetchCondPagsByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CondPagResponse fetchCondPagsByRequest(@WebParam(name = "request") CondPagInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of CondPags.
 	 *
@@ -273,7 +294,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "refreshCondPagsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CondPagResponse refreshCondPags(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all CondPags.
@@ -302,7 +323,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "insertFormaPgsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FormaPgResponse insertFormaPg(@WebParam(name = "request") FormaPgMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of FormaPgs.
 	 *
@@ -314,7 +335,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "updateFormaPgsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FormaPgResponse updateFormaPg(@WebParam(name = "request") FormaPgMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of FormaPgs.
 	 *
@@ -326,7 +347,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "deleteFormaPgsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FormaPgResponse deleteFormaPg(@WebParam(name = "request") FormaPgMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of FormaPgs.
 	 *
@@ -338,7 +359,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "fetchFormaPgByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FormaPgResponse fetchFormaPgById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of FormaPgs.
 	 *
@@ -350,8 +371,8 @@ public interface IFinanceiroWS
 	@WebResult(name = "fetchFormaPgsByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FormaPgResponse fetchFormaPgsByRequest(@WebParam(name = "request") FormaPgInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of FormaPgs.
 	 *
@@ -363,7 +384,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "refreshFormaPgsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FormaPgResponse refreshFormaPgs(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all FormaPgs.
@@ -392,7 +413,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "insertBancosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	BancoResponse insertBanco(@WebParam(name = "request") BancoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Bancos.
 	 *
@@ -404,7 +425,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "updateBancosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	BancoResponse updateBanco(@WebParam(name = "request") BancoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Bancos.
 	 *
@@ -416,7 +437,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "deleteBancosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	BancoResponse deleteBanco(@WebParam(name = "request") BancoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Bancos.
 	 *
@@ -428,7 +449,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "fetchBancoByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	BancoResponse fetchBancoById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Bancos.
 	 *
@@ -440,8 +461,8 @@ public interface IFinanceiroWS
 	@WebResult(name = "fetchBancosByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	BancoResponse fetchBancosByRequest(@WebParam(name = "request") BancoInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Bancos.
 	 *
@@ -453,7 +474,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "refreshBancosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	BancoResponse refreshBancos(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Bancos.
@@ -482,7 +503,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "insertContaCorrentesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ContaCorrenteResponse insertContaCorrente(@WebParam(name = "request") ContaCorrenteMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of ContaCorrentes.
 	 *
@@ -494,7 +515,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "updateContaCorrentesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ContaCorrenteResponse updateContaCorrente(@WebParam(name = "request") ContaCorrenteMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of ContaCorrentes.
 	 *
@@ -506,7 +527,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "deleteContaCorrentesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ContaCorrenteResponse deleteContaCorrente(@WebParam(name = "request") ContaCorrenteMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of ContaCorrentes.
 	 *
@@ -518,7 +539,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "fetchContaCorrenteByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ContaCorrenteResponse fetchContaCorrenteById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of ContaCorrentes.
 	 *
@@ -530,8 +551,8 @@ public interface IFinanceiroWS
 	@WebResult(name = "fetchContaCorrentesByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ContaCorrenteResponse fetchContaCorrentesByRequest(@WebParam(name = "request") ContaCorrenteInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of ContaCorrentes.
 	 *
@@ -543,7 +564,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "refreshContaCorrentesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ContaCorrenteResponse refreshContaCorrentes(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all ContaCorrentes.
@@ -572,7 +593,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "insertCaixasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CaixaResponse insertCaixa(@WebParam(name = "request") CaixaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Caixas.
 	 *
@@ -584,7 +605,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "updateCaixasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CaixaResponse updateCaixa(@WebParam(name = "request") CaixaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Caixas.
 	 *
@@ -596,7 +617,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "deleteCaixasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CaixaResponse deleteCaixa(@WebParam(name = "request") CaixaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Caixas.
 	 *
@@ -608,7 +629,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "fetchCaixaByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CaixaResponse fetchCaixaById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Caixas.
 	 *
@@ -620,8 +641,8 @@ public interface IFinanceiroWS
 	@WebResult(name = "fetchCaixasByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CaixaResponse fetchCaixasByRequest(@WebParam(name = "request") CaixaInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Caixas.
 	 *
@@ -633,7 +654,7 @@ public interface IFinanceiroWS
 	@WebResult(name = "refreshCaixasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CaixaResponse refreshCaixas(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Caixas.

@@ -8,8 +8,23 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.response.ProdutoResponse;
+import com.qat.samples.sysmgmt.produto.model.request.GrupoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.GrupoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.MarcaMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.SubGrupoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.UniMedMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.response.GrupoResponse;
+import com.qat.samples.sysmgmt.produto.model.response.MarcaResponse;
+import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
+import com.qat.samples.sysmgmt.produto.model.response.SubGrupoResponse;
+import com.qat.samples.sysmgmt.produto.model.response.UniMedResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -32,7 +47,7 @@ public interface IProdutoWS
 	@WebResult(name = "insertProdutosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ProdutoResponse insertProduto(@WebParam(name = "request") ProdutoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Produtos.
 	 *
@@ -44,7 +59,7 @@ public interface IProdutoWS
 	@WebResult(name = "updateProdutosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ProdutoResponse updateProduto(@WebParam(name = "request") ProdutoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Produtos.
 	 *
@@ -56,7 +71,7 @@ public interface IProdutoWS
 	@WebResult(name = "deleteProdutosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ProdutoResponse deleteProduto(@WebParam(name = "request") ProdutoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Produtos.
 	 *
@@ -68,7 +83,7 @@ public interface IProdutoWS
 	@WebResult(name = "fetchProdutoByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ProdutoResponse fetchProdutoById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Produtos.
 	 *
@@ -80,8 +95,8 @@ public interface IProdutoWS
 	@WebResult(name = "fetchProdutosByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ProdutoResponse fetchProdutosByRequest(@WebParam(name = "request") ProdutoInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Produtos.
 	 *
@@ -93,7 +108,7 @@ public interface IProdutoWS
 	@WebResult(name = "refreshProdutosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ProdutoResponse refreshProdutos(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Produtos.
@@ -122,7 +137,7 @@ public interface IProdutoWS
 	@WebResult(name = "insertMarcasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	MarcaResponse insertMarca(@WebParam(name = "request") MarcaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Marcas.
 	 *
@@ -134,7 +149,7 @@ public interface IProdutoWS
 	@WebResult(name = "updateMarcasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	MarcaResponse updateMarca(@WebParam(name = "request") MarcaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Marcas.
 	 *
@@ -146,7 +161,7 @@ public interface IProdutoWS
 	@WebResult(name = "deleteMarcasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	MarcaResponse deleteMarca(@WebParam(name = "request") MarcaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Marcas.
 	 *
@@ -158,7 +173,7 @@ public interface IProdutoWS
 	@WebResult(name = "fetchMarcaByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	MarcaResponse fetchMarcaById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Marcas.
 	 *
@@ -170,8 +185,8 @@ public interface IProdutoWS
 	@WebResult(name = "fetchMarcasByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	MarcaResponse fetchMarcasByRequest(@WebParam(name = "request") MarcaInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Marcas.
 	 *
@@ -183,7 +198,7 @@ public interface IProdutoWS
 	@WebResult(name = "refreshMarcasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	MarcaResponse refreshMarcas(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Marcas.
@@ -212,7 +227,7 @@ public interface IProdutoWS
 	@WebResult(name = "insertGruposReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	GrupoResponse insertGrupo(@WebParam(name = "request") GrupoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Grupos.
 	 *
@@ -224,7 +239,7 @@ public interface IProdutoWS
 	@WebResult(name = "updateGruposReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	GrupoResponse updateGrupo(@WebParam(name = "request") GrupoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Grupos.
 	 *
@@ -236,7 +251,7 @@ public interface IProdutoWS
 	@WebResult(name = "deleteGruposReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	GrupoResponse deleteGrupo(@WebParam(name = "request") GrupoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Grupos.
 	 *
@@ -248,7 +263,7 @@ public interface IProdutoWS
 	@WebResult(name = "fetchGrupoByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	GrupoResponse fetchGrupoById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Grupos.
 	 *
@@ -260,8 +275,8 @@ public interface IProdutoWS
 	@WebResult(name = "fetchGruposByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	GrupoResponse fetchGruposByRequest(@WebParam(name = "request") GrupoInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Grupos.
 	 *
@@ -273,7 +288,7 @@ public interface IProdutoWS
 	@WebResult(name = "refreshGruposReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	GrupoResponse refreshGrupos(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Grupos.
@@ -302,7 +317,7 @@ public interface IProdutoWS
 	@WebResult(name = "insertSubGruposReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	SubGrupoResponse insertSubGrupo(@WebParam(name = "request") SubGrupoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of SubGrupos.
 	 *
@@ -314,7 +329,7 @@ public interface IProdutoWS
 	@WebResult(name = "updateSubGruposReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	SubGrupoResponse updateSubGrupo(@WebParam(name = "request") SubGrupoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of SubGrupos.
 	 *
@@ -326,7 +341,7 @@ public interface IProdutoWS
 	@WebResult(name = "deleteSubGruposReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	SubGrupoResponse deleteSubGrupo(@WebParam(name = "request") SubGrupoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of SubGrupos.
 	 *
@@ -338,7 +353,7 @@ public interface IProdutoWS
 	@WebResult(name = "fetchSubGrupoByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	SubGrupoResponse fetchSubGrupoById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of SubGrupos.
 	 *
@@ -350,8 +365,8 @@ public interface IProdutoWS
 	@WebResult(name = "fetchSubGruposByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	SubGrupoResponse fetchSubGruposByRequest(@WebParam(name = "request") SubGrupoInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of SubGrupos.
 	 *
@@ -363,7 +378,7 @@ public interface IProdutoWS
 	@WebResult(name = "refreshSubGruposReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	SubGrupoResponse refreshSubGrupos(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all SubGrupos.
@@ -392,7 +407,7 @@ public interface IProdutoWS
 	@WebResult(name = "insertUniMedsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	UniMedResponse insertUniMed(@WebParam(name = "request") UniMedMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of UniMeds.
 	 *
@@ -404,7 +419,7 @@ public interface IProdutoWS
 	@WebResult(name = "updateUniMedsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	UniMedResponse updateUniMed(@WebParam(name = "request") UniMedMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of UniMeds.
 	 *
@@ -416,7 +431,7 @@ public interface IProdutoWS
 	@WebResult(name = "deleteUniMedsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	UniMedResponse deleteUniMed(@WebParam(name = "request") UniMedMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of UniMeds.
 	 *
@@ -428,7 +443,7 @@ public interface IProdutoWS
 	@WebResult(name = "fetchUniMedByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	UniMedResponse fetchUniMedById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of UniMeds.
 	 *
@@ -440,8 +455,8 @@ public interface IProdutoWS
 	@WebResult(name = "fetchUniMedsByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	UniMedResponse fetchUniMedsByRequest(@WebParam(name = "request") UniMedInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of UniMeds.
 	 *
@@ -453,7 +468,7 @@ public interface IProdutoWS
 	@WebResult(name = "refreshUniMedsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	UniMedResponse refreshUniMeds(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all UniMeds.

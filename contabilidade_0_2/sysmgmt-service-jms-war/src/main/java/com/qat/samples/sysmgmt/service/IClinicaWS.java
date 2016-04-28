@@ -8,8 +8,20 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.response.ClinicaResponse;
+import com.qat.samples.sysmgmt.clinica.model.request.ConsultaInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.ConsultaMaintenanceRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.ExameInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.ExameMaintenanceRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.MedicoInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.MedicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.PacienteInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.PacienteMaintenanceRequest;
+import com.qat.samples.sysmgmt.clinica.model.response.ConsultaResponse;
+import com.qat.samples.sysmgmt.clinica.model.response.ExameResponse;
+import com.qat.samples.sysmgmt.clinica.model.response.MedicoResponse;
+import com.qat.samples.sysmgmt.clinica.model.response.PacienteResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -32,7 +44,7 @@ public interface IClinicaWS
 	@WebResult(name = "insertMedicosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	MedicoResponse insertMedico(@WebParam(name = "request") MedicoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Medicos.
 	 *
@@ -44,7 +56,7 @@ public interface IClinicaWS
 	@WebResult(name = "updateMedicosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	MedicoResponse updateMedico(@WebParam(name = "request") MedicoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Medicos.
 	 *
@@ -56,7 +68,7 @@ public interface IClinicaWS
 	@WebResult(name = "deleteMedicosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	MedicoResponse deleteMedico(@WebParam(name = "request") MedicoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Medicos.
 	 *
@@ -68,7 +80,7 @@ public interface IClinicaWS
 	@WebResult(name = "fetchMedicoByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	MedicoResponse fetchMedicoById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Medicos.
 	 *
@@ -80,8 +92,8 @@ public interface IClinicaWS
 	@WebResult(name = "fetchMedicosByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	MedicoResponse fetchMedicosByRequest(@WebParam(name = "request") MedicoInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Medicos.
 	 *
@@ -93,7 +105,7 @@ public interface IClinicaWS
 	@WebResult(name = "refreshMedicosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	MedicoResponse refreshMedicos(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Medicos.
@@ -122,7 +134,7 @@ public interface IClinicaWS
 	@WebResult(name = "insertPacientesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	PacienteResponse insertPaciente(@WebParam(name = "request") PacienteMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Pacientes.
 	 *
@@ -134,7 +146,7 @@ public interface IClinicaWS
 	@WebResult(name = "updatePacientesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	PacienteResponse updatePaciente(@WebParam(name = "request") PacienteMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Pacientes.
 	 *
@@ -146,7 +158,7 @@ public interface IClinicaWS
 	@WebResult(name = "deletePacientesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	PacienteResponse deletePaciente(@WebParam(name = "request") PacienteMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Pacientes.
 	 *
@@ -158,7 +170,7 @@ public interface IClinicaWS
 	@WebResult(name = "fetchPacienteByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	PacienteResponse fetchPacienteById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Pacientes.
 	 *
@@ -170,8 +182,8 @@ public interface IClinicaWS
 	@WebResult(name = "fetchPacientesByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	PacienteResponse fetchPacientesByRequest(@WebParam(name = "request") PacienteInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Pacientes.
 	 *
@@ -183,7 +195,7 @@ public interface IClinicaWS
 	@WebResult(name = "refreshPacientesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	PacienteResponse refreshPacientes(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Pacientes.
@@ -212,7 +224,7 @@ public interface IClinicaWS
 	@WebResult(name = "insertConsultasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ConsultaResponse insertConsulta(@WebParam(name = "request") ConsultaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Consultas.
 	 *
@@ -224,7 +236,7 @@ public interface IClinicaWS
 	@WebResult(name = "updateConsultasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ConsultaResponse updateConsulta(@WebParam(name = "request") ConsultaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Consultas.
 	 *
@@ -236,7 +248,7 @@ public interface IClinicaWS
 	@WebResult(name = "deleteConsultasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ConsultaResponse deleteConsulta(@WebParam(name = "request") ConsultaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Consultas.
 	 *
@@ -248,7 +260,7 @@ public interface IClinicaWS
 	@WebResult(name = "fetchConsultaByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ConsultaResponse fetchConsultaById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Consultas.
 	 *
@@ -260,8 +272,8 @@ public interface IClinicaWS
 	@WebResult(name = "fetchConsultasByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ConsultaResponse fetchConsultasByRequest(@WebParam(name = "request") ConsultaInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Consultas.
 	 *
@@ -273,7 +285,7 @@ public interface IClinicaWS
 	@WebResult(name = "refreshConsultasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ConsultaResponse refreshConsultas(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Consultas.
@@ -302,7 +314,7 @@ public interface IClinicaWS
 	@WebResult(name = "insertExamesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ExameResponse insertExame(@WebParam(name = "request") ExameMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Exames.
 	 *
@@ -314,7 +326,7 @@ public interface IClinicaWS
 	@WebResult(name = "updateExamesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ExameResponse updateExame(@WebParam(name = "request") ExameMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Exames.
 	 *
@@ -326,7 +338,7 @@ public interface IClinicaWS
 	@WebResult(name = "deleteExamesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ExameResponse deleteExame(@WebParam(name = "request") ExameMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Exames.
 	 *
@@ -338,7 +350,7 @@ public interface IClinicaWS
 	@WebResult(name = "fetchExameByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ExameResponse fetchExameById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Exames.
 	 *
@@ -350,8 +362,8 @@ public interface IClinicaWS
 	@WebResult(name = "fetchExamesByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ExameResponse fetchExamesByRequest(@WebParam(name = "request") ExameInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Exames.
 	 *
@@ -363,7 +375,7 @@ public interface IClinicaWS
 	@WebResult(name = "refreshExamesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ExameResponse refreshExames(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Exames.

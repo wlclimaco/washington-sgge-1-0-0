@@ -8,8 +8,17 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.response.AdvogadoResponse;
+import com.qat.samples.sysmgmt.advocacia.request.AdvogadoInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.request.AdvogadoMaintenanceRequest;
+import com.qat.samples.sysmgmt.advocacia.request.AudienciaInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.request.AudienciaMaintenanceRequest;
+import com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.request.ProcessoMaintenanceRequest;
+import com.qat.samples.sysmgmt.advocacia.response.AdvogadoResponse;
+import com.qat.samples.sysmgmt.advocacia.response.AudienciaResponse;
+import com.qat.samples.sysmgmt.advocacia.response.ProcessoResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -32,7 +41,7 @@ public interface IAdvogadoWS
 	@WebResult(name = "insertAdvogadosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	AdvogadoResponse insertAdvogado(@WebParam(name = "request") AdvogadoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Advogados.
 	 *
@@ -44,7 +53,7 @@ public interface IAdvogadoWS
 	@WebResult(name = "updateAdvogadosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	AdvogadoResponse updateAdvogado(@WebParam(name = "request") AdvogadoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Advogados.
 	 *
@@ -56,7 +65,7 @@ public interface IAdvogadoWS
 	@WebResult(name = "deleteAdvogadosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	AdvogadoResponse deleteAdvogado(@WebParam(name = "request") AdvogadoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Advogados.
 	 *
@@ -68,7 +77,7 @@ public interface IAdvogadoWS
 	@WebResult(name = "fetchAdvogadoByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	AdvogadoResponse fetchAdvogadoById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Advogados.
 	 *
@@ -80,8 +89,8 @@ public interface IAdvogadoWS
 	@WebResult(name = "fetchAdvogadosByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	AdvogadoResponse fetchAdvogadosByRequest(@WebParam(name = "request") AdvogadoInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Advogados.
 	 *
@@ -93,7 +102,7 @@ public interface IAdvogadoWS
 	@WebResult(name = "refreshAdvogadosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	AdvogadoResponse refreshAdvogados(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Advogados.
@@ -122,7 +131,7 @@ public interface IAdvogadoWS
 	@WebResult(name = "insertAudienciasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	AudienciaResponse insertAudiencia(@WebParam(name = "request") AudienciaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Audiencias.
 	 *
@@ -134,7 +143,7 @@ public interface IAdvogadoWS
 	@WebResult(name = "updateAudienciasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	AudienciaResponse updateAudiencia(@WebParam(name = "request") AudienciaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Audiencias.
 	 *
@@ -146,7 +155,7 @@ public interface IAdvogadoWS
 	@WebResult(name = "deleteAudienciasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	AudienciaResponse deleteAudiencia(@WebParam(name = "request") AudienciaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Audiencias.
 	 *
@@ -158,7 +167,7 @@ public interface IAdvogadoWS
 	@WebResult(name = "fetchAudienciaByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	AudienciaResponse fetchAudienciaById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Audiencias.
 	 *
@@ -170,8 +179,8 @@ public interface IAdvogadoWS
 	@WebResult(name = "fetchAudienciasByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	AudienciaResponse fetchAudienciasByRequest(@WebParam(name = "request") AudienciaInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Audiencias.
 	 *
@@ -183,7 +192,7 @@ public interface IAdvogadoWS
 	@WebResult(name = "refreshAudienciasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	AudienciaResponse refreshAudiencias(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Audiencias.
@@ -212,7 +221,7 @@ public interface IAdvogadoWS
 	@WebResult(name = "insertProcessosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ProcessoResponse insertProcesso(@WebParam(name = "request") ProcessoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Processos.
 	 *
@@ -224,7 +233,7 @@ public interface IAdvogadoWS
 	@WebResult(name = "updateProcessosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ProcessoResponse updateProcesso(@WebParam(name = "request") ProcessoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Processos.
 	 *
@@ -236,7 +245,7 @@ public interface IAdvogadoWS
 	@WebResult(name = "deleteProcessosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ProcessoResponse deleteProcesso(@WebParam(name = "request") ProcessoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Processos.
 	 *
@@ -248,7 +257,7 @@ public interface IAdvogadoWS
 	@WebResult(name = "fetchProcessoByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ProcessoResponse fetchProcessoById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Processos.
 	 *
@@ -260,8 +269,8 @@ public interface IAdvogadoWS
 	@WebResult(name = "fetchProcessosByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ProcessoResponse fetchProcessosByRequest(@WebParam(name = "request") ProcessoInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Processos.
 	 *
@@ -273,7 +282,7 @@ public interface IAdvogadoWS
 	@WebResult(name = "refreshProcessosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ProcessoResponse refreshProcessos(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Processos.

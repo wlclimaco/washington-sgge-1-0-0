@@ -8,9 +8,30 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.response.CadastrosResponse;
+import com.qat.samples.sysmgmt.dp.model.response.ConvenioResponse;
+import com.qat.samples.sysmgmt.entidade.model.request.CidadeMaintenanceRequest;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoMaintenanceRequest;
+import com.qat.samples.sysmgmt.estado.model.response.EstadoResponse;
+import com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ClienteMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ConvenioInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.response.ClienteResponse;
+import com.qat.samples.sysmgmt.pessoa.model.response.FornecedorResponse;
+import com.qat.samples.sysmgmt.pessoa.model.response.TransportadorResponse;
+import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.ConvenioMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
+import com.qat.samples.sysmgmt.util.model.request.TarefaInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.TarefaMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.response.CidadeResponse;
+import com.qat.samples.sysmgmt.util.model.response.TarefaResponse;
 
 /**
  * The Interface ICadastrosBAS delegate used by a JMS listener. (Business Area Service - BAS)
@@ -32,7 +53,7 @@ public interface ICadastrosWS
 	@WebResult(name = "insertClientesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ClienteResponse insertCliente(@WebParam(name = "request") ClienteMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Clientes.
 	 *
@@ -44,7 +65,7 @@ public interface ICadastrosWS
 	@WebResult(name = "updateClientesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ClienteResponse updateCliente(@WebParam(name = "request") ClienteMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Clientes.
 	 *
@@ -56,7 +77,7 @@ public interface ICadastrosWS
 	@WebResult(name = "deleteClientesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ClienteResponse deleteCliente(@WebParam(name = "request") ClienteMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Clientes.
 	 *
@@ -68,7 +89,7 @@ public interface ICadastrosWS
 	@WebResult(name = "fetchClienteByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ClienteResponse fetchClienteById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Clientes.
 	 *
@@ -80,8 +101,8 @@ public interface ICadastrosWS
 	@WebResult(name = "fetchClientesByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ClienteResponse fetchClientesByRequest(@WebParam(name = "request") ClienteInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Clientes.
 	 *
@@ -93,7 +114,7 @@ public interface ICadastrosWS
 	@WebResult(name = "refreshClientesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ClienteResponse refreshClientes(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Clientes.
@@ -122,7 +143,7 @@ public interface ICadastrosWS
 	@WebResult(name = "insertFornecedorsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FornecedorResponse insertFornecedor(@WebParam(name = "request") FornecedorMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Fornecedors.
 	 *
@@ -134,7 +155,7 @@ public interface ICadastrosWS
 	@WebResult(name = "updateFornecedorsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FornecedorResponse updateFornecedor(@WebParam(name = "request") FornecedorMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Fornecedors.
 	 *
@@ -146,7 +167,7 @@ public interface ICadastrosWS
 	@WebResult(name = "deleteFornecedorsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FornecedorResponse deleteFornecedor(@WebParam(name = "request") FornecedorMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Fornecedors.
 	 *
@@ -158,7 +179,7 @@ public interface ICadastrosWS
 	@WebResult(name = "fetchFornecedorByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FornecedorResponse fetchFornecedorById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Fornecedors.
 	 *
@@ -170,8 +191,8 @@ public interface ICadastrosWS
 	@WebResult(name = "fetchFornecedorsByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FornecedorResponse fetchFornecedorsByRequest(@WebParam(name = "request") FornecedorInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Fornecedors.
 	 *
@@ -183,7 +204,7 @@ public interface ICadastrosWS
 	@WebResult(name = "refreshFornecedorsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FornecedorResponse refreshFornecedors(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Fornecedors.
@@ -212,7 +233,7 @@ public interface ICadastrosWS
 	@WebResult(name = "insertTransportadorsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	TransportadorResponse insertTransportador(@WebParam(name = "request") TransportadorMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Transportadors.
 	 *
@@ -224,7 +245,7 @@ public interface ICadastrosWS
 	@WebResult(name = "updateTransportadorsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	TransportadorResponse updateTransportador(@WebParam(name = "request") TransportadorMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Transportadors.
 	 *
@@ -236,7 +257,7 @@ public interface ICadastrosWS
 	@WebResult(name = "deleteTransportadorsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	TransportadorResponse deleteTransportador(@WebParam(name = "request") TransportadorMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Transportadors.
 	 *
@@ -248,7 +269,7 @@ public interface ICadastrosWS
 	@WebResult(name = "fetchTransportadorByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	TransportadorResponse fetchTransportadorById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Transportadors.
 	 *
@@ -260,8 +281,8 @@ public interface ICadastrosWS
 	@WebResult(name = "fetchTransportadorsByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	TransportadorResponse fetchTransportadorsByRequest(@WebParam(name = "request") TransportadorInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Transportadors.
 	 *
@@ -273,7 +294,7 @@ public interface ICadastrosWS
 	@WebResult(name = "refreshTransportadorsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	TransportadorResponse refreshTransportadors(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Transportadors.
@@ -302,7 +323,7 @@ public interface ICadastrosWS
 	@WebResult(name = "insertConveniosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ConvenioResponse insertConvenio(@WebParam(name = "request") ConvenioMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Convenios.
 	 *
@@ -314,7 +335,7 @@ public interface ICadastrosWS
 	@WebResult(name = "updateConveniosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ConvenioResponse updateConvenio(@WebParam(name = "request") ConvenioMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Convenios.
 	 *
@@ -326,7 +347,7 @@ public interface ICadastrosWS
 	@WebResult(name = "deleteConveniosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ConvenioResponse deleteConvenio(@WebParam(name = "request") ConvenioMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Convenios.
 	 *
@@ -338,7 +359,7 @@ public interface ICadastrosWS
 	@WebResult(name = "fetchConvenioByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ConvenioResponse fetchConvenioById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Convenios.
 	 *
@@ -350,8 +371,8 @@ public interface ICadastrosWS
 	@WebResult(name = "fetchConveniosByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ConvenioResponse fetchConveniosByRequest(@WebParam(name = "request") ConvenioInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Convenios.
 	 *
@@ -363,7 +384,7 @@ public interface ICadastrosWS
 	@WebResult(name = "refreshConveniosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ConvenioResponse refreshConvenios(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Convenios.
@@ -392,7 +413,7 @@ public interface ICadastrosWS
 	@WebResult(name = "insertCidadesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CidadeResponse insertCidade(@WebParam(name = "request") CidadeMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Cidades.
 	 *
@@ -404,7 +425,7 @@ public interface ICadastrosWS
 	@WebResult(name = "updateCidadesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CidadeResponse updateCidade(@WebParam(name = "request") CidadeMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Cidades.
 	 *
@@ -416,7 +437,7 @@ public interface ICadastrosWS
 	@WebResult(name = "deleteCidadesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CidadeResponse deleteCidade(@WebParam(name = "request") CidadeMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Cidades.
 	 *
@@ -428,7 +449,7 @@ public interface ICadastrosWS
 	@WebResult(name = "fetchCidadeByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CidadeResponse fetchCidadeById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Cidades.
 	 *
@@ -440,8 +461,8 @@ public interface ICadastrosWS
 	@WebResult(name = "fetchCidadesByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CidadeResponse fetchCidadesByRequest(@WebParam(name = "request") CidadeInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Cidades.
 	 *
@@ -453,7 +474,7 @@ public interface ICadastrosWS
 	@WebResult(name = "refreshCidadesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CidadeResponse refreshCidades(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Cidades.
@@ -482,7 +503,7 @@ public interface ICadastrosWS
 	@WebResult(name = "insertEstadosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	EstadoResponse insertEstado(@WebParam(name = "request") EstadoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Estados.
 	 *
@@ -494,7 +515,7 @@ public interface ICadastrosWS
 	@WebResult(name = "updateEstadosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	EstadoResponse updateEstado(@WebParam(name = "request") EstadoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Estados.
 	 *
@@ -506,7 +527,7 @@ public interface ICadastrosWS
 	@WebResult(name = "deleteEstadosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	EstadoResponse deleteEstado(@WebParam(name = "request") EstadoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Estados.
 	 *
@@ -518,7 +539,7 @@ public interface ICadastrosWS
 	@WebResult(name = "fetchEstadoByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	EstadoResponse fetchEstadoById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Estados.
 	 *
@@ -530,8 +551,8 @@ public interface ICadastrosWS
 	@WebResult(name = "fetchEstadosByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	EstadoResponse fetchEstadosByRequest(@WebParam(name = "request") EstadoInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Estados.
 	 *
@@ -543,7 +564,7 @@ public interface ICadastrosWS
 	@WebResult(name = "refreshEstadosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	EstadoResponse refreshEstados(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Estados.
@@ -572,7 +593,7 @@ public interface ICadastrosWS
 	@WebResult(name = "insertTarefasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	TarefaResponse insertTarefa(@WebParam(name = "request") TarefaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Tarefas.
 	 *
@@ -584,7 +605,7 @@ public interface ICadastrosWS
 	@WebResult(name = "updateTarefasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	TarefaResponse updateTarefa(@WebParam(name = "request") TarefaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Tarefas.
 	 *
@@ -596,7 +617,7 @@ public interface ICadastrosWS
 	@WebResult(name = "deleteTarefasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	TarefaResponse deleteTarefa(@WebParam(name = "request") TarefaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Tarefas.
 	 *
@@ -608,7 +629,7 @@ public interface ICadastrosWS
 	@WebResult(name = "fetchTarefaByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	TarefaResponse fetchTarefaById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Tarefas.
 	 *
@@ -620,8 +641,8 @@ public interface ICadastrosWS
 	@WebResult(name = "fetchTarefasByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	TarefaResponse fetchTarefasByRequest(@WebParam(name = "request") TarefaInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Tarefas.
 	 *
@@ -633,7 +654,7 @@ public interface ICadastrosWS
 	@WebResult(name = "refreshTarefasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	TarefaResponse refreshTarefas(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Tarefas.

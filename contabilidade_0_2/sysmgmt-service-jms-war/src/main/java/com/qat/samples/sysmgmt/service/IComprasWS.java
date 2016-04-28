@@ -8,8 +8,17 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.response.ComprasResponse;
+import com.qat.samples.sysmgmt.cotacao.request.CotacaoInquiryRequest;
+import com.qat.samples.sysmgmt.cotacao.request.CotacaoMaintenanceRequest;
+import com.qat.samples.sysmgmt.cotacao.response.CotacaoResponse;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalEntradaMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.PedidoComprasInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.PedidoComprasMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.response.NotaFiscalEntradaResponse;
+import com.qat.samples.sysmgmt.nf.model.response.PedidoComprasResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -32,7 +41,7 @@ public interface IComprasWS
 	@WebResult(name = "insertNotaFiscalEntradasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	NotaFiscalEntradaResponse insertNotaFiscalEntrada(@WebParam(name = "request") NotaFiscalEntradaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of NotaFiscalEntradas.
 	 *
@@ -44,7 +53,7 @@ public interface IComprasWS
 	@WebResult(name = "updateNotaFiscalEntradasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	NotaFiscalEntradaResponse updateNotaFiscalEntrada(@WebParam(name = "request") NotaFiscalEntradaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of NotaFiscalEntradas.
 	 *
@@ -56,7 +65,7 @@ public interface IComprasWS
 	@WebResult(name = "deleteNotaFiscalEntradasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	NotaFiscalEntradaResponse deleteNotaFiscalEntrada(@WebParam(name = "request") NotaFiscalEntradaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of NotaFiscalEntradas.
 	 *
@@ -68,7 +77,7 @@ public interface IComprasWS
 	@WebResult(name = "fetchNotaFiscalEntradaByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	NotaFiscalEntradaResponse fetchNotaFiscalEntradaById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of NotaFiscalEntradas.
 	 *
@@ -79,9 +88,9 @@ public interface IComprasWS
 	@WebMethod(action = "fetchNotaFiscalEntradasByRequest")
 	@WebResult(name = "fetchNotaFiscalEntradasByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
-	NotaFiscalEntradaResponse fetchNotaFiscalEntradasByRequest(@WebParam(name = "request") NotaFiscalEntradaInquiryRequest request);
-	
-	
+	NotaFiscalEntradaResponse fetchNotaFiscalEntradasByRequest(@WebParam(name = "request") NotaFiscalInquiryRequest request);
+
+
 	/**
 	 * Rebuild a list of NotaFiscalEntradas.
 	 *
@@ -93,7 +102,7 @@ public interface IComprasWS
 	@WebResult(name = "refreshNotaFiscalEntradasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	NotaFiscalEntradaResponse refreshNotaFiscalEntradas(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all NotaFiscalEntradas.
@@ -122,7 +131,7 @@ public interface IComprasWS
 	@WebResult(name = "insertPedidoComprassReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	PedidoComprasResponse insertPedidoCompras(@WebParam(name = "request") PedidoComprasMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of PedidoComprass.
 	 *
@@ -134,7 +143,7 @@ public interface IComprasWS
 	@WebResult(name = "updatePedidoComprassReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	PedidoComprasResponse updatePedidoCompras(@WebParam(name = "request") PedidoComprasMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of PedidoComprass.
 	 *
@@ -146,7 +155,7 @@ public interface IComprasWS
 	@WebResult(name = "deletePedidoComprassReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	PedidoComprasResponse deletePedidoCompras(@WebParam(name = "request") PedidoComprasMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of PedidoComprass.
 	 *
@@ -158,7 +167,7 @@ public interface IComprasWS
 	@WebResult(name = "fetchPedidoComprasByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	PedidoComprasResponse fetchPedidoComprasById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of PedidoComprass.
 	 *
@@ -170,8 +179,8 @@ public interface IComprasWS
 	@WebResult(name = "fetchPedidoComprassByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	PedidoComprasResponse fetchPedidoComprassByRequest(@WebParam(name = "request") PedidoComprasInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of PedidoComprass.
 	 *
@@ -183,7 +192,7 @@ public interface IComprasWS
 	@WebResult(name = "refreshPedidoComprassReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	PedidoComprasResponse refreshPedidoComprass(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all PedidoComprass.
@@ -212,7 +221,7 @@ public interface IComprasWS
 	@WebResult(name = "insertCotacaosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CotacaoResponse insertCotacao(@WebParam(name = "request") CotacaoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Cotacaos.
 	 *
@@ -224,7 +233,7 @@ public interface IComprasWS
 	@WebResult(name = "updateCotacaosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CotacaoResponse updateCotacao(@WebParam(name = "request") CotacaoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Cotacaos.
 	 *
@@ -236,7 +245,7 @@ public interface IComprasWS
 	@WebResult(name = "deleteCotacaosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CotacaoResponse deleteCotacao(@WebParam(name = "request") CotacaoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Cotacaos.
 	 *
@@ -248,7 +257,7 @@ public interface IComprasWS
 	@WebResult(name = "fetchCotacaoByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CotacaoResponse fetchCotacaoById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Cotacaos.
 	 *
@@ -260,8 +269,8 @@ public interface IComprasWS
 	@WebResult(name = "fetchCotacaosByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CotacaoResponse fetchCotacaosByRequest(@WebParam(name = "request") CotacaoInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Cotacaos.
 	 *
@@ -273,7 +282,7 @@ public interface IComprasWS
 	@WebResult(name = "refreshCotacaosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CotacaoResponse refreshCotacaos(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Cotacaos.

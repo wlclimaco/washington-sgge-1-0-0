@@ -8,9 +8,21 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.response.EmpresaResponse;
+import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.DepositoMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.EmpresaMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.response.DepositoResponse;
+import com.qat.samples.sysmgmt.entidade.model.response.EmpresaResponse;
+import com.qat.samples.sysmgmt.entidade.model.response.FilialResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
+import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.UsuarioMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.response.UsuarioResponse;
 
 /**
  * The Interface IEmpresaBAS delegate used by a JMS listener. (Business Area Service - BAS)
@@ -32,7 +44,7 @@ public interface IEmpresaWS
 	@WebResult(name = "insertEmpresasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	EmpresaResponse insertEmpresa(@WebParam(name = "request") EmpresaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Empresas.
 	 *
@@ -44,7 +56,7 @@ public interface IEmpresaWS
 	@WebResult(name = "updateEmpresasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	EmpresaResponse updateEmpresa(@WebParam(name = "request") EmpresaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Empresas.
 	 *
@@ -56,7 +68,7 @@ public interface IEmpresaWS
 	@WebResult(name = "deleteEmpresasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	EmpresaResponse deleteEmpresa(@WebParam(name = "request") EmpresaMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Empresas.
 	 *
@@ -68,7 +80,7 @@ public interface IEmpresaWS
 	@WebResult(name = "fetchEmpresaByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	EmpresaResponse fetchEmpresaById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Empresas.
 	 *
@@ -80,8 +92,8 @@ public interface IEmpresaWS
 	@WebResult(name = "fetchEmpresasByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	EmpresaResponse fetchEmpresasByRequest(@WebParam(name = "request") EmpresaInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Empresas.
 	 *
@@ -93,7 +105,7 @@ public interface IEmpresaWS
 	@WebResult(name = "refreshEmpresasReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	EmpresaResponse refreshEmpresas(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Empresas.
@@ -122,7 +134,7 @@ public interface IEmpresaWS
 	@WebResult(name = "insertFilialsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FilialResponse insertFilial(@WebParam(name = "request") FilialMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Filials.
 	 *
@@ -134,7 +146,7 @@ public interface IEmpresaWS
 	@WebResult(name = "updateFilialsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FilialResponse updateFilial(@WebParam(name = "request") FilialMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Filials.
 	 *
@@ -146,7 +158,7 @@ public interface IEmpresaWS
 	@WebResult(name = "deleteFilialsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FilialResponse deleteFilial(@WebParam(name = "request") FilialMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Filials.
 	 *
@@ -158,7 +170,7 @@ public interface IEmpresaWS
 	@WebResult(name = "fetchFilialByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FilialResponse fetchFilialById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Filials.
 	 *
@@ -170,8 +182,8 @@ public interface IEmpresaWS
 	@WebResult(name = "fetchFilialsByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FilialResponse fetchFilialsByRequest(@WebParam(name = "request") FilialInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Filials.
 	 *
@@ -183,7 +195,7 @@ public interface IEmpresaWS
 	@WebResult(name = "refreshFilialsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FilialResponse refreshFilials(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Filials.
@@ -212,7 +224,7 @@ public interface IEmpresaWS
 	@WebResult(name = "insertDepositosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	DepositoResponse insertDeposito(@WebParam(name = "request") DepositoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Depositos.
 	 *
@@ -224,7 +236,7 @@ public interface IEmpresaWS
 	@WebResult(name = "updateDepositosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	DepositoResponse updateDeposito(@WebParam(name = "request") DepositoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Depositos.
 	 *
@@ -236,7 +248,7 @@ public interface IEmpresaWS
 	@WebResult(name = "deleteDepositosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	DepositoResponse deleteDeposito(@WebParam(name = "request") DepositoMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Depositos.
 	 *
@@ -248,7 +260,7 @@ public interface IEmpresaWS
 	@WebResult(name = "fetchDepositoByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	DepositoResponse fetchDepositoById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Depositos.
 	 *
@@ -260,8 +272,8 @@ public interface IEmpresaWS
 	@WebResult(name = "fetchDepositosByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	DepositoResponse fetchDepositosByRequest(@WebParam(name = "request") DepositoInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Depositos.
 	 *
@@ -273,7 +285,7 @@ public interface IEmpresaWS
 	@WebResult(name = "refreshDepositosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	DepositoResponse refreshDepositos(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Depositos.
@@ -302,7 +314,7 @@ public interface IEmpresaWS
 	@WebResult(name = "insertUsuariosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	UsuarioResponse insertUsuario(@WebParam(name = "request") UsuarioMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Usuarios.
 	 *
@@ -314,7 +326,7 @@ public interface IEmpresaWS
 	@WebResult(name = "updateUsuariosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	UsuarioResponse updateUsuario(@WebParam(name = "request") UsuarioMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Usuarios.
 	 *
@@ -326,7 +338,7 @@ public interface IEmpresaWS
 	@WebResult(name = "deleteUsuariosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	UsuarioResponse deleteUsuario(@WebParam(name = "request") UsuarioMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Usuarios.
 	 *
@@ -338,7 +350,7 @@ public interface IEmpresaWS
 	@WebResult(name = "fetchUsuarioByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	UsuarioResponse fetchUsuarioById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Usuarios.
 	 *
@@ -350,8 +362,8 @@ public interface IEmpresaWS
 	@WebResult(name = "fetchUsuariosByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	UsuarioResponse fetchUsuariosByRequest(@WebParam(name = "request") UsuarioInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Usuarios.
 	 *
@@ -363,7 +375,7 @@ public interface IEmpresaWS
 	@WebResult(name = "refreshUsuariosReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	UsuarioResponse refreshUsuarios(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Usuarios.

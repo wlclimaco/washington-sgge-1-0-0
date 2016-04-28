@@ -8,8 +8,17 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.response.DicionarioResponse;
+import com.qat.samples.sysmgmt.dicionario.request.ClassesInquiryRequest;
+import com.qat.samples.sysmgmt.dicionario.request.ClassesMaintenanceRequest;
+import com.qat.samples.sysmgmt.dicionario.request.FieldInquiryRequest;
+import com.qat.samples.sysmgmt.dicionario.request.FieldMaintenanceRequest;
+import com.qat.samples.sysmgmt.dicionario.request.InterfaceInquiryRequest;
+import com.qat.samples.sysmgmt.dicionario.request.InterfaceMaintenanceRequest;
+import com.qat.samples.sysmgmt.dicionario.response.ClassesResponse;
+import com.qat.samples.sysmgmt.dicionario.response.FieldResponse;
+import com.qat.samples.sysmgmt.dicionario.response.InterfaceResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -32,7 +41,7 @@ public interface IDicionarioWS
 	@WebResult(name = "insertClassessReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ClassesResponse insertClasses(@WebParam(name = "request") ClassesMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Classess.
 	 *
@@ -44,7 +53,7 @@ public interface IDicionarioWS
 	@WebResult(name = "updateClassessReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ClassesResponse updateClasses(@WebParam(name = "request") ClassesMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Classess.
 	 *
@@ -56,7 +65,7 @@ public interface IDicionarioWS
 	@WebResult(name = "deleteClassessReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ClassesResponse deleteClasses(@WebParam(name = "request") ClassesMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Classess.
 	 *
@@ -68,7 +77,7 @@ public interface IDicionarioWS
 	@WebResult(name = "fetchClassesByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ClassesResponse fetchClassesById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Classess.
 	 *
@@ -80,8 +89,8 @@ public interface IDicionarioWS
 	@WebResult(name = "fetchClassessByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ClassesResponse fetchClassessByRequest(@WebParam(name = "request") ClassesInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Classess.
 	 *
@@ -93,7 +102,7 @@ public interface IDicionarioWS
 	@WebResult(name = "refreshClassessReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	ClassesResponse refreshClassess(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Classess.
@@ -122,7 +131,7 @@ public interface IDicionarioWS
 	@WebResult(name = "insertInterfacesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	InterfaceResponse insertInterface(@WebParam(name = "request") InterfaceMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Interfaces.
 	 *
@@ -134,7 +143,7 @@ public interface IDicionarioWS
 	@WebResult(name = "updateInterfacesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	InterfaceResponse updateInterface(@WebParam(name = "request") InterfaceMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Interfaces.
 	 *
@@ -146,7 +155,7 @@ public interface IDicionarioWS
 	@WebResult(name = "deleteInterfacesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	InterfaceResponse deleteInterface(@WebParam(name = "request") InterfaceMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Interfaces.
 	 *
@@ -158,7 +167,7 @@ public interface IDicionarioWS
 	@WebResult(name = "fetchInterfaceByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	InterfaceResponse fetchInterfaceById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Interfaces.
 	 *
@@ -170,8 +179,8 @@ public interface IDicionarioWS
 	@WebResult(name = "fetchInterfacesByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	InterfaceResponse fetchInterfacesByRequest(@WebParam(name = "request") InterfaceInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Interfaces.
 	 *
@@ -183,7 +192,7 @@ public interface IDicionarioWS
 	@WebResult(name = "refreshInterfacesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	InterfaceResponse refreshInterfaces(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Interfaces.
@@ -212,7 +221,7 @@ public interface IDicionarioWS
 	@WebResult(name = "insertFieldsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FieldResponse insertField(@WebParam(name = "request") FieldMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Fields.
 	 *
@@ -224,7 +233,7 @@ public interface IDicionarioWS
 	@WebResult(name = "updateFieldsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FieldResponse updateField(@WebParam(name = "request") FieldMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Fields.
 	 *
@@ -236,7 +245,7 @@ public interface IDicionarioWS
 	@WebResult(name = "deleteFieldsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FieldResponse deleteField(@WebParam(name = "request") FieldMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Fields.
 	 *
@@ -248,7 +257,7 @@ public interface IDicionarioWS
 	@WebResult(name = "fetchFieldByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FieldResponse fetchFieldById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Fields.
 	 *
@@ -260,8 +269,8 @@ public interface IDicionarioWS
 	@WebResult(name = "fetchFieldsByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FieldResponse fetchFieldsByRequest(@WebParam(name = "request") FieldInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Fields.
 	 *
@@ -273,7 +282,7 @@ public interface IDicionarioWS
 	@WebResult(name = "refreshFieldsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	FieldResponse refreshFields(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Fields.

@@ -8,8 +8,17 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.model.response.FiscalResponse;
+import com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest;
+import com.qat.samples.sysmgmt.cfop.model.request.CfopMaintenanceRequest;
+import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
+import com.qat.samples.sysmgmt.cnae.model.request.CnaeMaintenanceRequest;
+import com.qat.samples.sysmgmt.cnae.model.response.CnaeResponse;
+import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.RegimeMaintenanceRequest;
+import com.qat.samples.sysmgmt.fiscal.model.response.RegimeResponse;
+import com.qat.samples.sysmgmt.produto.model.response.CfopResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -32,7 +41,7 @@ public interface IFiscalWS
 	@WebResult(name = "insertRegimesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	RegimeResponse insertRegime(@WebParam(name = "request") RegimeMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Regimes.
 	 *
@@ -44,7 +53,7 @@ public interface IFiscalWS
 	@WebResult(name = "updateRegimesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	RegimeResponse updateRegime(@WebParam(name = "request") RegimeMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Regimes.
 	 *
@@ -56,7 +65,7 @@ public interface IFiscalWS
 	@WebResult(name = "deleteRegimesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	RegimeResponse deleteRegime(@WebParam(name = "request") RegimeMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Regimes.
 	 *
@@ -68,7 +77,7 @@ public interface IFiscalWS
 	@WebResult(name = "fetchRegimeByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	RegimeResponse fetchRegimeById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Regimes.
 	 *
@@ -80,8 +89,8 @@ public interface IFiscalWS
 	@WebResult(name = "fetchRegimesByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	RegimeResponse fetchRegimesByRequest(@WebParam(name = "request") RegimeInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Regimes.
 	 *
@@ -93,7 +102,7 @@ public interface IFiscalWS
 	@WebResult(name = "refreshRegimesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	RegimeResponse refreshRegimes(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Regimes.
@@ -122,7 +131,7 @@ public interface IFiscalWS
 	@WebResult(name = "insertCfopsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CfopResponse insertCfop(@WebParam(name = "request") CfopMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Cfops.
 	 *
@@ -134,7 +143,7 @@ public interface IFiscalWS
 	@WebResult(name = "updateCfopsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CfopResponse updateCfop(@WebParam(name = "request") CfopMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Cfops.
 	 *
@@ -146,7 +155,7 @@ public interface IFiscalWS
 	@WebResult(name = "deleteCfopsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CfopResponse deleteCfop(@WebParam(name = "request") CfopMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Cfops.
 	 *
@@ -158,7 +167,7 @@ public interface IFiscalWS
 	@WebResult(name = "fetchCfopByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CfopResponse fetchCfopById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Cfops.
 	 *
@@ -170,8 +179,8 @@ public interface IFiscalWS
 	@WebResult(name = "fetchCfopsByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CfopResponse fetchCfopsByRequest(@WebParam(name = "request") CfopInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Cfops.
 	 *
@@ -183,7 +192,7 @@ public interface IFiscalWS
 	@WebResult(name = "refreshCfopsReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CfopResponse refreshCfops(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Cfops.
@@ -212,7 +221,7 @@ public interface IFiscalWS
 	@WebResult(name = "insertCnaesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CnaeResponse insertCnae(@WebParam(name = "request") CnaeMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Cnaes.
 	 *
@@ -224,7 +233,7 @@ public interface IFiscalWS
 	@WebResult(name = "updateCnaesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CnaeResponse updateCnae(@WebParam(name = "request") CnaeMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Cnaes.
 	 *
@@ -236,7 +245,7 @@ public interface IFiscalWS
 	@WebResult(name = "deleteCnaesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CnaeResponse deleteCnae(@WebParam(name = "request") CnaeMaintenanceRequest request);
-	
+
 	/**
 	 * Rebuild a list of Cnaes.
 	 *
@@ -248,7 +257,7 @@ public interface IFiscalWS
 	@WebResult(name = "fetchCnaeByIdReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CnaeResponse fetchCnaeById(@WebParam(name = "request") FetchByIdRequest request);
-	
+
 	/**
 	 * Rebuild a list of Cnaes.
 	 *
@@ -260,8 +269,8 @@ public interface IFiscalWS
 	@WebResult(name = "fetchCnaesByRequestReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CnaeResponse fetchCnaesByRequest(@WebParam(name = "request") CnaeInquiryRequest request);
-	
-	
+
+
 	/**
 	 * Rebuild a list of Cnaes.
 	 *
@@ -273,7 +282,7 @@ public interface IFiscalWS
 	@WebResult(name = "refreshCnaesReturn")
 	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
 	CnaeResponse refreshCnaes(@WebParam(name = "request") RefreshRequest request);
-	
+
 
 	/**
 	 * Fetch all Cnaes.
@@ -287,95 +296,6 @@ public interface IFiscalWS
 	@WSDLDocumentation(value = "Returns a complete list of all counties.")
 	CnaeResponse fetchAllCnaes(@WebParam(name = "request") FetchAllRequest request);
 
-
-
-//===================================### CNAEEMPRESA ####======================================
-
-/**
-	 * Rebuild a list of CnaeEmpresas.
-	 *
-	 * @param request CnaeEmpresaRequest object containing parameter for building the list of CnaeEmpresa objects.
-	 *
-	 * @return the CnaeEmpresaResponse containing the list of CnaeEmpresas built
-	 */
-	@WebMethod(action = "insertCnaeEmpresas")
-	@WebResult(name = "insertCnaeEmpresasReturn")
-	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
-	CnaeEmpresaResponse insertCnaeEmpresa(@WebParam(name = "request") CnaeEmpresaMaintenanceRequest request);
-	
-	/**
-	 * Rebuild a list of CnaeEmpresas.
-	 *
-	 * @param request CnaeEmpresaRequest object containing parameter for building the list of CnaeEmpresa objects.
-	 *
-	 * @return the CnaeEmpresaResponse containing the list of CnaeEmpresas built
-	 */
-	@WebMethod(action = "updateCnaeEmpresas")
-	@WebResult(name = "updateCnaeEmpresasReturn")
-	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
-	CnaeEmpresaResponse updateCnaeEmpresa(@WebParam(name = "request") CnaeEmpresaMaintenanceRequest request);
-	
-	/**
-	 * Rebuild a list of CnaeEmpresas.
-	 *
-	 * @param request CnaeEmpresaRequest object containing parameter for building the list of CnaeEmpresa objects.
-	 *
-	 * @return the CnaeEmpresaResponse containing the list of CnaeEmpresas built
-	 */
-	@WebMethod(action = "deleteCnaeEmpresas")
-	@WebResult(name = "deleteCnaeEmpresasReturn")
-	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
-	CnaeEmpresaResponse deleteCnaeEmpresa(@WebParam(name = "request") CnaeEmpresaMaintenanceRequest request);
-	
-	/**
-	 * Rebuild a list of CnaeEmpresas.
-	 *
-	 * @param request CnaeEmpresaRequest object containing parameter for building the list of CnaeEmpresa objects.
-	 *
-	 * @return the CnaeEmpresaResponse containing the list of CnaeEmpresas built
-	 */
-	@WebMethod(action = "fetchCnaeEmpresaById")
-	@WebResult(name = "fetchCnaeEmpresaByIdReturn")
-	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
-	CnaeEmpresaResponse fetchCnaeEmpresaById(@WebParam(name = "request") FetchByIdRequest request);
-	
-	/**
-	 * Rebuild a list of CnaeEmpresas.
-	 *
-	 * @param request CnaeEmpresaRequest object containing parameter for building the list of CnaeEmpresa objects.
-	 *
-	 * @return the CnaeEmpresaResponse containing the list of CnaeEmpresas built
-	 */
-	@WebMethod(action = "fetchCnaeEmpresasByRequest")
-	@WebResult(name = "fetchCnaeEmpresasByRequestReturn")
-	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
-	CnaeEmpresaResponse fetchCnaeEmpresasByRequest(@WebParam(name = "request") CnaeEmpresaInquiryRequest request);
-	
-	
-	/**
-	 * Rebuild a list of CnaeEmpresas.
-	 *
-	 * @param request CnaeEmpresaRequest object containing parameter for building the list of CnaeEmpresa objects.
-	 *
-	 * @return the CnaeEmpresaResponse containing the list of CnaeEmpresas built
-	 */
-	@WebMethod(action = "refreshCnaeEmpresas")
-	@WebResult(name = "refreshCnaeEmpresasReturn")
-	@WSDLDocumentation(value = "Used for demo purposes only, rebuilds the county table.")
-	CnaeEmpresaResponse refreshCnaeEmpresas(@WebParam(name = "request") RefreshRequest request);
-	
-
-	/**
-	 * Fetch all CnaeEmpresas.
-	 *
-	 * @param request the request
-	 *
-	 * @return the CnaeEmpresaResponse containing all CnaeEmpresa objects
-	 */
-	@WebMethod(action = "fetchAllCnaeEmpresas")
-	@WebResult(name = "fetchAllCnaeEmpresasReturn")
-	@WSDLDocumentation(value = "Returns a complete list of all counties.")
-	CnaeEmpresaResponse fetchAllCnaeEmpresas(@WebParam(name = "request") FetchAllRequest request);
 
 
 }

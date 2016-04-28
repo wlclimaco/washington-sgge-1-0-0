@@ -1,16 +1,29 @@
 /** create by system gera-java version 1.0.0 28/04/2016 16:21 : 34*/
 package com.qat.samples.sysmgmt.service.impl;
 import javax.jws.WebService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IAdvogadoBAC;
-import com.qat.samples.sysmgmt.model.Advogado;
-import com.qat.samples.sysmgmt.model.response.AdvogadoResponse;
+import com.qat.samples.sysmgmt.advocacia.Advogado;
+import com.qat.samples.sysmgmt.advocacia.Audiencia;
+import com.qat.samples.sysmgmt.advocacia.Processo;
+import com.qat.samples.sysmgmt.advocacia.request.AdvogadoInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.request.AdvogadoMaintenanceRequest;
+import com.qat.samples.sysmgmt.advocacia.request.AudienciaInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.request.AudienciaMaintenanceRequest;
+import com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.request.ProcessoMaintenanceRequest;
+import com.qat.samples.sysmgmt.advocacia.response.AdvogadoResponse;
+import com.qat.samples.sysmgmt.advocacia.response.AudienciaResponse;
+import com.qat.samples.sysmgmt.advocacia.response.ProcessoResponse;
+import com.qat.samples.sysmgmt.bac.Advogado.IAdvocaciaBAC;
 import com.qat.samples.sysmgmt.service.IAdvogadoWS;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 /**
  * AdvogadoWS used to provide WS interface. Delegates all calls to the IAdvogadoBAC.
@@ -28,27 +41,29 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 	private static final String CLASS_NAME = AdvogadoWSImpl.class.getName();
 	/** The Constant LOG. */
 	private static final Logger LOG = LoggerFactory.getLogger(AdvogadoWSImpl.class);
-	private IAdvogadoBAC advogadoBAC;
+	private IAdvocaciaBAC advogadoBAC;
 	/**
 	 * @return the advogadoBAC which is expected to provide the implementation.
 	 */
-	public IAdvogadoBAC getAdvogadoBAC()
-	{	
+	public IAdvocaciaBAC getAdvogadoBAC()
+	{
 		return advogadoBAC;
 	}
-
-//===================================### ADVOGADO ####======================================
 
 	/**
 	 * Spring injection uses this method to inject an implementation of {@link IAdvogadoBAC}.
 	 *
 	 * @param advogadoBAC the advogadoBAC to set.
 	 */
-	public void setAdvogadoBAC(IAdvogadoBAC advogadoBAC)
+	public void setAdvogadoBAC(IAdvocaciaBAC advogadoBAC)
 	{
 		this.advogadoBAC = advogadoBAC;
 	}
-	
+
+//===================================### ADVOGADO ####======================================
+
+
+
 	/**
 	 * Delegates call to {@link IAdvogadoBAC}
 	 *
@@ -72,7 +87,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IAdvogadoBAC}
 	 *
@@ -96,7 +111,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IAdvogadoBAC}
 	 *
@@ -120,7 +135,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IAdvogadoBAC}
 	 *
@@ -144,7 +159,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IAdvogadoBAC}
 	 *
@@ -203,7 +218,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		AdvogadoResponse response = new AdvogadoResponse();
 		try
 		{
-			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().fetchAllAdvogados();
+			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().fetchAllAdvogados(new Advogado());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -214,18 +229,6 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		return response;
 	}
 
-//===================================### AUDIENCIA ####======================================
-
-	/**
-	 * Spring injection uses this method to inject an implementation of {@link IAudienciaBAC}.
-	 *
-	 * @param audienciaBAC the audienciaBAC to set.
-	 */
-	public void setAudienciaBAC(IAudienciaBAC audienciaBAC)
-	{
-		this.audienciaBAC = audienciaBAC;
-	}
-	
 	/**
 	 * Delegates call to {@link IAudienciaBAC}
 	 *
@@ -239,7 +242,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		AudienciaResponse response = new AudienciaResponse();
 		try
 		{
-			InternalResultsResponse<Audiencia> internalResponse = getAudienciaBAC().insertAudiencia(request);
+			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().insertAudiencia(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -249,7 +252,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IAudienciaBAC}
 	 *
@@ -263,7 +266,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		AudienciaResponse response = new AudienciaResponse();
 		try
 		{
-			InternalResultsResponse<Audiencia> internalResponse = getAudienciaBAC().updateAudiencia(request);
+			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().updateAudiencia(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -273,7 +276,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IAudienciaBAC}
 	 *
@@ -297,7 +300,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IAudienciaBAC}
 	 *
@@ -321,7 +324,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IAudienciaBAC}
 	 *
@@ -402,7 +405,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 	{
 		this.processoBAC = processoBAC;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IProcessoBAC}
 	 *
@@ -426,7 +429,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IProcessoBAC}
 	 *
@@ -450,7 +453,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IProcessoBAC}
 	 *
@@ -474,7 +477,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IProcessoBAC}
 	 *
@@ -498,7 +501,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IProcessoBAC}
 	 *
