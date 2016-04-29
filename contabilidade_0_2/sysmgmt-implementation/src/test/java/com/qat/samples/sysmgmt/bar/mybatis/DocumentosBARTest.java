@@ -57,9 +57,9 @@ public IDocumentoBAR getDocumentoBAR()
 @Test
 	public void testDeleteDocumento()
 	{
-		Documento documento = new Documento(1, DocumentoTypeEnum.CERTIDADONASCIMENTO, "000", (new Date()).getTime(), new Estado(1), PersistenceActionEnum.INSERT);
+		Documento documento = new Documento(4, DocumentoTypeEnum.CERTIDADONASCIMENTO, "000", (new Date()).getTime(), new Estado(1), PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(999);
+		request.setFetchId(4);
 		Documento documentoResponse = getDocumentoBAR().fetchDocumentoById(request);
 		Assert.assertEquals(documentoResponse, null);
 		getDocumentoBAR().insertDocumento(documento);
@@ -90,14 +90,14 @@ public IDocumentoBAR getDocumentoBAR()
 	@Test
 	public void testUpdateDocumento()
 	{
-		Documento documento = new Documento(1, DocumentoTypeEnum.CERTIDADONASCIMENTO, "000", (new Date()).getTime(), new Estado(1), PersistenceActionEnum.INSERT);
+		Documento documento = new Documento(1, DocumentoTypeEnum.CERTIDADONASCIMENTO, "numero_6", (new Date()).getTime(), new Estado(1), PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1234);
+		request.setFetchId(1);
 		Documento documentoResponse = getDocumentoBAR().fetchDocumentoById(request);
-		Assert.assertEquals(documentoResponse.getNumero(), "NATIVE INSERT");
+		Assert.assertEquals(documentoResponse.getNumero(), "numero_5");
 		getDocumentoBAR().updateDocumento(documento);
 		documentoResponse = getDocumentoBAR().fetchDocumentoById(request);
-		Assert.assertEquals(documentoResponse.getNumero(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(documentoResponse.getNumero(), "numero_6");
 	}
 
 	@Test

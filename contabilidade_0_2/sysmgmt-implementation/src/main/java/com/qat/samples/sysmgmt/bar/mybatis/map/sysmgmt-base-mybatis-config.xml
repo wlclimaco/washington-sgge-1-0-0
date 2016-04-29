@@ -31,6 +31,7 @@
 
 
 
+
   		<typeAlias alias="TabelaEnum" type="com.qat.samples.sysmgmt.util.model.TabelaEnum"/>
   		<typeAlias alias="AcaoEnum" type="com.qat.samples.sysmgmt.util.model.AcaoEnum"/>
   		<typeAlias alias="CdStatusTypeEnum" type="com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum"/>

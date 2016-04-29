@@ -27,17 +27,18 @@
   </resultMap>
 
   <sql id="allDocumentoColumns">
-create_date
-,create_user
-,modify_date
-,modify_user
-,id
+
+id
 ,tabelaEnumValue
 ,parentId
 ,processId
 ,documentoTypeEnumValue
 ,numero
 ,data
+,create_date
+,create_user
+,modify_date
+,modify_user
 
 </sql>
 <sql id="allDocumentoValues">
@@ -48,10 +49,10 @@ create_date
 #{documentoTypeEnumValue},
 #{numero},
 #{data},
-		#{createDateUTC},
-		#{createUser},
-		#{modifyDateUTC},
-		#{modifyUser}
+#{createDateUTC},
+#{createUser},
+#{modifyDateUTC},
+#{modifyUser}
   </sql>
 
  <sql id="allDocumentoColumnsWithQualifier">
@@ -106,8 +107,6 @@ c.data,
 
  <update id="updateDocumento" parameterType="Documento">
    UPDATE documento SET
-     documento_desc = #{description}
-<if test="id!= null">id = #{id},</if>
 <if test="tabelaEnumValue!= null">tabelaEnumValue = #{tabelaEnumValue},</if>
 <if test="parentId!= null">parentId = #{parentId},</if>
 <if test="processId!= null">processId = #{processId},</if>

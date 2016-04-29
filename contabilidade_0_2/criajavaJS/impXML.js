@@ -39,18 +39,22 @@ text = text + '  </resultMap>\n';
 text = text + '\n';
 
 text = text + '  <sql id="all'+name+'Columns">\n';
-text = text + 'create_date\n';
-text = text + ',create_user\n';
-text = text + ',modify_date\n';
-text = text + ',modify_user\n';
+
 for(i=0;i < oField.length;i++){
 	if(oField[i].field.xml == true){
 		if(oField[i].field.tipo.indexOf('List') == -1){
-			text = text + ','+oField[i].field.campo+'\n';
+			if(i == 0)
+				text = text + ''+oField[i].field.campo+'\n';
+			else
+				text = text + ','+oField[i].field.campo+'\n';
 		}
 	}
 
 }
+text = text + ',create_date\n';
+text = text + ',create_user\n';
+text = text + ',modify_date\n';
+text = text + ',modify_user\n';
 text = text + '\n';
 text = text + '</sql>\n';
 text = text + '<sql id="all'+name+'Values">\n';
@@ -98,33 +102,16 @@ text = text + '	<include refid="all'+name+'Columns" />\n';
  text = text + ' </select>\n';
 text = text + '\n';
  text = text + ' <select id="fetchAll'+name+'sRequest" parameterType="'+name+'InquiryRequest" resultMap="'+name+'Result">\n';
- text = text + ' 	<if test="_databaseId == '+'Oracle'+'">\n';
-text = text + '		SELECT * FROM (\n';
-text = text + '		SELECT * FROM (\n';
-text = text + '		SELECT <include refid="all'+name+'ColumnsWithQualifier" />,\n';
-text = text + '		ROWNUM ROWNUM_ FROM '+name.toLowerCase()+' c ORDER BY id ASC\n';
-text = text + '		) WHERE ROWNUM_ <![CDATA[ > ]]>\n';
-text = text + '		( #{startPage} * #{pageSize} )\n';
-text = text + '		) WHERE ROWNUM <![CDATA[ <= ]]>\n';
-text = text + '		#{pageSize}\n';
- text = text + '   </if>\n';
 text = text + '\n';
- text = text + '  	 <if test="_databaseId == '+'PostgreSQL'+'">\n';
 text = text + '		SELECT <include refid="all'+name+'Columns" />\n';
  text = text + '  		  FROM '+name.toLowerCase()+' ORDER BY id ASC\n';
 text = text + '		  OFFSET ( #{startPage} * #{pageSize} )\n';
 text = text + '		  LIMIT #{pageSize}\n';
-  text = text + '  </if>\n';
   text = text + '</select>\n';
 text = text + '\n';
   text = text + '<select id="fetch'+name+'RowCount" resultType="Integer">\n';
-  text = text + '    <if test="_databaseId == '+'PostgreSQL'+'">\n';
 	text = text + '		SELECT COUNT(*) AS RECORD_COUNT FROM '+name.toLowerCase()+' WHERE id IS NOT NULL\n';
-   text = text + '   </if>\n';
 text = text + '\n';
-   	text = text + '  <if test="_databaseId == '+'Oracle'+'">\n';
-	text = text + '	 	SELECT COUNT(id) AS RECORD_COUNT FROM '+name.toLowerCase()+'\n';
-    text = text + '  </if>\n';
  text = text + ' </select>\n';
 text = text + '\n';
  text = text + ' <insert id="insert'+name+'" parameterType="'+name+'">\n';
@@ -136,10 +123,10 @@ text = text + '	<include refid="all'+name+'Columns" />\n';
 text = text + '\n';
  text = text + ' <update id="update'+name+'" parameterType="'+name+'">\n';
  text = text + '   UPDATE '+name.toLowerCase()+' SET\n';
- text = text + '     '+name.toLowerCase()+'_desc = #{description}\n';
+
  for(i=0;i < oField.length;i++){
 	if(oField[i].field.xml == true){
-		if(oField[i].field.tipo.indexOf('List') == -1){
+		if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.tipo.indexOf('id'))){
 			text = text + '<if test="'+oField[i].field.campo+'!= null">'+oField[i].field.campo+' = #{'+oField[i].field.campo+'},</if>\n';
 		}
 	}

@@ -55,9 +55,9 @@ public IEmailBAR getEmailBAR()
 @Test
 	public void testDeleteEmail()
 	{
-		Email email = new Email(1, "wlclimaco@gmail.com", EmailTypeEnum.COMPRAS, PersistenceActionEnum.NONE);
+		Email email = new Email(4, "wlclimaco@gmail.com", EmailTypeEnum.COMPRAS, PersistenceActionEnum.NONE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(999);
+		request.setFetchId(4);
 		Email emailResponse = getEmailBAR().fetchEmailById(request);
 		Assert.assertEquals(emailResponse, null);
 		getEmailBAR().insertEmail(email);
@@ -88,14 +88,14 @@ public IEmailBAR getEmailBAR()
 	@Test
 	public void testUpdateEmail()
 	{
-		Email email = new Email(1, "wlclimaco@gmail.com", EmailTypeEnum.COMPRAS, PersistenceActionEnum.NONE);
+		Email email = new Email(1, "wlclimaco@gmail.com.br", EmailTypeEnum.COMPRAS, PersistenceActionEnum.NONE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1234);
+		request.setFetchId(1);
 		Email emailResponse = getEmailBAR().fetchEmailById(request);
-		Assert.assertEquals(emailResponse.getEmail(), "NATIVE INSERT");
+		Assert.assertEquals(emailResponse.getEmail(), "email_4");
 		getEmailBAR().updateEmail(email);
 		emailResponse = getEmailBAR().fetchEmailById(request);
-		Assert.assertEquals(emailResponse.getEmail(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(emailResponse.getEmail(), "wlclimaco@gmail.com.br");
 	}
 
 	@Test
@@ -107,7 +107,6 @@ public IEmailBAR getEmailBAR()
 		request.setStartPage(0);
 		request.setPageSize(3);
 		InternalResultsResponse<Email> response = getEmailBAR().fetchEmailsByRequest(request);
-		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 		// check for valid and precount and start 2nd page
@@ -115,7 +114,6 @@ public IEmailBAR getEmailBAR()
 		request.setStartPage(1);
 		request.setPageSize(3);
 		response = getEmailBAR().fetchEmailsByRequest(request);
-		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 

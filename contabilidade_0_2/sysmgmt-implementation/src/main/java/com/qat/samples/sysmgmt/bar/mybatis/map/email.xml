@@ -1,138 +1,123 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-
+<!-- create by system gera-java version 1.0.0 29/04/2016 12:49 : 21-->
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="EmailMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
-	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
-
-  	<!-- Result maps describe the mapping between the columns returned
-       from a query, and the class properties.  A result map isn't
-       necessary if the columns (or aliases) match to the properties
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
        exactly. -->
-
-  <resultMap id="emailResult" type="Email">
-    <result property="id" column="id" />
-    <result property="tabelaEnumValue" column="tabela" />
-   	<result property="parentId" column="parentId"/>
-	<result property="typeValue" column="type"/>
-	<result property="email" column="email" />
-    <result property="emailTypeEnumValue" column="emailType" />
-	<result property="createUser" column="create_user"/>
-	<result property="createDataUTC" column="create_date"/>
-	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDataUTC" column="modify_date"/>
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmail"/>
+  <resultMap id="EmailResult" type="Email">
+    <result property="id" column="id"/>
+    <result property="tabelaEnumValue" column="tabelaEnumValue"/>
+    <result property="parentId" column="parentId"/>
+    <result property="typeValue" column="typeValue"/>
+    <result property="email" column="email"/>
+    <result property="emailTypeEnumValue" column="emailTypeEnumValue"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
-  <!--
-		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
-	-->
   <sql id="allEmailColumns">
-		 tabela
-		,parentId
-		,type
-		,email
-		,emailType
-      	,create_date
-      	,create_user
-      	,modify_date
-      	,modify_user
+id
+,tabelaEnumValue
+,parentId
+,typeValue
+,email
+,emailTypeEnumValue
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allEmailValues">
+#{id},
+#{tabelaEnumValue},
+#{parentId},
+#{typeValue},
+#{email},
+#{emailTypeEnumValue},
+#{createDateUTC},
+#{createUser},
+#{modifyDateUTC},
+#{modifyUser}
   </sql>
 
-  <sql id="allEmailValues">
-		 #{tabelaEnumValue},
-		 #{parentId},
-		 #{typeValue},
-		 #{email},
-		 #{emailTypeEnumValue},
-    	<include refid="CBOFMap.changeControlFields"/>
-  </sql>
+ <sql id="allEmailColumnsWithQualifier">
+		c.id, c.email_desc
+c.id,
+c.tabelaEnumValue,
+c.parentId,
+c.typeValue,
+c.email,
+c.emailTypeEnumValue,
+		c.createDateUTC,
+		c.createUser,
+		c.modifyDateUTC,
+		c.modifyUser
+ </sql>
 
-  <!--
-		SQL Insert Statements.
- 	-->
-  <insert id="insertEmail" parameterType="Email" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO email (
-		<include refid="allEmailColumns" />
-      )
-    VALUES (<include refid="allEmailValues" /> )
-  </insert>
-
-
-	<!--
-		SQL Update Statements.
- 	-->
-
-  <update id="updateEmail" parameterType="Email">
-    UPDATE email
-    	<set>
-    		<if test="email!= null">email = #{email},</if>
-	    	<if test="emailTypeEnumValue!= null"> emailType=#{emailTypeEnumValue},</if>
-			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
-			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
-		</set>
-    WHERE
-     id = #{id}
-  </update>
-
-   <!--
-		SQL Delete Statements.
-   -->
-  <delete id="deleteEmailById" parameterType="Integer">
-    	DELETE FROM email WHERE id = #{id}
-  </delete>
-
-	<!--
-		SQL Fetch Statements.
- 	-->
-  <select id="fetchEmailRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
-     SELECT COUNT(business_id) AS RECORD_COUNT
-        FROM business
-     WHERE business_type = 2
-     <if test="parentId != null">
-		  AND FK_email_id = #{parentId}
-	 </if>
-  </select>
-
-  <select id="fetchAllEmails" resultMap="emailResult">
+ <select id="fetchAllEmails" resultMap="EmailResult">
     SELECT
 	<include refid="allEmailColumns" />
-    FROM business ORDER BY name ASC
-  </select>
-
- <select id="fetchAllEmailsByEmpresa" parameterType="Integer" resultMap="emailResult">
-	 SELECT
-	<include refid="allEmailColumns" />
-    FROM email  where tabela in(1,51,52) and parentId= #{id} ORDER BY id ASC
+   FROM email ORDER BY id ASC
  </select>
 
-  <select id="fetchAllEmailsByUsuario" parameterType="Integer" resultMap="emailResult">
-	 SELECT
+ <select id="fetchEmailById" parameterType="Integer" resultMap="EmailResult">
+    SELECT
 	<include refid="allEmailColumns" />
-    FROM email  where tabela = 55 and parentId= #{id} ORDER BY id ASC
+   FROM email WHERE id = #{fetchid}
  </select>
 
+ <select id="fetchAllEmailsRequest" parameterType="PagedInquiryRequest" resultMap="EmailResult">
 
- <select id="fetchAllEmailsByMarca" parameterType="Integer" resultMap="emailResult">
-	 SELECT
-	<include refid="allEmailColumns" />
-    FROM email  where tabela = 50 and parentId= #{id} ORDER BY id ASC
+		SELECT <include refid="allEmailColumns" />
+  		  FROM email ORDER BY id ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+</select>
+
+<select id="fetchEmailRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM email WHERE id IS NOT NULL
+
  </select>
 
- <select id="fetchAllEmailsByFuncionario" parameterType="Integer" resultMap="emailResult">
-	 SELECT
+ <insert id="insertEmail" parameterType="Email">
+ 	INSERT INTO email (
 	<include refid="allEmailColumns" />
-    FROM email where tabela in (16,17,18,19,23) and parentId= #{id} ORDER BY id ASC
- </select>
+     )
+   VALUES (<include refid="allEmailValues" /> )
+ </insert>
 
- <select id="fetchAllEmailsByPessoaId" parameterType="Integer" resultMap="emailResult">
-	 SELECT
-	<include refid="allEmailColumns" />
-    FROM email where tabela in (16,17,18,19,23) and parentId= #{id} ORDER BY id ASC
- </select>
+ <update id="updateEmail" parameterType="Email">
+   UPDATE email SET
+<if test="id!= null">id = #{id},</if>
+<if test="tabelaEnumValue!= null">tabelaEnumValue = #{tabelaEnumValue},</if>
+<if test="parentId!= null">parentId = #{parentId},</if>
+<if test="typeValue!= null">typeValue = #{typeValue},</if>
+<if test="email!= null">email = #{email},</if>
+<if test="emailTypeEnumValue!= null">emailTypeEnumValue = #{emailTypeEnumValue},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
 
+<delete id="deleteEmailById" parameterType="Email">
+  DELETE FROM email WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllEmails">
+	DELETE FROM email
+  </delete>
 </mapper>
+
+
