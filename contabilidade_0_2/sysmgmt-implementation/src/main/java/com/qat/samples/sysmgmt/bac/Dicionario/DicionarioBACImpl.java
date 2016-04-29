@@ -584,7 +584,7 @@ public InternalResultsResponse<Field> refreshFields(RefreshRequest request)
 
 	for (int i = 1; i <= refreshNumber; i++)
 	{
-	getDicionarioBAR().insertField(new Field(i, "FieldDesc" + i));
+	getDicionarioBAR().insertField(new Field());
 	}
 
 	// Call maintain to see if we need to return the field list and if so whether it should be paged or not

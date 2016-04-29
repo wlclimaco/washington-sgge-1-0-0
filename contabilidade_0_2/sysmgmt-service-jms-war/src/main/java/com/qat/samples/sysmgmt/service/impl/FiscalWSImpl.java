@@ -1,16 +1,29 @@
-/** create by system gera-java version 1.0.0 28/04/2016 16:21 : 34*/
+/** create by system gera-java version 1.0.0 28/04/2016 20:5 : 32*/
 package com.qat.samples.sysmgmt.service.impl;
 import javax.jws.WebService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IFiscalBAC;
-import com.qat.samples.sysmgmt.model.Fiscal;
-import com.qat.samples.sysmgmt.model.response.FiscalResponse;
+import com.qat.samples.sysmgmt.bac.Fiscal.IFiscalBAC;
+import com.qat.samples.sysmgmt.cfop.model.Cfop;
+import com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest;
+import com.qat.samples.sysmgmt.cfop.model.request.CfopMaintenanceRequest;
+import com.qat.samples.sysmgmt.cnae.model.Cnae;
+import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
+import com.qat.samples.sysmgmt.cnae.model.request.CnaeMaintenanceRequest;
+import com.qat.samples.sysmgmt.cnae.model.response.CnaeResponse;
+import com.qat.samples.sysmgmt.fiscal.model.Regime;
+import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.RegimeMaintenanceRequest;
+import com.qat.samples.sysmgmt.fiscal.model.response.RegimeResponse;
+import com.qat.samples.sysmgmt.produto.model.response.CfopResponse;
 import com.qat.samples.sysmgmt.service.IFiscalWS;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 /**
  * FiscalWS used to provide WS interface. Delegates all calls to the IFiscalBAC.
@@ -33,22 +46,22 @@ public class FiscalWSImpl implements IFiscalWS
 	 * @return the fiscalBAC which is expected to provide the implementation.
 	 */
 	public IFiscalBAC getFiscalBAC()
-	{	
+	{
 		return fiscalBAC;
 	}
+	/**
+	 * Spring injection uses this method to inject an implementation of {@link IFiscalBAC}.
+	 *
+	 * @param fiscalBAC the fiscalBAC to set.
+	 */
+	public void setFiscalBAC(IFiscalBAC fiscalBAC)
+	{
+		this.fiscalBAC = fiscalBAC;
+	}
+
 
 //===================================### REGIME ####======================================
 
-	/**
-	 * Spring injection uses this method to inject an implementation of {@link IRegimeBAC}.
-	 *
-	 * @param regimeBAC the regimeBAC to set.
-	 */
-	public void setRegimeBAC(IRegimeBAC regimeBAC)
-	{
-		this.regimeBAC = regimeBAC;
-	}
-	
 	/**
 	 * Delegates call to {@link IRegimeBAC}
 	 *
@@ -62,7 +75,7 @@ public class FiscalWSImpl implements IFiscalWS
 		RegimeResponse response = new RegimeResponse();
 		try
 		{
-			InternalResultsResponse<Regime> internalResponse = getRegimeBAC().insertRegime(request);
+			InternalResultsResponse<Regime> internalResponse = getFiscalBAC().insertRegime(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -72,7 +85,7 @@ public class FiscalWSImpl implements IFiscalWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IRegimeBAC}
 	 *
@@ -86,7 +99,7 @@ public class FiscalWSImpl implements IFiscalWS
 		RegimeResponse response = new RegimeResponse();
 		try
 		{
-			InternalResultsResponse<Regime> internalResponse = getRegimeBAC().updateRegime(request);
+			InternalResultsResponse<Regime> internalResponse = getFiscalBAC().updateRegime(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -96,7 +109,7 @@ public class FiscalWSImpl implements IFiscalWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IRegimeBAC}
 	 *
@@ -110,7 +123,7 @@ public class FiscalWSImpl implements IFiscalWS
 		RegimeResponse response = new RegimeResponse();
 		try
 		{
-			InternalResultsResponse<Regime> internalResponse = getRegimeBAC().deleteRegime(request);
+			InternalResultsResponse<Regime> internalResponse = getFiscalBAC().deleteRegime(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -120,7 +133,7 @@ public class FiscalWSImpl implements IFiscalWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IRegimeBAC}
 	 *
@@ -134,7 +147,7 @@ public class FiscalWSImpl implements IFiscalWS
 		RegimeResponse response = new RegimeResponse();
 		try
 		{
-			InternalResultsResponse<Regime> internalResponse = getRegimeBAC().fetchRegimeById(request);
+			InternalResultsResponse<Regime> internalResponse = getFiscalBAC().fetchRegimeById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -144,7 +157,7 @@ public class FiscalWSImpl implements IFiscalWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IRegimeBAC}
 	 *
@@ -158,7 +171,7 @@ public class FiscalWSImpl implements IFiscalWS
 		RegimeResponse response = new RegimeResponse();
 		try
 		{
-			InternalResultsResponse<Regime> internalResponse = getRegimeBAC().fetchRegimesByRequest(request);
+			InternalResultsResponse<Regime> internalResponse = getFiscalBAC().fetchRegimesByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -181,7 +194,7 @@ public class FiscalWSImpl implements IFiscalWS
 		RegimeResponse response = new RegimeResponse();
 		try
 		{
-			InternalResultsResponse<Regime> internalResponse = getRegimeBAC().refreshRegimes(request);
+			InternalResultsResponse<Regime> internalResponse = getFiscalBAC().refreshRegimes(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -203,7 +216,7 @@ public class FiscalWSImpl implements IFiscalWS
 		RegimeResponse response = new RegimeResponse();
 		try
 		{
-			InternalResultsResponse<Regime> internalResponse = getRegimeBAC().fetchAllRegimes();
+			InternalResultsResponse<Regime> internalResponse = getFiscalBAC().fetchAllRegimes(new Regime());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -217,16 +230,6 @@ public class FiscalWSImpl implements IFiscalWS
 //===================================### CFOP ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link ICfopBAC}.
-	 *
-	 * @param cfopBAC the cfopBAC to set.
-	 */
-	public void setCfopBAC(ICfopBAC cfopBAC)
-	{
-		this.cfopBAC = cfopBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link ICfopBAC}
 	 *
 	 * @param request a CfopRequest
@@ -239,7 +242,7 @@ public class FiscalWSImpl implements IFiscalWS
 		CfopResponse response = new CfopResponse();
 		try
 		{
-			InternalResultsResponse<Cfop> internalResponse = getCfopBAC().insertCfop(request);
+			InternalResultsResponse<Cfop> internalResponse = getFiscalBAC().insertCfop(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -249,7 +252,7 @@ public class FiscalWSImpl implements IFiscalWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICfopBAC}
 	 *
@@ -263,7 +266,7 @@ public class FiscalWSImpl implements IFiscalWS
 		CfopResponse response = new CfopResponse();
 		try
 		{
-			InternalResultsResponse<Cfop> internalResponse = getCfopBAC().updateCfop(request);
+			InternalResultsResponse<Cfop> internalResponse = getFiscalBAC().updateCfop(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -273,7 +276,7 @@ public class FiscalWSImpl implements IFiscalWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICfopBAC}
 	 *
@@ -287,7 +290,7 @@ public class FiscalWSImpl implements IFiscalWS
 		CfopResponse response = new CfopResponse();
 		try
 		{
-			InternalResultsResponse<Cfop> internalResponse = getCfopBAC().deleteCfop(request);
+			InternalResultsResponse<Cfop> internalResponse = getFiscalBAC().deleteCfop(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -297,7 +300,7 @@ public class FiscalWSImpl implements IFiscalWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICfopBAC}
 	 *
@@ -311,7 +314,7 @@ public class FiscalWSImpl implements IFiscalWS
 		CfopResponse response = new CfopResponse();
 		try
 		{
-			InternalResultsResponse<Cfop> internalResponse = getCfopBAC().fetchCfopById(request);
+			InternalResultsResponse<Cfop> internalResponse = getFiscalBAC().fetchCfopById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -321,7 +324,7 @@ public class FiscalWSImpl implements IFiscalWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICfopBAC}
 	 *
@@ -335,7 +338,7 @@ public class FiscalWSImpl implements IFiscalWS
 		CfopResponse response = new CfopResponse();
 		try
 		{
-			InternalResultsResponse<Cfop> internalResponse = getCfopBAC().fetchCfopsByRequest(request);
+			InternalResultsResponse<Cfop> internalResponse = getFiscalBAC().fetchCfopsByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -358,7 +361,7 @@ public class FiscalWSImpl implements IFiscalWS
 		CfopResponse response = new CfopResponse();
 		try
 		{
-			InternalResultsResponse<Cfop> internalResponse = getCfopBAC().refreshCfops(request);
+			InternalResultsResponse<Cfop> internalResponse = getFiscalBAC().refreshCfops(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -380,7 +383,7 @@ public class FiscalWSImpl implements IFiscalWS
 		CfopResponse response = new CfopResponse();
 		try
 		{
-			InternalResultsResponse<Cfop> internalResponse = getCfopBAC().fetchAllCfops();
+			InternalResultsResponse<Cfop> internalResponse = getFiscalBAC().fetchAllCfops(new Cfop());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -394,16 +397,6 @@ public class FiscalWSImpl implements IFiscalWS
 //===================================### CNAE ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link ICnaeBAC}.
-	 *
-	 * @param cnaeBAC the cnaeBAC to set.
-	 */
-	public void setCnaeBAC(ICnaeBAC cnaeBAC)
-	{
-		this.cnaeBAC = cnaeBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link ICnaeBAC}
 	 *
 	 * @param request a CnaeRequest
@@ -416,7 +409,7 @@ public class FiscalWSImpl implements IFiscalWS
 		CnaeResponse response = new CnaeResponse();
 		try
 		{
-			InternalResultsResponse<Cnae> internalResponse = getCnaeBAC().insertCnae(request);
+			InternalResultsResponse<Cnae> internalResponse = getFiscalBAC().insertCnae(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -426,7 +419,7 @@ public class FiscalWSImpl implements IFiscalWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICnaeBAC}
 	 *
@@ -440,7 +433,7 @@ public class FiscalWSImpl implements IFiscalWS
 		CnaeResponse response = new CnaeResponse();
 		try
 		{
-			InternalResultsResponse<Cnae> internalResponse = getCnaeBAC().updateCnae(request);
+			InternalResultsResponse<Cnae> internalResponse = getFiscalBAC().updateCnae(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -450,7 +443,7 @@ public class FiscalWSImpl implements IFiscalWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICnaeBAC}
 	 *
@@ -464,7 +457,7 @@ public class FiscalWSImpl implements IFiscalWS
 		CnaeResponse response = new CnaeResponse();
 		try
 		{
-			InternalResultsResponse<Cnae> internalResponse = getCnaeBAC().deleteCnae(request);
+			InternalResultsResponse<Cnae> internalResponse = getFiscalBAC().deleteCnae(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -474,7 +467,7 @@ public class FiscalWSImpl implements IFiscalWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICnaeBAC}
 	 *
@@ -488,7 +481,7 @@ public class FiscalWSImpl implements IFiscalWS
 		CnaeResponse response = new CnaeResponse();
 		try
 		{
-			InternalResultsResponse<Cnae> internalResponse = getCnaeBAC().fetchCnaeById(request);
+			InternalResultsResponse<Cnae> internalResponse = getFiscalBAC().fetchCnaeById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -498,7 +491,7 @@ public class FiscalWSImpl implements IFiscalWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICnaeBAC}
 	 *
@@ -512,7 +505,7 @@ public class FiscalWSImpl implements IFiscalWS
 		CnaeResponse response = new CnaeResponse();
 		try
 		{
-			InternalResultsResponse<Cnae> internalResponse = getCnaeBAC().fetchCnaesByRequest(request);
+			InternalResultsResponse<Cnae> internalResponse = getFiscalBAC().fetchCnaesByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -535,7 +528,7 @@ public class FiscalWSImpl implements IFiscalWS
 		CnaeResponse response = new CnaeResponse();
 		try
 		{
-			InternalResultsResponse<Cnae> internalResponse = getCnaeBAC().refreshCnaes(request);
+			InternalResultsResponse<Cnae> internalResponse = getFiscalBAC().refreshCnaes(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -557,7 +550,7 @@ public class FiscalWSImpl implements IFiscalWS
 		CnaeResponse response = new CnaeResponse();
 		try
 		{
-			InternalResultsResponse<Cnae> internalResponse = getCnaeBAC().fetchAllCnaes();
+			InternalResultsResponse<Cnae> internalResponse = getFiscalBAC().fetchAllCnaes(new Cnae());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -568,180 +561,5 @@ public class FiscalWSImpl implements IFiscalWS
 		return response;
 	}
 
-//===================================### CNAEEMPRESA ####======================================
 
-	/**
-	 * Spring injection uses this method to inject an implementation of {@link ICnaeEmpresaBAC}.
-	 *
-	 * @param cnaeempresaBAC the cnaeempresaBAC to set.
-	 */
-	public void setCnaeEmpresaBAC(ICnaeEmpresaBAC cnaeempresaBAC)
-	{
-		this.cnaeempresaBAC = cnaeempresaBAC;
-	}
-	
-	/**
-	 * Delegates call to {@link ICnaeEmpresaBAC}
-	 *
-	 * @param request a CnaeEmpresaRequest
-	 * @return CnaeEmpresaResponse
-	 */
-	@Override
-	public CnaeEmpresaResponse insertCnaeEmpresa(CnaeEmpresaMaintenanceRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		CnaeEmpresaResponse response = new CnaeEmpresaResponse();
-		try
-		{
-			InternalResultsResponse<CnaeEmpresa> internalResponse = getCnaeEmpresaBAC().insertCnaeEmpresa(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	
-	/**
-	 * Delegates call to {@link ICnaeEmpresaBAC}
-	 *
-	 * @param request a CnaeEmpresaRequest
-	 * @return CnaeEmpresaResponse
-	 */
-	@Override
-	public CnaeEmpresaResponse updateCnaeEmpresa(CnaeEmpresaMaintenanceRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		CnaeEmpresaResponse response = new CnaeEmpresaResponse();
-		try
-		{
-			InternalResultsResponse<CnaeEmpresa> internalResponse = getCnaeEmpresaBAC().updateCnaeEmpresa(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	
-	/**
-	 * Delegates call to {@link ICnaeEmpresaBAC}
-	 *
-	 * @param request a CnaeEmpresaRequest
-	 * @return CnaeEmpresaResponse
-	 */
-	@Override
-	public CnaeEmpresaResponse deleteCnaeEmpresa(CnaeEmpresaMaintenanceRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		CnaeEmpresaResponse response = new CnaeEmpresaResponse();
-		try
-		{
-			InternalResultsResponse<CnaeEmpresa> internalResponse = getCnaeEmpresaBAC().deleteCnaeEmpresa(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	
-	/**
-	 * Delegates call to {@link ICnaeEmpresaBAC}
-	 *
-	 * @param request a CnaeEmpresaRequest
-	 * @return CnaeEmpresaResponse
-	 */
-	@Override
-	public CnaeEmpresaResponse fetchCnaeEmpresaById(FetchByIdRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		CnaeEmpresaResponse response = new CnaeEmpresaResponse();
-		try
-		{
-			InternalResultsResponse<CnaeEmpresa> internalResponse = getCnaeEmpresaBAC().fetchCnaeEmpresaById(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	
-	/**
-	 * Delegates call to {@link ICnaeEmpresaBAC}
-	 *
-	 * @param request a CnaeEmpresaRequest
-	 * @return CnaeEmpresaResponse
-	 */
-	@Override
-	public CnaeEmpresaResponse fetchCnaeEmpresasByRequest(CnaeEmpresaInquiryRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		CnaeEmpresaResponse response = new CnaeEmpresaResponse();
-		try
-		{
-			InternalResultsResponse<CnaeEmpresa> internalResponse = getCnaeEmpresaBAC().fetchCnaeEmpresasByRequest(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	/**
-	 * Delegates call to {@link ICnaeEmpresaBAC}
-	 *
-	 * @param request a CnaeEmpresaRequest
-	 * @return CnaeEmpresaResponse
-	 */
-	@Override
-	public CnaeEmpresaResponse refreshCnaeEmpresas(RefreshRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		CnaeEmpresaResponse response = new CnaeEmpresaResponse();
-		try
-		{
-			InternalResultsResponse<CnaeEmpresa> internalResponse = getCnaeEmpresaBAC().refreshCnaeEmpresas(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	/**
-	 * Delegates call to {@link ICnaeEmpresaBAC}
-	 *
-	 * @param request a CnaeEmpresaRequest
-	 * @return CnaeEmpresaResponse
-	 */
-	@Override
-	public CnaeEmpresaResponse fetchAllCnaeEmpresas(FetchAllRequest request)
-	{
-		CnaeEmpresaResponse response = new CnaeEmpresaResponse();
-		try
-		{
-			InternalResultsResponse<CnaeEmpresa> internalResponse = getCnaeEmpresaBAC().fetchAllCnaeEmpresas();
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
 }

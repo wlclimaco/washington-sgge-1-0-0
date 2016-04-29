@@ -28,6 +28,10 @@ public class Audiencia extends ModelCosmeDamiao
 		// TODO Auto-generated constructor stub
 	}
 
+	public Audiencia(int i, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getId()
 	{
 		return id;

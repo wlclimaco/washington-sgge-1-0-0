@@ -1,16 +1,33 @@
-/** create by system gera-java version 1.0.0 28/04/2016 16:21 : 34*/
+/** create by system gera-java version 1.0.0 28/04/2016 20:5 : 32*/
 package com.qat.samples.sysmgmt.service.impl;
 import javax.jws.WebService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IClinicaBAC;
-import com.qat.samples.sysmgmt.model.Clinica;
-import com.qat.samples.sysmgmt.model.response.ClinicaResponse;
+import com.qat.samples.sysmgmt.bac.Clinica.IClinicaBAC;
+import com.qat.samples.sysmgmt.clinica.model.Consulta;
+import com.qat.samples.sysmgmt.clinica.model.Exame;
+import com.qat.samples.sysmgmt.clinica.model.request.ConsultaInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.ConsultaMaintenanceRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.ExameInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.ExameMaintenanceRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.MedicoInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.MedicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.PacienteInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.PacienteMaintenanceRequest;
+import com.qat.samples.sysmgmt.clinica.model.response.ConsultaResponse;
+import com.qat.samples.sysmgmt.clinica.model.response.ExameResponse;
+import com.qat.samples.sysmgmt.clinica.model.response.MedicoResponse;
+import com.qat.samples.sysmgmt.clinica.model.response.PacienteResponse;
+import com.qat.samples.sysmgmt.pessoa.model.Medico;
+import com.qat.samples.sysmgmt.pessoa.model.Paciente;
 import com.qat.samples.sysmgmt.service.IClinicaWS;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 /**
  * ClinicaWS used to provide WS interface. Delegates all calls to the IClinicaBAC.
@@ -33,22 +50,22 @@ public class ClinicaWSImpl implements IClinicaWS
 	 * @return the clinicaBAC which is expected to provide the implementation.
 	 */
 	public IClinicaBAC getClinicaBAC()
-	{	
+	{
 		return clinicaBAC;
 	}
+	/**
+	 * Spring injection uses this method to inject an implementation of {@link IClinicaBAC}.
+	 *
+	 * @param clinicaBAC the clinicaBAC to set.
+	 */
+	public void setClinicaBAC(IClinicaBAC clinicaBAC)
+	{
+		this.clinicaBAC = clinicaBAC;
+	}
+
 
 //===================================### MEDICO ####======================================
 
-	/**
-	 * Spring injection uses this method to inject an implementation of {@link IMedicoBAC}.
-	 *
-	 * @param medicoBAC the medicoBAC to set.
-	 */
-	public void setMedicoBAC(IMedicoBAC medicoBAC)
-	{
-		this.medicoBAC = medicoBAC;
-	}
-	
 	/**
 	 * Delegates call to {@link IMedicoBAC}
 	 *
@@ -62,7 +79,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		MedicoResponse response = new MedicoResponse();
 		try
 		{
-			InternalResultsResponse<Medico> internalResponse = getMedicoBAC().insertMedico(request);
+			InternalResultsResponse<Medico> internalResponse = getClinicaBAC().insertMedico(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -72,7 +89,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IMedicoBAC}
 	 *
@@ -86,7 +103,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		MedicoResponse response = new MedicoResponse();
 		try
 		{
-			InternalResultsResponse<Medico> internalResponse = getMedicoBAC().updateMedico(request);
+			InternalResultsResponse<Medico> internalResponse = getClinicaBAC().updateMedico(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -96,7 +113,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IMedicoBAC}
 	 *
@@ -110,7 +127,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		MedicoResponse response = new MedicoResponse();
 		try
 		{
-			InternalResultsResponse<Medico> internalResponse = getMedicoBAC().deleteMedico(request);
+			InternalResultsResponse<Medico> internalResponse = getClinicaBAC().deleteMedico(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -120,7 +137,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IMedicoBAC}
 	 *
@@ -134,7 +151,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		MedicoResponse response = new MedicoResponse();
 		try
 		{
-			InternalResultsResponse<Medico> internalResponse = getMedicoBAC().fetchMedicoById(request);
+			InternalResultsResponse<Medico> internalResponse = getClinicaBAC().fetchMedicoById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -144,7 +161,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IMedicoBAC}
 	 *
@@ -158,7 +175,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		MedicoResponse response = new MedicoResponse();
 		try
 		{
-			InternalResultsResponse<Medico> internalResponse = getMedicoBAC().fetchMedicosByRequest(request);
+			InternalResultsResponse<Medico> internalResponse = getClinicaBAC().fetchMedicosByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -181,7 +198,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		MedicoResponse response = new MedicoResponse();
 		try
 		{
-			InternalResultsResponse<Medico> internalResponse = getMedicoBAC().refreshMedicos(request);
+			InternalResultsResponse<Medico> internalResponse = getClinicaBAC().refreshMedicos(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -203,7 +220,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		MedicoResponse response = new MedicoResponse();
 		try
 		{
-			InternalResultsResponse<Medico> internalResponse = getMedicoBAC().fetchAllMedicos();
+			InternalResultsResponse<Medico> internalResponse = getClinicaBAC().fetchAllMedicos(new Medico());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -217,16 +234,6 @@ public class ClinicaWSImpl implements IClinicaWS
 //===================================### PACIENTE ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IPacienteBAC}.
-	 *
-	 * @param pacienteBAC the pacienteBAC to set.
-	 */
-	public void setPacienteBAC(IPacienteBAC pacienteBAC)
-	{
-		this.pacienteBAC = pacienteBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IPacienteBAC}
 	 *
 	 * @param request a PacienteRequest
@@ -239,7 +246,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		PacienteResponse response = new PacienteResponse();
 		try
 		{
-			InternalResultsResponse<Paciente> internalResponse = getPacienteBAC().insertPaciente(request);
+			InternalResultsResponse<Paciente> internalResponse = getClinicaBAC().insertPaciente(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -249,7 +256,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IPacienteBAC}
 	 *
@@ -263,7 +270,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		PacienteResponse response = new PacienteResponse();
 		try
 		{
-			InternalResultsResponse<Paciente> internalResponse = getPacienteBAC().updatePaciente(request);
+			InternalResultsResponse<Paciente> internalResponse = getClinicaBAC().updatePaciente(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -273,7 +280,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IPacienteBAC}
 	 *
@@ -287,7 +294,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		PacienteResponse response = new PacienteResponse();
 		try
 		{
-			InternalResultsResponse<Paciente> internalResponse = getPacienteBAC().deletePaciente(request);
+			InternalResultsResponse<Paciente> internalResponse = getClinicaBAC().deletePaciente(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -297,7 +304,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IPacienteBAC}
 	 *
@@ -311,7 +318,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		PacienteResponse response = new PacienteResponse();
 		try
 		{
-			InternalResultsResponse<Paciente> internalResponse = getPacienteBAC().fetchPacienteById(request);
+			InternalResultsResponse<Paciente> internalResponse = getClinicaBAC().fetchPacienteById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -321,7 +328,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IPacienteBAC}
 	 *
@@ -335,7 +342,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		PacienteResponse response = new PacienteResponse();
 		try
 		{
-			InternalResultsResponse<Paciente> internalResponse = getPacienteBAC().fetchPacientesByRequest(request);
+			InternalResultsResponse<Paciente> internalResponse = getClinicaBAC().fetchPacientesByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -358,7 +365,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		PacienteResponse response = new PacienteResponse();
 		try
 		{
-			InternalResultsResponse<Paciente> internalResponse = getPacienteBAC().refreshPacientes(request);
+			InternalResultsResponse<Paciente> internalResponse = getClinicaBAC().refreshPacientes(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -380,7 +387,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		PacienteResponse response = new PacienteResponse();
 		try
 		{
-			InternalResultsResponse<Paciente> internalResponse = getPacienteBAC().fetchAllPacientes();
+			InternalResultsResponse<Paciente> internalResponse = getClinicaBAC().fetchAllPacientes(new Paciente());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -394,16 +401,6 @@ public class ClinicaWSImpl implements IClinicaWS
 //===================================### CONSULTA ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IConsultaBAC}.
-	 *
-	 * @param consultaBAC the consultaBAC to set.
-	 */
-	public void setConsultaBAC(IConsultaBAC consultaBAC)
-	{
-		this.consultaBAC = consultaBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IConsultaBAC}
 	 *
 	 * @param request a ConsultaRequest
@@ -416,7 +413,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		ConsultaResponse response = new ConsultaResponse();
 		try
 		{
-			InternalResultsResponse<Consulta> internalResponse = getConsultaBAC().insertConsulta(request);
+			InternalResultsResponse<Consulta> internalResponse = getClinicaBAC().insertConsulta(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -426,7 +423,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IConsultaBAC}
 	 *
@@ -440,7 +437,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		ConsultaResponse response = new ConsultaResponse();
 		try
 		{
-			InternalResultsResponse<Consulta> internalResponse = getConsultaBAC().updateConsulta(request);
+			InternalResultsResponse<Consulta> internalResponse = getClinicaBAC().updateConsulta(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -450,7 +447,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IConsultaBAC}
 	 *
@@ -464,7 +461,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		ConsultaResponse response = new ConsultaResponse();
 		try
 		{
-			InternalResultsResponse<Consulta> internalResponse = getConsultaBAC().deleteConsulta(request);
+			InternalResultsResponse<Consulta> internalResponse = getClinicaBAC().deleteConsulta(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -474,7 +471,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IConsultaBAC}
 	 *
@@ -488,7 +485,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		ConsultaResponse response = new ConsultaResponse();
 		try
 		{
-			InternalResultsResponse<Consulta> internalResponse = getConsultaBAC().fetchConsultaById(request);
+			InternalResultsResponse<Consulta> internalResponse = getClinicaBAC().fetchConsultaById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -498,7 +495,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IConsultaBAC}
 	 *
@@ -512,7 +509,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		ConsultaResponse response = new ConsultaResponse();
 		try
 		{
-			InternalResultsResponse<Consulta> internalResponse = getConsultaBAC().fetchConsultasByRequest(request);
+			InternalResultsResponse<Consulta> internalResponse = getClinicaBAC().fetchConsultasByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -535,7 +532,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		ConsultaResponse response = new ConsultaResponse();
 		try
 		{
-			InternalResultsResponse<Consulta> internalResponse = getConsultaBAC().refreshConsultas(request);
+			InternalResultsResponse<Consulta> internalResponse = getClinicaBAC().refreshConsultas(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -557,7 +554,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		ConsultaResponse response = new ConsultaResponse();
 		try
 		{
-			InternalResultsResponse<Consulta> internalResponse = getConsultaBAC().fetchAllConsultas();
+			InternalResultsResponse<Consulta> internalResponse = getClinicaBAC().fetchAllConsultas(new Consulta());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -571,16 +568,6 @@ public class ClinicaWSImpl implements IClinicaWS
 //===================================### EXAME ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IExameBAC}.
-	 *
-	 * @param exameBAC the exameBAC to set.
-	 */
-	public void setExameBAC(IExameBAC exameBAC)
-	{
-		this.exameBAC = exameBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IExameBAC}
 	 *
 	 * @param request a ExameRequest
@@ -593,7 +580,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		ExameResponse response = new ExameResponse();
 		try
 		{
-			InternalResultsResponse<Exame> internalResponse = getExameBAC().insertExame(request);
+			InternalResultsResponse<Exame> internalResponse = getClinicaBAC().insertExame(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -603,7 +590,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IExameBAC}
 	 *
@@ -617,7 +604,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		ExameResponse response = new ExameResponse();
 		try
 		{
-			InternalResultsResponse<Exame> internalResponse = getExameBAC().updateExame(request);
+			InternalResultsResponse<Exame> internalResponse = getClinicaBAC().updateExame(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -627,7 +614,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IExameBAC}
 	 *
@@ -641,7 +628,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		ExameResponse response = new ExameResponse();
 		try
 		{
-			InternalResultsResponse<Exame> internalResponse = getExameBAC().deleteExame(request);
+			InternalResultsResponse<Exame> internalResponse = getClinicaBAC().deleteExame(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -651,7 +638,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IExameBAC}
 	 *
@@ -665,7 +652,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		ExameResponse response = new ExameResponse();
 		try
 		{
-			InternalResultsResponse<Exame> internalResponse = getExameBAC().fetchExameById(request);
+			InternalResultsResponse<Exame> internalResponse = getClinicaBAC().fetchExameById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -675,7 +662,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IExameBAC}
 	 *
@@ -689,7 +676,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		ExameResponse response = new ExameResponse();
 		try
 		{
-			InternalResultsResponse<Exame> internalResponse = getExameBAC().fetchExamesByRequest(request);
+			InternalResultsResponse<Exame> internalResponse = getClinicaBAC().fetchExamesByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -712,7 +699,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		ExameResponse response = new ExameResponse();
 		try
 		{
-			InternalResultsResponse<Exame> internalResponse = getExameBAC().refreshExames(request);
+			InternalResultsResponse<Exame> internalResponse = getClinicaBAC().refreshExames(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -734,7 +721,7 @@ public class ClinicaWSImpl implements IClinicaWS
 		ExameResponse response = new ExameResponse();
 		try
 		{
-			InternalResultsResponse<Exame> internalResponse = getExameBAC().fetchAllExames();
+			InternalResultsResponse<Exame> internalResponse = getClinicaBAC().fetchAllExames(new Exame());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}

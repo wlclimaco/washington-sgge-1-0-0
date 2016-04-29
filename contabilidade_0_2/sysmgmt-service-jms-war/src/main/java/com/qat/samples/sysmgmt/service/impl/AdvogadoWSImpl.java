@@ -1,4 +1,4 @@
-/** create by system gera-java version 1.0.0 28/04/2016 16:21 : 34*/
+/** create by system gera-java version 1.0.0 28/04/2016 20:3 : 21*/
 package com.qat.samples.sysmgmt.service.impl;
 import javax.jws.WebService;
 
@@ -49,7 +49,6 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 	{
 		return advogadoBAC;
 	}
-
 	/**
 	 * Spring injection uses this method to inject an implementation of {@link IAdvogadoBAC}.
 	 *
@@ -60,9 +59,8 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		this.advogadoBAC = advogadoBAC;
 	}
 
+
 //===================================### ADVOGADO ####======================================
-
-
 
 	/**
 	 * Delegates call to {@link IAdvogadoBAC}
@@ -229,6 +227,8 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		return response;
 	}
 
+//===================================### AUDIENCIA ####======================================
+
 	/**
 	 * Delegates call to {@link IAudienciaBAC}
 	 *
@@ -290,7 +290,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		AudienciaResponse response = new AudienciaResponse();
 		try
 		{
-			InternalResultsResponse<Audiencia> internalResponse = getAudienciaBAC().deleteAudiencia(request);
+			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().deleteAudiencia(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -314,7 +314,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		AudienciaResponse response = new AudienciaResponse();
 		try
 		{
-			InternalResultsResponse<Audiencia> internalResponse = getAudienciaBAC().fetchAudienciaById(request);
+			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().fetchAudienciaById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -338,7 +338,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		AudienciaResponse response = new AudienciaResponse();
 		try
 		{
-			InternalResultsResponse<Audiencia> internalResponse = getAudienciaBAC().fetchAudienciasByRequest(request);
+			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().fetchAudienciasByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -361,7 +361,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		AudienciaResponse response = new AudienciaResponse();
 		try
 		{
-			InternalResultsResponse<Audiencia> internalResponse = getAudienciaBAC().refreshAudiencias(request);
+			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().refreshAudiencias(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -383,7 +383,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		AudienciaResponse response = new AudienciaResponse();
 		try
 		{
-			InternalResultsResponse<Audiencia> internalResponse = getAudienciaBAC().fetchAllAudiencias();
+			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().fetchAllAudiencias(new Audiencia());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -395,16 +395,6 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 	}
 
 //===================================### PROCESSO ####======================================
-
-	/**
-	 * Spring injection uses this method to inject an implementation of {@link IProcessoBAC}.
-	 *
-	 * @param processoBAC the processoBAC to set.
-	 */
-	public void setProcessoBAC(IProcessoBAC processoBAC)
-	{
-		this.processoBAC = processoBAC;
-	}
 
 	/**
 	 * Delegates call to {@link IProcessoBAC}
@@ -419,7 +409,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		ProcessoResponse response = new ProcessoResponse();
 		try
 		{
-			InternalResultsResponse<Processo> internalResponse = getProcessoBAC().insertProcesso(request);
+			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().insertProcesso(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -443,7 +433,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		ProcessoResponse response = new ProcessoResponse();
 		try
 		{
-			InternalResultsResponse<Processo> internalResponse = getProcessoBAC().updateProcesso(request);
+			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().updateProcesso(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -467,7 +457,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		ProcessoResponse response = new ProcessoResponse();
 		try
 		{
-			InternalResultsResponse<Processo> internalResponse = getProcessoBAC().deleteProcesso(request);
+			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().deleteProcesso(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -491,7 +481,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		ProcessoResponse response = new ProcessoResponse();
 		try
 		{
-			InternalResultsResponse<Processo> internalResponse = getProcessoBAC().fetchProcessoById(request);
+			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().fetchProcessoById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -515,7 +505,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		ProcessoResponse response = new ProcessoResponse();
 		try
 		{
-			InternalResultsResponse<Processo> internalResponse = getProcessoBAC().fetchProcessosByRequest(request);
+			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().fetchProcessosByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -538,7 +528,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		ProcessoResponse response = new ProcessoResponse();
 		try
 		{
-			InternalResultsResponse<Processo> internalResponse = getProcessoBAC().refreshProcessos(request);
+			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().refreshProcessos(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -560,7 +550,7 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 		ProcessoResponse response = new ProcessoResponse();
 		try
 		{
-			InternalResultsResponse<Processo> internalResponse = getProcessoBAC().fetchAllProcessos();
+			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().fetchAllProcessos(new Processo());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}

@@ -1,5 +1,7 @@
 package com.qat.samples.sysmgmt.dicionario;
 
+import java.util.Date;
+
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -22,12 +24,25 @@ public class Field extends ModelCosmeDamiao
 	public Field()
 	{
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Field(int i, String string) {
-		// TODO Auto-generated constructor stub
+
+	public Field(Integer id, String tipo, Integer tamanho, Boolean requerid, Boolean primaryKey, Boolean forenkey,
+			Boolean model, Boolean xml , PersistenceActionEnum modelAction) {
+		super();
+		this.id = id;
+		this.tipo = tipo;
+		this.tamanho = tamanho;
+		this.requerid = requerid;
+		this.primaryKey = primaryKey;
+		this.forenkey = forenkey;
+		this.model = model;
+		this.xml = xml;
+		setModelAction(modelAction);
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
+
 
 	public Integer getId() {
 		return id;

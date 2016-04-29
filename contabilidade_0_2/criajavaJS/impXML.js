@@ -1,38 +1,12 @@
 
-function titleize(text) {
-
-    // Convertendo primeira letra em maiuscula.
-    text = text.charAt(0).toUpperCase() + text.slice(1);
-
-    for (var i = 0; i < text.length; i++) {
-        if (text.charAt(i) ===" ") {
-
-            // Convertendo letra após o ESPAÇO em maiuscula
-            var charToUper = text.charAt(i+1).toUpperCase();
-
-            // Colocando texto de antes do ESPAÇO na variável
-            var sliceBegin = text.slice(0, (i+1));
-
-            // colocando o texto de depois do ESPAÇO na variável
-            var sliceEnd = text.slice(i + 2);
-
-            // Juntando tudo
-            text = sliceBegin + charToUper + sliceEnd;
-
-        } else {
-
-            // NAO CONSIGO PENSAR EM COMO TRANSFORMAR O RESTANTE DAS LETRAS EM MINUSCULA
-        }   
-    }
-    return text;
-}
-
 implXML = function (oField,name){
 
-var text = '/** create by system gera-java version 1.0.0 '+dataAtualFormatada()+'*/\n';
+var text = '';
 text = text + '\n';
-	
+
 text = text + '<?xml version="1.0" encoding="UTF-8" ?>\n';
+text = text + '\n';
+text = text + '<!-- create by system gera-java version 1.0.0 '+dataAtualFormatada()+'-->\n';
 text = text + '\n';
 text = text + '<!DOCTYPE mapper\n';
 text = text + '   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"\n';
@@ -51,12 +25,16 @@ for(i=0;i < oField.length;i++){
 	if(oField[i].field.xml == true){
 		if(oField[i].field.tipo.indexOf('List') > -1){
 			text = text + '<collection property="'+oField[i].field.campo+'" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>\n';
-		}else{			
-			text = text + '    <result property="'+oField[i].field.campo+'" column="'+oField[i].field.tipo+'"/>\n';
+		}else{
+			text = text + '    <result property="'+oField[i].field.campo+'" column="'+oField[i].field.campo+'"/>\n';
 		}
 	}
 
 }
+text = text + '<result property="createUser" column="create_user"/>\n';
+text = text + '<result property="createDateUTC" column="create_date"/>\n';
+text = text + '<result property="modifyUser" column="modify_user"/>\n';
+text = text + '<result property="modifyDateUTC" column="modify_date"/>\n';
 text = text + '  </resultMap>\n';
 text = text + '\n';
 
@@ -71,7 +49,7 @@ for(i=0;i < oField.length;i++){
 			text = text + ','+oField[i].field.campo+'\n';
 		}
 	}
-	
+
 }
 text = text + '\n';
 text = text + '</sql>\n';
@@ -104,7 +82,7 @@ text = text + '		c.createDateUTC,\n';
 text = text + '		c.createUser,\n';
 text = text + '		c.modifyDateUTC,\n';
 text = text + '		c.modifyUser\n';
- 
+
  text = text + ' </sql>\n';
 text = text + '\n';
  text = text + ' <select id="fetchAll'+name+'s" resultMap="'+name+'Result">\n';

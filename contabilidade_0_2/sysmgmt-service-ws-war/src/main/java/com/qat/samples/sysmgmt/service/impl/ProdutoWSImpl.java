@@ -10,13 +10,29 @@ import org.springframework.stereotype.Service;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IProdutoBAC;
-import com.qat.samples.sysmgmt.model.Produto;
-import com.qat.samples.sysmgmt.model.request.ProdutoMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.ProdutoResponse;
+import com.qat.samples.sysmgmt.bac.Produto.IProdutoBAC;
+import com.qat.samples.sysmgmt.produto.model.Grupo;
+import com.qat.samples.sysmgmt.produto.model.Marca;
+import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.SubGrupo;
+import com.qat.samples.sysmgmt.produto.model.UniMed;
+import com.qat.samples.sysmgmt.produto.model.request.GrupoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.GrupoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.MarcaMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.SubGrupoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.UniMedMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.response.GrupoResponse;
+import com.qat.samples.sysmgmt.produto.model.response.MarcaResponse;
+import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
+import com.qat.samples.sysmgmt.produto.model.response.SubGrupoResponse;
+import com.qat.samples.sysmgmt.produto.model.response.UniMedResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**

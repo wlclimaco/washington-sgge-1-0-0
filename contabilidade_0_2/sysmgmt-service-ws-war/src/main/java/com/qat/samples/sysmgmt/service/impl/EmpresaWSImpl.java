@@ -10,14 +10,26 @@ import org.springframework.stereotype.Service;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IEmpresaBAC;
-import com.qat.samples.sysmgmt.model.Empresa;
-import com.qat.samples.sysmgmt.model.request.EmpresaMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.EmpresaResponse;
+import com.qat.samples.sysmgmt.bac.Empresa.IEmpresaBAC;
+import com.qat.samples.sysmgmt.entidade.model.Deposito;
+import com.qat.samples.sysmgmt.entidade.model.Empresa;
+import com.qat.samples.sysmgmt.entidade.model.Filial;
+import com.qat.samples.sysmgmt.entidade.model.Usuario;
+import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.DepositoMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.EmpresaMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.response.DepositoResponse;
+import com.qat.samples.sysmgmt.entidade.model.response.EmpresaResponse;
+import com.qat.samples.sysmgmt.entidade.model.response.FilialResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
+import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.UsuarioMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.response.UsuarioResponse;
 
 /**
  * Standard implementation of a web service where the operations are delegated to a BAC.

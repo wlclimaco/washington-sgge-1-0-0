@@ -1,17 +1,34 @@
-/** create by system gera-java version 1.0.0 28/04/2016 16:21 : 34*/
+/** create by system gera-java version 1.0.0 28/04/2016 20:5 : 32*/
 package com.qat.samples.sysmgmt.service.impl;
 import javax.jws.WebService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IEmpresaBAC;
-import com.qat.samples.sysmgmt.model.Empresa;
-import com.qat.samples.sysmgmt.model.response.EmpresaResponse;
+import com.qat.samples.sysmgmt.bac.Empresa.IEmpresaBAC;
+import com.qat.samples.sysmgmt.entidade.model.Deposito;
+import com.qat.samples.sysmgmt.entidade.model.Empresa;
+import com.qat.samples.sysmgmt.entidade.model.Filial;
+import com.qat.samples.sysmgmt.entidade.model.Usuario;
+import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.DepositoMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.EmpresaMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.response.DepositoResponse;
+import com.qat.samples.sysmgmt.entidade.model.response.EmpresaResponse;
+import com.qat.samples.sysmgmt.entidade.model.response.FilialResponse;
 import com.qat.samples.sysmgmt.service.IEmpresaWS;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
+import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.UsuarioMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.response.UsuarioResponse;
 /**
  * EmpresaWS used to provide WS interface. Delegates all calls to the IEmpresaBAC.
  *
@@ -33,12 +50,9 @@ public class EmpresaWSImpl implements IEmpresaWS
 	 * @return the empresaBAC which is expected to provide the implementation.
 	 */
 	public IEmpresaBAC getEmpresaBAC()
-	{	
+	{
 		return empresaBAC;
 	}
-
-//===================================### EMPRESA ####======================================
-
 	/**
 	 * Spring injection uses this method to inject an implementation of {@link IEmpresaBAC}.
 	 *
@@ -48,7 +62,10 @@ public class EmpresaWSImpl implements IEmpresaWS
 	{
 		this.empresaBAC = empresaBAC;
 	}
-	
+
+
+//===================================### EMPRESA ####======================================
+
 	/**
 	 * Delegates call to {@link IEmpresaBAC}
 	 *
@@ -72,7 +89,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IEmpresaBAC}
 	 *
@@ -96,7 +113,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IEmpresaBAC}
 	 *
@@ -120,7 +137,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IEmpresaBAC}
 	 *
@@ -144,7 +161,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IEmpresaBAC}
 	 *
@@ -203,7 +220,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		EmpresaResponse response = new EmpresaResponse();
 		try
 		{
-			InternalResultsResponse<Empresa> internalResponse = getEmpresaBAC().fetchAllEmpresas();
+			InternalResultsResponse<Empresa> internalResponse = getEmpresaBAC().fetchAllEmpresas(new Empresa());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -217,16 +234,6 @@ public class EmpresaWSImpl implements IEmpresaWS
 //===================================### FILIAL ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IFilialBAC}.
-	 *
-	 * @param filialBAC the filialBAC to set.
-	 */
-	public void setFilialBAC(IFilialBAC filialBAC)
-	{
-		this.filialBAC = filialBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IFilialBAC}
 	 *
 	 * @param request a FilialRequest
@@ -239,7 +246,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		FilialResponse response = new FilialResponse();
 		try
 		{
-			InternalResultsResponse<Filial> internalResponse = getFilialBAC().insertFilial(request);
+			InternalResultsResponse<Filial> internalResponse = getEmpresaBAC().insertFilial(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -249,7 +256,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IFilialBAC}
 	 *
@@ -263,7 +270,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		FilialResponse response = new FilialResponse();
 		try
 		{
-			InternalResultsResponse<Filial> internalResponse = getFilialBAC().updateFilial(request);
+			InternalResultsResponse<Filial> internalResponse = getEmpresaBAC().updateFilial(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -273,7 +280,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IFilialBAC}
 	 *
@@ -287,7 +294,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		FilialResponse response = new FilialResponse();
 		try
 		{
-			InternalResultsResponse<Filial> internalResponse = getFilialBAC().deleteFilial(request);
+			InternalResultsResponse<Filial> internalResponse = getEmpresaBAC().deleteFilial(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -297,7 +304,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IFilialBAC}
 	 *
@@ -311,7 +318,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		FilialResponse response = new FilialResponse();
 		try
 		{
-			InternalResultsResponse<Filial> internalResponse = getFilialBAC().fetchFilialById(request);
+			InternalResultsResponse<Filial> internalResponse = getEmpresaBAC().fetchFilialById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -321,7 +328,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IFilialBAC}
 	 *
@@ -335,7 +342,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		FilialResponse response = new FilialResponse();
 		try
 		{
-			InternalResultsResponse<Filial> internalResponse = getFilialBAC().fetchFilialsByRequest(request);
+			InternalResultsResponse<Filial> internalResponse = getEmpresaBAC().fetchFilialsByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -358,7 +365,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		FilialResponse response = new FilialResponse();
 		try
 		{
-			InternalResultsResponse<Filial> internalResponse = getFilialBAC().refreshFilials(request);
+			InternalResultsResponse<Filial> internalResponse = getEmpresaBAC().refreshFilials(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -380,7 +387,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		FilialResponse response = new FilialResponse();
 		try
 		{
-			InternalResultsResponse<Filial> internalResponse = getFilialBAC().fetchAllFilials();
+			InternalResultsResponse<Filial> internalResponse = getEmpresaBAC().fetchAllFilials(new Filial());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -394,16 +401,6 @@ public class EmpresaWSImpl implements IEmpresaWS
 //===================================### DEPOSITO ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IDepositoBAC}.
-	 *
-	 * @param depositoBAC the depositoBAC to set.
-	 */
-	public void setDepositoBAC(IDepositoBAC depositoBAC)
-	{
-		this.depositoBAC = depositoBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IDepositoBAC}
 	 *
 	 * @param request a DepositoRequest
@@ -416,7 +413,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		DepositoResponse response = new DepositoResponse();
 		try
 		{
-			InternalResultsResponse<Deposito> internalResponse = getDepositoBAC().insertDeposito(request);
+			InternalResultsResponse<Deposito> internalResponse = getEmpresaBAC().insertDeposito(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -426,7 +423,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IDepositoBAC}
 	 *
@@ -440,7 +437,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		DepositoResponse response = new DepositoResponse();
 		try
 		{
-			InternalResultsResponse<Deposito> internalResponse = getDepositoBAC().updateDeposito(request);
+			InternalResultsResponse<Deposito> internalResponse = getEmpresaBAC().updateDeposito(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -450,7 +447,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IDepositoBAC}
 	 *
@@ -464,7 +461,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		DepositoResponse response = new DepositoResponse();
 		try
 		{
-			InternalResultsResponse<Deposito> internalResponse = getDepositoBAC().deleteDeposito(request);
+			InternalResultsResponse<Deposito> internalResponse = getEmpresaBAC().deleteDeposito(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -474,7 +471,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IDepositoBAC}
 	 *
@@ -488,7 +485,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		DepositoResponse response = new DepositoResponse();
 		try
 		{
-			InternalResultsResponse<Deposito> internalResponse = getDepositoBAC().fetchDepositoById(request);
+			InternalResultsResponse<Deposito> internalResponse = getEmpresaBAC().fetchDepositoById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -498,7 +495,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IDepositoBAC}
 	 *
@@ -512,7 +509,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		DepositoResponse response = new DepositoResponse();
 		try
 		{
-			InternalResultsResponse<Deposito> internalResponse = getDepositoBAC().fetchDepositosByRequest(request);
+			InternalResultsResponse<Deposito> internalResponse = getEmpresaBAC().fetchDepositosByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -535,7 +532,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		DepositoResponse response = new DepositoResponse();
 		try
 		{
-			InternalResultsResponse<Deposito> internalResponse = getDepositoBAC().refreshDepositos(request);
+			InternalResultsResponse<Deposito> internalResponse = getEmpresaBAC().refreshDepositos(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -557,7 +554,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		DepositoResponse response = new DepositoResponse();
 		try
 		{
-			InternalResultsResponse<Deposito> internalResponse = getDepositoBAC().fetchAllDepositos();
+			InternalResultsResponse<Deposito> internalResponse = getEmpresaBAC().fetchAllDepositos(new Deposito());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -571,16 +568,6 @@ public class EmpresaWSImpl implements IEmpresaWS
 //===================================### USUARIO ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IUsuarioBAC}.
-	 *
-	 * @param usuarioBAC the usuarioBAC to set.
-	 */
-	public void setUsuarioBAC(IUsuarioBAC usuarioBAC)
-	{
-		this.usuarioBAC = usuarioBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IUsuarioBAC}
 	 *
 	 * @param request a UsuarioRequest
@@ -593,7 +580,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		UsuarioResponse response = new UsuarioResponse();
 		try
 		{
-			InternalResultsResponse<Usuario> internalResponse = getUsuarioBAC().insertUsuario(request);
+			InternalResultsResponse<Usuario> internalResponse = getEmpresaBAC().insertUsuario(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -603,7 +590,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IUsuarioBAC}
 	 *
@@ -617,7 +604,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		UsuarioResponse response = new UsuarioResponse();
 		try
 		{
-			InternalResultsResponse<Usuario> internalResponse = getUsuarioBAC().updateUsuario(request);
+			InternalResultsResponse<Usuario> internalResponse = getEmpresaBAC().updateUsuario(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -627,7 +614,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IUsuarioBAC}
 	 *
@@ -641,7 +628,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		UsuarioResponse response = new UsuarioResponse();
 		try
 		{
-			InternalResultsResponse<Usuario> internalResponse = getUsuarioBAC().deleteUsuario(request);
+			InternalResultsResponse<Usuario> internalResponse = getEmpresaBAC().deleteUsuario(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -651,7 +638,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IUsuarioBAC}
 	 *
@@ -665,7 +652,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		UsuarioResponse response = new UsuarioResponse();
 		try
 		{
-			InternalResultsResponse<Usuario> internalResponse = getUsuarioBAC().fetchUsuarioById(request);
+			InternalResultsResponse<Usuario> internalResponse = getEmpresaBAC().fetchUsuarioById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -675,7 +662,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IUsuarioBAC}
 	 *
@@ -689,7 +676,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		UsuarioResponse response = new UsuarioResponse();
 		try
 		{
-			InternalResultsResponse<Usuario> internalResponse = getUsuarioBAC().fetchUsuariosByRequest(request);
+			InternalResultsResponse<Usuario> internalResponse = getEmpresaBAC().fetchUsuariosByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -712,7 +699,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		UsuarioResponse response = new UsuarioResponse();
 		try
 		{
-			InternalResultsResponse<Usuario> internalResponse = getUsuarioBAC().refreshUsuarios(request);
+			InternalResultsResponse<Usuario> internalResponse = getEmpresaBAC().refreshUsuarios(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -734,7 +721,7 @@ public class EmpresaWSImpl implements IEmpresaWS
 		UsuarioResponse response = new UsuarioResponse();
 		try
 		{
-			InternalResultsResponse<Usuario> internalResponse = getUsuarioBAC().fetchAllUsuarios();
+			InternalResultsResponse<Usuario> internalResponse = getEmpresaBAC().fetchAllUsuarios(new Usuario());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}

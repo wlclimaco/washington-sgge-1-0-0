@@ -1,54 +1,83 @@
-/** create by system gera-java version 1.0.0 28/04/2016 16:21 : 34*/
+/** create by system gera-java version 1.0.0 28/04/2016 20:5 : 32*/
 package com.qat.samples.sysmgmt.service.impl;
 import javax.jws.WebService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.ICadastrosBAC;
-import com.qat.samples.sysmgmt.model.Cadastros;
-import com.qat.samples.sysmgmt.model.response.CadastrosResponse;
+import com.qat.samples.sysmgmt.bac.Cadastros.ICadastrosBAC;
+import com.qat.samples.sysmgmt.convenio.model.Convenio;
+import com.qat.samples.sysmgmt.dp.model.response.ConvenioResponse;
+import com.qat.samples.sysmgmt.entidade.model.request.CidadeMaintenanceRequest;
+import com.qat.samples.sysmgmt.estado.model.Estado;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoMaintenanceRequest;
+import com.qat.samples.sysmgmt.estado.model.response.EstadoResponse;
+import com.qat.samples.sysmgmt.pessoa.model.Cliente;
+import com.qat.samples.sysmgmt.pessoa.model.Fornecedor;
+import com.qat.samples.sysmgmt.pessoa.model.Transportador;
+import com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ClienteMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ConvenioInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.response.ClienteResponse;
+import com.qat.samples.sysmgmt.pessoa.model.response.FornecedorResponse;
+import com.qat.samples.sysmgmt.pessoa.model.response.TransportadorResponse;
 import com.qat.samples.sysmgmt.service.ICadastrosWS;
+import com.qat.samples.sysmgmt.util.model.Cidade;
+import com.qat.samples.sysmgmt.util.model.Tarefa;
+import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.ConvenioMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
+import com.qat.samples.sysmgmt.util.model.request.TarefaInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.TarefaMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.response.CidadeResponse;
+import com.qat.samples.sysmgmt.util.model.response.TarefaResponse;
 /**
  * CadastrosWS used to provide WS interface. Delegates all calls to the ICadastrosBAC.
  *
  */
 @Service
 @WebService(targetNamespace = "http://qat.com/jms")
-public class CadastrosWSImpl implements ICadastrosWS
+public class CadastroWSImpl implements ICadastrosWS
 {
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
 	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.cadastrosjmswsimpl.defaultexception";
 	/** The Constant DEFAULT_ERROR_MSG. */
 	private static final String DEFAULT_ERROR_MSG = "sysmgmt.base.cadastrosjmswsimpl.defaulterror";
 	/** The Constant CLASS_NAME. */
-	private static final String CLASS_NAME = CadastrosWSImpl.class.getName();
+	private static final String CLASS_NAME = CadastroWSImpl.class.getName();
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(CadastrosWSImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CadastroWSImpl.class);
 	private ICadastrosBAC cadastrosBAC;
 	/**
 	 * @return the cadastrosBAC which is expected to provide the implementation.
 	 */
 	public ICadastrosBAC getCadastrosBAC()
-	{	
+	{
 		return cadastrosBAC;
 	}
+	/**
+	 * Spring injection uses this method to inject an implementation of {@link ICadastrosBAC}.
+	 *
+	 * @param cadastrosBAC the cadastrosBAC to set.
+	 */
+	public void setCadastrosBAC(ICadastrosBAC cadastrosBAC)
+	{
+		this.cadastrosBAC = cadastrosBAC;
+	}
+
 
 //===================================### CLIENTE ####======================================
 
-	/**
-	 * Spring injection uses this method to inject an implementation of {@link IClienteBAC}.
-	 *
-	 * @param clienteBAC the clienteBAC to set.
-	 */
-	public void setClienteBAC(IClienteBAC clienteBAC)
-	{
-		this.clienteBAC = clienteBAC;
-	}
-	
 	/**
 	 * Delegates call to {@link IClienteBAC}
 	 *
@@ -62,7 +91,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		ClienteResponse response = new ClienteResponse();
 		try
 		{
-			InternalResultsResponse<Cliente> internalResponse = getClienteBAC().insertCliente(request);
+			InternalResultsResponse<Cliente> internalResponse = getCadastrosBAC().insertCliente(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -72,7 +101,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IClienteBAC}
 	 *
@@ -86,7 +115,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		ClienteResponse response = new ClienteResponse();
 		try
 		{
-			InternalResultsResponse<Cliente> internalResponse = getClienteBAC().updateCliente(request);
+			InternalResultsResponse<Cliente> internalResponse = getCadastrosBAC().updateCliente(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -96,7 +125,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IClienteBAC}
 	 *
@@ -110,7 +139,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		ClienteResponse response = new ClienteResponse();
 		try
 		{
-			InternalResultsResponse<Cliente> internalResponse = getClienteBAC().deleteCliente(request);
+			InternalResultsResponse<Cliente> internalResponse = getCadastrosBAC().deleteCliente(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -120,7 +149,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IClienteBAC}
 	 *
@@ -134,7 +163,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		ClienteResponse response = new ClienteResponse();
 		try
 		{
-			InternalResultsResponse<Cliente> internalResponse = getClienteBAC().fetchClienteById(request);
+			InternalResultsResponse<Cliente> internalResponse = getCadastrosBAC().fetchClienteById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -144,7 +173,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IClienteBAC}
 	 *
@@ -158,7 +187,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		ClienteResponse response = new ClienteResponse();
 		try
 		{
-			InternalResultsResponse<Cliente> internalResponse = getClienteBAC().fetchClientesByRequest(request);
+			InternalResultsResponse<Cliente> internalResponse = getCadastrosBAC().fetchClientesByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -181,7 +210,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		ClienteResponse response = new ClienteResponse();
 		try
 		{
-			InternalResultsResponse<Cliente> internalResponse = getClienteBAC().refreshClientes(request);
+			InternalResultsResponse<Cliente> internalResponse = getCadastrosBAC().refreshClientes(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -203,7 +232,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		ClienteResponse response = new ClienteResponse();
 		try
 		{
-			InternalResultsResponse<Cliente> internalResponse = getClienteBAC().fetchAllClientes();
+			InternalResultsResponse<Cliente> internalResponse = getCadastrosBAC().fetchAllClientes(new Cliente());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -217,16 +246,6 @@ public class CadastrosWSImpl implements ICadastrosWS
 //===================================### FORNECEDOR ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IFornecedorBAC}.
-	 *
-	 * @param fornecedorBAC the fornecedorBAC to set.
-	 */
-	public void setFornecedorBAC(IFornecedorBAC fornecedorBAC)
-	{
-		this.fornecedorBAC = fornecedorBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IFornecedorBAC}
 	 *
 	 * @param request a FornecedorRequest
@@ -239,7 +258,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		FornecedorResponse response = new FornecedorResponse();
 		try
 		{
-			InternalResultsResponse<Fornecedor> internalResponse = getFornecedorBAC().insertFornecedor(request);
+			InternalResultsResponse<Fornecedor> internalResponse = getCadastrosBAC().insertFornecedor(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -249,7 +268,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IFornecedorBAC}
 	 *
@@ -263,7 +282,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		FornecedorResponse response = new FornecedorResponse();
 		try
 		{
-			InternalResultsResponse<Fornecedor> internalResponse = getFornecedorBAC().updateFornecedor(request);
+			InternalResultsResponse<Fornecedor> internalResponse = getCadastrosBAC().updateFornecedor(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -273,7 +292,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IFornecedorBAC}
 	 *
@@ -287,7 +306,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		FornecedorResponse response = new FornecedorResponse();
 		try
 		{
-			InternalResultsResponse<Fornecedor> internalResponse = getFornecedorBAC().deleteFornecedor(request);
+			InternalResultsResponse<Fornecedor> internalResponse = getCadastrosBAC().deleteFornecedor(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -297,7 +316,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IFornecedorBAC}
 	 *
@@ -311,7 +330,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		FornecedorResponse response = new FornecedorResponse();
 		try
 		{
-			InternalResultsResponse<Fornecedor> internalResponse = getFornecedorBAC().fetchFornecedorById(request);
+			InternalResultsResponse<Fornecedor> internalResponse = getCadastrosBAC().fetchFornecedorById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -321,7 +340,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IFornecedorBAC}
 	 *
@@ -335,7 +354,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		FornecedorResponse response = new FornecedorResponse();
 		try
 		{
-			InternalResultsResponse<Fornecedor> internalResponse = getFornecedorBAC().fetchFornecedorsByRequest(request);
+			InternalResultsResponse<Fornecedor> internalResponse = getCadastrosBAC().fetchFornecedorsByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -358,7 +377,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		FornecedorResponse response = new FornecedorResponse();
 		try
 		{
-			InternalResultsResponse<Fornecedor> internalResponse = getFornecedorBAC().refreshFornecedors(request);
+			InternalResultsResponse<Fornecedor> internalResponse = getCadastrosBAC().refreshFornecedors(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -380,7 +399,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		FornecedorResponse response = new FornecedorResponse();
 		try
 		{
-			InternalResultsResponse<Fornecedor> internalResponse = getFornecedorBAC().fetchAllFornecedors();
+			InternalResultsResponse<Fornecedor> internalResponse = getCadastrosBAC().fetchAllFornecedors(new Fornecedor());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -394,16 +413,6 @@ public class CadastrosWSImpl implements ICadastrosWS
 //===================================### TRANSPORTADOR ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link ITransportadorBAC}.
-	 *
-	 * @param transportadorBAC the transportadorBAC to set.
-	 */
-	public void setTransportadorBAC(ITransportadorBAC transportadorBAC)
-	{
-		this.transportadorBAC = transportadorBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link ITransportadorBAC}
 	 *
 	 * @param request a TransportadorRequest
@@ -416,7 +425,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		TransportadorResponse response = new TransportadorResponse();
 		try
 		{
-			InternalResultsResponse<Transportador> internalResponse = getTransportadorBAC().insertTransportador(request);
+			InternalResultsResponse<Transportador> internalResponse = getCadastrosBAC().insertTransportador(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -426,7 +435,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ITransportadorBAC}
 	 *
@@ -440,7 +449,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		TransportadorResponse response = new TransportadorResponse();
 		try
 		{
-			InternalResultsResponse<Transportador> internalResponse = getTransportadorBAC().updateTransportador(request);
+			InternalResultsResponse<Transportador> internalResponse = getCadastrosBAC().updateTransportador(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -450,7 +459,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ITransportadorBAC}
 	 *
@@ -464,7 +473,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		TransportadorResponse response = new TransportadorResponse();
 		try
 		{
-			InternalResultsResponse<Transportador> internalResponse = getTransportadorBAC().deleteTransportador(request);
+			InternalResultsResponse<Transportador> internalResponse = getCadastrosBAC().deleteTransportador(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -474,7 +483,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ITransportadorBAC}
 	 *
@@ -488,7 +497,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		TransportadorResponse response = new TransportadorResponse();
 		try
 		{
-			InternalResultsResponse<Transportador> internalResponse = getTransportadorBAC().fetchTransportadorById(request);
+			InternalResultsResponse<Transportador> internalResponse = getCadastrosBAC().fetchTransportadorById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -498,7 +507,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ITransportadorBAC}
 	 *
@@ -512,7 +521,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		TransportadorResponse response = new TransportadorResponse();
 		try
 		{
-			InternalResultsResponse<Transportador> internalResponse = getTransportadorBAC().fetchTransportadorsByRequest(request);
+			InternalResultsResponse<Transportador> internalResponse = getCadastrosBAC().fetchTransportadorsByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -535,7 +544,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		TransportadorResponse response = new TransportadorResponse();
 		try
 		{
-			InternalResultsResponse<Transportador> internalResponse = getTransportadorBAC().refreshTransportadors(request);
+			InternalResultsResponse<Transportador> internalResponse = getCadastrosBAC().refreshTransportadors(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -557,7 +566,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		TransportadorResponse response = new TransportadorResponse();
 		try
 		{
-			InternalResultsResponse<Transportador> internalResponse = getTransportadorBAC().fetchAllTransportadors();
+			InternalResultsResponse<Transportador> internalResponse = getCadastrosBAC().fetchAllTransportadors(new Transportador());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -571,16 +580,6 @@ public class CadastrosWSImpl implements ICadastrosWS
 //===================================### CONVENIO ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IConvenioBAC}.
-	 *
-	 * @param convenioBAC the convenioBAC to set.
-	 */
-	public void setConvenioBAC(IConvenioBAC convenioBAC)
-	{
-		this.convenioBAC = convenioBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IConvenioBAC}
 	 *
 	 * @param request a ConvenioRequest
@@ -593,7 +592,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		ConvenioResponse response = new ConvenioResponse();
 		try
 		{
-			InternalResultsResponse<Convenio> internalResponse = getConvenioBAC().insertConvenio(request);
+			InternalResultsResponse<Convenio> internalResponse = getCadastrosBAC().insertConvenio(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -603,7 +602,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IConvenioBAC}
 	 *
@@ -617,7 +616,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		ConvenioResponse response = new ConvenioResponse();
 		try
 		{
-			InternalResultsResponse<Convenio> internalResponse = getConvenioBAC().updateConvenio(request);
+			InternalResultsResponse<Convenio> internalResponse = getCadastrosBAC().updateConvenio(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -627,7 +626,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IConvenioBAC}
 	 *
@@ -641,7 +640,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		ConvenioResponse response = new ConvenioResponse();
 		try
 		{
-			InternalResultsResponse<Convenio> internalResponse = getConvenioBAC().deleteConvenio(request);
+			InternalResultsResponse<Convenio> internalResponse = getCadastrosBAC().deleteConvenio(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -651,7 +650,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IConvenioBAC}
 	 *
@@ -665,7 +664,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		ConvenioResponse response = new ConvenioResponse();
 		try
 		{
-			InternalResultsResponse<Convenio> internalResponse = getConvenioBAC().fetchConvenioById(request);
+			InternalResultsResponse<Convenio> internalResponse = getCadastrosBAC().fetchConvenioById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -675,7 +674,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IConvenioBAC}
 	 *
@@ -689,7 +688,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		ConvenioResponse response = new ConvenioResponse();
 		try
 		{
-			InternalResultsResponse<Convenio> internalResponse = getConvenioBAC().fetchConveniosByRequest(request);
+			InternalResultsResponse<Convenio> internalResponse = getCadastrosBAC().fetchConveniosByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -712,7 +711,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		ConvenioResponse response = new ConvenioResponse();
 		try
 		{
-			InternalResultsResponse<Convenio> internalResponse = getConvenioBAC().refreshConvenios(request);
+			InternalResultsResponse<Convenio> internalResponse = getCadastrosBAC().refreshConvenios(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -734,7 +733,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		ConvenioResponse response = new ConvenioResponse();
 		try
 		{
-			InternalResultsResponse<Convenio> internalResponse = getConvenioBAC().fetchAllConvenios();
+			InternalResultsResponse<Convenio> internalResponse = getCadastrosBAC().fetchAllConvenios(new Convenio());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -748,16 +747,6 @@ public class CadastrosWSImpl implements ICadastrosWS
 //===================================### CIDADE ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link ICidadeBAC}.
-	 *
-	 * @param cidadeBAC the cidadeBAC to set.
-	 */
-	public void setCidadeBAC(ICidadeBAC cidadeBAC)
-	{
-		this.cidadeBAC = cidadeBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link ICidadeBAC}
 	 *
 	 * @param request a CidadeRequest
@@ -770,7 +759,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		CidadeResponse response = new CidadeResponse();
 		try
 		{
-			InternalResultsResponse<Cidade> internalResponse = getCidadeBAC().insertCidade(request);
+			InternalResultsResponse<Cidade> internalResponse = getCadastrosBAC().insertCidade(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -780,7 +769,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICidadeBAC}
 	 *
@@ -794,7 +783,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		CidadeResponse response = new CidadeResponse();
 		try
 		{
-			InternalResultsResponse<Cidade> internalResponse = getCidadeBAC().updateCidade(request);
+			InternalResultsResponse<Cidade> internalResponse = getCadastrosBAC().updateCidade(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -804,7 +793,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICidadeBAC}
 	 *
@@ -818,7 +807,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		CidadeResponse response = new CidadeResponse();
 		try
 		{
-			InternalResultsResponse<Cidade> internalResponse = getCidadeBAC().deleteCidade(request);
+			InternalResultsResponse<Cidade> internalResponse = getCadastrosBAC().deleteCidade(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -828,7 +817,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICidadeBAC}
 	 *
@@ -842,7 +831,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		CidadeResponse response = new CidadeResponse();
 		try
 		{
-			InternalResultsResponse<Cidade> internalResponse = getCidadeBAC().fetchCidadeById(request);
+			InternalResultsResponse<Cidade> internalResponse = getCadastrosBAC().fetchCidadeById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -852,7 +841,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICidadeBAC}
 	 *
@@ -866,7 +855,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		CidadeResponse response = new CidadeResponse();
 		try
 		{
-			InternalResultsResponse<Cidade> internalResponse = getCidadeBAC().fetchCidadesByRequest(request);
+			InternalResultsResponse<Cidade> internalResponse = getCadastrosBAC().fetchCidadesByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -889,7 +878,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		CidadeResponse response = new CidadeResponse();
 		try
 		{
-			InternalResultsResponse<Cidade> internalResponse = getCidadeBAC().refreshCidades(request);
+			InternalResultsResponse<Cidade> internalResponse = getCadastrosBAC().refreshCidades(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -911,7 +900,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		CidadeResponse response = new CidadeResponse();
 		try
 		{
-			InternalResultsResponse<Cidade> internalResponse = getCidadeBAC().fetchAllCidades();
+			InternalResultsResponse<Cidade> internalResponse = getCadastrosBAC().fetchAllCidades(new Cidade());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -925,16 +914,6 @@ public class CadastrosWSImpl implements ICadastrosWS
 //===================================### ESTADO ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IEstadoBAC}.
-	 *
-	 * @param estadoBAC the estadoBAC to set.
-	 */
-	public void setEstadoBAC(IEstadoBAC estadoBAC)
-	{
-		this.estadoBAC = estadoBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IEstadoBAC}
 	 *
 	 * @param request a EstadoRequest
@@ -947,7 +926,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		EstadoResponse response = new EstadoResponse();
 		try
 		{
-			InternalResultsResponse<Estado> internalResponse = getEstadoBAC().insertEstado(request);
+			InternalResultsResponse<Estado> internalResponse = getCadastrosBAC().insertEstado(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -957,7 +936,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IEstadoBAC}
 	 *
@@ -971,7 +950,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		EstadoResponse response = new EstadoResponse();
 		try
 		{
-			InternalResultsResponse<Estado> internalResponse = getEstadoBAC().updateEstado(request);
+			InternalResultsResponse<Estado> internalResponse = getCadastrosBAC().updateEstado(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -981,7 +960,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IEstadoBAC}
 	 *
@@ -995,7 +974,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		EstadoResponse response = new EstadoResponse();
 		try
 		{
-			InternalResultsResponse<Estado> internalResponse = getEstadoBAC().deleteEstado(request);
+			InternalResultsResponse<Estado> internalResponse = getCadastrosBAC().deleteEstado(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1005,7 +984,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IEstadoBAC}
 	 *
@@ -1019,7 +998,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		EstadoResponse response = new EstadoResponse();
 		try
 		{
-			InternalResultsResponse<Estado> internalResponse = getEstadoBAC().fetchEstadoById(request);
+			InternalResultsResponse<Estado> internalResponse = getCadastrosBAC().fetchEstadoById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1029,7 +1008,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IEstadoBAC}
 	 *
@@ -1043,7 +1022,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		EstadoResponse response = new EstadoResponse();
 		try
 		{
-			InternalResultsResponse<Estado> internalResponse = getEstadoBAC().fetchEstadosByRequest(request);
+			InternalResultsResponse<Estado> internalResponse = getCadastrosBAC().fetchEstadosByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1066,7 +1045,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		EstadoResponse response = new EstadoResponse();
 		try
 		{
-			InternalResultsResponse<Estado> internalResponse = getEstadoBAC().refreshEstados(request);
+			InternalResultsResponse<Estado> internalResponse = getCadastrosBAC().refreshEstados(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1088,7 +1067,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		EstadoResponse response = new EstadoResponse();
 		try
 		{
-			InternalResultsResponse<Estado> internalResponse = getEstadoBAC().fetchAllEstados();
+			InternalResultsResponse<Estado> internalResponse = getCadastrosBAC().fetchAllEstados(new Estado());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1102,16 +1081,6 @@ public class CadastrosWSImpl implements ICadastrosWS
 //===================================### TAREFA ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link ITarefaBAC}.
-	 *
-	 * @param tarefaBAC the tarefaBAC to set.
-	 */
-	public void setTarefaBAC(ITarefaBAC tarefaBAC)
-	{
-		this.tarefaBAC = tarefaBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link ITarefaBAC}
 	 *
 	 * @param request a TarefaRequest
@@ -1124,7 +1093,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		TarefaResponse response = new TarefaResponse();
 		try
 		{
-			InternalResultsResponse<Tarefa> internalResponse = getTarefaBAC().insertTarefa(request);
+			InternalResultsResponse<Tarefa> internalResponse = getCadastrosBAC().insertTarefa(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1134,7 +1103,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ITarefaBAC}
 	 *
@@ -1148,7 +1117,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		TarefaResponse response = new TarefaResponse();
 		try
 		{
-			InternalResultsResponse<Tarefa> internalResponse = getTarefaBAC().updateTarefa(request);
+			InternalResultsResponse<Tarefa> internalResponse = getCadastrosBAC().updateTarefa(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1158,7 +1127,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ITarefaBAC}
 	 *
@@ -1172,7 +1141,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		TarefaResponse response = new TarefaResponse();
 		try
 		{
-			InternalResultsResponse<Tarefa> internalResponse = getTarefaBAC().deleteTarefa(request);
+			InternalResultsResponse<Tarefa> internalResponse = getCadastrosBAC().deleteTarefa(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1182,7 +1151,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ITarefaBAC}
 	 *
@@ -1196,7 +1165,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		TarefaResponse response = new TarefaResponse();
 		try
 		{
-			InternalResultsResponse<Tarefa> internalResponse = getTarefaBAC().fetchTarefaById(request);
+			InternalResultsResponse<Tarefa> internalResponse = getCadastrosBAC().fetchTarefaById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1206,7 +1175,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ITarefaBAC}
 	 *
@@ -1220,7 +1189,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		TarefaResponse response = new TarefaResponse();
 		try
 		{
-			InternalResultsResponse<Tarefa> internalResponse = getTarefaBAC().fetchTarefasByRequest(request);
+			InternalResultsResponse<Tarefa> internalResponse = getCadastrosBAC().fetchTarefasByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1243,7 +1212,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		TarefaResponse response = new TarefaResponse();
 		try
 		{
-			InternalResultsResponse<Tarefa> internalResponse = getTarefaBAC().refreshTarefas(request);
+			InternalResultsResponse<Tarefa> internalResponse = getCadastrosBAC().refreshTarefas(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1265,7 +1234,7 @@ public class CadastrosWSImpl implements ICadastrosWS
 		TarefaResponse response = new TarefaResponse();
 		try
 		{
-			InternalResultsResponse<Tarefa> internalResponse = getTarefaBAC().fetchAllTarefas();
+			InternalResultsResponse<Tarefa> internalResponse = getCadastrosBAC().fetchAllTarefas(new Tarefa());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}

@@ -10,13 +10,21 @@ import org.springframework.stereotype.Service;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IComprasBAC;
-import com.qat.samples.sysmgmt.model.Compras;
-import com.qat.samples.sysmgmt.model.request.ComprasMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.ComprasResponse;
+import com.qat.samples.sysmgmt.bac.Compras.IComprasBAC;
+import com.qat.samples.sysmgmt.cotacao.model.Cotacao;
+import com.qat.samples.sysmgmt.cotacao.request.CotacaoInquiryRequest;
+import com.qat.samples.sysmgmt.cotacao.request.CotacaoMaintenanceRequest;
+import com.qat.samples.sysmgmt.cotacao.response.CotacaoResponse;
+import com.qat.samples.sysmgmt.nf.model.NotaFiscalEntrada;
+import com.qat.samples.sysmgmt.nf.model.PedidoCompras;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalEntradaMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.PedidoComprasInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.PedidoComprasMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.response.NotaFiscalEntradaResponse;
+import com.qat.samples.sysmgmt.nf.model.response.PedidoComprasResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.ComprasInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -188,7 +196,7 @@ public class ComprasWSImpl implements com.qat.samples.sysmgmt.service.IComprasWS
 	}
 
 	@Override
-	public NotaFiscalEntradaResponse fetchNotaFiscalEntradasByRequest(NotaFiscalEntradaInquiryRequest request)
+	public NotaFiscalEntradaResponse fetchNotaFiscalEntradasByRequest(NotaFiscalInquiryRequest request)
 	{
 		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
 

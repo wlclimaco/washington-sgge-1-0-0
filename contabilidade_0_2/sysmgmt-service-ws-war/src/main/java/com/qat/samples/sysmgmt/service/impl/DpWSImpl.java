@@ -10,13 +10,25 @@ import org.springframework.stereotype.Service;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IDpBAC;
-import com.qat.samples.sysmgmt.model.Dp;
-import com.qat.samples.sysmgmt.model.request.DpMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.DpResponse;
+import com.qat.samples.sysmgmt.bac.Dp.IDpBAC;
+import com.qat.samples.sysmgmt.beneficios.model.Beneficios;
+import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest;
+import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosMaintenanceRequest;
+import com.qat.samples.sysmgmt.beneficios.model.response.BeneficiosResponse;
+import com.qat.samples.sysmgmt.dp.model.Eventos;
+import com.qat.samples.sysmgmt.dp.model.HorarioFunc;
+import com.qat.samples.sysmgmt.dp.model.request.EventoInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.EventosMaintenanceRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioMaintenanceRequest;
+import com.qat.samples.sysmgmt.dp.model.request.HoraFuncInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.HoraFuncMaintenanceRequest;
+import com.qat.samples.sysmgmt.dp.model.response.EventoResponse;
+import com.qat.samples.sysmgmt.dp.model.response.FuncionarioResponse;
+import com.qat.samples.sysmgmt.dp.model.response.HorarioFuncResponse;
+import com.qat.samples.sysmgmt.pessoa.model.Funcionario;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.DpInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -208,9 +220,9 @@ public class DpWSImpl implements com.qat.samples.sysmgmt.service.IDpWS
 
 //===================================### EVENTOS ####======================================
 	@Override
-	public EventosResponse insertEventos(EventosMaintenanceRequest request)
+	public EventoResponse insertEventos(EventosMaintenanceRequest request)
 	{
-		EventosResponse response = new EventosResponse();
+		EventoResponse response = new EventoResponse();
 
 		try
 		{
@@ -227,9 +239,9 @@ public class DpWSImpl implements com.qat.samples.sysmgmt.service.IDpWS
 	}
 
 	@Override
-	public EventosResponse updateEventos(EventosMaintenanceRequest request)
+	public EventoResponse updateEventos(EventosMaintenanceRequest request)
 	{
-		EventosResponse response = new EventosResponse();
+		EventoResponse response = new EventoResponse();
 
 		try
 		{
@@ -246,9 +258,9 @@ public class DpWSImpl implements com.qat.samples.sysmgmt.service.IDpWS
 	}
 
 	@Override
-	public EventosResponse deleteEventos(EventosMaintenanceRequest request)
+	public EventoResponse deleteEventos(EventosMaintenanceRequest request)
 	{
-		EventosResponse response = new EventosResponse();
+		EventoResponse response = new EventoResponse();
 
 		try
 		{
@@ -265,10 +277,10 @@ public class DpWSImpl implements com.qat.samples.sysmgmt.service.IDpWS
 	}
 
 	@Override
-	public EventosResponse refreshEventoss(RefreshRequest request)
+	public EventoResponse refreshEventoss(RefreshRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		EventosResponse response = new EventosResponse();
+		EventoResponse response = new EventoResponse();
 
 		try
 		{
@@ -285,9 +297,9 @@ public class DpWSImpl implements com.qat.samples.sysmgmt.service.IDpWS
 	}
 
 	@Override
-	public EventosResponse fetchAllEventoss(FetchAllRequest request)
+	public EventoResponse fetchAllEventoss(FetchAllRequest request)
 	{
-		EventosResponse response = new EventosResponse();
+		EventoResponse response = new EventoResponse();
 
 		try
 		{
@@ -309,9 +321,9 @@ public class DpWSImpl implements com.qat.samples.sysmgmt.service.IDpWS
 	 * FetchByIdRequest)
 	 */
 	@Override
-	public EventosResponse fetchEventosById(FetchByIdRequest request)
+	public EventoResponse fetchEventosById(FetchByIdRequest request)
 	{
-		EventosResponse response = new EventosResponse();
+		EventoResponse response = new EventoResponse();
 
 		try
 		{
@@ -331,9 +343,9 @@ public class DpWSImpl implements com.qat.samples.sysmgmt.service.IDpWS
 	}
 
 	@Override
-	public EventosResponse fetchEventossByRequest(EventosInquiryRequest request)
+	public EventoResponse fetchEventossByRequest(EventoInquiryRequest request)
 	{
-		EventosResponse response = new EventosResponse();
+		EventoResponse response = new EventoResponse();
 
 		try
 		{
@@ -494,13 +506,13 @@ public class DpWSImpl implements com.qat.samples.sysmgmt.service.IDpWS
 
 //===================================### HORAFUNC ####======================================
 	@Override
-	public HoraFuncResponse insertHoraFunc(HoraFuncMaintenanceRequest request)
+	public HorarioFuncResponse insertHoraFunc(HoraFuncMaintenanceRequest request)
 	{
-		HoraFuncResponse response = new HoraFuncResponse();
+		HorarioFuncResponse response = new HorarioFuncResponse();
 
 		try
 		{
-			InternalResultsResponse<HoraFunc> internalResponse = getDpBAC().insertHoraFunc(request);
+			InternalResultsResponse<HorarioFunc> internalResponse = getDpBAC().insertHoraFunc(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -513,13 +525,13 @@ public class DpWSImpl implements com.qat.samples.sysmgmt.service.IDpWS
 	}
 
 	@Override
-	public HoraFuncResponse updateHoraFunc(HoraFuncMaintenanceRequest request)
+	public HorarioFuncResponse updateHoraFunc(HoraFuncMaintenanceRequest request)
 	{
-		HoraFuncResponse response = new HoraFuncResponse();
+		HorarioFuncResponse response = new HorarioFuncResponse();
 
 		try
 		{
-			InternalResultsResponse<HoraFunc> internalResponse = getDpBAC().updateHoraFunc(request);
+			InternalResultsResponse<HorarioFunc> internalResponse = getDpBAC().updateHoraFunc(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -532,13 +544,13 @@ public class DpWSImpl implements com.qat.samples.sysmgmt.service.IDpWS
 	}
 
 	@Override
-	public HoraFuncResponse deleteHoraFunc(HoraFuncMaintenanceRequest request)
+	public HorarioFuncResponse deleteHoraFunc(HoraFuncMaintenanceRequest request)
 	{
-		HoraFuncResponse response = new HoraFuncResponse();
+		HorarioFuncResponse response = new HorarioFuncResponse();
 
 		try
 		{
-			InternalResultsResponse<HoraFunc> internalResponse = getDpBAC().deleteHoraFunc(request);
+			InternalResultsResponse<HorarioFunc> internalResponse = getDpBAC().deleteHoraFunc(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -551,14 +563,14 @@ public class DpWSImpl implements com.qat.samples.sysmgmt.service.IDpWS
 	}
 
 	@Override
-	public HoraFuncResponse refreshHoraFuncs(RefreshRequest request)
+	public HorarioFuncResponse refreshHoraFuncs(RefreshRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		HoraFuncResponse response = new HoraFuncResponse();
+		HorarioFuncResponse response = new HorarioFuncResponse();
 
 		try
 		{
-			InternalResultsResponse<HoraFunc> internalResponse = getDpBAC().refreshHoraFuncs(request);
+			InternalResultsResponse<HorarioFunc> internalResponse = getDpBAC().refreshHoraFuncs(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -571,13 +583,13 @@ public class DpWSImpl implements com.qat.samples.sysmgmt.service.IDpWS
 	}
 
 	@Override
-	public HoraFuncResponse fetchAllHoraFuncs(FetchAllRequest request)
+	public HorarioFuncResponse fetchAllHoraFuncs(FetchAllRequest request)
 	{
-		HoraFuncResponse response = new HoraFuncResponse();
+		HorarioFuncResponse response = new HorarioFuncResponse();
 
 		try
 		{
-			InternalResultsResponse<HoraFunc> internalResponse = getDpBAC().fetchAllHoraFuncs(new HoraFunc());
+			InternalResultsResponse<HorarioFunc> internalResponse = getDpBAC().fetchAllHoraFuncs(new HorarioFunc());
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -595,13 +607,13 @@ public class DpWSImpl implements com.qat.samples.sysmgmt.service.IDpWS
 	 * FetchByIdRequest)
 	 */
 	@Override
-	public HoraFuncResponse fetchHoraFuncById(FetchByIdRequest request)
+	public HorarioFuncResponse fetchHoraFuncById(FetchByIdRequest request)
 	{
-		HoraFuncResponse response = new HoraFuncResponse();
+		HorarioFuncResponse response = new HorarioFuncResponse();
 
 		try
 		{
-			InternalResultsResponse<HoraFunc> internalResponse = new InternalResultsResponse<HoraFunc>();
+			InternalResultsResponse<HorarioFunc> internalResponse = new InternalResultsResponse<HorarioFunc>();
 
 			internalResponse = getDpBAC().fetchHoraFuncById(request);
 			// Handle the processing for all previous methods regardless of them failing or succeeding.
@@ -617,13 +629,13 @@ public class DpWSImpl implements com.qat.samples.sysmgmt.service.IDpWS
 	}
 
 	@Override
-	public HoraFuncResponse fetchHoraFuncsByRequest(HoraFuncInquiryRequest request)
+	public HorarioFuncResponse fetchHoraFuncsByRequest(HoraFuncInquiryRequest request)
 	{
-		HoraFuncResponse response = new HoraFuncResponse();
+		HorarioFuncResponse response = new HorarioFuncResponse();
 
 		try
 		{
-			InternalResultsResponse<HoraFunc> internalResponse = getDpBAC().fetchHoraFuncsByRequest(request);
+			InternalResultsResponse<HorarioFunc> internalResponse = getDpBAC().fetchHoraFuncsByRequest(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)

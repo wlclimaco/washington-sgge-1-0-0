@@ -117,6 +117,7 @@ function FieldModel() {
 
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "tamanho", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "tipo", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "requerid", tipo :"Boolean",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "primaryKey", tipo :"Boolean",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});

@@ -10,13 +10,25 @@ import org.springframework.stereotype.Service;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IClinicaBAC;
-import com.qat.samples.sysmgmt.model.Clinica;
-import com.qat.samples.sysmgmt.model.request.ClinicaMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.ClinicaResponse;
+import com.qat.samples.sysmgmt.bac.Clinica.IClinicaBAC;
+import com.qat.samples.sysmgmt.clinica.model.Consulta;
+import com.qat.samples.sysmgmt.clinica.model.Exame;
+import com.qat.samples.sysmgmt.clinica.model.request.ConsultaInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.ConsultaMaintenanceRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.ExameInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.ExameMaintenanceRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.MedicoInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.MedicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.PacienteInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.PacienteMaintenanceRequest;
+import com.qat.samples.sysmgmt.clinica.model.response.ConsultaResponse;
+import com.qat.samples.sysmgmt.clinica.model.response.ExameResponse;
+import com.qat.samples.sysmgmt.clinica.model.response.MedicoResponse;
+import com.qat.samples.sysmgmt.clinica.model.response.PacienteResponse;
+import com.qat.samples.sysmgmt.pessoa.model.Medico;
+import com.qat.samples.sysmgmt.pessoa.model.Paciente;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.ClinicaInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**

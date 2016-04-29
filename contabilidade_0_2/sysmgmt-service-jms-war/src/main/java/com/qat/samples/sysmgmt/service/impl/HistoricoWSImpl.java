@@ -1,16 +1,21 @@
-/** create by system gera-java version 1.0.0 28/04/2016 16:21 : 34*/
+/** create by system gera-java version 1.0.0 28/04/2016 20:5 : 32*/
 package com.qat.samples.sysmgmt.service.impl;
 import javax.jws.WebService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IHistoricoBAC;
-import com.qat.samples.sysmgmt.model.Historico;
-import com.qat.samples.sysmgmt.model.response.HistoricoResponse;
+import com.qat.samples.sysmgmt.bac.Historico.IHistoricoBAC;
+import com.qat.samples.sysmgmt.historico.model.Historico;
+import com.qat.samples.sysmgmt.historico.model.request.HistoricoInquiryRequest;
+import com.qat.samples.sysmgmt.historico.model.request.HistoricoMaintenanceRequest;
+import com.qat.samples.sysmgmt.historico.model.response.HistoricoResponse;
 import com.qat.samples.sysmgmt.service.IHistoricoWS;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 /**
  * HistoricoWS used to provide WS interface. Delegates all calls to the IHistoricoBAC.
@@ -33,12 +38,9 @@ public class HistoricoWSImpl implements IHistoricoWS
 	 * @return the historicoBAC which is expected to provide the implementation.
 	 */
 	public IHistoricoBAC getHistoricoBAC()
-	{	
+	{
 		return historicoBAC;
 	}
-
-//===================================### HISTORICO ####======================================
-
 	/**
 	 * Spring injection uses this method to inject an implementation of {@link IHistoricoBAC}.
 	 *
@@ -48,7 +50,10 @@ public class HistoricoWSImpl implements IHistoricoWS
 	{
 		this.historicoBAC = historicoBAC;
 	}
-	
+
+
+//===================================### HISTORICO ####======================================
+
 	/**
 	 * Delegates call to {@link IHistoricoBAC}
 	 *
@@ -72,7 +77,7 @@ public class HistoricoWSImpl implements IHistoricoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IHistoricoBAC}
 	 *
@@ -96,7 +101,7 @@ public class HistoricoWSImpl implements IHistoricoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IHistoricoBAC}
 	 *
@@ -120,7 +125,7 @@ public class HistoricoWSImpl implements IHistoricoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IHistoricoBAC}
 	 *
@@ -144,7 +149,7 @@ public class HistoricoWSImpl implements IHistoricoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IHistoricoBAC}
 	 *
@@ -203,7 +208,7 @@ public class HistoricoWSImpl implements IHistoricoWS
 		HistoricoResponse response = new HistoricoResponse();
 		try
 		{
-			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().fetchAllHistoricos();
+			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().fetchAllHistoricos(new Historico());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -214,180 +219,5 @@ public class HistoricoWSImpl implements IHistoricoWS
 		return response;
 	}
 
-//===================================### HISTORICOITENS ####======================================
 
-	/**
-	 * Spring injection uses this method to inject an implementation of {@link IHistoricoItensBAC}.
-	 *
-	 * @param historicoitensBAC the historicoitensBAC to set.
-	 */
-	public void setHistoricoItensBAC(IHistoricoItensBAC historicoitensBAC)
-	{
-		this.historicoitensBAC = historicoitensBAC;
-	}
-	
-	/**
-	 * Delegates call to {@link IHistoricoItensBAC}
-	 *
-	 * @param request a HistoricoItensRequest
-	 * @return HistoricoItensResponse
-	 */
-	@Override
-	public HistoricoItensResponse insertHistoricoItens(HistoricoItensMaintenanceRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		HistoricoItensResponse response = new HistoricoItensResponse();
-		try
-		{
-			InternalResultsResponse<HistoricoItens> internalResponse = getHistoricoItensBAC().insertHistoricoItens(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	
-	/**
-	 * Delegates call to {@link IHistoricoItensBAC}
-	 *
-	 * @param request a HistoricoItensRequest
-	 * @return HistoricoItensResponse
-	 */
-	@Override
-	public HistoricoItensResponse updateHistoricoItens(HistoricoItensMaintenanceRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		HistoricoItensResponse response = new HistoricoItensResponse();
-		try
-		{
-			InternalResultsResponse<HistoricoItens> internalResponse = getHistoricoItensBAC().updateHistoricoItens(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	
-	/**
-	 * Delegates call to {@link IHistoricoItensBAC}
-	 *
-	 * @param request a HistoricoItensRequest
-	 * @return HistoricoItensResponse
-	 */
-	@Override
-	public HistoricoItensResponse deleteHistoricoItens(HistoricoItensMaintenanceRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		HistoricoItensResponse response = new HistoricoItensResponse();
-		try
-		{
-			InternalResultsResponse<HistoricoItens> internalResponse = getHistoricoItensBAC().deleteHistoricoItens(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	
-	/**
-	 * Delegates call to {@link IHistoricoItensBAC}
-	 *
-	 * @param request a HistoricoItensRequest
-	 * @return HistoricoItensResponse
-	 */
-	@Override
-	public HistoricoItensResponse fetchHistoricoItensById(FetchByIdRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		HistoricoItensResponse response = new HistoricoItensResponse();
-		try
-		{
-			InternalResultsResponse<HistoricoItens> internalResponse = getHistoricoItensBAC().fetchHistoricoItensById(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	
-	/**
-	 * Delegates call to {@link IHistoricoItensBAC}
-	 *
-	 * @param request a HistoricoItensRequest
-	 * @return HistoricoItensResponse
-	 */
-	@Override
-	public HistoricoItensResponse fetchHistoricoItenssByRequest(HistoricoItensInquiryRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		HistoricoItensResponse response = new HistoricoItensResponse();
-		try
-		{
-			InternalResultsResponse<HistoricoItens> internalResponse = getHistoricoItensBAC().fetchHistoricoItenssByRequest(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	/**
-	 * Delegates call to {@link IHistoricoItensBAC}
-	 *
-	 * @param request a HistoricoItensRequest
-	 * @return HistoricoItensResponse
-	 */
-	@Override
-	public HistoricoItensResponse refreshHistoricoItenss(RefreshRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		HistoricoItensResponse response = new HistoricoItensResponse();
-		try
-		{
-			InternalResultsResponse<HistoricoItens> internalResponse = getHistoricoItensBAC().refreshHistoricoItenss(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	/**
-	 * Delegates call to {@link IHistoricoItensBAC}
-	 *
-	 * @param request a HistoricoItensRequest
-	 * @return HistoricoItensResponse
-	 */
-	@Override
-	public HistoricoItensResponse fetchAllHistoricoItenss(FetchAllRequest request)
-	{
-		HistoricoItensResponse response = new HistoricoItensResponse();
-		try
-		{
-			InternalResultsResponse<HistoricoItens> internalResponse = getHistoricoItensBAC().fetchAllHistoricoItenss();
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
 }

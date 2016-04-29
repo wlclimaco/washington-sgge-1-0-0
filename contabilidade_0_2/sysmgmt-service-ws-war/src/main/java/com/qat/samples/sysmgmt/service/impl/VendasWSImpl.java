@@ -10,13 +10,21 @@ import org.springframework.stereotype.Service;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IVendasBAC;
-import com.qat.samples.sysmgmt.model.Vendas;
-import com.qat.samples.sysmgmt.model.request.VendasMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.VendasResponse;
+import com.qat.samples.sysmgmt.bac.Vendas.IVendasBAC;
+import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
+import com.qat.samples.sysmgmt.nf.model.Orcamento;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalSaidaMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.OrcamentoMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.response.NotaFiscalSaidaResponse;
+import com.qat.samples.sysmgmt.nf.model.response.OrcamentoResponse;
+import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.response.OrdemServicoResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.VendasInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -188,7 +196,7 @@ public class VendasWSImpl implements com.qat.samples.sysmgmt.service.IVendasWS
 	}
 
 	@Override
-	public NotaFiscalSaidaResponse fetchNotaFiscalSaidasByRequest(NotaFiscalSaidaInquiryRequest request)
+	public NotaFiscalSaidaResponse fetchNotaFiscalSaidasByRequest(NotaFiscalInquiryRequest request)
 	{
 		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
 

@@ -24,8 +24,10 @@ b_Insert = function (table,oField,total){
 						if((oField[i].field.campo.toLowerCase().indexOf('data') > -1)||((oField[i].field.campo.toLowerCase().indexOf('date') > -1))){
 
 							a = a + " "+b.getTime()+",";
-						}else if((oField[i].field.tipo.toLowerCase() !== 'integer')&&(oField[i].field.tipo.toLowerCase() !== 'double')&&(oField[i].field.tipo.toLowerCase() !== 'long')){
+						}else if((oField[i].field.tipo.toLowerCase() !== 'integer')&&(oField[i].field.tipo.toLowerCase() !== 'double')&&(oField[i].field.tipo.toLowerCase() !== 'long')&&(oField[i].field.tipo.toLowerCase() !== 'boolean')){
 							a = a + " '"+oField[i].field.campo+"_"+i+"',";
+						}else if(oField[i].field.tipo.toLowerCase() === 'boolean'){
+							a = a + 'true,'
 						}else{
 							a = a + ' '+(x+1)+',';
 						}

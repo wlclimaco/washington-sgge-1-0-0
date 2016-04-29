@@ -1,16 +1,37 @@
-/** create by system gera-java version 1.0.0 28/04/2016 16:21 : 34*/
+/** create by system gera-java version 1.0.0 28/04/2016 20:5 : 32*/
 package com.qat.samples.sysmgmt.service.impl;
 import javax.jws.WebService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IProdutoBAC;
-import com.qat.samples.sysmgmt.model.Produto;
-import com.qat.samples.sysmgmt.model.response.ProdutoResponse;
+import com.qat.samples.sysmgmt.bac.Produto.IProdutoBAC;
+import com.qat.samples.sysmgmt.produto.model.Grupo;
+import com.qat.samples.sysmgmt.produto.model.Marca;
+import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.SubGrupo;
+import com.qat.samples.sysmgmt.produto.model.UniMed;
+import com.qat.samples.sysmgmt.produto.model.request.GrupoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.GrupoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.MarcaMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.SubGrupoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.UniMedMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.response.GrupoResponse;
+import com.qat.samples.sysmgmt.produto.model.response.MarcaResponse;
+import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
+import com.qat.samples.sysmgmt.produto.model.response.SubGrupoResponse;
+import com.qat.samples.sysmgmt.produto.model.response.UniMedResponse;
 import com.qat.samples.sysmgmt.service.IProdutoWS;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 /**
  * ProdutoWS used to provide WS interface. Delegates all calls to the IProdutoBAC.
@@ -33,12 +54,9 @@ public class ProdutoWSImpl implements IProdutoWS
 	 * @return the produtoBAC which is expected to provide the implementation.
 	 */
 	public IProdutoBAC getProdutoBAC()
-	{	
+	{
 		return produtoBAC;
 	}
-
-//===================================### PRODUTO ####======================================
-
 	/**
 	 * Spring injection uses this method to inject an implementation of {@link IProdutoBAC}.
 	 *
@@ -48,7 +66,10 @@ public class ProdutoWSImpl implements IProdutoWS
 	{
 		this.produtoBAC = produtoBAC;
 	}
-	
+
+
+//===================================### PRODUTO ####======================================
+
 	/**
 	 * Delegates call to {@link IProdutoBAC}
 	 *
@@ -72,7 +93,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IProdutoBAC}
 	 *
@@ -96,7 +117,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IProdutoBAC}
 	 *
@@ -120,7 +141,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IProdutoBAC}
 	 *
@@ -144,7 +165,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IProdutoBAC}
 	 *
@@ -203,7 +224,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		ProdutoResponse response = new ProdutoResponse();
 		try
 		{
-			InternalResultsResponse<Produto> internalResponse = getProdutoBAC().fetchAllProdutos();
+			InternalResultsResponse<Produto> internalResponse = getProdutoBAC().fetchAllProdutos(new Produto());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -217,16 +238,6 @@ public class ProdutoWSImpl implements IProdutoWS
 //===================================### MARCA ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IMarcaBAC}.
-	 *
-	 * @param marcaBAC the marcaBAC to set.
-	 */
-	public void setMarcaBAC(IMarcaBAC marcaBAC)
-	{
-		this.marcaBAC = marcaBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IMarcaBAC}
 	 *
 	 * @param request a MarcaRequest
@@ -239,7 +250,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		MarcaResponse response = new MarcaResponse();
 		try
 		{
-			InternalResultsResponse<Marca> internalResponse = getMarcaBAC().insertMarca(request);
+			InternalResultsResponse<Marca> internalResponse = getProdutoBAC().insertMarca(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -249,7 +260,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IMarcaBAC}
 	 *
@@ -263,7 +274,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		MarcaResponse response = new MarcaResponse();
 		try
 		{
-			InternalResultsResponse<Marca> internalResponse = getMarcaBAC().updateMarca(request);
+			InternalResultsResponse<Marca> internalResponse = getProdutoBAC().updateMarca(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -273,7 +284,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IMarcaBAC}
 	 *
@@ -287,7 +298,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		MarcaResponse response = new MarcaResponse();
 		try
 		{
-			InternalResultsResponse<Marca> internalResponse = getMarcaBAC().deleteMarca(request);
+			InternalResultsResponse<Marca> internalResponse = getProdutoBAC().deleteMarca(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -297,7 +308,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IMarcaBAC}
 	 *
@@ -311,7 +322,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		MarcaResponse response = new MarcaResponse();
 		try
 		{
-			InternalResultsResponse<Marca> internalResponse = getMarcaBAC().fetchMarcaById(request);
+			InternalResultsResponse<Marca> internalResponse = getProdutoBAC().fetchMarcaById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -321,7 +332,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IMarcaBAC}
 	 *
@@ -335,7 +346,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		MarcaResponse response = new MarcaResponse();
 		try
 		{
-			InternalResultsResponse<Marca> internalResponse = getMarcaBAC().fetchMarcasByRequest(request);
+			InternalResultsResponse<Marca> internalResponse = getProdutoBAC().fetchMarcasByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -358,7 +369,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		MarcaResponse response = new MarcaResponse();
 		try
 		{
-			InternalResultsResponse<Marca> internalResponse = getMarcaBAC().refreshMarcas(request);
+			InternalResultsResponse<Marca> internalResponse = getProdutoBAC().refreshMarcas(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -380,7 +391,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		MarcaResponse response = new MarcaResponse();
 		try
 		{
-			InternalResultsResponse<Marca> internalResponse = getMarcaBAC().fetchAllMarcas();
+			InternalResultsResponse<Marca> internalResponse = getProdutoBAC().fetchAllMarcas(new Marca());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -394,16 +405,6 @@ public class ProdutoWSImpl implements IProdutoWS
 //===================================### GRUPO ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IGrupoBAC}.
-	 *
-	 * @param grupoBAC the grupoBAC to set.
-	 */
-	public void setGrupoBAC(IGrupoBAC grupoBAC)
-	{
-		this.grupoBAC = grupoBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IGrupoBAC}
 	 *
 	 * @param request a GrupoRequest
@@ -416,7 +417,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		GrupoResponse response = new GrupoResponse();
 		try
 		{
-			InternalResultsResponse<Grupo> internalResponse = getGrupoBAC().insertGrupo(request);
+			InternalResultsResponse<Grupo> internalResponse = getProdutoBAC().insertGrupo(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -426,7 +427,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IGrupoBAC}
 	 *
@@ -440,7 +441,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		GrupoResponse response = new GrupoResponse();
 		try
 		{
-			InternalResultsResponse<Grupo> internalResponse = getGrupoBAC().updateGrupo(request);
+			InternalResultsResponse<Grupo> internalResponse = getProdutoBAC().updateGrupo(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -450,7 +451,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IGrupoBAC}
 	 *
@@ -464,7 +465,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		GrupoResponse response = new GrupoResponse();
 		try
 		{
-			InternalResultsResponse<Grupo> internalResponse = getGrupoBAC().deleteGrupo(request);
+			InternalResultsResponse<Grupo> internalResponse = getProdutoBAC().deleteGrupo(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -474,7 +475,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IGrupoBAC}
 	 *
@@ -488,7 +489,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		GrupoResponse response = new GrupoResponse();
 		try
 		{
-			InternalResultsResponse<Grupo> internalResponse = getGrupoBAC().fetchGrupoById(request);
+			InternalResultsResponse<Grupo> internalResponse = getProdutoBAC().fetchGrupoById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -498,7 +499,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IGrupoBAC}
 	 *
@@ -512,7 +513,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		GrupoResponse response = new GrupoResponse();
 		try
 		{
-			InternalResultsResponse<Grupo> internalResponse = getGrupoBAC().fetchGruposByRequest(request);
+			InternalResultsResponse<Grupo> internalResponse = getProdutoBAC().fetchGruposByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -535,7 +536,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		GrupoResponse response = new GrupoResponse();
 		try
 		{
-			InternalResultsResponse<Grupo> internalResponse = getGrupoBAC().refreshGrupos(request);
+			InternalResultsResponse<Grupo> internalResponse = getProdutoBAC().refreshGrupos(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -557,7 +558,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		GrupoResponse response = new GrupoResponse();
 		try
 		{
-			InternalResultsResponse<Grupo> internalResponse = getGrupoBAC().fetchAllGrupos();
+			InternalResultsResponse<Grupo> internalResponse = getProdutoBAC().fetchAllGrupos(new Grupo());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -571,16 +572,6 @@ public class ProdutoWSImpl implements IProdutoWS
 //===================================### SUBGRUPO ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link ISubGrupoBAC}.
-	 *
-	 * @param subgrupoBAC the subgrupoBAC to set.
-	 */
-	public void setSubGrupoBAC(ISubGrupoBAC subgrupoBAC)
-	{
-		this.subgrupoBAC = subgrupoBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link ISubGrupoBAC}
 	 *
 	 * @param request a SubGrupoRequest
@@ -593,7 +584,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		SubGrupoResponse response = new SubGrupoResponse();
 		try
 		{
-			InternalResultsResponse<SubGrupo> internalResponse = getSubGrupoBAC().insertSubGrupo(request);
+			InternalResultsResponse<SubGrupo> internalResponse = getProdutoBAC().insertSubGrupo(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -603,7 +594,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ISubGrupoBAC}
 	 *
@@ -617,7 +608,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		SubGrupoResponse response = new SubGrupoResponse();
 		try
 		{
-			InternalResultsResponse<SubGrupo> internalResponse = getSubGrupoBAC().updateSubGrupo(request);
+			InternalResultsResponse<SubGrupo> internalResponse = getProdutoBAC().updateSubGrupo(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -627,7 +618,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ISubGrupoBAC}
 	 *
@@ -641,7 +632,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		SubGrupoResponse response = new SubGrupoResponse();
 		try
 		{
-			InternalResultsResponse<SubGrupo> internalResponse = getSubGrupoBAC().deleteSubGrupo(request);
+			InternalResultsResponse<SubGrupo> internalResponse = getProdutoBAC().deleteSubGrupo(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -651,7 +642,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ISubGrupoBAC}
 	 *
@@ -665,7 +656,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		SubGrupoResponse response = new SubGrupoResponse();
 		try
 		{
-			InternalResultsResponse<SubGrupo> internalResponse = getSubGrupoBAC().fetchSubGrupoById(request);
+			InternalResultsResponse<SubGrupo> internalResponse = getProdutoBAC().fetchSubGrupoById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -675,7 +666,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ISubGrupoBAC}
 	 *
@@ -689,7 +680,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		SubGrupoResponse response = new SubGrupoResponse();
 		try
 		{
-			InternalResultsResponse<SubGrupo> internalResponse = getSubGrupoBAC().fetchSubGruposByRequest(request);
+			InternalResultsResponse<SubGrupo> internalResponse = getProdutoBAC().fetchSubGruposByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -712,7 +703,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		SubGrupoResponse response = new SubGrupoResponse();
 		try
 		{
-			InternalResultsResponse<SubGrupo> internalResponse = getSubGrupoBAC().refreshSubGrupos(request);
+			InternalResultsResponse<SubGrupo> internalResponse = getProdutoBAC().refreshSubGrupos(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -734,7 +725,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		SubGrupoResponse response = new SubGrupoResponse();
 		try
 		{
-			InternalResultsResponse<SubGrupo> internalResponse = getSubGrupoBAC().fetchAllSubGrupos();
+			InternalResultsResponse<SubGrupo> internalResponse = getProdutoBAC().fetchAllSubGrupos(new SubGrupo());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -748,16 +739,6 @@ public class ProdutoWSImpl implements IProdutoWS
 //===================================### UNIMED ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IUniMedBAC}.
-	 *
-	 * @param unimedBAC the unimedBAC to set.
-	 */
-	public void setUniMedBAC(IUniMedBAC unimedBAC)
-	{
-		this.unimedBAC = unimedBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IUniMedBAC}
 	 *
 	 * @param request a UniMedRequest
@@ -770,7 +751,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		UniMedResponse response = new UniMedResponse();
 		try
 		{
-			InternalResultsResponse<UniMed> internalResponse = getUniMedBAC().insertUniMed(request);
+			InternalResultsResponse<UniMed> internalResponse = getProdutoBAC().insertUniMed(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -780,7 +761,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IUniMedBAC}
 	 *
@@ -794,7 +775,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		UniMedResponse response = new UniMedResponse();
 		try
 		{
-			InternalResultsResponse<UniMed> internalResponse = getUniMedBAC().updateUniMed(request);
+			InternalResultsResponse<UniMed> internalResponse = getProdutoBAC().updateUniMed(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -804,7 +785,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IUniMedBAC}
 	 *
@@ -818,7 +799,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		UniMedResponse response = new UniMedResponse();
 		try
 		{
-			InternalResultsResponse<UniMed> internalResponse = getUniMedBAC().deleteUniMed(request);
+			InternalResultsResponse<UniMed> internalResponse = getProdutoBAC().deleteUniMed(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -828,7 +809,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IUniMedBAC}
 	 *
@@ -842,7 +823,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		UniMedResponse response = new UniMedResponse();
 		try
 		{
-			InternalResultsResponse<UniMed> internalResponse = getUniMedBAC().fetchUniMedById(request);
+			InternalResultsResponse<UniMed> internalResponse = getProdutoBAC().fetchUniMedById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -852,7 +833,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IUniMedBAC}
 	 *
@@ -866,7 +847,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		UniMedResponse response = new UniMedResponse();
 		try
 		{
-			InternalResultsResponse<UniMed> internalResponse = getUniMedBAC().fetchUniMedsByRequest(request);
+			InternalResultsResponse<UniMed> internalResponse = getProdutoBAC().fetchUniMedsByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -889,7 +870,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		UniMedResponse response = new UniMedResponse();
 		try
 		{
-			InternalResultsResponse<UniMed> internalResponse = getUniMedBAC().refreshUniMeds(request);
+			InternalResultsResponse<UniMed> internalResponse = getProdutoBAC().refreshUniMeds(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -911,7 +892,7 @@ public class ProdutoWSImpl implements IProdutoWS
 		UniMedResponse response = new UniMedResponse();
 		try
 		{
-			InternalResultsResponse<UniMed> internalResponse = getUniMedBAC().fetchAllUniMeds();
+			InternalResultsResponse<UniMed> internalResponse = getProdutoBAC().fetchAllUniMeds(new UniMed());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}

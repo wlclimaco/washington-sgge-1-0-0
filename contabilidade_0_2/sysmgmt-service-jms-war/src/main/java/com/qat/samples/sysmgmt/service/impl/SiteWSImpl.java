@@ -1,16 +1,33 @@
-/** create by system gera-java version 1.0.0 28/04/2016 16:21 : 34*/
+/** create by system gera-java version 1.0.0 28/04/2016 20:5 : 32*/
 package com.qat.samples.sysmgmt.service.impl;
 import javax.jws.WebService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.ISiteBAC;
-import com.qat.samples.sysmgmt.model.Site;
-import com.qat.samples.sysmgmt.model.response.SiteResponse;
+import com.qat.samples.sysmgmt.bac.Site.ISiteBAC;
+import com.qat.samples.sysmgmt.contabilidade.model.Plano;
+import com.qat.samples.sysmgmt.contato.model.Contato;
+import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
+import com.qat.samples.sysmgmt.contato.model.request.ContatoMaintenanceRequest;
+import com.qat.samples.sysmgmt.contato.model.response.ContatoResponse;
+import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.response.OrdemServicoResponse;
+import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.PlanoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.response.PlanoResponse;
 import com.qat.samples.sysmgmt.service.ISiteWS;
+import com.qat.samples.sysmgmt.site.model.Site;
+import com.qat.samples.sysmgmt.site.model.request.SiteInquiryRequest;
+import com.qat.samples.sysmgmt.site.model.request.SiteMaintenanceRequest;
+import com.qat.samples.sysmgmt.site.model.response.SiteResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 /**
  * SiteWS used to provide WS interface. Delegates all calls to the ISiteBAC.
@@ -33,12 +50,9 @@ public class SiteWSImpl implements ISiteWS
 	 * @return the siteBAC which is expected to provide the implementation.
 	 */
 	public ISiteBAC getSiteBAC()
-	{	
+	{
 		return siteBAC;
 	}
-
-//===================================### SITE ####======================================
-
 	/**
 	 * Spring injection uses this method to inject an implementation of {@link ISiteBAC}.
 	 *
@@ -48,7 +62,10 @@ public class SiteWSImpl implements ISiteWS
 	{
 		this.siteBAC = siteBAC;
 	}
-	
+
+
+//===================================### SITE ####======================================
+
 	/**
 	 * Delegates call to {@link ISiteBAC}
 	 *
@@ -72,7 +89,7 @@ public class SiteWSImpl implements ISiteWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ISiteBAC}
 	 *
@@ -96,7 +113,7 @@ public class SiteWSImpl implements ISiteWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ISiteBAC}
 	 *
@@ -120,7 +137,7 @@ public class SiteWSImpl implements ISiteWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ISiteBAC}
 	 *
@@ -144,7 +161,7 @@ public class SiteWSImpl implements ISiteWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ISiteBAC}
 	 *
@@ -203,7 +220,7 @@ public class SiteWSImpl implements ISiteWS
 		SiteResponse response = new SiteResponse();
 		try
 		{
-			InternalResultsResponse<Site> internalResponse = getSiteBAC().fetchAllSites();
+			InternalResultsResponse<Site> internalResponse = getSiteBAC().fetchAllSites(new Site());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -217,16 +234,6 @@ public class SiteWSImpl implements ISiteWS
 //===================================### CONTATO ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IContatoBAC}.
-	 *
-	 * @param contatoBAC the contatoBAC to set.
-	 */
-	public void setContatoBAC(IContatoBAC contatoBAC)
-	{
-		this.contatoBAC = contatoBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IContatoBAC}
 	 *
 	 * @param request a ContatoRequest
@@ -239,7 +246,7 @@ public class SiteWSImpl implements ISiteWS
 		ContatoResponse response = new ContatoResponse();
 		try
 		{
-			InternalResultsResponse<Contato> internalResponse = getContatoBAC().insertContato(request);
+			InternalResultsResponse<Contato> internalResponse = getSiteBAC().insertContato(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -249,7 +256,7 @@ public class SiteWSImpl implements ISiteWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IContatoBAC}
 	 *
@@ -263,7 +270,7 @@ public class SiteWSImpl implements ISiteWS
 		ContatoResponse response = new ContatoResponse();
 		try
 		{
-			InternalResultsResponse<Contato> internalResponse = getContatoBAC().updateContato(request);
+			InternalResultsResponse<Contato> internalResponse = getSiteBAC().updateContato(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -273,7 +280,7 @@ public class SiteWSImpl implements ISiteWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IContatoBAC}
 	 *
@@ -287,7 +294,7 @@ public class SiteWSImpl implements ISiteWS
 		ContatoResponse response = new ContatoResponse();
 		try
 		{
-			InternalResultsResponse<Contato> internalResponse = getContatoBAC().deleteContato(request);
+			InternalResultsResponse<Contato> internalResponse = getSiteBAC().deleteContato(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -297,7 +304,7 @@ public class SiteWSImpl implements ISiteWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IContatoBAC}
 	 *
@@ -311,7 +318,7 @@ public class SiteWSImpl implements ISiteWS
 		ContatoResponse response = new ContatoResponse();
 		try
 		{
-			InternalResultsResponse<Contato> internalResponse = getContatoBAC().fetchContatoById(request);
+			InternalResultsResponse<Contato> internalResponse = getSiteBAC().fetchContatoById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -321,7 +328,7 @@ public class SiteWSImpl implements ISiteWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IContatoBAC}
 	 *
@@ -335,7 +342,7 @@ public class SiteWSImpl implements ISiteWS
 		ContatoResponse response = new ContatoResponse();
 		try
 		{
-			InternalResultsResponse<Contato> internalResponse = getContatoBAC().fetchContatosByRequest(request);
+			InternalResultsResponse<Contato> internalResponse = getSiteBAC().fetchContatosByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -358,7 +365,7 @@ public class SiteWSImpl implements ISiteWS
 		ContatoResponse response = new ContatoResponse();
 		try
 		{
-			InternalResultsResponse<Contato> internalResponse = getContatoBAC().refreshContatos(request);
+			InternalResultsResponse<Contato> internalResponse = getSiteBAC().refreshContatos(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -380,7 +387,7 @@ public class SiteWSImpl implements ISiteWS
 		ContatoResponse response = new ContatoResponse();
 		try
 		{
-			InternalResultsResponse<Contato> internalResponse = getContatoBAC().fetchAllContatos();
+			InternalResultsResponse<Contato> internalResponse = getSiteBAC().fetchAllContatos(new Contato());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -394,16 +401,6 @@ public class SiteWSImpl implements ISiteWS
 //===================================### ORDEMSERVICO ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IOrdemServicoBAC}.
-	 *
-	 * @param ordemservicoBAC the ordemservicoBAC to set.
-	 */
-	public void setOrdemServicoBAC(IOrdemServicoBAC ordemservicoBAC)
-	{
-		this.ordemservicoBAC = ordemservicoBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IOrdemServicoBAC}
 	 *
 	 * @param request a OrdemServicoRequest
@@ -416,7 +413,7 @@ public class SiteWSImpl implements ISiteWS
 		OrdemServicoResponse response = new OrdemServicoResponse();
 		try
 		{
-			InternalResultsResponse<OrdemServico> internalResponse = getOrdemServicoBAC().insertOrdemServico(request);
+			InternalResultsResponse<OrdemServico> internalResponse = getSiteBAC().insertOrdemServico(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -426,7 +423,7 @@ public class SiteWSImpl implements ISiteWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IOrdemServicoBAC}
 	 *
@@ -440,7 +437,7 @@ public class SiteWSImpl implements ISiteWS
 		OrdemServicoResponse response = new OrdemServicoResponse();
 		try
 		{
-			InternalResultsResponse<OrdemServico> internalResponse = getOrdemServicoBAC().updateOrdemServico(request);
+			InternalResultsResponse<OrdemServico> internalResponse = getSiteBAC().updateOrdemServico(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -450,7 +447,7 @@ public class SiteWSImpl implements ISiteWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IOrdemServicoBAC}
 	 *
@@ -464,7 +461,7 @@ public class SiteWSImpl implements ISiteWS
 		OrdemServicoResponse response = new OrdemServicoResponse();
 		try
 		{
-			InternalResultsResponse<OrdemServico> internalResponse = getOrdemServicoBAC().deleteOrdemServico(request);
+			InternalResultsResponse<OrdemServico> internalResponse = getSiteBAC().deleteOrdemServico(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -474,7 +471,7 @@ public class SiteWSImpl implements ISiteWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IOrdemServicoBAC}
 	 *
@@ -488,7 +485,7 @@ public class SiteWSImpl implements ISiteWS
 		OrdemServicoResponse response = new OrdemServicoResponse();
 		try
 		{
-			InternalResultsResponse<OrdemServico> internalResponse = getOrdemServicoBAC().fetchOrdemServicoById(request);
+			InternalResultsResponse<OrdemServico> internalResponse = getSiteBAC().fetchOrdemServicoById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -498,7 +495,7 @@ public class SiteWSImpl implements ISiteWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IOrdemServicoBAC}
 	 *
@@ -512,7 +509,7 @@ public class SiteWSImpl implements ISiteWS
 		OrdemServicoResponse response = new OrdemServicoResponse();
 		try
 		{
-			InternalResultsResponse<OrdemServico> internalResponse = getOrdemServicoBAC().fetchOrdemServicosByRequest(request);
+			InternalResultsResponse<OrdemServico> internalResponse = getSiteBAC().fetchOrdemServicosByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -535,7 +532,7 @@ public class SiteWSImpl implements ISiteWS
 		OrdemServicoResponse response = new OrdemServicoResponse();
 		try
 		{
-			InternalResultsResponse<OrdemServico> internalResponse = getOrdemServicoBAC().refreshOrdemServicos(request);
+			InternalResultsResponse<OrdemServico> internalResponse = getSiteBAC().refreshOrdemServicos(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -557,7 +554,7 @@ public class SiteWSImpl implements ISiteWS
 		OrdemServicoResponse response = new OrdemServicoResponse();
 		try
 		{
-			InternalResultsResponse<OrdemServico> internalResponse = getOrdemServicoBAC().fetchAllOrdemServicos();
+			InternalResultsResponse<OrdemServico> internalResponse = getSiteBAC().fetchAllOrdemServicos(new OrdemServico());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -571,16 +568,6 @@ public class SiteWSImpl implements ISiteWS
 //===================================### PLANO ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IPlanoBAC}.
-	 *
-	 * @param planoBAC the planoBAC to set.
-	 */
-	public void setPlanoBAC(IPlanoBAC planoBAC)
-	{
-		this.planoBAC = planoBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IPlanoBAC}
 	 *
 	 * @param request a PlanoRequest
@@ -593,7 +580,7 @@ public class SiteWSImpl implements ISiteWS
 		PlanoResponse response = new PlanoResponse();
 		try
 		{
-			InternalResultsResponse<Plano> internalResponse = getPlanoBAC().insertPlano(request);
+			InternalResultsResponse<Plano> internalResponse = getSiteBAC().insertPlano(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -603,7 +590,7 @@ public class SiteWSImpl implements ISiteWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IPlanoBAC}
 	 *
@@ -617,7 +604,7 @@ public class SiteWSImpl implements ISiteWS
 		PlanoResponse response = new PlanoResponse();
 		try
 		{
-			InternalResultsResponse<Plano> internalResponse = getPlanoBAC().updatePlano(request);
+			InternalResultsResponse<Plano> internalResponse = getSiteBAC().updatePlano(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -627,7 +614,7 @@ public class SiteWSImpl implements ISiteWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IPlanoBAC}
 	 *
@@ -641,7 +628,7 @@ public class SiteWSImpl implements ISiteWS
 		PlanoResponse response = new PlanoResponse();
 		try
 		{
-			InternalResultsResponse<Plano> internalResponse = getPlanoBAC().deletePlano(request);
+			InternalResultsResponse<Plano> internalResponse = getSiteBAC().deletePlano(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -651,7 +638,7 @@ public class SiteWSImpl implements ISiteWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IPlanoBAC}
 	 *
@@ -665,7 +652,7 @@ public class SiteWSImpl implements ISiteWS
 		PlanoResponse response = new PlanoResponse();
 		try
 		{
-			InternalResultsResponse<Plano> internalResponse = getPlanoBAC().fetchPlanoById(request);
+			InternalResultsResponse<Plano> internalResponse = getSiteBAC().fetchPlanoById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -675,7 +662,7 @@ public class SiteWSImpl implements ISiteWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IPlanoBAC}
 	 *
@@ -689,7 +676,7 @@ public class SiteWSImpl implements ISiteWS
 		PlanoResponse response = new PlanoResponse();
 		try
 		{
-			InternalResultsResponse<Plano> internalResponse = getPlanoBAC().fetchPlanosByRequest(request);
+			InternalResultsResponse<Plano> internalResponse = getSiteBAC().fetchPlanosByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -712,7 +699,7 @@ public class SiteWSImpl implements ISiteWS
 		PlanoResponse response = new PlanoResponse();
 		try
 		{
-			InternalResultsResponse<Plano> internalResponse = getPlanoBAC().refreshPlanos(request);
+			InternalResultsResponse<Plano> internalResponse = getSiteBAC().refreshPlanos(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -734,7 +721,7 @@ public class SiteWSImpl implements ISiteWS
 		PlanoResponse response = new PlanoResponse();
 		try
 		{
-			InternalResultsResponse<Plano> internalResponse = getPlanoBAC().fetchAllPlanos();
+			InternalResultsResponse<Plano> internalResponse = getSiteBAC().fetchAllPlanos(new Plano());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}

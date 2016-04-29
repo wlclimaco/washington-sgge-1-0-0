@@ -1,16 +1,29 @@
-/** create by system gera-java version 1.0.0 28/04/2016 16:21 : 34*/
+/** create by system gera-java version 1.0.0 28/04/2016 20:5 : 32*/
 package com.qat.samples.sysmgmt.service.impl;
 import javax.jws.WebService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IComprasBAC;
-import com.qat.samples.sysmgmt.model.Compras;
-import com.qat.samples.sysmgmt.model.response.ComprasResponse;
+import com.qat.samples.sysmgmt.bac.Compras.IComprasBAC;
+import com.qat.samples.sysmgmt.cotacao.model.Cotacao;
+import com.qat.samples.sysmgmt.cotacao.request.CotacaoInquiryRequest;
+import com.qat.samples.sysmgmt.cotacao.request.CotacaoMaintenanceRequest;
+import com.qat.samples.sysmgmt.cotacao.response.CotacaoResponse;
+import com.qat.samples.sysmgmt.nf.model.NotaFiscalEntrada;
+import com.qat.samples.sysmgmt.nf.model.PedidoCompras;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalEntradaMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.PedidoComprasInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.PedidoComprasMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.response.NotaFiscalEntradaResponse;
+import com.qat.samples.sysmgmt.nf.model.response.PedidoComprasResponse;
 import com.qat.samples.sysmgmt.service.IComprasWS;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 /**
  * ComprasWS used to provide WS interface. Delegates all calls to the IComprasBAC.
@@ -33,22 +46,22 @@ public class ComprasWSImpl implements IComprasWS
 	 * @return the comprasBAC which is expected to provide the implementation.
 	 */
 	public IComprasBAC getComprasBAC()
-	{	
+	{
 		return comprasBAC;
 	}
+	/**
+	 * Spring injection uses this method to inject an implementation of {@link IComprasBAC}.
+	 *
+	 * @param comprasBAC the comprasBAC to set.
+	 */
+	public void setComprasBAC(IComprasBAC comprasBAC)
+	{
+		this.comprasBAC = comprasBAC;
+	}
+
 
 //===================================### NOTAFISCALENTRADA ####======================================
 
-	/**
-	 * Spring injection uses this method to inject an implementation of {@link INotaFiscalEntradaBAC}.
-	 *
-	 * @param notafiscalentradaBAC the notafiscalentradaBAC to set.
-	 */
-	public void setNotaFiscalEntradaBAC(INotaFiscalEntradaBAC notafiscalentradaBAC)
-	{
-		this.notafiscalentradaBAC = notafiscalentradaBAC;
-	}
-	
 	/**
 	 * Delegates call to {@link INotaFiscalEntradaBAC}
 	 *
@@ -62,7 +75,7 @@ public class ComprasWSImpl implements IComprasWS
 		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
 		try
 		{
-			InternalResultsResponse<NotaFiscalEntrada> internalResponse = getNotaFiscalEntradaBAC().insertNotaFiscalEntrada(request);
+			InternalResultsResponse<NotaFiscalEntrada> internalResponse = getComprasBAC().insertNotaFiscalEntrada(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -72,7 +85,7 @@ public class ComprasWSImpl implements IComprasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link INotaFiscalEntradaBAC}
 	 *
@@ -86,7 +99,7 @@ public class ComprasWSImpl implements IComprasWS
 		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
 		try
 		{
-			InternalResultsResponse<NotaFiscalEntrada> internalResponse = getNotaFiscalEntradaBAC().updateNotaFiscalEntrada(request);
+			InternalResultsResponse<NotaFiscalEntrada> internalResponse = getComprasBAC().updateNotaFiscalEntrada(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -96,7 +109,7 @@ public class ComprasWSImpl implements IComprasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link INotaFiscalEntradaBAC}
 	 *
@@ -110,7 +123,7 @@ public class ComprasWSImpl implements IComprasWS
 		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
 		try
 		{
-			InternalResultsResponse<NotaFiscalEntrada> internalResponse = getNotaFiscalEntradaBAC().deleteNotaFiscalEntrada(request);
+			InternalResultsResponse<NotaFiscalEntrada> internalResponse = getComprasBAC().deleteNotaFiscalEntrada(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -120,7 +133,7 @@ public class ComprasWSImpl implements IComprasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link INotaFiscalEntradaBAC}
 	 *
@@ -134,7 +147,7 @@ public class ComprasWSImpl implements IComprasWS
 		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
 		try
 		{
-			InternalResultsResponse<NotaFiscalEntrada> internalResponse = getNotaFiscalEntradaBAC().fetchNotaFiscalEntradaById(request);
+			InternalResultsResponse<NotaFiscalEntrada> internalResponse = getComprasBAC().fetchNotaFiscalEntradaById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -144,7 +157,7 @@ public class ComprasWSImpl implements IComprasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link INotaFiscalEntradaBAC}
 	 *
@@ -152,13 +165,13 @@ public class ComprasWSImpl implements IComprasWS
 	 * @return NotaFiscalEntradaResponse
 	 */
 	@Override
-	public NotaFiscalEntradaResponse fetchNotaFiscalEntradasByRequest(NotaFiscalEntradaInquiryRequest request)
+	public NotaFiscalEntradaResponse fetchNotaFiscalEntradasByRequest(NotaFiscalInquiryRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
 		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
 		try
 		{
-			InternalResultsResponse<NotaFiscalEntrada> internalResponse = getNotaFiscalEntradaBAC().fetchNotaFiscalEntradasByRequest(request);
+			InternalResultsResponse<NotaFiscalEntrada> internalResponse = getComprasBAC().fetchNotaFiscalEntradasByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -181,7 +194,7 @@ public class ComprasWSImpl implements IComprasWS
 		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
 		try
 		{
-			InternalResultsResponse<NotaFiscalEntrada> internalResponse = getNotaFiscalEntradaBAC().refreshNotaFiscalEntradas(request);
+			InternalResultsResponse<NotaFiscalEntrada> internalResponse = getComprasBAC().refreshNotaFiscalEntradas(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -203,7 +216,7 @@ public class ComprasWSImpl implements IComprasWS
 		NotaFiscalEntradaResponse response = new NotaFiscalEntradaResponse();
 		try
 		{
-			InternalResultsResponse<NotaFiscalEntrada> internalResponse = getNotaFiscalEntradaBAC().fetchAllNotaFiscalEntradas();
+			InternalResultsResponse<NotaFiscalEntrada> internalResponse = getComprasBAC().fetchAllNotaFiscalEntradas(new NotaFiscalEntrada());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -217,16 +230,6 @@ public class ComprasWSImpl implements IComprasWS
 //===================================### PEDIDOCOMPRAS ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IPedidoComprasBAC}.
-	 *
-	 * @param pedidocomprasBAC the pedidocomprasBAC to set.
-	 */
-	public void setPedidoComprasBAC(IPedidoComprasBAC pedidocomprasBAC)
-	{
-		this.pedidocomprasBAC = pedidocomprasBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IPedidoComprasBAC}
 	 *
 	 * @param request a PedidoComprasRequest
@@ -239,7 +242,7 @@ public class ComprasWSImpl implements IComprasWS
 		PedidoComprasResponse response = new PedidoComprasResponse();
 		try
 		{
-			InternalResultsResponse<PedidoCompras> internalResponse = getPedidoComprasBAC().insertPedidoCompras(request);
+			InternalResultsResponse<PedidoCompras> internalResponse = getComprasBAC().insertPedidoCompras(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -249,7 +252,7 @@ public class ComprasWSImpl implements IComprasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IPedidoComprasBAC}
 	 *
@@ -263,7 +266,7 @@ public class ComprasWSImpl implements IComprasWS
 		PedidoComprasResponse response = new PedidoComprasResponse();
 		try
 		{
-			InternalResultsResponse<PedidoCompras> internalResponse = getPedidoComprasBAC().updatePedidoCompras(request);
+			InternalResultsResponse<PedidoCompras> internalResponse = getComprasBAC().updatePedidoCompras(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -273,7 +276,7 @@ public class ComprasWSImpl implements IComprasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IPedidoComprasBAC}
 	 *
@@ -287,7 +290,7 @@ public class ComprasWSImpl implements IComprasWS
 		PedidoComprasResponse response = new PedidoComprasResponse();
 		try
 		{
-			InternalResultsResponse<PedidoCompras> internalResponse = getPedidoComprasBAC().deletePedidoCompras(request);
+			InternalResultsResponse<PedidoCompras> internalResponse = getComprasBAC().deletePedidoCompras(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -297,7 +300,7 @@ public class ComprasWSImpl implements IComprasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IPedidoComprasBAC}
 	 *
@@ -311,7 +314,7 @@ public class ComprasWSImpl implements IComprasWS
 		PedidoComprasResponse response = new PedidoComprasResponse();
 		try
 		{
-			InternalResultsResponse<PedidoCompras> internalResponse = getPedidoComprasBAC().fetchPedidoComprasById(request);
+			InternalResultsResponse<PedidoCompras> internalResponse = getComprasBAC().fetchPedidoComprasById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -321,7 +324,7 @@ public class ComprasWSImpl implements IComprasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IPedidoComprasBAC}
 	 *
@@ -335,7 +338,7 @@ public class ComprasWSImpl implements IComprasWS
 		PedidoComprasResponse response = new PedidoComprasResponse();
 		try
 		{
-			InternalResultsResponse<PedidoCompras> internalResponse = getPedidoComprasBAC().fetchPedidoComprassByRequest(request);
+			InternalResultsResponse<PedidoCompras> internalResponse = getComprasBAC().fetchPedidoComprassByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -358,7 +361,7 @@ public class ComprasWSImpl implements IComprasWS
 		PedidoComprasResponse response = new PedidoComprasResponse();
 		try
 		{
-			InternalResultsResponse<PedidoCompras> internalResponse = getPedidoComprasBAC().refreshPedidoComprass(request);
+			InternalResultsResponse<PedidoCompras> internalResponse = getComprasBAC().refreshPedidoComprass(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -380,7 +383,7 @@ public class ComprasWSImpl implements IComprasWS
 		PedidoComprasResponse response = new PedidoComprasResponse();
 		try
 		{
-			InternalResultsResponse<PedidoCompras> internalResponse = getPedidoComprasBAC().fetchAllPedidoComprass();
+			InternalResultsResponse<PedidoCompras> internalResponse = getComprasBAC().fetchAllPedidoComprass(new PedidoCompras());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -394,16 +397,6 @@ public class ComprasWSImpl implements IComprasWS
 //===================================### COTACAO ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link ICotacaoBAC}.
-	 *
-	 * @param cotacaoBAC the cotacaoBAC to set.
-	 */
-	public void setCotacaoBAC(ICotacaoBAC cotacaoBAC)
-	{
-		this.cotacaoBAC = cotacaoBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link ICotacaoBAC}
 	 *
 	 * @param request a CotacaoRequest
@@ -416,7 +409,7 @@ public class ComprasWSImpl implements IComprasWS
 		CotacaoResponse response = new CotacaoResponse();
 		try
 		{
-			InternalResultsResponse<Cotacao> internalResponse = getCotacaoBAC().insertCotacao(request);
+			InternalResultsResponse<Cotacao> internalResponse = getComprasBAC().insertCotacao(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -426,7 +419,7 @@ public class ComprasWSImpl implements IComprasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICotacaoBAC}
 	 *
@@ -440,7 +433,7 @@ public class ComprasWSImpl implements IComprasWS
 		CotacaoResponse response = new CotacaoResponse();
 		try
 		{
-			InternalResultsResponse<Cotacao> internalResponse = getCotacaoBAC().updateCotacao(request);
+			InternalResultsResponse<Cotacao> internalResponse = getComprasBAC().updateCotacao(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -450,7 +443,7 @@ public class ComprasWSImpl implements IComprasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICotacaoBAC}
 	 *
@@ -464,7 +457,7 @@ public class ComprasWSImpl implements IComprasWS
 		CotacaoResponse response = new CotacaoResponse();
 		try
 		{
-			InternalResultsResponse<Cotacao> internalResponse = getCotacaoBAC().deleteCotacao(request);
+			InternalResultsResponse<Cotacao> internalResponse = getComprasBAC().deleteCotacao(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -474,7 +467,7 @@ public class ComprasWSImpl implements IComprasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICotacaoBAC}
 	 *
@@ -488,7 +481,7 @@ public class ComprasWSImpl implements IComprasWS
 		CotacaoResponse response = new CotacaoResponse();
 		try
 		{
-			InternalResultsResponse<Cotacao> internalResponse = getCotacaoBAC().fetchCotacaoById(request);
+			InternalResultsResponse<Cotacao> internalResponse = getComprasBAC().fetchCotacaoById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -498,7 +491,7 @@ public class ComprasWSImpl implements IComprasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICotacaoBAC}
 	 *
@@ -512,7 +505,7 @@ public class ComprasWSImpl implements IComprasWS
 		CotacaoResponse response = new CotacaoResponse();
 		try
 		{
-			InternalResultsResponse<Cotacao> internalResponse = getCotacaoBAC().fetchCotacaosByRequest(request);
+			InternalResultsResponse<Cotacao> internalResponse = getComprasBAC().fetchCotacaosByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -535,7 +528,7 @@ public class ComprasWSImpl implements IComprasWS
 		CotacaoResponse response = new CotacaoResponse();
 		try
 		{
-			InternalResultsResponse<Cotacao> internalResponse = getCotacaoBAC().refreshCotacaos(request);
+			InternalResultsResponse<Cotacao> internalResponse = getComprasBAC().refreshCotacaos(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -557,7 +550,7 @@ public class ComprasWSImpl implements IComprasWS
 		CotacaoResponse response = new CotacaoResponse();
 		try
 		{
-			InternalResultsResponse<Cotacao> internalResponse = getCotacaoBAC().fetchAllCotacaos();
+			InternalResultsResponse<Cotacao> internalResponse = getComprasBAC().fetchAllCotacaos(new Cotacao());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}

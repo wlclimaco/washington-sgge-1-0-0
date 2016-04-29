@@ -10,13 +10,21 @@ import org.springframework.stereotype.Service;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.ICondominioBAC;
-import com.qat.samples.sysmgmt.model.Condominio;
-import com.qat.samples.sysmgmt.model.request.CondominioMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.CondominioResponse;
+import com.qat.samples.sysmgmt.bac.Condominio.ICondominioBAC;
+import com.qat.samples.sysmgmt.condominio.model.Avisos;
+import com.qat.samples.sysmgmt.condominio.model.Inquilino;
+import com.qat.samples.sysmgmt.condominio.model.Sindico;
+import com.qat.samples.sysmgmt.condominio.model.request.AvisoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.AvisoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.InquilinoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.InquilinoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.SindicoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.SindicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.response.AvisoResponse;
+import com.qat.samples.sysmgmt.condominio.model.response.InquilinoResponse;
+import com.qat.samples.sysmgmt.condominio.model.response.SindicoResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.CondominioInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -351,9 +359,9 @@ public class CondominioWSImpl implements com.qat.samples.sysmgmt.service.ICondom
 
 //===================================### AVISOS ####======================================
 	@Override
-	public AvisosResponse insertAvisos(AvisosMaintenanceRequest request)
+	public AvisoResponse insertAvisos(AvisoMaintenanceRequest request)
 	{
-		AvisosResponse response = new AvisosResponse();
+		AvisoResponse response = new AvisoResponse();
 
 		try
 		{
@@ -370,9 +378,9 @@ public class CondominioWSImpl implements com.qat.samples.sysmgmt.service.ICondom
 	}
 
 	@Override
-	public AvisosResponse updateAvisos(AvisosMaintenanceRequest request)
+	public AvisoResponse updateAvisos(AvisoMaintenanceRequest request)
 	{
-		AvisosResponse response = new AvisosResponse();
+		AvisoResponse response = new AvisoResponse();
 
 		try
 		{
@@ -389,9 +397,9 @@ public class CondominioWSImpl implements com.qat.samples.sysmgmt.service.ICondom
 	}
 
 	@Override
-	public AvisosResponse deleteAvisos(AvisosMaintenanceRequest request)
+	public AvisoResponse deleteAvisos(AvisoMaintenanceRequest request)
 	{
-		AvisosResponse response = new AvisosResponse();
+		AvisoResponse response = new AvisoResponse();
 
 		try
 		{
@@ -408,14 +416,14 @@ public class CondominioWSImpl implements com.qat.samples.sysmgmt.service.ICondom
 	}
 
 	@Override
-	public AvisosResponse refreshAvisoss(RefreshRequest request)
+	public AvisoResponse refreshAvisoss(RefreshRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		AvisosResponse response = new AvisosResponse();
+		AvisoResponse response = new AvisoResponse();
 
 		try
 		{
-			InternalResultsResponse<Avisos> internalResponse = getCondominioBAC().refreshAvisoss(request);
+			InternalResultsResponse<Avisos> internalResponse = getCondominioBAC().refreshAvisos(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)
@@ -428,9 +436,9 @@ public class CondominioWSImpl implements com.qat.samples.sysmgmt.service.ICondom
 	}
 
 	@Override
-	public AvisosResponse fetchAllAvisoss(FetchAllRequest request)
+	public AvisoResponse fetchAllAvisoss(FetchAllRequest request)
 	{
-		AvisosResponse response = new AvisosResponse();
+		AvisoResponse response = new AvisoResponse();
 
 		try
 		{
@@ -452,9 +460,9 @@ public class CondominioWSImpl implements com.qat.samples.sysmgmt.service.ICondom
 	 * FetchByIdRequest)
 	 */
 	@Override
-	public AvisosResponse fetchAvisosById(FetchByIdRequest request)
+	public AvisoResponse fetchAvisosById(FetchByIdRequest request)
 	{
-		AvisosResponse response = new AvisosResponse();
+		AvisoResponse response = new AvisoResponse();
 
 		try
 		{
@@ -474,13 +482,13 @@ public class CondominioWSImpl implements com.qat.samples.sysmgmt.service.ICondom
 	}
 
 	@Override
-	public AvisosResponse fetchAvisossByRequest(AvisosInquiryRequest request)
+	public AvisoResponse fetchAvisossByRequest(AvisoInquiryRequest request)
 	{
-		AvisosResponse response = new AvisosResponse();
+		AvisoResponse response = new AvisoResponse();
 
 		try
 		{
-			InternalResultsResponse<Avisos> internalResponse = getCondominioBAC().fetchAvisossByRequest(request);
+			InternalResultsResponse<Avisos> internalResponse = getCondominioBAC().fetchAvisosByRequest(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)

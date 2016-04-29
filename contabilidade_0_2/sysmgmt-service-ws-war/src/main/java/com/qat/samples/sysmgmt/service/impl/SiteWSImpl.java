@@ -10,13 +10,25 @@ import org.springframework.stereotype.Service;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.ISiteBAC;
-import com.qat.samples.sysmgmt.model.Site;
-import com.qat.samples.sysmgmt.model.request.SiteMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.SiteResponse;
+import com.qat.samples.sysmgmt.bac.Site.ISiteBAC;
+import com.qat.samples.sysmgmt.contabilidade.model.Plano;
+import com.qat.samples.sysmgmt.contato.model.Contato;
+import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
+import com.qat.samples.sysmgmt.contato.model.request.ContatoMaintenanceRequest;
+import com.qat.samples.sysmgmt.contato.model.response.ContatoResponse;
+import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.response.OrdemServicoResponse;
+import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.PlanoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.response.PlanoResponse;
+import com.qat.samples.sysmgmt.site.model.Site;
+import com.qat.samples.sysmgmt.site.model.request.SiteInquiryRequest;
+import com.qat.samples.sysmgmt.site.model.request.SiteMaintenanceRequest;
+import com.qat.samples.sysmgmt.site.model.response.SiteResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.SiteInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**

@@ -29,7 +29,7 @@ import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
 @ContextConfiguration(locations = {
 		"classpath:conf/unittest-base-context.xml",
-		"classpath:conf/documentobartest-context.xml"
+		"classpath:conf/documentosbartest-context.xml"
 })
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 @Transactional
@@ -109,7 +109,7 @@ public IDocumentoBAR getDocumentoBAR()
 		request.setStartPage(0);
 		request.setPageSize(3);
 		InternalResultsResponse<Documento> response = getDocumentoBAR().fetchDocumentosByRequest(request);
-		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertFalse(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 		// check for valid and precount and start 2nd page
@@ -117,7 +117,7 @@ public IDocumentoBAR getDocumentoBAR()
 		request.setStartPage(1);
 		request.setPageSize(3);
 		response = getDocumentoBAR().fetchDocumentosByRequest(request);
-		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertFalse(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 

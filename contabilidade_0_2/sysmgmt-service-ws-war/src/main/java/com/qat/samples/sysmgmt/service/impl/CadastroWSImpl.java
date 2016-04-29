@@ -10,14 +10,38 @@ import org.springframework.stereotype.Service;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.ICadastrosBAC;
-import com.qat.samples.sysmgmt.model.Cadastros;
-import com.qat.samples.sysmgmt.model.request.CadastrosMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.CadastrosResponse;
+import com.qat.samples.sysmgmt.bac.Cadastros.ICadastrosBAC;
+import com.qat.samples.sysmgmt.convenio.model.Convenio;
+import com.qat.samples.sysmgmt.dp.model.response.ConvenioResponse;
+import com.qat.samples.sysmgmt.entidade.model.request.CidadeMaintenanceRequest;
+import com.qat.samples.sysmgmt.estado.model.Estado;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest;
+import com.qat.samples.sysmgmt.estado.model.request.EstadoMaintenanceRequest;
+import com.qat.samples.sysmgmt.estado.model.response.EstadoResponse;
+import com.qat.samples.sysmgmt.pessoa.model.Cliente;
+import com.qat.samples.sysmgmt.pessoa.model.Fornecedor;
+import com.qat.samples.sysmgmt.pessoa.model.Transportador;
+import com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ClienteMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ConvenioInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.response.ClienteResponse;
+import com.qat.samples.sysmgmt.pessoa.model.response.FornecedorResponse;
+import com.qat.samples.sysmgmt.pessoa.model.response.TransportadorResponse;
+import com.qat.samples.sysmgmt.util.model.Cidade;
+import com.qat.samples.sysmgmt.util.model.Tarefa;
+import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.ConvenioMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.CadastrosInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
+import com.qat.samples.sysmgmt.util.model.request.TarefaInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.TarefaMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.response.CidadeResponse;
+import com.qat.samples.sysmgmt.util.model.response.TarefaResponse;
 
 /**
  * Standard implementation of a web service where the operations are delegated to a BAC.
@@ -25,7 +49,7 @@ import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
  */
 @Service
 @WebService(targetNamespace = "http://qat.com/sysmgmt")
-public class CadastrosWSImpl implements com.qat.samples.sysmgmt.service.ICadastrosWS
+public class CadastroWSImpl implements com.qat.samples.sysmgmt.service.ICadastrosWS
 {
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
 	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.cadastroswsimpl.defaultexception";
@@ -34,10 +58,10 @@ public class CadastrosWSImpl implements com.qat.samples.sysmgmt.service.ICadastr
 	private static final String DEFAULT_ERROR_MSG = "sysmgmt.base.cadastroswsimpl.defaulterror";
 
 	/** The Constant CLASS_NAME. */
-	private static final String CLASS_NAME = CadastrosWSImpl.class.getName();
+	private static final String CLASS_NAME = CadastroWSImpl.class.getName();
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(CadastrosWSImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CadastroWSImpl.class);
 
 	/** The cadastros BAC. */
 	private ICadastrosBAC cadastrosBAC; // injected by Spring through setter

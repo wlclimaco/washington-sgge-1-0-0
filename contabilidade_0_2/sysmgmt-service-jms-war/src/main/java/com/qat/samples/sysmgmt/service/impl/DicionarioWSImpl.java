@@ -1,16 +1,29 @@
-/** create by system gera-java version 1.0.0 28/04/2016 16:21 : 34*/
+/** create by system gera-java version 1.0.0 28/04/2016 20:5 : 32*/
 package com.qat.samples.sysmgmt.service.impl;
 import javax.jws.WebService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IDicionarioBAC;
-import com.qat.samples.sysmgmt.model.Dicionario;
-import com.qat.samples.sysmgmt.model.response.DicionarioResponse;
+import com.qat.samples.sysmgmt.bac.Dicionario.IDicionarioBAC;
+import com.qat.samples.sysmgmt.dicionario.Classes;
+import com.qat.samples.sysmgmt.dicionario.Field;
+import com.qat.samples.sysmgmt.dicionario.Interface;
+import com.qat.samples.sysmgmt.dicionario.request.ClassesInquiryRequest;
+import com.qat.samples.sysmgmt.dicionario.request.ClassesMaintenanceRequest;
+import com.qat.samples.sysmgmt.dicionario.request.FieldInquiryRequest;
+import com.qat.samples.sysmgmt.dicionario.request.FieldMaintenanceRequest;
+import com.qat.samples.sysmgmt.dicionario.request.InterfaceInquiryRequest;
+import com.qat.samples.sysmgmt.dicionario.request.InterfaceMaintenanceRequest;
+import com.qat.samples.sysmgmt.dicionario.response.ClassesResponse;
+import com.qat.samples.sysmgmt.dicionario.response.FieldResponse;
+import com.qat.samples.sysmgmt.dicionario.response.InterfaceResponse;
 import com.qat.samples.sysmgmt.service.IDicionarioWS;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 /**
  * DicionarioWS used to provide WS interface. Delegates all calls to the IDicionarioBAC.
@@ -33,22 +46,22 @@ public class DicionarioWSImpl implements IDicionarioWS
 	 * @return the dicionarioBAC which is expected to provide the implementation.
 	 */
 	public IDicionarioBAC getDicionarioBAC()
-	{	
+	{
 		return dicionarioBAC;
 	}
+	/**
+	 * Spring injection uses this method to inject an implementation of {@link IDicionarioBAC}.
+	 *
+	 * @param dicionarioBAC the dicionarioBAC to set.
+	 */
+	public void setDicionarioBAC(IDicionarioBAC dicionarioBAC)
+	{
+		this.dicionarioBAC = dicionarioBAC;
+	}
+
 
 //===================================### CLASSES ####======================================
 
-	/**
-	 * Spring injection uses this method to inject an implementation of {@link IClassesBAC}.
-	 *
-	 * @param classesBAC the classesBAC to set.
-	 */
-	public void setClassesBAC(IClassesBAC classesBAC)
-	{
-		this.classesBAC = classesBAC;
-	}
-	
 	/**
 	 * Delegates call to {@link IClassesBAC}
 	 *
@@ -62,7 +75,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		ClassesResponse response = new ClassesResponse();
 		try
 		{
-			InternalResultsResponse<Classes> internalResponse = getClassesBAC().insertClasses(request);
+			InternalResultsResponse<Classes> internalResponse = getDicionarioBAC().insertClasses(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -72,7 +85,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IClassesBAC}
 	 *
@@ -86,7 +99,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		ClassesResponse response = new ClassesResponse();
 		try
 		{
-			InternalResultsResponse<Classes> internalResponse = getClassesBAC().updateClasses(request);
+			InternalResultsResponse<Classes> internalResponse = getDicionarioBAC().updateClasses(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -96,7 +109,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IClassesBAC}
 	 *
@@ -110,7 +123,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		ClassesResponse response = new ClassesResponse();
 		try
 		{
-			InternalResultsResponse<Classes> internalResponse = getClassesBAC().deleteClasses(request);
+			InternalResultsResponse<Classes> internalResponse = getDicionarioBAC().deleteClasses(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -120,7 +133,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IClassesBAC}
 	 *
@@ -134,7 +147,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		ClassesResponse response = new ClassesResponse();
 		try
 		{
-			InternalResultsResponse<Classes> internalResponse = getClassesBAC().fetchClassesById(request);
+			InternalResultsResponse<Classes> internalResponse = getDicionarioBAC().fetchClassesById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -144,7 +157,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IClassesBAC}
 	 *
@@ -158,7 +171,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		ClassesResponse response = new ClassesResponse();
 		try
 		{
-			InternalResultsResponse<Classes> internalResponse = getClassesBAC().fetchClassessByRequest(request);
+			InternalResultsResponse<Classes> internalResponse = getDicionarioBAC().fetchClassessByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -181,7 +194,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		ClassesResponse response = new ClassesResponse();
 		try
 		{
-			InternalResultsResponse<Classes> internalResponse = getClassesBAC().refreshClassess(request);
+			InternalResultsResponse<Classes> internalResponse = getDicionarioBAC().refreshClassess(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -203,7 +216,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		ClassesResponse response = new ClassesResponse();
 		try
 		{
-			InternalResultsResponse<Classes> internalResponse = getClassesBAC().fetchAllClassess();
+			InternalResultsResponse<Classes> internalResponse = getDicionarioBAC().fetchAllClassess(new Classes());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -217,16 +230,6 @@ public class DicionarioWSImpl implements IDicionarioWS
 //===================================### INTERFACE ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IInterfaceBAC}.
-	 *
-	 * @param interfaceBAC the interfaceBAC to set.
-	 */
-	public void setInterfaceBAC(IInterfaceBAC interfaceBAC)
-	{
-		this.interfaceBAC = interfaceBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IInterfaceBAC}
 	 *
 	 * @param request a InterfaceRequest
@@ -239,7 +242,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		InterfaceResponse response = new InterfaceResponse();
 		try
 		{
-			InternalResultsResponse<Interface> internalResponse = getInterfaceBAC().insertInterface(request);
+			InternalResultsResponse<Interface> internalResponse = getDicionarioBAC().insertInterface(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -249,7 +252,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IInterfaceBAC}
 	 *
@@ -263,7 +266,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		InterfaceResponse response = new InterfaceResponse();
 		try
 		{
-			InternalResultsResponse<Interface> internalResponse = getInterfaceBAC().updateInterface(request);
+			InternalResultsResponse<Interface> internalResponse = getDicionarioBAC().updateInterface(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -273,7 +276,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IInterfaceBAC}
 	 *
@@ -287,7 +290,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		InterfaceResponse response = new InterfaceResponse();
 		try
 		{
-			InternalResultsResponse<Interface> internalResponse = getInterfaceBAC().deleteInterface(request);
+			InternalResultsResponse<Interface> internalResponse = getDicionarioBAC().deleteInterface(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -297,7 +300,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IInterfaceBAC}
 	 *
@@ -311,7 +314,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		InterfaceResponse response = new InterfaceResponse();
 		try
 		{
-			InternalResultsResponse<Interface> internalResponse = getInterfaceBAC().fetchInterfaceById(request);
+			InternalResultsResponse<Interface> internalResponse = getDicionarioBAC().fetchInterfaceById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -321,7 +324,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IInterfaceBAC}
 	 *
@@ -335,7 +338,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		InterfaceResponse response = new InterfaceResponse();
 		try
 		{
-			InternalResultsResponse<Interface> internalResponse = getInterfaceBAC().fetchInterfacesByRequest(request);
+			InternalResultsResponse<Interface> internalResponse = getDicionarioBAC().fetchInterfacesByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -358,7 +361,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		InterfaceResponse response = new InterfaceResponse();
 		try
 		{
-			InternalResultsResponse<Interface> internalResponse = getInterfaceBAC().refreshInterfaces(request);
+			InternalResultsResponse<Interface> internalResponse = getDicionarioBAC().refreshInterfaces(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -380,7 +383,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		InterfaceResponse response = new InterfaceResponse();
 		try
 		{
-			InternalResultsResponse<Interface> internalResponse = getInterfaceBAC().fetchAllInterfaces();
+			InternalResultsResponse<Interface> internalResponse = getDicionarioBAC().fetchAllInterfaces(new Interface());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -394,16 +397,6 @@ public class DicionarioWSImpl implements IDicionarioWS
 //===================================### FIELD ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IFieldBAC}.
-	 *
-	 * @param fieldBAC the fieldBAC to set.
-	 */
-	public void setFieldBAC(IFieldBAC fieldBAC)
-	{
-		this.fieldBAC = fieldBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IFieldBAC}
 	 *
 	 * @param request a FieldRequest
@@ -416,7 +409,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		FieldResponse response = new FieldResponse();
 		try
 		{
-			InternalResultsResponse<Field> internalResponse = getFieldBAC().insertField(request);
+			InternalResultsResponse<Field> internalResponse = getDicionarioBAC().insertField(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -426,7 +419,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IFieldBAC}
 	 *
@@ -440,7 +433,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		FieldResponse response = new FieldResponse();
 		try
 		{
-			InternalResultsResponse<Field> internalResponse = getFieldBAC().updateField(request);
+			InternalResultsResponse<Field> internalResponse = getDicionarioBAC().updateField(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -450,7 +443,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IFieldBAC}
 	 *
@@ -464,7 +457,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		FieldResponse response = new FieldResponse();
 		try
 		{
-			InternalResultsResponse<Field> internalResponse = getFieldBAC().deleteField(request);
+			InternalResultsResponse<Field> internalResponse = getDicionarioBAC().deleteField(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -474,7 +467,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IFieldBAC}
 	 *
@@ -488,7 +481,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		FieldResponse response = new FieldResponse();
 		try
 		{
-			InternalResultsResponse<Field> internalResponse = getFieldBAC().fetchFieldById(request);
+			InternalResultsResponse<Field> internalResponse = getDicionarioBAC().fetchFieldById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -498,7 +491,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IFieldBAC}
 	 *
@@ -512,7 +505,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		FieldResponse response = new FieldResponse();
 		try
 		{
-			InternalResultsResponse<Field> internalResponse = getFieldBAC().fetchFieldsByRequest(request);
+			InternalResultsResponse<Field> internalResponse = getDicionarioBAC().fetchFieldsByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -535,7 +528,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		FieldResponse response = new FieldResponse();
 		try
 		{
-			InternalResultsResponse<Field> internalResponse = getFieldBAC().refreshFields(request);
+			InternalResultsResponse<Field> internalResponse = getDicionarioBAC().refreshFields(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -557,7 +550,7 @@ public class DicionarioWSImpl implements IDicionarioWS
 		FieldResponse response = new FieldResponse();
 		try
 		{
-			InternalResultsResponse<Field> internalResponse = getFieldBAC().fetchAllFields();
+			InternalResultsResponse<Field> internalResponse = getDicionarioBAC().fetchAllFields(new Field());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}

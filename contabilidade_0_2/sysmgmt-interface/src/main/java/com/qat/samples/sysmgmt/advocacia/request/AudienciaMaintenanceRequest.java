@@ -1,13 +1,13 @@
 package com.qat.samples.sysmgmt.advocacia.request;
 
-import com.qat.samples.sysmgmt.advocacia.Advogado;
+import com.qat.samples.sysmgmt.advocacia.Audiencia;
 import com.qat.samples.sysmgmt.util.model.request.UtilMaintenanceRequest;
 
 public class AudienciaMaintenanceRequest extends UtilMaintenanceRequest
 {
 
 	/** Attributes */
-	private Advogado Advogado;
+	private Audiencia Audiencia;
 
 	/**
 	 * The Constructor.
@@ -18,24 +18,24 @@ public class AudienciaMaintenanceRequest extends UtilMaintenanceRequest
 	}
 
 	/**
-	 * @return the Advogado
+	 * @return the Audiencia
 	 */
-	public Advogado getAdvogado()
+	public Audiencia getAudiencia()
 	{
-		return Advogado;
+		return Audiencia;
 	}
 
 	/**
-	 * @param Advogado the Advogado to set
+	 * @param Audiencia the Audiencia to set
 	 */
-	public void setAdvogado(Advogado Advogado)
+	public void setAudiencia(Audiencia Audiencia)
 	{
-		this.Advogado = Advogado;
+		this.Audiencia = Audiencia;
 	}
 
 	@Override
 	public String toString() {
-		return "AdvogadoMaintenanceRequest [getAdvogado()=" + getAdvogado() + ", toString()=" + super.toString() + "]";
+		return "AudienciaMaintenanceRequest [getAudiencia()=" + getAudiencia() + ", toString()=" + super.toString() + "]";
 	}
 
 

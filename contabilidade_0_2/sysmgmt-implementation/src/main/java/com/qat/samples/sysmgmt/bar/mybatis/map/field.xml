@@ -13,31 +13,39 @@
       necessary if the columns (or aliases) match to the properties
        exactly. -->
   <resultMap id="FieldResult" type="Field">
-    <result property="id" column="Integer"/>
-    <result property="tipo" column="String"/>
-    <result property="requerid" column="Boolean"/>
-    <result property="primaryKey" column="Boolean"/>
-    <result property="forenkey" column="Boolean"/>
-    <result property="model" column="Boolean"/>
-    <result property="xml" column="Boolean"/>
+    <result property="id" column="id"/>
+    <result property="tamanho" column="tamanho"/>
+    <result property="tipo" column="tipo"/>
+    <result property="requerid" column="requerid"/>
+    <result property="primaryKey" column="primaryKey"/>
+    <result property="forenkey" column="forenkey"/>
+    <result property="model" column="model"/>
+    <result property="xml" column="xml"/>
+    <result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
   <sql id="allFieldColumns">
-create_date
-,create_user
-,modify_date
-,modify_user
-,id
+
+id
+,tamanho
 ,tipo
 ,requerid
 ,primaryKey
 ,forenkey
 ,model
 ,xml
+,create_date
+,create_user
+,modify_date
+,modify_user
 
 </sql>
 <sql id="allFieldValues">
 #{id},
+#{tamanho},
 #{tipo},
 #{requerid},
 #{primaryKey},

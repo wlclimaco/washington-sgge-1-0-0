@@ -1,16 +1,29 @@
-/** create by system gera-java version 1.0.0 28/04/2016 16:21 : 34*/
+/** create by system gera-java version 1.0.0 28/04/2016 20:5 : 32*/
 package com.qat.samples.sysmgmt.service.impl;
 import javax.jws.WebService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IVendasBAC;
-import com.qat.samples.sysmgmt.model.Vendas;
-import com.qat.samples.sysmgmt.model.response.VendasResponse;
+import com.qat.samples.sysmgmt.bac.Vendas.IVendasBAC;
+import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
+import com.qat.samples.sysmgmt.nf.model.Orcamento;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalSaidaMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.OrcamentoMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.response.NotaFiscalSaidaResponse;
+import com.qat.samples.sysmgmt.nf.model.response.OrcamentoResponse;
+import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.response.OrdemServicoResponse;
 import com.qat.samples.sysmgmt.service.IVendasWS;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 /**
  * VendasWS used to provide WS interface. Delegates all calls to the IVendasBAC.
@@ -33,22 +46,22 @@ public class VendasWSImpl implements IVendasWS
 	 * @return the vendasBAC which is expected to provide the implementation.
 	 */
 	public IVendasBAC getVendasBAC()
-	{	
+	{
 		return vendasBAC;
 	}
+	/**
+	 * Spring injection uses this method to inject an implementation of {@link IVendasBAC}.
+	 *
+	 * @param vendasBAC the vendasBAC to set.
+	 */
+	public void setVendasBAC(IVendasBAC vendasBAC)
+	{
+		this.vendasBAC = vendasBAC;
+	}
+
 
 //===================================### NOTAFISCALSAIDA ####======================================
 
-	/**
-	 * Spring injection uses this method to inject an implementation of {@link INotaFiscalSaidaBAC}.
-	 *
-	 * @param notafiscalsaidaBAC the notafiscalsaidaBAC to set.
-	 */
-	public void setNotaFiscalSaidaBAC(INotaFiscalSaidaBAC notafiscalsaidaBAC)
-	{
-		this.notafiscalsaidaBAC = notafiscalsaidaBAC;
-	}
-	
 	/**
 	 * Delegates call to {@link INotaFiscalSaidaBAC}
 	 *
@@ -62,7 +75,7 @@ public class VendasWSImpl implements IVendasWS
 		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
 		try
 		{
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getNotaFiscalSaidaBAC().insertNotaFiscalSaida(request);
+			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().insertNotaFiscalSaida(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -72,7 +85,7 @@ public class VendasWSImpl implements IVendasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link INotaFiscalSaidaBAC}
 	 *
@@ -86,7 +99,7 @@ public class VendasWSImpl implements IVendasWS
 		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
 		try
 		{
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getNotaFiscalSaidaBAC().updateNotaFiscalSaida(request);
+			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().updateNotaFiscalSaida(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -96,7 +109,7 @@ public class VendasWSImpl implements IVendasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link INotaFiscalSaidaBAC}
 	 *
@@ -110,7 +123,7 @@ public class VendasWSImpl implements IVendasWS
 		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
 		try
 		{
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getNotaFiscalSaidaBAC().deleteNotaFiscalSaida(request);
+			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().deleteNotaFiscalSaida(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -120,7 +133,7 @@ public class VendasWSImpl implements IVendasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link INotaFiscalSaidaBAC}
 	 *
@@ -134,7 +147,7 @@ public class VendasWSImpl implements IVendasWS
 		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
 		try
 		{
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getNotaFiscalSaidaBAC().fetchNotaFiscalSaidaById(request);
+			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().fetchNotaFiscalSaidaById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -144,7 +157,7 @@ public class VendasWSImpl implements IVendasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link INotaFiscalSaidaBAC}
 	 *
@@ -152,13 +165,13 @@ public class VendasWSImpl implements IVendasWS
 	 * @return NotaFiscalSaidaResponse
 	 */
 	@Override
-	public NotaFiscalSaidaResponse fetchNotaFiscalSaidasByRequest(NotaFiscalSaidaInquiryRequest request)
+	public NotaFiscalSaidaResponse fetchNotaFiscalSaidasByRequest(NotaFiscalInquiryRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
 		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
 		try
 		{
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getNotaFiscalSaidaBAC().fetchNotaFiscalSaidasByRequest(request);
+			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().fetchNotaFiscalSaidasByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -181,7 +194,7 @@ public class VendasWSImpl implements IVendasWS
 		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
 		try
 		{
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getNotaFiscalSaidaBAC().refreshNotaFiscalSaidas(request);
+			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().refreshNotaFiscalSaidas(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -203,7 +216,7 @@ public class VendasWSImpl implements IVendasWS
 		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
 		try
 		{
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getNotaFiscalSaidaBAC().fetchAllNotaFiscalSaidas();
+			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().fetchAllNotaFiscalSaidas(new NotaFiscalSaida());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -217,16 +230,6 @@ public class VendasWSImpl implements IVendasWS
 //===================================### ORCAMENTO ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IOrcamentoBAC}.
-	 *
-	 * @param orcamentoBAC the orcamentoBAC to set.
-	 */
-	public void setOrcamentoBAC(IOrcamentoBAC orcamentoBAC)
-	{
-		this.orcamentoBAC = orcamentoBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IOrcamentoBAC}
 	 *
 	 * @param request a OrcamentoRequest
@@ -239,7 +242,7 @@ public class VendasWSImpl implements IVendasWS
 		OrcamentoResponse response = new OrcamentoResponse();
 		try
 		{
-			InternalResultsResponse<Orcamento> internalResponse = getOrcamentoBAC().insertOrcamento(request);
+			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().insertOrcamento(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -249,7 +252,7 @@ public class VendasWSImpl implements IVendasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IOrcamentoBAC}
 	 *
@@ -263,7 +266,7 @@ public class VendasWSImpl implements IVendasWS
 		OrcamentoResponse response = new OrcamentoResponse();
 		try
 		{
-			InternalResultsResponse<Orcamento> internalResponse = getOrcamentoBAC().updateOrcamento(request);
+			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().updateOrcamento(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -273,7 +276,7 @@ public class VendasWSImpl implements IVendasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IOrcamentoBAC}
 	 *
@@ -287,7 +290,7 @@ public class VendasWSImpl implements IVendasWS
 		OrcamentoResponse response = new OrcamentoResponse();
 		try
 		{
-			InternalResultsResponse<Orcamento> internalResponse = getOrcamentoBAC().deleteOrcamento(request);
+			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().deleteOrcamento(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -297,7 +300,7 @@ public class VendasWSImpl implements IVendasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IOrcamentoBAC}
 	 *
@@ -311,7 +314,7 @@ public class VendasWSImpl implements IVendasWS
 		OrcamentoResponse response = new OrcamentoResponse();
 		try
 		{
-			InternalResultsResponse<Orcamento> internalResponse = getOrcamentoBAC().fetchOrcamentoById(request);
+			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().fetchOrcamentoById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -321,7 +324,7 @@ public class VendasWSImpl implements IVendasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IOrcamentoBAC}
 	 *
@@ -335,7 +338,7 @@ public class VendasWSImpl implements IVendasWS
 		OrcamentoResponse response = new OrcamentoResponse();
 		try
 		{
-			InternalResultsResponse<Orcamento> internalResponse = getOrcamentoBAC().fetchOrcamentosByRequest(request);
+			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().fetchOrcamentosByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -358,7 +361,7 @@ public class VendasWSImpl implements IVendasWS
 		OrcamentoResponse response = new OrcamentoResponse();
 		try
 		{
-			InternalResultsResponse<Orcamento> internalResponse = getOrcamentoBAC().refreshOrcamentos(request);
+			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().refreshOrcamentos(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -380,7 +383,7 @@ public class VendasWSImpl implements IVendasWS
 		OrcamentoResponse response = new OrcamentoResponse();
 		try
 		{
-			InternalResultsResponse<Orcamento> internalResponse = getOrcamentoBAC().fetchAllOrcamentos();
+			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().fetchAllOrcamentos(new Orcamento());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -394,16 +397,6 @@ public class VendasWSImpl implements IVendasWS
 //===================================### ORDEMSERVICO ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IOrdemServicoBAC}.
-	 *
-	 * @param ordemservicoBAC the ordemservicoBAC to set.
-	 */
-	public void setOrdemServicoBAC(IOrdemServicoBAC ordemservicoBAC)
-	{
-		this.ordemservicoBAC = ordemservicoBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IOrdemServicoBAC}
 	 *
 	 * @param request a OrdemServicoRequest
@@ -416,7 +409,7 @@ public class VendasWSImpl implements IVendasWS
 		OrdemServicoResponse response = new OrdemServicoResponse();
 		try
 		{
-			InternalResultsResponse<OrdemServico> internalResponse = getOrdemServicoBAC().insertOrdemServico(request);
+			InternalResultsResponse<OrdemServico> internalResponse = getVendasBAC().insertOrdemServico(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -426,7 +419,7 @@ public class VendasWSImpl implements IVendasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IOrdemServicoBAC}
 	 *
@@ -440,7 +433,7 @@ public class VendasWSImpl implements IVendasWS
 		OrdemServicoResponse response = new OrdemServicoResponse();
 		try
 		{
-			InternalResultsResponse<OrdemServico> internalResponse = getOrdemServicoBAC().updateOrdemServico(request);
+			InternalResultsResponse<OrdemServico> internalResponse = getVendasBAC().updateOrdemServico(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -450,7 +443,7 @@ public class VendasWSImpl implements IVendasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IOrdemServicoBAC}
 	 *
@@ -464,7 +457,7 @@ public class VendasWSImpl implements IVendasWS
 		OrdemServicoResponse response = new OrdemServicoResponse();
 		try
 		{
-			InternalResultsResponse<OrdemServico> internalResponse = getOrdemServicoBAC().deleteOrdemServico(request);
+			InternalResultsResponse<OrdemServico> internalResponse = getVendasBAC().deleteOrdemServico(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -474,7 +467,7 @@ public class VendasWSImpl implements IVendasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IOrdemServicoBAC}
 	 *
@@ -488,7 +481,7 @@ public class VendasWSImpl implements IVendasWS
 		OrdemServicoResponse response = new OrdemServicoResponse();
 		try
 		{
-			InternalResultsResponse<OrdemServico> internalResponse = getOrdemServicoBAC().fetchOrdemServicoById(request);
+			InternalResultsResponse<OrdemServico> internalResponse = getVendasBAC().fetchOrdemServicoById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -498,7 +491,7 @@ public class VendasWSImpl implements IVendasWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IOrdemServicoBAC}
 	 *
@@ -512,7 +505,7 @@ public class VendasWSImpl implements IVendasWS
 		OrdemServicoResponse response = new OrdemServicoResponse();
 		try
 		{
-			InternalResultsResponse<OrdemServico> internalResponse = getOrdemServicoBAC().fetchOrdemServicosByRequest(request);
+			InternalResultsResponse<OrdemServico> internalResponse = getVendasBAC().fetchOrdemServicosByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -535,7 +528,7 @@ public class VendasWSImpl implements IVendasWS
 		OrdemServicoResponse response = new OrdemServicoResponse();
 		try
 		{
-			InternalResultsResponse<OrdemServico> internalResponse = getOrdemServicoBAC().refreshOrdemServicos(request);
+			InternalResultsResponse<OrdemServico> internalResponse = getVendasBAC().refreshOrdemServicos(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -557,7 +550,7 @@ public class VendasWSImpl implements IVendasWS
 		OrdemServicoResponse response = new OrdemServicoResponse();
 		try
 		{
-			InternalResultsResponse<OrdemServico> internalResponse = getOrdemServicoBAC().fetchAllOrdemServicos();
+			InternalResultsResponse<OrdemServico> internalResponse = getVendasBAC().fetchAllOrdemServicos(new OrdemServico());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}

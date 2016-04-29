@@ -1,3 +1,4 @@
+/** create by system gera-java version 1.0.0 28/04/2016 20:29 : 56*/
 package com.qat.samples.sysmgmt.bac.Advogado;
 
 
@@ -16,9 +17,12 @@ import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.advocacia.Advogado;
+import com.qat.samples.sysmgmt.advocacia.Audiencia;
 import com.qat.samples.sysmgmt.advocacia.Processo;
 import com.qat.samples.sysmgmt.advocacia.request.AdvogadoInquiryRequest;
 import com.qat.samples.sysmgmt.advocacia.request.AdvogadoMaintenanceRequest;
+import com.qat.samples.sysmgmt.advocacia.request.AudienciaInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.request.AudienciaMaintenanceRequest;
 import com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest;
 import com.qat.samples.sysmgmt.advocacia.request.ProcessoMaintenanceRequest;
 import com.qat.samples.sysmgmt.bar.Advogado.IAdvocaciaBAR;
@@ -26,7 +30,7 @@ import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
- * Standards based implementation of a BAC for Advogado leveraging the injected IAdvocaciaBAR.
+ * Standards based implementation of a BAC for Advogado leveraging the injected IAdvogadoBAR.
  */
 @Component
 public class AdvocaciaBACImpl implements IAdvocaciaBAC
@@ -184,7 +188,7 @@ public InternalResultsResponse<Advogado> fetchAdvogadoById(FetchByIdRequest requ
 	}
 	else
 	{
-		response.getResultsList().add(getAdvogadoBAR().fetchAdvogadoById(request).getFirstResult());
+		response.getResultsList().add(getAdvogadoBAR().fetchAdvogadoById(request));
 	}
 
 	return response;
@@ -305,6 +309,223 @@ private InternalResultsResponse<Advogado> processAdvogado(ValidationContextIndic
 		}
 	}
 
+//===================================### AUDIENCIA ####======================================
+	/**
+/*
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.ICountyBAC#insertAudiencia(com.qat.samples.sysmgmt.model.request.AudienciaMaintenanceRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Audiencia> insertAudiencia(AudienciaMaintenanceRequest request)
+{
+	InternalResultsResponse<Audiencia> response =
+			processAudiencia(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.IAudienciaBAC#updateAudiencia(com.qat.samples.sysmgmt.model.request.AudienciaMaintenanceRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Audiencia> updateAudiencia(AudienciaMaintenanceRequest request)
+{
+	InternalResultsResponse<Audiencia> response =
+			processAudiencia(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.IAudienciaBAC#deleteAudiencia(com.qat.samples.sysmgmt.model.request.AudienciaMaintenanceRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Audiencia> deleteAudiencia(AudienciaMaintenanceRequest request)
+{
+	InternalResultsResponse<Audiencia> response =
+			processAudiencia(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IAudienciaBAC#refreshAudiencias(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+ */
+@Override
+public InternalResultsResponse<Audiencia> refreshAudiencias(RefreshRequest request)
+{
+	// This method is demo code only. Do not view this as a QAT Global Standard.
+	getAdvogadoBAR().deleteAllAudiencias();
+	int refreshNumber = request.getRefreshInt();
+	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
+
+	for (int i = 1; i <= refreshNumber; i++)
+	{
+	getAdvogadoBAR().insertAudiencia(new Audiencia(i, "AudienciaDesc" + i));
+	}
+
+	// Call maintain to see if we need to return the audiencia list and if so whether it should be paged or not
+	return maintainReturnListAudiencia(request.getReturnList(), request.getReturnListPaged(),new Audiencia());
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IAudienciaBAC#fetchAllAudiencias(Audiencia audiencia)
+ */
+@Override
+public InternalResultsResponse<Audiencia> fetchAllAudiencias(Audiencia audiencia)
+{
+	InternalResultsResponse<Audiencia> response = new InternalResultsResponse<Audiencia>();
+	response.getResultsList().addAll(getAdvogadoBAR().fetchAllAudiencias(audiencia).getResultsList());
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.IAudienciaBAC#fetchAudienciaById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Audiencia> fetchAudienciaById(FetchByIdRequest request)
+{
+	InternalResultsResponse<Audiencia> response = new InternalResultsResponse<Audiencia>();
+	// validate fetchId field
+	if (ValidationUtil.isNull(request.getFetchId()))
+	{
+		response.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
+		response.setStatus(SystemErrorCategory.SystemValidation);
+	}
+	else
+	{
+		response.getResultsList().add(getAdvogadoBAR().fetchAudienciaById(request));
+	}
+
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IAudienciaBAC#fetchAudienciasByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<Audiencia> fetchAudienciasByRequest(AudienciaInquiryRequest request)
+{
+	return getAdvogadoBAR().fetchAudienciasByRequest(request);
+}
+
+/**
+ * Process.
+ *
+ * @param indicator the indicator
+ * @param persistType the persist type
+ * @param request the request
+ * @return the audiencia response
+ */
+private InternalResultsResponse<Audiencia> processAudiencia(ValidationContextIndicator indicator,
+		PersistenceActionEnum persistType,
+		AudienciaMaintenanceRequest request)
+		{
+	InternalResultsResponse<Audiencia> response = null;
+
+	// Validate
+	ValidationContext context = new ValidationContext(Audiencia.class.getSimpleName(), request.getAudiencia(), indicator);
+	if (!getValidationController().validate(context))
+	{
+		response = new InternalResultsResponse<Audiencia>();
+		response.setStatus(SystemErrorCategory.SystemValidation);
+		response.addMessages(context.getMessages());
+		return response;
+	}
+
+		// Persist
+		InternalResponse internalResponse = doPersistenceAudiencia(request.getAudiencia(), persistType);
+		if (internalResponse.isInError())
+		{
+			response = new InternalResultsResponse<Audiencia>();
+			response.setStatus(internalResponse.getError());
+			response.addMessages(internalResponse.getMessageInfoList());
+			response.addMessage(DEFAULT_ADVOGADO_BAC_EXCEPTION_MSG, MessageSeverity.Error,
+					MessageLevel.Object, new Object[] {internalResponse.errorToString()});
+
+			return response;
+		}
+
+		// Call maintainReurnList to see if we need to return the audiencia list and if so whether it should be paged or
+		// not
+		response = maintainReturnListAudiencia(request.getReturnList(), request.getReturnListPaged(),new Audiencia());
+
+		return response;
+			}
+
+	/**
+	 * Do persistenceAudiencia.
+	 *
+	 * @param request the request
+	 * @param updateType the update type
+	 * @return the internal response
+	 */
+	private InternalResponse doPersistenceAudiencia(Audiencia audiencia, PersistenceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			case INSERT:
+				return getAdvogadoBAR().insertAudiencia(audiencia);
+
+			case UPDATE:
+				return getAdvogadoBAR().updateAudiencia(audiencia);
+
+			case DELETE:
+				return getAdvogadoBAR().deleteAudienciaById(audiencia);
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
+		}
+
+		return null;
+	}
+
+	/**
+	 * Maintain return list.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private InternalResultsResponse<Audiencia> maintainReturnListAudiencia(Boolean listIndicator, Boolean pageListIndicator,Audiencia audiencia)
+	{
+		// Fetch again if requested.
+		if (listIndicator)
+		{
+			// Fetch Paged is requested.
+			if (pageListIndicator)
+			{
+				AudienciaInquiryRequest request = new AudienciaInquiryRequest();
+				request.setPreQueryCount(true);
+				return fetchAudienciasByRequest(request);
+			}
+			else
+			{
+				// otherwise return all rows not paged
+				return fetchAllAudiencias(audiencia);
+			}
+		}
+		else
+		{
+			return new InternalResultsResponse<Audiencia>();
+		}
+	}
+
 //===================================### PROCESSO ####======================================
 	/**
 /*
@@ -401,7 +622,7 @@ public InternalResultsResponse<Processo> fetchProcessoById(FetchByIdRequest requ
 	}
 	else
 	{
-		response.getResultsList().add(getAdvogadoBAR().fetchProcessoById(request).getFirstResult());
+		response.getResultsList().add(getAdvogadoBAR().fetchProcessoById(request));
 	}
 
 	return response;

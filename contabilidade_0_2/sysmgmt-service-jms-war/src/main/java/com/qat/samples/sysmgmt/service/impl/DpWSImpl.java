@@ -1,16 +1,33 @@
-/** create by system gera-java version 1.0.0 28/04/2016 16:21 : 34*/
+/** create by system gera-java version 1.0.0 28/04/2016 20:5 : 32*/
 package com.qat.samples.sysmgmt.service.impl;
 import javax.jws.WebService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IDpBAC;
-import com.qat.samples.sysmgmt.model.Dp;
-import com.qat.samples.sysmgmt.model.response.DpResponse;
+import com.qat.samples.sysmgmt.bac.Dp.IDpBAC;
+import com.qat.samples.sysmgmt.beneficios.model.Beneficios;
+import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest;
+import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosMaintenanceRequest;
+import com.qat.samples.sysmgmt.beneficios.model.response.BeneficiosResponse;
+import com.qat.samples.sysmgmt.dp.model.Eventos;
+import com.qat.samples.sysmgmt.dp.model.HorarioFunc;
+import com.qat.samples.sysmgmt.dp.model.request.EventoInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.EventosMaintenanceRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.FuncionarioMaintenanceRequest;
+import com.qat.samples.sysmgmt.dp.model.request.HoraFuncInquiryRequest;
+import com.qat.samples.sysmgmt.dp.model.request.HoraFuncMaintenanceRequest;
+import com.qat.samples.sysmgmt.dp.model.response.EventoResponse;
+import com.qat.samples.sysmgmt.dp.model.response.FuncionarioResponse;
+import com.qat.samples.sysmgmt.dp.model.response.HorarioFuncResponse;
+import com.qat.samples.sysmgmt.pessoa.model.Funcionario;
 import com.qat.samples.sysmgmt.service.IDpWS;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 /**
  * DpWS used to provide WS interface. Delegates all calls to the IDpBAC.
@@ -33,22 +50,22 @@ public class DpWSImpl implements IDpWS
 	 * @return the dpBAC which is expected to provide the implementation.
 	 */
 	public IDpBAC getDpBAC()
-	{	
+	{
 		return dpBAC;
 	}
+	/**
+	 * Spring injection uses this method to inject an implementation of {@link IDpBAC}.
+	 *
+	 * @param dpBAC the dpBAC to set.
+	 */
+	public void setDpBAC(IDpBAC dpBAC)
+	{
+		this.dpBAC = dpBAC;
+	}
+
 
 //===================================### FUNCIONARIO ####======================================
 
-	/**
-	 * Spring injection uses this method to inject an implementation of {@link IFuncionarioBAC}.
-	 *
-	 * @param funcionarioBAC the funcionarioBAC to set.
-	 */
-	public void setFuncionarioBAC(IFuncionarioBAC funcionarioBAC)
-	{
-		this.funcionarioBAC = funcionarioBAC;
-	}
-	
 	/**
 	 * Delegates call to {@link IFuncionarioBAC}
 	 *
@@ -62,7 +79,7 @@ public class DpWSImpl implements IDpWS
 		FuncionarioResponse response = new FuncionarioResponse();
 		try
 		{
-			InternalResultsResponse<Funcionario> internalResponse = getFuncionarioBAC().insertFuncionario(request);
+			InternalResultsResponse<Funcionario> internalResponse = getDpBAC().insertFuncionario(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -72,7 +89,7 @@ public class DpWSImpl implements IDpWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IFuncionarioBAC}
 	 *
@@ -86,7 +103,7 @@ public class DpWSImpl implements IDpWS
 		FuncionarioResponse response = new FuncionarioResponse();
 		try
 		{
-			InternalResultsResponse<Funcionario> internalResponse = getFuncionarioBAC().updateFuncionario(request);
+			InternalResultsResponse<Funcionario> internalResponse = getDpBAC().updateFuncionario(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -96,7 +113,7 @@ public class DpWSImpl implements IDpWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IFuncionarioBAC}
 	 *
@@ -110,7 +127,7 @@ public class DpWSImpl implements IDpWS
 		FuncionarioResponse response = new FuncionarioResponse();
 		try
 		{
-			InternalResultsResponse<Funcionario> internalResponse = getFuncionarioBAC().deleteFuncionario(request);
+			InternalResultsResponse<Funcionario> internalResponse = getDpBAC().deleteFuncionario(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -120,7 +137,7 @@ public class DpWSImpl implements IDpWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IFuncionarioBAC}
 	 *
@@ -134,7 +151,7 @@ public class DpWSImpl implements IDpWS
 		FuncionarioResponse response = new FuncionarioResponse();
 		try
 		{
-			InternalResultsResponse<Funcionario> internalResponse = getFuncionarioBAC().fetchFuncionarioById(request);
+			InternalResultsResponse<Funcionario> internalResponse = getDpBAC().fetchFuncionarioById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -144,7 +161,7 @@ public class DpWSImpl implements IDpWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IFuncionarioBAC}
 	 *
@@ -158,7 +175,7 @@ public class DpWSImpl implements IDpWS
 		FuncionarioResponse response = new FuncionarioResponse();
 		try
 		{
-			InternalResultsResponse<Funcionario> internalResponse = getFuncionarioBAC().fetchFuncionariosByRequest(request);
+			InternalResultsResponse<Funcionario> internalResponse = getDpBAC().fetchFuncionariosByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -181,7 +198,7 @@ public class DpWSImpl implements IDpWS
 		FuncionarioResponse response = new FuncionarioResponse();
 		try
 		{
-			InternalResultsResponse<Funcionario> internalResponse = getFuncionarioBAC().refreshFuncionarios(request);
+			InternalResultsResponse<Funcionario> internalResponse = getDpBAC().refreshFuncionarios(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -203,7 +220,7 @@ public class DpWSImpl implements IDpWS
 		FuncionarioResponse response = new FuncionarioResponse();
 		try
 		{
-			InternalResultsResponse<Funcionario> internalResponse = getFuncionarioBAC().fetchAllFuncionarios();
+			InternalResultsResponse<Funcionario> internalResponse = getDpBAC().fetchAllFuncionarios(new Funcionario());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -217,29 +234,19 @@ public class DpWSImpl implements IDpWS
 //===================================### EVENTOS ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IEventosBAC}.
-	 *
-	 * @param eventosBAC the eventosBAC to set.
-	 */
-	public void setEventosBAC(IEventosBAC eventosBAC)
-	{
-		this.eventosBAC = eventosBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IEventosBAC}
 	 *
 	 * @param request a EventosRequest
-	 * @return EventosResponse
+	 * @return EventoResponse
 	 */
 	@Override
-	public EventosResponse insertEventos(EventosMaintenanceRequest request)
+	public EventoResponse insertEventos(EventosMaintenanceRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		EventosResponse response = new EventosResponse();
+		EventoResponse response = new EventoResponse();
 		try
 		{
-			InternalResultsResponse<Eventos> internalResponse = getEventosBAC().insertEventos(request);
+			InternalResultsResponse<Eventos> internalResponse = getDpBAC().insertEventos(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -249,21 +256,21 @@ public class DpWSImpl implements IDpWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IEventosBAC}
 	 *
 	 * @param request a EventosRequest
-	 * @return EventosResponse
+	 * @return EventoResponse
 	 */
 	@Override
-	public EventosResponse updateEventos(EventosMaintenanceRequest request)
+	public EventoResponse updateEventos(EventosMaintenanceRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		EventosResponse response = new EventosResponse();
+		EventoResponse response = new EventoResponse();
 		try
 		{
-			InternalResultsResponse<Eventos> internalResponse = getEventosBAC().updateEventos(request);
+			InternalResultsResponse<Eventos> internalResponse = getDpBAC().updateEventos(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -273,21 +280,21 @@ public class DpWSImpl implements IDpWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IEventosBAC}
 	 *
 	 * @param request a EventosRequest
-	 * @return EventosResponse
+	 * @return EventoResponse
 	 */
 	@Override
-	public EventosResponse deleteEventos(EventosMaintenanceRequest request)
+	public EventoResponse deleteEventos(EventosMaintenanceRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		EventosResponse response = new EventosResponse();
+		EventoResponse response = new EventoResponse();
 		try
 		{
-			InternalResultsResponse<Eventos> internalResponse = getEventosBAC().deleteEventos(request);
+			InternalResultsResponse<Eventos> internalResponse = getDpBAC().deleteEventos(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -297,21 +304,21 @@ public class DpWSImpl implements IDpWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IEventosBAC}
 	 *
 	 * @param request a EventosRequest
-	 * @return EventosResponse
+	 * @return EventoResponse
 	 */
 	@Override
-	public EventosResponse fetchEventosById(FetchByIdRequest request)
+	public EventoResponse fetchEventosById(FetchByIdRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		EventosResponse response = new EventosResponse();
+		EventoResponse response = new EventoResponse();
 		try
 		{
-			InternalResultsResponse<Eventos> internalResponse = getEventosBAC().fetchEventosById(request);
+			InternalResultsResponse<Eventos> internalResponse = getDpBAC().fetchEventosById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -321,21 +328,21 @@ public class DpWSImpl implements IDpWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IEventosBAC}
 	 *
 	 * @param request a EventosRequest
-	 * @return EventosResponse
+	 * @return EventoResponse
 	 */
 	@Override
-	public EventosResponse fetchEventossByRequest(EventosInquiryRequest request)
+	public EventoResponse fetchEventossByRequest(EventoInquiryRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		EventosResponse response = new EventosResponse();
+		EventoResponse response = new EventoResponse();
 		try
 		{
-			InternalResultsResponse<Eventos> internalResponse = getEventosBAC().fetchEventossByRequest(request);
+			InternalResultsResponse<Eventos> internalResponse = getDpBAC().fetchEventossByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -349,16 +356,16 @@ public class DpWSImpl implements IDpWS
 	 * Delegates call to {@link IEventosBAC}
 	 *
 	 * @param request a EventosRequest
-	 * @return EventosResponse
+	 * @return EventoResponse
 	 */
 	@Override
-	public EventosResponse refreshEventoss(RefreshRequest request)
+	public EventoResponse refreshEventoss(RefreshRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		EventosResponse response = new EventosResponse();
+		EventoResponse response = new EventoResponse();
 		try
 		{
-			InternalResultsResponse<Eventos> internalResponse = getEventosBAC().refreshEventoss(request);
+			InternalResultsResponse<Eventos> internalResponse = getDpBAC().refreshEventoss(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -372,15 +379,15 @@ public class DpWSImpl implements IDpWS
 	 * Delegates call to {@link IEventosBAC}
 	 *
 	 * @param request a EventosRequest
-	 * @return EventosResponse
+	 * @return EventoResponse
 	 */
 	@Override
-	public EventosResponse fetchAllEventoss(FetchAllRequest request)
+	public EventoResponse fetchAllEventoss(FetchAllRequest request)
 	{
-		EventosResponse response = new EventosResponse();
+		EventoResponse response = new EventoResponse();
 		try
 		{
-			InternalResultsResponse<Eventos> internalResponse = getEventosBAC().fetchAllEventoss();
+			InternalResultsResponse<Eventos> internalResponse = getDpBAC().fetchAllEventoss(new Eventos());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -394,16 +401,6 @@ public class DpWSImpl implements IDpWS
 //===================================### BENEFICIOS ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IBeneficiosBAC}.
-	 *
-	 * @param beneficiosBAC the beneficiosBAC to set.
-	 */
-	public void setBeneficiosBAC(IBeneficiosBAC beneficiosBAC)
-	{
-		this.beneficiosBAC = beneficiosBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IBeneficiosBAC}
 	 *
 	 * @param request a BeneficiosRequest
@@ -416,7 +413,7 @@ public class DpWSImpl implements IDpWS
 		BeneficiosResponse response = new BeneficiosResponse();
 		try
 		{
-			InternalResultsResponse<Beneficios> internalResponse = getBeneficiosBAC().insertBeneficios(request);
+			InternalResultsResponse<Beneficios> internalResponse = getDpBAC().insertBeneficios(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -426,7 +423,7 @@ public class DpWSImpl implements IDpWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IBeneficiosBAC}
 	 *
@@ -440,7 +437,7 @@ public class DpWSImpl implements IDpWS
 		BeneficiosResponse response = new BeneficiosResponse();
 		try
 		{
-			InternalResultsResponse<Beneficios> internalResponse = getBeneficiosBAC().updateBeneficios(request);
+			InternalResultsResponse<Beneficios> internalResponse = getDpBAC().updateBeneficios(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -450,7 +447,7 @@ public class DpWSImpl implements IDpWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IBeneficiosBAC}
 	 *
@@ -464,7 +461,7 @@ public class DpWSImpl implements IDpWS
 		BeneficiosResponse response = new BeneficiosResponse();
 		try
 		{
-			InternalResultsResponse<Beneficios> internalResponse = getBeneficiosBAC().deleteBeneficios(request);
+			InternalResultsResponse<Beneficios> internalResponse = getDpBAC().deleteBeneficios(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -474,7 +471,7 @@ public class DpWSImpl implements IDpWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IBeneficiosBAC}
 	 *
@@ -488,7 +485,7 @@ public class DpWSImpl implements IDpWS
 		BeneficiosResponse response = new BeneficiosResponse();
 		try
 		{
-			InternalResultsResponse<Beneficios> internalResponse = getBeneficiosBAC().fetchBeneficiosById(request);
+			InternalResultsResponse<Beneficios> internalResponse = getDpBAC().fetchBeneficiosById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -498,7 +495,7 @@ public class DpWSImpl implements IDpWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IBeneficiosBAC}
 	 *
@@ -512,7 +509,7 @@ public class DpWSImpl implements IDpWS
 		BeneficiosResponse response = new BeneficiosResponse();
 		try
 		{
-			InternalResultsResponse<Beneficios> internalResponse = getBeneficiosBAC().fetchBeneficiossByRequest(request);
+			InternalResultsResponse<Beneficios> internalResponse = getDpBAC().fetchBeneficiossByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -535,7 +532,7 @@ public class DpWSImpl implements IDpWS
 		BeneficiosResponse response = new BeneficiosResponse();
 		try
 		{
-			InternalResultsResponse<Beneficios> internalResponse = getBeneficiosBAC().refreshBeneficioss(request);
+			InternalResultsResponse<Beneficios> internalResponse = getDpBAC().refreshBeneficioss(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -557,7 +554,7 @@ public class DpWSImpl implements IDpWS
 		BeneficiosResponse response = new BeneficiosResponse();
 		try
 		{
-			InternalResultsResponse<Beneficios> internalResponse = getBeneficiosBAC().fetchAllBeneficioss();
+			InternalResultsResponse<Beneficios> internalResponse = getDpBAC().fetchAllBeneficioss(new Beneficios());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -571,29 +568,19 @@ public class DpWSImpl implements IDpWS
 //===================================### HORAFUNC ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IHoraFuncBAC}.
-	 *
-	 * @param horafuncBAC the horafuncBAC to set.
-	 */
-	public void setHoraFuncBAC(IHoraFuncBAC horafuncBAC)
-	{
-		this.horafuncBAC = horafuncBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IHoraFuncBAC}
 	 *
 	 * @param request a HoraFuncRequest
-	 * @return HoraFuncResponse
+	 * @return HorarioFuncResponse
 	 */
 	@Override
-	public HoraFuncResponse insertHoraFunc(HoraFuncMaintenanceRequest request)
+	public HorarioFuncResponse insertHoraFunc(HoraFuncMaintenanceRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		HoraFuncResponse response = new HoraFuncResponse();
+		HorarioFuncResponse response = new HorarioFuncResponse();
 		try
 		{
-			InternalResultsResponse<HoraFunc> internalResponse = getHoraFuncBAC().insertHoraFunc(request);
+			InternalResultsResponse<HorarioFunc> internalResponse = getDpBAC().insertHoraFunc(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -603,21 +590,21 @@ public class DpWSImpl implements IDpWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IHoraFuncBAC}
 	 *
 	 * @param request a HoraFuncRequest
-	 * @return HoraFuncResponse
+	 * @return HorarioFuncResponse
 	 */
 	@Override
-	public HoraFuncResponse updateHoraFunc(HoraFuncMaintenanceRequest request)
+	public HorarioFuncResponse updateHoraFunc(HoraFuncMaintenanceRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		HoraFuncResponse response = new HoraFuncResponse();
+		HorarioFuncResponse response = new HorarioFuncResponse();
 		try
 		{
-			InternalResultsResponse<HoraFunc> internalResponse = getHoraFuncBAC().updateHoraFunc(request);
+			InternalResultsResponse<HorarioFunc> internalResponse = getDpBAC().updateHoraFunc(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -627,21 +614,21 @@ public class DpWSImpl implements IDpWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IHoraFuncBAC}
 	 *
 	 * @param request a HoraFuncRequest
-	 * @return HoraFuncResponse
+	 * @return HorarioFuncResponse
 	 */
 	@Override
-	public HoraFuncResponse deleteHoraFunc(HoraFuncMaintenanceRequest request)
+	public HorarioFuncResponse deleteHoraFunc(HoraFuncMaintenanceRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		HoraFuncResponse response = new HoraFuncResponse();
+		HorarioFuncResponse response = new HorarioFuncResponse();
 		try
 		{
-			InternalResultsResponse<HoraFunc> internalResponse = getHoraFuncBAC().deleteHoraFunc(request);
+			InternalResultsResponse<HorarioFunc> internalResponse = getDpBAC().deleteHoraFunc(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -651,21 +638,21 @@ public class DpWSImpl implements IDpWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IHoraFuncBAC}
 	 *
 	 * @param request a HoraFuncRequest
-	 * @return HoraFuncResponse
+	 * @return HorarioFuncResponse
 	 */
 	@Override
-	public HoraFuncResponse fetchHoraFuncById(FetchByIdRequest request)
+	public HorarioFuncResponse fetchHoraFuncById(FetchByIdRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		HoraFuncResponse response = new HoraFuncResponse();
+		HorarioFuncResponse response = new HorarioFuncResponse();
 		try
 		{
-			InternalResultsResponse<HoraFunc> internalResponse = getHoraFuncBAC().fetchHoraFuncById(request);
+			InternalResultsResponse<HorarioFunc> internalResponse = getDpBAC().fetchHoraFuncById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -675,21 +662,21 @@ public class DpWSImpl implements IDpWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IHoraFuncBAC}
 	 *
 	 * @param request a HoraFuncRequest
-	 * @return HoraFuncResponse
+	 * @return HorarioFuncResponse
 	 */
 	@Override
-	public HoraFuncResponse fetchHoraFuncsByRequest(HoraFuncInquiryRequest request)
+	public HorarioFuncResponse fetchHoraFuncsByRequest(HoraFuncInquiryRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		HoraFuncResponse response = new HoraFuncResponse();
+		HorarioFuncResponse response = new HorarioFuncResponse();
 		try
 		{
-			InternalResultsResponse<HoraFunc> internalResponse = getHoraFuncBAC().fetchHoraFuncsByRequest(request);
+			InternalResultsResponse<HorarioFunc> internalResponse = getDpBAC().fetchHoraFuncsByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -703,16 +690,16 @@ public class DpWSImpl implements IDpWS
 	 * Delegates call to {@link IHoraFuncBAC}
 	 *
 	 * @param request a HoraFuncRequest
-	 * @return HoraFuncResponse
+	 * @return HorarioFuncResponse
 	 */
 	@Override
-	public HoraFuncResponse refreshHoraFuncs(RefreshRequest request)
+	public HorarioFuncResponse refreshHoraFuncs(RefreshRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		HoraFuncResponse response = new HoraFuncResponse();
+		HorarioFuncResponse response = new HorarioFuncResponse();
 		try
 		{
-			InternalResultsResponse<HoraFunc> internalResponse = getHoraFuncBAC().refreshHoraFuncs(request);
+			InternalResultsResponse<HorarioFunc> internalResponse = getDpBAC().refreshHoraFuncs(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -726,15 +713,15 @@ public class DpWSImpl implements IDpWS
 	 * Delegates call to {@link IHoraFuncBAC}
 	 *
 	 * @param request a HoraFuncRequest
-	 * @return HoraFuncResponse
+	 * @return HorarioFuncResponse
 	 */
 	@Override
-	public HoraFuncResponse fetchAllHoraFuncs(FetchAllRequest request)
+	public HorarioFuncResponse fetchAllHoraFuncs(FetchAllRequest request)
 	{
-		HoraFuncResponse response = new HoraFuncResponse();
+		HorarioFuncResponse response = new HorarioFuncResponse();
 		try
 		{
-			InternalResultsResponse<HoraFunc> internalResponse = getHoraFuncBAC().fetchAllHoraFuncs();
+			InternalResultsResponse<HorarioFunc> internalResponse = getDpBAC().fetchAllHoraFuncs(new HorarioFunc());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}

@@ -10,13 +10,14 @@ import org.springframework.stereotype.Service;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IHistoricoBAC;
-import com.qat.samples.sysmgmt.model.Historico;
-import com.qat.samples.sysmgmt.model.request.HistoricoMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.HistoricoResponse;
+import com.qat.samples.sysmgmt.bac.Historico.IHistoricoBAC;
+import com.qat.samples.sysmgmt.historico.model.Historico;
+import com.qat.samples.sysmgmt.historico.model.HistoricoItens;
+import com.qat.samples.sysmgmt.historico.model.request.HistoricoInquiryRequest;
+import com.qat.samples.sysmgmt.historico.model.request.HistoricoMaintenanceRequest;
+import com.qat.samples.sysmgmt.historico.model.response.HistoricoResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.HistoricoInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -195,149 +196,6 @@ public class HistoricoWSImpl implements com.qat.samples.sysmgmt.service.IHistori
 		try
 		{
 			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().fetchHistoricosByRequest(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
-	}
-
-//===================================### HISTORICOITENS ####======================================
-	@Override
-	public HistoricoItensResponse insertHistoricoItens(HistoricoItensMaintenanceRequest request)
-	{
-		HistoricoItensResponse response = new HistoricoItensResponse();
-
-		try
-		{
-			InternalResultsResponse<HistoricoItens> internalResponse = getHistoricoBAC().insertHistoricoItens(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
-	}
-
-	@Override
-	public HistoricoItensResponse updateHistoricoItens(HistoricoItensMaintenanceRequest request)
-	{
-		HistoricoItensResponse response = new HistoricoItensResponse();
-
-		try
-		{
-			InternalResultsResponse<HistoricoItens> internalResponse = getHistoricoBAC().updateHistoricoItens(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
-	}
-
-	@Override
-	public HistoricoItensResponse deleteHistoricoItens(HistoricoItensMaintenanceRequest request)
-	{
-		HistoricoItensResponse response = new HistoricoItensResponse();
-
-		try
-		{
-			InternalResultsResponse<HistoricoItens> internalResponse = getHistoricoBAC().deleteHistoricoItens(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
-	}
-
-	@Override
-	public HistoricoItensResponse refreshHistoricoItenss(RefreshRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		HistoricoItensResponse response = new HistoricoItensResponse();
-
-		try
-		{
-			InternalResultsResponse<HistoricoItens> internalResponse = getHistoricoBAC().refreshHistoricoItenss(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
-	}
-
-	@Override
-	public HistoricoItensResponse fetchAllHistoricoItenss(FetchAllRequest request)
-	{
-		HistoricoItensResponse response = new HistoricoItensResponse();
-
-		try
-		{
-			InternalResultsResponse<HistoricoItens> internalResponse = getHistoricoBAC().fetchAllHistoricoItenss(new HistoricoItens());
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.dapi.impl.IHistoricoItensWS#fetchHistoricoItensById(com.qat.samples.sysmgmt.model.request.
-	 * FetchByIdRequest)
-	 */
-	@Override
-	public HistoricoItensResponse fetchHistoricoItensById(FetchByIdRequest request)
-	{
-		HistoricoItensResponse response = new HistoricoItensResponse();
-
-		try
-		{
-			InternalResultsResponse<HistoricoItens> internalResponse = new InternalResultsResponse<HistoricoItens>();
-
-			internalResponse = getHistoricoBAC().fetchHistoricoItensById(request);
-			// Handle the processing for all previous methods regardless of them failing or succeeding.
-			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
-	}
-
-	@Override
-	public HistoricoItensResponse fetchHistoricoItenssByRequest(HistoricoItensInquiryRequest request)
-	{
-		HistoricoItensResponse response = new HistoricoItensResponse();
-
-		try
-		{
-			InternalResultsResponse<HistoricoItens> internalResponse = getHistoricoBAC().fetchHistoricoItenssByRequest(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)

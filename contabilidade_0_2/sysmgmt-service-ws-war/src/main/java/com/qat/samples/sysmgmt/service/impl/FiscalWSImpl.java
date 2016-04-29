@@ -10,13 +10,22 @@ import org.springframework.stereotype.Service;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IFiscalBAC;
-import com.qat.samples.sysmgmt.model.Fiscal;
-import com.qat.samples.sysmgmt.model.request.FiscalMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.FiscalResponse;
+import com.qat.samples.sysmgmt.bac.Fiscal.IFiscalBAC;
+import com.qat.samples.sysmgmt.cfop.model.Cfop;
+import com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest;
+import com.qat.samples.sysmgmt.cfop.model.request.CfopMaintenanceRequest;
+import com.qat.samples.sysmgmt.cnae.model.Cnae;
+import com.qat.samples.sysmgmt.cnae.model.CnaeEmpresa;
+import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
+import com.qat.samples.sysmgmt.cnae.model.request.CnaeMaintenanceRequest;
+import com.qat.samples.sysmgmt.cnae.model.response.CnaeResponse;
+import com.qat.samples.sysmgmt.fiscal.model.Regime;
+import com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.request.RegimeMaintenanceRequest;
+import com.qat.samples.sysmgmt.fiscal.model.response.RegimeResponse;
+import com.qat.samples.sysmgmt.produto.model.response.CfopResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.FiscalInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -481,149 +490,6 @@ public class FiscalWSImpl implements com.qat.samples.sysmgmt.service.IFiscalWS
 		try
 		{
 			InternalResultsResponse<Cnae> internalResponse = getFiscalBAC().fetchCnaesByRequest(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
-	}
-
-//===================================### CNAEEMPRESA ####======================================
-	@Override
-	public CnaeEmpresaResponse insertCnaeEmpresa(CnaeEmpresaMaintenanceRequest request)
-	{
-		CnaeEmpresaResponse response = new CnaeEmpresaResponse();
-
-		try
-		{
-			InternalResultsResponse<CnaeEmpresa> internalResponse = getFiscalBAC().insertCnaeEmpresa(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
-	}
-
-	@Override
-	public CnaeEmpresaResponse updateCnaeEmpresa(CnaeEmpresaMaintenanceRequest request)
-	{
-		CnaeEmpresaResponse response = new CnaeEmpresaResponse();
-
-		try
-		{
-			InternalResultsResponse<CnaeEmpresa> internalResponse = getFiscalBAC().updateCnaeEmpresa(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
-	}
-
-	@Override
-	public CnaeEmpresaResponse deleteCnaeEmpresa(CnaeEmpresaMaintenanceRequest request)
-	{
-		CnaeEmpresaResponse response = new CnaeEmpresaResponse();
-
-		try
-		{
-			InternalResultsResponse<CnaeEmpresa> internalResponse = getFiscalBAC().deleteCnaeEmpresa(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
-	}
-
-	@Override
-	public CnaeEmpresaResponse refreshCnaeEmpresas(RefreshRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		CnaeEmpresaResponse response = new CnaeEmpresaResponse();
-
-		try
-		{
-			InternalResultsResponse<CnaeEmpresa> internalResponse = getFiscalBAC().refreshCnaeEmpresas(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
-	}
-
-	@Override
-	public CnaeEmpresaResponse fetchAllCnaeEmpresas(FetchAllRequest request)
-	{
-		CnaeEmpresaResponse response = new CnaeEmpresaResponse();
-
-		try
-		{
-			InternalResultsResponse<CnaeEmpresa> internalResponse = getFiscalBAC().fetchAllCnaeEmpresas(new CnaeEmpresa());
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.dapi.impl.ICnaeEmpresaWS#fetchCnaeEmpresaById(com.qat.samples.sysmgmt.model.request.
-	 * FetchByIdRequest)
-	 */
-	@Override
-	public CnaeEmpresaResponse fetchCnaeEmpresaById(FetchByIdRequest request)
-	{
-		CnaeEmpresaResponse response = new CnaeEmpresaResponse();
-
-		try
-		{
-			InternalResultsResponse<CnaeEmpresa> internalResponse = new InternalResultsResponse<CnaeEmpresa>();
-
-			internalResponse = getFiscalBAC().fetchCnaeEmpresaById(request);
-			// Handle the processing for all previous methods regardless of them failing or succeeding.
-			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
-	}
-
-	@Override
-	public CnaeEmpresaResponse fetchCnaeEmpresasByRequest(CnaeEmpresaInquiryRequest request)
-	{
-		CnaeEmpresaResponse response = new CnaeEmpresaResponse();
-
-		try
-		{
-			InternalResultsResponse<CnaeEmpresa> internalResponse = getFiscalBAC().fetchCnaeEmpresasByRequest(request);
 			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
 		catch (Exception ex)

@@ -1,16 +1,45 @@
-/** create by system gera-java version 1.0.0 28/04/2016 16:21 : 34*/
+/** create by system gera-java version 1.0.0 28/04/2016 20:5 : 32*/
 package com.qat.samples.sysmgmt.service.impl;
 import javax.jws.WebService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.IFinanceiroBAC;
-import com.qat.samples.sysmgmt.model.Financeiro;
-import com.qat.samples.sysmgmt.model.response.FinanceiroResponse;
+import com.qat.samples.sysmgmt.bac.Financeiro.IFinanceiroBAC;
+import com.qat.samples.sysmgmt.banco.model.Banco;
+import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
+import com.qat.samples.sysmgmt.banco.model.request.BancoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condpag.model.CondPag;
+import com.qat.samples.sysmgmt.condpag.model.FormaPg;
+import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
+import com.qat.samples.sysmgmt.dp.model.response.BancoResponse;
+import com.qat.samples.sysmgmt.dp.model.response.FormaPgResponse;
+import com.qat.samples.sysmgmt.financeiro.model.Caixa;
+import com.qat.samples.sysmgmt.financeiro.model.ContasPagar;
+import com.qat.samples.sysmgmt.financeiro.model.ContasReceber;
+import com.qat.samples.sysmgmt.financeiro.model.request.CaixaInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.CaixaMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.CondPagInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.CondPagMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.FormaPgInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.FormaPgMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.response.CondPagResponse;
+import com.qat.samples.sysmgmt.financeiro.model.response.ContaCorrenteResponse;
+import com.qat.samples.sysmgmt.financeiro.model.response.ContasPagarResponse;
+import com.qat.samples.sysmgmt.financeiro.model.response.ContasReceberResponse;
+import com.qat.samples.sysmgmt.nf.model.response.CaixaResponse;
 import com.qat.samples.sysmgmt.service.IFinanceiroWS;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 /**
  * FinanceiroWS used to provide WS interface. Delegates all calls to the IFinanceiroBAC.
@@ -33,22 +62,22 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 	 * @return the financeiroBAC which is expected to provide the implementation.
 	 */
 	public IFinanceiroBAC getFinanceiroBAC()
-	{	
+	{
 		return financeiroBAC;
 	}
+	/**
+	 * Spring injection uses this method to inject an implementation of {@link IFinanceiroBAC}.
+	 *
+	 * @param financeiroBAC the financeiroBAC to set.
+	 */
+	public void setFinanceiroBAC(IFinanceiroBAC financeiroBAC)
+	{
+		this.financeiroBAC = financeiroBAC;
+	}
+
 
 //===================================### CONTASPAGAR ####======================================
 
-	/**
-	 * Spring injection uses this method to inject an implementation of {@link IContasPagarBAC}.
-	 *
-	 * @param contaspagarBAC the contaspagarBAC to set.
-	 */
-	public void setContasPagarBAC(IContasPagarBAC contaspagarBAC)
-	{
-		this.contaspagarBAC = contaspagarBAC;
-	}
-	
 	/**
 	 * Delegates call to {@link IContasPagarBAC}
 	 *
@@ -62,7 +91,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		ContasPagarResponse response = new ContasPagarResponse();
 		try
 		{
-			InternalResultsResponse<ContasPagar> internalResponse = getContasPagarBAC().insertContasPagar(request);
+			InternalResultsResponse<ContasPagar> internalResponse = getFinanceiroBAC().insertContasPagar(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -72,7 +101,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IContasPagarBAC}
 	 *
@@ -86,7 +115,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		ContasPagarResponse response = new ContasPagarResponse();
 		try
 		{
-			InternalResultsResponse<ContasPagar> internalResponse = getContasPagarBAC().updateContasPagar(request);
+			InternalResultsResponse<ContasPagar> internalResponse = getFinanceiroBAC().updateContasPagar(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -96,7 +125,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IContasPagarBAC}
 	 *
@@ -110,7 +139,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		ContasPagarResponse response = new ContasPagarResponse();
 		try
 		{
-			InternalResultsResponse<ContasPagar> internalResponse = getContasPagarBAC().deleteContasPagar(request);
+			InternalResultsResponse<ContasPagar> internalResponse = getFinanceiroBAC().deleteContasPagar(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -120,7 +149,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IContasPagarBAC}
 	 *
@@ -134,7 +163,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		ContasPagarResponse response = new ContasPagarResponse();
 		try
 		{
-			InternalResultsResponse<ContasPagar> internalResponse = getContasPagarBAC().fetchContasPagarById(request);
+			InternalResultsResponse<ContasPagar> internalResponse = getFinanceiroBAC().fetchContasPagarById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -144,7 +173,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IContasPagarBAC}
 	 *
@@ -158,7 +187,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		ContasPagarResponse response = new ContasPagarResponse();
 		try
 		{
-			InternalResultsResponse<ContasPagar> internalResponse = getContasPagarBAC().fetchContasPagarsByRequest(request);
+			InternalResultsResponse<ContasPagar> internalResponse = getFinanceiroBAC().fetchContasPagarsByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -181,7 +210,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		ContasPagarResponse response = new ContasPagarResponse();
 		try
 		{
-			InternalResultsResponse<ContasPagar> internalResponse = getContasPagarBAC().refreshContasPagars(request);
+			InternalResultsResponse<ContasPagar> internalResponse = getFinanceiroBAC().refreshContasPagars(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -203,7 +232,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		ContasPagarResponse response = new ContasPagarResponse();
 		try
 		{
-			InternalResultsResponse<ContasPagar> internalResponse = getContasPagarBAC().fetchAllContasPagars();
+			InternalResultsResponse<ContasPagar> internalResponse = getFinanceiroBAC().fetchAllContasPagars(new ContasPagar());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -217,16 +246,6 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 //===================================### CONTASRECEBER ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IContasReceberBAC}.
-	 *
-	 * @param contasreceberBAC the contasreceberBAC to set.
-	 */
-	public void setContasReceberBAC(IContasReceberBAC contasreceberBAC)
-	{
-		this.contasreceberBAC = contasreceberBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IContasReceberBAC}
 	 *
 	 * @param request a ContasReceberRequest
@@ -239,7 +258,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		ContasReceberResponse response = new ContasReceberResponse();
 		try
 		{
-			InternalResultsResponse<ContasReceber> internalResponse = getContasReceberBAC().insertContasReceber(request);
+			InternalResultsResponse<ContasReceber> internalResponse = getFinanceiroBAC().insertContasReceber(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -249,7 +268,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IContasReceberBAC}
 	 *
@@ -263,7 +282,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		ContasReceberResponse response = new ContasReceberResponse();
 		try
 		{
-			InternalResultsResponse<ContasReceber> internalResponse = getContasReceberBAC().updateContasReceber(request);
+			InternalResultsResponse<ContasReceber> internalResponse = getFinanceiroBAC().updateContasReceber(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -273,7 +292,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IContasReceberBAC}
 	 *
@@ -287,7 +306,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		ContasReceberResponse response = new ContasReceberResponse();
 		try
 		{
-			InternalResultsResponse<ContasReceber> internalResponse = getContasReceberBAC().deleteContasReceber(request);
+			InternalResultsResponse<ContasReceber> internalResponse = getFinanceiroBAC().deleteContasReceber(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -297,7 +316,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IContasReceberBAC}
 	 *
@@ -311,7 +330,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		ContasReceberResponse response = new ContasReceberResponse();
 		try
 		{
-			InternalResultsResponse<ContasReceber> internalResponse = getContasReceberBAC().fetchContasReceberById(request);
+			InternalResultsResponse<ContasReceber> internalResponse = getFinanceiroBAC().fetchContasReceberById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -321,7 +340,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IContasReceberBAC}
 	 *
@@ -335,7 +354,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		ContasReceberResponse response = new ContasReceberResponse();
 		try
 		{
-			InternalResultsResponse<ContasReceber> internalResponse = getContasReceberBAC().fetchContasRecebersByRequest(request);
+			InternalResultsResponse<ContasReceber> internalResponse = getFinanceiroBAC().fetchContasRecebersByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -358,7 +377,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		ContasReceberResponse response = new ContasReceberResponse();
 		try
 		{
-			InternalResultsResponse<ContasReceber> internalResponse = getContasReceberBAC().refreshContasRecebers(request);
+			InternalResultsResponse<ContasReceber> internalResponse = getFinanceiroBAC().refreshContasRecebers(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -380,7 +399,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		ContasReceberResponse response = new ContasReceberResponse();
 		try
 		{
-			InternalResultsResponse<ContasReceber> internalResponse = getContasReceberBAC().fetchAllContasRecebers();
+			InternalResultsResponse<ContasReceber> internalResponse = getFinanceiroBAC().fetchAllContasRecebers(new ContasReceber());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -394,16 +413,6 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 //===================================### CONDPAG ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link ICondPagBAC}.
-	 *
-	 * @param condpagBAC the condpagBAC to set.
-	 */
-	public void setCondPagBAC(ICondPagBAC condpagBAC)
-	{
-		this.condpagBAC = condpagBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link ICondPagBAC}
 	 *
 	 * @param request a CondPagRequest
@@ -416,7 +425,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		CondPagResponse response = new CondPagResponse();
 		try
 		{
-			InternalResultsResponse<CondPag> internalResponse = getCondPagBAC().insertCondPag(request);
+			InternalResultsResponse<CondPag> internalResponse = getFinanceiroBAC().insertCondPag(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -426,7 +435,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICondPagBAC}
 	 *
@@ -440,7 +449,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		CondPagResponse response = new CondPagResponse();
 		try
 		{
-			InternalResultsResponse<CondPag> internalResponse = getCondPagBAC().updateCondPag(request);
+			InternalResultsResponse<CondPag> internalResponse = getFinanceiroBAC().updateCondPag(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -450,7 +459,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICondPagBAC}
 	 *
@@ -464,7 +473,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		CondPagResponse response = new CondPagResponse();
 		try
 		{
-			InternalResultsResponse<CondPag> internalResponse = getCondPagBAC().deleteCondPag(request);
+			InternalResultsResponse<CondPag> internalResponse = getFinanceiroBAC().deleteCondPag(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -474,7 +483,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICondPagBAC}
 	 *
@@ -488,7 +497,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		CondPagResponse response = new CondPagResponse();
 		try
 		{
-			InternalResultsResponse<CondPag> internalResponse = getCondPagBAC().fetchCondPagById(request);
+			InternalResultsResponse<CondPag> internalResponse = getFinanceiroBAC().fetchCondPagById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -498,7 +507,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICondPagBAC}
 	 *
@@ -512,7 +521,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		CondPagResponse response = new CondPagResponse();
 		try
 		{
-			InternalResultsResponse<CondPag> internalResponse = getCondPagBAC().fetchCondPagsByRequest(request);
+			InternalResultsResponse<CondPag> internalResponse = getFinanceiroBAC().fetchCondPagsByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -535,7 +544,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		CondPagResponse response = new CondPagResponse();
 		try
 		{
-			InternalResultsResponse<CondPag> internalResponse = getCondPagBAC().refreshCondPags(request);
+			InternalResultsResponse<CondPag> internalResponse = getFinanceiroBAC().refreshCondPags(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -557,7 +566,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		CondPagResponse response = new CondPagResponse();
 		try
 		{
-			InternalResultsResponse<CondPag> internalResponse = getCondPagBAC().fetchAllCondPags();
+			InternalResultsResponse<CondPag> internalResponse = getFinanceiroBAC().fetchAllCondPags(new CondPag());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -571,16 +580,6 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 //===================================### FORMAPG ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IFormaPgBAC}.
-	 *
-	 * @param formapgBAC the formapgBAC to set.
-	 */
-	public void setFormaPgBAC(IFormaPgBAC formapgBAC)
-	{
-		this.formapgBAC = formapgBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IFormaPgBAC}
 	 *
 	 * @param request a FormaPgRequest
@@ -593,7 +592,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		FormaPgResponse response = new FormaPgResponse();
 		try
 		{
-			InternalResultsResponse<FormaPg> internalResponse = getFormaPgBAC().insertFormaPg(request);
+			InternalResultsResponse<FormaPg> internalResponse = getFinanceiroBAC().insertFormaPg(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -603,7 +602,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IFormaPgBAC}
 	 *
@@ -617,7 +616,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		FormaPgResponse response = new FormaPgResponse();
 		try
 		{
-			InternalResultsResponse<FormaPg> internalResponse = getFormaPgBAC().updateFormaPg(request);
+			InternalResultsResponse<FormaPg> internalResponse = getFinanceiroBAC().updateFormaPg(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -627,7 +626,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IFormaPgBAC}
 	 *
@@ -641,7 +640,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		FormaPgResponse response = new FormaPgResponse();
 		try
 		{
-			InternalResultsResponse<FormaPg> internalResponse = getFormaPgBAC().deleteFormaPg(request);
+			InternalResultsResponse<FormaPg> internalResponse = getFinanceiroBAC().deleteFormaPg(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -651,7 +650,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IFormaPgBAC}
 	 *
@@ -665,7 +664,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		FormaPgResponse response = new FormaPgResponse();
 		try
 		{
-			InternalResultsResponse<FormaPg> internalResponse = getFormaPgBAC().fetchFormaPgById(request);
+			InternalResultsResponse<FormaPg> internalResponse = getFinanceiroBAC().fetchFormaPgById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -675,7 +674,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IFormaPgBAC}
 	 *
@@ -689,7 +688,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		FormaPgResponse response = new FormaPgResponse();
 		try
 		{
-			InternalResultsResponse<FormaPg> internalResponse = getFormaPgBAC().fetchFormaPgsByRequest(request);
+			InternalResultsResponse<FormaPg> internalResponse = getFinanceiroBAC().fetchFormaPgsByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -712,7 +711,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		FormaPgResponse response = new FormaPgResponse();
 		try
 		{
-			InternalResultsResponse<FormaPg> internalResponse = getFormaPgBAC().refreshFormaPgs(request);
+			InternalResultsResponse<FormaPg> internalResponse = getFinanceiroBAC().refreshFormaPgs(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -734,7 +733,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		FormaPgResponse response = new FormaPgResponse();
 		try
 		{
-			InternalResultsResponse<FormaPg> internalResponse = getFormaPgBAC().fetchAllFormaPgs();
+			InternalResultsResponse<FormaPg> internalResponse = getFinanceiroBAC().fetchAllFormaPgs(new FormaPg());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -748,16 +747,6 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 //===================================### BANCO ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IBancoBAC}.
-	 *
-	 * @param bancoBAC the bancoBAC to set.
-	 */
-	public void setBancoBAC(IBancoBAC bancoBAC)
-	{
-		this.bancoBAC = bancoBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IBancoBAC}
 	 *
 	 * @param request a BancoRequest
@@ -770,7 +759,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		BancoResponse response = new BancoResponse();
 		try
 		{
-			InternalResultsResponse<Banco> internalResponse = getBancoBAC().insertBanco(request);
+			InternalResultsResponse<Banco> internalResponse = getFinanceiroBAC().insertBanco(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -780,7 +769,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IBancoBAC}
 	 *
@@ -794,7 +783,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		BancoResponse response = new BancoResponse();
 		try
 		{
-			InternalResultsResponse<Banco> internalResponse = getBancoBAC().updateBanco(request);
+			InternalResultsResponse<Banco> internalResponse = getFinanceiroBAC().updateBanco(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -804,7 +793,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IBancoBAC}
 	 *
@@ -818,7 +807,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		BancoResponse response = new BancoResponse();
 		try
 		{
-			InternalResultsResponse<Banco> internalResponse = getBancoBAC().deleteBanco(request);
+			InternalResultsResponse<Banco> internalResponse = getFinanceiroBAC().deleteBanco(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -828,7 +817,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IBancoBAC}
 	 *
@@ -842,7 +831,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		BancoResponse response = new BancoResponse();
 		try
 		{
-			InternalResultsResponse<Banco> internalResponse = getBancoBAC().fetchBancoById(request);
+			InternalResultsResponse<Banco> internalResponse = getFinanceiroBAC().fetchBancoById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -852,7 +841,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IBancoBAC}
 	 *
@@ -866,7 +855,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		BancoResponse response = new BancoResponse();
 		try
 		{
-			InternalResultsResponse<Banco> internalResponse = getBancoBAC().fetchBancosByRequest(request);
+			InternalResultsResponse<Banco> internalResponse = getFinanceiroBAC().fetchBancosByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -889,7 +878,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		BancoResponse response = new BancoResponse();
 		try
 		{
-			InternalResultsResponse<Banco> internalResponse = getBancoBAC().refreshBancos(request);
+			InternalResultsResponse<Banco> internalResponse = getFinanceiroBAC().refreshBancos(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -911,7 +900,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		BancoResponse response = new BancoResponse();
 		try
 		{
-			InternalResultsResponse<Banco> internalResponse = getBancoBAC().fetchAllBancos();
+			InternalResultsResponse<Banco> internalResponse = getFinanceiroBAC().fetchAllBancos(new Banco());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -925,16 +914,6 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 //===================================### CONTACORRENTE ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IContaCorrenteBAC}.
-	 *
-	 * @param contacorrenteBAC the contacorrenteBAC to set.
-	 */
-	public void setContaCorrenteBAC(IContaCorrenteBAC contacorrenteBAC)
-	{
-		this.contacorrenteBAC = contacorrenteBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IContaCorrenteBAC}
 	 *
 	 * @param request a ContaCorrenteRequest
@@ -947,7 +926,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		ContaCorrenteResponse response = new ContaCorrenteResponse();
 		try
 		{
-			InternalResultsResponse<ContaCorrente> internalResponse = getContaCorrenteBAC().insertContaCorrente(request);
+			InternalResultsResponse<ContaCorrente> internalResponse = getFinanceiroBAC().insertContaCorrente(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -957,7 +936,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IContaCorrenteBAC}
 	 *
@@ -971,7 +950,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		ContaCorrenteResponse response = new ContaCorrenteResponse();
 		try
 		{
-			InternalResultsResponse<ContaCorrente> internalResponse = getContaCorrenteBAC().updateContaCorrente(request);
+			InternalResultsResponse<ContaCorrente> internalResponse = getFinanceiroBAC().updateContaCorrente(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -981,7 +960,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IContaCorrenteBAC}
 	 *
@@ -995,7 +974,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		ContaCorrenteResponse response = new ContaCorrenteResponse();
 		try
 		{
-			InternalResultsResponse<ContaCorrente> internalResponse = getContaCorrenteBAC().deleteContaCorrente(request);
+			InternalResultsResponse<ContaCorrente> internalResponse = getFinanceiroBAC().deleteContaCorrente(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1005,7 +984,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IContaCorrenteBAC}
 	 *
@@ -1019,7 +998,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		ContaCorrenteResponse response = new ContaCorrenteResponse();
 		try
 		{
-			InternalResultsResponse<ContaCorrente> internalResponse = getContaCorrenteBAC().fetchContaCorrenteById(request);
+			InternalResultsResponse<ContaCorrente> internalResponse = getFinanceiroBAC().fetchContaCorrenteById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1029,7 +1008,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IContaCorrenteBAC}
 	 *
@@ -1043,7 +1022,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		ContaCorrenteResponse response = new ContaCorrenteResponse();
 		try
 		{
-			InternalResultsResponse<ContaCorrente> internalResponse = getContaCorrenteBAC().fetchContaCorrentesByRequest(request);
+			InternalResultsResponse<ContaCorrente> internalResponse = getFinanceiroBAC().fetchContaCorrentesByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1066,7 +1045,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		ContaCorrenteResponse response = new ContaCorrenteResponse();
 		try
 		{
-			InternalResultsResponse<ContaCorrente> internalResponse = getContaCorrenteBAC().refreshContaCorrentes(request);
+			InternalResultsResponse<ContaCorrente> internalResponse = getFinanceiroBAC().refreshContaCorrentes(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1088,7 +1067,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		ContaCorrenteResponse response = new ContaCorrenteResponse();
 		try
 		{
-			InternalResultsResponse<ContaCorrente> internalResponse = getContaCorrenteBAC().fetchAllContaCorrentes();
+			InternalResultsResponse<ContaCorrente> internalResponse = getFinanceiroBAC().fetchAllContaCorrentes(new ContaCorrente());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1102,16 +1081,6 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 //===================================### CAIXA ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link ICaixaBAC}.
-	 *
-	 * @param caixaBAC the caixaBAC to set.
-	 */
-	public void setCaixaBAC(ICaixaBAC caixaBAC)
-	{
-		this.caixaBAC = caixaBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link ICaixaBAC}
 	 *
 	 * @param request a CaixaRequest
@@ -1124,7 +1093,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		CaixaResponse response = new CaixaResponse();
 		try
 		{
-			InternalResultsResponse<Caixa> internalResponse = getCaixaBAC().insertCaixa(request);
+			InternalResultsResponse<Caixa> internalResponse = getFinanceiroBAC().insertCaixa(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1134,7 +1103,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICaixaBAC}
 	 *
@@ -1148,7 +1117,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		CaixaResponse response = new CaixaResponse();
 		try
 		{
-			InternalResultsResponse<Caixa> internalResponse = getCaixaBAC().updateCaixa(request);
+			InternalResultsResponse<Caixa> internalResponse = getFinanceiroBAC().updateCaixa(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1158,7 +1127,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICaixaBAC}
 	 *
@@ -1172,7 +1141,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		CaixaResponse response = new CaixaResponse();
 		try
 		{
-			InternalResultsResponse<Caixa> internalResponse = getCaixaBAC().deleteCaixa(request);
+			InternalResultsResponse<Caixa> internalResponse = getFinanceiroBAC().deleteCaixa(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1182,7 +1151,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICaixaBAC}
 	 *
@@ -1196,7 +1165,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		CaixaResponse response = new CaixaResponse();
 		try
 		{
-			InternalResultsResponse<Caixa> internalResponse = getCaixaBAC().fetchCaixaById(request);
+			InternalResultsResponse<Caixa> internalResponse = getFinanceiroBAC().fetchCaixaById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1206,7 +1175,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ICaixaBAC}
 	 *
@@ -1220,7 +1189,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		CaixaResponse response = new CaixaResponse();
 		try
 		{
-			InternalResultsResponse<Caixa> internalResponse = getCaixaBAC().fetchCaixasByRequest(request);
+			InternalResultsResponse<Caixa> internalResponse = getFinanceiroBAC().fetchCaixasByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1243,7 +1212,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		CaixaResponse response = new CaixaResponse();
 		try
 		{
-			InternalResultsResponse<Caixa> internalResponse = getCaixaBAC().refreshCaixas(request);
+			InternalResultsResponse<Caixa> internalResponse = getFinanceiroBAC().refreshCaixas(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -1265,7 +1234,7 @@ public class FinanceiroWSImpl implements IFinanceiroWS
 		CaixaResponse response = new CaixaResponse();
 		try
 		{
-			InternalResultsResponse<Caixa> internalResponse = getCaixaBAC().fetchAllCaixas();
+			InternalResultsResponse<Caixa> internalResponse = getFinanceiroBAC().fetchAllCaixas(new Caixa());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}

@@ -21,6 +21,15 @@
   		<typeAlias alias="FetchByIdRequest" type="com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest"/>
   		<typeAlias alias="Entidade" type="com.qat.samples.sysmgmt.entidade.model.Entidade"/>
 
+  		<!-- Dicionario -->
+  		<typeAlias alias="Field" type="com.qat.samples.sysmgmt.dicionario.Field"/>
+  		<typeAlias alias="Classes" type="com.qat.samples.sysmgmt.dicionario.Classes"/>
+  		<typeAlias alias="Interface" type="com.qat.samples.sysmgmt.dicionario.Interface"/>
+  		<typeAlias alias="FieldInquiryRequest" type="com.qat.samples.sysmgmt.dicionario.request.FieldInquiryRequest"/>
+  		<typeAlias alias="InterfaceInquiryRequest" type="com.qat.samples.sysmgmt.dicionario.request.InterfaceInquiryRequest"/>
+  		<typeAlias alias="ClassesInquiryRequest" type="com.qat.samples.sysmgmt.dicionario.request.ClassesInquiryRequest"/>
+
+
 
   		<typeAlias alias="TabelaEnum" type="com.qat.samples.sysmgmt.util.model.TabelaEnum"/>
   		<typeAlias alias="AcaoEnum" type="com.qat.samples.sysmgmt.util.model.AcaoEnum"/>
@@ -331,6 +340,9 @@
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/advogado.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/exame.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/consulta.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/field.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/classes.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/interface.xml"/>
     </mappers>
 
 </configuration>

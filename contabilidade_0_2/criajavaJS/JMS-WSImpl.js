@@ -1,32 +1,3 @@
-
-function titleize(text) {
-
-    // Convertendo primeira letra em maiuscula.
-    text = text.charAt(0).toUpperCase() + text.slice(1);
-
-    for (var i = 0; i < text.length; i++) {
-        if (text.charAt(i) ===" ") {
-
-            // Convertendo letra ap�s o ESPA�O em maiuscula
-            var charToUper = text.charAt(i+1).toUpperCase();
-
-            // Colocando texto de antes do ESPA�O na vari�vel
-            var sliceBegin = text.slice(0, (i+1));
-
-            // colocando o texto de depois do ESPA�O na vari�vel
-            var sliceEnd = text.slice(i + 2);
-
-            // Juntando tudo
-            text = sliceBegin + charToUper + sliceEnd;
-
-        } else {
-
-            // NAO CONSIGO PENSAR EM COMO TRANSFORMAR O RESTANTE DAS LETRAS EM MINUSCULA
-        }
-    }
-    return text;
-}
-
 jms_WsImpl = function (teste,bar,local){
 
 	var text = '/** create by system gera-java version 1.0.0 '+dataAtualFormatada()+'*/\n';
@@ -76,6 +47,16 @@ text = text + '	public I'+titleize(bar)+'BAC get'+titleize(bar)+'BAC()\n';
 text = text + '	{	\n';
 text = text + '		return '+bar.toLowerCase()+'BAC;\n';
 text = text + '	}\n';
+text = text + '	/**\n';
+text = text + '	 * Spring injection uses this method to inject an implementation of {@link I'+bar+'BAC}.\n';
+text = text + '	 *\n';
+text = text + '	 * @param '+bar.toLowerCase()+'BAC the '+bar.toLowerCase()+'BAC to set.\n';
+text = text + '	 */\n';
+text = text + '	public void set'+bar+'BAC(I'+bar+'BAC '+bar.toLowerCase()+'BAC)\n';
+text = text + '	{\n';
+text = text + '		this.'+bar.toLowerCase()+'BAC = '+bar.toLowerCase()+'BAC;\n';
+text = text + '	}\n';
+text = text + '	\n';
 
 for(i=0;i < teste.length;i++){
 var nome = teste[i].classe.toLowerCase();
@@ -84,16 +65,7 @@ text = text + "\n";
 text = text + '//===================================### '+nomeM.toUpperCase()+' ####======================================\n';
 text = text + '\n';
 
-text = text + '	/**\n';
-text = text + '	 * Spring injection uses this method to inject an implementation of {@link I'+nomeM+'BAC}.\n';
-text = text + '	 *\n';
-text = text + '	 * @param '+nomeM.toLowerCase()+'BAC the '+nomeM.toLowerCase()+'BAC to set.\n';
-text = text + '	 */\n';
-text = text + '	public void set'+nomeM+'BAC(I'+nomeM+'BAC '+nomeM.toLowerCase()+'BAC)\n';
-text = text + '	{\n';
-text = text + '		this.'+nomeM.toLowerCase()+'BAC = '+nomeM.toLowerCase()+'BAC;\n';
-text = text + '	}\n';
-text = text + '	\n';
+
 text = text + '	/**\n';
 text = text + '	 * Delegates call to {@link I'+nomeM+'BAC}\n';
 text = text + '	 *\n';
@@ -108,7 +80,7 @@ text = text + '		'+nomeM+'Response response = new '+nomeM+'Response();\n';
 
 text = text + '		try\n';
 text = text + '		{\n';
-text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+nomeM+'BAC().insert'+nomeM+'(request);\n';
+text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+bar+'BAC().insert'+nomeM+'(request);\n';
 text = text + '			ResponseHandler\n';
 text = text + '					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());\n';
 text = text + '		}\n';
@@ -134,7 +106,7 @@ text = text + '		'+nomeM+'Response response = new '+nomeM+'Response();\n';
 
 text = text + '		try\n';
 text = text + '		{\n';
-text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+nomeM+'BAC().update'+nomeM+'(request);\n';
+text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+bar+'BAC().update'+nomeM+'(request);\n';
 text = text + '			ResponseHandler\n';
 text = text + '					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());\n';
 text = text + '		}\n';
@@ -160,7 +132,7 @@ text = text + '		'+nomeM+'Response response = new '+nomeM+'Response();\n';
 
 text = text + '		try\n';
 text = text + '		{\n';
-text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+nomeM+'BAC().delete'+nomeM+'(request);\n';
+text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+bar+'BAC().delete'+nomeM+'(request);\n';
 text = text + '			ResponseHandler\n';
 text = text + '					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());\n';
 text = text + '		}\n';
@@ -186,7 +158,7 @@ text = text + '		'+nomeM+'Response response = new '+nomeM+'Response();\n';
 
 text = text + '		try\n';
 text = text + '		{\n';
-text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+nomeM+'BAC().fetch'+nomeM+'ById(request);\n';
+text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+bar+'BAC().fetch'+nomeM+'ById(request);\n';
 text = text + '			ResponseHandler\n';
 text = text + '					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());\n';
 text = text + '		}\n';
@@ -212,7 +184,7 @@ text = text + '		'+nomeM+'Response response = new '+nomeM+'Response();\n';
 
 text = text + '		try\n';
 text = text + '		{\n';
-text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+nomeM+'BAC().fetch'+nomeM+'sByRequest(request);\n';
+text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+bar+'BAC().fetch'+nomeM+'sByRequest(request);\n';
 text = text + '			ResponseHandler\n';
 text = text + '					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());\n';
 text = text + '		}\n';
@@ -238,7 +210,7 @@ text = text + '		'+nomeM+'Response response = new '+nomeM+'Response();\n';
 
 text = text + '		try\n';
 text = text + '		{\n';
-text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+nomeM+'BAC().refresh'+nomeM+'s(request);\n';
+text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+bar+'BAC().refresh'+nomeM+'s(request);\n';
 text = text + '			ResponseHandler\n';
 text = text + '					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());\n';
 text = text + '		}\n';
@@ -263,7 +235,7 @@ text = text + '		'+nomeM+'Response response = new '+nomeM+'Response();\n';
 
 text = text + '		try\n';
 text = text + '		{\n';
-text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+nomeM+'BAC().fetchAll'+nomeM+'s();\n';
+text = text + '			InternalResultsResponse<'+nomeM+'> internalResponse = get'+bar+'BAC().fetchAll'+nomeM+'s(new '+nomeM+'());\n';
 text = text + '			ResponseHandler\n';
 text = text + '					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());\n';
 text = text + '		}\n';

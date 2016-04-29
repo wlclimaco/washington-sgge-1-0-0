@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.bar.Dicionario.IDicionarioBAR;
@@ -148,7 +149,7 @@ public IDicionarioBAR getDicionarioBAR()
 @Test
 	public void testDeleteInterface()
 	{
-		Interface interfaces = new Interface(999, "Interface_999");
+		Interface interfaces = new Interface(1, "Interface_999");
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(999);
 		Interface interfaceResponse = getDicionarioBAR().fetchInterfaceById(request);
@@ -237,9 +238,9 @@ public IDicionarioBAR getDicionarioBAR()
 @Test
 	public void testDeleteField()
 	{
-		Field field = new Field(999, "Field_999");
+		Field field = new Field(1, "tipo", 10, true, true, true, true, true, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(999);
+		request.setFetchId(1);
 		Field fieldResponse = getDicionarioBAR().fetchFieldById(request);
 		Assert.assertEquals(fieldResponse, null);
 		getDicionarioBAR().insertField(field);
@@ -270,7 +271,7 @@ public IDicionarioBAR getDicionarioBAR()
 	@Test
 	public void testUpdateField()
 	{
-		Field field = new Field(1234, "NATIVE INSERT UPDATE");
+		Field field = new Field(1, "tipo", 10, true, true, true, true, true, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1234);
 		Field fieldResponse = getDicionarioBAR().fetchFieldById(request);

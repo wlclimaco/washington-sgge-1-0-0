@@ -1,14 +1,17 @@
+/** create by system gera-java version 1.0.0 28/04/2016 20:29 : 56*/
 package com.qat.samples.sysmgmt.bar.Advogado;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.advocacia.Advogado;
+import com.qat.samples.sysmgmt.advocacia.Audiencia;
 import com.qat.samples.sysmgmt.advocacia.Processo;
 import com.qat.samples.sysmgmt.advocacia.request.AdvogadoInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.request.AudienciaInquiryRequest;
 import com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 
 /**
- * The Interface AdvogadoBAR.. (Data Access Component - DAC)
+ * The Interface AdvocaciaBAR.. (Data Access Component - DAC)
  */
 public interface IAdvocaciaBAR
 {
@@ -19,7 +22,7 @@ public interface IAdvocaciaBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Advogado> fetchAdvogadoById(FetchByIdRequest request);
+	public Advogado fetchAdvogadoById(FetchByIdRequest request);
 
 	/**
 * Insert advogado.
@@ -71,12 +74,69 @@ public interface IAdvocaciaBAR
 	public InternalResultsResponse<Advogado> fetchAdvogadosByRequest(AdvogadoInquiryRequest request);
 
 	/**
+	 * Fetch audiencia by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public Audiencia fetchAudienciaById(FetchByIdRequest request);
+
+	/**
+* Insert audiencia.
+*
+* @param audiencia the audiencia
+*
+* @return the internal response
+*/
+	public InternalResponse insertAudiencia(Audiencia audiencia);
+
+	/**
+* Update audiencia.
+*
+* @param audiencia the audiencia
+*
+* @return the internal response
+*/
+	public InternalResponse updateAudiencia(Audiencia audiencia);
+
+	/**
+* Delete audiencia.
+*
+* @param audiencia the audiencia
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAudienciaById(Audiencia audiencia);
+
+	/**
+* Delete all audiencias.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllAudiencias();
+
+	/**
+* Fetch all audiencias.
+*
+* @return the list< audiencia>
+*/
+	public InternalResultsResponse<Audiencia> fetchAllAudiencias(Audiencia  audiencia);
+
+	/**
+* Fetch audiencias by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Audiencia> fetchAudienciasByRequest(AudienciaInquiryRequest request);
+
+	/**
 	 * Fetch processo by id.
 	 *
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Processo> fetchProcessoById(FetchByIdRequest request);
+	public Processo fetchProcessoById(FetchByIdRequest request);
 
 	/**
 * Insert processo.

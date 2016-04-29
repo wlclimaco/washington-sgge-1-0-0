@@ -1,16 +1,29 @@
-/** create by system gera-java version 1.0.0 28/04/2016 16:21 : 34*/
+/** create by system gera-java version 1.0.0 28/04/2016 20:5 : 32*/
 package com.qat.samples.sysmgmt.service.impl;
 import javax.jws.WebService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.ICondominioBAC;
-import com.qat.samples.sysmgmt.model.Condominio;
-import com.qat.samples.sysmgmt.model.response.CondominioResponse;
+import com.qat.samples.sysmgmt.bac.Condominio.ICondominioBAC;
+import com.qat.samples.sysmgmt.condominio.model.Avisos;
+import com.qat.samples.sysmgmt.condominio.model.Inquilino;
+import com.qat.samples.sysmgmt.condominio.model.Sindico;
+import com.qat.samples.sysmgmt.condominio.model.request.AvisoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.AvisoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.InquilinoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.InquilinoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.SindicoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.SindicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.response.AvisoResponse;
+import com.qat.samples.sysmgmt.condominio.model.response.InquilinoResponse;
+import com.qat.samples.sysmgmt.condominio.model.response.SindicoResponse;
 import com.qat.samples.sysmgmt.service.ICondominioWS;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 /**
  * CondominioWS used to provide WS interface. Delegates all calls to the ICondominioBAC.
@@ -33,22 +46,22 @@ public class CondominioWSImpl implements ICondominioWS
 	 * @return the condominioBAC which is expected to provide the implementation.
 	 */
 	public ICondominioBAC getCondominioBAC()
-	{	
+	{
 		return condominioBAC;
 	}
+	/**
+	 * Spring injection uses this method to inject an implementation of {@link ICondominioBAC}.
+	 *
+	 * @param condominioBAC the condominioBAC to set.
+	 */
+	public void setCondominioBAC(ICondominioBAC condominioBAC)
+	{
+		this.condominioBAC = condominioBAC;
+	}
+
 
 //===================================### SINDICO ####======================================
 
-	/**
-	 * Spring injection uses this method to inject an implementation of {@link ISindicoBAC}.
-	 *
-	 * @param sindicoBAC the sindicoBAC to set.
-	 */
-	public void setSindicoBAC(ISindicoBAC sindicoBAC)
-	{
-		this.sindicoBAC = sindicoBAC;
-	}
-	
 	/**
 	 * Delegates call to {@link ISindicoBAC}
 	 *
@@ -62,7 +75,7 @@ public class CondominioWSImpl implements ICondominioWS
 		SindicoResponse response = new SindicoResponse();
 		try
 		{
-			InternalResultsResponse<Sindico> internalResponse = getSindicoBAC().insertSindico(request);
+			InternalResultsResponse<Sindico> internalResponse = getCondominioBAC().insertSindico(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -72,7 +85,7 @@ public class CondominioWSImpl implements ICondominioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ISindicoBAC}
 	 *
@@ -86,7 +99,7 @@ public class CondominioWSImpl implements ICondominioWS
 		SindicoResponse response = new SindicoResponse();
 		try
 		{
-			InternalResultsResponse<Sindico> internalResponse = getSindicoBAC().updateSindico(request);
+			InternalResultsResponse<Sindico> internalResponse = getCondominioBAC().updateSindico(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -96,7 +109,7 @@ public class CondominioWSImpl implements ICondominioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ISindicoBAC}
 	 *
@@ -110,7 +123,7 @@ public class CondominioWSImpl implements ICondominioWS
 		SindicoResponse response = new SindicoResponse();
 		try
 		{
-			InternalResultsResponse<Sindico> internalResponse = getSindicoBAC().deleteSindico(request);
+			InternalResultsResponse<Sindico> internalResponse = getCondominioBAC().deleteSindico(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -120,7 +133,7 @@ public class CondominioWSImpl implements ICondominioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ISindicoBAC}
 	 *
@@ -134,7 +147,7 @@ public class CondominioWSImpl implements ICondominioWS
 		SindicoResponse response = new SindicoResponse();
 		try
 		{
-			InternalResultsResponse<Sindico> internalResponse = getSindicoBAC().fetchSindicoById(request);
+			InternalResultsResponse<Sindico> internalResponse = getCondominioBAC().fetchSindicoById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -144,7 +157,7 @@ public class CondominioWSImpl implements ICondominioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link ISindicoBAC}
 	 *
@@ -158,7 +171,7 @@ public class CondominioWSImpl implements ICondominioWS
 		SindicoResponse response = new SindicoResponse();
 		try
 		{
-			InternalResultsResponse<Sindico> internalResponse = getSindicoBAC().fetchSindicosByRequest(request);
+			InternalResultsResponse<Sindico> internalResponse = getCondominioBAC().fetchSindicosByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -181,7 +194,7 @@ public class CondominioWSImpl implements ICondominioWS
 		SindicoResponse response = new SindicoResponse();
 		try
 		{
-			InternalResultsResponse<Sindico> internalResponse = getSindicoBAC().refreshSindicos(request);
+			InternalResultsResponse<Sindico> internalResponse = getCondominioBAC().refreshSindicos(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -203,7 +216,7 @@ public class CondominioWSImpl implements ICondominioWS
 		SindicoResponse response = new SindicoResponse();
 		try
 		{
-			InternalResultsResponse<Sindico> internalResponse = getSindicoBAC().fetchAllSindicos();
+			InternalResultsResponse<Sindico> internalResponse = getCondominioBAC().fetchAllSindicos(new Sindico());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -217,16 +230,6 @@ public class CondominioWSImpl implements ICondominioWS
 //===================================### INQUILINO ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IInquilinoBAC}.
-	 *
-	 * @param inquilinoBAC the inquilinoBAC to set.
-	 */
-	public void setInquilinoBAC(IInquilinoBAC inquilinoBAC)
-	{
-		this.inquilinoBAC = inquilinoBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IInquilinoBAC}
 	 *
 	 * @param request a InquilinoRequest
@@ -239,7 +242,7 @@ public class CondominioWSImpl implements ICondominioWS
 		InquilinoResponse response = new InquilinoResponse();
 		try
 		{
-			InternalResultsResponse<Inquilino> internalResponse = getInquilinoBAC().insertInquilino(request);
+			InternalResultsResponse<Inquilino> internalResponse = getCondominioBAC().insertInquilino(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -249,7 +252,7 @@ public class CondominioWSImpl implements ICondominioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IInquilinoBAC}
 	 *
@@ -263,7 +266,7 @@ public class CondominioWSImpl implements ICondominioWS
 		InquilinoResponse response = new InquilinoResponse();
 		try
 		{
-			InternalResultsResponse<Inquilino> internalResponse = getInquilinoBAC().updateInquilino(request);
+			InternalResultsResponse<Inquilino> internalResponse = getCondominioBAC().updateInquilino(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -273,7 +276,7 @@ public class CondominioWSImpl implements ICondominioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IInquilinoBAC}
 	 *
@@ -287,7 +290,7 @@ public class CondominioWSImpl implements ICondominioWS
 		InquilinoResponse response = new InquilinoResponse();
 		try
 		{
-			InternalResultsResponse<Inquilino> internalResponse = getInquilinoBAC().deleteInquilino(request);
+			InternalResultsResponse<Inquilino> internalResponse = getCondominioBAC().deleteInquilino(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -297,7 +300,7 @@ public class CondominioWSImpl implements ICondominioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IInquilinoBAC}
 	 *
@@ -311,7 +314,7 @@ public class CondominioWSImpl implements ICondominioWS
 		InquilinoResponse response = new InquilinoResponse();
 		try
 		{
-			InternalResultsResponse<Inquilino> internalResponse = getInquilinoBAC().fetchInquilinoById(request);
+			InternalResultsResponse<Inquilino> internalResponse = getCondominioBAC().fetchInquilinoById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -321,7 +324,7 @@ public class CondominioWSImpl implements ICondominioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IInquilinoBAC}
 	 *
@@ -335,7 +338,7 @@ public class CondominioWSImpl implements ICondominioWS
 		InquilinoResponse response = new InquilinoResponse();
 		try
 		{
-			InternalResultsResponse<Inquilino> internalResponse = getInquilinoBAC().fetchInquilinosByRequest(request);
+			InternalResultsResponse<Inquilino> internalResponse = getCondominioBAC().fetchInquilinosByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -358,7 +361,7 @@ public class CondominioWSImpl implements ICondominioWS
 		InquilinoResponse response = new InquilinoResponse();
 		try
 		{
-			InternalResultsResponse<Inquilino> internalResponse = getInquilinoBAC().refreshInquilinos(request);
+			InternalResultsResponse<Inquilino> internalResponse = getCondominioBAC().refreshInquilinos(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -380,7 +383,7 @@ public class CondominioWSImpl implements ICondominioWS
 		InquilinoResponse response = new InquilinoResponse();
 		try
 		{
-			InternalResultsResponse<Inquilino> internalResponse = getInquilinoBAC().fetchAllInquilinos();
+			InternalResultsResponse<Inquilino> internalResponse = getCondominioBAC().fetchAllInquilinos(new Inquilino());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -394,29 +397,19 @@ public class CondominioWSImpl implements ICondominioWS
 //===================================### AVISOS ####======================================
 
 	/**
-	 * Spring injection uses this method to inject an implementation of {@link IAvisosBAC}.
-	 *
-	 * @param avisosBAC the avisosBAC to set.
-	 */
-	public void setAvisosBAC(IAvisosBAC avisosBAC)
-	{
-		this.avisosBAC = avisosBAC;
-	}
-	
-	/**
 	 * Delegates call to {@link IAvisosBAC}
 	 *
 	 * @param request a AvisosRequest
-	 * @return AvisosResponse
+	 * @return AvisoResponse
 	 */
 	@Override
-	public AvisosResponse insertAvisos(AvisosMaintenanceRequest request)
+	public AvisoResponse insertAvisos(AvisoMaintenanceRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		AvisosResponse response = new AvisosResponse();
+		AvisoResponse response = new AvisoResponse();
 		try
 		{
-			InternalResultsResponse<Avisos> internalResponse = getAvisosBAC().insertAvisos(request);
+			InternalResultsResponse<Avisos> internalResponse = getCondominioBAC().insertAvisos(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -426,21 +419,21 @@ public class CondominioWSImpl implements ICondominioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IAvisosBAC}
 	 *
 	 * @param request a AvisosRequest
-	 * @return AvisosResponse
+	 * @return AvisoResponse
 	 */
 	@Override
-	public AvisosResponse updateAvisos(AvisosMaintenanceRequest request)
+	public AvisoResponse updateAvisos(AvisoMaintenanceRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		AvisosResponse response = new AvisosResponse();
+		AvisoResponse response = new AvisoResponse();
 		try
 		{
-			InternalResultsResponse<Avisos> internalResponse = getAvisosBAC().updateAvisos(request);
+			InternalResultsResponse<Avisos> internalResponse = getCondominioBAC().updateAvisos(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -450,21 +443,21 @@ public class CondominioWSImpl implements ICondominioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IAvisosBAC}
 	 *
 	 * @param request a AvisosRequest
-	 * @return AvisosResponse
+	 * @return AvisoResponse
 	 */
 	@Override
-	public AvisosResponse deleteAvisos(AvisosMaintenanceRequest request)
+	public AvisoResponse deleteAvisos(AvisoMaintenanceRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		AvisosResponse response = new AvisosResponse();
+		AvisoResponse response = new AvisoResponse();
 		try
 		{
-			InternalResultsResponse<Avisos> internalResponse = getAvisosBAC().deleteAvisos(request);
+			InternalResultsResponse<Avisos> internalResponse = getCondominioBAC().deleteAvisos(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -474,21 +467,21 @@ public class CondominioWSImpl implements ICondominioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IAvisosBAC}
 	 *
 	 * @param request a AvisosRequest
-	 * @return AvisosResponse
+	 * @return AvisoResponse
 	 */
 	@Override
-	public AvisosResponse fetchAvisosById(FetchByIdRequest request)
+	public AvisoResponse fetchAvisosById(FetchByIdRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		AvisosResponse response = new AvisosResponse();
+		AvisoResponse response = new AvisoResponse();
 		try
 		{
-			InternalResultsResponse<Avisos> internalResponse = getAvisosBAC().fetchAvisosById(request);
+			InternalResultsResponse<Avisos> internalResponse = getCondominioBAC().fetchAvisosById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -498,21 +491,21 @@ public class CondominioWSImpl implements ICondominioWS
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Delegates call to {@link IAvisosBAC}
 	 *
 	 * @param request a AvisosRequest
-	 * @return AvisosResponse
+	 * @return AvisoResponse
 	 */
 	@Override
-	public AvisosResponse fetchAvisossByRequest(AvisosInquiryRequest request)
+	public AvisoResponse fetchAvisossByRequest(AvisoInquiryRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		AvisosResponse response = new AvisosResponse();
+		AvisoResponse response = new AvisoResponse();
 		try
 		{
-			InternalResultsResponse<Avisos> internalResponse = getAvisosBAC().fetchAvisossByRequest(request);
+			InternalResultsResponse<Avisos> internalResponse = getCondominioBAC().fetchAvisosByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -526,16 +519,16 @@ public class CondominioWSImpl implements ICondominioWS
 	 * Delegates call to {@link IAvisosBAC}
 	 *
 	 * @param request a AvisosRequest
-	 * @return AvisosResponse
+	 * @return AvisoResponse
 	 */
 	@Override
-	public AvisosResponse refreshAvisoss(RefreshRequest request)
+	public AvisoResponse refreshAvisoss(RefreshRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
-		AvisosResponse response = new AvisosResponse();
+		AvisoResponse response = new AvisoResponse();
 		try
 		{
-			InternalResultsResponse<Avisos> internalResponse = getAvisosBAC().refreshAvisoss(request);
+			InternalResultsResponse<Avisos> internalResponse = getCondominioBAC().refreshAvisos(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -549,15 +542,15 @@ public class CondominioWSImpl implements ICondominioWS
 	 * Delegates call to {@link IAvisosBAC}
 	 *
 	 * @param request a AvisosRequest
-	 * @return AvisosResponse
+	 * @return AvisoResponse
 	 */
 	@Override
-	public AvisosResponse fetchAllAvisoss(FetchAllRequest request)
+	public AvisoResponse fetchAllAvisoss(FetchAllRequest request)
 	{
-		AvisosResponse response = new AvisosResponse();
+		AvisoResponse response = new AvisoResponse();
 		try
 		{
-			InternalResultsResponse<Avisos> internalResponse = getAvisosBAC().fetchAllAvisoss();
+			InternalResultsResponse<Avisos> internalResponse = getCondominioBAC().fetchAllAvisoss(new Avisos());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
