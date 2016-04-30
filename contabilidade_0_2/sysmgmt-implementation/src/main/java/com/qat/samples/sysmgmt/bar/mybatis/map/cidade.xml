@@ -1,162 +1,130 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+<!-- create by system gera-java version 1.0.0 30/04/2016 13:0 : 39-->
+
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="CidadeMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
-
-
-	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
-
-  	<!-- Result maps describe the mapping between the columns returned
-       from a query, and the class properties.  A result map isn't
-       necessary if the columns (or aliases) match to the properties
-       exactly. id codigo, cidade, descricao, abreviado -->
-
-  <resultMap id="cidadeResult" type="Cidade">
-    <result property="id" column="id" />
-    <result property="codigo" column="CODIGO" />
-    <result property="nome" column="cidade" />
-   	<result property="cdIBGE" column="IBGE"/>
-   	<result property="cep" column="CEP" />
-   	<result property="municipio" column="MUNICIPIO"/>
-	<result property="createUser" column="create_user"/>
-	<result property="createDataUTC" column="create_date"/>
-	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDataUTC" column="modify_date"/>
-	<association property="estado"    column="estado" select="EstadoMap.fetchEstadoById"  />
-	 <!--<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEndereco"/>-->
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="CidadeResult" type="Cidade">
+    <result property="id" column="id"/>
+    <result property="codigo" column="codigo"/>
+    <result property="nome" column="nome"/>
+    <result property="cdIBGE" column="cdIBGE"/>
+    <result property="cep" column="cep"/>
+    <result property="municipio" column="municipio"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+<association property="estado"    column="estado" select="EstadoMap.fetchEstadoById"  />
   </resultMap>
 
-  <!--
-
-  id integer NOT NULL DEFAULT nextval('cidade_id_seq1'::regclass),
-  codigo character varying(10) NOT NULL,
-  cidade character varying(50),
-  versn_lock_num integer,
-  controleid integer,
-  estado integer,
-  cep character varying(12),
-  municipio character varying(10),
-  "IBGE" character varying(10),
-  CONSTRAINT cidade_pkey PRIMARY KEY (id),
-  CONSTRAINT cidade_estado_key UNIQUE (codigo)
-		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
-	-->
   <sql id="allCidadeColumns">
-		 cidade
-		,codigo
-      	,IBGE
-      	,estado
-      	,municipio
-      	,cep
+id
+,codigo
+,nome
+,cdIBGE
+,cep
+,municipio
+,estado
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allCidadeValues">
+#{id},
+#{codigo},
+#{nome},
+#{cdIBGE},
+#{cep},
+#{municipio},
+#{estado.id},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
   </sql>
 
-  <sql id="allCidadeValues">
-  		#{nome},
-  		#{codigo},
-  		#{cdIBGE},
-    	#{estado.id},
-    	#{municipio},
-    	#{cep}
-    	 <!--<include refid="CBOFMap.changeControlFields"/>-->
-  </sql>
+ <sql id="allCidadeColumnsWithQualifier">
+		c.id, c.cidade_desc
+c.id,
+c.codigo,
+c.nome,
+c.cdIBGE,
+c.cep,
+c.municipio,
+c.estado,
+		c.createDateUTC,
+		c.createUser,
+		c.modifyDateUTC,
+		c.modifyUser
+ </sql>
 
-  <!--
-		SQL Insert Statements.
- 	-->
-  <insert id="insertCidade" parameterType="Cidade" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO cidade (
-  	
-  		<include refid="allCidadeColumns" />
-
-      )
-    VALUES (<include refid="allCidadeValues" /> )
-  </insert>
-
-	<!--
-		SQL Update Statements.
- 	-->
-
-  <update id="updateCidade" parameterType="Cidade">
-    UPDATE cidade
-    	<set>
-    		<if test="nome!= null">cidade = #{nome},</if>
-    		<if test="codigo!= null">codigo = #{codigo},</if>
-	    	<if test="cdIBGE!= null"> IBGE=#{cdIBGE},</if>
-	    	<if test="estado.id!= null"> estado=#{estado.id},</if>
-	    	<if test="cep!= null"> cep=#{cep},</if>
-			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
-			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
-		</set>
-    WHERE
-    id = #{id}
-  </update>
-
-   <!--
-		SQL Delete Statements.
-   -->
-  <delete id="deleteCidadeById" parameterType="Cidade">
-    	DELETE FROM cidade WHERE id = #{id}
-  </delete>
-
-	<!--
-		SQL Fetch Statements.
- 	-->
-  <select id="fetchCidadeRowCount" parameterType="CidadeInquiryRequest" resultType="Integer">
-     SELECT COUNT(id) AS RECORD_COUNT
-        FROM cidade
-
-
-  </select>
-
-  <select id="fetchAllCidades" resultMap="cidadeResult">
+ <select id="fetchAllCidades" resultMap="CidadeResult">
     SELECT
 	<include refid="allCidadeColumns" />
-    FROM cidade ORDER BY name ASC
-  </select>
+   FROM cidade ORDER BY id ASC
+ </select>
 
-  <select id="fetchCidadeById" parameterType="Integer" resultMap="cidadeResult">
-    			   SELECT id,
-						<include refid="allCidadeColumns" />
-					FROM cidade where id= #{id} ORDER BY id ASC
-  </select>
+ <select id="fetchCidadeById" parameterType="Integer" resultMap="CidadeResult">
+    SELECT
+	<include refid="allCidadeColumns" />
+   FROM cidade WHERE id = #{fetchid}
+ </select>
 
+ <select id="fetchAllCidadesRequest" parameterType="CidadeInquiryRequest" resultMap="CidadeResult">
 
+		SELECT <include refid="allCidadeColumns" />
+  		  FROM cidade ORDER BY id ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+</select>
 
-  <select id="fetchCidadeByEmpresa" parameterType="Integer" resultMap="cidadeResult">
-    			   SELECT id,
-						<include refid="allCidadeColumns" />
-					FROM cidade  where id= #{id} ORDER BY id ASC
-  </select>
+<select id="fetchCidadeRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM cidade WHERE id IS NOT NULL
 
-  <select id="fetchAllCidadesByRequest" parameterType="CidadeInquiryRequest" resultMap="cidadeResult">
-    SELECT * FROM
-    			(
-    				SELECT id,
-    						<include refid="allCidadeColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
-    				FROM cidade b
-    				<if test="criteria.id != null">
-							where id = #{criteria.id}
-					</if>
+ </select>
 
-    			) LIST
-				<choose>
-					<when test="pageSize != null and pageSize > 0">
-					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
-					        LOWER: startRow + 1 and
-					        UPPER: startRow + pageSize -->
-					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
-					</when>
-					<otherwise>
-					 	WHERE RowNumber BETWEEN 1 AND RowNumber
-					 	ORDER BY RowNumber
-					</otherwise>
-				</choose>
-  </select>
+ <insert id="insertCidade" parameterType="Cidade">
+ 	INSERT INTO cidade (
+	<include refid="allCidadeColumns" />
+     )
+   VALUES (<include refid="allCidadeValues" /> )
+ </insert>
 
+ <update id="updateCidade" parameterType="Cidade">
+   UPDATE cidade SET
+<if test="id!= null">id = #{id},</if>
+<if test="codigo!= null">codigo = #{codigo},</if>
+<if test="nome!= null">nome = #{nome},</if>
+<if test="cdIBGE!= null">cdIBGE = #{cdIBGE},</if>
+<if test="cep!= null">cep = #{cep},</if>
+<if test="municipio!= null">municipio = #{municipio},</if>
+<if test="estado.id!= null">estado = #{estado.id},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteCidadeById" parameterType="Cidade">
+  DELETE FROM cidade WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllCidades">
+	DELETE FROM cidade
+  </delete>
 </mapper>
+
+

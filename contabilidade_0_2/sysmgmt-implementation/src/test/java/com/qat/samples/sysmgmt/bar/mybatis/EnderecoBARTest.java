@@ -57,9 +57,9 @@ public IEnderecoBAR getEnderecoBAR()
 @Test
 	public void testDeleteEndereco()
 	{
-		Endereco endereco = new Endereco(1, "logradouro", new Cidade(1),new Estado(1), "bairro", "numero", "cep", "complemento", EnderecoTypeEnum.ENTREGA, PersistenceActionEnum.INSERT);
+		Endereco endereco = new Endereco(4, "logradouro", new Cidade(1),new Estado(1), "bairro", "numero", "cep", "complemento", EnderecoTypeEnum.ENTREGA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(999);
+		request.setFetchId(4);
 		Endereco enderecoResponse = getEnderecoBAR().fetchEnderecoById(request);
 		Assert.assertEquals(enderecoResponse, null);
 		getEnderecoBAR().insertEndereco(endereco);
@@ -90,14 +90,14 @@ public IEnderecoBAR getEnderecoBAR()
 	@Test
 	public void testUpdateEndereco()
 	{
-		Endereco endereco = new Endereco(1, "logradouro", new Cidade(1),new Estado(1), "bairro", "numero", "cep", "complemento", EnderecoTypeEnum.ENTREGA, PersistenceActionEnum.INSERT);
+		Endereco endereco = new Endereco(1, "logradouro", new Cidade(1),new Estado(1), "bairro_6", "numero", "cep", "complemento", EnderecoTypeEnum.ENTREGA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Endereco enderecoResponse = getEnderecoBAR().fetchEnderecoById(request);
-		Assert.assertEquals(enderecoResponse.getBairro(), "NATIVE INSERT");
+		Assert.assertEquals(enderecoResponse.getBairro(), "bairro_5");
 		getEnderecoBAR().updateEndereco(endereco);
 		enderecoResponse = getEnderecoBAR().fetchEnderecoById(request);
-		Assert.assertEquals(enderecoResponse.getBairro(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(enderecoResponse.getBairro(), "bairro_6");
 	}
 
 	@Test
@@ -109,7 +109,6 @@ public IEnderecoBAR getEnderecoBAR()
 		request.setStartPage(0);
 		request.setPageSize(3);
 		InternalResultsResponse<Endereco> response = getEnderecoBAR().fetchEnderecosByRequest(request);
-		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 		// check for valid and precount and start 2nd page
@@ -117,7 +116,6 @@ public IEnderecoBAR getEnderecoBAR()
 		request.setStartPage(1);
 		request.setPageSize(3);
 		response = getEnderecoBAR().fetchEnderecosByRequest(request);
-		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 

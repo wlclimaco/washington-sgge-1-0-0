@@ -59,9 +59,9 @@ public IDicionarioBAR getDicionarioBAR()
 @Test
 	public void testDeleteClasses()
 	{
-		Classes classes = new Classes(999, "Classes_999");
+		Classes classes = new Classes(4, "Classes_999");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(999);
+		request.setFetchId(4);
 		Classes classesResponse = getDicionarioBAR().fetchClassesById(request);
 		Assert.assertEquals(classesResponse, null);
 		getDicionarioBAR().insertClasses(classes);
@@ -92,11 +92,11 @@ public IDicionarioBAR getDicionarioBAR()
 	@Test
 	public void testUpdateClasses()
 	{
-		Classes classes = new Classes(1234, "NATIVE INSERT UPDATE");
+		Classes classes = new Classes(1, "NATIVE INSERT UPDATE");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1234);
+		request.setFetchId(1);
 		Classes classesResponse = getDicionarioBAR().fetchClassesById(request);
-		Assert.assertEquals(classesResponse.getNome(), "NATIVE INSERT");
+		Assert.assertEquals(classesResponse.getNome(), "nome_1");
 		getDicionarioBAR().updateClasses(classes);
 		classesResponse = getDicionarioBAR().fetchClassesById(request);
 		Assert.assertEquals(classesResponse.getNome(), "NATIVE INSERT UPDATE");
@@ -111,7 +111,6 @@ public IDicionarioBAR getDicionarioBAR()
 		request.setStartPage(0);
 		request.setPageSize(3);
 		InternalResultsResponse<Classes> response = getDicionarioBAR().fetchClassessByRequest(request);
-		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 		// check for valid and precount and start 2nd page
@@ -119,7 +118,6 @@ public IDicionarioBAR getDicionarioBAR()
 		request.setStartPage(1);
 		request.setPageSize(3);
 		response = getDicionarioBAR().fetchClassessByRequest(request);
-		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
@@ -149,9 +147,9 @@ public IDicionarioBAR getDicionarioBAR()
 @Test
 	public void testDeleteInterface()
 	{
-		Interface interfaces = new Interface(1, "Interface_999");
+		Interface interfaces = new Interface(4, "Interface_999","Local");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(999);
+		request.setFetchId(4);
 		Interface interfaceResponse = getDicionarioBAR().fetchInterfaceById(request);
 		Assert.assertEquals(interfaceResponse, null);
 		getDicionarioBAR().insertInterface(interfaces);
@@ -182,11 +180,11 @@ public IDicionarioBAR getDicionarioBAR()
 	@Test
 	public void testUpdateInterface()
 	{
-		Interface interfaces = new Interface(1234, "NATIVE INSERT UPDATE");
+		Interface interfaces = new Interface(1, "NATIVE INSERT UPDATE","local");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1234);
+		request.setFetchId(1);
 		Interface interfaceResponse = getDicionarioBAR().fetchInterfaceById(request);
-		Assert.assertEquals(interfaceResponse.getNome(), "NATIVE INSERT");
+		Assert.assertEquals(interfaceResponse.getNome(), "nome_1");
 		getDicionarioBAR().updateInterface(interfaces);
 		interfaceResponse = getDicionarioBAR().fetchInterfaceById(request);
 		Assert.assertEquals(interfaceResponse.getNome(), "NATIVE INSERT UPDATE");
@@ -201,7 +199,6 @@ public IDicionarioBAR getDicionarioBAR()
 		request.setStartPage(0);
 		request.setPageSize(3);
 		InternalResultsResponse<Interface> response = getDicionarioBAR().fetchInterfacesByRequest(request);
-		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 		// check for valid and precount and start 2nd page
@@ -209,7 +206,6 @@ public IDicionarioBAR getDicionarioBAR()
 		request.setStartPage(1);
 		request.setPageSize(3);
 		response = getDicionarioBAR().fetchInterfacesByRequest(request);
-		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
@@ -238,9 +234,9 @@ public IDicionarioBAR getDicionarioBAR()
 @Test
 	public void testDeleteField()
 	{
-		Field field = new Field(1, "tipo", 10, true, true, true, true, true, PersistenceActionEnum.INSERT);
+		Field field = new Field(4, "tipo", 10, true, true, true, true, true, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(4);
 		Field fieldResponse = getDicionarioBAR().fetchFieldById(request);
 		Assert.assertEquals(fieldResponse, null);
 		getDicionarioBAR().insertField(field);
@@ -271,14 +267,14 @@ public IDicionarioBAR getDicionarioBAR()
 	@Test
 	public void testUpdateField()
 	{
-		Field field = new Field(1, "tipo", 10, true, true, true, true, true, PersistenceActionEnum.INSERT);
+		Field field = new Field(1, "tipo_2", 10, true, true, true, true, true, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1234);
+		request.setFetchId(1);
 		Field fieldResponse = getDicionarioBAR().fetchFieldById(request);
-		Assert.assertEquals(fieldResponse.getTipo(), "NATIVE INSERT");
+		Assert.assertEquals(fieldResponse.getTipo(), "tipo_1");
 		getDicionarioBAR().updateField(field);
 		fieldResponse = getDicionarioBAR().fetchFieldById(request);
-		Assert.assertEquals(fieldResponse.getTipo(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(fieldResponse.getTipo(), "tipo_2");
 	}
 
 	@Test
@@ -290,7 +286,6 @@ public IDicionarioBAR getDicionarioBAR()
 		request.setStartPage(0);
 		request.setPageSize(3);
 		InternalResultsResponse<Field> response = getDicionarioBAR().fetchFieldsByRequest(request);
-		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 		// check for valid and precount and start 2nd page
@@ -298,7 +293,6 @@ public IDicionarioBAR getDicionarioBAR()
 		request.setStartPage(1);
 		request.setPageSize(3);
 		response = getDicionarioBAR().fetchFieldsByRequest(request);
-		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 

@@ -1,122 +1,116 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+
+<!-- create by system gera-java version 1.0.0 30/04/2016 13:59 : 11-->
+
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="NoteMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
   <!-- Result maps describe the mapping between the columns returned
-       from a query, and the class properties.  A result map isn't
-       necessary if the columns (or aliases) match to the properties
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
        exactly. -->
+  <resultMap id="NoteResult" type="Note">
+    <result property="id" column="id"/>
+    <result property="parentId" column="parentId"/>
+    <result property="noteText" column="noteText"/>
+    <result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
 
-   	<resultMap id="noteResult" type="Note">
-		<result property="id" column="id"/>
-		<result property="parentId" column="parentId" />
-		<result property="noteText" column="note_text" />
-		<result property="tabelaEnumValue" column="tabela" />
-		<result property="createDataUTC" column="create_date" />
-		<result property="createUser" column="create_user" />
-		<result property="modifyDataUTC" column="modify_date" />
-		<result property="modifyUser" column="modify_user" />
-	</resultMap>
+  <sql id="allNoteColumns">
+id
+,parentId
+,noteText
+,tabelaEnumValue
+,create_date
+,create_user
+,modify_date
+,modify_user
 
-	<!--
-		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
-	-->
-  	<sql id="allNoteColumns">
-  		 parentId
-  		,note_text
-  		,tabela
-  		,create_date
-      	,create_user
-      	,modify_date
-      	,modify_user
-  	</sql>
+</sql>
+<sql id="allNoteValues">
+#{id},
+#{parentId},
+#{noteText},
+#{tabelaEnumValue},
+#{createDateUTC},
+#{createUser},
+#{modifyDateUTC},
+#{modifyUser}
+  </sql>
 
-  	<sql id="allNoteValue">
-		#{parentId},
-		#{noteText},
-		#{tabelaEnumValue},
-		<include refid="CBOFMap.changeControlFields"/>
-	</sql>
+ <sql id="allNoteColumnsWithQualifier">
+		c.id, c.notes_desc
+c.id,
+c.parentId,
+c.noteText,
+c.tabelaEnumValue,
+		c.createDateUTC,
+		c.createUser,
+		c.modifyDateUTC,
+		c.modifyUser
+ </sql>
 
+ <select id="fetchAllNotes" resultMap="NoteResult">
+    SELECT
+	<include refid="allNoteColumns" />
+   FROM notes ORDER BY id ASC
+ </select>
 
-	<insert id="insertNote" parameterType="Note" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO Note1 (<include refid="allNoteColumns" />)
-		VALUES( <include refid="allNoteValue"/>)
-	</insert>
+ <select id="fetchNoteById" parameterType="Integer" resultMap="NoteResult">
+    SELECT
+	<include refid="allNoteColumns" />
+   FROM notes WHERE id = #{fetchid}
+ </select>
 
+ <select id="fetchAllNotesRequest" parameterType="PagedInquiryRequest" resultMap="NoteResult">
 
+		SELECT <include refid="allNoteColumns" />
+  		  FROM notes ORDER BY id ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+</select>
 
+<select id="fetchNoteRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM notes WHERE id IS NOT NULL
 
-	<!--
-		SQL Update Statements.
-	-->
-	<update id="updateNote" parameterType="Note">
-		UPDATE Note1
-		<set>
-			<if test="noteText != null">note_text = #{noteText},</if>
-			modify_date = #{modifyDataUTC},
-			modify_user = #{modifyUser}
-		</set>
-		WHERE id = #{id}
-	</update>
+ </select>
 
-	<!--
-		SQL Delete Statements.
-	-->
-	<update id="deleteNote" parameterType="Note">
-		DELETE FROM Note1
-		WHERE id = #{id}
-	</update>
+ <insert id="insertNote" parameterType="Note">
+ 	INSERT INTO notes (
+	<include refid="allNoteColumns" />
+     )
+   VALUES (<include refid="allNoteValues" /> )
+ </insert>
 
-	<!--
-		SQL Fetch Statements.
-	-->
-    <select id="fetchNoteById" parameterType="Note" resultMap="noteResult">
-		SELECT
-			id,
-			<include refid="allNoteColumns" />
-		FROM note1 b
-		WHERE id = #{value}
-	</select>
+ <update id="updateNote" parameterType="Note">
+   UPDATE notes SET
+<if test="id!= null">id = #{id},</if>
+<if test="parentId!= null">parentId = #{parentId},</if>
+<if test="noteText!= null">noteText = #{noteText},</if>
+<if test="tabelaEnumValue!= null">tabelaEnumValue = #{tabelaEnumValue},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
 
-	 <select id="fetchNoteByPessoa" parameterType="Integer" resultMap="noteResult">
-		SELECT
-			id,
-			<include refid="allNoteColumns" />
-		FROM note1 b
-		WHERE parentId = #{id} and tabela in(16,17,18,19,23)
-	</select>
+<delete id="deleteNoteById" parameterType="Note">
+  DELETE FROM notes WHERE id = #{id}
+ </delete>
 
-
-	 <select id="fetchNoteByContato" parameterType="Integer" resultMap="noteResult">
-		SELECT
-			id,
-			<include refid="allNoteColumns" />
-		FROM note1 b
-		WHERE parentId = #{id} and tabela = 33
-	</select>
-
-
-	<select id="fetchNoteByNotaFiscalId" parameterType="Integer" resultMap="noteResult">
-		SELECT
-			id,
-			<include refid="allNoteColumns" />
-		FROM note1 b
-		WHERE parentId = #{id} and tabela = 46
-	</select>
-
-	<select id="fetchNoteByNotes" parameterType="Integer" resultMap="noteResult">
-		SELECT
-			id,
-			<include refid="allNoteColumns" />
-		FROM note1 b
-		WHERE parentId = #{id} and tabela in(1,51,52)
-	</select>
-
-
-
+ <delete id="deleteAllNotes">
+	DELETE FROM notes
+  </delete>
 </mapper>
+
+

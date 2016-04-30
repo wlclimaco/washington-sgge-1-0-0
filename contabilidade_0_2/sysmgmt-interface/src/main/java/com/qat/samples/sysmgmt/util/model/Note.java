@@ -1,5 +1,7 @@
 package com.qat.samples.sysmgmt.util.model;
 
+import java.util.Date;
+
 /**
  * The Class Note models any comment that could be attached to entities in the system, for instance {@link Person} or
  * {@link Business}
@@ -37,6 +39,8 @@ public class Note extends ModelCosmeDamiao
 		super();
 		this.id = id;
 		this.noteText = noteText;
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	/**

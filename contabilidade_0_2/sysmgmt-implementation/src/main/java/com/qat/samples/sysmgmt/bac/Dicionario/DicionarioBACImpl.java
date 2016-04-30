@@ -367,7 +367,7 @@ public InternalResultsResponse<Interface> refreshInterfaces(RefreshRequest reque
 
 	for (int i = 1; i <= refreshNumber; i++)
 	{
-	getDicionarioBAR().insertInterface(new Interface(i, "InterfaceDesc" + i));
+	getDicionarioBAR().insertInterface(new Interface(i, "InterfaceDesc" + i,"dd"));
 	}
 
 	// Call maintain to see if we need to return the interface list and if so whether it should be paged or not

@@ -1,122 +1,136 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+
+<!-- create by system gera-java version 1.0.0 30/04/2016 15:17 : 38-->
+
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="TelefoneMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
-	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
-
-  	<!-- Result maps describe the mapping between the columns returned
-       from a query, and the class properties.  A result map isn't
-       necessary if the columns (or aliases) match to the properties
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
        exactly. -->
-
-  <resultMap id="telefoneResult" type="Telefone">
-    <result property="id" column="id" />
-    <result property="typeValue" column="type" />
-    <result property="parentId" column="parentId" />
-   	<result property="tabelaEnumValue" column="tabela"/>
-	<result property="ddd" column="ddd"/>
-	<result property="numero" column="telefone" />
-	<result property="telefoneTypeEnumValue" column="telefoneType" />
-	<result property="processId" column="processId" />
-   <result property="createUser" column="create_user"/>
-	<result property="createDataUTC" column="create_date"/>
-	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDataUTC" column="modify_date"/>
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByTelefone"/>
-
+  <resultMap id="TelefoneResult" type="Telefone">
+    <result property="id" column="id"/>
+    <result property="typeValue" column="typeValue"/>
+    <result property="parentId" column="parentId"/>
+    <result property="tabelaEnumValue" column="tabelaEnumValue"/>
+    <result property="ddd" column="ddd"/>
+    <result property="numero" column="numero"/>
+    <result property="telefoneTypeEnumValue" column="telefoneTypeEnumValue"/>
+    <result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
-  <!--
-		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
-	-->
   <sql id="allTelefoneColumns">
-		 type
-		,parentId
-		,tabela
-		,ddd
-		,telefone
-		,telefoneType
-		,processId
-      	,create_date
-      	,create_user
-      	,modify_date
-      	,modify_user
+id
+,typeValue
+,parentId
+,tabelaEnumValue
+,ddd
+,numero
+,telefoneTypeEnumValue
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allTelefoneValues">
+#{id},
+#{typeValue},
+#{parentId},
+#{tabelaEnumValue},
+#{ddd},
+#{numero},
+#{telefoneTypeEnumValue},
+#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
   </sql>
 
-  <sql id="allTelefoneValues">
-    	#{typeValue},
-    	#{parentId},
-    	#{tabelaEnumValue},
-    	#{ddd},
-    	#{numero},
-    	#{telefoneTypeEnumValue},
-    	#{processId},
-    	<include refid="CBOFMap.changeControlFields"/>
-  </sql>
+ <sql id="allTelefoneColumnsWithQualifier">
+		c.id, c.telefone_desc
+c.id,
+c.typeValue,
+c.parentId,
+c.tabelaEnumValue,
+c.ddd,
+c.numero,
+c.telefoneTypeEnumValue,
+c.processId,
+		c.createDateUTC,
+		c.createUser,
+		c.modifyDateUTC,
+		c.modifyUser
+ </sql>
 
+ <select id="fetchAllTelefones" resultMap="TelefoneResult">
+    SELECT
+	<include refid="allTelefoneColumns" />
+   FROM telefone ORDER BY id ASC
+ </select>
 
-  <!--
-		SQL Insert Statements.
- 	-->
-  <insert id="insertTelefone" parameterType="Telefone" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO telefone (
-		<include refid="allTelefoneColumns" />
-      )
-    VALUES (<include refid="allTelefoneValues" /> )
-  </insert>
+ <select id="fetchTelefoneById" parameterType="Integer" resultMap="TelefoneResult">
+    SELECT
+	<include refid="allTelefoneColumns" />
+   FROM telefone WHERE id = #{fetchid}
+ </select>
 
+ <select id="fetchAllTelefonesRequest" parameterType="PagedInquiryRequest" resultMap="TelefoneResult">
 
-	<!--
-		SQL Update Statements.
- 	-->
+		SELECT <include refid="allTelefoneColumns" />
+  		  FROM telefone ORDER BY id ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+</select>
 
-  <update id="updateTelefone" parameterType="Telefone">
-    UPDATE telefone
-    	<set>
-    		<if test="ddd!= null">ddd = #{ddd},</if>
-	    	<if test="typeValue!= null"> type=#{typeValue},</if>
-	    	<if test="numero!= null"> telefone=#{numero},</if>
-			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
-			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
-		</set>
-    WHERE
-     id = #{id}
-  </update>
+<select id="fetchTelefoneRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM telefone WHERE id IS NOT NULL
 
-   <!--
-		SQL Delete Statements.
-   -->
-  <delete id="deleteTelefoneById" parameterType="Integer">
-    	DELETE FROM telefone WHERE id = #{id}
+ </select>
+
+ <insert id="insertTelefone" parameterType="Telefone">
+ 	INSERT INTO telefone (
+	<include refid="allTelefoneColumns" />
+     )
+   VALUES (<include refid="allTelefoneValues" /> )
+ </insert>
+
+ <update id="updateTelefone" parameterType="Telefone">
+   UPDATE telefone SET
+<if test="id!= null">id = #{id},</if>
+<if test="typeValue!= null">typeValue = #{typeValue},</if>
+<if test="parentId!= null">parentId = #{parentId},</if>
+<if test="tabelaEnumValue!= null">tabelaEnumValue = #{tabelaEnumValue},</if>
+<if test="ddd!= null">ddd = #{ddd},</if>
+<if test="numero!= null">numero = #{numero},</if>
+<if test="telefoneTypeEnumValue!= null">telefoneTypeEnumValue = #{telefoneTypeEnumValue},</if>
+<if test="processId!= null">processId = #{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteTelefoneById" parameterType="Telefone">
+  DELETE FROM telefone WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllTelefones">
+	DELETE FROM telefone
   </delete>
-
-	<!--
-		SQL Fetch Statements.
- 	-->
-  <select id="fetchTelefoneByEmpresa" parameterType="Integer" resultMap="telefoneResult">
-     SELECT * FROM telefone
-     WHERE tabela in(1,51,52) and parentId = #{id}
-  </select>
-
-  <select id="fetchTelefoneByFuncionario" parameterType="Integer" resultMap="telefoneResult">
-     SELECT * FROM telefone
-     WHERE tabela = 16 and parentId = #{id}
-  </select>
-
-  <select id="fetchTelefoneByPessoaId" parameterType="Integer" resultMap="telefoneResult">
-     SELECT * FROM telefone
-     WHERE tabela in (16,17,18,19,23) and parentId = #{id}
-  </select>
-
-  <select id="fetchTelefoneByMarca" parameterType="Integer" resultMap="telefoneResult">
-     SELECT * FROM telefone
-     WHERE tabela = 50 and parentId = #{id}
-  </select>
-
-
 </mapper>
+
+

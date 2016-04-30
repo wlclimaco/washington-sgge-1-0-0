@@ -27,31 +27,31 @@ public class NotesBARImpl extends SqlSessionDaoSupport implements INotesBAR
 
 ///===================================### NOTES ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_NOTES = "NotesMap.";
+private static final String NAMESPACE_NOTES = "NoteMap.";
 
 /** The Constant STMT_INSERT_NOTES. */
-private static final String STMT_INSERT_NOTES = NAMESPACE_NOTES + "insertNotes";
+private static final String STMT_INSERT_NOTES = NAMESPACE_NOTES + "insertNote";
 
 /** The Constant STMT_UPDATE_NOTES. */
-private static final String STMT_UPDATE_NOTES = NAMESPACE_NOTES + "updateNotes";
+private static final String STMT_UPDATE_NOTES = NAMESPACE_NOTES + "updateNote";
 
 /** The Constant STMT_DELETE_NOTES. */
-private static final String STMT_DELETE_NOTES = NAMESPACE_NOTES + "deleteNotesById";
+private static final String STMT_DELETE_NOTES = NAMESPACE_NOTES + "deleteNoteById";
 
 	/** The Constant STMT_DELETE_NOTES_ALL. */
-	private static final String STMT_DELETE_NOTES_ALL = NAMESPACE_NOTES + "deleteAllNotess";
+	private static final String STMT_DELETE_NOTES_ALL = NAMESPACE_NOTES + "deleteAllNotes";
 
 	/** The Constant STMT_FETCH_NOTES. */
-	private static final String STMT_FETCH_NOTES = NAMESPACE_NOTES + "fetchNotesById";
+	private static final String STMT_FETCH_NOTES = NAMESPACE_NOTES + "fetchNoteById";
 
 	/** The Constant STMT_FETCH_NOTES_ALL. */
-	private static final String STMT_FETCH_NOTES_ALL = NAMESPACE_NOTES + "fetchAllNotess";
+	private static final String STMT_FETCH_NOTES_ALL = NAMESPACE_NOTES + "fetchAllNotes";
 
 	/** The Constant STMT_FETCH_NOTES_COUNT. */
-	private static final String STMT_FETCH_NOTES_COUNT = NAMESPACE_NOTES + "fetchNotesRowCount";
+	private static final String STMT_FETCH_NOTES_COUNT = NAMESPACE_NOTES + "fetchNoteRowCount";
 
 	/** The Constant STMT_FETCH_NOTES_ALL_REQUEST. */
-	private static final String STMT_FETCH_NOTES_ALL_REQUEST = NAMESPACE_NOTES + "fetchAllNotessRequest";
+	private static final String STMT_FETCH_NOTES_ALL_REQUEST = NAMESPACE_NOTES + "fetchAllNotesRequest";
 
 //===================================### NOTES ####======================================
 	/**

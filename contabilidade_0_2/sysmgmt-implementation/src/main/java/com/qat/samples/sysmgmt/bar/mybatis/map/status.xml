@@ -13,17 +13,17 @@
       necessary if the columns (or aliases) match to the properties
        exactly. -->
   <resultMap id="StatusResult" type="Status">
-    <result property="id" column="Integer"/>
-    <result property="dataStatus" column="Long"/>
-    <result property="parentId" column="Integer"/>
-    <result property="statusValue" column="Integer"/>
-    <result property="acaoEnumValue" column="Integer"/>
-    <result property="tabelaEnumValue" column="Integer"/>
-    <result property="note" column="String"/>
-    <result property="createUser" column="create_user"/>
-	<result property="createDataUTC" column="create_date"/>
-	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDataUTC" column="modify_date"/>
+    <result property="id" column="id"/>
+    <result property="dataStatus" column="dataStatus"/>
+    <result property="parentId" column="parentId"/>
+    <result property="statusValue" column="statusValue"/>
+    <result property="acaoEnumValue" column="acaoEnumValue"/>
+    <result property="tabelaEnumValue" column="tabelaEnumValue"/>
+    <result property="note" column="note"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
   <sql id="allStatusColumns">

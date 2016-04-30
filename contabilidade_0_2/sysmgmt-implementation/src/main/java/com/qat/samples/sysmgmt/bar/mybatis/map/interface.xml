@@ -16,26 +16,30 @@
     <result property="id" column="Integer"/>
     <result property="nome" column="String"/>
     <result property="local" column="String"/>
+    <result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
   <sql id="allInterfaceColumns">
-create_date
+id
+,nome
+,local
+,create_date
 ,create_user
 ,modify_date
 ,modify_user
-,id
-,nome
-,local
 
 </sql>
 <sql id="allInterfaceValues">
 #{id},
 #{nome},
 #{local},
-		#{createDateUTC},
-		#{createUser},
-		#{modifyDateUTC},
-		#{modifyUser}
+#{createDateUTC},
+#{createUser},
+#{modifyDateUTC},
+#{modifyUser}
   </sql>
 
  <sql id="allInterfaceColumnsWithQualifier">
@@ -62,33 +66,18 @@ c.local,
  </select>
 
  <select id="fetchAllInterfacesRequest" parameterType="InterfaceInquiryRequest" resultMap="InterfaceResult">
- 	<if test="_databaseId == Oracle">
-		SELECT * FROM (
-		SELECT * FROM (
-		SELECT <include refid="allInterfaceColumnsWithQualifier" />,
-		ROWNUM ROWNUM_ FROM interface c ORDER BY id ASC
-		) WHERE ROWNUM_ <![CDATA[ > ]]>
-		( #{startPage} * #{pageSize} )
-		) WHERE ROWNUM <![CDATA[ <= ]]>
-		#{pageSize}
-   </if>
 
-  	 <if test="_databaseId == PostgreSQL">
+
 		SELECT <include refid="allInterfaceColumns" />
   		  FROM interface ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
-  </if>
+
 </select>
 
 <select id="fetchInterfaceRowCount" resultType="Integer">
-    <if test="_databaseId == PostgreSQL">
 		SELECT COUNT(*) AS RECORD_COUNT FROM interface WHERE id IS NOT NULL
-   </if>
 
-  <if test="_databaseId == Oracle">
-	 	SELECT COUNT(id) AS RECORD_COUNT FROM interface
-  </if>
  </select>
 
  <insert id="insertInterface" parameterType="Interface">
@@ -100,7 +89,6 @@ c.local,
 
  <update id="updateInterface" parameterType="Interface">
    UPDATE interface SET
-     interface_desc = #{description}
 <if test="id!= null">id = #{id},</if>
 <if test="nome!= null">nome = #{nome},</if>
 <if test="local!= null">local = #{local},</if>

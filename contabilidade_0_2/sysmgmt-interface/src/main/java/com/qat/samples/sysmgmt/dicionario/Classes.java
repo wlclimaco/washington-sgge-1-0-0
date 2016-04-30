@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.dicionario;
 
+import java.util.Date;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
@@ -26,8 +27,12 @@ public class Classes extends ModelCosmeDamiao
 		// TODO Auto-generated constructor stub
 	}
 
-	public Classes(int i, String string) {
-		// TODO Auto-generated constructor stub
+	public Classes(Integer id, String nome) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	public Integer getId() {

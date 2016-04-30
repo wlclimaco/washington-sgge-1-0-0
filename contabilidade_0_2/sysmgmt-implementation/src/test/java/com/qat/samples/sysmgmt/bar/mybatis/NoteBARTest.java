@@ -53,9 +53,9 @@ public INotesBAR getNotesBAR()
 @Test
 	public void testDeleteNote()
 	{
-		Note notes = new Note(1, "Note_999");
+		Note notes = new Note(4, "Note_999");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(999);
+		request.setFetchId(4);
 		Note notesResponse = getNotesBAR().fetchNotesById(request);
 		Assert.assertEquals(notesResponse, null);
 		getNotesBAR().insertNotes(notes);
@@ -86,11 +86,11 @@ public INotesBAR getNotesBAR()
 	@Test
 	public void testUpdateNote()
 	{
-		Note notes = new Note(1234, "NATIVE INSERT UPDATE");
+		Note notes = new Note(1, "NATIVE INSERT UPDATE");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1234);
+		request.setFetchId(1);
 		Note notesResponse = getNotesBAR().fetchNotesById(request);
-		Assert.assertEquals(notesResponse.getNoteText(), "NATIVE INSERT");
+		Assert.assertEquals(notesResponse.getNoteText(), "noteText_2");
 		getNotesBAR().updateNotes(notes);
 		notesResponse = getNotesBAR().fetchNotesById(request);
 		Assert.assertEquals(notesResponse.getNoteText(), "NATIVE INSERT UPDATE");
@@ -105,7 +105,6 @@ public INotesBAR getNotesBAR()
 		request.setStartPage(0);
 		request.setPageSize(3);
 		InternalResultsResponse<Note> response = getNotesBAR().fetchNotessByRequest(request);
-		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 		// check for valid and precount and start 2nd page
@@ -113,7 +112,6 @@ public INotesBAR getNotesBAR()
 		request.setStartPage(1);
 		request.setPageSize(3);
 		response = getNotesBAR().fetchNotessByRequest(request);
-		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
@@ -138,7 +136,7 @@ public INotesBAR getNotesBAR()
 	@Before
 	public void setup()
 	{
-		executeSqlScript("conf/insertNote.sql", false);
+		executeSqlScript("conf/insertNotes.sql", false);
 	}
 
 }

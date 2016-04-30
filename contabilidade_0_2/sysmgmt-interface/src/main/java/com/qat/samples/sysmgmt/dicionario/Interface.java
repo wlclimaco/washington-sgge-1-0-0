@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.dicionario;
 
+import java.util.Date;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.pessoa.model.Cliente;
@@ -28,9 +29,18 @@ public class Interface extends ModelCosmeDamiao
 
 	}
 
-	public Interface(int i, String string) {
-		// TODO Auto-generated constructor stub
+
+
+	public Interface(Integer id, String nome, String local) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.local = local;
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
+
+
 
 	public Integer getId() {
 		return id;

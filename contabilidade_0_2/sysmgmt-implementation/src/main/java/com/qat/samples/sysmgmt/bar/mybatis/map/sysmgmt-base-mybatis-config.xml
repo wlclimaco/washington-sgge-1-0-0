@@ -21,6 +21,8 @@
   		<typeAlias alias="FetchByIdRequest" type="com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest"/>
   		<typeAlias alias="Entidade" type="com.qat.samples.sysmgmt.entidade.model.Entidade"/>
 
+  		<typeAlias alias="Estado" type="com.qat.samples.sysmgmt.estado.model.Estado"/>
+
   		<!-- Dicionario -->
   		<typeAlias alias="Field" type="com.qat.samples.sysmgmt.dicionario.Field"/>
   		<typeAlias alias="Classes" type="com.qat.samples.sysmgmt.dicionario.Classes"/>
@@ -96,6 +98,7 @@
   		<typeAlias alias="TabPreco" type="com.qat.samples.sysmgmt.produto.model.TabPreco"/>
 
   		<typeAlias alias="Historico" type="com.qat.samples.sysmgmt.historico.model.Historico"/>
+
   		<typeAlias alias="Imagem" type="com.qat.samples.sysmgmt.util.model.Imagem"/>
   		<typeAlias alias="PlanoByServico" type="com.qat.samples.sysmgmt.produto.model.PlanoByServico"/>
   		<typeAlias alias="Status" type="com.qat.samples.sysmgmt.util.model.Status"/>
@@ -282,6 +285,7 @@
      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/servico.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/preco.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/historico.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/historicoItens.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/status.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/imagens.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/plano.xml"/>

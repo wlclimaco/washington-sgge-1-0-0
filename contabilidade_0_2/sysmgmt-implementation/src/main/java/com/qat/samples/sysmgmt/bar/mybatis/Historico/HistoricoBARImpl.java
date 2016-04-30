@@ -57,31 +57,31 @@ private static final String STMT_DELETE_HISTORICO = NAMESPACE_HISTORICO + "delet
 
 ///===================================### HISTORICOITENS ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_HISTORICOITENS = "HistoricoitensMap.";
+private static final String NAMESPACE_HISTORICOITENS = "HistoricoItensMap.";
 
 /** The Constant STMT_INSERT_HISTORICOITENS. */
-private static final String STMT_INSERT_HISTORICOITENS = NAMESPACE_HISTORICOITENS + "insertHistoricoitens";
+private static final String STMT_INSERT_HISTORICOITENS = NAMESPACE_HISTORICOITENS + "insertHistoricoItens";
 
 /** The Constant STMT_UPDATE_HISTORICOITENS. */
-private static final String STMT_UPDATE_HISTORICOITENS = NAMESPACE_HISTORICOITENS + "updateHistoricoitens";
+private static final String STMT_UPDATE_HISTORICOITENS = NAMESPACE_HISTORICOITENS + "updateHistoricoItens";
 
 /** The Constant STMT_DELETE_HISTORICOITENS. */
-private static final String STMT_DELETE_HISTORICOITENS = NAMESPACE_HISTORICOITENS + "deleteHistoricoitensById";
+private static final String STMT_DELETE_HISTORICOITENS = NAMESPACE_HISTORICOITENS + "deleteHistoricoItensById";
 
 	/** The Constant STMT_DELETE_HISTORICOITENS_ALL. */
-	private static final String STMT_DELETE_HISTORICOITENS_ALL = NAMESPACE_HISTORICOITENS + "deleteAllHistoricoitenss";
+	private static final String STMT_DELETE_HISTORICOITENS_ALL = NAMESPACE_HISTORICOITENS + "deleteAllHistoricoItens";
 
 	/** The Constant STMT_FETCH_HISTORICOITENS. */
-	private static final String STMT_FETCH_HISTORICOITENS = NAMESPACE_HISTORICOITENS + "fetchHistoricoitensById";
+	private static final String STMT_FETCH_HISTORICOITENS = NAMESPACE_HISTORICOITENS + "fetchHistoricoItensById";
 
 	/** The Constant STMT_FETCH_HISTORICOITENS_ALL. */
-	private static final String STMT_FETCH_HISTORICOITENS_ALL = NAMESPACE_HISTORICOITENS + "fetchAllHistoricoitenss";
+	private static final String STMT_FETCH_HISTORICOITENS_ALL = NAMESPACE_HISTORICOITENS + "fetchAllHistoricoItens";
 
 	/** The Constant STMT_FETCH_HISTORICOITENS_COUNT. */
-	private static final String STMT_FETCH_HISTORICOITENS_COUNT = NAMESPACE_HISTORICOITENS + "fetchHistoricoitensRowCount";
+	private static final String STMT_FETCH_HISTORICOITENS_COUNT = NAMESPACE_HISTORICOITENS + "fetchHistoricoItensRowCount";
 
 	/** The Constant STMT_FETCH_HISTORICOITENS_ALL_REQUEST. */
-	private static final String STMT_FETCH_HISTORICOITENS_ALL_REQUEST = NAMESPACE_HISTORICOITENS + "fetchAllHistoricoitenssRequest";
+	private static final String STMT_FETCH_HISTORICOITENS_ALL_REQUEST = NAMESPACE_HISTORICOITENS + "fetchAllHistoricoItensRequest";
 
 //===================================### HISTORICO ####======================================
 	/**

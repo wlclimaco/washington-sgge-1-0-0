@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+
+<!-- create by system gera-java version 1.0.0 30/04/2016 14:51 : 33-->
+
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -13,17 +16,21 @@
       necessary if the columns (or aliases) match to the properties
        exactly. -->
   <resultMap id="ClassesResult" type="Classes">
-    <result property="id" column="Integer"/>
-    <result property="nome" column="String"/>
+    <result property="id" column="id"/>
+    <result property="nome" column="nome"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
   <sql id="allClassesColumns">
-create_date
+id
+,nome
+,create_date
 ,create_user
 ,modify_date
 ,modify_user
-,id
-,nome
 
 </sql>
 <sql id="allClassesValues">
@@ -58,33 +65,16 @@ c.nome,
  </select>
 
  <select id="fetchAllClassessRequest" parameterType="ClassesInquiryRequest" resultMap="ClassesResult">
- 	<if test="_databaseId == Oracle">
-		SELECT * FROM (
-		SELECT * FROM (
-		SELECT <include refid="allClassesColumnsWithQualifier" />,
-		ROWNUM ROWNUM_ FROM classes c ORDER BY id ASC
-		) WHERE ROWNUM_ <![CDATA[ > ]]>
-		( #{startPage} * #{pageSize} )
-		) WHERE ROWNUM <![CDATA[ <= ]]>
-		#{pageSize}
-   </if>
 
-  	 <if test="_databaseId == PostgreSQL">
 		SELECT <include refid="allClassesColumns" />
   		  FROM classes ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
-  </if>
 </select>
 
 <select id="fetchClassesRowCount" resultType="Integer">
-    <if test="_databaseId == PostgreSQL">
 		SELECT COUNT(*) AS RECORD_COUNT FROM classes WHERE id IS NOT NULL
-   </if>
 
-  <if test="_databaseId == Oracle">
-	 	SELECT COUNT(id) AS RECORD_COUNT FROM classes
-  </if>
  </select>
 
  <insert id="insertClasses" parameterType="Classes">
@@ -96,7 +86,6 @@ c.nome,
 
  <update id="updateClasses" parameterType="Classes">
    UPDATE classes SET
-     classes_desc = #{description}
 <if test="id!= null">id = #{id},</if>
 <if test="nome!= null">nome = #{nome},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>

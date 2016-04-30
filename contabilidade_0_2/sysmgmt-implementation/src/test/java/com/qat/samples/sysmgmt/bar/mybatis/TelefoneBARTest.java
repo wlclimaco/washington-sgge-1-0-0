@@ -55,9 +55,9 @@ public ITelefoneBAR getTelefoneBAR()
 @Test
 	public void testDeleteTelefone()
 	{
-		Telefone telefone = new Telefone(1,"034" ,"33158065", TelefoneTypeEnum.GERENTE, PersistenceActionEnum.NONE);
+		Telefone telefone = new Telefone(4,"034" ,"33158065", TelefoneTypeEnum.GERENTE, PersistenceActionEnum.NONE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(999);
+		request.setFetchId(4);
 		Telefone telefoneResponse = getTelefoneBAR().fetchTelefoneById(request);
 		Assert.assertEquals(telefoneResponse, null);
 		getTelefoneBAR().insertTelefone(telefone);
@@ -90,12 +90,12 @@ public ITelefoneBAR getTelefoneBAR()
 	{
 		Telefone telefone = new Telefone(1,"034" ,"33158065", TelefoneTypeEnum.GERENTE, PersistenceActionEnum.NONE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1234);
+		request.setFetchId(1);
 		Telefone telefoneResponse = getTelefoneBAR().fetchTelefoneById(request);
-		Assert.assertEquals(telefoneResponse.getNumero(), "NATIVE INSERT");
+		Assert.assertEquals(telefoneResponse.getNumero(), "numero_5");
 		getTelefoneBAR().updateTelefone(telefone);
 		telefoneResponse = getTelefoneBAR().fetchTelefoneById(request);
-		Assert.assertEquals(telefoneResponse.getNumero(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(telefoneResponse.getNumero(), "33158065");
 	}
 
 	@Test
@@ -107,7 +107,6 @@ public ITelefoneBAR getTelefoneBAR()
 		request.setStartPage(0);
 		request.setPageSize(3);
 		InternalResultsResponse<Telefone> response = getTelefoneBAR().fetchTelefonesByRequest(request);
-		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 		// check for valid and precount and start 2nd page
@@ -115,7 +114,6 @@ public ITelefoneBAR getTelefoneBAR()
 		request.setStartPage(1);
 		request.setPageSize(3);
 		response = getTelefoneBAR().fetchTelefonesByRequest(request);
-		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
