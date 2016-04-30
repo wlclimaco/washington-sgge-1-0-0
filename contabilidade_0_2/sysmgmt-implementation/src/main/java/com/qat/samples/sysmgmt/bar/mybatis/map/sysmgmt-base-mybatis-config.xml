@@ -181,6 +181,8 @@
 
   		<typeAlias alias="Note" type="com.qat.samples.sysmgmt.util.model.Note"/>
 
+  		<typeAlias alias="Cidade" type="com.qat.samples.sysmgmt.util.model.Cidade"/>
+
 
   		<typeAlias alias="AgenciaInquiryRequest" type="com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest"/>
 
