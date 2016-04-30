@@ -1,3 +1,4 @@
+/** create by system gera-java version 1.0.0 30/04/2016 19:13 : 13*/
 package com.qat.samples.sysmgmt.bar.Cadastros;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
@@ -29,7 +30,7 @@ public interface ICadastrosBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Cliente> fetchClienteById(FetchByIdRequest request);
+	public Cliente fetchClienteById(FetchByIdRequest request);
 
 	/**
 * Insert cliente.
@@ -86,7 +87,7 @@ public interface ICadastrosBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Fornecedor> fetchFornecedorById(FetchByIdRequest request);
+	public Fornecedor fetchFornecedorById(FetchByIdRequest request);
 
 	/**
 * Insert fornecedor.
@@ -143,7 +144,7 @@ public interface ICadastrosBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Transportador> fetchTransportadorById(FetchByIdRequest request);
+	public Transportador fetchTransportadorById(FetchByIdRequest request);
 
 	/**
 * Insert transportador.
@@ -200,7 +201,7 @@ public interface ICadastrosBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Convenio> fetchConvenioById(FetchByIdRequest request);
+	public Convenio fetchConvenioById(FetchByIdRequest request);
 
 	/**
 * Insert convenio.
@@ -257,7 +258,7 @@ public interface ICadastrosBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Cidade> fetchCidadeById(FetchByIdRequest request);
+	public Cidade fetchCidadeById(FetchByIdRequest request);
 
 	/**
 * Insert cidade.
@@ -314,7 +315,7 @@ public interface ICadastrosBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Estado> fetchEstadoById(FetchByIdRequest request);
+	public Estado fetchEstadoById(FetchByIdRequest request);
 
 	/**
 * Insert estado.
@@ -371,7 +372,7 @@ public interface ICadastrosBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Tarefa> fetchTarefaById(FetchByIdRequest request);
+	public Tarefa fetchTarefaById(FetchByIdRequest request);
 
 	/**
 * Insert tarefa.

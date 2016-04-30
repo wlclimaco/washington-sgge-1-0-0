@@ -1,3 +1,4 @@
+/** create by system gera-java version 1.0.0 30/04/2016 19:13 : 13*/
 package com.qat.samples.sysmgmt.bar.mybatis.Cadastros;
 
 
@@ -240,10 +241,10 @@ private static final String STMT_DELETE_TAREFA = NAMESPACE_TAREFA + "deleteTaref
  * @see com.qat.samples.sysmgmt.base.bar.IClienteBAR#insertCliente(com.qat.samples.sysmgmt.base.model.Cliente)
  */
 @Override
-public InternalResponse insertCliente(Cliente county)
+public InternalResponse insertCliente(Cliente cliente)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CLIENTE, county, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CLIENTE, cliente, response);
 	return response;
 }
 
@@ -252,10 +253,10 @@ public InternalResponse insertCliente(Cliente county)
  * @see com.qat.samples.sysmgmt.base.bar.IClienteBAR#updateCliente(com.qat.samples.sysmgmt.base.model.Cliente)
  */
 @Override
-public InternalResponse updateCliente(Cliente county)
+public InternalResponse updateCliente(Cliente cliente)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CLIENTE, county, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CLIENTE, cliente, response);
 	return response;
 }
 
@@ -264,10 +265,10 @@ public InternalResponse updateCliente(Cliente county)
  * @see com.qat.samples.sysmgmt.base.bar.IClienteBAR#deleteCliente(com.qat.samples.sysmgmt.base.model.Cliente)
  */
 @Override
-public InternalResponse deleteClienteById(Cliente county)
+public InternalResponse deleteClienteById(Cliente cliente)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CLIENTE, county, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CLIENTE, cliente, response);
 	return response;
 }
 
@@ -289,12 +290,10 @@ public InternalResponse deleteAllClientes()
  * com.qat.samples.sysmgmt.bar.IClienteBAR#fetchClienteById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<Cliente> fetchClienteById(FetchByIdRequest request)
+public Cliente fetchClienteById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Cliente> response = new InternalResultsResponse<Cliente>();
-	response.addResult((Cliente)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CLIENTE,
-			request.getFetchId()));
-	return response;
+return (Cliente)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CLIENTE, request.getFetchId());
+
 }
 
 /*
@@ -375,10 +374,10 @@ public static void fetchClientesByRequest(SqlSession sqlSession, ClienteInquiryR
  * @see com.qat.samples.sysmgmt.base.bar.IFornecedorBAR#insertFornecedor(com.qat.samples.sysmgmt.base.model.Fornecedor)
  */
 @Override
-public InternalResponse insertFornecedor(Fornecedor county)
+public InternalResponse insertFornecedor(Fornecedor fornecedor)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_FORNECEDOR, county, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_FORNECEDOR, fornecedor, response);
 	return response;
 }
 
@@ -387,10 +386,10 @@ public InternalResponse insertFornecedor(Fornecedor county)
  * @see com.qat.samples.sysmgmt.base.bar.IFornecedorBAR#updateFornecedor(com.qat.samples.sysmgmt.base.model.Fornecedor)
  */
 @Override
-public InternalResponse updateFornecedor(Fornecedor county)
+public InternalResponse updateFornecedor(Fornecedor fornecedor)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_FORNECEDOR, county, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_FORNECEDOR, fornecedor, response);
 	return response;
 }
 
@@ -399,10 +398,10 @@ public InternalResponse updateFornecedor(Fornecedor county)
  * @see com.qat.samples.sysmgmt.base.bar.IFornecedorBAR#deleteFornecedor(com.qat.samples.sysmgmt.base.model.Fornecedor)
  */
 @Override
-public InternalResponse deleteFornecedorById(Fornecedor county)
+public InternalResponse deleteFornecedorById(Fornecedor fornecedor)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_FORNECEDOR, county, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_FORNECEDOR, fornecedor, response);
 	return response;
 }
 
@@ -424,12 +423,10 @@ public InternalResponse deleteAllFornecedors()
  * com.qat.samples.sysmgmt.bar.IFornecedorBAR#fetchFornecedorById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<Fornecedor> fetchFornecedorById(FetchByIdRequest request)
+public Fornecedor fetchFornecedorById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Fornecedor> response = new InternalResultsResponse<Fornecedor>();
-	response.addResult((Fornecedor)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_FORNECEDOR,
-			request.getFetchId()));
-	return response;
+return (Fornecedor)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_FORNECEDOR, request.getFetchId());
+
 }
 
 /*
@@ -510,10 +507,10 @@ public static void fetchFornecedorsByRequest(SqlSession sqlSession, FornecedorIn
  * @see com.qat.samples.sysmgmt.base.bar.ITransportadorBAR#insertTransportador(com.qat.samples.sysmgmt.base.model.Transportador)
  */
 @Override
-public InternalResponse insertTransportador(Transportador county)
+public InternalResponse insertTransportador(Transportador transportador)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_TRANSPORTADOR, county, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_TRANSPORTADOR, transportador, response);
 	return response;
 }
 
@@ -522,10 +519,10 @@ public InternalResponse insertTransportador(Transportador county)
  * @see com.qat.samples.sysmgmt.base.bar.ITransportadorBAR#updateTransportador(com.qat.samples.sysmgmt.base.model.Transportador)
  */
 @Override
-public InternalResponse updateTransportador(Transportador county)
+public InternalResponse updateTransportador(Transportador transportador)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_TRANSPORTADOR, county, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_TRANSPORTADOR, transportador, response);
 	return response;
 }
 
@@ -534,10 +531,10 @@ public InternalResponse updateTransportador(Transportador county)
  * @see com.qat.samples.sysmgmt.base.bar.ITransportadorBAR#deleteTransportador(com.qat.samples.sysmgmt.base.model.Transportador)
  */
 @Override
-public InternalResponse deleteTransportadorById(Transportador county)
+public InternalResponse deleteTransportadorById(Transportador transportador)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_TRANSPORTADOR, county, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_TRANSPORTADOR, transportador, response);
 	return response;
 }
 
@@ -559,12 +556,10 @@ public InternalResponse deleteAllTransportadors()
  * com.qat.samples.sysmgmt.bar.ITransportadorBAR#fetchTransportadorById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<Transportador> fetchTransportadorById(FetchByIdRequest request)
+public Transportador fetchTransportadorById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Transportador> response = new InternalResultsResponse<Transportador>();
-	response.addResult((Transportador)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_TRANSPORTADOR,
-			request.getFetchId()));
-	return response;
+return (Transportador)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_TRANSPORTADOR, request.getFetchId());
+
 }
 
 /*
@@ -645,10 +640,10 @@ public static void fetchTransportadorsByRequest(SqlSession sqlSession, Transport
  * @see com.qat.samples.sysmgmt.base.bar.IConvenioBAR#insertConvenio(com.qat.samples.sysmgmt.base.model.Convenio)
  */
 @Override
-public InternalResponse insertConvenio(Convenio county)
+public InternalResponse insertConvenio(Convenio convenio)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONVENIO, county, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONVENIO, convenio, response);
 	return response;
 }
 
@@ -657,10 +652,10 @@ public InternalResponse insertConvenio(Convenio county)
  * @see com.qat.samples.sysmgmt.base.bar.IConvenioBAR#updateConvenio(com.qat.samples.sysmgmt.base.model.Convenio)
  */
 @Override
-public InternalResponse updateConvenio(Convenio county)
+public InternalResponse updateConvenio(Convenio convenio)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CONVENIO, county, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CONVENIO, convenio, response);
 	return response;
 }
 
@@ -669,10 +664,10 @@ public InternalResponse updateConvenio(Convenio county)
  * @see com.qat.samples.sysmgmt.base.bar.IConvenioBAR#deleteConvenio(com.qat.samples.sysmgmt.base.model.Convenio)
  */
 @Override
-public InternalResponse deleteConvenioById(Convenio county)
+public InternalResponse deleteConvenioById(Convenio convenio)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONVENIO, county, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONVENIO, convenio, response);
 	return response;
 }
 
@@ -694,12 +689,10 @@ public InternalResponse deleteAllConvenios()
  * com.qat.samples.sysmgmt.bar.IConvenioBAR#fetchConvenioById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<Convenio> fetchConvenioById(FetchByIdRequest request)
+public Convenio fetchConvenioById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Convenio> response = new InternalResultsResponse<Convenio>();
-	response.addResult((Convenio)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONVENIO,
-			request.getFetchId()));
-	return response;
+return (Convenio)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONVENIO, request.getFetchId());
+
 }
 
 /*
@@ -780,10 +773,10 @@ public static void fetchConveniosByRequest(SqlSession sqlSession, ConvenioInquir
  * @see com.qat.samples.sysmgmt.base.bar.ICidadeBAR#insertCidade(com.qat.samples.sysmgmt.base.model.Cidade)
  */
 @Override
-public InternalResponse insertCidade(Cidade county)
+public InternalResponse insertCidade(Cidade cidade)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CIDADE, county, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CIDADE, cidade, response);
 	return response;
 }
 
@@ -792,10 +785,10 @@ public InternalResponse insertCidade(Cidade county)
  * @see com.qat.samples.sysmgmt.base.bar.ICidadeBAR#updateCidade(com.qat.samples.sysmgmt.base.model.Cidade)
  */
 @Override
-public InternalResponse updateCidade(Cidade county)
+public InternalResponse updateCidade(Cidade cidade)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CIDADE, county, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CIDADE, cidade, response);
 	return response;
 }
 
@@ -804,10 +797,10 @@ public InternalResponse updateCidade(Cidade county)
  * @see com.qat.samples.sysmgmt.base.bar.ICidadeBAR#deleteCidade(com.qat.samples.sysmgmt.base.model.Cidade)
  */
 @Override
-public InternalResponse deleteCidadeById(Cidade county)
+public InternalResponse deleteCidadeById(Cidade cidade)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CIDADE, county, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CIDADE, cidade, response);
 	return response;
 }
 
@@ -829,12 +822,10 @@ public InternalResponse deleteAllCidades()
  * com.qat.samples.sysmgmt.bar.ICidadeBAR#fetchCidadeById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<Cidade> fetchCidadeById(FetchByIdRequest request)
+public Cidade fetchCidadeById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Cidade> response = new InternalResultsResponse<Cidade>();
-	response.addResult((Cidade)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CIDADE,
-			request.getFetchId()));
-	return response;
+return (Cidade)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CIDADE, request.getFetchId());
+
 }
 
 /*
@@ -915,10 +906,10 @@ public static void fetchCidadesByRequest(SqlSession sqlSession, CidadeInquiryReq
  * @see com.qat.samples.sysmgmt.base.bar.IEstadoBAR#insertEstado(com.qat.samples.sysmgmt.base.model.Estado)
  */
 @Override
-public InternalResponse insertEstado(Estado county)
+public InternalResponse insertEstado(Estado estado)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ESTADO, county, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ESTADO, estado, response);
 	return response;
 }
 
@@ -927,10 +918,10 @@ public InternalResponse insertEstado(Estado county)
  * @see com.qat.samples.sysmgmt.base.bar.IEstadoBAR#updateEstado(com.qat.samples.sysmgmt.base.model.Estado)
  */
 @Override
-public InternalResponse updateEstado(Estado county)
+public InternalResponse updateEstado(Estado estado)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ESTADO, county, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ESTADO, estado, response);
 	return response;
 }
 
@@ -939,10 +930,10 @@ public InternalResponse updateEstado(Estado county)
  * @see com.qat.samples.sysmgmt.base.bar.IEstadoBAR#deleteEstado(com.qat.samples.sysmgmt.base.model.Estado)
  */
 @Override
-public InternalResponse deleteEstadoById(Estado county)
+public InternalResponse deleteEstadoById(Estado estado)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ESTADO, county, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ESTADO, estado, response);
 	return response;
 }
 
@@ -964,12 +955,10 @@ public InternalResponse deleteAllEstados()
  * com.qat.samples.sysmgmt.bar.IEstadoBAR#fetchEstadoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<Estado> fetchEstadoById(FetchByIdRequest request)
+public Estado fetchEstadoById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Estado> response = new InternalResultsResponse<Estado>();
-	response.addResult((Estado)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_ESTADO,
-			request.getFetchId()));
-	return response;
+return (Estado)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_ESTADO, request.getFetchId());
+
 }
 
 /*
@@ -1050,10 +1039,10 @@ public static void fetchEstadosByRequest(SqlSession sqlSession, EstadoInquiryReq
  * @see com.qat.samples.sysmgmt.base.bar.ITarefaBAR#insertTarefa(com.qat.samples.sysmgmt.base.model.Tarefa)
  */
 @Override
-public InternalResponse insertTarefa(Tarefa county)
+public InternalResponse insertTarefa(Tarefa tarefa)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_TAREFA, county, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_TAREFA, tarefa, response);
 	return response;
 }
 
@@ -1062,10 +1051,10 @@ public InternalResponse insertTarefa(Tarefa county)
  * @see com.qat.samples.sysmgmt.base.bar.ITarefaBAR#updateTarefa(com.qat.samples.sysmgmt.base.model.Tarefa)
  */
 @Override
-public InternalResponse updateTarefa(Tarefa county)
+public InternalResponse updateTarefa(Tarefa tarefa)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_TAREFA, county, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_TAREFA, tarefa, response);
 	return response;
 }
 
@@ -1074,10 +1063,10 @@ public InternalResponse updateTarefa(Tarefa county)
  * @see com.qat.samples.sysmgmt.base.bar.ITarefaBAR#deleteTarefa(com.qat.samples.sysmgmt.base.model.Tarefa)
  */
 @Override
-public InternalResponse deleteTarefaById(Tarefa county)
+public InternalResponse deleteTarefaById(Tarefa tarefa)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_TAREFA, county, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_TAREFA, tarefa, response);
 	return response;
 }
 
@@ -1099,12 +1088,10 @@ public InternalResponse deleteAllTarefas()
  * com.qat.samples.sysmgmt.bar.ITarefaBAR#fetchTarefaById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<Tarefa> fetchTarefaById(FetchByIdRequest request)
+public Tarefa fetchTarefaById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Tarefa> response = new InternalResultsResponse<Tarefa>();
-	response.addResult((Tarefa)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_TAREFA,
-			request.getFetchId()));
-	return response;
+return (Tarefa)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_TAREFA, request.getFetchId());
+
 }
 
 /*

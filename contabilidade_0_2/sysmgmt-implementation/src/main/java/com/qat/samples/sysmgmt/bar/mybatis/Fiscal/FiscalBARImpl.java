@@ -117,31 +117,31 @@ private static final String STMT_DELETE_CNAE = NAMESPACE_CNAE + "deleteCnaeById"
 
 ///===================================### CNAEEMPRESA ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_CNAEEMPRESA = "CnaeempresaMap.";
+private static final String NAMESPACE_CNAEEMPRESA = "CnaeEmpresaMap.";
 
 /** The Constant STMT_INSERT_CNAEEMPRESA. */
-private static final String STMT_INSERT_CNAEEMPRESA = NAMESPACE_CNAEEMPRESA + "insertCnaeempresa";
+private static final String STMT_INSERT_CNAEEMPRESA = NAMESPACE_CNAEEMPRESA + "insertCnaeEmpresa";
 
 /** The Constant STMT_UPDATE_CNAEEMPRESA. */
-private static final String STMT_UPDATE_CNAEEMPRESA = NAMESPACE_CNAEEMPRESA + "updateCnaeempresa";
+private static final String STMT_UPDATE_CNAEEMPRESA = NAMESPACE_CNAEEMPRESA + "updateCnaeEmpresa";
 
 /** The Constant STMT_DELETE_CNAEEMPRESA. */
-private static final String STMT_DELETE_CNAEEMPRESA = NAMESPACE_CNAEEMPRESA + "deleteCnaeempresaById";
+private static final String STMT_DELETE_CNAEEMPRESA = NAMESPACE_CNAEEMPRESA + "deleteCnaeEmpresaById";
 
 	/** The Constant STMT_DELETE_CNAEEMPRESA_ALL. */
-	private static final String STMT_DELETE_CNAEEMPRESA_ALL = NAMESPACE_CNAEEMPRESA + "deleteAllCnaeempresas";
+	private static final String STMT_DELETE_CNAEEMPRESA_ALL = NAMESPACE_CNAEEMPRESA + "deleteAllCnaeEmpresas";
 
 	/** The Constant STMT_FETCH_CNAEEMPRESA. */
-	private static final String STMT_FETCH_CNAEEMPRESA = NAMESPACE_CNAEEMPRESA + "fetchCnaeempresaById";
+	private static final String STMT_FETCH_CNAEEMPRESA = NAMESPACE_CNAEEMPRESA + "fetchCnaeEmpresaById";
 
 	/** The Constant STMT_FETCH_CNAEEMPRESA_ALL. */
-	private static final String STMT_FETCH_CNAEEMPRESA_ALL = NAMESPACE_CNAEEMPRESA + "fetchAllCnaeempresas";
+	private static final String STMT_FETCH_CNAEEMPRESA_ALL = NAMESPACE_CNAEEMPRESA + "fetchAllCnaeEmpresas";
 
 	/** The Constant STMT_FETCH_CNAEEMPRESA_COUNT. */
-	private static final String STMT_FETCH_CNAEEMPRESA_COUNT = NAMESPACE_CNAEEMPRESA + "fetchCnaeempresaRowCount";
+	private static final String STMT_FETCH_CNAEEMPRESA_COUNT = NAMESPACE_CNAEEMPRESA + "fetchCnaeEmpresaRowCount";
 
 	/** The Constant STMT_FETCH_CNAEEMPRESA_ALL_REQUEST. */
-	private static final String STMT_FETCH_CNAEEMPRESA_ALL_REQUEST = NAMESPACE_CNAEEMPRESA + "fetchAllCnaeempresasRequest";
+	private static final String STMT_FETCH_CNAEEMPRESA_ALL_REQUEST = NAMESPACE_CNAEEMPRESA + "fetchAllCnaeEmpresasRequest";
 
 //===================================### REGIME ####======================================
 	/**

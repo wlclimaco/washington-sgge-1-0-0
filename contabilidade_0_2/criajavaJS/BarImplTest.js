@@ -92,9 +92,9 @@ text = text + "\n";
 text = text + "@Test\n";
 text = text + "	public void testDelete"+nomeM+"()\n";
 text = text + "	{\n";
-text = text + '		'+nomeM+' '+nome+' = new '+nomeM+'(999, "'+nomeM+'_999");\n';
+text = text + '		'+nomeM+' '+nome+' = new '+nomeM+'(4, "'+nomeM+'_999");\n';
 text = text + "		FetchByIdRequest request = new FetchByIdRequest();\n";
-text = text + "		request.setFetchId(999);\n";
+text = text + "		request.setFetchId(4);\n";
 text = text + "		"+nomeM+" "+nome+"Response = get"+bar+"BAR().fetch"+nomeM+"ById(request);\n";
 text = text + "		Assert.assertEquals("+nome+"Response, null);\n";
 text = text + "		get"+bar+"BAR().insert"+nomeM+"("+nome+");\n";
@@ -118,16 +118,16 @@ text = text + "	public void testDeleteAll"+nomeM+"s()\n";
 text = text + "	{\n";
 text = text + "		get"+bar+"BAR().deleteAll"+nomeM+"s();\n";
 text = text + "	"+nomeM+" "+nome+" = new "+nomeM+"();\n";
-text = text + "		List<"+nomeM+"> response = get"+bar+"BAR().fetchAll"+nomeM+"s().getResultsList();\n";
+text = text + "		List<"+nomeM+"> response = get"+bar+"BAR().fetchAll"+nomeM+"s(new "+nomeM+"()).getResultsList();\n";
 text = text + "		Assert.assertEquals(response.size(), 0);\n";
 text = text + "	}\n";
 text = text + "\n";
 text = text + "	@Test\n";
 text = text + "	public void testUpdate"+nomeM+"()\n";
 text = text + "	{\n";
-text = text + '		'+nomeM+' '+nome+' = new '+nomeM+'(1234, "NATIVE INSERT UPDATE");\n';
+text = text + '		'+nomeM+' '+nome+' = new '+nomeM+'(1, "NATIVE INSERT UPDATE");\n';
 text = text + "		FetchByIdRequest request = new FetchByIdRequest();\n";
-text = text + "		request.setFetchId(1234);\n";
+text = text + "		request.setFetchId(1);\n";
 text = text + "		"+nomeM+" "+nome+"Response = get"+bar+"BAR().fetch"+nomeM+"ById(request);\n";
 text = text + '		Assert.assertEquals('+nome+'Response.getDescription(), "NATIVE INSERT");\n';
 text = text + "		get"+bar+"BAR().update"+nomeM+"("+nome+");\n";
@@ -144,7 +144,7 @@ text = text + "		request.setPreQueryCount(true);\n";
 text = text + "		request.setStartPage(0);\n";
 text = text + "		request.setPageSize(3);\n";
 text = text + "		InternalResultsResponse<"+nomeM+"> response = get"+bar+"BAR().fetch"+nomeM+"sByRequest(request);\n";
-text = text + "		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());\n";
+text = text + "		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());\n";
 text = text + "		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);\n";
 text = text + "		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);\n";
 text = text + "		// check for valid and precount and start 2nd page\n";
@@ -152,7 +152,7 @@ text = text + "		request.setPreQueryCount(true);\n";
 text = text + "		request.setStartPage(1);\n";
 text = text + "		request.setPageSize(3);\n";
 text = text + "		response = get"+bar+"BAR().fetch"+nomeM+"sByRequest(request);\n";
-text = text + "		Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());\n";
+text = text + "		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());\n";
 text = text + "		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);\n";
 text = text + "		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);\n";
 text = text + "\n";
@@ -173,14 +173,20 @@ text = text + "		InternalResultsResponse<"+nomeM+"> response3 = get"+bar+"BAR().
 text = text + "		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);\n";
 text = text + "\n";
 text = text + "	}\n";
+
+}
 text = text + "\n";
 text = text + "	@Before\n";
 text = text + "	public void setup()\n";
 text = text + "	{\n";
+for(i=0;i < teste.length;i++){
+
+	var nome = teste[i].classe.toLowerCase();
+	nomeM = titleize(nome)
 text = text + '		executeSqlScript("conf/insert'+nomeM+'.sql", false);\n';
+}
 text = text + "	}\n";
 text = text + "\n";
-}
 text = text + "}\n";
 return text;
 }

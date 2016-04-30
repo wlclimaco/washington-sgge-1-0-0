@@ -31,4 +31,36 @@
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 	</bean>
 
+	<bean id="statusBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Status.StatusBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="documentosBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Documentos.DocumentoBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="emailBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Email.EmailBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="enderecoBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Endereco.EnderecoBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="historicoBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Historico.HistoricoBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="noteBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Notes.NotesBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="telefoneBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Telefone.TelefoneBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="dicionarioBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Dicionario.DicionarioBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
 </beans>

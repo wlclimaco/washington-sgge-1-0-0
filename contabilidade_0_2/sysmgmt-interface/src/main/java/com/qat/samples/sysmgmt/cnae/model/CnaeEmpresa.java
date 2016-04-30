@@ -30,6 +30,10 @@ public class CnaeEmpresa extends ModelCosmeDamiao
 
 	}
 
+	public CnaeEmpresa(int i, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * @return the id
 	 */
