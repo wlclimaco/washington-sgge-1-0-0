@@ -20,16 +20,16 @@
     [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,-->
 
-  <resultMap id="empresaResult" type="Empresa" extends="EntidadeMap.entidadeResult">
-	<collection property="socios" column="id" select="SocioMap.fetchSocioByEmpresaId"/>
+  <resultMap id="empresaResult" type="Empresa" extends="EntidadeMap.EntidadeResult">
+	<!--<collection property="socios" column="id" select="SocioMap.fetchSocioByEmpresaId"/>
 	<collection property="planoList" column="id" select="PlanoMap.fetchPlanoByEmpresa"/>
 	<collection property="filialList" column="id" select="FilialMap.fetchAllFilialByEntidade"/>
 	<collection property="depositoList" column="id" select="DepositoMap.fetchAllDepositoByEntidade"/>
-	<!--  <collection property="contaCorrenteList" column="id" select="ContaCorrenteMap.fetchAllDepositoByEntidade"/>
+	  <collection property="contaCorrenteList" column="id" select="ContaCorrenteMap.fetchAllDepositoByEntidade"/>
 	<collection property="tarefaList" column="id" select="TarefaMap.fetchAllDepositoByEntidade"/>-->
   </resultMap>
 
-   <resultMap id="empresaTableResult" type="Empresa" extends="EntidadeMap.entidadeTableResult">
+   <resultMap id="empresaTableResult" type="Empresa" extends="EntidadeMap.EntidadeResult">
 	</resultMap>
 
 
@@ -47,14 +47,14 @@
   <select id="fetchEmpresaRowCount" parameterType="EmpresaInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM entidade
-        where entidadeEnum = 1
+        where entidadeEnumValue = 1
 
   </select>
 
   <select id="fetchAllEmpresas" resultMap="empresaTableResult">
     SELECT
 	<include refid="allEmpresaColumns" />
-    FROM entidade ORDER BY nome ASC
+    FROM entidade  where entidadeEnumValue = 1 ORDER BY nome ASC
   </select>
 
   <select id="fetchEmpresaById" parameterType="FetchByIdRequest" resultMap="empresaResult">
@@ -76,7 +76,7 @@
     						<include refid="allEmpresaColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM entidade b
-
+					where entidadeEnumValue = 1
 
     			) LIST
 				<choose>
@@ -93,5 +93,11 @@
 				</choose>
   </select>
 
+<delete id="deleteEmpresaById" parameterType="Empresa">
+  DELETE FROM entidade WHERE id = #{id}
+ </delete>
 
+ <delete id="deleteAllEmpresas">
+	DELETE FROM entidade
+  </delete>
 </mapper>

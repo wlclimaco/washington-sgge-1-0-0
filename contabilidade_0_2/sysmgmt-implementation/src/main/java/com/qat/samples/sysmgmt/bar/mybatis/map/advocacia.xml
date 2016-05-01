@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 01/05/2016 19:22 : 3-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdvocaciaMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+<resultMap id="AdvocaciaResult" type="Advocacia" extends="EntidadeMap.EntidadeResult">
+	<!--<collection property="depositoList" column="emprId" select="DepositoMap.fetchAllDepositoByEntidade"/>-->
+  </resultMap>
+
+	<sql id="allAdvocaciaColumns">
+		<include refid="EntidadeMap.allEntidadeColumns"/>
+	</sql>
+	<sql id="allAdvocaciaValues">
+		<include refid="EntidadeMap.allEntidadeValues"/>
+	</sql>
+
+ <select id="fetchAllAdvocacias" resultMap="AdvocaciaResult">
+    SELECT
+	<include refid="allAdvocaciaColumns" />
+   FROM entidade where entidadeEnumValue = 6 ORDER BY id ASC
+ </select>
+
+ <select id="fetchAdvocaciaById" parameterType="Integer" resultMap="AdvocaciaResult">
+    SELECT
+	<include refid="allAdvocaciaColumns" />
+   FROM entidade WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllAdvocaciasRequest" parameterType="AdvocaciaInquiryRequest" resultMap="AdvocaciaResult">
+
+		SELECT <include refid="allAdvocaciaColumns" />
+  		  FROM entidade where entidadeEnumValue = 6 ORDER BY id ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+</select>
+
+<select id="fetchAdvocaciaRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM entidade WHERE id IS NOT NULL and entidadeEnumValue = 6
+
+ </select>
+
+</mapper>
+
+

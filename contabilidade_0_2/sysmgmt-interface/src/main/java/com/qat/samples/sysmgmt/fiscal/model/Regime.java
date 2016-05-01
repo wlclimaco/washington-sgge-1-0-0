@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.fiscal.model;
 
+import java.util.Date;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
@@ -37,8 +38,14 @@ public class Regime extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	public Regime(int i, String string) {
-		// TODO Auto-generated constructor stub
+
+
+	public Regime(Integer id, String nome) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	public Integer getId()

@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.entidade.model;
 
+import java.util.Date;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
@@ -45,7 +46,10 @@ public class Empresa extends Entidade
 	}
 
 	public Empresa(int i, String string) {
-		// TODO Auto-generated constructor stub
+		setId(i);
+		setNome(string);
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	/**

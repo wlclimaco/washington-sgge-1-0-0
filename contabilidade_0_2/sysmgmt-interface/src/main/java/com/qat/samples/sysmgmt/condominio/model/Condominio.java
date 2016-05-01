@@ -25,7 +25,7 @@ public class Condominio extends Entidade
 		super();
 	}
 
-	public Condominio(Integer id)
+	public Condominio(Integer id, String string)
 	{
 		setId(id);
 	}

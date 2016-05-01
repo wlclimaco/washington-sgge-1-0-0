@@ -5,7 +5,7 @@ import com.qat.framework.model.IIntegerEnum;
 
 /**
  * The Enum PayrollTypeEnum details the different options a payroll can have inside of SendSolv
- * 
+ *
  * @author abarros
  * @version 1.0
  * @created 21-Jul-2014 10:00:07 AM
@@ -22,8 +22,16 @@ public enum EntidadeTypeEnum implements IIntegerEnum, II18nEnum
 	/** The mixed. */
 	DEPOSITO(3, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
 
+	CLINICA(4, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
+
+	CONDOMINIO(5, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
+
+	ADVOCACIA(6, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
+
+	OUTROS(7, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
+
 	/** The unknown. */
-	UNKNOWN(4, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
+	UNKNOWN(8, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
 
 	/** The code. */
 	private Integer code;
@@ -33,7 +41,7 @@ public enum EntidadeTypeEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * The Constructor.
-	 * 
+	 *
 	 * @param value the value
 	 * @param labelKeyParam the label key param
 	 */
@@ -45,7 +53,7 @@ public enum EntidadeTypeEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * Gets the value.
-	 * 
+	 *
 	 * @return the value
 	 */
 	@Override
@@ -56,7 +64,7 @@ public enum EntidadeTypeEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * Enum for value.
-	 * 
+	 *
 	 * @param value the value
 	 * @return the process status enum
 	 */
@@ -75,7 +83,7 @@ public enum EntidadeTypeEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * Gets the valid values.
-	 * 
+	 *
 	 * @return the valid values
 	 */
 	public static String getValidValues()

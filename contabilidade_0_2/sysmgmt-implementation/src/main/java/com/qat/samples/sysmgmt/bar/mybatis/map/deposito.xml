@@ -20,7 +20,7 @@
     [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,-->
 
-  <resultMap id="depositoResult" type="Deposito" extends="EntidadeMap.entidadeResult">
+  <resultMap id="depositoResult" type="Deposito" extends="EntidadeMap.EntidadeResult">
 
   </resultMap>
 
@@ -40,7 +40,7 @@
   <select id="fetchDepositoRowCount" parameterType="DepositoInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM entidade
-        where entidadeEnum = 3
+        where entidadeEnumValue = 3
 
   </select>
 
@@ -69,7 +69,7 @@
     						<include refid="allDepositoColumns" />,
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM entidade b
-						where b.entidadeEnum = 3
+						where b.entidadeEnumValue = 3
 					<if test="parentId != null">
 						AND b.id = #{id}
 					</if>
@@ -99,7 +99,7 @@
     			   SELECT
 					b.id,	<include refid="allDepositoColumns" />
  				   FROM entidade b
-					where b.emprId = #{id} and entidadeEnum = 3
+					where b.emprId = #{id} and entidadeEnumValue = 3
   </select>
 
 

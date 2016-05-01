@@ -7,8 +7,13 @@ var sReturn = "";
 	    case "Long":
 	        sReturn = "bigint"
 	        break;
+	    case "Double":
+	        sReturn = "float"
+	        break;
 	    default:
-	        sReturn = stipo.toLowerCase();
+	    			sReturn = stipo.toLowerCase();
+
+
 	        break;
 	}
 	return sReturn;

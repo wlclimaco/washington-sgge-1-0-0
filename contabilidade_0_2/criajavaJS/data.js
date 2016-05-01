@@ -22,8 +22,8 @@ function EntidadeModel() {
     a.push({field :{campo : "processId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "entidadeId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "emprId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "entidadeEnumValue", tipo :"EntidadeEnum",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-    a.push({field :{campo : "regime"   , tipo:"Regime",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "entidadeEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "regime"   , tipo:"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
    	a.push({field :{campo : "documentos" ,tipo:"List<Documento>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "enderecos", tipo:"List<Endereco>" ,requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "emails", tipo:"List<Email>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -420,13 +420,8 @@ function RegimeModel() {
 
 	var a = [];
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-   /* a.push({field :{campo : "nome" column="nome" />
-    a.push({field :{campo : "descricao" column="descricao" />
-	a.push({field :{campo : "createUser" column="create_user"/>
-	a.push({field :{campo : "createDataUTC" column="create_date"/>
-	a.push({field :{campo : "modifyUser" column="modify_user"/>
-	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
-	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});*/
+    a.push({field :{campo : "nome" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "descricao" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
@@ -435,6 +430,16 @@ function CfopModel() {
 
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "cfop", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "natureza", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "simplificado", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "cfopTypeEnum", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "icms", tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "icmsReduzido", tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "margemAgregadaST", tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "cstPrincipal", tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "classFiscal", tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "observacao", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
@@ -913,7 +918,7 @@ oProjet.push({
 })
 
 oProjet.push({
-	classes :[{classe : "empresa",model : EmpresaModel()},{classe :"filial",model : EmpresaModel()},{classe :"deposito",model : EmpresaModel()},{classe :"usuario",model : UsuarioModel()}],
+	classes :[{classe : "Empresa",model : EmpresaModel()},{classe :"Filial",model : FilialModel()},{classe :"Deposito",model : DepositoModel()},{classe :"Usuario",model : UsuarioModel()},{classe :"Condominio",model : FilialModel()},{classe :"Clinica",model : FilialModel()},{classe :"Advocacia",model : FilialModel()}],
 	interfaces : "Empresa",
 	local : "Empresa"
 })

@@ -20,11 +20,11 @@
     <result property="parentId" column="parentId"/>
     <result property="tabelaEnumValue" column="tabelaEnumValue"/>
     <result property="processId" column="processId"/>
-    <result property="idCnae" column="idCnae"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<association property="idCnae"    column="idCnae" select="CnaeMap.fetchCnaeById"  />
   </resultMap>
 
   <sql id="allCnaeEmpresaColumns">
@@ -44,7 +44,7 @@ id
 #{parentId},
 #{tabelaEnumValue},
 #{processId},
-#{idCnae},
+#{idCnae.id},
 		#{createDateUTC},
 		#{createUser},
 		#{modifyDateUTC},
@@ -76,7 +76,7 @@ c.idCnae,
    FROM cnaeempresa WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllCnaeEmpresasRequest" parameterType="CnaeEmpresaInquiryRequest" resultMap="CnaeEmpresaResult">
+ <select id="fetchAllCnaeEmpresasRequest" parameterType="PagedInquiryRequest" resultMap="CnaeEmpresaResult">
 
 		SELECT <include refid="allCnaeEmpresaColumns" />
   		  FROM cnaeempresa ORDER BY id ASC
@@ -98,11 +98,10 @@ c.idCnae,
 
  <update id="updateCnaeEmpresa" parameterType="CnaeEmpresa">
    UPDATE cnaeempresa SET
-<if test="id!= null">id = #{id},</if>
 <if test="parentId!= null">parentId = #{parentId},</if>
 <if test="tabelaEnumValue!= null">tabelaEnumValue = #{tabelaEnumValue},</if>
 <if test="processId!= null">processId = #{processId},</if>
-<if test="idCnae!= null">idCnae = #{idCnae},</if>
+<if test="idCnae.id!= null">idCnae = #{idCnae.id},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

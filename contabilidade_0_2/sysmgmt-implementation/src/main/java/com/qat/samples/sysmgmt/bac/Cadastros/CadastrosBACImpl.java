@@ -199,7 +199,7 @@ public InternalResultsResponse<Cliente> fetchClienteById(FetchByIdRequest reques
 	}
 	else
 	{
-		response.getResultsList().add(getCadastrosBAR().fetchClienteById(request).getFirstResult());
+		response.getResultsList().add(getCadastrosBAR().fetchClienteById(request));
 	}
 
 	return response;
@@ -416,7 +416,7 @@ public InternalResultsResponse<Fornecedor> fetchFornecedorById(FetchByIdRequest 
 	}
 	else
 	{
-		response.getResultsList().add(getCadastrosBAR().fetchFornecedorById(request).getFirstResult());
+		response.getResultsList().add(getCadastrosBAR().fetchFornecedorById(request));
 	}
 
 	return response;
@@ -633,7 +633,7 @@ public InternalResultsResponse<Transportador> fetchTransportadorById(FetchByIdRe
 	}
 	else
 	{
-		response.getResultsList().add(getCadastrosBAR().fetchTransportadorById(request).getFirstResult());
+		response.getResultsList().add(getCadastrosBAR().fetchTransportadorById(request));
 	}
 
 	return response;
@@ -850,7 +850,7 @@ public InternalResultsResponse<Convenio> fetchConvenioById(FetchByIdRequest requ
 	}
 	else
 	{
-		response.getResultsList().add(getCadastrosBAR().fetchConvenioById(request).getFirstResult());
+		response.getResultsList().add(getCadastrosBAR().fetchConvenioById(request));
 	}
 
 	return response;
@@ -1067,7 +1067,7 @@ public InternalResultsResponse<Cidade> fetchCidadeById(FetchByIdRequest request)
 	}
 	else
 	{
-		response.getResultsList().add(getCadastrosBAR().fetchCidadeById(request).getFirstResult());
+		response.getResultsList().add(getCadastrosBAR().fetchCidadeById(request));
 	}
 
 	return response;
@@ -1284,7 +1284,7 @@ public InternalResultsResponse<Estado> fetchEstadoById(FetchByIdRequest request)
 	}
 	else
 	{
-		response.getResultsList().add(getCadastrosBAR().fetchEstadoById(request).getFirstResult());
+		response.getResultsList().add(getCadastrosBAR().fetchEstadoById(request));
 	}
 
 	return response;
@@ -1501,7 +1501,7 @@ public InternalResultsResponse<Tarefa> fetchTarefaById(FetchByIdRequest request)
 	}
 	else
 	{
-		response.getResultsList().add(getCadastrosBAR().fetchTarefaById(request).getFirstResult());
+		response.getResultsList().add(getCadastrosBAR().fetchTarefaById(request));
 	}
 
 	return response;

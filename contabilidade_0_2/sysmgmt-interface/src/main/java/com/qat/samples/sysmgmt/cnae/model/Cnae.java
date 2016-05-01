@@ -1,5 +1,7 @@
 package com.qat.samples.sysmgmt.cnae.model;
 
+import java.util.Date;
+
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -42,8 +44,12 @@ public class Cnae extends ModelCosmeDamiao
 		setModelAction(mode);
 	}
 
-	public Cnae(int i, String string) {
-		// TODO Auto-generated constructor stub
+	public Cnae(Integer id, String cnae) {
+		super();
+		this.id = id;
+		this.cnae = cnae;
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	/**

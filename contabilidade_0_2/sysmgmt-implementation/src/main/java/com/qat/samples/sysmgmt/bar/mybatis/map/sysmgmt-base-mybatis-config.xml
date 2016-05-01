@@ -32,6 +32,14 @@
   		<typeAlias alias="ClassesInquiryRequest" type="com.qat.samples.sysmgmt.dicionario.request.ClassesInquiryRequest"/>
 
 
+		<typeAlias alias="Advocacia" type="com.qat.samples.sysmgmt.advocacia.Advocacia"/>
+  		<typeAlias alias="Clinica" type="com.qat.samples.sysmgmt.clinica.model.Clinica"/>
+  		<typeAlias alias="Condominio" type="com.qat.samples.sysmgmt.condominio.model.Condominio"/>
+
+  		<typeAlias alias="AdvocaciaInquiryRequest" type="com.qat.samples.sysmgmt.advocacia.request.AdvocaciaInquiryRequest"/>
+  		<typeAlias alias="ClinicaInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.ClinicaInquiryRequest"/>
+  		<typeAlias alias="CondominioInquiryRequest" type="com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest"/>
+
 
 
   		<typeAlias alias="TabelaEnum" type="com.qat.samples.sysmgmt.util.model.TabelaEnum"/>
@@ -276,11 +284,16 @@
      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/entidade.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/cidade.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/cnae.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/cnaeEmpresa.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/classificacao.xml"/>
+
      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/deposito.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/empresa.xml"/>
-
      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/filial.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/clinica.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/condominio.xml"/>
+     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/advocacia.xml"/>
+
      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/regime.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/servico.xml"/>
      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/preco.xml"/>

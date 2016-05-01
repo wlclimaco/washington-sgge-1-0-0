@@ -30,8 +30,11 @@ public class CnaeEmpresa extends ModelCosmeDamiao
 
 	}
 
-	public CnaeEmpresa(int i, String string) {
-		// TODO Auto-generated constructor stub
+
+
+	public CnaeEmpresa(Integer id) {
+		super();
+		this.id = id;
 	}
 
 	/**

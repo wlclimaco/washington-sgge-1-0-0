@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 30/04/2016 19:44 : 33-->
+<!-- create by system gera-java version 1.0.0 01/05/2016 16:37 : 0-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -17,6 +17,8 @@
        exactly. -->
   <resultMap id="RegimeResult" type="Regime">
     <result property="id" column="id"/>
+    <result property="nome" column="nome"/>
+    <result property="descricao" column="descricao"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
@@ -25,6 +27,8 @@
 
   <sql id="allRegimeColumns">
 id
+,nome
+,descricao
 ,create_date
 ,create_user
 ,modify_date
@@ -33,6 +37,8 @@ id
 </sql>
 <sql id="allRegimeValues">
 #{id},
+#{nome},
+#{descricao},
 		#{createDateUTC},
 		#{createUser},
 		#{modifyDateUTC},
@@ -42,6 +48,8 @@ id
  <sql id="allRegimeColumnsWithQualifier">
 		c.id, c.regime_desc
 c.id,
+c.nome,
+c.descricao,
 		c.createDateUTC,
 		c.createUser,
 		c.modifyDateUTC,
@@ -83,6 +91,8 @@ c.id,
  <update id="updateRegime" parameterType="Regime">
    UPDATE regime SET
 <if test="id!= null">id = #{id},</if>
+<if test="nome!= null">nome = #{nome},</if>
+<if test="descricao!= null">descricao = #{descricao},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

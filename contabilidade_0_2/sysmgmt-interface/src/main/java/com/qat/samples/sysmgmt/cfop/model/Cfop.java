@@ -1,5 +1,7 @@
 package com.qat.samples.sysmgmt.cfop.model;
 
+import java.util.Date;
+
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -66,8 +68,13 @@ public class Cfop extends ModelCosmeDamiao
 		setModelAction(modelAction);
 	}
 
-	public Cfop(int i, String string) {
-		// TODO Auto-generated constructor stub
+	public Cfop(Integer id, String cfop) {
+		super();
+		this.id = id;
+		this.cfop = cfop;
+		setModelAction(PersistenceActionEnum.NONE);
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	public Integer getCfopTypeEnumValue()

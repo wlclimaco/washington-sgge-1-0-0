@@ -1,6 +1,13 @@
+/** create by system gera-java version 1.0.0 01/05/2016 18:42 : 57*/
 package com.qat.samples.sysmgmt.bar.Empresa;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.advocacia.Advocacia;
+import com.qat.samples.sysmgmt.advocacia.request.AdvocaciaInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.Clinica;
+import com.qat.samples.sysmgmt.clinica.model.request.ClinicaInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.Condominio;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
@@ -23,7 +30,7 @@ public interface IEmpresaBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Empresa> fetchEmpresaById(FetchByIdRequest request);
+	public Empresa fetchEmpresaById(FetchByIdRequest request);
 
 	/**
 * Insert empresa.
@@ -80,7 +87,7 @@ public interface IEmpresaBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Filial> fetchFilialById(FetchByIdRequest request);
+	public Filial fetchFilialById(FetchByIdRequest request);
 
 	/**
 * Insert filial.
@@ -137,7 +144,7 @@ public interface IEmpresaBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Deposito> fetchDepositoById(FetchByIdRequest request);
+	public Deposito fetchDepositoById(FetchByIdRequest request);
 
 	/**
 * Insert deposito.
@@ -194,7 +201,7 @@ public interface IEmpresaBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Usuario> fetchUsuarioById(FetchByIdRequest request);
+	public Usuario fetchUsuarioById(FetchByIdRequest request);
 
 	/**
 * Insert usuario.
@@ -244,5 +251,176 @@ public interface IEmpresaBAR
 * @return the internal results response
 */
 	public InternalResultsResponse<Usuario> fetchUsuariosByRequest(UsuarioInquiryRequest request);
+
+	/**
+	 * Fetch condominio by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public Condominio fetchCondominioById(FetchByIdRequest request);
+
+	/**
+* Insert condominio.
+*
+* @param condominio the condominio
+*
+* @return the internal response
+*/
+	public InternalResponse insertCondominio(Condominio condominio);
+
+	/**
+* Update condominio.
+*
+* @param condominio the condominio
+*
+* @return the internal response
+*/
+	public InternalResponse updateCondominio(Condominio condominio);
+
+	/**
+* Delete condominio.
+*
+* @param condominio the condominio
+*
+* @return the internal response
+*/
+	public InternalResponse deleteCondominioById(Condominio condominio);
+
+	/**
+* Delete all condominios.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllCondominios();
+
+	/**
+* Fetch all condominios.
+*
+* @return the list< condominio>
+*/
+	public InternalResultsResponse<Condominio> fetchAllCondominios(Condominio  condominio);
+
+	/**
+* Fetch condominios by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Condominio> fetchCondominiosByRequest(CondominioInquiryRequest request);
+
+	/**
+	 * Fetch clinica by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public Clinica fetchClinicaById(FetchByIdRequest request);
+
+	/**
+* Insert clinica.
+*
+* @param clinica the clinica
+*
+* @return the internal response
+*/
+	public InternalResponse insertClinica(Clinica clinica);
+
+	/**
+* Update clinica.
+*
+* @param clinica the clinica
+*
+* @return the internal response
+*/
+	public InternalResponse updateClinica(Clinica clinica);
+
+	/**
+* Delete clinica.
+*
+* @param clinica the clinica
+*
+* @return the internal response
+*/
+	public InternalResponse deleteClinicaById(Clinica clinica);
+
+	/**
+* Delete all clinicas.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllClinicas();
+
+	/**
+* Fetch all clinicas.
+*
+* @return the list< clinica>
+*/
+	public InternalResultsResponse<Clinica> fetchAllClinicas(Clinica  clinica);
+
+	/**
+* Fetch clinicas by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Clinica> fetchClinicasByRequest(ClinicaInquiryRequest request);
+
+	/**
+	 * Fetch advocacia by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public Advocacia fetchAdvocaciaById(FetchByIdRequest request);
+
+	/**
+* Insert advocacia.
+*
+* @param advocacia the advocacia
+*
+* @return the internal response
+*/
+	public InternalResponse insertAdvocacia(Advocacia advocacia);
+
+	/**
+* Update advocacia.
+*
+* @param advocacia the advocacia
+*
+* @return the internal response
+*/
+	public InternalResponse updateAdvocacia(Advocacia advocacia);
+
+	/**
+* Delete advocacia.
+*
+* @param advocacia the advocacia
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAdvocaciaById(Advocacia advocacia);
+
+	/**
+* Delete all advocacias.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllAdvocacias();
+
+	/**
+* Fetch all advocacias.
+*
+* @return the list< advocacia>
+*/
+	public InternalResultsResponse<Advocacia> fetchAllAdvocacias(Advocacia  advocacia);
+
+	/**
+* Fetch advocacias by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Advocacia> fetchAdvocaciasByRequest(AdvocaciaInquiryRequest request);
 
 }

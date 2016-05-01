@@ -20,8 +20,8 @@
     [modify_date]  [int] NOT NULL DEFAULT (datediff(second,'1/1/1970',getutcdate())),
     [modify_user]  [varchar](50) NULL,-->
 
-  <resultMap id="filialResult" type="Filial" extends="EntidadeMap.entidadeResult">
-	<collection property="depositoList" column="emprId" select="DepositoMap.fetchAllDepositoByEntidade"/>
+  <resultMap id="filialResult" type="Filial" extends="EntidadeMap.EntidadeResult">
+	<!--<collection property="depositoList" column="emprId" select="DepositoMap.fetchAllDepositoByEntidade"/>-->
   </resultMap>
 
 
@@ -41,7 +41,7 @@
   <select id="fetchFilialRowCount" parameterType="FilialInquiryRequest" resultType="Integer">
      SELECT COUNT(id) AS RECORD_COUNT
         FROM entidade
-        where entidadeEnum = 2
+        where entidadeEnumValue = 2
 
   </select>
 
@@ -69,7 +69,7 @@
     			   SELECT
 					id,	<include refid="allFilialColumns" />
  				   FROM entidade b
-					where entidadeId = #{id} and entidadeEnum = 2
+					where entidadeId = #{id} and entidadeEnumValue = 2
   </select>
 
 
@@ -79,17 +79,11 @@
     						<include refid="allFilialColumns" />,
     						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
     				FROM entidade b
-						where entidadeEnum = 2
-					<if test="parentId != null">
-						AND id = #{id}
+						where entidadeEnumValue = 2
+					<if test="criteria.emprId != null">
+						AND emprId = #{id}
 					</if>
-					 <if test="statusList != null and !statusList.isEmpty()">
-					     AND PGSI_status IN
-					     <foreach item="item" index="index" collection="statusList"
-						     open="(" separator="," close=")">
-						   	 #{item.value}
-						 </foreach>
-					 </if>
+
     			) LIST
 				<choose>
 					<when test="pageSize != null and pageSize > 0">
@@ -105,6 +99,12 @@
 				</choose>
   </select>
 
+<delete id="deleteFilialById" parameterType="Filial">
+  DELETE FROM entidade WHERE id = #{id}
+ </delete>
 
+ <delete id="deleteAllFilials">
+	DELETE FROM entidade
+  </delete>
 
 </mapper>

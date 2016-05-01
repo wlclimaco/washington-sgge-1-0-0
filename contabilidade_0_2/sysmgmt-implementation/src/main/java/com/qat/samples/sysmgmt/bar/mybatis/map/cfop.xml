@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 30/04/2016 19:44 : 33-->
+<!-- create by system gera-java version 1.0.0 01/05/2016 16:19 : 49-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -17,6 +17,16 @@
        exactly. -->
   <resultMap id="CfopResult" type="Cfop">
     <result property="id" column="id"/>
+    <result property="cfop" column="cfop"/>
+    <result property="natureza" column="natureza"/>
+    <result property="simplificado" column="simplificado"/>
+    <result property="cfopTypeEnumValue" column="cfopTypeEnum"/>
+    <result property="icms" column="icms"/>
+    <result property="icmsReduzido" column="icmsReduzido"/>
+    <result property="margemAgregadaST" column="margemAgregadaST"/>
+    <result property="cstPrincipal" column="cstPrincipal"/>
+    <result property="classFiscal" column="classFiscal"/>
+    <result property="observacao" column="observacao"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
@@ -25,6 +35,16 @@
 
   <sql id="allCfopColumns">
 id
+,cfop
+,natureza
+,simplificado
+,cfopTypeEnum
+,icms
+,icmsReduzido
+,margemAgregadaST
+,cstPrincipal
+,classFiscal
+,observacao
 ,create_date
 ,create_user
 ,modify_date
@@ -33,6 +53,16 @@ id
 </sql>
 <sql id="allCfopValues">
 #{id},
+#{cfop},
+#{natureza},
+#{simplificado},
+#{cfopTypeEnumValue},
+#{icms},
+#{icmsReduzido},
+#{margemAgregadaST},
+#{cstPrincipal},
+#{classFiscal},
+#{observacao},
 		#{createDateUTC},
 		#{createUser},
 		#{modifyDateUTC},
@@ -42,6 +72,16 @@ id
  <sql id="allCfopColumnsWithQualifier">
 		c.id, c.cfop_desc
 c.id,
+c.cfop,
+c.natureza,
+c.simplificado,
+c.cfopTypeEnum,
+c.icms,
+c.icmsReduzido,
+c.margemAgregadaST,
+c.cstPrincipal,
+c.classFiscal,
+c.observacao,
 		c.createDateUTC,
 		c.createUser,
 		c.modifyDateUTC,
@@ -82,7 +122,16 @@ c.id,
 
  <update id="updateCfop" parameterType="Cfop">
    UPDATE cfop SET
-<if test="id!= null">id = #{id},</if>
+<if test="cfop!= null">cfop = #{cfop},</if>
+<if test="natureza!= null">natureza = #{natureza},</if>
+<if test="simplificado!= null">simplificado = #{simplificado},</if>
+<if test="cfopTypeEnumValue!= null">cfopTypeEnum = #{cfopTypeEnumValue},</if>
+<if test="icms!= null">icms = #{icms},</if>
+<if test="icmsReduzido!= null">icmsReduzido = #{icmsReduzido},</if>
+<if test="margemAgregadaST!= null">margemAgregadaST = #{margemAgregadaST},</if>
+<if test="cstPrincipal!= null">cstPrincipal = #{cstPrincipal},</if>
+<if test="classFiscal!= null">classFiscal = #{classFiscal},</if>
+<if test="observacao!= null">observacao = #{observacao},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE
