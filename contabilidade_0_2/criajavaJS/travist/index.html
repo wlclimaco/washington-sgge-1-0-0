@@ -212,11 +212,13 @@
 						<div class="panel-body">
 							<div class="checkbox">				 
 								<label>
-									<input id="b-create" type="checkbox" /> Create
+									<input id="b-create" type="checkbox" /> Create  
+									<input id="text-b-create" checked = "true" type="checkbox" /> um Arquivo só? 									
 								</label>
-								<input type="text" class="" id="text-b-insert" placeholder="Quantidade"/>
+								
 								<label>			
-									<input id="b-insert" type="checkbox" /> Insert
+									<input id="b-insert" type="checkbox" /> Insert 
+									<input type="text" class="" id="text-b-insert" placeholder="Quantidade"/>
 								</label>
 								<label>
 									<input id="b-update" type="checkbox" /> Update
@@ -707,114 +709,132 @@ $('#checkeds').append(imputs);
         for(var i = 0;i<oProjet.length;i++){
 
 			if($('#_'+oProjet[i].interfaces).prop('checked')){
-			if($('#BAC').prop('checked')){
-			
-				$("div#tabs").addTab(oProjet[i].interfaces + "BAC",bac(oProjet[i].classes,oProjet[i].local));
-			}
-			if($('#BACIMPL').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces + "BACImpl",bacImpl(oProjet[i].classes,oProjet[i].interfaces));
-			}
-			if($('#BAR').prop('checked')){
-		
-				$("div#tabs").addTab(oProjet[i].interfaces + "BAR",as(oProjet[i].classes,oProjet[i].local));
-			}
-			if($('#BARIMPL').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces + "BARImpl",BarImpl(oProjet[i].classes,oProjet[i].interfaces));
-			}
-			if($('#BARDIMPL').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces + "BARDImpl",BarImpl(oProjet[i].classes,oProjet[i].interfaces));
-			}
-			if($('#XML').prop('checked')){
-			//debugger
-				for (var x = 0;x< oProjet[i].classes.length;x++){
-					$("div#tabs").addTab(oProjet[i].classes[x].classe,implXML(oProjet[i].classes[x].model,oProjet[i].classes[x].classe));
-				}
-			}	
-			if($('#Model').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces,model(oProjet[i].classes,oProjet[i].interfaces));
-			}	
-			if($('#Request').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces,requestInquery(oProjet[i].classes,oProjet[i].interfaces));
-				$("div#tabs").addTab(oProjet[i].interfaces,requestmantence(oProjet[i].classes,oProjet[i].interfaces));
-			}	
-			if($('#Response').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces,response(oProjet[i].classes,oProjet[i].interfaces));
-			}	
-			if($('#Criteria').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces,criteria(oProjet[i].classes,oProjet[i].interfaces));
-			}	
-			if($('#WS').prop('checked')){
-				$("div#tabs").addTab('I'+oProjet[i].interfaces+'_WS',war_ws(oProjet[i].classes,oProjet[i].interfaces));
-			}	
-			if($('#WSImpl').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces+'Impl_ws',war_WSImpl(oProjet[i].classes,oProjet[i].interfaces));
-			}	
-			if($('#jms-WS').prop('checked')){
-				$("div#tabs").addTab('I'+oProjet[i].interfaces+'_JMS',jms_WS(oProjet[i].classes,oProjet[i].interfaces));
-			}	
-			if($('#jsm-WSImpl').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces+'Impl_JMS',jms_WsImpl(oProjet[i].classes,oProjet[i].interfaces));
-			}	
-			
-			if($('#BACIMPLTest').prop('checked')){
-
-				$("div#tabs").addTab(oProjet[i].interfaces,bacImplTest(oProjet[i].classes,oProjet[i].interfaces));
-			}	
-			if($('#BARIMPLTest').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces,barImplTest(oProjet[i].classes,oProjet[i].interfaces));
-			}	
-			if($('#ControllerTest').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces,ControllerTest(oProjet[i].classes,oProjet[i].interfaces));
-			}	
-			if($('#JMSWSClientTest').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces,jms_WsImplTestClient(oProjet[i].classes,oProjet[i].interfaces));
-			}	
-			if($('#JMSWSImplTest').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces,jms_WsImplTestServer(oProjet[i].classes,oProjet[i].interfaces));
-			}	
-			if($('#WSImplTest').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces,war_WSImplTest(oProjet[i].classes,oProjet[i].interfaces));
-			}	
-			
-			if($('#Controller-java').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces,controller(oProjet[i].classes,oProjet[i].interfaces));
-			}	
-			if($('#ViewTable1').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces,modelTable1(oProjet[i].classes,oProjet[i].interfaces));
-			}	
-			if($('#ViewTable2').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces,modelTable2(oProjet[i].classes,oProjet[i].interfaces));
-			}	
-			if($('#Controller-js').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces,Controller_js(oProjet[i].classes,oProjet[i].interfaces));
-			}	
-			if($('#view-Form').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces,Form_insert(oProjet[i].classes,oProjet[i].interfaces));
-				$("div#tabs").addTab(oProjet[i].interfaces,Form_Delete(oProjet[i].classes,oProjet[i].interfaces));
-				$("div#tabs").addTab(oProjet[i].interfaces,Form_Update(oProjet[i].classes,oProjet[i].interfaces));
-			}	
-			if($('#view-main').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces,viewMain(oProjet[i].classes,oProjet[i].interfaces));
-			}	
-			if($('#domain').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces,domain(oProjet[i].classes,oProjet[i].interfaces));
-			}	
-			if($('#b-create').prop('checked')){
-				for (var x = 0;x < oProjet[i].classes.length;x++){
-	
-					$("div#tabs").addTab(oProjet[i].classes[x].classe,b_Table(oProjet[i].classes[x].classe,oProjet[i].classes[x].model));
-				}
+				if($('#BAC').prop('checked')){
 				
-			}	
-			if($('#b-insert').prop('checked')){
-				for (var x = 0;x < oProjet[i].classes.length;x++){
-	
-					$("div#tabs").addTab(oProjet[i].classes[x].classe,b_Insert(oProjet[i].classes[x].classe,oProjet[i].classes[x].model,$("#text-b-insert").val()));
+					$("div#tabs").addTab(oProjet[i].interfaces + "BAC",bac(oProjet[i].classes,oProjet[i].local));
 				}
-			}	
-			if($('#b-update').prop('checked')){
-				$("div#tabs").addTab(oProjet[i].interfaces,domain(oProjet[i].classes,oProjet[i].interfaces));
-			}	
+				if($('#BACIMPL').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces + "BACImpl",bacImpl(oProjet[i].classes,oProjet[i].interfaces));
+				}
+				if($('#BAR').prop('checked')){
+			
+					$("div#tabs").addTab(oProjet[i].interfaces + "BAR",as(oProjet[i].classes,oProjet[i].local));
+				}
+				if($('#BARIMPL').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces + "BARImpl",BarImpl(oProjet[i].classes,oProjet[i].interfaces));
+				}
+				if($('#BARDIMPL').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces + "BARDImpl",BarImpl(oProjet[i].classes,oProjet[i].interfaces));
+				}
+				if($('#XML').prop('checked')){
+				//debugger
+					for (var x = 0;x< oProjet[i].classes.length;x++){
+						$("div#tabs").addTab(oProjet[i].classes[x].classe,implXML(oProjet[i].classes[x].model,oProjet[i].classes[x].classe));
+					}
+				}	
+				if($('#Model').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces,model(oProjet[i].classes,oProjet[i].interfaces));
+				}	
+				if($('#Request').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces,requestInquery(oProjet[i].classes,oProjet[i].interfaces));
+					$("div#tabs").addTab(oProjet[i].interfaces,requestmantence(oProjet[i].classes,oProjet[i].interfaces));
+				}	
+				if($('#Response').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces,response(oProjet[i].classes,oProjet[i].interfaces));
+				}	
+				if($('#Criteria').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces,criteria(oProjet[i].classes,oProjet[i].interfaces));
+				}	
+				if($('#WS').prop('checked')){
+					$("div#tabs").addTab('I'+oProjet[i].interfaces+'_WS',war_ws(oProjet[i].classes,oProjet[i].interfaces));
+				}	
+				if($('#WSImpl').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces+'Impl_ws',war_WSImpl(oProjet[i].classes,oProjet[i].interfaces));
+				}	
+				if($('#jms-WS').prop('checked')){
+					$("div#tabs").addTab('I'+oProjet[i].interfaces+'_JMS',jms_WS(oProjet[i].classes,oProjet[i].interfaces));
+				}	
+				if($('#jsm-WSImpl').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces+'Impl_JMS',jms_WsImpl(oProjet[i].classes,oProjet[i].interfaces));
+				}	
+				
+				if($('#BACIMPLTest').prop('checked')){
+
+					$("div#tabs").addTab(oProjet[i].interfaces,bacImplTest(oProjet[i].classes,oProjet[i].interfaces));
+				}	
+				if($('#BARIMPLTest').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces,barImplTest(oProjet[i].classes,oProjet[i].interfaces));
+				}	
+				if($('#ControllerTest').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces,ControllerTest(oProjet[i].classes,oProjet[i].interfaces));
+				}	
+				if($('#JMSWSClientTest').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces,jms_WsImplTestClient(oProjet[i].classes,oProjet[i].interfaces));
+				}	
+				if($('#JMSWSImplTest').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces,jms_WsImplTestServer(oProjet[i].classes,oProjet[i].interfaces));
+				}	
+				if($('#WSImplTest').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces,war_WSImplTest(oProjet[i].classes,oProjet[i].interfaces));
+				}	
+				
+				if($('#Controller-java').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces,controller(oProjet[i].classes,oProjet[i].interfaces));
+				}	
+				if($('#ViewTable1').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces,modelTable1(oProjet[i].classes,oProjet[i].interfaces));
+				}	
+				if($('#ViewTable2').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces,modelTable2(oProjet[i].classes,oProjet[i].interfaces));
+				}	
+				if($('#Controller-js').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces,Controller_js(oProjet[i].classes,oProjet[i].interfaces));
+				}	
+				if($('#view-Form').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces,Form_insert(oProjet[i].classes,oProjet[i].interfaces));
+					$("div#tabs").addTab(oProjet[i].interfaces,Form_Delete(oProjet[i].classes,oProjet[i].interfaces));
+					$("div#tabs").addTab(oProjet[i].interfaces,Form_Update(oProjet[i].classes,oProjet[i].interfaces));
+				}	
+				if($('#view-main').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces,viewMain(oProjet[i].classes,oProjet[i].interfaces));
+				}	
+				if($('#domain').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces,domain(oProjet[i].classes,oProjet[i].interfaces));
+				}	
+				if($('#b-create').prop('checked')){
+					if($('#text-b-create').prop('checked')){
+						var sqlJ = "";
+						for(var ii = 0;ii<oProjet.length;ii++){
+							if($('#_'+oProjet[ii].interfaces).prop('checked')){
+								for (var x = 0;x < oProjet[ii].classes.length;x++){
+									sqlJ = sqlJ + b_Table(oProjet[i].classes[x].classe,oProjet[i].classes[x].model);
+								}
+							}
+						}
+						$("div#tabs").addTab("Data",sqlJ);
+					}else{
+						for (var x = 0;x < oProjet[i].classes.length;x++){
+							$("div#tabs").addTab(oProjet[i].classes[x].classe,b_Table(oProjet[i].classes[x].classe,oProjet[i].classes[x].model));
+						}
+					}				
+				}	
+				if($('#b-insert').prop('checked')){
+			
+					var sqlJ = "";
+					for (var x = 0;x < oProjet[i].classes.length;x++){
+						sqlJ = b_Insert(oProjet[i].classes[x].classe,oProjet[i].classes[x].model,$("#text-b-insert").val());
+						for (var xx = 0;xx < oProjet[i].classes[x].dependencias.length;xx++){
+							sqlJ = sqlJ + b_Insert(oProjet[i].classes[x].dependencias[xx].dependencia,oProjet[i].classes[x].dependencias[xx].campos,$("#text-b-insert").val());
+						}	
+					
+
+					$("div#tabs").addTab(oProjet[i].classes[x].classe,sqlJ);
+					}
+					
+				}	
+				if($('#b-update').prop('checked')){
+					$("div#tabs").addTab(oProjet[i].interfaces,domain(oProjet[i].classes,oProjet[i].interfaces));
+				}	
 			}
 		}
 		$("#tabs").tabs();

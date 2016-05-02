@@ -22,8 +22,8 @@ function EntidadeModel() {
     a.push({field :{campo : "processId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "entidadeId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "emprId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "entidadeEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-    a.push({field :{campo : "regime"   , tipo:"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "entidadeEnumValue", tipo :"EntidadeEnum",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "regime"   , tipo:"Regime",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
    	a.push({field :{campo : "documentos" ,tipo:"List<Documento>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "enderecos", tipo:"List<Endereco>" ,requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "emails", tipo:"List<Email>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -420,8 +420,13 @@ function RegimeModel() {
 
 	var a = [];
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-    a.push({field :{campo : "nome" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-    a.push({field :{campo : "descricao" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   /* a.push({field :{campo : "nome" column="nome" />
+    a.push({field :{campo : "descricao" column="descricao" />
+	a.push({field :{campo : "createUser" column="create_user"/>
+	a.push({field :{campo : "createDataUTC" column="create_date"/>
+	a.push({field :{campo : "modifyUser" column="modify_user"/>
+	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});*/
 	return a;
 }
 
@@ -430,16 +435,6 @@ function CfopModel() {
 
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "cfop", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "natureza", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "simplificado", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "cfopTypeEnum", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "icms", tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "icmsReduzido", tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "margemAgregadaST", tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "cstPrincipal", tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "classFiscal", tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "observacao", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
@@ -862,6 +857,181 @@ function FilialModel() {
 	a.push({field :{campo : "depositoList", tipo :"Deposito",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
+function AdvocaciaModel() {
+
+	var a = [];
+	a = EntidadeModel();
+	return a;
+}
+
+function ClinicaModel() {
+
+	var a = [];
+	a = EntidadeModel();
+	return a;
+}
+
+function CondominioModel() {
+
+	var a = [];
+	a = EntidadeModel();
+	return a;
+}
+function dependenciaBase(){
+	var a = []
+	
+	a.push({dependencia :"Endereco" 	,campos : EnderecoModel()});
+	a.push({dependencia :"Email",		 campos : EmailModel()});
+	a.push({dependencia :"Documentos"	,campos : DocumentosModel()});
+	a.push({dependencia :"Telefone"		,campos : TelefoneModel()});
+	a.push({dependencia :"Status"		,campos : StatusModel()});
+	a.push({dependencia :"Note"			,campos : NoteModel()});
+	
+	return a
+}
+
+function dependenciaEntidade(){
+	var a = [];
+	a = dependenciaBase();
+	a.push({dependencia :"Entidade",campos : EntidadeModel()});
+	a.push({dependencia :"Regime",campos : RegimeModel()});
+	a.push({dependencia :"Cnae",campos : EnderecoModel()});
+	a.push({dependencia :"CnaeEmpresa",campos : EnderecoModel()});
+	return a
+}
+
+function dependenciaEmpresa(){
+	var a = [];
+	a = dependenciaEntidade();
+	a.push({dependencia :"Socios",campos : EnderecoModel()});
+	a.push({dependencia :"Plano",campos :  PlanoModel()});
+	a.push({dependencia :"Tarefa",campos : TarefaModel()});
+	a.push({dependencia :"Filial",campos : EnderecoModel()});
+	return a
+}
+
+function dependenciaAdvocacia(){
+	var a = [];
+	a = dependenciaEntidade();
+	a.push({dependencia :"Socios",campos : EnderecoModel()});
+	a.push({dependencia :"Plano",campos :  PlanoModel()});
+	a.push({dependencia :"Tarefa",campos : TarefaModel()});
+	a.push({dependencia :"Filial",campos : EnderecoModel()});
+	return a
+}
+
+function dependenciaClinica(){
+	var a = [];
+	a = dependenciaEntidade();
+	a.push({dependencia :"Socios",campos : EnderecoModel()});
+	a.push({dependencia :"Plano",campos :  PlanoModel()});
+	a.push({dependencia :"Tarefa",campos : TarefaModel()});
+	a.push({dependencia :"Filial",campos : EnderecoModel()});
+	return a
+}
+
+function dependenciaCondominio(){
+	var a = [];
+	a = dependenciaEntidade();
+	a.push({dependencia :"Socios",campos : EnderecoModel()});
+	a.push({dependencia :"Plano",campos :  PlanoModel()});
+	a.push({dependencia :"Tarefa",campos : TarefaModel()});
+	a.push({dependencia :"Filial",campos : EnderecoModel()});
+	return a
+}
+
+function dependenciaUsuario(){
+	var a = [];
+	a.push({dependencia :"Empresa",campos : EnderecoModel()});
+	return a
+	
+}
+
+function dependenciaFilial(){
+	var a = [];
+	a = dependenciaEntidade();
+	a.push({dependencia :"Deposito",campos : EnderecoModel()});
+	return a
+}
+
+function dependenciaDeposito(){
+	var a = [];
+	a = dependenciaEntidade();
+	return a
+}
+
+function dependenciaCondominio(){
+	var a = [];
+	a = dependenciaEntidade();
+	return a
+}
+
+function dependenciaClinica(){
+	var a = [];
+	a = dependenciaEntidade();
+	return a
+}
+
+
+function dependenciaPessoa(){
+	var a = [];
+	a = dependenciaBase();
+	return a
+}
+
+function dependenciaAdvogado(){
+	var a = [];
+	a = dependenciaBase();
+	return a
+}
+
+function dependenciaCliente(){
+	var a = [];
+	a = dependenciaBase();
+	return a
+}
+
+function dependenciaFornecedor(){
+	var a = [];
+	a = dependenciaBase();
+	return a
+}
+
+function dependenciaTransportador(){
+	var a = [];
+	a = dependenciaBase();
+	return a
+}
+
+function dependenciaMedico(){
+	var a = [];
+	a = dependenciaBase();
+	return a
+}
+
+function dependenciaPaciente(){
+	var a = [];
+	a = dependenciaBase();
+	return a
+}
+
+function dependenciaSindico(){
+	var a = [];
+	a = dependenciaBase();
+	return a
+}
+
+function dependenciaInquilino(){
+	var a = [];
+	a = dependenciaBase();
+	return a
+}
+
+function dependenciaFuncionario(){
+	var a = [];
+	a = dependenciaBase();
+	return a
+}
 
 function EmpresaModel() {
 
@@ -880,21 +1050,27 @@ function EmpresaModel() {
 dataModel = function (){
 
 	var oProjet = [];
+	
+oProjet.push({
+	classes :[{classe : "advogado",model : PessoaModel()},{classe : "Cliente",model : PessoaModel(),dependencias : dependenciaCliente()},{classe :"Fornecedor",model : PessoaModel(),dependencias : dependenciaFornecedor()},{classe :"Transportador",model : PessoaModel(),dependencias : dependenciaTransportador()},{classe : "Medico",model : PessoaModel(),dependencias : dependenciaMedico()},{classe :"Paciente",model : PessoaModel(),dependencias : dependenciaPaciente()},{classe : "Sindico",model : PessoaModel(),dependencias : dependenciaSindico()},{classe :"Inquilino",model : PessoaModel(),dependencias : dependenciaInquilino()},{classe : "Funcionario",model : PessoaModel(),dependencias : dependenciaFuncionario()}],
+	interfaces : "Pessoa",
+	local : "Pessoa"
+})
 
 oProjet.push({
-	classes :[{classe : "advogado",model : PessoaModel()},{classe : "audiencia",model : AuditoriaModel()},{classe :"Processo" ,model :ProcessModel()}],
+	classes :[{classe : "audiencia",model : AuditoriaModel()},{classe :"Processo" ,model :ProcessModel()}],
 	interfaces : "Advogado",
 	local : "Advocacia"
 })
 
 oProjet.push({
-	classes :[{classe : "Cliente",model : PessoaModel()},{classe :"Fornecedor",model : PessoaModel()},{classe :"Transportador",model : PessoaModel()},{classe :"Convenio",model : ConvenioModel()},{classe :"Cidade",model : CidadeModel()},{classe :"Estado",model : EstadoModel()},{classe :"Tarefa",model : TarefaModel()}],
+	classes :[{classe :"Convenio",model : ConvenioModel()},{classe :"Cidade",model : CidadeModel()},{classe :"Estado",model : EstadoModel()},{classe :"Tarefa",model : TarefaModel()}],
 	interfaces : "Cadastros",
 	local : "Cadastros"
 })
 
 oProjet.push({
-	classes :[{classe : "Medico",model : PessoaModel()},{classe :"Paciente",model : PessoaModel()},{classe :"Consulta",model : ConsultaModel()},{classe :"Exame",model : ExameModel()}],
+	classes :[{classe :"Consulta",model : ConsultaModel()},{classe :"Exame",model : ExameModel()}],
 	interfaces : "Clinica",
 	local : "Clinica"
 })
@@ -906,19 +1082,19 @@ oProjet.push({
 })
 
 oProjet.push({
-	classes :[{classe : "Sindico",model : PessoaModel()},{classe :"Inquilino",model : PessoaModel()},{classe :"Avisos",model : AvisosModel()}],
+	classes :[{classe :"Avisos",model : AvisosModel()}],
 	interfaces : "Condominio",
 	local : "Condominio"
 })
 
 oProjet.push({
-	classes :[{classe : "Funcionario",model : PessoaModel()},{classe :"Eventos",model : EventosModel()},{classe :"Beneficios",model : BeneficiosModel()},{classe :"HoraFunc",model : HoraFuncModel()}],
+	classes :[{classe :"Eventos",model : EventosModel()},{classe :"Beneficios",model : BeneficiosModel()},{classe :"HoraFunc",model : HoraFuncModel()}],
 	interfaces : "Dp",
 	local :"Dp"
 })
 
 oProjet.push({
-	classes :[{classe : "Empresa",model : EmpresaModel()},{classe :"Filial",model : FilialModel()},{classe :"Deposito",model : DepositoModel()},{classe :"Usuario",model : UsuarioModel()},{classe :"Condominio",model : FilialModel()},{classe :"Clinica",model : FilialModel()},{classe :"Advocacia",model : FilialModel()}],
+	classes :[{classe : "Empresa",model : EmpresaModel(),dependencias : dependenciaEmpresa()},{classe :"Filial",model : EmpresaModel(),dependencias : dependenciaFilial()},{classe :"Deposito",model : EmpresaModel(),dependencias : dependenciaDeposito()},{classe :"Usuario",model : UsuarioModel(),dependencias : dependenciaUsuario()},{classe :"Advocacia",model : AdvocaciaModel(),dependencias : dependenciaAdvocacia()},{classe :"Clinica",model : ClinicaModel(),dependencias : dependenciaClinica()},{classe :"Condominio",model : CondominioModel(),dependencias : dependenciaCondominio()}],
 	interfaces : "Empresa",
 	local : "Empresa"
 })
