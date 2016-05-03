@@ -16,9 +16,9 @@
 			</list>
 		</property>
 	</bean>
-	
-	<bean id="ProcedureValidator" class="com.qat.samples.sysmgmt.validation.ProcedureValidator" />	
-		
+
+	<bean id="ProcedureValidator" class="com.qat.samples.sysmgmt.validation.ProcedureValidator" />
+
 	<bean id="procedureValidationController" class="com.qat.framework.validation.ValidationController">
 		<property name="validators">
 			<list>
@@ -26,7 +26,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="drugValidationController" class="com.qat.framework.validation.ValidationController">
 		<property name="validators">
 			<list>

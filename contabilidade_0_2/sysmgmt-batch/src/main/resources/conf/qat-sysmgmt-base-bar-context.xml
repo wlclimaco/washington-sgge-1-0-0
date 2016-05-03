@@ -56,4 +56,20 @@
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 	</bean>
 
+	<bean id="cadastrosBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Cadastros.CadastrosBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="fiscalBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Fiscal.FiscalBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="empresaBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Empresa.EmpresaBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="pessoaBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Pessoa.PessoaBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
 </beans>
