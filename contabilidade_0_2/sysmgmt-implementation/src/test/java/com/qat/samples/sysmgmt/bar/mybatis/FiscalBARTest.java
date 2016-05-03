@@ -90,18 +90,18 @@ public IFiscalBAR getFiscalBAR()
 		Assert.assertEquals(response.size(), 0);
 	}
 
-	@Test
-	public void testUpdateRegime()
-	{
-		Regime regime = new Regime(1, "NATIVE INSERT UPDATE");
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
-		Regime regimeResponse = getFiscalBAR().fetchRegimeById(request);
-		Assert.assertEquals(regimeResponse.getNome(), "nome_1");
-		getFiscalBAR().updateRegime(regime);
-		regimeResponse = getFiscalBAR().fetchRegimeById(request);
-		Assert.assertEquals(regimeResponse.getNome(), "NATIVE INSERT UPDATE");
-	}
+//	@Test
+//	public void testUpdateRegime()
+//	{
+//		Regime regime = new Regime(1, "NATIVE INSERT UPDATE");
+//		FetchByIdRequest request = new FetchByIdRequest();
+//		request.setFetchId(1);
+//		Regime regimeResponse = getFiscalBAR().fetchRegimeById(request);
+//		Assert.assertEquals(regimeResponse.getNome(), "nome_1");
+//		getFiscalBAR().updateRegime(regime);
+//		regimeResponse = getFiscalBAR().fetchRegimeById(request);
+//		Assert.assertEquals(regimeResponse.getNome(), "NATIVE INSERT UPDATE");
+//	}
 
 	@Test
 	public void testFetchRegimesByRequest() throws Exception

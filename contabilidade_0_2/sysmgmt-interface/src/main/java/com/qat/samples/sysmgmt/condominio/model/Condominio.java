@@ -1,9 +1,11 @@
 package com.qat.samples.sysmgmt.condominio.model;
 
+import java.util.Date;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
 import com.qat.samples.sysmgmt.entidade.model.Entidade;
+import com.qat.samples.sysmgmt.entidade.model.EntidadeTypeEnum;
 import com.qat.samples.sysmgmt.entidade.model.TarefaEnt;
 
 /**
@@ -25,9 +27,13 @@ public class Condominio extends Entidade
 		super();
 	}
 
-	public Condominio(Integer id, String string)
-	{
+	public Condominio(Integer id,String nome) {
+		super();
 		setId(id);
+		setNome(nome);
+		setEntidadeEnum(EntidadeTypeEnum.CONDOMINIO);
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	public List<TarefaEnt> getTarefaList()

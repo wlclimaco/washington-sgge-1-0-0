@@ -32,25 +32,25 @@
  <select id="fetchAllClinicas" resultMap="ClinicaResult">
     SELECT
 	<include refid="allClinicaColumns" />
-   FROM clinica where entidadeEnumValue = 4 ORDER BY id ASC
+   FROM entidade where entidadeEnumValue = 4 ORDER BY id ASC
  </select>
 
  <select id="fetchClinicaById" parameterType="Integer" resultMap="ClinicaResult">
     SELECT
 	<include refid="allClinicaColumns" />
-   FROM clinica WHERE id = #{fetchid}
+   FROM entidade WHERE id = #{fetchid}
  </select>
 
  <select id="fetchAllClinicasRequest" parameterType="ClinicaInquiryRequest" resultMap="ClinicaResult">
 
 		SELECT <include refid="allClinicaColumns" />
-  		  FROM clinica where entidadeEnumValue = 4 ORDER BY id ASC
+  		  FROM entidade where entidadeEnumValue = 4 ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchClinicaRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM clinica WHERE id IS NOT NULL and entidadeEnumValue = 4
+		SELECT COUNT(*) AS RECORD_COUNT FROM entidade WHERE id IS NOT NULL and entidadeEnumValue = 4
 
  </select>
 </mapper>

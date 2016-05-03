@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.entidade.model;
 
+import java.util.Date;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.pessoa.model.Pessoa;
@@ -27,8 +28,14 @@ public class Usuario extends Pessoa
 
 	private List<Email> emails;
 
-	public Usuario(int i, String string) {
-		// TODO Auto-generated constructor stub
+
+
+	public Usuario(Integer id,String role) {
+		super();
+		this.role = role;
+		setId(id);
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	public Usuario() {

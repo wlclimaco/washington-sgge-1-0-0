@@ -41,6 +41,9 @@
      SELECT COUNT(id) AS RECORD_COUNT
         FROM entidade
         where entidadeEnumValue = 3
+        	<if test="criteria.emprId != null">
+				AND b.emprId = #{id}
+			</if>
 
   </select>
 
@@ -70,16 +73,9 @@
     						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
     				FROM entidade b
 						where b.entidadeEnumValue = 3
-					<if test="parentId != null">
-						AND b.id = #{id}
+					<if test="criteria.emprId != null">
+						AND b.emprId = #{id}
 					</if>
-					 <if test="statusList != null and !statusList.isEmpty()">
-					     AND b.PGSI_status IN
-					     <foreach item="item" index="index" collection="statusList"
-						     open="(" separator="," close=")">
-						   	 #{item.value}
-						 </foreach>
-					 </if>
     			) LIST
 				<choose>
 					<when test="pageSize != null and pageSize > 0">

@@ -85,8 +85,7 @@ c.regime,
 <if test="processId!= null">processId = #{processId},</if>
 <if test="entidadeId!= null">entidadeId = #{entidadeId},</if>
 <if test="emprId!= null">emprId = #{emprId},</if>
-<if test="entidadeEnumValue!= null">entidadeEnumValue = #{entidadeEnumValue},</if>
-<if test="regime.id!= null">regime = #{regime.id},</if>
+<if test="regime != null">regime = #{regime.id},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

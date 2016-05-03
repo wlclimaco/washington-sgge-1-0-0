@@ -19,7 +19,6 @@
     <result property="id" column="id"/>
     <result property="emprId" column="emprId"/>
     <result property="processId" column="processId"/>
-    <result property="email" column="email"/>
     <result property="senha" column="senha"/>
     <result property="pergunta" column="pergunta"/>
     <result property="role" column="role"/>
@@ -37,7 +36,6 @@ id
 ,emprId
 ,processId
 ,email
-,senha
 ,pergunta
 ,role
 ,language
@@ -53,7 +51,6 @@ id
 #{id},
 #{emprId},
 #{processId},
-#{email},
 #{senha},
 #{pergunta},
 #{role},
@@ -121,7 +118,6 @@ c.tabelaEnumValue,
 <if test="id!= null">id = #{id},</if>
 <if test="emprId!= null">emprId = #{emprId},</if>
 <if test="processId!= null">processId = #{processId},</if>
-<if test="email!= null">email = #{email},</if>
 <if test="senha!= null">senha = #{senha},</if>
 <if test="pergunta!= null">pergunta = #{pergunta},</if>
 <if test="role!= null">role = #{role},</if>

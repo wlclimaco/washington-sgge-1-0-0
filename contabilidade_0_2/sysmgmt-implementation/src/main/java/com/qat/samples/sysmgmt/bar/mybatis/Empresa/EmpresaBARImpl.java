@@ -64,7 +64,7 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	private static final String STMT_FETCH_EMPRESA_COUNT = NAMESPACE_EMPRESA + "fetchEmpresaRowCount";
 
 	/** The Constant STMT_FETCH_EMPRESA_ALL_REQUEST. */
-	private static final String STMT_FETCH_EMPRESA_ALL_REQUEST = NAMESPACE_EMPRESA + "fetchAllEmpresasRequest";
+	private static final String STMT_FETCH_EMPRESA_ALL_REQUEST = NAMESPACE_EMPRESA + "fetchAllEmpresasByRequest";
 
 	/// ===================================### FILIAL
 	/// ####======================================
@@ -98,7 +98,7 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	private static final String STMT_FETCH_DEPOSITO_COUNT = NAMESPACE_DEPOSITO + "fetchDepositoRowCount";
 
 	/** The Constant STMT_FETCH_DEPOSITO_ALL_REQUEST. */
-	private static final String STMT_FETCH_DEPOSITO_ALL_REQUEST = NAMESPACE_DEPOSITO + "fetchAllDepositosRequest";
+	private static final String STMT_FETCH_DEPOSITO_ALL_REQUEST = NAMESPACE_DEPOSITO + "fetchAllDepositosByRequest";
 
 	/// ===================================### USUARIO
 	/// ####======================================
@@ -1014,7 +1014,7 @@ public InternalResponse deleteClinicaById(Clinica clinica)
 	/**
 	 * /* (non-Javadoc)
 	 *
-	 * @see com.qat.samples.sysmgmt.base.bar.IAdvocaciaBAR#insertAdvocacia(com.qat.samples.sysmgmt.base.model.Advocacia)
+	 * @see com.qat.samples.sysmgmt.IPessoaBAR.bar.IAdvocaciaBAR#insertAdvocacia(com.qat.samples.sysmgmt.base.model.Advocacia)
 	 */
 	@Override
 	public InternalResponse insertAdvocacia(Advocacia advocacia) {

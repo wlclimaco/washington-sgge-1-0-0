@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.entidade.model;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,8 +37,13 @@ public class Filial extends Entidade
 		super();
 	}
 
-	public Filial(int i, String string) {
-		// TODO Auto-generated constructor stub
+	public Filial(Integer id,String nome) {
+		super();
+		setId(id);
+		setNome(nome);
+		setEntidadeEnum(EntidadeTypeEnum.ADVOCACIA);
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	@Override

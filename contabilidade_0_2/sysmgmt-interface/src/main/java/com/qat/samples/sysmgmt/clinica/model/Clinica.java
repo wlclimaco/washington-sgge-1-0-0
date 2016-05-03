@@ -1,6 +1,9 @@
 package com.qat.samples.sysmgmt.clinica.model;
 
+import java.util.Date;
+
 import com.qat.samples.sysmgmt.entidade.model.Entidade;
+import com.qat.samples.sysmgmt.entidade.model.EntidadeTypeEnum;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -23,8 +26,13 @@ public class Clinica extends Entidade
 		super();
 	}
 
-	public Clinica(int i, String string) {
-		// TODO Auto-generated constructor stub
+	public Clinica(Integer id,String nome) {
+		super();
+		setId(id);
+		setNome(nome);
+		setEntidadeEnum(EntidadeTypeEnum.CLINICA);
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	@Override

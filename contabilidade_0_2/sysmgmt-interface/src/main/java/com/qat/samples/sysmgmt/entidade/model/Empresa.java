@@ -45,9 +45,11 @@ public class Empresa extends Entidade
 		setId(id);
 	}
 
-	public Empresa(int i, String string) {
-		setId(i);
-		setNome(string);
+	public Empresa(Integer id,String nome) {
+		super();
+		setId(id);
+		setNome(nome);
+		setEntidadeEnum(EntidadeTypeEnum.ADVOCACIA);
 		setModifyDateUTC((new Date()).getTime());
 		setModifyUser("system");
 	}

@@ -190,7 +190,7 @@ public InternalResultsResponse<Empresa> fetchEmpresaById(FetchByIdRequest reques
 	}
 	else
 	{
-		response.getResultsList().add(getEmpresaBAR().fetchEmpresaById(request).getFirstResult());
+		response.getResultsList().add(getEmpresaBAR().fetchEmpresaById(request));
 	}
 
 	return response;
@@ -407,7 +407,7 @@ public InternalResultsResponse<Filial> fetchFilialById(FetchByIdRequest request)
 	}
 	else
 	{
-		response.getResultsList().add(getEmpresaBAR().fetchFilialById(request).getFirstResult());
+		response.getResultsList().add(getEmpresaBAR().fetchFilialById(request));
 	}
 
 	return response;
@@ -624,7 +624,7 @@ public InternalResultsResponse<Deposito> fetchDepositoById(FetchByIdRequest requ
 	}
 	else
 	{
-		response.getResultsList().add(getEmpresaBAR().fetchDepositoById(request).getFirstResult());
+		response.getResultsList().add(getEmpresaBAR().fetchDepositoById(request));
 	}
 
 	return response;
@@ -841,7 +841,7 @@ public InternalResultsResponse<Usuario> fetchUsuarioById(FetchByIdRequest reques
 	}
 	else
 	{
-		response.getResultsList().add(getEmpresaBAR().fetchUsuarioById(request).getFirstResult());
+		response.getResultsList().add(getEmpresaBAR().fetchUsuarioById(request));
 	}
 
 	return response;
