@@ -977,7 +977,6 @@ function dependenciaClinica(){
 	return a
 }
 
-
 function dependenciaPessoa(){
 	var a = [];
 	a = dependenciaBase();

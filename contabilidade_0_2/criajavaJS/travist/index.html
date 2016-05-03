@@ -823,10 +823,11 @@ $('#checkeds').append(imputs);
 					var sqlJ = "";
 					for (var x = 0;x < oProjet[i].classes.length;x++){
 						sqlJ = b_Insert(oProjet[i].classes[x].classe,oProjet[i].classes[x].model,$("#text-b-insert").val());
-						for (var xx = 0;xx < oProjet[i].classes[x].dependencias.length;xx++){
-							sqlJ = sqlJ + b_Insert(oProjet[i].classes[x].dependencias[xx].dependencia,oProjet[i].classes[x].dependencias[xx].campos,$("#text-b-insert").val());
-						}	
-					
+						if((oProjet[i].classes[x].dependencias !== null)&&(oProjet[i].classes[x].dependencias !== undefined)){
+							for (var xx = 0;xx < oProjet[i].classes[x].dependencias.length;xx++){
+								sqlJ = sqlJ + b_Insert(oProjet[i].classes[x].dependencias[xx].dependencia,oProjet[i].classes[x].dependencias[xx].campos,$("#text-b-insert").val());
+							}	
+						}
 
 					$("div#tabs").addTab(oProjet[i].classes[x].classe,sqlJ);
 					}
