@@ -420,13 +420,8 @@ function RegimeModel() {
 
 	var a = [];
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-   /* a.push({field :{campo : "nome" column="nome" />
-    a.push({field :{campo : "descricao" column="descricao" />
-	a.push({field :{campo : "createUser" column="create_user"/>
-	a.push({field :{campo : "createDataUTC" column="create_date"/>
-	a.push({field :{campo : "modifyUser" column="modify_user"/>
-	a.push({field :{campo : "modifyDataUTC" column="modify_date"/>
-	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});*/
+    a.push({field :{campo : "nome" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "descricao" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
@@ -435,6 +430,16 @@ function CfopModel() {
 
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "cfop" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "natureza" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "simplificado" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "cfopTypeEnum" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "icms" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "icmsReduzido" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "margemAgregadaST" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "cstPrincipal" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "classFiscal" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "observacao" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 

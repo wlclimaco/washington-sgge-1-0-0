@@ -54,17 +54,18 @@ public IStatusBAR getStatusBAR()
 @Test
 	public void testDeleteStatus()
 	{
-		Status status = new Status(1,(long) 9999999,CdStatusTypeEnum.ATIVO, "Note");
+		Status status = new Status(4,(long) 9999999,CdStatusTypeEnum.ATIVO, "Note");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(4);
 		Status statusResponse = getStatusBAR().fetchStatusById(request);
-	//	Assert.assertEquals(statusResponse, null);
+		Assert.assertEquals(statusResponse, null);
 		getStatusBAR().insertStatus(status);
-		//statusResponse = getStatusBAR().fetchStatusById(request);
-		//Assert.assertEquals(status.getId(), statusResponse.getId());
-		//getStatusBAR().deleteStatusById(status);
-		//statusResponse = getStatusBAR().fetchStatusById(request);
-		//Assert.assertEquals(statusResponse, null);
+//		request.setFetchId(1);
+//		statusResponse = getStatusBAR().fetchStatusById(request);
+//		Assert.assertEquals(status.getId(), statusResponse.getId());
+//		getStatusBAR().deleteStatusById(status);
+//		statusResponse = getStatusBAR().fetchStatusById(request);
+//		Assert.assertEquals(statusResponse, null);
 	}
 
 	@Test

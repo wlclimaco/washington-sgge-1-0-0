@@ -807,7 +807,7 @@ $('#checkeds').append(imputs);
 						for(var ii = 0;ii<oProjet.length;ii++){
 							if($('#_'+oProjet[ii].interfaces).prop('checked')){
 								for (var x = 0;x < oProjet[ii].classes.length;x++){
-									sqlJ = sqlJ + b_Table(oProjet[i].classes[x].classe,oProjet[i].classes[x].model);
+									sqlJ = sqlJ + b_Table(oProjet[ii].classes[x].classe,oProjet[ii].classes[x].model);
 								}
 							}
 						}
