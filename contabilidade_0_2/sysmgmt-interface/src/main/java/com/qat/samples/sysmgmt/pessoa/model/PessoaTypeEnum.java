@@ -37,7 +37,9 @@ public enum PessoaTypeEnum implements IIntegerEnum, II18nEnum
 
 	ADVOGADO(9, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
 
-	INQUILINO(10, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
+	INQUILINO(10, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
+
+	SINDICO(11, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
 
 	/** The code. */
 	private Integer code;

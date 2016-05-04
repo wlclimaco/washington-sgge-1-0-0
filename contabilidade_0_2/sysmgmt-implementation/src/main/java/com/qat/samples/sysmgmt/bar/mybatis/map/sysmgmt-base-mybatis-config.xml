@@ -11,6 +11,7 @@
 	</settings>
 
   	<typeAliases>
+
   		<typeAlias alias="County" type="com.qat.samples.sysmgmt.model.County"/>
   		<typeAlias alias="Drug" type="com.qat.samples.sysmgmt.model.Drug"/>
   		<typeAlias alias="DrugPrice" type="com.qat.samples.sysmgmt.model.DrugPrice"/>
