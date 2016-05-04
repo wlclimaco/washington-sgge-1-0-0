@@ -65,8 +65,8 @@ codigo
  </select>
 
  <select id="fetchAllCnaesRequest" parameterType="CnaeInquiryRequest" resultMap="CnaeResult">
- id,
-		SELECT <include refid="allCnaeColumns" />
+
+		SELECT id,<include refid="allCnaeColumns" />
   		  FROM cnae ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
