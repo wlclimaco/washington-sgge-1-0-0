@@ -36,7 +36,7 @@ public final class StatusBARD extends SqlSessionDaoSupport
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public static Boolean maintainStatusAssociations(List<Status> statusList,
+	public static Boolean  maintainStatusAssociations(List<Status> statusList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			String usuario,
 			Integer empresa,
@@ -47,7 +47,7 @@ public final class StatusBARD extends SqlSessionDaoSupport
 		// First Maintain Empresa
 		if ((ValidationUtil.isNullOrEmpty(statusList)) || (ValidationUtil.isNull(statusList.get(0))))
 		{
-			return count;
+			return false;
 		}
 
 		// For Each Contact...

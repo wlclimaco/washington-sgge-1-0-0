@@ -1,6 +1,8 @@
 /** create by system gera-java version 1.0.0 01/05/2016 18:42 : 57*/
 package com.qat.samples.sysmgmt.bar.mybatis.Empresa;
 
+import javax.annotation.Resource;
+
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -11,7 +13,17 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.MyBatisBARHelper;
 import com.qat.samples.sysmgmt.advocacia.Advocacia;
 import com.qat.samples.sysmgmt.advocacia.request.AdvocaciaInquiryRequest;
+import com.qat.samples.sysmgmt.bar.Cadastros.ICadastrosBAR;
+import com.qat.samples.sysmgmt.bar.Documentos.IDocumentoBAR;
+import com.qat.samples.sysmgmt.bar.Email.IEmailBAR;
 import com.qat.samples.sysmgmt.bar.Empresa.IEmpresaBAR;
+import com.qat.samples.sysmgmt.bar.Endereco.IEnderecoBAR;
+import com.qat.samples.sysmgmt.bar.Fiscal.IFiscalBAR;
+import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
+import com.qat.samples.sysmgmt.bar.Notes.INotesBAR;
+import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.BaseBARD;
 import com.qat.samples.sysmgmt.clinica.model.Clinica;
 import com.qat.samples.sysmgmt.clinica.model.request.ClinicaInquiryRequest;
 import com.qat.samples.sysmgmt.condominio.model.Condominio;
@@ -23,6 +35,7 @@ import com.qat.samples.sysmgmt.entidade.model.Usuario;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
 
@@ -182,6 +195,98 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	// ===================================### EMPRESA
 	// ####======================================
+	IEnderecoBAR enderecoBAR;
+
+	IStatusBAR statusBAR;
+
+	IHistoricoBAR historicoBAR;
+
+	ICadastrosBAR cadastrosBAR;
+
+	IFiscalBAR fiscalBAR;
+
+	ITelefoneBAR telefoneBAR;
+
+	IEmailBAR emailBAR;
+
+	IDocumentoBAR documentoBAR;
+
+	INotesBAR notesBAR;
+
+
+
+	public IHistoricoBAR getHistoricoBAR() {
+		return historicoBAR;
+	}
+
+	public void setHistoricoBAR(IHistoricoBAR historicoBAR) {
+		this.historicoBAR = historicoBAR;
+	}
+
+	public IStatusBAR getStatusBAR() {
+		return statusBAR;
+	}
+
+	public void setStatusBAR(IStatusBAR statusBAR) {
+		this.statusBAR = statusBAR;
+	}
+
+	public IEnderecoBAR getEnderecoBAR() {
+		return enderecoBAR;
+	}
+	//@Resource
+	public void setEnderecoBAR(IEnderecoBAR enderecoBAR) {
+		this.enderecoBAR = enderecoBAR;
+	}
+
+	public ICadastrosBAR getCadastrosBAR() {
+		return cadastrosBAR;
+	}
+
+	public void setCadastrosBAR(ICadastrosBAR cadastrosBAR) {
+		this.cadastrosBAR = cadastrosBAR;
+	}
+
+	public IFiscalBAR getFiscalBAR() {
+		return fiscalBAR;
+	}
+
+	public void setFiscalBAR(IFiscalBAR fiscalBAR) {
+		this.fiscalBAR = fiscalBAR;
+	}
+
+	public ITelefoneBAR getTelefoneBAR() {
+		return telefoneBAR;
+	}
+
+	public void setTelefoneBAR(ITelefoneBAR telefoneBAR) {
+		this.telefoneBAR = telefoneBAR;
+	}
+
+	public IEmailBAR getEmailBAR() {
+		return emailBAR;
+	}
+
+	public void setEmailBAR(IEmailBAR emailBAR) {
+		this.emailBAR = emailBAR;
+	}
+
+	public IDocumentoBAR getDocumentoBAR() {
+		return documentoBAR;
+	}
+
+	public void setDocumentoBAR(IDocumentoBAR documentoBAR) {
+		this.documentoBAR = documentoBAR;
+	}
+
+	public INotesBAR getNotesBAR() {
+		return notesBAR;
+	}
+
+	public void setNotesBAR(INotesBAR notesBAR) {
+		this.notesBAR = notesBAR;
+	}
+
 	/**
 	 * /* (non-Javadoc)
 	 *
@@ -191,6 +296,11 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	public InternalResponse insertEmpresa(Empresa empresa) {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ENTIDADE, empresa, response);
+		 Integer historicoId = 1;
+		 Integer processId = 1 ;
+		BaseBARD.maintainInsertBase(empresa, historicoId, processId,TabelaEnum.EMPRESA,getEnderecoBAR() ,getStatusBAR(),getHistoricoBAR(),
+				getCadastrosBAR(),getFiscalBAR(),getTelefoneBAR(),getEmailBAR(),getDocumentoBAR(),getNotesBAR(), new InternalResultsResponse<Empresa>());
+
 		return response;
 	}
 

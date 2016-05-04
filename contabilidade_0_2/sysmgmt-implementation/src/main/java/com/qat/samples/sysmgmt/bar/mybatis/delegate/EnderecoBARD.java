@@ -109,7 +109,10 @@ public final class EnderecoBARD extends SqlSessionDaoSupport
 
 			}
 		}
-
-		return 1;
+		if(count){
+			return 1;
+		}else{
+			return 0;
+		}
 	}
 }

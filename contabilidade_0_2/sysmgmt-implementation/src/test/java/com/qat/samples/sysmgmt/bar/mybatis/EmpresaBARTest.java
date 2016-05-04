@@ -2,6 +2,8 @@
 package com.qat.samples.sysmgmt.bar.mybatis;
 
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -17,22 +19,44 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.advocacia.Advocacia;
 import com.qat.samples.sysmgmt.advocacia.request.AdvocaciaInquiryRequest;
+import com.qat.samples.sysmgmt.banco.model.Banco;
+import com.qat.samples.sysmgmt.banco.model.BancoPessoa;
 import com.qat.samples.sysmgmt.bar.Empresa.IEmpresaBAR;
+import com.qat.samples.sysmgmt.cfop.model.Cfop;
+import com.qat.samples.sysmgmt.cfop.model.CfopPessoa;
+import com.qat.samples.sysmgmt.cfop.model.CfopTypeEnum;
 import com.qat.samples.sysmgmt.clinica.model.Clinica;
 import com.qat.samples.sysmgmt.clinica.model.request.ClinicaInquiryRequest;
+import com.qat.samples.sysmgmt.cnae.model.Cnae;
+import com.qat.samples.sysmgmt.cnae.model.CnaeEmpresa;
 import com.qat.samples.sysmgmt.condominio.model.Condominio;
 import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
+import com.qat.samples.sysmgmt.entidade.model.EntidadeTypeEnum;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
 import com.qat.samples.sysmgmt.entidade.model.Usuario;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
+import com.qat.samples.sysmgmt.estado.model.Estado;
+import com.qat.samples.sysmgmt.fiscal.model.Regime;
+import com.qat.samples.sysmgmt.util.model.Cidade;
+import com.qat.samples.sysmgmt.util.model.Configuracao;
+import com.qat.samples.sysmgmt.util.model.Documento;
+import com.qat.samples.sysmgmt.util.model.DocumentoTypeEnum;
+import com.qat.samples.sysmgmt.util.model.Email;
+import com.qat.samples.sysmgmt.util.model.EmailTypeEnum;
+import com.qat.samples.sysmgmt.util.model.Endereco;
+import com.qat.samples.sysmgmt.util.model.EnderecoTypeEnum;
+import com.qat.samples.sysmgmt.util.model.Note;
+import com.qat.samples.sysmgmt.util.model.Telefone;
+import com.qat.samples.sysmgmt.util.model.TelefoneTypeEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
 
@@ -71,7 +95,7 @@ public IEmpresaBAR getEmpresaBAR()
 		request.setFetchId(19);
 		Empresa empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
 		Assert.assertEquals(empresaResponse, null);
-		getEmpresaBAR().insertEmpresa(empresa);
+		getEmpresaBAR().insertEmpresa(insertEmpresa(PersistenceActionEnum.INSERT));
 		empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
 		Assert.assertEquals(empresa.getId(), empresaResponse.getId());
 		getEmpresaBAR().deleteEmpresaById(empresa);
@@ -688,6 +712,256 @@ public IEmpresaBAR getEmpresaBAR()
 			executeSqlScript("conf/insertClinica.sql", false);
 			executeSqlScript("conf/insertAdvocacia.sql", false);
 		}
+		public List<Endereco> enderecoList(PersistenceActionEnum action)
+		{
+			List<Endereco> enderecoList = new ArrayList<Endereco>();
+			Endereco endereco =
+					new Endereco(0, "logradouro", new Cidade(), new Estado(), "bairro", "numero", "cep", "complemento",
+							EnderecoTypeEnum.ENTREGA, action);
+			endereco.setProcessId(1);
+			enderecoList.add(endereco);
 
+			endereco =
+					new Endereco(0, "logradouro", new Cidade(), new Estado(), "bairro", "numero", "cep", "complemento",
+							EnderecoTypeEnum.COBRANCA, action);
+			endereco.setProcessId(1);
+			enderecoList.add(endereco);
+
+			endereco =
+					new Endereco(0, "logradouro", new Cidade(), new Estado(), "bairro", "numero", "cep", "complemento",
+							EnderecoTypeEnum.PRINCIPAL, action);
+			endereco.setProcessId(1);
+			enderecoList.add(endereco);
+			return enderecoList;
+
+		}
+
+		public List<Documento> documentoList(PersistenceActionEnum action)
+		{
+			List<Documento> documentoList = new ArrayList<Documento>();
+			Documento documento = new Documento(0, DocumentoTypeEnum.CNPJ, "numero", (long)123456789, new Estado(), action);
+			documento.setProcessId(1);
+			documentoList.add(documento);
+
+			documento = new Documento(0, DocumentoTypeEnum.IE, "numero", (long)123456789, new Estado(), action);
+			documento.setProcessId(1);
+			documentoList.add(documento);
+
+			documento = new Documento(0, DocumentoTypeEnum.IM, "numero", (long)123456789, new Estado(), action);
+			documento.setProcessId(1);
+			documentoList.add(documento);
+			return documentoList;
+
+		}
+
+		public List<Email> emailList(PersistenceActionEnum action)
+		{
+			List<Email> documentoList = new ArrayList<Email>();
+			Email documento = new Email(0, "email", EmailTypeEnum.COMPRAS, action);
+			documento.setProcessId(1);
+			documentoList.add(documento);
+			documento = new Email(0, "email", EmailTypeEnum.NFE, action);
+			documento.setProcessId(1);
+			documentoList.add(documento);
+			documento = new Email(0, "email", EmailTypeEnum.VENDAS, action);
+			documento.setProcessId(1);
+			documentoList.add(documento);
+			return documentoList;
+
+		}
+
+		public List<Telefone> telefoneList(PersistenceActionEnum action)
+		{
+			List<Telefone> documentoList = new ArrayList<Telefone>();
+			Telefone documento = new Telefone(0, "ddd", "numero", TelefoneTypeEnum.DIRETOR, action);
+			documento.setProcessId(1);
+			documentoList.add(documento);
+
+			documento = new Telefone(0, "ddd", "numero", TelefoneTypeEnum.COMPRAS, action);
+			documento.setProcessId(1);
+			documentoList.add(documento);
+
+			documento = new Telefone(0, "ddd", "numero", TelefoneTypeEnum.REPRESENTANTE, action);
+			documento.setProcessId(1);
+			documentoList.add(documento);
+
+			return documentoList;
+
+		}
+
+		public List<BancoPessoa> bancoList(PersistenceActionEnum action)
+		{
+			List<BancoPessoa> documentoList = new ArrayList<BancoPessoa>();
+			BancoPessoa documento = new BancoPessoa();
+			documento.setModelAction(action);
+			documento.setBancoId(new Banco(0, "ITAU", action));
+			documento.setProcessId(1);
+			documento.setSaldo(new Double(1.99));
+			documentoList.add(documento);
+			return documentoList;
+
+		}
+
+		public List<CfopPessoa> cfopList(PersistenceActionEnum action)
+		{
+			List<CfopPessoa> documentoList = new ArrayList<CfopPessoa>();
+			CfopPessoa documento = new CfopPessoa();
+			documento.setModelAction(action);
+			documento.setProcessId(1);
+			documento.setIdCfop(new Cfop(0, "cfop", "natureza", "simplificado", CfopTypeEnum.ENTRADA, 0.39, 0.15, 0.54,
+					0.9, 0.1, "observacao", action));
+			documento.setParentId(1);
+
+			documentoList.add(documento);
+			return documentoList;
+
+		}
+
+		public List<Note> noteList(PersistenceActionEnum action)
+		{
+			List<Note> documentoList = new ArrayList<Note>();
+			Note documento = new Note();
+			documento.setModelAction(action);
+			documento.setId(1);
+			documento.setEmprId(1);
+			documento.setNoteText("Test NOte");
+			documento.setProcessId(1);
+			documentoList.add(documento);
+			return documentoList;
+
+		}
+
+		public List<CnaeEmpresa> cnaeList(PersistenceActionEnum action)
+		{
+			List<CnaeEmpresa> cnaeList = new ArrayList<CnaeEmpresa>();
+			cnaeList.add(new CnaeEmpresa(1, 1, action, new Cnae(0, "CNAE", "DESCRICAO", "ABREV", action)));
+			cnaeList.add(new CnaeEmpresa(1, 1, action, new Cnae(0, "CNAE", "DESCRICAO", "ABREV", action)));
+			cnaeList.add(new CnaeEmpresa(1, 1, action, new Cnae(0, "CNAE", "DESCRICAO", "ABREV", action)));
+			cnaeList.add(new CnaeEmpresa(1, 1, action, new Cnae(0, "CNAE", "DESCRICAO", "ABREV", action)));
+			cnaeList.add(new CnaeEmpresa(1, 1, action, new Cnae(0, "CNAE", "DESCRICAO", "ABREV", action)));
+			return cnaeList;
+
+		}
+
+		public Regime insertRegime(PersistenceActionEnum action)
+		{
+
+			Regime regime = new Regime();
+			regime.setId(1);
+			regime.setNome("Teste");
+			regime.setDescricao("Teste");
+			regime.setModelAction(action);
+			return regime;
+		}
+
+		public List<Usuario> insertUsuario(PersistenceActionEnum action)
+		{
+			List<Usuario> list = new ArrayList<Usuario>();
+			Date a = new Date();
+			for (Integer i = 0; i < 10; i++)
+			{
+				Usuario usuario = new Usuario();
+				usuario.setId(1);
+				usuario.setLogin("LOGIN");
+				usuario.setSenha("SENHA");
+				usuario.setPergunta("PERGUNTA");
+				usuario.setRole("ROLE");
+				usuario.setLanguage("LAN");
+				usuario.setUltAcesso(a.getTime());
+				usuario.setEmails(emailList(action));
+				usuario.setModelAction(action);
+				list.add(usuario);
+			}
+			return list;
+
+		}
+
+		public Empresa insertEmpresa(PersistenceActionEnum action)
+		{
+			Empresa funcionario = new Empresa();
+			Date a = new Date();
+
+			funcionario.setId(19);
+			funcionario.setNome("NOME");
+			funcionario.setRegime(insertRegime(action));
+			funcionario.setEntidadeId(1);
+			funcionario.setEntidadeEnum(EntidadeTypeEnum.EMPRESA);
+			funcionario.setConfiguracao(new Configuracao());
+			funcionario.setCnaes(cnaeList(action));
+			funcionario.setUsuarioList(insertUsuario(action));
+			funcionario.setProcessId(1);
+			funcionario.setDocumentos(documentoList(action));
+			funcionario.setTelefones(telefoneList(action));
+			funcionario.setEmails(emailList(action));
+			funcionario.setEnderecos(enderecoList(action));
+			funcionario.setBancos(bancoList(action));
+			funcionario.setNotes(noteList(action));
+			funcionario.setModelAction(action);
+
+			return funcionario;
+		}
+
+		public Filial insertFilial(PersistenceActionEnum action)
+		{
+			Filial funcionario = new Filial();
+			Date a = new Date();
+
+			funcionario.setId(1);
+			funcionario.setNome("NOME");
+			funcionario.setRegime(insertRegime(action));
+			funcionario.setEntidadeId(1);
+			funcionario.setEntidadeEnum(EntidadeTypeEnum.FILIAL);
+			funcionario.setConfiguracao(new Configuracao());
+			funcionario.setCnaes(cnaeList(action));
+			funcionario.setProcessId(1);
+			funcionario.setDocumentos(documentoList(action));
+			funcionario.setTelefones(telefoneList(action));
+			funcionario.setEmails(emailList(action));
+			funcionario.setEnderecos(enderecoList(action));
+			funcionario.setNotes(noteList(action));
+			funcionario.setModelAction(action);
+
+			return funcionario;
+		}
+
+		public Deposito insertDeposito(PersistenceActionEnum action)
+		{
+			Deposito funcionario = new Deposito();
+			Date a = new Date();
+
+			funcionario.setId(1);
+			funcionario.setNome("NOME");
+			funcionario.setRegime(insertRegime(action));
+			funcionario.setEntidadeId(1);
+			funcionario.setEntidadeEnum(EntidadeTypeEnum.DEPOSITO);
+			funcionario.setConfiguracao(new Configuracao());
+			funcionario.setCnaes(cnaeList(action));
+			funcionario.setProcessId(1);
+			funcionario.setDocumentos(documentoList(action));
+			funcionario.setTelefones(telefoneList(action));
+			funcionario.setEmails(emailList(action));
+			funcionario.setEnderecos(enderecoList(action));
+			funcionario.setNotes(noteList(action));
+			funcionario.setModelAction(action);
+
+			return funcionario;
+		}
+
+		public Cidade insertCidade(PersistenceActionEnum action)
+		{
+			Cidade cidade = new Cidade();
+			Date a = new Date();
+
+			cidade.setId(1);
+			cidade.setCodigo("CODIGO");
+			cidade.setNome("NOME");
+			cidade.setCdIBGE("CDIBGE");
+			cidade.setEstado(new Estado(1));
+			cidade.setCep("CEP");
+			cidade.setMunicipio("MUNICIO");
+			cidade.setNotes(noteList(action));
+
+			return cidade;
+		}
 
 }
