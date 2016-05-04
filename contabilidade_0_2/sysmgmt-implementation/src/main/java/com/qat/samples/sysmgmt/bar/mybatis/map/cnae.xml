@@ -28,8 +28,7 @@
   </resultMap>
 
   <sql id="allCnaeColumns">
-id
-,codigo
+codigo
 ,cnae
 ,descricao
 ,abreviado
@@ -40,7 +39,7 @@ id
 
 </sql>
 <sql id="allCnaeValues">
-#{id},
+
 #{codigo},
 #{cnae},
 #{descricao},
@@ -51,33 +50,22 @@ id
 		#{modifyUser}
   </sql>
 
- <sql id="allCnaeColumnsWithQualifier">
-		c.id, c.cnae_desc
-c.id,
-c.codigo,
-c.cnae,
-c.descricao,
-c.abreviado,
-		c.createDateUTC,
-		c.createUser,
-		c.modifyDateUTC,
-		c.modifyUser
- </sql>
+
 
  <select id="fetchAllCnaes" resultMap="CnaeResult">
-    SELECT
+    SELECT id,
 	<include refid="allCnaeColumns" />
    FROM cnae ORDER BY id ASC
  </select>
 
  <select id="fetchCnaeById" parameterType="Integer" resultMap="CnaeResult">
-    SELECT
+    SELECT id,
 	<include refid="allCnaeColumns" />
    FROM cnae WHERE id = #{fetchid}
  </select>
 
  <select id="fetchAllCnaesRequest" parameterType="CnaeInquiryRequest" resultMap="CnaeResult">
-
+ id,
 		SELECT <include refid="allCnaeColumns" />
   		  FROM cnae ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
@@ -90,10 +78,10 @@ c.abreviado,
  </select>
 
  <insert id="insertCnae" parameterType="Cnae">
- 	INSERT INTO cnae (
+ 	INSERT INTO cnae (<if test="id != null">id,</if>
 	<include refid="allCnaeColumns" />
      )
-   VALUES (<include refid="allCnaeValues" /> )
+   VALUES (<if test="id != null">#{id},</if><include refid="allCnaeValues" /> )
  </insert>
 
  <update id="updateCnae" parameterType="Cnae">

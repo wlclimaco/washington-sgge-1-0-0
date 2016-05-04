@@ -70,9 +70,9 @@ public IPessoaBAR getPessoaBAR()
 @Test
 	public void testDeleteAdvogado()
 	{
-		Advogado advogado = new Advogado(4, "Advogado_999");
+		Advogado advogado = new Advogado(30, "Advogado_999");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(30);
 		Advogado advogadoResponse = getPessoaBAR().fetchAdvogadoById(request);
 		Assert.assertEquals(advogadoResponse, null);
 		getPessoaBAR().insertAdvogado(advogado);
@@ -97,20 +97,20 @@ public IPessoaBAR getPessoaBAR()
 		getPessoaBAR().deleteAllAdvogados();
 	Advogado advogado = new Advogado();
 		List<Advogado> response = getPessoaBAR().fetchAllAdvogados(new Advogado()).getResultsList();
-		Assert.assertEquals(response.size(), 0);
+		Assert.assertEquals(response.size(), 3);
 	}
 
 	@Test
 	public void testUpdateAdvogado()
 	{
-		Advogado advogado = new Advogado(1, "NATIVE INSERT UPDATE");
+		Advogado advogado = new Advogado(1, "nome_1 UPDATE");
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Advogado advogadoResponse = getPessoaBAR().fetchAdvogadoById(request);
-		Assert.assertEquals(advogadoResponse.getNome(), "NATIVE INSERT");
+		Assert.assertEquals(advogadoResponse.getNome(), "nome_1");
 		getPessoaBAR().updateAdvogado(advogado);
 		advogadoResponse = getPessoaBAR().fetchAdvogadoById(request);
-		Assert.assertEquals(advogadoResponse.getNome(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(advogadoResponse.getNome(), "nome_1 UPDATE");
 	}
 
 	@Test
@@ -158,9 +158,9 @@ public IPessoaBAR getPessoaBAR()
 @Test
 	public void testDeleteCliente()
 	{
-		Cliente cliente = new Cliente(4, "Cliente_999");
+		Cliente cliente = new Cliente(30, "Cliente_999");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(30);
 		Cliente clienteResponse = getPessoaBAR().fetchClienteById(request);
 		Assert.assertEquals(clienteResponse, null);
 		getPessoaBAR().insertCliente(cliente);
@@ -191,14 +191,14 @@ public IPessoaBAR getPessoaBAR()
 	@Test
 	public void testUpdateCliente()
 	{
-		Cliente cliente = new Cliente(1, "NATIVE INSERT UPDATE");
+		Cliente cliente = new Cliente(1, "nome_1 UPDATE");
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Cliente clienteResponse = getPessoaBAR().fetchClienteById(request);
-		Assert.assertEquals(clienteResponse.getNome(), "NATIVE INSERT");
+		Assert.assertEquals(clienteResponse.getNome(), "nome_1");
 		getPessoaBAR().updateCliente(cliente);
 		clienteResponse = getPessoaBAR().fetchClienteById(request);
-		Assert.assertEquals(clienteResponse.getNome(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(clienteResponse.getNome(), "nome_1 UPDATE");
 	}
 
 	@Test
@@ -246,9 +246,9 @@ public IPessoaBAR getPessoaBAR()
 @Test
 	public void testDeleteFornecedor()
 	{
-		Fornecedor fornecedor = new Fornecedor(4, "Fornecedor_999");
+		Fornecedor fornecedor = new Fornecedor(30, "Fornecedor_999");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(30);
 		Fornecedor fornecedorResponse = getPessoaBAR().fetchFornecedorById(request);
 		Assert.assertEquals(fornecedorResponse, null);
 		getPessoaBAR().insertFornecedor(fornecedor);
@@ -279,14 +279,14 @@ public IPessoaBAR getPessoaBAR()
 	@Test
 	public void testUpdateFornecedor()
 	{
-		Fornecedor fornecedor = new Fornecedor(1, "NATIVE INSERT UPDATE");
+		Fornecedor fornecedor = new Fornecedor(1, "nome_1 UPDATE");
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Fornecedor fornecedorResponse = getPessoaBAR().fetchFornecedorById(request);
-		Assert.assertEquals(fornecedorResponse.getNome(), "NATIVE INSERT");
+		Assert.assertEquals(fornecedorResponse.getNome(), "nome_1");
 		getPessoaBAR().updateFornecedor(fornecedor);
 		fornecedorResponse = getPessoaBAR().fetchFornecedorById(request);
-		Assert.assertEquals(fornecedorResponse.getNome(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(fornecedorResponse.getNome(), "nome_1 UPDATE");
 	}
 
 	@Test
@@ -334,9 +334,9 @@ public IPessoaBAR getPessoaBAR()
 @Test
 	public void testDeleteTransportador()
 	{
-		Transportador transportador = new Transportador(4, "Transportador_999");
+		Transportador transportador = new Transportador(30, "Transportador_999");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(30);
 		Transportador transportadorResponse = getPessoaBAR().fetchTransportadorById(request);
 		Assert.assertEquals(transportadorResponse, null);
 		getPessoaBAR().insertTransportador(transportador);
@@ -361,20 +361,20 @@ public IPessoaBAR getPessoaBAR()
 		getPessoaBAR().deleteAllTransportadors();
 	Transportador transportador = new Transportador();
 		List<Transportador> response = getPessoaBAR().fetchAllTransportadors(new Transportador()).getResultsList();
-		Assert.assertEquals(response.size(), 0);
+		Assert.assertEquals(response.size(), 3);
 	}
 
 	@Test
 	public void testUpdateTransportador()
 	{
-		Transportador transportador = new Transportador(1, "NATIVE INSERT UPDATE");
+		Transportador transportador = new Transportador(1, "nome_1 UPDATE");
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Transportador transportadorResponse = getPessoaBAR().fetchTransportadorById(request);
-		Assert.assertEquals(transportadorResponse.getNome(), "NATIVE INSERT");
+		Assert.assertEquals(transportadorResponse.getNome(), "nome_1");
 		getPessoaBAR().updateTransportador(transportador);
 		transportadorResponse = getPessoaBAR().fetchTransportadorById(request);
-		Assert.assertEquals(transportadorResponse.getNome(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(transportadorResponse.getNome(), "nome_1 UPDATE");
 	}
 
 	@Test
@@ -422,9 +422,9 @@ public IPessoaBAR getPessoaBAR()
 @Test
 	public void testDeleteMedico()
 	{
-		Medico medico = new Medico(4, "Medico_999");
+		Medico medico = new Medico(30, "Medico_999");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(30);
 		Medico medicoResponse = getPessoaBAR().fetchMedicoById(request);
 		Assert.assertEquals(medicoResponse, null);
 		getPessoaBAR().insertMedico(medico);
@@ -455,14 +455,14 @@ public IPessoaBAR getPessoaBAR()
 	@Test
 	public void testUpdateMedico()
 	{
-		Medico medico = new Medico(1, "NATIVE INSERT UPDATE");
+		Medico medico = new Medico(1, "nome_1 UPDATE");
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Medico medicoResponse = getPessoaBAR().fetchMedicoById(request);
-		Assert.assertEquals(medicoResponse.getNome(), "NATIVE INSERT");
+		Assert.assertEquals(medicoResponse.getNome(), "nome_1");
 		getPessoaBAR().updateMedico(medico);
 		medicoResponse = getPessoaBAR().fetchMedicoById(request);
-		Assert.assertEquals(medicoResponse.getNome(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(medicoResponse.getNome(), "nome_1 UPDATE");
 	}
 
 	@Test
@@ -510,9 +510,9 @@ public IPessoaBAR getPessoaBAR()
 @Test
 	public void testDeletePaciente()
 	{
-		Paciente paciente = new Paciente(4, "Paciente_999");
+		Paciente paciente = new Paciente(30, "Paciente_999");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(30);
 		Paciente pacienteResponse = getPessoaBAR().fetchPacienteById(request);
 		Assert.assertEquals(pacienteResponse, null);
 		getPessoaBAR().insertPaciente(paciente);
@@ -543,14 +543,14 @@ public IPessoaBAR getPessoaBAR()
 	@Test
 	public void testUpdatePaciente()
 	{
-		Paciente paciente = new Paciente(1, "NATIVE INSERT UPDATE");
+		Paciente paciente = new Paciente(1, "nome_1 UPDATE");
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Paciente pacienteResponse = getPessoaBAR().fetchPacienteById(request);
-		Assert.assertEquals(pacienteResponse.getNome(), "NATIVE INSERT");
+		Assert.assertEquals(pacienteResponse.getNome(), "nome_1");
 		getPessoaBAR().updatePaciente(paciente);
 		pacienteResponse = getPessoaBAR().fetchPacienteById(request);
-		Assert.assertEquals(pacienteResponse.getNome(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(pacienteResponse.getNome(), "nome_1 UPDATE");
 	}
 
 	@Test
@@ -598,9 +598,9 @@ public IPessoaBAR getPessoaBAR()
 @Test
 	public void testDeleteSindico()
 	{
-		Sindico sindico = new Sindico(4, "Sindico_999");
+		Sindico sindico = new Sindico(30, "Sindico_999");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(30);
 		Sindico sindicoResponse = getPessoaBAR().fetchSindicoById(request);
 		Assert.assertEquals(sindicoResponse, null);
 		getPessoaBAR().insertSindico(sindico);
@@ -631,14 +631,14 @@ public IPessoaBAR getPessoaBAR()
 	@Test
 	public void testUpdateSindico()
 	{
-		Sindico sindico = new Sindico(1, "NATIVE INSERT UPDATE");
+		Sindico sindico = new Sindico(1, "nome_1 UPDATE");
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Sindico sindicoResponse = getPessoaBAR().fetchSindicoById(request);
-		Assert.assertEquals(sindicoResponse.getNome(), "NATIVE INSERT");
+		Assert.assertEquals(sindicoResponse.getNome(), "nome_1");
 		getPessoaBAR().updateSindico(sindico);
 		sindicoResponse = getPessoaBAR().fetchSindicoById(request);
-		Assert.assertEquals(sindicoResponse.getNome(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(sindicoResponse.getNome(), "nome_1 UPDATE");
 	}
 
 	@Test
@@ -686,9 +686,9 @@ public IPessoaBAR getPessoaBAR()
 @Test
 	public void testDeleteInquilino()
 	{
-		Inquilino inquilino = new Inquilino(4, "Inquilino_999");
+		Inquilino inquilino = new Inquilino(30, "Inquilino_999");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(30);
 		Inquilino inquilinoResponse = getPessoaBAR().fetchInquilinoById(request);
 		Assert.assertEquals(inquilinoResponse, null);
 		getPessoaBAR().insertInquilino(inquilino);
@@ -719,14 +719,14 @@ public IPessoaBAR getPessoaBAR()
 	@Test
 	public void testUpdateInquilino()
 	{
-		Inquilino inquilino = new Inquilino(1, "NATIVE INSERT UPDATE");
+		Inquilino inquilino = new Inquilino(1, "nome_1 UPDATE");
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Inquilino inquilinoResponse = getPessoaBAR().fetchInquilinoById(request);
-		Assert.assertEquals(inquilinoResponse.getNome(), "NATIVE INSERT");
+		Assert.assertEquals(inquilinoResponse.getNome(), "nome_1");
 		getPessoaBAR().updateInquilino(inquilino);
 		inquilinoResponse = getPessoaBAR().fetchInquilinoById(request);
-		Assert.assertEquals(inquilinoResponse.getNome(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(inquilinoResponse.getNome(), "nome_1 UPDATE");
 	}
 
 	@Test
@@ -774,9 +774,9 @@ public IPessoaBAR getPessoaBAR()
 @Test
 	public void testDeleteFuncionario()
 	{
-		Funcionario funcionario = new Funcionario(4, "Funcionario_999");
+		Funcionario funcionario = new Funcionario(30, "Funcionario_999");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(30);
 		Funcionario funcionarioResponse = getPessoaBAR().fetchFuncionarioById(request);
 		Assert.assertEquals(funcionarioResponse, null);
 		getPessoaBAR().insertFuncionario(funcionario);
@@ -807,14 +807,14 @@ public IPessoaBAR getPessoaBAR()
 	@Test
 	public void testUpdateFuncionario()
 	{
-		Funcionario funcionario = new Funcionario(1, "NATIVE INSERT UPDATE");
+		Funcionario funcionario = new Funcionario(1, "nome_1 UPDATE");
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Funcionario funcionarioResponse = getPessoaBAR().fetchFuncionarioById(request);
-		Assert.assertEquals(funcionarioResponse.getNome(), "NATIVE INSERT");
+		Assert.assertEquals(funcionarioResponse.getNome(), "nome_1");
 		getPessoaBAR().updateFuncionario(funcionario);
 		funcionarioResponse = getPessoaBAR().fetchFuncionarioById(request);
-		Assert.assertEquals(funcionarioResponse.getNome(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(funcionarioResponse.getNome(), "nome_1 UPDATE");
 	}
 
 	@Test

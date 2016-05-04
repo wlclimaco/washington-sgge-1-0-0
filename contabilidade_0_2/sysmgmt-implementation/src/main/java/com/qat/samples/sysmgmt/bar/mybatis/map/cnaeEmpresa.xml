@@ -28,8 +28,7 @@
   </resultMap>
 
   <sql id="allCnaeEmpresaColumns">
-id
-,parentId
+parentId
 ,tabelaEnumValue
 ,processId
 ,idCnae
@@ -40,7 +39,7 @@ id
 
 </sql>
 <sql id="allCnaeEmpresaValues">
-#{id},
+
 #{parentId},
 #{tabelaEnumValue},
 #{processId},
@@ -51,34 +50,22 @@ id
 		#{modifyUser}
   </sql>
 
- <sql id="allCnaeEmpresaColumnsWithQualifier">
-		c.id, c.cnaeempresa_desc
-c.id,
-c.parentId,
-c.tabelaEnumValue,
-c.processId,
-c.idCnae,
-		c.createDateUTC,
-		c.createUser,
-		c.modifyDateUTC,
-		c.modifyUser
- </sql>
 
  <select id="fetchAllCnaeEmpresas" resultMap="CnaeEmpresaResult">
-    SELECT
+    SELECT id,
 	<include refid="allCnaeEmpresaColumns" />
    FROM cnaeempresa ORDER BY id ASC
  </select>
 
  <select id="fetchCnaeEmpresaById" parameterType="Integer" resultMap="CnaeEmpresaResult">
-    SELECT
+    SELECT id,
 	<include refid="allCnaeEmpresaColumns" />
    FROM cnaeempresa WHERE id = #{fetchid}
  </select>
 
  <select id="fetchAllCnaeEmpresasRequest" parameterType="PagedInquiryRequest" resultMap="CnaeEmpresaResult">
 
-		SELECT <include refid="allCnaeEmpresaColumns" />
+		SELECT id,<include refid="allCnaeEmpresaColumns" />
   		  FROM cnaeempresa ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
@@ -89,11 +76,18 @@ c.idCnae,
 
  </select>
 
+ <select id="fetchAllCnaesByEmpresa" parameterType="Integer" resultMap="CnaeEmpresaResult">
+    	SELECT id,
+			<include refid="allCnaeEmpresaColumns" />
+		    FROM cnaeEmpresa b
+		   where tabelaenumvalue in (1,51,52,61,62,63) and  parentid = #{id}
+    </select>
+
  <insert id="insertCnaeEmpresa" parameterType="CnaeEmpresa">
- 	INSERT INTO cnaeempresa (
+ 	INSERT INTO cnaeempresa (<if test="id != null">id,</if>
 	<include refid="allCnaeEmpresaColumns" />
      )
-   VALUES (<include refid="allCnaeEmpresaValues" /> )
+   VALUES (<if test="id != null">#{id},</if><include refid="allCnaeEmpresaValues" /> )
  </insert>
 
  <update id="updateCnaeEmpresa" parameterType="CnaeEmpresa">

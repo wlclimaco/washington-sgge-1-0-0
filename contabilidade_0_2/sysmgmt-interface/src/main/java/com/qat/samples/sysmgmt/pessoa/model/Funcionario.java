@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.pessoa.model;
 
+import java.util.Date;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.beneficios.model.BeneficioPessoa;
@@ -41,7 +42,11 @@ public class Funcionario extends Pessoa
 	}
 
 	public Funcionario(int i, String string) {
-		// TODO Auto-generated constructor stub
+		setId(i);
+		setNome(string);
+		setModelAction(PersistenceActionEnum.INSERT);
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	/**

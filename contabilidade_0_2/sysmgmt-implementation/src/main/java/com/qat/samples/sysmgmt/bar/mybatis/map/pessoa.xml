@@ -25,7 +25,7 @@
     <result property="tipoPessoa" column="tipoPessoa"/>
     <result property="datanasc" column="datanasc"/>
     <result property="foto" column="foto"/>
-    <result property="pessoaTypeEnum" column="pessoaTypeEnum"/>
+    <result property="pessoaTypeEnumValue" column="pessoaTypeEnum"/>
     <result property="sexo" column="sexo"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
@@ -69,7 +69,7 @@ id
 #{tipoPessoa},
 #{datanasc},
 #{foto},
-#{pessoaTypeEnum},
+#{pessoaTypeEnumValue},
 #{sexo},
 		#{createDateUTC},
 		#{createUser},
@@ -94,7 +94,7 @@ id
 <if test="tipoPessoa!= null">tipoPessoa = #{tipoPessoa},</if>
 <if test="datanasc!= null">datanasc = #{datanasc},</if>
 <if test="foto!= null">foto = #{foto},</if>
-<if test="pessoaTypeEnum!= null">pessoaTypeEnum = #{pessoaTypeEnum},</if>
+<if test="pessoaTypeEnumValue!= null">pessoaTypeEnum = #{pessoaTypeEnumValue},</if>
 <if test="sexo!= null">sexo = #{sexo},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>

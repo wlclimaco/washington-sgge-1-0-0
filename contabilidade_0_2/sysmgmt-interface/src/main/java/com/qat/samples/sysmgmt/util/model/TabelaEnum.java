@@ -6,7 +6,7 @@ import com.qat.framework.model.IIntegerEnum;
 // TODO: Auto-generated Javadoc
 /**
  * The Enum RiskLevelEnum.
- * 
+ *
  * @author abarros
  * @version 1.0
  * @created 21-Jul-2014 10:00:07 AM
@@ -16,7 +16,7 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * The high.
-	 * 
+	 *
 	 * REGIME
 	 * EMPRESA
 	 * DOCUMENTO
@@ -171,7 +171,13 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	PLANOSAUDE(58, "sendsolv.base.model.risklevelenum.medium"),
 	CONSULTA(59, "sendsolv.base.model.risklevelenum.medium"),
 
-	USUARIO(60, "sendsolv.base.model.risklevelenum.medium");
+	USUARIO(60, "sendsolv.base.model.risklevelenum.medium"),
+
+	CONDOMINIO(61, "sendsolv.base.model.risklevelenum.medium"),
+
+	ADVOCACIA(62, "sendsolv.base.model.risklevelenum.medium"),
+
+	CLINICA(63, "sendsolv.base.model.risklevelenum.medium");
 
 	/** The code. */
 	private Integer code;
@@ -181,7 +187,7 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * The Constructor.
-	 * 
+	 *
 	 * @param value the value
 	 * @param labelKeyParam the label key param
 	 */
@@ -193,7 +199,7 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * Gets the value.
-	 * 
+	 *
 	 * @return the value
 	 */
 	@Override
@@ -204,7 +210,7 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * Enum for value.
-	 * 
+	 *
 	 * @param value the value
 	 * @return the process status enum
 	 */
@@ -223,7 +229,7 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * Gets the valid values.
-	 * 
+	 *
 	 * @return the valid values
 	 */
 	public static String getValidValues()
@@ -246,7 +252,7 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	 */
 	/**
 	 * Gets the label key.
-	 * 
+	 *
 	 * @return the label key
 	 */
 	@Override

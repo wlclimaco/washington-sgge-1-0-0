@@ -1,7 +1,9 @@
 package com.qat.samples.sysmgmt.condominio.model;
 
+import java.util.Date;
 import java.util.List;
 
+import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.samples.sysmgmt.pessoa.model.Pessoa;
 
 /**
@@ -21,7 +23,11 @@ public class Sindico extends Pessoa
 	}
 
 	public Sindico(int i, String string) {
-		// TODO Auto-generated constructor stub
+		setId(i);
+		setNome(string);
+		setModelAction(PersistenceActionEnum.INSERT);
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	@Override

@@ -27,8 +27,7 @@
   </resultMap>
 
   <sql id="allNoteColumns">
-id
-,parentId
+parentId
 ,noteText
 ,tabelaEnumValue
 ,create_date
@@ -38,7 +37,6 @@ id
 
 </sql>
 <sql id="allNoteValues">
-#{id},
 #{parentId},
 #{noteText},
 #{tabelaEnumValue},
@@ -48,33 +46,27 @@ id
 #{modifyUser}
   </sql>
 
- <sql id="allNoteColumnsWithQualifier">
-		c.id, c.notes_desc
-c.id,
-c.parentId,
-c.noteText,
-c.tabelaEnumValue,
-		c.createDateUTC,
-		c.createUser,
-		c.modifyDateUTC,
-		c.modifyUser
- </sql>
-
  <select id="fetchAllNotes" resultMap="NoteResult">
-    SELECT
+    SELECT id,
 	<include refid="allNoteColumns" />
    FROM notes ORDER BY id ASC
  </select>
 
  <select id="fetchNoteById" parameterType="Integer" resultMap="NoteResult">
-    SELECT
+    SELECT id,
 	<include refid="allNoteColumns" />
    FROM notes WHERE id = #{fetchid}
  </select>
 
+ <select id="fetchNoteByNotes" parameterType="Integer" resultMap="NoteResult">
+    SELECT id,
+	<include refid="allNoteColumns" />
+   FROM notes WHERE parentId = #{fetchid} and tabelaEnumValue in (1,51,52,61,62,63)
+ </select>
+
  <select id="fetchAllNotesRequest" parameterType="PagedInquiryRequest" resultMap="NoteResult">
 
-		SELECT <include refid="allNoteColumns" />
+		SELECT id,<include refid="allNoteColumns" />
   		  FROM notes ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
@@ -86,10 +78,10 @@ c.tabelaEnumValue,
  </select>
 
  <insert id="insertNote" parameterType="Note">
- 	INSERT INTO notes (
+ 	INSERT INTO notes (<if test="id != null">id,</if>
 	<include refid="allNoteColumns" />
      )
-   VALUES (<include refid="allNoteValues" /> )
+   VALUES (<if test="id != null">#{id},</if><include refid="allNoteValues" /> )
  </insert>
 
  <update id="updateNote" parameterType="Note">

@@ -53,35 +53,27 @@
 	#{modifyUser}
   </sql>
 
- <sql id="allStatusColumnsWithQualifier">
-		c.id, c.status_desc
-c.id,
-c.dataStatus,
-c.parentId,
-c.statusValue,
-c.acaoEnumValue,
-c.tabelaEnumValue,
-c.note,
-		c.createDateUTC,
-		c.createUser,
-		c.modifyDateUTC,
-		c.modifyUser
- </sql>
 
  <select id="fetchAllStatus" resultMap="StatusResult">
-    SELECT
+    SELECT id,
 	<include refid="allStatusColumns" />
    FROM status ORDER BY id ASC
  </select>
 
  <select id="fetchStatusById" parameterType="Integer" resultMap="StatusResult">
-    SELECT
+    SELECT id,
 	<include refid="allStatusColumns" />
    FROM status WHERE id = #{fetchid}
  </select>
 
+  <select id="fetchAllStatusByEmpresa" parameterType="Integer" resultMap="StatusResult">
+    SELECT id,
+	<include refid="allStatusColumns" />
+   FROM status WHERE parentId = #{fetchid} and tabelaEnumValue in (1,51,52,61,62,63)
+ </select>
+
  <select id="fetchAllStatusRequest" parameterType="PagedInquiryRequest" resultMap="StatusResult">
-		SELECT <include refid="allStatusColumns" />
+		SELECT id,<include refid="allStatusColumns" />
   		  FROM status ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
@@ -94,15 +86,14 @@ c.note,
  </select>
 
  <insert id="insertStatus" parameterType="Status">
- 	INSERT INTO status (
+ 	INSERT INTO status (<if test="id != null">id,</if>
 	<include refid="allStatusColumns" />
      )
-   VALUES (<include refid="allStatusValues" /> )
+   VALUES (<if test="id != null">#{id},</if><include refid="allStatusValues" /> )
  </insert>
 
  <update id="updateStatus" parameterType="Status">
    UPDATE status SET
-		<if test="id!= null">id = #{id},</if>
 		<if test="dataStatus!= null">dataStatus = #{dataStatus},</if>
 		<if test="parentId!= null">parentId = #{parentId},</if>
 		<if test="statusValue!= null">statusValue = #{statusValue},</if>

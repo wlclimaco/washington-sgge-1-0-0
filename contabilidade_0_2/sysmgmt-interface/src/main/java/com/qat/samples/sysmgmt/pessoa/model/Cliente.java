@@ -1,7 +1,9 @@
 package com.qat.samples.sysmgmt.pessoa.model;
 
+import java.util.Date;
 import java.util.List;
 
+import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.samples.sysmgmt.convenio.model.ConvenioPessoa;
 import com.qat.samples.sysmgmt.dp.model.Profissao;
 
@@ -29,7 +31,11 @@ public class Cliente extends Pessoa
 	}
 
 	public Cliente(int i, String string) {
-		// TODO Auto-generated constructor stub
+		setId(i);
+		setNome(string);
+		setModelAction(PersistenceActionEnum.INSERT);
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	/**

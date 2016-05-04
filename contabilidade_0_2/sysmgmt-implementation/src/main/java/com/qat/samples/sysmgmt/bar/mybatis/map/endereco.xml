@@ -33,8 +33,7 @@
   </resultMap>
 
   <sql id="allEnderecoColumns">
-id
-,parentId
+parentId
 ,tabelaEnumValue
 ,processId
 ,logradouro
@@ -51,7 +50,6 @@ id
 
 </sql>
 <sql id="allEnderecoValues">
-#{id},
 #{parentId},
 #{tabelaEnumValue},
 #{processId},
@@ -68,40 +66,22 @@ id
 		#{modifyUser}
   </sql>
 
- <sql id="allEnderecoColumnsWithQualifier">
-		c.id, c.endereco_desc
-c.id,
-c.parentId,
-c.tabelaEnumValue,
-c.processId,
-c.logradouro,
-c.bairro,
-c.numero,
-c.enderecoTypeValue,
-c.cep,
-c.complemento,
-c.cidade,
-		c.createDateUTC,
-		c.createUser,
-		c.modifyDateUTC,
-		c.modifyUser
- </sql>
 
  <select id="fetchAllEnderecos" resultMap="EnderecoResult">
-    SELECT
+    SELECT id,
 	<include refid="allEnderecoColumns" />
    FROM endereco ORDER BY id ASC
  </select>
 
  <select id="fetchEnderecoById" parameterType="Integer" resultMap="EnderecoResult">
-    SELECT
+    SELECT id,
 	<include refid="allEnderecoColumns" />
    FROM endereco WHERE id = #{fetchid}
  </select>
 
  <select id="fetchAllEnderecosRequest" parameterType="PagedInquiryRequest" resultMap="EnderecoResult">
 
-		SELECT <include refid="allEnderecoColumns" />
+		SELECT id,<include refid="allEnderecoColumns" />
   		  FROM endereco ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
@@ -112,11 +92,18 @@ c.cidade,
 
  </select>
 
+ <select id="fetchEnderecoByTableById" parameterType="Integer" resultMap="EnderecoResult">
+    SELECT id,
+	<include refid="allEnderecoColumns" />
+   FROM endereco WHERE parentId = #{id} and tabelaEnumValue in (1,51,52,61,62,63)
+ </select>
+
  <insert id="insertEndereco" parameterType="Endereco">
  	INSERT INTO endereco (
+ 	<if test="id != null">id,</if>
 	<include refid="allEnderecoColumns" />
      )
-   VALUES (<include refid="allEnderecoValues" /> )
+   VALUES (<if test="id != null">#{id},</if><include refid="allEnderecoValues" /> )
  </insert>
 
  <update id="updateEndereco" parameterType="Endereco">

@@ -26,8 +26,7 @@
   </resultMap>
 
   <sql id="allEmailColumns">
-id
-,tabelaEnumValue
+tabelaEnumValue
 ,parentId
 ,typeValue
 ,email
@@ -39,7 +38,6 @@ id
 
 </sql>
 <sql id="allEmailValues">
-#{id},
 #{tabelaEnumValue},
 #{parentId},
 #{typeValue},
@@ -51,35 +49,23 @@ id
 #{modifyUser}
   </sql>
 
- <sql id="allEmailColumnsWithQualifier">
-		c.id, c.email_desc
-c.id,
-c.tabelaEnumValue,
-c.parentId,
-c.typeValue,
-c.email,
-c.emailTypeEnumValue,
-		c.createDateUTC,
-		c.createUser,
-		c.modifyDateUTC,
-		c.modifyUser
- </sql>
+
 
  <select id="fetchAllEmails" resultMap="EmailResult">
-    SELECT
+    SELECT id,
 	<include refid="allEmailColumns" />
    FROM email ORDER BY id ASC
  </select>
 
  <select id="fetchEmailById" parameterType="Integer" resultMap="EmailResult">
-    SELECT
+    SELECT id,
 	<include refid="allEmailColumns" />
    FROM email WHERE id = #{fetchid}
  </select>
 
  <select id="fetchAllEmailsRequest" parameterType="PagedInquiryRequest" resultMap="EmailResult">
 
-		SELECT <include refid="allEmailColumns" />
+		SELECT id,<include refid="allEmailColumns" />
   		  FROM email ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
@@ -91,15 +77,14 @@ c.emailTypeEnumValue,
  </select>
 
  <insert id="insertEmail" parameterType="Email">
- 	INSERT INTO email (
+ 	INSERT INTO email (<if test="id != null">id,</if>
 	<include refid="allEmailColumns" />
      )
-   VALUES (<include refid="allEmailValues" /> )
+   VALUES (<if test="id != null">#{id},</if><include refid="allEmailValues" /> )
  </insert>
 
  <update id="updateEmail" parameterType="Email">
    UPDATE email SET
-<if test="id!= null">id = #{id},</if>
 <if test="tabelaEnumValue!= null">tabelaEnumValue = #{tabelaEnumValue},</if>
 <if test="parentId!= null">parentId = #{parentId},</if>
 <if test="typeValue!= null">typeValue = #{typeValue},</if>
@@ -118,6 +103,12 @@ c.emailTypeEnumValue,
  <delete id="deleteAllEmails">
 	DELETE FROM email
   </delete>
+
+  <select id="fetchAllEmailsByEmpresa" parameterType="Integer" resultMap="EmailResult">
+    SELECT id,
+	<include refid="allEmailColumns" />
+   FROM email WHERE parentId = #{fetchid} and tabelaEnumValue in (1,51,52,61,62,63)
+ </select>
 </mapper>
 
 

@@ -40,23 +40,26 @@ public class PessoaBARImpl extends SqlSessionDaoSupport implements IPessoaBAR
 
 /** The Constant ZERO. */
 	private static final int ZERO = 0;
+	///===================================### PESSOA ####======================================
+	/** The Constant NAMESPACE. */
+	private static final String NAMESPACE_PESSOA = "PessoaMap.";
+
+	/** The Constant STMT_INSERT_ADVOGADO. */
+	private static final String STMT_INSERT_PESSOA = NAMESPACE_PESSOA + "insertPessoa";
+
+	/** The Constant STMT_UPDATE_ADVOGADO. */
+	private static final String STMT_UPDATE_PESSOA = NAMESPACE_PESSOA + "updatePessoa";
+
+	/** The Constant STMT_DELETE_ADVOGADO. */
+	private static final String STMT_DELETE_PESSOA = NAMESPACE_PESSOA + "deletePessoaById";
+
+		/** The Constant STMT_DELETE_ADVOGADO_ALL. */
+		private static final String STMT_DELETE_PESSOA_ALL = NAMESPACE_PESSOA + "deleteAllPessoas";
 
 
 ///===================================### ADVOGADO ####======================================
 /** The Constant NAMESPACE. */
 private static final String NAMESPACE_ADVOGADO = "AdvogadoMap.";
-
-/** The Constant STMT_INSERT_ADVOGADO. */
-private static final String STMT_INSERT_ADVOGADO = NAMESPACE_ADVOGADO + "insertAdvogado";
-
-/** The Constant STMT_UPDATE_ADVOGADO. */
-private static final String STMT_UPDATE_ADVOGADO = NAMESPACE_ADVOGADO + "updateAdvogado";
-
-/** The Constant STMT_DELETE_ADVOGADO. */
-private static final String STMT_DELETE_ADVOGADO = NAMESPACE_ADVOGADO + "deleteAdvogadoById";
-
-	/** The Constant STMT_DELETE_ADVOGADO_ALL. */
-	private static final String STMT_DELETE_ADVOGADO_ALL = NAMESPACE_ADVOGADO + "deleteAllAdvogados";
 
 	/** The Constant STMT_FETCH_ADVOGADO. */
 	private static final String STMT_FETCH_ADVOGADO = NAMESPACE_ADVOGADO + "fetchAdvogadoById";
@@ -74,18 +77,6 @@ private static final String STMT_DELETE_ADVOGADO = NAMESPACE_ADVOGADO + "deleteA
 /** The Constant NAMESPACE. */
 private static final String NAMESPACE_CLIENTE = "ClienteMap.";
 
-/** The Constant STMT_INSERT_CLIENTE. */
-private static final String STMT_INSERT_CLIENTE = NAMESPACE_CLIENTE + "insertCliente";
-
-/** The Constant STMT_UPDATE_CLIENTE. */
-private static final String STMT_UPDATE_CLIENTE = NAMESPACE_CLIENTE + "updateCliente";
-
-/** The Constant STMT_DELETE_CLIENTE. */
-private static final String STMT_DELETE_CLIENTE = NAMESPACE_CLIENTE + "deleteClienteById";
-
-	/** The Constant STMT_DELETE_CLIENTE_ALL. */
-	private static final String STMT_DELETE_CLIENTE_ALL = NAMESPACE_CLIENTE + "deleteAllClientes";
-
 	/** The Constant STMT_FETCH_CLIENTE. */
 	private static final String STMT_FETCH_CLIENTE = NAMESPACE_CLIENTE + "fetchClienteById";
 
@@ -101,18 +92,6 @@ private static final String STMT_DELETE_CLIENTE = NAMESPACE_CLIENTE + "deleteCli
 ///===================================### FORNECEDOR ####======================================
 /** The Constant NAMESPACE. */
 private static final String NAMESPACE_FORNECEDOR = "FornecedorMap.";
-
-/** The Constant STMT_INSERT_FORNECEDOR. */
-private static final String STMT_INSERT_FORNECEDOR = NAMESPACE_FORNECEDOR + "insertFornecedor";
-
-/** The Constant STMT_UPDATE_FORNECEDOR. */
-private static final String STMT_UPDATE_FORNECEDOR = NAMESPACE_FORNECEDOR + "updateFornecedor";
-
-/** The Constant STMT_DELETE_FORNECEDOR. */
-private static final String STMT_DELETE_FORNECEDOR = NAMESPACE_FORNECEDOR + "deleteFornecedorById";
-
-	/** The Constant STMT_DELETE_FORNECEDOR_ALL. */
-	private static final String STMT_DELETE_FORNECEDOR_ALL = NAMESPACE_FORNECEDOR + "deleteAllFornecedors";
 
 	/** The Constant STMT_FETCH_FORNECEDOR. */
 	private static final String STMT_FETCH_FORNECEDOR = NAMESPACE_FORNECEDOR + "fetchFornecedorById";
@@ -130,18 +109,6 @@ private static final String STMT_DELETE_FORNECEDOR = NAMESPACE_FORNECEDOR + "del
 /** The Constant NAMESPACE. */
 private static final String NAMESPACE_TRANSPORTADOR = "TransportadorMap.";
 
-/** The Constant STMT_INSERT_TRANSPORTADOR. */
-private static final String STMT_INSERT_TRANSPORTADOR = NAMESPACE_TRANSPORTADOR + "insertTransportador";
-
-/** The Constant STMT_UPDATE_TRANSPORTADOR. */
-private static final String STMT_UPDATE_TRANSPORTADOR = NAMESPACE_TRANSPORTADOR + "updateTransportador";
-
-/** The Constant STMT_DELETE_TRANSPORTADOR. */
-private static final String STMT_DELETE_TRANSPORTADOR = NAMESPACE_TRANSPORTADOR + "deleteTransportadorById";
-
-	/** The Constant STMT_DELETE_TRANSPORTADOR_ALL. */
-	private static final String STMT_DELETE_TRANSPORTADOR_ALL = NAMESPACE_TRANSPORTADOR + "deleteAllTransportadors";
-
 	/** The Constant STMT_FETCH_TRANSPORTADOR. */
 	private static final String STMT_FETCH_TRANSPORTADOR = NAMESPACE_TRANSPORTADOR + "fetchTransportadorById";
 
@@ -157,18 +124,6 @@ private static final String STMT_DELETE_TRANSPORTADOR = NAMESPACE_TRANSPORTADOR 
 ///===================================### MEDICO ####======================================
 /** The Constant NAMESPACE. */
 private static final String NAMESPACE_MEDICO = "MedicoMap.";
-
-/** The Constant STMT_INSERT_MEDICO. */
-private static final String STMT_INSERT_MEDICO = NAMESPACE_MEDICO + "insertMedico";
-
-/** The Constant STMT_UPDATE_MEDICO. */
-private static final String STMT_UPDATE_MEDICO = NAMESPACE_MEDICO + "updateMedico";
-
-/** The Constant STMT_DELETE_MEDICO. */
-private static final String STMT_DELETE_MEDICO = NAMESPACE_MEDICO + "deleteMedicoById";
-
-	/** The Constant STMT_DELETE_MEDICO_ALL. */
-	private static final String STMT_DELETE_MEDICO_ALL = NAMESPACE_MEDICO + "deleteAllMedicos";
 
 	/** The Constant STMT_FETCH_MEDICO. */
 	private static final String STMT_FETCH_MEDICO = NAMESPACE_MEDICO + "fetchMedicoById";
@@ -186,18 +141,6 @@ private static final String STMT_DELETE_MEDICO = NAMESPACE_MEDICO + "deleteMedic
 /** The Constant NAMESPACE. */
 private static final String NAMESPACE_PACIENTE = "PacienteMap.";
 
-/** The Constant STMT_INSERT_PACIENTE. */
-private static final String STMT_INSERT_PACIENTE = NAMESPACE_PACIENTE + "insertPaciente";
-
-/** The Constant STMT_UPDATE_PACIENTE. */
-private static final String STMT_UPDATE_PACIENTE = NAMESPACE_PACIENTE + "updatePaciente";
-
-/** The Constant STMT_DELETE_PACIENTE. */
-private static final String STMT_DELETE_PACIENTE = NAMESPACE_PACIENTE + "deletePacienteById";
-
-	/** The Constant STMT_DELETE_PACIENTE_ALL. */
-	private static final String STMT_DELETE_PACIENTE_ALL = NAMESPACE_PACIENTE + "deleteAllPacientes";
-
 	/** The Constant STMT_FETCH_PACIENTE. */
 	private static final String STMT_FETCH_PACIENTE = NAMESPACE_PACIENTE + "fetchPacienteById";
 
@@ -213,18 +156,6 @@ private static final String STMT_DELETE_PACIENTE = NAMESPACE_PACIENTE + "deleteP
 ///===================================### SINDICO ####======================================
 /** The Constant NAMESPACE. */
 private static final String NAMESPACE_SINDICO = "SindicoMap.";
-
-/** The Constant STMT_INSERT_SINDICO. */
-private static final String STMT_INSERT_SINDICO = NAMESPACE_SINDICO + "insertSindico";
-
-/** The Constant STMT_UPDATE_SINDICO. */
-private static final String STMT_UPDATE_SINDICO = NAMESPACE_SINDICO + "updateSindico";
-
-/** The Constant STMT_DELETE_SINDICO. */
-private static final String STMT_DELETE_SINDICO = NAMESPACE_SINDICO + "deleteSindicoById";
-
-	/** The Constant STMT_DELETE_SINDICO_ALL. */
-	private static final String STMT_DELETE_SINDICO_ALL = NAMESPACE_SINDICO + "deleteAllSindicos";
 
 	/** The Constant STMT_FETCH_SINDICO. */
 	private static final String STMT_FETCH_SINDICO = NAMESPACE_SINDICO + "fetchSindicoById";
@@ -242,18 +173,6 @@ private static final String STMT_DELETE_SINDICO = NAMESPACE_SINDICO + "deleteSin
 /** The Constant NAMESPACE. */
 private static final String NAMESPACE_INQUILINO = "InquilinoMap.";
 
-/** The Constant STMT_INSERT_INQUILINO. */
-private static final String STMT_INSERT_INQUILINO = NAMESPACE_INQUILINO + "insertInquilino";
-
-/** The Constant STMT_UPDATE_INQUILINO. */
-private static final String STMT_UPDATE_INQUILINO = NAMESPACE_INQUILINO + "updateInquilino";
-
-/** The Constant STMT_DELETE_INQUILINO. */
-private static final String STMT_DELETE_INQUILINO = NAMESPACE_INQUILINO + "deleteInquilinoById";
-
-	/** The Constant STMT_DELETE_INQUILINO_ALL. */
-	private static final String STMT_DELETE_INQUILINO_ALL = NAMESPACE_INQUILINO + "deleteAllInquilinos";
-
 	/** The Constant STMT_FETCH_INQUILINO. */
 	private static final String STMT_FETCH_INQUILINO = NAMESPACE_INQUILINO + "fetchInquilinoById";
 
@@ -269,18 +188,6 @@ private static final String STMT_DELETE_INQUILINO = NAMESPACE_INQUILINO + "delet
 ///===================================### FUNCIONARIO ####======================================
 /** The Constant NAMESPACE. */
 private static final String NAMESPACE_FUNCIONARIO = "FuncionarioMap.";
-
-/** The Constant STMT_INSERT_FUNCIONARIO. */
-private static final String STMT_INSERT_FUNCIONARIO = NAMESPACE_FUNCIONARIO + "insertFuncionario";
-
-/** The Constant STMT_UPDATE_FUNCIONARIO. */
-private static final String STMT_UPDATE_FUNCIONARIO = NAMESPACE_FUNCIONARIO + "updateFuncionario";
-
-/** The Constant STMT_DELETE_FUNCIONARIO. */
-private static final String STMT_DELETE_FUNCIONARIO = NAMESPACE_FUNCIONARIO + "deleteFuncionarioById";
-
-	/** The Constant STMT_DELETE_FUNCIONARIO_ALL. */
-	private static final String STMT_DELETE_FUNCIONARIO_ALL = NAMESPACE_FUNCIONARIO + "deleteAllFuncionarios";
 
 	/** The Constant STMT_FETCH_FUNCIONARIO. */
 	private static final String STMT_FETCH_FUNCIONARIO = NAMESPACE_FUNCIONARIO + "fetchFuncionarioById";
@@ -304,7 +211,7 @@ private static final String STMT_DELETE_FUNCIONARIO = NAMESPACE_FUNCIONARIO + "d
 public InternalResponse insertAdvogado(Advogado advogado)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ADVOGADO, advogado, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PESSOA, advogado, response);
 	return response;
 }
 
@@ -316,7 +223,7 @@ public InternalResponse insertAdvogado(Advogado advogado)
 public InternalResponse updateAdvogado(Advogado advogado)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ADVOGADO, advogado, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PESSOA, advogado, response);
 	return response;
 }
 
@@ -328,7 +235,7 @@ public InternalResponse updateAdvogado(Advogado advogado)
 public InternalResponse deleteAdvogadoById(Advogado advogado)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ADVOGADO, advogado, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA, advogado, response);
 	return response;
 }
 
@@ -340,7 +247,7 @@ public InternalResponse deleteAdvogadoById(Advogado advogado)
 public InternalResponse deleteAllAdvogados()
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ADVOGADO_ALL, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA_ALL, response);
 	return response;
 }
 
@@ -437,7 +344,7 @@ public static void fetchAdvogadosByRequest(SqlSession sqlSession, AdvogadoInquir
 public InternalResponse insertCliente(Cliente cliente)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CLIENTE, cliente, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PESSOA, cliente, response);
 	return response;
 }
 
@@ -449,7 +356,7 @@ public InternalResponse insertCliente(Cliente cliente)
 public InternalResponse updateCliente(Cliente cliente)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CLIENTE, cliente, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PESSOA, cliente, response);
 	return response;
 }
 
@@ -461,7 +368,7 @@ public InternalResponse updateCliente(Cliente cliente)
 public InternalResponse deleteClienteById(Cliente cliente)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CLIENTE, cliente, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA, cliente, response);
 	return response;
 }
 
@@ -473,7 +380,7 @@ public InternalResponse deleteClienteById(Cliente cliente)
 public InternalResponse deleteAllClientes()
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CLIENTE_ALL, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA_ALL, response);
 	return response;
 }
 
@@ -570,7 +477,7 @@ public static void fetchClientesByRequest(SqlSession sqlSession, ClienteInquiryR
 public InternalResponse insertFornecedor(Fornecedor fornecedor)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_FORNECEDOR, fornecedor, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PESSOA, fornecedor, response);
 	return response;
 }
 
@@ -582,7 +489,7 @@ public InternalResponse insertFornecedor(Fornecedor fornecedor)
 public InternalResponse updateFornecedor(Fornecedor fornecedor)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_FORNECEDOR, fornecedor, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PESSOA, fornecedor, response);
 	return response;
 }
 
@@ -594,7 +501,7 @@ public InternalResponse updateFornecedor(Fornecedor fornecedor)
 public InternalResponse deleteFornecedorById(Fornecedor fornecedor)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_FORNECEDOR, fornecedor, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA, fornecedor, response);
 	return response;
 }
 
@@ -606,7 +513,7 @@ public InternalResponse deleteFornecedorById(Fornecedor fornecedor)
 public InternalResponse deleteAllFornecedors()
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_FORNECEDOR_ALL, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA_ALL, response);
 	return response;
 }
 
@@ -703,7 +610,7 @@ public static void fetchFornecedorsByRequest(SqlSession sqlSession, FornecedorIn
 public InternalResponse insertTransportador(Transportador transportador)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_TRANSPORTADOR, transportador, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PESSOA, transportador, response);
 	return response;
 }
 
@@ -715,7 +622,7 @@ public InternalResponse insertTransportador(Transportador transportador)
 public InternalResponse updateTransportador(Transportador transportador)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_TRANSPORTADOR, transportador, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PESSOA, transportador, response);
 	return response;
 }
 
@@ -727,7 +634,7 @@ public InternalResponse updateTransportador(Transportador transportador)
 public InternalResponse deleteTransportadorById(Transportador transportador)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_TRANSPORTADOR, transportador, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA, transportador, response);
 	return response;
 }
 
@@ -739,7 +646,7 @@ public InternalResponse deleteTransportadorById(Transportador transportador)
 public InternalResponse deleteAllTransportadors()
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_TRANSPORTADOR_ALL, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA_ALL, response);
 	return response;
 }
 
@@ -836,7 +743,7 @@ public static void fetchTransportadorsByRequest(SqlSession sqlSession, Transport
 public InternalResponse insertMedico(Medico medico)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_MEDICO, medico, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PESSOA, medico, response);
 	return response;
 }
 
@@ -848,7 +755,7 @@ public InternalResponse insertMedico(Medico medico)
 public InternalResponse updateMedico(Medico medico)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_MEDICO, medico, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PESSOA, medico, response);
 	return response;
 }
 
@@ -860,7 +767,7 @@ public InternalResponse updateMedico(Medico medico)
 public InternalResponse deleteMedicoById(Medico medico)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_MEDICO, medico, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA, medico, response);
 	return response;
 }
 
@@ -872,7 +779,7 @@ public InternalResponse deleteMedicoById(Medico medico)
 public InternalResponse deleteAllMedicos()
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_MEDICO_ALL, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA_ALL, response);
 	return response;
 }
 
@@ -969,7 +876,7 @@ public static void fetchMedicosByRequest(SqlSession sqlSession, MedicoInquiryReq
 public InternalResponse insertPaciente(Paciente paciente)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PACIENTE, paciente, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PESSOA, paciente, response);
 	return response;
 }
 
@@ -981,7 +888,7 @@ public InternalResponse insertPaciente(Paciente paciente)
 public InternalResponse updatePaciente(Paciente paciente)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PACIENTE, paciente, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PESSOA, paciente, response);
 	return response;
 }
 
@@ -993,7 +900,7 @@ public InternalResponse updatePaciente(Paciente paciente)
 public InternalResponse deletePacienteById(Paciente paciente)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PACIENTE, paciente, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA, paciente, response);
 	return response;
 }
 
@@ -1005,7 +912,7 @@ public InternalResponse deletePacienteById(Paciente paciente)
 public InternalResponse deleteAllPacientes()
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PACIENTE_ALL, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA_ALL, response);
 	return response;
 }
 
@@ -1102,7 +1009,7 @@ public static void fetchPacientesByRequest(SqlSession sqlSession, PacienteInquir
 public InternalResponse insertSindico(Sindico sindico)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_SINDICO, sindico, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PESSOA, sindico, response);
 	return response;
 }
 
@@ -1114,7 +1021,7 @@ public InternalResponse insertSindico(Sindico sindico)
 public InternalResponse updateSindico(Sindico sindico)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_SINDICO, sindico, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PESSOA, sindico, response);
 	return response;
 }
 
@@ -1126,7 +1033,7 @@ public InternalResponse updateSindico(Sindico sindico)
 public InternalResponse deleteSindicoById(Sindico sindico)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_SINDICO, sindico, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA, sindico, response);
 	return response;
 }
 
@@ -1138,7 +1045,7 @@ public InternalResponse deleteSindicoById(Sindico sindico)
 public InternalResponse deleteAllSindicos()
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_SINDICO_ALL, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA_ALL, response);
 	return response;
 }
 
@@ -1235,7 +1142,7 @@ public static void fetchSindicosByRequest(SqlSession sqlSession, SindicoInquiryR
 public InternalResponse insertInquilino(Inquilino inquilino)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_INQUILINO, inquilino, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PESSOA, inquilino, response);
 	return response;
 }
 
@@ -1247,7 +1154,7 @@ public InternalResponse insertInquilino(Inquilino inquilino)
 public InternalResponse updateInquilino(Inquilino inquilino)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_INQUILINO, inquilino, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PESSOA, inquilino, response);
 	return response;
 }
 
@@ -1259,7 +1166,7 @@ public InternalResponse updateInquilino(Inquilino inquilino)
 public InternalResponse deleteInquilinoById(Inquilino inquilino)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_INQUILINO, inquilino, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA, inquilino, response);
 	return response;
 }
 
@@ -1271,7 +1178,7 @@ public InternalResponse deleteInquilinoById(Inquilino inquilino)
 public InternalResponse deleteAllInquilinos()
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_INQUILINO_ALL, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA_ALL, response);
 	return response;
 }
 
@@ -1368,7 +1275,7 @@ public static void fetchInquilinosByRequest(SqlSession sqlSession, InquilinoInqu
 public InternalResponse insertFuncionario(Funcionario funcionario)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_FUNCIONARIO, funcionario, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PESSOA, funcionario, response);
 	return response;
 }
 
@@ -1380,7 +1287,7 @@ public InternalResponse insertFuncionario(Funcionario funcionario)
 public InternalResponse updateFuncionario(Funcionario funcionario)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_FUNCIONARIO, funcionario, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PESSOA, funcionario, response);
 	return response;
 }
 
@@ -1392,7 +1299,7 @@ public InternalResponse updateFuncionario(Funcionario funcionario)
 public InternalResponse deleteFuncionarioById(Funcionario funcionario)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_FUNCIONARIO, funcionario, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA, funcionario, response);
 	return response;
 }
 
@@ -1404,7 +1311,7 @@ public InternalResponse deleteFuncionarioById(Funcionario funcionario)
 public InternalResponse deleteAllFuncionarios()
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_FUNCIONARIO_ALL, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA_ALL, response);
 	return response;
 }
 

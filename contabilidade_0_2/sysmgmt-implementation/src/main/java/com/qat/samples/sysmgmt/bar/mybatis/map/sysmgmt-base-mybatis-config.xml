@@ -46,6 +46,13 @@
   		<typeAlias alias="TabelaEnum" type="com.qat.samples.sysmgmt.util.model.TabelaEnum"/>
   		<typeAlias alias="AcaoEnum" type="com.qat.samples.sysmgmt.util.model.AcaoEnum"/>
   		<typeAlias alias="CdStatusTypeEnum" type="com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum"/>
+  		<typeAlias alias="PessoaTypeEnum" type="com.qat.samples.sysmgmt.pessoa.model.PessoaTypeEnum"/>
+
+  		<typeAlias alias="Sindico" type="com.qat.samples.sysmgmt.condominio.model.Sindico"/>
+  		<typeAlias alias="SindicoInquiryRequest" type="com.qat.samples.sysmgmt.condominio.model.request.SindicoInquiryRequest"/>
+
+  		<typeAlias alias="Inquilino" type="com.qat.samples.sysmgmt.condominio.model.Inquilino"/>
+  		<typeAlias alias="InquilinoInquiryRequest" type="com.qat.samples.sysmgmt.condominio.model.request.InquilinoInquiryRequest"/>
 
 
   		<typeAlias alias="PagedInquiryRequest" type="com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest"/>
@@ -364,6 +371,8 @@
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/field.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/classes.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/interface.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/sindico.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/inquilino.xml"/>
     </mappers>
 
 </configuration>

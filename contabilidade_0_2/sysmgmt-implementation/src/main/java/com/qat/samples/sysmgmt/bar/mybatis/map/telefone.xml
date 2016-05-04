@@ -31,8 +31,7 @@
   </resultMap>
 
   <sql id="allTelefoneColumns">
-id
-,typeValue
+typeValue
 ,parentId
 ,tabelaEnumValue
 ,ddd
@@ -46,7 +45,7 @@ id
 
 </sql>
 <sql id="allTelefoneValues">
-#{id},
+
 #{typeValue},
 #{parentId},
 #{tabelaEnumValue},
@@ -60,37 +59,21 @@ id
 		#{modifyUser}
   </sql>
 
- <sql id="allTelefoneColumnsWithQualifier">
-		c.id, c.telefone_desc
-c.id,
-c.typeValue,
-c.parentId,
-c.tabelaEnumValue,
-c.ddd,
-c.numero,
-c.telefoneTypeEnumValue,
-c.processId,
-		c.createDateUTC,
-		c.createUser,
-		c.modifyDateUTC,
-		c.modifyUser
- </sql>
-
  <select id="fetchAllTelefones" resultMap="TelefoneResult">
-    SELECT
+    SELECT id,
 	<include refid="allTelefoneColumns" />
    FROM telefone ORDER BY id ASC
  </select>
 
  <select id="fetchTelefoneById" parameterType="Integer" resultMap="TelefoneResult">
-    SELECT
+    SELECT id,
 	<include refid="allTelefoneColumns" />
    FROM telefone WHERE id = #{fetchid}
  </select>
 
  <select id="fetchAllTelefonesRequest" parameterType="PagedInquiryRequest" resultMap="TelefoneResult">
 
-		SELECT <include refid="allTelefoneColumns" />
+		SELECT id,<include refid="allTelefoneColumns" />
   		  FROM telefone ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
@@ -101,16 +84,21 @@ c.processId,
 
  </select>
 
+  <select id="fetchTelefoneByEmpresa" parameterType="Integer" resultMap="TelefoneResult">
+    SELECT id,
+	<include refid="allTelefoneColumns" />
+   FROM telefone WHERE parentid = #{fetchid} and tabelaEnumValue in (1,51,52,61,62,63)
+ </select>
+
  <insert id="insertTelefone" parameterType="Telefone">
- 	INSERT INTO telefone (
+ 	INSERT INTO telefone (<if test="id != null">id,</if>
 	<include refid="allTelefoneColumns" />
      )
-   VALUES (<include refid="allTelefoneValues" /> )
+   VALUES (<if test="id != null">#{id},</if><include refid="allTelefoneValues" /> )
  </insert>
 
  <update id="updateTelefone" parameterType="Telefone">
    UPDATE telefone SET
-<if test="id!= null">id = #{id},</if>
 <if test="typeValue!= null">typeValue = #{typeValue},</if>
 <if test="parentId!= null">parentId = #{parentId},</if>
 <if test="tabelaEnumValue!= null">tabelaEnumValue = #{tabelaEnumValue},</if>

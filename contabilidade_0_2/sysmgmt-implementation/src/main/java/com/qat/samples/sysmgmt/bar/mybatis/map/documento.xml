@@ -27,9 +27,7 @@
   </resultMap>
 
   <sql id="allDocumentoColumns">
-
-id
-,tabelaEnumValue
+tabelaEnumValue
 ,parentId
 ,processId
 ,documentoTypeEnumValue
@@ -42,7 +40,6 @@ id
 
 </sql>
 <sql id="allDocumentoValues">
-#{id},
 #{tabelaEnumValue},
 #{parentId},
 #{processId},
@@ -55,29 +52,14 @@ id
 #{modifyUser}
   </sql>
 
- <sql id="allDocumentoColumnsWithQualifier">
-		c.id, c.documento_desc
-c.id,
-c.tabelaEnumValue,
-c.parentId,
-c.processId,
-c.documentoTypeEnumValue,
-c.numero,
-c.data,
-		c.createDateUTC,
-		c.createUser,
-		c.modifyDateUTC,
-		c.modifyUser
- </sql>
-
  <select id="fetchAllDocumentos" resultMap="DocumentoResult">
-    SELECT
+    SELECT id,
 	<include refid="allDocumentoColumns" />
    FROM documento ORDER BY id ASC
  </select>
 
  <select id="fetchDocumentoById" parameterType="Integer" resultMap="DocumentoResult">
-    SELECT
+    SELECT id,
 	<include refid="allDocumentoColumns" />
    FROM documento WHERE id = #{fetchid}
  </select>
@@ -86,7 +68,7 @@ c.data,
 
 
 
-		SELECT <include refid="allDocumentoColumns" />
+		SELECT id,<include refid="allDocumentoColumns" />
   		  FROM documento ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
@@ -99,10 +81,10 @@ c.data,
  </select>
 
  <insert id="insertDocumento" parameterType="Documento">
- 	INSERT INTO documento (
+ 	INSERT INTO documento (<if test="id != null">id,</if>
 	<include refid="allDocumentoColumns" />
      )
-   VALUES (<include refid="allDocumentoValues" /> )
+   VALUES (<if test="id != null">#{id},</if><include refid="allDocumentoValues" /> )
  </insert>
 
  <update id="updateDocumento" parameterType="Documento">
@@ -126,6 +108,12 @@ c.data,
  <delete id="deleteAllDocumentos">
 	DELETE FROM documento
   </delete>
+
+   <select id="fetchDocumentoByEmpresa" parameterType="Integer" resultMap="DocumentoResult">
+    SELECT id,
+	<include refid="allDocumentoColumns" />
+   FROM documento WHERE parentId = #{id}  and tabelaEnumValue in (1,51,52,61,62,63)
+ </select>
 </mapper>
 
 
