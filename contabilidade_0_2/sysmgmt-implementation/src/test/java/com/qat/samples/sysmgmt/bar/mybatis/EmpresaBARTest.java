@@ -62,7 +62,7 @@ import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
 
 @ContextConfiguration(locations = {
 		"classpath:conf/unittest-base-context.xml",
-		"classpath:conf/empresabartest-context.xml"
+		"classpath:conf/bartest-context.xml"
 })
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 @Transactional

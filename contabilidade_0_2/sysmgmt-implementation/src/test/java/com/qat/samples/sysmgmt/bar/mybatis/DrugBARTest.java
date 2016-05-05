@@ -27,7 +27,7 @@ import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
 @ContextConfiguration(locations = {
 		"classpath:conf/unittest-base-context.xml",
-		"classpath:conf/drugbartest-context.xml"})
+		"classpath:conf/bartest-context.xml"})
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 @Transactional
 @ActiveProfiles("postgres")

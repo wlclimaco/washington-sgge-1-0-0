@@ -296,8 +296,8 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	public InternalResponse insertEmpresa(Empresa empresa) {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ENTIDADE, empresa, response);
-		 Integer historicoId = 1;
-		 Integer processId = 1 ;
+		 Integer historicoId = InsertHistBARD.maintainInsertHistorico();
+		 Integer processId   = InsertHistBARD.maintainInsertHistoricoItens();
 		BaseBARD.maintainInsertBase(empresa, historicoId, processId,TabelaEnum.EMPRESA,getEnderecoBAR() ,getStatusBAR(),getHistoricoBAR(),
 				getCadastrosBAR(),getFiscalBAR(),getTelefoneBAR(),getEmailBAR(),getDocumentoBAR(),getNotesBAR(), new InternalResultsResponse<Empresa>());
 

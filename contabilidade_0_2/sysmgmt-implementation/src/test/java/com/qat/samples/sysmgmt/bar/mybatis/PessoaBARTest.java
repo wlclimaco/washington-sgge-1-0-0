@@ -42,7 +42,7 @@ import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 
 @ContextConfiguration(locations = {
 		"classpath:conf/unittest-base-context.xml",
-		"classpath:conf/pessoabartest-context.xml"
+		"classpath:conf/bartest-context.xml"
 })
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 @Transactional

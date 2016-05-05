@@ -108,7 +108,6 @@ parentId
 
  <update id="updateEndereco" parameterType="Endereco">
    UPDATE endereco SET
-<if test="id!= null">id = #{id},</if>
 <if test="parentId!= null">parentId = #{parentId},</if>
 <if test="tabelaEnumValue!= null">tabelaEnumValue = #{tabelaEnumValue},</if>
 <if test="processId!= null">processId = #{processId},</if>

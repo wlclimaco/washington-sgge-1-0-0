@@ -59,7 +59,7 @@ text = text + '</sql>\n';
 text = text + '<sql id="all'+name+'Values">\n';
 for(i=0;i < oField.length;i++){
 	if(oField[i].field.xml == true){
-		if(oField[i].field.tipo.indexOf('List') == -1){
+		if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.tipo.indexOf('id')){
 			text = text + '#{'+oField[i].field.campo+'},\n';
 		}
 	}
@@ -76,7 +76,7 @@ text = text + '\n';
 text = text + '		c.id, c.'+name.toLowerCase()+'_desc\n';
 for(i=0;i < oField.length;i++){
 	if(oField[i].field.xml == true){
-		if(oField[i].field.tipo.indexOf('List') == -1){
+		if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.tipo.indexOf('id')){
 			text = text + 'c.'+oField[i].field.campo+',\n';
 		}
 	}
@@ -89,20 +89,20 @@ text = text + '		c.modifyUser\n';
  text = text + ' </sql>\n';
 text = text + '\n';
  text = text + ' <select id="fetchAll'+name+'s" resultMap="'+name+'Result">\n';
-text = text + '    SELECT\n';
+text = text + '    SELECT id,\n';
 text = text + '	<include refid="all'+name+'Columns" />\n';
  text = text + '   FROM '+name.toLowerCase()+' ORDER BY id ASC\n';
  text = text + ' </select>\n';
 text = text + '\n';
  text = text + ' <select id="fetch'+name+'ById" parameterType="Integer" resultMap="'+name+'Result">\n';
-text = text + '    SELECT\n';
+text = text + '    SELECT id,\n'; 
 text = text + '	<include refid="all'+name+'Columns" />\n';
  text = text + '   FROM '+name.toLowerCase()+' WHERE id = #{fetchid}\n';
  text = text + ' </select>\n';
 text = text + '\n';
  text = text + ' <select id="fetchAll'+name+'sRequest" parameterType="'+name+'InquiryRequest" resultMap="'+name+'Result">\n';
 text = text + '\n';
-text = text + '		SELECT <include refid="all'+name+'Columns" />\n';
+text = text + '		SELECT id,<include refid="all'+name+'Columns" />\n';
  text = text + '  		  FROM '+name.toLowerCase()+' ORDER BY id ASC\n';
 text = text + '		  OFFSET ( #{startPage} * #{pageSize} )\n';
 text = text + '		  LIMIT #{pageSize}\n';
@@ -115,9 +115,9 @@ text = text + '\n';
 text = text + '\n';
  text = text + ' <insert id="insert'+name+'" parameterType="'+name+'">\n';
  text = text + ' 	INSERT INTO '+name.toLowerCase()+' (\n';
-text = text + '	<include refid="all'+name+'Columns" />\n';
+text = text + '	<if test="id != null">id,</if><include refid="all'+name+'Columns" />\n';
  text = text + '     )\n';
- text = text + '   VALUES (<include refid="all'+name+'Values" /> )\n';
+ text = text + '   VALUES (<if test="id != null">#{id},</if><include refid="all'+name+'Values" /> )\n';
  text = text + ' </insert>\n';
 text = text + '\n';
  text = text + ' <update id="update'+name+'" parameterType="'+name+'">\n';
