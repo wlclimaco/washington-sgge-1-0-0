@@ -1,25 +1,15 @@
 package com.qat.samples.sysmgmt.bar.mybatis.delegate;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.bar.Cadastros.ICadastrosBAR;
-import com.qat.samples.sysmgmt.bar.Documentos.IDocumentoBAR;
-import com.qat.samples.sysmgmt.bar.Email.IEmailBAR;
-import com.qat.samples.sysmgmt.bar.Endereco.IEnderecoBAR;
-import com.qat.samples.sysmgmt.bar.Fiscal.IFiscalBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
-import com.qat.samples.sysmgmt.bar.Notes.INotesBAR;
-import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
-import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
-import com.qat.samples.sysmgmt.entidade.model.Entidade;
+import com.qat.samples.sysmgmt.historico.model.Historico;
+import com.qat.samples.sysmgmt.historico.model.HistoricoItens;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
-import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 
 /**
@@ -42,25 +32,35 @@ public final class InsertHistBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainInsertHistorico(Integer parentId,IHistoricoBAR historicoBAR,InternalResultsResponse<?> response)
+	public static Integer maintainInsertHistorico(TabelaEnum parentId,IHistoricoBAR historicoBAR,InternalResultsResponse<?> response)
 	{
 		Integer count = 0;
-		if (!ValidationUtil.isNullOrZero(parentId))
+		if (!ValidationUtil.isNull(parentId))
 		{
-			count += historicoBAR.Ins().getId();
-					
+			Historico historico = new Historico();
+			historico.setTabelaEnum(parentId);
+			historico.setModifyDateUTC((new Date()).getTime());
+			historico.setModifyUser("system");
+			count = historicoBAR.insertHistorico(historico).getId();
+
 		}
 
 		return count;
 
 	}
-	public static Integer maintainInsertHistoricoItens(Integer historicoId,IHistoricoItensBAR historicoBAR,InternalResultsResponse<?> response)
+	public static Integer maintainInsertHistoricoItens(TabelaEnum tabela,AcaoEnum acao ,Integer historicoId,IHistoricoBAR historicoBAR,InternalResultsResponse<?> response)
 	{
 		Integer count = 0;
 		if (!ValidationUtil.isNullOrZero(historicoId))
 		{
-			count += historicoBAR.Ins().getId();
-					
+			HistoricoItens historico = new HistoricoItens();
+			historico.setIdHist(historicoId);
+			historico.setTabelaEnum(tabela);
+			historico.setAcaoType(acao);
+			historico.setModifyDateUTC((new Date()).getTime());
+			historico.setModifyUser("system");
+			count = historicoBAR.insertHistoricoItens(historico).getId();
+
 		}
 
 		return count;

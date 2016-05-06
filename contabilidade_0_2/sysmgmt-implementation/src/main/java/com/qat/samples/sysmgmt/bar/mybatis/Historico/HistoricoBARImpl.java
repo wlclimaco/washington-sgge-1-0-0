@@ -90,11 +90,11 @@ private static final String STMT_DELETE_HISTORICOITENS = NAMESPACE_HISTORICOITEN
  * @see com.qat.samples.sysmgmt.base.bar.IHistoricoBAR#insertHistorico(com.qat.samples.sysmgmt.base.model.Historico)
  */
 @Override
-public InternalResponse insertHistorico(Historico historico)
+public Historico insertHistorico(Historico historico)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_HISTORICO, historico, response);
-	return response;
+	return historico;
 }
 
 /*
@@ -223,11 +223,12 @@ public static void fetchHistoricosByRequest(SqlSession sqlSession, HistoricoInqu
  * @see com.qat.samples.sysmgmt.base.bar.IHistoricoItensBAR#insertHistoricoItens(com.qat.samples.sysmgmt.base.model.HistoricoItens)
  */
 @Override
-public InternalResponse insertHistoricoItens(HistoricoItens historicoitens)
+public HistoricoItens insertHistoricoItens(HistoricoItens historicoitens)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_HISTORICOITENS, historicoitens, response);
-	return response;
+
+	return historicoitens;
 }
 
 /*

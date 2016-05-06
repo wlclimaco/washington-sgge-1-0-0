@@ -29,7 +29,7 @@ public interface IHistoricoBAR
 *
 * @return the internal response
 */
-	public InternalResponse insertHistorico(Historico historico);
+	public Historico insertHistorico(Historico historico);
 
 	/**
 * Update historico.
@@ -86,7 +86,7 @@ public interface IHistoricoBAR
 *
 * @return the internal response
 */
-	public InternalResponse insertHistoricoItens(HistoricoItens historicoitens);
+	public HistoricoItens insertHistoricoItens(HistoricoItens historicoitens);
 
 	/**
 * Update historicoitens.
