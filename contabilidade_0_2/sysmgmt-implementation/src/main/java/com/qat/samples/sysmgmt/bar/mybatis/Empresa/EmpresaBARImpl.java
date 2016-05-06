@@ -296,8 +296,9 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	public InternalResponse insertEmpresa(Empresa empresa) {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ENTIDADE, empresa, response);
-		 Integer historicoId = InsertHistBARD.maintainInsertHistorico();
-		 Integer processId   = InsertHistBARD.maintainInsertHistoricoItens();
+		Integer historicoId = InsertHistBARD.maintainInsertHistorico();
+		Integer processId   = InsertHistBARD.maintainInsertHistoricoItens();
+		empresa.setProcessId(processId)
 		BaseBARD.maintainInsertBase(empresa, historicoId, processId,TabelaEnum.EMPRESA,getEnderecoBAR() ,getStatusBAR(),getHistoricoBAR(),
 				getCadastrosBAR(),getFiscalBAR(),getTelefoneBAR(),getEmailBAR(),getDocumentoBAR(),getNotesBAR(), new InternalResultsResponse<Empresa>());
 
@@ -314,6 +315,10 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	public InternalResponse updateEmpresa(Empresa empresa) {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ENTIDADE, empresa, response);
+		
+		BaseBARD.maintainInsertBase(empresa, historicoId, processId,TabelaEnum.EMPRESA,getEnderecoBAR() ,getStatusBAR(),getHistoricoBAR(),
+				getCadastrosBAR(),getFiscalBAR(),getTelefoneBAR(),getEmailBAR(),getDocumentoBAR(),getNotesBAR(), new InternalResultsResponse<Empresa>());
+		
 		return response;
 	}
 
@@ -327,6 +332,10 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	public InternalResponse deleteEmpresaById(Empresa empresa) {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ENTIDADE, empresa, response);
+		
+		BaseBARD.maintainInsertBase(empresa, historicoId, processId,TabelaEnum.EMPRESA,getEnderecoBAR() ,getStatusBAR(),getHistoricoBAR(),
+				getCadastrosBAR(),getFiscalBAR(),getTelefoneBAR(),getEmailBAR(),getDocumentoBAR(),getNotesBAR(), new InternalResultsResponse<Empresa>());
+				
 		return response;
 	}
 
@@ -437,6 +446,11 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	public InternalResponse insertFilial(Filial filial) {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ENTIDADE, filial, response);
+		
+		BaseBARD.maintainInsertBase(empresa, historicoId, processId,TabelaEnum.EMPRESA,getEnderecoBAR() ,getStatusBAR(),getHistoricoBAR(),
+				getCadastrosBAR(),getFiscalBAR(),getTelefoneBAR(),getEmailBAR(),getDocumentoBAR(),getNotesBAR(), new InternalResultsResponse<Empresa>());
+				
+				
 		return response;
 	}
 
@@ -451,6 +465,11 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	public InternalResponse updateFilial(Filial filial) {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ENTIDADE, filial, response);
+		
+		BaseBARD.maintainInsertBase(empresa, historicoId, processId,TabelaEnum.EMPRESA,getEnderecoBAR() ,getStatusBAR(),getHistoricoBAR(),
+				getCadastrosBAR(),getFiscalBAR(),getTelefoneBAR(),getEmailBAR(),getDocumentoBAR(),getNotesBAR(), new InternalResultsResponse<Empresa>());
+				
+				
 		return response;
 	}
 
@@ -575,6 +594,10 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	public InternalResponse insertDeposito(Deposito deposito) {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ENTIDADE, deposito, response);
+		
+		BaseBARD.maintainInsertBase(empresa, historicoId, processId,TabelaEnum.EMPRESA,getEnderecoBAR() ,getStatusBAR(),getHistoricoBAR(),
+				getCadastrosBAR(),getFiscalBAR(),getTelefoneBAR(),getEmailBAR(),getDocumentoBAR(),getNotesBAR(), new InternalResultsResponse<Empresa>());
+				
 		return response;
 	}
 
@@ -589,6 +612,10 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	public InternalResponse updateDeposito(Deposito deposito) {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ENTIDADE, deposito, response);
+		
+		BaseBARD.maintainInsertBase(empresa, historicoId, processId,TabelaEnum.EMPRESA,getEnderecoBAR() ,getStatusBAR(),getHistoricoBAR(),
+				getCadastrosBAR(),getFiscalBAR(),getTelefoneBAR(),getEmailBAR(),getDocumentoBAR(),getNotesBAR(), new InternalResultsResponse<Empresa>());
+				
 		return response;
 	}
 
@@ -602,7 +629,12 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	@Override
 	public InternalResponse deleteDepositoById(Deposito deposito) {
 		InternalResponse response = new InternalResponse();
+		
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ENTIDADE, deposito, response);
+		
+		BaseBARD.maintainInsertBase(empresa, historicoId, processId,TabelaEnum.EMPRESA,getEnderecoBAR() ,getStatusBAR(),getHistoricoBAR(),
+				getCadastrosBAR(),getFiscalBAR(),getTelefoneBAR(),getEmailBAR(),getDocumentoBAR(),getNotesBAR(), new InternalResultsResponse<Empresa>());
+				
 		return response;
 	}
 
