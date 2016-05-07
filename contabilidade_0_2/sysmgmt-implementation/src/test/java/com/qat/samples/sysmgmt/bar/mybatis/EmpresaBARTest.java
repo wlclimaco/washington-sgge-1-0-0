@@ -716,19 +716,19 @@ public IEmpresaBAR getEmpresaBAR()
 		{
 			List<Endereco> enderecoList = new ArrayList<Endereco>();
 			Endereco endereco =
-					new Endereco(0, "logradouro", new Cidade(), new Estado(), "bairro", "numero", "cep", "complemento",
+					new Endereco(null, "logradouro", new Cidade(), new Estado(), "bairro", "numero", "cep", "complemento",
 							EnderecoTypeEnum.ENTREGA, action);
 			endereco.setProcessId(1);
 			enderecoList.add(endereco);
 
 			endereco =
-					new Endereco(0, "logradouro", new Cidade(), new Estado(), "bairro", "numero", "cep", "complemento",
+					new Endereco(null, "logradouro", new Cidade(), new Estado(), "bairro", "numero", "cep", "complemento",
 							EnderecoTypeEnum.COBRANCA, action);
 			endereco.setProcessId(1);
 			enderecoList.add(endereco);
 
 			endereco =
-					new Endereco(0, "logradouro", new Cidade(), new Estado(), "bairro", "numero", "cep", "complemento",
+					new Endereco(null, "logradouro", new Cidade(), new Estado(), "bairro", "numero", "cep", "complemento",
 							EnderecoTypeEnum.PRINCIPAL, action);
 			endereco.setProcessId(1);
 			enderecoList.add(endereco);
@@ -739,15 +739,15 @@ public IEmpresaBAR getEmpresaBAR()
 		public List<Documento> documentoList(PersistenceActionEnum action)
 		{
 			List<Documento> documentoList = new ArrayList<Documento>();
-			Documento documento = new Documento(0, DocumentoTypeEnum.CNPJ, "numero", (long)123456789, new Estado(), action);
+			Documento documento = new Documento(null, DocumentoTypeEnum.CNPJ, "numero", (long)123456789, new Estado(), action);
 			documento.setProcessId(1);
 			documentoList.add(documento);
 
-			documento = new Documento(0, DocumentoTypeEnum.IE, "numero", (long)123456789, new Estado(), action);
+			documento = new Documento(null, DocumentoTypeEnum.IE, "numero", (long)123456789, new Estado(), action);
 			documento.setProcessId(1);
 			documentoList.add(documento);
 
-			documento = new Documento(0, DocumentoTypeEnum.IM, "numero", (long)123456789, new Estado(), action);
+			documento = new Documento(null, DocumentoTypeEnum.IM, "numero", (long)123456789, new Estado(), action);
 			documento.setProcessId(1);
 			documentoList.add(documento);
 			return documentoList;
@@ -757,13 +757,13 @@ public IEmpresaBAR getEmpresaBAR()
 		public List<Email> emailList(PersistenceActionEnum action)
 		{
 			List<Email> documentoList = new ArrayList<Email>();
-			Email documento = new Email(0, "email", EmailTypeEnum.COMPRAS, action);
+			Email documento = new Email(null, "email", EmailTypeEnum.COMPRAS, action);
 			documento.setProcessId(1);
 			documentoList.add(documento);
-			documento = new Email(0, "email", EmailTypeEnum.NFE, action);
+			documento = new Email(null, "email", EmailTypeEnum.NFE, action);
 			documento.setProcessId(1);
 			documentoList.add(documento);
-			documento = new Email(0, "email", EmailTypeEnum.VENDAS, action);
+			documento = new Email(null, "email", EmailTypeEnum.VENDAS, action);
 			documento.setProcessId(1);
 			documentoList.add(documento);
 			return documentoList;
@@ -773,15 +773,15 @@ public IEmpresaBAR getEmpresaBAR()
 		public List<Telefone> telefoneList(PersistenceActionEnum action)
 		{
 			List<Telefone> documentoList = new ArrayList<Telefone>();
-			Telefone documento = new Telefone(0, "ddd", "numero", TelefoneTypeEnum.DIRETOR, action);
+			Telefone documento = new Telefone(null, "ddd", "numero", TelefoneTypeEnum.DIRETOR, action);
 			documento.setProcessId(1);
 			documentoList.add(documento);
 
-			documento = new Telefone(0, "ddd", "numero", TelefoneTypeEnum.COMPRAS, action);
+			documento = new Telefone(null, "ddd", "numero", TelefoneTypeEnum.COMPRAS, action);
 			documento.setProcessId(1);
 			documentoList.add(documento);
 
-			documento = new Telefone(0, "ddd", "numero", TelefoneTypeEnum.REPRESENTANTE, action);
+			documento = new Telefone(null, "ddd", "numero", TelefoneTypeEnum.REPRESENTANTE, action);
 			documento.setProcessId(1);
 			documentoList.add(documento);
 
@@ -794,7 +794,7 @@ public IEmpresaBAR getEmpresaBAR()
 			List<BancoPessoa> documentoList = new ArrayList<BancoPessoa>();
 			BancoPessoa documento = new BancoPessoa();
 			documento.setModelAction(action);
-			documento.setBancoId(new Banco(0, "ITAU", action));
+			documento.setBancoId(new Banco(null, "ITAU", action));
 			documento.setProcessId(1);
 			documento.setSaldo(new Double(1.99));
 			documentoList.add(documento);
@@ -808,7 +808,7 @@ public IEmpresaBAR getEmpresaBAR()
 			CfopPessoa documento = new CfopPessoa();
 			documento.setModelAction(action);
 			documento.setProcessId(1);
-			documento.setIdCfop(new Cfop(0, "cfop", "natureza", "simplificado", CfopTypeEnum.ENTRADA, 0.39, 0.15, 0.54,
+			documento.setIdCfop(new Cfop(null, "cfop", "natureza", "simplificado", CfopTypeEnum.ENTRADA, 0.39, 0.15, 0.54,
 					0.9, 0.1, "observacao", action));
 			documento.setParentId(1);
 
@@ -822,7 +822,7 @@ public IEmpresaBAR getEmpresaBAR()
 			List<Note> documentoList = new ArrayList<Note>();
 			Note documento = new Note();
 			documento.setModelAction(action);
-			documento.setId(1);
+			documento.setId(null);
 			documento.setEmprId(1);
 			documento.setNoteText("Test NOte");
 			documento.setProcessId(1);
@@ -834,11 +834,11 @@ public IEmpresaBAR getEmpresaBAR()
 		public List<CnaeEmpresa> cnaeList(PersistenceActionEnum action)
 		{
 			List<CnaeEmpresa> cnaeList = new ArrayList<CnaeEmpresa>();
-			cnaeList.add(new CnaeEmpresa(1, 1, action, new Cnae(0, "CNAE", "DESCRICAO", "ABREV", action)));
-			cnaeList.add(new CnaeEmpresa(1, 1, action, new Cnae(0, "CNAE", "DESCRICAO", "ABREV", action)));
-			cnaeList.add(new CnaeEmpresa(1, 1, action, new Cnae(0, "CNAE", "DESCRICAO", "ABREV", action)));
-			cnaeList.add(new CnaeEmpresa(1, 1, action, new Cnae(0, "CNAE", "DESCRICAO", "ABREV", action)));
-			cnaeList.add(new CnaeEmpresa(1, 1, action, new Cnae(0, "CNAE", "DESCRICAO", "ABREV", action)));
+			cnaeList.add(new CnaeEmpresa(null, 1, action, new Cnae(null, "CNAE", "DESCRICAO", "ABREV", action)));
+			cnaeList.add(new CnaeEmpresa(null, 1, action, new Cnae(null, "CNAE", "DESCRICAO", "ABREV", action)));
+			cnaeList.add(new CnaeEmpresa(null, 1, action, new Cnae(null, "CNAE", "DESCRICAO", "ABREV", action)));
+			cnaeList.add(new CnaeEmpresa(null, 1, action, new Cnae(null, "CNAE", "DESCRICAO", "ABREV", action)));
+			cnaeList.add(new CnaeEmpresa(null, 1, action, new Cnae(null, "CNAE", "DESCRICAO", "ABREV", action)));
 			return cnaeList;
 
 		}
@@ -847,7 +847,7 @@ public IEmpresaBAR getEmpresaBAR()
 		{
 
 			Regime regime = new Regime();
-			regime.setId(1);
+			regime.setId(null);
 			regime.setNome("Teste");
 			regime.setDescricao("Teste");
 			regime.setModelAction(action);
@@ -861,7 +861,7 @@ public IEmpresaBAR getEmpresaBAR()
 			for (Integer i = 0; i < 10; i++)
 			{
 				Usuario usuario = new Usuario();
-				usuario.setId(1);
+				usuario.setId(null);
 				usuario.setLogin("LOGIN");
 				usuario.setSenha("SENHA");
 				usuario.setPergunta("PERGUNTA");
@@ -906,7 +906,7 @@ public IEmpresaBAR getEmpresaBAR()
 			Filial funcionario = new Filial();
 			Date a = new Date();
 
-			funcionario.setId(1);
+			funcionario.setId(null);
 			funcionario.setNome("NOME");
 			funcionario.setRegime(insertRegime(action));
 			funcionario.setEntidadeId(1);
@@ -929,7 +929,7 @@ public IEmpresaBAR getEmpresaBAR()
 			Deposito funcionario = new Deposito();
 			Date a = new Date();
 
-			funcionario.setId(1);
+			funcionario.setId(null);
 			funcionario.setNome("NOME");
 			funcionario.setRegime(insertRegime(action));
 			funcionario.setEntidadeId(1);

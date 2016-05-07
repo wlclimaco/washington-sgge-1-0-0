@@ -28,8 +28,7 @@
   </resultMap>
 
   <sql id="allHistoricoItensColumns">
-id
-,processId
+processId
 ,acaoEnumValue
 ,tabelaEnumValue
 ,parentId
@@ -40,7 +39,7 @@ id
 
 </sql>
 <sql id="allHistoricoItensValues">
-#{id},
+
 #{processId},
 #{acaoEnumValue},
 #{tabelaEnumValue},
@@ -51,18 +50,7 @@ id
 		#{modifyUser}
   </sql>
 
- <sql id="allHistoricoItensColumnsWithQualifier">
-		c.id, c.historicoitens_desc
-c.id,
-c.processId,
-c.acaoEnumValue,
-c.tabelaEnumValue,
-c.parentId,
-		c.createDateUTC,
-		c.createUser,
-		c.modifyDateUTC,
-		c.modifyUser
- </sql>
+
 
  <select id="fetchAllHistoricoItens" resultMap="HistoricoItensResult">
     SELECT
@@ -89,16 +77,15 @@ c.parentId,
 
  </select>
 
- <insert id="insertHistoricoItens" parameterType="HistoricoItens">
- 	INSERT INTO historicoitens (
+ <insert id="insertHistoricoItens" parameterType="HistoricoItens" useGeneratedKeys="true" keyProperty="id">
+ 	INSERT INTO historicoitens (<if test="id != null"><if test="id > 0">id,</if></if>
 	<include refid="allHistoricoItensColumns" />
      )
-   VALUES (<include refid="allHistoricoItensValues" /> )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allHistoricoItensValues" /> )
  </insert>
 
  <update id="updateHistoricoItens" parameterType="HistoricoItens">
    UPDATE historicoitens SET
-<if test="id!= null">id = #{id},</if>
 <if test="processId!= null">processId = #{processId},</if>
 <if test="acaoEnumValue!= null">acaoEnumValue = #{acaoEnumValue},</if>
 <if test="tabelaEnumValue!= null">tabelaEnumValue = #{tabelaEnumValue},</if>

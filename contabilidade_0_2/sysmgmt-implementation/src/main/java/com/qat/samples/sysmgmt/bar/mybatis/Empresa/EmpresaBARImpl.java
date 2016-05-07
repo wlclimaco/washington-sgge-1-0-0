@@ -1,8 +1,6 @@
 /** create by system gera-java version 1.0.0 01/05/2016 18:42 : 57*/
 package com.qat.samples.sysmgmt.bar.mybatis.Empresa;
 
-import javax.annotation.Resource;
-
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -11,6 +9,7 @@ import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.MyBatisBARHelper;
+import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.advocacia.Advocacia;
 import com.qat.samples.sysmgmt.advocacia.request.AdvocaciaInquiryRequest;
 import com.qat.samples.sysmgmt.bar.Cadastros.ICadastrosBAR;
@@ -18,12 +17,19 @@ import com.qat.samples.sysmgmt.bar.Documentos.IDocumentoBAR;
 import com.qat.samples.sysmgmt.bar.Email.IEmailBAR;
 import com.qat.samples.sysmgmt.bar.Empresa.IEmpresaBAR;
 import com.qat.samples.sysmgmt.bar.Endereco.IEnderecoBAR;
+import com.qat.samples.sysmgmt.bar.Financeiro.IFinanceiroBAR;
 import com.qat.samples.sysmgmt.bar.Fiscal.IFiscalBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Notes.INotesBAR;
+import com.qat.samples.sysmgmt.bar.Site.ISiteBAR;
+import com.qat.samples.sysmgmt.bar.Socios.ISociosBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.BaseBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.PlanoBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.SociosBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.UsuarioBARD;
 import com.qat.samples.sysmgmt.clinica.model.Clinica;
 import com.qat.samples.sysmgmt.clinica.model.request.ClinicaInquiryRequest;
 import com.qat.samples.sysmgmt.condominio.model.Condominio;
@@ -35,6 +41,7 @@ import com.qat.samples.sysmgmt.entidade.model.Usuario;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
@@ -211,9 +218,43 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	IDocumentoBAR documentoBAR;
 
+	ISociosBAR sociosBAR;
+
+	ISiteBAR siteBAR;
+
+	IFinanceiroBAR financeiroBAR;
+
 	INotesBAR notesBAR;
 
 
+
+	public ISociosBAR getSociosBAR() {
+		return sociosBAR;
+	}
+
+	public void setSociosBAR(ISociosBAR sociosBAR) {
+		this.sociosBAR = sociosBAR;
+	}
+
+	public ISiteBAR getSiteBAR() {
+		return siteBAR;
+	}
+
+	public void setSiteBAR(ISiteBAR siteBAR) {
+		this.siteBAR = siteBAR;
+	}
+
+	public IFinanceiroBAR getFinanceiroBAR() {
+		return financeiroBAR;
+	}
+
+	public void setFinanceiroBAR(IFinanceiroBAR financeiroBAR) {
+		this.financeiroBAR = financeiroBAR;
+	}
+
+	public IDocumentoBAR getDocumentoBAR() {
+		return documentoBAR;
+	}
 
 	public IHistoricoBAR getHistoricoBAR() {
 		return historicoBAR;
@@ -234,7 +275,8 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	public IEnderecoBAR getEnderecoBAR() {
 		return enderecoBAR;
 	}
-	//@Resource
+
+	// @Resource
 	public void setEnderecoBAR(IEnderecoBAR enderecoBAR) {
 		this.enderecoBAR = enderecoBAR;
 	}
@@ -271,7 +313,7 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 		this.emailBAR = emailBAR;
 	}
 
-	public IDocumentoBAR getDocumentoBAR() {
+	public IDocumentoBAR getDocumentosBAR() {
 		return documentoBAR;
 	}
 
@@ -295,12 +337,51 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	@Override
 	public InternalResponse insertEmpresa(Empresa empresa) {
 		InternalResponse response = new InternalResponse();
+		Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.EMPRESA, getHistoricoBAR(), response);
+		Integer processId = 1;
+		empresa.setProcessId(historicoId);
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ENTIDADE, empresa, response);
-		Integer historicoId = InsertHistBARD.maintainInsertHistorico();
-		Integer processId   = InsertHistBARD.maintainInsertHistoricoItens();
-		empresa.setProcessId(processId)
-		BaseBARD.maintainInsertBase(empresa, historicoId, processId,TabelaEnum.EMPRESA,getEnderecoBAR() ,getStatusBAR(),getHistoricoBAR(),
-				getCadastrosBAR(),getFiscalBAR(),getTelefoneBAR(),getEmailBAR(),getDocumentoBAR(),getNotesBAR(), new InternalResultsResponse<Empresa>());
+
+		BaseBARD.maintainInsertBase(empresa, historicoId, processId, TabelaEnum.EMPRESA, getEnderecoBAR(),
+				getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getFiscalBAR(), getTelefoneBAR(), getEmailBAR(),
+				getDocumentosBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
+
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoId,
+				getHistoricoBAR(), response, empresa.getId());
+
+		if (!ValidationUtil.isNullOrEmpty(empresa.getSocios()))
+		{
+			a +=
+					SociosBARD.maintainSocioAssociations(empresa.getSocios(), response, empresa.getId(), null, null,
+							TabelaEnum.EMPRESA, getSociosBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
+							empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+
+		}
+		if (!ValidationUtil.isNullOrEmpty(empresa.getPlanoList()))
+		{
+			a +=
+					PlanoBARD.maintainPlanoAssociations(empresa.getPlanoList(), response, empresa.getId(), null, null,
+							TabelaEnum.EMPRESA, getSiteBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
+							empresa.getCreateUser(), historicoId, historicoId);
+		}
+
+		if (!ValidationUtil.isNullOrEmpty(empresa.getUsuarioList()))
+		{
+//			a +=
+//					UsuarioBARD.maintainUsuarioAssociations(empresa.getUsuarioList(), response, empresa.getId(), null,
+//							null,
+//							TabelaEnum.EMPRESA, getUsuarioBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
+//							empresa.getCreateUser(), historicoId, historicoId);
+		}
+
+		if (!ValidationUtil.isNullOrEmpty(empresa.getContaCorrenteList()))
+		{
+			a +=
+					UsuarioBARD.maintainUsuarioAssociations(empresa.getUsuarioList(), response, empresa.getId(), null,
+							null,
+							TabelaEnum.EMPRESA, getFinanceiroBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
+							empresa.getCreateUser(), historicoId, historicoId);
+		}
 
 		return response;
 	}
@@ -315,10 +396,14 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	public InternalResponse updateEmpresa(Empresa empresa) {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ENTIDADE, empresa, response);
-		
-		BaseBARD.maintainInsertBase(empresa, historicoId, processId,TabelaEnum.EMPRESA,getEnderecoBAR() ,getStatusBAR(),getHistoricoBAR(),
-				getCadastrosBAR(),getFiscalBAR(),getTelefoneBAR(),getEmailBAR(),getDocumentoBAR(),getNotesBAR(), new InternalResultsResponse<Empresa>());
-		
+
+		Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.EMPRESA, getHistoricoBAR(), response);
+		Integer processId = 1;
+
+		BaseBARD.maintainInsertBase(empresa, historicoId, processId, TabelaEnum.EMPRESA, getEnderecoBAR(),
+				getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getFiscalBAR(), getTelefoneBAR(), getEmailBAR(),
+				getDocumentosBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
+
 		return response;
 	}
 
@@ -332,10 +417,14 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	public InternalResponse deleteEmpresaById(Empresa empresa) {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ENTIDADE, empresa, response);
-		
-		BaseBARD.maintainInsertBase(empresa, historicoId, processId,TabelaEnum.EMPRESA,getEnderecoBAR() ,getStatusBAR(),getHistoricoBAR(),
-				getCadastrosBAR(),getFiscalBAR(),getTelefoneBAR(),getEmailBAR(),getDocumentoBAR(),getNotesBAR(), new InternalResultsResponse<Empresa>());
-				
+
+		Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.EMPRESA, getHistoricoBAR(), response);
+		Integer processId = historicoId;
+
+		BaseBARD.maintainInsertBase(empresa, historicoId, processId, TabelaEnum.EMPRESA, getEnderecoBAR(),
+				getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getFiscalBAR(), getTelefoneBAR(), getEmailBAR(),
+				getDocumentosBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
+
 		return response;
 	}
 
@@ -446,11 +535,14 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	public InternalResponse insertFilial(Filial filial) {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ENTIDADE, filial, response);
-		
-		BaseBARD.maintainInsertBase(empresa, historicoId, processId,TabelaEnum.EMPRESA,getEnderecoBAR() ,getStatusBAR(),getHistoricoBAR(),
-				getCadastrosBAR(),getFiscalBAR(),getTelefoneBAR(),getEmailBAR(),getDocumentoBAR(),getNotesBAR(), new InternalResultsResponse<Empresa>());
-				
-				
+
+		Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.EMPRESA, getHistoricoBAR(), response);
+		Integer processId = historicoId;
+
+		BaseBARD.maintainInsertBase(filial, historicoId, processId, TabelaEnum.EMPRESA, getEnderecoBAR(),
+				getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getFiscalBAR(), getTelefoneBAR(), getEmailBAR(),
+				getDocumentosBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
+
 		return response;
 	}
 
@@ -465,11 +557,14 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	public InternalResponse updateFilial(Filial filial) {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ENTIDADE, filial, response);
-		
-		BaseBARD.maintainInsertBase(empresa, historicoId, processId,TabelaEnum.EMPRESA,getEnderecoBAR() ,getStatusBAR(),getHistoricoBAR(),
-				getCadastrosBAR(),getFiscalBAR(),getTelefoneBAR(),getEmailBAR(),getDocumentoBAR(),getNotesBAR(), new InternalResultsResponse<Empresa>());
-				
-				
+
+		Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.EMPRESA, getHistoricoBAR(), response);
+		Integer processId = historicoId;
+
+		BaseBARD.maintainInsertBase(filial, historicoId, processId, TabelaEnum.EMPRESA, getEnderecoBAR(),
+				getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getFiscalBAR(), getTelefoneBAR(), getEmailBAR(),
+				getDocumentosBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
+
 		return response;
 	}
 
@@ -483,7 +578,15 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	@Override
 	public InternalResponse deleteFilialById(Filial filial) {
 		InternalResponse response = new InternalResponse();
+
+		Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.EMPRESA, getHistoricoBAR(), response);
+		Integer processId = historicoId;
+
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ENTIDADE, filial, response);
+
+		BaseBARD.maintainInsertBase(filial, historicoId, processId, TabelaEnum.FILIAL, getEnderecoBAR(), getStatusBAR(),
+				getHistoricoBAR(), getCadastrosBAR(), getFiscalBAR(), getTelefoneBAR(), getEmailBAR(),
+				getDocumentosBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
 		return response;
 	}
 
@@ -593,11 +696,16 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	@Override
 	public InternalResponse insertDeposito(Deposito deposito) {
 		InternalResponse response = new InternalResponse();
+
+		Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.EMPRESA, getHistoricoBAR(), response);
+		Integer processId = historicoId;
+
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ENTIDADE, deposito, response);
-		
-		BaseBARD.maintainInsertBase(empresa, historicoId, processId,TabelaEnum.EMPRESA,getEnderecoBAR() ,getStatusBAR(),getHistoricoBAR(),
-				getCadastrosBAR(),getFiscalBAR(),getTelefoneBAR(),getEmailBAR(),getDocumentoBAR(),getNotesBAR(), new InternalResultsResponse<Empresa>());
-				
+
+		BaseBARD.maintainInsertBase(deposito, historicoId, processId, TabelaEnum.EMPRESA, getEnderecoBAR(),
+				getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getFiscalBAR(), getTelefoneBAR(), getEmailBAR(),
+				getDocumentosBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
+
 		return response;
 	}
 
@@ -611,11 +719,16 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	@Override
 	public InternalResponse updateDeposito(Deposito deposito) {
 		InternalResponse response = new InternalResponse();
+
+		Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.EMPRESA, getHistoricoBAR(), response);
+		Integer processId = historicoId;
+
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ENTIDADE, deposito, response);
-		
-		BaseBARD.maintainInsertBase(empresa, historicoId, processId,TabelaEnum.EMPRESA,getEnderecoBAR() ,getStatusBAR(),getHistoricoBAR(),
-				getCadastrosBAR(),getFiscalBAR(),getTelefoneBAR(),getEmailBAR(),getDocumentoBAR(),getNotesBAR(), new InternalResultsResponse<Empresa>());
-				
+
+		BaseBARD.maintainInsertBase(deposito, historicoId, processId, TabelaEnum.EMPRESA, getEnderecoBAR(),
+				getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getFiscalBAR(), getTelefoneBAR(), getEmailBAR(),
+				getDocumentosBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
+
 		return response;
 	}
 
@@ -629,12 +742,15 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	@Override
 	public InternalResponse deleteDepositoById(Deposito deposito) {
 		InternalResponse response = new InternalResponse();
-		
+
+		Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.EMPRESA, getHistoricoBAR(), response);
+		Integer processId = historicoId;
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ENTIDADE, deposito, response);
-		
-		BaseBARD.maintainInsertBase(empresa, historicoId, processId,TabelaEnum.EMPRESA,getEnderecoBAR() ,getStatusBAR(),getHistoricoBAR(),
-				getCadastrosBAR(),getFiscalBAR(),getTelefoneBAR(),getEmailBAR(),getDocumentoBAR(),getNotesBAR(), new InternalResultsResponse<Empresa>());
-				
+
+		BaseBARD.maintainInsertBase(deposito, historicoId, processId, TabelaEnum.EMPRESA, getEnderecoBAR(),
+				getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getFiscalBAR(), getTelefoneBAR(), getEmailBAR(),
+				getDocumentosBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
+
 		return response;
 	}
 
@@ -1015,17 +1131,16 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	// ===================================### CLINICA
 	// ####======================================
 	/**
-/*
- * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.base.bar.IClinicaBAR#insertClinica(com.qat.samples.sysmgmt.base.model.Clinica)
- */
-@Override
-public InternalResponse insertClinica(Clinica clinicas)
-{
-	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ENTIDADE ,clinicas, response);
-	return response;
-}
+	 * /* (non-Javadoc)
+	 *
+	 * @see com.qat.samples.sysmgmt.base.bar.IClinicaBAR#insertClinica(com.qat.samples.sysmgmt.base.model.Clinica)
+	 */
+	@Override
+	public InternalResponse insertClinica(Clinica clinicas) {
+		InternalResponse response = new InternalResponse();
+		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ENTIDADE, clinicas, response);
+		return response;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -1033,13 +1148,12 @@ public InternalResponse insertClinica(Clinica clinicas)
 	 * @see com.qat.samples.sysmgmt.base.bar.IClinicaBAR#updateClinica(com.qat.
 	 * samples.sysmgmt.base.model.Clinica)
 	 */
-@Override
-public InternalResponse updateClinica(Clinica clinica)
-{
-	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ENTIDADE, clinica, response);
-	return response;
-}
+	@Override
+	public InternalResponse updateClinica(Clinica clinica) {
+		InternalResponse response = new InternalResponse();
+		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ENTIDADE, clinica, response);
+		return response;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -1047,13 +1161,12 @@ public InternalResponse updateClinica(Clinica clinica)
 	 * @see com.qat.samples.sysmgmt.base.bar.IClinicaBAR#deleteClinica(com.qat.
 	 * samples.sysmgmt.base.model.Clinica)
 	 */
-@Override
-public InternalResponse deleteClinicaById(Clinica clinica)
-{
-	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ENTIDADE, clinica, response);
-	return response;
-}
+	@Override
+	public InternalResponse deleteClinicaById(Clinica clinica) {
+		InternalResponse response = new InternalResponse();
+		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ENTIDADE, clinica, response);
+		return response;
+	}
 
 	/*
 	 * (non-Javadoc)

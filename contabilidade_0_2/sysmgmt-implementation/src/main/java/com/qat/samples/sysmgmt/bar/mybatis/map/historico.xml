@@ -31,8 +31,7 @@
   </resultMap>
 
   <sql id="allHistoricoColumns">
-id
-,data
+data
 ,userId
 ,emprId
 ,tabelaEnumValue
@@ -45,7 +44,6 @@ id
 
 </sql>
 <sql id="allHistoricoValues">
-#{id},
 #{data},
 #{userId},
 #{emprId},
@@ -58,36 +56,21 @@ id
 		#{modifyUser}
   </sql>
 
- <sql id="allHistoricoColumnsWithQualifier">
-		c.id, c.historico_desc
-c.id,
-c.data,
-c.userId,
-c.emprId,
-c.tabelaEnumValue,
-c.acaoEnumValue,
-c.processId,
-		c.createDateUTC,
-		c.createUser,
-		c.modifyDateUTC,
-		c.modifyUser
- </sql>
-
  <select id="fetchAllHistoricos" resultMap="HistoricoResult">
-    SELECT
+    SELECT id,
 	<include refid="allHistoricoColumns" />
    FROM historico ORDER BY id ASC
  </select>
 
  <select id="fetchHistoricoById" parameterType="Integer" resultMap="HistoricoResult">
-    SELECT
+    SELECT id,
 	<include refid="allHistoricoColumns" />
    FROM historico WHERE id = #{fetchid}
  </select>
 
  <select id="fetchAllHistoricosRequest" parameterType="HistoricoInquiryRequest" resultMap="HistoricoResult">
 
-		SELECT <include refid="allHistoricoColumns" />
+		SELECT id,<include refid="allHistoricoColumns" />
   		  FROM historico ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
@@ -98,11 +81,11 @@ c.processId,
 
  </select>
 
- <insert id="insertHistorico" parameterType="Historico">
- 	INSERT INTO historico (
+ <insert id="insertHistorico" parameterType="Historico" useGeneratedKeys="true" keyProperty="id">
+ 	INSERT INTO historico (<if test="id != null">id,</if>
 	<include refid="allHistoricoColumns" />
      )
-   VALUES (<include refid="allHistoricoValues" /> )
+   VALUES (<if test="id != null">#{id},</if><include refid="allHistoricoValues" /> )
  </insert>
 
  <update id="updateHistorico" parameterType="Historico">

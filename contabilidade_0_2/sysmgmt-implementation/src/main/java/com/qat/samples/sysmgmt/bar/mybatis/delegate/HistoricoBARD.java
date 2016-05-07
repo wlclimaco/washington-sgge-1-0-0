@@ -39,76 +39,76 @@ public final class HistoricoBARD extends SqlSessionDaoSupport
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IHistoricoBAR historicoDAC, IStatusBAR statusDAC)
 	{
-		Boolean count = false;
-		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(historicoList))
-		{
-			return 0;
-		}
-		// For Each Contact...
-		for (Historico historico : historicoList)
-		{
-			// Make sure we set the parent key
-			historico.setParentId(parentId);
-
-			if (ValidationUtil.isNull(historico.getModelAction()))
-			{
-				continue;
-			}
-			switch (historico.getModelAction())
-			{
-				case INSERT:
-					count = historicoDAC.insertHistorico(historico).hasSystemError();;
-
-					break;
-				case UPDATE:
-					count = historicoDAC.updateHistorico(historico).hasSystemError();;
-
-					break;
-				case DELETE:
-					count = historicoDAC.deleteHistoricoById(historico).hasSystemError();;
-
-					break;
-
-			}
-		}
+//		Boolean count = false;
+//		// First Maintain Empresa
+//		if (ValidationUtil.isNullOrEmpty(historicoList))
+//		{
+//			return 0;
+//		}
+//		// For Each Contact...
+//		for (Historico historico : historicoList)
+//		{
+//			// Make sure we set the parent key
+//			historico.setParentId(parentId);
+//
+//			if (ValidationUtil.isNull(historico.getModelAction()))
+//			{
+//				continue;
+//			}
+//			switch (historico.getModelAction())
+//			{
+//				case INSERT:
+//					count = historicoDAC.insertHistorico(historico).hasSystemError();;
+//
+//					break;
+//				case UPDATE:
+//					count = historicoDAC.updateHistorico(historico).hasSystemError();;
+//
+//					break;
+//				case DELETE:
+//					count = historicoDAC.deleteHistoricoById(historico).hasSystemError();;
+//
+//					break;
+//
+//			}
+//		}
+//
+//		return 1;
+//	}
+//
+//	@SuppressWarnings("unchecked")
+//	public static Integer inserthistoricoItens(Integer id, String userId, InternalResultsResponse<?> response,
+//			TabelaEnum tabelaEnum, AcaoEnum acaoType, Integer historico, IHistoricoBAR historicoDAC)
+//	{
+//		HistoricoItens historicoItens = new HistoricoItens();
+//		historicoItens.setIdHist(historico);
+//		historicoItens.setProcessId(historico);
+//		historicoItens.setParentId(id);
+//		historicoItens.setTabelaEnum(tabelaEnum);
+//		historicoItens.setAcaoType(acaoType);
+//
+//		historicoDAC.insertHistoricoItens(historicoItens);
+//
+//		return historicoItens.getId();
+//	}
+//
+//	@SuppressWarnings("unchecked")
+//	public static Integer inserthistorico(Integer id, Integer emprId, String userId,
+//			InternalResultsResponse<?> response,
+//			TabelaEnum tabelaEnum,
+//			AcaoEnum acaoType, IHistoricoBAR historicoDAC)
+//	{
+//		Historico historico = new Historico();
+//		historico.setParentId(id);
+//		historico.setEmprId(emprId);
+//		historico.setUserId(userId);
+//		historico.setAcaoType(acaoType);
+//		historico.setTabelaEnum(tabelaEnum);
+//		historico.setProcessId(0);
+//		Date a = new Date();
+//		historico.setData(a.getTime());
+//		historicoDAC.insertHistorico(historico);
 
 		return 1;
-	}
-
-	@SuppressWarnings("unchecked")
-	public static Integer inserthistoricoItens(Integer id, String userId, InternalResultsResponse<?> response,
-			TabelaEnum tabelaEnum, AcaoEnum acaoType, Integer historico, IHistoricoBAR historicoDAC)
-	{
-		HistoricoItens historicoItens = new HistoricoItens();
-		historicoItens.setIdHist(historico);
-		historicoItens.setProcessId(historico);
-		historicoItens.setParentId(id);
-		historicoItens.setTabelaEnum(tabelaEnum);
-		historicoItens.setAcaoType(acaoType);
-
-		historicoDAC.insertHistoricoItens(historicoItens);
-
-		return historicoItens.getId();
-	}
-
-	@SuppressWarnings("unchecked")
-	public static Integer inserthistorico(Integer id, Integer emprId, String userId,
-			InternalResultsResponse<?> response,
-			TabelaEnum tabelaEnum,
-			AcaoEnum acaoType, IHistoricoBAR historicoDAC)
-	{
-		Historico historico = new Historico();
-		historico.setParentId(id);
-		historico.setEmprId(emprId);
-		historico.setUserId(userId);
-		historico.setAcaoType(acaoType);
-		historico.setTabelaEnum(tabelaEnum);
-		historico.setProcessId(0);
-		Date a = new Date();
-		historico.setData(a.getTime());
-		historicoDAC.insertHistorico(historico);
-
-		return historico.getId();
 	}
 }

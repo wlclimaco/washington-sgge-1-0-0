@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Documentos.IDocumentoBAR;
@@ -39,7 +40,7 @@ public final class SociosBARD extends SqlSessionDaoSupport
 	 */
 	@SuppressWarnings("unchecked")
 	public static Integer maintainSocioAssociations(List<Socio> socioList,
-			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, ISociosBAR socioDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC,
 			Integer empId, String UserId, Integer processId, Integer historicoId, IDocumentoBAR documentoDAC)
 	{
@@ -70,7 +71,7 @@ public final class SociosBARD extends SqlSessionDaoSupport
 						List<Status> statusList = new ArrayList<Status>();
 						statusList.add(status);
 						count =
-								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
+								StatusBARD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>) response, parentId, null,
 										AcaoEnum.INSERT, UserId, empId, TabelaEnum.SOCIO, statusDAC, historicoDAC,
 										processId, historicoId);
 					}

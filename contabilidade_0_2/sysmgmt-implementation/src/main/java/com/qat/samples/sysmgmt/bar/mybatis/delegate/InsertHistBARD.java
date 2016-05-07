@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
@@ -32,7 +33,7 @@ public final class InsertHistBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainInsertHistorico(TabelaEnum parentId,IHistoricoBAR historicoBAR,InternalResultsResponse<?> response)
+	public static Integer maintainInsertHistorico(TabelaEnum parentId,IHistoricoBAR historicoBAR,InternalResponse response)
 	{
 		Integer count = 0;
 		if (!ValidationUtil.isNull(parentId))
@@ -48,7 +49,7 @@ public final class InsertHistBARD extends SqlSessionDaoSupport
 		return count;
 
 	}
-	public static Integer maintainInsertHistoricoItens(TabelaEnum tabela,AcaoEnum acao ,Integer historicoId,IHistoricoBAR historicoBAR,InternalResultsResponse<?> response)
+	public static Integer maintainInsertHistoricoItens(TabelaEnum tabela,AcaoEnum acao ,Integer historicoId,IHistoricoBAR historicoBAR,InternalResponse response,Integer parendId)
 	{
 		Integer count = 0;
 		if (!ValidationUtil.isNullOrZero(historicoId))
@@ -57,6 +58,7 @@ public final class InsertHistBARD extends SqlSessionDaoSupport
 			historico.setIdHist(historicoId);
 			historico.setTabelaEnum(tabela);
 			historico.setAcaoType(acao);
+			historico.setParentId(parendId);
 			historico.setModifyDateUTC((new Date()).getTime());
 			historico.setModifyUser("system");
 			count = historicoBAR.insertHistoricoItens(historico).getId();

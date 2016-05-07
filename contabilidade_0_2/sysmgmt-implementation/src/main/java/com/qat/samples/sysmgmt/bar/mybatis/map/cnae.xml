@@ -86,7 +86,6 @@ codigo
 
  <update id="updateCnae" parameterType="Cnae">
    UPDATE cnae SET
-<if test="id!= null">id = #{id},</if>
 <if test="codigo!= null">codigo = #{codigo},</if>
 <if test="cnae!= null">cnae = #{cnae},</if>
 <if test="descricao!= null">descricao = #{descricao},</if>
