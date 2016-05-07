@@ -12,6 +12,7 @@ import com.qat.samples.sysmgmt.bar.Documentos.IDocumentoBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Socios.ISociosBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.pessoa.model.Socio;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
@@ -40,12 +41,13 @@ public final class SociosBARD extends SqlSessionDaoSupport
 	 */
 	@SuppressWarnings("unchecked")
 	public static Integer maintainSocioAssociations(List<Socio> socioList,
-			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			InternalResponse responsew, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, ISociosBAR socioDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC,
 			Integer empId, String UserId, Integer processId, Integer historicoId, IDocumentoBAR documentoDAC)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
+		InternalResultsResponse<Empresa> response  = new InternalResultsResponse<Empresa>();
 		if (ValidationUtil.isNullOrEmpty(socioList))
 		{
 			return 0;

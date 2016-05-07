@@ -13,14 +13,13 @@ public class OrdemServicoItens extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	/** The type of an account. */
-	private Integer idOrdemServico;
-
 	/** The estado. */
 	private Long data;
 
 	/** The cep. */
 	private String texto;
+
+
 
 	/**
 	 * Default constructor.
@@ -30,9 +29,13 @@ public class OrdemServicoItens extends ModelCosmeDamiao
 		super();
 	}
 
+	public OrdemServicoItens(int i, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Gets the id.
-	 * 
+	 *
 	 * @return the id
 	 */
 	public Integer getId()
@@ -42,7 +45,7 @@ public class OrdemServicoItens extends ModelCosmeDamiao
 
 	/**
 	 * Sets the id.
-	 * 
+	 *
 	 * @param id the id to set
 	 */
 	public void setId(Integer id)
@@ -52,7 +55,7 @@ public class OrdemServicoItens extends ModelCosmeDamiao
 
 	/**
 	 * Gets the data.
-	 * 
+	 *
 	 * @return the data
 	 */
 	public Long getData()
@@ -62,7 +65,7 @@ public class OrdemServicoItens extends ModelCosmeDamiao
 
 	/**
 	 * Sets the data.
-	 * 
+	 *
 	 * @param data the new data
 	 */
 	public void setData(Long data)
@@ -72,7 +75,7 @@ public class OrdemServicoItens extends ModelCosmeDamiao
 
 	/**
 	 * Gets the texto.
-	 * 
+	 *
 	 * @return the texto
 	 */
 	public String getTexto()
@@ -82,7 +85,7 @@ public class OrdemServicoItens extends ModelCosmeDamiao
 
 	/**
 	 * Sets the texto.
-	 * 
+	 *
 	 * @param texto the new texto
 	 */
 	public void setTexto(String texto)
@@ -90,27 +93,11 @@ public class OrdemServicoItens extends ModelCosmeDamiao
 		this.texto = texto;
 	}
 
-	/**
-	 * @return the idOrdemServico
-	 */
-	public Integer getIdOrdemServico()
-	{
-		return idOrdemServico;
-	}
-
-	/**
-	 * @param idOrdemServico the idOrdemServico to set
-	 */
-	public void setIdOrdemServico(Integer idOrdemServico)
-	{
-		this.idOrdemServico = idOrdemServico;
-	}
-
 	@Override
 	public String toString()
 	{
 		return "OrdemServicoItens [getId()=" + getId() + ", getData()=" + getData() + ", getTexto()=" + getTexto()
-				+ ", getIdOrdemServico()=" + getIdOrdemServico() + ", toString()=" + super.toString() + "]";
+				+ ", getIdOrdemServico()=" + super.toString() + "]";
 	}
 
 }

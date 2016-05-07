@@ -23,6 +23,10 @@ public class ContatoItens extends ModelCosmeDamiao
 	/** The titulo. */
 	private String titulo;
 
+	private ContatoStatusEnum contatoStatus;
+
+	private boolean visto;
+
 	/**
 	 * Default constructor.
 	 */
@@ -38,6 +42,10 @@ public class ContatoItens extends ModelCosmeDamiao
 		this.texto = texto;
 		this.titulo = titulo;
 		setModelAction(modelAction);
+	}
+
+	public ContatoItens(int i, String string) {
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -110,11 +118,27 @@ public class ContatoItens extends ModelCosmeDamiao
 		this.titulo = titulo;
 	}
 
+	public ContatoStatusEnum getContatoStatus() {
+		return contatoStatus;
+	}
+
+	public void setContatoStatus(ContatoStatusEnum contatoStatus) {
+		this.contatoStatus = contatoStatus;
+	}
+
+	public boolean isVisto() {
+		return visto;
+	}
+
+	public void setVisto(boolean visto) {
+		this.visto = visto;
+	}
+
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "ContatoItens [getId()=" + getId() + ", getDataAlt()=" + getDataAlt() + ", getTexto()=" + getTexto()
-				+ ", getTitulo()=" + getTitulo() + ", toString()=" + super.toString() + "]";
+				+ ", getTitulo()=" + getTitulo() + ", getContatoStatus()=" + getContatoStatus() + ", isVisto()="
+				+ isVisto() + ", toString()=" + super.toString() + "]";
 	}
 
 }

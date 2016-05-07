@@ -373,6 +373,7 @@
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/interface.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/sindico.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/inquilino.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/contatoItens.xml"/>
     </mappers>
 
 </configuration>

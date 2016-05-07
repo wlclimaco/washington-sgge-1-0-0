@@ -3,7 +3,8 @@ package com.qat.samples.sysmgmt.contabilidade.model;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.produto.model.PlanoByServico;
-import com.qat.samples.sysmgmt.produto.model.TabPreco;
+import com.qat.samples.sysmgmt.produto.model.Servico;
+import com.qat.samples.sysmgmt.produto.model.Preco;
 import com.qat.samples.sysmgmt.util.model.Imagem;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
@@ -20,13 +21,11 @@ public class Plano extends ModelCosmeDamiao
 
 	private Long dataFinal;
 
-	private List<TabPreco> preco;
+	private List<Preco> preco;
 
 	private Integer numeroContrato;
 
-	private List<PlanoByServico> servicos;
-
-	private List<Imagem> imagens;
+	private List<Servico> servicos;
 
 	private String descricao;
 
@@ -97,20 +96,18 @@ public class Plano extends ModelCosmeDamiao
 		this.numeroContrato = numeroContrato;
 	}
 
-	public List<PlanoByServico> getServicos()
-	{
+	public List<Servico> getServicos() {
 		return servicos;
 	}
 
-	public void setServicos(List<PlanoByServico> servicos)
-	{
+	public void setServicos(List<Servico> servicos) {
 		this.servicos = servicos;
 	}
 
 	/**
 	 * @return the preco
 	 */
-	public List<TabPreco> getPreco()
+	public List<Preco> getPreco()
 	{
 		return preco;
 	}
@@ -118,19 +115,9 @@ public class Plano extends ModelCosmeDamiao
 	/**
 	 * @param preco the preco to set
 	 */
-	public void setPreco(List<TabPreco> preco)
+	public void setPreco(List<Preco> preco)
 	{
 		this.preco = preco;
-	}
-
-	public List<Imagem> getImagens()
-	{
-		return imagens;
-	}
-
-	public void setImagens(List<Imagem> imagens)
-	{
-		this.imagens = imagens;
 	}
 
 	public String getDescricao()
@@ -168,7 +155,7 @@ public class Plano extends ModelCosmeDamiao
 	{
 		return "Plano [getDataInicio()=" + getDataInicio() + ", getDataFinal()=" + getDataFinal()
 				+ ", getNumeroContrato()=" + getNumeroContrato() + ", getServicos()=" + getServicos() + ", getPreco()="
-				+ getPreco() + ", getImagens()=" + getImagens() + ", getDescricao()=" + getDescricao()
+				+ getPreco()  + ", getDescricao()=" + getDescricao()
 				+ ", getTitulo()=" + getTitulo() + ", getId()=" + getId() + ", toString()=" + super.toString() + "]";
 	}
 

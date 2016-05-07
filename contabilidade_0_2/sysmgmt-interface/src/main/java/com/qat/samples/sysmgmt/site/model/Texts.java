@@ -15,6 +15,8 @@ public class Texts extends ModelCosmeDamiao
 	/** The type of an account. */
 	private String nome;
 
+	private String text;
+
 	private String url;
 
 	private Integer zIndex;
@@ -38,6 +40,14 @@ public class Texts extends ModelCosmeDamiao
 	public void setId(Integer id)
 	{
 		this.id = id;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
 	}
 
 	/**

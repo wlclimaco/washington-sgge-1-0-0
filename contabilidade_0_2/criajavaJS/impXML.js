@@ -41,7 +41,7 @@ text = text + '  <sql id="all'+name+'Columns">\n';
 
 for(i=0;i < oField.length;i++){
 	if(oField[i].field.xml == true){
-		if(oField[i].field.tipo.indexOf('List') == -1){
+		if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.tipo.indexOf('id') == -1)){
 			if(i == 0)
 				text = text + ''+oField[i].field.campo+'\n';
 			else
@@ -59,7 +59,7 @@ text = text + '</sql>\n';
 text = text + '<sql id="all'+name+'Values">\n';
 for(i=0;i < oField.length;i++){
 	if(oField[i].field.xml == true){
-		if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.tipo.indexOf('id')){
+		if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.tipo.indexOf('id') == -1)){
 			text = text + '#{'+oField[i].field.campo+'},\n';
 		}
 	}
@@ -76,7 +76,7 @@ text = text + '\n';
 text = text + '		c.id, c.'+name.toLowerCase()+'_desc\n';
 for(i=0;i < oField.length;i++){
 	if(oField[i].field.xml == true){
-		if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.tipo.indexOf('id')){
+		if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.tipo.indexOf('id'))){
 			text = text + 'c.'+oField[i].field.campo+',\n';
 		}
 	}

@@ -2,8 +2,12 @@ package com.qat.samples.sysmgmt.site.model;
 
 import java.util.List;
 
+import com.qat.samples.sysmgmt.contabilidade.model.Plano;
 import com.qat.samples.sysmgmt.produto.model.Servico;
+import com.qat.samples.sysmgmt.util.model.Email;
+import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
+import com.qat.samples.sysmgmt.util.model.Telefone;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -20,14 +24,27 @@ public class Site extends ModelCosmeDamiao
 
 	private String url;
 
-	private List<Divs> divs;
-	private List<Images> images;
-	private List<Links> links;
-	private List<Servico> servicos;
+	private String quemSomos;
 
-	private List<Texts> texts;
+	private String missao;
 
-	private QuemSomos gerente;
+	private String visao;
+
+	private String titulo;
+
+	private String logo;
+
+	private boolean atorization;
+
+	private List<Servico> servicoList;
+
+	private List<Plano> planoList;
+
+	private List<Endereco> enderecoList;
+
+	private List<Email> emailList;
+
+	private List<Telefone> telefoneList;
 
 	public Site()
 	{
@@ -38,115 +55,125 @@ public class Site extends ModelCosmeDamiao
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @return the id
-	 */
-	public Integer getId()
-	{
+	public Integer getId() {
 		return id;
 	}
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Integer id)
-	{
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the nome
-	 */
-	public String getNome()
-	{
+	public String getNome() {
 		return nome;
 	}
 
-	/**
-	 * @param nome the nome to set
-	 */
-	public void setNome(String nome)
-	{
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	public String getUrl()
-	{
+	public String getUrl() {
 		return url;
 	}
 
-	public void setUrl(String url)
-	{
+	public void setUrl(String url) {
 		this.url = url;
 	}
 
-	public List<Divs> getDivs()
-	{
-		return divs;
+	public List<Servico> getServicoList() {
+		return servicoList;
 	}
 
-	public void setDivs(List<Divs> divs)
-	{
-		this.divs = divs;
+	public void setServicoList(List<Servico> servicoList) {
+		this.servicoList = servicoList;
 	}
 
-	public List<Images> getImages()
-	{
-		return images;
+	public List<Plano> getPlanoList() {
+		return planoList;
 	}
 
-	public void setImages(List<Images> images)
-	{
-		this.images = images;
+	public void setPlanoList(List<Plano> planoList) {
+		this.planoList = planoList;
 	}
 
-	public List<Links> getLinks()
-	{
-		return links;
+	public String getQuemSomos() {
+		return quemSomos;
 	}
 
-	public void setLinks(List<Links> links)
-	{
-		this.links = links;
+	public void setQuemSomos(String quemSomos) {
+		this.quemSomos = quemSomos;
 	}
 
-	public List<Servico> getServicos()
-	{
-		return servicos;
+	public String getMissao() {
+		return missao;
 	}
 
-	public void setServicos(List<Servico> servicos)
-	{
-		this.servicos = servicos;
+	public void setMissao(String missao) {
+		this.missao = missao;
 	}
 
-	public List<Texts> getTexts()
-	{
-		return texts;
+	public String getVisao() {
+		return visao;
 	}
 
-	public void setTexts(List<Texts> texts)
-	{
-		this.texts = texts;
+	public void setVisao(String visao) {
+		this.visao = visao;
 	}
 
-	public QuemSomos getGerente()
-	{
-		return gerente;
+	public String getTitulo() {
+		return titulo;
 	}
 
-	public void setGerente(QuemSomos gerente)
-	{
-		this.gerente = gerente;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+
+	public boolean isAtorization() {
+		return atorization;
+	}
+
+	public void setAtorization(boolean atorization) {
+		this.atorization = atorization;
+	}
+
+	public List<Endereco> getEnderecoList() {
+		return enderecoList;
+	}
+
+	public void setEnderecoList(List<Endereco> enderecoList) {
+		this.enderecoList = enderecoList;
+	}
+
+	public List<Email> getEmailList() {
+		return emailList;
+	}
+
+	public void setEmailList(List<Email> emailList) {
+		this.emailList = emailList;
+	}
+
+	public List<Telefone> getTelefoneList() {
+		return telefoneList;
+	}
+
+	public void setTelefoneList(List<Telefone> telefoneList) {
+		this.telefoneList = telefoneList;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "Site [getId()=" + getId() + ", getNome()=" + getNome() + ", getUrl()=" + getUrl() + ", getDivs()="
-				+ getDivs() + ", getImages()=" + getImages() + ", getLinks()=" + getLinks() + ", getServicos()="
-				+ getServicos() + ", getTexts()=" + getTexts() + ", getGerente()=" + getGerente() + ", getParentId()="
-				+ getParentId() + ", toString()=" + super.toString() + "]";
+	public String toString() {
+		return "Site [getId()=" + getId() + ", getNome()=" + getNome() + ", getUrl()=" + getUrl()
+				+ ", getServicoList()=" + getServicoList() + ", getPlanoList()=" + getPlanoList() + ", getQuemSomos()="
+				+ getQuemSomos() + ", getMissao()=" + getMissao() + ", getVisao()=" + getVisao() + ", getTitulo()="
+				+ getTitulo() + ", getLogo()=" + getLogo() + ", isAtorization()=" + isAtorization()
+				+ ", getEnderecoList()=" + getEnderecoList() + ", getEmailList()=" + getEmailList()
+				+ ", getTelefoneList()=" + getTelefoneList() + ", toString()=" + super.toString() + "]";
 	}
-
 }

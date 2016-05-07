@@ -21,9 +21,6 @@ public class OrdemServico extends ModelCosmeDamiao
 	/** The estado. */
 	private Long data;
 
-	/** The bairro. */
-	private OrdemServicoTypes typeId;
-
 	/** The numero. */
 	private String assunto;
 
@@ -98,22 +95,6 @@ public class OrdemServico extends ModelCosmeDamiao
 	}
 
 	/**
-	 * @return the typeId
-	 */
-	public OrdemServicoTypes getTypeId()
-	{
-		return typeId;
-	}
-
-	/**
-	 * @param typeId the typeId to set
-	 */
-	public void setTypeId(OrdemServicoTypes typeId)
-	{
-		this.typeId = typeId;
-	}
-
-	/**
 	 * @return the assunto
 	 */
 	public String getAssunto()
@@ -159,7 +140,7 @@ public class OrdemServico extends ModelCosmeDamiao
 	public String toString()
 	{
 		return "OrdemServico [getId()=" + getId() + ", getNome()=" + getNome() + ", getData()=" + getData()
-				+ ", getTypeId()=" + getTypeId() + ", getAssunto()=" + getAssunto() + ", getOrdemStatusList()="
+				+ ", getAssunto()=" + getAssunto() + ", getOrdemStatusList()="
 				+ getOrdemStatusList() + ", getStatus()=" + getStatus() + ", toString()=" + super.toString() + "]";
 	}
 

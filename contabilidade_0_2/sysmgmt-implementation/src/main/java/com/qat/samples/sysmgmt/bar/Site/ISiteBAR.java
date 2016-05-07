@@ -1,15 +1,21 @@
+/** create by system gera-java version 1.0.0 07/05/2016 18:30 : 34*/
 package com.qat.samples.sysmgmt.bar.Site;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
 import com.qat.samples.sysmgmt.contato.model.Contato;
+import com.qat.samples.sysmgmt.contato.model.ContatoItens;
 import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
+import com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoItens;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
 import com.qat.samples.sysmgmt.site.model.Site;
 import com.qat.samples.sysmgmt.site.model.request.SiteInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
 /**
  * The Interface SiteBAR.. (Data Access Component - DAC)
@@ -18,12 +24,69 @@ public interface ISiteBAR
 {
 
 	/**
+	 * Fetch servico by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public Servico fetchServicoById(FetchByIdRequest request);
+
+	/**
+* Insert servico.
+*
+* @param servico the servico
+*
+* @return the internal response
+*/
+	public InternalResponse insertServico(Servico servico);
+
+	/**
+* Update servico.
+*
+* @param servico the servico
+*
+* @return the internal response
+*/
+	public InternalResponse updateServico(Servico servico);
+
+	/**
+* Delete servico.
+*
+* @param servico the servico
+*
+* @return the internal response
+*/
+	public InternalResponse deleteServicoById(Servico servico);
+
+	/**
+* Delete all servicos.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllServicos();
+
+	/**
+* Fetch all servicos.
+*
+* @return the list< servico>
+*/
+	public InternalResultsResponse<Servico> fetchAllServicos(Servico  servico);
+
+	/**
+* Fetch servicos by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Servico> fetchServicosByRequest(ServicoInquiryRequest request);
+
+	/**
 	 * Fetch site by id.
 	 *
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Site> fetchSiteById(FetchByIdRequest request);
+	public Site fetchSiteById(FetchByIdRequest request);
 
 	/**
 * Insert site.
@@ -80,7 +143,7 @@ public interface ISiteBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Contato> fetchContatoById(FetchByIdRequest request);
+	public Contato fetchContatoById(FetchByIdRequest request);
 
 	/**
 * Insert contato.
@@ -132,12 +195,69 @@ public interface ISiteBAR
 	public InternalResultsResponse<Contato> fetchContatosByRequest(ContatoInquiryRequest request);
 
 	/**
+	 * Fetch contatoitens by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public ContatoItens fetchContatoItensById(FetchByIdRequest request);
+
+	/**
+* Insert contatoitens.
+*
+* @param contatoitens the contatoitens
+*
+* @return the internal response
+*/
+	public InternalResponse insertContatoItens(ContatoItens contatoitens);
+
+	/**
+* Update contatoitens.
+*
+* @param contatoitens the contatoitens
+*
+* @return the internal response
+*/
+	public InternalResponse updateContatoItens(ContatoItens contatoitens);
+
+	/**
+* Delete contatoitens.
+*
+* @param contatoitens the contatoitens
+*
+* @return the internal response
+*/
+	public InternalResponse deleteContatoItensById(ContatoItens contatoitens);
+
+	/**
+* Delete all contatoitenss.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllContatoItenss();
+
+	/**
+* Fetch all contatoitenss.
+*
+* @return the list< contatoitens>
+*/
+	public InternalResultsResponse<ContatoItens> fetchAllContatoItenss(ContatoItens  contatoitens);
+
+	/**
+* Fetch contatoitenss by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<ContatoItens> fetchContatoItenssByRequest(PagedInquiryRequest request);
+
+	/**
 	 * Fetch ordemservico by id.
 	 *
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<OrdemServico> fetchOrdemServicoById(FetchByIdRequest request);
+	public OrdemServico fetchOrdemServicoById(FetchByIdRequest request);
 
 	/**
 * Insert ordemservico.
@@ -189,12 +309,69 @@ public interface ISiteBAR
 	public InternalResultsResponse<OrdemServico> fetchOrdemServicosByRequest(OrdemServicoInquiryRequest request);
 
 	/**
+	 * Fetch ordemservicoitens by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public OrdemServicoItens fetchOrdemServicoItensById(FetchByIdRequest request);
+
+	/**
+* Insert ordemservicoitens.
+*
+* @param ordemservicoitens the ordemservicoitens
+*
+* @return the internal response
+*/
+	public InternalResponse insertOrdemServicoItens(OrdemServicoItens ordemservicoitens);
+
+	/**
+* Update ordemservicoitens.
+*
+* @param ordemservicoitens the ordemservicoitens
+*
+* @return the internal response
+*/
+	public InternalResponse updateOrdemServicoItens(OrdemServicoItens ordemservicoitens);
+
+	/**
+* Delete ordemservicoitens.
+*
+* @param ordemservicoitens the ordemservicoitens
+*
+* @return the internal response
+*/
+	public InternalResponse deleteOrdemServicoItensById(OrdemServicoItens ordemservicoitens);
+
+	/**
+* Delete all ordemservicoitenss.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllOrdemServicoItenss();
+
+	/**
+* Fetch all ordemservicoitenss.
+*
+* @return the list< ordemservicoitens>
+*/
+	public InternalResultsResponse<OrdemServicoItens> fetchAllOrdemServicoItenss(OrdemServicoItens  ordemservicoitens);
+
+	/**
+* Fetch ordemservicoitenss by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<OrdemServicoItens> fetchOrdemServicoItenssByRequest(PagedInquiryRequest request);
+
+	/**
 	 * Fetch plano by id.
 	 *
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Plano> fetchPlanoById(FetchByIdRequest request);
+	public Plano fetchPlanoById(FetchByIdRequest request);
 
 	/**
 * Insert plano.

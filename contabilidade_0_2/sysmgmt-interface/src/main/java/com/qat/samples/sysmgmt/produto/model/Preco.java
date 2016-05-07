@@ -7,7 +7,7 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
  * setting.
  */
 @SuppressWarnings("serial")
-public class TabPreco extends ModelCosmeDamiao
+public class Preco extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
@@ -32,9 +32,13 @@ public class TabPreco extends ModelCosmeDamiao
 	/**
 	 * Default constructor.
 	 */
-	public TabPreco()
+	public Preco()
 	{
 		super();
+	}
+
+	public Preco(int i, String string) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getPrecoTypeEnumValue()
@@ -53,7 +57,7 @@ public class TabPreco extends ModelCosmeDamiao
 
 	/**
 	 * Gets the id.
-	 * 
+	 *
 	 * @return the id
 	 */
 	public Integer getId()
@@ -63,7 +67,7 @@ public class TabPreco extends ModelCosmeDamiao
 
 	/**
 	 * Sets the id.
-	 * 
+	 *
 	 * @param id the new id
 	 */
 	public void setId(Integer id)

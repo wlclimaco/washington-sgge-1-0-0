@@ -19,7 +19,7 @@ public class Servico extends ModelCosmeDamiao
 
 	private String descricao;
 
-	private List<TabPreco> preco;
+	private List<Preco> preco;
 
 	/**
 	 * Default constructor.
@@ -29,9 +29,13 @@ public class Servico extends ModelCosmeDamiao
 		super();
 	}
 
+	public Servico(int i, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Gets the id.
-	 * 
+	 *
 	 * @return the id
 	 */
 	public Integer getId()
@@ -41,7 +45,7 @@ public class Servico extends ModelCosmeDamiao
 
 	/**
 	 * Sets the id.
-	 * 
+	 *
 	 * @param id the new id
 	 */
 	public void setId(Integer id)
@@ -69,12 +73,12 @@ public class Servico extends ModelCosmeDamiao
 		this.descricao = descricao;
 	}
 
-	public List<TabPreco> getPreco()
+	public List<Preco> getPreco()
 	{
 		return preco;
 	}
 
-	public void setPreco(List<TabPreco> preco)
+	public void setPreco(List<Preco> preco)
 	{
 		this.preco = preco;
 	}

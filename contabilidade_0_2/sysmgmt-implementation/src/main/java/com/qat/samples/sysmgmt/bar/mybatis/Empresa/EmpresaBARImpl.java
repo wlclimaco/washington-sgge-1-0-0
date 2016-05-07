@@ -376,11 +376,11 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 		if (!ValidationUtil.isNullOrEmpty(empresa.getContaCorrenteList()))
 		{
-			a +=
-					UsuarioBARD.maintainUsuarioAssociations(empresa.getUsuarioList(), response, empresa.getId(), null,
-							null,
-							TabelaEnum.EMPRESA, getFinanceiroBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-							empresa.getCreateUser(), historicoId, historicoId);
+//			a +=
+//					UsuarioBARD.maintainUsuarioAssociations(empresa.getUsuarioList(), response, empresa.getId(), null,
+//							null,
+//							TabelaEnum.EMPRESA, getFinanceiroBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
+//							empresa.getCreateUser(), historicoId, historicoId);
 		}
 
 		return response;

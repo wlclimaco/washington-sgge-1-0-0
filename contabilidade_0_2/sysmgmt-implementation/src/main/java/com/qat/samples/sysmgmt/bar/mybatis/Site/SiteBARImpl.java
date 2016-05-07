@@ -1,3 +1,4 @@
+/** create by system gera-java version 1.0.0 07/05/2016 18:30 : 34*/
 package com.qat.samples.sysmgmt.bar.mybatis.Site;
 
 
@@ -12,13 +13,18 @@ import com.qat.framework.util.MyBatisBARHelper;
 import com.qat.samples.sysmgmt.bar.Site.ISiteBAR;
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
 import com.qat.samples.sysmgmt.contato.model.Contato;
+import com.qat.samples.sysmgmt.contato.model.ContatoItens;
 import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
+import com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoItens;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
 import com.qat.samples.sysmgmt.site.model.Site;
 import com.qat.samples.sysmgmt.site.model.request.SiteInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
 /**
  * The Class CountyBARImpl. (Business Access Repository - BAR)
@@ -30,6 +36,34 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR
 /** The Constant ZERO. */
 	private static final int ZERO = 0;
 
+
+///===================================### SERVICO ####======================================
+/** The Constant NAMESPACE. */
+private static final String NAMESPACE_SERVICO = "ServicoMap.";
+
+/** The Constant STMT_INSERT_SERVICO. */
+private static final String STMT_INSERT_SERVICO = NAMESPACE_SERVICO + "insertServico";
+
+/** The Constant STMT_UPDATE_SERVICO. */
+private static final String STMT_UPDATE_SERVICO = NAMESPACE_SERVICO + "updateServico";
+
+/** The Constant STMT_DELETE_SERVICO. */
+private static final String STMT_DELETE_SERVICO = NAMESPACE_SERVICO + "deleteServicoById";
+
+	/** The Constant STMT_DELETE_SERVICO_ALL. */
+	private static final String STMT_DELETE_SERVICO_ALL = NAMESPACE_SERVICO + "deleteAllServicos";
+
+	/** The Constant STMT_FETCH_SERVICO. */
+	private static final String STMT_FETCH_SERVICO = NAMESPACE_SERVICO + "fetchServicoById";
+
+	/** The Constant STMT_FETCH_SERVICO_ALL. */
+	private static final String STMT_FETCH_SERVICO_ALL = NAMESPACE_SERVICO + "fetchAllServicos";
+
+	/** The Constant STMT_FETCH_SERVICO_COUNT. */
+	private static final String STMT_FETCH_SERVICO_COUNT = NAMESPACE_SERVICO + "fetchServicoRowCount";
+
+	/** The Constant STMT_FETCH_SERVICO_ALL_REQUEST. */
+	private static final String STMT_FETCH_SERVICO_ALL_REQUEST = NAMESPACE_SERVICO + "fetchAllServicosRequest";
 
 ///===================================### SITE ####======================================
 /** The Constant NAMESPACE. */
@@ -87,33 +121,89 @@ private static final String STMT_DELETE_CONTATO = NAMESPACE_CONTATO + "deleteCon
 	/** The Constant STMT_FETCH_CONTATO_ALL_REQUEST. */
 	private static final String STMT_FETCH_CONTATO_ALL_REQUEST = NAMESPACE_CONTATO + "fetchAllContatosRequest";
 
+///===================================### CONTATOITENS ####======================================
+/** The Constant NAMESPACE. */
+private static final String NAMESPACE_CONTATOITENS = "ContatoitensMap.";
+
+/** The Constant STMT_INSERT_CONTATOITENS. */
+private static final String STMT_INSERT_CONTATOITENS = NAMESPACE_CONTATOITENS + "insertContatoitens";
+
+/** The Constant STMT_UPDATE_CONTATOITENS. */
+private static final String STMT_UPDATE_CONTATOITENS = NAMESPACE_CONTATOITENS + "updateContatoitens";
+
+/** The Constant STMT_DELETE_CONTATOITENS. */
+private static final String STMT_DELETE_CONTATOITENS = NAMESPACE_CONTATOITENS + "deleteContatoitensById";
+
+	/** The Constant STMT_DELETE_CONTATOITENS_ALL. */
+	private static final String STMT_DELETE_CONTATOITENS_ALL = NAMESPACE_CONTATOITENS + "deleteAllContatoitenss";
+
+	/** The Constant STMT_FETCH_CONTATOITENS. */
+	private static final String STMT_FETCH_CONTATOITENS = NAMESPACE_CONTATOITENS + "fetchContatoitensById";
+
+	/** The Constant STMT_FETCH_CONTATOITENS_ALL. */
+	private static final String STMT_FETCH_CONTATOITENS_ALL = NAMESPACE_CONTATOITENS + "fetchAllContatoitenss";
+
+	/** The Constant STMT_FETCH_CONTATOITENS_COUNT. */
+	private static final String STMT_FETCH_CONTATOITENS_COUNT = NAMESPACE_CONTATOITENS + "fetchContatoitensRowCount";
+
+	/** The Constant STMT_FETCH_CONTATOITENS_ALL_REQUEST. */
+	private static final String STMT_FETCH_CONTATOITENS_ALL_REQUEST = NAMESPACE_CONTATOITENS + "fetchAllContatoitenssRequest";
+
 ///===================================### ORDEMSERVICO ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_ORDEMSERVICO = "OrdemServicoMap.";
+private static final String NAMESPACE_ORDEMSERVICO = "OrdemservicoMap.";
 
 /** The Constant STMT_INSERT_ORDEMSERVICO. */
-private static final String STMT_INSERT_ORDEMSERVICO = NAMESPACE_ORDEMSERVICO + "insertOrdemServico";
+private static final String STMT_INSERT_ORDEMSERVICO = NAMESPACE_ORDEMSERVICO + "insertOrdemservico";
 
 /** The Constant STMT_UPDATE_ORDEMSERVICO. */
-private static final String STMT_UPDATE_ORDEMSERVICO = NAMESPACE_ORDEMSERVICO + "updateOrdemServico";
+private static final String STMT_UPDATE_ORDEMSERVICO = NAMESPACE_ORDEMSERVICO + "updateOrdemservico";
 
 /** The Constant STMT_DELETE_ORDEMSERVICO. */
-private static final String STMT_DELETE_ORDEMSERVICO = NAMESPACE_ORDEMSERVICO + "deleteOrdemServicoById";
+private static final String STMT_DELETE_ORDEMSERVICO = NAMESPACE_ORDEMSERVICO + "deleteOrdemservicoById";
 
 	/** The Constant STMT_DELETE_ORDEMSERVICO_ALL. */
-	private static final String STMT_DELETE_ORDEMSERVICO_ALL = NAMESPACE_ORDEMSERVICO + "deleteAllOrdemServicos";
+	private static final String STMT_DELETE_ORDEMSERVICO_ALL = NAMESPACE_ORDEMSERVICO + "deleteAllOrdemservicos";
 
 	/** The Constant STMT_FETCH_ORDEMSERVICO. */
-	private static final String STMT_FETCH_ORDEMSERVICO = NAMESPACE_ORDEMSERVICO + "fetchOrdemServicoById";
+	private static final String STMT_FETCH_ORDEMSERVICO = NAMESPACE_ORDEMSERVICO + "fetchOrdemservicoById";
 
 	/** The Constant STMT_FETCH_ORDEMSERVICO_ALL. */
-	private static final String STMT_FETCH_ORDEMSERVICO_ALL = NAMESPACE_ORDEMSERVICO + "fetchAllOrdemServicos";
+	private static final String STMT_FETCH_ORDEMSERVICO_ALL = NAMESPACE_ORDEMSERVICO + "fetchAllOrdemservicos";
 
 	/** The Constant STMT_FETCH_ORDEMSERVICO_COUNT. */
-	private static final String STMT_FETCH_ORDEMSERVICO_COUNT = NAMESPACE_ORDEMSERVICO + "fetchOrdemServicoRowCount";
+	private static final String STMT_FETCH_ORDEMSERVICO_COUNT = NAMESPACE_ORDEMSERVICO + "fetchOrdemservicoRowCount";
 
 	/** The Constant STMT_FETCH_ORDEMSERVICO_ALL_REQUEST. */
-	private static final String STMT_FETCH_ORDEMSERVICO_ALL_REQUEST = NAMESPACE_ORDEMSERVICO + "fetchAllOrdemServicosRequest";
+	private static final String STMT_FETCH_ORDEMSERVICO_ALL_REQUEST = NAMESPACE_ORDEMSERVICO + "fetchAllOrdemservicosRequest";
+
+///===================================### ORDEMSERVICOITENS ####======================================
+/** The Constant NAMESPACE. */
+private static final String NAMESPACE_ORDEMSERVICOITENS = "OrdemservicoitensMap.";
+
+/** The Constant STMT_INSERT_ORDEMSERVICOITENS. */
+private static final String STMT_INSERT_ORDEMSERVICOITENS = NAMESPACE_ORDEMSERVICOITENS + "insertOrdemservicoitens";
+
+/** The Constant STMT_UPDATE_ORDEMSERVICOITENS. */
+private static final String STMT_UPDATE_ORDEMSERVICOITENS = NAMESPACE_ORDEMSERVICOITENS + "updateOrdemservicoitens";
+
+/** The Constant STMT_DELETE_ORDEMSERVICOITENS. */
+private static final String STMT_DELETE_ORDEMSERVICOITENS = NAMESPACE_ORDEMSERVICOITENS + "deleteOrdemservicoitensById";
+
+	/** The Constant STMT_DELETE_ORDEMSERVICOITENS_ALL. */
+	private static final String STMT_DELETE_ORDEMSERVICOITENS_ALL = NAMESPACE_ORDEMSERVICOITENS + "deleteAllOrdemservicoitenss";
+
+	/** The Constant STMT_FETCH_ORDEMSERVICOITENS. */
+	private static final String STMT_FETCH_ORDEMSERVICOITENS = NAMESPACE_ORDEMSERVICOITENS + "fetchOrdemservicoitensById";
+
+	/** The Constant STMT_FETCH_ORDEMSERVICOITENS_ALL. */
+	private static final String STMT_FETCH_ORDEMSERVICOITENS_ALL = NAMESPACE_ORDEMSERVICOITENS + "fetchAllOrdemservicoitenss";
+
+	/** The Constant STMT_FETCH_ORDEMSERVICOITENS_COUNT. */
+	private static final String STMT_FETCH_ORDEMSERVICOITENS_COUNT = NAMESPACE_ORDEMSERVICOITENS + "fetchOrdemservicoitensRowCount";
+
+	/** The Constant STMT_FETCH_ORDEMSERVICOITENS_ALL_REQUEST. */
+	private static final String STMT_FETCH_ORDEMSERVICOITENS_ALL_REQUEST = NAMESPACE_ORDEMSERVICOITENS + "fetchAllOrdemservicoitenssRequest";
 
 ///===================================### PLANO ####======================================
 /** The Constant NAMESPACE. */
@@ -143,6 +233,139 @@ private static final String STMT_DELETE_PLANO = NAMESPACE_PLANO + "deletePlanoBy
 	/** The Constant STMT_FETCH_PLANO_ALL_REQUEST. */
 	private static final String STMT_FETCH_PLANO_ALL_REQUEST = NAMESPACE_PLANO + "fetchAllPlanosRequest";
 
+//===================================### SERVICO ####======================================
+	/**
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IServicoBAR#insertServico(com.qat.samples.sysmgmt.base.model.Servico)
+ */
+@Override
+public InternalResponse insertServico(Servico servico)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_SERVICO, servico, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IServicoBAR#updateServico(com.qat.samples.sysmgmt.base.model.Servico)
+ */
+@Override
+public InternalResponse updateServico(Servico servico)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_SERVICO, servico, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IServicoBAR#deleteServico(com.qat.samples.sysmgmt.base.model.Servico)
+ */
+@Override
+public InternalResponse deleteServicoById(Servico servico)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_SERVICO, servico, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IServicoBAR#deleteAllServicos()
+ */
+@Override
+public InternalResponse deleteAllServicos()
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_SERVICO_ALL, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bar.IServicoBAR#fetchServicoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+ */
+@Override
+public Servico fetchServicoById(FetchByIdRequest request)
+{
+return (Servico)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_SERVICO, request.getFetchId());
+
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IServicoBAR#fetchAllServicosCache()
+ */
+@Override
+public InternalResultsResponse<Servico> fetchAllServicos(Servico servico)
+{
+	InternalResultsResponse<Servico> response = new InternalResultsResponse<Servico>();
+	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_SERVICO_ALL));
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bar.IServicoBAR#fetchServicosByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<Servico> fetchServicosByRequest(ServicoInquiryRequest request)
+{
+	InternalResultsResponse<Servico> response = new InternalResultsResponse<Servico>();
+	fetchServicosByRequest(getSqlSession(), request, STMT_FETCH_SERVICO_COUNT, STMT_FETCH_SERVICO_ALL_REQUEST,
+			response);
+	return response;
+}
+
+//===================================### fetchServicosByRequest ####======================================
+
+public static void fetchServicosByRequest(SqlSession sqlSession, ServicoInquiryRequest request, String countStatement,
+			String fetchPagedStatement,
+			InternalResultsResponse<?> response)
+	{
+
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount())
+		{
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
+			{
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
+			}
+		}
+
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
+		{
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
+
 //===================================### SITE ####======================================
 	/**
 /*
@@ -150,10 +373,10 @@ private static final String STMT_DELETE_PLANO = NAMESPACE_PLANO + "deletePlanoBy
  * @see com.qat.samples.sysmgmt.base.bar.ISiteBAR#insertSite(com.qat.samples.sysmgmt.base.model.Site)
  */
 @Override
-public InternalResponse insertSite(Site county)
+public InternalResponse insertSite(Site site)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_SITE, county, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_SITE, site, response);
 	return response;
 }
 
@@ -162,10 +385,10 @@ public InternalResponse insertSite(Site county)
  * @see com.qat.samples.sysmgmt.base.bar.ISiteBAR#updateSite(com.qat.samples.sysmgmt.base.model.Site)
  */
 @Override
-public InternalResponse updateSite(Site county)
+public InternalResponse updateSite(Site site)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_SITE, county, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_SITE, site, response);
 	return response;
 }
 
@@ -174,10 +397,10 @@ public InternalResponse updateSite(Site county)
  * @see com.qat.samples.sysmgmt.base.bar.ISiteBAR#deleteSite(com.qat.samples.sysmgmt.base.model.Site)
  */
 @Override
-public InternalResponse deleteSiteById(Site county)
+public InternalResponse deleteSiteById(Site site)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_SITE, county, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_SITE, site, response);
 	return response;
 }
 
@@ -199,12 +422,10 @@ public InternalResponse deleteAllSites()
  * com.qat.samples.sysmgmt.bar.ISiteBAR#fetchSiteById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<Site> fetchSiteById(FetchByIdRequest request)
+public Site fetchSiteById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Site> response = new InternalResultsResponse<Site>();
-	response.addResult((Site)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_SITE,
-			request.getFetchId()));
-	return response;
+return (Site)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_SITE, request.getFetchId());
+
 }
 
 /*
@@ -285,10 +506,10 @@ public static void fetchSitesByRequest(SqlSession sqlSession, SiteInquiryRequest
  * @see com.qat.samples.sysmgmt.base.bar.IContatoBAR#insertContato(com.qat.samples.sysmgmt.base.model.Contato)
  */
 @Override
-public InternalResponse insertContato(Contato county)
+public InternalResponse insertContato(Contato contato)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONTATO, county, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONTATO, contato, response);
 	return response;
 }
 
@@ -297,10 +518,10 @@ public InternalResponse insertContato(Contato county)
  * @see com.qat.samples.sysmgmt.base.bar.IContatoBAR#updateContato(com.qat.samples.sysmgmt.base.model.Contato)
  */
 @Override
-public InternalResponse updateContato(Contato county)
+public InternalResponse updateContato(Contato contato)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CONTATO, county, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CONTATO, contato, response);
 	return response;
 }
 
@@ -309,10 +530,10 @@ public InternalResponse updateContato(Contato county)
  * @see com.qat.samples.sysmgmt.base.bar.IContatoBAR#deleteContato(com.qat.samples.sysmgmt.base.model.Contato)
  */
 @Override
-public InternalResponse deleteContatoById(Contato county)
+public InternalResponse deleteContatoById(Contato contato)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONTATO, county, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONTATO, contato, response);
 	return response;
 }
 
@@ -334,12 +555,10 @@ public InternalResponse deleteAllContatos()
  * com.qat.samples.sysmgmt.bar.IContatoBAR#fetchContatoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<Contato> fetchContatoById(FetchByIdRequest request)
+public Contato fetchContatoById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Contato> response = new InternalResultsResponse<Contato>();
-	response.addResult((Contato)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONTATO,
-			request.getFetchId()));
-	return response;
+return (Contato)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONTATO, request.getFetchId());
+
 }
 
 /*
@@ -413,6 +632,139 @@ public static void fetchContatosByRequest(SqlSession sqlSession, ContatoInquiryR
 	}
 
 
+//===================================### CONTATOITENS ####======================================
+	/**
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IContatoItensBAR#insertContatoItens(com.qat.samples.sysmgmt.base.model.ContatoItens)
+ */
+@Override
+public InternalResponse insertContatoItens(ContatoItens contatoitens)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONTATOITENS, contatoitens, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IContatoItensBAR#updateContatoItens(com.qat.samples.sysmgmt.base.model.ContatoItens)
+ */
+@Override
+public InternalResponse updateContatoItens(ContatoItens contatoitens)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CONTATOITENS, contatoitens, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IContatoItensBAR#deleteContatoItens(com.qat.samples.sysmgmt.base.model.ContatoItens)
+ */
+@Override
+public InternalResponse deleteContatoItensById(ContatoItens contatoitens)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONTATOITENS, contatoitens, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IContatoItensBAR#deleteAllContatoItenss()
+ */
+@Override
+public InternalResponse deleteAllContatoItenss()
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONTATOITENS_ALL, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bar.IContatoItensBAR#fetchContatoItensById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+ */
+@Override
+public ContatoItens fetchContatoItensById(FetchByIdRequest request)
+{
+return (ContatoItens)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONTATOITENS, request.getFetchId());
+
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IContatoItensBAR#fetchAllContatoItenssCache()
+ */
+@Override
+public InternalResultsResponse<ContatoItens> fetchAllContatoItenss(ContatoItens contatoitens)
+{
+	InternalResultsResponse<ContatoItens> response = new InternalResultsResponse<ContatoItens>();
+	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_CONTATOITENS_ALL));
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bar.IContatoItensBAR#fetchContatoItenssByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<ContatoItens> fetchContatoItenssByRequest(PagedInquiryRequest request)
+{
+	InternalResultsResponse<ContatoItens> response = new InternalResultsResponse<ContatoItens>();
+	fetchContatoItenssByRequest(getSqlSession(), request, STMT_FETCH_CONTATOITENS_COUNT, STMT_FETCH_CONTATOITENS_ALL_REQUEST,
+			response);
+	return response;
+}
+
+//===================================### fetchContatoItenssByRequest ####======================================
+
+public static void fetchContatoItenssByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
+			String fetchPagedStatement,
+			InternalResultsResponse<?> response)
+	{
+
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount())
+		{
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
+			{
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
+			}
+		}
+
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
+		{
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
+
 //===================================### ORDEMSERVICO ####======================================
 	/**
 /*
@@ -420,10 +772,10 @@ public static void fetchContatosByRequest(SqlSession sqlSession, ContatoInquiryR
  * @see com.qat.samples.sysmgmt.base.bar.IOrdemServicoBAR#insertOrdemServico(com.qat.samples.sysmgmt.base.model.OrdemServico)
  */
 @Override
-public InternalResponse insertOrdemServico(OrdemServico county)
+public InternalResponse insertOrdemServico(OrdemServico ordemservico)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ORDEMSERVICO, county, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ORDEMSERVICO, ordemservico, response);
 	return response;
 }
 
@@ -432,10 +784,10 @@ public InternalResponse insertOrdemServico(OrdemServico county)
  * @see com.qat.samples.sysmgmt.base.bar.IOrdemServicoBAR#updateOrdemServico(com.qat.samples.sysmgmt.base.model.OrdemServico)
  */
 @Override
-public InternalResponse updateOrdemServico(OrdemServico county)
+public InternalResponse updateOrdemServico(OrdemServico ordemservico)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ORDEMSERVICO, county, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ORDEMSERVICO, ordemservico, response);
 	return response;
 }
 
@@ -444,10 +796,10 @@ public InternalResponse updateOrdemServico(OrdemServico county)
  * @see com.qat.samples.sysmgmt.base.bar.IOrdemServicoBAR#deleteOrdemServico(com.qat.samples.sysmgmt.base.model.OrdemServico)
  */
 @Override
-public InternalResponse deleteOrdemServicoById(OrdemServico county)
+public InternalResponse deleteOrdemServicoById(OrdemServico ordemservico)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ORDEMSERVICO, county, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ORDEMSERVICO, ordemservico, response);
 	return response;
 }
 
@@ -469,12 +821,10 @@ public InternalResponse deleteAllOrdemServicos()
  * com.qat.samples.sysmgmt.bar.IOrdemServicoBAR#fetchOrdemServicoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<OrdemServico> fetchOrdemServicoById(FetchByIdRequest request)
+public OrdemServico fetchOrdemServicoById(FetchByIdRequest request)
 {
-	InternalResultsResponse<OrdemServico> response = new InternalResultsResponse<OrdemServico>();
-	response.addResult((OrdemServico)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_ORDEMSERVICO,
-			request.getFetchId()));
-	return response;
+return (OrdemServico)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_ORDEMSERVICO, request.getFetchId());
+
 }
 
 /*
@@ -548,6 +898,139 @@ public static void fetchOrdemServicosByRequest(SqlSession sqlSession, OrdemServi
 	}
 
 
+//===================================### ORDEMSERVICOITENS ####======================================
+	/**
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IOrdemServicoItensBAR#insertOrdemServicoItens(com.qat.samples.sysmgmt.base.model.OrdemServicoItens)
+ */
+@Override
+public InternalResponse insertOrdemServicoItens(OrdemServicoItens ordemservicoitens)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ORDEMSERVICOITENS, ordemservicoitens, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IOrdemServicoItensBAR#updateOrdemServicoItens(com.qat.samples.sysmgmt.base.model.OrdemServicoItens)
+ */
+@Override
+public InternalResponse updateOrdemServicoItens(OrdemServicoItens ordemservicoitens)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ORDEMSERVICOITENS, ordemservicoitens, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IOrdemServicoItensBAR#deleteOrdemServicoItens(com.qat.samples.sysmgmt.base.model.OrdemServicoItens)
+ */
+@Override
+public InternalResponse deleteOrdemServicoItensById(OrdemServicoItens ordemservicoitens)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ORDEMSERVICOITENS, ordemservicoitens, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IOrdemServicoItensBAR#deleteAllOrdemServicoItenss()
+ */
+@Override
+public InternalResponse deleteAllOrdemServicoItenss()
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ORDEMSERVICOITENS_ALL, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bar.IOrdemServicoItensBAR#fetchOrdemServicoItensById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+ */
+@Override
+public OrdemServicoItens fetchOrdemServicoItensById(FetchByIdRequest request)
+{
+return (OrdemServicoItens)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_ORDEMSERVICOITENS, request.getFetchId());
+
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IOrdemServicoItensBAR#fetchAllOrdemServicoItenssCache()
+ */
+@Override
+public InternalResultsResponse<OrdemServicoItens> fetchAllOrdemServicoItenss(OrdemServicoItens ordemservicoitens)
+{
+	InternalResultsResponse<OrdemServicoItens> response = new InternalResultsResponse<OrdemServicoItens>();
+	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_ORDEMSERVICOITENS_ALL));
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bar.IOrdemServicoItensBAR#fetchOrdemServicoItenssByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<OrdemServicoItens> fetchOrdemServicoItenssByRequest(PagedInquiryRequest request)
+{
+	InternalResultsResponse<OrdemServicoItens> response = new InternalResultsResponse<OrdemServicoItens>();
+	fetchOrdemServicoItenssByRequest(getSqlSession(), request, STMT_FETCH_ORDEMSERVICOITENS_COUNT, STMT_FETCH_ORDEMSERVICOITENS_ALL_REQUEST,
+			response);
+	return response;
+}
+
+//===================================### fetchOrdemServicoItenssByRequest ####======================================
+
+public static void fetchOrdemServicoItenssByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
+			String fetchPagedStatement,
+			InternalResultsResponse<?> response)
+	{
+
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount())
+		{
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
+			{
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
+			}
+		}
+
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
+		{
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
+
 //===================================### PLANO ####======================================
 	/**
 /*
@@ -555,10 +1038,10 @@ public static void fetchOrdemServicosByRequest(SqlSession sqlSession, OrdemServi
  * @see com.qat.samples.sysmgmt.base.bar.IPlanoBAR#insertPlano(com.qat.samples.sysmgmt.base.model.Plano)
  */
 @Override
-public InternalResponse insertPlano(Plano county)
+public InternalResponse insertPlano(Plano plano)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PLANO, county, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PLANO, plano, response);
 	return response;
 }
 
@@ -567,10 +1050,10 @@ public InternalResponse insertPlano(Plano county)
  * @see com.qat.samples.sysmgmt.base.bar.IPlanoBAR#updatePlano(com.qat.samples.sysmgmt.base.model.Plano)
  */
 @Override
-public InternalResponse updatePlano(Plano county)
+public InternalResponse updatePlano(Plano plano)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PLANO, county, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PLANO, plano, response);
 	return response;
 }
 
@@ -579,10 +1062,10 @@ public InternalResponse updatePlano(Plano county)
  * @see com.qat.samples.sysmgmt.base.bar.IPlanoBAR#deletePlano(com.qat.samples.sysmgmt.base.model.Plano)
  */
 @Override
-public InternalResponse deletePlanoById(Plano county)
+public InternalResponse deletePlanoById(Plano plano)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PLANO, county, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PLANO, plano, response);
 	return response;
 }
 
@@ -604,12 +1087,10 @@ public InternalResponse deleteAllPlanos()
  * com.qat.samples.sysmgmt.bar.IPlanoBAR#fetchPlanoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<Plano> fetchPlanoById(FetchByIdRequest request)
+public Plano fetchPlanoById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Plano> response = new InternalResultsResponse<Plano>();
-	response.addResult((Plano)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_PLANO,
-			request.getFetchId()));
-	return response;
+return (Plano)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_PLANO, request.getFetchId());
+
 }
 
 /*

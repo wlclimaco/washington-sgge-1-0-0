@@ -66,7 +66,7 @@ public class Produto extends ModelCosmeDamiao
 
 	private List<Estoque> estoqueList;
 
-	private List<TabPreco> precoList;
+	private List<Preco> precoList;
 
 	private List<Custo> custoList;
 
@@ -423,7 +423,7 @@ public class Produto extends ModelCosmeDamiao
 	/**
 	 * @return the precoList
 	 */
-	public List<TabPreco> getPrecoList()
+	public List<Preco> getPrecoList()
 	{
 		return precoList;
 	}
@@ -431,7 +431,7 @@ public class Produto extends ModelCosmeDamiao
 	/**
 	 * @param precoList the precoList to set
 	 */
-	public void setPrecoList(List<TabPreco> precoList)
+	public void setPrecoList(List<Preco> precoList)
 	{
 		this.precoList = precoList;
 	}

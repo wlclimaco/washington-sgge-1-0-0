@@ -190,7 +190,7 @@ public InternalResultsResponse<Site> fetchSiteById(FetchByIdRequest request)
 	}
 	else
 	{
-		response.getResultsList().add(getSiteBAR().fetchSiteById(request).getFirstResult());
+		response.getResultsList().add(getSiteBAR().fetchSiteById(request));
 	}
 
 	return response;
@@ -407,7 +407,7 @@ public InternalResultsResponse<Contato> fetchContatoById(FetchByIdRequest reques
 	}
 	else
 	{
-		response.getResultsList().add(getSiteBAR().fetchContatoById(request).getFirstResult());
+		response.getResultsList().add(getSiteBAR().fetchContatoById(request));
 	}
 
 	return response;
@@ -624,7 +624,7 @@ public InternalResultsResponse<OrdemServico> fetchOrdemServicoById(FetchByIdRequ
 	}
 	else
 	{
-		response.getResultsList().add(getSiteBAR().fetchOrdemServicoById(request).getFirstResult());
+		response.getResultsList().add(getSiteBAR().fetchOrdemServicoById(request));
 	}
 
 	return response;
@@ -841,7 +841,7 @@ public InternalResultsResponse<Plano> fetchPlanoById(FetchByIdRequest request)
 	}
 	else
 	{
-		response.getResultsList().add(getSiteBAR().fetchPlanoById(request).getFirstResult());
+		response.getResultsList().add(getSiteBAR().fetchPlanoById(request));
 	}
 
 	return response;

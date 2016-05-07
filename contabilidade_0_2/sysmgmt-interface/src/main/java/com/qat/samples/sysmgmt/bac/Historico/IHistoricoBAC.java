@@ -16,41 +16,6 @@ public interface IHistoricoBAC
 
 
 //===================================### HISTORICO ####======================================
-	/**
-
-	/**
-	 * Insert historico.
-	 *
-* @param request the historico maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<Historico> insertHistorico(HistoricoMaintenanceRequest request);
-
-	/**
-* Update historico.
-*
-* @param request the historico maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<Historico> updateHistorico(HistoricoMaintenanceRequest request);
-
-	/**
-* Delete historico.
-*
-* @param request the historico maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<Historico> deleteHistorico(HistoricoMaintenanceRequest request);
-
-	/**
-* Refresh historicos.
-*
-* @param request containing the number to refresh with and whether to return the result
-*/
-	public InternalResultsResponse<Historico> refreshHistoricos(RefreshRequest request);
 
 	/**
 * Fetch historico by id.

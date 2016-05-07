@@ -58,7 +58,7 @@ text = text + "import com.qat.samples.sysmgmt.model.request."+bar+"InquiryReques
 text = text + "\n";
 text = text + "@ContextConfiguration(locations = {\n";
 text = text + '		"classpath:conf/unittest-base-context.xml",\n';
-text = text + '		"classpath:conf/'+bar.toLowerCase()+'bartest-context.xml"\n';
+text = text + '		"classpath:conf/bartest-context.xml"\n';
 text = text + "})\n";
 text = text + '@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)\n';
 text = text + "@Transactional\n";

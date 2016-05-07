@@ -1,121 +1,142 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+
+<!-- create by system gera-java version 1.0.0 07/05/2016 17:55 : 31-->
+
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="SupermercadoMap">
-
+<mapper namespace="SiteMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
   <!-- Result maps describe the mapping between the columns returned
-       from a query, and the class properties.  A result map isn't
-       necessary if the columns (or aliases) match to the properties
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
        exactly. -->
-  <resultMap id="SupermercadoResult" type="Supermercado">
-    <result property="superId" column="supermercadoid"/>
-    <result property="usuario" column="usuario"/>
-    <result property="senha" column="senha"/>
-    <result property="site" column="site"/>
-    <result property="email" column="email"/>
-    <association property="produtos" column="supermercadoid" javaType="Integer" select="fetchCountPreco"/>
-    <collection property="documentos" column="supermercadoid" select="DocumentoMap.fetchAllDocumentosBySupermercado" />
-    <collection property="enderecos" column="supermercadoid" select="EnderecoMap.fetchAllEnderecosBySupermercado" />
-    <collection property="acessos" column="supermercadoid" select="ControleAcessMap.fetchAllControleBySupermercado" />
+  <resultMap id="SiteResult" type="Site">
+    <result property="id" column="id"/>
+    <result property="nome" column="nome"/>
+    <result property="url" column="url"/>
+    <result property="quemSomos" column="quemSomos"/>
+    <result property="missao" column="missao"/>
+    <result property="visao" column="visao"/>
+    <result property="titulo" column="titulo"/>
+    <result property="logo" column="logo"/>
+    <result property="atorization" column="atorization"/>
+    <result property="siteTypeEnumValue" column="atorization"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
-  <sql id="allSupermercadoColumns">
-		 supermercadoid, usuario, email, site, controleid, senha
+  <sql id="allSiteColumns">
+nome
+,url
+,quemSomos
+,missao
+,visao
+,titulo
+,logo
+,siteTypeEnumValue
+,atorization
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allSiteValues">
+#{nome},
+#{url},
+#{quemSomos},
+#{missao},
+#{visao},
+#{titulo},
+#{logo},
+#{siteTypeEnumValue},
+#{atorization},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
   </sql>
 
-  <sql id="allSupermercadoColumnsWithQualifier">
-		p.supermercadoid, p.usuario, p.email, p.site, p.controleid, p.senha
-  </sql>
+ <sql id="allSiteColumnsWithQualifier">
+		c.id, c.site_desc
+c.id,
+c.nome,
+c.url,
+c.quemSomos,
+c.missao,
+c.visao,
+c.titulo,
+c.logo,
+c.atorization,
+		c.createDateUTC,
+		c.createUser,
+		c.modifyDateUTC,
+		c.modifyUser
+ </sql>
 
-  <select id="fetchCountPreco" parameterType="Integer" resultType="Integer">
-    select count(*) as Total from tabpreco t where t.supermercadoid = #{id}
-  </select>
+ <select id="fetchAllSites" resultMap="SiteResult">
+    SELECT id,
+	<include refid="allSiteColumns" />
+   FROM site ORDER BY id ASC
+ </select>
 
-  <select id="fetchAllSupermercados" resultMap="SupermercadoResult">
-    SELECT
-    <include refid="allSupermercadoColumns" />
-    FROM SUPERMERCADO ORDER BY SUPERMERCADOID ASC
-  </select>
+ <select id="fetchSiteById" parameterType="Integer" resultMap="SiteResult">
+    SELECT id,
+	<include refid="allSiteColumns" />
+   FROM site WHERE id = #{fetchid}
+ </select>
 
-  <select id="fetchAllSupermercadosPagedBatch" resultMap="SupermercadoResult">
-  	<if test="_databaseId == 'Oracle'">
-		SELECT * FROM (
-		SELECT * FROM (
-		SELECT <include refid="allSupermercadoColumnsWithQualifier" />,
-		ROWNUM ROWNUM_ FROM SUPERMERCADO p ORDER BY SUPERMERCADOID ASC
-		) WHERE ROWNUM_ <![CDATA[ > ]]>
-		( #{_page} * #{_pagesize} )
-		) WHERE ROWNUM <![CDATA[ <= ]]>
-		#{_pagesize}mo
-    </if>
+ <select id="fetchAllSitesRequest" parameterType="SiteInquiryRequest" resultMap="SiteResult">
 
-   	 <if test="_databaseId == 'PostgreSQL'">
-		SELECT <include refid="allSupermercadoColumns" />
-   		  FROM SUPERMERCADO ORDER BY SUPERMERCADOID ASC
-		  OFFSET ( #{_page} * #{_pagesize} )
-		  LIMIT #{_pagesize}
-    </if>
-  </select>
-
-  <select id="fetchSupermercadoRowCount" resultType="Integer">
-      <if test="_databaseId == 'PostgreSQL'">
-			SELECT COUNT(*) AS RECORD_COUNT FROM SUPERMERCADO WHERE SUPERMERCADOID IS NOT NULL
-      </if>
-
-   	  <if test="_databaseId == 'Oracle'">
-		 	SELECT COUNT(SUPERMERCADOID) AS RECORD_COUNT FROM SUPERMERCADO
-      </if>
-  </select>
-
-  <select id="fetchAllSupermercadosRequest" parameterType="PagedInquiryRequest" resultMap="SupermercadoResult">
-  	<if test="_databaseId == 'Oracle'">
-		SELECT * FROM (
-		SELECT * FROM (
-		SELECT <include refid="allSupermercadoColumnsWithQualifier" />,
-		ROWNUM ROWNUM_ FROM SUPERMERCADO p ORDER BY SUPERMERCADOID ASC
-		) WHERE ROWNUM_ <![CDATA[ > ]]>
-		( #{startPage} * #{pageSize} )
-		) WHERE ROWNUM <![CDATA[ <= ]]>
-		#{pageSize}
-    </if>
-
-   	 <if test="_databaseId == 'PostgreSQL'">
-		SELECT <include refid="allSupermercadoColumns" />
-   		  FROM SUPERMERCADO ORDER BY SUPERMERCADOID ASC
+		SELECT id,<include refid="allSiteColumns" />
+  		  FROM site ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
-    </if>
-  </select>
+</select>
 
-  <select id="fetchSupermercadoById" parameterType="Integer" resultMap="SupermercadoResult">
-    SELECT
-   <include refid="allSupermercadoColumns" />
-    FROM SUPERMERCADO WHERE SUPERMERCADOID = #{fetchid}
-  </select>
+<select id="fetchSiteRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM site WHERE id IS NOT NULL
 
-  <select id="fetchVersionNumber" parameterType="Supermercado" resultType="int">
-	SELECT VERSN_LOCK_NUM FROM SUPERMERCADO WHERE SUPERMERCADOID = #{id}
-  </select>
+ </select>
 
-  <select id="insertSupermercado" parameterType="Supermercado" resultType="int" statementType="CALLABLE">
-        { call ins_supermercado( #{usuario}, #{email},#{site},#{senha},#{logradouro},  #{bairro}, #{estado}, #{cidade}, #{numero}, #{cep}, #{nome}, #{complemento},#{usuarioid}, #{rginscmuni},  #{cpfcnpj}, #{razao}) }
+ <insert id="insertSite" parameterType="Site">
+ 	INSERT INTO site (
+	<if test="id != null">id,</if><include refid="allSiteColumns" />
+     )
+   VALUES (<if test="id != null">#{id},</if><include refid="allSiteValues" /> )
+ </insert>
 
-  </select>
+ <update id="updateSite" parameterType="Site">
+   UPDATE site SET
+<if test="nome!= null">nome = #{nome},</if>
+<if test="url!= null">url = #{url},</if>
+<if test="quemSomos!= null">quemSomos = #{quemSomos},</if>
+<if test="missao!= null">missao = #{missao},</if>
+<if test="visao!= null">visao = #{visao},</if>
+<if test="titulo!= null">titulo = #{titulo},</if>
+<if test="logo!= null">logo = #{logo},</if>
+<if test="siteTypeEnumValue!= null">siteTypeEnumValue = #{siteTypeEnumValue},</if>
+<if test="atorization!= null">atorization = #{atorization},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
 
-   <select id="updateSupermercado" parameterType="Supermercado" resultType="int" statementType="CALLABLE">
-        { call upd_supermercado( #{supermercadoid},#{usuario}, #{email},#{site},#{senha},#{enderecoid},#{id},#{logradouro},  #{bairro}, #{estado}, #{cidade}, #{numero}, #{cep}, #{nome}, #{complemento},#{documentoid},#{usuarioid}, #{rginscmuni},  #{cpfcnpj}, #{razao}) }
-  </select>
+<delete id="deleteSiteById" parameterType="Site">
+  DELETE FROM site WHERE id = #{id}
+ </delete>
 
-  <select id="deleteSupermercadoById" parameterType="Supermercado" resultType="int" statementType="CALLABLE">
-        { call del_supermercado( #{superId},#{userId} ) }
-
-  </select>
-
-  <delete id="deleteAllSupermercados">
-	DELETE FROM SUPERMERCADO
+ <delete id="deleteAllSites">
+	DELETE FROM site
   </delete>
 </mapper>
+
+
