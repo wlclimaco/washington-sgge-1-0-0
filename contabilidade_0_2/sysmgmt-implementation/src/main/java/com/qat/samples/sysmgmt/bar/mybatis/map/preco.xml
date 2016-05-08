@@ -18,11 +18,11 @@
   <resultMap id="PrecoResult" type="Preco">
     <result property="id" column="id"/>
     <result property="dataMarcacao" column="dataMarcacao"/>
-    <result property="precoTypeEnum" column="precoTypeEnum"/>
+    <result property="precoTypeEnumValue" column="precoTypeEnum"/>
     <result property="valor" column="valor"/>
     <result property="dataProInicial" column="dataProInicial"/>
     <result property="dataProFinal" column="dataProFinal"/>
-    <result property="parenId" column="parenId"/>
+    <result property="parentId" column="parentId"/>
     <result property="emprId" column="emprId"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
@@ -36,7 +36,7 @@ dataMarcacao
 ,valor
 ,dataProInicial
 ,dataProFinal
-,parenId
+,parentId
 ,emprId
 ,create_date
 ,create_user
@@ -46,33 +46,17 @@ dataMarcacao
 </sql>
 <sql id="allPrecoValues">
 #{dataMarcacao},
-#{precoTypeEnum},
+#{precoTypeEnumValue},
 #{valor},
 #{dataProInicial},
 #{dataProFinal},
-#{parenId},
+#{parentId},
 #{emprId},
 		#{createDateUTC},
 		#{createUser},
 		#{modifyDateUTC},
 		#{modifyUser}
   </sql>
-
- <sql id="allPrecoColumnsWithQualifier">
-		c.id, c.preco_desc
-c.id,
-c.dataMarcacao,
-c.precoTypeEnum,
-c.valor,
-c.dataProInicial,
-c.dataProFinal,
-c.parenId,
-c.emprId,
-		c.createDateUTC,
-		c.createUser,
-		c.modifyDateUTC,
-		c.modifyUser
- </sql>
 
  <select id="fetchAllPrecos" resultMap="PrecoResult">
     SELECT id,
@@ -86,7 +70,7 @@ c.emprId,
    FROM preco WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllPrecosRequest" parameterType="PrecoInquiryRequest" resultMap="PrecoResult">
+ <select id="fetchAllPrecosRequest" parameterType="PagedInquiryRequest" resultMap="PrecoResult">
 
 		SELECT id,<include refid="allPrecoColumns" />
   		  FROM preco ORDER BY id ASC
@@ -109,11 +93,11 @@ c.emprId,
  <update id="updatePreco" parameterType="Preco">
    UPDATE preco SET
 <if test="dataMarcacao!= null">dataMarcacao = #{dataMarcacao},</if>
-<if test="precoTypeEnum!= null">precoTypeEnum = #{precoTypeEnum},</if>
+<if test="precoTypeEnumValue!= null">precoTypeEnum = #{precoTypeEnumValue},</if>
 <if test="valor!= null">valor = #{valor},</if>
 <if test="dataProInicial!= null">dataProInicial = #{dataProInicial},</if>
 <if test="dataProFinal!= null">dataProFinal = #{dataProFinal},</if>
-<if test="parenId!= null">parenId = #{parenId},</if>
+<if test="parentId!= null">parentId = #{parentId},</if>
 <if test="emprId!= null">emprId = #{emprId},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>

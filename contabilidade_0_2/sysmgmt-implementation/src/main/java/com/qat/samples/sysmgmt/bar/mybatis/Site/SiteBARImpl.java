@@ -123,87 +123,87 @@ private static final String STMT_DELETE_CONTATO = NAMESPACE_CONTATO + "deleteCon
 
 ///===================================### CONTATOITENS ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_CONTATOITENS = "ContatoitensMap.";
+private static final String NAMESPACE_CONTATOITENS = "ContatoItensMap.";
 
 /** The Constant STMT_INSERT_CONTATOITENS. */
-private static final String STMT_INSERT_CONTATOITENS = NAMESPACE_CONTATOITENS + "insertContatoitens";
+private static final String STMT_INSERT_CONTATOITENS = NAMESPACE_CONTATOITENS + "insertContatoItens";
 
 /** The Constant STMT_UPDATE_CONTATOITENS. */
-private static final String STMT_UPDATE_CONTATOITENS = NAMESPACE_CONTATOITENS + "updateContatoitens";
+private static final String STMT_UPDATE_CONTATOITENS = NAMESPACE_CONTATOITENS + "updateContatoItens";
 
 /** The Constant STMT_DELETE_CONTATOITENS. */
-private static final String STMT_DELETE_CONTATOITENS = NAMESPACE_CONTATOITENS + "deleteContatoitensById";
+private static final String STMT_DELETE_CONTATOITENS = NAMESPACE_CONTATOITENS + "deleteContatoItensById";
 
 	/** The Constant STMT_DELETE_CONTATOITENS_ALL. */
-	private static final String STMT_DELETE_CONTATOITENS_ALL = NAMESPACE_CONTATOITENS + "deleteAllContatoitenss";
+	private static final String STMT_DELETE_CONTATOITENS_ALL = NAMESPACE_CONTATOITENS + "deleteAllContatoItenss";
 
 	/** The Constant STMT_FETCH_CONTATOITENS. */
-	private static final String STMT_FETCH_CONTATOITENS = NAMESPACE_CONTATOITENS + "fetchContatoitensById";
+	private static final String STMT_FETCH_CONTATOITENS = NAMESPACE_CONTATOITENS + "fetchContatoItensById";
 
 	/** The Constant STMT_FETCH_CONTATOITENS_ALL. */
-	private static final String STMT_FETCH_CONTATOITENS_ALL = NAMESPACE_CONTATOITENS + "fetchAllContatoitenss";
+	private static final String STMT_FETCH_CONTATOITENS_ALL = NAMESPACE_CONTATOITENS + "fetchAllContatoItenss";
 
 	/** The Constant STMT_FETCH_CONTATOITENS_COUNT. */
-	private static final String STMT_FETCH_CONTATOITENS_COUNT = NAMESPACE_CONTATOITENS + "fetchContatoitensRowCount";
+	private static final String STMT_FETCH_CONTATOITENS_COUNT = NAMESPACE_CONTATOITENS + "fetchContatoItensRowCount";
 
 	/** The Constant STMT_FETCH_CONTATOITENS_ALL_REQUEST. */
-	private static final String STMT_FETCH_CONTATOITENS_ALL_REQUEST = NAMESPACE_CONTATOITENS + "fetchAllContatoitenssRequest";
+	private static final String STMT_FETCH_CONTATOITENS_ALL_REQUEST = NAMESPACE_CONTATOITENS + "fetchAllContatoItenssRequest";
 
 ///===================================### ORDEMSERVICO ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_ORDEMSERVICO = "OrdemservicoMap.";
+private static final String NAMESPACE_ORDEMSERVICO = "OrdemServicoMap.";
 
 /** The Constant STMT_INSERT_ORDEMSERVICO. */
-private static final String STMT_INSERT_ORDEMSERVICO = NAMESPACE_ORDEMSERVICO + "insertOrdemservico";
+private static final String STMT_INSERT_ORDEMSERVICO = NAMESPACE_ORDEMSERVICO + "insertOrdemServico";
 
 /** The Constant STMT_UPDATE_ORDEMSERVICO. */
-private static final String STMT_UPDATE_ORDEMSERVICO = NAMESPACE_ORDEMSERVICO + "updateOrdemservico";
+private static final String STMT_UPDATE_ORDEMSERVICO = NAMESPACE_ORDEMSERVICO + "updateOrdemServico";
 
 /** The Constant STMT_DELETE_ORDEMSERVICO. */
-private static final String STMT_DELETE_ORDEMSERVICO = NAMESPACE_ORDEMSERVICO + "deleteOrdemservicoById";
+private static final String STMT_DELETE_ORDEMSERVICO = NAMESPACE_ORDEMSERVICO + "deleteOrdemServicoById";
 
 	/** The Constant STMT_DELETE_ORDEMSERVICO_ALL. */
-	private static final String STMT_DELETE_ORDEMSERVICO_ALL = NAMESPACE_ORDEMSERVICO + "deleteAllOrdemservicos";
+	private static final String STMT_DELETE_ORDEMSERVICO_ALL = NAMESPACE_ORDEMSERVICO + "deleteAllOrdemServicos";
 
 	/** The Constant STMT_FETCH_ORDEMSERVICO. */
-	private static final String STMT_FETCH_ORDEMSERVICO = NAMESPACE_ORDEMSERVICO + "fetchOrdemservicoById";
+	private static final String STMT_FETCH_ORDEMSERVICO = NAMESPACE_ORDEMSERVICO + "fetchOrdemServicoById";
 
 	/** The Constant STMT_FETCH_ORDEMSERVICO_ALL. */
-	private static final String STMT_FETCH_ORDEMSERVICO_ALL = NAMESPACE_ORDEMSERVICO + "fetchAllOrdemservicos";
+	private static final String STMT_FETCH_ORDEMSERVICO_ALL = NAMESPACE_ORDEMSERVICO + "fetchAllOrdemServicos";
 
 	/** The Constant STMT_FETCH_ORDEMSERVICO_COUNT. */
-	private static final String STMT_FETCH_ORDEMSERVICO_COUNT = NAMESPACE_ORDEMSERVICO + "fetchOrdemservicoRowCount";
+	private static final String STMT_FETCH_ORDEMSERVICO_COUNT = NAMESPACE_ORDEMSERVICO + "fetchOrdemServicoRowCount";
 
 	/** The Constant STMT_FETCH_ORDEMSERVICO_ALL_REQUEST. */
-	private static final String STMT_FETCH_ORDEMSERVICO_ALL_REQUEST = NAMESPACE_ORDEMSERVICO + "fetchAllOrdemservicosRequest";
+	private static final String STMT_FETCH_ORDEMSERVICO_ALL_REQUEST = NAMESPACE_ORDEMSERVICO + "fetchAllOrdemServicosRequest";
 
 ///===================================### ORDEMSERVICOITENS ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_ORDEMSERVICOITENS = "OrdemservicoitensMap.";
+private static final String NAMESPACE_ORDEMSERVICOITENS = "OrdemServicoItensMap.";
 
 /** The Constant STMT_INSERT_ORDEMSERVICOITENS. */
-private static final String STMT_INSERT_ORDEMSERVICOITENS = NAMESPACE_ORDEMSERVICOITENS + "insertOrdemservicoitens";
+private static final String STMT_INSERT_ORDEMSERVICOITENS = NAMESPACE_ORDEMSERVICOITENS + "insertOrdemServicoItens";
 
 /** The Constant STMT_UPDATE_ORDEMSERVICOITENS. */
-private static final String STMT_UPDATE_ORDEMSERVICOITENS = NAMESPACE_ORDEMSERVICOITENS + "updateOrdemservicoitens";
+private static final String STMT_UPDATE_ORDEMSERVICOITENS = NAMESPACE_ORDEMSERVICOITENS + "updateOrdemServicoItens";
 
 /** The Constant STMT_DELETE_ORDEMSERVICOITENS. */
-private static final String STMT_DELETE_ORDEMSERVICOITENS = NAMESPACE_ORDEMSERVICOITENS + "deleteOrdemservicoitensById";
+private static final String STMT_DELETE_ORDEMSERVICOITENS = NAMESPACE_ORDEMSERVICOITENS + "deleteOrdemServicoItensById";
 
 	/** The Constant STMT_DELETE_ORDEMSERVICOITENS_ALL. */
-	private static final String STMT_DELETE_ORDEMSERVICOITENS_ALL = NAMESPACE_ORDEMSERVICOITENS + "deleteAllOrdemservicoitenss";
+	private static final String STMT_DELETE_ORDEMSERVICOITENS_ALL = NAMESPACE_ORDEMSERVICOITENS + "deleteAllOrdemServicoItenss";
 
 	/** The Constant STMT_FETCH_ORDEMSERVICOITENS. */
-	private static final String STMT_FETCH_ORDEMSERVICOITENS = NAMESPACE_ORDEMSERVICOITENS + "fetchOrdemservicoitensById";
+	private static final String STMT_FETCH_ORDEMSERVICOITENS = NAMESPACE_ORDEMSERVICOITENS + "fetchOrdemServicoItensById";
 
 	/** The Constant STMT_FETCH_ORDEMSERVICOITENS_ALL. */
-	private static final String STMT_FETCH_ORDEMSERVICOITENS_ALL = NAMESPACE_ORDEMSERVICOITENS + "fetchAllOrdemservicoitenss";
+	private static final String STMT_FETCH_ORDEMSERVICOITENS_ALL = NAMESPACE_ORDEMSERVICOITENS + "fetchAllOrdemServicoItenss";
 
 	/** The Constant STMT_FETCH_ORDEMSERVICOITENS_COUNT. */
-	private static final String STMT_FETCH_ORDEMSERVICOITENS_COUNT = NAMESPACE_ORDEMSERVICOITENS + "fetchOrdemservicoitensRowCount";
+	private static final String STMT_FETCH_ORDEMSERVICOITENS_COUNT = NAMESPACE_ORDEMSERVICOITENS + "fetchOrdemServicoItensRowCount";
 
 	/** The Constant STMT_FETCH_ORDEMSERVICOITENS_ALL_REQUEST. */
-	private static final String STMT_FETCH_ORDEMSERVICOITENS_ALL_REQUEST = NAMESPACE_ORDEMSERVICOITENS + "fetchAllOrdemservicoitenssRequest";
+	private static final String STMT_FETCH_ORDEMSERVICOITENS_ALL_REQUEST = NAMESPACE_ORDEMSERVICOITENS + "fetchAllOrdemServicoItenssRequest";
 
 ///===================================### PLANO ####======================================
 /** The Constant NAMESPACE. */

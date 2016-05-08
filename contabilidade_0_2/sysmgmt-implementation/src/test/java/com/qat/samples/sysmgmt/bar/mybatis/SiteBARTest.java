@@ -102,7 +102,7 @@ public ISiteBAR getSiteBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Servico servicoResponse = getSiteBAR().fetchServicoById(request);
-		Assert.assertEquals(servicoResponse.getNome(), "NATIVE INSERT");
+		Assert.assertEquals(servicoResponse.getNome(), "nome");
 		getSiteBAR().updateServico(servico);
 		servicoResponse = getSiteBAR().fetchServicoById(request);
 		Assert.assertEquals(servicoResponse.getNome(), "NATIVE INSERT UPDATE");
@@ -178,7 +178,7 @@ public ISiteBAR getSiteBAR()
 	public void testDeleteAllSites()
 	{
 		getSiteBAR().deleteAllSites();
-	Site site = new Site();
+		Site site = new Site();
 		List<Site> response = getSiteBAR().fetchAllSites(new Site()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
@@ -190,7 +190,7 @@ public ISiteBAR getSiteBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Site siteResponse = getSiteBAR().fetchSiteById(request);
-		Assert.assertEquals(siteResponse.getNome(), "NATIVE INSERT");
+		Assert.assertEquals(siteResponse.getNome(), "nome_1");
 		getSiteBAR().updateSite(site);
 		siteResponse = getSiteBAR().fetchSiteById(request);
 		Assert.assertEquals(siteResponse.getNome(), "NATIVE INSERT UPDATE");
@@ -278,7 +278,7 @@ public ISiteBAR getSiteBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Contato contatoResponse = getSiteBAR().fetchContatoById(request);
-		Assert.assertEquals(contatoResponse.getNome(), "NATIVE INSERT");
+		Assert.assertEquals(contatoResponse.getNome(), "nome_3");
 		getSiteBAR().updateContato(contato);
 		contatoResponse = getSiteBAR().fetchContatoById(request);
 		Assert.assertEquals(contatoResponse.getNome(), "NATIVE INSERT UPDATE");
@@ -366,7 +366,7 @@ public ISiteBAR getSiteBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		ContatoItens contatoitensResponse = getSiteBAR().fetchContatoItensById(request);
-		Assert.assertEquals(contatoitensResponse.getTexto(), "NATIVE INSERT");
+		Assert.assertEquals(contatoitensResponse.getTexto(), "texto_2");
 		getSiteBAR().updateContatoItens(contatoitens);
 		contatoitensResponse = getSiteBAR().fetchContatoItensById(request);
 		Assert.assertEquals(contatoitensResponse.getTexto(), "NATIVE INSERT UPDATE");
@@ -454,7 +454,7 @@ public ISiteBAR getSiteBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		OrdemServico ordemservicoResponse = getSiteBAR().fetchOrdemServicoById(request);
-		Assert.assertEquals(ordemservicoResponse.getNome(), "NATIVE INSERT");
+		Assert.assertEquals(ordemservicoResponse.getNome(), "nome_3");
 		getSiteBAR().updateOrdemServico(ordemservico);
 		ordemservicoResponse = getSiteBAR().fetchOrdemServicoById(request);
 		Assert.assertEquals(ordemservicoResponse.getNome(), "NATIVE INSERT UPDATE");
@@ -538,11 +538,11 @@ public ISiteBAR getSiteBAR()
 	@Test
 	public void testUpdateOrdemServicoItens()
 	{
-		OrdemServicoItens ordemservicoitens = new OrdemServicoItens(1, "NATIVE INSERT UPDATE");
+		OrdemServicoItens ordemservicoitens = new OrdemServicoItens(100001, "NATIVE INSERT UPDATE");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(100001);
 		OrdemServicoItens ordemservicoitensResponse = getSiteBAR().fetchOrdemServicoItensById(request);
-		Assert.assertEquals(ordemservicoitensResponse.getTexto(), "NATIVE INSERT");
+		Assert.assertEquals(ordemservicoitensResponse.getTexto(), "texto_2");
 		getSiteBAR().updateOrdemServicoItens(ordemservicoitens);
 		ordemservicoitensResponse = getSiteBAR().fetchOrdemServicoItensById(request);
 		Assert.assertEquals(ordemservicoitensResponse.getTexto(), "NATIVE INSERT UPDATE");
@@ -630,7 +630,7 @@ public ISiteBAR getSiteBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Plano planoResponse = getSiteBAR().fetchPlanoById(request);
-		Assert.assertEquals(planoResponse.getTitulo(), "NATIVE INSERT");
+		Assert.assertEquals(planoResponse.getTitulo(), "titulo_5");
 		getSiteBAR().updatePlano(plano);
 		planoResponse = getSiteBAR().fetchPlanoById(request);
 		Assert.assertEquals(planoResponse.getTitulo(), "NATIVE INSERT UPDATE");

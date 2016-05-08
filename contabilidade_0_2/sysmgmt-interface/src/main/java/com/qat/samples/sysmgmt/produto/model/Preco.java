@@ -1,5 +1,7 @@
 package com.qat.samples.sysmgmt.produto.model;
 
+import java.util.Date;
+
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -37,9 +39,22 @@ public class Preco extends ModelCosmeDamiao
 		super();
 	}
 
-	public Preco(int i, String string) {
-		// TODO Auto-generated constructor stub
+
+
+	public Preco(Integer id, PrecoTypeEnum precoTypeEnum, Double valor) {
+		super();
+		this.id = id;
+		this.precoTypeEnum = precoTypeEnum;
+		this.valor = valor;
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
+		setParentId(1);
 	}
+
+
+
+
+
 
 	public Integer getPrecoTypeEnumValue()
 	{

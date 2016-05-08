@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.contabilidade.model;
 
+import java.util.Date;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.produto.model.PlanoByServico;
@@ -45,7 +46,11 @@ public class Plano extends ModelCosmeDamiao
 	}
 
 	public Plano(int i, String string) {
-		// TODO Auto-generated constructor stub
+
+		this.id = i;
+		this.titulo = string;
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	/**

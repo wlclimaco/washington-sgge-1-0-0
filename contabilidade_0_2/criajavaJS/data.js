@@ -529,8 +529,8 @@ function ServicoModel() {
 
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "nome", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "descricao", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "nome", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "descricao", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
@@ -815,7 +815,7 @@ function PrecoModel() {
    	a.push({field :{campo : "valor" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
    	a.push({field :{campo : "dataProInicial" , tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
    	a.push({field :{campo : "dataProFinal" , tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-   	a.push({field :{campo : "parenId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "parentId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
    	a.push({field :{campo : "emprId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 
 	return a;

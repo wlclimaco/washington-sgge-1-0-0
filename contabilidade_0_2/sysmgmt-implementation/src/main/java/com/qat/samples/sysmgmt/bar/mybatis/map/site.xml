@@ -25,7 +25,7 @@
     <result property="titulo" column="titulo"/>
     <result property="logo" column="logo"/>
     <result property="atorization" column="atorization"/>
-    <result property="siteTypeEnumValue" column="atorization"/>
+    <result property="siteTypeEnumValue" column="siteTypeEnum"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
@@ -40,7 +40,7 @@ nome
 ,visao
 ,titulo
 ,logo
-,siteTypeEnumValue
+,siteTypeEnum
 ,atorization
 ,create_date
 ,create_user
@@ -64,22 +64,6 @@ nome
 		#{modifyUser}
   </sql>
 
- <sql id="allSiteColumnsWithQualifier">
-		c.id, c.site_desc
-c.id,
-c.nome,
-c.url,
-c.quemSomos,
-c.missao,
-c.visao,
-c.titulo,
-c.logo,
-c.atorization,
-		c.createDateUTC,
-		c.createUser,
-		c.modifyDateUTC,
-		c.modifyUser
- </sql>
 
  <select id="fetchAllSites" resultMap="SiteResult">
     SELECT id,
@@ -122,7 +106,7 @@ c.atorization,
 <if test="visao!= null">visao = #{visao},</if>
 <if test="titulo!= null">titulo = #{titulo},</if>
 <if test="logo!= null">logo = #{logo},</if>
-<if test="siteTypeEnumValue!= null">siteTypeEnumValue = #{siteTypeEnumValue},</if>
+<if test="siteTypeEnumValue!= null">siteTypeEnum = #{siteTypeEnumValue},</if>
 <if test="atorization!= null">atorization = #{atorization},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>

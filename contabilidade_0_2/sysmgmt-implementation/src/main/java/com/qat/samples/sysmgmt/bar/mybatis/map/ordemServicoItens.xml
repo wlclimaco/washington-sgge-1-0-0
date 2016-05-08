@@ -26,8 +26,7 @@
   </resultMap>
 
   <sql id="allOrdemServicoItensColumns">
-id
-,data
+data
 ,texto
 ,create_date
 ,create_user
@@ -36,7 +35,6 @@ id
 
 </sql>
 <sql id="allOrdemServicoItensValues">
-#{id},
 #{data},
 #{texto},
 		#{createDateUTC},
@@ -45,16 +43,7 @@ id
 		#{modifyUser}
   </sql>
 
- <sql id="allOrdemServicoItensColumnsWithQualifier">
-		c.id, c.ordemservicoitens_desc
-c.id,
-c.data,
-c.texto,
-		c.createDateUTC,
-		c.createUser,
-		c.modifyDateUTC,
-		c.modifyUser
- </sql>
+
 
  <select id="fetchAllOrdemServicoItenss" resultMap="OrdemServicoItensResult">
     SELECT id,
@@ -68,7 +57,7 @@ c.texto,
    FROM ordemservicoitens WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllOrdemServicoItenssRequest" parameterType="OrdemServicoItensInquiryRequest" resultMap="OrdemServicoItensResult">
+ <select id="fetchAllOrdemServicoItenssRequest" parameterType="PagedInquiryRequest" resultMap="OrdemServicoItensResult">
 
 		SELECT id,<include refid="allOrdemServicoItensColumns" />
   		  FROM ordemservicoitens ORDER BY id ASC

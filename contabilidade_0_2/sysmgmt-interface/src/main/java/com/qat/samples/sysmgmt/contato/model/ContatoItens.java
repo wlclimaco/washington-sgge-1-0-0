@@ -1,6 +1,9 @@
 package com.qat.samples.sysmgmt.contato.model;
 
+import java.util.Date;
+
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
+import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -27,6 +30,20 @@ public class ContatoItens extends ModelCosmeDamiao
 
 	private boolean visto;
 
+	public Integer getContatoStatusValue()
+	{
+		if (contatoStatus != null)
+		{
+			return contatoStatus.getValue();
+		}
+		return null;
+	}
+
+	public void setContatoStatusValue(Integer acaoTypeValue)
+	{
+		contatoStatus = ContatoStatusEnum.enumForValue(acaoTypeValue);
+	}
+
 	/**
 	 * Default constructor.
 	 */
@@ -45,7 +62,10 @@ public class ContatoItens extends ModelCosmeDamiao
 	}
 
 	public ContatoItens(int i, String string) {
-		// TODO Auto-generated constructor stub
+		this.id = i;
+		this.texto = string;
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	/**

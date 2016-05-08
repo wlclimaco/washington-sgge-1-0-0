@@ -1,8 +1,10 @@
 package com.qat.samples.sysmgmt.ordemServico.model;
 
+import java.util.Date;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
+import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -28,7 +30,21 @@ public class OrdemServico extends ModelCosmeDamiao
 	private List<OrdemServicoItens> ordemStatusList;
 
 	/** The description. */
-	private OrdemServicoStatus status;
+	private OrdemServicoTypeEnum status;
+
+	public Integer getStatusValue()
+	{
+		if (status != null)
+		{
+			return status.getValue();
+		}
+		return null;
+	}
+
+	public void setStatusValue(Integer acaoTypeValue)
+	{
+		status = OrdemServicoTypeEnum.enumForValue(acaoTypeValue);
+	}
 
 	/**
 	 * Default constructor.
@@ -39,7 +55,10 @@ public class OrdemServico extends ModelCosmeDamiao
 	}
 
 	public OrdemServico(int i, String string) {
-		// TODO Auto-generated constructor stub
+		this.id = i;
+		this.nome = string;
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	/**
@@ -126,13 +145,13 @@ public class OrdemServico extends ModelCosmeDamiao
 		this.ordemStatusList = ordemStatusList;
 	}
 
-	public OrdemServicoStatus getStatus()
-	{
+
+
+	public OrdemServicoTypeEnum getStatus() {
 		return status;
 	}
 
-	public void setStatus(OrdemServicoStatus status)
-	{
+	public void setStatus(OrdemServicoTypeEnum status) {
 		this.status = status;
 	}
 

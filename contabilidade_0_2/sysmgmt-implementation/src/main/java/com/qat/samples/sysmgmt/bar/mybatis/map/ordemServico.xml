@@ -30,8 +30,7 @@
   </resultMap>
 
   <sql id="allOrdemServicoColumns">
-id
-,emprId
+emprId
 ,userId
 ,nome
 ,data
@@ -44,7 +43,7 @@ id
 
 </sql>
 <sql id="allOrdemServicoValues">
-#{id},
+
 #{emprId},
 #{userId},
 #{nome},

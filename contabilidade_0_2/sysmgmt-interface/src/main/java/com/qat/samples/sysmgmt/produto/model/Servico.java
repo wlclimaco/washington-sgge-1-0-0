@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.produto.model;
 
+import java.util.Date;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
@@ -30,7 +31,11 @@ public class Servico extends ModelCosmeDamiao
 	}
 
 	public Servico(int i, String string) {
-		// TODO Auto-generated constructor stub
+
+		this.nome = string;
+		this.id = i;
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	/**

@@ -23,6 +23,9 @@
   		<typeAlias alias="Entidade" type="com.qat.samples.sysmgmt.entidade.model.Entidade"/>
 
   		<typeAlias alias="Estado" type="com.qat.samples.sysmgmt.estado.model.Estado"/>
+  		<typeAlias alias="ContatoItens" type="com.qat.samples.sysmgmt.contato.model.ContatoItens"/>
+  		<typeAlias alias="OrdemServicoItens" type="com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoItens"/>
+
 
   		<!-- Dicionario -->
   		<typeAlias alias="Field" type="com.qat.samples.sysmgmt.dicionario.Field"/>
@@ -52,8 +55,9 @@
   		<typeAlias alias="SindicoInquiryRequest" type="com.qat.samples.sysmgmt.condominio.model.request.SindicoInquiryRequest"/>
 
   		<typeAlias alias="Inquilino" type="com.qat.samples.sysmgmt.condominio.model.Inquilino"/>
+  		<typeAlias alias="Site" type="com.qat.samples.sysmgmt.site.model.Site"/>
   		<typeAlias alias="InquilinoInquiryRequest" type="com.qat.samples.sysmgmt.condominio.model.request.InquilinoInquiryRequest"/>
-
+<typeAlias alias="SiteInquiryRequest" type="com.qat.samples.sysmgmt.site.model.request.SiteInquiryRequest"/>
 
   		<typeAlias alias="PagedInquiryRequest" type="com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest"/>
 <!--   		<typeAlias alias="CadastroInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest"/> -->
@@ -111,7 +115,7 @@
   		<typeAlias alias="PlanoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest"/>
 
 
-  		<typeAlias alias="TabPreco" type="com.qat.samples.sysmgmt.produto.model.TabPreco"/>
+  		<typeAlias alias="Preco" type="com.qat.samples.sysmgmt.produto.model.Preco"/>
 
   		<typeAlias alias="Historico" type="com.qat.samples.sysmgmt.historico.model.Historico"/>
 
@@ -121,7 +125,7 @@
   		<typeAlias alias="HistoricoItens" type="com.qat.samples.sysmgmt.historico.model.HistoricoItens"/>
   		<typeAlias alias="HistoricoInquiryRequest" type="com.qat.samples.sysmgmt.historico.model.request.HistoricoInquiryRequest"/>
 
-  		<typeAlias alias="TabPreco" type="com.qat.samples.sysmgmt.produto.model.TabPreco"/>
+  		<typeAlias alias="Preco" type="com.qat.samples.sysmgmt.produto.model.Preco"/>
   		<typeAlias alias="Socio" type="com.qat.samples.sysmgmt.pessoa.model.Socio"/>
 
   		<typeAlias alias="Endereco" type="com.qat.samples.sysmgmt.util.model.Endereco"/>
@@ -374,6 +378,10 @@
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/sindico.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/inquilino.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/contatoItens.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/preco.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/site.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/ordemServicoItens.xml"/>
+
     </mappers>
 
 </configuration>

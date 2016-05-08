@@ -1,5 +1,7 @@
 package com.qat.samples.sysmgmt.ordemServico.model;
 
+import java.util.Date;
+
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 // TODO: Auto-generated Javadoc
@@ -30,7 +32,10 @@ public class OrdemServicoItens extends ModelCosmeDamiao
 	}
 
 	public OrdemServicoItens(int i, String string) {
-		// TODO Auto-generated constructor stub
+		this.id = i;
+		this.texto = string;
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	/**

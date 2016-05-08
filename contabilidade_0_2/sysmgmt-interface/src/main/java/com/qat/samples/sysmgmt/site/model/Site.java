@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.site.model;
 
+import java.util.Date;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
@@ -7,6 +8,7 @@ import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
+import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.Telefone;
 
 /**
@@ -34,6 +36,8 @@ public class Site extends ModelCosmeDamiao
 
 	private String logo;
 
+	private SiteTypeEnum siteTypeEnum;
+
 	private boolean atorization;
 
 	private List<Servico> servicoList;
@@ -46,13 +50,38 @@ public class Site extends ModelCosmeDamiao
 
 	private List<Telefone> telefoneList;
 
+	public Integer getSiteTypeEnumValue()
+	{
+		if (siteTypeEnum != null)
+		{
+			return siteTypeEnum.getValue();
+		}
+		return null;
+	}
+
+	public void setSiteTypeEnumValue(Integer acaoTypeValue)
+	{
+		siteTypeEnum = SiteTypeEnum.enumForValue(acaoTypeValue);
+	}
+
 	public Site()
 	{
 
 	}
 
 	public Site(int i, String string) {
-		// TODO Auto-generated constructor stub
+		this.id = i;
+		this.nome = string;
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
+	}
+
+	public SiteTypeEnum getSiteTypeEnum() {
+		return siteTypeEnum;
+	}
+
+	public void setSiteTypeEnum(SiteTypeEnum siteTypeEnum) {
+		this.siteTypeEnum = siteTypeEnum;
 	}
 
 	public Integer getId() {

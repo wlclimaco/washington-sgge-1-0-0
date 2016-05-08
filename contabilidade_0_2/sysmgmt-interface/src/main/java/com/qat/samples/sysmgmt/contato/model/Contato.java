@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.contato.model;
 
+import java.util.Date;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
@@ -16,7 +17,7 @@ public class Contato extends ModelCosmeDamiao
 	private Integer id;
 
 	/** The data contato. */
-	private Integer dataContato;
+	private Long dataContato;
 
 	/** The nome. */
 	private String nome;
@@ -32,7 +33,7 @@ public class Contato extends ModelCosmeDamiao
 
 	private List<ContatoItens> contatoItensList;
 
-	public Contato(Integer id, Integer dataContato, String nome, String email, String telefone, ContatoTypeEnum motivo,
+	public Contato(Integer id, Long dataContato, String nome, String email, String telefone, ContatoTypeEnum motivo,
 			List<ContatoItens> contatoItensList, PersistenceActionEnum modelAction)
 	{
 		super();
@@ -99,7 +100,10 @@ public class Contato extends ModelCosmeDamiao
 	}
 
 	public Contato(int i, String string) {
-		// TODO Auto-generated constructor stub
+		this.id = i;
+		this.nome = string;
+		setModifyDateUTC((new Date()).getTime());
+		setModifyUser("system");
 	}
 
 	/**
@@ -127,7 +131,7 @@ public class Contato extends ModelCosmeDamiao
 	 *
 	 * @return the dataContato
 	 */
-	public Integer getDataContato()
+	public Long getDataContato()
 	{
 		return dataContato;
 	}
@@ -137,7 +141,7 @@ public class Contato extends ModelCosmeDamiao
 	 *
 	 * @param dataContato the dataContato to set
 	 */
-	public void setDataContato(Integer dataContato)
+	public void setDataContato(Long dataContato)
 	{
 		this.dataContato = dataContato;
 	}

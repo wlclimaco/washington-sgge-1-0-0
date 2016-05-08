@@ -30,7 +30,7 @@
   </resultMap>
 
   <sql id="allPlanoColumns">
-,dataInicio
+dataInicio
 ,dataFinal
 ,numeroContrato
 ,descricao

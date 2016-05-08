@@ -20,7 +20,7 @@
     <result property="dataAlt" column="dataAlt"/>
     <result property="texto" column="texto"/>
     <result property="titulo" column="titulo"/>
-    <result property="contatoStatus" column="contatoStatus"/>
+    <result property="contatoStatusValue" column="contatoStatus"/>
     <result property="visto" column="visto"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
@@ -44,7 +44,7 @@ dataAlt
 #{dataAlt},
 #{texto},
 #{titulo},
-#{contatoStatus},
+#{contatoStatusValue},
 #{visto},
 		#{createDateUTC},
 		#{createUser},
@@ -78,7 +78,7 @@ c.visto,
    FROM contatoitens WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllContatoItenssRequest" parameterType="ContatoItensInquiryRequest" resultMap="ContatoItensResult">
+ <select id="fetchAllContatoItenssRequest" parameterType="PagedInquiryRequest" resultMap="ContatoItensResult">
 
 		SELECT id,<include refid="allContatoItensColumns" />
   		  FROM contatoitens ORDER BY id ASC
@@ -103,7 +103,7 @@ c.visto,
 <if test="dataAlt!= null">dataAlt = #{dataAlt},</if>
 <if test="texto!= null">texto = #{texto},</if>
 <if test="titulo!= null">titulo = #{titulo},</if>
-<if test="contatoStatus!= null">contatoStatus = #{contatoStatus},</if>
+<if test="contatoStatusValue!= null">contatoStatus = #{contatoStatusValue},</if>
 <if test="visto!= null">visto = #{visto},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>

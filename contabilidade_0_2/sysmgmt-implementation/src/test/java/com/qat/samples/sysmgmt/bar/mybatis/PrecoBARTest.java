@@ -21,6 +21,7 @@ import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.bar.Produto.IPrecoBAR;
 import com.qat.samples.sysmgmt.produto.model.Preco;
+import com.qat.samples.sysmgmt.produto.model.PrecoTypeEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
@@ -54,7 +55,7 @@ public IPrecoBAR getPrecoBAR()
 @Test
 	public void testDeletePreco()
 	{
-		Preco preco = new Preco(4, "Preco_999");
+		Preco preco = new Preco(4, PrecoTypeEnum.VENDA,new Double(9.99));
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		Preco precoResponse = getPrecoBAR().fetchPrecoById(request);
@@ -87,7 +88,7 @@ public IPrecoBAR getPrecoBAR()
 	@Test
 	public void testUpdatePreco()
 	{
-		Preco preco = new Preco(1, "NATIVE INSERT UPDATE");
+		Preco preco = new Preco(4, PrecoTypeEnum.VENDA,new Double(9.99));
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Preco precoResponse = getPrecoBAR().fetchPrecoById(request);

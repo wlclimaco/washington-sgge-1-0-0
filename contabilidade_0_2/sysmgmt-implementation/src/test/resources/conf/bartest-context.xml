@@ -18,6 +18,14 @@
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 	</bean>
 
+	<bean id="precoBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Produto.PrecoBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="siteBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Site.SiteBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
 	<bean id="drugBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.DrugBARImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 	</bean>
