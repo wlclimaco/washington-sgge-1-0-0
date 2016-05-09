@@ -4,11 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
+import com.qat.samples.sysmgmt.contabilidade.model.PlanoBySite;
 import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
-import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.Telefone;
 
 /**
@@ -42,7 +42,7 @@ public class Site extends ModelCosmeDamiao
 
 	private List<Servico> servicoList;
 
-	private List<PlanoByEntidade> planoList;
+	private List<PlanoBySite> planoList;
 
 	public Integer getSiteTypeEnumValue()
 	{
@@ -110,11 +110,11 @@ public class Site extends ModelCosmeDamiao
 		this.servicoList = servicoList;
 	}
 
-	public List<Plano> getPlanoList() {
+	public List<PlanoBySite> getPlanoList() {
 		return planoList;
 	}
 
-	public void setPlanoList(List<Plano> planoList) {
+	public void setPlanoList(List<PlanoBySite> planoList) {
 		this.planoList = planoList;
 	}
 
@@ -166,37 +166,15 @@ public class Site extends ModelCosmeDamiao
 		this.atorization = atorization;
 	}
 
-	public List<Endereco> getEnderecoList() {
-		return enderecoList;
-	}
-
-	public void setEnderecoList(List<Endereco> enderecoList) {
-		this.enderecoList = enderecoList;
-	}
-
-	public List<Email> getEmailList() {
-		return emailList;
-	}
-
-	public void setEmailList(List<Email> emailList) {
-		this.emailList = emailList;
-	}
-
-	public List<Telefone> getTelefoneList() {
-		return telefoneList;
-	}
-
-	public void setTelefoneList(List<Telefone> telefoneList) {
-		this.telefoneList = telefoneList;
-	}
-
 	@Override
 	public String toString() {
-		return "Site [getId()=" + getId() + ", getNome()=" + getNome() + ", getUrl()=" + getUrl()
-				+ ", getServicoList()=" + getServicoList() + ", getPlanoList()=" + getPlanoList() + ", getQuemSomos()="
-				+ getQuemSomos() + ", getMissao()=" + getMissao() + ", getVisao()=" + getVisao() + ", getTitulo()="
-				+ getTitulo() + ", getLogo()=" + getLogo() + ", isAtorization()=" + isAtorization()
-				+ ", getEnderecoList()=" + getEnderecoList() + ", getEmailList()=" + getEmailList()
-				+ ", getTelefoneList()=" + getTelefoneList() + ", toString()=" + super.toString() + "]";
+		return "Site [getSiteTypeEnumValue()=" + getSiteTypeEnumValue() + ", getSiteTypeEnum()=" + getSiteTypeEnum()
+				+ ", getId()=" + getId() + ", getNome()=" + getNome() + ", getUrl()=" + getUrl() + ", getServicoList()="
+				+ getServicoList() + ", getPlanoList()=" + getPlanoList() + ", getQuemSomos()=" + getQuemSomos()
+				+ ", getMissao()=" + getMissao() + ", getVisao()=" + getVisao() + ", getTitulo()=" + getTitulo()
+				+ ", getLogo()=" + getLogo() + ", isAtorization()=" + isAtorization() + ", toString()="
+				+ super.toString() + "]";
 	}
+
+
 }

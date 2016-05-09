@@ -1,3 +1,5 @@
+/** create by system gera-java version 1.0.0 09/05/2016 16:51 : 47*/
+
 package com.qat.samples.sysmgmt.controller;
 
 import javax.annotation.Resource;
@@ -13,173 +15,163 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.ICountyBAC;
-import com.qat.samples.sysmgmt.model.County;
-import com.qat.samples.sysmgmt.model.request.CountyMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.CountyResponse;
-import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.bac.Condominio.ICondominioBAC;
+import com.qat.samples.sysmgmt.condominio.model.Avisos;
+import com.qat.samples.sysmgmt.condominio.model.request.AvisoInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.AvisoMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.response.AvisoResponse;
+import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
- * The Class CountyAPIController.
+ * The Class CondominioAPIController.
  */
 @Controller
-@RequestMapping("/county/api")
-public class CountyAPIController extends BaseController {
+@RequestMapping("/condominio/api")
+public class CondominioAPIController extends BaseController {
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
-	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.countycontrollerrest.defaultexception";
+	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.condominiocontrollerrest.defaultexception";
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(CountyAPIController.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CondominioAPIController.class);
 
-	/** The county bac. */
-	private ICountyBAC countyBAC; // injected by @Resource
+	/** The condominio bac. */
+	private ICondominioBAC condominioBAC; // injected by @Resource
 
 	/**
-	 * Gets the county bac.
+	 * Gets the condominio bac.
 	 *
-	 * @return the county bac
+	 * @return the condominio bac
 	 */
-	public ICountyBAC getCountyBAC() {
-		return countyBAC;
+	public ICondominioBAC getCondominioBAC() {
+		return condominioBAC;
 	}
 
 	/**
-	 * Sets the county bac.
+	 * Sets the condominio bac.
 	 *
-	 * @param countyBAC
-	 *            the new county bac
+	 * @param condominioBAC
+	 *            the new condominio bac
 	 */
 	@Resource
-	public void setCountyBAC(ICountyBAC countyBAC) {
-		this.countyBAC = countyBAC;
+	public void setCondominioBAC(ICondominioBAC condominioBAC) {
+		this.condominioBAC = condominioBAC;
 	}
 
-	// /**
-	// * Refresh counties.
-	// *
-	// * @param refreshInt the refresh int
-	// * @param retList the ret list
-	// * @param retPaged the ret paged
-	// * @return the county response
-	// */
-	// @RequestMapping(value = "/refresh", method = RequestMethod.GET)
-	// @ResponseBody
-	// public CountyResponse refreshCounties(@RequestParam("refreshInt") Integer
-	// refreshInt,
-	// @RequestParam("retList") Boolean retList,
-	// @RequestParam("retPaged") Boolean retPaged)
-	// {
-	// CountyResponse countyResponse = new CountyResponse();
-	//
-	// try
-	// {
-	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
-	// retPaged);
-	// InternalResultsResponse<County> internalResponse =
-	// getCountyBAC().refreshCounties(request);
-	// ResponseHandler.handleOperationStatusAndMessages(countyResponse,
-	// internalResponse, true);
-	// }
-	// catch (Exception ex)
-	// {
-	// ResponseHandler.handleException(LOG, countyResponse, ex,
-	// DEFAULT_EXCEPTION_MSG,
-	// new Object[] {ex.toString()});
-	// }
-	// return countyResponse;
-	//
-	// }
-
+	// ===================================### AVISOS
+	// ####======================================
 	/**
-	 * Fetch counties paged.
+	 * Refresh avisoss.
 	 *
-	 * @param request
-	 *            the request
-	 * @return the county response
-	 */
-	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
-	@ResponseBody
-	public CountyResponse fetchCountiesPaged(@RequestBody PagedInquiryRequest request) {
-		CountyResponse countyResponse = new CountyResponse();
-		try {
-			InternalResultsResponse<County> internalResponse = getCountyBAC().fetchCountiesByRequest(request);
-			ResponseHandler.handleOperationStatusAndMessages(countyResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, countyResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return countyResponse;
-	}
-
-	/**
-	 * Insert county.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the county response
-	 */
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	@ResponseBody
-	public CountyResponse insertCounty(@RequestBody CountyMaintenanceRequest request) {
-		CountyResponse countyResponse = new CountyResponse();
-		try {
-			InternalResultsResponse<County> internalResponse = getCountyBAC().insertCounty(request);
-			ResponseHandler.handleOperationStatusAndMessages(countyResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, countyResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return countyResponse;
-	}
-
-	/**
-	 * Update county.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the county response
-	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	@ResponseBody
-	public CountyResponse updateCounty(@RequestBody CountyMaintenanceRequest request) {
-		CountyResponse countyResponse = new CountyResponse();
-		try {
-			InternalResultsResponse<County> internalResponse = getCountyBAC().updateCounty(request);
-			ResponseHandler.handleOperationStatusAndMessages(countyResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, countyResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return countyResponse;
-	}
-
-	/**
-	 * Delete county.
-	 *
-	 * @param countyId
-	 *            the county id
+	 * @param refreshInt
+	 *            the refresh int
 	 * @param retList
 	 *            the ret list
 	 * @param retPaged
 	 *            the ret paged
-	 * @return the county response
+	 * @return the avisos response
 	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
 	@ResponseBody
-	public CountyResponse deleteCounty(@RequestParam("countyId") Integer countyId,
+	public AvisoResponse refreshAvisoss(@RequestParam("refreshInt") Integer refreshInt,
 			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
-		CountyResponse countyResponse = new CountyResponse();
+		AvisoResponse avisosResponse = new AvisoResponse();
 
 		try {
-			CountyMaintenanceRequest request = new CountyMaintenanceRequest(new County(countyId, null), retList,
-					retPaged);
-			InternalResultsResponse<County> internalResponse = getCountyBAC().deleteCounty(request);
-			ResponseHandler.handleOperationStatusAndMessages(countyResponse, internalResponse, true);
+			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
+			InternalResultsResponse<Avisos> internalResponse = getCondominioBAC().refreshAvisos(request);
+			ResponseHandler.handleOperationStatusAndMessages(avisosResponse, internalResponse, true);
 		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, countyResponse, ex, DEFAULT_EXCEPTION_MSG,
+			ResponseHandler.handleException(LOG, avisosResponse, ex, DEFAULT_EXCEPTION_MSG,
 					new Object[] { ex.toString() });
 		}
-		return countyResponse;
+		return avisosResponse;
 
 	}
+
+	/**
+	 * Fetch avisos paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the avisos response
+	 */
+	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public AvisoResponse fetchAvisosPaged(@RequestBody AvisoInquiryRequest request) {
+		AvisoResponse avisosResponse = new AvisoResponse();
+		try {
+			InternalResultsResponse<Avisos> internalResponse = getCondominioBAC().fetchAvisosByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(avisosResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, avisosResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return avisosResponse;
+	}
+
+	/**
+	 * Insert avisos.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the avisos response
+	 */
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public AvisoResponse insertAvisos(@RequestBody AvisoMaintenanceRequest request) {
+		AvisoResponse avisosResponse = new AvisoResponse();
+		try {
+			InternalResultsResponse<Avisos> internalResponse = getCondominioBAC().insertAvisos(request);
+			ResponseHandler.handleOperationStatusAndMessages(avisosResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, avisosResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return avisosResponse;
+	}
+
+	/**
+	 * Update avisos.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the avisos response
+	 */
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ResponseBody
+	public AvisoResponse updateAvisos(@RequestBody AvisoMaintenanceRequest request) {
+		AvisoResponse avisosResponse = new AvisoResponse();
+		try {
+			InternalResultsResponse<Avisos> internalResponse = getCondominioBAC().updateAvisos(request);
+			ResponseHandler.handleOperationStatusAndMessages(avisosResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, avisosResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return avisosResponse;
+	}
+
+	/**
+	 * Delete avisos.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the avisos response
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public AvisoResponse deleteAvisos(@RequestBody AvisoMaintenanceRequest request) {
+		AvisoResponse avisosResponse = new AvisoResponse();
+
+		try {
+			InternalResultsResponse<Avisos> internalResponse = getCondominioBAC().deleteAvisos(request);
+			ResponseHandler.handleOperationStatusAndMessages(avisosResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, avisosResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return avisosResponse;
+
+	}
+
 }

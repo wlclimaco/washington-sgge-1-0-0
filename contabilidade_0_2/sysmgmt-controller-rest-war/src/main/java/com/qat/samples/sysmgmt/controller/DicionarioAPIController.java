@@ -1,3 +1,5 @@
+/** create by system gera-java version 1.0.0 09/05/2016 16:51 : 47*/
+
 package com.qat.samples.sysmgmt.controller;
 
 import javax.annotation.Resource;
@@ -13,173 +15,405 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.ICountyBAC;
-import com.qat.samples.sysmgmt.model.County;
-import com.qat.samples.sysmgmt.model.request.CountyMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.CountyResponse;
-import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.bac.Dicionario.IDicionarioBAC;
+import com.qat.samples.sysmgmt.dicionario.Classes;
+import com.qat.samples.sysmgmt.dicionario.Field;
+import com.qat.samples.sysmgmt.dicionario.Interface;
+import com.qat.samples.sysmgmt.dicionario.request.ClassesInquiryRequest;
+import com.qat.samples.sysmgmt.dicionario.request.ClassesMaintenanceRequest;
+import com.qat.samples.sysmgmt.dicionario.request.FieldInquiryRequest;
+import com.qat.samples.sysmgmt.dicionario.request.FieldMaintenanceRequest;
+import com.qat.samples.sysmgmt.dicionario.request.InterfaceInquiryRequest;
+import com.qat.samples.sysmgmt.dicionario.request.InterfaceMaintenanceRequest;
+import com.qat.samples.sysmgmt.dicionario.response.ClassesResponse;
+import com.qat.samples.sysmgmt.dicionario.response.FieldResponse;
+import com.qat.samples.sysmgmt.dicionario.response.InterfaceResponse;
+import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
- * The Class CountyAPIController.
+ * The Class DicionarioAPIController.
  */
 @Controller
-@RequestMapping("/county/api")
-public class CountyAPIController extends BaseController {
+@RequestMapping("/dicionario/api")
+public class DicionarioAPIController extends BaseController {
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
-	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.countycontrollerrest.defaultexception";
+	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.dicionariocontrollerrest.defaultexception";
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(CountyAPIController.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DicionarioAPIController.class);
 
-	/** The county bac. */
-	private ICountyBAC countyBAC; // injected by @Resource
+	/** The dicionario bac. */
+	private IDicionarioBAC dicionarioBAC; // injected by @Resource
 
 	/**
-	 * Gets the county bac.
+	 * Gets the dicionario bac.
 	 *
-	 * @return the county bac
+	 * @return the dicionario bac
 	 */
-	public ICountyBAC getCountyBAC() {
-		return countyBAC;
+	public IDicionarioBAC getDicionarioBAC() {
+		return dicionarioBAC;
 	}
 
 	/**
-	 * Sets the county bac.
+	 * Sets the dicionario bac.
 	 *
-	 * @param countyBAC
-	 *            the new county bac
+	 * @param dicionarioBAC
+	 *            the new dicionario bac
 	 */
 	@Resource
-	public void setCountyBAC(ICountyBAC countyBAC) {
-		this.countyBAC = countyBAC;
+	public void setDicionarioBAC(IDicionarioBAC dicionarioBAC) {
+		this.dicionarioBAC = dicionarioBAC;
 	}
 
-	// /**
-	// * Refresh counties.
-	// *
-	// * @param refreshInt the refresh int
-	// * @param retList the ret list
-	// * @param retPaged the ret paged
-	// * @return the county response
-	// */
-	// @RequestMapping(value = "/refresh", method = RequestMethod.GET)
-	// @ResponseBody
-	// public CountyResponse refreshCounties(@RequestParam("refreshInt") Integer
-	// refreshInt,
-	// @RequestParam("retList") Boolean retList,
-	// @RequestParam("retPaged") Boolean retPaged)
-	// {
-	// CountyResponse countyResponse = new CountyResponse();
-	//
-	// try
-	// {
-	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
-	// retPaged);
-	// InternalResultsResponse<County> internalResponse =
-	// getCountyBAC().refreshCounties(request);
-	// ResponseHandler.handleOperationStatusAndMessages(countyResponse,
-	// internalResponse, true);
-	// }
-	// catch (Exception ex)
-	// {
-	// ResponseHandler.handleException(LOG, countyResponse, ex,
-	// DEFAULT_EXCEPTION_MSG,
-	// new Object[] {ex.toString()});
-	// }
-	// return countyResponse;
-	//
-	// }
-
+	// ===================================### CLASSES
+	// ####======================================
 	/**
-	 * Fetch counties paged.
+	 * Refresh classess.
 	 *
-	 * @param request
-	 *            the request
-	 * @return the county response
-	 */
-	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
-	@ResponseBody
-	public CountyResponse fetchCountiesPaged(@RequestBody PagedInquiryRequest request) {
-		CountyResponse countyResponse = new CountyResponse();
-		try {
-			InternalResultsResponse<County> internalResponse = getCountyBAC().fetchCountiesByRequest(request);
-			ResponseHandler.handleOperationStatusAndMessages(countyResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, countyResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return countyResponse;
-	}
-
-	/**
-	 * Insert county.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the county response
-	 */
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	@ResponseBody
-	public CountyResponse insertCounty(@RequestBody CountyMaintenanceRequest request) {
-		CountyResponse countyResponse = new CountyResponse();
-		try {
-			InternalResultsResponse<County> internalResponse = getCountyBAC().insertCounty(request);
-			ResponseHandler.handleOperationStatusAndMessages(countyResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, countyResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return countyResponse;
-	}
-
-	/**
-	 * Update county.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the county response
-	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	@ResponseBody
-	public CountyResponse updateCounty(@RequestBody CountyMaintenanceRequest request) {
-		CountyResponse countyResponse = new CountyResponse();
-		try {
-			InternalResultsResponse<County> internalResponse = getCountyBAC().updateCounty(request);
-			ResponseHandler.handleOperationStatusAndMessages(countyResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, countyResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return countyResponse;
-	}
-
-	/**
-	 * Delete county.
-	 *
-	 * @param countyId
-	 *            the county id
+	 * @param refreshInt
+	 *            the refresh int
 	 * @param retList
 	 *            the ret list
 	 * @param retPaged
 	 *            the ret paged
-	 * @return the county response
+	 * @return the classes response
 	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
 	@ResponseBody
-	public CountyResponse deleteCounty(@RequestParam("countyId") Integer countyId,
+	public ClassesResponse refreshClassess(@RequestParam("refreshInt") Integer refreshInt,
 			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
-		CountyResponse countyResponse = new CountyResponse();
+		ClassesResponse classesResponse = new ClassesResponse();
 
 		try {
-			CountyMaintenanceRequest request = new CountyMaintenanceRequest(new County(countyId, null), retList,
-					retPaged);
-			InternalResultsResponse<County> internalResponse = getCountyBAC().deleteCounty(request);
-			ResponseHandler.handleOperationStatusAndMessages(countyResponse, internalResponse, true);
+			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
+			InternalResultsResponse<Classes> internalResponse = getDicionarioBAC().refreshClassess(request);
+			ResponseHandler.handleOperationStatusAndMessages(classesResponse, internalResponse, true);
 		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, countyResponse, ex, DEFAULT_EXCEPTION_MSG,
+			ResponseHandler.handleException(LOG, classesResponse, ex, DEFAULT_EXCEPTION_MSG,
 					new Object[] { ex.toString() });
 		}
-		return countyResponse;
+		return classesResponse;
 
 	}
+
+	/**
+	 * Fetch classes paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the classes response
+	 */
+	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public ClassesResponse fetchClassesPaged(@RequestBody ClassesInquiryRequest request) {
+		ClassesResponse classesResponse = new ClassesResponse();
+		try {
+			InternalResultsResponse<Classes> internalResponse = getDicionarioBAC().fetchClassessByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(classesResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, classesResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return classesResponse;
+	}
+
+	/**
+	 * Insert classes.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the classes response
+	 */
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public ClassesResponse insertClasses(@RequestBody ClassesMaintenanceRequest request) {
+		ClassesResponse classesResponse = new ClassesResponse();
+		try {
+			InternalResultsResponse<Classes> internalResponse = getDicionarioBAC().insertClasses(request);
+			ResponseHandler.handleOperationStatusAndMessages(classesResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, classesResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return classesResponse;
+	}
+
+	/**
+	 * Update classes.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the classes response
+	 */
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ResponseBody
+	public ClassesResponse updateClasses(@RequestBody ClassesMaintenanceRequest request) {
+		ClassesResponse classesResponse = new ClassesResponse();
+		try {
+			InternalResultsResponse<Classes> internalResponse = getDicionarioBAC().updateClasses(request);
+			ResponseHandler.handleOperationStatusAndMessages(classesResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, classesResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return classesResponse;
+	}
+
+	/**
+	 * Delete classes.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the classes response
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public ClassesResponse deleteClasses(@RequestBody ClassesMaintenanceRequest request) {
+		ClassesResponse classesResponse = new ClassesResponse();
+
+		try {
+			InternalResultsResponse<Classes> internalResponse = getDicionarioBAC().deleteClasses(request);
+			ResponseHandler.handleOperationStatusAndMessages(classesResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, classesResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return classesResponse;
+
+	}
+
+	// ===================================### INTERFACE
+	// ####======================================
+	/**
+	 * Refresh interfaces.
+	 *
+	 * @param refreshInt
+	 *            the refresh int
+	 * @param retList
+	 *            the ret list
+	 * @param retPaged
+	 *            the ret paged
+	 * @return the interface response
+	 */
+	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	@ResponseBody
+	public InterfaceResponse refreshInterfaces(@RequestParam("refreshInt") Integer refreshInt,
+			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
+		InterfaceResponse interfaceResponse = new InterfaceResponse();
+
+		try {
+			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
+			InternalResultsResponse<Interface> internalResponse = getDicionarioBAC().refreshInterfaces(request);
+			ResponseHandler.handleOperationStatusAndMessages(interfaceResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, interfaceResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return interfaceResponse;
+
+	}
+
+	/**
+	 * Fetch interface paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the interface response
+	 */
+	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public InterfaceResponse fetchInterfacePaged(@RequestBody InterfaceInquiryRequest request) {
+		InterfaceResponse interfaceResponse = new InterfaceResponse();
+		try {
+			InternalResultsResponse<Interface> internalResponse = getDicionarioBAC().fetchInterfacesByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(interfaceResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, interfaceResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return interfaceResponse;
+	}
+
+	/**
+	 * Insert interface.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the interface response
+	 */
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public InterfaceResponse insertInterface(@RequestBody InterfaceMaintenanceRequest request) {
+		InterfaceResponse interfaceResponse = new InterfaceResponse();
+		try {
+			InternalResultsResponse<Interface> internalResponse = getDicionarioBAC().insertInterface(request);
+			ResponseHandler.handleOperationStatusAndMessages(interfaceResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, interfaceResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return interfaceResponse;
+	}
+
+	/**
+	 * Update interface.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the interface response
+	 */
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ResponseBody
+	public InterfaceResponse updateInterface(@RequestBody InterfaceMaintenanceRequest request) {
+		InterfaceResponse interfaceResponse = new InterfaceResponse();
+		try {
+			InternalResultsResponse<Interface> internalResponse = getDicionarioBAC().updateInterface(request);
+			ResponseHandler.handleOperationStatusAndMessages(interfaceResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, interfaceResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return interfaceResponse;
+	}
+
+	/**
+	 * Delete interface.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the interface response
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public InterfaceResponse deleteInterface(@RequestBody InterfaceMaintenanceRequest request) {
+		InterfaceResponse interfaceResponse = new InterfaceResponse();
+
+		try {
+			InternalResultsResponse<Interface> internalResponse = getDicionarioBAC().deleteInterface(request);
+			ResponseHandler.handleOperationStatusAndMessages(interfaceResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, interfaceResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return interfaceResponse;
+
+	}
+
+	// ===================================### FIELD
+	// ####======================================
+	/**
+	 * Refresh fields.
+	 *
+	 * @param refreshInt
+	 *            the refresh int
+	 * @param retList
+	 *            the ret list
+	 * @param retPaged
+	 *            the ret paged
+	 * @return the field response
+	 */
+	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	@ResponseBody
+	public FieldResponse refreshFields(@RequestParam("refreshInt") Integer refreshInt,
+			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
+		FieldResponse fieldResponse = new FieldResponse();
+
+		try {
+			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
+			InternalResultsResponse<Field> internalResponse = getDicionarioBAC().refreshFields(request);
+			ResponseHandler.handleOperationStatusAndMessages(fieldResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, fieldResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return fieldResponse;
+
+	}
+
+	/**
+	 * Fetch field paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the field response
+	 */
+	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public FieldResponse fetchFieldPaged(@RequestBody FieldInquiryRequest request) {
+		FieldResponse fieldResponse = new FieldResponse();
+		try {
+			InternalResultsResponse<Field> internalResponse = getDicionarioBAC().fetchFieldsByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(fieldResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, fieldResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return fieldResponse;
+	}
+
+	/**
+	 * Insert field.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the field response
+	 */
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public FieldResponse insertField(@RequestBody FieldMaintenanceRequest request) {
+		FieldResponse fieldResponse = new FieldResponse();
+		try {
+			InternalResultsResponse<Field> internalResponse = getDicionarioBAC().insertField(request);
+			ResponseHandler.handleOperationStatusAndMessages(fieldResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, fieldResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return fieldResponse;
+	}
+
+	/**
+	 * Update field.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the field response
+	 */
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ResponseBody
+	public FieldResponse updateField(@RequestBody FieldMaintenanceRequest request) {
+		FieldResponse fieldResponse = new FieldResponse();
+		try {
+			InternalResultsResponse<Field> internalResponse = getDicionarioBAC().updateField(request);
+			ResponseHandler.handleOperationStatusAndMessages(fieldResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, fieldResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return fieldResponse;
+	}
+
+	/**
+	 * Delete field.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the field response
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public FieldResponse deleteField(@RequestBody FieldMaintenanceRequest request) {
+		FieldResponse fieldResponse = new FieldResponse();
+
+		try {
+			InternalResultsResponse<Field> internalResponse = getDicionarioBAC().deleteField(request);
+			ResponseHandler.handleOperationStatusAndMessages(fieldResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, fieldResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return fieldResponse;
+
+	}
+
 }

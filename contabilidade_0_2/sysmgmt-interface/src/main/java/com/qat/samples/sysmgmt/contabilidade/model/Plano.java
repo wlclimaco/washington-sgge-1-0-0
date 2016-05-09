@@ -101,67 +101,54 @@ public class Plano extends ModelCosmeDamiao
 		this.numeroContrato = numeroContrato;
 	}
 
-	public List<PlanoByServico> getServicos() {
-		return servicos;
-	}
-
-	public void setServicos(List<PlanoByServico> servicos) {
-		this.servicos = servicos;
-	}
-
-	/**
-	 * @return the preco
-	 */
-	public List<Preco> getPreco()
-	{
-		return preco;
-	}
-
-	/**
-	 * @param preco the preco to set
-	 */
-	public void setPreco(List<Preco> preco)
-	{
-		this.preco = preco;
-	}
-
-	public String getDescricao()
-	{
-		return descricao;
-	}
-
-	public void setDescricao(String descricao)
-	{
-		this.descricao = descricao;
-	}
-
-	public String getTitulo()
-	{
-		return titulo;
-	}
-
-	public void setTitulo(String titulo)
-	{
-		this.titulo = titulo;
-	}
-
-	public Integer getId()
-	{
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Integer id)
-	{
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	@Override
-	public String toString()
-	{
-		return "Plano [getDataInicio()=" + getDataInicio() + ", getDataFinal()=" + getDataFinal()
-				+ ", getNumeroContrato()=" + getNumeroContrato() + ", getServicos()=" + getServicos() + ", getPreco()="
-				+ getPreco()  + ", getDescricao()=" + getDescricao()
-				+ ", getTitulo()=" + getTitulo() + ", getId()=" + getId() + ", toString()=" + super.toString() + "]";
+	public List<Preco> getPrecoList() {
+		return precoList;
 	}
+
+	public void setPrecoList(List<Preco> precoList) {
+		this.precoList = precoList;
+	}
+
+	public List<PlanoByServico> getServicoList() {
+		return servicoList;
+	}
+
+	public void setServicoList(List<PlanoByServico> servicoList) {
+		this.servicoList = servicoList;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	@Override
+	public String toString() {
+		return "Plano [getDataInicio()=" + getDataInicio() + ", getDataFinal()=" + getDataFinal()
+				+ ", getNumeroContrato()=" + getNumeroContrato() + ", getId()=" + getId() + ", getPrecoList()="
+				+ getPrecoList() + ", getServicoList()=" + getServicoList() + ", getDescricao()=" + getDescricao()
+				+ ", getTitulo()=" + getTitulo() + ", toString()=" + super.toString() + "]";
+	}
+
+
 
 }

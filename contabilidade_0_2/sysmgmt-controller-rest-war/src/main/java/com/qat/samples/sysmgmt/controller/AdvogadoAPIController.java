@@ -1,3 +1,5 @@
+/** create by system gera-java version 1.0.0 09/05/2016 16:45 : 52*/
+
 package com.qat.samples.sysmgmt.controller;
 
 import javax.annotation.Resource;
@@ -13,173 +15,284 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.ICountyBAC;
-import com.qat.samples.sysmgmt.model.County;
-import com.qat.samples.sysmgmt.model.request.CountyMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.CountyResponse;
-import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.Audiencia;
+import com.qat.samples.sysmgmt.advocacia.Processo;
+import com.qat.samples.sysmgmt.advocacia.request.AudienciaInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.request.AudienciaMaintenanceRequest;
+import com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.request.ProcessoMaintenanceRequest;
+import com.qat.samples.sysmgmt.advocacia.response.AudienciaResponse;
+import com.qat.samples.sysmgmt.advocacia.response.ProcessoResponse;
+import com.qat.samples.sysmgmt.bac.Advogado.IAdvocaciaBAC;
+import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
- * The Class CountyAPIController.
+ * The Class AdvogadoAPIController.
  */
 @Controller
-@RequestMapping("/county/api")
-public class CountyAPIController extends BaseController {
+@RequestMapping("/advocacia/api")
+public class AdvogadoAPIController extends BaseController {
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
-	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.countycontrollerrest.defaultexception";
+	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.advogadocontrollerrest.defaultexception";
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(CountyAPIController.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AdvogadoAPIController.class);
 
-	/** The county bac. */
-	private ICountyBAC countyBAC; // injected by @Resource
+	/** The advogado bac. */
+	private IAdvocaciaBAC advogadoBAC; // injected by @Resource
 
 	/**
-	 * Gets the county bac.
+	 * Gets the advogado bac.
 	 *
-	 * @return the county bac
+	 * @return the advogado bac
 	 */
-	public ICountyBAC getCountyBAC() {
-		return countyBAC;
+	public IAdvocaciaBAC getAdvogadoBAC() {
+		return advogadoBAC;
 	}
 
 	/**
-	 * Sets the county bac.
+	 * Sets the advogado bac.
 	 *
-	 * @param countyBAC
-	 *            the new county bac
+	 * @param advogadoBAC
+	 *            the new advogado bac
 	 */
 	@Resource
-	public void setCountyBAC(ICountyBAC countyBAC) {
-		this.countyBAC = countyBAC;
+	public void setAdvogadoBAC(IAdvocaciaBAC advogadoBAC) {
+		this.advogadoBAC = advogadoBAC;
 	}
 
-	// /**
-	// * Refresh counties.
-	// *
-	// * @param refreshInt the refresh int
-	// * @param retList the ret list
-	// * @param retPaged the ret paged
-	// * @return the county response
-	// */
-	// @RequestMapping(value = "/refresh", method = RequestMethod.GET)
-	// @ResponseBody
-	// public CountyResponse refreshCounties(@RequestParam("refreshInt") Integer
-	// refreshInt,
-	// @RequestParam("retList") Boolean retList,
-	// @RequestParam("retPaged") Boolean retPaged)
-	// {
-	// CountyResponse countyResponse = new CountyResponse();
-	//
-	// try
-	// {
-	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
-	// retPaged);
-	// InternalResultsResponse<County> internalResponse =
-	// getCountyBAC().refreshCounties(request);
-	// ResponseHandler.handleOperationStatusAndMessages(countyResponse,
-	// internalResponse, true);
-	// }
-	// catch (Exception ex)
-	// {
-	// ResponseHandler.handleException(LOG, countyResponse, ex,
-	// DEFAULT_EXCEPTION_MSG,
-	// new Object[] {ex.toString()});
-	// }
-	// return countyResponse;
-	//
-	// }
-
+	// ===================================### AUDIENCIA
+	// ####======================================
 	/**
-	 * Fetch counties paged.
+	 * Refresh audiencias.
 	 *
-	 * @param request
-	 *            the request
-	 * @return the county response
-	 */
-	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
-	@ResponseBody
-	public CountyResponse fetchCountiesPaged(@RequestBody PagedInquiryRequest request) {
-		CountyResponse countyResponse = new CountyResponse();
-		try {
-			InternalResultsResponse<County> internalResponse = getCountyBAC().fetchCountiesByRequest(request);
-			ResponseHandler.handleOperationStatusAndMessages(countyResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, countyResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return countyResponse;
-	}
-
-	/**
-	 * Insert county.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the county response
-	 */
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	@ResponseBody
-	public CountyResponse insertCounty(@RequestBody CountyMaintenanceRequest request) {
-		CountyResponse countyResponse = new CountyResponse();
-		try {
-			InternalResultsResponse<County> internalResponse = getCountyBAC().insertCounty(request);
-			ResponseHandler.handleOperationStatusAndMessages(countyResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, countyResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return countyResponse;
-	}
-
-	/**
-	 * Update county.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the county response
-	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	@ResponseBody
-	public CountyResponse updateCounty(@RequestBody CountyMaintenanceRequest request) {
-		CountyResponse countyResponse = new CountyResponse();
-		try {
-			InternalResultsResponse<County> internalResponse = getCountyBAC().updateCounty(request);
-			ResponseHandler.handleOperationStatusAndMessages(countyResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, countyResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return countyResponse;
-	}
-
-	/**
-	 * Delete county.
-	 *
-	 * @param countyId
-	 *            the county id
+	 * @param refreshInt
+	 *            the refresh int
 	 * @param retList
 	 *            the ret list
 	 * @param retPaged
 	 *            the ret paged
-	 * @return the county response
+	 * @return the audiencia response
 	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
 	@ResponseBody
-	public CountyResponse deleteCounty(@RequestParam("countyId") Integer countyId,
+	public AudienciaResponse refreshAudiencias(@RequestParam("refreshInt") Integer refreshInt,
 			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
-		CountyResponse countyResponse = new CountyResponse();
+		AudienciaResponse audienciaResponse = new AudienciaResponse();
 
 		try {
-			CountyMaintenanceRequest request = new CountyMaintenanceRequest(new County(countyId, null), retList,
-					retPaged);
-			InternalResultsResponse<County> internalResponse = getCountyBAC().deleteCounty(request);
-			ResponseHandler.handleOperationStatusAndMessages(countyResponse, internalResponse, true);
+			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
+			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().refreshAudiencias(request);
+			ResponseHandler.handleOperationStatusAndMessages(audienciaResponse, internalResponse, true);
 		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, countyResponse, ex, DEFAULT_EXCEPTION_MSG,
+			ResponseHandler.handleException(LOG, audienciaResponse, ex, DEFAULT_EXCEPTION_MSG,
 					new Object[] { ex.toString() });
 		}
-		return countyResponse;
+		return audienciaResponse;
 
 	}
+
+	/**
+	 * Fetch audiencia paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the audiencia response
+	 */
+	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public AudienciaResponse fetchAudienciaPaged(@RequestBody AudienciaInquiryRequest request) {
+		AudienciaResponse audienciaResponse = new AudienciaResponse();
+		try {
+			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().fetchAudienciasByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(audienciaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, audienciaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return audienciaResponse;
+	}
+
+	/**
+	 * Insert audiencia.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the audiencia response
+	 */
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public AudienciaResponse insertAudiencia(@RequestBody AudienciaMaintenanceRequest request) {
+		AudienciaResponse audienciaResponse = new AudienciaResponse();
+		try {
+			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().insertAudiencia(request);
+			ResponseHandler.handleOperationStatusAndMessages(audienciaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, audienciaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return audienciaResponse;
+	}
+
+	/**
+	 * Update audiencia.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the audiencia response
+	 */
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ResponseBody
+	public AudienciaResponse updateAudiencia(@RequestBody AudienciaMaintenanceRequest request) {
+		AudienciaResponse audienciaResponse = new AudienciaResponse();
+		try {
+			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().updateAudiencia(request);
+			ResponseHandler.handleOperationStatusAndMessages(audienciaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, audienciaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return audienciaResponse;
+	}
+
+	/**
+	 * Delete audiencia.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the audiencia response
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public AudienciaResponse deleteAudiencia(@RequestBody AudienciaMaintenanceRequest request) {
+		AudienciaResponse audienciaResponse = new AudienciaResponse();
+
+		try {
+			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().deleteAudiencia(request);
+			ResponseHandler.handleOperationStatusAndMessages(audienciaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, audienciaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return audienciaResponse;
+
+	}
+
+	// ===================================### PROCESSO
+	// ####======================================
+	/**
+	 * Refresh processos.
+	 *
+	 * @param refreshInt
+	 *            the refresh int
+	 * @param retList
+	 *            the ret list
+	 * @param retPaged
+	 *            the ret paged
+	 * @return the processo response
+	 */
+	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	@ResponseBody
+	public ProcessoResponse refreshProcessos(@RequestParam("refreshInt") Integer refreshInt,
+			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
+		ProcessoResponse processoResponse = new ProcessoResponse();
+
+		try {
+			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
+			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().refreshProcessos(request);
+			ResponseHandler.handleOperationStatusAndMessages(processoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, processoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return processoResponse;
+
+	}
+
+	/**
+	 * Fetch processo paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the processo response
+	 */
+	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public ProcessoResponse fetchProcessoPaged(@RequestBody ProcessoInquiryRequest request) {
+		ProcessoResponse processoResponse = new ProcessoResponse();
+		try {
+			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().fetchProcessosByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(processoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, processoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return processoResponse;
+	}
+
+	/**
+	 * Insert processo.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the processo response
+	 */
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public ProcessoResponse insertProcesso(@RequestBody ProcessoMaintenanceRequest request) {
+		ProcessoResponse processoResponse = new ProcessoResponse();
+		try {
+			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().insertProcesso(request);
+			ResponseHandler.handleOperationStatusAndMessages(processoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, processoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return processoResponse;
+	}
+
+	/**
+	 * Update processo.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the processo response
+	 */
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ResponseBody
+	public ProcessoResponse updateProcesso(@RequestBody ProcessoMaintenanceRequest request) {
+		ProcessoResponse processoResponse = new ProcessoResponse();
+		try {
+			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().updateProcesso(request);
+			ResponseHandler.handleOperationStatusAndMessages(processoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, processoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return processoResponse;
+	}
+
+	/**
+	 * Delete processo.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the processo response
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public ProcessoResponse deleteProcesso(@RequestBody ProcessoMaintenanceRequest request) {
+		ProcessoResponse processoResponse = new ProcessoResponse();
+
+		try {
+			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().deleteProcesso(request);
+			ResponseHandler.handleOperationStatusAndMessages(processoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, processoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return processoResponse;
+
+	}
+
 }

@@ -1,3 +1,5 @@
+/** create by system gera-java version 1.0.0 09/05/2016 16:51 : 47*/
+
 package com.qat.samples.sysmgmt.controller;
 
 import javax.annotation.Resource;
@@ -13,173 +15,406 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.ICountyBAC;
-import com.qat.samples.sysmgmt.model.County;
-import com.qat.samples.sysmgmt.model.request.CountyMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.CountyResponse;
-import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.bac.Vendas.IVendasBAC;
+import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
+import com.qat.samples.sysmgmt.nf.model.Orcamento;
+import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalSaidaMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest;
+import com.qat.samples.sysmgmt.nf.model.request.OrcamentoMaintenanceRequest;
+import com.qat.samples.sysmgmt.nf.model.response.NotaFiscalSaidaResponse;
+import com.qat.samples.sysmgmt.nf.model.response.OrcamentoResponse;
+import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.ordemServico.model.response.OrdemServicoResponse;
+import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
- * The Class CountyAPIController.
+ * The Class VendasAPIController.
  */
 @Controller
-@RequestMapping("/county/api")
-public class CountyAPIController extends BaseController {
+@RequestMapping("/vendas/api")
+public class VendasAPIController extends BaseController {
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
-	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.countycontrollerrest.defaultexception";
+	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.vendascontrollerrest.defaultexception";
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(CountyAPIController.class);
+	private static final Logger LOG = LoggerFactory.getLogger(VendasAPIController.class);
 
-	/** The county bac. */
-	private ICountyBAC countyBAC; // injected by @Resource
+	/** The vendas bac. */
+	private IVendasBAC vendasBAC; // injected by @Resource
 
 	/**
-	 * Gets the county bac.
+	 * Gets the vendas bac.
 	 *
-	 * @return the county bac
+	 * @return the vendas bac
 	 */
-	public ICountyBAC getCountyBAC() {
-		return countyBAC;
+	public IVendasBAC getVendasBAC() {
+		return vendasBAC;
 	}
 
 	/**
-	 * Sets the county bac.
+	 * Sets the vendas bac.
 	 *
-	 * @param countyBAC
-	 *            the new county bac
+	 * @param vendasBAC
+	 *            the new vendas bac
 	 */
 	@Resource
-	public void setCountyBAC(ICountyBAC countyBAC) {
-		this.countyBAC = countyBAC;
+	public void setVendasBAC(IVendasBAC vendasBAC) {
+		this.vendasBAC = vendasBAC;
 	}
 
-	// /**
-	// * Refresh counties.
-	// *
-	// * @param refreshInt the refresh int
-	// * @param retList the ret list
-	// * @param retPaged the ret paged
-	// * @return the county response
-	// */
-	// @RequestMapping(value = "/refresh", method = RequestMethod.GET)
-	// @ResponseBody
-	// public CountyResponse refreshCounties(@RequestParam("refreshInt") Integer
-	// refreshInt,
-	// @RequestParam("retList") Boolean retList,
-	// @RequestParam("retPaged") Boolean retPaged)
-	// {
-	// CountyResponse countyResponse = new CountyResponse();
-	//
-	// try
-	// {
-	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
-	// retPaged);
-	// InternalResultsResponse<County> internalResponse =
-	// getCountyBAC().refreshCounties(request);
-	// ResponseHandler.handleOperationStatusAndMessages(countyResponse,
-	// internalResponse, true);
-	// }
-	// catch (Exception ex)
-	// {
-	// ResponseHandler.handleException(LOG, countyResponse, ex,
-	// DEFAULT_EXCEPTION_MSG,
-	// new Object[] {ex.toString()});
-	// }
-	// return countyResponse;
-	//
-	// }
-
+	// ===================================### NOTAFISCALSAIDA
+	// ####======================================
 	/**
-	 * Fetch counties paged.
+	 * Refresh notafiscalsaidas.
 	 *
-	 * @param request
-	 *            the request
-	 * @return the county response
-	 */
-	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
-	@ResponseBody
-	public CountyResponse fetchCountiesPaged(@RequestBody PagedInquiryRequest request) {
-		CountyResponse countyResponse = new CountyResponse();
-		try {
-			InternalResultsResponse<County> internalResponse = getCountyBAC().fetchCountiesByRequest(request);
-			ResponseHandler.handleOperationStatusAndMessages(countyResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, countyResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return countyResponse;
-	}
-
-	/**
-	 * Insert county.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the county response
-	 */
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	@ResponseBody
-	public CountyResponse insertCounty(@RequestBody CountyMaintenanceRequest request) {
-		CountyResponse countyResponse = new CountyResponse();
-		try {
-			InternalResultsResponse<County> internalResponse = getCountyBAC().insertCounty(request);
-			ResponseHandler.handleOperationStatusAndMessages(countyResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, countyResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return countyResponse;
-	}
-
-	/**
-	 * Update county.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the county response
-	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	@ResponseBody
-	public CountyResponse updateCounty(@RequestBody CountyMaintenanceRequest request) {
-		CountyResponse countyResponse = new CountyResponse();
-		try {
-			InternalResultsResponse<County> internalResponse = getCountyBAC().updateCounty(request);
-			ResponseHandler.handleOperationStatusAndMessages(countyResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, countyResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return countyResponse;
-	}
-
-	/**
-	 * Delete county.
-	 *
-	 * @param countyId
-	 *            the county id
+	 * @param refreshInt
+	 *            the refresh int
 	 * @param retList
 	 *            the ret list
 	 * @param retPaged
 	 *            the ret paged
-	 * @return the county response
+	 * @return the notafiscalsaida response
 	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
 	@ResponseBody
-	public CountyResponse deleteCounty(@RequestParam("countyId") Integer countyId,
+	public NotaFiscalSaidaResponse refreshNotaFiscalSaidas(@RequestParam("refreshInt") Integer refreshInt,
 			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
-		CountyResponse countyResponse = new CountyResponse();
+		NotaFiscalSaidaResponse notafiscalsaidaResponse = new NotaFiscalSaidaResponse();
 
 		try {
-			CountyMaintenanceRequest request = new CountyMaintenanceRequest(new County(countyId, null), retList,
-					retPaged);
-			InternalResultsResponse<County> internalResponse = getCountyBAC().deleteCounty(request);
-			ResponseHandler.handleOperationStatusAndMessages(countyResponse, internalResponse, true);
+			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
+			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().refreshNotaFiscalSaidas(request);
+			ResponseHandler.handleOperationStatusAndMessages(notafiscalsaidaResponse, internalResponse, true);
 		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, countyResponse, ex, DEFAULT_EXCEPTION_MSG,
+			ResponseHandler.handleException(LOG, notafiscalsaidaResponse, ex, DEFAULT_EXCEPTION_MSG,
 					new Object[] { ex.toString() });
 		}
-		return countyResponse;
+		return notafiscalsaidaResponse;
 
 	}
+
+	/**
+	 * Fetch notafiscalsaida paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the notafiscalsaida response
+	 */
+	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public NotaFiscalSaidaResponse fetchNotaFiscalSaidaPaged(@RequestBody NotaFiscalSaidaInquiryRequest request) {
+		NotaFiscalSaidaResponse notafiscalsaidaResponse = new NotaFiscalSaidaResponse();
+		try {
+			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC()
+					.fetchNotaFiscalSaidasByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(notafiscalsaidaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, notafiscalsaidaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return notafiscalsaidaResponse;
+	}
+
+	/**
+	 * Insert notafiscalsaida.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the notafiscalsaida response
+	 */
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public NotaFiscalSaidaResponse insertNotaFiscalSaida(@RequestBody NotaFiscalSaidaMaintenanceRequest request) {
+		NotaFiscalSaidaResponse notafiscalsaidaResponse = new NotaFiscalSaidaResponse();
+		try {
+			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().insertNotaFiscalSaida(request);
+			ResponseHandler.handleOperationStatusAndMessages(notafiscalsaidaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, notafiscalsaidaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return notafiscalsaidaResponse;
+	}
+
+	/**
+	 * Update notafiscalsaida.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the notafiscalsaida response
+	 */
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ResponseBody
+	public NotaFiscalSaidaResponse updateNotaFiscalSaida(@RequestBody NotaFiscalSaidaMaintenanceRequest request) {
+		NotaFiscalSaidaResponse notafiscalsaidaResponse = new NotaFiscalSaidaResponse();
+		try {
+			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().updateNotaFiscalSaida(request);
+			ResponseHandler.handleOperationStatusAndMessages(notafiscalsaidaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, notafiscalsaidaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return notafiscalsaidaResponse;
+	}
+
+	/**
+	 * Delete notafiscalsaida.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the notafiscalsaida response
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public NotaFiscalSaidaResponse deleteNotaFiscalSaida(@RequestBody NotaFiscalSaidaMaintenanceRequest request) {
+		NotaFiscalSaidaResponse notafiscalsaidaResponse = new NotaFiscalSaidaResponse();
+
+		try {
+			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().deleteNotaFiscalSaida(request);
+			ResponseHandler.handleOperationStatusAndMessages(notafiscalsaidaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, notafiscalsaidaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return notafiscalsaidaResponse;
+
+	}
+
+	// ===================================### ORCAMENTO
+	// ####======================================
+	/**
+	 * Refresh orcamentos.
+	 *
+	 * @param refreshInt
+	 *            the refresh int
+	 * @param retList
+	 *            the ret list
+	 * @param retPaged
+	 *            the ret paged
+	 * @return the orcamento response
+	 */
+	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	@ResponseBody
+	public OrcamentoResponse refreshOrcamentos(@RequestParam("refreshInt") Integer refreshInt,
+			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
+		OrcamentoResponse orcamentoResponse = new OrcamentoResponse();
+
+		try {
+			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
+			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().refreshOrcamentos(request);
+			ResponseHandler.handleOperationStatusAndMessages(orcamentoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, orcamentoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return orcamentoResponse;
+
+	}
+
+	/**
+	 * Fetch orcamento paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the orcamento response
+	 */
+	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public OrcamentoResponse fetchOrcamentoPaged(@RequestBody OrcamentoInquiryRequest request) {
+		OrcamentoResponse orcamentoResponse = new OrcamentoResponse();
+		try {
+			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().fetchOrcamentosByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(orcamentoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, orcamentoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return orcamentoResponse;
+	}
+
+	/**
+	 * Insert orcamento.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the orcamento response
+	 */
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public OrcamentoResponse insertOrcamento(@RequestBody OrcamentoMaintenanceRequest request) {
+		OrcamentoResponse orcamentoResponse = new OrcamentoResponse();
+		try {
+			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().insertOrcamento(request);
+			ResponseHandler.handleOperationStatusAndMessages(orcamentoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, orcamentoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return orcamentoResponse;
+	}
+
+	/**
+	 * Update orcamento.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the orcamento response
+	 */
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ResponseBody
+	public OrcamentoResponse updateOrcamento(@RequestBody OrcamentoMaintenanceRequest request) {
+		OrcamentoResponse orcamentoResponse = new OrcamentoResponse();
+		try {
+			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().updateOrcamento(request);
+			ResponseHandler.handleOperationStatusAndMessages(orcamentoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, orcamentoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return orcamentoResponse;
+	}
+
+	/**
+	 * Delete orcamento.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the orcamento response
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public OrcamentoResponse deleteOrcamento(@RequestBody OrcamentoMaintenanceRequest request) {
+		OrcamentoResponse orcamentoResponse = new OrcamentoResponse();
+
+		try {
+			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().deleteOrcamento(request);
+			ResponseHandler.handleOperationStatusAndMessages(orcamentoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, orcamentoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return orcamentoResponse;
+
+	}
+
+	// ===================================### ORDEMSERVICO
+	// ####======================================
+	/**
+	 * Refresh ordemservicos.
+	 *
+	 * @param refreshInt
+	 *            the refresh int
+	 * @param retList
+	 *            the ret list
+	 * @param retPaged
+	 *            the ret paged
+	 * @return the ordemservico response
+	 */
+	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	@ResponseBody
+	public OrdemServicoResponse refreshOrdemServicos(@RequestParam("refreshInt") Integer refreshInt,
+			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
+		OrdemServicoResponse ordemservicoResponse = new OrdemServicoResponse();
+
+		try {
+			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
+			InternalResultsResponse<OrdemServico> internalResponse = getVendasBAC().refreshOrdemServicos(request);
+			ResponseHandler.handleOperationStatusAndMessages(ordemservicoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, ordemservicoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return ordemservicoResponse;
+
+	}
+
+	/**
+	 * Fetch ordemservico paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the ordemservico response
+	 */
+	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public OrdemServicoResponse fetchOrdemServicoPaged(@RequestBody OrdemServicoInquiryRequest request) {
+		OrdemServicoResponse ordemservicoResponse = new OrdemServicoResponse();
+		try {
+			InternalResultsResponse<OrdemServico> internalResponse = getVendasBAC()
+					.fetchOrdemServicosByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(ordemservicoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, ordemservicoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return ordemservicoResponse;
+	}
+
+	/**
+	 * Insert ordemservico.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the ordemservico response
+	 */
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public OrdemServicoResponse insertOrdemServico(@RequestBody OrdemServicoMaintenanceRequest request) {
+		OrdemServicoResponse ordemservicoResponse = new OrdemServicoResponse();
+		try {
+			InternalResultsResponse<OrdemServico> internalResponse = getVendasBAC().insertOrdemServico(request);
+			ResponseHandler.handleOperationStatusAndMessages(ordemservicoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, ordemservicoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return ordemservicoResponse;
+	}
+
+	/**
+	 * Update ordemservico.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the ordemservico response
+	 */
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ResponseBody
+	public OrdemServicoResponse updateOrdemServico(@RequestBody OrdemServicoMaintenanceRequest request) {
+		OrdemServicoResponse ordemservicoResponse = new OrdemServicoResponse();
+		try {
+			InternalResultsResponse<OrdemServico> internalResponse = getVendasBAC().updateOrdemServico(request);
+			ResponseHandler.handleOperationStatusAndMessages(ordemservicoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, ordemservicoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return ordemservicoResponse;
+	}
+
+	/**
+	 * Delete ordemservico.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the ordemservico response
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public OrdemServicoResponse deleteOrdemServico(@RequestBody OrdemServicoMaintenanceRequest request) {
+		OrdemServicoResponse ordemservicoResponse = new OrdemServicoResponse();
+
+		try {
+			InternalResultsResponse<OrdemServico> internalResponse = getVendasBAC().deleteOrdemServico(request);
+			ResponseHandler.handleOperationStatusAndMessages(ordemservicoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, ordemservicoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return ordemservicoResponse;
+
+	}
+
 }

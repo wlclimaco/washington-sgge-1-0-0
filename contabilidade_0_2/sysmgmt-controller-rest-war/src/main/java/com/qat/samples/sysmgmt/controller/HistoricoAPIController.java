@@ -1,3 +1,5 @@
+/** create by system gera-java version 1.0.0 09/05/2016 16:51 : 47*/
+
 package com.qat.samples.sysmgmt.controller;
 
 import javax.annotation.Resource;
@@ -13,173 +15,328 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.bac.ICountyBAC;
-import com.qat.samples.sysmgmt.model.County;
-import com.qat.samples.sysmgmt.model.request.CountyMaintenanceRequest;
-import com.qat.samples.sysmgmt.model.response.CountyResponse;
-import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.bac.Historico.IHistoricoBAC;
+import com.qat.samples.sysmgmt.historico.model.Historico;
+import com.qat.samples.sysmgmt.historico.model.HistoricoItens;
+import com.qat.samples.sysmgmt.historico.model.request.HistoricoInquiryRequest;
+import com.qat.samples.sysmgmt.historico.model.request.HistoricoMaintenanceRequest;
+import com.qat.samples.sysmgmt.historico.model.response.HistoricoResponse;
+import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
- * The Class CountyAPIController.
+ * The Class HistoricoAPIController.
  */
 @Controller
-@RequestMapping("/county/api")
-public class CountyAPIController extends BaseController {
+@RequestMapping("/historico/api")
+public class HistoricoAPIController extends BaseController {
 	/** The Constant DEFAULT_EXCEPTION_MSG. */
-	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.countycontrollerrest.defaultexception";
+	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.historicocontrollerrest.defaultexception";
 
 	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(CountyAPIController.class);
+	private static final Logger LOG = LoggerFactory.getLogger(HistoricoAPIController.class);
 
-	/** The county bac. */
-	private ICountyBAC countyBAC; // injected by @Resource
+	/** The historico bac. */
+	private IHistoricoBAC historicoBAC; // injected by @Resource
 
 	/**
-	 * Gets the county bac.
+	 * Gets the historico bac.
 	 *
-	 * @return the county bac
+	 * @return the historico bac
 	 */
-	public ICountyBAC getCountyBAC() {
-		return countyBAC;
+	public IHistoricoBAC getHistoricoBAC() {
+		return historicoBAC;
 	}
 
 	/**
-	 * Sets the county bac.
+	 * Sets the historico bac.
 	 *
-	 * @param countyBAC
-	 *            the new county bac
+	 * @param historicoBAC
+	 *            the new historico bac
 	 */
 	@Resource
-	public void setCountyBAC(ICountyBAC countyBAC) {
-		this.countyBAC = countyBAC;
+	public void setHistoricoBAC(IHistoricoBAC historicoBAC) {
+		this.historicoBAC = historicoBAC;
 	}
 
-	// /**
-	// * Refresh counties.
-	// *
-	// * @param refreshInt the refresh int
-	// * @param retList the ret list
-	// * @param retPaged the ret paged
-	// * @return the county response
-	// */
-	// @RequestMapping(value = "/refresh", method = RequestMethod.GET)
-	// @ResponseBody
-	// public CountyResponse refreshCounties(@RequestParam("refreshInt") Integer
-	// refreshInt,
-	// @RequestParam("retList") Boolean retList,
-	// @RequestParam("retPaged") Boolean retPaged)
-	// {
-	// CountyResponse countyResponse = new CountyResponse();
-	//
-	// try
-	// {
-	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
-	// retPaged);
-	// InternalResultsResponse<County> internalResponse =
-	// getCountyBAC().refreshCounties(request);
-	// ResponseHandler.handleOperationStatusAndMessages(countyResponse,
-	// internalResponse, true);
-	// }
-	// catch (Exception ex)
-	// {
-	// ResponseHandler.handleException(LOG, countyResponse, ex,
-	// DEFAULT_EXCEPTION_MSG,
-	// new Object[] {ex.toString()});
-	// }
-	// return countyResponse;
-	//
-	// }
-
+	// ===================================### HISTORICO
+	// ####======================================
 	/**
-	 * Fetch counties paged.
+	 * Refresh historicos.
 	 *
-	 * @param request
-	 *            the request
-	 * @return the county response
-	 */
-	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
-	@ResponseBody
-	public CountyResponse fetchCountiesPaged(@RequestBody PagedInquiryRequest request) {
-		CountyResponse countyResponse = new CountyResponse();
-		try {
-			InternalResultsResponse<County> internalResponse = getCountyBAC().fetchCountiesByRequest(request);
-			ResponseHandler.handleOperationStatusAndMessages(countyResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, countyResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return countyResponse;
-	}
-
-	/**
-	 * Insert county.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the county response
-	 */
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	@ResponseBody
-	public CountyResponse insertCounty(@RequestBody CountyMaintenanceRequest request) {
-		CountyResponse countyResponse = new CountyResponse();
-		try {
-			InternalResultsResponse<County> internalResponse = getCountyBAC().insertCounty(request);
-			ResponseHandler.handleOperationStatusAndMessages(countyResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, countyResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return countyResponse;
-	}
-
-	/**
-	 * Update county.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the county response
-	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	@ResponseBody
-	public CountyResponse updateCounty(@RequestBody CountyMaintenanceRequest request) {
-		CountyResponse countyResponse = new CountyResponse();
-		try {
-			InternalResultsResponse<County> internalResponse = getCountyBAC().updateCounty(request);
-			ResponseHandler.handleOperationStatusAndMessages(countyResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, countyResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return countyResponse;
-	}
-
-	/**
-	 * Delete county.
-	 *
-	 * @param countyId
-	 *            the county id
+	 * @param refreshInt
+	 *            the refresh int
 	 * @param retList
 	 *            the ret list
 	 * @param retPaged
 	 *            the ret paged
-	 * @return the county response
+	 * @return the historico response
 	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	@ResponseBody
-	public CountyResponse deleteCounty(@RequestParam("countyId") Integer countyId,
-			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
-		CountyResponse countyResponse = new CountyResponse();
+	// @RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	// @ResponseBody
+	// public HistoricoResponse refreshHistoricos(@RequestParam("refreshInt")
+	// Integer refreshInt,
+	// @RequestParam("retList") Boolean retList, @RequestParam("retPaged")
+	// Boolean retPaged) {
+	// HistoricoResponse historicoResponse = new HistoricoResponse();
+	//
+	// try {
+	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
+	// retPaged);
+	// InternalResultsResponse<Historico> internalResponse =
+	// getHistoricoBAC().refreshHistoricos(request);
+	// ResponseHandler.handleOperationStatusAndMessages(historicoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, historicoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return historicoResponse;
+	//
+	// }
 
+	/**
+	 * Fetch historico paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the historico response
+	 */
+	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public HistoricoResponse fetchHistoricoPaged(@RequestBody HistoricoInquiryRequest request) {
+		HistoricoResponse historicoResponse = new HistoricoResponse();
 		try {
-			CountyMaintenanceRequest request = new CountyMaintenanceRequest(new County(countyId, null), retList,
-					retPaged);
-			InternalResultsResponse<County> internalResponse = getCountyBAC().deleteCounty(request);
-			ResponseHandler.handleOperationStatusAndMessages(countyResponse, internalResponse, true);
+			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().fetchHistoricosByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(historicoResponse, internalResponse, true);
 		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, countyResponse, ex, DEFAULT_EXCEPTION_MSG,
+			ResponseHandler.handleException(LOG, historicoResponse, ex, DEFAULT_EXCEPTION_MSG,
 					new Object[] { ex.toString() });
 		}
-		return countyResponse;
-
+		return historicoResponse;
 	}
+
+	// /**
+	// * Insert historico.
+	// *
+	// * @param request
+	// * the request
+	// * @return the historico response
+	// */
+	// @RequestMapping(value = "/insert", method = RequestMethod.POST)
+	// @ResponseBody
+	// public HistoricoResponse insertHistorico(@RequestBody
+	// HistoricoMaintenanceRequest request) {
+	// HistoricoResponse historicoResponse = new HistoricoResponse();
+	// try {
+	// InternalResultsResponse<Historico> internalResponse =
+	// getHistoricoBAC().insertHistorico(request);
+	// ResponseHandler.handleOperationStatusAndMessages(historicoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, historicoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return historicoResponse;
+	// }
+
+	// /**
+	// * Update historico.
+	// *
+	// * @param request
+	// * the request
+	// * @return the historico response
+	// */
+	// @RequestMapping(value = "/update", method = RequestMethod.POST)
+	// @ResponseBody
+	// public HistoricoResponse updateHistorico(@RequestBody
+	// HistoricoMaintenanceRequest request) {
+	// HistoricoResponse historicoResponse = new HistoricoResponse();
+	// try {
+	// InternalResultsResponse<Historico> internalResponse =
+	// getHistoricoBAC().updateHistorico(request);
+	// ResponseHandler.handleOperationStatusAndMessages(historicoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, historicoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return historicoResponse;
+	// }
+	//
+	// /**
+	// * Delete historico.
+	// *
+	// * @param request
+	// * the request
+	// * @return the historico response
+	// */
+	// @RequestMapping(value = "/delete", method = RequestMethod.POST)
+	// @ResponseBody
+	// public HistoricoResponse deleteHistorico(@RequestBody
+	// HistoricoMaintenanceRequest request) {
+	// HistoricoResponse historicoResponse = new HistoricoResponse();
+	//
+	// try {
+	// InternalResultsResponse<Historico> internalResponse =
+	// getHistoricoBAC().deleteHistorico(request);
+	// ResponseHandler.handleOperationStatusAndMessages(historicoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, historicoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return historicoResponse;
+	//
+	// }
+
+	// // ===================================### HISTORICOITENS
+	// // ####======================================
+	// /**
+	// * Refresh historicoitenss.
+	// *
+	// * @param refreshInt
+	// * the refresh int
+	// * @param retList
+	// * the ret list
+	// * @param retPaged
+	// * the ret paged
+	// * @return the historicoitens response
+	// */
+	// @RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	// @ResponseBody
+	// public HistoricoItensResponse
+	// refreshHistoricoItenss(@RequestParam("refreshInt") Integer refreshInt,
+	// @RequestParam("retList") Boolean retList, @RequestParam("retPaged")
+	// Boolean retPaged) {
+	// HistoricoItensResponse historicoitensResponse = new
+	// HistoricoItensResponse();
+	//
+	// try {
+	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
+	// retPaged);
+	// InternalResultsResponse<HistoricoItens> internalResponse =
+	// getHistoricoBAC()
+	// .refreshHistoricoItenss(request);
+	// ResponseHandler.handleOperationStatusAndMessages(historicoitensResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, historicoitensResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return historicoitensResponse;
+	//
+	// }
+	//
+	// /**
+	// * Fetch historicoitens paged.
+	// *
+	// * @param request
+	// * the request
+	// * @return the historicoitens response
+	// */
+	// @RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	// @ResponseBody
+	// public HistoricoItensResponse fetchHistoricoItensPaged(@RequestBody
+	// HistoricoItensInquiryRequest request) {
+	// HistoricoItensResponse historicoitensResponse = new
+	// HistoricoItensResponse();
+	// try {
+	// InternalResultsResponse<HistoricoItens> internalResponse =
+	// getHistoricoBAC()
+	// .fetchHistoricoItenssByRequest(request);
+	// ResponseHandler.handleOperationStatusAndMessages(historicoitensResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, historicoitensResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return historicoitensResponse;
+	// }
+	//
+	// /**
+	// * Insert historicoitens.
+	// *
+	// * @param request
+	// * the request
+	// * @return the historicoitens response
+	// */
+	// @RequestMapping(value = "/insert", method = RequestMethod.POST)
+	// @ResponseBody
+	// public HistoricoItensResponse insertHistoricoItens(@RequestBody
+	// HistoricoItensMaintenanceRequest request) {
+	// HistoricoItensResponse historicoitensResponse = new
+	// HistoricoItensResponse();
+	// try {
+	// InternalResultsResponse<HistoricoItens> internalResponse =
+	// getHistoricoBAC().insertHistoricoItens(request);
+	// ResponseHandler.handleOperationStatusAndMessages(historicoitensResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, historicoitensResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return historicoitensResponse;
+	// }
+	//
+	// /**
+	// * Update historicoitens.
+	// *
+	// * @param request
+	// * the request
+	// * @return the historicoitens response
+	// */
+	// @RequestMapping(value = "/update", method = RequestMethod.POST)
+	// @ResponseBody
+	// public HistoricoItensResponse updateHistoricoItens(@RequestBody
+	// HistoricoItensMaintenanceRequest request) {
+	// HistoricoItensResponse historicoitensResponse = new
+	// HistoricoItensResponse();
+	// try {
+	// InternalResultsResponse<HistoricoItens> internalResponse =
+	// getHistoricoBAC().updateHistoricoItens(request);
+	// ResponseHandler.handleOperationStatusAndMessages(historicoitensResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, historicoitensResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return historicoitensResponse;
+	// }
+	//
+	// /**
+	// * Delete historicoitens.
+	// *
+	// * @param request
+	// * the request
+	// * @return the historicoitens response
+	// */
+	// @RequestMapping(value = "/delete", method = RequestMethod.POST)
+	// @ResponseBody
+	// public HistoricoItensResponse deleteHistoricoItens(@RequestBody
+	// HistoricoItensMaintenanceRequest request) {
+	// HistoricoItensResponse historicoitensResponse = new
+	// HistoricoItensResponse();
+	//
+	// try {
+	// InternalResultsResponse<HistoricoItens> internalResponse =
+	// getHistoricoBAC().deleteHistoricoItens(request);
+	// ResponseHandler.handleOperationStatusAndMessages(historicoitensResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, historicoitensResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return historicoitensResponse;
+	//
+	// }
+
 }
