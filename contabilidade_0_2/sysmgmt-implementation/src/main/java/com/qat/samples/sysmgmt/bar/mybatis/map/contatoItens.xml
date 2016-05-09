@@ -17,6 +17,7 @@
        exactly. -->
   <resultMap id="ContatoItensResult" type="ContatoItens">
     <result property="id" column="id"/>
+	<result property="parentId" column="parentId"/>
     <result property="dataAlt" column="dataAlt"/>
     <result property="texto" column="texto"/>
     <result property="titulo" column="titulo"/>

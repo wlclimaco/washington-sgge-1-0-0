@@ -15,48 +15,51 @@
       from a query, and the class properties.  A result map isnt
       necessary if the columns (or aliases) match to the properties
        exactly. -->
-  <resultMap id="PrecoResult" type="Preco">
+<resultMap id="PrecoResult" type="Preco">
     <result property="id" column="id"/>
     <result property="dataMarcacao" column="dataMarcacao"/>
     <result property="precoTypeEnumValue" column="precoTypeEnum"/>
     <result property="valor" column="valor"/>
     <result property="dataProInicial" column="dataProInicial"/>
+	<result property="tabelaEnumValue" column="tabelaEnumValue"/>
     <result property="dataProFinal" column="dataProFinal"/>
     <result property="parentId" column="parentId"/>
     <result property="emprId" column="emprId"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
-  </resultMap>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+</resultMap>
 
-  <sql id="allPrecoColumns">
-dataMarcacao
-,precoTypeEnum
-,valor
-,dataProInicial
-,dataProFinal
-,parentId
-,emprId
-,create_date
-,create_user
-,modify_date
-,modify_user
-
+<sql id="allPrecoColumns">
+	dataMarcacao
+	,precoTypeEnum
+	,valor
+	,dataProInicial
+	,tabelaEnumValue
+	,dataProFinal
+	,parentId
+	,emprId
+	,create_date
+	,create_user
+	,modify_date
+	,modify_user
 </sql>
+
 <sql id="allPrecoValues">
-#{dataMarcacao},
-#{precoTypeEnumValue},
-#{valor},
-#{dataProInicial},
-#{dataProFinal},
-#{parentId},
-#{emprId},
-		#{createDateUTC},
-		#{createUser},
-		#{modifyDateUTC},
-		#{modifyUser}
-  </sql>
+	#{dataMarcacao},
+	#{precoTypeEnumValue},
+	#{valor},
+	#{dataProInicial},
+	#{tabelaEnumValue},
+	#{dataProFinal},
+	#{parentId},
+	#{emprId},
+	#{createDateUTC},
+	#{createUser},
+	#{modifyDateUTC},
+	#{modifyUser}
+</sql>
 
  <select id="fetchAllPrecos" resultMap="PrecoResult">
     SELECT id,
@@ -68,6 +71,12 @@ dataMarcacao
     SELECT id,
 	<include refid="allPrecoColumns" />
    FROM preco WHERE id = #{fetchid}
+ </select>
+ 
+ <select id="fetchPrecoByPlano" parameterType="Integer" resultMap="PrecoResult">
+    SELECT id,
+	<include refid="allPrecoColumns" />
+   FROM preco WHERE parentId = #{fetchid} and tabelaEnumValue = 54
  </select>
 
  <select id="fetchAllPrecosRequest" parameterType="PagedInquiryRequest" resultMap="PrecoResult">
@@ -96,6 +105,7 @@ dataMarcacao
 <if test="precoTypeEnumValue!= null">precoTypeEnum = #{precoTypeEnumValue},</if>
 <if test="valor!= null">valor = #{valor},</if>
 <if test="dataProInicial!= null">dataProInicial = #{dataProInicial},</if>
+<if test="tabelaEnumValue!= null">tabelaEnumValue = #{tabelaEnumValue},</if>
 <if test="dataProFinal!= null">dataProFinal = #{dataProFinal},</if>
 <if test="parentId!= null">parentId = #{parentId},</if>
 <if test="emprId!= null">emprId = #{emprId},</if>

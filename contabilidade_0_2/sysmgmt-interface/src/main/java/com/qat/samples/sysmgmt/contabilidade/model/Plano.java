@@ -22,11 +22,11 @@ public class Plano extends ModelCosmeDamiao
 
 	private Long dataFinal;
 
-	private List<Preco> preco;
+	private List<Preco> precoList;
 
 	private Integer numeroContrato;
 
-	private List<Servico> servicos;
+	private List<PlanoByServico> servicoList;
 
 	private String descricao;
 
@@ -101,11 +101,11 @@ public class Plano extends ModelCosmeDamiao
 		this.numeroContrato = numeroContrato;
 	}
 
-	public List<Servico> getServicos() {
+	public List<PlanoByServico> getServicos() {
 		return servicos;
 	}
 
-	public void setServicos(List<Servico> servicos) {
+	public void setServicos(List<PlanoByServico> servicos) {
 		this.servicos = servicos;
 	}
 

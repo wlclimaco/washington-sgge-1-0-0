@@ -524,13 +524,24 @@ function SiteModel() {
 	a.push({field :{campo : "atorization", tipo :"Boolean",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
-//================ Site
+//================ Servico
 function ServicoModel() {
 
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "nome", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "descricao", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	return a;
+}
+//================ PlanoByServico
+function PlanoByServicoModel() {
+
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "parentId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "tabelaEnumValue" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "processId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "servico" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
@@ -716,9 +727,10 @@ function OrdemServicoModel() {
 function OrdemServicoItensModel() {
 
 	var a = [];
-	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-    a.push({field :{campo : "data" , tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-   	a.push({field :{campo : "texto" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "id" 		, tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "data" 		, tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "texto" 	, tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "parentId"  , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	
 	
 	return a;
@@ -812,6 +824,7 @@ function PrecoModel() {
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "dataMarcacao" , tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
    	a.push({field :{campo : "precoTypeEnum" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "tabelaEnumValue" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
    	a.push({field :{campo : "valor" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
    	a.push({field :{campo : "dataProInicial" , tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
    	a.push({field :{campo : "dataProFinal" , tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -1178,7 +1191,7 @@ oProjet.push({
 })
 
 oProjet.push({
-	classes :[{classe : "Servico",model : ServicoModel(),dependencias : dependenciaServico()},{classe : "Site",model : SiteModel(),dependencias : dependenciaSite()},{classe :"Contato",model : ContatoModel(),dependencias : dependenciaContato()},{classe :"ContatoItens",model : ContatoItensModel()},{classe :"OrdemServico",model : OrdemServicoModel(),dependencias : dependenciaOrdemServico()},{classe :"OrdemServicoItens",model : OrdemServicoItensModel()},{classe :"Plano",model : PlanoModel()}],
+	classes :[{classe : "Servico",model : ServicoModel(),dependencias : dependenciaServico()},{classe : "ServicoByPlano",model : ServicoByPlanoModel(),dependencias : dependenciaServico()},{classe : "Site",model : SiteModel(),dependencias : dependenciaSite()},{classe :"Contato",model : ContatoModel(),dependencias : dependenciaContato()},{classe :"ContatoItens",model : ContatoItensModel()},{classe :"OrdemServico",model : OrdemServicoModel(),dependencias : dependenciaOrdemServico()},{classe :"OrdemServicoItens",model : OrdemServicoItensModel()},{classe :"Plano",model : PlanoModel()}],
 	interfaces : "Site",
 	local : "Site"
 })

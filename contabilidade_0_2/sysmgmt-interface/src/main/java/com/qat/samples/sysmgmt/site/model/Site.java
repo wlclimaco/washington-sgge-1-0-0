@@ -42,13 +42,7 @@ public class Site extends ModelCosmeDamiao
 
 	private List<Servico> servicoList;
 
-	private List<Plano> planoList;
-
-	private List<Endereco> enderecoList;
-
-	private List<Email> emailList;
-
-	private List<Telefone> telefoneList;
+	private List<PlanoByEntidade> planoList;
 
 	public Integer getSiteTypeEnumValue()
 	{

@@ -21,10 +21,11 @@
     <result property="dataContato" column="dataContato"/>
     <result property="nome" column="nome"/>
     <result property="motivoValue" column="motivoValue"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<collection property="contatoItensList" column="id" select="ContatoItensMap.fetchPrecoByPlano"/>
   </resultMap>
 
   <sql id="allContatoColumns">

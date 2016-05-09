@@ -15,15 +15,15 @@
       from a query, and the class properties.  A result map isnt
       necessary if the columns (or aliases) match to the properties
        exactly. -->
-  <resultMap id="ServicoResult" type="Servico">
+<resultMap id="ServicoResult" type="Servico">
     <result property="id" column="id"/>
     <result property="nome" column="nome"/>
     <result property="descricao" column="descricao"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
-  </resultMap>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+</resultMap>
 
   <sql id="allServicoColumns">
 nome
@@ -35,24 +35,13 @@ nome
 
 </sql>
 <sql id="allServicoValues">
-#{nome},
-#{descricao},
-		#{createDateUTC},
-		#{createUser},
-		#{modifyDateUTC},
-		#{modifyUser}
+	#{nome},
+	#{descricao},
+	#{createDateUTC},
+	#{createUser},
+	#{modifyDateUTC},
+	#{modifyUser}
   </sql>
-
- <sql id="allServicoColumnsWithQualifier">
-		c.id, c.servico_desc
-c.id,
-c.nome,
-c.descricao,
-		c.createDateUTC,
-		c.createUser,
-		c.modifyDateUTC,
-		c.modifyUser
- </sql>
 
  <select id="fetchAllServicos" resultMap="ServicoResult">
     SELECT id,
@@ -64,6 +53,12 @@ c.descricao,
     SELECT id,
 	<include refid="allServicoColumns" />
    FROM servico WHERE id = #{fetchid}
+ </select>
+ 
+ <select id="fetchPrecoByPlano" parameterType="Integer" resultMap="ServicoResult">
+    SELECT id,
+	<include refid="allServicoColumns" />
+		FROM servico WHERE parentId = #{fetchid}
  </select>
 
  <select id="fetchAllServicosRequest" parameterType="ServicoInquiryRequest" resultMap="ServicoResult">

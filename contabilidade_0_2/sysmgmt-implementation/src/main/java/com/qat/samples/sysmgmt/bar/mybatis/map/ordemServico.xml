@@ -23,10 +23,11 @@
     <result property="data" column="data"/>
     <result property="assunto" column="assunto"/>
     <result property="statusValue" column="statusValue"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<collection property="ordemServicoItensList" column="id" select="OrdemServicoItensMap.fetchOrdemServicoByItens"/>
   </resultMap>
 
   <sql id="allOrdemServicoColumns">

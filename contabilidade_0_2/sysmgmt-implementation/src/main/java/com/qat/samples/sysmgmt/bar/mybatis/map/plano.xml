@@ -23,10 +23,12 @@
     <result property="descricao" column="descricao"/>
     <result property="titulo" column="titulo"/>
     <result property="emprId" column="emprId"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<collection property="precoList" column="id" select="PrecoMap.fetchPrecoByPlano"/>
+	<collection property="servicoList" column="id" select="PlanoByServicoMap.fetchServicoByPlano"/>
   </resultMap>
 
   <sql id="allPlanoColumns">
