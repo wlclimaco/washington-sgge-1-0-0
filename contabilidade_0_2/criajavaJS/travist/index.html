@@ -724,10 +724,11 @@ $('#checkeds').append(imputs);
 					$("div#tabs").addTab(oProjet[i].interfaces + "BARImpl",BarImpl(oProjet[i].classes,oProjet[i].interfaces));
 				}
 				if($('#BARDIMPL').prop('checked')){
-					$("div#tabs").addTab(oProjet[i].interfaces + "BARDImpl",BarImpl(oProjet[i].classes,oProjet[i].interfaces));
+					for (var x = 0;x< oProjet[i].classes.length;x++){
+						$("div#tabs").addTab(""+oProjet[i].classes[x].classe+"BARD"+,oProjet[i].classes[x].classe,BarDImpl(oProjet[i].classes[x].model,oProjet[i].classes[x].classe));
+					}
 				}
 				if($('#XML').prop('checked')){
-				//debugger
 					for (var x = 0;x< oProjet[i].classes.length;x++){
 						$("div#tabs").addTab(oProjet[i].classes[x].classe,implXML(oProjet[i].classes[x].model,oProjet[i].classes[x].classe));
 					}

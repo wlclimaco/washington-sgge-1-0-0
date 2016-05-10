@@ -1,35 +1,138 @@
 
-function titleize(text) {
+BarDImpl = function (teste,bar,local){
 
-    // Convertendo primeira letra em maiuscula.
-    text = text.charAt(0).toUpperCase() + text.slice(1);
-
-    for (var i = 0; i < text.length; i++) {
-        if (text.charAt(i) ===" ") {
-
-            // Convertendo letra ap�s o ESPA�O em maiuscula
-            var charToUper = text.charAt(i+1).toUpperCase();
-
-            // Colocando texto de antes do ESPA�O na vari�vel
-            var sliceBegin = text.slice(0, (i+1));
-
-            // colocando o texto de depois do ESPA�O na vari�vel
-            var sliceEnd = text.slice(i + 2);
-
-            // Juntando tudo
-            text = sliceBegin + charToUper + sliceEnd;
-
-        } else {
-
-            // NAO CONSIGO PENSAR EM COMO TRANSFORMAR O RESTANTE DAS LETRAS EM MINUSCULA
-        }
-    }
-    return text;
-}
-
-BarImpl = function (teste,bar,local){
-
-	var text = '/** create by system gera-java version 1.0.0 '+dataAtualFormatada()+'*/\n';
+var text = '/** create by system gera-java version 1.0.0 '+dataAtualFormatada()+'*/\n';
+text = text + '\n';
+text = text + '\n';
+text = text + 'package com.qat.samples.sysmgmt.bar.mybatis.delegate;\n';
+text = text + '\n';
+text = text + 'import java.util.ArrayList;\n';
+text = text + 'import java.util.List;\n';
+text = text + '\n';
+text = text + 'import org.mybatis.spring.support.SqlSessionDaoSupport;\n';
+text = text + '\n';
+text = text + 'import com.qat.framework.model.response.InternalResultsResponse;\n';
+text = text + 'import com.qat.framework.validation.ValidationUtil;\n';
+text = text + 'import com.qat.samples.sysmgmt.bar.'+bar+'.I'+bar+'BAR;\n';
+text = text + 'import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;\n';
+text = text + 'import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;\n';
+text = text + 'import com.qat.samples.sysmgmt.util.model.AcaoEnum;\n';
+text = text + 'import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;\n';
+text = text + 'import com.qat.samples.sysmgmt.util.model.'+bar+';\n';
+text = text + 'import com.qat.samples.sysmgmt.util.model.Status;\n';
+text = text + 'import com.qat.samples.sysmgmt.util.model.TabelaEnum;\n';
+text = text + 'import com.qat.samples.sysmgmt.util.model.TypeEnum;\n';
+text = text + '\n';
+text = text + '/**\n';
+text = text + ' * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be\n';
+text = text + ' * passed into the methods. Nothing injected.\n';
+text = text + ' */\n';
+text = text + 'public final class '+bar+'BARD extends SqlSessionDaoSupport\n';
+text = text + '{\n';
+text = text + '\n';
+text = text + '	/** The Constant ZERO. */\n';
+text = text + '	private static final Integer ZERO = 0;\n';
+text = text + '\n';
+text = text + '	/**\n';
+text = text + '	 * Fetch objects by request.\n';
+text = text + '	 *\n';
+text = text + '	 * @param sqlSession the sql session\n';
+text = text + '	 * @param request the request\n';
+text = text + '	 * @param countStatement the count statement\n';
+text = text + '	 * @param fetchPagedStatement the fetch paged statement\n';
+text = text + '	 * @param response the response\n';
+text = text + '	 */\n';
+text = text + '	@SuppressWarnings("unchecked")\n';
+text = text + '	public static Integer maintain'+bar+'Associations(List<'+bar+'> '+bar.toLowerCase()+'List,\n';
+text = text + '			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,\n';
+text = text + '			TabelaEnum tabelaEnum, I'+bar+'BAR '+bar.toLowerCase()+'DAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,\n';
+text = text + '			String UserId, Integer processId, Integer historicoId)\n';
+text = text + '	{\n';
+text = text + '		Boolean count = false;\n';
+text = text + '		// First Maintain Empresa\n';
+text = text + '		if (ValidationUtil.isNullOrEmpty('+bar.toLowerCase()+'List))\n';
+text = text + '		{\n';
+text = text + '			return 0;\n';
+text = text + '		}\n';
+text = text + '		// For Each Contact...\n';
+text = text + '		for ('+bar+' '+bar.toLowerCase()+' : '+bar.toLowerCase()+'List)\n';
+text = text + '		{\n';
+text = text + '			// Make sure we set the parent key\n';
+text = text + '			'+bar.toLowerCase()+'.setParentId(parentId);\n';
+text = text + '			'+bar.toLowerCase()+'.setTabelaEnum(tabelaEnum);\n';
+text = text + '			'+bar.toLowerCase()+'.setProcessId(processId);\n';
+text = text + '\n';
+text = text + '			if (ValidationUtil.isNull('+bar.toLowerCase()+'.getModelAction()))\n';
+text = text + '			{\n';
+text = text + '				continue;\n';
+text = text + '			}\n';
+text = text + '			switch ('+bar.toLowerCase()+'.getModelAction())\n';
+text = text + '			{\n';
+text = text + '				case INSERT:\n';
+text = text + '					count = '+bar.toLowerCase()+'DAC.insert'+bar+'('+bar.toLowerCase()+').hasSystemError();\n';
+text = text + '					if (count == true)\n';
+text = text + '					{\n';
+text = text + '						Status status = new Status();\n';
+text = text + '						status.setStatus(CdStatusTypeEnum.ATIVO);\n';
+text = text + '						List<Status> statusList = new ArrayList<Status>();\n';
+text = text + '						statusList.add(status);\n';
+text = text + '						count =\n';
+text = text + '								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,\n';
+text = text + '										AcaoEnum.INSERT, UserId, empId, TabelaEnum.'+bar.toUpperCase()+', statusDAC, historicoDAC,\n';
+text = text + '										processId, historicoId);\n';
+text = text + '					}\n';
+text = text + '					break;\n';
+text = text + '				case UPDATE:\n';
+text = text + '					count = '+bar.toLowerCase()+'DAC.update'+bar+'('+bar.toLowerCase()+').hasSystemError();\n';
+text = text + '					if (count == true)\n';
+text = text + '					{\n';
+text = text + '						count =\n';
+text = text + '								StatusBARD.maintainStatusAssociations('+bar.toLowerCase()+'.getStatusList(), response, '+bar.toLowerCase()+'.getId(),\n';
+text = text + '										null,\n';
+text = text + '										AcaoEnum.UPDATE, UserId, empId, TabelaEnum.'+bar.toUpperCase()+', statusDAC, historicoDAC,\n';
+text = text + '										processId, historicoId);\n';
+text = text + '					}\n';
+text = text + '					break;\n';
+text = text + '				case DELETE:\n';
+text = text + '					count = '+bar.toLowerCase()+'DAC.delete'+bar+'ById('+bar.toLowerCase()+').hasSystemError();\n';
+text = text + '					Status status = new Status();\n';
+text = text + '					status.setStatus(CdStatusTypeEnum.DELETADO);\n';
+text = text + '					List<Status> statusList = new ArrayList<Status>();\n';
+text = text + '					statusList.add(status);\n';
+text = text + '					count =\n';
+text = text + '							StatusBARD.maintainStatusAssociations(statusList, response, '+bar.toLowerCase()+'.getId(), null,\n';
+text = text + '									AcaoEnum.DELETE, UserId, empId, TabelaEnum.'+bar.toUpperCase()+', statusDAC, historicoDAC,\n';
+text = text + '									processId, historicoId);\n';
+text = text + '\n';
+text = text + '					break;\n';
+text = text + '			}\n';
+text = text + '		}\n';
+text = text + '		if(count == true ){\n';
+text = text + '			return 1;\n';
+text = text + '		}else{\n';
+text = text + '			return 0;\n';
+text = text + '		}\n';
+text = text + '		\n';
+text = text + '	}\n';
+text = text + '}\n';
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 text = text + "package com.qat.samples.sysmgmt.bar.mybatis."+titleize(local)+";\n";
 text = text + "\n";
 text = text + "\n";

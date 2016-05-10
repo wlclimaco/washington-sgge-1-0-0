@@ -336,16 +336,16 @@ function EventosModel() {
 function UsuarioModel() {
 
 	var a = [];
-	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-    a.push({field :{campo : "emprId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-    a.push({field :{campo : "processId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-   	a.push({field :{campo : "email", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-   	a.push({field :{campo : "senha" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "pergunta" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-   	a.push({field :{campo : "role" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-   	a.push({field :{campo : "language" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-   	a.push({field :{campo : "ultAcesso", tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-   	a.push({field :{campo : "tabelaEnumValue" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "emprId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "processId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "email", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "senha" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "pergunta" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "role" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "language" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "ultAcesso", tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "tabelaEnumValue" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
