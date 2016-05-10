@@ -29,7 +29,7 @@ public interface IFinanceiroBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<ContasPagar> fetchContasPagarById(FetchByIdRequest request);
+	public ContasPagar fetchContasPagarById(FetchByIdRequest request);
 
 	/**
 * Insert contaspagar.

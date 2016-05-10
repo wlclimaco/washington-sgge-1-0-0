@@ -40,9 +40,9 @@ public final class PlanoBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainPlanoAssociations(List<PlanoBySite> list,
+	public static Integer maintainPlanoBySiteAssociations(List<PlanoBySite> list,
 			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IPrecoBAR iPrecoBAR, IStatusBAR statusDAC, IHistoricoBAR historicoDAC,
+			TabelaEnum tabelaEnum, ISiteBAR iPrecoBAR, IStatusBAR statusDAC, IHistoricoBAR historicoDAC,
 			Integer empId, String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
@@ -53,6 +53,64 @@ public final class PlanoBARD extends SqlSessionDaoSupport
 		}
 		// For Each Contact...
 		for (PlanoBySite plano : list)
+		{
+			// Make sure we set the parent key
+			plano.setParentId(parentId);
+			plano.setEmprId(empId);
+
+			if (ValidationUtil.isNull(plano.getModelAction()))
+			{
+				continue;
+			}
+			switch (plano.getModelAction())
+			{
+				case INSERT:
+					count = iPrecoBAR.insertPlanoBySite(plano).hasSystemError();
+					if (count == true)
+					{
+						Status status = new Status();
+						status.setStatus(CdStatusTypeEnum.ATIVO);
+						List<Status> statusList = new ArrayList<Status>();
+						statusList.add(status);
+						count =
+								StatusBARD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>) response, parentId, null,
+										AcaoEnum.INSERT, UserId, empId, TabelaEnum.SOCIO, statusDAC, historicoDAC,
+										processId, historicoId);
+					}
+					break;
+				case UPDATE:
+					count = iPrecoBAR.updatePlanoBySite(plano).hasSystemError();
+					if (count == true)
+					{
+						count =
+								StatusBARD
+										.maintainStatusAssociations(plano.getStatusList(), (InternalResultsResponse<?>) response, plano.getId(),
+												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.SOCIO, statusDAC,
+												historicoDAC, processId, historicoId);
+					}
+					break;
+				case DELETE:
+					count = iPrecoBAR.deletePlanoBySiteById(plano).hasSystemError();
+
+					break;
+			}
+		}
+		return 1;
+	}
+
+	public static Integer maintainPlanoAssociations(List<Plano> list,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			TabelaEnum tabelaEnum, ISiteBAR iPrecoBAR, IStatusBAR statusDAC, IHistoricoBAR historicoDAC,
+			Integer empId, String UserId, Integer processId, Integer historicoId)
+	{
+		Boolean count = false;
+		// First Maintain Empresa
+		if (ValidationUtil.isNullOrEmpty(list))
+		{
+			return 0;
+		}
+		// For Each Contact...
+		for (Plano plano : list)
 		{
 			// Make sure we set the parent key
 			plano.setParentId(parentId);

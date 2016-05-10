@@ -10,11 +10,10 @@ import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Site.ISiteBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
-import com.qat.samples.sysmgmt.produto.model.PlanoByServico;
+import com.qat.samples.sysmgmt.contabilidade.model.PlanoByServico;
 import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
@@ -28,6 +27,9 @@ public final class ServicoBARD extends SqlSessionDaoSupport
 
 	/** The Constant ZERO. */
 	private static final Integer ZERO = 0;
+	private static final String INSERT = null;
+	private static final String UPDATE = null;
+	private static final String DELETE = null;
 
 	/**
 	 * Fetch objects by request.
@@ -65,7 +67,7 @@ public final class ServicoBARD extends SqlSessionDaoSupport
 			switch (email.getModelAction())
 			{
 				case INSERT:
-					count = emailDAC.insertServico(email).hasSystemError();
+					count = emailDAC.insertServicoByPlano(email).hasSystemError();
 					if (count == true)
 					{
 						Status status = new Status();
@@ -79,7 +81,7 @@ public final class ServicoBARD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
-					count = emailDAC.updateServico(email).hasSystemError();
+					count = emailDAC.updateServicoByPlano(email).hasSystemError();
 					if (count == true)
 					{
 						count =
@@ -90,7 +92,7 @@ public final class ServicoBARD extends SqlSessionDaoSupport
 					}
 					break;
 				case DELETE:
-					count = emailDAC.deleteServicoById(email).hasSystemError();
+					count = emailDAC.deleteServicoByPlanoById(email).hasSystemError();
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();

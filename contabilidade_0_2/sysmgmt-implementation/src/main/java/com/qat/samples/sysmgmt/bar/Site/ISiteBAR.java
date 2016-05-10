@@ -3,6 +3,8 @@ package com.qat.samples.sysmgmt.bar.Site;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
+import com.qat.samples.sysmgmt.contabilidade.model.PlanoByServico;
+import com.qat.samples.sysmgmt.contabilidade.model.PlanoBySite;
 import com.qat.samples.sysmgmt.contato.model.Contato;
 import com.qat.samples.sysmgmt.contato.model.ContatoItens;
 import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
@@ -421,5 +423,54 @@ public interface ISiteBAR
 * @return the internal results response
 */
 	public InternalResultsResponse<Plano> fetchPlanosByRequest(PlanoInquiryRequest request);
+
+
+	/**
+* Insert plano.
+*
+* @param plano the plano
+*
+* @return the internal response
+*/
+	public InternalResponse insertPlanoBySite(PlanoBySite plano);
+
+	/**
+* Update plano.
+*
+* @param plano the plano
+*
+* @return the internal response
+*/
+	public InternalResponse updatePlanoBySite(PlanoBySite plano);
+
+	/**
+* Delete plano.
+*
+* @param plano the plano
+*
+* @return the internal response
+*/
+	public InternalResponse deletePlanoBySiteById(PlanoBySite plano);
+
+	public InternalResponse insertServicoByPlano(PlanoByServico servico);
+
+	/**
+* Update servico.
+*
+* @param servico the servico
+*
+* @return the internal response
+*/
+	public InternalResponse updateServicoByPlano(PlanoByServico servico);
+
+	/**
+* Delete servico.
+*
+* @param servico the servico
+*
+* @return the internal response
+*/
+	public InternalResponse deleteServicoByPlanoById(PlanoByServico servico);
+
 
 }
