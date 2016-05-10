@@ -725,7 +725,7 @@ $('#checkeds').append(imputs);
 				}
 				if($('#BARDIMPL').prop('checked')){
 					for (var x = 0;x< oProjet[i].classes.length;x++){
-						$("div#tabs").addTab(""+oProjet[i].classes[x].classe+"BARD"+,oProjet[i].classes[x].classe,BarDImpl(oProjet[i].classes[x].model,oProjet[i].classes[x].classe));
+						$("div#tabs").addTab(""+oProjet[i].classes[x].classe+"BARD",BarDImpl(oProjet[i].classes[x].model,oProjet[i].classes[x].classe,""));
 					}
 				}
 				if($('#XML').prop('checked')){
