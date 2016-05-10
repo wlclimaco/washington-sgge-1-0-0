@@ -1,32 +1,3 @@
-
-function titleize(text) {
-
-    // Convertendo primeira letra em maiuscula.
-    text = text.charAt(0).toUpperCase() + text.slice(1);
-
-    for (var i = 0; i < text.length; i++) {
-        if (text.charAt(i) ===" ") {
-
-            // Convertendo letra ap�s o ESPA�O em maiuscula
-            var charToUper = text.charAt(i+1).toUpperCase();
-
-            // Colocando texto de antes do ESPA�O na vari�vel
-            var sliceBegin = text.slice(0, (i+1));
-
-            // colocando o texto de depois do ESPA�O na vari�vel
-            var sliceEnd = text.slice(i + 2);
-
-            // Juntando tudo
-            text = sliceBegin + charToUper + sliceEnd;
-
-        } else {
-
-            // NAO CONSIGO PENSAR EM COMO TRANSFORMAR O RESTANTE DAS LETRAS EM MINUSCULA
-        }
-    }
-    return text;
-}
-
 Controller = function (teste,bar){
 
 	var text = '/** create by system gera-java version 1.0.0 '+dataAtualFormatada()+'*/\n';
@@ -59,7 +30,7 @@ text = text + "/**\n";
 text = text + " * The Class "+titleize(bar)+"APIController.\n";
 text = text + " */\n";
 text = text + "@Controller\n";
-text = text + '@RequestMapping("/"+bar.toLowerCase()+"/api")\n';
+text = text + '@RequestMapping("/'+bar.toLowerCase()+'/api")\n';
 text = text + "public class "+titleize(bar)+"APIController extends BaseController\n";
 text = text + "{\n";
 text = text + "	/** The Constant DEFAULT_EXCEPTION_MSG. */\n";
@@ -97,7 +68,7 @@ text = text + "\n";
 for(i=0;i < teste.length;i++){
 
 var nome = teste[i].classe.toLowerCase();
-nomeM = titleize(nome)
+nomeM = titleize(teste[i].classe)
 text = text + "\n";
 text = text + '//===================================### '+nomeM.toUpperCase()+' ####======================================\n';
 text = text + '/**\n';
@@ -139,7 +110,7 @@ text = text + '	 * @return the '+nomeM.toLowerCase()+' response\n';
 text = text + '	 */\n';
 text = text + '	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)\n';
 text = text + '	@ResponseBody\n';
-text = text + '	public '+nomeM+'Response fetch'+nomeM+'Paged(@RequestBody PagedInquiryRequest request)\n';
+text = text + '	public '+nomeM+'Response fetch'+nomeM+'Paged(@RequestBody '+nomeM+'InquiryRequest request)\n';
 text = text + '	{\n';
 text = text + '		'+nomeM+'Response '+nomeM.toLowerCase()+'Response = new '+nomeM+'Response();\n';
 text = text + '		try\n';

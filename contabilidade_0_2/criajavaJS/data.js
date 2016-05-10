@@ -1191,7 +1191,7 @@ oProjet.push({
 })
 
 oProjet.push({
-	classes :[{classe : "Servico",model : ServicoModel(),dependencias : dependenciaServico()},{classe : "ServicoByPlano",model : ServicoByPlanoModel(),dependencias : dependenciaServico()},{classe : "Site",model : SiteModel(),dependencias : dependenciaSite()},{classe :"Contato",model : ContatoModel(),dependencias : dependenciaContato()},{classe :"ContatoItens",model : ContatoItensModel()},{classe :"OrdemServico",model : OrdemServicoModel(),dependencias : dependenciaOrdemServico()},{classe :"OrdemServicoItens",model : OrdemServicoItensModel()},{classe :"Plano",model : PlanoModel()}],
+	classes :[{classe : "Servico",model : ServicoModel(),dependencias : dependenciaServico()},{classe : "ServicoByPlano",model : PlanoByServicoModel(),dependencias : dependenciaServico()},{classe : "Site",model : SiteModel(),dependencias : dependenciaSite()},{classe :"Contato",model : ContatoModel(),dependencias : dependenciaContato()},{classe :"ContatoItens",model : ContatoItensModel()},{classe :"OrdemServico",model : OrdemServicoModel(),dependencias : dependenciaOrdemServico()},{classe :"OrdemServicoItens",model : OrdemServicoItensModel()},{classe :"Plano",model : PlanoModel()}],
 	interfaces : "Site",
 	local : "Site"
 })

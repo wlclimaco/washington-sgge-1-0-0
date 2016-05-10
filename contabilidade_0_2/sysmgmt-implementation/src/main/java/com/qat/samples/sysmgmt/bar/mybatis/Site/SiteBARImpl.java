@@ -2,6 +2,9 @@
 package com.qat.samples.sysmgmt.bar.mybatis.Site;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -11,11 +14,18 @@ import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.MyBatisBARHelper;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
+import com.qat.samples.sysmgmt.bar.Produto.IPrecoBAR;
 import com.qat.samples.sysmgmt.bar.Site.ISiteBAR;
+import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ContatoItensBARD;
-import com.qat.samples.sysmgmt.bar.mybatis.delegate.EnderecoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.OrdemServicoItensBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.PlanoBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.PrecoBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.ServicoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.SociosBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.StatusBARD;
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
 import com.qat.samples.sysmgmt.contato.model.Contato;
 import com.qat.samples.sysmgmt.contato.model.ContatoItens;
@@ -29,6 +39,8 @@ import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
 import com.qat.samples.sysmgmt.site.model.Site;
 import com.qat.samples.sysmgmt.site.model.request.SiteInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
+import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
+import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
@@ -241,6 +253,48 @@ private static final String STMT_DELETE_PLANO = NAMESPACE_PLANO + "deletePlanoBy
 	private static final String STMT_FETCH_PLANO_ALL_REQUEST = NAMESPACE_PLANO + "fetchAllPlanosRequest";
 
 //===================================### SERVICO ####======================================
+	IStatusBAR statusBAR;
+
+	IHistoricoBAR historicoBAR;
+
+	IPrecoBAR precoBAR;
+
+	ISiteBAR siteBAR;
+
+
+
+	public IStatusBAR getStatusBAR() {
+		return statusBAR;
+	}
+
+	public void setStatusBAR(IStatusBAR statusBAR) {
+		this.statusBAR = statusBAR;
+	}
+
+	public IHistoricoBAR getHistoricoBAR() {
+		return historicoBAR;
+	}
+
+	public void setHistoricoBAR(IHistoricoBAR historicoBAR) {
+		this.historicoBAR = historicoBAR;
+	}
+
+	public IPrecoBAR getPrecoBAR() {
+		return precoBAR;
+	}
+
+	public void setPrecoBAR(IPrecoBAR precoBAR) {
+		this.precoBAR = precoBAR;
+	}
+
+	public ISiteBAR getSiteBAR() {
+		return siteBAR;
+	}
+
+	public void setSiteBAR(ISiteBAR siteBAR) {
+		this.siteBAR = siteBAR;
+	}
+
 	/**
 /*
  * (non-Javadoc)
@@ -250,28 +304,28 @@ private static final String STMT_DELETE_PLANO = NAMESPACE_PLANO + "deletePlanoBy
 public InternalResponse insertServico(Servico servico)
 {
 	InternalResponse response = new InternalResponse();
-	
+
 	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.SERVICO, getHistoricoBAR(), response);
 		Integer processId = 1;
 		servico.setProcessId(historicoId);
-		
+
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_SERVICO, servico, response);
-	
+
 	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SERVICO, AcaoEnum.INSERT, historicoId,
 				getHistoricoBAR(), response, servico.getId());
-	
-	if (!ValidationUtil.isNullOrEmpty(servico.getPrecos()))
+
+	if (!ValidationUtil.isNullOrEmpty(servico.getPreco()))
 	{
 		a +=
-				SociosBARD.maintainPrecoAssociations(empresa.getPrecos(), response, empresa.getId(), null, null,
-						TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-						empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+				PrecoBARD.maintainPrecoAssociations(servico.getPreco(), (InternalResultsResponse<?>) response, servico.getId(), null, null,
+						TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), servico.getId(),
+						servico.getCreateUser(), historicoId, historicoId);
 
 	}
-				
-	
-	
-	
+
+
+
+
 	return response;
 }
 
@@ -284,19 +338,19 @@ public InternalResponse updateServico(Servico servico)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_SERVICO, servico, response);
-	
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SERVICO, AcaoEnum.UPDATE, historicoId,
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SERVICO, AcaoEnum.UPDATE, servico.getProcessId(),
 				getHistoricoBAR(), response, servico.getId());
-	
-	if (!ValidationUtil.isNullOrEmpty(servico.getPrecos()))
+
+	if (!ValidationUtil.isNullOrEmpty(servico.getPreco()))
 	{
 		a +=
-				SociosBARD.maintainPrecoAssociations(empresa.getPrecos(), response, empresa.getId(), null, null,
-						TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-						empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+				PrecoBARD.maintainPrecoAssociations(servico.getPreco(), (InternalResultsResponse<?>)response, servico.getId(), null, null,
+						TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), servico.getId(),
+						servico.getCreateUser(), servico.getProcessId(), servico.getProcessId());
 
 	}
-	
+
 	return response;
 }
 
@@ -309,19 +363,19 @@ public InternalResponse deleteServicoById(Servico servico)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_SERVICO, servico, response);
-	
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SERVICO, AcaoEnum.DELETE, historicoId,
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SERVICO, AcaoEnum.DELETE, servico.getProcessId(),
 				getHistoricoBAR(), response, servico.getId());
-	
-	if (!ValidationUtil.isNullOrEmpty(servico.getPrecos()))
+
+	if (!ValidationUtil.isNullOrEmpty(servico.getPreco()))
 	{
 		a +=
-				SociosBARD.maintainPrecoAssociations(empresa.getPrecos(), response, empresa.getId(), null, null,
-						TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-						empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+				PrecoBARD.maintainPrecoAssociations(servico.getPreco(), (InternalResultsResponse<?>)response, servico.getId(), null, null,
+						TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), servico.getId(),
+						servico.getCreateUser(), servico.getProcessId(), servico.getProcessId());
 
 	}
-	
+
 	return response;
 }
 
@@ -430,34 +484,43 @@ public static void fetchServicosByRequest(SqlSession sqlSession, ServicoInquiryR
 public InternalResponse insertSite(Site site)
 {
 	InternalResponse response = new InternalResponse();
-	
+
 	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.SITE, getHistoricoBAR(), response);
 		Integer processId = 1;
-		servico.setProcessId(historicoId);
-		
+		site.setProcessId(historicoId);
+
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_SITE, site, response);
-	
+
 	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SITE, AcaoEnum.INSERT, historicoId,
 				getHistoricoBAR(), response, site.getId());
-	
-	if (!ValidationUtil.isNullOrEmpty(servico.getServicoList()))
+
+	if (!ValidationUtil.isNullOrEmpty(site.getServicoList()))
 	{
 		a +=
-				SociosBARD.maintainPrecoAssociations(empresa.getServicoList(), response, empresa.getId(), null, null,
-						TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-						empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+				ServicoBARD.maintainServicoAssociations(site.getServicoList(), (InternalResultsResponse<?>)response, site.getId(), null, null,
+						TabelaEnum.SITE, getSiteBAR(), getStatusBAR(), getHistoricoBAR(), site.getId(),
+						site.getCreateUser(), historicoId, historicoId);
 
 	}
-	
-	if (!ValidationUtil.isNullOrEmpty(empresa.getPlanoList()))
+
+	if (!ValidationUtil.isNullOrEmpty(site.getPlanoList()))
 	{
 		a +=
-				EnderecoBARD.maintainEnderecoAssociations(empresa.getPlanoList(), response, site.getId(), null,
+				PlanoBARD.maintainPlanoAssociations(site.getPlanoList(), (InternalResultsResponse<?>)response, site.getId(), null,
 						null,
-						tabela, enderecoBAR, statusBAR, historicoBAR, site.getId(),
-						site.getCreateUser(), processId, historicoId, cadastroBAR);
+						TabelaEnum.SITE, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), site.getId(),
+						site.getCreateUser(), processId, historicoId);
 	}
-	
+
+	Status status = new Status();
+	status.setStatus(CdStatusTypeEnum.ATIVO);
+	List<Status> statusList = new ArrayList<Status>();
+	statusList.add(status);
+	boolean b =
+			StatusBARD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>) response, site.getId(), null,
+					AcaoEnum.INSERT, site.getUserId(), site.getEmprId(), TabelaEnum.SOCIO, getStatusBAR(), getHistoricoBAR(),
+					processId, historicoId);
+
 	return response;
 }
 
@@ -470,28 +533,30 @@ public InternalResponse updateSite(Site site)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_SITE, site, response);
-	
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SITE, AcaoEnum.UPDATE, historicoId,
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SITE, AcaoEnum.UPDATE, site.getProcessId(),
 				getHistoricoBAR(), response, site.getId());
-	
-	if (!ValidationUtil.isNullOrEmpty(servico.getServicoList()))
+
+
+	if (!ValidationUtil.isNullOrEmpty(site.getServicoList()))
 	{
 		a +=
-				SociosBARD.maintainPrecoAssociations(empresa.getServicoList(), response, empresa.getId(), null, null,
-						TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-						empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+				ServicoBARD.maintainServicoAssociations(site.getServicoList(), (InternalResultsResponse<?>)response, site.getId(), null, null,
+						TabelaEnum.SITE, getSiteBAR(), getStatusBAR(), getHistoricoBAR(), site.getId(),
+						site.getCreateUser(), site.getProcessId(), site.getProcessId());
 
 	}
-	
-	if (!ValidationUtil.isNullOrEmpty(empresa.getPlanoList()))
+
+	if (!ValidationUtil.isNullOrEmpty(site.getPlanoList()))
 	{
 		a +=
-				EnderecoBARD.maintainEnderecoAssociations(empresa.getPlanoList(), response, site.getId(), null,
+				PlanoBARD.maintainPlanoAssociations(site.getPlanoList(), (InternalResultsResponse<?>)response, site.getId(), null,
 						null,
-						tabela, enderecoBAR, statusBAR, historicoBAR, site.getId(),
-						site.getCreateUser(), processId, historicoId, cadastroBAR);
+						TabelaEnum.SITE, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), site.getId(),
+						site.getCreateUser(), site.getProcessId(), site.getProcessId());
 	}
-	
+
+
 	return response;
 }
 
@@ -503,29 +568,38 @@ public InternalResponse updateSite(Site site)
 public InternalResponse deleteSiteById(Site site)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_SITE, site, response);
-	
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SITE, AcaoEnum.DELETE, historicoId,
+//	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_SITE, site, response);
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SITE, AcaoEnum.DELETE, site.getProcessId(),
 				getHistoricoBAR(), response, site.getId());
-	
-	if (!ValidationUtil.isNullOrEmpty(servico.getServicoList()))
+
+	if (!ValidationUtil.isNullOrEmpty(site.getServicoList()))
 	{
 		a +=
-				SociosBARD.maintainPrecoAssociations(empresa.getServicoList(), response, empresa.getId(), null, null,
-						TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-						empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+				ServicoBARD.maintainServicoAssociations(site.getServicoList(), (InternalResultsResponse<?>)response, site.getId(), null, null,
+						TabelaEnum.SITE, getSiteBAR(), getStatusBAR(), getHistoricoBAR(), site.getId(),
+						site.getCreateUser(), site.getProcessId(), site.getProcessId());
 
 	}
-	
-	if (!ValidationUtil.isNullOrEmpty(empresa.getPlanoList()))
+
+	if (!ValidationUtil.isNullOrEmpty(site.getPlanoList()))
 	{
 		a +=
-				EnderecoBARD.maintainEnderecoAssociations(empresa.getPlanoList(), response, site.getId(), null,
+				PlanoBARD.maintainPlanoAssociations(site.getPlanoList(), (InternalResultsResponse<?>)response, site.getId(), null,
 						null,
-						tabela, enderecoBAR, statusBAR, historicoBAR, site.getId(),
-						site.getCreateUser(), processId, historicoId, cadastroBAR);
+						TabelaEnum.SITE, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), site.getId(),
+						site.getCreateUser(), site.getProcessId(), site.getProcessId());
 	}
-	
+
+	Status status = new Status();
+	status.setStatus(CdStatusTypeEnum.DELETADO);
+	List<Status> statusList = new ArrayList<Status>();
+	statusList.add(status);
+	boolean b =
+			StatusBARD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>) response, site.getId(), null,
+					AcaoEnum.DELETE, site.getUserId(), site.getEmprId(), TabelaEnum.SOCIO, getStatusBAR(), getHistoricoBAR(),
+					site.getProcessId(), site.getProcessId());
+
 	return response;
 }
 
@@ -634,25 +708,25 @@ public static void fetchSitesByRequest(SqlSession sqlSession, SiteInquiryRequest
 public InternalResponse insertContato(Contato contato)
 {
 	InternalResponse response = new InternalResponse();
-	
+
 	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.CONTATO, getHistoricoBAR(), response);
 		Integer processId = 1;
-		servico.setProcessId(historicoId);
-	
+		contato.setProcessId(historicoId);
+
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONTATO, contato, response);
-	
+
 	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.CONTATO, AcaoEnum.INSERT, historicoId,
 				getHistoricoBAR(), response, contato.getId());
-	
-	if (!ValidationUtil.isNullOrEmpty(servico.getContatoItensList()))
+
+	if (!ValidationUtil.isNullOrEmpty(contato.getContatoItensList()))
 	{
 		a +=
-				ContatoItensBARD.maintainContatoItensAssociations(servico.getContatoItensList(), response, servico.getId(), null, null,
-						TabelaEnum.CONTATO, getContatoItensBAR(), getStatusBAR(), getHistoricoBAR(), servico.getId(),
-						servico.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+				ContatoItensBARD.maintainContatoItensAssociations(contato.getContatoItensList(), (InternalResultsResponse<?>)response, contato.getId(), null, null,
+						TabelaEnum.CONTATO, getSiteBAR(), getStatusBAR(), getHistoricoBAR(), contato.getId(),
+						contato.getCreateUser(), historicoId, historicoId);
 
 	}
-	
+
 	return response;
 }
 
@@ -665,19 +739,19 @@ public InternalResponse updateContato(Contato contato)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CONTATO, contato, response);
-	
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.CONTATO, AcaoEnum.UPDATE, historicoId,
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.CONTATO, AcaoEnum.UPDATE, contato.getProcessId(),
 				getHistoricoBAR(), response, contato.getId());
-	
-	if (!ValidationUtil.isNullOrEmpty(servico.getContatoItensList()))
+
+	if (!ValidationUtil.isNullOrEmpty(contato.getContatoItensList()))
 	{
 		a +=
-				ContatoItensBARD.maintainContatoItensAssociations(servico.getContatoItensList(), response, servico.getId(), null, null,
-						TabelaEnum.CONTATO, getContatoItensBAR(), getStatusBAR(), getHistoricoBAR(), servico.getId(),
-						servico.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+				ContatoItensBARD.maintainContatoItensAssociations(contato.getContatoItensList(), (InternalResultsResponse<?>)response, contato.getId(), null, null,
+						TabelaEnum.CONTATO, getSiteBAR(), getStatusBAR(), getHistoricoBAR(), contato.getId(),
+						contato.getCreateUser(), contato.getProcessId(), contato.getProcessId());
 
 	}
-	
+
 	return response;
 }
 
@@ -690,19 +764,19 @@ public InternalResponse deleteContatoById(Contato contato)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONTATO, contato, response);
-	
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.CONTATO, AcaoEnum.DELETE, historicoId,
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.CONTATO, AcaoEnum.DELETE, contato.getProcessId(),
 				getHistoricoBAR(), response, contato.getId());
-	
-	if (!ValidationUtil.isNullOrEmpty(servico.getContatoItensList()))
+
+	if (!ValidationUtil.isNullOrEmpty(contato.getContatoItensList()))
 	{
 		a +=
-				ContatoItensBARD.maintainContatoItensAssociations(servico.getContatoItensList(), response, servico.getId(), null, null,
-						TabelaEnum.CONTATO, getContatoItensBAR(), getStatusBAR(), getHistoricoBAR(), servico.getId(),
-						servico.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+				ContatoItensBARD.maintainContatoItensAssociations(contato.getContatoItensList(), (InternalResultsResponse<?>)response, contato.getId(), null, null,
+						TabelaEnum.CONTATO, getSiteBAR(), getStatusBAR(), getHistoricoBAR(), contato.getId(),
+						contato.getCreateUser(), contato.getProcessId(), contato.getProcessId());
 
 	}
-	
+
 	return response;
 }
 
@@ -812,7 +886,7 @@ public InternalResponse insertContatoItens(ContatoItens contatoitens)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONTATOITENS, contatoitens, response);
-	
+
 	return response;
 }
 
@@ -945,25 +1019,34 @@ public static void fetchContatoItenssByRequest(SqlSession sqlSession, PagedInqui
 public InternalResponse insertOrdemServico(OrdemServico ordemservico)
 {
 	InternalResponse response = new InternalResponse();
-	
+
 	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.ORDEMSERVICO, getHistoricoBAR(), response);
 		Integer processId = 1;
-		servico.setProcessId(historicoId);
-	
+		ordemservico.setProcessId(historicoId);
+
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ORDEMSERVICO, ordemservico, response);
-	
+
 	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ORDEMSERVICO, AcaoEnum.INSERT, historicoId,
-				getHistoricoBAR(), response, servico.getId());
-	
-	if (!ValidationUtil.isNullOrEmpty(servico.getOrdemServicoItemList()))
+				getHistoricoBAR(), response, ordemservico.getId());
+
+	if (!ValidationUtil.isNullOrEmpty(ordemservico.getOrdemStatusList()))
 	{
 		a +=
-				SociosBARD.maintainPrecoAssociations(empresa.getOrdemServicoItemList(), response, empresa.getId(), null, null,
-						TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-						empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+				OrdemServicoItensBARD.maintainOrdemServicoItensAssociations(ordemservico.getOrdemStatusList(), (InternalResultsResponse<?>)response, ordemservico.getId(), null, null,
+						TabelaEnum.ORDEMSERVICO, getSiteBAR(), getStatusBAR(), getHistoricoBAR(), ordemservico.getId(),
+						ordemservico.getCreateUser(), historicoId, historicoId);
 
 	}
-	
+
+	Status status = new Status();
+	status.setStatus(CdStatusTypeEnum.ATIVO);
+	List<Status> statusList = new ArrayList<Status>();
+	statusList.add(status);
+	boolean b =
+			StatusBARD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>) response, ordemservico.getId(), null,
+					AcaoEnum.DELETE, ordemservico.getUserId(), ordemservico.getEmprId(), TabelaEnum.ORDEMSERVICO, getStatusBAR(), getHistoricoBAR(),
+					ordemservico.getProcessId(), ordemservico.getProcessId());
+
 	return response;
 }
 
@@ -976,19 +1059,19 @@ public InternalResponse updateOrdemServico(OrdemServico ordemservico)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ORDEMSERVICO, ordemservico, response);
-	
+
 	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ORDEMSERVICO, AcaoEnum.UPDATE, ordemservico.getProcessId(),
-				getHistoricoBAR(), response, servico.getId());
-	
-	if (!ValidationUtil.isNullOrEmpty(servico.getOrdemServicoItemList()))
+				getHistoricoBAR(), response, ordemservico.getId());
+
+	if (!ValidationUtil.isNullOrEmpty(ordemservico.getOrdemStatusList()))
 	{
 		a +=
-				SociosBARD.maintainPrecoAssociations(empresa.getOrdemServicoItemList(), response, empresa.getId(), null, null,
-						TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-						empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+				OrdemServicoItensBARD.maintainOrdemServicoItensAssociations(ordemservico.getOrdemStatusList(), (InternalResultsResponse<?>)response, ordemservico.getId(), null, null,
+						TabelaEnum.ORDEMSERVICO, getSiteBAR(), getStatusBAR(), getHistoricoBAR(), ordemservico.getId(),
+						ordemservico.getCreateUser(), ordemservico.getProcessId(), ordemservico.getProcessId());
 
 	}
-	
+
 	return response;
 }
 
@@ -1001,19 +1084,28 @@ public InternalResponse deleteOrdemServicoById(OrdemServico ordemservico)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ORDEMSERVICO, ordemservico, response);
-	
+
 	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ORDEMSERVICO, AcaoEnum.UPDATE, ordemservico.getProcessId(),
-				getHistoricoBAR(), response, servico.getId());
-	
-	if (!ValidationUtil.isNullOrEmpty(servico.getOrdemServicoItemList()))
+				getHistoricoBAR(), response, ordemservico.getId());
+
+	if (!ValidationUtil.isNullOrEmpty(ordemservico.getOrdemStatusList()))
 	{
 		a +=
-				SociosBARD.maintainPrecoAssociations(empresa.getOrdemServicoItemList(), response, empresa.getId(), null, null,
-						TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-						empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+				OrdemServicoItensBARD.maintainOrdemServicoItensAssociations(ordemservico.getOrdemStatusList(), (InternalResultsResponse<?>)response, ordemservico.getId(), null, null,
+						TabelaEnum.ORDEMSERVICO, getSiteBAR(), getStatusBAR(), getHistoricoBAR(), ordemservico.getId(),
+						ordemservico.getCreateUser(), ordemservico.getProcessId(), ordemservico.getProcessId());
 
 	}
-	
+
+	Status status = new Status();
+	status.setStatus(CdStatusTypeEnum.DELETADO);
+	List<Status> statusList = new ArrayList<Status>();
+	statusList.add(status);
+	boolean b =
+			StatusBARD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>) response, ordemservico.getId(), null,
+					AcaoEnum.DELETE, ordemservico.getUserId(), ordemservico.getEmprId(), TabelaEnum.ORDEMSERVICO, getStatusBAR(), getHistoricoBAR(),
+					ordemservico.getProcessId(), ordemservico.getProcessId());
+
 	return response;
 }
 
@@ -1123,10 +1215,10 @@ public InternalResponse insertOrdemServicoItens(OrdemServicoItens ordemservicoit
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ORDEMSERVICOITENS, ordemservicoitens, response);
-	
+
 	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ORDEMSERVICOITENS, AcaoEnum.INSERT, ordemservicoitens.getProcessId(),
-				getHistoricoBAR(), response, servico.getId());
-	
+				getHistoricoBAR(), response, ordemservicoitens.getId());
+
 	return response;
 }
 
@@ -1139,10 +1231,10 @@ public InternalResponse updateOrdemServicoItens(OrdemServicoItens ordemservicoit
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ORDEMSERVICOITENS, ordemservicoitens, response);
-	
+
 	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ORDEMSERVICOITENS, AcaoEnum.UPDATE, ordemservicoitens.getProcessId(),
-				getHistoricoBAR(), response, servico.getId());
-	
+				getHistoricoBAR(), response, ordemservicoitens.getId());
+
 	return response;
 }
 
@@ -1155,10 +1247,10 @@ public InternalResponse deleteOrdemServicoItensById(OrdemServicoItens ordemservi
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ORDEMSERVICOITENS, ordemservicoitens, response);
-	
+
 	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ORDEMSERVICOITENS, AcaoEnum.DELETE, ordemservicoitens.getProcessId(),
-				getHistoricoBAR(), response, servico.getId());
-	
+				getHistoricoBAR(), response, ordemservicoitens.getId());
+
 	return response;
 }
 
@@ -1267,35 +1359,44 @@ public static void fetchOrdemServicoItenssByRequest(SqlSession sqlSession, Paged
 public InternalResponse insertPlano(Plano plano)
 {
 	InternalResponse response = new InternalResponse();
-	
+
 	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.PLANO, getHistoricoBAR(), response);
 		Integer processId = 1;
-		servico.setProcessId(historicoId);
-	
+		plano.setProcessId(historicoId);
+
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PLANO, plano, response);
-	
+
 	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PLANO, AcaoEnum.INSERT, historicoId,
-				getHistoricoBAR(), response, servico.getId());
-	
-	if (!ValidationUtil.isNullOrEmpty(servico.precoList()))
+				getHistoricoBAR(), response, plano.getId());
+
+	if (!ValidationUtil.isNullOrEmpty(plano.getPrecoList()))
 	{
 		a +=
-				SociosBARD.maintainPrecoAssociations(empresa.precoList(), response, empresa.getId(), null, null,
-						TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-						empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+				PrecoBARD.maintainPrecoAssociations(plano.getPrecoList(), (InternalResultsResponse<?>)response, plano.getId(), null, null,
+						TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), plano.getId(),
+						plano.getCreateUser(), historicoId, historicoId);
 
 	}
-	
-	if (!ValidationUtil.isNullOrEmpty(servico.servicoList()))
+
+	if (!ValidationUtil.isNullOrEmpty(plano.getServicoList()))
 	{
 		a +=
-				SociosBARD.maintainPrecoAssociations(empresa.servicoList(), response, empresa.getId(), null, null,
-						TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-						empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+				ServicoBARD.maintainServicoByPlanoAssociations(plano.getServicoList(), (InternalResultsResponse<?>)response, plano.getId(), null, null,
+						TabelaEnum.PLANO, getSiteBAR(), getStatusBAR(), getHistoricoBAR(), plano.getId(),
+						plano.getCreateUser(), historicoId, historicoId);
 
 	}
-	
-	
+
+	Status status = new Status();
+	status.setStatus(CdStatusTypeEnum.ATIVO);
+	List<Status> statusList = new ArrayList<Status>();
+	statusList.add(status);
+	boolean b =
+			StatusBARD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>) response, plano.getId(), null,
+					AcaoEnum.INSERT, plano.getUserId(), plano.getEmprId(), TabelaEnum.PLANO, getStatusBAR(), getHistoricoBAR(),
+					plano.getProcessId(), plano.getProcessId());
+
+
 	return response;
 }
 
@@ -1308,28 +1409,29 @@ public InternalResponse updatePlano(Plano plano)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PLANO, plano, response);
-	
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PLANO, AcaoEnum.UPDATE, historicoId,
-				getHistoricoBAR(), response, servico.getId());
-	
-	if (!ValidationUtil.isNullOrEmpty(servico.precoList()))
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PLANO, AcaoEnum.UPDATE, plano.getProcessId(),
+				getHistoricoBAR(), response, plano.getId());
+
+	if (!ValidationUtil.isNullOrEmpty(plano.getPrecoList()))
 	{
 		a +=
-				SociosBARD.maintainPrecoAssociations(empresa.precoList(), response, empresa.getId(), null, null,
-						TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-						empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+				PrecoBARD.maintainPrecoAssociations(plano.getPrecoList(), (InternalResultsResponse<?>)response, plano.getId(), null, null,
+						TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), plano.getId(),
+						plano.getCreateUser(), plano.getProcessId(), plano.getProcessId());
 
 	}
-	
-	if (!ValidationUtil.isNullOrEmpty(servico.servicoList()))
+
+	if (!ValidationUtil.isNullOrEmpty(plano.getServicoList()))
 	{
 		a +=
-				SociosBARD.maintainPrecoAssociations(empresa.servicoList(), response, empresa.getId(), null, null,
-						TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-						empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+				ServicoBARD.maintainServicoByPlanoAssociations(plano.getServicoList(), (InternalResultsResponse<?>)response, plano.getId(), null, null,
+						TabelaEnum.PLANO, getSiteBAR(), getStatusBAR(), getHistoricoBAR(), plano.getId(),
+						plano.getCreateUser(), plano.getProcessId(), plano.getProcessId());
 
 	}
-	
+
+
 	return response;
 }
 
@@ -1341,30 +1443,39 @@ public InternalResponse updatePlano(Plano plano)
 public InternalResponse deletePlanoById(Plano plano)
 {
 	InternalResponse response = new InternalResponse();
-	
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PLANO, plano, response);
-	
+
+	//MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PLANO, plano, response);
+
 	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PLANO, AcaoEnum.DELETE, plano.getProcessId(),
 				getHistoricoBAR(), response, plano.getId());
-	
-	if (!ValidationUtil.isNullOrEmpty(plano.precoList()))
+
+	if (!ValidationUtil.isNullOrEmpty(plano.getPrecoList()))
 	{
 		a +=
-				SociosBARD.maintainPrecoAssociations(plano.precoList(), response, plano.getId(), null, null,
+				PrecoBARD.maintainPrecoAssociations(plano.getPrecoList(), (InternalResultsResponse<?>)response, plano.getId(), null, null,
 						TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), plano.getId(),
-						plano.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+						plano.getCreateUser(), plano.getProcessId(), plano.getProcessId());
 
 	}
-	
-	if (!ValidationUtil.isNullOrEmpty(servico.servicoList()))
+
+	if (!ValidationUtil.isNullOrEmpty(plano.getServicoList()))
 	{
 		a +=
-				SociosBARD.maintainPrecoAssociations(empresa.servicoList(), response, empresa.getId(), null, null,
-						TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-						empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+				ServicoBARD.maintainServicoByPlanoAssociations(plano.getServicoList(), (InternalResultsResponse<?>)response, plano.getId(), null, null,
+						TabelaEnum.PLANO, getSiteBAR(), getStatusBAR(), getHistoricoBAR(), plano.getId(),
+						plano.getCreateUser(), plano.getProcessId(), plano.getProcessId());
 
 	}
-	
+
+	Status status = new Status();
+	status.setStatus(CdStatusTypeEnum.ATIVO);
+	List<Status> statusList = new ArrayList<Status>();
+	statusList.add(status);
+	boolean b =
+			StatusBARD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>) response, plano.getId(), null,
+					AcaoEnum.INSERT, plano.getUserId(), plano.getEmprId(), TabelaEnum.PLANO, getStatusBAR(), getHistoricoBAR(),
+					plano.getProcessId(), plano.getProcessId());
+
 	return response;
 }
 

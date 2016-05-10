@@ -9,9 +9,11 @@ import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
+import com.qat.samples.sysmgmt.bar.Produto.IPrecoBAR;
 import com.qat.samples.sysmgmt.bar.Site.ISiteBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
+import com.qat.samples.sysmgmt.contabilidade.model.PlanoBySite;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.model.Status;
@@ -38,19 +40,19 @@ public final class PlanoBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainPlanoAssociations(List<Plano> planoList,
+	public static Integer maintainPlanoAssociations(List<PlanoBySite> list,
 			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, ISiteBAR planoDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC,
+			TabelaEnum tabelaEnum, IPrecoBAR iPrecoBAR, IStatusBAR statusDAC, IHistoricoBAR historicoDAC,
 			Integer empId, String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(planoList))
+		if (ValidationUtil.isNullOrEmpty(list))
 		{
 			return 0;
 		}
 		// For Each Contact...
-		for (Plano plano : planoList)
+		for (PlanoBySite plano : list)
 		{
 			// Make sure we set the parent key
 			plano.setParentId(parentId);
@@ -63,7 +65,7 @@ public final class PlanoBARD extends SqlSessionDaoSupport
 			switch (plano.getModelAction())
 			{
 				case INSERT:
-					count = planoDAC.insertPlano(plano).hasSystemError();
+					count = iPrecoBAR.insertPlano(plano).hasSystemError();
 					if (count == true)
 					{
 						Status status = new Status();
@@ -77,7 +79,7 @@ public final class PlanoBARD extends SqlSessionDaoSupport
 					}
 					break;
 				case UPDATE:
-					count = planoDAC.updatePlano(plano).hasSystemError();
+					count = iPrecoBAR.updatePlano(plano).hasSystemError();
 					if (count == true)
 					{
 						count =
@@ -88,7 +90,7 @@ public final class PlanoBARD extends SqlSessionDaoSupport
 					}
 					break;
 				case DELETE:
-					count = planoDAC.deletePlanoById(plano).hasSystemError();
+					count = iPrecoBAR.deletePlanoById(plano).hasSystemError();
 
 					break;
 			}

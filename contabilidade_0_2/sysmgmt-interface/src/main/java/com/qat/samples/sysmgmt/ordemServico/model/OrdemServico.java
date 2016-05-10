@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
-import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -27,7 +26,7 @@ public class OrdemServico extends ModelCosmeDamiao
 	private String assunto;
 
 	/** The tipo endereco. */
-	private List<OrdemServicoItens> ordemStatusList;
+	private List<OrdemServicoItens> ordemServicoItensList;
 
 	/** The description. */
 	private OrdemServicoTypeEnum status;
@@ -134,7 +133,7 @@ public class OrdemServico extends ModelCosmeDamiao
 	 */
 	public List<OrdemServicoItens> getOrdemStatusList()
 	{
-		return ordemStatusList;
+		return ordemServicoItensList;
 	}
 
 	/**
@@ -142,7 +141,7 @@ public class OrdemServico extends ModelCosmeDamiao
 	 */
 	public void setOrdemStatusList(List<OrdemServicoItens> ordemStatusList)
 	{
-		this.ordemStatusList = ordemStatusList;
+		this.ordemServicoItensList = ordemStatusList;
 	}
 
 
