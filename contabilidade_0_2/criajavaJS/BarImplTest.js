@@ -1,32 +1,4 @@
 
-function titleize(text) {
-
-    // Convertendo primeira letra em maiuscula.
-    text = text.charAt(0).toUpperCase() + text.slice(1);
-
-    for (var i = 0; i < text.length; i++) {
-        if (text.charAt(i) ===" ") {
-
-            // Convertendo letra ap�s o ESPA�O em maiuscula
-            var charToUper = text.charAt(i+1).toUpperCase();
-
-            // Colocando texto de antes do ESPA�O na vari�vel
-            var sliceBegin = text.slice(0, (i+1));
-
-            // colocando o texto de depois do ESPA�O na vari�vel
-            var sliceEnd = text.slice(i + 2);
-
-            // Juntando tudo
-            text = sliceBegin + charToUper + sliceEnd;
-
-        } else {
-
-            // NAO CONSIGO PENSAR EM COMO TRANSFORMAR O RESTANTE DAS LETRAS EM MINUSCULA
-        }
-    }
-    return text;
-}
-
 barImplTest = function (teste,bar){
 
 var text = '/** create by system gera-java version 1.0.0 '+dataAtualFormatada()+'*/\n';
@@ -186,6 +158,39 @@ for(i=0;i < teste.length;i++){
 text = text + '		executeSqlScript("conf/insert'+nomeM+'.sql", false);\n';
 }
 text = text + "	}\n";
+text = text + "\n";
+
+for(var i=0;i < teste.length;i++){
+text = text + '	\n';
+
+text = text + '	public '+titleize(teste[i].classe)+' insert'+titleize(teste[i].classe)+'(Integer id,TabelaEnum tabela,PersistenceActionEnum action)\n';
+text = text + '		{\n';
+text = text + '			'+titleize(teste[i].classe)+' '+teste[i].classe.toLowerCase()+' = new '+titleize(teste[i].classe)+'();\n';
+text = text + '			Date a = new Date();\n';
+for(var y=0;y < teste[i].model.length;y++){
+						if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.campo !== 'id')){
+							
+							
+						}else{
+							
+							
+						}
+	
+}
+text = text + '			servico.setParentId(id);\n';
+text = text + '			servico.setServico(insertServico(id, tabela, action));\n';
+text = text + '			servico.setEmprId(1);\n';
+text = text + '			servico.setModifyDateUTC(a.getTime());\n';
+text = text + '			servico.setCreateDateUTC(a.getTime());\n';
+text = text + '			servico.setCreateUser("system");\n';
+text = text + '			servico.setModifyUser("system");\n';
+text = text + '			servico.setProcessId(1);\n';
+text = text + '			servico.setModelAction(action);\n';
+text = text + '	\n';
+text = text + '			return servico;\n';
+text = text + '		}\n';
+text = text + "\n";
+}
 text = text + "\n";
 text = text + "}\n";
 return text;

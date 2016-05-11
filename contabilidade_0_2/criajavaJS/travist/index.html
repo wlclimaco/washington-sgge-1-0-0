@@ -764,6 +764,7 @@ $('#checkeds').append(imputs);
 					$("div#tabs").addTab(oProjet[i].interfaces,bacImplTest(oProjet[i].classes,oProjet[i].interfaces));
 				}	
 				if($('#BARIMPLTest').prop('checked')){
+					debugger
 					$("div#tabs").addTab(oProjet[i].interfaces,barImplTest(oProjet[i].classes,oProjet[i].interfaces));
 				}	
 				if($('#ControllerTest').prop('checked')){
