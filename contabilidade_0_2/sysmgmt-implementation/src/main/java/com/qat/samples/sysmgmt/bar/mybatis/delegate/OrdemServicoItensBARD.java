@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
-import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Site.ISiteBAR;
@@ -38,7 +38,7 @@ public final class OrdemServicoItensBARD extends SqlSessionDaoSupport
 	 */
 	@SuppressWarnings("unchecked")
 	public static Integer maintainOrdemServicoItensAssociations(List<OrdemServicoItens> emailList,
-			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, ISiteBAR emailDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{

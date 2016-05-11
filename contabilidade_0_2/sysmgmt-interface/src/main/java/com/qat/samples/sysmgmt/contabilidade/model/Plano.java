@@ -3,10 +3,7 @@ package com.qat.samples.sysmgmt.contabilidade.model;
 import java.util.Date;
 import java.util.List;
 
-import com.qat.samples.sysmgmt.produto.model.PlanoByServico;
-import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.produto.model.Preco;
-import com.qat.samples.sysmgmt.util.model.Imagem;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**

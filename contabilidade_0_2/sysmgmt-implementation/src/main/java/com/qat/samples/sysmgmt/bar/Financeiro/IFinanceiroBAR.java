@@ -86,7 +86,7 @@ public interface IFinanceiroBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<ContasReceber> fetchContasReceberById(FetchByIdRequest request);
+	public ContasReceber fetchContasReceberById(FetchByIdRequest request);
 
 	/**
 * Insert contasreceber.
@@ -143,7 +143,7 @@ public interface IFinanceiroBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<CondPag> fetchCondPagById(FetchByIdRequest request);
+	public CondPag fetchCondPagById(FetchByIdRequest request);
 
 	/**
 * Insert condpag.
@@ -200,7 +200,7 @@ public interface IFinanceiroBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<FormaPg> fetchFormaPgById(FetchByIdRequest request);
+	public FormaPg fetchFormaPgById(FetchByIdRequest request);
 
 	/**
 * Insert formapg.
@@ -257,7 +257,7 @@ public interface IFinanceiroBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Banco> fetchBancoById(FetchByIdRequest request);
+	public Banco fetchBancoById(FetchByIdRequest request);
 
 	/**
 * Insert banco.
@@ -314,7 +314,7 @@ public interface IFinanceiroBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<ContaCorrente> fetchContaCorrenteById(FetchByIdRequest request);
+	public ContaCorrente fetchContaCorrenteById(FetchByIdRequest request);
 
 	/**
 * Insert contacorrente.
@@ -371,7 +371,7 @@ public interface IFinanceiroBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Caixa> fetchCaixaById(FetchByIdRequest request);
+	public Caixa fetchCaixaById(FetchByIdRequest request);
 
 	/**
 * Insert caixa.

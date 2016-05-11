@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
@@ -42,7 +43,7 @@ public final class ServicoBARD extends SqlSessionDaoSupport
 	 */
 	@SuppressWarnings("unchecked")
 	public static Integer maintainServicoByPlanoAssociations(List<PlanoByServico> list,
-			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, ISiteBAR emailDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
@@ -120,7 +121,7 @@ public final class ServicoBARD extends SqlSessionDaoSupport
 	 */
 	@SuppressWarnings("unchecked")
 	public static Integer maintainServicoAssociations(List<Servico> list,
-			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, ISiteBAR emailDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{

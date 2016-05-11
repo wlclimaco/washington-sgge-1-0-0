@@ -326,8 +326,8 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 				getHistoricoBAR(), response, servico.getId());
 
 		if (!ValidationUtil.isNullOrEmpty(servico.getPreco())) {
-			a += PrecoBARD.maintainPrecoAssociations(servico.getPreco(), (InternalResultsResponse<?>) response,
-					servico.getId(), null, null, TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(),
+			a += PrecoBARD.maintainPrecoAssociations(servico.getPreco(),  response,
+					servico.getId(), null, null, TabelaEnum.SERVICO, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(),
 					servico.getId(), servico.getCreateUser(), historicoId, historicoId);
 
 		}
@@ -350,7 +350,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 				servico.getProcessId(), getHistoricoBAR(), response, servico.getId());
 
 		if (!ValidationUtil.isNullOrEmpty(servico.getPreco())) {
-			a += PrecoBARD.maintainPrecoAssociations(servico.getPreco(), (InternalResultsResponse<?>) response,
+			a += PrecoBARD.maintainPrecoAssociations(servico.getPreco(), response,
 					servico.getId(), null, null, TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(),
 					servico.getId(), servico.getCreateUser(), servico.getProcessId(), servico.getProcessId());
 
@@ -374,7 +374,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 				servico.getProcessId(), getHistoricoBAR(), response, servico.getId());
 
 		if (!ValidationUtil.isNullOrEmpty(servico.getPreco())) {
-			a += PrecoBARD.maintainPrecoAssociations(servico.getPreco(), (InternalResultsResponse<?>) response,
+			a += PrecoBARD.maintainPrecoAssociations(servico.getPreco(),  response,
 					servico.getId(), null, null, TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(),
 					servico.getId(), servico.getCreateUser(), servico.getProcessId(), servico.getProcessId());
 
@@ -500,14 +500,14 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 				getHistoricoBAR(), response, site.getId());
 
 		if (!ValidationUtil.isNullOrEmpty(site.getServicoList())) {
-			a += ServicoBARD.maintainServicoAssociations(site.getServicoList(), (InternalResultsResponse<?>) response,
+			a += ServicoBARD.maintainServicoAssociations(site.getServicoList(),  response,
 					site.getId(), null, null, TabelaEnum.SITE, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
 					site.getId(), site.getCreateUser(), historicoId, historicoId);
 
 		}
 
 		if (!ValidationUtil.isNullOrEmpty(site.getPlanoList())) {
-			a += PlanoBARD.maintainPlanoBySiteAssociations(site.getPlanoList(), (InternalResultsResponse<?>) response,
+			a += PlanoBARD.maintainPlanoBySiteAssociations(site.getPlanoList(),  response,
 					site.getId(), null, null, TabelaEnum.SITE, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
 					site.getId(), site.getCreateUser(), processId, historicoId);
 		}
@@ -516,7 +516,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		status.setStatus(CdStatusTypeEnum.ATIVO);
 		List<Status> statusList = new ArrayList<Status>();
 		statusList.add(status);
-		boolean b = StatusBARD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>) response,
+		boolean b = StatusBARD.maintainStatusAssociations(statusList,  response,
 				site.getId(), null, AcaoEnum.INSERT, site.getUserId(), site.getEmprId(), TabelaEnum.SOCIO,
 				getStatusBAR(), getHistoricoBAR(), processId, historicoId);
 
@@ -539,14 +539,14 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 				getHistoricoBAR(), response, site.getId());
 
 		if (!ValidationUtil.isNullOrEmpty(site.getServicoList())) {
-			a += ServicoBARD.maintainServicoAssociations(site.getServicoList(), (InternalResultsResponse<?>) response,
+			a += ServicoBARD.maintainServicoAssociations(site.getServicoList(),  response,
 					site.getId(), null, null, TabelaEnum.SITE, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
 					site.getId(), site.getCreateUser(), site.getProcessId(), site.getProcessId());
 
 		}
 
 		if (!ValidationUtil.isNullOrEmpty(site.getPlanoList())) {
-			a += PlanoBARD.maintainPlanoBySiteAssociations(site.getPlanoList(), (InternalResultsResponse<?>) response,
+			a += PlanoBARD.maintainPlanoBySiteAssociations(site.getPlanoList(),  response,
 					site.getId(), null, null, TabelaEnum.SITE, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
 					site.getId(), site.getCreateUser(), site.getProcessId(), site.getProcessId());
 		}
@@ -571,14 +571,14 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 				getHistoricoBAR(), response, site.getId());
 
 		if (!ValidationUtil.isNullOrEmpty(site.getServicoList())) {
-			a += ServicoBARD.maintainServicoAssociations(site.getServicoList(), (InternalResultsResponse<?>) response,
+			a += ServicoBARD.maintainServicoAssociations(site.getServicoList(),  response,
 					site.getId(), null, null, TabelaEnum.SITE, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
 					site.getId(), site.getCreateUser(), site.getProcessId(), site.getProcessId());
 
 		}
 
 		if (!ValidationUtil.isNullOrEmpty(site.getPlanoList())) {
-			a += PlanoBARD.maintainPlanoBySiteAssociations(site.getPlanoList(), (InternalResultsResponse<?>) response,
+			a += PlanoBARD.maintainPlanoBySiteAssociations(site.getPlanoList(),  response,
 					site.getId(), null, null, TabelaEnum.SITE, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
 					site.getId(), site.getCreateUser(), site.getProcessId(), site.getProcessId());
 		}
@@ -587,7 +587,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		status.setStatus(CdStatusTypeEnum.DELETADO);
 		List<Status> statusList = new ArrayList<Status>();
 		statusList.add(status);
-		boolean b = StatusBARD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>) response,
+		boolean b = StatusBARD.maintainStatusAssociations(statusList,  response,
 				site.getId(), null, AcaoEnum.DELETE, site.getUserId(), site.getEmprId(), TabelaEnum.SOCIO,
 				getStatusBAR(), getHistoricoBAR(), site.getProcessId(), site.getProcessId());
 
@@ -710,7 +710,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		if (!ValidationUtil.isNullOrEmpty(contato.getContatoItensList())) {
 			a += ContatoItensBARD.maintainContatoItensAssociations(contato.getContatoItensList(),
-					(InternalResultsResponse<?>) response, contato.getId(), null, null, TabelaEnum.CONTATO,
+					 response, contato.getId(), null, null, TabelaEnum.CONTATO,
 					getSiteBAR(), getStatusBAR(), getHistoricoBAR(), contato.getId(), contato.getCreateUser(),
 					historicoId, historicoId);
 
@@ -735,7 +735,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		if (!ValidationUtil.isNullOrEmpty(contato.getContatoItensList())) {
 			a += ContatoItensBARD.maintainContatoItensAssociations(contato.getContatoItensList(),
-					(InternalResultsResponse<?>) response, contato.getId(), null, null, TabelaEnum.CONTATO,
+					 response, contato.getId(), null, null, TabelaEnum.CONTATO,
 					getSiteBAR(), getStatusBAR(), getHistoricoBAR(), contato.getId(), contato.getCreateUser(),
 					contato.getProcessId(), contato.getProcessId());
 
@@ -760,7 +760,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		if (!ValidationUtil.isNullOrEmpty(contato.getContatoItensList())) {
 			a += ContatoItensBARD.maintainContatoItensAssociations(contato.getContatoItensList(),
-					(InternalResultsResponse<?>) response, contato.getId(), null, null, TabelaEnum.CONTATO,
+					 response, contato.getId(), null, null, TabelaEnum.CONTATO,
 					getSiteBAR(), getStatusBAR(), getHistoricoBAR(), contato.getId(), contato.getCreateUser(),
 					contato.getProcessId(), contato.getProcessId());
 
@@ -1031,7 +1031,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		if (!ValidationUtil.isNullOrEmpty(ordemservico.getOrdemStatusList())) {
 			a += OrdemServicoItensBARD.maintainOrdemServicoItensAssociations(ordemservico.getOrdemStatusList(),
-					(InternalResultsResponse<?>) response, ordemservico.getId(), null, null, TabelaEnum.ORDEMSERVICO,
+					 response, ordemservico.getId(), null, null, TabelaEnum.ORDEMSERVICO,
 					getSiteBAR(), getStatusBAR(), getHistoricoBAR(), ordemservico.getId(), ordemservico.getCreateUser(),
 					historicoId, historicoId);
 
@@ -1041,7 +1041,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		status.setStatus(CdStatusTypeEnum.ATIVO);
 		List<Status> statusList = new ArrayList<Status>();
 		statusList.add(status);
-		boolean b = StatusBARD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>) response,
+		boolean b = StatusBARD.maintainStatusAssociations(statusList,  response,
 				ordemservico.getId(), null, AcaoEnum.DELETE, ordemservico.getUserId(), ordemservico.getEmprId(),
 				TabelaEnum.ORDEMSERVICO, getStatusBAR(), getHistoricoBAR(), ordemservico.getProcessId(),
 				ordemservico.getProcessId());
@@ -1066,7 +1066,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		if (!ValidationUtil.isNullOrEmpty(ordemservico.getOrdemStatusList())) {
 			a += OrdemServicoItensBARD.maintainOrdemServicoItensAssociations(ordemservico.getOrdemStatusList(),
-					(InternalResultsResponse<?>) response, ordemservico.getId(), null, null, TabelaEnum.ORDEMSERVICO,
+					 response, ordemservico.getId(), null, null, TabelaEnum.ORDEMSERVICO,
 					getSiteBAR(), getStatusBAR(), getHistoricoBAR(), ordemservico.getId(), ordemservico.getCreateUser(),
 					ordemservico.getProcessId(), ordemservico.getProcessId());
 
@@ -1092,7 +1092,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		if (!ValidationUtil.isNullOrEmpty(ordemservico.getOrdemStatusList())) {
 			a += OrdemServicoItensBARD.maintainOrdemServicoItensAssociations(ordemservico.getOrdemStatusList(),
-					(InternalResultsResponse<?>) response, ordemservico.getId(), null, null, TabelaEnum.ORDEMSERVICO,
+					 response, ordemservico.getId(), null, null, TabelaEnum.ORDEMSERVICO,
 					getSiteBAR(), getStatusBAR(), getHistoricoBAR(), ordemservico.getId(), ordemservico.getCreateUser(),
 					ordemservico.getProcessId(), ordemservico.getProcessId());
 
@@ -1102,7 +1102,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		status.setStatus(CdStatusTypeEnum.DELETADO);
 		List<Status> statusList = new ArrayList<Status>();
 		statusList.add(status);
-		boolean b = StatusBARD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>) response,
+		boolean b = StatusBARD.maintainStatusAssociations(statusList,  response,
 				ordemservico.getId(), null, AcaoEnum.DELETE, ordemservico.getUserId(), ordemservico.getEmprId(),
 				TabelaEnum.ORDEMSERVICO, getStatusBAR(), getHistoricoBAR(), ordemservico.getProcessId(),
 				ordemservico.getProcessId());
@@ -1385,7 +1385,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 				getHistoricoBAR(), response, plano.getId());
 
 		if (!ValidationUtil.isNullOrEmpty(plano.getPrecoList())) {
-			a += PrecoBARD.maintainPrecoAssociations(plano.getPrecoList(), (InternalResultsResponse<?>) response,
+			a += PrecoBARD.maintainPrecoAssociations(plano.getPrecoList(),  response,
 					plano.getId(), null, null, TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(),
 					plano.getId(), plano.getCreateUser(), historicoId, historicoId);
 
@@ -1393,7 +1393,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		if (!ValidationUtil.isNullOrEmpty(plano.getServicoList())) {
 			a += ServicoBARD.maintainServicoByPlanoAssociations(plano.getServicoList(),
-					(InternalResultsResponse<?>) response, plano.getId(), null, null, TabelaEnum.PLANO, getSiteBAR(),
+					 response, plano.getId(), null, null, TabelaEnum.PLANO, getSiteBAR(),
 					getStatusBAR(), getHistoricoBAR(), plano.getId(), plano.getCreateUser(), historicoId, historicoId);
 
 		}
@@ -1402,7 +1402,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		status.setStatus(CdStatusTypeEnum.ATIVO);
 		List<Status> statusList = new ArrayList<Status>();
 		statusList.add(status);
-		boolean b = StatusBARD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>) response,
+		boolean b = StatusBARD.maintainStatusAssociations(statusList,  response,
 				plano.getId(), null, AcaoEnum.INSERT, plano.getUserId(), plano.getEmprId(), TabelaEnum.PLANO,
 				getStatusBAR(), getHistoricoBAR(), plano.getProcessId(), plano.getProcessId());
 
@@ -1425,7 +1425,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 				getHistoricoBAR(), response, plano.getId());
 
 		if (!ValidationUtil.isNullOrEmpty(plano.getPrecoList())) {
-			a += PrecoBARD.maintainPrecoAssociations(plano.getPrecoList(), (InternalResultsResponse<?>) response,
+			a += PrecoBARD.maintainPrecoAssociations(plano.getPrecoList(),  response,
 					plano.getId(), null, null, TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(),
 					plano.getId(), plano.getCreateUser(), plano.getProcessId(), plano.getProcessId());
 
@@ -1433,7 +1433,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		if (!ValidationUtil.isNullOrEmpty(plano.getServicoList())) {
 			a += ServicoBARD.maintainServicoByPlanoAssociations(plano.getServicoList(),
-					(InternalResultsResponse<?>) response, plano.getId(), null, null, TabelaEnum.PLANO, getSiteBAR(),
+					 response, plano.getId(), null, null, TabelaEnum.PLANO, getSiteBAR(),
 					getStatusBAR(), getHistoricoBAR(), plano.getId(), plano.getCreateUser(), plano.getProcessId(),
 					plano.getProcessId());
 
@@ -1460,7 +1460,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 				getHistoricoBAR(), response, plano.getId());
 
 		if (!ValidationUtil.isNullOrEmpty(plano.getPrecoList())) {
-			a += PrecoBARD.maintainPrecoAssociations(plano.getPrecoList(), (InternalResultsResponse<?>) response,
+			a += PrecoBARD.maintainPrecoAssociations(plano.getPrecoList(),  response,
 					plano.getId(), null, null, TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(),
 					plano.getId(), plano.getCreateUser(), plano.getProcessId(), plano.getProcessId());
 
@@ -1468,7 +1468,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		if (!ValidationUtil.isNullOrEmpty(plano.getServicoList())) {
 			a += ServicoBARD.maintainServicoByPlanoAssociations(plano.getServicoList(),
-					(InternalResultsResponse<?>) response, plano.getId(), null, null, TabelaEnum.PLANO, getSiteBAR(),
+					 response, plano.getId(), null, null, TabelaEnum.PLANO, getSiteBAR(),
 					getStatusBAR(), getHistoricoBAR(), plano.getId(), plano.getCreateUser(), plano.getProcessId(),
 					plano.getProcessId());
 
@@ -1478,7 +1478,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		status.setStatus(CdStatusTypeEnum.ATIVO);
 		List<Status> statusList = new ArrayList<Status>();
 		statusList.add(status);
-		boolean b = StatusBARD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>) response,
+		boolean b = StatusBARD.maintainStatusAssociations(statusList,  response,
 				plano.getId(), null, AcaoEnum.INSERT, plano.getUserId(), plano.getEmprId(), TabelaEnum.PLANO,
 				getStatusBAR(), getHistoricoBAR(), plano.getProcessId(), plano.getProcessId());
 

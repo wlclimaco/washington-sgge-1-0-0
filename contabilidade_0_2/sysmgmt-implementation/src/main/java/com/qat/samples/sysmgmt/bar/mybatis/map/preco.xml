@@ -72,7 +72,13 @@
 	<include refid="allPrecoColumns" />
    FROM preco WHERE id = #{fetchid}
  </select>
- 
+
+ <select id="fetchPrecoByServico" parameterType="Integer" resultMap="PrecoResult">
+    SELECT id,
+	<include refid="allPrecoColumns" />
+   FROM preco WHERE parentId = #{fetchid} and tabelaEnumValue = 53
+ </select>
+
  <select id="fetchPrecoByPlano" parameterType="Integer" resultMap="PrecoResult">
     SELECT id,
 	<include refid="allPrecoColumns" />

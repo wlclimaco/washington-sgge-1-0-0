@@ -24,6 +24,7 @@ import com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteInquiryRequ
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.FormaPgInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 
 /**
@@ -289,12 +290,9 @@ public InternalResponse deleteAllContasPagars()
  * com.qat.samples.sysmgmt.bar.IContasPagarBAR#fetchContasPagarById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<ContasPagar> fetchContasPagarById(FetchByIdRequest request)
+public ContasPagar fetchContasPagarById(FetchByIdRequest request)
 {
-	InternalResultsResponse<ContasPagar> response = new InternalResultsResponse<ContasPagar>();
-	response.addResult((ContasPagar)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONTASPAGAR,
-			request.getFetchId()));
-	return response;
+	return (ContasPagar) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONTASPAGAR, request.getFetchId());
 }
 
 /*
@@ -424,12 +422,9 @@ public InternalResponse deleteAllContasRecebers()
  * com.qat.samples.sysmgmt.bar.IContasReceberBAR#fetchContasReceberById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<ContasReceber> fetchContasReceberById(FetchByIdRequest request)
+public ContasReceber fetchContasReceberById(FetchByIdRequest request)
 {
-	InternalResultsResponse<ContasReceber> response = new InternalResultsResponse<ContasReceber>();
-	response.addResult((ContasReceber)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONTASRECEBER,
-			request.getFetchId()));
-	return response;
+	return (ContasReceber) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONTASRECEBER, request.getFetchId());
 }
 
 /*
@@ -559,12 +554,9 @@ public InternalResponse deleteAllCondPags()
  * com.qat.samples.sysmgmt.bar.ICondPagBAR#fetchCondPagById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<CondPag> fetchCondPagById(FetchByIdRequest request)
+public CondPag fetchCondPagById(FetchByIdRequest request)
 {
-	InternalResultsResponse<CondPag> response = new InternalResultsResponse<CondPag>();
-	response.addResult((CondPag)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONDPAG,
-			request.getFetchId()));
-	return response;
+	return (CondPag) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONDPAG, request.getFetchId());
 }
 
 /*
@@ -694,12 +686,9 @@ public InternalResponse deleteAllFormaPgs()
  * com.qat.samples.sysmgmt.bar.IFormaPgBAR#fetchFormaPgById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<FormaPg> fetchFormaPgById(FetchByIdRequest request)
+public FormaPg fetchFormaPgById(FetchByIdRequest request)
 {
-	InternalResultsResponse<FormaPg> response = new InternalResultsResponse<FormaPg>();
-	response.addResult((FormaPg)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_FORMAPG,
-			request.getFetchId()));
-	return response;
+	return (FormaPg) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_FORMAPG, request.getFetchId());
 }
 
 /*
@@ -829,12 +818,11 @@ public InternalResponse deleteAllBancos()
  * com.qat.samples.sysmgmt.bar.IBancoBAR#fetchBancoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<Banco> fetchBancoById(FetchByIdRequest request)
+public Banco fetchBancoById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Banco> response = new InternalResultsResponse<Banco>();
-	response.addResult((Banco)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_BANCO,
-			request.getFetchId()));
-	return response;
+
+	return (Banco) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_BANCO, request.getFetchId());
+
 }
 
 /*
@@ -846,7 +834,9 @@ public InternalResultsResponse<Banco> fetchAllBancos(Banco banco)
 {
 	InternalResultsResponse<Banco> response = new InternalResultsResponse<Banco>();
 	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_BANCO_ALL));
+
 	return response;
+
 }
 
 /*
@@ -964,12 +954,9 @@ public InternalResponse deleteAllContaCorrentes()
  * com.qat.samples.sysmgmt.bar.IContaCorrenteBAR#fetchContaCorrenteById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<ContaCorrente> fetchContaCorrenteById(FetchByIdRequest request)
+public ContaCorrente fetchContaCorrenteById(FetchByIdRequest request)
 {
-	InternalResultsResponse<ContaCorrente> response = new InternalResultsResponse<ContaCorrente>();
-	response.addResult((ContaCorrente)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONTACORRENTE,
-			request.getFetchId()));
-	return response;
+	return (ContaCorrente) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONTACORRENTE, request.getFetchId());
 }
 
 /*
@@ -1099,12 +1086,9 @@ public InternalResponse deleteAllCaixas()
  * com.qat.samples.sysmgmt.bar.ICaixaBAR#fetchCaixaById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<Caixa> fetchCaixaById(FetchByIdRequest request)
+public Caixa fetchCaixaById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Caixa> response = new InternalResultsResponse<Caixa>();
-	response.addResult((Caixa)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CAIXA,
-			request.getFetchId()));
-	return response;
+	return (Caixa) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CAIXA, request.getFetchId());
 }
 
 /*

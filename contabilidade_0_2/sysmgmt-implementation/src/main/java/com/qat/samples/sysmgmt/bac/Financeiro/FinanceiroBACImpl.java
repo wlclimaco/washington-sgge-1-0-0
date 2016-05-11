@@ -199,7 +199,7 @@ public InternalResultsResponse<ContasPagar> fetchContasPagarById(FetchByIdReques
 	}
 	else
 	{
-		response.getResultsList().add(getFinanceiroBAR().fetchContasPagarById(request).getFirstResult());
+		response.getResultsList().add(getFinanceiroBAR().fetchContasPagarById(request));
 	}
 
 	return response;
@@ -416,7 +416,7 @@ public InternalResultsResponse<ContasReceber> fetchContasReceberById(FetchByIdRe
 	}
 	else
 	{
-		response.getResultsList().add(getFinanceiroBAR().fetchContasReceberById(request).getFirstResult());
+		response.getResultsList().add(getFinanceiroBAR().fetchContasReceberById(request));
 	}
 
 	return response;
@@ -633,7 +633,7 @@ public InternalResultsResponse<CondPag> fetchCondPagById(FetchByIdRequest reques
 	}
 	else
 	{
-		response.getResultsList().add(getFinanceiroBAR().fetchCondPagById(request).getFirstResult());
+		response.getResultsList().add(getFinanceiroBAR().fetchCondPagById(request));
 	}
 
 	return response;
@@ -850,7 +850,7 @@ public InternalResultsResponse<FormaPg> fetchFormaPgById(FetchByIdRequest reques
 	}
 	else
 	{
-		response.getResultsList().add(getFinanceiroBAR().fetchFormaPgById(request).getFirstResult());
+		response.getResultsList().add(getFinanceiroBAR().fetchFormaPgById(request));
 	}
 
 	return response;
@@ -1067,7 +1067,7 @@ public InternalResultsResponse<Banco> fetchBancoById(FetchByIdRequest request)
 	}
 	else
 	{
-		response.getResultsList().add(getFinanceiroBAR().fetchBancoById(request).getFirstResult());
+		response.getResultsList().add(getFinanceiroBAR().fetchBancoById(request));
 	}
 
 	return response;
@@ -1284,7 +1284,7 @@ public InternalResultsResponse<ContaCorrente> fetchContaCorrenteById(FetchByIdRe
 	}
 	else
 	{
-		response.getResultsList().add(getFinanceiroBAR().fetchContaCorrenteById(request).getFirstResult());
+		response.getResultsList().add(getFinanceiroBAR().fetchContaCorrenteById(request));
 	}
 
 	return response;
@@ -1501,7 +1501,7 @@ public InternalResultsResponse<Caixa> fetchCaixaById(FetchByIdRequest request)
 	}
 	else
 	{
-		response.getResultsList().add(getFinanceiroBAR().fetchCaixaById(request).getFirstResult());
+		response.getResultsList().add(getFinanceiroBAR().fetchCaixaById(request));
 	}
 
 	return response;

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
-import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Site.ISiteBAR;
@@ -13,7 +13,6 @@ import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.contato.model.ContatoItens;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
@@ -39,7 +38,7 @@ public final class ContatoItensBARD extends SqlSessionDaoSupport
 	 */
 	@SuppressWarnings("unchecked")
 	public static Integer maintainContatoItensAssociations(List<ContatoItens> emailList,
-			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, ISiteBAR emailDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{

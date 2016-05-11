@@ -16,7 +16,7 @@ public class PlanoByServico extends ModelCosmeDamiao
 
 
 
-	public PlanoByServico(Integer id)
+	public PlanoByServico()
 	{
 		super();
 	}

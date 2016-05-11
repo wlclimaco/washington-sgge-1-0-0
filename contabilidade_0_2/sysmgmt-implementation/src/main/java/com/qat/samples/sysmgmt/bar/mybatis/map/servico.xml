@@ -23,6 +23,7 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
+	<collection property="preco" column="id" select="PrecoMap.fetchPrecoByServico"/>
 </resultMap>
 
   <sql id="allServicoColumns">
@@ -54,7 +55,7 @@ nome
 	<include refid="allServicoColumns" />
    FROM servico WHERE id = #{fetchid}
  </select>
- 
+
  <select id="fetchPrecoByPlano" parameterType="Integer" resultMap="ServicoResult">
     SELECT id,
 	<include refid="allServicoColumns" />

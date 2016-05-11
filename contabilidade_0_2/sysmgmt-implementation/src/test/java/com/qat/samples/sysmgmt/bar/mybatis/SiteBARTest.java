@@ -2,6 +2,8 @@
 package com.qat.samples.sysmgmt.bar.mybatis;
 
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -17,21 +19,26 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.bar.Site.ISiteBAR;
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
+import com.qat.samples.sysmgmt.contabilidade.model.PlanoByServico;
 import com.qat.samples.sysmgmt.contato.model.Contato;
 import com.qat.samples.sysmgmt.contato.model.ContatoItens;
 import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
 import com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoItens;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.Preco;
+import com.qat.samples.sysmgmt.produto.model.PrecoTypeEnum;
 import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
 import com.qat.samples.sysmgmt.site.model.Site;
 import com.qat.samples.sysmgmt.site.model.request.SiteInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
@@ -65,7 +72,7 @@ public ISiteBAR getSiteBAR()
 @Test
 	public void testDeleteServico()
 	{
-		Servico servico = new Servico(4, "Servico_999");
+		Servico servico = insertServico(4,TabelaEnum.SERVICO,PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		Servico servicoResponse = getSiteBAR().fetchServicoById(request);
@@ -73,6 +80,7 @@ public ISiteBAR getSiteBAR()
 		getSiteBAR().insertServico(servico);
 		servicoResponse = getSiteBAR().fetchServicoById(request);
 		Assert.assertEquals(servico.getId(), servicoResponse.getId());
+		Assert.assertEquals(servicoResponse.getPreco().size(), 1);
 		getSiteBAR().deleteServicoById(servico);
 		servicoResponse = getSiteBAR().fetchServicoById(request);
 		Assert.assertEquals(servicoResponse, null);
@@ -90,7 +98,7 @@ public ISiteBAR getSiteBAR()
 	public void testDeleteAllServicos()
 	{
 		getSiteBAR().deleteAllServicos();
-	Servico servico = new Servico();
+		Servico servico = new Servico();
 		List<Servico> response = getSiteBAR().fetchAllServicos(new Servico()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
@@ -98,7 +106,7 @@ public ISiteBAR getSiteBAR()
 	@Test
 	public void testUpdateServico()
 	{
-		Servico servico = new Servico(1, "NATIVE INSERT UPDATE");
+		Servico servico = insertServico(1,TabelaEnum.SERVICO,PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Servico servicoResponse = getSiteBAR().fetchServicoById(request);
@@ -106,6 +114,7 @@ public ISiteBAR getSiteBAR()
 		getSiteBAR().updateServico(servico);
 		servicoResponse = getSiteBAR().fetchServicoById(request);
 		Assert.assertEquals(servicoResponse.getNome(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(servicoResponse.getPreco().size(), 1);
 	}
 
 	@Test
@@ -686,5 +695,164 @@ public ISiteBAR getSiteBAR()
 		executeSqlScript("conf/insertOrdemServicoItens.sql", false);
 		executeSqlScript("conf/insertPlano.sql", false);
 	}
+
+	public Servico insertServico(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		Servico servico = new Servico();
+		Date a = new Date();
+		servico.setId(id);
+		servico.setNome("NATIVE INSERT UPDATE");
+		servico.setDescricao("Descricao");
+		servico.setPreco(new ArrayList<Preco>());
+		servico.getPreco().add(insertPreco(id,tabela,action));
+		servico.setEmprId(1);
+		servico.setModifyDateUTC(a.getTime());
+		servico.setCreateDateUTC(a.getTime());
+		servico.setCreateUser("system");
+		servico.setModifyUser("system");
+		servico.setProcessId(1);
+		servico.setModelAction(action);
+
+		return servico;
+	}
+
+	public Plano insertPlano(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		Plano servico = new Plano();
+		Date a = new Date();
+
+		servico.setId(1);
+
+		servico.setDataInicio(a.getTime());
+
+		servico.setDataFinal(a.getTime());
+		servico.setPrecoList(new ArrayList<Preco>());
+		servico.getPrecoList().add(insertPreco(id,tabela,action));
+
+		servico.setNumeroContrato(12);
+
+		servico.setServicoList(new ArrayList<PlanoByServico>());
+		servico.getServicoList().add(insertPlanoByServico(id,TabelaEnum.PLANO,action));
+
+		servico.setDescricao("Descricao");
+
+		servico.setTitulo("Titulo");
+		servico.setEmprId(1);
+		servico.setModifyDateUTC(a.getTime());
+		servico.setCreateDateUTC(a.getTime());
+		servico.setCreateUser("system");
+		servico.setModifyUser("system");
+		servico.setProcessId(1);
+		servico.setModelAction(action);
+
+		return servico;
+	}
+
+	public Contato insertContato(PersistenceActionEnum action)
+	{
+		Contato servico = new Contato();
+		Date a = new Date();
+
+		servico.setEmprId(1);
+		servico.setModifyDateUTC(a.getTime());
+		servico.setCreateDateUTC(a.getTime());
+		servico.setCreateUser("system");
+		servico.setModifyUser("system");
+		servico.setProcessId(1);
+		servico.setModelAction(action);
+
+		return servico;
+	}
+
+	public ContatoItens insertContatoItens(PersistenceActionEnum action)
+	{
+		ContatoItens servico = new ContatoItens();
+		Date a = new Date();
+
+		servico.setEmprId(1);
+		servico.setModifyDateUTC(a.getTime());
+		servico.setCreateDateUTC(a.getTime());
+		servico.setCreateUser("system");
+		servico.setModifyUser("system");
+		servico.setProcessId(1);
+		servico.setModelAction(action);
+
+		return servico;
+	}
+
+	public OrdemServico insertOrdemServico(PersistenceActionEnum action)
+	{
+		OrdemServico servico = new OrdemServico();
+		Date a = new Date();
+
+		servico.setEmprId(1);
+		servico.setModifyDateUTC(a.getTime());
+		servico.setCreateDateUTC(a.getTime());
+		servico.setCreateUser("system");
+		servico.setModifyUser("system");
+		servico.setProcessId(1);
+		servico.setModelAction(action);
+
+		return servico;
+	}
+
+	public OrdemServicoItens insertOrdemServicoItens(PersistenceActionEnum action)
+	{
+		OrdemServicoItens servico = new OrdemServicoItens();
+		Date a = new Date();
+
+		servico.setEmprId(1);
+		servico.setModifyDateUTC(a.getTime());
+		servico.setCreateDateUTC(a.getTime());
+		servico.setCreateUser("system");
+		servico.setModifyUser("system");
+		servico.setProcessId(1);
+		servico.setModelAction(action);
+
+		return servico;
+	}
+
+	public Preco insertPreco(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		Preco servico = new Preco();
+		Date a = new Date();
+
+		servico.setDataMarcacao(a.getTime());
+		servico.setParentId(id);
+		servico.setTabelaEnum(tabela);
+		servico.setPrecoTypeEnum(PrecoTypeEnum.COMPRA);
+		servico.setValor(new Double(1.99));
+		servico.setDataProInicial(a.getTime());
+		servico.setDataProFinal(a.getTime());
+		servico.setMaxVendProd(10);
+		servico.setEmprId(1);
+		servico.setModifyDateUTC(a.getTime());
+		servico.setCreateDateUTC(a.getTime());
+		servico.setCreateUser("system");
+		servico.setModifyUser("system");
+		servico.setProcessId(1);
+		servico.setModelAction(action);
+
+		return servico;
+	}
+
+	public PlanoByServico insertPlanoByServico(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		PlanoByServico servico = new PlanoByServico();
+		Date a = new Date();
+		servico.setParentId(id);
+		servico.setServico(insertServico(id, tabela, action));
+		servico.setEmprId(1);
+		servico.setModifyDateUTC(a.getTime());
+		servico.setCreateDateUTC(a.getTime());
+		servico.setCreateUser("system");
+		servico.setModifyUser("system");
+		servico.setProcessId(1);
+		servico.setModelAction(action);
+
+		return servico;
+	}
+
+
 
 }

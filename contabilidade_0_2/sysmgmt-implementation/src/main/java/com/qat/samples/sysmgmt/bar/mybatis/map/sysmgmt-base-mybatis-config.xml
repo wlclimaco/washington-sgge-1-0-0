@@ -22,6 +22,8 @@
   		<typeAlias alias="FetchByIdRequest" type="com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest"/>
   		<typeAlias alias="Entidade" type="com.qat.samples.sysmgmt.entidade.model.Entidade"/>
 
+  		<typeAlias alias="PlanoByServico" type="com.qat.samples.sysmgmt.contabilidade.model.PlanoByServico"/>
+
   		<typeAlias alias="Estado" type="com.qat.samples.sysmgmt.estado.model.Estado"/>
   		<typeAlias alias="ContatoItens" type="com.qat.samples.sysmgmt.contato.model.ContatoItens"/>
   		<typeAlias alias="OrdemServicoItens" type="com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoItens"/>
@@ -120,7 +122,7 @@
   		<typeAlias alias="Historico" type="com.qat.samples.sysmgmt.historico.model.Historico"/>
 
   		<typeAlias alias="Imagem" type="com.qat.samples.sysmgmt.util.model.Imagem"/>
-  		<typeAlias alias="PlanoByServico" type="com.qat.samples.sysmgmt.produto.model.PlanoByServico"/>
+
   		<typeAlias alias="Status" type="com.qat.samples.sysmgmt.util.model.Status"/>
   		<typeAlias alias="HistoricoItens" type="com.qat.samples.sysmgmt.historico.model.HistoricoItens"/>
   		<typeAlias alias="HistoricoInquiryRequest" type="com.qat.samples.sysmgmt.historico.model.request.HistoricoInquiryRequest"/>
