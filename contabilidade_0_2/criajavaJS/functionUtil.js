@@ -18,6 +18,37 @@ var sReturn = "";
 	}
 	return sReturn;
 }
+
+
+convertModule = function(stipo,sCampo,list){
+	var sReturn = "";
+	b = new Date();
+		switch(stipo) {
+		    case "String":
+		        sReturn = '"'+sCampo+'"'
+		        break;
+		    case "Long":
+		        sReturn = "a.getTime()"
+		        break;
+		    case "Double":
+		        sReturn = "new Double(1.99)"
+		        break;
+		    case "Integer":
+		        sReturn = "100"
+		        break;
+		    default:
+		    	if(stipo.indexOf('List') > 0){
+		    			sReturn = "new "+list+"()"
+		    	}else{
+		    		sReturn = "new ArrayList<"+list+">()"
+		    	}
+
+		        break;
+		}
+		return sReturn;
+	}
+
+
 dataAtualFormatada = function (){
     var data = new Date();
     var dia = data.getDate();

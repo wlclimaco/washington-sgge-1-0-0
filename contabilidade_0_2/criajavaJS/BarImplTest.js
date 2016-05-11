@@ -167,27 +167,26 @@ text = text + '	public '+titleize(teste[i].classe)+' insert'+titleize(teste[i].c
 text = text + '		{\n';
 text = text + '			'+titleize(teste[i].classe)+' '+teste[i].classe.toLowerCase()+' = new '+titleize(teste[i].classe)+'();\n';
 text = text + '			Date a = new Date();\n';
-for(var y=0;y < teste[i].model.length;y++){
-						if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.campo !== 'id')){
-							
-							
-						}else{
-							
-							
-						}
-	
-}
-text = text + '			servico.setParentId(id);\n';
-text = text + '			servico.setServico(insertServico(id, tabela, action));\n';
-text = text + '			servico.setEmprId(1);\n';
-text = text + '			servico.setModifyDateUTC(a.getTime());\n';
-text = text + '			servico.setCreateDateUTC(a.getTime());\n';
-text = text + '			servico.setCreateUser("system");\n';
-text = text + '			servico.setModifyUser("system");\n';
-text = text + '			servico.setProcessId(1);\n';
-text = text + '			servico.setModelAction(action);\n';
+	for(var y=0;y < teste[i].model.length;y++){
+
+		console.log()
+		if(teste[i].model[y].field.tipo.indexOf('List') == -1){
+			text = text + '			'+teste[i].classe.toLowerCase()+'.set'+titleize(teste[i].model[y].field.campo)+'('+convertModule(teste[i].model[y].field.tipo,teste[i].model[y].field.campo,teste[i].model[y].field.List)+');\n';
+		}else{
+			text = text + '			'+teste[i].classe.toLowerCase()+'.set'+titleize(teste[i].model[y].field.campo)+'('+convertModule(teste[i].model[y].field.tipo,teste[i].model[y].field.campo,teste[i].model[y].field.List)+');\n';
+			text = text + '			'+teste[i].classe.toLowerCase()+'.get'+teste[i].model[y].field.List+'().add(insert'+teste[i].model[y].field.List+'(id,TabelaEnum.'+teste[i].classe.toUpperCase()+',action));\n';
+		}
+	}
+text = text + '			'+teste[i].classe.toLowerCase()+'.setParentId(id);\n';
+text = text + '			'+teste[i].classe.toLowerCase()+'.setEmprId(1);\n';
+text = text + '			'+teste[i].classe.toLowerCase()+'.setModifyDateUTC(a.getTime());\n';
+text = text + '			'+teste[i].classe.toLowerCase()+'.setCreateDateUTC(a.getTime());\n';
+text = text + '			'+teste[i].classe.toLowerCase()+'.setCreateUser("system");\n';
+text = text + '			'+teste[i].classe.toLowerCase()+'.setModifyUser("system");\n';
+text = text + '			'+teste[i].classe.toLowerCase()+'.setProcessId(1);\n';
+text = text + '			'+teste[i].classe.toLowerCase()+'.setModelAction(action);\n';
 text = text + '	\n';
-text = text + '			return servico;\n';
+text = text + '			return '+teste[i].classe.toLowerCase()+';\n';
 text = text + '		}\n';
 text = text + "\n";
 }
