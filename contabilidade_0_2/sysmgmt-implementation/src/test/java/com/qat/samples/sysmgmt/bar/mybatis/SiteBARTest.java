@@ -25,6 +25,7 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.bar.Site.ISiteBAR;
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
 import com.qat.samples.sysmgmt.contabilidade.model.PlanoByServico;
+import com.qat.samples.sysmgmt.contabilidade.model.PlanoBySite;
 import com.qat.samples.sysmgmt.contato.model.Contato;
 import com.qat.samples.sysmgmt.contato.model.ContatoItens;
 import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
@@ -32,7 +33,6 @@ import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
 import com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoItens;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.Preco;
-import com.qat.samples.sysmgmt.produto.model.PrecoTypeEnum;
 import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
@@ -700,131 +700,11 @@ public ISiteBAR getSiteBAR()
 	{
 		Servico servico = new Servico();
 		Date a = new Date();
-		servico.setId(id);
-		servico.setNome("NATIVE INSERT UPDATE");
-		servico.setDescricao("Descricao");
-		servico.setPreco(new ArrayList<Preco>());
-		servico.getPreco().add(insertPreco(id,tabela,action));
-		servico.setEmprId(1);
-		servico.setModifyDateUTC(a.getTime());
-		servico.setCreateDateUTC(a.getTime());
-		servico.setCreateUser("system");
-		servico.setModifyUser("system");
-		servico.setProcessId(1);
-		servico.setModelAction(action);
-
-		return servico;
-	}
-
-	public Plano insertPlano(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
-		Plano servico = new Plano();
-		Date a = new Date();
-
-		servico.setId(1);
-
-		servico.setDataInicio(a.getTime());
-
-		servico.setDataFinal(a.getTime());
-		servico.setPrecoList(new ArrayList<Preco>());
-		servico.getPrecoList().add(insertPreco(id,tabela,action));
-
-		servico.setNumeroContrato(12);
-
-		servico.setServicoList(new ArrayList<PlanoByServico>());
-		servico.getServicoList().add(insertPlanoByServico(id,TabelaEnum.PLANO,action));
-
-		servico.setDescricao("Descricao");
-
-		servico.setTitulo("Titulo");
-		servico.setEmprId(1);
-		servico.setModifyDateUTC(a.getTime());
-		servico.setCreateDateUTC(a.getTime());
-		servico.setCreateUser("system");
-		servico.setModifyUser("system");
-		servico.setProcessId(1);
-		servico.setModelAction(action);
-
-		return servico;
-	}
-
-	public Contato insertContato(PersistenceActionEnum action)
-	{
-		Contato servico = new Contato();
-		Date a = new Date();
-
-		servico.setEmprId(1);
-		servico.setModifyDateUTC(a.getTime());
-		servico.setCreateDateUTC(a.getTime());
-		servico.setCreateUser("system");
-		servico.setModifyUser("system");
-		servico.setProcessId(1);
-		servico.setModelAction(action);
-
-		return servico;
-	}
-
-	public ContatoItens insertContatoItens(PersistenceActionEnum action)
-	{
-		ContatoItens servico = new ContatoItens();
-		Date a = new Date();
-
-		servico.setEmprId(1);
-		servico.setModifyDateUTC(a.getTime());
-		servico.setCreateDateUTC(a.getTime());
-		servico.setCreateUser("system");
-		servico.setModifyUser("system");
-		servico.setProcessId(1);
-		servico.setModelAction(action);
-
-		return servico;
-	}
-
-	public OrdemServico insertOrdemServico(PersistenceActionEnum action)
-	{
-		OrdemServico servico = new OrdemServico();
-		Date a = new Date();
-
-		servico.setEmprId(1);
-		servico.setModifyDateUTC(a.getTime());
-		servico.setCreateDateUTC(a.getTime());
-		servico.setCreateUser("system");
-		servico.setModifyUser("system");
-		servico.setProcessId(1);
-		servico.setModelAction(action);
-
-		return servico;
-	}
-
-	public OrdemServicoItens insertOrdemServicoItens(PersistenceActionEnum action)
-	{
-		OrdemServicoItens servico = new OrdemServicoItens();
-		Date a = new Date();
-
-		servico.setEmprId(1);
-		servico.setModifyDateUTC(a.getTime());
-		servico.setCreateDateUTC(a.getTime());
-		servico.setCreateUser("system");
-		servico.setModifyUser("system");
-		servico.setProcessId(1);
-		servico.setModelAction(action);
-
-		return servico;
-	}
-
-	public Preco insertPreco(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
-		Preco servico = new Preco();
-		Date a = new Date();
-
-		servico.setDataMarcacao(a.getTime());
+servico.setId(100);
+servico.setNome("nome");
+servico.setDescricao("descricao");
+servico.setPreco(new ArrayList<Preco>());
 		servico.setParentId(id);
-		servico.setTabelaEnum(tabela);
-		servico.setPrecoTypeEnum(PrecoTypeEnum.COMPRA);
-		servico.setValor(new Double(1.99));
-		servico.setDataProInicial(a.getTime());
-		servico.setDataProFinal(a.getTime());
-		servico.setMaxVendProd(10);
 		servico.setEmprId(1);
 		servico.setModifyDateUTC(a.getTime());
 		servico.setCreateDateUTC(a.getTime());
@@ -836,23 +716,169 @@ public ISiteBAR getSiteBAR()
 		return servico;
 	}
 
-	public PlanoByServico insertPlanoByServico(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+
+public ServicoByPlano insertServicoByPlano(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 	{
-		PlanoByServico servico = new PlanoByServico();
+		ServicoByPlano servicobyplano = new ServicoByPlano();
 		Date a = new Date();
-		servico.setParentId(id);
-		servico.setServico(insertServico(id, tabela, action));
-		servico.setEmprId(1);
-		servico.setModifyDateUTC(a.getTime());
-		servico.setCreateDateUTC(a.getTime());
-		servico.setCreateUser("system");
-		servico.setModifyUser("system");
-		servico.setProcessId(1);
-		servico.setModelAction(action);
+servicobyplano.setId(100);
+servicobyplano.setParentId(100);
+servicobyplano.setServico(new ArrayList<Servico>());
+		servicobyplano.setParentId(id);
+		servicobyplano.setEmprId(1);
+		servicobyplano.setModifyDateUTC(a.getTime());
+		servicobyplano.setCreateDateUTC(a.getTime());
+		servicobyplano.setCreateUser("system");
+		servicobyplano.setModifyUser("system");
+		servicobyplano.setProcessId(1);
+		servicobyplano.setModelAction(action);
 
-		return servico;
+		return servicobyplano;
 	}
 
+
+public Site insertSite(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		Site site = new Site();
+		Date a = new Date();
+site.setId(100);
+site.setNome("nome");
+site.setUrl("url");
+site.setQuemSomos("quemSomos");
+site.setMissao("missao");
+site.setVisao("visao");
+site.setTitulo("titulo");
+site.setLogo("logo");
+site.setAtorization(Boolean.TRUE);
+site.setSiteTypeEnumValue(1);
+site.setServicoList(new ArrayList<Servico>());
+site.setPlanoList(new ArrayList<PlanoBySite>());
+		site.setParentId(id);
+		site.setEmprId(1);
+		site.setModifyDateUTC(a.getTime());
+		site.setCreateDateUTC(a.getTime());
+		site.setCreateUser("system");
+		site.setModifyUser("system");
+		site.setProcessId(1);
+		site.setModelAction(action);
+
+		return site;
+	}
+
+
+public Contato insertContato(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		Contato contato = new Contato();
+		Date a = new Date();
+contato.setId(100);
+contato.setParentId(100);
+contato.setDataContato(a.getTime());
+contato.setNome("nome");
+contato.setMotivoValue(100);
+contato.setContatoItensList(new ArrayList<ContatoItens>());
+		contato.setParentId(id);
+		contato.setEmprId(1);
+		contato.setModifyDateUTC(a.getTime());
+		contato.setCreateDateUTC(a.getTime());
+		contato.setCreateUser("system");
+		contato.setModifyUser("system");
+		contato.setProcessId(1);
+		contato.setModelAction(action);
+
+		return contato;
+	}
+
+
+public ContatoItens insertContatoItens(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		ContatoItens contatoitens = new ContatoItens();
+		Date a = new Date();
+contatoitens.setId(100);
+contatoitens.setDataAlt(a.getTime());
+contatoitens.setTexto("texto");
+contatoitens.setTitulo("titulo");
+		contatoitens.setParentId(id);
+		contatoitens.setEmprId(1);
+		contatoitens.setModifyDateUTC(a.getTime());
+		contatoitens.setCreateDateUTC(a.getTime());
+		contatoitens.setCreateUser("system");
+		contatoitens.setModifyUser("system");
+		contatoitens.setProcessId(1);
+		contatoitens.setModelAction(action);
+
+		return contatoitens;
+	}
+
+
+public OrdemServico insertOrdemServico(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		OrdemServico ordemservico = new OrdemServico();
+		Date a = new Date();
+ordemservico.setId(100);
+ordemservico.setEmprId(100);
+ordemservico.setUserId("100");
+ordemservico.setNome("nome");
+ordemservico.setData(a.getTime());
+ordemservico.setAssunto("assunto");
+ordemservico.setStatusValue(100);
+ordemservico.setOrdemServicoItensList(new ArrayList<OrdemServicoItens>());
+		ordemservico.setParentId(id);
+		ordemservico.setEmprId(1);
+		ordemservico.setModifyDateUTC(a.getTime());
+		ordemservico.setCreateDateUTC(a.getTime());
+		ordemservico.setCreateUser("system");
+		ordemservico.setModifyUser("system");
+		ordemservico.setProcessId(1);
+		ordemservico.setModelAction(action);
+
+		return ordemservico;
+	}
+
+
+public OrdemServicoItens insertOrdemServicoItens(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		OrdemServicoItens ordemservicoitens = new OrdemServicoItens();
+		Date a = new Date();
+ordemservicoitens.setId(100);
+ordemservicoitens.setData(a.getTime());
+ordemservicoitens.setTexto("texto");
+ordemservicoitens.setParentId(100);
+		ordemservicoitens.setParentId(id);
+		ordemservicoitens.setEmprId(1);
+		ordemservicoitens.setModifyDateUTC(a.getTime());
+		ordemservicoitens.setCreateDateUTC(a.getTime());
+		ordemservicoitens.setCreateUser("system");
+		ordemservicoitens.setModifyUser("system");
+		ordemservicoitens.setProcessId(1);
+		ordemservicoitens.setModelAction(action);
+
+		return ordemservicoitens;
+	}
+
+
+public Plano insertPlano(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		Plano plano = new Plano();
+		Date a = new Date();
+plano.setId(100);
+plano.setDataInicio(a.getTime());
+plano.setDataFinal(a.getTime());
+plano.setNumeroContrato(100);
+plano.setDescricao("descricao");
+plano.setTitulo("titulo");
+plano.setPrecoList(new ArrayList<Preco>());
+plano.setServicoList(new ArrayList<PlanoByServico>());
+		plano.setParentId(id);
+		plano.setEmprId(1);
+		plano.setModifyDateUTC(a.getTime());
+		plano.setCreateDateUTC(a.getTime());
+		plano.setCreateUser("system");
+		plano.setModifyUser("system");
+		plano.setProcessId(1);
+		plano.setModelAction(action);
+
+		return plano;
+	}
 
 
 }

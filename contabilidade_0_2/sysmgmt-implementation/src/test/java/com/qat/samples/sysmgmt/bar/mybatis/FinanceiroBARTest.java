@@ -2,6 +2,7 @@
 package com.qat.samples.sysmgmt.bar.mybatis;
 
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -17,6 +18,7 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.banco.model.Banco;
@@ -34,6 +36,7 @@ import com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteInquiryRequ
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.FormaPgInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 
 @ContextConfiguration(locations = {
@@ -686,6 +689,133 @@ public IFinanceiroBAR getFinanceiroBAR()
 		executeSqlScript("conf/insertBanco.sql", false);
 		executeSqlScript("conf/insertContaCorrente.sql", false);
 		executeSqlScript("conf/insertCaixa.sql", false);
+	}
+
+	public ContasPagar insertContasPagar(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		ContasPagar contaspagar = new ContasPagar();
+		Date a = new Date();
+		contaspagar.setId(100);
+		contaspagar.setParentId(id);
+		contaspagar.setEmprId(1);
+		contaspagar.setModifyDateUTC(a.getTime());
+		contaspagar.setCreateDateUTC(a.getTime());
+		contaspagar.setCreateUser("system");
+		contaspagar.setModifyUser("system");
+		contaspagar.setProcessId(1);
+		contaspagar.setModelAction(action);
+
+		return contaspagar;
+	}
+
+
+public ContasReceber insertContasReceber(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		ContasReceber contasreceber = new ContasReceber();
+		Date a = new Date();
+		contasreceber.setId(100);
+		contasreceber.setParentId(id);
+		contasreceber.setEmprId(1);
+		contasreceber.setModifyDateUTC(a.getTime());
+		contasreceber.setCreateDateUTC(a.getTime());
+		contasreceber.setCreateUser("system");
+		contasreceber.setModifyUser("system");
+		contasreceber.setProcessId(1);
+		contasreceber.setModelAction(action);
+
+		return contasreceber;
+	}
+
+
+public CondPag insertCondPag(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		CondPag condpag = new CondPag();
+		Date a = new Date();
+		condpag.setId(100);
+		condpag.setParentId(id);
+		condpag.setEmprId(1);
+		condpag.setModifyDateUTC(a.getTime());
+		condpag.setCreateDateUTC(a.getTime());
+		condpag.setCreateUser("system");
+		condpag.setModifyUser("system");
+		condpag.setProcessId(1);
+		condpag.setModelAction(action);
+
+		return condpag;
+	}
+
+
+public FormaPg insertFormaPg(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		FormaPg formapg = new FormaPg();
+		Date a = new Date();
+		formapg.setId(100);
+		formapg.setParentId(id);
+		formapg.setEmprId(1);
+		formapg.setModifyDateUTC(a.getTime());
+		formapg.setCreateDateUTC(a.getTime());
+		formapg.setCreateUser("system");
+		formapg.setModifyUser("system");
+		formapg.setProcessId(1);
+		formapg.setModelAction(action);
+
+		return formapg;
+	}
+
+
+public Banco insertBanco(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		Banco banco = new Banco();
+		Date a = new Date();
+		banco.setId(100);
+		banco.setParentId(id);
+		banco.setEmprId(1);
+		banco.setModifyDateUTC(a.getTime());
+		banco.setCreateDateUTC(a.getTime());
+		banco.setCreateUser("system");
+		banco.setModifyUser("system");
+		banco.setProcessId(1);
+		banco.setModelAction(action);
+
+		return banco;
+	}
+
+
+public ContaCorrente insertContaCorrente(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		ContaCorrente contacorrente = new ContaCorrente();
+		Date a = new Date();
+		contacorrente.setId(100);
+		contacorrente.setSaldo(new Double(1.99));
+		contacorrente.setNumeroConta("descricao");
+		contacorrente.setParentId(id);
+		contacorrente.setEmprId(1);
+		contacorrente.setModifyDateUTC(a.getTime());
+		contacorrente.setCreateDateUTC(a.getTime());
+		contacorrente.setCreateUser("system");
+		contacorrente.setModifyUser("system");
+		contacorrente.setProcessId(1);
+		contacorrente.setModelAction(action);
+
+		return contacorrente;
+	}
+
+
+public Caixa insertCaixa(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		Caixa caixa = new Caixa();
+		Date a = new Date();
+		caixa.setId(100);
+		caixa.setParentId(id);
+		caixa.setEmprId(1);
+		caixa.setModifyDateUTC(a.getTime());
+		caixa.setCreateDateUTC(a.getTime());
+		caixa.setCreateUser("system");
+		caixa.setModifyUser("system");
+		caixa.setProcessId(1);
+		caixa.setModelAction(action);
+
+		return caixa;
 	}
 
 }
