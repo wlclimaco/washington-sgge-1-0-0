@@ -15,6 +15,7 @@ public class ContaCorrente extends ModelCosmeDamiao
 
 	private Banco banco;
 
+
 	/** The type of an account. */
 	private String numeroConta;
 
