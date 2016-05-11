@@ -30,7 +30,7 @@ for(i=0;i < oField.length;i++){
 	}
 
 }
-text = text + '<result property="emprId" column="parentId"/>\n';
+text = text + '<result property="emprId" column="emprId"/>\n';
 text = text + '<result property="processId" column="processId"/>\n';
 text = text + '<result property="createUser" column="create_user"/>\n';
 text = text + '<result property="createDateUTC" column="create_date"/>\n';
