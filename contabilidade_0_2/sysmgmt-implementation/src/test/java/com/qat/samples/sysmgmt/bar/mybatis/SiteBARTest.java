@@ -717,13 +717,13 @@ servico.setPreco(new ArrayList<Preco>());
 	}
 
 
-public ServicoByPlano insertServicoByPlano(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+public PlanoByServico insertServicoByPlano(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 	{
-		ServicoByPlano servicobyplano = new ServicoByPlano();
+	PlanoByServico servicobyplano = new PlanoByServico();
 		Date a = new Date();
 servicobyplano.setId(100);
 servicobyplano.setParentId(100);
-servicobyplano.setServico(new ArrayList<Servico>());
+servicobyplano.setServico(insertServico(id, tabela, action));
 		servicobyplano.setParentId(id);
 		servicobyplano.setEmprId(1);
 		servicobyplano.setModifyDateUTC(a.getTime());

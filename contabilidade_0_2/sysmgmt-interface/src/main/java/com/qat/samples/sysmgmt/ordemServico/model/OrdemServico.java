@@ -60,91 +60,46 @@ public class OrdemServico extends ModelCosmeDamiao
 		setModifyUser("system");
 	}
 
-	/**
-	 * Gets the id.
-	 *
-	 * @return the id
-	 */
-	public Integer getId()
-	{
+
+	public Integer getId() {
 		return id;
 	}
 
-	/**
-	 * Sets the id.
-	 *
-	 * @param id the id to set
-	 */
-	public void setId(Integer id)
-	{
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the nome
-	 */
-	public String getNome()
-	{
+	public String getNome() {
 		return nome;
 	}
 
-	/**
-	 * @param nome the nome to set
-	 */
-	public void setNome(String nome)
-	{
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	/**
-	 * @return the data
-	 */
-	public Long getData()
-	{
+	public Long getData() {
 		return data;
 	}
 
-	/**
-	 * @param data the data to set
-	 */
-	public void setData(Long data)
-	{
+	public void setData(Long data) {
 		this.data = data;
 	}
 
-	/**
-	 * @return the assunto
-	 */
-	public String getAssunto()
-	{
+	public String getAssunto() {
 		return assunto;
 	}
 
-	/**
-	 * @param assunto the assunto to set
-	 */
-	public void setAssunto(String assunto)
-	{
+	public void setAssunto(String assunto) {
 		this.assunto = assunto;
 	}
 
-	/**
-	 * @return the ordemStatusList
-	 */
-	public List<OrdemServicoItens> getOrdemStatusList()
-	{
+	public List<OrdemServicoItens> getOrdemServicoItensList() {
 		return ordemServicoItensList;
 	}
 
-	/**
-	 * @param ordemStatusList the ordemStatusList to set
-	 */
-	public void setOrdemStatusList(List<OrdemServicoItens> ordemStatusList)
-	{
-		this.ordemServicoItensList = ordemStatusList;
+	public void setOrdemServicoItensList(List<OrdemServicoItens> ordemServicoItensList) {
+		this.ordemServicoItensList = ordemServicoItensList;
 	}
-
-
 
 	public OrdemServicoTypeEnum getStatus() {
 		return status;
@@ -159,7 +114,7 @@ public class OrdemServico extends ModelCosmeDamiao
 	{
 		return "OrdemServico [getId()=" + getId() + ", getNome()=" + getNome() + ", getData()=" + getData()
 				+ ", getAssunto()=" + getAssunto() + ", getOrdemStatusList()="
-				+ getOrdemStatusList() + ", getStatus()=" + getStatus() + ", toString()=" + super.toString() + "]";
+				+ getOrdemServicoItensList() + ", getStatus()=" + getStatus() + ", toString()=" + super.toString() + "]";
 	}
 
 }
