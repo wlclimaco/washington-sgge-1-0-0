@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 12/05/2016 11:41 : 33-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ContasPagarMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="ContasPagarResult" type="ContasPagar">
+    <result property="id" column="id"/>
+    <result property="dataBaixa" column="dataBaixa"/>
+    <result property="observacao" column="observacao"/>
+    <result property="Valor" column="Valor"/>
+    <result property="juros" column="juros"/>
+    <result property="multa" column="multa"/>
+    <result property="desconto" column="desconto"/>
+<collection property="tipoBaixaList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+    <result property="fornecedor" column="fornecedor"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
+
+  <sql id="allContasPagarColumns">
+,dataBaixa
+,observacao
+,Valor
+,juros
+,multa
+,desconto
+,fornecedor
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allContasPagarValues">
+#{dataBaixa},
+#{observacao},
+#{Valor},
+#{juros},
+#{multa},
+#{desconto},
+#{fornecedor},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllContasPagars" resultMap="ContasPagarResult">
+    SELECT id,
+	<include refid="allContasPagarColumns" />
+   FROM contaspagar ORDER BY id ASC
+ </select>
+
+ <select id="fetchContasPagarById" parameterType="Integer" resultMap="ContasPagarResult">
+    SELECT id,
+	<include refid="allContasPagarColumns" />
+   FROM contaspagar WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllContasPagarsRequest" parameterType="ContasPagarInquiryRequest" resultMap="ContasPagarResult">
+
+		SELECT id,<include refid="allContasPagarColumns" />
+  		  FROM contaspagar where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+</select>
+
+<select id="fetchContasPagarRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM contaspagar WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+
+ </select>
+
+ <insert id="insertContasPagar" parameterType="ContasPagar" useGeneratedKeys="true" keyProperty="id">
+ 	INSERT INTO contaspagar (
+	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allContasPagarColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allContasPagarValues" /> )
+ </insert>
+
+ <update id="updateContasPagar" parameterType="ContasPagar">
+   UPDATE contaspagar SET
+<if test="dataBaixa!= null">dataBaixa = #{dataBaixa},</if>
+<if test="observacao!= null">observacao = #{observacao},</if>
+<if test="Valor!= null">Valor = #{Valor},</if>
+<if test="juros!= null">juros = #{juros},</if>
+<if test="multa!= null">multa = #{multa},</if>
+<if test="desconto!= null">desconto = #{desconto},</if>
+<if test="fornecedor!= null">fornecedor = #{fornecedor},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteContasPagarById" parameterType="ContasPagar">
+  DELETE FROM contaspagar WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllContasPagars">
+	DELETE FROM contaspagar
+  </delete>
+</mapper>
+
+

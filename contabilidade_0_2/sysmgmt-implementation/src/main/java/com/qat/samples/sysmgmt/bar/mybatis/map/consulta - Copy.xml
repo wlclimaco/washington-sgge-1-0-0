@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ConsultaMap">
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+
+  	<!--
+
+  	-->
+	  <resultMap id="consultaResult" type="Consulta" >
+		<result property="id" column="id" />
+		<result property="dataConsulta" column="dataConsulta" />
+		<result property="valor" column="valor" />
+		<result property="dataMarcacao" column="dataMarcacao" />
+	   	<result property="createUser" column="create_user"/>
+		<result property="createDataUTC" column="create_date"/>
+		<result property="modifyUser" column="modify_user"/>
+		<result property="modifyDataUTC" column="modify_date"/>
+      	<association property="medico"    column="medico" select="MedicoMap.fetchMedicoById"  />
+      	<association property="paciente"  column="paciente" select="PacienteMap.fetchMedicoById"  />
+      	<association property="planoSaude"  column="planoSaude" select="PlanoSaudeMap.fetchPlanoSaudeByConsulta"  />
+      	<collection property="exameList" column="id" select="ExameMap.fetchAllExameByConsulta"/>
+      </resultMap>
+
+  <!--
+		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
+	-->
+  <sql id="allConsultaColumns">
+		dataConsulta,
+		valor,
+		dataMarcacao,
+		medico,
+		paciente,
+		planoSaude,
+      	create_date,
+      	create_user,
+      	modify_date,
+      	modify_user
+  </sql>
+
+  <sql id="allConsultaValues">
+  		#{dataConsulta},
+		#{valor},
+		#{dataMarcacao},
+		#{medico.id},
+		#{paciente.id},
+		#{planoSaude.id},
+    	<include refid="CBOFMap.changeControlFields"/>
+  </sql>
+
+
+  <!--
+		SQL Insert Statements.
+ 	-->
+  <insert id="insertConsulta" parameterType="Consulta" useGeneratedKeys="true" keyProperty="id">
+  	INSERT INTO consulta (
+		<include refid="allConsultaColumns" />
+      )
+    VALUES (<include refid="allConsultaValues" /> )
+  </insert>
+
+	<!--
+		SQL Update Statements.
+ 	-->
+
+  <update id="updateConsulta" parameterType="Consulta">
+    UPDATE consulta
+    	<set>
+    		<if test="dataConsulta!= null">dataConsulta = #{dataConsulta},</if>
+    		<if test="valor!= null">valor = #{valor},</if>
+    		<if test="dataMarcacao!= null">dataMarcacao = #{dataMarcacao},</if>
+    		<if test="medico.id!= null">medico = #{medico.id},</if>
+    		<if test="paciente.id!= null">paciente = #{paciente.id},</if>
+    		<if test="planoSaude.id!= null">planoSaude = #{planoSaude.id},</if>
+			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
+			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		</set>
+    WHERE
+     id = #{id}
+  </update>
+
+   <!--
+		SQL Delete Statements.
+   -->
+  <delete id="deleteConsultaById" parameterType="Integer">
+    	DELETE FROM consulta WHERE id = #{id}
+  </delete>
+
+	<!--
+		SQL Fetch Statements.
+ 	-->
+  <select id="fetchConsultaRowCount" parameterType="ConsultaInquiryRequest" resultType="Integer">
+     SELECT COUNT(id) AS RECORD_COUNT
+        FROM consulta
+     WHERE 1=1
+     <if test="criteria.id != null">
+		  AND id = #{criteria.id}
+	 </if>
+  </select>
+
+  <select id="fetchAllConsultas" resultMap="consultaResult">
+    SELECT id
+	<include refid="allConsultaColumns" />
+    FROM consulta b ORDER BY id ASC
+  </select>
+
+  <select id="fetchConsultaById" parameterType="FetchByIdRequest" resultMap="consultaResult">
+	SELECT
+		<include refid="allConsultaColumns" />
+        FROM consulta b
+     WHERE 1=1
+
+  </select>
+
+
+  <select id="fetchAllConsultasByRequest" parameterType="ConsultaInquiryRequest" resultMap="consultaResult">
+	   SELECT * FROM
+    			(
+    				SELECT
+    						<include refid="allConsultaColumns" />,
+    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
+    				FROM consulta b
+					WHERE 2 = 2
+					<if test="criteria.id != null">
+						AND id = #{criteria.id}
+					</if>
+    			) LIST
+				<choose>
+					<when test="pageSize != null and pageSize > 0">
+					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
+					        LOWER: startRow + 1 and
+					        UPPER: startRow + pageSize -->
+					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
+					</when>
+					<otherwise>
+					 	WHERE RowNumber BETWEEN 1 AND RowNumber
+					 	ORDER BY RowNumber
+					</otherwise>
+				</choose>
+  </select>
+
+   <select id="fetchAllConsultaByMedico" parameterType="Integer" resultMap="consultaResult">
+	SELECT
+		<include refid="allConsultaColumns" />
+        FROM consulta b
+     WHERE 1=1 and medico = #{id}
+
+  </select>
+
+
+
+</mapper>

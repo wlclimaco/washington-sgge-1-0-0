@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 12/05/2016 11:41 : 33-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TipoBaixaMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="TipoBaixaResult" type="TipoBaixa">
+    <result property="id" column="id"/>
+    <result property="nome" column="nome"/>
+<collection property="descricao" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
+
+  <sql id="allTipoBaixaColumns">
+,nome
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allTipoBaixaValues">
+#{nome},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllTipoBaixas" resultMap="TipoBaixaResult">
+    SELECT id,
+	<include refid="allTipoBaixaColumns" />
+   FROM tipobaixa ORDER BY id ASC
+ </select>
+
+ <select id="fetchTipoBaixaById" parameterType="Integer" resultMap="TipoBaixaResult">
+    SELECT id,
+	<include refid="allTipoBaixaColumns" />
+   FROM tipobaixa WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllTipoBaixasRequest" parameterType="TipoBaixaInquiryRequest" resultMap="TipoBaixaResult">
+
+		SELECT id,<include refid="allTipoBaixaColumns" />
+  		  FROM tipobaixa where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+</select>
+
+<select id="fetchTipoBaixaRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM tipobaixa WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+
+ </select>
+
+ <insert id="insertTipoBaixa" parameterType="TipoBaixa" useGeneratedKeys="true" keyProperty="id">
+ 	INSERT INTO tipobaixa (
+	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allTipoBaixaColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allTipoBaixaValues" /> )
+ </insert>
+
+ <update id="updateTipoBaixa" parameterType="TipoBaixa">
+   UPDATE tipobaixa SET
+<if test="nome!= null">nome = #{nome},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteTipoBaixaById" parameterType="TipoBaixa">
+  DELETE FROM tipobaixa WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllTipoBaixas">
+	DELETE FROM tipobaixa
+  </delete>
+</mapper>
+
+

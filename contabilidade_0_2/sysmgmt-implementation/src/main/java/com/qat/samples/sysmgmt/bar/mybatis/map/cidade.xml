@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- create by system gera-java version 1.0.0 30/04/2016 13:0 : 39-->
+
+<!-- create by system gera-java version 1.0.0 10/05/2016 15:3 : 23-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -21,6 +22,8 @@
     <result property="cdIBGE" column="cdIBGE"/>
     <result property="cep" column="cep"/>
     <result property="municipio" column="municipio"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
@@ -29,13 +32,14 @@
   </resultMap>
 
   <sql id="allCidadeColumns">
-id
 ,codigo
 ,nome
 ,cdIBGE
 ,cep
 ,municipio
 ,estado
+,emprId
+,processId
 ,create_date
 ,create_user
 ,modify_date
@@ -43,75 +47,61 @@ id
 
 </sql>
 <sql id="allCidadeValues">
-#{id},
 #{codigo},
 #{nome},
 #{cdIBGE},
 #{cep},
 #{municipio},
-#{estado.id},
+#{estado},
+		#{emprId},
+		#{processId},
 		#{createDateUTC},
 		#{createUser},
 		#{modifyDateUTC},
 		#{modifyUser}
   </sql>
 
- <sql id="allCidadeColumnsWithQualifier">
-		c.id, c.cidade_desc
-c.id,
-c.codigo,
-c.nome,
-c.cdIBGE,
-c.cep,
-c.municipio,
-c.estado,
-		c.createDateUTC,
-		c.createUser,
-		c.modifyDateUTC,
-		c.modifyUser
- </sql>
 
  <select id="fetchAllCidades" resultMap="CidadeResult">
-    SELECT
+    SELECT id,
 	<include refid="allCidadeColumns" />
    FROM cidade ORDER BY id ASC
  </select>
 
  <select id="fetchCidadeById" parameterType="Integer" resultMap="CidadeResult">
-    SELECT
+    SELECT id,
 	<include refid="allCidadeColumns" />
    FROM cidade WHERE id = #{fetchid}
  </select>
 
  <select id="fetchAllCidadesRequest" parameterType="CidadeInquiryRequest" resultMap="CidadeResult">
 
-		SELECT <include refid="allCidadeColumns" />
-  		  FROM cidade ORDER BY id ASC
+		SELECT id,<include refid="allCidadeColumns" />
+  		  FROM cidade where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchCidadeRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM cidade WHERE id IS NOT NULL
+		SELECT COUNT(*) AS RECORD_COUNT FROM cidade WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
 
  </select>
 
- <insert id="insertCidade" parameterType="Cidade">
+ <insert id="insertCidade" parameterType="Cidade" useGeneratedKeys="true" keyProperty="id">
  	INSERT INTO cidade (
-	<include refid="allCidadeColumns" />
+	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allCidadeColumns" />
      )
-   VALUES (<include refid="allCidadeValues" /> )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allCidadeValues" /> )
  </insert>
 
  <update id="updateCidade" parameterType="Cidade">
    UPDATE cidade SET
-<if test="id!= null">id = #{id},</if>
 <if test="codigo!= null">codigo = #{codigo},</if>
 <if test="nome!= null">nome = #{nome},</if>
 <if test="cdIBGE!= null">cdIBGE = #{cdIBGE},</if>
 <if test="cep!= null">cep = #{cep},</if>
 <if test="municipio!= null">municipio = #{municipio},</if>
-<if test="estado.id!= null">estado = #{estado.id},</if>
+<if test="estado!= null">estado = #{estado},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

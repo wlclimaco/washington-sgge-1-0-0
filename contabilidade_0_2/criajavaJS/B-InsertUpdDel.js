@@ -5,8 +5,10 @@ b_InsertSemID = function (table,oField,total){
 		for(var x=0;x < total;x++){
 			for(i=0;i < oField.length;i++){
 				if(oField[i].field.xml == true){
-					if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.tipo.indexOf('id'))){
-						a = a + ' '+oField[i].field.campo+',';
+					if(oField[i].field.tipo !== undefined){
+						if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.tipo.indexOf('id'))){
+							a = a + ' '+oField[i].field.campo+',';
+						}
 					}
 				}
 
@@ -18,17 +20,19 @@ b_InsertSemID = function (table,oField,total){
 			b = new Date();
 			for(i=0;i < oField.length;i++){
 				if(oField[i].field.xml == true){
-					if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.tipo.indexOf('id'))){
+					if(oField[i].field.tipo !== undefined){
+						if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.tipo.indexOf('id'))){
 
-						if((oField[i].field.campo.toLowerCase().indexOf('data') > -1)||((oField[i].field.campo.toLowerCase().indexOf('date') > -1))){
+							if((oField[i].field.campo.toLowerCase().indexOf('data') > -1)||((oField[i].field.campo.toLowerCase().indexOf('date') > -1))){
 
-							a = a + " "+b.getTime()+",";
-						}else if((oField[i].field.tipo.toLowerCase() !== 'integer')&&(oField[i].field.tipo.toLowerCase() !== 'double')&&(oField[i].field.tipo.toLowerCase() !== 'long')&&(oField[i].field.tipo.toLowerCase() !== 'boolean')){
-							a = a + " '"+oField[i].field.campo+"_"+i+"',";
-						}else if(oField[i].field.tipo.toLowerCase() === 'boolean'){
-							a = a + 'true,'
-						}else{
-							a = a + ' '+(x+1)+',';
+								a = a + " "+b.getTime()+",";
+							}else if((oField[i].field.tipo.toLowerCase() !== 'integer')&&(oField[i].field.tipo.toLowerCase() !== 'double')&&(oField[i].field.tipo.toLowerCase() !== 'long')&&(oField[i].field.tipo.toLowerCase() !== 'boolean')){
+								a = a + " '"+oField[i].field.campo+"_"+i+"',";
+							}else if(oField[i].field.tipo.toLowerCase() === 'boolean'){
+								a = a + 'true,'
+							}else{
+								a = a + ' '+(x+1)+',';
+							}
 						}
 					}
 				}
@@ -53,8 +57,10 @@ b_Insert = function (table,oField,total){
 		for(var x=0;x < total;x++){
 			for(i=0;i < oField.length;i++){
 				if(oField[i].field.xml == true){
-					if(oField[i].field.tipo.indexOf('List') == -1){
-						a = a + ' '+oField[i].field.campo+',';
+					if(oField[i].field.tipo !== undefined){
+						if(oField[i].field.tipo.indexOf('List') == -1){
+							a = a + ' '+oField[i].field.campo+',';
+						}
 					}
 				}
 
@@ -66,17 +72,19 @@ b_Insert = function (table,oField,total){
 			b = new Date();
 			for(i=0;i < oField.length;i++){
 				if(oField[i].field.xml == true){
-					if(oField[i].field.tipo.indexOf('List') == -1){
+					if(oField[i].field.tipo !== undefined){
+						if(oField[i].field.tipo.indexOf('List') == -1){
 
-						if((oField[i].field.campo.toLowerCase().indexOf('data') > -1)||((oField[i].field.campo.toLowerCase().indexOf('date') > -1))){
+							if((oField[i].field.campo.toLowerCase().indexOf('data') > -1)||((oField[i].field.campo.toLowerCase().indexOf('date') > -1))){
 
-							a = a + " "+b.getTime()+",";
-						}else if((oField[i].field.tipo.toLowerCase() !== 'integer')&&(oField[i].field.tipo.toLowerCase() !== 'double')&&(oField[i].field.tipo.toLowerCase() !== 'long')&&(oField[i].field.tipo.toLowerCase() !== 'boolean')){
-							a = a + " '"+oField[i].field.campo+"_"+i+"',";
-						}else if(oField[i].field.tipo.toLowerCase() === 'boolean'){
-							a = a + 'true,'
-						}else{
-							a = a + ' '+(x+1)+',';
+								a = a + " "+b.getTime()+",";
+							}else if((oField[i].field.tipo.toLowerCase() !== 'integer')&&(oField[i].field.tipo.toLowerCase() !== 'double')&&(oField[i].field.tipo.toLowerCase() !== 'long')&&(oField[i].field.tipo.toLowerCase() !== 'boolean')){
+								a = a + " '"+oField[i].field.campo+"_"+i+"',";
+							}else if(oField[i].field.tipo.toLowerCase() === 'boolean'){
+								a = a + 'true,'
+							}else{
+								a = a + ' '+(x+1)+',';
+							}
 						}
 					}
 				}
@@ -99,12 +107,14 @@ b_Table = function (table,oField){
 var a = "";
 for(i=0;i < oField.length;i++){
 	if(oField[i].field.xml == true){
-		if(oField[i].field.tipo.indexOf('List') == -1){
-			if(oField[i].field.campo.toLowerCase() !== 'id'){
-				if(oField[i].field.requerid == true){
-					a = a + oField[i].field.campo+' '+convertBanco(oField[i].field.tipo,100)+' NOT NULL,\n'
-				}else{
-					a = a + oField[i].field.campo+' '+convertBanco(oField[i].field.tipo,100)+' ,\n';
+		if(oField[i].field.tipo !== undefined){
+			if(oField[i].field.tipo.indexOf('List') == -1){
+				if(oField[i].field.campo.toLowerCase() !== 'id'){
+					if(oField[i].field.requerid == true){
+						a = a + oField[i].field.campo+' '+convertBanco(oField[i].field.tipo,100)+' NOT NULL,\n'
+					}else{
+						a = a + oField[i].field.campo+' '+convertBanco(oField[i].field.tipo,100)+' ,\n';
+					}
 				}
 			}
 		}

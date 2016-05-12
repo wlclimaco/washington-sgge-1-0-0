@@ -22,10 +22,12 @@ text = text + '       exactly. -->\n';
 text = text + '  <resultMap id="'+name+'Result" type="'+name+'">\n';
 for(i=0;i < oField.length;i++){
 	if(oField[i].field.xml == true){
-		if(oField[i].field.tipo.indexOf('List') > -1){
-			text = text + '<collection property="'+oField[i].field.campo+'" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>\n';
-		}else{
-			text = text + '    <result property="'+oField[i].field.campo+'" column="'+oField[i].field.campo+'"/>\n';
+		if(oField[i].field.tipo !== undefined){
+			if(oField[i].field.tipo.indexOf('List') > -1){
+				text = text + '<collection property="'+oField[i].field.campo+'" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>\n';
+			}else{
+				text = text + '    <result property="'+oField[i].field.campo+'" column="'+oField[i].field.campo+'"/>\n';
+			}
 		}
 	}
 
@@ -43,11 +45,13 @@ text = text + '  <sql id="all'+name+'Columns">\n';
 
 for(i=0;i < oField.length;i++){
 	if(oField[i].field.xml == true){
-		if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.campo !== 'id')){
-			if(i == 0)
-				text = text + ''+oField[i].field.campo+'\n';
-			else
-				text = text + ','+oField[i].field.campo+'\n';
+		if(oField[i].field.tipo !== undefined){
+			if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.campo !== 'id')){
+				if(i == 0)
+					text = text + ''+oField[i].field.campo+'\n';
+				else
+					text = text + ','+oField[i].field.campo+'\n';
+			}
 		}
 	}
 
@@ -63,8 +67,10 @@ text = text + '</sql>\n';
 text = text + '<sql id="all'+name+'Values">\n';
 for(i=0;i < oField.length;i++){
 	if(oField[i].field.xml == true){
-		if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.campo !== 'id')){
-			text = text + '#{'+oField[i].field.campo+'},\n';
+		if(oField[i].field.tipo !== undefined){
+			if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.campo !== 'id')){
+				text = text + '#{'+oField[i].field.campo+'},\n';
+			}
 		}
 	}
 }
@@ -116,8 +122,10 @@ text = text + '\n';
 
  for(i=0;i < oField.length;i++){
 	if(oField[i].field.xml == true){
-		if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.campo !== 'id')){
-			text = text + '<if test="'+oField[i].field.campo+'!= null">'+oField[i].field.campo+' = #{'+oField[i].field.campo+'},</if>\n';
+		if(oField[i].field.tipo !== undefined){
+			if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.campo !== 'id')){
+				text = text + '<if test="'+oField[i].field.campo+'!= null">'+oField[i].field.campo+' = #{'+oField[i].field.campo+'},</if>\n';
+			}
 		}
 	}
 }

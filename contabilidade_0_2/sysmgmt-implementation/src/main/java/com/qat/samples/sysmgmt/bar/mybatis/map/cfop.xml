@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 01/05/2016 16:19 : 49-->
+<!-- create by system gera-java version 1.0.0 10/05/2016 15:25 : 22-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -20,13 +20,15 @@
     <result property="cfop" column="cfop"/>
     <result property="natureza" column="natureza"/>
     <result property="simplificado" column="simplificado"/>
-    <result property="cfopTypeEnumValue" column="cfopTypeEnum"/>
+    <result property="cfopTypeEnum" column="cfopTypeEnum"/>
     <result property="icms" column="icms"/>
     <result property="icmsReduzido" column="icmsReduzido"/>
     <result property="margemAgregadaST" column="margemAgregadaST"/>
     <result property="cstPrincipal" column="cstPrincipal"/>
     <result property="classFiscal" column="classFiscal"/>
     <result property="observacao" column="observacao"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
@@ -34,7 +36,6 @@
   </resultMap>
 
   <sql id="allCfopColumns">
-id
 ,cfop
 ,natureza
 ,simplificado
@@ -45,6 +46,8 @@ id
 ,cstPrincipal
 ,classFiscal
 ,observacao
+,emprId
+,processId
 ,create_date
 ,create_user
 ,modify_date
@@ -52,72 +55,55 @@ id
 
 </sql>
 <sql id="allCfopValues">
-#{id},
 #{cfop},
 #{natureza},
 #{simplificado},
-#{cfopTypeEnumValue},
+#{cfopTypeEnum},
 #{icms},
 #{icmsReduzido},
 #{margemAgregadaST},
 #{cstPrincipal},
 #{classFiscal},
 #{observacao},
+		#{emprId},
+		#{processId},
 		#{createDateUTC},
 		#{createUser},
 		#{modifyDateUTC},
 		#{modifyUser}
   </sql>
 
- <sql id="allCfopColumnsWithQualifier">
-		c.id, c.cfop_desc
-c.id,
-c.cfop,
-c.natureza,
-c.simplificado,
-c.cfopTypeEnum,
-c.icms,
-c.icmsReduzido,
-c.margemAgregadaST,
-c.cstPrincipal,
-c.classFiscal,
-c.observacao,
-		c.createDateUTC,
-		c.createUser,
-		c.modifyDateUTC,
-		c.modifyUser
- </sql>
 
  <select id="fetchAllCfops" resultMap="CfopResult">
-    SELECT
+    SELECT id,
 	<include refid="allCfopColumns" />
    FROM cfop ORDER BY id ASC
  </select>
 
  <select id="fetchCfopById" parameterType="Integer" resultMap="CfopResult">
-    SELECT
+    SELECT id,
 	<include refid="allCfopColumns" />
    FROM cfop WHERE id = #{fetchid}
  </select>
 
  <select id="fetchAllCfopsRequest" parameterType="CfopInquiryRequest" resultMap="CfopResult">
 
-		SELECT <include refid="allCfopColumns" />
-  		  FROM cfop ORDER BY id ASC
+		SELECT id,<include refid="allCfopColumns" />
+  		  FROM cfop where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchCfopRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM cfop WHERE id IS NOT NULL
+		SELECT COUNT(*) AS RECORD_COUNT FROM cfop WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
 
  </select>
 
- <insert id="insertCfop" parameterType="Cfop">
+ <insert id="insertCfop" parameterType="Cfop" useGeneratedKeys="true" keyProperty="id">
  	INSERT INTO cfop (
-	<include refid="allCfopColumns" />
+	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allCfopColumns" />
      )
-   VALUES (<include refid="allCfopValues" /> )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allCfopValues" /> )
  </insert>
 
  <update id="updateCfop" parameterType="Cfop">
@@ -125,7 +111,7 @@ c.observacao,
 <if test="cfop!= null">cfop = #{cfop},</if>
 <if test="natureza!= null">natureza = #{natureza},</if>
 <if test="simplificado!= null">simplificado = #{simplificado},</if>
-<if test="cfopTypeEnumValue!= null">cfopTypeEnum = #{cfopTypeEnumValue},</if>
+<if test="cfopTypeEnum!= null">cfopTypeEnum = #{cfopTypeEnum},</if>
 <if test="icms!= null">icms = #{icms},</if>
 <if test="icmsReduzido!= null">icmsReduzido = #{icmsReduzido},</if>
 <if test="margemAgregadaST!= null">margemAgregadaST = #{margemAgregadaST},</if>

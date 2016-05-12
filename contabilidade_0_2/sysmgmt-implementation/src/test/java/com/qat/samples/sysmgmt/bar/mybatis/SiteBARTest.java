@@ -164,7 +164,7 @@ public ISiteBAR getSiteBAR()
 @Test
 	public void testDeleteSite()
 	{
-		Site site = new Site(4, "Site_999");
+		Site site = insertServico(4,TabelaEnum.SERVICO,PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		Site siteResponse = getSiteBAR().fetchSiteById(request);
@@ -197,7 +197,7 @@ public ISiteBAR getSiteBAR()
 	@Test
 	public void testUpdateSite()
 	{
-		Site site = new Site(1, "NATIVE INSERT UPDATE");
+		Site site = insertSite(1,TabelaEnum.SITE,PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Site siteResponse = getSiteBAR().fetchSiteById(request);
@@ -252,7 +252,7 @@ public ISiteBAR getSiteBAR()
 @Test
 	public void testDeleteContato()
 	{
-		Contato contato = new Contato(4, "Contato_999");
+		Contato contato = insertContato(4,TabelaEnum.CONTATO,PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		Contato contatoResponse = getSiteBAR().fetchContatoById(request);
@@ -285,7 +285,7 @@ public ISiteBAR getSiteBAR()
 	@Test
 	public void testUpdateContato()
 	{
-		Contato contato = new Contato(1, "NATIVE INSERT UPDATE");
+		Contato contato = insertContato(1,TabelaEnum.CONTATO,PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Contato contatoResponse = getSiteBAR().fetchContatoById(request);
@@ -340,7 +340,7 @@ public ISiteBAR getSiteBAR()
 @Test
 	public void testDeleteContatoItens()
 	{
-		ContatoItens contatoitens = new ContatoItens(4, "ContatoItens_999");
+		ContatoItens contatoitens = insertContatoItens(4,TabelaEnum.CONTATOITENS,PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		ContatoItens contatoitensResponse = getSiteBAR().fetchContatoItensById(request);
@@ -373,7 +373,7 @@ public ISiteBAR getSiteBAR()
 	@Test
 	public void testUpdateContatoItens()
 	{
-		ContatoItens contatoitens = new ContatoItens(1, "NATIVE INSERT UPDATE");
+		ContatoItens contatoitens = insertContatoItens(1,TabelaEnum.CONTATOITENS,PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		ContatoItens contatoitensResponse = getSiteBAR().fetchContatoItensById(request);
@@ -428,7 +428,7 @@ public ISiteBAR getSiteBAR()
 @Test
 	public void testDeleteOrdemServico()
 	{
-		OrdemServico ordemservico = new OrdemServico(4, "OrdemServico_999");
+		OrdemServico ordemservico = insertOrdemServico(4,TabelaEnum.ORDEMSERVICO,PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		OrdemServico ordemservicoResponse = getSiteBAR().fetchOrdemServicoById(request);
@@ -461,7 +461,7 @@ public ISiteBAR getSiteBAR()
 	@Test
 	public void testUpdateOrdemServico()
 	{
-		OrdemServico ordemservico = new OrdemServico(1, "NATIVE INSERT UPDATE");
+		OrdemServico ordemservico = insertOrdemServico(1,TabelaEnum.ORDEMSERVICO,PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		OrdemServico ordemservicoResponse = getSiteBAR().fetchOrdemServicoById(request);
@@ -516,7 +516,7 @@ public ISiteBAR getSiteBAR()
 @Test
 	public void testDeleteOrdemServicoItens()
 	{
-		OrdemServicoItens ordemservicoitens = new OrdemServicoItens(4, "OrdemServicoItens_999");
+		OrdemServicoItens ordemservicoitens = insertOrdemServicoItens(4,TabelaEnum.ORDEMSERVICOITENS,PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		OrdemServicoItens ordemservicoitensResponse = getSiteBAR().fetchOrdemServicoItensById(request);
@@ -549,7 +549,7 @@ public ISiteBAR getSiteBAR()
 	@Test
 	public void testUpdateOrdemServicoItens()
 	{
-		OrdemServicoItens ordemservicoitens = new OrdemServicoItens(100001, "NATIVE INSERT UPDATE");
+		OrdemServicoItens ordemservicoitens = insertOrdemServicoItens(100001,TabelaEnum.ORDEMSERVICOITENS,PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(100001);
 		OrdemServicoItens ordemservicoitensResponse = getSiteBAR().fetchOrdemServicoItensById(request);
@@ -637,7 +637,7 @@ public ISiteBAR getSiteBAR()
 	@Test
 	public void testUpdatePlano()
 	{
-		Plano plano = new Plano(1, "NATIVE INSERT UPDATE");
+		Plano plano = insertPlano(1, TabelaEnum.PLANO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Plano planoResponse = getSiteBAR().fetchPlanoById(request);

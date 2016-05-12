@@ -353,7 +353,7 @@ function UsuarioModel() {
 function ContasPagarModel() {
 
 	var a = [];
-	a = BaixaTituloModel();
+	a = TituloModel();
 	a.push({field :{campo : "fornecedor" , tipo :"Fornecedor",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
@@ -363,7 +363,7 @@ function ContasPagarModel() {
 function ContasReceberModel() {
 
 	var a = [];
-	a = BaixaTituloModel();
+	a = TituloModel();
 	a.push({field :{campo : "cliente" , tipo :"Cliente",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
@@ -623,11 +623,10 @@ function TituloModel() {
 	var a = [];
 		a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 		a.push({field :{campo : "numero", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-		a.push({field :{campo : "fornecedor", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-		a.push({field :{campo : "cliente", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 		a.push({field :{campo : "dataEmissao", tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 		a.push({field :{campo : "dataVencimento", tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 		a.push({field :{campo : "docId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "valor", tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 		a.push({field :{campo : "observacao", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 		a.push({field :{campo : "financeiroEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 		a.push({field :{campo : "listBaixa", tipo :"List<BaixaTitulo>",List : "BaixaTitulo",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -1144,9 +1143,6 @@ function dependenciaSite(){
 	var a = [];
 	a.push({dependencia :"Servico",campos : ServicoModel()});
 	a.push({dependencia :"Plano",campos : PlanoModel()});
-	a.push({dependencia :"Endereco" 	,campos : EnderecoModel()});
-	a.push({dependencia :"Email",		 campos : EmailModel()});
-	a.push({dependencia :"Telefone"		,campos : TelefoneModel()});
 	a.push({dependencia :"Status"		,campos : StatusModel()});
 	a.push({dependencia :"Note"			,campos : NoteModel()});
 	return a
@@ -1169,6 +1165,25 @@ function dependenciaPlano(){
 function dependenciaOrdemServico(){
 	var a = [];
 	a.push({dependencia :"OrdemServicoItens",campos : OrdemServicoItensModel()});
+	return a
+}
+
+function dependenciaTitulo(){
+	var a = [];
+	a.push({dependencia :"BaixaTitulo",campos : BaixaTituloModel()});
+	a.push({dependencia :"TipoTitulo" ,campos : TipoBaixaModel()});
+	return a
+}
+
+function dependenciaContasPagar(){
+	var a = [];
+	a = dependenciaTitulo();
+	return a
+}
+
+function dependenciaContasReceber(){
+	var a = [];
+	a = dependenciaTitulo();
 	return a
 }
 
@@ -1239,7 +1254,7 @@ oProjet.push({
 })
 
 oProjet.push({
-	classes :[{classe : "ContasPagar",model : ContasPagarModel()},{classe : "Titulo",model : TituloModel()},{classe : "BaixaTitulo",model : BaixaTituloModel()},{classe : "TipoBaixa",model : TipoBaixaModel()},{classe :"ContasReceber",model : ContasReceberModel()},{classe :"CondPag",model : CondPagModel()},{classe :"FormaPg",model : FormaPgModel()},{classe :"Banco",model : BancoModel()},{classe :"ContaCorrente",model : ContaCorrenteModel()},{classe :"Caixa",model : CaixaModel()}],
+	classes :[{classe : "ContasPagar",model : ContasPagarModel(),dependencias : dependenciaContasPagar()},{classe : "Titulo",model : TituloModel(),dependencias : dependenciaTitulo()},{classe : "BaixaTitulo",model : BaixaTituloModel()},{classe : "TipoBaixa",model : TipoBaixaModel()},{classe :"ContasReceber",model : ContasReceberModel(),dependencias : dependenciaContasReceber()},{classe :"CondPag",model : CondPagModel()},{classe :"FormaPg",model : FormaPgModel()},{classe :"Banco",model : BancoModel()},{classe :"ContaCorrente",model : ContaCorrenteModel()},{classe :"Caixa",model : CaixaModel()}],
 	interfaces : "Financeiro",
 	local :"Financeiro"
 })

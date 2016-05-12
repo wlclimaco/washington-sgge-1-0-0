@@ -69,7 +69,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteContasPagar()
 	{
-		ContasPagar contaspagar = new ContasPagar(4, "ContasPagar_999");
+		ContasPagar contaspagar = insertContasPagar(4, TabelaEnum.CONTASPAGAR, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		ContasPagar contaspagarResponse = getFinanceiroBAR().fetchContasPagarById(request);
@@ -157,7 +157,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteTitulo()
 	{
-		Titulo titulo = new Titulo(4, "Titulo_999");
+		Titulo titulo = insertTitulo(4, TabelaEnum.TITULO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		Titulo tituloResponse = getFinanceiroBAR().fetchTituloById(request);
@@ -190,7 +190,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 	@Test
 	public void testUpdateTitulo()
 	{
-		Titulo titulo = new Titulo(1, "NATIVE INSERT UPDATE");
+		Titulo titulo = insertTitulo(1, TabelaEnum.TITULO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Titulo tituloResponse = getFinanceiroBAR().fetchTituloById(request);
@@ -245,7 +245,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteBaixatitulo()
 	{
-		Baixatitulo baixatitulo = new Baixatitulo(4, "Baixatitulo_999");
+		Baixatitulo baixatitulo = insertBaixaTitulo(4, TabelaEnum.BAIXATITULO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		Baixatitulo baixatituloResponse = getFinanceiroBAR().fetchBaixatituloById(request);
@@ -278,7 +278,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 	@Test
 	public void testUpdateBaixatitulo()
 	{
-		Baixatitulo baixatitulo = new Baixatitulo(1, "NATIVE INSERT UPDATE");
+		Baixatitulo baixatitulo = insertBaixaTitulo(1, TabelaEnum.BAIXATITULO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Baixatitulo baixatituloResponse = getFinanceiroBAR().fetchBaixatituloById(request);
@@ -333,7 +333,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteTipobaixa()
 	{
-		Tipobaixa tipobaixa = new Tipobaixa(4, "Tipobaixa_999");
+		Tipobaixa tipobaixa = insertTipoBaixa(4, TabelaEnum.TIPOBAIXA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		Tipobaixa tipobaixaResponse = getFinanceiroBAR().fetchTipobaixaById(request);
@@ -366,7 +366,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 	@Test
 	public void testUpdateTipobaixa()
 	{
-		Tipobaixa tipobaixa = new Tipobaixa(1, "NATIVE INSERT UPDATE");
+		Tipobaixa tipobaixa = insertTipoBaixa(1, TabelaEnum.TIPOBAIXA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Tipobaixa tipobaixaResponse = getFinanceiroBAR().fetchTipobaixaById(request);
@@ -419,60 +419,60 @@ public IFinanceiroBAR getFinanceiroBAR()
 
 
 @Test
-	public void testDeleteContasreceber()
+	public void testDeleteContasReceber()
 	{
-		Contasreceber contasreceber = new Contasreceber(4, "Contasreceber_999");
+		ContasReceber contasreceber = insertContasReceber(4, TabelaEnum.CONTASRECEBER, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
-		Contasreceber contasreceberResponse = getFinanceiroBAR().fetchContasreceberById(request);
+		ContasReceber contasreceberResponse = getFinanceiroBAR().fetchContasReceberById(request);
 		Assert.assertEquals(contasreceberResponse, null);
-		getFinanceiroBAR().insertContasreceber(contasreceber);
-		contasreceberResponse = getFinanceiroBAR().fetchContasreceberById(request);
+		getFinanceiroBAR().insertContasReceber(contasreceber);
+		contasreceberResponse = getFinanceiroBAR().fetchContasReceberById(request);
 		Assert.assertEquals(contasreceber.getId(), contasreceberResponse.getId());
-		getFinanceiroBAR().deleteContasreceberById(contasreceber);
-		contasreceberResponse = getFinanceiroBAR().fetchContasreceberById(request);
+		getFinanceiroBAR().deleteContasReceberById(contasreceber);
+		contasreceberResponse = getFinanceiroBAR().fetchContasReceberById(request);
 		Assert.assertEquals(contasreceberResponse, null);
 	}
 
 	@Test
-	public void testFetchAllContasrecebers()
+	public void testFetchAllContasRecebers()
 	{
-	Contasreceber contasreceber = new Contasreceber();
-		List<Contasreceber> response = getFinanceiroBAR().fetchAllContasrecebers(contasreceber).getResultsList();
+	ContasReceber contasreceber = new ContasReceber();
+		List<ContasReceber> response = getFinanceiroBAR().fetchAllContasRecebers(contasreceber).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
 	@Test
-	public void testDeleteAllContasrecebers()
+	public void testDeleteAllContasRecebers()
 	{
-		getFinanceiroBAR().deleteAllContasrecebers();
-	Contasreceber contasreceber = new Contasreceber();
-		List<Contasreceber> response = getFinanceiroBAR().fetchAllContasrecebers(new Contasreceber()).getResultsList();
+		getFinanceiroBAR().deleteAllContasRecebers();
+	ContasReceber contasreceber = new ContasReceber();
+		List<ContasReceber> response = getFinanceiroBAR().fetchAllContasRecebers(new ContasReceber()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
-	public void testUpdateContasreceber()
+	public void testUpdateContasReceber()
 	{
-		Contasreceber contasreceber = new Contasreceber(1, "NATIVE INSERT UPDATE");
+		ContasReceber contasreceber = insertContasReceber(1, TabelaEnum.CONTASRECEBER, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
-		Contasreceber contasreceberResponse = getFinanceiroBAR().fetchContasreceberById(request);
+		ContasReceber contasreceberResponse = getFinanceiroBAR().fetchContasReceberById(request);
 		Assert.assertEquals(contasreceberResponse.getDescription(), "NATIVE INSERT");
-		getFinanceiroBAR().updateContasreceber(contasreceber);
-		contasreceberResponse = getFinanceiroBAR().fetchContasreceberById(request);
+		getFinanceiroBAR().updateContasReceber(contasreceber);
+		contasreceberResponse = getFinanceiroBAR().fetchContasReceberById(request);
 		Assert.assertEquals(contasreceberResponse.getDescription(), "NATIVE INSERT UPDATE");
 	}
 
 	@Test
-	public void testFetchContasrecebersByRequest() throws Exception
+	public void testFetchContasRecebersByRequest() throws Exception
 	{
 		// check for valid and precount
-		ContasreceberInquiryRequest request = new ContasreceberInquiryRequest();
+		ContasReceberInquiryRequest request = new ContasReceberInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
-		InternalResultsResponse<Contasreceber> response = getFinanceiroBAR().fetchContasrecebersByRequest(request);
+		InternalResultsResponse<ContasReceber> response = getFinanceiroBAR().fetchContasRecebersByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
@@ -480,25 +480,25 @@ public IFinanceiroBAR getFinanceiroBAR()
 		request.setPreQueryCount(true);
 		request.setStartPage(1);
 		request.setPageSize(3);
-		response = getFinanceiroBAR().fetchContasrecebersByRequest(request);
+		response = getFinanceiroBAR().fetchContasRecebersByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
 		// check for valid and no precount
-		ContasreceberInquiryRequest request2 = new ContasreceberInquiryRequest();
+		ContasReceberInquiryRequest request2 = new ContasReceberInquiryRequest();
 		request2.setPreQueryCount(false);
-		InternalResultsResponse<Contasreceber> response2 = getFinanceiroBAR().fetchContasrecebersByRequest(request2);
+		InternalResultsResponse<ContasReceber> response2 = getFinanceiroBAR().fetchContasRecebersByRequest(request2);
 		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
 		// this is because we did not choose to precount
 		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
 
 		// check for zero rows
-		getFinanceiroBAR().deleteAllContasrecebers();
-		ContasreceberInquiryRequest request3 = new ContasreceberInquiryRequest();
+		getFinanceiroBAR().deleteAllContasRecebers();
+		ContasReceberInquiryRequest request3 = new ContasReceberInquiryRequest();
 		request3.setPreQueryCount(true);
-		InternalResultsResponse<Contasreceber> response3 = getFinanceiroBAR().fetchContasrecebersByRequest(request3);
+		InternalResultsResponse<ContasReceber> response3 = getFinanceiroBAR().fetchContasRecebersByRequest(request3);
 		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 	}
@@ -507,60 +507,60 @@ public IFinanceiroBAR getFinanceiroBAR()
 
 
 @Test
-	public void testDeleteCondpag()
+	public void testDeleteCondPag()
 	{
-		Condpag condpag = new Condpag(4, "Condpag_999");
+		CondPag condpag = insertContasReceber(4, TabelaEnum.CONDPAG, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
-		Condpag condpagResponse = getFinanceiroBAR().fetchCondpagById(request);
+		CondPag condpagResponse = getFinanceiroBAR().fetchCondPagById(request);
 		Assert.assertEquals(condpagResponse, null);
-		getFinanceiroBAR().insertCondpag(condpag);
-		condpagResponse = getFinanceiroBAR().fetchCondpagById(request);
+		getFinanceiroBAR().insertCondPag(condpag);
+		condpagResponse = getFinanceiroBAR().fetchCondPagById(request);
 		Assert.assertEquals(condpag.getId(), condpagResponse.getId());
-		getFinanceiroBAR().deleteCondpagById(condpag);
-		condpagResponse = getFinanceiroBAR().fetchCondpagById(request);
+		getFinanceiroBAR().deleteCondPagById(condpag);
+		condpagResponse = getFinanceiroBAR().fetchCondPagById(request);
 		Assert.assertEquals(condpagResponse, null);
 	}
 
 	@Test
-	public void testFetchAllCondpags()
+	public void testFetchAllCondPags()
 	{
-	Condpag condpag = new Condpag();
-		List<Condpag> response = getFinanceiroBAR().fetchAllCondpags(condpag).getResultsList();
+	CondPag condpag = new CondPag();
+		List<CondPag> response = getFinanceiroBAR().fetchAllCondPags(condpag).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
 	@Test
-	public void testDeleteAllCondpags()
+	public void testDeleteAllCondPags()
 	{
-		getFinanceiroBAR().deleteAllCondpags();
-	Condpag condpag = new Condpag();
-		List<Condpag> response = getFinanceiroBAR().fetchAllCondpags(new Condpag()).getResultsList();
+		getFinanceiroBAR().deleteAllCondPags();
+	CondPag condpag = new CondPag();
+		List<CondPag> response = getFinanceiroBAR().fetchAllCondPags(new CondPag()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
-	public void testUpdateCondpag()
+	public void testUpdateCondPag()
 	{
-		Condpag condpag = new Condpag(1, "NATIVE INSERT UPDATE");
+		CondPag condpag = insertContasReceber(1, TabelaEnum.CONDPAG, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
-		Condpag condpagResponse = getFinanceiroBAR().fetchCondpagById(request);
+		CondPag condpagResponse = getFinanceiroBAR().fetchCondPagById(request);
 		Assert.assertEquals(condpagResponse.getDescription(), "NATIVE INSERT");
-		getFinanceiroBAR().updateCondpag(condpag);
-		condpagResponse = getFinanceiroBAR().fetchCondpagById(request);
+		getFinanceiroBAR().updateCondPag(condpag);
+		condpagResponse = getFinanceiroBAR().fetchCondPagById(request);
 		Assert.assertEquals(condpagResponse.getDescription(), "NATIVE INSERT UPDATE");
 	}
 
 	@Test
-	public void testFetchCondpagsByRequest() throws Exception
+	public void testFetchCondPagsByRequest() throws Exception
 	{
 		// check for valid and precount
-		CondpagInquiryRequest request = new CondpagInquiryRequest();
+		CondPagInquiryRequest request = new CondPagInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
-		InternalResultsResponse<Condpag> response = getFinanceiroBAR().fetchCondpagsByRequest(request);
+		InternalResultsResponse<CondPag> response = getFinanceiroBAR().fetchCondPagsByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
@@ -568,25 +568,25 @@ public IFinanceiroBAR getFinanceiroBAR()
 		request.setPreQueryCount(true);
 		request.setStartPage(1);
 		request.setPageSize(3);
-		response = getFinanceiroBAR().fetchCondpagsByRequest(request);
+		response = getFinanceiroBAR().fetchCondPagsByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
 		// check for valid and no precount
-		CondpagInquiryRequest request2 = new CondpagInquiryRequest();
+		CondPagInquiryRequest request2 = new CondPagInquiryRequest();
 		request2.setPreQueryCount(false);
-		InternalResultsResponse<Condpag> response2 = getFinanceiroBAR().fetchCondpagsByRequest(request2);
+		InternalResultsResponse<CondPag> response2 = getFinanceiroBAR().fetchCondPagsByRequest(request2);
 		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
 		// this is because we did not choose to precount
 		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
 
 		// check for zero rows
-		getFinanceiroBAR().deleteAllCondpags();
-		CondpagInquiryRequest request3 = new CondpagInquiryRequest();
+		getFinanceiroBAR().deleteAllCondPags();
+		CondPagInquiryRequest request3 = new CondPagInquiryRequest();
 		request3.setPreQueryCount(true);
-		InternalResultsResponse<Condpag> response3 = getFinanceiroBAR().fetchCondpagsByRequest(request3);
+		InternalResultsResponse<CondPag> response3 = getFinanceiroBAR().fetchCondPagsByRequest(request3);
 		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 	}
@@ -595,60 +595,60 @@ public IFinanceiroBAR getFinanceiroBAR()
 
 
 @Test
-	public void testDeleteFormapg()
+	public void testDeleteFormaPg()
 	{
-		Formapg formapg = new Formapg(4, "Formapg_999");
+		FormaPg formapg = insertFormaPg(4, TabelaEnum.FORMAPG, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
-		Formapg formapgResponse = getFinanceiroBAR().fetchFormapgById(request);
+		FormaPg formapgResponse = getFinanceiroBAR().fetchFormaPgById(request);
 		Assert.assertEquals(formapgResponse, null);
-		getFinanceiroBAR().insertFormapg(formapg);
-		formapgResponse = getFinanceiroBAR().fetchFormapgById(request);
+		getFinanceiroBAR().insertFormaPg(formapg);
+		formapgResponse = getFinanceiroBAR().fetchFormaPgById(request);
 		Assert.assertEquals(formapg.getId(), formapgResponse.getId());
-		getFinanceiroBAR().deleteFormapgById(formapg);
-		formapgResponse = getFinanceiroBAR().fetchFormapgById(request);
+		getFinanceiroBAR().deleteFormaPgById(formapg);
+		formapgResponse = getFinanceiroBAR().fetchFormaPgById(request);
 		Assert.assertEquals(formapgResponse, null);
 	}
 
 	@Test
-	public void testFetchAllFormapgs()
+	public void testFetchAllFormaPgs()
 	{
-	Formapg formapg = new Formapg();
-		List<Formapg> response = getFinanceiroBAR().fetchAllFormapgs(formapg).getResultsList();
+	FormaPg formapg = new FormaPg();
+		List<FormaPg> response = getFinanceiroBAR().fetchAllFormaPgs(formapg).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
 	@Test
-	public void testDeleteAllFormapgs()
+	public void testDeleteAllFormaPgs()
 	{
-		getFinanceiroBAR().deleteAllFormapgs();
-	Formapg formapg = new Formapg();
-		List<Formapg> response = getFinanceiroBAR().fetchAllFormapgs(new Formapg()).getResultsList();
+		getFinanceiroBAR().deleteAllFormaPgs();
+	FormaPg formapg = new FormaPg();
+		List<FormaPg> response = getFinanceiroBAR().fetchAllFormaPgs(new FormaPg()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
-	public void testUpdateFormapg()
+	public void testUpdateFormaPg()
 	{
-		Formapg formapg = new Formapg(1, "NATIVE INSERT UPDATE");
+		FormaPg formapg = insertFormaPg(1, TabelaEnum.FORMAPG, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
-		Formapg formapgResponse = getFinanceiroBAR().fetchFormapgById(request);
+		FormaPg formapgResponse = getFinanceiroBAR().fetchFormaPgById(request);
 		Assert.assertEquals(formapgResponse.getDescription(), "NATIVE INSERT");
-		getFinanceiroBAR().updateFormapg(formapg);
-		formapgResponse = getFinanceiroBAR().fetchFormapgById(request);
+		getFinanceiroBAR().updateFormaPg(formapg);
+		formapgResponse = getFinanceiroBAR().fetchFormaPgById(request);
 		Assert.assertEquals(formapgResponse.getDescription(), "NATIVE INSERT UPDATE");
 	}
 
 	@Test
-	public void testFetchFormapgsByRequest() throws Exception
+	public void testFetchFormaPgsByRequest() throws Exception
 	{
 		// check for valid and precount
-		FormapgInquiryRequest request = new FormapgInquiryRequest();
+		FormaPgInquiryRequest request = new FormaPgInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
-		InternalResultsResponse<Formapg> response = getFinanceiroBAR().fetchFormapgsByRequest(request);
+		InternalResultsResponse<FormaPg> response = getFinanceiroBAR().fetchFormaPgsByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
@@ -656,25 +656,25 @@ public IFinanceiroBAR getFinanceiroBAR()
 		request.setPreQueryCount(true);
 		request.setStartPage(1);
 		request.setPageSize(3);
-		response = getFinanceiroBAR().fetchFormapgsByRequest(request);
+		response = getFinanceiroBAR().fetchFormaPgsByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
 		// check for valid and no precount
-		FormapgInquiryRequest request2 = new FormapgInquiryRequest();
+		FormaPgInquiryRequest request2 = new FormaPgInquiryRequest();
 		request2.setPreQueryCount(false);
-		InternalResultsResponse<Formapg> response2 = getFinanceiroBAR().fetchFormapgsByRequest(request2);
+		InternalResultsResponse<FormaPg> response2 = getFinanceiroBAR().fetchFormaPgsByRequest(request2);
 		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
 		// this is because we did not choose to precount
 		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
 
 		// check for zero rows
-		getFinanceiroBAR().deleteAllFormapgs();
-		FormapgInquiryRequest request3 = new FormapgInquiryRequest();
+		getFinanceiroBAR().deleteAllFormaPgs();
+		FormaPgInquiryRequest request3 = new FormaPgInquiryRequest();
 		request3.setPreQueryCount(true);
-		InternalResultsResponse<Formapg> response3 = getFinanceiroBAR().fetchFormapgsByRequest(request3);
+		InternalResultsResponse<FormaPg> response3 = getFinanceiroBAR().fetchFormaPgsByRequest(request3);
 		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 	}
@@ -685,7 +685,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteBanco()
 	{
-		Banco banco = new Banco(4, "Banco_999");
+		Banco banco = insertBANCO(4, TabelaEnum.FORMAPG, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		Banco bancoResponse = getFinanceiroBAR().fetchBancoById(request);
@@ -718,7 +718,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 	@Test
 	public void testUpdateBanco()
 	{
-		Banco banco = new Banco(1, "NATIVE INSERT UPDATE");
+		Banco banco = insertBANCO(1, TabelaEnum.FORMAPG, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Banco bancoResponse = getFinanceiroBAR().fetchBancoById(request);
@@ -771,60 +771,60 @@ public IFinanceiroBAR getFinanceiroBAR()
 
 
 @Test
-	public void testDeleteContacorrente()
+	public void testDeleteContaCorrente()
 	{
-		Contacorrente contacorrente = new Contacorrente(4, "Contacorrente_999");
+		ContaCorrente contacorrente = insertContaCorrente(4, TabelaEnum.CONTACORRENTE, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
-		Contacorrente contacorrenteResponse = getFinanceiroBAR().fetchContacorrenteById(request);
+		ContaCorrente contacorrenteResponse = getFinanceiroBAR().fetchContaCorrenteById(request);
 		Assert.assertEquals(contacorrenteResponse, null);
-		getFinanceiroBAR().insertContacorrente(contacorrente);
-		contacorrenteResponse = getFinanceiroBAR().fetchContacorrenteById(request);
+		getFinanceiroBAR().insertContaCorrente(contacorrente);
+		contacorrenteResponse = getFinanceiroBAR().fetchContaCorrenteById(request);
 		Assert.assertEquals(contacorrente.getId(), contacorrenteResponse.getId());
-		getFinanceiroBAR().deleteContacorrenteById(contacorrente);
-		contacorrenteResponse = getFinanceiroBAR().fetchContacorrenteById(request);
+		getFinanceiroBAR().deleteContaCorrenteById(contacorrente);
+		contacorrenteResponse = getFinanceiroBAR().fetchContaCorrenteById(request);
 		Assert.assertEquals(contacorrenteResponse, null);
 	}
 
 	@Test
-	public void testFetchAllContacorrentes()
+	public void testFetchAllContaCorrentes()
 	{
-	Contacorrente contacorrente = new Contacorrente();
-		List<Contacorrente> response = getFinanceiroBAR().fetchAllContacorrentes(contacorrente).getResultsList();
+	ContaCorrente contacorrente = new ContaCorrente();
+		List<ContaCorrente> response = getFinanceiroBAR().fetchAllContaCorrentes(contacorrente).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
 	@Test
-	public void testDeleteAllContacorrentes()
+	public void testDeleteAllContaCorrentes()
 	{
-		getFinanceiroBAR().deleteAllContacorrentes();
-	Contacorrente contacorrente = new Contacorrente();
-		List<Contacorrente> response = getFinanceiroBAR().fetchAllContacorrentes(new Contacorrente()).getResultsList();
+		getFinanceiroBAR().deleteAllContaCorrentes();
+	ContaCorrente contacorrente = new ContaCorrente();
+		List<ContaCorrente> response = getFinanceiroBAR().fetchAllContaCorrentes(new ContaCorrente()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
-	public void testUpdateContacorrente()
+	public void testUpdateContaCorrente()
 	{
-		Contacorrente contacorrente = new Contacorrente(1, "NATIVE INSERT UPDATE");
+		ContaCorrente contacorrente = insertContaCorrente(1, TabelaEnum.CONTACORRENTE, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
-		Contacorrente contacorrenteResponse = getFinanceiroBAR().fetchContacorrenteById(request);
+		ContaCorrente contacorrenteResponse = getFinanceiroBAR().fetchContaCorrenteById(request);
 		Assert.assertEquals(contacorrenteResponse.getDescription(), "NATIVE INSERT");
-		getFinanceiroBAR().updateContacorrente(contacorrente);
-		contacorrenteResponse = getFinanceiroBAR().fetchContacorrenteById(request);
+		getFinanceiroBAR().updateContaCorrente(contacorrente);
+		contacorrenteResponse = getFinanceiroBAR().fetchContaCorrenteById(request);
 		Assert.assertEquals(contacorrenteResponse.getDescription(), "NATIVE INSERT UPDATE");
 	}
 
 	@Test
-	public void testFetchContacorrentesByRequest() throws Exception
+	public void testFetchContaCorrentesByRequest() throws Exception
 	{
 		// check for valid and precount
-		ContacorrenteInquiryRequest request = new ContacorrenteInquiryRequest();
+		ContaCorrenteInquiryRequest request = new ContaCorrenteInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
-		InternalResultsResponse<Contacorrente> response = getFinanceiroBAR().fetchContacorrentesByRequest(request);
+		InternalResultsResponse<ContaCorrente> response = getFinanceiroBAR().fetchContaCorrentesByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
@@ -832,25 +832,25 @@ public IFinanceiroBAR getFinanceiroBAR()
 		request.setPreQueryCount(true);
 		request.setStartPage(1);
 		request.setPageSize(3);
-		response = getFinanceiroBAR().fetchContacorrentesByRequest(request);
+		response = getFinanceiroBAR().fetchContaCorrentesByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
 		// check for valid and no precount
-		ContacorrenteInquiryRequest request2 = new ContacorrenteInquiryRequest();
+		ContaCorrenteInquiryRequest request2 = new ContaCorrenteInquiryRequest();
 		request2.setPreQueryCount(false);
-		InternalResultsResponse<Contacorrente> response2 = getFinanceiroBAR().fetchContacorrentesByRequest(request2);
+		InternalResultsResponse<ContaCorrente> response2 = getFinanceiroBAR().fetchContaCorrentesByRequest(request2);
 		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
 		// this is because we did not choose to precount
 		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
 
 		// check for zero rows
-		getFinanceiroBAR().deleteAllContacorrentes();
-		ContacorrenteInquiryRequest request3 = new ContacorrenteInquiryRequest();
+		getFinanceiroBAR().deleteAllContaCorrentes();
+		ContaCorrenteInquiryRequest request3 = new ContaCorrenteInquiryRequest();
 		request3.setPreQueryCount(true);
-		InternalResultsResponse<Contacorrente> response3 = getFinanceiroBAR().fetchContacorrentesByRequest(request3);
+		InternalResultsResponse<ContaCorrente> response3 = getFinanceiroBAR().fetchContaCorrentesByRequest(request3);
 		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 	}
@@ -861,7 +861,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteCaixa()
 	{
-		Caixa caixa = new Caixa(4, "Caixa_999");
+		Caixa caixa =  insertCaixa(4, TabelaEnum.CAIXA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		Caixa caixaResponse = getFinanceiroBAR().fetchCaixaById(request);
@@ -894,7 +894,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 	@Test
 	public void testUpdateCaixa()
 	{
-		Caixa caixa = new Caixa(1, "NATIVE INSERT UPDATE");
+		Caixa caixa = insertCaixa(1, TabelaEnum.CAIXA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Caixa caixaResponse = getFinanceiroBAR().fetchCaixaById(request);
@@ -948,13 +948,13 @@ public IFinanceiroBAR getFinanceiroBAR()
 	{
 		executeSqlScript("conf/insertContasPagar.sql", false);
 		executeSqlScript("conf/insertTitulo.sql", false);
-		executeSqlScript("conf/insertBaixatitulo.sql", false);
+		executeSqlScript("conf/insertBaixaTitulo.sql", false);
 		executeSqlScript("conf/insertTipobaixa.sql", false);
-		executeSqlScript("conf/insertContasreceber.sql", false);
-		executeSqlScript("conf/insertCondpag.sql", false);
-		executeSqlScript("conf/insertFormapg.sql", false);
+		executeSqlScript("conf/insertContasReceber.sql", false);
+		executeSqlScript("conf/insertCondPag.sql", false);
+		executeSqlScript("conf/insertFormaPg.sql", false);
 		executeSqlScript("conf/insertBanco.sql", false);
-		executeSqlScript("conf/insertContacorrente.sql", false);
+		executeSqlScript("conf/insertContaCorrente.sql", false);
 		executeSqlScript("conf/insertCaixa.sql", false);
 	}
 
@@ -965,7 +965,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 			Date a = new Date();
 			contaspagar.setId(100);
 			contaspagar.setDataBaixa(a.getTime());
-			contaspagar.setObservacao("observacao");
+			contaspagar.setObservacao("NATIVE INSERT");
 			contaspagar.setValor(new Double(1.99));
 			contaspagar.setJuros(new Double(1.99));
 			contaspagar.setMulta(new Double(1.99));
@@ -997,7 +997,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 			titulo.setDataEmissao(a.getTime());
 			titulo.setDataVencimento(a.getTime());
 			titulo.setDocId(100);
-			titulo.setObservacao("observacao");
+			titulo.setObservacao("NATIVE INSERT");
 			titulo.setFinanceiroEnumValue(100);
 			titulo.setListBaixa(new ArrayList<BaixaTitulo>());
 			titulo.getBaixaTitulo().add(insertBaixaTitulo(id,TabelaEnum.TITULO,action));
@@ -1020,7 +1020,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 			Date a = new Date();
 			baixatitulo.setId(100);
 			baixatitulo.setDataBaixa(a.getTime());
-			baixatitulo.setObservacao("observacao");
+			baixatitulo.setObservacao("NATIVE INSERT");
 			baixatitulo.setValor(new Double(1.99));
 			baixatitulo.setJuros(new Double(1.99));
 			baixatitulo.setMulta(new Double(1.99));
@@ -1045,9 +1045,8 @@ public IFinanceiroBAR getFinanceiroBAR()
 			TipoBaixa tipobaixa = new TipoBaixa();
 			Date a = new Date();
 			tipobaixa.setId(100);
-			tipobaixa.setNome("nome");
-			tipobaixa.setDescricao(new ArrayList<undefined>());
-			tipobaixa.getundefined().add(insertundefined(id,TabelaEnum.TIPOBAIXA,action));
+			tipobaixa.setNome("NATIVE INSERT");
+			tipobaixa.setDescricao("NATIVE INSERT");
 			tipobaixa.setParentId(id);
 			tipobaixa.setEmprId(1);
 			tipobaixa.setModifyDateUTC(a.getTime());
@@ -1067,7 +1066,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 			Date a = new Date();
 			contasreceber.setId(100);
 			contasreceber.setDataBaixa(a.getTime());
-			contasreceber.setObservacao("observacao");
+			contasreceber.setObservacao("NATIVE INSERT");
 			contasreceber.setValor(new Double(1.99));
 			contasreceber.setJuros(new Double(1.99));
 			contasreceber.setMulta(new Double(1.99));
@@ -1147,9 +1146,9 @@ public IFinanceiroBAR getFinanceiroBAR()
 			ContaCorrente contacorrente = new ContaCorrente();
 			Date a = new Date();
 			contacorrente.setId(100);
-			contacorrente.setNome("nome");
+			contacorrente.setNome("NATIVE INSERT");
 			contacorrente.setSaldo(new Double(1.99));
-			contacorrente.setDescricao("descricao");
+			contacorrente.setDescricao("NATIVE INSERT");
 			contacorrente.setParentId(id);
 			contacorrente.setEmprId(1);
 			contacorrente.setModifyDateUTC(a.getTime());

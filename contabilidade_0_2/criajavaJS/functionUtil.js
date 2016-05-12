@@ -25,7 +25,7 @@ convertModule = function(stipo,sCampo,list){
 	b = new Date();
 		switch(stipo) {
 		    case "String":
-		        sReturn = '"'+sCampo+'"'
+		        sReturn = '"NATIVE INSERT UPDATE"'
 		        break;
 		    case "Long":
 		        sReturn = "a.getTime()"

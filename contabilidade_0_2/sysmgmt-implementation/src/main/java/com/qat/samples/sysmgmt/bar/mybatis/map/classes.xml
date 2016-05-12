@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 30/04/2016 14:51 : 33-->
+<!-- create by system gera-java version 1.0.0 10/05/2016 15:25 : 22-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -18,6 +18,8 @@
   <resultMap id="ClassesResult" type="Classes">
     <result property="id" column="id"/>
     <result property="nome" column="nome"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
@@ -25,8 +27,9 @@
   </resultMap>
 
   <sql id="allClassesColumns">
-id
 ,nome
+,emprId
+,processId
 ,create_date
 ,create_user
 ,modify_date
@@ -34,59 +37,50 @@ id
 
 </sql>
 <sql id="allClassesValues">
-#{id},
 #{nome},
+		#{emprId},
+		#{processId},
 		#{createDateUTC},
 		#{createUser},
 		#{modifyDateUTC},
 		#{modifyUser}
   </sql>
 
- <sql id="allClassesColumnsWithQualifier">
-		c.id, c.classes_desc
-c.id,
-c.nome,
-		c.createDateUTC,
-		c.createUser,
-		c.modifyDateUTC,
-		c.modifyUser
- </sql>
 
  <select id="fetchAllClassess" resultMap="ClassesResult">
-    SELECT
+    SELECT id,
 	<include refid="allClassesColumns" />
    FROM classes ORDER BY id ASC
  </select>
 
  <select id="fetchClassesById" parameterType="Integer" resultMap="ClassesResult">
-    SELECT
+    SELECT id,
 	<include refid="allClassesColumns" />
    FROM classes WHERE id = #{fetchid}
  </select>
 
  <select id="fetchAllClassessRequest" parameterType="ClassesInquiryRequest" resultMap="ClassesResult">
 
-		SELECT <include refid="allClassesColumns" />
-  		  FROM classes ORDER BY id ASC
+		SELECT id,<include refid="allClassesColumns" />
+  		  FROM classes where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchClassesRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM classes WHERE id IS NOT NULL
+		SELECT COUNT(*) AS RECORD_COUNT FROM classes WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
 
  </select>
 
- <insert id="insertClasses" parameterType="Classes">
+ <insert id="insertClasses" parameterType="Classes" useGeneratedKeys="true" keyProperty="id">
  	INSERT INTO classes (
-	<include refid="allClassesColumns" />
+	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allClassesColumns" />
      )
-   VALUES (<include refid="allClassesValues" /> )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allClassesValues" /> )
  </insert>
 
  <update id="updateClasses" parameterType="Classes">
    UPDATE classes SET
-<if test="id!= null">id = #{id},</if>
 <if test="nome!= null">nome = #{nome},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
