@@ -23,23 +23,25 @@
     <result property="juros" column="juros"/>
     <result property="multa" column="multa"/>
     <result property="desconto" column="desconto"/>
-<collection property="tipoBaixaList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<result property="emprId" column="emprId"/>
-<result property="processId" column="processId"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
+	<result property="emprId" column="emprId"/>
+	<result property="parentId" column="parentId"/>
+	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<collection property="tipoBaixaList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
   </resultMap>
 
   <sql id="allBaixaTituloColumns">
-,dataBaixa
+dataBaixa
 ,observacao
 ,Valor
 ,juros
 ,multa
 ,desconto
 ,emprId
+,parentId
 ,processId
 ,create_date
 ,create_user
@@ -55,6 +57,7 @@
 #{multa},
 #{desconto},
 		#{emprId},
+		#{parentId},
 		#{processId},
 		#{createDateUTC},
 		#{createUser},

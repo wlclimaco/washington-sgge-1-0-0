@@ -162,7 +162,7 @@ public InternalResultsResponse<ContasPagar> refreshContasPagars(RefreshRequest r
 
 	for (int i = 1; i <= refreshNumber; i++)
 	{
-	getFinanceiroBAR().insertContasPagar(new ContasPagar(i, "ContasPagarDesc" + i));
+	getFinanceiroBAR().insertContasPagar(new ContasPagar());
 	}
 
 	// Call maintain to see if we need to return the contaspagar list and if so whether it should be paged or not

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 12/05/2016 11:41 : 33-->
+<!-- create by system gera-java version 1.0.0 12/05/2016 12:43 : 4-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -17,13 +17,13 @@
        exactly. -->
   <resultMap id="ContasReceberResult" type="ContasReceber">
     <result property="id" column="id"/>
-    <result property="dataBaixa" column="dataBaixa"/>
+    <result property="numero" column="numero"/>
+    <result property="dataEmissao" column="dataEmissao"/>
+    <result property="dataVencimento" column="dataVencimento"/>
+    <result property="docId" column="docId"/>
+    <result property="valor" column="valor"/>
     <result property="observacao" column="observacao"/>
-    <result property="Valor" column="Valor"/>
-    <result property="juros" column="juros"/>
-    <result property="multa" column="multa"/>
-    <result property="desconto" column="desconto"/>
-<collection property="tipoBaixaList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+    <result property="financeiroEnumValue" column="financeiroEnumValue"/>
     <result property="cliente" column="cliente"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
@@ -31,15 +31,17 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<collection property="listBaixa" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
   </resultMap>
 
   <sql id="allContasReceberColumns">
-,dataBaixa
+,numero
+,dataEmissao
+,dataVencimento
+,docId
+,valor
 ,observacao
-,Valor
-,juros
-,multa
-,desconto
+,financeiroEnumValue
 ,cliente
 ,emprId
 ,processId
@@ -50,12 +52,13 @@
 
 </sql>
 <sql id="allContasReceberValues">
-#{dataBaixa},
+#{numero},
+#{dataEmissao},
+#{dataVencimento},
+#{docId},
+#{valor},
 #{observacao},
-#{Valor},
-#{juros},
-#{multa},
-#{desconto},
+#{financeiroEnumValue},
 #{cliente},
 		#{emprId},
 		#{processId},
@@ -100,12 +103,13 @@
 
  <update id="updateContasReceber" parameterType="ContasReceber">
    UPDATE contasreceber SET
-<if test="dataBaixa!= null">dataBaixa = #{dataBaixa},</if>
+<if test="numero!= null">numero = #{numero},</if>
+<if test="dataEmissao!= null">dataEmissao = #{dataEmissao},</if>
+<if test="dataVencimento!= null">dataVencimento = #{dataVencimento},</if>
+<if test="docId!= null">docId = #{docId},</if>
+<if test="valor!= null">valor = #{valor},</if>
 <if test="observacao!= null">observacao = #{observacao},</if>
-<if test="Valor!= null">Valor = #{Valor},</if>
-<if test="juros!= null">juros = #{juros},</if>
-<if test="multa!= null">multa = #{multa},</if>
-<if test="desconto!= null">desconto = #{desconto},</if>
+<if test="financeiroEnumValue!= null">financeiroEnumValue = #{financeiroEnumValue},</if>
 <if test="cliente!= null">cliente = #{cliente},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>

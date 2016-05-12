@@ -648,6 +648,7 @@ function BaixaTituloModel() {
 
 	var a = [];
 		a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "parentId", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 		a.push({field :{campo : "finanId", Integer :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 		a.push({field :{campo : "dataBaixa", tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 		a.push({field :{campo : "observacao", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});

@@ -18,7 +18,7 @@
   <resultMap id="TipoBaixaResult" type="TipoBaixa">
     <result property="id" column="id"/>
     <result property="nome" column="nome"/>
-<collection property="descricao" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<result property="descricao" column="descricao"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
@@ -28,7 +28,7 @@
   </resultMap>
 
   <sql id="allTipoBaixaColumns">
-,nome
+nome
 ,emprId
 ,processId
 ,create_date

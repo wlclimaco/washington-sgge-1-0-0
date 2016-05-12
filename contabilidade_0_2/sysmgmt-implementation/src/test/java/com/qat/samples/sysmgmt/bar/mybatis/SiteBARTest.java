@@ -164,7 +164,7 @@ public ISiteBAR getSiteBAR()
 @Test
 	public void testDeleteSite()
 	{
-		Site site = insertServico(4,TabelaEnum.SERVICO,PersistenceActionEnum.INSERT);
+		Site site = insertSite(4,TabelaEnum.SERVICO,PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		Site siteResponse = getSiteBAR().fetchSiteById(request);

@@ -92,7 +92,7 @@ text = text + '	<include refid="all'+name+'Columns" />\n';
  text = text + ' </select>\n';
 text = text + '\n';
  text = text + ' <select id="fetch'+name+'ById" parameterType="Integer" resultMap="'+name+'Result">\n';
-text = text + '    SELECT id,\n'; 
+text = text + '    SELECT id,\n';
 text = text + '	<include refid="all'+name+'Columns" />\n';
  text = text + '   FROM '+name.toLowerCase()+' WHERE id = #{fetchid}\n';
  text = text + ' </select>\n';

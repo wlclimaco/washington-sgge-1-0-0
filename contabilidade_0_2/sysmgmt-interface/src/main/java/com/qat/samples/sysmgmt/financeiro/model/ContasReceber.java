@@ -49,7 +49,7 @@ public class ContasReceber extends ModelCosmeDamiao
 
 	private FinanceiroStatusEnum financeiroEnum;
 
-	private List<Baixa> listBaixa;
+	private List<BaixaTitulo> listBaixa;
 
 	/**
 	 * Default constructor.
@@ -203,12 +203,12 @@ public class ContasReceber extends ModelCosmeDamiao
 		this.financeiroEnum = financeiroEnum;
 	}
 
-	public List<Baixa> getListBaixa()
+	public List<BaixaTitulo> getListBaixa()
 	{
 		return listBaixa;
 	}
 
-	public void setListBaixa(List<Baixa> listBaixa)
+	public void setListBaixa(List<BaixaTitulo> listBaixa)
 	{
 		this.listBaixa = listBaixa;
 	}

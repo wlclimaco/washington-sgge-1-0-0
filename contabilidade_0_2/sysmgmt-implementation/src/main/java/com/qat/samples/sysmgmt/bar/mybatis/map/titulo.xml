@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 12/05/2016 11:41 : 33-->
+<!-- create by system gera-java version 1.0.0 12/05/2016 12:43 : 4-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -18,29 +18,28 @@
   <resultMap id="TituloResult" type="Titulo">
     <result property="id" column="id"/>
     <result property="numero" column="numero"/>
-    <result property="fornecedor" column="fornecedor"/>
-    <result property="cliente" column="cliente"/>
     <result property="dataEmissao" column="dataEmissao"/>
     <result property="dataVencimento" column="dataVencimento"/>
     <result property="docId" column="docId"/>
+    <result property="valor" column="valor"/>
     <result property="observacao" column="observacao"/>
     <result property="financeiroEnumValue" column="financeiroEnumValue"/>
-<collection property="listBaixa" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<collection property="listBaixa" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
   </resultMap>
 
   <sql id="allTituloColumns">
-,numero
-,fornecedor
-,cliente
+numero
 ,dataEmissao
 ,dataVencimento
 ,docId
+,valor
 ,observacao
 ,financeiroEnumValue
 ,emprId
@@ -53,11 +52,10 @@
 </sql>
 <sql id="allTituloValues">
 #{numero},
-#{fornecedor},
-#{cliente},
 #{dataEmissao},
 #{dataVencimento},
 #{docId},
+#{valor},
 #{observacao},
 #{financeiroEnumValue},
 		#{emprId},
@@ -104,11 +102,10 @@
  <update id="updateTitulo" parameterType="Titulo">
    UPDATE titulo SET
 <if test="numero!= null">numero = #{numero},</if>
-<if test="fornecedor!= null">fornecedor = #{fornecedor},</if>
-<if test="cliente!= null">cliente = #{cliente},</if>
 <if test="dataEmissao!= null">dataEmissao = #{dataEmissao},</if>
 <if test="dataVencimento!= null">dataVencimento = #{dataVencimento},</if>
 <if test="docId!= null">docId = #{docId},</if>
+<if test="valor!= null">valor = #{valor},</if>
 <if test="observacao!= null">observacao = #{observacao},</if>
 <if test="financeiroEnumValue!= null">financeiroEnumValue = #{financeiroEnumValue},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
