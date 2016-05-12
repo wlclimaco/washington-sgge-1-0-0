@@ -78,6 +78,7 @@
   		<typeAlias alias="Regime" type="com.qat.samples.sysmgmt.fiscal.model.Regime"/>
   		<typeAlias alias="RegimeInquiryRequest" type="com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest"/>
 
+<typeAlias alias="PlanoByServico" type="com.qat.samples.sysmgmt.contabilidade.model.PlanoByServico"/>
 
   		<typeAlias alias="Deposito" type="com.qat.samples.sysmgmt.entidade.model.Deposito"/>
   		<typeAlias alias="DepositoInquiryRequest" type="com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest"/>
@@ -383,6 +384,7 @@
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/preco.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/site.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/ordemServicoItens.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/planoBySite.xml"/>
 
     </mappers>
 

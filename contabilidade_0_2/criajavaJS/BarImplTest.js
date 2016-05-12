@@ -169,12 +169,14 @@ text = text + '			'+titleize(teste[i].classe)+' '+teste[i].classe.toLowerCase()+
 text = text + '			Date a = new Date();\n';
 	for(var y=0;y < teste[i].model.length;y++){
 
-		console.log()
-		if(teste[i].model[y].field.tipo.indexOf('List') == -1){
-			text = text + '			'+teste[i].classe.toLowerCase()+'.set'+titleize(teste[i].model[y].field.campo)+'('+convertModule(teste[i].model[y].field.tipo,teste[i].model[y].field.campo,teste[i].model[y].field.List)+');\n';
-		}else{
-			text = text + '			'+teste[i].classe.toLowerCase()+'.set'+titleize(teste[i].model[y].field.campo)+'('+convertModule(teste[i].model[y].field.tipo,teste[i].model[y].field.campo,teste[i].model[y].field.List)+');\n';
-			text = text + '			'+teste[i].classe.toLowerCase()+'.get'+teste[i].model[y].field.List+'().add(insert'+teste[i].model[y].field.List+'(id,TabelaEnum.'+teste[i].classe.toUpperCase()+',action));\n';
+		console.log(teste[i].model[y].field.tipo);
+		if(teste[i].model[y].field.tipo !== undefined){
+			if(teste[i].model[y].field.tipo.indexOf('List') == -1){
+				text = text + '			'+teste[i].classe.toLowerCase()+'.set'+titleize(teste[i].model[y].field.campo)+'('+convertModule(teste[i].model[y].field.tipo,teste[i].model[y].field.campo,teste[i].model[y].field.List)+');\n';
+			}else{
+				text = text + '			'+teste[i].classe.toLowerCase()+'.set'+titleize(teste[i].model[y].field.campo)+'('+convertModule(teste[i].model[y].field.tipo,teste[i].model[y].field.campo,teste[i].model[y].field.List)+');\n';
+				text = text + '			'+teste[i].classe.toLowerCase()+'.get'+teste[i].model[y].field.List+'().add(insert'+teste[i].model[y].field.List+'(id,TabelaEnum.'+teste[i].classe.toUpperCase()+',action));\n';
+			}
 		}
 	}
 text = text + '			'+teste[i].classe.toLowerCase()+'.setParentId(id);\n';

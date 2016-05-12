@@ -353,7 +353,8 @@ function UsuarioModel() {
 function ContasPagarModel() {
 
 	var a = [];
-	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a = BaixaTituloModel();
+	a.push({field :{campo : "fornecedor" , tipo :"Fornecedor",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
@@ -362,7 +363,8 @@ function ContasPagarModel() {
 function ContasReceberModel() {
 
 	var a = [];
-	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a = BaixaTituloModel();
+	a.push({field :{campo : "cliente" , tipo :"Cliente",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
@@ -612,6 +614,50 @@ function EmailModel() {
 	a.push({field :{campo : "typeValue" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "email", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "emailTypeEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Orcamento
+function TituloModel() {
+
+	var a = [];
+		a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "numero", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "fornecedor", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "cliente", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "dataEmissao", tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "dataVencimento", tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "docId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "observacao", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "financeiroEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "listBaixa", tipo :"List<BaixaTitulo>",List : "BaixaTitulo",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ Orcamento
+function TipoBaixaModel() {
+
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "nome", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "descricao", tipo :"List<BaixaTitulo>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+//================ OrcamentoList
+function BaixaTituloModel() {
+
+	var a = [];
+		a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "finanId", Integer :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "dataBaixa", tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "observacao", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "Valor", tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "juros", tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "multa", tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "desconto", tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "tipoBaixaList", tipo :"List<TipoBaixa> ",List :"BaixaTitulo",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+
 	return a;
 }
 
@@ -1193,7 +1239,7 @@ oProjet.push({
 })
 
 oProjet.push({
-	classes :[{classe : "ContasPagar",model : ContasPagarModel()},{classe :"ContasReceber",model : ContasReceberModel()},{classe :"CondPag",model : CondPagModel()},{classe :"FormaPg",model : FormaPgModel()},{classe :"Banco",model : BancoModel()},{classe :"ContaCorrente",model : ContaCorrenteModel()},{classe :"Caixa",model : CaixaModel()}],
+	classes :[{classe : "ContasPagar",model : ContasPagarModel()},{classe : "Titulo",model : TituloModel()},{classe : "BaixaTitulo",model : BaixaTituloModel()},{classe : "TipoBaixa",model : TipoBaixaModel()},{classe :"ContasReceber",model : ContasReceberModel()},{classe :"CondPag",model : CondPagModel()},{classe :"FormaPg",model : FormaPgModel()},{classe :"Banco",model : BancoModel()},{classe :"ContaCorrente",model : ContaCorrenteModel()},{classe :"Caixa",model : CaixaModel()}],
 	interfaces : "Financeiro",
 	local :"Financeiro"
 })

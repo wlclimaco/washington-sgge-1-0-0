@@ -72,6 +72,12 @@
    FROM status WHERE parentId = #{fetchid} and tabelaEnumValue in (1,51,52,61,62,63)
  </select>
 
+<select id="fetchAllStatusByTable" parameterType="Integer" resultMap="StatusResult">
+    SELECT id,
+	<include refid="allStatusColumns" />
+   FROM status WHERE parentId = #{fetchid} and tabelaEnumValue = 54
+ </select>
+
  <select id="fetchAllStatusRequest" parameterType="PagedInquiryRequest" resultMap="StatusResult">
 		SELECT id,<include refid="allStatusColumns" />
   		  FROM status ORDER BY id ASC

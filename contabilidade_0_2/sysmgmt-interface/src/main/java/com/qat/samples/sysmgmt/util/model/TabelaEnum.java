@@ -179,7 +179,15 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 
 	CLINICA(63, "sendsolv.base.model.risklevelenum.medium"),
 
-	SITE(64, "sendsolv.base.model.risklevelenum.medium");
+	SITE(64, "sendsolv.base.model.risklevelenum.medium"),
+
+	CONTASPAGAR(65, "sendsolv.base.model.risklevelenum.medium"),
+
+	CONTASRECEBER(66, "sendsolv.base.model.risklevelenum.medium"),
+
+	BAIXARTITULO(67, "sendsolv.base.model.risklevelenum.medium"),
+
+	TIPOBAIXA(68, "sendsolv.base.model.risklevelenum.medium");
 
 	/** The code. */
 	private Integer code;

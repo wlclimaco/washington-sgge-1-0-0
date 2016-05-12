@@ -213,7 +213,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 	private static final String STMT_UPDATE_ORDEMSERVICOITENS = NAMESPACE_ORDEMSERVICOITENS + "updateOrdemServicoItens";
 
 	/** The Constant STMT_DELETE_ORDEMSERVICOITENS. */
-	private static final String STMT_DELETE_ORDEMSERVICOITENS = NAMESPACE_ORDEMSERVICOITENS
+	private static final String STMT_DELETE_ORDEMSERVICOITENS = NAMESPACE_ORDEMSERVICOITENS 
 			+ "deleteOrdemServicoItensById";
 
 	/** The Constant STMT_DELETE_ORDEMSERVICOITENS_ALL. */
@@ -229,7 +229,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 			+ "fetchAllOrdemServicoItenss";
 
 	/** The Constant STMT_FETCH_ORDEMSERVICOITENS_COUNT. */
-	private static final String STMT_FETCH_ORDEMSERVICOITENS_COUNT = NAMESPACE_ORDEMSERVICOITENS
+	private static final String STMT_FETCH_ORDEMSERVICOITENS_COUNT = NAMESPACE_ORDEMSERVICOITENS + ""
 			+ "fetchOrdemServicoItensRowCount";
 
 	/** The Constant STMT_FETCH_ORDEMSERVICOITENS_ALL_REQUEST. */
@@ -1029,8 +1029,8 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ORDEMSERVICO, AcaoEnum.INSERT, historicoId,
 				getHistoricoBAR(), response, ordemservico.getId());
 
-		if (!ValidationUtil.isNullOrEmpty(ordemservico.getOrdemStatusList())) {
-			a += OrdemServicoItensBARD.maintainOrdemServicoItensAssociations(ordemservico.getOrdemStatusList(),
+		if (!ValidationUtil.isNullOrEmpty(ordemservico.getOrdemServicoItensList())) {
+			a += OrdemServicoItensBARD.maintainOrdemServicoItensAssociations(ordemservico.getOrdemServicoItensList(),
 					 response, ordemservico.getId(), null, null, TabelaEnum.ORDEMSERVICO,
 					getSiteBAR(), getStatusBAR(), getHistoricoBAR(), ordemservico.getId(), ordemservico.getCreateUser(),
 					historicoId, historicoId);
@@ -1064,8 +1064,8 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ORDEMSERVICO, AcaoEnum.UPDATE,
 				ordemservico.getProcessId(), getHistoricoBAR(), response, ordemservico.getId());
 
-		if (!ValidationUtil.isNullOrEmpty(ordemservico.getOrdemStatusList())) {
-			a += OrdemServicoItensBARD.maintainOrdemServicoItensAssociations(ordemservico.getOrdemStatusList(),
+		if (!ValidationUtil.isNullOrEmpty(ordemservico.getOrdemServicoItensList())) {
+			a += OrdemServicoItensBARD.maintainOrdemServicoItensAssociations(ordemservico.getOrdemServicoItensList(),
 					 response, ordemservico.getId(), null, null, TabelaEnum.ORDEMSERVICO,
 					getSiteBAR(), getStatusBAR(), getHistoricoBAR(), ordemservico.getId(), ordemservico.getCreateUser(),
 					ordemservico.getProcessId(), ordemservico.getProcessId());
@@ -1090,8 +1090,8 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ORDEMSERVICO, AcaoEnum.UPDATE,
 				ordemservico.getProcessId(), getHistoricoBAR(), response, ordemservico.getId());
 
-		if (!ValidationUtil.isNullOrEmpty(ordemservico.getOrdemStatusList())) {
-			a += OrdemServicoItensBARD.maintainOrdemServicoItensAssociations(ordemservico.getOrdemStatusList(),
+		if (!ValidationUtil.isNullOrEmpty(ordemservico.getOrdemServicoItensList())) {
+			a += OrdemServicoItensBARD.maintainOrdemServicoItensAssociations(ordemservico.getOrdemServicoItensList(),
 					 response, ordemservico.getId(), null, null, TabelaEnum.ORDEMSERVICO,
 					getSiteBAR(), getStatusBAR(), getHistoricoBAR(), ordemservico.getId(), ordemservico.getCreateUser(),
 					ordemservico.getProcessId(), ordemservico.getProcessId());
@@ -1461,7 +1461,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		if (!ValidationUtil.isNullOrEmpty(plano.getPrecoList())) {
 			a += PrecoBARD.maintainPrecoAssociations(plano.getPrecoList(),  response,
-					plano.getId(), null, null, TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(),
+					plano.getId(), null, null, TabelaEnum.PLANO, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(),
 					plano.getId(), plano.getCreateUser(), plano.getProcessId(), plano.getProcessId());
 
 		}
@@ -1475,7 +1475,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		}
 
 		Status status = new Status();
-		status.setStatus(CdStatusTypeEnum.ATIVO);
+		status.setStatus(CdStatusTypeEnum.DELETADO);
 		List<Status> statusList = new ArrayList<Status>();
 		statusList.add(status);
 		boolean b = StatusBARD.maintainStatusAssociations(statusList,  response,
@@ -1622,7 +1622,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		InternalResponse response = new InternalResponse();
 
-		MyBatisBARHelper.doInsert(getSqlSession(), "PlanoBySiteMAP.insertPlanoBySite", servico, response);
+		MyBatisBARHelper.doInsert(getSqlSession(), "PlanoByServicoMap.insertPlanoByServico", servico, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PLANO, AcaoEnum.DELETE,
 				servico.getProcessId(), getHistoricoBAR(), response, servico.getId());
@@ -1634,7 +1634,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 	public InternalResponse updateServicoByPlano(PlanoByServico servico) {
 		InternalResponse response = new InternalResponse();
 
-		MyBatisBARHelper.doUpdate(getSqlSession(), "PlanoBySiteMAP.updadePlanoBySite", servico, response);
+		MyBatisBARHelper.doUpdate(getSqlSession(), "PlanoByServicoMap.updatePlanoByServico", servico, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PLANO, AcaoEnum.DELETE,
 				servico.getProcessId(), getHistoricoBAR(), response, servico.getId());
@@ -1646,7 +1646,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 	public InternalResponse deleteServicoByPlanoById(PlanoByServico servico) {
 		InternalResponse response = new InternalResponse();
 
-		MyBatisBARHelper.doRemove(getSqlSession(), "PlanoBySiteMAP.deletePlanoBySite", servico, response);
+		MyBatisBARHelper.doRemove(getSqlSession(), "PlanoByServicoMap.deletePlanoByServicoById", servico, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PLANO, AcaoEnum.DELETE,
 				servico.getProcessId(), getHistoricoBAR(), response, servico.getId());

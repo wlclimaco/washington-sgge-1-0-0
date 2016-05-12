@@ -12,6 +12,8 @@ public class TipoBaixa extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
+	private String nome;
+
 	private String descricao;
 
 	/**
@@ -42,11 +44,18 @@ public class TipoBaixa extends ModelCosmeDamiao
 		this.descricao = descricao;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	@Override
-	public String toString()
-	{
-		return "TipoBaixa [getId()=" + getId() + ", getDescricao()=" + getDescricao() + ", toString()="
-				+ super.toString() + "]";
+	public String toString() {
+		return "TipoBaixa [getId()=" + getId() + ", getDescricao()=" + getDescricao() + ", getNome()=" + getNome()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

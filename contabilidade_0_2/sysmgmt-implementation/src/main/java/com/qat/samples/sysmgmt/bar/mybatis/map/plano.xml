@@ -29,6 +29,7 @@
 	<result property="modifyDateUTC" column="modify_date"/>
 	<collection property="precoList" column="id" select="PrecoMap.fetchPrecoByPlano"/>
 	<collection property="servicoList" column="id" select="PlanoByServicoMap.fetchServicoByPlano"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByTable"/>
   </resultMap>
 
   <sql id="allPlanoColumns">

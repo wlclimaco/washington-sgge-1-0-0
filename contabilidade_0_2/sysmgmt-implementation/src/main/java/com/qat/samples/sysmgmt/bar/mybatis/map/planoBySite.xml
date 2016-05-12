@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 30/04/2016 19:44 : 33-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PlanoByServicoMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="PlanoByServicoResult" type="PlanoByServico">
+    <result property="id" column="id"/>
+    <result property="parentId" column="parentId"/>
+    <result property="tabelaEnumValue" column="tabelaEnumValue"/>
+    <result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<association property="servico"    column="servico" select="ServicoMap.fetchServicoById"  />
+  </resultMap>
+
+  <sql id="allPlanoByServicoColumns">
+parentId
+,tabelaEnumValue
+,processId
+,servico
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allPlanoByServicoValues">
+
+#{parentId},
+#{tabelaEnumValue},
+#{processId},
+#{servico.id},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllPlanoByServicos" resultMap="PlanoByServicoResult">
+    SELECT id,
+	<include refid="allPlanoByServicoColumns" />
+   FROM planoByServico ORDER BY id ASC
+ </select>
+
+ <select id="fetchPlanoByServicoById" parameterType="Integer" resultMap="PlanoByServicoResult">
+    SELECT id,
+	<include refid="allPlanoByServicoColumns" />
+   FROM planoByServico parentId = #{fetchid} and tabelaEnumValue = 54
+ </select>
+
+  <select id="fetchServicoByPlano" parameterType="Integer" resultMap="PlanoByServicoResult">
+    SELECT id,
+	<include refid="allPlanoByServicoColumns" />
+   FROM planoByServico WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllPlanoByServicosRequest" parameterType="PagedInquiryRequest" resultMap="PlanoByServicoResult">
+
+		SELECT id,<include refid="allPlanoByServicoColumns" />
+  		  FROM planoByServico ORDER BY id ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+</select>
+
+<select id="fetchPlanoByServicoRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM planoByServico WHERE id IS NOT NULL
+
+ </select>
+
+ <select id="fetchAllCnaesByEmpresa" parameterType="Integer" resultMap="PlanoByServicoResult">
+    	SELECT id,
+			<include refid="allPlanoByServicoColumns" />
+		    FROM cnaeEmpresa b
+		   where tabelaenumvalue in (1,51,52,61,62,63) and  parentid = #{id}
+    </select>
+
+ <insert id="insertPlanoByServico" parameterType="PlanoByServico">
+ 	INSERT INTO planoByServico (<if test="id != null">id,</if>
+	<include refid="allPlanoByServicoColumns" />
+     )
+   VALUES (<if test="id != null">#{id},</if><include refid="allPlanoByServicoValues" /> )
+ </insert>
+
+ <update id="updatePlanoByServico" parameterType="PlanoByServico">
+   UPDATE planoByServico SET
+<if test="parentId!= null">parentId = #{parentId},</if>
+<if test="tabelaEnumValue!= null">tabelaEnumValue = #{tabelaEnumValue},</if>
+<if test="processId!= null">processId = #{processId},</if>
+<if test="servico.id!= null">servico = #{servico.id},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deletePlanoByServicoById" parameterType="PlanoByServico">
+  DELETE FROM planoByServico WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllPlanoByServicos">
+	DELETE FROM planoByServico
+  </delete>
+</mapper>
+
+

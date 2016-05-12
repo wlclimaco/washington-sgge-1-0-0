@@ -13,43 +13,11 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
  * setting.
  */
 @SuppressWarnings("serial")
-public class ContasPagar extends ModelCosmeDamiao
+public class ContasPagar extends Titulo
 {
-	/** The SendSolv id for the account. */
-	private Integer id;
-
-	private String numero;
-
-	private Integer parcela;
-
 	/** The type of an account. */
 	private Fornecedor fornecedor;
 
-	/** The description. */
-	private Cliente cliente;
-
-	/** The estado. */
-	private Long dataEmissao;
-
-	/** The bairro. */
-	private Long dataVencimento;
-
-	/** The numero. */
-	private Integer docId;
-
-	/** The cep. */
-	private NotaFiscalEntrada notaFiscalEntrada;
-
-	private NotaFiscalSaida notaFiscalSaida;
-
-	/** The tipo endereco. */
-	private String observacao;
-
-	private Double valor;
-
-	private FinanceiroStatusEnum financeiroEnum;
-
-	private List<Baixa> listBaixa;
 
 	/**
 	 * Default constructor.

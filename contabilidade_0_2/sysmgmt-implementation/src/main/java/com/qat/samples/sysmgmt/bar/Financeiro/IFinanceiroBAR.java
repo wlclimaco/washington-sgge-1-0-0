@@ -1,3 +1,4 @@
+/** create by system gera-java version 1.0.0 11/05/2016 23:5 : 6*/
 package com.qat.samples.sysmgmt.bar.Financeiro;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
@@ -6,9 +7,12 @@ import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
 import com.qat.samples.sysmgmt.condpag.model.CondPag;
 import com.qat.samples.sysmgmt.condpag.model.FormaPg;
 import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
+import com.qat.samples.sysmgmt.financeiro.model.BaixaTitulo;
 import com.qat.samples.sysmgmt.financeiro.model.Caixa;
 import com.qat.samples.sysmgmt.financeiro.model.ContasPagar;
 import com.qat.samples.sysmgmt.financeiro.model.ContasReceber;
+import com.qat.samples.sysmgmt.financeiro.model.TipoBaixa;
+import com.qat.samples.sysmgmt.financeiro.model.Titulo;
 import com.qat.samples.sysmgmt.financeiro.model.request.CaixaInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.CondPagInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteInquiryRequest;
@@ -16,6 +20,7 @@ import com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarInquiryReques
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.FormaPgInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
 /**
  * The Interface FinanceiroBAR.. (Data Access Component - DAC)
@@ -79,6 +84,177 @@ public interface IFinanceiroBAR
 * @return the internal results response
 */
 	public InternalResultsResponse<ContasPagar> fetchContasPagarsByRequest(ContasPagarInquiryRequest request);
+
+	/**
+	 * Fetch titulo by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public Titulo fetchTituloById(FetchByIdRequest request);
+
+	/**
+* Insert titulo.
+*
+* @param titulo the titulo
+*
+* @return the internal response
+*/
+	public InternalResponse insertTitulo(Titulo titulo);
+
+	/**
+* Update titulo.
+*
+* @param titulo the titulo
+*
+* @return the internal response
+*/
+	public InternalResponse updateTitulo(Titulo titulo);
+
+	/**
+* Delete titulo.
+*
+* @param titulo the titulo
+*
+* @return the internal response
+*/
+	public InternalResponse deleteTituloById(Titulo titulo);
+
+	/**
+* Delete all titulos.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllTitulos();
+
+	/**
+* Fetch all titulos.
+*
+* @return the list< titulo>
+*/
+	public InternalResultsResponse<Titulo> fetchAllTitulos(Titulo  titulo);
+
+	/**
+* Fetch titulos by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Titulo> fetchTitulosByRequest(PagedInquiryRequest request);
+
+	/**
+	 * Fetch baixatitulo by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public BaixaTitulo fetchBaixaTituloById(FetchByIdRequest request);
+
+	/**
+* Insert baixatitulo.
+*
+* @param baixatitulo the baixatitulo
+*
+* @return the internal response
+*/
+	public InternalResponse insertBaixaTitulo(BaixaTitulo baixatitulo);
+
+	/**
+* Update baixatitulo.
+*
+* @param baixatitulo the baixatitulo
+*
+* @return the internal response
+*/
+	public InternalResponse updateBaixaTitulo(BaixaTitulo baixatitulo);
+
+	/**
+* Delete baixatitulo.
+*
+* @param baixatitulo the baixatitulo
+*
+* @return the internal response
+*/
+	public InternalResponse deleteBaixaTituloById(BaixaTitulo baixatitulo);
+
+	/**
+* Delete all baixatitulos.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllBaixaTitulos();
+
+	/**
+* Fetch all baixatitulos.
+*
+* @return the list< baixatitulo>
+*/
+	public InternalResultsResponse<BaixaTitulo> fetchAllBaixaTitulos(BaixaTitulo  baixatitulo);
+
+	/**
+* Fetch baixatitulos by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<BaixaTitulo> fetchBaixaTitulosByRequest(PagedInquiryRequest request);
+
+	/**
+	 * Fetch tipobaixa by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public TipoBaixa fetchTipoBaixaById(FetchByIdRequest request);
+
+	/**
+* Insert tipobaixa.
+*
+* @param tipobaixa the tipobaixa
+*
+* @return the internal response
+*/
+	public InternalResponse insertTipoBaixa(TipoBaixa tipobaixa);
+
+	/**
+* Update tipobaixa.
+*
+* @param tipobaixa the tipobaixa
+*
+* @return the internal response
+*/
+	public InternalResponse updateTipoBaixa(TipoBaixa tipobaixa);
+
+	/**
+* Delete tipobaixa.
+*
+* @param tipobaixa the tipobaixa
+*
+* @return the internal response
+*/
+	public InternalResponse deleteTipoBaixaById(TipoBaixa tipobaixa);
+
+	/**
+* Delete all tipobaixas.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllTipoBaixas();
+
+	/**
+* Fetch all tipobaixas.
+*
+* @return the list< tipobaixa>
+*/
+	public InternalResultsResponse<TipoBaixa> fetchAllTipoBaixas(TipoBaixa  tipobaixa);
+
+	/**
+* Fetch tipobaixas by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<TipoBaixa> fetchTipoBaixasByRequest(PagedInquiryRequest request);
 
 	/**
 	 * Fetch contasreceber by id.

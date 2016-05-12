@@ -13,7 +13,7 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
  * setting.
  */
 @SuppressWarnings("serial")
-public class Financeiro extends ModelCosmeDamiao
+public class Titulo extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
@@ -21,12 +21,6 @@ public class Financeiro extends ModelCosmeDamiao
 	private String numero;
 
 	private Integer parcela;
-
-	/** The type of an account. */
-	private Fornecedor fornecedor;
-
-	/** The description. */
-	private Cliente cliente;
 
 	/** The estado. */
 	private Long dataEmissao;
@@ -37,12 +31,6 @@ public class Financeiro extends ModelCosmeDamiao
 	/** The numero. */
 	private Integer docId;
 
-	/** The cep. */
-	private NotaFiscalEntrada notaFiscalEntrada;
-
-	private NotaFiscalSaida notaFiscalSaida;
-
-	/** The tipo endereco. */
 	private String observacao;
 
 	private Double valor;
@@ -54,14 +42,18 @@ public class Financeiro extends ModelCosmeDamiao
 	/**
 	 * Default constructor.
 	 */
-	public Financeiro()
+	public Titulo()
 	{
 		super();
 	}
 
+	public Titulo(int i, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Gets the id.
-	 * 
+	 *
 	 * @return the id
 	 */
 	public Integer getId()
@@ -71,7 +63,7 @@ public class Financeiro extends ModelCosmeDamiao
 
 	/**
 	 * Sets the id.
-	 * 
+	 *
 	 * @param id the id to set
 	 */
 	public void setId(Integer id)
@@ -97,26 +89,6 @@ public class Financeiro extends ModelCosmeDamiao
 	public void setParcela(Integer parcela)
 	{
 		this.parcela = parcela;
-	}
-
-	public Fornecedor getFornecedor()
-	{
-		return fornecedor;
-	}
-
-	public void setFornecedor(Fornecedor fornecedor)
-	{
-		this.fornecedor = fornecedor;
-	}
-
-	public Cliente getCliente()
-	{
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente)
-	{
-		this.cliente = cliente;
 	}
 
 	public Long getDataEmissao()
@@ -149,25 +121,7 @@ public class Financeiro extends ModelCosmeDamiao
 		this.docId = docId;
 	}
 
-	public NotaFiscalEntrada getNotaFiscalEntrada()
-	{
-		return notaFiscalEntrada;
-	}
 
-	public void setNotaFiscalEntrada(NotaFiscalEntrada notaFiscalEntrada)
-	{
-		this.notaFiscalEntrada = notaFiscalEntrada;
-	}
-
-	public NotaFiscalSaida getNotaFiscalSaida()
-	{
-		return notaFiscalSaida;
-	}
-
-	public void setNotaFiscalSaida(NotaFiscalSaida notaFiscalSaida)
-	{
-		this.notaFiscalSaida = notaFiscalSaida;
-	}
 
 	public String getObservacao()
 	{
@@ -210,13 +164,10 @@ public class Financeiro extends ModelCosmeDamiao
 	}
 
 	@Override
-	public String toString()
-	{
-		return "Financeiro [getId()=" + getId() + ", getNumero()=" + getNumero() + ", getParcela()=" + getParcela()
-				+ ", getFornecedor()=" + getFornecedor() + ", getCliente()=" + getCliente() + ", getDataEmissao()="
-				+ getDataEmissao() + ", getDataVencimento()=" + getDataVencimento() + ", getDocId()=" + getDocId()
-				+ ", getNotaFiscalEntrada()=" + getNotaFiscalEntrada() + ", getNotaFiscalSaida()="
-				+ getNotaFiscalSaida() + ", getObservacao()=" + getObservacao() + ", getValor()=" + getValor()
+	public String toString() {
+		return "Titulo [getId()=" + getId() + ", getNumero()=" + getNumero() + ", getParcela()=" + getParcela()
+				+ ", getDataEmissao()=" + getDataEmissao() + ", getDataVencimento()=" + getDataVencimento()
+				+ ", getDocId()=" + getDocId() + ", getObservacao()=" + getObservacao() + ", getValor()=" + getValor()
 				+ ", getFinanceiroEnum()=" + getFinanceiroEnum() + ", getListBaixa()=" + getListBaixa()
 				+ ", toString()=" + super.toString() + "]";
 	}

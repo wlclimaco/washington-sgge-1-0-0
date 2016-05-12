@@ -1,5 +1,7 @@
 package com.qat.samples.sysmgmt.financeiro.model;
 
+import java.util.List;
+
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -7,7 +9,7 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
  * setting.
  */
 @SuppressWarnings("serial")
-public class Baixa extends ModelCosmeDamiao
+public class BaixaTitulo extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
@@ -25,19 +27,21 @@ public class Baixa extends ModelCosmeDamiao
 
 	private Double multa;
 
-	private TipoBaixa tipoBaixa;
+	private Double desconto;
+
+	private List<TipoBaixa> tipoBaixaList;
 
 	/**
 	 * Default constructor.
 	 */
-	public Baixa()
+	public BaixaTitulo()
 	{
 		super();
 	}
 
 	/**
 	 * Gets the id.
-	 * 
+	 *
 	 * @return the id
 	 */
 	public Integer getId()
@@ -47,7 +51,7 @@ public class Baixa extends ModelCosmeDamiao
 
 	/**
 	 * Sets the id.
-	 * 
+	 *
 	 * @param id the id to set
 	 */
 	public void setId(Integer id)
@@ -115,23 +119,30 @@ public class Baixa extends ModelCosmeDamiao
 		this.multa = multa;
 	}
 
-	public TipoBaixa getTipoBaixa()
-	{
-		return tipoBaixa;
+	public List<TipoBaixa> getTipoBaixaList() {
+		return tipoBaixaList;
 	}
 
-	public void setTipoBaixa(TipoBaixa tipoBaixa)
-	{
-		this.tipoBaixa = tipoBaixa;
+	public void setTipoBaixaList(List<TipoBaixa> tipoBaixaList) {
+		this.tipoBaixaList = tipoBaixaList;
+	}
+
+	public Double getDesconto() {
+		return desconto;
+	}
+
+	public void setDesconto(Double desconto) {
+		this.desconto = desconto;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "Baixa [getId()=" + getId() + ", getFinanId()=" + getFinanId() + ", getDataBaixa()=" + getDataBaixa()
-				+ ", getObservacao()=" + getObservacao() + ", getValor()=" + getValor() + ", getJuros()=" + getJuros()
-				+ ", getMulta()=" + getMulta() + ", getTipoBaixa()=" + getTipoBaixa() + ", toString()="
-				+ super.toString() + "]";
+	public String toString() {
+		return "BaixaTitulo [getId()=" + getId() + ", getFinanId()=" + getFinanId() + ", getDataBaixa()="
+				+ getDataBaixa() + ", getObservacao()=" + getObservacao() + ", getValor()=" + getValor()
+				+ ", getJuros()=" + getJuros() + ", getMulta()=" + getMulta() + ", getTipoBaixaList()="
+				+ getTipoBaixaList() + ", getDesconto()=" + getDesconto() + ", toString()=" + super.toString() + "]";
 	}
+
+
 
 }
