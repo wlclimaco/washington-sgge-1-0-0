@@ -11,13 +11,13 @@ public class Custo extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
-
-	private Integer entidadeId;
+	
+	private Double valor;
 
 	/** The type of an account. */
-	private CustoItem custo;
+	private List<CustoItem> custo;
 
-	private Double valor;
+	
 
 	/**
 	 * Default constructor.
