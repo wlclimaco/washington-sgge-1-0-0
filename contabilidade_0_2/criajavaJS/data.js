@@ -354,7 +354,6 @@ function ContasPagarModel() {
 
 	var a = [];
 	a = TituloModel();
-	a.push({field :{campo : "fornecedor" , tipo :"Fornecedor",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
@@ -364,7 +363,6 @@ function ContasReceberModel() {
 
 	var a = [];
 	a = TituloModel();
-	a.push({field :{campo : "cliente" , tipo :"Cliente",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
@@ -629,6 +627,7 @@ function TituloModel() {
 		a.push({field :{campo : "valor", tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 		a.push({field :{campo : "observacao", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 		a.push({field :{campo : "financeiroEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "parentId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 		a.push({field :{campo : "listBaixa", tipo :"List<BaixaTitulo>",List : "BaixaTitulo",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
@@ -1172,7 +1171,7 @@ function dependenciaOrdemServico(){
 function dependenciaTitulo(){
 	var a = [];
 	a.push({dependencia :"BaixaTitulo",campos : BaixaTituloModel()});
-	a.push({dependencia :"TipoTitulo" ,campos : TipoBaixaModel()});
+	a.push({dependencia :"TipoBaixa" ,campos : TipoBaixaModel()});
 	return a
 }
 

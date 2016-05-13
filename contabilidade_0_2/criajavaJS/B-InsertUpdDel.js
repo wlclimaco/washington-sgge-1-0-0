@@ -67,7 +67,7 @@ b_Insert = function (table,oField,total){
 			}
 			//debugger
 			text = text + "\n";
-			text = text + 'INSERT INTO '+table+'('+a+'emprId','processId','create_user,create_date,modify_user,modify_date)values\n';
+			text = text + 'INSERT INTO '+table+'('+a+'emprId,processId,create_user,create_date,modify_user,modify_date)values\n';
 			a ="";
 			b = new Date();
 			for(i=0;i < oField.length;i++){
@@ -91,7 +91,7 @@ b_Insert = function (table,oField,total){
 
 			}
 
-			text = text + "("+a+"'1','1','system',"+b.getTime()+",'rod',"+b.getTime()+");\n";
+			text = text + "("+a+"1,1,'system',"+b.getTime()+",'rod',"+b.getTime()+");\n";
 			a ="";
 		}
 	}
