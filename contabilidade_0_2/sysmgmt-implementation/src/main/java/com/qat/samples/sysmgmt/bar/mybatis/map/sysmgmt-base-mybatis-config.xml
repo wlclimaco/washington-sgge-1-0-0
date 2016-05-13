@@ -45,21 +45,23 @@
   		<typeAlias alias="AdvocaciaInquiryRequest" type="com.qat.samples.sysmgmt.advocacia.request.AdvocaciaInquiryRequest"/>
   		<typeAlias alias="ClinicaInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.ClinicaInquiryRequest"/>
   		<typeAlias alias="CondominioInquiryRequest" type="com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest"/>
-		
-		
+
+
 		<!-- Financeiro -->
-  		<typeAlias alias="ContasPagar" type="com.qat.samples.sysmgmt.financeiro.model.ContasPagar"/>
+
+		<typeAlias alias="ContasPagar" type="com.qat.samples.sysmgmt.financeiro.model.ContasPagar"/>
   		<typeAlias alias="Titulo" type="com.qat.samples.sysmgmt.financeiro.model.Titulo"/>
   		<typeAlias alias="BaixaTitulo" type="com.qat.samples.sysmgmt.financeiro.model.BaixaTitulo"/>
   		<typeAlias alias="TipoBaixa" type="com.qat.samples.sysmgmt.financeiro.model.TipoBaixa"/>
   		<typeAlias alias="ContasReceber" type="com.qat.samples.sysmgmt.financeiro.model.ContasReceber"/>
-  		<typeAlias alias="CondPag" type="com.qat.samples.sysmgmt.financeiro.model.CondPag"/>
-		<typeAlias alias="FormaPg" type="com.qat.samples.sysmgmt.financeiro.model.FormaPg"/>
-		<typeAlias alias="Banco" type="com.qat.samples.sysmgmt.financeiro.model.Banco"/>
-		<typeAlias alias="ContaCorrente" type="com.qat.samples.sysmgmt.financeiro.model.ContaCorrente"/>
+  		<typeAlias alias="CondPag" type="com.qat.samples.sysmgmt.condpag.model.CondPag"/>
+		<typeAlias alias="ContaCorrente" type="com.qat.samples.sysmgmt.conta.model.ContaCorrente"/>
 		<typeAlias alias="Caixa" type="com.qat.samples.sysmgmt.financeiro.model.Caixa"/>
 
-
+		<typeAlias alias="ContasPagarInquiryRequest" type="com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarInquiryRequest"/>
+		<typeAlias alias="ContasReceberInquiryRequest" type="com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberInquiryRequest"/>
+<typeAlias alias="ContaCorrenteInquiryRequest" type="com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteInquiryRequest"/>
+<typeAlias alias="CaixaInquiryRequest" type="com.qat.samples.sysmgmt.financeiro.model.request.CaixaInquiryRequest"/>
 
   		<typeAlias alias="TabelaEnum" type="com.qat.samples.sysmgmt.util.model.TabelaEnum"/>
   		<typeAlias alias="AcaoEnum" type="com.qat.samples.sysmgmt.util.model.AcaoEnum"/>
@@ -163,7 +165,6 @@
   		<typeAlias alias="BancoInquiryRequest" type="com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest"/>
 
   		<typeAlias alias="CondPagPessoa" type="com.qat.samples.sysmgmt.condpag.model.CondPagPessoa"/>
-  		<typeAlias alias="CondPag" type="com.qat.samples.sysmgmt.condpag.model.CondPag"/>
   		<typeAlias alias="TipoPag" type="com.qat.samples.sysmgmt.condpag.model.TipoPag"/>
 
 
@@ -354,7 +355,7 @@
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/salarios.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/profissao.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/note.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/condpag.xml"/>
+		<!--  <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/condpag.xml"/>-->
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/contador.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/horaFunc.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/formapg.xml"/>
@@ -381,7 +382,7 @@
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/rentabilidade.xml"/>
 		<!-- <mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/rentabilidadeItens.xml"/> -->
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/subgrupo.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/tributacao.xml"/>
+
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/tributos.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/uniMed.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/produto.xml"/>
@@ -403,12 +404,10 @@
   		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/baixaTitulo.xml"/>
   		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/tipoBaixa.xml"/>
   		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/contasReceber.xml"/>
-  		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/condPag.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/formaPg.xml"/>
+  		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/condpag.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/banco.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/contaCorrente.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/caixa.xml"/>
-
     </mappers>
 
 </configuration>

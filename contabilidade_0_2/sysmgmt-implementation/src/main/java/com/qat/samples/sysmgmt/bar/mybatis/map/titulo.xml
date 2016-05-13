@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 12/05/2016 12:43 : 4-->
+<!-- create by system gera-java version 1.0.0 12/05/2016 22:16 : 13-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -24,14 +24,13 @@
     <result property="valor" column="valor"/>
     <result property="observacao" column="observacao"/>
     <result property="financeiroEnumValue" column="financeiroEnumValue"/>
-
-<result property="emprId" column="emprId"/>
-<result property="processId" column="processId"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
-<collection property="listBaixa" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+	<result property="emprId" column="emprId"/>
+	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<collection property="listBaixa" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
   </resultMap>
 
   <sql id="allTituloColumns">
@@ -79,16 +78,16 @@ numero
    FROM titulo WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllTitulosRequest" parameterType="TituloInquiryRequest" resultMap="TituloResult">
+ <select id="fetchAllTitulosRequest" parameterType="PagedInquiryRequest" resultMap="TituloResult">
 
 		SELECT id,<include refid="allTituloColumns" />
-  		  FROM titulo where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+  		  FROM titulo where 0 = 0  ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchTituloRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM titulo WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM titulo WHERE id IS NOT NULL
 
  </select>
 

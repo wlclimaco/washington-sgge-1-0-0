@@ -56,16 +56,16 @@
    FROM condpag WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllCondPagsRequest" parameterType="CondPagInquiryRequest" resultMap="CondPagResult">
+ <select id="fetchAllCondPagsRequest" parameterType="PagedInquiryRequest" resultMap="CondPagResult">
 
 		SELECT id,<include refid="allCondPagColumns" />
-  		  FROM condpag where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+  		  FROM condpag where 0 = 0 <if test="baseCriteria.emprId != null"> and emprId = baseCriteria.emprId</if> ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchCondPagRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM condpag WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM condpag WHERE id IS NOT NULL <if test="baseCriteria.emprId != null"> and emprId = baseCriteria.emprId</if>
 
  </select>
 

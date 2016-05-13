@@ -956,16 +956,14 @@ public IFinanceiroBAR getFinanceiroBAR()
 	@Before
 	public void setup()
 	{
-		executeSqlScript("conf/insertContasPagar.sql", false);
 		executeSqlScript("conf/insertTitulo.sql", false);
-		executeSqlScript("conf/insertBaixaTitulo.sql", false);
-		executeSqlScript("conf/insertTipoBaixa.sql", false);
-		executeSqlScript("conf/insertContasReceber.sql", false);
-		executeSqlScript("conf/insertCondPag.sql", false);
-		executeSqlScript("conf/insertFormaPg.sql", false);
-		executeSqlScript("conf/insertBanco.sql", false);
-		executeSqlScript("conf/insertContaCorrente.sql", false);
-		executeSqlScript("conf/insertCaixa.sql", false);
+//		executeSqlScript("conf/insertBaixaTitulo.sql", false);
+//		executeSqlScript("conf/insertTipoBaixa.sql", false);
+//		executeSqlScript("conf/insertCondPag.sql", false);
+//		executeSqlScript("conf/insertFormaPg.sql", false);
+//		executeSqlScript("conf/insertBanco.sql", false);
+//		executeSqlScript("conf/insertContaCorrente.sql", false);
+//		executeSqlScript("conf/insertCaixa.sql", false);
 	}
 
 

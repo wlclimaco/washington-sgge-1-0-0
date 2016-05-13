@@ -60,16 +60,16 @@ nome
    FROM tipobaixa WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllTipoBaixasRequest" parameterType="TipoBaixaInquiryRequest" resultMap="TipoBaixaResult">
+ <select id="fetchAllTipoBaixasRequest" parameterType="PagedInquiryRequest" resultMap="TipoBaixaResult">
 
 		SELECT id,<include refid="allTipoBaixaColumns" />
-  		  FROM tipobaixa where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+  		  FROM tipobaixa where 0 = 0 <if test="baseCriteria.emprId != null"> and emprId = baseCriteria.emprId</if> ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchTipoBaixaRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM tipobaixa WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM tipobaixa WHERE id IS NOT NULL <if test="baseCriteria.emprId != null"> and emprId = baseCriteria.emprId</if>
 
  </select>
 

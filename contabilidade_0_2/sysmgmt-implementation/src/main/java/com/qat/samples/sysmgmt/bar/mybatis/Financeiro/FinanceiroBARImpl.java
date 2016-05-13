@@ -13,6 +13,8 @@ import com.qat.framework.util.MyBatisBARHelper;
 import com.qat.samples.sysmgmt.banco.model.Banco;
 import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
 import com.qat.samples.sysmgmt.bar.Financeiro.IFinanceiroBAR;
+import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
+import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.condpag.model.CondPag;
 import com.qat.samples.sysmgmt.condpag.model.FormaPg;
 import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
@@ -322,7 +324,38 @@ private static final String STMT_DELETE_CAIXA = NAMESPACE_CAIXA + "deleteCaixaBy
 	/** The Constant STMT_FETCH_CAIXA_ALL_REQUEST. */
 	private static final String STMT_FETCH_CAIXA_ALL_REQUEST = NAMESPACE_CAIXA + "fetchAllCaixasRequest";
 
-//===================================### CONTASPAGAR ####======================================
+	IStatusBAR statusBAR;
+
+	IHistoricoBAR historicoBAR;
+
+	IFinanceiroBAR financeiroBAR;
+
+
+	public IStatusBAR getStatusBAR() {
+		return statusBAR;
+	}
+
+	public void setStatusBAR(IStatusBAR statusBAR) {
+		this.statusBAR = statusBAR;
+	}
+
+	public IHistoricoBAR getHistoricoBAR() {
+		return historicoBAR;
+	}
+
+	public void setHistoricoBAR(IHistoricoBAR historicoBAR) {
+		this.historicoBAR = historicoBAR;
+	}
+
+	public IFinanceiroBAR getFinanceiroBAR() {
+		return financeiroBAR;
+	}
+
+	public void setFinanceiroBAR(IFinanceiroBAR financeiroBAR) {
+		this.financeiroBAR = financeiroBAR;
+	}
+
+	//===================================### CONTASPAGAR ####======================================
 	/**
 /*
  * (non-Javadoc)

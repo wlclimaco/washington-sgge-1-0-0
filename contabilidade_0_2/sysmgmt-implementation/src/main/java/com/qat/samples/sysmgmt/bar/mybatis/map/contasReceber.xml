@@ -15,76 +15,38 @@
       from a query, and the class properties.  A result map isnt
       necessary if the columns (or aliases) match to the properties
        exactly. -->
-  <resultMap id="ContasReceberResult" type="ContasReceber">
-    <result property="id" column="id"/>
-    <result property="numero" column="numero"/>
-    <result property="dataEmissao" column="dataEmissao"/>
-    <result property="dataVencimento" column="dataVencimento"/>
-    <result property="docId" column="docId"/>
-    <result property="valor" column="valor"/>
-    <result property="observacao" column="observacao"/>
-    <result property="financeiroEnumValue" column="financeiroEnumValue"/>
-    <result property="cliente" column="cliente"/>
-<result property="emprId" column="emprId"/>
-<result property="processId" column="processId"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
-<collection property="listBaixa" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+  <resultMap id="ContasReceberResult" type="ContasReceber" extends="TituloMap.TituloResult">
+    <collection property="cliente" column="parentId" select="ClienteMap.fetchClienteById"/>
   </resultMap>
 
   <sql id="allContasReceberColumns">
-,numero
-,dataEmissao
-,dataVencimento
-,docId
-,valor
-,observacao
-,financeiroEnumValue
-,cliente
-,emprId
-,processId
-,create_date
-,create_user
-,modify_date
-,modify_user
+  <include refid="TituloMap.allTituloColumns"/>
+	,parentId
+
 
 </sql>
 <sql id="allContasReceberValues">
-#{numero},
-#{dataEmissao},
-#{dataVencimento},
-#{docId},
-#{valor},
-#{observacao},
-#{financeiroEnumValue},
-#{cliente},
-		#{emprId},
-		#{processId},
-		#{createDateUTC},
-		#{createUser},
-		#{modifyDateUTC},
-		#{modifyUser}
-  </sql>
+<include refid="TituloMap.allTituloValues"/>
+	,#{cliente.id}
+</sql>
 
 
  <select id="fetchAllContasRecebers" resultMap="ContasReceberResult">
     SELECT id,
 	<include refid="allContasReceberColumns" />
-   FROM contasreceber ORDER BY id ASC
+   FROM titulo ORDER BY id ASC
  </select>
 
  <select id="fetchContasReceberById" parameterType="Integer" resultMap="ContasReceberResult">
     SELECT id,
 	<include refid="allContasReceberColumns" />
-   FROM contasreceber WHERE id = #{fetchid}
+   FROM titulo WHERE id = #{fetchid}
  </select>
 
  <select id="fetchAllContasRecebersRequest" parameterType="ContasReceberInquiryRequest" resultMap="ContasReceberResult">
 
 		SELECT id,<include refid="allContasReceberColumns" />
-  		  FROM contasreceber where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+  		  FROM titulo where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
@@ -110,7 +72,7 @@
 <if test="valor!= null">valor = #{valor},</if>
 <if test="observacao!= null">observacao = #{observacao},</if>
 <if test="financeiroEnumValue!= null">financeiroEnumValue = #{financeiroEnumValue},</if>
-<if test="cliente!= null">cliente = #{cliente},</if>
+<if test="cliente.id!= null">cliente = #{cliente.id},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

@@ -90,6 +90,13 @@
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 	</bean>
 
+	<bean id="financeiroBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Financeiro.FinanceiroBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+		<property name="historicoBAR" ref="historicoBARTarget" />
+		<property name="statusBAR" ref="statusBARTarget" />
+		<property name="financeiroBAR" ref="financeiroBARTarget" />
+	</bean>
+
 
 	<bean id="qat-debug-loggingInterceptor" class="com.qat.framework.aop.DebugLoggingAOP"></bean>
 
