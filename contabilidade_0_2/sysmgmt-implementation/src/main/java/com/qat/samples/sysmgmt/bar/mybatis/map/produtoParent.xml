@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 13/05/2016 17:59 : 56-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProdutoParentMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="ProdutoParentResult" type="ProdutoParent">
+    <result property="id" column="id"/>
+    <result property="parentId" column="parentId"/>
+    <result property="emprId" column="emprId"/>
+    <result property="tributacao" column="tributacao"/>
+<collection property="estoqueList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="precoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="custoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="porcaoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="rentabilidadeList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="cfopList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+    <result property="dataValidade" column="dataValidade"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
+
+  <sql id="allProdutoParentColumns">
+,parentId
+,emprId
+,tributacao
+,dataValidade
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allProdutoParentValues">
+#{parentId},
+#{emprId},
+#{tributacao},
+#{dataValidade},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllProdutoParents" resultMap="ProdutoParentResult">
+    SELECT id,
+	<include refid="allProdutoParentColumns" />
+   FROM produtoparent ORDER BY id ASC
+ </select>
+
+ <select id="fetchProdutoParentById" parameterType="Integer" resultMap="ProdutoParentResult">
+    SELECT id,
+	<include refid="allProdutoParentColumns" />
+   FROM produtoparent WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllProdutoParentsRequest" parameterType="ProdutoParentInquiryRequest" resultMap="ProdutoParentResult">
+
+		SELECT id,<include refid="allProdutoParentColumns" />
+  		  FROM produtoparent where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+</select>
+
+<select id="fetchProdutoParentRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM produtoparent WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+
+ </select>
+
+ <insert id="insertProdutoParent" parameterType="ProdutoParent" useGeneratedKeys="true" keyProperty="id">
+ 	INSERT INTO produtoparent (
+	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allProdutoParentColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allProdutoParentValues" /> )
+ </insert>
+
+ <update id="updateProdutoParent" parameterType="ProdutoParent">
+   UPDATE produtoparent SET
+<if test="parentId!= null">parentId = #{parentId},</if>
+<if test="emprId!= null">emprId = #{emprId},</if>
+<if test="tributacao!= null">tributacao = #{tributacao},</if>
+<if test="dataValidade!= null">dataValidade = #{dataValidade},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteProdutoParentById" parameterType="ProdutoParent">
+  DELETE FROM produtoparent WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllProdutoParents">
+	DELETE FROM produtoparent
+  </delete>
+</mapper>
+
+

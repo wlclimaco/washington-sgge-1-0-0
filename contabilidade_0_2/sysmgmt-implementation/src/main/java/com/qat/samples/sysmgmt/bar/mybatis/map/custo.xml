@@ -1,134 +1,105 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+
+<!-- create by system gera-java version 1.0.0 13/05/2016 17:59 : 56-->
+
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="CustoMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
-	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
-
-  	<!-- [id]              [int] NOT NULL,
-	[prodId]          [int] NOT NULL,
-	[idcustoItens]    [int] NOT NULL,
-	[valor]           [real] NOT NULL,
-       -->
-
-  <resultMap id="custoResult" type="Custo" >
-    <result property="id" column="id" />
-   	<result property="valor" column="valor"/>
-   	<result property="parentId" column="prodId" />
-   	<result property="emprId" column="emprId"/>
-   	<result property="entidadeId" column="entidadeId"/>
-	<result property="createUser" column="create_user"/>
-	<result property="createDataUTC" column="create_date"/>
-	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDataUTC" column="modify_date"/>
-    <association property="idcustoItens"    column="idcustoItens" select="CustoItemMap.fetchCustoItemByCusto"  />
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="CustoResult" type="Custo">
+    <result property="id" column="id"/>
+    <result property="valor" column="valor"/>
+<collection property="custo" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+    <result property="parentId" column="parentId"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
-  <!--
-		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
-	-->
   <sql id="allCustoColumns">
-		 b.idcustoItens
-		,b.valor
-		,b.prodId
-   		,b.emprId
-   		,b.entidadeId
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+,valor
+,parentId
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allCustoValues">
+#{valor},
+#{parentId},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
   </sql>
 
-  <sql id="allCustoValues">
-  		#{prodId},
-  		#{idcustoItens},
-  		#{valor},
-  		#{parentId},
-   		#{emprId},
-   		#{entidadeId},
-    	<include refid="CBOFMap.changeControlFields"/>
-  </sql>
 
-  <!--
-		SQL Insert Statements.
- 	-->
-  <insert id="insertCusto" parameterType="Custo" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO custo (
-		<include refid="allCustoColumns" />
-      )
-    VALUES (<include refid="allCustoValues" /> )
-  </insert>
+ <select id="fetchAllCustos" resultMap="CustoResult">
+    SELECT id,
+	<include refid="allCustoColumns" />
+   FROM custo ORDER BY id ASC
+ </select>
 
+ <select id="fetchCustoById" parameterType="Integer" resultMap="CustoResult">
+    SELECT id,
+	<include refid="allCustoColumns" />
+   FROM custo WHERE id = #{fetchid}
+ </select>
 
-	<!--
-		SQL Update Statements.
- 	-->
+ <select id="fetchAllCustosRequest" parameterType="CustoInquiryRequest" resultMap="CustoResult">
 
-  <update id="updateCusto" parameterType="Custo">
-    UPDATE custo
-    	<set>
-    		<if test="prodId!= null">prodId = #{prodId},</if>
-	    	<if test="idcustoItens!= null">idcustoItens=#{idcustoItens},</if>
-	    	<if test="valor!= null"> valor=#{valor},</if>
-			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
-			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
-		</set>
-    WHERE
-     id = #{id}
-  </update>
+		SELECT id,<include refid="allCustoColumns" />
+  		  FROM custo where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+</select>
 
-   <!--
-		SQL Delete Statements.
-   -->
-  <delete id="deleteCustoById" parameterType="Integer">
-    	DELETE FROM custo WHERE id = #{id}
+<select id="fetchCustoRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM custo WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+
+ </select>
+
+ <insert id="insertCusto" parameterType="Custo" useGeneratedKeys="true" keyProperty="id">
+ 	INSERT INTO custo (
+	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allCustoColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allCustoValues" /> )
+ </insert>
+
+ <update id="updateCusto" parameterType="Custo">
+   UPDATE custo SET
+<if test="valor!= null">valor = #{valor},</if>
+<if test="parentId!= null">parentId = #{parentId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteCustoById" parameterType="Custo">
+  DELETE FROM custo WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllCustos">
+	DELETE FROM custo
   </delete>
-
-	<!--
-		SQL Fetch Statements.
- 	-->
-  <select id="fetchCustoRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
-     SELECT COUNT(id) AS RECORD_COUNT
-        FROM custo
-     WHERE 1 = 1
-     <if test="id != null">
-		  AND id = #{id}
-	 </if>
-  </select>
-
-  <select id="fetchAllCustos" resultMap="custoResult">
-    SELECT
-	<include refid="allCustoColumns" />
-    FROM custo ORDER BY id ASC
-  </select>
-
-  <select id="fetchCustoById" parameterType="FetchByIdRequest" resultMap="custoResult">
-	SELECT b.id,
-	<include refid="allCustoColumns" />
-    FROM custo b
-    where id = #{id}
-    ORDER BY id ASC
-  </select>
-
-  <select id="fetchAllCustosByRequest" parameterType="PagedInquiryRequest" resultMap="custoResult">
-	 SELECT b.id,<include refid="allCustoColumns" />
-        FROM custo b
-     WHERE 1 = 1
-     <if test="id != null">
-		  AND b.id = #{id}
-	 </if>
-  </select>
-
-  <select id="fetchCustoByProduto" parameterType="Integer" resultMap="custoResult">
-	  	SELECT b.id,<include refid="allCustoColumns" />
-        FROM custo b
-     WHERE   b.prodId=#{id}
-
-  </select>
-
-
 </mapper>
+
+

@@ -1,124 +1,101 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+
+<!-- create by system gera-java version 1.0.0 13/05/2016 17:59 : 56-->
+
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="RentabilidadeMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
-	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
-
-  	<!-- private Integer id;
-
-	private Integer idproduto;
-
-	/** The type of an account. */
-	private RentabilidadeItem rentabilidadeItens;
-
-	private Double valor;
-       -->
-
-  <resultMap id="rentabilidadeResult" type="Rentabilidade" >
-    <result property="id" column="id" />
-    <result property="idproduto" column="prodId" />
-	<result property="createUser" column="create_user"/>
-	<result property="createDataUTC" column="create_date"/>
-	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDataUTC" column="modify_date"/>
-   <!--   <collection property="rentabilidadeList" column="id" select="RentabilidadeItemMap.fetchRentabilidadeItensByRentabilidade"/>-->
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="RentabilidadeResult" type="Rentabilidade">
+    <result property="id" column="id"/>
+    <result property="parentId" column="parentId"/>
+<collection property="rentabilidadeList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
-  <!--
-		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
-	-->
   <sql id="allRentabilidadeColumns">
-		 b.prodId
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+,parentId
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allRentabilidadeValues">
+#{parentId},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
   </sql>
 
-  <sql id="allRentabilidadeValues">
-  		#{idproduto},
-    	<include refid="CBOFMap.changeControlFields"/>
-  </sql>
 
-  <!--
-		SQL Insert Statements.
- 	-->
-  <insert id="insertRentabilidade" parameterType="Rentabilidade" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO rentabilidade (
-		<include refid="allRentabilidadeColumns" />
-      )
-    VALUES (<include refid="allRentabilidadeValues" /> )
-  </insert>
+ <select id="fetchAllRentabilidades" resultMap="RentabilidadeResult">
+    SELECT id,
+	<include refid="allRentabilidadeColumns" />
+   FROM rentabilidade ORDER BY id ASC
+ </select>
 
+ <select id="fetchRentabilidadeById" parameterType="Integer" resultMap="RentabilidadeResult">
+    SELECT id,
+	<include refid="allRentabilidadeColumns" />
+   FROM rentabilidade WHERE id = #{fetchid}
+ </select>
 
-	<!--
-		SQL Update Statements.
- 	-->
+ <select id="fetchAllRentabilidadesRequest" parameterType="RentabilidadeInquiryRequest" resultMap="RentabilidadeResult">
 
-  <update id="updateRentabilidade" parameterType="Rentabilidade">
-    UPDATE rentabilidade
-    	<set>
-    		<if test="idproduto!= null">prodId = #{idproduto},</if>
-			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
-			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
-		</set>
-    WHERE
-     id = #{id}
-  </update>
+		SELECT id,<include refid="allRentabilidadeColumns" />
+  		  FROM rentabilidade where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+</select>
 
-   <!--
-		SQL Delete Statements.
-   -->
-  <delete id="deleteRentabilidadeById" parameterType="Integer">
-    	DELETE FROM rentabilidade WHERE id = #{id}
+<select id="fetchRentabilidadeRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM rentabilidade WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+
+ </select>
+
+ <insert id="insertRentabilidade" parameterType="Rentabilidade" useGeneratedKeys="true" keyProperty="id">
+ 	INSERT INTO rentabilidade (
+	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allRentabilidadeColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allRentabilidadeValues" /> )
+ </insert>
+
+ <update id="updateRentabilidade" parameterType="Rentabilidade">
+   UPDATE rentabilidade SET
+<if test="parentId!= null">parentId = #{parentId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteRentabilidadeById" parameterType="Rentabilidade">
+  DELETE FROM rentabilidade WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllRentabilidades">
+	DELETE FROM rentabilidade
   </delete>
-
-	<!--
-		SQL Fetch Statements.
- 	-->
-  <select id="fetchRentabilidadeRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
-     SELECT COUNT(id) AS RECORD_COUNT
-        FROM rentabilidade
-     WHERE 1 = 1
-     <if test="id != null">
-		  AND id = #{id}
-	 </if>
-  </select>
-
-  <select id="fetchAllRentabilidades" resultMap="rentabilidadeResult">
-    SELECT
-	<include refid="allRentabilidadeColumns" />
-    FROM rentabilidade ORDER BY id ASC
-  </select>
-
-  <select id="fetchRentabilidadeById" parameterType="FetchByIdRequest" resultMap="rentabilidadeResult">
-	SELECT b.id,
-	<include refid="allRentabilidadeColumns" />
-    FROM rentabilidade b
-    where id = #{id}
-    ORDER BY id ASC
-  </select>
-
-  <select id="fetchAllRentabilidadesByRequest" parameterType="PagedInquiryRequest" resultMap="rentabilidadeResult">
-	 SELECT b.id,<include refid="allRentabilidadeColumns" />
-        FROM rentabilidade b
-     WHERE 1 = 1
-     <if test="id != null">
-		  AND b.id = #{id}
-	 </if>
-  </select>
-
-  <select id="fetchRentabilidadeByProduto" parameterType="Integer" resultMap="rentabilidadeResult">
-	  	SELECT b.id,<include refid="allRentabilidadeColumns" />
-        FROM rentabilidade b
-     WHERE  b.prodid = #{id}
-
-  </select>
-
-
 </mapper>
+
+

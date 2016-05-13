@@ -1,135 +1,116 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+
+<!-- create by system gera-java version 1.0.0 13/05/2016 17:59 : 56-->
+
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="PorcaoItemMap">
-
-	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+<mapper namespace="PorcaoItensMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
-  		private Integer id;
-
-	/** The type of an account. */
-	private String nome;
-
-	private Double porcao;
-
-	private Double vd;
-
-	private UniMed unimed;
-       -->
-
-  <resultMap id="porcaoItemResult" type="PorcaoItem" >
-    <result property="id" column="id" />
-    <result property="nome" column="nome" />
-   	<result property="porcao" column="porcao"/>
-   	<result property="vd" column="vd"/>
-	<result property="createUser" column="create_user"/>
-	<result property="createDataUTC" column="create_date"/>
-	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDataUTC" column="modify_date"/>
-	<association property="unimed"    column="unimed" select="UniMedMap.fetchUniMedById"  />
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="PorcaoItensResult" type="PorcaoItens">
+    <result property="id" column="id"/>
+    <result property="parentId" column="parentId"/>
+    <result property="porcao" column="porcao"/>
+    <result property="vd" column="vd"/>
+    <result property="unimed" column="unimed"/>
+    <result property="nome" column="nome"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
-  <!--
-		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
-	-->
-  <sql id="allPorcaoItemColumns">
-		 b.nome
-		,b.porcao
-      	,b.vd
-      	,b.unimed
-      	,b.create_date
-      	,b.create_user
-      	,b.modify_date
-      	,b.modify_user
+  <sql id="allPorcaoItensColumns">
+,parentId
+,porcao
+,vd
+,unimed
+,nome
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allPorcaoItensValues">
+#{parentId},
+#{porcao},
+#{vd},
+#{unimed},
+#{nome},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
   </sql>
 
-  <sql id="allPorcaoItemValues">
-  		#{nome},
-  		#{porcao},
-  		#{vd},
-  		#{unimed.id},
-    	<include refid="CBOFMap.changeControlFields"/>
-  </sql>
 
-  <!--
-		SQL Insert Statements.
- 	-->
-  <insert id="insertPorcaoItem" parameterType="PorcaoItem" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO porcaoItens (
-		<include refid="allPorcaoItemColumns" />
-      )
-    VALUES (<include refid="allPorcaoItemValues" /> )
-  </insert>
+ <select id="fetchAllPorcaoItenss" resultMap="PorcaoItensResult">
+    SELECT id,
+	<include refid="allPorcaoItensColumns" />
+   FROM porcaoitens ORDER BY id ASC
+ </select>
 
+ <select id="fetchPorcaoItensById" parameterType="Integer" resultMap="PorcaoItensResult">
+    SELECT id,
+	<include refid="allPorcaoItensColumns" />
+   FROM porcaoitens WHERE id = #{fetchid}
+ </select>
 
-	<!--
-		SQL Update Statements.
- 	-->
+ <select id="fetchAllPorcaoItenssRequest" parameterType="PorcaoItensInquiryRequest" resultMap="PorcaoItensResult">
 
-  <update id="updatePorcaoItem" parameterType="PorcaoItem">
-    UPDATE porcaoItens
-    	<set>
-    		<if test="nome!= null">nome = #{nome},</if>
-	    	<if test="porcao!= null">porcao=#{porcao},</if>
-	    	<if test="vd!= null">vd = #{vd},</if>
-	    	<if test="unimed.id!= null">unimed=#{unimed.id},</if>
-			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
-			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
-		</set>
-    WHERE
-     id = #{id}
-  </update>
+		SELECT id,<include refid="allPorcaoItensColumns" />
+  		  FROM porcaoitens where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+</select>
 
-   <!--
-		SQL Delete Statements.
-   -->
-  <delete id="deletePorcaoItemById" parameterType="Integer">
-    	DELETE FROM porcaoItens WHERE id = #{id}
+<select id="fetchPorcaoItensRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM porcaoitens WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+
+ </select>
+
+ <insert id="insertPorcaoItens" parameterType="PorcaoItens" useGeneratedKeys="true" keyProperty="id">
+ 	INSERT INTO porcaoitens (
+	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allPorcaoItensColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allPorcaoItensValues" /> )
+ </insert>
+
+ <update id="updatePorcaoItens" parameterType="PorcaoItens">
+   UPDATE porcaoitens SET
+<if test="parentId!= null">parentId = #{parentId},</if>
+<if test="porcao!= null">porcao = #{porcao},</if>
+<if test="vd!= null">vd = #{vd},</if>
+<if test="unimed!= null">unimed = #{unimed},</if>
+<if test="nome!= null">nome = #{nome},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deletePorcaoItensById" parameterType="PorcaoItens">
+  DELETE FROM porcaoitens WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllPorcaoItenss">
+	DELETE FROM porcaoitens
   </delete>
-
-	<!--
-		SQL Fetch Statements.
- 	-->
-  <select id="fetchPorcaoItemRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
-     SELECT COUNT(id) AS RECORD_COUNT
-        FROM porcaoItens
-     WHERE 1 = 1
-     <if test="id != null">
-		  AND id = #{id}
-	 </if>
-  </select>
-
-  <select id="fetchAllPorcaoItems" resultMap="porcaoItemResult">
-    SELECT
-	<include refid="allPorcaoItemColumns" />
-    FROM porcaoItens ORDER BY id ASC
-  </select>
-
-  <select id="fetchPorcaoItemById" parameterType="FetchByIdRequest" resultMap="porcaoItemResult">
-	SELECT b.id,
-	<include refid="allPorcaoItemColumns" />
-    FROM porcaoItens b
-    where id = #{id}
-    ORDER BY id ASC
-  </select>
-
-  <select id="fetchAllPorcaoItemsByRequest" parameterType="PagedInquiryRequest" resultMap="porcaoItemResult">
-	 SELECT b.id,<include refid="allPorcaoItemColumns" />
-        FROM porcaoItens b
-     WHERE 1 = 1
-
-  </select>
-
-  <select id="fetchPorcaoItemByPorcao" parameterType="PagedInquiryRequest" resultMap="porcaoItemResult">
-	 SELECT b.id,<include refid="allPorcaoItemColumns" />
-        FROM porcaoItens b
-     WHERE 1 = 1 and
- 	b.id = #{id}
-  </select>
-
-
 </mapper>
+
+

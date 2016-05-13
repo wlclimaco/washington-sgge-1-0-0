@@ -1,278 +1,164 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+
+<!-- create by system gera-java version 1.0.0 13/05/2016 17:59 : 56-->
+
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ProdutoMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
-	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
-
-  	<!--
-/** The SendSolv id for the account. */
-	private Integer id;
-	private String codigo;
-	private String cdBarras;
-	private Classificacao classificacao;
-	private Long dataCreate;
-	private String produto;
-	private String aplicacao;
-	private String localizacao;
-	private Long dataValidade;
-	private String comissao;
-	private String fracao;
-	private UniMed uniMed;
-	private Grupo grupo;
-	private SubGrupo subGrupo;
-	private Marca marca;
-	private Double porcao;
-	private Double pesoBruto;
-	private Double pesoLiquido;
-	private String modoUso;
-	private Tributacao tributacao;
-	private List<Estoque> estoqueList;
-	private List<TabPreco> precoList;
-	private List<Custo> custoList;
-	private List<Porcao> porcaoList;
-	private List<Rentabilidade> rentabilidadeList;
-	private List<Cfop> cfopList;
-	private List<Fornecedor> fornecedorList;
-       -->
-
-  <resultMap id="produtoResult" type="Produto" >
-  	<result property="id" column="id" />
-	<result property="codigo" column="codigo" />
-	<result property="cdBarras" column="cdBarras" />
-	<result property="dataCreate" column="dataCreate" />
-	<result property="produto" column="produto" />
-	<result property="aplicacao" column="aplicacao" />
-	<result property="localizacao" column="localizacao" />
-	<result property="dataValidade" column="dataValidade" />
-	<result property="comissao" column="comissao" />
-	<result property="fracao" column="fracao" />
-	<result property="porcao" column="porcao" />
-	<result property="pesoBruto" column="pesoBruto" />
-	<result property="pesoLiquido" column="pesoLiquido" />
-	<result property="emprId" column="emprId" />
-	<result property="processId" column="processId" />
-	<result property="modoUso" column="modoUso" />
-	<result property="createUser" column="create_user"/>
-	<result property="createDataUTC" column="create_date"/>
-	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDataUTC" column="modify_date"/>
-<!-- 	<association property="classificacao"    column="classificacao" select="ClassificaMap.fetchClassificacaoById"  /> -->
-	<association property="uniMed"    column="uniMed" select="UniMedMap.fetchUniMedByProduto"  />
-	<association property="grupo"    column="grupo" select="GrupoMap.fetchGrupoByProduto"  />
-	<association property="subGrupo"    column="subGrupo" select="SubGrupoMap.fetchSubGrupoByProduto"  />
-	<association property="marca"    column="marca" select="MarcaMap.fetchMarcaByProduto"  />
-	<association property="tributacao"    column="tributacao" select="TributosMap.fetchTributacaoByProduto"  />
-	<collection property="estoqueList" column="id" select="EstoqueMap.fetchEstoqueByProduto"/>
-<!-- 	<collection property="precoList" column="{countryCode=recipient_country_code, code=recipient_state_province_region_id}" select="countryMap.fetchStateProvinceRegionByCountryCodeAndCode"/> -->
-	<collection property="precoList" column="{id=id,entidadeId=emprId}" select="TabPrecoMap.fetchTabPrecoByProduto"/>
-	<collection property="custoList" column="id" select="CustoMap.fetchCustoByProduto"/>
-	<collection property="porcaoList" column="id" select="PorcaoMap.fetchPorcaoByProduto"/>
-	<collection property="rentabilidadeList" column="id" select="RentabilidadeMap.fetchRentabilidadeByProduto"/>
-	<collection property="cfopList" column="id" select="CfopMap.fetchCfopByProd"/>
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByProduto"/>
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="ProdutoResult" type="Produto">
+    <result property="id" column="id"/>
+    <result property="codigo" column="codigo"/>
+    <result property="cdBarras" column="cdBarras"/>
+    <result property="produto" column="produto"/>
+    <result property="dataCreate" column="dataCreate"/>
+    <result property="aplicacao" column="aplicacao"/>
+    <result property="localizacao" column="localizacao"/>
+    <result property="comissao" column="comissao"/>
+    <result property="fracao" column="fracao"/>
+    <result property="classificacao" column="classificacao"/>
+    <result property="uniMed" column="uniMed"/>
+    <result property="grupo" column="grupo"/>
+    <result property="subGrupo" column="subGrupo"/>
+    <result property="marca" column="marca"/>
+    <result property="porcao" column="porcao"/>
+    <result property="pesoBruto" column="pesoBruto"/>
+    <result property="pesoLiquido" column="pesoLiquido"/>
+    <result property="modoUso" column="modoUso"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
-
-   <resultMap id="produtoPessoaResult" type="ProdutoPessoa" >
-  	<result property="id" column="id" />
-	<result property="parentId" column="parentId" />
-	<result property="processId" column="processId" />
-	<result property="createUser" column="create_user"/>
-	<result property="createDataUTC" column="create_date"/>
-	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDataUTC" column="modify_date"/>
-	<association property="prodId"    column="prodId" select="ClassificaMap.fetchClassificacaoById"  />
-  </resultMap>
-  <!--
-		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
-	-->
-
- <sql id="allProdutoPessoaColumns">
-		 parentId
-		,processId
-		,prodId
-		,create_date
-      	,create_user
-      	,modify_date
-      	,modify_user
-  </sql>
-
-<sql id="allProdutoPessoaValues">
-  		#{parentId},
-		#{processId},
-		#{prodId.id},
-		<include refid="CBOFMap.changeControlFields"/>
-  </sql>
 
   <sql id="allProdutoColumns">
-		 codigo
-		,cdBarras
-		,dataCreate
-		,produto
-		,aplicacao
-		,localizacao
-		,dataValidade
-		,comissao
-		,fracao
-		,porcao
-		,pesoBruto
-		,pesoLiquido
-		,modoUso
-		,classificacao
-		,uniMed
-		,grupo
-		,subGrupo
-		,marca
-		,processId
-		,tributacao
-		,emprId
-      	,create_date
-      	,create_user
-      	,modify_date
-      	,modify_user
-  </sql>
+,codigo
+,cdBarras
+,produto
+,dataCreate
+,aplicacao
+,localizacao
+,comissao
+,fracao
+,classificacao
+,uniMed
+,grupo
+,subGrupo
+,marca
+,porcao
+,pesoBruto
+,pesoLiquido
+,modoUso
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
 
-  <sql id="allProdutoValues">
-  		#{codigo},
-		#{cdBarras},
-		#{dataCreate},
-		#{produto},
-		#{aplicacao},
-		#{localizacao},
-		#{dataValidade},
-		#{comissao},
-		#{fracao},
-		#{porcao.id},
-		#{pesoBruto},
-		#{pesoLiquido},
-		#{modoUso},
-		#{classificacao.id},
-		#{uniMed.id},
-		#{grupo.id},
-		#{subGrupo.id},
-		#{marca.id},
-		#{processId},
-		#{tributacao.id},
+</sql>
+<sql id="allProdutoValues">
+#{codigo},
+#{cdBarras},
+#{produto},
+#{dataCreate},
+#{aplicacao},
+#{localizacao},
+#{comissao},
+#{fracao},
+#{classificacao},
+#{uniMed},
+#{grupo},
+#{subGrupo},
+#{marca},
+#{porcao},
+#{pesoBruto},
+#{pesoLiquido},
+#{modoUso},
 		#{emprId},
-    	<include refid="CBOFMap.changeControlFields"/>
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
   </sql>
 
-  <!--
-		SQL Insert Statements.
- 	-->
-  <insert id="insertProduto" parameterType="Produto" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO produto (
-		<include refid="allProdutoColumns" />
-      )
-    VALUES (<include refid="allProdutoValues" /> )
-  </insert>
 
+ <select id="fetchAllProdutos" resultMap="ProdutoResult">
+    SELECT id,
+	<include refid="allProdutoColumns" />
+   FROM produto ORDER BY id ASC
+ </select>
 
-  <insert id="insertProdutoPessoa" parameterType="ProdutoPessoa" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO produtoPessoa (
-		<include refid="allProdutoPessoaColumns" />
-      )
-    VALUES (<include refid="allProdutoPessoaValues" /> )
-  </insert>
+ <select id="fetchProdutoById" parameterType="Integer" resultMap="ProdutoResult">
+    SELECT id,
+	<include refid="allProdutoColumns" />
+   FROM produto WHERE id = #{fetchid}
+ </select>
 
+ <select id="fetchAllProdutosRequest" parameterType="ProdutoInquiryRequest" resultMap="ProdutoResult">
 
-	<!--
-		SQL Update Statements.
- 	-->
+		SELECT id,<include refid="allProdutoColumns" />
+  		  FROM produto where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+</select>
 
-  <update id="updateProduto" parameterType="Produto">
-    UPDATE produto
-    	<set>
-	    	<if test="codigo!= null">codigo = #{codigo},</if>
-			<if test="cdBarras!= null">cdBarras = #{cdBarras},</if>
-			<if test="dataCreate!= null">dataCreate = #{dataCreate},</if>
-			<if test="produto!= null">produto = #{produto},</if>
-			<if test="aplicacao!= null">aplicacao = #{aplicacao},</if>
-			<if test="localizacao!= null">localizacao = #{localizacao},</if>
-			<if test="dataValidade!= null">dataValidade = #{dataValidade},</if>
-			<if test="comissao!= null">comissao = #{comissao},</if>
-			<if test="fracao!= null">fracao = #{fracao},</if>
-			<if test="porcao!= null">porcao = #{porcao},</if>
-			<if test="pesoBruto!= null">pesoBruto = #{pesoBruto},</if>
-			<if test="pesoLiquido!= null">pesoLiquido = #{pesoLiquido},</if>
-			<if test="modoUso!= null">modoUso = #{modoUso},</if>
-			<if test="classificacao.id!= null">classificacao = #{classificacao.id},</if>
-			<if test="uniMed.id!= null">uniMed = #{uniMed.id},</if>
-			<if test="grupo.id!= null">grupo = #{grupo.id},</if>
-			<if test="subGrupo.id!= null">subGrupo = #{subGrupo.id},</if>
-			<if test="marca.id!= null">marca = #{marca.id},</if>
-			<if test="tributacao.id!= null">tributacao = #{tributacao.id},</if>
-			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
-			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
-		</set>
-    WHERE
-     id = #{id}
-  </update>
+<select id="fetchProdutoRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM produto WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
 
-   <!--
-		SQL Delete Statements.
-   -->
-  <delete id="deleteProdutoById" parameterType="Integer">
-    	DELETE FROM produto WHERE id = #{id}
+ </select>
+
+ <insert id="insertProduto" parameterType="Produto" useGeneratedKeys="true" keyProperty="id">
+ 	INSERT INTO produto (
+	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allProdutoColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allProdutoValues" /> )
+ </insert>
+
+ <update id="updateProduto" parameterType="Produto">
+   UPDATE produto SET
+<if test="codigo!= null">codigo = #{codigo},</if>
+<if test="cdBarras!= null">cdBarras = #{cdBarras},</if>
+<if test="produto!= null">produto = #{produto},</if>
+<if test="dataCreate!= null">dataCreate = #{dataCreate},</if>
+<if test="aplicacao!= null">aplicacao = #{aplicacao},</if>
+<if test="localizacao!= null">localizacao = #{localizacao},</if>
+<if test="comissao!= null">comissao = #{comissao},</if>
+<if test="fracao!= null">fracao = #{fracao},</if>
+<if test="classificacao!= null">classificacao = #{classificacao},</if>
+<if test="uniMed!= null">uniMed = #{uniMed},</if>
+<if test="grupo!= null">grupo = #{grupo},</if>
+<if test="subGrupo!= null">subGrupo = #{subGrupo},</if>
+<if test="marca!= null">marca = #{marca},</if>
+<if test="porcao!= null">porcao = #{porcao},</if>
+<if test="pesoBruto!= null">pesoBruto = #{pesoBruto},</if>
+<if test="pesoLiquido!= null">pesoLiquido = #{pesoLiquido},</if>
+<if test="modoUso!= null">modoUso = #{modoUso},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteProdutoById" parameterType="Produto">
+  DELETE FROM produto WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllProdutos">
+	DELETE FROM produto
   </delete>
-
-	<!--
-		SQL Fetch Statements.
- 	-->
-  <select id="fetchProdutoRowCount" parameterType="ProdutoInquiryRequest" resultType="Integer">
-     SELECT COUNT(id) AS RECORD_COUNT
-        FROM produto
-  </select>
-
-  <select id="fetchAllProdutos" resultMap="produtoResult">
-    SELECT
-	<include refid="allProdutoColumns" />
-    FROM produto ORDER BY id ASC
-  </select>
-
-  <select id="fetchProdutoById" parameterType="FetchByIdRequest" resultMap="produtoResult">
-	SELECT id,
-	<include refid="allProdutoColumns" />
-    FROM produto
-    where id = #{fetchId}
-    ORDER BY id ASC
-  </select>
-
-  <select id="fetchAllProdutosByRequest" parameterType="ProdutoInquiryRequest" resultMap="produtoResult">
-	 SELECT id,<include refid="allProdutoColumns" />
-        FROM produto
-  </select>
-
-  <select id="fetchProdutoByProduto" parameterType="Integer" resultMap="produtoResult">
-	  	SELECT F.*
-
-		  FROM produtoProd AS C
-
-		  INNER JOIN produto AS F
-
-		    ON F.id like C.Produtoid
-		where  c.prodId = #{id}
-  </select>
-
-    <select id="fetchProdutoByPessoa" parameterType="Integer" resultMap="produtoPessoaResult">
-	 SELECT id,<include refid="allProdutoPessoaColumns" />
-        FROM produtoPessoa
-     WHERE 1 = 1
-		  AND parentid = #{id}
-  </select>
-
-  <select id="fetchAllProdutoByPlano" parameterType="Integer" resultMap="produtoPessoaResult">
-	 SELECT id,<include refid="allProdutoPessoaColumns" />
-        FROM produtoPessoa
-     WHERE 1 = 1
-		  AND parentid = #{id}
-  </select>
-
-
-
-
 </mapper>
+
+

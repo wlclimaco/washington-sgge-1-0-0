@@ -1,4 +1,5 @@
-package com.qat.samples.sysmgmt.bar.mybatis.Produto;
+/** create by system gera-java version 1.0.0 13/05/2016 17:59 : 56*/
+package com.qat.samples.sysmgmt.bar.mybatis.produto;
 
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,15 +11,24 @@ import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.MyBatisBARHelper;
 import com.qat.samples.sysmgmt.bar.Produto.IProdutoBAR;
+import com.qat.samples.sysmgmt.cfop.model.Cfop;
+import com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest;
+import com.qat.samples.sysmgmt.fiscal.model.Tributacao;
+import com.qat.samples.sysmgmt.produto.model.Custo;
+import com.qat.samples.sysmgmt.produto.model.Estoque;
 import com.qat.samples.sysmgmt.produto.model.Grupo;
 import com.qat.samples.sysmgmt.produto.model.Marca;
+import com.qat.samples.sysmgmt.produto.model.Porcao;
 import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.Rentabilidade;
+import com.qat.samples.sysmgmt.produto.model.RentabilidadeItens;
 import com.qat.samples.sysmgmt.produto.model.SubGrupo;
 import com.qat.samples.sysmgmt.produto.model.UniMed;
 import com.qat.samples.sysmgmt.produto.model.request.GrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 
@@ -32,6 +42,34 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR
 /** The Constant ZERO. */
 	private static final int ZERO = 0;
 
+
+///===================================### PRODUTOPARENT ####======================================
+/** The Constant NAMESPACE. */
+private static final String NAMESPACE_PRODUTOPARENT = "ProdutoparentMap.";
+
+/** The Constant STMT_INSERT_PRODUTOPARENT. */
+private static final String STMT_INSERT_PRODUTOPARENT = NAMESPACE_PRODUTOPARENT + "insertProdutoparent";
+
+/** The Constant STMT_UPDATE_PRODUTOPARENT. */
+private static final String STMT_UPDATE_PRODUTOPARENT = NAMESPACE_PRODUTOPARENT + "updateProdutoparent";
+
+/** The Constant STMT_DELETE_PRODUTOPARENT. */
+private static final String STMT_DELETE_PRODUTOPARENT = NAMESPACE_PRODUTOPARENT + "deleteProdutoparentById";
+
+	/** The Constant STMT_DELETE_PRODUTOPARENT_ALL. */
+	private static final String STMT_DELETE_PRODUTOPARENT_ALL = NAMESPACE_PRODUTOPARENT + "deleteAllProdutoparents";
+
+	/** The Constant STMT_FETCH_PRODUTOPARENT. */
+	private static final String STMT_FETCH_PRODUTOPARENT = NAMESPACE_PRODUTOPARENT + "fetchProdutoparentById";
+
+	/** The Constant STMT_FETCH_PRODUTOPARENT_ALL. */
+	private static final String STMT_FETCH_PRODUTOPARENT_ALL = NAMESPACE_PRODUTOPARENT + "fetchAllProdutoparents";
+
+	/** The Constant STMT_FETCH_PRODUTOPARENT_COUNT. */
+	private static final String STMT_FETCH_PRODUTOPARENT_COUNT = NAMESPACE_PRODUTOPARENT + "fetchProdutoparentRowCount";
+
+	/** The Constant STMT_FETCH_PRODUTOPARENT_ALL_REQUEST. */
+	private static final String STMT_FETCH_PRODUTOPARENT_ALL_REQUEST = NAMESPACE_PRODUTOPARENT + "fetchAllProdutoparentsRequest";
 
 ///===================================### PRODUTO ####======================================
 /** The Constant NAMESPACE. */
@@ -61,6 +99,34 @@ private static final String STMT_DELETE_PRODUTO = NAMESPACE_PRODUTO + "deletePro
 	/** The Constant STMT_FETCH_PRODUTO_ALL_REQUEST. */
 	private static final String STMT_FETCH_PRODUTO_ALL_REQUEST = NAMESPACE_PRODUTO + "fetchAllProdutosRequest";
 
+///===================================### CFOP ####======================================
+/** The Constant NAMESPACE. */
+private static final String NAMESPACE_CFOP = "CfopMap.";
+
+/** The Constant STMT_INSERT_CFOP. */
+private static final String STMT_INSERT_CFOP = NAMESPACE_CFOP + "insertCfop";
+
+/** The Constant STMT_UPDATE_CFOP. */
+private static final String STMT_UPDATE_CFOP = NAMESPACE_CFOP + "updateCfop";
+
+/** The Constant STMT_DELETE_CFOP. */
+private static final String STMT_DELETE_CFOP = NAMESPACE_CFOP + "deleteCfopById";
+
+	/** The Constant STMT_DELETE_CFOP_ALL. */
+	private static final String STMT_DELETE_CFOP_ALL = NAMESPACE_CFOP + "deleteAllCfops";
+
+	/** The Constant STMT_FETCH_CFOP. */
+	private static final String STMT_FETCH_CFOP = NAMESPACE_CFOP + "fetchCfopById";
+
+	/** The Constant STMT_FETCH_CFOP_ALL. */
+	private static final String STMT_FETCH_CFOP_ALL = NAMESPACE_CFOP + "fetchAllCfops";
+
+	/** The Constant STMT_FETCH_CFOP_COUNT. */
+	private static final String STMT_FETCH_CFOP_COUNT = NAMESPACE_CFOP + "fetchCfopRowCount";
+
+	/** The Constant STMT_FETCH_CFOP_ALL_REQUEST. */
+	private static final String STMT_FETCH_CFOP_ALL_REQUEST = NAMESPACE_CFOP + "fetchAllCfopsRequest";
+
 ///===================================### MARCA ####======================================
 /** The Constant NAMESPACE. */
 private static final String NAMESPACE_MARCA = "MarcaMap.";
@@ -88,6 +154,34 @@ private static final String STMT_DELETE_MARCA = NAMESPACE_MARCA + "deleteMarcaBy
 
 	/** The Constant STMT_FETCH_MARCA_ALL_REQUEST. */
 	private static final String STMT_FETCH_MARCA_ALL_REQUEST = NAMESPACE_MARCA + "fetchAllMarcasRequest";
+
+///===================================### MARCAPRODUTO ####======================================
+/** The Constant NAMESPACE. */
+private static final String NAMESPACE_MARCAPRODUTO = "MarcaprodutoMap.";
+
+/** The Constant STMT_INSERT_MARCAPRODUTO. */
+private static final String STMT_INSERT_MARCAPRODUTO = NAMESPACE_MARCAPRODUTO + "insertMarcaproduto";
+
+/** The Constant STMT_UPDATE_MARCAPRODUTO. */
+private static final String STMT_UPDATE_MARCAPRODUTO = NAMESPACE_MARCAPRODUTO + "updateMarcaproduto";
+
+/** The Constant STMT_DELETE_MARCAPRODUTO. */
+private static final String STMT_DELETE_MARCAPRODUTO = NAMESPACE_MARCAPRODUTO + "deleteMarcaprodutoById";
+
+	/** The Constant STMT_DELETE_MARCAPRODUTO_ALL. */
+	private static final String STMT_DELETE_MARCAPRODUTO_ALL = NAMESPACE_MARCAPRODUTO + "deleteAllMarcaprodutos";
+
+	/** The Constant STMT_FETCH_MARCAPRODUTO. */
+	private static final String STMT_FETCH_MARCAPRODUTO = NAMESPACE_MARCAPRODUTO + "fetchMarcaprodutoById";
+
+	/** The Constant STMT_FETCH_MARCAPRODUTO_ALL. */
+	private static final String STMT_FETCH_MARCAPRODUTO_ALL = NAMESPACE_MARCAPRODUTO + "fetchAllMarcaprodutos";
+
+	/** The Constant STMT_FETCH_MARCAPRODUTO_COUNT. */
+	private static final String STMT_FETCH_MARCAPRODUTO_COUNT = NAMESPACE_MARCAPRODUTO + "fetchMarcaprodutoRowCount";
+
+	/** The Constant STMT_FETCH_MARCAPRODUTO_ALL_REQUEST. */
+	private static final String STMT_FETCH_MARCAPRODUTO_ALL_REQUEST = NAMESPACE_MARCAPRODUTO + "fetchAllMarcaprodutosRequest";
 
 ///===================================### GRUPO ####======================================
 /** The Constant NAMESPACE. */
@@ -119,59 +213,416 @@ private static final String STMT_DELETE_GRUPO = NAMESPACE_GRUPO + "deleteGrupoBy
 
 ///===================================### SUBGRUPO ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_SUBGRUPO = "SubGrupoMap.";
+private static final String NAMESPACE_SUBGRUPO = "SubgrupoMap.";
 
 /** The Constant STMT_INSERT_SUBGRUPO. */
-private static final String STMT_INSERT_SUBGRUPO = NAMESPACE_SUBGRUPO + "insertSubGrupo";
+private static final String STMT_INSERT_SUBGRUPO = NAMESPACE_SUBGRUPO + "insertSubgrupo";
 
 /** The Constant STMT_UPDATE_SUBGRUPO. */
-private static final String STMT_UPDATE_SUBGRUPO = NAMESPACE_SUBGRUPO + "updateSubGrupo";
+private static final String STMT_UPDATE_SUBGRUPO = NAMESPACE_SUBGRUPO + "updateSubgrupo";
 
 /** The Constant STMT_DELETE_SUBGRUPO. */
-private static final String STMT_DELETE_SUBGRUPO = NAMESPACE_SUBGRUPO + "deleteSubGrupoById";
+private static final String STMT_DELETE_SUBGRUPO = NAMESPACE_SUBGRUPO + "deleteSubgrupoById";
 
 	/** The Constant STMT_DELETE_SUBGRUPO_ALL. */
-	private static final String STMT_DELETE_SUBGRUPO_ALL = NAMESPACE_SUBGRUPO + "deleteAllSubGrupos";
+	private static final String STMT_DELETE_SUBGRUPO_ALL = NAMESPACE_SUBGRUPO + "deleteAllSubgrupos";
 
 	/** The Constant STMT_FETCH_SUBGRUPO. */
-	private static final String STMT_FETCH_SUBGRUPO = NAMESPACE_SUBGRUPO + "fetchSubGrupoById";
+	private static final String STMT_FETCH_SUBGRUPO = NAMESPACE_SUBGRUPO + "fetchSubgrupoById";
 
 	/** The Constant STMT_FETCH_SUBGRUPO_ALL. */
-	private static final String STMT_FETCH_SUBGRUPO_ALL = NAMESPACE_SUBGRUPO + "fetchAllSubGrupos";
+	private static final String STMT_FETCH_SUBGRUPO_ALL = NAMESPACE_SUBGRUPO + "fetchAllSubgrupos";
 
 	/** The Constant STMT_FETCH_SUBGRUPO_COUNT. */
-	private static final String STMT_FETCH_SUBGRUPO_COUNT = NAMESPACE_SUBGRUPO + "fetchSubGrupoRowCount";
+	private static final String STMT_FETCH_SUBGRUPO_COUNT = NAMESPACE_SUBGRUPO + "fetchSubgrupoRowCount";
 
 	/** The Constant STMT_FETCH_SUBGRUPO_ALL_REQUEST. */
-	private static final String STMT_FETCH_SUBGRUPO_ALL_REQUEST = NAMESPACE_SUBGRUPO + "fetchAllSubGruposRequest";
+	private static final String STMT_FETCH_SUBGRUPO_ALL_REQUEST = NAMESPACE_SUBGRUPO + "fetchAllSubgruposRequest";
 
 ///===================================### UNIMED ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_UNIMED = "UniMedMap.";
+private static final String NAMESPACE_UNIMED = "UnimedMap.";
 
 /** The Constant STMT_INSERT_UNIMED. */
-private static final String STMT_INSERT_UNIMED = NAMESPACE_UNIMED + "insertUniMed";
+private static final String STMT_INSERT_UNIMED = NAMESPACE_UNIMED + "insertUnimed";
 
 /** The Constant STMT_UPDATE_UNIMED. */
-private static final String STMT_UPDATE_UNIMED = NAMESPACE_UNIMED + "updateUniMed";
+private static final String STMT_UPDATE_UNIMED = NAMESPACE_UNIMED + "updateUnimed";
 
 /** The Constant STMT_DELETE_UNIMED. */
-private static final String STMT_DELETE_UNIMED = NAMESPACE_UNIMED + "deleteUniMedById";
+private static final String STMT_DELETE_UNIMED = NAMESPACE_UNIMED + "deleteUnimedById";
 
 	/** The Constant STMT_DELETE_UNIMED_ALL. */
-	private static final String STMT_DELETE_UNIMED_ALL = NAMESPACE_UNIMED + "deleteAllUniMeds";
+	private static final String STMT_DELETE_UNIMED_ALL = NAMESPACE_UNIMED + "deleteAllUnimeds";
 
 	/** The Constant STMT_FETCH_UNIMED. */
-	private static final String STMT_FETCH_UNIMED = NAMESPACE_UNIMED + "fetchUniMedById";
+	private static final String STMT_FETCH_UNIMED = NAMESPACE_UNIMED + "fetchUnimedById";
 
 	/** The Constant STMT_FETCH_UNIMED_ALL. */
-	private static final String STMT_FETCH_UNIMED_ALL = NAMESPACE_UNIMED + "fetchAllUniMeds";
+	private static final String STMT_FETCH_UNIMED_ALL = NAMESPACE_UNIMED + "fetchAllUnimeds";
 
 	/** The Constant STMT_FETCH_UNIMED_COUNT. */
-	private static final String STMT_FETCH_UNIMED_COUNT = NAMESPACE_UNIMED + "fetchUniMedRowCount";
+	private static final String STMT_FETCH_UNIMED_COUNT = NAMESPACE_UNIMED + "fetchUnimedRowCount";
 
 	/** The Constant STMT_FETCH_UNIMED_ALL_REQUEST. */
-	private static final String STMT_FETCH_UNIMED_ALL_REQUEST = NAMESPACE_UNIMED + "fetchAllUniMedsRequest";
+	private static final String STMT_FETCH_UNIMED_ALL_REQUEST = NAMESPACE_UNIMED + "fetchAllUnimedsRequest";
+
+///===================================### TRIBUTACAO ####======================================
+/** The Constant NAMESPACE. */
+private static final String NAMESPACE_TRIBUTACAO = "TributacaoMap.";
+
+/** The Constant STMT_INSERT_TRIBUTACAO. */
+private static final String STMT_INSERT_TRIBUTACAO = NAMESPACE_TRIBUTACAO + "insertTributacao";
+
+/** The Constant STMT_UPDATE_TRIBUTACAO. */
+private static final String STMT_UPDATE_TRIBUTACAO = NAMESPACE_TRIBUTACAO + "updateTributacao";
+
+/** The Constant STMT_DELETE_TRIBUTACAO. */
+private static final String STMT_DELETE_TRIBUTACAO = NAMESPACE_TRIBUTACAO + "deleteTributacaoById";
+
+	/** The Constant STMT_DELETE_TRIBUTACAO_ALL. */
+	private static final String STMT_DELETE_TRIBUTACAO_ALL = NAMESPACE_TRIBUTACAO + "deleteAllTributacaos";
+
+	/** The Constant STMT_FETCH_TRIBUTACAO. */
+	private static final String STMT_FETCH_TRIBUTACAO = NAMESPACE_TRIBUTACAO + "fetchTributacaoById";
+
+	/** The Constant STMT_FETCH_TRIBUTACAO_ALL. */
+	private static final String STMT_FETCH_TRIBUTACAO_ALL = NAMESPACE_TRIBUTACAO + "fetchAllTributacaos";
+
+	/** The Constant STMT_FETCH_TRIBUTACAO_COUNT. */
+	private static final String STMT_FETCH_TRIBUTACAO_COUNT = NAMESPACE_TRIBUTACAO + "fetchTributacaoRowCount";
+
+	/** The Constant STMT_FETCH_TRIBUTACAO_ALL_REQUEST. */
+	private static final String STMT_FETCH_TRIBUTACAO_ALL_REQUEST = NAMESPACE_TRIBUTACAO + "fetchAllTributacaosRequest";
+
+///===================================### CUSTO ####======================================
+/** The Constant NAMESPACE. */
+private static final String NAMESPACE_CUSTO = "CustoMap.";
+
+/** The Constant STMT_INSERT_CUSTO. */
+private static final String STMT_INSERT_CUSTO = NAMESPACE_CUSTO + "insertCusto";
+
+/** The Constant STMT_UPDATE_CUSTO. */
+private static final String STMT_UPDATE_CUSTO = NAMESPACE_CUSTO + "updateCusto";
+
+/** The Constant STMT_DELETE_CUSTO. */
+private static final String STMT_DELETE_CUSTO = NAMESPACE_CUSTO + "deleteCustoById";
+
+	/** The Constant STMT_DELETE_CUSTO_ALL. */
+	private static final String STMT_DELETE_CUSTO_ALL = NAMESPACE_CUSTO + "deleteAllCustos";
+
+	/** The Constant STMT_FETCH_CUSTO. */
+	private static final String STMT_FETCH_CUSTO = NAMESPACE_CUSTO + "fetchCustoById";
+
+	/** The Constant STMT_FETCH_CUSTO_ALL. */
+	private static final String STMT_FETCH_CUSTO_ALL = NAMESPACE_CUSTO + "fetchAllCustos";
+
+	/** The Constant STMT_FETCH_CUSTO_COUNT. */
+	private static final String STMT_FETCH_CUSTO_COUNT = NAMESPACE_CUSTO + "fetchCustoRowCount";
+
+	/** The Constant STMT_FETCH_CUSTO_ALL_REQUEST. */
+	private static final String STMT_FETCH_CUSTO_ALL_REQUEST = NAMESPACE_CUSTO + "fetchAllCustosRequest";
+
+///===================================### CUSTOITENS ####======================================
+/** The Constant NAMESPACE. */
+private static final String NAMESPACE_CUSTOITENS = "CustoitensMap.";
+
+/** The Constant STMT_INSERT_CUSTOITENS. */
+private static final String STMT_INSERT_CUSTOITENS = NAMESPACE_CUSTOITENS + "insertCustoitens";
+
+/** The Constant STMT_UPDATE_CUSTOITENS. */
+private static final String STMT_UPDATE_CUSTOITENS = NAMESPACE_CUSTOITENS + "updateCustoitens";
+
+/** The Constant STMT_DELETE_CUSTOITENS. */
+private static final String STMT_DELETE_CUSTOITENS = NAMESPACE_CUSTOITENS + "deleteCustoitensById";
+
+	/** The Constant STMT_DELETE_CUSTOITENS_ALL. */
+	private static final String STMT_DELETE_CUSTOITENS_ALL = NAMESPACE_CUSTOITENS + "deleteAllCustoitenss";
+
+	/** The Constant STMT_FETCH_CUSTOITENS. */
+	private static final String STMT_FETCH_CUSTOITENS = NAMESPACE_CUSTOITENS + "fetchCustoitensById";
+
+	/** The Constant STMT_FETCH_CUSTOITENS_ALL. */
+	private static final String STMT_FETCH_CUSTOITENS_ALL = NAMESPACE_CUSTOITENS + "fetchAllCustoitenss";
+
+	/** The Constant STMT_FETCH_CUSTOITENS_COUNT. */
+	private static final String STMT_FETCH_CUSTOITENS_COUNT = NAMESPACE_CUSTOITENS + "fetchCustoitensRowCount";
+
+	/** The Constant STMT_FETCH_CUSTOITENS_ALL_REQUEST. */
+	private static final String STMT_FETCH_CUSTOITENS_ALL_REQUEST = NAMESPACE_CUSTOITENS + "fetchAllCustoitenssRequest";
+
+///===================================### ESTOQUE ####======================================
+/** The Constant NAMESPACE. */
+private static final String NAMESPACE_ESTOQUE = "EstoqueMap.";
+
+/** The Constant STMT_INSERT_ESTOQUE. */
+private static final String STMT_INSERT_ESTOQUE = NAMESPACE_ESTOQUE + "insertEstoque";
+
+/** The Constant STMT_UPDATE_ESTOQUE. */
+private static final String STMT_UPDATE_ESTOQUE = NAMESPACE_ESTOQUE + "updateEstoque";
+
+/** The Constant STMT_DELETE_ESTOQUE. */
+private static final String STMT_DELETE_ESTOQUE = NAMESPACE_ESTOQUE + "deleteEstoqueById";
+
+	/** The Constant STMT_DELETE_ESTOQUE_ALL. */
+	private static final String STMT_DELETE_ESTOQUE_ALL = NAMESPACE_ESTOQUE + "deleteAllEstoques";
+
+	/** The Constant STMT_FETCH_ESTOQUE. */
+	private static final String STMT_FETCH_ESTOQUE = NAMESPACE_ESTOQUE + "fetchEstoqueById";
+
+	/** The Constant STMT_FETCH_ESTOQUE_ALL. */
+	private static final String STMT_FETCH_ESTOQUE_ALL = NAMESPACE_ESTOQUE + "fetchAllEstoques";
+
+	/** The Constant STMT_FETCH_ESTOQUE_COUNT. */
+	private static final String STMT_FETCH_ESTOQUE_COUNT = NAMESPACE_ESTOQUE + "fetchEstoqueRowCount";
+
+	/** The Constant STMT_FETCH_ESTOQUE_ALL_REQUEST. */
+	private static final String STMT_FETCH_ESTOQUE_ALL_REQUEST = NAMESPACE_ESTOQUE + "fetchAllEstoquesRequest";
+
+///===================================### PORCAO ####======================================
+/** The Constant NAMESPACE. */
+private static final String NAMESPACE_PORCAO = "PorcaoMap.";
+
+/** The Constant STMT_INSERT_PORCAO. */
+private static final String STMT_INSERT_PORCAO = NAMESPACE_PORCAO + "insertPorcao";
+
+/** The Constant STMT_UPDATE_PORCAO. */
+private static final String STMT_UPDATE_PORCAO = NAMESPACE_PORCAO + "updatePorcao";
+
+/** The Constant STMT_DELETE_PORCAO. */
+private static final String STMT_DELETE_PORCAO = NAMESPACE_PORCAO + "deletePorcaoById";
+
+	/** The Constant STMT_DELETE_PORCAO_ALL. */
+	private static final String STMT_DELETE_PORCAO_ALL = NAMESPACE_PORCAO + "deleteAllPorcaos";
+
+	/** The Constant STMT_FETCH_PORCAO. */
+	private static final String STMT_FETCH_PORCAO = NAMESPACE_PORCAO + "fetchPorcaoById";
+
+	/** The Constant STMT_FETCH_PORCAO_ALL. */
+	private static final String STMT_FETCH_PORCAO_ALL = NAMESPACE_PORCAO + "fetchAllPorcaos";
+
+	/** The Constant STMT_FETCH_PORCAO_COUNT. */
+	private static final String STMT_FETCH_PORCAO_COUNT = NAMESPACE_PORCAO + "fetchPorcaoRowCount";
+
+	/** The Constant STMT_FETCH_PORCAO_ALL_REQUEST. */
+	private static final String STMT_FETCH_PORCAO_ALL_REQUEST = NAMESPACE_PORCAO + "fetchAllPorcaosRequest";
+
+///===================================### PORCAOITENS ####======================================
+/** The Constant NAMESPACE. */
+private static final String NAMESPACE_PORCAOITENS = "PorcaoitensMap.";
+
+/** The Constant STMT_INSERT_PORCAOITENS. */
+private static final String STMT_INSERT_PORCAOITENS = NAMESPACE_PORCAOITENS + "insertPorcaoitens";
+
+/** The Constant STMT_UPDATE_PORCAOITENS. */
+private static final String STMT_UPDATE_PORCAOITENS = NAMESPACE_PORCAOITENS + "updatePorcaoitens";
+
+/** The Constant STMT_DELETE_PORCAOITENS. */
+private static final String STMT_DELETE_PORCAOITENS = NAMESPACE_PORCAOITENS + "deletePorcaoitensById";
+
+	/** The Constant STMT_DELETE_PORCAOITENS_ALL. */
+	private static final String STMT_DELETE_PORCAOITENS_ALL = NAMESPACE_PORCAOITENS + "deleteAllPorcaoitenss";
+
+	/** The Constant STMT_FETCH_PORCAOITENS. */
+	private static final String STMT_FETCH_PORCAOITENS = NAMESPACE_PORCAOITENS + "fetchPorcaoitensById";
+
+	/** The Constant STMT_FETCH_PORCAOITENS_ALL. */
+	private static final String STMT_FETCH_PORCAOITENS_ALL = NAMESPACE_PORCAOITENS + "fetchAllPorcaoitenss";
+
+	/** The Constant STMT_FETCH_PORCAOITENS_COUNT. */
+	private static final String STMT_FETCH_PORCAOITENS_COUNT = NAMESPACE_PORCAOITENS + "fetchPorcaoitensRowCount";
+
+	/** The Constant STMT_FETCH_PORCAOITENS_ALL_REQUEST. */
+	private static final String STMT_FETCH_PORCAOITENS_ALL_REQUEST = NAMESPACE_PORCAOITENS + "fetchAllPorcaoitenssRequest";
+
+///===================================### RENTABILIDADE ####======================================
+/** The Constant NAMESPACE. */
+private static final String NAMESPACE_RENTABILIDADE = "RentabilidadeMap.";
+
+/** The Constant STMT_INSERT_RENTABILIDADE. */
+private static final String STMT_INSERT_RENTABILIDADE = NAMESPACE_RENTABILIDADE + "insertRentabilidade";
+
+/** The Constant STMT_UPDATE_RENTABILIDADE. */
+private static final String STMT_UPDATE_RENTABILIDADE = NAMESPACE_RENTABILIDADE + "updateRentabilidade";
+
+/** The Constant STMT_DELETE_RENTABILIDADE. */
+private static final String STMT_DELETE_RENTABILIDADE = NAMESPACE_RENTABILIDADE + "deleteRentabilidadeById";
+
+	/** The Constant STMT_DELETE_RENTABILIDADE_ALL. */
+	private static final String STMT_DELETE_RENTABILIDADE_ALL = NAMESPACE_RENTABILIDADE + "deleteAllRentabilidades";
+
+	/** The Constant STMT_FETCH_RENTABILIDADE. */
+	private static final String STMT_FETCH_RENTABILIDADE = NAMESPACE_RENTABILIDADE + "fetchRentabilidadeById";
+
+	/** The Constant STMT_FETCH_RENTABILIDADE_ALL. */
+	private static final String STMT_FETCH_RENTABILIDADE_ALL = NAMESPACE_RENTABILIDADE + "fetchAllRentabilidades";
+
+	/** The Constant STMT_FETCH_RENTABILIDADE_COUNT. */
+	private static final String STMT_FETCH_RENTABILIDADE_COUNT = NAMESPACE_RENTABILIDADE + "fetchRentabilidadeRowCount";
+
+	/** The Constant STMT_FETCH_RENTABILIDADE_ALL_REQUEST. */
+	private static final String STMT_FETCH_RENTABILIDADE_ALL_REQUEST = NAMESPACE_RENTABILIDADE + "fetchAllRentabilidadesRequest";
+
+///===================================### RENTABILIDADEITENS ####======================================
+/** The Constant NAMESPACE. */
+private static final String NAMESPACE_RENTABILIDADEITENS = "RentabilidadeitensMap.";
+
+/** The Constant STMT_INSERT_RENTABILIDADEITENS. */
+private static final String STMT_INSERT_RENTABILIDADEITENS = NAMESPACE_RENTABILIDADEITENS + "insertRentabilidadeitens";
+
+/** The Constant STMT_UPDATE_RENTABILIDADEITENS. */
+private static final String STMT_UPDATE_RENTABILIDADEITENS = NAMESPACE_RENTABILIDADEITENS + "updateRentabilidadeitens";
+
+/** The Constant STMT_DELETE_RENTABILIDADEITENS. */
+private static final String STMT_DELETE_RENTABILIDADEITENS = NAMESPACE_RENTABILIDADEITENS + "deleteRentabilidadeitensById";
+
+	/** The Constant STMT_DELETE_RENTABILIDADEITENS_ALL. */
+	private static final String STMT_DELETE_RENTABILIDADEITENS_ALL = NAMESPACE_RENTABILIDADEITENS + "deleteAllRentabilidadeitenss";
+
+	/** The Constant STMT_FETCH_RENTABILIDADEITENS. */
+	private static final String STMT_FETCH_RENTABILIDADEITENS = NAMESPACE_RENTABILIDADEITENS + "fetchRentabilidadeitensById";
+
+	/** The Constant STMT_FETCH_RENTABILIDADEITENS_ALL. */
+	private static final String STMT_FETCH_RENTABILIDADEITENS_ALL = NAMESPACE_RENTABILIDADEITENS + "fetchAllRentabilidadeitenss";
+
+	/** The Constant STMT_FETCH_RENTABILIDADEITENS_COUNT. */
+	private static final String STMT_FETCH_RENTABILIDADEITENS_COUNT = NAMESPACE_RENTABILIDADEITENS + "fetchRentabilidadeitensRowCount";
+
+	/** The Constant STMT_FETCH_RENTABILIDADEITENS_ALL_REQUEST. */
+	private static final String STMT_FETCH_RENTABILIDADEITENS_ALL_REQUEST = NAMESPACE_RENTABILIDADEITENS + "fetchAllRentabilidadeitenssRequest";
+
+//===================================### PRODUTOPARENT ####======================================
+	/**
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IProdutoParentBAR#insertProdutoParent(com.qat.samples.sysmgmt.base.model.ProdutoParent)
+ */
+@Override
+public InternalResponse insertProdutoParent(ProdutoParent produtoparent)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PRODUTOPARENT, produtoparent, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IProdutoParentBAR#updateProdutoParent(com.qat.samples.sysmgmt.base.model.ProdutoParent)
+ */
+@Override
+public InternalResponse updateProdutoParent(ProdutoParent produtoparent)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PRODUTOPARENT, produtoparent, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IProdutoParentBAR#deleteProdutoParent(com.qat.samples.sysmgmt.base.model.ProdutoParent)
+ */
+@Override
+public InternalResponse deleteProdutoParentById(ProdutoParent produtoparent)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PRODUTOPARENT, produtoparent, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IProdutoParentBAR#deleteAllProdutoParents()
+ */
+@Override
+public InternalResponse deleteAllProdutoParents()
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PRODUTOPARENT_ALL, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bar.IProdutoParentBAR#fetchProdutoParentById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+ */
+@Override
+public ProdutoParent fetchProdutoParentById(FetchByIdRequest request)
+{
+return (ProdutoParent)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_PRODUTOPARENT, request.getFetchId());
+
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IProdutoParentBAR#fetchAllProdutoParentsCache()
+ */
+@Override
+public InternalResultsResponse<ProdutoParent> fetchAllProdutoParents(ProdutoParent produtoparent)
+{
+	InternalResultsResponse<ProdutoParent> response = new InternalResultsResponse<ProdutoParent>();
+	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_PRODUTOPARENT_ALL));
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bar.IProdutoParentBAR#fetchProdutoParentsByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<ProdutoParent> fetchProdutoParentsByRequest(ProdutoParentInquiryRequest request)
+{
+	InternalResultsResponse<ProdutoParent> response = new InternalResultsResponse<ProdutoParent>();
+	fetchProdutoParentsByRequest(getSqlSession(), request, STMT_FETCH_PRODUTOPARENT_COUNT, STMT_FETCH_PRODUTOPARENT_ALL_REQUEST,
+			response);
+	return response;
+}
+
+//===================================### fetchProdutoParentsByRequest ####======================================
+
+public static void fetchProdutoParentsByRequest(SqlSession sqlSession, ProdutoParentInquiryRequest request, String countStatement,
+			String fetchPagedStatement,
+			InternalResultsResponse<?> response)
+	{
+
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount())
+		{
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
+			{
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
+			}
+		}
+
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
+		{
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
 
 //===================================### PRODUTO ####======================================
 	/**
@@ -180,10 +631,10 @@ private static final String STMT_DELETE_UNIMED = NAMESPACE_UNIMED + "deleteUniMe
  * @see com.qat.samples.sysmgmt.base.bar.IProdutoBAR#insertProduto(com.qat.samples.sysmgmt.base.model.Produto)
  */
 @Override
-public InternalResponse insertProduto(Produto county)
+public InternalResponse insertProduto(Produto produto)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PRODUTO, county, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PRODUTO, produto, response);
 	return response;
 }
 
@@ -192,10 +643,10 @@ public InternalResponse insertProduto(Produto county)
  * @see com.qat.samples.sysmgmt.base.bar.IProdutoBAR#updateProduto(com.qat.samples.sysmgmt.base.model.Produto)
  */
 @Override
-public InternalResponse updateProduto(Produto county)
+public InternalResponse updateProduto(Produto produto)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PRODUTO, county, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PRODUTO, produto, response);
 	return response;
 }
 
@@ -204,10 +655,10 @@ public InternalResponse updateProduto(Produto county)
  * @see com.qat.samples.sysmgmt.base.bar.IProdutoBAR#deleteProduto(com.qat.samples.sysmgmt.base.model.Produto)
  */
 @Override
-public InternalResponse deleteProdutoById(Produto county)
+public InternalResponse deleteProdutoById(Produto produto)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PRODUTO, county, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PRODUTO, produto, response);
 	return response;
 }
 
@@ -229,12 +680,10 @@ public InternalResponse deleteAllProdutos()
  * com.qat.samples.sysmgmt.bar.IProdutoBAR#fetchProdutoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<Produto> fetchProdutoById(FetchByIdRequest request)
+public Produto fetchProdutoById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Produto> response = new InternalResultsResponse<Produto>();
-	response.addResult((Produto)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_PRODUTO,
-			request.getFetchId()));
-	return response;
+return (Produto)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_PRODUTO, request.getFetchId());
+
 }
 
 /*
@@ -308,6 +757,139 @@ public static void fetchProdutosByRequest(SqlSession sqlSession, ProdutoInquiryR
 	}
 
 
+//===================================### CFOP ####======================================
+	/**
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.ICfopBAR#insertCfop(com.qat.samples.sysmgmt.base.model.Cfop)
+ */
+@Override
+public InternalResponse insertCfop(Cfop cfop)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CFOP, cfop, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.ICfopBAR#updateCfop(com.qat.samples.sysmgmt.base.model.Cfop)
+ */
+@Override
+public InternalResponse updateCfop(Cfop cfop)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CFOP, cfop, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.ICfopBAR#deleteCfop(com.qat.samples.sysmgmt.base.model.Cfop)
+ */
+@Override
+public InternalResponse deleteCfopById(Cfop cfop)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CFOP, cfop, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.ICfopBAR#deleteAllCfops()
+ */
+@Override
+public InternalResponse deleteAllCfops()
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CFOP_ALL, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bar.ICfopBAR#fetchCfopById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+ */
+@Override
+public Cfop fetchCfopById(FetchByIdRequest request)
+{
+return (Cfop)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CFOP, request.getFetchId());
+
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.ICfopBAR#fetchAllCfopsCache()
+ */
+@Override
+public InternalResultsResponse<Cfop> fetchAllCfops(Cfop cfop)
+{
+	InternalResultsResponse<Cfop> response = new InternalResultsResponse<Cfop>();
+	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_CFOP_ALL));
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bar.ICfopBAR#fetchCfopsByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<Cfop> fetchCfopsByRequest(CfopInquiryRequest request)
+{
+	InternalResultsResponse<Cfop> response = new InternalResultsResponse<Cfop>();
+	fetchCfopsByRequest(getSqlSession(), request, STMT_FETCH_CFOP_COUNT, STMT_FETCH_CFOP_ALL_REQUEST,
+			response);
+	return response;
+}
+
+//===================================### fetchCfopsByRequest ####======================================
+
+public static void fetchCfopsByRequest(SqlSession sqlSession, CfopInquiryRequest request, String countStatement,
+			String fetchPagedStatement,
+			InternalResultsResponse<?> response)
+	{
+
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount())
+		{
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
+			{
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
+			}
+		}
+
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
+		{
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
+
 //===================================### MARCA ####======================================
 	/**
 /*
@@ -315,10 +897,10 @@ public static void fetchProdutosByRequest(SqlSession sqlSession, ProdutoInquiryR
  * @see com.qat.samples.sysmgmt.base.bar.IMarcaBAR#insertMarca(com.qat.samples.sysmgmt.base.model.Marca)
  */
 @Override
-public InternalResponse insertMarca(Marca county)
+public InternalResponse insertMarca(Marca marca)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_MARCA, county, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_MARCA, marca, response);
 	return response;
 }
 
@@ -327,10 +909,10 @@ public InternalResponse insertMarca(Marca county)
  * @see com.qat.samples.sysmgmt.base.bar.IMarcaBAR#updateMarca(com.qat.samples.sysmgmt.base.model.Marca)
  */
 @Override
-public InternalResponse updateMarca(Marca county)
+public InternalResponse updateMarca(Marca marca)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_MARCA, county, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_MARCA, marca, response);
 	return response;
 }
 
@@ -339,10 +921,10 @@ public InternalResponse updateMarca(Marca county)
  * @see com.qat.samples.sysmgmt.base.bar.IMarcaBAR#deleteMarca(com.qat.samples.sysmgmt.base.model.Marca)
  */
 @Override
-public InternalResponse deleteMarcaById(Marca county)
+public InternalResponse deleteMarcaById(Marca marca)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_MARCA, county, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_MARCA, marca, response);
 	return response;
 }
 
@@ -364,12 +946,10 @@ public InternalResponse deleteAllMarcas()
  * com.qat.samples.sysmgmt.bar.IMarcaBAR#fetchMarcaById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<Marca> fetchMarcaById(FetchByIdRequest request)
+public Marca fetchMarcaById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Marca> response = new InternalResultsResponse<Marca>();
-	response.addResult((Marca)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_MARCA,
-			request.getFetchId()));
-	return response;
+return (Marca)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_MARCA, request.getFetchId());
+
 }
 
 /*
@@ -443,6 +1023,139 @@ public static void fetchMarcasByRequest(SqlSession sqlSession, MarcaInquiryReque
 	}
 
 
+//===================================### MARCAPRODUTO ####======================================
+	/**
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IMarcaProdutoBAR#insertMarcaProduto(com.qat.samples.sysmgmt.base.model.MarcaProduto)
+ */
+@Override
+public InternalResponse insertMarcaProduto(MarcaProduto marcaproduto)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_MARCAPRODUTO, marcaproduto, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IMarcaProdutoBAR#updateMarcaProduto(com.qat.samples.sysmgmt.base.model.MarcaProduto)
+ */
+@Override
+public InternalResponse updateMarcaProduto(MarcaProduto marcaproduto)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_MARCAPRODUTO, marcaproduto, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IMarcaProdutoBAR#deleteMarcaProduto(com.qat.samples.sysmgmt.base.model.MarcaProduto)
+ */
+@Override
+public InternalResponse deleteMarcaProdutoById(MarcaProduto marcaproduto)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_MARCAPRODUTO, marcaproduto, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IMarcaProdutoBAR#deleteAllMarcaProdutos()
+ */
+@Override
+public InternalResponse deleteAllMarcaProdutos()
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_MARCAPRODUTO_ALL, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bar.IMarcaProdutoBAR#fetchMarcaProdutoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+ */
+@Override
+public MarcaProduto fetchMarcaProdutoById(FetchByIdRequest request)
+{
+return (MarcaProduto)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_MARCAPRODUTO, request.getFetchId());
+
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IMarcaProdutoBAR#fetchAllMarcaProdutosCache()
+ */
+@Override
+public InternalResultsResponse<MarcaProduto> fetchAllMarcaProdutos(MarcaProduto marcaproduto)
+{
+	InternalResultsResponse<MarcaProduto> response = new InternalResultsResponse<MarcaProduto>();
+	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_MARCAPRODUTO_ALL));
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bar.IMarcaProdutoBAR#fetchMarcaProdutosByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<MarcaProduto> fetchMarcaProdutosByRequest(MarcaProdutoInquiryRequest request)
+{
+	InternalResultsResponse<MarcaProduto> response = new InternalResultsResponse<MarcaProduto>();
+	fetchMarcaProdutosByRequest(getSqlSession(), request, STMT_FETCH_MARCAPRODUTO_COUNT, STMT_FETCH_MARCAPRODUTO_ALL_REQUEST,
+			response);
+	return response;
+}
+
+//===================================### fetchMarcaProdutosByRequest ####======================================
+
+public static void fetchMarcaProdutosByRequest(SqlSession sqlSession, MarcaProdutoInquiryRequest request, String countStatement,
+			String fetchPagedStatement,
+			InternalResultsResponse<?> response)
+	{
+
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount())
+		{
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
+			{
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
+			}
+		}
+
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
+		{
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
+
 //===================================### GRUPO ####======================================
 	/**
 /*
@@ -450,10 +1163,10 @@ public static void fetchMarcasByRequest(SqlSession sqlSession, MarcaInquiryReque
  * @see com.qat.samples.sysmgmt.base.bar.IGrupoBAR#insertGrupo(com.qat.samples.sysmgmt.base.model.Grupo)
  */
 @Override
-public InternalResponse insertGrupo(Grupo county)
+public InternalResponse insertGrupo(Grupo grupo)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_GRUPO, county, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_GRUPO, grupo, response);
 	return response;
 }
 
@@ -462,10 +1175,10 @@ public InternalResponse insertGrupo(Grupo county)
  * @see com.qat.samples.sysmgmt.base.bar.IGrupoBAR#updateGrupo(com.qat.samples.sysmgmt.base.model.Grupo)
  */
 @Override
-public InternalResponse updateGrupo(Grupo county)
+public InternalResponse updateGrupo(Grupo grupo)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_GRUPO, county, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_GRUPO, grupo, response);
 	return response;
 }
 
@@ -474,10 +1187,10 @@ public InternalResponse updateGrupo(Grupo county)
  * @see com.qat.samples.sysmgmt.base.bar.IGrupoBAR#deleteGrupo(com.qat.samples.sysmgmt.base.model.Grupo)
  */
 @Override
-public InternalResponse deleteGrupoById(Grupo county)
+public InternalResponse deleteGrupoById(Grupo grupo)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_GRUPO, county, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_GRUPO, grupo, response);
 	return response;
 }
 
@@ -499,12 +1212,10 @@ public InternalResponse deleteAllGrupos()
  * com.qat.samples.sysmgmt.bar.IGrupoBAR#fetchGrupoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<Grupo> fetchGrupoById(FetchByIdRequest request)
+public Grupo fetchGrupoById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Grupo> response = new InternalResultsResponse<Grupo>();
-	response.addResult((Grupo)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_GRUPO,
-			request.getFetchId()));
-	return response;
+return (Grupo)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_GRUPO, request.getFetchId());
+
 }
 
 /*
@@ -585,10 +1296,10 @@ public static void fetchGruposByRequest(SqlSession sqlSession, GrupoInquiryReque
  * @see com.qat.samples.sysmgmt.base.bar.ISubGrupoBAR#insertSubGrupo(com.qat.samples.sysmgmt.base.model.SubGrupo)
  */
 @Override
-public InternalResponse insertSubGrupo(SubGrupo county)
+public InternalResponse insertSubGrupo(SubGrupo subgrupo)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_SUBGRUPO, county, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_SUBGRUPO, subgrupo, response);
 	return response;
 }
 
@@ -597,10 +1308,10 @@ public InternalResponse insertSubGrupo(SubGrupo county)
  * @see com.qat.samples.sysmgmt.base.bar.ISubGrupoBAR#updateSubGrupo(com.qat.samples.sysmgmt.base.model.SubGrupo)
  */
 @Override
-public InternalResponse updateSubGrupo(SubGrupo county)
+public InternalResponse updateSubGrupo(SubGrupo subgrupo)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_SUBGRUPO, county, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_SUBGRUPO, subgrupo, response);
 	return response;
 }
 
@@ -609,10 +1320,10 @@ public InternalResponse updateSubGrupo(SubGrupo county)
  * @see com.qat.samples.sysmgmt.base.bar.ISubGrupoBAR#deleteSubGrupo(com.qat.samples.sysmgmt.base.model.SubGrupo)
  */
 @Override
-public InternalResponse deleteSubGrupoById(SubGrupo county)
+public InternalResponse deleteSubGrupoById(SubGrupo subgrupo)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_SUBGRUPO, county, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_SUBGRUPO, subgrupo, response);
 	return response;
 }
 
@@ -634,12 +1345,10 @@ public InternalResponse deleteAllSubGrupos()
  * com.qat.samples.sysmgmt.bar.ISubGrupoBAR#fetchSubGrupoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<SubGrupo> fetchSubGrupoById(FetchByIdRequest request)
+public SubGrupo fetchSubGrupoById(FetchByIdRequest request)
 {
-	InternalResultsResponse<SubGrupo> response = new InternalResultsResponse<SubGrupo>();
-	response.addResult((SubGrupo)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_SUBGRUPO,
-			request.getFetchId()));
-	return response;
+return (SubGrupo)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_SUBGRUPO, request.getFetchId());
+
 }
 
 /*
@@ -720,10 +1429,10 @@ public static void fetchSubGruposByRequest(SqlSession sqlSession, SubGrupoInquir
  * @see com.qat.samples.sysmgmt.base.bar.IUniMedBAR#insertUniMed(com.qat.samples.sysmgmt.base.model.UniMed)
  */
 @Override
-public InternalResponse insertUniMed(UniMed county)
+public InternalResponse insertUniMed(UniMed unimed)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_UNIMED, county, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_UNIMED, unimed, response);
 	return response;
 }
 
@@ -732,10 +1441,10 @@ public InternalResponse insertUniMed(UniMed county)
  * @see com.qat.samples.sysmgmt.base.bar.IUniMedBAR#updateUniMed(com.qat.samples.sysmgmt.base.model.UniMed)
  */
 @Override
-public InternalResponse updateUniMed(UniMed county)
+public InternalResponse updateUniMed(UniMed unimed)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_UNIMED, county, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_UNIMED, unimed, response);
 	return response;
 }
 
@@ -744,10 +1453,10 @@ public InternalResponse updateUniMed(UniMed county)
  * @see com.qat.samples.sysmgmt.base.bar.IUniMedBAR#deleteUniMed(com.qat.samples.sysmgmt.base.model.UniMed)
  */
 @Override
-public InternalResponse deleteUniMedById(UniMed county)
+public InternalResponse deleteUniMedById(UniMed unimed)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_UNIMED, county, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_UNIMED, unimed, response);
 	return response;
 }
 
@@ -769,12 +1478,10 @@ public InternalResponse deleteAllUniMeds()
  * com.qat.samples.sysmgmt.bar.IUniMedBAR#fetchUniMedById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<UniMed> fetchUniMedById(FetchByIdRequest request)
+public UniMed fetchUniMedById(FetchByIdRequest request)
 {
-	InternalResultsResponse<UniMed> response = new InternalResultsResponse<UniMed>();
-	response.addResult((UniMed)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_UNIMED,
-			request.getFetchId()));
-	return response;
+return (UniMed)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_UNIMED, request.getFetchId());
+
 }
 
 /*
@@ -806,6 +1513,1070 @@ public InternalResultsResponse<UniMed> fetchUniMedsByRequest(UniMedInquiryReques
 //===================================### fetchUniMedsByRequest ####======================================
 
 public static void fetchUniMedsByRequest(SqlSession sqlSession, UniMedInquiryRequest request, String countStatement,
+			String fetchPagedStatement,
+			InternalResultsResponse<?> response)
+	{
+
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount())
+		{
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
+			{
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
+			}
+		}
+
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
+		{
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
+
+//===================================### TRIBUTACAO ####======================================
+	/**
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.ITributacaoBAR#insertTributacao(com.qat.samples.sysmgmt.base.model.Tributacao)
+ */
+@Override
+public InternalResponse insertTributacao(Tributacao tributacao)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_TRIBUTACAO, tributacao, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.ITributacaoBAR#updateTributacao(com.qat.samples.sysmgmt.base.model.Tributacao)
+ */
+@Override
+public InternalResponse updateTributacao(Tributacao tributacao)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_TRIBUTACAO, tributacao, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.ITributacaoBAR#deleteTributacao(com.qat.samples.sysmgmt.base.model.Tributacao)
+ */
+@Override
+public InternalResponse deleteTributacaoById(Tributacao tributacao)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_TRIBUTACAO, tributacao, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.ITributacaoBAR#deleteAllTributacaos()
+ */
+@Override
+public InternalResponse deleteAllTributacaos()
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_TRIBUTACAO_ALL, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bar.ITributacaoBAR#fetchTributacaoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+ */
+@Override
+public Tributacao fetchTributacaoById(FetchByIdRequest request)
+{
+return (Tributacao)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_TRIBUTACAO, request.getFetchId());
+
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.ITributacaoBAR#fetchAllTributacaosCache()
+ */
+@Override
+public InternalResultsResponse<Tributacao> fetchAllTributacaos(Tributacao tributacao)
+{
+	InternalResultsResponse<Tributacao> response = new InternalResultsResponse<Tributacao>();
+	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_TRIBUTACAO_ALL));
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bar.ITributacaoBAR#fetchTributacaosByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<Tributacao> fetchTributacaosByRequest(TributacaoInquiryRequest request)
+{
+	InternalResultsResponse<Tributacao> response = new InternalResultsResponse<Tributacao>();
+	fetchTributacaosByRequest(getSqlSession(), request, STMT_FETCH_TRIBUTACAO_COUNT, STMT_FETCH_TRIBUTACAO_ALL_REQUEST,
+			response);
+	return response;
+}
+
+//===================================### fetchTributacaosByRequest ####======================================
+
+public static void fetchTributacaosByRequest(SqlSession sqlSession, TributacaoInquiryRequest request, String countStatement,
+			String fetchPagedStatement,
+			InternalResultsResponse<?> response)
+	{
+
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount())
+		{
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
+			{
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
+			}
+		}
+
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
+		{
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
+
+//===================================### CUSTO ####======================================
+	/**
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.ICustoBAR#insertCusto(com.qat.samples.sysmgmt.base.model.Custo)
+ */
+@Override
+public InternalResponse insertCusto(Custo custo)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CUSTO, custo, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.ICustoBAR#updateCusto(com.qat.samples.sysmgmt.base.model.Custo)
+ */
+@Override
+public InternalResponse updateCusto(Custo custo)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CUSTO, custo, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.ICustoBAR#deleteCusto(com.qat.samples.sysmgmt.base.model.Custo)
+ */
+@Override
+public InternalResponse deleteCustoById(Custo custo)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CUSTO, custo, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.ICustoBAR#deleteAllCustos()
+ */
+@Override
+public InternalResponse deleteAllCustos()
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CUSTO_ALL, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bar.ICustoBAR#fetchCustoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+ */
+@Override
+public Custo fetchCustoById(FetchByIdRequest request)
+{
+return (Custo)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CUSTO, request.getFetchId());
+
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.ICustoBAR#fetchAllCustosCache()
+ */
+@Override
+public InternalResultsResponse<Custo> fetchAllCustos(Custo custo)
+{
+	InternalResultsResponse<Custo> response = new InternalResultsResponse<Custo>();
+	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_CUSTO_ALL));
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bar.ICustoBAR#fetchCustosByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<Custo> fetchCustosByRequest(CustoInquiryRequest request)
+{
+	InternalResultsResponse<Custo> response = new InternalResultsResponse<Custo>();
+	fetchCustosByRequest(getSqlSession(), request, STMT_FETCH_CUSTO_COUNT, STMT_FETCH_CUSTO_ALL_REQUEST,
+			response);
+	return response;
+}
+
+//===================================### fetchCustosByRequest ####======================================
+
+public static void fetchCustosByRequest(SqlSession sqlSession, CustoInquiryRequest request, String countStatement,
+			String fetchPagedStatement,
+			InternalResultsResponse<?> response)
+	{
+
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount())
+		{
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
+			{
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
+			}
+		}
+
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
+		{
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
+
+//===================================### CUSTOITENS ####======================================
+	/**
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.ICustoItensBAR#insertCustoItens(com.qat.samples.sysmgmt.base.model.CustoItens)
+ */
+@Override
+public InternalResponse insertCustoItens(CustoItens custoitens)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CUSTOITENS, custoitens, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.ICustoItensBAR#updateCustoItens(com.qat.samples.sysmgmt.base.model.CustoItens)
+ */
+@Override
+public InternalResponse updateCustoItens(CustoItens custoitens)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CUSTOITENS, custoitens, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.ICustoItensBAR#deleteCustoItens(com.qat.samples.sysmgmt.base.model.CustoItens)
+ */
+@Override
+public InternalResponse deleteCustoItensById(CustoItens custoitens)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CUSTOITENS, custoitens, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.ICustoItensBAR#deleteAllCustoItenss()
+ */
+@Override
+public InternalResponse deleteAllCustoItenss()
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CUSTOITENS_ALL, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bar.ICustoItensBAR#fetchCustoItensById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+ */
+@Override
+public CustoItens fetchCustoItensById(FetchByIdRequest request)
+{
+return (CustoItens)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CUSTOITENS, request.getFetchId());
+
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.ICustoItensBAR#fetchAllCustoItenssCache()
+ */
+@Override
+public InternalResultsResponse<CustoItens> fetchAllCustoItenss(CustoItens custoitens)
+{
+	InternalResultsResponse<CustoItens> response = new InternalResultsResponse<CustoItens>();
+	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_CUSTOITENS_ALL));
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bar.ICustoItensBAR#fetchCustoItenssByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<CustoItens> fetchCustoItenssByRequest(CustoItensInquiryRequest request)
+{
+	InternalResultsResponse<CustoItens> response = new InternalResultsResponse<CustoItens>();
+	fetchCustoItenssByRequest(getSqlSession(), request, STMT_FETCH_CUSTOITENS_COUNT, STMT_FETCH_CUSTOITENS_ALL_REQUEST,
+			response);
+	return response;
+}
+
+//===================================### fetchCustoItenssByRequest ####======================================
+
+public static void fetchCustoItenssByRequest(SqlSession sqlSession, CustoItensInquiryRequest request, String countStatement,
+			String fetchPagedStatement,
+			InternalResultsResponse<?> response)
+	{
+
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount())
+		{
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
+			{
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
+			}
+		}
+
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
+		{
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
+
+//===================================### ESTOQUE ####======================================
+	/**
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IEstoqueBAR#insertEstoque(com.qat.samples.sysmgmt.base.model.Estoque)
+ */
+@Override
+public InternalResponse insertEstoque(Estoque estoque)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ESTOQUE, estoque, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IEstoqueBAR#updateEstoque(com.qat.samples.sysmgmt.base.model.Estoque)
+ */
+@Override
+public InternalResponse updateEstoque(Estoque estoque)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ESTOQUE, estoque, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IEstoqueBAR#deleteEstoque(com.qat.samples.sysmgmt.base.model.Estoque)
+ */
+@Override
+public InternalResponse deleteEstoqueById(Estoque estoque)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ESTOQUE, estoque, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IEstoqueBAR#deleteAllEstoques()
+ */
+@Override
+public InternalResponse deleteAllEstoques()
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ESTOQUE_ALL, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bar.IEstoqueBAR#fetchEstoqueById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+ */
+@Override
+public Estoque fetchEstoqueById(FetchByIdRequest request)
+{
+return (Estoque)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_ESTOQUE, request.getFetchId());
+
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IEstoqueBAR#fetchAllEstoquesCache()
+ */
+@Override
+public InternalResultsResponse<Estoque> fetchAllEstoques(Estoque estoque)
+{
+	InternalResultsResponse<Estoque> response = new InternalResultsResponse<Estoque>();
+	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_ESTOQUE_ALL));
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bar.IEstoqueBAR#fetchEstoquesByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<Estoque> fetchEstoquesByRequest(EstoqueInquiryRequest request)
+{
+	InternalResultsResponse<Estoque> response = new InternalResultsResponse<Estoque>();
+	fetchEstoquesByRequest(getSqlSession(), request, STMT_FETCH_ESTOQUE_COUNT, STMT_FETCH_ESTOQUE_ALL_REQUEST,
+			response);
+	return response;
+}
+
+//===================================### fetchEstoquesByRequest ####======================================
+
+public static void fetchEstoquesByRequest(SqlSession sqlSession, EstoqueInquiryRequest request, String countStatement,
+			String fetchPagedStatement,
+			InternalResultsResponse<?> response)
+	{
+
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount())
+		{
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
+			{
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
+			}
+		}
+
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
+		{
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
+
+//===================================### PORCAO ####======================================
+	/**
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IPorcaoBAR#insertPorcao(com.qat.samples.sysmgmt.base.model.Porcao)
+ */
+@Override
+public InternalResponse insertPorcao(Porcao porcao)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PORCAO, porcao, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IPorcaoBAR#updatePorcao(com.qat.samples.sysmgmt.base.model.Porcao)
+ */
+@Override
+public InternalResponse updatePorcao(Porcao porcao)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PORCAO, porcao, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IPorcaoBAR#deletePorcao(com.qat.samples.sysmgmt.base.model.Porcao)
+ */
+@Override
+public InternalResponse deletePorcaoById(Porcao porcao)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PORCAO, porcao, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IPorcaoBAR#deleteAllPorcaos()
+ */
+@Override
+public InternalResponse deleteAllPorcaos()
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PORCAO_ALL, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bar.IPorcaoBAR#fetchPorcaoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+ */
+@Override
+public Porcao fetchPorcaoById(FetchByIdRequest request)
+{
+return (Porcao)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_PORCAO, request.getFetchId());
+
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IPorcaoBAR#fetchAllPorcaosCache()
+ */
+@Override
+public InternalResultsResponse<Porcao> fetchAllPorcaos(Porcao porcao)
+{
+	InternalResultsResponse<Porcao> response = new InternalResultsResponse<Porcao>();
+	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_PORCAO_ALL));
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bar.IPorcaoBAR#fetchPorcaosByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<Porcao> fetchPorcaosByRequest(PorcaoInquiryRequest request)
+{
+	InternalResultsResponse<Porcao> response = new InternalResultsResponse<Porcao>();
+	fetchPorcaosByRequest(getSqlSession(), request, STMT_FETCH_PORCAO_COUNT, STMT_FETCH_PORCAO_ALL_REQUEST,
+			response);
+	return response;
+}
+
+//===================================### fetchPorcaosByRequest ####======================================
+
+public static void fetchPorcaosByRequest(SqlSession sqlSession, PorcaoInquiryRequest request, String countStatement,
+			String fetchPagedStatement,
+			InternalResultsResponse<?> response)
+	{
+
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount())
+		{
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
+			{
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
+			}
+		}
+
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
+		{
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
+
+//===================================### PORCAOITENS ####======================================
+	/**
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IPorcaoItensBAR#insertPorcaoItens(com.qat.samples.sysmgmt.base.model.PorcaoItens)
+ */
+@Override
+public InternalResponse insertPorcaoItens(PorcaoItens porcaoitens)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PORCAOITENS, porcaoitens, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IPorcaoItensBAR#updatePorcaoItens(com.qat.samples.sysmgmt.base.model.PorcaoItens)
+ */
+@Override
+public InternalResponse updatePorcaoItens(PorcaoItens porcaoitens)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PORCAOITENS, porcaoitens, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IPorcaoItensBAR#deletePorcaoItens(com.qat.samples.sysmgmt.base.model.PorcaoItens)
+ */
+@Override
+public InternalResponse deletePorcaoItensById(PorcaoItens porcaoitens)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PORCAOITENS, porcaoitens, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IPorcaoItensBAR#deleteAllPorcaoItenss()
+ */
+@Override
+public InternalResponse deleteAllPorcaoItenss()
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PORCAOITENS_ALL, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bar.IPorcaoItensBAR#fetchPorcaoItensById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+ */
+@Override
+public PorcaoItens fetchPorcaoItensById(FetchByIdRequest request)
+{
+return (PorcaoItens)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_PORCAOITENS, request.getFetchId());
+
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IPorcaoItensBAR#fetchAllPorcaoItenssCache()
+ */
+@Override
+public InternalResultsResponse<PorcaoItens> fetchAllPorcaoItenss(PorcaoItens porcaoitens)
+{
+	InternalResultsResponse<PorcaoItens> response = new InternalResultsResponse<PorcaoItens>();
+	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_PORCAOITENS_ALL));
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bar.IPorcaoItensBAR#fetchPorcaoItenssByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<PorcaoItens> fetchPorcaoItenssByRequest(PorcaoItensInquiryRequest request)
+{
+	InternalResultsResponse<PorcaoItens> response = new InternalResultsResponse<PorcaoItens>();
+	fetchPorcaoItenssByRequest(getSqlSession(), request, STMT_FETCH_PORCAOITENS_COUNT, STMT_FETCH_PORCAOITENS_ALL_REQUEST,
+			response);
+	return response;
+}
+
+//===================================### fetchPorcaoItenssByRequest ####======================================
+
+public static void fetchPorcaoItenssByRequest(SqlSession sqlSession, PorcaoItensInquiryRequest request, String countStatement,
+			String fetchPagedStatement,
+			InternalResultsResponse<?> response)
+	{
+
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount())
+		{
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
+			{
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
+			}
+		}
+
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
+		{
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
+
+//===================================### RENTABILIDADE ####======================================
+	/**
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IRentabilidadeBAR#insertRentabilidade(com.qat.samples.sysmgmt.base.model.Rentabilidade)
+ */
+@Override
+public InternalResponse insertRentabilidade(Rentabilidade rentabilidade)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_RENTABILIDADE, rentabilidade, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IRentabilidadeBAR#updateRentabilidade(com.qat.samples.sysmgmt.base.model.Rentabilidade)
+ */
+@Override
+public InternalResponse updateRentabilidade(Rentabilidade rentabilidade)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_RENTABILIDADE, rentabilidade, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IRentabilidadeBAR#deleteRentabilidade(com.qat.samples.sysmgmt.base.model.Rentabilidade)
+ */
+@Override
+public InternalResponse deleteRentabilidadeById(Rentabilidade rentabilidade)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_RENTABILIDADE, rentabilidade, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IRentabilidadeBAR#deleteAllRentabilidades()
+ */
+@Override
+public InternalResponse deleteAllRentabilidades()
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_RENTABILIDADE_ALL, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bar.IRentabilidadeBAR#fetchRentabilidadeById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+ */
+@Override
+public Rentabilidade fetchRentabilidadeById(FetchByIdRequest request)
+{
+return (Rentabilidade)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_RENTABILIDADE, request.getFetchId());
+
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IRentabilidadeBAR#fetchAllRentabilidadesCache()
+ */
+@Override
+public InternalResultsResponse<Rentabilidade> fetchAllRentabilidades(Rentabilidade rentabilidade)
+{
+	InternalResultsResponse<Rentabilidade> response = new InternalResultsResponse<Rentabilidade>();
+	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_RENTABILIDADE_ALL));
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bar.IRentabilidadeBAR#fetchRentabilidadesByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<Rentabilidade> fetchRentabilidadesByRequest(RentabilidadeInquiryRequest request)
+{
+	InternalResultsResponse<Rentabilidade> response = new InternalResultsResponse<Rentabilidade>();
+	fetchRentabilidadesByRequest(getSqlSession(), request, STMT_FETCH_RENTABILIDADE_COUNT, STMT_FETCH_RENTABILIDADE_ALL_REQUEST,
+			response);
+	return response;
+}
+
+//===================================### fetchRentabilidadesByRequest ####======================================
+
+public static void fetchRentabilidadesByRequest(SqlSession sqlSession, RentabilidadeInquiryRequest request, String countStatement,
+			String fetchPagedStatement,
+			InternalResultsResponse<?> response)
+	{
+
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount())
+		{
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
+			{
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
+			}
+		}
+
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
+		{
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
+
+//===================================### RENTABILIDADEITENS ####======================================
+	/**
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IRentabilidadeItensBAR#insertRentabilidadeItens(com.qat.samples.sysmgmt.base.model.RentabilidadeItens)
+ */
+@Override
+public InternalResponse insertRentabilidadeItens(RentabilidadeItens rentabilidadeitens)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_RENTABILIDADEITENS, rentabilidadeitens, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IRentabilidadeItensBAR#updateRentabilidadeItens(com.qat.samples.sysmgmt.base.model.RentabilidadeItens)
+ */
+@Override
+public InternalResponse updateRentabilidadeItens(RentabilidadeItens rentabilidadeitens)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_RENTABILIDADEITENS, rentabilidadeitens, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IRentabilidadeItensBAR#deleteRentabilidadeItens(com.qat.samples.sysmgmt.base.model.RentabilidadeItens)
+ */
+@Override
+public InternalResponse deleteRentabilidadeItensById(RentabilidadeItens rentabilidadeitens)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_RENTABILIDADEITENS, rentabilidadeitens, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IRentabilidadeItensBAR#deleteAllRentabilidadeItenss()
+ */
+@Override
+public InternalResponse deleteAllRentabilidadeItenss()
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_RENTABILIDADEITENS_ALL, response);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bar.IRentabilidadeItensBAR#fetchRentabilidadeItensById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+ */
+@Override
+public RentabilidadeItens fetchRentabilidadeItensById(FetchByIdRequest request)
+{
+return (RentabilidadeItens)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_RENTABILIDADEITENS, request.getFetchId());
+
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.base.bar.IRentabilidadeItensBAR#fetchAllRentabilidadeItenssCache()
+ */
+@Override
+public InternalResultsResponse<RentabilidadeItens> fetchAllRentabilidadeItenss(RentabilidadeItens rentabilidadeitens)
+{
+	InternalResultsResponse<RentabilidadeItens> response = new InternalResultsResponse<RentabilidadeItens>();
+	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_RENTABILIDADEITENS_ALL));
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bar.IRentabilidadeItensBAR#fetchRentabilidadeItenssByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<RentabilidadeItens> fetchRentabilidadeItenssByRequest(RentabilidadeItensInquiryRequest request)
+{
+	InternalResultsResponse<RentabilidadeItens> response = new InternalResultsResponse<RentabilidadeItens>();
+	fetchRentabilidadeItenssByRequest(getSqlSession(), request, STMT_FETCH_RENTABILIDADEITENS_COUNT, STMT_FETCH_RENTABILIDADEITENS_ALL_REQUEST,
+			response);
+	return response;
+}
+
+//===================================### fetchRentabilidadeItenssByRequest ####======================================
+
+public static void fetchRentabilidadeItenssByRequest(SqlSession sqlSession, RentabilidadeItensInquiryRequest request, String countStatement,
 			String fetchPagedStatement,
 			InternalResultsResponse<?> response)
 	{
