@@ -7,6 +7,7 @@ import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
 import com.qat.samples.sysmgmt.pessoa.model.Cliente;
 import com.qat.samples.sysmgmt.pessoa.model.Fornecedor;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
+import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -38,6 +39,20 @@ public class Titulo extends ModelCosmeDamiao
 	private FinanceiroStatusEnum financeiroEnum;
 
 	private List<BaixaTitulo> listBaixa;
+
+	public Integer getFinanceiroEnumValue()
+	{
+		if (financeiroEnum != null)
+		{
+			return financeiroEnum.getValue();
+		}
+		return null;
+	}
+
+	public void setFinanceiroEnumValue(Integer acaoTypeValue)
+	{
+		financeiroEnum = FinanceiroStatusEnum.enumForValue(acaoTypeValue);
+	}
 
 	/**
 	 * Default constructor.
