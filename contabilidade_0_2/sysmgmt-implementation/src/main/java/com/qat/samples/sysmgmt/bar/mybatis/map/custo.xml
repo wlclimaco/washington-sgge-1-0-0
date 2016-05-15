@@ -18,7 +18,6 @@
   <resultMap id="CustoResult" type="Custo">
     <result property="id" column="id"/>
     <result property="valor" column="valor"/>
-<collection property="custo" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
     <result property="parentId" column="parentId"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
@@ -26,6 +25,7 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<collection property="custo" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
   </resultMap>
 
   <sql id="allCustoColumns">
@@ -63,7 +63,7 @@
    FROM custo WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllCustosRequest" parameterType="CustoInquiryRequest" resultMap="CustoResult">
+ <select id="fetchAllCustosRequest" parameterType="PagedInquiryRequest" resultMap="CustoResult">
 
 		SELECT id,<include refid="allCustoColumns" />
   		  FROM custo where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC

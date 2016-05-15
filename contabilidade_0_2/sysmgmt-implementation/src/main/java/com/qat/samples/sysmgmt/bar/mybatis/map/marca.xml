@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 13/05/2016 17:59 : 56-->
+<!-- create by system gera-java version 1.0.0 14/05/2016 21:53 : 25-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -17,19 +17,23 @@
        exactly. -->
   <resultMap id="MarcaResult" type="Marca">
     <result property="id" column="id"/>
-    <result property="unimed" column="unimed"/>
-    <result property="sigla" column="sigla"/>
+    <result property="marca" column="marca"/>
+    <result property="fabricante" column="fabricante"/>
+
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<collection property="emailList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="enderecoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="telefoneList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
   </resultMap>
 
   <sql id="allMarcaColumns">
-,unimed
-,sigla
+,marca
+,fabricante
 ,emprId
 ,processId
 ,create_date
@@ -39,8 +43,8 @@
 
 </sql>
 <sql id="allMarcaValues">
-#{unimed},
-#{sigla},
+#{marca},
+#{fabricante},
 		#{emprId},
 		#{processId},
 		#{createDateUTC},
@@ -84,8 +88,8 @@
 
  <update id="updateMarca" parameterType="Marca">
    UPDATE marca SET
-<if test="unimed!= null">unimed = #{unimed},</if>
-<if test="sigla!= null">sigla = #{sigla},</if>
+<if test="marca!= null">marca = #{marca},</if>
+<if test="fabricante!= null">fabricante = #{fabricante},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

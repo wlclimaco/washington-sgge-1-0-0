@@ -60,11 +60,18 @@ public class MarcaProd extends ModelCosmeDamiao
 		this.marcaId = marcaId;
 	}
 
+	public Marca getMarcaId() {
+		return marcaId;
+	}
+
+	public void setMarcaId(Marca marcaId) {
+		this.marcaId = marcaId;
+	}
+
 	@Override
-	public String toString()
-	{
-		return "MarcaProd [getId()=" + getId() + ", getUnimedId()=" + getUnimedId() + ", toString()="
-				+ super.toString() + "]";
+	public String toString() {
+		return "MarcaProd [getId()=" + getId() + ", getUnimedId()=" + getUnimedId() + ", getMarcaId()=" + getMarcaId()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

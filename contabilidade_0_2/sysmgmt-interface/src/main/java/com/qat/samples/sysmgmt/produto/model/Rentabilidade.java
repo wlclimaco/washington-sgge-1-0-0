@@ -17,7 +17,7 @@ public class Rentabilidade extends ModelCosmeDamiao
 	private Integer idproduto;
 
 	/** The type of an account. */
-	private List<RentabilidadeItens> rentabilidadeList;
+	private List<RentabilidadeItens> rentabilidadeItensList;
 
 	/**
 	 * Default constructor.
@@ -27,63 +27,36 @@ public class Rentabilidade extends ModelCosmeDamiao
 		super();
 	}
 
-	/**
-	 * Gets the id.
-	 * 
-	 * @return the id
-	 */
-	public Integer getId()
-	{
+	public Integer getId() {
 		return id;
 	}
 
-	/**
-	 * Sets the id.
-	 * 
-	 * @param id the new id
-	 */
-	public void setId(Integer id)
-	{
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the idproduto
-	 */
-	public Integer getIdproduto()
-	{
+	public Integer getIdproduto() {
 		return idproduto;
 	}
 
-	/**
-	 * @param idproduto the idproduto to set
-	 */
-	public void setIdproduto(Integer idproduto)
-	{
+	public void setIdproduto(Integer idproduto) {
 		this.idproduto = idproduto;
 	}
 
-	/**
-	 * @return the rentabilidadeList
-	 */
-	public List<RentabilidadeItens> getRentabilidadeList()
-	{
-		return rentabilidadeList;
+	public List<RentabilidadeItens> getRentabilidadeItensList() {
+		return rentabilidadeItensList;
 	}
 
-	/**
-	 * @param rentabilidadeList the rentabilidadeList to set
-	 */
-	public void setRentabilidadeList(List<RentabilidadeItens> rentabilidadeList)
-	{
-		this.rentabilidadeList = rentabilidadeList;
+	public void setRentabilidadeItensList(List<RentabilidadeItens> rentabilidadeItensList) {
+		this.rentabilidadeItensList = rentabilidadeItensList;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "Rentabilidade [getId()=" + getId() + ", getIdproduto()=" + getIdproduto() + ", getRentabilidadeList()="
-				+ getRentabilidadeList() + ", toString()=" + super.toString() + "]";
+	public String toString() {
+		return "Rentabilidade [getId()=" + getId() + ", getIdproduto()=" + getIdproduto()
+				+ ", getRentabilidadeItensList()=" + getRentabilidadeItensList() + ", toString()=" + super.toString()
+				+ "]";
 	}
+
 
 }

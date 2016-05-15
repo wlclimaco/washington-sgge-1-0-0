@@ -19,13 +19,13 @@
     <result property="id" column="id"/>
     <result property="grupo" column="grupo"/>
     <result property="descricao" column="descricao"/>
-    <result property="subGrupo" column="subGrupo"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<collection property="subGrupo" column="subGrupo" select="DocumentoMap.fetchDocumentoByEmpresa"/>
   </resultMap>
 
   <sql id="allGrupoColumns">

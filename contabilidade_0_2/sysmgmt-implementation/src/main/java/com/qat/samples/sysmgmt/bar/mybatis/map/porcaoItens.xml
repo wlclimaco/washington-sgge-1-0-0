@@ -20,7 +20,6 @@
     <result property="parentId" column="parentId"/>
     <result property="porcao" column="porcao"/>
     <result property="vd" column="vd"/>
-    <result property="unimed" column="unimed"/>
     <result property="nome" column="nome"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
@@ -28,6 +27,7 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<collection property="unimed" column="unimed" select="DocumentoMap.fetchDocumentoByEmpresa"/>
   </resultMap>
 
   <sql id="allPorcaoItensColumns">
@@ -48,7 +48,7 @@
 #{parentId},
 #{porcao},
 #{vd},
-#{unimed},
+#{unimed.id},
 #{nome},
 		#{emprId},
 		#{processId},
@@ -71,7 +71,7 @@
    FROM porcaoitens WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllPorcaoItenssRequest" parameterType="PorcaoItensInquiryRequest" resultMap="PorcaoItensResult">
+ <select id="fetchAllPorcaoItenssRequest" parameterType="PagedInquiryRequest" resultMap="PorcaoItensResult">
 
 		SELECT id,<include refid="allPorcaoItensColumns" />
   		  FROM porcaoitens where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
@@ -96,7 +96,7 @@
 <if test="parentId!= null">parentId = #{parentId},</if>
 <if test="porcao!= null">porcao = #{porcao},</if>
 <if test="vd!= null">vd = #{vd},</if>
-<if test="unimed!= null">unimed = #{unimed},</if>
+<if test="unimed.id!= null">unimed = #{unimed.id},</if>
 <if test="nome!= null">nome = #{nome},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>

@@ -68,7 +68,7 @@
    FROM rentabilidadeitens WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllRentabilidadeItenssRequest" parameterType="RentabilidadeItensInquiryRequest" resultMap="RentabilidadeItensResult">
+ <select id="fetchAllRentabilidadeItenssRequest" parameterType="PagedInquiryRequest" resultMap="RentabilidadeItensResult">
 
 		SELECT id,<include refid="allRentabilidadeItensColumns" />
   		  FROM rentabilidadeitens where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC

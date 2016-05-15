@@ -25,12 +25,6 @@
     <result property="localizacao" column="localizacao"/>
     <result property="comissao" column="comissao"/>
     <result property="fracao" column="fracao"/>
-    <result property="classificacao" column="classificacao"/>
-    <result property="uniMed" column="uniMed"/>
-    <result property="grupo" column="grupo"/>
-    <result property="subGrupo" column="subGrupo"/>
-    <result property="marca" column="marca"/>
-    <result property="porcao" column="porcao"/>
     <result property="pesoBruto" column="pesoBruto"/>
     <result property="pesoLiquido" column="pesoLiquido"/>
     <result property="modoUso" column="modoUso"/>
@@ -40,6 +34,12 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<collection property="classificacao" column="classificacao" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="grupo" column="grupo" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="subGrupo" column="subGrupo" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="unimed" column="unimed" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="marca" column="marca" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="porcao" column="marca" select="DocumentoMap.fetchDocumentoByEmpresa"/>
   </resultMap>
 
   <sql id="allProdutoColumns">

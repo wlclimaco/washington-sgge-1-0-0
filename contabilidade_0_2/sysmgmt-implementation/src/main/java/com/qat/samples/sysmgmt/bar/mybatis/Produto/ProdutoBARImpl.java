@@ -1,5 +1,5 @@
 /** create by system gera-java version 1.0.0 13/05/2016 17:59 : 56*/
-package com.qat.samples.sysmgmt.bar.mybatis.produto;
+package com.qat.samples.sysmgmt.bar.mybatis.Produto;
 
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,11 +15,15 @@ import com.qat.samples.sysmgmt.cfop.model.Cfop;
 import com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.Tributacao;
 import com.qat.samples.sysmgmt.produto.model.Custo;
+import com.qat.samples.sysmgmt.produto.model.CustoItens;
 import com.qat.samples.sysmgmt.produto.model.Estoque;
 import com.qat.samples.sysmgmt.produto.model.Grupo;
 import com.qat.samples.sysmgmt.produto.model.Marca;
+import com.qat.samples.sysmgmt.produto.model.MarcaProd;
 import com.qat.samples.sysmgmt.produto.model.Porcao;
+import com.qat.samples.sysmgmt.produto.model.PorcaoItens;
 import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.ProdutoParent;
 import com.qat.samples.sysmgmt.produto.model.Rentabilidade;
 import com.qat.samples.sysmgmt.produto.model.RentabilidadeItens;
 import com.qat.samples.sysmgmt.produto.model.SubGrupo;
@@ -27,10 +31,12 @@ import com.qat.samples.sysmgmt.produto.model.UniMed;
 import com.qat.samples.sysmgmt.produto.model.request.GrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoParentInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
 /**
  * The Class CountyBARImpl. (Business Access Repository - BAR)
@@ -1030,7 +1036,7 @@ public static void fetchMarcasByRequest(SqlSession sqlSession, MarcaInquiryReque
  * @see com.qat.samples.sysmgmt.base.bar.IMarcaProdutoBAR#insertMarcaProduto(com.qat.samples.sysmgmt.base.model.MarcaProduto)
  */
 @Override
-public InternalResponse insertMarcaProduto(MarcaProduto marcaproduto)
+public InternalResponse insertMarcaProduto(MarcaProd marcaproduto)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_MARCAPRODUTO, marcaproduto, response);
@@ -1042,7 +1048,7 @@ public InternalResponse insertMarcaProduto(MarcaProduto marcaproduto)
  * @see com.qat.samples.sysmgmt.base.bar.IMarcaProdutoBAR#updateMarcaProduto(com.qat.samples.sysmgmt.base.model.MarcaProduto)
  */
 @Override
-public InternalResponse updateMarcaProduto(MarcaProduto marcaproduto)
+public InternalResponse updateMarcaProduto(MarcaProd marcaproduto)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_MARCAPRODUTO, marcaproduto, response);
@@ -1054,7 +1060,7 @@ public InternalResponse updateMarcaProduto(MarcaProduto marcaproduto)
  * @see com.qat.samples.sysmgmt.base.bar.IMarcaProdutoBAR#deleteMarcaProduto(com.qat.samples.sysmgmt.base.model.MarcaProduto)
  */
 @Override
-public InternalResponse deleteMarcaProdutoById(MarcaProduto marcaproduto)
+public InternalResponse deleteMarcaProdutoById(MarcaProd marcaproduto)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_MARCAPRODUTO, marcaproduto, response);
@@ -1079,9 +1085,9 @@ public InternalResponse deleteAllMarcaProdutos()
  * com.qat.samples.sysmgmt.bar.IMarcaProdutoBAR#fetchMarcaProdutoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public MarcaProduto fetchMarcaProdutoById(FetchByIdRequest request)
+public MarcaProd fetchMarcaProdutoById(FetchByIdRequest request)
 {
-return (MarcaProduto)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_MARCAPRODUTO, request.getFetchId());
+return (MarcaProd)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_MARCAPRODUTO, request.getFetchId());
 
 }
 
@@ -1090,9 +1096,9 @@ return (MarcaProduto)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FET
  * @see com.qat.samples.sysmgmt.base.bar.IMarcaProdutoBAR#fetchAllMarcaProdutosCache()
  */
 @Override
-public InternalResultsResponse<MarcaProduto> fetchAllMarcaProdutos(MarcaProduto marcaproduto)
+public InternalResultsResponse<MarcaProd> fetchAllMarcaProdutos(MarcaProd marcaproduto)
 {
-	InternalResultsResponse<MarcaProduto> response = new InternalResultsResponse<MarcaProduto>();
+	InternalResultsResponse<MarcaProd> response = new InternalResultsResponse<MarcaProd>();
 	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_MARCAPRODUTO_ALL));
 	return response;
 }
@@ -1103,9 +1109,9 @@ public InternalResultsResponse<MarcaProduto> fetchAllMarcaProdutos(MarcaProduto 
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<MarcaProduto> fetchMarcaProdutosByRequest(MarcaProdutoInquiryRequest request)
+public InternalResultsResponse<MarcaProd> fetchMarcaProdutosByRequest(PagedInquiryRequest request)
 {
-	InternalResultsResponse<MarcaProduto> response = new InternalResultsResponse<MarcaProduto>();
+	InternalResultsResponse<MarcaProd> response = new InternalResultsResponse<MarcaProd>();
 	fetchMarcaProdutosByRequest(getSqlSession(), request, STMT_FETCH_MARCAPRODUTO_COUNT, STMT_FETCH_MARCAPRODUTO_ALL_REQUEST,
 			response);
 	return response;
@@ -1113,7 +1119,7 @@ public InternalResultsResponse<MarcaProduto> fetchMarcaProdutosByRequest(MarcaPr
 
 //===================================### fetchMarcaProdutosByRequest ####======================================
 
-public static void fetchMarcaProdutosByRequest(SqlSession sqlSession, MarcaProdutoInquiryRequest request, String countStatement,
+public static void fetchMarcaProdutosByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
 			String fetchPagedStatement,
 			InternalResultsResponse<?> response)
 	{
@@ -1768,7 +1774,7 @@ public InternalResultsResponse<Custo> fetchAllCustos(Custo custo)
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<Custo> fetchCustosByRequest(CustoInquiryRequest request)
+public InternalResultsResponse<Custo> fetchCustosByRequest(PagedInquiryRequest request)
 {
 	InternalResultsResponse<Custo> response = new InternalResultsResponse<Custo>();
 	fetchCustosByRequest(getSqlSession(), request, STMT_FETCH_CUSTO_COUNT, STMT_FETCH_CUSTO_ALL_REQUEST,
@@ -1778,7 +1784,7 @@ public InternalResultsResponse<Custo> fetchCustosByRequest(CustoInquiryRequest r
 
 //===================================### fetchCustosByRequest ####======================================
 
-public static void fetchCustosByRequest(SqlSession sqlSession, CustoInquiryRequest request, String countStatement,
+public static void fetchCustosByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
 			String fetchPagedStatement,
 			InternalResultsResponse<?> response)
 	{
@@ -1901,7 +1907,7 @@ public InternalResultsResponse<CustoItens> fetchAllCustoItenss(CustoItens custoi
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<CustoItens> fetchCustoItenssByRequest(CustoItensInquiryRequest request)
+public InternalResultsResponse<CustoItens> fetchCustoItenssByRequest(PagedInquiryRequest request)
 {
 	InternalResultsResponse<CustoItens> response = new InternalResultsResponse<CustoItens>();
 	fetchCustoItenssByRequest(getSqlSession(), request, STMT_FETCH_CUSTOITENS_COUNT, STMT_FETCH_CUSTOITENS_ALL_REQUEST,
@@ -1911,7 +1917,7 @@ public InternalResultsResponse<CustoItens> fetchCustoItenssByRequest(CustoItensI
 
 //===================================### fetchCustoItenssByRequest ####======================================
 
-public static void fetchCustoItenssByRequest(SqlSession sqlSession, CustoItensInquiryRequest request, String countStatement,
+public static void fetchCustoItenssByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
 			String fetchPagedStatement,
 			InternalResultsResponse<?> response)
 	{
@@ -2034,7 +2040,7 @@ public InternalResultsResponse<Estoque> fetchAllEstoques(Estoque estoque)
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<Estoque> fetchEstoquesByRequest(EstoqueInquiryRequest request)
+public InternalResultsResponse<Estoque> fetchEstoquesByRequest(PagedInquiryRequest request)
 {
 	InternalResultsResponse<Estoque> response = new InternalResultsResponse<Estoque>();
 	fetchEstoquesByRequest(getSqlSession(), request, STMT_FETCH_ESTOQUE_COUNT, STMT_FETCH_ESTOQUE_ALL_REQUEST,
@@ -2044,7 +2050,7 @@ public InternalResultsResponse<Estoque> fetchEstoquesByRequest(EstoqueInquiryReq
 
 //===================================### fetchEstoquesByRequest ####======================================
 
-public static void fetchEstoquesByRequest(SqlSession sqlSession, EstoqueInquiryRequest request, String countStatement,
+public static void fetchEstoquesByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
 			String fetchPagedStatement,
 			InternalResultsResponse<?> response)
 	{
@@ -2167,7 +2173,7 @@ public InternalResultsResponse<Porcao> fetchAllPorcaos(Porcao porcao)
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<Porcao> fetchPorcaosByRequest(PorcaoInquiryRequest request)
+public InternalResultsResponse<Porcao> fetchPorcaosByRequest(PagedInquiryRequest request)
 {
 	InternalResultsResponse<Porcao> response = new InternalResultsResponse<Porcao>();
 	fetchPorcaosByRequest(getSqlSession(), request, STMT_FETCH_PORCAO_COUNT, STMT_FETCH_PORCAO_ALL_REQUEST,
@@ -2177,7 +2183,7 @@ public InternalResultsResponse<Porcao> fetchPorcaosByRequest(PorcaoInquiryReques
 
 //===================================### fetchPorcaosByRequest ####======================================
 
-public static void fetchPorcaosByRequest(SqlSession sqlSession, PorcaoInquiryRequest request, String countStatement,
+public static void fetchPorcaosByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
 			String fetchPagedStatement,
 			InternalResultsResponse<?> response)
 	{
@@ -2300,7 +2306,7 @@ public InternalResultsResponse<PorcaoItens> fetchAllPorcaoItenss(PorcaoItens por
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<PorcaoItens> fetchPorcaoItenssByRequest(PorcaoItensInquiryRequest request)
+public InternalResultsResponse<PorcaoItens> fetchPorcaoItenssByRequest(PagedInquiryRequest request)
 {
 	InternalResultsResponse<PorcaoItens> response = new InternalResultsResponse<PorcaoItens>();
 	fetchPorcaoItenssByRequest(getSqlSession(), request, STMT_FETCH_PORCAOITENS_COUNT, STMT_FETCH_PORCAOITENS_ALL_REQUEST,
@@ -2310,7 +2316,7 @@ public InternalResultsResponse<PorcaoItens> fetchPorcaoItenssByRequest(PorcaoIte
 
 //===================================### fetchPorcaoItenssByRequest ####======================================
 
-public static void fetchPorcaoItenssByRequest(SqlSession sqlSession, PorcaoItensInquiryRequest request, String countStatement,
+public static void fetchPorcaoItenssByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
 			String fetchPagedStatement,
 			InternalResultsResponse<?> response)
 	{
@@ -2433,7 +2439,7 @@ public InternalResultsResponse<Rentabilidade> fetchAllRentabilidades(Rentabilida
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<Rentabilidade> fetchRentabilidadesByRequest(RentabilidadeInquiryRequest request)
+public InternalResultsResponse<Rentabilidade> fetchRentabilidadesByRequest(PagedInquiryRequest request)
 {
 	InternalResultsResponse<Rentabilidade> response = new InternalResultsResponse<Rentabilidade>();
 	fetchRentabilidadesByRequest(getSqlSession(), request, STMT_FETCH_RENTABILIDADE_COUNT, STMT_FETCH_RENTABILIDADE_ALL_REQUEST,
@@ -2443,7 +2449,7 @@ public InternalResultsResponse<Rentabilidade> fetchRentabilidadesByRequest(Renta
 
 //===================================### fetchRentabilidadesByRequest ####======================================
 
-public static void fetchRentabilidadesByRequest(SqlSession sqlSession, RentabilidadeInquiryRequest request, String countStatement,
+public static void fetchRentabilidadesByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
 			String fetchPagedStatement,
 			InternalResultsResponse<?> response)
 	{
@@ -2566,7 +2572,7 @@ public InternalResultsResponse<RentabilidadeItens> fetchAllRentabilidadeItenss(R
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<RentabilidadeItens> fetchRentabilidadeItenssByRequest(RentabilidadeItensInquiryRequest request)
+public InternalResultsResponse<RentabilidadeItens> fetchRentabilidadeItenssByRequest(PagedInquiryRequest request)
 {
 	InternalResultsResponse<RentabilidadeItens> response = new InternalResultsResponse<RentabilidadeItens>();
 	fetchRentabilidadeItenssByRequest(getSqlSession(), request, STMT_FETCH_RENTABILIDADEITENS_COUNT, STMT_FETCH_RENTABILIDADEITENS_ALL_REQUEST,
@@ -2576,7 +2582,7 @@ public InternalResultsResponse<RentabilidadeItens> fetchRentabilidadeItenssByReq
 
 //===================================### fetchRentabilidadeItenssByRequest ####======================================
 
-public static void fetchRentabilidadeItenssByRequest(SqlSession sqlSession, RentabilidadeItensInquiryRequest request, String countStatement,
+public static void fetchRentabilidadeItenssByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
 			String fetchPagedStatement,
 			InternalResultsResponse<?> response)
 	{

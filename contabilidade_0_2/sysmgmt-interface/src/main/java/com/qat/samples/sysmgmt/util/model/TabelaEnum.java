@@ -195,7 +195,29 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 
 	CONTACORRENTE(71, "sendsolv.base.model.risklevelenum.medium"),
 
-	CAIXA(72, "sendsolv.base.model.risklevelenum.medium");
+	CAIXA(72, "sendsolv.base.model.risklevelenum.medium"),
+	PRODUTOPARENT(72, "sendsolv.base.model.risklevelenum.medium"),
+
+	MARCAPRODUTO(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	GRUPO(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	SUBGRUPO(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	CUSTOITENS(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	ESTOQUE(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	PORCAO(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	PORCAOITENS(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	RENTABILIDADE(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	RENTABILIDADEITENS(73, "sendsolv.base.model.risklevelenum.medium"),
+
+
+	TRIBUTACAO(73, "sendsolv.base.model.risklevelenum.medium");
 
 	/** The code. */
 	private Integer code;

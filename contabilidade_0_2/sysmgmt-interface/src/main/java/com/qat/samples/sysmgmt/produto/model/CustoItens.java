@@ -7,7 +7,7 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
  * setting.
  */
 @SuppressWarnings("serial")
-public class CustoItem extends ModelCosmeDamiao
+public class CustoItens extends ModelCosmeDamiao
 {
 
 	/** The SendSolv id for the account. */
@@ -18,7 +18,7 @@ public class CustoItem extends ModelCosmeDamiao
 
 	private Integer custoDesp;
 
-	public CustoItem(Integer id)
+	public CustoItens(Integer id)
 	{
 		super();
 		this.id = id;
@@ -27,7 +27,7 @@ public class CustoItem extends ModelCosmeDamiao
 	/**
 	 * Default constructor.
 	 */
-	public CustoItem()
+	public CustoItens()
 	{
 		super();
 	}

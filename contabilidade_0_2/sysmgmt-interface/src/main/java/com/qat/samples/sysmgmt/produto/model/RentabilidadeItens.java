@@ -1,6 +1,7 @@
 package com.qat.samples.sysmgmt.produto.model;
 
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
+import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -15,7 +16,7 @@ public class RentabilidadeItens extends ModelCosmeDamiao
 	private Integer idRentabilidade;
 
 	/** The type of an account. */
-	private Produto produto;
+	private Integer produto;
 
 	private Double valor;
 
@@ -29,9 +30,23 @@ public class RentabilidadeItens extends ModelCosmeDamiao
 		super();
 	}
 
+	public void setRentabilidadeTypeEnumValue(Integer acaoTypeValue)
+	{
+		rentabilidadeTypeEnum = RentabilidadeTypeEnum.enumForValue(acaoTypeValue);
+	}
+
+	public Integer getRentabilidadeTypeEnumValue()
+	{
+		if (rentabilidadeTypeEnum != null)
+		{
+			return rentabilidadeTypeEnum.getValue();
+		}
+		return null;
+	}
+
 	/**
 	 * Gets the id.
-	 * 
+	 *
 	 * @return the id
 	 */
 	public Integer getId()
@@ -41,7 +56,7 @@ public class RentabilidadeItens extends ModelCosmeDamiao
 
 	/**
 	 * Sets the id.
-	 * 
+	 *
 	 * @param id the new id
 	 */
 	public void setId(Integer id)
@@ -60,7 +75,7 @@ public class RentabilidadeItens extends ModelCosmeDamiao
 	/**
 	 * @return the produto
 	 */
-	public Produto getProduto()
+	public Integer getProduto()
 	{
 		return produto;
 	}
@@ -68,7 +83,7 @@ public class RentabilidadeItens extends ModelCosmeDamiao
 	/**
 	 * @param produto the produto to set
 	 */
-	public void setProduto(Produto produto)
+	public void setProduto(Integer produto)
 	{
 		this.produto = produto;
 	}

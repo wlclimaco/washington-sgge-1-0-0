@@ -520,6 +520,8 @@ function ProdutoParentIdModel() {
 	a.push({field :{campo : "rentabilidadeList" , tipo :"List<Rentabilidade>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "cfopList" , tipo :"List<CfopPessoa>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "dataValidade" , tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "localizacao" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});	
+	a.push({field :{campo : "comissao" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
@@ -531,15 +533,13 @@ function ProdutoModel() {
 	a.push({field :{campo : "cdBarras" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "produto" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "dataCreate" , tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "aplicacao" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "localizacao" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});	
-	a.push({field :{campo : "comissao" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "aplicacao" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});	
 	a.push({field :{campo : "fracao" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "classificacao" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "uniMed" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "grupo" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "subGrupo" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "marca" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "marca" , tipo :"List<MarcaProd>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "porcao" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "pesoBruto" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "pesoLiquido" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -572,8 +572,12 @@ function MarcaModel() {
 
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "unimed", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "sigla", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "marca", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "fabricante", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "emailList", tipo :"List<Email>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "enderecoList", tipo :"List<Endereco>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "telefoneList", tipo :"List<Telefone>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+
 	return a;
 }
 

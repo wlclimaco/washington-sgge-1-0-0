@@ -28,7 +28,7 @@ import com.qat.samples.sysmgmt.banco.model.Banco;
 import com.qat.samples.sysmgmt.banco.model.BancoPessoa;
 import com.qat.samples.sysmgmt.bar.Empresa.IEmpresaBAR;
 import com.qat.samples.sysmgmt.cfop.model.Cfop;
-import com.qat.samples.sysmgmt.cfop.model.CfopPessoa;
+import com.qat.samples.sysmgmt.cfop.model.CfopParentId;
 import com.qat.samples.sysmgmt.cfop.model.CfopTypeEnum;
 import com.qat.samples.sysmgmt.clinica.model.Clinica;
 import com.qat.samples.sysmgmt.clinica.model.request.ClinicaInquiryRequest;
@@ -802,13 +802,13 @@ public IEmpresaBAR getEmpresaBAR()
 
 		}
 
-		public List<CfopPessoa> cfopList(PersistenceActionEnum action)
+		public List<CfopParentId> cfopList(PersistenceActionEnum action)
 		{
-			List<CfopPessoa> documentoList = new ArrayList<CfopPessoa>();
-			CfopPessoa documento = new CfopPessoa();
+			List<CfopParentId> documentoList = new ArrayList<CfopParentId>();
+			CfopParentId documento = new CfopParentId();
 			documento.setModelAction(action);
 			documento.setProcessId(1);
-			documento.setIdCfop(new Cfop(null, "cfop", "natureza", "simplificado", CfopTypeEnum.ENTRADA, 0.39, 0.15, 0.54,
+			documento.setCfop(new Cfop(null, "cfop", "natureza", "simplificado", CfopTypeEnum.ENTRADA, 0.39, 0.15, 0.54,
 					0.9, 0.1, "observacao", action));
 			documento.setParentId(1);
 

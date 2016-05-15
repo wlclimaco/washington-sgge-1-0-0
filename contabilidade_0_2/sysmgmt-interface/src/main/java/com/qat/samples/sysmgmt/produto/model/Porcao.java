@@ -17,7 +17,7 @@ public class Porcao extends ModelCosmeDamiao
 	private Integer idproduto;
 
 	/** The type of an account. */
-	private List<PorcaoItem> porcaoItens;
+	private List<PorcaoItens> porcaoItens;
 
 	private Double valor;
 
@@ -68,7 +68,7 @@ public class Porcao extends ModelCosmeDamiao
 	/**
 	 * @return the porcaoItens
 	 */
-	public List<PorcaoItem> getPorcaoItens()
+	public List<PorcaoItens> getPorcaoItens()
 	{
 		return porcaoItens;
 	}
@@ -76,7 +76,7 @@ public class Porcao extends ModelCosmeDamiao
 	/**
 	 * @param porcaoItens the porcaoItens to set
 	 */
-	public void setPorcaoItens(List<PorcaoItem> porcaoItens)
+	public void setPorcaoItens(List<PorcaoItens> porcaoItens)
 	{
 		this.porcaoItens = porcaoItens;
 	}

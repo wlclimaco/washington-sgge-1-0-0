@@ -18,13 +18,13 @@
   <resultMap id="RentabilidadeResult" type="Rentabilidade">
     <result property="id" column="id"/>
     <result property="parentId" column="parentId"/>
-<collection property="rentabilidadeList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<result property="emprId" column="emprId"/>
-<result property="processId" column="processId"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
+	<result property="emprId" column="emprId"/>
+	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<collection property="rentabilidadeList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
   </resultMap>
 
   <sql id="allRentabilidadeColumns">
@@ -60,7 +60,7 @@
    FROM rentabilidade WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllRentabilidadesRequest" parameterType="RentabilidadeInquiryRequest" resultMap="RentabilidadeResult">
+ <select id="fetchAllRentabilidadesRequest" parameterType="PagedInquiryRequest" resultMap="RentabilidadeResult">
 
 		SELECT id,<include refid="allRentabilidadeColumns" />
   		  FROM rentabilidade where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC

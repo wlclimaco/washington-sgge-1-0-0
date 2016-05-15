@@ -65,7 +65,7 @@
    FROM custoitens WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllCustoItenssRequest" parameterType="CustoItensInquiryRequest" resultMap="CustoItensResult">
+ <select id="fetchAllCustoItenssRequest" parameterType="PagedInquiryRequest" resultMap="CustoItensResult">
 
 		SELECT id,<include refid="allCustoItensColumns" />
   		  FROM custoitens where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC

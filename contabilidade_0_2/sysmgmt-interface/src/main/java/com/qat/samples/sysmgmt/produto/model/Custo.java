@@ -1,5 +1,7 @@
 package com.qat.samples.sysmgmt.produto.model;
 
+import java.util.List;
+
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -11,13 +13,13 @@ public class Custo extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
-	
+
 	private Double valor;
 
 	/** The type of an account. */
-	private List<CustoItem> custo;
+	private List<CustoItens> custoItens;
 
-	
+
 
 	/**
 	 * Default constructor.
@@ -29,7 +31,7 @@ public class Custo extends ModelCosmeDamiao
 
 	/**
 	 * Gets the id.
-	 * 
+	 *
 	 * @return the id
 	 */
 	public Integer getId()
@@ -37,69 +39,32 @@ public class Custo extends ModelCosmeDamiao
 		return id;
 	}
 
-	/**
-	 * Sets the id.
-	 * 
-	 * @param id the new id
-	 */
-	public void setId(Integer id)
-	{
-		this.id = id;
-	}
-
-	/**
-	 * @return the custo
-	 */
-	public CustoItem getCusto()
-	{
-		return custo;
-	}
-
-	/**
-	 * @param custo the custo to set
-	 */
-	public void setCusto(CustoItem custo)
-	{
-		this.custo = custo;
-	}
-
-	/**
-	 * @return the valor
-	 */
-	public Double getValor()
-	{
+	public Double getValor() {
 		return valor;
 	}
 
-	/**
-	 * @param valor the valor to set
-	 */
-	public void setValor(Double valor)
-	{
+	public void setValor(Double valor) {
 		this.valor = valor;
 	}
 
-	/**
-	 * @return the entidadeId
-	 */
-	public Integer getEntidadeId()
-	{
-		return entidadeId;
+	public List<CustoItens> getCustoItens() {
+		return custoItens;
 	}
 
-	/**
-	 * @param entidadeId the entidadeId to set
-	 */
-	public void setEntidadeId(Integer entidadeId)
-	{
-		this.entidadeId = entidadeId;
+	public void setCustoItens(List<CustoItens> custoItens) {
+		this.custoItens = custoItens;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "Custo [getId()=" + getId() + ", getCusto()=" + getCusto() + ", getValor()=" + getValor()
-				+ ", getEntidadeId()=" + getEntidadeId() + ", toString()=" + super.toString() + "]";
+	public String toString() {
+		return "Custo [getId()=" + getId() + ", getValor()=" + getValor() + ", getCustoItens()=" + getCustoItens()
+				+ ", toString()=" + super.toString() + "]";
 	}
+
+
 
 }

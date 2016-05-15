@@ -68,7 +68,7 @@
    FROM estoque WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllEstoquesRequest" parameterType="EstoqueInquiryRequest" resultMap="EstoqueResult">
+ <select id="fetchAllEstoquesRequest" parameterType="PagedInquiryRequest" resultMap="EstoqueResult">
 
 		SELECT id,<include refid="allEstoqueColumns" />
   		  FROM estoque where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC

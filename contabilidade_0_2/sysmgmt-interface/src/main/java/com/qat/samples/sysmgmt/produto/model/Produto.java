@@ -2,7 +2,7 @@ package com.qat.samples.sysmgmt.produto.model;
 
 import java.util.List;
 
-import com.qat.samples.sysmgmt.cfop.model.CfopPessoa;
+import com.qat.samples.sysmgmt.cfop.model.CfopParentId;
 import com.qat.samples.sysmgmt.fiscal.model.Classificacao;
 import com.qat.samples.sysmgmt.fiscal.model.Tributacao;
 import com.qat.samples.sysmgmt.pessoa.model.Fornecedor;
@@ -32,11 +32,11 @@ public class Produto extends ModelCosmeDamiao
 
 	private String aplicacao;
 
-	private String localizacao;
 
-	private Long dataValidade;
 
-	private String comissao;
+
+
+
 
 	private String fracao;
 
@@ -54,29 +54,13 @@ public class Produto extends ModelCosmeDamiao
 
 	private Double porcao;
 
-	private MarcaProd marca;
+	private List<MarcaProd> marca;
 
 	private Double pesoBruto;
 
 	private Double pesoLiquido;
 
 	private String modoUso;
-
-	private Tributacao tributacao;
-
-	private List<Estoque> estoqueList;
-
-	private List<Preco> precoList;
-
-	private List<Custo> custoList;
-
-	private List<Porcao> porcaoList;
-
-	private List<Rentabilidade> rentabilidadeList;
-
-	private List<CfopPessoa> cfopList;
-
-	private List<Fornecedor> fornecedorList;
 
 	/**
 	 * Default constructor.
@@ -212,341 +196,88 @@ public class Produto extends ModelCosmeDamiao
 		this.aplicacao = aplicacao;
 	}
 
-	/**
-	 * @return the localizacao
-	 */
-	public String getLocalizacao()
-	{
-		return localizacao;
-	}
-
-	/**
-	 * @param localizacao the localizacao to set
-	 */
-	public void setLocalizacao(String localizacao)
-	{
-		this.localizacao = localizacao;
-	}
-
-	/**
-	 * @return the dataValidade
-	 */
-	public Long getDataValidade()
-	{
-		return dataValidade;
-	}
-
-	/**
-	 * @param dataValidade the dataValidade to set
-	 */
-	public void setDataValidade(Long dataValidade)
-	{
-		this.dataValidade = dataValidade;
-	}
-
-	/**
-	 * @return the comissao
-	 */
-	public String getComissao()
-	{
-		return comissao;
-	}
-
-	/**
-	 * @param comissao the comissao to set
-	 */
-	public void setComissao(String comissao)
-	{
-		this.comissao = comissao;
-	}
-
-	/**
-	 * @return the fracao
-	 */
-	public String getFracao()
-	{
+	public String getFracao() {
 		return fracao;
 	}
 
-	/**
-	 * @param fracao the fracao to set
-	 */
-	public void setFracao(String fracao)
-	{
+	public void setFracao(String fracao) {
 		this.fracao = fracao;
 	}
 
-	/**
-	 * @return the uniMed
-	 */
-	public UniMedProd getUniMed()
-	{
+	public UniMedProd getUniMed() {
 		return uniMed;
 	}
 
-	/**
-	 * @param uniMed the uniMed to set
-	 */
-	public void setUniMed(UniMedProd uniMed)
-	{
+	public void setUniMed(UniMedProd uniMed) {
 		this.uniMed = uniMed;
 	}
 
-	/**
-	 * @return the grupo
-	 */
-	public GrupoProd getGrupo()
-	{
+	public GrupoProd getGrupo() {
 		return grupo;
 	}
 
-	/**
-	 * @param grupo the grupo to set
-	 */
-	public void setGrupo(GrupoProd grupo)
-	{
+	public void setGrupo(GrupoProd grupo) {
 		this.grupo = grupo;
 	}
 
-	/**
-	 * @return the subGrupo
-	 */
-	public SubGrupoProd getSubGrupo()
-	{
+	public SubGrupoProd getSubGrupo() {
 		return subGrupo;
 	}
 
-	/**
-	 * @param subGrupo the subGrupo to set
-	 */
-	public void setSubGrupo(SubGrupoProd subGrupo)
-	{
+	public void setSubGrupo(SubGrupoProd subGrupo) {
 		this.subGrupo = subGrupo;
 	}
 
-	/**
-	 * @return the marca
-	 */
-	public MarcaProd getMarca()
-	{
-		return marca;
-	}
-
-	/**
-	 * @param marca the marca to set
-	 */
-	public void setMarca(MarcaProd marca)
-	{
-		this.marca = marca;
-	}
-
-	/**
-	 * @return the modoUso
-	 */
-	public String getModoUso()
-	{
-		return modoUso;
-	}
-
-	/**
-	 * @param modoUso the modoUso to set
-	 */
-	public void setModoUso(String modoUso)
-	{
-		this.modoUso = modoUso;
-	}
-
-	/**
-	 * @return the pesoBruto
-	 */
-	public Double getPesoBruto()
-	{
-		return pesoBruto;
-	}
-
-	/**
-	 * @param pesoBruto the pesoBruto to set
-	 */
-	public void setPesoBruto(Double pesoBruto)
-	{
-		this.pesoBruto = pesoBruto;
-	}
-
-	/**
-	 * @return the pesoLiquido
-	 */
-	public Double getPesoLiquido()
-	{
-		return pesoLiquido;
-	}
-
-	/**
-	 * @param pesoLiquido the pesoLiquido to set
-	 */
-	public void setPesoLiquido(Double pesoLiquido)
-	{
-		this.pesoLiquido = pesoLiquido;
-	}
-
-	/**
-	 * @return the tributacao
-	 */
-	public Tributacao getTributacao()
-	{
-		return tributacao;
-	}
-
-	/**
-	 * @param tributacao the tributacao to set
-	 */
-	public void setTributacao(Tributacao tributacao)
-	{
-		this.tributacao = tributacao;
-	}
-
-	/**
-	 * @return the estoqueList
-	 */
-	public List<Estoque> getEstoqueList()
-	{
-		return estoqueList;
-	}
-
-	/**
-	 * @param estoqueList the estoqueList to set
-	 */
-	public void setEstoqueList(List<Estoque> estoqueList)
-	{
-		this.estoqueList = estoqueList;
-	}
-
-	/**
-	 * @return the precoList
-	 */
-	public List<Preco> getPrecoList()
-	{
-		return precoList;
-	}
-
-	/**
-	 * @param precoList the precoList to set
-	 */
-	public void setPrecoList(List<Preco> precoList)
-	{
-		this.precoList = precoList;
-	}
-
-	/**
-	 * @return the custoList
-	 */
-	public List<Custo> getCustoList()
-	{
-		return custoList;
-	}
-
-	/**
-	 * @param custoList the custoList to set
-	 */
-	public void setCustoList(List<Custo> custoList)
-	{
-		this.custoList = custoList;
-	}
-
-	/**
-	 * @return the porcaoList
-	 */
-	public List<Porcao> getPorcaoList()
-	{
-		return porcaoList;
-	}
-
-	/**
-	 * @param porcaoList the porcaoList to set
-	 */
-	public void setPorcaoList(List<Porcao> porcaoList)
-	{
-		this.porcaoList = porcaoList;
-	}
-
-	/**
-	 * @return the rentabilidadeList
-	 */
-	public List<Rentabilidade> getRentabilidadeList()
-	{
-		return rentabilidadeList;
-	}
-
-	/**
-	 * @param rentabilidadeList the rentabilidadeList to set
-	 */
-	public void setRentabilidadeList(List<Rentabilidade> rentabilidadeList)
-	{
-		this.rentabilidadeList = rentabilidadeList;
-	}
-
-	/**
-	 * @return the cfopList
-	 */
-	public List<CfopPessoa> getCfopList()
-	{
-		return cfopList;
-	}
-
-	/**
-	 * @param cfopList the cfopList to set
-	 */
-	public void setCfopList(List<CfopPessoa> cfopList)
-	{
-		this.cfopList = cfopList;
-	}
-
-	/**
-	 * @return the fornecedorList
-	 */
-	public List<Fornecedor> getFornecedorList()
-	{
-		return fornecedorList;
-	}
-
-	/**
-	 * @param fornecedorList the fornecedorList to set
-	 */
-	public void setFornecedorList(List<Fornecedor> fornecedorList)
-	{
-		this.fornecedorList = fornecedorList;
-	}
-
-	/**
-	 * @return the porcao
-	 */
-	public Double getPorcao()
-	{
+	public Double getPorcao() {
 		return porcao;
 	}
 
-	/**
-	 * @param porcao the porcao to set
-	 */
-	public void setPorcao(Double porcao)
-	{
+	public void setPorcao(Double porcao) {
 		this.porcao = porcao;
 	}
 
+	public List<MarcaProd> getMarca() {
+		return marca;
+	}
+
+	public void setMarca(List<MarcaProd> marca) {
+		this.marca = marca;
+	}
+
+	public Double getPesoBruto() {
+		return pesoBruto;
+	}
+
+	public void setPesoBruto(Double pesoBruto) {
+		this.pesoBruto = pesoBruto;
+	}
+
+	public Double getPesoLiquido() {
+		return pesoLiquido;
+	}
+
+	public void setPesoLiquido(Double pesoLiquido) {
+		this.pesoLiquido = pesoLiquido;
+	}
+
+	public String getModoUso() {
+		return modoUso;
+	}
+
+	public void setModoUso(String modoUso) {
+		this.modoUso = modoUso;
+	}
+
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "Produto [getId()=" + getId() + ", getCodigo()=" + getCodigo() + ", getCdBarras()=" + getCdBarras()
 				+ ", getClassificacao()=" + getClassificacao() + ", getDataCreate()=" + getDataCreate()
-				+ ", getProduto()=" + getProduto() + ", getAplicacao()=" + getAplicacao() + ", getLocalizacao()="
-				+ getLocalizacao() + ", getDataValidade()=" + getDataValidade() + ", getComissao()=" + getComissao()
-				+ ", getFracao()=" + getFracao() + ", getUniMed()=" + getUniMed() + ", getGrupo()=" + getGrupo()
-				+ ", getSubGrupo()=" + getSubGrupo() + ", getMarca()=" + getMarca() + ", getModoUso()=" + getModoUso()
-				+ ", getPesoBruto()=" + getPesoBruto() + ", getPesoLiquido()=" + getPesoLiquido()
-				+ ", getTributacao()=" + getTributacao() + ", getEstoqueList()=" + getEstoqueList()
-				+ ", getPrecoList()=" + getPrecoList() + ", getCustoList()=" + getCustoList() + ", getPorcaoList()="
-				+ getPorcaoList() + ", getRentabilidadeList()=" + getRentabilidadeList() + ", getCfopList()="
-				+ getCfopList() + ", getFornecedorList()=" + getFornecedorList() + ", getPorcao()=" + getPorcao()
+				+ ", getProduto()=" + getProduto() + ", getAplicacao()=" + getAplicacao() + ", getFracao()="
+				+ getFracao() + ", getUniMed()=" + getUniMed() + ", getGrupo()=" + getGrupo() + ", getSubGrupo()="
+				+ getSubGrupo() + ", getPorcao()=" + getPorcao() + ", getMarca()=" + getMarca() + ", getPesoBruto()="
+				+ getPesoBruto() + ", getPesoLiquido()=" + getPesoLiquido() + ", getModoUso()=" + getModoUso()
 				+ ", toString()=" + super.toString() + "]";
 	}
+
 
 }
