@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 13/05/2016 17:59 : 56-->
+<!-- create by system gera-java version 1.0.0 15/05/2016 20:34 : 51-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -22,8 +22,6 @@
     <result property="produto" column="produto"/>
     <result property="dataCreate" column="dataCreate"/>
     <result property="aplicacao" column="aplicacao"/>
-    <result property="localizacao" column="localizacao"/>
-    <result property="comissao" column="comissao"/>
     <result property="fracao" column="fracao"/>
     <result property="pesoBruto" column="pesoBruto"/>
     <result property="pesoLiquido" column="pesoLiquido"/>
@@ -35,11 +33,13 @@
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
 <collection property="classificacao" column="classificacao" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="uniMed" column="uniMed" select="DocumentoMap.fetchDocumentoByEmpresa"/>
 <collection property="grupo" column="grupo" select="DocumentoMap.fetchDocumentoByEmpresa"/>
 <collection property="subGrupo" column="subGrupo" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="unimed" column="unimed" select="DocumentoMap.fetchDocumentoByEmpresa"/>
 <collection property="marca" column="marca" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="porcao" column="marca" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="porcao" column="porcao" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
+	<collection property="notes" column="id" select="NoteMap.fetchNoteByNotes"/>
   </resultMap>
 
   <sql id="allProdutoColumns">
@@ -48,14 +48,11 @@ codigo
 ,produto
 ,dataCreate
 ,aplicacao
-,localizacao
-,comissao
 ,fracao
 ,classificacao
 ,uniMed
 ,grupo
 ,subGrupo
-,marca
 ,porcao
 ,pesoBruto
 ,pesoLiquido
@@ -74,14 +71,11 @@ codigo
 #{produto},
 #{dataCreate},
 #{aplicacao},
-#{localizacao},
-#{comissao},
 #{fracao},
 #{classificacao},
 #{uniMed},
 #{grupo},
 #{subGrupo},
-#{marca},
 #{porcao},
 #{pesoBruto},
 #{pesoLiquido},
@@ -134,14 +128,11 @@ codigo
 <if test="produto!= null">produto = #{produto},</if>
 <if test="dataCreate!= null">dataCreate = #{dataCreate},</if>
 <if test="aplicacao!= null">aplicacao = #{aplicacao},</if>
-<if test="localizacao!= null">localizacao = #{localizacao},</if>
-<if test="comissao!= null">comissao = #{comissao},</if>
 <if test="fracao!= null">fracao = #{fracao},</if>
 <if test="classificacao!= null">classificacao = #{classificacao},</if>
 <if test="uniMed!= null">uniMed = #{uniMed},</if>
 <if test="grupo!= null">grupo = #{grupo},</if>
 <if test="subGrupo!= null">subGrupo = #{subGrupo},</if>
-<if test="marca!= null">marca = #{marca},</if>
 <if test="porcao!= null">porcao = #{porcao},</if>
 <if test="pesoBruto!= null">pesoBruto = #{pesoBruto},</if>
 <if test="pesoLiquido!= null">pesoLiquido = #{pesoLiquido},</if>
