@@ -1,6 +1,9 @@
 package com.qat.samples.sysmgmt.conta.model;
 
-import com.qat.samples.sysmgmt.banco.model.Banco;
+import java.util.List;
+
+import com.qat.samples.sysmgmt.agencia.model.Agencia;
+import com.qat.samples.sysmgmt.historico.model.HistoricoMovimento;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -13,13 +16,16 @@ public class ContaCorrente extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	private Banco banco;
+	private Agencia agencia;
 
 
 	/** The type of an account. */
 	private String numeroConta;
+	private String nossoNumero;
 
 	private double saldo;
+
+	private List<HistoricoMovimento> historicoList;
 
 	public ContaCorrente()
 	{
@@ -46,59 +52,51 @@ public class ContaCorrente extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	/**
-	 * @return the banco
-	 */
-	public Banco getBanco()
-	{
-		return banco;
+	public Agencia getAgencia() {
+		return agencia;
 	}
 
-	/**
-	 * @param banco the banco to set
-	 */
-	public void setBanco(Banco banco)
-	{
-		this.banco = banco;
+	public void setAgencia(Agencia agencia) {
+		this.agencia = agencia;
 	}
 
-	/**
-	 * @return the numeroConta
-	 */
-	public String getNumeroConta()
-	{
+	public String getNumeroConta() {
 		return numeroConta;
 	}
 
-	/**
-	 * @param numeroConta the numeroConta to set
-	 */
-	public void setNumeroConta(String numeroConta)
-	{
+	public void setNumeroConta(String numeroConta) {
 		this.numeroConta = numeroConta;
 	}
 
-	/**
-	 * @return the saldo
-	 */
-	public double getSaldo()
-	{
+	public String getNossoNumero() {
+		return nossoNumero;
+	}
+
+	public void setNossoNumero(String nossoNumero) {
+		this.nossoNumero = nossoNumero;
+	}
+
+	public double getSaldo() {
 		return saldo;
 	}
 
-	/**
-	 * @param saldo the saldo to set
-	 */
-	public void setSaldo(double saldo)
-	{
+	public void setSaldo(double saldo) {
 		this.saldo = saldo;
 	}
 
+	public List<HistoricoMovimento> getHistoricoList() {
+		return historicoList;
+	}
+
+	public void setHistoricoList(List<HistoricoMovimento> historicoList) {
+		this.historicoList = historicoList;
+	}
+
 	@Override
-	public String toString()
-	{
-		return "Conta [getId()=" + getId() + ", getBanco()=" + getBanco() + ", getNumeroConta()=" + getNumeroConta()
-				+ ", getSaldo()=" + getSaldo() + ", toString()=" + super.toString() + "]";
+	public String toString() {
+		return "ContaCorrente [getId()=" + getId() + ", getAgencia()=" + getAgencia() + ", getNumeroConta()="
+				+ getNumeroConta() + ", getNossoNumero()=" + getNossoNumero() + ", getSaldo()=" + getSaldo()
+				+ ", getHistoricoList()=" + getHistoricoList() + ", toString()=" + super.toString() + "]";
 	}
 
 }

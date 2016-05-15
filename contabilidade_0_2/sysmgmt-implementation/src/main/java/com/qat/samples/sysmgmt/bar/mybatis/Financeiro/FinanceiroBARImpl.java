@@ -46,31 +46,31 @@ public class FinanceiroBARImpl extends SqlSessionDaoSupport implements IFinancei
 
 ///===================================### CONTASPAGAR ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_CONTASPAGAR = "ContaspagarMap.";
+private static final String NAMESPACE_CONTASPAGAR = "ContasPagarMap.";
 
 /** The Constant STMT_INSERT_CONTASPAGAR. */
-private static final String STMT_INSERT_CONTASPAGAR = NAMESPACE_CONTASPAGAR + "insertContaspagar";
+private static final String STMT_INSERT_CONTASPAGAR = NAMESPACE_CONTASPAGAR + "insertContasPagar";
 
 /** The Constant STMT_UPDATE_CONTASPAGAR. */
-private static final String STMT_UPDATE_CONTASPAGAR = NAMESPACE_CONTASPAGAR + "updateContaspagar";
+private static final String STMT_UPDATE_CONTASPAGAR = NAMESPACE_CONTASPAGAR + "updateContasPagar";
 
 /** The Constant STMT_DELETE_CONTASPAGAR. */
-private static final String STMT_DELETE_CONTASPAGAR = NAMESPACE_CONTASPAGAR + "deleteContaspagarById";
+private static final String STMT_DELETE_CONTASPAGAR = NAMESPACE_CONTASPAGAR + "deleteContasPagarById";
 
 	/** The Constant STMT_DELETE_CONTASPAGAR_ALL. */
-	private static final String STMT_DELETE_CONTASPAGAR_ALL = NAMESPACE_CONTASPAGAR + "deleteAllContaspagars";
+	private static final String STMT_DELETE_CONTASPAGAR_ALL = NAMESPACE_CONTASPAGAR + "deleteAllContasPagars";
 
 	/** The Constant STMT_FETCH_CONTASPAGAR. */
-	private static final String STMT_FETCH_CONTASPAGAR = NAMESPACE_CONTASPAGAR + "fetchContaspagarById";
+	private static final String STMT_FETCH_CONTASPAGAR = NAMESPACE_CONTASPAGAR + "fetchContasPagarById";
 
 	/** The Constant STMT_FETCH_CONTASPAGAR_ALL. */
-	private static final String STMT_FETCH_CONTASPAGAR_ALL = NAMESPACE_CONTASPAGAR + "fetchAllContaspagars";
+	private static final String STMT_FETCH_CONTASPAGAR_ALL = NAMESPACE_CONTASPAGAR + "fetchAllContasPagars";
 
 	/** The Constant STMT_FETCH_CONTASPAGAR_COUNT. */
-	private static final String STMT_FETCH_CONTASPAGAR_COUNT = NAMESPACE_CONTASPAGAR + "fetchContaspagarRowCount";
+	private static final String STMT_FETCH_CONTASPAGAR_COUNT = NAMESPACE_CONTASPAGAR + "fetchContasPagarRowCount";
 
 	/** The Constant STMT_FETCH_CONTASPAGAR_ALL_REQUEST. */
-	private static final String STMT_FETCH_CONTASPAGAR_ALL_REQUEST = NAMESPACE_CONTASPAGAR + "fetchAllContaspagarsRequest";
+	private static final String STMT_FETCH_CONTASPAGAR_ALL_REQUEST = NAMESPACE_CONTASPAGAR + "fetchAllContasPagarsRequest";
 
 ///===================================### TITULO ####======================================
 /** The Constant NAMESPACE. */
@@ -102,143 +102,143 @@ private static final String STMT_DELETE_TITULO = NAMESPACE_TITULO + "deleteTitul
 
 ///===================================### BAIXATITULO ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_BAIXATITULO = "BaixatituloMap.";
+private static final String NAMESPACE_BAIXATITULO = "BaixaTituloMap.";
 
 /** The Constant STMT_INSERT_BAIXATITULO. */
-private static final String STMT_INSERT_BAIXATITULO = NAMESPACE_BAIXATITULO + "insertBaixatitulo";
+private static final String STMT_INSERT_BAIXATITULO = NAMESPACE_BAIXATITULO + "insertBaixaTitulo";
 
 /** The Constant STMT_UPDATE_BAIXATITULO. */
-private static final String STMT_UPDATE_BAIXATITULO = NAMESPACE_BAIXATITULO + "updateBaixatitulo";
+private static final String STMT_UPDATE_BAIXATITULO = NAMESPACE_BAIXATITULO + "updateBaixaTitulo";
 
 /** The Constant STMT_DELETE_BAIXATITULO. */
-private static final String STMT_DELETE_BAIXATITULO = NAMESPACE_BAIXATITULO + "deleteBaixatituloById";
+private static final String STMT_DELETE_BAIXATITULO = NAMESPACE_BAIXATITULO + "deleteBaixaTituloById";
 
 	/** The Constant STMT_DELETE_BAIXATITULO_ALL. */
-	private static final String STMT_DELETE_BAIXATITULO_ALL = NAMESPACE_BAIXATITULO + "deleteAllBaixatitulos";
+	private static final String STMT_DELETE_BAIXATITULO_ALL = NAMESPACE_BAIXATITULO + "deleteAllBaixaTitulos";
 
 	/** The Constant STMT_FETCH_BAIXATITULO. */
-	private static final String STMT_FETCH_BAIXATITULO = NAMESPACE_BAIXATITULO + "fetchBaixatituloById";
+	private static final String STMT_FETCH_BAIXATITULO = NAMESPACE_BAIXATITULO + "fetchBaixaTituloById";
 
 	/** The Constant STMT_FETCH_BAIXATITULO_ALL. */
-	private static final String STMT_FETCH_BAIXATITULO_ALL = NAMESPACE_BAIXATITULO + "fetchAllBaixatitulos";
+	private static final String STMT_FETCH_BAIXATITULO_ALL = NAMESPACE_BAIXATITULO + "fetchAllBaixaTitulos";
 
 	/** The Constant STMT_FETCH_BAIXATITULO_COUNT. */
-	private static final String STMT_FETCH_BAIXATITULO_COUNT = NAMESPACE_BAIXATITULO + "fetchBaixatituloRowCount";
+	private static final String STMT_FETCH_BAIXATITULO_COUNT = NAMESPACE_BAIXATITULO + "fetchBaixaTituloRowCount";
 
 	/** The Constant STMT_FETCH_BAIXATITULO_ALL_REQUEST. */
-	private static final String STMT_FETCH_BAIXATITULO_ALL_REQUEST = NAMESPACE_BAIXATITULO + "fetchAllBaixatitulosRequest";
+	private static final String STMT_FETCH_BAIXATITULO_ALL_REQUEST = NAMESPACE_BAIXATITULO + "fetchAllBaixaTitulosRequest";
 
 ///===================================### TIPOBAIXA ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_TIPOBAIXA = "TipobaixaMap.";
+private static final String NAMESPACE_TIPOBAIXA = "TipoBaixaMap.";
 
 /** The Constant STMT_INSERT_TIPOBAIXA. */
-private static final String STMT_INSERT_TIPOBAIXA = NAMESPACE_TIPOBAIXA + "insertTipobaixa";
+private static final String STMT_INSERT_TIPOBAIXA = NAMESPACE_TIPOBAIXA + "insertTipoBaixa";
 
 /** The Constant STMT_UPDATE_TIPOBAIXA. */
-private static final String STMT_UPDATE_TIPOBAIXA = NAMESPACE_TIPOBAIXA + "updateTipobaixa";
+private static final String STMT_UPDATE_TIPOBAIXA = NAMESPACE_TIPOBAIXA + "updateTipoBaixa";
 
 /** The Constant STMT_DELETE_TIPOBAIXA. */
-private static final String STMT_DELETE_TIPOBAIXA = NAMESPACE_TIPOBAIXA + "deleteTipobaixaById";
+private static final String STMT_DELETE_TIPOBAIXA = NAMESPACE_TIPOBAIXA + "deleteTipoBaixaById";
 
 	/** The Constant STMT_DELETE_TIPOBAIXA_ALL. */
-	private static final String STMT_DELETE_TIPOBAIXA_ALL = NAMESPACE_TIPOBAIXA + "deleteAllTipobaixas";
+	private static final String STMT_DELETE_TIPOBAIXA_ALL = NAMESPACE_TIPOBAIXA + "deleteAllTipoBaixas";
 
 	/** The Constant STMT_FETCH_TIPOBAIXA. */
-	private static final String STMT_FETCH_TIPOBAIXA = NAMESPACE_TIPOBAIXA + "fetchTipobaixaById";
+	private static final String STMT_FETCH_TIPOBAIXA = NAMESPACE_TIPOBAIXA + "fetchTipoBaixaById";
 
 	/** The Constant STMT_FETCH_TIPOBAIXA_ALL. */
-	private static final String STMT_FETCH_TIPOBAIXA_ALL = NAMESPACE_TIPOBAIXA + "fetchAllTipobaixas";
+	private static final String STMT_FETCH_TIPOBAIXA_ALL = NAMESPACE_TIPOBAIXA + "fetchAllTipoBaixas";
 
 	/** The Constant STMT_FETCH_TIPOBAIXA_COUNT. */
-	private static final String STMT_FETCH_TIPOBAIXA_COUNT = NAMESPACE_TIPOBAIXA + "fetchTipobaixaRowCount";
+	private static final String STMT_FETCH_TIPOBAIXA_COUNT = NAMESPACE_TIPOBAIXA + "fetchTipoBaixaRowCount";
 
 	/** The Constant STMT_FETCH_TIPOBAIXA_ALL_REQUEST. */
-	private static final String STMT_FETCH_TIPOBAIXA_ALL_REQUEST = NAMESPACE_TIPOBAIXA + "fetchAllTipobaixasRequest";
+	private static final String STMT_FETCH_TIPOBAIXA_ALL_REQUEST = NAMESPACE_TIPOBAIXA + "fetchAllTipoBaixasRequest";
 
 ///===================================### CONTASRECEBER ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_CONTASRECEBER = "ContasreceberMap.";
+private static final String NAMESPACE_CONTASRECEBER = "ContasReceberMap.";
 
 /** The Constant STMT_INSERT_CONTASRECEBER. */
-private static final String STMT_INSERT_CONTASRECEBER = NAMESPACE_CONTASRECEBER + "insertContasreceber";
+private static final String STMT_INSERT_CONTASRECEBER = NAMESPACE_CONTASRECEBER + "insertContasReceber";
 
 /** The Constant STMT_UPDATE_CONTASRECEBER. */
-private static final String STMT_UPDATE_CONTASRECEBER = NAMESPACE_CONTASRECEBER + "updateContasreceber";
+private static final String STMT_UPDATE_CONTASRECEBER = NAMESPACE_CONTASRECEBER + "updateContasReceber";
 
 /** The Constant STMT_DELETE_CONTASRECEBER. */
-private static final String STMT_DELETE_CONTASRECEBER = NAMESPACE_CONTASRECEBER + "deleteContasreceberById";
+private static final String STMT_DELETE_CONTASRECEBER = NAMESPACE_CONTASRECEBER + "deleteContasReceberById";
 
 	/** The Constant STMT_DELETE_CONTASRECEBER_ALL. */
-	private static final String STMT_DELETE_CONTASRECEBER_ALL = NAMESPACE_CONTASRECEBER + "deleteAllContasrecebers";
+	private static final String STMT_DELETE_CONTASRECEBER_ALL = NAMESPACE_CONTASRECEBER + "deleteAllContasRecebers";
 
 	/** The Constant STMT_FETCH_CONTASRECEBER. */
-	private static final String STMT_FETCH_CONTASRECEBER = NAMESPACE_CONTASRECEBER + "fetchContasreceberById";
+	private static final String STMT_FETCH_CONTASRECEBER = NAMESPACE_CONTASRECEBER + "fetchContasReceberById";
 
 	/** The Constant STMT_FETCH_CONTASRECEBER_ALL. */
-	private static final String STMT_FETCH_CONTASRECEBER_ALL = NAMESPACE_CONTASRECEBER + "fetchAllContasrecebers";
+	private static final String STMT_FETCH_CONTASRECEBER_ALL = NAMESPACE_CONTASRECEBER + "fetchAllContasRecebers";
 
 	/** The Constant STMT_FETCH_CONTASRECEBER_COUNT. */
-	private static final String STMT_FETCH_CONTASRECEBER_COUNT = NAMESPACE_CONTASRECEBER + "fetchContasreceberRowCount";
+	private static final String STMT_FETCH_CONTASRECEBER_COUNT = NAMESPACE_CONTASRECEBER + "fetchContasReceberRowCount";
 
 	/** The Constant STMT_FETCH_CONTASRECEBER_ALL_REQUEST. */
-	private static final String STMT_FETCH_CONTASRECEBER_ALL_REQUEST = NAMESPACE_CONTASRECEBER + "fetchAllContasrecebersRequest";
+	private static final String STMT_FETCH_CONTASRECEBER_ALL_REQUEST = NAMESPACE_CONTASRECEBER + "fetchAllContasRecebersRequest";
 
 ///===================================### CONDPAG ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_CONDPAG = "CondpagMap.";
+private static final String NAMESPACE_CONDPAG = "CondPagMap.";
 
 /** The Constant STMT_INSERT_CONDPAG. */
-private static final String STMT_INSERT_CONDPAG = NAMESPACE_CONDPAG + "insertCondpag";
+private static final String STMT_INSERT_CONDPAG = NAMESPACE_CONDPAG + "insertCondPag";
 
 /** The Constant STMT_UPDATE_CONDPAG. */
-private static final String STMT_UPDATE_CONDPAG = NAMESPACE_CONDPAG + "updateCondpag";
+private static final String STMT_UPDATE_CONDPAG = NAMESPACE_CONDPAG + "updateCondPag";
 
 /** The Constant STMT_DELETE_CONDPAG. */
-private static final String STMT_DELETE_CONDPAG = NAMESPACE_CONDPAG + "deleteCondpagById";
+private static final String STMT_DELETE_CONDPAG = NAMESPACE_CONDPAG + "deleteCondPagById";
 
 	/** The Constant STMT_DELETE_CONDPAG_ALL. */
-	private static final String STMT_DELETE_CONDPAG_ALL = NAMESPACE_CONDPAG + "deleteAllCondpags";
+	private static final String STMT_DELETE_CONDPAG_ALL = NAMESPACE_CONDPAG + "deleteAllCondPags";
 
 	/** The Constant STMT_FETCH_CONDPAG. */
-	private static final String STMT_FETCH_CONDPAG = NAMESPACE_CONDPAG + "fetchCondpagById";
+	private static final String STMT_FETCH_CONDPAG = NAMESPACE_CONDPAG + "fetchCondPagById";
 
 	/** The Constant STMT_FETCH_CONDPAG_ALL. */
-	private static final String STMT_FETCH_CONDPAG_ALL = NAMESPACE_CONDPAG + "fetchAllCondpags";
+	private static final String STMT_FETCH_CONDPAG_ALL = NAMESPACE_CONDPAG + "fetchAllCondPags";
 
 	/** The Constant STMT_FETCH_CONDPAG_COUNT. */
-	private static final String STMT_FETCH_CONDPAG_COUNT = NAMESPACE_CONDPAG + "fetchCondpagRowCount";
+	private static final String STMT_FETCH_CONDPAG_COUNT = NAMESPACE_CONDPAG + "fetchCondPagRowCount";
 
 	/** The Constant STMT_FETCH_CONDPAG_ALL_REQUEST. */
-	private static final String STMT_FETCH_CONDPAG_ALL_REQUEST = NAMESPACE_CONDPAG + "fetchAllCondpagsRequest";
+	private static final String STMT_FETCH_CONDPAG_ALL_REQUEST = NAMESPACE_CONDPAG + "fetchAllCondPagsRequest";
 
 ///===================================### FORMAPG ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_FORMAPG = "FormapgMap.";
+private static final String NAMESPACE_FORMAPG = "FormaPgMap.";
 
 /** The Constant STMT_INSERT_FORMAPG. */
-private static final String STMT_INSERT_FORMAPG = NAMESPACE_FORMAPG + "insertFormapg";
+private static final String STMT_INSERT_FORMAPG = NAMESPACE_FORMAPG + "insertFormaPg";
 
 /** The Constant STMT_UPDATE_FORMAPG. */
-private static final String STMT_UPDATE_FORMAPG = NAMESPACE_FORMAPG + "updateFormapg";
+private static final String STMT_UPDATE_FORMAPG = NAMESPACE_FORMAPG + "updateFormaPg";
 
 /** The Constant STMT_DELETE_FORMAPG. */
-private static final String STMT_DELETE_FORMAPG = NAMESPACE_FORMAPG + "deleteFormapgById";
+private static final String STMT_DELETE_FORMAPG = NAMESPACE_FORMAPG + "deleteFormaPgById";
 
 	/** The Constant STMT_DELETE_FORMAPG_ALL. */
-	private static final String STMT_DELETE_FORMAPG_ALL = NAMESPACE_FORMAPG + "deleteAllFormapgs";
+	private static final String STMT_DELETE_FORMAPG_ALL = NAMESPACE_FORMAPG + "deleteAllFormaPgs";
 
 	/** The Constant STMT_FETCH_FORMAPG. */
-	private static final String STMT_FETCH_FORMAPG = NAMESPACE_FORMAPG + "fetchFormapgById";
+	private static final String STMT_FETCH_FORMAPG = NAMESPACE_FORMAPG + "fetchFormaPgById";
 
 	/** The Constant STMT_FETCH_FORMAPG_ALL. */
-	private static final String STMT_FETCH_FORMAPG_ALL = NAMESPACE_FORMAPG + "fetchAllFormapgs";
+	private static final String STMT_FETCH_FORMAPG_ALL = NAMESPACE_FORMAPG + "fetchAllFormaPgs";
 
 	/** The Constant STMT_FETCH_FORMAPG_COUNT. */
-	private static final String STMT_FETCH_FORMAPG_COUNT = NAMESPACE_FORMAPG + "fetchFormapgRowCount";
+	private static final String STMT_FETCH_FORMAPG_COUNT = NAMESPACE_FORMAPG + "fetchFormaPgRowCount";
 
 	/** The Constant STMT_FETCH_FORMAPG_ALL_REQUEST. */
-	private static final String STMT_FETCH_FORMAPG_ALL_REQUEST = NAMESPACE_FORMAPG + "fetchAllFormapgsRequest";
+	private static final String STMT_FETCH_FORMAPG_ALL_REQUEST = NAMESPACE_FORMAPG + "fetchAllFormaPgsRequest";
 
 ///===================================### BANCO ####======================================
 /** The Constant NAMESPACE. */
@@ -270,31 +270,31 @@ private static final String STMT_DELETE_BANCO = NAMESPACE_BANCO + "deleteBancoBy
 
 ///===================================### CONTACORRENTE ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_CONTACORRENTE = "ContacorrenteMap.";
+private static final String NAMESPACE_CONTACORRENTE = "ContaCorrenteMap.";
 
 /** The Constant STMT_INSERT_CONTACORRENTE. */
-private static final String STMT_INSERT_CONTACORRENTE = NAMESPACE_CONTACORRENTE + "insertContacorrente";
+private static final String STMT_INSERT_CONTACORRENTE = NAMESPACE_CONTACORRENTE + "insertContaCorrente";
 
 /** The Constant STMT_UPDATE_CONTACORRENTE. */
-private static final String STMT_UPDATE_CONTACORRENTE = NAMESPACE_CONTACORRENTE + "updateContacorrente";
+private static final String STMT_UPDATE_CONTACORRENTE = NAMESPACE_CONTACORRENTE + "updateContaCorrente";
 
 /** The Constant STMT_DELETE_CONTACORRENTE. */
-private static final String STMT_DELETE_CONTACORRENTE = NAMESPACE_CONTACORRENTE + "deleteContacorrenteById";
+private static final String STMT_DELETE_CONTACORRENTE = NAMESPACE_CONTACORRENTE + "deleteContaCorrenteById";
 
 	/** The Constant STMT_DELETE_CONTACORRENTE_ALL. */
-	private static final String STMT_DELETE_CONTACORRENTE_ALL = NAMESPACE_CONTACORRENTE + "deleteAllContacorrentes";
+	private static final String STMT_DELETE_CONTACORRENTE_ALL = NAMESPACE_CONTACORRENTE + "deleteAllContaCorrentes";
 
 	/** The Constant STMT_FETCH_CONTACORRENTE. */
-	private static final String STMT_FETCH_CONTACORRENTE = NAMESPACE_CONTACORRENTE + "fetchContacorrenteById";
+	private static final String STMT_FETCH_CONTACORRENTE = NAMESPACE_CONTACORRENTE + "fetchContaCorrenteById";
 
 	/** The Constant STMT_FETCH_CONTACORRENTE_ALL. */
-	private static final String STMT_FETCH_CONTACORRENTE_ALL = NAMESPACE_CONTACORRENTE + "fetchAllContacorrentes";
+	private static final String STMT_FETCH_CONTACORRENTE_ALL = NAMESPACE_CONTACORRENTE + "fetchAllContaCorrentes";
 
 	/** The Constant STMT_FETCH_CONTACORRENTE_COUNT. */
-	private static final String STMT_FETCH_CONTACORRENTE_COUNT = NAMESPACE_CONTACORRENTE + "fetchContacorrenteRowCount";
+	private static final String STMT_FETCH_CONTACORRENTE_COUNT = NAMESPACE_CONTACORRENTE + "fetchContaCorrenteRowCount";
 
 	/** The Constant STMT_FETCH_CONTACORRENTE_ALL_REQUEST. */
-	private static final String STMT_FETCH_CONTACORRENTE_ALL_REQUEST = NAMESPACE_CONTACORRENTE + "fetchAllContacorrentesRequest";
+	private static final String STMT_FETCH_CONTACORRENTE_ALL_REQUEST = NAMESPACE_CONTACORRENTE + "fetchAllContaCorrentesRequest";
 
 ///===================================### CAIXA ####======================================
 /** The Constant NAMESPACE. */

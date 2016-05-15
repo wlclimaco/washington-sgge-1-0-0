@@ -704,8 +704,21 @@ public IFinanceiroBAR getFinanceiroBAR()
 	}
 
 	private Banco insertBANCO(int i, TabelaEnum formapg, PersistenceActionEnum insert) {
-	// TODO Auto-generated method stub
-	return null;
+		Banco condpag = new Banco();
+		Date a = new Date();
+		condpag.setId(i);
+		condpag.setNome("nome");
+		condpag.setParentId(i);
+		condpag.setEmprId(1);
+		condpag.setTabelaEnum(formapg);
+		condpag.setModifyDateUTC(a.getTime());
+		condpag.setCreateDateUTC(a.getTime());
+		condpag.setCreateUser("system");
+		condpag.setModifyUser("system");
+		condpag.setProcessId(1);
+		condpag.setModelAction(insert);
+
+		return condpag;
 }
 
 	@Test
@@ -1143,7 +1156,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 		{
 			Caixa caixa = new Caixa();
 			Date a = new Date();
-			caixa.setId(100);
+			caixa.setId(id);
 			caixa.setParentId(id);
 			caixa.setEmprId(1);
 			caixa.setModifyDateUTC(a.getTime());

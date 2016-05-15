@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 12/05/2016 11:41 : 33-->
+<!-- create by system gera-java version 1.0.0 15/05/2016 12:46 : 35-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -17,21 +17,24 @@
        exactly. -->
   <resultMap id="ContaCorrenteResult" type="ContaCorrente">
     <result property="id" column="id"/>
-    <result property="nome" column="nome"/>
     <result property="saldo" column="saldo"/>
-    <result property="descricao" column="descricao"/>
+    <result property="numeroConta" column="numeroConta"/>
+    <result property="nossoNumero" column="nossoNumero"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<collection property="historicoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="agencia" column="agencia" select="DocumentoMap.fetchDocumentoByEmpresa"/>
   </resultMap>
 
   <sql id="allContaCorrenteColumns">
-,nome
+agencia
 ,saldo
-,descricao
+,numeroConta
+,nossoNumero
 ,emprId
 ,processId
 ,create_date
@@ -41,9 +44,10 @@
 
 </sql>
 <sql id="allContaCorrenteValues">
-#{nome},
+#{agencia.id},
 #{saldo},
-#{descricao},
+#{numeroConta},
+#{nossoNumero},
 		#{emprId},
 		#{processId},
 		#{createDateUTC},
@@ -87,9 +91,10 @@
 
  <update id="updateContaCorrente" parameterType="ContaCorrente">
    UPDATE contacorrente SET
-<if test="nome!= null">nome = #{nome},</if>
+<if test="agencia.id!= null">agencia = #{agencia.id},</if>
 <if test="saldo!= null">saldo = #{saldo},</if>
-<if test="descricao!= null">descricao = #{descricao},</if>
+<if test="numeroConta!= null">numeroConta = #{numeroConta},</if>
+<if test="nossoNumero!= null">nossoNumero = #{nossoNumero},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

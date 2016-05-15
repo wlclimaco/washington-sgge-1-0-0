@@ -1,9 +1,9 @@
 
-INSERT INTO ContaCorrente( id, nome, saldo, descricao, agencia,emprId,processId,create_user,create_date,modify_user,modify_date)values
-( 1, 'nome_1', 1, 'descricao_3', 1,1,1,'system',1463274147518,'rod',1463274147518);
+INSERT INTO ContaCorrente( id, agencia, saldo, numeroConta, nossoNumero,emprId,processId,create_user,create_date,modify_user,modify_date)values
+( 1, 1, 1, 'numeroConta_3', 'nossoNumero_4',1,1,'system',1463327448714,'rod',1463327448714);
 
-INSERT INTO ContaCorrente( id, nome, saldo, descricao, agencia,emprId,processId,create_user,create_date,modify_user,modify_date)values
-( 2, 'nome_1', 2, 'descricao_3', 2,1,1,'system',1463274147518,'rod',1463274147518);
+INSERT INTO ContaCorrente( id, agencia, saldo, numeroConta, nossoNumero,emprId,processId,create_user,create_date,modify_user,modify_date)values
+( 2, 2, 2, 'numeroConta_3', 'nossoNumero_4',1,1,'system',1463327448714,'rod',1463327448714);
 
-INSERT INTO ContaCorrente( id, nome, saldo, descricao, agencia,emprId,processId,create_user,create_date,modify_user,modify_date)values
-( 3, 'nome_1', 3, 'descricao_3', 3,1,1,'system',1463274147518,'rod',1463274147518);
+INSERT INTO ContaCorrente( id, agencia, saldo, numeroConta, nossoNumero,emprId,processId,create_user,create_date,modify_user,modify_date)values
+( 3, 3, 3, 'numeroConta_3', 'nossoNumero_4',1,1,'system',1463327448714,'rod',1463327448714);

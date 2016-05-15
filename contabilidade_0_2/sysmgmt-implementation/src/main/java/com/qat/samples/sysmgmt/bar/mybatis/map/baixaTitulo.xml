@@ -78,6 +78,12 @@ dataBaixa
    FROM baixatitulo WHERE id = #{fetchid}
  </select>
 
+  <select id="fetchBaixaTituloByCaixa" parameterType="Integer" resultMap="BaixaTituloResult">
+    SELECT id,
+	<include refid="allBaixaTituloColumns" />
+   FROM baixatitulo WHERE id = #{fetchid}
+ </select>
+
  <select id="fetchAllBaixaTitulosRequest" parameterType="PagedInquiryRequest" resultMap="BaixaTituloResult">
 
 		SELECT id,<include refid="allBaixaTituloColumns" />

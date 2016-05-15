@@ -16,7 +16,7 @@
       necessary if the columns (or aliases) match to the properties
        exactly. -->
   <resultMap id="ContasPagarResult" type="ContasPagar" extends="TituloMap.TituloResult">
-    <collection property="fornecedor" column="parentId" select="FornecedorMap.fetchClienteById"/>
+    <collection property="fornecedor" column="parentId" select="FornecedorMap.fetchFornecedorById"/>
   </resultMap>
 
   <sql id="allContasPagarColumns">

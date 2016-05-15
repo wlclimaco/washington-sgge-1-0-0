@@ -17,15 +17,18 @@
        exactly. -->
   <resultMap id="CaixaResult" type="Caixa">
     <result property="id" column="id"/>
+    <result property="saldo" column="saldo"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<collection property="baixaTituloList" column="id" select="BaixaTituloMap.fetchBaixaTituloByCaixa"/>
   </resultMap>
 
   <sql id="allCaixaColumns">
+saldo
 ,emprId
 ,processId
 ,create_date
@@ -35,6 +38,7 @@
 
 </sql>
 <sql id="allCaixaValues">
+		#{saldo},
 		#{emprId},
 		#{processId},
 		#{createDateUTC},
@@ -78,6 +82,7 @@
 
  <update id="updateCaixa" parameterType="Caixa">
    UPDATE caixa SET
+<if test="saldo!= null"> saldo=#{saldo},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

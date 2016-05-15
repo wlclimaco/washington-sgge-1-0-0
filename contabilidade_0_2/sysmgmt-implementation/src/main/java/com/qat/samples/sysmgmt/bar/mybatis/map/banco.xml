@@ -17,6 +17,7 @@
        exactly. -->
   <resultMap id="BancoResult" type="Banco">
     <result property="id" column="id"/>
+     <result property="nome" column="nome"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
@@ -26,6 +27,7 @@
   </resultMap>
 
   <sql id="allBancoColumns">
+nome
 ,emprId
 ,processId
 ,create_date
@@ -35,6 +37,7 @@
 
 </sql>
 <sql id="allBancoValues">
+		#{nome},
 		#{emprId},
 		#{processId},
 		#{createDateUTC},
@@ -78,6 +81,7 @@
 
  <update id="updateBanco" parameterType="Banco">
    UPDATE banco SET
+   <if test="nome!= null"> nome=#{nome},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE
