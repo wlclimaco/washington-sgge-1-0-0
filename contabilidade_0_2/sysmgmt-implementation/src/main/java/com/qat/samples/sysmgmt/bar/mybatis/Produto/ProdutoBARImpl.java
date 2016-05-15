@@ -2624,4 +2624,10 @@ public static void fetchRentabilidadeItenssByRequest(SqlSession sqlSession, Page
 
 	}
 
+@Override
+public MarcaProd fetchMarcaProdutosById(FetchByIdRequest request) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
 }

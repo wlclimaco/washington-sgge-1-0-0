@@ -2,7 +2,6 @@
 package com.qat.samples.sysmgmt.bar.mybatis;
 
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.agencia.model.Agencia;
 import com.qat.samples.sysmgmt.banco.model.Banco;
 import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
 import com.qat.samples.sysmgmt.bar.Financeiro.IFinanceiroBAR;
@@ -40,6 +40,8 @@ import com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteInquiryRequ
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.FormaPgInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.Cliente;
+import com.qat.samples.sysmgmt.pessoa.model.Fornecedor;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
@@ -74,9 +76,9 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteContasPagar()
 	{
-		ContasPagar contaspagar = insertContasPagar(4, TabelaEnum.CONTASPAGAR, PersistenceActionEnum.INSERT);
+		ContasPagar contaspagar = insertContasPagar(7, TabelaEnum.CONTASPAGAR, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(7);
 		ContasPagar contaspagarResponse = getFinanceiroBAR().fetchContasPagarById(request);
 		Assert.assertEquals(contaspagarResponse, null);
 		getFinanceiroBAR().insertContasPagar(contaspagar);
@@ -162,9 +164,9 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteTitulo()
 	{
-		Titulo titulo = insertTitulo(4, TabelaEnum.TITULO, PersistenceActionEnum.INSERT);
+		Titulo titulo = insertTitulo(7, TabelaEnum.TITULO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(7);
 		Titulo tituloResponse = getFinanceiroBAR().fetchTituloById(request);
 		Assert.assertEquals(tituloResponse, null);
 		getFinanceiroBAR().insertTitulo(titulo);
@@ -250,9 +252,9 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteBaixaTitulo()
 	{
-		BaixaTitulo baixatitulo = insertBaixaTitulo(4, TabelaEnum.BAIXARTITULO, PersistenceActionEnum.INSERT);
+		BaixaTitulo baixatitulo = insertBaixaTitulo(7, TabelaEnum.BAIXARTITULO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(7);
 		BaixaTitulo baixatituloResponse = getFinanceiroBAR().fetchBaixaTituloById(request);
 		Assert.assertEquals(baixatituloResponse, null);
 		getFinanceiroBAR().insertBaixaTitulo(baixatitulo);
@@ -287,10 +289,10 @@ public IFinanceiroBAR getFinanceiroBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		BaixaTitulo baixatituloResponse = getFinanceiroBAR().fetchBaixaTituloById(request);
-		Assert.assertEquals(baixatituloResponse.getCreateUser(), "NATIVE INSERT");
+		Assert.assertEquals(baixatituloResponse.getModifyUser(), "NATIVE INSERT");
 		getFinanceiroBAR().updateBaixaTitulo(baixatitulo);
 		baixatituloResponse = getFinanceiroBAR().fetchBaixaTituloById(request);
-		Assert.assertEquals(baixatituloResponse.getCreateUser(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(baixatituloResponse.getModifyUser(), "NATIVE INSERT UPDATE");
 	}
 
 	@Test
@@ -338,9 +340,9 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteTipoBaixa()
 	{
-		TipoBaixa tipobaixa = insertTipoBaixa(4, TabelaEnum.TIPOBAIXA, PersistenceActionEnum.INSERT);
+		TipoBaixa tipobaixa = insertTipoBaixa(7, TabelaEnum.TIPOBAIXA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(7);
 		TipoBaixa tipobaixaResponse = getFinanceiroBAR().fetchTipoBaixaById(request);
 		Assert.assertEquals(tipobaixaResponse, null);
 		getFinanceiroBAR().insertTipoBaixa(tipobaixa);
@@ -426,9 +428,9 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteContasReceber()
 	{
-		ContasReceber contasreceber = insertContasReceber(4, TabelaEnum.CONTASRECEBER, PersistenceActionEnum.INSERT);
+		ContasReceber contasreceber = insertContasReceber(7, TabelaEnum.CONTASRECEBER, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(7);
 		ContasReceber contasreceberResponse = getFinanceiroBAR().fetchContasReceberById(request);
 		Assert.assertEquals(contasreceberResponse, null);
 		getFinanceiroBAR().insertContasReceber(contasreceber);
@@ -707,7 +709,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 		Banco condpag = new Banco();
 		Date a = new Date();
 		condpag.setId(i);
-		condpag.setNome("nome");
+		condpag.setNome("NATIVE INSERT");
 		condpag.setParentId(i);
 		condpag.setEmprId(1);
 		condpag.setTabelaEnum(formapg);
@@ -745,10 +747,10 @@ public IFinanceiroBAR getFinanceiroBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Banco bancoResponse = getFinanceiroBAR().fetchBancoById(request);
-		Assert.assertEquals(bancoResponse.getNome(), "NATIVE INSERT");
+		Assert.assertEquals(bancoResponse.getNome(), "nome_1");
 		getFinanceiroBAR().updateBanco(banco);
 		bancoResponse = getFinanceiroBAR().fetchBancoById(request);
-		Assert.assertEquals(bancoResponse.getNome(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(bancoResponse.getNome(), "NATIVE INSERT");
 	}
 
 	@Test
@@ -924,7 +926,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 		Assert.assertEquals(caixaResponse.getCreateUser(), "NATIVE INSERT");
 		getFinanceiroBAR().updateCaixa(caixa);
 		caixaResponse = getFinanceiroBAR().fetchCaixaById(request);
-		Assert.assertEquals(caixaResponse.getCreateUser(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(caixaResponse.getModifyUser(), "NATIVE INSERT UPDATE");
 	}
 
 	@Test
@@ -984,12 +986,15 @@ public IFinanceiroBAR getFinanceiroBAR()
 		{
 			ContasPagar contaspagar = new ContasPagar();
 			Date a = new Date();
+			contaspagar.setId(id);
 			contaspagar.setParentId(id);
 			contaspagar.setEmprId(1);
+			contaspagar.setNumero("NATIVE INSERT UPDATE");
 			contaspagar.setModifyDateUTC(a.getTime());
 			contaspagar.setCreateDateUTC(a.getTime());
 			contaspagar.setCreateUser("system");
 			contaspagar.setModifyUser("system");
+			contaspagar.setFornecedor(new Fornecedor());
 			contaspagar.setProcessId(1);
 			contaspagar.setModelAction(action);
 
@@ -1001,8 +1006,8 @@ public IFinanceiroBAR getFinanceiroBAR()
 		{
 			Titulo titulo = new Titulo();
 			Date a = new Date();
-			titulo.setId(100);
-			titulo.setNumero("numero");
+			titulo.setId(id);
+			titulo.setNumero("NATIVE INSERT UPDATE");
 
 			titulo.setParentId(id);
 			titulo.setEmprId(1);
@@ -1021,9 +1026,9 @@ public IFinanceiroBAR getFinanceiroBAR()
 		{
 			BaixaTitulo baixatitulo = new BaixaTitulo();
 			Date a = new Date();
-			baixatitulo.setId(100);
+			baixatitulo.setId(id);
 			baixatitulo.setDataBaixa(a.getTime());
-			baixatitulo.setObservacao("NATIVE INSERT");
+			baixatitulo.setObservacao("NATIVE INSERT UPDATE");
 			baixatitulo.setValor(new Double(1.99));
 			baixatitulo.setJuros(new Double(1.99));
 			baixatitulo.setMulta(new Double(1.99));
@@ -1032,8 +1037,8 @@ public IFinanceiroBAR getFinanceiroBAR()
 			baixatitulo.setEmprId(1);
 			baixatitulo.setModifyDateUTC(a.getTime());
 			baixatitulo.setCreateDateUTC(a.getTime());
-			baixatitulo.setCreateUser("system");
-			baixatitulo.setModifyUser("system");
+			baixatitulo.setCreateUser("NATIVE INSERT UPDATE");
+			baixatitulo.setModifyUser("NATIVE INSERT UPDATE");
 			baixatitulo.setProcessId(1);
 			baixatitulo.setModelAction(action);
 
@@ -1045,9 +1050,9 @@ public IFinanceiroBAR getFinanceiroBAR()
 		{
 			TipoBaixa tipobaixa = new TipoBaixa();
 			Date a = new Date();
-			tipobaixa.setId(100);
-			tipobaixa.setNome("NATIVE INSERT");
-			tipobaixa.setDescricao("NATIVE INSERT");
+			tipobaixa.setId(id);
+			tipobaixa.setNome("NATIVE INSERT UPDATE");
+			tipobaixa.setDescricao("NATIVE INSERT UPDATE");
 			tipobaixa.setParentId(id);
 			tipobaixa.setEmprId(1);
 			tipobaixa.setModifyDateUTC(a.getTime());
@@ -1065,13 +1070,15 @@ public IFinanceiroBAR getFinanceiroBAR()
 		{
 			ContasReceber contasreceber = new ContasReceber();
 			Date a = new Date();
-			contasreceber.setId(100);
+			contasreceber.setId(id);
 			contasreceber.setParentId(id);
 			contasreceber.setEmprId(1);
 			contasreceber.setModifyDateUTC(a.getTime());
 			contasreceber.setCreateDateUTC(a.getTime());
 			contasreceber.setCreateUser("system");
 			contasreceber.setModifyUser("system");
+			contasreceber.setCliente(new Cliente());
+			contasreceber.setNumero("NATIVE INSERT UPDATE");
 			contasreceber.setProcessId(1);
 			contasreceber.setModelAction(action);
 
@@ -1083,9 +1090,10 @@ public IFinanceiroBAR getFinanceiroBAR()
 		{
 			CondPag condpag = new CondPag();
 			Date a = new Date();
-			condpag.setId(100);
+			condpag.setId(id);
 			condpag.setParentId(id);
 			condpag.setEmprId(1);
+			condpag.setNome("NATIVE INSERT UPDATE");
 			condpag.setModifyDateUTC(a.getTime());
 			condpag.setCreateDateUTC(a.getTime());
 			condpag.setCreateUser("system");
@@ -1101,12 +1109,13 @@ public IFinanceiroBAR getFinanceiroBAR()
 		{
 			FormaPg formapg = new FormaPg();
 			Date a = new Date();
-			formapg.setId(100);
+			formapg.setId(id);
 			formapg.setParentId(id);
 			formapg.setEmprId(1);
+			formapg.setDescricao("NATIVE INSERT UPDATE");
 			formapg.setModifyDateUTC(a.getTime());
 			formapg.setCreateDateUTC(a.getTime());
-			formapg.setCreateUser("system");
+			formapg.setCreateUser("NATIVE INSERT UPDATE");
 			formapg.setModifyUser("system");
 			formapg.setProcessId(1);
 			formapg.setModelAction(action);
@@ -1137,10 +1146,12 @@ public IFinanceiroBAR getFinanceiroBAR()
 		{
 			ContaCorrente contacorrente = new ContaCorrente();
 			Date a = new Date();
-			contacorrente.setId(100);
+			contacorrente.setId(id);
 			contacorrente.setSaldo(new Double(1.99));
+			contacorrente.setNumeroConta("NATIVE INSERT UPDATE");
 			contacorrente.setParentId(id);
 			contacorrente.setEmprId(1);
+			contacorrente.setAgencia(new Agencia());
 			contacorrente.setModifyDateUTC(a.getTime());
 			contacorrente.setCreateDateUTC(a.getTime());
 			contacorrente.setCreateUser("system");
@@ -1161,8 +1172,8 @@ public IFinanceiroBAR getFinanceiroBAR()
 			caixa.setEmprId(1);
 			caixa.setModifyDateUTC(a.getTime());
 			caixa.setCreateDateUTC(a.getTime());
-			caixa.setCreateUser("system");
-			caixa.setModifyUser("system");
+			caixa.setCreateUser("NATIVE INSERT UPDATE");
+			caixa.setModifyUser("NATIVE INSERT UPDATE");
 			caixa.setProcessId(1);
 			caixa.setModelAction(action);
 

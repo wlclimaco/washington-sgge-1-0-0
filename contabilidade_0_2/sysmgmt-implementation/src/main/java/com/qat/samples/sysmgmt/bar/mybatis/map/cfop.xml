@@ -20,7 +20,7 @@
     <result property="cfop" column="cfop"/>
     <result property="natureza" column="natureza"/>
     <result property="simplificado" column="simplificado"/>
-    <result property="cfopTypeEnum" column="cfopTypeEnum"/>
+    <result property="cfopTypeEnumValue" column="cfopTypeEnum"/>
     <result property="icms" column="icms"/>
     <result property="icmsReduzido" column="icmsReduzido"/>
     <result property="margemAgregadaST" column="margemAgregadaST"/>
@@ -36,7 +36,7 @@
   </resultMap>
 
   <sql id="allCfopColumns">
-,cfop
+cfop
 ,natureza
 ,simplificado
 ,cfopTypeEnum
@@ -58,7 +58,7 @@
 #{cfop},
 #{natureza},
 #{simplificado},
-#{cfopTypeEnum},
+#{cfopTypeEnumValue},
 #{icms},
 #{icmsReduzido},
 #{margemAgregadaST},
@@ -89,13 +89,13 @@
  <select id="fetchAllCfopsRequest" parameterType="CfopInquiryRequest" resultMap="CfopResult">
 
 		SELECT id,<include refid="allCfopColumns" />
-  		  FROM cfop where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+  		  FROM cfop where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchCfopRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM cfop WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM cfop WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 
@@ -111,7 +111,7 @@
 <if test="cfop!= null">cfop = #{cfop},</if>
 <if test="natureza!= null">natureza = #{natureza},</if>
 <if test="simplificado!= null">simplificado = #{simplificado},</if>
-<if test="cfopTypeEnum!= null">cfopTypeEnum = #{cfopTypeEnum},</if>
+<if test="cfopTypeEnumValue!= null">cfopTypeEnum = #{cfopTypeEnumValue},</if>
 <if test="icms!= null">icms = #{icms},</if>
 <if test="icmsReduzido!= null">icmsReduzido = #{icmsReduzido},</if>
 <if test="margemAgregadaST!= null">margemAgregadaST = #{margemAgregadaST},</if>

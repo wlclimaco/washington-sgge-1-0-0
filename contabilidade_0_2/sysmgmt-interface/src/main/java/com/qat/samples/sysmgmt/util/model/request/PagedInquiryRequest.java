@@ -9,7 +9,15 @@ import com.qat.samples.sysmgmt.util.model.criteria.ComumCriteria;
 public class PagedInquiryRequest extends InquiryRequest
 {
 
-	private ComumCriteria baseCriteria;
+	/** The business id. */
+	private Integer emprId;
+
+	/** The recipient id. */
+	private Integer Id;
+
+	private Integer parentId;
+
+	private String string;
 
 	public PagedInquiryRequest()
 	{
@@ -19,21 +27,85 @@ public class PagedInquiryRequest extends InquiryRequest
 
 
 
-	public ComumCriteria getBaseCriteria() {
-		return baseCriteria;
+
+
+
+	public Integer getEmprId() {
+		return emprId;
 	}
 
 
 
-	public void setBaseCriteria(ComumCriteria baseCriteria) {
-		this.baseCriteria = baseCriteria;
+
+
+
+	public void setEmprId(Integer emprId) {
+		this.emprId = emprId;
 	}
+
+
+
+
+
+
+	public Integer getId() {
+		return Id;
+	}
+
+
+
+
+
+
+	public void setId(Integer id) {
+		Id = id;
+	}
+
+
+
+
+
+
+	public Integer getParentId() {
+		return parentId;
+	}
+
+
+
+
+
+
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
+	}
+
+
+
+
+
+
+	public String getString() {
+		return string;
+	}
+
+
+
+
+
+
+	public void setString(String string) {
+		this.string = string;
+	}
+
+
+
 
 
 
 	@Override
 	public String toString() {
-		return "PagedInquiryRequest [getBaseCriteria()=" + getBaseCriteria() + ", toString()=" + super.toString() + "]";
+		return "PagedInquiryRequest [getEmprId()=" + getEmprId() + ", getId()=" + getId() + ", getParentId()="
+				+ getParentId() + ", getString()=" + getString() + ", toString()=" + super.toString() + "]";
 	}
 
 }

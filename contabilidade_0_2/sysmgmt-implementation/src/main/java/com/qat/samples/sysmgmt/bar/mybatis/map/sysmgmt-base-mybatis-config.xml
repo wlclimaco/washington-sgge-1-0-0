@@ -37,6 +37,7 @@
   		<typeAlias alias="InterfaceInquiryRequest" type="com.qat.samples.sysmgmt.dicionario.request.InterfaceInquiryRequest"/>
   		<typeAlias alias="ClassesInquiryRequest" type="com.qat.samples.sysmgmt.dicionario.request.ClassesInquiryRequest"/>
 
+		<typeAlias alias="CondPagInquiryRequest" type="com.qat.samples.sysmgmt.financeiro.model.request.CondPagInquiryRequest"/>
 
 		<typeAlias alias="Advocacia" type="com.qat.samples.sysmgmt.advocacia.Advocacia"/>
   		<typeAlias alias="Clinica" type="com.qat.samples.sysmgmt.clinica.model.Clinica"/>

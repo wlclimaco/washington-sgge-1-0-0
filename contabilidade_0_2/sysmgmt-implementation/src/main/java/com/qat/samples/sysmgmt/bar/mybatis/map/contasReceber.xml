@@ -52,19 +52,19 @@
 </select>
 
 <select id="fetchContasReceberRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM contasreceber WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM titulo WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
 
  </select>
 
  <insert id="insertContasReceber" parameterType="ContasReceber" useGeneratedKeys="true" keyProperty="id">
- 	INSERT INTO contasreceber (
+ 	INSERT INTO titulo (
 	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allContasReceberColumns" />
      )
    VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allContasReceberValues" /> )
  </insert>
 
  <update id="updateContasReceber" parameterType="ContasReceber">
-   UPDATE contasreceber SET
+   UPDATE titulo SET
 <if test="numero!= null">numero = #{numero},</if>
 <if test="dataEmissao!= null">dataEmissao = #{dataEmissao},</if>
 <if test="dataVencimento!= null">dataVencimento = #{dataVencimento},</if>
@@ -80,11 +80,11 @@
  </update>
 
 <delete id="deleteContasReceberById" parameterType="ContasReceber">
-  DELETE FROM contasreceber WHERE id = #{id}
+  DELETE FROM titulo WHERE id = #{id}
  </delete>
 
  <delete id="deleteAllContasRecebers">
-	DELETE FROM contasreceber
+	DELETE FROM titulo
   </delete>
 </mapper>
 

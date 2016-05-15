@@ -87,13 +87,13 @@ dataBaixa
  <select id="fetchAllBaixaTitulosRequest" parameterType="PagedInquiryRequest" resultMap="BaixaTituloResult">
 
 		SELECT id,<include refid="allBaixaTituloColumns" />
-  		  FROM baixatitulo where 0 = 0 <if test="baseCriteria.emprId != null"> and emprId = baseCriteria.emprId</if> ORDER BY id ASC
+  		  FROM baixatitulo where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchBaixaTituloRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM baixatitulo WHERE id IS NOT NULL <if test="baseCriteria.emprId != null"> and emprId = baseCriteria.emprId</if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM baixatitulo WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 

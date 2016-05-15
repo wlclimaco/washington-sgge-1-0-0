@@ -769,8 +769,8 @@ public Site insertSite(Integer id,TabelaEnum tabela,PersistenceActionEnum action
 	{
 		Site site = new Site();
 		Date a = new Date();
-site.setId(100);
-site.setNome("nome");
+site.setId(id);
+site.setNome("NATIVE INSERT UPDATE");
 site.setUrl("url");
 site.setQuemSomos("quemSomos");
 site.setMissao("missao");
@@ -798,10 +798,10 @@ public Contato insertContato(Integer id,TabelaEnum tabela,PersistenceActionEnum 
 	{
 		Contato contato = new Contato();
 		Date a = new Date();
-contato.setId(100);
-contato.setParentId(100);
+contato.setId(id);
+contato.setParentId(id);
 contato.setDataContato(a.getTime());
-contato.setNome("nome");
+contato.setNome("NATIVE INSERT UPDATE");
 contato.setMotivoValue(100);
 contato.setContatoItensList(new ArrayList<ContatoItens>());
 		contato.setParentId(id);
@@ -821,10 +821,10 @@ public ContatoItens insertContatoItens(Integer id,TabelaEnum tabela,PersistenceA
 	{
 		ContatoItens contatoitens = new ContatoItens();
 		Date a = new Date();
-contatoitens.setId(100);
+contatoitens.setId(id);
 contatoitens.setDataAlt(a.getTime());
-contatoitens.setTexto("texto");
-contatoitens.setTitulo("titulo");
+contatoitens.setTexto("NATIVE INSERT UPDATE");
+contatoitens.setTitulo("NATIVE INSERT UPDATE");
 		contatoitens.setParentId(id);
 		contatoitens.setEmprId(1);
 		contatoitens.setModifyDateUTC(a.getTime());
@@ -842,10 +842,10 @@ public OrdemServico insertOrdemServico(Integer id,TabelaEnum tabela,PersistenceA
 	{
 		OrdemServico ordemservico = new OrdemServico();
 		Date a = new Date();
-ordemservico.setId(100);
-ordemservico.setEmprId(100);
+ordemservico.setId(id);
+ordemservico.setEmprId(4);
 ordemservico.setUserId("100");
-ordemservico.setNome("nome");
+ordemservico.setNome("NATIVE INSERT UPDATE");
 ordemservico.setData(a.getTime());
 ordemservico.setAssunto("assunto");
 ordemservico.setStatusValue(100);
@@ -867,10 +867,9 @@ public OrdemServicoItens insertOrdemServicoItens(Integer id,TabelaEnum tabela,Pe
 	{
 		OrdemServicoItens ordemservicoitens = new OrdemServicoItens();
 		Date a = new Date();
-ordemservicoitens.setId(100);
+ordemservicoitens.setId(id);
 ordemservicoitens.setData(a.getTime());
-ordemservicoitens.setTexto("texto");
-ordemservicoitens.setParentId(100);
+ordemservicoitens.setTexto("NATIVE INSERT UPDATE");
 		ordemservicoitens.setParentId(id);
 		ordemservicoitens.setEmprId(1);
 		ordemservicoitens.setModifyDateUTC(a.getTime());
@@ -893,7 +892,7 @@ plano.setDataInicio(a.getTime());
 plano.setDataFinal(a.getTime());
 plano.setNumeroContrato(100);
 plano.setDescricao("descricao");
-plano.setTitulo("titulo");
+plano.setTitulo("NATIVE INSERT UPDATE");
 plano.setPrecoList(new ArrayList<Preco>());
 plano.getPrecoList().add(insertPreco(id, TabelaEnum.PLANO, action));
 plano.setServicoList(new ArrayList<PlanoByServico>());

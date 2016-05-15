@@ -26,7 +26,7 @@
   </resultMap>
 
   <sql id="allAgenciaColumns">
-,emprId
+emprId
 ,processId
 ,create_date
 ,create_user

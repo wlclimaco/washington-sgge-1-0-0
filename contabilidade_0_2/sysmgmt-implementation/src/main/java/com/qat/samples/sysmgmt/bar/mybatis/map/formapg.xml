@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 12/05/2016 11:41 : 33-->
+<!-- create by system gera-java version 1.0.0 15/05/2016 18:59 : 2-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -17,6 +17,9 @@
        exactly. -->
   <resultMap id="FormaPgResult" type="FormaPg">
     <result property="id" column="id"/>
+    <result property="descricao" column="descricao"/>
+    <result property="diasPg" column="diasPg"/>
+    <result property="entrada" column="entrada"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
@@ -26,6 +29,9 @@
   </resultMap>
 
   <sql id="allFormaPgColumns">
+descricao
+,diasPg
+,entrada
 ,emprId
 ,processId
 ,create_date
@@ -35,6 +41,9 @@
 
 </sql>
 <sql id="allFormaPgValues">
+#{descricao},
+#{diasPg},
+#{entrada},
 		#{emprId},
 		#{processId},
 		#{createDateUTC},
@@ -56,16 +65,16 @@
    FROM formapg WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllFormaPgsRequest" parameterType="PagedInquiryRequest" resultMap="FormaPgResult">
+ <select id="fetchAllFormaPgsRequest" parameterType="FormaPgInquiryRequest" resultMap="FormaPgResult">
 
 		SELECT id,<include refid="allFormaPgColumns" />
-  		  FROM formapg where 0 = 0 <if test="baseCriteria.emprId != null"> and emprId = baseCriteria.emprId</if> ORDER BY id ASC
+  		  FROM formapg where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchFormaPgRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM formapg WHERE id IS NOT NULL <if test="baseCriteria.emprId != null"> and emprId = baseCriteria.emprId</if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM formapg WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
 
  </select>
 
@@ -78,6 +87,9 @@
 
  <update id="updateFormaPg" parameterType="FormaPg">
    UPDATE formapg SET
+<if test="descricao!= null">descricao = #{descricao},</if>
+<if test="diasPg!= null">diasPg = #{diasPg},</if>
+<if test="entrada!= null">entrada = #{entrada},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

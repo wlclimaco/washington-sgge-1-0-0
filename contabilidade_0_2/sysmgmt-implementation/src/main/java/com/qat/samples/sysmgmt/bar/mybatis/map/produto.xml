@@ -43,7 +43,7 @@
   </resultMap>
 
   <sql id="allProdutoColumns">
-,codigo
+codigo
 ,cdBarras
 ,produto
 ,dataCreate

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 12/05/2016 11:41 : 33-->
+<!-- create by system gera-java version 1.0.0 15/05/2016 18:59 : 2-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -17,15 +17,25 @@
        exactly. -->
   <resultMap id="CondPagResult" type="CondPag">
     <result property="id" column="id"/>
+    <result property="nome" column="nome"/>
+    <result property="valorIni" column="valorIni"/>
+    <result property="valorFin" column="valorFin"/>
+    <result property="parcelas" column="parcelas"/>
+
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<!-- <collection property="listTipoPag" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/> -->
   </resultMap>
 
   <sql id="allCondPagColumns">
+nome
+,valorIni
+,valorFin
+,parcelas
 ,emprId
 ,processId
 ,create_date
@@ -35,6 +45,10 @@
 
 </sql>
 <sql id="allCondPagValues">
+#{nome},
+#{valorIni},
+#{valorFin},
+#{parcelas},
 		#{emprId},
 		#{processId},
 		#{createDateUTC},
@@ -56,16 +70,16 @@
    FROM condpag WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllCondPagsRequest" parameterType="PagedInquiryRequest" resultMap="CondPagResult">
+ <select id="fetchAllCondPagsRequest" parameterType="CondPagInquiryRequest" resultMap="CondPagResult">
 
 		SELECT id,<include refid="allCondPagColumns" />
-  		  FROM condpag where 0 = 0 <if test="baseCriteria.emprId != null"> and emprId = baseCriteria.emprId</if> ORDER BY id ASC
+  		  FROM condpag where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchCondPagRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM condpag WHERE id IS NOT NULL <if test="baseCriteria.emprId != null"> and emprId = baseCriteria.emprId</if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM condpag WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
 
  </select>
 
@@ -78,6 +92,10 @@
 
  <update id="updateCondPag" parameterType="CondPag">
    UPDATE condpag SET
+<if test="nome!= null">nome = #{nome},</if>
+<if test="valorIni!= null">valorIni = #{valorIni},</if>
+<if test="valorFin!= null">valorFin = #{valorFin},</if>
+<if test="parcelas!= null">parcelas = #{parcelas},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

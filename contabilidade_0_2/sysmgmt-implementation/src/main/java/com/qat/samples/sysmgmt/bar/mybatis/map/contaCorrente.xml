@@ -26,8 +26,8 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="historicoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="agencia" column="agencia" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<!-- <collection property="historicoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/> -->
+<collection property="agencia" column="agencia" select="AgenciaMap.fetchAgenciaById"/>
   </resultMap>
 
   <sql id="allContaCorrenteColumns">

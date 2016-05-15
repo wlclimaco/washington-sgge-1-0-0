@@ -570,6 +570,16 @@ function CfopModel() {
 	return a;
 }
 
+//================ Cfop
+function CfopParentIdModel() {
+
+	var a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "cfop" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "parentId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
 //================ Marca
 function MarcaModel() {
 
@@ -1012,7 +1022,7 @@ function OrdemServicoModel() {
 	var a = [];
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
  	a.push({field :{campo : "emprId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-    a.push({field :{campo : "userId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "userId" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
    	a.push({field :{campo : "nome" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "data" , tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "assunto" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -1148,6 +1158,15 @@ function DepositoModel() {
 
 	var a = [];
 	a = EntidadeModel();
+	return a;
+}
+
+//================ Orcamento
+function MarcaProdModel() {
+
+	var a = [];
+	a.push({field :{campo : "depositoList", tipo :"Deposito",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "marcaId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 
@@ -1400,6 +1419,59 @@ function EmpresaModel() {
 	return a;
 }
 
+function dependenciaProdutoParent(){
+	var a = [];
+	a.push({dependencia :"Estoque",campos : EstoqueModel()});
+	a.push({dependencia :"Preco",campos : PrecoModel()});
+	a.push({dependencia :"Custo",campos : CustoModel()});
+	a.push({dependencia :"Porcao",campos : PorcaoModel()});
+	a.push({dependencia :"Rentabilidade",campos : RentabilidadeModel()});
+	a.push({dependencia :"CfopParentId",campos : CfopParentIdModel()});
+	a.push({dependencia :"Produto",campos : ProdutoModel()});
+	return a
+}
+
+function dependenciaProduto(){
+	var a = [];
+	a.push({dependencia :"MarcaProd",campos : MarcaProdModel()});
+	return a
+}
+
+function dependenciaMarcaProd(){
+	var a = [];
+	a.push({dependencia :"Marca",campos : MarcaModel()});
+	return a
+}
+
+
+function dependenciaMarca(){
+	var a = [];
+	a.push({dependencia :"Email",campos : EmailModel()});
+	a.push({dependencia :"Endereco",campos : EnderecoModel()});
+	a.push({dependencia :"Telefone",campos : TelefoneModel()});
+	return a
+}
+
+function dependenciaCusto(){
+	var a = [];
+	a.push({dependencia :"CustoItens",campos : CustoItensModel()});
+	return a
+}
+
+function dependenciaPorcao(){
+	var a = [];
+	a.push({dependencia :"PorcaoItens",campos : PorcaoItensModel()});
+	return a
+}
+
+function dependenciaRentabilidade(){
+	var a = [];
+	a.push({dependencia :"RentabilidadeItens",campos : RentabilidadeItensModel()});
+	return a
+}
+
+
+
 
 
 
@@ -1468,7 +1540,7 @@ oProjet.push({
 })
 
 oProjet.push({
-	classes :[{classe : "ProdutoParent",model : ProdutoParentIdModel()},{classe : "Produto",model : ProdutoModel()},{classe : "Cfop",model : CfopModel()},{classe : "Marca",model : MarcaModel()},{classe : "MarcaProduto",model : MarcaProdutoModel()},{classe :"Grupo",model : GrupoModel()},{classe :"SubGrupo",model : SubGrupoModel()},{classe :"UniMed",model : UniMedModel()},{classe :"Tributacao",model : TributacaoModel()},{classe :"Custo",model : CustoModel()},{classe :"CustoItens",model : CustoItensModel()},{classe :"Estoque",model : EstoqueModel()},{classe :"Porcao",model : PorcaoModel()},{classe :"PorcaoItens",model : PorcaoItensModel()},{classe :"Rentabilidade",model : RentabilidadeModel()},{classe :"RentabilidadeItens",model : RentabilidadeItensModel()}],
+	classes :[{classe : "ProdutoParent",model : ProdutoParentIdModel(),dependencias : dependenciaProdutoParent()},{classe : "Produto",model : ProdutoModel(),dependencias : dependenciaProduto()},{classe : "Cfop",model : CfopModel()},{classe : "Marca",model : MarcaModel(),dependencias : dependenciaMarca()},{classe : "MarcaProduto",model : MarcaProdutoModel()},{classe :"Grupo",model : GrupoModel()},{classe :"SubGrupo",model : SubGrupoModel()},{classe :"UniMed",model : UniMedModel()},{classe :"Tributacao",model : TributacaoModel()},{classe :"Custo",model : CustoModel(),dependencias : dependenciaCusto()},{classe :"CustoItens",model : CustoItensModel()},{classe :"Estoque",model : EstoqueModel()},{classe :"Porcao",model : PorcaoModel(),dependencias : dependenciaPorcao()},{classe :"PorcaoItens",model : PorcaoItensModel()},{classe :"Rentabilidade",model : RentabilidadeModel(),dependencias : dependenciaRentabilidade()},{classe :"RentabilidadeItens",model : RentabilidadeItensModel()}],
 	interfaces : "Produto",
 	local : "Produto"
 })
