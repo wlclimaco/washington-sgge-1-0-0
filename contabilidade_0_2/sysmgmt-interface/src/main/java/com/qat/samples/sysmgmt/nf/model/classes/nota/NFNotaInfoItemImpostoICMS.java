@@ -1,62 +1,60 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
 
 public class NFNotaInfoItemImpostoICMS extends NFBase {
 
     private boolean isSelecionado = false;
 
-    @Element(name = "ICMS00", required = false)
+    //@Element(name = "ICMS00", required = false)
     private NFNotaInfoItemImpostoICMS00 icms00;
 
-    @Element(name = "ICMS10", required = false)
+    //@Element(name = "ICMS10", required = false)
     private NFNotaInfoItemImpostoICMS10 icms10;
 
-    @Element(name = "ICMS20", required = false)
+    //@Element(name = "ICMS20", required = false)
     private NFNotaInfoItemImpostoICMS20 icms20;
 
-    @Element(name = "ICMS30", required = false)
+    //@Element(name = "ICMS30", required = false)
     private NFNotaInfoItemImpostoICMS30 icms30;
 
-    @Element(name = "ICMS40", required = false)
+    //@Element(name = "ICMS40", required = false)
     private NFNotaInfoItemImpostoICMS40 icms40;
 
-    @Element(name = "ICMS51", required = false)
+    //@Element(name = "ICMS51", required = false)
     private NFNotaInfoItemImpostoICMS51 icms51;
 
-    @Element(name = "ICMS60", required = false)
+    //@Element(name = "ICMS60", required = false)
     private NFNotaInfoItemImpostoICMS60 icms60;
 
-    @Element(name = "ICMS70", required = false)
+    //@Element(name = "ICMS70", required = false)
     private NFNotaInfoItemImpostoICMS70 icms70;
 
-    @Element(name = "ICMS90", required = false)
+    //@Element(name = "ICMS90", required = false)
     private NFNotaInfoItemImpostoICMS90 icms90;
 
-    @Element(name = "ICMSPart", required = false)
+    //@Element(name = "ICMSPart", required = false)
     private NFNotaInfoItemImpostoICMSPartilhado icmsPartilhado;
 
-    @Element(name = "ICMSST", required = false)
+    //@Element(name = "ICMSST", required = false)
     private NFNotaInfoItemImpostoICMSST icmsst;
 
-    @Element(name = "ICMSSN101", required = false)
+    //@Element(name = "ICMSSN101", required = false)
     private NFNotaInfoItemImpostoICMSSN101 icmssn101;
 
-    @Element(name = "ICMSSN102", required = false)
+    //@Element(name = "ICMSSN102", required = false)
     private NFNotaInfoItemImpostoICMSSN102 icmssn102;
 
-    @Element(name = "ICMSSN201", required = false)
+    //@Element(name = "ICMSSN201", required = false)
     private NFNotaInfoItemImpostoICMSSN201 icmssn201;
 
-    @Element(name = "ICMSSN202", required = false)
+    //@Element(name = "ICMSSN202", required = false)
     private NFNotaInfoItemImpostoICMSSN202 icmssn202;
 
-    @Element(name = "ICMSSN500", required = false)
+    //@Element(name = "ICMSSN500", required = false)
     private NFNotaInfoItemImpostoICMSSN500 icmssn500;
 
-    @Element(name = "ICMSSN900", required = false)
+    //@Element(name = "ICMSSN900", required = false)
     private NFNotaInfoItemImpostoICMSSN900 icmssn900;
 
     public void setIcms00(final NFNotaInfoItemImpostoICMS00 icms00) {

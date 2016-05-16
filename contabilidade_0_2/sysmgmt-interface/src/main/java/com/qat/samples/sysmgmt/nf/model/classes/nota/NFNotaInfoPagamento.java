@@ -1,21 +1,18 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
 import java.math.BigDecimal;
 
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.validadores.BigDecimalParser;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
 
 public class NFNotaInfoPagamento extends NFBase {
 
-    @Element(name = "tPag", required = true)
+    //@Element(name = "tPag", required = true)
     private NFFormaPagamentoMoeda formaPagamentoMoeda;
 
-    @Element(name = "vPag", required = true)
+    //@Element(name = "vPag", required = true)
     private String valorPagamento;
 
-    @Element(name = "card", required = false)
+    //@Element(name = "card", required = false)
     private NFNotaInfoCartao cartao;
 
     public void setCartao(final NFNotaInfoCartao cartao) {
@@ -26,9 +23,9 @@ public class NFNotaInfoPagamento extends NFBase {
         this.formaPagamentoMoeda = formaPagamentoMoeda;
     }
 
-    public void setValorPagamento(final BigDecimal valorPagamento) {
-        this.valorPagamento = BigDecimalParser.tamanho15Com2CasasDecimais(valorPagamento);
-    }
+//    public void setValorPagamento(final BigDecimal valorPagamento) {
+//        this.valorPagamento = BigDecimalParser.tamanho15Com2CasasDecimais(valorPagamento);
+//    }
 
     public NFFormaPagamentoMoeda getFormaPagamentoMoeda() {
         return this.formaPagamentoMoeda;

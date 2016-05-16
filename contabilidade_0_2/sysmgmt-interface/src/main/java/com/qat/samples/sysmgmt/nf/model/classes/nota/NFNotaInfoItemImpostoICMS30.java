@@ -1,45 +1,42 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
 import java.math.BigDecimal;
 
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.classes.NFNotaInfoImpostoTributacaoICMS;
-import com.fincatto.nfe310.classes.NFNotaInfoItemModalidadeBCICMSST;
-import com.fincatto.nfe310.classes.NFNotaMotivoDesoneracaoICMS;
-import com.fincatto.nfe310.classes.NFOrigem;
-import com.fincatto.nfe310.validadores.BigDecimalParser;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFNotaInfoImpostoTributacaoICMS;
+import com.qat.samples.sysmgmt.nf.model.classes.NFNotaInfoItemModalidadeBCICMSST;
+import com.qat.samples.sysmgmt.nf.model.classes.NFNotaMotivoDesoneracaoICMS;
+import com.qat.samples.sysmgmt.nf.model.classes.NFOrigem;
 
 public class NFNotaInfoItemImpostoICMS30 extends NFBase {
-    @Element(name = "orig", required = true)
+    //@Element(name = "orig", required = true)
     private NFOrigem origem;
 
-    @Element(name = "CST", required = true)
+    //@Element(name = "CST", required = true)
     private NFNotaInfoImpostoTributacaoICMS situacaoTributaria;
 
-    @Element(name = "modBCST", required = true)
+    //@Element(name = "modBCST", required = true)
     private NFNotaInfoItemModalidadeBCICMSST modalidadeDeterminacaoBC;
 
-    @Element(name = "pMVAST", required = false)
+    //@Element(name = "pMVAST", required = false)
     private String percentualMargemValorAdicionadoICMSST;
 
-    @Element(name = "pRedBCST", required = false)
+    //@Element(name = "pRedBCST", required = false)
     private String percentualReducaoBCICMSST;
 
-    @Element(name = "vBCST", required = true)
+    //@Element(name = "vBCST", required = true)
     private String valorBCICMSST;
 
-    @Element(name = "pICMSST", required = true)
+    //@Element(name = "pICMSST", required = true)
     private String percentualAliquotaImpostoICMSST;
 
-    @Element(name = "vICMSST", required = true)
+    //@Element(name = "vICMSST", required = true)
     private String valorImpostoICMSST;
 
-    @Element(name = "vICMSDeson", required = false)
+    //@Element(name = "vICMSDeson", required = false)
     private String valorICMSDesoneracao;
 
-    @Element(name = "motDesICMS", required = false)
+    //@Element(name = "motDesICMS", required = false)
     private NFNotaMotivoDesoneracaoICMS desoneracao;
 
     public void setOrigem(final NFOrigem origem) {
@@ -54,33 +51,33 @@ public class NFNotaInfoItemImpostoICMS30 extends NFBase {
         this.modalidadeDeterminacaoBC = modalidadeDeterminacaoBC;
     }
 
-    public void setPercentualMargemValorAdicionadoICMSST(final BigDecimal percentualMargemValorAdicionadoICMSST) {
-        this.percentualMargemValorAdicionadoICMSST = BigDecimalParser.tamanho7ComAte4CasasDecimais(percentualMargemValorAdicionadoICMSST);
-    }
-
-    public void setPercentualReducaoBCICMSST(final BigDecimal percentualReducaoBCICMSST) {
-        this.percentualReducaoBCICMSST = BigDecimalParser.tamanho7ComAte4CasasDecimais(percentualReducaoBCICMSST);
-    }
-
-    public void setValorBCICMSST(final BigDecimal valorBCICMSST) {
-        this.valorBCICMSST = BigDecimalParser.tamanho15Com2CasasDecimais(valorBCICMSST);
-    }
-
-    public void setPercentualAliquotaImpostoICMSST(final BigDecimal aliquotaImpostoICMSST) {
-        this.percentualAliquotaImpostoICMSST = BigDecimalParser.tamanho7ComAte4CasasDecimais(aliquotaImpostoICMSST);
-    }
-
-    public void setValorImpostoICMSST(final BigDecimal valorImpostoICMSST) {
-        this.valorImpostoICMSST = BigDecimalParser.tamanho15Com2CasasDecimais(valorImpostoICMSST);
-    }
-
-    public void setDesoneracao(final NFNotaMotivoDesoneracaoICMS nfNotaMotivoDesoneracaoICMS) {
-        this.desoneracao = nfNotaMotivoDesoneracaoICMS;
-    }
-
-    public void setValorICMSDesoneracao(final BigDecimal valorICMSDesoneracao) {
-        this.valorICMSDesoneracao = BigDecimalParser.tamanho15Com2CasasDecimais(valorICMSDesoneracao);
-    }
+//    public void setPercentualMargemValorAdicionadoICMSST(final BigDecimal percentualMargemValorAdicionadoICMSST) {
+//        this.percentualMargemValorAdicionadoICMSST = BigDecimalParser.tamanho7ComAte4CasasDecimais(percentualMargemValorAdicionadoICMSST);
+//    }
+//
+//    public void setPercentualReducaoBCICMSST(final BigDecimal percentualReducaoBCICMSST) {
+//        this.percentualReducaoBCICMSST = BigDecimalParser.tamanho7ComAte4CasasDecimais(percentualReducaoBCICMSST);
+//    }
+//
+//    public void setValorBCICMSST(final BigDecimal valorBCICMSST) {
+//        this.valorBCICMSST = BigDecimalParser.tamanho15Com2CasasDecimais(valorBCICMSST);
+//    }
+//
+//    public void setPercentualAliquotaImpostoICMSST(final BigDecimal aliquotaImpostoICMSST) {
+//        this.percentualAliquotaImpostoICMSST = BigDecimalParser.tamanho7ComAte4CasasDecimais(aliquotaImpostoICMSST);
+//    }
+//
+//    public void setValorImpostoICMSST(final BigDecimal valorImpostoICMSST) {
+//        this.valorImpostoICMSST = BigDecimalParser.tamanho15Com2CasasDecimais(valorImpostoICMSST);
+//    }
+//
+//    public void setDesoneracao(final NFNotaMotivoDesoneracaoICMS nfNotaMotivoDesoneracaoICMS) {
+//        this.desoneracao = nfNotaMotivoDesoneracaoICMS;
+//    }
+//
+//    public void setValorICMSDesoneracao(final BigDecimal valorICMSDesoneracao) {
+//        this.valorICMSDesoneracao = BigDecimalParser.tamanho15Com2CasasDecimais(valorICMSDesoneracao);
+//    }
 
     public NFOrigem getOrigem() {
         return this.origem;

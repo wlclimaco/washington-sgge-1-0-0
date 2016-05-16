@@ -1,27 +1,17 @@
-package com.fincatto.nfe310.classes.nota.assinatura;
+package com.qat.samples.sysmgmt.nf.model.classes.nota.assinatura;
 
 import java.util.List;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
-import org.simpleframework.xml.Path;
-
-import com.fincatto.nfe310.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
 
 public class NFReference extends NFBase {
 
-    @Attribute(name = "URI", required = false)
     private String uri;
 
-    @Path("Transforms")
-    @ElementList(entry = "Transform", inline = true, required = false)
     private List<NFTransform> transform;
 
-    @Element(name = "DigestMethod", required = false)
     private NFDigestMethod digestMethod;
 
-    @Element(name = "DigestValue", required = false)
     private String digestValue;
 
     public String getUri() {

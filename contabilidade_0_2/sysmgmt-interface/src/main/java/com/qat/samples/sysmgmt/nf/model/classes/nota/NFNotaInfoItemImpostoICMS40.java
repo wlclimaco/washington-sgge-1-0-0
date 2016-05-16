@@ -1,26 +1,23 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
 import java.math.BigDecimal;
 
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.classes.NFNotaInfoImpostoTributacaoICMS;
-import com.fincatto.nfe310.classes.NFNotaMotivoDesoneracaoICMS;
-import com.fincatto.nfe310.classes.NFOrigem;
-import com.fincatto.nfe310.validadores.BigDecimalParser;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFNotaInfoImpostoTributacaoICMS;
+import com.qat.samples.sysmgmt.nf.model.classes.NFNotaMotivoDesoneracaoICMS;
+import com.qat.samples.sysmgmt.nf.model.classes.NFOrigem;
 
 public class NFNotaInfoItemImpostoICMS40 extends NFBase {
-    @Element(name = "orig", required = true)
+    //@Element(name = "orig", required = true)
     private NFOrigem origem;
 
-    @Element(name = "CST", required = true)
+    //@Element(name = "CST", required = true)
     private NFNotaInfoImpostoTributacaoICMS situacaoTributaria;
 
-    @Element(name = "vICMSDeson", required = false)
+    //@Element(name = "vICMSDeson", required = false)
     private String valorICMSDesoneracao;
 
-    @Element(name = "motDesICMS", required = false)
+    //@Element(name = "motDesICMS", required = false)
     private NFNotaMotivoDesoneracaoICMS motivoDesoneracaoICMS;
 
     public void setOrigem(final NFOrigem origem) {
@@ -31,9 +28,9 @@ public class NFNotaInfoItemImpostoICMS40 extends NFBase {
         this.situacaoTributaria = situacaoTributaria;
     }
 
-    public void setValorICMSDesoneracao(final BigDecimal valorICMSDesoneracao) {
-        this.valorICMSDesoneracao = BigDecimalParser.tamanho15Com2CasasDecimais(valorICMSDesoneracao);
-    }
+//    public void setValorICMSDesoneracao(final BigDecimal valorICMSDesoneracao) {
+//        this.valorICMSDesoneracao = BigDecimalParser.tamanho15Com2CasasDecimais(valorICMSDesoneracao);
+//    }
 
     public void setMotivoDesoneracaoICMS(final NFNotaMotivoDesoneracaoICMS motivoDesoneracaoICMS) {
         this.motivoDesoneracaoICMS = motivoDesoneracaoICMS;

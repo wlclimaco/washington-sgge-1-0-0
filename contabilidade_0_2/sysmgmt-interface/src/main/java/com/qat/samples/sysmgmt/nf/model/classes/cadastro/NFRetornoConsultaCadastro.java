@@ -1,18 +1,13 @@
 package com.qat.samples.sysmgmt.nf.model.classes.cadastro;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Root;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
 
-import com.fincatto.nfe310.classes.NFBase;
 
-@Root(name = "retConsCad")
 public class NFRetornoConsultaCadastro extends NFBase {
 
-    @Attribute(name = "versao")
+
     private String versao;
 
-    @Element(name = "infCons")
     private NFRetornoConsultaCadastroDados dados;
 
     public NFRetornoConsultaCadastroDados getDados() {

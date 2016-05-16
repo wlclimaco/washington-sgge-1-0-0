@@ -1,13 +1,11 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.classes.NFNotaInfoSituacaoTributariaIPI;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFNotaInfoSituacaoTributariaIPI;
 
 public class NFNotaInfoItemImpostoIPINT extends NFBase {
 
-    @Element(name = "IPINT", required = true)
+    //@Element(name = "IPINT", required = true)
     private NFNotaInfoSituacaoTributariaIPI situacaoTributariaIPI;
 
     public NFNotaInfoSituacaoTributariaIPI getSituacaoTributariaIPI() {

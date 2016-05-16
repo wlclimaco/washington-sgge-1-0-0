@@ -1,21 +1,19 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
 
 public class NFNotaInfoItemImpostoPIS extends NFBase {
 
-    @Element(name = "PISAliq", required = false)
+    //@Element(name = "PISAliq", required = false)
     private NFNotaInfoItemImpostoPISAliquota aliquota;
 
-    @Element(name = "PISQtde", required = false)
+    //@Element(name = "PISQtde", required = false)
     private NFNotaInfoItemImpostoPISQuantidade quantidade;
 
-    @Element(name = "PISNT", required = false)
+    //@Element(name = "PISNT", required = false)
     private NFNotaInfoItemImpostoPISNaoTributado naoTributado;
 
-    @Element(name = "PISOutr", required = false)
+    //@Element(name = "PISOutr", required = false)
     private NFNotaInfoItemImpostoPISOutrasOperacoes outrasOperacoes;
 
     public NFNotaInfoItemImpostoPIS() {

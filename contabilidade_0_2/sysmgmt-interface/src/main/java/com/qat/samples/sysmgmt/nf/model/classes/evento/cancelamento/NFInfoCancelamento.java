@@ -1,24 +1,21 @@
-package com.fincatto.nfe310.classes.evento.cancelamento;
+package com.qat.samples.sysmgmt.nf.model.classes.evento.cancelamento;
 
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.evento.NFTipoEvento;
-import com.fincatto.nfe310.validadores.StringValidador;
+import com.qat.samples.sysmgmt.nf.model.classes.evento.NFTipoEvento;
 
 public class NFInfoCancelamento extends NFTipoEvento {
-    @Element(name = "nProt", required = true)
+
     private String protocoloAutorizacao;
 
-    @Element(name = "xJust", required = true)
+
     private String justificativa;
 
     public void setJustificativa(final String justificativa) {
-        StringValidador.tamanho15a256(justificativa);
+     //   StringValidador.tamanho15a256(justificativa);
         this.justificativa = justificativa;
     }
 
     public void setProtocoloAutorizacao(final String protocoloAutorizacao) {
-        StringValidador.exatamente15N(protocoloAutorizacao);
+     //   StringValidador.exatamente15N(protocoloAutorizacao);
         this.protocoloAutorizacao = protocoloAutorizacao;
     }
 

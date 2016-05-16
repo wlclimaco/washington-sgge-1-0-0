@@ -1,31 +1,28 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
 import java.math.BigDecimal;
 
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.classes.NFNotaInfoSituacaoTributariaIPI;
-import com.fincatto.nfe310.validadores.BigDecimalParser;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFNotaInfoSituacaoTributariaIPI;
 
 public class NFNotaInfoItemImpostoIPITributado extends NFBase {
 
-    @Element(name = "CST", required = true)
+    //@Element(name = "CST", required = true)
     private NFNotaInfoSituacaoTributariaIPI situacaoTributaria;
 
-    @Element(name = "vBC", required = false)
+    //@Element(name = "vBC", required = false)
     private String valorBaseCalculo;
 
-    @Element(name = "pIPI", required = false)
+    //@Element(name = "pIPI", required = false)
     private String percentualAliquota;
 
-    @Element(name = "qUnid", required = false)
+    //@Element(name = "qUnid", required = false)
     private String quantidade;
 
-    @Element(name = "vUnid", required = false)
+    //@Element(name = "vUnid", required = false)
     private String valorUnidadeTributavel;
 
-    @Element(name = "vIPI", required = true)
+    //@Element(name = "vIPI", required = true)
     private String valorTributo;
 
     public NFNotaInfoItemImpostoIPITributado() {
@@ -44,37 +41,37 @@ public class NFNotaInfoItemImpostoIPITributado extends NFBase {
         this.situacaoTributaria = situacaoTributaria;
     }
 
-    public void setValorBaseCalculo(final BigDecimal valorBaseCalculo) {
-        if (this.quantidade != null || this.valorUnidadeTributavel != null) {
-            throw new IllegalStateException("Nao pode setar valor base calculo se quantidade ou valor unidade tributavel esta setado");
-        }
-        this.valorBaseCalculo = BigDecimalParser.tamanho15Com2CasasDecimais(valorBaseCalculo);
-    }
-
-    public void setPercentualAliquota(final BigDecimal aliquota) {
-        if (this.quantidade != null || this.valorUnidadeTributavel != null) {
-            throw new IllegalStateException("Nao pode setar percentual aliquota se quantidade ou valor unidade tributavel esta setado");
-        }
-        this.percentualAliquota = BigDecimalParser.tamanho7ComAte4CasasDecimais(aliquota);
-    }
-
-    public void setQuantidade(final BigDecimal quantidade) {
-        if (this.valorBaseCalculo != null || this.percentualAliquota != null) {
-            throw new IllegalStateException("Nao pode setar quantidade se valorBaseCalculo ou PercentualAliquota esta setado");
-        }
-        this.quantidade = BigDecimalParser.tamanho16ComAte4CasasDecimais(quantidade);
-    }
-
-    public void setValorUnidadeTributavel(final BigDecimal valorUnitario) {
-        if (this.valorBaseCalculo != null || this.percentualAliquota != null) {
-            throw new IllegalStateException("Nao pode setar valor unidade tributavel se valorBaseCalculo ou PercentualAliquota esta setado");
-        }
-        this.valorUnidadeTributavel = BigDecimalParser.tamanho15comAte4CasasDecimais(valorUnitario);
-    }
-
-    public void setValorTributo(final BigDecimal valorTributo) {
-        this.valorTributo = BigDecimalParser.tamanho15Com2CasasDecimais(valorTributo);
-    }
+//    public void setValorBaseCalculo(final BigDecimal valorBaseCalculo) {
+//        if (this.quantidade != null || this.valorUnidadeTributavel != null) {
+//            throw new IllegalStateException("Nao pode setar valor base calculo se quantidade ou valor unidade tributavel esta setado");
+//        }
+//        this.valorBaseCalculo = BigDecimalParser.tamanho15Com2CasasDecimais(valorBaseCalculo);
+//    }
+//
+//    public void setPercentualAliquota(final BigDecimal aliquota) {
+//        if (this.quantidade != null || this.valorUnidadeTributavel != null) {
+//            throw new IllegalStateException("Nao pode setar percentual aliquota se quantidade ou valor unidade tributavel esta setado");
+//        }
+//        this.percentualAliquota = BigDecimalParser.tamanho7ComAte4CasasDecimais(aliquota);
+//    }
+//
+//    public void setQuantidade(final BigDecimal quantidade) {
+//        if (this.valorBaseCalculo != null || this.percentualAliquota != null) {
+//            throw new IllegalStateException("Nao pode setar quantidade se valorBaseCalculo ou PercentualAliquota esta setado");
+//        }
+//        this.quantidade = BigDecimalParser.tamanho16ComAte4CasasDecimais(quantidade);
+//    }
+//
+//    public void setValorUnidadeTributavel(final BigDecimal valorUnitario) {
+//        if (this.valorBaseCalculo != null || this.percentualAliquota != null) {
+//            throw new IllegalStateException("Nao pode setar valor unidade tributavel se valorBaseCalculo ou PercentualAliquota esta setado");
+//        }
+//        this.valorUnidadeTributavel = BigDecimalParser.tamanho15comAte4CasasDecimais(valorUnitario);
+//    }
+//
+//    public void setValorTributo(final BigDecimal valorTributo) {
+//        this.valorTributo = BigDecimalParser.tamanho15Com2CasasDecimais(valorTributo);
+//    }
 
     public NFNotaInfoSituacaoTributariaIPI getSituacaoTributaria() {
         return this.situacaoTributaria;

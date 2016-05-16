@@ -2,8 +2,6 @@ package com.qat.samples.sysmgmt.nf.model.classes;
 
 import java.util.Arrays;
 
-import com.fincatto.nfe310.parsers.NotaFiscalChaveParser;
-
 /**
  * <h1>URLs dos serviços</h1><br>
  * <a href="http://hom.nfe.fazenda.gov.br/portal/webServices.aspx?tipoConteudo=Wak0FwB7dKs=">NFE Homologação</a><br>
@@ -981,11 +979,11 @@ public enum NFAutorizador31 {
 		throw new IllegalStateException(String.format("N\u00e3o existe autorizador para a UF %s", uf.getCodigo()));
 	}
 
-	public static NFAutorizador31 valueOfChaveAcesso(final String chaveAcesso) {
-		final NotaFiscalChaveParser chaveParser = new NotaFiscalChaveParser(chaveAcesso);
-		if (chaveParser.isEmitidaContingenciaSCAN()) {
-			return NFAutorizador31.SCAN;
-		}
-		return NFAutorizador31.valueOfCodigoUF(chaveParser.getNFUnidadeFederativa());
-	}
+//	public static NFAutorizador31 valueOfChaveAcesso(final String chaveAcesso) {
+//		final NotaFiscalChaveParser chaveParser = new NotaFiscalChaveParser(chaveAcesso);
+//		if (chaveParser.isEmitidaContingenciaSCAN()) {
+//			return NFAutorizador31.SCAN;
+//		}
+//		return NFAutorizador31.valueOfCodigoUF(chaveParser.getNFUnidadeFederativa());
+//	}
 }

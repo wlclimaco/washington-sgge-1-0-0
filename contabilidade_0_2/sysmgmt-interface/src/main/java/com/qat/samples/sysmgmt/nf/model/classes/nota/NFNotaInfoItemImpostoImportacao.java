@@ -1,24 +1,21 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
 import java.math.BigDecimal;
 
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.validadores.BigDecimalParser;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
 
 public class NFNotaInfoItemImpostoImportacao extends NFBase {
 
-    @Element(name = "vBC", required = true)
+    //@Element(name = "vBC", required = true)
     private String valorBaseCalculo;
 
-    @Element(name = "vDespAdu", required = true)
+    //@Element(name = "vDespAdu", required = true)
     private String valorDespesaAduaneira;
 
-    @Element(name = "vII", required = true)
+    //@Element(name = "vII", required = true)
     private String valorImpostoImportacao;
 
-    @Element(name = "vIOF", required = true)
+    //@Element(name = "vIOF", required = true)
     private String valorIOF;
 
     public NFNotaInfoItemImpostoImportacao() {
@@ -28,21 +25,21 @@ public class NFNotaInfoItemImpostoImportacao extends NFBase {
         this.valorIOF = null;
     }
 
-    public void setValorBaseCalculo(final BigDecimal valorBaseCalculo) {
-        this.valorBaseCalculo = BigDecimalParser.tamanho15Com2CasasDecimais(valorBaseCalculo);
-    }
-
-    public void setValorDespesaAduaneira(final BigDecimal valorDespesaAduaneira) {
-        this.valorDespesaAduaneira = BigDecimalParser.tamanho15Com2CasasDecimais(valorDespesaAduaneira);
-    }
-
-    public void setValorImpostoImportacao(final BigDecimal valorImpostoImportacao) {
-        this.valorImpostoImportacao = BigDecimalParser.tamanho15Com2CasasDecimais(valorImpostoImportacao);
-    }
-
-    public void setValorIOF(final BigDecimal valorIOF) {
-        this.valorIOF = BigDecimalParser.tamanho15Com2CasasDecimais(valorIOF);
-    }
+//    public void setValorBaseCalculo(final BigDecimal valorBaseCalculo) {
+//        this.valorBaseCalculo = BigDecimalParser.tamanho15Com2CasasDecimais(valorBaseCalculo);
+//    }
+//
+//    public void setValorDespesaAduaneira(final BigDecimal valorDespesaAduaneira) {
+//        this.valorDespesaAduaneira = BigDecimalParser.tamanho15Com2CasasDecimais(valorDespesaAduaneira);
+//    }
+//
+//    public void setValorImpostoImportacao(final BigDecimal valorImpostoImportacao) {
+//        this.valorImpostoImportacao = BigDecimalParser.tamanho15Com2CasasDecimais(valorImpostoImportacao);
+//    }
+//
+//    public void setValorIOF(final BigDecimal valorIOF) {
+//        this.valorIOF = BigDecimalParser.tamanho15Com2CasasDecimais(valorIOF);
+//    }
 
     public String getValorBaseCalculo() {
         return this.valorBaseCalculo;

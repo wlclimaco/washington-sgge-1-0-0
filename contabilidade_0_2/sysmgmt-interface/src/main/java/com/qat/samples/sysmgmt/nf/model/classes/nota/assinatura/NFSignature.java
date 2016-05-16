@@ -1,20 +1,15 @@
-package com.fincatto.nfe310.classes.nota.assinatura;
+package com.qat.samples.sysmgmt.nf.model.classes.nota.assinatura;
 
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Namespace;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
 
-import com.fincatto.nfe310.classes.NFBase;
 
-@Namespace(reference = "http://www.w3.org/2000/09/xmldsig#")
 public class NFSignature extends NFBase {
 
-    @Element(name = "SignedInfo", required = false)
+
     private NFSignedInfo signedInfo;
 
-    @Element(name = "SignatureValue", required = false)
     private String signatureValue;
 
-    @Element(name = "KeyInfo", required = false)
     private NFKeyInfo keyInfo;
 
     public NFSignedInfo getSignedInfo() {

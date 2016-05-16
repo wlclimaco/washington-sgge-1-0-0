@@ -1,61 +1,50 @@
 package com.qat.samples.sysmgmt.nf.model.classes.cadastro;
 
-import org.joda.time.LocalDate;
-import org.simpleframework.xml.Element;
+import java.time.LocalDate;
+
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFUnidadeFederativa;
 
 
 
 public class NFRetornoConsultaCadastroSituacaoCadastral extends NFBase {
 
-    @Element(name = "IE", required = true)
+
     private String inscricaoEstadual;
 
-    @Element(name = "CNPJ", required = false)
+
     private String cnpj;
 
-    @Element(name = "CPF", required = false)
+
     private String cpf;
 
-    @Element(name = "UF", required = true)
+
     private NFUnidadeFederativa uf;
 
-    @Element(name = "cSit", required = true)
     private NFSituacaoContribuinte situacaoContribuinte;
 
-    @Element(name = "indCredNFe", required = false)
     private NFIndicadorContribuinteNFe indicadorContribuinteNFe;
 
-    @Element(name = "indCredCTe", required = false)
     private NFIndicadorContribuinteCTe indicaodrContribuinteCTe;
 
-    @Element(name = "xNome", required = true)
     private String razaoSocial;
 
-    @Element(name = "xFant", required = false)
     private String nomeFantasia;
 
-    @Element(name = "xRegApur", required = false)
     private String regimeApuracaoICMSContribuinte;
 
-    @Element(name = "CNAE", required = false)
     private String cnaePrincipalContribuinte;
 
-    @Element(name = "dIniAtiv", required = false)
     private LocalDate dataInicioAtividade;
 
-    @Element(name = "dUltSit", required = false)
     private LocalDate dataUltimaModificacaoSituacaoCadastral;
 
-    @Element(name = "dBaixa", required = false)
     private LocalDate dataOcorrenciaBaixa;
 
-    @Element(name = "IEUnica", required = false)
     private String inscricaoEstadualUnica;
 
-    @Element(name = "IEAtual", required = false)
     private String inscricaoEstadualAtual;
 
-    @Element(name = "ender", required = false)
     private NFRetornoConsultaCadastroEndereco endereco;
 
     public String getInscricaoEstadual() {

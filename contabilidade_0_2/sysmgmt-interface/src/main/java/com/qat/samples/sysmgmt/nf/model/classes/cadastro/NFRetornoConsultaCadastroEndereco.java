@@ -1,29 +1,21 @@
 package com.qat.samples.sysmgmt.nf.model.classes.cadastro;
 
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
 
 public class NFRetornoConsultaCadastroEndereco extends NFBase {
-    @Element(name = "xLgr", required = false)
+
     private String logradouro;
 
-    @Element(name = "nro", required = false)
     private String numero;
 
-    @Element(name = "xCpl", required = false)
     private String complemento;
 
-    @Element(name = "xBairro", required = false)
     private String bairro;
 
-    @Element(name = "cMun", required = false)
     private String codigoMunicipio;
 
-    @Element(name = "xMun", required = false)
     private String descricaoMunicipio;
 
-    @Element(name = "CEP", required = false)
     private String cep;
 
     public String getLogradouro() {

@@ -1,4 +1,4 @@
-package com.fincatto.nfe310.classes.lote.envio;
+package com.qat.samples.sysmgmt.nf.model.classes.lote.envio;
 
 public enum NFLoteIndicadorProcessamento {
 

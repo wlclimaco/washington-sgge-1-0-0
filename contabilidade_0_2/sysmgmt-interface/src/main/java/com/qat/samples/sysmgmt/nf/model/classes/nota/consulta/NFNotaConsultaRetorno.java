@@ -1,55 +1,37 @@
-package com.fincatto.nfe310.classes.nota.consulta;
+package com.qat.samples.sysmgmt.nf.model.classes.nota.consulta;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
-import org.joda.time.LocalDateTime;
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
-import org.simpleframework.xml.Namespace;
-import org.simpleframework.xml.Root;
+import com.qat.samples.sysmgmt.nf.model.classes.NFAmbiente;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFProtocolo;
+import com.qat.samples.sysmgmt.nf.model.classes.NFUnidadeFederativa;
+import com.qat.samples.sysmgmt.nf.model.classes.evento.cancelamento.NFRetornoCancelamento;
 
-import com.fincatto.nfe310.classes.NFAmbiente;
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.classes.NFProtocolo;
-import com.fincatto.nfe310.classes.NFUnidadeFederativa;
-import com.fincatto.nfe310.classes.evento.cancelamento.NFRetornoCancelamento;
 
-@Root(name = "retConsSitNFe", strict = false)
-@Namespace(reference = "http://www.portalfiscal.inf.br/nfe")
 public class NFNotaConsultaRetorno extends NFBase {
 
-    @Attribute(name = "versao", required = true)
     private String versao;
 
-    @Element(name = "tpAmb", required = true)
     private NFAmbiente ambiente;
 
-    @Element(name = "verAplic", required = true)
     private String versaoAplicacao;
 
-    @Element(name = "cStat", required = true)
     private String status;
 
-    @Element(name = "xMotivo", required = true)
     private String motivo;
 
-    @Element(name = "cUF", required = true)
     private NFUnidadeFederativa uf;
 
-    @Element(name = "dhRecbto", required = true)
     private LocalDateTime dataHoraRecibo;
 
-    @Element(name = "chNFe", required = true)
     private String chave;
 
-    @Element(name = "protNFe", required = false)
     protected NFProtocolo protocolo;
 
-    @Element(name = "retCancNFe", required = false)
     private NFRetornoCancelamento protocoloCancelamento;
 
-    @ElementList(entry = "procEventoNFe", inline = true, required = false)
     private List<NFProtocoloEvento> protocoloEvento;
 
     public NFNotaConsultaRetorno() {

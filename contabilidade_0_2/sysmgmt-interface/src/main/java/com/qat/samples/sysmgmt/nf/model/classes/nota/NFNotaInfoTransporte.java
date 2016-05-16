@@ -1,38 +1,33 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
 import java.util.List;
 
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
-
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.classes.NFModalidadeFrete;
-import com.fincatto.nfe310.validadores.ListValidador;
-import com.fincatto.nfe310.validadores.StringValidador;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFModalidadeFrete;
 
 public class NFNotaInfoTransporte extends NFBase {
-    @Element(name = "modFrete", required = true)
+    //@Element(name = "modFrete", required = true)
     private NFModalidadeFrete modalidadeFrete;
 
-    @Element(name = "transporta", required = false)
+    //@Element(name = "transporta", required = false)
     private NFNotaInfoTransportador transportador;
 
-    @Element(name = "retTransp", required = false)
+    //@Element(name = "retTransp", required = false)
     private NFNotaInfoRetencaoICMSTransporte icmsTransporte;
 
-    @Element(name = "veicTransp", required = false)
+    //@Element(name = "veicTransp", required = false)
     private NFNotaInfoVeiculo veiculo;
 
-    @ElementList(entry = "reboque", inline = true, required = false)
+    //@ElementList(entry = "reboque", inline = true, required = false)
     private List<NFNotaInfoReboque> reboques;
 
-    @Element(name = "vagao", required = false)
+    //@Element(name = "vagao", required = false)
     private String vagao;
 
-    @Element(name = "balsa", required = false)
+    //@Element(name = "balsa", required = false)
     private String balsa;
 
-    @ElementList(entry = "vol", inline = true, required = false)
+    //@ElementList(entry = "vol", inline = true, required = false)
     private List<NFNotaInfoVolume> volumes;
 
     public void setModalidadeFrete(final NFModalidadeFrete modalidadeFrete) {
@@ -51,25 +46,25 @@ public class NFNotaInfoTransporte extends NFBase {
         this.veiculo = veiculo;
     }
 
-    public void setReboques(final List<NFNotaInfoReboque> reboques) {
-        ListValidador.tamanho5(reboques);
-        this.reboques = reboques;
-    }
-
-    public void setVolumes(final List<NFNotaInfoVolume> volumes) {
-        ListValidador.tamanho5000(volumes);
-        this.volumes = volumes;
-    }
-
-    public void setVagao(final String vagao) {
-        StringValidador.tamanho20(vagao);
-        this.vagao = vagao;
-    }
-
-    public void setBalsa(final String balsa) {
-        StringValidador.tamanho20(balsa);
-        this.balsa = balsa;
-    }
+//    public void setReboques(final List<NFNotaInfoReboque> reboques) {
+//        ListValidador.tamanho5(reboques);
+//        this.reboques = reboques;
+//    }
+//
+//    public void setVolumes(final List<NFNotaInfoVolume> volumes) {
+//        ListValidador.tamanho5000(volumes);
+//        this.volumes = volumes;
+//    }
+//
+//    public void setVagao(final String vagao) {
+//        StringValidador.tamanho20(vagao);
+//        this.vagao = vagao;
+//    }
+//
+//    public void setBalsa(final String balsa) {
+//        StringValidador.tamanho20(balsa);
+//        this.balsa = balsa;
+//    }
 
     public NFModalidadeFrete getModalidadeFrete() {
         return this.modalidadeFrete;

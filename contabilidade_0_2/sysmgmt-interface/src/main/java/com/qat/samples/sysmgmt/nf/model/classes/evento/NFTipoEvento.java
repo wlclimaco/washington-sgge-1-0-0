@@ -1,36 +1,30 @@
-package com.fincatto.nfe310.classes.evento;
+package com.qat.samples.sysmgmt.nf.model.classes.evento;
 
 import java.math.BigDecimal;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Root;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
 
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.validadores.BigDecimalParser;
-import com.fincatto.nfe310.validadores.StringValidador;
 
-@Root(strict = false)
 public class NFTipoEvento extends NFBase {
-    @Attribute(name = "versao", required = true)
+
     private String versao;
 
-    @Element(name = "descEvento", required = true)
+
     private String descricaoEvento;
 
     // Carta correcao
-    @Element(name = "xCorrecao", required = false)
+
     private String textoCorrecao;;
 
-    @Element(name = "xCondUso", required = false)
+
     private String condicaoUso;
 
     public void setVersao(final BigDecimal versao) {
-        this.versao = BigDecimalParser.tamanho5Com2CasasDecimais(versao);
+      //  this.versao = BigDecimalParser.tamanho5Com2CasasDecimais(versao);
     }
 
     public void setDescricaoEvento(final String descricaoEvento) {
-        StringValidador.tamanho5a60(descricaoEvento);
+      //  StringValidador.tamanho5a60(descricaoEvento);
         this.descricaoEvento = descricaoEvento;
     }
 

@@ -1,28 +1,20 @@
-package com.fincatto.nfe310.classes.statusservico.consulta;
+package com.qat.samples.sysmgmt.nf.model.classes.statusservico.consulta;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Namespace;
-import org.simpleframework.xml.Root;
+import com.qat.samples.sysmgmt.nf.model.classes.NFAmbiente;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFUnidadeFederativa;
 
-import com.fincatto.nfe310.classes.NFAmbiente;
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.classes.NFUnidadeFederativa;
-
-@Root(name = "consStatServ")
-@Namespace(reference = "http://www.portalfiscal.inf.br/nfe")
 public class NFStatusServicoConsulta extends NFBase {
 
-    @Attribute(name = "versao", required = true)
     private String versao;
 
-    @Element(name = "tpAmb", required = true)
+    //@Element(name = "tpAmb", required = true)
     private NFAmbiente ambiente;
 
-    @Element(name = "cUF", required = true)
+    //@Element(name = "cUF", required = true)
     private NFUnidadeFederativa uf;
 
-    @Element(name = "xServ", required = true)
+    //@Element(name = "xServ", required = true)
     private String servico;
 
     public NFStatusServicoConsulta() {

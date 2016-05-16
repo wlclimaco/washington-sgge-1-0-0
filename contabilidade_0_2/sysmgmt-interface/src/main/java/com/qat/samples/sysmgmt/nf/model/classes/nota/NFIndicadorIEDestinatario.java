@@ -1,4 +1,4 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
 public enum NFIndicadorIEDestinatario {
     CONTRIBUINTE_ICMS("1"),

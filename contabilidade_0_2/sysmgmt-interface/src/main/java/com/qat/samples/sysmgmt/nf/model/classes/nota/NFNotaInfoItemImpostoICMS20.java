@@ -1,43 +1,40 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
 import java.math.BigDecimal;
 
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.classes.NFNotaInfoImpostoTributacaoICMS;
-import com.fincatto.nfe310.classes.NFNotaInfoItemImpostoICMSModalidadeBaseCalculo;
-import com.fincatto.nfe310.classes.NFNotaMotivoDesoneracaoICMS;
-import com.fincatto.nfe310.classes.NFOrigem;
-import com.fincatto.nfe310.validadores.BigDecimalParser;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFNotaInfoImpostoTributacaoICMS;
+import com.qat.samples.sysmgmt.nf.model.classes.NFNotaInfoItemImpostoICMSModalidadeBaseCalculo;
+import com.qat.samples.sysmgmt.nf.model.classes.NFNotaMotivoDesoneracaoICMS;
+import com.qat.samples.sysmgmt.nf.model.classes.NFOrigem;
 
 public class NFNotaInfoItemImpostoICMS20 extends NFBase {
 
-    @Element(name = "orig", required = true)
+    //@Element(name = "orig", required = true)
     private NFOrigem origem;
 
-    @Element(name = "CST", required = true)
+    //@Element(name = "CST", required = true)
     private NFNotaInfoImpostoTributacaoICMS situacaoTributaria;
 
-    @Element(name = "modBC", required = true)
+    //@Element(name = "modBC", required = true)
     private NFNotaInfoItemImpostoICMSModalidadeBaseCalculo modalidadeBaseCalculo;
 
-    @Element(name = "pRedBC", required = true)
+    //@Element(name = "pRedBC", required = true)
     private String percentualReducaoBC;
 
-    @Element(name = "vBC", required = true)
+    //@Element(name = "vBC", required = true)
     private String valorBCICMS;
 
-    @Element(name = "pICMS", required = true)
+    //@Element(name = "pICMS", required = true)
     private String percentualAliquota;
 
-    @Element(name = "vICMS", required = true)
+    //@Element(name = "vICMS", required = true)
     private String valorTributo;
 
-    @Element(name = "vICMSDeson", required = false)
+    //@Element(name = "vICMSDeson", required = false)
     private String valorICMSDesoneracao;
 
-    @Element(name = "motDesICMS", required = false)
+    //@Element(name = "motDesICMS", required = false)
     private NFNotaMotivoDesoneracaoICMS desoneracao;
 
     public void setOrigem(final NFOrigem origem) {
@@ -52,29 +49,29 @@ public class NFNotaInfoItemImpostoICMS20 extends NFBase {
         this.modalidadeBaseCalculo = modalidadeBaseCalculo;
     }
 
-    public void setPercentualReducaoBC(final BigDecimal percentualReducaoBC) {
-        this.percentualReducaoBC = BigDecimalParser.tamanho7ComAte4CasasDecimais(percentualReducaoBC);
-    }
-
-    public void setValorBCICMS(final BigDecimal valorBCICMS) {
-        this.valorBCICMS = BigDecimalParser.tamanho15Com2CasasDecimais(valorBCICMS);
-    }
-
-    public void setPercentualAliquota(final BigDecimal aliquota) {
-        this.percentualAliquota = BigDecimalParser.tamanho5Com2CasasDecimais(aliquota);
-    }
-
-    public void setValorTributo(final BigDecimal valorTributo) {
-        this.valorTributo = BigDecimalParser.tamanho15Com2CasasDecimais(valorTributo);
-    }
-
-    public void setDesoneracao(final NFNotaMotivoDesoneracaoICMS outros) {
-        this.desoneracao = outros;
-    }
-
-    public void setValorICMSDesoneracao(final BigDecimal valorICMSDesoneracao) {
-        this.valorICMSDesoneracao = BigDecimalParser.tamanho15Com2CasasDecimais(valorICMSDesoneracao);
-    }
+//    public void setPercentualReducaoBC(final BigDecimal percentualReducaoBC) {
+//        this.percentualReducaoBC = BigDecimalParser.tamanho7ComAte4CasasDecimais(percentualReducaoBC);
+//    }
+//
+//    public void setValorBCICMS(final BigDecimal valorBCICMS) {
+//        this.valorBCICMS = BigDecimalParser.tamanho15Com2CasasDecimais(valorBCICMS);
+//    }
+//
+//    public void setPercentualAliquota(final BigDecimal aliquota) {
+//        this.percentualAliquota = BigDecimalParser.tamanho5Com2CasasDecimais(aliquota);
+//    }
+//
+//    public void setValorTributo(final BigDecimal valorTributo) {
+//        this.valorTributo = BigDecimalParser.tamanho15Com2CasasDecimais(valorTributo);
+//    }
+//
+//    public void setDesoneracao(final NFNotaMotivoDesoneracaoICMS outros) {
+//        this.desoneracao = outros;
+//    }
+//
+//    public void setValorICMSDesoneracao(final BigDecimal valorICMSDesoneracao) {
+//        this.valorICMSDesoneracao = BigDecimalParser.tamanho15Com2CasasDecimais(valorICMSDesoneracao);
+//    }
 
     public NFOrigem getOrigem() {
         return this.origem;

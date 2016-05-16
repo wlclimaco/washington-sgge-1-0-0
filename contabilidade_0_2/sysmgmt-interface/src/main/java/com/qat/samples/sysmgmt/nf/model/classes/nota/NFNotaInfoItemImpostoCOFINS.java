@@ -1,21 +1,19 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
 
 public class NFNotaInfoItemImpostoCOFINS extends NFBase {
 
-    @Element(name = "COFINSAliq", required = false)
+    //@Element(name = "COFINSAliq", required = false)
     private NFNotaInfoItemImpostoCOFINSAliquota aliquota;
 
-    @Element(name = "COFINSQtde", required = false)
+    //@Element(name = "COFINSQtde", required = false)
     private NFNotaInfoItemImpostoCOFINSQuantidade quantidade;
 
-    @Element(name = "COFINSNT", required = false)
+    //@Element(name = "COFINSNT", required = false)
     private NFNotaInfoItemImpostoCOFINSNaoTributavel naoTributavel;
 
-    @Element(name = "COFINSOutr", required = false)
+    //@Element(name = "COFINSOutr", required = false)
     private NFNotaInfoItemImpostoCOFINSOutrasOperacoes outrasOperacoes;
 
     public void setAliquota(final NFNotaInfoItemImpostoCOFINSAliquota aliquota) {

@@ -1,13 +1,11 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.classes.NFNotaInfoSituacaoTributariaCOFINS;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFNotaInfoSituacaoTributariaCOFINS;
 
 public class NFNotaInfoItemImpostoCOFINSNaoTributavel extends NFBase {
 
-    @Element(name = "CST", required = true)
+    //@Element(name = "CST", required = true)
     private NFNotaInfoSituacaoTributariaCOFINS situacaoTributaria;
 
     public NFNotaInfoItemImpostoCOFINSNaoTributavel() {

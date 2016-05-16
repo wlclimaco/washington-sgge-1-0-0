@@ -1,33 +1,28 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
-import java.math.BigDecimal;
-
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.classes.NFNotaInfoImpostoTributacaoICMS;
-import com.fincatto.nfe310.classes.NFNotaInfoItemImpostoICMSModalidadeBaseCalculo;
-import com.fincatto.nfe310.classes.NFOrigem;
-import com.fincatto.nfe310.validadores.BigDecimalParser;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFNotaInfoImpostoTributacaoICMS;
+import com.qat.samples.sysmgmt.nf.model.classes.NFNotaInfoItemImpostoICMSModalidadeBaseCalculo;
+import com.qat.samples.sysmgmt.nf.model.classes.NFOrigem;
 
 public class NFNotaInfoItemImpostoICMS00 extends NFBase {
 
-    @Element(name = "orig", required = true)
+    //@Element(name = "orig", required = true)
     private NFOrigem origem;
 
-    @Element(name = "CST", required = true)
+    //@Element(name = "CST", required = true)
     private NFNotaInfoImpostoTributacaoICMS situacaoTributaria;
 
-    @Element(name = "modBC", required = true)
+    //@Element(name = "modBC", required = true)
     private NFNotaInfoItemImpostoICMSModalidadeBaseCalculo modalidadeBaseCalculo;
 
-    @Element(name = "vBC", required = true)
+    //@Element(name = "vBC", required = true)
     private String valorBaseCalculo;
 
-    @Element(name = "pICMS", required = true)
+    //@Element(name = "pICMS", required = true)
     private String percentualAliquota;
 
-    @Element(name = "vICMS", required = true)
+    //@Element(name = "vICMS", required = true)
     private String valorTributo;
 
     public void setOrigem(final NFOrigem origem) {
@@ -45,17 +40,17 @@ public class NFNotaInfoItemImpostoICMS00 extends NFBase {
         this.modalidadeBaseCalculo = modalidadeBaseCalculo;
     }
 
-    public void setValorBaseCalculo(final BigDecimal valorBaseCalculo) {
-        this.valorBaseCalculo = BigDecimalParser.tamanho15Com2CasasDecimais(valorBaseCalculo);
-    }
-
-    public void setPercentualAliquota(final BigDecimal aliquota) {
-        this.percentualAliquota = BigDecimalParser.tamanho7ComAte4CasasDecimais(aliquota);
-    }
-
-    public void setValorTributo(final BigDecimal valorTributo) {
-        this.valorTributo = BigDecimalParser.tamanho15Com2CasasDecimais(valorTributo);
-    }
+//    public void setValorBaseCalculo(final BigDecimal valorBaseCalculo) {
+//        this.valorBaseCalculo = BigDecimalParser.tamanho15Com2CasasDecimais(valorBaseCalculo);
+//    }
+//
+//    public void setPercentualAliquota(final BigDecimal aliquota) {
+//        this.percentualAliquota = BigDecimalParser.tamanho7ComAte4CasasDecimais(aliquota);
+//    }
+//
+//    public void setValorTributo(final BigDecimal valorTributo) {
+//        this.valorTributo = BigDecimalParser.tamanho15Com2CasasDecimais(valorTributo);
+//    }
 
     public NFOrigem getOrigem() {
         return this.origem;

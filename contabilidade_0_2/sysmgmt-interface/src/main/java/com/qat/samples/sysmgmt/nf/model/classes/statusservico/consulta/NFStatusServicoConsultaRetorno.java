@@ -1,47 +1,42 @@
-package com.fincatto.nfe310.classes.statusservico.consulta;
+package com.qat.samples.sysmgmt.nf.model.classes.statusservico.consulta;
 
-import org.joda.time.LocalDateTime;
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Namespace;
-import org.simpleframework.xml.Root;
+import java.time.LocalDateTime;
 
-import com.fincatto.nfe310.classes.NFAmbiente;
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.classes.NFUnidadeFederativa;
+import com.qat.samples.sysmgmt.nf.model.classes.NFAmbiente;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFUnidadeFederativa;
 
-@Root(name = "retConsStatServ")
-@Namespace(reference = "http://www.portalfiscal.inf.br/nfe")
+
 public class NFStatusServicoConsultaRetorno extends NFBase {
 
-    @Attribute(name = "versao", required = true)
+  //  @Attribute(name = "versao", required = true)
     private String versao;
 
-    @Element(name = "tpAmb", required = true)
+    //@Element(name = "tpAmb", required = true)
     private NFAmbiente ambiente;
 
-    @Element(name = "verAplic", required = true)
+    //@Element(name = "verAplic", required = true)
     private String versaoAplicacao;
 
-    @Element(name = "cStat", required = true)
+    //@Element(name = "cStat", required = true)
     private String status;
 
-    @Element(name = "xMotivo", required = true)
+    //@Element(name = "xMotivo", required = true)
     private String motivo;
 
-    @Element(name = "cUF", required = true)
+    //@Element(name = "cUF", required = true)
     private NFUnidadeFederativa uf;
 
-    @Element(name = "dhRecbto", required = true)
+    //@Element(name = "dhRecbto", required = true)
     private LocalDateTime dataRecebimento;
 
-    @Element(name = "dhRetorno", required = false)
+    //@Element(name = "dhRetorno", required = false)
     private LocalDateTime dataRetorno;
 
-    @Element(name = "xObs", required = false)
+    //@Element(name = "xObs", required = false)
     private String observacao;
 
-    @Element(name = "tMed", required = true)
+    //@Element(name = "tMed", required = true)
     private String tempoMedio;
 
     public NFStatusServicoConsultaRetorno() {

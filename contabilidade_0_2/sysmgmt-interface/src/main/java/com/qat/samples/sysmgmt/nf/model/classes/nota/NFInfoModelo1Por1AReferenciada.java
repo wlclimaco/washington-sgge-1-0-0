@@ -1,29 +1,25 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.classes.NFUnidadeFederativa;
-import com.fincatto.nfe310.validadores.IntegerValidador;
-import com.fincatto.nfe310.validadores.StringValidador;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFUnidadeFederativa;
 
 public class NFInfoModelo1Por1AReferenciada extends NFBase {
-    @Element(name = "cUF", required = true)
+
     private NFUnidadeFederativa uf;
 
-    @Element(name = "AAMM", required = true)
+
     private String anoMesEmissaoNFe;
 
-    @Element(name = "CNPJ", required = true)
+
     private String cnpj;
 
-    @Element(name = "mod", required = true)
+
     private String modeloDocumentoFiscal;
 
-    @Element(name = "serie", required = true)
+
     private Integer serie;
 
-    @Element(name = "nNF", required = false)
+
     private String numeroDocumentoFiscal;
 
     public void setUf(final NFUnidadeFederativa uf) {
@@ -31,27 +27,27 @@ public class NFInfoModelo1Por1AReferenciada extends NFBase {
     }
 
     public void setAnoMesEmissaoNFe(final String anoMesEmissaoNFe) {
-        StringValidador.aamm(anoMesEmissaoNFe);
+    //    StringValidador.aamm(anoMesEmissaoNFe);
         this.anoMesEmissaoNFe = anoMesEmissaoNFe;
     }
 
     public void setCnpj(final String cnpj) {
-        StringValidador.cnpj(cnpj);
+     //   StringValidador.cnpj(cnpj);
         this.cnpj = cnpj;
     }
 
     public void setModeloDocumentoFiscal(final String modeloDocumentoFiscal) {
-        StringValidador.exatamente2(modeloDocumentoFiscal);
+     //   StringValidador.exatamente2(modeloDocumentoFiscal);
         this.modeloDocumentoFiscal = modeloDocumentoFiscal;
     }
 
     public void setSerie(final Integer serie) {
-        IntegerValidador.tamanho3(serie);
+     //   IntegerValidador.tamanho3(serie);
         this.serie = serie;
     }
 
     public void setNumeroDocumentoFiscal(final String numeroDocumentoFiscal) {
-        StringValidador.tamanho9(numeroDocumentoFiscal);
+     //   StringValidador.tamanho9(numeroDocumentoFiscal);
         this.numeroDocumentoFiscal = numeroDocumentoFiscal;
     }
 

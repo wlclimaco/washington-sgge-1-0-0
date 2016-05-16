@@ -1,14 +1,11 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
 import java.math.BigDecimal;
 
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.validadores.BigDecimalParser;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
 
 public class NFInformacaoImpostoDevolvido extends NFBase {
-    @Element(name = "vIPIDevol", required = true)
+    //@Element(name = "vIPIDevol", required = true)
     private String valorIPIDevolvido;
 
     public String getValorIPIDevolvido() {
@@ -16,7 +13,7 @@ public class NFInformacaoImpostoDevolvido extends NFBase {
     }
 
     public void setValorIPIDevolvido(final BigDecimal valorIPIDevolvido) {
-        this.valorIPIDevolvido = BigDecimalParser.tamanho15Com2CasasDecimais(valorIPIDevolvido);
+      //  this.valorIPIDevolvido = BigDecimalParser.tamanho15Com2CasasDecimais(valorIPIDevolvido);
     }
 
 }

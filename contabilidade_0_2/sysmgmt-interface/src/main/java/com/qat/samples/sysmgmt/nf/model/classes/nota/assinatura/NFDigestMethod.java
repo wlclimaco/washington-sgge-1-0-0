@@ -1,10 +1,6 @@
-package com.fincatto.nfe310.classes.nota.assinatura;
-
-import org.simpleframework.xml.Attribute;
+package com.qat.samples.sysmgmt.nf.model.classes.nota.assinatura;
 
 public class NFDigestMethod {
-
-	@Attribute(name = "Algorithm", required = false)
     private String algorithm;
 
 	public String getAlgorithm() {
@@ -14,5 +10,5 @@ public class NFDigestMethod {
 	public void setAlgorithm(String algorithm) {
 		this.algorithm = algorithm;
 	}
-	
+
 }

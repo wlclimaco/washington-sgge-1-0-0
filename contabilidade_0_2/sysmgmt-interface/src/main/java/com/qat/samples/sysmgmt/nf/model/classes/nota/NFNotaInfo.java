@@ -1,77 +1,64 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
-import org.simpleframework.xml.Namespace;
-import org.simpleframework.xml.Root;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
 
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.validadores.BigDecimalParser;
-import com.fincatto.nfe310.validadores.ListValidador;
-import com.fincatto.nfe310.validadores.StringValidador;
-
-@Root(name = "infNFe")
-@Namespace(reference = "http://www.portalfiscal.inf.br/nfe")
 public class NFNotaInfo extends NFBase {
 
 	public static final String IDENT = "NFe";
 
-	@Attribute(name = "Id", required = true)
 	private String identificador;
 
-	@Attribute(name = "versao", required = true)
 	private String versao;
 
-	@Element(name = "ide", required = true)
+	////////@Element(name = "ide", required = true)
 	private NFNotaInfoIdentificacao identificacao;
 
-	@Element(name = "emit", required = true)
+	////////@Element(name = "emit", required = true)
 	private NFNotaInfoEmitente emitente;
 
-	@Element(name = "avulsa", required = false)
+	////////@Element(name = "avulsa", required = false)
 	private NFNotaInfoAvulsa avulsa;
 
-	@Element(name = "dest", required = false)
+	////////@Element(name = "dest", required = false)
 	private NFNotaInfoDestinatario destinatario;
 
-	@Element(name = "retirada", required = false)
+	////////@Element(name = "retirada", required = false)
 	private NFNotaInfoLocal retirada;
 
-	@Element(name = "entrega", required = false)
+	////////@Element(name = "entrega", required = false)
 	private NFNotaInfoLocal entrega;
 
-	@ElementList(entry = "autXML", inline = true, required = false)
+	////////@ElementList(entry = "autXML", inline = true, required = false)
 	private List<NFPessoaAutorizadaDownloadNFe> pessoasAutorizadasDownloadNFe;
 
-	@ElementList(entry = "det", inline = true, required = true)
+	////////@ElementList(entry = "det", inline = true, required = true)
 	private List<NFNotaInfoItem> itens;
 
-	@Element(name = "total", required = true)
+	//////////@Element(name = "total", required = true)
 	private NFNotaInfoTotal total;
 
-	@Element(name = "transp", required = true)
+	//////////@Element(name = "transp", required = true)
 	private NFNotaInfoTransporte transporte;
 
-	@Element(name = "cobr", required = false)
+	////////@Element(name = "cobr", required = false)
 	private NFNotaInfoCobranca cobranca;
 
-	@ElementList(entry = "pag", inline = true, required = false)
+	//////@ElementList(entry = "pag", inline = true, required = false)
 	private List<NFNotaInfoPagamento> pagamentos;
 
-	@Element(name = "infAdic", required = false)
+	////////@Element(name = "infAdic", required = false)
 	private NFNotaInfoInformacoesAdicionais informacoesAdicionais;
 
-	@Element(name = "exporta", required = false)
+	////////@Element(name = "exporta", required = false)
 	private NFNotaInfoExportacao exportacao;
 
-	@Element(name = "compra", required = false)
+	////////@Element(name = "compra", required = false)
 	private NFNotaInfoCompra compra;
 
-	@Element(name = "cana", required = false)
+	////////@Element(name = "cana", required = false)
 	private NFNotaInfoCana cana;
 
 	/**
@@ -83,18 +70,18 @@ public class NFNotaInfo extends NFBase {
 		return this.identificador.replace(NFNotaInfo.IDENT, "");
 	}
 
-	public void setIdentificador(final String identificador) {
-		StringValidador.exatamente44N(identificador);
-		this.identificador = NFNotaInfo.IDENT + identificador;
-	}
-
-	public String getIdentificador() {
-		return this.identificador;
-	}
-
-	public void setVersao(final BigDecimal versao) {
-		this.versao = BigDecimalParser.tamanho4Com2CasasDecimais(versao);
-	}
+//	public void setIdentificador(final String identificador) {
+//		StringValidador.exatamente44N(identificador);
+//		this.identificador = NFNotaInfo.IDENT + identificador;
+//	}
+//
+//	public String getIdentificador() {
+//		return this.identificador;
+//	}
+//
+//	public void setVersao(final BigDecimal versao) {
+//		this.versao = BigDecimalParser.tamanho4Com2CasasDecimais(versao);
+//	}
 
 	public NFNotaInfoIdentificacao getIdentificacao() {
 		return this.identificacao;
@@ -120,10 +107,10 @@ public class NFNotaInfo extends NFBase {
 		this.destinatario = destinatario;
 	}
 
-	public void setItens(final List<NFNotaInfoItem> itens) {
-		ListValidador.tamanho990(itens);
-		this.itens = itens;
-	}
+//	public void setItens(final List<NFNotaInfoItem> itens) {
+//		ListValidador.tamanho990(itens);
+//		this.itens = itens;
+//	}
 
 	public void setRetirada(final NFNotaInfoLocal retirada) {
 		this.retirada = retirada;
@@ -161,15 +148,15 @@ public class NFNotaInfo extends NFBase {
 		this.cana = cana;
 	}
 
-	public void setPessoasAutorizadasDownloadNFe(final List<NFPessoaAutorizadaDownloadNFe> pessoasAutorizadasDownloadNFe) {
-		ListValidador.tamanho10(pessoasAutorizadasDownloadNFe);
-		this.pessoasAutorizadasDownloadNFe = pessoasAutorizadasDownloadNFe;
-	}
-
-	public void setPagamentos(final List<NFNotaInfoPagamento> pagamentos) {
-		ListValidador.tamanho100(pagamentos);
-		this.pagamentos = pagamentos;
-	}
+//	public void setPessoasAutorizadasDownloadNFe(final List<NFPessoaAutorizadaDownloadNFe> pessoasAutorizadasDownloadNFe) {
+//		ListValidador.tamanho10(pessoasAutorizadasDownloadNFe);
+//		this.pessoasAutorizadasDownloadNFe = pessoasAutorizadasDownloadNFe;
+//	}
+//
+//	public void setPagamentos(final List<NFNotaInfoPagamento> pagamentos) {
+//		ListValidador.tamanho100(pagamentos);
+//		this.pagamentos = pagamentos;
+//	}
 
 	public String getVersao() {
 		return this.versao;

@@ -1,18 +1,13 @@
-package com.fincatto.nfe310.classes.nota.assinatura;
+package com.qat.samples.sysmgmt.nf.model.classes.nota.assinatura;
 
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
 
 public class NFSignedInfo extends NFBase {
 
-    @Element(name = "CanonicalizationMethod", required = false)
     private NFCanonicalizationMethod canonicalizationMethod;
 
-    @Element(name = "SignatureMethod", required = false)
     private NFSignatureMethod signatureMethod;
 
-    @Element(name = "Reference", required = false)
     private NFReference reference;
 
     public NFCanonicalizationMethod getCanonicalizationMethod() {

@@ -1,32 +1,28 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
 import java.math.BigDecimal;
 
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.classes.NFUnidadeFederativa;
-import com.fincatto.nfe310.validadores.BigDecimalParser;
-import com.fincatto.nfe310.validadores.StringValidador;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFUnidadeFederativa;
 
 public class NFNotaInfoItemProdutoCombustivel extends NFBase {
 
-    @Element(name = "cProdANP", required = true)
+    //@Element(name = "cProdANP", required = true)
     private String codigoProdutoANP;
 
-    @Element(name = "pMixGN", required = false)
+    //@Element(name = "pMixGN", required = false)
     private String percentualGasNatural;
 
-    @Element(name = "CODIF", required = false)
+    //@Element(name = "CODIF", required = false)
     private String codigoAutorizacaoCOFIF;
 
-    @Element(name = "qTemp", required = false)
+    //@Element(name = "qTemp", required = false)
     private String quantidade;
 
-    @Element(name = "UFCons", required = true)
+    //@Element(name = "UFCons", required = true)
     private String uf;
 
-    @Element(name = "CIDE", required = false)
+    //@Element(name = "CIDE", required = false)
     private NFNotaInfoItemProdutoCombustivelCIDE cide;
 
     public NFNotaInfoItemProdutoCombustivel() {
@@ -37,19 +33,19 @@ public class NFNotaInfoItemProdutoCombustivel extends NFBase {
         this.cide = null;
     }
 
-    public void setCodigoProdutoANP(final String codigoProdutoANP) {
-        StringValidador.exatamente9(codigoProdutoANP);
-        this.codigoProdutoANP = codigoProdutoANP;
-    }
-
-    public void setCodigoAutorizacaoCODIF(final String codigoAutorizacaoCOFIF) {
-        StringValidador.tamanho21(codigoAutorizacaoCOFIF);
-        this.codigoAutorizacaoCOFIF = codigoAutorizacaoCOFIF;
-    }
-
-    public void setQuantidade(final BigDecimal quantidade) {
-        this.quantidade = BigDecimalParser.tamanho16Com4CasasDecimais(quantidade);
-    }
+//    public void setCodigoProdutoANP(final String codigoProdutoANP) {
+//        StringValidador.exatamente9(codigoProdutoANP);
+//        this.codigoProdutoANP = codigoProdutoANP;
+//    }
+//
+//    public void setCodigoAutorizacaoCODIF(final String codigoAutorizacaoCOFIF) {
+//        StringValidador.tamanho21(codigoAutorizacaoCOFIF);
+//        this.codigoAutorizacaoCOFIF = codigoAutorizacaoCOFIF;
+//    }
+//
+//    public void setQuantidade(final BigDecimal quantidade) {
+//        this.quantidade = BigDecimalParser.tamanho16Com4CasasDecimais(quantidade);
+//    }
 
     public void setUf(final NFUnidadeFederativa uf) {
         this.uf = uf.getCodigo();
@@ -59,9 +55,9 @@ public class NFNotaInfoItemProdutoCombustivel extends NFBase {
         this.cide = cide;
     }
 
-    public void setPercentualGasNatural(final BigDecimal percentualGasNatural) {
-        this.percentualGasNatural = BigDecimalParser.tamanho5Com2CasasDecimais(percentualGasNatural);
-    }
+//    public void setPercentualGasNatural(final BigDecimal percentualGasNatural) {
+//        this.percentualGasNatural = BigDecimalParser.tamanho5Com2CasasDecimais(percentualGasNatural);
+//    }
 
     public String getCodigoProdutoANP() {
         return this.codigoProdutoANP;

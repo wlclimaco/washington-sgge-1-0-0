@@ -1,23 +1,20 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.classes.NFUnidadeFederativa;
-import com.fincatto.nfe310.validadores.StringValidador;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFUnidadeFederativa;
 
 public class NFNotaInfoReboque extends NFBase {
-    @Element(name = "placa", required = true)
+    //@Element(name = "placa", required = true)
     private String placaVeiculo;
 
-    @Element(name = "UF", required = true)
+    //@Element(name = "UF", required = true)
     private String uf;
 
-    @Element(name = "RNTC", required = false)
+    //@Element(name = "RNTC", required = false)
     private String registroNacionalTransportadorCarga;
 
     public void setPlacaVeiculo(final String placaVeiculo) {
-        StringValidador.placaDeVeiculo(placaVeiculo);
+   //     StringValidador.placaDeVeiculo(placaVeiculo);
         this.placaVeiculo = placaVeiculo;
     }
 
@@ -26,7 +23,7 @@ public class NFNotaInfoReboque extends NFBase {
     }
 
     public void setRegistroNacionalTransportadorCarga(final String registroNacionalTransportadorCarga) {
-        StringValidador.tamanho20(registroNacionalTransportadorCarga);
+   //     StringValidador.tamanho20(registroNacionalTransportadorCarga);
         this.registroNacionalTransportadorCarga = registroNacionalTransportadorCarga;
     }
 

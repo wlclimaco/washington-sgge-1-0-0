@@ -1,24 +1,17 @@
 package com.qat.samples.sysmgmt.nf.model.classes.cadastro;
 
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.validadores.StringValidador;
-import org.simpleframework.xml.Element;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
 
 public class NFInfoConsultaCadastro extends NFBase {
 
-    @Element(name = "xServ", required = true)
     private String servico;
 
-    @Element(name = "UF", required = true)
     private String uf;
 
-    @Element(name = "IE", required = false)
     private String inscricaoEstadual;
 
-    @Element(name = "CNPJ", required = false)
     private String cnpj;
 
-    @Element(name = "CPF", required = false)
     private String cpf;
 
     public String getServico() {
@@ -49,25 +42,25 @@ public class NFInfoConsultaCadastro extends NFBase {
         return this.cnpj;
     }
 
-    public void setCnpj(final String cnpj) {
-        if (this.cpf != null) {
-            throw new IllegalStateException("Nao pode setar CPF pois CNPJ ja esta setado");
-        }
-
-        StringValidador.cnpj(cnpj);
-        this.cnpj = cnpj;
-    }
+//    public void setCnpj(final String cnpj) {
+//        if (this.cpf != null) {
+//            throw new IllegalStateException("Nao pode setar CPF pois CNPJ ja esta setado");
+//        }
+//
+//        StringValidador.cnpj(cnpj);
+//        this.cnpj = cnpj;
+//    }
 
     public String getCpf() {
         return this.cpf;
     }
 
-    public void setCpf(final String cpf) {
-        if (this.cnpj != null) {
-            throw new IllegalStateException("Nao pode setar CPF pois CNPJ ja esta setado");
-        }
-
-        StringValidador.cpf(cpf);
-        this.cpf = cpf;
-    }
+//    public void setCpf(final String cpf) {
+//        if (this.cnpj != null) {
+//            throw new IllegalStateException("Nao pode setar CPF pois CNPJ ja esta setado");
+//        }
+//
+//        StringValidador.cpf(cpf);
+//        this.cpf = cpf;
+//    }
 }

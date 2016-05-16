@@ -1,21 +1,18 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
 import java.math.BigDecimal;
 
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.validadores.BigDecimalParser;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
 
 public class NFNotaInfoItemProdutoCombustivelCIDE extends NFBase {
 
-    @Element(name = "qBCProd", required = true)
+    //@Element(name = "qBCProd", required = true)
     private String quantidadeBCCIDE;
 
-    @Element(name = "vAliqProd", required = true)
+    //@Element(name = "vAliqProd", required = true)
     private String valorAliquota;
 
-    @Element(name = "vCIDE", required = true)
+    //@Element(name = "vCIDE", required = true)
     private String valor;
 
     public NFNotaInfoItemProdutoCombustivelCIDE() {
@@ -24,17 +21,17 @@ public class NFNotaInfoItemProdutoCombustivelCIDE extends NFBase {
         this.valor = null;
     }
 
-    public void setQuantidadeBCCIDE(final BigDecimal quantidade) {
-        this.quantidadeBCCIDE = BigDecimalParser.tamanho16Com4CasasDecimais(quantidade);
-    }
-
-    public void setValorAliquota(final BigDecimal valorAliquota) {
-        this.valorAliquota = BigDecimalParser.tamanho15Com4CasasDecimais(valorAliquota);
-    }
-
-    public void setValor(final BigDecimal valor) {
-        this.valor = BigDecimalParser.tamanho15Com2CasasDecimais(valor);
-    }
+//    public void setQuantidadeBCCIDE(final BigDecimal quantidade) {
+//        this.quantidadeBCCIDE = BigDecimalParser.tamanho16Com4CasasDecimais(quantidade);
+//    }
+//
+//    public void setValorAliquota(final BigDecimal valorAliquota) {
+//        this.valorAliquota = BigDecimalParser.tamanho15Com4CasasDecimais(valorAliquota);
+//    }
+//
+//    public void setValor(final BigDecimal valor) {
+//        this.valor = BigDecimalParser.tamanho15Com2CasasDecimais(valor);
+//    }
 
     public String getQuantidadeBCCIDE() {
         return this.quantidadeBCCIDE;

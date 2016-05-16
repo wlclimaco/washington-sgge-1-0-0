@@ -1,18 +1,16 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
 
 public class NFNotaInfoTotal extends NFBase {
 
-    @Element(name = "ICMSTot", required = true)
+    //@Element(name = "ICMSTot", required = true)
     private NFNotaInfoICMSTotal icmsTotal;
 
-    @Element(name = "ISSQNtot", required = false)
+    //@Element(name = "ISSQNtot", required = false)
     private NFNotaInfoISSQNTotal issqnTotal;
 
-    @Element(name = "retTrib", required = false)
+    //@Element(name = "retTrib", required = false)
     private NFNotaInfoRetencoesTributos retencoesTributos;
 
     public void setIcmsTotal(final NFNotaInfoICMSTotal icmsTotal) {

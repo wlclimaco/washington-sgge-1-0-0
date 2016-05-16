@@ -1,39 +1,27 @@
 package com.qat.samples.sysmgmt.nf.model.classes;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 
-import org.joda.time.LocalDateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class NFProtocoloInfo extends NFBase {
 
-    @Attribute(name = "Id", required = false)
     private String identificador;
 
-    @Element(name = "tpAmb", required = true)
     private NFAmbiente ambiente;
 
-    @Element(name = "verAplic", required = true)
     private String versaoAplicacao;
 
-    @Element(name = "chNFe", required = true)
     private String chave;
 
-    @Element(name = "dhRecbto", required = true)
     private String dataRecebimento;
 
-    @Element(name = "nProt", required = false)
     private String numeroProtocolo;
 
-    @Element(name = "digVal", required = false)
     private String validador;
-
-    @Element(name = "cStat", required = true)
     private String status;
 
-    @Element(name = "xMotivo", required = true)
     private String motivo;
 
     public void setAmbiente(final NFAmbiente ambiente) {
@@ -80,13 +68,13 @@ public class NFProtocoloInfo extends NFBase {
         return this.chave;
     }
 
-    public LocalDateTime getDataRecebimento() throws Exception {
-        try {
-            return LocalDateTime.parse(this.dataRecebimento, DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss"));
-        } catch (final Exception e) {
-            return LocalDateTime.fromDateFields(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX").parse(this.dataRecebimento));
-        }
-    }
+//    public LocalDateTime getDataRecebimento() throws Exception {
+//        try {
+//            return LocalDateTime.parse(this.dataRecebimento, DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss"));
+//        } catch (final Exception e) {
+//            return LocalDateTime.fromDateFields(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX").parse(this.dataRecebimento));
+//        }
+//    }
 
     public String getNumeroProtocolo() {
         return this.numeroProtocolo;

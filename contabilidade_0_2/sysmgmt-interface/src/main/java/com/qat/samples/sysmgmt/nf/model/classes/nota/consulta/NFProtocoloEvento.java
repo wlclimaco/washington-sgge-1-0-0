@@ -1,21 +1,15 @@
-package com.fincatto.nfe310.classes.nota.consulta;
+package com.qat.samples.sysmgmt.nf.model.classes.nota.consulta;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.classes.evento.NFEvento;
-import com.fincatto.nfe310.classes.evento.NFEventoRetorno;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.evento.NFEvento;
+import com.qat.samples.sysmgmt.nf.model.classes.evento.NFEventoRetorno;
 
 public class NFProtocoloEvento extends NFBase {
 
-    @Attribute(name = "versao", required = true)
     private String versao;
 
-    @Element(name = "evento", required = true)
     private NFEvento evento;
 
-    @Element(name = "retEvento", required = true)
     private NFEventoRetorno eventoRetorno;
 
     public NFEvento getEvento() {

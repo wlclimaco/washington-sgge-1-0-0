@@ -1,42 +1,40 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
 import org.apache.commons.lang3.StringUtils;
-import org.simpleframework.xml.Element;
 
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.classes.NFEndereco;
-import com.fincatto.nfe310.validadores.StringValidador;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFEndereco;
 
 public class NFNotaInfoDestinatario extends NFBase {
 
-	@Element(name = "CNPJ", required = false)
+	//@Element(name = "CNPJ", required = false)
 	private String cnpj;
 
-	@Element(name = "CPF", required = false)
+	//@Element(name = "CPF", required = false)
 	private String cpf;
 
-	@Element(name = "idEstrangeiro", required = false)
+	//@Element(name = "idEstrangeiro", required = false)
 	private String idEstrangeiro;
 
-	@Element(name = "xNome", required = false)
+	//@Element(name = "xNome", required = false)
 	private String razaoSocial;
 
-	@Element(name = "enderDest", required = false)
+	//@Element(name = "enderDest", required = false)
 	private NFEndereco endereco;
 
-	@Element(name = "indIEDest", required = true)
+	//@Element(name = "indIEDest", required = true)
 	private NFIndicadorIEDestinatario indicadorIEDestinatario;
 
-	@Element(name = "IE", required = false)
+	//@Element(name = "IE", required = false)
 	private String inscricaoEstadual;
 
-	@Element(name = "ISUF", required = false)
+	//@Element(name = "ISUF", required = false)
 	private String inscricaoSuframa;
 
-	@Element(name = "IM", required = false)
+	//@Element(name = "IM", required = false)
 	private String inscricaoMunicipal;
 
-	@Element(name = "email", required = false)
+	//@Element(name = "email", required = false)
 	private String email;
 
 	public String getCnpj() {
@@ -47,7 +45,7 @@ public class NFNotaInfoDestinatario extends NFBase {
 		if (this.cpf != null) {
 			throw new IllegalStateException("Nao deve setar CNPJ se CPF esteja setado");
 		}
-		StringValidador.cnpj(cnpj);
+	//	StringValidador.cnpj(cnpj);
 		this.cnpj = cnpj;
 	}
 
@@ -55,7 +53,7 @@ public class NFNotaInfoDestinatario extends NFBase {
 		if (this.cnpj != null) {
 			throw new IllegalStateException("Nao deve setar CPF se CNPJ esteja setado");
 		}
-		StringValidador.cpf(cpf);
+	//	StringValidador.cpf(cpf);
 		this.cpf = cpf;
 	}
 
@@ -73,7 +71,7 @@ public class NFNotaInfoDestinatario extends NFBase {
 	}
 
 	public void setRazaoSocial(final String razaoSocial) {
-		StringValidador.tamanho60(razaoSocial);
+	//	StringValidador.tamanho60(razaoSocial);
 		this.razaoSocial = razaoSocial;
 	}
 
@@ -82,23 +80,23 @@ public class NFNotaInfoDestinatario extends NFBase {
 	}
 
 	public void setInscricaoEstadual(final String inscricaoEstadual) {
-		StringValidador.inscricaoEstadual(inscricaoEstadual);
+	//	StringValidador.inscricaoEstadual(inscricaoEstadual);
 		this.inscricaoEstadual = inscricaoEstadual;
 	}
 
 	public void setInscricaoSuframa(final String inscricaoSuframa) {
-		StringValidador.tamanho8a9N(inscricaoSuframa);
+	//	StringValidador.tamanho8a9N(inscricaoSuframa);
 		this.inscricaoSuframa = inscricaoSuframa;
 	}
 
 	public void setEmail(final String email) {
-		StringValidador.tamanho60(email);
+	//	StringValidador.tamanho60(email);
 		this.email = email;
 	}
 
 	public void setIdEstrangeiro(final String idEstrangeiro) {
 		if (!idEstrangeiro.isEmpty()) {
-			StringValidador.tamanho5a20(idEstrangeiro);
+	//		StringValidador.tamanho5a20(idEstrangeiro);
 		}
 		this.idEstrangeiro = idEstrangeiro;
 	}
@@ -108,7 +106,7 @@ public class NFNotaInfoDestinatario extends NFBase {
 	}
 
 	public void setInscricaoMunicipal(final String inscricaoMunicipal) {
-		StringValidador.tamanho15(inscricaoMunicipal);
+	//	StringValidador.tamanho15(inscricaoMunicipal);
 		this.inscricaoMunicipal = inscricaoMunicipal;
 	}
 

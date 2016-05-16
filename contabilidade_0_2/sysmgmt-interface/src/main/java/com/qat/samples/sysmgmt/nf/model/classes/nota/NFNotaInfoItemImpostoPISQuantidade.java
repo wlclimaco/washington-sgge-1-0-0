@@ -1,25 +1,22 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
 import java.math.BigDecimal;
 
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.classes.NFNotaInfoSituacaoTributariaPIS;
-import com.fincatto.nfe310.validadores.BigDecimalParser;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
+import com.qat.samples.sysmgmt.nf.model.classes.NFNotaInfoSituacaoTributariaPIS;
 
 public class NFNotaInfoItemImpostoPISQuantidade extends NFBase {
 
-    @Element(name = "CST", required = true)
+    //@Element(name = "CST", required = true)
     private NFNotaInfoSituacaoTributariaPIS situacaoTributaria;
 
-    @Element(name = "qBCProd", required = true)
+    //@Element(name = "qBCProd", required = true)
     private String quantidadeVendida;
 
-    @Element(name = "vAliqProd", required = true)
+    //@Element(name = "vAliqProd", required = true)
     private String valorAliquota;
 
-    @Element(name = "vPIS", required = true)
+    //@Element(name = "vPIS", required = true)
     private String valorTributo;
 
     public NFNotaInfoItemImpostoPISQuantidade() {
@@ -37,17 +34,17 @@ public class NFNotaInfoItemImpostoPISQuantidade extends NFBase {
         this.situacaoTributaria = situacaoTributaria;
     }
 
-    public void setQuantidadeVendida(final BigDecimal quantidadeVendida) {
-        this.quantidadeVendida = BigDecimalParser.tamanho16ComAte4CasasDecimais(quantidadeVendida);
-    }
-
-    public void setValorAliquota(final BigDecimal valorAliquota) {
-        this.valorAliquota = BigDecimalParser.tamanho15Com4CasasDecimais(valorAliquota);
-    }
-
-    public void setValorTributo(final BigDecimal valorTributo) {
-        this.valorTributo = BigDecimalParser.tamanho15Com2CasasDecimais(valorTributo);
-    }
+//    public void setQuantidadeVendida(final BigDecimal quantidadeVendida) {
+//        this.quantidadeVendida = BigDecimalParser.tamanho16ComAte4CasasDecimais(quantidadeVendida);
+//    }
+//
+//    public void setValorAliquota(final BigDecimal valorAliquota) {
+//        this.valorAliquota = BigDecimalParser.tamanho15Com4CasasDecimais(valorAliquota);
+//    }
+//
+//    public void setValorTributo(final BigDecimal valorTributo) {
+//        this.valorTributo = BigDecimalParser.tamanho15Com2CasasDecimais(valorTributo);
+//    }
 
     public NFNotaInfoSituacaoTributariaPIS getSituacaoTributaria() {
         return this.situacaoTributaria;

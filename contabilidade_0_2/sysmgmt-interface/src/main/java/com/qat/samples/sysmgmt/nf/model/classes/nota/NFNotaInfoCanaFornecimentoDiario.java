@@ -1,18 +1,14 @@
-package com.fincatto.nfe310.classes.nota;
+package com.qat.samples.sysmgmt.nf.model.classes.nota;
 
 import java.math.BigDecimal;
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-
-import com.fincatto.nfe310.classes.NFBase;
-import com.fincatto.nfe310.validadores.BigDecimalParser;
+import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
 
 public class NFNotaInfoCanaFornecimentoDiario extends NFBase {
-    @Attribute(name = "dia", required = true)
+
     private int dia;
 
-    @Element(name = "qtde", required = true)
+    //@Element(name = "qtde", required = true)
     private String quantidade;
 
     public void setDia(final int dia) {
@@ -23,7 +19,7 @@ public class NFNotaInfoCanaFornecimentoDiario extends NFBase {
     }
 
     public void setQuantidade(final BigDecimal quantidade) {
-        this.quantidade = BigDecimalParser.tamanho21ComAte10CasasDecimais(quantidade);
+     //   this.quantidade = BigDecimalParser.tamanho21ComAte10CasasDecimais(quantidade);
     }
 
     public int getDia() {
