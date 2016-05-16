@@ -507,6 +507,108 @@ function CnaeEmpresaModel() {
 	return a;
 }
 
+//===========================================================================================NFE=======================================================================================================
+
+function NFBaseModel() {
+
+	var a = [];
+
+		a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+function NFNotaModel() {
+
+	private long identificadorLocal;
+
+    @Element(name = "infNFe")
+    private NFNotaInfo info;
+    
+    @Element(name = "infNFeSupl", required = false)
+    private NFNotaInfoSuplementar infoSuplementar;
+
+    @Element(name = "Signature", required = false)
+    private NFSignature assinatura;
+	var a = [];
+
+		a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+function NFNotaInfoModel() {
+
+	var a = [];
+
+		a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+		public static final String IDENT = "NFe";
+
+	@Attribute(name = "Id", required = true)
+	private String identificador;
+
+	@Attribute(name = "versao", required = true)
+	private String versao;
+
+	@Element(name = "ide", required = true)
+	private NFNotaInfoIdentificacao identificacao;
+
+	@Element(name = "emit", required = true)
+	private NFNotaInfoEmitente emitente;
+
+	@Element(name = "avulsa", required = false)
+	private NFNotaInfoAvulsa avulsa;
+
+	@Element(name = "dest", required = false)
+	private NFNotaInfoDestinatario destinatario;
+
+	@Element(name = "retirada", required = false)
+	private NFNotaInfoLocal retirada;
+
+	@Element(name = "entrega", required = false)
+	private NFNotaInfoLocal entrega;
+
+	@ElementList(entry = "autXML", inline = true, required = false)
+	private List<NFPessoaAutorizadaDownloadNFe> pessoasAutorizadasDownloadNFe;
+
+	@ElementList(entry = "det", inline = true, required = true)
+	private List<NFNotaInfoItem> itens;
+
+	@Element(name = "total", required = true)
+	private NFNotaInfoTotal total;
+
+	@Element(name = "transp", required = true)
+	private NFNotaInfoTransporte transporte;
+
+	@Element(name = "cobr", required = false)
+	private NFNotaInfoCobranca cobranca;
+
+	@ElementList(entry = "pag", inline = true, required = false)
+	private List<NFNotaInfoPagamento> pagamentos;
+
+	@Element(name = "infAdic", required = false)
+	private NFNotaInfoInformacoesAdicionais informacoesAdicionais;
+
+	@Element(name = "exporta", required = false)
+	private NFNotaInfoExportacao exportacao;
+
+	@Element(name = "compra", required = false)
+	private NFNotaInfoCompra compra;
+
+	@Element(name = "cana", required = false)
+	private NFNotaInfoCana cana;
+	return a;
+}
+
+function NFNotaInfoSuplementarModel() {
+
+	var a = [];
+
+		a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+
+//======================================================================================================================================================================================================
+
 //================ Produto
 //================================================================================================================================================================================= Produto =====================================================
 function ProdutoParentIdModel() {
