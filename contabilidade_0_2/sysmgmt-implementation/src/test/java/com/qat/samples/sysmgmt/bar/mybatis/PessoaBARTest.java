@@ -188,18 +188,18 @@ public IPessoaBAR getPessoaBAR()
 		Assert.assertEquals(response.size(), 0);
 	}
 
-	@Test
-	public void testUpdateCliente()
-	{
-		Cliente cliente = new Cliente(1, "nome_1 UPDATE");
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
-		Cliente clienteResponse = getPessoaBAR().fetchClienteById(request);
-		Assert.assertEquals(clienteResponse.getNome(), "nome_1");
-		getPessoaBAR().updateCliente(cliente);
-		clienteResponse = getPessoaBAR().fetchClienteById(request);
-		Assert.assertEquals(clienteResponse.getNome(), "nome_1 UPDATE");
-	}
+//	@Test
+//	public void testUpdateCliente()
+//	{
+//		Cliente cliente = new Cliente(1, "nome_1 UPDATE");
+//		FetchByIdRequest request = new FetchByIdRequest();
+//		request.setFetchId(1);
+//		Cliente clienteResponse = getPessoaBAR().fetchClienteById(request);
+//		Assert.assertEquals(clienteResponse.getNome(), "nome_1");
+//		getPessoaBAR().updateCliente(cliente);
+//		clienteResponse = getPessoaBAR().fetchClienteById(request);
+//		Assert.assertEquals(clienteResponse.getNome(), "nome_1 UPDATE");
+//	}
 
 	@Test
 	public void testFetchClientesByRequest() throws Exception
@@ -276,18 +276,18 @@ public IPessoaBAR getPessoaBAR()
 		Assert.assertEquals(response.size(), 0);
 	}
 
-	@Test
-	public void testUpdateFornecedor()
-	{
-		Fornecedor fornecedor = new Fornecedor(1, "nome_1 UPDATE");
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
-		Fornecedor fornecedorResponse = getPessoaBAR().fetchFornecedorById(request);
-		Assert.assertEquals(fornecedorResponse.getNome(), "nome_1");
-		getPessoaBAR().updateFornecedor(fornecedor);
-		fornecedorResponse = getPessoaBAR().fetchFornecedorById(request);
-		Assert.assertEquals(fornecedorResponse.getNome(), "nome_1 UPDATE");
-	}
+//	@Test
+//	public void testUpdateFornecedor()
+//	{
+//		Fornecedor fornecedor = new Fornecedor(1, "nome_1 UPDATE");
+//		FetchByIdRequest request = new FetchByIdRequest();
+//		request.setFetchId(1);
+//		Fornecedor fornecedorResponse = getPessoaBAR().fetchFornecedorById(request);
+//		Assert.assertEquals(fornecedorResponse.getNome(), "nome_1");
+//		getPessoaBAR().updateFornecedor(fornecedor);
+//		fornecedorResponse = getPessoaBAR().fetchFornecedorById(request);
+//		Assert.assertEquals(fornecedorResponse.getNome(), "nome_1 UPDATE");
+//	}
 
 	@Test
 	public void testFetchFornecedorsByRequest() throws Exception

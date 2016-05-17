@@ -1,7 +1,10 @@
 package com.qat.samples.sysmgmt.nf.model.classes.cadastro;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import org.joda.time.LocalDateTime;
 
 import com.qat.samples.sysmgmt.nf.model.classes.NFBase;
 import com.qat.samples.sysmgmt.nf.model.classes.NFUnidadeFederativa;
@@ -86,25 +89,25 @@ public class NFRetornoConsultaCadastroDados extends NFBase {
         this.cpf = cpf;
     }
 
-//    public LocalDateTime getDataHoraProcessamento() {
-//        try {
-//            return LocalDateTime.fromDateFields(NFRetornoConsultaCadastroDados.DATE_FORMATTER.parse(this.dataHoraProcessamento));
-//        } catch (final ParseException e) {
-//            throw new IllegalStateException("Houve um problema em parsear a data");
-//        }
-//    }
-//
-//    public void setDataHoraProcessamento(final LocalDateTime dataHoraProcessamento) {
-//        this.dataHoraProcessamento = NFRetornoConsultaCadastroDados.DATE_FORMATTER.format(dataHoraProcessamento.toDate());
-//    }
-//
-//    public NFUnidadeFederativa getUfAutorizadora() {
-//        return this.ufAutorizadora;
-//    }
-//
-//    public void setUfAutorizadora(final NFUnidadeFederativa ufAutorizadora) {
-//        this.ufAutorizadora = ufAutorizadora;
-//    }
+    public LocalDateTime getDataHoraProcessamento() {
+        try {
+            return LocalDateTime.fromDateFields(NFRetornoConsultaCadastroDados.DATE_FORMATTER.parse(this.dataHoraProcessamento));
+        } catch (final ParseException e) {
+            throw new IllegalStateException("Houve um problema em parsear a data");
+        }
+    }
+
+    public void setDataHoraProcessamento(final LocalDateTime dataHoraProcessamento) {
+        this.dataHoraProcessamento = NFRetornoConsultaCadastroDados.DATE_FORMATTER.format(dataHoraProcessamento.toDate());
+    }
+
+    public NFUnidadeFederativa getUfAutorizadora() {
+        return this.ufAutorizadora;
+    }
+
+    public void setUfAutorizadora(final NFUnidadeFederativa ufAutorizadora) {
+        this.ufAutorizadora = ufAutorizadora;
+    }
 
     public List<NFRetornoConsultaCadastroSituacaoCadastral> getSituacaoCadastral() {
         return this.situacaoCadastral;

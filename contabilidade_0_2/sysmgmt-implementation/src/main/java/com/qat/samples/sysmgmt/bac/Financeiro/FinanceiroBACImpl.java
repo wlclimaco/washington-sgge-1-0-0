@@ -1464,7 +1464,7 @@ public InternalResultsResponse<Caixa> refreshCaixas(RefreshRequest request)
 
 	for (int i = 1; i <= refreshNumber; i++)
 	{
-	getFinanceiroBAR().insertCaixa(new Caixa(i, "CaixaDesc" + i));
+	getFinanceiroBAR().insertCaixa(new Caixa());
 	}
 
 	// Call maintain to see if we need to return the caixa list and if so whether it should be paged or not

@@ -193,7 +193,7 @@ public InternalResultsResponse<Produto> fetchProdutoById(FetchByIdRequest reques
 	}
 	else
 	{
-		response.getResultsList().add(getProdutoBAR().fetchProdutoById(request).getFirstResult());
+		response.getResultsList().add(getProdutoBAR().fetchProdutoById(request));
 	}
 
 	return response;
@@ -410,7 +410,7 @@ public InternalResultsResponse<Marca> fetchMarcaById(FetchByIdRequest request)
 	}
 	else
 	{
-		response.getResultsList().add(getProdutoBAR().fetchMarcaById(request).getFirstResult());
+		response.getResultsList().add(getProdutoBAR().fetchMarcaById(request));
 	}
 
 	return response;
@@ -627,7 +627,7 @@ public InternalResultsResponse<Grupo> fetchGrupoById(FetchByIdRequest request)
 	}
 	else
 	{
-		response.getResultsList().add(getProdutoBAR().fetchGrupoById(request).getFirstResult());
+		response.getResultsList().add(getProdutoBAR().fetchGrupoById(request));
 	}
 
 	return response;
@@ -844,7 +844,7 @@ public InternalResultsResponse<SubGrupo> fetchSubGrupoById(FetchByIdRequest requ
 	}
 	else
 	{
-		response.getResultsList().add(getProdutoBAR().fetchSubGrupoById(request).getFirstResult());
+		response.getResultsList().add(getProdutoBAR().fetchSubGrupoById(request));
 	}
 
 	return response;
@@ -1061,7 +1061,7 @@ public InternalResultsResponse<UniMed> fetchUniMedById(FetchByIdRequest request)
 	}
 	else
 	{
-		response.getResultsList().add(getProdutoBAR().fetchUniMedById(request).getFirstResult());
+		response.getResultsList().add(getProdutoBAR().fetchUniMedById(request));
 	}
 
 	return response;

@@ -18,5 +18,10 @@
             <artifactId>qat-framework-core</artifactId>
             <version>${qat.framework.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.wmixvideo</groupId>
+            <artifactId>nfe</artifactId>
+            <version>1.1.12</version>
+        </dependency>
     </dependencies>
 </project>
