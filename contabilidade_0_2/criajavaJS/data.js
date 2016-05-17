@@ -597,14 +597,413 @@ function NFNotaInfoModel() {
 	private NFNotaInfoCana cana;
 	return a;
 }
+function NFNotaInfoIdentificacaoModel() {
+
+	var a = [];
+
+@Element(name = "cUF", required = true)
+    private NFUnidadeFederativa uf;
+
+    @Element(name = "cNF", required = true)
+    private String codigoRandomico;
+
+    @Element(name = "natOp", required = true)
+    private String naturezaOperacao;
+
+    @Element(name = "indPag", required = true)
+    private NFFormaPagamentoPrazo formaPagamento;
+
+    @Element(name = "mod", required = true)
+    private NFModelo modelo;
+
+    @Element(name = "serie", required = true)
+    private String serie;
+
+    @Element(name = "nNF", required = true)
+    private String numeroNota;
+
+    @Element(name = "dhEmi", required = true)
+    private DateTime dataHoraEmissao;
+
+    @Element(name = "dhSaiEnt", required = false)
+    private DateTime dataHoraSaidaOuEntrada;
+
+    @Element(name = "tpNF", required = true)
+    private NFTipo tipo;
+
+    @Element(name = "idDest", required = true)
+    private NFIdentificadorLocalDestinoOperacao identificadorLocalDestinoOperacao;
+
+    @Element(name = "cMunFG", required = true)
+    private String codigoMunicipio;
+
+    @Element(name = "tpImp", required = true)
+    private NFTipoImpressao tipoImpressao;
+
+    @Element(name = "tpEmis", required = true)
+    private NFTipoEmissao tipoEmissao;
+
+    @Element(name = "cDV", required = true)
+    private Integer digitoVerificador;
+
+    @Element(name = "tpAmb", required = true)
+    private NFAmbiente ambiente;
+
+    @Element(name = "finNFe", required = true)
+    private NFFinalidade finalidade;
+
+    @Element(name = "indFinal", required = true)
+    private NFOperacaoConsumidorFinal operacaoConsumidorFinal;
+
+    @Element(name = "indPres", required = true)
+    private NFIndicadorPresencaComprador indicadorPresencaComprador;
+
+    @Element(name = "procEmi", required = true)
+    private NFProcessoEmissor programaEmissor;
+
+    @Element(name = "verProc", required = true)
+    private String versaoEmissor;
+
+    @Element(name = "dhCont", required = false)
+    private DateTime dataHoraContigencia;
+
+    @Element(name = "xJust", required = false)
+    private String justificativaEntradaContingencia;
+
+    @ElementList(entry = "NFref", inline = true, required = false)
+    private List<NFInfoReferenciada> referenciadas;
+
+ }
 
 function NFNotaInfoSuplementarModel() {
+
+	var a = [];
+
+		public class NFNotaInfoEmitente extends NFBase {
+
+    @Element(name = "CNPJ", required = false)
+    private String cnpj;
+
+    @Element(name = "CPF", required = false)
+    private String cpf;
+
+    @Element(name = "xNome", required = true)
+    private String razaoSocial;
+
+    @Element(name = "xFant", required = false)
+    private String nomeFantasia;
+
+    @Element(name = "enderEmit", required = true)
+    private NFEndereco endereco;
+
+    @Element(name = "IE", required = true)
+    private String inscricaoEstadual;
+
+    @Element(name = "IEST", required = false)
+    private String inscricaoEstadualSubstituicaoTributaria;
+
+    @Element(name = "IM", required = false)
+    private String inscricaoMunicipal;
+
+    @Element(name = "CNAE", required = false)
+    private String classificacaoNacionalAtividadesEconomicas;
+
+    @Element(name = "CRT", required = true)
+    private NFRegimeTributario regimeTributario;
+	return a;
+}
+
+function NFNotaInfoSuplementarModel() {
+
+	var a = [];
+
+		@Element(name = "CNPJ", required = true)
+    private String cnpj;
+
+    @Element(name = "xOrgao", required = true)
+    private String orgaoEmitente;
+
+    @Element(name = "matr", required = true)
+    private String matriculaAgente;
+
+    @Element(name = "xAgente", required = true)
+    private String nomeAgente;
+
+    @Element(name = "fone", required = false)
+    private String fone;
+
+    @Element(name = "UF", required = true)
+    private String uf;
+
+    @Element(name = "nDAR", required = false)
+    private String numeroDocumentoArrecadacaoReceita;
+
+    @Element(name = "dEmi", required = false)
+    private LocalDate dataEmissaoDocumentoArrecadacao;
+
+    @Element(name = "vDAR", required = false)
+    private String valorTotalConstanteDocumentoArrecadacaoReceita;
+
+    @Element(name = "repEmi", required = true)
+    private String reparticaoFiscalEmitente;
+
+    @Element(name = "dPag", required = false)
+    private LocalDate dataPagamentoDocumentoArrecadacao;
+	return a;
+}
+
+function NFNotaInfoSuplementarModel() {
+
+	public class NFNotaInfoDestinatario extends NFBase {
+
+	@Element(name = "CNPJ", required = false)
+	private String cnpj;
+
+	@Element(name = "CPF", required = false)
+	private String cpf;
+
+	@Element(name = "idEstrangeiro", required = false)
+	private String idEstrangeiro;
+
+	@Element(name = "xNome", required = false)
+	private String razaoSocial;
+
+	@Element(name = "enderDest", required = false)
+	private NFEndereco endereco;
+
+	@Element(name = "indIEDest", required = true)
+	private NFIndicadorIEDestinatario indicadorIEDestinatario;
+
+	@Element(name = "IE", required = false)
+	private String inscricaoEstadual;
+
+	@Element(name = "ISUF", required = false)
+	private String inscricaoSuframa;
+
+	@Element(name = "IM", required = false)
+	private String inscricaoMunicipal;
+
+	@Element(name = "email", required = false)
+	private String email;
+
+	public String getCnpj() {
+		return this.cnpj;
+	}
+	return a;
+}
+
+
+function NFNotaInfoSuplementarModel() {
+
+	var a = [];
+
+		@Element(name = "CNPJ", required = false)
+    private String cnpj;
+
+    @Element(name = "CPF", required = false)
+    private String cpf;
+
+    @Element(name = "xLgr", required = true)
+    private String logradouro;
+
+    @Element(name = "nro", required = true)
+    private String numero;
+
+    @Element(name = "xCpl", required = false)
+    private String complemento;
+
+    @Element(name = "xBairro", required = true)
+    private String bairro;
+
+    @Element(name = "cMun", required = true)
+    private String codigoMunicipio;
+
+    @Element(name = "xMun", required = true)
+    private String nomeMunicipio;
+
+    @Element(name = "UF", required = true)
+    private String uf;
+	return a;
+}
+
+
+function NFNotaInfoSuplementarModel() {
+
+	var a = [];
+
+		ublic class NFPessoaAutorizadaDownloadNFe extends NFBase {
+    @Element(name = "CNPJ", required = false)
+    private String cnpj;
+
+    @Element(name = "CPF", required = false)
+    private String cpf;
+	return a;
+}
+
+
+function NFNotaInfoItemModel() {
+
+	var a = [];
+
+		@Attribute(name = "nItem", required = true)
+    private Integer numeroItem;
+
+    @Element(name = "prod", required = true)
+    private NFNotaInfoItemProduto produto;
+
+    @Element(name = "imposto", required = true)
+    private NFNotaInfoItemImposto imposto;
+
+    @Element(name = "impostoDevol", required = false)
+    private NFImpostoDevolvido impostoDevolvido;
+
+    @Element(name = "infAdProd", required = false)
+    private String informacoesAdicionais;
+
+	return a;
+}
+
+
+function NFNotaInfoSuplementarModel() {
+
+	var a = [];
+
+		NFNotaInfoTotal extends NFBase {
+
+    @Element(name = "ICMSTot", required = true)
+    private NFNotaInfoICMSTotal icmsTotal;
+
+    @Element(name = "ISSQNtot", required = false)
+    private NFNotaInfoISSQNTotal issqnTotal;
+
+    @Element(name = "retTrib", required = false)
+    private NFNotaInfoRetencoesTributos retencoesTributos;
+	return a;
+}
+
+function NFNotaInfoSuplementarModel() {
+
+	var a = [];
+
+		NFNotaInfoTransporte extends NFBase {
+    @Element(name = "modFrete", required = true)
+    private NFModalidadeFrete modalidadeFrete;
+
+    @Element(name = "transporta", required = false)
+    private NFNotaInfoTransportador transportador;
+
+    @Element(name = "retTransp", required = false)
+    private NFNotaInfoRetencaoICMSTransporte icmsTransporte;
+
+    @Element(name = "veicTransp", required = false)
+    private NFNotaInfoVeiculo veiculo;
+
+    @ElementList(entry = "reboque", inline = true, required = false)
+    private List<NFNotaInfoReboque> reboques;
+
+    @Element(name = "vagao", required = false)
+    private String vagao;
+
+    @Element(name = "balsa", required = false)
+    private String balsa;
+
+    @ElementList(entry = "vol", inline = true, required = false)
+    private List<NFNotaInfoVolume> volumes;
+
+	return a;
+}
+
+
+function NFBaseModel() {
+
+	var a = [];
+
+		NFNotaInfoCobranca extends NFBase {
+    @Element(name = "fat", required = false)
+    private NFNotaInfoFatura fatura;
+
+    @ElementList(entry = "dup", inline = true, required = false)
+    private List<NFNotaInfoDuplicata> duplicatas;
+	return a;
+}
+
+
+function NFBaseModel() {
+
+	var a = [];
+
+		NFNotaInfoPagamento extends NFBase {
+
+    @Element(name = "tPag", required = true)
+    private NFFormaPagamentoMoeda formaPagamentoMoeda;
+
+    @Element(name = "vPag", required = true)
+    private String valorPagamento;
+
+    @Element(name = "card", required = false)
+    private NFNotaInfoCartao cartao;
+	return a;
+}
+
+
+function NFBaseModel() {
+
+	var a = [];
+
+		NFNotaInfoInformacoesAdicionais extends NFBase {
+    @Element(name = "infAdFisco", required = false)
+    private String informacoesAdicionaisInteresseFisco;
+
+    @Element(name = "infCpl", required = false)
+    private String informacoesComplementaresInteresseContribuinte;
+
+    @ElementList(entry = "obsCont", inline = true, required = false)
+    private List<NFNotaInfoObservacao> observacoesContribuinte;
+
+    @ElementList(entry = "obsFisco", inline = true, required = false)
+    private List<NFNotaInfoObservacao> observacoesFisco;
+
+    @ElementList(entry = "procRef", inline = true, required = false)
+    private List<NFNotaInfoProcessoReferenciado> processosRefenciado;
+	return a;
+}
+
+
+function NFBaseModel() {
 
 	var a = [];
 
 		a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	return a;
 }
+
+
+function NFBaseModel() {
+
+	var a = [];
+
+		a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+
+function NFBaseModel() {
+
+	var a = [];
+
+		a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
+
+function NFBaseModel() {
+
+	var a = [];
+
+		a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	return a;
+}
+
 
 
 //======================================================================================================================================================================================================
