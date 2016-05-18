@@ -7,7 +7,7 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
  * setting.
  */
 @SuppressWarnings("serial")
-public class MarcaProd extends ModelCosmeDamiao
+public class MarcaProduto extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
@@ -17,12 +17,12 @@ public class MarcaProd extends ModelCosmeDamiao
 	/**
 	 * Default constructor.
 	 */
-	public MarcaProd()
+	public MarcaProduto()
 	{
 		super();
 	}
 
-	public MarcaProd(Integer id)
+	public MarcaProduto(Integer id)
 	{
 		super();
 		this.id = id;

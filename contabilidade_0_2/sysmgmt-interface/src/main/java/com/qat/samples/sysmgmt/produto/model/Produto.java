@@ -44,17 +44,17 @@ public class Produto extends ModelCosmeDamiao
 	private Classificacao classificacao;
 
 	/** The top. */
-	private UniMedProd uniMed;
+	private UniMed uniMed;
 
 	/** The width. */
-	private GrupoProd grupo;
+	private Grupo grupo;
 
 	/** The height. */
-	private SubGrupoProd subGrupo;
+	private SubGrupo subGrupo;
 
 	private Double porcao;
 
-	private List<MarcaProd> marca;
+	private List<MarcaProduto> marca;
 
 	private Double pesoBruto;
 
@@ -204,27 +204,29 @@ public class Produto extends ModelCosmeDamiao
 		this.fracao = fracao;
 	}
 
-	public UniMedProd getUniMed() {
+
+
+	public UniMed getUniMed() {
 		return uniMed;
 	}
 
-	public void setUniMed(UniMedProd uniMed) {
+	public void setUniMed(UniMed uniMed) {
 		this.uniMed = uniMed;
 	}
 
-	public GrupoProd getGrupo() {
+	public Grupo getGrupo() {
 		return grupo;
 	}
 
-	public void setGrupo(GrupoProd grupo) {
+	public void setGrupo(Grupo grupo) {
 		this.grupo = grupo;
 	}
 
-	public SubGrupoProd getSubGrupo() {
+	public SubGrupo getSubGrupo() {
 		return subGrupo;
 	}
 
-	public void setSubGrupo(SubGrupoProd subGrupo) {
+	public void setSubGrupo(SubGrupo subGrupo) {
 		this.subGrupo = subGrupo;
 	}
 
@@ -236,11 +238,11 @@ public class Produto extends ModelCosmeDamiao
 		this.porcao = porcao;
 	}
 
-	public List<MarcaProd> getMarca() {
+	public List<MarcaProduto> getMarca() {
 		return marca;
 	}
 
-	public void setMarca(List<MarcaProd> marca) {
+	public void setMarca(List<MarcaProduto> marca) {
 		this.marca = marca;
 	}
 
