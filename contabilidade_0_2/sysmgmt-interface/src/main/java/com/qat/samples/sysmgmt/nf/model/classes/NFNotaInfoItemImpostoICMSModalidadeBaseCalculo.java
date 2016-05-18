@@ -1,7 +1,5 @@
 package com.qat.samples.sysmgmt.nf.model.classes;
 
-import com.fincatto.nfe310.classes.NFNotaInfoItemImpostoICMSModalidadeBaseCalculo;
-
 public enum NFNotaInfoItemImpostoICMSModalidadeBaseCalculo {
 
     MVA("0", "Margem de valor agregado"),

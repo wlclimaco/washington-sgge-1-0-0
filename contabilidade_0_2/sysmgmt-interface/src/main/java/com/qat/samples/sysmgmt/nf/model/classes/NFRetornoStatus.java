@@ -3,8 +3,6 @@ package com.qat.samples.sysmgmt.nf.model.classes;
 import java.util.Arrays;
 import java.util.List;
 
-import com.fincatto.nfe310.classes.NFRetornoStatus;
-
 public enum NFRetornoStatus {
 
     AUTORIZADO_USO_NFE(100, "Autorizado o uso da NF-e"),

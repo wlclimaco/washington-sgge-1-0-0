@@ -3,7 +3,6 @@ package com.qat.samples.sysmgmt.nf.model.classes;
 import java.util.Arrays;
 
 import com.fincatto.nfe310.classes.NFAmbiente;
-import com.fincatto.nfe310.classes.NFAutorizador31;
 import com.fincatto.nfe310.classes.NFUnidadeFederativa;
 import com.fincatto.nfe310.parsers.NotaFiscalChaveParser;
 

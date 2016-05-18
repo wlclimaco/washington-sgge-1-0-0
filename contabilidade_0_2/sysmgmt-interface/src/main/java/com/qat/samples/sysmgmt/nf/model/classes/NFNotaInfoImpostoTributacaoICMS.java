@@ -1,7 +1,5 @@
 package com.qat.samples.sysmgmt.nf.model.classes;
 
-import com.fincatto.nfe310.classes.NFNotaInfoImpostoTributacaoICMS;
-
 public enum NFNotaInfoImpostoTributacaoICMS {
     TRIBUTACAO_INTEGRALMENTE("00"),
     TRIBUTADA_COM_COBRANCA_ICMS_POR_SUBSTITUICAO_TRIBUTARIA("10"),

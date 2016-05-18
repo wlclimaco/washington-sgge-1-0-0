@@ -1,7 +1,5 @@
 package com.qat.samples.sysmgmt.nf.model.classes;
 
-import com.fincatto.nfe310.classes.NFOrigemProcesso;
-
 public enum NFOrigemProcesso {
     SEFAZ("0"),
     JUSTICA_FEDERAL("1"),

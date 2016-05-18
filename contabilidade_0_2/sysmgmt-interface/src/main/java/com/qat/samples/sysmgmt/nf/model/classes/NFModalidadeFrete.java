@@ -1,7 +1,5 @@
 package com.qat.samples.sysmgmt.nf.model.classes;
 
-import com.fincatto.nfe310.classes.NFModalidadeFrete;
-
 public enum NFModalidadeFrete {
     POR_CONTA_DO_EMITENTE("0"),
     POR_CONTA_DO_DESTINATARIO_REMETENTE("1"),

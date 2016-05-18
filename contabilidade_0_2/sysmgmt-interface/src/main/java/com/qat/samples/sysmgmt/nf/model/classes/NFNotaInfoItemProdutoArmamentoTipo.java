@@ -1,7 +1,5 @@
 package com.qat.samples.sysmgmt.nf.model.classes;
 
-import com.fincatto.nfe310.classes.NFNotaInfoItemProdutoArmamentoTipo;
-
 public enum NFNotaInfoItemProdutoArmamentoTipo {
     PERMITIDO("0"),
     RESTRITO("1");

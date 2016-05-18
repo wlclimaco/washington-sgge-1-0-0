@@ -1,7 +1,5 @@
 package com.qat.samples.sysmgmt.nf.model.classes;
 
-import com.fincatto.nfe310.classes.NFNotaInfoSituacaoTributariaPIS;
-
 public enum NFNotaInfoSituacaoTributariaPIS {
     OPERACAO_TRIBUTAVEL_CUMULATIVO_NAO_CUMULATIVO("01"),
     OPERACAO_TRIBUTAVEL_ALIQUOTA_DIFERENCIADA("02"),

@@ -1,7 +1,5 @@
 package com.qat.samples.sysmgmt.nf.model.classes;
 
-import com.fincatto.nfe310.classes.NFTipoEmissao;
-
 public enum NFTipoEmissao {
 
     EMISSAO_NORMAL("1", "Normal"),

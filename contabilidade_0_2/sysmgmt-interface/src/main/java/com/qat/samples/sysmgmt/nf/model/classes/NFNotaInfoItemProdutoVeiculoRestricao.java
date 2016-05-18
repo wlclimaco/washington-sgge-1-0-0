@@ -1,7 +1,5 @@
 package com.qat.samples.sysmgmt.nf.model.classes;
 
-import com.fincatto.nfe310.classes.NFNotaInfoItemProdutoVeiculoRestricao;
-
 public enum NFNotaInfoItemProdutoVeiculoRestricao {
 
     NAO_HA("0"),

@@ -1,7 +1,5 @@
 package com.qat.samples.sysmgmt.nf.model.classes;
 
-import com.fincatto.nfe310.classes.NFNotaInfoItemModalidadeBCICMSST;
-
 public enum NFNotaInfoItemModalidadeBCICMSST {
     PRECO_TABELADO("0", "Preço Tabelado"),
     LISTA_NEGATIVA("1", "Lista Negativa"),

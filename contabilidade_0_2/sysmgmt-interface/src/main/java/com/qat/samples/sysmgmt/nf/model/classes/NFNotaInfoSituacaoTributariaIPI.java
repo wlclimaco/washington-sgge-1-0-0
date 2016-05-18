@@ -1,7 +1,5 @@
 package com.qat.samples.sysmgmt.nf.model.classes;
 
-import com.fincatto.nfe310.classes.NFNotaInfoSituacaoTributariaIPI;
-
 public enum NFNotaInfoSituacaoTributariaIPI {
     ENTRADA_RECUPERACAO_CREDITO("00"),
     ENTRADA_TRIBUTADA_ALIQUOTA_ZERO("01"),

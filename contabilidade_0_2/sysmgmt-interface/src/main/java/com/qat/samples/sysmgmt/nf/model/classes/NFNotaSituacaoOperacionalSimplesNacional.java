@@ -1,7 +1,5 @@
 package com.qat.samples.sysmgmt.nf.model.classes;
 
-import com.fincatto.nfe310.classes.NFNotaSituacaoOperacionalSimplesNacional;
-
 public enum NFNotaSituacaoOperacionalSimplesNacional {
     TRIBUTADA_COM_PERMISSAO_CREDITO("101"),
     TRIBUTADA_SEM_PERMISSAO_CREDITO("102"),

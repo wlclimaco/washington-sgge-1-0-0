@@ -1,7 +1,5 @@
 package com.qat.samples.sysmgmt.nf.model.classes;
 
-import com.fincatto.nfe310.classes.NFNotaInfoEspecieVeiculo;
-
 public enum NFNotaInfoEspecieVeiculo {
     PASSAGEIRO("1"),
     CARGA("2"),

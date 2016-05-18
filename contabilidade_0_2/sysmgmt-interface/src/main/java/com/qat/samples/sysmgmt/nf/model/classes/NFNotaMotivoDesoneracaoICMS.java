@@ -1,7 +1,5 @@
 package com.qat.samples.sysmgmt.nf.model.classes;
 
-import com.fincatto.nfe310.classes.NFNotaMotivoDesoneracaoICMS;
-
 public enum NFNotaMotivoDesoneracaoICMS {
     TAXI("1"),
     PRODUTOR_AGROPECUARIO("3"),

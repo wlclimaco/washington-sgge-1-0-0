@@ -1,7 +1,5 @@
 package com.qat.samples.sysmgmt.nf.model.classes;
 
-import com.fincatto.nfe310.classes.NFTipoImpressao;
-
 public enum NFTipoImpressao {
     SEM_GERACAO_DANFE("0"),
     DANFE_NORMAL_RETRATO("1"),

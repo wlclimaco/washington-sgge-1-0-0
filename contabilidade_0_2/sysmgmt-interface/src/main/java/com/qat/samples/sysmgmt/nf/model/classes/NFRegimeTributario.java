@@ -1,7 +1,5 @@
 package com.qat.samples.sysmgmt.nf.model.classes;
 
-import com.fincatto.nfe310.classes.NFRegimeTributario;
-
 public enum NFRegimeTributario {
 
     SIMPLES_NACIONAL("1", "Simples nacional"),
