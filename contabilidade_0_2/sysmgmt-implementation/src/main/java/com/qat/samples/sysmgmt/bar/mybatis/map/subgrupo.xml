@@ -19,6 +19,7 @@
     <result property="id" column="id"/>
     <result property="subGrupo" column="subGrupo"/>
     <result property="descricao" column="descricao"/>
+    <result property="parentId" column="parentId"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
@@ -28,9 +29,10 @@
   </resultMap>
 
   <sql id="allSubGrupoColumns">
-,subGrupo
+subGrupo
 ,descricao
 ,emprId
+,parentId
 ,processId
 ,create_date
 ,create_user
@@ -42,6 +44,7 @@
 #{subGrupo},
 #{descricao},
 		#{emprId},
+		#{parentId},
 		#{processId},
 		#{createDateUTC},
 		#{createUser},
@@ -60,6 +63,12 @@
     SELECT id,
 	<include refid="allSubGrupoColumns" />
    FROM subgrupo WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchGrupoBySubGrupo" parameterType="Integer" resultMap="SubGrupoResult">
+    SELECT id,
+	<include refid="allSubGrupoColumns" />
+   FROM subgrupo WHERE parentid = #{fetchid}
  </select>
 
  <select id="fetchAllSubGruposRequest" parameterType="SubGrupoInquiryRequest" resultMap="SubGrupoResult">

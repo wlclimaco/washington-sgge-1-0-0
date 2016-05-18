@@ -18,30 +18,31 @@
   <resultMap id="TributacaoResult" type="Tributacao">
     <result property="id" column="id"/>
     <result property="parentId" column="parentId"/>
-    <result property="cstId" column="cstId"/>
+
     <result property="icms" column="icms"/>
     <result property="st" column="st"/>
     <result property="mva" column="mva"/>
-    <result property="csosnId" column="csosnId"/>
     <result property="ipi" column="ipi"/>
     <result property="iat" column="iat"/>
     <result property="ippt" column="ippt"/>
-    <result property="incidencia" column="incidencia"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<!--  <association property="incidencia"    column="incidencia" select="ClassificacaoMap.fetchClassificacaoById"  />
+<association property="cst"    column="cst" select="ClassificacaoMap.fetchClassificacaoById"  />
+<association property="csosn"    column="csosn" select="ClassificacaoMap.fetchClassificacaoById"  />-->
   </resultMap>
 
   <sql id="allTributacaoColumns">
-,parentId
-,cstId
+parentId
+,cst
 ,icms
 ,st
 ,mva
-,csosnId
+,csosn
 ,ipi
 ,iat
 ,ippt
@@ -56,15 +57,15 @@
 </sql>
 <sql id="allTributacaoValues">
 #{parentId},
-#{cstId},
+#{cst.id},
 #{icms},
 #{st},
 #{mva},
-#{csosnId},
+#{csosn.id},
 #{ipi},
 #{iat},
 #{ippt},
-#{incidencia},
+#{incidencia.id},
 		#{emprId},
 		#{processId},
 		#{createDateUTC},
@@ -109,15 +110,15 @@
  <update id="updateTributacao" parameterType="Tributacao">
    UPDATE tributacao SET
 <if test="parentId!= null">parentId = #{parentId},</if>
-<if test="cstId!= null">cstId = #{cstId},</if>
+<!--  <if test="cst.id!= null">cst = #{cst.id},</if>-->
 <if test="icms!= null">icms = #{icms},</if>
 <if test="st!= null">st = #{st},</if>
 <if test="mva!= null">mva = #{mva},</if>
-<if test="csosnId!= null">csosnId = #{csosnId},</if>
+<!--<if test="csosn.id!= null">csosn = #{csosn.id},</if>-->
 <if test="ipi!= null">ipi = #{ipi},</if>
 <if test="iat!= null">iat = #{iat},</if>
 <if test="ippt!= null">ippt = #{ippt},</if>
-<if test="incidencia!= null">incidencia = #{incidencia},</if>
+<!--<if test="incidencia.id!= null">incidencia = #{incidencia.id},</if>-->
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

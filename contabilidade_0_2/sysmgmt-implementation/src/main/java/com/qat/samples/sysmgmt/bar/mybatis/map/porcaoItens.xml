@@ -31,7 +31,7 @@
   </resultMap>
 
   <sql id="allPorcaoItensColumns">
-,parentId
+parentId
 ,porcao
 ,vd
 ,unimed
@@ -71,16 +71,22 @@
    FROM porcaoitens WHERE id = #{fetchid}
  </select>
 
+  <select id="fetchPorcaoByPorcaoItens" parameterType="Integer" resultMap="PorcaoItensResult">
+    SELECT id,
+	<include refid="allPorcaoItensColumns" />
+   FROM porcaoitens WHERE parentid = #{fetchid}
+ </select>
+
  <select id="fetchAllPorcaoItenssRequest" parameterType="PagedInquiryRequest" resultMap="PorcaoItensResult">
 
 		SELECT id,<include refid="allPorcaoItensColumns" />
-  		  FROM porcaoitens where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+  		  FROM porcaoitens where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchPorcaoItensRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM porcaoitens WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM porcaoitens WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 

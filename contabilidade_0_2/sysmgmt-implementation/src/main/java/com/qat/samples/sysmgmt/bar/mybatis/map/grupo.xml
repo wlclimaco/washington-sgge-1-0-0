@@ -25,11 +25,11 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="subGrupo" column="subGrupo" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="subGrupo" column="subGrupo" select="SubGrupoMap.fetchGrupoBySubGrupo"/>
   </resultMap>
 
   <sql id="allGrupoColumns">
-,grupo
+grupo
 ,descricao
 ,subGrupo
 ,emprId
@@ -43,7 +43,7 @@
 <sql id="allGrupoValues">
 #{grupo},
 #{descricao},
-#{subGrupo},
+#{subGrupo.id},
 		#{emprId},
 		#{processId},
 		#{createDateUTC},
@@ -89,7 +89,7 @@
    UPDATE grupo SET
 <if test="grupo!= null">grupo = #{grupo},</if>
 <if test="descricao!= null">descricao = #{descricao},</if>
-<if test="subGrupo!= null">subGrupo = #{subGrupo},</if>
+<if test="subGrupo.id!= null">subGrupo = #{subGrupo.id},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

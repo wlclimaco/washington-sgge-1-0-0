@@ -20,7 +20,7 @@
     <result property="parentId" column="parentId"/>
     <result property="produto" column="produto"/>
     <result property="valor" column="valor"/>
-    <result property="rentabilidadeTypeEnum" column="rentabilidadeTypeEnum"/>
+    <result property="rentabilidadeTypeEnumValue" column="rentabilidadeTypeEnum"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
@@ -30,7 +30,7 @@
   </resultMap>
 
   <sql id="allRentabilidadeItensColumns">
-,parentId
+parentId
 ,produto
 ,valor
 ,rentabilidadeTypeEnum
@@ -46,7 +46,7 @@
 #{parentId},
 #{produto},
 #{valor},
-#{rentabilidadeTypeEnum},
+#{rentabilidadeTypeEnumValue},
 		#{emprId},
 		#{processId},
 		#{createDateUTC},
@@ -62,6 +62,12 @@
    FROM rentabilidadeitens ORDER BY id ASC
  </select>
 
+<select id="fetchRentabilidadeByRentabilidadeItens" parameterType="Integer" resultMap="RentabilidadeItensResult">
+    SELECT id,
+	<include refid="allRentabilidadeItensColumns" />
+   FROM rentabilidadeitens WHERE parentId = #{fetchid}
+ </select>
+
  <select id="fetchRentabilidadeItensById" parameterType="Integer" resultMap="RentabilidadeItensResult">
     SELECT id,
 	<include refid="allRentabilidadeItensColumns" />
@@ -71,13 +77,13 @@
  <select id="fetchAllRentabilidadeItenssRequest" parameterType="PagedInquiryRequest" resultMap="RentabilidadeItensResult">
 
 		SELECT id,<include refid="allRentabilidadeItensColumns" />
-  		  FROM rentabilidadeitens where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+  		  FROM rentabilidadeitens where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchRentabilidadeItensRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM rentabilidadeitens WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM rentabilidadeitens WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 
@@ -93,7 +99,7 @@
 <if test="parentId!= null">parentId = #{parentId},</if>
 <if test="produto!= null">produto = #{produto},</if>
 <if test="valor!= null">valor = #{valor},</if>
-<if test="rentabilidadeTypeEnum!= null">rentabilidadeTypeEnum = #{rentabilidadeTypeEnum},</if>
+<if test="rentabilidadeTypeEnumValue!= null">rentabilidadeTypeEnum = #{rentabilidadeTypeEnumValue},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

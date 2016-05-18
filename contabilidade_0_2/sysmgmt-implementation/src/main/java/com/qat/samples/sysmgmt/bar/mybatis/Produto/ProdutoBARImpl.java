@@ -19,7 +19,7 @@ import com.qat.samples.sysmgmt.produto.model.CustoItens;
 import com.qat.samples.sysmgmt.produto.model.Estoque;
 import com.qat.samples.sysmgmt.produto.model.Grupo;
 import com.qat.samples.sysmgmt.produto.model.Marca;
-import com.qat.samples.sysmgmt.produto.model.MarcaProd;
+import com.qat.samples.sysmgmt.produto.model.MarcaProduto;
 import com.qat.samples.sysmgmt.produto.model.Porcao;
 import com.qat.samples.sysmgmt.produto.model.PorcaoItens;
 import com.qat.samples.sysmgmt.produto.model.Produto;
@@ -51,31 +51,31 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR
 
 ///===================================### PRODUTOPARENT ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_PRODUTOPARENT = "ProdutoparentMap.";
+private static final String NAMESPACE_PRODUTOPARENT = "ProdutoParentMap.";
 
 /** The Constant STMT_INSERT_PRODUTOPARENT. */
-private static final String STMT_INSERT_PRODUTOPARENT = NAMESPACE_PRODUTOPARENT + "insertProdutoparent";
+private static final String STMT_INSERT_PRODUTOPARENT = NAMESPACE_PRODUTOPARENT + "insertProdutoParent";
 
 /** The Constant STMT_UPDATE_PRODUTOPARENT. */
-private static final String STMT_UPDATE_PRODUTOPARENT = NAMESPACE_PRODUTOPARENT + "updateProdutoparent";
+private static final String STMT_UPDATE_PRODUTOPARENT = NAMESPACE_PRODUTOPARENT + "updateProdutoParent";
 
 /** The Constant STMT_DELETE_PRODUTOPARENT. */
-private static final String STMT_DELETE_PRODUTOPARENT = NAMESPACE_PRODUTOPARENT + "deleteProdutoparentById";
+private static final String STMT_DELETE_PRODUTOPARENT = NAMESPACE_PRODUTOPARENT + "deleteProdutoParentById";
 
 	/** The Constant STMT_DELETE_PRODUTOPARENT_ALL. */
-	private static final String STMT_DELETE_PRODUTOPARENT_ALL = NAMESPACE_PRODUTOPARENT + "deleteAllProdutoparents";
+	private static final String STMT_DELETE_PRODUTOPARENT_ALL = NAMESPACE_PRODUTOPARENT + "deleteAllProdutoParents";
 
 	/** The Constant STMT_FETCH_PRODUTOPARENT. */
-	private static final String STMT_FETCH_PRODUTOPARENT = NAMESPACE_PRODUTOPARENT + "fetchProdutoparentById";
+	private static final String STMT_FETCH_PRODUTOPARENT = NAMESPACE_PRODUTOPARENT + "fetchProdutoParentById";
 
 	/** The Constant STMT_FETCH_PRODUTOPARENT_ALL. */
-	private static final String STMT_FETCH_PRODUTOPARENT_ALL = NAMESPACE_PRODUTOPARENT + "fetchAllProdutoparents";
+	private static final String STMT_FETCH_PRODUTOPARENT_ALL = NAMESPACE_PRODUTOPARENT + "fetchAllProdutoParents";
 
 	/** The Constant STMT_FETCH_PRODUTOPARENT_COUNT. */
-	private static final String STMT_FETCH_PRODUTOPARENT_COUNT = NAMESPACE_PRODUTOPARENT + "fetchProdutoparentRowCount";
+	private static final String STMT_FETCH_PRODUTOPARENT_COUNT = NAMESPACE_PRODUTOPARENT + "fetchProdutoParentRowCount";
 
 	/** The Constant STMT_FETCH_PRODUTOPARENT_ALL_REQUEST. */
-	private static final String STMT_FETCH_PRODUTOPARENT_ALL_REQUEST = NAMESPACE_PRODUTOPARENT + "fetchAllProdutoparentsRequest";
+	private static final String STMT_FETCH_PRODUTOPARENT_ALL_REQUEST = NAMESPACE_PRODUTOPARENT + "fetchAllProdutoParentsRequest";
 
 ///===================================### PRODUTO ####======================================
 /** The Constant NAMESPACE. */
@@ -163,31 +163,31 @@ private static final String STMT_DELETE_MARCA = NAMESPACE_MARCA + "deleteMarcaBy
 
 ///===================================### MARCAPRODUTO ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_MARCAPRODUTO = "MarcaprodutoMap.";
+private static final String NAMESPACE_MARCAPRODUTO = "MarcaProdutoMap.";
 
 /** The Constant STMT_INSERT_MARCAPRODUTO. */
-private static final String STMT_INSERT_MARCAPRODUTO = NAMESPACE_MARCAPRODUTO + "insertMarcaproduto";
+private static final String STMT_INSERT_MARCAPRODUTO = NAMESPACE_MARCAPRODUTO + "insertMarcaProduto";
 
 /** The Constant STMT_UPDATE_MARCAPRODUTO. */
-private static final String STMT_UPDATE_MARCAPRODUTO = NAMESPACE_MARCAPRODUTO + "updateMarcaproduto";
+private static final String STMT_UPDATE_MARCAPRODUTO = NAMESPACE_MARCAPRODUTO + "updateMarcaProduto";
 
 /** The Constant STMT_DELETE_MARCAPRODUTO. */
-private static final String STMT_DELETE_MARCAPRODUTO = NAMESPACE_MARCAPRODUTO + "deleteMarcaprodutoById";
+private static final String STMT_DELETE_MARCAPRODUTO = NAMESPACE_MARCAPRODUTO + "deleteMarcaProdutoById";
 
 	/** The Constant STMT_DELETE_MARCAPRODUTO_ALL. */
-	private static final String STMT_DELETE_MARCAPRODUTO_ALL = NAMESPACE_MARCAPRODUTO + "deleteAllMarcaprodutos";
+	private static final String STMT_DELETE_MARCAPRODUTO_ALL = NAMESPACE_MARCAPRODUTO + "deleteAllMarcaProdutos";
 
 	/** The Constant STMT_FETCH_MARCAPRODUTO. */
-	private static final String STMT_FETCH_MARCAPRODUTO = NAMESPACE_MARCAPRODUTO + "fetchMarcaprodutoById";
+	private static final String STMT_FETCH_MARCAPRODUTO = NAMESPACE_MARCAPRODUTO + "fetchMarcaProdutoById";
 
 	/** The Constant STMT_FETCH_MARCAPRODUTO_ALL. */
-	private static final String STMT_FETCH_MARCAPRODUTO_ALL = NAMESPACE_MARCAPRODUTO + "fetchAllMarcaprodutos";
+	private static final String STMT_FETCH_MARCAPRODUTO_ALL = NAMESPACE_MARCAPRODUTO + "fetchAllMarcaProdutos";
 
 	/** The Constant STMT_FETCH_MARCAPRODUTO_COUNT. */
-	private static final String STMT_FETCH_MARCAPRODUTO_COUNT = NAMESPACE_MARCAPRODUTO + "fetchMarcaprodutoRowCount";
+	private static final String STMT_FETCH_MARCAPRODUTO_COUNT = NAMESPACE_MARCAPRODUTO + "fetchMarcaProdutoRowCount";
 
 	/** The Constant STMT_FETCH_MARCAPRODUTO_ALL_REQUEST. */
-	private static final String STMT_FETCH_MARCAPRODUTO_ALL_REQUEST = NAMESPACE_MARCAPRODUTO + "fetchAllMarcaprodutosRequest";
+	private static final String STMT_FETCH_MARCAPRODUTO_ALL_REQUEST = NAMESPACE_MARCAPRODUTO + "fetchAllMarcaProdutosRequest";
 
 ///===================================### GRUPO ####======================================
 /** The Constant NAMESPACE. */
@@ -217,61 +217,61 @@ private static final String STMT_DELETE_GRUPO = NAMESPACE_GRUPO + "deleteGrupoBy
 	/** The Constant STMT_FETCH_GRUPO_ALL_REQUEST. */
 	private static final String STMT_FETCH_GRUPO_ALL_REQUEST = NAMESPACE_GRUPO + "fetchAllGruposRequest";
 
-///===================================### SUBGRUPO ####======================================
+///===================================### SubGrupo ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_SUBGRUPO = "SubgrupoMap.";
+private static final String NAMESPACE_SubGrupo = "SubGrupoMap.";
 
-/** The Constant STMT_INSERT_SUBGRUPO. */
-private static final String STMT_INSERT_SUBGRUPO = NAMESPACE_SUBGRUPO + "insertSubgrupo";
+/** The Constant STMT_INSERT_SubGrupo. */
+private static final String STMT_INSERT_SubGrupo = NAMESPACE_SubGrupo + "insertSubGrupo";
 
-/** The Constant STMT_UPDATE_SUBGRUPO. */
-private static final String STMT_UPDATE_SUBGRUPO = NAMESPACE_SUBGRUPO + "updateSubgrupo";
+/** The Constant STMT_UPDATE_SubGrupo. */
+private static final String STMT_UPDATE_SubGrupo = NAMESPACE_SubGrupo + "updateSubGrupo";
 
-/** The Constant STMT_DELETE_SUBGRUPO. */
-private static final String STMT_DELETE_SUBGRUPO = NAMESPACE_SUBGRUPO + "deleteSubgrupoById";
+/** The Constant STMT_DELETE_SubGrupo. */
+private static final String STMT_DELETE_SubGrupo = NAMESPACE_SubGrupo + "deleteSubGrupoById";
 
-	/** The Constant STMT_DELETE_SUBGRUPO_ALL. */
-	private static final String STMT_DELETE_SUBGRUPO_ALL = NAMESPACE_SUBGRUPO + "deleteAllSubgrupos";
+	/** The Constant STMT_DELETE_SubGrupo_ALL. */
+	private static final String STMT_DELETE_SubGrupo_ALL = NAMESPACE_SubGrupo + "deleteAllSubGrupos";
 
-	/** The Constant STMT_FETCH_SUBGRUPO. */
-	private static final String STMT_FETCH_SUBGRUPO = NAMESPACE_SUBGRUPO + "fetchSubgrupoById";
+	/** The Constant STMT_FETCH_SubGrupo. */
+	private static final String STMT_FETCH_SubGrupo = NAMESPACE_SubGrupo + "fetchSubGrupoById";
 
-	/** The Constant STMT_FETCH_SUBGRUPO_ALL. */
-	private static final String STMT_FETCH_SUBGRUPO_ALL = NAMESPACE_SUBGRUPO + "fetchAllSubgrupos";
+	/** The Constant STMT_FETCH_SubGrupo_ALL. */
+	private static final String STMT_FETCH_SubGrupo_ALL = NAMESPACE_SubGrupo + "fetchAllSubGrupos";
 
-	/** The Constant STMT_FETCH_SUBGRUPO_COUNT. */
-	private static final String STMT_FETCH_SUBGRUPO_COUNT = NAMESPACE_SUBGRUPO + "fetchSubgrupoRowCount";
+	/** The Constant STMT_FETCH_SubGrupo_COUNT. */
+	private static final String STMT_FETCH_SubGrupo_COUNT = NAMESPACE_SubGrupo + "fetchSubGrupoRowCount";
 
-	/** The Constant STMT_FETCH_SUBGRUPO_ALL_REQUEST. */
-	private static final String STMT_FETCH_SUBGRUPO_ALL_REQUEST = NAMESPACE_SUBGRUPO + "fetchAllSubgruposRequest";
+	/** The Constant STMT_FETCH_SubGrupo_ALL_REQUEST. */
+	private static final String STMT_FETCH_SubGrupo_ALL_REQUEST = NAMESPACE_SubGrupo + "fetchAllSubGruposRequest";
 
 ///===================================### UNIMED ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_UNIMED = "UnimedMap.";
+private static final String NAMESPACE_UNIMED = "UniMedMap.";
 
 /** The Constant STMT_INSERT_UNIMED. */
-private static final String STMT_INSERT_UNIMED = NAMESPACE_UNIMED + "insertUnimed";
+private static final String STMT_INSERT_UNIMED = NAMESPACE_UNIMED + "insertUniMed";
 
 /** The Constant STMT_UPDATE_UNIMED. */
-private static final String STMT_UPDATE_UNIMED = NAMESPACE_UNIMED + "updateUnimed";
+private static final String STMT_UPDATE_UNIMED = NAMESPACE_UNIMED + "updateUniMed";
 
 /** The Constant STMT_DELETE_UNIMED. */
-private static final String STMT_DELETE_UNIMED = NAMESPACE_UNIMED + "deleteUnimedById";
+private static final String STMT_DELETE_UNIMED = NAMESPACE_UNIMED + "deleteUniMedById";
 
 	/** The Constant STMT_DELETE_UNIMED_ALL. */
-	private static final String STMT_DELETE_UNIMED_ALL = NAMESPACE_UNIMED + "deleteAllUnimeds";
+	private static final String STMT_DELETE_UNIMED_ALL = NAMESPACE_UNIMED + "deleteAllUniMeds";
 
 	/** The Constant STMT_FETCH_UNIMED. */
-	private static final String STMT_FETCH_UNIMED = NAMESPACE_UNIMED + "fetchUnimedById";
+	private static final String STMT_FETCH_UNIMED = NAMESPACE_UNIMED + "fetchUniMedById";
 
 	/** The Constant STMT_FETCH_UNIMED_ALL. */
-	private static final String STMT_FETCH_UNIMED_ALL = NAMESPACE_UNIMED + "fetchAllUnimeds";
+	private static final String STMT_FETCH_UNIMED_ALL = NAMESPACE_UNIMED + "fetchAllUniMeds";
 
 	/** The Constant STMT_FETCH_UNIMED_COUNT. */
-	private static final String STMT_FETCH_UNIMED_COUNT = NAMESPACE_UNIMED + "fetchUnimedRowCount";
+	private static final String STMT_FETCH_UNIMED_COUNT = NAMESPACE_UNIMED + "fetchUniMedRowCount";
 
 	/** The Constant STMT_FETCH_UNIMED_ALL_REQUEST. */
-	private static final String STMT_FETCH_UNIMED_ALL_REQUEST = NAMESPACE_UNIMED + "fetchAllUnimedsRequest";
+	private static final String STMT_FETCH_UNIMED_ALL_REQUEST = NAMESPACE_UNIMED + "fetchAllUniMedsRequest";
 
 ///===================================### TRIBUTACAO ####======================================
 /** The Constant NAMESPACE. */
@@ -331,31 +331,31 @@ private static final String STMT_DELETE_CUSTO = NAMESPACE_CUSTO + "deleteCustoBy
 
 ///===================================### CUSTOITENS ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_CUSTOITENS = "CustoitensMap.";
+private static final String NAMESPACE_CUSTOITENS = "CustoItensMap.";
 
 /** The Constant STMT_INSERT_CUSTOITENS. */
-private static final String STMT_INSERT_CUSTOITENS = NAMESPACE_CUSTOITENS + "insertCustoitens";
+private static final String STMT_INSERT_CUSTOITENS = NAMESPACE_CUSTOITENS + "insertCustoItens";
 
 /** The Constant STMT_UPDATE_CUSTOITENS. */
-private static final String STMT_UPDATE_CUSTOITENS = NAMESPACE_CUSTOITENS + "updateCustoitens";
+private static final String STMT_UPDATE_CUSTOITENS = NAMESPACE_CUSTOITENS + "updateCustoItens";
 
 /** The Constant STMT_DELETE_CUSTOITENS. */
-private static final String STMT_DELETE_CUSTOITENS = NAMESPACE_CUSTOITENS + "deleteCustoitensById";
+private static final String STMT_DELETE_CUSTOITENS = NAMESPACE_CUSTOITENS + "deleteCustoItensById";
 
 	/** The Constant STMT_DELETE_CUSTOITENS_ALL. */
-	private static final String STMT_DELETE_CUSTOITENS_ALL = NAMESPACE_CUSTOITENS + "deleteAllCustoitenss";
+	private static final String STMT_DELETE_CUSTOITENS_ALL = NAMESPACE_CUSTOITENS + "deleteAllCustoItenss";
 
 	/** The Constant STMT_FETCH_CUSTOITENS. */
-	private static final String STMT_FETCH_CUSTOITENS = NAMESPACE_CUSTOITENS + "fetchCustoitensById";
+	private static final String STMT_FETCH_CUSTOITENS = NAMESPACE_CUSTOITENS + "fetchCustoItensById";
 
 	/** The Constant STMT_FETCH_CUSTOITENS_ALL. */
-	private static final String STMT_FETCH_CUSTOITENS_ALL = NAMESPACE_CUSTOITENS + "fetchAllCustoitenss";
+	private static final String STMT_FETCH_CUSTOITENS_ALL = NAMESPACE_CUSTOITENS + "fetchAllCustoItenss";
 
 	/** The Constant STMT_FETCH_CUSTOITENS_COUNT. */
-	private static final String STMT_FETCH_CUSTOITENS_COUNT = NAMESPACE_CUSTOITENS + "fetchCustoitensRowCount";
+	private static final String STMT_FETCH_CUSTOITENS_COUNT = NAMESPACE_CUSTOITENS + "fetchCustoItensRowCount";
 
 	/** The Constant STMT_FETCH_CUSTOITENS_ALL_REQUEST. */
-	private static final String STMT_FETCH_CUSTOITENS_ALL_REQUEST = NAMESPACE_CUSTOITENS + "fetchAllCustoitenssRequest";
+	private static final String STMT_FETCH_CUSTOITENS_ALL_REQUEST = NAMESPACE_CUSTOITENS + "fetchAllCustoItenssRequest";
 
 ///===================================### ESTOQUE ####======================================
 /** The Constant NAMESPACE. */
@@ -413,33 +413,33 @@ private static final String STMT_DELETE_PORCAO = NAMESPACE_PORCAO + "deletePorca
 	/** The Constant STMT_FETCH_PORCAO_ALL_REQUEST. */
 	private static final String STMT_FETCH_PORCAO_ALL_REQUEST = NAMESPACE_PORCAO + "fetchAllPorcaosRequest";
 
-///===================================### PORCAOITENS ####======================================
+///===================================### PorcaoItens ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_PORCAOITENS = "PorcaoitensMap.";
+private static final String NAMESPACE_PorcaoItens = "PorcaoItensMap.";
 
-/** The Constant STMT_INSERT_PORCAOITENS. */
-private static final String STMT_INSERT_PORCAOITENS = NAMESPACE_PORCAOITENS + "insertPorcaoitens";
+/** The Constant STMT_INSERT_PorcaoItens. */
+private static final String STMT_INSERT_PorcaoItens = NAMESPACE_PorcaoItens + "insertPorcaoItens";
 
-/** The Constant STMT_UPDATE_PORCAOITENS. */
-private static final String STMT_UPDATE_PORCAOITENS = NAMESPACE_PORCAOITENS + "updatePorcaoitens";
+/** The Constant STMT_UPDATE_PorcaoItens. */
+private static final String STMT_UPDATE_PorcaoItens = NAMESPACE_PorcaoItens + "updatePorcaoItens";
 
-/** The Constant STMT_DELETE_PORCAOITENS. */
-private static final String STMT_DELETE_PORCAOITENS = NAMESPACE_PORCAOITENS + "deletePorcaoitensById";
+/** The Constant STMT_DELETE_PorcaoItens. */
+private static final String STMT_DELETE_PorcaoItens = NAMESPACE_PorcaoItens + "deletePorcaoItensById";
 
-	/** The Constant STMT_DELETE_PORCAOITENS_ALL. */
-	private static final String STMT_DELETE_PORCAOITENS_ALL = NAMESPACE_PORCAOITENS + "deleteAllPorcaoitenss";
+	/** The Constant STMT_DELETE_PorcaoItens_ALL. */
+	private static final String STMT_DELETE_PorcaoItens_ALL = NAMESPACE_PorcaoItens + "deleteAllPorcaoItenss";
 
-	/** The Constant STMT_FETCH_PORCAOITENS. */
-	private static final String STMT_FETCH_PORCAOITENS = NAMESPACE_PORCAOITENS + "fetchPorcaoitensById";
+	/** The Constant STMT_FETCH_PorcaoItens. */
+	private static final String STMT_FETCH_PorcaoItens = NAMESPACE_PorcaoItens + "fetchPorcaoItensById";
 
-	/** The Constant STMT_FETCH_PORCAOITENS_ALL. */
-	private static final String STMT_FETCH_PORCAOITENS_ALL = NAMESPACE_PORCAOITENS + "fetchAllPorcaoitenss";
+	/** The Constant STMT_FETCH_PorcaoItens_ALL. */
+	private static final String STMT_FETCH_PorcaoItens_ALL = NAMESPACE_PorcaoItens + "fetchAllPorcaoItenss";
 
-	/** The Constant STMT_FETCH_PORCAOITENS_COUNT. */
-	private static final String STMT_FETCH_PORCAOITENS_COUNT = NAMESPACE_PORCAOITENS + "fetchPorcaoitensRowCount";
+	/** The Constant STMT_FETCH_PorcaoItens_COUNT. */
+	private static final String STMT_FETCH_PorcaoItens_COUNT = NAMESPACE_PorcaoItens + "fetchPorcaoItensRowCount";
 
-	/** The Constant STMT_FETCH_PORCAOITENS_ALL_REQUEST. */
-	private static final String STMT_FETCH_PORCAOITENS_ALL_REQUEST = NAMESPACE_PORCAOITENS + "fetchAllPorcaoitenssRequest";
+	/** The Constant STMT_FETCH_PorcaoItens_ALL_REQUEST. */
+	private static final String STMT_FETCH_PorcaoItens_ALL_REQUEST = NAMESPACE_PorcaoItens + "fetchAllPorcaoItenssRequest";
 
 ///===================================### RENTABILIDADE ####======================================
 /** The Constant NAMESPACE. */
@@ -471,31 +471,31 @@ private static final String STMT_DELETE_RENTABILIDADE = NAMESPACE_RENTABILIDADE 
 
 ///===================================### RENTABILIDADEITENS ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_RENTABILIDADEITENS = "RentabilidadeitensMap.";
+private static final String NAMESPACE_RENTABILIDADEITENS = "RentabilidadeItensMap.";
 
 /** The Constant STMT_INSERT_RENTABILIDADEITENS. */
-private static final String STMT_INSERT_RENTABILIDADEITENS = NAMESPACE_RENTABILIDADEITENS + "insertRentabilidadeitens";
+private static final String STMT_INSERT_RENTABILIDADEITENS = NAMESPACE_RENTABILIDADEITENS + "insertRentabilidadeItens";
 
 /** The Constant STMT_UPDATE_RENTABILIDADEITENS. */
-private static final String STMT_UPDATE_RENTABILIDADEITENS = NAMESPACE_RENTABILIDADEITENS + "updateRentabilidadeitens";
+private static final String STMT_UPDATE_RENTABILIDADEITENS = NAMESPACE_RENTABILIDADEITENS + "updateRentabilidadeItens";
 
 /** The Constant STMT_DELETE_RENTABILIDADEITENS. */
-private static final String STMT_DELETE_RENTABILIDADEITENS = NAMESPACE_RENTABILIDADEITENS + "deleteRentabilidadeitensById";
+private static final String STMT_DELETE_RENTABILIDADEITENS = NAMESPACE_RENTABILIDADEITENS + "deleteRentabilidadeItensById";
 
 	/** The Constant STMT_DELETE_RENTABILIDADEITENS_ALL. */
-	private static final String STMT_DELETE_RENTABILIDADEITENS_ALL = NAMESPACE_RENTABILIDADEITENS + "deleteAllRentabilidadeitenss";
+	private static final String STMT_DELETE_RENTABILIDADEITENS_ALL = NAMESPACE_RENTABILIDADEITENS + "deleteAllRentabilidadeItenss";
 
 	/** The Constant STMT_FETCH_RENTABILIDADEITENS. */
-	private static final String STMT_FETCH_RENTABILIDADEITENS = NAMESPACE_RENTABILIDADEITENS + "fetchRentabilidadeitensById";
+	private static final String STMT_FETCH_RENTABILIDADEITENS = NAMESPACE_RENTABILIDADEITENS + "fetchRentabilidadeItensById";
 
 	/** The Constant STMT_FETCH_RENTABILIDADEITENS_ALL. */
-	private static final String STMT_FETCH_RENTABILIDADEITENS_ALL = NAMESPACE_RENTABILIDADEITENS + "fetchAllRentabilidadeitenss";
+	private static final String STMT_FETCH_RENTABILIDADEITENS_ALL = NAMESPACE_RENTABILIDADEITENS + "fetchAllRentabilidadeItenss";
 
 	/** The Constant STMT_FETCH_RENTABILIDADEITENS_COUNT. */
-	private static final String STMT_FETCH_RENTABILIDADEITENS_COUNT = NAMESPACE_RENTABILIDADEITENS + "fetchRentabilidadeitensRowCount";
+	private static final String STMT_FETCH_RENTABILIDADEITENS_COUNT = NAMESPACE_RENTABILIDADEITENS + "fetchRentabilidadeItensRowCount";
 
 	/** The Constant STMT_FETCH_RENTABILIDADEITENS_ALL_REQUEST. */
-	private static final String STMT_FETCH_RENTABILIDADEITENS_ALL_REQUEST = NAMESPACE_RENTABILIDADEITENS + "fetchAllRentabilidadeitenssRequest";
+	private static final String STMT_FETCH_RENTABILIDADEITENS_ALL_REQUEST = NAMESPACE_RENTABILIDADEITENS + "fetchAllRentabilidadeItenssRequest";
 
 //===================================### PRODUTOPARENT ####======================================
 	/**
@@ -1036,7 +1036,7 @@ public static void fetchMarcasByRequest(SqlSession sqlSession, MarcaInquiryReque
  * @see com.qat.samples.sysmgmt.base.bar.IMarcaProdutoBAR#insertMarcaProduto(com.qat.samples.sysmgmt.base.model.MarcaProduto)
  */
 @Override
-public InternalResponse insertMarcaProduto(MarcaProd marcaproduto)
+public InternalResponse insertMarcaProduto(MarcaProduto marcaproduto)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_MARCAPRODUTO, marcaproduto, response);
@@ -1048,7 +1048,7 @@ public InternalResponse insertMarcaProduto(MarcaProd marcaproduto)
  * @see com.qat.samples.sysmgmt.base.bar.IMarcaProdutoBAR#updateMarcaProduto(com.qat.samples.sysmgmt.base.model.MarcaProduto)
  */
 @Override
-public InternalResponse updateMarcaProduto(MarcaProd marcaproduto)
+public InternalResponse updateMarcaProduto(MarcaProduto marcaproduto)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_MARCAPRODUTO, marcaproduto, response);
@@ -1060,7 +1060,7 @@ public InternalResponse updateMarcaProduto(MarcaProd marcaproduto)
  * @see com.qat.samples.sysmgmt.base.bar.IMarcaProdutoBAR#deleteMarcaProduto(com.qat.samples.sysmgmt.base.model.MarcaProduto)
  */
 @Override
-public InternalResponse deleteMarcaProdutoById(MarcaProd marcaproduto)
+public InternalResponse deleteMarcaProdutoById(MarcaProduto marcaproduto)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_MARCAPRODUTO, marcaproduto, response);
@@ -1085,9 +1085,9 @@ public InternalResponse deleteAllMarcaProdutos()
  * com.qat.samples.sysmgmt.bar.IMarcaProdutoBAR#fetchMarcaProdutoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public MarcaProd fetchMarcaProdutoById(FetchByIdRequest request)
+public MarcaProduto fetchMarcaProdutoById(FetchByIdRequest request)
 {
-return (MarcaProd)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_MARCAPRODUTO, request.getFetchId());
+return (MarcaProduto)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_MARCAPRODUTO, request.getFetchId());
 
 }
 
@@ -1096,9 +1096,9 @@ return (MarcaProd)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_
  * @see com.qat.samples.sysmgmt.base.bar.IMarcaProdutoBAR#fetchAllMarcaProdutosCache()
  */
 @Override
-public InternalResultsResponse<MarcaProd> fetchAllMarcaProdutos(MarcaProd marcaproduto)
+public InternalResultsResponse<MarcaProduto> fetchAllMarcaProdutos(MarcaProduto marcaproduto)
 {
-	InternalResultsResponse<MarcaProd> response = new InternalResultsResponse<MarcaProd>();
+	InternalResultsResponse<MarcaProduto> response = new InternalResultsResponse<MarcaProduto>();
 	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_MARCAPRODUTO_ALL));
 	return response;
 }
@@ -1109,9 +1109,9 @@ public InternalResultsResponse<MarcaProd> fetchAllMarcaProdutos(MarcaProd marcap
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<MarcaProd> fetchMarcaProdutosByRequest(PagedInquiryRequest request)
+public InternalResultsResponse<MarcaProduto> fetchMarcaProdutosByRequest(PagedInquiryRequest request)
 {
-	InternalResultsResponse<MarcaProd> response = new InternalResultsResponse<MarcaProd>();
+	InternalResultsResponse<MarcaProduto> response = new InternalResultsResponse<MarcaProduto>();
 	fetchMarcaProdutosByRequest(getSqlSession(), request, STMT_FETCH_MARCAPRODUTO_COUNT, STMT_FETCH_MARCAPRODUTO_ALL_REQUEST,
 			response);
 	return response;
@@ -1295,17 +1295,17 @@ public static void fetchGruposByRequest(SqlSession sqlSession, GrupoInquiryReque
 	}
 
 
-//===================================### SUBGRUPO ####======================================
+//===================================### SubGrupo ####======================================
 	/**
 /*
  * (non-Javadoc)
  * @see com.qat.samples.sysmgmt.base.bar.ISubGrupoBAR#insertSubGrupo(com.qat.samples.sysmgmt.base.model.SubGrupo)
  */
 @Override
-public InternalResponse insertSubGrupo(SubGrupo subgrupo)
+public InternalResponse insertSubGrupo(SubGrupo SubGrupo)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_SUBGRUPO, subgrupo, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_SubGrupo, SubGrupo, response);
 	return response;
 }
 
@@ -1314,10 +1314,10 @@ public InternalResponse insertSubGrupo(SubGrupo subgrupo)
  * @see com.qat.samples.sysmgmt.base.bar.ISubGrupoBAR#updateSubGrupo(com.qat.samples.sysmgmt.base.model.SubGrupo)
  */
 @Override
-public InternalResponse updateSubGrupo(SubGrupo subgrupo)
+public InternalResponse updateSubGrupo(SubGrupo SubGrupo)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_SUBGRUPO, subgrupo, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_SubGrupo, SubGrupo, response);
 	return response;
 }
 
@@ -1326,10 +1326,10 @@ public InternalResponse updateSubGrupo(SubGrupo subgrupo)
  * @see com.qat.samples.sysmgmt.base.bar.ISubGrupoBAR#deleteSubGrupo(com.qat.samples.sysmgmt.base.model.SubGrupo)
  */
 @Override
-public InternalResponse deleteSubGrupoById(SubGrupo subgrupo)
+public InternalResponse deleteSubGrupoById(SubGrupo SubGrupo)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_SUBGRUPO, subgrupo, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_SubGrupo, SubGrupo, response);
 	return response;
 }
 
@@ -1341,7 +1341,7 @@ public InternalResponse deleteSubGrupoById(SubGrupo subgrupo)
 public InternalResponse deleteAllSubGrupos()
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_SUBGRUPO_ALL, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_SubGrupo_ALL, response);
 	return response;
 }
 
@@ -1353,7 +1353,7 @@ public InternalResponse deleteAllSubGrupos()
 @Override
 public SubGrupo fetchSubGrupoById(FetchByIdRequest request)
 {
-return (SubGrupo)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_SUBGRUPO, request.getFetchId());
+return (SubGrupo)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_SubGrupo, request.getFetchId());
 
 }
 
@@ -1362,10 +1362,10 @@ return (SubGrupo)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_S
  * @see com.qat.samples.sysmgmt.base.bar.ISubGrupoBAR#fetchAllSubGruposCache()
  */
 @Override
-public InternalResultsResponse<SubGrupo> fetchAllSubGrupos(SubGrupo subgrupo)
+public InternalResultsResponse<SubGrupo> fetchAllSubGrupos(SubGrupo SubGrupo)
 {
 	InternalResultsResponse<SubGrupo> response = new InternalResultsResponse<SubGrupo>();
-	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_SUBGRUPO_ALL));
+	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_SubGrupo_ALL));
 	return response;
 }
 
@@ -1378,7 +1378,7 @@ public InternalResultsResponse<SubGrupo> fetchAllSubGrupos(SubGrupo subgrupo)
 public InternalResultsResponse<SubGrupo> fetchSubGruposByRequest(SubGrupoInquiryRequest request)
 {
 	InternalResultsResponse<SubGrupo> response = new InternalResultsResponse<SubGrupo>();
-	fetchSubGruposByRequest(getSqlSession(), request, STMT_FETCH_SUBGRUPO_COUNT, STMT_FETCH_SUBGRUPO_ALL_REQUEST,
+	fetchSubGruposByRequest(getSqlSession(), request, STMT_FETCH_SubGrupo_COUNT, STMT_FETCH_SubGrupo_ALL_REQUEST,
 			response);
 	return response;
 }
@@ -2226,17 +2226,17 @@ public static void fetchPorcaosByRequest(SqlSession sqlSession, PagedInquiryRequ
 	}
 
 
-//===================================### PORCAOITENS ####======================================
+//===================================### PorcaoItens ####======================================
 	/**
 /*
  * (non-Javadoc)
  * @see com.qat.samples.sysmgmt.base.bar.IPorcaoItensBAR#insertPorcaoItens(com.qat.samples.sysmgmt.base.model.PorcaoItens)
  */
 @Override
-public InternalResponse insertPorcaoItens(PorcaoItens porcaoitens)
+public InternalResponse insertPorcaoItens(PorcaoItens PorcaoItens)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PORCAOITENS, porcaoitens, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PorcaoItens, PorcaoItens, response);
 	return response;
 }
 
@@ -2245,10 +2245,10 @@ public InternalResponse insertPorcaoItens(PorcaoItens porcaoitens)
  * @see com.qat.samples.sysmgmt.base.bar.IPorcaoItensBAR#updatePorcaoItens(com.qat.samples.sysmgmt.base.model.PorcaoItens)
  */
 @Override
-public InternalResponse updatePorcaoItens(PorcaoItens porcaoitens)
+public InternalResponse updatePorcaoItens(PorcaoItens PorcaoItens)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PORCAOITENS, porcaoitens, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PorcaoItens, PorcaoItens, response);
 	return response;
 }
 
@@ -2257,10 +2257,10 @@ public InternalResponse updatePorcaoItens(PorcaoItens porcaoitens)
  * @see com.qat.samples.sysmgmt.base.bar.IPorcaoItensBAR#deletePorcaoItens(com.qat.samples.sysmgmt.base.model.PorcaoItens)
  */
 @Override
-public InternalResponse deletePorcaoItensById(PorcaoItens porcaoitens)
+public InternalResponse deletePorcaoItensById(PorcaoItens PorcaoItens)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PORCAOITENS, porcaoitens, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PorcaoItens, PorcaoItens, response);
 	return response;
 }
 
@@ -2272,7 +2272,7 @@ public InternalResponse deletePorcaoItensById(PorcaoItens porcaoitens)
 public InternalResponse deleteAllPorcaoItenss()
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PORCAOITENS_ALL, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PorcaoItens_ALL, response);
 	return response;
 }
 
@@ -2284,7 +2284,7 @@ public InternalResponse deleteAllPorcaoItenss()
 @Override
 public PorcaoItens fetchPorcaoItensById(FetchByIdRequest request)
 {
-return (PorcaoItens)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_PORCAOITENS, request.getFetchId());
+return (PorcaoItens)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_PorcaoItens, request.getFetchId());
 
 }
 
@@ -2293,10 +2293,10 @@ return (PorcaoItens)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETC
  * @see com.qat.samples.sysmgmt.base.bar.IPorcaoItensBAR#fetchAllPorcaoItenssCache()
  */
 @Override
-public InternalResultsResponse<PorcaoItens> fetchAllPorcaoItenss(PorcaoItens porcaoitens)
+public InternalResultsResponse<PorcaoItens> fetchAllPorcaoItenss(PorcaoItens PorcaoItens)
 {
 	InternalResultsResponse<PorcaoItens> response = new InternalResultsResponse<PorcaoItens>();
-	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_PORCAOITENS_ALL));
+	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_PorcaoItens_ALL));
 	return response;
 }
 
@@ -2309,7 +2309,7 @@ public InternalResultsResponse<PorcaoItens> fetchAllPorcaoItenss(PorcaoItens por
 public InternalResultsResponse<PorcaoItens> fetchPorcaoItenssByRequest(PagedInquiryRequest request)
 {
 	InternalResultsResponse<PorcaoItens> response = new InternalResultsResponse<PorcaoItens>();
-	fetchPorcaoItenssByRequest(getSqlSession(), request, STMT_FETCH_PORCAOITENS_COUNT, STMT_FETCH_PORCAOITENS_ALL_REQUEST,
+	fetchPorcaoItenssByRequest(getSqlSession(), request, STMT_FETCH_PorcaoItens_COUNT, STMT_FETCH_PorcaoItens_ALL_REQUEST,
 			response);
 	return response;
 }
@@ -2625,7 +2625,7 @@ public static void fetchRentabilidadeItenssByRequest(SqlSession sqlSession, Page
 	}
 
 @Override
-public MarcaProd fetchMarcaProdutosById(FetchByIdRequest request) {
+public MarcaProduto fetchMarcaProdutosById(FetchByIdRequest request) {
 	// TODO Auto-generated method stub
 	return null;
 }

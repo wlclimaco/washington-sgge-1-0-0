@@ -24,11 +24,11 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<collection property="rentabilidadeList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+	<collection property="rentabilidadeItensList" column="id" select="RentabilidadeItensMap.fetchRentabilidadeByRentabilidadeItens"/>
   </resultMap>
 
   <sql id="allRentabilidadeColumns">
-,parentId
+parentId
 ,emprId
 ,processId
 ,create_date
@@ -63,13 +63,13 @@
  <select id="fetchAllRentabilidadesRequest" parameterType="PagedInquiryRequest" resultMap="RentabilidadeResult">
 
 		SELECT id,<include refid="allRentabilidadeColumns" />
-  		  FROM rentabilidade where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+  		  FROM rentabilidade where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchRentabilidadeRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM rentabilidade WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM rentabilidade WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 13/05/2016 17:59 : 56-->
+<!-- create by system gera-java version 1.0.0 17/05/2016 23:35 : 36-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -18,28 +18,30 @@
   <resultMap id="ProdutoParentResult" type="ProdutoParent">
     <result property="id" column="id"/>
     <result property="parentId" column="parentId"/>
-    <result property="emprId" column="emprId"/>
-    <result property="tributacao" column="tributacao"/>
+ <!--     <result property="tributacao" column="tributacao"/>
+<collection property="estoqueList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="precoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="custoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="porcaoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="rentabilidadeList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="cfopList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>-->
     <result property="dataValidade" column="dataValidade"/>
-	<result property="emprId" column="emprId"/>
-	<result property="processId" column="processId"/>
-	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
-	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
-	<collection property="estoqueList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-	<collection property="precoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-	<collection property="custoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-	<collection property="porcaoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-	<collection property="rentabilidadeList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-	<collection property="cfopList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+    <result property="localizacao" column="localizacao"/>
+    <result property="comissao" column="comissao"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
   <sql id="allProdutoParentColumns">
 parentId
-,emprId
 ,tributacao
 ,dataValidade
+,localizacao
+,comissao
 ,emprId
 ,processId
 ,create_date
@@ -50,9 +52,10 @@ parentId
 </sql>
 <sql id="allProdutoParentValues">
 #{parentId},
-#{emprId},
-#{tributacao},
+#{tributacao.id},
 #{dataValidade},
+#{localizacao},
+#{comissao},
 		#{emprId},
 		#{processId},
 		#{createDateUTC},
@@ -98,8 +101,10 @@ parentId
    UPDATE produtoparent SET
 <if test="parentId!= null">parentId = #{parentId},</if>
 <if test="emprId!= null">emprId = #{emprId},</if>
-<if test="tributacao!= null">tributacao = #{tributacao},</if>
+<if test="tributacao.id!= null">tributacao = #{tributacao.id},</if>
 <if test="dataValidade!= null">dataValidade = #{dataValidade},</if>
+<if test="localizacao!= null">localizacao = #{localizacao},</if>
+<if test="comissao!= null">comissao = #{comissao},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

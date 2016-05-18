@@ -23,5 +23,18 @@
             <artifactId>nfe</artifactId>
             <version>1.1.12</version>
         </dependency>
+        <!-- Simple Xml Framework -->
+        <dependency>
+            <groupId>org.simpleframework</groupId>
+            <artifactId>simple-xml</artifactId>
+            <version>2.7.1</version>
+        </dependency>
+
+        <!-- Commons Lang -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
     </dependencies>
 </project>

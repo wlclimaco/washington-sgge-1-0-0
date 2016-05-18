@@ -18,17 +18,17 @@
   <resultMap id="MarcaProdutoResult" type="MarcaProduto">
     <result property="id" column="id"/>
     <result property="parentId" column="parentId"/>
-    <result property="marcaId" column="marcaId"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<association property="marcaId"    column="marcaId" select="MarcaMap.fetchMarcaById"  />
   </resultMap>
 
   <sql id="allMarcaProdutoColumns">
-,parentId
+parentId
 ,marcaId
 ,emprId
 ,processId
@@ -40,7 +40,7 @@
 </sql>
 <sql id="allMarcaProdutoValues">
 #{parentId},
-#{marcaId},
+#{marcaId.id},
 		#{emprId},
 		#{processId},
 		#{createDateUTC},
@@ -62,16 +62,16 @@
    FROM marcaproduto WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllMarcaProdutosRequest" parameterType="MarcaProdutoInquiryRequest" resultMap="MarcaProdutoResult">
+ <select id="fetchAllMarcaProdutosRequest" parameterType="PagedInquiryRequest" resultMap="MarcaProdutoResult">
 
 		SELECT id,<include refid="allMarcaProdutoColumns" />
-  		  FROM marcaproduto where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+  		  FROM marcaproduto where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchMarcaProdutoRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM marcaproduto WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM marcaproduto WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 
@@ -85,7 +85,7 @@
  <update id="updateMarcaProduto" parameterType="MarcaProduto">
    UPDATE marcaproduto SET
 <if test="parentId!= null">parentId = #{parentId},</if>
-<if test="marcaId!= null">marcaId = #{marcaId},</if>
+<if test="marcaId.id!= null">marcaId = #{marcaId.id},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

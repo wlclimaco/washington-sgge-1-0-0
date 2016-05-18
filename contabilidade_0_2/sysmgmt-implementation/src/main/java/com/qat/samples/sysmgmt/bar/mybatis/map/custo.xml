@@ -25,11 +25,11 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="custo" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="custoItens" column="id" select="CustoItensMap.fetchCustoByCustoItens"/>
   </resultMap>
 
   <sql id="allCustoColumns">
-,valor
+valor
 ,parentId
 ,emprId
 ,processId
@@ -66,13 +66,13 @@
  <select id="fetchAllCustosRequest" parameterType="PagedInquiryRequest" resultMap="CustoResult">
 
 		SELECT id,<include refid="allCustoColumns" />
-  		  FROM custo where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+  		  FROM custo where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchCustoRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM custo WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM custo WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 

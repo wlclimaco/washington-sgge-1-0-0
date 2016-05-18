@@ -32,14 +32,15 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="classificacao" column="classificacao" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="uniMed" column="uniMed" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="grupo" column="grupo" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="subGrupo" column="subGrupo" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="marca" column="marca" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="porcao" column="porcao" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+  <association property="classificacao"    column="classificacao" select="ClassificacaoMap.fetchClassificacaoById"  />
+	<association property="uniMed"    column="uniMed" select="UniMedMap.fetchUniMedById"  />
+	<association property="grupo"    column="grupo" select="GrupoMap.fetchGrupoById"  />
+	<association property="subGrupo"    column="subGrupo" select="ClassificacaoMap.fetchClassificacaoById"  />
+	<association property="marca"    column="marca" select="ClassificacaoMap.fetchClassificacaoById"  />
+	<association property="porcao"    column="porcao" select="ClassificacaoMap.fetchClassificacaoById"  />
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
 	<collection property="notes" column="id" select="NoteMap.fetchNoteByNotes"/>
+	<!--<collection property="marca" column="marca" select="NoteMap.fetchNoteByNotes"/>-->
   </resultMap>
 
   <sql id="allProdutoColumns">

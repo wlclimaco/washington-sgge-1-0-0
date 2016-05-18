@@ -28,7 +28,7 @@
   </resultMap>
 
   <sql id="allClassificacaoColumns">
-,descricao
+descricao
 ,codigo
 ,emprId
 ,processId

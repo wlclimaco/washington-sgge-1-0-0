@@ -29,7 +29,7 @@
   </resultMap>
 
   <sql id="allCustoItensColumns">
-,parentId
+parentId
 ,custo
 ,custoDesp
 ,emprId
@@ -65,16 +65,21 @@
    FROM custoitens WHERE id = #{fetchid}
  </select>
 
+ <select id="fetchCustoByCustoItens" parameterType="Integer" resultMap="CustoItensResult">
+    SELECT id,
+	<include refid="allCustoItensColumns" />
+   FROM custoitens WHERE parentid = #{fetchid}
+ </select>
  <select id="fetchAllCustoItenssRequest" parameterType="PagedInquiryRequest" resultMap="CustoItensResult">
 
 		SELECT id,<include refid="allCustoItensColumns" />
-  		  FROM custoitens where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+  		  FROM custoitens where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchCustoItensRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM custoitens WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM custoitens WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 

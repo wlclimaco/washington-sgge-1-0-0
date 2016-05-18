@@ -258,6 +258,8 @@
 
 		<typeAlias alias="Cst" type="com.qat.samples.sysmgmt.fiscal.model.Cst"/>
 
+<typeAlias alias="MarcaProduto" type="com.qat.samples.sysmgmt.produto.model.MarcaProduto"/>
+
 		<typeAlias alias="Custo" type="com.qat.samples.sysmgmt.produto.model.Custo"/>
 		<typeAlias alias="CustoItens" type="com.qat.samples.sysmgmt.produto.model.CustoItens"/>
 
@@ -273,7 +275,7 @@
   		<typeAlias alias="GrupoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.GrupoInquiryRequest"/>
 
 		<typeAlias alias="Marca" type="com.qat.samples.sysmgmt.produto.model.Marca"/>
-		<typeAlias alias="MarcaProd" type="com.qat.samples.sysmgmt.produto.model.MarcaProd"/>
+
   		<typeAlias alias="MarcaInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest"/>
 
 		<typeAlias alias="Porcao" type="com.qat.samples.sysmgmt.produto.model.Porcao"/>
@@ -289,8 +291,8 @@
 
 		<typeAlias alias="Tributacao" type="com.qat.samples.sysmgmt.fiscal.model.Tributacao"/>
   		<typeAlias alias="TributacaoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest"/>
-
-
+<typeAlias alias="ProdutoParentInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.ProdutoParentInquiryRequest"/>
+<typeAlias alias="ProdutoParent" type="com.qat.samples.sysmgmt.produto.model.ProdutoParent"/>
 		<typeAlias alias="UniMed" type="com.qat.samples.sysmgmt.produto.model.UniMed"/>
 		<typeAlias alias="SubGrupo" type="com.qat.samples.sysmgmt.produto.model.SubGrupo"/>
 		<typeAlias alias="UniMedProd" type="com.qat.samples.sysmgmt.produto.model.UniMedProd"/>
@@ -377,7 +379,7 @@
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/porcao.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/porcaoItens.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/rentabilidade.xml"/>
-		<!-- <mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/rentabilidadeItens.xml"/> -->
+		 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/rentabilidadeItens.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/subgrupo.xml"/>
 
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/tributos.xml"/>
@@ -405,6 +407,9 @@
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/banco.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/contaCorrente.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/caixa.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/tributacao.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/produtoParent.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/marcaProduto.xml"/>
     </mappers>
 
 </configuration>

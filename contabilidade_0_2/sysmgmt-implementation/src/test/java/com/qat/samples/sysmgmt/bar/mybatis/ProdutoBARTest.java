@@ -32,7 +32,7 @@ import com.qat.samples.sysmgmt.produto.model.CustoItens;
 import com.qat.samples.sysmgmt.produto.model.Estoque;
 import com.qat.samples.sysmgmt.produto.model.Grupo;
 import com.qat.samples.sysmgmt.produto.model.Marca;
-import com.qat.samples.sysmgmt.produto.model.MarcaProd;
+import com.qat.samples.sysmgmt.produto.model.MarcaProduto;
 import com.qat.samples.sysmgmt.produto.model.Porcao;
 import com.qat.samples.sysmgmt.produto.model.PorcaoItens;
 import com.qat.samples.sysmgmt.produto.model.Preco;
@@ -121,7 +121,7 @@ public IProdutoBAR getProdutoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		ProdutoParent ProdutoParentResponse = getProdutoBAR().fetchProdutoParentById(request);
-		Assert.assertEquals(ProdutoParentResponse.getLocalizacao(), "NATIVE INSERT");
+		Assert.assertEquals(ProdutoParentResponse.getLocalizacao(), "localizacao_11");
 		getProdutoBAR().updateProdutoParent(ProdutoParent);
 		ProdutoParentResponse = getProdutoBAR().fetchProdutoParentById(request);
 		Assert.assertEquals(ProdutoParentResponse.getLocalizacao(), "NATIVE INSERT UPDATE");
@@ -209,7 +209,7 @@ public IProdutoBAR getProdutoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Produto produtoResponse = getProdutoBAR().fetchProdutoById(request);
-		Assert.assertEquals(produtoResponse.getProduto(), "NATIVE INSERT");
+		Assert.assertEquals(produtoResponse.getProduto(), "produto_3");
 		getProdutoBAR().updateProduto(produto);
 		produtoResponse = getProdutoBAR().fetchProdutoById(request);
 		Assert.assertEquals(produtoResponse.getProduto(), "NATIVE INSERT UPDATE");
@@ -297,7 +297,7 @@ public IProdutoBAR getProdutoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Cfop cfopResponse = getProdutoBAR().fetchCfopById(request);
-		Assert.assertEquals(cfopResponse.getCfop(), "NATIVE INSERT");
+		Assert.assertEquals(cfopResponse.getCfop(), "cfop_1");
 		getProdutoBAR().updateCfop(cfop);
 		cfopResponse = getProdutoBAR().fetchCfopById(request);
 		Assert.assertEquals(cfopResponse.getCfop(), "NATIVE INSERT UPDATE");
@@ -385,7 +385,7 @@ public IProdutoBAR getProdutoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Marca marcaResponse = getProdutoBAR().fetchMarcaById(request);
-		Assert.assertEquals(marcaResponse.getMarca(), "NATIVE INSERT");
+		Assert.assertEquals(marcaResponse.getMarca(), "marca_1");
 		getProdutoBAR().updateMarca(marca);
 		marcaResponse = getProdutoBAR().fetchMarcaById(request);
 		Assert.assertEquals(marcaResponse.getMarca(), "NATIVE INSERT UPDATE");
@@ -436,10 +436,10 @@ public IProdutoBAR getProdutoBAR()
 @Test
 	public void testDeleteMarcaProd()
 	{
-		MarcaProd marcaproduto = insertMarcaProd(4, TabelaEnum.MARCAPRODUTO, PersistenceActionEnum.INSERT);
+		MarcaProduto marcaproduto = insertMarcaProd(4, TabelaEnum.MARCAPRODUTO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
-		MarcaProd marcaprodutoResponse = getProdutoBAR().fetchMarcaProdutoById(request);
+		MarcaProduto marcaprodutoResponse = getProdutoBAR().fetchMarcaProdutoById(request);
 		Assert.assertEquals(marcaprodutoResponse, null);
 		getProdutoBAR().insertMarcaProduto(marcaproduto);
 		marcaprodutoResponse = getProdutoBAR().fetchMarcaProdutoById(request);
@@ -452,8 +452,8 @@ public IProdutoBAR getProdutoBAR()
 	@Test
 	public void testFetchAllMarcaProds()
 	{
-	MarcaProd marcaproduto = new MarcaProd();
-		List<MarcaProd> response = getProdutoBAR().fetchAllMarcaProdutos(marcaproduto).getResultsList();
+	MarcaProduto marcaproduto = new MarcaProduto();
+		List<MarcaProduto> response = getProdutoBAR().fetchAllMarcaProdutos(marcaproduto).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
@@ -461,22 +461,22 @@ public IProdutoBAR getProdutoBAR()
 	public void testDeleteAllMarcaProds()
 	{
 		getProdutoBAR().deleteAllMarcaProdutos();
-	MarcaProd marcaproduto = new MarcaProd();
-		List<MarcaProd> response = getProdutoBAR().fetchAllMarcaProdutos(new MarcaProd()).getResultsList();
+	MarcaProduto marcaproduto = new MarcaProduto();
+		List<MarcaProduto> response = getProdutoBAR().fetchAllMarcaProdutos(new MarcaProduto()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
 	public void testUpdateMarcaProd()
 	{
-		MarcaProd marcaproduto = insertMarcaProd(1, TabelaEnum.MARCAPRODUTO, PersistenceActionEnum.UPDATE);
+		MarcaProduto marcaproduto = insertMarcaProd(1, TabelaEnum.MARCAPRODUTO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
-		MarcaProd marcaprodutoResponse = getProdutoBAR().fetchMarcaProdutoById(request);
-		Assert.assertEquals(marcaprodutoResponse.getModifyUser(),"system");
+		MarcaProduto marcaprodutoResponse = getProdutoBAR().fetchMarcaProdutoById(request);
+		Assert.assertEquals(marcaprodutoResponse.getModifyUser(),"rod");
 		getProdutoBAR().updateMarcaProduto(marcaproduto);
 		marcaprodutoResponse = getProdutoBAR().fetchMarcaProdutoById(request);
-		Assert.assertEquals(marcaprodutoResponse.getModifyUser(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(marcaprodutoResponse.getModifyUser(), "system");
 	}
 
 	@Test
@@ -487,7 +487,7 @@ public IProdutoBAR getProdutoBAR()
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
-		InternalResultsResponse<MarcaProd> response = getProdutoBAR().fetchMarcaProdutosByRequest(request);
+		InternalResultsResponse<MarcaProduto> response = getProdutoBAR().fetchMarcaProdutosByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
@@ -503,7 +503,7 @@ public IProdutoBAR getProdutoBAR()
 		// check for valid and no precount
 		PagedInquiryRequest request2 = new PagedInquiryRequest();
 		request2.setPreQueryCount(false);
-		InternalResultsResponse<MarcaProd> response2 = getProdutoBAR().fetchMarcaProdutosByRequest(request2);
+		InternalResultsResponse<MarcaProduto> response2 = getProdutoBAR().fetchMarcaProdutosByRequest(request2);
 		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
 		// this is because we did not choose to precount
@@ -513,7 +513,7 @@ public IProdutoBAR getProdutoBAR()
 		getProdutoBAR().deleteAllMarcaProdutos();
 		PagedInquiryRequest request3 = new PagedInquiryRequest();
 		request3.setPreQueryCount(true);
-		InternalResultsResponse<MarcaProd> response3 = getProdutoBAR().fetchMarcaProdutosByRequest(request3);
+		InternalResultsResponse<MarcaProduto> response3 = getProdutoBAR().fetchMarcaProdutosByRequest(request3);
 		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 	}
@@ -561,7 +561,7 @@ public IProdutoBAR getProdutoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Grupo grupoResponse = getProdutoBAR().fetchGrupoById(request);
-		Assert.assertEquals(grupoResponse.getGrupo(), "NATIVE INSERT");
+		Assert.assertEquals(grupoResponse.getGrupo(), "grupo_1");
 		getProdutoBAR().updateGrupo(grupo);
 		grupoResponse = getProdutoBAR().fetchGrupoById(request);
 		Assert.assertEquals(grupoResponse.getGrupo(), "NATIVE INSERT UPDATE");
@@ -649,7 +649,7 @@ public IProdutoBAR getProdutoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		SubGrupo subgrupoResponse = getProdutoBAR().fetchSubGrupoById(request);
-		Assert.assertEquals(subgrupoResponse.getSubGrupo(), "NATIVE INSERT");
+		Assert.assertEquals(subgrupoResponse.getSubGrupo(), "subGrupo_1");
 		getProdutoBAR().updateSubGrupo(subgrupo);
 		subgrupoResponse = getProdutoBAR().fetchSubGrupoById(request);
 		Assert.assertEquals(subgrupoResponse.getSubGrupo(), "NATIVE INSERT UPDATE");
@@ -737,7 +737,7 @@ public IProdutoBAR getProdutoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		UniMed unimedResponse = getProdutoBAR().fetchUniMedById(request);
-		Assert.assertEquals(unimedResponse.getUnimed(), "NATIVE INSERT");
+		Assert.assertEquals(unimedResponse.getUnimed(), "unimed_1");
 		getProdutoBAR().updateUniMed(unimed);
 		unimedResponse = getProdutoBAR().fetchUniMedById(request);
 		Assert.assertEquals(unimedResponse.getUnimed(), "NATIVE INSERT UPDATE");
@@ -825,10 +825,10 @@ public IProdutoBAR getProdutoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Tributacao tributacaoResponse = getProdutoBAR().fetchTributacaoById(request);
-		Assert.assertEquals(tributacaoResponse.getCreateUser(), "NATIVE INSERT");
+		Assert.assertEquals(tributacaoResponse.getCreateUser(), "system");
 		getProdutoBAR().updateTributacao(tributacao);
 		tributacaoResponse = getProdutoBAR().fetchTributacaoById(request);
-		Assert.assertEquals(tributacaoResponse.getCreateUser(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(tributacaoResponse.getCreateUser(), "system");
 	}
 
 	@Test
@@ -913,10 +913,10 @@ public IProdutoBAR getProdutoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Custo custoResponse = getProdutoBAR().fetchCustoById(request);
-		Assert.assertEquals(custoResponse.getCreateUser(), "NATIVE INSERT");
+		Assert.assertEquals(custoResponse.getCreateUser(), "system");
 		getProdutoBAR().updateCusto(custo);
 		custoResponse = getProdutoBAR().fetchCustoById(request);
-		Assert.assertEquals(custoResponse.getCreateUser(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(custoResponse.getCreateUser(), "system");
 	}
 
 	@Test
@@ -1001,10 +1001,10 @@ public IProdutoBAR getProdutoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		CustoItens custoitensResponse = getProdutoBAR().fetchCustoItensById(request);
-		Assert.assertEquals(custoitensResponse.getCusto(), "NATIVE INSERT");
+		Assert.assertEquals(custoitensResponse.getCusto(), "1");
 		getProdutoBAR().updateCustoItens(custoitens);
 		custoitensResponse = getProdutoBAR().fetchCustoItensById(request);
-		Assert.assertEquals(custoitensResponse.getCusto(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(custoitensResponse.getCusto(), "Custo");
 	}
 
 	@Test
@@ -1089,10 +1089,10 @@ public IProdutoBAR getProdutoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Estoque estoqueResponse = getProdutoBAR().fetchEstoqueById(request);
-		Assert.assertEquals(estoqueResponse.getCreateUser(), "NATIVE INSERT");
+		Assert.assertEquals(estoqueResponse.getModifyUser(), "rod");
 		getProdutoBAR().updateEstoque(estoque);
 		estoqueResponse = getProdutoBAR().fetchEstoqueById(request);
-		Assert.assertEquals(estoqueResponse.getCreateUser(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(estoqueResponse.getModifyUser(), "system");
 	}
 
 	@Test
@@ -1177,10 +1177,10 @@ public IProdutoBAR getProdutoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Porcao porcaoResponse = getProdutoBAR().fetchPorcaoById(request);
-		Assert.assertEquals(porcaoResponse.getCreateUser(), "NATIVE INSERT");
+		Assert.assertEquals(porcaoResponse.getCreateUser(), "system");
 		getProdutoBAR().updatePorcao(porcao);
 		porcaoResponse = getProdutoBAR().fetchPorcaoById(request);
-		Assert.assertEquals(porcaoResponse.getCreateUser(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(porcaoResponse.getCreateUser(), "system");
 	}
 
 	@Test
@@ -1265,7 +1265,7 @@ public IProdutoBAR getProdutoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		PorcaoItens porcaoitensResponse = getProdutoBAR().fetchPorcaoItensById(request);
-		Assert.assertEquals(porcaoitensResponse.getNome(), "NATIVE INSERT");
+		Assert.assertEquals(porcaoitensResponse.getNome(), "nome_5");
 		getProdutoBAR().updatePorcaoItens(porcaoitens);
 		porcaoitensResponse = getProdutoBAR().fetchPorcaoItensById(request);
 		Assert.assertEquals(porcaoitensResponse.getNome(), "NATIVE INSERT UPDATE");
@@ -1353,10 +1353,10 @@ public IProdutoBAR getProdutoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Rentabilidade rentabilidadeResponse = getProdutoBAR().fetchRentabilidadeById(request);
-		Assert.assertEquals(rentabilidadeResponse.getCreateUser(), "NATIVE INSERT");
+		Assert.assertEquals(rentabilidadeResponse.getCreateUser(), "system");
 		getProdutoBAR().updateRentabilidade(rentabilidade);
 		rentabilidadeResponse = getProdutoBAR().fetchRentabilidadeById(request);
-		Assert.assertEquals(rentabilidadeResponse.getCreateUser(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(rentabilidadeResponse.getCreateUser(), "system");
 	}
 
 	@Test
@@ -1441,10 +1441,10 @@ public IProdutoBAR getProdutoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		RentabilidadeItens rentabilidadeitensResponse = getProdutoBAR().fetchRentabilidadeItensById(request);
-		Assert.assertEquals(rentabilidadeitensResponse.getCreateUser(), "NATIVE INSERT");
+		Assert.assertEquals(rentabilidadeitensResponse.getCreateUser(), "system");
 		getProdutoBAR().updateRentabilidadeItens(rentabilidadeitens);
 		rentabilidadeitensResponse = getProdutoBAR().fetchRentabilidadeItensById(request);
-		Assert.assertEquals(rentabilidadeitensResponse.getCreateUser(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(rentabilidadeitensResponse.getCreateUser(), "system");
 	}
 
 	@Test
@@ -1512,9 +1512,10 @@ public IProdutoBAR getProdutoBAR()
 		{
 			ProdutoParent ProdutoParent = new ProdutoParent();
 			Date a = new Date();
-			ProdutoParent.setId(100);
-			ProdutoParent.setParentId(100);
+			ProdutoParent.setId(id);
+			ProdutoParent.setParentId(id);
 			ProdutoParent.setEmprId(100);
+			ProdutoParent.setLocalizacao("NATIVE INSERT UPDATE");
 			ProdutoParent.setTributacao(insertTributacao(id, tabela, action));
 			ProdutoParent.setEstoqueList(new ArrayList<Estoque>());
 			ProdutoParent.getEstoqueList().add(insertEstoque(id,TabelaEnum.PRODUTOPARENT,action));
@@ -1564,16 +1565,16 @@ public IProdutoBAR getProdutoBAR()
 		{
 			Produto produto = new Produto();
 			Date a = new Date();
-			produto.setId(100);
+			produto.setId(id);
 			produto.setCodigo("NATIVE INSERT UPDATE");
 			produto.setCdBarras("NATIVE INSERT UPDATE");
 			produto.setProduto("NATIVE INSERT UPDATE");
 			produto.setDataCreate(a.getTime());
 			produto.setAplicacao("NATIVE INSERT UPDATE");
 			produto.setFracao("NATIVE INSERT UPDATE");
-			produto.setPorcao(new Double(1.99));
-			produto.setPesoBruto(new Double(1.99));
-			produto.setPesoLiquido(new Double(1.99));
+//			produto.setPorcao(new Double(1.99));
+//			produto.setPesoBruto(new Double(1.99));
+//			produto.setPesoLiquido(new Double(1.99));
 			produto.setModoUso("NATIVE INSERT UPDATE");
 			produto.setParentId(id);
 			produto.setEmprId(1);
@@ -1592,7 +1593,7 @@ public IProdutoBAR getProdutoBAR()
 		{
 			Cfop cfop = new Cfop();
 			Date a = new Date();
-			cfop.setId(100);
+			cfop.setId(id);
 			cfop.setCfop("NATIVE INSERT UPDATE");
 			cfop.setNatureza("NATIVE INSERT UPDATE");
 			cfop.setSimplificado("NATIVE INSERT UPDATE");
@@ -1620,7 +1621,7 @@ public IProdutoBAR getProdutoBAR()
 		{
 			Marca marca = new Marca();
 			Date a = new Date();
-			marca.setId(100);
+			marca.setId(id);
 			marca.setFabricante("NATIVE INSERT UPDATE");
 			marca.setMarca("NATIVE INSERT UPDATE");
 			marca.setParentId(id);
@@ -1636,12 +1637,12 @@ public IProdutoBAR getProdutoBAR()
 		}
 
 
-	public MarcaProd insertMarcaProd(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	public MarcaProduto insertMarcaProd(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
-			MarcaProd marcaproduto = new MarcaProd();
+			MarcaProduto marcaproduto = new MarcaProduto();
 			Date a = new Date();
-			marcaproduto.setId(100);
-			marcaproduto.setParentId(100);
+			marcaproduto.setId(id);
+			marcaproduto.setParentId(id);
 			marcaproduto.setMarcaId(insertMarca(id, tabela, action));
 			marcaproduto.setParentId(id);
 			marcaproduto.setEmprId(1);
@@ -1660,7 +1661,7 @@ public IProdutoBAR getProdutoBAR()
 		{
 			Grupo grupo = new Grupo();
 			Date a = new Date();
-			grupo.setId(100);
+			grupo.setId(id);
 			grupo.setGrupo("NATIVE INSERT UPDATE");
 			grupo.setDescricao("NATIVE INSERT UPDATE");
 			grupo.setSubGrupo(insertSubGrupo(id, tabela, action));
@@ -1681,7 +1682,7 @@ public IProdutoBAR getProdutoBAR()
 		{
 			SubGrupo subgrupo = new SubGrupo();
 			Date a = new Date();
-			subgrupo.setId(100);
+			subgrupo.setId(id);
 			subgrupo.setSubGrupo("NATIVE INSERT UPDATE");
 			subgrupo.setDescricao("NATIVE INSERT UPDATE");
 			subgrupo.setParentId(id);
@@ -1701,7 +1702,7 @@ public IProdutoBAR getProdutoBAR()
 		{
 			UniMed unimed = new UniMed();
 			Date a = new Date();
-			unimed.setId(100);
+			unimed.setId(id);
 			unimed.setUnimed("NATIVE INSERT UPDATE");
 			unimed.setSigla("NATIVE INSERT UPDATE");
 			unimed.setParentId(id);
@@ -1721,8 +1722,7 @@ public IProdutoBAR getProdutoBAR()
 		{
 			Tributacao tributacao = new Tributacao();
 			Date a = new Date();
-			tributacao.setId(100);
-			tributacao.setParentId(100);
+			tributacao.setId(id);
 		//	tributacao.setCstId(100);
 			tributacao.setIcms(new Double(1.99));
 			tributacao.setSt(new Double(1.99));
@@ -1749,7 +1749,7 @@ public IProdutoBAR getProdutoBAR()
 		{
 			Custo custo = new Custo();
 			Date a = new Date();
-			custo.setId(100);
+			custo.setId(id);
 			custo.setValor(new Double(1.99));
 			custo.setCustoItens(new ArrayList<CustoItens>());
 			custo.getCustoItens().add(insertCustoItens(id,TabelaEnum.CUSTO,action));
@@ -1771,7 +1771,7 @@ public IProdutoBAR getProdutoBAR()
 		{
 			CustoItens custoitens = new CustoItens();
 			Date a = new Date();
-			custoitens.setId(100);
+			custoitens.setId(id);
 			custoitens.setParentId(100);
 			custoitens.setCusto("Custo");
 			custoitens.setCustoDesp(100);
@@ -1792,8 +1792,8 @@ public IProdutoBAR getProdutoBAR()
 		{
 			Estoque estoque = new Estoque();
 			Date a = new Date();
-			estoque.setId(100);
-			estoque.setParentId(100);
+			estoque.setId(id);
+			estoque.setParentId(id);
 			estoque.setEstoqueTypeEnumValue(1);
 			estoque.setUltimoMov(a.getTime());
 			estoque.setQuant(new Double(1.99));
@@ -1814,7 +1814,7 @@ public IProdutoBAR getProdutoBAR()
 		{
 			Porcao porcao = new Porcao();
 			Date a = new Date();
-			porcao.setId(100);
+			porcao.setId(id);
 			porcao.setParentId(100);
 			porcao.setValor(new Double(1.99));
 			porcao.setPorcaoItens(new ArrayList<PorcaoItens>());
@@ -1836,8 +1836,8 @@ public IProdutoBAR getProdutoBAR()
 		{
 			PorcaoItens porcaoitens = new PorcaoItens();
 			Date a = new Date();
-			porcaoitens.setId(100);
-			porcaoitens.setParentId(100);
+			porcaoitens.setId(id);
+			porcaoitens.setParentId(id);
 			porcaoitens.setPorcao(new Double(1.99));
 			porcaoitens.setVd(new Double(1.99));
 			porcaoitens.setUnimed(insertUniMed(id, tabela, action));
@@ -1859,8 +1859,7 @@ public IProdutoBAR getProdutoBAR()
 		{
 			Rentabilidade rentabilidade = new Rentabilidade();
 			Date a = new Date();
-			rentabilidade.setId(100);
-			rentabilidade.setParentId(100);
+			rentabilidade.setId(id);
 			rentabilidade.setRentabilidadeItensList(new ArrayList<RentabilidadeItens>());
 			rentabilidade.getRentabilidadeItensList().add(insertRentabilidadeItens(id,TabelaEnum.RENTABILIDADE,action));
 			rentabilidade.setParentId(id);
@@ -1880,7 +1879,7 @@ public IProdutoBAR getProdutoBAR()
 		{
 			RentabilidadeItens rentabilidadeitens = new RentabilidadeItens();
 			Date a = new Date();
-			rentabilidadeitens.setId(100);
+			rentabilidadeitens.setId(id);
 			rentabilidadeitens.setParentId(100);
 			rentabilidadeitens.setProduto(100);
 			rentabilidadeitens.setValor(new Double(1.99));

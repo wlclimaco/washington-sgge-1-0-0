@@ -10,7 +10,7 @@ import com.qat.samples.sysmgmt.produto.model.CustoItens;
 import com.qat.samples.sysmgmt.produto.model.Estoque;
 import com.qat.samples.sysmgmt.produto.model.Grupo;
 import com.qat.samples.sysmgmt.produto.model.Marca;
-import com.qat.samples.sysmgmt.produto.model.MarcaProd;
+import com.qat.samples.sysmgmt.produto.model.MarcaProduto;
 import com.qat.samples.sysmgmt.produto.model.Porcao;
 import com.qat.samples.sysmgmt.produto.model.PorcaoItens;
 import com.qat.samples.sysmgmt.produto.model.Produto;
@@ -269,7 +269,7 @@ public interface IProdutoBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public MarcaProd fetchMarcaProdutoById(FetchByIdRequest request);
+	public MarcaProduto fetchMarcaProdutoById(FetchByIdRequest request);
 
 	/**
 * Insert marcaproduto.
@@ -278,7 +278,7 @@ public interface IProdutoBAR
 *
 * @return the internal response
 */
-	public InternalResponse insertMarcaProduto(MarcaProd marcaproduto);
+	public InternalResponse insertMarcaProduto(MarcaProduto marcaproduto);
 
 	/**
 * Update marcaproduto.
@@ -287,7 +287,7 @@ public interface IProdutoBAR
 *
 * @return the internal response
 */
-	public InternalResponse updateMarcaProduto(MarcaProd marcaproduto);
+	public InternalResponse updateMarcaProduto(MarcaProduto marcaproduto);
 
 	/**
 * Delete marcaproduto.
@@ -296,7 +296,7 @@ public interface IProdutoBAR
 *
 * @return the internal response
 */
-	public InternalResponse deleteMarcaProdutoById(MarcaProd marcaproduto);
+	public InternalResponse deleteMarcaProdutoById(MarcaProduto marcaproduto);
 
 	/**
 * Delete all marcaprodutos.
@@ -310,7 +310,7 @@ public interface IProdutoBAR
 *
 * @return the list< marcaproduto>
 */
-	public InternalResultsResponse<MarcaProd> fetchAllMarcaProdutos(MarcaProd  marcaproduto);
+	public InternalResultsResponse<MarcaProduto> fetchAllMarcaProdutos(MarcaProduto  marcaproduto);
 
 	/**
 * Fetch marcaprodutos by request.
@@ -318,7 +318,7 @@ public interface IProdutoBAR
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<MarcaProd> fetchMarcaProdutosByRequest(PagedInquiryRequest request);
+	public InternalResultsResponse<MarcaProduto> fetchMarcaProdutosByRequest(PagedInquiryRequest request);
 
 	/**
 	 * Fetch grupo by id.
@@ -947,6 +947,6 @@ public interface IProdutoBAR
 */
 	public InternalResultsResponse<RentabilidadeItens> fetchRentabilidadeItenssByRequest(PagedInquiryRequest request);
 
-	public MarcaProd fetchMarcaProdutosById(FetchByIdRequest request);
+	public MarcaProduto fetchMarcaProdutosById(FetchByIdRequest request);
 
 }

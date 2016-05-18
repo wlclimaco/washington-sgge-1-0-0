@@ -28,7 +28,7 @@
   </resultMap>
 
   <sql id="allUniMedColumns">
-,unimed
+unimed
 ,sigla
 ,emprId
 ,processId
