@@ -508,7 +508,7 @@ function CnaeEmpresaModel() {
 }
 
 //===========================================================================================NFE=======================================================================================================
-
+/*
 function NFBaseModel() {
 
 	var a = [];
@@ -912,7 +912,7 @@ function NFNotaInfoSuplementarModel() {
 
 	return a;
 }
-
+*/
 
 function NFBaseModel() {
 
