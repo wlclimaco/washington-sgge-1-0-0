@@ -764,7 +764,7 @@ $('#checkeds').append(imputs);
 					$("div#tabs").addTab(oProjet[i].interfaces,bacImplTest(oProjet[i].classes,oProjet[i].interfaces));
 				}	
 				if($('#BARIMPLTest').prop('checked')){
-					debugger
+
 					$("div#tabs").addTab(oProjet[i].interfaces,barImplTest(oProjet[i].classes,oProjet[i].interfaces));
 				}	
 				if($('#ControllerTest').prop('checked')){
@@ -801,7 +801,16 @@ $('#checkeds').append(imputs);
 					$("div#tabs").addTab(oProjet[i].interfaces,viewMain(oProjet[i].classes,oProjet[i].interfaces));
 				}	
 				if($('#domain').prop('checked')){
-					$("div#tabs").addTab(oProjet[i].interfaces,domain(oProjet[i].classes,oProjet[i].interfaces));
+					var sqlJ = "";
+					var sqlJ1 = "";
+					debugger
+					for (var x = 0;x< oProjet[i].classes.length;x++){
+						sqlJ = sqlJ + domain(oProjet[i].classes[x].model,oProjet[i].classes[x].classe);
+						sqlJ1 = sqlJ1 + domainTest(oProjet[i].classes[x].model,oProjet[i].classes[x].classe);
+					}
+
+					$("div#tabs").addTab("Domain",sqlJ);
+					$("div#tabs").addTab("MOK",sqlJ1);
 				}	
 				if($('#b-create').prop('checked')){
 					if($('#text-b-create').prop('checked')){

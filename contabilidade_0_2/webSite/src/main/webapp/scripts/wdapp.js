@@ -29,7 +29,7 @@ var WebDaptiveAppConfig = {
 				'wdApp.charts.flot.controllers', 'wdApp.charts.morris.controllers', 'wdApp.charts.chartjs.controllers',
 				'wdApp.charts.other.controllers', 'wdApp.charts.echarts.controllers', 'wdApp.charts.directives', 'wdApp.authentication',
 				'wdApp.pages.controllers', 'wdApp.demodata', 'wdApp.apps.stocks', 'wdApp.apps.stocksdata',
-				'wdApp.apps.counties', 'wdApp.apps.procedures','wdApp.apps.sysmgmt.data']);
+				'wdApp.apps.counties', 'wdApp.apps.procedures','wdApp.apps.sysmgmt.data','wdApp.apps.site']);
 
 	wdApp.config(['$routeProvider',
 		function($routeProvider) {
@@ -47,6 +47,7 @@ var WebDaptiveAppConfig = {
 
 			//geeric routeine for building route from array
 			setRoutes = function(route) {
+
 				var config, url;
 				url = '/' + route;
 				config = {
@@ -63,7 +64,7 @@ var WebDaptiveAppConfig = {
 
 			//routes not automatically built specified here
 			return $routeProvider.when('/', {
-				redirectTo: '/dashboard'
+				redirectTo: '/'
 			}).when('/404', {
 				templateUrl: 'views/pages/404.html'
 			}).otherwise({
@@ -86,7 +87,8 @@ var WebDaptiveAppConfig = {
 
 	//run each time angular app comes up (runs only once)
 	wdApp.run(function($rootScope, $location, localStorageService) {
-
+		console.log($location.absUrl())
+		console.log($location.url())
 		$rootScope.main = {
 			brand: 'WebDaptive - Angular',
 			name: 'Taz'
