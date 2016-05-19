@@ -70,7 +70,6 @@ qat.model.ServicoByPlano = function(_oObjet)
 //Site Object
 qat.model.Site = function(_oObjet)
 {
-	debugger
      this.id = _oObjet.id;
      this.nome = _oObjet.nome;
      this.url = _oObjet.url;
