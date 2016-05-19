@@ -22,7 +22,7 @@ function EntidadeModel() {
     a.push({field :{campo : "processId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "entidadeId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "emprId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "entidadeEnumValue", tipo :"EntidadeEnum",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "entidadeEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "regime"   , tipo:"Regime",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
    	a.push({field :{campo : "documentos" ,tipo:"List<Documento>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "enderecos", tipo:"List<Endereco>" ,requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -58,7 +58,7 @@ function PessoaModel() {
 	a.push({field :{campo : "tipoPessoa", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "datanasc", tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "foto", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "pessoaTypeEnum", tipo :"PessoaTypeEnum",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "pessoaTypeEnum", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "sexo", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "enderecos", tipo :"List<Endereco>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "documentos", tipo :"List<Documento>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -523,7 +523,7 @@ function NFNotaModel() {
 
     @Element(name = "infNFe")
     private NFNotaInfo info;
-    
+
     @Element(name = "infNFeSupl", required = false)
     private NFNotaInfoSuplementar infoSuplementar;
 
@@ -912,7 +912,7 @@ function NFNotaInfoSuplementarModel() {
 
 	return a;
 }
-*/
+
 
 function NFBaseModel() {
 
@@ -1004,7 +1004,7 @@ function NFBaseModel() {
 	return a;
 }
 
-
+*/
 
 //======================================================================================================================================================================================================
 
@@ -1016,7 +1016,7 @@ function ProdutoParentIdModel() {
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "parentId", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "emprId", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "tributacao" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});	
+	a.push({field :{campo : "tributacao" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "estoqueList" , tipo :"List<Estoque>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "precoList" , tipo :"List<Preco>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "custoList" , tipo :"List<Custo>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -1024,7 +1024,7 @@ function ProdutoParentIdModel() {
 	a.push({field :{campo : "rentabilidadeList" , tipo :"List<Rentabilidade>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "cfopList" , tipo :"List<CfopPessoa>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "dataValidade" , tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "localizacao" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});	
+	a.push({field :{campo : "localizacao" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "comissao" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
@@ -1037,7 +1037,7 @@ function ProdutoModel() {
 	a.push({field :{campo : "cdBarras" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "produto" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "dataCreate" , tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "aplicacao" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});	
+	a.push({field :{campo : "aplicacao" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "fracao" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "classificacao" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "uniMed" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -1048,7 +1048,7 @@ function ProdutoModel() {
 	a.push({field :{campo : "pesoBruto" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "pesoLiquido" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "modoUso" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	
+
 
 	return a;
 }
@@ -1162,7 +1162,7 @@ function CustoModel() {
 	a.push({field :{campo : "valor" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "custo" , tipo :"List<CustoItem>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "parentId"  , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	
+
 	return a;
 }
 
@@ -1174,7 +1174,7 @@ function CustoItensModel() {
 	a.push({field :{campo : "parentId"  , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "custo" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "custoDesp" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	
+
 	return a;
 }
 
@@ -1187,7 +1187,7 @@ function EstoqueModel() {
 	a.push({field :{campo : "estoqueTypeEnum" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "ultimoMov" , tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "quant" , tipo :"Double",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	
+
 	return a;
 }
 
