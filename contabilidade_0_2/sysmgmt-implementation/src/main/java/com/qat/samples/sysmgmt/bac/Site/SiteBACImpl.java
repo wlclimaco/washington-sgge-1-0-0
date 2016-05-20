@@ -23,8 +23,11 @@ import com.qat.samples.sysmgmt.contato.model.request.ContatoMaintenanceRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoMaintenanceRequest;
 import com.qat.samples.sysmgmt.site.model.Site;
 import com.qat.samples.sysmgmt.site.model.request.SiteInquiryRequest;
 import com.qat.samples.sysmgmt.site.model.request.SiteMaintenanceRequest;
@@ -961,4 +964,222 @@ private InternalResultsResponse<Plano> processPlano(ValidationContextIndicator i
 			return new InternalResultsResponse<Plano>();
 		}
 	}
+
+	//===================================### SERVICO ####======================================
+		/**
+	/*
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bac.ICountyBAC#insertServico(com.qat.samples.sysmgmt.model.request.ServicoMaintenanceRequest
+	 * )
+	 */
+	@Override
+	public InternalResultsResponse<Servico> insertServico(ServicoMaintenanceRequest request)
+	{
+		InternalResultsResponse<Servico> response =
+				processServico(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bac.IServicoBAC#updateServico(com.qat.samples.sysmgmt.model.request.ServicoMaintenanceRequest
+	 * )
+	 */
+	@Override
+	public InternalResultsResponse<Servico> updateServico(ServicoMaintenanceRequest request)
+	{
+		InternalResultsResponse<Servico> response =
+				processServico(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bac.IServicoBAC#deleteServico(com.qat.samples.sysmgmt.model.request.ServicoMaintenanceRequest
+	 * )
+	 */
+	@Override
+	public InternalResultsResponse<Servico> deleteServico(ServicoMaintenanceRequest request)
+	{
+		InternalResultsResponse<Servico> response =
+				processServico(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.bac.IServicoBAC#refreshServicos(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+	 */
+	@Override
+	public InternalResultsResponse<Servico> refreshServicos(RefreshRequest request)
+	{
+		// This method is demo code only. Do not view this as a QAT Global Standard.
+		getSiteBAR().deleteAllServicos();
+		int refreshNumber = request.getRefreshInt();
+		refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
+
+		for (int i = 1; i <= refreshNumber; i++)
+		{
+		getSiteBAR().insertServico(new Servico(i, "ServicoDesc" + i));
+		}
+
+		// Call maintain to see if we need to return the servico list and if so whether it should be paged or not
+		return maintainReturnListServico(request.getReturnList(), request.getReturnListPaged(),new Servico());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.bac.IServicoBAC#fetchAllServicos(Servico servico)
+	 */
+	@Override
+	public InternalResultsResponse<Servico> fetchAllServicos(Servico servico)
+	{
+		InternalResultsResponse<Servico> response = new InternalResultsResponse<Servico>();
+		response.getResultsList().addAll(getSiteBAR().fetchAllServicos(servico).getResultsList());
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bac.IServicoBAC#fetchServicoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+	 * )
+	 */
+	@Override
+	public InternalResultsResponse<Servico> fetchServicoById(FetchByIdRequest request)
+	{
+		InternalResultsResponse<Servico> response = new InternalResultsResponse<Servico>();
+		// validate fetchId field
+		if (ValidationUtil.isNull(request.getFetchId()))
+		{
+			response.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
+			response.setStatus(SystemErrorCategory.SystemValidation);
+		}
+		else
+		{
+			response.getResultsList().add(getSiteBAR().fetchServicoById(request));
+		}
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.bac.IServicoBAC#fetchServicosByRequest(com.qat.samples.sysmgmt.model.request.
+	 * PagedInquiryRequest)
+	 */
+	@Override
+	public InternalResultsResponse<Servico> fetchServicosByRequest(ServicoInquiryRequest request)
+	{
+		return getSiteBAR().fetchServicosByRequest(request);
+	}
+
+	/**
+	 * Process.
+	 *
+	 * @param indicator the indicator
+	 * @param persistType the persist type
+	 * @param request the request
+	 * @return the servico response
+	 */
+	private InternalResultsResponse<Servico> processServico(ValidationContextIndicator indicator,
+			PersistenceActionEnum persistType,
+			ServicoMaintenanceRequest request)
+			{
+		InternalResultsResponse<Servico> response = null;
+
+		// Validate
+		ValidationContext context = new ValidationContext(Servico.class.getSimpleName(), request.getServico(), indicator);
+		if (!getValidationController().validate(context))
+		{
+			response = new InternalResultsResponse<Servico>();
+			response.setStatus(SystemErrorCategory.SystemValidation);
+			response.addMessages(context.getMessages());
+			return response;
+		}
+
+			// Persist
+			InternalResponse internalResponse = doPersistenceServico(request.getServico(), persistType);
+			if (internalResponse.isInError())
+			{
+				response = new InternalResultsResponse<Servico>();
+				response.setStatus(internalResponse.getError());
+				response.addMessages(internalResponse.getMessageInfoList());
+				response.addMessage(DEFAULT_SITE_BAC_EXCEPTION_MSG, MessageSeverity.Error,
+						MessageLevel.Object, new Object[] {internalResponse.errorToString()});
+
+				return response;
+			}
+
+			// Call maintainReurnList to see if we need to return the servico list and if so whether it should be paged or
+			// not
+			response = maintainReturnListServico(request.getReturnList(), request.getReturnListPaged(),new Servico());
+
+			return response;
+				}
+
+		/**
+		 * Do persistenceServico.
+		 *
+		 * @param request the request
+		 * @param updateType the update type
+		 * @return the internal response
+		 */
+		private InternalResponse doPersistenceServico(Servico servico, PersistenceActionEnum updateType)
+		{
+			switch (updateType)
+			{
+				case INSERT:
+					return getSiteBAR().insertServico(servico);
+
+				case UPDATE:
+					return getSiteBAR().updateServico(servico);
+
+				case DELETE:
+					return getSiteBAR().deleteServicoById(servico);
+				default:
+					if (LOG.isDebugEnabled())
+					{
+						LOG.debug("updateType missing!");
+					}
+					break;
+			}
+
+			return null;
+		}
+
+		/**
+		 * Maintain return list.
+		 *
+		 * @param request the request
+		 * @param response the response
+		 */
+		private InternalResultsResponse<Servico> maintainReturnListServico(Boolean listIndicator, Boolean pageListIndicator,Servico servico)
+		{
+			// Fetch again if requested.
+			if (listIndicator)
+			{
+				// Fetch Paged is requested.
+				if (pageListIndicator)
+				{
+					ServicoInquiryRequest request = new ServicoInquiryRequest();
+					request.setPreQueryCount(true);
+					return fetchServicosByRequest(request);
+				}
+				else
+				{
+					// otherwise return all rows not paged
+					return fetchAllServicos(servico);
+				}
+			}
+			else
+			{
+				return new InternalResultsResponse<Servico>();
+			}
+		}
+
 }

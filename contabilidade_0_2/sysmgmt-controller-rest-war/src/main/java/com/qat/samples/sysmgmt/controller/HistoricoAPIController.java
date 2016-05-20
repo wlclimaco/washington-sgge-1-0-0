@@ -29,174 +29,41 @@ import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 @Controller
 @RequestMapping("/historico/api")
 public class HistoricoAPIController extends BaseController {
-	/** The Constant DEFAULT_EXCEPTION_MSG. */
-	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.historicocontrollerrest.defaultexception";
-
-	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(HistoricoAPIController.class);
-
-	/** The historico bac. */
-	private IHistoricoBAC historicoBAC; // injected by @Resource
-
-	/**
-	 * Gets the historico bac.
-	 *
-	 * @return the historico bac
-	 */
-	public IHistoricoBAC getHistoricoBAC() {
-		return historicoBAC;
-	}
-
-	/**
-	 * Sets the historico bac.
-	 *
-	 * @param historicoBAC
-	 *            the new historico bac
-	 */
-	@Resource
-	public void setHistoricoBAC(IHistoricoBAC historicoBAC) {
-		this.historicoBAC = historicoBAC;
-	}
-
-	// ===================================### HISTORICO
-	// ####======================================
-	/**
-	 * Refresh historicos.
-	 *
-	 * @param refreshInt
-	 *            the refresh int
-	 * @param retList
-	 *            the ret list
-	 * @param retPaged
-	 *            the ret paged
-	 * @return the historico response
-	 */
-	// @RequestMapping(value = "/refresh", method = RequestMethod.GET)
-	// @ResponseBody
-	// public HistoricoResponse refreshHistoricos(@RequestParam("refreshInt")
-	// Integer refreshInt,
-	// @RequestParam("retList") Boolean retList, @RequestParam("retPaged")
-	// Boolean retPaged) {
-	// HistoricoResponse historicoResponse = new HistoricoResponse();
+	// /** The Constant DEFAULT_EXCEPTION_MSG. */
+	// private static final String DEFAULT_EXCEPTION_MSG =
+	// "sysmgmt.base.historicocontrollerrest.defaultexception";
 	//
-	// try {
-	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
-	// retPaged);
-	// InternalResultsResponse<Historico> internalResponse =
-	// getHistoricoBAC().refreshHistoricos(request);
-	// ResponseHandler.handleOperationStatusAndMessages(historicoResponse,
-	// internalResponse, true);
-	// } catch (Exception ex) {
-	// ResponseHandler.handleException(LOG, historicoResponse, ex,
-	// DEFAULT_EXCEPTION_MSG,
-	// new Object[] { ex.toString() });
-	// }
-	// return historicoResponse;
+	// /** The Constant LOG. */
+	// private static final Logger LOG =
+	// LoggerFactory.getLogger(HistoricoAPIController.class);
 	//
-	// }
-
-	/**
-	 * Fetch historico paged.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the historico response
-	 */
-	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
-	@ResponseBody
-	public HistoricoResponse fetchHistoricoPaged(@RequestBody HistoricoInquiryRequest request) {
-		HistoricoResponse historicoResponse = new HistoricoResponse();
-		try {
-			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().fetchHistoricosByRequest(request);
-			ResponseHandler.handleOperationStatusAndMessages(historicoResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, historicoResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return historicoResponse;
-	}
-
+	// /** The historico bac. */
+	// private IHistoricoBAC historicoBAC; // injected by @Resource
+	//
 	// /**
-	// * Insert historico.
+	// * Gets the historico bac.
 	// *
-	// * @param request
-	// * the request
-	// * @return the historico response
+	// * @return the historico bac
 	// */
-	// @RequestMapping(value = "/insert", method = RequestMethod.POST)
-	// @ResponseBody
-	// public HistoricoResponse insertHistorico(@RequestBody
-	// HistoricoMaintenanceRequest request) {
-	// HistoricoResponse historicoResponse = new HistoricoResponse();
-	// try {
-	// InternalResultsResponse<Historico> internalResponse =
-	// getHistoricoBAC().insertHistorico(request);
-	// ResponseHandler.handleOperationStatusAndMessages(historicoResponse,
-	// internalResponse, true);
-	// } catch (Exception ex) {
-	// ResponseHandler.handleException(LOG, historicoResponse, ex,
-	// DEFAULT_EXCEPTION_MSG,
-	// new Object[] { ex.toString() });
-	// }
-	// return historicoResponse;
-	// }
-
-	// /**
-	// * Update historico.
-	// *
-	// * @param request
-	// * the request
-	// * @return the historico response
-	// */
-	// @RequestMapping(value = "/update", method = RequestMethod.POST)
-	// @ResponseBody
-	// public HistoricoResponse updateHistorico(@RequestBody
-	// HistoricoMaintenanceRequest request) {
-	// HistoricoResponse historicoResponse = new HistoricoResponse();
-	// try {
-	// InternalResultsResponse<Historico> internalResponse =
-	// getHistoricoBAC().updateHistorico(request);
-	// ResponseHandler.handleOperationStatusAndMessages(historicoResponse,
-	// internalResponse, true);
-	// } catch (Exception ex) {
-	// ResponseHandler.handleException(LOG, historicoResponse, ex,
-	// DEFAULT_EXCEPTION_MSG,
-	// new Object[] { ex.toString() });
-	// }
-	// return historicoResponse;
+	// public IHistoricoBAC getHistoricoBAC() {
+	// return historicoBAC;
 	// }
 	//
 	// /**
-	// * Delete historico.
+	// * Sets the historico bac.
 	// *
-	// * @param request
-	// * the request
-	// * @return the historico response
+	// * @param historicoBAC
+	// * the new historico bac
 	// */
-	// @RequestMapping(value = "/delete", method = RequestMethod.POST)
-	// @ResponseBody
-	// public HistoricoResponse deleteHistorico(@RequestBody
-	// HistoricoMaintenanceRequest request) {
-	// HistoricoResponse historicoResponse = new HistoricoResponse();
-	//
-	// try {
-	// InternalResultsResponse<Historico> internalResponse =
-	// getHistoricoBAC().deleteHistorico(request);
-	// ResponseHandler.handleOperationStatusAndMessages(historicoResponse,
-	// internalResponse, true);
-	// } catch (Exception ex) {
-	// ResponseHandler.handleException(LOG, historicoResponse, ex,
-	// DEFAULT_EXCEPTION_MSG,
-	// new Object[] { ex.toString() });
+	// @Resource
+	// public void setHistoricoBAC(IHistoricoBAC historicoBAC) {
+	// this.historicoBAC = historicoBAC;
 	// }
-	// return historicoResponse;
 	//
-	// }
-
-	// // ===================================### HISTORICOITENS
+	// // ===================================### HISTORICO
 	// // ####======================================
 	// /**
-	// * Refresh historicoitenss.
+	// * Refresh historicos.
 	// *
 	// * @param refreshInt
 	// * the refresh int
@@ -204,139 +71,283 @@ public class HistoricoAPIController extends BaseController {
 	// * the ret list
 	// * @param retPaged
 	// * the ret paged
-	// * @return the historicoitens response
+	// * @return the historico response
 	// */
-	// @RequestMapping(value = "/refresh", method = RequestMethod.GET)
-	// @ResponseBody
-	// public HistoricoItensResponse
-	// refreshHistoricoItenss(@RequestParam("refreshInt") Integer refreshInt,
-	// @RequestParam("retList") Boolean retList, @RequestParam("retPaged")
-	// Boolean retPaged) {
-	// HistoricoItensResponse historicoitensResponse = new
-	// HistoricoItensResponse();
-	//
-	// try {
-	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
-	// retPaged);
-	// InternalResultsResponse<HistoricoItens> internalResponse =
-	// getHistoricoBAC()
-	// .refreshHistoricoItenss(request);
-	// ResponseHandler.handleOperationStatusAndMessages(historicoitensResponse,
-	// internalResponse, true);
-	// } catch (Exception ex) {
-	// ResponseHandler.handleException(LOG, historicoitensResponse, ex,
-	// DEFAULT_EXCEPTION_MSG,
-	// new Object[] { ex.toString() });
-	// }
-	// return historicoitensResponse;
-	//
-	// }
+	// // @RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	// // @ResponseBody
+	// // public HistoricoResponse refreshHistoricos(@RequestParam("refreshInt")
+	// // Integer refreshInt,
+	// // @RequestParam("retList") Boolean retList, @RequestParam("retPaged")
+	// // Boolean retPaged) {
+	// // HistoricoResponse historicoResponse = new HistoricoResponse();
+	// //
+	// // try {
+	// // RefreshRequest request = new RefreshRequest(refreshInt, retList,
+	// // retPaged);
+	// // InternalResultsResponse<Historico> internalResponse =
+	// // getHistoricoBAC().refreshHistoricos(request);
+	// // ResponseHandler.handleOperationStatusAndMessages(historicoResponse,
+	// // internalResponse, true);
+	// // } catch (Exception ex) {
+	// // ResponseHandler.handleException(LOG, historicoResponse, ex,
+	// // DEFAULT_EXCEPTION_MSG,
+	// // new Object[] { ex.toString() });
+	// // }
+	// // return historicoResponse;
+	// //
+	// // }
 	//
 	// /**
-	// * Fetch historicoitens paged.
+	// * Fetch historico paged.
 	// *
 	// * @param request
 	// * the request
-	// * @return the historicoitens response
+	// * @return the historico response
 	// */
 	// @RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
 	// @ResponseBody
-	// public HistoricoItensResponse fetchHistoricoItensPaged(@RequestBody
-	// HistoricoItensInquiryRequest request) {
-	// HistoricoItensResponse historicoitensResponse = new
-	// HistoricoItensResponse();
+	// public HistoricoResponse fetchHistoricoPaged(@RequestBody
+	// HistoricoInquiryRequest request) {
+	// HistoricoResponse historicoResponse = new HistoricoResponse();
 	// try {
-	// InternalResultsResponse<HistoricoItens> internalResponse =
-	// getHistoricoBAC()
-	// .fetchHistoricoItenssByRequest(request);
-	// ResponseHandler.handleOperationStatusAndMessages(historicoitensResponse,
+	// InternalResultsResponse<Historico> internalResponse =
+	// getHistoricoBAC().fetchHistoricosByRequest(request);
+	// ResponseHandler.handleOperationStatusAndMessages(historicoResponse,
 	// internalResponse, true);
 	// } catch (Exception ex) {
-	// ResponseHandler.handleException(LOG, historicoitensResponse, ex,
+	// ResponseHandler.handleException(LOG, historicoResponse, ex,
 	// DEFAULT_EXCEPTION_MSG,
 	// new Object[] { ex.toString() });
 	// }
-	// return historicoitensResponse;
+	// return historicoResponse;
 	// }
 	//
-	// /**
-	// * Insert historicoitens.
-	// *
-	// * @param request
-	// * the request
-	// * @return the historicoitens response
-	// */
-	// @RequestMapping(value = "/insert", method = RequestMethod.POST)
-	// @ResponseBody
-	// public HistoricoItensResponse insertHistoricoItens(@RequestBody
-	// HistoricoItensMaintenanceRequest request) {
-	// HistoricoItensResponse historicoitensResponse = new
-	// HistoricoItensResponse();
-	// try {
-	// InternalResultsResponse<HistoricoItens> internalResponse =
-	// getHistoricoBAC().insertHistoricoItens(request);
+	// // /**
+	// // * Insert historico.
+	// // *
+	// // * @param request
+	// // * the request
+	// // * @return the historico response
+	// // */
+	// // @RequestMapping(value = "/insert", method = RequestMethod.POST)
+	// // @ResponseBody
+	// // public HistoricoResponse insertHistorico(@RequestBody
+	// // HistoricoMaintenanceRequest request) {
+	// // HistoricoResponse historicoResponse = new HistoricoResponse();
+	// // try {
+	// // InternalResultsResponse<Historico> internalResponse =
+	// // getHistoricoBAC().insertHistorico(request);
+	// // ResponseHandler.handleOperationStatusAndMessages(historicoResponse,
+	// // internalResponse, true);
+	// // } catch (Exception ex) {
+	// // ResponseHandler.handleException(LOG, historicoResponse, ex,
+	// // DEFAULT_EXCEPTION_MSG,
+	// // new Object[] { ex.toString() });
+	// // }
+	// // return historicoResponse;
+	// // }
+	//
+	// // /**
+	// // * Update historico.
+	// // *
+	// // * @param request
+	// // * the request
+	// // * @return the historico response
+	// // */
+	// // @RequestMapping(value = "/update", method = RequestMethod.POST)
+	// // @ResponseBody
+	// // public HistoricoResponse updateHistorico(@RequestBody
+	// // HistoricoMaintenanceRequest request) {
+	// // HistoricoResponse historicoResponse = new HistoricoResponse();
+	// // try {
+	// // InternalResultsResponse<Historico> internalResponse =
+	// // getHistoricoBAC().updateHistorico(request);
+	// // ResponseHandler.handleOperationStatusAndMessages(historicoResponse,
+	// // internalResponse, true);
+	// // } catch (Exception ex) {
+	// // ResponseHandler.handleException(LOG, historicoResponse, ex,
+	// // DEFAULT_EXCEPTION_MSG,
+	// // new Object[] { ex.toString() });
+	// // }
+	// // return historicoResponse;
+	// // }
+	// //
+	// // /**
+	// // * Delete historico.
+	// // *
+	// // * @param request
+	// // * the request
+	// // * @return the historico response
+	// // */
+	// // @RequestMapping(value = "/delete", method = RequestMethod.POST)
+	// // @ResponseBody
+	// // public HistoricoResponse deleteHistorico(@RequestBody
+	// // HistoricoMaintenanceRequest request) {
+	// // HistoricoResponse historicoResponse = new HistoricoResponse();
+	// //
+	// // try {
+	// // InternalResultsResponse<Historico> internalResponse =
+	// // getHistoricoBAC().deleteHistorico(request);
+	// // ResponseHandler.handleOperationStatusAndMessages(historicoResponse,
+	// // internalResponse, true);
+	// // } catch (Exception ex) {
+	// // ResponseHandler.handleException(LOG, historicoResponse, ex,
+	// // DEFAULT_EXCEPTION_MSG,
+	// // new Object[] { ex.toString() });
+	// // }
+	// // return historicoResponse;
+	// //
+	// // }
+	//
+	// // // ===================================### HISTORICOITENS
+	// // // ####======================================
+	// // /**
+	// // * Refresh historicoitenss.
+	// // *
+	// // * @param refreshInt
+	// // * the refresh int
+	// // * @param retList
+	// // * the ret list
+	// // * @param retPaged
+	// // * the ret paged
+	// // * @return the historicoitens response
+	// // */
+	// // @RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	// // @ResponseBody
+	// // public HistoricoItensResponse
+	// // refreshHistoricoItenss(@RequestParam("refreshInt") Integer refreshInt,
+	// // @RequestParam("retList") Boolean retList, @RequestParam("retPaged")
+	// // Boolean retPaged) {
+	// // HistoricoItensResponse historicoitensResponse = new
+	// // HistoricoItensResponse();
+	// //
+	// // try {
+	// // RefreshRequest request = new RefreshRequest(refreshInt, retList,
+	// // retPaged);
+	// // InternalResultsResponse<HistoricoItens> internalResponse =
+	// // getHistoricoBAC()
+	// // .refreshHistoricoItenss(request);
+	// //
 	// ResponseHandler.handleOperationStatusAndMessages(historicoitensResponse,
-	// internalResponse, true);
-	// } catch (Exception ex) {
-	// ResponseHandler.handleException(LOG, historicoitensResponse, ex,
-	// DEFAULT_EXCEPTION_MSG,
-	// new Object[] { ex.toString() });
-	// }
-	// return historicoitensResponse;
-	// }
-	//
-	// /**
-	// * Update historicoitens.
-	// *
-	// * @param request
-	// * the request
-	// * @return the historicoitens response
-	// */
-	// @RequestMapping(value = "/update", method = RequestMethod.POST)
-	// @ResponseBody
-	// public HistoricoItensResponse updateHistoricoItens(@RequestBody
-	// HistoricoItensMaintenanceRequest request) {
-	// HistoricoItensResponse historicoitensResponse = new
-	// HistoricoItensResponse();
-	// try {
-	// InternalResultsResponse<HistoricoItens> internalResponse =
-	// getHistoricoBAC().updateHistoricoItens(request);
+	// // internalResponse, true);
+	// // } catch (Exception ex) {
+	// // ResponseHandler.handleException(LOG, historicoitensResponse, ex,
+	// // DEFAULT_EXCEPTION_MSG,
+	// // new Object[] { ex.toString() });
+	// // }
+	// // return historicoitensResponse;
+	// //
+	// // }
+	// //
+	// // /**
+	// // * Fetch historicoitens paged.
+	// // *
+	// // * @param request
+	// // * the request
+	// // * @return the historicoitens response
+	// // */
+	// // @RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	// // @ResponseBody
+	// // public HistoricoItensResponse fetchHistoricoItensPaged(@RequestBody
+	// // HistoricoItensInquiryRequest request) {
+	// // HistoricoItensResponse historicoitensResponse = new
+	// // HistoricoItensResponse();
+	// // try {
+	// // InternalResultsResponse<HistoricoItens> internalResponse =
+	// // getHistoricoBAC()
+	// // .fetchHistoricoItenssByRequest(request);
+	// //
 	// ResponseHandler.handleOperationStatusAndMessages(historicoitensResponse,
-	// internalResponse, true);
-	// } catch (Exception ex) {
-	// ResponseHandler.handleException(LOG, historicoitensResponse, ex,
-	// DEFAULT_EXCEPTION_MSG,
-	// new Object[] { ex.toString() });
-	// }
-	// return historicoitensResponse;
-	// }
-	//
-	// /**
-	// * Delete historicoitens.
-	// *
-	// * @param request
-	// * the request
-	// * @return the historicoitens response
-	// */
-	// @RequestMapping(value = "/delete", method = RequestMethod.POST)
-	// @ResponseBody
-	// public HistoricoItensResponse deleteHistoricoItens(@RequestBody
-	// HistoricoItensMaintenanceRequest request) {
-	// HistoricoItensResponse historicoitensResponse = new
-	// HistoricoItensResponse();
-	//
-	// try {
-	// InternalResultsResponse<HistoricoItens> internalResponse =
-	// getHistoricoBAC().deleteHistoricoItens(request);
+	// // internalResponse, true);
+	// // } catch (Exception ex) {
+	// // ResponseHandler.handleException(LOG, historicoitensResponse, ex,
+	// // DEFAULT_EXCEPTION_MSG,
+	// // new Object[] { ex.toString() });
+	// // }
+	// // return historicoitensResponse;
+	// // }
+	// //
+	// // /**
+	// // * Insert historicoitens.
+	// // *
+	// // * @param request
+	// // * the request
+	// // * @return the historicoitens response
+	// // */
+	// // @RequestMapping(value = "/insert", method = RequestMethod.POST)
+	// // @ResponseBody
+	// // public HistoricoItensResponse insertHistoricoItens(@RequestBody
+	// // HistoricoItensMaintenanceRequest request) {
+	// // HistoricoItensResponse historicoitensResponse = new
+	// // HistoricoItensResponse();
+	// // try {
+	// // InternalResultsResponse<HistoricoItens> internalResponse =
+	// // getHistoricoBAC().insertHistoricoItens(request);
+	// //
 	// ResponseHandler.handleOperationStatusAndMessages(historicoitensResponse,
-	// internalResponse, true);
-	// } catch (Exception ex) {
-	// ResponseHandler.handleException(LOG, historicoitensResponse, ex,
-	// DEFAULT_EXCEPTION_MSG,
-	// new Object[] { ex.toString() });
-	// }
-	// return historicoitensResponse;
-	//
-	// }
+	// // internalResponse, true);
+	// // } catch (Exception ex) {
+	// // ResponseHandler.handleException(LOG, historicoitensResponse, ex,
+	// // DEFAULT_EXCEPTION_MSG,
+	// // new Object[] { ex.toString() });
+	// // }
+	// // return historicoitensResponse;
+	// // }
+	// //
+	// // /**
+	// // * Update historicoitens.
+	// // *
+	// // * @param request
+	// // * the request
+	// // * @return the historicoitens response
+	// // */
+	// // @RequestMapping(value = "/update", method = RequestMethod.POST)
+	// // @ResponseBody
+	// // public HistoricoItensResponse updateHistoricoItens(@RequestBody
+	// // HistoricoItensMaintenanceRequest request) {
+	// // HistoricoItensResponse historicoitensResponse = new
+	// // HistoricoItensResponse();
+	// // try {
+	// // InternalResultsResponse<HistoricoItens> internalResponse =
+	// // getHistoricoBAC().updateHistoricoItens(request);
+	// //
+	// ResponseHandler.handleOperationStatusAndMessages(historicoitensResponse,
+	// // internalResponse, true);
+	// // } catch (Exception ex) {
+	// // ResponseHandler.handleException(LOG, historicoitensResponse, ex,
+	// // DEFAULT_EXCEPTION_MSG,
+	// // new Object[] { ex.toString() });
+	// // }
+	// // return historicoitensResponse;
+	// // }
+	// //
+	// // /**
+	// // * Delete historicoitens.
+	// // *
+	// // * @param request
+	// // * the request
+	// // * @return the historicoitens response
+	// // */
+	// // @RequestMapping(value = "/delete", method = RequestMethod.POST)
+	// // @ResponseBody
+	// // public HistoricoItensResponse deleteHistoricoItens(@RequestBody
+	// // HistoricoItensMaintenanceRequest request) {
+	// // HistoricoItensResponse historicoitensResponse = new
+	// // HistoricoItensResponse();
+	// //
+	// // try {
+	// // InternalResultsResponse<HistoricoItens> internalResponse =
+	// // getHistoricoBAC().deleteHistoricoItens(request);
+	// //
+	// ResponseHandler.handleOperationStatusAndMessages(historicoitensResponse,
+	// // internalResponse, true);
+	// // } catch (Exception ex) {
+	// // ResponseHandler.handleException(LOG, historicoitensResponse, ex,
+	// // DEFAULT_EXCEPTION_MSG,
+	// // new Object[] { ex.toString() });
+	// // }
+	// // return historicoitensResponse;
+	// //
+	// // }
 
 }

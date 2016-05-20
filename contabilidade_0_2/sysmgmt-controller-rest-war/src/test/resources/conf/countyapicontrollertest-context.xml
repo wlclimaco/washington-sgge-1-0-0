@@ -38,4 +38,8 @@
 	    <constructor-arg value="com.qat.samples.sysmgmt.bac.ICountyBAC" />
 	</bean>
 
+	<bean id="siteBACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.qat.samples.sysmgmt.bac.Site.ISiteBAC" />
+	</bean>
+
 </beans>

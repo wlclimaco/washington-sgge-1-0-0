@@ -1,7 +1,5 @@
 package com.qat.samples.sysmgmt.nf.model.classes.lote.envio;
 
-import com.fincatto.nfe310.classes.lote.envio.NFLoteIndicadorProcessamento;
-
 public enum NFLoteIndicadorProcessamento {
 
     PROCESSAMENTO_ASSINCRONO("0"),

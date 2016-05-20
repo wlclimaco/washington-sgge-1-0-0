@@ -16,8 +16,8 @@
 		<property name="validationController" ref="countyValidationController"/>
 	</bean>
 
-	<bean id="drugBACTarget" class="com.qat.samples.sysmgmt.bac.impl.DrugBACImpl">
-		<property name="drugBAR" ref="drugBARTarget"/>
+	<bean id="siteBACTarget" class="com.qat.samples.sysmgmt.bac.site.SiteBACImpl">
+		<property name="siteBAR" ref="siteBARTarget"/>
 		<property name="validationController" ref="drugValidationController"/>
 	</bean>
 	<!-- ========================= ASPECT CONFIGURATION ======================== -->

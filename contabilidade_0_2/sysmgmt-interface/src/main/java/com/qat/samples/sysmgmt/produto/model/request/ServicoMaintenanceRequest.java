@@ -1,9 +1,9 @@
 package com.qat.samples.sysmgmt.produto.model.request;
 
-import com.qat.framework.model.request.Request;
 import com.qat.samples.sysmgmt.produto.model.Servico;
+import com.qat.samples.sysmgmt.util.model.request.UtilMaintenanceRequest;
 
-public class ServicoMaintenanceRequest extends Request
+public class ServicoMaintenanceRequest extends UtilMaintenanceRequest
 {
 
 	/** Attributes. */

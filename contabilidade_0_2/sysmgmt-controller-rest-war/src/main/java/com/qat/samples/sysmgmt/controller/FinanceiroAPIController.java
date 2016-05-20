@@ -52,855 +52,1021 @@ import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 @Controller
 @RequestMapping("/financeiro/api")
 public class FinanceiroAPIController extends BaseController {
-	/** The Constant DEFAULT_EXCEPTION_MSG. */
-	private static final String DEFAULT_EXCEPTION_MSG = "sysmgmt.base.financeirocontrollerrest.defaultexception";
-
-	/** The Constant LOG. */
-	private static final Logger LOG = LoggerFactory.getLogger(FinanceiroAPIController.class);
-
-	/** The financeiro bac. */
-	private IFinanceiroBAC financeiroBAC; // injected by @Resource
-
-	/**
-	 * Gets the financeiro bac.
-	 *
-	 * @return the financeiro bac
-	 */
-	public IFinanceiroBAC getFinanceiroBAC() {
-		return financeiroBAC;
-	}
-
-	/**
-	 * Sets the financeiro bac.
-	 *
-	 * @param financeiroBAC
-	 *            the new financeiro bac
-	 */
-	@Resource
-	public void setFinanceiroBAC(IFinanceiroBAC financeiroBAC) {
-		this.financeiroBAC = financeiroBAC;
-	}
-
-	// ===================================### CONTASPAGAR
-	// ####======================================
-	/**
-	 * Refresh contaspagars.
-	 *
-	 * @param refreshInt
-	 *            the refresh int
-	 * @param retList
-	 *            the ret list
-	 * @param retPaged
-	 *            the ret paged
-	 * @return the contaspagar response
-	 */
-	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
-	@ResponseBody
-	public ContasPagarResponse refreshContasPagars(@RequestParam("refreshInt") Integer refreshInt,
-			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
-		ContasPagarResponse contaspagarResponse = new ContasPagarResponse();
-
-		try {
-			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
-			InternalResultsResponse<ContasPagar> internalResponse = getFinanceiroBAC().refreshContasPagars(request);
-			ResponseHandler.handleOperationStatusAndMessages(contaspagarResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, contaspagarResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return contaspagarResponse;
-
-	}
-
-	/**
-	 * Fetch contaspagar paged.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the contaspagar response
-	 */
-	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
-	@ResponseBody
-	public ContasPagarResponse fetchContasPagarPaged(@RequestBody ContasPagarInquiryRequest request) {
-		ContasPagarResponse contaspagarResponse = new ContasPagarResponse();
-		try {
-			InternalResultsResponse<ContasPagar> internalResponse = getFinanceiroBAC()
-					.fetchContasPagarsByRequest(request);
-			ResponseHandler.handleOperationStatusAndMessages(contaspagarResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, contaspagarResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return contaspagarResponse;
-	}
-
-	/**
-	 * Insert contaspagar.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the contaspagar response
-	 */
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	@ResponseBody
-	public ContasPagarResponse insertContasPagar(@RequestBody ContasPagarMaintenanceRequest request) {
-		ContasPagarResponse contaspagarResponse = new ContasPagarResponse();
-		try {
-			InternalResultsResponse<ContasPagar> internalResponse = getFinanceiroBAC().insertContasPagar(request);
-			ResponseHandler.handleOperationStatusAndMessages(contaspagarResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, contaspagarResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return contaspagarResponse;
-	}
-
-	/**
-	 * Update contaspagar.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the contaspagar response
-	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	@ResponseBody
-	public ContasPagarResponse updateContasPagar(@RequestBody ContasPagarMaintenanceRequest request) {
-		ContasPagarResponse contaspagarResponse = new ContasPagarResponse();
-		try {
-			InternalResultsResponse<ContasPagar> internalResponse = getFinanceiroBAC().updateContasPagar(request);
-			ResponseHandler.handleOperationStatusAndMessages(contaspagarResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, contaspagarResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return contaspagarResponse;
-	}
-
-	/**
-	 * Delete contaspagar.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the contaspagar response
-	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	@ResponseBody
-	public ContasPagarResponse deleteContasPagar(@RequestBody ContasPagarMaintenanceRequest request) {
-		ContasPagarResponse contaspagarResponse = new ContasPagarResponse();
-
-		try {
-			InternalResultsResponse<ContasPagar> internalResponse = getFinanceiroBAC().deleteContasPagar(request);
-			ResponseHandler.handleOperationStatusAndMessages(contaspagarResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, contaspagarResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return contaspagarResponse;
-
-	}
-
-	// ===================================### CONTASRECEBER
-	// ####======================================
-	/**
-	 * Refresh contasrecebers.
-	 *
-	 * @param refreshInt
-	 *            the refresh int
-	 * @param retList
-	 *            the ret list
-	 * @param retPaged
-	 *            the ret paged
-	 * @return the contasreceber response
-	 */
-	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
-	@ResponseBody
-	public ContasReceberResponse refreshContasRecebers(@RequestParam("refreshInt") Integer refreshInt,
-			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
-		ContasReceberResponse contasreceberResponse = new ContasReceberResponse();
-
-		try {
-			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
-			InternalResultsResponse<ContasReceber> internalResponse = getFinanceiroBAC().refreshContasRecebers(request);
-			ResponseHandler.handleOperationStatusAndMessages(contasreceberResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, contasreceberResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return contasreceberResponse;
-
-	}
-
-	/**
-	 * Fetch contasreceber paged.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the contasreceber response
-	 */
-	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
-	@ResponseBody
-	public ContasReceberResponse fetchContasReceberPaged(@RequestBody ContasReceberInquiryRequest request) {
-		ContasReceberResponse contasreceberResponse = new ContasReceberResponse();
-		try {
-			InternalResultsResponse<ContasReceber> internalResponse = getFinanceiroBAC()
-					.fetchContasRecebersByRequest(request);
-			ResponseHandler.handleOperationStatusAndMessages(contasreceberResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, contasreceberResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return contasreceberResponse;
-	}
-
-	/**
-	 * Insert contasreceber.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the contasreceber response
-	 */
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	@ResponseBody
-	public ContasReceberResponse insertContasReceber(@RequestBody ContasReceberMaintenanceRequest request) {
-		ContasReceberResponse contasreceberResponse = new ContasReceberResponse();
-		try {
-			InternalResultsResponse<ContasReceber> internalResponse = getFinanceiroBAC().insertContasReceber(request);
-			ResponseHandler.handleOperationStatusAndMessages(contasreceberResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, contasreceberResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return contasreceberResponse;
-	}
-
-	/**
-	 * Update contasreceber.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the contasreceber response
-	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	@ResponseBody
-	public ContasReceberResponse updateContasReceber(@RequestBody ContasReceberMaintenanceRequest request) {
-		ContasReceberResponse contasreceberResponse = new ContasReceberResponse();
-		try {
-			InternalResultsResponse<ContasReceber> internalResponse = getFinanceiroBAC().updateContasReceber(request);
-			ResponseHandler.handleOperationStatusAndMessages(contasreceberResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, contasreceberResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return contasreceberResponse;
-	}
-
-	/**
-	 * Delete contasreceber.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the contasreceber response
-	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	@ResponseBody
-	public ContasReceberResponse deleteContasReceber(@RequestBody ContasReceberMaintenanceRequest request) {
-		ContasReceberResponse contasreceberResponse = new ContasReceberResponse();
-
-		try {
-			InternalResultsResponse<ContasReceber> internalResponse = getFinanceiroBAC().deleteContasReceber(request);
-			ResponseHandler.handleOperationStatusAndMessages(contasreceberResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, contasreceberResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return contasreceberResponse;
-
-	}
-
-	// ===================================### CONDPAG
-	// ####======================================
-	/**
-	 * Refresh condpags.
-	 *
-	 * @param refreshInt
-	 *            the refresh int
-	 * @param retList
-	 *            the ret list
-	 * @param retPaged
-	 *            the ret paged
-	 * @return the condpag response
-	 */
-	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
-	@ResponseBody
-	public CondPagResponse refreshCondPags(@RequestParam("refreshInt") Integer refreshInt,
-			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
-		CondPagResponse condpagResponse = new CondPagResponse();
-
-		try {
-			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
-			InternalResultsResponse<CondPag> internalResponse = getFinanceiroBAC().refreshCondPags(request);
-			ResponseHandler.handleOperationStatusAndMessages(condpagResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, condpagResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return condpagResponse;
-
-	}
-
-	/**
-	 * Fetch condpag paged.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the condpag response
-	 */
-	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
-	@ResponseBody
-	public CondPagResponse fetchCondPagPaged(@RequestBody CondPagInquiryRequest request) {
-		CondPagResponse condpagResponse = new CondPagResponse();
-		try {
-			InternalResultsResponse<CondPag> internalResponse = getFinanceiroBAC().fetchCondPagsByRequest(request);
-			ResponseHandler.handleOperationStatusAndMessages(condpagResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, condpagResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return condpagResponse;
-	}
-
-	/**
-	 * Insert condpag.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the condpag response
-	 */
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	@ResponseBody
-	public CondPagResponse insertCondPag(@RequestBody CondPagMaintenanceRequest request) {
-		CondPagResponse condpagResponse = new CondPagResponse();
-		try {
-			InternalResultsResponse<CondPag> internalResponse = getFinanceiroBAC().insertCondPag(request);
-			ResponseHandler.handleOperationStatusAndMessages(condpagResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, condpagResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return condpagResponse;
-	}
-
-	/**
-	 * Update condpag.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the condpag response
-	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	@ResponseBody
-	public CondPagResponse updateCondPag(@RequestBody CondPagMaintenanceRequest request) {
-		CondPagResponse condpagResponse = new CondPagResponse();
-		try {
-			InternalResultsResponse<CondPag> internalResponse = getFinanceiroBAC().updateCondPag(request);
-			ResponseHandler.handleOperationStatusAndMessages(condpagResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, condpagResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return condpagResponse;
-	}
-
-	/**
-	 * Delete condpag.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the condpag response
-	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	@ResponseBody
-	public CondPagResponse deleteCondPag(@RequestBody CondPagMaintenanceRequest request) {
-		CondPagResponse condpagResponse = new CondPagResponse();
-
-		try {
-			InternalResultsResponse<CondPag> internalResponse = getFinanceiroBAC().deleteCondPag(request);
-			ResponseHandler.handleOperationStatusAndMessages(condpagResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, condpagResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return condpagResponse;
-
-	}
-
-	// ===================================### FORMAPG
-	// ####======================================
-	/**
-	 * Refresh formapgs.
-	 *
-	 * @param refreshInt
-	 *            the refresh int
-	 * @param retList
-	 *            the ret list
-	 * @param retPaged
-	 *            the ret paged
-	 * @return the formapg response
-	 */
-	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
-	@ResponseBody
-	public FormaPgResponse refreshFormaPgs(@RequestParam("refreshInt") Integer refreshInt,
-			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
-		FormaPgResponse formapgResponse = new FormaPgResponse();
-
-		try {
-			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
-			InternalResultsResponse<FormaPg> internalResponse = getFinanceiroBAC().refreshFormaPgs(request);
-			ResponseHandler.handleOperationStatusAndMessages(formapgResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, formapgResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return formapgResponse;
-
-	}
-
-	/**
-	 * Fetch formapg paged.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the formapg response
-	 */
-	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
-	@ResponseBody
-	public FormaPgResponse fetchFormaPgPaged(@RequestBody FormaPgInquiryRequest request) {
-		FormaPgResponse formapgResponse = new FormaPgResponse();
-		try {
-			InternalResultsResponse<FormaPg> internalResponse = getFinanceiroBAC().fetchFormaPgsByRequest(request);
-			ResponseHandler.handleOperationStatusAndMessages(formapgResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, formapgResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return formapgResponse;
-	}
-
-	/**
-	 * Insert formapg.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the formapg response
-	 */
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	@ResponseBody
-	public FormaPgResponse insertFormaPg(@RequestBody FormaPgMaintenanceRequest request) {
-		FormaPgResponse formapgResponse = new FormaPgResponse();
-		try {
-			InternalResultsResponse<FormaPg> internalResponse = getFinanceiroBAC().insertFormaPg(request);
-			ResponseHandler.handleOperationStatusAndMessages(formapgResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, formapgResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return formapgResponse;
-	}
-
-	/**
-	 * Update formapg.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the formapg response
-	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	@ResponseBody
-	public FormaPgResponse updateFormaPg(@RequestBody FormaPgMaintenanceRequest request) {
-		FormaPgResponse formapgResponse = new FormaPgResponse();
-		try {
-			InternalResultsResponse<FormaPg> internalResponse = getFinanceiroBAC().updateFormaPg(request);
-			ResponseHandler.handleOperationStatusAndMessages(formapgResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, formapgResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return formapgResponse;
-	}
-
-	/**
-	 * Delete formapg.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the formapg response
-	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	@ResponseBody
-	public FormaPgResponse deleteFormaPg(@RequestBody FormaPgMaintenanceRequest request) {
-		FormaPgResponse formapgResponse = new FormaPgResponse();
-
-		try {
-			InternalResultsResponse<FormaPg> internalResponse = getFinanceiroBAC().deleteFormaPg(request);
-			ResponseHandler.handleOperationStatusAndMessages(formapgResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, formapgResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return formapgResponse;
-
-	}
-
-	// ===================================### BANCO
-	// ####======================================
-	/**
-	 * Refresh bancos.
-	 *
-	 * @param refreshInt
-	 *            the refresh int
-	 * @param retList
-	 *            the ret list
-	 * @param retPaged
-	 *            the ret paged
-	 * @return the banco response
-	 */
-	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
-	@ResponseBody
-	public BancoResponse refreshBancos(@RequestParam("refreshInt") Integer refreshInt,
-			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
-		BancoResponse bancoResponse = new BancoResponse();
-
-		try {
-			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
-			InternalResultsResponse<Banco> internalResponse = getFinanceiroBAC().refreshBancos(request);
-			ResponseHandler.handleOperationStatusAndMessages(bancoResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, bancoResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return bancoResponse;
-
-	}
-
-	/**
-	 * Fetch banco paged.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the banco response
-	 */
-	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
-	@ResponseBody
-	public BancoResponse fetchBancoPaged(@RequestBody BancoInquiryRequest request) {
-		BancoResponse bancoResponse = new BancoResponse();
-		try {
-			InternalResultsResponse<Banco> internalResponse = getFinanceiroBAC().fetchBancosByRequest(request);
-			ResponseHandler.handleOperationStatusAndMessages(bancoResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, bancoResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return bancoResponse;
-	}
-
-	/**
-	 * Insert banco.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the banco response
-	 */
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	@ResponseBody
-	public BancoResponse insertBanco(@RequestBody BancoMaintenanceRequest request) {
-		BancoResponse bancoResponse = new BancoResponse();
-		try {
-			InternalResultsResponse<Banco> internalResponse = getFinanceiroBAC().insertBanco(request);
-			ResponseHandler.handleOperationStatusAndMessages(bancoResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, bancoResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return bancoResponse;
-	}
-
-	/**
-	 * Update banco.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the banco response
-	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	@ResponseBody
-	public BancoResponse updateBanco(@RequestBody BancoMaintenanceRequest request) {
-		BancoResponse bancoResponse = new BancoResponse();
-		try {
-			InternalResultsResponse<Banco> internalResponse = getFinanceiroBAC().updateBanco(request);
-			ResponseHandler.handleOperationStatusAndMessages(bancoResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, bancoResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return bancoResponse;
-	}
-
-	/**
-	 * Delete banco.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the banco response
-	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	@ResponseBody
-	public BancoResponse deleteBanco(@RequestBody BancoMaintenanceRequest request) {
-		BancoResponse bancoResponse = new BancoResponse();
-
-		try {
-			InternalResultsResponse<Banco> internalResponse = getFinanceiroBAC().deleteBanco(request);
-			ResponseHandler.handleOperationStatusAndMessages(bancoResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, bancoResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return bancoResponse;
-
-	}
-
-	// ===================================### CONTACORRENTE
-	// ####======================================
-	/**
-	 * Refresh contacorrentes.
-	 *
-	 * @param refreshInt
-	 *            the refresh int
-	 * @param retList
-	 *            the ret list
-	 * @param retPaged
-	 *            the ret paged
-	 * @return the contacorrente response
-	 */
-	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
-	@ResponseBody
-	public ContaCorrenteResponse refreshContaCorrentes(@RequestParam("refreshInt") Integer refreshInt,
-			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
-		ContaCorrenteResponse contacorrenteResponse = new ContaCorrenteResponse();
-
-		try {
-			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
-			InternalResultsResponse<ContaCorrente> internalResponse = getFinanceiroBAC().refreshContaCorrentes(request);
-			ResponseHandler.handleOperationStatusAndMessages(contacorrenteResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, contacorrenteResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return contacorrenteResponse;
-
-	}
-
-	/**
-	 * Fetch contacorrente paged.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the contacorrente response
-	 */
-	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
-	@ResponseBody
-	public ContaCorrenteResponse fetchContaCorrentePaged(@RequestBody ContaCorrenteInquiryRequest request) {
-		ContaCorrenteResponse contacorrenteResponse = new ContaCorrenteResponse();
-		try {
-			InternalResultsResponse<ContaCorrente> internalResponse = getFinanceiroBAC()
-					.fetchContaCorrentesByRequest(request);
-			ResponseHandler.handleOperationStatusAndMessages(contacorrenteResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, contacorrenteResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return contacorrenteResponse;
-	}
-
-	/**
-	 * Insert contacorrente.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the contacorrente response
-	 */
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	@ResponseBody
-	public ContaCorrenteResponse insertContaCorrente(@RequestBody ContaCorrenteMaintenanceRequest request) {
-		ContaCorrenteResponse contacorrenteResponse = new ContaCorrenteResponse();
-		try {
-			InternalResultsResponse<ContaCorrente> internalResponse = getFinanceiroBAC().insertContaCorrente(request);
-			ResponseHandler.handleOperationStatusAndMessages(contacorrenteResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, contacorrenteResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return contacorrenteResponse;
-	}
-
-	/**
-	 * Update contacorrente.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the contacorrente response
-	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	@ResponseBody
-	public ContaCorrenteResponse updateContaCorrente(@RequestBody ContaCorrenteMaintenanceRequest request) {
-		ContaCorrenteResponse contacorrenteResponse = new ContaCorrenteResponse();
-		try {
-			InternalResultsResponse<ContaCorrente> internalResponse = getFinanceiroBAC().updateContaCorrente(request);
-			ResponseHandler.handleOperationStatusAndMessages(contacorrenteResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, contacorrenteResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return contacorrenteResponse;
-	}
-
-	/**
-	 * Delete contacorrente.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the contacorrente response
-	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	@ResponseBody
-	public ContaCorrenteResponse deleteContaCorrente(@RequestBody ContaCorrenteMaintenanceRequest request) {
-		ContaCorrenteResponse contacorrenteResponse = new ContaCorrenteResponse();
-
-		try {
-			InternalResultsResponse<ContaCorrente> internalResponse = getFinanceiroBAC().deleteContaCorrente(request);
-			ResponseHandler.handleOperationStatusAndMessages(contacorrenteResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, contacorrenteResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return contacorrenteResponse;
-
-	}
-
-	// ===================================### CAIXA
-	// ####======================================
-	/**
-	 * Refresh caixas.
-	 *
-	 * @param refreshInt
-	 *            the refresh int
-	 * @param retList
-	 *            the ret list
-	 * @param retPaged
-	 *            the ret paged
-	 * @return the caixa response
-	 */
-	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
-	@ResponseBody
-	public CaixaResponse refreshCaixas(@RequestParam("refreshInt") Integer refreshInt,
-			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
-		CaixaResponse caixaResponse = new CaixaResponse();
-
-		try {
-			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
-			InternalResultsResponse<Caixa> internalResponse = getFinanceiroBAC().refreshCaixas(request);
-			ResponseHandler.handleOperationStatusAndMessages(caixaResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, caixaResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return caixaResponse;
-
-	}
-
-	/**
-	 * Fetch caixa paged.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the caixa response
-	 */
-	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
-	@ResponseBody
-	public CaixaResponse fetchCaixaPaged(@RequestBody CaixaInquiryRequest request) {
-		CaixaResponse caixaResponse = new CaixaResponse();
-		try {
-			InternalResultsResponse<Caixa> internalResponse = getFinanceiroBAC().fetchCaixasByRequest(request);
-			ResponseHandler.handleOperationStatusAndMessages(caixaResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, caixaResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return caixaResponse;
-	}
-
-	/**
-	 * Insert caixa.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the caixa response
-	 */
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	@ResponseBody
-	public CaixaResponse insertCaixa(@RequestBody CaixaMaintenanceRequest request) {
-		CaixaResponse caixaResponse = new CaixaResponse();
-		try {
-			InternalResultsResponse<Caixa> internalResponse = getFinanceiroBAC().insertCaixa(request);
-			ResponseHandler.handleOperationStatusAndMessages(caixaResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, caixaResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return caixaResponse;
-	}
-
-	/**
-	 * Update caixa.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the caixa response
-	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	@ResponseBody
-	public CaixaResponse updateCaixa(@RequestBody CaixaMaintenanceRequest request) {
-		CaixaResponse caixaResponse = new CaixaResponse();
-		try {
-			InternalResultsResponse<Caixa> internalResponse = getFinanceiroBAC().updateCaixa(request);
-			ResponseHandler.handleOperationStatusAndMessages(caixaResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, caixaResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return caixaResponse;
-	}
-
-	/**
-	 * Delete caixa.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the caixa response
-	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	@ResponseBody
-	public CaixaResponse deleteCaixa(@RequestBody CaixaMaintenanceRequest request) {
-		CaixaResponse caixaResponse = new CaixaResponse();
-
-		try {
-			InternalResultsResponse<Caixa> internalResponse = getFinanceiroBAC().deleteCaixa(request);
-			ResponseHandler.handleOperationStatusAndMessages(caixaResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, caixaResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return caixaResponse;
-
-	}
+	// /** The Constant DEFAULT_EXCEPTION_MSG. */
+	// private static final String DEFAULT_EXCEPTION_MSG =
+	// "sysmgmt.base.financeirocontrollerrest.defaultexception";
+	//
+	// /** The Constant LOG. */
+	// private static final Logger LOG =
+	// LoggerFactory.getLogger(FinanceiroAPIController.class);
+	//
+	// /** The financeiro bac. */
+	// private IFinanceiroBAC financeiroBAC; // injected by @Resource
+	//
+	// /**
+	// * Gets the financeiro bac.
+	// *
+	// * @return the financeiro bac
+	// */
+	// public IFinanceiroBAC getFinanceiroBAC() {
+	// return financeiroBAC;
+	// }
+	//
+	// /**
+	// * Sets the financeiro bac.
+	// *
+	// * @param financeiroBAC
+	// * the new financeiro bac
+	// */
+	// @Resource
+	// public void setFinanceiroBAC(IFinanceiroBAC financeiroBAC) {
+	// this.financeiroBAC = financeiroBAC;
+	// }
+	//
+	// // ===================================### CONTASPAGAR
+	// // ####======================================
+	// /**
+	// * Refresh contaspagars.
+	// *
+	// * @param refreshInt
+	// * the refresh int
+	// * @param retList
+	// * the ret list
+	// * @param retPaged
+	// * the ret paged
+	// * @return the contaspagar response
+	// */
+	// @RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	// @ResponseBody
+	// public ContasPagarResponse
+	// refreshContasPagars(@RequestParam("refreshInt") Integer refreshInt,
+	// @RequestParam("retList") Boolean retList, @RequestParam("retPaged")
+	// Boolean retPaged) {
+	// ContasPagarResponse contaspagarResponse = new ContasPagarResponse();
+	//
+	// try {
+	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
+	// retPaged);
+	// InternalResultsResponse<ContasPagar> internalResponse =
+	// getFinanceiroBAC().refreshContasPagars(request);
+	// ResponseHandler.handleOperationStatusAndMessages(contaspagarResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, contaspagarResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return contaspagarResponse;
+	//
+	// }
+	//
+	// /**
+	// * Fetch contaspagar paged.
+	// *
+	// * @param request
+	// * the request
+	// * @return the contaspagar response
+	// */
+	// @RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	// @ResponseBody
+	// public ContasPagarResponse fetchContasPagarPaged(@RequestBody
+	// ContasPagarInquiryRequest request) {
+	// ContasPagarResponse contaspagarResponse = new ContasPagarResponse();
+	// try {
+	// InternalResultsResponse<ContasPagar> internalResponse =
+	// getFinanceiroBAC()
+	// .fetchContasPagarsByRequest(request);
+	// ResponseHandler.handleOperationStatusAndMessages(contaspagarResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, contaspagarResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return contaspagarResponse;
+	// }
+	//
+	// /**
+	// * Insert contaspagar.
+	// *
+	// * @param request
+	// * the request
+	// * @return the contaspagar response
+	// */
+	// @RequestMapping(value = "/insert", method = RequestMethod.POST)
+	// @ResponseBody
+	// public ContasPagarResponse insertContasPagar(@RequestBody
+	// ContasPagarMaintenanceRequest request) {
+	// ContasPagarResponse contaspagarResponse = new ContasPagarResponse();
+	// try {
+	// InternalResultsResponse<ContasPagar> internalResponse =
+	// getFinanceiroBAC().insertContasPagar(request);
+	// ResponseHandler.handleOperationStatusAndMessages(contaspagarResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, contaspagarResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return contaspagarResponse;
+	// }
+	//
+	// /**
+	// * Update contaspagar.
+	// *
+	// * @param request
+	// * the request
+	// * @return the contaspagar response
+	// */
+	// @RequestMapping(value = "/update", method = RequestMethod.POST)
+	// @ResponseBody
+	// public ContasPagarResponse updateContasPagar(@RequestBody
+	// ContasPagarMaintenanceRequest request) {
+	// ContasPagarResponse contaspagarResponse = new ContasPagarResponse();
+	// try {
+	// InternalResultsResponse<ContasPagar> internalResponse =
+	// getFinanceiroBAC().updateContasPagar(request);
+	// ResponseHandler.handleOperationStatusAndMessages(contaspagarResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, contaspagarResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return contaspagarResponse;
+	// }
+	//
+	// /**
+	// * Delete contaspagar.
+	// *
+	// * @param request
+	// * the request
+	// * @return the contaspagar response
+	// */
+	// @RequestMapping(value = "/delete", method = RequestMethod.POST)
+	// @ResponseBody
+	// public ContasPagarResponse deleteContasPagar(@RequestBody
+	// ContasPagarMaintenanceRequest request) {
+	// ContasPagarResponse contaspagarResponse = new ContasPagarResponse();
+	//
+	// try {
+	// InternalResultsResponse<ContasPagar> internalResponse =
+	// getFinanceiroBAC().deleteContasPagar(request);
+	// ResponseHandler.handleOperationStatusAndMessages(contaspagarResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, contaspagarResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return contaspagarResponse;
+	//
+	// }
+	//
+	// // ===================================### CONTASRECEBER
+	// // ####======================================
+	// /**
+	// * Refresh contasrecebers.
+	// *
+	// * @param refreshInt
+	// * the refresh int
+	// * @param retList
+	// * the ret list
+	// * @param retPaged
+	// * the ret paged
+	// * @return the contasreceber response
+	// */
+	// @RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	// @ResponseBody
+	// public ContasReceberResponse
+	// refreshContasRecebers(@RequestParam("refreshInt") Integer refreshInt,
+	// @RequestParam("retList") Boolean retList, @RequestParam("retPaged")
+	// Boolean retPaged) {
+	// ContasReceberResponse contasreceberResponse = new
+	// ContasReceberResponse();
+	//
+	// try {
+	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
+	// retPaged);
+	// InternalResultsResponse<ContasReceber> internalResponse =
+	// getFinanceiroBAC().refreshContasRecebers(request);
+	// ResponseHandler.handleOperationStatusAndMessages(contasreceberResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, contasreceberResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return contasreceberResponse;
+	//
+	// }
+	//
+	// /**
+	// * Fetch contasreceber paged.
+	// *
+	// * @param request
+	// * the request
+	// * @return the contasreceber response
+	// */
+	// @RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	// @ResponseBody
+	// public ContasReceberResponse fetchContasReceberPaged(@RequestBody
+	// ContasReceberInquiryRequest request) {
+	// ContasReceberResponse contasreceberResponse = new
+	// ContasReceberResponse();
+	// try {
+	// InternalResultsResponse<ContasReceber> internalResponse =
+	// getFinanceiroBAC()
+	// .fetchContasRecebersByRequest(request);
+	// ResponseHandler.handleOperationStatusAndMessages(contasreceberResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, contasreceberResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return contasreceberResponse;
+	// }
+	//
+	// /**
+	// * Insert contasreceber.
+	// *
+	// * @param request
+	// * the request
+	// * @return the contasreceber response
+	// */
+	// @RequestMapping(value = "/insert", method = RequestMethod.POST)
+	// @ResponseBody
+	// public ContasReceberResponse insertContasReceber(@RequestBody
+	// ContasReceberMaintenanceRequest request) {
+	// ContasReceberResponse contasreceberResponse = new
+	// ContasReceberResponse();
+	// try {
+	// InternalResultsResponse<ContasReceber> internalResponse =
+	// getFinanceiroBAC().insertContasReceber(request);
+	// ResponseHandler.handleOperationStatusAndMessages(contasreceberResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, contasreceberResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return contasreceberResponse;
+	// }
+	//
+	// /**
+	// * Update contasreceber.
+	// *
+	// * @param request
+	// * the request
+	// * @return the contasreceber response
+	// */
+	// @RequestMapping(value = "/update", method = RequestMethod.POST)
+	// @ResponseBody
+	// public ContasReceberResponse updateContasReceber(@RequestBody
+	// ContasReceberMaintenanceRequest request) {
+	// ContasReceberResponse contasreceberResponse = new
+	// ContasReceberResponse();
+	// try {
+	// InternalResultsResponse<ContasReceber> internalResponse =
+	// getFinanceiroBAC().updateContasReceber(request);
+	// ResponseHandler.handleOperationStatusAndMessages(contasreceberResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, contasreceberResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return contasreceberResponse;
+	// }
+	//
+	// /**
+	// * Delete contasreceber.
+	// *
+	// * @param request
+	// * the request
+	// * @return the contasreceber response
+	// */
+	// @RequestMapping(value = "/delete", method = RequestMethod.POST)
+	// @ResponseBody
+	// public ContasReceberResponse deleteContasReceber(@RequestBody
+	// ContasReceberMaintenanceRequest request) {
+	// ContasReceberResponse contasreceberResponse = new
+	// ContasReceberResponse();
+	//
+	// try {
+	// InternalResultsResponse<ContasReceber> internalResponse =
+	// getFinanceiroBAC().deleteContasReceber(request);
+	// ResponseHandler.handleOperationStatusAndMessages(contasreceberResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, contasreceberResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return contasreceberResponse;
+	//
+	// }
+	//
+	// // ===================================### CONDPAG
+	// // ####======================================
+	// /**
+	// * Refresh condpags.
+	// *
+	// * @param refreshInt
+	// * the refresh int
+	// * @param retList
+	// * the ret list
+	// * @param retPaged
+	// * the ret paged
+	// * @return the condpag response
+	// */
+	// @RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	// @ResponseBody
+	// public CondPagResponse refreshCondPags(@RequestParam("refreshInt")
+	// Integer refreshInt,
+	// @RequestParam("retList") Boolean retList, @RequestParam("retPaged")
+	// Boolean retPaged) {
+	// CondPagResponse condpagResponse = new CondPagResponse();
+	//
+	// try {
+	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
+	// retPaged);
+	// InternalResultsResponse<CondPag> internalResponse =
+	// getFinanceiroBAC().refreshCondPags(request);
+	// ResponseHandler.handleOperationStatusAndMessages(condpagResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, condpagResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return condpagResponse;
+	//
+	// }
+	//
+	// /**
+	// * Fetch condpag paged.
+	// *
+	// * @param request
+	// * the request
+	// * @return the condpag response
+	// */
+	// @RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	// @ResponseBody
+	// public CondPagResponse fetchCondPagPaged(@RequestBody
+	// CondPagInquiryRequest request) {
+	// CondPagResponse condpagResponse = new CondPagResponse();
+	// try {
+	// InternalResultsResponse<CondPag> internalResponse =
+	// getFinanceiroBAC().fetchCondPagsByRequest(request);
+	// ResponseHandler.handleOperationStatusAndMessages(condpagResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, condpagResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return condpagResponse;
+	// }
+	//
+	// /**
+	// * Insert condpag.
+	// *
+	// * @param request
+	// * the request
+	// * @return the condpag response
+	// */
+	// @RequestMapping(value = "/insert", method = RequestMethod.POST)
+	// @ResponseBody
+	// public CondPagResponse insertCondPag(@RequestBody
+	// CondPagMaintenanceRequest request) {
+	// CondPagResponse condpagResponse = new CondPagResponse();
+	// try {
+	// InternalResultsResponse<CondPag> internalResponse =
+	// getFinanceiroBAC().insertCondPag(request);
+	// ResponseHandler.handleOperationStatusAndMessages(condpagResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, condpagResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return condpagResponse;
+	// }
+	//
+	// /**
+	// * Update condpag.
+	// *
+	// * @param request
+	// * the request
+	// * @return the condpag response
+	// */
+	// @RequestMapping(value = "/update", method = RequestMethod.POST)
+	// @ResponseBody
+	// public CondPagResponse updateCondPag(@RequestBody
+	// CondPagMaintenanceRequest request) {
+	// CondPagResponse condpagResponse = new CondPagResponse();
+	// try {
+	// InternalResultsResponse<CondPag> internalResponse =
+	// getFinanceiroBAC().updateCondPag(request);
+	// ResponseHandler.handleOperationStatusAndMessages(condpagResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, condpagResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return condpagResponse;
+	// }
+	//
+	// /**
+	// * Delete condpag.
+	// *
+	// * @param request
+	// * the request
+	// * @return the condpag response
+	// */
+	// @RequestMapping(value = "/delete", method = RequestMethod.POST)
+	// @ResponseBody
+	// public CondPagResponse deleteCondPag(@RequestBody
+	// CondPagMaintenanceRequest request) {
+	// CondPagResponse condpagResponse = new CondPagResponse();
+	//
+	// try {
+	// InternalResultsResponse<CondPag> internalResponse =
+	// getFinanceiroBAC().deleteCondPag(request);
+	// ResponseHandler.handleOperationStatusAndMessages(condpagResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, condpagResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return condpagResponse;
+	//
+	// }
+	//
+	// // ===================================### FORMAPG
+	// // ####======================================
+	// /**
+	// * Refresh formapgs.
+	// *
+	// * @param refreshInt
+	// * the refresh int
+	// * @param retList
+	// * the ret list
+	// * @param retPaged
+	// * the ret paged
+	// * @return the formapg response
+	// */
+	// @RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	// @ResponseBody
+	// public FormaPgResponse refreshFormaPgs(@RequestParam("refreshInt")
+	// Integer refreshInt,
+	// @RequestParam("retList") Boolean retList, @RequestParam("retPaged")
+	// Boolean retPaged) {
+	// FormaPgResponse formapgResponse = new FormaPgResponse();
+	//
+	// try {
+	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
+	// retPaged);
+	// InternalResultsResponse<FormaPg> internalResponse =
+	// getFinanceiroBAC().refreshFormaPgs(request);
+	// ResponseHandler.handleOperationStatusAndMessages(formapgResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, formapgResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return formapgResponse;
+	//
+	// }
+	//
+	// /**
+	// * Fetch formapg paged.
+	// *
+	// * @param request
+	// * the request
+	// * @return the formapg response
+	// */
+	// @RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	// @ResponseBody
+	// public FormaPgResponse fetchFormaPgPaged(@RequestBody
+	// FormaPgInquiryRequest request) {
+	// FormaPgResponse formapgResponse = new FormaPgResponse();
+	// try {
+	// InternalResultsResponse<FormaPg> internalResponse =
+	// getFinanceiroBAC().fetchFormaPgsByRequest(request);
+	// ResponseHandler.handleOperationStatusAndMessages(formapgResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, formapgResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return formapgResponse;
+	// }
+	//
+	// /**
+	// * Insert formapg.
+	// *
+	// * @param request
+	// * the request
+	// * @return the formapg response
+	// */
+	// @RequestMapping(value = "/insert", method = RequestMethod.POST)
+	// @ResponseBody
+	// public FormaPgResponse insertFormaPg(@RequestBody
+	// FormaPgMaintenanceRequest request) {
+	// FormaPgResponse formapgResponse = new FormaPgResponse();
+	// try {
+	// InternalResultsResponse<FormaPg> internalResponse =
+	// getFinanceiroBAC().insertFormaPg(request);
+	// ResponseHandler.handleOperationStatusAndMessages(formapgResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, formapgResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return formapgResponse;
+	// }
+	//
+	// /**
+	// * Update formapg.
+	// *
+	// * @param request
+	// * the request
+	// * @return the formapg response
+	// */
+	// @RequestMapping(value = "/update", method = RequestMethod.POST)
+	// @ResponseBody
+	// public FormaPgResponse updateFormaPg(@RequestBody
+	// FormaPgMaintenanceRequest request) {
+	// FormaPgResponse formapgResponse = new FormaPgResponse();
+	// try {
+	// InternalResultsResponse<FormaPg> internalResponse =
+	// getFinanceiroBAC().updateFormaPg(request);
+	// ResponseHandler.handleOperationStatusAndMessages(formapgResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, formapgResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return formapgResponse;
+	// }
+	//
+	// /**
+	// * Delete formapg.
+	// *
+	// * @param request
+	// * the request
+	// * @return the formapg response
+	// */
+	// @RequestMapping(value = "/delete", method = RequestMethod.POST)
+	// @ResponseBody
+	// public FormaPgResponse deleteFormaPg(@RequestBody
+	// FormaPgMaintenanceRequest request) {
+	// FormaPgResponse formapgResponse = new FormaPgResponse();
+	//
+	// try {
+	// InternalResultsResponse<FormaPg> internalResponse =
+	// getFinanceiroBAC().deleteFormaPg(request);
+	// ResponseHandler.handleOperationStatusAndMessages(formapgResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, formapgResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return formapgResponse;
+	//
+	// }
+	//
+	// // ===================================### BANCO
+	// // ####======================================
+	// /**
+	// * Refresh bancos.
+	// *
+	// * @param refreshInt
+	// * the refresh int
+	// * @param retList
+	// * the ret list
+	// * @param retPaged
+	// * the ret paged
+	// * @return the banco response
+	// */
+	// @RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	// @ResponseBody
+	// public BancoResponse refreshBancos(@RequestParam("refreshInt") Integer
+	// refreshInt,
+	// @RequestParam("retList") Boolean retList, @RequestParam("retPaged")
+	// Boolean retPaged) {
+	// BancoResponse bancoResponse = new BancoResponse();
+	//
+	// try {
+	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
+	// retPaged);
+	// InternalResultsResponse<Banco> internalResponse =
+	// getFinanceiroBAC().refreshBancos(request);
+	// ResponseHandler.handleOperationStatusAndMessages(bancoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, bancoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return bancoResponse;
+	//
+	// }
+	//
+	// /**
+	// * Fetch banco paged.
+	// *
+	// * @param request
+	// * the request
+	// * @return the banco response
+	// */
+	// @RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	// @ResponseBody
+	// public BancoResponse fetchBancoPaged(@RequestBody BancoInquiryRequest
+	// request) {
+	// BancoResponse bancoResponse = new BancoResponse();
+	// try {
+	// InternalResultsResponse<Banco> internalResponse =
+	// getFinanceiroBAC().fetchBancosByRequest(request);
+	// ResponseHandler.handleOperationStatusAndMessages(bancoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, bancoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return bancoResponse;
+	// }
+	//
+	// /**
+	// * Insert banco.
+	// *
+	// * @param request
+	// * the request
+	// * @return the banco response
+	// */
+	// @RequestMapping(value = "/insert", method = RequestMethod.POST)
+	// @ResponseBody
+	// public BancoResponse insertBanco(@RequestBody BancoMaintenanceRequest
+	// request) {
+	// BancoResponse bancoResponse = new BancoResponse();
+	// try {
+	// InternalResultsResponse<Banco> internalResponse =
+	// getFinanceiroBAC().insertBanco(request);
+	// ResponseHandler.handleOperationStatusAndMessages(bancoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, bancoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return bancoResponse;
+	// }
+	//
+	// /**
+	// * Update banco.
+	// *
+	// * @param request
+	// * the request
+	// * @return the banco response
+	// */
+	// @RequestMapping(value = "/update", method = RequestMethod.POST)
+	// @ResponseBody
+	// public BancoResponse updateBanco(@RequestBody BancoMaintenanceRequest
+	// request) {
+	// BancoResponse bancoResponse = new BancoResponse();
+	// try {
+	// InternalResultsResponse<Banco> internalResponse =
+	// getFinanceiroBAC().updateBanco(request);
+	// ResponseHandler.handleOperationStatusAndMessages(bancoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, bancoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return bancoResponse;
+	// }
+	//
+	// /**
+	// * Delete banco.
+	// *
+	// * @param request
+	// * the request
+	// * @return the banco response
+	// */
+	// @RequestMapping(value = "/delete", method = RequestMethod.POST)
+	// @ResponseBody
+	// public BancoResponse deleteBanco(@RequestBody BancoMaintenanceRequest
+	// request) {
+	// BancoResponse bancoResponse = new BancoResponse();
+	//
+	// try {
+	// InternalResultsResponse<Banco> internalResponse =
+	// getFinanceiroBAC().deleteBanco(request);
+	// ResponseHandler.handleOperationStatusAndMessages(bancoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, bancoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return bancoResponse;
+	//
+	// }
+	//
+	// // ===================================### CONTACORRENTE
+	// // ####======================================
+	// /**
+	// * Refresh contacorrentes.
+	// *
+	// * @param refreshInt
+	// * the refresh int
+	// * @param retList
+	// * the ret list
+	// * @param retPaged
+	// * the ret paged
+	// * @return the contacorrente response
+	// */
+	// @RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	// @ResponseBody
+	// public ContaCorrenteResponse
+	// refreshContaCorrentes(@RequestParam("refreshInt") Integer refreshInt,
+	// @RequestParam("retList") Boolean retList, @RequestParam("retPaged")
+	// Boolean retPaged) {
+	// ContaCorrenteResponse contacorrenteResponse = new
+	// ContaCorrenteResponse();
+	//
+	// try {
+	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
+	// retPaged);
+	// InternalResultsResponse<ContaCorrente> internalResponse =
+	// getFinanceiroBAC().refreshContaCorrentes(request);
+	// ResponseHandler.handleOperationStatusAndMessages(contacorrenteResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, contacorrenteResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return contacorrenteResponse;
+	//
+	// }
+	//
+	// /**
+	// * Fetch contacorrente paged.
+	// *
+	// * @param request
+	// * the request
+	// * @return the contacorrente response
+	// */
+	// @RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	// @ResponseBody
+	// public ContaCorrenteResponse fetchContaCorrentePaged(@RequestBody
+	// ContaCorrenteInquiryRequest request) {
+	// ContaCorrenteResponse contacorrenteResponse = new
+	// ContaCorrenteResponse();
+	// try {
+	// InternalResultsResponse<ContaCorrente> internalResponse =
+	// getFinanceiroBAC()
+	// .fetchContaCorrentesByRequest(request);
+	// ResponseHandler.handleOperationStatusAndMessages(contacorrenteResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, contacorrenteResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return contacorrenteResponse;
+	// }
+	//
+	// /**
+	// * Insert contacorrente.
+	// *
+	// * @param request
+	// * the request
+	// * @return the contacorrente response
+	// */
+	// @RequestMapping(value = "/insert", method = RequestMethod.POST)
+	// @ResponseBody
+	// public ContaCorrenteResponse insertContaCorrente(@RequestBody
+	// ContaCorrenteMaintenanceRequest request) {
+	// ContaCorrenteResponse contacorrenteResponse = new
+	// ContaCorrenteResponse();
+	// try {
+	// InternalResultsResponse<ContaCorrente> internalResponse =
+	// getFinanceiroBAC().insertContaCorrente(request);
+	// ResponseHandler.handleOperationStatusAndMessages(contacorrenteResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, contacorrenteResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return contacorrenteResponse;
+	// }
+	//
+	// /**
+	// * Update contacorrente.
+	// *
+	// * @param request
+	// * the request
+	// * @return the contacorrente response
+	// */
+	// @RequestMapping(value = "/update", method = RequestMethod.POST)
+	// @ResponseBody
+	// public ContaCorrenteResponse updateContaCorrente(@RequestBody
+	// ContaCorrenteMaintenanceRequest request) {
+	// ContaCorrenteResponse contacorrenteResponse = new
+	// ContaCorrenteResponse();
+	// try {
+	// InternalResultsResponse<ContaCorrente> internalResponse =
+	// getFinanceiroBAC().updateContaCorrente(request);
+	// ResponseHandler.handleOperationStatusAndMessages(contacorrenteResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, contacorrenteResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return contacorrenteResponse;
+	// }
+	//
+	// /**
+	// * Delete contacorrente.
+	// *
+	// * @param request
+	// * the request
+	// * @return the contacorrente response
+	// */
+	// @RequestMapping(value = "/delete", method = RequestMethod.POST)
+	// @ResponseBody
+	// public ContaCorrenteResponse deleteContaCorrente(@RequestBody
+	// ContaCorrenteMaintenanceRequest request) {
+	// ContaCorrenteResponse contacorrenteResponse = new
+	// ContaCorrenteResponse();
+	//
+	// try {
+	// InternalResultsResponse<ContaCorrente> internalResponse =
+	// getFinanceiroBAC().deleteContaCorrente(request);
+	// ResponseHandler.handleOperationStatusAndMessages(contacorrenteResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, contacorrenteResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return contacorrenteResponse;
+	//
+	// }
+	//
+	// // ===================================### CAIXA
+	// // ####======================================
+	// /**
+	// * Refresh caixas.
+	// *
+	// * @param refreshInt
+	// * the refresh int
+	// * @param retList
+	// * the ret list
+	// * @param retPaged
+	// * the ret paged
+	// * @return the caixa response
+	// */
+	// @RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	// @ResponseBody
+	// public CaixaResponse refreshCaixas(@RequestParam("refreshInt") Integer
+	// refreshInt,
+	// @RequestParam("retList") Boolean retList, @RequestParam("retPaged")
+	// Boolean retPaged) {
+	// CaixaResponse caixaResponse = new CaixaResponse();
+	//
+	// try {
+	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
+	// retPaged);
+	// InternalResultsResponse<Caixa> internalResponse =
+	// getFinanceiroBAC().refreshCaixas(request);
+	// ResponseHandler.handleOperationStatusAndMessages(caixaResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, caixaResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return caixaResponse;
+	//
+	// }
+	//
+	// /**
+	// * Fetch caixa paged.
+	// *
+	// * @param request
+	// * the request
+	// * @return the caixa response
+	// */
+	// @RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	// @ResponseBody
+	// public CaixaResponse fetchCaixaPaged(@RequestBody CaixaInquiryRequest
+	// request) {
+	// CaixaResponse caixaResponse = new CaixaResponse();
+	// try {
+	// InternalResultsResponse<Caixa> internalResponse =
+	// getFinanceiroBAC().fetchCaixasByRequest(request);
+	// ResponseHandler.handleOperationStatusAndMessages(caixaResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, caixaResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return caixaResponse;
+	// }
+	//
+	// /**
+	// * Insert caixa.
+	// *
+	// * @param request
+	// * the request
+	// * @return the caixa response
+	// */
+	// @RequestMapping(value = "/insert", method = RequestMethod.POST)
+	// @ResponseBody
+	// public CaixaResponse insertCaixa(@RequestBody CaixaMaintenanceRequest
+	// request) {
+	// CaixaResponse caixaResponse = new CaixaResponse();
+	// try {
+	// InternalResultsResponse<Caixa> internalResponse =
+	// getFinanceiroBAC().insertCaixa(request);
+	// ResponseHandler.handleOperationStatusAndMessages(caixaResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, caixaResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return caixaResponse;
+	// }
+	//
+	// /**
+	// * Update caixa.
+	// *
+	// * @param request
+	// * the request
+	// * @return the caixa response
+	// */
+	// @RequestMapping(value = "/update", method = RequestMethod.POST)
+	// @ResponseBody
+	// public CaixaResponse updateCaixa(@RequestBody CaixaMaintenanceRequest
+	// request) {
+	// CaixaResponse caixaResponse = new CaixaResponse();
+	// try {
+	// InternalResultsResponse<Caixa> internalResponse =
+	// getFinanceiroBAC().updateCaixa(request);
+	// ResponseHandler.handleOperationStatusAndMessages(caixaResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, caixaResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return caixaResponse;
+	// }
+	//
+	// /**
+	// * Delete caixa.
+	// *
+	// * @param request
+	// * the request
+	// * @return the caixa response
+	// */
+	// @RequestMapping(value = "/delete", method = RequestMethod.POST)
+	// @ResponseBody
+	// public CaixaResponse deleteCaixa(@RequestBody CaixaMaintenanceRequest
+	// request) {
+	// CaixaResponse caixaResponse = new CaixaResponse();
+	//
+	// try {
+	// InternalResultsResponse<Caixa> internalResponse =
+	// getFinanceiroBAC().deleteCaixa(request);
+	// ResponseHandler.handleOperationStatusAndMessages(caixaResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, caixaResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return caixaResponse;
+	//
+	// }
 
 }
