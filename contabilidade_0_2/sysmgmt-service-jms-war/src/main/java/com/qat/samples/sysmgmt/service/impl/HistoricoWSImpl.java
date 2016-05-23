@@ -50,174 +50,209 @@ public class HistoricoWSImpl implements IHistoricoWS
 	{
 		this.historicoBAC = historicoBAC;
 	}
+	@Override
+	public HistoricoResponse insertHistorico(HistoricoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public HistoricoResponse updateHistorico(HistoricoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public HistoricoResponse deleteHistorico(HistoricoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public HistoricoResponse fetchHistoricoById(FetchByIdRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public HistoricoResponse fetchHistoricosByRequest(HistoricoInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public HistoricoResponse refreshHistoricos(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public HistoricoResponse fetchAllHistoricos(FetchAllRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 //===================================### HISTORICO ####======================================
-
-	/**
-	 * Delegates call to {@link IHistoricoBAC}
-	 *
-	 * @param request a HistoricoRequest
-	 * @return HistoricoResponse
-	 */
-	@Override
-	public HistoricoResponse insertHistorico(HistoricoMaintenanceRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		HistoricoResponse response = new HistoricoResponse();
-		try
-		{
-			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().insertHistorico(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	/**
-	 * Delegates call to {@link IHistoricoBAC}
-	 *
-	 * @param request a HistoricoRequest
-	 * @return HistoricoResponse
-	 */
-	@Override
-	public HistoricoResponse updateHistorico(HistoricoMaintenanceRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		HistoricoResponse response = new HistoricoResponse();
-		try
-		{
-			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().updateHistorico(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	/**
-	 * Delegates call to {@link IHistoricoBAC}
-	 *
-	 * @param request a HistoricoRequest
-	 * @return HistoricoResponse
-	 */
-	@Override
-	public HistoricoResponse deleteHistorico(HistoricoMaintenanceRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		HistoricoResponse response = new HistoricoResponse();
-		try
-		{
-			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().deleteHistorico(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	/**
-	 * Delegates call to {@link IHistoricoBAC}
-	 *
-	 * @param request a HistoricoRequest
-	 * @return HistoricoResponse
-	 */
-	@Override
-	public HistoricoResponse fetchHistoricoById(FetchByIdRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		HistoricoResponse response = new HistoricoResponse();
-		try
-		{
-			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().fetchHistoricoById(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	/**
-	 * Delegates call to {@link IHistoricoBAC}
-	 *
-	 * @param request a HistoricoRequest
-	 * @return HistoricoResponse
-	 */
-	@Override
-	public HistoricoResponse fetchHistoricosByRequest(HistoricoInquiryRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		HistoricoResponse response = new HistoricoResponse();
-		try
-		{
-			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().fetchHistoricosByRequest(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	/**
-	 * Delegates call to {@link IHistoricoBAC}
-	 *
-	 * @param request a HistoricoRequest
-	 * @return HistoricoResponse
-	 */
-	@Override
-	public HistoricoResponse refreshHistoricos(RefreshRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		HistoricoResponse response = new HistoricoResponse();
-		try
-		{
-			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().refreshHistoricos(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	/**
-	 * Delegates call to {@link IHistoricoBAC}
-	 *
-	 * @param request a HistoricoRequest
-	 * @return HistoricoResponse
-	 */
-	@Override
-	public HistoricoResponse fetchAllHistoricos(FetchAllRequest request)
-	{
-		HistoricoResponse response = new HistoricoResponse();
-		try
-		{
-			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().fetchAllHistoricos(new Historico());
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
+//
+//	/**
+//	 * Delegates call to {@link IHistoricoBAC}
+//	 *
+//	 * @param request a HistoricoRequest
+//	 * @return HistoricoResponse
+//	 */
+//	@Override
+//	public HistoricoResponse insertHistorico(HistoricoMaintenanceRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		HistoricoResponse response = new HistoricoResponse();
+//		try
+//		{
+//			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().insertHistorico(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//
+//	/**
+//	 * Delegates call to {@link IHistoricoBAC}
+//	 *
+//	 * @param request a HistoricoRequest
+//	 * @return HistoricoResponse
+//	 */
+//	@Override
+//	public HistoricoResponse updateHistorico(HistoricoMaintenanceRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		HistoricoResponse response = new HistoricoResponse();
+//		try
+//		{
+//			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().updateHistorico(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//
+//	/**
+//	 * Delegates call to {@link IHistoricoBAC}
+//	 *
+//	 * @param request a HistoricoRequest
+//	 * @return HistoricoResponse
+//	 */
+//	@Override
+//	public HistoricoResponse deleteHistorico(HistoricoMaintenanceRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		HistoricoResponse response = new HistoricoResponse();
+//		try
+//		{
+//			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().deleteHistorico(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//
+//	/**
+//	 * Delegates call to {@link IHistoricoBAC}
+//	 *
+//	 * @param request a HistoricoRequest
+//	 * @return HistoricoResponse
+//	 */
+//	@Override
+//	public HistoricoResponse fetchHistoricoById(FetchByIdRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		HistoricoResponse response = new HistoricoResponse();
+//		try
+//		{
+//			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().fetchHistoricoById(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//
+//	/**
+//	 * Delegates call to {@link IHistoricoBAC}
+//	 *
+//	 * @param request a HistoricoRequest
+//	 * @return HistoricoResponse
+//	 */
+//	@Override
+//	public HistoricoResponse fetchHistoricosByRequest(HistoricoInquiryRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		HistoricoResponse response = new HistoricoResponse();
+//		try
+//		{
+//			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().fetchHistoricosByRequest(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//	/**
+//	 * Delegates call to {@link IHistoricoBAC}
+//	 *
+//	 * @param request a HistoricoRequest
+//	 * @return HistoricoResponse
+//	 */
+//	@Override
+//	public HistoricoResponse refreshHistoricos(RefreshRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		HistoricoResponse response = new HistoricoResponse();
+//		try
+//		{
+//			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().refreshHistoricos(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//	/**
+//	 * Delegates call to {@link IHistoricoBAC}
+//	 *
+//	 * @param request a HistoricoRequest
+//	 * @return HistoricoResponse
+//	 */
+//	@Override
+//	public HistoricoResponse fetchAllHistoricos(FetchAllRequest request)
+//	{
+//		HistoricoResponse response = new HistoricoResponse();
+//		try
+//		{
+//			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().fetchAllHistoricos(new Historico());
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
 
 
 }
