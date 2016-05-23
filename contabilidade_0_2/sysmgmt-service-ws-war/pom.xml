@@ -162,6 +162,26 @@
             <version>9.4-1204-jdbc42</version>
         </dependency>
 
+        <!--  Simple Xml Framework -->
+        <dependency>
+            <groupId>org.simpleframework</groupId>
+            <artifactId>simple-xml</artifactId>
+            <version>2.7.1</version>
+        </dependency>
+
+        <!-- Commons Lang -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
+
+        <!-- http://mvnrepository.com/artifact/com.github.wmixvideo/nfe -->
+        <dependency>
+            <groupId>com.github.wmixvideo</groupId>
+            <artifactId>nfe</artifactId>
+            <version>1.1.12</version>
+        </dependency>
 
         <!-- Testing Dependencies. -->
         <!--  The javax.transaction dependency is marked for test because it is needed only for JBoss -->
