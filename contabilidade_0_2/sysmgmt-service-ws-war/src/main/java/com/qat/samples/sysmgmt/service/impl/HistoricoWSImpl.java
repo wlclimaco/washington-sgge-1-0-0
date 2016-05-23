@@ -8,11 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.util.ResponseHandler;
 import com.qat.samples.sysmgmt.bac.Historico.IHistoricoBAC;
-import com.qat.samples.sysmgmt.historico.model.Historico;
-import com.qat.samples.sysmgmt.historico.model.HistoricoItens;
 import com.qat.samples.sysmgmt.historico.model.request.HistoricoInquiryRequest;
 import com.qat.samples.sysmgmt.historico.model.request.HistoricoMaintenanceRequest;
 import com.qat.samples.sysmgmt.historico.model.response.HistoricoResponse;
@@ -63,147 +59,46 @@ public class HistoricoWSImpl implements com.qat.samples.sysmgmt.service.IHistori
 		return historicoBAC;
 	}
 
-
-//===================================### HISTORICO ####======================================
 	@Override
-	public HistoricoResponse insertHistorico(HistoricoMaintenanceRequest request)
-	{
-		HistoricoResponse response = new HistoricoResponse();
-
-		try
-		{
-			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().insertHistorico(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public HistoricoResponse insertHistorico(HistoricoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public HistoricoResponse updateHistorico(HistoricoMaintenanceRequest request)
-	{
-		HistoricoResponse response = new HistoricoResponse();
-
-		try
-		{
-			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().updateHistorico(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public HistoricoResponse updateHistorico(HistoricoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public HistoricoResponse deleteHistorico(HistoricoMaintenanceRequest request)
-	{
-		HistoricoResponse response = new HistoricoResponse();
-
-		try
-		{
-			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().deleteHistorico(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public HistoricoResponse deleteHistorico(HistoricoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public HistoricoResponse refreshHistoricos(RefreshRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		HistoricoResponse response = new HistoricoResponse();
-
-		try
-		{
-			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().refreshHistoricos(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public HistoricoResponse refreshHistoricos(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public HistoricoResponse fetchAllHistoricos(FetchAllRequest request)
-	{
-		HistoricoResponse response = new HistoricoResponse();
-
-		try
-		{
-			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().fetchAllHistoricos(new Historico());
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.dapi.impl.IHistoricoWS#fetchHistoricoById(com.qat.samples.sysmgmt.model.request.
-	 * FetchByIdRequest)
-	 */
-	@Override
-	public HistoricoResponse fetchHistoricoById(FetchByIdRequest request)
-	{
-		HistoricoResponse response = new HistoricoResponse();
-
-		try
-		{
-			InternalResultsResponse<Historico> internalResponse = new InternalResultsResponse<Historico>();
-
-			internalResponse = getHistoricoBAC().fetchHistoricoById(request);
-			// Handle the processing for all previous methods regardless of them failing or succeeding.
-			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public HistoricoResponse fetchAllHistoricos(FetchAllRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public HistoricoResponse fetchHistoricosByRequest(HistoricoInquiryRequest request)
-	{
-		HistoricoResponse response = new HistoricoResponse();
-
-		try
-		{
-			InternalResultsResponse<Historico> internalResponse = getHistoricoBAC().fetchHistoricosByRequest(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public HistoricoResponse fetchHistoricoById(FetchByIdRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	@Override
+	public HistoricoResponse fetchHistoricosByRequest(HistoricoInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
