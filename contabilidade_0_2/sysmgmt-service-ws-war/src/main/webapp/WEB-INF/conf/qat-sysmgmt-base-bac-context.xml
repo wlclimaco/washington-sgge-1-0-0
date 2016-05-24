@@ -20,6 +20,10 @@
 		<property name="drugBAR" ref="drugBARTarget"/>
 		<property name="validationController" ref="drugValidationController"/>
 	</bean>
+
+	<bean id="siteBACTarget" class="com.qat.samples.sysmgmt.bac.Site.SiteBACImpl">
+		<property name="siteBAR" ref="siteBARTarget"/>
+	</bean>
 	<!-- ========================= ASPECT CONFIGURATION ======================== -->
 
 	<!-- ========================= InternalResponse status categories ========== -->

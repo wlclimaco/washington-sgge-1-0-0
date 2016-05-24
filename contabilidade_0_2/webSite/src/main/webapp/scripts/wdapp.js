@@ -8,14 +8,22 @@ var WebDaptiveAppConfig = {
 	useAuthTokenHeader: true,
 	//string to check for rest calls to jDpative Back-end so the angular http provider can inject x-auth token
 	restAuthBase: 'qat-sysmgmt-controller-rest',
-	authenticationURL: 'http://contabil0001.mybluemix.net/qat-sysmgmt-controller-rest/auth/api/authenticate',
-	base_county_url: 'http://contabil0001.mybluemix.net/qat-sysmgmt-controller-rest/county/api',
-	base_procedure_url: 'http://contabil0001.mybluemix.net/qat-sysmgmt-controller-rest/procedure/api',
+	authenticationURL: 'http://localhost:8080/qat-sysmgmt-controller-rest/auth/api/authenticate',
+	base_county_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/county/api',
+	base_procedure_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/procedure/api',
 	fetch_url: '/fetchPage',
 	refresh_url: '/refresh',
 	create_url: '/insert',
 	update_url: '/update',
-	delete_url: '/delete'
+	delete_url: '/delete',
+
+	//site
+	base_site_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/site/api',
+	fetch_url: '/fetchPage',
+	refresh_url: '/refresh',
+	create_url: '/insert',
+	update_url: '/update',
+	delete_url: '/delete',
 };
 
 (function() {

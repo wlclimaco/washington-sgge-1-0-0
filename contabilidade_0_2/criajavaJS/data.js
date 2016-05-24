@@ -1257,6 +1257,7 @@ function SiteModel() {
 	a.push({field :{campo : "logo", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "atorization", tipo :"Boolean",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "siteTypeEnum", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "empresa", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "servicoList", tipo :"List<Servico>",List : ServicoModel() ,requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "planoList", tipo :"List<PlanoBySite>",List :PlanoBySiteModel(),requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 
@@ -1269,6 +1270,7 @@ function ServicoModel() {
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "nome", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "descricao", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "parentId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "preco", tipo :"List<Preco>",List : PrecoModel(),requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
@@ -1289,7 +1291,7 @@ function PlanoByServicoModel() {
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "parentId" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
-	a.push({field :{campo : "servico" , tipo :"Servico",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "servico" , tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
 }
 

@@ -60,7 +60,7 @@ parentId
  <select id="fetchPlanoByServicoById" parameterType="Integer" resultMap="PlanoByServicoResult">
     SELECT id,
 	<include refid="allPlanoByServicoColumns" />
-   FROM planoByServico parentId = #{fetchid} and tabelaEnumValue = 54
+   FROM planoByServico WHERE parentId = #{fetchid}
  </select>
 
   <select id="fetchServicoByPlano" parameterType="Integer" resultMap="PlanoByServicoResult">
@@ -68,6 +68,7 @@ parentId
 	<include refid="allPlanoByServicoColumns" />
    FROM planoByServico WHERE id = #{fetchid}
  </select>
+
 
  <select id="fetchAllPlanoByServicosRequest" parameterType="PagedInquiryRequest" resultMap="PlanoByServicoResult">
 

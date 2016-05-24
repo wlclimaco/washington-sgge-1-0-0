@@ -9,6 +9,25 @@ import com.qat.samples.sysmgmt.util.model.criteria.ComumCriteria;
 public class SiteCriteria extends ComumCriteria
 {
 
+	private String url;
+	private String nome;
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	/**
 	 * The Constructor.
 	 */
@@ -17,15 +36,11 @@ public class SiteCriteria extends ComumCriteria
 		super();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
-	public String toString()
-	{
-		return "ArquivoCriteria [getEmprId()=" + getEmprId() + ", getId()=" + getId() + ", toString()="
-				+ super.toString() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
+	public String toString() {
+		return "SiteCriteria [getUrl()=" + getUrl() + ", getNome()=" + getNome() + ", getEmprId()=" + getEmprId()
+				+ ", getId()=" + getId() + ", toString()=" + super.toString() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 }

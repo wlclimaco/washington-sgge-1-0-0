@@ -3,13 +3,10 @@ package com.qat.samples.sysmgmt.site.model;
 import java.util.Date;
 import java.util.List;
 
-import com.qat.samples.sysmgmt.contabilidade.model.Plano;
 import com.qat.samples.sysmgmt.contabilidade.model.PlanoBySite;
+import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.produto.model.Servico;
-import com.qat.samples.sysmgmt.util.model.Email;
-import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
-import com.qat.samples.sysmgmt.util.model.Telefone;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -39,6 +36,8 @@ public class Site extends ModelCosmeDamiao
 	private SiteTypeEnum siteTypeEnum;
 
 	private boolean atorization;
+
+	private Empresa empresa;
 
 	private List<Servico> servicoList;
 
@@ -166,14 +165,22 @@ public class Site extends ModelCosmeDamiao
 		this.atorization = atorization;
 	}
 
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
 	@Override
 	public String toString() {
 		return "Site [getSiteTypeEnumValue()=" + getSiteTypeEnumValue() + ", getSiteTypeEnum()=" + getSiteTypeEnum()
 				+ ", getId()=" + getId() + ", getNome()=" + getNome() + ", getUrl()=" + getUrl() + ", getServicoList()="
 				+ getServicoList() + ", getPlanoList()=" + getPlanoList() + ", getQuemSomos()=" + getQuemSomos()
 				+ ", getMissao()=" + getMissao() + ", getVisao()=" + getVisao() + ", getTitulo()=" + getTitulo()
-				+ ", getLogo()=" + getLogo() + ", isAtorization()=" + isAtorization() + ", toString()="
-				+ super.toString() + "]";
+				+ ", getLogo()=" + getLogo() + ", isAtorization()=" + isAtorization() + ", getEmpresa()=" + getEmpresa()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 

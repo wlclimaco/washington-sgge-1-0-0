@@ -16,10 +16,10 @@
 		<property name="validationController" ref="countyValidationController"/>
 	</bean>
 
-	<bean id="siteBACTarget" class="com.qat.samples.sysmgmt.bac.site.SiteBACImpl">
+	<bean id="siteBACTarget" class="com.qat.samples.sysmgmt.bac.Site.SiteBACImpl">
 		<property name="siteBAR" ref="siteBARTarget"/>
-		<property name="validationController" ref="drugValidationController"/>
 	</bean>
+
 	<!-- ========================= ASPECT CONFIGURATION ======================== -->
 
 	<!-- ========================= InternalResponse status categories ========== -->

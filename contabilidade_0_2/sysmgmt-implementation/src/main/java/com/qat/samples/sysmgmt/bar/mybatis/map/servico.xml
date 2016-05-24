@@ -19,6 +19,7 @@
     <result property="id" column="id"/>
     <result property="nome" column="nome"/>
     <result property="descricao" column="descricao"/>
+    <result property="parentId" column="parentId"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -29,6 +30,7 @@
   <sql id="allServicoColumns">
 nome
 ,descricao
+,parentId
 ,create_date
 ,create_user
 ,modify_date
@@ -38,6 +40,7 @@ nome
 <sql id="allServicoValues">
 	#{nome},
 	#{descricao},
+	#{parentId},
 	#{createDateUTC},
 	#{createUser},
 	#{modifyDateUTC},
@@ -54,6 +57,12 @@ nome
     SELECT id,
 	<include refid="allServicoColumns" />
    FROM servico WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchServicoBySite" parameterType="Integer" resultMap="ServicoResult">
+    SELECT id,
+	<include refid="allServicoColumns" />
+   FROM servico WHERE parentId = #{fetchid}
  </select>
 
  <select id="fetchPrecoByPlano" parameterType="Integer" resultMap="ServicoResult">

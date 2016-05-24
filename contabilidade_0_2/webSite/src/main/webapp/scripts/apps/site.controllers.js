@@ -1,27 +1,34 @@
 (function() {
-  angular.module('wdApp.apps.site', []).controller('SiteController', 
-  ['$scope','$location', 'SysMgmtData', 'toastr', 'toastrConfig','$rootElement',
-	function($scope, SysMgmtData, toastr, toastrConfig,$location) {
-		var cvm = this;		
+  angular.module('wdApp.apps.site', []).controller('SiteController',
+   ['$scope', 'SysMgmtData', 'toastr', 'toastrConfig','$location',
+     function($scope, SysMgmtData, toastr, toastrConfig,location) {
+		var pvm = this;
 		var initLoad = true; //used to ensure not calling server multiple times
-		var fetch_url =    WebDaptiveAppConfig.base_county_url +  WebDaptiveAppConfig.fetch_url;
-		var refresh_url =  WebDaptiveAppConfig.base_county_url +  WebDaptiveAppConfig.refresh_url;
-		var create_url =   WebDaptiveAppConfig.base_county_url +  WebDaptiveAppConfig.create_url;
-		var update_url =   WebDaptiveAppConfig.base_county_url +  WebDaptiveAppConfig.update_url;	
-		var delete_url =   WebDaptiveAppConfig.base_county_url +  WebDaptiveAppConfig.delete_url;		
-		cvm.isActive = false;
-		toastrConfig.closeButton = true;		
-		
+		var fetch_url =    WebDaptiveAppConfig.base_site_url +  WebDaptiveAppConfig.fetch_url;
+		var refresh_url =  WebDaptiveAppConfig.base_site_url +  WebDaptiveAppConfig.refresh_url;
+		var create_url =   WebDaptiveAppConfig.base_site_url +  WebDaptiveAppConfig.create_url;
+		var update_url =   WebDaptiveAppConfig.base_site_url +  WebDaptiveAppConfig.update_url;
+		var delete_url =   WebDaptiveAppConfig.base_site_url +  WebDaptiveAppConfig.delete_url;
+		pvm.isActive = false;
+		toastrConfig.closeButton = true;
+
 		//form model data
-		cvm.county = {
+		pvm.county = {
 			id: '',
 			description: ''
 		};
 
-		 cvm.team = 'test'// $scope.$location.search().keyword
+		 pvm.team = 'test'// $scope.$location.search().keyword
 	//	 cvm.team =  $scope.$location.url(); new qat.model.county
+debugger
+          SysMgmtData.processPostPageData(fetch_url, new qat.model.pagedInquiryRequest( 100/20, true), function(res){
+               console.log(res)
+               var dataThisPage = res.procedures;
+               var lastRow = res.resultsSetInfo.totalRowsAvailable;
+               params.successCallback(dataThisPage, lastRow);
+          });
 
-		
+
 	/** create by system gera-java version 1.0.0 19/05/2016 15:48 : 53*/
 
 //Servico Object
@@ -220,7 +227,7 @@ var _Site = []
      _Site.modifyUser     = "rod"
      _Site.modifyDateUTC  = 1463683733871;
 
-     cvm.site = new qat.model.Site(_Site);
+     pvm.site = new qat.model.Site(_Site);
 
     }
 
@@ -229,4 +236,3 @@ var _Site = []
 
 
 
-     

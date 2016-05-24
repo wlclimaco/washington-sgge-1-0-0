@@ -177,7 +177,7 @@ public class SiteAPIController extends BaseController {
 	 *            the ret paged
 	 * @return the site response
 	 */
-	@RequestMapping(value = "/site/refresh", method = RequestMethod.GET)
+	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
 	@ResponseBody
 	public SiteResponse refreshSites(@RequestParam("refreshInt") Integer refreshInt,
 			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
@@ -202,7 +202,7 @@ public class SiteAPIController extends BaseController {
 	 *            the request
 	 * @return the site response
 	 */
-	@RequestMapping(value = "/site/fetchPage", method = RequestMethod.POST)
+	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
 	@ResponseBody
 	public SiteResponse fetchSitePaged(@RequestBody SiteInquiryRequest request) {
 		SiteResponse siteResponse = new SiteResponse();
@@ -223,7 +223,7 @@ public class SiteAPIController extends BaseController {
 	 *            the request
 	 * @return the site response
 	 */
-	@RequestMapping(value = "/site/insert", method = RequestMethod.POST)
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	@ResponseBody
 	public SiteResponse insertSite(@RequestBody SiteMaintenanceRequest request) {
 		SiteResponse siteResponse = new SiteResponse();
@@ -244,7 +244,7 @@ public class SiteAPIController extends BaseController {
 	 *            the request
 	 * @return the site response
 	 */
-	@RequestMapping(value = "/site/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
 	public SiteResponse updateSite(@RequestBody SiteMaintenanceRequest request) {
 		SiteResponse siteResponse = new SiteResponse();
@@ -265,7 +265,7 @@ public class SiteAPIController extends BaseController {
 	 *            the request
 	 * @return the site response
 	 */
-	@RequestMapping(value = "/site/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public SiteResponse deleteSite(@RequestBody SiteMaintenanceRequest request) {
 		SiteResponse siteResponse = new SiteResponse();

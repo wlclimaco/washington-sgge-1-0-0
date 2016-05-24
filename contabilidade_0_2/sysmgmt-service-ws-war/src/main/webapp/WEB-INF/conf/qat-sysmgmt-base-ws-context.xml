@@ -86,4 +86,8 @@ the cxf-ehcache.xml file reference, so Tomcat 8 doesn't find it. -->
 		<property name="drugBAC" ref="drugBACTarget"/>
 	</bean>
 
+	<bean id="siteWSImpl" class="com.qat.samples.sysmgmt.service.impl.SiteWSImpl">
+		<property name="siteBAC" ref="siteBACTarget"/>
+	</bean>
+
 </beans>
