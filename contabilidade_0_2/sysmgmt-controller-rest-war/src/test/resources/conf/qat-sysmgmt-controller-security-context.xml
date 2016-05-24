@@ -7,10 +7,12 @@
 			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
-	<sec:global-method-security pre-post-annotations="enabled">	</sec:global-method-security>
 
+
+	<sec:global-method-security pre-post-annotations="enabled">	</sec:global-method-security>
 	<sec:http auto-config="true" use-expressions="true" disable-url-rewriting="false">
 		<sec:csrf disabled="true"/>
+		<sec:intercept-url pattern="/site/api/fetchPage" access="isAuthenticated()"/>
 		<sec:intercept-url pattern="/**/**"
 			access="hasAnyRole('ROLE_DOMAIN_ADMINS', 'ROLE_DOMAIN_USERS', 'ROLE_GUEST')" />
 	</sec:http>
