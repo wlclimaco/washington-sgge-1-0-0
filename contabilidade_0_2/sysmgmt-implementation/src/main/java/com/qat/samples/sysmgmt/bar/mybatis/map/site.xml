@@ -87,8 +87,7 @@ nome
 
 		SELECT id,<include refid="allSiteColumns" />
   		  FROM site where 0=0<if test="criteria.url != null"> and url = criteria.url</if> ORDER BY id ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
+
 </select>
 
 <select id="fetchSiteRowCount" resultType="Integer">
