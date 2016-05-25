@@ -31,7 +31,7 @@
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
 	<collection property="servicoList" column="id" select="ServicoMap.fetchServicoBySite"/>
-	<collection property="planoList" column="id" select="PlanoByServicoMap.fetchPlanoByServicoById"/>
+	<collection property="planoList" column="id" select="PlanoMap.fetchPlanoBySite"/>
 	<collection property="empresa" column="empresa" select="StatusMap.fetchAllStatusByEmpresa"/>
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
 </resultMap>
@@ -86,12 +86,14 @@ nome
  <select id="fetchAllSitesRequest" parameterType="SiteInquiryRequest" resultMap="SiteResult">
 
 		SELECT id,<include refid="allSiteColumns" />
-  		  FROM site where 0=0<if test="criteria.url != null"> and url = criteria.url</if> ORDER BY id ASC
+  		  FROM site where 0=0  <if test="criteria.url!= null"> and url =#{criteria.url}</if>  ORDER BY id ASC
+  		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
 
 </select>
 
-<select id="fetchSiteRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM site WHERE id IS NOT NULL
+<select id="fetchSiteRowCount" parameterType="SiteInquiryRequest" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM site WHERE id IS NOT NULL <if test="criteria.url!= null"> and url =#{criteria.url}</if>
 
  </select>
 

@@ -397,7 +397,7 @@
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/preco.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/site.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/ordemServicoItens.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/planoBySite.xml"/>
+
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/contasPagar.xml"/>
   		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/titulo.xml"/>
   		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/baixaTitulo.xml"/>

@@ -1,7 +1,7 @@
 (function() {
   angular.module('wdApp.apps.site', []).controller('SiteController',
-   ['$scope', 'SysMgmtData', 'toastr', 'toastrConfig','$location',
-     function($scope, SysMgmtData, toastr, toastrConfig,location) {
+   ['$scope', '$rootScope', 'SysMgmtData', 'toastr', 'toastrConfig','$location',
+     function($scope, $rootScope, SysMgmtData, toastr, toastrConfig,location) {
 		var pvm = this;
 		var initLoad = true; //used to ensure not calling server multiple times
 		var fetch_url =    WebDaptiveAppConfig.base_site_url +  WebDaptiveAppConfig.fetch_url;
@@ -20,12 +20,13 @@
 
 		 pvm.team = 'test'// $scope.$location.search().keyword
 	//	 cvm.team =  $scope.$location.url(); new qat.model.county
-debugger
+
+
+        //  var commonControllers =  angular.module('wdApp.controllers', ['LoginController']);
+          //console.log(commonControllers.login());
           SysMgmtData.processPostPageData(fetch_url, new qat.model.pagedInquiryRequest( 100/20, true), function(res){
                console.log(res)
-               var dataThisPage = res.procedures;
-               var lastRow = res.resultsSetInfo.totalRowsAvailable;
-               params.successCallback(dataThisPage, lastRow);
+               pvm.site = new qat.model.Site(res.sites[0]);
           });
 
 
@@ -227,7 +228,7 @@ var _Site = []
      _Site.modifyUser     = "rod"
      _Site.modifyDateUTC  = 1463683733871;
 
-     pvm.site = new qat.model.Site(_Site);
+     //pvm.site = new qat.model.Site(_Site);
 
     }
 

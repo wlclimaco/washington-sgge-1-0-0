@@ -3,6 +3,7 @@ package com.qat.samples.sysmgmt.site.model;
 import java.util.Date;
 import java.util.List;
 
+import com.qat.samples.sysmgmt.contabilidade.model.Plano;
 import com.qat.samples.sysmgmt.contabilidade.model.PlanoBySite;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.produto.model.Servico;
@@ -41,7 +42,7 @@ public class Site extends ModelCosmeDamiao
 
 	private List<Servico> servicoList;
 
-	private List<PlanoBySite> planoList;
+	private List<Plano> planoList;
 
 	public Integer getSiteTypeEnumValue()
 	{
@@ -109,11 +110,11 @@ public class Site extends ModelCosmeDamiao
 		this.servicoList = servicoList;
 	}
 
-	public List<PlanoBySite> getPlanoList() {
+	public List<Plano> getPlanoList() {
 		return planoList;
 	}
 
-	public void setPlanoList(List<PlanoBySite> planoList) {
+	public void setPlanoList(List<Plano> planoList) {
 		this.planoList = planoList;
 	}
 

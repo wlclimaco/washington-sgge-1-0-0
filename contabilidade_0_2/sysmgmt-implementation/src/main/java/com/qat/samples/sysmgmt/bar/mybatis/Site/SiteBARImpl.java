@@ -213,7 +213,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 	private static final String STMT_UPDATE_ORDEMSERVICOITENS = NAMESPACE_ORDEMSERVICOITENS + "updateOrdemServicoItens";
 
 	/** The Constant STMT_DELETE_ORDEMSERVICOITENS. */
-	private static final String STMT_DELETE_ORDEMSERVICOITENS = NAMESPACE_ORDEMSERVICOITENS 
+	private static final String STMT_DELETE_ORDEMSERVICOITENS = NAMESPACE_ORDEMSERVICOITENS
 			+ "deleteOrdemServicoItensById";
 
 	/** The Constant STMT_DELETE_ORDEMSERVICOITENS_ALL. */
@@ -506,11 +506,11 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		}
 
-		if (!ValidationUtil.isNullOrEmpty(site.getPlanoList())) {
-			a += PlanoBARD.maintainPlanoBySiteAssociations(site.getPlanoList(),  response,
-					site.getId(), null, null, TabelaEnum.SITE, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
-					site.getId(), site.getCreateUser(), processId, historicoId);
-		}
+//		if (!ValidationUtil.isNullOrEmpty(site.getPlanoList())) {
+//			a += PlanoBARD.maintainPlanoBySiteAssociations(site.getPlanoList(),  response,
+//					site.getId(), null, null, TabelaEnum.SITE, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
+//					site.getId(), site.getCreateUser(), processId, historicoId);
+//		}
 
 		Status status = new Status();
 		status.setStatus(CdStatusTypeEnum.ATIVO);
@@ -545,11 +545,11 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		}
 
-		if (!ValidationUtil.isNullOrEmpty(site.getPlanoList())) {
-			a += PlanoBARD.maintainPlanoBySiteAssociations(site.getPlanoList(),  response,
-					site.getId(), null, null, TabelaEnum.SITE, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
-					site.getId(), site.getCreateUser(), site.getProcessId(), site.getProcessId());
-		}
+//		if (!ValidationUtil.isNullOrEmpty(site.getPlanoList())) {
+//			a += PlanoBARD.maintainPlanoBySiteAssociations(site.getPlanoList(),  response,
+//					site.getId(), null, null, TabelaEnum.SITE, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
+//					site.getId(), site.getCreateUser(), site.getProcessId(), site.getProcessId());
+//		}
 
 		return response;
 	}
@@ -577,11 +577,11 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		}
 
-		if (!ValidationUtil.isNullOrEmpty(site.getPlanoList())) {
-			a += PlanoBARD.maintainPlanoBySiteAssociations(site.getPlanoList(),  response,
-					site.getId(), null, null, TabelaEnum.SITE, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
-					site.getId(), site.getCreateUser(), site.getProcessId(), site.getProcessId());
-		}
+//		if (!ValidationUtil.isNullOrEmpty(site.getPlanoList())) {
+//			a += PlanoBARD.maintainPlanoBySiteAssociations(site.getPlanoList(),  response,
+//					site.getId(), null, null, TabelaEnum.SITE, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
+//					site.getId(), site.getCreateUser(), site.getProcessId(), site.getProcessId());
+//		}
 
 		Status status = new Status();
 		status.setStatus(CdStatusTypeEnum.DELETADO);

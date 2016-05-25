@@ -1308,6 +1308,8 @@ function PlanoModel() {
 		a.push({field :{campo : "numeroContrato", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 		a.push({field :{campo : "descricao", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 		a.push({field :{campo : "titulo", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "parentId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "tabelaEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 		a.push({field :{campo : "precoList", tipo :"List<Preco>",List : "Preco" ,requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 		a.push({field :{campo : "servicoList", tipo :"List<PlanoByServico>",List :"PlanoByServico",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;
@@ -1643,6 +1645,7 @@ function ContatoItensModel() {
 	a.push({field :{campo : "dataAlt", tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "texto", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "titulo", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "parentId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "contatoStatus", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "visto", tipo :"Boolean",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	return a;

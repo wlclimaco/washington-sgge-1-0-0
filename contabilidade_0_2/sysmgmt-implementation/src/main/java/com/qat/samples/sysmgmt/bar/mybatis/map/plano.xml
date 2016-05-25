@@ -22,13 +22,14 @@
     <result property="numeroContrato" column="numeroContrato"/>
     <result property="descricao" column="descricao"/>
     <result property="titulo" column="titulo"/>
+     <result property="parentId" column="ParentId"/>
     <result property="emprId" column="emprId"/>
+    <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
 	<collection property="precoList" column="id" select="PrecoMap.fetchPrecoByPlano"/>
-	<collection property="servicoList" column="id" select="PlanoByServicoMap.fetchServicoByPlano"/>
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByTable"/>
   </resultMap>
 
@@ -39,6 +40,8 @@ dataInicio
 ,descricao
 ,titulo
 ,emprId
+,parentId
+,tabelaEnumValue
 ,create_date
 ,create_user
 ,modify_date
@@ -52,6 +55,8 @@ dataInicio
 #{descricao},
 #{titulo},
 #{emprId},
+#{parentId},
+#{tabelaEnumValue},
 		#{createDateUTC},
 		#{createUser},
 		#{modifyDateUTC},
@@ -77,6 +82,12 @@ c.emprId,
     SELECT id,
 	<include refid="allPlanoColumns" />
    FROM plano ORDER BY id ASC
+ </select>
+
+<select id="fetchPlanoBySite" parameterType="Integer" resultMap="PlanoResult">
+    SELECT id,
+	<include refid="allPlanoColumns" />
+   FROM plano WHERE parentId = #{fetchid} and tabelaEnumValue = 64
  </select>
 
  <select id="fetchPlanoById" parameterType="Integer" resultMap="PlanoResult">
