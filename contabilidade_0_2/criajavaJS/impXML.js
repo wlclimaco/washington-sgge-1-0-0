@@ -32,6 +32,8 @@ for(i=0;i < oField.length;i++){
 	}
 
 }
+text = text + '<result property="parentId" column="parentId"/>\n';
+text = text + '<result property="tabelaEnumValue" column="tabelaEnumValue"/>\n';
 text = text + '<result property="emprId" column="emprId"/>\n';
 text = text + '<result property="processId" column="processId"/>\n';
 text = text + '<result property="createUser" column="create_user"/>\n';
@@ -56,6 +58,8 @@ for(i=0;i < oField.length;i++){
 	}
 
 }
+text = text + ',parentId\n';
+text = text + ',tabelaEnumValue\n';
 text = text + ',emprId\n';
 text = text + ',processId\n';
 text = text + ',create_date\n';
@@ -74,6 +78,8 @@ for(i=0;i < oField.length;i++){
 		}
 	}
 }
+text = text + '		#{parentId},\n';
+text = text + '		#{tabelaEnumValue},\n';
 text = text + '		#{emprId},\n';
 text = text + '		#{processId},\n';
 text = text + '		#{createDateUTC},\n';
@@ -129,6 +135,11 @@ text = text + '\n';
 		}
 	}
 }
+
+ text = text + '<if test="parentId!= null"> parentId=#{parentId},</if>\n';
+ text = text + '<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>\n';
+ text = text + '<if test="emprId!= null"> emprId=#{emprId},</if>\n';
+ text = text + '<if test="processId!= null"> processId=#{processId},</if>\n';
  text = text + '<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>\n';
  text = text + '<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>\n';
  text = text + '   WHERE\n';

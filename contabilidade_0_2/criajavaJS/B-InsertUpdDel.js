@@ -67,7 +67,7 @@ b_Insert = function (table,oField,total){
 			}
 			//debugger
 			text = text + "\n";
-			text = text + 'INSERT INTO '+table+'('+a+'emprId,processId,create_user,create_date,modify_user,modify_date)values\n';
+			text = text + 'INSERT INTO '+table+'('+a+'parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values\n';
 			a ="";
 			b = new Date();
 			for(i=0;i < oField.length;i++){
@@ -91,7 +91,7 @@ b_Insert = function (table,oField,total){
 
 			}
 
-			text = text + "("+a+"1,1,'system',"+b.getTime()+",'rod',"+b.getTime()+");\n";
+			text = text + "("+a+"1,1,1,1,'system',"+b.getTime()+",'rod',"+b.getTime()+");\n";
 			a ="";
 		}
 	}
@@ -138,6 +138,8 @@ text = text + "\n"
 text = text + "CREATE TABLE "+table.toLowerCase()+"(\n"
 text = text + "    id           integer NOT NULL DEFAULT nextval('"+table.toLowerCase()+"_id_seq'::regclass),\n"
 text = text + " "+a+" \n"
+text = text + "parentId     integer,\n"
+text = text + "tabelaEnumValue     integer,\n"
 text = text + "emprId     integer,\n"
 text = text + "processId  integer,\n"
 text = text + "create_date  bigint,\n"
