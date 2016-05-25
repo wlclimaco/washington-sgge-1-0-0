@@ -32,8 +32,8 @@
 
 	/** create by system gera-java version 1.0.0 19/05/2016 15:48 : 53*/
 
-//Servico Object
-var _Servico = []
+var servico = function (){
+	var _Servico = []
 
      _Servico.id =  1,
      _Servico.nome =  'nome_1',
@@ -49,9 +49,13 @@ var _Servico = []
      _Servico.modifyUser     = "rod"
      _Servico.modifyDateUTC  = 1463683733871;
 
+     return _Servico;
+}
+
 /** create by system gera-java version 1.0.0 19/05/2016 15:48 : 53*/
 
 //ServicoByPlano Object
+var servico = function (){
 var _ServicoByPlano = []
 
      _ServicoByPlano.id =  1,
@@ -67,11 +71,15 @@ var _ServicoByPlano = []
      _ServicoByPlano.modifyUser     = "rod"
      _ServicoByPlano.modifyDateUTC  = 1463683733871;
 
+      return _Servico;
+}
+
 /** create by system gera-java version 1.0.0 19/05/2016 15:48 : 53*/
 
 /** create by system gera-java version 1.0.0 19/05/2016 15:48 : 53*/
 
 //Contato Object
+var fnContato = function (){
 var _Contato = []
 
      _Contato.id =  1,
@@ -90,9 +98,13 @@ var _Contato = []
      _Contato.modifyUser     = "rod"
      _Contato.modifyDateUTC  = 1463683733871;
 
+      return _Servico;
+}
+
 /** create by system gera-java version 1.0.0 19/05/2016 15:48 : 53*/
 
 //ContatoItens Object
+var fnContatoItens = function (){
 var _ContatoItens = []
 
      _ContatoItens.id =  1,
@@ -111,9 +123,13 @@ var _ContatoItens = []
      _ContatoItens.modifyUser     = "rod"
      _ContatoItens.modifyDateUTC  = 1463683733871;
 
+      return _Servico;
+}
+
 /** create by system gera-java version 1.0.0 19/05/2016 15:48 : 53*/
 
 //OrdemServico Object
+var fnOrdemServico = function (){
 var _OrdemServico = []
 
      _OrdemServico.id =  1,
@@ -134,9 +150,13 @@ var _OrdemServico = []
      _OrdemServico.modifyUser     = "rod"
      _OrdemServico.modifyDateUTC  = 1463683733871;
 
+      return _Servico;
+}
+
 /** create by system gera-java version 1.0.0 19/05/2016 15:48 : 53*/
 
 //OrdemServicoItens Object
+var fnOrdemServicoItens = function (){
 var _OrdemServicoItens = []
 
      _OrdemServicoItens.id =  1,
@@ -153,9 +173,13 @@ var _OrdemServicoItens = []
      _OrdemServicoItens.modifyUser     = "rod"
      _OrdemServicoItens.modifyDateUTC  = 1463683733871;
 
+      return _Servico;
+}
+
 /** create by system gera-java version 1.0.0 19/05/2016 15:48 : 53*/
 
 //Plano Object
+var fnPlano = function (){
 var _Plano = []
 
      _Plano.id =  1,
@@ -176,10 +200,14 @@ var _Plano = []
      _Plano.modifyUser     = "rod"
      _Plano.modifyDateUTC  = 1463683733871;
 
+      return _Servico;
+}
+
 
 /** create by system gera-java version 1.0.0 19/05/2016 16:4 : 43*/
 
 //Preco Object
+var fnPreco = function (){
 var _Preco = []
 
      _Preco.id =  1,
@@ -201,9 +229,13 @@ var _Preco = []
      _Preco.modifyUser     = "rod"
      _Preco.modifyDateUTC  = 1463684683948;
 
+      return _Servico;
+}
+
 
 
      //Site Object
+     var fnSite = function (){
 var _Site = []
 
      _Site.id =  1,
@@ -227,6 +259,9 @@ var _Site = []
      _Site.createDateUTC  = 1463683733871;
      _Site.modifyUser     = "rod"
      _Site.modifyDateUTC  = 1463683733871;
+
+      return _Servico;
+}
 
      //pvm.site = new qat.model.Site(_Site);
 
