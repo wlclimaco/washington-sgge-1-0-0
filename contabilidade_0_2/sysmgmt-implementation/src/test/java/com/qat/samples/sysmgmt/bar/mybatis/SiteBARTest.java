@@ -216,13 +216,11 @@ public ISiteBAR getSiteBAR()
 		SiteInquiryRequest request = new SiteInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
-		request.setPageSize(3);
-		SiteCriteria criteri = new SiteCriteria();
-		criteri.setUrl("url_2");
-		request.setCriteria(criteri);
+		request.setPageSize(1);
+		request.setUrl("url_2");
 		InternalResultsResponse<Site> response = getSiteBAR().fetchSitesByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		Assert.assertTrue(response.getResultsList().size() == 1);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 		// check for valid and precount and start 2nd page
@@ -695,17 +693,17 @@ public ISiteBAR getSiteBAR()
 
 	}
 
-	@Before
-	public void setup()
-	{
-		executeSqlScript("conf/insertServico.sql", false);
-		executeSqlScript("conf/insertSite.sql", false);
-		executeSqlScript("conf/insertContato.sql", false);
-		executeSqlScript("conf/insertContatoItens.sql", false);
-		executeSqlScript("conf/insertOrdemServico.sql", false);
-		executeSqlScript("conf/insertOrdemServicoItens.sql", false);
-		executeSqlScript("conf/insertPlano.sql", false);
-	}
+//	@Before
+//	public void setup()
+//	{
+//		executeSqlScript("conf/insertServico.sql", false);
+//		executeSqlScript("conf/insertSite.sql", false);
+//		executeSqlScript("conf/insertContato.sql", false);
+//		executeSqlScript("conf/insertContatoItens.sql", false);
+//		executeSqlScript("conf/insertOrdemServico.sql", false);
+//		executeSqlScript("conf/insertOrdemServicoItens.sql", false);
+//		executeSqlScript("conf/insertPlano.sql", false);
+//	}
 
 	public Servico insertServico(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 	{
