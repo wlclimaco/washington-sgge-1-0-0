@@ -74,8 +74,14 @@ public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
 		if (userName != null) {
 
 			UserDetails userDetails = userService.loadUserByUsername(userName);
+			if (userName.equals("anonimo@aninimo.com")) {
 
-			if (TokenUtils.validateToken(authToken, userDetails)) {
+				authToken = TokenUtils.createToken(userDetails);
+				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+						userDetails, null, userDetails.getAuthorities());
+				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpRequest));
+				SecurityContextHolder.getContext().setAuthentication(authentication);
+			} else if (TokenUtils.validateToken(authToken, userDetails)) {
 
 				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
 						userDetails, null, userDetails.getAuthorities());

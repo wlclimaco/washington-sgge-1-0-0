@@ -25,6 +25,8 @@
     <result property="enderecoTypeValue" column="enderecoTypeValue"/>
     <result property="cep" column="cep"/>
     <result property="complemento" column="complemento"/>
+    <result property="latitude" column="latitude"/>
+    <result property="longitude" column="longitude"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -42,6 +44,8 @@ parentId
 ,enderecoTypeValue
 ,cep
 ,complemento
+,latitude
+,longitude
 ,cidade
 ,create_date
 ,create_user
@@ -59,6 +63,8 @@ parentId
 #{enderecoTypeValue},
 #{cep},
 #{complemento},
+#{latitude},
+#{longitude},
 #{cidade.id},
 		#{createDateUTC},
 		#{createUser},
@@ -117,6 +123,8 @@ parentId
 <if test="enderecoTypeValue!= null">enderecoTypeValue = #{enderecoTypeValue},</if>
 <if test="cep!= null">cep = #{cep},</if>
 <if test="complemento!= null">complemento = #{complemento},</if>
+<if test="latitude null">latitude = #{latitude},</if>
+<if test="longitude!= null">longitude = #{longitude},</if>
 <if test="cidade.id!= null">cidade = #{cidade.id},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>

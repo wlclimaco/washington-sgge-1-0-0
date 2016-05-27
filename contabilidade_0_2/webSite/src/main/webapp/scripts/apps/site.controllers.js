@@ -24,7 +24,7 @@
 
         //  var commonControllers =  angular.module('wdApp.controllers', ['LoginController']);
           //console.log(commonControllers.login());
-          SysMgmtData.processPostPageData(fetch_url, new qat.model.pagedInquiryRequest( 100/20, true), function(res){
+          SysMgmtData.processPostPageData(fetch_url, new qat.model.siteInquiryRequest( 100/20, true, "http://localhost:8080/webSite/"), function(res){
                console.log(res)
                pvm.site = new qat.model.Site(res.sites[0]);
           });

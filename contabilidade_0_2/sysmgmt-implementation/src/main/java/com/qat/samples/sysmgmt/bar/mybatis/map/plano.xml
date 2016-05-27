@@ -25,11 +25,13 @@
      <result property="parentId" column="ParentId"/>
     <result property="emprId" column="emprId"/>
     <result property="tabelaEnumValue" column="tabelaEnumValue"/>
+    <result property="cor" column="cor"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
 	<collection property="precoList" column="id" select="PrecoMap.fetchPrecoByPlano"/>
+	<collection property="servicoList" column="id" select="PlanoByServicoMap.fetchPlanoByServicos"/>
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByTable"/>
   </resultMap>
 
@@ -42,6 +44,7 @@ dataInicio
 ,emprId
 ,parentId
 ,tabelaEnumValue
+,cor
 ,create_date
 ,create_user
 ,modify_date
@@ -57,6 +60,7 @@ dataInicio
 #{emprId},
 #{parentId},
 #{tabelaEnumValue},
+#{cor},
 		#{createDateUTC},
 		#{createUser},
 		#{modifyDateUTC},
@@ -124,6 +128,7 @@ c.emprId,
 <if test="descricao!= null">descricao = #{descricao},</if>
 <if test="titulo!= null">titulo = #{titulo},</if>
 <if test="emprId!= null">emprId = #{emprId},</if>
+<if test="cor!= null">cor = #{cor},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

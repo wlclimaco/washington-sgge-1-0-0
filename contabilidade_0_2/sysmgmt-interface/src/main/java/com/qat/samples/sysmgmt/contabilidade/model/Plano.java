@@ -27,6 +27,8 @@ public class Plano extends ModelCosmeDamiao
 
 	private String descricao;
 
+	private String cor;
+
 	private String titulo;
 
 	public Plano(Integer id)
@@ -138,12 +140,20 @@ public class Plano extends ModelCosmeDamiao
 		this.titulo = titulo;
 	}
 
+	public String getCor() {
+		return cor;
+	}
+
+	public void setCor(String cor) {
+		this.cor = cor;
+	}
+
 	@Override
 	public String toString() {
 		return "Plano [getDataInicio()=" + getDataInicio() + ", getDataFinal()=" + getDataFinal()
 				+ ", getNumeroContrato()=" + getNumeroContrato() + ", getId()=" + getId() + ", getPrecoList()="
 				+ getPrecoList() + ", getServicoList()=" + getServicoList() + ", getDescricao()=" + getDescricao()
-				+ ", getTitulo()=" + getTitulo() + ", toString()=" + super.toString() + "]";
+				+ ", getTitulo()=" + getTitulo() + ", getCor()=" + getCor() + ", toString()=" + super.toString() + "]";
 	}
 
 

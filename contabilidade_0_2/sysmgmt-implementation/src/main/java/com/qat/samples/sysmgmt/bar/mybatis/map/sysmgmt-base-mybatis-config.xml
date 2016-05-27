@@ -410,6 +410,7 @@
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/tributacao.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/produtoParent.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/marcaProduto.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/planoByServico.xml"/>
     </mappers>
 
 </configuration>

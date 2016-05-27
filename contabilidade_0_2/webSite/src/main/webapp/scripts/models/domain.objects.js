@@ -23,7 +23,7 @@
 		this.code = _procCode;
 		this.description = _procDesc;
 		this.price = _procPrice;
-		this.version = _version;	
+		this.version = _version;
 	};
 
 	/** create by system gera-java version 1.0.0 19/05/2016 15:9 : 2*/
@@ -83,6 +83,7 @@ qat.model.Site = function(_oObjet)
      this.servicoList = _oObjet.servicoList;
      this.planoList = _oObjet.planoList;
      this.parentId       = _oObjet.parentId;
+     this.empresa         = _oObjet.empresa;
      this.emprId         = _oObjet.emprId;
      this.processId      = _oObjet.processId;
      this.tableEnumValue = _oObjet.tableEnumValue;

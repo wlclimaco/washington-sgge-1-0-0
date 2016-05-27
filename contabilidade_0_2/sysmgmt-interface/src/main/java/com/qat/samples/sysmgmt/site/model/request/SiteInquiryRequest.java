@@ -10,40 +10,32 @@ public class SiteInquiryRequest extends PagedInquiryRequest
 {
 
 	/** The criteria. */
-	private SiteCriteria criteria;
+	private String url;
 
-	/**
-	 * Gets the criteria.
-	 *
-	 * @return the criteria
-	 */
-	public SiteCriteria getCriteria()
-	{
-		if (criteria == null)
-		{
-			criteria = new SiteCriteria();
-		}
-		return criteria;
+	private String nome;
+
+	public String getUrl() {
+		return url;
 	}
 
-	/**
-	 * Sets the criteria.
-	 *
-	 * @param criteria the criteria
-	 */
-	public void setCriteria(SiteCriteria criteria)
-	{
-		this.criteria = criteria;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	@Override
-	public String toString()
-	{
-		return "BancoInquiryRequest [getCriteria()=" + getCriteria() + ", toString()=" + super.toString() + "]";
+	public String toString() {
+		return "SiteInquiryRequest [getUrl()=" + getUrl() + ", getNome()=" + getNome() + ", toString()="
+				+ super.toString() + "]";
 	}
+
+
 
 }

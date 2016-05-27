@@ -44,6 +44,17 @@
 		this.maxPreQueryCount = 0;
 	};
 
+	//siteInquryRequest
+	qat.model.siteInquiryRequest = function ( _iStartPage, _bCount,_url)
+	{
+		this.pageSize = 20;
+		this.url = _url
+		this.startPage = _iStartPage;
+		this.sortExpressions = null;
+		this.preQueryCount = _bCount;
+		this.maxPreQueryCount = 0;
+	};
+
 	//PageData Object
 	qat.model.pageData = function(_pageSize, _startPage, _bRowsAvailable, _totalRows)
 	{
@@ -52,3 +63,10 @@
 	 	this.moreRowsAvailable =  _bRowsAvailable;
 	 	this.totalRowsAvailable = _totalRows;
 	};
+
+	//=========================
+	qat.model.siteCriteria = function ( _url,_nome){
+		this.nome =  _nome;
+	 	this.url =  _url;
+	}
+

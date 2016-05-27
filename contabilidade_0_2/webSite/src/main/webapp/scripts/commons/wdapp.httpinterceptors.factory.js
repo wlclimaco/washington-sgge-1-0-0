@@ -36,7 +36,7 @@
 				//	debugger
 					//gambiarra
 					if(config.url == 'http://localhost:8080/qat-sysmgmt-controller-rest/site/api/fetchPage'){
-						config.headers['X-Auth-Token'] = "taz@qat.com:1464136071197:45f873499ccf7bc677c25ea06cc6efa2";
+						config.headers['X-Auth-Token'] = "anonimo@aninimo.com:1464222873542:eb86a5e265cbdd54d63a03efece46935";
 					}
 					var isRestCall = config.url.indexOf(WebDaptiveAppConfig.restAuthBase) != -1;
 					if (isRestCall && angular.isDefined($rootScope.authToken)) {

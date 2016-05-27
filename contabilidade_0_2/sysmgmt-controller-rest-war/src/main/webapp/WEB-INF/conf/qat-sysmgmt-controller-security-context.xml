@@ -22,7 +22,7 @@
 		<sec:csrf disabled="true"/>
 		<sec:custom-filter ref="authenticationTokenProcessingFilter" position="FORM_LOGIN_FILTER" />
 		<sec:intercept-url pattern="/auth/api/authenticate" access="permitAll" />
-		<sec:intercept-url pattern="/site/api/fetchPage" access="hasAnyRole('ROLE_DOMAIN_ADMINS')" />
+		<sec:intercept-url pattern="/site/api/fetchPage" access="hasAnyRole('ROLE_ANONIMO')" />
 		<sec:intercept-url pattern="/county/api/refresh" access="hasAnyRole('ROLE_DOMAIN_ADMINS')" />
 
 		<sec:intercept-url pattern="/county/api/insert" access="hasAnyRole('ROLE_DOMAIN_ADMINS')" />

@@ -1,12 +1,14 @@
 package com.qat.samples.sysmgmt.site.model.criteria;
 
+import java.io.Serializable;
+
 import com.qat.samples.sysmgmt.util.model.criteria.ComumCriteria;
 
 /**
  * The Class MemberCriteria.
  */
 @SuppressWarnings("serial")
-public class SiteCriteria extends ComumCriteria
+public class SiteCriteria implements Serializable
 {
 
 	private String url;
@@ -38,9 +40,10 @@ public class SiteCriteria extends ComumCriteria
 
 	@Override
 	public String toString() {
-		return "SiteCriteria [getUrl()=" + getUrl() + ", getNome()=" + getNome() + ", getEmprId()=" + getEmprId()
-				+ ", getId()=" + getId() + ", toString()=" + super.toString() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + "]";
+		return "SiteCriteria [getUrl()=" + getUrl() + ", getNome()=" + getNome() + ", toString()=" + super.toString()
+				+ "]";
 	}
+
+
 
 }
