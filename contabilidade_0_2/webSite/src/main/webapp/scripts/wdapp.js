@@ -43,14 +43,14 @@ var WebDaptiveAppConfig = {
 		function($routeProvider) {
 			var routes, setRoutes;
 			//all available routes
-			routes = ['dashboard', 'ui/typography', 'ui/buttons',
+			routes = ['dashboard','principal', 'ui/typography', 'ui/buttons','index3',
 			'ui/icons', 'ui/grids', 'ui/widgets', 'ui/components',
 			'ui/timeline', 'ui/tree', 'ui/pricing-tables', 'ui/maps',
 			'tables/static', 'tables/dynamic', 'tables/responsive',
 			'forms/elements', 'forms/layouts', 'forms/validation', 'forms/wizard',
 			'charts/charts', 'charts/flot', 'charts/morris', 'charts/chartjs', 'charts/echarts',
 			'pages/404', 'pages/500', 'pages/blank', 'pages/invoice', 'pages/profile',
-			'pages/signin', 'mail/compose', 'mail/inbox', 'mail/single', 'tasks/tasks',
+			'pages/signin', 'mail/compose', 'mail/inbox', 'mail/single', 'tasks/tasks','empresa/cadEmpresa',
 			'apps/stocks', 'apps/counties', 'apps/procedures'];
 
 			//geeric routeine for building route from array
@@ -72,7 +72,7 @@ var WebDaptiveAppConfig = {
 
 			//routes not automatically built specified here
 			return $routeProvider.when('/', {
-				redirectTo: '/'
+				redirectTo: '/principal'
 			}).when('/404', {
 				templateUrl: 'views/pages/404.html'
 			}).otherwise({

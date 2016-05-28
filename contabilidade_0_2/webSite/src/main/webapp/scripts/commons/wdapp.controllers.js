@@ -61,7 +61,11 @@
 		});
     }]);
 
-	commonControllers.controller('DashboardController', ['$scope', function($scope) {}]);
+	commonControllers.controller('DashboardController', ['$scope', function($scope) {
+
+		$('#header').hide();
+		$('#footer').hide();
+	}]);
 
 	commonControllers.controller('LoginController', ['$scope', '$rootScope', '$location', 'localStorageService','WDAuthentication',
 		function($scope, $rootScope, $location, localStorageService, WDAuthentication) {
@@ -84,12 +88,13 @@
 						localStorageService.set('displayRoles', $rootScope.displayRoles);
 						if ($rootScope.callingPath !== undefined){
 							if ($rootScope.callingPath === '/pages/signin'){
-								$rootScope.callingPath = "/";
+								$rootScope.callingPath = "/principal";
+
 							}
 							$location.path($rootScope.callingPath);
 						}
 						else{
-							$location.path( "/" );
+							$location.path( "/dashboard" );
 						}
 					}
 					else{

@@ -1,102 +1,32 @@
 <header class="top-header clearfix">
-    <!-- Logo -->
-    <div class="logo">
-        <a href="#/">
-            <span>{{::main.brand}}</span>
-        </a>
-    </div>
-    <div class="top-nav" data-ng-controller="NavController">
-        <ul class="nav-left pull-right list-unstyled">
-            <li class="dropdown text-normal nav-profile" uib-dropdown on-toggle="toggled(open)">
-                <a href="javascript:;" class="dropdown-toggle" uib-dropdown-toggle>
-                    <img src="images/taz.jpg" alt="" class="img-circle img30_30">
-                    <span class="hidden-xs">
-                        <span data-i18n="Taz"></span>
-						<span ng-show="user.user">({{user.user}})</span>
-                    </span>
-                </a>
-				
-                <ul class="pull-right dropdown-menu with-arrow">
-                    <li>
-                        <a href="#/pages/profile">
-                            <i class="fa fa-user"></i>
-                            <span data-i18n="My Profile"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#/tasks/tasks">
-                            <i class="fa fa-check"></i>
-                            <span data-i18n="My Tasks"></span> <span class="badge badge-danger main-badge" data-ng-show="taskRemainingCount > 0">{{taskRemainingCount}}</span>
-                        </a>
-                    </li>
-					<li>
-                        <a href="#/pages/signin">
-                            <i class="fa fa-sign-in"></i>
-                            <span data-i18n="Log In"></span>
-                        </a>
-                    </li>					
-                    <li>
-                        <a href="" ng-click="logout()">
-                            <i class="fa fa-sign-out"></i>
-                            <span data-i18n="Log Out"></span>
-                        </a>
-                    </li>
-                </ul>
-			</li>
-            <li class="dropdown langs text-normal"  uib-dropdown on-toggle="toggled(open)" data-ng-controller="LangController">
-                <a href class="dropdown-toggle active-flag" uib-dropdown-toggle>
-                    <div class="flag {{ getFlag() }}"></div>
-                </a>
-                <ul class="pull-right dropdown-menu with-arrow list-langs" role="menu">
-                    <li data-ng-show="lang !== 'English' ">
-                        <a href="javascript:;" data-ng-click="setLang('English')"><div class="flag flags-american"></div> English</a></li>
-                    <li data-ng-show="lang !== 'Español' ">
-                        <a href="javascript:;" data-ng-click="setLang('Español')"><div class="flag flags-spain"></div> Español</a></li>
-                    <li data-ng-show="lang !== '日本語' ">
-                        <a href="javascript:;" data-ng-click="setLang('日本語')"><div class="flag flags-japan"></div> 日本語</a></li>
-                    <li data-ng-show="lang !== '中文' ">
-                        <a href="javascript:;" data-ng-click="setLang('中文')"><div class="flag flags-china"></div> 中文</a></li>
-                    <li data-ng-show="lang !== 'Deutsch' ">
-                        <a href="javascript:;" data-ng-click="setLang('Deutsch')"><div class="flag flags-germany"></div> Deutsch</a></li>
-                    <li data-ng-show="lang !== 'français' ">
-                        <a href="javascript:;" data-ng-click="setLang('français')"><div class="flag flags-france"></div> français</a></li>
-                    <li data-ng-show="lang !== 'Italiano' ">
-                        <a href="javascript:;" data-ng-click="setLang('Italiano')"><div class="flag flags-italy"></div> Italiano</a></li>
-                    <li data-ng-show="lang !== 'Portugal' ">
-                        <a href="javascript:;" data-ng-click="setLang('Portugal')"><div class="flag flags-portugal"></div> Portugal</a></li>
-                    <li data-ng-show="lang !== 'Русский язык' ">
-                        <a href="javascript:;" data-ng-click="setLang('Русский язык')"><div class="flag flags-russia"></div> Русский язык</a></li>
-                    <li data-ng-show="lang !== '한국어' ">
-                        <a href="javascript:;" data-ng-click="setLang('한국어')"><div class="flag flags-korea"></div> 한국어</a></li>
-                </ul>
-            </li>			
-            <li class="dropdown hidden-xs" uib-dropdown on-toggle="toggled(open)">
-                <a href="javascript:;" class="dropdown-toggle" uib-dropdown-toggle><i class="fa fa-cogs"></i></a>
-                <div class="pull-right dropdown-menu with-arrow panel panel-default admin-options">
-                    <div class="panel-heading"> Admin Options </div>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <p>Layouts Style</p>
-                            <label class="ui-radio"><input name="layout" type="radio" value="boxed" ng-model="admin.layout"><span>Boxed</span></label>
-                            <label class="ui-radio"><input name="layout" type="radio" value="wide" ng-model="admin.layout"><span>Wide</span></label>
-                        </li>
-                        <li class="list-group-item">
-                            <p>Menu Style</p>
-                            <label class="ui-radio"><input name="menu" type="radio" value="vertical" ng-model="admin.menu"><span>Vertical</span></label>
-                            <label class="ui-radio"><input name="menu" type="radio" value="horizontal" ng-model="admin.menu"><span>Horizontal</span></label>
-                        </li>
-                        <li class="list-group-item">
-                            <p>Additional</p>
-                            <label class="ui-checkbox"><input name="checkbox1" type="checkbox" value="option1" ng-model="admin.fixedHeader"><span>Fixed Top Header</span></label>
-                            <br>
-                            <label class="ui-checkbox"><input name="checkbox1" type="checkbox" value="option1" ng-model="admin.fixedSidebar"><span>Fixed Sidebar Menu</span></label>
-                        </li>
-                    </ul>
-                </div>
-            </li>			
-            <li>
-                <a href="#/" data-toggle-nav-collapsed-min class="toggle-min"><i class="fa fa-bars"></i></a>
-            </li>
-        </ul>
-    </div>
+	<section class="mbr-navbar mbr-navbar--freeze mbr-navbar--absolute mbr-navbar--transparent mbr-navbar--sticky mbr-navbar--auto-collapse" id="ext_menu-3">
+	    <div class="mbr-navbar__section mbr-section">
+	        <div class="mbr-section__container container">
+	            <div class="mbr-navbar__container">
+	                <div class="mbr-navbar__column mbr-navbar__column--s mbr-navbar__brand">
+	                    <span class="mbr-navbar__brand-link mbr-brand mbr-brand--inline">
+	                        <span class="mbr-brand__logo"><a href="https://mobirise.com"><img src="assets/images/logo.png" class="mbr-navbar__brand-img mbr-brand__img" alt="Mobirise"></a></span>
+	                        <span class="mbr-brand__name"><a class="mbr-brand__name text-white" href={{cc.site.url}}>{{cc.site.nome}}</a></span>
+	                    </span>
+	                </div>
+	                <div class="mbr-navbar__hamburger mbr-hamburger"><span class="mbr-hamburger__line"></span></div>
+	    <div class="mbr-navbar__column mbr-navbar__menu">
+	        <nav class="mbr-navbar__menu-box mbr-navbar__menu-box--inline-right">
+	            <div class="mbr-navbar__column">
+	                <ul class="mbr-navbar__items mbr-navbar__items--right float-left mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-decorator mbr-buttons--active">
+	                	<li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="#" data-nav-section="sobre">Sobre a {{cc.site.nome}}</a></li>
+	                	<li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="#" data-nav-section="services">Planos</a></li>
+	                	<li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="#" data-nav-section="services">Contato</a></li>
+
+	                </ul>
+	                <ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-inverse mbr-buttons--active"><li class="mbr-navbar__item"><a class="mbr-buttons__btn btn btn-danger" href="https://mobirise.com">Abrir Empresa</a></li></ul>
+	                <ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-inverse mbr-buttons--active"><li class="mbr-navbar__item"><a class="mbr-buttons__btn btn btn-danger" href="#/empresa/cadEmpresa">Migrar Empresa</a></li></ul>
+	                <ul class="mbr-navbar__items mbr-navbar__items--right float-left mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-decorator mbr-buttons--active"><li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="#/pages/signin" data-nav-section="services">Login</a></li></ul>
+	            </div>
+	        </nav>
+	    </div>
+	            </div>
+	        </div>
+	    </div>
+	</section>
 </header>

@@ -1,0 +1,47 @@
+<div class="page">
+<div class="panel panel-default">
+                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Sign in Form</strong></div>
+                <div class="panel-body" data-ng-controller="SignInController">
+                    <form name="form_signin" class="form-horizontal form-validation" data-ng-submit="submitForm()">
+                        <fieldset>
+                            <div class="form-group">
+                                <div class="col-sm-3">
+                                    <label for="">Email</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="email"
+                                           class="form-control"
+                                           required
+                                           data-ng-model="user.email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-3">
+                                    <label for="">Password</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="password"
+                                           class="form-control"
+                                           required
+                                           data-ng-model="user.password">
+                                </div>
+                            </div>
+                            <button type="submit"
+                                    class="btn btn-success"
+                                    data-ng-disabled="!canSubmit()"
+                                    >Submit</button>
+                            <button class="btn btn-default"
+                                    data-ng-disabled="!canRevert()"
+                                    data-ng-click="revert()"
+                            >Revert Changes</button>
+                            <div class="callout callout-info">
+                                <p>Submit button will be active only when all fields are valid.</p>
+                                <p>Revert button will be active only when one or more fields is changed.</p>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="alert alert-info" data-ng-show="showInfoOnSubmit">This is just for demo. In real project, you will submit form with AJAX :)</div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+</div>

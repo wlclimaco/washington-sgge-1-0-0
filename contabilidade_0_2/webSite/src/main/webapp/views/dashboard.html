@@ -1,3 +1,22 @@
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>WebDaptive - Angular</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <!-- Place favicon.ico in the root directory -->
+        <!-- Needs images, font...  -->
+        <link rel="stylesheet" href="thirdparty/font-awesome/css/font-awesome.min.css">
+        <!-- end Needs images -->
+        <link rel="stylesheet" href="thirdparty/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="thirdparty/angular-toastr/angular-toastr.min.css"></link>
+        <link rel="stylesheet" href="thirdparty/angular-ag/ag-grid.css"></link>
+        <link rel="stylesheet" href="thirdparty/angular-ag/theme-fresh.css"></link>
+        <link rel="stylesheet" href="thirdparty/angular-chartjs/angular-chart.min.css">
+        <link rel="stylesheet" href="thirdparty/angular/angular-csp.css">
+        <link rel="stylesheet" href="styles/wd_main.css">
+
+    </head>
 <div class="page page-dashboard" data-ng-controller="DashboardController">
 
     <div class="row">
@@ -10,7 +29,7 @@
                          style="width: 100%; height: 230px;"
                          ></div>
                 </div>
-            </div>            
+            </div>
         </div>
         <div class="col-lg-6">
             <!-- stats -->
@@ -62,7 +81,7 @@
                     </div>
                 </div>
             </div>
-            <!-- end stats -->            
+            <!-- end stats -->
         </div>
     </div>
 
@@ -78,7 +97,7 @@
 
 
     <div class="panel panel-default">
-        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Table - General</strong></div>	
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Table - General</strong></div>
         <table class="table">
             <thead>
                 <tr>
@@ -135,6 +154,14 @@
             </tbody>
         </table>
     </div>
-	<div data-ui-footer></div>		
+	<div data-ui-footer></div>
 </div>
-  
+<script>
+    $( document ).ready(function() {
+        $('#dashboard-nav').show();
+        $('#dashboard-header').show();
+        $('#teste').show();
+        $('.teste').hide();
+
+    });
+</script>
