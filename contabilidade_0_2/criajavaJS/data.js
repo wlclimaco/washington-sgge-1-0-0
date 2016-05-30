@@ -27,6 +27,8 @@ function EntidadeModel() {
 	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "nome", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "entidadeId", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "numFunc", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "statusInicial", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 	a.push({field :{campo : "entidadeEnumValue", tipo :"Integer",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "regime"   , tipo:"Regime",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
    	a.push({field :{campo : "documentos" ,tipo:"List<Documento>",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
@@ -339,6 +341,8 @@ function UsuarioModel() {
 
 	var a = [];
 		a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "nome", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+		a.push({field :{campo : "cpf", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
 		a.push({field :{campo : "email", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 		a.push({field :{campo : "senha" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
 		a.push({field :{campo : "pergunta" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});

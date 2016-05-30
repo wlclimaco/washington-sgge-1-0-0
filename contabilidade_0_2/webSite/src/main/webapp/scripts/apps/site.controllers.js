@@ -25,15 +25,14 @@
 
         //  var commonControllers =  angular.module('wdApp.controllers', ['LoginController']);
           //console.log(commonControllers.login());
-          SysMgmtData.processPostPageData(fetch_url, new qat.model.siteInquiryRequest( 100/20, true, "http://localhost:8080/webSite/"), function(res){
-               console.log(res)
-               pvm.site = new qat.model.Site(res.sites[0]);
-          });
+          //SysMgmtData.processPostPageData(fetch_url, new qat.model.siteInquiryRequest( 100/20, true, "http://localhost:8080/webSite/"), function(res){
+         //      console.log(res)
+        //       pvm.site = new qat.model.Site(res.sites[0]);
+        //  });
 
 
 	/** create by system gera-java version 1.0.0 19/05/2016 15:48 : 53*/
 
-var servico = function (){
 	var _Servico = []
 
      _Servico.id =  1,
@@ -51,12 +50,11 @@ var servico = function (){
      _Servico.modifyDateUTC  = 1463683733871;
 
      return _Servico;
-}
 
 /** create by system gera-java version 1.0.0 19/05/2016 15:48 : 53*/
 
 //ServicoByPlano Object
-var servico = function (){
+
 var _ServicoByPlano = []
 
      _ServicoByPlano.id =  1,
@@ -73,14 +71,12 @@ var _ServicoByPlano = []
      _ServicoByPlano.modifyDateUTC  = 1463683733871;
 
       return _Servico;
-}
 
 /** create by system gera-java version 1.0.0 19/05/2016 15:48 : 53*/
 
 /** create by system gera-java version 1.0.0 19/05/2016 15:48 : 53*/
 
 //Contato Object
-var fnContato = function (){
 var _Contato = []
 
      _Contato.id =  1,
@@ -100,12 +96,11 @@ var _Contato = []
      _Contato.modifyDateUTC  = 1463683733871;
 
       return _Servico;
-}
+
 
 /** create by system gera-java version 1.0.0 19/05/2016 15:48 : 53*/
 
 //ContatoItens Object
-var fnContatoItens = function (){
 var _ContatoItens = []
 
      _ContatoItens.id =  1,
@@ -125,12 +120,11 @@ var _ContatoItens = []
      _ContatoItens.modifyDateUTC  = 1463683733871;
 
       return _Servico;
-}
+
 
 /** create by system gera-java version 1.0.0 19/05/2016 15:48 : 53*/
 
 //OrdemServico Object
-var fnOrdemServico = function (){
 var _OrdemServico = []
 
      _OrdemServico.id =  1,
@@ -152,12 +146,12 @@ var _OrdemServico = []
      _OrdemServico.modifyDateUTC  = 1463683733871;
 
       return _Servico;
-}
+
 
 /** create by system gera-java version 1.0.0 19/05/2016 15:48 : 53*/
 
 //OrdemServicoItens Object
-var fnOrdemServicoItens = function (){
+
 var _OrdemServicoItens = []
 
      _OrdemServicoItens.id =  1,
@@ -175,12 +169,12 @@ var _OrdemServicoItens = []
      _OrdemServicoItens.modifyDateUTC  = 1463683733871;
 
       return _Servico;
-}
+
 
 /** create by system gera-java version 1.0.0 19/05/2016 15:48 : 53*/
 
 //Plano Object
-var fnPlano = function (){
+
 var _Plano = []
 
      _Plano.id =  1,
@@ -202,13 +196,12 @@ var _Plano = []
      _Plano.modifyDateUTC  = 1463683733871;
 
       return _Servico;
-}
+
 
 
 /** create by system gera-java version 1.0.0 19/05/2016 16:4 : 43*/
 
 //Preco Object
-var fnPreco = function (){
 var _Preco = []
 
      _Preco.id =  1,
@@ -231,12 +224,12 @@ var _Preco = []
      _Preco.modifyDateUTC  = 1463684683948;
 
       return _Servico;
-}
+
 
 
 
      //Site Object
-     var fnSite = function (){
+
 var _Site = []
 
      _Site.id =  1,
@@ -262,9 +255,9 @@ var _Site = []
      _Site.modifyDateUTC  = 1463683733871;
 
       return _Servico;
-}
 
-     //pvm.site = new qat.model.Site(_Site);
+
+     pvm.site = new qat.model.Site(_Site);
 
     }
 
