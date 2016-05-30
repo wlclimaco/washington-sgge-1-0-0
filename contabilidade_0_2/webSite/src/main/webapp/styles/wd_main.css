@@ -6408,6 +6408,8 @@ body {
 ::selection {
   background: #00475b;
   color: #ffffff;
+  font-size:12px!Important;
+    height:800px!Important;
 }
 ::-moz-selection {
   background: #00475b;
@@ -6656,13 +6658,13 @@ a.bg-orange:hover {
 .divider-dashed {
    border: 1px dashed #e9e9e9;
    margin-top: 30px;
-   margin-bottom: 30px;   
+   margin-bottom: 30px;
 }
 .divider-dotted {
    border: 1px dotted #e9e9e9;
    margin-top: 30px;
-   margin-bottom: 30px;  
-} 
+   margin-bottom: 30px;
+}
 
 .divider-sm {
   height: 15px;
@@ -7790,14 +7792,14 @@ fieldset[disabled] .btn-dark.active {
 }
 /*==========  animations  ==========*/
 lesshat-selector {
-  -lh-property: 0; } 
+  -lh-property: 0; }
 @-webkit-keyframes fade-up-enter{ 0%{opacity: 0; -webkit-transform:translateY(20px);} 100%{opacity: 1; -webkit-transform:translateY(0);}}
 @-moz-keyframes fade-up-enter{ 0%{opacity: 0; -moz-transform:translateY(20px);} 100%{opacity: 1; -moz-transform:translateY(0);}}
 @-o-keyframes fade-up-enter{ 0%{opacity: 0; -o-transform:translateY(20px);} 100%{opacity: 1; -o-transform:translateY(0);}}
 @keyframes fade-up-enter{ 0%{opacity: 0;-webkit-transform:translateY(20px);-moz-transform:translateY(20px);-ms-transform:translateY(20px);transform:translateY(20px);} 100%{opacity: 1;-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);transform:translateY(0);};
 }
 lesshat-selector {
-  -lh-property: 0; } 
+  -lh-property: 0; }
 @-webkit-keyframes fade-up-leave{ 0%{opacity: 1; -webkit-transform:translateY(0);} 100%{opacity: 0;-webkit-transform:translateY(-20px);}}
 @-moz-keyframes fade-up-leave{ 0%{opacity: 1; -moz-transform:translateY(0);} 100%{opacity: 0;-moz-transform:translateY(-20px);}}
 @-o-keyframes fade-up-leave{ 0%{opacity: 1; -o-transform:translateY(0);} 100%{opacity: 0;-o-transform:translateY(-20px);}}
@@ -7810,14 +7812,14 @@ lesshat-selector {
   animation: 0.35s fade-up-enter;
 }
 lesshat-selector {
-  -lh-property: 0; } 
+  -lh-property: 0; }
 @-webkit-keyframes animate-flip-y-enter{ 0%{-webkit-transform:perspective(3000px); -webkit-transform:rotateY(90deg); opacity: 0;} 100%{-webkit-transform:perspective(3000px); -webkit-transform:rotateY(0deg)); opacity: 1;}}
 @-moz-keyframes animate-flip-y-enter{ 0%{-moz-transform:perspective(3000px); -moz-transform:rotateY(90deg); opacity: 0;} 100%{-moz-transform:perspective(3000px); -moz-transform:rotateY(0deg)); opacity: 1;}}
 @-o-keyframes animate-flip-y-enter{ 0%{-o-transform:perspective(3000px); -o-transform:rotateY(90deg); opacity: 0;} 100%{-o-transform:perspective(3000px); -o-transform:rotateY(0deg)); opacity: 1;}}
 @keyframes animate-flip-y-enter{ 0%{-webkit-transform:perspective(3000px);-moz-transform:perspective(3000px);-ms-transform:perspective(3000px);transform:perspective(3000px);-webkit-transform:rotateY(90deg);-moz-transform:rotateY(90deg);-ms-transform:rotateY(90deg);transform:rotateY(90deg); opacity: 0;} 100%{-webkit-transform:perspective(3000px);-moz-transform:perspective(3000px);-ms-transform:perspective(3000px);transform:perspective(3000px);-webkit-transform:rotateY(0deg));-moz-transform:rotateY(0deg));-ms-transform:rotateY(0deg));transform:rotateY(0deg)); opacity: 1;};
 }
 lesshat-selector {
-  -lh-property: 0; } 
+  -lh-property: 0; }
 @-webkit-keyframes animate-flip-y-leave{ 0%{-webkit-transform:perspective(3000px); -webkit-transform:rotateY(0deg); opacity: 1;} 100%{-webkit-transform:perspective(3000px); -webkit-transform:rotateY(-90deg); opacity: 0;}}
 @-moz-keyframes animate-flip-y-leave{ 0%{-moz-transform:perspective(3000px); -moz-transform:rotateY(0deg); opacity: 1;} 100%{-moz-transform:perspective(3000px); -moz-transform:rotateY(-90deg); opacity: 0;}}
 @-o-keyframes animate-flip-y-leave{ 0%{-o-transform:perspective(3000px); -o-transform:rotateY(0deg); opacity: 1;} 100%{-o-transform:perspective(3000px); -o-transform:rotateY(-90deg); opacity: 0;}}
@@ -7836,14 +7838,14 @@ lesshat-selector {
   animation: 0.5s animate-flip-y-leave;
 }
 lesshat-selector {
-  -lh-property: 0; } 
+  -lh-property: 0; }
 @-webkit-keyframes slideInDown{ 0%{opacity: 0; -webkit-transform:translateY(-2000px);} 100% {-webkit-transform:translateY(0);}}
 @-moz-keyframes slideInDown{ 0%{opacity: 0; -moz-transform:translateY(-2000px);} 100% {-moz-transform:translateY(0);}}
 @-o-keyframes slideInDown{ 0%{opacity: 0; -o-transform:translateY(-2000px);} 100% {-o-transform:translateY(0);}}
 @keyframes slideInDown{ 0%{opacity: 0;-webkit-transform:translateY(-2000px);-moz-transform:translateY(-2000px);-ms-transform:translateY(-2000px);transform:translateY(-2000px);} 100% {-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);transform:translateY(0);};
 }
 lesshat-selector {
-  -lh-property: 0; } 
+  -lh-property: 0; }
 @-webkit-keyframes slideOutUp{ 0%{-webkit-transform:translateY(0);} 100% {opacity: 0;-webkit-transform:translateY(-2000px);}}
 @-moz-keyframes slideOutUp{ 0%{-moz-transform:translateY(0);} 100% {opacity: 0;-moz-transform:translateY(-2000px);}}
 @-o-keyframes slideOutUp{ 0%{-o-transform:translateY(0);} 100% {opacity: 0;-o-transform:translateY(-2000px);}}
@@ -9365,6 +9367,7 @@ button.toast-close-button {
   background: #00475b;
   color: #fff;
   cursor: default;
+
 }
 .wizard > .steps .done a,
 .wizard > .steps .done a:hover,
@@ -9390,13 +9393,15 @@ button.toast-close-button {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
+    height: 1024px!Important;
 }
 .wizard > .content > .body {
   float: left;
   position: absolute;
-  width: 95%;
-  height: 95%;
+  width: 100%;
+  height: 900px!Important;
   padding: 2.5%;
+  font-size: 12px!Important;
 }
 .wizard > .content > .body ul {
   list-style: disc !important;
@@ -10745,9 +10750,9 @@ html {
   width: 100%;
   height: 50px;
   background-color: #696969;
-  font-family: "Righteous",cursive;  
+  font-family: "Righteous",cursive;
   display: block;
-  font-size: 20px;  
+  font-size: 20px;
   color: #fafafa;
   line-height: 50px;
   text-align: center;
@@ -11192,5 +11197,9 @@ body {
 	margin: auto;
 }
 .panel-height {
-  height: 50px; 
+  height: 50px;
+}
+.form-empresa:{
+    font-size:12px!Important;
+    height:800px!Important;
 }

@@ -1,24 +1,30 @@
+    <link rel="stylesheet" href="dist/css/formValidation.css"/>
+    <link rel="stylesheet" href="dist/css/select2.css"/>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css"/>
+
+    <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="dist/js/select2.min.js"></script>
+    <script type="text/javascript" src="dist/js/formValidation.js"></script>
+    <script type="text/javascript" src="dist/js/framework/bootstrap.js"></script>
+
 <div class="page">
-
-
     <section class="panel panel-default">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Wizard Form</strong></div>
-        <div class="panel-body">
+        <div class="panel-body" >
+         <form id="bookForm" method="post" class="form-horizontal">
             <div data-ui-wizard-form>
                 <h1>Informação do Usuario</h1>
                 <div>Informação do Usuario
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-md-8 col-md-offset-2">
-
-                                        <form role="form">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Nome Completo</label>
-                                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Nome Completo">
+                                                <input type="email" id='nome-completo' class="form-control" id="exampleInputEmail1" placeholder="Nome Completo">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">CPF</label>
-                                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="CPF">
+                                                <input type="email" id='cpf' class="form-control" id="exampleInputEmail1" placeholder="CPF">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Telefone</label>
@@ -26,7 +32,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Email</label>
-                                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                                <input type="email" id='email' class="form-control" id="exampleInputEmail1" placeholder="Email">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Senha</label>
@@ -42,7 +48,6 @@
                                                 </label>
                                             </div>
                                             <button type="submit" class="btn btn-primary btn-w-md">Submit</button>
-                                        </form>
 
                                     </div>
                                 </div>
@@ -51,7 +56,166 @@
 
 
                 <h1>Informação Empresa</h1>
-                <div>Informação Empresa</div>
+                <div class="form-empresa">Informação Empresa
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <label for="exampleInputPassword1">Digite seu CNPJ</label>
+                            <input type="text" class="form-control col-sm-8" placeholder="col-sm-8">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="exampleInputPassword1">Informe o Numero de Funcionarios</label>
+                            <input type="text" class="form-control col-sm-4" placeholder="col-sm-4">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="exampleInputPassword1">Informe a Razão Social</label>
+                            <input type="text" class="form-control col-sm-8" placeholder="col-sm-8">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <dl class="dl-horizontal">
+                                <dt>Sua Empresa Esta Ativa?</dt>
+                                <dd>
+                                    <label class="ui-radio"><input name="radio1" type="radio" value="option1" ><span>Sim</span></label>
+                                    <label class="ui-radio"><input name="radio1" type="radio" value="option2" checked><span>Não</span></label>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-sm-6">
+                            <dl class="dl-horizontal">
+                                <dt>Selecione o regime Tributario da Empresa</dt>
+                                <dd>
+                                    <label class="ui-radio"><input name="radio1" type="radio" value="option1" checked ><span>Simples Nacional</span></label>
+                                    <label class="ui-radio"><input name="radio1" type="radio" value="option2" ><span>Lucro Real</span></label>
+                                    <label class="ui-radio"><input name="radio1" type="radio" value="option2" ><span>Lucro Presumido</span></label>
+                                </dd>
+                            </dl>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                        <label for="exampleInputPassword1">CEP</label>
+                            <div class="input-group">
+
+                                <input type="text" class="form-control">
+                                <span class="input-group-btn">
+
+                                    <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"> </i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <label for="exampleInputPassword1">Logradouro</label>
+                            <input type="text" class="form-control col-sm-8" placeholder="col-sm-8">
+                        </div>
+                        <div class="col-sm-9">
+                            <label for="exampleInputPassword1">Numero</label>
+                            <input type="text" class="form-control col-sm-4" placeholder="col-sm-4">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="exampleInputPassword1">Complemento</label>
+                            <input type="text" class="form-control col-sm-8" placeholder="col-sm-8">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="exampleInputPassword1">Bairro</label>
+                            <input type="text" class="form-control col-sm-4" placeholder="col-sm-4">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="exampleInputPassword1">Estado</label>
+                            <input type="text" class="form-control col-sm-8" placeholder="col-sm-8">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="exampleInputPassword1">Municipio</label>
+                            <input type="text" class="form-control col-sm-4" placeholder="col-sm-4">
+                        </div>
+                    </div>
+
+                 <div class="row">
+                    <div class="container">
+    <label class="col-xs-1 control-label">Cnae</label>
+    <div class="col-xs-6">
+        <select id="mySel" name="cnae" class="form-control">
+            <option> teste 001</option>
+            <option> teste 002</option>
+            <option> teste 003</option>
+            <option> teste 004</option>
+            <option> teste 005</option>
+
+        </select><br>
+    </div>
+    <div class="col-xs-1">
+        <button type="button" class="btn btn-default addButton1"><i class="fa fa-plus"></i></button>
+    </div>
+
+    <div class="form-group hide" id="bookTemplate1">
+        <label class="col-xs-1 control-label">Cnae</label>
+        <div class="col-xs-6">
+            <select id="mySel" class="form-control">
+                <option> teste 001</option>
+                <option> teste 002</option>
+                <option> teste 003</option>
+                <option> teste 004</option>
+                <option> teste 005</option>
+
+            </select>
+        </div>
+        <div class="col-xs-1">
+            <button type="button" class="btn btn-default removeButton1"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
+</div>
+                </div>
+                </div>
+
+                <h1>Socios</h1>
+                <div>
+                    <form id="bookForm" method="post" class="form-horizontal">
+<div class="container">
+    <label class="col-xs-1 control-label">Cnae</label>
+    <div class="col-xs-6">
+        <select id="mySel" name="cnae" class="form-control">
+            <option> teste 001</option>
+            <option> teste 002</option>
+            <option> teste 003</option>
+            <option> teste 004</option>
+            <option> teste 005</option>
+
+        </select><br>
+    </div>
+    <div class="col-xs-1">
+        <button type="button" class="btn btn-default addButton1"><i class="fa fa-plus"></i></button>
+    </div>
+
+    <div class="form-group hide" id="bookTemplate1">
+        <label class="col-xs-1 control-label">Cnae</label>
+        <div class="col-xs-6">
+            <select id="mySel" class="form-control">
+                <option> teste 001</option>
+                <option> teste 002</option>
+                <option> teste 003</option>
+                <option> teste 004</option>
+                <option> teste 005</option>
+
+            </select>
+        </div>
+        <div class="col-xs-1">
+            <button type="button" class="btn btn-default removeButton1"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
+</div>
+</form>
+
+
+                </div>
 
                 <h1>Escolha Plano</h1>
                 <div>Escolha Plano</div>
@@ -59,7 +223,7 @@
                 <h1>Pagamento</h1>
                 <div>Pagamento</div>
             </div>
-
+            </form>
         </div>
     </section>
 
@@ -69,8 +233,94 @@
     $( document ).ready(function() {
         $('#dashboard-nav').hide();
         $('#dashboard-header').hide();
-        $('#teste').hide()
+        $('#teste').hide();
 
+
+    $(".js-example-basic-single").select2();
+debugger
+    var titleValidators = {
+            row: '#nome-completo',   // The title is placed inside a <div class="col-xs-4"> element
+            validators: {
+                notEmpty: {
+                    message: 'The title is required'
+                }
+            }
+        },
+        isbnValidators = {
+            row: '#cpf',
+            validators: {
+                notEmpty: {
+                    message: 'The ISBN is required'
+                },
+                isbn: {
+                    message: 'The ISBN is not valid'
+                }
+            }
+        },
+        priceValidators = {
+            row: '#email',
+            validators: {
+                notEmpty: {
+                    message: 'The price is required'
+                },
+                numeric: {
+                    message: 'The price must be a numeric number'
+                }
+            }
+        },
+        bookIndex = 0;
+
+    $('#bookForm')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                'book[0].title': titleValidators,
+                'book[0].isbn': isbnValidators,
+                'book[0].price': priceValidators,
+                'book[0].cnae': priceValidators
+            }
+        }).on('click', '.addButton1', function() {
+            bookIndex++;
+            debugger
+            var $template = $('#bookTemplate1'),
+                $clone    = $template
+                                .clone()
+                                .removeClass('hide')
+                                .removeAttr('id')
+                                .attr('data-book-index', bookIndex)
+                                .insertBefore($template);
+
+            // Update the name attributes
+            $clone
+                .find('[name="cnae"]').attr('name', 'book[' + bookIndex + '].cnae').end();
+
+            // Add new fields
+            // Note that we also pass the validator rules for new field as the third parameter
+            $('#bookForm')
+                .formValidation('addField', 'book[' + bookIndex + '].cnae', priceValidators);
+        })
+
+        // Remove button click handler
+        .on('click', '.removeButton1', function() {
+            var $row  = $(this).parents('.form-group'),
+                index = $row.attr('data-book-index');
+
+            // Remove fields
+            $('#bookForm')
+                .formValidation('removeField', $row.find('[name="book[' + index + '].cnae"]'));
+
+            // Remove element containing the fields
+            $row.remove();
+        });
+        $("select").select2({
+          placeholder: "Select a state",
+          allowClear: true
+        });
 
     });
 </script>
