@@ -28,9 +28,11 @@ function titleize(text) {
 }
 
 Form_insert = function (oObject){
+console.log(oObject);
 
-
+    var requerido = "Favor preencher o campo solicitado";
 	var text = '/** create by system gera-java version 1.0.0 '+dataAtualFormatada()+'*/\n';
+    var div = '';
 text = text + '<link rel="stylesheet" href="dist/css/formValidation.css"/>\n';
 text = text + '    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css"/>\n';
 text = text + '    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2-bootstrap.min.css" />\n';
@@ -73,43 +75,79 @@ text = text + '    margin-top: 20px;\n';
 text = text + '}\n';
 text = text + '</style>\n';
 
+text = text + '<section class="panel panel-default">\n';
+text = text + '        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Wizard Form</strong></div>\n';
+text = text + '        <div class="panel-body" >\n';
+text = text + '         <form id="bookForm" method="post" class="form-horizontal">\n';
+text = text + '            <div data-ui-wizard-form>\n';
+text = text + '                <h1>Informação do Usuario</h1>\n';
+text = text + '                <div>Informação do Usuario\n';
+
+
+var tamanho = 0;
+var validator = "";
 text = text + '<form id="installationForm" class="form-horizontal">\n';
-text = text + '    <ul class="nav nav-pills">\n';
-text = text + '        <li class="active"><a href="#basic-tab" data-toggle="tab">Site information</a></li>\n';
-text = text + '        <li><a href="#database-tab" data-toggle="tab">Database</a></li>\n';
-text = text + '    </ul>\n';
+for (var i = 0 ; i < oObject[0].tabs[0].field.table.length;i++){
+    var form = oObject[0].tabs[0].field.table[i].field;
+    if(form.tipo == 'input' ){
+        div = div + '    <div class="col-sm-'+form.tamanho+'">\n';
+        div = div + '        <label for="exampleInputPassword1">'+form.label+'</label>\n';
+        div = div + '        <input type="text" class="form-control col-sm-8 '+form.class+'" ng-model="'+form.ngmodel+'" name="'+form.campo+'"  placeholder="'+form.campo+'">\n';
+        div = div + '    </div>\n';
+        tamanho = tamanho + parseInt(form.tamanho,10);
+    }else if (form.tipo == 'radio'){
 
-text = text + '    <div class="tab-content">\n';
-text = text + '        <!-- First tab -->\n';
-text = text + '        <div class="tab-pane active" id="basic-tab">\n';
-text = text + '            <div class="form-group">\n';
-text = text + '                <label class="col-xs-3 control-label">Site name</label>\n';
-text = text + '                <div class="col-xs-5">\n';
-text = text + '                    <input type="text" class="form-control" name="name" />\n';
-text = text + '                </div>\n';
-text = text + '            </div>\n';
+            div = div + '<div class="col-sm-6">'+form.label+'</div>\n';
+            div = div + '<div class="col-sm-6">\n';
+            div = div + '    <div  >\n';
+            for (y=0;y < form.domain.length ;y++){
+                div = div + '        <label >\n';
+                div = div + '            <input type="radio" id="'+form.domain[y].value+'" name="'+form.domain[y].value+'" value="'+form.domain[y].value+'" /> "'+form.domain[y].label+'" \n';
+                div = div + '        </label> \n';
+            }
+            div = div + '    </div>\n';
+            div = div + '</div>\n';
+            tamanho = tamanho + parseInt(form.tamanho,10);
+    }else if (form.tipo == 'select2'){
 
-text = text + '</form>\n';
 
-text = text + '<div class="modal fade" id="completeModal" tabindex="-1" role="dialog">\n';
-text = text + '    <div class="modal-dialog modal-sm">\n';
-text = text + '        <div class="modal-content">\n';
-text = text + '            <div class="modal-header">\n';
-text = text + '                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>\n';
-text = text + '                <h4 class="modal-title">Complete</h4>\n';
-text = text + '            </div>\n';
+    div = div + '<label class="col-xs-1 control-label">Cnae</label>\n';
+    div = div + '<div class="col-xs-'+form.tamanho+'">\n';
+    div = div + '    <select id="mySel" name="cnae" class="form-control">\n';
+    div = div + '        <option> teste 001</option>\n';
+    div = div + '        <option> teste 002</option>\n';
+    div = div + '        <option> teste 003</option>\n';
+    div = div + '        <option> teste 004</option>\n';
+    div = div + '        <option> teste 005</option>\n';             
+    div = div + '    </select><br>\n';
+    div = div + '</div>\n';
+    tamanho = tamanho + parseInt(form.tamanho,10);
+}
+    if(tamanho > 11){
+        tamanho = 0;
+        text = text + '<div class="row">\n';
+        text = text + ' '+div+'\n';
+        text = text + '</div>\n';
+        div = "";
+    }
+if(form.requerid == true){
+    validator = validator + '\n';
+    validator = validator + ' '+form.campo+': {\n';
+    validator = validator + '    validators: {\n';
+    validator = validator + '        notEmpty: {\n';
+    validator = validator + '            message: "'+requerido+'"\n';
+    validator = validator + '        }\n';
+    validator = validator + '    }\n';
+    validator = validator + '},\n';
+}
 
-text = text + '            <div class="modal-body">\n';
-text = text + '                <p class="text-center">The installation is completed</p>\n';
-text = text + '            </div>\n';
-
-text = text + '            <div class="modal-footer">\n';
-text = text + '                <button type="button" class="btn btn-success" data-dismiss="modal">Visit the website</button>\n';
-text = text + '            </div>\n';
-text = text + '        </div>\n';
+}
+text = text + '<div class="form-group">\n';
+text = text + '    <div class="col-lg-offset-3 col-lg-3">\n';
+text = text + '        <button type="submit" class="btn btn-primary">Submit</button>\n';
 text = text + '    </div>\n';
 text = text + '</div>\n';
-
+text = text + '</form>\n';
 text = text + '<script>\n';
 text = text + '$(document).ready(function() {\n';
 
@@ -122,83 +160,31 @@ text = text + '            $iframe.height($body.height());\n';
 text = text + '        }\n';
 text = text + '    }\n';
 
-text = text + "    $('#installationForm')\n";
-text = text + '        .formValidation({\n';
-text = text + "            framework: 'bootstrap',\n";
-text = text + '            icon: {\n';
-text = text + "                valid: 'glyphicon glyphicon-ok',\n";
-text = text + "                invalid: 'glyphicon glyphicon-remove',\n";
-text = text + "                validating: 'glyphicon glyphicon-refresh'\n";
-text = text + '            },\n';
-text = text + '            // This option will not ignore invisible fields which belong to inactive panels\n';
-text = text + "            excluded: ':disabled',\n";
-text = text + '            fields: {\n';
-text = text + '                name: {\n';
-text = text + '                    validators: {\n';
-text = text + '                        notEmpty: {\n';
-text = text + "                            message: 'The site name is required'\n";
-text = text + '                        }\n';
-text = text + '                    }\n';
+text = text + '$("#shippingForm")\n';
+text = text + '    .on("init.form.fv", function(e, data) {\n';
+text = text + '        //console.log(data);\n';
+text = text + '    })\n';
+text = text + '    .formValidation({\n';
+text = text + "       message: 'This value is not valid',\n";
+text = text + '        icon: {\n';
+text = text + "            valid: 'glyphicon glyphicon-ok',\n";
+text = text + "            invalid: 'glyphicon glyphicon-remove',\n";
+text = text + "            validating: 'glyphicon glyphicon-refresh'\n";
+text = text + '        },\n';
+text = text + '        fields: {\n';
+text = text + ' '+ validator +'\n';
+text = text + 'senderCity: {\n';
+text = text + 'validators: {\n';
+text = text + '            notEmpty: {\n';
+text = text + '                message: "The city is required"\n';
 text = text + '                }\n';
-text = text + '        })\n';
-text = text + '        .bootstrapWizard({\n';
-text = text + "            tabClass: 'nav nav-pills',\n";
-text = text + '            onTabClick: function(tab, navigation, index) {\n';
-text = text + '                return validateTab(index);\n';
-text = text + '            },\n';
-text = text + '            onNext: function(tab, navigation, index) {\n';
-text = text + "                var numTabs    = $('#installationForm').find('.tab-pane').length,\n";
-text = text + '                    isValidTab = validateTab(index - 1);\n';
-text = text + '                if (!isValidTab) {\n';
-text = text + '                    return false;\n';
-text = text + '                }\n';
-
-text = text + '                if (index === numTabs) {\n';
-text = text + '                    // We are at the last tab\n';
-
-text = text + '                    // Uncomment the following line to submit the form using the defaultSubmit() method\n';
-text = text + "                    // $('#installationForm').formValidation('defaultSubmit');\n";
-
-text = text + '                    // For testing purpose\n';
-text = text + "                    $('#completeModal').modal();\n";
-text = text + '                }\n';
-
-text = text + '                return true;\n';
-text = text + '            },\n';
-text = text + '            onPrevious: function(tab, navigation, index) {\n';
-text = text + '                return validateTab(index + 1);\n';
-text = text + '            },\n';
-text = text + '            onTabShow: function(tab, navigation, index) {\n';
-text = text + '                // Update the label of Next button when we are at the last tab\n';
-text = text + "                var numTabs = $('#installationForm').find('.tab-pane').length;\n";
-text = text + "                $('#installationForm')\n";
-text = text + "                    .find('.next')\n";
-text = text + "                       .removeClass('disabled')    // Enable the Next button\n";
-text = text + "                        .find('a')\n";
-text = text + "                        .html(index === numTabs - 1 ? 'Install' : 'Next');\n";
-
-text = text + "                // You don't need to care about it\n";
-text = text + '                // It is for the specific demo\n';
-text = text + '                adjustIframeHeight();\n';
 text = text + '            }\n';
-text = text + '        });\n';
-
-text = text + '    function validateTab(index) {\n';
-text = text + "        var fv   = $('#installationForm').data('formValidation'), // FormValidation instance\n";
-text = text + '            // The current tab\n';
-text = text + "            $tab = $('#installationForm').find('.tab-pane').eq(index);\n";
-
-text = text + '        // Validate the container\n';
-text = text + '        fv.validateContainer($tab);\n';
-
-text = text + '        var isValidStep = fv.isValidContainer($tab);\n';
-text = text + '        if (isValidStep === false || isValidStep === null) {\n';
-text = text + '            // Do not jump to the target tab\n';
-text = text + '            return false;\n';
 text = text + '        }\n';
-
-text = text + '        return true;\n';
 text = text + '    }\n';
+text = text + '})\n';
+text = text + '.on("added.field.fv", function(e, data) {\n';
+text = text + "console.log('Added element --> ', data.field, data.element, data.options);\n";
+text = text + '})\n';
 text = text + '});\n';
 text = text + '</script>\n';
 text = text + '\n';

@@ -2,12 +2,12 @@
 function EmpresaFormModel() {
 
 	var a = [];
-	a.push({field :{campo : "id",label:"", ngmodel:'empresa.id', class:"hide", tipo :"Integer",requerid : false ,mask:"",tamanho : '6',msg:'',tipo :'input'}});
+	a.push({field :{campo : "id",label:"", ngmodel:'empresa.id', class:"hide", tipo :"Integer",requerid : false ,mask:"",tamanho : '12',msg:'',tipo :'input'}});
 	a.push({field :{campo : "nome",label:"Razão Social", ngmodel:'empresa.nome', class:"", tipo :"String",requerid : true ,mask:"",tamanho : '9',msg:'',tipo :'input'}});
-	a.push({field :{campo : "numeroFuncionario",label:"Numero Funcionarios", ngmodel:'empresa.numFunc', class:"", tipo :"Integer",requerid : false ,mask:"",tamanho : '3',msg:'',tipo :'input'}});
-	a.push({field :{campo : "entidadeEnumValue",label:"Tipo Empresa", ngmodel:'empresa.entidadeEnumValue', class:"", tipo :"Integer",requerid : false ,mask:"",tamanho : '6',msg:'',tipo :'radio'}});
-	a.push({field :{campo : "regime",label:"Regime Tributario Empresa", ngmodel:'empresa.regime.id', class:"", tipo :"Integer",requerid : false ,mask:"",tamanho : '6',msg:'',tipo :'radio'}});
-	a.push({field :{campo : "statusInicial",label:"Sua Empresa Esta Ativa?", ngmodel:'empresa.statusInicial', class:"", tipo :"Integer",requerid : false ,mask:"",tamanho : '6',msg:'',tipo :'radio'}});
+	a.push({field :{campo : "numeroFuncionario",label:"Numero Funcionarios", ngmodel:'empresa.numFunc', class:"", validator:['integer'], tipo :"Integer",requerid : true ,mask:"",tamanho : '3',msg:'',tipo :'input'}});
+	a.push({field :{campo : "entidadeEnumValue",label:"Tipo Empresa", ngmodel:'empresa.entidadeEnumValue', class:"hide", tipo :"Integer",requerid : false ,mask:"",tamanho : '6',msg:'',tipo :'input'}});
+	a.push({field :{campo : "regime",label:"Regime Tributario Empresa", ngmodel:'empresa.regime.id', class:"", tipo :"Integer",requerid : false ,mask:"",tamanho : '6',msg:'',tipo :'radio',domain :[{label : 'Simples Nacional',value : '1'},{label : 'Lucro Real',value:'2'},{label : 'Lucro Presumido',value:'3'}]}});
+	a.push({field :{campo : "statusInicial",label:"Sua Empresa Esta Ativa?", ngmodel:'empresa.statusInicial', class:"", tipo :"Integer",requerid : false ,mask:"",tamanho : '6',msg:'',tipo :'radio',domain :[{label : 'Sim',value : 'sim'},{label : 'Não',value:'nao'}]}});
 
 	return a;
 }
@@ -18,7 +18,7 @@ function DocumentoFormModel() {
 
 	a.push({field :{campo : "id",label:"", ngmodel:'empresa.documento[0].id', class:"hide", tipo :"Integer",requerid : false ,mask:"",tamanho : '6',msg:'',tipo :'input'}});
 	a.push({field :{campo : "documentoTypeEnumValue",class:"hide",label:"Documento", ngmodel:'empresa.documento[0].documentoTypeEnumValue', class:"", tipo :"Integer",requerid : false ,mask:"",tamanho : '9',msg:'',tipo :'input'}});
-	a.push({field :{campo : "numero",label:"Numero do Documento", ngmodel:'empresa.documento[0].numero', class:"", tipo :"Integer",requerid : false ,mask:"",tamanho : '3',msg:'',tipo :'input'}});
+	a.push({field :{campo : "numero",label:"Numero do Documento", ngmodel:'empresa.documento[0].numero', class:"", tipo :"Integer",requerid : false ,mask:"",tamanho : '6',msg:'',tipo :'input'}});
 	a.push({field :{campo : "data",label:"Data Expedição ", ngmodel:'empresa.documento[0].data', class:"hide", tipo :"Date",requerid : false ,mask:"",tamanho : '6',msg:'',tipo :'data'}});
 	
 	return a;
@@ -101,6 +101,7 @@ function EmpresaFormTest() {
 		tabs :[{tabName : 'informaçoes usuario',field :{table : [
 			EmpresaFormModel()[0],
 			EmpresaFormModel()[1],
+			EmpresaFormModel()[2],
 			EmpresaFormModel()[4],
 			EmpresaFormModel()[5],
 			EnderecoFormModel()[0],
