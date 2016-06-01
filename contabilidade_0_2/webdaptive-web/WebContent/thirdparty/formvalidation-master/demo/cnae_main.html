@@ -1,146 +1,226 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>FormValidation demo</title>
+/** create by system gera-java version 1.0.0 31/05/2016 15:23 : 16*/
+<link rel="stylesheet" href="dist/css/formValidation.css"/>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2-bootstrap.min.css" />
 
-    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
-    <link rel="stylesheet" href="../dist/css/formValidation.css"/>
-	<link rel="stylesheet" href="../dist/css/select2.css"/>
-	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css"/>
-	
+ 
+    <script src="dist/js/select2.min.js"></script>
+    <script src="dist/js/formValidation.js"></script>
+    <script src="dist/js/framework/bootstrap.js"></script>
 
-    <script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.js"></script>
-<script src="../dist/js/select2.min.js"></script>
-                                       
 
-    <script type="text/javascript" src="../dist/js/formValidation.js"></script>
-    <script type="text/javascript" src="../dist/js/framework/bootstrap.js"></script>
-		
-	
-</head>
-<body>
- <form id="bookForm" method="post" class="form-horizontal">
-<div class="container">
-	<label class="col-xs-1 control-label">Cnae</label>
-	<div class="col-xs-6">
-		<select id="mySel" name="cnae" class="form-control">
-			<option> teste 001</option>
-			<option> teste 002</option>
-			<option> teste 003</option>
-			<option> teste 004</option>
-			<option> teste 005</option>
-			  
-		</select><br>
-	</div>
-	<div class="col-xs-1">
-		<button type="button" class="btn btn-default addButton1"><i class="fa fa-plus"></i></button>
-	</div>
-	
-	<div class="form-group hide" id="bookTemplate1">
-        <label class="col-xs-1 control-label">Cnae</label>
-		<div class="col-xs-6">
-			<select id="mySel" class="form-control">
-				<option> teste 001</option>
-				<option> teste 002</option>
-				<option> teste 003</option>
-				<option> teste 004</option>
-				<option> teste 005</option>
-				  
-			</select>
-		</div>
-        <div class="col-xs-1">
-            <button type="button" class="btn btn-default removeButton1"><i class="fa fa-minus"></i></button>
-        </div>
+
+<!-- Include Select2 CSS -->
+
+<!-- CSS to make Select2 fit in with Bootstrap 3.x -->
+
+
+<script src="vendor/bootstrap/js/bootstrap.js"></script>
+<!-- Include Select2 JS -->
+
+    <script src="dist/js/formValidation.js"></script>
+    <script src="dist/js/framework/bootstrap.js"></script>
+
+<style type="text/css">
+#select2Form .form-control-feedback {
+    /* To make the feedback icon visible */
+    z-index: 100;
+}
+
+.content-container.animate-fade-up.teste.ng-scope {
+    margin-top: 130px;
+}
+</style>
+
+<!-- Include Bootstrap Wizard -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap-wizard/1.2/jquery.bootstrap.wizard.min.js"></script>
+<style type="text/css">
+#installationForm .tab-content {
+    margin-top: 20px;
+}
+</style>
+<form id="installationForm" class="form-horizontal">
+<div class="row">
+     <div class="col-sm-12">
+        <label for="exampleInputPassword1"></label>
+        <input type="text" class="form-control col-sm-8 hide" ng-model="empresa.id" name="id"  placeholder="id">
     </div>
-</div>	
+
+</div>
+<div class="row">
+     <div class="col-sm-9">
+        <label for="exampleInputPassword1">Razão Social</label>
+        <input type="text" class="form-control col-sm-8 " ng-model="empresa.nome" name="nome"  placeholder="nome">
+    </div>
+    <div class="col-sm-3">
+        <label for="exampleInputPassword1">Numero Funcionarios</label>
+        <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="numeroFuncionario"  placeholder="numeroFuncionario">
+    </div>
+
+</div>
+<div class="row">
+ <div class="col-sm-6">Regime Tributario Empresa</div>
+<div class="col-sm-6">
+    <div  >
+        <label >
+            <input type="radio" id="1" name="1" value="1" /> "Simples Nacional" 
+        </label> 
+        <label >
+            <input type="radio" id="2" name="2" value="2" /> "Lucro Real" 
+        </label> 
+        <label >
+            <input type="radio" id="3" name="3" value="3" /> "Lucro Presumido" 
+        </label> 
+    </div>
+</div>
+<div class="col-sm-6">Sua Empresa Esta Ativa?</div>
+<div class="col-sm-6">
+    <div  >
+        <label >
+            <input type="radio" id="sim" name="sim" value="sim" /> "Sim" 
+        </label> 
+        <label >
+            <input type="radio" id="nao" name="nao" value="nao" /> "Não" 
+        </label> 
+    </div>
+</div>
+
+</div>
+<div class="row">
+     <div class="col-sm-6">
+        <label for="exampleInputPassword1"></label>
+        <input type="text" class="form-control col-sm-8 hide" ng-model="empresa.endereco[0].id" name="id"  placeholder="id">
+    </div>
+<label class="col-xs-1 control-label">Cnae</label>
+<div class="col-xs-6">
+    <select id="mySel" name="cnae" class="form-control">
+        <option> teste 001</option>
+        <option> teste 002</option>
+        <option> teste 003</option>
+        <option> teste 004</option>
+        <option> teste 005</option>
+    </select><br>
+</div>
+
+</div>
+<div class="row">
+     <div class="col-sm-9">
+        <label for="exampleInputPassword1">Logradouro</label>
+        <input type="text" class="form-control col-sm-8 " ng-model="empresa.endereco[0].logradouro" name="logradouro"  placeholder="logradouro">
+    </div>
+    <div class="col-sm-6">
+        <label for="exampleInputPassword1">Numero</label>
+        <input type="text" class="form-control col-sm-8 " ng-model="empresa.endereco[0].numero" name="numero"  placeholder="numero">
+    </div>
+
+</div>
+<div class="row">
+     <div class="col-sm-3">
+        <label for="exampleInputPassword1">Bairro</label>
+        <input type="text" class="form-control col-sm-8 " ng-model="empresa.endereco[0].bairro" name="bairro"  placeholder="bairro">
+    </div>
+    <div class="col-sm-6">
+        <label for="exampleInputPassword1">Municipio</label>
+        <input type="text" class="form-control col-sm-8 " ng-model="empresa.endereco[0].cidade" name="cidade"  placeholder="cidade">
+    </div>
+    <div class="col-sm-6">
+        <label for="exampleInputPassword1">Complemento</label>
+        <input type="text" class="form-control col-sm-8 " ng-model="empresa.endereco[0].complemento" name="complemento"  placeholder="complemento">
+    </div>
+
+</div>
+<div class="row">
+     <div class="col-sm-6">
+        <label for="exampleInputPassword1"></label>
+        <input type="text" class="form-control col-sm-8 hide" ng-model="empresa.id" name="id"  placeholder="id">
+    </div>
+    <div class="col-sm-9">
+        <label for="exampleInputPassword1">Codigo</label>
+        <input type="text" class="form-control col-sm-8 " ng-model="empresa.nome" name="codigo"  placeholder="codigo">
+    </div>
+
+</div>
+<div class="form-group">
+    <div class="col-lg-offset-3 col-lg-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</div>
 </form>
 <script>
-$(document).ready(function() {	
+$(document).ready(function() {
+    function adjustIframeHeight() {
+        var $body   = $('body'),
+                $iframe = $body.data('iframe.fv');
+        if ($iframe) {
+            // Adjust the height of iframe
+            $iframe.height($body.height());
+        }
+    }
+$("#shippingForm")
+    .on("init.form.fv", function(e, data) {
+        //console.log(data);
+    })
+    .formValidation({
+       message: 'This value is not valid',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+ 
+ nome: {
+    validators: {
+        notEmpty: {
+            message: "Favor preencher o campo solicitado"
+        }
+    }
+},
 
- var titleValidators = {
-            row: '.col-xs-4',   // The title is placed inside a <div class="col-xs-4"> element
-            validators: {
-                notEmpty: {
-                    message: 'The title is required'
+ numeroFuncionario: {
+    validators: {
+        notEmpty: {
+            message: "Favor preencher o campo solicitado"
+        }
+    }
+},
+
+ cep: {
+    validators: {
+        notEmpty: {
+            message: "Favor preencher o campo solicitado"
+        }
+    }
+},
+
+ logradouro: {
+    validators: {
+        notEmpty: {
+            message: "Favor preencher o campo solicitado"
+        }
+    }
+},
+
+ codigo: {
+    validators: {
+        notEmpty: {
+            message: "Favor preencher o campo solicitado"
+        }
+    }
+},
+
+senderCity: {
+validators: {
+            notEmpty: {
+                message: "The city is required"
                 }
             }
-        },
-        isbnValidators = {
-            row: '.col-xs-4',
-            validators: {
-                notEmpty: {
-                    message: 'The ISBN is required'
-                },
-                isbn: {
-                    message: 'The ISBN is not valid'
-                }
-            }
-        },
-        priceValidators = {
-            row: '.col-xs-2',
-            validators: {
-                notEmpty: {
-                    message: 'The price is required'
-                },
-                numeric: {
-                    message: 'The price must be a numeric number'
-                }
-            }
-        },
-        bookIndex = 0;
-
-    $('#bookForm')
-        .formValidation({
-            framework: 'bootstrap',
-            icon: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-                'book[0].title': titleValidators,
-                'book[0].isbn': isbnValidators,
-                'book[0].price': priceValidators,
-				'book[0].cnae': priceValidators
-            }
-        }).on('click', '.addButton1', function() {
-            bookIndex++;
-            var $template = $('#bookTemplate1'),
-                $clone    = $template
-                                .clone()
-                                .removeClass('hide')
-                                .removeAttr('id')
-                                .attr('data-book-index', bookIndex)
-                                .insertBefore($template);
-
-            // Update the name attributes
-            $clone
-                .find('[name="cnae"]').attr('name', 'book[' + bookIndex + '].cnae').end();
-
-            // Add new fields
-            // Note that we also pass the validator rules for new field as the third parameter
-            $('#bookForm')
-                .formValidation('addField', 'book[' + bookIndex + '].cnae', priceValidators);
-        })
-
-        // Remove button click handler
-        .on('click', '.removeButton1', function() {
-            var $row  = $(this).parents('.form-group'),
-                index = $row.attr('data-book-index');
-
-            // Remove fields
-            $('#bookForm')
-                .formValidation('removeField', $row.find('[name="book[' + index + '].cnae"]'));
-
-            // Remove element containing the fields
-            $row.remove();
-        });
-		$("select").select2({
-		  placeholder: "Select a state",
-		  allowClear: true
-		});
- });
+        }
+    }
+})
+.on("added.field.fv", function(e, data) {
+console.log('Added element --> ', data.field, data.element, data.options);
+})
+});
 </script>
-</body>
-</html>
+

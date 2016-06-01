@@ -111,6 +111,45 @@ public class CountyAPIController extends BaseController {
 		return countyResponse;
 	}
 
+	@RequestMapping(value =  "/add-document" , method = RequestMethod.POST)
+	public String uploadDocument(@Valid FileBucket fileBucket, BindingResult result, ModelMap model, @PathVariable int userId) throws IOException{
+		
+		if (result.hasErrors()) {
+			System.out.println("validation errors");
+			User user = userService.findById(userId);
+			model.addAttribute("user", user);
+
+			List<UserDocument> documents = userDocumentService.findAllByUserId(userId);
+			model.addAttribute("documents", documents);
+			
+			return "managedocuments";
+		} else {
+			
+			System.out.println("Fetching file");
+			
+			User user = userService.findById(userId);
+			model.addAttribute("user", user);
+
+			saveDocument(fileBucket, user);
+
+			return "redirect:/add-document-"+userId;
+		}
+	}
+	
+	private void saveDocument(FileBucket fileBucket, User user) throws IOException{
+		
+		UserDocument document = new UserDocument();
+		
+		MultipartFile multipartFile = fileBucket.getFile();
+		
+		document.setName(multipartFile.getOriginalFilename());
+		document.setDescription(fileBucket.getDescription());
+		document.setType(multipartFile.getContentType());
+		document.setContent(multipartFile.getBytes());
+		document.setUser(user);
+		userDocumentService.saveDocument(document);
+	}
+
 	/**
 	 * Insert county.
 	 *

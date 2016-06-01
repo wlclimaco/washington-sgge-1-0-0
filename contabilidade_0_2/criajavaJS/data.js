@@ -1326,6 +1326,7 @@ function EnderecoModel() {
 
 	var a = [];
 	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "codIbge", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "logradouro" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "bairro", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
     a.push({field :{campo : "numero", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});

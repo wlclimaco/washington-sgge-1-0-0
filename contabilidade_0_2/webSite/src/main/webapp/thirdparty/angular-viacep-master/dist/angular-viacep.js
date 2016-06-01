@@ -5,6 +5,7 @@ angular.module('angular.viacep').factory('viaCEP', [
     var _get;
     _get = function(cepValue) {
       var deferred, formatedCep, viaCepUrl;
+      debugger
       if (cepValue === void 0) {
         throw new TypeError("CEP can't be undefined");
       }
@@ -45,6 +46,7 @@ angular.module('angular.viacep').directive('viaCep', [
       link: function(scope, element, attrs, ngModelController) {
         var _get;
         _get = function(cepValue) {
+          debugger
           if (viaCEPHelper.isValidCep(cepValue)) {
             return viaCEPHelper.get(cepValue).then(function() {
               return ngModelController.$setValidity('cep', true);
@@ -80,6 +82,7 @@ angular.module('angular.viacep').factory('viaCEPHelper', [
       return _mappers[viacepKey] = modelController;
     };
     _fillAddress = function(address) {
+      debugger
       var i, key, len, results;
       results = [];
       for (i = 0, len = _validKeys.length; i < len; i++) {
@@ -108,6 +111,7 @@ angular.module('angular.viacep').factory('viaCEPHelper', [
       return results;
     };
     _get = function(cepValue) {
+      debugger
       var deferred;
       deferred = $q.defer();
       viaCEP.get(cepValue).then(function(response) {

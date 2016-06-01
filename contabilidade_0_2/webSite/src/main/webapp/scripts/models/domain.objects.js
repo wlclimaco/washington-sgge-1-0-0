@@ -206,6 +206,283 @@ qat.model.Plano = function(_oObjet)
      this.modifyDateUTC  = (new Date()).getTime();
 }
 
+//Empresa
+/** create by system gera-java version 1.0.0 01/06/2016 14:44 : 36*/
+
+//Empresa Object
+qat.model.Empresa = function(_oObjet)
+{
+     this.id = _oObjet.id;
+     this.nome = _oObjet.nome;
+     this.entidadeId = _oObjet.entidadeId;
+     this.numFunc = _oObjet.numFunc;
+     this.statusInicial = _oObjet.statusInicial;
+     this.entidadeEnumValue = _oObjet.entidadeEnumValue;
+     this.regime = _oObjet.regime;
+     this.documentos = _oObjet.documentos;
+     this.enderecos = _oObjet.enderecos;
+     this.emails = _oObjet.emails;
+     this.telefones = _oObjet.telefones;
+     this.cnaes = _oObjet.cnaes;
+     this.statusList = _oObjet.statusList;
+     this.notes = _oObjet.notes;
+     this.parentId       = _oObjet.parentId;
+     this.emprId         = _oObjet.emprId;
+     this.processId      = _oObjet.processId;
+     this.tableEnumValue = _oObjet.tableEnumValue;
+     this.modelAction    = _oObjet.modelAction;
+     this.createUser     = $rootScope.user;
+     this.createDateUTC  = (new Date()).getTime();
+     this.modifyUser     = $rootScope.user;
+     this.modifyDateUTC  = (new Date()).getTime();
+}
+
+/** create by system gera-java version 1.0.0 01/06/2016 14:44 : 36*/
+
+//Filial Object
+qat.model.Filial = function(_oObjet)
+{
+     this.id = _oObjet.id;
+     this.nome = _oObjet.nome;
+     this.entidadeId = _oObjet.entidadeId;
+     this.numFunc = _oObjet.numFunc;
+     this.statusInicial = _oObjet.statusInicial;
+     this.entidadeEnumValue = _oObjet.entidadeEnumValue;
+     this.regime = _oObjet.regime;
+     this.documentos = _oObjet.documentos;
+     this.enderecos = _oObjet.enderecos;
+     this.emails = _oObjet.emails;
+     this.telefones = _oObjet.telefones;
+     this.cnaes = _oObjet.cnaes;
+     this.statusList = _oObjet.statusList;
+     this.notes = _oObjet.notes;
+     this.parentId       = _oObjet.parentId;
+     this.emprId         = _oObjet.emprId;
+     this.processId      = _oObjet.processId;
+     this.tableEnumValue = _oObjet.tableEnumValue;
+     this.modelAction    = _oObjet.modelAction;
+     this.createUser     = $rootScope.user;
+     this.createDateUTC  = (new Date()).getTime();
+     this.modifyUser     = $rootScope.user;
+     this.modifyDateUTC  = (new Date()).getTime();
+}
+
+/** create by system gera-java version 1.0.0 01/06/2016 14:44 : 36*/
+
+//Deposito Object
+qat.model.Deposito = function(_oObjet)
+{
+     this.id = _oObjet.id;
+     this.nome = _oObjet.nome;
+     this.entidadeId = _oObjet.entidadeId;
+     this.numFunc = _oObjet.numFunc;
+     this.statusInicial = _oObjet.statusInicial;
+     this.entidadeEnumValue = _oObjet.entidadeEnumValue;
+     this.regime = _oObjet.regime;
+     this.documentos = _oObjet.documentos;
+     this.enderecos = _oObjet.enderecos;
+     this.emails = _oObjet.emails;
+     this.telefones = _oObjet.telefones;
+     this.cnaes = _oObjet.cnaes;
+     this.statusList = _oObjet.statusList;
+     this.notes = _oObjet.notes;
+     this.parentId       = _oObjet.parentId;
+     this.emprId         = _oObjet.emprId;
+     this.processId      = _oObjet.processId;
+     this.tableEnumValue = _oObjet.tableEnumValue;
+     this.modelAction    = _oObjet.modelAction;
+     this.createUser     = $rootScope.user;
+     this.createDateUTC  = (new Date()).getTime();
+     this.modifyUser     = $rootScope.user;
+     this.modifyDateUTC  = (new Date()).getTime();
+}
+
+/** create by system gera-java version 1.0.0 01/06/2016 14:44 : 36*/
+
+//Usuario Object
+qat.model.Usuario = function(_oObjet)
+{
+     this.id = _oObjet.id;
+     this.nome = _oObjet.nome;
+     this.cpf = _oObjet.cpf;
+     this.email = _oObjet.email;
+     this.senha = _oObjet.senha;
+     this.pergunta = _oObjet.pergunta;
+     this.role = _oObjet.role;
+     this.language = _oObjet.language;
+     this.ultAcesso = _oObjet.ultAcesso;
+     this.parentId       = _oObjet.parentId;
+     this.emprId         = _oObjet.emprId;
+     this.processId      = _oObjet.processId;
+     this.tableEnumValue = _oObjet.tableEnumValue;
+     this.modelAction    = _oObjet.modelAction;
+     this.createUser     = $rootScope.user;
+     this.createDateUTC  = (new Date()).getTime();
+     this.modifyUser     = $rootScope.user;
+     this.modifyDateUTC  = (new Date()).getTime();
+}
+
+/** create by system gera-java version 1.0.0 01/06/2016 14:44 : 36*/
+
+//Advocacia Object
+qat.model.Advocacia = function(_oObjet)
+{
+     this.id = _oObjet.id;
+     this.nome = _oObjet.nome;
+     this.entidadeId = _oObjet.entidadeId;
+     this.numFunc = _oObjet.numFunc;
+     this.statusInicial = _oObjet.statusInicial;
+     this.entidadeEnumValue = _oObjet.entidadeEnumValue;
+     this.regime = _oObjet.regime;
+     this.documentos = _oObjet.documentos;
+     this.enderecos = _oObjet.enderecos;
+     this.emails = _oObjet.emails;
+     this.telefones = _oObjet.telefones;
+     this.cnaes = _oObjet.cnaes;
+     this.statusList = _oObjet.statusList;
+     this.notes = _oObjet.notes;
+     this.parentId       = _oObjet.parentId;
+     this.emprId         = _oObjet.emprId;
+     this.processId      = _oObjet.processId;
+     this.tableEnumValue = _oObjet.tableEnumValue;
+     this.modelAction    = _oObjet.modelAction;
+     this.createUser     = $rootScope.user;
+     this.createDateUTC  = (new Date()).getTime();
+     this.modifyUser     = $rootScope.user;
+     this.modifyDateUTC  = (new Date()).getTime();
+}
+
+/** create by system gera-java version 1.0.0 01/06/2016 14:44 : 36*/
+
+//Clinica Object
+qat.model.Clinica = function(_oObjet)
+{
+     this.id = _oObjet.id;
+     this.nome = _oObjet.nome;
+     this.entidadeId = _oObjet.entidadeId;
+     this.numFunc = _oObjet.numFunc;
+     this.statusInicial = _oObjet.statusInicial;
+     this.entidadeEnumValue = _oObjet.entidadeEnumValue;
+     this.regime = _oObjet.regime;
+     this.documentos = _oObjet.documentos;
+     this.enderecos = _oObjet.enderecos;
+     this.emails = _oObjet.emails;
+     this.telefones = _oObjet.telefones;
+     this.cnaes = _oObjet.cnaes;
+     this.statusList = _oObjet.statusList;
+     this.notes = _oObjet.notes;
+     this.parentId       = _oObjet.parentId;
+     this.emprId         = _oObjet.emprId;
+     this.processId      = _oObjet.processId;
+     this.tableEnumValue = _oObjet.tableEnumValue;
+     this.modelAction    = _oObjet.modelAction;
+     this.createUser     = $rootScope.user;
+     this.createDateUTC  = (new Date()).getTime();
+     this.modifyUser     = $rootScope.user;
+     this.modifyDateUTC  = (new Date()).getTime();
+}
+
+/** create by system gera-java version 1.0.0 01/06/2016 14:44 : 36*/
+
+//Condominio Object
+qat.model.Condominio = function(_oObjet)
+{
+     this.id = _oObjet.id;
+     this.nome = _oObjet.nome;
+     this.entidadeId = _oObjet.entidadeId;
+     this.numFunc = _oObjet.numFunc;
+     this.statusInicial = _oObjet.statusInicial;
+     this.entidadeEnumValue = _oObjet.entidadeEnumValue;
+     this.regime = _oObjet.regime;
+     this.documentos = _oObjet.documentos;
+     this.enderecos = _oObjet.enderecos;
+     this.emails = _oObjet.emails;
+     this.telefones = _oObjet.telefones;
+     this.cnaes = _oObjet.cnaes;
+     this.statusList = _oObjet.statusList;
+     this.notes = _oObjet.notes;
+     this.parentId       = _oObjet.parentId;
+     this.emprId         = _oObjet.emprId;
+     this.processId      = _oObjet.processId;
+     this.tableEnumValue = _oObjet.tableEnumValue;
+     this.modelAction    = _oObjet.modelAction;
+     this.createUser     = $rootScope.user;
+     this.createDateUTC  = (new Date()).getTime();
+     this.modifyUser     = $rootScope.user;
+     this.modifyDateUTC  = (new Date()).getTime();
+}
+
+/** create by system gera-java version 1.0.0 01/06/2016 15:1 : 45*/
+
+//Endereco Object
+qat.model.Endereco = function(_oObjet)
+{
+     this.id = _oObjet.id;
+     this.codIbge = _oObjet.codIbge;
+     this.logradouro = _oObjet.logradouro;
+     this.bairro = _oObjet.bairro;
+     this.numero = _oObjet.numero;
+     this.enderecoTypeValue = _oObjet.enderecoTypeValue;
+     this.cep = _oObjet.cep;
+     this.latitude = _oObjet.latitude;
+     this.longitude = _oObjet.longitude;
+     this.complemento = _oObjet.complemento;
+     this.cidade = _oObjet.cidade;
+     this.parentId       = _oObjet.parentId;
+     this.emprId         = _oObjet.emprId;
+     this.processId      = _oObjet.processId;
+     this.tableEnumValue = _oObjet.tableEnumValue;
+     this.modelAction    = _oObjet.modelAction;
+     this.createUser     = $rootScope.user;
+     this.createDateUTC  = (new Date()).getTime();
+     this.modifyUser     = $rootScope.user;
+     this.modifyDateUTC  = (new Date()).getTime();
+}
+
+/** create by system gera-java version 1.0.0 01/06/2016 15:2 : 48*/
+
+//Email Object
+qat.model.Email = function(_oObjet)
+{
+     this.id = _oObjet.id;
+     this.typeValue = _oObjet.typeValue;
+     this.email = _oObjet.email;
+     this.emailTypeEnumValue = _oObjet.emailTypeEnumValue;
+     this.parentId       = _oObjet.parentId;
+     this.emprId         = _oObjet.emprId;
+     this.processId      = _oObjet.processId;
+     this.tableEnumValue = _oObjet.tableEnumValue;
+     this.modelAction    = _oObjet.modelAction;
+     this.createUser     = $rootScope.user;
+     this.createDateUTC  = (new Date()).getTime();
+     this.modifyUser     = $rootScope.user;
+     this.modifyDateUTC  = (new Date()).getTime();
+}
+
+/** create by system gera-java version 1.0.0 01/06/2016 15:3 : 11*/
+
+//Telefone Object
+qat.model.Telefone = function(_oObjet)
+{
+     this.id = _oObjet.id;
+     this.typeValue = _oObjet.typeValue;
+     this.ddd = _oObjet.ddd;
+     this.numero = _oObjet.numero;
+     this.telefoneTypeEnumValue = _oObjet.telefoneTypeEnumValue;
+     this.parentId       = _oObjet.parentId;
+     this.emprId         = _oObjet.emprId;
+     this.processId      = _oObjet.processId;
+     this.tableEnumValue = _oObjet.tableEnumValue;
+     this.modelAction    = _oObjet.modelAction;
+     this.createUser     = $rootScope.user;
+     this.createDateUTC  = (new Date()).getTime();
+     this.modifyUser     = $rootScope.user;
+     this.modifyDateUTC  = (new Date()).getTime();
+}
+
+
+
+
 
 
 

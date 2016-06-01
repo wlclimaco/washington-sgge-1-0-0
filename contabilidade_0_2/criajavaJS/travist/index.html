@@ -706,9 +706,9 @@ $('#checkeds').append(imputs);
     $("#add-tab").click(function () {
 		$("#tabs").tabs();
 		$("#tabs").tabs('destroy');
-		
+		var cc = 1;
         for(var i = 0;i<oProjet.length;i++){
-
+        	
 			if($('#_'+oProjet[i].interfaces).prop('checked')){
 				if($('#BAC').prop('checked')){
 				
@@ -807,9 +807,10 @@ $('#checkeds').append(imputs);
 						sqlJ = sqlJ + domain(oProjet[i].classes[x].model,oProjet[i].classes[x].classe);
 						sqlJ1 = sqlJ1 + domainTest(oProjet[i].classes[x].model,oProjet[i].classes[x].classe);
 					}
-
-					$("div#tabs").addTab("Domain",sqlJ);
-					$("div#tabs").addTab("MOK",sqlJ1);
+					
+					$("div#tabs").addTab("Domain_"+cc+" ",sqlJ);
+					$("div#tabs").addTab("MOK_"+cc+" ",sqlJ1);
+					cc = cc + 1;
 				}	
 				if($('#b-create').prop('checked')){
 					if($('#text-b-create').prop('checked')){

@@ -1,7 +1,7 @@
 (function() {
   angular.module('wdApp.apps.site', []).controller('SiteController',
-   ['$scope', '$rootScope', 'SysMgmtData', 'toastr', 'toastrConfig','$location',
-     function($scope, $rootScope, SysMgmtData, toastr, toastrConfig,location) {
+   ['$scope', '$rootScope', 'SysMgmtData', 'toastr', 'toastrConfig','$location','$http', '$q',
+     function($scope, $rootScope, SysMgmtData, toastr, toastrConfig,location ,$http, $q) {
 		var pvm = this;
 		var initLoad = true; //used to ensure not calling server multiple times
 		var fetch_url =    WebDaptiveAppConfig.base_site_url +  WebDaptiveAppConfig.fetch_url;
@@ -29,6 +29,55 @@
          //      console.log(res)
         //       pvm.site = new qat.model.Site(res.sites[0]);
         //  });
+
+       //  SysMgmtData.processPostPageData("fetch_url", {cep : '38082243'}, function(res){
+        //       console.log(res)
+        //       pvm.site = new qat.model.Site(res.sites[0]);
+       //  });
+       cepValue = '38082243'
+       var formatedCep;
+            //formatedCep = cepValue.replace(/\D/g, '');
+          var formatedCep = cepValue.replace(/\D/g, '');
+          var viaCepUrl = "https://viacep.com.br/ws/" + formatedCep + "/json/";
+          $http.get(viaCepUrl).then(function(response) {
+            var raw;
+            //debugger
+            raw = response.data;
+          });
+
+            $http.get('https://cosmos.bluesoft.com.br/api/gtins/7891910000197.json', {
+                headers: {
+                    "Authorization": 'X-Cosmos-Token="T9pFIi3coAXpypnWF4miGw"'
+                }
+              }).success(function(response){
+                console.log(response)
+              });
+
+          var config = {headers: {
+            'X-Cosmos-Token': 'T9pFIi3coAXpypnWF4miGw',
+            'Content-Type': 'application/json',
+             "Access-Control-Allow-Origin": "*",
+             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+             'Access-Control-Allow-Credentials': 'true',
+             'Accept': 'application/json;odata=verbose'
+            }
+        };
+
+          var formatedCep;
+            //formatedCep = cepValue.replace(/\D/g, '');
+          var formatedCep = cepValue.replace(/\D/g, '');
+          var viaCepUrl = 'https://cosmos.bluesoft.com.br/api/gtins/7891910000197/json/';
+          $http.get(viaCepUrl,config).then(function(response) {
+            var raw;
+            debugger
+            raw = response.data;
+            if (raw.erro) {
+              return deferred.reject('CEP not found');
+            } else {
+              return deferred.resolve(raw);
+            }
+          });
+
 
 
 	/** create by system gera-java version 1.0.0 19/05/2016 15:48 : 53*/
