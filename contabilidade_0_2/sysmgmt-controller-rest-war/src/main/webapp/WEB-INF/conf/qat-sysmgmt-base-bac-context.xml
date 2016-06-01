@@ -16,6 +16,10 @@
 		<property name="validationController" ref="countyValidationController"/>
 	</bean>
 
+	<bean id="cepBACTarget" class="org.talesolutions.cep.BuscaCEP">
+
+	</bean>
+
 	<bean id="siteBACTarget" class="com.qat.samples.sysmgmt.bac.Site.SiteBACImpl">
 		<property name="siteBAR" ref="siteBARTarget"/>
 	</bean>

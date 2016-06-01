@@ -181,6 +181,22 @@ function CidadeModel() {
 }
 
 //================ Cidade
+function CepModel() {
+
+	var a = [];
+
+	a.push({field :{campo : "id" , tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "codigo", tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+    a.push({field :{campo : "nome" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "cdIBGE" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "cep" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+   	a.push({field :{campo : "municipio" , tipo :"String",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "estado"   , tipo :"Estado",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+
+	return a;
+}
+
+//================ Cidade
 function NotaFiscalModel() {
 
 	var a = [];
