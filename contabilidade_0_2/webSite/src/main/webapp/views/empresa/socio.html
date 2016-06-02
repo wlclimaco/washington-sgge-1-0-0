@@ -1,91 +1,24 @@
     <link rel="stylesheet" href="dist/css/formValidation.css"/>
     <link rel="stylesheet" href="dist/css/select2.css"/>
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css"/>
-    <link href="thirdparty/twitter-bootstrap-wizard-master/prettify.css" rel="stylesheet">
-    <link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload.css">
-    <link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload-ui.css">
-<!-- CSS adjustments for browsers with JavaScript disabled -->
-    <noscript><link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload-noscript.css"></noscript>
-    <noscript><link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload-ui-noscript.css"></noscript>
-
-    <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-    <script src="js/vendor/jquery.ui.widget.js"></script>
-    <!-- The Templates plugin is included to render the upload/download listings -->
-    
-    <!-- The main application script 
-    <script src="thirdparty/jQuery-File-Upload-master/js/main.js"></script>-->
 
     <script src="vendor/bootstrap/js/bootstrap.js"></script>
     <script src="dist/js/select2.min.js"></script>
     <script src="dist/js/formValidation.js"></script>
     <script src="dist/js/framework/bootstrap.js"></script>
-    <script src="thirdparty/twitter-bootstrap-wizard-master/jquery.bootstrap.wizard.js"></script>
-    <script src="thirdparty/twitter-bootstrap-wizard-master/prettify.js"></script>
-    
-    
 
-<div class='container' data-ng-controller="EmpresaController as cc">
+<div class="page">
+    <section class="panel panel-default">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Wizard Form</strong></div>
+        <div class="panel-body" >
+         <form id="bookForm" method="post" class="form-horizontal" data-ng-controller="EmpresaController as cc">
+         <button   type="button" ng-click="cc.buscaRCep('38082243')"  class="btn btn-success">Add</button>
+            <div class="data-ui-wizard-form">
 
-            <section id="wizard" style="background : white">
-              <div class="page-header">
-                <h1>Wizard With Form Validation</h1>
-              </div>
+ <button   type="button" ng-click="cc.buscaRCep('38082243')"  class="btn btn-success">Add</button>
 
-                <div id="rootwizard">
-                    <div class="navbar">
-                      <div class="navbar-inner">
-                        <div class="container">
-                    <ul>
-                        <li><a href=".tab1" data-toggle="tab">Informações do Usuario</a></li>
-                        <li><a href=".tab2" data-toggle="tab">Informações da Empresa</a></li>
-                        <li><a href=".tab3" data-toggle="tab">Informações de Socios</a></li>
-                        <li><a href=".tab4" data-toggle="tab">Informações Plano Serviçoes</a></li>
-                        <li><a href=".tab5" data-toggle="tab">Contrato Social</a></li>
-                        <li><a href=".tab6" data-toggle="tab">Pagamento</a></li>
-                    </ul>
-                     </div>
-                      </div>
-                    </div>
-                    <div id="bar" class="progress">
-                      <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;background : red"></div>
-                    </div>
-                    <div class="tab-content">
-                        <div class="tab-pane tab1" id="tab1">
-                            <div class="panel-body" >
-                            <div class="row">
-                                <div class="col-md-8 col-md-offset-2">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Nome Completo</label>
-                                            <input type="email" id='nome-completo' name="nome-completo" class="form-control" id="exampleInputEmail1" placeholder="Nome Completo">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">CPF</label>
-                                            <input type="email" id='cpf' class="form-control" name="cpf" id="exampleInputEmail1" placeholder="CPF">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Telefone</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1" name="Telefone" placeholder="Telefone">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Email</label>
-                                            <input type="email" id='email' class="form-control" id="exampleInputEmail1" name="email" placeholder="Email">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Senha</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Confirmar Senha</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirmar Senha">
-                                        </div>
-
-                                </div>
-                            </div>
-</div>
-
-                        </div>
-                        <div class="tab-pane tab2" id="tab2">
-                            <div class="form-empresa">
+                <h1>Informação Empresa</h1>
+                <div class="form-empresa">Informação Empresa
                     <div class="row">
                         <div class="col-sm-8">
                             <label for="exampleInputPassword1">Digite seu CNPJ</label>
@@ -104,8 +37,8 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
-                            <label for="exampleInputPassword1">Sua Empresa Esta Ativa?</label>
                             <dl class="dl-horizontal">
+                                <dt>Sua Empresa Esta Ativa?</dt><br>
                                 <dd>
                                     <label class="ui-radio"><input name="radio1" type="radio" value="option1" ><span>Sim</span></label>
                                     <label class="ui-radio"><input name="radio1" type="radio" value="option2" checked><span>Não</span></label>
@@ -113,8 +46,8 @@
                             </dl>
                         </div>
                         <div class="col-sm-6">
-                           <label for="exampleInputPassword1">Selecione o regime Tributario da Empresa</label>
                             <dl class="dl-horizontal">
+                                <dt>Selecione o regime Tributario da Empresa</dt><br>
                                 <dd>
                                     <label class="ui-radio"><input name="radio1" type="radio" value="option1" checked ><span>Simples Nacional</span></label>
                                     <label class="ui-radio"><input name="radio1" type="radio" value="option2" ><span>Lucro Real</span></label>
@@ -132,7 +65,7 @@
                                 <input type="text" class="form-control">
                                 <span class="input-group-btn">
 
-                                    <button class="btn btn-default" type="button" ng-click="cc.buscaRCep('38082243')"><i class="glyphicon glyphicon-search"> </i></button>
+                                    <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"> </i></button>
                                 </span>
                             </div>
                         </div>
@@ -215,35 +148,41 @@
                             </div>
                     </div>
                 </div>
+
+                <h1>Socios</h1>
+                <div>
+                <div class="row">
+                        <div class="col-sm-2">
+                            <label for="exampleInputPassword1">CPF Socio</label>
+                            <input type="text" class="form-control" name="book[0].title" placeholder="CPF Socio" />
                         </div>
-                        <div class="tab-pane tab3" id="tab3">
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label for="exampleInputPassword1">CPF Socio</label>
-                                    <input type="text" class="form-control" name="book[0].title" placeholder="CPF Socio" />
-                                </div>
-                                <div class="col-sm-4">
-                                    <label for="exampleInputPassword1">Nome Socio</label>
-                                    <input type="text" class="form-control" name="book[0].isbn" placeholder="Nome Socio" />
-                                </div>
-                                <div class="col-sm-2">
-                                    <label for="exampleInputPassword1">Porcentagem</label>
-                                    <input type="text" class="form-control" name="book[0].price" placeholder="%" />
-                                </div>
-                                <div class="col-sm-3" style="margin-top:18px">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="receiver" value="0" checked /> Socio Administrador ?
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-xs-1" style="margin-top:18px">
-                                    <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
-                                </div>
+                        <div class="col-sm-4">
+                            <label for="exampleInputPassword1">Nome Socio</label>
+                            <input type="text" class="form-control" name="book[0].isbn" placeholder="Nome Socio" />
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="exampleInputPassword1">Porcentagem</label>
+                            <input type="text" class="form-control" name="book[0].price" placeholder="%" />
+                        </div>
+                        <div class="col-sm-3" style="margin-top:18px">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="receiver" value="0" checked /> Socio Administrador ?
+                                </label>
                             </div>
                         </div>
-                        <div class="tab-pane tab4" id="tab4">
-                            <div class="mbr-section__container mbr-section__container--std-top-padding container" style="padding-top: 93px; margin-bottom: 0px;">
+                        <div class="col-xs-1" style="margin-top:18px">
+                            <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <h1>Escolha Plano</h1>
+                <div>
+                    <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="pricing-table1-10" style="background-color: rgb(240, 240, 240);">
+
+    <div class="mbr-section__container mbr-section__container--std-top-padding container" style="padding-top: 93px; margin-bottom: 0px;">
         <div class="row">
             <div class="mbr-plan col-xs-12 mbr-plan--first col-md-3 col-sm-6">
                 <div class="mbr-plan__box">
@@ -340,71 +279,24 @@
 
         </div>
     </div>
-                        </div>
-                        <div class="tab-pane tab5" id="tab5">
-                            <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
-                                <!-- Redirect browsers with JavaScript disabled to the origin page -->
-                                <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
-                                <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-                                <div class="row fileupload-buttonbar">
-                                    <div class="col-lg-7">
-                                        <!-- The fileinput-button span is used to style the file input field as button -->
-                                        <span class="btn btn-success fileinput-button">
-                                            <i class="glyphicon glyphicon-plus"></i>
-                                            <span>Add files...</span>
-                                            <input type="file" name="files[]" multiple>
-                                        </span>
-                                        <button type="submit" class="btn btn-primary start">
-                                            <i class="glyphicon glyphicon-upload"></i>
-                                            <span>Start upload</span>
-                                        </button>
-                                        <button type="reset" class="btn btn-warning cancel">
-                                            <i class="glyphicon glyphicon-ban-circle"></i>
-                                            <span>Cancel upload</span>
-                                        </button>
-                                        <button type="button" class="btn btn-danger delete">
-                                            <i class="glyphicon glyphicon-trash"></i>
-                                            <span>Delete</span>
-                                        </button>
-                                        <input type="checkbox" class="toggle">
-                                        <!-- The global file processing state -->
-                                        <span class="fileupload-process"></span>
-                                    </div>
-                                    <!-- The global progress state -->
-                                    <div class="col-lg-5 fileupload-progress fade">
-                                        <!-- The global progress bar -->
-                                        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                                            <div class="progress-bar progress-bar-success" style="width:0%;"></div>
-                                        </div>
-                                        <!-- The extended global progress state -->
-                                        <div class="progress-extended">&nbsp;</div>
-                                    </div>
-                                </div>
-                                <!-- The table listing the files available for upload/download -->
-                                <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
-                            </form>
-                        </div>
-                        <div class="tab-pane" id="tab6">
-                            6
-                        </div>
-                        <ul class="pager wizard">
-                            <li class="previous first" style="display:none;"><a href="javascript:;">First</a></li>
-                            <li class="previous"><a href="javascript:;">Previous</a></li>
-                            <li class="next last" style="display:none;"><a href="javascript:;">Last</a></li>
-                            <li class="next"><a href="javascript:;">Next</a></li>
-                        </ul>
-                    </div>
+</section>
                 </div>
 
+                <h1>Pagamento</h1>
+                <div>Pagamento</div>
+            </div>
+            </form>
+        </div>
+    </section>
+</div>
+<script>
+    $( document ).ready(function() {
 
+    $('#dashboard-nav').hide();
+    $('#dashboard-header').hide();
+    $('#teste').hide();
 
-            </section>
-    </div>
-    <script>
-    $(document).ready(function() {
-        
-
-        var titleValidators = {
+    var titleValidators = {
             row: '#nome-completo',   // The title is placed inside a <div class="col-xs-4"> element
             validators: {
                 notEmpty: {
@@ -492,27 +384,5 @@
           allowClear: true
         });
 
-        $('#rootwizard').bootstrapWizard({onNext: function(tab, navigation, index) {
-            /*  if(index==2) {
-                    // Make sure we entered the name
-                    if(!$('#name').val()) {
-                        alert('You must enter your name');
-                        $('#name').focus();
-                        return false;
-                    }
-                }
-
-                // Set the name for the next tab
-                $('#tab3').html('Hello, ' + $('#name').val());
-            */
-            }, onTabShow: function(tab, navigation, index) {
-
-                var $total = navigation.find('li').length;
-                var $current = index+1;
-                var $percent = ($current/$total) * 100;
-                $('#rootwizard .progress-bar').css({width:$percent+'%'});
-            }});
-        window.prettyPrint && prettyPrint();
-
     });
-    </script>
+</script>

@@ -25,16 +25,18 @@
 
         //  var commonControllers =  angular.module('wdApp.controllers', ['LoginController']);
          // console.log(commonControllers.login());
+
+         /*
           SysMgmtData.processPostPageData(fetch_url, new qat.model.siteInquiryRequest( 100/20, true, "http://localhost:8080/webSite/"), function(res){
                console.log(res)
                pvm.site = new qat.model.Site(res.sites[0]);
           });
-
+        */
        //  SysMgmtData.processPostPageData("fetch_url", {cep : '38082243'}, function(res){
         //       console.log(res)
         //       pvm.site = new qat.model.Site(res.sites[0]);
        //  });
-       cepValue = '38082243'
+     /*  cepValue = '38082243'
        var formatedCep;
             //formatedCep = cepValue.replace(/\D/g, '');
           var formatedCep = cepValue.replace(/\D/g, '');
@@ -76,7 +78,7 @@
             } else {
               return deferred.resolve(raw);
             }
-          });
+          });*/
 
     }
 
