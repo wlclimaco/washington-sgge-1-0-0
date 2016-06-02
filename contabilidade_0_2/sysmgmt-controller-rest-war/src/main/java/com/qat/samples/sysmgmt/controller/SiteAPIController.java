@@ -1,5 +1,5 @@
 /** create by system gera-java version 1.0.0 09/05/2016 16:51 : 47*/
-
+//@Grapes(@Grab("com.github.fabito:busca-cep-java-client:1.7"))
 package com.qat.samples.sysmgmt.controller;
 
 import javax.annotation.Resource;
@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.talesolutions.cep.CEP;
-import org.talesolutions.cep.CEPService;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
@@ -55,16 +53,6 @@ public class SiteAPIController extends BaseController {
 	/** The site bac. */
 	private ISiteBAC siteBAC; // injected by @Resource
 
-	private CEPService buscaCEP;
-
-	public CEPService getBuscaCEP() {
-		return buscaCEP;
-	}
-
-	public void setBuscaCEP(CEPService buscaCEP) {
-		this.buscaCEP = buscaCEP;
-	}
-
 	/**
 	 * Gets the site bac.
 	 *
@@ -100,8 +88,7 @@ public class SiteAPIController extends BaseController {
 	public ServicoResponse fetchServicoPaged(@RequestBody ServicoInquiryRequest request) {
 		ServicoResponse servicoResponse = new ServicoResponse();
 		try {
-			getBuscaCEP().obtemPorNumeroCEP("38082243");
-			// System.out.println(cep);
+
 			InternalResultsResponse<Servico> internalResponse = getSiteBAC().fetchServicosByRequest(request);
 			ResponseHandler.handleOperationStatusAndMessages(servicoResponse, internalResponse, true);
 		} catch (Exception ex) {

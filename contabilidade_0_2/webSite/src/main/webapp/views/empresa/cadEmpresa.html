@@ -139,71 +139,120 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group">
-                            <label class="col-xs-3 control-label">Phone number</label>
-                            <div class="col-xs-5">
-                                <input type="text" class="form-control" name="phoneNumber" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <label for="exampleInputPassword1">Atividade principal da Empresa</label>
-                            <select id="mySel2" name="cnae" class="form-control">
+                        <div class="col-sm-6">
+                        <label for="exampleInputPassword1">Atividade Principal da Empresa</label>
+                            <select id="atividade1" name="atividade1" class="form-control">
                                 <option> teste 001</option>
                                 <option> teste 002</option>
                                 <option> teste 003</option>
                                 <option> teste 004</option>
                                 <option> teste 005</option>
 
-                            </select><br>
+                            </select>
                         </div>
+                    </div>
+                    <div class="row">
+                                <div class="col-sm-5">
+                                    <label for="exampleInputPassword1">Atividade Secundaria da Empresa</label>
+                                    <select id="mySel" name="cnae" class="form-control">
+                                        <option> teste 001</option>
+                                        <option> teste 002</option>
+                                        <option> teste 003</option>
+                                        <option> teste 004</option>
+                                        <option> teste 005</option>
+
+                                    </select>
+
+                                    <button type="button" class="btn btn-default addButton1"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        <div class="row">
+                            <div class="form-group hide" id="bookTemplate1">
+                                <div class="col-sm-6">
+                                <label for="exampleInputPassword1">Outras Atividades</label>
+                                    <select id="mySel" class="form-control">
+                                        <option> teste 001</option>
+                                        <option> teste 002</option>
+                                        <option> teste 003</option>
+                                        <option> teste 004</option>
+                                        <option> teste 005</option>
+
+                                    </select>
+
+                                <div class="col-xs-1">
+                                    <button type="button" class="btn btn-default removeButton1"><i class="fa fa-minus"></i></button>
+                                </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
 
                 <h1>Socios</h1>
                 <div>
-                    <form id="bookForm" method="post" class="form-horizontal">
-<div class="container">
-    <label class="col-xs-1 control-label">Cnae</label>
-    <div class="col-xs-6">
-        <select id="mySel" name="cnae1" class="form-control">
-            <option> teste 001</option>
-            <option> teste 002</option>
-            <option> teste 003</option>
-            <option> teste 004</option>
-            <option> teste 005</option>
-
-        </select><br>
-    </div>
-    <div class="col-xs-1">
-        <button type="button" class="btn btn-default addButton1"><i class="fa fa-plus"></i></button>
-    </div>
-
-    <div class="form-group hide" id="bookTemplate1">
-        <label class="col-xs-1 control-label">Cnae</label>
-        <div class="col-xs-6">
-            <select id="mySel" class="form-control">
-                <option> teste 001</option>
-                <option> teste 002</option>
-                <option> teste 003</option>
-                <option> teste 004</option>
-                <option> teste 005</option>
-
-            </select>
-        </div>
-        <div class="col-xs-1">
-            <button type="button" class="btn btn-default removeButton1"><i class="fa fa-minus"></i></button>
-        </div>
-    </div>
-</div>
-</form>
-
+                <div class="row">
+                        <div class="col-sm-2">
+                            <label for="exampleInputPassword1">CPF Socio</label>
+                            <input type="text" class="form-control" name="book[0].title" placeholder="CPF Socio" />
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="exampleInputPassword1">Nome Socio</label>
+                            <input type="text" class="form-control" name="book[0].isbn" placeholder="Nome Socio" />
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="exampleInputPassword1">Porcentagem</label>
+                            <input type="text" class="form-control" name="book[0].price" placeholder="%" />
+                        </div>
+                        <div class="col-sm-3" style="margin-top:18px">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="receiver" value="0" checked /> Socio Administrador ?
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-1" style="margin-top:18px">
+                            <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
 
                 </div>
 
                 <h1>Escolha Plano</h1>
-                <div>Escolha Plano</div>
+                <div>
+                    <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="pricing-table1-12" style="background-color: rgb(240, 240, 240);" data-ng-controller="SiteController as cc">
+
+                        <div class="mbr-section__container mbr-section__container--std-top-padding container" style="padding-top: 93px; margin-bottom: 0px;">
+                            <div class="row" >
+                                <div class="mbr-plan col-xs-12 mbr-plan--first col-md-3 col-sm-6" ng-repeat="plano in cc.site.planoList">
+                                    <div class="mbr-plan__box">
+                                        <div class="mbr-plan__header">
+                                            <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
+                                                <h3 class="mbr-header__text">{{plano.titulo}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="mbr-plan__number">
+                                            <div class="mbr-number mbr-number--price">
+                                                <div class="mbr-number__num">
+                                                    <div class="mbr-number__group">
+                                                        <sup class="mbr-number__left">$</sup><span class="mbr-number__value">{{plano.precoList[0].valor || 0}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="mbr-number__caption">Mensal</div>
+                                            </div>
+                                        </div>
+                                        <div class="mbr-plan__details">
+                                            <ul ng-repeat="servico in plano.servicoList">
+                                                <li><strong>{{servico.servico.nome}}</strong> {{servico.servico.descricao}}</li>
+                                            </ul>
+                                        </div>
+                                        <div class="mbr-plan__buttons">
+                                            <div class="mbr-buttons mbr-buttons--center"><a href="https://mobirise.com" class="mbr-buttons__btn btn btn-wrap btn-xs-lg btn-default">Contratar</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
 
                 <h1>Pagamento</h1>
                 <div>Pagamento</div>
@@ -211,8 +260,6 @@
             </form>
         </div>
     </section>
-
-	<div data-ui-footer></div>
 </div>
 <script>
     $( document ).ready(function() {
@@ -265,7 +312,7 @@
                 'book[0].nome-completo': titleValidators,
                 'book[0].cpf': isbnValidators,
                 'book[0].telefone': priceValidators,
-                'book[0].cnae': priceValidators
+                'book[0].cnae': titleValidators
             }
         }).on('click', '.addButton1', function() {
             bookIndex++;
@@ -280,12 +327,14 @@
 
             // Update the name attributes
             $clone
-                .find('[name="cnae"]').attr('name', 'book[' + bookIndex + '].cnae').end();
+                .find('[name="cnae1"]').attr('name', 'book[' + bookIndex + '].cnae').end();
 
             // Add new fields
             // Note that we also pass the validator rules for new field as the third parameter
             $('#bookForm')
-                .formValidation('addField', 'book[' + bookIndex + '].cnae', priceValidators);
+                .formValidation('addField', 'book[' + bookIndex + '].cnae', titleValidators);
+
+
         })
 
         // Remove button click handler

@@ -9,6 +9,9 @@
 	<!-- Miscellaneous beans -->
 	<bean id="QATAppContext" class="com.qat.framework.util.AppContextHelper"></bean>
 
+<bean id="CEPServiceFactory" class="org.talesolutions.cep.CEPServiceFactory"/>
+<bean id="BuscaCEP" class="org.talesolutions.cep.BuscaCEP"/>
+
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basenames">
 			<list>

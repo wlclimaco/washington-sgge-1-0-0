@@ -16,10 +16,6 @@
 		<property name="validationController" ref="countyValidationController"/>
 	</bean>
 
-	<bean id="cepBACTarget" class="org.talesolutions.cep.BuscaCEP">
-
-	</bean>
-
 	<bean id="siteBACTarget" class="com.qat.samples.sysmgmt.bac.Site.SiteBACImpl">
 		<property name="siteBAR" ref="siteBARTarget"/>
 	</bean>
@@ -55,7 +51,7 @@
 	<bean id="noRowsFoundEnumType" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
 		<property name="staticField" value="com.qat.framework.model.response.InternalResponse$BusinessErrorCategory.NoRowsFound"/>
 	</bean>
-	<bean id="noRowsFoundEnumName" factory-bean="noRowsFoundEnumType" factory-method="name" />
+
 	<bean id="noRowsInsertedEnumType" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
 		<property name="staticField" value="com.qat.framework.model.response.InternalResponse$BusinessErrorCategory.NoRowsInserted"/>
 	</bean>
