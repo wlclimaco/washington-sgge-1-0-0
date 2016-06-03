@@ -56,7 +56,7 @@
                                 <div class="col-md-8 col-md-offset-2">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Nome Completo</label>
-                                            <input type="text"  ng-model="empresa.usuarios[0].nome" name="nome-completo" class="form-control" placeholder="Nome Completo">
+                                            <input type="text"  ng-model="empresa.usuarios[0].nome" name="nome" class="form-control" placeholder="Nome Completo">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">CPF</label>
@@ -64,7 +64,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Telefone</label>
-                                            <input type="text" class="form-control" ng-model="empresa.usuarios[0].telefone" name="Telefone" placeholder="Telefone">
+                                            <input type="text" class="form-control" ng-model="empresa.usuarios[0].telefone" name="telefone" placeholder="Telefone">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Email</label>
@@ -72,11 +72,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Senha</label>
-                                            <input type="password" class="form-control" ng-model="empresa.usuarios[0].senha" placeholder="Senha">
+                                            <input type="password" class="form-control" ng-model="empresa.usuarios[0].senha" name="password" placeholder="Senha">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Confirmar Senha</label>
-                                            <input type="password" class="form-control" ng-model="senha" placeholder="Confirmar Senha">
+                                            <input type="password" class="form-control" ng-model="senha"  name="confirmPassword" placeholder="Confirmar Senha">
                                         </div>
 
                                 </div>
@@ -172,6 +172,75 @@
                                         <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].codIbge" placeholder="Codigo IBGE">
                                     </div>
                                 </div>
+
+                                <!-- -------------------  TELEFONE ----------------- -->
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                    <label for="exampleInputPassword1">Telefone</label>
+                                        <input type="text" class="form-control col-sm-4" ng-model="empresa.telefones[0].numero" name="phone" placeholder="Telefone">
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:25px">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Adicionar <span class="caret"></span></button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="javascript:;" class="addPhoneButton" data-name="phone_iphone">Principal</a></li>
+                                                <li><a href="javascript:;" class="addPhoneButton" data-name="phone_home">Compras</a></li>
+                                                <li><a href="javascript:;" class="addPhoneButton" data-name="phone_office">Vendas</a></li>
+                                                <li><a href="javascript:;" class="addPhoneButton" data-name="phone_office">SAC</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Template for dynamic field -->
+                                <div class="row" id="template" style="display: none;">
+                                    <div class="col-sm-4">
+                                    <label for="exampleInputPassword1">Telefone</label>
+                                        <input type="text" class="form-control col-sm-4" ng-model="empresa.telefones[1].numero" placeholder="Telefone">
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:25px">
+                                        <button type="button" class="btn btn-link removeButton">deletar</button>
+                                    </div>
+                                </div>
+
+                                <!-- ------------------------------------- --><!-- ------------------------------------- -->
+
+                                <!-- -------------------  Email Empresa ----------------- -->
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                    <label for="exampleInputPassword1">Email</label>
+                                        <input type="text" class="form-control col-sm-4" ng-model="empresa.emails[0].email" name="email" placeholder="Email">
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:25px">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Adicionar <span class="caret"></span></button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="javascript:;" class="addEmailButton" data-name="email_princ">Principal</a></li>
+                                                <li><a href="javascript:;" class="addEmailButton" data-name="email_home">Compras</a></li>
+                                                <li><a href="javascript:;" class="addEmailButton" data-name="email_office">Vendas</a></li>
+                                                <li><a href="javascript:;" class="addEmailButton" data-name="email_nfe">NFE</a></li>
+                                                <li><a href="javascript:;" class="addEmailButton" data-name="email_sac">SAC</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Template for dynamic field -->
+                                <div class="row" id="template-email" style="display: none;">
+                                    <div class="col-sm-4">
+                                    <label for="exampleInputPassword1">Email</label>
+                                        <input type="email" class="form-control col-sm-4" ng-model="empresa.emails[1].email" placeholder="Email">
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:25px">
+                                        <button type="button" class="btn btn-link removeButton">deletar</button>
+                                    </div>
+                                </div>
+
+                                <!-- ------------------------------------- --><!-- ------------------------------------- -->
+
+
+
+
                                 <div class="row">
                                     <div class="col-sm-6">
                                     <label for="exampleInputPassword1">Atividade Principal da Empresa</label>
@@ -409,37 +478,6 @@
     <script>
     $(document).ready(function() {
 
-
-        var titleValidators = {
-            row: '#nome-completo',   // The title is placed inside a <div class="col-xs-4"> element
-            validators: {
-                notEmpty: {
-                    message: 'The title is required'
-                }
-            }
-        },
-        isbnValidators = {
-            row: '#cpf',
-            validators: {
-                notEmpty: {
-                    message: 'The ISBN is required'
-                },
-                isbn: {
-                    message: 'The ISBN is not valid'
-                }
-            }
-        },
-        priceValidators = {
-            row: '#email',
-            validators: {
-                notEmpty: {
-                    message: 'The price is required'
-                },
-                numeric: {
-                    message: 'The price must be a numeric number'
-                }
-            }
-        },
         bookIndex = 0;
 
     $('#bookForm')
@@ -451,47 +489,85 @@
                 validating: 'glyphicon glyphicon-refresh'
             },
             fields: {
-                'book[0].nome-completo': titleValidators,
-                'book[0].cpf': isbnValidators,
-                'book[0].telefone': priceValidators,
-                'book[0].cnae': titleValidators
+            nome: {
+                message: 'The username is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required and can\'t be empty'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_\.]+$/,
+                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+                    }
+                }
+            },
+            cpf: {
+                validators: {
+                    notEmpty: {
+                        message: 'The country is required and can\'t be empty'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_\.]+$/,
+                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+                    }
+                 }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required and can\'t be empty'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    }
+                }
+            },
+            telefone: {
+                validators: {
+                    phone: {
+                        message: 'The input is not a valid UK phone number',
+                        country: 'BR'
+                    }
+                }
+            },
+            cep: {
+                validators: {
+                    zipCode: {
+                        country: 'BR',
+                        message: 'The input is not a valid US zip code'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required and can\'t be empty'
+                    }
+                }
+            },
+            confirmPassword: {
+                validators: {
+                    notEmpty: {
+                        message: 'The confirm password is required and can\'t be empty'
+                    },
+                    identical: {
+                        field: 'password',
+                        message: 'The password and its confirm are not the same'
+                    }
+                }
             }
-        }).on('click', '.addButton1', function() {
-            bookIndex++;
 
-            var $template = $('#bookTemplate1'),
-                $clone    = $template
-                                .clone()
-                                .removeClass('hide')
-                                .removeAttr('id')
-                                .attr('data-book-index', bookIndex)
-                                .insertBefore($template);
-
-            // Update the name attributes
-            $clone
-                .find('[name="cnae1"]').attr('name', 'book[' + bookIndex + '].cnae').end();
-
-            // Add new fields
-            // Note that we also pass the validator rules for new field as the third parameter
-            $('#bookForm')
-                .formValidation('addField', 'book[' + bookIndex + '].cnae', titleValidators);
-
-
-        })
-
-        // Remove button click handler
-        .on('click', '.removeButton1', function() {
-            var $row  = $(this).parents('.form-group'),
-                index = $row.attr('data-book-index');
-
-            // Remove fields
-            $('#bookForm')
-                .formValidation('removeField', $row.find('[name="book[' + index + '].cnae"]'));
-
-            // Remove element containing the fields
-            $row.remove();
-        }).on('change', 'BR', function(e) {
-            $('#bookForm').formValidation('revalidateField', 'phoneNumber');
+        }
         });
         $("select").select2({
           placeholder: "Select a state",
@@ -519,6 +595,86 @@
                 $('#rootwizard .progress-bar').css({width:$percent+'%'});
             }});
         window.prettyPrint && prettyPrint();
+
+        //============================= Telefone
+        $('.addPhoneButton').on('click', function() {
+            var $that     = $(this),
+                $template = $('#template'),
+                $newRow   = $template.clone().removeAttr('id').insertBefore($template).show();
+
+            $that.parent().addClass('disabled');
+
+            // Set the label and field name
+            var fieldName = $that.attr('data-name');
+            $newRow
+                .find('.control-label')
+                    .html($that.html())
+                    .end()
+                .find('input')
+                    .attr('name', fieldName)
+                    .end()
+                .on('click', '.removeButton', function() {
+                    // Remove field when clicking the Remove button
+                    $('#contactForm').formValidation('removeField', fieldName);
+
+                    // Enable the Add button
+                    $that.parent().removeClass('disabled');
+
+                    // Remove element
+                    $newRow.remove();
+                });
+
+            // Add new field
+            $('#contactForm').formValidation('addField', fieldName, {
+                message: 'The phone number is not valid',
+                validators: {
+                    digits: {
+                        message: 'The value can contain only digits'
+                    }
+                }
+            });
+        });
+        //============================= Telefone fim
+
+        //============================= Email
+        $('.addPhoneButton').on('click', function() {
+            var $that     = $(this),
+                $template = $('#template'),
+                $newRow   = $template.clone().removeAttr('id').insertBefore($template).show();
+
+            $that.parent().addClass('disabled');
+
+            // Set the label and field name
+            var fieldName = $that.attr('data-name');
+            $newRow
+                .find('.control-label')
+                    .html($that.html())
+                    .end()
+                .find('input')
+                    .attr('name', fieldName)
+                    .end()
+                .on('click', '.removeButton', function() {
+                    // Remove field when clicking the Remove button
+                    $('#contactForm').formValidation('removeField', fieldName);
+
+                    // Enable the Add button
+                    $that.parent().removeClass('disabled');
+
+                    // Remove element
+                    $newRow.remove();
+                });
+
+            // Add new field
+            $('#contactForm').formValidation('addField', fieldName, {
+                message: 'The phone number is not valid',
+                validators: {
+                    digits: {
+                        message: 'The value can contain only digits'
+                    }
+                }
+            });
+        });
+        //============================= Email fim
 
     });
     </script>
