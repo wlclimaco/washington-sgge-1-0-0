@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.pessoa.model.Pessoa;
+import com.qat.samples.sysmgmt.util.model.Documento;
 import com.qat.samples.sysmgmt.util.model.Email;
 
 /**
@@ -18,11 +19,17 @@ public class Usuario extends Pessoa
 
 	private String senha;
 
+	private Documento cpf;
+
 	private String pergunta;
 
 	private String role;
 
+	private String telefone;
+
 	private String language;
+
+
 
 	private Long ultAcesso;
 
@@ -114,12 +121,28 @@ public class Usuario extends Pessoa
 		this.emails = emails;
 	}
 
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public Documento getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(Documento cpf) {
+		this.cpf = cpf;
+	}
+
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "Usuario [getSenha()=" + getSenha() + ", getPergunta()=" + getPergunta() + ", getRole()=" + getRole()
 				+ ", getLanguage()=" + getLanguage() + ", getLogin()=" + getLogin() + ", getUltAcesso()="
-				+ getUltAcesso() + ", getEmails()=" + getEmails() + ", toString()=" + super.toString() + "]";
+				+ getUltAcesso() + ", getEmails()=" + getEmails() + ", getTelefone()=" + getTelefone() + ", getCpf()="
+				+ getCpf() + ", toString()=" + super.toString() + "]";
 	}
 
 }

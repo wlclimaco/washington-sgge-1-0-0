@@ -22,6 +22,8 @@ public class Entidade extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
+	private Integer numFunc;
+
 	/** The type of an account. */
 	private String nome;
 
@@ -275,6 +277,14 @@ public class Entidade extends ModelCosmeDamiao
 	public void setNotificacoes(List<NotificationPreferences> notificacoes)
 	{
 		this.notificacoes = notificacoes;
+	}
+
+	public Integer getNumFunc() {
+		return numFunc;
+	}
+
+	public void setNumFunc(Integer numFunc) {
+		this.numFunc = numFunc;
 	}
 
 	@Override

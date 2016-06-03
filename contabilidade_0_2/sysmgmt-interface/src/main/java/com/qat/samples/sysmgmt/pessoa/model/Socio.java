@@ -14,6 +14,8 @@ public class Socio extends Pessoa
 	/** The description. */
 	private String porcentagem;
 
+	private Integer socioAdm;
+
 	/**
 	 * Default constructor.
 	 */
@@ -24,7 +26,7 @@ public class Socio extends Pessoa
 
 	/**
 	 * Gets the cota.
-	 * 
+	 *
 	 * @return the cota
 	 */
 	public String getCota()
@@ -34,7 +36,7 @@ public class Socio extends Pessoa
 
 	/**
 	 * Sets the cota.
-	 * 
+	 *
 	 * @param cota the cota to set
 	 */
 	public void setCota(String cota)
@@ -44,7 +46,7 @@ public class Socio extends Pessoa
 
 	/**
 	 * Gets the porcentagem.
-	 * 
+	 *
 	 * @return the porcentagem
 	 */
 	public String getPorcentagem()
@@ -54,7 +56,7 @@ public class Socio extends Pessoa
 
 	/**
 	 * Sets the porcentagem.
-	 * 
+	 *
 	 * @param porcentagem the porcentagem to set
 	 */
 	public void setPorcentagem(String porcentagem)
@@ -62,11 +64,18 @@ public class Socio extends Pessoa
 		this.porcentagem = porcentagem;
 	}
 
+	public Integer getSocioAdm() {
+		return socioAdm;
+	}
+
+	public void setSocioAdm(Integer socioAdm) {
+		this.socioAdm = socioAdm;
+	}
+
 	@Override
-	public String toString()
-	{
-		return "Socio [getCota()=" + getCota() + ", getPorcentagem()=" + getPorcentagem() + ", toString()="
-				+ super.toString() + "]";
+	public String toString() {
+		return "Socio [getCota()=" + getCota() + ", getPorcentagem()=" + getPorcentagem() + ", getSocioAdm()="
+				+ getSocioAdm() + ", toString()=" + super.toString() + "]";
 	}
 
 }

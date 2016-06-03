@@ -11,8 +11,8 @@
     <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
     <script src="js/vendor/jquery.ui.widget.js"></script>
     <!-- The Templates plugin is included to render the upload/download listings -->
-    
-    <!-- The main application script 
+
+    <!-- The main application script
     <script src="thirdparty/jQuery-File-Upload-master/js/main.js"></script>-->
 
     <script src="vendor/bootstrap/js/bootstrap.js"></script>
@@ -21,8 +21,8 @@
     <script src="dist/js/framework/bootstrap.js"></script>
     <script src="thirdparty/twitter-bootstrap-wizard-master/jquery.bootstrap.wizard.js"></script>
     <script src="thirdparty/twitter-bootstrap-wizard-master/prettify.js"></script>
-    
-    
+
+
 
 <div class='container' data-ng-controller="EmpresaController as cc">
 
@@ -56,184 +56,189 @@
                                 <div class="col-md-8 col-md-offset-2">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Nome Completo</label>
-                                            <input type="email" id='nome-completo' name="nome-completo" class="form-control" id="exampleInputEmail1" placeholder="Nome Completo">
+                                            <input type="text"  ng-model="empresa.usuarios[0].nome" name="nome-completo" class="form-control" placeholder="Nome Completo">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">CPF</label>
-                                            <input type="email" id='cpf' class="form-control" name="cpf" id="exampleInputEmail1" placeholder="CPF">
+                                            <input type="text"  class="form-control" name="cpf" ng-model="empresa.usuarios[0].cpf.numero"  placeholder="CPF">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Telefone</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1" name="Telefone" placeholder="Telefone">
+                                            <input type="text" class="form-control" ng-model="empresa.usuarios[0].telefone" name="Telefone" placeholder="Telefone">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Email</label>
-                                            <input type="email" id='email' class="form-control" id="exampleInputEmail1" name="email" placeholder="Email">
+                                            <input type="email" id='email' class="form-control" ng-model="empresa.usuarios[0].email" name="email" placeholder="Email">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Senha</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha">
+                                            <input type="password" class="form-control" ng-model="empresa.usuarios[0].senha" placeholder="Senha">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Confirmar Senha</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirmar Senha">
+                                            <input type="password" class="form-control" ng-model="senha" placeholder="Confirmar Senha">
                                         </div>
 
                                 </div>
                             </div>
-</div>
+                        </div>
 
                         </div>
                         <div class="tab-pane tab2" id="tab2">
-                            <div class="form-empresa">
-                    <div class="row">
-                        <div class="col-sm-8">
-                            <label for="exampleInputPassword1">Digite seu CNPJ</label>
-                            <input type="text" class="form-control col-sm-8" placeholder="col-sm-8">
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="exampleInputPassword1">Informe o Numero de Funcionarios</label>
-                            <input type="text" class="form-control col-sm-4" placeholder="col-sm-4">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <label for="exampleInputPassword1">Informe a Razão Social</label>
-                            <input type="text" class="form-control col-sm-8" placeholder="col-sm-8">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label for="exampleInputPassword1">Sua Empresa Esta Ativa?</label>
-                            <dl class="dl-horizontal">
-                                <dd>
-                                    <label class="ui-radio"><input name="radio1" type="radio" value="option1" ><span>Sim</span></label>
-                                    <label class="ui-radio"><input name="radio1" type="radio" value="option2" checked><span>Não</span></label>
-                                </dd>
-                            </dl>
-                        </div>
-                        <div class="col-sm-6">
-                           <label for="exampleInputPassword1">Selecione o regime Tributario da Empresa</label>
-                            <dl class="dl-horizontal">
-                                <dd>
-                                    <label class="ui-radio"><input name="radio1" type="radio" value="option1" checked ><span>Simples Nacional</span></label>
-                                    <label class="ui-radio"><input name="radio1" type="radio" value="option2" ><span>Lucro Real</span></label>
-                                    <label class="ui-radio"><input name="radio1" type="radio" value="option2" ><span>Lucro Presumido</span></label>
-                                </dd>
-                            </dl>
+                            <div class="panel-body" >
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <label for="exampleInputPassword1">Digite seu CNPJ</label>
+                                        <input type="text" class="form-control col-sm-8" ng-model="empresa.documentos[0].numero" placeholder="CNPJ">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1">Informe o Numero de Funcionarios</label>
+                                        <input type="text" class="form-control col-sm-4" ng-model="empresa.numFunc" placeholder="Numero de Funcionarios">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <label for="exampleInputPassword1">Informe a Razão Social</label>
+                                        <input type="text" class="form-control col-sm-8" ng-model="empresa.nome" placeholder="Razão Social">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="exampleInputPassword1">Sua Empresa Esta Ativa?</label>
+                                        <dl class="dl-horizontal">
+                                            <dd>
+                                                <label class="ui-radio"><input name="radio1" ng-model="empresa.statusInicial" type="radio" value="1" ><span>Sim</span></label>
+                                                <label class="ui-radio"><input name="radio1" ng-model="empresa.statusInicial" type="radio" value="2" checked><span>Não</span></label>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-sm-6">
+                                       <label for="exampleInputPassword1">Selecione o regime Tributario da Empresa</label>
+                                        <dl class="dl-horizontal">
+                                            <dd>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="1" checked ><span>Simples Nacional</span></label>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="2" ><span>Lucro Real</span></label>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Lucro Presumido</span></label>
+                                            </dd>
+                                        </dl>
 
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                        <label for="exampleInputPassword1">CEP</label>
-                            <div class="input-group">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                    <label for="exampleInputPassword1">CEP</label>
+                                        <div class="input-group">
 
-                                <input type="text" class="form-control">
-                                <span class="input-group-btn">
+                                            <input type="text" class="form-control" ng-model="empresa.enderecos[0].cep">
+                                            <span class="input-group-btn">
 
-                                    <button class="btn btn-default" type="button" ng-click="cc.buscaRCep('38082243')"><i class="glyphicon glyphicon-search"> </i></button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-9">
-                            <label for="exampleInputPassword1">Logradouro</label>
-                            <input type="text" class="form-control col-sm-8" placeholder="col-sm-8">
-                        </div>
-                        <div class="col-sm-9">
-                            <label for="exampleInputPassword1">Numero</label>
-                            <input type="text" class="form-control col-sm-4" placeholder="col-sm-4">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label for="exampleInputPassword1">Complemento</label>
-                            <input type="text" class="form-control col-sm-8" placeholder="col-sm-8">
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="exampleInputPassword1">Bairro</label>
-                            <input type="text" class="form-control col-sm-4" placeholder="col-sm-4">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label for="exampleInputPassword1">Estado</label>
-                            <input type="text" class="form-control col-sm-8" placeholder="col-sm-8">
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="exampleInputPassword1">Municipio</label>
-                            <input type="text" class="form-control col-sm-4" placeholder="col-sm-4">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                        <label for="exampleInputPassword1">Atividade Principal da Empresa</label>
-                            <select id="atividade1" name="atividade1" class="form-control">
-                                <option> teste 001</option>
-                                <option> teste 002</option>
-                                <option> teste 003</option>
-                                <option> teste 004</option>
-                                <option> teste 005</option>
+                                                <button class="btn btn-default" type="button" ng-click="cc.buscaRCep('38082243')"><i class="glyphicon glyphicon-search"> </i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <label for="exampleInputPassword1">Logradouro</label>
+                                        <input type="text" class="form-control col-sm-8" ng-model="empresa.enderecos[0].logradouro" placeholder="Logradouro">
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <label for="exampleInputPassword1">Numero</label>
+                                        <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].numero" placeholder="Numero">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="exampleInputPassword1">Complemento</label>
+                                        <input type="text" class="form-control col-sm-8" ng-model="empresa.enderecos[0].complemento" placeholder="Complemento">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="exampleInputPassword1">Bairro</label>
+                                        <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].bairro" placeholder="Bairro">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1">Estado</label>
+                                        <input type="text" class="form-control col-sm-8" ng-model="empresa.enderecos[0].cidade.estado" placeholder="Estado">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1">Municipio</label>
+                                        <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].cidade.nome" placeholder="Municipio">
+                                    </div>
 
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                                <div class="col-sm-5">
-                                    <label for="exampleInputPassword1">Atividade Secundaria da Empresa</label>
-                                    <select id="mySel" name="cnae" class="form-control">
-                                        <option> teste 001</option>
-                                        <option> teste 002</option>
-                                        <option> teste 003</option>
-                                        <option> teste 004</option>
-                                        <option> teste 005</option>
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1">Codigo IBGE</label>
+                                        <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].codIbge" placeholder="Codigo IBGE">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                    <label for="exampleInputPassword1">Atividade Principal da Empresa</label>
+                                        <select id="atividade1" name="atividade1" class="form-control">
+                                            <option> teste 001</option>
+                                            <option> teste 002</option>
+                                            <option> teste 003</option>
+                                            <option> teste 004</option>
+                                            <option> teste 005</option>
 
-                                    </select>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                            <div class="col-sm-5">
+                                                <label for="exampleInputPassword1">Atividade Secundaria da Empresa</label>
+                                                <select id="mySel" name="cnae" class="form-control">
+                                                    <option> teste 001</option>
+                                                    <option> teste 002</option>
+                                                    <option> teste 003</option>
+                                                    <option> teste 004</option>
+                                                    <option> teste 005</option>
 
-                                    <button type="button" class="btn btn-default addButton1"><i class="fa fa-plus"></i></button>
+                                                </select>
+
+                                                <button type="button" class="btn btn-default addButton1"><i class="fa fa-plus"></i></button>
+                                            </div>
+                                        </div>
+                                    <div class="row">
+                                        <div class="form-group hide" id="bookTemplate1">
+                                            <div class="col-sm-6">
+                                            <label for="exampleInputPassword1">Outras Atividades</label>
+                                                <select id="mySel" class="form-control">
+                                                    <option> teste 001</option>
+                                                    <option> teste 002</option>
+                                                    <option> teste 003</option>
+                                                    <option> teste 004</option>
+                                                    <option> teste 005</option>
+
+                                                </select>
+
+                                            <div class="col-xs-1">
+                                                <button type="button" class="btn btn-default removeButton1"><i class="fa fa-minus"></i></button>
+                                            </div>
+                                            </div>
+                                        </div>
                                 </div>
                             </div>
-                        <div class="row">
-                            <div class="form-group hide" id="bookTemplate1">
-                                <div class="col-sm-6">
-                                <label for="exampleInputPassword1">Outras Atividades</label>
-                                    <select id="mySel" class="form-control">
-                                        <option> teste 001</option>
-                                        <option> teste 002</option>
-                                        <option> teste 003</option>
-                                        <option> teste 004</option>
-                                        <option> teste 005</option>
-
-                                    </select>
-
-                                <div class="col-xs-1">
-                                    <button type="button" class="btn btn-default removeButton1"><i class="fa fa-minus"></i></button>
-                                </div>
-                                </div>
-                            </div>
-                    </div>
-                </div>
                         </div>
                         <div class="tab-pane tab3" id="tab3">
                             <div class="row">
                                 <div class="col-sm-2">
                                     <label for="exampleInputPassword1">CPF Socio</label>
-                                    <input type="text" class="form-control" name="book[0].title" placeholder="CPF Socio" />
+                                    <input type="text" class="form-control" ng-model="empresa.socios[0].documentos[0].numero" name="book[0].title" placeholder="CPF Socio" />
                                 </div>
                                 <div class="col-sm-4">
                                     <label for="exampleInputPassword1">Nome Socio</label>
-                                    <input type="text" class="form-control" name="book[0].isbn" placeholder="Nome Socio" />
+                                    <input type="text" class="form-control" ng-model="empresa.socios[0].documentos[0].nome" name="book[0].isbn" placeholder="Nome Socio" />
                                 </div>
                                 <div class="col-sm-2">
                                     <label for="exampleInputPassword1">Porcentagem</label>
-                                    <input type="text" class="form-control" name="book[0].price" placeholder="%" />
+                                    <input type="text" class="form-control" ng-model="empresa.socios[0].porcentagem" name="book[0].price" placeholder="%" />
                                 </div>
                                 <div class="col-sm-3" style="margin-top:18px">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="receiver" value="0" checked /> Socio Administrador ?
+                                            <input type="checkbox" name="receiver" ng-model="empresa.socios[0].socioAdm" value="1" /> Socio Administrador ?
                                         </label>
                                     </div>
                                 </div>
@@ -392,6 +397,7 @@
                             <li class="previous"><a href="javascript:;">Previous</a></li>
                             <li class="next last" style="display:none;"><a href="javascript:;">Last</a></li>
                             <li class="next"><a href="javascript:;">Next</a></li>
+                            <li class=""><a href="javascript:;" ng-click="cc.teste()">save</a></li>
                         </ul>
                     </div>
                 </div>
@@ -402,7 +408,7 @@
     </div>
     <script>
     $(document).ready(function() {
-        
+
 
         var titleValidators = {
             row: '#nome-completo',   // The title is placed inside a <div class="col-xs-4"> element

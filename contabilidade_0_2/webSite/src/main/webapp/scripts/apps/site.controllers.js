@@ -26,12 +26,12 @@
         //  var commonControllers =  angular.module('wdApp.controllers', ['LoginController']);
          // console.log(commonControllers.login());
 
-         /*
+
           SysMgmtData.processPostPageData(fetch_url, new qat.model.siteInquiryRequest( 100/20, true, "http://localhost:8080/webSite/"), function(res){
                console.log(res)
                pvm.site = new qat.model.Site(res.sites[0]);
           });
-        */
+
        //  SysMgmtData.processPostPageData("fetch_url", {cep : '38082243'}, function(res){
         //       console.log(res)
         //       pvm.site = new qat.model.Site(res.sites[0]);
@@ -54,7 +54,7 @@
               }).success(function(response){
                 console.log(response)
               });
-
+            */
           var config = {headers: {
             'X-Cosmos-Token': 'T9pFIi3coAXpypnWF4miGw',
             'Content-Type': 'application/json',
@@ -65,9 +65,6 @@
             }
         };
 
-          var formatedCep;
-            //formatedCep = cepValue.replace(/\D/g, '');
-          var formatedCep = cepValue.replace(/\D/g, '');
           var viaCepUrl = 'https://cosmos.bluesoft.com.br/api/gtins/7891910000197/json/';
           $http.get(viaCepUrl,config).then(function(response) {
             var raw;
@@ -78,7 +75,7 @@
             } else {
               return deferred.resolve(raw);
             }
-          });*/
+          });
 
     }
 

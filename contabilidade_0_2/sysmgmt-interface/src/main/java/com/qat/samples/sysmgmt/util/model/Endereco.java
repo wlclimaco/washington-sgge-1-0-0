@@ -32,9 +32,11 @@ public class Endereco extends ModelCosmeDamiao
 	/** The cep. */
 	private String cep;
 
-	private String latitude;
+	private Double latitude;
 
-	private String longitude;
+	private Double longitude;
+
+	private String codIbge;
 
 	private String complemento;
 
@@ -245,20 +247,30 @@ public class Endereco extends ModelCosmeDamiao
 
 
 
-	public String getLatitude() {
+
+
+	public Double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(String latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 
-	public String getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(String longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
+	}
+
+	public String getCodIbge() {
+		return codIbge;
+	}
+
+	public void setCodIbge(String codIbge) {
+		this.codIbge = codIbge;
 	}
 
 	@Override
@@ -267,8 +279,8 @@ public class Endereco extends ModelCosmeDamiao
 				+ ", getLogradouro()=" + getLogradouro() + ", getCidade()=" + getCidade() + ", getEstado()="
 				+ getEstado() + ", getBairro()=" + getBairro() + ", getNumero()=" + getNumero() + ", getCep()="
 				+ getCep() + ", getComplemento()=" + getComplemento() + ", getEnderecoType()=" + getEnderecoType()
-				+ ", getLatitude()=" + getLatitude() + ", getLongitude()=" + getLongitude() + ", toString()="
-				+ super.toString() + "]";
+				+ ", getLatitude()=" + getLatitude() + ", getLongitude()=" + getLongitude() + ", getCodIbge()="
+				+ getCodIbge() + ", toString()=" + super.toString() + "]";
 	}
 
 }
