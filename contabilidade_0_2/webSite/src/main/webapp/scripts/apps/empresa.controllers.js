@@ -4,11 +4,11 @@
      function($scope, $rootScope, SysMgmtData, toastr, toastrConfig,location ,$http, $q) {
 		var pvm = this;
 		var initLoad = true; //used to ensure not calling server multiple times
-		var fetch_url =    WebDaptiveAppConfig.base_site_url +  WebDaptiveAppConfig.fetch_url;
-		var refresh_url =  WebDaptiveAppConfig.base_site_url +  WebDaptiveAppConfig.refresh_url;
-		var create_url =   WebDaptiveAppConfig.base_site_url +  WebDaptiveAppConfig.create_url;
-		var update_url =   WebDaptiveAppConfig.base_site_url +  WebDaptiveAppConfig.update_url;
-		var delete_url =   WebDaptiveAppConfig.base_site_url +  WebDaptiveAppConfig.delete_url;
+		var fetch_url =    WebDaptiveAppConfig.base_empresa_url +"/empresa"+  WebDaptiveAppConfig.fetch_url;
+		var refresh_url =  WebDaptiveAppConfig.base_empresa_url +"/empresa"+   WebDaptiveAppConfig.refresh_url;
+		var create_url =   WebDaptiveAppConfig.base_empresa_url +"/empresa"+   WebDaptiveAppConfig.create_url;
+		var update_url =   WebDaptiveAppConfig.base_empresa_url +"/empresa"+   WebDaptiveAppConfig.update_url;
+		var delete_url =   WebDaptiveAppConfig.base_empresa_url +"/empresa"+   WebDaptiveAppConfig.delete_url;
 		pvm.isActive = false;
 		toastrConfig.closeButton = true;
 
@@ -103,39 +103,8 @@
                        modifyDateUTC  : (new Date()).getTime(),
 
                     }],
-          emails              : [{
-                       id : 0,
-                       typeValue : 0,
-                       email : '',
-                       emailTypeEnumValue : 0,
-                       parentId       : 0,
-                       emprId         : 0,
-                       processId      : 0,
-                       tableEnumValue : 0,
-                       modelAction    : "NONE",
-                       createUser     : $rootScope.user.user,
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : $rootScope.user.user,
-                       modifyDateUTC  : (new Date()).getTime(),
 
-                    }],
-          telefones           : [{
-                       id : 0,
-                       typeValue : 0,
-                       ddd : '',
-                       numero : '',
-                       telefoneTypeEnumValue : 0,
-                       parentId       : 0,
-                       emprId         : 0,
-                       processId      : 0,
-                       tableEnumValue : 0,
-                       modelAction    : 0,
-                       createUser     : $rootScope.user.user,
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : $rootScope.user.user,
-                       modifyDateUTC  : (new Date()).getTime(),
-                    }],
-          cnaes               : [{
+          cnaes   : [{
                        id : 0,
                        idCnae : {
 
@@ -243,12 +212,115 @@
                     }]
 
         }
+
+
+        //reusable processGetData (insert, update, pagedFetch, delete)
+        function processPostData(_url, _req, _bLoading){
+
+            SysMgmtData.processPostPageData(_url, _req, function(res){
+                if (res){
+                    initLoad = true;
+                    debugger
+                }
+                else{
+                   debugger
+                }
+            });
+        };
+
+        $scope.submit = function() {
+            processPostData(create_url, new qat.model.reqEmpr($scope.empresa ,true, true), true);
+          };
+        $scope.doIfChecked = function(_ckecked,_value,_nome) {
+
+
+            console.log(_value);
+        }
         console.log($scope.empresa.usuarios[0].nome)
         $scope.empresa.usuarios[0].nome = 'teste'
         console.log($scope.empresa.usuarios[0].nome)
          pvm.teste = function(){
-            console.log($scope.empresa)
+            console.log($scope.empresa);
+            var count = 0;
+            var bb = [];
+            $('.gugu:visible').each(function() {
+                bb.push(fnTelefones($(this).val(),count,1));
+                count = count + 1;
+            });
+            $scope.empresa.telefones = bb;
+
+            // email
+            count = 0;
+            bb = [];
+            $('.input-email:visible').each(function() {
+                bb.push(fnEmails($(this).val(),count,1));
+                count = count + 1;
+            });
+            $scope.empresa.emails = bb;
+            console.log($scope.empresa);
         }
+        fnTelefones =function(numero,id,type)
+        {
+
+            telefones = {
+               id : id,
+               typeValue : 0,
+               ddd : '',
+               numero : numero,
+               telefoneTypeEnumValue : type,
+               parentId       : 0,
+               emprId         : 0,
+               processId      : 0,
+               tableEnumValue : 0,
+               modelAction    : 0,
+               createUser     : $rootScope.user.user,
+               createDateUTC  : (new Date()).getTime(),
+               modifyUser     : $rootScope.user.user,
+               modifyDateUTC  : (new Date()).getTime()
+            }
+
+            return telefones;
+        }
+
+        fnEmails =function(email,id,type)
+        {
+            emails  = {
+               id : id,
+               typeValue : 0,
+               email : email,
+               emailTypeEnumValue : type,
+               parentId       : 0,
+               emprId         : 0,
+               processId      : 0,
+               tableEnumValue : 0,
+               modelAction    : "NONE",
+               createUser     : $rootScope.user.user,
+               createDateUTC  : (new Date()).getTime(),
+               modifyUser     : $rootScope.user.user,
+               modifyDateUTC  : (new Date()).getTime()
+
+            }
+            return emails;
+        }
+
+
+        validateTab = function(index) {
+            var fv   = $('#empresaForm').data('formValidation'), // FormValidation instance
+                // The current tab
+                $tab = $('#empresaForm').find('.tab-pane').eq(index);
+
+            // Validate the container
+            fv.validateContainer($tab);
+
+            var isValidStep = fv.isValidContainer($tab);
+            if (isValidStep === false || isValidStep === null) {
+                // Do not jump to the target tab
+                return false;
+            }
+
+            return true;
+        }
+
           $('#dashboard-header').hide();
           $('#header').hide();
       //    debugger

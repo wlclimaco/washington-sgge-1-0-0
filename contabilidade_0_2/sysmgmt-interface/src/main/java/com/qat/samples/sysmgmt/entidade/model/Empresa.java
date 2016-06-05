@@ -21,10 +21,6 @@ public class Empresa extends Entidade
 
 	private Integer qntDeposito;
 
-	private Integer qntSocios;
-
-	private List<Socio> socios;
-
 	private List<Filial> filialList;
 
 	private List<Deposito> depositoList;
@@ -102,21 +98,7 @@ public class Empresa extends Entidade
 		this.qntDeposito = qntDeposito;
 	}
 
-	/**
-	 * @return the socios
-	 */
-	public List<Socio> getSocios()
-	{
-		return socios;
-	}
 
-	/**
-	 * @param socios the socios to set
-	 */
-	public void setSocios(List<Socio> socios)
-	{
-		this.socios = socios;
-	}
 
 	/**
 	 * @return the filialList
@@ -150,16 +132,6 @@ public class Empresa extends Entidade
 		this.depositoList = depositoList;
 	}
 
-	public Integer getQntSocios()
-	{
-		return qntSocios;
-	}
-
-	public void setQntSocios(Integer qntSocios)
-	{
-		this.qntSocios = qntSocios;
-	}
-
 	public List<Usuario> getUsuarioList()
 	{
 		return usuarioList;
@@ -180,13 +152,20 @@ public class Empresa extends Entidade
 		this.contaCorrenteList = contaCorrenteList;
 	}
 
+	public List<TarefaEnt> getTarefaList() {
+		return tarefaList;
+	}
+
+	public void setTarefaList(List<TarefaEnt> tarefaList) {
+		this.tarefaList = tarefaList;
+	}
+
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "Empresa [getPlanoList()=" + getPlanoList() + ", getQntFilial()=" + getQntFilial()
-				+ ", getQntDeposito()=" + getQntDeposito() + ", getSocios()=" + getSocios() + ", getFilialList()="
-				+ getFilialList() + ", getDepositoList()=" + getDepositoList() + ", getQntSocios()=" + getQntSocios()
-				+ ", getUsuarioList()=" + getUsuarioList() + ", getContaCorrenteList()=" + getContaCorrenteList()
+				+ ", getQntDeposito()=" + getQntDeposito() + ", getFilialList()=" + getFilialList()
+				+ ", getDepositoList()=" + getDepositoList() + ", getUsuarioList()=" + getUsuarioList()
+				+ ", getContaCorrenteList()=" + getContaCorrenteList() + ", getTarefaList()=" + getTarefaList()
 				+ ", toString()=" + super.toString() + "]";
 	}
 

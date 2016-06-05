@@ -17,6 +17,8 @@
        exactly. -->
   <resultMap id="UsuarioResult" type="Usuario">
     <result property="id" column="id"/>
+    <result property="email" column="email"/>
+    <result property="telefone" column="telefone"/>
     <result property="emprId" column="emprId"/>
     <result property="processId" column="processId"/>
     <result property="senha" column="senha"/>
@@ -33,6 +35,8 @@
 
   <sql id="allUsuarioColumns">
 id
+,email
+,telefone
 ,emprId
 ,processId
 ,email
@@ -49,6 +53,8 @@ id
 </sql>
 <sql id="allUsuarioValues">
 #{id},
+#{email},
+#{telefone},
 #{emprId},
 #{processId},
 #{senha},
@@ -117,6 +123,8 @@ c.tabelaEnumValue,
    UPDATE usuario SET
 <if test="id!= null">id = #{id},</if>
 <if test="emprId!= null">emprId = #{emprId},</if>
+<if test="email!= null">email = #{email},</if>
+<if test="telefone!= null">telefone = #{telefone},</if>
 <if test="processId!= null">processId = #{processId},</if>
 <if test="senha!= null">senha = #{senha},</if>
 <if test="pergunta!= null">pergunta = #{pergunta},</if>

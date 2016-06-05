@@ -24,6 +24,9 @@ var WebDaptiveAppConfig = {
 	create_url: '/insert',
 	update_url: '/update',
 	delete_url: '/delete',
+
+	base_empresa_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/entidade/api',
+
 };
 
 (function() {

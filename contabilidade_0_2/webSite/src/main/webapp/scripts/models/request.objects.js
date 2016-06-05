@@ -70,3 +70,11 @@
 	 	this.url =  _url;
 	}
 
+		//ProcedureMaintenanceRequest
+	qat.model.reqEmpr = function ( _oEmpr, _bList, _bPagedList)
+	{
+		this.empresa = _oEmpr;
+		this.returnList = _bList;
+		this.returnListPaged = _bPagedList;
+	};
+

@@ -15,7 +15,7 @@ import com.qat.samples.sysmgmt.util.model.Email;
 public class Usuario extends Pessoa
 {
 
-	private String login;
+	private String email;
 
 	private String senha;
 
@@ -89,16 +89,6 @@ public class Usuario extends Pessoa
 		this.language = language;
 	}
 
-	public String getLogin()
-	{
-		return login;
-	}
-
-	public void setLogin(String login)
-	{
-		this.login = login;
-	}
-
 	public Long getUltAcesso()
 	{
 		return ultAcesso;
@@ -137,12 +127,20 @@ public class Usuario extends Pessoa
 		this.cpf = cpf;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public String toString() {
 		return "Usuario [getSenha()=" + getSenha() + ", getPergunta()=" + getPergunta() + ", getRole()=" + getRole()
-				+ ", getLanguage()=" + getLanguage() + ", getLogin()=" + getLogin() + ", getUltAcesso()="
-				+ getUltAcesso() + ", getEmails()=" + getEmails() + ", getTelefone()=" + getTelefone() + ", getCpf()="
-				+ getCpf() + ", toString()=" + super.toString() + "]";
+				+ ", getLanguage()=" + getLanguage() + ", getUltAcesso()=" + getUltAcesso() + ", getEmails()="
+				+ getEmails() + ", getTelefone()=" + getTelefone() + ", getCpf()=" + getCpf() + ", getEmail()="
+				+ getEmail() + ", toString()=" + super.toString() + "]";
 	}
 
 }

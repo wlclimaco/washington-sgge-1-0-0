@@ -1,4 +1,6 @@
 package com.qat.samples.sysmgmt.bac.Empresa;
+/** create by system gera-java version 1.0.0 04/06/2016 19:35 : 11*/
+
 
 
 import org.slf4j.Logger;
@@ -15,7 +17,16 @@ import com.qat.framework.validation.ValidationContext;
 import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.advocacia.Advocacia;
+import com.qat.samples.sysmgmt.advocacia.request.AdvocaciaInquiryRequest;
+import com.qat.samples.sysmgmt.advocacia.request.AdvocaciaMaintenanceRequest;
 import com.qat.samples.sysmgmt.bar.Empresa.IEmpresaBAR;
+import com.qat.samples.sysmgmt.clinica.model.Clinica;
+import com.qat.samples.sysmgmt.clinica.model.request.ClinicaInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.request.ClinicaMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.Condominio;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
@@ -959,6 +970,657 @@ private InternalResultsResponse<Usuario> processUsuario(ValidationContextIndicat
 		else
 		{
 			return new InternalResultsResponse<Usuario>();
+		}
+	}
+
+//===================================### ADVOCACIA ####======================================
+	/**
+/*
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.ICountyBAC#insertAdvocacia(com.qat.samples.sysmgmt.model.request.AdvocaciaMaintenanceRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Advocacia> insertAdvocacia(AdvocaciaMaintenanceRequest request)
+{
+	InternalResultsResponse<Advocacia> response =
+			processAdvocacia(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.IAdvocaciaBAC#updateAdvocacia(com.qat.samples.sysmgmt.model.request.AdvocaciaMaintenanceRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Advocacia> updateAdvocacia(AdvocaciaMaintenanceRequest request)
+{
+	InternalResultsResponse<Advocacia> response =
+			processAdvocacia(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.IAdvocaciaBAC#deleteAdvocacia(com.qat.samples.sysmgmt.model.request.AdvocaciaMaintenanceRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Advocacia> deleteAdvocacia(AdvocaciaMaintenanceRequest request)
+{
+	InternalResultsResponse<Advocacia> response =
+			processAdvocacia(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IAdvocaciaBAC#refreshAdvocacias(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+ */
+@Override
+public InternalResultsResponse<Advocacia> refreshAdvocacias(RefreshRequest request)
+{
+	// This method is demo code only. Do not view this as a QAT Global Standard.
+	getEmpresaBAR().deleteAllAdvocacias();
+	int refreshNumber = request.getRefreshInt();
+	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
+
+	for (int i = 1; i <= refreshNumber; i++)
+	{
+	getEmpresaBAR().insertAdvocacia(new Advocacia(i, "AdvocaciaDesc" + i));
+	}
+
+	// Call maintain to see if we need to return the advocacia list and if so whether it should be paged or not
+	return maintainReturnListAdvocacia(request.getReturnList(), request.getReturnListPaged(),new Advocacia());
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IAdvocaciaBAC#fetchAllAdvocacias(Advocacia advocacia)
+ */
+@Override
+public InternalResultsResponse<Advocacia> fetchAllAdvocacias(Advocacia advocacia)
+{
+	InternalResultsResponse<Advocacia> response = new InternalResultsResponse<Advocacia>();
+	response.getResultsList().addAll(getEmpresaBAR().fetchAllAdvocacias(advocacia).getResultsList());
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.IAdvocaciaBAC#fetchAdvocaciaById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Advocacia> fetchAdvocaciaById(FetchByIdRequest request)
+{
+	InternalResultsResponse<Advocacia> response = new InternalResultsResponse<Advocacia>();
+	// validate fetchId field
+	if (ValidationUtil.isNull(request.getFetchId()))
+	{
+		response.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
+		response.setStatus(SystemErrorCategory.SystemValidation);
+	}
+	else
+	{
+		response.getResultsList().add(getEmpresaBAR().fetchAdvocaciaById(request));
+	}
+
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IAdvocaciaBAC#fetchAdvocaciasByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<Advocacia> fetchAdvocaciasByRequest(AdvocaciaInquiryRequest request)
+{
+	return getEmpresaBAR().fetchAdvocaciasByRequest(request);
+}
+
+/**
+ * Process.
+ *
+ * @param indicator the indicator
+ * @param persistType the persist type
+ * @param request the request
+ * @return the advocacia response
+ */
+private InternalResultsResponse<Advocacia> processAdvocacia(ValidationContextIndicator indicator,
+		PersistenceActionEnum persistType,
+		AdvocaciaMaintenanceRequest request)
+		{
+	InternalResultsResponse<Advocacia> response = null;
+
+	// Validate
+	ValidationContext context = new ValidationContext(Advocacia.class.getSimpleName(), request.getAdvocacia(), indicator);
+	if (!getValidationController().validate(context))
+	{
+		response = new InternalResultsResponse<Advocacia>();
+		response.setStatus(SystemErrorCategory.SystemValidation);
+		response.addMessages(context.getMessages());
+		return response;
+	}
+
+		// Persist
+		InternalResponse internalResponse = doPersistenceAdvocacia(request.getAdvocacia(), persistType);
+		if (internalResponse.isInError())
+		{
+			response = new InternalResultsResponse<Advocacia>();
+			response.setStatus(internalResponse.getError());
+			response.addMessages(internalResponse.getMessageInfoList());
+			response.addMessage(DEFAULT_EMPRESA_BAC_EXCEPTION_MSG, MessageSeverity.Error,
+					MessageLevel.Object, new Object[] {internalResponse.errorToString()});
+
+			return response;
+		}
+
+		// Call maintainReurnList to see if we need to return the advocacia list and if so whether it should be paged or
+		// not
+		response = maintainReturnListAdvocacia(request.getReturnList(), request.getReturnListPaged(),new Advocacia());
+
+		return response;
+			}
+
+	/**
+	 * Do persistenceAdvocacia.
+	 *
+	 * @param request the request
+	 * @param updateType the update type
+	 * @return the internal response
+	 */
+	private InternalResponse doPersistenceAdvocacia(Advocacia advocacia, PersistenceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			case INSERT:
+				return getEmpresaBAR().insertAdvocacia(advocacia);
+
+			case UPDATE:
+				return getEmpresaBAR().updateAdvocacia(advocacia);
+
+			case DELETE:
+				return getEmpresaBAR().deleteAdvocaciaById(advocacia);
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
+		}
+
+		return null;
+	}
+
+	/**
+	 * Maintain return list.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private InternalResultsResponse<Advocacia> maintainReturnListAdvocacia(Boolean listIndicator, Boolean pageListIndicator,Advocacia advocacia)
+	{
+		// Fetch again if requested.
+		if (listIndicator)
+		{
+			// Fetch Paged is requested.
+			if (pageListIndicator)
+			{
+				AdvocaciaInquiryRequest request = new AdvocaciaInquiryRequest();
+				request.setPreQueryCount(true);
+				return fetchAdvocaciasByRequest(request);
+			}
+			else
+			{
+				// otherwise return all rows not paged
+				return fetchAllAdvocacias(advocacia);
+			}
+		}
+		else
+		{
+			return new InternalResultsResponse<Advocacia>();
+		}
+	}
+
+//===================================### CLINICA ####======================================
+	/**
+/*
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.ICountyBAC#insertClinica(com.qat.samples.sysmgmt.model.request.ClinicaMaintenanceRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Clinica> insertClinica(ClinicaMaintenanceRequest request)
+{
+	InternalResultsResponse<Clinica> response =
+			processClinica(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.IClinicaBAC#updateClinica(com.qat.samples.sysmgmt.model.request.ClinicaMaintenanceRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Clinica> updateClinica(ClinicaMaintenanceRequest request)
+{
+	InternalResultsResponse<Clinica> response =
+			processClinica(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.IClinicaBAC#deleteClinica(com.qat.samples.sysmgmt.model.request.ClinicaMaintenanceRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Clinica> deleteClinica(ClinicaMaintenanceRequest request)
+{
+	InternalResultsResponse<Clinica> response =
+			processClinica(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IClinicaBAC#refreshClinicas(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+ */
+@Override
+public InternalResultsResponse<Clinica> refreshClinicas(RefreshRequest request)
+{
+	// This method is demo code only. Do not view this as a QAT Global Standard.
+	getEmpresaBAR().deleteAllClinicas();
+	int refreshNumber = request.getRefreshInt();
+	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
+
+	for (int i = 1; i <= refreshNumber; i++)
+	{
+	getEmpresaBAR().insertClinica(new Clinica(i, "ClinicaDesc" + i));
+	}
+
+	// Call maintain to see if we need to return the clinica list and if so whether it should be paged or not
+	return maintainReturnListClinica(request.getReturnList(), request.getReturnListPaged(),new Clinica());
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IClinicaBAC#fetchAllClinicas(Clinica clinica)
+ */
+@Override
+public InternalResultsResponse<Clinica> fetchAllClinicas(Clinica clinica)
+{
+	InternalResultsResponse<Clinica> response = new InternalResultsResponse<Clinica>();
+	response.getResultsList().addAll(getEmpresaBAR().fetchAllClinicas(clinica).getResultsList());
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.IClinicaBAC#fetchClinicaById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Clinica> fetchClinicaById(FetchByIdRequest request)
+{
+	InternalResultsResponse<Clinica> response = new InternalResultsResponse<Clinica>();
+	// validate fetchId field
+	if (ValidationUtil.isNull(request.getFetchId()))
+	{
+		response.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
+		response.setStatus(SystemErrorCategory.SystemValidation);
+	}
+	else
+	{
+		response.getResultsList().add(getEmpresaBAR().fetchClinicaById(request));
+	}
+
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IClinicaBAC#fetchClinicasByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<Clinica> fetchClinicasByRequest(ClinicaInquiryRequest request)
+{
+	return getEmpresaBAR().fetchClinicasByRequest(request);
+}
+
+/**
+ * Process.
+ *
+ * @param indicator the indicator
+ * @param persistType the persist type
+ * @param request the request
+ * @return the clinica response
+ */
+private InternalResultsResponse<Clinica> processClinica(ValidationContextIndicator indicator,
+		PersistenceActionEnum persistType,
+		ClinicaMaintenanceRequest request)
+		{
+	InternalResultsResponse<Clinica> response = null;
+
+	// Validate
+	ValidationContext context = new ValidationContext(Clinica.class.getSimpleName(), request.getClinica(), indicator);
+	if (!getValidationController().validate(context))
+	{
+		response = new InternalResultsResponse<Clinica>();
+		response.setStatus(SystemErrorCategory.SystemValidation);
+		response.addMessages(context.getMessages());
+		return response;
+	}
+
+		// Persist
+		InternalResponse internalResponse = doPersistenceClinica(request.getClinica(), persistType);
+		if (internalResponse.isInError())
+		{
+			response = new InternalResultsResponse<Clinica>();
+			response.setStatus(internalResponse.getError());
+			response.addMessages(internalResponse.getMessageInfoList());
+			response.addMessage(DEFAULT_EMPRESA_BAC_EXCEPTION_MSG, MessageSeverity.Error,
+					MessageLevel.Object, new Object[] {internalResponse.errorToString()});
+
+			return response;
+		}
+
+		// Call maintainReurnList to see if we need to return the clinica list and if so whether it should be paged or
+		// not
+		response = maintainReturnListClinica(request.getReturnList(), request.getReturnListPaged(),new Clinica());
+
+		return response;
+			}
+
+	/**
+	 * Do persistenceClinica.
+	 *
+	 * @param request the request
+	 * @param updateType the update type
+	 * @return the internal response
+	 */
+	private InternalResponse doPersistenceClinica(Clinica clinica, PersistenceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			case INSERT:
+				return getEmpresaBAR().insertClinica(clinica);
+
+			case UPDATE:
+				return getEmpresaBAR().updateClinica(clinica);
+
+			case DELETE:
+				return getEmpresaBAR().deleteClinicaById(clinica);
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
+		}
+
+		return null;
+	}
+
+	/**
+	 * Maintain return list.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private InternalResultsResponse<Clinica> maintainReturnListClinica(Boolean listIndicator, Boolean pageListIndicator,Clinica clinica)
+	{
+		// Fetch again if requested.
+		if (listIndicator)
+		{
+			// Fetch Paged is requested.
+			if (pageListIndicator)
+			{
+				ClinicaInquiryRequest request = new ClinicaInquiryRequest();
+				request.setPreQueryCount(true);
+				return fetchClinicasByRequest(request);
+			}
+			else
+			{
+				// otherwise return all rows not paged
+				return fetchAllClinicas(clinica);
+			}
+		}
+		else
+		{
+			return new InternalResultsResponse<Clinica>();
+		}
+	}
+
+//===================================### CONDOMINIO ####======================================
+	/**
+/*
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.ICountyBAC#insertCondominio(com.qat.samples.sysmgmt.model.request.CondominioMaintenanceRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Condominio> insertCondominio(CondominioMaintenanceRequest request)
+{
+	InternalResultsResponse<Condominio> response =
+			processCondominio(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.ICondominioBAC#updateCondominio(com.qat.samples.sysmgmt.model.request.CondominioMaintenanceRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Condominio> updateCondominio(CondominioMaintenanceRequest request)
+{
+	InternalResultsResponse<Condominio> response =
+			processCondominio(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.ICondominioBAC#deleteCondominio(com.qat.samples.sysmgmt.model.request.CondominioMaintenanceRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Condominio> deleteCondominio(CondominioMaintenanceRequest request)
+{
+	InternalResultsResponse<Condominio> response =
+			processCondominio(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.ICondominioBAC#refreshCondominios(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+ */
+@Override
+public InternalResultsResponse<Condominio> refreshCondominios(RefreshRequest request)
+{
+	// This method is demo code only. Do not view this as a QAT Global Standard.
+	getEmpresaBAR().deleteAllCondominios();
+	int refreshNumber = request.getRefreshInt();
+	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
+
+	for (int i = 1; i <= refreshNumber; i++)
+	{
+	getEmpresaBAR().insertCondominio(new Condominio(i, "CondominioDesc" + i));
+	}
+
+	// Call maintain to see if we need to return the condominio list and if so whether it should be paged or not
+	return maintainReturnListCondominio(request.getReturnList(), request.getReturnListPaged(),new Condominio());
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.ICondominioBAC#fetchAllCondominios(Condominio condominio)
+ */
+@Override
+public InternalResultsResponse<Condominio> fetchAllCondominios(Condominio condominio)
+{
+	InternalResultsResponse<Condominio> response = new InternalResultsResponse<Condominio>();
+	response.getResultsList().addAll(getEmpresaBAR().fetchAllCondominios(condominio).getResultsList());
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.ICondominioBAC#fetchCondominioById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Condominio> fetchCondominioById(FetchByIdRequest request)
+{
+	InternalResultsResponse<Condominio> response = new InternalResultsResponse<Condominio>();
+	// validate fetchId field
+	if (ValidationUtil.isNull(request.getFetchId()))
+	{
+		response.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
+		response.setStatus(SystemErrorCategory.SystemValidation);
+	}
+	else
+	{
+		response.getResultsList().add(getEmpresaBAR().fetchCondominioById(request));
+	}
+
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.ICondominioBAC#fetchCondominiosByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<Condominio> fetchCondominiosByRequest(CondominioInquiryRequest request)
+{
+	return getEmpresaBAR().fetchCondominiosByRequest(request);
+}
+
+/**
+ * Process.
+ *
+ * @param indicator the indicator
+ * @param persistType the persist type
+ * @param request the request
+ * @return the condominio response
+ */
+private InternalResultsResponse<Condominio> processCondominio(ValidationContextIndicator indicator,
+		PersistenceActionEnum persistType,
+		CondominioMaintenanceRequest request)
+		{
+	InternalResultsResponse<Condominio> response = null;
+
+	// Validate
+	ValidationContext context = new ValidationContext(Condominio.class.getSimpleName(), request.getCondominio(), indicator);
+	if (!getValidationController().validate(context))
+	{
+		response = new InternalResultsResponse<Condominio>();
+		response.setStatus(SystemErrorCategory.SystemValidation);
+		response.addMessages(context.getMessages());
+		return response;
+	}
+
+		// Persist
+		InternalResponse internalResponse = doPersistenceCondominio(request.getCondominio(), persistType);
+		if (internalResponse.isInError())
+		{
+			response = new InternalResultsResponse<Condominio>();
+			response.setStatus(internalResponse.getError());
+			response.addMessages(internalResponse.getMessageInfoList());
+			response.addMessage(DEFAULT_EMPRESA_BAC_EXCEPTION_MSG, MessageSeverity.Error,
+					MessageLevel.Object, new Object[] {internalResponse.errorToString()});
+
+			return response;
+		}
+
+		// Call maintainReurnList to see if we need to return the condominio list and if so whether it should be paged or
+		// not
+		response = maintainReturnListCondominio(request.getReturnList(), request.getReturnListPaged(),new Condominio());
+
+		return response;
+			}
+
+	/**
+	 * Do persistenceCondominio.
+	 *
+	 * @param request the request
+	 * @param updateType the update type
+	 * @return the internal response
+	 */
+	private InternalResponse doPersistenceCondominio(Condominio condominio, PersistenceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			case INSERT:
+				return getEmpresaBAR().insertCondominio(condominio);
+
+			case UPDATE:
+				return getEmpresaBAR().updateCondominio(condominio);
+
+			case DELETE:
+				return getEmpresaBAR().deleteCondominioById(condominio);
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
+		}
+
+		return null;
+	}
+
+	/**
+	 * Maintain return list.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private InternalResultsResponse<Condominio> maintainReturnListCondominio(Boolean listIndicator, Boolean pageListIndicator,Condominio condominio)
+	{
+		// Fetch again if requested.
+		if (listIndicator)
+		{
+			// Fetch Paged is requested.
+			if (pageListIndicator)
+			{
+				CondominioInquiryRequest request = new CondominioInquiryRequest();
+				request.setPreQueryCount(true);
+				return fetchCondominiosByRequest(request);
+			}
+			else
+			{
+				// otherwise return all rows not paged
+				return fetchAllCondominios(condominio);
+			}
+		}
+		else
+		{
+			return new InternalResultsResponse<Condominio>();
 		}
 	}
 }

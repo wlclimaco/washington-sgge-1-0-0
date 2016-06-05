@@ -5,6 +5,8 @@ import java.util.List;
 import com.qat.samples.sysmgmt.banco.model.BancoPessoa;
 import com.qat.samples.sysmgmt.cnae.model.CnaeEmpresa;
 import com.qat.samples.sysmgmt.fiscal.model.Regime;
+import com.qat.samples.sysmgmt.pessoa.model.Socio;
+import com.qat.samples.sysmgmt.site.model.ServicoAndPlano;
 import com.qat.samples.sysmgmt.util.model.Configuracao;
 import com.qat.samples.sysmgmt.util.model.Documento;
 import com.qat.samples.sysmgmt.util.model.Email;
@@ -48,6 +50,10 @@ public class Entidade extends ModelCosmeDamiao
 	private List<Usuario> usuarios;
 
 	private List<BancoPessoa> bancos;
+
+	private List<ServicoAndPlano> planosServicos;
+
+	private List<Socio> socios;
 
 	private List<NotificationPreferences> notificacoes;
 
@@ -287,16 +293,32 @@ public class Entidade extends ModelCosmeDamiao
 		this.numFunc = numFunc;
 	}
 
+	public List<ServicoAndPlano> getPlanosServicos() {
+		return planosServicos;
+	}
+
+	public void setPlanosServicos(List<ServicoAndPlano> planosServicos) {
+		this.planosServicos = planosServicos;
+	}
+
+	public List<Socio> getSocios() {
+		return socios;
+	}
+
+	public void setSocios(List<Socio> socios) {
+		this.socios = socios;
+	}
+
 	@Override
-	public String toString()
-	{
-		return "Entidade [getUsuarios()=" + getUsuarios() + ", getBancos()=" + getBancos()
-				+ ", getEntidadeEnumValue()=" + getEntidadeEnumValue() + ", getId()=" + getId() + ", getNome()="
-				+ getNome() + ", getEnderecos()=" + getEnderecos() + ", getDocumentos()=" + getDocumentos()
-				+ ", getEmails()=" + getEmails() + ", getTelefones()=" + getTelefones() + ", getCnaes()=" + getCnaes()
-				+ ", getRegime()=" + getRegime() + ", getEntidadeEnum()=" + getEntidadeEnum() + ", getConfiguracao()="
-				+ getConfiguracao() + ", getEntidadeId()=" + getEntidadeId() + ", getNotificacoes()="
-				+ getNotificacoes() + ", toString()=" + super.toString() + "]";
+	public String toString() {
+		return "Entidade [getUsuarios()=" + getUsuarios() + ", getBancos()=" + getBancos() + ", getEntidadeEnumValue()="
+				+ getEntidadeEnumValue() + ", getId()=" + getId() + ", getNome()=" + getNome() + ", getEnderecos()="
+				+ getEnderecos() + ", getDocumentos()=" + getDocumentos() + ", getEmails()=" + getEmails()
+				+ ", getTelefones()=" + getTelefones() + ", getCnaes()=" + getCnaes() + ", getRegime()=" + getRegime()
+				+ ", getEntidadeEnum()=" + getEntidadeEnum() + ", getConfiguracao()=" + getConfiguracao()
+				+ ", getEntidadeId()=" + getEntidadeId() + ", getNotificacoes()=" + getNotificacoes()
+				+ ", getNumFunc()=" + getNumFunc() + ", getPlanosServicos()=" + getPlanosServicos() + ", getSocios()="
+				+ getSocios() + ", toString()=" + super.toString() + "]";
 	}
 
 }
