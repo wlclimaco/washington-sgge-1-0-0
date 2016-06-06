@@ -12,6 +12,19 @@ function EmpresaFormModel() {
 	return a;
 }
 
+function ClienteFormModel() {
+
+	var a = [];
+	a.push({field :{campo : "id",label:"", ngmodel:'empresa.id', class:"hide", tipo :"Integer",requerid : false ,mask:"",tamanho : '12',msg:'',tipo :'input'}});
+	a.push({field :{campo : "nome",label:"Razão Social", ngmodel:'empresa.nome', class:"", tipo :"String",requerid : true ,mask:"",tamanho : '9',msg:'',tipo :'input'}});
+	a.push({field :{campo : "numeroFuncionario",label:"Numero Funcionarios", ngmodel:'empresa.numFunc', class:"", validator:['integer'], tipo :"Integer",requerid : true ,mask:"",tamanho : '3',msg:'',tipo :'input'}});
+	a.push({field :{campo : "entidadeEnumValue",label:"Tipo Empresa", ngmodel:'empresa.entidadeEnumValue', class:"hide", tipo :"Integer",requerid : false ,mask:"",tamanho : '6',msg:'',tipo :'input'}});
+	a.push({field :{campo : "regime",label:"Regime Tributario Empresa", ngmodel:'empresa.regime.id', class:"", tipo :"Integer",requerid : false ,mask:"",tamanho : '6',msg:'',tipo :'radio',domain :[{label : 'Simples Nacional',value : '1'},{label : 'Lucro Real',value:'2'},{label : 'Lucro Presumido',value:'3'}]}});
+	a.push({field :{campo : "statusInicial",label:"Sua Empresa Esta Ativa?", ngmodel:'empresa.statusInicial', class:"", tipo :"Integer",requerid : false ,mask:"",tamanho : '6',msg:'',tipo :'radio',domain :[{label : 'Sim',value : 'sim'},{label : 'Não',value:'nao'}]}});
+
+	return a;
+}
+
 function DocumentoFormModel() {
 
 	var a = [];
@@ -121,6 +134,36 @@ function EmpresaFormTest() {
 	return a;
 }
 
+function PessoaFormTest() {
+
+	var a = [];
+	a.push({
+		formType : 'Tab',
+		tabs :[{tabName : 'informaçoes usuario',field :{table : [
+			EmpresaFormModel()[0],
+			EmpresaFormModel()[1],
+			EmpresaFormModel()[2],
+			EmpresaFormModel()[4],
+			EmpresaFormModel()[5],
+			EnderecoFormModel()[0],
+			EnderecoFormModel()[6],
+			EnderecoFormModel()[1],
+			EnderecoFormModel()[2],
+			EnderecoFormModel()[3],
+			EnderecoFormModel()[4],
+			EnderecoFormModel()[9],
+			CnaeFormModel()[0],
+			CnaeFormModel()[1],
+
+
+			]}}]
+
+	});
+	return a;
+}
+
+
+// CLIENTE FORNECEDOR TRANSPORTADOR
 Nome ou Razão social
 Nome Fantasia
 CPF ou CNPJ
@@ -140,3 +183,55 @@ País
 Nome do responsável
 Telefone
 E-mail
+Telefone
+E-mail
+Data nascimento
+
+
+//Produto
+ // dados Gerais
+ Nome
+CadastrarCategoria
+Código personalizado
+Unidade tributada
+UN
+Margem de lucro
+Preço de custo
+Preço de venda
+Inform. adicionais para a NFe
+Referência EAN/GTIN
+NCM (Encontre NCMs)
+Exceção tab IPI
+CEST
+Anotações internas
+Não controlar estoque
+ Arquivar (esconder)
+Estoque mínimo
+Palavras-chave
+
+//dados tributarios
+PESOS
+Peso unitário líquido (kg)
+Peso unitário bruto (kg)
+CFOP
+CFOP padrão para NFe
+ICMS
+Situação Tributária
+Origem
+IPI
+Situação tributária
+Classe cigarros e bebidas
+CNPJ Produtor
+Cod. selo controle IPI
+Qtd. selo IPI
+Cód. enquadramento (buscar)
+999
+PIS
+Situação tributária
+Tipo de cálculo Subst. Trib.
+	 
+COFINS
+Situação Tributária
+
+Tipo de cálculo Subst. Trib.
+
