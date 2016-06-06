@@ -75,7 +75,7 @@
           emprId              : 0,
           processId           : 0,
           tableEnumValue      : 1,
-          modelAction         : 'NONE',
+          modelAction         : 'INSERT',
           createUser          : $rootScope.user.user,
           createDateUTC       : (new Date()).getTime(),
           modifyUser          : $rootScope.user.user,
@@ -87,7 +87,7 @@
                        documentoTypeEnumValue : 0,
                        numero : 0,
                        tableEnumValue : 2,
-                       modelAction    : "NONE",
+                       modelAction    : "INSERT",
                        createUser     : $rootScope.user.user,
                        createDateUTC  : (new Date()).getTime(),
                        modifyUser     : $rootScope.user.user,
@@ -139,9 +139,7 @@
 
             console.log(_value);
         }
-        console.log($scope.empresa.usuarios[0].nome)
-        $scope.empresa.usuarios[0].nome = 'teste'
-        console.log($scope.empresa.usuarios[0].nome)
+
          pvm.teste = function(){
             console.log($scope.empresa);
             var count = 0;

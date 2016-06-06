@@ -35,6 +35,7 @@
 		<property name="siteBAR" ref="siteBARTarget" />
 		<property name="financeiroBAR" ref="financeiroBARTarget" />
 		<property name="notesBAR" ref="notesBARTarget" />
+		<property name="empresaBAR" ref="empresaBARTarget" />
 
 	</bean>
 
