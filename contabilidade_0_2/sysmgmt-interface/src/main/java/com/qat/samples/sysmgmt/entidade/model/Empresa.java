@@ -25,8 +25,6 @@ public class Empresa extends Entidade
 
 	private List<Deposito> depositoList;
 
-	private List<Usuario> usuarioList;
-
 	private List<ContaCorrente> contaCorrenteList;
 
 	private List<TarefaEnt> tarefaList;
@@ -132,16 +130,6 @@ public class Empresa extends Entidade
 		this.depositoList = depositoList;
 	}
 
-	public List<Usuario> getUsuarioList()
-	{
-		return usuarioList;
-	}
-
-	public void setUsuarioList(List<Usuario> usuarioList)
-	{
-		this.usuarioList = usuarioList;
-	}
-
 	public List<ContaCorrente> getContaCorrenteList()
 	{
 		return contaCorrenteList;
@@ -164,9 +152,8 @@ public class Empresa extends Entidade
 	public String toString() {
 		return "Empresa [getPlanoList()=" + getPlanoList() + ", getQntFilial()=" + getQntFilial()
 				+ ", getQntDeposito()=" + getQntDeposito() + ", getFilialList()=" + getFilialList()
-				+ ", getDepositoList()=" + getDepositoList() + ", getUsuarioList()=" + getUsuarioList()
-				+ ", getContaCorrenteList()=" + getContaCorrenteList() + ", getTarefaList()=" + getTarefaList()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", getDepositoList()=" + getDepositoList() + ", getContaCorrenteList()=" + getContaCorrenteList()
+				+ ", getTarefaList()=" + getTarefaList() + ", toString()=" + super.toString() + "]";
 	}
 
 }

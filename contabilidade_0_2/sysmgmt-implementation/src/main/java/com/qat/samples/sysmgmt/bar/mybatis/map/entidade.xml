@@ -37,8 +37,8 @@
   </resultMap>
 
   <sql id="allEntidadeColumns">
-id
-,nome
+
+nome
 ,processId
 ,entidadeId
 ,emprId
@@ -51,7 +51,7 @@ id
 
 </sql>
 <sql id="allEntidadeValues">
-#{id},
+
 #{nome},
 #{processId},
 #{entidadeId},
@@ -79,11 +79,11 @@ c.regime,
 		c.modifyUser
  </sql>
 
- <insert id="insertEntidade" parameterType="Empresa">
+ <insert id="insertEntidade" parameterType="Empresa" useGeneratedKeys="true" keyProperty="id">
  	INSERT INTO entidade (
-	<include refid="allEntidadeColumns" />
+	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allEntidadeColumns" />
      )
-   VALUES (<include refid="allEntidadeValues" /> )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if> <include refid="allEntidadeValues" /> )
  </insert>
 
  <update id="updateEntidade" parameterType="Empresa">

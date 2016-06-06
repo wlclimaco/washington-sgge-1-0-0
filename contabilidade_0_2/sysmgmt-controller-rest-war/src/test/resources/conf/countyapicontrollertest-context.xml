@@ -42,4 +42,8 @@
 	    <constructor-arg value="com.qat.samples.sysmgmt.bac.Site.ISiteBAC" />
 	</bean>
 
+	<bean id="empresaBACTarget" class="org.mockito.Mockito" factory-method="mock">
+	    <constructor-arg value="com.qat.samples.sysmgmt.bac.Empresa.IEmpresaBAC" />
+	</bean>
+
 </beans>

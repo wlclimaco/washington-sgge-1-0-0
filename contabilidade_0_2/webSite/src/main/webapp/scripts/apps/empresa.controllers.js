@@ -22,42 +22,13 @@
 
         $scope.empresa ={
 
-          id                  : 0,
           nome                : '',
           entidadeId          : 0,
-          numFunc             : 0,
+          numFunc             : null,
           statusInicial       : null,
           entidadeEnumValue   : 1,
-          socios              :[{
-                      cota : 0,
-                      porcentagem : "",
-                      socioAdm : 0,
-                      documentos          : [{
-                                 id : 0,
-                                 documentoTypeEnumValue : 1,
-                                 numero : 0,
-                                 data : null,
-                                 parentId       : 0,
-                                 emprId         : 0,
-                                 processId      : 0,
-                                 tableEnumValue : 1,
-                                 modelAction    : "NONE",
-                                 createUser     : $rootScope.user.user,
-                                 createDateUTC  : (new Date()).getTime(),
-                                 modifyUser     : $rootScope.user.user,
-                                 modifyDateUTC  : (new Date()).getTime(),
-
-                              }],
-                    }],
           regime              : {
              id : 0,
-             nome : '',
-             descricao : '',
-             statusInicial  : 0,
-             parentId       : 0,
-             emprId         : 0,
-             processId      : 0,
-             tableEnumValue : 0,
              modelAction    : "NONE",
              createUser     : $rootScope.user.user,
              createDateUTC  : (new Date()).getTime(),
@@ -65,15 +36,10 @@
              modifyDateUTC  : (new Date()).getTime(),
           },
           documentos          : [{
-                       id : 0,
                        documentoTypeEnumValue : 1,
                        numero : 0,
-                       data : null,
-                       parentId       : 0,
-                       emprId         : 0,
-                       processId      : 0,
                        tableEnumValue : 1,
-                       modelAction    : "NONE",
+                       modelAction    : "INSERT",
                        createUser     : $rootScope.user.user,
                        createDateUTC  : (new Date()).getTime(),
                        modifyUser     : $rootScope.user.user,
@@ -81,7 +47,6 @@
 
                     }],
           enderecos           : [{
-                       id : 0,
                        codIbge : 0,
                        logradouro : '',
                        bairro : '',
@@ -91,12 +56,13 @@
                        latitude : '',
                        longitude : '',
                        complemento : '',
-                       cidade : {nome : "",estado:''},
+                       cidade : {nome : ""},
+                       estado : {nome : ""},
                        parentId       : 0,
                        emprId         : 0,
                        processId      : 0,
                        tableEnumValue : 0,
-                       modelAction    :  "NONE",
+                       modelAction    :  "INSERT",
                        createUser     : $rootScope.user.user,
                        createDateUTC  : (new Date()).getTime(),
                        modifyUser     : $rootScope.user.user,
@@ -104,65 +70,7 @@
 
                     }],
 
-          cnaes   : [{
-                       id : 0,
-                       idCnae : {
 
-                           id : 0,
-                           codigo : '',
-                           cnae : '',
-                           descricao : '',
-                           abreviado : '',
-                           parentId       : 0,
-                           emprId         : 0,
-                           processId      : 0,
-                           tableEnumValue : 0,
-                           modelAction    : "NONE",
-                           createUser     : $rootScope.user.user,
-                           createDateUTC  : (new Date()).getTime(),
-                           modifyUser     : $rootScope.user.user,
-                           modifyDateUTC  : (new Date()).getTime(),
-
-                       },
-                       parentId       : 1,
-                       emprId         : 0,
-                       processId      : 0,
-                       tableEnumValue : 0,
-                       modelAction    : "NONE",
-                       createUser     : $rootScope.user.user,
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : $rootScope.user.user,
-                       modifyDateUTC  : (new Date()).getTime(),
-                    }],
-          statusList          : [{
-                           id : 0,
-                           dataStatus :(new Date()).getTime(),
-                           statusValue : 0,
-                           acaoEnumValue : 0,
-                           note : 0,
-                           parentId       : 0,
-                           emprId         : 0,
-                           processId      : 0,
-                           tableEnumValue : 0,
-                           modelAction    : "NONE",
-                           createUser     : $rootScope.user.user,
-                           createDateUTC  : (new Date()).getTime(),
-                           modifyUser     : $rootScope.user.user,
-                           modifyDateUTC  : (new Date()).getTime(),
-                        }],
-          notes               : [{
-                       id : 0,
-                       noteText : "NONE",
-                       parentId       : 0,
-                       emprId         : 0,
-                       processId      : 0,
-                       tableEnumValue : 0,
-                       modelAction    : "NONE",
-                       createUser     : $rootScope.user.user,
-                       createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : $rootScope.user.user,
-                       modifyDateUTC  : (new Date()).getTime(),
-                    }],
           parentId            : 0,
           emprId              : 0,
           processId           : 0,
@@ -173,16 +81,11 @@
           modifyUser          : $rootScope.user.user,
           modifyDateUTC       : (new Date()).getTime(),
           usuarios            :[{
-                 id : 0,
                  nome : '',
                  cpf : {
                        id : 0,
                        documentoTypeEnumValue : 0,
                        numero : 0,
-                       data : null,
-                       parentId       : 0,
-                       emprId         : 0,
-                       processId      : 0,
                        tableEnumValue : 2,
                        modelAction    : "NONE",
                        createUser     : $rootScope.user.user,
@@ -203,7 +106,7 @@
                  processId      : 0,
                  tableEnumValue : 0,
 
-                 modelAction    : 'NONE',
+                 modelAction    : 'INSERT',
                  createUser     : $rootScope.user.user,
                  createDateUTC  : (new Date()).getTime(),
                  modifyUser     : $rootScope.user.user,
@@ -219,11 +122,11 @@
 
             SysMgmtData.processPostPageData(_url, _req, function(res){
                 if (res){
-                    initLoad = true;
-                    debugger
+                    initLoad = true;-
+                    console.log(res)
                 }
                 else{
-                   debugger
+                    console.log(res)
                 }
             });
         };
@@ -302,6 +205,66 @@
             }
             return emails;
         }
+        fnSocios = function()
+        {
+             var  socios    = {
+              cota : 0,
+              porcentagem : "",
+              socioAdm : 0,
+              documentos          : [{
+                         id : 0,
+                         documentoTypeEnumValue : 1,
+                         numero : 0,
+                         data : null,
+                         parentId       : 0,
+                         emprId         : 0,
+                         processId      : 0,
+                         tableEnumValue : 1,
+                         modelAction    : "NONE",
+                         createUser     : $rootScope.user.user,
+                         createDateUTC  : (new Date()).getTime(),
+                         modifyUser     : $rootScope.user.user,
+                         modifyDateUTC  : (new Date()).getTime(),
+
+                      }],
+            }
+            return socios;
+        }
+
+        fnCnae = function()
+        {
+                  var     cnaes    = {
+                       id : 0,
+                       idCnae : {
+
+                           id : 0,
+                           codigo : '',
+                           cnae : '',
+                           descricao : '',
+                           abreviado : '',
+                           parentId       : 0,
+                           emprId         : 0,
+                           processId      : 0,
+                           tableEnumValue : 0,
+                           modelAction    : "NONE",
+                           createUser     : $rootScope.user.user,
+                           createDateUTC  : (new Date()).getTime(),
+                           modifyUser     : $rootScope.user.user,
+                           modifyDateUTC  : (new Date()).getTime(),
+
+                       },
+                       parentId       : 1,
+                       emprId         : 0,
+                       processId      : 0,
+                       tableEnumValue : 0,
+                       modelAction    : "NONE",
+                       createUser     : $rootScope.user.user,
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : $rootScope.user.user,
+                       modifyDateUTC  : (new Date()).getTime(),
+                    }
+                return cnaes;
+        }
 
 
         validateTab = function(index) {
@@ -327,13 +290,21 @@
 		 pvm.team = 'test';// $scope.$location.search().keyword
 	    // pvm.empresa = new qat.model.Empresa();
         pvm.buscaRCep = function(cepValue){
-            debugger
+
+            var config = {headers: {
+            'X-Cosmos-Token': 'T9pFIi3coAXpypnWF4miGw',
+            'Content-Type': 'application/json',
+             "Access-Control-Allow-Origin": "*",
+             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+             'Access-Control-Allow-Credentials': 'true',
+             'Accept': 'application/json;odata=verbose'
+            }}
             var cepValue = $scope.empresa.enderecos[0].cep;
             var formatedCep;
             //formatedCep = cepValue.replace(/\D/g, '');
             var formatedCep = cepValue.replace(/\D/g, '');
             var viaCepUrl = "https://viacep.com.br/ws/" + formatedCep + "/json/";
-            $http.get(viaCepUrl).then(function(response) {
+            $http.get(viaCepUrl,config).then(function(response) {
                 var raw;
                 //debugger
                 raw = response.data;

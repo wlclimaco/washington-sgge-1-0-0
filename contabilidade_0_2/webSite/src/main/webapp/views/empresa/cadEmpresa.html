@@ -8,8 +8,6 @@
     <noscript><link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload-noscript.css"></noscript>
     <noscript><link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload-ui-noscript.css"></noscript>
 
-    <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-    <script src="js/vendor/jquery.ui.widget.js"></script>
     <!-- The Templates plugin is included to render the upload/download listings -->
 
     <!-- The main application script
@@ -86,6 +84,21 @@
                         </div>
                         <div class="tab-pane tab2" id="tab2">
                             <div class="panel-body" >
+                                <div class="col-sm-12">
+                                       <label for="exampleInputPassword1">Tipo de Empresa</label>
+                                        <dl class="dl-horizontal">
+                                            <dd>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="1" checked ><span>Venda e Compra e prstação de serviço </span></label>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="2" ><span>Clinica </span></label>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Escritorio Advocacia</span></label>
+
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Condominio</span></label>
+
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Escritorio Contabil</span></label>
+                                            </dd>
+                                        </dl>
+
+                                    </div>
                                 <div class="row">
                                     <div class="input-group">
                                         <div class="col-sm-8">
@@ -94,7 +107,7 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <label for="exampleInputPassword1">Informe o Numero de Funcionarios</label>
-                                            <input type="text" class="form-control col-sm-4" name="nunFunc" ng-model="empresa.numFunc" placeholder="Numero de Funcionarios">
+                                            <input type="text" class="form-control col-sm-4" name="numFunc" ng-model="empresa.numFunc" placeholder="Numero de Funcionarios">
                                         </div>
                                     </div>
                                 </div>
@@ -162,7 +175,7 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <label for="exampleInputPassword1">Estado</label>
-                                        <input type="text" class="form-control col-sm-8" ng-model="empresa.enderecos[0].cidade.estado" placeholder="Estado">
+                                        <input type="text" class="form-control col-sm-8" ng-model="empresa.enderecos[0].estado.nome" placeholder="Estado">
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="exampleInputPassword1">Municipio</label>
@@ -838,7 +851,7 @@ $('#empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
 
 //Tab 2
 $('#empresaForm').find('[name="cnpj"]').val('099.099.099.099');
-$('#empresaForm').find('[name="nunfunc"]').val('8');
+$('#empresaForm').find('[name="numfunc"]').val('8');
 $('#empresaForm').find('[name="razao"]').val('34988406670');
 $('#empresaForm').find('[name="cep"]').val('38082243');
 $('#empresaForm').find('[name="numero"]').val('686');

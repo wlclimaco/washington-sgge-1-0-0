@@ -31,15 +31,15 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<collection property="cpf" column="id" select="DocumentoMap.fetchDocumentoByUsuario"/>
   </resultMap>
 
   <sql id="allUsuarioColumns">
-id
-,email
+email
 ,telefone
 ,emprId
 ,processId
-,email
+,senha
 ,pergunta
 ,role
 ,language
@@ -52,7 +52,6 @@ id
 
 </sql>
 <sql id="allUsuarioValues">
-#{id},
 #{email},
 #{telefone},
 #{emprId},
@@ -63,10 +62,10 @@ id
 #{language},
 #{ultAcesso},
 #{tabelaEnumValue},
-		#{createDateUTC},
-		#{createUser},
-		#{modifyDateUTC},
-		#{modifyUser}
+#{createDateUTC},
+#{createUser},
+#{modifyDateUTC},
+#{modifyUser}
   </sql>
 
  <sql id="allUsuarioColumnsWithQualifier">
@@ -89,19 +88,19 @@ c.tabelaEnumValue,
 
  <select id="fetchAllUsuarios" resultMap="UsuarioResult">
     SELECT
-	<include refid="allUsuarioColumns" />
+	id,<include refid="allUsuarioColumns" />
    FROM usuario ORDER BY id ASC
  </select>
 
  <select id="fetchUsuarioById" parameterType="Integer" resultMap="UsuarioResult">
     SELECT
-	<include refid="allUsuarioColumns" />
+	id,<include refid="allUsuarioColumns" />
    FROM usuario WHERE id = #{fetchid}
  </select>
 
  <select id="fetchAllUsuariosRequest" parameterType="UsuarioInquiryRequest" resultMap="UsuarioResult">
 
-		SELECT <include refid="allUsuarioColumns" />
+		SELECT id,<include refid="allUsuarioColumns" />
   		  FROM usuario ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
@@ -112,11 +111,11 @@ c.tabelaEnumValue,
 
  </select>
 
- <insert id="insertUsuario" parameterType="Usuario">
+ <insert id="insertUsuario" parameterType="Usuario" useGeneratedKeys="true" keyProperty="id">
  	INSERT INTO usuario (
-	<include refid="allUsuarioColumns" />
+	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allUsuarioColumns" />
      )
-   VALUES (<include refid="allUsuarioValues" /> )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allUsuarioValues" /> )
  </insert>
 
  <update id="updateUsuario" parameterType="Usuario">

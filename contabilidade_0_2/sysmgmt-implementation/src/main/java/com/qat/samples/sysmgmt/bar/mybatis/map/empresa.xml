@@ -37,11 +37,11 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allEmpresaColumns">
-			<include refid="EntidadeMap.allEntidadeColumns"/>
+			id,<include refid="EntidadeMap.allEntidadeColumns"/>
   </sql>
 
   <sql id="allEmpresaValues">
-  			<include refid="EntidadeMap.allEntidadeValues"/>
+  			#{id},<include refid="EntidadeMap.allEntidadeValues"/>
   </sql>
 
   <select id="fetchEmpresaRowCount" parameterType="EmpresaInquiryRequest" resultType="Integer">

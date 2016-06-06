@@ -114,6 +114,12 @@ tabelaEnumValue
 	<include refid="allDocumentoColumns" />
    FROM documento WHERE parentId = #{id}  and tabelaEnumValue in (1,51,52,61,62,63)
  </select>
+
+    <select id="fetchDocumentoByUsuario" parameterType="Integer" resultMap="DocumentoResult">
+    SELECT id,
+	<include refid="allDocumentoColumns" />
+   FROM documento WHERE parentId = #{id}  and tabelaEnumValue = 60
+ </select>
 </mapper>
 
 

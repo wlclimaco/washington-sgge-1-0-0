@@ -226,6 +226,8 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	INotesBAR notesBAR;
 
+	IEmpresaBAR empresaBAR;
+
 
 
 	public ISociosBAR getSociosBAR() {
@@ -329,6 +331,14 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 		this.notesBAR = notesBAR;
 	}
 
+	public IEmpresaBAR getEmpresaBAR() {
+		return empresaBAR;
+	}
+
+	public void setEmpresaBAR(IEmpresaBAR empresaBAR) {
+		this.empresaBAR = empresaBAR;
+	}
+
 	/**
 	 * /* (non-Javadoc)
 	 *
@@ -365,13 +375,13 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 							empresa.getCreateUser(), historicoId, historicoId);
 		}
 
-		if (!ValidationUtil.isNullOrEmpty(empresa.getUsuarioList()))
+		if (!ValidationUtil.isNullOrEmpty(empresa.getUsuarios()))
 		{
-//			a +=
-//					UsuarioBARD.maintainUsuarioAssociations(empresa.getUsuarioList(), response, empresa.getId(), null,
-//							null,
-//							TabelaEnum.EMPRESA, getUsuarioBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-//							empresa.getCreateUser(), historicoId, historicoId);
+			a +=
+					UsuarioBARD.maintainUsuarioAssociations(empresa.getUsuarios(), response, empresa.getId(), null,
+							null,
+							TabelaEnum.EMPRESA, getEmpresaBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
+							empresa.getCreateUser(), historicoId, historicoId);
 		}
 
 		if (!ValidationUtil.isNullOrEmpty(empresa.getContaCorrenteList()))

@@ -232,16 +232,6 @@ private InternalResultsResponse<Empresa> processEmpresa(ValidationContextIndicat
 		{
 	InternalResultsResponse<Empresa> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Empresa.class.getSimpleName(), request.getEmpresa(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Empresa>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceEmpresa(request.getEmpresa(), persistType);
 		if (internalResponse.isInError())
