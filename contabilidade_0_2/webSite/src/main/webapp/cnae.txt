@@ -1,0 +1,556 @@
+01.31-7,Cultivo de frutas cítricas
+01.32-5,Cultivo de café
+01.33-3,Cultivo de cacau
+01.34-1,Cultivo de uva
+01.39-2,Cultivo de outros produtos de lavoura permanente
+01.41-4	Criação de bovinos
+01.42-2	Criação de outros animais de grande porte
+01.43-0	Criação de ovinos
+01.44-9	Criação de suínos
+01.45-7	Criação de aves
+01.46-5	Criação de outros animais
+01.50-3	Produção mista: lavoura e pecuária
+01.61-9	Atividades de serviços relacionados com a agricultura
+01.62-7	Atividades de serviços relacionados com a pecuária, exceto atividades veterinárias
+01.70-8	Caça, repovoamento cinegético e atividades dos serviços relacionados
+02.11-9	Silvicultura
+02.12-7	Exploração florestal
+02.13-5	Atividades dos serviços relacionados com a silvicultura e a exploração florestal
+05.11-8	Pesca e serviços relacionados
+05.12-6	Aqüicultura e serviços relacionados
+10.00-6	Extração de carvão mineral
+11.10-0	Extração de petróleo e gás natura
+11.20-7	Serviços relacionados com a extração de petróleo e gás - exceto a prospecção realizada por terceiros
+13.10-2	Extração de minério de ferro
+13.21-8	Extração de minério de alumínio
+13.22-6	Extração de minério de estanho
+13.23-4	Extração de minério de manganês
+13.24-2	Extração de minério de metais preciosos
+13.25-0	Extração de minerais radioativos
+13.29-3	Extração de outros minerais metálicos não-ferrosos
+14.10-9	Extração de pedra, areia e argila
+14.21-4	Extração de minerais para fabricação de adubos, fertilizantes e produtos químicos
+14.22-2	Extração e refino de sal marinho e sal-gema
+14.29-0	Extração de outros minerais não-metálicos
+15.11-3	Abate de reses, preparação de produtos de carne
+15.12-1	Abate de aves e outros pequenos animais e preparação de produtos de carne
+15.13-0	Preparação de carne, banha e produtos de salsicharia não associadas ao abate
+15.14-8	Preparação e preservação do pescado e fabricação de conservas de peixes, crustáceos e moluscos
+15.21-0	Processamento, preservação e produção de conservas de frutas
+15.22-9	Processamento, preservação e produção de conservas de legumes e outros vegetais
+15.23-7	Produção de sucos de frutas e de legumes
+15.31-8	Produção de óleos vegetais em bruto
+15.32-6	Refino de óleos vegetais
+15.33-4	Preparação de margarina e outras gorduras vegetais e de óleos de origem animal não comestíveis
+15.41-5	Preparação do leite
+15.42-3	Fabricação de produtos do laticínio
+15.43-1	Fabricação de sorvetes
+15.51-2	Beneficiamento de arroz e fabricação de produtos do arroz
+15.52-0	Moagem de trigo e fabricação de derivados
+15.53-9	Fabricação de farinha de mandioca e derivados
+15.54-7	Fabricação de fubá e farinha de milho
+15.55-5	Fabricação de amidos e féculas   de vegetais e fabricação de óleos de milho
+15.56-3	Fabricação de rações balanceadas para animais
+15.59-8	Beneficiamento, moagem  e preparação de outros produtos de origem vegetal
+15.61-0	Usinas de açúcar
+15.62-8	Refino e moagem de açúcar
+15.71-7	Torrefação e moagem de café
+15.72-5	Fabricação de café solúvel
+15.81-4	Fabricação de produtos de padaria, confeitaria e pastelaria
+15.82-2	Fabricação de biscoitos e bolachas
+15.83-0	Produção de derivados do cacau e elaboração de chocolates, balas, gomas de mascar
+15.84-9	Fabricação de massas alimentícias
+15.85-7	Preparação de especiarias, molhos, temperos e condimentos
+15.86-5	Preparação de produtos  dietéticos, alimentos para crianças e outros alimentos conservados
+15.89-0	Fabricação de outros produtos alimentícios
+15.91-1	Fabricação, retificação, homogeneização e mistura de aguardentes e outras bebidas destiladas
+15.92-0	Fabricação de vinho
+15.93-8	Fabricação de malte, cervejas e chopes
+15.94-6	Engarrafamento e gaseificação de águas minerais
+15.95-4	Fabricação de refrigerantes e refrescos
+16.00-4	Fabricação de produtos do fumo
+17.11-6	Beneficiamento de algodão
+17.19-1	Beneficiamento de outras fibras têxteis naturais
+17.21-3	Fiação de algodão
+17.22-1	Fiação de outras fibras têxteis naturais
+17.23-0	Fiação de fibras artificiais ou sintéticas
+17.24-8	Fabricação de linhas e fios para coser e bordar
+17.31-0	Tecelagem de algodão
+17.32-9	Tecelagem de fios de fibras têxteis naturais
+17.33-7	Tecelagem de fios e filamentos contínuos artificiais ou sintéticos
+17.41-8	Fabricação de artigos de tecido de uso doméstico, incluindo tecelagem
+17.49-3	Fabricação de outros artefatos têxteis, incluindo tecelagem
+17.50-7	Serviços de acabamento em fios, tecidos e artigos têxteis produzidos por terceiros
+17.61-2	Fabricação de artefatos têxteis a partir de tecidos – exclusive vestuário
+17.62-0	Fabricação de artefatos de tapeçaria
+17.63-9	Fabricação de artefatos de cordoaria
+17.64-7	Fabricação de tecidos especiais - inclusive artefatos
+17.69-8	Fabricação de outros artigos têxteis - exclusive vestuário
+17.71-0	Fabricação de tecidos de malha
+17.72-8	Fabricação de meias
+17.79-5	Fabricação de outros artigos do vestuário produzidos em malharias (tricotagens)
+18.11-2	Confecção de peças interiores do vestuário
+18.12-0	Confecção de outras peças do vestuário
+18.13-9	Confecção de roupas profissionais
+18.21-0	Fabricação de acessórios do vestuário
+18.22-8	Fabricação de acessórios para segurança industrial e pessoal
+19.10-0	Curtimento e outras preparações de couro
+19.21-6	Fabricação de malas, bolsas, valises e outros artefatos para viagem, de qualquer material
+19.29-1	Fabricação de outros artefatos de couro
+19.31-3	Fabricação de calçados de couro
+19.32-1	Fabricação de tênis de qualquer material
+19.33-0	Fabricação de calçados de plástico
+19.39-9	Fabricação de calçados de outros materiais
+20.10-9	Desdobramento de madeira
+20.21-4	Fabricação de madeira laminada e de chapas de madeira compensada, prensada ou aglomerada
+20.22-2	Fabricação de esquadrias de madeira, de casas de madeira pré-fabricadas, de estruturas de madeira e artigos de carpintaria
+20.23-0	Fabricação de artefatos de tanoaria e embalagens de madeira
+20.29-0	Fabricação de artefatos diversos de madeira, palha, cortiça e material trançado - exclusive móveis
+21.10-5	Fabricação de celulose e outras pastas para a fabricação de papel
+21.21-0	Fabricação de papel
+21.22-9	Fabricação de papelão liso, cartolina e cartão
+21.31-8	Fabricação de embalagens de papel
+21.32-6	Fabricação de embalagens  de papelão - inclusive a fabricação de papelão corrugado
+21.41-5	Fabricação de artefatos de papel, papelão, cartolina e cartão para escritório
+21.42-3	Fabricação de fitas e formulários contínuos - impressos ou não
+21.49-0	Fabricação de outros artefatos de pastas, papel, papelão, cartolina e cartão
+22.11-0	Edição ; edição e impressão de jornais
+22.12-8	Edição; edição e impressão de revistas
+22.13-6	Edição; edição e impressão de livros
+22.14-4	Edição de discos, fitas e outros materiais gravados
+22.19-5	Edição ; edição e impressão de outros produtos gráficos
+22.21-7	Impressão de jornais, revistas e livros
+22.22-5	Serviço de impressão de material escolar e de material para usos industrial e comercial
+22.29-2	Execução de outros serviços gráficos
+22.31-4	Reprodução de discos e fitas
+22.32-2	Reprodução de fitas de vídeos
+22.33-0	Reprodução de filmes
+22.34-9	Reprodução de programas de informática em disquetes e fitas
+23.10-8	Coquerias
+23.20-5	Refino de petróleo
+23.30-2	Elaboração de combustíveis nucleares
+23.40-0	Produção de álcool
+24.11-2	Fabricação de cloro e álcalis
+24.12-0	Fabricação de intermediários para fertilizantes
+24.13-9	Fabricação de fertilizantes fosfatados, nitrogenados e potássicos
+24.14-7	Fabricação de gases industriais
+24.19-8	Fabricação de outros produtos inorgânicos
+24.21-0	Fabricação de produtos petroquímicos básicos
+24.22-8	Fabricação de intermediários para resinas e fibras
+24.29-5	Fabricação de outros produtos químicos orgânicos
+24.31-7	Fabricação de resinas termoplásticas
+24.32-5	Fabricação de resinas termofixas
+24.33-3	Fabricação de elastômeros
+24.41-4	Fabricação de fibras, fios, cabos e filamentos contínuos artificiais
+24.42-2	Fabricação de fibras, fios, cabos e filamentos contínuos sintéticos
+24.51-1	Fabricação de produtos farmoquímicos
+24.52-0	Fabricação de medicamentos para uso humano
+24.53-8	Fabricação de medicamentos para uso veterinário
+24.54-6	Fabricação de materiais para usos médicos, hospitalares e odontológicos
+24.61-9	Fabricação de inseticidas
+24.62-7	Fabricação de fungicidas
+24.63-5	Fabricação de herbicidas
+24.69-4	Fabricação de outros defensivos agrícolas
+24.71-6	Fabricação de sabões, sabonetes e detergentes sintéticos
+24.72-4	Fabricação de produtos de limpeza e polimento
+24.73-2	Fabricação de artigos de perfumaria e cosméticos
+24.81-3	Fabricação de tintas, vernizes, esmaltes e lacas
+24.82-1	Fabricação de tintas de impressão
+24.83-0	Fabricação de impermeabilizantes, solventes e produtos afins
+24.91-0	Fabricação de adesivos e selantes
+24.92-9	Fabricação de explosivos
+24.93-7	Fabricação de catalisadores
+24.94-5	Fabricação de aditivos de uso industrial
+24.95-3	Fabricação de chapas, filmes, papéis e outros materiais e produtos químicos para fotografia
+24.96-1	Fabricação de discos e fitas virgens
+24.99-6	Fabricação de outros produtos químicos não especificados ou não classificados
+25.11-9	Fabricação de pneumáticos e de câmaras-de-ar
+25.12-7	Recondicionamento de pneumáticos
+25.19-4	Fabricação de artefatos diversos de borracha
+25.21-6	Fabricação de laminados planos e tubulares plástico
+25.22-4	Fabricação de embalagem de plástico
+25.29-1	Fabricação de artefatos diversos de plástico
+26.11-5	Fabricação de vidro plano e de segurança
+26.12-3	Fabricação de embalagens de vidro
+26.19-0	Fabricação de artigos de vidro
+26.20-4	Fabricação de cimento
+26.30-1	Fabricação de artefatos de concreto, cimento, fibrocimento, gesso e estuque
+26.41-7	Fabricação de produtos cerâmicos não-refratários para uso estrutural na construção civil
+26.42-5	Fabricação de produtos cerâmicos refratários
+26.49-2	Fabricação de produtos cerâmicos não-refratários para usos diversos
+26.91-3	Britamento, aparelhamento e outros trabalhos em pedras (não associado a extração)
+26.92-1	Fabricação de cal virgem, cal hidratada e gesso
+26.99-9	Fabricação de outros produtos de minerais não-metálicos
+27.11-1	Produção de laminados planos de aço
+27.12-0	Produção de laminados não-planos de aço
+27.21-9	Produção de gusa
+27.22-7	Produção de ferro, aço e ferro-ligas em formas primárias e semi-acabados
+27.29-4	Produção de relaminados, trefilados e retrefilados de aço - exclusive tubos
+27.31-6	Fabricação de tubos de aço com costura
+27.39-1	Fabricação de outros tubos de ferro e aço
+27.41-3	Metalurgia do alumínio e suas ligas
+27.42-1	Metalurgia dos metais preciosos
+27.49-9	Metalurgia de outros metais não-ferrosos e suas ligas
+27.51-0	Fabricação de peças fundidas de ferro e aço
+27.52-9	Fabricação de peças fundidas de metais não-ferrosos e suas ligas
+28.11-8	Fabricação de estruturas metálicas para edifícios, pontes, torres de transmissão, andaimes e outros fins
+28.12-6	Fabricação de esquadrias de metal
+28.13-4	Fabricação de obras de caldeiraria pesada
+28.21-5	Fabricação de tanques, reservatórios metálicos e caldeiras para aquecimento central
+28.22-3	Fabricação de caldeiras geradoras de vapor - exclusive para aquecimento central e para veículos
+28.31-2	Produção de forjados de aço
+28.32-0	Produção de forjados de metais não-ferrosos e suas ligas
+28.33-9	Fabricação de artefatos estampados de metal
+28.34-7	Metalurgia do pó
+28.39-8	Têmpera, cementação e tratamento térmico do aço, serviços de usinagem, galvanotécnica e solda
+28.41-0	Fabricação de artigos de cutelaria
+28.42-8	Fabricação de artigos de serralheria - exclusive esquadrias
+28.43-6	Fabricação de ferramentas manuais
+28.91-6	Fabricação de embalagens metálicas
+28.92-4	Fabricação de artefatos de trefilados
+28.93-2	Fabricação de artigos de funilaria e de artigos de metal para usos doméstico e pessoal
+28.99-1	Fabricação de outros produtos elaborados de metal
+29.11-4	Fabricação de motores estacionários de combustão interna, turbinas e outras máquinas motrizes não-elétricas - exclusive para aviões e veículos rodoviários
+29.12-2	Fabricação de bombas e carneiros hidráulicos
+29.13-0	Fabricação de válvulas, torneiras e registros
+29.14-9	Fabricação de compressores
+29.15-7	Fabricação de equipamentos de transmissão para fins industriais - inclusive rolamentos
+29.21-1	Fabricação de fornos industriais, aparelhos e equipamentos não-elétricos para instalações térmicas
+29.22-0	Fabricação de estufas e fornos elétricos para fins industriais
+29.23-8	Fabricação de máquinas, equipamentos e aparelhos para transporte e elevação de cargas e pessoas
+29.24-6	Fabricação de máquinas e aparelhos de refrigeração e ventilação de uso industrial
+29.25-4	Fabricação de aparelhos de ar condicionado
+29.29-7	Fabricação de outras máquinas e equipamentos de uso geral
+29.31-9	Fabricação de máquinas e equipamentos para agricultura, avicultura e obtenção de produtos animais
+29.32-7	Fabricação de tratores agrícolas
+29.40-8	Fabricação de máquinas-ferramenta
+29.51-3	Fabricação de máquinas e equipamentos para a indústria de prospecção e extração de petróleo
+29.52-1	Fabricação de outras máquinas e equipamentos para a extração de minérios e indústria da construção
+29.53-0	Fabricação de tratores de esteira e tratores de uso na construção e mineração
+29.54-8	Fabricação de máquinas e equipamentos de terraplanagem e pavimentação
+29.61-0	Fabricação de máquinas para a indústria metalúrgica - exclusive máquinas-ferramenta
+29.62-9	Fabricação de máquinas e equipamentos para as indústrias alimentar, de bebida e fumo
+29.63-7	Fabricação de máquinas e equipamentos para a indústria têxtil
+29.64-5	Fabricação de máquinas e equipamentos para as indústrias do  vestuário e de couro e calçados
+29.65-3	Fabricação de máquinas e equipamentos para as indústrias de celulose, papel e papelão e artefatos
+29.69-6	Fabricação de outras máquinas e equipamentos de uso específico
+29.71-8	Fabricação de armas de fogo e munições
+29.72-6	Fabricação de equipamento bélico pesado
+29.81-5	Fabricação de fogões, refrigeradores e máquinas de lavar e secar para uso doméstico
+29.89-0	Fabricação de outros aparelhos eletrodomésticos
+30.11-2	Fabricação de máquinas de escrever e calcular, copiadoras e outros equipamentos não-eletrônicos para escritório
+30.12-0	Fabricação de máquinas de escrever e calcular, copiadoras e outros equipamentos eletrônicos destinados à automação gerencial e comercial
+30.21-0	Fabricação de computadores
+30.22-8	Fabricação de equipamentos periféricos para máquinas eletrônicas para tratamento de informações
+31.11-9	Fabricação de geradores de corrente contínua ou alternada
+31.12-7	Fabricação de transformadores, indutores, conversores, sincronizadores e semelhantes
+31.13-5	Fabricação de motores elétricos
+31.21-6	Fabricação de subestações, quadros de comando, reguladores de voltagem e outros aparelhos e equipamentos para distribuição e controle de energia
+31.22-4	Fabricação de material elétrico para instalações em circuito de consumo
+31.30-5	Fabricação de fios, cabos e condutores elétricos isolados
+31.41-0	Fabricação de pilhas, baterias e acumuladores elétricos - exclusive para veículos
+31.42-9	Fabricação de baterias e acumuladores para veículos
+31.51-8	Fabricação de lâmpadas
+31.52-6	Fabricação de luminárias e equipamentos de iluminação - exclusive para veículos
+31.60-7	Fabricação de material elétrico para veículos - exclusive baterias
+31.91-7	Fabricação de eletrodos, contatos e outros artigos de carvão e grafita para uso elétrico, eletroimãs e isoladores
+31.92-5	Fabricação de aparelhos e utensílios para sinalização e alarme
+31.99-2	Fabricação de outros aparelhos ou equipamentos elétricos
+32.10-7	Fabricação de material eletrônico básico
+32.21-2	Fabricação de equipamentos transmissores de rádio e televisão e de equipamentos para estações telefônicas, para radiotelefonia e radiotelegrafia - inclusive de microondas e repetidoras
+32.22-0	Fabricação de aparelhos telefônicos, sistemas de intercomunicação e semelhantes
+32.30-1	Fabricação de aparelhos receptores de rádio e televisão e de reprodução, gravação ou amplificação de som e vídeo
+33.10-3	Fabricação de aparelhos e instrumentos para usos médico-hospitalares, odontológicos e de laboratórios e aparelhos ortopédicos
+33.20-0	Fabricação de aparelhos e instrumentos de medida, teste e controle - exclusive equipamentos para controle de processos industriais
+33.30-8	Fabricação de máquinas, aparelhos e equipamentos de sistemas eletrônicos dedicados a automação industrial e controle do processo produtivo
+33.40-5	Fabricação de aparelhos, instrumentos e materiais ópticos, fotográficos e cinematográficos
+33.50-2	Fabricação de cronômetros e relógios
+34.10-0	Fabricação de automóveis, camionetas e utilitários
+34.20-7	Fabricação de caminhões e ônibus
+34.31-2	Fabricação de cabines, carrocerias e reboques para caminhão 
+34.32-0	Fabricação de carrocerias para ônibus
+34.39-8	Fabricação de cabines, carrocerias e reboques para outros veículos
+34.41-0	Fabricação de peças e acessórios para o sistema motor
+34.42-8	Fabricação de peças e acessórios para os sistemas de marcha e transmissão
+34.43-6	Fabricação de peças e acessórios para o sistema de freios
+34.44-4	Fabricação de peças e acessórios para o sistema de direção e suspensão
+34.49-5	Fabricação de peças e acessórios de metal para veículos automotores não classificados em outra classe
+34.50-9	Recondicionamento ou recuperação de motores para veículos automotores
+35.11-4	Construção e reparação de embarcações e estruturas flutuantes
+35.12-2	Construção e reparação de embarcações para esporte e lazer
+35.21-1	Construção e montagem de locomotivas, vagões e outros materiais rodantes
+35.22-0	Fabricação de peças e acessórios para veículos ferroviários
+35.23-8	Reparação de veículos ferroviários
+35.31-9	Construção e montagem de aeronaves
+35.32-7	Reparação de aeronaves
+35.91-2	Fabricação de motocicletas
+35.92-0	Fabricação de bicicletas e triciclos não-motorizados
+35.99-8	Fabricação de outros equipamentos de transporte
+36.11-0	Fabricação de móveis com predominância de madeira
+36.12-9	Fabricação de móveis com predominância de metal
+36.13-7	Fabricação de móveis de outros materiais
+36.14-5	Fabricação de colchões
+36.91-9	Lapidação de pedras preciosas e semi-preciosas, fabricação de artefatos de ourivesaria e joalheria
+36.92-7	Fabricação de instrumentos musicais
+36.93-5	Fabricação de artefatos para caça, pesca e esporte
+36.94-3	Fabricação de brinquedos e de jogos recreativos
+36.95-1	Fabricação de canetas, lápis, fitas impressoras para máquinas e outros artigos para escritório
+36.96-0	Fabricação de aviamentos para costura
+36.97-8	Fabricação de escovas, pincéis e vassouras
+36.99-4	Fabricação de produtos diversos
+37.10-9	Reciclagem de sucatas metálicas
+37.20-6	Reciclagem de sucatas não-metálicas
+40.10-0	Produção e distribuição de energia elétrica
+40.20-7	Produção e distribuição de gás através de tubulações
+40.30-4	Produção e distribuição de vapor e água quente
+41.00-9	Captação, tratamento e distribuição de água
+45.11-0	Demolição e preparação do terreno
+45.12-8	Perfurações e execução de fundações destinadas à construção civil
+45.13-6	Grandes movimentações de terra
+45.21-7	Edificações (residenciais, industriais, comerciais e de serviços)
+45.22-5	Obras viárias
+45.23-3	Grandes estruturas e obras de arte
+45.24-1	Obras de urbanização e paisagismo
+45.25-0	Montagem de estruturas  
+45.29-2	Obras de outros tipos
+45.31-4	Construção de barragens e represas para geração de energia elétrica
+45.32-2	Construção de estações e redes de distribuição de energia elétrica
+45.33-0	Construção de estações e redes de telefonia e comunicação
+45.34-9	Construção de obras de prevenção e recuperação do meio ambiente
+45.41-1	Instalações elétricas
+45.42-0	Instalações de sistemas de ar condicionado, de ventilação e refrigeração
+45.43-8	Instalações hidráulicas, sanitárias, de gás e de sistema de prevenção contra incêndio
+45.49-7	Outras obras de instalações
+45.51-9	Alvenaria e reboco
+45.52-7	Impermeabilização e serviços de pintura em geral
+45.59-4	Outras obras de acabamento
+45.60-8	Aluguel de equipamentos de construção e demolição com operários
+50.10-5	Comércio a varejo e por atacado de veículos automotores
+50.20-2	Manutenção e reparação de veículos automotores
+50.30-0	Comércio a varejo e por atacado de peças e acessórios para veículos automotores
+50.41-5	Comércio a varejo e por atacado de motocicletas, partes, peças e acessórios
+50.42-3	Manutenção e reparação de motocicletas
+50.50-4	Comércio a varejo de combustíveis
+51.11-0	Representantes comerciais e agentes do comércio de matérias-primas agrícolas, animais vivos, matérias primas têxteis e produtos semi-acabados
+51.12-8	Representantes comerciais e agentes do comércio de combustíveis, minerais, metais e produtos químicos industriais
+51.13-6	Representantes comerciais e agentes do comércio de madeira, material de construção e ferragens
+51.14-4	Representantes comerciais e agentes do comércio de máquinas, equipamentos industriais, embarcações e aeronaves
+51.15-2	Representantes comerciais e agentes do comércio de móveis e artigos de uso doméstico
+51.16-0	Representantes comerciais e agentes do comércio de têxteis, vestuário, calçados e artigos de couro
+51.17-9	Representantes comerciais e agentes do comércio de produtos alimentícios, bebidas e fumo
+51.18-7	Representantes comerciais e agentes do comércio especializado em produtos não especificados anteriormente
+51.19-5	Representantes comerciais e agentes do comércio de mercadorias em geral (não especializados)
+51.21-7	Comércio atacadista de produtos agrícolas "in natura"; produtos alimentícios para animais
+51.22-5	Comércio atacadista de animais vivos
+51.31-4	Comércio atacadista de leite e produtos do leite
+51.32-2	Comércio atacadista de cereais beneficiados, farinhas, amidos e féculas
+51.33-0	Comércio atacadista de hortifrutigranjeiros
+51.34-9	Comércio atacadista de carnes e produtos da carne
+51.35-7	Comércio atacadista de pescados
+51.36-5	Comércio atacadista de bebidas
+51.37-3	Comércio atacadista de produtos do fumo
+51.39-0	Comércio atacadista de outros produtos alimentícios, não especificados anteriormente
+51.41-1	Comércio atacadista de fios têxteis, tecidos, artefatos de tecidos e de armarinho
+51.42-0	Comércio atacadista de artigos do vestuário e complementos
+51.43-8	Comércio atacadista de calçados
+51.44-6	Comércio atacadista de eletrodomésticos e outros equipamentos de usos pessoal e doméstico
+51.45-4	Comércio atacadista de produtos farmacêuticos, médicos, ortopédicos e odontológicos
+51.46-2	Comércio atacadista de cosméticos e produtos de perfumaria
+51.47-0	Comércio atacadista de artigos de escritório e de papelaria;  livros, jornais, e outras publicações
+51.49-7	Comércio atacadista de outros artigos de usos pessoal e doméstico, não especificados anteriormente
+51.51-9	Comércio atacadista de combustíveis
+51.52-7	Comércio atacadista de produtos extrativos de origem mineral
+51.53-5	Comércio atacadista de madeira, material de construção, ferragens e ferramentas
+51.54-3	Comércio atacadista de produtos químicos
+51.55-1	Comércio atacadista de resíduos e sucatas
+51.59-4	Comércio atacadista de outros produtos intermediários não agropecuários, não especificados anteriormente
+51.61-6	Comércio atacadista de máquinas, aparelhos e equipamentos para uso agropecuário
+51.62-4	Comércio atacadista de máquinas e equipamentos para o comércio
+51.63-2	Comércio atacadista de máquinas e equipamentos para escritório
+51.69-1	Comércio atacadista de máquinas, aparelhos e equipamentos para usos industrial, técnico e profissional, e outros usos, não especificados anteriormente
+51.91-8	Comércio atacadista de mercadorias em geral (não especializado)
+51.92-6	Comércio atacadista especializado em mercadorias não especificadas anteriormente
+52.11-6	Comércio varejista de mercadorias em geral, com predominância de produtos alimentícios, com área de venda superior a 5000 metros quadrados - hipermercados
+52.12-4	Comércio varejista de mercadorias em geral, com predominância de produtos alimentícios, com área de venda entre 300 e 5000 metros quadrados - supermercados
+52.13-2	Comércio varejista de mercadorias em geral, com predominância de produtos alimentícios, com área de venda inferior a 300 metros quadrados - exclusive lojas de conveniência
+52.14-0	Comércio varejista de mercadorias em geral, com predominância de produtos alimentícios indústrializados - lojas de conveniência
+52.15-9	Comércio varejista não especializado, sem predominância de produtos alimentícios
+52.21-3	Comércio varejista de produtos de padaria, de laticínio, frios e conservas
+52.22-1	Comércio varejista de balas, bombons e semelhantes
+52.23-0	Comércio varejista de carnes - açougues
+52.24-8	Comércio varejista de bebidas
+52.29-9	Comércio varejista de outros produtos alimentícios não especificados anteriormente e de produtos do fumo
+52.31-0	Comércio varejista de tecidos e artigos de armarinho
+52.32-9	Comércio varejista de artigos do vestuário e complementos
+52.33-7	Comércio varejista de calçados, artigos de couro e viagem
+52.41-8	Comércio varejista de produtos farmacêuticos, artigos médicos e ortopédicos, de perfumaria e cosméticos
+52.42-6	Comércio varejista de máquinas e aparelhos de usos doméstico e pessoal, discos e instrumentos musicais
+52.43-4	Comércio varejista de móveis, artigos de iluminação e outros artigos para residência
+52.44-2	Comércio varejista de material de construção, ferragens, ferramentas manuais e produtos metalúrgicos; vidros, espelhos e vitrais; tintas e madeiras
+52.45-0	Comércio varejista de equipamentos para escritório; informática e comunicação, inclusive suprimentos
+52.46-9	Comércio varejista de livros, jornais, revistas e papelaria
+52.47-7	Comércio varejista de gás liquefeito de petróleo (GLP)
+52.49-3	Comércio varejista de outros produtos não especificados anteriormente
+52.50-7	Comércio varejista de artigos usados, em lojas
+52.61-2	Comércio varejista de artigos em geral, por catálogo, televisão, internet e outros meios de comunicação
+52.69-8	Comércio varejista realizado em vias públicas, postos móveis e outros tipos não realizados em lojas
+52.71-0	Reparação e manutenção de máquinas e de aparelhos eletrodomésticos
+52.72-8	Reparação de calçados
+52.79-5	Reparação de outros objetos pessoais e domésticos
+55.11-5	Estabelecimentos hoteleiros, com restaurante
+55.12-3	Estabelecimentos hoteleiros, sem restaurante
+55.19-0	Outros tipos de alojamento
+55.21-2	Restaurantes e estabelecimentos de bebidas, com serviço completo
+55.22-0	Lanchonetes e similares
+55.23-9	Cantinas (serviços de alimentação privativos)
+55.24-7	Fornecimento de comida preparada
+55.29-8	Outros serviços de alimentação
+60.10-0	Transporte ferroviário interurbano
+60.21-6	Transporte ferroviário de passageiros, urbano
+60.22-4	Transporte metroviário
+60.23-2	Transporte rodoviário de passageiros, regular, urbano
+60.24-0	Transporte rodoviário de passageiros, regular, não urbano
+60.25-9	Transporte rodoviário de passageiros, não regular
+60.26-7	Transporte rodoviário de cargas, em geral
+60.27-5	Transporte rodoviário de produtos perigosos
+60.28-3	Transporte rodoviário de mudanças
+60.29-1	Transporte regular em bondes, funiculares, teleféricos ou trens próprios para exploração de pontos turísticos
+60.30-5	Transporte dutoviário
+61.11-5	Transporte marítimo de cabotagem
+61.12-3	Transporte marítimo de longo curso
+61.21-2	Transporte por navegação interior de passageiros
+61.22-0	Transporte por navegação interior de carga
+61.23-9	Transporte aquaviário urbano
+62.10-3	Transporte aéreo, regular
+62.20-0	Transporte aéreo, não regular
+62.30-8	Transporte espacial
+63.11-8	Carga e descarga
+63.12-6	Armazenamento e depósitos de cargas
+63.21-5	Atividades auxiliares aos transportes terrestres
+63.22-3	Atividades auxiliares aos transportes aquaviários
+63.23-1	Atividades auxiliares aos transportes aéreos
+63.30-4	Atividades de agências de viagens e organizadores de viagem
+63.40-1	Atividades relacionadas à organização do transporte de cargas
+64.11-4	Atividades de Correio Nacional
+64.12-2	Outras atividades de correio
+64.20-3	Telecomunicações
+65.10-2	Banco Central
+65.21-8	Bancos comerciais
+65.22-6	Bancos múltiplos (com carteira comercial)
+65.23-4	Caixas econômicas
+65.24-2	Crédito cooperativo 
+65.31-5	Bancos múltiplos (sem carteira comercial)
+65.32-3	Bancos de investimento
+65.33-1	Bancos de desenvolvimento
+65.34-0	Crédito imobiliário
+65.35-8	Sociedades de crédito, financiamento e investimento
+65.40-4	Arrendamento mercantil
+65.51-0	Agências de desenvolvimento
+65.59-5	Outras atividades de concessão de crédito
+65.91-9	Fundos mútuos de investimento
+65.92-7	Sociedades de capitalização
+65.99-4	Outras atividades de intermediação financeira, não especificadas anteriormente
+66.11-7	Seguros de vida
+66.12-5	Seguros não-vida
+66.13-3	Resseguros
+66.21-4	Previdência privada fechada
+66.22-2	Previdência privada aberta
+66.30-3	Planos de saúde
+67.11-3	Administração de mercados bursáteis
+67.12-1	Atividades de intermediários em transações de títulos e valores mobiliários
+67.19-9	Outras atividades auxiliares da intermediação financeira, não especificadas anteriormente
+67.20-2	Atividades auxiliares dos seguros e da previdência privada
+70.10-6	Incorporação e compra e venda de imóveis
+70.20-3	Aluguel de imóveis
+70.31-9	Corretagem e avaliação de imóveis
+70.32-7	Administração de imóveis por conta de terceiros
+70.40-8	Condomínios prediais
+71.10-2	Aluguel de automóveis
+71.21-8	Aluguel de outros meios de transporte terrestre
+71.22-6	Aluguel de embarcações
+71.23-4	Aluguel de aeronaves
+71.31-5	Aluguel de máquinas e equipamentos agrícolas
+71.32-3	Aluguel de máquinas e equipamentos para construção e engenharia civil
+71.33-1	Aluguel de máquinas e equipamentos para escritórios
+71.39-0	Aluguel de máquinas e equipamentos de outros tipos, não especificados anteriormente
+71.40-4	Aluguel de objetos pessoais e domésticos
+72.10-9	Consultoria em sistemas de informática
+72.20-6	Desenvolvimento de programas de informática
+72.30-3	Processamento de dados
+72.40-0	Atividades de banco de dados
+72.50-8	Manutenção e reparação de máquinas de escritório e de informática
+72.90-7	Outras atividades de informática, não especificadas anteriormente
+73.10-5	Pesquisa e desenvolvimento das ciências físicas e naturais
+73.20-2	Pesquisa e desenvolvimento das ciências sociais e humanas
+74.11-0	Atividades jurídicas
+74.12-8	Atividades de contabilidade e auditoria
+74.13-6	Pesquisas de mercado e de opinião pública
+74.14-4	Gestão de participações societárias (holdings)
+74.15-2	Sedes de empresas e unidades administrativas locais
+74.16-0	Atividades de assessoria em gestão empresarial
+74.20-9	Serviços de arquitetura e engenharia e de assessoramento técnico especializado
+74.30-6	Ensaios de materiais e de produtos; análise de qualidade
+74.40-3	Publicidade
+74.50-0	Seleção, agenciamento e locação de mão-de-obra 
+74.60-8	Atividades de investigação, vigilância e segurança
+74.70-5	Atividades de limpeza em prédios e domicílios
+74.91-8	Atividades fotográficas
+74.92-6	Atividades de envasamento e empacotamento, por conta de terceiros
+74.99-3	Outras atividades de serviços prestados principalmente às empresas, não especificadas anteriormente
+75.11-6	Administração pública em geral
+75.12-4	Regulação das atividades sociais e culturais
+75.13-2	Regulação das atividades econômicas
+75.14-0	Atividades de apoio à administração pública
+75.21-3	Relações exteriores
+75.22-1	Defesa
+75.23-0	Justiça
+75.24-8	Segurança e ordem pública
+75.25-6	Defesa Civil
+75.30-2	Seguridade social
+80.11-0	Educação pré-escolar
+80.12-8	Educação fundamental
+80.21-7	Educação média de formação geral
+80.22-5	Educação média de formação técnica e profissional
+80.30-6	Educação superior
+80.91-8	Ensino em auto-escolas e cursos de pilotagem
+80.92-6	Educação supletiva
+80.93-4	Educação continuada ou permanente e aprendizagem profissional
+80.94-2	Ensino à distância
+80.95-0	Educação especial
+85.11-1	Atividades de atendimento hospitalar
+85.12-0	Atividades de atendimento a urgências e emergências
+85.13-8	Atividades de atenção ambulatorial
+85.14-6	Atividades de serviços de complementação diagnóstica ou terapêutica
+85.15-4	Atividades de outros profissionais da área de saúde
+85.16-2	Outras atividades relacionadas com a atenção à saúde
+85.20-0	Serviços veterinários
+85.31-6	Serviços sociais com alojamento
+85.32-4	Serviços sociais sem alojamento
+90.00-0	Limpeza urbana e esgoto; e atividades conexas
+91.11-1	Atividades de organizações empresariais e patronais
+91.12-0	Atividades de organizações profissionais
+91.20-0	Atividades de organizações sindicais
+91.91-0	Atividades de organizações religiosas
+91.92-8	Atividades de organizações políticas
+91.99-5	Outras atividades associativas, não especificadas anteriormente
+92.11-8	Produção de filmes cinematográficos e fitas de vídeo
+92.12-6	Distribuição de filmes e de vídeos
+92.13-4	Projeção de filmes e de vídeos
+92.21-5	Atividades de rádio
+92.22-3	Atividades de televisão
+92.31-2	Atividades de teatro, música e outras atividades artísticas e literárias
+92.32-0	Gestão de salas de espetáculos
+92.39-8	Outras atividades de espetáculos, não especificadas anteriormente
+92.40-1	Atividades de agências de notícias
+92.51-7	Atividades de bibliotecas e arquivos
+92.52-5	Atividades de museus e conservação do patrimônio histórico
+92.53-3	Atividades de jardins botânicos, zoológicos, parques nacionais e reservas ecológicas
+92.61-4	Atividades desportivas
+92.62-2	Outras atividades relacionadas ao lazer
+93.01-7	Lavanderias e tinturarias
+93.02-5	Cabeleireiros e outros tratamentos de beleza
+93.03-3	Atividades funerárias e conexas
+93.04-1	Atividades de manutenção do físico corporal
+93.09-2	Outras atividades de serviços pessoais, não especificadas anteriormente
+95.00-1	Serviços domésticos
+99.00-7	Organismos internacionais e outras instituições extraterritoriais

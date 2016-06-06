@@ -120,3 +120,23 @@ function EmpresaFormTest() {
 	});
 	return a;
 }
+
+Nome ou Razão social
+Nome Fantasia
+CPF ou CNPJ
+Inscr Est Subst Trib
+Indicador de IE
+Inscrição Estadual
+Inscrição Municipal
+Inscrição Suframa
+CEP
+Endereço
+Número
+Complemento
+Bairro
+Estado
+Cidade
+País
+Nome do responsável
+Telefone
+E-mail

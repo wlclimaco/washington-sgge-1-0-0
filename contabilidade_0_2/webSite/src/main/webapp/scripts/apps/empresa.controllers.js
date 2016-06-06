@@ -132,6 +132,7 @@
         };
 
         $scope.submit = function() {
+            fnMontaObjeto();
             processPostData(create_url, new qat.model.reqEmpr($scope.empresa ,true, true), true);
           };
         $scope.doIfChecked = function(_ckecked,_value,_nome) {
@@ -140,13 +141,16 @@
             console.log(_value);
         }
 
-         pvm.teste = function(){
+         fnMontaObjeto = function(){
             console.log($scope.empresa);
             var count = 0;
             var bb = [];
             $('.gugu:visible').each(function() {
-                bb.push(fnTelefones($(this).val(),count,1));
-                count = count + 1;
+                if($(this).val() != "")
+                {
+                    bb.push(fnTelefones($(this).val(),count,1));
+                    count = count + 1;
+                }
             });
             $scope.empresa.telefones = bb;
 
@@ -154,10 +158,24 @@
             count = 0;
             bb = [];
             $('.input-email:visible').each(function() {
-                bb.push(fnEmails($(this).val(),count,1));
-                count = count + 1;
+                if($(this).val() != "")
+                {
+                    bb.push(fnEmails($(this).val(),count,1));
+                    count = count + 1;
+                }
             });
             $scope.empresa.emails = bb;
+
+             // socios
+
+            count = 0;
+            bb = [];
+            $('.socios:visible').each(function() {
+                bb.push(fnSocios($(this).find('.nome-socio').val(),$(this).find('.cpf-socio').val(),$(this).find('.cota-socio').val(),$(this).find('.check-socio').is(":checked")));
+                count = count + 1;
+            });
+            $scope.empresa.socios = bb;
+
             console.log($scope.empresa);
         }
         fnTelefones =function(numero,id,type)
@@ -203,22 +221,23 @@
             }
             return emails;
         }
-        fnSocios = function()
+        fnSocios = function(_nome,_cpf,_cota,_adm)
         {
+            var socioAdm = 0;
+            if(_adm == true)
+            {
+               socioAdm = 1; 
+            }
              var  socios    = {
               cota : 0,
-              porcentagem : "",
-              socioAdm : 0,
+              porcentagem : _cota,
+              socioAdm : socioAdm,
+              modelAction    : "INSERT",
               documentos          : [{
-                         id : 0,
                          documentoTypeEnumValue : 1,
-                         numero : 0,
-                         data : null,
-                         parentId       : 0,
-                         emprId         : 0,
-                         processId      : 0,
+                         numero : _cpf,
                          tableEnumValue : 1,
-                         modelAction    : "NONE",
+                         modelAction    : "INSERT",
                          createUser     : $rootScope.user.user,
                          createDateUTC  : (new Date()).getTime(),
                          modifyUser     : $rootScope.user.user,
@@ -229,21 +248,12 @@
             return socios;
         }
 
-        fnCnae = function()
+        fnCnae = function(_id)
         {
-                  var     cnaes    = {
-                       id : 0,
+            var     cnaes    = {
                        idCnae : {
 
-                           id : 0,
-                           codigo : '',
-                           cnae : '',
-                           descricao : '',
-                           abreviado : '',
-                           parentId       : 0,
-                           emprId         : 0,
-                           processId      : 0,
-                           tableEnumValue : 0,
+                           id : _id,
                            modelAction    : "NONE",
                            createUser     : $rootScope.user.user,
                            createDateUTC  : (new Date()).getTime(),
@@ -251,10 +261,6 @@
                            modifyDateUTC  : (new Date()).getTime(),
 
                        },
-                       parentId       : 1,
-                       emprId         : 0,
-                       processId      : 0,
-                       tableEnumValue : 0,
                        modelAction    : "NONE",
                        createUser     : $rootScope.user.user,
                        createDateUTC  : (new Date()).getTime(),

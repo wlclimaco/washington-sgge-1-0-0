@@ -1,3 +1,4 @@
+
     <link rel="stylesheet" href="dist/css/formValidation.css"/>
     <link rel="stylesheet" href="dist/css/select2.css"/>
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css"/>
@@ -102,19 +103,25 @@
                                 <div class="row">
                                     <div class="input-group">
                                         <div class="col-sm-8">
-                                            <label for="exampleInputPassword1">Digite seu CNPJ</label>
-                                            <input type="text" class="form-control col-sm-8" name="cnpj" ng-model="empresa.documentos[0].numero" placeholder="CNPJ">
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">Digite seu CNPJ</label>
+                                                <input type="text" class="form-control col-sm-8" name="cnpj" ng-model="empresa.documentos[0].numero" placeholder="CNPJ">
+                                            </div>
                                         </div>
                                         <div class="col-sm-4">
-                                            <label for="exampleInputPassword1">Informe o Numero de Funcionarios</label>
-                                            <input type="text" class="form-control col-sm-4" name="numFunc" ng-model="empresa.numFunc" placeholder="Numero de Funcionarios">
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">Informe o Numero de Funcionarios</label>
+                                                <input type="text" class="form-control col-sm-4" name="numFunc" ng-model="empresa.numFunc" placeholder="Numero de Funcionarios">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <label for="exampleInputPassword1">Informe a Razão Social</label>
-                                        <input type="text" class="form-control col-sm-8" name="razao" ng-model="empresa.nome" placeholder="Razão Social">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Informe a Razão Social</label>
+                                            <input type="text" class="form-control col-sm-8" name="razao" ng-model="empresa.nome" placeholder="Razão Social">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -143,8 +150,9 @@
                                     <div class="col-sm-6">
                                     <label for="exampleInputPassword1">CEP</label>
                                         <div class="input-group">
-
-                                            <input type="text" class="form-control" name="cep" ng-model="empresa.enderecos[0].cep">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="cep" ng-model="empresa.enderecos[0].cep">
+                                            </div>
                                             <span class="input-group-btn">
 
                                                 <button class="btn btn-default" type="button" ng-click="cc.buscaRCep('38082243')"><i class="glyphicon glyphicon-search"> </i></button>
@@ -154,12 +162,16 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-9">
-                                        <label for="exampleInputPassword1">Logradouro</label>
-                                        <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="empresa.enderecos[0].logradouro" placeholder="Logradouro">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Logradouro</label>
+                                            <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="empresa.enderecos[0].logradouro" placeholder="Logradouro">
+                                        </div>
                                     </div>
                                     <div class="col-sm-9">
-                                        <label for="exampleInputPassword1">Numero</label>
-                                        <input type="text" class="form-control col-sm-4" name="numero" ng-model="empresa.enderecos[0].numero" placeholder="Numero">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Numero</label>
+                                            <input type="text" class="form-control col-sm-4" name="numero" ng-model="empresa.enderecos[0].numero" placeholder="Numero">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -190,30 +202,31 @@
 
                                 <!-- -------------------  TELEFONE ----------------- -->
                                 <div class="row">
-                                    <div class="col-sm-4">
-                                    <label for="exampleInputPassword1" class="control-label" >Telefone</label>
-                                        <input type="text" class="form-control col-sm-4 gugu" name="phone" placeholder="Telefone">
-                                    </div>
+                                   
                                     <div class="col-sm-4" style="margin-top:25px">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Adicionar <span class="caret"></span></button>
                                             <ul class="dropdown-menu" role="menu">
-                                                <li><a href="javascript:;" class="addPhoneButton" data-name="phone_iphone">Principal</a></li>
                                                 <li><a href="javascript:;" class="addPhoneButton" data-name="phone_home">Compras</a></li>
                                                 <li><a href="javascript:;" class="addPhoneButton" data-name="phone_office">Vendas</a></li>
                                                 <li><a href="javascript:;" class="addPhoneButton" data-name="phone_office">SAC</a></li>
                                             </ul>
                                         </div>
                                     </div>
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1" class="control-label" >Telefone</label>
+                                        <input type="text" class="form-control col-sm-4 gugu" name="phone" placeholder="Telefone">
+                                    </div>
                                 </div>
                                 <!-- Template for dynamic field -->
                                 <div class="row" id="template" style="display: none;">
+                                    
+                                    <div class="col-sm-4" style="margin-top:25px">
+                                        <button type="button" class="btn btn-link removeButton">deletar</button>
+                                    </div>
                                     <div class="col-sm-4">
                                     <label  for="exampleInputPassword1" class="control-label">Telefone</label>
                                         <input id='gugu' type="text" class="form-control col-sm-4 gugu"  placeholder="Telefone">
-                                    </div>
-                                    <div class="col-sm-4" style="margin-top:25px">
-                                        <button type="button" class="btn btn-link removeButton">deletar</button>
                                     </div>
                                 </div>
 
@@ -305,48 +318,60 @@
                             </div>
                         </div>
                         <div class="tab-pane tab3" id="tab3">
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <label for="exampleInputPassword1">CPF Socio</label>
-                                    <input type="text" class="form-control" ng-model="empresa.socios[0].documentos[0].numero" name="book[0].title" placeholder="CPF Socio" />
-                                </div>
-                                <div class="col-sm-4">
-                                    <label for="exampleInputPassword1">Nome Socio</label>
-                                    <input type="text" class="form-control" ng-model="empresa.socios[0].documentos[0].nome" name="book[0].isbn" placeholder="Nome Socio" />
-                                </div>
-                                <div class="col-sm-2">
-                                    <label for="exampleInputPassword1">Porcentagem</label>
-                                    <input type="text" class="form-control" ng-model="empresa.socios[0].porcentagem" name="book[0].price" placeholder="%" />
-                                </div>
-                                <div class="col-sm-3" style="margin-top:18px">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="receiver" ng-model="empresa.socios[0].socioAdm" value="1" /> Socio Administrador ?
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-xs-1" style="margin-top:18px">
-                                    <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
-                                </div>
-                            </div>
-                                <div class="form-group hide" id="bookTemplate">
-                                    <div class="row">
+                            <div class="row socios"> 
                                     <div class="col-sm-2">
-                                        <label for="exampleInputPassword1">CPF Socio</label>
-                                        <input type="text" class="form-control" ng-model="empresa.socios[0].documentos[0].numero" name="book[0].title" placeholder="CPF Socio" />
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">CPF Socio</label>
+                                            <input type="text" class="form-control cpf-socio"  name="book[0].cpf" placeholder="CPF Socio" />
+                                        </div>
                                     </div>
                                     <div class="col-sm-4">
-                                        <label for="exampleInputPassword1">Nome Socio</label>
-                                        <input type="text" class="form-control" ng-model="empresa.socios[0].documentos[0].nome" name="book[0].isbn" placeholder="Nome Socio" />
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Nome Socio</label>
+                                            <input type="text" class="form-control nome-socio"  name="book[0].nome" placeholder="Nome Socio" />
+                                        </div>
                                     </div>
                                     <div class="col-sm-2">
-                                        <label for="exampleInputPassword1">Porcentagem</label>
-                                        <input type="text" class="form-control" ng-model="empresa.socios[0].porcentagem" name="book[0].price" placeholder="%" />
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Porcentagem</label>
+                                            <input type="text" class="form-control cota-socio"  name="book[0].cota" placeholder="%" />
+                                        </div>
                                     </div>
                                     <div class="col-sm-3" style="margin-top:18px">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="receiver" ng-model="empresa.socios[0].socioAdm" value="1" /> Socio Administrador ?
+                                                <input type="checkbox" name="receiver" class="check-socio" value="1" /> Socio Administrador ?
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-1" style="margin-top:18px">
+                                        <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                                    </div>
+                            </div>
+                                <div class="form-group hide" id="bookTemplate">
+                                    <div class="row socios">
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">CPF Socio</label>
+                                            <input type="text" class="form-control cpf-socio"  name="cpf-socio" placeholder="CPF Socio" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Nome Socio</label>
+                                            <input type="text" class="form-control nome-socio"  name="nome-socio" placeholder="Nome Socio" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Porcentagem</label>
+                                            <input type="text" class="form-control cota-socio" name="cota-socio" placeholder="%" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3" style="margin-top:18px">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="receiver" class="check-socio" value="1" /> Socio Administrador ?
                                             </label>
                                         </div>
                                     </div>
@@ -512,140 +537,21 @@
                 validating: 'glyphicon glyphicon-refresh'
             },
             fields: {
-            nome: {
-                message: 'The username is not valid',
-                validators: {
-                    notEmpty: {
-                        message: 'The username is required and can\'t be empty'
-                    },
-                    stringLength: {
-                        min: 6,
-                        max: 30,
-                        message: 'The username must be more than 6 and less than 30 characters long'
-                    },
-                    regexp: {
-                        regexp: /^[a-zA-Z0-9_\.]+$/,
-                        message: 'The username can only consist of alphabetical, number, dot and underscore'
-                    }
-                }
-            },
-            nunFunc: {
-                validators: {
-                    notEmpty: {
-                        message: 'The username is required and can\'t be empty'
-                    },
-                    integer: {
-                        message: 'The value is not an integer',
-                        // The default separators
-                        thousandsSeparator: '',
-                        decimalSeparator: '.'
-                    }
-                }
-            },
-            razao: {
-                message: 'The username is not valid',
-                validators: {
-                    notEmpty: {
-                        message: 'The username is required and can\'t be empty'
-                    },
-                    stringLength: {
-                        min: 6,
-                        max: 30,
-                        message: 'The username must be more than 6 and less than 30 characters long'
-                    }
-                }
-            },
-            logradouro: {
-                message: 'The username is not valid',
-                validators: {
-                    notEmpty: {
-                        message: 'The username is required and can\'t be empty'
-                    },
-                    stringLength: {
-                        min: 6,
-                        max: 30,
-                        message: 'The username must be more than 6 and less than 30 characters long'
-                    },
-                    regexp: {
-                        regexp: /^[a-zA-Z0-9_\.]+$/,
-                        message: 'The username can only consist of alphabetical, number, dot and underscore'
-                    }
-                }
-            },
-            cpf: {
-                validators: {
-                    notEmpty: {
-                        message: 'The country is required and can\'t be empty'
-                    },
-                    stringLength: {
-                        min: 6,
-                        max: 30,
-                        message: 'The username must be more than 6 and less than 30 characters long'
-                    },
-                    regexp: {
-                        regexp: /^[a-zA-Z0-9_\.]+$/,
-                        message: 'The username can only consist of alphabetical, number, dot and underscore'
-                    }
-                 }
-            },
-            cep: {
-                validators: {
-                    notEmpty: {
-                        message: 'The country is required and can\'t be empty'
-                    },
-                    stringLength: {
-                        min: 6,
-                        max: 30,
-                        message: 'The username must be more than 6 and less than 30 characters long'
-                    },
-                    regexp: {
-                        regexp: /^[a-zA-Z0-9_\.]+$/,
-                        message: 'The username can only consist of alphabetical, number, dot and underscore'
-                    }
-                 }
-            },
-            cnpj: {
-                validators: {
-                    notEmpty: {
-                        message: 'The country is required and can\'t be empty'
-                    },
-                    stringLength: {
-                        min: 6,
-                        max: 30,
-                        message: 'The username must be more than 6 and less than 30 characters long'
-                    },
-                    regexp: {
-                        regexp: /^[a-zA-Z0-9_\.]+$/,
-                        message: 'The username can only consist of alphabetical, number, dot and underscore'
-                    }
-                 }
-            },
-            email: {
-                validators: {
-                    notEmpty: {
-                        message: 'The email address is required and can\'t be empty'
-                    },
-                    emailAddress: {
-                        message: 'The input is not a valid email address'
-                    }
-                }
-            },
-            telefone: {
-                validators: {
-                    phone: {
-                        message: 'The input is not a valid UK phone number',
-                        country: 'BR'
-                    }
-                }
-            },
-            cep: {
-                validators: {
-                    zipCode: {
-                        country: 'BR',
-                        message: 'The input is not a valid US zip code'
-                    }
-                }
-            },
+
+            'book[0].cpf': notEmptyStringMinMaxRegexp,
+            'book[0].nome': notEmptyStringMinMaxRegexp,
+            'book[0].cota': integerNotEmptyValidation,
+             nome: notEmptyStringMinMaxRegexp,
+             nunFunc: integerNotEmptyValidation,
+            razao:notEmptyStringMinMax,
+            logradouro:notEmptyStringMinMax,
+            cpf: notEmptyStringMinMaxRegexp,
+            cep: notEmptyStringMinMax,
+            cnpj: notEmptyStringMinMax,
+            email: emailValidation,
+            telefone: telefoneValidation,
+            phone: telefoneValidation,
+            cep: cepNotEmptyValidation,
             password: {
                 validators: {
                     notEmpty: {
@@ -680,16 +586,16 @@
 
             // Update the name attributes
             $clone
-                .find('[name="title"]').attr('name', 'book[' + bookIndex + '].title').end()
-                .find('[name="isbn"]').attr('name', 'book[' + bookIndex + '].isbn').end()
-                .find('[name="price"]').attr('name', 'book[' + bookIndex + '].price').end();
+                .find('[name="cpf-socio"]').attr('name', 'book[' + bookIndex + '].cpf').end()
+                .find('[name="nome-socio"]').attr('name', 'book[' + bookIndex + '].nome').end()
+                .find('[name="cota-socio"]').attr('name', 'book[' + bookIndex + '].cota').end();
 
             // Add new fields
             // Note that we also pass the validator rules for new field as the third parameter
-            $('#bookForm')
-                .formValidation('addField', 'book[' + bookIndex + '].title')
-                .formValidation('addField', 'book[' + bookIndex + '].isbn')
-                .formValidation('addField', 'book[' + bookIndex + '].price');
+            $('#empresaForm')
+                .formValidation('addField', 'book[' + bookIndex + '].cpf',notEmptyStringMinMaxRegexp)
+                .formValidation('addField', 'book[' + bookIndex + '].nome',notEmptyStringMinMaxRegexp)
+                .formValidation('addField', 'book[' + bookIndex + '].cota',integerNotEmptyValidation);
         });
         $("select").select2({
           placeholder: "Select a state",
