@@ -21,6 +21,9 @@ public class Produto extends ModelCosmeDamiao
 	/** The type of an account. */
 	private String codigo;
 
+	/** The type of an account. */
+	private String ncm;
+
 	/** The description. */
 	private String cdBarras;
 
@@ -31,12 +34,6 @@ public class Produto extends ModelCosmeDamiao
 	private String produto;
 
 	private String aplicacao;
-
-
-
-
-
-
 
 	private String fracao;
 
@@ -53,8 +50,6 @@ public class Produto extends ModelCosmeDamiao
 	private SubGrupo subGrupo;
 
 	private Double porcao;
-
-	private List<MarcaProduto> marca;
 
 	private Double pesoBruto;
 

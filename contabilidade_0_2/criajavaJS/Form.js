@@ -1,38 +1,10 @@
-
-function titleize(text) {
-
-    // Convertendo primeira letra em maiuscula.
-    text = text.charAt(0).toUpperCase() + text.slice(1);
-
-    for (var i = 0; i < text.length; i++) {
-        if (text.charAt(i) ===" ") {
-
-            // Convertendo letra ap�s o ESPA�O em maiuscula
-            var charToUper = text.charAt(i+1).toUpperCase();
-
-            // Colocando texto de antes do ESPA�O na vari�vel
-            var sliceBegin = text.slice(0, (i+1));
-
-            // colocando o texto de depois do ESPA�O na vari�vel
-            var sliceEnd = text.slice(i + 2);
-
-            // Juntando tudo
-            text = sliceBegin + charToUper + sliceEnd;
-
-        } else {
-
-            // NAO CONSIGO PENSAR EM COMO TRANSFORMAR O RESTANTE DAS LETRAS EM MINUSCULA
-        }
-    }
-    return text;
-}
-
 Form_insert = function (oObject){
 console.log(oObject);
 
     var requerido = "Favor preencher o campo solicitado";
 	var text = '/** create by system gera-java version 1.0.0 '+dataAtualFormatada()+'*/\n';
     var div = '';
+/*
 text = text + '<link rel="stylesheet" href="dist/css/formValidation.css"/>\n';
 text = text + '    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css"/>\n';
 text = text + '    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2-bootstrap.min.css" />\n';
@@ -57,7 +29,7 @@ text = text + '    <script src="dist/js/framework/bootstrap.js"></script>\n';
 text = text + '\n';
 text = text + '<style type="text/css">\n';
 text = text + '#select2Form .form-control-feedback {\n';
-text = text + '    /* To make the feedback icon visible */\n';
+
 text = text + '    z-index: 100;\n';
 text = text + '}\n';
 text = text + '\n';
@@ -83,16 +55,22 @@ text = text + '            <div data-ui-wizard-form>\n';
 text = text + '                <h1>Informação do Usuario</h1>\n';
 text = text + '                <div>Informação do Usuario\n';
 
-
+*/
 var tamanho = 0;
 var validator = "";
 text = text + '<form id="installationForm" class="form-horizontal">\n';
 for (var i = 0 ; i < oObject[0].tabs[0].field.table.length;i++){
     var form = oObject[0].tabs[0].field.table[i].field;
     if(form.tipo == 'input' ){
-        div = div + '    <div class="col-sm-'+form.tamanho+'">\n';
-        div = div + '        <label for="exampleInputPassword1">'+form.label+'</label>\n';
-        div = div + '        <input type="text" class="form-control col-sm-8 '+form.class+'" ng-model="'+form.ngmodel+'" name="'+form.campo+'"  placeholder="'+form.campo+'">\n';
+            if( form.class == 'hide'){
+                div = div + '    <div class="'+form.class+'">\n';
+            }else{
+                div = div + '    <div class="col-sm-'+form.tamanho+' '+form.class+'">\n';
+            }
+        div = div + '        <div class="form-group">\n';
+        div = div + '             <label for="exampleInputPassword1">'+form.label+'</label>\n';
+        div = div + '             <input type="text" class="form-control col-sm-8 '+form.class+'" ng-model="'+form.ngmodel+'" name="'+form.campo+'"  placeholder="'+form.campo+'">\n';
+        div = div + '        </div>\n';
         div = div + '    </div>\n';
         tamanho = tamanho + parseInt(form.tamanho,10);
     }else if (form.tipo == 'radio'){
@@ -150,7 +128,7 @@ text = text + '</div>\n';
 text = text + '</form>\n';
 text = text + '<script>\n';
 text = text + '$(document).ready(function() {\n';
-
+/*
 text = text + '    function adjustIframeHeight() {\n';
 text = text + "        var $body   = $('body'),\n";
 text = text + "                $iframe = $body.data('iframe.fv');\n";
@@ -186,7 +164,7 @@ text = text + '.on("added.field.fv", function(e, data) {\n';
 text = text + "console.log('Added element --> ', data.field, data.element, data.options);\n";
 text = text + '})\n';
 text = text + '});\n';
-text = text + '</script>\n';
+text = text + '</script>\n';*/
 text = text + '\n';
 
 return text;

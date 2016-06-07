@@ -28,6 +28,8 @@ public class ProdutoParent extends ModelCosmeDamiao
 
 	private String localizacao;
 
+	private List<MarcaProduto> marca;
+
 	/** The numero. */
 	private Classificacao classificacao;
 
