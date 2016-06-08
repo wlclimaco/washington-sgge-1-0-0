@@ -1,0 +1,54 @@
+
+    <link rel="stylesheet" href="dist/css/formValidation.css"/>
+    <link rel="stylesheet" href="dist/css/select2.css"/>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css"/>
+    <script src="vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="dist/js/select2.min.js"></script>
+    <script src="dist/js/formValidation.js"></script>
+    <script src="dist/js/framework/bootstrap.js"></script>
+<style>
+
+    .mbr-plan__number1 :{
+        font-size: 40px!Important;
+    }
+</style>
+
+
+<div class='container' data-ng-controller="EmpresaController as cc">
+    <form ng-submit="submit()" id="empresaForm">
+        <div class="tab-content">
+            <div class="tab-pane tab1" id="tab1">
+                <div class="panel-body" >
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nome Completo</label>
+                                <input type="text"  ng-model="empresa.usuarios[0].nome" name="nome" class="form-control" placeholder="Nome Completo">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">CPF</label>
+                                <input type="text" id="cpf"  class="form-control" name="cpf" ng-model="empresa.usuarios[0].cpf.numero"  placeholder="CPF">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Telefone</label>
+                                <input type="text" class="form-control" ng-model="empresa.usuarios[0].telefone" name="telefone" placeholder="Telefone">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email</label>
+                                <input type="email" id='email' class="form-control" ng-model="empresa.usuarios[0].email" name="email" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Senha</label>
+                                <input type="password" class="form-control" ng-model="empresa.usuarios[0].senha" name="password" placeholder="Senha">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Confirmar Senha</label>
+                                <input type="password" class="form-control" ng-model="senha"  name="confirmPassword" placeholder="Confirmar Senha">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </form>
+</div>               

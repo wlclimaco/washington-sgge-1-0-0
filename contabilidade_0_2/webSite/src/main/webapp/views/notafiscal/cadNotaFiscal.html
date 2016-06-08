@@ -1,0 +1,339 @@
+<html>
+<head>
+<title>Minha pagina</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../dist/css/formValidation.css"/>
+
+    <script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/formValidation.js"></script>
+    <script type="text/javascript" src="../dist/js/framework/bootstrap.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
+                        Dados que geralmente não mudam
+                        </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                        </h4>
+                    </div>
+                <div id="collapseOne" class="panel-collapse collapse in collapseFour">
+                    <div class="panel-body">
+                        <div class="row">
+                            CNPJ:
+                            Razão Social:
+                            Nome fantasia:
+                            Inscr. Est.:
+                            Inscr. Mun.:
+                            CNAE:
+                            Telefone:
+                            Endereço:
+                            Bairro:
+                            Cidade/UF:
+                            Local fato gerador:
+                            CEP:
+                            CRT:
+                            Modelo nota:
+                            Série nota:
+                            Ambiente envio:
+                        </div>
+                    </div>
+                </div>
+                </div>                         
+            </div>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
+                        Dados gerais
+                        </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                        </h4>
+                    </div>
+                <div id="collapseOne" class="panel-collapse collapse in collapseFour">
+                    <div class="panel-body">
+                        <div class="row">
+                            Número da NFe (mudar)
+                            Natureza da operação
+                            Tipo de operação    
+                            Finalidade da emissão 
+                            Destino da operação   
+                            Possui NF referenciada
+                            Data emissão NF
+                            Hora emissão NF (atual)
+                            Data saída/entrada
+                            Hora saída/entrada (atual)
+                            Forma de pagamento 
+                            Presença do comprador  
+                            Ins. Est. Subst. Trib.
+
+                        </div>
+                    </div>
+                </div>
+                </div>                         
+            </div>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
+                        Dados do destinatário
+                        </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                        </h4>
+                    </div>
+                <div id="collapseOne" class="panel-collapse collapse in collapseFour">
+                    <div class="panel-body">
+                        <div class="row">
+                        Razão/Nome dest.
+                        CNPJ/CPF destinatário
+                        Telefone
+                        E-mail
+                        Inscr. Suframa
+                        Logradouro
+                        Número
+                        Complemento
+                        Bairro
+                        CEP
+                        Estado
+                        Município
+                        Indicador de IE
+                        Inscr. Estadual
+                        Inscr. Munici
+                        </div>
+                    </div>
+                </div>
+                </div>                         
+            </div>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
+                        Lista de produtos
+                        </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                        </h4>
+                    </div>
+                <div id="collapseOne" class="panel-collapse collapse in collapseFour">
+                    <div class="panel-body">
+                        <div class="row">
+                         Não efetuar cálculos automático
+                        Somar valor do IPI na Base de Cálculo do ICMS
+                        Não informar tributos da Lei da Transparência
+                        CÓD NOME DO ITEM    
+                        CFOP    
+                        QUANT   
+                        $ UNIT. 
+                        TOTAL PROD
+                        </div>
+                    </div>
+                </div>
+                </div>                         
+            </div>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
+                        Totalizadores <sub>(estes valores não podem ser alterados manualmente)</sub>
+                        </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                        </h4>
+                    </div>
+                <div id="collapseOne" class="panel-collapse collapse in collapseFour">
+                    <div class="panel-body">
+                        <div class="row">
+                        Total BC ICMS
+                        Total ICMS
+                        Total BC ICMS ST
+                        Total ICMS ST
+                        Total bruto dos produtos
+                        Total ICMS desonerado
+                        Total de frete
+                        Total de seguro
+                        Total de desconto
+                        Total de IPI
+                        Total de PIS
+                        Total de PIS ST
+                        Total de COFINS
+                        Total de COFINS ST
+                        Total de II
+                        Total do FCP
+                        ICMS UF remet.
+                        ICMS UF destino
+                        Total Outras Despesas
+                        TOTAL DA NF
+                        //====
+                        Informar retenções de impostos
+                        Retenções de impostos
+                        Valor retido PIS
+                        Valor retido COFINS
+                        Valor retido CSLL
+                        BC retido IRRF
+                        Valor retido IRRF
+                        BC retido previdência
+                        Valor retido previdência
+
+                        </div>
+                    </div>
+                </div>
+                </div>                         
+            </div>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
+                        Lei da Transparência <br> <sub>Esta lei mostra ao cliente a quantidade de impostos que ele está pagando para o governo ao adquirir a mercadoria.</sub>
+                        </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                        </h4>
+                    </div>
+                <div id="collapseOne" class="panel-collapse collapse in collapseFour">
+                    <div class="panel-body">
+                        <div class="row">
+                            Impostos federais
+                            Impostos estaduais
+                            Impostos municipais
+                            Total aproximado
+                        </div>
+                    </div>
+                </div>
+                </div>                         
+            </div>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
+                        Dados do transporte
+                        </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                        </h4>
+                    </div>
+                <div id="collapseOne" class="panel-collapse collapse in collapseFour">
+                    <div class="panel-body">
+                        <div class="row">
+                            Modalidade do frete   
+                            Listar 50Nome transportador
+                            CNPJ/CPF transport.
+                            Inscr. Est. transp.
+                            Endereço completo
+                            UF transportador   
+                            Município transp.
+                            Placa veículo
+                            UF veículo  
+                            Reg. Nac. Trans. Carga
+                            Identificação vagão
+                            Identificação balsa
+                            Informar retenções de ICMS de transporte
+                        </div>
+                    </div>
+                </div>
+                </div>                         
+            </div>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
+                        Volumes transportados
+                        </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                        </h4>
+                    </div>
+                <div id="collapseOne" class="panel-collapse collapse in collapseFour">
+                    <div class="panel-body">
+                        <div class="row">
+                        Quantidade de vol.
+                        Espécie dos vol.
+                        Marca dos volumes
+                        Numeração dos vol.
+                        Peso líquido
+                        Peso bruto
+                        Números dos lacres
+                        </div>
+                    </div>
+                </div>
+                </div>                         
+            </div>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
+                        Faturas e duplicatas
+                        </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                        </h4>
+                    </div>
+                <div id="collapseOne" class="panel-collapse collapse in collapseFour">
+                    <div class="panel-body">
+                        <div class="row">
+                            Número da fatura
+                            Valor original fat.
+                            Valor desconto
+                            Valor líquido fat.
+
+                        </div>
+                    </div>
+                </div>
+                </div>                         
+            </div>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
+                        Outras informações
+                        </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                        </h4>
+                    </div>
+                <div id="collapseOne" class="panel-collapse collapse in collapseFour">
+                    <div class="panel-body">
+                        <div class="row">
+                        Informações complementares
+                        Informações para o Fisco
+                        </div>
+                    </div>
+                </div>
+                </div>                         
+            </div>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
+                        Informações de compras
+                        </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                        </h4>
+                    </div>
+                <div id="collapseOne" class="panel-collapse collapse in collapseFour">
+                    <div class="panel-body">
+                        <div class="row">
+                            nformar dados de compras
+                            Nota de Empenho
+                            Pedido
+                            Contrato
+                        </div>
+                    </div>
+                </div>
+                </div>                         
+            </div>
+        </div>
+    </div>
+</div>   
+
+<script type="text/javascript">
+function toggleChevron(e) {
+    $(e.target)
+        .prev('.panel-heading')
+        .find("i.indicator")
+        .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+}
+$('#accordion').on('hidden.bs.collapse', toggleChevron);
+$('#accordion').on('shown.bs.collapse', toggleChevron);
+</script>
+</body>
+</html>

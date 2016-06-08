@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FormValidation demo</title>
+
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../dist/css/formValidation.css"/>
+
+    <script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/formValidation.js"></script>
+    <script type="text/javascript" src="../dist/js/framework/bootstrap.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+
+<form id="empresaForm">
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseOne">
+                                Cliente
+                                </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                                </h4>
+                            </div>
+                        <div id="collapseOne" class="panel-collapse collapse in collapseOne">
+                            <div class="panel-body">
+                            <div class="row">
+                                    <div class="col-sm-12">
+                                    <label for="exampleInputPassword1">Cliente</label>
+                                        <select id="atividade1" name="atividade1" class="form-control">
+                                            <option> teste 001</option>
+                                            <option> teste 002</option>
+                                            <option> teste 003</option>
+                                            <option> teste 004</option>
+                                            <option> teste 005</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>                         
+                    </div>
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseTwo">
+                                Dados Processo
+                                </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                                </h4>
+                            </div>
+                        <div id="collapseOne" class="panel-collapse collapse in collapseTwo">
+                            <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Data Inicio Processo</label>
+                                                <input type="text"  ng-model="empresa.usuarios[0].nome" name="nome" class="form-control" placeholder="Nome Completo">
+                                            </div>
+                                        </div>                                                                          
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">N° Processo</label>
+                                                <input type="text" class="form-control" ng-model="empresa.usuarios[0].telefone" name="telefone" placeholder="Telefone">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Descrição Processo</label>
+                                                <textarea class="form-control" rows="5" id="comment" placeholder="CPF"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>     
+                        </div>
+                        </div>                         
+                    </div>
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseTree">
+                                Financeiro
+                                </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                                </h4>
+                            </div>
+                        <div id="collapseOne" class="panel-collapse collapse in collapseTree">
+                            <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1">Forma Pagamento</label>
+                                        <select id="atividade1" name="atividade1" class="form-control">
+                                            <option>A Vista</option>
+                                            <option>1X</option>
+                                            <option>2X</option>
+                                            <option>3X</option>
+                                            <option>4X</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Valor Total</label>
+                                            <input type="text"  ng-model="empresa.usuarios[0].nome" name="nome" class="form-control" placeholder="Nome Completo">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Data Primeiro Pagamento</label>
+                                            <input type="text" id="cpf"  class="form-control" name="cpf" ng-model="empresa.usuarios[0].cpf.numero"  placeholder="CPF">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>     
+                        </div>
+                        </div>                         
+                    </div>
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFour">
+                                Audiencia
+                                </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                                </h4>
+                            </div>
+                        <div id="collapseOne" class="panel-collapse collapse in collapseFour">
+                            <div class="panel-body">
+                            <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Data Audiencia</label>
+                                            <input type="text" id="cpf"  class="form-control" name="cpf" ng-model="empresa.usuarios[0].cpf.numero"  placeholder="CPF">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Juiz Responsavel</label>
+                                            <input type="text" id="cpf"  class="form-control" name="cpf" ng-model="empresa.usuarios[0].cpf.numero"  placeholder="CPF">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1">Vara</label>
+                                        <select id="atividade1" name="atividade1" class="form-control">
+                                            <option> teste 001</option>
+                                            <option> teste 002</option>
+                                            <option> teste 003</option>
+                                            <option> teste 004</option>
+                                            <option> teste 005</option>
+                                        </select>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Resultado</label>
+                                                <textarea class="form-control" rows="5" id="comment" placeholder="CPF"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>                         
+                    </div>
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFive">
+                                Advogado
+                                </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                                </h4>
+                            </div>
+                        <div id="collapseOne" class="panel-collapse collapse in collapseFive">
+                            <div class="panel-body">
+                            <div class="row">
+                                    <div class="col-sm-12">
+                                    <label for="exampleInputPassword1">Nome do Advogado no processo</label>
+                                        <select id="atividade1" name="atividade1" class="form-control">
+                                            <option> teste 001</option>
+                                            <option> teste 002</option>
+                                            <option> teste 003</option>
+                                            <option> teste 004</option>
+                                            <option> teste 005</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>                         
+                    </div>
+    </form>
+</div>
+            </div>
+        </div>   
+
+<script type="text/javascript">
+function toggleChevron(e) {
+    $(e.target)
+        .prev('.panel-heading')
+        .find("i.indicator")
+        .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+}
+$('#accordion').on('hidden.bs.collapse', toggleChevron);
+$('#accordion').on('shown.bs.collapse', toggleChevron);
+</script>
+</body>
+</html>

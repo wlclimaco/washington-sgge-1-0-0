@@ -1,0 +1,341 @@
+<html>
+<head>
+<title>Minha pagina</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../dist/css/formValidation.css"/>
+
+    <script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/formValidation.js"></script>
+    <script type="text/javascript" src="../dist/js/framework/bootstrap.js"></script>
+</head>
+<body>
+<div class="container">
+    <div>
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href=".home" aria-controls="home" role="tab" data-toggle="tab">Produto</a></li>
+        <li role="presentation"><a href=".profile" aria-controls="profile" role="tab" data-toggle="tab">Dados Tributarios</a></li>
+        <li role="presentation"><a href=".messages" aria-controls="messages" role="tab" data-toggle="tab">Preço/Estoque</a></li>
+        <li role="presentation"><a href=".imagens" aria-controls="imagens" role="tab" data-toggle="tab">Imagens</a></li>
+        <li role="presentation"><a href=".settings" aria-controls="settings" role="tab" data-toggle="tab">Historico</a></li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active home" id="home">
+        
+    <div class="row">
+        <form id="installationForm" class="form-horizontal">
+    <div class="row">
+         <div class="hide">
+            <div class="form-group">
+                 <label for="exampleInputPassword1"></label>
+                 <input type="text" class="form-control col-sm-8 hide" ng-model="empresa.id" name="id"  placeholder="id">
+            </div>
+        </div>
+        <div class="col-sm-8 ">
+            <div class="form-group">
+                 <label for="exampleInputPassword1">Produto</label>
+                 <input type="text" class="form-control col-sm-8 " ng-model="empresa.nome" name="produto"  placeholder="produto">
+            </div>
+        </div>
+         <div class="col-sm-4 ">
+            <div class="form-group">
+                 <label for="exampleInputPassword1">Código personalizado</label>
+                 <input type="text" class="form-control col-sm-8 " ng-model="empresa.nome" name="codigo"  placeholder="codigo">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3 ">
+            <div class="form-group">
+                 <label for="exampleInputPassword1">NCM</label>
+                 <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="ncm"  placeholder="ncm">
+            </div>
+        </div>
+         <div class="col-sm-3 ">
+            <div class="form-group">
+                 <label for="exampleInputPassword1">Código de barras (EAN):</label>
+                 <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="cdBarras"  placeholder="cdBarras">
+            </div>
+        </div>
+        <div class="col-sm-3 ">
+            <div class="form-group">
+                 <label for="exampleInputPassword1">Data Cadastro</label>
+                 <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="dataCreate"  placeholder="dataCreate">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 ">
+            <div class="form-group">
+                 <label for="exampleInputPassword1">Inform. adicionais para a NFe</label>
+                 <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="aplicacao"  placeholder="aplicacao">
+            </div>
+        </div>
+        <div class="col-sm-6 ">
+            <div class="form-group">
+                 <label for="exampleInputPassword1">Observações</label>
+                 <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="fracao"  placeholder="fracao">
+            </div>
+        </div>
+    </div>
+<div class="row">
+    <div class="col-sm-3 ">
+        <div class="form-group">
+             <label for="exampleInputPassword1">Unidade tributada</label>
+             <select id="atividade1" name="atividade1" class="form-control">
+                <option> teste 001</option>
+                <option> teste 002</option>
+                <option> teste 003</option>
+                <option> teste 004</option>
+                <option> teste 005</option>
+                <option style="background-color : #F1F4F9"><a>Adicionar Novo </a><i class="glyphicon glyphicon-plus"></i></option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-3 ">
+        <div class="form-group">
+             <label for="exampleInputPassword1">Grupo</label>
+             <select id="atividade1" name="atividade1" class="form-control">
+                <option> teste 001</option>
+                <option> teste 002</option>
+                <option> teste 003</option>
+                <option> teste 004</option>
+                <option> teste 005</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-3 ">
+        <div class="form-group">
+             <label for="exampleInputPassword1">Sub-Grupo</label>
+             <select id="atividade1" name="atividade1" class="form-control">
+                <option> teste 001</option>
+                <option> teste 002</option>
+                <option> teste 003</option>
+                <option> teste 004</option>
+                <option> teste 005</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-3 ">
+        <div class="form-group">
+             <label for="exampleInputPassword1">Marca</label>
+             <select id="atividade1" name="atividade1" class="form-control">
+                <option> teste 001</option>
+                <option> teste 002</option>
+                <option> teste 003</option>
+                <option> teste 004</option>
+                <option> teste 005</option>
+            </select>
+        </div>
+    </div>
+
+</div>
+<div class="form-group">
+    <div class="col-lg-offset-3 col-lg-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</div>
+</form>
+    </div>
+    </div>
+    <div role="tabpanel" class="tab-pane profile" id="profile">
+        <div class="row">
+            <div class="col-sm-4 ">
+                <div class="form-group">
+                     <label for="exampleInputPassword1">Peso unitário bruto (kg)</label>
+                     <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="pesoBruto"  placeholder="pesoBruto">
+                </div>
+            </div>
+            <div class="col-sm-4 ">
+                <div class="form-group">
+                     <label for="exampleInputPassword1">Peso unitário líquido (kg)</label>
+                     <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="pesoLiquido"  placeholder="pesoLiquido">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 ">
+                <div class="form-group">
+                     <label for="exampleInputPassword1">CFOP padrão para NFe</label>
+                     <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 ">
+                <div class="form-group">
+                     <label for="exampleInputPassword1">ICMS - Situação Tributária</label>
+                     <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                </div>
+            </div>
+            <div class="col-sm-3 ">
+                <div class="form-group">
+                     <label for="exampleInputPassword1">ICMS - Situação Tributária</label>
+                     <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5 ">
+                <div class="form-group">
+                     <label for="exampleInputPassword1">IPI - Situação tributária</label>
+                     <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                </div>
+            </div>
+            <div class="col-sm-5 ">
+                <div class="form-group">
+                     <label for="exampleInputPassword1">Classe cigarros e bebidas</label>
+                     <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 ">
+                <div class="form-group">
+                     <label for="exampleInputPassword1">CNPJ Produtor</label>
+                     <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                </div>
+            </div>
+            <div class="col-sm-4 ">
+                <div class="form-group">
+                     <label for="exampleInputPassword1">Cod. selo controle IPI</label>
+                     <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                </div>
+            </div>
+            <div class="col-sm-4 ">
+                <div class="form-group">
+                     <label for="exampleInputPassword1">Qtd. selo IPI</label>
+                     <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                </div>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-sm-6 ">
+                    <div class="form-group">
+                         <label for="exampleInputPassword1">Cód. enquadramento</label>
+                         <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3 ">
+                    <div class="form-group">
+                         <label for="exampleInputPassword1">PIS - Situação tributária</label>
+                         <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                    </div>
+                </div>
+                <div class="col-sm-3 ">
+                    <div class="form-group">
+                         <label for="exampleInputPassword1">Valor unid. trib. PIS</label>
+                         <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 ">
+                    <div class="form-group">
+                         <label for="exampleInputPassword1">Tipo de cálculo Subst. Trib.</label>
+                         <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                    </div>
+                </div>
+                <div class="col-sm-3 ">
+                    <div class="form-group">
+                         <label for="exampleInputPassword1">Valor unid trib PIS ST</label>
+                         <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 ">
+                    <div class="form-group">
+                         <label for="exampleInputPassword1">COFINS - Situação Tributária</label>
+                         <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                    </div>
+                </div>
+                <div class="col-sm-3 ">
+                    <div class="form-group">
+                         <label for="exampleInputPassword1">Valor unid trib COFINS</label>
+                         <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                    </div>
+                </div>
+            </div>
+            <div class="row">           
+                <div class="col-sm-3 ">
+                    <div class="form-group">
+                         <label for="exampleInputPassword1">Tipo de cálculo Subst. Trib.</label>
+                         <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                    </div>
+                </div>
+                <div class="col-sm-3 ">
+                    <div class="form-group">
+                         <label for="exampleInputPassword1">Alíquota COFINS ST</label>
+                         <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div role="tabpanel" class="tab-pane messages" id="messages">
+            <div class="row">           
+                <div class="col-sm-3 ">
+                    <div class="form-group">
+                         <label for="exampleInputPassword1">Estoque Minimo</label>
+                         <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                    </div>
+                </div>
+                <div class="col-sm-3 ">
+                    <div class="form-group">
+                         <label for="exampleInputPassword1">Estoque Atual</label>
+                         <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                    </div>
+                </div>
+                <div class="col-sm-3 ">
+                    <div class="form-group">
+                         <label for="exampleInputPassword1">Estoque Maximo</label>
+                         <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                    </div>
+                </div>
+            </div>
+            <div class="row">           
+                <div class="col-sm-3 ">
+                    <div class="form-group">
+                         <label for="exampleInputPassword1">Margem de lucro</label>
+                         <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                    </div>
+                </div>
+                <div class="col-sm-3 ">
+                    <div class="form-group">
+                         <label for="exampleInputPassword1">Preço de custo</label>
+                         <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                    </div>
+                </div>
+                <div class="col-sm-3 ">
+                    <div class="form-group">
+                         <label for="exampleInputPassword1">Preço de venda</label>
+                         <input type="text" class="form-control col-sm-8 " ng-model="empresa.numFunc" name="modoUso"  placeholder="modoUso">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div role="tabpanel" class="tab-pane settings" id="settings">martins</div>
+    </div>
+</div>   
+
+<script type="text/javascript">
+function toggleChevron(e) {
+    $(e.target)
+        .prev('.panel-heading')
+        .find("i.indicator")
+        .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+}
+$('#accordion').on('hidden.bs.collapse', toggleChevron);
+$('#accordion').on('shown.bs.collapse', toggleChevron);
+</script>
+</body>
+</html>

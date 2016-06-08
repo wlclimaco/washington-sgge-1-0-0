@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FormValidation demo</title>
+
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../dist/css/formValidation.css"/>
+
+    <script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/formValidation.js"></script>
+    <script type="text/javascript" src="../dist/js/framework/bootstrap.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+
+<form id="installationForm" class="form-horizontal">
+<div class="row">
+     <div class="hide">
+        <div class="form-group">
+             <label for="exampleInputPassword1"></label>
+             <input type="text" class="form-control col-sm-8 hide" ng-model="cliente.id" name="id"  placeholder="id">
+        </div>
+    </div>
+
+</div>
+<div class="row">
+     <div class="col-sm-6 ">
+        <div class="form-group">
+             <label for="exampleInputPassword1">Nome ou Razão social</label>
+             <input type="text" class="form-control col-sm-6 " ng-model="empresa.nome" name="nome"  placeholder="nome">
+        </div>
+    </div>
+    <div class="col-sm-6 ">
+        <div class="form-group">
+             <label for="exampleInputPassword1">Nome Fantasia</label>
+             <input type="text" class="form-control col-sm-6 " ng-model="empresa.numFunc" name="nomeFantasia"  placeholder="nomeFantasia">
+        </div>
+    </div>
+
+</div>
+<div class="row">
+     <div class="col-sm-6 ">
+        <div class="form-group">
+             <label for="exampleInputPassword1">Data nascimento</label>
+             <input type="text" class="form-control col-sm-8 " ng-model="empresa.entidadeEnumValue" name="datanasc"  placeholder="datanasc">
+        </div>
+    </div>
+    <div class="hide">
+        <div class="form-group">
+             <label for="exampleInputPassword1"></label>
+             <input type="text" class="form-control col-sm-8 hide" ng-model="empresa.documento[0].id" name="id"  placeholder="id">
+        </div>
+    </div>
+     <div class="hide">
+        <div class="form-group">
+             <label for="exampleInputPassword1">Documento</label>
+             <input type="text" class="form-control col-sm-8 hide" ng-model="empresa.documento[0].documentoTypeEnumValue" name="documentoTypeEnumValue"  placeholder="documentoTypeEnumValue">
+        </div>
+    </div>
+    <div class="col-sm-6 ">
+        <div class="form-group">
+             <label for="exampleInputPassword1">CPF ou CNPJ</label>
+             <input type="text" class="form-control col-sm-8 " ng-model="empresa.documento[0].numero" name="numero"  placeholder="numero">
+        </div>
+    </div>
+
+</div>
+<div class="row">
+     <div class="hide">
+        <div class="form-group">
+             <label for="exampleInputPassword1"></label>
+             <input type="text" class="form-control col-sm-8 hide" ng-model="empresa.documento[0].id" name="id"  placeholder="id">
+        </div>
+    </div>
+    <div class="hide">
+        <div class="form-group">
+             <label for="exampleInputPassword1">Documento</label>
+             <input type="text" class="form-control col-sm-8 hide" ng-model="empresa.documento[0].documentoTypeEnumValue" name="documentoTypeEnumValue"  placeholder="documentoTypeEnumValue">
+        </div>
+    </div>
+
+</div>
+<div class="row">
+     <div class="col-sm-6 ">
+        <div class="form-group">
+             <label for="exampleInputPassword1">Inscr Est Subst Trib</label>
+             <input type="text" class="form-control col-sm-8 " ng-model="empresa.documento[0].numero" name="numero"  placeholder="numero">
+        </div>
+    </div>
+    <div class="hide">
+        <div class="form-group">
+             <label for="exampleInputPassword1"></label>
+             <input type="text" class="form-control col-sm-8 hide" ng-model="empresa.documento[0].id" name="id"  placeholder="id">
+        </div>
+    </div>
+
+     <div class="hide">
+        <div class="form-group">
+             <label for="exampleInputPassword1">Documento</label>
+             <input type="text" class="form-control col-sm-8 hide" ng-model="empresa.documento[0].documentoTypeEnumValue" name="documentoTypeEnumValue"  placeholder="documentoTypeEnumValue">
+        </div>
+    </div>
+    <div class="col-sm-6 ">
+        <div class="form-group">
+             <label for="exampleInputPassword1">Indicador de IE</label>
+             <input type="text" class="form-control col-sm-8 " ng-model="empresa.documento[0].numero" name="numero"  placeholder="numero">
+        </div>
+    </div>
+
+</div>
+<div class="row">
+     <div class="hide">
+        <div class="form-group">
+             <label for="exampleInputPassword1"></label>
+             <input type="text" class="form-control col-sm-8 hide" ng-model="empresa.documento[0].id" name="id"  placeholder="id">
+        </div>
+    </div>
+    <div class="hide">
+        <div class="form-group">
+             <label for="exampleInputPassword1">Documento</label>
+             <input type="text" class="form-control col-sm-8 hide" ng-model="empresa.documento[0].documentoTypeEnumValue" name="documentoTypeEnumValue"  placeholder="documentoTypeEnumValue">
+        </div>
+    </div>
+
+</div>
+<div class="row">
+     <div class="col-sm-6 ">
+        <div class="form-group">
+             <label for="exampleInputPassword1">Inscrição Estadual</label>
+             <input type="text" class="form-control col-sm-8 " ng-model="empresa.documento[0].numero" name="numero"  placeholder="numero">
+        </div>
+    </div>
+    <div class="hide">
+        <div class="form-group">
+             <label for="exampleInputPassword1"></label>
+             <input type="text" class="form-control col-sm-8 hide" ng-model="empresa.documento[0].id" name="id"  placeholder="id">
+        </div>
+    </div>
+
+     <div class="hide">
+        <div class="form-group">
+             <label for="exampleInputPassword1">Documento</label>
+             <input type="text" class="form-control col-sm-8 hide" ng-model="empresa.documento[0].documentoTypeEnumValue" name="documentoTypeEnumValue"  placeholder="documentoTypeEnumValue">
+        </div>
+    </div>
+    <div class="col-sm-6 ">
+        <div class="form-group">
+             <label for="exampleInputPassword1">Inscrição Municipal</label>
+             <input type="text" class="form-control col-sm-8 " ng-model="empresa.documento[0].numero" name="numero"  placeholder="numero">
+        </div>
+    </div>
+
+</div>
+<div class="row">
+     <div class="hide">
+        <div class="form-group">
+             <label for="exampleInputPassword1"></label>
+             <input type="text" class="form-control col-sm-8 hide" ng-model="empresa.documento[0].id" name="id"  placeholder="id">
+        </div>
+    </div>
+    <div class="hide">
+        <div class="form-group">
+             <label for="exampleInputPassword1">Documento</label>
+             <input type="text" class="form-control col-sm-8 hide" ng-model="empresa.documento[0].documentoTypeEnumValue" name="documentoTypeEnumValue"  placeholder="documentoTypeEnumValue">
+        </div>
+    </div>
+
+</div>
+<div class="row">
+     <div class="col-sm-6 ">
+        <div class="form-group">
+             <label for="exampleInputPassword1">Inscrição Suframa</label>
+             <input type="text" class="form-control col-sm-8 " ng-model="empresa.documento[0].numero" name="numero"  placeholder="numero">
+        </div>
+    </div>
+    <div class="hide">
+        <div class="form-group">
+             <label for="exampleInputPassword1"></label>
+             <input type="text" class="form-control col-sm-8 hide" ng-model="empresa.endereco[0].id" name="id"  placeholder="id">
+        </div>
+    </div>
+
+</div>
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseFive">
+                                Endereço
+                                </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                                </h4>
+                            </div>
+                        <div id="collapseOne" class="panel-collapse collapse in collapseFive">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                        <label for="exampleInputPassword1">CEP</label>
+                                            <div class="input-group">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="cep" ng-model="empresa.enderecos[0].cep">
+                                                </div>
+                                                <span class="input-group-btn">
+
+                                                    <button class="btn btn-default" type="button" ng-click="cc.buscaRCep('38082243')"><i class="glyphicon glyphicon-search"> </i></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-9 ">
+                                            <div class="form-group">
+                                                 <label for="exampleInputPassword1">Logradouro</label>
+                                                 <input type="text" class="form-control col-sm-8 " ng-model="empresa.endereco[0].logradouro" name="logradouro"  placeholder="logradouro">
+                                            </div>
+                                        </div>
+                                         <div class="col-sm-2 ">
+                                            <div class="form-group">
+                                                 <label for="exampleInputPassword1">Numero</label>
+                                                 <input type="text" class="form-control col-sm-8 " ng-model="empresa.endereco[0].numero" name="numero"  placeholder="numero">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4 ">
+                                            <div class="form-group">
+                                                 <label for="exampleInputPassword1">Bairro</label>
+                                                 <input type="text" class="form-control col-sm-8 " ng-model="empresa.endereco[0].bairro" name="bairro"  placeholder="bairro">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 ">
+                                            <div class="form-group">
+                                                 <label for="exampleInputPassword1">Municipio</label>
+                                                 <input type="text" class="form-control col-sm-8 " ng-model="empresa.endereco[0].cidade" name="cidade"  placeholder="cidade">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 ">
+                                            <div class="form-group">
+                                                <label class="col-xs-1 control-label">Estado</label>
+                                                    <select id="mySel" name="cnae" class="form-control">
+                                                        <option> teste 001</option>
+                                                        <option> teste 002</option>
+                                                        <option> teste 003</option>
+                                                        <option> teste 004</option>
+                                                        <option> teste 005</option>
+                                                    </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                        </div>                         
+                    </div>
+                </div>
+            </div>
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseOne">
+                                Telefones
+                                </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in collapseOne">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <!-- -------------------  TELEFONE ----------------- -->
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label for="exampleInputPassword1" class="control-label" >Telefone</label>
+                                                <input type="text" class="form-control col-sm-4 gugu" name="phone" placeholder="Telefone">
+                                            </div>
+                                            <div class="col-sm-4" style="margin-top:25px">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Adicionar <span class="caret"></span></button>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="javascript:;" class="addPhoneButton" data-name="phone_home">Compras</a></li>
+                                                        <li><a href="javascript:;" class="addPhoneButton" data-name="phone_office">Vendas</a></li>
+                                                        <li><a href="javascript:;" class="addPhoneButton" data-name="phone_office">SAC</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Template for dynamic field -->
+                                        <div class="row" id="template" style="display: none;">
+
+                                            
+                                            <div class="col-sm-4">
+                                            <label  for="exampleInputPassword1" class="control-label">Telefone</label>
+                                                <input id='gugu' type="text" class="form-control col-sm-4 gugu"  placeholder="Telefone">
+                                            </div>
+                                            <div class="col-sm-4" style="margin-top:25px">
+                                                <button type="button" class="btn btn-link removeButton">deletar</button>
+                                            </div>
+                                        </div>
+
+                                <!-- ------------------------------------- -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=".collapseTwo">
+                                Emails
+                                </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in collapseTwo">
+                                <div class="panel-body">
+                                    <!-- -------------------  Email Empresa ----------------- -->
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                    <label for="exampleInputPassword1">Email</label>
+                                        <input type="text" class="form-control col-sm-4 input-email" name="email" placeholder="Email">
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:25px">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Adicionar <span class="caret"></span></button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="javascript:;" class="addEmailButton" data-name="email_princ">Principal</a></li>
+                                                <li><a href="javascript:;" class="addEmailButton" data-name="email_home">Compras</a></li>
+                                                <li><a href="javascript:;" class="addEmailButton" data-name="email_office">Vendas</a></li>
+                                                <li><a href="javascript:;" class="addEmailButton" data-name="email_nfe">NFE</a></li>
+                                                <li><a href="javascript:;" class="addEmailButton" data-name="email_sac">SAC</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Template for dynamic field -->
+                                <div class="row" id="template-email" style="display: none;">
+                                    <div class="col-sm-4">
+                                    <label for="exampleInputPassword1" class="control-label">Email</label>
+                                        <input type="email" class="form-control col-sm-4 input-email"  placeholder="Email">
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:25px">
+                                        <button type="button" class="btn btn-link removeButton">deletar</button>
+                                    </div>
+                                </div>
+
+                                <!-- ------------------------------------- --><!-- ------------------------------------- -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+<div class="form-group">
+    <div class="col-lg-offset-3 col-lg-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</div>
+</form>
+
+
+        </div>
+    </div>
+</div>   
+
+<script type="text/javascript">
+$(document).ready(function() {
+function toggleChevron(e) {
+    $(e.target)
+        .prev('.panel-heading')
+        .find("i.indicator")
+        .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+}
+$('#accordion').on('hidden.bs.collapse', toggleChevron);
+$('#accordion').on('shown.bs.collapse', toggleChevron);
+
+//============================= Telefone
+        $('.addPhoneButton').on('click', function() {
+
+            var $that     = $(this),
+            $template = $('#template'),
+            $newRow   = $template.clone().removeAttr('id').insertBefore($template).show();
+
+            $that.parent().addClass('disabled');
+
+            // Set the label and field name
+            var fieldName = $that.attr('data-name');
+            $newRow
+                .find('.control-label')
+                    .html($that.html())
+                    .end()
+                .find('input')
+                    .attr('name', fieldName)
+                    .end()
+                .on('click', '.removeButton', function() {
+                    // Remove field when clicking the Remove button
+                    $('#contactForm').formValidation('removeField', fieldName);
+
+                    // Enable the Add button
+                    $that.parent().removeClass('disabled');
+
+                    // Remove element
+                    $newRow.remove();
+                });
+
+            // Add new field
+            $('#empresaForm').formValidation('addField', fieldName, {
+                message: 'The phone number is not valid',
+                validators: {
+                    digits: {
+                        message: 'The value can contain only digits'
+                    }
+                }
+            });
+        });
+        //============================= Telefone fim
+
+        //============================= Email
+        $('.addEmailButton').on('click', function() {
+            var $that     = $(this),
+                $template = $('#template-email'),
+                $newRow   = $template.clone().removeAttr('id').insertBefore($template).show();
+
+            $that.parent().addClass('disabled');
+
+            // Set the label and field name
+            var fieldName = $that.attr('data-name');
+            $newRow
+                .find('.control-label')
+                    .html($that.html())
+                    .end()
+                .find('input')
+                    .attr('name', fieldName)
+                    .end()
+                .on('click', '.removeButton', function() {
+                    // Remove field when clicking the Remove button
+                    $('#contactForm').formValidation('removeField', fieldName);
+
+                    // Enable the Add button
+                    $that.parent().removeClass('disabled');
+
+                    // Remove element
+                    $newRow.remove();
+                });
+
+            // Add new field
+            $('#empresaForm').formValidation('addField', fieldName, {
+                message: 'The phone number is not valid',
+                validators: {
+                    digits: {
+                        message: 'The value can contain only digits'
+                    }
+                }
+            });
+        });
+        //============================= Email fim
+});
+</script>
+</body>
+</html>

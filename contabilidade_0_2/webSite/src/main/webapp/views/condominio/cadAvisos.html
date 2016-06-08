@@ -1,0 +1,794 @@
+
+    <link rel="stylesheet" href="dist/css/formValidation.css"/>
+    <link rel="stylesheet" href="dist/css/select2.css"/>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css"/>
+    <link href="thirdparty/twitter-bootstrap-wizard-master/prettify.css" rel="stylesheet">
+    <link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload.css">
+    <link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload-ui.css">
+<!-- CSS adjustments for browsers with JavaScript disabled -->
+    <noscript><link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload-noscript.css"></noscript>
+    <noscript><link rel="stylesheet" href="thirdparty/jQuery-File-Upload-master/css/jquery.fileupload-ui-noscript.css"></noscript>
+
+    <!-- The Templates plugin is included to render the upload/download listings -->
+
+    <!-- The main application script
+    <script src="thirdparty/jQuery-File-Upload-master/js/main.js"></script>-->
+
+    <script src="vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="dist/js/select2.min.js"></script>
+    <script src="dist/js/formValidation.js"></script>
+    <script src="dist/js/framework/bootstrap.js"></script>
+    <script src="thirdparty/twitter-bootstrap-wizard-master/jquery.bootstrap.wizard.js"></script>
+    <script src="thirdparty/twitter-bootstrap-wizard-master/prettify.js"></script>
+<style>
+
+    .mbr-plan__number1 :{
+        font-size: 40px!Important;
+    }
+</style>
+
+
+<div class='container' data-ng-controller="EmpresaController as cc">
+
+            <section id="wizard" style="background : white">
+                <div id="rootwizard">
+                    <div class="navbar">
+                      <div class="navbar-inner">
+                        <div class="container">
+                    <ul>
+                        <li><a href=".tab1" data-toggle="tab">Informações do Usuario</a></li>
+                        <li><a href=".tab2" data-toggle="tab">Informações da Empresa</a></li>
+                        <li><a href=".tab3" data-toggle="tab">Informações de Socios</a></li>
+                        <li><a href=".tab4" data-toggle="tab">Informações Plano Serviçoes</a></li>
+                        <li><a href=".tab5" data-toggle="tab">Contrato Social</a></li>
+                        <li><a href=".tab6" data-toggle="tab">Pagamento</a></li>
+                    </ul>
+                     </div>
+                      </div>
+                    </div>
+                    <div id="bar" class="progress">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;background : red"></div>
+                    </div>
+                    <form ng-submit="submit()" id="empresaForm">
+                    <div class="tab-content">
+                        <div class="tab-pane tab1" id="tab1">
+                            <div class="panel-body" >
+                                <div class="row">
+                                    <div class="col-md-8 col-md-offset-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Nome Completo</label>
+                                            <input type="text"  ng-model="empresa.usuarios[0].nome" name="nome" class="form-control" placeholder="Nome Completo">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">CPF</label>
+                                            <input type="text" id="cpf"  class="form-control" name="cpf" ng-model="empresa.usuarios[0].cpf.numero"  placeholder="CPF">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Telefone</label>
+                                            <input type="text" class="form-control" ng-model="empresa.usuarios[0].telefone" name="telefone" placeholder="Telefone">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Email</label>
+                                            <input type="email" id='email' class="form-control" ng-model="empresa.usuarios[0].email" name="email" placeholder="Email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Senha</label>
+                                            <input type="password" class="form-control" ng-model="empresa.usuarios[0].senha" name="password" placeholder="Senha">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Confirmar Senha</label>
+                                            <input type="password" class="form-control" ng-model="senha"  name="confirmPassword" placeholder="Confirmar Senha">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane tab2" id="tab2">
+                            <div class="panel-body" >
+                                <div class="col-sm-12">
+                                       <label for="exampleInputPassword1">Tipo de Empresa</label>
+                                        <dl class="dl-horizontal">
+                                            <dd>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="1" checked ><span>Venda e Compra e prstação de serviço </span></label>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="2" ><span>Clinica </span></label>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Escritorio Advocacia</span></label>
+
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Condominio</span></label>
+
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Escritorio Contabil</span></label>
+                                            </dd>
+                                        </dl>
+
+                                    </div>
+                                <div class="row">
+                                    <div class="input-group">
+                                        <div class="col-sm-8">
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">Digite seu CNPJ</label>
+                                                <input type="text" class="form-control col-sm-8" name="cnpj" ng-model="empresa.documentos[0].numero" placeholder="CNPJ">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">Informe o Numero de Funcionarios</label>
+                                                <input type="text" class="form-control col-sm-4" name="numFunc" ng-model="empresa.numFunc" placeholder="Numero de Funcionarios">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Informe a Razão Social</label>
+                                            <input type="text" class="form-control col-sm-8" name="razao" ng-model="empresa.nome" placeholder="Razão Social">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="exampleInputPassword1">Sua Empresa Esta Ativa?</label>
+                                        <dl class="dl-horizontal">
+                                            <dd>
+                                                <label class="ui-radio"><input name="radio1" ng-model="empresa.statusInicial" type="radio" value="1" ><span>Sim</span></label>
+                                                <label class="ui-radio"><input name="radio1" ng-model="empresa.statusInicial" type="radio" value="2" checked><span>Não</span></label>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-sm-6">
+                                       <label for="exampleInputPassword1">Selecione o regime Tributario da Empresa</label>
+                                        <dl class="dl-horizontal">
+                                            <dd>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="1" checked ><span>Simples Nacional</span></label>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="2" ><span>Lucro Real</span></label>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Lucro Presumido</span></label>
+                                            </dd>
+                                        </dl>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                    <label for="exampleInputPassword1">CEP</label>
+                                        <div class="input-group">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="cep" ng-model="empresa.enderecos[0].cep">
+                                            </div>
+                                            <span class="input-group-btn">
+
+                                                <button class="btn btn-default" type="button" ng-click="cc.buscaRCep('38082243')"><i class="glyphicon glyphicon-search"> </i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Logradouro</label>
+                                            <input type="text" class="form-control col-sm-8" name="logradouro" ng-model="empresa.enderecos[0].logradouro" placeholder="Logradouro">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Numero</label>
+                                            <input type="text" class="form-control col-sm-4" name="numero" ng-model="empresa.enderecos[0].numero" placeholder="Numero">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="exampleInputPassword1">Complemento</label>
+                                        <input type="text" class="form-control col-sm-8" name="complemento" ng-model="empresa.enderecos[0].complemento" placeholder="Complemento">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="exampleInputPassword1">Bairro</label>
+                                        <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].bairro" placeholder="Bairro">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1">Estado</label>
+                                        <input type="text" class="form-control col-sm-8" ng-model="empresa.enderecos[0].estado.nome" placeholder="Estado">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1">Municipio</label>
+                                        <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].cidade.nome" placeholder="Municipio">
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1">Codigo IBGE</label>
+                                        <input type="text" class="form-control col-sm-4" ng-model="empresa.enderecos[0].codIbge" placeholder="Codigo IBGE">
+                                    </div>
+                                </div>
+
+                                <!-- -------------------  TELEFONE ----------------- -->
+                                <div class="row">
+
+                                    <div class="col-sm-4" style="margin-top:25px">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Adicionar <span class="caret"></span></button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="javascript:;" class="addPhoneButton" data-name="phone_home">Compras</a></li>
+                                                <li><a href="javascript:;" class="addPhoneButton" data-name="phone_office">Vendas</a></li>
+                                                <li><a href="javascript:;" class="addPhoneButton" data-name="phone_office">SAC</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="exampleInputPassword1" class="control-label" >Telefone</label>
+                                        <input type="text" class="form-control col-sm-4 gugu" name="phone" placeholder="Telefone">
+                                    </div>
+                                </div>
+                                <!-- Template for dynamic field -->
+                                <div class="row" id="template" style="display: none;">
+
+                                    <div class="col-sm-4" style="margin-top:25px">
+                                        <button type="button" class="btn btn-link removeButton">deletar</button>
+                                    </div>
+                                    <div class="col-sm-4">
+                                    <label  for="exampleInputPassword1" class="control-label">Telefone</label>
+                                        <input id='gugu' type="text" class="form-control col-sm-4 gugu"  placeholder="Telefone">
+                                    </div>
+                                </div>
+
+                                <!-- ------------------------------------- --><!-- ------------------------------------- -->
+
+                                <!-- -------------------  Email Empresa ----------------- -->
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                    <label for="exampleInputPassword1">Email</label>
+                                        <input type="text" class="form-control col-sm-4 input-email" name="email" placeholder="Email">
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:25px">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Adicionar <span class="caret"></span></button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="javascript:;" class="addEmailButton" data-name="email_princ">Principal</a></li>
+                                                <li><a href="javascript:;" class="addEmailButton" data-name="email_home">Compras</a></li>
+                                                <li><a href="javascript:;" class="addEmailButton" data-name="email_office">Vendas</a></li>
+                                                <li><a href="javascript:;" class="addEmailButton" data-name="email_nfe">NFE</a></li>
+                                                <li><a href="javascript:;" class="addEmailButton" data-name="email_sac">SAC</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Template for dynamic field -->
+                                <div class="row" id="template-email" style="display: none;">
+                                    <div class="col-sm-4">
+                                    <label for="exampleInputPassword1" class="control-label">Email</label>
+                                        <input type="email" class="form-control col-sm-4 input-email"  placeholder="Email">
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:25px">
+                                        <button type="button" class="btn btn-link removeButton">deletar</button>
+                                    </div>
+                                </div>
+
+                                <!-- ------------------------------------- --><!-- ------------------------------------- -->
+
+
+
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                    <label for="exampleInputPassword1">Atividade Principal da Empresa</label>
+                                        <select id="atividade1" name="atividade1" class="form-control">
+                                            <option> teste 001</option>
+                                            <option> teste 002</option>
+                                            <option> teste 003</option>
+                                            <option> teste 004</option>
+                                            <option> teste 005</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                            <div class="col-sm-5">
+                                                <label for="exampleInputPassword1">Atividade Secundaria da Empresa</label>
+                                                <select id="mySel" name="cnae" class="form-control">
+                                                    <option> teste 001</option>
+                                                    <option> teste 002</option>
+                                                    <option> teste 003</option>
+                                                    <option> teste 004</option>
+                                                    <option> teste 005</option>
+
+                                                </select>
+
+                                                <button type="button" class="btn btn-default addButton1"><i class="fa fa-plus"></i></button>
+                                            </div>
+                                        </div>
+                                    <div class="row">
+                                        <div class="form-group hide" id="bookTemplate1">
+                                            <div class="col-sm-6">
+                                            <label for="exampleInputPassword1">Outras Atividades</label>
+                                                <select id="mySel" class="form-control">
+                                                    <option> teste 001</option>
+                                                    <option> teste 002</option>
+                                                    <option> teste 003</option>
+                                                    <option> teste 004</option>
+                                                    <option> teste 005</option>
+
+                                                </select>
+
+                                            <div class="col-xs-1">
+                                                <button type="button" class="btn btn-default removeButton1"><i class="fa fa-minus"></i></button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane tab3" id="tab3">
+                            <div class="row socios">
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">CPF Socio</label>
+                                            <input type="text" class="form-control cpf-socio"  name="book[0].cpf" placeholder="CPF Socio" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Nome Socio</label>
+                                            <input type="text" class="form-control nome-socio"  name="book[0].nome" placeholder="Nome Socio" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Porcentagem</label>
+                                            <input type="text" class="form-control cota-socio"  name="book[0].cota" placeholder="%" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3" style="margin-top:18px">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="receiver" class="check-socio" value="1" /> Socio Administrador ?
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-1" style="margin-top:18px">
+                                        <button type="button" class="btn btn-default addButton"><i class="fa fa-plus"></i></button>
+                                    </div>
+                            </div>
+                                <div class="form-group hide" id="bookTemplate">
+                                    <div class="row socios">
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">CPF Socio</label>
+                                            <input type="text" class="form-control cpf-socio"  name="cpf-socio" placeholder="CPF Socio" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Nome Socio</label>
+                                            <input type="text" class="form-control nome-socio"  name="nome-socio" placeholder="Nome Socio" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Porcentagem</label>
+                                            <input type="text" class="form-control cota-socio" name="cota-socio" placeholder="%" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3" style="margin-top:18px">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="receiver" class="check-socio" value="1" /> Socio Administrador ?
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-1" style="margin-top:18px">
+                                        <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane tab4 col-sm-12" id="tab4" data-ng-controller="SiteController as cc">
+                        <div class="col-sm-8">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href=".collapseThree">1 - Planos</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseThree" class="panel-collapse collapse collapseThree">
+                                    <div class="panel-body">
+                                       <section class="mbr-section mbr-section--relative mbr-section--fixed-size " id="pricing-table1-11" style="background-color: rgb(240, 240, 240);">
+                                                <div class="mbr-section__container mbr-section__container--std-top-padding  container" style="padding-top: 93px; margin-bottom: 0px;width:100%">
+                                                    <div class="row" >
+                                                        <div class="mbr-plan col-xs-12 mbr-plan--first col-md-3 col-sm-6" ng-repeat="plano in cc.site.planoList">
+                                                            <div class="mbr-plan__box planos">
+                                                                <div class="mbr-plan__header">
+                                                                    <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
+                                                                        <h3 class="mbr-header__text">{{plano.titulo}}</h3>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mbr-plan__number">
+                                                                    <div class="mbr-number mbr-number--price">
+                                                                        <div class="mbr-number__num"><div class="{{plano.id}} hide id"></div><div class="hide type plano"></div>
+                                                                            <div class="mbr-number__group">
+                                                                                <sup class="mbr-number__left">$</sup><span class="mbr-number__value mbr-plan__number1 valor">{{plano.precoList[0].valor || 0}}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="mbr-number__caption">Mensal</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mbr-plan__details">
+                                                                    <ul ng-repeat="servico in plano.servicoList">
+                                                                        <li><strong>{{servico.servico.nome}}</strong> {{servico.servico.descricao}}</li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="mbr-plan__buttons">
+                                                                    <div class="mbr-buttons mbr-buttons--center">
+                                                                        <label>Contratar - <input type='checkbox' class="plano" ng-init='checkStatus=false' ng-model='checkStatus' ng-click='doIfChecked(checkStatus)'></label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href=".collapseFour">2 - Serviços</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseFour" class="panel-collapse collapse collapseFour">
+                                    <div class="panel-body">
+                                       <section class="mbr-section mbr-section--relative mbr-section--fixed-size planos" id="pricing-table1-11" style="background-color: rgb(240, 240, 240);">
+                                                <div class="mbr-section__container mbr-section__container--std-top-padding container" style="padding-top: 93px; margin-bottom: 0px;">
+                                                    <div class="row" >
+                                                        <div class="mbr-plan col-xs-8 mbr-plan--first col-md-3 col-sm-6" ng-repeat="servico in cc.site.servicoList">
+                                                            <div class="mbr-plan__box">
+                                                                <div class="mbr-plan__header">
+                                                                    <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
+                                                                        <h3 class="mbr-header__text">{{servico.nome}}</h3>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mbr-plan__number"><div class="{{servico.id}} hide id"></div><div class="hide type servico"></div>
+                                                                    <div class="mbr-number mbr-number--price">
+                                                                        <div class="mbr-number__num">
+                                                                            <div class="mbr-number__group">
+                                                                                <sup class="mbr-number__left" >$</sup><span class="mbr-number__value mbr-plan__number1 valor" style="font-size:40%">{{servico.precoList[0].valor || 0}}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="mbr-number__caption">Mensal</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mbr-plan__details">
+                                                                    <ul>
+                                                                        <li><strong>{{servico.servico.descricao}}</strong></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="mbr-plan__buttons">
+                                                                    <div class="mbr-buttons mbr-buttons--center">
+                                                                        <label>Contratar - <input type='checkbox' class="plano" ng-init='checkStatus=false' ng-model='checkStatus' ng-click='doIfChecked(checkStatus,10,nome)'></label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4" >
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href=".collapseten" style="font-size:24px">Total</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseten" class="panel-collapse collapse collapseten">
+                                    <div class="panel-body">
+                                        <div>
+                                            <div class="mbr-plan__number">
+                                                <div class="mbr-number mbr-number--price">
+                                                    <div class="mbr-number__num">
+                                                        <div class="mbr-number__group">
+                                                            <sup class="mbr-number__left" >$</sup><span class="mbr-number__value mbr-plan__number1" style="font-size:40%">{{cc.total}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mbr-number__caption">Mensal</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="tab-pane tab5" id="tab5">
+
+                        </div>
+                        <div class="tab-pane" id="tab6">
+                            6
+                        </div>
+                        <ul class="pager wizard">
+                            <li class="previous first" style="display:none;"><a href="javascript:;">First</a></li>
+                            <li class="previous"><a href="javascript:;">Previous</a></li>
+                            <li class="next last" style="display:none;"><a href="javascript:;">Last</a></li>
+                            <li class="next"><a href="javascript:;">Next</a></li>
+                            <li class="hide save-empresa"><input type="submit" id="submit" value="Submit" ng-click="cc.submit()"/></li>
+                        </ul>
+                    </div>
+                    </form>
+                </div>
+
+
+
+            </section>
+    </div>
+    <script>
+    $(document).ready(function() {
+
+        bookIndex = 0;
+
+    $('#empresaForm')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+
+            'book[0].cpf': notEmptyStringMinMaxRegexp,
+            'book[0].nome': notEmptyStringMinMax,
+            'book[0].cota': integerNotEmptyValidation,
+             nome: notEmptyStringMinMax,
+             nunFunc: integerNotEmptyValidation,
+            razao:notEmptyStringMinMax,
+            logradouro:notEmptyStringMinMax,
+            cpf: notEmptyStringMinMaxRegexp,
+            cep: notEmptyStringMinMax,
+            cnpj: notEmptyStringMinMax,
+            email: emailValidation,
+            telefone: telefoneValidation,
+            phone: telefoneValidation,
+            cep: cepNotEmptyValidation,
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required and can\'t be empty'
+                    }
+                }
+            },
+            confirmPassword: {
+                validators: {
+                    notEmpty: {
+                        message: 'The confirm password is required and can\'t be empty'
+                    },
+                    identical: {
+                        field: 'password',
+                        message: 'The password and its confirm are not the same'
+                    }
+                }
+            }
+
+        }
+        })
+        // Add button click handler
+        .on('click', '.addButton', function() {
+            bookIndex++;
+            var $template = $('#bookTemplate'),
+                $clone    = $template
+                                .clone()
+                                .removeClass('hide')
+                                .removeAttr('id')
+                                .attr('data-book-index', bookIndex)
+                                .insertBefore($template);
+
+            // Update the name attributes
+            $clone
+                .find('[name="cpf-socio"]').attr('name', 'book[' + bookIndex + '].cpf').end()
+                .find('[name="nome-socio"]').attr('name', 'book[' + bookIndex + '].nome').end()
+                .find('[name="cota-socio"]').attr('name', 'book[' + bookIndex + '].cota').end();
+
+            // Add new fields
+            // Note that we also pass the validator rules for new field as the third parameter
+            $('#empresaForm')
+                .formValidation('addField', 'book[' + bookIndex + '].cpf',notEmptyStringMinMaxRegexp)
+                .formValidation('addField', 'book[' + bookIndex + '].nome',notEmptyStringMinMaxRegexp)
+                .formValidation('addField', 'book[' + bookIndex + '].cota',integerNotEmptyValidation);
+        });
+        $("select").select2({
+          placeholder: "Select a state",
+          allowClear: true
+        });
+
+        $('#rootwizard').bootstrapWizard({onNext: function(tab, navigation, index) {
+            /*  if(index==2) {
+                    // Make sure we entered the name
+                    if(!$('#name').val()) {
+                        alert('You must enter your name');
+                        $('#name').focus();
+                        return false;
+                    }
+                }
+
+                // Set the name for the next tab
+                $('#tab3').html('Hello, ' + $('#name').val());
+            */
+            }, onTabShow: function(tab, navigation, index) {
+
+                var $total = navigation.find('li').length;
+                var $current = index+1;
+                var $percent = ($current/$total) * 100;
+                $('#rootwizard .progress-bar').css({width:$percent+'%'});
+                if($percent == 100)
+                {
+                    $('.save-empresa').removeClass('hide');
+                }else{
+                    $('.save-empresa').addClass('hide');
+                }
+            },
+            onNext: function(tab, navigation, index) {
+                var numTabs    = $('#installationForm').find('.tab-pane').length,
+                    isValidTab = validateTab(index - 1);
+                if (!isValidTab) {
+                    return false;
+                }
+
+                if (index === numTabs) {
+                    alert('agora');
+                    // We are at the last tab
+
+                    // Uncomment the following line to submit the form using the defaultSubmit() method
+                    // $('#installationForm').formValidation('defaultSubmit');
+
+                    // For testing purpose
+                    $('#completeModal').modal();
+                }
+
+                return true;
+            }});
+        window.prettyPrint && prettyPrint();
+
+        //============================= Telefone
+        $('.addPhoneButton').on('click', function() {
+
+            var $that     = $(this),
+            $template = $('#template'),
+            $newRow   = $template.clone().removeAttr('id').insertBefore($template).show();
+
+            $that.parent().addClass('disabled');
+
+            // Set the label and field name
+            var fieldName = $that.attr('data-name');
+            $newRow
+                .find('.control-label')
+                    .html($that.html())
+                    .end()
+                .find('input')
+                    .attr('name', fieldName)
+                    .end()
+                .on('click', '.removeButton', function() {
+                    // Remove field when clicking the Remove button
+                    $('#contactForm').formValidation('removeField', fieldName);
+
+                    // Enable the Add button
+                    $that.parent().removeClass('disabled');
+
+                    // Remove element
+                    $newRow.remove();
+                });
+
+            // Add new field
+            $('#empresaForm').formValidation('addField', fieldName, {
+                message: 'The phone number is not valid',
+                validators: {
+                    digits: {
+                        message: 'The value can contain only digits'
+                    }
+                }
+            });
+        });
+        //============================= Telefone fim
+
+        //============================= Email
+        $('.addEmailButton').on('click', function() {
+            var $that     = $(this),
+                $template = $('#template-email'),
+                $newRow   = $template.clone().removeAttr('id').insertBefore($template).show();
+
+            $that.parent().addClass('disabled');
+
+            // Set the label and field name
+            var fieldName = $that.attr('data-name');
+            $newRow
+                .find('.control-label')
+                    .html($that.html())
+                    .end()
+                .find('input')
+                    .attr('name', fieldName)
+                    .end()
+                .on('click', '.removeButton', function() {
+                    // Remove field when clicking the Remove button
+                    $('#contactForm').formValidation('removeField', fieldName);
+
+                    // Enable the Add button
+                    $that.parent().removeClass('disabled');
+
+                    // Remove element
+                    $newRow.remove();
+                });
+
+            // Add new field
+            $('#empresaForm').formValidation('addField', fieldName, {
+                message: 'The phone number is not valid',
+                validators: {
+                    digits: {
+                        message: 'The value can contain only digits'
+                    }
+                }
+            });
+        });
+        //============================= Email fim
+         function validateTab(index) {
+            var fv   = $('#empresaForm').data('formValidation'), // FormValidation instance
+                // The current tab
+                $tab = $('#empresaForm').find('.tab-pane').eq(index);
+
+            // Validate the container
+            fv.validateContainer($tab);
+
+            var isValidStep = fv.isValidContainer($tab);
+            if (isValidStep === false || isValidStep === null) {
+                // Do not jump to the target tab
+                return false;
+            }
+
+            return true;
+        }
+
+        //Tab 1
+$('#empresaForm').find('[name="nome"]').val('099.099.099.099');
+$('#empresaForm').find('[name="cpf"]').val('099.099.099.099');
+$('#empresaForm').find('[name="telefone"]').val('34988406670');
+$('#empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
+$('#empresaForm').find('[name="password"]').val('099.099.099.099');
+$('#empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
+
+//Tab 2
+$('#empresaForm').find('[name="cnpj"]').val('099.099.099.099');
+$('#empresaForm').find('[name="numfunc"]').val('8');
+$('#empresaForm').find('[name="razao"]').val('34988406670');
+$('#empresaForm').find('[name="cep"]').val('38082243');
+$('#empresaForm').find('[name="numero"]').val('686');
+$('#empresaForm').find('[name="complemento"]').val('complemento');
+$('#empresaForm').find('[name="logradouro"]').val('logradouro');
+
+    });
+//prencher form
+/*
+//Tab 1
+$('#empresaForm').find('[name="nome"]').val('099.099.099.099');
+$('#empresaForm').find('[name="cpf"]').val('099.099.099.099');
+$('#empresaForm').find('[name="telefone"]').val('34988406670');
+$('#empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
+$('#empresaForm').find('[name="password"]').val('099.099.099.099');
+$('#empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
+
+//Tab 2
+$('#empresaForm').find('[name="cnpj"]').val('099.099.099.099');
+$('#empresaForm').find('[name="nunfunc"]').val('8');
+$('#empresaForm').find('[name="razao"]').val('34988406670');
+$('#empresaForm').find('[name="cep"]').val('38082243');
+$('#empresaForm').find('[name="numero"]').val('686');
+$('#empresaForm').find('[name="complemento"]').val('complemento');
+
+//Tab 3
+$('#empresaForm').find('[name="nome"]').val('099.099.099.099');
+$('#empresaForm').find('[name="cpf"]').val('099.099.099.099');
+$('#empresaForm').find('[name="telefone"]').val('34988406670');
+$('#empresaForm').find('[name="email"]').val('wlclimaco@gmail.com');
+$('#empresaForm').find('[name="password"]').val('099.099.099.099');
+$('#empresaForm').find('[name="confirmPassword"]').val('099.099.099.099');
+*/
+    </script>
