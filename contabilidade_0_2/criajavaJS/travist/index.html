@@ -796,6 +796,14 @@ $('#checkeds').append(imputs);
 				if($('#view-Form').prop('checked')){
 					$("div#tabs").addTab("Formulario-Empresa",Form_insert(EmpresaFormTest()));
 					$("div#tabs").addTab("Formulario-Cliente",Form_insert(PessoaFormTest()));
+					$("div#tabs").addTab("Formulario-Produto",Form_insert(ProdutoFormTest()));
+					$("div#tabs").addTab("Formulario-nf",Form_insert(NotaFiscalFormTest()));
+				/*	$("div#tabs").addTab("Formulario-fornecedor",Form_insert(EmpresaFormTest()));
+					$("div#tabs").addTab("Formulario-inquilino",Form_insert(PessoaFormTest()));
+					$("div#tabs").addTab("Formulario-sindico",Form_insert(EmpresaFormTest()));
+					$("div#tabs").addTab("Formulario-paciente",Form_insert(PessoaFormTest()));
+					$("div#tabs").addTab("Formulario-medico",Form_insert(EmpresaFormTest()));
+					$("div#tabs").addTab("Formulario-titulo",Form_insert(PessoaFormTest()));*/
 				}	
 				if($('#view-main').prop('checked')){
 					$("div#tabs").addTab(oProjet[i].interfaces,viewMain(oProjet[i].classes,oProjet[i].interfaces));

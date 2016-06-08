@@ -16,11 +16,15 @@ public class Processo extends ModelCosmeDamiao
 	private Integer id;
 
 	/** The type of an account. */
-	private Integer dataProcess;
+	private Long dataProcess;
 
-	private Double valor;
+	private Long dataFim;
 
-	private List<Advogado> advogadoLIst;
+	private ProcessoAcao acao;
+
+	private List<TituloReceber> tituloList;
+
+	private List<Advogado> advogadoList;
 
 	private List<Cliente> clienteList;
 
@@ -48,12 +52,12 @@ public class Processo extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	public Integer getDataProcess()
+	public Long getDataProcess()
 	{
 		return dataProcess;
 	}
 
-	public void setDataProcess(Integer dataProcess)
+	public void setDataProcess(Long dataProcess)
 	{
 		this.dataProcess = dataProcess;
 	}

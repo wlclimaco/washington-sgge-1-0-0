@@ -186,6 +186,18 @@ function ProdutoFormModel() {
 	return a;
 }
 
+function ProcessoFormModel() {
+
+	var a = [];
+	a.push({field :{campo : "id",label:"", ngmodel:'empresa.id', class:"hide", tipo :"Integer",requerid : false ,mask:"",tamanho : '6',msg:'',tipo :'input'}});
+	a.push({field :{campo : "dataProcess",label:"Data Entrada Processo", ngmodel:'empresa.nome', class:"", tipo :"Data",requerid : true ,mask:"",tamanho : '9',msg:'',tipo :'input'}});
+	a.push({field :{campo : "dataFim",label:"Data Finalização do Processo", ngmodel:'empresa.nome', class:"", tipo :"Data",requerid : true ,mask:"",tamanho : '9',msg:'',tipo :'input'}});
+	a.push({field :{campo : "obs",label:"Descrição Processo", ngmodel:'empresa.nome', class:"", tipo :"String",requerid : true ,mask:"",tamanho : '9',msg:'',tipo :'input'}});
+	
+	return a;
+}
+
+
 
 /*
 //Produto
@@ -330,6 +342,37 @@ function InquilinoFormTest() {
 			EnderecoFormModel()[3],
 			EnderecoFormModel()[4],
 			EnderecoFormModel()[9],
+
+
+
+			]}}]
+
+	});
+	return a;
+}
+
+function ProdutoFormTest() {
+
+	var a = [];
+	a.push({
+		formType : 'Tab',
+		tabs :[{tabName : 'informaçoes usuario',field :{table : [
+			ProdutoFormModel()[0],
+			ProdutoFormModel()[1],
+			ProdutoFormModel()[2],
+			ProdutoFormModel()[3],
+			ProdutoFormModel()[4],
+			ProdutoFormModel()[5],
+			ProdutoFormModel()[6],
+			ProdutoFormModel()[7],
+			ProdutoFormModel()[8],
+			ProdutoFormModel()[9],
+			ProdutoFormModel()[10],
+			ProdutoFormModel()[11],
+			ProdutoFormModel()[12],
+			ProdutoFormModel()[13],
+			ProdutoFormModel()[14],
+			ProdutoFormModel()[15],
 
 
 
@@ -494,6 +537,38 @@ function TituloPagarFormTest() {
 
 
 
+			]}}]
+
+	});
+	return a;
+}
+
+function ProcessoFormTest() {
+
+	var a = [];
+	a.push({
+		formType : 'Tab',
+		tabs :[{tabName : 'informaçoes usuario',field :{table : [
+			ProcessoFormModel()[0],
+			ProcessoFormModel()[1],
+			ProcessoFormModel()[2],
+			ProcessoFormModel()[3]
+			]}}]
+
+	});
+	return a;
+}
+
+function NotaFiscalFormTest() {
+
+	var a = [];
+	a.push({
+		formType : 'Tab',
+		tabs :[{tabName : 'informaçoes usuario',field :{table : [
+			ProcessoFormModel()[0],
+			ProcessoFormModel()[1],
+			ProcessoFormModel()[2],
+			ProcessoFormModel()[3]
 			]}}]
 
 	});
