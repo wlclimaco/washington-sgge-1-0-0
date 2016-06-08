@@ -6,118 +6,73 @@
 
 <mapper namespace="SocioMap">
 
-	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
-
-  	<!-- Result maps describe the mapping between the columns returned
-       from a query, and the class properties.  A result map isn't
-       necessary if the columns (or aliases) match to the properties
-       exactly.
-       id           int
-	parentId	 int
-	nome         varchar(200)
-	cota         varchar(10)
-	porcentagem  varchar(10)
-	create_date  long
-    create_user  varchar(50)
-    modify_date  long
-    modify_user  varchar(50)
-
-
-       -->
-
-  <resultMap id="socioResult" type="Socio" >
-    <result property="id" column="id" />
-    <result property="parentId" column="parentId" />
-   	<result property="nome" column="nome"/>
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+<resultMap id="socioResult" type="Socio" extends="PessoaMap.PessoaResult">
 	<result property="cota" column="cota"/>
 	<result property="porcentagem" column="porcentagem" />
-	<result property="createUser" column="create_user"/>
-	<result property="createDataUTC" column="create_date"/>
-	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDataUTC" column="modify_date"/>
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusBySocio"/>
   </resultMap>
 
-  <!--
-		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
-	-->
-  <sql id="allSocioColumns">
-		 parentId
-		,nome
-		,cota
-		,porcentagem
-      	,create_date
-      	,create_user
-      	,modify_date
-      	,modify_user
-  </sql>
-
-  <sql id="allSocioValues">
-  		#{parentId},
-    	#{nome},
-    	#{cota},
-    	#{porcentagem},
-    	<include refid="CBOFMap.changeControlFields"/>
-  </sql>
-
-  <!--
-		SQL Insert Statements.
- 	-->
-  <insert id="insertSocio" parameterType="Socio" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO socio (
-		<include refid="allSocioColumns" />
-      )
-    VALUES (<include refid="allSocioValues" /> )
-  </insert>
-
-
-	<!--
-		SQL Update Statements.
- 	-->
-
-  <update id="updateSocio" parameterType="Socio">
-    UPDATE socio
-    	<set>
-    		<if test="nome!= null">nome = #{nome},</if>
-	    	<if test="cota!= null"> cota=#{cota},</if>
-	    	<if test="porcentagem!= null"> porcentagem=#{porcentagem},</if>
-			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
-			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
-		</set>
-    WHERE
-     id = #{id}
-  </update>
-
-   <!--
-		SQL Delete Statements.
-   -->
-  <delete id="deleteSocioById" parameterType="Integer">
-    	DELETE FROM socio WHERE id = #{id}
-  </delete>
-
-	<!--
-		SQL Fetch Statements.
- 	-->
-  <select id="fetchSocioRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
-     SELECT
-     <include refid="allSocioColumns" />
-        FROM business
-     WHERE tabela = 1 and parentId = #{id}
-
-  </select>
-
-  <select id="fetchAllSocios" resultMap="socioResult">
-    SELECT
+<sql id="allSocioColumns">
+	cota,porcentagem,
+	<include refid="PessoaMap.allPessoaColumns"/>
+</sql>
+<sql id="allSocioValues">
+	#{cota},#{porcentagem},
+	<include refid="PessoaMap.allPessoaValues"/>
+</sql>
+ <insert id="insertSocio" parameterType="Socio" useGeneratedKeys="true" keyProperty="id">
+ 	INSERT INTO pessoa (
+	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allSocioColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allSocioValues" /> )
+ </insert>
+ <select id="fetchAllSocios" resultMap="socioResult">
+    SELECT id,
 	<include refid="allSocioColumns" />
-    FROM socio ORDER BY nome ASC
-  </select>
+   FROM pessoa where pessoaTypeEnum = 6 ORDER BY id ASC
+ </select>
 
-    <select id="fetchSocioByEmpresaId"  parameterType="Integer" resultMap="socioResult">
-    SELECT
+ <select id="fetchSocioById" parameterType="Integer" resultMap="socioResult">
+    SELECT id,
 	<include refid="allSocioColumns" />
-    FROM socio  where parentId = #{id}
-  </select>
+   FROM pessoa WHERE id = #{fetchid}
+ </select>
 
+ <select id="fetchAllSociosRequest" parameterType="SocioInquiryRequest" resultMap="socioResult">
 
+		SELECT id,<include refid="allSocioColumns" />
+  		  FROM pessoa where pessoaTypeEnum = 6 ORDER BY id ASC
+		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+</select>
+
+<select id="fetchSocioRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM pessoa WHERE id IS NOT NULL and pessoaTypeEnum = 6
+
+ </select>
+
+ <update id="updateSocio" parameterType="Socio">
+   UPDATE pessoa SET
+<if test="nome!= null">nome = #{nome},</if>
+<if test="nomePai!= null">nomePai = #{nomePai},</if>
+<if test="nomeMae!= null">nomeMae = #{nomeMae},</if>
+<if test="nomeConjugue!= null">nomeConjugue = #{nomeConjugue},</if>
+<if test="estadoCivil!= null">estadoCivil = #{estadoCivil},</if>
+<if test="tipoPessoa!= null">tipoPessoa = #{tipoPessoa},</if>
+<if test="datanasc!= null">datanasc = #{datanasc},</if>
+<if test="foto!= null">foto = #{foto},</if>
+<if test="pessoaTypeEnumValue!= null">pessoaTypeEnum = #{pessoaTypeEnumValue},</if>
+<if test="sexo!= null">sexo = #{sexo},</if>
+<if test="cota!= null">cota = #{cota},</if>
+<if test="porcentagem!= null">porcentagem = #{porcentagem},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
 </mapper>
+
+

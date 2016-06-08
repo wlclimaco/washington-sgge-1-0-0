@@ -28,6 +28,7 @@ import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.BaseBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.PlanoBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.ServicoAndPlanoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.SociosBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.UsuarioBARD;
 import com.qat.samples.sysmgmt.clinica.model.Clinica;
@@ -367,10 +368,10 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 							empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
 
 		}
-		if (!ValidationUtil.isNullOrEmpty(empresa.getPlanoList()))
+		if (!ValidationUtil.isNullOrEmpty(empresa.getPlanosServicos()))
 		{
 			a +=
-					PlanoBARD.maintainPlanoAssociations(empresa.getPlanoList(), response, empresa.getId(), null, null,
+					ServicoAndPlanoBARD.maintainServicoAndPlanoAssociations(empresa.getPlanosServicos(), response, empresa.getId(), null, null,
 							TabelaEnum.EMPRESA, getSiteBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
 							empresa.getCreateUser(), historicoId, historicoId);
 		}
@@ -382,15 +383,6 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 							null,
 							TabelaEnum.EMPRESA, getEmpresaBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
 							empresa.getCreateUser(), historicoId, historicoId);
-		}
-
-		if (!ValidationUtil.isNullOrEmpty(empresa.getContaCorrenteList()))
-		{
-//			a +=
-//					UsuarioBARD.maintainUsuarioAssociations(empresa.getUsuarioList(), response, empresa.getId(), null,
-//							null,
-//							TabelaEnum.EMPRESA, getFinanceiroBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-//							empresa.getCreateUser(), historicoId, historicoId);
 		}
 
 		return response;

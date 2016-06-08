@@ -187,7 +187,7 @@ function ProdutoFormModel() {
 }
 
 
-
+/*
 //Produto
  // dados Gerais
  Nome
@@ -234,7 +234,7 @@ COFINS
 Situação Tributária
 
 Tipo de cálculo Subst. Trib.
-
+*/
 
 function EmpresaFormTest() {
 
@@ -555,7 +555,7 @@ Tipo de cálculo Subst. Trib.
 */
 
 
-
+/*
 //==================
 Dados que geralmente não mudam Editar
 
@@ -769,4 +769,4 @@ Informações para o Fisco
 Informações de compras
  Informar dados de compras
 
-//==================================
+//==================================*/

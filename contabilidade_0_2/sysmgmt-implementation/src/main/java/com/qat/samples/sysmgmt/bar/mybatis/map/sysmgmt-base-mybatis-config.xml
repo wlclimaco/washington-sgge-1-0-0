@@ -23,6 +23,7 @@
   		<typeAlias alias="Entidade" type="com.qat.samples.sysmgmt.entidade.model.Entidade"/>
 
   		<typeAlias alias="PlanoByServico" type="com.qat.samples.sysmgmt.contabilidade.model.PlanoByServico"/>
+  		<typeAlias alias="ServicoAndPlano" type="com.qat.samples.sysmgmt.site.model.ServicoAndPlano"/>
 
   		<typeAlias alias="Estado" type="com.qat.samples.sysmgmt.estado.model.Estado"/>
   		<typeAlias alias="ContatoItens" type="com.qat.samples.sysmgmt.contato.model.ContatoItens"/>
@@ -181,6 +182,7 @@
 
   		<typeAlias alias="Cliente" type="com.qat.samples.sysmgmt.pessoa.model.Cliente"/>
   		<typeAlias alias="ClienteInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest"/>
+  		<typeAlias alias="SocioInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.SocioInquiryRequest"/>
 
   		<typeAlias alias="Cliente" type="com.qat.samples.sysmgmt.pessoa.model.Cliente"/>
   		<typeAlias alias="ClienteInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest"/>
@@ -411,6 +413,7 @@
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/produtoParent.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/marcaProduto.xml"/>
 		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/planoByServico.xml"/>
+		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/servicoAndPlano.xml"/>
     </mappers>
 
 </configuration>

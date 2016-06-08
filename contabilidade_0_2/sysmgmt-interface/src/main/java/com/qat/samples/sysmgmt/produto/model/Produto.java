@@ -1,11 +1,6 @@
 package com.qat.samples.sysmgmt.produto.model;
 
-import java.util.List;
-
-import com.qat.samples.sysmgmt.cfop.model.CfopParentId;
 import com.qat.samples.sysmgmt.fiscal.model.Classificacao;
-import com.qat.samples.sysmgmt.fiscal.model.Tributacao;
-import com.qat.samples.sysmgmt.pessoa.model.Fornecedor;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -233,14 +228,6 @@ public class Produto extends ModelCosmeDamiao
 		this.porcao = porcao;
 	}
 
-	public List<MarcaProduto> getMarca() {
-		return marca;
-	}
-
-	public void setMarca(List<MarcaProduto> marca) {
-		this.marca = marca;
-	}
-
 	public Double getPesoBruto() {
 		return pesoBruto;
 	}
@@ -271,10 +258,12 @@ public class Produto extends ModelCosmeDamiao
 				+ ", getClassificacao()=" + getClassificacao() + ", getDataCreate()=" + getDataCreate()
 				+ ", getProduto()=" + getProduto() + ", getAplicacao()=" + getAplicacao() + ", getFracao()="
 				+ getFracao() + ", getUniMed()=" + getUniMed() + ", getGrupo()=" + getGrupo() + ", getSubGrupo()="
-				+ getSubGrupo() + ", getPorcao()=" + getPorcao() + ", getMarca()=" + getMarca() + ", getPesoBruto()="
-				+ getPesoBruto() + ", getPesoLiquido()=" + getPesoLiquido() + ", getModoUso()=" + getModoUso()
-				+ ", toString()=" + super.toString() + "]";
+				+ getSubGrupo() + ", getPorcao()=" + getPorcao() + ", getPesoBruto()=" + getPesoBruto()
+				+ ", getPesoLiquido()=" + getPesoLiquido() + ", getModoUso()=" + getModoUso() + ", toString()="
+				+ super.toString() + "]";
 	}
+
+	
 
 
 }

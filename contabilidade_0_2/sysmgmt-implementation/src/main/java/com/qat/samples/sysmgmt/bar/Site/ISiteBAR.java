@@ -1,5 +1,7 @@
 /** create by system gera-java version 1.0.0 07/05/2016 18:30 : 34*/
 package com.qat.samples.sysmgmt.bar.Site;
+import org.apache.ibatis.annotations.Insert;
+
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
@@ -14,6 +16,7 @@ import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryReq
 import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
+import com.qat.samples.sysmgmt.site.model.ServicoAndPlano;
 import com.qat.samples.sysmgmt.site.model.Site;
 import com.qat.samples.sysmgmt.site.model.request.SiteInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
@@ -471,6 +474,54 @@ public interface ISiteBAR
 * @return the internal response
 */
 	public InternalResponse deleteServicoByPlanoById(PlanoByServico servico);
+	/**
+	* Insert servicoandplano.
+	*
+	* @param servicoandplano the servicoandplano
+	*
+	* @return the internal response
+	*/
+		public InternalResponse insertServicoAndPlano(ServicoAndPlano servicoandplano);
 
+		/**
+	* Update servicoandplano.
+	*
+	* @param servicoandplano the servicoandplano
+	*
+	* @return the internal response
+	*/
+		public InternalResponse updateServicoAndPlano(ServicoAndPlano servicoandplano);
+
+		/**
+	* Delete servicoandplano.
+	*
+	* @param servicoandplano the servicoandplano
+	*
+	* @return the internal response
+	*/
+		public InternalResponse deleteServicoAndPlanoById(ServicoAndPlano servicoandplano);
+
+		/**
+	* Delete all servicoandplanos.
+	*
+	* @return the internal response
+	*/
+		public InternalResponse deleteAllServicoAndPlanos();
+
+		/**
+	* Fetch all servicoandplanos.
+	*
+	* @return the list< servicoandplano>
+	*/
+		public InternalResultsResponse<ServicoAndPlano> fetchAllServicoAndPlanos(ServicoAndPlano  servicoandplano);
+
+		public ServicoAndPlano fetchServicoAndPlanoById(FetchByIdRequest request);
+		/**
+	* Fetch servicoandplanos by request.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<ServicoAndPlano> fetchServicoAndPlanosByRequest(PagedInquiryRequest request);
 
 }

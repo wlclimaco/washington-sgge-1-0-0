@@ -20,6 +20,20 @@ function ProcessModel() {
 	return a;
 }
 
+//================ ServicoAndPlano
+function ServicoAndPlanoModel() {
+
+	a = [];
+	a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({ field:{campo : "dataInicio", tipo :"Long",requerid : false ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "valor", tipo :"Double",requerid : true ,primaryKey:false,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "servicoPlanoEnumValue", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "servicoList", tipo :"Servico",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+	a.push({field :{campo : "planoList", tipo :"Plano",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
+
+	return a;
+}
+
 //================ Entidade
 function EntidadeModel() {
 	a = [];
@@ -1844,6 +1858,7 @@ function dependenciaSite(){
 	a.push({dependencia :"Plano",campos : PlanoModel()});
 	a.push({dependencia :"Status"		,campos : StatusModel()});
 	a.push({dependencia :"Note"			,campos : NoteModel()});
+	a.push({dependencia :"ServicoAndPlano"			,campos : ServicoAndPlanoModel()});
 	return a
 }
 
@@ -2024,7 +2039,7 @@ oProjet.push({
 })
 
 oProjet.push({
-	classes :[{classe : "Servico",model : ServicoModel(),dependencias : dependenciaServico()},{classe : "PlanoByServico",model : PlanoByServicoModel(),dependencias : dependenciaServico()},{classe : "Site",model : SiteModel(),dependencias : dependenciaSite()},{classe :"Contato",model : ContatoModel(),dependencias : dependenciaContato()},{classe :"ContatoItens",model : ContatoItensModel()},{classe :"OrdemServico",model : OrdemServicoModel(),dependencias : dependenciaOrdemServico()},{classe :"OrdemServicoItens",model : OrdemServicoItensModel()},{classe :"Plano",model : PlanoModel()}],
+	classes :[{classe : "Servico",model : ServicoModel(),dependencias : dependenciaServico()},{classe : "PlanoByServico",model : PlanoByServicoModel(),dependencias : dependenciaServico()},{classe : "Site",model : SiteModel(),dependencias : dependenciaSite()},{classe :"Contato",model : ContatoModel(),dependencias : dependenciaContato()},{classe :"ContatoItens",model : ContatoItensModel()},{classe :"OrdemServico",model : OrdemServicoModel(),dependencias : dependenciaOrdemServico()},{classe :"OrdemServicoItens",model : OrdemServicoItensModel()},{classe :"Plano",model : PlanoModel()},{classe : "ServicoAndPlano",model : ServicoAndPlanoModel()}],
 	interfaces : "Site",
 	local : "Site"
 })

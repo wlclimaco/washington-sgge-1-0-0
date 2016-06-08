@@ -42,8 +42,8 @@
   </resultMap>
 
   <sql id="allPessoaColumns">
-id
-,nome
+
+nome
 ,nomePai
 ,nomeMae
 ,nomeConjugue
@@ -60,7 +60,6 @@ id
 
 </sql>
 <sql id="allPessoaValues">
-#{id},
 #{nome},
 #{nomePai},
 #{nomeMae},

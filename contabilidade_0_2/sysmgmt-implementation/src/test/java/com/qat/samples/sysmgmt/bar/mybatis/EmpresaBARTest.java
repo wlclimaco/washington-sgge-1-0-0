@@ -20,32 +20,25 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.qat.framework.model.BaseModel.PersistenceActionEnum;
-import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
-import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.advocacia.Advocacia;
-import com.qat.samples.sysmgmt.advocacia.request.AdvocaciaInquiryRequest;
 import com.qat.samples.sysmgmt.banco.model.Banco;
 import com.qat.samples.sysmgmt.banco.model.BancoPessoa;
 import com.qat.samples.sysmgmt.bar.Empresa.IEmpresaBAR;
 import com.qat.samples.sysmgmt.cfop.model.Cfop;
 import com.qat.samples.sysmgmt.cfop.model.CfopParentId;
 import com.qat.samples.sysmgmt.cfop.model.CfopTypeEnum;
-import com.qat.samples.sysmgmt.clinica.model.Clinica;
-import com.qat.samples.sysmgmt.clinica.model.request.ClinicaInquiryRequest;
 import com.qat.samples.sysmgmt.cnae.model.Cnae;
 import com.qat.samples.sysmgmt.cnae.model.CnaeEmpresa;
-import com.qat.samples.sysmgmt.condominio.model.Condominio;
-import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
+import com.qat.samples.sysmgmt.contabilidade.model.Plano;
 import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.EntidadeTypeEnum;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
 import com.qat.samples.sysmgmt.entidade.model.Usuario;
-import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.model.Estado;
 import com.qat.samples.sysmgmt.fiscal.model.Regime;
+import com.qat.samples.sysmgmt.pessoa.model.Socio;
+import com.qat.samples.sysmgmt.produto.model.Servico;
+import com.qat.samples.sysmgmt.site.model.ServicoAndPlano;
 import com.qat.samples.sysmgmt.util.model.Cidade;
 import com.qat.samples.sysmgmt.util.model.Configuracao;
 import com.qat.samples.sysmgmt.util.model.Documento;
@@ -55,10 +48,10 @@ import com.qat.samples.sysmgmt.util.model.EmailTypeEnum;
 import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.EnderecoTypeEnum;
 import com.qat.samples.sysmgmt.util.model.Note;
+import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.Telefone;
 import com.qat.samples.sysmgmt.util.model.TelefoneTypeEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
 
 @ContextConfiguration(locations = {
 		"classpath:conf/unittest-base-context.xml",
@@ -90,12 +83,13 @@ public IEmpresaBAR getEmpresaBAR()
 @Test
 	public void testDeleteEmpresa()
 	{
-		Empresa empresa = new Empresa(19, "Empresa_999");
+		Empresa empresa = new Empresa();
+		empresa = 		insertEmpresa(19,PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(19);
 		Empresa empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
 		Assert.assertEquals(empresaResponse, null);
-		getEmpresaBAR().insertEmpresa(insertEmpresa(PersistenceActionEnum.INSERT));
+		getEmpresaBAR().insertEmpresa(insertEmpresa(19,PersistenceActionEnum.INSERT));
 		empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
 		Assert.assertEquals(empresa.getId(), empresaResponse.getId());
 		getEmpresaBAR().deleteEmpresaById(empresa);
@@ -876,12 +870,12 @@ public IEmpresaBAR getEmpresaBAR()
 
 		}
 
-		public Empresa insertEmpresa(PersistenceActionEnum action)
+		public Empresa insertEmpresa(Integer id,PersistenceActionEnum action)
 		{
 			Empresa funcionario = new Empresa();
 			Date a = new Date();
 
-			funcionario.setId(19);
+			funcionario.setId(id);
 			funcionario.setNome("NOME");
 			funcionario.setRegime(insertRegime(action));
 			funcionario.setEntidadeId(1);
@@ -895,6 +889,11 @@ public IEmpresaBAR getEmpresaBAR()
 			funcionario.setEmails(emailList(action));
 			funcionario.setEnderecos(enderecoList(action));
 			funcionario.setBancos(bancoList(action));
+			funcionario.setSocios(new ArrayList<Socio>());
+			funcionario.setPlanosServicos(new ArrayList<ServicoAndPlano>());
+			funcionario.getPlanosServicos().add(insertPlano(id,TabelaEnum.EMPRESA,action));
+			funcionario.getSocios().add(insertSocios(19,action));
+
 			funcionario.setNotes(noteList(action));
 			funcionario.setModelAction(action);
 
@@ -962,6 +961,51 @@ public IEmpresaBAR getEmpresaBAR()
 			cidade.setNotes(noteList(action));
 
 			return cidade;
+		}
+
+		public Socio insertSocios(Integer id,PersistenceActionEnum action)
+		{
+			Socio cidade = new Socio();
+			Date a = new Date();
+
+			cidade.setId(id);
+			cidade.setDocumentos(documentoList(action));
+			cidade.setNome("NOME");
+			cidade.setPorcentagem("100%");
+			cidade.setCota("10");
+			cidade.setParentId(id);
+			cidade.setEmprId(1);
+			cidade.setModifyDateUTC(a.getTime());
+			cidade.setCreateDateUTC(a.getTime());
+			cidade.setCreateUser("system");
+			cidade.setModifyUser("system");
+			cidade.setProcessId(1);
+			cidade.setModelAction(action);
+
+
+			return cidade;
+		}
+
+		public ServicoAndPlano insertPlano(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			ServicoAndPlano plano = new ServicoAndPlano();
+			Date a = new Date();
+			plano.setId(id);
+			plano.setDataInicio(a.getTime());
+			plano.setValor(new Double(1.99));
+			plano.setServicoPlanoEnumValue(1);
+			plano.setServicoList(new Servico(1,"tanga"));
+			plano.setPlanoList(new Plano(2,"Tanga"));
+			plano.setParentId(id);
+			plano.setEmprId(1);
+			plano.setModifyDateUTC(a.getTime());
+			plano.setCreateDateUTC(a.getTime());
+			plano.setCreateUser("system");
+			plano.setModifyUser("system");
+			plano.setProcessId(1);
+			plano.setModelAction(action);
+
+			return plano;
 		}
 
 }

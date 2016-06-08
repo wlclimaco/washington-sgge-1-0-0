@@ -159,7 +159,7 @@ text = text + "	private static final int ZERO = 0;\n";
 text = text + "\n";
 for(i=0;i < teste.length;i++){
 
-
+console.log(teste[i].classe)
 var nome = teste[i].classe.toLowerCase();
 nomeM = titleize(nome);
 text = text + "\n";

@@ -20,7 +20,6 @@ import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ContatoItensBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.OrdemServicoItensBARD;
-import com.qat.samples.sysmgmt.bar.mybatis.delegate.PlanoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.PrecoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ServicoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.StatusBARD;
@@ -36,6 +35,7 @@ import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryReq
 import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
+import com.qat.samples.sysmgmt.site.model.ServicoAndPlano;
 import com.qat.samples.sysmgmt.site.model.Site;
 import com.qat.samples.sysmgmt.site.model.request.SiteInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
@@ -82,6 +82,35 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 	/** The Constant STMT_FETCH_SERVICO_ALL_REQUEST. */
 	private static final String STMT_FETCH_SERVICO_ALL_REQUEST = NAMESPACE_SERVICO + "fetchAllServicosRequest";
+
+
+	///===================================### SERVICOANDPLANO ####======================================
+	/** The Constant NAMESPACE. */
+	private static final String NAMESPACE_SERVICOANDPLANO = "ServicoAndPlanoMap.";
+
+	/** The Constant STMT_INSERT_SERVICOANDPLANO. */
+	private static final String STMT_INSERT_SERVICOANDPLANO = NAMESPACE_SERVICOANDPLANO + "insertServicoAndPlano";
+
+	/** The Constant STMT_UPDATE_SERVICOANDPLANO. */
+	private static final String STMT_UPDATE_SERVICOANDPLANO = NAMESPACE_SERVICOANDPLANO + "updateServicoAndPlano";
+
+	/** The Constant STMT_DELETE_SERVICOANDPLANO. */
+	private static final String STMT_DELETE_SERVICOANDPLANO = NAMESPACE_SERVICOANDPLANO + "deleteServicoAndPlanoById";
+
+		/** The Constant STMT_DELETE_SERVICOANDPLANO_ALL. */
+		private static final String STMT_DELETE_SERVICOANDPLANO_ALL = NAMESPACE_SERVICOANDPLANO + "deleteAllServicoAndPlanos";
+
+		/** The Constant STMT_FETCH_SERVICOANDPLANO. */
+		private static final String STMT_FETCH_SERVICOANDPLANO = NAMESPACE_SERVICOANDPLANO + "fetchServicoAndPlanoById";
+
+		/** The Constant STMT_FETCH_SERVICOANDPLANO_ALL. */
+		private static final String STMT_FETCH_SERVICOANDPLANO_ALL = NAMESPACE_SERVICOANDPLANO + "fetchAllServicoAndPlanos";
+
+		/** The Constant STMT_FETCH_SERVICOANDPLANO_COUNT. */
+		private static final String STMT_FETCH_SERVICOANDPLANO_COUNT = NAMESPACE_SERVICOANDPLANO + "fetchServicoAndPlanoRowCount";
+
+		/** The Constant STMT_FETCH_SERVICOANDPLANO_ALL_REQUEST. */
+		private static final String STMT_FETCH_SERVICOANDPLANO_ALL_REQUEST = NAMESPACE_SERVICOANDPLANO + "fetchAllServicoAndPlanosRequest";
 
 	/// ===================================### SITE
 	/// ####======================================
@@ -1653,5 +1682,137 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		return response;
 	}
+
+	//===================================### SERVICOANDPLANO ####======================================
+		/**
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.base.bar.IServicoAndPlanoBAR#insertServicoAndPlano(com.qat.samples.sysmgmt.ServicoAndPlanoBARD.model.ServicoAndPlano)
+	 */
+	@Override
+	public InternalResponse insertServicoAndPlano(ServicoAndPlano servicoandplano)
+	{
+		InternalResponse response = new InternalResponse();
+		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_SERVICOANDPLANO, servicoandplano, response);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.base.bar.IServicoAndPlanoBAR#updateServicoAndPlano(com.qat.samples.sysmgmt.base.model.ServicoAndPlano)
+	 */
+	@Override
+	public InternalResponse updateServicoAndPlano(ServicoAndPlano servicoandplano)
+	{
+		InternalResponse response = new InternalResponse();
+		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_SERVICOANDPLANO, servicoandplano, response);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.base.bar.IServicoAndPlanoBAR#deleteServicoAndPlano(com.qat.samples.sysmgmt.base.model.ServicoAndPlano)
+	 */
+	@Override
+	public InternalResponse deleteServicoAndPlanoById(ServicoAndPlano servicoandplano)
+	{
+		InternalResponse response = new InternalResponse();
+		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_SERVICOANDPLANO, servicoandplano, response);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.base.bar.IServicoAndPlanoBAR#deleteAllServicoAndPlanos()
+	 */
+	@Override
+	public InternalResponse deleteAllServicoAndPlanos()
+	{
+		InternalResponse response = new InternalResponse();
+		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_SERVICOANDPLANO_ALL, response);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bar.IServicoAndPlanoBAR#fetchServicoAndPlanoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+	 */
+	@Override
+	public ServicoAndPlano fetchServicoAndPlanoById(FetchByIdRequest request)
+	{
+	return (ServicoAndPlano)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_SERVICOANDPLANO, request.getFetchId());
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.base.bar.IServicoAndPlanoBAR#fetchAllServicoAndPlanosCache()
+	 */
+	@Override
+	public InternalResultsResponse<ServicoAndPlano> fetchAllServicoAndPlanos(ServicoAndPlano servicoandplano)
+	{
+		InternalResultsResponse<ServicoAndPlano> response = new InternalResultsResponse<ServicoAndPlano>();
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_SERVICOANDPLANO_ALL));
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.bar.IServicoAndPlanoBAR#fetchServicoAndPlanosByRequest(com.qat.samples.sysmgmt.model.request.
+	 * PagedInquiryRequest)
+	 */
+	@Override
+	public InternalResultsResponse<ServicoAndPlano> fetchServicoAndPlanosByRequest(PagedInquiryRequest request)
+	{
+		InternalResultsResponse<ServicoAndPlano> response = new InternalResultsResponse<ServicoAndPlano>();
+		fetchServicoAndPlanosByRequest(getSqlSession(), request, STMT_FETCH_SERVICOANDPLANO_COUNT, STMT_FETCH_SERVICOANDPLANO_ALL_REQUEST,
+				response);
+		return response;
+	}
+
+	//===================================### fetchServicoAndPlanosByRequest ####======================================
+
+	public static void fetchServicoAndPlanosByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
+				String fetchPagedStatement,
+				InternalResultsResponse<?> response)
+		{
+
+			// If the user requested the total rows/record count
+			if (request.isPreQueryCount())
+			{
+				// set the total rows available in the response
+				response.getResultsSetInfo().setTotalRowsAvailable(
+						(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+				if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
+				{
+					response.setStatus(BusinessErrorCategory.NoRowsFound);
+					return;
+				}
+			}
+
+			// Fetch Objects by InquiryRequest Object, paged of course
+			response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+			// move request start page to response start page
+			response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+			// move request page size to response page size
+			response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+			// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
+			// 1.
+			int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+			// set moreRowsAvailable in response based on total rows compared to (page size * start page)
+			// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
+			// is that you your own logic to handle this.
+			if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
+			{
+				response.getResultsSetInfo().setMoreRowsAvailable(true);
+			}
+
+		}
 
 }
