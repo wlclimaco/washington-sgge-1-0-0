@@ -17,7 +17,7 @@
 			id: '',
 			description: ''
 		};
-
+        pvm.total = 0;
          $scope.senha = "";
 
         $scope.empresa ={
@@ -136,9 +136,16 @@
             processPostData(create_url, new qat.model.reqEmpr($scope.empresa ,true, true), true);
           };
         $scope.doIfChecked = function(_ckecked,_value,_nome) {
-
-
-            console.log(_value);
+            var value = 0;
+            $('.planos').each(function()
+            {
+                if($(this).find('.plano').is(":checked") == true)
+                {
+                    value = value + parseFloat(parseFloat($(this).find('.valor').text()).toFixed(2));
+                }
+            });
+            console.log(value);
+            pvm.total = value;
         }
 
          fnMontaObjeto = function(){
@@ -226,7 +233,7 @@
             var socioAdm = 0;
             if(_adm == true)
             {
-               socioAdm = 1; 
+               socioAdm = 1;
             }
              var  socios    = {
               cota : 0,

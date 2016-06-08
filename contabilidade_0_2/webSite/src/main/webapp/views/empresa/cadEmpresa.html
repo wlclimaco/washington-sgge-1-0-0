@@ -202,7 +202,7 @@
 
                                 <!-- -------------------  TELEFONE ----------------- -->
                                 <div class="row">
-                                   
+
                                     <div class="col-sm-4" style="margin-top:25px">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Adicionar <span class="caret"></span></button>
@@ -220,7 +220,7 @@
                                 </div>
                                 <!-- Template for dynamic field -->
                                 <div class="row" id="template" style="display: none;">
-                                    
+
                                     <div class="col-sm-4" style="margin-top:25px">
                                         <button type="button" class="btn btn-link removeButton">deletar</button>
                                     </div>
@@ -318,7 +318,7 @@
                             </div>
                         </div>
                         <div class="tab-pane tab3" id="tab3">
-                            <div class="row socios"> 
+                            <div class="row socios">
                                     <div class="col-sm-2">
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">CPF Socio</label>
@@ -391,11 +391,11 @@
                                 </div>
                                 <div id="collapseThree" class="panel-collapse collapse collapseThree">
                                     <div class="panel-body">
-                                       <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="pricing-table1-11" style="background-color: rgb(240, 240, 240);">
-                                                <div class="mbr-section__container mbr-section__container--std-top-padding container" style="padding-top: 93px; margin-bottom: 0px;width:100%">
+                                       <section class="mbr-section mbr-section--relative mbr-section--fixed-size " id="pricing-table1-11" style="background-color: rgb(240, 240, 240);">
+                                                <div class="mbr-section__container mbr-section__container--std-top-padding  container" style="padding-top: 93px; margin-bottom: 0px;width:100%">
                                                     <div class="row" >
                                                         <div class="mbr-plan col-xs-12 mbr-plan--first col-md-3 col-sm-6" ng-repeat="plano in cc.site.planoList">
-                                                            <div class="mbr-plan__box">
+                                                            <div class="mbr-plan__box planos">
                                                                 <div class="mbr-plan__header">
                                                                     <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
                                                                         <h3 class="mbr-header__text">{{plano.titulo}}</h3>
@@ -403,9 +403,9 @@
                                                                 </div>
                                                                 <div class="mbr-plan__number">
                                                                     <div class="mbr-number mbr-number--price">
-                                                                        <div class="mbr-number__num">
+                                                                        <div class="mbr-number__num"><div class="{{plano.id}} hide id"></div><div class="hide type plano"></div>
                                                                             <div class="mbr-number__group">
-                                                                                <sup class="mbr-number__left">$</sup><span class="mbr-number__value mbr-plan__number1">{{plano.precoList[0].valor || 0}}</span>
+                                                                                <sup class="mbr-number__left">$</sup><span class="mbr-number__value mbr-plan__number1 valor">{{plano.precoList[0].valor || 0}}</span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="mbr-number__caption">Mensal</div>
@@ -418,7 +418,7 @@
                                                                 </div>
                                                                 <div class="mbr-plan__buttons">
                                                                     <div class="mbr-buttons mbr-buttons--center">
-                                                                        <label>Contratar - <input type='checkbox' ng-init='checkStatus=false' ng-model='checkStatus' ng-click='doIfChecked(checkStatus)'></label>
+                                                                        <label>Contratar - <input type='checkbox' class="plano" ng-init='checkStatus=false' ng-model='checkStatus' ng-click='doIfChecked(checkStatus)'></label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -437,7 +437,7 @@
                                 </div>
                                 <div id="collapseFour" class="panel-collapse collapse collapseFour">
                                     <div class="panel-body">
-                                       <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="pricing-table1-11" style="background-color: rgb(240, 240, 240);">
+                                       <section class="mbr-section mbr-section--relative mbr-section--fixed-size planos" id="pricing-table1-11" style="background-color: rgb(240, 240, 240);">
                                                 <div class="mbr-section__container mbr-section__container--std-top-padding container" style="padding-top: 93px; margin-bottom: 0px;">
                                                     <div class="row" >
                                                         <div class="mbr-plan col-xs-8 mbr-plan--first col-md-3 col-sm-6" ng-repeat="servico in cc.site.servicoList">
@@ -447,11 +447,11 @@
                                                                         <h3 class="mbr-header__text">{{servico.nome}}</h3>
                                                                     </div>
                                                                 </div>
-                                                                <div class="mbr-plan__number">
+                                                                <div class="mbr-plan__number"><div class="{{servico.id}} hide id"></div><div class="hide type servico"></div>
                                                                     <div class="mbr-number mbr-number--price">
                                                                         <div class="mbr-number__num">
                                                                             <div class="mbr-number__group">
-                                                                                <sup class="mbr-number__left" >$</sup><span class="mbr-number__value mbr-plan__number1" style="font-size:40%">{{servico.precoList[0].valor || 0}}</span>
+                                                                                <sup class="mbr-number__left" >$</sup><span class="mbr-number__value mbr-plan__number1 valor" style="font-size:40%">{{servico.precoList[0].valor || 0}}</span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="mbr-number__caption">Mensal</div>
@@ -464,7 +464,7 @@
                                                                 </div>
                                                                 <div class="mbr-plan__buttons">
                                                                     <div class="mbr-buttons mbr-buttons--center">
-                                                                        <label>Contratar - <input type='checkbox' ng-init='checkStatus=false' ng-model='checkStatus' ng-click='doIfChecked(checkStatus,10,nome)'></label>
+                                                                        <label>Contratar - <input type='checkbox' class="plano" ng-init='checkStatus=false' ng-model='checkStatus' ng-click='doIfChecked(checkStatus,10,nome)'></label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -489,7 +489,7 @@
                                                 <div class="mbr-number mbr-number--price">
                                                     <div class="mbr-number__num">
                                                         <div class="mbr-number__group">
-                                                            <sup class="mbr-number__left" >$</sup><span class="mbr-number__value mbr-plan__number1" style="font-size:40%">0,00</span>
+                                                            <sup class="mbr-number__left" >$</sup><span class="mbr-number__value mbr-plan__number1" style="font-size:40%">{{cc.total}}</span>
                                                         </div>
                                                     </div>
                                                     <div class="mbr-number__caption">Mensal</div>
@@ -539,9 +539,9 @@
             fields: {
 
             'book[0].cpf': notEmptyStringMinMaxRegexp,
-            'book[0].nome': notEmptyStringMinMaxRegexp,
+            'book[0].nome': notEmptyStringMinMax,
             'book[0].cota': integerNotEmptyValidation,
-             nome: notEmptyStringMinMaxRegexp,
+             nome: notEmptyStringMinMax,
              nunFunc: integerNotEmptyValidation,
             razao:notEmptyStringMinMax,
             logradouro:notEmptyStringMinMax,
