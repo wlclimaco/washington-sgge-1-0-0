@@ -17,6 +17,9 @@
 		<link rel="stylesheet" href="thirdparty/angular/angular-csp.css">
 	    <link rel="stylesheet" href="styles/wd_main.css">
 
+		<link rel="stylesheet" href="thirdparty/angular-datatables-master/dist/plugins/bootstrap/datatables.bootstrap.css">
+		<link rel="stylesheet" href="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.css">
+
     </head>
 	<div class="loader" ng-hide="initialized">
 		Loading...
@@ -45,6 +48,7 @@
 		<script src="http://maps.googleapis.com/maps/api/js?v=3&libraries=visualization"></script>
         <script src="thirdparty/jquery/jquery-2.2.2.min.js"></script>
         <script src="thirdparty/angular/angular.min.js"></script>
+		<script src="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.js"></script>
         <script src="thirdparty/angular-route/angular-route.min.js"></script>
         <script src="thirdparty/angular-animate/angular-animate.min.js"></script>
         <script src="thirdparty/angular-bootstrap/ui-bootstrap-tpls-1.2.5.min.js"></script>
@@ -81,6 +85,13 @@
         <script src="thirdparty/angular-chartjs/angular-chart.min.js"></script>
         <script src="thirdparty/angular-echarts/echarts-all.js"></script>
         <script src="thirdparty/angular-echarts/ngecharts.js"></script>
+
+		<script src="thirdparty/angular-datatables-master/ng-table.js"></script>
+        <script src="thirdparty/angular-datatables-master/ng-table-export.src.js"></script>
+
+        <!-- datatables -->
+		<script src="thirdparty/angular-datatables-master/dist/angular-datatables.min.js"></script>
+
         <!--webdaptive -->
         <script src="scripts/wdapp.js"></script>
         <script src="scripts/commons/wdapp.controllers.js"></script>
@@ -111,5 +122,6 @@
         <script src="scripts/apps/sysmgmt.data.factory.js"></script>
         <script src="scripts/apps/site.controllers.js"></script>
         <script src="scripts/apps/empresa.controllers.js"></script>
+		<script src="scripts/apps/estado/estado.controllers.js"></script>
     </body>
 </html>
