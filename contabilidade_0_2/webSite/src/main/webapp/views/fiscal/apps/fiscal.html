@@ -1,0 +1,67 @@
+<div class="page page-table" data-ng-controller="EstadoController as cc"  >
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Estados </strong>&nbsp;<a href="javascript:;"  ng-show="hasRole('ROLE_DOMAIN_ADMINS')" data-ng-click="cc.refreshCounties(86)"><i class="fa fa-refresh" ng-class="{'fa-spin': cc.isActive}" ></i></a></div>
+				<div class="panel-body" style="text-align:center;">
+					<div ng-app="wdApp.apps.counties" class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-12" ng-controller="EstadoController as demo">
+      <div class="brn-group pull-right">
+        <button class="btn btn-default" ng-if="demo.isEditing" ng-click="demo.cancelChanges()">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+        <button class="btn btn-primary" ng-if="!demo.isEditing" ng-click="demo.isEditing = true">
+          <span class="glyphicon glyphicon-pencil"></span>
+        </button>
+        <button class="btn btn-primary" ng-if="demo.isEditing" ng-disabled="!demo.hasChanges() || demo.tableTracker.$invalid" ng-click="demo.saveChanges()">
+          <span class="glyphicon glyphicon-ok"></span>
+        </button>
+        <button class="btn btn-default" ng-click="demo.add()">
+          <span class="glyphicon glyphicon-plus"></span>
+        </button>
+      </div>
+      <table ng-table="demo.tableParams" class="table table-bordered table-hover table-condensed editable-table" ng-form="demo.tableForm" disable-filter="demo.isAdding" demo-tracked-table="demo.tableTracker">
+        <colgroup>
+          <col width="70%" />
+          <col width="12%" />
+          <col width="13%" />
+          <col width="5%" />
+        </colgroup>
+        <tr ng-repeat="row in $data" ng-form="rowForm" demo-tracked-table-row="row">
+          <td title="'Id'" filter="{id: 'number'}" sortable="'id'" ng-switch="demo.isEditing" ng-class="id.$dirty ? 'bg-warning' : ''" ng-form="id" demo-tracked-table-cell>
+            <span ng-switch-default class="editable-text">{{row.id}}</span>
+            <div class="controls" ng-class="id.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="id" ng-model="row.id" class="editable-input form-control input-sm" required />
+            </div>
+          </td>
+          <td title="'nome'" filter="{nome: 'text'}" sortable="'nome'" ng-switch="demo.isEditing" ng-class="nome.$dirty ? 'bg-warning' : ''" ng-form="nome" demo-tracked-table-cell>
+            <span ng-switch-default class="editable-text">{{row.nome}}</span>
+            <div class="controls" ng-class="nome.$invalid && nome.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="number" name="nome" ng-model="row.nome" class="editable-input form-control input-sm" required/>
+            </div>
+          </td>
+          <td title="'Abreviacao'" filter="{abreviacao: 'text'}" sortable="'abreviacao'" ng-switch="demo.isEditing" ng-class="abreviacao.$dirty ? 'bg-warning' : ''" ng-form="abreviacao" demo-tracked-table-cell>
+            <span ng-switch-default class="editable-text">{{row.abreviacao}}</span>
+            <div class="controls" ng-class="abreviacao.$invalid && abreviacao.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="number" name="abreviacao" ng-model="row.abreviacao" class="editable-input form-control input-sm" required/>
+            </div>
+          </td>
+         <td>
+            <button class="btn btn-primary btn-sm" ng-click="demo.save(row, rowForm)" ng-if="row.isEditing" ng-disabled="rowForm.$pristine || rowForm.$invalid"><span class="glyphicon glyphicon-ok"></span></button>
+            <button class="btn btn-default btn-sm" ng-click="demo.cancel(row, rowForm)" ng-if="row.isEditing"><span class="glyphicon glyphicon-remove"></span></button>
+            <button class="btn btn-default btn-sm" ng-click="row.isEditing = true" ng-if="!row.isEditing"><span class="glyphicon glyphicon-pencil"></span></button>
+            <button class="btn btn-danger btn-sm" ng-click="demo.del(row)" ng-if="!row.isEditing"><span class="glyphicon glyphicon-trash"></span></button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	<div data-ui-footer></div>

@@ -1,0 +1,91 @@
+<div class="page page-charts">
+
+    <div class="row">
+        <div class="col-md-6">
+            <section class="panel panel-default">
+                <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Line Chart</div>
+                <div class="panel-body" data-ng-controller="ChartjsLineController as cjcc">
+					<canvas id="linechartjs" class="chart chart-line" chart-data="cjcc.linedata"
+					  chart-labels="cjcc.linelabels" chart-legend="true" chart-series="cjcc.lineseries">
+					</canvas> 
+                </div>
+            </section>            
+        </div>
+        <div class="col-md-6">
+            <section class="panel panel-default">
+                <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Bar Chart</div>
+                <div class="panel-body" data-ng-controller="ChartjsBarController as cjbc">
+					<canvas id="barchartjs" class="chart chart-bar"
+					  chart-data="cjbc.bardata" chart-labels="cjbc.barlabels" chart-legend="true" chart-series="cjbc.barseries">
+					</canvas>
+                </div>
+            </section>              
+        </div>
+    </div>
+	
+    <div class="row">
+        <div class="col-md-6">
+            <section class="panel panel-default">
+                <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Pie Chart</div>
+                <div class="panel-body" data-ng-controller="ChartjsPieController as cjpc">
+					<canvas id="piechartjs" class="chart chart-pie" chart-data=" cjpc.piedata" chart-labels=" cjpc.pielabels" chart-options=" cjpc.pieoptions" chart-legend="true" >
+					</canvas>  
+                </div>
+            </section>            
+        </div>
+        <div class="col-md-6">
+            <section class="panel panel-default">
+                <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Radar Chart</div>
+                <div class="panel-body" data-ng-controller="ChartjsRadarController as cjrc">
+					<canvas id="radarchartjs" class="chart chart-radar"  chart-data="cjrc.radardata" chart-series="cjrc.radarseries" chart-labels="cjrc.radarlabels" chart-legend="true">
+					</canvas> 
+                </div>
+            </section>              
+        </div>
+    </div>	
+	
+    <div class="row">
+        <div class="col-md-6">
+            <section class="panel panel-default">
+                <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Doughnut Chart</div>
+                <div class="panel-body" data-ng-controller="ChartjsDoughnutController as cjdc">
+					<canvas id="doughnutchartjs" class="chart chart-doughnut" chart-data="cjdc.doughnutdata" chart-labels="cjdc.doughnutlabels" chart-options="cjdc.doughnutoptions" chart-legend="true">
+					</canvas> 
+                </div>
+            </section>            
+        </div>
+        <div class="col-md-6">
+            <section class="panel panel-default">
+                <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Polar Chart</div>
+                <div class="panel-body" data-ng-controller="ChartjsPolarController as cjpc">
+					<canvas id="polarchartjs" class="chart chart-polar-area" chart-data="cjpc.polardata" chart-labels="cjpc.polarlabels" chart-legend="true"></canvas> 
+                </div>
+            </section>              
+        </div>
+    </div>	
+
+    <div class="row">
+        <div class="col-md-6">
+            <section class="panel panel-default">
+                <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Reactive Chart</div>
+                <div class="panel-body" data-ng-controller="ChartjsReactiveController as cjreactc">
+					<canvas id="reactivechartjs" class="chart chart-line" chart-data="cjreactc.reactivedata" chart-labels="cjreactc.reactivelabels" chart-colours="cjreactc.reactivecolours">
+					</canvas>
+					<button type="button" class="btn btn-primary pull-right" ng-click="cjreactc.randomize()">Randomize</button>					
+                </div>
+            </section>            
+        </div>
+        <div class="col-md-6">
+            <section class="panel panel-default">
+                <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Dynamic Chart</div>
+                <div class="panel-body" data-ng-controller="ChartjsDynamicController as cjdync" >
+					<canvas id="basechartjs" class="chart-base" chart-type="cjdync.type"  chart-data="cjdync.dyndata" chart-labels="cjdync.dynlabels" chart-legend="true" chart-options="cjdync.dynoptions">
+					</canvas> 
+					<button type="button" class="btn btn-primary pull-right" ng-click="cjdync.toggle()">Toggle</button>					
+                </div>
+            </section>              
+        </div>
+    </div>		
+	
+	<div data-ui-footer></div>	
+</div>
