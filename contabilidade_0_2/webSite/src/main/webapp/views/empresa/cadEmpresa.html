@@ -1,4 +1,4 @@
-
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="dist/css/formValidation.css"/>
     <link rel="stylesheet" href="dist/css/select2.css"/>
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.8/select2.css"/>
@@ -36,10 +36,10 @@
                       <div class="navbar-inner">
                         <div class="container">
                     <ul>
-                        <li><a href=".tab1" data-toggle="tab">Informações do Usuario</a></li>
-                        <li><a href=".tab2" data-toggle="tab">Informações da Empresa</a></li>
-                        <li><a href=".tab3" data-toggle="tab">Informações de Socios</a></li>
-                        <li><a href=".tab4" data-toggle="tab">Informações Plano Serviçoes</a></li>
+                        <li><a href=".tab1" data-toggle="tab">InformaÃ§Ãµes do Usuario</a></li>
+                        <li><a href=".tab2" data-toggle="tab">InformaÃ§Ãµes da Empresa</a></li>
+                        <li><a href=".tab3" data-toggle="tab">InformaÃ§Ãµes de Socios</a></li>
+                        <li><a href=".tab4" data-toggle="tab">InformaÃ§Ãµes Plano ServiÃ§oes</a></li>
                         <li><a href=".tab5" data-toggle="tab">Contrato Social</a></li>
                         <li><a href=".tab6" data-toggle="tab">Pagamento</a></li>
                     </ul>
@@ -58,6 +58,7 @@
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Nome Completo</label>
                                             <input type="text"  ng-model="empresa.usuarios[0].nome" name="nome" class="form-control" placeholder="Nome Completo">
+                                                <span>{{empresa.usuarios[0].nome}}</span>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">CPF</label>
@@ -89,7 +90,7 @@
                                        <label for="exampleInputPassword1">Tipo de Empresa</label>
                                         <dl class="dl-horizontal">
                                             <dd>
-                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="1" checked ><span>Venda e Compra e prstação de serviço </span></label>
+                                                <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="1" checked ><span>Venda e Compra e prstaÃ§Ã£o de serviÃ§o </span></label>
                                                 <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="2" ><span>Clinica </span></label>
                                                 <label class="ui-radio"><input name="radio1" type="radio" ng-model="empresa.regime.id" value="3" ><span>Escritorio Advocacia</span></label>
 
@@ -119,8 +120,8 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Informe a Razão Social</label>
-                                            <input type="text" class="form-control col-sm-8" name="razao" ng-model="empresa.nome" placeholder="Razão Social">
+                                            <label for="exampleInputPassword1">Informe a RazÃ£o Social</label>
+                                            <input type="text" class="form-control col-sm-8" name="razao" ng-model="empresa.nome" placeholder="RazÃ£o Social">
                                         </div>
                                     </div>
                                 </div>
@@ -130,7 +131,7 @@
                                         <dl class="dl-horizontal">
                                             <dd>
                                                 <label class="ui-radio"><input name="radio1" ng-model="empresa.statusInicial" type="radio" value="1" ><span>Sim</span></label>
-                                                <label class="ui-radio"><input name="radio1" ng-model="empresa.statusInicial" type="radio" value="2" checked><span>Não</span></label>
+                                                <label class="ui-radio"><input name="radio1" ng-model="empresa.statusInicial" type="radio" value="2" checked><span>NÃ£o</span></label>
                                             </dd>
                                         </dl>
                                     </div>
@@ -187,7 +188,7 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <label for="exampleInputPassword1">Estado</label>
-                                        <input type="text" class="form-control col-sm-8" ng-model="empresa.enderecos[0].estado.nome" placeholder="Estado">
+                                        <input type="text" class="form-control col-sm-8" ng-model="empresa.enderecos[0].estado.abreviacao" placeholder="Estado">
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="exampleInputPassword1">Municipio</label>
@@ -396,6 +397,8 @@
                                                     <div class="row" >
                                                         <div class="mbr-plan col-xs-12 mbr-plan--first col-md-3 col-sm-6" ng-repeat="plano in cc.site.planoList">
                                                             <div class="mbr-plan__box planos">
+                                                                <div class="plano-id hide">{{plano.id}}</div>
+                                                                <div class="plano-type hide">1</div>
                                                                 <div class="mbr-plan__header">
                                                                     <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
                                                                         <h3 class="mbr-header__text">{{plano.titulo}}</h3>
@@ -432,7 +435,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href=".collapseFour">2 - Serviços</a>
+                                        <a data-toggle="collapse" data-parent="#accordion" href=".collapseFour">2 - ServiÃ§os</a>
                                     </h4>
                                 </div>
                                 <div id="collapseFour" class="panel-collapse collapse collapseFour">
@@ -441,6 +444,8 @@
                                                 <div class="mbr-section__container mbr-section__container--std-top-padding container" style="padding-top: 93px; margin-bottom: 0px;">
                                                     <div class="row" >
                                                         <div class="mbr-plan col-xs-8 mbr-plan--first col-md-3 col-sm-6" ng-repeat="servico in cc.site.servicoList">
+                                                            <div class="plano-id hide">{{servico.id}}</div>
+                                                            <div class="plano-type hide">2</div>
                                                             <div class="mbr-plan__box">
                                                                 <div class="mbr-plan__header">
                                                                     <div class="mbr-header mbr-header--reduce mbr-header--center mbr-header--wysiwyg">
@@ -482,22 +487,22 @@
                                         <a data-toggle="collapse" data-parent="#accordion" href=".collapseten" style="font-size:24px">Total</a>
                                     </h4>
                                 </div>
-                                <div id="collapseten" class="panel-collapse collapse collapseten">
+
                                     <div class="panel-body">
-                                        <div>
-                                            <div class="mbr-plan__number">
-                                                <div class="mbr-number mbr-number--price">
-                                                    <div class="mbr-number__num">
-                                                        <div class="mbr-number__group">
-                                                            <sup class="mbr-number__left" >$</sup><span class="mbr-number__value mbr-plan__number1" style="font-size:40%">{{cc.total}}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mbr-number__caption">Mensal</div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <table class="table table-hover">
+                                          <thead>
+                                            <tr>
+                                              <th>#</th>
+                                              <th>Plano</th>
+                                              <th>Valor</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody id='table-plano'>
+
+                                          </tbody>
+                                        </table>
                                     </div>
-                                </div>
+
 
 
                             </div>
@@ -763,6 +768,9 @@ $('#empresaForm').find('[name="cep"]').val('38082243');
 $('#empresaForm').find('[name="numero"]').val('686');
 $('#empresaForm').find('[name="complemento"]').val('complemento');
 $('#empresaForm').find('[name="logradouro"]').val('logradouro');
+$('#empresaForm').find('[name="book[0].nome"]').val('joao das coves');
+$('#empresaForm').find('[name="book[0].cpf"]').val('05790167659');
+$('#empresaForm').find('[name="book[0].cpf"]').val('10');
 
     });
 //prencher form

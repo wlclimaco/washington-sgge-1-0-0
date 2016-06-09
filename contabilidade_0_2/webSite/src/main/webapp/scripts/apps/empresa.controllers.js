@@ -30,9 +30,9 @@
           regime              : {
              id : 0,
              modelAction    : "NONE",
-             createUser     : $rootScope.user.user,
+             createUser     : "System",
              createDateUTC  : (new Date()).getTime(),
-             modifyUser     : $rootScope.user.user,
+             modifyUser     : "System",
              modifyDateUTC  : (new Date()).getTime(),
           },
           documentos          : [{
@@ -40,9 +40,9 @@
                        numero : 0,
                        tableEnumValue : 1,
                        modelAction    : "INSERT",
-                       createUser     : $rootScope.user.user,
+                       createUser     : "System",
                        createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : $rootScope.user.user,
+                       modifyUser     : "System",
                        modifyDateUTC  : (new Date()).getTime(),
 
                     }],
@@ -57,15 +57,15 @@
                        longitude : '',
                        complemento : '',
                        cidade : {nome : ""},
-                       estado : {nome : ""},
+                       estado : {abreviacao : ""},
                        parentId       : 0,
                        emprId         : 0,
                        processId      : 0,
                        tableEnumValue : 0,
                        modelAction    :  "INSERT",
-                       createUser     : $rootScope.user.user,
+                       createUser     : "System",
                        createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : $rootScope.user.user,
+                       modifyUser     : "System",
                        modifyDateUTC  : (new Date()).getTime(),
 
                     }],
@@ -76,9 +76,9 @@
           processId           : 0,
           tableEnumValue      : 1,
           modelAction         : 'INSERT',
-          createUser          : $rootScope.user.user,
+          createUser          : "System",
           createDateUTC       : (new Date()).getTime(),
-          modifyUser          : $rootScope.user.user,
+          modifyUser          : "System",
           modifyDateUTC       : (new Date()).getTime(),
           usuarios            :[{
                  nome : '',
@@ -88,9 +88,9 @@
                        numero : 0,
                        tableEnumValue : 2,
                        modelAction    : "INSERT",
-                       createUser     : $rootScope.user.user,
+                       createUser     : "System",
                        createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : $rootScope.user.user,
+                       modifyUser     : "System",
                        modifyDateUTC  : (new Date()).getTime(),
 
                     },
@@ -107,9 +107,9 @@
                  tableEnumValue : 0,
 
                  modelAction    : 'INSERT',
-                 createUser     : $rootScope.user.user,
+                 createUser     : "System",
                  createDateUTC  : (new Date()).getTime(),
-                 modifyUser     : $rootScope.user.user,
+                 modifyUser     : "System",
                  modifyDateUTC  : (new Date()).getTime()
 
                     }]
@@ -132,18 +132,38 @@
         };
 
         $scope.submit = function() {
+
+            console.log($scope.empresa)
             fnMontaObjeto();
+            console.log($scope.empresa)
             processPostData(create_url, new qat.model.reqEmpr($scope.empresa ,true, true), true);
           };
         $scope.doIfChecked = function(_ckecked,_value,_nome) {
+
             var value = 0;
+            var sHtml = "",count =1;
             $('.planos').each(function()
             {
                 if($(this).find('.plano').is(":checked") == true)
                 {
                     value = value + parseFloat(parseFloat($(this).find('.valor').text()).toFixed(2));
+                    sHtml = sHtml  + "<tr>";
+                    sHtml = sHtml  + "  <th scope='row'>"+count+"</th>";
+                    sHtml = sHtml  + "  <td>"+$(this).find('.mbr-header__text').text()+"</td>";
+                    sHtml = sHtml  + "  <td>"+parseFloat(parseFloat($(this).find('.valor').text()).toFixed(2))+"</td>";
+                    sHtml = sHtml  + "</tr>";
+                    count = count + 1
                 }
             });
+
+
+            sHtml = sHtml  + "<tr style='background-color : red;color:black'>";
+            sHtml = sHtml  + "  <th scope='row'></th>";
+            sHtml = sHtml  + "  <td colspan='2'>Total</td>";
+            sHtml = sHtml  + "  <td>"+value+"</td>";
+            sHtml = sHtml  + "</tr>";
+            $('#table-plano').empty();
+            $('#table-plano').append(sHtml);
             console.log(value);
             pvm.total = value;
         }
@@ -152,7 +172,8 @@
             console.log($scope.empresa);
             var count = 0;
             var bb = [];
-            $('.gugu:visible').each(function() {
+
+            $('.gugu').each(function() {
                 if($(this).val() != "")
                 {
                     bb.push(fnTelefones($(this).val(),count,1));
@@ -164,7 +185,7 @@
             // email
             count = 0;
             bb = [];
-            $('.input-email:visible').each(function() {
+            $('.input-email').each(function() {
                 if($(this).val() != "")
                 {
                     bb.push(fnEmails($(this).val(),count,1));
@@ -177,11 +198,26 @@
 
             count = 0;
             bb = [];
-            $('.socios:visible').each(function() {
-                bb.push(fnSocios($(this).find('.nome-socio').val(),$(this).find('.cpf-socio').val(),$(this).find('.cota-socio').val(),$(this).find('.check-socio').is(":checked")));
-                count = count + 1;
+            $('.socios').each(function() {
+                if($(this).find('.nome-socio').val() !="")
+                {
+                    bb.push(fnSocios($(this).find('.nome-socio').val(),$(this).find('.cpf-socio').val(),$(this).find('.cota-socio').val(),$(this).find('.check-socio').is(":checked")));
+                    count = count + 1;
+                }
             });
             $scope.empresa.socios = bb;
+
+            count = 0;
+            bb = [];
+            $('.planos').each(function()
+            {
+                if($(this).find('.plano').is(":checked") == true)
+                {
+                    bb.push(fnServicoAndPlano(parseFloat(parseFloat($(this).find('.valor').text()).toFixed(2)),$(this).find('.plano-id').text(),$(this).find('.plano-type').text()));
+                    count = count + 1;
+                }
+            });
+            $scope.empresa.planosServicos = bb;
 
             console.log($scope.empresa);
         }
@@ -199,9 +235,9 @@
                processId      : 0,
                tableEnumValue : 0,
                modelAction    : 0,
-               createUser     : $rootScope.user.user,
+               createUser     : "System",
                createDateUTC  : (new Date()).getTime(),
-               modifyUser     : $rootScope.user.user,
+               modifyUser     : "System",
                modifyDateUTC  : (new Date()).getTime()
             }
 
@@ -220,13 +256,42 @@
                processId      : 0,
                tableEnumValue : 0,
                modelAction    : "NONE",
-               createUser     : $rootScope.user.user,
+               createUser     : "System",
                createDateUTC  : (new Date()).getTime(),
-               modifyUser     : $rootScope.user.user,
+               modifyUser     : "System",
                modifyDateUTC  : (new Date()).getTime()
 
             }
             return emails;
+        }
+        fnServicoAndPlano = function(_valor,_id,_type)
+        {
+            servicoAndPlano  = {
+               valor : _valor,
+               dataInicio : (new Date()).getTime(),
+               servicoPlanoEnumValue : _type,
+               parentId       : 0,
+               emprId         : 0,
+               processId      : 0,
+               tableEnumValue : 0,
+               modelAction    : "INSERT",
+               createUser     : "System",
+               createDateUTC  : (new Date()).getTime(),
+               modifyUser     : "System",
+               modifyDateUTC  : (new Date()).getTime()
+
+            }
+
+            if(_type == 1)
+            {
+               servicoAndPlano.planoList = {id :_id};
+            }
+            else
+            {
+                servicoAndPlano.servicoList = {id :_id};
+            }
+
+            return servicoAndPlano;
         }
         fnSocios = function(_nome,_cpf,_cota,_adm)
         {
@@ -245,9 +310,9 @@
                          numero : _cpf,
                          tableEnumValue : 1,
                          modelAction    : "INSERT",
-                         createUser     : $rootScope.user.user,
+                         createUser     : "System",
                          createDateUTC  : (new Date()).getTime(),
-                         modifyUser     : $rootScope.user.user,
+                         modifyUser     : "System",
                          modifyDateUTC  : (new Date()).getTime(),
 
                       }],
@@ -262,16 +327,16 @@
 
                            id : _id,
                            modelAction    : "NONE",
-                           createUser     : $rootScope.user.user,
+                           createUser     : "System",
                            createDateUTC  : (new Date()).getTime(),
-                           modifyUser     : $rootScope.user.user,
+                           modifyUser     : "System",
                            modifyDateUTC  : (new Date()).getTime(),
 
                        },
                        modelAction    : "NONE",
-                       createUser     : $rootScope.user.user,
+                       createUser     : "System",
                        createDateUTC  : (new Date()).getTime(),
-                       modifyUser     : $rootScope.user.user,
+                       modifyUser     : "System",
                        modifyDateUTC  : (new Date()).getTime(),
                     }
                 return cnaes;
@@ -326,10 +391,126 @@
                 $scope.empresa.enderecos[0].codIbge = raw.ibge;
                 $scope.empresa.enderecos[0].cidade.nome = raw.localidade;
                 $scope.empresa.enderecos[0].logradouro = raw.logradouro;
-                $scope.empresa.enderecos[0].cidade.estado = raw.uf;
+                $scope.empresa.enderecos[0].estado.abreviacao = raw.uf;
 
             });
         }
+        $scope.empresa ={
+
+          nome                : 'Cosme e damiao',
+          entidadeId          : 1,
+          numFunc             : 5,
+          statusInicial       : 1,
+          entidadeEnumValue   : 1,
+          regime              : {
+             id : 1,
+             modelAction    : "NONE",
+             createUser     : "System",
+             createDateUTC  : (new Date()).getTime(),
+             modifyUser     : "System",
+             modifyDateUTC  : (new Date()).getTime(),
+          },
+          documentos          : [{
+                       documentoTypeEnumValue : 1,
+                       numero : 05790167659,
+                       tableEnumValue : 1,
+                       modelAction    : "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    }],
+          enderecos           : [{
+                       codIbge : 0,
+                       logradouro : '',
+                       bairro : '',
+                       numero : '686',
+                       enderecoTypeValue : 0,
+                       cep : '38082243',
+                       latitude : '',
+                       longitude : '',
+                       complemento : '',
+                       cidade : {nome : ""},
+                       estado : {abreviacao : "MG"},
+                       parentId       : 0,
+                       emprId         : 0,
+                       processId      : 0,
+                       tableEnumValue : 0,
+                       modelAction    :  "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    }],
+
+
+          parentId            : 0,
+          emprId              : 1,
+          processId           : 0,
+          tableEnumValue      : 1,
+          modelAction         : 'INSERT',
+          createUser          : "System",
+          createDateUTC       : (new Date()).getTime(),
+          modifyUser          : "System",
+          modifyDateUTC       : (new Date()).getTime(),
+          usuarios            :[{
+                 nome : 'Washington@gmail.com',
+                 cpf : {
+                       id : 0,
+                       documentoTypeEnumValue : 0,
+                       numero : '05790167659',
+                       tableEnumValue : 2,
+                       modelAction    : "INSERT",
+                       createUser     : "System",
+                       createDateUTC  : (new Date()).getTime(),
+                       modifyUser     : "System",
+                       modifyDateUTC  : (new Date()).getTime(),
+
+                    },
+                 email : 'Washington@gmail.com',
+                 telefone : '34988406670',
+                 senha : 'n6j7y7a5',
+                 pergunta : 'jose',
+                 role : 'ADMIN',
+                 language : 'Pt',
+                 ultAcesso : (new Date()).getTime(),
+                 parentId       : 0,
+                 emprId         : 0,
+                 processId      : 0,
+                 tableEnumValue : 0,
+
+                 modelAction    : 'INSERT',
+                 createUser     : "System",
+                 createDateUTC  : (new Date()).getTime(),
+                 modifyUser     : "System",
+                 modifyDateUTC  : (new Date()).getTime()
+
+                    }],
+        socios    : [{
+              nome : "washington climaco",
+              porcentagem : 100,
+              socioAdm : 1,
+              modelAction    : "INSERT",
+              documentos          : [{
+                         documentoTypeEnumValue : 1,
+                         numero : '05790167659',
+                         tableEnumValue : 1,
+                         modelAction    : "INSERT",
+                         createUser     : "System",
+                         createDateUTC  : (new Date()).getTime(),
+                         modifyUser     : "System",
+                         modifyDateUTC  : (new Date()).getTime(),
+
+                      }]
+
+        }]
+    }
+   $scope.senha = "n6j7y7a5";
+
+
+
  /*         var config = {headers: {
             'X-Cosmos-Token': 'T9pFIi3coAXpypnWF4miGw',
             'Content-Type': 'application/json',

@@ -13,14 +13,15 @@
 <resultMap id="socioResult" type="Socio" extends="PessoaMap.PessoaResult">
 	<result property="cota" column="cota"/>
 	<result property="porcentagem" column="porcentagem" />
+	<result property="socioAdm" column="admin" />
   </resultMap>
 
 <sql id="allSocioColumns">
-	cota,porcentagem,
+	cota,porcentagem,admin,
 	<include refid="PessoaMap.allPessoaColumns"/>
 </sql>
 <sql id="allSocioValues">
-	#{cota},#{porcentagem},
+	#{cota},#{porcentagem},#{socioAdm},
 	<include refid="PessoaMap.allPessoaValues"/>
 </sql>
  <insert id="insertSocio" parameterType="Socio" useGeneratedKeys="true" keyProperty="id">
@@ -67,6 +68,7 @@
 <if test="pessoaTypeEnumValue!= null">pessoaTypeEnum = #{pessoaTypeEnumValue},</if>
 <if test="sexo!= null">sexo = #{sexo},</if>
 <if test="cota!= null">cota = #{cota},</if>
+<if test="socioAdm!= null">admin = #{socioAdm},</if>
 <if test="porcentagem!= null">porcentagem = #{porcentagem},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>

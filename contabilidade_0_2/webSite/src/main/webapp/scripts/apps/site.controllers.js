@@ -54,7 +54,7 @@
               }).success(function(response){
                 console.log(response)
               });
-            */
+
           var config = {headers: {
             'X-Cosmos-Token': 'T9pFIi3coAXpypnWF4miGw',
             'Content-Type': 'application/json',
@@ -76,7 +76,7 @@
               return deferred.resolve(raw);
             }
           });
-
+*/
     }
 
   ]);

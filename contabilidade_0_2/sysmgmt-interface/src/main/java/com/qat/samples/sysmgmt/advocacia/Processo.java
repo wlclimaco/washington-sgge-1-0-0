@@ -2,6 +2,7 @@ package com.qat.samples.sysmgmt.advocacia;
 
 import java.util.List;
 
+import com.qat.samples.sysmgmt.financeiro.model.ContasReceber;
 import com.qat.samples.sysmgmt.pessoa.model.Cliente;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
@@ -22,7 +23,7 @@ public class Processo extends ModelCosmeDamiao
 
 	private ProcessoAcao acao;
 
-	private List<TituloReceber> tituloList;
+	private List<ContasReceber> tituloList;
 
 	private List<Advogado> advogadoList;
 
@@ -62,26 +63,6 @@ public class Processo extends ModelCosmeDamiao
 		this.dataProcess = dataProcess;
 	}
 
-	public Double getValor()
-	{
-		return valor;
-	}
-
-	public void setValor(Double valor)
-	{
-		this.valor = valor;
-	}
-
-	public List<Advogado> getAdvogadoLIst()
-	{
-		return advogadoLIst;
-	}
-
-	public void setAdvogadoLIst(List<Advogado> advogadoLIst)
-	{
-		this.advogadoLIst = advogadoLIst;
-	}
-
 	public List<Cliente> getClienteList()
 	{
 		return clienteList;
@@ -112,13 +93,45 @@ public class Processo extends ModelCosmeDamiao
 		this.processoStatusList = processoStatusList;
 	}
 
+	public Long getDataFim() {
+		return dataFim;
+	}
+
+	public void setDataFim(Long dataFim) {
+		this.dataFim = dataFim;
+	}
+
+	public ProcessoAcao getAcao() {
+		return acao;
+	}
+
+	public void setAcao(ProcessoAcao acao) {
+		this.acao = acao;
+	}
+
+	public List<ContasReceber> getTituloList() {
+		return tituloList;
+	}
+
+	public void setTituloList(List<ContasReceber> tituloList) {
+		this.tituloList = tituloList;
+	}
+
+	public List<Advogado> getAdvogadoList() {
+		return advogadoList;
+	}
+
+	public void setAdvogadoList(List<Advogado> advogadoList) {
+		this.advogadoList = advogadoList;
+	}
+
 	@Override
-	public String toString()
-	{
-		return "Processo [getId()=" + getId() + ", getDataProcess()=" + getDataProcess() + ", getValor()=" + getValor()
-				+ ", getAdvogadoLIst()=" + getAdvogadoLIst() + ", getClienteList()=" + getClienteList()
-				+ ", getAudienciaList()=" + getAudienciaList() + ", getProcessoStatusList()=" + getProcessoStatusList()
-				+ ", toString()=" + super.toString() + "]";
+	public String toString() {
+		return "Processo [getId()=" + getId() + ", getDataProcess()=" + getDataProcess() + ", getClienteList()="
+				+ getClienteList() + ", getAudienciaList()=" + getAudienciaList() + ", getProcessoStatusList()="
+				+ getProcessoStatusList() + ", getDataFim()=" + getDataFim() + ", getAcao()=" + getAcao()
+				+ ", getTituloList()=" + getTituloList() + ", getAdvogadoList()=" + getAdvogadoList() + ", toString()="
+				+ super.toString() + "]";
 	}
 
 }
