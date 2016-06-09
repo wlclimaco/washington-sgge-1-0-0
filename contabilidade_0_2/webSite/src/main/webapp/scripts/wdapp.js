@@ -15,23 +15,12 @@ var WebDaptiveAppConfig = {
 	refresh_url: '/refresh',
 	create_url: '/insert',
 	update_url: '/update',
-	delete_url: '/delete',
-
-	//site
-	base_site_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/site/api',
-	fetch_url: '/fetchPage',
-	refresh_url: '/refresh',
-	create_url: '/insert',
-	update_url: '/update',
-	delete_url: '/delete',
-
-	base_empresa_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/entidade/api',
-
+	delete_url: '/delete'
 };
 
 (function() {
   'use strict';
-	var wdApp = angular.module('wdApp',
+		var wdApp = angular.module('wdApp',
 				['ngRoute', 'ngAnimate', 'ui.bootstrap', 'easypiechart', 'textAngular',
 				'ui.tree', 'ngMap', 'ngTagsInput', 'toastr', 'angular-loading-bar', 'chart.js', 'ngecharts',
 				'agGrid', 'base64', 'LocalStorageModule', 'wdApp.controllers', 'wdApp.directives', 'wdApp.httpint',
@@ -40,12 +29,13 @@ var WebDaptiveAppConfig = {
 				'wdApp.charts.flot.controllers', 'wdApp.charts.morris.controllers', 'wdApp.charts.chartjs.controllers',
 				'wdApp.charts.other.controllers', 'wdApp.charts.echarts.controllers', 'wdApp.charts.directives', 'wdApp.authentication',
 				'wdApp.pages.controllers', 'wdApp.demodata', 'wdApp.apps.stocks', 'wdApp.apps.stocksdata',
-				'wdApp.apps.counties', 'wdApp.apps.procedures','wdApp.apps.sysmgmt.data','wdApp.apps.site','wdApp.apps.empresa']);
+				'wdApp.apps.counties', 'ngTable', 'wdApp.apps.estado', 'wdApp.apps.procedures','wdApp.apps.sysmgmt.data','wdApp.apps.site','wdApp.apps.empresa']);
 
 	wdApp.config(['$routeProvider',
 		function($routeProvider) {
 			var routes, setRoutes;
 			//all available routes
+			
 			routes = ['dashboard','principal', 'ui/typography', 'ui/buttons','index3',
 			'ui/icons', 'ui/grids', 'ui/widgets', 'ui/components',
 			'ui/timeline', 'ui/tree', 'ui/pricing-tables', 'ui/maps',
@@ -54,11 +44,10 @@ var WebDaptiveAppConfig = {
 			'charts/charts', 'charts/flot', 'charts/morris', 'charts/chartjs', 'charts/echarts',
 			'pages/404', 'pages/500', 'pages/blank', 'pages/invoice', 'pages/profile',
 			'pages/signin', 'mail/compose', 'mail/inbox', 'mail/single', 'tasks/tasks','empresa/cadEmpresa',
-			'apps/stocks', 'apps/counties', 'apps/procedures'];
+			'apps/stocks', 'apps/counties', 'apps/procedures', 'estado/apps/estado'];
 
 			//geeric routeine for building route from array
 			setRoutes = function(route) {
-
 				var config, url;
 				url = '/' + route;
 				config = {
@@ -75,7 +64,7 @@ var WebDaptiveAppConfig = {
 
 			//routes not automatically built specified here
 			return $routeProvider.when('/', {
-				redirectTo: '/principal'
+				redirectTo: '/dashboard'
 			}).when('/404', {
 				templateUrl: 'views/pages/404.html'
 			}).otherwise({
@@ -98,8 +87,7 @@ var WebDaptiveAppConfig = {
 
 	//run each time angular app comes up (runs only once)
 	wdApp.run(function($rootScope, $location, localStorageService) {
-		console.log($location.absUrl())
-		console.log($location.url())
+
 		$rootScope.main = {
 			brand: 'WebDaptive - Angular',
 			name: 'Taz'

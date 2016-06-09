@@ -1,194 +1,288 @@
 (function() {
-  angular.module('wdApp.apps.procedures', []).controller('ProceduresController', 
-  ['$scope', 'SysMgmtData', 'toastr', 'toastrConfig',
-	function($scope, SysMgmtData, toastr, toastrConfig) {
-		var pvm = this;
-		var initLoad = true; //used to ensure not calling server multiple times
-		var fetch_url = WebDaptiveAppConfig.base_procedure_url +  WebDaptiveAppConfig.fetch_url;
-		var refresh_url =  WebDaptiveAppConfig.base_procedure_url +  WebDaptiveAppConfig.refresh_url;
-		var create_url =  WebDaptiveAppConfig.base_procedure_url +  WebDaptiveAppConfig.create_url;
-		var update_url =  WebDaptiveAppConfig.base_procedure_url +  WebDaptiveAppConfig.update_url;	
-		var delete_url =  WebDaptiveAppConfig.base_procedure_url +  WebDaptiveAppConfig.delete_url;	
-		//must be part of scope since needs to referenced in the html		
-		pvm.isActive = false;
-		toastrConfig.closeButton = true;	
-		
-		//form model data
-		pvm.procedure = {
-			id: '',
-			code: '',
-			description: '',
-			price: '',
-			version: ''
-		};
-		
-		//grid column defs
-		pvm.procedureColumnDefs = [
-			{headerName: "Id", field: "id"},
-			{headerName: "Procedure Code", field: "code"},		
-			{headerName: "Procedure Description", field: "description", width: 820},
-			{headerName: "Price", field: "price", cellRenderer: currencyRenderer},	
-			{headerName: "Version", field: "version", width: 100}			
-		];
-		
-		//grid row select function
-		function rowSelectedFunc(event) {
-			pvm.procedure.id = event.node.data.id;
-			pvm.procedure.code = event.node.data.code;			
-			pvm.procedure.description = event.node.data.description;		
-			pvm.procedure.price = event.node.data.price;
-			pvm.procedure.version = event.node.data.version;				
-		};
+  angular.module('wdApp.apps.procedures', []).controller('ProceduresController', ProceduresController,
+  ['$scope', 'SysMgmtData', 'toastr', 'toastrConfig',"NgTableParams"
+  ])
 
-		//grid options
-		pvm.procedureGridOptions = {
-			columnDefs: pvm.procedureColumnDefs,
-			rowSelection: 'single',
-			rowHeight: 30,			
-			headerHeight: 30,	
-			suppressCellSelection: true,			
-			onRowSelected: rowSelectedFunc,
-			enableColResize: true
-		};
-		
-		//reusable paging datasource grid
-		function createNewDatasource(resIn) {
-			var procedureDataSource = {
-				pageSize: 20, //using default paging of 20 
+  ProceduresController.$inject = ["NgTableParams",'$scope', 'SysMgmtData', 'toastr', 'toastrConfig'];
+
+  function ProceduresController(NgTableParams,$scope, SysMgmtData, toastr, toastrConfig)  // var self = this;
+  {
+	var cvm = this;
+		var initLoad =    true; //used to ensure not calling server multiple times
+		var fetch_url = "cidade/api/fetchByRequestBAS";
+		var refresh_url =  "qat-webdaptive/cidade/api/refreshBAS";
+		var create_url =  "qat-webdaptive/cidade/api/insertBAS";
+		var update_url =  "qat-webdaptive/cidade/api/updateBAS";
+		var delete_url =  "qat-webdaptive/cidade/api/deleteBAS";
+		cvm.isActive =    false;
+		//toastrConfig.closeButton = true;
+function createNewDatasource(resIn) {
+			var countyDataSource = {
+				pageSize: 20, //using default paging of 20
 				getRows: function (params) {
 					if (initLoad){
-						//console.log("getRows() initLoad=true: " + resIn);	
+						//console.log("getRows() initLoad=true: " + resIn);
 						initLoad=false;
-						pvm.isActive = false;						
-						var dataThisPage = resIn.procedures;
+						cvm.isActive = false;
+						var dataThisPage = resIn.counties;
+						cvm.gList =  dataThisPage;
 						var lastRow = (resIn) ? resIn.resultsSetInfo.totalRowsAvailable : 0;
-						params.successCallback(dataThisPage, lastRow);						
+						params.successCallback(dataThisPage, lastRow);
+
 					}
 					else{
-						//console.log('asking for ' + params.startRow + ' to ' + params.endRow);	
+						//console.log('asking for ' + params.startRow + ' to ' + params.endRow);
 						SysMgmtData.processPostPageData(fetch_url, new qat.model.pagedInquiryRequest(  params.startRow/20, true), function(res){
-							var dataThisPage = res.procedures;
+							var dataThisPage = res.counties;
+							cvm.gList =  dataThisPage;
 							var lastRow = res.resultsSetInfo.totalRowsAvailable;
-							params.successCallback(dataThisPage, lastRow);	
+							params.successCallback(dataThisPage, lastRow);
 						});
-					}		
-					
+					}
 				}
 			};
-			pvm.procedureGridOptions.api.setDatasource(procedureDataSource);
+			cvm.countyGridOptions.api.setDatasource(countyDataSource);
 		};
-	
-		function currencyRenderer(params) {
-			if (params.value){
-				return params.value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-			} 
-			else{
-				return null;
-			}
-		};
-	
-	
+
 		//initial data load
 		processPostData(fetch_url, new qat.model.pagedInquiryRequest( 0, true), false);
-		
-		//reusable data methods
-		//reusable processGetData (refresh)
-		function processGetData(_url){
-			//console.log(_url);			
-			pvm.procedureGridOptions.api.showLoadingOverlay(true);
-			SysMgmtData.processGetPageData(_url,  function(res){
-				initLoad = true;
-				createNewDatasource(res); //send Data 
-			});				
-		};	
 
-		//reusable processGetData (insert, update, pagedFetch, delete)
-		function processPostData(_url, _req, _bLoading){
-			//console.log(_url);	
-			if (_bLoading){	
-				pvm.procedureGridOptions.api.showLoadingOverlay(true);
-			}	
-			SysMgmtData.processPostPageData(_url, _req, function(res){
-				if (res){	
+		//reusable data methods
+		//reusable processGetData (refresh,delete)
+		function processGetData(_url)
+		{
+			//console.log(_url);
+			cvm.countyGridOptions.api.showLoadingOverlay(true);
+			SysMgmtData.processGetPageData(_url,  function(res){
+				if (res){
 					initLoad = true;
 					createNewDatasource(res); //send Data
 				}
 				else{
-					pvm.procedureGridOptions.api.hideOverlay();		
+					cvm.countyGridOptions.api.hideOverlay();
 				}
-			});				
-		};			
-		
-		//refresh procedure function
-		pvm.refreshProcedures = function(refreshCount) {	
-			pvm.isActive = !pvm.isActive;
-			//clear form data
-			pvm.clearForm();
-			var send_url = refresh_url + "?refreshInt=" + refreshCount + "&retList=true&retPaged=true";
-			processGetData(send_url);
-		};			
-		
-		//form methods
-		//reusable clear form logic
-		pvm.clearForm = function(){
-			//clear data
-			pvm.procedure.id = '';
-			pvm.procedure.code = '';			
-			pvm.procedure.description = '';		
-			pvm.procedure.price = '';
-			pvm.procedure.version = '';		
-			//clear grid selection	
-			pvm.procedureGridOptions.api.deselectAll();	
-			//set form to pristine
-			pvm.form_procedure.$setPristine();				
+
+			});
 		};
 
-		//reusable button form logic	
-		pvm.processButtons = function(_btnType){	
-			if (pvm.form_procedure.$valid){	
-				switch (_btnType) {
-				//Add Button							
-				case 'A':
-					processPostData(create_url, new qat.model.reqProc( new qat.model.procedure(pvm.procedure.id, pvm.procedure.code, 
-								pvm.procedure.description, pvm.procedure.price, pvm.procedure.version),true, true), true);						
-					break;
-				//Update Button						
-				case 'U':
-					processPostData(update_url, new qat.model.reqProc( new qat.model.procedure(pvm.procedure.id, pvm.procedure.code, 
-								pvm.procedure.description, pvm.procedure.price, pvm.procedure.version),true, true), true);						
-					break;
-				//Delete Button	
-				case 'D':
-					processPostData(delete_url, new qat.model.reqProc( new qat.model.procedure(pvm.procedure.id, pvm.procedure.code, 
-								pvm.procedure.description, pvm.procedure.price, pvm.procedure.version),true, true), true);						
-					break;	
-				//List Button	
-				case 'L':
-					processPostData(fetch_url, new qat.model.pagedInquiryRequest( 0, true), true);					
-					break;						
-				default: 
-					console.log('Invalid button type: ' + _btnType);					
-				};
-			
-				//clear the form
-				pvm.clearForm();
+		//reusable processGetData (insert, update, pagedFetch)
+		function processPostData(_url, _req, _bLoading)
+		{
+			//console.log(_url);
+			if (_bLoading){
+				cvm.countyGridOptions.api.showLoadingOverlay(true);
 			}
-			else
+			SysMgmtData.processPostPageData(_url, _req, function(res){
+				if (res){
+					initLoad = true;
+					createNewDatasource(res); //send Data
+				}
+				else{
+				//	cvm.countyGridOptions.api.hideOverlay();
+				}
+			});
+		};
+
+		//refresh county function
+		cvm.refreshCounties = function(refreshCount) {
+			cvm.isActive = !cvm.isActive;
+			//clear form data
+			cvm.clearForm();
+			var send_url = refresh_url + "?refreshInt=" + refreshCount + "&retList=true&retPaged=true";
+			processGetData(send_url);
+		};
+
+		//form methods
+		//reusable clear form logic
+		cvm.clearForm = function (){
+			//clear data
+			cvm.county.id = "";
+			cvm.county.description = "";
+			//clear grid selection
+			cvm.countyGridOptions.api.deselectAll();
+			//set form to pristine
+			cvm.form_county.$setPristine();
+		};
+
+		//reusable button form logic
+		cvm.processButtons = function(_btnType){
+			//console.log(_btnType);
+			if (cvm.form_county.$valid)
 			{
+				switch (_btnType) {
+				//Add Button
+				case 'A':
+					processPostData(create_url,  new qat.model.reqCounty( new qat.model.county(cvm.county.id, cvm.county.description),true, true), true);
+					break;
+				//Update Button
+				case 'U':
+				//	processPostData(update_url,  new qat.model.reqCounty( new qat.model.county(cvm.county.id, cvm.county.description),true, true), true);
+					break;
+				//Delete Button
+				case 'D':
+					var send_url = delete_url + "?countyId=" + cvm.county.id + "&retList=true&retPaged=true";
+					processGetData(send_url);
+					break;
+				//List Button
+				case 'L':
+					processPostData(fetch_url, new qat.model.pagedInquiryRequest( 0, true), true);
+					break;
+				default:
+					console.log('Invalid button type: ' + _btnType);
+				};
+				//clear the form
+				cvm.clearForm();
+			}
+			else{
 				if (_btnType == 'L'){
 					processPostData(fetch_url, new qat.model.pagedInquiryRequest( 0, true), true);
 					//clear the form
-					pvm.clearForm();
+					cvm.clearForm();
 				}
-				else{					
-					toastr.error('Procedure form error, please correct and resubmit.', 'Error');
-				}	
-			}		
-		};		
-		
+				else{
+					toastr.error('County form error, please correct and resubmit.', 'Error');
+				}
+			}
+		};
+
+		//form model data
+		cvm.county = {
+			id: '',
+			description: ''
+		};
+		//processPostData(fetch_url, new qat.model.pagedInquiryRequest( 0, true), false);
+		//grid column defs
+		var countyColumnDefs = [
+			{headerName: "County Id", field: "id", width: 270},
+			{headerName: "County Description", field: "description", width: 450}
+		];
+processPostData(fetch_url, new qat.model.pagedInquiryRequest( 0, true), false);
+		//grid row select function
+		function rowSelectedFunc(event) {
+			cvm.county.id = event.node.data.id;
+			cvm.county.description = event.node.data.description;
+		};
+
+		//grid options
+		cvm.countyGridOptions = {
+			columnDefs: countyColumnDefs,
+			rowSelection: 'single',
+			onRowSelected: rowSelectedFunc,
+			rowHeight: 30,
+			headerHeight: 30,
+			enableColResize: true
+		};
+
+		//reusable paging datasource grid
+
+
+		//var simpleList = processGetData("_url");
+		simpleList = [{
+          "name": "aab",
+          "age": 5,
+          "money": 5
+        },
+        {
+          "name": "aac",
+          "age": 55,
+          "money": 0
+        },
+        {
+          "name": "aad",
+          "age": 555,
+          "money": 1
+        },
+        {
+          "name": "aae",
+          "age": 5555,
+          "money": 2
+        },
+        {
+          "name": "aaf",
+          "age": 55555,
+          "money": 3
+        },
+        {
+          "name": "aag",
+          "age": 555555,
+          "money": 4
+        }]
+		var originalData = angular.copy(simpleList);
+
+		cvm.tableParams = new NgTableParams({}, {
+		  dataset: angular.copy(simpleList)
+		});
+
+		cvm.deleteCount = 0;
+
+		cvm.add = add;
+		cvm.cancelChanges = cancelChanges;
+		cvm.del = del;
+		cvm.hasChanges = hasChanges;
+		cvm.saveChanges = saveChanges;
+
+		//////////
+
+    function add() {
+      cvm.isEditing = true;
+      cvm.isAdding = true;
+      cvm.tableParams.settings().dataset.unshift({
+        name: "",
+        age: null,
+        money: null
+      });
+      // we need to ensure the user sees the new row we've just added.
+      // it seems a poor but reliable choice to remove sorting and move them to the first page
+      // where we know that our new item was added to
+      cvm.tableParams.sorting({});
+      cvm.tableParams.page(1);
+      cvm.tableParams.reload();
     }
-  ]);
-}).call(this);
 
+	function cancelChanges() {
+      resetTableStatus();
+      var currentPage = cvm.tableParams.page();
+      cvm.tableParams.settings({
+        dataset: angular.copy(originalData)
+      });
+      // keep the user on the current page when we can
+      if (!cvm.isAdding) {
+        cvm.tableParams.page(currentPage);
+      }
+    }
 
+    function del(row) {
+      _.remove(cvm.tableParams.settings().dataset, function(item) {
+        return row === item;
+      });
+      cvm.deleteCount++;
+      cvm.tableTracker.untrack(row);
+      cvm.tableParams.reload().then(function(data) {
+        if (data.length === 0 && cvm.tableParams.total() > 0) {
+          cvm.tableParams.page(cvm.tableParams.page() - 1);
+          cvm.tableParams.reload();
+        }
+      });
+    }
+
+    function hasChanges() {
+      return cvm.tableForm.$dirty || cvm.deleteCount > 0
+    }
+
+    function resetTableStatus() {
+      cvm.isEditing = false;
+      cvm.isAdding = false;
+      cvm.deleteCount = 0;
+      cvm.tableTracker.reset();
+      cvm.tableForm.$setPristine();
+    }
+
+    function saveChanges() {
+      resetTableStatus();
+      var currentPage = cvm.tableParams.page();
+      originalData = angular.copy(cvm.tableParams.settings().dataset);
+    }
+
+  }
+})();
 

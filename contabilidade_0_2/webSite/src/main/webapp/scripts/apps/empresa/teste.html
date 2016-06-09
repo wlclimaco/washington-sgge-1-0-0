@@ -1,0 +1,100 @@
+   <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.css">
+    <!--[if lt IE 9]>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+
+	<title>Lista Telefonica</title>
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/app.css">
+	<link rel="stylesheet" type="text/css" href="css/ui.css">
+	<script src="lib/angular/angular.js"></script>
+	<script src="lib/angular/angular-route.js"></script>
+	<script src="lib/angular/angular-messages.js"></script>
+	<script src="lib/serialGenerator/serialGenerator.js"></script>
+	<script src="lib/ui/ui.js"></script>
+	
+	<script src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script src='https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.js'></script>
+	<script src="empresa.controllers.js"></script>
+	
+
+</head>
+<style>
+.demoTable td:last-child {
+  min-width: 90px;
+}
+
+/** Editable table
+------------------------- */
+
+.editable-table > tbody > tr > td {
+  padding: 4px
+}
+.editable-text {
+  padding-left: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  display: inline-block;
+}
+.editable-table tbody > tr > td > .controls {
+  //width: 100%
+}
+.editable-input {
+  padding-left: 3px;
+}
+.editable-input.input-sm {
+  height: 30px;
+  font-size: 14px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+</style>
+<body>
+<div>
+<div ng-app="myApp" class="container-fluid">
+  <div class="row">
+    <div class="col-md-6" ng-controller="dynamicDemoController as demo">
+      <h3>ngTableDynamic directive</h3>
+      <div style="margin-bottom: 20px">
+        <label class="checkbox-inline" ng-repeat="col in demo.cols">
+          <input type="checkbox" ng-model="col.show" /> {{col.title}}
+        </label>
+      </div>
+      <table ng-table-dynamic="demo.tableParams with demo.cols" 
+             class="table table-condensed table-bordered table-striped">
+        <tr ng-repeat="row in $data">
+          <td ng-repeat="col in $columns">{{row[col.field]}}</td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+</div>
+</div>
+    
+
+</div>
+
+
+</body>
+<script>
+
+</script>
+</html>
