@@ -12,7 +12,14 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.MyBatisBARHelper;
 import com.qat.samples.sysmgmt.advocacia.Advogado;
 import com.qat.samples.sysmgmt.advocacia.request.AdvogadoInquiryRequest;
+import com.qat.samples.sysmgmt.bar.Documentos.IDocumentoBAR;
+import com.qat.samples.sysmgmt.bar.Email.IEmailBAR;
+import com.qat.samples.sysmgmt.bar.Endereco.IEnderecoBAR;
+import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
+import com.qat.samples.sysmgmt.bar.Notes.INotesBAR;
 import com.qat.samples.sysmgmt.bar.Pessoa.IPessoaBAR;
+import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
 import com.qat.samples.sysmgmt.clinica.model.request.MedicoInquiryRequest;
 import com.qat.samples.sysmgmt.clinica.model.request.PacienteInquiryRequest;
 import com.qat.samples.sysmgmt.condominio.model.Inquilino;
@@ -202,6 +209,75 @@ private static final String NAMESPACE_FUNCIONARIO = "FuncionarioMap.";
 	private static final String STMT_FETCH_FUNCIONARIO_ALL_REQUEST = NAMESPACE_FUNCIONARIO + "fetchAllFuncionariosRequest";
 
 //===================================### ADVOGADO ####======================================
+
+	IEnderecoBAR enderecoBAR;
+
+	IStatusBAR statusBAR;
+
+	IHistoricoBAR historicoBAR;
+
+	IEmailBAR emailBAR;
+	IDocumentoBAR documentosBAR;
+	ITelefoneBAR telefoneBAR;
+	INotesBAR notesBAR;
+
+
+	public IEnderecoBAR getEnderecoBAR() {
+		return enderecoBAR;
+	}
+
+	public void setEnderecoBAR(IEnderecoBAR enderecoBAR) {
+		this.enderecoBAR = enderecoBAR;
+	}
+
+	public IStatusBAR getStatusBAR() {
+		return statusBAR;
+	}
+
+	public void setStatusBAR(IStatusBAR statusBAR) {
+		this.statusBAR = statusBAR;
+	}
+
+	public IHistoricoBAR getHistoricoBAR() {
+		return historicoBAR;
+	}
+
+	public void setHistoricoBAR(IHistoricoBAR historicoBAR) {
+		this.historicoBAR = historicoBAR;
+	}
+
+	public IEmailBAR getEmailBAR() {
+		return emailBAR;
+	}
+
+	public void setEmailBAR(IEmailBAR emailBAR) {
+		this.emailBAR = emailBAR;
+	}
+
+	public IDocumentoBAR getDocumentosBAR() {
+		return documentosBAR;
+	}
+
+	public void setDocumentosBAR(IDocumentoBAR documentosBAR) {
+		this.documentosBAR = documentosBAR;
+	}
+
+	public ITelefoneBAR getTelefoneBAR() {
+		return telefoneBAR;
+	}
+
+	public void setTelefoneBAR(ITelefoneBAR telefoneBAR) {
+		this.telefoneBAR = telefoneBAR;
+	}
+
+	public INotesBAR getNotesBAR() {
+		return notesBAR;
+	}
+
+	public void setNotesBAR(INotesBAR notesBAR) {
+		this.notesBAR = notesBAR;
+	}
+
 	/**
 /*
  * (non-Javadoc)
