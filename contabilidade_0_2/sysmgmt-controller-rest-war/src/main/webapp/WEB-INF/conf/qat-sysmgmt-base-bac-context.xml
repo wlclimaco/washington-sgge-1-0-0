@@ -26,6 +26,36 @@
 		<property name="validationController" ref="countyValidationController"/>
 	</bean>
 
+	<bean id="cadastrosBACTarget" class="com.qat.samples.sysmgmt.bac.Cadastros.CadastrosBACImpl">
+		<property name="cadastrosBAR" ref="cadastrosBARTarget"/>
+		<property name="validationController" ref="countyValidationController"/>
+	</bean>
+
+	<bean id="comprasBACTarget" class="com.qat.samples.sysmgmt.bac.Compras.ComprasBACImpl">
+		<property name="comprasBAR" ref="comprasBARTarget"/>
+		<property name="validationController" ref="countyValidationController"/>
+	</bean>
+
+	<bean id="financeiroBACTarget" class="com.qat.samples.sysmgmt.bac.Financeiro.FinanceiroBACImpl">
+		<property name="financeiroBAR" ref="financeiroBARTarget"/>
+		<property name="validationController" ref="countyValidationController"/>
+	</bean>
+
+	<bean id="fiscalBACTarget" class="com.qat.samples.sysmgmt.bac.Fiscal.FiscalBACImpl">
+		<property name="fiscalBAR" ref="fiscalBARTarget"/>
+		<property name="validationController" ref="countyValidationController"/>
+	</bean>
+
+	<bean id="pessoaBACTarget" class="com.qat.samples.sysmgmt.bac.Pessoa.PessoaBACImpl">
+		<property name="pessoaBAR" ref="pessoaBARTarget"/>
+		<property name="validationController" ref="countyValidationController"/>
+	</bean>
+
+	<bean id="vendasBACTarget" class="com.qat.samples.sysmgmt.bac.Vendas.VendasBACImpl">
+		<property name="vendasBAR" ref="vendasBARTarget"/>
+		<property name="validationController" ref="countyValidationController"/>
+	</bean>
+
 	<!-- ========================= ASPECT CONFIGURATION ======================== -->
 
 	<!-- ========================= InternalResponse status categories ========== -->

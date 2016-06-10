@@ -46,4 +46,32 @@
 	    <constructor-arg value="com.qat.samples.sysmgmt.bac.Empresa.IEmpresaBAC" />
 	</bean>
 
+	<bean id="cadastrosBACTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.qat.samples.sysmgmt.bac.Cadastros.ICadastrosBAC" />
+	</bean>
+
+	<bean id="comprasBACTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.qat.samples.sysmgmt.bac.Compras.IComprasBAC" />
+	</bean>
+
+	<bean id="financeiroBACTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.qat.samples.sysmgmt.bac.Financeiro.IFinanceiroBAC" />
+	</bean>
+
+	<bean id="fiscalBACTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.qat.samples.sysmgmt.bac.Fiscal.IFiscalBAC" />
+	</bean>
+
+	<bean id="pessoaBACTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.qat.samples.sysmgmt.bac.Pessoa.IPessoaBAC" />
+	</bean>
+
+	<bean id="vendasBACTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.qat.samples.sysmgmt.bac.Vendas.IVendasBAC" />
+	</bean>
+
+	<bean id="produtoBACTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.qat.samples.sysmgmt.bac.Produto.IProdutoBAC" />
+	</bean>
+
 </beans>
