@@ -24,7 +24,7 @@
 	<div class="loader" ng-hide="initialized">
 		Loading...
 	</div>
-    <body data-ng-app="wdApp"
+       <body data-ng-app="wdApp"
           id="wdApp"
           class="wdApp"
           data-off-canvas-nav
@@ -42,8 +42,9 @@
                    data-ng-class=" {'nav-fixed': admin.fixedSidebar, 'nav-vertical': admin.menu === 'vertical', 'nav-horizontal': admin.menu === 'horizontal'}">
             </aside>
 
-            <section data-ng-view data-ng-cloak id="content" class="content-container animate-fade-up"></section>
+            <section data-ng-view data-ng-cloak id="content" class="content-container animate-fade-up "></section>
         </div>
+        <!-- thirdparty libraries-->
         <!-- thirdparty libraries-->
 		<script src="http://maps.googleapis.com/maps/api/js?v=3&libraries=visualization"></script>
         <script src="thirdparty/jquery/jquery-2.2.2.min.js"></script>
@@ -123,5 +124,6 @@
         <script src="scripts/apps/site.controllers.js"></script>
         <script src="scripts/apps/empresa.controllers.js"></script>
 		<script src="scripts/apps/estado/estado.controllers.js"></script>
+        <script src="scripts/apps/produto/produto.controllers.js"></script>
     </body>
 </html>

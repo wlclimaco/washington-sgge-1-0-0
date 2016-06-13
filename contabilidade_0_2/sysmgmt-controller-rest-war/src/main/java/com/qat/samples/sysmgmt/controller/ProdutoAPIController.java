@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
+import com.qat.samples.sysmgmt.Dto.ProdutoTransforme;
 import com.qat.samples.sysmgmt.bac.Produto.IProdutoBAC;
 import com.qat.samples.sysmgmt.produto.model.Grupo;
 import com.qat.samples.sysmgmt.produto.model.Marca;
@@ -86,7 +87,7 @@ public class ProdutoAPIController extends BaseController {
 	 *            the ret paged
 	 * @return the produto response
 	 */
-	@RequestMapping(value = "/produto/refresh", method = RequestMethod.GET)
+	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
 	@ResponseBody
 	public ProdutoResponse refreshProdutos(@RequestParam("refreshInt") Integer refreshInt,
 			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
@@ -111,7 +112,7 @@ public class ProdutoAPIController extends BaseController {
 	 *            the request
 	 * @return the produto response
 	 */
-	@RequestMapping(value = "/produto/fetchPage", method = RequestMethod.POST)
+	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
 	@ResponseBody
 	public ProdutoResponse fetchProdutoPaged(@RequestBody ProdutoInquiryRequest request) {
 		ProdutoResponse produtoResponse = new ProdutoResponse();
@@ -132,12 +133,14 @@ public class ProdutoAPIController extends BaseController {
 	 *            the request
 	 * @return the produto response
 	 */
-	@RequestMapping(value = "/produto/insert", method = RequestMethod.POST)
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	@ResponseBody
-	public ProdutoResponse insertProduto(@RequestBody ProdutoMaintenanceRequest request) {
+	public ProdutoResponse insertProduto(@RequestBody com.qat.samples.sysmgmt.Dto.ProdutoMaintenanceRequest request) {
 		ProdutoResponse produtoResponse = new ProdutoResponse();
 		try {
-			InternalResultsResponse<Produto> internalResponse = getProdutoBAC().insertProduto(request);
+			ProdutoMaintenanceRequest request1 = new ProdutoMaintenanceRequest();
+			request1 = ProdutoTransforme.maintainInsertBase(request);
+			InternalResultsResponse<Produto> internalResponse = getProdutoBAC().insertProduto(request1);
 			ResponseHandler.handleOperationStatusAndMessages(produtoResponse, internalResponse, true);
 		} catch (Exception ex) {
 			ResponseHandler.handleException(LOG, produtoResponse, ex, DEFAULT_EXCEPTION_MSG,
@@ -153,7 +156,7 @@ public class ProdutoAPIController extends BaseController {
 	 *            the request
 	 * @return the produto response
 	 */
-	@RequestMapping(value = "/produto/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
 	public ProdutoResponse updateProduto(@RequestBody ProdutoMaintenanceRequest request) {
 		ProdutoResponse produtoResponse = new ProdutoResponse();
@@ -174,7 +177,7 @@ public class ProdutoAPIController extends BaseController {
 	 *            the request
 	 * @return the produto response
 	 */
-	@RequestMapping(value = "/produto/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public ProdutoResponse deleteProduto(@RequestBody ProdutoMaintenanceRequest request) {
 		ProdutoResponse produtoResponse = new ProdutoResponse();

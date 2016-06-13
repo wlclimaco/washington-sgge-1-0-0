@@ -25,6 +25,14 @@ var WebDaptiveAppConfig = {
 	update_url: '/update',
 	delete_url: '/delete',
 
+	//produto
+	base_site_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/produto/api',
+	fetch_url: '/fetchPage',
+	refresh_url: '/refresh',
+	create_url: '/insert',
+	update_url: '/update',
+	delete_url: '/delete',
+
 	base_empresa_url: 'http://localhost:8080/qat-sysmgmt-controller-rest/entidade/api',
 
 };
@@ -40,13 +48,13 @@ var WebDaptiveAppConfig = {
 				'wdApp.charts.flot.controllers', 'wdApp.charts.morris.controllers', 'wdApp.charts.chartjs.controllers',
 				'wdApp.charts.other.controllers', 'wdApp.charts.echarts.controllers', 'wdApp.charts.directives', 'wdApp.authentication',
 				'wdApp.pages.controllers', 'wdApp.demodata', 'wdApp.apps.stocks', 'wdApp.apps.stocksdata',
-				'wdApp.apps.counties', 'ngTable', 'wdApp.apps.estado', 'wdApp.apps.procedures','wdApp.apps.sysmgmt.data','wdApp.apps.site','wdApp.apps.empresa']);
+				'wdApp.apps.counties', 'ngTable', 'wdApp.apps.estado', 'wdApp.apps.procedures','wdApp.apps.sysmgmt.data','wdApp.apps.site','wdApp.apps.empresa','wdApp.apps.produto']);
 
 	wdApp.config(['$routeProvider',
 		function($routeProvider) {
 			var routes, setRoutes;
 			//all available routes
-			
+
 			routes = ['dashboard','principal', 'ui/typography', 'ui/buttons','index3',
 			'ui/icons', 'ui/grids', 'ui/widgets', 'ui/components',
 			'ui/timeline', 'ui/tree', 'ui/pricing-tables', 'ui/maps',
@@ -55,7 +63,7 @@ var WebDaptiveAppConfig = {
 			'charts/charts', 'charts/flot', 'charts/morris', 'charts/chartjs', 'charts/echarts',
 			'pages/404', 'pages/500', 'pages/blank', 'pages/invoice', 'pages/profile',
 			'pages/signin', 'mail/compose', 'mail/inbox', 'mail/single', 'tasks/tasks','empresa/cadEmpresa',
-			'apps/stocks', 'apps/counties', 'apps/procedures', 'estado/apps/estado'];
+			'apps/stocks', 'apps/counties', 'apps/procedures', 'estado/apps/estado', 'produto/tables/produto', 'produto/forms/cadProduto'];
 
 			//geeric routeine for building route from array
 			setRoutes = function(route) {

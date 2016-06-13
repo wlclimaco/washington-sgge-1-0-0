@@ -51,6 +51,11 @@
 		<property name="validationController" ref="countyValidationController"/>
 	</bean>
 
+	<bean id="produtoBACTarget" class="com.qat.samples.sysmgmt.bac.Produto.ProdutoBACImpl">
+		<property name="produtoBAR" ref="produtoBARTarget"/>
+		<property name="validationController" ref="countyValidationController"/>
+	</bean>
+
 	<bean id="vendasBACTarget" class="com.qat.samples.sysmgmt.bac.Vendas.VendasBACImpl">
 		<property name="vendasBAR" ref="vendasBARTarget"/>
 		<property name="validationController" ref="countyValidationController"/>

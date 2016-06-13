@@ -102,6 +102,25 @@
             <version>3.1.0</version>
         </dependency>
 
+        <!-- http://mvnrepository.com/artifact/com.github.wmixvideo/nfe -->
+        <dependency>
+            <groupId>com.github.wmixvideo</groupId>
+            <artifactId>nfe</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+        <!-- http://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.iharder</groupId>
+            <artifactId>base64</artifactId>
+            <version>2.3.8</version>
+        </dependency>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>

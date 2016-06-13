@@ -33,8 +33,7 @@ import com.qat.samples.sysmgmt.security.model.TokenModel;
  */
 @Controller
 @RequestMapping("/auth/api")
-public class AuthenticationAPIController
-{
+public class AuthenticationAPIController {
 
 	/** The Constant LOG. */
 	private static final Logger LOG = LoggerFactory.getLogger(AuthenticationAPIController.class);
@@ -51,30 +50,55 @@ public class AuthenticationAPIController
 	/**
 	 * Authenticate.
 	 *
-	 * @param username the username
-	 * @param password the password
+	 * @param username
+	 *            the username
+	 * @param password
+	 *            the password
 	 * @return the token model
 	 */
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	@ResponseBody
-	public TokenModel authenticate(@RequestParam("username") String username, @RequestParam("password") String password)
-	{
-		UsernamePasswordAuthenticationToken authenticationToken =
-				new UsernamePasswordAuthenticationToken(username, password);
+	public TokenModel authenticate(@RequestParam("username") String username,
+			@RequestParam("password") String password) {
+		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,
+				password);
 		Authentication authentication = authManager.authenticate(authenticationToken);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
 		/*
-		 * Reload user as password of authentication principal will be null after authorization and
-		 * password is needed for token generation
+		 * Reload user as password of authentication principal will be null
+		 * after authorization and password is needed for token generation
 		 */
 		UserDetails userDetails = userService.loadUserByUsername(username);
 
 		TokenModel tokenModel = new TokenModel(TokenUtils.createToken(userDetails), userDetails.getUsername(),
 				createRoleMap(userDetails));
 
-		if (LOG.isDebugEnabled())
-		{
+		if (LOG.isDebugEnabled()) {
+			LOG.debug(tokenModel.toString());
+		}
+
+		return tokenModel;
+	}
+
+	@RequestMapping(value = "/authenticatee", method = RequestMethod.POST)
+	@ResponseBody
+	public TokenModel authenticatee(@RequestBody String username, String password) {
+		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,
+				password);
+		Authentication authentication = authManager.authenticate(authenticationToken);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+
+		/*
+		 * Reload user as password of authentication principal will be null
+		 * after authorization and password is needed for token generation
+		 */
+		UserDetails userDetails = userService.loadUserByUsername(username);
+
+		TokenModel tokenModel = new TokenModel(TokenUtils.createToken(userDetails), userDetails.getUsername(),
+				createRoleMap(userDetails));
+
+		if (LOG.isDebugEnabled()) {
 			LOG.debug(tokenModel.toString());
 		}
 
@@ -84,14 +108,13 @@ public class AuthenticationAPIController
 	/**
 	 * Creates the role map.
 	 *
-	 * @param userDetails the user details
+	 * @param userDetails
+	 *            the user details
 	 * @return the map
 	 */
-	private Map<String, Boolean> createRoleMap(UserDetails userDetails)
-	{
+	private Map<String, Boolean> createRoleMap(UserDetails userDetails) {
 		Map<String, Boolean> roles = new HashMap<String, Boolean>();
-		for (GrantedAuthority authority : userDetails.getAuthorities())
-		{
+		for (GrantedAuthority authority : userDetails.getAuthorities()) {
 			roles.put(authority.getAuthority(), Boolean.TRUE);
 		}
 
