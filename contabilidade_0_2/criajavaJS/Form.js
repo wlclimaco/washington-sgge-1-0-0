@@ -128,15 +128,6 @@ text = text + '</div>\n';
 text = text + '</form>\n';
 text = text + '<script>\n';
 text = text + '$(document).ready(function() {\n';
-/*
-text = text + '    function adjustIframeHeight() {\n';
-text = text + "        var $body   = $('body'),\n";
-text = text + "                $iframe = $body.data('iframe.fv');\n";
-text = text + '        if ($iframe) {\n';
-text = text + '            // Adjust the height of iframe\n';
-text = text + '            $iframe.height($body.height());\n';
-text = text + '        }\n';
-text = text + '    }\n';
 
 text = text + '$("#shippingForm")\n';
 text = text + '    .on("init.form.fv", function(e, data) {\n';
@@ -164,7 +155,7 @@ text = text + '.on("added.field.fv", function(e, data) {\n';
 text = text + "console.log('Added element --> ', data.field, data.element, data.options);\n";
 text = text + '})\n';
 text = text + '});\n';
-text = text + '</script>\n';*/
+text = text + '</script>\n';
 text = text + '\n';
 
 return text;
