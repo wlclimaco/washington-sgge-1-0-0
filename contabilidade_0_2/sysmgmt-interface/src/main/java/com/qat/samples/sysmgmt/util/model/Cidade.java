@@ -23,8 +23,6 @@ public class Cidade extends ModelCosmeDamiao
 
 	private String cep;
 
-	private String municipio;
-
 	/**
 	 * Default constructor.
 	 */
