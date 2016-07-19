@@ -41,8 +41,8 @@
             <artifactId>spring-security-config</artifactId>
             <version>${springsecurity.version}</version>
         </dependency>
-        <!-- The exclusion of the spring-expression is needed below
-             to prevent and old version of that jar from being used. -->
+        <!-- The exclusion of the spring-expression is needed below to prevent
+			and old version of that jar from being used. -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
@@ -162,7 +162,7 @@
             <version>9.4-1204-jdbc42</version>
         </dependency>
 
-        <!--  Simple Xml Framework -->
+        <!-- Simple Xml Framework -->
         <dependency>
             <groupId>org.simpleframework</groupId>
             <artifactId>simple-xml</artifactId>
@@ -176,6 +176,45 @@
             <version>3.4</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.simpleframework</groupId>
+            <artifactId>simple-xml</artifactId>
+            <version>2.7.1</version>
+        </dependency>
+
+        <!-- Joda Time -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.9.3</version>
+        </dependency>
+        <!-- Axis 2 -->
+        <dependency>
+            <groupId>org.apache.axis2</groupId>
+            <artifactId>axis2-kernel</artifactId>
+            <version>1.7.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.axis2</groupId>
+            <artifactId>axis2-adb</artifactId>
+            <version>1.7.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.axis2</groupId>
+            <artifactId>axis2-transport-local</artifactId>
+            <version>1.7.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.axis2</groupId>
+            <artifactId>axis2-transport-http</artifactId>
+            <version>1.7.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.21</version>
+        </dependency>
+
         <!-- http://mvnrepository.com/artifact/com.github.wmixvideo/nfe -->
         <dependency>
             <groupId>com.github.wmixvideo</groupId>
@@ -184,7 +223,8 @@
         </dependency>
 
         <!-- Testing Dependencies. -->
-        <!--  The javax.transaction dependency is marked for test because it is needed only for JBoss -->
+        <!-- The javax.transaction dependency is marked for test because it is
+			needed only for JBoss -->
         <dependency>
             <groupId>javax.transaction</groupId>
             <artifactId>jta</artifactId>
@@ -224,12 +264,12 @@
     <build>
 
         <finalName>qat-sysmgmt-sample-ws-service</finalName>
-        <!--         <resources> -->
-        <!--             <resource> -->
-        <!--                 <filtering>true</filtering> -->
-        <!--                 <directory>src/main/webapp</directory> -->
-        <!--             </resource> -->
-        <!--         </resources> -->
+        <!-- <resources> -->
+        <!-- <resource> -->
+        <!-- <filtering>true</filtering> -->
+        <!-- <directory>src/main/webapp</directory> -->
+        <!-- </resource> -->
+        <!-- </resources> -->
 
         <plugins>
 

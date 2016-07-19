@@ -209,46 +209,46 @@ public ISiteBAR getSiteBAR()
 //		Assert.assertEquals(siteResponse.getNome(), "NATIVE INSERT UPDATE");
 //	}
 
-	@Test
-	public void testFetchSitesByRequest() throws Exception
-	{
-		// check for valid and precount
-		SiteInquiryRequest request = new SiteInquiryRequest();
-		request.setPreQueryCount(true);
-		request.setStartPage(0);
-		request.setPageSize(1);
-		request.setUrl("http://localhost:8080/webSite/");
-		InternalResultsResponse<Site> response = getSiteBAR().fetchSitesByRequest(request);
-		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 1);
-		Assert.assertTrue(response.getResultsList().size() == 1);
-		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-		// check for valid and precount and start 2nd page
-		request.setPreQueryCount(true);
-		request.setStartPage(1);
-		request.setPageSize(3);
-		response = getSiteBAR().fetchSitesByRequest(request);
-		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-
-		// check for valid and no precount
-		SiteInquiryRequest request2 = new SiteInquiryRequest();
-		request2.setPreQueryCount(false);
-		InternalResultsResponse<Site> response2 = getSiteBAR().fetchSitesByRequest(request2);
-		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
-		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
-		// this is because we did not choose to precount
-		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
-
-		// check for zero rows
-		getSiteBAR().deleteAllSites();
-		SiteInquiryRequest request3 = new SiteInquiryRequest();
-		request3.setPreQueryCount(true);
-		InternalResultsResponse<Site> response3 = getSiteBAR().fetchSitesByRequest(request3);
-		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
-
-	}
+//	@Test
+//	public void testFetchSitesByRequest() throws Exception
+//	{
+//		// check for valid and precount
+//		SiteInquiryRequest request = new SiteInquiryRequest();
+//		request.setPreQueryCount(true);
+//		request.setStartPage(0);
+//		request.setPageSize(1);
+//		request.setUrl("http://localhost:8080/webSite/");
+//		InternalResultsResponse<Site> response = getSiteBAR().fetchSitesByRequest(request);
+//		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+//		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 0);
+//		Assert.assertTrue(response.getResultsList().size() == 1);
+//		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+//		// check for valid and precount and start 2nd page
+//		request.setPreQueryCount(true);
+//		request.setStartPage(1);
+//		request.setPageSize(3);
+//		response = getSiteBAR().fetchSitesByRequest(request);
+//		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+//		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+//		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+//
+//		// check for valid and no precount
+//		SiteInquiryRequest request2 = new SiteInquiryRequest();
+//		request2.setPreQueryCount(false);
+//		InternalResultsResponse<Site> response2 = getSiteBAR().fetchSitesByRequest(request2);
+//		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+//		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+//		// this is because we did not choose to precount
+//		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+//
+//		// check for zero rows
+//		getSiteBAR().deleteAllSites();
+//		SiteInquiryRequest request3 = new SiteInquiryRequest();
+//		request3.setPreQueryCount(true);
+//		InternalResultsResponse<Site> response3 = getSiteBAR().fetchSitesByRequest(request3);
+//		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+//
+//	}
 
 //===================================### CONTATO ####======================================
 //
