@@ -71,17 +71,11 @@ public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
 		responses.setHeader("Access-Control-Allow-Headers",
 				"Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
 
-		if (userName != null) {
+				if (userName != null) {
 
 			UserDetails userDetails = userService.loadUserByUsername(userName);
-			if (userName.equals("anonimo@aninimo.com")) {
 
-				authToken = TokenUtils.createToken(userDetails);
-				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-						userDetails, null, userDetails.getAuthorities());
-				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpRequest));
-				SecurityContextHolder.getContext().setAuthentication(authentication);
-			} else if (TokenUtils.validateToken(authToken, userDetails)) {
+			if (TokenUtils.validateToken(authToken, userDetails)) {
 
 				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
 						userDetails, null, userDetails.getAuthorities());
