@@ -26,8 +26,7 @@
   </resultMap>
 
   <sql id="allRegimeColumns">
-id
-,nome
+nome
 ,descricao
 ,create_date
 ,create_user
@@ -36,7 +35,6 @@ id
 
 </sql>
 <sql id="allRegimeValues">
-#{id},
 #{nome},
 #{descricao},
 		#{createDateUTC},
@@ -45,32 +43,22 @@ id
 		#{modifyUser}
   </sql>
 
- <sql id="allRegimeColumnsWithQualifier">
-		c.id, c.regime_desc
-c.id,
-c.nome,
-c.descricao,
-		c.createDateUTC,
-		c.createUser,
-		c.modifyDateUTC,
-		c.modifyUser
- </sql>
 
  <select id="fetchAllRegimes" resultMap="RegimeResult">
-    SELECT
+    SELECT id,
 	<include refid="allRegimeColumns" />
    FROM regime ORDER BY id ASC
  </select>
 
  <select id="fetchRegimeById" parameterType="Integer" resultMap="RegimeResult">
-    SELECT
+    SELECT id,
 	<include refid="allRegimeColumns" />
    FROM regime WHERE id = #{fetchid}
  </select>
 
  <select id="fetchAllRegimesRequest" parameterType="RegimeInquiryRequest" resultMap="RegimeResult">
 
-		SELECT <include refid="allRegimeColumns" />
+		SELECT id,<include refid="allRegimeColumns" />
   		  FROM regime ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
@@ -81,13 +69,12 @@ c.descricao,
 
  </select>
 
- <insert id="insertRegime" parameterType="Regime">
+ <insert id="insertRegime" parameterType="Regime" useGeneratedKeys="true" keyProperty="id">
  	INSERT INTO regime (
-	<include refid="allRegimeColumns" />
+	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allRegimeColumns" />
      )
-   VALUES (<include refid="allRegimeValues" /> )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allRegimeValues" /> )
  </insert>
-
  <update id="updateRegime" parameterType="Regime">
    UPDATE regime SET
 <if test="id!= null">id = #{id},</if>

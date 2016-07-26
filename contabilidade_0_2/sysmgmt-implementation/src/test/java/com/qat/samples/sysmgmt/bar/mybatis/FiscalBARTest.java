@@ -181,9 +181,9 @@ public IFiscalBAR getFiscalBAR()
 	@Test
 	public void testUpdateCfop()
 	{
-		Cfop cfop = new Cfop(1, "NATIVE INSERT UPDATE");
+		Cfop cfop = new Cfop(9999, "NATIVE INSERT UPDATE");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(9999);
 		Cfop cfopResponse = getFiscalBAR().fetchCfopById(request);
 		Assert.assertEquals(cfopResponse.getCfop(), "cfop_1");
 		getFiscalBAR().updateCfop(cfop);
@@ -410,7 +410,7 @@ public IFiscalBAR getFiscalBAR()
 		executeSqlScript("conf/insertRegime.sql", false);
 		executeSqlScript("conf/insertCfop.sql", false);
 		executeSqlScript("conf/insertCnae.sql", false);
-		executeSqlScript("conf/insertCnaeEmpresa.sql", false);
+		//executeSqlScript("conf/insertCnaeEmpresa.sql", false);
 	}
 
 }

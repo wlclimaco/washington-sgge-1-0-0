@@ -87,6 +87,7 @@ public IEmpresaBAR getEmpresaBAR()
 		empresa = 		insertEmpresa(19,PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(19);
+
 		Empresa empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
 		Assert.assertEquals(empresaResponse, null);
 //		getEmpresaBAR().insertEmpresa(insertEmpresa(19,PersistenceActionEnum.INSERT));
@@ -957,7 +958,6 @@ public IEmpresaBAR getEmpresaBAR()
 			cidade.setCdIBGE("CDIBGE");
 			cidade.setEstado(new Estado(1));
 			cidade.setCep("CEP");
-			cidade.setMunicipio("MUNICIO");
 			cidade.setNotes(noteList(action));
 
 			return cidade;

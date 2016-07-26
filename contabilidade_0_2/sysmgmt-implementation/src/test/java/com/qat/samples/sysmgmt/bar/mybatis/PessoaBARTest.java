@@ -70,9 +70,9 @@ public IPessoaBAR getPessoaBAR()
 @Test
 	public void testDeleteAdvogado()
 	{
-		Advogado advogado = new Advogado(30, "Advogado_999");
+		Advogado advogado = new Advogado(1001, "Advogado_999");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(30);
+		request.setFetchId(1001);
 		Advogado advogadoResponse = getPessoaBAR().fetchAdvogadoById(request);
 		Assert.assertEquals(advogadoResponse, null);
 		getPessoaBAR().insertAdvogado(advogado);
@@ -103,9 +103,9 @@ public IPessoaBAR getPessoaBAR()
 	@Test
 	public void testUpdateAdvogado()
 	{
-		Advogado advogado = new Advogado(1, "nome_1 UPDATE");
+		Advogado advogado = new Advogado(1001, "nome_1 UPDATE");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1001);
 		Advogado advogadoResponse = getPessoaBAR().fetchAdvogadoById(request);
 		Assert.assertEquals(advogadoResponse.getNome(), "nome_1");
 		getPessoaBAR().updateAdvogado(advogado);
@@ -158,9 +158,9 @@ public IPessoaBAR getPessoaBAR()
 @Test
 	public void testDeleteCliente()
 	{
-		Cliente cliente = new Cliente(30, "Cliente_999");
+		Cliente cliente = new Cliente(1030, "Cliente_999");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(30);
+		request.setFetchId(1030);
 		Cliente clienteResponse = getPessoaBAR().fetchClienteById(request);
 		Assert.assertEquals(clienteResponse, null);
 		getPessoaBAR().insertCliente(cliente);
@@ -246,9 +246,9 @@ public IPessoaBAR getPessoaBAR()
 @Test
 	public void testDeleteFornecedor()
 	{
-		Fornecedor fornecedor = new Fornecedor(30, "Fornecedor_999");
+		Fornecedor fornecedor = new Fornecedor(1030, "Fornecedor_999");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(30);
+		request.setFetchId(1030);
 		Fornecedor fornecedorResponse = getPessoaBAR().fetchFornecedorById(request);
 		Assert.assertEquals(fornecedorResponse, null);
 		getPessoaBAR().insertFornecedor(fornecedor);
@@ -334,9 +334,9 @@ public IPessoaBAR getPessoaBAR()
 @Test
 	public void testDeleteTransportador()
 	{
-		Transportador transportador = new Transportador(30, "Transportador_999");
+		Transportador transportador = new Transportador(1030, "Transportador_999");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(30);
+		request.setFetchId(1001);
 		Transportador transportadorResponse = getPessoaBAR().fetchTransportadorById(request);
 		Assert.assertEquals(transportadorResponse, null);
 		getPessoaBAR().insertTransportador(transportador);
@@ -367,9 +367,9 @@ public IPessoaBAR getPessoaBAR()
 	@Test
 	public void testUpdateTransportador()
 	{
-		Transportador transportador = new Transportador(1, "nome_1 UPDATE");
+		Transportador transportador = new Transportador(1001, "nome_1 UPDATE");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1001);
 		Transportador transportadorResponse = getPessoaBAR().fetchTransportadorById(request);
 		Assert.assertEquals(transportadorResponse.getNome(), "nome_1");
 		getPessoaBAR().updateTransportador(transportador);
@@ -422,9 +422,9 @@ public IPessoaBAR getPessoaBAR()
 @Test
 	public void testDeleteMedico()
 	{
-		Medico medico = new Medico(30, "Medico_999");
+		Medico medico = new Medico(1001, "Medico_999");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(30);
+		request.setFetchId(1001);
 		Medico medicoResponse = getPessoaBAR().fetchMedicoById(request);
 		Assert.assertEquals(medicoResponse, null);
 		getPessoaBAR().insertMedico(medico);
@@ -455,9 +455,9 @@ public IPessoaBAR getPessoaBAR()
 	@Test
 	public void testUpdateMedico()
 	{
-		Medico medico = new Medico(1, "nome_1 UPDATE");
+		Medico medico = new Medico(1001, "nome_1 UPDATE");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1001);
 		Medico medicoResponse = getPessoaBAR().fetchMedicoById(request);
 		Assert.assertEquals(medicoResponse.getNome(), "nome_1");
 		getPessoaBAR().updateMedico(medico);
@@ -510,9 +510,9 @@ public IPessoaBAR getPessoaBAR()
 @Test
 	public void testDeletePaciente()
 	{
-		Paciente paciente = new Paciente(30, "Paciente_999");
+		Paciente paciente = new Paciente(1001, "Paciente_999");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(30);
+		request.setFetchId(1001);
 		Paciente pacienteResponse = getPessoaBAR().fetchPacienteById(request);
 		Assert.assertEquals(pacienteResponse, null);
 		getPessoaBAR().insertPaciente(paciente);
@@ -543,9 +543,9 @@ public IPessoaBAR getPessoaBAR()
 	@Test
 	public void testUpdatePaciente()
 	{
-		Paciente paciente = new Paciente(1, "nome_1 UPDATE");
+		Paciente paciente = new Paciente(1001, "nome_1 UPDATE");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1001);
 		Paciente pacienteResponse = getPessoaBAR().fetchPacienteById(request);
 		Assert.assertEquals(pacienteResponse.getNome(), "nome_1");
 		getPessoaBAR().updatePaciente(paciente);
@@ -598,9 +598,9 @@ public IPessoaBAR getPessoaBAR()
 @Test
 	public void testDeleteSindico()
 	{
-		Sindico sindico = new Sindico(30, "Sindico_999");
+		Sindico sindico = new Sindico(1001, "Sindico_999");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(30);
+		request.setFetchId(1001);
 		Sindico sindicoResponse = getPessoaBAR().fetchSindicoById(request);
 		Assert.assertEquals(sindicoResponse, null);
 		getPessoaBAR().insertSindico(sindico);
@@ -631,9 +631,9 @@ public IPessoaBAR getPessoaBAR()
 	@Test
 	public void testUpdateSindico()
 	{
-		Sindico sindico = new Sindico(1, "nome_1 UPDATE");
+		Sindico sindico = new Sindico(1001, "nome_1 UPDATE");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1001);
 		Sindico sindicoResponse = getPessoaBAR().fetchSindicoById(request);
 		Assert.assertEquals(sindicoResponse.getNome(), "nome_1");
 		getPessoaBAR().updateSindico(sindico);
@@ -686,9 +686,9 @@ public IPessoaBAR getPessoaBAR()
 @Test
 	public void testDeleteInquilino()
 	{
-		Inquilino inquilino = new Inquilino(30, "Inquilino_999");
+		Inquilino inquilino = new Inquilino(1030, "Inquilino_999");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(30);
+		request.setFetchId(1030);
 		Inquilino inquilinoResponse = getPessoaBAR().fetchInquilinoById(request);
 		Assert.assertEquals(inquilinoResponse, null);
 		getPessoaBAR().insertInquilino(inquilino);
@@ -719,9 +719,9 @@ public IPessoaBAR getPessoaBAR()
 	@Test
 	public void testUpdateInquilino()
 	{
-		Inquilino inquilino = new Inquilino(1, "nome_1 UPDATE");
+		Inquilino inquilino = new Inquilino(1001, "nome_1 UPDATE");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1001);
 		Inquilino inquilinoResponse = getPessoaBAR().fetchInquilinoById(request);
 		Assert.assertEquals(inquilinoResponse.getNome(), "nome_1");
 		getPessoaBAR().updateInquilino(inquilino);
@@ -774,9 +774,9 @@ public IPessoaBAR getPessoaBAR()
 @Test
 	public void testDeleteFuncionario()
 	{
-		Funcionario funcionario = new Funcionario(30, "Funcionario_999");
+		Funcionario funcionario = new Funcionario(1001, "Funcionario_999");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(30);
+		request.setFetchId(1001);
 		Funcionario funcionarioResponse = getPessoaBAR().fetchFuncionarioById(request);
 		Assert.assertEquals(funcionarioResponse, null);
 		getPessoaBAR().insertFuncionario(funcionario);
@@ -807,9 +807,9 @@ public IPessoaBAR getPessoaBAR()
 	@Test
 	public void testUpdateFuncionario()
 	{
-		Funcionario funcionario = new Funcionario(1, "nome_1 UPDATE");
+		Funcionario funcionario = new Funcionario(1001, "nome_1 UPDATE");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1001);
 		Funcionario funcionarioResponse = getPessoaBAR().fetchFuncionarioById(request);
 		Assert.assertEquals(funcionarioResponse.getNome(), "nome_1");
 		getPessoaBAR().updateFuncionario(funcionario);
