@@ -27,9 +27,9 @@ public class TrueValue extends ModelCosmeDamiao
 
 	public Integer getTrueValueTypeEnumValue()
 	{
-		if (documentoType != null)
+		if (valueType != null)
 		{
-			return TrueValueTypeEnum.getValue();
+			return valueType.getValue();
 		}
 		return null;
 	}
@@ -39,130 +39,44 @@ public class TrueValue extends ModelCosmeDamiao
 		valueType = TrueValueTypeEnum.enumForValue(acaoTypeValue);
 	}
 
-	/**
-	 * Default constructor.
-	 */
-	public Documento()
-	{
-		super();
-	}
-
-	public Documento(Integer id, DocumentoTypeEnum documentoType, String numero, Long data, Estado estado,
-			PersistenceActionEnum modelAction)
-	{
-		super();
-		this.id = id;
-		this.documentoType = documentoType;
-		this.numero = numero;
-		this.data = data;
-		this.estado = estado;
-		setModelAction(modelAction);
-		setModifyDateUTC((new Date()).getTime());
-		setModifyUser("system");
-	}
-
-	/**
-	 * Gets the id.
-	 *
-	 * @return the id
-	 */
-	public Integer getId()
-	{
+	public Integer getId() {
 		return id;
 	}
 
-	/**
-	 * Sets the id.
-	 *
-	 * @param id the id to set
-	 */
-	public void setId(Integer id)
-	{
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the documentoType
-	 */
-	public DocumentoTypeEnum getDocumentoType()
-	{
-		return documentoType;
+	public TrueValueTypeEnum getValueType() {
+		return valueType;
 	}
 
-	/**
-	 * @param documentoType the documentoType to set
-	 */
-	public void setDocumentoType(DocumentoTypeEnum documentoType)
-	{
-		this.documentoType = documentoType;
+	public void setValueType(TrueValueTypeEnum valueType) {
+		this.valueType = valueType;
 	}
 
-	/**
-	 * Gets the numero.
-	 *
-	 * @return the numero
-	 */
-	public String getNumero()
-	{
-		return numero;
+	public String getValor() {
+		return valor;
 	}
 
-	/**
-	 * Sets the numero.
-	 *
-	 * @param numero the numero to set
-	 */
-	public void setNumero(String numero)
-	{
-		this.numero = numero;
+	public void setValor(String valor) {
+		this.valor = valor;
 	}
 
-	/**
-	 * Gets the data.
-	 *
-	 * @return the data
-	 */
-	public Long getData()
-	{
-		return data;
+	public Long getLabel() {
+		return label;
 	}
 
-	/**
-	 * Sets the data.
-	 *
-	 * @param data the data to set
-	 */
-	public void setData(Long data)
-	{
-		this.data = data;
-	}
-
-	/**
-	 * Gets the estado.
-	 *
-	 * @return the estado
-	 */
-	public Estado getEstado()
-	{
-		return estado;
-	}
-
-	/**
-	 * Sets the estado.
-	 *
-	 * @param estado the estado to set
-	 */
-	public void setEstado(Estado estado)
-	{
-		this.estado = estado;
+	public void setLabel(Long label) {
+		this.label = label;
 	}
 
 	@Override
-	public String toString()
-	{
-		return "Documento [getDocumentoTypeEnumValue()=" + getDocumentoTypeEnumValue() + ", getId()=" + getId()
-				+ ", getDocumentoType()=" + getDocumentoType() + ", getNumero()=" + getNumero() + ", getData()="
-				+ getData() + ", getEstado()=" + getEstado() + ", toString()=" + super.toString() + "]";
+	public String toString() {
+		return "TrueValue [getTrueValueTypeEnumValue()=" + getTrueValueTypeEnumValue() + ", getId()=" + getId()
+				+ ", getValueType()=" + getValueType() + ", getValor()=" + getValor() + ", getLabel()=" + getLabel()
+				+ ", toString()=" + super.toString() + "]";
 	}
+
 
 }

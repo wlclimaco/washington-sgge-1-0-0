@@ -122,22 +122,6 @@ public class Cidade extends ModelCosmeDamiao
 	}
 
 	/**
-	 * @return the municipio
-	 */
-	public String getMunicipio()
-	{
-		return municipio;
-	}
-
-	/**
-	 * @param municipio the municipio to set
-	 */
-	public void setMunicipio(String municipio)
-	{
-		this.municipio = municipio;
-	}
-
-	/**
 	 * @param estado the estado to set
 	 */
 	public void setEstado(Estado estado)
@@ -165,7 +149,7 @@ public class Cidade extends ModelCosmeDamiao
 	public String toString()
 	{
 		return "Cidade [getId()=" + getId() + ", getNome()=" + getNome() + ", getCdIBGE()=" + getCdIBGE()
-				+ ", getEstado()=" + getEstado() + ", getCep()=" + getCep() + ", getMunicipio()=" + getMunicipio()
+				+ ", getEstado()=" + getEstado() + ", getCep()=" + getCep()
 				+ ", getCodigo()=" + getCodigo() + ", toString()=" + super.toString() + "]";
 	}
 

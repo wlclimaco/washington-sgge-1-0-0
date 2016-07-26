@@ -5,12 +5,12 @@ import com.qat.framework.model.IIntegerEnum;
 
 /**
  * The Enum RiskLevelEnum.
- * 
+ *
  * @author abarros
  * @version 1.0
  * @created 21-Jul-2014 10:00:07 AM
  */
-public enum TypeEnum implements IIntegerEnum, II18nEnum
+public enum TrueValueTypeEnum implements IIntegerEnum, II18nEnum
 {
 
 	/** The high. */
@@ -33,11 +33,11 @@ public enum TypeEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * The Constructor.
-	 * 
+	 *
 	 * @param value the value
 	 * @param labelKeyParam the label key param
 	 */
-	private TypeEnum(Integer value, String labelKeyParam)
+	private TrueValueTypeEnum(Integer value, String labelKeyParam)
 	{
 		code = value;
 		labelKey = labelKeyParam;
@@ -45,7 +45,7 @@ public enum TypeEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * Gets the value.
-	 * 
+	 *
 	 * @return the value
 	 */
 	@Override
@@ -56,13 +56,13 @@ public enum TypeEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * Enum for value.
-	 * 
+	 *
 	 * @param value the value
 	 * @return the process status enum
 	 */
-	public static TypeEnum enumForValue(Integer value)
+	public static TrueValueTypeEnum enumForValue(Integer value)
 	{
-		for (TypeEnum e : values())
+		for (TrueValueTypeEnum e : values())
 		{
 			if (e.getValue().equals(value))
 			{
@@ -75,7 +75,7 @@ public enum TypeEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * Gets the valid values.
-	 * 
+	 *
 	 * @return the valid values
 	 */
 	public static String getValidValues()
