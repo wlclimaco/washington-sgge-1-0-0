@@ -30,9 +30,13 @@ public class DoisValores extends ModelCosmeDamiao
 		super();
 	}
 
+	public DoisValores(int i, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Gets the id.
-	 * 
+	 *
 	 * @return the id
 	 */
 	public Integer getId()
@@ -42,7 +46,7 @@ public class DoisValores extends ModelCosmeDamiao
 
 	/**
 	 * Sets the id.
-	 * 
+	 *
 	 * @param id the id to set
 	 */
 	public void setId(Integer id)
@@ -52,7 +56,7 @@ public class DoisValores extends ModelCosmeDamiao
 
 	/**
 	 * Gets the description.
-	 * 
+	 *
 	 * @return the description
 	 */
 	public String getDescription()
@@ -62,7 +66,7 @@ public class DoisValores extends ModelCosmeDamiao
 
 	/**
 	 * Sets the description.
-	 * 
+	 *
 	 * @param description the description to set
 	 */
 	public void setDescription(String description)
@@ -72,7 +76,7 @@ public class DoisValores extends ModelCosmeDamiao
 
 	/**
 	 * Gets the nome.
-	 * 
+	 *
 	 * @return the nome
 	 */
 	public String getNome()
@@ -82,7 +86,7 @@ public class DoisValores extends ModelCosmeDamiao
 
 	/**
 	 * Sets the nome.
-	 * 
+	 *
 	 * @param nome the new nome
 	 */
 	public void setNome(String nome)
@@ -92,7 +96,7 @@ public class DoisValores extends ModelCosmeDamiao
 
 	/**
 	 * Gets the atributos.
-	 * 
+	 *
 	 * @return the atributos
 	 */
 	public List<Atributos> getAtributos()
@@ -102,7 +106,7 @@ public class DoisValores extends ModelCosmeDamiao
 
 	/**
 	 * Sets the atributos.
-	 * 
+	 *
 	 * @param atributos the new atributos
 	 */
 	public void setAtributos(List<Atributos> atributos)

@@ -38,7 +38,7 @@ public class Tela extends ModelCosmeDamiao
 
 	/**
 	 * Gets the id.
-	 * 
+	 *
 	 * @return the id
 	 */
 	public Integer getId()
@@ -48,7 +48,7 @@ public class Tela extends ModelCosmeDamiao
 
 	/**
 	 * Sets the id.
-	 * 
+	 *
 	 * @param id the id to set
 	 */
 	public void setId(Integer id)
@@ -58,7 +58,7 @@ public class Tela extends ModelCosmeDamiao
 
 	/**
 	 * Gets the description.
-	 * 
+	 *
 	 * @return the description
 	 */
 	public String getDescription()
@@ -68,7 +68,7 @@ public class Tela extends ModelCosmeDamiao
 
 	/**
 	 * Sets the description.
-	 * 
+	 *
 	 * @param description the description to set
 	 */
 	public void setDescription(String description)
@@ -78,7 +78,7 @@ public class Tela extends ModelCosmeDamiao
 
 	/**
 	 * Gets the help.
-	 * 
+	 *
 	 * @return the help
 	 */
 	public String getHelp()
@@ -88,7 +88,7 @@ public class Tela extends ModelCosmeDamiao
 
 	/**
 	 * Sets the help.
-	 * 
+	 *
 	 * @param help the new help
 	 */
 	public void setHelp(String help)
@@ -98,7 +98,7 @@ public class Tela extends ModelCosmeDamiao
 
 	/**
 	 * Gets the data.
-	 * 
+	 *
 	 * @return the data
 	 */
 	public Long getData()
@@ -108,7 +108,7 @@ public class Tela extends ModelCosmeDamiao
 
 	/**
 	 * Sets the data.
-	 * 
+	 *
 	 * @param data the new data
 	 */
 	public void setData(Long data)
@@ -118,7 +118,7 @@ public class Tela extends ModelCosmeDamiao
 
 	/**
 	 * Gets the desenvolvida.
-	 * 
+	 *
 	 * @return the desenvolvida
 	 */
 	public String getDesenvolvida()
@@ -128,7 +128,7 @@ public class Tela extends ModelCosmeDamiao
 
 	/**
 	 * Sets the desenvolvida.
-	 * 
+	 *
 	 * @param desenvolvida the new desenvolvida
 	 */
 	public void setDesenvolvida(String desenvolvida)
@@ -138,7 +138,7 @@ public class Tela extends ModelCosmeDamiao
 
 	/**
 	 * Gets the tabs.
-	 * 
+	 *
 	 * @return the tabs
 	 */
 	public List<Tabs> getTabs()
@@ -148,7 +148,7 @@ public class Tela extends ModelCosmeDamiao
 
 	/**
 	 * Sets the tabs.
-	 * 
+	 *
 	 * @param tabs the new tabs
 	 */
 	public void setTabs(List<Tabs> tabs)
@@ -163,7 +163,7 @@ public class Tela extends ModelCosmeDamiao
 	@Override
 	public String toString()
 	{
-		return "Tela [getId()=" + getId() + ", getType()=" + getType() + ", getDescription()=" + getDescription()
+		return "Tela [getId()=" + getId() + ", getDescription()=" + getDescription()
 				+ ", getHelp()=" + getHelp() + ", getData()=" + getData() + ", getDesenvolvida()=" + getDesenvolvida()
 				+ ", getTabs()=" + getTabs() + ", toString()=" + super.toString() + "]";
 	}

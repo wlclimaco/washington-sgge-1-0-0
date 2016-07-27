@@ -217,6 +217,20 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	RENTABILIDADEITENS(73, "sendsolv.base.model.risklevelenum.medium"),
 
 
+	BOLETO(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	CONFIGALERTAS(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	CONFIGCARNE(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	CONFIGENTRADA(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	CONFIGFISCAL(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	CONFIGGERAL(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	CONFIGPRODUTO(73, "sendsolv.base.model.risklevelenum.medium"),
+
 	TRIBUTACAO(73, "sendsolv.base.model.risklevelenum.medium");
 
 	/** The code. */
