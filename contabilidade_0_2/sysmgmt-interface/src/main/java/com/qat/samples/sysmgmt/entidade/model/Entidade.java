@@ -36,6 +36,8 @@ public class Entidade extends ModelCosmeDamiao
 	private EntidadeTypeEnum entidadeEnum;
 
 	private Configuracao configuracao;
+	
+	private ConfiguracaoNFe configuracaoNFe;
 
 	private List<Endereco> enderecos;
 
@@ -308,6 +310,16 @@ public class Entidade extends ModelCosmeDamiao
 	public void setSocios(List<Socio> socios) {
 		this.socios = socios;
 	}
+	
+	
+
+	public ConfiguracaoNFe getConfiguracaoNFe() {
+		return configuracaoNFe;
+	}
+
+	public void setConfiguracaoNFe(ConfiguracaoNFe configuracaoNFe) {
+		this.configuracaoNFe = configuracaoNFe;
+	}
 
 	@Override
 	public String toString() {
@@ -318,7 +330,10 @@ public class Entidade extends ModelCosmeDamiao
 				+ ", getEntidadeEnum()=" + getEntidadeEnum() + ", getConfiguracao()=" + getConfiguracao()
 				+ ", getEntidadeId()=" + getEntidadeId() + ", getNotificacoes()=" + getNotificacoes()
 				+ ", getNumFunc()=" + getNumFunc() + ", getPlanosServicos()=" + getPlanosServicos() + ", getSocios()="
-				+ getSocios() + ", toString()=" + super.toString() + "]";
+				+ getSocios() + ", getConfiguracaoNFe()=" + getConfiguracaoNFe() + ", toString()=" + super.toString()
+				+ "]";
 	}
+
+	
 
 }
