@@ -1,5 +1,5 @@
 /** create by system gera-java version 1.0.0 27/07/2016 15:44 : 43*/
-package com.qat.samples.sysmgmt.bac.undefined;
+package com.qat.samples.sysmgmt.bac.Util;
 
 
 import org.slf4j.Logger;
@@ -16,12 +16,11 @@ import com.qat.framework.validation.ValidationContext;
 import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.bac.IDoisValorBAC;
-import com.qat.samples.sysmgmt.bar.IComprasBAR;
-import com.qat.samples.sysmgmt.model.DoisValor;
-import com.qat.samples.sysmgmt.model.request.DoisValorMaintenanceRequest;
+import com.qat.samples.sysmgmt.bar.Util.IDoisValorBAR;
+import com.qat.samples.sysmgmt.util.model.DoisValores;
+import com.qat.samples.sysmgmt.util.model.request.DoisValoresInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.DoisValoresMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -93,88 +92,88 @@ public class DoisValorBACImpl implements IDoisValorBAC
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.ICountyBAC#insertDoisvalor(com.qat.samples.sysmgmt.model.request.DoisvalorMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.ICountyBAC#insertDoisValores(com.qat.samples.sysmgmt.model.request.DoisValoresMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Doisvalor> insertDoisvalor(DoisvalorMaintenanceRequest request)
+public InternalResultsResponse<DoisValores> insertDoisValor(DoisValoresMaintenanceRequest request)
 {
-	InternalResultsResponse<Doisvalor> response =
-			processDoisvalor(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+	InternalResultsResponse<DoisValores> response =
+			processDoisValores(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IDoisvalorBAC#updateDoisvalor(com.qat.samples.sysmgmt.model.request.DoisvalorMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IDoisValoresBAC#updateDoisValores(com.qat.samples.sysmgmt.model.request.DoisValoresMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Doisvalor> updateDoisvalor(DoisvalorMaintenanceRequest request)
+public InternalResultsResponse<DoisValores> updateDoisValor(DoisValoresMaintenanceRequest request)
 {
-	InternalResultsResponse<Doisvalor> response =
-			processDoisvalor(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+	InternalResultsResponse<DoisValores> response =
+			processDoisValores(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IDoisvalorBAC#deleteDoisvalor(com.qat.samples.sysmgmt.model.request.DoisvalorMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IDoisValoresBAC#deleteDoisValores(com.qat.samples.sysmgmt.model.request.DoisValoresMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Doisvalor> deleteDoisvalor(DoisvalorMaintenanceRequest request)
+public InternalResultsResponse<DoisValores> deleteDoisValor(DoisValoresMaintenanceRequest request)
 {
-	InternalResultsResponse<Doisvalor> response =
-			processDoisvalor(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+	InternalResultsResponse<DoisValores> response =
+			processDoisValores(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IDoisvalorBAC#refreshDoisvalors(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+ * @see com.qat.samples.sysmgmt.bac.IDoisValoresBAC#refreshDoisValoress(com.qat.samples.sysmgmt.model.request.RefreshRequest)
  */
 @Override
-public InternalResultsResponse<Doisvalor> refreshDoisvalors(RefreshRequest request)
+public InternalResultsResponse<DoisValores> refreshDoisValors(RefreshRequest request)
 {
 	// This method is demo code only. Do not view this as a QAT Global Standard.
-	getDoisValorBAR().deleteAllDoisvalors();
+	getDoisValorBAR().deleteAllDoisValoress();
 	int refreshNumber = request.getRefreshInt();
 	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
 
 	for (int i = 1; i <= refreshNumber; i++)
 	{
-	getDoisValorBAR().insertDoisvalor(new Doisvalor(i, "DoisvalorDesc" + i));
+	getDoisValorBAR().insertDoisValores(new DoisValores(i, "DoisValoresDesc" + i));
 	}
 
 	// Call maintain to see if we need to return the doisvalor list and if so whether it should be paged or not
-	return maintainReturnListDoisvalor(request.getReturnList(), request.getReturnListPaged(),new Doisvalor());
+	return maintainReturnListDoisValores(request.getReturnList(), request.getReturnListPaged(),new DoisValores());
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IDoisvalorBAC#fetchAllDoisvalors(Doisvalor doisvalor)
+ * @see com.qat.samples.sysmgmt.bac.IDoisValoresBAC#fetchAllDoisValoress(DoisValores doisvalor)
  */
 @Override
-public InternalResultsResponse<Doisvalor> fetchAllDoisvalors(Doisvalor doisvalor)
+public InternalResultsResponse<DoisValores> fetchAllDoisValors(DoisValores doisvalor)
 {
-	InternalResultsResponse<Doisvalor> response = new InternalResultsResponse<Doisvalor>();
-	response.getResultsList().addAll(getDoisValorBAR().fetchAllDoisvalors(doisvalor).getResultsList());
+	InternalResultsResponse<DoisValores> response = new InternalResultsResponse<DoisValores>();
+	response.getResultsList().addAll(getDoisValorBAR().fetchAllDoisValoress(doisvalor).getResultsList());
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IDoisvalorBAC#fetchDoisvalorById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * com.qat.samples.sysmgmt.bac.IDoisValoresBAC#fetchDoisValoresById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
  * )
  */
 @Override
-public InternalResultsResponse<Doisvalor> fetchDoisvalorById(FetchByIdRequest request)
+public InternalResultsResponse<DoisValores> fetchDoisValorById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Doisvalor> response = new InternalResultsResponse<Doisvalor>();
+	InternalResultsResponse<DoisValores> response = new InternalResultsResponse<DoisValores>();
 	// validate fetchId field
 	if (ValidationUtil.isNull(request.getFetchId()))
 	{
@@ -183,7 +182,7 @@ public InternalResultsResponse<Doisvalor> fetchDoisvalorById(FetchByIdRequest re
 	}
 	else
 	{
-		response.getResultsList().add(getDoisValorBAR().fetchDoisvalorById(request));
+		response.getResultsList().add(getDoisValorBAR().fetchDoisValoresById(request));
 	}
 
 	return response;
@@ -191,13 +190,13 @@ public InternalResultsResponse<Doisvalor> fetchDoisvalorById(FetchByIdRequest re
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IDoisvalorBAC#fetchDoisvalorsByRequest(com.qat.samples.sysmgmt.model.request.
+ * @see com.qat.samples.sysmgmt.bac.IDoisValoresBAC#fetchDoisValoressByRequest(com.qat.samples.sysmgmt.model.request.
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<Doisvalor> fetchDoisvalorsByRequest(DoisvalorInquiryRequest request)
+public InternalResultsResponse<DoisValores> fetchDoisValorsByRequest(DoisValoresInquiryRequest request)
 {
-	return getDoisValorBAR().fetchDoisvalorsByRequest(request);
+	return getDoisValorBAR().fetchDoisValoressByRequest(request);
 }
 
 /**
@@ -208,27 +207,27 @@ public InternalResultsResponse<Doisvalor> fetchDoisvalorsByRequest(DoisvalorInqu
  * @param request the request
  * @return the doisvalor response
  */
-private InternalResultsResponse<Doisvalor> processDoisvalor(ValidationContextIndicator indicator,
+private InternalResultsResponse<DoisValores> processDoisValores(ValidationContextIndicator indicator,
 		PersistenceActionEnum persistType,
-		DoisvalorMaintenanceRequest request)
+		DoisValoresMaintenanceRequest request)
 		{
-	InternalResultsResponse<Doisvalor> response = null;
+	InternalResultsResponse<DoisValores> response = null;
 
 	// Validate
-	ValidationContext context = new ValidationContext(Doisvalor.class.getSimpleName(), request.getDoisvalor(), indicator);
+	ValidationContext context = new ValidationContext(DoisValores.class.getSimpleName(), request.getDoisValores(), indicator);
 	if (!getValidationController().validate(context))
 	{
-		response = new InternalResultsResponse<Doisvalor>();
+		response = new InternalResultsResponse<DoisValores>();
 		response.setStatus(SystemErrorCategory.SystemValidation);
 		response.addMessages(context.getMessages());
 		return response;
 	}
 
 		// Persist
-		InternalResponse internalResponse = doPersistenceDoisvalor(request.getDoisvalor(), persistType);
+		InternalResponse internalResponse = doPersistenceDoisValores(request.getDoisValores(), persistType);
 		if (internalResponse.isInError())
 		{
-			response = new InternalResultsResponse<Doisvalor>();
+			response = new InternalResultsResponse<DoisValores>();
 			response.setStatus(internalResponse.getError());
 			response.addMessages(internalResponse.getMessageInfoList());
 			response.addMessage(DEFAULT_DOISVALOR_BAC_EXCEPTION_MSG, MessageSeverity.Error,
@@ -239,30 +238,30 @@ private InternalResultsResponse<Doisvalor> processDoisvalor(ValidationContextInd
 
 		// Call maintainReurnList to see if we need to return the doisvalor list and if so whether it should be paged or
 		// not
-		response = maintainReturnListDoisvalor(request.getReturnList(), request.getReturnListPaged(),new Doisvalor());
+		response = maintainReturnListDoisValores(request.getReturnList(), request.getReturnListPaged(),new DoisValores());
 
 		return response;
 			}
 
 	/**
-	 * Do persistenceDoisvalor.
+	 * Do persistenceDoisValores.
 	 *
 	 * @param request the request
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistenceDoisvalor(Doisvalor doisvalor, PersistenceActionEnum updateType)
+	private InternalResponse doPersistenceDoisValores(DoisValores doisvalor, PersistenceActionEnum updateType)
 	{
 		switch (updateType)
 		{
 			case INSERT:
-				return getDoisValorBAR().insertDoisvalor(doisvalor);
+				return getDoisValorBAR().insertDoisValores(doisvalor);
 
 			case UPDATE:
-				return getDoisValorBAR().updateDoisvalor(doisvalor);
+				return getDoisValorBAR().updateDoisValores(doisvalor);
 
 			case DELETE:
-				return getDoisValorBAR().deleteDoisvalorById(doisvalor);
+				return getDoisValorBAR().deleteDoisValoresById(doisvalor);
 			default:
 				if (LOG.isDebugEnabled())
 				{
@@ -280,7 +279,7 @@ private InternalResultsResponse<Doisvalor> processDoisvalor(ValidationContextInd
 	 * @param request the request
 	 * @param response the response
 	 */
-	private InternalResultsResponse<Doisvalor> maintainReturnListDoisvalor(Boolean listIndicator, Boolean pageListIndicator,Doisvalor doisvalor)
+	private InternalResultsResponse<DoisValores> maintainReturnListDoisValores(Boolean listIndicator, Boolean pageListIndicator,DoisValores doisvalor)
 	{
 		// Fetch again if requested.
 		if (listIndicator)
@@ -288,19 +287,19 @@ private InternalResultsResponse<Doisvalor> processDoisvalor(ValidationContextInd
 			// Fetch Paged is requested.
 			if (pageListIndicator)
 			{
-				DoisvalorInquiryRequest request = new DoisvalorInquiryRequest();
+				DoisValoresInquiryRequest request = new DoisValoresInquiryRequest();
 				request.setPreQueryCount(true);
-				return fetchDoisvalorsByRequest(request);
+				return fetchDoisValorsByRequest(request);
 			}
 			else
 			{
 				// otherwise return all rows not paged
-				return fetchAllDoisvalors(doisvalor);
+				return fetchAllDoisValors(doisvalor);
 			}
 		}
 		else
 		{
-			return new InternalResultsResponse<Doisvalor>();
+			return new InternalResultsResponse<DoisValores>();
 		}
 	}
 }

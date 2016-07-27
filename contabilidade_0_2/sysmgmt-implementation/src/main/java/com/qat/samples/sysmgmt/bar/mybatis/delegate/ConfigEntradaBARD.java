@@ -10,12 +10,12 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.bar.ConfigEntrada.IConfigEntradaBAR;
+import com.qat.samples.sysmgmt.bar.Configuracao.IConfiguracaoBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.entidade.model.ConfigEntrada;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.ConfigEntrada;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
@@ -40,29 +40,24 @@ public final class ConfigEntradaBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainConfigEntradaAssociations(List<ConfigEntrada> configentradaList,
+	public static Integer maintainConfigEntradaAssociations(ConfigEntrada configentrada,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IConfigEntradaBAR configentradaDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
+			TabelaEnum tabelaEnum, IConfiguracaoBAR configentradaDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(configentradaList))
+		if (ValidationUtil.isNull(configentrada))
 		{
 			return 0;
 		}
-		// For Each Contact...
-		for (ConfigEntrada configentrada : configentradaList)
-		{
+
 			// Make sure we set the parent key
 			configentrada.setParentId(parentId);
 			configentrada.setTabelaEnum(tabelaEnum);
 			configentrada.setProcessId(processId);
 
-			if (ValidationUtil.isNull(configentrada.getModelAction()))
-			{
-				continue;
-			}
+
 			switch (configentrada.getModelAction())
 			{
 				case INSERT:
@@ -102,13 +97,13 @@ public final class ConfigEntradaBARD extends SqlSessionDaoSupport
 									processId, historicoId);
 
 					break;
-			}
+
 		}
 		if(count == true ){
 			return 1;
 		}else{
 			return 0;
 		}
-		
+
 	}
 }

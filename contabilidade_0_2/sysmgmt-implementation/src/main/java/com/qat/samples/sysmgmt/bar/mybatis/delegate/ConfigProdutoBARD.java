@@ -10,12 +10,12 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.bar.ConfigProduto.IConfigProdutoBAR;
+import com.qat.samples.sysmgmt.bar.Configuracao.IConfiguracaoBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.entidade.model.ConfigProduto;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.ConfigProduto;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
@@ -40,29 +40,23 @@ public final class ConfigProdutoBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainConfigProdutoAssociations(List<ConfigProduto> configprodutoList,
+	public static Integer maintainConfigProdutoAssociations(ConfigProduto configproduto,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IConfigProdutoBAR configprodutoDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
+			TabelaEnum tabelaEnum, IConfiguracaoBAR configprodutoDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(configprodutoList))
+		if (ValidationUtil.isNull(configproduto))
 		{
 			return 0;
 		}
-		// For Each Contact...
-		for (ConfigProduto configproduto : configprodutoList)
-		{
+
 			// Make sure we set the parent key
 			configproduto.setParentId(parentId);
 			configproduto.setTabelaEnum(tabelaEnum);
 			configproduto.setProcessId(processId);
 
-			if (ValidationUtil.isNull(configproduto.getModelAction()))
-			{
-				continue;
-			}
 			switch (configproduto.getModelAction())
 			{
 				case INSERT:
@@ -103,12 +97,12 @@ public final class ConfigProdutoBARD extends SqlSessionDaoSupport
 
 					break;
 			}
-		}
+
 		if(count == true ){
 			return 1;
 		}else{
 			return 0;
 		}
-		
+
 	}
 }

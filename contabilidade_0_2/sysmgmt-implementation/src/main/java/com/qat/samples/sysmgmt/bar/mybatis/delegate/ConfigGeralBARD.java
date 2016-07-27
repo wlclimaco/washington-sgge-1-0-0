@@ -10,12 +10,12 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.bar.ConfigGeral.IConfigGeralBAR;
+import com.qat.samples.sysmgmt.bar.Configuracao.IConfiguracaoBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.entidade.model.ConfigGeral;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.ConfigGeral;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
@@ -40,29 +40,24 @@ public final class ConfigGeralBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainConfigGeralAssociations(List<ConfigGeral> configgeralList,
+	public static Integer maintainConfigGeralAssociations(ConfigGeral configgeral,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IConfigGeralBAR configgeralDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
+			TabelaEnum tabelaEnum, IConfiguracaoBAR configgeralDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(configgeralList))
+		if (ValidationUtil.isNull(configgeral))
 		{
 			return 0;
 		}
-		// For Each Contact...
-		for (ConfigGeral configgeral : configgeralList)
-		{
+
 			// Make sure we set the parent key
 			configgeral.setParentId(parentId);
 			configgeral.setTabelaEnum(tabelaEnum);
 			configgeral.setProcessId(processId);
 
-			if (ValidationUtil.isNull(configgeral.getModelAction()))
-			{
-				continue;
-			}
+
 			switch (configgeral.getModelAction())
 			{
 				case INSERT:
@@ -103,12 +98,12 @@ public final class ConfigGeralBARD extends SqlSessionDaoSupport
 
 					break;
 			}
-		}
+
 		if(count == true ){
 			return 1;
 		}else{
 			return 0;
 		}
-		
+
 	}
 }

@@ -10,12 +10,12 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.bar.ConfigFiscal.IConfigFiscalBAR;
+import com.qat.samples.sysmgmt.bar.Configuracao.IConfiguracaoBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.entidade.model.ConfigFiscal;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.ConfigFiscal;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
@@ -40,29 +40,23 @@ public final class ConfigFiscalBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainConfigFiscalAssociations(List<ConfigFiscal> configfiscalList,
+	public static Integer maintainConfigFiscalAssociations(ConfigFiscal configfiscal,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IConfigFiscalBAR configfiscalDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
+			TabelaEnum tabelaEnum, IConfiguracaoBAR configfiscalDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(configfiscalList))
+		if (ValidationUtil.isNull(configfiscal))
 		{
 			return 0;
 		}
-		// For Each Contact...
-		for (ConfigFiscal configfiscal : configfiscalList)
-		{
+
 			// Make sure we set the parent key
 			configfiscal.setParentId(parentId);
 			configfiscal.setTabelaEnum(tabelaEnum);
 			configfiscal.setProcessId(processId);
 
-			if (ValidationUtil.isNull(configfiscal.getModelAction()))
-			{
-				continue;
-			}
 			switch (configfiscal.getModelAction())
 			{
 				case INSERT:
@@ -103,12 +97,12 @@ public final class ConfigFiscalBARD extends SqlSessionDaoSupport
 
 					break;
 			}
-		}
+
 		if(count == true ){
 			return 1;
 		}else{
 			return 0;
 		}
-		
+
 	}
 }

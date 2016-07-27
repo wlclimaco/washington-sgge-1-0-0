@@ -1,5 +1,5 @@
 /** create by system gera-java version 1.0.0 27/07/2016 15:44 : 43*/
-package com.qat.samples.sysmgmt.bac.undefined;
+package com.qat.samples.sysmgmt.bac.Configuracao;
 
 
 import org.slf4j.Logger;
@@ -16,10 +16,29 @@ import com.qat.framework.validation.ValidationContext;
 import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.bac.IConfiguracaoBAC;
-import com.qat.samples.sysmgmt.bar.IComprasBAR;
-import com.qat.samples.sysmgmt.model.Configuracao;
-import com.qat.samples.sysmgmt.model.request.ConfiguracaoMaintenanceRequest;
+import com.qat.samples.sysmgmt.bar.Configuracao.IConfiguracaoBAR;
+import com.qat.samples.sysmgmt.entidade.model.Boleto;
+import com.qat.samples.sysmgmt.entidade.model.ConfigAlertas;
+import com.qat.samples.sysmgmt.entidade.model.ConfigCarne;
+import com.qat.samples.sysmgmt.entidade.model.ConfigEntrada;
+import com.qat.samples.sysmgmt.entidade.model.ConfigFiscal;
+import com.qat.samples.sysmgmt.entidade.model.ConfigGeral;
+import com.qat.samples.sysmgmt.entidade.model.ConfigProduto;
+import com.qat.samples.sysmgmt.entidade.model.ConfigSMTP;
+import com.qat.samples.sysmgmt.entidade.model.ConfigVendas;
+import com.qat.samples.sysmgmt.entidade.model.Configuracao;
+import com.qat.samples.sysmgmt.entidade.model.ConfiguracaoNFe;
+import com.qat.samples.sysmgmt.entidade.model.request.BoletoMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.ConfigAlertasMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.ConfigCarneMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.ConfigEntradaMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.ConfigFiscalMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.ConfigGeralMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.ConfigProdutoMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.ConfigSMTPMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.ConfigVendasMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.ConfiguracaoMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.ConfiguracaoNFeMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
@@ -195,7 +214,7 @@ public InternalResultsResponse<Configuracao> fetchConfiguracaoById(FetchByIdRequ
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<Configuracao> fetchConfiguracaosByRequest(ConfiguracaoInquiryRequest request)
+public InternalResultsResponse<Configuracao> fetchConfiguracaosByRequest(PagedInquiryRequest request)
 {
 	return getConfiguracaoBAR().fetchConfiguracaosByRequest(request);
 }
@@ -288,7 +307,7 @@ private InternalResultsResponse<Configuracao> processConfiguracao(ValidationCont
 			// Fetch Paged is requested.
 			if (pageListIndicator)
 			{
-				ConfiguracaoInquiryRequest request = new ConfiguracaoInquiryRequest();
+				PagedInquiryRequest request = new PagedInquiryRequest();
 				request.setPreQueryCount(true);
 				return fetchConfiguracaosByRequest(request);
 			}
@@ -412,7 +431,7 @@ public InternalResultsResponse<Boleto> fetchBoletoById(FetchByIdRequest request)
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<Boleto> fetchBoletosByRequest(BoletoInquiryRequest request)
+public InternalResultsResponse<Boleto> fetchBoletosByRequest(PagedInquiryRequest request)
 {
 	return getConfiguracaoBAR().fetchBoletosByRequest(request);
 }
@@ -505,7 +524,7 @@ private InternalResultsResponse<Boleto> processBoleto(ValidationContextIndicator
 			// Fetch Paged is requested.
 			if (pageListIndicator)
 			{
-				BoletoInquiryRequest request = new BoletoInquiryRequest();
+				PagedInquiryRequest request = new PagedInquiryRequest();
 				request.setPreQueryCount(true);
 				return fetchBoletosByRequest(request);
 			}
@@ -527,88 +546,88 @@ private InternalResultsResponse<Boleto> processBoleto(ValidationContextIndicator
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.ICountyBAC#insertConfigcarne(com.qat.samples.sysmgmt.model.request.ConfigcarneMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.ICountyBAC#insertConfigCarne(com.qat.samples.sysmgmt.model.request.ConfigCarneMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configcarne> insertConfigcarne(ConfigcarneMaintenanceRequest request)
+public InternalResultsResponse<ConfigCarne> insertConfigCarne(ConfigCarneMaintenanceRequest request)
 {
-	InternalResultsResponse<Configcarne> response =
-			processConfigcarne(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+	InternalResultsResponse<ConfigCarne> response =
+			processConfigCarne(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfigcarneBAC#updateConfigcarne(com.qat.samples.sysmgmt.model.request.ConfigcarneMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IConfigCarneBAC#updateConfigCarne(com.qat.samples.sysmgmt.model.request.ConfigCarneMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configcarne> updateConfigcarne(ConfigcarneMaintenanceRequest request)
+public InternalResultsResponse<ConfigCarne> updateConfigCarne(ConfigCarneMaintenanceRequest request)
 {
-	InternalResultsResponse<Configcarne> response =
-			processConfigcarne(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+	InternalResultsResponse<ConfigCarne> response =
+			processConfigCarne(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfigcarneBAC#deleteConfigcarne(com.qat.samples.sysmgmt.model.request.ConfigcarneMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IConfigCarneBAC#deleteConfigCarne(com.qat.samples.sysmgmt.model.request.ConfigCarneMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configcarne> deleteConfigcarne(ConfigcarneMaintenanceRequest request)
+public InternalResultsResponse<ConfigCarne> deleteConfigCarne(ConfigCarneMaintenanceRequest request)
 {
-	InternalResultsResponse<Configcarne> response =
-			processConfigcarne(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+	InternalResultsResponse<ConfigCarne> response =
+			processConfigCarne(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfigcarneBAC#refreshConfigcarnes(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+ * @see com.qat.samples.sysmgmt.bac.IConfigCarneBAC#refreshConfigCarnes(com.qat.samples.sysmgmt.model.request.RefreshRequest)
  */
 @Override
-public InternalResultsResponse<Configcarne> refreshConfigcarnes(RefreshRequest request)
+public InternalResultsResponse<ConfigCarne> refreshConfigCarnes(RefreshRequest request)
 {
 	// This method is demo code only. Do not view this as a QAT Global Standard.
-	getConfiguracaoBAR().deleteAllConfigcarnes();
+	getConfiguracaoBAR().deleteAllConfigCarnes();
 	int refreshNumber = request.getRefreshInt();
 	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
 
 	for (int i = 1; i <= refreshNumber; i++)
 	{
-	getConfiguracaoBAR().insertConfigcarne(new Configcarne(i, "ConfigcarneDesc" + i));
+	getConfiguracaoBAR().insertConfigCarne(new ConfigCarne(i, "ConfigCarneDesc" + i));
 	}
 
 	// Call maintain to see if we need to return the configcarne list and if so whether it should be paged or not
-	return maintainReturnListConfigcarne(request.getReturnList(), request.getReturnListPaged(),new Configcarne());
+	return maintainReturnListConfigCarne(request.getReturnList(), request.getReturnListPaged(),new ConfigCarne());
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfigcarneBAC#fetchAllConfigcarnes(Configcarne configcarne)
+ * @see com.qat.samples.sysmgmt.bac.IConfigCarneBAC#fetchAllConfigCarnes(ConfigCarne configcarne)
  */
 @Override
-public InternalResultsResponse<Configcarne> fetchAllConfigcarnes(Configcarne configcarne)
+public InternalResultsResponse<ConfigCarne> fetchAllConfigCarnes(ConfigCarne configcarne)
 {
-	InternalResultsResponse<Configcarne> response = new InternalResultsResponse<Configcarne>();
-	response.getResultsList().addAll(getConfiguracaoBAR().fetchAllConfigcarnes(configcarne).getResultsList());
+	InternalResultsResponse<ConfigCarne> response = new InternalResultsResponse<ConfigCarne>();
+	response.getResultsList().addAll(getConfiguracaoBAR().fetchAllConfigCarnes(configcarne).getResultsList());
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfigcarneBAC#fetchConfigcarneById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * com.qat.samples.sysmgmt.bac.IConfigCarneBAC#fetchConfigCarneById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configcarne> fetchConfigcarneById(FetchByIdRequest request)
+public InternalResultsResponse<ConfigCarne> fetchConfigCarneById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Configcarne> response = new InternalResultsResponse<Configcarne>();
+	InternalResultsResponse<ConfigCarne> response = new InternalResultsResponse<ConfigCarne>();
 	// validate fetchId field
 	if (ValidationUtil.isNull(request.getFetchId()))
 	{
@@ -617,7 +636,7 @@ public InternalResultsResponse<Configcarne> fetchConfigcarneById(FetchByIdReques
 	}
 	else
 	{
-		response.getResultsList().add(getConfiguracaoBAR().fetchConfigcarneById(request));
+		response.getResultsList().add(getConfiguracaoBAR().fetchConfigCarneById(request));
 	}
 
 	return response;
@@ -625,13 +644,13 @@ public InternalResultsResponse<Configcarne> fetchConfigcarneById(FetchByIdReques
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfigcarneBAC#fetchConfigcarnesByRequest(com.qat.samples.sysmgmt.model.request.
+ * @see com.qat.samples.sysmgmt.bac.IConfigCarneBAC#fetchConfigCarnesByRequest(com.qat.samples.sysmgmt.model.request.
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<Configcarne> fetchConfigcarnesByRequest(ConfigcarneInquiryRequest request)
+public InternalResultsResponse<ConfigCarne> fetchConfigCarnesByRequest(PagedInquiryRequest request)
 {
-	return getConfiguracaoBAR().fetchConfigcarnesByRequest(request);
+	return getConfiguracaoBAR().fetchConfigCarnesByRequest(request);
 }
 
 /**
@@ -642,27 +661,27 @@ public InternalResultsResponse<Configcarne> fetchConfigcarnesByRequest(Configcar
  * @param request the request
  * @return the configcarne response
  */
-private InternalResultsResponse<Configcarne> processConfigcarne(ValidationContextIndicator indicator,
+private InternalResultsResponse<ConfigCarne> processConfigCarne(ValidationContextIndicator indicator,
 		PersistenceActionEnum persistType,
-		ConfigcarneMaintenanceRequest request)
+		ConfigCarneMaintenanceRequest request)
 		{
-	InternalResultsResponse<Configcarne> response = null;
+	InternalResultsResponse<ConfigCarne> response = null;
 
 	// Validate
-	ValidationContext context = new ValidationContext(Configcarne.class.getSimpleName(), request.getConfigcarne(), indicator);
+	ValidationContext context = new ValidationContext(ConfigCarne.class.getSimpleName(), request.getConfigCarne(), indicator);
 	if (!getValidationController().validate(context))
 	{
-		response = new InternalResultsResponse<Configcarne>();
+		response = new InternalResultsResponse<ConfigCarne>();
 		response.setStatus(SystemErrorCategory.SystemValidation);
 		response.addMessages(context.getMessages());
 		return response;
 	}
 
 		// Persist
-		InternalResponse internalResponse = doPersistenceConfigcarne(request.getConfigcarne(), persistType);
+		InternalResponse internalResponse = doPersistenceConfigCarne(request.getConfigCarne(), persistType);
 		if (internalResponse.isInError())
 		{
-			response = new InternalResultsResponse<Configcarne>();
+			response = new InternalResultsResponse<ConfigCarne>();
 			response.setStatus(internalResponse.getError());
 			response.addMessages(internalResponse.getMessageInfoList());
 			response.addMessage(DEFAULT_CONFIGURACAO_BAC_EXCEPTION_MSG, MessageSeverity.Error,
@@ -673,30 +692,30 @@ private InternalResultsResponse<Configcarne> processConfigcarne(ValidationContex
 
 		// Call maintainReurnList to see if we need to return the configcarne list and if so whether it should be paged or
 		// not
-		response = maintainReturnListConfigcarne(request.getReturnList(), request.getReturnListPaged(),new Configcarne());
+		response = maintainReturnListConfigCarne(request.getReturnList(), request.getReturnListPaged(),new ConfigCarne());
 
 		return response;
 			}
 
 	/**
-	 * Do persistenceConfigcarne.
+	 * Do persistenceConfigCarne.
 	 *
 	 * @param request the request
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistenceConfigcarne(Configcarne configcarne, PersistenceActionEnum updateType)
+	private InternalResponse doPersistenceConfigCarne(ConfigCarne configcarne, PersistenceActionEnum updateType)
 	{
 		switch (updateType)
 		{
 			case INSERT:
-				return getConfiguracaoBAR().insertConfigcarne(configcarne);
+				return getConfiguracaoBAR().insertConfigCarne(configcarne);
 
 			case UPDATE:
-				return getConfiguracaoBAR().updateConfigcarne(configcarne);
+				return getConfiguracaoBAR().updateConfigCarne(configcarne);
 
 			case DELETE:
-				return getConfiguracaoBAR().deleteConfigcarneById(configcarne);
+				return getConfiguracaoBAR().deleteConfigCarneById(configcarne);
 			default:
 				if (LOG.isDebugEnabled())
 				{
@@ -714,7 +733,7 @@ private InternalResultsResponse<Configcarne> processConfigcarne(ValidationContex
 	 * @param request the request
 	 * @param response the response
 	 */
-	private InternalResultsResponse<Configcarne> maintainReturnListConfigcarne(Boolean listIndicator, Boolean pageListIndicator,Configcarne configcarne)
+	private InternalResultsResponse<ConfigCarne> maintainReturnListConfigCarne(Boolean listIndicator, Boolean pageListIndicator,ConfigCarne configcarne)
 	{
 		// Fetch again if requested.
 		if (listIndicator)
@@ -722,19 +741,19 @@ private InternalResultsResponse<Configcarne> processConfigcarne(ValidationContex
 			// Fetch Paged is requested.
 			if (pageListIndicator)
 			{
-				ConfigcarneInquiryRequest request = new ConfigcarneInquiryRequest();
+				PagedInquiryRequest request = new PagedInquiryRequest();
 				request.setPreQueryCount(true);
-				return fetchConfigcarnesByRequest(request);
+				return fetchConfigCarnesByRequest(request);
 			}
 			else
 			{
 				// otherwise return all rows not paged
-				return fetchAllConfigcarnes(configcarne);
+				return fetchAllConfigCarnes(configcarne);
 			}
 		}
 		else
 		{
-			return new InternalResultsResponse<Configcarne>();
+			return new InternalResultsResponse<ConfigCarne>();
 		}
 	}
 
@@ -744,88 +763,88 @@ private InternalResultsResponse<Configcarne> processConfigcarne(ValidationContex
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.ICountyBAC#insertConfigentrada(com.qat.samples.sysmgmt.model.request.ConfigentradaMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.ICountyBAC#insertConfigEntrada(com.qat.samples.sysmgmt.model.request.ConfigEntradaMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configentrada> insertConfigentrada(ConfigentradaMaintenanceRequest request)
+public InternalResultsResponse<ConfigEntrada> insertConfigEntrada(ConfigEntradaMaintenanceRequest request)
 {
-	InternalResultsResponse<Configentrada> response =
-			processConfigentrada(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+	InternalResultsResponse<ConfigEntrada> response =
+			processConfigEntrada(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfigentradaBAC#updateConfigentrada(com.qat.samples.sysmgmt.model.request.ConfigentradaMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IConfigEntradaBAC#updateConfigEntrada(com.qat.samples.sysmgmt.model.request.ConfigEntradaMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configentrada> updateConfigentrada(ConfigentradaMaintenanceRequest request)
+public InternalResultsResponse<ConfigEntrada> updateConfigEntrada(ConfigEntradaMaintenanceRequest request)
 {
-	InternalResultsResponse<Configentrada> response =
-			processConfigentrada(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+	InternalResultsResponse<ConfigEntrada> response =
+			processConfigEntrada(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfigentradaBAC#deleteConfigentrada(com.qat.samples.sysmgmt.model.request.ConfigentradaMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IConfigEntradaBAC#deleteConfigEntrada(com.qat.samples.sysmgmt.model.request.ConfigEntradaMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configentrada> deleteConfigentrada(ConfigentradaMaintenanceRequest request)
+public InternalResultsResponse<ConfigEntrada> deleteConfigEntrada(ConfigEntradaMaintenanceRequest request)
 {
-	InternalResultsResponse<Configentrada> response =
-			processConfigentrada(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+	InternalResultsResponse<ConfigEntrada> response =
+			processConfigEntrada(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfigentradaBAC#refreshConfigentradas(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+ * @see com.qat.samples.sysmgmt.bac.IConfigEntradaBAC#refreshConfigEntradas(com.qat.samples.sysmgmt.model.request.RefreshRequest)
  */
 @Override
-public InternalResultsResponse<Configentrada> refreshConfigentradas(RefreshRequest request)
+public InternalResultsResponse<ConfigEntrada> refreshConfigEntradas(RefreshRequest request)
 {
 	// This method is demo code only. Do not view this as a QAT Global Standard.
-	getConfiguracaoBAR().deleteAllConfigentradas();
+	getConfiguracaoBAR().deleteAllConfigEntradas();
 	int refreshNumber = request.getRefreshInt();
 	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
 
 	for (int i = 1; i <= refreshNumber; i++)
 	{
-	getConfiguracaoBAR().insertConfigentrada(new Configentrada(i, "ConfigentradaDesc" + i));
+	getConfiguracaoBAR().insertConfigEntrada(new ConfigEntrada(i, "ConfigEntradaDesc" + i));
 	}
 
 	// Call maintain to see if we need to return the configentrada list and if so whether it should be paged or not
-	return maintainReturnListConfigentrada(request.getReturnList(), request.getReturnListPaged(),new Configentrada());
+	return maintainReturnListConfigEntrada(request.getReturnList(), request.getReturnListPaged(),new ConfigEntrada());
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfigentradaBAC#fetchAllConfigentradas(Configentrada configentrada)
+ * @see com.qat.samples.sysmgmt.bac.IConfigEntradaBAC#fetchAllConfigEntradas(ConfigEntrada configentrada)
  */
 @Override
-public InternalResultsResponse<Configentrada> fetchAllConfigentradas(Configentrada configentrada)
+public InternalResultsResponse<ConfigEntrada> fetchAllConfigEntradas(ConfigEntrada configentrada)
 {
-	InternalResultsResponse<Configentrada> response = new InternalResultsResponse<Configentrada>();
-	response.getResultsList().addAll(getConfiguracaoBAR().fetchAllConfigentradas(configentrada).getResultsList());
+	InternalResultsResponse<ConfigEntrada> response = new InternalResultsResponse<ConfigEntrada>();
+	response.getResultsList().addAll(getConfiguracaoBAR().fetchAllConfigEntradas(configentrada).getResultsList());
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfigentradaBAC#fetchConfigentradaById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * com.qat.samples.sysmgmt.bac.IConfigEntradaBAC#fetchConfigEntradaById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configentrada> fetchConfigentradaById(FetchByIdRequest request)
+public InternalResultsResponse<ConfigEntrada> fetchConfigEntradaById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Configentrada> response = new InternalResultsResponse<Configentrada>();
+	InternalResultsResponse<ConfigEntrada> response = new InternalResultsResponse<ConfigEntrada>();
 	// validate fetchId field
 	if (ValidationUtil.isNull(request.getFetchId()))
 	{
@@ -834,7 +853,7 @@ public InternalResultsResponse<Configentrada> fetchConfigentradaById(FetchByIdRe
 	}
 	else
 	{
-		response.getResultsList().add(getConfiguracaoBAR().fetchConfigentradaById(request));
+		response.getResultsList().add(getConfiguracaoBAR().fetchConfigEntradaById(request));
 	}
 
 	return response;
@@ -842,13 +861,13 @@ public InternalResultsResponse<Configentrada> fetchConfigentradaById(FetchByIdRe
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfigentradaBAC#fetchConfigentradasByRequest(com.qat.samples.sysmgmt.model.request.
+ * @see com.qat.samples.sysmgmt.bac.IConfigEntradaBAC#fetchConfigEntradasByRequest(com.qat.samples.sysmgmt.model.request.
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<Configentrada> fetchConfigentradasByRequest(ConfigentradaInquiryRequest request)
+public InternalResultsResponse<ConfigEntrada> fetchConfigEntradasByRequest(PagedInquiryRequest request)
 {
-	return getConfiguracaoBAR().fetchConfigentradasByRequest(request);
+	return getConfiguracaoBAR().fetchConfigEntradasByRequest(request);
 }
 
 /**
@@ -859,27 +878,27 @@ public InternalResultsResponse<Configentrada> fetchConfigentradasByRequest(Confi
  * @param request the request
  * @return the configentrada response
  */
-private InternalResultsResponse<Configentrada> processConfigentrada(ValidationContextIndicator indicator,
+private InternalResultsResponse<ConfigEntrada> processConfigEntrada(ValidationContextIndicator indicator,
 		PersistenceActionEnum persistType,
-		ConfigentradaMaintenanceRequest request)
+		ConfigEntradaMaintenanceRequest request)
 		{
-	InternalResultsResponse<Configentrada> response = null;
+	InternalResultsResponse<ConfigEntrada> response = null;
 
 	// Validate
-	ValidationContext context = new ValidationContext(Configentrada.class.getSimpleName(), request.getConfigentrada(), indicator);
+	ValidationContext context = new ValidationContext(ConfigEntrada.class.getSimpleName(), request.getConfigEntrada(), indicator);
 	if (!getValidationController().validate(context))
 	{
-		response = new InternalResultsResponse<Configentrada>();
+		response = new InternalResultsResponse<ConfigEntrada>();
 		response.setStatus(SystemErrorCategory.SystemValidation);
 		response.addMessages(context.getMessages());
 		return response;
 	}
 
 		// Persist
-		InternalResponse internalResponse = doPersistenceConfigentrada(request.getConfigentrada(), persistType);
+		InternalResponse internalResponse = doPersistenceConfigEntrada(request.getConfigEntrada(), persistType);
 		if (internalResponse.isInError())
 		{
-			response = new InternalResultsResponse<Configentrada>();
+			response = new InternalResultsResponse<ConfigEntrada>();
 			response.setStatus(internalResponse.getError());
 			response.addMessages(internalResponse.getMessageInfoList());
 			response.addMessage(DEFAULT_CONFIGURACAO_BAC_EXCEPTION_MSG, MessageSeverity.Error,
@@ -890,30 +909,30 @@ private InternalResultsResponse<Configentrada> processConfigentrada(ValidationCo
 
 		// Call maintainReurnList to see if we need to return the configentrada list and if so whether it should be paged or
 		// not
-		response = maintainReturnListConfigentrada(request.getReturnList(), request.getReturnListPaged(),new Configentrada());
+		response = maintainReturnListConfigEntrada(request.getReturnList(), request.getReturnListPaged(),new ConfigEntrada());
 
 		return response;
 			}
 
 	/**
-	 * Do persistenceConfigentrada.
+	 * Do persistenceConfigEntrada.
 	 *
 	 * @param request the request
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistenceConfigentrada(Configentrada configentrada, PersistenceActionEnum updateType)
+	private InternalResponse doPersistenceConfigEntrada(ConfigEntrada configentrada, PersistenceActionEnum updateType)
 	{
 		switch (updateType)
 		{
 			case INSERT:
-				return getConfiguracaoBAR().insertConfigentrada(configentrada);
+				return getConfiguracaoBAR().insertConfigEntrada(configentrada);
 
 			case UPDATE:
-				return getConfiguracaoBAR().updateConfigentrada(configentrada);
+				return getConfiguracaoBAR().updateConfigEntrada(configentrada);
 
 			case DELETE:
-				return getConfiguracaoBAR().deleteConfigentradaById(configentrada);
+				return getConfiguracaoBAR().deleteConfigEntradaById(configentrada);
 			default:
 				if (LOG.isDebugEnabled())
 				{
@@ -931,7 +950,7 @@ private InternalResultsResponse<Configentrada> processConfigentrada(ValidationCo
 	 * @param request the request
 	 * @param response the response
 	 */
-	private InternalResultsResponse<Configentrada> maintainReturnListConfigentrada(Boolean listIndicator, Boolean pageListIndicator,Configentrada configentrada)
+	private InternalResultsResponse<ConfigEntrada> maintainReturnListConfigEntrada(Boolean listIndicator, Boolean pageListIndicator,ConfigEntrada configentrada)
 	{
 		// Fetch again if requested.
 		if (listIndicator)
@@ -939,19 +958,19 @@ private InternalResultsResponse<Configentrada> processConfigentrada(ValidationCo
 			// Fetch Paged is requested.
 			if (pageListIndicator)
 			{
-				ConfigentradaInquiryRequest request = new ConfigentradaInquiryRequest();
+				PagedInquiryRequest request = new PagedInquiryRequest();
 				request.setPreQueryCount(true);
-				return fetchConfigentradasByRequest(request);
+				return fetchConfigEntradasByRequest(request);
 			}
 			else
 			{
 				// otherwise return all rows not paged
-				return fetchAllConfigentradas(configentrada);
+				return fetchAllConfigEntradas(configentrada);
 			}
 		}
 		else
 		{
-			return new InternalResultsResponse<Configentrada>();
+			return new InternalResultsResponse<ConfigEntrada>();
 		}
 	}
 
@@ -961,88 +980,88 @@ private InternalResultsResponse<Configentrada> processConfigentrada(ValidationCo
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.ICountyBAC#insertConfigfiscal(com.qat.samples.sysmgmt.model.request.ConfigfiscalMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.ICountyBAC#insertConfigFiscal(com.qat.samples.sysmgmt.model.request.ConfigFiscalMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configfiscal> insertConfigfiscal(ConfigfiscalMaintenanceRequest request)
+public InternalResultsResponse<ConfigFiscal> insertConfigFiscal(ConfigFiscalMaintenanceRequest request)
 {
-	InternalResultsResponse<Configfiscal> response =
-			processConfigfiscal(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+	InternalResultsResponse<ConfigFiscal> response =
+			processConfigFiscal(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfigfiscalBAC#updateConfigfiscal(com.qat.samples.sysmgmt.model.request.ConfigfiscalMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IConfigFiscalBAC#updateConfigFiscal(com.qat.samples.sysmgmt.model.request.ConfigFiscalMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configfiscal> updateConfigfiscal(ConfigfiscalMaintenanceRequest request)
+public InternalResultsResponse<ConfigFiscal> updateConfigFiscal(ConfigFiscalMaintenanceRequest request)
 {
-	InternalResultsResponse<Configfiscal> response =
-			processConfigfiscal(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+	InternalResultsResponse<ConfigFiscal> response =
+			processConfigFiscal(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfigfiscalBAC#deleteConfigfiscal(com.qat.samples.sysmgmt.model.request.ConfigfiscalMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IConfigFiscalBAC#deleteConfigFiscal(com.qat.samples.sysmgmt.model.request.ConfigFiscalMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configfiscal> deleteConfigfiscal(ConfigfiscalMaintenanceRequest request)
+public InternalResultsResponse<ConfigFiscal> deleteConfigFiscal(ConfigFiscalMaintenanceRequest request)
 {
-	InternalResultsResponse<Configfiscal> response =
-			processConfigfiscal(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+	InternalResultsResponse<ConfigFiscal> response =
+			processConfigFiscal(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfigfiscalBAC#refreshConfigfiscals(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+ * @see com.qat.samples.sysmgmt.bac.IConfigFiscalBAC#refreshConfigFiscals(com.qat.samples.sysmgmt.model.request.RefreshRequest)
  */
 @Override
-public InternalResultsResponse<Configfiscal> refreshConfigfiscals(RefreshRequest request)
+public InternalResultsResponse<ConfigFiscal> refreshConfigFiscals(RefreshRequest request)
 {
 	// This method is demo code only. Do not view this as a QAT Global Standard.
-	getConfiguracaoBAR().deleteAllConfigfiscals();
+	getConfiguracaoBAR().deleteAllConfigFiscals();
 	int refreshNumber = request.getRefreshInt();
 	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
 
 	for (int i = 1; i <= refreshNumber; i++)
 	{
-	getConfiguracaoBAR().insertConfigfiscal(new Configfiscal(i, "ConfigfiscalDesc" + i));
+	getConfiguracaoBAR().insertConfigFiscal(new ConfigFiscal(i, "ConfigFiscalDesc" + i));
 	}
 
 	// Call maintain to see if we need to return the configfiscal list and if so whether it should be paged or not
-	return maintainReturnListConfigfiscal(request.getReturnList(), request.getReturnListPaged(),new Configfiscal());
+	return maintainReturnListConfigFiscal(request.getReturnList(), request.getReturnListPaged(),new ConfigFiscal());
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfigfiscalBAC#fetchAllConfigfiscals(Configfiscal configfiscal)
+ * @see com.qat.samples.sysmgmt.bac.IConfigFiscalBAC#fetchAllConfigFiscals(ConfigFiscal configfiscal)
  */
 @Override
-public InternalResultsResponse<Configfiscal> fetchAllConfigfiscals(Configfiscal configfiscal)
+public InternalResultsResponse<ConfigFiscal> fetchAllConfigFiscals(ConfigFiscal configfiscal)
 {
-	InternalResultsResponse<Configfiscal> response = new InternalResultsResponse<Configfiscal>();
-	response.getResultsList().addAll(getConfiguracaoBAR().fetchAllConfigfiscals(configfiscal).getResultsList());
+	InternalResultsResponse<ConfigFiscal> response = new InternalResultsResponse<ConfigFiscal>();
+	response.getResultsList().addAll(getConfiguracaoBAR().fetchAllConfigFiscals(configfiscal).getResultsList());
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfigfiscalBAC#fetchConfigfiscalById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * com.qat.samples.sysmgmt.bac.IConfigFiscalBAC#fetchConfigFiscalById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configfiscal> fetchConfigfiscalById(FetchByIdRequest request)
+public InternalResultsResponse<ConfigFiscal> fetchConfigFiscalById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Configfiscal> response = new InternalResultsResponse<Configfiscal>();
+	InternalResultsResponse<ConfigFiscal> response = new InternalResultsResponse<ConfigFiscal>();
 	// validate fetchId field
 	if (ValidationUtil.isNull(request.getFetchId()))
 	{
@@ -1051,7 +1070,7 @@ public InternalResultsResponse<Configfiscal> fetchConfigfiscalById(FetchByIdRequ
 	}
 	else
 	{
-		response.getResultsList().add(getConfiguracaoBAR().fetchConfigfiscalById(request));
+		response.getResultsList().add(getConfiguracaoBAR().fetchConfigFiscalById(request));
 	}
 
 	return response;
@@ -1059,13 +1078,13 @@ public InternalResultsResponse<Configfiscal> fetchConfigfiscalById(FetchByIdRequ
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfigfiscalBAC#fetchConfigfiscalsByRequest(com.qat.samples.sysmgmt.model.request.
+ * @see com.qat.samples.sysmgmt.bac.IConfigFiscalBAC#fetchConfigFiscalsByRequest(com.qat.samples.sysmgmt.model.request.
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<Configfiscal> fetchConfigfiscalsByRequest(ConfigfiscalInquiryRequest request)
+public InternalResultsResponse<ConfigFiscal> fetchConfigFiscalsByRequest(PagedInquiryRequest request)
 {
-	return getConfiguracaoBAR().fetchConfigfiscalsByRequest(request);
+	return getConfiguracaoBAR().fetchConfigFiscalsByRequest(request);
 }
 
 /**
@@ -1076,27 +1095,27 @@ public InternalResultsResponse<Configfiscal> fetchConfigfiscalsByRequest(Configf
  * @param request the request
  * @return the configfiscal response
  */
-private InternalResultsResponse<Configfiscal> processConfigfiscal(ValidationContextIndicator indicator,
+private InternalResultsResponse<ConfigFiscal> processConfigFiscal(ValidationContextIndicator indicator,
 		PersistenceActionEnum persistType,
-		ConfigfiscalMaintenanceRequest request)
+		ConfigFiscalMaintenanceRequest request)
 		{
-	InternalResultsResponse<Configfiscal> response = null;
+	InternalResultsResponse<ConfigFiscal> response = null;
 
 	// Validate
-	ValidationContext context = new ValidationContext(Configfiscal.class.getSimpleName(), request.getConfigfiscal(), indicator);
+	ValidationContext context = new ValidationContext(ConfigFiscal.class.getSimpleName(), request.getConfigFiscal(), indicator);
 	if (!getValidationController().validate(context))
 	{
-		response = new InternalResultsResponse<Configfiscal>();
+		response = new InternalResultsResponse<ConfigFiscal>();
 		response.setStatus(SystemErrorCategory.SystemValidation);
 		response.addMessages(context.getMessages());
 		return response;
 	}
 
 		// Persist
-		InternalResponse internalResponse = doPersistenceConfigfiscal(request.getConfigfiscal(), persistType);
+		InternalResponse internalResponse = doPersistenceConfigFiscal(request.getConfigFiscal(), persistType);
 		if (internalResponse.isInError())
 		{
-			response = new InternalResultsResponse<Configfiscal>();
+			response = new InternalResultsResponse<ConfigFiscal>();
 			response.setStatus(internalResponse.getError());
 			response.addMessages(internalResponse.getMessageInfoList());
 			response.addMessage(DEFAULT_CONFIGURACAO_BAC_EXCEPTION_MSG, MessageSeverity.Error,
@@ -1107,30 +1126,30 @@ private InternalResultsResponse<Configfiscal> processConfigfiscal(ValidationCont
 
 		// Call maintainReurnList to see if we need to return the configfiscal list and if so whether it should be paged or
 		// not
-		response = maintainReturnListConfigfiscal(request.getReturnList(), request.getReturnListPaged(),new Configfiscal());
+		response = maintainReturnListConfigFiscal(request.getReturnList(), request.getReturnListPaged(),new ConfigFiscal());
 
 		return response;
 			}
 
 	/**
-	 * Do persistenceConfigfiscal.
+	 * Do persistenceConfigFiscal.
 	 *
 	 * @param request the request
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistenceConfigfiscal(Configfiscal configfiscal, PersistenceActionEnum updateType)
+	private InternalResponse doPersistenceConfigFiscal(ConfigFiscal configfiscal, PersistenceActionEnum updateType)
 	{
 		switch (updateType)
 		{
 			case INSERT:
-				return getConfiguracaoBAR().insertConfigfiscal(configfiscal);
+				return getConfiguracaoBAR().insertConfigFiscal(configfiscal);
 
 			case UPDATE:
-				return getConfiguracaoBAR().updateConfigfiscal(configfiscal);
+				return getConfiguracaoBAR().updateConfigFiscal(configfiscal);
 
 			case DELETE:
-				return getConfiguracaoBAR().deleteConfigfiscalById(configfiscal);
+				return getConfiguracaoBAR().deleteConfigFiscalById(configfiscal);
 			default:
 				if (LOG.isDebugEnabled())
 				{
@@ -1148,7 +1167,7 @@ private InternalResultsResponse<Configfiscal> processConfigfiscal(ValidationCont
 	 * @param request the request
 	 * @param response the response
 	 */
-	private InternalResultsResponse<Configfiscal> maintainReturnListConfigfiscal(Boolean listIndicator, Boolean pageListIndicator,Configfiscal configfiscal)
+	private InternalResultsResponse<ConfigFiscal> maintainReturnListConfigFiscal(Boolean listIndicator, Boolean pageListIndicator,ConfigFiscal configfiscal)
 	{
 		// Fetch again if requested.
 		if (listIndicator)
@@ -1156,19 +1175,19 @@ private InternalResultsResponse<Configfiscal> processConfigfiscal(ValidationCont
 			// Fetch Paged is requested.
 			if (pageListIndicator)
 			{
-				ConfigfiscalInquiryRequest request = new ConfigfiscalInquiryRequest();
+				PagedInquiryRequest request = new PagedInquiryRequest();
 				request.setPreQueryCount(true);
-				return fetchConfigfiscalsByRequest(request);
+				return fetchConfigFiscalsByRequest(request);
 			}
 			else
 			{
 				// otherwise return all rows not paged
-				return fetchAllConfigfiscals(configfiscal);
+				return fetchAllConfigFiscals(configfiscal);
 			}
 		}
 		else
 		{
-			return new InternalResultsResponse<Configfiscal>();
+			return new InternalResultsResponse<ConfigFiscal>();
 		}
 	}
 
@@ -1178,88 +1197,88 @@ private InternalResultsResponse<Configfiscal> processConfigfiscal(ValidationCont
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.ICountyBAC#insertConfigalertas(com.qat.samples.sysmgmt.model.request.ConfigalertasMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.ICountyBAC#insertConfigAlertas(com.qat.samples.sysmgmt.model.request.ConfigAlertasMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configalertas> insertConfigalertas(ConfigalertasMaintenanceRequest request)
+public InternalResultsResponse<ConfigAlertas> insertConfigAlertas(ConfigAlertasMaintenanceRequest request)
 {
-	InternalResultsResponse<Configalertas> response =
-			processConfigalertas(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+	InternalResultsResponse<ConfigAlertas> response =
+			processConfigAlertas(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfigalertasBAC#updateConfigalertas(com.qat.samples.sysmgmt.model.request.ConfigalertasMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IConfigAlertasBAC#updateConfigAlertas(com.qat.samples.sysmgmt.model.request.ConfigAlertasMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configalertas> updateConfigalertas(ConfigalertasMaintenanceRequest request)
+public InternalResultsResponse<ConfigAlertas> updateConfigAlertas(ConfigAlertasMaintenanceRequest request)
 {
-	InternalResultsResponse<Configalertas> response =
-			processConfigalertas(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+	InternalResultsResponse<ConfigAlertas> response =
+			processConfigAlertas(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfigalertasBAC#deleteConfigalertas(com.qat.samples.sysmgmt.model.request.ConfigalertasMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IConfigAlertasBAC#deleteConfigAlertas(com.qat.samples.sysmgmt.model.request.ConfigAlertasMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configalertas> deleteConfigalertas(ConfigalertasMaintenanceRequest request)
+public InternalResultsResponse<ConfigAlertas> deleteConfigAlertas(ConfigAlertasMaintenanceRequest request)
 {
-	InternalResultsResponse<Configalertas> response =
-			processConfigalertas(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+	InternalResultsResponse<ConfigAlertas> response =
+			processConfigAlertas(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfigalertasBAC#refreshConfigalertass(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+ * @see com.qat.samples.sysmgmt.bac.IConfigAlertasBAC#refreshConfigAlertass(com.qat.samples.sysmgmt.model.request.RefreshRequest)
  */
 @Override
-public InternalResultsResponse<Configalertas> refreshConfigalertass(RefreshRequest request)
+public InternalResultsResponse<ConfigAlertas> refreshConfigAlertass(RefreshRequest request)
 {
 	// This method is demo code only. Do not view this as a QAT Global Standard.
-	getConfiguracaoBAR().deleteAllConfigalertass();
+	getConfiguracaoBAR().deleteAllConfigAlertass();
 	int refreshNumber = request.getRefreshInt();
 	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
 
 	for (int i = 1; i <= refreshNumber; i++)
 	{
-	getConfiguracaoBAR().insertConfigalertas(new Configalertas(i, "ConfigalertasDesc" + i));
+	getConfiguracaoBAR().insertConfigAlertas(new ConfigAlertas(i, "ConfigAlertasDesc" + i));
 	}
 
 	// Call maintain to see if we need to return the configalertas list and if so whether it should be paged or not
-	return maintainReturnListConfigalertas(request.getReturnList(), request.getReturnListPaged(),new Configalertas());
+	return maintainReturnListConfigAlertas(request.getReturnList(), request.getReturnListPaged(),new ConfigAlertas());
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfigalertasBAC#fetchAllConfigalertass(Configalertas configalertas)
+ * @see com.qat.samples.sysmgmt.bac.IConfigAlertasBAC#fetchAllConfigAlertass(ConfigAlertas configalertas)
  */
 @Override
-public InternalResultsResponse<Configalertas> fetchAllConfigalertass(Configalertas configalertas)
+public InternalResultsResponse<ConfigAlertas> fetchAllConfigAlertass(ConfigAlertas configalertas)
 {
-	InternalResultsResponse<Configalertas> response = new InternalResultsResponse<Configalertas>();
-	response.getResultsList().addAll(getConfiguracaoBAR().fetchAllConfigalertass(configalertas).getResultsList());
+	InternalResultsResponse<ConfigAlertas> response = new InternalResultsResponse<ConfigAlertas>();
+	response.getResultsList().addAll(getConfiguracaoBAR().fetchAllConfigAlertass(configalertas).getResultsList());
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfigalertasBAC#fetchConfigalertasById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * com.qat.samples.sysmgmt.bac.IConfigAlertasBAC#fetchConfigAlertasById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configalertas> fetchConfigalertasById(FetchByIdRequest request)
+public InternalResultsResponse<ConfigAlertas> fetchConfigAlertasById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Configalertas> response = new InternalResultsResponse<Configalertas>();
+	InternalResultsResponse<ConfigAlertas> response = new InternalResultsResponse<ConfigAlertas>();
 	// validate fetchId field
 	if (ValidationUtil.isNull(request.getFetchId()))
 	{
@@ -1268,7 +1287,7 @@ public InternalResultsResponse<Configalertas> fetchConfigalertasById(FetchByIdRe
 	}
 	else
 	{
-		response.getResultsList().add(getConfiguracaoBAR().fetchConfigalertasById(request));
+		response.getResultsList().add(getConfiguracaoBAR().fetchConfigAlertasById(request));
 	}
 
 	return response;
@@ -1276,13 +1295,13 @@ public InternalResultsResponse<Configalertas> fetchConfigalertasById(FetchByIdRe
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfigalertasBAC#fetchConfigalertassByRequest(com.qat.samples.sysmgmt.model.request.
+ * @see com.qat.samples.sysmgmt.bac.IConfigAlertasBAC#fetchConfigAlertassByRequest(com.qat.samples.sysmgmt.model.request.
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<Configalertas> fetchConfigalertassByRequest(ConfigalertasInquiryRequest request)
+public InternalResultsResponse<ConfigAlertas> fetchConfigAlertassByRequest(PagedInquiryRequest request)
 {
-	return getConfiguracaoBAR().fetchConfigalertassByRequest(request);
+	return getConfiguracaoBAR().fetchConfigAlertassByRequest(request);
 }
 
 /**
@@ -1293,27 +1312,27 @@ public InternalResultsResponse<Configalertas> fetchConfigalertassByRequest(Confi
  * @param request the request
  * @return the configalertas response
  */
-private InternalResultsResponse<Configalertas> processConfigalertas(ValidationContextIndicator indicator,
+private InternalResultsResponse<ConfigAlertas> processConfigAlertas(ValidationContextIndicator indicator,
 		PersistenceActionEnum persistType,
-		ConfigalertasMaintenanceRequest request)
+		ConfigAlertasMaintenanceRequest request)
 		{
-	InternalResultsResponse<Configalertas> response = null;
+	InternalResultsResponse<ConfigAlertas> response = null;
 
 	// Validate
-	ValidationContext context = new ValidationContext(Configalertas.class.getSimpleName(), request.getConfigalertas(), indicator);
+	ValidationContext context = new ValidationContext(ConfigAlertas.class.getSimpleName(), request.getConfigAlertas(), indicator);
 	if (!getValidationController().validate(context))
 	{
-		response = new InternalResultsResponse<Configalertas>();
+		response = new InternalResultsResponse<ConfigAlertas>();
 		response.setStatus(SystemErrorCategory.SystemValidation);
 		response.addMessages(context.getMessages());
 		return response;
 	}
 
 		// Persist
-		InternalResponse internalResponse = doPersistenceConfigalertas(request.getConfigalertas(), persistType);
+		InternalResponse internalResponse = doPersistenceConfigAlertas(request.getConfigAlertas(), persistType);
 		if (internalResponse.isInError())
 		{
-			response = new InternalResultsResponse<Configalertas>();
+			response = new InternalResultsResponse<ConfigAlertas>();
 			response.setStatus(internalResponse.getError());
 			response.addMessages(internalResponse.getMessageInfoList());
 			response.addMessage(DEFAULT_CONFIGURACAO_BAC_EXCEPTION_MSG, MessageSeverity.Error,
@@ -1324,30 +1343,30 @@ private InternalResultsResponse<Configalertas> processConfigalertas(ValidationCo
 
 		// Call maintainReurnList to see if we need to return the configalertas list and if so whether it should be paged or
 		// not
-		response = maintainReturnListConfigalertas(request.getReturnList(), request.getReturnListPaged(),new Configalertas());
+		response = maintainReturnListConfigAlertas(request.getReturnList(), request.getReturnListPaged(),new ConfigAlertas());
 
 		return response;
 			}
 
 	/**
-	 * Do persistenceConfigalertas.
+	 * Do persistenceConfigAlertas.
 	 *
 	 * @param request the request
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistenceConfigalertas(Configalertas configalertas, PersistenceActionEnum updateType)
+	private InternalResponse doPersistenceConfigAlertas(ConfigAlertas configalertas, PersistenceActionEnum updateType)
 	{
 		switch (updateType)
 		{
 			case INSERT:
-				return getConfiguracaoBAR().insertConfigalertas(configalertas);
+				return getConfiguracaoBAR().insertConfigAlertas(configalertas);
 
 			case UPDATE:
-				return getConfiguracaoBAR().updateConfigalertas(configalertas);
+				return getConfiguracaoBAR().updateConfigAlertas(configalertas);
 
 			case DELETE:
-				return getConfiguracaoBAR().deleteConfigalertasById(configalertas);
+				return getConfiguracaoBAR().deleteConfigAlertasById(configalertas);
 			default:
 				if (LOG.isDebugEnabled())
 				{
@@ -1365,7 +1384,7 @@ private InternalResultsResponse<Configalertas> processConfigalertas(ValidationCo
 	 * @param request the request
 	 * @param response the response
 	 */
-	private InternalResultsResponse<Configalertas> maintainReturnListConfigalertas(Boolean listIndicator, Boolean pageListIndicator,Configalertas configalertas)
+	private InternalResultsResponse<ConfigAlertas> maintainReturnListConfigAlertas(Boolean listIndicator, Boolean pageListIndicator,ConfigAlertas configalertas)
 	{
 		// Fetch again if requested.
 		if (listIndicator)
@@ -1373,19 +1392,19 @@ private InternalResultsResponse<Configalertas> processConfigalertas(ValidationCo
 			// Fetch Paged is requested.
 			if (pageListIndicator)
 			{
-				ConfigalertasInquiryRequest request = new ConfigalertasInquiryRequest();
+				PagedInquiryRequest request = new PagedInquiryRequest();
 				request.setPreQueryCount(true);
-				return fetchConfigalertassByRequest(request);
+				return fetchConfigAlertassByRequest(request);
 			}
 			else
 			{
 				// otherwise return all rows not paged
-				return fetchAllConfigalertass(configalertas);
+				return fetchAllConfigAlertass(configalertas);
 			}
 		}
 		else
 		{
-			return new InternalResultsResponse<Configalertas>();
+			return new InternalResultsResponse<ConfigAlertas>();
 		}
 	}
 
@@ -1395,88 +1414,88 @@ private InternalResultsResponse<Configalertas> processConfigalertas(ValidationCo
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.ICountyBAC#insertConfiggeral(com.qat.samples.sysmgmt.model.request.ConfiggeralMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.ICountyBAC#insertConfigGeral(com.qat.samples.sysmgmt.model.request.ConfigGeralMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configgeral> insertConfiggeral(ConfiggeralMaintenanceRequest request)
+public InternalResultsResponse<ConfigGeral> insertConfigGeral(ConfigGeralMaintenanceRequest request)
 {
-	InternalResultsResponse<Configgeral> response =
-			processConfiggeral(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+	InternalResultsResponse<ConfigGeral> response =
+			processConfigGeral(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfiggeralBAC#updateConfiggeral(com.qat.samples.sysmgmt.model.request.ConfiggeralMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IConfigGeralBAC#updateConfigGeral(com.qat.samples.sysmgmt.model.request.ConfigGeralMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configgeral> updateConfiggeral(ConfiggeralMaintenanceRequest request)
+public InternalResultsResponse<ConfigGeral> updateConfigGeral(ConfigGeralMaintenanceRequest request)
 {
-	InternalResultsResponse<Configgeral> response =
-			processConfiggeral(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+	InternalResultsResponse<ConfigGeral> response =
+			processConfigGeral(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfiggeralBAC#deleteConfiggeral(com.qat.samples.sysmgmt.model.request.ConfiggeralMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IConfigGeralBAC#deleteConfigGeral(com.qat.samples.sysmgmt.model.request.ConfigGeralMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configgeral> deleteConfiggeral(ConfiggeralMaintenanceRequest request)
+public InternalResultsResponse<ConfigGeral> deleteConfigGeral(ConfigGeralMaintenanceRequest request)
 {
-	InternalResultsResponse<Configgeral> response =
-			processConfiggeral(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+	InternalResultsResponse<ConfigGeral> response =
+			processConfigGeral(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfiggeralBAC#refreshConfiggerals(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+ * @see com.qat.samples.sysmgmt.bac.IConfigGeralBAC#refreshConfigGerals(com.qat.samples.sysmgmt.model.request.RefreshRequest)
  */
 @Override
-public InternalResultsResponse<Configgeral> refreshConfiggerals(RefreshRequest request)
+public InternalResultsResponse<ConfigGeral> refreshConfigGerals(RefreshRequest request)
 {
 	// This method is demo code only. Do not view this as a QAT Global Standard.
-	getConfiguracaoBAR().deleteAllConfiggerals();
+	getConfiguracaoBAR().deleteAllConfigGerals();
 	int refreshNumber = request.getRefreshInt();
 	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
 
 	for (int i = 1; i <= refreshNumber; i++)
 	{
-	getConfiguracaoBAR().insertConfiggeral(new Configgeral(i, "ConfiggeralDesc" + i));
+	getConfiguracaoBAR().insertConfigGeral(new ConfigGeral(i, "ConfigGeralDesc" + i));
 	}
 
 	// Call maintain to see if we need to return the configgeral list and if so whether it should be paged or not
-	return maintainReturnListConfiggeral(request.getReturnList(), request.getReturnListPaged(),new Configgeral());
+	return maintainReturnListConfigGeral(request.getReturnList(), request.getReturnListPaged(),new ConfigGeral());
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfiggeralBAC#fetchAllConfiggerals(Configgeral configgeral)
+ * @see com.qat.samples.sysmgmt.bac.IConfigGeralBAC#fetchAllConfigGerals(ConfigGeral configgeral)
  */
 @Override
-public InternalResultsResponse<Configgeral> fetchAllConfiggerals(Configgeral configgeral)
+public InternalResultsResponse<ConfigGeral> fetchAllConfigGerals(ConfigGeral configgeral)
 {
-	InternalResultsResponse<Configgeral> response = new InternalResultsResponse<Configgeral>();
-	response.getResultsList().addAll(getConfiguracaoBAR().fetchAllConfiggerals(configgeral).getResultsList());
+	InternalResultsResponse<ConfigGeral> response = new InternalResultsResponse<ConfigGeral>();
+	response.getResultsList().addAll(getConfiguracaoBAR().fetchAllConfigGerals(configgeral).getResultsList());
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfiggeralBAC#fetchConfiggeralById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * com.qat.samples.sysmgmt.bac.IConfigGeralBAC#fetchConfigGeralById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configgeral> fetchConfiggeralById(FetchByIdRequest request)
+public InternalResultsResponse<ConfigGeral> fetchConfigGeralById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Configgeral> response = new InternalResultsResponse<Configgeral>();
+	InternalResultsResponse<ConfigGeral> response = new InternalResultsResponse<ConfigGeral>();
 	// validate fetchId field
 	if (ValidationUtil.isNull(request.getFetchId()))
 	{
@@ -1485,7 +1504,7 @@ public InternalResultsResponse<Configgeral> fetchConfiggeralById(FetchByIdReques
 	}
 	else
 	{
-		response.getResultsList().add(getConfiguracaoBAR().fetchConfiggeralById(request));
+		response.getResultsList().add(getConfiguracaoBAR().fetchConfigGeralById(request));
 	}
 
 	return response;
@@ -1493,13 +1512,13 @@ public InternalResultsResponse<Configgeral> fetchConfiggeralById(FetchByIdReques
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfiggeralBAC#fetchConfiggeralsByRequest(com.qat.samples.sysmgmt.model.request.
+ * @see com.qat.samples.sysmgmt.bac.IConfigGeralBAC#fetchConfigGeralsByRequest(com.qat.samples.sysmgmt.model.request.
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<Configgeral> fetchConfiggeralsByRequest(ConfiggeralInquiryRequest request)
+public InternalResultsResponse<ConfigGeral> fetchConfigGeralsByRequest(PagedInquiryRequest request)
 {
-	return getConfiguracaoBAR().fetchConfiggeralsByRequest(request);
+	return getConfiguracaoBAR().fetchConfigGeralsByRequest(request);
 }
 
 /**
@@ -1510,27 +1529,27 @@ public InternalResultsResponse<Configgeral> fetchConfiggeralsByRequest(Configger
  * @param request the request
  * @return the configgeral response
  */
-private InternalResultsResponse<Configgeral> processConfiggeral(ValidationContextIndicator indicator,
+private InternalResultsResponse<ConfigGeral> processConfigGeral(ValidationContextIndicator indicator,
 		PersistenceActionEnum persistType,
-		ConfiggeralMaintenanceRequest request)
+		ConfigGeralMaintenanceRequest request)
 		{
-	InternalResultsResponse<Configgeral> response = null;
+	InternalResultsResponse<ConfigGeral> response = null;
 
 	// Validate
-	ValidationContext context = new ValidationContext(Configgeral.class.getSimpleName(), request.getConfiggeral(), indicator);
+	ValidationContext context = new ValidationContext(ConfigGeral.class.getSimpleName(), request.getConfigGeral(), indicator);
 	if (!getValidationController().validate(context))
 	{
-		response = new InternalResultsResponse<Configgeral>();
+		response = new InternalResultsResponse<ConfigGeral>();
 		response.setStatus(SystemErrorCategory.SystemValidation);
 		response.addMessages(context.getMessages());
 		return response;
 	}
 
 		// Persist
-		InternalResponse internalResponse = doPersistenceConfiggeral(request.getConfiggeral(), persistType);
+		InternalResponse internalResponse = doPersistenceConfigGeral(request.getConfigGeral(), persistType);
 		if (internalResponse.isInError())
 		{
-			response = new InternalResultsResponse<Configgeral>();
+			response = new InternalResultsResponse<ConfigGeral>();
 			response.setStatus(internalResponse.getError());
 			response.addMessages(internalResponse.getMessageInfoList());
 			response.addMessage(DEFAULT_CONFIGURACAO_BAC_EXCEPTION_MSG, MessageSeverity.Error,
@@ -1541,30 +1560,30 @@ private InternalResultsResponse<Configgeral> processConfiggeral(ValidationContex
 
 		// Call maintainReurnList to see if we need to return the configgeral list and if so whether it should be paged or
 		// not
-		response = maintainReturnListConfiggeral(request.getReturnList(), request.getReturnListPaged(),new Configgeral());
+		response = maintainReturnListConfigGeral(request.getReturnList(), request.getReturnListPaged(),new ConfigGeral());
 
 		return response;
 			}
 
 	/**
-	 * Do persistenceConfiggeral.
+	 * Do persistenceConfigGeral.
 	 *
 	 * @param request the request
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistenceConfiggeral(Configgeral configgeral, PersistenceActionEnum updateType)
+	private InternalResponse doPersistenceConfigGeral(ConfigGeral configgeral, PersistenceActionEnum updateType)
 	{
 		switch (updateType)
 		{
 			case INSERT:
-				return getConfiguracaoBAR().insertConfiggeral(configgeral);
+				return getConfiguracaoBAR().insertConfigGeral(configgeral);
 
 			case UPDATE:
-				return getConfiguracaoBAR().updateConfiggeral(configgeral);
+				return getConfiguracaoBAR().updateConfigGeral(configgeral);
 
 			case DELETE:
-				return getConfiguracaoBAR().deleteConfiggeralById(configgeral);
+				return getConfiguracaoBAR().deleteConfigGeralById(configgeral);
 			default:
 				if (LOG.isDebugEnabled())
 				{
@@ -1582,7 +1601,7 @@ private InternalResultsResponse<Configgeral> processConfiggeral(ValidationContex
 	 * @param request the request
 	 * @param response the response
 	 */
-	private InternalResultsResponse<Configgeral> maintainReturnListConfiggeral(Boolean listIndicator, Boolean pageListIndicator,Configgeral configgeral)
+	private InternalResultsResponse<ConfigGeral> maintainReturnListConfigGeral(Boolean listIndicator, Boolean pageListIndicator,ConfigGeral configgeral)
 	{
 		// Fetch again if requested.
 		if (listIndicator)
@@ -1590,19 +1609,19 @@ private InternalResultsResponse<Configgeral> processConfiggeral(ValidationContex
 			// Fetch Paged is requested.
 			if (pageListIndicator)
 			{
-				ConfiggeralInquiryRequest request = new ConfiggeralInquiryRequest();
+				PagedInquiryRequest request = new PagedInquiryRequest();
 				request.setPreQueryCount(true);
-				return fetchConfiggeralsByRequest(request);
+				return fetchConfigGeralsByRequest(request);
 			}
 			else
 			{
 				// otherwise return all rows not paged
-				return fetchAllConfiggerals(configgeral);
+				return fetchAllConfigGerals(configgeral);
 			}
 		}
 		else
 		{
-			return new InternalResultsResponse<Configgeral>();
+			return new InternalResultsResponse<ConfigGeral>();
 		}
 	}
 
@@ -1612,88 +1631,88 @@ private InternalResultsResponse<Configgeral> processConfiggeral(ValidationContex
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.ICountyBAC#insertConfigproduto(com.qat.samples.sysmgmt.model.request.ConfigprodutoMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.ICountyBAC#insertConfigProduto(com.qat.samples.sysmgmt.model.request.ConfigProdutoMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configproduto> insertConfigproduto(ConfigprodutoMaintenanceRequest request)
+public InternalResultsResponse<ConfigProduto> insertConfigProduto(ConfigProdutoMaintenanceRequest request)
 {
-	InternalResultsResponse<Configproduto> response =
-			processConfigproduto(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+	InternalResultsResponse<ConfigProduto> response =
+			processConfigProduto(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfigprodutoBAC#updateConfigproduto(com.qat.samples.sysmgmt.model.request.ConfigprodutoMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IConfigProdutoBAC#updateConfigProduto(com.qat.samples.sysmgmt.model.request.ConfigProdutoMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configproduto> updateConfigproduto(ConfigprodutoMaintenanceRequest request)
+public InternalResultsResponse<ConfigProduto> updateConfigProduto(ConfigProdutoMaintenanceRequest request)
 {
-	InternalResultsResponse<Configproduto> response =
-			processConfigproduto(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+	InternalResultsResponse<ConfigProduto> response =
+			processConfigProduto(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfigprodutoBAC#deleteConfigproduto(com.qat.samples.sysmgmt.model.request.ConfigprodutoMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IConfigProdutoBAC#deleteConfigProduto(com.qat.samples.sysmgmt.model.request.ConfigProdutoMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configproduto> deleteConfigproduto(ConfigprodutoMaintenanceRequest request)
+public InternalResultsResponse<ConfigProduto> deleteConfigProduto(ConfigProdutoMaintenanceRequest request)
 {
-	InternalResultsResponse<Configproduto> response =
-			processConfigproduto(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+	InternalResultsResponse<ConfigProduto> response =
+			processConfigProduto(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfigprodutoBAC#refreshConfigprodutos(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+ * @see com.qat.samples.sysmgmt.bac.IConfigProdutoBAC#refreshConfigProdutos(com.qat.samples.sysmgmt.model.request.RefreshRequest)
  */
 @Override
-public InternalResultsResponse<Configproduto> refreshConfigprodutos(RefreshRequest request)
+public InternalResultsResponse<ConfigProduto> refreshConfigProdutos(RefreshRequest request)
 {
 	// This method is demo code only. Do not view this as a QAT Global Standard.
-	getConfiguracaoBAR().deleteAllConfigprodutos();
+	getConfiguracaoBAR().deleteAllConfigProdutos();
 	int refreshNumber = request.getRefreshInt();
 	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
 
 	for (int i = 1; i <= refreshNumber; i++)
 	{
-	getConfiguracaoBAR().insertConfigproduto(new Configproduto(i, "ConfigprodutoDesc" + i));
+	getConfiguracaoBAR().insertConfigProduto(new ConfigProduto(i, "ConfigProdutoDesc" + i));
 	}
 
 	// Call maintain to see if we need to return the configproduto list and if so whether it should be paged or not
-	return maintainReturnListConfigproduto(request.getReturnList(), request.getReturnListPaged(),new Configproduto());
+	return maintainReturnListConfigProduto(request.getReturnList(), request.getReturnListPaged(),new ConfigProduto());
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfigprodutoBAC#fetchAllConfigprodutos(Configproduto configproduto)
+ * @see com.qat.samples.sysmgmt.bac.IConfigProdutoBAC#fetchAllConfigProdutos(ConfigProduto configproduto)
  */
 @Override
-public InternalResultsResponse<Configproduto> fetchAllConfigprodutos(Configproduto configproduto)
+public InternalResultsResponse<ConfigProduto> fetchAllConfigProdutos(ConfigProduto configproduto)
 {
-	InternalResultsResponse<Configproduto> response = new InternalResultsResponse<Configproduto>();
-	response.getResultsList().addAll(getConfiguracaoBAR().fetchAllConfigprodutos(configproduto).getResultsList());
+	InternalResultsResponse<ConfigProduto> response = new InternalResultsResponse<ConfigProduto>();
+	response.getResultsList().addAll(getConfiguracaoBAR().fetchAllConfigProdutos(configproduto).getResultsList());
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfigprodutoBAC#fetchConfigprodutoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * com.qat.samples.sysmgmt.bac.IConfigProdutoBAC#fetchConfigProdutoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configproduto> fetchConfigprodutoById(FetchByIdRequest request)
+public InternalResultsResponse<ConfigProduto> fetchConfigProdutoById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Configproduto> response = new InternalResultsResponse<Configproduto>();
+	InternalResultsResponse<ConfigProduto> response = new InternalResultsResponse<ConfigProduto>();
 	// validate fetchId field
 	if (ValidationUtil.isNull(request.getFetchId()))
 	{
@@ -1702,7 +1721,7 @@ public InternalResultsResponse<Configproduto> fetchConfigprodutoById(FetchByIdRe
 	}
 	else
 	{
-		response.getResultsList().add(getConfiguracaoBAR().fetchConfigprodutoById(request));
+		response.getResultsList().add(getConfiguracaoBAR().fetchConfigProdutoById(request));
 	}
 
 	return response;
@@ -1710,13 +1729,13 @@ public InternalResultsResponse<Configproduto> fetchConfigprodutoById(FetchByIdRe
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfigprodutoBAC#fetchConfigprodutosByRequest(com.qat.samples.sysmgmt.model.request.
+ * @see com.qat.samples.sysmgmt.bac.IConfigProdutoBAC#fetchConfigProdutosByRequest(com.qat.samples.sysmgmt.model.request.
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<Configproduto> fetchConfigprodutosByRequest(ConfigprodutoInquiryRequest request)
+public InternalResultsResponse<ConfigProduto> fetchConfigProdutosByRequest(PagedInquiryRequest request)
 {
-	return getConfiguracaoBAR().fetchConfigprodutosByRequest(request);
+	return getConfiguracaoBAR().fetchConfigProdutosByRequest(request);
 }
 
 /**
@@ -1727,27 +1746,27 @@ public InternalResultsResponse<Configproduto> fetchConfigprodutosByRequest(Confi
  * @param request the request
  * @return the configproduto response
  */
-private InternalResultsResponse<Configproduto> processConfigproduto(ValidationContextIndicator indicator,
+private InternalResultsResponse<ConfigProduto> processConfigProduto(ValidationContextIndicator indicator,
 		PersistenceActionEnum persistType,
-		ConfigprodutoMaintenanceRequest request)
+		ConfigProdutoMaintenanceRequest request)
 		{
-	InternalResultsResponse<Configproduto> response = null;
+	InternalResultsResponse<ConfigProduto> response = null;
 
 	// Validate
-	ValidationContext context = new ValidationContext(Configproduto.class.getSimpleName(), request.getConfigproduto(), indicator);
+	ValidationContext context = new ValidationContext(ConfigProduto.class.getSimpleName(), request.getConfigProduto(), indicator);
 	if (!getValidationController().validate(context))
 	{
-		response = new InternalResultsResponse<Configproduto>();
+		response = new InternalResultsResponse<ConfigProduto>();
 		response.setStatus(SystemErrorCategory.SystemValidation);
 		response.addMessages(context.getMessages());
 		return response;
 	}
 
 		// Persist
-		InternalResponse internalResponse = doPersistenceConfigproduto(request.getConfigproduto(), persistType);
+		InternalResponse internalResponse = doPersistenceConfigProduto(request.getConfigProduto(), persistType);
 		if (internalResponse.isInError())
 		{
-			response = new InternalResultsResponse<Configproduto>();
+			response = new InternalResultsResponse<ConfigProduto>();
 			response.setStatus(internalResponse.getError());
 			response.addMessages(internalResponse.getMessageInfoList());
 			response.addMessage(DEFAULT_CONFIGURACAO_BAC_EXCEPTION_MSG, MessageSeverity.Error,
@@ -1758,30 +1777,30 @@ private InternalResultsResponse<Configproduto> processConfigproduto(ValidationCo
 
 		// Call maintainReurnList to see if we need to return the configproduto list and if so whether it should be paged or
 		// not
-		response = maintainReturnListConfigproduto(request.getReturnList(), request.getReturnListPaged(),new Configproduto());
+		response = maintainReturnListConfigProduto(request.getReturnList(), request.getReturnListPaged(),new ConfigProduto());
 
 		return response;
 			}
 
 	/**
-	 * Do persistenceConfigproduto.
+	 * Do persistenceConfigProduto.
 	 *
 	 * @param request the request
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistenceConfigproduto(Configproduto configproduto, PersistenceActionEnum updateType)
+	private InternalResponse doPersistenceConfigProduto(ConfigProduto configproduto, PersistenceActionEnum updateType)
 	{
 		switch (updateType)
 		{
 			case INSERT:
-				return getConfiguracaoBAR().insertConfigproduto(configproduto);
+				return getConfiguracaoBAR().insertConfigProduto(configproduto);
 
 			case UPDATE:
-				return getConfiguracaoBAR().updateConfigproduto(configproduto);
+				return getConfiguracaoBAR().updateConfigProduto(configproduto);
 
 			case DELETE:
-				return getConfiguracaoBAR().deleteConfigprodutoById(configproduto);
+				return getConfiguracaoBAR().deleteConfigProdutoById(configproduto);
 			default:
 				if (LOG.isDebugEnabled())
 				{
@@ -1799,7 +1818,7 @@ private InternalResultsResponse<Configproduto> processConfigproduto(ValidationCo
 	 * @param request the request
 	 * @param response the response
 	 */
-	private InternalResultsResponse<Configproduto> maintainReturnListConfigproduto(Boolean listIndicator, Boolean pageListIndicator,Configproduto configproduto)
+	private InternalResultsResponse<ConfigProduto> maintainReturnListConfigProduto(Boolean listIndicator, Boolean pageListIndicator,ConfigProduto configproduto)
 	{
 		// Fetch again if requested.
 		if (listIndicator)
@@ -1807,19 +1826,19 @@ private InternalResultsResponse<Configproduto> processConfigproduto(ValidationCo
 			// Fetch Paged is requested.
 			if (pageListIndicator)
 			{
-				ConfigprodutoInquiryRequest request = new ConfigprodutoInquiryRequest();
+				PagedInquiryRequest request = new PagedInquiryRequest();
 				request.setPreQueryCount(true);
-				return fetchConfigprodutosByRequest(request);
+				return fetchConfigProdutosByRequest(request);
 			}
 			else
 			{
 				// otherwise return all rows not paged
-				return fetchAllConfigprodutos(configproduto);
+				return fetchAllConfigProdutos(configproduto);
 			}
 		}
 		else
 		{
-			return new InternalResultsResponse<Configproduto>();
+			return new InternalResultsResponse<ConfigProduto>();
 		}
 	}
 
@@ -1829,88 +1848,88 @@ private InternalResultsResponse<Configproduto> processConfigproduto(ValidationCo
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.ICountyBAC#insertConfigsmtp(com.qat.samples.sysmgmt.model.request.ConfigsmtpMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.ICountyBAC#insertConfigSMTP(com.qat.samples.sysmgmt.model.request.ConfigSMTPMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configsmtp> insertConfigsmtp(ConfigsmtpMaintenanceRequest request)
+public InternalResultsResponse<ConfigSMTP> insertConfigSMTP(ConfigSMTPMaintenanceRequest request)
 {
-	InternalResultsResponse<Configsmtp> response =
-			processConfigsmtp(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+	InternalResultsResponse<ConfigSMTP> response =
+			processConfigSMTP(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfigsmtpBAC#updateConfigsmtp(com.qat.samples.sysmgmt.model.request.ConfigsmtpMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IConfigSMTPBAC#updateConfigSMTP(com.qat.samples.sysmgmt.model.request.ConfigSMTPMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configsmtp> updateConfigsmtp(ConfigsmtpMaintenanceRequest request)
+public InternalResultsResponse<ConfigSMTP> updateConfigSMTP(ConfigSMTPMaintenanceRequest request)
 {
-	InternalResultsResponse<Configsmtp> response =
-			processConfigsmtp(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+	InternalResultsResponse<ConfigSMTP> response =
+			processConfigSMTP(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfigsmtpBAC#deleteConfigsmtp(com.qat.samples.sysmgmt.model.request.ConfigsmtpMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IConfigSMTPBAC#deleteConfigSMTP(com.qat.samples.sysmgmt.model.request.ConfigSMTPMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configsmtp> deleteConfigsmtp(ConfigsmtpMaintenanceRequest request)
+public InternalResultsResponse<ConfigSMTP> deleteConfigSMTP(ConfigSMTPMaintenanceRequest request)
 {
-	InternalResultsResponse<Configsmtp> response =
-			processConfigsmtp(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+	InternalResultsResponse<ConfigSMTP> response =
+			processConfigSMTP(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfigsmtpBAC#refreshConfigsmtps(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+ * @see com.qat.samples.sysmgmt.bac.IConfigSMTPBAC#refreshConfigSMTPs(com.qat.samples.sysmgmt.model.request.RefreshRequest)
  */
 @Override
-public InternalResultsResponse<Configsmtp> refreshConfigsmtps(RefreshRequest request)
+public InternalResultsResponse<ConfigSMTP> refreshConfigSMTPs(RefreshRequest request)
 {
 	// This method is demo code only. Do not view this as a QAT Global Standard.
-	getConfiguracaoBAR().deleteAllConfigsmtps();
+	getConfiguracaoBAR().deleteAllConfigSMTPs();
 	int refreshNumber = request.getRefreshInt();
 	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
 
 	for (int i = 1; i <= refreshNumber; i++)
 	{
-	getConfiguracaoBAR().insertConfigsmtp(new Configsmtp(i, "ConfigsmtpDesc" + i));
+	getConfiguracaoBAR().insertConfigSMTP(new ConfigSMTP(i, "ConfigSMTPDesc" + i));
 	}
 
 	// Call maintain to see if we need to return the configsmtp list and if so whether it should be paged or not
-	return maintainReturnListConfigsmtp(request.getReturnList(), request.getReturnListPaged(),new Configsmtp());
+	return maintainReturnListConfigSMTP(request.getReturnList(), request.getReturnListPaged(),new ConfigSMTP());
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfigsmtpBAC#fetchAllConfigsmtps(Configsmtp configsmtp)
+ * @see com.qat.samples.sysmgmt.bac.IConfigSMTPBAC#fetchAllConfigSMTPs(ConfigSMTP configsmtp)
  */
 @Override
-public InternalResultsResponse<Configsmtp> fetchAllConfigsmtps(Configsmtp configsmtp)
+public InternalResultsResponse<ConfigSMTP> fetchAllConfigSMTPs(ConfigSMTP configsmtp)
 {
-	InternalResultsResponse<Configsmtp> response = new InternalResultsResponse<Configsmtp>();
-	response.getResultsList().addAll(getConfiguracaoBAR().fetchAllConfigsmtps(configsmtp).getResultsList());
+	InternalResultsResponse<ConfigSMTP> response = new InternalResultsResponse<ConfigSMTP>();
+	response.getResultsList().addAll(getConfiguracaoBAR().fetchAllConfigSMTPs(configsmtp).getResultsList());
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfigsmtpBAC#fetchConfigsmtpById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * com.qat.samples.sysmgmt.bac.IConfigSMTPBAC#fetchConfigSMTPById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configsmtp> fetchConfigsmtpById(FetchByIdRequest request)
+public InternalResultsResponse<ConfigSMTP> fetchConfigSMTPById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Configsmtp> response = new InternalResultsResponse<Configsmtp>();
+	InternalResultsResponse<ConfigSMTP> response = new InternalResultsResponse<ConfigSMTP>();
 	// validate fetchId field
 	if (ValidationUtil.isNull(request.getFetchId()))
 	{
@@ -1919,7 +1938,7 @@ public InternalResultsResponse<Configsmtp> fetchConfigsmtpById(FetchByIdRequest 
 	}
 	else
 	{
-		response.getResultsList().add(getConfiguracaoBAR().fetchConfigsmtpById(request));
+		response.getResultsList().add(getConfiguracaoBAR().fetchConfigSMTPById(request));
 	}
 
 	return response;
@@ -1927,13 +1946,13 @@ public InternalResultsResponse<Configsmtp> fetchConfigsmtpById(FetchByIdRequest 
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfigsmtpBAC#fetchConfigsmtpsByRequest(com.qat.samples.sysmgmt.model.request.
+ * @see com.qat.samples.sysmgmt.bac.IConfigSMTPBAC#fetchConfigSMTPsByRequest(com.qat.samples.sysmgmt.model.request.
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<Configsmtp> fetchConfigsmtpsByRequest(ConfigsmtpInquiryRequest request)
+public InternalResultsResponse<ConfigSMTP> fetchConfigSMTPsByRequest(PagedInquiryRequest request)
 {
-	return getConfiguracaoBAR().fetchConfigsmtpsByRequest(request);
+	return getConfiguracaoBAR().fetchConfigSMTPsByRequest(request);
 }
 
 /**
@@ -1944,27 +1963,27 @@ public InternalResultsResponse<Configsmtp> fetchConfigsmtpsByRequest(ConfigsmtpI
  * @param request the request
  * @return the configsmtp response
  */
-private InternalResultsResponse<Configsmtp> processConfigsmtp(ValidationContextIndicator indicator,
+private InternalResultsResponse<ConfigSMTP> processConfigSMTP(ValidationContextIndicator indicator,
 		PersistenceActionEnum persistType,
-		ConfigsmtpMaintenanceRequest request)
+		ConfigSMTPMaintenanceRequest request)
 		{
-	InternalResultsResponse<Configsmtp> response = null;
+	InternalResultsResponse<ConfigSMTP> response = null;
 
 	// Validate
-	ValidationContext context = new ValidationContext(Configsmtp.class.getSimpleName(), request.getConfigsmtp(), indicator);
+	ValidationContext context = new ValidationContext(ConfigSMTP.class.getSimpleName(), request.getConfigSMTP(), indicator);
 	if (!getValidationController().validate(context))
 	{
-		response = new InternalResultsResponse<Configsmtp>();
+		response = new InternalResultsResponse<ConfigSMTP>();
 		response.setStatus(SystemErrorCategory.SystemValidation);
 		response.addMessages(context.getMessages());
 		return response;
 	}
 
 		// Persist
-		InternalResponse internalResponse = doPersistenceConfigsmtp(request.getConfigsmtp(), persistType);
+		InternalResponse internalResponse = doPersistenceConfigSMTP(request.getConfigSMTP(), persistType);
 		if (internalResponse.isInError())
 		{
-			response = new InternalResultsResponse<Configsmtp>();
+			response = new InternalResultsResponse<ConfigSMTP>();
 			response.setStatus(internalResponse.getError());
 			response.addMessages(internalResponse.getMessageInfoList());
 			response.addMessage(DEFAULT_CONFIGURACAO_BAC_EXCEPTION_MSG, MessageSeverity.Error,
@@ -1975,30 +1994,30 @@ private InternalResultsResponse<Configsmtp> processConfigsmtp(ValidationContextI
 
 		// Call maintainReurnList to see if we need to return the configsmtp list and if so whether it should be paged or
 		// not
-		response = maintainReturnListConfigsmtp(request.getReturnList(), request.getReturnListPaged(),new Configsmtp());
+		response = maintainReturnListConfigSMTP(request.getReturnList(), request.getReturnListPaged(),new ConfigSMTP());
 
 		return response;
 			}
 
 	/**
-	 * Do persistenceConfigsmtp.
+	 * Do persistenceConfigSMTP.
 	 *
 	 * @param request the request
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistenceConfigsmtp(Configsmtp configsmtp, PersistenceActionEnum updateType)
+	private InternalResponse doPersistenceConfigSMTP(ConfigSMTP configsmtp, PersistenceActionEnum updateType)
 	{
 		switch (updateType)
 		{
 			case INSERT:
-				return getConfiguracaoBAR().insertConfigsmtp(configsmtp);
+				return getConfiguracaoBAR().insertConfigSMTP(configsmtp);
 
 			case UPDATE:
-				return getConfiguracaoBAR().updateConfigsmtp(configsmtp);
+				return getConfiguracaoBAR().updateConfigSMTP(configsmtp);
 
 			case DELETE:
-				return getConfiguracaoBAR().deleteConfigsmtpById(configsmtp);
+				return getConfiguracaoBAR().deleteConfigSMTPById(configsmtp);
 			default:
 				if (LOG.isDebugEnabled())
 				{
@@ -2016,7 +2035,7 @@ private InternalResultsResponse<Configsmtp> processConfigsmtp(ValidationContextI
 	 * @param request the request
 	 * @param response the response
 	 */
-	private InternalResultsResponse<Configsmtp> maintainReturnListConfigsmtp(Boolean listIndicator, Boolean pageListIndicator,Configsmtp configsmtp)
+	private InternalResultsResponse<ConfigSMTP> maintainReturnListConfigSMTP(Boolean listIndicator, Boolean pageListIndicator,ConfigSMTP configsmtp)
 	{
 		// Fetch again if requested.
 		if (listIndicator)
@@ -2024,19 +2043,19 @@ private InternalResultsResponse<Configsmtp> processConfigsmtp(ValidationContextI
 			// Fetch Paged is requested.
 			if (pageListIndicator)
 			{
-				ConfigsmtpInquiryRequest request = new ConfigsmtpInquiryRequest();
+				PagedInquiryRequest request = new PagedInquiryRequest();
 				request.setPreQueryCount(true);
-				return fetchConfigsmtpsByRequest(request);
+				return fetchConfigSMTPsByRequest(request);
 			}
 			else
 			{
 				// otherwise return all rows not paged
-				return fetchAllConfigsmtps(configsmtp);
+				return fetchAllConfigSMTPs(configsmtp);
 			}
 		}
 		else
 		{
-			return new InternalResultsResponse<Configsmtp>();
+			return new InternalResultsResponse<ConfigSMTP>();
 		}
 	}
 
@@ -2046,88 +2065,88 @@ private InternalResultsResponse<Configsmtp> processConfigsmtp(ValidationContextI
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.ICountyBAC#insertConfiguracaonfe(com.qat.samples.sysmgmt.model.request.ConfiguracaonfeMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.ICountyBAC#insertConfiguracaoNFe(com.qat.samples.sysmgmt.model.request.ConfiguracaoNFeMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configuracaonfe> insertConfiguracaonfe(ConfiguracaonfeMaintenanceRequest request)
+public InternalResultsResponse<ConfiguracaoNFe> insertConfiguracaoNFe(ConfiguracaoNFeMaintenanceRequest request)
 {
-	InternalResultsResponse<Configuracaonfe> response =
-			processConfiguracaonfe(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+	InternalResultsResponse<ConfiguracaoNFe> response =
+			processConfiguracaoNFe(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfiguracaonfeBAC#updateConfiguracaonfe(com.qat.samples.sysmgmt.model.request.ConfiguracaonfeMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IConfiguracaoNFeBAC#updateConfiguracaoNFe(com.qat.samples.sysmgmt.model.request.ConfiguracaoNFeMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configuracaonfe> updateConfiguracaonfe(ConfiguracaonfeMaintenanceRequest request)
+public InternalResultsResponse<ConfiguracaoNFe> updateConfiguracaoNFe(ConfiguracaoNFeMaintenanceRequest request)
 {
-	InternalResultsResponse<Configuracaonfe> response =
-			processConfiguracaonfe(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+	InternalResultsResponse<ConfiguracaoNFe> response =
+			processConfiguracaoNFe(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfiguracaonfeBAC#deleteConfiguracaonfe(com.qat.samples.sysmgmt.model.request.ConfiguracaonfeMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IConfiguracaoNFeBAC#deleteConfiguracaoNFe(com.qat.samples.sysmgmt.model.request.ConfiguracaoNFeMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configuracaonfe> deleteConfiguracaonfe(ConfiguracaonfeMaintenanceRequest request)
+public InternalResultsResponse<ConfiguracaoNFe> deleteConfiguracaoNFe(ConfiguracaoNFeMaintenanceRequest request)
 {
-	InternalResultsResponse<Configuracaonfe> response =
-			processConfiguracaonfe(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+	InternalResultsResponse<ConfiguracaoNFe> response =
+			processConfiguracaoNFe(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfiguracaonfeBAC#refreshConfiguracaonfes(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+ * @see com.qat.samples.sysmgmt.bac.IConfiguracaoNFeBAC#refreshConfiguracaoNFes(com.qat.samples.sysmgmt.model.request.RefreshRequest)
  */
 @Override
-public InternalResultsResponse<Configuracaonfe> refreshConfiguracaonfes(RefreshRequest request)
+public InternalResultsResponse<ConfiguracaoNFe> refreshConfiguracaoNFes(RefreshRequest request)
 {
 	// This method is demo code only. Do not view this as a QAT Global Standard.
-	getConfiguracaoBAR().deleteAllConfiguracaonfes();
+	getConfiguracaoBAR().deleteAllConfiguracaoNFes();
 	int refreshNumber = request.getRefreshInt();
 	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
 
 	for (int i = 1; i <= refreshNumber; i++)
 	{
-	getConfiguracaoBAR().insertConfiguracaonfe(new Configuracaonfe(i, "ConfiguracaonfeDesc" + i));
+	getConfiguracaoBAR().insertConfiguracaoNFe(new ConfiguracaoNFe(i, "ConfiguracaoNFeDesc" + i));
 	}
 
 	// Call maintain to see if we need to return the configuracaonfe list and if so whether it should be paged or not
-	return maintainReturnListConfiguracaonfe(request.getReturnList(), request.getReturnListPaged(),new Configuracaonfe());
+	return maintainReturnListConfiguracaoNFe(request.getReturnList(), request.getReturnListPaged(),new ConfiguracaoNFe());
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfiguracaonfeBAC#fetchAllConfiguracaonfes(Configuracaonfe configuracaonfe)
+ * @see com.qat.samples.sysmgmt.bac.IConfiguracaoNFeBAC#fetchAllConfiguracaoNFes(ConfiguracaoNFe configuracaonfe)
  */
 @Override
-public InternalResultsResponse<Configuracaonfe> fetchAllConfiguracaonfes(Configuracaonfe configuracaonfe)
+public InternalResultsResponse<ConfiguracaoNFe> fetchAllConfiguracaoNFes(ConfiguracaoNFe configuracaonfe)
 {
-	InternalResultsResponse<Configuracaonfe> response = new InternalResultsResponse<Configuracaonfe>();
-	response.getResultsList().addAll(getConfiguracaoBAR().fetchAllConfiguracaonfes(configuracaonfe).getResultsList());
+	InternalResultsResponse<ConfiguracaoNFe> response = new InternalResultsResponse<ConfiguracaoNFe>();
+	response.getResultsList().addAll(getConfiguracaoBAR().fetchAllConfiguracaoNFes(configuracaonfe).getResultsList());
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfiguracaonfeBAC#fetchConfiguracaonfeById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * com.qat.samples.sysmgmt.bac.IConfiguracaoNFeBAC#fetchConfiguracaoNFeById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configuracaonfe> fetchConfiguracaonfeById(FetchByIdRequest request)
+public InternalResultsResponse<ConfiguracaoNFe> fetchConfiguracaoNFeById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Configuracaonfe> response = new InternalResultsResponse<Configuracaonfe>();
+	InternalResultsResponse<ConfiguracaoNFe> response = new InternalResultsResponse<ConfiguracaoNFe>();
 	// validate fetchId field
 	if (ValidationUtil.isNull(request.getFetchId()))
 	{
@@ -2136,7 +2155,7 @@ public InternalResultsResponse<Configuracaonfe> fetchConfiguracaonfeById(FetchBy
 	}
 	else
 	{
-		response.getResultsList().add(getConfiguracaoBAR().fetchConfiguracaonfeById(request));
+		response.getResultsList().add(getConfiguracaoBAR().fetchConfiguracaoNFeById(request));
 	}
 
 	return response;
@@ -2144,13 +2163,13 @@ public InternalResultsResponse<Configuracaonfe> fetchConfiguracaonfeById(FetchBy
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfiguracaonfeBAC#fetchConfiguracaonfesByRequest(com.qat.samples.sysmgmt.model.request.
+ * @see com.qat.samples.sysmgmt.bac.IConfiguracaoNFeBAC#fetchConfiguracaoNFesByRequest(com.qat.samples.sysmgmt.model.request.
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<Configuracaonfe> fetchConfiguracaonfesByRequest(ConfiguracaonfeInquiryRequest request)
+public InternalResultsResponse<ConfiguracaoNFe> fetchConfiguracaoNFesByRequest(PagedInquiryRequest request)
 {
-	return getConfiguracaoBAR().fetchConfiguracaonfesByRequest(request);
+	return getConfiguracaoBAR().fetchConfiguracaoNFesByRequest(request);
 }
 
 /**
@@ -2161,27 +2180,27 @@ public InternalResultsResponse<Configuracaonfe> fetchConfiguracaonfesByRequest(C
  * @param request the request
  * @return the configuracaonfe response
  */
-private InternalResultsResponse<Configuracaonfe> processConfiguracaonfe(ValidationContextIndicator indicator,
+private InternalResultsResponse<ConfiguracaoNFe> processConfiguracaoNFe(ValidationContextIndicator indicator,
 		PersistenceActionEnum persistType,
-		ConfiguracaonfeMaintenanceRequest request)
+		ConfiguracaoNFeMaintenanceRequest request)
 		{
-	InternalResultsResponse<Configuracaonfe> response = null;
+	InternalResultsResponse<ConfiguracaoNFe> response = null;
 
 	// Validate
-	ValidationContext context = new ValidationContext(Configuracaonfe.class.getSimpleName(), request.getConfiguracaonfe(), indicator);
+	ValidationContext context = new ValidationContext(ConfiguracaoNFe.class.getSimpleName(), request.getConfiguracaoNFe(), indicator);
 	if (!getValidationController().validate(context))
 	{
-		response = new InternalResultsResponse<Configuracaonfe>();
+		response = new InternalResultsResponse<ConfiguracaoNFe>();
 		response.setStatus(SystemErrorCategory.SystemValidation);
 		response.addMessages(context.getMessages());
 		return response;
 	}
 
 		// Persist
-		InternalResponse internalResponse = doPersistenceConfiguracaonfe(request.getConfiguracaonfe(), persistType);
+		InternalResponse internalResponse = doPersistenceConfiguracaoNFe(request.getConfiguracaoNFe(), persistType);
 		if (internalResponse.isInError())
 		{
-			response = new InternalResultsResponse<Configuracaonfe>();
+			response = new InternalResultsResponse<ConfiguracaoNFe>();
 			response.setStatus(internalResponse.getError());
 			response.addMessages(internalResponse.getMessageInfoList());
 			response.addMessage(DEFAULT_CONFIGURACAO_BAC_EXCEPTION_MSG, MessageSeverity.Error,
@@ -2192,30 +2211,30 @@ private InternalResultsResponse<Configuracaonfe> processConfiguracaonfe(Validati
 
 		// Call maintainReurnList to see if we need to return the configuracaonfe list and if so whether it should be paged or
 		// not
-		response = maintainReturnListConfiguracaonfe(request.getReturnList(), request.getReturnListPaged(),new Configuracaonfe());
+		response = maintainReturnListConfiguracaoNFe(request.getReturnList(), request.getReturnListPaged(),new ConfiguracaoNFe());
 
 		return response;
 			}
 
 	/**
-	 * Do persistenceConfiguracaonfe.
+	 * Do persistenceConfiguracaoNFe.
 	 *
 	 * @param request the request
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistenceConfiguracaonfe(Configuracaonfe configuracaonfe, PersistenceActionEnum updateType)
+	private InternalResponse doPersistenceConfiguracaoNFe(ConfiguracaoNFe configuracaonfe, PersistenceActionEnum updateType)
 	{
 		switch (updateType)
 		{
 			case INSERT:
-				return getConfiguracaoBAR().insertConfiguracaonfe(configuracaonfe);
+				return getConfiguracaoBAR().insertConfiguracaoNFe(configuracaonfe);
 
 			case UPDATE:
-				return getConfiguracaoBAR().updateConfiguracaonfe(configuracaonfe);
+				return getConfiguracaoBAR().updateConfiguracaoNFe(configuracaonfe);
 
 			case DELETE:
-				return getConfiguracaoBAR().deleteConfiguracaonfeById(configuracaonfe);
+				return getConfiguracaoBAR().deleteConfiguracaoNFeById(configuracaonfe);
 			default:
 				if (LOG.isDebugEnabled())
 				{
@@ -2233,7 +2252,7 @@ private InternalResultsResponse<Configuracaonfe> processConfiguracaonfe(Validati
 	 * @param request the request
 	 * @param response the response
 	 */
-	private InternalResultsResponse<Configuracaonfe> maintainReturnListConfiguracaonfe(Boolean listIndicator, Boolean pageListIndicator,Configuracaonfe configuracaonfe)
+	private InternalResultsResponse<ConfiguracaoNFe> maintainReturnListConfiguracaoNFe(Boolean listIndicator, Boolean pageListIndicator,ConfiguracaoNFe configuracaonfe)
 	{
 		// Fetch again if requested.
 		if (listIndicator)
@@ -2241,19 +2260,19 @@ private InternalResultsResponse<Configuracaonfe> processConfiguracaonfe(Validati
 			// Fetch Paged is requested.
 			if (pageListIndicator)
 			{
-				ConfiguracaonfeInquiryRequest request = new ConfiguracaonfeInquiryRequest();
+				PagedInquiryRequest request = new PagedInquiryRequest();
 				request.setPreQueryCount(true);
-				return fetchConfiguracaonfesByRequest(request);
+				return fetchConfiguracaoNFesByRequest(request);
 			}
 			else
 			{
 				// otherwise return all rows not paged
-				return fetchAllConfiguracaonfes(configuracaonfe);
+				return fetchAllConfiguracaoNFes(configuracaonfe);
 			}
 		}
 		else
 		{
-			return new InternalResultsResponse<Configuracaonfe>();
+			return new InternalResultsResponse<ConfiguracaoNFe>();
 		}
 	}
 
@@ -2263,88 +2282,88 @@ private InternalResultsResponse<Configuracaonfe> processConfiguracaonfe(Validati
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.ICountyBAC#insertConfigvendas(com.qat.samples.sysmgmt.model.request.ConfigvendasMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.ICountyBAC#insertConfigVendas(com.qat.samples.sysmgmt.model.request.ConfigVendasMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configvendas> insertConfigvendas(ConfigvendasMaintenanceRequest request)
+public InternalResultsResponse<ConfigVendas> insertConfigVendas(ConfigVendasMaintenanceRequest request)
 {
-	InternalResultsResponse<Configvendas> response =
-			processConfigvendas(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+	InternalResultsResponse<ConfigVendas> response =
+			processConfigVendas(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfigvendasBAC#updateConfigvendas(com.qat.samples.sysmgmt.model.request.ConfigvendasMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IConfigVendasBAC#updateConfigVendas(com.qat.samples.sysmgmt.model.request.ConfigVendasMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configvendas> updateConfigvendas(ConfigvendasMaintenanceRequest request)
+public InternalResultsResponse<ConfigVendas> updateConfigVendas(ConfigVendasMaintenanceRequest request)
 {
-	InternalResultsResponse<Configvendas> response =
-			processConfigvendas(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+	InternalResultsResponse<ConfigVendas> response =
+			processConfigVendas(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfigvendasBAC#deleteConfigvendas(com.qat.samples.sysmgmt.model.request.ConfigvendasMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IConfigVendasBAC#deleteConfigVendas(com.qat.samples.sysmgmt.model.request.ConfigVendasMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configvendas> deleteConfigvendas(ConfigvendasMaintenanceRequest request)
+public InternalResultsResponse<ConfigVendas> deleteConfigVendas(ConfigVendasMaintenanceRequest request)
 {
-	InternalResultsResponse<Configvendas> response =
-			processConfigvendas(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+	InternalResultsResponse<ConfigVendas> response =
+			processConfigVendas(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfigvendasBAC#refreshConfigvendass(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+ * @see com.qat.samples.sysmgmt.bac.IConfigVendasBAC#refreshConfigVendass(com.qat.samples.sysmgmt.model.request.RefreshRequest)
  */
 @Override
-public InternalResultsResponse<Configvendas> refreshConfigvendass(RefreshRequest request)
+public InternalResultsResponse<ConfigVendas> refreshConfigVendass(RefreshRequest request)
 {
 	// This method is demo code only. Do not view this as a QAT Global Standard.
-	getConfiguracaoBAR().deleteAllConfigvendass();
+	getConfiguracaoBAR().deleteAllConfigVendass();
 	int refreshNumber = request.getRefreshInt();
 	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
 
 	for (int i = 1; i <= refreshNumber; i++)
 	{
-	getConfiguracaoBAR().insertConfigvendas(new Configvendas(i, "ConfigvendasDesc" + i));
+	getConfiguracaoBAR().insertConfigVendas(new ConfigVendas(i, "ConfigVendasDesc" + i));
 	}
 
 	// Call maintain to see if we need to return the configvendas list and if so whether it should be paged or not
-	return maintainReturnListConfigvendas(request.getReturnList(), request.getReturnListPaged(),new Configvendas());
+	return maintainReturnListConfigVendas(request.getReturnList(), request.getReturnListPaged(),new ConfigVendas());
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfigvendasBAC#fetchAllConfigvendass(Configvendas configvendas)
+ * @see com.qat.samples.sysmgmt.bac.IConfigVendasBAC#fetchAllConfigVendass(ConfigVendas configvendas)
  */
 @Override
-public InternalResultsResponse<Configvendas> fetchAllConfigvendass(Configvendas configvendas)
+public InternalResultsResponse<ConfigVendas> fetchAllConfigVendass(ConfigVendas configvendas)
 {
-	InternalResultsResponse<Configvendas> response = new InternalResultsResponse<Configvendas>();
-	response.getResultsList().addAll(getConfiguracaoBAR().fetchAllConfigvendass(configvendas).getResultsList());
+	InternalResultsResponse<ConfigVendas> response = new InternalResultsResponse<ConfigVendas>();
+	response.getResultsList().addAll(getConfiguracaoBAR().fetchAllConfigVendass(configvendas).getResultsList());
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IConfigvendasBAC#fetchConfigvendasById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * com.qat.samples.sysmgmt.bac.IConfigVendasBAC#fetchConfigVendasById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
  * )
  */
 @Override
-public InternalResultsResponse<Configvendas> fetchConfigvendasById(FetchByIdRequest request)
+public InternalResultsResponse<ConfigVendas> fetchConfigVendasById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Configvendas> response = new InternalResultsResponse<Configvendas>();
+	InternalResultsResponse<ConfigVendas> response = new InternalResultsResponse<ConfigVendas>();
 	// validate fetchId field
 	if (ValidationUtil.isNull(request.getFetchId()))
 	{
@@ -2353,7 +2372,7 @@ public InternalResultsResponse<Configvendas> fetchConfigvendasById(FetchByIdRequ
 	}
 	else
 	{
-		response.getResultsList().add(getConfiguracaoBAR().fetchConfigvendasById(request));
+		response.getResultsList().add(getConfiguracaoBAR().fetchConfigVendasById(request));
 	}
 
 	return response;
@@ -2361,13 +2380,13 @@ public InternalResultsResponse<Configvendas> fetchConfigvendasById(FetchByIdRequ
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IConfigvendasBAC#fetchConfigvendassByRequest(com.qat.samples.sysmgmt.model.request.
+ * @see com.qat.samples.sysmgmt.bac.IConfigVendasBAC#fetchConfigVendassByRequest(com.qat.samples.sysmgmt.model.request.
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<Configvendas> fetchConfigvendassByRequest(ConfigvendasInquiryRequest request)
+public InternalResultsResponse<ConfigVendas> fetchConfigVendassByRequest(PagedInquiryRequest request)
 {
-	return getConfiguracaoBAR().fetchConfigvendassByRequest(request);
+	return getConfiguracaoBAR().fetchConfigVendassByRequest(request);
 }
 
 /**
@@ -2378,27 +2397,27 @@ public InternalResultsResponse<Configvendas> fetchConfigvendassByRequest(Configv
  * @param request the request
  * @return the configvendas response
  */
-private InternalResultsResponse<Configvendas> processConfigvendas(ValidationContextIndicator indicator,
+private InternalResultsResponse<ConfigVendas> processConfigVendas(ValidationContextIndicator indicator,
 		PersistenceActionEnum persistType,
-		ConfigvendasMaintenanceRequest request)
+		ConfigVendasMaintenanceRequest request)
 		{
-	InternalResultsResponse<Configvendas> response = null;
+	InternalResultsResponse<ConfigVendas> response = null;
 
 	// Validate
-	ValidationContext context = new ValidationContext(Configvendas.class.getSimpleName(), request.getConfigvendas(), indicator);
+	ValidationContext context = new ValidationContext(ConfigVendas.class.getSimpleName(), request.getConfigVendas(), indicator);
 	if (!getValidationController().validate(context))
 	{
-		response = new InternalResultsResponse<Configvendas>();
+		response = new InternalResultsResponse<ConfigVendas>();
 		response.setStatus(SystemErrorCategory.SystemValidation);
 		response.addMessages(context.getMessages());
 		return response;
 	}
 
 		// Persist
-		InternalResponse internalResponse = doPersistenceConfigvendas(request.getConfigvendas(), persistType);
+		InternalResponse internalResponse = doPersistenceConfigVendas(request.getConfigVendas(), persistType);
 		if (internalResponse.isInError())
 		{
-			response = new InternalResultsResponse<Configvendas>();
+			response = new InternalResultsResponse<ConfigVendas>();
 			response.setStatus(internalResponse.getError());
 			response.addMessages(internalResponse.getMessageInfoList());
 			response.addMessage(DEFAULT_CONFIGURACAO_BAC_EXCEPTION_MSG, MessageSeverity.Error,
@@ -2409,30 +2428,30 @@ private InternalResultsResponse<Configvendas> processConfigvendas(ValidationCont
 
 		// Call maintainReurnList to see if we need to return the configvendas list and if so whether it should be paged or
 		// not
-		response = maintainReturnListConfigvendas(request.getReturnList(), request.getReturnListPaged(),new Configvendas());
+		response = maintainReturnListConfigVendas(request.getReturnList(), request.getReturnListPaged(),new ConfigVendas());
 
 		return response;
 			}
 
 	/**
-	 * Do persistenceConfigvendas.
+	 * Do persistenceConfigVendas.
 	 *
 	 * @param request the request
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistenceConfigvendas(Configvendas configvendas, PersistenceActionEnum updateType)
+	private InternalResponse doPersistenceConfigVendas(ConfigVendas configvendas, PersistenceActionEnum updateType)
 	{
 		switch (updateType)
 		{
 			case INSERT:
-				return getConfiguracaoBAR().insertConfigvendas(configvendas);
+				return getConfiguracaoBAR().insertConfigVendas(configvendas);
 
 			case UPDATE:
-				return getConfiguracaoBAR().updateConfigvendas(configvendas);
+				return getConfiguracaoBAR().updateConfigVendas(configvendas);
 
 			case DELETE:
-				return getConfiguracaoBAR().deleteConfigvendasById(configvendas);
+				return getConfiguracaoBAR().deleteConfigVendasById(configvendas);
 			default:
 				if (LOG.isDebugEnabled())
 				{
@@ -2450,7 +2469,7 @@ private InternalResultsResponse<Configvendas> processConfigvendas(ValidationCont
 	 * @param request the request
 	 * @param response the response
 	 */
-	private InternalResultsResponse<Configvendas> maintainReturnListConfigvendas(Boolean listIndicator, Boolean pageListIndicator,Configvendas configvendas)
+	private InternalResultsResponse<ConfigVendas> maintainReturnListConfigVendas(Boolean listIndicator, Boolean pageListIndicator,ConfigVendas configvendas)
 	{
 		// Fetch again if requested.
 		if (listIndicator)
@@ -2458,19 +2477,19 @@ private InternalResultsResponse<Configvendas> processConfigvendas(ValidationCont
 			// Fetch Paged is requested.
 			if (pageListIndicator)
 			{
-				ConfigvendasInquiryRequest request = new ConfigvendasInquiryRequest();
+				PagedInquiryRequest request = new PagedInquiryRequest();
 				request.setPreQueryCount(true);
-				return fetchConfigvendassByRequest(request);
+				return fetchConfigVendassByRequest(request);
 			}
 			else
 			{
 				// otherwise return all rows not paged
-				return fetchAllConfigvendass(configvendas);
+				return fetchAllConfigVendass(configvendas);
 			}
 		}
 		else
 		{
-			return new InternalResultsResponse<Configvendas>();
+			return new InternalResultsResponse<ConfigVendas>();
 		}
 	}
 }

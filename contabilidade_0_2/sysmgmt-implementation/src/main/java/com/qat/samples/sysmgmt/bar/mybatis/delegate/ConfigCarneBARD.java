@@ -10,12 +10,12 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.bar.ConfigCarne.IConfigCarneBAR;
+import com.qat.samples.sysmgmt.bar.Configuracao.IConfiguracaoBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.entidade.model.ConfigCarne;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.ConfigCarne;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
@@ -40,29 +40,23 @@ public final class ConfigCarneBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainConfigCarneAssociations(List<ConfigCarne> configcarneList,
+	public static Integer maintainConfigCarneAssociations(ConfigCarne configcarne,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IConfigCarneBAR configcarneDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
+			TabelaEnum tabelaEnum, IConfiguracaoBAR configcarneDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(configcarneList))
+		if (ValidationUtil.isNull(configcarne))
 		{
 			return 0;
 		}
-		// For Each Contact...
-		for (ConfigCarne configcarne : configcarneList)
-		{
+
 			// Make sure we set the parent key
 			configcarne.setParentId(parentId);
 			configcarne.setTabelaEnum(tabelaEnum);
 			configcarne.setProcessId(processId);
 
-			if (ValidationUtil.isNull(configcarne.getModelAction()))
-			{
-				continue;
-			}
 			switch (configcarne.getModelAction())
 			{
 				case INSERT:
@@ -103,12 +97,12 @@ public final class ConfigCarneBARD extends SqlSessionDaoSupport
 
 					break;
 			}
-		}
+
 		if(count == true ){
 			return 1;
 		}else{
 			return 0;
 		}
-		
+
 	}
 }

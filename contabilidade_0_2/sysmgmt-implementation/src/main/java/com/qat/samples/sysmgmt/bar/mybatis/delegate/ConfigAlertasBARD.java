@@ -10,12 +10,12 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.bar.ConfigAlertas.IConfigAlertasBAR;
+import com.qat.samples.sysmgmt.bar.Configuracao.IConfiguracaoBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.entidade.model.ConfigAlertas;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.ConfigAlertas;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
@@ -40,29 +40,24 @@ public final class ConfigAlertasBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainConfigAlertasAssociations(List<ConfigAlertas> configalertasList,
+	public static Integer maintainConfigAlertasAssociations(ConfigAlertas configalertas,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IConfigAlertasBAR configalertasDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
+			TabelaEnum tabelaEnum, IConfiguracaoBAR configalertasDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(configalertasList))
+		if (ValidationUtil.isNull(configalertas))
 		{
 			return 0;
 		}
 		// For Each Contact...
-		for (ConfigAlertas configalertas : configalertasList)
-		{
+
 			// Make sure we set the parent key
 			configalertas.setParentId(parentId);
 			configalertas.setTabelaEnum(tabelaEnum);
 			configalertas.setProcessId(processId);
 
-			if (ValidationUtil.isNull(configalertas.getModelAction()))
-			{
-				continue;
-			}
 			switch (configalertas.getModelAction())
 			{
 				case INSERT:
@@ -103,12 +98,12 @@ public final class ConfigAlertasBARD extends SqlSessionDaoSupport
 
 					break;
 			}
-		}
+
 		if(count == true ){
 			return 1;
 		}else{
 			return 0;
 		}
-		
+
 	}
 }
