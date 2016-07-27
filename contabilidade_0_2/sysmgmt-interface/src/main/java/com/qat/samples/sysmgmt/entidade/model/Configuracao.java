@@ -16,21 +16,16 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 public class Configuracao extends ModelCosmeDamiao
 {
 	private Integer id;
-	private List<Boleto> boletoList;
-
+	
 	private ConfigGeral confGeral;
-	
 	private ConfigFiscal confFiscal;
-
 	private ConfigProduto confProd;
-
 	private ConfigVendas confVendas;
-
 	private ConfigSMTP confCMTP;
-	
 	private ConfigEntrada confEntrada;
-
 	private ConfigCarne confCarne;
+	private ConfiguracaoNFe confNFe;
+	private List<Boleto> boletoList;
 
 
 	public Configuracao()

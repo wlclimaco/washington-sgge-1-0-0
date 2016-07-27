@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 27/07/2016 12:18 : 35-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoletoMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="BoletoResult" type="Boleto">
+    <result property="id" column="id"/>
+    <collection property="ativarBolOnLine" column="ativarBolOnLine" select="RegimeMap.fetchRegimeById"/>
+    <collection property="tipoBoleto" column="tipoBoleto" select="RegimeMap.fetchRegimeById"/>
+    <result property="agencia" column="agencia"/>
+    <result property="cedente" column="cedente"/>
+    <result property="juros" column="juros"/>
+    <collection property="tipoCalcMora" column="tipoCalcMora" select="RegimeMap.fetchRegimeById"/>
+    <result property="mora" column="mora"/>
+    <result property="instrucoes" column="instrucoes"/>
+    <result property="demonstrativo" column="demonstrativo"/>
+    <collection property="impJuros" column="impJuros" select="RegimeMap.fetchRegimeById"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
+
+  <sql id="allBoletoColumns">
+,ativarBolOnLine
+,tipoBoleto
+,agencia
+,cedente
+,juros
+,tipoCalcMora
+,mora
+,instrucoes
+,demonstrativo
+,impJuros
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allBoletoValues">
+#{ativarBolOnLine.id},
+#{tipoBoleto.id},
+#{agencia},
+#{cedente},
+#{juros},
+#{tipoCalcMora.id},
+#{mora},
+#{instrucoes},
+#{demonstrativo},
+#{impJuros.id},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllBoletos" resultMap="BoletoResult">
+    SELECT id,
+ <include refid="allBoletoColumns" />
+   FROM boleto ORDER BY id ASC
+ </select>
+
+ <select id="fetchBoletoById" parameterType="Integer" resultMap="BoletoResult">
+    SELECT id,
+ <include refid="allBoletoColumns" />
+   FROM boleto WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllBoletosRequest" parameterType="BoletoInquiryRequest" resultMap="BoletoResult">
+
+     SELECT id,<include refid="allBoletoColumns" />
+           FROM boleto where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchBoletoRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM boleto WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+
+ </select>
+
+ <insert id="insertBoleto" parameterType="Boleto" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO boleto (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allBoletoColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allBoletoValues" /> )
+ </insert>
+
+ <update id="updateBoleto" parameterType="Boleto">
+   UPDATE boleto SET
+<if test="ativarBolOnLine!= null">ativarBolOnLine = #{ativarBolOnLine.id},</if>
+<if test="tipoBoleto!= null">tipoBoleto = #{tipoBoleto.id},</if>
+<if test="agencia!= null">agencia = #{agencia},</if>
+<if test="cedente!= null">cedente = #{cedente},</if>
+<if test="juros!= null">juros = #{juros},</if>
+<if test="tipoCalcMora!= null">tipoCalcMora = #{tipoCalcMora.id},</if>
+<if test="mora!= null">mora = #{mora},</if>
+<if test="instrucoes!= null">instrucoes = #{instrucoes},</if>
+<if test="demonstrativo!= null">demonstrativo = #{demonstrativo},</if>
+<if test="impJuros!= null">impJuros = #{impJuros.id},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteBoletoById" parameterType="Boleto">
+  DELETE FROM boleto WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllBoletos">
+ DELETE FROM boleto
+  </delete>
+</mapper>
+
+

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 27/07/2016 12:18 : 35-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ConfigGeralMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="ConfigGeralResult" type="ConfigGeral">
+    <result property="id" column="id"/>
+    <result property="fusoHorario" column="fusoHorario"/>
+    <result property="casasDecimais" column="casasDecimais"/>
+    <result property="diasCartaCobr" column="diasCartaCobr"/>
+    <collection property="infPosicionarMouse" column="infPosicionarMouse" select="RegimeMap.fetchRegimeById"/>
+    <collection property="cnpjCPFUnico" column="cnpjCPFUnico" select="RegimeMap.fetchRegimeById"/>
+    <collection property="impCodPersonalizado" column="impCodPersonalizado" select="RegimeMap.fetchRegimeById"/>
+    <collection property="logListRelImp" column="logListRelImp" select="RegimeMap.fetchRegimeById"/>
+    <collection property="obsProdFinProd" column="obsProdFinProd" select="RegimeMap.fetchRegimeById"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
+
+  <sql id="allConfigGeralColumns">
+,fusoHorario
+,casasDecimais
+,diasCartaCobr
+,infPosicionarMouse
+,cnpjCPFUnico
+,impCodPersonalizado
+,logListRelImp
+,obsProdFinProd
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allConfigGeralValues">
+#{fusoHorario},
+#{casasDecimais},
+#{diasCartaCobr},
+#{infPosicionarMouse.id},
+#{cnpjCPFUnico.id},
+#{impCodPersonalizado.id},
+#{logListRelImp.id},
+#{obsProdFinProd.id},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllConfigGerals" resultMap="ConfigGeralResult">
+    SELECT id,
+ <include refid="allConfigGeralColumns" />
+   FROM configgeral ORDER BY id ASC
+ </select>
+
+ <select id="fetchConfigGeralById" parameterType="Integer" resultMap="ConfigGeralResult">
+    SELECT id,
+ <include refid="allConfigGeralColumns" />
+   FROM configgeral WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllConfigGeralsRequest" parameterType="ConfigGeralInquiryRequest" resultMap="ConfigGeralResult">
+
+     SELECT id,<include refid="allConfigGeralColumns" />
+           FROM configgeral where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchConfigGeralRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM configgeral WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+
+ </select>
+
+ <insert id="insertConfigGeral" parameterType="ConfigGeral" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO configgeral (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allConfigGeralColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allConfigGeralValues" /> )
+ </insert>
+
+ <update id="updateConfigGeral" parameterType="ConfigGeral">
+   UPDATE configgeral SET
+<if test="fusoHorario!= null">fusoHorario = #{fusoHorario},</if>
+<if test="casasDecimais!= null">casasDecimais = #{casasDecimais},</if>
+<if test="diasCartaCobr!= null">diasCartaCobr = #{diasCartaCobr},</if>
+<if test="infPosicionarMouse!= null">infPosicionarMouse = #{infPosicionarMouse.id},</if>
+<if test="cnpjCPFUnico!= null">cnpjCPFUnico = #{cnpjCPFUnico.id},</if>
+<if test="impCodPersonalizado!= null">impCodPersonalizado = #{impCodPersonalizado.id},</if>
+<if test="logListRelImp!= null">logListRelImp = #{logListRelImp.id},</if>
+<if test="obsProdFinProd!= null">obsProdFinProd = #{obsProdFinProd.id},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteConfigGeralById" parameterType="ConfigGeral">
+  DELETE FROM configgeral WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllConfigGerals">
+ DELETE FROM configgeral
+  </delete>
+</mapper>
+
+

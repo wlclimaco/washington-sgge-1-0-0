@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 27/07/2016 12:18 : 35-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ConfigVendasMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="ConfigVendasResult" type="ConfigVendas">
+    <result property="id" column="id"/>
+    <result property="descontoMaxVenda" column="descontoMaxVenda"/>
+    <collection property="observacao" column="observacao" select="RegimeMap.fetchRegimeById"/>
+    <collection property="imprSegVia" column="imprSegVia" select="RegimeMap.fetchRegimeById"/>
+    <collection property="imprAssinatura" column="imprAssinatura" select="RegimeMap.fetchRegimeById"/>
+    <collection property="imprResumoFinanc" column="imprResumoFinanc" select="RegimeMap.fetchRegimeById"/>
+    <collection property="atuaPrecoClonar" column="atuaPrecoClonar" select="RegimeMap.fetchRegimeById"/>
+    <collection property="imprColUnidade" column="imprColUnidade" select="RegimeMap.fetchRegimeById"/>
+    <collection property="bloquearvendProdSemEstoq" column="bloquearvendProdSemEstoq" select="RegimeMap.fetchRegimeById"/>
+    <collection property="addDespCalcImposto" column="addDespCalcImposto" select="RegimeMap.fetchRegimeById"/>
+    <collection property="retSubstTribICMS" column="retSubstTribICMS" select="RegimeMap.fetchRegimeById"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
+
+  <sql id="allConfigVendasColumns">
+,descontoMaxVenda
+,observacao
+,imprSegVia
+,imprAssinatura
+,imprResumoFinanc
+,atuaPrecoClonar
+,imprColUnidade
+,bloquearvendProdSemEstoq
+,addDespCalcImposto
+,retSubstTribICMS
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allConfigVendasValues">
+#{descontoMaxVenda},
+#{observacao.id},
+#{imprSegVia.id},
+#{imprAssinatura.id},
+#{imprResumoFinanc.id},
+#{atuaPrecoClonar.id},
+#{imprColUnidade.id},
+#{bloquearvendProdSemEstoq.id},
+#{addDespCalcImposto.id},
+#{retSubstTribICMS.id},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllConfigVendass" resultMap="ConfigVendasResult">
+    SELECT id,
+ <include refid="allConfigVendasColumns" />
+   FROM configvendas ORDER BY id ASC
+ </select>
+
+ <select id="fetchConfigVendasById" parameterType="Integer" resultMap="ConfigVendasResult">
+    SELECT id,
+ <include refid="allConfigVendasColumns" />
+   FROM configvendas WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllConfigVendassRequest" parameterType="ConfigVendasInquiryRequest" resultMap="ConfigVendasResult">
+
+     SELECT id,<include refid="allConfigVendasColumns" />
+           FROM configvendas where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchConfigVendasRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM configvendas WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+
+ </select>
+
+ <insert id="insertConfigVendas" parameterType="ConfigVendas" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO configvendas (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allConfigVendasColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allConfigVendasValues" /> )
+ </insert>
+
+ <update id="updateConfigVendas" parameterType="ConfigVendas">
+   UPDATE configvendas SET
+<if test="descontoMaxVenda!= null">descontoMaxVenda = #{descontoMaxVenda},</if>
+<if test="observacao!= null">observacao = #{observacao.id},</if>
+<if test="imprSegVia!= null">imprSegVia = #{imprSegVia.id},</if>
+<if test="imprAssinatura!= null">imprAssinatura = #{imprAssinatura.id},</if>
+<if test="imprResumoFinanc!= null">imprResumoFinanc = #{imprResumoFinanc.id},</if>
+<if test="atuaPrecoClonar!= null">atuaPrecoClonar = #{atuaPrecoClonar.id},</if>
+<if test="imprColUnidade!= null">imprColUnidade = #{imprColUnidade.id},</if>
+<if test="bloquearvendProdSemEstoq!= null">bloquearvendProdSemEstoq = #{bloquearvendProdSemEstoq.id},</if>
+<if test="addDespCalcImposto!= null">addDespCalcImposto = #{addDespCalcImposto.id},</if>
+<if test="retSubstTribICMS!= null">retSubstTribICMS = #{retSubstTribICMS.id},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteConfigVendasById" parameterType="ConfigVendas">
+  DELETE FROM configvendas WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllConfigVendass">
+ DELETE FROM configvendas
+  </delete>
+</mapper>
+
+

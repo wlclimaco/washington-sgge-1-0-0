@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 27/07/2016 12:18 : 35-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ConfigAlertasMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="ConfigAlertasResult" type="ConfigAlertas">
+    <result property="id" column="id"/>
+    <collection property="estoqMin" column="estoqMin" select="RegimeMap.fetchRegimeById"/>
+    <collection property="estoqMax" column="estoqMax" select="RegimeMap.fetchRegimeById"/>
+    <collection property="erroNFe" column="erroNFe" select="RegimeMap.fetchRegimeById"/>
+    <collection property="pdCompra" column="pdCompra" select="RegimeMap.fetchRegimeById"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
+
+  <sql id="allConfigAlertasColumns">
+,estoqMin
+,estoqMax
+,erroNFe
+,pdCompra
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allConfigAlertasValues">
+#{estoqMin.id},
+#{estoqMax.id},
+#{erroNFe.id},
+#{pdCompra.id},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllConfigAlertass" resultMap="ConfigAlertasResult">
+    SELECT id,
+ <include refid="allConfigAlertasColumns" />
+   FROM configalertas ORDER BY id ASC
+ </select>
+
+ <select id="fetchConfigAlertasById" parameterType="Integer" resultMap="ConfigAlertasResult">
+    SELECT id,
+ <include refid="allConfigAlertasColumns" />
+   FROM configalertas WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllConfigAlertassRequest" parameterType="ConfigAlertasInquiryRequest" resultMap="ConfigAlertasResult">
+
+     SELECT id,<include refid="allConfigAlertasColumns" />
+           FROM configalertas where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchConfigAlertasRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM configalertas WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+
+ </select>
+
+ <insert id="insertConfigAlertas" parameterType="ConfigAlertas" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO configalertas (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allConfigAlertasColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allConfigAlertasValues" /> )
+ </insert>
+
+ <update id="updateConfigAlertas" parameterType="ConfigAlertas">
+   UPDATE configalertas SET
+<if test="estoqMin!= null">estoqMin = #{estoqMin.id},</if>
+<if test="estoqMax!= null">estoqMax = #{estoqMax.id},</if>
+<if test="erroNFe!= null">erroNFe = #{erroNFe.id},</if>
+<if test="pdCompra!= null">pdCompra = #{pdCompra.id},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteConfigAlertasById" parameterType="ConfigAlertas">
+  DELETE FROM configalertas WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllConfigAlertass">
+ DELETE FROM configalertas
+  </delete>
+</mapper>
+
+

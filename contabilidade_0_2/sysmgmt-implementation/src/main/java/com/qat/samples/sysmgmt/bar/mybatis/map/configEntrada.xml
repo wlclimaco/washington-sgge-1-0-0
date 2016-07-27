@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 27/07/2016 12:18 : 35-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ConfigEntradaMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+ <resultMap id="ConfigEntradaResult" type="ConfigEntrada">
+    <result property="id" column="id"/>
+    
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+<collection property="valorTotalFixo" column="valorTotalFixo" select="RegimeMap.fetchRegimeById"/>
+    <collection property="manterPrecoVendaProd" column="manterPrecoVendaProd" select="RegimeMap.fetchRegimeById"/>
+  </resultMap>
+
+  <sql id="allConfigEntradaColumns">
+,valorTotalFixo
+,manterPrecoVendaProd
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allConfigEntradaValues">
+#{valorTotalFixo.id},
+#{manterPrecoVendaProd.id},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllConfigEntradas" resultMap="ConfigEntradaResult">
+    SELECT id,
+ <include refid="allConfigEntradaColumns" />
+   FROM configentrada ORDER BY id ASC
+ </select>
+
+ <select id="fetchConfigEntradaById" parameterType="Integer" resultMap="ConfigEntradaResult">
+    SELECT id,
+ <include refid="allConfigEntradaColumns" />
+   FROM configentrada WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllConfigEntradasRequest" parameterType="ConfigEntradaInquiryRequest" resultMap="ConfigEntradaResult">
+
+     SELECT id,<include refid="allConfigEntradaColumns" />
+           FROM configentrada where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchConfigEntradaRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM configentrada WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+
+ </select>
+
+ <insert id="insertConfigEntrada" parameterType="ConfigEntrada" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO configentrada (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allConfigEntradaColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allConfigEntradaValues" /> )
+ </insert>
+
+ <update id="updateConfigEntrada" parameterType="ConfigEntrada">
+   UPDATE configentrada SET
+<if test="valorTotalFixo!= null">valorTotalFixo = #{valorTotalFixo.id},</if>
+<if test="manterPrecoVendaProd!= null">manterPrecoVendaProd = #{manterPrecoVendaProd.id},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteConfigEntradaById" parameterType="ConfigEntrada">
+  DELETE FROM configentrada WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllConfigEntradas">
+ DELETE FROM configentrada
+  </delete>
+</mapper>
+
+

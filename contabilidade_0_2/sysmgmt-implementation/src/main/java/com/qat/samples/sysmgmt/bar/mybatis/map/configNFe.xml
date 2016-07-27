@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 27/07/2016 12:18 : 35-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ConfiguracaoNFeMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="ConfiguracaoNFeResult" type="ConfiguracaoNFe">
+    <result property="id" column="id"/>
+    <collection property="presCompr" column="presCompr" select="RegimeMap.fetchRegimeById"/>
+    <collection property="destConsFinal" column="destConsFinal" select="RegimeMap.fetchRegimeById"/>
+    <collection property="preencherDataHora" column="preencherDataHora" select="RegimeMap.fetchRegimeById"/>
+    <result property="icmsPadrao" column="icmsPadrao"/>
+    <result property="ipiPadrao" column="ipiPadrao"/>
+    <result property="pisPadrao" column="pisPadrao"/>
+    <result property="cofinsPadrao" column="cofinsPadrao"/>
+    <collection property="ambienteEnvio" column="ambienteEnvio" select="RegimeMap.fetchRegimeById"/>
+    <result property="servMsmNota" column="servMsmNota"/>
+    <result property="serieEnvio" column="serieEnvio"/>
+    <collection property="anexarXmlEmail" column="anexarXmlEmail" select="RegimeMap.fetchRegimeById"/>
+    <result property="idCSC" column="idCSC"/>
+    <result property="cSC" column="cSC"/>
+    <result property="informacaoAdd" column="informacaoAdd"/>
+    <result property="certificado" column="certificado"/>
+    <result property="senha" column="senha"/>
+    <collection property="salvarSenha" column="salvarSenha" select="RegimeMap.fetchRegimeById"/>
+    <collection property="cfopPadrao" column="cfopPadrao" select="RegimeMap.fetchRegimeById"/>
+    <collection property="confSMTP" column="confSMTP" select="RegimeMap.fetchRegimeById"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
+
+  <sql id="allConfiguracaoNFeColumns">
+,presCompr
+,destConsFinal
+,preencherDataHora
+,icmsPadrao
+,ipiPadrao
+,pisPadrao
+,cofinsPadrao
+,ambienteEnvio
+,servMsmNota
+,serieEnvio
+,anexarXmlEmail
+,idCSC
+,cSC
+,informacaoAdd
+,certificado
+,senha
+,salvarSenha
+,cfopPadrao
+,confSMTP
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allConfiguracaoNFeValues">
+#{presCompr.id},
+#{destConsFinal.id},
+#{preencherDataHora.id},
+#{icmsPadrao},
+#{ipiPadrao},
+#{pisPadrao},
+#{cofinsPadrao},
+#{ambienteEnvio.id},
+#{servMsmNota},
+#{serieEnvio},
+#{anexarXmlEmail.id},
+#{idCSC},
+#{cSC},
+#{informacaoAdd},
+#{certificado},
+#{senha},
+#{salvarSenha.id},
+#{cfopPadrao.id},
+#{confSMTP.id},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllConfiguracaoNFes" resultMap="ConfiguracaoNFeResult">
+    SELECT id,
+ <include refid="allConfiguracaoNFeColumns" />
+   FROM configuracaonfe ORDER BY id ASC
+ </select>
+
+ <select id="fetchConfiguracaoNFeById" parameterType="Integer" resultMap="ConfiguracaoNFeResult">
+    SELECT id,
+ <include refid="allConfiguracaoNFeColumns" />
+   FROM configuracaonfe WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllConfiguracaoNFesRequest" parameterType="ConfiguracaoNFeInquiryRequest" resultMap="ConfiguracaoNFeResult">
+
+     SELECT id,<include refid="allConfiguracaoNFeColumns" />
+           FROM configuracaonfe where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchConfiguracaoNFeRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM configuracaonfe WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+
+ </select>
+
+ <insert id="insertConfiguracaoNFe" parameterType="ConfiguracaoNFe" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO configuracaonfe (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allConfiguracaoNFeColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allConfiguracaoNFeValues" /> )
+ </insert>
+
+ <update id="updateConfiguracaoNFe" parameterType="ConfiguracaoNFe">
+   UPDATE configuracaonfe SET
+<if test="presCompr!= null">presCompr = #{presCompr.id},</if>
+<if test="destConsFinal!= null">destConsFinal = #{destConsFinal.id},</if>
+<if test="preencherDataHora!= null">preencherDataHora = #{preencherDataHora.id},</if>
+<if test="icmsPadrao!= null">icmsPadrao = #{icmsPadrao},</if>
+<if test="ipiPadrao!= null">ipiPadrao = #{ipiPadrao},</if>
+<if test="pisPadrao!= null">pisPadrao = #{pisPadrao},</if>
+<if test="cofinsPadrao!= null">cofinsPadrao = #{cofinsPadrao},</if>
+<if test="ambienteEnvio!= null">ambienteEnvio = #{ambienteEnvio.id},</if>
+<if test="servMsmNota!= null">servMsmNota = #{servMsmNota},</if>
+<if test="serieEnvio!= null">serieEnvio = #{serieEnvio},</if>
+<if test="anexarXmlEmail!= null">anexarXmlEmail = #{anexarXmlEmail.id},</if>
+<if test="idCSC!= null">idCSC = #{idCSC},</if>
+<if test="cSC!= null">cSC = #{cSC},</if>
+<if test="informacaoAdd!= null">informacaoAdd = #{informacaoAdd},</if>
+<if test="certificado!= null">certificado = #{certificado},</if>
+<if test="senha!= null">senha = #{senha},</if>
+<if test="salvarSenha!= null">salvarSenha = #{salvarSenha.id},</if>
+<if test="cfopPadrao!= null">cfopPadrao = #{cfopPadrao.id},</if>
+<if test="confSMTP!= null">confSMTP = #{confSMTP.id},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteConfiguracaoNFeById" parameterType="ConfiguracaoNFe">
+  DELETE FROM configuracaonfe WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllConfiguracaoNFes">
+ DELETE FROM configuracaonfe
+  </delete>
+</mapper>
+
+

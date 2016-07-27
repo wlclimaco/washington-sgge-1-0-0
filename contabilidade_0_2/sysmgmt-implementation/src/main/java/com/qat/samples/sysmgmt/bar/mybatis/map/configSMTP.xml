@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 27/07/2016 12:18 : 35-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ConfigSMTPMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="ConfigSMTPResult" type="ConfigSMTP">
+    <result property="id" column="id"/>
+    <result property="servSMTP" column="servSMTP"/>
+    <result property="porta" column="porta"/>
+    <result property="endEmail" column="endEmail"/>
+    <result property="usuario" column="usuario"/>
+    <result property="senha" column="senha"/>
+    <collection property="seguranca" column="seguranca" select="RegimeMap.fetchRegimeById"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
+
+  <sql id="allConfigSMTPColumns">
+,servSMTP
+,porta
+,endEmail
+,usuario
+,senha
+,seguranca
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allConfigSMTPValues">
+#{servSMTP},
+#{porta},
+#{endEmail},
+#{usuario},
+#{senha},
+#{seguranca.id},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllConfigSMTPs" resultMap="ConfigSMTPResult">
+    SELECT id,
+ <include refid="allConfigSMTPColumns" />
+   FROM configsmtp ORDER BY id ASC
+ </select>
+
+ <select id="fetchConfigSMTPById" parameterType="Integer" resultMap="ConfigSMTPResult">
+    SELECT id,
+ <include refid="allConfigSMTPColumns" />
+   FROM configsmtp WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllConfigSMTPsRequest" parameterType="ConfigSMTPInquiryRequest" resultMap="ConfigSMTPResult">
+
+     SELECT id,<include refid="allConfigSMTPColumns" />
+           FROM configsmtp where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchConfigSMTPRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM configsmtp WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+
+ </select>
+
+ <insert id="insertConfigSMTP" parameterType="ConfigSMTP" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO configsmtp (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allConfigSMTPColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allConfigSMTPValues" /> )
+ </insert>
+
+ <update id="updateConfigSMTP" parameterType="ConfigSMTP">
+   UPDATE configsmtp SET
+<if test="servSMTP!= null">servSMTP = #{servSMTP},</if>
+<if test="porta!= null">porta = #{porta},</if>
+<if test="endEmail!= null">endEmail = #{endEmail},</if>
+<if test="usuario!= null">usuario = #{usuario},</if>
+<if test="senha!= null">senha = #{senha},</if>
+<if test="seguranca!= null">seguranca = #{seguranca.id},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteConfigSMTPById" parameterType="ConfigSMTP">
+  DELETE FROM configsmtp WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllConfigSMTPs">
+ DELETE FROM configsmtp
+  </delete>
+</mapper>
+
+

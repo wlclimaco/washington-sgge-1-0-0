@@ -5,415 +5,445 @@
 
 <configuration>
 
- 	<settings>
-		<setting name="lazyLoadingEnabled" value="false" />
-		<setting name="cacheEnabled" value="true" />
-	</settings>
+    <settings>
+        <setting name="lazyLoadingEnabled" value="false" />
+        <setting name="cacheEnabled" value="true" />
+    </settings>
+
+    <typeAliases>
+
+        <typeAlias alias="County" type="com.qat.samples.sysmgmt.model.County" />
+        <typeAlias alias="Drug" type="com.qat.samples.sysmgmt.model.Drug" />
+        <typeAlias alias="DrugPrice" type="com.qat.samples.sysmgmt.model.DrugPrice" />
+        <typeAlias alias="Procedure" type="com.qat.samples.sysmgmt.model.Procedure" />
+        <typeAlias alias="PagedInquiryRequest" type="com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest" />
+
+        <typeAlias alias="QATModel1" type="com.qat.samples.sysmgmt.util.model.QATModel1" />
+        <typeAlias alias="FetchByIdRequest" type="com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest" />
+        <typeAlias alias="Entidade" type="com.qat.samples.sysmgmt.entidade.model.Entidade" />
+
+        <typeAlias alias="PlanoByServico" type="com.qat.samples.sysmgmt.contabilidade.model.PlanoByServico" />
+        <typeAlias alias="ServicoAndPlano" type="com.qat.samples.sysmgmt.site.model.ServicoAndPlano" />
+
+        <typeAlias alias="Estado" type="com.qat.samples.sysmgmt.estado.model.Estado" />
+        <typeAlias alias="ContatoItens" type="com.qat.samples.sysmgmt.contato.model.ContatoItens" />
+        <typeAlias alias="OrdemServicoItens" type="com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoItens" />
+
+
+        <!-- Dicionario -->
+        <typeAlias alias="Field" type="com.qat.samples.sysmgmt.dicionario.Field" />
+        <typeAlias alias="Classes" type="com.qat.samples.sysmgmt.dicionario.Classes" />
+        <typeAlias alias="Interface" type="com.qat.samples.sysmgmt.dicionario.Interface" />
+        <typeAlias alias="FieldInquiryRequest" type="com.qat.samples.sysmgmt.dicionario.request.FieldInquiryRequest" />
+        <typeAlias alias="InterfaceInquiryRequest" type="com.qat.samples.sysmgmt.dicionario.request.InterfaceInquiryRequest" />
+        <typeAlias alias="ClassesInquiryRequest" type="com.qat.samples.sysmgmt.dicionario.request.ClassesInquiryRequest" />
 
-  	<typeAliases>
+        <typeAlias alias="CondPagInquiryRequest" type="com.qat.samples.sysmgmt.financeiro.model.request.CondPagInquiryRequest" />
 
-  		<typeAlias alias="County" type="com.qat.samples.sysmgmt.model.County"/>
-  		<typeAlias alias="Drug" type="com.qat.samples.sysmgmt.model.Drug"/>
-  		<typeAlias alias="DrugPrice" type="com.qat.samples.sysmgmt.model.DrugPrice"/>
-  		<typeAlias alias="Procedure" type="com.qat.samples.sysmgmt.model.Procedure"/>
-  		<typeAlias alias="PagedInquiryRequest" type="com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest"/>
+        <typeAlias alias="Advocacia" type="com.qat.samples.sysmgmt.advocacia.Advocacia" />
+        <typeAlias alias="Clinica" type="com.qat.samples.sysmgmt.clinica.model.Clinica" />
+        <typeAlias alias="Condominio" type="com.qat.samples.sysmgmt.condominio.model.Condominio" />
 
-		<typeAlias alias="QATModel1" type="com.qat.samples.sysmgmt.util.model.QATModel1"/>
-  		<typeAlias alias="FetchByIdRequest" type="com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest"/>
-  		<typeAlias alias="Entidade" type="com.qat.samples.sysmgmt.entidade.model.Entidade"/>
+        <typeAlias alias="AdvocaciaInquiryRequest" type="com.qat.samples.sysmgmt.advocacia.request.AdvocaciaInquiryRequest" />
+        <typeAlias alias="ClinicaInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.ClinicaInquiryRequest" />
+        <typeAlias alias="CondominioInquiryRequest" type="com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest" />
 
-  		<typeAlias alias="PlanoByServico" type="com.qat.samples.sysmgmt.contabilidade.model.PlanoByServico"/>
-  		<typeAlias alias="ServicoAndPlano" type="com.qat.samples.sysmgmt.site.model.ServicoAndPlano"/>
 
-  		<typeAlias alias="Estado" type="com.qat.samples.sysmgmt.estado.model.Estado"/>
-  		<typeAlias alias="ContatoItens" type="com.qat.samples.sysmgmt.contato.model.ContatoItens"/>
-  		<typeAlias alias="OrdemServicoItens" type="com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoItens"/>
+        <!-- Configuracao -->
+        <typeAlias alias="Boleto" type="com.qat.samples.sysmgmt.entidade.model.Boleto" />
+        <typeAlias alias="ConfigCarne" type="com.qat.samples.sysmgmt.entidade.model.ConfigCarne" />
+        <typeAlias alias="ConfigEntrada" type="com.qat.samples.sysmgmt.entidade.model.ConfigEntrada" />
+        <typeAlias alias="ConfigFiscal" type="com.qat.samples.sysmgmt.entidade.model.ConfigFiscal" />
+        <typeAlias alias="ConfigAlertas" type="com.qat.samples.sysmgmt.entidade.model.ConfigAlertas" />
+        <typeAlias alias="ConfigGeral" type="com.qat.samples.sysmgmt.entidade.model.ConfigGeral" />
+        <typeAlias alias="ConfigProduto" type="com.qat.samples.sysmgmt.entidade.model.ConfigProduto" />
+        <typeAlias alias="ConfigSMTP" type="com.qat.samples.sysmgmt.entidade.model.ConfigSMTP" />
+        <typeAlias alias="ConfiguracaoNFe" type="com.qat.samples.sysmgmt.entidade.model.ConfiguracaoNFe" />
+        <typeAlias alias="ConfigVendas" type="com.qat.samples.sysmgmt.entidade.model.ConfigVendas" />
+        <typeAlias alias="Configuracao" type="com.qat.samples.sysmgmt.entidade.model.Configuracao" />
 
 
-  		<!-- Dicionario -->
-  		<typeAlias alias="Field" type="com.qat.samples.sysmgmt.dicionario.Field"/>
-  		<typeAlias alias="Classes" type="com.qat.samples.sysmgmt.dicionario.Classes"/>
-  		<typeAlias alias="Interface" type="com.qat.samples.sysmgmt.dicionario.Interface"/>
-  		<typeAlias alias="FieldInquiryRequest" type="com.qat.samples.sysmgmt.dicionario.request.FieldInquiryRequest"/>
-  		<typeAlias alias="InterfaceInquiryRequest" type="com.qat.samples.sysmgmt.dicionario.request.InterfaceInquiryRequest"/>
-  		<typeAlias alias="ClassesInquiryRequest" type="com.qat.samples.sysmgmt.dicionario.request.ClassesInquiryRequest"/>
+        <!-- Util-->
+        <typeAlias alias="DoisValor" type="com.qat.samples.sysmgmt.util.model.DoisValor" />
 
-		<typeAlias alias="CondPagInquiryRequest" type="com.qat.samples.sysmgmt.financeiro.model.request.CondPagInquiryRequest"/>
+        <!-- Financeiro -->
 
-		<typeAlias alias="Advocacia" type="com.qat.samples.sysmgmt.advocacia.Advocacia"/>
-  		<typeAlias alias="Clinica" type="com.qat.samples.sysmgmt.clinica.model.Clinica"/>
-  		<typeAlias alias="Condominio" type="com.qat.samples.sysmgmt.condominio.model.Condominio"/>
+        <typeAlias alias="ContasPagar" type="com.qat.samples.sysmgmt.financeiro.model.ContasPagar" />
+        <typeAlias alias="Titulo" type="com.qat.samples.sysmgmt.financeiro.model.Titulo" />
+        <typeAlias alias="BaixaTitulo" type="com.qat.samples.sysmgmt.financeiro.model.BaixaTitulo" />
+        <typeAlias alias="TipoBaixa" type="com.qat.samples.sysmgmt.financeiro.model.TipoBaixa" />
+        <typeAlias alias="ContasReceber" type="com.qat.samples.sysmgmt.financeiro.model.ContasReceber" />
+        <typeAlias alias="CondPag" type="com.qat.samples.sysmgmt.condpag.model.CondPag" />
+        <typeAlias alias="ContaCorrente" type="com.qat.samples.sysmgmt.conta.model.ContaCorrente" />
+        <typeAlias alias="Caixa" type="com.qat.samples.sysmgmt.financeiro.model.Caixa" />
 
-  		<typeAlias alias="AdvocaciaInquiryRequest" type="com.qat.samples.sysmgmt.advocacia.request.AdvocaciaInquiryRequest"/>
-  		<typeAlias alias="ClinicaInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.ClinicaInquiryRequest"/>
-  		<typeAlias alias="CondominioInquiryRequest" type="com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest"/>
+        <typeAlias alias="ContasPagarInquiryRequest" type="com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarInquiryRequest" />
+        <typeAlias alias="ContasReceberInquiryRequest" type="com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberInquiryRequest" />
+        <typeAlias alias="ContaCorrenteInquiryRequest" type="com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteInquiryRequest" />
+        <typeAlias alias="CaixaInquiryRequest" type="com.qat.samples.sysmgmt.financeiro.model.request.CaixaInquiryRequest" />
 
+        <typeAlias alias="TabelaEnum" type="com.qat.samples.sysmgmt.util.model.TabelaEnum" />
+        <typeAlias alias="AcaoEnum" type="com.qat.samples.sysmgmt.util.model.AcaoEnum" />
+        <typeAlias alias="CdStatusTypeEnum" type="com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum" />
+        <typeAlias alias="PessoaTypeEnum" type="com.qat.samples.sysmgmt.pessoa.model.PessoaTypeEnum" />
 
-		<!-- Financeiro -->
+        <typeAlias alias="Sindico" type="com.qat.samples.sysmgmt.condominio.model.Sindico" />
+        <typeAlias alias="SindicoInquiryRequest" type="com.qat.samples.sysmgmt.condominio.model.request.SindicoInquiryRequest" />
 
-		<typeAlias alias="ContasPagar" type="com.qat.samples.sysmgmt.financeiro.model.ContasPagar"/>
-  		<typeAlias alias="Titulo" type="com.qat.samples.sysmgmt.financeiro.model.Titulo"/>
-  		<typeAlias alias="BaixaTitulo" type="com.qat.samples.sysmgmt.financeiro.model.BaixaTitulo"/>
-  		<typeAlias alias="TipoBaixa" type="com.qat.samples.sysmgmt.financeiro.model.TipoBaixa"/>
-  		<typeAlias alias="ContasReceber" type="com.qat.samples.sysmgmt.financeiro.model.ContasReceber"/>
-  		<typeAlias alias="CondPag" type="com.qat.samples.sysmgmt.condpag.model.CondPag"/>
-		<typeAlias alias="ContaCorrente" type="com.qat.samples.sysmgmt.conta.model.ContaCorrente"/>
-		<typeAlias alias="Caixa" type="com.qat.samples.sysmgmt.financeiro.model.Caixa"/>
+        <typeAlias alias="Inquilino" type="com.qat.samples.sysmgmt.condominio.model.Inquilino" />
+        <typeAlias alias="Site" type="com.qat.samples.sysmgmt.site.model.Site" />
+        <typeAlias alias="InquilinoInquiryRequest" type="com.qat.samples.sysmgmt.condominio.model.request.InquilinoInquiryRequest" />
+        <typeAlias alias="SiteInquiryRequest" type="com.qat.samples.sysmgmt.site.model.request.SiteInquiryRequest" />
 
-		<typeAlias alias="ContasPagarInquiryRequest" type="com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarInquiryRequest"/>
-		<typeAlias alias="ContasReceberInquiryRequest" type="com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberInquiryRequest"/>
-<typeAlias alias="ContaCorrenteInquiryRequest" type="com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteInquiryRequest"/>
-<typeAlias alias="CaixaInquiryRequest" type="com.qat.samples.sysmgmt.financeiro.model.request.CaixaInquiryRequest"/>
+        <typeAlias alias="PagedInquiryRequest" type="com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest" />
+        <!--      <typeAlias alias="CadastroInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest"/> -->
+        <typeAlias alias="ProdutoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest" />
+        <!--      <typeAlias alias="CidadeInquiryRequest" type="com.qat.samples.sysmgmt.cidade.model.request.CidadeInquiryRequest"/> -->
+        <!--      <typeAlias alias="Cidade" type="com.qat.samples.sysmgmt.cidade.model.Cidade"/> -->
+        <typeAlias alias="Produto" type="com.qat.samples.sysmgmt.produto.model.Produto" />
+        <typeAlias alias="ProdutoParent" type="com.qat.samples.sysmgmt.produto.model.ProdutoParent" />
 
-  		<typeAlias alias="TabelaEnum" type="com.qat.samples.sysmgmt.util.model.TabelaEnum"/>
-  		<typeAlias alias="AcaoEnum" type="com.qat.samples.sysmgmt.util.model.AcaoEnum"/>
-  		<typeAlias alias="CdStatusTypeEnum" type="com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum"/>
-  		<typeAlias alias="PessoaTypeEnum" type="com.qat.samples.sysmgmt.pessoa.model.PessoaTypeEnum"/>
+        <typeAlias alias="Cidade" type="com.qat.samples.sysmgmt.util.model.Cidade" />
+        <typeAlias alias="CidadeInquiryRequest" type="com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest" />
 
-  		<typeAlias alias="Sindico" type="com.qat.samples.sysmgmt.condominio.model.Sindico"/>
-  		<typeAlias alias="SindicoInquiryRequest" type="com.qat.samples.sysmgmt.condominio.model.request.SindicoInquiryRequest"/>
+        <typeAlias alias="Classificacao" type="com.qat.samples.sysmgmt.fiscal.model.Classificacao" />
+        <typeAlias alias="ClassificacaoInquiryRequest" type="com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest" />
 
-  		<typeAlias alias="Inquilino" type="com.qat.samples.sysmgmt.condominio.model.Inquilino"/>
-  		<typeAlias alias="Site" type="com.qat.samples.sysmgmt.site.model.Site"/>
-  		<typeAlias alias="InquilinoInquiryRequest" type="com.qat.samples.sysmgmt.condominio.model.request.InquilinoInquiryRequest"/>
-<typeAlias alias="SiteInquiryRequest" type="com.qat.samples.sysmgmt.site.model.request.SiteInquiryRequest"/>
+        <typeAlias alias="Regime" type="com.qat.samples.sysmgmt.fiscal.model.Regime" />
+        <typeAlias alias="RegimeInquiryRequest" type="com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest" />
 
-  		<typeAlias alias="PagedInquiryRequest" type="com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest"/>
-<!--   		<typeAlias alias="CadastroInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.CadastroInquiryRequest"/> -->
-  		<typeAlias alias="ProdutoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest"/>
-<!--   		<typeAlias alias="CidadeInquiryRequest" type="com.qat.samples.sysmgmt.cidade.model.request.CidadeInquiryRequest"/> -->
-<!--   		<typeAlias alias="Cidade" type="com.qat.samples.sysmgmt.cidade.model.Cidade"/> -->
-  		<typeAlias alias="Produto" type="com.qat.samples.sysmgmt.produto.model.Produto"/>
-  		<typeAlias alias="ProdutoParent" type="com.qat.samples.sysmgmt.produto.model.ProdutoParent"/>
+        <typeAlias alias="PlanoByServico" type="com.qat.samples.sysmgmt.contabilidade.model.PlanoByServico" />
 
-  		<typeAlias alias="Cidade" type="com.qat.samples.sysmgmt.util.model.Cidade"/>
-  		<typeAlias alias="CidadeInquiryRequest" type="com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest"/>
+        <typeAlias alias="Deposito" type="com.qat.samples.sysmgmt.entidade.model.Deposito" />
+        <typeAlias alias="DepositoInquiryRequest" type="com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest" />
 
-  		<typeAlias alias="Classificacao" type="com.qat.samples.sysmgmt.fiscal.model.Classificacao"/>
-  		<typeAlias alias="ClassificacaoInquiryRequest" type="com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest"/>
+        <typeAlias alias="Empresa" type="com.qat.samples.sysmgmt.entidade.model.Empresa" />
+        <typeAlias alias="EmpresaInquiryRequest" type="com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest" />
 
-  		<typeAlias alias="Regime" type="com.qat.samples.sysmgmt.fiscal.model.Regime"/>
-  		<typeAlias alias="RegimeInquiryRequest" type="com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest"/>
+        <typeAlias alias="Contato" type="com.qat.samples.sysmgmt.contato.model.Contato" />
+        <typeAlias alias="ContatoItens" type="com.qat.samples.sysmgmt.contato.model.ContatoItens" />
+        <typeAlias alias="ContatoInquiryRequest" type="com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest" />
 
-<typeAlias alias="PlanoByServico" type="com.qat.samples.sysmgmt.contabilidade.model.PlanoByServico"/>
+        <typeAlias alias="Filial" type="com.qat.samples.sysmgmt.entidade.model.Filial" />
+        <typeAlias alias="FilialInquiryRequest" type="com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest" />
 
-  		<typeAlias alias="Deposito" type="com.qat.samples.sysmgmt.entidade.model.Deposito"/>
-  		<typeAlias alias="DepositoInquiryRequest" type="com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest"/>
+        <typeAlias alias="Cnae" type="com.qat.samples.sysmgmt.cnae.model.Cnae" />
+        <typeAlias alias="CnaeInquiryRequest" type="com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest" />
+        <typeAlias alias="CnaeEmpresa" type="com.qat.samples.sysmgmt.cnae.model.CnaeEmpresa" />
 
-  		<typeAlias alias="Empresa" type="com.qat.samples.sysmgmt.entidade.model.Empresa"/>
-  		<typeAlias alias="EmpresaInquiryRequest" type="com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest"/>
 
-  		<typeAlias alias="Contato" type="com.qat.samples.sysmgmt.contato.model.Contato"/>
-  		<typeAlias alias="ContatoItens" type="com.qat.samples.sysmgmt.contato.model.ContatoItens"/>
-  		<typeAlias alias="ContatoInquiryRequest" type="com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest"/>
+        <typeAlias alias="Convenio" type="com.qat.samples.sysmgmt.convenio.model.Convenio" />
+        <typeAlias alias="ConvenioPessoa" type="com.qat.samples.sysmgmt.convenio.model.ConvenioPessoa" />
+        <typeAlias alias="ConvenioInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.ConvenioInquiryRequest" />
 
-  		<typeAlias alias="Filial" type="com.qat.samples.sysmgmt.entidade.model.Filial"/>
-  		<typeAlias alias="FilialInquiryRequest" type="com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest"/>
 
-  		<typeAlias alias="Cnae" type="com.qat.samples.sysmgmt.cnae.model.Cnae"/>
-  		<typeAlias alias="CnaeInquiryRequest" type="com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest"/>
-  		<typeAlias alias="CnaeEmpresa" type="com.qat.samples.sysmgmt.cnae.model.CnaeEmpresa"/>
 
+        <typeAlias alias="OrdemServicoTypes" type="com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoTypes" />
+        <typeAlias alias="OrdemServico" type="com.qat.samples.sysmgmt.ordemServico.model.OrdemServico" />
+        <typeAlias alias="OrdemServicoInquiryRequest" type="com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest" />
+        <typeAlias alias="OrdemServicoStatus" type="com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoStatus" />
+        <typeAlias alias="OrdemServicoItens" type="com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoItens" />
 
-  		<typeAlias alias="Convenio" type="com.qat.samples.sysmgmt.convenio.model.Convenio"/>
-  		<typeAlias alias="ConvenioPessoa" type="com.qat.samples.sysmgmt.convenio.model.ConvenioPessoa"/>
-  		<typeAlias alias="ConvenioInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.ConvenioInquiryRequest"/>
 
+        <typeAlias alias="Servico" type="com.qat.samples.sysmgmt.produto.model.Servico" />
+        <typeAlias alias="ServicoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest" />
 
+        <typeAlias alias="Plano" type="com.qat.samples.sysmgmt.contabilidade.model.Plano" />
+        <typeAlias alias="PlanoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest" />
 
-  		<typeAlias alias="OrdemServicoTypes" type="com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoTypes"/>
-  		<typeAlias alias="OrdemServico" type="com.qat.samples.sysmgmt.ordemServico.model.OrdemServico"/>
-  		<typeAlias alias="OrdemServicoInquiryRequest" type="com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest"/>
-  		<typeAlias alias="OrdemServicoStatus" type="com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoStatus"/>
-  		<typeAlias alias="OrdemServicoItens" type="com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoItens"/>
 
+        <typeAlias alias="Preco" type="com.qat.samples.sysmgmt.produto.model.Preco" />
 
-  		<typeAlias alias="Servico" type="com.qat.samples.sysmgmt.produto.model.Servico"/>
-  		<typeAlias alias="ServicoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest"/>
+        <typeAlias alias="Historico" type="com.qat.samples.sysmgmt.historico.model.Historico" />
 
-  		<typeAlias alias="Plano" type="com.qat.samples.sysmgmt.contabilidade.model.Plano"/>
-  		<typeAlias alias="PlanoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest"/>
+        <typeAlias alias="Imagem" type="com.qat.samples.sysmgmt.util.model.Imagem" />
 
+        <typeAlias alias="Status" type="com.qat.samples.sysmgmt.util.model.Status" />
+        <typeAlias alias="HistoricoItens" type="com.qat.samples.sysmgmt.historico.model.HistoricoItens" />
+        <typeAlias alias="HistoricoInquiryRequest" type="com.qat.samples.sysmgmt.historico.model.request.HistoricoInquiryRequest" />
 
-  		<typeAlias alias="Preco" type="com.qat.samples.sysmgmt.produto.model.Preco"/>
+        <typeAlias alias="Preco" type="com.qat.samples.sysmgmt.produto.model.Preco" />
+        <typeAlias alias="Socio" type="com.qat.samples.sysmgmt.pessoa.model.Socio" />
 
-  		<typeAlias alias="Historico" type="com.qat.samples.sysmgmt.historico.model.Historico"/>
+        <typeAlias alias="Endereco" type="com.qat.samples.sysmgmt.util.model.Endereco" />
+        <typeAlias alias="Email" type="com.qat.samples.sysmgmt.util.model.Email" />
+        <typeAlias alias="Telefone" type="com.qat.samples.sysmgmt.util.model.Telefone" />
+        <typeAlias alias="Documento" type="com.qat.samples.sysmgmt.util.model.Documento" />
+        <typeAlias alias="Estado" type="com.qat.samples.sysmgmt.estado.model.Estado" />
+        <typeAlias alias="EstadoInquiryRequest" type="com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest" />
 
-  		<typeAlias alias="Imagem" type="com.qat.samples.sysmgmt.util.model.Imagem"/>
+        <typeAlias alias="Usuario" type="com.qat.samples.sysmgmt.entidade.model.Usuario" />
+        <typeAlias alias="UsuarioInquiryRequest" type="com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest" />
 
-  		<typeAlias alias="Status" type="com.qat.samples.sysmgmt.util.model.Status"/>
-  		<typeAlias alias="HistoricoItens" type="com.qat.samples.sysmgmt.historico.model.HistoricoItens"/>
-  		<typeAlias alias="HistoricoInquiryRequest" type="com.qat.samples.sysmgmt.historico.model.request.HistoricoInquiryRequest"/>
 
-  		<typeAlias alias="Preco" type="com.qat.samples.sysmgmt.produto.model.Preco"/>
-  		<typeAlias alias="Socio" type="com.qat.samples.sysmgmt.pessoa.model.Socio"/>
+        <typeAlias alias="Agencia" type="com.qat.samples.sysmgmt.agencia.model.Agencia" />
+        <typeAlias alias="AgenciaInquiryRequest" type="com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest" />
 
-  		<typeAlias alias="Endereco" type="com.qat.samples.sysmgmt.util.model.Endereco"/>
-  		<typeAlias alias="Email" type="com.qat.samples.sysmgmt.util.model.Email"/>
-  		<typeAlias alias="Telefone" type="com.qat.samples.sysmgmt.util.model.Telefone"/>
-  		<typeAlias alias="Documento" type="com.qat.samples.sysmgmt.util.model.Documento"/>
-  		<typeAlias alias="Estado" type="com.qat.samples.sysmgmt.estado.model.Estado"/>
-		<typeAlias alias="EstadoInquiryRequest" type="com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest"/>
+        <typeAlias alias="Banco" type="com.qat.samples.sysmgmt.banco.model.Banco" />
+        <typeAlias alias="BancoPessoa" type="com.qat.samples.sysmgmt.banco.model.BancoPessoa" />
+        <typeAlias alias="BancoInquiryRequest" type="com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest" />
 
-		<typeAlias alias="Usuario" type="com.qat.samples.sysmgmt.entidade.model.Usuario"/>
-  		<typeAlias alias="UsuarioInquiryRequest" type="com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest"/>
+        <typeAlias alias="CondPagPessoa" type="com.qat.samples.sysmgmt.condpag.model.CondPagPessoa" />
+        <typeAlias alias="TipoPag" type="com.qat.samples.sysmgmt.condpag.model.TipoPag" />
 
 
-  		<typeAlias alias="Agencia" type="com.qat.samples.sysmgmt.agencia.model.Agencia"/>
-  		<typeAlias alias="AgenciaInquiryRequest" type="com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest"/>
 
-  		<typeAlias alias="Banco" type="com.qat.samples.sysmgmt.banco.model.Banco"/>
-  		<typeAlias alias="BancoPessoa" type="com.qat.samples.sysmgmt.banco.model.BancoPessoa"/>
-  		<typeAlias alias="BancoInquiryRequest" type="com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest"/>
+        <typeAlias alias="FormaPg" type="com.qat.samples.sysmgmt.condpag.model.FormaPg" />
+        <typeAlias alias="FormaPgPessoa" type="com.qat.samples.sysmgmt.condpag.model.FormaPgPessoa" />
+        <typeAlias alias="FormaPgInquiryRequest" type="com.qat.samples.sysmgmt.condpag.model.request.FormaPgInquiryRequest" />
 
-  		<typeAlias alias="CondPagPessoa" type="com.qat.samples.sysmgmt.condpag.model.CondPagPessoa"/>
-  		<typeAlias alias="TipoPag" type="com.qat.samples.sysmgmt.condpag.model.TipoPag"/>
+        <typeAlias alias="Beneficios" type="com.qat.samples.sysmgmt.beneficios.model.Beneficios" />
+        <typeAlias alias="BeneficioPessoa" type="com.qat.samples.sysmgmt.beneficios.model.BeneficioPessoa" />
+        <typeAlias alias="BeneficioMesApp" type="com.qat.samples.sysmgmt.beneficios.model.BeneficioMesApp" />
+        <typeAlias alias="BeneficiosInquiryRequest" type="com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest" />
 
+        <typeAlias alias="Cliente" type="com.qat.samples.sysmgmt.pessoa.model.Cliente" />
+        <typeAlias alias="ClienteInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest" />
+        <typeAlias alias="SocioInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.SocioInquiryRequest" />
 
+        <typeAlias alias="Cliente" type="com.qat.samples.sysmgmt.pessoa.model.Cliente" />
+        <typeAlias alias="ClienteInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest" />
 
-  		<typeAlias alias="FormaPg" type="com.qat.samples.sysmgmt.condpag.model.FormaPg"/>
-  		<typeAlias alias="FormaPgPessoa" type="com.qat.samples.sysmgmt.condpag.model.FormaPgPessoa"/>
-  		<typeAlias alias="FormaPgInquiryRequest" type="com.qat.samples.sysmgmt.condpag.model.request.FormaPgInquiryRequest"/>
+        <typeAlias alias="Contato" type="com.qat.samples.sysmgmt.contato.model.Contato" />
+        <typeAlias alias="ContatoItens" type="com.qat.samples.sysmgmt.contato.model.ContatoItens" />
+        <typeAlias alias="ContatoInquiryRequest" type="com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest" />
 
-  		<typeAlias alias="Beneficios" type="com.qat.samples.sysmgmt.beneficios.model.Beneficios"/>
-  		<typeAlias alias="BeneficioPessoa" type="com.qat.samples.sysmgmt.beneficios.model.BeneficioPessoa"/>
-  		<typeAlias alias="BeneficioMesApp" type="com.qat.samples.sysmgmt.beneficios.model.BeneficioMesApp"/>
-  		<typeAlias alias="BeneficiosInquiryRequest" type="com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest"/>
+        <typeAlias alias="Cfop" type="com.qat.samples.sysmgmt.cfop.model.Cfop" />
+        <typeAlias alias="CfopParentId" type="com.qat.samples.sysmgmt.cfop.model.CfopParentId" />
+        <typeAlias alias="CfopInquiryRequest" type="com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest" />
 
-  		<typeAlias alias="Cliente" type="com.qat.samples.sysmgmt.pessoa.model.Cliente"/>
-  		<typeAlias alias="ClienteInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest"/>
-  		<typeAlias alias="SocioInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.SocioInquiryRequest"/>
+        <typeAlias alias="Eventos" type="com.qat.samples.sysmgmt.dp.model.Eventos" />
+        <typeAlias alias="Salario" type="com.qat.samples.sysmgmt.dp.model.Salario" />
+        <typeAlias alias="EventoPessoa" type="com.qat.samples.sysmgmt.dp.model.EventoPessoa" />
+        <typeAlias alias="EventoInquiryRequest" type="com.qat.samples.sysmgmt.dp.model.request.EventoInquiryRequest" />
 
-  		<typeAlias alias="Cliente" type="com.qat.samples.sysmgmt.pessoa.model.Cliente"/>
-  		<typeAlias alias="ClienteInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest"/>
+        <typeAlias alias="HorarioFunc" type="com.qat.samples.sysmgmt.dp.model.HorarioFunc" />
+        <typeAlias alias="HoraFuncInquiryRequest" type="com.qat.samples.sysmgmt.dp.model.request.HoraFuncInquiryRequest" />
 
-  		<typeAlias alias="Contato" type="com.qat.samples.sysmgmt.contato.model.Contato"/>
-  		<typeAlias alias="ContatoItens" type="com.qat.samples.sysmgmt.contato.model.ContatoItens"/>
-  		<typeAlias alias="ContatoInquiryRequest" type="com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest"/>
+        <typeAlias alias="Fornecedor" type="com.qat.samples.sysmgmt.pessoa.model.Fornecedor" />
+        <typeAlias alias="FornecedorInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.FornecedorInquiryRequest" />
 
-  		<typeAlias alias="Cfop" type="com.qat.samples.sysmgmt.cfop.model.Cfop"/>
-  		<typeAlias alias="CfopParentId" type="com.qat.samples.sysmgmt.cfop.model.CfopParentId"/>
-  		<typeAlias alias="CfopInquiryRequest" type="com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest"/>
+        <typeAlias alias="Funcionario" type="com.qat.samples.sysmgmt.pessoa.model.Funcionario" />
+        <typeAlias alias="FuncionarioInquiryRequest" type="com.qat.samples.sysmgmt.dp.model.request.FuncionarioInquiryRequest" />
 
-  		<typeAlias alias="Eventos" type="com.qat.samples.sysmgmt.dp.model.Eventos"/>
-  		<typeAlias alias="Salario" type="com.qat.samples.sysmgmt.dp.model.Salario"/>
-  		<typeAlias alias="EventoPessoa" type="com.qat.samples.sysmgmt.dp.model.EventoPessoa"/>
-  		<typeAlias alias="EventoInquiryRequest" type="com.qat.samples.sysmgmt.dp.model.request.EventoInquiryRequest"/>
+        <typeAlias alias="Contador" type="com.qat.samples.sysmgmt.pessoa.model.Contador" />
 
-  		<typeAlias alias="HorarioFunc" type="com.qat.samples.sysmgmt.dp.model.HorarioFunc"/>
-  		<typeAlias alias="HoraFuncInquiryRequest" type="com.qat.samples.sysmgmt.dp.model.request.HoraFuncInquiryRequest"/>
+        <typeAlias alias="Pessoa" type="com.qat.samples.sysmgmt.pessoa.model.Pessoa" />
 
-  		<typeAlias alias="Fornecedor" type="com.qat.samples.sysmgmt.pessoa.model.Fornecedor"/>
-  		<typeAlias alias="FornecedorInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.FornecedorInquiryRequest"/>
+        <typeAlias alias="Transportador" type="com.qat.samples.sysmgmt.pessoa.model.Transportador" />
+        <typeAlias alias="TransportadorInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.TransportadorInquiryRequest" />
 
-  		<typeAlias alias="Funcionario" type="com.qat.samples.sysmgmt.pessoa.model.Funcionario"/>
-  		<typeAlias alias="FuncionarioInquiryRequest" type="com.qat.samples.sysmgmt.dp.model.request.FuncionarioInquiryRequest"/>
+        <typeAlias alias="Agencia" type="com.qat.samples.sysmgmt.agencia.model.Agencia" />
+        <typeAlias alias="AgenciaInquiryRequest" type="com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest" />
 
-		<typeAlias alias="Contador" type="com.qat.samples.sysmgmt.pessoa.model.Contador"/>
+        <typeAlias alias="Profissao" type="com.qat.samples.sysmgmt.dp.model.Profissao" />
+        <typeAlias alias="ProfissaoInquiryRequest" type="com.qat.samples.sysmgmt.dp.model.request.ProfissaoInquiryRequest" />
 
-  		<typeAlias alias="Pessoa" type="com.qat.samples.sysmgmt.pessoa.model.Pessoa"/>
+        <typeAlias alias="Note" type="com.qat.samples.sysmgmt.util.model.Note" />
 
-  		<typeAlias alias="Transportador" type="com.qat.samples.sysmgmt.pessoa.model.Transportador"/>
-  		<typeAlias alias="TransportadorInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.TransportadorInquiryRequest"/>
+        <typeAlias alias="Cidade" type="com.qat.samples.sysmgmt.util.model.Cidade" />
 
-  		<typeAlias alias="Agencia" type="com.qat.samples.sysmgmt.agencia.model.Agencia"/>
-  		<typeAlias alias="AgenciaInquiryRequest" type="com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest"/>
 
-  		<typeAlias alias="Profissao" type="com.qat.samples.sysmgmt.dp.model.Profissao"/>
-  		<typeAlias alias="ProfissaoInquiryRequest" type="com.qat.samples.sysmgmt.dp.model.request.ProfissaoInquiryRequest"/>
 
-  		<typeAlias alias="Note" type="com.qat.samples.sysmgmt.util.model.Note"/>
 
-  		<typeAlias alias="Cidade" type="com.qat.samples.sysmgmt.util.model.Cidade"/>
+        <typeAlias alias="AgenciaInquiryRequest" type="com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest" />
 
+        <typeAlias alias="Consulta" type="com.qat.samples.sysmgmt.clinica.model.Consulta" />
+        <typeAlias alias="ConsultaInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.ConsultaInquiryRequest" />
 
+        <typeAlias alias="Especialidade" type="com.qat.samples.sysmgmt.clinica.model.Especialidade" />
+        <typeAlias alias="EspecialidadePessoa" type="com.qat.samples.sysmgmt.clinica.model.EspecialidadePessoa" />
 
+        <typeAlias alias="Exame" type="com.qat.samples.sysmgmt.clinica.model.Exame" />
+        <typeAlias alias="ExameInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.ExameInquiryRequest" />
 
-  		<typeAlias alias="AgenciaInquiryRequest" type="com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest"/>
+        <typeAlias alias="Medico" type="com.qat.samples.sysmgmt.pessoa.model.Medico" />
+        <typeAlias alias="MedicoInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.MedicoInquiryRequest" />
 
-		<typeAlias alias="Consulta" type="com.qat.samples.sysmgmt.clinica.model.Consulta"/>
-  		<typeAlias alias="ConsultaInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.ConsultaInquiryRequest"/>
+        <typeAlias alias="Paciente" type="com.qat.samples.sysmgmt.pessoa.model.Paciente" />
+        <typeAlias alias="PacienteInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.PacienteInquiryRequest" />
 
-		<typeAlias alias="Especialidade" type="com.qat.samples.sysmgmt.clinica.model.Especialidade"/>
-  		<typeAlias alias="EspecialidadePessoa" type="com.qat.samples.sysmgmt.clinica.model.EspecialidadePessoa"/>
+        <typeAlias alias="PlanoSaude" type="com.qat.samples.sysmgmt.clinica.model.PlanoSaude" />
+        <typeAlias alias="PlanoSaudePessoa" type="com.qat.samples.sysmgmt.clinica.model.PlanoSaudePessoa" />
+        <typeAlias alias="PlanoSaudeInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.PlanoSaudeInquiryRequest" />
 
-		<typeAlias alias="Exame" type="com.qat.samples.sysmgmt.clinica.model.Exame"/>
-  		<typeAlias alias="ExameInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.ExameInquiryRequest"/>
 
-		<typeAlias alias="Medico" type="com.qat.samples.sysmgmt.pessoa.model.Medico"/>
-  		<typeAlias alias="MedicoInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.MedicoInquiryRequest"/>
+        <!-- Produtos -->
+        <typeAlias alias="Cfop" type="com.qat.samples.sysmgmt.cfop.model.Cfop" />
+        <typeAlias alias="CfopInquiryRequest" type="com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest" />
 
-		<typeAlias alias="Paciente" type="com.qat.samples.sysmgmt.pessoa.model.Paciente"/>
-  		<typeAlias alias="PacienteInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.PacienteInquiryRequest"/>
+        <typeAlias alias="Classificacao" type="com.qat.samples.sysmgmt.fiscal.model.Classificacao" />
+        <typeAlias alias="ClassificacaoInquiryRequest" type="com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest" />
 
-		<typeAlias alias="PlanoSaude" type="com.qat.samples.sysmgmt.clinica.model.PlanoSaude"/>
-  		<typeAlias alias="PlanoSaudePessoa" type="com.qat.samples.sysmgmt.clinica.model.PlanoSaudePessoa"/>
-  		<typeAlias alias="PlanoSaudeInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.PlanoSaudeInquiryRequest"/>
+        <typeAlias alias="Cst" type="com.qat.samples.sysmgmt.fiscal.model.Cst" />
 
+        <typeAlias alias="MarcaProduto" type="com.qat.samples.sysmgmt.produto.model.MarcaProduto" />
 
-<!-- Produtos -->
-		<typeAlias alias="Cfop" type="com.qat.samples.sysmgmt.cfop.model.Cfop"/>
-  		<typeAlias alias="CfopInquiryRequest" type="com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest"/>
+        <typeAlias alias="Custo" type="com.qat.samples.sysmgmt.produto.model.Custo" />
+        <typeAlias alias="CustoItens" type="com.qat.samples.sysmgmt.produto.model.CustoItens" />
 
-		<typeAlias alias="Classificacao" type="com.qat.samples.sysmgmt.fiscal.model.Classificacao"/>
-  		<typeAlias alias="ClassificacaoInquiryRequest" type="com.qat.samples.sysmgmt.fiscal.model.request.ClassificacaoInquiryRequest"/>
-
-		<typeAlias alias="Cst" type="com.qat.samples.sysmgmt.fiscal.model.Cst"/>
-
-<typeAlias alias="MarcaProduto" type="com.qat.samples.sysmgmt.produto.model.MarcaProduto"/>
-
-		<typeAlias alias="Custo" type="com.qat.samples.sysmgmt.produto.model.Custo"/>
-		<typeAlias alias="CustoItens" type="com.qat.samples.sysmgmt.produto.model.CustoItens"/>
-
-<!--
-		<mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/custoItens.xml"/>
-		<typeAlias alias="CustoItens" type="com.qat.samples.sysmgmt.pessoa.Medico"/>
-  		<typeAlias alias="MedicoInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.MedicoInquiryRequest"/>
+        <!--
+    <mapper resource="com/qat/samples/sysmgmt/produto/dac/mybatis/map/custoItens.xml"/>
+    <typeAlias alias="CustoItens" type="com.qat.samples.sysmgmt.pessoa.Medico"/>
+      <typeAlias alias="MedicoInquiryRequest" type="com.qat.samples.sysmgmt.clinica.model.request.MedicoInquiryRequest"/>
 -->
-		<typeAlias alias="Estoque" type="com.qat.samples.sysmgmt.produto.model.Estoque"/>
+        <typeAlias alias="Estoque" type="com.qat.samples.sysmgmt.produto.model.Estoque" />
 
-		<typeAlias alias="Grupo" type="com.qat.samples.sysmgmt.produto.model.Grupo"/>
-		<typeAlias alias="GrupoProd" type="com.qat.samples.sysmgmt.produto.model.GrupoProd"/>
-  		<typeAlias alias="GrupoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.GrupoInquiryRequest"/>
+        <typeAlias alias="Grupo" type="com.qat.samples.sysmgmt.produto.model.Grupo" />
+        <typeAlias alias="GrupoProd" type="com.qat.samples.sysmgmt.produto.model.GrupoProd" />
+        <typeAlias alias="GrupoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.GrupoInquiryRequest" />
 
-		<typeAlias alias="Marca" type="com.qat.samples.sysmgmt.produto.model.Marca"/>
+        <typeAlias alias="Marca" type="com.qat.samples.sysmgmt.produto.model.Marca" />
 
-  		<typeAlias alias="MarcaInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest"/>
+        <typeAlias alias="MarcaInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest" />
 
-		<typeAlias alias="Porcao" type="com.qat.samples.sysmgmt.produto.model.Porcao"/>
-		<typeAlias alias="PorcaoItens" type="com.qat.samples.sysmgmt.produto.model.PorcaoItens"/>
-
-
-		<typeAlias alias="Rentabilidade" type="com.qat.samples.sysmgmt.produto.model.Rentabilidade"/>
-
-		<typeAlias alias="RentabilidadeItens" type="com.qat.samples.sysmgmt.produto.model.RentabilidadeItens"/>
-
-		<typeAlias alias="SubGrupoProd" type="com.qat.samples.sysmgmt.produto.model.SubGrupoProd"/>
-  		<typeAlias alias="SubGrupoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest"/>
-
-		<typeAlias alias="Tributacao" type="com.qat.samples.sysmgmt.fiscal.model.Tributacao"/>
-  		<typeAlias alias="TributacaoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest"/>
-<typeAlias alias="ProdutoParentInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.ProdutoParentInquiryRequest"/>
-<typeAlias alias="ProdutoParent" type="com.qat.samples.sysmgmt.produto.model.ProdutoParent"/>
-		<typeAlias alias="UniMed" type="com.qat.samples.sysmgmt.produto.model.UniMed"/>
-		<typeAlias alias="SubGrupo" type="com.qat.samples.sysmgmt.produto.model.SubGrupo"/>
-		<typeAlias alias="UniMedProd" type="com.qat.samples.sysmgmt.produto.model.UniMedProd"/>
-  		<typeAlias alias="UniMedInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest"/>
-
-  		<typeAlias alias="Advogado" type="com.qat.samples.sysmgmt.advocacia.Advogado"/>
-  		<typeAlias alias="AdvogadoInquiryRequest" type="com.qat.samples.sysmgmt.advocacia.request.AdvogadoInquiryRequest"/>
-
-  	</typeAliases>
-
- 	<mappers>
-    	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/county.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/drug.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/procedure.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/cbof.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/estado.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/entidade.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/cidade.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/cnae.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/cnaeEmpresa.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/classificacao.xml"/>
-
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/deposito.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/empresa.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/filial.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/clinica.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/condominio.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/advocacia.xml"/>
-
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/regime.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/servico.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/preco.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/historico.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/historicoItens.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/status.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/imagens.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/plano.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/contato.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/ordemServico.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/ordemServicoItens.xml"/>
-     	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/socios.xml"/>
-
-      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/documento.xml"/>
-      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/email.xml"/>
-      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/telefone.xml"/>
-      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/endereco.xml"/>
-      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/usuario.xml"/>
-      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/agencia.xml"/>
-      	<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/banco.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/beneficios.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/cliente.xml"/>
-	<!--	<mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/contato.xml"/>-->
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/evento.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/fornecedor.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/funcionario.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/pessoa.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/transportador.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/agencia.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/salarios.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/profissao.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/note.xml"/>
-		<!--  <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/condpag.xml"/>-->
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/contador.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/horaFunc.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/formapg.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/convenio.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/cfop.xml"/>
-
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/consulta.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/especialidade.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/exame.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/medico.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/paciente.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/planoSaude.xml"/>
+        <typeAlias alias="Porcao" type="com.qat.samples.sysmgmt.produto.model.Porcao" />
+        <typeAlias alias="PorcaoItens" type="com.qat.samples.sysmgmt.produto.model.PorcaoItens" />
 
 
-		<!-- Produtos -->
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/cst.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/custo.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/custoItens.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/estoque.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/grupo.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/marca.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/porcao.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/porcaoItens.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/rentabilidade.xml"/>
-		 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/rentabilidadeItens.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/subgrupo.xml"/>
+        <typeAlias alias="Rentabilidade" type="com.qat.samples.sysmgmt.produto.model.Rentabilidade" />
 
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/tributos.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/uniMed.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/produto.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/advogado.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/exame.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/consulta.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/field.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/classes.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/interface.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/sindico.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/inquilino.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/contatoItens.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/preco.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/site.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/ordemServicoItens.xml"/>
+        <typeAlias alias="RentabilidadeItens" type="com.qat.samples.sysmgmt.produto.model.RentabilidadeItens" />
 
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/contasPagar.xml"/>
-  		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/titulo.xml"/>
-  		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/baixaTitulo.xml"/>
-  		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/tipoBaixa.xml"/>
-  		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/contasReceber.xml"/>
-  		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/condpag.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/banco.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/contaCorrente.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/caixa.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/tributacao.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/produtoParent.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/marcaProduto.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/planoByServico.xml"/>
-		<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/servicoAndPlano.xml"/>
+        <typeAlias alias="SubGrupoProd" type="com.qat.samples.sysmgmt.produto.model.SubGrupoProd" />
+        <typeAlias alias="SubGrupoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest" />
+
+        <typeAlias alias="Tributacao" type="com.qat.samples.sysmgmt.fiscal.model.Tributacao" />
+        <typeAlias alias="TributacaoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest" />
+        <typeAlias alias="ProdutoParentInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.ProdutoParentInquiryRequest" />
+        <typeAlias alias="ProdutoParent" type="com.qat.samples.sysmgmt.produto.model.ProdutoParent" />
+        <typeAlias alias="UniMed" type="com.qat.samples.sysmgmt.produto.model.UniMed" />
+        <typeAlias alias="SubGrupo" type="com.qat.samples.sysmgmt.produto.model.SubGrupo" />
+        <typeAlias alias="UniMedProd" type="com.qat.samples.sysmgmt.produto.model.UniMedProd" />
+        <typeAlias alias="UniMedInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest" />
+
+        <typeAlias alias="Advogado" type="com.qat.samples.sysmgmt.advocacia.Advogado" />
+        <typeAlias alias="AdvogadoInquiryRequest" type="com.qat.samples.sysmgmt.advocacia.request.AdvogadoInquiryRequest" />
+
+    </typeAliases>
+
+    <mappers>
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/county.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/drug.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/procedure.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/cbof.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/estado.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/entidade.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/cidade.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/cnae.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/cnaeEmpresa.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/classificacao.xml" />
+
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/deposito.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/empresa.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/filial.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/clinica.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/condominio.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/advocacia.xml" />
+
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/regime.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/servico.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/preco.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/historico.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/historicoItens.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/status.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/imagens.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/plano.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/contato.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/ordemServico.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/ordemServicoItens.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/socios.xml" />
+
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/documento.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/email.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/telefone.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/endereco.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/usuario.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/agencia.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/banco.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/beneficios.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/cliente.xml" />
+        <!--  <mapper resource="com/qat/samples/sysmgmt/pessoa/dac/mybatis/map/contato.xml"/>-->
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/evento.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/fornecedor.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/funcionario.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/pessoa.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/transportador.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/agencia.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/salarios.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/profissao.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/note.xml" />
+        <!--  <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/condpag.xml"/>-->
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/contador.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/horaFunc.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/formapg.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/convenio.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/cfop.xml" />
+
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/consulta.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/especialidade.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/exame.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/medico.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/paciente.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/planoSaude.xml" />
+
+
+        <!-- Produtos -->
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/cst.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/custo.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/custoItens.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/estoque.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/grupo.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/marca.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/porcao.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/porcaoItens.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/rentabilidade.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/rentabilidadeItens.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/subgrupo.xml" />
+
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/tributos.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/uniMed.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/produto.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/advogado.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/exame.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/consulta.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/field.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/classes.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/interface.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/sindico.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/inquilino.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/contatoItens.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/preco.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/site.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/ordemServicoItens.xml" />
+
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/contasPagar.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/titulo.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/baixaTitulo.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/tipoBaixa.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/contasReceber.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/condpag.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/banco.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/contaCorrente.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/caixa.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/tributacao.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/produtoParent.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/marcaProduto.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/planoByServico.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/servicoAndPlano.xml" />
+        <!-- Configuracao -->
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/boleto.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configCarne.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configEntrada.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configFiscal.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configAlertas.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configGeral.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configProduto.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configSMTP.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configuracaoNFe.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configVendas.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configuracao.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/doisValor.xml" />
     </mappers>
 
 </configuration>
