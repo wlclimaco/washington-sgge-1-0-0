@@ -25,7 +25,7 @@ implXML = function(oField, name) {
                 if (oField[i].field.tipo.indexOf('List') > -1) {
                     text = text + '<collection property="' + oField[i].field.campo + '" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>\n';
                 } else {
-                    if ((oField[i].field.tipo.toLowerCase() == 'integer') || (oField[i].field.tipo.toLowerCase() == 'double')||(oField[i].field.tipo.toLowerCase() == 'string')||(oField[i].field.tipo.toLowerCase() == 'data')||(oField[i].field.tipo.toLowerCase() == 'float')) 
+                    if ((oField[i].field.tipo.toLowerCase() == 'boolean') ||(oField[i].field.tipo.toLowerCase() == 'integer') || (oField[i].field.tipo.toLowerCase() == 'double')||(oField[i].field.tipo.toLowerCase() == 'string')||(oField[i].field.tipo.toLowerCase() == 'data')||(oField[i].field.tipo.toLowerCase() == 'float')) 
                     {
                         text = text + '    <result property="' + oField[i].field.campo + '" column="' + oField[i].field.campo + '"/>\n';
                     } else {
@@ -78,7 +78,7 @@ implXML = function(oField, name) {
         if (oField[i].field.xml == true) {
             if (oField[i].field.tipo !== undefined) {
                 if ((oField[i].field.tipo.indexOf('List') == -1) && (oField[i].field.campo !== 'id')) {
-                    if ((oField[i].field.tipo.toLowerCase() == 'integer') || (oField[i].field.tipo.toLowerCase() == 'double')||(oField[i].field.tipo.toLowerCase() == 'string')||(oField[i].field.tipo.toLowerCase() == 'data')||(oField[i].field.tipo.toLowerCase() == 'float')) 
+                    if ((oField[i].field.tipo.toLowerCase() == 'boolean') ||(oField[i].field.tipo.toLowerCase() == 'integer') || (oField[i].field.tipo.toLowerCase() == 'double')||(oField[i].field.tipo.toLowerCase() == 'string')||(oField[i].field.tipo.toLowerCase() == 'data')||(oField[i].field.tipo.toLowerCase() == 'float')) 
                     {
                         text = text + '#{' + oField[i].field.campo + '},\n';
                     } else {
@@ -141,7 +141,7 @@ implXML = function(oField, name) {
         if (oField[i].field.xml == true) {
             if (oField[i].field.tipo !== undefined) {
                 if ((oField[i].field.tipo.indexOf('List') == -1) && (oField[i].field.campo !== 'id')) {
-                    if ((oField[i].field.tipo.toLowerCase() == 'integer') || (oField[i].field.tipo.toLowerCase() == 'double')||(oField[i].field.tipo.toLowerCase() == 'string')||(oField[i].field.tipo.toLowerCase() == 'data')||(oField[i].field.tipo.toLowerCase() == 'float')) 
+                    if ((oField[i].field.tipo.toLowerCase() == 'boolean') ||(oField[i].field.tipo.toLowerCase() == 'integer') || (oField[i].field.tipo.toLowerCase() == 'double')||(oField[i].field.tipo.toLowerCase() == 'string')||(oField[i].field.tipo.toLowerCase() == 'data')||(oField[i].field.tipo.toLowerCase() == 'float')) 
                     {
                         text = text + '<if test="' + oField[i].field.campo + '!= null">' + oField[i].field.campo + ' = #{' + oField[i].field.campo + '},</if>\n';
                     } else {
