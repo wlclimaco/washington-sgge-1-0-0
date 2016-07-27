@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 27/07/2016 12:18 : 35-->
+<!-- create by system gera-java version 1.0.0 27/07/2016 17:55 : 21-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -17,16 +17,16 @@
        exactly. -->
   <resultMap id="BoletoResult" type="Boleto">
     <result property="id" column="id"/>
-    <collection property="ativarBolOnLine" column="ativarBolOnLine" select="RegimeMap.fetchRegimeById"/>
-    <collection property="tipoBoleto" column="tipoBoleto" select="RegimeMap.fetchRegimeById"/>
+    <result property="ativarBolOnLine" column="ativarBolOnLine"/>
+
     <result property="agencia" column="agencia"/>
     <result property="cedente" column="cedente"/>
     <result property="juros" column="juros"/>
-    <collection property="tipoCalcMora" column="tipoCalcMora" select="RegimeMap.fetchRegimeById"/>
+
     <result property="mora" column="mora"/>
     <result property="instrucoes" column="instrucoes"/>
     <result property="demonstrativo" column="demonstrativo"/>
-    <collection property="impJuros" column="impJuros" select="RegimeMap.fetchRegimeById"/>
+    <result property="impJuros" column="impJuros"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -35,6 +35,8 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<collection property="tipoBoleto" column="tipoBoleto" select="RegimeMap.fetchRegimeById"/>
+<collection property="tipoCalcMora" column="tipoCalcMora" select="RegimeMap.fetchRegimeById"/>
   </resultMap>
 
   <sql id="allBoletoColumns">
@@ -59,7 +61,7 @@
 
 </sql>
 <sql id="allBoletoValues">
-#{ativarBolOnLine.id},
+#{ativarBolOnLine},
 #{tipoBoleto.id},
 #{agencia},
 #{cedente},
@@ -68,7 +70,7 @@
 #{mora},
 #{instrucoes},
 #{demonstrativo},
-#{impJuros.id},
+#{impJuros},
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -114,7 +116,7 @@
 
  <update id="updateBoleto" parameterType="Boleto">
    UPDATE boleto SET
-<if test="ativarBolOnLine!= null">ativarBolOnLine = #{ativarBolOnLine.id},</if>
+<if test="ativarBolOnLine!= null">ativarBolOnLine = #{ativarBolOnLine},</if>
 <if test="tipoBoleto!= null">tipoBoleto = #{tipoBoleto.id},</if>
 <if test="agencia!= null">agencia = #{agencia},</if>
 <if test="cedente!= null">cedente = #{cedente},</if>
@@ -123,7 +125,7 @@
 <if test="mora!= null">mora = #{mora},</if>
 <if test="instrucoes!= null">instrucoes = #{instrucoes},</if>
 <if test="demonstrativo!= null">demonstrativo = #{demonstrativo},</if>
-<if test="impJuros!= null">impJuros = #{impJuros.id},</if>
+<if test="impJuros!= null">impJuros = #{impJuros},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>

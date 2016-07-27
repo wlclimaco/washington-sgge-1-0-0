@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 27/07/2016 12:18 : 35-->
+<!-- create by system gera-java version 1.0.0 27/07/2016 17:55 : 21-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -17,25 +17,24 @@
        exactly. -->
   <resultMap id="ConfiguracaoNFeResult" type="ConfiguracaoNFe">
     <result property="id" column="id"/>
-    <collection property="presCompr" column="presCompr" select="RegimeMap.fetchRegimeById"/>
-    <collection property="destConsFinal" column="destConsFinal" select="RegimeMap.fetchRegimeById"/>
-    <collection property="preencherDataHora" column="preencherDataHora" select="RegimeMap.fetchRegimeById"/>
+
+    <result property="destConsFinal" column="destConsFinal"/>
+    <result property="preencherDataHora" column="preencherDataHora"/>
     <result property="icmsPadrao" column="icmsPadrao"/>
     <result property="ipiPadrao" column="ipiPadrao"/>
     <result property="pisPadrao" column="pisPadrao"/>
     <result property="cofinsPadrao" column="cofinsPadrao"/>
-    <collection property="ambienteEnvio" column="ambienteEnvio" select="RegimeMap.fetchRegimeById"/>
+
     <result property="servMsmNota" column="servMsmNota"/>
     <result property="serieEnvio" column="serieEnvio"/>
-    <collection property="anexarXmlEmail" column="anexarXmlEmail" select="RegimeMap.fetchRegimeById"/>
+    <result property="anexarXmlEmail" column="anexarXmlEmail"/>
     <result property="idCSC" column="idCSC"/>
     <result property="cSC" column="cSC"/>
     <result property="informacaoAdd" column="informacaoAdd"/>
     <result property="certificado" column="certificado"/>
     <result property="senha" column="senha"/>
-    <collection property="salvarSenha" column="salvarSenha" select="RegimeMap.fetchRegimeById"/>
-    <collection property="cfopPadrao" column="cfopPadrao" select="RegimeMap.fetchRegimeById"/>
-    <collection property="confSMTP" column="confSMTP" select="RegimeMap.fetchRegimeById"/>
+    <result property="salvarSenha" column="salvarSenha"/>
+
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -44,6 +43,10 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<collection property="ambienteEnvio" column="ambienteEnvio" select="RegimeMap.fetchRegimeById"/>
+<collection property="cfopPadrao" column="cfopPadrao" select="RegimeMap.fetchRegimeById"/>
+<collection property="confSMTP" column="confSMTP" select="RegimeMap.fetchRegimeById"/>
+<collection property="presCompr" column="presCompr" select="RegimeMap.fetchRegimeById"/>
   </resultMap>
 
   <sql id="allConfiguracaoNFeColumns">
@@ -78,8 +81,8 @@
 </sql>
 <sql id="allConfiguracaoNFeValues">
 #{presCompr.id},
-#{destConsFinal.id},
-#{preencherDataHora.id},
+#{destConsFinal},
+#{preencherDataHora},
 #{icmsPadrao},
 #{ipiPadrao},
 #{pisPadrao},
@@ -87,13 +90,13 @@
 #{ambienteEnvio.id},
 #{servMsmNota},
 #{serieEnvio},
-#{anexarXmlEmail.id},
+#{anexarXmlEmail},
 #{idCSC},
 #{cSC},
 #{informacaoAdd},
 #{certificado},
 #{senha},
-#{salvarSenha.id},
+#{salvarSenha},
 #{cfopPadrao.id},
 #{confSMTP.id},
      #{parentId},
@@ -142,8 +145,8 @@
  <update id="updateConfiguracaoNFe" parameterType="ConfiguracaoNFe">
    UPDATE configuracaonfe SET
 <if test="presCompr!= null">presCompr = #{presCompr.id},</if>
-<if test="destConsFinal!= null">destConsFinal = #{destConsFinal.id},</if>
-<if test="preencherDataHora!= null">preencherDataHora = #{preencherDataHora.id},</if>
+<if test="destConsFinal!= null">destConsFinal = #{destConsFinal},</if>
+<if test="preencherDataHora!= null">preencherDataHora = #{preencherDataHora},</if>
 <if test="icmsPadrao!= null">icmsPadrao = #{icmsPadrao},</if>
 <if test="ipiPadrao!= null">ipiPadrao = #{ipiPadrao},</if>
 <if test="pisPadrao!= null">pisPadrao = #{pisPadrao},</if>
@@ -151,13 +154,13 @@
 <if test="ambienteEnvio!= null">ambienteEnvio = #{ambienteEnvio.id},</if>
 <if test="servMsmNota!= null">servMsmNota = #{servMsmNota},</if>
 <if test="serieEnvio!= null">serieEnvio = #{serieEnvio},</if>
-<if test="anexarXmlEmail!= null">anexarXmlEmail = #{anexarXmlEmail.id},</if>
+<if test="anexarXmlEmail!= null">anexarXmlEmail = #{anexarXmlEmail},</if>
 <if test="idCSC!= null">idCSC = #{idCSC},</if>
 <if test="cSC!= null">cSC = #{cSC},</if>
 <if test="informacaoAdd!= null">informacaoAdd = #{informacaoAdd},</if>
 <if test="certificado!= null">certificado = #{certificado},</if>
 <if test="senha!= null">senha = #{senha},</if>
-<if test="salvarSenha!= null">salvarSenha = #{salvarSenha.id},</if>
+<if test="salvarSenha!= null">salvarSenha = #{salvarSenha},</if>
 <if test="cfopPadrao!= null">cfopPadrao = #{cfopPadrao.id},</if>
 <if test="confSMTP!= null">confSMTP = #{confSMTP.id},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>

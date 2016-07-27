@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 27/07/2016 12:18 : 35-->
+<!-- create by system gera-java version 1.0.0 27/07/2016 17:55 : 21-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -18,15 +18,15 @@
   <resultMap id="ConfigVendasResult" type="ConfigVendas">
     <result property="id" column="id"/>
     <result property="descontoMaxVenda" column="descontoMaxVenda"/>
-    <collection property="observacao" column="observacao" select="RegimeMap.fetchRegimeById"/>
-    <collection property="imprSegVia" column="imprSegVia" select="RegimeMap.fetchRegimeById"/>
-    <collection property="imprAssinatura" column="imprAssinatura" select="RegimeMap.fetchRegimeById"/>
-    <collection property="imprResumoFinanc" column="imprResumoFinanc" select="RegimeMap.fetchRegimeById"/>
-    <collection property="atuaPrecoClonar" column="atuaPrecoClonar" select="RegimeMap.fetchRegimeById"/>
-    <collection property="imprColUnidade" column="imprColUnidade" select="RegimeMap.fetchRegimeById"/>
-    <collection property="bloquearvendProdSemEstoq" column="bloquearvendProdSemEstoq" select="RegimeMap.fetchRegimeById"/>
-    <collection property="addDespCalcImposto" column="addDespCalcImposto" select="RegimeMap.fetchRegimeById"/>
-    <collection property="retSubstTribICMS" column="retSubstTribICMS" select="RegimeMap.fetchRegimeById"/>
+    <result property="observacao" column="observacao"/>
+    <result property="imprSegVia" column="imprSegVia"/>
+    <result property="imprAssinatura" column="imprAssinatura"/>
+    <result property="imprResumoFinanc" column="imprResumoFinanc"/>
+    <result property="atuaPrecoClonar" column="atuaPrecoClonar"/>
+    <result property="imprColUnidade" column="imprColUnidade"/>
+    <result property="bloquearvendProdSemEstoq" column="bloquearvendProdSemEstoq"/>
+    <result property="addDespCalcImposto" column="addDespCalcImposto"/>
+    <result property="retSubstTribICMS" column="retSubstTribICMS"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -60,15 +60,15 @@
 </sql>
 <sql id="allConfigVendasValues">
 #{descontoMaxVenda},
-#{observacao.id},
-#{imprSegVia.id},
-#{imprAssinatura.id},
-#{imprResumoFinanc.id},
-#{atuaPrecoClonar.id},
-#{imprColUnidade.id},
-#{bloquearvendProdSemEstoq.id},
-#{addDespCalcImposto.id},
-#{retSubstTribICMS.id},
+#{observacao},
+#{imprSegVia},
+#{imprAssinatura},
+#{imprResumoFinanc},
+#{atuaPrecoClonar},
+#{imprColUnidade},
+#{bloquearvendProdSemEstoq},
+#{addDespCalcImposto},
+#{retSubstTribICMS},
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -115,15 +115,15 @@
  <update id="updateConfigVendas" parameterType="ConfigVendas">
    UPDATE configvendas SET
 <if test="descontoMaxVenda!= null">descontoMaxVenda = #{descontoMaxVenda},</if>
-<if test="observacao!= null">observacao = #{observacao.id},</if>
-<if test="imprSegVia!= null">imprSegVia = #{imprSegVia.id},</if>
-<if test="imprAssinatura!= null">imprAssinatura = #{imprAssinatura.id},</if>
-<if test="imprResumoFinanc!= null">imprResumoFinanc = #{imprResumoFinanc.id},</if>
-<if test="atuaPrecoClonar!= null">atuaPrecoClonar = #{atuaPrecoClonar.id},</if>
-<if test="imprColUnidade!= null">imprColUnidade = #{imprColUnidade.id},</if>
-<if test="bloquearvendProdSemEstoq!= null">bloquearvendProdSemEstoq = #{bloquearvendProdSemEstoq.id},</if>
-<if test="addDespCalcImposto!= null">addDespCalcImposto = #{addDespCalcImposto.id},</if>
-<if test="retSubstTribICMS!= null">retSubstTribICMS = #{retSubstTribICMS.id},</if>
+<if test="observacao!= null">observacao = #{observacao},</if>
+<if test="imprSegVia!= null">imprSegVia = #{imprSegVia},</if>
+<if test="imprAssinatura!= null">imprAssinatura = #{imprAssinatura},</if>
+<if test="imprResumoFinanc!= null">imprResumoFinanc = #{imprResumoFinanc},</if>
+<if test="atuaPrecoClonar!= null">atuaPrecoClonar = #{atuaPrecoClonar},</if>
+<if test="imprColUnidade!= null">imprColUnidade = #{imprColUnidade},</if>
+<if test="bloquearvendProdSemEstoq!= null">bloquearvendProdSemEstoq = #{bloquearvendProdSemEstoq},</if>
+<if test="addDespCalcImposto!= null">addDespCalcImposto = #{addDespCalcImposto},</if>
+<if test="retSubstTribICMS!= null">retSubstTribICMS = #{retSubstTribICMS},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>

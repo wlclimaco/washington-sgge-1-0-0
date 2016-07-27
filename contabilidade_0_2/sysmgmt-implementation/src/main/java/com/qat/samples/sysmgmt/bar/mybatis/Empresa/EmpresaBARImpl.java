@@ -1271,7 +1271,7 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	/**
 	 * /* (non-Javadoc)
 	 *
-	 * @see com.qat.samples.sysmgmt.IPessoaBAR.bar.IAdvocaciaBAR#insertAdvocacia(com.qat.samples.sysmgmt.base.model.Advocacia)
+	 * @see com.qat.samples.sysmgmt.IDoisValorBAR.bar.IAdvocaciaBAR#insertAdvocacia(com.qat.samples.sysmgmt.base.model.Advocacia)
 	 */
 	@Override
 	public InternalResponse insertAdvocacia(Advocacia advocacia) {

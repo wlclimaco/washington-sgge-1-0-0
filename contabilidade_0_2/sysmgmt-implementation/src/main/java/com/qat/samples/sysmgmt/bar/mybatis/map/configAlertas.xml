@@ -17,10 +17,10 @@
        exactly. -->
   <resultMap id="ConfigAlertasResult" type="ConfigAlertas">
     <result property="id" column="id"/>
-    <collection property="estoqMin" column="estoqMin" select="RegimeMap.fetchRegimeById"/>
-    <collection property="estoqMax" column="estoqMax" select="RegimeMap.fetchRegimeById"/>
-    <collection property="erroNFe" column="erroNFe" select="RegimeMap.fetchRegimeById"/>
-    <collection property="pdCompra" column="pdCompra" select="RegimeMap.fetchRegimeById"/>
+    <result property="estoqMin" column="estoqMin"/>
+    <result property="estoqMax" column="estoqMax"/>
+    <result property="erroNFe" column="erroNFe"/>
+    <result property="pdCompra" column="pdCompra"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>

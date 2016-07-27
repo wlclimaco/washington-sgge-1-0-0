@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 27/07/2016 12:18 : 35-->
+<!-- create by system gera-java version 1.0.0 27/07/2016 17:55 : 21-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -22,7 +22,7 @@
     <result property="endEmail" column="endEmail"/>
     <result property="usuario" column="usuario"/>
     <result property="senha" column="senha"/>
-    <collection property="seguranca" column="seguranca" select="RegimeMap.fetchRegimeById"/>
+
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -31,6 +31,7 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<collection property="seguranca" column="seguranca" select="RegimeMap.fetchRegimeById"/>
   </resultMap>
 
   <sql id="allConfigSMTPColumns">

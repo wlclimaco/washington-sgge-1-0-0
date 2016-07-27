@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 27/07/2016 12:18 : 35-->
+<!-- create by system gera-java version 1.0.0 27/07/2016 17:55 : 21-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -17,36 +17,32 @@
        exactly. -->
   <resultMap id="ConfigProdutoResult" type="ConfigProduto">
     <result property="id" column="id"/>
-    <collection property="cfop" column="cfop" select="RegimeMap.fetchRegimeById"/>
-    <collection property="icmsSitTrib" column="icmsSitTrib" select="RegimeMap.fetchRegimeById"/>
-    <collection property="icmsOrigem" column="icmsOrigem" select="RegimeMap.fetchRegimeById"/>
-    <collection property="icmsModalidadeBC" column="icmsModalidadeBC" select="RegimeMap.fetchRegimeById"/>
+
     <result property="icmsRedBaseCalc" column="icmsRedBaseCalc"/>
     <result property="icmsAliq" column="icmsAliq"/>
-    <collection property="icmsMotDesoneracao" column="icmsMotDesoneracao" select="RegimeMap.fetchRegimeById"/>
-    <collection property="icmsModBCST" column="icmsModBCST" select="RegimeMap.fetchRegimeById"/>
+
     <result property="icmsMargValAdic" column="icmsMargValAdic"/>
     <result property="icmsRedBaseCalcST" column="icmsRedBaseCalcST"/>
     <result property="icmsPrecoUnitPautaST" column="icmsPrecoUnitPautaST"/>
     <result property="icmsAliqST" column="icmsAliqST"/>
-    <collection property="ipiSitTrib" column="ipiSitTrib" select="RegimeMap.fetchRegimeById"/>
+
     <result property="ipiClasCigarroBebida" column="ipiClasCigarroBebida"/>
     <result property="ipiCNPJProd" column="ipiCNPJProd"/>
     <result property="ipiCodSeloCont" column="ipiCodSeloCont"/>
     <result property="ipiQtdSelo" column="ipiQtdSelo"/>
     <result property="ipiCodEnquad" column="ipiCodEnquad"/>
-    <collection property="ipiTipCalc" column="ipiTipCalc" select="RegimeMap.fetchRegimeById"/>
+
     <result property="ipiAliq" column="ipiAliq"/>
-    <collection property="pisSitTrib" column="pisSitTrib" select="RegimeMap.fetchRegimeById"/>
+
     <result property="pisAliq" column="pisAliq"/>
     <result property="pisValUnidtrib" column="pisValUnidtrib"/>
-    <collection property="pistipoCalcSubstTrib" column="pistipoCalcSubstTrib" select="RegimeMap.fetchRegimeById"/>
+
     <result property="pisAliqST" column="pisAliqST"/>
     <result property="pisValorAliqST" column="pisValorAliqST"/>
-    <collection property="cofinsSubstTrib" column="cofinsSubstTrib" select="RegimeMap.fetchRegimeById"/>
+
     <result property="cofinsAliq" column="cofinsAliq"/>
     <result property="cofinsValorAliq" column="cofinsValorAliq"/>
-    <collection property="cofinsTipoCalcSubstTrib" column="cofinsTipoCalcSubstTrib" select="RegimeMap.fetchRegimeById"/>
+
     <result property="cofinsAliqST" column="cofinsAliqST"/>
     <result property="cofinsValorAliqST" column="cofinsValorAliqST"/>
 <result property="parentId" column="parentId"/>
@@ -57,6 +53,18 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+ <collection property="cfop" column="cfop" select="RegimeMap.fetchRegimeById"/>
+    <collection property="icmsSitTrib" column="icmsSitTrib" select="RegimeMap.fetchRegimeById"/>
+    <collection property="icmsOrigem" column="icmsOrigem" select="RegimeMap.fetchRegimeById"/>
+    <collection property="icmsModalidadeBC" column="icmsModalidadeBC" select="RegimeMap.fetchRegimeById"/>
+    <collection property="icmsMotDesoneracao" column="icmsMotDesoneracao" select="RegimeMap.fetchRegimeById"/>
+    <collection property="icmsModBCST" column="icmsModBCST" select="RegimeMap.fetchRegimeById"/>
+     <collection property="ipiSitTrib" column="ipiSitTrib" select="RegimeMap.fetchRegimeById"/>
+     <collection property="ipiTipCalc" column="ipiTipCalc" select="RegimeMap.fetchRegimeById"/>
+     <collection property="pisSitTrib" column="pisSitTrib" select="RegimeMap.fetchRegimeById"/>
+     <collection property="pistipoCalcSubstTrib" column="pistipoCalcSubstTrib" select="RegimeMap.fetchRegimeById"/>
+     <collection property="cofinsSubstTrib" column="cofinsSubstTrib" select="RegimeMap.fetchRegimeById"/>
+     <collection property="cofinsTipoCalcSubstTrib" column="cofinsTipoCalcSubstTrib" select="RegimeMap.fetchRegimeById"/>
   </resultMap>
 
   <sql id="allConfigProdutoColumns">

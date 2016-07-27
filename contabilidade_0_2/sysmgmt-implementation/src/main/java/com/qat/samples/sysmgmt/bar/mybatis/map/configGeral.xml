@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 27/07/2016 12:18 : 35-->
+<!-- create by system gera-java version 1.0.0 27/07/2016 17:55 : 21-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -20,11 +20,11 @@
     <result property="fusoHorario" column="fusoHorario"/>
     <result property="casasDecimais" column="casasDecimais"/>
     <result property="diasCartaCobr" column="diasCartaCobr"/>
-    <collection property="infPosicionarMouse" column="infPosicionarMouse" select="RegimeMap.fetchRegimeById"/>
-    <collection property="cnpjCPFUnico" column="cnpjCPFUnico" select="RegimeMap.fetchRegimeById"/>
-    <collection property="impCodPersonalizado" column="impCodPersonalizado" select="RegimeMap.fetchRegimeById"/>
-    <collection property="logListRelImp" column="logListRelImp" select="RegimeMap.fetchRegimeById"/>
-    <collection property="obsProdFinProd" column="obsProdFinProd" select="RegimeMap.fetchRegimeById"/>
+    <result property="infPosicionarMouse" column="infPosicionarMouse"/>
+    <result property="cnpjCPFUnico" column="cnpjCPFUnico"/>
+    <result property="impCodPersonalizado" column="impCodPersonalizado"/>
+    <result property="logListRelImp" column="logListRelImp"/>
+    <result property="obsProdFinProd" column="obsProdFinProd"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -58,11 +58,11 @@
 #{fusoHorario},
 #{casasDecimais},
 #{diasCartaCobr},
-#{infPosicionarMouse.id},
-#{cnpjCPFUnico.id},
-#{impCodPersonalizado.id},
-#{logListRelImp.id},
-#{obsProdFinProd.id},
+#{infPosicionarMouse},
+#{cnpjCPFUnico},
+#{impCodPersonalizado},
+#{logListRelImp},
+#{obsProdFinProd},
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -111,11 +111,11 @@
 <if test="fusoHorario!= null">fusoHorario = #{fusoHorario},</if>
 <if test="casasDecimais!= null">casasDecimais = #{casasDecimais},</if>
 <if test="diasCartaCobr!= null">diasCartaCobr = #{diasCartaCobr},</if>
-<if test="infPosicionarMouse!= null">infPosicionarMouse = #{infPosicionarMouse.id},</if>
-<if test="cnpjCPFUnico!= null">cnpjCPFUnico = #{cnpjCPFUnico.id},</if>
-<if test="impCodPersonalizado!= null">impCodPersonalizado = #{impCodPersonalizado.id},</if>
-<if test="logListRelImp!= null">logListRelImp = #{logListRelImp.id},</if>
-<if test="obsProdFinProd!= null">obsProdFinProd = #{obsProdFinProd.id},</if>
+<if test="infPosicionarMouse!= null">infPosicionarMouse = #{infPosicionarMouse},</if>
+<if test="cnpjCPFUnico!= null">cnpjCPFUnico = #{cnpjCPFUnico},</if>
+<if test="impCodPersonalizado!= null">impCodPersonalizado = #{impCodPersonalizado},</if>
+<if test="logListRelImp!= null">logListRelImp = #{logListRelImp},</if>
+<if test="obsProdFinProd!= null">obsProdFinProd = #{obsProdFinProd},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>
