@@ -24,7 +24,7 @@ public class ConfigSMTP extends ModelCosmeDamiao
 	private String usuario;
 	private String senha;
 	private DoisValores seguranca;
-	
+
 
 
 	public ConfigSMTP()
@@ -35,6 +35,10 @@ public class ConfigSMTP extends ModelCosmeDamiao
 	public ConfigSMTP(Integer id)
 	{
 		setId(id);
+	}
+
+	public ConfigSMTP(int i, String string) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getId() {
@@ -100,7 +104,7 @@ public class ConfigSMTP extends ModelCosmeDamiao
 				+ ", getSeguranca()=" + getSeguranca() + ", toString()=" + super.toString() + "]";
 	}
 
-	
-	
+
+
 
 }

@@ -32,6 +32,10 @@ public class ConfigEntrada extends ModelCosmeDamiao
 		setId(id);
 	}
 
+	public ConfigEntrada(int i, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -62,6 +66,6 @@ public class ConfigEntrada extends ModelCosmeDamiao
 				+ ", getManterPrecoVendaProd()=" + getManterPrecoVendaProd() + ", toString()=" + super.toString() + "]";
 	}
 
-	
+
 
 }

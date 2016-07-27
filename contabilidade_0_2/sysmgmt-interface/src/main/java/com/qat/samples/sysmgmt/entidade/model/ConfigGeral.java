@@ -36,6 +36,10 @@ public class ConfigGeral extends ModelCosmeDamiao
 		setId(id);
 	}
 
+	public ConfigGeral(int i, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getId() {
 		return id;
 	}

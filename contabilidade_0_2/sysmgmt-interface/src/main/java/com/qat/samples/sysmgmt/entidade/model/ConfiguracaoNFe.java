@@ -21,7 +21,7 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 	private DoisValores presCompr;
 
 	private Boolean destConsFinal;
-	
+
 	private Boolean preencherDataHora;
 
 	private Double icmsPadrao;
@@ -29,31 +29,31 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 	private Double ipiPadrao;
 
 	private Double pisPadrao;
-	
+
 	private Double cofinsPadrao;
-	
+
 	private DoisValores ambienteEnvio;
-	
+
 	private DoisValores servMsmNota;
-	
+
 	private String serieEnvio;
-	
+
 	private Boolean anexarXmlEmail;
 
 	private String idCSC;
-	
+
 	private String cSC;
-	
+
 	private String informacaoAdd;
-	
+
 	private String certificado;
-	
+
 	private String senha;
-	
+
 	private Boolean salvarSenha;
-	
+
 	private Cfop cfopPadrao;
-	
+
 	private ConfigSMTP confSMTP;
 
 
@@ -65,6 +65,10 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 	public ConfiguracaoNFe(Integer id)
 	{
 		setId(id);
+	}
+
+	public ConfiguracaoNFe(int i, String string) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getId() {
@@ -240,5 +244,5 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 				+ getCfopPadrao() + ", getConfSMTP()=" + getConfSMTP() + ", toString()=" + super.toString() + "]";
 	}
 
-	
+
 }

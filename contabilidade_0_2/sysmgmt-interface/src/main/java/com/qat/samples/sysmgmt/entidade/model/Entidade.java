@@ -7,7 +7,6 @@ import com.qat.samples.sysmgmt.cnae.model.CnaeEmpresa;
 import com.qat.samples.sysmgmt.fiscal.model.Regime;
 import com.qat.samples.sysmgmt.pessoa.model.Socio;
 import com.qat.samples.sysmgmt.site.model.ServicoAndPlano;
-import com.qat.samples.sysmgmt.util.model.Configuracao;
 import com.qat.samples.sysmgmt.util.model.Documento;
 import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.Endereco;
@@ -36,7 +35,7 @@ public class Entidade extends ModelCosmeDamiao
 	private EntidadeTypeEnum entidadeEnum;
 
 	private Configuracao configuracao;
-	
+
 	private ConfiguracaoNFe configuracaoNFe;
 
 	private List<Endereco> enderecos;
@@ -310,8 +309,8 @@ public class Entidade extends ModelCosmeDamiao
 	public void setSocios(List<Socio> socios) {
 		this.socios = socios;
 	}
-	
-	
+
+
 
 	public ConfiguracaoNFe getConfiguracaoNFe() {
 		return configuracaoNFe;
@@ -334,6 +333,6 @@ public class Entidade extends ModelCosmeDamiao
 				+ "]";
 	}
 
-	
+
 
 }

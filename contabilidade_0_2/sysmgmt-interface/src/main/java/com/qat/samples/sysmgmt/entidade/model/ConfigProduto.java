@@ -24,14 +24,14 @@ public class ConfigProduto extends ModelCosmeDamiao
 	private DoisValores icmsModalidadeBC;
 	private Double icmsRedBaseCalc;
 	private Double icmsAliq;
-	
+
 	private DoisValores icmsMotDesoneracao;
 	private DoisValores icmsModBCST;
 	private Double icmsMargValAdic;
 	private Double icmsRedBaseCalcST;
 	private Double icmsPrecoUnitPautaST;
 	private Double icmsAliqST;
-	
+
 	private DoisValores ipiSitTrib;
 	private Double ipiClasCigarroBebida;
 	private String ipiCNPJProd;
@@ -40,22 +40,22 @@ public class ConfigProduto extends ModelCosmeDamiao
 	private Integer ipiCodEnquad;
 	private DoisValores ipiTipCalc;
 	private Double ipiAliq;
-	
+
 	private DoisValores pisSitTrib;
 	private Double pisAliq;
 	private Double pisValUnidtrib;
-	
+
 	private DoisValores pistipoCalcSubstTrib;
 	private Double pisAliqST;
 	private Double pisValorAliqST;
-	
+
 	private DoisValores cofinsSubstTrib;
 	private Double cofinsAliq;
 	private Double cofinsValorAliq;
 	private DoisValores cofinsTipoCalcSubstTrib;
 	private Double cofinsAliqST;
 	private Double cofinsValorAliqST;
-	
+
 	public ConfigProduto()
 	{
 		super();
@@ -64,6 +64,10 @@ public class ConfigProduto extends ModelCosmeDamiao
 	public ConfigProduto(Integer id)
 	{
 		setId(id);
+	}
+
+	public ConfigProduto(int i, String string) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getId() {

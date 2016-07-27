@@ -38,6 +38,10 @@ public class Boleto extends ModelCosmeDamiao
 		setId(id);
 	}
 
+	public Boleto(int i, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -135,5 +139,5 @@ public class Boleto extends ModelCosmeDamiao
 				+ ", getImpJuros()=" + getImpJuros() + ", toString()=" + super.toString() + "]";
 	}
 
-	
+
 }

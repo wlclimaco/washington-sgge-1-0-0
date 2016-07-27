@@ -38,6 +38,10 @@ public class ConfigVendas extends ModelCosmeDamiao
 		setId(id);
 	}
 
+	public ConfigVendas(int i, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -137,5 +141,5 @@ public class ConfigVendas extends ModelCosmeDamiao
 				+ super.toString() + "]";
 	}
 
-	
+
 }

@@ -32,6 +32,10 @@ public class ConfigCarne extends ModelCosmeDamiao
 		setId(id);
 	}
 
+	public ConfigCarne(int i, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -62,6 +66,6 @@ public class ConfigCarne extends ModelCosmeDamiao
 				+ getCarneNormal() + ", toString()=" + super.toString() + "]";
 	}
 
-	
+
 
 }

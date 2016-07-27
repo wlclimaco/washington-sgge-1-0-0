@@ -14,7 +14,7 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
  * setting.
  */
 @SuppressWarnings("serial")
-public class ConfigCarne extends ModelCosmeDamiao
+public class ConfigAlertas extends ModelCosmeDamiao
 {
 	private Integer id;
 
@@ -22,14 +22,18 @@ public class ConfigCarne extends ModelCosmeDamiao
 	private Boolean carneNormal;
 
 
-	public ConfigCarne()
+	public ConfigAlertas()
 	{
 		super();
 	}
 
-	public ConfigCarne(Integer id)
+	public ConfigAlertas(Integer id)
 	{
 		setId(id);
+	}
+
+	public ConfigAlertas(int i, String string) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getId() {
@@ -62,6 +66,6 @@ public class ConfigCarne extends ModelCosmeDamiao
 				+ getCarneNormal() + ", toString()=" + super.toString() + "]";
 	}
 
-	
+
 
 }

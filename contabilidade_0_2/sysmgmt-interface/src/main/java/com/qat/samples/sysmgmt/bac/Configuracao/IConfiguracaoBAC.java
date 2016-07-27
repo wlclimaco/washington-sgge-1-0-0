@@ -1,8 +1,28 @@
 /** create by system gera-java version 1.0.0 27/07/2016 15:44 : 43*/
-package com.qat.samples.sysmgmt.bac.undefined;
+package com.qat.samples.sysmgmt.bac.Configuracao;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.model.County;
-import com.qat.samples.sysmgmt.model.request.CountyMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.Boleto;
+import com.qat.samples.sysmgmt.entidade.model.ConfigAlertas;
+import com.qat.samples.sysmgmt.entidade.model.ConfigCarne;
+import com.qat.samples.sysmgmt.entidade.model.ConfigEntrada;
+import com.qat.samples.sysmgmt.entidade.model.ConfigFiscal;
+import com.qat.samples.sysmgmt.entidade.model.ConfigGeral;
+import com.qat.samples.sysmgmt.entidade.model.ConfigProduto;
+import com.qat.samples.sysmgmt.entidade.model.ConfigSMTP;
+import com.qat.samples.sysmgmt.entidade.model.ConfigVendas;
+import com.qat.samples.sysmgmt.entidade.model.Configuracao;
+import com.qat.samples.sysmgmt.entidade.model.ConfiguracaoNFe;
+import com.qat.samples.sysmgmt.entidade.model.request.BoletoMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.ConfigAlertasMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.ConfigCarneMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.ConfigEntradaMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.ConfigFiscalMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.ConfigGeralMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.ConfigProdutoMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.ConfigSMTPMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.ConfigVendasMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.ConfiguracaoMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.ConfiguracaoNFeMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
@@ -73,7 +93,7 @@ public interface IConfiguracaoBAC
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Configuracao> fetchConfiguracaosByRequest(ConfiguracaoInquiryRequest request);
+	public InternalResultsResponse<Configuracao> fetchConfiguracaosByRequest(PagedInquiryRequest request);
 
 
 //===================================### BOLETO ####======================================
@@ -134,555 +154,554 @@ public interface IConfiguracaoBAC
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Boleto> fetchBoletosByRequest(BoletoInquiryRequest request);
+	public InternalResultsResponse<Boleto> fetchBoletosByRequest(PagedInquiryRequest request);
 
 
-//===================================### CONFIGCARNE ####======================================
+//===================================### ConfigCarne ####======================================
 	/**
 
 	/**
-	 * Insert configcarne.
+	 * Insert ConfigCarne.
 	 *
-* @param request the configcarne maintenance request
+* @param request the ConfigCarne maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configcarne> insertConfigcarne(ConfigcarneMaintenanceRequest request);
+	public InternalResultsResponse<ConfigCarne> insertConfigCarne(ConfigCarneMaintenanceRequest request);
 
 	/**
-* Update configcarne.
+* Update ConfigCarne.
 *
-* @param request the configcarne maintenance request
+* @param request the ConfigCarne maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configcarne> updateConfigcarne(ConfigcarneMaintenanceRequest request);
+	public InternalResultsResponse<ConfigCarne> updateConfigCarne(ConfigCarneMaintenanceRequest request);
 
 	/**
-* Delete configcarne.
+* Delete ConfigCarne.
 *
-* @param request the configcarne maintenance request
+* @param request the ConfigCarne maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configcarne> deleteConfigcarne(ConfigcarneMaintenanceRequest request);
+	public InternalResultsResponse<ConfigCarne> deleteConfigCarne(ConfigCarneMaintenanceRequest request);
 
 	/**
-* Refresh configcarnes.
+* Refresh ConfigCarnes.
 *
 * @param request containing the number to refresh with and whether to return the result
 */
-	public InternalResultsResponse<Configcarne> refreshConfigcarnes(RefreshRequest request);
+	public InternalResultsResponse<ConfigCarne> refreshConfigCarnes(RefreshRequest request);
 
 	/**
-* Fetch configcarne by id.
+* Fetch ConfigCarne by id.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Configcarne> fetchConfigcarneById(FetchByIdRequest request);
+	public InternalResultsResponse<ConfigCarne> fetchConfigCarneById(FetchByIdRequest request);
 
 	/**
-* Fetch all configcarnes.
+* Fetch all ConfigCarnes.
 *
-* @return the internal results response< configcarne>
+* @return the internal results response< ConfigCarne>
 */
-	public InternalResultsResponse<Configcarne> fetchAllConfigcarnes(Configcarne  configcarne);
+	public InternalResultsResponse<ConfigCarne> fetchAllConfigCarnes(ConfigCarne  ConfigCarne);
 
 	/**
-* Fetch configcarnes by request.
+* Fetch ConfigCarnes by request.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Configcarne> fetchConfigcarnesByRequest(ConfigcarneInquiryRequest request);
+	public InternalResultsResponse<ConfigCarne> fetchConfigCarnesByRequest(PagedInquiryRequest request);
 
 
-//===================================### CONFIGENTRADA ####======================================
+//===================================### ConfigEntrada ####======================================
 	/**
 
 	/**
-	 * Insert configentrada.
+	 * Insert ConfigEntrada.
 	 *
-* @param request the configentrada maintenance request
+* @param request the ConfigEntrada maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configentrada> insertConfigentrada(ConfigentradaMaintenanceRequest request);
+	public InternalResultsResponse<ConfigEntrada> insertConfigEntrada(ConfigEntradaMaintenanceRequest request);
 
 	/**
-* Update configentrada.
+* Update ConfigEntrada.
 *
-* @param request the configentrada maintenance request
+* @param request the ConfigEntrada maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configentrada> updateConfigentrada(ConfigentradaMaintenanceRequest request);
+	public InternalResultsResponse<ConfigEntrada> updateConfigEntrada(ConfigEntradaMaintenanceRequest request);
 
 	/**
-* Delete configentrada.
+* Delete ConfigEntrada.
 *
-* @param request the configentrada maintenance request
+* @param request the ConfigEntrada maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configentrada> deleteConfigentrada(ConfigentradaMaintenanceRequest request);
+	public InternalResultsResponse<ConfigEntrada> deleteConfigEntrada(ConfigEntradaMaintenanceRequest request);
 
 	/**
-* Refresh configentradas.
+* Refresh ConfigEntradas.
 *
 * @param request containing the number to refresh with and whether to return the result
 */
-	public InternalResultsResponse<Configentrada> refreshConfigentradas(RefreshRequest request);
+	public InternalResultsResponse<ConfigEntrada> refreshConfigEntradas(RefreshRequest request);
 
 	/**
-* Fetch configentrada by id.
+* Fetch ConfigEntrada by id.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Configentrada> fetchConfigentradaById(FetchByIdRequest request);
+	public InternalResultsResponse<ConfigEntrada> fetchConfigEntradaById(FetchByIdRequest request);
 
 	/**
-* Fetch all configentradas.
+* Fetch all ConfigEntradas.
 *
-* @return the internal results response< configentrada>
+* @return the internal results response< ConfigEntrada>
 */
-	public InternalResultsResponse<Configentrada> fetchAllConfigentradas(Configentrada  configentrada);
+	public InternalResultsResponse<ConfigEntrada> fetchAllConfigEntradas(ConfigEntrada  ConfigEntrada);
 
 	/**
-* Fetch configentradas by request.
+* Fetch ConfigEntradas by request.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Configentrada> fetchConfigentradasByRequest(ConfigentradaInquiryRequest request);
+	public InternalResultsResponse<ConfigEntrada> fetchConfigEntradasByRequest(PagedInquiryRequest request);
 
 
-//===================================### CONFIGFISCAL ####======================================
+//===================================### ConfigFiscal ####======================================
 	/**
 
 	/**
-	 * Insert configfiscal.
+	 * Insert ConfigFiscal.
 	 *
-* @param request the configfiscal maintenance request
+* @param request the ConfigFiscal maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configfiscal> insertConfigfiscal(ConfigfiscalMaintenanceRequest request);
+	public InternalResultsResponse<ConfigFiscal> insertConfigFiscal(ConfigFiscalMaintenanceRequest request);
 
 	/**
-* Update configfiscal.
+* Update ConfigFiscal.
 *
-* @param request the configfiscal maintenance request
+* @param request the ConfigFiscal maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configfiscal> updateConfigfiscal(ConfigfiscalMaintenanceRequest request);
+	public InternalResultsResponse<ConfigFiscal> updateConfigFiscal(ConfigFiscalMaintenanceRequest request);
 
 	/**
-* Delete configfiscal.
+* Delete ConfigFiscal.
 *
-* @param request the configfiscal maintenance request
+* @param request the ConfigFiscal maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configfiscal> deleteConfigfiscal(ConfigfiscalMaintenanceRequest request);
+	public InternalResultsResponse<ConfigFiscal> deleteConfigFiscal(ConfigFiscalMaintenanceRequest request);
 
 	/**
-* Refresh configfiscals.
+* Refresh ConfigFiscals.
 *
 * @param request containing the number to refresh with and whether to return the result
 */
-	public InternalResultsResponse<Configfiscal> refreshConfigfiscals(RefreshRequest request);
+	public InternalResultsResponse<ConfigFiscal> refreshConfigFiscals(RefreshRequest request);
 
 	/**
-* Fetch configfiscal by id.
+* Fetch ConfigFiscal by id.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Configfiscal> fetchConfigfiscalById(FetchByIdRequest request);
+	public InternalResultsResponse<ConfigFiscal> fetchConfigFiscalById(FetchByIdRequest request);
 
 	/**
-* Fetch all configfiscals.
+* Fetch all ConfigFiscals.
 *
-* @return the internal results response< configfiscal>
+* @return the internal results response< ConfigFiscal>
 */
-	public InternalResultsResponse<Configfiscal> fetchAllConfigfiscals(Configfiscal  configfiscal);
+	public InternalResultsResponse<ConfigFiscal> fetchAllConfigFiscals(ConfigFiscal  ConfigFiscal);
 
 	/**
-* Fetch configfiscals by request.
+* Fetch ConfigFiscals by request.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Configfiscal> fetchConfigfiscalsByRequest(ConfigfiscalInquiryRequest request);
+	public InternalResultsResponse<ConfigFiscal> fetchConfigFiscalsByRequest(PagedInquiryRequest request);
 
 
-//===================================### CONFIGALERTAS ####======================================
+//===================================### ConfigAlertas ####======================================
 	/**
 
 	/**
-	 * Insert configalertas.
+	 * Insert ConfigAlertas.
 	 *
-* @param request the configalertas maintenance request
+* @param request the ConfigAlertas maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configalertas> insertConfigalertas(ConfigalertasMaintenanceRequest request);
+	public InternalResultsResponse<ConfigAlertas> insertConfigAlertas(ConfigAlertasMaintenanceRequest request);
 
 	/**
-* Update configalertas.
+* Update ConfigAlertas.
 *
-* @param request the configalertas maintenance request
+* @param request the ConfigAlertas maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configalertas> updateConfigalertas(ConfigalertasMaintenanceRequest request);
-
+	public InternalResultsResponse<ConfigAlertas> updateConfigAlertas(ConfigAlertasMaintenanceRequest request);
 	/**
-* Delete configalertas.
+* Delete ConfigAlertas.
 *
-* @param request the configalertas maintenance request
+* @param request the ConfigAlertas maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configalertas> deleteConfigalertas(ConfigalertasMaintenanceRequest request);
+	public InternalResultsResponse<ConfigAlertas> deleteConfigAlertas(ConfigAlertasMaintenanceRequest request);
 
 	/**
-* Refresh configalertass.
+* Refresh ConfigAlertass.
 *
 * @param request containing the number to refresh with and whether to return the result
 */
-	public InternalResultsResponse<Configalertas> refreshConfigalertass(RefreshRequest request);
+	public InternalResultsResponse<ConfigAlertas> refreshConfigAlertass(RefreshRequest request);
 
 	/**
-* Fetch configalertas by id.
+* Fetch ConfigAlertas by id.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Configalertas> fetchConfigalertasById(FetchByIdRequest request);
+	public InternalResultsResponse<ConfigAlertas> fetchConfigAlertasById(FetchByIdRequest request);
 
 	/**
-* Fetch all configalertass.
+* Fetch all ConfigAlertass.
 *
-* @return the internal results response< configalertas>
+* @return the internal results response< ConfigAlertas>
 */
-	public InternalResultsResponse<Configalertas> fetchAllConfigalertass(Configalertas  configalertas);
+	public InternalResultsResponse<ConfigAlertas> fetchAllConfigAlertass(ConfigAlertas  ConfigAlertas);
 
 	/**
-* Fetch configalertass by request.
+* Fetch ConfigAlertass by request.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Configalertas> fetchConfigalertassByRequest(ConfigalertasInquiryRequest request);
+	public InternalResultsResponse<ConfigAlertas> fetchConfigAlertassByRequest(PagedInquiryRequest request);
 
 
-//===================================### CONFIGGERAL ####======================================
+//===================================### ConfigGeral ####======================================
 	/**
 
 	/**
-	 * Insert configgeral.
+	 * Insert ConfigGeral.
 	 *
-* @param request the configgeral maintenance request
+* @param request the ConfigGeral maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configgeral> insertConfiggeral(ConfiggeralMaintenanceRequest request);
+	public InternalResultsResponse<ConfigGeral> insertConfigGeral(ConfigGeralMaintenanceRequest request);
 
 	/**
-* Update configgeral.
+* Update ConfigGeral.
 *
-* @param request the configgeral maintenance request
+* @param request the ConfigGeral maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configgeral> updateConfiggeral(ConfiggeralMaintenanceRequest request);
+	public InternalResultsResponse<ConfigGeral> updateConfigGeral(ConfigGeralMaintenanceRequest request);
 
 	/**
-* Delete configgeral.
+* Delete ConfigGeral.
 *
-* @param request the configgeral maintenance request
+* @param request the ConfigGeral maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configgeral> deleteConfiggeral(ConfiggeralMaintenanceRequest request);
+	public InternalResultsResponse<ConfigGeral> deleteConfigGeral(ConfigGeralMaintenanceRequest request);
 
 	/**
-* Refresh configgerals.
+* Refresh ConfigGerals.
 *
 * @param request containing the number to refresh with and whether to return the result
 */
-	public InternalResultsResponse<Configgeral> refreshConfiggerals(RefreshRequest request);
+	public InternalResultsResponse<ConfigGeral> refreshConfigGerals(RefreshRequest request);
 
 	/**
-* Fetch configgeral by id.
+* Fetch ConfigGeral by id.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Configgeral> fetchConfiggeralById(FetchByIdRequest request);
+	public InternalResultsResponse<ConfigGeral> fetchConfigGeralById(FetchByIdRequest request);
 
 	/**
-* Fetch all configgerals.
+* Fetch all ConfigGerals.
 *
-* @return the internal results response< configgeral>
+* @return the internal results response< ConfigGeral>
 */
-	public InternalResultsResponse<Configgeral> fetchAllConfiggerals(Configgeral  configgeral);
+	public InternalResultsResponse<ConfigGeral> fetchAllConfigGerals(ConfigGeral  ConfigGeral);
 
 	/**
-* Fetch configgerals by request.
+* Fetch ConfigGerals by request.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Configgeral> fetchConfiggeralsByRequest(ConfiggeralInquiryRequest request);
+	public InternalResultsResponse<ConfigGeral> fetchConfigGeralsByRequest(PagedInquiryRequest request);
 
 
-//===================================### CONFIGPRODUTO ####======================================
+//===================================### ConfigProduto ####======================================
 	/**
 
 	/**
-	 * Insert configproduto.
+	 * Insert ConfigProduto.
 	 *
-* @param request the configproduto maintenance request
+* @param request the ConfigProduto maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configproduto> insertConfigproduto(ConfigprodutoMaintenanceRequest request);
+	public InternalResultsResponse<ConfigProduto> insertConfigProduto(ConfigProdutoMaintenanceRequest request);
 
 	/**
-* Update configproduto.
+* Update ConfigProduto.
 *
-* @param request the configproduto maintenance request
+* @param request the ConfigProduto maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configproduto> updateConfigproduto(ConfigprodutoMaintenanceRequest request);
+	public InternalResultsResponse<ConfigProduto> updateConfigProduto(ConfigProdutoMaintenanceRequest request);
 
 	/**
-* Delete configproduto.
+* Delete ConfigProduto.
 *
-* @param request the configproduto maintenance request
+* @param request the ConfigProduto maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configproduto> deleteConfigproduto(ConfigprodutoMaintenanceRequest request);
+	public InternalResultsResponse<ConfigProduto> deleteConfigProduto(ConfigProdutoMaintenanceRequest request);
 
 	/**
-* Refresh configprodutos.
+* Refresh ConfigProdutos.
 *
 * @param request containing the number to refresh with and whether to return the result
 */
-	public InternalResultsResponse<Configproduto> refreshConfigprodutos(RefreshRequest request);
+	public InternalResultsResponse<ConfigProduto> refreshConfigProdutos(RefreshRequest request);
 
 	/**
-* Fetch configproduto by id.
+* Fetch ConfigProduto by id.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Configproduto> fetchConfigprodutoById(FetchByIdRequest request);
+	public InternalResultsResponse<ConfigProduto> fetchConfigProdutoById(FetchByIdRequest request);
 
 	/**
-* Fetch all configprodutos.
+* Fetch all ConfigProdutos.
 *
-* @return the internal results response< configproduto>
+* @return the internal results response< ConfigProduto>
 */
-	public InternalResultsResponse<Configproduto> fetchAllConfigprodutos(Configproduto  configproduto);
+	public InternalResultsResponse<ConfigProduto> fetchAllConfigProdutos(ConfigProduto  ConfigProduto);
 
 	/**
-* Fetch configprodutos by request.
+* Fetch ConfigProdutos by request.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Configproduto> fetchConfigprodutosByRequest(ConfigprodutoInquiryRequest request);
+	public InternalResultsResponse<ConfigProduto> fetchConfigProdutosByRequest(PagedInquiryRequest request);
 
 
-//===================================### CONFIGSMTP ####======================================
+//===================================### ConfigSMTP ####======================================
 	/**
 
 	/**
-	 * Insert configsmtp.
+	 * Insert ConfigSMTP.
 	 *
-* @param request the configsmtp maintenance request
+* @param request the ConfigSMTP maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configsmtp> insertConfigsmtp(ConfigsmtpMaintenanceRequest request);
+	public InternalResultsResponse<ConfigSMTP> insertConfigSMTP(ConfigSMTPMaintenanceRequest request);
 
 	/**
-* Update configsmtp.
+* Update ConfigSMTP.
 *
-* @param request the configsmtp maintenance request
+* @param request the ConfigSMTP maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configsmtp> updateConfigsmtp(ConfigsmtpMaintenanceRequest request);
+	public InternalResultsResponse<ConfigSMTP> updateConfigSMTP(ConfigSMTPMaintenanceRequest request);
 
 	/**
-* Delete configsmtp.
+* Delete ConfigSMTP.
 *
-* @param request the configsmtp maintenance request
+* @param request the ConfigSMTP maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configsmtp> deleteConfigsmtp(ConfigsmtpMaintenanceRequest request);
+	public InternalResultsResponse<ConfigSMTP> deleteConfigSMTP(ConfigSMTPMaintenanceRequest request);
 
 	/**
-* Refresh configsmtps.
+* Refresh ConfigSMTPs.
 *
 * @param request containing the number to refresh with and whether to return the result
 */
-	public InternalResultsResponse<Configsmtp> refreshConfigsmtps(RefreshRequest request);
+	public InternalResultsResponse<ConfigSMTP> refreshConfigSMTPs(RefreshRequest request);
 
 	/**
-* Fetch configsmtp by id.
+* Fetch ConfigSMTP by id.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Configsmtp> fetchConfigsmtpById(FetchByIdRequest request);
+	public InternalResultsResponse<ConfigSMTP> fetchConfigSMTPById(FetchByIdRequest request);
 
 	/**
-* Fetch all configsmtps.
+* Fetch all ConfigSMTPs.
 *
-* @return the internal results response< configsmtp>
+* @return the internal results response< ConfigSMTP>
 */
-	public InternalResultsResponse<Configsmtp> fetchAllConfigsmtps(Configsmtp  configsmtp);
+	public InternalResultsResponse<ConfigSMTP> fetchAllConfigSMTPs(ConfigSMTP  ConfigSMTP);
 
 	/**
-* Fetch configsmtps by request.
+* Fetch ConfigSMTPs by request.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Configsmtp> fetchConfigsmtpsByRequest(ConfigsmtpInquiryRequest request);
+	public InternalResultsResponse<ConfigSMTP> fetchConfigSMTPsByRequest(PagedInquiryRequest request);
 
 
-//===================================### CONFIGURACAONFE ####======================================
+//===================================### ConfiguracaoNFe ####======================================
 	/**
 
 	/**
-	 * Insert configuracaonfe.
+	 * Insert ConfiguracaoNFe.
 	 *
-* @param request the configuracaonfe maintenance request
+* @param request the ConfiguracaoNFe maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configuracaonfe> insertConfiguracaonfe(ConfiguracaonfeMaintenanceRequest request);
+	public InternalResultsResponse<ConfiguracaoNFe> insertConfiguracaoNFe(ConfiguracaoNFeMaintenanceRequest request);
 
 	/**
-* Update configuracaonfe.
+* Update ConfiguracaoNFe.
 *
-* @param request the configuracaonfe maintenance request
+* @param request the ConfiguracaoNFe maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configuracaonfe> updateConfiguracaonfe(ConfiguracaonfeMaintenanceRequest request);
+	public InternalResultsResponse<ConfiguracaoNFe> updateConfiguracaoNFe(ConfiguracaoNFeMaintenanceRequest request);
 
 	/**
-* Delete configuracaonfe.
+* Delete ConfiguracaoNFe.
 *
-* @param request the configuracaonfe maintenance request
+* @param request the ConfiguracaoNFe maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configuracaonfe> deleteConfiguracaonfe(ConfiguracaonfeMaintenanceRequest request);
+	public InternalResultsResponse<ConfiguracaoNFe> deleteConfiguracaoNFe(ConfiguracaoNFeMaintenanceRequest request);
 
 	/**
-* Refresh configuracaonfes.
+* Refresh ConfiguracaoNFes.
 *
 * @param request containing the number to refresh with and whether to return the result
 */
-	public InternalResultsResponse<Configuracaonfe> refreshConfiguracaonfes(RefreshRequest request);
+	public InternalResultsResponse<ConfiguracaoNFe> refreshConfiguracaoNFes(RefreshRequest request);
 
 	/**
-* Fetch configuracaonfe by id.
+* Fetch ConfiguracaoNFe by id.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Configuracaonfe> fetchConfiguracaonfeById(FetchByIdRequest request);
+	public InternalResultsResponse<ConfiguracaoNFe> fetchConfiguracaoNFeById(FetchByIdRequest request);
 
 	/**
-* Fetch all configuracaonfes.
+* Fetch all ConfiguracaoNFes.
 *
-* @return the internal results response< configuracaonfe>
+* @return the internal results response< ConfiguracaoNFe>
 */
-	public InternalResultsResponse<Configuracaonfe> fetchAllConfiguracaonfes(Configuracaonfe  configuracaonfe);
+	public InternalResultsResponse<ConfiguracaoNFe> fetchAllConfiguracaoNFes(ConfiguracaoNFe  ConfiguracaoNFe);
 
 	/**
-* Fetch configuracaonfes by request.
+* Fetch ConfiguracaoNFes by request.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Configuracaonfe> fetchConfiguracaonfesByRequest(ConfiguracaonfeInquiryRequest request);
+	public InternalResultsResponse<ConfiguracaoNFe> fetchConfiguracaoNFesByRequest(PagedInquiryRequest request);
 
 
-//===================================### CONFIGVENDAS ####======================================
+//===================================### ConfigVendas ####======================================
 	/**
 
 	/**
-	 * Insert configvendas.
+	 * Insert ConfigVendas.
 	 *
-* @param request the configvendas maintenance request
+* @param request the ConfigVendas maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configvendas> insertConfigvendas(ConfigvendasMaintenanceRequest request);
+	public InternalResultsResponse<ConfigVendas> insertConfigVendas(ConfigVendasMaintenanceRequest request);
 
 	/**
-* Update configvendas.
+* Update ConfigVendas.
 *
-* @param request the configvendas maintenance request
+* @param request the ConfigVendas maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configvendas> updateConfigvendas(ConfigvendasMaintenanceRequest request);
+	public InternalResultsResponse<ConfigVendas> updateConfigVendas(ConfigVendasMaintenanceRequest request);
 
 	/**
-* Delete configvendas.
+* Delete ConfigVendas.
 *
-* @param request the configvendas maintenance request
+* @param request the ConfigVendas maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Configvendas> deleteConfigvendas(ConfigvendasMaintenanceRequest request);
+	public InternalResultsResponse<ConfigVendas> deleteConfigVendas(ConfigVendasMaintenanceRequest request);
 
 	/**
-* Refresh configvendass.
+* Refresh ConfigVendass.
 *
 * @param request containing the number to refresh with and whether to return the result
 */
-	public InternalResultsResponse<Configvendas> refreshConfigvendass(RefreshRequest request);
+	public InternalResultsResponse<ConfigVendas> refreshConfigVendass(RefreshRequest request);
 
 	/**
-* Fetch configvendas by id.
+* Fetch ConfigVendas by id.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Configvendas> fetchConfigvendasById(FetchByIdRequest request);
+	public InternalResultsResponse<ConfigVendas> fetchConfigVendasById(FetchByIdRequest request);
 
 	/**
-* Fetch all configvendass.
+* Fetch all ConfigVendass.
 *
-* @return the internal results response< configvendas>
+* @return the internal results response< ConfigVendas>
 */
-	public InternalResultsResponse<Configvendas> fetchAllConfigvendass(Configvendas  configvendas);
+	public InternalResultsResponse<ConfigVendas> fetchAllConfigVendass(ConfigVendas  ConfigVendas);
 
 	/**
-* Fetch configvendass by request.
+* Fetch ConfigVendass by request.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Configvendas> fetchConfigvendassByRequest(ConfigvendasInquiryRequest request);
+	public InternalResultsResponse<ConfigVendas> fetchConfigVendassByRequest(PagedInquiryRequest request);
 
 }

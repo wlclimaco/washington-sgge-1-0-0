@@ -16,7 +16,7 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 public class Configuracao extends ModelCosmeDamiao
 {
 	private Integer id;
-	
+
 	private ConfigGeral confGeral;
 	private ConfigFiscal confFiscal;
 	private ConfigProduto confProd;
@@ -36,6 +36,10 @@ public class Configuracao extends ModelCosmeDamiao
 	public Configuracao(Integer id)
 	{
 		setId(id);
+	}
+
+	public Configuracao(int i, String string) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getId() {
@@ -118,7 +122,7 @@ public class Configuracao extends ModelCosmeDamiao
 				+ getConfEntrada() + ", getConfCarne()=" + getConfCarne() + ", toString()=" + super.toString() + "]";
 	}
 
-	
 
-	
+
+
 }

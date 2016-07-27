@@ -1,10 +1,10 @@
 /** create by system gera-java version 1.0.0 27/07/2016 15:44 : 43*/
-package com.qat.samples.sysmgmt.bac.undefined;
+package com.qat.samples.sysmgmt.bac.Util;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.model.County;
-import com.qat.samples.sysmgmt.model.request.CountyMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.DoisValores;
+import com.qat.samples.sysmgmt.util.model.request.DoisValoresInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.DoisValoresMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -25,7 +25,7 @@ public interface IDoisValorBAC
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Doisvalor> insertDoisvalor(DoisvalorMaintenanceRequest request);
+	public InternalResultsResponse<DoisValores> insertDoisValor(DoisValoresMaintenanceRequest request);
 
 	/**
 * Update doisvalor.
@@ -34,7 +34,7 @@ public interface IDoisValorBAC
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Doisvalor> updateDoisvalor(DoisvalorMaintenanceRequest request);
+	public InternalResultsResponse<DoisValores> updateDoisValor(DoisValoresMaintenanceRequest request);
 
 	/**
 * Delete doisvalor.
@@ -43,14 +43,14 @@ public interface IDoisValorBAC
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<Doisvalor> deleteDoisvalor(DoisvalorMaintenanceRequest request);
+	public InternalResultsResponse<DoisValores> deleteDoisValor(DoisValoresMaintenanceRequest request);
 
 	/**
 * Refresh doisvalors.
 *
 * @param request containing the number to refresh with and whether to return the result
 */
-	public InternalResultsResponse<Doisvalor> refreshDoisvalors(RefreshRequest request);
+	public InternalResultsResponse<DoisValores> refreshDoisValors(RefreshRequest request);
 
 	/**
 * Fetch doisvalor by id.
@@ -58,14 +58,14 @@ public interface IDoisValorBAC
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Doisvalor> fetchDoisvalorById(FetchByIdRequest request);
+	public InternalResultsResponse<DoisValores> fetchDoisValorById(FetchByIdRequest request);
 
 	/**
 * Fetch all doisvalors.
 *
 * @return the internal results response< doisvalor>
 */
-	public InternalResultsResponse<Doisvalor> fetchAllDoisvalors(Doisvalor  doisvalor);
+	public InternalResultsResponse<DoisValores> fetchAllDoisValors(DoisValores  doisvalor);
 
 	/**
 * Fetch doisvalors by request.
@@ -73,6 +73,6 @@ public interface IDoisValorBAC
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Doisvalor> fetchDoisvalorsByRequest(DoisvalorInquiryRequest request);
+	public InternalResultsResponse<DoisValores> fetchDoisValorsByRequest(DoisValoresInquiryRequest request);
 
 }
