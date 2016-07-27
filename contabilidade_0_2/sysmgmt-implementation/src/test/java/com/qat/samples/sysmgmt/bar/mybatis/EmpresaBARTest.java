@@ -20,6 +20,8 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.qat.framework.model.BaseModel.PersistenceActionEnum;
+import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
+import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.banco.model.Banco;
 import com.qat.samples.sysmgmt.banco.model.BancoPessoa;
 import com.qat.samples.sysmgmt.bar.Empresa.IEmpresaBAR;
@@ -34,6 +36,7 @@ import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.EntidadeTypeEnum;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
 import com.qat.samples.sysmgmt.entidade.model.Usuario;
+import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.estado.model.Estado;
 import com.qat.samples.sysmgmt.fiscal.model.Regime;
 import com.qat.samples.sysmgmt.pessoa.model.Socio;
@@ -97,75 +100,75 @@ public IEmpresaBAR getEmpresaBAR()
 //		empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
 //		Assert.assertEquals(empresaResponse, null);
 	}
-//
-//	@Test
-//	public void testFetchAllEmpresas()
-//	{
-//	Empresa empresa = new Empresa();
-//		List<Empresa> response = getEmpresaBAR().fetchAllEmpresas(empresa).getResultsList();
-//		Assert.assertNotNull(response);
-//	}
-//
-//	@Test
-//	public void testDeleteAllEmpresas()
-//	{
-//		getEmpresaBAR().deleteAllEmpresas();
-//	Empresa empresa = new Empresa();
-//		List<Empresa> response = getEmpresaBAR().fetchAllEmpresas(new Empresa()).getResultsList();
-//		Assert.assertEquals(response.size(), 0);
-//	}
-//
-//	@Test
-//	public void testUpdateEmpresa()
-//	{
-//		Empresa empresa = new Empresa(1, "NATIVE INSERT UPDATE");
-//		FetchByIdRequest request = new FetchByIdRequest();
-//		request.setFetchId(1);
-//		Empresa empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
-//		Assert.assertEquals(empresaResponse.getNome(), "nome_1");
-//		getEmpresaBAR().updateEmpresa(empresa);
-//		empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
-//		Assert.assertEquals(empresaResponse.getNome(), "NATIVE INSERT UPDATE");
-//	}
-//
-//	@Test
-//	public void testFetchEmpresasByRequest() throws Exception
-//	{
-//		// check for valid and precount
-//		EmpresaInquiryRequest request = new EmpresaInquiryRequest();
-//		request.setPreQueryCount(true);
-//		request.setStartPage(0);
-//		request.setPageSize(3);
-//		InternalResultsResponse<Empresa> response = getEmpresaBAR().fetchEmpresasByRequest(request);
-//		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-//		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-//		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-//		// check for valid and precount and start 2nd page
-//		request.setPreQueryCount(true);
-//		request.setStartPage(1);
-//		request.setPageSize(3);
-//		response = getEmpresaBAR().fetchEmpresasByRequest(request);
-//		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-//		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-//		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-//
-//		// check for valid and no precount
-//		EmpresaInquiryRequest request2 = new EmpresaInquiryRequest();
-//		request2.setPreQueryCount(false);
-//		InternalResultsResponse<Empresa> response2 = getEmpresaBAR().fetchEmpresasByRequest(request2);
-//		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
-//		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
-//		// this is because we did not choose to precount
-//		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
-//
-//		// check for zero rows
-//		getEmpresaBAR().deleteAllEmpresas();
-//		EmpresaInquiryRequest request3 = new EmpresaInquiryRequest();
-//		request3.setPreQueryCount(true);
-//		InternalResultsResponse<Empresa> response3 = getEmpresaBAR().fetchEmpresasByRequest(request3);
-//		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
-//
-//	}
+
+	@Test
+	public void testFetchAllEmpresas()
+	{
+	Empresa empresa = new Empresa();
+		List<Empresa> response = getEmpresaBAR().fetchAllEmpresas(empresa).getResultsList();
+		Assert.assertNotNull(response);
+	}
+
+	@Test
+	public void testDeleteAllEmpresas()
+	{
+		getEmpresaBAR().deleteAllEmpresas();
+	Empresa empresa = new Empresa();
+		List<Empresa> response = getEmpresaBAR().fetchAllEmpresas(new Empresa()).getResultsList();
+		Assert.assertEquals(response.size(), 0);
+	}
+
+	@Test
+	public void testUpdateEmpresa()
+	{
+		Empresa empresa = new Empresa(1, "NATIVE INSERT UPDATE");
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(1);
+		Empresa empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
+		Assert.assertEquals(empresaResponse.getNome(), "nome_1");
+		getEmpresaBAR().updateEmpresa(empresa);
+		empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
+		Assert.assertEquals(empresaResponse.getNome(), "NATIVE INSERT UPDATE");
+	}
+
+	@Test
+	public void testFetchEmpresasByRequest() throws Exception
+	{
+		// check for valid and precount
+		EmpresaInquiryRequest request = new EmpresaInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(3);
+		InternalResultsResponse<Empresa> response = getEmpresaBAR().fetchEmpresasByRequest(request);
+		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+		// check for valid and precount and start 2nd page
+		request.setPreQueryCount(true);
+		request.setStartPage(1);
+		request.setPageSize(3);
+		response = getEmpresaBAR().fetchEmpresasByRequest(request);
+		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+
+		// check for valid and no precount
+		EmpresaInquiryRequest request2 = new EmpresaInquiryRequest();
+		request2.setPreQueryCount(false);
+		InternalResultsResponse<Empresa> response2 = getEmpresaBAR().fetchEmpresasByRequest(request2);
+		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+		// this is because we did not choose to precount
+		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+		// check for zero rows
+		getEmpresaBAR().deleteAllEmpresas();
+		EmpresaInquiryRequest request3 = new EmpresaInquiryRequest();
+		request3.setPreQueryCount(true);
+		InternalResultsResponse<Empresa> response3 = getEmpresaBAR().fetchEmpresasByRequest(request3);
+		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+
+	}
 
 //===================================### FILIAL ####======================================
 //
