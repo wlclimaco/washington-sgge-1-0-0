@@ -104,12 +104,12 @@ public IEmpresaBAR getEmpresaBAR()
 
 		Empresa empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
 		Assert.assertEquals(empresaResponse, null);
-//		getEmpresaBAR().insertEmpresa(insertEmpresa(19,PersistenceActionEnum.INSERT));
-//		empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
-//		Assert.assertEquals(empresa.getId(), empresaResponse.getId());
-//		getEmpresaBAR().deleteEmpresaById(empresa);
-//		empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
-//		Assert.assertEquals(empresaResponse, null);
+		getEmpresaBAR().insertEmpresa(insertEmpresa(19,PersistenceActionEnum.INSERT));
+		empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
+		Assert.assertEquals(empresa.getId(), empresaResponse.getId());
+		getEmpresaBAR().deleteEmpresaById(empresa);
+		empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
+		Assert.assertEquals(empresaResponse, null);
 	}
 
 	@Test

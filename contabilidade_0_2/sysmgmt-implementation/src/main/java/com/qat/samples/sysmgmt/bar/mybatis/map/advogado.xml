@@ -20,7 +20,7 @@
   </resultMap>
 
 <sql id="allAdvogadoColumns">
-	<include refid="PessoaMap.allPessoaColumns"/>
+	id,<include refid="PessoaMap.allPessoaColumns"/>
 </sql>
 <sql id="allAdvogadoValues">
 	<include refid="PessoaMap.allPessoaValues"/>
@@ -29,7 +29,7 @@
  <select id="fetchAllAdvogados" resultMap="advogadoResult">
     SELECT
 	<include refid="allAdvogadoColumns" />
-   FROM pessoa where pessoaTypeEnum = 8 ORDER BY id ASC
+   FROM pessoa where pessoaTypeEnum = 9 ORDER BY id ASC
  </select>
 
  <select id="fetchAdvogadoById" parameterType="Integer" resultMap="advogadoResult">
@@ -41,13 +41,13 @@
  <select id="fetchAllAdvogadosRequest" parameterType="AdvogadoInquiryRequest" resultMap="advogadoResult">
 
 		SELECT <include refid="allAdvogadoColumns" />
-  		  FROM pessoa where pessoaTypeEnum = 8 ORDER BY id ASC
+  		  FROM pessoa where pessoaTypeEnum = 9 ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchAdvogadoRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM pessoa WHERE id IS NOT NULL and pessoaTypeEnum = 8
+		SELECT COUNT(*) AS RECORD_COUNT FROM pessoa WHERE id IS NOT NULL and pessoaTypeEnum = 9
 
  </select>
 </mapper>

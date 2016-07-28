@@ -68,7 +68,7 @@
   </resultMap>
 
   <sql id="allConfigProdutoColumns">
-,cfop
+cfop
 ,icmsSitTrib
 ,icmsOrigem
 ,icmsModalidadeBC
@@ -169,13 +169,13 @@
  <select id="fetchAllConfigProdutosRequest" parameterType="PagedInquiryRequest" resultMap="ConfigProdutoResult">
 
      SELECT id,<include refid="allConfigProdutoColumns" />
-           FROM configproduto where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+           FROM configproduto where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
        OFFSET ( #{startPage} * #{pageSize} )
        LIMIT #{pageSize}
 </select>
 
 <select id="fetchConfigProdutoRowCount" resultType="Integer">
-     SELECT COUNT(*) AS RECORD_COUNT FROM configproduto WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+     SELECT COUNT(*) AS RECORD_COUNT FROM configproduto WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 

@@ -32,7 +32,7 @@
   </resultMap>
 
   <sql id="allConfigFiscalColumns">
-,princAtividade
+princAtividade
 ,regime
 ,aliqSimples
 ,parentId
@@ -75,13 +75,13 @@
  <select id="fetchAllConfigFiscalsRequest" parameterType="PagedInquiryRequest" resultMap="ConfigFiscalResult">
 
      SELECT id,<include refid="allConfigFiscalColumns" />
-           FROM configfiscal where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+           FROM configfiscal where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
        OFFSET ( #{startPage} * #{pageSize} )
        LIMIT #{pageSize}
 </select>
 
 <select id="fetchConfigFiscalRowCount" resultType="Integer">
-     SELECT COUNT(*) AS RECORD_COUNT FROM configfiscal WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+     SELECT COUNT(*) AS RECORD_COUNT FROM configfiscal WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 

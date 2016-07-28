@@ -28,31 +28,31 @@ public class DoisValorBARImpl extends SqlSessionDaoSupport implements IDoisValor
 
 ///===================================### DOISVALOR ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_DOISVALOR = "DoisvalorMap.";
+private static final String NAMESPACE_DOISVALOR = "DoisValorMap.";
 
 /** The Constant STMT_INSERT_DOISVALOR. */
-private static final String STMT_INSERT_DOISVALOR = NAMESPACE_DOISVALOR + "insertDoisvalor";
+private static final String STMT_INSERT_DOISVALOR = NAMESPACE_DOISVALOR + "insertDoisValor";
 
 /** The Constant STMT_UPDATE_DOISVALOR. */
-private static final String STMT_UPDATE_DOISVALOR = NAMESPACE_DOISVALOR + "updateDoisvalor";
+private static final String STMT_UPDATE_DOISVALOR = NAMESPACE_DOISVALOR + "updateDoisValor";
 
 /** The Constant STMT_DELETE_DOISVALOR. */
-private static final String STMT_DELETE_DOISVALOR = NAMESPACE_DOISVALOR + "deleteDoisvalorById";
+private static final String STMT_DELETE_DOISVALOR = NAMESPACE_DOISVALOR + "deleteDoisValorById";
 
 	/** The Constant STMT_DELETE_DOISVALOR_ALL. */
-	private static final String STMT_DELETE_DOISVALOR_ALL = NAMESPACE_DOISVALOR + "deleteAllDoisvalors";
+	private static final String STMT_DELETE_DOISVALOR_ALL = NAMESPACE_DOISVALOR + "deleteAllDoisValors";
 
 	/** The Constant STMT_FETCH_DOISVALOR. */
-	private static final String STMT_FETCH_DOISVALOR = NAMESPACE_DOISVALOR + "fetchDoisvalorById";
+	private static final String STMT_FETCH_DOISVALOR = NAMESPACE_DOISVALOR + "fetchDoisValorById";
 
 	/** The Constant STMT_FETCH_DOISVALOR_ALL. */
-	private static final String STMT_FETCH_DOISVALOR_ALL = NAMESPACE_DOISVALOR + "fetchAllDoisvalors";
+	private static final String STMT_FETCH_DOISVALOR_ALL = NAMESPACE_DOISVALOR + "fetchAllDoisValors";
 
 	/** The Constant STMT_FETCH_DOISVALOR_COUNT. */
-	private static final String STMT_FETCH_DOISVALOR_COUNT = NAMESPACE_DOISVALOR + "fetchDoisvalorRowCount";
+	private static final String STMT_FETCH_DOISVALOR_COUNT = NAMESPACE_DOISVALOR + "fetchDoisValorRowCount";
 
 	/** The Constant STMT_FETCH_DOISVALOR_ALL_REQUEST. */
-	private static final String STMT_FETCH_DOISVALOR_ALL_REQUEST = NAMESPACE_DOISVALOR + "fetchAllDoisvalorsRequest";
+	private static final String STMT_FETCH_DOISVALOR_ALL_REQUEST = NAMESPACE_DOISVALOR + "fetchAllDoisValorsRequest";
 
 //===================================### DOISVALOR ####======================================
 	/**

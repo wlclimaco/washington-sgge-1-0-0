@@ -26,12 +26,13 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="carneBotelo" column="carneBotelo" select="RegimeMap.fetchRegimeById"/>
-    <collection property="carneNormal" column="carneNormal" select="RegimeMap.fetchRegimeById"/>
+
+<result property="carneBotelo" column="carneBotelo"  typeHandler="BooleanHandler"/>
+<result property="carneNormal" column="carneNormal" typeHandler="BooleanHandler"/>
   </resultMap>
 
   <sql id="allConfigCarneColumns">
-,carneBotelo
+carneBotelo
 ,carneNormal
 ,parentId
 ,tabelaEnumValue
@@ -72,13 +73,13 @@
  <select id="fetchAllConfigCarnesRequest" parameterType="PagedInquiryRequest" resultMap="ConfigCarneResult">
 
      SELECT id,<include refid="allConfigCarneColumns" />
-           FROM configcarne where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+           FROM configcarne where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
        OFFSET ( #{startPage} * #{pageSize} )
        LIMIT #{pageSize}
 </select>
 
 <select id="fetchConfigCarneRowCount" resultType="Integer">
-     SELECT COUNT(*) AS RECORD_COUNT FROM configcarne WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+     SELECT COUNT(*) AS RECORD_COUNT FROM configcarne WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 

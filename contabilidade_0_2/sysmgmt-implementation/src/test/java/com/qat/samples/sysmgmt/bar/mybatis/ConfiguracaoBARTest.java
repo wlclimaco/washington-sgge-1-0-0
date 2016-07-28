@@ -1,5 +1,5 @@
 /** create by system gera-java version 1.0.0 27/07/2016 15:55 : 11*/
-package com.qat.samples.sysmgmt.bar.mybatis;	
+package com.qat.samples.sysmgmt.bar.mybatis;
 
 
 import java.util.ArrayList;
@@ -104,14 +104,14 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 	@Test
 	public void testUpdateConfiguracao()
 	{
-		Configuracao configuracao = insertConfiguracao(1, TabelaEnum.CONFIGURACAO, PersistenceActionEnum.UPDATE);
+		Configuracao configuracao = insertConfiguracao(1000, TabelaEnum.CONFIGURACAO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		Configuracao configuracaoResponse = getConfiguracaoBAR().fetchConfiguracaoById(request);
-		Assert.assertEquals(configuracaoResponse.getUserId(), "System");
+		Assert.assertEquals(configuracaoResponse.getModifyUser(), "rod");
 		getConfiguracaoBAR().updateConfiguracao(configuracao);
 		configuracaoResponse = getConfiguracaoBAR().fetchConfiguracaoById(request);
-		Assert.assertEquals(configuracaoResponse.getUserId(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(configuracaoResponse.getModifyUser(), "rod");
 	}
 
 	@Test
@@ -192,11 +192,11 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 	@Test
 	public void testUpdateBoleto()
 	{
-		Boleto boleto = insertBoleto(1, TabelaEnum.BOLETO, PersistenceActionEnum.UPDATE);
+		Boleto boleto = insertBoleto(1010, TabelaEnum.BOLETO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1010);
 		Boleto boletoResponse = getConfiguracaoBAR().fetchBoletoById(request);
-		Assert.assertEquals(boletoResponse.getInstrucoes(), "NATIVE INSERT");
+		Assert.assertEquals(boletoResponse.getInstrucoes(), "instrucoes_0");
 		getConfiguracaoBAR().updateBoleto(boleto);
 		boletoResponse = getConfiguracaoBAR().fetchBoletoById(request);
 		Assert.assertEquals(boletoResponse.getInstrucoes(), "NATIVE INSERT UPDATE");
@@ -280,9 +280,9 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 	@Test
 	public void testUpdateConfigCarne()
 	{
-		ConfigCarne ConfigCarne = insertConfigCarne(1, TabelaEnum.CONFIGCARNE, PersistenceActionEnum.UPDATE);
+		ConfigCarne ConfigCarne = insertConfigCarne(1010, TabelaEnum.CONFIGCARNE, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1010);
 		ConfigCarne ConfigCarneResponse = getConfiguracaoBAR().fetchConfigCarneById(request);
 		Assert.assertEquals(ConfigCarneResponse.getCarneBotelo(), true);
 		getConfiguracaoBAR().updateConfigCarne(ConfigCarne);
@@ -360,7 +360,7 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 	public void testDeleteAllConfigEntradas()
 	{
 		getConfiguracaoBAR().deleteAllConfigEntradas();
-	ConfigEntrada ConfigEntrada = new ConfigEntrada();
+		ConfigEntrada ConfigEntrada = new ConfigEntrada();
 		List<ConfigEntrada> response = getConfiguracaoBAR().fetchAllConfigEntradas(new ConfigEntrada()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
@@ -368,9 +368,9 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 	@Test
 	public void testUpdateConfigEntrada()
 	{
-		ConfigEntrada ConfigEntrada = insertConfigEntrada(1, TabelaEnum.CONFIGENTRADA, PersistenceActionEnum.UPDATE);
+		ConfigEntrada ConfigEntrada = insertConfigEntrada(1010, TabelaEnum.CONFIGENTRADA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1010);
 		ConfigEntrada ConfigEntradaResponse = getConfiguracaoBAR().fetchConfigEntradaById(request);
 		Assert.assertEquals(ConfigEntradaResponse.getValorTotalFixo(), true);
 		getConfiguracaoBAR().updateConfigEntrada(ConfigEntrada);
@@ -544,9 +544,9 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 	@Test
 	public void testUpdateConfigAlertas()
 	{
-		ConfigAlertas ConfigAlertas = insertConfigAlertas(1, TabelaEnum.CONFIGALERTAS, PersistenceActionEnum.UPDATE);
+		ConfigAlertas ConfigAlertas = insertConfigAlertas(1010, TabelaEnum.CONFIGALERTAS, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1010);
 		ConfigAlertas ConfigAlertasResponse = getConfiguracaoBAR().fetchConfigAlertasById(request);
 		Assert.assertEquals(ConfigAlertasResponse.getEstoqMax(), true);
 		getConfiguracaoBAR().updateConfigAlertas(ConfigAlertas);
@@ -632,9 +632,9 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 	@Test
 	public void testUpdateConfigGeral()
 	{
-		ConfigGeral ConfigGeral = insertConfigGeral(1, TabelaEnum.CONFIGGERAL, PersistenceActionEnum.UPDATE);
+		ConfigGeral ConfigGeral = insertConfigGeral(1010, TabelaEnum.CONFIGGERAL, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1010);
 		ConfigGeral ConfigGeralResponse = getConfiguracaoBAR().fetchConfigGeralById(request);
 		Assert.assertEquals(ConfigGeralResponse.getCnpjCPFUnico(), true);
 		getConfiguracaoBAR().updateConfigGeral(ConfigGeral);
@@ -808,11 +808,11 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 	@Test
 	public void testUpdateConfigSMTP()
 	{
-		ConfigSMTP ConfigSMTP = insertConfigSMTP(1, TabelaEnum.CONFIGSMTP, PersistenceActionEnum.UPDATE);
+		ConfigSMTP ConfigSMTP = insertConfigSMTP(1010, TabelaEnum.CONFIGSMTP, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1010);
 		ConfigSMTP ConfigSMTPResponse = getConfiguracaoBAR().fetchConfigSMTPById(request);
-		Assert.assertEquals(ConfigSMTPResponse.getEndEmail(), "NATIVE INSERT");
+		Assert.assertEquals(ConfigSMTPResponse.getEndEmail(), "endEmail_0");
 		getConfiguracaoBAR().updateConfigSMTP(ConfigSMTP);
 		ConfigSMTPResponse = getConfiguracaoBAR().fetchConfigSMTPById(request);
 		Assert.assertEquals(ConfigSMTPResponse.getEndEmail(), "NATIVE INSERT UPDATE");
@@ -896,11 +896,11 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 	@Test
 	public void testUpdateConfiguracaoNFe()
 	{
-		ConfiguracaoNFe ConfiguracaoNFe = insertConfiguracaoNFe(1, TabelaEnum.CONFIGURACAONFE, PersistenceActionEnum.UPDATE);
+		ConfiguracaoNFe ConfiguracaoNFe = insertConfiguracaoNFe(1010, TabelaEnum.CONFIGURACAONFE, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1010);
 		ConfiguracaoNFe ConfiguracaoNFeResponse = getConfiguracaoBAR().fetchConfiguracaoNFeById(request);
-		Assert.assertEquals(ConfiguracaoNFeResponse.getcSC(), "NATIVE INSERT");
+		Assert.assertEquals(ConfiguracaoNFeResponse.getcSC(), "cSC_0");
 		getConfiguracaoBAR().updateConfiguracaoNFe(ConfiguracaoNFe);
 		ConfiguracaoNFeResponse = getConfiguracaoBAR().fetchConfiguracaoNFeById(request);
 		Assert.assertEquals(ConfiguracaoNFeResponse.getcSC(), "NATIVE INSERT UPDATE");
@@ -1049,12 +1049,12 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 		executeSqlScript("conf/insertConfigVendas.sql", false);
 	}
 
-	
+
 	public Configuracao insertConfiguracao(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			Configuracao configuracao = new Configuracao();
 			Date a = new Date();
-			configuracao.setId(100);
+			configuracao.setId(id);
 			configuracao.setConfGeral(insertConfigGeral(id,TabelaEnum.BOLETO,action));
 			configuracao.setConfNFe(insertConfiguracaoNFe(id,TabelaEnum.BOLETO,action));
 			configuracao.setConfFiscal(insertConfigFiscal(id,TabelaEnum.BOLETO,action));
@@ -1070,19 +1070,19 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			configuracao.setModifyDateUTC(a.getTime());
 			configuracao.setCreateDateUTC(a.getTime());
 			configuracao.setCreateUser("system");
-			configuracao.setModifyUser("system");
+			configuracao.setModifyUser("rod");
 			configuracao.setProcessId(1);
 			configuracao.setModelAction(action);
-	
+
 			return configuracao;
 		}
 
-	
+
 	public Boleto insertBoleto(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			Boleto boleto = new Boleto();
 			Date a = new Date();
-			boleto.setId(100);
+			boleto.setId(id);
 			boleto.setAtivarBolOnLine(Boolean.FALSE);
 			boleto.setTipoBoleto(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
 			boleto.setAgencia(100);
@@ -1101,16 +1101,16 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			boleto.setModifyUser("system");
 			boleto.setProcessId(1);
 			boleto.setModelAction(action);
-	
+
 			return boleto;
 		}
 
-	
+
 	public ConfigCarne insertConfigCarne(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			ConfigCarne ConfigCarne = new ConfigCarne();
 			Date a = new Date();
-			ConfigCarne.setId(100);
+			ConfigCarne.setId(id);
 			ConfigCarne.setCarneBotelo(Boolean.FALSE);
 			ConfigCarne.setCarneNormal(Boolean.FALSE);
 			ConfigCarne.setParentId(id);
@@ -1121,16 +1121,16 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			ConfigCarne.setModifyUser("system");
 			ConfigCarne.setProcessId(1);
 			ConfigCarne.setModelAction(action);
-	
+
 			return ConfigCarne;
 		}
 
-	
+
 	public ConfigEntrada insertConfigEntrada(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			ConfigEntrada ConfigEntrada = new ConfigEntrada();
 			Date a = new Date();
-			ConfigEntrada.setId(100);
+			ConfigEntrada.setId(id);
 			ConfigEntrada.setValorTotalFixo(Boolean.FALSE);
 			ConfigEntrada.setManterPrecoVendaProd(Boolean.FALSE);
 			ConfigEntrada.setParentId(id);
@@ -1141,16 +1141,16 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			ConfigEntrada.setModifyUser("system");
 			ConfigEntrada.setProcessId(1);
 			ConfigEntrada.setModelAction(action);
-	
+
 			return ConfigEntrada;
 		}
 
-	
+
 	public ConfigFiscal insertConfigFiscal(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			ConfigFiscal ConfigFiscal = new ConfigFiscal();
 			Date a = new Date();
-			ConfigFiscal.setId(100);
+			ConfigFiscal.setId(id);
 			ConfigFiscal.setPrincAtividade(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
 			ConfigFiscal.setRegime(new Regime());
 			ConfigFiscal.setAliqSimples(new Double(1.99));
@@ -1162,16 +1162,16 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			ConfigFiscal.setModifyUser("system");
 			ConfigFiscal.setProcessId(1);
 			ConfigFiscal.setModelAction(action);
-	
+
 			return ConfigFiscal;
 		}
 
-	
+
 	public ConfigAlertas insertConfigAlertas(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			ConfigAlertas ConfigAlertas = new ConfigAlertas();
 			Date a = new Date();
-			ConfigAlertas.setId(100);
+			ConfigAlertas.setId(id);
 			ConfigAlertas.setEstoqMin(Boolean.FALSE);
 			ConfigAlertas.setEstoqMax(Boolean.FALSE);
 			ConfigAlertas.setErroNFe(Boolean.FALSE);
@@ -1184,16 +1184,16 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			ConfigAlertas.setModifyUser("system");
 			ConfigAlertas.setProcessId(1);
 			ConfigAlertas.setModelAction(action);
-	
+
 			return ConfigAlertas;
 		}
 
-	
+
 	public ConfigGeral insertConfigGeral(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			ConfigGeral ConfigGeral = new ConfigGeral();
 			Date a = new Date();
-			ConfigGeral.setId(100);
+			ConfigGeral.setId(id);
 			ConfigGeral.setFusoHorario(100);
 			ConfigGeral.setCasasDecimais(100);
 			ConfigGeral.setDiasCartaCobr(100);
@@ -1210,16 +1210,16 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			ConfigGeral.setModifyUser("system");
 			ConfigGeral.setProcessId(1);
 			ConfigGeral.setModelAction(action);
-	
+
 			return ConfigGeral;
 		}
 
-	
+
 	public ConfigProduto insertConfigProduto(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			ConfigProduto ConfigProduto = new ConfigProduto();
 			Date a = new Date();
-			ConfigProduto.setId(100);
+			ConfigProduto.setId(id);
 			ConfigProduto.setCfop(new Cfop());
 			ConfigProduto.setIcmsSitTrib(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
 			ConfigProduto.setIcmsOrigem(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
@@ -1260,16 +1260,16 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			ConfigProduto.setModifyUser("system");
 			ConfigProduto.setProcessId(1);
 			ConfigProduto.setModelAction(action);
-	
+
 			return ConfigProduto;
 		}
 
-	
+
 	public ConfigSMTP insertConfigSMTP(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			ConfigSMTP ConfigSMTP = new ConfigSMTP();
 			Date a = new Date();
-			ConfigSMTP.setId(100);
+			ConfigSMTP.setId(id);
 			ConfigSMTP.setServSMTP("NATIVE INSERT UPDATE");
 			ConfigSMTP.setPorta("NATIVE INSERT UPDATE");
 			ConfigSMTP.setEndEmail("NATIVE INSERT UPDATE");
@@ -1284,16 +1284,16 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			ConfigSMTP.setModifyUser("system");
 			ConfigSMTP.setProcessId(1);
 			ConfigSMTP.setModelAction(action);
-	
+
 			return ConfigSMTP;
 		}
 
-	
+
 	public ConfiguracaoNFe insertConfiguracaoNFe(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			ConfiguracaoNFe ConfiguracaoNFe = new ConfiguracaoNFe();
 			Date a = new Date();
-			ConfiguracaoNFe.setId(100);
+			ConfiguracaoNFe.setId(id);
 			ConfiguracaoNFe.setPresCompr(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
 			ConfiguracaoNFe.setDestConsFinal(Boolean.FALSE);
 			ConfiguracaoNFe.setPreencherDataHora(Boolean.FALSE);
@@ -1321,16 +1321,16 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			ConfiguracaoNFe.setModifyUser("system");
 			ConfiguracaoNFe.setProcessId(1);
 			ConfiguracaoNFe.setModelAction(action);
-	
+
 			return ConfiguracaoNFe;
 		}
 
-	
+
 	public ConfigVendas insertConfigVendas(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			ConfigVendas ConfigVendas = new ConfigVendas();
 			Date a = new Date();
-			ConfigVendas.setId(100);
+			ConfigVendas.setId(id);
 			ConfigVendas.setDescontoMaxVenda(new Double(1.99));
 			ConfigVendas.setObservacao("observação");
 			ConfigVendas.setImprSegVia(Boolean.FALSE);
@@ -1349,15 +1349,15 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			ConfigVendas.setModifyUser("system");
 			ConfigVendas.setProcessId(1);
 			ConfigVendas.setModelAction(action);
-	
+
 			return ConfigVendas;
 		}
-	
+
 	public DoisValores insertDoisValor(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 	{
 		DoisValores ConfigVendas = new DoisValores();
 		Date a = new Date();
-		ConfigVendas.setId(100);
+		ConfigVendas.setId(id);
 		ConfigVendas.setNome("teste");
 		ConfigVendas.setDescricao("Description");
 		ConfigVendas.setParentId(id);

@@ -32,7 +32,7 @@
   </resultMap>
 
   <sql id="allConfigAlertasColumns">
-,estoqMin
+estoqMin
 ,estoqMax
 ,erroNFe
 ,pdCompra
@@ -77,13 +77,13 @@
  <select id="fetchAllConfigAlertassRequest" parameterType="PagedInquiryRequest" resultMap="ConfigAlertasResult">
 
      SELECT id,<include refid="allConfigAlertasColumns" />
-           FROM configalertas where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+           FROM configalertas where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
        OFFSET ( #{startPage} * #{pageSize} )
        LIMIT #{pageSize}
 </select>
 
 <select id="fetchConfigAlertasRowCount" resultType="Integer">
-     SELECT COUNT(*) AS RECORD_COUNT FROM configalertas WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+     SELECT COUNT(*) AS RECORD_COUNT FROM configalertas WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 

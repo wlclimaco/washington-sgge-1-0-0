@@ -19,7 +19,7 @@
   </resultMap>
 
 <sql id="allInquilinoColumns">
-	<include refid="PessoaMap.allPessoaColumns"/>
+	id,<include refid="PessoaMap.allPessoaColumns"/>
 </sql>
 <sql id="allInquilinoValues">
 	<include refid="PessoaMap.allPessoaValues"/>

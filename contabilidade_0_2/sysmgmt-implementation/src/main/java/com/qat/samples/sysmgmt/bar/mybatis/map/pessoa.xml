@@ -77,10 +77,10 @@ nome
   </sql>
 
  <insert id="insertPessoa" parameterType="Cliente">
- 	INSERT INTO pessoa (
-	<include refid="allPessoaColumns" />
+   INSERT INTO pessoa (
+	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allPessoaColumns" />
      )
-   VALUES (<include refid="allPessoaValues" /> )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allPessoaValues" /> )
  </insert>
 
  <update id="updatePessoa" parameterType="Cliente">

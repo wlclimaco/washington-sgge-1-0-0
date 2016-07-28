@@ -35,7 +35,7 @@
   </resultMap>
 
   <sql id="allConfigSMTPColumns">
-,servSMTP
+servSMTP
 ,porta
 ,endEmail
 ,usuario
@@ -84,13 +84,13 @@
  <select id="fetchAllConfigSMTPsRequest" parameterType="PagedInquiryRequest" resultMap="ConfigSMTPResult">
 
      SELECT id,<include refid="allConfigSMTPColumns" />
-           FROM configsmtp where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+           FROM configsmtp where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
        OFFSET ( #{startPage} * #{pageSize} )
        LIMIT #{pageSize}
 </select>
 
 <select id="fetchConfigSMTPRowCount" resultType="Integer">
-     SELECT COUNT(*) AS RECORD_COUNT FROM configsmtp WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+     SELECT COUNT(*) AS RECORD_COUNT FROM configsmtp WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 

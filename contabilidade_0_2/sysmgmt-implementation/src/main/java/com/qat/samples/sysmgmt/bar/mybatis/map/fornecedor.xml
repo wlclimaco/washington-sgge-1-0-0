@@ -19,7 +19,7 @@
   </resultMap>
 
 <sql id="allFornecedorColumns">
-	<include refid="PessoaMap.allPessoaColumns"/>
+	id,<include refid="PessoaMap.allPessoaColumns"/>
 </sql>
 <sql id="allFornecedorValues">
 	<include refid="PessoaMap.allPessoaValues"/>
@@ -28,7 +28,7 @@
  <select id="fetchAllFornecedors" resultMap="fornecedorResult">
     SELECT
 	<include refid="allFornecedorColumns" />
-   FROM pessoa where pessoaTypeEnum = 8 ORDER BY id ASC
+   FROM pessoa where pessoaTypeEnum = 2 ORDER BY id ASC
  </select>
 
  <select id="fetchFornecedorById" parameterType="Integer" resultMap="fornecedorResult">
@@ -40,13 +40,13 @@
  <select id="fetchAllFornecedorsRequest" parameterType="FornecedorInquiryRequest" resultMap="fornecedorResult">
 
 		SELECT <include refid="allFornecedorColumns" />
-  		  FROM pessoa where pessoaTypeEnum = 8 ORDER BY id ASC
+  		  FROM pessoa where pessoaTypeEnum = 2 ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchFornecedorRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM pessoa WHERE id IS NOT NULL and pessoaTypeEnum = 8
+		SELECT COUNT(*) AS RECORD_COUNT FROM pessoa WHERE id IS NOT NULL and pessoaTypeEnum = 2
 
  </select>
 </mapper>

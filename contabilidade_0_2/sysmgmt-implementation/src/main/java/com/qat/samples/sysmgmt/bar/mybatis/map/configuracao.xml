@@ -38,7 +38,7 @@
   </resultMap>
 
   <sql id="allConfiguracaoColumns">
-,confGeral
+confGeral
 ,confFiscal
 ,confProd
 ,confVendas
@@ -91,13 +91,13 @@
  <select id="fetchAllConfiguracaosRequest" parameterType="PagedInquiryRequest" resultMap="ConfiguracaoResult">
 
      SELECT id,<include refid="allConfiguracaoColumns" />
-           FROM configuracao where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+           FROM configuracao where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
        OFFSET ( #{startPage} * #{pageSize} )
        LIMIT #{pageSize}
 </select>
 
 <select id="fetchConfiguracaoRowCount" resultType="Integer">
-     SELECT COUNT(*) AS RECORD_COUNT FROM configuracao WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+     SELECT COUNT(*) AS RECORD_COUNT FROM configuracao WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 

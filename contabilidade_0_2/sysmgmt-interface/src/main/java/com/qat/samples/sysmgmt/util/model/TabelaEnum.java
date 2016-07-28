@@ -215,7 +215,7 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	RENTABILIDADE(80, "sendsolv.base.model.risklevelenum.medium"),
 
 	RENTABILIDADEITENS(73, "sendsolv.base.model.risklevelenum.medium"),
-	
+
 	TRIBUTACAO(73, "sendsolv.base.model.risklevelenum.medium"),
 
 
@@ -232,18 +232,22 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	CONFIGGERAL(73, "sendsolv.base.model.risklevelenum.medium"),
 
 	CONFIGPRODUTO(73, "sendsolv.base.model.risklevelenum.medium"),
-	
+
 	CONFIGSMTP(73, "sendsolv.base.model.risklevelenum.medium"),
-	
+
 	CONFIGURACAO(73, "sendsolv.base.model.risklevelenum.medium"),
-	
+
 	CONFIGURACAONFE(73, "sendsolv.base.model.risklevelenum.medium"),
-	
+
 	DOISVALOR(73, "sendsolv.base.model.risklevelenum.medium"),
-	
+
+	SINDICO(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	INQUILINO(73, "sendsolv.base.model.risklevelenum.medium"),
+
 	CONFIGVENDAS(73, "sendsolv.base.model.risklevelenum.medium");
 
-	
+
 
 	/** The code. */
 	private Integer code;

@@ -36,14 +36,6 @@ public class ConfigCarne extends ModelCosmeDamiao
 		// TODO Auto-generated constructor stub
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public Boolean getCarneBotelo() {
 		return carneBotelo;
 	}
@@ -58,6 +50,14 @@ public class ConfigCarne extends ModelCosmeDamiao
 
 	public void setCarneNormal(Boolean carneNormal) {
 		this.carneNormal = carneNormal;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Override

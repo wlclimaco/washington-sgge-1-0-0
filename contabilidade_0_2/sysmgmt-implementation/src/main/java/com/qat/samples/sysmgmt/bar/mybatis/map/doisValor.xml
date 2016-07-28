@@ -17,7 +17,7 @@
        exactly. -->
     <resultMap id="DoisValorResult" type="DoisValor">
         <result property="id" column="id" />
-        <result property="valor" column="valor" />
+        <result property="nome" column="nome" />
         <result property="descricao" column="descricao" />
         <result property="parentId" column="parentId" />
         <result property="tabelaEnumValue" column="tabelaEnumValue" />
@@ -30,11 +30,11 @@
     </resultMap>
 
     <sql id="allDoisValorColumns">
-        ,valor ,descricao ,parentId ,tabelaEnumValue ,emprId ,processId ,create_date ,create_user ,modify_date ,modify_user
+        nome ,descricao ,parentId ,tabelaEnumValue ,emprId ,processId ,create_date ,create_user ,modify_date ,modify_user
 
     </sql>
     <sql id="allDoisValorValues">
-        #{valor}, #{descricao}, #{parentId}, #{tabelaEnumValue}, #{emprId}, #{processId}, #{createDateUTC}, #{createUser}, #{modifyDateUTC}, #{modifyUser}
+        #{nome}, #{descricao}, #{parentId}, #{tabelaEnumValue}, #{emprId}, #{processId}, #{createDateUTC}, #{createUser}, #{modifyDateUTC}, #{modifyUser}
     </sql>
 
 
@@ -77,7 +77,7 @@
 
     <update id="updateDoisValor" parameterType="DoisValor">
         UPDATE doisvalor SET
-        <if test="valor!= null">valor = #{valor},</if>
+        <if test="nome!= null">nome = #{nome},</if>
         <if test="descricao!= null">descricao = #{descricao},</if>
         <if test="parentId!= null"> parentId=#{parentId},</if>
         <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>

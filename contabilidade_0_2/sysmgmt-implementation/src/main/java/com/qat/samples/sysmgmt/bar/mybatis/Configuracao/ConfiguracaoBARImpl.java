@@ -98,273 +98,273 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 	/// ===================================### CONFIGCARNE
 	/// ####======================================
 	/** The Constant NAMESPACE. */
-	private static final String NAMESPACE_CONFIGCARNE = "ConfigcarneMap.";
+	private static final String NAMESPACE_CONFIGCARNE = "ConfigCarneMap.";
 
 	/** The Constant STMT_INSERT_CONFIGCARNE. */
-	private static final String STMT_INSERT_CONFIGCARNE = NAMESPACE_CONFIGCARNE + "insertConfigcarne";
+	private static final String STMT_INSERT_CONFIGCARNE = NAMESPACE_CONFIGCARNE + "insertConfigCarne";
 
 	/** The Constant STMT_UPDATE_CONFIGCARNE. */
-	private static final String STMT_UPDATE_CONFIGCARNE = NAMESPACE_CONFIGCARNE + "updateConfigcarne";
+	private static final String STMT_UPDATE_CONFIGCARNE = NAMESPACE_CONFIGCARNE + "updateConfigCarne";
 
 	/** The Constant STMT_DELETE_CONFIGCARNE. */
-	private static final String STMT_DELETE_CONFIGCARNE = NAMESPACE_CONFIGCARNE + "deleteConfigcarneById";
+	private static final String STMT_DELETE_CONFIGCARNE = NAMESPACE_CONFIGCARNE + "deleteConfigCarneById";
 
 	/** The Constant STMT_DELETE_CONFIGCARNE_ALL. */
-	private static final String STMT_DELETE_CONFIGCARNE_ALL = NAMESPACE_CONFIGCARNE + "deleteAllConfigcarnes";
+	private static final String STMT_DELETE_CONFIGCARNE_ALL = NAMESPACE_CONFIGCARNE + "deleteAllConfigCarnes";
 
 	/** The Constant STMT_FETCH_CONFIGCARNE. */
-	private static final String STMT_FETCH_CONFIGCARNE = NAMESPACE_CONFIGCARNE + "fetchConfigcarneById";
+	private static final String STMT_FETCH_CONFIGCARNE = NAMESPACE_CONFIGCARNE + "fetchConfigCarneById";
 
 	/** The Constant STMT_FETCH_CONFIGCARNE_ALL. */
-	private static final String STMT_FETCH_CONFIGCARNE_ALL = NAMESPACE_CONFIGCARNE + "fetchAllConfigcarnes";
+	private static final String STMT_FETCH_CONFIGCARNE_ALL = NAMESPACE_CONFIGCARNE + "fetchAllConfigCarnes";
 
 	/** The Constant STMT_FETCH_CONFIGCARNE_COUNT. */
-	private static final String STMT_FETCH_CONFIGCARNE_COUNT = NAMESPACE_CONFIGCARNE + "fetchConfigcarneRowCount";
+	private static final String STMT_FETCH_CONFIGCARNE_COUNT = NAMESPACE_CONFIGCARNE + "fetchConfigCarneRowCount";
 
 	/** The Constant STMT_FETCH_CONFIGCARNE_ALL_REQUEST. */
 	private static final String STMT_FETCH_CONFIGCARNE_ALL_REQUEST = NAMESPACE_CONFIGCARNE
-			+ "fetchAllConfigcarnesRequest";
+			+ "fetchAllConfigCarnesRequest";
 
 	/// ===================================### CONFIGENTRADA
 	/// ####======================================
 	/** The Constant NAMESPACE. */
-	private static final String NAMESPACE_CONFIGENTRADA = "ConfigentradaMap.";
+	private static final String NAMESPACE_CONFIGENTRADA = "ConfigEntradaMap.";
 
 	/** The Constant STMT_INSERT_CONFIGENTRADA. */
-	private static final String STMT_INSERT_CONFIGENTRADA = NAMESPACE_CONFIGENTRADA + "insertConfigentrada";
+	private static final String STMT_INSERT_CONFIGENTRADA = NAMESPACE_CONFIGENTRADA + "insertConfigEntrada";
 
 	/** The Constant STMT_UPDATE_CONFIGENTRADA. */
-	private static final String STMT_UPDATE_CONFIGENTRADA = NAMESPACE_CONFIGENTRADA + "updateConfigentrada";
+	private static final String STMT_UPDATE_CONFIGENTRADA = NAMESPACE_CONFIGENTRADA + "updateConfigEntrada";
 
 	/** The Constant STMT_DELETE_CONFIGENTRADA. */
-	private static final String STMT_DELETE_CONFIGENTRADA = NAMESPACE_CONFIGENTRADA + "deleteConfigentradaById";
+	private static final String STMT_DELETE_CONFIGENTRADA = NAMESPACE_CONFIGENTRADA + "deleteConfigEntradaById";
 
 	/** The Constant STMT_DELETE_CONFIGENTRADA_ALL. */
-	private static final String STMT_DELETE_CONFIGENTRADA_ALL = NAMESPACE_CONFIGENTRADA + "deleteAllConfigentradas";
+	private static final String STMT_DELETE_CONFIGENTRADA_ALL = NAMESPACE_CONFIGENTRADA + "deleteAllConfigEntradas";
 
 	/** The Constant STMT_FETCH_CONFIGENTRADA. */
-	private static final String STMT_FETCH_CONFIGENTRADA = NAMESPACE_CONFIGENTRADA + "fetchConfigentradaById";
+	private static final String STMT_FETCH_CONFIGENTRADA = NAMESPACE_CONFIGENTRADA + "fetchConfigEntradaById";
 
 	/** The Constant STMT_FETCH_CONFIGENTRADA_ALL. */
-	private static final String STMT_FETCH_CONFIGENTRADA_ALL = NAMESPACE_CONFIGENTRADA + "fetchAllConfigentradas";
+	private static final String STMT_FETCH_CONFIGENTRADA_ALL = NAMESPACE_CONFIGENTRADA + "fetchAllConfigEntradas";
 
 	/** The Constant STMT_FETCH_CONFIGENTRADA_COUNT. */
-	private static final String STMT_FETCH_CONFIGENTRADA_COUNT = NAMESPACE_CONFIGENTRADA + "fetchConfigentradaRowCount";
+	private static final String STMT_FETCH_CONFIGENTRADA_COUNT = NAMESPACE_CONFIGENTRADA + "fetchConfigEntradaRowCount";
 
 	/** The Constant STMT_FETCH_CONFIGENTRADA_ALL_REQUEST. */
 	private static final String STMT_FETCH_CONFIGENTRADA_ALL_REQUEST = NAMESPACE_CONFIGENTRADA
-			+ "fetchAllConfigentradasRequest";
+			+ "fetchAllConfigEntradasRequest";
 
 	/// ===================================### CONFIGFISCAL
 	/// ####======================================
 	/** The Constant NAMESPACE. */
-	private static final String NAMESPACE_CONFIGFISCAL = "ConfigfiscalMap.";
+	private static final String NAMESPACE_CONFIGFISCAL = "ConfigFiscalMap.";
 
 	/** The Constant STMT_INSERT_CONFIGFISCAL. */
-	private static final String STMT_INSERT_CONFIGFISCAL = NAMESPACE_CONFIGFISCAL + "insertConfigfiscal";
+	private static final String STMT_INSERT_CONFIGFISCAL = NAMESPACE_CONFIGFISCAL + "insertConfigFiscal";
 
 	/** The Constant STMT_UPDATE_CONFIGFISCAL. */
-	private static final String STMT_UPDATE_CONFIGFISCAL = NAMESPACE_CONFIGFISCAL + "updateConfigfiscal";
+	private static final String STMT_UPDATE_CONFIGFISCAL = NAMESPACE_CONFIGFISCAL + "updateConfigFiscal";
 
 	/** The Constant STMT_DELETE_CONFIGFISCAL. */
-	private static final String STMT_DELETE_CONFIGFISCAL = NAMESPACE_CONFIGFISCAL + "deleteConfigfiscalById";
+	private static final String STMT_DELETE_CONFIGFISCAL = NAMESPACE_CONFIGFISCAL + "deleteConfigFiscalById";
 
 	/** The Constant STMT_DELETE_CONFIGFISCAL_ALL. */
-	private static final String STMT_DELETE_CONFIGFISCAL_ALL = NAMESPACE_CONFIGFISCAL + "deleteAllConfigfiscals";
+	private static final String STMT_DELETE_CONFIGFISCAL_ALL = NAMESPACE_CONFIGFISCAL + "deleteAllConfigFiscals";
 
 	/** The Constant STMT_FETCH_CONFIGFISCAL. */
-	private static final String STMT_FETCH_CONFIGFISCAL = NAMESPACE_CONFIGFISCAL + "fetchConfigfiscalById";
+	private static final String STMT_FETCH_CONFIGFISCAL = NAMESPACE_CONFIGFISCAL + "fetchConfigFiscalById";
 
 	/** The Constant STMT_FETCH_CONFIGFISCAL_ALL. */
-	private static final String STMT_FETCH_CONFIGFISCAL_ALL = NAMESPACE_CONFIGFISCAL + "fetchAllConfigfiscals";
+	private static final String STMT_FETCH_CONFIGFISCAL_ALL = NAMESPACE_CONFIGFISCAL + "fetchAllConfigFiscals";
 
 	/** The Constant STMT_FETCH_CONFIGFISCAL_COUNT. */
-	private static final String STMT_FETCH_CONFIGFISCAL_COUNT = NAMESPACE_CONFIGFISCAL + "fetchConfigfiscalRowCount";
+	private static final String STMT_FETCH_CONFIGFISCAL_COUNT = NAMESPACE_CONFIGFISCAL + "fetchConfigFiscalRowCount";
 
 	/** The Constant STMT_FETCH_CONFIGFISCAL_ALL_REQUEST. */
 	private static final String STMT_FETCH_CONFIGFISCAL_ALL_REQUEST = NAMESPACE_CONFIGFISCAL
-			+ "fetchAllConfigfiscalsRequest";
+			+ "fetchAllConfigFiscalsRequest";
 
 	/// ===================================### CONFIGALERTAS
 	/// ####======================================
 	/** The Constant NAMESPACE. */
-	private static final String NAMESPACE_CONFIGALERTAS = "ConfigalertasMap.";
+	private static final String NAMESPACE_CONFIGALERTAS = "ConfigAlertasMap.";
 
 	/** The Constant STMT_INSERT_CONFIGALERTAS. */
-	private static final String STMT_INSERT_CONFIGALERTAS = NAMESPACE_CONFIGALERTAS + "insertConfigalertas";
+	private static final String STMT_INSERT_CONFIGALERTAS = NAMESPACE_CONFIGALERTAS + "insertConfigAlertas";
 
 	/** The Constant STMT_UPDATE_CONFIGALERTAS. */
-	private static final String STMT_UPDATE_CONFIGALERTAS = NAMESPACE_CONFIGALERTAS + "updateConfigalertas";
+	private static final String STMT_UPDATE_CONFIGALERTAS = NAMESPACE_CONFIGALERTAS + "updateConfigAlertas";
 
 	/** The Constant STMT_DELETE_CONFIGALERTAS. */
-	private static final String STMT_DELETE_CONFIGALERTAS = NAMESPACE_CONFIGALERTAS + "deleteConfigalertasById";
+	private static final String STMT_DELETE_CONFIGALERTAS = NAMESPACE_CONFIGALERTAS + "deleteConfigAlertasById";
 
 	/** The Constant STMT_DELETE_CONFIGALERTAS_ALL. */
-	private static final String STMT_DELETE_CONFIGALERTAS_ALL = NAMESPACE_CONFIGALERTAS + "deleteAllConfigalertass";
+	private static final String STMT_DELETE_CONFIGALERTAS_ALL = NAMESPACE_CONFIGALERTAS + "deleteAllConfigAlertass";
 
 	/** The Constant STMT_FETCH_CONFIGALERTAS. */
-	private static final String STMT_FETCH_CONFIGALERTAS = NAMESPACE_CONFIGALERTAS + "fetchConfigalertasById";
+	private static final String STMT_FETCH_CONFIGALERTAS = NAMESPACE_CONFIGALERTAS + "fetchConfigAlertasById";
 
 	/** The Constant STMT_FETCH_CONFIGALERTAS_ALL. */
-	private static final String STMT_FETCH_CONFIGALERTAS_ALL = NAMESPACE_CONFIGALERTAS + "fetchAllConfigalertass";
+	private static final String STMT_FETCH_CONFIGALERTAS_ALL = NAMESPACE_CONFIGALERTAS + "fetchAllConfigAlertass";
 
 	/** The Constant STMT_FETCH_CONFIGALERTAS_COUNT. */
-	private static final String STMT_FETCH_CONFIGALERTAS_COUNT = NAMESPACE_CONFIGALERTAS + "fetchConfigalertasRowCount";
+	private static final String STMT_FETCH_CONFIGALERTAS_COUNT = NAMESPACE_CONFIGALERTAS + "fetchConfigAlertasRowCount";
 
 	/** The Constant STMT_FETCH_CONFIGALERTAS_ALL_REQUEST. */
 	private static final String STMT_FETCH_CONFIGALERTAS_ALL_REQUEST = NAMESPACE_CONFIGALERTAS
-			+ "fetchAllConfigalertassRequest";
+			+ "fetchAllConfigAlertassRequest";
 
 	/// ===================================### CONFIGGERAL
 	/// ####======================================
 	/** The Constant NAMESPACE. */
-	private static final String NAMESPACE_CONFIGGERAL = "ConfiggeralMap.";
+	private static final String NAMESPACE_CONFIGGERAL = "ConfigGeralMap.";
 
 	/** The Constant STMT_INSERT_CONFIGGERAL. */
-	private static final String STMT_INSERT_CONFIGGERAL = NAMESPACE_CONFIGGERAL + "insertConfiggeral";
+	private static final String STMT_INSERT_CONFIGGERAL = NAMESPACE_CONFIGGERAL + "insertConfigGeral";
 
 	/** The Constant STMT_UPDATE_CONFIGGERAL. */
-	private static final String STMT_UPDATE_CONFIGGERAL = NAMESPACE_CONFIGGERAL + "updateConfiggeral";
+	private static final String STMT_UPDATE_CONFIGGERAL = NAMESPACE_CONFIGGERAL + "updateConfigGeral";
 
 	/** The Constant STMT_DELETE_CONFIGGERAL. */
-	private static final String STMT_DELETE_CONFIGGERAL = NAMESPACE_CONFIGGERAL + "deleteConfiggeralById";
+	private static final String STMT_DELETE_CONFIGGERAL = NAMESPACE_CONFIGGERAL + "deleteConfigGeralById";
 
 	/** The Constant STMT_DELETE_CONFIGGERAL_ALL. */
-	private static final String STMT_DELETE_CONFIGGERAL_ALL = NAMESPACE_CONFIGGERAL + "deleteAllConfiggerals";
+	private static final String STMT_DELETE_CONFIGGERAL_ALL = NAMESPACE_CONFIGGERAL + "deleteAllConfigGerals";
 
 	/** The Constant STMT_FETCH_CONFIGGERAL. */
-	private static final String STMT_FETCH_CONFIGGERAL = NAMESPACE_CONFIGGERAL + "fetchConfiggeralById";
+	private static final String STMT_FETCH_CONFIGGERAL = NAMESPACE_CONFIGGERAL + "fetchConfigGeralById";
 
 	/** The Constant STMT_FETCH_CONFIGGERAL_ALL. */
-	private static final String STMT_FETCH_CONFIGGERAL_ALL = NAMESPACE_CONFIGGERAL + "fetchAllConfiggerals";
+	private static final String STMT_FETCH_CONFIGGERAL_ALL = NAMESPACE_CONFIGGERAL + "fetchAllConfigGerals";
 
 	/** The Constant STMT_FETCH_CONFIGGERAL_COUNT. */
-	private static final String STMT_FETCH_CONFIGGERAL_COUNT = NAMESPACE_CONFIGGERAL + "fetchConfiggeralRowCount";
+	private static final String STMT_FETCH_CONFIGGERAL_COUNT = NAMESPACE_CONFIGGERAL + "fetchConfigGeralRowCount";
 
 	/** The Constant STMT_FETCH_CONFIGGERAL_ALL_REQUEST. */
 	private static final String STMT_FETCH_CONFIGGERAL_ALL_REQUEST = NAMESPACE_CONFIGGERAL
-			+ "fetchAllConfiggeralsRequest";
+			+ "fetchAllConfigGeralsRequest";
 
 	/// ===================================### CONFIGPRODUTO
 	/// ####======================================
 	/** The Constant NAMESPACE. */
-	private static final String NAMESPACE_CONFIGPRODUTO = "ConfigprodutoMap.";
+	private static final String NAMESPACE_CONFIGPRODUTO = "ConfigProdutoMap.";
 
 	/** The Constant STMT_INSERT_CONFIGPRODUTO. */
-	private static final String STMT_INSERT_CONFIGPRODUTO = NAMESPACE_CONFIGPRODUTO + "insertConfigproduto";
+	private static final String STMT_INSERT_CONFIGPRODUTO = NAMESPACE_CONFIGPRODUTO + "insertConfigProduto";
 
 	/** The Constant STMT_UPDATE_CONFIGPRODUTO. */
-	private static final String STMT_UPDATE_CONFIGPRODUTO = NAMESPACE_CONFIGPRODUTO + "updateConfigproduto";
+	private static final String STMT_UPDATE_CONFIGPRODUTO = NAMESPACE_CONFIGPRODUTO + "updateConfigProduto";
 
 	/** The Constant STMT_DELETE_CONFIGPRODUTO. */
-	private static final String STMT_DELETE_CONFIGPRODUTO = NAMESPACE_CONFIGPRODUTO + "deleteConfigprodutoById";
+	private static final String STMT_DELETE_CONFIGPRODUTO = NAMESPACE_CONFIGPRODUTO + "deleteConfigProdutoById";
 
 	/** The Constant STMT_DELETE_CONFIGPRODUTO_ALL. */
-	private static final String STMT_DELETE_CONFIGPRODUTO_ALL = NAMESPACE_CONFIGPRODUTO + "deleteAllConfigprodutos";
+	private static final String STMT_DELETE_CONFIGPRODUTO_ALL = NAMESPACE_CONFIGPRODUTO + "deleteAllConfigProdutos";
 
 	/** The Constant STMT_FETCH_CONFIGPRODUTO. */
-	private static final String STMT_FETCH_CONFIGPRODUTO = NAMESPACE_CONFIGPRODUTO + "fetchConfigprodutoById";
+	private static final String STMT_FETCH_CONFIGPRODUTO = NAMESPACE_CONFIGPRODUTO + "fetchConfigProdutoById";
 
 	/** The Constant STMT_FETCH_CONFIGPRODUTO_ALL. */
-	private static final String STMT_FETCH_CONFIGPRODUTO_ALL = NAMESPACE_CONFIGPRODUTO + "fetchAllConfigprodutos";
+	private static final String STMT_FETCH_CONFIGPRODUTO_ALL = NAMESPACE_CONFIGPRODUTO + "fetchAllConfigProdutos";
 
 	/** The Constant STMT_FETCH_CONFIGPRODUTO_COUNT. */
-	private static final String STMT_FETCH_CONFIGPRODUTO_COUNT = NAMESPACE_CONFIGPRODUTO + "fetchConfigprodutoRowCount";
+	private static final String STMT_FETCH_CONFIGPRODUTO_COUNT = NAMESPACE_CONFIGPRODUTO + "fetchConfigProdutoRowCount";
 
 	/** The Constant STMT_FETCH_CONFIGPRODUTO_ALL_REQUEST. */
 	private static final String STMT_FETCH_CONFIGPRODUTO_ALL_REQUEST = NAMESPACE_CONFIGPRODUTO
-			+ "fetchAllConfigprodutosRequest";
+			+ "fetchAllConfigProdutosRequest";
 
 	/// ===================================### CONFIGSMTP
 	/// ####======================================
 	/** The Constant NAMESPACE. */
-	private static final String NAMESPACE_CONFIGSMTP = "ConfigsmtpMap.";
+	private static final String NAMESPACE_CONFIGSMTP = "ConfigSMTPMap.";
 
 	/** The Constant STMT_INSERT_CONFIGSMTP. */
-	private static final String STMT_INSERT_CONFIGSMTP = NAMESPACE_CONFIGSMTP + "insertConfigsmtp";
+	private static final String STMT_INSERT_CONFIGSMTP = NAMESPACE_CONFIGSMTP + "insertConfigSMTP";
 
 	/** The Constant STMT_UPDATE_CONFIGSMTP. */
-	private static final String STMT_UPDATE_CONFIGSMTP = NAMESPACE_CONFIGSMTP + "updateConfigsmtp";
+	private static final String STMT_UPDATE_CONFIGSMTP = NAMESPACE_CONFIGSMTP + "updateConfigSMTP";
 
 	/** The Constant STMT_DELETE_CONFIGSMTP. */
-	private static final String STMT_DELETE_CONFIGSMTP = NAMESPACE_CONFIGSMTP + "deleteConfigsmtpById";
+	private static final String STMT_DELETE_CONFIGSMTP = NAMESPACE_CONFIGSMTP + "deleteConfigSMTPById";
 
 	/** The Constant STMT_DELETE_CONFIGSMTP_ALL. */
-	private static final String STMT_DELETE_CONFIGSMTP_ALL = NAMESPACE_CONFIGSMTP + "deleteAllConfigsmtps";
+	private static final String STMT_DELETE_CONFIGSMTP_ALL = NAMESPACE_CONFIGSMTP + "deleteAllConfigSMTPs";
 
 	/** The Constant STMT_FETCH_CONFIGSMTP. */
-	private static final String STMT_FETCH_CONFIGSMTP = NAMESPACE_CONFIGSMTP + "fetchConfigsmtpById";
+	private static final String STMT_FETCH_CONFIGSMTP = NAMESPACE_CONFIGSMTP + "fetchConfigSMTPById";
 
 	/** The Constant STMT_FETCH_CONFIGSMTP_ALL. */
-	private static final String STMT_FETCH_CONFIGSMTP_ALL = NAMESPACE_CONFIGSMTP + "fetchAllConfigsmtps";
+	private static final String STMT_FETCH_CONFIGSMTP_ALL = NAMESPACE_CONFIGSMTP + "fetchAllConfigSMTPs";
 
 	/** The Constant STMT_FETCH_CONFIGSMTP_COUNT. */
-	private static final String STMT_FETCH_CONFIGSMTP_COUNT = NAMESPACE_CONFIGSMTP + "fetchConfigsmtpRowCount";
+	private static final String STMT_FETCH_CONFIGSMTP_COUNT = NAMESPACE_CONFIGSMTP + "fetchConfigSMTPRowCount";
 
 	/** The Constant STMT_FETCH_CONFIGSMTP_ALL_REQUEST. */
-	private static final String STMT_FETCH_CONFIGSMTP_ALL_REQUEST = NAMESPACE_CONFIGSMTP + "fetchAllConfigsmtpsRequest";
+	private static final String STMT_FETCH_CONFIGSMTP_ALL_REQUEST = NAMESPACE_CONFIGSMTP + "fetchAllConfigSMTPsRequest";
 
 	/// ===================================### CONFIGURACAONFE
 	/// ####======================================
 	/** The Constant NAMESPACE. */
-	private static final String NAMESPACE_CONFIGURACAONFE = "ConfiguracaonfeMap.";
+	private static final String NAMESPACE_CONFIGURACAONFE = "ConfiguracaoNFeMap.";
 
 	/** The Constant STMT_INSERT_CONFIGURACAONFE. */
-	private static final String STMT_INSERT_CONFIGURACAONFE = NAMESPACE_CONFIGURACAONFE + "insertConfiguracaonfe";
+	private static final String STMT_INSERT_CONFIGURACAONFE = NAMESPACE_CONFIGURACAONFE + "insertConfiguracaoNFe";
 
 	/** The Constant STMT_UPDATE_CONFIGURACAONFE. */
-	private static final String STMT_UPDATE_CONFIGURACAONFE = NAMESPACE_CONFIGURACAONFE + "updateConfiguracaonfe";
+	private static final String STMT_UPDATE_CONFIGURACAONFE = NAMESPACE_CONFIGURACAONFE + "updateConfiguracaoNFe";
 
 	/** The Constant STMT_DELETE_CONFIGURACAONFE. */
-	private static final String STMT_DELETE_CONFIGURACAONFE = NAMESPACE_CONFIGURACAONFE + "deleteConfiguracaonfeById";
+	private static final String STMT_DELETE_CONFIGURACAONFE = NAMESPACE_CONFIGURACAONFE + "deleteConfiguracaoNFeById";
 
 	/** The Constant STMT_DELETE_CONFIGURACAONFE_ALL. */
 	private static final String STMT_DELETE_CONFIGURACAONFE_ALL = NAMESPACE_CONFIGURACAONFE
-			+ "deleteAllConfiguracaonfes";
+			+ "deleteAllConfiguracaoNFes";
 
 	/** The Constant STMT_FETCH_CONFIGURACAONFE. */
-	private static final String STMT_FETCH_CONFIGURACAONFE = NAMESPACE_CONFIGURACAONFE + "fetchConfiguracaonfeById";
+	private static final String STMT_FETCH_CONFIGURACAONFE = NAMESPACE_CONFIGURACAONFE + "fetchConfiguracaoNFeById";
 
 	/** The Constant STMT_FETCH_CONFIGURACAONFE_ALL. */
-	private static final String STMT_FETCH_CONFIGURACAONFE_ALL = NAMESPACE_CONFIGURACAONFE + "fetchAllConfiguracaonfes";
+	private static final String STMT_FETCH_CONFIGURACAONFE_ALL = NAMESPACE_CONFIGURACAONFE + "fetchAllConfiguracaoNFes";
 
 	/** The Constant STMT_FETCH_CONFIGURACAONFE_COUNT. */
 	private static final String STMT_FETCH_CONFIGURACAONFE_COUNT = NAMESPACE_CONFIGURACAONFE
-			+ "fetchConfiguracaonfeRowCount";
+			+ "fetchConfiguracaoNFeRowCount";
 
 	/** The Constant STMT_FETCH_CONFIGURACAONFE_ALL_REQUEST. */
 	private static final String STMT_FETCH_CONFIGURACAONFE_ALL_REQUEST = NAMESPACE_CONFIGURACAONFE
-			+ "fetchAllConfiguracaonfesRequest";
+			+ "fetchAllConfiguracaoNFesRequest";
 
 	/// ===================================### CONFIGVENDAS
 	/// ####======================================
 	/** The Constant NAMESPACE. */
-	private static final String NAMESPACE_CONFIGVENDAS = "ConfigvendasMap.";
+	private static final String NAMESPACE_CONFIGVENDAS = "ConfigVendasMap.";
 
 	/** The Constant STMT_INSERT_CONFIGVENDAS. */
-	private static final String STMT_INSERT_CONFIGVENDAS = NAMESPACE_CONFIGVENDAS + "insertConfigvendas";
+	private static final String STMT_INSERT_CONFIGVENDAS = NAMESPACE_CONFIGVENDAS + "insertConfigVendas";
 
 	/** The Constant STMT_UPDATE_CONFIGVENDAS. */
-	private static final String STMT_UPDATE_CONFIGVENDAS = NAMESPACE_CONFIGVENDAS + "updateConfigvendas";
+	private static final String STMT_UPDATE_CONFIGVENDAS = NAMESPACE_CONFIGVENDAS + "updateConfigVendas";
 
 	/** The Constant STMT_DELETE_CONFIGVENDAS. */
-	private static final String STMT_DELETE_CONFIGVENDAS = NAMESPACE_CONFIGVENDAS + "deleteConfigvendasById";
+	private static final String STMT_DELETE_CONFIGVENDAS = NAMESPACE_CONFIGVENDAS + "deleteConfigVendasById";
 
 	/** The Constant STMT_DELETE_CONFIGVENDAS_ALL. */
-	private static final String STMT_DELETE_CONFIGVENDAS_ALL = NAMESPACE_CONFIGVENDAS + "deleteAllConfigvendass";
+	private static final String STMT_DELETE_CONFIGVENDAS_ALL = NAMESPACE_CONFIGVENDAS + "deleteAllConfigVendass";
 
 	/** The Constant STMT_FETCH_CONFIGVENDAS. */
-	private static final String STMT_FETCH_CONFIGVENDAS = NAMESPACE_CONFIGVENDAS + "fetchConfigvendasById";
+	private static final String STMT_FETCH_CONFIGVENDAS = NAMESPACE_CONFIGVENDAS + "fetchConfigVendasById";
 
 	/** The Constant STMT_FETCH_CONFIGVENDAS_ALL. */
-	private static final String STMT_FETCH_CONFIGVENDAS_ALL = NAMESPACE_CONFIGVENDAS + "fetchAllConfigvendass";
+	private static final String STMT_FETCH_CONFIGVENDAS_ALL = NAMESPACE_CONFIGVENDAS + "fetchAllConfigVendass";
 
 	/** The Constant STMT_FETCH_CONFIGVENDAS_COUNT. */
-	private static final String STMT_FETCH_CONFIGVENDAS_COUNT = NAMESPACE_CONFIGVENDAS + "fetchConfigvendasRowCount";
+	private static final String STMT_FETCH_CONFIGVENDAS_COUNT = NAMESPACE_CONFIGVENDAS + "fetchConfigVendasRowCount";
 
 	/** The Constant STMT_FETCH_CONFIGVENDAS_ALL_REQUEST. */
 	private static final String STMT_FETCH_CONFIGVENDAS_ALL_REQUEST = NAMESPACE_CONFIGVENDAS
-			+ "fetchAllConfigvendassRequest";
+			+ "fetchAllConfigVendassRequest";
 
 	// ===================================### CONFIGURACAO
 	// ####======================================

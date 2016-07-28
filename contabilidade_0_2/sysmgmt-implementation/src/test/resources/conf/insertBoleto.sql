@@ -1,9 +1,9 @@
 
-INSERT INTO entidade( id, nome, processId, entidadeId, emprId, entidadeEnumValue, regime,create_user,create_date,modify_user,modify_date)values
-( 10, 'nome_1', 1, 1, 1, 6, 1,'system',1462134312649,'rod',1462134312649);
+INSERT INTO Boleto( id, ativarBolOnLine, tipoBoleto, agencia, cedente, juros, tipoCalcMora, mora, instrucoes, demonstrativo, impJuros,parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values
+( 1010, true, 1000, 1000, 1000, 10.00, 1000, 10.00, 'instrucoes_0', 'demonstrativo_0', true,10000,1,1,1,'system',1469738374489,'rod',1469738374489);
 
-INSERT INTO entidade( id, nome, processId, entidadeId, emprId, entidadeEnumValue, regime,create_user,create_date,modify_user,modify_date)values
-( 11, 'nome_1', 2, 2, 2, 6, 2,'system',1462134312649,'rod',1462134312649);
+INSERT INTO Boleto( id, ativarBolOnLine, tipoBoleto, agencia, cedente, juros, tipoCalcMora, mora, instrucoes, demonstrativo, impJuros,parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values
+( 1011, true, 1001, 1001, 1001, 10.00, 1001, 10.00, 'instrucoes_1', 'demonstrativo_1', true,10000,1,1,1,'system',1469738374489,'rod',1469738374489);
 
-INSERT INTO entidade( id, nome, processId, entidadeId, emprId, entidadeEnumValue, regime,create_user,create_date,modify_user,modify_date)values
-( 12, 'nome_1', 3, 3, 3, 6, 3,'system',1462134312649,'rod',1462134312649);
+INSERT INTO Boleto( id, ativarBolOnLine, tipoBoleto, agencia, cedente, juros, tipoCalcMora, mora, instrucoes, demonstrativo, impJuros,parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values
+( 1012, true, 1002, 1002, 1002, 10.00, 1002, 10.00, 'instrucoes_2', 'demonstrativo_2', true,10000,1,1,1,'system',1469738374489,'rod',1469738374489);

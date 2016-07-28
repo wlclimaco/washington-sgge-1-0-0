@@ -28,11 +28,11 @@
  <select id="fetchAllClientes" resultMap="clienteResult">
     SELECT
 	<include refid="allClienteColumns" />
-   FROM pessoa where pessoaTypeEnum = 8 ORDER BY id ASC
+   FROM pessoa where pessoaTypeEnum = 1 ORDER BY id ASC
  </select>
 
  <select id="fetchClienteById" parameterType="Integer" resultMap="clienteResult">
-    SELECT
+    SELECT id,
 	<include refid="allClienteColumns" />
    FROM pessoa WHERE id = #{fetchid}
  </select>
@@ -40,13 +40,13 @@
  <select id="fetchAllClientesRequest" parameterType="ClienteInquiryRequest" resultMap="clienteResult">
 
 		SELECT <include refid="allClienteColumns" />
-  		  FROM pessoa where pessoaTypeEnum = 8 ORDER BY id ASC
+  		  FROM pessoa where pessoaTypeEnum = 1 ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchClienteRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM pessoa WHERE id IS NOT NULL and pessoaTypeEnum = 8
+		SELECT COUNT(*) AS RECORD_COUNT FROM pessoa WHERE id IS NOT NULL and pessoaTypeEnum = 1
 
  </select>
 </mapper>

@@ -19,7 +19,7 @@
   </resultMap>
 
 <sql id="allSindicoColumns">
-	<include refid="PessoaMap.allPessoaColumns"/>
+	id,<include refid="PessoaMap.allPessoaColumns"/>
 </sql>
 <sql id="allSindicoValues">
 	<include refid="PessoaMap.allPessoaValues"/>

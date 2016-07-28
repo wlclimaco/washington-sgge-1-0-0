@@ -48,7 +48,7 @@
   </resultMap>
 
   <sql id="allConfiguracaoNFeColumns">
-,presCompr
+presCompr
 ,destConsFinal
 ,preencherDataHora
 ,icmsPadrao
@@ -86,7 +86,7 @@
 #{pisPadrao},
 #{cofinsPadrao},
 #{ambienteEnvio.id},
-#{servMsmNota},
+#{servMsmNota.id},
 #{serieEnvio},
 #{anexarXmlEmail},
 #{idCSC},
@@ -123,13 +123,13 @@
  <select id="fetchAllConfiguracaoNFesRequest" parameterType="PagedInquiryRequest" resultMap="ConfiguracaoNFeResult">
 
      SELECT id,<include refid="allConfiguracaoNFeColumns" />
-           FROM configuracaonfe where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+           FROM configuracaonfe where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
        OFFSET ( #{startPage} * #{pageSize} )
        LIMIT #{pageSize}
 </select>
 
 <select id="fetchConfiguracaoNFeRowCount" resultType="Integer">
-     SELECT COUNT(*) AS RECORD_COUNT FROM configuracaonfe WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+     SELECT COUNT(*) AS RECORD_COUNT FROM configuracaonfe WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 
@@ -150,7 +150,7 @@
 <if test="pisPadrao!= null">pisPadrao = #{pisPadrao},</if>
 <if test="cofinsPadrao!= null">cofinsPadrao = #{cofinsPadrao},</if>
 <if test="ambienteEnvio!= null">ambienteEnvio = #{ambienteEnvio.id},</if>
-<if test="servMsmNota!= null">servMsmNota = #{servMsmNota},</if>
+<if test="servMsmNota!= null">servMsmNota = #{servMsmNota.id},</if>
 <if test="serieEnvio!= null">serieEnvio = #{serieEnvio},</if>
 <if test="anexarXmlEmail!= null">anexarXmlEmail = #{anexarXmlEmail},</if>
 <if test="idCSC!= null">idCSC = #{idCSC},</if>

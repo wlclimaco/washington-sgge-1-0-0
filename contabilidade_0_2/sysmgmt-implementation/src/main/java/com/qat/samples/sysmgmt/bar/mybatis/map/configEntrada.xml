@@ -26,12 +26,12 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="valorTotalFixo" column="valorTotalFixo" select="RegimeMap.fetchRegimeById"/>
-    <collection property="manterPrecoVendaProd" column="manterPrecoVendaProd" select="RegimeMap.fetchRegimeById"/>
+<result property="valorTotalFixo" column="valorTotalFixo" />
+    <result property="manterPrecoVendaProd" column="manterPrecoVendaProd" />
   </resultMap>
 
   <sql id="allConfigEntradaColumns">
-,valorTotalFixo
+valorTotalFixo
 ,manterPrecoVendaProd
 ,parentId
 ,tabelaEnumValue
@@ -72,13 +72,13 @@
  <select id="fetchAllConfigEntradasRequest" parameterType="PagedInquiryRequest" resultMap="ConfigEntradaResult">
 
      SELECT id,<include refid="allConfigEntradaColumns" />
-           FROM configentrada where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+           FROM configentrada where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
        OFFSET ( #{startPage} * #{pageSize} )
        LIMIT #{pageSize}
 </select>
 
 <select id="fetchConfigEntradaRowCount" resultType="Integer">
-     SELECT COUNT(*) AS RECORD_COUNT FROM configentrada WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+     SELECT COUNT(*) AS RECORD_COUNT FROM configentrada WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 
