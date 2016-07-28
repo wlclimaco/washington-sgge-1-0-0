@@ -10,12 +10,12 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.bar.ConfigSMTP.IConfigSMTPBAR;
+import com.qat.samples.sysmgmt.bar.Configuracao.IConfiguracaoBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.entidade.model.ConfigSMTP;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.ConfigSMTP;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
@@ -40,29 +40,19 @@ public final class ConfigSMTPBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainConfigSMTPAssociations(List<ConfigSMTP> configsmtpList,
+	public static Integer maintainConfigSMTPAssociations(ConfigSMTP configsmtp,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IConfigSMTPBAR configsmtpDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
+			TabelaEnum tabelaEnum, IConfiguracaoBAR configsmtpDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
-		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(configsmtpList))
-		{
-			return 0;
-		}
-		// For Each Contact...
-		for (ConfigSMTP configsmtp : configsmtpList)
-		{
+
 			// Make sure we set the parent key
 			configsmtp.setParentId(parentId);
 			configsmtp.setTabelaEnum(tabelaEnum);
 			configsmtp.setProcessId(processId);
 
-			if (ValidationUtil.isNull(configsmtp.getModelAction()))
-			{
-				continue;
-			}
+
 			switch (configsmtp.getModelAction())
 			{
 				case INSERT:
@@ -103,7 +93,7 @@ public final class ConfigSMTPBARD extends SqlSessionDaoSupport
 
 					break;
 			}
-		}
+	
 		if(count == true ){
 			return 1;
 		}else{

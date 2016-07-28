@@ -200,21 +200,23 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 
 	MARCAPRODUTO(73, "sendsolv.base.model.risklevelenum.medium"),
 
-	GRUPO(73, "sendsolv.base.model.risklevelenum.medium"),
+	GRUPO(74, "sendsolv.base.model.risklevelenum.medium"),
 
-	SUBGRUPO(73, "sendsolv.base.model.risklevelenum.medium"),
+	SUBGRUPO(75, "sendsolv.base.model.risklevelenum.medium"),
 
-	CUSTOITENS(73, "sendsolv.base.model.risklevelenum.medium"),
+	CUSTOITENS(76, "sendsolv.base.model.risklevelenum.medium"),
 
-	ESTOQUE(73, "sendsolv.base.model.risklevelenum.medium"),
+	ESTOQUE(77, "sendsolv.base.model.risklevelenum.medium"),
 
-	PORCAO(73, "sendsolv.base.model.risklevelenum.medium"),
+	PORCAO(78, "sendsolv.base.model.risklevelenum.medium"),
 
-	PORCAOITENS(73, "sendsolv.base.model.risklevelenum.medium"),
+	PORCAOITENS(79, "sendsolv.base.model.risklevelenum.medium"),
 
-	RENTABILIDADE(73, "sendsolv.base.model.risklevelenum.medium"),
+	RENTABILIDADE(80, "sendsolv.base.model.risklevelenum.medium"),
 
 	RENTABILIDADEITENS(73, "sendsolv.base.model.risklevelenum.medium"),
+	
+	TRIBUTACAO(73, "sendsolv.base.model.risklevelenum.medium"),
 
 
 	BOLETO(73, "sendsolv.base.model.risklevelenum.medium"),
@@ -230,8 +232,18 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	CONFIGGERAL(73, "sendsolv.base.model.risklevelenum.medium"),
 
 	CONFIGPRODUTO(73, "sendsolv.base.model.risklevelenum.medium"),
+	
+	CONFIGSMTP(73, "sendsolv.base.model.risklevelenum.medium"),
+	
+	CONFIGURACAO(73, "sendsolv.base.model.risklevelenum.medium"),
+	
+	CONFIGURACAONFE(73, "sendsolv.base.model.risklevelenum.medium"),
+	
+	DOISVALOR(73, "sendsolv.base.model.risklevelenum.medium"),
+	
+	CONFIGVENDAS(73, "sendsolv.base.model.risklevelenum.medium");
 
-	TRIBUTACAO(73, "sendsolv.base.model.risklevelenum.medium");
+	
 
 	/** The code. */
 	private Integer code;

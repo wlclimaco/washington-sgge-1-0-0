@@ -2,6 +2,8 @@
 package com.qat.samples.sysmgmt.bar.mybatis;	
 
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -17,12 +19,27 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.bar.IConfiguracaoBAR;
-import com.qat.samples.sysmgmt.model.Configuracao;
-import com.qat.samples.sysmgmt.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.model.request.ConfiguracaoInquiryRequest;
+import com.qat.samples.sysmgmt.bar.Configuracao.IConfiguracaoBAR;
+import com.qat.samples.sysmgmt.cfop.model.Cfop;
+import com.qat.samples.sysmgmt.entidade.model.Boleto;
+import com.qat.samples.sysmgmt.entidade.model.ConfigAlertas;
+import com.qat.samples.sysmgmt.entidade.model.ConfigCarne;
+import com.qat.samples.sysmgmt.entidade.model.ConfigEntrada;
+import com.qat.samples.sysmgmt.entidade.model.ConfigFiscal;
+import com.qat.samples.sysmgmt.entidade.model.ConfigGeral;
+import com.qat.samples.sysmgmt.entidade.model.ConfigProduto;
+import com.qat.samples.sysmgmt.entidade.model.ConfigSMTP;
+import com.qat.samples.sysmgmt.entidade.model.ConfigVendas;
+import com.qat.samples.sysmgmt.entidade.model.Configuracao;
+import com.qat.samples.sysmgmt.entidade.model.ConfiguracaoNFe;
+import com.qat.samples.sysmgmt.fiscal.model.Regime;
+import com.qat.samples.sysmgmt.util.model.DoisValores;
+import com.qat.samples.sysmgmt.util.model.TabelaEnum;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
 @ContextConfiguration(locations = {
 		"classpath:conf/unittest-base-context.xml",
@@ -91,17 +108,17 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Configuracao configuracaoResponse = getConfiguracaoBAR().fetchConfiguracaoById(request);
-		Assert.assertEquals(configuracaoResponse.getDescription(), "NATIVE INSERT");
+		Assert.assertEquals(configuracaoResponse.getUserId(), "System");
 		getConfiguracaoBAR().updateConfiguracao(configuracao);
 		configuracaoResponse = getConfiguracaoBAR().fetchConfiguracaoById(request);
-		Assert.assertEquals(configuracaoResponse.getDescription(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(configuracaoResponse.getUserId(), "NATIVE INSERT UPDATE");
 	}
 
 	@Test
 	public void testFetchConfiguracaosByRequest() throws Exception
 	{
 		// check for valid and precount
-		ConfiguracaoInquiryRequest request = new ConfiguracaoInquiryRequest();
+		PagedInquiryRequest request = new PagedInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
@@ -119,7 +136,7 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
 		// check for valid and no precount
-		ConfiguracaoInquiryRequest request2 = new ConfiguracaoInquiryRequest();
+		PagedInquiryRequest request2 = new PagedInquiryRequest();
 		request2.setPreQueryCount(false);
 		InternalResultsResponse<Configuracao> response2 = getConfiguracaoBAR().fetchConfiguracaosByRequest(request2);
 		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
@@ -129,7 +146,7 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 
 		// check for zero rows
 		getConfiguracaoBAR().deleteAllConfiguracaos();
-		ConfiguracaoInquiryRequest request3 = new ConfiguracaoInquiryRequest();
+		PagedInquiryRequest request3 = new PagedInquiryRequest();
 		request3.setPreQueryCount(true);
 		InternalResultsResponse<Configuracao> response3 = getConfiguracaoBAR().fetchConfiguracaosByRequest(request3);
 		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
@@ -179,17 +196,17 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Boleto boletoResponse = getConfiguracaoBAR().fetchBoletoById(request);
-		Assert.assertEquals(boletoResponse.getDescription(), "NATIVE INSERT");
+		Assert.assertEquals(boletoResponse.getInstrucoes(), "NATIVE INSERT");
 		getConfiguracaoBAR().updateBoleto(boleto);
 		boletoResponse = getConfiguracaoBAR().fetchBoletoById(request);
-		Assert.assertEquals(boletoResponse.getDescription(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(boletoResponse.getInstrucoes(), "NATIVE INSERT UPDATE");
 	}
 
 	@Test
 	public void testFetchBoletosByRequest() throws Exception
 	{
 		// check for valid and precount
-		BoletoInquiryRequest request = new BoletoInquiryRequest();
+		PagedInquiryRequest request = new PagedInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
@@ -207,7 +224,7 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
 		// check for valid and no precount
-		BoletoInquiryRequest request2 = new BoletoInquiryRequest();
+		PagedInquiryRequest request2 = new PagedInquiryRequest();
 		request2.setPreQueryCount(false);
 		InternalResultsResponse<Boleto> response2 = getConfiguracaoBAR().fetchBoletosByRequest(request2);
 		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
@@ -217,71 +234,71 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 
 		// check for zero rows
 		getConfiguracaoBAR().deleteAllBoletos();
-		BoletoInquiryRequest request3 = new BoletoInquiryRequest();
+		PagedInquiryRequest request3 = new PagedInquiryRequest();
 		request3.setPreQueryCount(true);
 		InternalResultsResponse<Boleto> response3 = getConfiguracaoBAR().fetchBoletosByRequest(request3);
 		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 	}
 
-//===================================### CONFIGCARNE ####======================================
+//===================================### ConfigCarne ####======================================
 
 
 @Test
-	public void testDeleteConfigcarne()
+	public void testDeleteConfigCarne()
 	{
-		Configcarne configcarne = insertConfigcarne(4, TabelaEnum.CONFIGCARNE, PersistenceActionEnum.INSERT);
+		ConfigCarne ConfigCarne = insertConfigCarne(4, TabelaEnum.CONFIGCARNE, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
-		Configcarne configcarneResponse = getConfiguracaoBAR().fetchConfigcarneById(request);
-		Assert.assertEquals(configcarneResponse, null);
-		getConfiguracaoBAR().insertConfigcarne(configcarne);
-		configcarneResponse = getConfiguracaoBAR().fetchConfigcarneById(request);
-		Assert.assertEquals(configcarne.getId(), configcarneResponse.getId());
-		getConfiguracaoBAR().deleteConfigcarneById(configcarne);
-		configcarneResponse = getConfiguracaoBAR().fetchConfigcarneById(request);
-		Assert.assertEquals(configcarneResponse, null);
+		ConfigCarne ConfigCarneResponse = getConfiguracaoBAR().fetchConfigCarneById(request);
+		Assert.assertEquals(ConfigCarneResponse, null);
+		getConfiguracaoBAR().insertConfigCarne(ConfigCarne);
+		ConfigCarneResponse = getConfiguracaoBAR().fetchConfigCarneById(request);
+		Assert.assertEquals(ConfigCarne.getId(), ConfigCarneResponse.getId());
+		getConfiguracaoBAR().deleteConfigCarneById(ConfigCarne);
+		ConfigCarneResponse = getConfiguracaoBAR().fetchConfigCarneById(request);
+		Assert.assertEquals(ConfigCarneResponse, null);
 	}
 
 	@Test
-	public void testFetchAllConfigcarnes()
+	public void testFetchAllConfigCarnes()
 	{
-	Configcarne configcarne = new Configcarne();
-		List<Configcarne> response = getConfiguracaoBAR().fetchAllConfigcarnes(configcarne).getResultsList();
+	ConfigCarne ConfigCarne = new ConfigCarne();
+		List<ConfigCarne> response = getConfiguracaoBAR().fetchAllConfigCarnes(ConfigCarne).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
 	@Test
-	public void testDeleteAllConfigcarnes()
+	public void testDeleteAllConfigCarnes()
 	{
-		getConfiguracaoBAR().deleteAllConfigcarnes();
-	Configcarne configcarne = new Configcarne();
-		List<Configcarne> response = getConfiguracaoBAR().fetchAllConfigcarnes(new Configcarne()).getResultsList();
+		getConfiguracaoBAR().deleteAllConfigCarnes();
+	ConfigCarne ConfigCarne = new ConfigCarne();
+		List<ConfigCarne> response = getConfiguracaoBAR().fetchAllConfigCarnes(new ConfigCarne()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
-	public void testUpdateConfigcarne()
+	public void testUpdateConfigCarne()
 	{
-		Configcarne configcarne = insertConfigcarne(1, TabelaEnum.CONFIGCARNE, PersistenceActionEnum.UPDATE);
+		ConfigCarne ConfigCarne = insertConfigCarne(1, TabelaEnum.CONFIGCARNE, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
-		Configcarne configcarneResponse = getConfiguracaoBAR().fetchConfigcarneById(request);
-		Assert.assertEquals(configcarneResponse.getDescription(), "NATIVE INSERT");
-		getConfiguracaoBAR().updateConfigcarne(configcarne);
-		configcarneResponse = getConfiguracaoBAR().fetchConfigcarneById(request);
-		Assert.assertEquals(configcarneResponse.getDescription(), "NATIVE INSERT UPDATE");
+		ConfigCarne ConfigCarneResponse = getConfiguracaoBAR().fetchConfigCarneById(request);
+		Assert.assertEquals(ConfigCarneResponse.getCarneBotelo(), true);
+		getConfiguracaoBAR().updateConfigCarne(ConfigCarne);
+		ConfigCarneResponse = getConfiguracaoBAR().fetchConfigCarneById(request);
+		Assert.assertEquals(ConfigCarneResponse.getCarneBotelo(), true);
 	}
 
 	@Test
-	public void testFetchConfigcarnesByRequest() throws Exception
+	public void testFetchConfigCarnesByRequest() throws Exception
 	{
 		// check for valid and precount
-		ConfigcarneInquiryRequest request = new ConfigcarneInquiryRequest();
+		PagedInquiryRequest request = new PagedInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
-		InternalResultsResponse<Configcarne> response = getConfiguracaoBAR().fetchConfigcarnesByRequest(request);
+		InternalResultsResponse<ConfigCarne> response = getConfiguracaoBAR().fetchConfigCarnesByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
@@ -289,87 +306,87 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 		request.setPreQueryCount(true);
 		request.setStartPage(1);
 		request.setPageSize(3);
-		response = getConfiguracaoBAR().fetchConfigcarnesByRequest(request);
+		response = getConfiguracaoBAR().fetchConfigCarnesByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
 		// check for valid and no precount
-		ConfigcarneInquiryRequest request2 = new ConfigcarneInquiryRequest();
+		PagedInquiryRequest request2 = new PagedInquiryRequest();
 		request2.setPreQueryCount(false);
-		InternalResultsResponse<Configcarne> response2 = getConfiguracaoBAR().fetchConfigcarnesByRequest(request2);
+		InternalResultsResponse<ConfigCarne> response2 = getConfiguracaoBAR().fetchConfigCarnesByRequest(request2);
 		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
 		// this is because we did not choose to precount
 		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
 
 		// check for zero rows
-		getConfiguracaoBAR().deleteAllConfigcarnes();
-		ConfigcarneInquiryRequest request3 = new ConfigcarneInquiryRequest();
+		getConfiguracaoBAR().deleteAllConfigCarnes();
+		PagedInquiryRequest request3 = new PagedInquiryRequest();
 		request3.setPreQueryCount(true);
-		InternalResultsResponse<Configcarne> response3 = getConfiguracaoBAR().fetchConfigcarnesByRequest(request3);
+		InternalResultsResponse<ConfigCarne> response3 = getConfiguracaoBAR().fetchConfigCarnesByRequest(request3);
 		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 	}
 
-//===================================### CONFIGENTRADA ####======================================
+//===================================### ConfigEntrada ####======================================
 
 
 @Test
-	public void testDeleteConfigentrada()
+	public void testDeleteConfigEntrada()
 	{
-		Configentrada configentrada = insertConfigentrada(4, TabelaEnum.CONFIGENTRADA, PersistenceActionEnum.INSERT);
+		ConfigEntrada ConfigEntrada = insertConfigEntrada(4, TabelaEnum.CONFIGENTRADA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
-		Configentrada configentradaResponse = getConfiguracaoBAR().fetchConfigentradaById(request);
-		Assert.assertEquals(configentradaResponse, null);
-		getConfiguracaoBAR().insertConfigentrada(configentrada);
-		configentradaResponse = getConfiguracaoBAR().fetchConfigentradaById(request);
-		Assert.assertEquals(configentrada.getId(), configentradaResponse.getId());
-		getConfiguracaoBAR().deleteConfigentradaById(configentrada);
-		configentradaResponse = getConfiguracaoBAR().fetchConfigentradaById(request);
-		Assert.assertEquals(configentradaResponse, null);
+		ConfigEntrada ConfigEntradaResponse = getConfiguracaoBAR().fetchConfigEntradaById(request);
+		Assert.assertEquals(ConfigEntradaResponse, null);
+		getConfiguracaoBAR().insertConfigEntrada(ConfigEntrada);
+		ConfigEntradaResponse = getConfiguracaoBAR().fetchConfigEntradaById(request);
+		Assert.assertEquals(ConfigEntrada.getId(), ConfigEntradaResponse.getId());
+		getConfiguracaoBAR().deleteConfigEntradaById(ConfigEntrada);
+		ConfigEntradaResponse = getConfiguracaoBAR().fetchConfigEntradaById(request);
+		Assert.assertEquals(ConfigEntradaResponse, null);
 	}
 
 	@Test
-	public void testFetchAllConfigentradas()
+	public void testFetchAllConfigEntradas()
 	{
-	Configentrada configentrada = new Configentrada();
-		List<Configentrada> response = getConfiguracaoBAR().fetchAllConfigentradas(configentrada).getResultsList();
+	ConfigEntrada ConfigEntrada = new ConfigEntrada();
+		List<ConfigEntrada> response = getConfiguracaoBAR().fetchAllConfigEntradas(ConfigEntrada).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
 	@Test
-	public void testDeleteAllConfigentradas()
+	public void testDeleteAllConfigEntradas()
 	{
-		getConfiguracaoBAR().deleteAllConfigentradas();
-	Configentrada configentrada = new Configentrada();
-		List<Configentrada> response = getConfiguracaoBAR().fetchAllConfigentradas(new Configentrada()).getResultsList();
+		getConfiguracaoBAR().deleteAllConfigEntradas();
+	ConfigEntrada ConfigEntrada = new ConfigEntrada();
+		List<ConfigEntrada> response = getConfiguracaoBAR().fetchAllConfigEntradas(new ConfigEntrada()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
-	public void testUpdateConfigentrada()
+	public void testUpdateConfigEntrada()
 	{
-		Configentrada configentrada = insertConfigentrada(1, TabelaEnum.CONFIGENTRADA, PersistenceActionEnum.UPDATE);
+		ConfigEntrada ConfigEntrada = insertConfigEntrada(1, TabelaEnum.CONFIGENTRADA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
-		Configentrada configentradaResponse = getConfiguracaoBAR().fetchConfigentradaById(request);
-		Assert.assertEquals(configentradaResponse.getDescription(), "NATIVE INSERT");
-		getConfiguracaoBAR().updateConfigentrada(configentrada);
-		configentradaResponse = getConfiguracaoBAR().fetchConfigentradaById(request);
-		Assert.assertEquals(configentradaResponse.getDescription(), "NATIVE INSERT UPDATE");
+		ConfigEntrada ConfigEntradaResponse = getConfiguracaoBAR().fetchConfigEntradaById(request);
+		Assert.assertEquals(ConfigEntradaResponse.getValorTotalFixo(), true);
+		getConfiguracaoBAR().updateConfigEntrada(ConfigEntrada);
+		ConfigEntradaResponse = getConfiguracaoBAR().fetchConfigEntradaById(request);
+		Assert.assertEquals(ConfigEntradaResponse.getValorTotalFixo(), false);
 	}
 
 	@Test
-	public void testFetchConfigentradasByRequest() throws Exception
+	public void testFetchConfigEntradasByRequest() throws Exception
 	{
 		// check for valid and precount
-		ConfigentradaInquiryRequest request = new ConfigentradaInquiryRequest();
+		PagedInquiryRequest request = new PagedInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
-		InternalResultsResponse<Configentrada> response = getConfiguracaoBAR().fetchConfigentradasByRequest(request);
+		InternalResultsResponse<ConfigEntrada> response = getConfiguracaoBAR().fetchConfigEntradasByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
@@ -377,87 +394,87 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 		request.setPreQueryCount(true);
 		request.setStartPage(1);
 		request.setPageSize(3);
-		response = getConfiguracaoBAR().fetchConfigentradasByRequest(request);
+		response = getConfiguracaoBAR().fetchConfigEntradasByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
 		// check for valid and no precount
-		ConfigentradaInquiryRequest request2 = new ConfigentradaInquiryRequest();
+		PagedInquiryRequest request2 = new PagedInquiryRequest();
 		request2.setPreQueryCount(false);
-		InternalResultsResponse<Configentrada> response2 = getConfiguracaoBAR().fetchConfigentradasByRequest(request2);
+		InternalResultsResponse<ConfigEntrada> response2 = getConfiguracaoBAR().fetchConfigEntradasByRequest(request2);
 		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
 		// this is because we did not choose to precount
 		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
 
 		// check for zero rows
-		getConfiguracaoBAR().deleteAllConfigentradas();
-		ConfigentradaInquiryRequest request3 = new ConfigentradaInquiryRequest();
+		getConfiguracaoBAR().deleteAllConfigEntradas();
+		PagedInquiryRequest request3 = new PagedInquiryRequest();
 		request3.setPreQueryCount(true);
-		InternalResultsResponse<Configentrada> response3 = getConfiguracaoBAR().fetchConfigentradasByRequest(request3);
+		InternalResultsResponse<ConfigEntrada> response3 = getConfiguracaoBAR().fetchConfigEntradasByRequest(request3);
 		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 	}
 
-//===================================### CONFIGFISCAL ####======================================
+//===================================### ConfigFiscal ####======================================
 
 
 @Test
-	public void testDeleteConfigfiscal()
+	public void testDeleteConfigFiscal()
 	{
-		Configfiscal configfiscal = insertConfigfiscal(4, TabelaEnum.CONFIGFISCAL, PersistenceActionEnum.INSERT);
+		ConfigFiscal ConfigFiscal = insertConfigFiscal(4, TabelaEnum.CONFIGFISCAL, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
-		Configfiscal configfiscalResponse = getConfiguracaoBAR().fetchConfigfiscalById(request);
-		Assert.assertEquals(configfiscalResponse, null);
-		getConfiguracaoBAR().insertConfigfiscal(configfiscal);
-		configfiscalResponse = getConfiguracaoBAR().fetchConfigfiscalById(request);
-		Assert.assertEquals(configfiscal.getId(), configfiscalResponse.getId());
-		getConfiguracaoBAR().deleteConfigfiscalById(configfiscal);
-		configfiscalResponse = getConfiguracaoBAR().fetchConfigfiscalById(request);
-		Assert.assertEquals(configfiscalResponse, null);
+		ConfigFiscal ConfigFiscalResponse = getConfiguracaoBAR().fetchConfigFiscalById(request);
+		Assert.assertEquals(ConfigFiscalResponse, null);
+		getConfiguracaoBAR().insertConfigFiscal(ConfigFiscal);
+		ConfigFiscalResponse = getConfiguracaoBAR().fetchConfigFiscalById(request);
+		Assert.assertEquals(ConfigFiscal.getId(), ConfigFiscalResponse.getId());
+		getConfiguracaoBAR().deleteConfigFiscalById(ConfigFiscal);
+		ConfigFiscalResponse = getConfiguracaoBAR().fetchConfigFiscalById(request);
+		Assert.assertEquals(ConfigFiscalResponse, null);
 	}
 
 	@Test
-	public void testFetchAllConfigfiscals()
+	public void testFetchAllConfigFiscals()
 	{
-	Configfiscal configfiscal = new Configfiscal();
-		List<Configfiscal> response = getConfiguracaoBAR().fetchAllConfigfiscals(configfiscal).getResultsList();
+	ConfigFiscal ConfigFiscal = new ConfigFiscal();
+		List<ConfigFiscal> response = getConfiguracaoBAR().fetchAllConfigFiscals(ConfigFiscal).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
 	@Test
-	public void testDeleteAllConfigfiscals()
+	public void testDeleteAllConfigFiscals()
 	{
-		getConfiguracaoBAR().deleteAllConfigfiscals();
-	Configfiscal configfiscal = new Configfiscal();
-		List<Configfiscal> response = getConfiguracaoBAR().fetchAllConfigfiscals(new Configfiscal()).getResultsList();
+		getConfiguracaoBAR().deleteAllConfigFiscals();
+	ConfigFiscal ConfigFiscal = new ConfigFiscal();
+		List<ConfigFiscal> response = getConfiguracaoBAR().fetchAllConfigFiscals(new ConfigFiscal()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
-	public void testUpdateConfigfiscal()
+	public void testUpdateConfigFiscal()
 	{
-		Configfiscal configfiscal = insertConfigfiscal(1, TabelaEnum.CONFIGFISCAL, PersistenceActionEnum.UPDATE);
+		ConfigFiscal ConfigFiscal = insertConfigFiscal(1, TabelaEnum.CONFIGFISCAL, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
-		Configfiscal configfiscalResponse = getConfiguracaoBAR().fetchConfigfiscalById(request);
-		Assert.assertEquals(configfiscalResponse.getDescription(), "NATIVE INSERT");
-		getConfiguracaoBAR().updateConfigfiscal(configfiscal);
-		configfiscalResponse = getConfiguracaoBAR().fetchConfigfiscalById(request);
-		Assert.assertEquals(configfiscalResponse.getDescription(), "NATIVE INSERT UPDATE");
+		ConfigFiscal ConfigFiscalResponse = getConfiguracaoBAR().fetchConfigFiscalById(request);
+		Assert.assertEquals(ConfigFiscalResponse.getAliqSimples(), new Double(10.00));
+		getConfiguracaoBAR().updateConfigFiscal(ConfigFiscal);
+		ConfigFiscalResponse = getConfiguracaoBAR().fetchConfigFiscalById(request);
+		Assert.assertEquals(ConfigFiscalResponse.getAliqSimples(), new Double(11.00));
 	}
 
 	@Test
-	public void testFetchConfigfiscalsByRequest() throws Exception
+	public void testFetchConfigFiscalsByRequest() throws Exception
 	{
 		// check for valid and precount
-		ConfigfiscalInquiryRequest request = new ConfigfiscalInquiryRequest();
+		PagedInquiryRequest request = new PagedInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
-		InternalResultsResponse<Configfiscal> response = getConfiguracaoBAR().fetchConfigfiscalsByRequest(request);
+		InternalResultsResponse<ConfigFiscal> response = getConfiguracaoBAR().fetchConfigFiscalsByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
@@ -465,87 +482,87 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 		request.setPreQueryCount(true);
 		request.setStartPage(1);
 		request.setPageSize(3);
-		response = getConfiguracaoBAR().fetchConfigfiscalsByRequest(request);
+		response = getConfiguracaoBAR().fetchConfigFiscalsByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
 		// check for valid and no precount
-		ConfigfiscalInquiryRequest request2 = new ConfigfiscalInquiryRequest();
+		PagedInquiryRequest request2 = new PagedInquiryRequest();
 		request2.setPreQueryCount(false);
-		InternalResultsResponse<Configfiscal> response2 = getConfiguracaoBAR().fetchConfigfiscalsByRequest(request2);
+		InternalResultsResponse<ConfigFiscal> response2 = getConfiguracaoBAR().fetchConfigFiscalsByRequest(request2);
 		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
 		// this is because we did not choose to precount
 		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
 
 		// check for zero rows
-		getConfiguracaoBAR().deleteAllConfigfiscals();
-		ConfigfiscalInquiryRequest request3 = new ConfigfiscalInquiryRequest();
+		getConfiguracaoBAR().deleteAllConfigFiscals();
+		PagedInquiryRequest request3 = new PagedInquiryRequest();
 		request3.setPreQueryCount(true);
-		InternalResultsResponse<Configfiscal> response3 = getConfiguracaoBAR().fetchConfigfiscalsByRequest(request3);
+		InternalResultsResponse<ConfigFiscal> response3 = getConfiguracaoBAR().fetchConfigFiscalsByRequest(request3);
 		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 	}
 
-//===================================### CONFIGALERTAS ####======================================
+//===================================### ConfigAlertas ####======================================
 
 
 @Test
-	public void testDeleteConfigalertas()
+	public void testDeleteConfigAlertas()
 	{
-		Configalertas configalertas = insertConfigalertas(4, TabelaEnum.CONFIGALERTAS, PersistenceActionEnum.INSERT);
+		ConfigAlertas ConfigAlertas = insertConfigAlertas(4, TabelaEnum.CONFIGALERTAS, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
-		Configalertas configalertasResponse = getConfiguracaoBAR().fetchConfigalertasById(request);
-		Assert.assertEquals(configalertasResponse, null);
-		getConfiguracaoBAR().insertConfigalertas(configalertas);
-		configalertasResponse = getConfiguracaoBAR().fetchConfigalertasById(request);
-		Assert.assertEquals(configalertas.getId(), configalertasResponse.getId());
-		getConfiguracaoBAR().deleteConfigalertasById(configalertas);
-		configalertasResponse = getConfiguracaoBAR().fetchConfigalertasById(request);
-		Assert.assertEquals(configalertasResponse, null);
+		ConfigAlertas ConfigAlertasResponse = getConfiguracaoBAR().fetchConfigAlertasById(request);
+		Assert.assertEquals(ConfigAlertasResponse, null);
+		getConfiguracaoBAR().insertConfigAlertas(ConfigAlertas);
+		ConfigAlertasResponse = getConfiguracaoBAR().fetchConfigAlertasById(request);
+		Assert.assertEquals(ConfigAlertas.getId(), ConfigAlertasResponse.getId());
+		getConfiguracaoBAR().deleteConfigAlertasById(ConfigAlertas);
+		ConfigAlertasResponse = getConfiguracaoBAR().fetchConfigAlertasById(request);
+		Assert.assertEquals(ConfigAlertasResponse, null);
 	}
 
 	@Test
-	public void testFetchAllConfigalertass()
+	public void testFetchAllConfigAlertass()
 	{
-	Configalertas configalertas = new Configalertas();
-		List<Configalertas> response = getConfiguracaoBAR().fetchAllConfigalertass(configalertas).getResultsList();
+	ConfigAlertas ConfigAlertas = new ConfigAlertas();
+		List<ConfigAlertas> response = getConfiguracaoBAR().fetchAllConfigAlertass(ConfigAlertas).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
 	@Test
-	public void testDeleteAllConfigalertass()
+	public void testDeleteAllConfigAlertass()
 	{
-		getConfiguracaoBAR().deleteAllConfigalertass();
-	Configalertas configalertas = new Configalertas();
-		List<Configalertas> response = getConfiguracaoBAR().fetchAllConfigalertass(new Configalertas()).getResultsList();
+		getConfiguracaoBAR().deleteAllConfigAlertass();
+	ConfigAlertas ConfigAlertas = new ConfigAlertas();
+		List<ConfigAlertas> response = getConfiguracaoBAR().fetchAllConfigAlertass(new ConfigAlertas()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
-	public void testUpdateConfigalertas()
+	public void testUpdateConfigAlertas()
 	{
-		Configalertas configalertas = insertConfigalertas(1, TabelaEnum.CONFIGALERTAS, PersistenceActionEnum.UPDATE);
+		ConfigAlertas ConfigAlertas = insertConfigAlertas(1, TabelaEnum.CONFIGALERTAS, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
-		Configalertas configalertasResponse = getConfiguracaoBAR().fetchConfigalertasById(request);
-		Assert.assertEquals(configalertasResponse.getDescription(), "NATIVE INSERT");
-		getConfiguracaoBAR().updateConfigalertas(configalertas);
-		configalertasResponse = getConfiguracaoBAR().fetchConfigalertasById(request);
-		Assert.assertEquals(configalertasResponse.getDescription(), "NATIVE INSERT UPDATE");
+		ConfigAlertas ConfigAlertasResponse = getConfiguracaoBAR().fetchConfigAlertasById(request);
+		Assert.assertEquals(ConfigAlertasResponse.getEstoqMax(), true);
+		getConfiguracaoBAR().updateConfigAlertas(ConfigAlertas);
+		ConfigAlertasResponse = getConfiguracaoBAR().fetchConfigAlertasById(request);
+		Assert.assertEquals(ConfigAlertasResponse.getEstoqMax(), false);
 	}
 
 	@Test
-	public void testFetchConfigalertassByRequest() throws Exception
+	public void testFetchConfigAlertassByRequest() throws Exception
 	{
 		// check for valid and precount
-		ConfigalertasInquiryRequest request = new ConfigalertasInquiryRequest();
+		PagedInquiryRequest request = new PagedInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
-		InternalResultsResponse<Configalertas> response = getConfiguracaoBAR().fetchConfigalertassByRequest(request);
+		InternalResultsResponse<ConfigAlertas> response = getConfiguracaoBAR().fetchConfigAlertassByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
@@ -553,87 +570,87 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 		request.setPreQueryCount(true);
 		request.setStartPage(1);
 		request.setPageSize(3);
-		response = getConfiguracaoBAR().fetchConfigalertassByRequest(request);
+		response = getConfiguracaoBAR().fetchConfigAlertassByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
 		// check for valid and no precount
-		ConfigalertasInquiryRequest request2 = new ConfigalertasInquiryRequest();
+		PagedInquiryRequest request2 = new PagedInquiryRequest();
 		request2.setPreQueryCount(false);
-		InternalResultsResponse<Configalertas> response2 = getConfiguracaoBAR().fetchConfigalertassByRequest(request2);
+		InternalResultsResponse<ConfigAlertas> response2 = getConfiguracaoBAR().fetchConfigAlertassByRequest(request2);
 		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
 		// this is because we did not choose to precount
 		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
 
 		// check for zero rows
-		getConfiguracaoBAR().deleteAllConfigalertass();
-		ConfigalertasInquiryRequest request3 = new ConfigalertasInquiryRequest();
+		getConfiguracaoBAR().deleteAllConfigAlertass();
+		PagedInquiryRequest request3 = new PagedInquiryRequest();
 		request3.setPreQueryCount(true);
-		InternalResultsResponse<Configalertas> response3 = getConfiguracaoBAR().fetchConfigalertassByRequest(request3);
+		InternalResultsResponse<ConfigAlertas> response3 = getConfiguracaoBAR().fetchConfigAlertassByRequest(request3);
 		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 	}
 
-//===================================### CONFIGGERAL ####======================================
+//===================================### ConfigGeral ####======================================
 
 
 @Test
-	public void testDeleteConfiggeral()
+	public void testDeleteConfigGeral()
 	{
-		Configgeral configgeral = insertConfiggeral(4, TabelaEnum.CONFIGGERAL, PersistenceActionEnum.INSERT);
+		ConfigGeral ConfigGeral = insertConfigGeral(4, TabelaEnum.CONFIGGERAL, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
-		Configgeral configgeralResponse = getConfiguracaoBAR().fetchConfiggeralById(request);
-		Assert.assertEquals(configgeralResponse, null);
-		getConfiguracaoBAR().insertConfiggeral(configgeral);
-		configgeralResponse = getConfiguracaoBAR().fetchConfiggeralById(request);
-		Assert.assertEquals(configgeral.getId(), configgeralResponse.getId());
-		getConfiguracaoBAR().deleteConfiggeralById(configgeral);
-		configgeralResponse = getConfiguracaoBAR().fetchConfiggeralById(request);
-		Assert.assertEquals(configgeralResponse, null);
+		ConfigGeral ConfigGeralResponse = getConfiguracaoBAR().fetchConfigGeralById(request);
+		Assert.assertEquals(ConfigGeralResponse, null);
+		getConfiguracaoBAR().insertConfigGeral(ConfigGeral);
+		ConfigGeralResponse = getConfiguracaoBAR().fetchConfigGeralById(request);
+		Assert.assertEquals(ConfigGeral.getId(), ConfigGeralResponse.getId());
+		getConfiguracaoBAR().deleteConfigGeralById(ConfigGeral);
+		ConfigGeralResponse = getConfiguracaoBAR().fetchConfigGeralById(request);
+		Assert.assertEquals(ConfigGeralResponse, null);
 	}
 
 	@Test
-	public void testFetchAllConfiggerals()
+	public void testFetchAllConfigGerals()
 	{
-	Configgeral configgeral = new Configgeral();
-		List<Configgeral> response = getConfiguracaoBAR().fetchAllConfiggerals(configgeral).getResultsList();
+	ConfigGeral ConfigGeral = new ConfigGeral();
+		List<ConfigGeral> response = getConfiguracaoBAR().fetchAllConfigGerals(ConfigGeral).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
 	@Test
-	public void testDeleteAllConfiggerals()
+	public void testDeleteAllConfigGerals()
 	{
-		getConfiguracaoBAR().deleteAllConfiggerals();
-	Configgeral configgeral = new Configgeral();
-		List<Configgeral> response = getConfiguracaoBAR().fetchAllConfiggerals(new Configgeral()).getResultsList();
+		getConfiguracaoBAR().deleteAllConfigGerals();
+	ConfigGeral ConfigGeral = new ConfigGeral();
+		List<ConfigGeral> response = getConfiguracaoBAR().fetchAllConfigGerals(new ConfigGeral()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
-	public void testUpdateConfiggeral()
+	public void testUpdateConfigGeral()
 	{
-		Configgeral configgeral = insertConfiggeral(1, TabelaEnum.CONFIGGERAL, PersistenceActionEnum.UPDATE);
+		ConfigGeral ConfigGeral = insertConfigGeral(1, TabelaEnum.CONFIGGERAL, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
-		Configgeral configgeralResponse = getConfiguracaoBAR().fetchConfiggeralById(request);
-		Assert.assertEquals(configgeralResponse.getDescription(), "NATIVE INSERT");
-		getConfiguracaoBAR().updateConfiggeral(configgeral);
-		configgeralResponse = getConfiguracaoBAR().fetchConfiggeralById(request);
-		Assert.assertEquals(configgeralResponse.getDescription(), "NATIVE INSERT UPDATE");
+		ConfigGeral ConfigGeralResponse = getConfiguracaoBAR().fetchConfigGeralById(request);
+		Assert.assertEquals(ConfigGeralResponse.getCnpjCPFUnico(), true);
+		getConfiguracaoBAR().updateConfigGeral(ConfigGeral);
+		ConfigGeralResponse = getConfiguracaoBAR().fetchConfigGeralById(request);
+		Assert.assertEquals(ConfigGeralResponse.getCnpjCPFUnico(), false);
 	}
 
 	@Test
-	public void testFetchConfiggeralsByRequest() throws Exception
+	public void testFetchConfigGeralsByRequest() throws Exception
 	{
 		// check for valid and precount
-		ConfiggeralInquiryRequest request = new ConfiggeralInquiryRequest();
+		PagedInquiryRequest request = new PagedInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
-		InternalResultsResponse<Configgeral> response = getConfiguracaoBAR().fetchConfiggeralsByRequest(request);
+		InternalResultsResponse<ConfigGeral> response = getConfiguracaoBAR().fetchConfigGeralsByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
@@ -641,87 +658,87 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 		request.setPreQueryCount(true);
 		request.setStartPage(1);
 		request.setPageSize(3);
-		response = getConfiguracaoBAR().fetchConfiggeralsByRequest(request);
+		response = getConfiguracaoBAR().fetchConfigGeralsByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
 		// check for valid and no precount
-		ConfiggeralInquiryRequest request2 = new ConfiggeralInquiryRequest();
+		PagedInquiryRequest request2 = new PagedInquiryRequest();
 		request2.setPreQueryCount(false);
-		InternalResultsResponse<Configgeral> response2 = getConfiguracaoBAR().fetchConfiggeralsByRequest(request2);
+		InternalResultsResponse<ConfigGeral> response2 = getConfiguracaoBAR().fetchConfigGeralsByRequest(request2);
 		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
 		// this is because we did not choose to precount
 		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
 
 		// check for zero rows
-		getConfiguracaoBAR().deleteAllConfiggerals();
-		ConfiggeralInquiryRequest request3 = new ConfiggeralInquiryRequest();
+		getConfiguracaoBAR().deleteAllConfigGerals();
+		PagedInquiryRequest request3 = new PagedInquiryRequest();
 		request3.setPreQueryCount(true);
-		InternalResultsResponse<Configgeral> response3 = getConfiguracaoBAR().fetchConfiggeralsByRequest(request3);
+		InternalResultsResponse<ConfigGeral> response3 = getConfiguracaoBAR().fetchConfigGeralsByRequest(request3);
 		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 	}
 
-//===================================### CONFIGPRODUTO ####======================================
+//===================================### ConfigProduto ####======================================
 
 
 @Test
-	public void testDeleteConfigproduto()
+	public void testDeleteConfigProduto()
 	{
-		Configproduto configproduto = insertConfigproduto(4, TabelaEnum.CONFIGPRODUTO, PersistenceActionEnum.INSERT);
+		ConfigProduto ConfigProduto = insertConfigProduto(4, TabelaEnum.CONFIGPRODUTO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
-		Configproduto configprodutoResponse = getConfiguracaoBAR().fetchConfigprodutoById(request);
-		Assert.assertEquals(configprodutoResponse, null);
-		getConfiguracaoBAR().insertConfigproduto(configproduto);
-		configprodutoResponse = getConfiguracaoBAR().fetchConfigprodutoById(request);
-		Assert.assertEquals(configproduto.getId(), configprodutoResponse.getId());
-		getConfiguracaoBAR().deleteConfigprodutoById(configproduto);
-		configprodutoResponse = getConfiguracaoBAR().fetchConfigprodutoById(request);
-		Assert.assertEquals(configprodutoResponse, null);
+		ConfigProduto ConfigProdutoResponse = getConfiguracaoBAR().fetchConfigProdutoById(request);
+		Assert.assertEquals(ConfigProdutoResponse, null);
+		getConfiguracaoBAR().insertConfigProduto(ConfigProduto);
+		ConfigProdutoResponse = getConfiguracaoBAR().fetchConfigProdutoById(request);
+		Assert.assertEquals(ConfigProduto.getId(), ConfigProdutoResponse.getId());
+		getConfiguracaoBAR().deleteConfigProdutoById(ConfigProduto);
+		ConfigProdutoResponse = getConfiguracaoBAR().fetchConfigProdutoById(request);
+		Assert.assertEquals(ConfigProdutoResponse, null);
 	}
 
 	@Test
-	public void testFetchAllConfigprodutos()
+	public void testFetchAllConfigProdutos()
 	{
-	Configproduto configproduto = new Configproduto();
-		List<Configproduto> response = getConfiguracaoBAR().fetchAllConfigprodutos(configproduto).getResultsList();
+	ConfigProduto ConfigProduto = new ConfigProduto();
+		List<ConfigProduto> response = getConfiguracaoBAR().fetchAllConfigProdutos(ConfigProduto).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
 	@Test
-	public void testDeleteAllConfigprodutos()
+	public void testDeleteAllConfigProdutos()
 	{
-		getConfiguracaoBAR().deleteAllConfigprodutos();
-	Configproduto configproduto = new Configproduto();
-		List<Configproduto> response = getConfiguracaoBAR().fetchAllConfigprodutos(new Configproduto()).getResultsList();
+		getConfiguracaoBAR().deleteAllConfigProdutos();
+	ConfigProduto ConfigProduto = new ConfigProduto();
+		List<ConfigProduto> response = getConfiguracaoBAR().fetchAllConfigProdutos(new ConfigProduto()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
-	public void testUpdateConfigproduto()
+	public void testUpdateConfigProduto()
 	{
-		Configproduto configproduto = insertConfigproduto(1, TabelaEnum.CONFIGPRODUTO, PersistenceActionEnum.UPDATE);
+		ConfigProduto ConfigProduto = insertConfigProduto(1, TabelaEnum.CONFIGPRODUTO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
-		Configproduto configprodutoResponse = getConfiguracaoBAR().fetchConfigprodutoById(request);
-		Assert.assertEquals(configprodutoResponse.getDescription(), "NATIVE INSERT");
-		getConfiguracaoBAR().updateConfigproduto(configproduto);
-		configprodutoResponse = getConfiguracaoBAR().fetchConfigprodutoById(request);
-		Assert.assertEquals(configprodutoResponse.getDescription(), "NATIVE INSERT UPDATE");
+		ConfigProduto ConfigProdutoResponse = getConfiguracaoBAR().fetchConfigProdutoById(request);
+		Assert.assertEquals(ConfigProdutoResponse.getIpiCNPJProd(), "NATIVE INSERT");
+		getConfiguracaoBAR().updateConfigProduto(ConfigProduto);
+		ConfigProdutoResponse = getConfiguracaoBAR().fetchConfigProdutoById(request);
+		Assert.assertEquals(ConfigProdutoResponse.getIpiCNPJProd(), "NATIVE INSERT UPDATE");
 	}
 
 	@Test
-	public void testFetchConfigprodutosByRequest() throws Exception
+	public void testFetchConfigProdutosByRequest() throws Exception
 	{
 		// check for valid and precount
-		ConfigprodutoInquiryRequest request = new ConfigprodutoInquiryRequest();
+		PagedInquiryRequest request = new PagedInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
-		InternalResultsResponse<Configproduto> response = getConfiguracaoBAR().fetchConfigprodutosByRequest(request);
+		InternalResultsResponse<ConfigProduto> response = getConfiguracaoBAR().fetchConfigProdutosByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
@@ -729,87 +746,87 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 		request.setPreQueryCount(true);
 		request.setStartPage(1);
 		request.setPageSize(3);
-		response = getConfiguracaoBAR().fetchConfigprodutosByRequest(request);
+		response = getConfiguracaoBAR().fetchConfigProdutosByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
 		// check for valid and no precount
-		ConfigprodutoInquiryRequest request2 = new ConfigprodutoInquiryRequest();
+		PagedInquiryRequest request2 = new PagedInquiryRequest();
 		request2.setPreQueryCount(false);
-		InternalResultsResponse<Configproduto> response2 = getConfiguracaoBAR().fetchConfigprodutosByRequest(request2);
+		InternalResultsResponse<ConfigProduto> response2 = getConfiguracaoBAR().fetchConfigProdutosByRequest(request2);
 		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
 		// this is because we did not choose to precount
 		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
 
 		// check for zero rows
-		getConfiguracaoBAR().deleteAllConfigprodutos();
-		ConfigprodutoInquiryRequest request3 = new ConfigprodutoInquiryRequest();
+		getConfiguracaoBAR().deleteAllConfigProdutos();
+		PagedInquiryRequest request3 = new PagedInquiryRequest();
 		request3.setPreQueryCount(true);
-		InternalResultsResponse<Configproduto> response3 = getConfiguracaoBAR().fetchConfigprodutosByRequest(request3);
+		InternalResultsResponse<ConfigProduto> response3 = getConfiguracaoBAR().fetchConfigProdutosByRequest(request3);
 		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 	}
 
-//===================================### CONFIGSMTP ####======================================
+//===================================### ConfigSMTP ####======================================
 
 
 @Test
-	public void testDeleteConfigsmtp()
+	public void testDeleteConfigSMTP()
 	{
-		Configsmtp configsmtp = insertConfigsmtp(4, TabelaEnum.CONFIGSMTP, PersistenceActionEnum.INSERT);
+		ConfigSMTP ConfigSMTP = insertConfigSMTP(4, TabelaEnum.CONFIGSMTP, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
-		Configsmtp configsmtpResponse = getConfiguracaoBAR().fetchConfigsmtpById(request);
-		Assert.assertEquals(configsmtpResponse, null);
-		getConfiguracaoBAR().insertConfigsmtp(configsmtp);
-		configsmtpResponse = getConfiguracaoBAR().fetchConfigsmtpById(request);
-		Assert.assertEquals(configsmtp.getId(), configsmtpResponse.getId());
-		getConfiguracaoBAR().deleteConfigsmtpById(configsmtp);
-		configsmtpResponse = getConfiguracaoBAR().fetchConfigsmtpById(request);
-		Assert.assertEquals(configsmtpResponse, null);
+		ConfigSMTP ConfigSMTPResponse = getConfiguracaoBAR().fetchConfigSMTPById(request);
+		Assert.assertEquals(ConfigSMTPResponse, null);
+		getConfiguracaoBAR().insertConfigSMTP(ConfigSMTP);
+		ConfigSMTPResponse = getConfiguracaoBAR().fetchConfigSMTPById(request);
+		Assert.assertEquals(ConfigSMTP.getId(), ConfigSMTPResponse.getId());
+		getConfiguracaoBAR().deleteConfigSMTPById(ConfigSMTP);
+		ConfigSMTPResponse = getConfiguracaoBAR().fetchConfigSMTPById(request);
+		Assert.assertEquals(ConfigSMTPResponse, null);
 	}
 
 	@Test
-	public void testFetchAllConfigsmtps()
+	public void testFetchAllConfigSMTPs()
 	{
-	Configsmtp configsmtp = new Configsmtp();
-		List<Configsmtp> response = getConfiguracaoBAR().fetchAllConfigsmtps(configsmtp).getResultsList();
+	ConfigSMTP ConfigSMTP = new ConfigSMTP();
+		List<ConfigSMTP> response = getConfiguracaoBAR().fetchAllConfigSMTPs(ConfigSMTP).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
 	@Test
-	public void testDeleteAllConfigsmtps()
+	public void testDeleteAllConfigSMTPs()
 	{
-		getConfiguracaoBAR().deleteAllConfigsmtps();
-	Configsmtp configsmtp = new Configsmtp();
-		List<Configsmtp> response = getConfiguracaoBAR().fetchAllConfigsmtps(new Configsmtp()).getResultsList();
+		getConfiguracaoBAR().deleteAllConfigSMTPs();
+	ConfigSMTP ConfigSMTP = new ConfigSMTP();
+		List<ConfigSMTP> response = getConfiguracaoBAR().fetchAllConfigSMTPs(new ConfigSMTP()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
-	public void testUpdateConfigsmtp()
+	public void testUpdateConfigSMTP()
 	{
-		Configsmtp configsmtp = insertConfigsmtp(1, TabelaEnum.CONFIGSMTP, PersistenceActionEnum.UPDATE);
+		ConfigSMTP ConfigSMTP = insertConfigSMTP(1, TabelaEnum.CONFIGSMTP, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
-		Configsmtp configsmtpResponse = getConfiguracaoBAR().fetchConfigsmtpById(request);
-		Assert.assertEquals(configsmtpResponse.getDescription(), "NATIVE INSERT");
-		getConfiguracaoBAR().updateConfigsmtp(configsmtp);
-		configsmtpResponse = getConfiguracaoBAR().fetchConfigsmtpById(request);
-		Assert.assertEquals(configsmtpResponse.getDescription(), "NATIVE INSERT UPDATE");
+		ConfigSMTP ConfigSMTPResponse = getConfiguracaoBAR().fetchConfigSMTPById(request);
+		Assert.assertEquals(ConfigSMTPResponse.getEndEmail(), "NATIVE INSERT");
+		getConfiguracaoBAR().updateConfigSMTP(ConfigSMTP);
+		ConfigSMTPResponse = getConfiguracaoBAR().fetchConfigSMTPById(request);
+		Assert.assertEquals(ConfigSMTPResponse.getEndEmail(), "NATIVE INSERT UPDATE");
 	}
 
 	@Test
-	public void testFetchConfigsmtpsByRequest() throws Exception
+	public void testFetchConfigSMTPsByRequest() throws Exception
 	{
 		// check for valid and precount
-		ConfigsmtpInquiryRequest request = new ConfigsmtpInquiryRequest();
+		PagedInquiryRequest request = new PagedInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
-		InternalResultsResponse<Configsmtp> response = getConfiguracaoBAR().fetchConfigsmtpsByRequest(request);
+		InternalResultsResponse<ConfigSMTP> response = getConfiguracaoBAR().fetchConfigSMTPsByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
@@ -817,87 +834,87 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 		request.setPreQueryCount(true);
 		request.setStartPage(1);
 		request.setPageSize(3);
-		response = getConfiguracaoBAR().fetchConfigsmtpsByRequest(request);
+		response = getConfiguracaoBAR().fetchConfigSMTPsByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
 		// check for valid and no precount
-		ConfigsmtpInquiryRequest request2 = new ConfigsmtpInquiryRequest();
+		PagedInquiryRequest request2 = new PagedInquiryRequest();
 		request2.setPreQueryCount(false);
-		InternalResultsResponse<Configsmtp> response2 = getConfiguracaoBAR().fetchConfigsmtpsByRequest(request2);
+		InternalResultsResponse<ConfigSMTP> response2 = getConfiguracaoBAR().fetchConfigSMTPsByRequest(request2);
 		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
 		// this is because we did not choose to precount
 		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
 
 		// check for zero rows
-		getConfiguracaoBAR().deleteAllConfigsmtps();
-		ConfigsmtpInquiryRequest request3 = new ConfigsmtpInquiryRequest();
+		getConfiguracaoBAR().deleteAllConfigSMTPs();
+		PagedInquiryRequest request3 = new PagedInquiryRequest();
 		request3.setPreQueryCount(true);
-		InternalResultsResponse<Configsmtp> response3 = getConfiguracaoBAR().fetchConfigsmtpsByRequest(request3);
+		InternalResultsResponse<ConfigSMTP> response3 = getConfiguracaoBAR().fetchConfigSMTPsByRequest(request3);
 		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 	}
 
-//===================================### CONFIGURACAONFE ####======================================
+//===================================### ConfiguracaoNFe ####======================================
 
 
 @Test
-	public void testDeleteConfiguracaonfe()
+	public void testDeleteConfiguracaoNFe()
 	{
-		Configuracaonfe configuracaonfe = insertConfiguracaonfe(4, TabelaEnum.CONFIGURACAONFE, PersistenceActionEnum.INSERT);
+		ConfiguracaoNFe ConfiguracaoNFe = insertConfiguracaoNFe(4, TabelaEnum.CONFIGURACAONFE, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
-		Configuracaonfe configuracaonfeResponse = getConfiguracaoBAR().fetchConfiguracaonfeById(request);
-		Assert.assertEquals(configuracaonfeResponse, null);
-		getConfiguracaoBAR().insertConfiguracaonfe(configuracaonfe);
-		configuracaonfeResponse = getConfiguracaoBAR().fetchConfiguracaonfeById(request);
-		Assert.assertEquals(configuracaonfe.getId(), configuracaonfeResponse.getId());
-		getConfiguracaoBAR().deleteConfiguracaonfeById(configuracaonfe);
-		configuracaonfeResponse = getConfiguracaoBAR().fetchConfiguracaonfeById(request);
-		Assert.assertEquals(configuracaonfeResponse, null);
+		ConfiguracaoNFe ConfiguracaoNFeResponse = getConfiguracaoBAR().fetchConfiguracaoNFeById(request);
+		Assert.assertEquals(ConfiguracaoNFeResponse, null);
+		getConfiguracaoBAR().insertConfiguracaoNFe(ConfiguracaoNFe);
+		ConfiguracaoNFeResponse = getConfiguracaoBAR().fetchConfiguracaoNFeById(request);
+		Assert.assertEquals(ConfiguracaoNFe.getId(), ConfiguracaoNFeResponse.getId());
+		getConfiguracaoBAR().deleteConfiguracaoNFeById(ConfiguracaoNFe);
+		ConfiguracaoNFeResponse = getConfiguracaoBAR().fetchConfiguracaoNFeById(request);
+		Assert.assertEquals(ConfiguracaoNFeResponse, null);
 	}
 
 	@Test
-	public void testFetchAllConfiguracaonfes()
+	public void testFetchAllConfiguracaoNFes()
 	{
-	Configuracaonfe configuracaonfe = new Configuracaonfe();
-		List<Configuracaonfe> response = getConfiguracaoBAR().fetchAllConfiguracaonfes(configuracaonfe).getResultsList();
+	ConfiguracaoNFe ConfiguracaoNFe = new ConfiguracaoNFe();
+		List<ConfiguracaoNFe> response = getConfiguracaoBAR().fetchAllConfiguracaoNFes(ConfiguracaoNFe).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
 	@Test
-	public void testDeleteAllConfiguracaonfes()
+	public void testDeleteAllConfiguracaoNFes()
 	{
-		getConfiguracaoBAR().deleteAllConfiguracaonfes();
-	Configuracaonfe configuracaonfe = new Configuracaonfe();
-		List<Configuracaonfe> response = getConfiguracaoBAR().fetchAllConfiguracaonfes(new Configuracaonfe()).getResultsList();
+		getConfiguracaoBAR().deleteAllConfiguracaoNFes();
+	ConfiguracaoNFe ConfiguracaoNFe = new ConfiguracaoNFe();
+		List<ConfiguracaoNFe> response = getConfiguracaoBAR().fetchAllConfiguracaoNFes(new ConfiguracaoNFe()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
-	public void testUpdateConfiguracaonfe()
+	public void testUpdateConfiguracaoNFe()
 	{
-		Configuracaonfe configuracaonfe = insertConfiguracaonfe(1, TabelaEnum.CONFIGURACAONFE, PersistenceActionEnum.UPDATE);
+		ConfiguracaoNFe ConfiguracaoNFe = insertConfiguracaoNFe(1, TabelaEnum.CONFIGURACAONFE, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
-		Configuracaonfe configuracaonfeResponse = getConfiguracaoBAR().fetchConfiguracaonfeById(request);
-		Assert.assertEquals(configuracaonfeResponse.getDescription(), "NATIVE INSERT");
-		getConfiguracaoBAR().updateConfiguracaonfe(configuracaonfe);
-		configuracaonfeResponse = getConfiguracaoBAR().fetchConfiguracaonfeById(request);
-		Assert.assertEquals(configuracaonfeResponse.getDescription(), "NATIVE INSERT UPDATE");
+		ConfiguracaoNFe ConfiguracaoNFeResponse = getConfiguracaoBAR().fetchConfiguracaoNFeById(request);
+		Assert.assertEquals(ConfiguracaoNFeResponse.getcSC(), "NATIVE INSERT");
+		getConfiguracaoBAR().updateConfiguracaoNFe(ConfiguracaoNFe);
+		ConfiguracaoNFeResponse = getConfiguracaoBAR().fetchConfiguracaoNFeById(request);
+		Assert.assertEquals(ConfiguracaoNFeResponse.getcSC(), "NATIVE INSERT UPDATE");
 	}
 
 	@Test
-	public void testFetchConfiguracaonfesByRequest() throws Exception
+	public void testFetchConfiguracaoNFesByRequest() throws Exception
 	{
 		// check for valid and precount
-		ConfiguracaonfeInquiryRequest request = new ConfiguracaonfeInquiryRequest();
+		PagedInquiryRequest request = new PagedInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
-		InternalResultsResponse<Configuracaonfe> response = getConfiguracaoBAR().fetchConfiguracaonfesByRequest(request);
+		InternalResultsResponse<ConfiguracaoNFe> response = getConfiguracaoBAR().fetchConfiguracaoNFesByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
@@ -905,87 +922,87 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 		request.setPreQueryCount(true);
 		request.setStartPage(1);
 		request.setPageSize(3);
-		response = getConfiguracaoBAR().fetchConfiguracaonfesByRequest(request);
+		response = getConfiguracaoBAR().fetchConfiguracaoNFesByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
 		// check for valid and no precount
-		ConfiguracaonfeInquiryRequest request2 = new ConfiguracaonfeInquiryRequest();
+		PagedInquiryRequest request2 = new PagedInquiryRequest();
 		request2.setPreQueryCount(false);
-		InternalResultsResponse<Configuracaonfe> response2 = getConfiguracaoBAR().fetchConfiguracaonfesByRequest(request2);
+		InternalResultsResponse<ConfiguracaoNFe> response2 = getConfiguracaoBAR().fetchConfiguracaoNFesByRequest(request2);
 		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
 		// this is because we did not choose to precount
 		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
 
 		// check for zero rows
-		getConfiguracaoBAR().deleteAllConfiguracaonfes();
-		ConfiguracaonfeInquiryRequest request3 = new ConfiguracaonfeInquiryRequest();
+		getConfiguracaoBAR().deleteAllConfiguracaoNFes();
+		PagedInquiryRequest request3 = new PagedInquiryRequest();
 		request3.setPreQueryCount(true);
-		InternalResultsResponse<Configuracaonfe> response3 = getConfiguracaoBAR().fetchConfiguracaonfesByRequest(request3);
+		InternalResultsResponse<ConfiguracaoNFe> response3 = getConfiguracaoBAR().fetchConfiguracaoNFesByRequest(request3);
 		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 	}
 
-//===================================### CONFIGVENDAS ####======================================
+//===================================### ConfigVendas ####======================================
 
 
 @Test
-	public void testDeleteConfigvendas()
+	public void testDeleteConfigVendas()
 	{
-		Configvendas configvendas = insertConfigvendas(4, TabelaEnum.CONFIGVENDAS, PersistenceActionEnum.INSERT);
+		ConfigVendas ConfigVendas = insertConfigVendas(4, TabelaEnum.CONFIGVENDAS, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
-		Configvendas configvendasResponse = getConfiguracaoBAR().fetchConfigvendasById(request);
-		Assert.assertEquals(configvendasResponse, null);
-		getConfiguracaoBAR().insertConfigvendas(configvendas);
-		configvendasResponse = getConfiguracaoBAR().fetchConfigvendasById(request);
-		Assert.assertEquals(configvendas.getId(), configvendasResponse.getId());
-		getConfiguracaoBAR().deleteConfigvendasById(configvendas);
-		configvendasResponse = getConfiguracaoBAR().fetchConfigvendasById(request);
-		Assert.assertEquals(configvendasResponse, null);
+		ConfigVendas ConfigVendasResponse = getConfiguracaoBAR().fetchConfigVendasById(request);
+		Assert.assertEquals(ConfigVendasResponse, null);
+		getConfiguracaoBAR().insertConfigVendas(ConfigVendas);
+		ConfigVendasResponse = getConfiguracaoBAR().fetchConfigVendasById(request);
+		Assert.assertEquals(ConfigVendas.getId(), ConfigVendasResponse.getId());
+		getConfiguracaoBAR().deleteConfigVendasById(ConfigVendas);
+		ConfigVendasResponse = getConfiguracaoBAR().fetchConfigVendasById(request);
+		Assert.assertEquals(ConfigVendasResponse, null);
 	}
 
 	@Test
-	public void testFetchAllConfigvendass()
+	public void testFetchAllConfigVendass()
 	{
-	Configvendas configvendas = new Configvendas();
-		List<Configvendas> response = getConfiguracaoBAR().fetchAllConfigvendass(configvendas).getResultsList();
+	ConfigVendas ConfigVendas = new ConfigVendas();
+		List<ConfigVendas> response = getConfiguracaoBAR().fetchAllConfigVendass(ConfigVendas).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
 	@Test
-	public void testDeleteAllConfigvendass()
+	public void testDeleteAllConfigVendass()
 	{
-		getConfiguracaoBAR().deleteAllConfigvendass();
-	Configvendas configvendas = new Configvendas();
-		List<Configvendas> response = getConfiguracaoBAR().fetchAllConfigvendass(new Configvendas()).getResultsList();
+		getConfiguracaoBAR().deleteAllConfigVendass();
+	ConfigVendas ConfigVendas = new ConfigVendas();
+		List<ConfigVendas> response = getConfiguracaoBAR().fetchAllConfigVendass(new ConfigVendas()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
-	public void testUpdateConfigvendas()
+	public void testUpdateConfigVendas()
 	{
-		Configvendas configvendas = insertConfigvendas(1, TabelaEnum.CONFIGVENDAS, PersistenceActionEnum.UPDATE);
+		ConfigVendas ConfigVendas = insertConfigVendas(1, TabelaEnum.CONFIGVENDAS, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
-		Configvendas configvendasResponse = getConfiguracaoBAR().fetchConfigvendasById(request);
-		Assert.assertEquals(configvendasResponse.getDescription(), "NATIVE INSERT");
-		getConfiguracaoBAR().updateConfigvendas(configvendas);
-		configvendasResponse = getConfiguracaoBAR().fetchConfigvendasById(request);
-		Assert.assertEquals(configvendasResponse.getDescription(), "NATIVE INSERT UPDATE");
+		ConfigVendas ConfigVendasResponse = getConfiguracaoBAR().fetchConfigVendasById(request);
+		Assert.assertEquals(ConfigVendasResponse.getBloquearvendProdSemEstoq(), true);
+		getConfiguracaoBAR().updateConfigVendas(ConfigVendas);
+		ConfigVendasResponse = getConfiguracaoBAR().fetchConfigVendasById(request);
+		Assert.assertEquals(ConfigVendasResponse.getBloquearvendProdSemEstoq(), false);
 	}
 
 	@Test
-	public void testFetchConfigvendassByRequest() throws Exception
+	public void testFetchConfigVendassByRequest() throws Exception
 	{
 		// check for valid and precount
-		ConfigvendasInquiryRequest request = new ConfigvendasInquiryRequest();
+		PagedInquiryRequest request = new PagedInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
-		InternalResultsResponse<Configvendas> response = getConfiguracaoBAR().fetchConfigvendassByRequest(request);
+		InternalResultsResponse<ConfigVendas> response = getConfiguracaoBAR().fetchConfigVendassByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
@@ -993,25 +1010,25 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 		request.setPreQueryCount(true);
 		request.setStartPage(1);
 		request.setPageSize(3);
-		response = getConfiguracaoBAR().fetchConfigvendassByRequest(request);
+		response = getConfiguracaoBAR().fetchConfigVendassByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
 		// check for valid and no precount
-		ConfigvendasInquiryRequest request2 = new ConfigvendasInquiryRequest();
+		PagedInquiryRequest request2 = new PagedInquiryRequest();
 		request2.setPreQueryCount(false);
-		InternalResultsResponse<Configvendas> response2 = getConfiguracaoBAR().fetchConfigvendassByRequest(request2);
+		InternalResultsResponse<ConfigVendas> response2 = getConfiguracaoBAR().fetchConfigVendassByRequest(request2);
 		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
 		// this is because we did not choose to precount
 		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
 
 		// check for zero rows
-		getConfiguracaoBAR().deleteAllConfigvendass();
-		ConfigvendasInquiryRequest request3 = new ConfigvendasInquiryRequest();
+		getConfiguracaoBAR().deleteAllConfigVendass();
+		PagedInquiryRequest request3 = new PagedInquiryRequest();
 		request3.setPreQueryCount(true);
-		InternalResultsResponse<Configvendas> response3 = getConfiguracaoBAR().fetchConfigvendassByRequest(request3);
+		InternalResultsResponse<ConfigVendas> response3 = getConfiguracaoBAR().fetchConfigVendassByRequest(request3);
 		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 	}
@@ -1021,15 +1038,15 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 	{
 		executeSqlScript("conf/insertConfiguracao.sql", false);
 		executeSqlScript("conf/insertBoleto.sql", false);
-		executeSqlScript("conf/insertConfigcarne.sql", false);
-		executeSqlScript("conf/insertConfigentrada.sql", false);
-		executeSqlScript("conf/insertConfigfiscal.sql", false);
-		executeSqlScript("conf/insertConfigalertas.sql", false);
-		executeSqlScript("conf/insertConfiggeral.sql", false);
-		executeSqlScript("conf/insertConfigproduto.sql", false);
-		executeSqlScript("conf/insertConfigsmtp.sql", false);
-		executeSqlScript("conf/insertConfiguracaonfe.sql", false);
-		executeSqlScript("conf/insertConfigvendas.sql", false);
+		executeSqlScript("conf/insertConfigCarne.sql", false);
+		executeSqlScript("conf/insertConfigEntrada.sql", false);
+		executeSqlScript("conf/insertConfigFiscal.sql", false);
+		executeSqlScript("conf/insertConfigAlertas.sql", false);
+		executeSqlScript("conf/insertConfigGeral.sql", false);
+		executeSqlScript("conf/insertConfigProduto.sql", false);
+		executeSqlScript("conf/insertConfigSMTP.sql", false);
+		executeSqlScript("conf/insertConfiguracaoNFe.sql", false);
+		executeSqlScript("conf/insertConfigVendas.sql", false);
 	}
 
 	
@@ -1038,16 +1055,16 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			Configuracao configuracao = new Configuracao();
 			Date a = new Date();
 			configuracao.setId(100);
-			configuracao.setConfGeral(new ArrayList<undefined>());
-			configuracao.setConfNFe(new ArrayList<undefined>());
-			configuracao.setConfFiscal(new ArrayList<undefined>());
-			configuracao.setConfProd(new ArrayList<undefined>());
-			configuracao.setConfVendas(new ArrayList<undefined>());
-			configuracao.setConfCMTP(new ArrayList<undefined>());
-			configuracao.setConfEntrada(new ArrayList<undefined>());
-			configuracao.setConfCarne(new ArrayList<undefined>());
-			configuracao.setBoletoList(new ArrayList<undefined>());
-			configuracao.getundefined().add(insertundefined(id,TabelaEnum.CONFIGURACAO,action));
+			configuracao.setConfGeral(insertConfigGeral(id,TabelaEnum.BOLETO,action));
+			configuracao.setConfNFe(insertConfiguracaoNFe(id,TabelaEnum.BOLETO,action));
+			configuracao.setConfFiscal(insertConfigFiscal(id,TabelaEnum.BOLETO,action));
+			configuracao.setConfProd(insertConfigProduto(id,TabelaEnum.BOLETO,action));
+			configuracao.setConfVendas(insertConfigVendas(id,TabelaEnum.BOLETO,action));
+			configuracao.setConfCMTP(insertConfigSMTP(id,TabelaEnum.BOLETO,action));
+			configuracao.setConfEntrada(insertConfigEntrada(id,TabelaEnum.BOLETO,action));
+			configuracao.setConfCarne(insertConfigCarne(id,TabelaEnum.BOLETO,action));
+			configuracao.setBoletoList(new ArrayList<Boleto>());
+			configuracao.getBoletoList().add(insertBoleto(id,TabelaEnum.BOLETO,action));
 			configuracao.setParentId(id);
 			configuracao.setEmprId(1);
 			configuracao.setModifyDateUTC(a.getTime());
@@ -1066,16 +1083,16 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			Boleto boleto = new Boleto();
 			Date a = new Date();
 			boleto.setId(100);
-			boleto.setAtivarBolOnLine(new ArrayList<undefined>());
-			boleto.setTipoBoleto(new ArrayList<undefined>());
+			boleto.setAtivarBolOnLine(Boolean.FALSE);
+			boleto.setTipoBoleto(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
 			boleto.setAgencia(100);
 			boleto.setCedente(100);
 			boleto.setJuros(new Double(1.99));
-			boleto.setTipoCalcMora(new ArrayList<undefined>());
+			boleto.setTipoCalcMora(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
 			boleto.setMora(new Double(1.99));
 			boleto.setInstrucoes("NATIVE INSERT UPDATE");
 			boleto.setDemonstrativo("NATIVE INSERT UPDATE");
-			boleto.setImpJuros(new ArrayList<undefined>());
+			boleto.setImpJuros(Boolean.FALSE);
 			boleto.setParentId(id);
 			boleto.setEmprId(1);
 			boleto.setModifyDateUTC(a.getTime());
@@ -1091,250 +1108,269 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 	
 	public ConfigCarne insertConfigCarne(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
-			ConfigCarne configcarne = new ConfigCarne();
+			ConfigCarne ConfigCarne = new ConfigCarne();
 			Date a = new Date();
-			configcarne.setId(100);
-			configcarne.setCarneBotelo(new ArrayList<undefined>());
-			configcarne.setCarneNormal(new ArrayList<undefined>());
-			configcarne.setParentId(id);
-			configcarne.setEmprId(1);
-			configcarne.setModifyDateUTC(a.getTime());
-			configcarne.setCreateDateUTC(a.getTime());
-			configcarne.setCreateUser("system");
-			configcarne.setModifyUser("system");
-			configcarne.setProcessId(1);
-			configcarne.setModelAction(action);
+			ConfigCarne.setId(100);
+			ConfigCarne.setCarneBotelo(Boolean.FALSE);
+			ConfigCarne.setCarneNormal(Boolean.FALSE);
+			ConfigCarne.setParentId(id);
+			ConfigCarne.setEmprId(1);
+			ConfigCarne.setModifyDateUTC(a.getTime());
+			ConfigCarne.setCreateDateUTC(a.getTime());
+			ConfigCarne.setCreateUser("system");
+			ConfigCarne.setModifyUser("system");
+			ConfigCarne.setProcessId(1);
+			ConfigCarne.setModelAction(action);
 	
-			return configcarne;
+			return ConfigCarne;
 		}
 
 	
 	public ConfigEntrada insertConfigEntrada(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
-			ConfigEntrada configentrada = new ConfigEntrada();
+			ConfigEntrada ConfigEntrada = new ConfigEntrada();
 			Date a = new Date();
-			configentrada.setId(100);
-			configentrada.setValorTotalFixo(new ArrayList<undefined>());
-			configentrada.setManterPrecoVendaProd(new ArrayList<undefined>());
-			configentrada.setParentId(id);
-			configentrada.setEmprId(1);
-			configentrada.setModifyDateUTC(a.getTime());
-			configentrada.setCreateDateUTC(a.getTime());
-			configentrada.setCreateUser("system");
-			configentrada.setModifyUser("system");
-			configentrada.setProcessId(1);
-			configentrada.setModelAction(action);
+			ConfigEntrada.setId(100);
+			ConfigEntrada.setValorTotalFixo(Boolean.FALSE);
+			ConfigEntrada.setManterPrecoVendaProd(Boolean.FALSE);
+			ConfigEntrada.setParentId(id);
+			ConfigEntrada.setEmprId(1);
+			ConfigEntrada.setModifyDateUTC(a.getTime());
+			ConfigEntrada.setCreateDateUTC(a.getTime());
+			ConfigEntrada.setCreateUser("system");
+			ConfigEntrada.setModifyUser("system");
+			ConfigEntrada.setProcessId(1);
+			ConfigEntrada.setModelAction(action);
 	
-			return configentrada;
+			return ConfigEntrada;
 		}
 
 	
 	public ConfigFiscal insertConfigFiscal(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
-			ConfigFiscal configfiscal = new ConfigFiscal();
+			ConfigFiscal ConfigFiscal = new ConfigFiscal();
 			Date a = new Date();
-			configfiscal.setId(100);
-			configfiscal.setPrincAtividade(new ArrayList<undefined>());
-			configfiscal.setRegime(new ArrayList<undefined>());
-			configfiscal.setAliqSimples(new Double(1.99));
-			configfiscal.setParentId(id);
-			configfiscal.setEmprId(1);
-			configfiscal.setModifyDateUTC(a.getTime());
-			configfiscal.setCreateDateUTC(a.getTime());
-			configfiscal.setCreateUser("system");
-			configfiscal.setModifyUser("system");
-			configfiscal.setProcessId(1);
-			configfiscal.setModelAction(action);
+			ConfigFiscal.setId(100);
+			ConfigFiscal.setPrincAtividade(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigFiscal.setRegime(new Regime());
+			ConfigFiscal.setAliqSimples(new Double(1.99));
+			ConfigFiscal.setParentId(id);
+			ConfigFiscal.setEmprId(1);
+			ConfigFiscal.setModifyDateUTC(a.getTime());
+			ConfigFiscal.setCreateDateUTC(a.getTime());
+			ConfigFiscal.setCreateUser("system");
+			ConfigFiscal.setModifyUser("system");
+			ConfigFiscal.setProcessId(1);
+			ConfigFiscal.setModelAction(action);
 	
-			return configfiscal;
+			return ConfigFiscal;
 		}
 
 	
 	public ConfigAlertas insertConfigAlertas(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
-			ConfigAlertas configalertas = new ConfigAlertas();
+			ConfigAlertas ConfigAlertas = new ConfigAlertas();
 			Date a = new Date();
-			configalertas.setId(100);
-			configalertas.setEstoqMin(new ArrayList<undefined>());
-			configalertas.setEstoqMax(new ArrayList<undefined>());
-			configalertas.setErroNFe(new ArrayList<undefined>());
-			configalertas.setPdCompra(new ArrayList<undefined>());
-			configalertas.setParentId(id);
-			configalertas.setEmprId(1);
-			configalertas.setModifyDateUTC(a.getTime());
-			configalertas.setCreateDateUTC(a.getTime());
-			configalertas.setCreateUser("system");
-			configalertas.setModifyUser("system");
-			configalertas.setProcessId(1);
-			configalertas.setModelAction(action);
+			ConfigAlertas.setId(100);
+			ConfigAlertas.setEstoqMin(Boolean.FALSE);
+			ConfigAlertas.setEstoqMax(Boolean.FALSE);
+			ConfigAlertas.setErroNFe(Boolean.FALSE);
+			ConfigAlertas.setPdCompra(Boolean.FALSE);
+			ConfigAlertas.setParentId(id);
+			ConfigAlertas.setEmprId(1);
+			ConfigAlertas.setModifyDateUTC(a.getTime());
+			ConfigAlertas.setCreateDateUTC(a.getTime());
+			ConfigAlertas.setCreateUser("system");
+			ConfigAlertas.setModifyUser("system");
+			ConfigAlertas.setProcessId(1);
+			ConfigAlertas.setModelAction(action);
 	
-			return configalertas;
+			return ConfigAlertas;
 		}
 
 	
 	public ConfigGeral insertConfigGeral(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
-			ConfigGeral configgeral = new ConfigGeral();
+			ConfigGeral ConfigGeral = new ConfigGeral();
 			Date a = new Date();
-			configgeral.setId(100);
-			configgeral.setFusoHorario(100);
-			configgeral.setCasasDecimais(100);
-			configgeral.setDiasCartaCobr(100);
-			configgeral.setInfPosicionarMouse(new ArrayList<undefined>());
-			configgeral.setCnpjCPFUnico(new ArrayList<undefined>());
-			configgeral.setImpCodPersonalizado(new ArrayList<undefined>());
-			configgeral.setLogListRelImp(new ArrayList<undefined>());
-			configgeral.setObsProdFinProd(new ArrayList<undefined>());
-			configgeral.setParentId(id);
-			configgeral.setEmprId(1);
-			configgeral.setModifyDateUTC(a.getTime());
-			configgeral.setCreateDateUTC(a.getTime());
-			configgeral.setCreateUser("system");
-			configgeral.setModifyUser("system");
-			configgeral.setProcessId(1);
-			configgeral.setModelAction(action);
+			ConfigGeral.setId(100);
+			ConfigGeral.setFusoHorario(100);
+			ConfigGeral.setCasasDecimais(100);
+			ConfigGeral.setDiasCartaCobr(100);
+			ConfigGeral.setInfPosicionarMouse(Boolean.FALSE);
+			ConfigGeral.setCnpjCPFUnico(Boolean.FALSE);
+			ConfigGeral.setImpCodPersonalizado(Boolean.FALSE);
+			ConfigGeral.setLogListRelImp(Boolean.FALSE);
+			ConfigGeral.setObsProdFinProd(Boolean.FALSE);
+			ConfigGeral.setParentId(id);
+			ConfigGeral.setEmprId(1);
+			ConfigGeral.setModifyDateUTC(a.getTime());
+			ConfigGeral.setCreateDateUTC(a.getTime());
+			ConfigGeral.setCreateUser("system");
+			ConfigGeral.setModifyUser("system");
+			ConfigGeral.setProcessId(1);
+			ConfigGeral.setModelAction(action);
 	
-			return configgeral;
+			return ConfigGeral;
 		}
 
 	
 	public ConfigProduto insertConfigProduto(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
-			ConfigProduto configproduto = new ConfigProduto();
+			ConfigProduto ConfigProduto = new ConfigProduto();
 			Date a = new Date();
-			configproduto.setId(100);
-			configproduto.setCfop(new ArrayList<undefined>());
-			configproduto.setIcmsSitTrib(new ArrayList<undefined>());
-			configproduto.setIcmsOrigem(new ArrayList<undefined>());
-			configproduto.setIcmsModalidadeBC(new ArrayList<undefined>());
-			configproduto.setIcmsRedBaseCalc(new Double(1.99));
-			configproduto.setIcmsAliq(new Double(1.99));
-			configproduto.setIcmsMotDesoneracao(new ArrayList<undefined>());
-			configproduto.setIcmsModBCST(new ArrayList<undefined>());
-			configproduto.setIcmsMargValAdic(new Double(1.99));
-			configproduto.setIcmsRedBaseCalcST(new Double(1.99));
-			configproduto.setIcmsPrecoUnitPautaST(new Double(1.99));
-			configproduto.setIcmsAliqST(new Double(1.99));
-			configproduto.setIpiSitTrib(new ArrayList<undefined>());
-			configproduto.setIpiClasCigarroBebida(new Double(1.99));
-			configproduto.setIpiCNPJProd("NATIVE INSERT UPDATE");
-			configproduto.setIpiCodSeloCont("NATIVE INSERT UPDATE");
-			configproduto.setIpiQtdSelo(new Double(1.99));
-			configproduto.setIpiCodEnquad(100);
-			configproduto.setIpiTipCalc(new ArrayList<undefined>());
-			configproduto.setIpiAliq(new Double(1.99));
-			configproduto.setPisSitTrib(new ArrayList<undefined>());
-			configproduto.setPisAliq(new Double(1.99));
-			configproduto.setPisValUnidtrib(new Double(1.99));
-			configproduto.setPistipoCalcSubstTrib(new ArrayList<undefined>());
-			configproduto.setPisAliqST(new Double(1.99));
-			configproduto.setPisValorAliqST(new Double(1.99));
-			configproduto.setCofinsSubstTrib(new ArrayList<undefined>());
-			configproduto.setCofinsAliq(new Double(1.99));
-			configproduto.setCofinsValorAliq(new Double(1.99));
-			configproduto.setCofinsTipoCalcSubstTrib(new ArrayList<undefined>());
-			configproduto.setCofinsAliqST(new Double(1.99));
-			configproduto.setCofinsValorAliqST(new Double(1.99));
-			configproduto.setParentId(id);
-			configproduto.setEmprId(1);
-			configproduto.setModifyDateUTC(a.getTime());
-			configproduto.setCreateDateUTC(a.getTime());
-			configproduto.setCreateUser("system");
-			configproduto.setModifyUser("system");
-			configproduto.setProcessId(1);
-			configproduto.setModelAction(action);
+			ConfigProduto.setId(100);
+			ConfigProduto.setCfop(new Cfop());
+			ConfigProduto.setIcmsSitTrib(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setIcmsOrigem(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setIcmsModalidadeBC(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setIcmsRedBaseCalc(new Double(1.99));
+			ConfigProduto.setIcmsAliq(new Double(1.99));
+			ConfigProduto.setIcmsMotDesoneracao(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setIcmsModBCST(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setIcmsMargValAdic(new Double(1.99));
+			ConfigProduto.setIcmsRedBaseCalcST(new Double(1.99));
+			ConfigProduto.setIcmsPrecoUnitPautaST(new Double(1.99));
+			ConfigProduto.setIcmsAliqST(new Double(1.99));
+			ConfigProduto.setIpiSitTrib(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setIpiClasCigarroBebida(new Double(1.99));
+			ConfigProduto.setIpiCNPJProd("NATIVE INSERT UPDATE");
+			ConfigProduto.setIpiCodSeloCont("NATIVE INSERT UPDATE");
+			ConfigProduto.setIpiQtdSelo(new Double(1.99));
+			ConfigProduto.setIpiCodEnquad(100);
+			ConfigProduto.setIpiTipCalc(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setIpiAliq(new Double(1.99));
+			ConfigProduto.setPisSitTrib(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setPisAliq(new Double(1.99));
+			ConfigProduto.setPisValUnidtrib(new Double(1.99));
+			ConfigProduto.setPistipoCalcSubstTrib(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setPisAliqST(new Double(1.99));
+			ConfigProduto.setPisValorAliqST(new Double(1.99));
+			ConfigProduto.setCofinsSubstTrib(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setCofinsAliq(new Double(1.99));
+			ConfigProduto.setCofinsValorAliq(new Double(1.99));
+			ConfigProduto.setCofinsTipoCalcSubstTrib(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setCofinsAliqST(new Double(1.99));
+			ConfigProduto.setCofinsValorAliqST(new Double(1.99));
+			ConfigProduto.setParentId(id);
+			ConfigProduto.setEmprId(1);
+			ConfigProduto.setModifyDateUTC(a.getTime());
+			ConfigProduto.setCreateDateUTC(a.getTime());
+			ConfigProduto.setCreateUser("system");
+			ConfigProduto.setModifyUser("system");
+			ConfigProduto.setProcessId(1);
+			ConfigProduto.setModelAction(action);
 	
-			return configproduto;
+			return ConfigProduto;
 		}
 
 	
 	public ConfigSMTP insertConfigSMTP(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
-			ConfigSMTP configsmtp = new ConfigSMTP();
+			ConfigSMTP ConfigSMTP = new ConfigSMTP();
 			Date a = new Date();
-			configsmtp.setId(100);
-			configsmtp.setServSMTP("NATIVE INSERT UPDATE");
-			configsmtp.setPorta("NATIVE INSERT UPDATE");
-			configsmtp.setEndEmail("NATIVE INSERT UPDATE");
-			configsmtp.setUsuario("NATIVE INSERT UPDATE");
-			configsmtp.setSenha("NATIVE INSERT UPDATE");
-			configsmtp.setSeguranca(new ArrayList<undefined>());
-			configsmtp.setParentId(id);
-			configsmtp.setEmprId(1);
-			configsmtp.setModifyDateUTC(a.getTime());
-			configsmtp.setCreateDateUTC(a.getTime());
-			configsmtp.setCreateUser("system");
-			configsmtp.setModifyUser("system");
-			configsmtp.setProcessId(1);
-			configsmtp.setModelAction(action);
+			ConfigSMTP.setId(100);
+			ConfigSMTP.setServSMTP("NATIVE INSERT UPDATE");
+			ConfigSMTP.setPorta("NATIVE INSERT UPDATE");
+			ConfigSMTP.setEndEmail("NATIVE INSERT UPDATE");
+			ConfigSMTP.setUsuario("NATIVE INSERT UPDATE");
+			ConfigSMTP.setSenha("NATIVE INSERT UPDATE");
+			ConfigSMTP.setSeguranca(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigSMTP.setParentId(id);
+			ConfigSMTP.setEmprId(1);
+			ConfigSMTP.setModifyDateUTC(a.getTime());
+			ConfigSMTP.setCreateDateUTC(a.getTime());
+			ConfigSMTP.setCreateUser("system");
+			ConfigSMTP.setModifyUser("system");
+			ConfigSMTP.setProcessId(1);
+			ConfigSMTP.setModelAction(action);
 	
-			return configsmtp;
+			return ConfigSMTP;
 		}
 
 	
 	public ConfiguracaoNFe insertConfiguracaoNFe(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
-			ConfiguracaoNFe configuracaonfe = new ConfiguracaoNFe();
+			ConfiguracaoNFe ConfiguracaoNFe = new ConfiguracaoNFe();
 			Date a = new Date();
-			configuracaonfe.setId(100);
-			configuracaonfe.setPresCompr(new ArrayList<undefined>());
-			configuracaonfe.setDestConsFinal(new ArrayList<undefined>());
-			configuracaonfe.setPreencherDataHora(new ArrayList<undefined>());
-			configuracaonfe.setIcmsPadrao(new Double(1.99));
-			configuracaonfe.setIpiPadrao(new Double(1.99));
-			configuracaonfe.setPisPadrao(new Double(1.99));
-			configuracaonfe.setCofinsPadrao(new Double(1.99));
-			configuracaonfe.setAmbienteEnvio(new ArrayList<undefined>());
-			configuracaonfe.setServMsmNota(new Double(1.99));
-			configuracaonfe.setSerieEnvio("NATIVE INSERT UPDATE");
-			configuracaonfe.setAnexarXmlEmail(new ArrayList<undefined>());
-			configuracaonfe.setIdCSC("NATIVE INSERT UPDATE");
-			configuracaonfe.setCSC("NATIVE INSERT UPDATE");
-			configuracaonfe.setInformacaoAdd("NATIVE INSERT UPDATE");
-			configuracaonfe.setCertificado("NATIVE INSERT UPDATE");
-			configuracaonfe.setSenha("NATIVE INSERT UPDATE");
-			configuracaonfe.setSalvarSenha(new ArrayList<undefined>());
-			configuracaonfe.setCfopPadrao(new ArrayList<undefined>());
-			configuracaonfe.setConfSMTP(new ArrayList<undefined>());
-			configuracaonfe.setParentId(id);
-			configuracaonfe.setEmprId(1);
-			configuracaonfe.setModifyDateUTC(a.getTime());
-			configuracaonfe.setCreateDateUTC(a.getTime());
-			configuracaonfe.setCreateUser("system");
-			configuracaonfe.setModifyUser("system");
-			configuracaonfe.setProcessId(1);
-			configuracaonfe.setModelAction(action);
+			ConfiguracaoNFe.setId(100);
+			ConfiguracaoNFe.setPresCompr(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfiguracaoNFe.setDestConsFinal(Boolean.FALSE);
+			ConfiguracaoNFe.setPreencherDataHora(Boolean.FALSE);
+			ConfiguracaoNFe.setIcmsPadrao(new Double(1.99));
+			ConfiguracaoNFe.setIpiPadrao(new Double(1.99));
+			ConfiguracaoNFe.setPisPadrao(new Double(1.99));
+			ConfiguracaoNFe.setCofinsPadrao(new Double(1.99));
+			ConfiguracaoNFe.setAmbienteEnvio(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfiguracaoNFe.setServMsmNota(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfiguracaoNFe.setSerieEnvio("NATIVE INSERT UPDATE");
+			ConfiguracaoNFe.setAnexarXmlEmail(Boolean.FALSE);
+			ConfiguracaoNFe.setIdCSC("NATIVE INSERT UPDATE");
+			ConfiguracaoNFe.setcSC("NATIVE INSERT UPDATE");
+			ConfiguracaoNFe.setInformacaoAdd("NATIVE INSERT UPDATE");
+			ConfiguracaoNFe.setCertificado("NATIVE INSERT UPDATE");
+			ConfiguracaoNFe.setSenha("NATIVE INSERT UPDATE");
+			ConfiguracaoNFe.setSalvarSenha(Boolean.FALSE);
+			ConfiguracaoNFe.setCfopPadrao(new Cfop());
+			ConfiguracaoNFe.setConfSMTP(new ConfigSMTP());
+			ConfiguracaoNFe.setParentId(id);
+			ConfiguracaoNFe.setEmprId(1);
+			ConfiguracaoNFe.setModifyDateUTC(a.getTime());
+			ConfiguracaoNFe.setCreateDateUTC(a.getTime());
+			ConfiguracaoNFe.setCreateUser("system");
+			ConfiguracaoNFe.setModifyUser("system");
+			ConfiguracaoNFe.setProcessId(1);
+			ConfiguracaoNFe.setModelAction(action);
 	
-			return configuracaonfe;
+			return ConfiguracaoNFe;
 		}
 
 	
 	public ConfigVendas insertConfigVendas(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
-			ConfigVendas configvendas = new ConfigVendas();
+			ConfigVendas ConfigVendas = new ConfigVendas();
 			Date a = new Date();
-			configvendas.setId(100);
-			configvendas.setDescontoMaxVenda(new Double(1.99));
-			configvendas.setObservacao(new ArrayList<undefined>());
-			configvendas.setImprSegVia(new ArrayList<undefined>());
-			configvendas.setImprAssinatura(new ArrayList<undefined>());
-			configvendas.setImprResumoFinanc(new ArrayList<undefined>());
-			configvendas.setAtuaPrecoClonar(new ArrayList<undefined>());
-			configvendas.setImprColUnidade(new ArrayList<undefined>());
-			configvendas.setBloquearvendProdSemEstoq(new ArrayList<undefined>());
-			configvendas.setAddDespCalcImposto(new ArrayList<undefined>());
-			configvendas.setRetSubstTribICMS(new ArrayList<undefined>());
-			configvendas.setParentId(id);
-			configvendas.setEmprId(1);
-			configvendas.setModifyDateUTC(a.getTime());
-			configvendas.setCreateDateUTC(a.getTime());
-			configvendas.setCreateUser("system");
-			configvendas.setModifyUser("system");
-			configvendas.setProcessId(1);
-			configvendas.setModelAction(action);
+			ConfigVendas.setId(100);
+			ConfigVendas.setDescontoMaxVenda(new Double(1.99));
+			ConfigVendas.setObservacao("observação");
+			ConfigVendas.setImprSegVia(Boolean.FALSE);
+			ConfigVendas.setImprAssinatura(Boolean.FALSE);
+			ConfigVendas.setImprResumoFinanc(Boolean.FALSE);
+			ConfigVendas.setAtuaPrecoClonar(Boolean.FALSE);
+			ConfigVendas.setImprColUnidade(Boolean.FALSE);
+			ConfigVendas.setBloquearvendProdSemEstoq(Boolean.FALSE);
+			ConfigVendas.setAddDespCalcImposto(Boolean.FALSE);
+			ConfigVendas.setRetSubstTribICMS(Boolean.FALSE);
+			ConfigVendas.setParentId(id);
+			ConfigVendas.setEmprId(1);
+			ConfigVendas.setModifyDateUTC(a.getTime());
+			ConfigVendas.setCreateDateUTC(a.getTime());
+			ConfigVendas.setCreateUser("system");
+			ConfigVendas.setModifyUser("system");
+			ConfigVendas.setProcessId(1);
+			ConfigVendas.setModelAction(action);
 	
-			return configvendas;
+			return ConfigVendas;
 		}
+	
+	public DoisValores insertDoisValor(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		DoisValores ConfigVendas = new DoisValores();
+		Date a = new Date();
+		ConfigVendas.setId(100);
+		ConfigVendas.setNome("teste");
+		ConfigVendas.setDescricao("Description");
+		ConfigVendas.setParentId(id);
+		ConfigVendas.setEmprId(1);
+		ConfigVendas.setModifyDateUTC(a.getTime());
+		ConfigVendas.setCreateDateUTC(a.getTime());
+		ConfigVendas.setCreateUser("system");
+		ConfigVendas.setModifyUser("system");
+		ConfigVendas.setProcessId(1);
+		ConfigVendas.setModelAction(action);
+
+		return ConfigVendas;
+	}
 
 
 }

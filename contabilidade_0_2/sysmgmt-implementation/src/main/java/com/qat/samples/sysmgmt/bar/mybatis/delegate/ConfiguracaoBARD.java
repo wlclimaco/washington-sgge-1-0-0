@@ -9,13 +9,12 @@ import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Configuracao.IConfiguracaoBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.entidade.model.Configuracao;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.Configuracao;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
@@ -40,29 +39,20 @@ public final class ConfiguracaoBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainConfiguracaoAssociations(List<Configuracao> configuracaoList,
+	public static Integer maintainConfiguracaoAssociations(Configuracao configuracao,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IConfiguracaoBAR configuracaoDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(configuracaoList))
-		{
-			return 0;
-		}
-		// For Each Contact...
-		for (Configuracao configuracao : configuracaoList)
-		{
+	
 			// Make sure we set the parent key
 			configuracao.setParentId(parentId);
 			configuracao.setTabelaEnum(tabelaEnum);
 			configuracao.setProcessId(processId);
 
-			if (ValidationUtil.isNull(configuracao.getModelAction()))
-			{
-				continue;
-			}
+
 			switch (configuracao.getModelAction())
 			{
 				case INSERT:
@@ -103,7 +93,7 @@ public final class ConfiguracaoBARD extends SqlSessionDaoSupport
 
 					break;
 			}
-		}
+	
 		if(count == true ){
 			return 1;
 		}else{

@@ -9,13 +9,12 @@ import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.bar.ConfiguracaoNFe.IConfiguracaoNFeBAR;
+import com.qat.samples.sysmgmt.bar.Configuracao.IConfiguracaoBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.entidade.model.ConfiguracaoNFe;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.ConfiguracaoNFe;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
@@ -40,29 +39,18 @@ public final class ConfiguracaoNFeBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainConfiguracaoNFeAssociations(List<ConfiguracaoNFe> configuracaonfeList,
+	public static Integer maintainConfiguracaoNFeAssociations(ConfiguracaoNFe configuracaonfe,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IConfiguracaoNFeBAR configuracaonfeDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
+			TabelaEnum tabelaEnum, IConfiguracaoBAR configuracaonfeDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
-		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(configuracaonfeList))
-		{
-			return 0;
-		}
-		// For Each Contact...
-		for (ConfiguracaoNFe configuracaonfe : configuracaonfeList)
-		{
-			// Make sure we set the parent key
+// Make sure we set the parent key
 			configuracaonfe.setParentId(parentId);
 			configuracaonfe.setTabelaEnum(tabelaEnum);
 			configuracaonfe.setProcessId(processId);
 
-			if (ValidationUtil.isNull(configuracaonfe.getModelAction()))
-			{
-				continue;
-			}
+
 			switch (configuracaonfe.getModelAction())
 			{
 				case INSERT:
@@ -103,7 +91,7 @@ public final class ConfiguracaoNFeBARD extends SqlSessionDaoSupport
 
 					break;
 			}
-		}
+	
 		if(count == true ){
 			return 1;
 		}else{

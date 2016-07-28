@@ -31,6 +31,17 @@ import com.qat.samples.sysmgmt.cfop.model.CfopTypeEnum;
 import com.qat.samples.sysmgmt.cnae.model.Cnae;
 import com.qat.samples.sysmgmt.cnae.model.CnaeEmpresa;
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
+import com.qat.samples.sysmgmt.entidade.model.Boleto;
+import com.qat.samples.sysmgmt.entidade.model.ConfigAlertas;
+import com.qat.samples.sysmgmt.entidade.model.ConfigCarne;
+import com.qat.samples.sysmgmt.entidade.model.ConfigEntrada;
+import com.qat.samples.sysmgmt.entidade.model.ConfigFiscal;
+import com.qat.samples.sysmgmt.entidade.model.ConfigGeral;
+import com.qat.samples.sysmgmt.entidade.model.ConfigProduto;
+import com.qat.samples.sysmgmt.entidade.model.ConfigSMTP;
+import com.qat.samples.sysmgmt.entidade.model.ConfigVendas;
+import com.qat.samples.sysmgmt.entidade.model.Configuracao;
+import com.qat.samples.sysmgmt.entidade.model.ConfiguracaoNFe;
 import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.EntidadeTypeEnum;
@@ -43,9 +54,9 @@ import com.qat.samples.sysmgmt.pessoa.model.Socio;
 import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.site.model.ServicoAndPlano;
 import com.qat.samples.sysmgmt.util.model.Cidade;
-import com.qat.samples.sysmgmt.util.model.Configuracao;
 import com.qat.samples.sysmgmt.util.model.Documento;
 import com.qat.samples.sysmgmt.util.model.DocumentoTypeEnum;
+import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.EmailTypeEnum;
 import com.qat.samples.sysmgmt.util.model.Endereco;
@@ -884,7 +895,7 @@ public IEmpresaBAR getEmpresaBAR()
 			funcionario.setRegime(insertRegime(action));
 			funcionario.setEntidadeId(1);
 			funcionario.setEntidadeEnum(EntidadeTypeEnum.EMPRESA);
-			funcionario.setConfiguracao(new Configuracao());
+			funcionario.setConfiguracao(insertConfiguracao(id,TabelaEnum.EMPRESA,action));
 			funcionario.setCnaes(cnaeList(action));
 			funcionario.setUsuarios(insertUsuario(action));
 			funcionario.setProcessId(1);
@@ -904,7 +915,7 @@ public IEmpresaBAR getEmpresaBAR()
 			return funcionario;
 		}
 
-		public Filial insertFilial(PersistenceActionEnum action)
+		public Filial insertFilial(Integer id,PersistenceActionEnum action)
 		{
 			Filial funcionario = new Filial();
 			Date a = new Date();
@@ -914,7 +925,7 @@ public IEmpresaBAR getEmpresaBAR()
 			funcionario.setRegime(insertRegime(action));
 			funcionario.setEntidadeId(1);
 			funcionario.setEntidadeEnum(EntidadeTypeEnum.FILIAL);
-			funcionario.setConfiguracao(new Configuracao());
+			funcionario.setConfiguracao(insertConfiguracao(id,TabelaEnum.EMPRESA,action));
 			funcionario.setCnaes(cnaeList(action));
 			funcionario.setProcessId(1);
 			funcionario.setDocumentos(documentoList(action));
@@ -927,7 +938,7 @@ public IEmpresaBAR getEmpresaBAR()
 			return funcionario;
 		}
 
-		public Deposito insertDeposito(PersistenceActionEnum action)
+		public Deposito insertDeposito(Integer id,PersistenceActionEnum action)
 		{
 			Deposito funcionario = new Deposito();
 			Date a = new Date();
@@ -937,7 +948,7 @@ public IEmpresaBAR getEmpresaBAR()
 			funcionario.setRegime(insertRegime(action));
 			funcionario.setEntidadeId(1);
 			funcionario.setEntidadeEnum(EntidadeTypeEnum.DEPOSITO);
-			funcionario.setConfiguracao(new Configuracao());
+			funcionario.setConfiguracao(insertConfiguracao(id,TabelaEnum.EMPRESA,action));
 			funcionario.setCnaes(cnaeList(action));
 			funcionario.setProcessId(1);
 			funcionario.setDocumentos(documentoList(action));
@@ -1010,5 +1021,327 @@ public IEmpresaBAR getEmpresaBAR()
 
 			return plano;
 		}
+		
+		public Configuracao insertConfiguracao(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			Configuracao configuracao = new Configuracao();
+			Date a = new Date();
+			configuracao.setId(100);
+			configuracao.setConfGeral(insertConfigGeral(id,TabelaEnum.BOLETO,action));
+			configuracao.setConfNFe(insertConfiguracaoNFe(id,TabelaEnum.BOLETO,action));
+			configuracao.setConfFiscal(insertConfigFiscal(id,TabelaEnum.BOLETO,action));
+			configuracao.setConfProd(insertConfigProduto(id,TabelaEnum.BOLETO,action));
+			configuracao.setConfVendas(insertConfigVendas(id,TabelaEnum.BOLETO,action));
+			configuracao.setConfCMTP(insertConfigSMTP(id,TabelaEnum.BOLETO,action));
+			configuracao.setConfEntrada(insertConfigEntrada(id,TabelaEnum.BOLETO,action));
+			configuracao.setConfCarne(insertConfigCarne(id,TabelaEnum.BOLETO,action));
+			configuracao.setBoletoList(new ArrayList<Boleto>());
+			configuracao.getBoletoList().add(insertBoleto(id,TabelaEnum.BOLETO,action));
+			configuracao.setParentId(id);
+			configuracao.setEmprId(1);
+			configuracao.setModifyDateUTC(a.getTime());
+			configuracao.setCreateDateUTC(a.getTime());
+			configuracao.setCreateUser("system");
+			configuracao.setModifyUser("system");
+			configuracao.setProcessId(1);
+			configuracao.setModelAction(action);
+	
+			return configuracao;
+		}
+
+	
+	public Boleto insertBoleto(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			Boleto boleto = new Boleto();
+			Date a = new Date();
+			boleto.setId(100);
+			boleto.setAtivarBolOnLine(Boolean.FALSE);
+			boleto.setTipoBoleto(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			boleto.setAgencia(100);
+			boleto.setCedente(100);
+			boleto.setJuros(new Double(1.99));
+			boleto.setTipoCalcMora(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			boleto.setMora(new Double(1.99));
+			boleto.setInstrucoes("NATIVE INSERT UPDATE");
+			boleto.setDemonstrativo("NATIVE INSERT UPDATE");
+			boleto.setImpJuros(Boolean.FALSE);
+			boleto.setParentId(id);
+			boleto.setEmprId(1);
+			boleto.setModifyDateUTC(a.getTime());
+			boleto.setCreateDateUTC(a.getTime());
+			boleto.setCreateUser("system");
+			boleto.setModifyUser("system");
+			boleto.setProcessId(1);
+			boleto.setModelAction(action);
+	
+			return boleto;
+		}
+
+	
+	public ConfigCarne insertConfigCarne(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			ConfigCarne ConfigCarne = new ConfigCarne();
+			Date a = new Date();
+			ConfigCarne.setId(100);
+			ConfigCarne.setCarneBotelo(Boolean.FALSE);
+			ConfigCarne.setCarneNormal(Boolean.FALSE);
+			ConfigCarne.setParentId(id);
+			ConfigCarne.setEmprId(1);
+			ConfigCarne.setModifyDateUTC(a.getTime());
+			ConfigCarne.setCreateDateUTC(a.getTime());
+			ConfigCarne.setCreateUser("system");
+			ConfigCarne.setModifyUser("system");
+			ConfigCarne.setProcessId(1);
+			ConfigCarne.setModelAction(action);
+	
+			return ConfigCarne;
+		}
+
+	
+	public ConfigEntrada insertConfigEntrada(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			ConfigEntrada ConfigEntrada = new ConfigEntrada();
+			Date a = new Date();
+			ConfigEntrada.setId(100);
+			ConfigEntrada.setValorTotalFixo(Boolean.FALSE);
+			ConfigEntrada.setManterPrecoVendaProd(Boolean.FALSE);
+			ConfigEntrada.setParentId(id);
+			ConfigEntrada.setEmprId(1);
+			ConfigEntrada.setModifyDateUTC(a.getTime());
+			ConfigEntrada.setCreateDateUTC(a.getTime());
+			ConfigEntrada.setCreateUser("system");
+			ConfigEntrada.setModifyUser("system");
+			ConfigEntrada.setProcessId(1);
+			ConfigEntrada.setModelAction(action);
+	
+			return ConfigEntrada;
+		}
+
+	
+	public ConfigFiscal insertConfigFiscal(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			ConfigFiscal ConfigFiscal = new ConfigFiscal();
+			Date a = new Date();
+			ConfigFiscal.setId(100);
+			ConfigFiscal.setPrincAtividade(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigFiscal.setRegime(new Regime());
+			ConfigFiscal.setAliqSimples(new Double(1.99));
+			ConfigFiscal.setParentId(id);
+			ConfigFiscal.setEmprId(1);
+			ConfigFiscal.setModifyDateUTC(a.getTime());
+			ConfigFiscal.setCreateDateUTC(a.getTime());
+			ConfigFiscal.setCreateUser("system");
+			ConfigFiscal.setModifyUser("system");
+			ConfigFiscal.setProcessId(1);
+			ConfigFiscal.setModelAction(action);
+	
+			return ConfigFiscal;
+		}
+
+	
+	public ConfigAlertas insertConfigAlertas(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			ConfigAlertas ConfigAlertas = new ConfigAlertas();
+			Date a = new Date();
+			ConfigAlertas.setId(100);
+			ConfigAlertas.setEstoqMin(Boolean.FALSE);
+			ConfigAlertas.setEstoqMax(Boolean.FALSE);
+			ConfigAlertas.setErroNFe(Boolean.FALSE);
+			ConfigAlertas.setPdCompra(Boolean.FALSE);
+			ConfigAlertas.setParentId(id);
+			ConfigAlertas.setEmprId(1);
+			ConfigAlertas.setModifyDateUTC(a.getTime());
+			ConfigAlertas.setCreateDateUTC(a.getTime());
+			ConfigAlertas.setCreateUser("system");
+			ConfigAlertas.setModifyUser("system");
+			ConfigAlertas.setProcessId(1);
+			ConfigAlertas.setModelAction(action);
+	
+			return ConfigAlertas;
+		}
+
+	
+	public ConfigGeral insertConfigGeral(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			ConfigGeral ConfigGeral = new ConfigGeral();
+			Date a = new Date();
+			ConfigGeral.setId(100);
+			ConfigGeral.setFusoHorario(100);
+			ConfigGeral.setCasasDecimais(100);
+			ConfigGeral.setDiasCartaCobr(100);
+			ConfigGeral.setInfPosicionarMouse(Boolean.FALSE);
+			ConfigGeral.setCnpjCPFUnico(Boolean.FALSE);
+			ConfigGeral.setImpCodPersonalizado(Boolean.FALSE);
+			ConfigGeral.setLogListRelImp(Boolean.FALSE);
+			ConfigGeral.setObsProdFinProd(Boolean.FALSE);
+			ConfigGeral.setParentId(id);
+			ConfigGeral.setEmprId(1);
+			ConfigGeral.setModifyDateUTC(a.getTime());
+			ConfigGeral.setCreateDateUTC(a.getTime());
+			ConfigGeral.setCreateUser("system");
+			ConfigGeral.setModifyUser("system");
+			ConfigGeral.setProcessId(1);
+			ConfigGeral.setModelAction(action);
+	
+			return ConfigGeral;
+		}
+
+	
+	public ConfigProduto insertConfigProduto(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			ConfigProduto ConfigProduto = new ConfigProduto();
+			Date a = new Date();
+			ConfigProduto.setId(100);
+			ConfigProduto.setCfop(new Cfop());
+			ConfigProduto.setIcmsSitTrib(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setIcmsOrigem(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setIcmsModalidadeBC(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setIcmsRedBaseCalc(new Double(1.99));
+			ConfigProduto.setIcmsAliq(new Double(1.99));
+			ConfigProduto.setIcmsMotDesoneracao(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setIcmsModBCST(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setIcmsMargValAdic(new Double(1.99));
+			ConfigProduto.setIcmsRedBaseCalcST(new Double(1.99));
+			ConfigProduto.setIcmsPrecoUnitPautaST(new Double(1.99));
+			ConfigProduto.setIcmsAliqST(new Double(1.99));
+			ConfigProduto.setIpiSitTrib(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setIpiClasCigarroBebida(new Double(1.99));
+			ConfigProduto.setIpiCNPJProd("NATIVE INSERT UPDATE");
+			ConfigProduto.setIpiCodSeloCont("NATIVE INSERT UPDATE");
+			ConfigProduto.setIpiQtdSelo(new Double(1.99));
+			ConfigProduto.setIpiCodEnquad(100);
+			ConfigProduto.setIpiTipCalc(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setIpiAliq(new Double(1.99));
+			ConfigProduto.setPisSitTrib(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setPisAliq(new Double(1.99));
+			ConfigProduto.setPisValUnidtrib(new Double(1.99));
+			ConfigProduto.setPistipoCalcSubstTrib(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setPisAliqST(new Double(1.99));
+			ConfigProduto.setPisValorAliqST(new Double(1.99));
+			ConfigProduto.setCofinsSubstTrib(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setCofinsAliq(new Double(1.99));
+			ConfigProduto.setCofinsValorAliq(new Double(1.99));
+			ConfigProduto.setCofinsTipoCalcSubstTrib(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigProduto.setCofinsAliqST(new Double(1.99));
+			ConfigProduto.setCofinsValorAliqST(new Double(1.99));
+			ConfigProduto.setParentId(id);
+			ConfigProduto.setEmprId(1);
+			ConfigProduto.setModifyDateUTC(a.getTime());
+			ConfigProduto.setCreateDateUTC(a.getTime());
+			ConfigProduto.setCreateUser("system");
+			ConfigProduto.setModifyUser("system");
+			ConfigProduto.setProcessId(1);
+			ConfigProduto.setModelAction(action);
+	
+			return ConfigProduto;
+		}
+
+	
+	public ConfigSMTP insertConfigSMTP(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			ConfigSMTP ConfigSMTP = new ConfigSMTP();
+			Date a = new Date();
+			ConfigSMTP.setId(100);
+			ConfigSMTP.setServSMTP("NATIVE INSERT UPDATE");
+			ConfigSMTP.setPorta("NATIVE INSERT UPDATE");
+			ConfigSMTP.setEndEmail("NATIVE INSERT UPDATE");
+			ConfigSMTP.setUsuario("NATIVE INSERT UPDATE");
+			ConfigSMTP.setSenha("NATIVE INSERT UPDATE");
+			ConfigSMTP.setSeguranca(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfigSMTP.setParentId(id);
+			ConfigSMTP.setEmprId(1);
+			ConfigSMTP.setModifyDateUTC(a.getTime());
+			ConfigSMTP.setCreateDateUTC(a.getTime());
+			ConfigSMTP.setCreateUser("system");
+			ConfigSMTP.setModifyUser("system");
+			ConfigSMTP.setProcessId(1);
+			ConfigSMTP.setModelAction(action);
+	
+			return ConfigSMTP;
+		}
+
+	
+	public ConfiguracaoNFe insertConfiguracaoNFe(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			ConfiguracaoNFe ConfiguracaoNFe = new ConfiguracaoNFe();
+			Date a = new Date();
+			ConfiguracaoNFe.setId(100);
+			ConfiguracaoNFe.setPresCompr(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfiguracaoNFe.setDestConsFinal(Boolean.FALSE);
+			ConfiguracaoNFe.setPreencherDataHora(Boolean.FALSE);
+			ConfiguracaoNFe.setIcmsPadrao(new Double(1.99));
+			ConfiguracaoNFe.setIpiPadrao(new Double(1.99));
+			ConfiguracaoNFe.setPisPadrao(new Double(1.99));
+			ConfiguracaoNFe.setCofinsPadrao(new Double(1.99));
+			ConfiguracaoNFe.setAmbienteEnvio(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfiguracaoNFe.setServMsmNota(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			ConfiguracaoNFe.setSerieEnvio("NATIVE INSERT UPDATE");
+			ConfiguracaoNFe.setAnexarXmlEmail(Boolean.FALSE);
+			ConfiguracaoNFe.setIdCSC("NATIVE INSERT UPDATE");
+			ConfiguracaoNFe.setcSC("NATIVE INSERT UPDATE");
+			ConfiguracaoNFe.setInformacaoAdd("NATIVE INSERT UPDATE");
+			ConfiguracaoNFe.setCertificado("NATIVE INSERT UPDATE");
+			ConfiguracaoNFe.setSenha("NATIVE INSERT UPDATE");
+			ConfiguracaoNFe.setSalvarSenha(Boolean.FALSE);
+			ConfiguracaoNFe.setCfopPadrao(new Cfop());
+			ConfiguracaoNFe.setConfSMTP(new ConfigSMTP());
+			ConfiguracaoNFe.setParentId(id);
+			ConfiguracaoNFe.setEmprId(1);
+			ConfiguracaoNFe.setModifyDateUTC(a.getTime());
+			ConfiguracaoNFe.setCreateDateUTC(a.getTime());
+			ConfiguracaoNFe.setCreateUser("system");
+			ConfiguracaoNFe.setModifyUser("system");
+			ConfiguracaoNFe.setProcessId(1);
+			ConfiguracaoNFe.setModelAction(action);
+	
+			return ConfiguracaoNFe;
+		}
+
+	
+	public ConfigVendas insertConfigVendas(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			ConfigVendas ConfigVendas = new ConfigVendas();
+			Date a = new Date();
+			ConfigVendas.setId(100);
+			ConfigVendas.setDescontoMaxVenda(new Double(1.99));
+			ConfigVendas.setObservacao("observação");
+			ConfigVendas.setImprSegVia(Boolean.FALSE);
+			ConfigVendas.setImprAssinatura(Boolean.FALSE);
+			ConfigVendas.setImprResumoFinanc(Boolean.FALSE);
+			ConfigVendas.setAtuaPrecoClonar(Boolean.FALSE);
+			ConfigVendas.setImprColUnidade(Boolean.FALSE);
+			ConfigVendas.setBloquearvendProdSemEstoq(Boolean.FALSE);
+			ConfigVendas.setAddDespCalcImposto(Boolean.FALSE);
+			ConfigVendas.setRetSubstTribICMS(Boolean.FALSE);
+			ConfigVendas.setParentId(id);
+			ConfigVendas.setEmprId(1);
+			ConfigVendas.setModifyDateUTC(a.getTime());
+			ConfigVendas.setCreateDateUTC(a.getTime());
+			ConfigVendas.setCreateUser("system");
+			ConfigVendas.setModifyUser("system");
+			ConfigVendas.setProcessId(1);
+			ConfigVendas.setModelAction(action);
+	
+			return ConfigVendas;
+		}
+	
+	public DoisValores insertDoisValor(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		DoisValores ConfigVendas = new DoisValores();
+		Date a = new Date();
+		ConfigVendas.setId(100);
+		ConfigVendas.setNome("teste");
+		ConfigVendas.setDescricao("Description");
+		ConfigVendas.setParentId(id);
+		ConfigVendas.setEmprId(1);
+		ConfigVendas.setModifyDateUTC(a.getTime());
+		ConfigVendas.setCreateDateUTC(a.getTime());
+		ConfigVendas.setCreateUser("system");
+		ConfigVendas.setModifyUser("system");
+		ConfigVendas.setProcessId(1);
+		ConfigVendas.setModelAction(action);
+
+		return ConfigVendas;
+	}
 
 }

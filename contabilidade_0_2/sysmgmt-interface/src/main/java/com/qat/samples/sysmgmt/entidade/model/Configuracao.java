@@ -114,12 +114,21 @@ public class Configuracao extends ModelCosmeDamiao
 		this.confCarne = confCarne;
 	}
 
+	public ConfiguracaoNFe getConfNFe() {
+		return confNFe;
+	}
+
+	public void setConfNFe(ConfiguracaoNFe confNFe) {
+		this.confNFe = confNFe;
+	}
+
 	@Override
 	public String toString() {
 		return "Configuracao [getId()=" + getId() + ", getBoletoList()=" + getBoletoList() + ", getConfGeral()="
 				+ getConfGeral() + ", getConfFiscal()=" + getConfFiscal() + ", getConfProd()=" + getConfProd()
 				+ ", getConfVendas()=" + getConfVendas() + ", getConfCMTP()=" + getConfCMTP() + ", getConfEntrada()="
-				+ getConfEntrada() + ", getConfCarne()=" + getConfCarne() + ", toString()=" + super.toString() + "]";
+				+ getConfEntrada() + ", getConfCarne()=" + getConfCarne() + ", getConfNFe()=" + getConfNFe()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 

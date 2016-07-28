@@ -18,9 +18,11 @@ public class ConfigAlertas extends ModelCosmeDamiao
 {
 	private Integer id;
 
-	private Boolean carneBotelo;
-	private Boolean carneNormal;
 
+	private Boolean estoqMin;
+	private Boolean estoqMax;
+	private Boolean erroNFe;
+	private Boolean pdCompra;
 
 	public ConfigAlertas()
 	{
@@ -44,28 +46,45 @@ public class ConfigAlertas extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	public Boolean getCarneBotelo() {
-		return carneBotelo;
+	public Boolean getEstoqMin() {
+		return estoqMin;
 	}
 
-	public void setCarneBotelo(Boolean carneBotelo) {
-		this.carneBotelo = carneBotelo;
+	public void setEstoqMin(Boolean estoqMin) {
+		this.estoqMin = estoqMin;
 	}
 
-	public Boolean getCarneNormal() {
-		return carneNormal;
+	public Boolean getEstoqMax() {
+		return estoqMax;
 	}
 
-	public void setCarneNormal(Boolean carneNormal) {
-		this.carneNormal = carneNormal;
+	public void setEstoqMax(Boolean estoqMax) {
+		this.estoqMax = estoqMax;
+	}
+
+	public Boolean getErroNFe() {
+		return erroNFe;
+	}
+
+	public void setErroNFe(Boolean erroNFe) {
+		this.erroNFe = erroNFe;
+	}
+
+	public Boolean getPdCompra() {
+		return pdCompra;
+	}
+
+	public void setPdCompra(Boolean pdCompra) {
+		this.pdCompra = pdCompra;
 	}
 
 	@Override
 	public String toString() {
-		return "ConfigCarne [getId()=" + getId() + ", getCarneBotelo()=" + getCarneBotelo() + ", getCarneNormal()="
-				+ getCarneNormal() + ", toString()=" + super.toString() + "]";
+		return "ConfigAlertas [getId()=" + getId() + ", getEstoqMin()=" + getEstoqMin() + ", getEstoqMax()="
+				+ getEstoqMax() + ", getErroNFe()=" + getErroNFe() + ", getPdCompra()=" + getPdCompra()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
-
+	
 
 }
