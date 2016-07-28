@@ -1495,13 +1495,13 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		}
 
-		if (!ValidationUtil.isNullOrEmpty(plano.getServicoList())) {
-			a += ServicoBARD.maintainServicoByPlanoAssociations(plano.getServicoList(),
-					 response, plano.getId(), null, null, TabelaEnum.PLANO, getSiteBAR(),
-					getStatusBAR(), getHistoricoBAR(), plano.getId(), plano.getCreateUser(), plano.getProcessId(),
-					plano.getProcessId());
-
-		}
+//		if (!ValidationUtil.isNullOrEmpty(plano.getServicoList())) {
+//			a += ServicoBARD.maintainServicoByPlanoAssociations(plano.getServicoList(),
+//					 response, plano.getId(), null, null, TabelaEnum.PLANO, getSiteBAR(),
+//					getStatusBAR(), getHistoricoBAR(), plano.getId(), plano.getCreateUser(), plano.getProcessId(),
+//					plano.getProcessId());
+//
+//		}
 
 		Status status = new Status();
 		status.setStatus(CdStatusTypeEnum.DELETADO);

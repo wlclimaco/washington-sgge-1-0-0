@@ -217,10 +217,19 @@ private static final String NAMESPACE_FUNCIONARIO = "FuncionarioMap.";
 	IHistoricoBAR historicoBAR;
 
 	IEmailBAR emailBAR;
-	IDocumentoBAR documentosBAR;
+	IDocumentoBAR documentoBAR;
 	ITelefoneBAR telefoneBAR;
 	INotesBAR notesBAR;
 
+
+
+	public IDocumentoBAR getDocumentoBAR() {
+		return documentoBAR;
+	}
+
+	public void setDocumentoBAR(IDocumentoBAR documentoBAR) {
+		this.documentoBAR = documentoBAR;
+	}
 
 	public IEnderecoBAR getEnderecoBAR() {
 		return enderecoBAR;
@@ -254,13 +263,6 @@ private static final String NAMESPACE_FUNCIONARIO = "FuncionarioMap.";
 		this.emailBAR = emailBAR;
 	}
 
-	public IDocumentoBAR getDocumentosBAR() {
-		return documentosBAR;
-	}
-
-	public void setDocumentosBAR(IDocumentoBAR documentosBAR) {
-		this.documentosBAR = documentosBAR;
-	}
 
 	public ITelefoneBAR getTelefoneBAR() {
 		return telefoneBAR;

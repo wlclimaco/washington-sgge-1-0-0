@@ -123,7 +123,7 @@ parentId
 <if test="enderecoTypeValue!= null">enderecoTypeValue = #{enderecoTypeValue},</if>
 <if test="cep!= null">cep = #{cep},</if>
 <if test="complemento!= null">complemento = #{complemento},</if>
-<if test="latitude null">latitude = #{latitude},</if>
+<if test="latitude != null">latitude = #{latitude},</if>
 <if test="longitude!= null">longitude = #{longitude},</if>
 <if test="cidade.id!= null">cidade = #{cidade.id},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>

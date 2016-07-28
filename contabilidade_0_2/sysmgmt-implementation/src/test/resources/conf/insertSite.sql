@@ -1,12 +1,12 @@
 
 INSERT INTO Site( id, nome, url, quemSomos, missao, visao, titulo, logo, atorization,create_user,create_date,modify_user,modify_date)values
-( 1, 'nome_1', 'url_2', 'quemSomos_3', 'missao_4', 'visao_5', 'titulo_6', 'logo_7',true,'system',1462656383020,'rod',1462656383020);
+( 1, 'nome_1', 'http://localhost:8080/webSite/', 'quemSomos_3', 'missao_4', 'visao_5', 'titulo_6', 'logo_7',true,'system',1462656383020,'rod',1462656383020);
 
 INSERT INTO Site( id, nome, url, quemSomos, missao, visao, titulo, logo, atorization,create_user,create_date,modify_user,modify_date)values
-( 2, 'nome_1', 'url_3', 'quemSomos_3', 'missao_4', 'visao_5', 'titulo_6', 'logo_7',true,'system',1462656383020,'rod',1462656383020);
+( 2, 'nome_1', 'http://localhost:8080/webSite/', 'quemSomos_3', 'missao_4', 'visao_5', 'titulo_6', 'logo_7',true,'system',1462656383020,'rod',1462656383020);
 
 INSERT INTO Site( id, nome, url, quemSomos, missao, visao, titulo, logo, atorization,create_user,create_date,modify_user,modify_date)values
-( 3, 'nome_1', 'url_1', 'quemSomos_3', 'missao_4', 'visao_5', 'titulo_6', 'logo_7',true,'system',1462656383020,'rod',1462656383020);
+( 3, 'nome_1', 'http://localhost:8080/webSite/', 'quemSomos_3', 'missao_4', 'visao_5', 'titulo_6', 'logo_7',true,'system',1462656383020,'rod',1462656383020);
 
 INSERT INTO Plano(  dataInicio, dataFinal, numeroContrato, descricao, titulo, emprId,create_user,create_date,modify_user,modify_date)values
 ( 1462656383021, 1462656383021, 1, 'descricao_4', 'titulo_5', 1,'system',1462656383021,'rod',1462656383021);

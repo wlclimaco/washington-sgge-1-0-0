@@ -94,7 +94,7 @@
    FROM boleto WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllBoletosRequest" parameterType="BoletoInquiryRequest" resultMap="BoletoResult">
+ <select id="fetchAllBoletosRequest" parameterType="pagedInquiryRequest" resultMap="BoletoResult">
 
      SELECT id,<include refid="allBoletoColumns" />
            FROM boleto where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC

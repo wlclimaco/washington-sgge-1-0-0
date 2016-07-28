@@ -81,7 +81,7 @@
    FROM configsmtp WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllConfigSMTPsRequest" parameterType="ConfigSMTPInquiryRequest" resultMap="ConfigSMTPResult">
+ <select id="fetchAllConfigSMTPsRequest" parameterType="PagedInquiryRequest" resultMap="ConfigSMTPResult">
 
      SELECT id,<include refid="allConfigSMTPColumns" />
            FROM configsmtp where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC

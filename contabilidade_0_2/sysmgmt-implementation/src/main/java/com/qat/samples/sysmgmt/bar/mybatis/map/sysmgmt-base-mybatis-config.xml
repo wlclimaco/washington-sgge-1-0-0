@@ -64,7 +64,8 @@
 
 
         <!-- Util-->
-        <typeAlias alias="DoisValor" type="com.qat.samples.sysmgmt.util.model.DoisValor" />
+        <typeAlias alias="DoisValor" type="com.qat.samples.sysmgmt.util.model.DoisValores" />
+        <typeAlias alias="DoisValorInquiryRequest" type="com.qat.samples.sysmgmt.util.model.request.DoisValoresInquiryRequest" />
 
         <!-- Financeiro -->
 
@@ -440,7 +441,7 @@
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configGeral.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configProduto.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configSMTP.xml" />
-        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configuracaoNFe.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configNFe.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configVendas.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configuracao.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/doisValor.xml" />

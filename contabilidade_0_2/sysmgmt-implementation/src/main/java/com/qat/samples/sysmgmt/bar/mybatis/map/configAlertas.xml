@@ -74,7 +74,7 @@
    FROM configalertas WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllConfigAlertassRequest" parameterType="ConfigAlertasInquiryRequest" resultMap="ConfigAlertasResult">
+ <select id="fetchAllConfigAlertassRequest" parameterType="PagedInquiryRequest" resultMap="ConfigAlertasResult">
 
      SELECT id,<include refid="allConfigAlertasColumns" />
            FROM configalertas where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC

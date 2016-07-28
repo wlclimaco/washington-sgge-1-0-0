@@ -92,7 +92,7 @@
    FROM configvendas WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllConfigVendassRequest" parameterType="ConfigVendasInquiryRequest" resultMap="ConfigVendasResult">
+ <select id="fetchAllConfigVendassRequest" parameterType="PagedInquiryRequest" resultMap="ConfigVendasResult">
 
      SELECT id,<include refid="allConfigVendasColumns" />
            FROM configvendas where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC

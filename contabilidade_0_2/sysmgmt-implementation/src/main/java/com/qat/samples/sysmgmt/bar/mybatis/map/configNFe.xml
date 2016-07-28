@@ -24,8 +24,6 @@
     <result property="ipiPadrao" column="ipiPadrao"/>
     <result property="pisPadrao" column="pisPadrao"/>
     <result property="cofinsPadrao" column="cofinsPadrao"/>
-
-    <result property="servMsmNota" column="servMsmNota"/>
     <result property="serieEnvio" column="serieEnvio"/>
     <result property="anexarXmlEmail" column="anexarXmlEmail"/>
     <result property="idCSC" column="idCSC"/>
@@ -34,7 +32,6 @@
     <result property="certificado" column="certificado"/>
     <result property="senha" column="senha"/>
     <result property="salvarSenha" column="salvarSenha"/>
-
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -43,6 +40,7 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<collection property="servMsmNota" column="servMsmNota" select="RegimeMap.fetchRegimeById"/>
 <collection property="ambienteEnvio" column="ambienteEnvio" select="RegimeMap.fetchRegimeById"/>
 <collection property="cfopPadrao" column="cfopPadrao" select="RegimeMap.fetchRegimeById"/>
 <collection property="confSMTP" column="confSMTP" select="RegimeMap.fetchRegimeById"/>
@@ -122,7 +120,7 @@
    FROM configuracaonfe WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllConfiguracaoNFesRequest" parameterType="ConfiguracaoNFeInquiryRequest" resultMap="ConfiguracaoNFeResult">
+ <select id="fetchAllConfiguracaoNFesRequest" parameterType="PagedInquiryRequest" resultMap="ConfiguracaoNFeResult">
 
      SELECT id,<include refid="allConfiguracaoNFeColumns" />
            FROM configuracaonfe where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC

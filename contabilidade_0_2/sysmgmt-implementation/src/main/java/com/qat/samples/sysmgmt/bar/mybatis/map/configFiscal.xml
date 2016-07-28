@@ -72,7 +72,7 @@
    FROM configfiscal WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllConfigFiscalsRequest" parameterType="ConfigFiscalInquiryRequest" resultMap="ConfigFiscalResult">
+ <select id="fetchAllConfigFiscalsRequest" parameterType="PagedInquiryRequest" resultMap="ConfigFiscalResult">
 
      SELECT id,<include refid="allConfigFiscalColumns" />
            FROM configfiscal where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC

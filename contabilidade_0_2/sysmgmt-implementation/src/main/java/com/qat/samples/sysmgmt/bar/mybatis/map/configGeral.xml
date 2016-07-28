@@ -86,7 +86,7 @@
    FROM configgeral WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllConfigGeralsRequest" parameterType="ConfigGeralInquiryRequest" resultMap="ConfigGeralResult">
+ <select id="fetchAllConfigGeralsRequest" parameterType="PagedInquiryRequest" resultMap="ConfigGeralResult">
 
      SELECT id,<include refid="allConfigGeralColumns" />
            FROM configgeral where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC

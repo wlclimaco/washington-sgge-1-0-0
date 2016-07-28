@@ -17,7 +17,7 @@
        exactly. -->
  <resultMap id="ConfigEntradaResult" type="ConfigEntrada">
     <result property="id" column="id"/>
-    
+
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -69,7 +69,7 @@
    FROM configentrada WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllConfigEntradasRequest" parameterType="ConfigEntradaInquiryRequest" resultMap="ConfigEntradaResult">
+ <select id="fetchAllConfigEntradasRequest" parameterType="PagedInquiryRequest" resultMap="ConfigEntradaResult">
 
      SELECT id,<include refid="allConfigEntradaColumns" />
            FROM configentrada where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC

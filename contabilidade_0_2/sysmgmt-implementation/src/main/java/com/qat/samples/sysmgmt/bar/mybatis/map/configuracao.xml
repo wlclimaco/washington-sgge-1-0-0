@@ -88,7 +88,7 @@
    FROM configuracao WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllConfiguracaosRequest" parameterType="ConfiguracaoInquiryRequest" resultMap="ConfiguracaoResult">
+ <select id="fetchAllConfiguracaosRequest" parameterType="PagedInquiryRequest" resultMap="ConfiguracaoResult">
 
      SELECT id,<include refid="allConfiguracaoColumns" />
            FROM configuracao where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
