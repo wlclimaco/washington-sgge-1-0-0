@@ -31,7 +31,7 @@ b_InsertSemID = function (table,oField,total){
 							}else if(oField[i].field.tipo.toLowerCase() === 'boolean'){
 								a = a + 'true,'
 							}else{
-								a = a + ' '+(x+1)+',';
+								a = a + ' '+(x+10000)+',';
 							}
 						}
 					}
@@ -79,11 +79,11 @@ b_Insert = function (table,oField,total){
 
 								a = a + " "+b.getTime()+",";
 							}else if((oField[i].field.tipo.toLowerCase() !== 'integer')&&(oField[i].field.tipo.toLowerCase() !== 'double')&&(oField[i].field.tipo.toLowerCase() !== 'long')&&(oField[i].field.tipo.toLowerCase() !== 'boolean')){
-								a = a + " '"+oField[i].field.campo+"_"+i+"',";
+								a = a + ' '+(x+10000)+',';
 							}else if(oField[i].field.tipo.toLowerCase() === 'boolean'){
 								a = a + 'true,'
 							}else{
-								a = a + ' '+(x+1)+',';
+								a = a + ' '+(x+10000)+',';
 							}
 						}
 					}
@@ -91,7 +91,7 @@ b_Insert = function (table,oField,total){
 
 			}
 
-			text = text + "("+a+"1,1,1,1,'system',"+b.getTime()+",'rod',"+b.getTime()+");\n";
+			text = text + "("+a+"10000,1,1,1,'system',"+b.getTime()+",'rod',"+b.getTime()+");\n";
 			a ="";
 		}
 	}

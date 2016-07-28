@@ -1,17 +1,20 @@
 convertBanco = function(stipo,iTamanho){
 var sReturn = "";
-	switch(stipo) {
-	    case "String":
+	switch(stipo.toLowerCase()) {
+	    case "string":
 	        sReturn = "character varying("+iTamanho+")"
 	        break;
-	    case "Long":
+	    case "long":
 	        sReturn = "bigint"
 	        break;
-	    case "Double":
+	    case "double":
 	        sReturn = "float"
 	        break;
+	       case "boolean":
+	        sReturn = "boolean"
+	        break;
 	    default:
-	    			sReturn = stipo.toLowerCase();
+	    			sReturn = "integer";
 
 
 	        break;
@@ -23,24 +26,27 @@ var sReturn = "";
 convertModule = function(stipo,sCampo,list){
 	var sReturn = "";
 	b = new Date();
-		switch(stipo) {
-		    case "String":
+		switch(stipo.toLowerCase()) {
+		    case "string":
 		        sReturn = '"NATIVE INSERT UPDATE"'
 		        break;
-		    case "Long":
+		    case "long":
 		        sReturn = "a.getTime()"
 		        break;
-		    case "Double":
-		        sReturn = "new Double(1.99)"
+		    case "double":
+		        sReturn = "new Double(10.00)"
 		        break;
-		    case "Integer":
+		    case "boolean":
+		        sReturn = "true"
+		        break;
+		    case "integer":
 		        sReturn = "100"
 		        break;
 		    default:
 		    	if(stipo.indexOf('List') > 0){
-		    			sReturn = "new "+list+"()"
+		    			sReturn = "new ArrayList<"+list+">()"
 		    	}else{
-		    		sReturn = "new ArrayList<"+list+">()"
+		    		sReturn = "10000"
 		    	}
 
 		        break;

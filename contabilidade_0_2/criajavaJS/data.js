@@ -1376,7 +1376,7 @@ function DoisValorModel() {
     });
     a.push({
         field: {
-            campo: "valor",
+            campo: "nome",
             tipo: "String",
             requerid: false,
             primaryKey: false,
@@ -1389,6 +1389,17 @@ function DoisValorModel() {
         field: {
             campo: "descricao",
             tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "doisValorType",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -8103,39 +8114,39 @@ function dependenciaConf() {
         campos: BoletoModel()
     });
     a.push({
-        dependencia: "Carne",
+        dependencia: "configCarne",
         campos: CarneModel()
     });
     a.push({
-        dependencia: "Entrada",
+        dependencia: "configEntrada",
         campos: EntradaModel()
     });
     a.push({
-        dependencia: "Fiscal",
+        dependencia: "configFiscal",
         campos: FiscalModel()
     });
     a.push({
-        dependencia: "Alertas",
+        dependencia: "configAlertas",
         campos: AlertasModel()
     });
     a.push({
-        dependencia: "Geral",
+        dependencia: "configGeral",
         campos: GeralModel()
     });
     a.push({
-        dependencia: "ConfProduto",
+        dependencia: "configProduto",
         campos: ConfProdutoModel()
     });
     a.push({
-        dependencia: "SMTP",
+        dependencia: "configSMTP",
         campos: SMTPModel()
     });
     a.push({
-        dependencia: "ConfNFE",
+        dependencia: "ConfiguracaoNFE",
         campos: ConfNFEModel()
     });
     a.push({
-        dependencia: "Vendas",
+        dependencia: "configVendas",
         campos: VendasModel()
     });
     a.push({
