@@ -33,6 +33,12 @@ convertModule = function(stipo,sCampo,list){
 		    case "long":
 		        sReturn = "a.getTime()"
 		        break;
+		    case "date":
+		        sReturn = "a.getTime()"
+		        break;
+		     case "data":
+		        sReturn = "a.getTime()"
+		        break;
 		    case "double":
 		        sReturn = "new Double(10.00)"
 		        break;
@@ -42,6 +48,7 @@ convertModule = function(stipo,sCampo,list){
 		    case "integer":
 		        sReturn = "100"
 		        break;
+
 		    default:
 		    	if(stipo.indexOf('List') > 0){
 		    			sReturn = "new ArrayList<"+list+">()"
@@ -53,6 +60,48 @@ convertModule = function(stipo,sCampo,list){
 		}
 		return sReturn;
 	}
+
+convertModules = function(stipo,index,campo){
+	var sReturn = "";
+	debugger
+	b = new Date();
+		switch(stipo.toLowerCase()) {
+		    case "string":
+		        sReturn = "'"+campo+'_'+index+"'"
+		        break;
+		    case "long":
+		        sReturn = "b.getTime()"
+		        break;
+		    case "date":
+		        sReturn = "a.getTime()"
+		        break;
+		     case "data":
+		        sReturn = "a.getTime()"
+		        break;
+		    case "double":
+		        sReturn = "10.00"
+		        break;
+		    case "boolean":
+		        sReturn = "true"
+		        break;
+		    case "integer":
+		        sReturn = ""+(1000 + index)+"" 
+		        break;
+		    case "doisValores":
+		        sReturn = ""+(1000 + index)+"" 
+		        break;
+		    default:
+		    	if(stipo.indexOf('List') > 0){
+		    			sReturn = ""
+		    	}else{
+		    		sReturn = ""+(1000 + index)+"" 
+		    	}
+
+		        break;
+		}
+		return sReturn;
+	}
+
 
 
 dataAtualFormatada = function (){
