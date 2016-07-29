@@ -16,7 +16,7 @@ function BoletoModel() {
     a.push({
         field: {
             campo: "ativarBolOnLine",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -115,7 +115,7 @@ function BoletoModel() {
     a.push({
         field: {
             campo: "impJuros",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -144,7 +144,7 @@ function CarneModel() {
     a.push({
         field: {
             campo: "carneBotelo",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -155,7 +155,7 @@ function CarneModel() {
     a.push({
         field: {
             campo: "carneNormal",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -185,7 +185,7 @@ function EntradaModel() {
     a.push({
         field: {
             campo: "valorTotalFixo",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -196,7 +196,7 @@ function EntradaModel() {
     a.push({
         field: {
             campo: "manterPrecoVendaProd",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -276,7 +276,7 @@ function AlertasModel() {
     a.push({
         field: {
             campo: "estoqMin",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -287,7 +287,7 @@ function AlertasModel() {
     a.push({
         field: {
             campo: "estoqMax",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -298,7 +298,7 @@ function AlertasModel() {
     a.push({
         field: {
             campo: "erroNFe",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -309,7 +309,7 @@ function AlertasModel() {
     a.push({
         field: {
             campo: "pdCompra",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -371,7 +371,7 @@ function GeralModel() {
     a.push({
         field: {
             campo: "infPosicionarMouse",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -382,7 +382,7 @@ function GeralModel() {
     a.push({
         field: {
             campo: "cnpjCPFUnico",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -393,7 +393,7 @@ function GeralModel() {
     a.push({
         field: {
             campo: "impCodPersonalizado",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -404,7 +404,7 @@ function GeralModel() {
     a.push({
         field: {
             campo: "logListRelImp",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -415,7 +415,7 @@ function GeralModel() {
     a.push({
         field: {
             campo: "obsProdFinProd",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -914,7 +914,7 @@ function ConfNFEModel() {
     a.push({
         field: {
             campo: "destConsFinal",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -925,7 +925,7 @@ function ConfNFEModel() {
     a.push({
         field: {
             campo: "preencherDataHora",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -1013,7 +1013,7 @@ function ConfNFEModel() {
     a.push({
         field: {
             campo: "anexarXmlEmail",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -1079,7 +1079,7 @@ function ConfNFEModel() {
     a.push({
         field: {
             campo: "salvarSenha",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -1143,7 +1143,7 @@ function VendasModel() {
     a.push({
         field: {
             campo: "observacao",
-            tipo: "Boolean",
+            tipo: "String",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -1154,7 +1154,7 @@ function VendasModel() {
     a.push({
         field: {
             campo: "imprSegVia",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -1165,7 +1165,7 @@ function VendasModel() {
     a.push({
         field: {
             campo: "imprAssinatura",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -1176,7 +1176,7 @@ function VendasModel() {
     a.push({
         field: {
             campo: "imprResumoFinanc",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -1187,7 +1187,7 @@ function VendasModel() {
     a.push({
         field: {
             campo: "atuaPrecoClonar",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -1198,7 +1198,7 @@ function VendasModel() {
     a.push({
         field: {
             campo: "imprColUnidade",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -1209,7 +1209,7 @@ function VendasModel() {
     a.push({
         field: {
             campo: "bloquearvendProdSemEstoq",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -1220,7 +1220,7 @@ function VendasModel() {
     a.push({
         field: {
             campo: "addDespCalcImposto",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -1231,7 +1231,7 @@ function VendasModel() {
     a.push({
         field: {
             campo: "retSubstTribICMS",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -2631,7 +2631,7 @@ function ForenKeyModel() {
     a.push({
         field: {
             campo: "requerid",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -2715,7 +2715,7 @@ function FieldModel() {
     a.push({
         field: {
             campo: "requerid",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -2726,7 +2726,7 @@ function FieldModel() {
     a.push({
         field: {
             campo: "primaryKey",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -2737,7 +2737,7 @@ function FieldModel() {
     a.push({
         field: {
             campo: "forenkey",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -2748,7 +2748,7 @@ function FieldModel() {
     a.push({
         field: {
             campo: "model",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -2759,7 +2759,7 @@ function FieldModel() {
     a.push({
         field: {
             campo: "xml",
-            tipo: "Boolean",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -8147,7 +8147,7 @@ function dependenciaConf() {
     });
     a.push({
         dependencia: "configVendas",
-        campos: VendasModel()
+        campos: character varying(50)()
     });
     a.push({
         dependencia: "Configuracao",
