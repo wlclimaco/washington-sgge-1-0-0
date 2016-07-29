@@ -26,15 +26,15 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-    <collection property="confGeral" column="confGeral" select="RegimeMap.fetchRegimeById"/>
-    <collection property="confFiscal" column="confFiscal" select="RegimeMap.fetchRegimeById"/>
-    <collection property="confProd" column="confProd" select="RegimeMap.fetchRegimeById"/>
-    <collection property="confVendas" column="confVendas" select="RegimeMap.fetchRegimeById"/>
-    <collection property="confCMTP" column="confCMTP" select="RegimeMap.fetchRegimeById"/>
-    <collection property="confEntrada" column="confEntrada" select="RegimeMap.fetchRegimeById"/>
-    <collection property="confCarne" column="confCarne" select="RegimeMap.fetchRegimeById"/>
-    <collection property="confNFe" column="confNFe" select="RegimeMap.fetchRegimeById"/>
-<collection property="boletoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+    <collection property="confGeral" column="confGeral" select="ConfigGeralMap.fetchConfigGeralById"/>
+    <collection property="confFiscal" column="confFiscal" select="ConfigFiscalMap.fetchConfigFiscalById"/>
+    <collection property="confProd" column="confProd" select="ConfigProdutoMap.fetchConfigProdutoById"/>
+    <collection property="confVendas" column="confVendas" select="ConfigVendasMap.fetchConfigVendasById"/>
+    <collection property="confCMTP" column="confCMTP" select="ConfigSMTPMap.fetchConfigSMTPById"/>
+    <collection property="confEntrada" column="confEntrada" select="ConfigEntradaMap.fetchConfigEntradaById"/>
+    <collection property="confCarne" column="confCarne" select="ConfigCarneMap.fetchConfigCarneById"/>
+    <collection property="confNFe" column="confNFe" select="ConfiguracaoNFeMap.fetchConfiguracaoNFeById"/>
+<collection property="boletoList" column="id" select="BoletoMap.fetchBoletoByEmprId"/>
   </resultMap>
 
   <sql id="allConfiguracaoColumns">

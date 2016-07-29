@@ -88,12 +88,12 @@ public IStatusBAR getStatusBAR()
 	@Test
 	public void testUpdateStatus()
 	{
-		Status status = new Status(999,(long) 9999999,CdStatusTypeEnum.ATIVO, "Note");
+		Status status = new Status(1001,(long) 9999999,CdStatusTypeEnum.ATIVO, "Note");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1001);
 		Status statusResponse = getStatusBAR().fetchStatusById(request);
 		Assert.assertEquals(statusResponse.getStatus(), CdStatusTypeEnum.ATIVO);
-		getStatusBAR().updateStatus(new Status(1,(long) 9999999,CdStatusTypeEnum.ANALISANDO, "Note"));
+		getStatusBAR().updateStatus(new Status(1001,(long) 9999999,CdStatusTypeEnum.ANALISANDO, "Note"));
 		statusResponse = getStatusBAR().fetchStatusById(request);
 		Assert.assertEquals(statusResponse.getStatus(), CdStatusTypeEnum.ANALISANDO);
 	}

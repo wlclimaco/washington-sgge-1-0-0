@@ -1,12 +1,5 @@
 package com.qat.samples.sysmgmt.entidade.model;
 
-import java.util.Date;
-import java.util.List;
-
-import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
-import com.qat.samples.sysmgmt.contabilidade.model.Plano;
-import com.qat.samples.sysmgmt.pessoa.model.Socio;
-import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -17,14 +10,13 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 public class ConfigCarne extends ModelCosmeDamiao
 {
 	private Integer id;
-
-	private Boolean carneBotelo;
-	private Boolean carneNormal;
+	private Integer carneBotelo;
+	private Integer carneNormal;
 
 
 	public ConfigCarne()
 	{
-		super();
+
 	}
 
 	public ConfigCarne(Integer id)
@@ -36,19 +28,19 @@ public class ConfigCarne extends ModelCosmeDamiao
 		// TODO Auto-generated constructor stub
 	}
 
-	public Boolean getCarneBotelo() {
+	public Integer getCarneBotelo() {
 		return carneBotelo;
 	}
 
-	public void setCarneBotelo(Boolean carneBotelo) {
+	public void setCarneBotelo(Integer carneBotelo) {
 		this.carneBotelo = carneBotelo;
 	}
 
-	public Boolean getCarneNormal() {
+	public Integer getCarneNormal() {
 		return carneNormal;
 	}
 
-	public void setCarneNormal(Boolean carneNormal) {
+	public void setCarneNormal(Integer carneNormal) {
 		this.carneNormal = carneNormal;
 	}
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 27/07/2016 12:18 : 35-->
+<!-- create by system gera-java version 1.0.0 28/07/2016 19:49 : 19-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -47,10 +47,10 @@ estoqMin
 
 </sql>
 <sql id="allConfigAlertasValues">
-#{estoqMin.id},
-#{estoqMax.id},
-#{erroNFe.id},
-#{pdCompra.id},
+#{estoqMin},
+#{estoqMax},
+#{erroNFe},
+#{pdCompra},
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -74,7 +74,7 @@ estoqMin
    FROM configalertas WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllConfigAlertassRequest" parameterType="PagedInquiryRequest" resultMap="ConfigAlertasResult">
+ <select id="fetchAllConfigAlertassRequest" parameterType="pagedInquiryRequest" resultMap="ConfigAlertasResult">
 
      SELECT id,<include refid="allConfigAlertasColumns" />
            FROM configalertas where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
@@ -96,10 +96,10 @@ estoqMin
 
  <update id="updateConfigAlertas" parameterType="ConfigAlertas">
    UPDATE configalertas SET
-<if test="estoqMin!= null">estoqMin = #{estoqMin.id},</if>
-<if test="estoqMax!= null">estoqMax = #{estoqMax.id},</if>
-<if test="erroNFe!= null">erroNFe = #{erroNFe.id},</if>
-<if test="pdCompra!= null">pdCompra = #{pdCompra.id},</if>
+<if test="estoqMin!= null">estoqMin = #{estoqMin},</if>
+<if test="estoqMax!= null">estoqMax = #{estoqMax},</if>
+<if test="erroNFe!= null">erroNFe = #{erroNFe},</if>
+<if test="pdCompra!= null">pdCompra = #{pdCompra},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>

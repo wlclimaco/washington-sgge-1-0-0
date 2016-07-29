@@ -20,9 +20,9 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 	private Integer id;
 	private DoisValores presCompr;
 
-	private Boolean destConsFinal;
+	private Integer destConsFinal;
 
-	private Boolean preencherDataHora;
+	private Integer preencherDataHora;
 
 	private Double icmsPadrao;
 
@@ -38,7 +38,7 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 
 	private String serieEnvio;
 
-	private Boolean anexarXmlEmail;
+	private Integer anexarXmlEmail;
 
 	private String idCSC;
 
@@ -50,7 +50,7 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 
 	private String senha;
 
-	private Boolean salvarSenha;
+	private Integer salvarSenha;
 
 	private Cfop cfopPadrao;
 
@@ -87,19 +87,19 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 		this.presCompr = presCompr;
 	}
 
-	public Boolean getDestConsFinal() {
+	public Integer getDestConsFinal() {
 		return destConsFinal;
 	}
 
-	public void setDestConsFinal(Boolean destConsFinal) {
+	public void setDestConsFinal(Integer destConsFinal) {
 		this.destConsFinal = destConsFinal;
 	}
 
-	public Boolean getPreencherDataHora() {
+	public Integer getPreencherDataHora() {
 		return preencherDataHora;
 	}
 
-	public void setPreencherDataHora(Boolean preencherDataHora) {
+	public void setPreencherDataHora(Integer preencherDataHora) {
 		this.preencherDataHora = preencherDataHora;
 	}
 
@@ -159,11 +159,11 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 		this.serieEnvio = serieEnvio;
 	}
 
-	public Boolean getAnexarXmlEmail() {
+	public Integer getAnexarXmlEmail() {
 		return anexarXmlEmail;
 	}
 
-	public void setAnexarXmlEmail(Boolean anexarXmlEmail) {
+	public void setAnexarXmlEmail(Integer anexarXmlEmail) {
 		this.anexarXmlEmail = anexarXmlEmail;
 	}
 
@@ -207,11 +207,11 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 		this.senha = senha;
 	}
 
-	public Boolean getSalvarSenha() {
+	public Integer getSalvarSenha() {
 		return salvarSenha;
 	}
 
-	public void setSalvarSenha(Boolean salvarSenha) {
+	public void setSalvarSenha(Integer salvarSenha) {
 		this.salvarSenha = salvarSenha;
 	}
 

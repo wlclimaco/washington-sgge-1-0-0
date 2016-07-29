@@ -284,10 +284,10 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1010);
 		ConfigCarne ConfigCarneResponse = getConfiguracaoBAR().fetchConfigCarneById(request);
-		Assert.assertEquals(ConfigCarneResponse.getCarneBotelo(), true);
+		Assert.assertEquals(ConfigCarneResponse.getCarneBotelo().toString(), "0");
 		getConfiguracaoBAR().updateConfigCarne(ConfigCarne);
 		ConfigCarneResponse = getConfiguracaoBAR().fetchConfigCarneById(request);
-		Assert.assertEquals(ConfigCarneResponse.getCarneBotelo(), true);
+		Assert.assertEquals(ConfigCarneResponse.getCarneBotelo().toString(), "1");
 	}
 
 	@Test
@@ -372,10 +372,10 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1010);
 		ConfigEntrada ConfigEntradaResponse = getConfiguracaoBAR().fetchConfigEntradaById(request);
-		Assert.assertEquals(ConfigEntradaResponse.getValorTotalFixo(), true);
+		Assert.assertEquals(ConfigEntradaResponse.getValorTotalFixo().toString(), "0");
 		getConfiguracaoBAR().updateConfigEntrada(ConfigEntrada);
 		ConfigEntradaResponse = getConfiguracaoBAR().fetchConfigEntradaById(request);
-		Assert.assertEquals(ConfigEntradaResponse.getValorTotalFixo(), false);
+		Assert.assertEquals(ConfigEntradaResponse.getValorTotalFixo().toString(), "1");
 	}
 
 	@Test
@@ -456,14 +456,14 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 	@Test
 	public void testUpdateConfigFiscal()
 	{
-		ConfigFiscal ConfigFiscal = insertConfigFiscal(1, TabelaEnum.CONFIGFISCAL, PersistenceActionEnum.UPDATE);
+		ConfigFiscal ConfigFiscal = insertConfigFiscal(1010, TabelaEnum.CONFIGFISCAL, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1010);
 		ConfigFiscal ConfigFiscalResponse = getConfiguracaoBAR().fetchConfigFiscalById(request);
-		Assert.assertEquals(ConfigFiscalResponse.getAliqSimples(), new Double(10.00));
+		Assert.assertEquals(ConfigFiscalResponse.getAliqSimples().toString(), "10.0");
 		getConfiguracaoBAR().updateConfigFiscal(ConfigFiscal);
 		ConfigFiscalResponse = getConfiguracaoBAR().fetchConfigFiscalById(request);
-		Assert.assertEquals(ConfigFiscalResponse.getAliqSimples(), new Double(11.00));
+		Assert.assertEquals(ConfigFiscalResponse.getAliqSimples().toString(), "1.99");
 	}
 
 	@Test
@@ -548,10 +548,10 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1010);
 		ConfigAlertas ConfigAlertasResponse = getConfiguracaoBAR().fetchConfigAlertasById(request);
-		Assert.assertEquals(ConfigAlertasResponse.getEstoqMax(), true);
+		Assert.assertEquals(ConfigAlertasResponse.getEstoqMax().toString(), "0");
 		getConfiguracaoBAR().updateConfigAlertas(ConfigAlertas);
 		ConfigAlertasResponse = getConfiguracaoBAR().fetchConfigAlertasById(request);
-		Assert.assertEquals(ConfigAlertasResponse.getEstoqMax(), false);
+		Assert.assertEquals(ConfigAlertasResponse.getEstoqMax().toString(), "1");
 	}
 
 	@Test
@@ -636,10 +636,10 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1010);
 		ConfigGeral ConfigGeralResponse = getConfiguracaoBAR().fetchConfigGeralById(request);
-		Assert.assertEquals(ConfigGeralResponse.getCnpjCPFUnico(), true);
+		Assert.assertEquals(ConfigGeralResponse.getCnpjCPFUnico().toString(), "0");
 		getConfiguracaoBAR().updateConfigGeral(ConfigGeral);
 		ConfigGeralResponse = getConfiguracaoBAR().fetchConfigGeralById(request);
-		Assert.assertEquals(ConfigGeralResponse.getCnpjCPFUnico(), false);
+		Assert.assertEquals(ConfigGeralResponse.getCnpjCPFUnico().toString(), "1");
 	}
 
 	@Test
@@ -720,11 +720,11 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 	@Test
 	public void testUpdateConfigProduto()
 	{
-		ConfigProduto ConfigProduto = insertConfigProduto(1, TabelaEnum.CONFIGPRODUTO, PersistenceActionEnum.UPDATE);
+		ConfigProduto ConfigProduto = insertConfigProduto(1010, TabelaEnum.CONFIGPRODUTO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1010);
 		ConfigProduto ConfigProdutoResponse = getConfiguracaoBAR().fetchConfigProdutoById(request);
-		Assert.assertEquals(ConfigProdutoResponse.getIpiCNPJProd(), "NATIVE INSERT");
+		Assert.assertEquals(ConfigProdutoResponse.getIpiCNPJProd(), "ipiCNPJProd_0");
 		getConfiguracaoBAR().updateConfigProduto(ConfigProduto);
 		ConfigProdutoResponse = getConfiguracaoBAR().fetchConfigProdutoById(request);
 		Assert.assertEquals(ConfigProdutoResponse.getIpiCNPJProd(), "NATIVE INSERT UPDATE");
@@ -984,14 +984,14 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 	@Test
 	public void testUpdateConfigVendas()
 	{
-		ConfigVendas ConfigVendas = insertConfigVendas(1, TabelaEnum.CONFIGVENDAS, PersistenceActionEnum.UPDATE);
+		ConfigVendas ConfigVendas = insertConfigVendas(1010, TabelaEnum.CONFIGVENDAS, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1010);
 		ConfigVendas ConfigVendasResponse = getConfiguracaoBAR().fetchConfigVendasById(request);
-		Assert.assertEquals(ConfigVendasResponse.getBloquearvendProdSemEstoq(), true);
+		Assert.assertEquals(ConfigVendasResponse.getBloquearvendProdSemEstoq().toString(), "0");
 		getConfiguracaoBAR().updateConfigVendas(ConfigVendas);
 		ConfigVendasResponse = getConfiguracaoBAR().fetchConfigVendasById(request);
-		Assert.assertEquals(ConfigVendasResponse.getBloquearvendProdSemEstoq(), false);
+		Assert.assertEquals(ConfigVendasResponse.getBloquearvendProdSemEstoq().toString(), "1");
 	}
 
 	@Test
@@ -1083,7 +1083,7 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			Boleto boleto = new Boleto();
 			Date a = new Date();
 			boleto.setId(id);
-			boleto.setAtivarBolOnLine(Boolean.FALSE);
+			boleto.setAtivarBolOnLine(1);
 			boleto.setTipoBoleto(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
 			boleto.setAgencia(100);
 			boleto.setCedente(100);
@@ -1092,7 +1092,7 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			boleto.setMora(new Double(1.99));
 			boleto.setInstrucoes("NATIVE INSERT UPDATE");
 			boleto.setDemonstrativo("NATIVE INSERT UPDATE");
-			boleto.setImpJuros(Boolean.FALSE);
+			boleto.setImpJuros(1);
 			boleto.setParentId(id);
 			boleto.setEmprId(1);
 			boleto.setModifyDateUTC(a.getTime());
@@ -1111,8 +1111,8 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			ConfigCarne ConfigCarne = new ConfigCarne();
 			Date a = new Date();
 			ConfigCarne.setId(id);
-			ConfigCarne.setCarneBotelo(Boolean.FALSE);
-			ConfigCarne.setCarneNormal(Boolean.FALSE);
+			ConfigCarne.setCarneBotelo(1);
+			ConfigCarne.setCarneNormal(1);
 			ConfigCarne.setParentId(id);
 			ConfigCarne.setEmprId(1);
 			ConfigCarne.setModifyDateUTC(a.getTime());
@@ -1131,8 +1131,8 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			ConfigEntrada ConfigEntrada = new ConfigEntrada();
 			Date a = new Date();
 			ConfigEntrada.setId(id);
-			ConfigEntrada.setValorTotalFixo(Boolean.FALSE);
-			ConfigEntrada.setManterPrecoVendaProd(Boolean.FALSE);
+			ConfigEntrada.setValorTotalFixo(1);
+			ConfigEntrada.setManterPrecoVendaProd(1);
 			ConfigEntrada.setParentId(id);
 			ConfigEntrada.setEmprId(1);
 			ConfigEntrada.setModifyDateUTC(a.getTime());
@@ -1172,10 +1172,10 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			ConfigAlertas ConfigAlertas = new ConfigAlertas();
 			Date a = new Date();
 			ConfigAlertas.setId(id);
-			ConfigAlertas.setEstoqMin(Boolean.FALSE);
-			ConfigAlertas.setEstoqMax(Boolean.FALSE);
-			ConfigAlertas.setErroNFe(Boolean.FALSE);
-			ConfigAlertas.setPdCompra(Boolean.FALSE);
+			ConfigAlertas.setEstoqMin(1);
+			ConfigAlertas.setEstoqMax(1);
+			ConfigAlertas.setErroNFe(1);
+			ConfigAlertas.setPdCompra(1);
 			ConfigAlertas.setParentId(id);
 			ConfigAlertas.setEmprId(1);
 			ConfigAlertas.setModifyDateUTC(a.getTime());
@@ -1197,11 +1197,11 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			ConfigGeral.setFusoHorario(100);
 			ConfigGeral.setCasasDecimais(100);
 			ConfigGeral.setDiasCartaCobr(100);
-			ConfigGeral.setInfPosicionarMouse(Boolean.FALSE);
-			ConfigGeral.setCnpjCPFUnico(Boolean.FALSE);
-			ConfigGeral.setImpCodPersonalizado(Boolean.FALSE);
-			ConfigGeral.setLogListRelImp(Boolean.FALSE);
-			ConfigGeral.setObsProdFinProd(Boolean.FALSE);
+			ConfigGeral.setInfPosicionarMouse(1);
+			ConfigGeral.setCnpjCPFUnico(1);
+			ConfigGeral.setImpCodPersonalizado(1);
+			ConfigGeral.setLogListRelImp(1);
+			ConfigGeral.setObsProdFinProd(1);
 			ConfigGeral.setParentId(id);
 			ConfigGeral.setEmprId(1);
 			ConfigGeral.setModifyDateUTC(a.getTime());
@@ -1295,8 +1295,8 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			Date a = new Date();
 			ConfiguracaoNFe.setId(id);
 			ConfiguracaoNFe.setPresCompr(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
-			ConfiguracaoNFe.setDestConsFinal(Boolean.FALSE);
-			ConfiguracaoNFe.setPreencherDataHora(Boolean.FALSE);
+			ConfiguracaoNFe.setDestConsFinal(1);
+			ConfiguracaoNFe.setPreencherDataHora(1);
 			ConfiguracaoNFe.setIcmsPadrao(new Double(1.99));
 			ConfiguracaoNFe.setIpiPadrao(new Double(1.99));
 			ConfiguracaoNFe.setPisPadrao(new Double(1.99));
@@ -1304,13 +1304,13 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			ConfiguracaoNFe.setAmbienteEnvio(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
 			ConfiguracaoNFe.setServMsmNota(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
 			ConfiguracaoNFe.setSerieEnvio("NATIVE INSERT UPDATE");
-			ConfiguracaoNFe.setAnexarXmlEmail(Boolean.FALSE);
+			ConfiguracaoNFe.setAnexarXmlEmail(1);
 			ConfiguracaoNFe.setIdCSC("NATIVE INSERT UPDATE");
 			ConfiguracaoNFe.setcSC("NATIVE INSERT UPDATE");
 			ConfiguracaoNFe.setInformacaoAdd("NATIVE INSERT UPDATE");
 			ConfiguracaoNFe.setCertificado("NATIVE INSERT UPDATE");
 			ConfiguracaoNFe.setSenha("NATIVE INSERT UPDATE");
-			ConfiguracaoNFe.setSalvarSenha(Boolean.FALSE);
+			ConfiguracaoNFe.setSalvarSenha(1);
 			ConfiguracaoNFe.setCfopPadrao(new Cfop());
 			ConfiguracaoNFe.setConfSMTP(new ConfigSMTP());
 			ConfiguracaoNFe.setParentId(id);
@@ -1333,14 +1333,14 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 			ConfigVendas.setId(id);
 			ConfigVendas.setDescontoMaxVenda(new Double(1.99));
 			ConfigVendas.setObservacao("observação");
-			ConfigVendas.setImprSegVia(Boolean.FALSE);
-			ConfigVendas.setImprAssinatura(Boolean.FALSE);
-			ConfigVendas.setImprResumoFinanc(Boolean.FALSE);
-			ConfigVendas.setAtuaPrecoClonar(Boolean.FALSE);
-			ConfigVendas.setImprColUnidade(Boolean.FALSE);
-			ConfigVendas.setBloquearvendProdSemEstoq(Boolean.FALSE);
-			ConfigVendas.setAddDespCalcImposto(Boolean.FALSE);
-			ConfigVendas.setRetSubstTribICMS(Boolean.FALSE);
+			ConfigVendas.setImprSegVia(1);
+			ConfigVendas.setImprAssinatura(1);
+			ConfigVendas.setImprResumoFinanc(1);
+			ConfigVendas.setAtuaPrecoClonar(1);
+			ConfigVendas.setImprColUnidade(1);
+			ConfigVendas.setBloquearvendProdSemEstoq(1);
+			ConfigVendas.setAddDespCalcImposto(1);
+			ConfigVendas.setRetSubstTribICMS(1);
 			ConfigVendas.setParentId(id);
 			ConfigVendas.setEmprId(1);
 			ConfigVendas.setModifyDateUTC(a.getTime());

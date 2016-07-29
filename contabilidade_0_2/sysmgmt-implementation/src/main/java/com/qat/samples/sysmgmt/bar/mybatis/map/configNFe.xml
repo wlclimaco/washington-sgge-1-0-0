@@ -40,11 +40,11 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="servMsmNota" column="servMsmNota" select="RegimeMap.fetchRegimeById"/>
-<collection property="ambienteEnvio" column="ambienteEnvio" select="RegimeMap.fetchRegimeById"/>
-<collection property="cfopPadrao" column="cfopPadrao" select="RegimeMap.fetchRegimeById"/>
-<collection property="confSMTP" column="confSMTP" select="RegimeMap.fetchRegimeById"/>
-<collection property="presCompr" column="presCompr" select="RegimeMap.fetchRegimeById"/>
+<collection property="servMsmNota" column="servMsmNota" select="DoisValorMap.fetchDoisValorById"/>
+<collection property="ambienteEnvio" column="ambienteEnvio" select="DoisValorMap.fetchDoisValorById"/>
+<collection property="cfopPadrao" column="cfopPadrao" select="CfopMap.fetchCfopById"/>
+<collection property="confSMTP" column="confSMTP" select="ConfigSMTPMap.fetchConfigSMTPById"/>
+<collection property="presCompr" column="presCompr" select="DoisValorMap.fetchDoisValorById"/>
   </resultMap>
 
   <sql id="allConfiguracaoNFeColumns">

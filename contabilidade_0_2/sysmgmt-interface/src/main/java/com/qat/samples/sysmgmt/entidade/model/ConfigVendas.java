@@ -19,14 +19,14 @@ public class ConfigVendas extends ModelCosmeDamiao
 	private Integer id;
 	private Double  descontoMaxVenda;
 	private String  observacao;
-	private Boolean imprSegVia;
-	private Boolean imprAssinatura;
-	private Boolean imprResumoFinanc;
-	private Boolean atuaPrecoClonar;
-	private Boolean imprColUnidade;
-	private Boolean bloquearvendProdSemEstoq;
-	private Boolean addDespCalcImposto;
-	private Boolean retSubstTribICMS;
+	private Integer imprSegVia;
+	private Integer imprAssinatura;
+	private Integer imprResumoFinanc;
+	private Integer atuaPrecoClonar;
+	private Integer imprColUnidade;
+	private Integer bloquearvendProdSemEstoq;
+	private Integer addDespCalcImposto;
+	private Integer retSubstTribICMS;
 
 	public ConfigVendas()
 	{
@@ -66,67 +66,67 @@ public class ConfigVendas extends ModelCosmeDamiao
 		this.observacao = observacao;
 	}
 
-	public Boolean getImprSegVia() {
+	public Integer getImprSegVia() {
 		return imprSegVia;
 	}
 
-	public void setImprSegVia(Boolean imprSegVia) {
+	public void setImprSegVia(Integer imprSegVia) {
 		this.imprSegVia = imprSegVia;
 	}
 
-	public Boolean getImprAssinatura() {
+	public Integer getImprAssinatura() {
 		return imprAssinatura;
 	}
 
-	public void setImprAssinatura(Boolean imprAssinatura) {
+	public void setImprAssinatura(Integer imprAssinatura) {
 		this.imprAssinatura = imprAssinatura;
 	}
 
-	public Boolean getImprResumoFinanc() {
+	public Integer getImprResumoFinanc() {
 		return imprResumoFinanc;
 	}
 
-	public void setImprResumoFinanc(Boolean imprResumoFinanc) {
+	public void setImprResumoFinanc(Integer imprResumoFinanc) {
 		this.imprResumoFinanc = imprResumoFinanc;
 	}
 
-	public Boolean getAtuaPrecoClonar() {
+	public Integer getAtuaPrecoClonar() {
 		return atuaPrecoClonar;
 	}
 
-	public void setAtuaPrecoClonar(Boolean atuaPrecoClonar) {
+	public void setAtuaPrecoClonar(Integer atuaPrecoClonar) {
 		this.atuaPrecoClonar = atuaPrecoClonar;
 	}
 
-	public Boolean getImprColUnidade() {
+	public Integer getImprColUnidade() {
 		return imprColUnidade;
 	}
 
-	public void setImprColUnidade(Boolean imprColUnidade) {
+	public void setImprColUnidade(Integer imprColUnidade) {
 		this.imprColUnidade = imprColUnidade;
 	}
 
-	public Boolean getBloquearvendProdSemEstoq() {
+	public Integer getBloquearvendProdSemEstoq() {
 		return bloquearvendProdSemEstoq;
 	}
 
-	public void setBloquearvendProdSemEstoq(Boolean bloquearvendProdSemEstoq) {
+	public void setBloquearvendProdSemEstoq(Integer bloquearvendProdSemEstoq) {
 		this.bloquearvendProdSemEstoq = bloquearvendProdSemEstoq;
 	}
 
-	public Boolean getAddDespCalcImposto() {
+	public Integer getAddDespCalcImposto() {
 		return addDespCalcImposto;
 	}
 
-	public void setAddDespCalcImposto(Boolean addDespCalcImposto) {
+	public void setAddDespCalcImposto(Integer addDespCalcImposto) {
 		this.addDespCalcImposto = addDespCalcImposto;
 	}
 
-	public Boolean getRetSubstTribICMS() {
+	public Integer getRetSubstTribICMS() {
 		return retSubstTribICMS;
 	}
 
-	public void setRetSubstTribICMS(Boolean retSubstTribICMS) {
+	public void setRetSubstTribICMS(Integer retSubstTribICMS) {
 		this.retSubstTribICMS = retSubstTribICMS;
 	}
 

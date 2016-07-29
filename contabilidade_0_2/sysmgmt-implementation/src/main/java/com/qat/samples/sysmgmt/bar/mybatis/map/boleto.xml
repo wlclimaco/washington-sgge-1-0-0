@@ -35,8 +35,8 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="tipoBoleto" column="tipoBoleto" select="RegimeMap.fetchRegimeById"/>
-<collection property="tipoCalcMora" column="tipoCalcMora" select="RegimeMap.fetchRegimeById"/>
+<collection property="tipoBoleto" column="tipoBoleto" select="DoisValorMap.fetchDoisValorById"/>
+<collection property="tipoCalcMora" column="tipoCalcMora" select="DoisValorMap.fetchDoisValorById"/>
   </resultMap>
 
   <sql id="allBoletoColumns">
@@ -92,6 +92,12 @@ ativarBolOnLine
     SELECT id,
  <include refid="allBoletoColumns" />
    FROM boleto WHERE id = #{fetchid}
+ </select>
+ 
+  <select id="fetchBoletoByEmprId" parameterType="Integer" resultMap="BoletoResult">
+    SELECT id,
+ <include refid="allBoletoColumns" />
+   FROM boleto WHERE emprId = #{fetchid}
  </select>
 
  <select id="fetchAllBoletosRequest" parameterType="pagedInquiryRequest" resultMap="BoletoResult">

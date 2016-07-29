@@ -90,9 +90,9 @@ public IEnderecoBAR getEnderecoBAR()
 	@Test
 	public void testUpdateEndereco()
 	{
-		Endereco endereco = new Endereco(1, "logradouro", new Cidade(1),new Estado(1), "bairro_6", "numero", "cep", "complemento", EnderecoTypeEnum.ENTREGA, PersistenceActionEnum.INSERT);
+		Endereco endereco = new Endereco(1011, "logradouro", new Cidade(1),new Estado(1), "bairro_6", "numero", "cep", "complemento", EnderecoTypeEnum.ENTREGA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1011);
 		Endereco enderecoResponse = getEnderecoBAR().fetchEnderecoById(request);
 		Assert.assertEquals(enderecoResponse.getBairro(), "bairro_5");
 		getEnderecoBAR().updateEndereco(endereco);

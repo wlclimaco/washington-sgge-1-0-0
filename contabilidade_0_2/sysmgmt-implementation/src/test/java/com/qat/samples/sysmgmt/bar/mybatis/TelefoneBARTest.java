@@ -88,9 +88,9 @@ public ITelefoneBAR getTelefoneBAR()
 	@Test
 	public void testUpdateTelefone()
 	{
-		Telefone telefone = new Telefone(1,"034" ,"33158065", TelefoneTypeEnum.GERENTE, PersistenceActionEnum.NONE);
+		Telefone telefone = new Telefone(1011,"034" ,"33158065", TelefoneTypeEnum.GERENTE, PersistenceActionEnum.NONE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1011);
 		Telefone telefoneResponse = getTelefoneBAR().fetchTelefoneById(request);
 		Assert.assertEquals(telefoneResponse.getNumero(), "numero_5");
 		getTelefoneBAR().updateTelefone(telefone);

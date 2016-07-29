@@ -53,18 +53,18 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
- <collection property="cfop" column="cfop" select="RegimeMap.fetchRegimeById"/>
-    <collection property="icmsSitTrib" column="icmsSitTrib" select="RegimeMap.fetchRegimeById"/>
-    <collection property="icmsOrigem" column="icmsOrigem" select="RegimeMap.fetchRegimeById"/>
-    <collection property="icmsModalidadeBC" column="icmsModalidadeBC" select="RegimeMap.fetchRegimeById"/>
-    <collection property="icmsMotDesoneracao" column="icmsMotDesoneracao" select="RegimeMap.fetchRegimeById"/>
-    <collection property="icmsModBCST" column="icmsModBCST" select="RegimeMap.fetchRegimeById"/>
-     <collection property="ipiSitTrib" column="ipiSitTrib" select="RegimeMap.fetchRegimeById"/>
-     <collection property="ipiTipCalc" column="ipiTipCalc" select="RegimeMap.fetchRegimeById"/>
-     <collection property="pisSitTrib" column="pisSitTrib" select="RegimeMap.fetchRegimeById"/>
-     <collection property="pistipoCalcSubstTrib" column="pistipoCalcSubstTrib" select="RegimeMap.fetchRegimeById"/>
-     <collection property="cofinsSubstTrib" column="cofinsSubstTrib" select="RegimeMap.fetchRegimeById"/>
-     <collection property="cofinsTipoCalcSubstTrib" column="cofinsTipoCalcSubstTrib" select="RegimeMap.fetchRegimeById"/>
+ <collection property="cfop" column="cfop" select="CfopMap.fetchCfopById"/>
+    <collection property="icmsSitTrib" column="icmsSitTrib" select="DoisValorMap.fetchDoisValorById"/>
+    <collection property="icmsOrigem" column="icmsOrigem" select="DoisValorMap.fetchDoisValorById"/>
+    <collection property="icmsModalidadeBC" column="icmsModalidadeBC" select="DoisValorMap.fetchDoisValorById"/>
+    <collection property="icmsMotDesoneracao" column="icmsMotDesoneracao" select="DoisValorMap.fetchDoisValorById"/>
+    <collection property="icmsModBCST" column="icmsModBCST" select="DoisValorMap.fetchDoisValorById"/>
+     <collection property="ipiSitTrib" column="ipiSitTrib" select="DoisValorMap.fetchDoisValorById"/>
+     <collection property="ipiTipCalc" column="ipiTipCalc" select="DoisValorMap.fetchDoisValorById"/>
+     <collection property="pisSitTrib" column="pisSitTrib" select="DoisValorMap.fetchDoisValorById"/>
+     <collection property="pistipoCalcSubstTrib" column="pistipoCalcSubstTrib" select="DoisValorMap.fetchDoisValorById"/>
+     <collection property="cofinsSubstTrib" column="cofinsSubstTrib" select="DoisValorMap.fetchDoisValorById"/>
+     <collection property="cofinsTipoCalcSubstTrib" column="cofinsTipoCalcSubstTrib" select="DoisValorMap.fetchDoisValorById"/>
   </resultMap>
 
   <sql id="allConfigProdutoColumns">

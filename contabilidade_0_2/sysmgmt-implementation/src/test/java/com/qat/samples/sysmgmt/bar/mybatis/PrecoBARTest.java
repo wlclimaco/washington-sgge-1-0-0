@@ -55,9 +55,9 @@ public IPrecoBAR getPrecoBAR()
 @Test
 	public void testDeletePreco()
 	{
-		Preco preco = new Preco(4, PrecoTypeEnum.VENDA,new Double(9.99));
+		Preco preco = new Preco(40, PrecoTypeEnum.VENDA,new Double(9.99));
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(40);
 		Preco precoResponse = getPrecoBAR().fetchPrecoById(request);
 		Assert.assertEquals(precoResponse, null);
 		getPrecoBAR().insertPreco(preco);
@@ -88,14 +88,14 @@ public IPrecoBAR getPrecoBAR()
 	@Test
 	public void testUpdatePreco()
 	{
-		Preco preco = new Preco(4, PrecoTypeEnum.VENDA,new Double(9.99));
+		Preco preco = new Preco(1011, PrecoTypeEnum.VENDA,new Double(9.99));
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1011);
 		Preco precoResponse = getPrecoBAR().fetchPrecoById(request);
-//		Assert.assertEquals(precoResponse.getString, "NATIVE INSERT");
-//		getPrecoBAR().updatePreco(preco);
-////		precoResponse = getPrecoBAR().fetchPrecoById(request);
-//		Assert.assertEquals(precoResponse.getDescription(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(precoResponse.getValor().toString(), "1.0");
+		getPrecoBAR().updatePreco(preco);
+		precoResponse = getPrecoBAR().fetchPrecoById(request);
+		Assert.assertEquals(precoResponse.getValor().toString(), "9.99");
 	}
 
 	@Test

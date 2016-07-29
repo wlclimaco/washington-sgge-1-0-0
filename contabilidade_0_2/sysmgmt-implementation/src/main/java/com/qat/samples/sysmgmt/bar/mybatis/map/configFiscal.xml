@@ -27,7 +27,7 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="princAtividade" column="princAtividade" select="RegimeMap.fetchRegimeById"/>
+<collection property="princAtividade" column="princAtividade" select="DoisValorMap.fetchDoisValorById"/>
 <collection property="regime" column="regime" select="RegimeMap.fetchRegimeById"/>
   </resultMap>
 

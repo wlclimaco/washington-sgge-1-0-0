@@ -31,7 +31,7 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="seguranca" column="seguranca" select="RegimeMap.fetchRegimeById"/>
+<collection property="seguranca" column="seguranca" select="DoisValorMap.fetchDoisValorById"/>
   </resultMap>
 
   <sql id="allConfigSMTPColumns">

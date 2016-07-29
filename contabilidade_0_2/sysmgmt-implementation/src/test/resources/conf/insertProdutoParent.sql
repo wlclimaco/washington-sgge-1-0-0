@@ -1,12 +1,12 @@
 
 INSERT INTO ProdutoParent( id, parentId,  tributacao, dataValidade, localizacao, comissao,emprId,processId,create_user,create_date,modify_user,modify_date)values
-( 1, 10001, 1,  1463354114930, 'localizacao_11', 'comissao_12',1,1,'system',1463354114930,'rod',1463354114930);
+( 1011, 10001, 1,  1463354114930, 'localizacao_11', 'comissao_12',1,1,'system',1463354114930,'rod',1463354114930);
 
 INSERT INTO ProdutoParent( id, parentId,  tributacao, dataValidade, localizacao, comissao,emprId,processId,create_user,create_date,modify_user,modify_date)values
-( 2, 10002, 2, 1463354114930, 'localizacao_11', 'comissao_12',1,1,'system',1463354114930,'rod',1463354114930);
+( 1012, 10002, 2, 1463354114930, 'localizacao_11', 'comissao_12',1,1,'system',1463354114930,'rod',1463354114930);
 
 INSERT INTO ProdutoParent( id, parentId, tributacao, dataValidade, localizacao, comissao,emprId,processId,create_user,create_date,modify_user,modify_date)values
-( 3, 10003,  3, 1463354114930, 'localizacao_11', 'comissao_12',1,1,'system',1463354114930,'rod',1463354114930);
+( 1013, 10003,  3, 1463354114930, 'localizacao_11', 'comissao_12',1,1,'system',1463354114930,'rod',1463354114930);
 
 INSERT INTO Estoque( id, parentId, estoqueTypeEnum, ultimoMov, quant,create_user,create_date,modify_user,modify_date)values
 ( 10001, 1, 1, 1, 1,'system',1463354114930,'rod',1463354114930);

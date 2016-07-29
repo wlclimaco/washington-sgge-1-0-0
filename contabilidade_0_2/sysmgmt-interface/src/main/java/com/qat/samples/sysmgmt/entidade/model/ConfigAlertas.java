@@ -19,10 +19,10 @@ public class ConfigAlertas extends ModelCosmeDamiao
 	private Integer id;
 
 
-	private Boolean estoqMin;
-	private Boolean estoqMax;
-	private Boolean erroNFe;
-	private Boolean pdCompra;
+	private Integer estoqMin;
+	private Integer estoqMax;
+	private Integer erroNFe;
+	private Integer pdCompra;
 
 	public ConfigAlertas()
 	{
@@ -46,35 +46,35 @@ public class ConfigAlertas extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	public Boolean getEstoqMin() {
+	public Integer getEstoqMin() {
 		return estoqMin;
 	}
 
-	public void setEstoqMin(Boolean estoqMin) {
+	public void setEstoqMin(Integer estoqMin) {
 		this.estoqMin = estoqMin;
 	}
 
-	public Boolean getEstoqMax() {
+	public Integer getEstoqMax() {
 		return estoqMax;
 	}
 
-	public void setEstoqMax(Boolean estoqMax) {
+	public void setEstoqMax(Integer estoqMax) {
 		this.estoqMax = estoqMax;
 	}
 
-	public Boolean getErroNFe() {
+	public Integer getErroNFe() {
 		return erroNFe;
 	}
 
-	public void setErroNFe(Boolean erroNFe) {
+	public void setErroNFe(Integer erroNFe) {
 		this.erroNFe = erroNFe;
 	}
 
-	public Boolean getPdCompra() {
+	public Integer getPdCompra() {
 		return pdCompra;
 	}
 
-	public void setPdCompra(Boolean pdCompra) {
+	public void setPdCompra(Integer pdCompra) {
 		this.pdCompra = pdCompra;
 	}
 

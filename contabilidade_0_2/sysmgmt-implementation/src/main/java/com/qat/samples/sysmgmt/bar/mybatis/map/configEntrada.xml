@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 27/07/2016 12:18 : 35-->
+<!-- create by system gera-java version 1.0.0 28/07/2016 19:49 : 19-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -15,9 +15,10 @@
       from a query, and the class properties.  A result map isnt
       necessary if the columns (or aliases) match to the properties
        exactly. -->
- <resultMap id="ConfigEntradaResult" type="ConfigEntrada">
+  <resultMap id="ConfigEntradaResult" type="ConfigEntrada">
     <result property="id" column="id"/>
-
+    <result property="valorTotalFixo" column="valorTotalFixo"/>
+    <result property="manterPrecoVendaProd" column="manterPrecoVendaProd"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -26,8 +27,6 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<result property="valorTotalFixo" column="valorTotalFixo" />
-    <result property="manterPrecoVendaProd" column="manterPrecoVendaProd" />
   </resultMap>
 
   <sql id="allConfigEntradaColumns">
@@ -44,8 +43,8 @@ valorTotalFixo
 
 </sql>
 <sql id="allConfigEntradaValues">
-#{valorTotalFixo.id},
-#{manterPrecoVendaProd.id},
+#{valorTotalFixo},
+#{manterPrecoVendaProd},
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -91,8 +90,8 @@ valorTotalFixo
 
  <update id="updateConfigEntrada" parameterType="ConfigEntrada">
    UPDATE configentrada SET
-<if test="valorTotalFixo!= null">valorTotalFixo = #{valorTotalFixo.id},</if>
-<if test="manterPrecoVendaProd!= null">manterPrecoVendaProd = #{manterPrecoVendaProd.id},</if>
+<if test="valorTotalFixo!= null">valorTotalFixo = #{valorTotalFixo},</if>
+<if test="manterPrecoVendaProd!= null">manterPrecoVendaProd = #{manterPrecoVendaProd},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>

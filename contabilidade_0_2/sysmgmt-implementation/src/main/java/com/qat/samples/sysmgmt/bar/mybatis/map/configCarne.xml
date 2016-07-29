@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 27/07/2016 12:18 : 35-->
+<!-- create by system gera-java version 1.0.0 28/07/2016 19:49 : 19-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -17,7 +17,8 @@
        exactly. -->
   <resultMap id="ConfigCarneResult" type="ConfigCarne">
     <result property="id" column="id"/>
-
+    <result property="carneBotelo" column="carneBotelo"/>
+    <result property="carneNormal" column="carneNormal"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -26,9 +27,6 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-
-<result property="carneBotelo" column="carneBotelo"  typeHandler="BooleanHandler"/>
-<result property="carneNormal" column="carneNormal" typeHandler="BooleanHandler"/>
   </resultMap>
 
   <sql id="allConfigCarneColumns">
@@ -45,8 +43,8 @@ carneBotelo
 
 </sql>
 <sql id="allConfigCarneValues">
-#{carneBotelo.id},
-#{carneNormal.id},
+#{carneBotelo},
+#{carneNormal},
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -92,8 +90,8 @@ carneBotelo
 
  <update id="updateConfigCarne" parameterType="ConfigCarne">
    UPDATE configcarne SET
-<if test="carneBotelo!= null">carneBotelo = #{carneBotelo.id},</if>
-<if test="carneNormal!= null">carneNormal = #{carneNormal.id},</if>
+<if test="carneBotelo!= null">carneBotelo = #{carneBotelo},</if>
+<if test="carneNormal!= null">carneNormal = #{carneNormal},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>

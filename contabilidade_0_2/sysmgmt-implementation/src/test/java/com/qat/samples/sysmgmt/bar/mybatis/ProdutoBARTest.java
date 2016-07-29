@@ -117,9 +117,9 @@ public IProdutoBAR getProdutoBAR()
 	@Test
 	public void testUpdateProdutoParent()
 	{
-		ProdutoParent ProdutoParent = insertProdutoParent(1, TabelaEnum.PRODUTOPARENT, PersistenceActionEnum.UPDATE);
+		ProdutoParent ProdutoParent = insertProdutoParent(1011, TabelaEnum.PRODUTOPARENT, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1011);
 		ProdutoParent ProdutoParentResponse = getProdutoBAR().fetchProdutoParentById(request);
 		Assert.assertEquals(ProdutoParentResponse.getLocalizacao(), "localizacao_11");
 		getProdutoBAR().updateProdutoParent(ProdutoParent);
@@ -205,9 +205,9 @@ public IProdutoBAR getProdutoBAR()
 	@Test
 	public void testUpdateProduto()
 	{
-		Produto produto = insertProduto(1, TabelaEnum.PRODUTO, PersistenceActionEnum.UPDATE);
+		Produto produto = insertProduto(1011, TabelaEnum.PRODUTO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1011);
 		Produto produtoResponse = getProdutoBAR().fetchProdutoById(request);
 		Assert.assertEquals(produtoResponse.getProduto(), "produto_3");
 		getProdutoBAR().updateProduto(produto);
@@ -293,9 +293,9 @@ public IProdutoBAR getProdutoBAR()
 	@Test
 	public void testUpdateCfop()
 	{
-		Cfop cfop = insertCfop(1, TabelaEnum.CFOP, PersistenceActionEnum.UPDATE);
+		Cfop cfop = insertCfop(9997, TabelaEnum.CFOP, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(9997);
 		Cfop cfopResponse = getProdutoBAR().fetchCfopById(request);
 		Assert.assertEquals(cfopResponse.getCfop(), "cfop_1");
 		getProdutoBAR().updateCfop(cfop);
@@ -381,9 +381,9 @@ public IProdutoBAR getProdutoBAR()
 	@Test
 	public void testUpdateMarca()
 	{
-		Marca marca = insertMarca(1, TabelaEnum.MARCA, PersistenceActionEnum.UPDATE);
+		Marca marca = insertMarca(1011, TabelaEnum.MARCA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1011);
 		Marca marcaResponse = getProdutoBAR().fetchMarcaById(request);
 		Assert.assertEquals(marcaResponse.getMarca(), "marca_1");
 		getProdutoBAR().updateMarca(marca);
@@ -469,9 +469,9 @@ public IProdutoBAR getProdutoBAR()
 	@Test
 	public void testUpdateMarcaProd()
 	{
-		MarcaProduto marcaproduto = insertMarcaProd(1, TabelaEnum.MARCAPRODUTO, PersistenceActionEnum.UPDATE);
+		MarcaProduto marcaproduto = insertMarcaProd(1011, TabelaEnum.MARCAPRODUTO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1011);
 		MarcaProduto marcaprodutoResponse = getProdutoBAR().fetchMarcaProdutoById(request);
 		Assert.assertEquals(marcaprodutoResponse.getModifyUser(),"rod");
 		getProdutoBAR().updateMarcaProduto(marcaproduto);
@@ -557,9 +557,9 @@ public IProdutoBAR getProdutoBAR()
 	@Test
 	public void testUpdateGrupo()
 	{
-		Grupo grupo = insertGrupo(1, TabelaEnum.GRUPO, PersistenceActionEnum.UPDATE);
+		Grupo grupo = insertGrupo(1011, TabelaEnum.GRUPO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1011);
 		Grupo grupoResponse = getProdutoBAR().fetchGrupoById(request);
 		Assert.assertEquals(grupoResponse.getGrupo(), "grupo_1");
 		getProdutoBAR().updateGrupo(grupo);
@@ -645,9 +645,9 @@ public IProdutoBAR getProdutoBAR()
 	@Test
 	public void testUpdateSubGrupo()
 	{
-		SubGrupo subgrupo = insertSubGrupo(1, TabelaEnum.SUBGRUPO, PersistenceActionEnum.UPDATE);
+		SubGrupo subgrupo = insertSubGrupo(1011, TabelaEnum.SUBGRUPO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1011);
 		SubGrupo subgrupoResponse = getProdutoBAR().fetchSubGrupoById(request);
 		Assert.assertEquals(subgrupoResponse.getSubGrupo(), "subGrupo_1");
 		getProdutoBAR().updateSubGrupo(subgrupo);
@@ -733,9 +733,9 @@ public IProdutoBAR getProdutoBAR()
 	@Test
 	public void testUpdateUniMed()
 	{
-		UniMed unimed = insertUniMed(1, TabelaEnum.UNIMED, PersistenceActionEnum.UPDATE);
+		UniMed unimed = insertUniMed(1011, TabelaEnum.UNIMED, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1011);
 		UniMed unimedResponse = getProdutoBAR().fetchUniMedById(request);
 		Assert.assertEquals(unimedResponse.getUnimed(), "unimed_1");
 		getProdutoBAR().updateUniMed(unimed);
@@ -821,9 +821,9 @@ public IProdutoBAR getProdutoBAR()
 	@Test
 	public void testUpdateTributacao()
 	{
-		Tributacao tributacao = insertTributacao(1, TabelaEnum.TRIBUTACAO, PersistenceActionEnum.UPDATE);
+		Tributacao tributacao = insertTributacao(1011, TabelaEnum.TRIBUTACAO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1011);
 		Tributacao tributacaoResponse = getProdutoBAR().fetchTributacaoById(request);
 		Assert.assertEquals(tributacaoResponse.getCreateUser(), "system");
 		getProdutoBAR().updateTributacao(tributacao);
@@ -909,9 +909,9 @@ public IProdutoBAR getProdutoBAR()
 	@Test
 	public void testUpdateCusto()
 	{
-		Custo custo = insertCusto(1, TabelaEnum.CUSTO, PersistenceActionEnum.UPDATE);
+		Custo custo = insertCusto(1011, TabelaEnum.CUSTO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1011);
 		Custo custoResponse = getProdutoBAR().fetchCustoById(request);
 		Assert.assertEquals(custoResponse.getCreateUser(), "system");
 		getProdutoBAR().updateCusto(custo);
@@ -997,9 +997,9 @@ public IProdutoBAR getProdutoBAR()
 	@Test
 	public void testUpdateCustoItens()
 	{
-		CustoItens custoitens = insertCustoItens(1, TabelaEnum.CUSTOITENS, PersistenceActionEnum.UPDATE);
+		CustoItens custoitens = insertCustoItens(1011, TabelaEnum.CUSTOITENS, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1011);
 		CustoItens custoitensResponse = getProdutoBAR().fetchCustoItensById(request);
 		Assert.assertEquals(custoitensResponse.getCusto(), "1");
 		getProdutoBAR().updateCustoItens(custoitens);
@@ -1085,9 +1085,9 @@ public IProdutoBAR getProdutoBAR()
 	@Test
 	public void testUpdateEstoque()
 	{
-		Estoque estoque = insertEstoque(1, TabelaEnum.ESTOQUE, PersistenceActionEnum.UPDATE);
+		Estoque estoque = insertEstoque(1011, TabelaEnum.ESTOQUE, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1011);
 		Estoque estoqueResponse = getProdutoBAR().fetchEstoqueById(request);
 		Assert.assertEquals(estoqueResponse.getModifyUser(), "rod");
 		getProdutoBAR().updateEstoque(estoque);
@@ -1173,9 +1173,9 @@ public IProdutoBAR getProdutoBAR()
 	@Test
 	public void testUpdatePorcao()
 	{
-		Porcao porcao = insertPorcao(1, TabelaEnum.PORCAO, PersistenceActionEnum.UPDATE);
+		Porcao porcao = insertPorcao(1011, TabelaEnum.PORCAO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1011);
 		Porcao porcaoResponse = getProdutoBAR().fetchPorcaoById(request);
 		Assert.assertEquals(porcaoResponse.getCreateUser(), "system");
 		getProdutoBAR().updatePorcao(porcao);
@@ -1261,9 +1261,9 @@ public IProdutoBAR getProdutoBAR()
 	@Test
 	public void testUpdatePorcaoItens()
 	{
-		PorcaoItens porcaoitens = insertPorcaoItens(1, TabelaEnum.PORCAOITENS, PersistenceActionEnum.UPDATE);
+		PorcaoItens porcaoitens = insertPorcaoItens(1011, TabelaEnum.PORCAOITENS, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1011);
 		PorcaoItens porcaoitensResponse = getProdutoBAR().fetchPorcaoItensById(request);
 		Assert.assertEquals(porcaoitensResponse.getNome(), "nome_5");
 		getProdutoBAR().updatePorcaoItens(porcaoitens);
@@ -1349,9 +1349,9 @@ public IProdutoBAR getProdutoBAR()
 	@Test
 	public void testUpdateRentabilidade()
 	{
-		Rentabilidade rentabilidade = insertRentabilidade(1, TabelaEnum.RENTABILIDADE, PersistenceActionEnum.UPDATE);
+		Rentabilidade rentabilidade = insertRentabilidade(1011, TabelaEnum.RENTABILIDADE, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1011);
 		Rentabilidade rentabilidadeResponse = getProdutoBAR().fetchRentabilidadeById(request);
 		Assert.assertEquals(rentabilidadeResponse.getCreateUser(), "system");
 		getProdutoBAR().updateRentabilidade(rentabilidade);

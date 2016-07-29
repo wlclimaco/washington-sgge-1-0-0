@@ -17,7 +17,7 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 public class Boleto extends ModelCosmeDamiao
 {
 	private Integer id;
-	private Boolean ativarBolOnLine;
+	private Integer ativarBolOnLine;
 	private DoisValores tipoBoleto;
 	private Integer agencia;
 	private Integer cedente;
@@ -26,7 +26,7 @@ public class Boleto extends ModelCosmeDamiao
 	private Double mora;
 	private String instrucoes;
 	private String demonstrativo;
-	private Boolean impJuros;
+	private Integer impJuros;
 
 	public Boleto()
 	{
@@ -50,11 +50,11 @@ public class Boleto extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	public Boolean getAtivarBolOnLine() {
+	public Integer getAtivarBolOnLine() {
 		return ativarBolOnLine;
 	}
 
-	public void setAtivarBolOnLine(Boolean ativarBolOnLine) {
+	public void setAtivarBolOnLine(Integer ativarBolOnLine) {
 		this.ativarBolOnLine = ativarBolOnLine;
 	}
 
@@ -122,11 +122,11 @@ public class Boleto extends ModelCosmeDamiao
 		this.demonstrativo = demonstrativo;
 	}
 
-	public Boolean getImpJuros() {
+	public Integer getImpJuros() {
 		return impJuros;
 	}
 
-	public void setImpJuros(Boolean impJuros) {
+	public void setImpJuros(Integer impJuros) {
 		this.impJuros = impJuros;
 	}
 

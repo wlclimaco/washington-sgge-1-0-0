@@ -20,11 +20,11 @@ public class ConfigGeral extends ModelCosmeDamiao
 	private Integer fusoHorario;
 	private Integer casasDecimais;
 	private Integer diasCartaCobr;
-	private Boolean infPosicionarMouse;
-	private Boolean cnpjCPFUnico;
-	private Boolean impCodPersonalizado;
-	private Boolean logListRelImp;
-	private Boolean obsProdFinProd;
+	private Integer infPosicionarMouse;
+	private Integer cnpjCPFUnico;
+	private Integer impCodPersonalizado;
+	private Integer logListRelImp;
+	private Integer obsProdFinProd;
 
 	public ConfigGeral()
 	{
@@ -72,43 +72,43 @@ public class ConfigGeral extends ModelCosmeDamiao
 		this.diasCartaCobr = diasCartaCobr;
 	}
 
-	public Boolean getInfPosicionarMouse() {
+	public Integer getInfPosicionarMouse() {
 		return infPosicionarMouse;
 	}
 
-	public void setInfPosicionarMouse(Boolean infPosicionarMouse) {
+	public void setInfPosicionarMouse(Integer infPosicionarMouse) {
 		this.infPosicionarMouse = infPosicionarMouse;
 	}
 
-	public Boolean getCnpjCPFUnico() {
+	public Integer getCnpjCPFUnico() {
 		return cnpjCPFUnico;
 	}
 
-	public void setCnpjCPFUnico(Boolean cnpjCPFUnico) {
+	public void setCnpjCPFUnico(Integer cnpjCPFUnico) {
 		this.cnpjCPFUnico = cnpjCPFUnico;
 	}
 
-	public Boolean getImpCodPersonalizado() {
+	public Integer getImpCodPersonalizado() {
 		return impCodPersonalizado;
 	}
 
-	public void setImpCodPersonalizado(Boolean impCodPersonalizado) {
+	public void setImpCodPersonalizado(Integer impCodPersonalizado) {
 		this.impCodPersonalizado = impCodPersonalizado;
 	}
 
-	public Boolean getLogListRelImp() {
+	public Integer getLogListRelImp() {
 		return logListRelImp;
 	}
 
-	public void setLogListRelImp(Boolean logListRelImp) {
+	public void setLogListRelImp(Integer logListRelImp) {
 		this.logListRelImp = logListRelImp;
 	}
 
-	public Boolean getObsProdFinProd() {
+	public Integer getObsProdFinProd() {
 		return obsProdFinProd;
 	}
 
-	public void setObsProdFinProd(Boolean obsProdFinProd) {
+	public void setObsProdFinProd(Integer obsProdFinProd) {
 		this.obsProdFinProd = obsProdFinProd;
 	}
 

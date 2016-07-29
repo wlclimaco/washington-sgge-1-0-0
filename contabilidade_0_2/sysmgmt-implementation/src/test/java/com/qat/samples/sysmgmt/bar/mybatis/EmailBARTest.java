@@ -88,9 +88,9 @@ public IEmailBAR getEmailBAR()
 	@Test
 	public void testUpdateEmail()
 	{
-		Email email = new Email(1, "wlclimaco@gmail.com.br", EmailTypeEnum.COMPRAS, PersistenceActionEnum.NONE);
+		Email email = new Email(101, "wlclimaco@gmail.com.br", EmailTypeEnum.COMPRAS, PersistenceActionEnum.NONE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(101);
 		Email emailResponse = getEmailBAR().fetchEmailById(request);
 		Assert.assertEquals(emailResponse.getEmail(), "email_4");
 		getEmailBAR().updateEmail(email);

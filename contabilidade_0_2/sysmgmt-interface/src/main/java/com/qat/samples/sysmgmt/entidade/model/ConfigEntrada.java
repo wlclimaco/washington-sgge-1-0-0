@@ -18,8 +18,8 @@ public class ConfigEntrada extends ModelCosmeDamiao
 {
 	private Integer id;
 
-	private Boolean valorTotalFixo;
-	private Boolean manterPrecoVendaProd;
+	private Integer valorTotalFixo;
+	private Integer manterPrecoVendaProd;
 
 
 	public ConfigEntrada()
@@ -44,19 +44,19 @@ public class ConfigEntrada extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	public Boolean getValorTotalFixo() {
+	public Integer getValorTotalFixo() {
 		return valorTotalFixo;
 	}
 
-	public void setValorTotalFixo(Boolean valorTotalFixo) {
+	public void setValorTotalFixo(Integer valorTotalFixo) {
 		this.valorTotalFixo = valorTotalFixo;
 	}
 
-	public Boolean getManterPrecoVendaProd() {
+	public Integer getManterPrecoVendaProd() {
 		return manterPrecoVendaProd;
 	}
 
-	public void setManterPrecoVendaProd(Boolean manterPrecoVendaProd) {
+	public void setManterPrecoVendaProd(Integer manterPrecoVendaProd) {
 		this.manterPrecoVendaProd = manterPrecoVendaProd;
 	}
 

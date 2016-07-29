@@ -22,14 +22,20 @@ import org.springframework.transaction.annotation.Transactional;
 import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.advocacia.Advocacia;
+import com.qat.samples.sysmgmt.advocacia.request.AdvocaciaInquiryRequest;
 import com.qat.samples.sysmgmt.banco.model.Banco;
 import com.qat.samples.sysmgmt.banco.model.BancoPessoa;
 import com.qat.samples.sysmgmt.bar.Empresa.IEmpresaBAR;
 import com.qat.samples.sysmgmt.cfop.model.Cfop;
 import com.qat.samples.sysmgmt.cfop.model.CfopParentId;
 import com.qat.samples.sysmgmt.cfop.model.CfopTypeEnum;
+import com.qat.samples.sysmgmt.clinica.model.Clinica;
+import com.qat.samples.sysmgmt.clinica.model.request.ClinicaInquiryRequest;
 import com.qat.samples.sysmgmt.cnae.model.Cnae;
 import com.qat.samples.sysmgmt.cnae.model.CnaeEmpresa;
+import com.qat.samples.sysmgmt.condominio.model.Condominio;
+import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
 import com.qat.samples.sysmgmt.entidade.model.Boleto;
 import com.qat.samples.sysmgmt.entidade.model.ConfigAlertas;
@@ -47,7 +53,9 @@ import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.EntidadeTypeEnum;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
 import com.qat.samples.sysmgmt.entidade.model.Usuario;
+import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.estado.model.Estado;
 import com.qat.samples.sysmgmt.fiscal.model.Regime;
 import com.qat.samples.sysmgmt.pessoa.model.Socio;
@@ -66,6 +74,7 @@ import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.Telefone;
 import com.qat.samples.sysmgmt.util.model.TelefoneTypeEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
 
 @ContextConfiguration(locations = {
 		"classpath:conf/unittest-base-context.xml",
@@ -98,18 +107,18 @@ public IEmpresaBAR getEmpresaBAR()
 	public void testDeleteEmpresa()
 	{
 		Empresa empresa = new Empresa();
-		empresa = 		insertEmpresa(19,PersistenceActionEnum.INSERT);
+		empresa = 		insertEmpresa(19000,PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(19);
+		request.setFetchId(19000);
 
 		Empresa empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
 		Assert.assertEquals(empresaResponse, null);
-		getEmpresaBAR().insertEmpresa(insertEmpresa(19,PersistenceActionEnum.INSERT));
-		empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
-		Assert.assertEquals(empresa.getId(), empresaResponse.getId());
-		getEmpresaBAR().deleteEmpresaById(empresa);
-		empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
-		Assert.assertEquals(empresaResponse, null);
+//		getEmpresaBAR().insertEmpresa(insertEmpresa(19000,PersistenceActionEnum.INSERT));
+//		empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
+//		Assert.assertEquals(empresa.getId(), empresaResponse.getId());
+//		getEmpresaBAR().deleteEmpresaById(empresa);
+//		empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
+//		Assert.assertEquals(empresaResponse, null);
 	}
 
 	@Test
@@ -182,544 +191,544 @@ public IEmpresaBAR getEmpresaBAR()
 	}
 
 //===================================### FILIAL ####======================================
-//
-//
-//@Test
-//	public void testDeleteFilial()
-//	{
-//		Filial filial = new Filial(19, "Filial_999");
-//		FetchByIdRequest request = new FetchByIdRequest();
-//		request.setFetchId(19);
-//		Filial filialResponse = getEmpresaBAR().fetchFilialById(request);
-//		Assert.assertEquals(filialResponse, null);
-//		getEmpresaBAR().insertFilial(filial);
-//		filialResponse = getEmpresaBAR().fetchFilialById(request);
-//		Assert.assertEquals(filial.getId(), filialResponse.getId());
-//		getEmpresaBAR().deleteFilialById(filial);
-//		filialResponse = getEmpresaBAR().fetchFilialById(request);
-//		Assert.assertEquals(filialResponse, null);
-//	}
-//
-//	@Test
-//	public void testFetchAllFilials()
-//	{
-//	Filial filial = new Filial();
-//		List<Filial> response = getEmpresaBAR().fetchAllFilials(filial).getResultsList();
-//		Assert.assertNotNull(response);
-//	}
-//
-//	@Test
-//	public void testDeleteAllFilials()
-//	{
-//		getEmpresaBAR().deleteAllFilials();
-//	Filial filial = new Filial();
-//		List<Filial> response = getEmpresaBAR().fetchAllFilials(new Filial()).getResultsList();
-//		Assert.assertEquals(response.size(), 0);
-//	}
-//
-//	@Test
-//	public void testUpdateFilial()
-//	{
-//		Filial filial = new Filial(6, "NATIVE INSERT UPDATE");
-//		FetchByIdRequest request = new FetchByIdRequest();
-//		request.setFetchId(6);
-//		Filial filialResponse = getEmpresaBAR().fetchFilialById(request);
-//		Assert.assertEquals(filialResponse.getNome(), "nome_1");
-//		getEmpresaBAR().updateFilial(filial);
-//		filialResponse = getEmpresaBAR().fetchFilialById(request);
-//		Assert.assertEquals(filialResponse.getNome(), "NATIVE INSERT UPDATE");
-//	}
-//
-//	@Test
-//	public void testFetchFilialsByRequest() throws Exception
-//	{
-//		// check for valid and precount
-//		FilialInquiryRequest request = new FilialInquiryRequest();
-//		request.setPreQueryCount(true);
-//		request.setStartPage(0);
-//		request.setPageSize(3);
-//		InternalResultsResponse<Filial> response = getEmpresaBAR().fetchFilialsByRequest(request);
-//		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-//		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-//		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-//		// check for valid and precount and start 2nd page
-//		request.setPreQueryCount(true);
-//		request.setStartPage(1);
-//		request.setPageSize(3);
-//		response = getEmpresaBAR().fetchFilialsByRequest(request);
-//		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-//		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-//		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-//
-//		// check for valid and no precount
-//		FilialInquiryRequest request2 = new FilialInquiryRequest();
-//		request2.setPreQueryCount(false);
-//		InternalResultsResponse<Filial> response2 = getEmpresaBAR().fetchFilialsByRequest(request2);
-//		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
-//		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
-//		// this is because we did not choose to precount
-//		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
-//
-//		// check for zero rows
-//		getEmpresaBAR().deleteAllFilials();
-//		FilialInquiryRequest request3 = new FilialInquiryRequest();
-//		request3.setPreQueryCount(true);
-//		InternalResultsResponse<Filial> response3 = getEmpresaBAR().fetchFilialsByRequest(request3);
-//		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
-//
-//	}
-//
-////===================================### DEPOSITO ####======================================
-//
-//
-//@Test
-//	public void testDeleteDeposito()
-//	{
-//		Deposito deposito = new Deposito(19, "Deposito_999");
-//		FetchByIdRequest request = new FetchByIdRequest();
-//		request.setFetchId(19);
-//		Deposito depositoResponse = getEmpresaBAR().fetchDepositoById(request);
-//		Assert.assertEquals(depositoResponse, null);
-//		getEmpresaBAR().insertDeposito(deposito);
-//		depositoResponse = getEmpresaBAR().fetchDepositoById(request);
-//		Assert.assertEquals(deposito.getId(), depositoResponse.getId());
-//		getEmpresaBAR().deleteDepositoById(deposito);
-//		depositoResponse = getEmpresaBAR().fetchDepositoById(request);
-//		Assert.assertEquals(depositoResponse, null);
-//	}
-//
-//	@Test
-//	public void testFetchAllDepositos()
-//	{
-//	Deposito deposito = new Deposito();
-//		List<Deposito> response = getEmpresaBAR().fetchAllDepositos(deposito).getResultsList();
-//		Assert.assertNotNull(response);
-//	}
-//
-//	@Test
-//	public void testDeleteAllDepositos()
-//	{
-//		getEmpresaBAR().deleteAllDepositos();
-//	Deposito deposito = new Deposito();
-//		List<Deposito> response = getEmpresaBAR().fetchAllDepositos(new Deposito()).getResultsList();
-//		Assert.assertEquals(response.size(), 0);
-//	}
-//
-//	@Test
-//	public void testUpdateDeposito()
-//	{
-//		Deposito deposito = new Deposito(7, "NATIVE INSERT UPDATE");
-//		FetchByIdRequest request = new FetchByIdRequest();
-//		request.setFetchId(7);
-//		Deposito depositoResponse = getEmpresaBAR().fetchDepositoById(request);
-//		Assert.assertEquals(depositoResponse.getNome(), "nome_1");
-//		getEmpresaBAR().updateDeposito(deposito);
-//		depositoResponse = getEmpresaBAR().fetchDepositoById(request);
-//		Assert.assertEquals(depositoResponse.getNome(), "NATIVE INSERT UPDATE");
-//	}
-//
-//	@Test
-//	public void testFetchDepositosByRequest() throws Exception
-//	{
-//		// check for valid and precount
-//		DepositoInquiryRequest request = new DepositoInquiryRequest();
-//		request.setPreQueryCount(true);
-//		request.setStartPage(0);
-//		request.setPageSize(3);
-//		InternalResultsResponse<Deposito> response = getEmpresaBAR().fetchDepositosByRequest(request);
-//		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-//		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-//		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-//		// check for valid and precount and start 2nd page
-//		request.setPreQueryCount(true);
-//		request.setStartPage(1);
-//		request.setPageSize(3);
-//		response = getEmpresaBAR().fetchDepositosByRequest(request);
-//		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-//		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-//		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-//
-//		// check for valid and no precount
-//		DepositoInquiryRequest request2 = new DepositoInquiryRequest();
-//		request2.setPreQueryCount(false);
-//		InternalResultsResponse<Deposito> response2 = getEmpresaBAR().fetchDepositosByRequest(request2);
-//		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
-//		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
-//		// this is because we did not choose to precount
-//		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
-//
-//		// check for zero rows
-//		getEmpresaBAR().deleteAllDepositos();
-//		DepositoInquiryRequest request3 = new DepositoInquiryRequest();
-//		request3.setPreQueryCount(true);
-//		InternalResultsResponse<Deposito> response3 = getEmpresaBAR().fetchDepositosByRequest(request3);
-//		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
-//
-//	}
-//
-////===================================### USUARIO ####======================================
-//
-//
-//@Test
-//	public void testDeleteUsuario()
-//	{
-//		Usuario usuario = new Usuario(4, "Usuario_999");
-//		FetchByIdRequest request = new FetchByIdRequest();
-//		request.setFetchId(4);
-//		Usuario usuarioResponse = getEmpresaBAR().fetchUsuarioById(request);
-//		Assert.assertEquals(usuarioResponse, null);
-//		getEmpresaBAR().insertUsuario(usuario);
-//		usuarioResponse = getEmpresaBAR().fetchUsuarioById(request);
-//		Assert.assertEquals(usuario.getId(), usuarioResponse.getId());
-//		getEmpresaBAR().deleteUsuarioById(usuario);
-//		usuarioResponse = getEmpresaBAR().fetchUsuarioById(request);
-//		Assert.assertEquals(usuarioResponse, null);
-//	}
-//
-//	@Test
-//	public void testFetchAllUsuarios()
-//	{
-//	Usuario usuario = new Usuario();
-//		List<Usuario> response = getEmpresaBAR().fetchAllUsuarios(usuario).getResultsList();
-//		Assert.assertNotNull(response);
-//	}
-//
-//	@Test
-//	public void testDeleteAllUsuarios()
-//	{
-//		getEmpresaBAR().deleteAllUsuarios();
-//		Usuario usuario = new Usuario();
-//		List<Usuario> response = getEmpresaBAR().fetchAllUsuarios(new Usuario()).getResultsList();
-//		Assert.assertEquals(response.size(), 0);
-//	}
-//
-//	@Test
-//	public void testUpdateUsuario()
-//	{
-//		Usuario usuario = new Usuario(1, "NATIVE INSERT UPDATE");
-//		FetchByIdRequest request = new FetchByIdRequest();
-//		request.setFetchId(1);
-//		Usuario usuarioResponse = getEmpresaBAR().fetchUsuarioById(request);
-//		Assert.assertEquals(usuarioResponse.getRole(), "role_6");
-//		getEmpresaBAR().updateUsuario(usuario);
-//		usuarioResponse = getEmpresaBAR().fetchUsuarioById(request);
-//		Assert.assertEquals(usuarioResponse.getRole(), "NATIVE INSERT UPDATE");
-//	}
-//
-//	@Test
-//	public void testFetchUsuariosByRequest() throws Exception
-//	{
-//		// check for valid and precount
-//		UsuarioInquiryRequest request = new UsuarioInquiryRequest();
-//		request.setPreQueryCount(true);
-//		request.setStartPage(0);
-//		request.setPageSize(3);
-//		InternalResultsResponse<Usuario> response = getEmpresaBAR().fetchUsuariosByRequest(request);
-//		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-//		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-//		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-//		// check for valid and precount and start 2nd page
-//		request.setPreQueryCount(true);
-//		request.setStartPage(1);
-//		request.setPageSize(3);
-//		response = getEmpresaBAR().fetchUsuariosByRequest(request);
-//		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-//		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-//		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-//
-//		// check for valid and no precount
-//		UsuarioInquiryRequest request2 = new UsuarioInquiryRequest();
-//		request2.setPreQueryCount(false);
-//		InternalResultsResponse<Usuario> response2 = getEmpresaBAR().fetchUsuariosByRequest(request2);
-//		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
-//		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
-//		// this is because we did not choose to precount
-//		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
-//
-//		// check for zero rows
-//		getEmpresaBAR().deleteAllUsuarios();
-//		UsuarioInquiryRequest request3 = new UsuarioInquiryRequest();
-//		request3.setPreQueryCount(true);
-//		InternalResultsResponse<Usuario> response3 = getEmpresaBAR().fetchUsuariosByRequest(request3);
-//		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
-//
-//	}
-//
-//
+
+
+@Test
+	public void testDeleteFilial()
+	{
+		Filial filial = new Filial(1900, "Filial_999");
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(1900);
+		Filial filialResponse = getEmpresaBAR().fetchFilialById(request);
+		Assert.assertEquals(filialResponse, null);
+		getEmpresaBAR().insertFilial(filial);
+		filialResponse = getEmpresaBAR().fetchFilialById(request);
+		Assert.assertEquals(filial.getId(), filialResponse.getId());
+		getEmpresaBAR().deleteFilialById(filial);
+		filialResponse = getEmpresaBAR().fetchFilialById(request);
+		Assert.assertEquals(filialResponse, null);
+	}
+
+	@Test
+	public void testFetchAllFilials()
+	{
+	Filial filial = new Filial();
+		List<Filial> response = getEmpresaBAR().fetchAllFilials(filial).getResultsList();
+		Assert.assertNotNull(response);
+	}
+
+	@Test
+	public void testDeleteAllFilials()
+	{
+		getEmpresaBAR().deleteAllFilials();
+	Filial filial = new Filial();
+		List<Filial> response = getEmpresaBAR().fetchAllFilials(new Filial()).getResultsList();
+		Assert.assertEquals(response.size(), 0);
+	}
+
+	@Test
+	public void testUpdateFilial()
+	{
+		Filial filial = new Filial(1014, "NATIVE INSERT UPDATE");
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(1014);
+		Filial filialResponse = getEmpresaBAR().fetchFilialById(request);
+		Assert.assertEquals(filialResponse.getNome(), "nome_1");
+		getEmpresaBAR().updateFilial(filial);
+		filialResponse = getEmpresaBAR().fetchFilialById(request);
+		Assert.assertEquals(filialResponse.getNome(), "NATIVE INSERT UPDATE");
+	}
+
+	@Test
+	public void testFetchFilialsByRequest() throws Exception
+	{
+		// check for valid and precount
+		FilialInquiryRequest request = new FilialInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(3);
+		InternalResultsResponse<Filial> response = getEmpresaBAR().fetchFilialsByRequest(request);
+		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+		// check for valid and precount and start 2nd page
+		request.setPreQueryCount(true);
+		request.setStartPage(1);
+		request.setPageSize(3);
+		response = getEmpresaBAR().fetchFilialsByRequest(request);
+		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+
+		// check for valid and no precount
+		FilialInquiryRequest request2 = new FilialInquiryRequest();
+		request2.setPreQueryCount(false);
+		InternalResultsResponse<Filial> response2 = getEmpresaBAR().fetchFilialsByRequest(request2);
+		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+		// this is because we did not choose to precount
+		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+		// check for zero rows
+		getEmpresaBAR().deleteAllFilials();
+		FilialInquiryRequest request3 = new FilialInquiryRequest();
+		request3.setPreQueryCount(true);
+		InternalResultsResponse<Filial> response3 = getEmpresaBAR().fetchFilialsByRequest(request3);
+		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+
+	}
+
+//===================================### DEPOSITO ####======================================
+
+
+@Test
+	public void testDeleteDeposito()
+	{
+		Deposito deposito = new Deposito(19, "Deposito_999");
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(19);
+		Deposito depositoResponse = getEmpresaBAR().fetchDepositoById(request);
+		Assert.assertEquals(depositoResponse, null);
+		getEmpresaBAR().insertDeposito(deposito);
+		depositoResponse = getEmpresaBAR().fetchDepositoById(request);
+		Assert.assertEquals(deposito.getId(), depositoResponse.getId());
+		getEmpresaBAR().deleteDepositoById(deposito);
+		depositoResponse = getEmpresaBAR().fetchDepositoById(request);
+		Assert.assertEquals(depositoResponse, null);
+	}
+
+	@Test
+	public void testFetchAllDepositos()
+	{
+	Deposito deposito = new Deposito();
+		List<Deposito> response = getEmpresaBAR().fetchAllDepositos(deposito).getResultsList();
+		Assert.assertNotNull(response);
+	}
+
+	@Test
+	public void testDeleteAllDepositos()
+	{
+		getEmpresaBAR().deleteAllDepositos();
+	Deposito deposito = new Deposito();
+		List<Deposito> response = getEmpresaBAR().fetchAllDepositos(new Deposito()).getResultsList();
+		Assert.assertEquals(response.size(), 0);
+	}
+
+	@Test
+	public void testUpdateDeposito()
+	{
+		Deposito deposito = new Deposito(1017, "NATIVE INSERT UPDATE");
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(1017);
+		Deposito depositoResponse = getEmpresaBAR().fetchDepositoById(request);
+		Assert.assertEquals(depositoResponse.getNome(), "nome_1");
+		getEmpresaBAR().updateDeposito(deposito);
+		depositoResponse = getEmpresaBAR().fetchDepositoById(request);
+		Assert.assertEquals(depositoResponse.getNome(), "NATIVE INSERT UPDATE");
+	}
+
+	@Test
+	public void testFetchDepositosByRequest() throws Exception
+	{
+		// check for valid and precount
+		DepositoInquiryRequest request = new DepositoInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(3);
+		InternalResultsResponse<Deposito> response = getEmpresaBAR().fetchDepositosByRequest(request);
+		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+		// check for valid and precount and start 2nd page
+		request.setPreQueryCount(true);
+		request.setStartPage(1);
+		request.setPageSize(3);
+		response = getEmpresaBAR().fetchDepositosByRequest(request);
+		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+
+		// check for valid and no precount
+		DepositoInquiryRequest request2 = new DepositoInquiryRequest();
+		request2.setPreQueryCount(false);
+		InternalResultsResponse<Deposito> response2 = getEmpresaBAR().fetchDepositosByRequest(request2);
+		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+		// this is because we did not choose to precount
+		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+		// check for zero rows
+		getEmpresaBAR().deleteAllDepositos();
+		DepositoInquiryRequest request3 = new DepositoInquiryRequest();
+		request3.setPreQueryCount(true);
+		InternalResultsResponse<Deposito> response3 = getEmpresaBAR().fetchDepositosByRequest(request3);
+		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+
+	}
+
+//===================================### USUARIO ####======================================
+
+
+@Test
+	public void testDeleteUsuario()
+	{
+		Usuario usuario = new Usuario(4, "Usuario_999");
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(4);
+		Usuario usuarioResponse = getEmpresaBAR().fetchUsuarioById(request);
+		Assert.assertEquals(usuarioResponse, null);
+		getEmpresaBAR().insertUsuario(usuario);
+		usuarioResponse = getEmpresaBAR().fetchUsuarioById(request);
+		Assert.assertEquals(usuario.getId(), usuarioResponse.getId());
+		getEmpresaBAR().deleteUsuarioById(usuario);
+		usuarioResponse = getEmpresaBAR().fetchUsuarioById(request);
+		Assert.assertEquals(usuarioResponse, null);
+	}
+
+	@Test
+	public void testFetchAllUsuarios()
+	{
+	Usuario usuario = new Usuario();
+		List<Usuario> response = getEmpresaBAR().fetchAllUsuarios(usuario).getResultsList();
+		Assert.assertNotNull(response);
+	}
+
+	@Test
+	public void testDeleteAllUsuarios()
+	{
+		getEmpresaBAR().deleteAllUsuarios();
+		Usuario usuario = new Usuario();
+		List<Usuario> response = getEmpresaBAR().fetchAllUsuarios(new Usuario()).getResultsList();
+		Assert.assertEquals(response.size(), 0);
+	}
+
+	@Test
+	public void testUpdateUsuario()
+	{
+		Usuario usuario = new Usuario(1011, "NATIVE INSERT UPDATE");
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(1011);
+		Usuario usuarioResponse = getEmpresaBAR().fetchUsuarioById(request);
+		Assert.assertEquals(usuarioResponse.getRole(), "role_6");
+		getEmpresaBAR().updateUsuario(usuario);
+		usuarioResponse = getEmpresaBAR().fetchUsuarioById(request);
+		Assert.assertEquals(usuarioResponse.getRole(), "NATIVE INSERT UPDATE");
+	}
+
+	@Test
+	public void testFetchUsuariosByRequest() throws Exception
+	{
+		// check for valid and precount
+		UsuarioInquiryRequest request = new UsuarioInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(3);
+		InternalResultsResponse<Usuario> response = getEmpresaBAR().fetchUsuariosByRequest(request);
+		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+		// check for valid and precount and start 2nd page
+		request.setPreQueryCount(true);
+		request.setStartPage(1);
+		request.setPageSize(3);
+		response = getEmpresaBAR().fetchUsuariosByRequest(request);
+		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+
+		// check for valid and no precount
+		UsuarioInquiryRequest request2 = new UsuarioInquiryRequest();
+		request2.setPreQueryCount(false);
+		InternalResultsResponse<Usuario> response2 = getEmpresaBAR().fetchUsuariosByRequest(request2);
+		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+		// this is because we did not choose to precount
+		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+		// check for zero rows
+		getEmpresaBAR().deleteAllUsuarios();
+		UsuarioInquiryRequest request3 = new UsuarioInquiryRequest();
+		request3.setPreQueryCount(true);
+		InternalResultsResponse<Usuario> response3 = getEmpresaBAR().fetchUsuariosByRequest(request3);
+		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+
+	}
+
+
 //	//===================================### CONDOMINIO ####======================================
-//
-//
-//	@Test
-//		public void testDeleteCondominio()
-//		{
-//			Condominio condominio = new Condominio(19, "Condominio_999");
-//			FetchByIdRequest request = new FetchByIdRequest();
-//			request.setFetchId(19);
-//			Condominio condominioResponse = getEmpresaBAR().fetchCondominioById(request);
-//			Assert.assertEquals(condominioResponse, null);
-//			getEmpresaBAR().insertCondominio(condominio);
-//			condominioResponse = getEmpresaBAR().fetchCondominioById(request);
+
+
+	@Test
+		public void testDeleteCondominio()
+		{
+			Condominio condominio = new Condominio(19, "Condominio_999");
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(19);
+			Condominio condominioResponse = getEmpresaBAR().fetchCondominioById(request);
+			Assert.assertEquals(condominioResponse, null);
+			getEmpresaBAR().insertCondominio(condominio);
+			condominioResponse = getEmpresaBAR().fetchCondominioById(request);
 //			Assert.assertEquals(condominio.getId(), condominioResponse.getId());
 //			getEmpresaBAR().deleteCondominioById(condominio);
 //			condominioResponse = getEmpresaBAR().fetchCondominioById(request);
 //			Assert.assertEquals(condominioResponse, null);
-//		}
-//
-//		@Test
-//		public void testFetchAllCondominios()
-//		{
-//		Condominio condominio = new Condominio();
-//			List<Condominio> response = getEmpresaBAR().fetchAllCondominios(condominio).getResultsList();
-//			Assert.assertNotNull(response);
-//		}
-//
-//		@Test
-//		public void testDeleteAllCondominios()
-//		{
-//			getEmpresaBAR().deleteAllCondominios();
-//		Condominio condominio = new Condominio();
-//			List<Condominio> response = getEmpresaBAR().fetchAllCondominios(new Condominio()).getResultsList();
-//			Assert.assertEquals(response.size(), 0);
-//		}
-//
-//		@Test
-//		public void testUpdateCondominio()
-//		{
-//			Condominio condominio = new Condominio(18, "NATIVE INSERT UPDATE");
-//			FetchByIdRequest request = new FetchByIdRequest();
-//			request.setFetchId(18);
-//			Condominio condominioResponse = getEmpresaBAR().fetchCondominioById(request);
-//			Assert.assertEquals(condominioResponse.getNome(), "nome_1");
-//			getEmpresaBAR().updateCondominio(condominio);
-//			condominioResponse = getEmpresaBAR().fetchCondominioById(request);
-//			Assert.assertEquals(condominioResponse.getNome(), "NATIVE INSERT UPDATE");
-//		}
-//
-//		@Test
-//		public void testFetchCondominiosByRequest() throws Exception
-//		{
-//			// check for valid and precount
-//			CondominioInquiryRequest request = new CondominioInquiryRequest();
-//			request.setPreQueryCount(true);
-//			request.setStartPage(0);
-//			request.setPageSize(3);
-//			InternalResultsResponse<Condominio> response = getEmpresaBAR().fetchCondominiosByRequest(request);
-//			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-//			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-//			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-//			// check for valid and precount and start 2nd page
-//			request.setPreQueryCount(true);
-//			request.setStartPage(1);
-//			request.setPageSize(3);
-//			response = getEmpresaBAR().fetchCondominiosByRequest(request);
-//			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-//			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-//			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-//
-//			// check for valid and no precount
-//			CondominioInquiryRequest request2 = new CondominioInquiryRequest();
-//			request2.setPreQueryCount(false);
-//			InternalResultsResponse<Condominio> response2 = getEmpresaBAR().fetchCondominiosByRequest(request2);
-//			Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
-//			Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
-//			// this is because we did not choose to precount
-//			Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
-//
-//			// check for zero rows
-//			getEmpresaBAR().deleteAllCondominios();
-//			CondominioInquiryRequest request3 = new CondominioInquiryRequest();
-//			request3.setPreQueryCount(true);
-//			InternalResultsResponse<Condominio> response3 = getEmpresaBAR().fetchCondominiosByRequest(request3);
-//			Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
-//
-//		}
-//
-//	//===================================### CLINICA ####======================================
-//
-//
-//	@Test
-//		public void testDeleteClinica()
-//		{
-//			Clinica clinica = new Clinica(19, "Clinica_999");
-//			FetchByIdRequest request = new FetchByIdRequest();
-//			request.setFetchId(19);
-//			Clinica clinicaResponse = getEmpresaBAR().fetchClinicaById(request);
-//			Assert.assertEquals(clinicaResponse, null);
-//			getEmpresaBAR().insertClinica(clinica);
-//			clinicaResponse = getEmpresaBAR().fetchClinicaById(request);
+		}
+
+		@Test
+		public void testFetchAllCondominios()
+		{
+		Condominio condominio = new Condominio();
+			List<Condominio> response = getEmpresaBAR().fetchAllCondominios(condominio).getResultsList();
+			Assert.assertNotNull(response);
+		}
+
+		@Test
+		public void testDeleteAllCondominios()
+		{
+			getEmpresaBAR().deleteAllCondominios();
+		Condominio condominio = new Condominio();
+			List<Condominio> response = getEmpresaBAR().fetchAllCondominios(new Condominio()).getResultsList();
+			Assert.assertEquals(response.size(), 0);
+		}
+
+		@Test
+		public void testUpdateCondominio()
+		{
+			Condominio condominio = new Condominio(10116, "NATIVE INSERT UPDATE");
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(10116);
+			Condominio condominioResponse = getEmpresaBAR().fetchCondominioById(request);
+			Assert.assertEquals(condominioResponse.getNome(), "nome_1");
+			getEmpresaBAR().updateCondominio(condominio);
+			condominioResponse = getEmpresaBAR().fetchCondominioById(request);
+			Assert.assertEquals(condominioResponse.getNome(), "NATIVE INSERT UPDATE");
+		}
+
+		@Test
+		public void testFetchCondominiosByRequest() throws Exception
+		{
+			// check for valid and precount
+			CondominioInquiryRequest request = new CondominioInquiryRequest();
+			request.setPreQueryCount(true);
+			request.setStartPage(0);
+			request.setPageSize(3);
+			InternalResultsResponse<Condominio> response = getEmpresaBAR().fetchCondominiosByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+			// check for valid and precount and start 2nd page
+			request.setPreQueryCount(true);
+			request.setStartPage(1);
+			request.setPageSize(3);
+			response = getEmpresaBAR().fetchCondominiosByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+
+			// check for valid and no precount
+			CondominioInquiryRequest request2 = new CondominioInquiryRequest();
+			request2.setPreQueryCount(false);
+			InternalResultsResponse<Condominio> response2 = getEmpresaBAR().fetchCondominiosByRequest(request2);
+			Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+			// this is because we did not choose to precount
+			Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+			// check for zero rows
+			getEmpresaBAR().deleteAllCondominios();
+			CondominioInquiryRequest request3 = new CondominioInquiryRequest();
+			request3.setPreQueryCount(true);
+			InternalResultsResponse<Condominio> response3 = getEmpresaBAR().fetchCondominiosByRequest(request3);
+			Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+
+		}
+
+	//===================================### CLINICA ####======================================
+
+
+	@Test
+		public void testDeleteClinica()
+		{
+			Clinica clinica = new Clinica(19, "Clinica_999");
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(19);
+			Clinica clinicaResponse = getEmpresaBAR().fetchClinicaById(request);
+			Assert.assertEquals(clinicaResponse, null);
+			getEmpresaBAR().insertClinica(clinica);
+			clinicaResponse = getEmpresaBAR().fetchClinicaById(request);
 //			Assert.assertEquals(clinica.getId(), clinicaResponse.getId());
 //			getEmpresaBAR().deleteClinicaById(clinica);
 //			clinicaResponse = getEmpresaBAR().fetchClinicaById(request);
 //			Assert.assertEquals(clinicaResponse, null);
-//		}
-//
-//		@Test
-//		public void testFetchAllClinicas()
-//		{
-//		Clinica clinica = new Clinica();
-//			List<Clinica> response = getEmpresaBAR().fetchAllClinicas(clinica).getResultsList();
-//			Assert.assertNotNull(response);
-//		}
-//
-//		@Test
-//		public void testDeleteAllClinicas()
-//		{
-//			getEmpresaBAR().deleteAllClinicas();
-//		Clinica clinica = new Clinica();
-//			List<Clinica> response = getEmpresaBAR().fetchAllClinicas(new Clinica()).getResultsList();
-//			Assert.assertEquals(response.size(), 0);
-//		}
-//
-//		@Test
-//		public void testUpdateClinica()
-//		{
-//			Clinica clinica = new Clinica(13, "NATIVE INSERT UPDATE");
-//			FetchByIdRequest request = new FetchByIdRequest();
-//			request.setFetchId(13);
-//			Clinica clinicaResponse = getEmpresaBAR().fetchClinicaById(request);
-//			Assert.assertEquals(clinicaResponse.getNome(), "nome_1");
-//			getEmpresaBAR().updateClinica(clinica);
-//			clinicaResponse = getEmpresaBAR().fetchClinicaById(request);
-//			Assert.assertEquals(clinicaResponse.getNome(), "NATIVE INSERT UPDATE");
-//		}
-//
-//		@Test
-//		public void testFetchClinicasByRequest() throws Exception
-//		{
-//			// check for valid and precount
-//			ClinicaInquiryRequest request = new ClinicaInquiryRequest();
-//			request.setPreQueryCount(true);
-//			request.setStartPage(0);
-//			request.setPageSize(3);
-//			InternalResultsResponse<Clinica> response = getEmpresaBAR().fetchClinicasByRequest(request);
-//			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-//			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-//			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-//			// check for valid and precount and start 2nd page
-//			request.setPreQueryCount(true);
-//			request.setStartPage(1);
-//			request.setPageSize(3);
-//			response = getEmpresaBAR().fetchClinicasByRequest(request);
-//			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-//			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-//			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-//
-//			// check for valid and no precount
-//			ClinicaInquiryRequest request2 = new ClinicaInquiryRequest();
-//			request2.setPreQueryCount(false);
-//			InternalResultsResponse<Clinica> response2 = getEmpresaBAR().fetchClinicasByRequest(request2);
-//			Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
-//			Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
-//			// this is because we did not choose to precount
-//			Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
-//
-//			// check for zero rows
-//			getEmpresaBAR().deleteAllClinicas();
-//			ClinicaInquiryRequest request3 = new ClinicaInquiryRequest();
-//			request3.setPreQueryCount(true);
-//			InternalResultsResponse<Clinica> response3 = getEmpresaBAR().fetchClinicasByRequest(request3);
-//			Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
-//
-//		}
-//
-//	//===================================### ADVOCACIA ####======================================
-//
-//
-//	@Test
-//		public void testDeleteAdvocacia()
-//		{
-//			Advocacia advocacia = new Advocacia(19, "Advocacia_999");
-//			FetchByIdRequest request = new FetchByIdRequest();
-//			request.setFetchId(19);
-//			Advocacia advocaciaResponse = getEmpresaBAR().fetchAdvocaciaById(request);
-//			Assert.assertEquals(advocaciaResponse, null);
-//			getEmpresaBAR().insertAdvocacia(advocacia);
-//			advocaciaResponse = getEmpresaBAR().fetchAdvocaciaById(request);
+		}
+
+		@Test
+		public void testFetchAllClinicas()
+		{
+		Clinica clinica = new Clinica();
+			List<Clinica> response = getEmpresaBAR().fetchAllClinicas(clinica).getResultsList();
+			Assert.assertNotNull(response);
+		}
+
+		@Test
+		public void testDeleteAllClinicas()
+		{
+			getEmpresaBAR().deleteAllClinicas();
+		Clinica clinica = new Clinica();
+			List<Clinica> response = getEmpresaBAR().fetchAllClinicas(new Clinica()).getResultsList();
+			Assert.assertEquals(response.size(), 0);
+		}
+
+		@Test
+		public void testUpdateClinica()
+		{
+			Clinica clinica = new Clinica(10113, "NATIVE INSERT UPDATE");
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(10113);
+			Clinica clinicaResponse = getEmpresaBAR().fetchClinicaById(request);
+			Assert.assertEquals(clinicaResponse.getNome(), "nome_1");
+			getEmpresaBAR().updateClinica(clinica);
+			clinicaResponse = getEmpresaBAR().fetchClinicaById(request);
+			Assert.assertEquals(clinicaResponse.getNome(), "NATIVE INSERT UPDATE");
+		}
+
+		@Test
+		public void testFetchClinicasByRequest() throws Exception
+		{
+			// check for valid and precount
+			ClinicaInquiryRequest request = new ClinicaInquiryRequest();
+			request.setPreQueryCount(true);
+			request.setStartPage(0);
+			request.setPageSize(3);
+			InternalResultsResponse<Clinica> response = getEmpresaBAR().fetchClinicasByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+			// check for valid and precount and start 2nd page
+			request.setPreQueryCount(true);
+			request.setStartPage(1);
+			request.setPageSize(3);
+			response = getEmpresaBAR().fetchClinicasByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+
+			// check for valid and no precount
+			ClinicaInquiryRequest request2 = new ClinicaInquiryRequest();
+			request2.setPreQueryCount(false);
+			InternalResultsResponse<Clinica> response2 = getEmpresaBAR().fetchClinicasByRequest(request2);
+			Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+			// this is because we did not choose to precount
+			Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+			// check for zero rows
+			getEmpresaBAR().deleteAllClinicas();
+			ClinicaInquiryRequest request3 = new ClinicaInquiryRequest();
+			request3.setPreQueryCount(true);
+			InternalResultsResponse<Clinica> response3 = getEmpresaBAR().fetchClinicasByRequest(request3);
+			Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+
+		}
+
+	//===================================### ADVOCACIA ####======================================
+
+
+	@Test
+		public void testDeleteAdvocacia()
+		{
+			Advocacia advocacia = new Advocacia(19, "Advocacia_999");
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(19);
+			Advocacia advocaciaResponse = getEmpresaBAR().fetchAdvocaciaById(request);
+			Assert.assertEquals(advocaciaResponse, null);
+			getEmpresaBAR().insertAdvocacia(advocacia);
+			advocaciaResponse = getEmpresaBAR().fetchAdvocaciaById(request);
 //			Assert.assertEquals(advocacia.getId(), advocaciaResponse.getId());
 //			getEmpresaBAR().deleteAdvocaciaById(advocacia);
 //			advocaciaResponse = getEmpresaBAR().fetchAdvocaciaById(request);
 //			Assert.assertEquals(advocaciaResponse, null);
-//		}
-//
-//		@Test
-//		public void testFetchAllAdvocacias()
-//		{
-//		Advocacia advocacia = new Advocacia();
-//			List<Advocacia> response = getEmpresaBAR().fetchAllAdvocacias(advocacia).getResultsList();
-//			Assert.assertNotNull(response);
-//		}
-//
-//		@Test
-//		public void testDeleteAllAdvocacias()
-//		{
-//			getEmpresaBAR().deleteAllAdvocacias();
-//			Advocacia advocacia = new Advocacia();
-//			List<Advocacia> response = getEmpresaBAR().fetchAllAdvocacias(new Advocacia()).getResultsList();
-//			Assert.assertEquals(response.size(), 3);
-//		}
-//
-//		@Test
-//		public void testUpdateAdvocacia()
-//		{
-//			Advocacia advocacia = new Advocacia(10, "NATIVE INSERT UPDATE");
-//			FetchByIdRequest request = new FetchByIdRequest();
-//			request.setFetchId(10);
-//			Advocacia advocaciaResponse = getEmpresaBAR().fetchAdvocaciaById(request);
-//			Assert.assertEquals(advocaciaResponse.getNome(), "nome_1");
-//			getEmpresaBAR().updateAdvocacia(advocacia);
-//			advocaciaResponse = getEmpresaBAR().fetchAdvocaciaById(request);
-//			Assert.assertEquals(advocaciaResponse.getNome(), "NATIVE INSERT UPDATE");
-//		}
-//
-//		@Test
-//		public void testFetchAdvocaciasByRequest() throws Exception
-//		{
-//			// check for valid and precount
-//			AdvocaciaInquiryRequest request = new AdvocaciaInquiryRequest();
-//			request.setPreQueryCount(true);
-//			request.setStartPage(0);
-//			request.setPageSize(3);
-//			InternalResultsResponse<Advocacia> response = getEmpresaBAR().fetchAdvocaciasByRequest(request);
-//			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-//			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-//			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-//			// check for valid and precount and start 2nd page
-//			request.setPreQueryCount(true);
-//			request.setStartPage(1);
-//			request.setPageSize(3);
-//			response = getEmpresaBAR().fetchAdvocaciasByRequest(request);
-//			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-//			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-//			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-//
-//			// check for valid and no precount
-//			AdvocaciaInquiryRequest request2 = new AdvocaciaInquiryRequest();
-//			request2.setPreQueryCount(false);
-//			InternalResultsResponse<Advocacia> response2 = getEmpresaBAR().fetchAdvocaciasByRequest(request2);
-//			Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
-//			Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
-//			// this is because we did not choose to precount
-//			Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
-//
-//			// check for zero rows
-//			getEmpresaBAR().deleteAllAdvocacias();
-//			AdvocaciaInquiryRequest request3 = new AdvocaciaInquiryRequest();
-//			request3.setPreQueryCount(true);
-//			InternalResultsResponse<Advocacia> response3 = getEmpresaBAR().fetchAdvocaciasByRequest(request3);
-//			Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
-//
-//		}
+		}
+
+		@Test
+		public void testFetchAllAdvocacias()
+		{
+		Advocacia advocacia = new Advocacia();
+			List<Advocacia> response = getEmpresaBAR().fetchAllAdvocacias(advocacia).getResultsList();
+			Assert.assertNotNull(response);
+		}
+
+		@Test
+		public void testDeleteAllAdvocacias()
+		{
+			getEmpresaBAR().deleteAllAdvocacias();
+			Advocacia advocacia = new Advocacia();
+			List<Advocacia> response = getEmpresaBAR().fetchAllAdvocacias(new Advocacia()).getResultsList();
+			Assert.assertEquals(response.size(), 3);
+		}
+
+		@Test
+		public void testUpdateAdvocacia()
+		{
+			Advocacia advocacia = new Advocacia(10110, "NATIVE INSERT UPDATE");
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(10110);
+			Advocacia advocaciaResponse = getEmpresaBAR().fetchAdvocaciaById(request);
+			Assert.assertEquals(advocaciaResponse.getNome(), "nome_1");
+			getEmpresaBAR().updateAdvocacia(advocacia);
+			advocaciaResponse = getEmpresaBAR().fetchAdvocaciaById(request);
+			Assert.assertEquals(advocaciaResponse.getNome(), "NATIVE INSERT UPDATE");
+		}
+
+		@Test
+		public void testFetchAdvocaciasByRequest() throws Exception
+		{
+			// check for valid and precount
+			AdvocaciaInquiryRequest request = new AdvocaciaInquiryRequest();
+			request.setPreQueryCount(true);
+			request.setStartPage(0);
+			request.setPageSize(3);
+			InternalResultsResponse<Advocacia> response = getEmpresaBAR().fetchAdvocaciasByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+			// check for valid and precount and start 2nd page
+			request.setPreQueryCount(true);
+			request.setStartPage(1);
+			request.setPageSize(3);
+			response = getEmpresaBAR().fetchAdvocaciasByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+
+			// check for valid and no precount
+			AdvocaciaInquiryRequest request2 = new AdvocaciaInquiryRequest();
+			request2.setPreQueryCount(false);
+			InternalResultsResponse<Advocacia> response2 = getEmpresaBAR().fetchAdvocaciasByRequest(request2);
+			Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+			// this is because we did not choose to precount
+			Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+			// check for zero rows
+			getEmpresaBAR().deleteAllAdvocacias();
+			AdvocaciaInquiryRequest request3 = new AdvocaciaInquiryRequest();
+			request3.setPreQueryCount(true);
+			InternalResultsResponse<Advocacia> response3 = getEmpresaBAR().fetchAdvocaciasByRequest(request3);
+			Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+
+		}
 
 		@Before
 		public void setup()
 		{
 			executeSqlScript("conf/insertEmpresa.sql", false);
-//			executeSqlScript("conf/insertFilial.sql", false);
-//			executeSqlScript("conf/insertDeposito.sql", false);
-//			executeSqlScript("conf/insertUsuario.sql", false);
-//			executeSqlScript("conf/insertCondominio.sql", false);
-//			executeSqlScript("conf/insertClinica.sql", false);
-//			executeSqlScript("conf/insertAdvocacia.sql", false);
+			executeSqlScript("conf/insertFilial.sql", false);
+			executeSqlScript("conf/insertDeposito.sql", false);
+			executeSqlScript("conf/insertUsuario.sql", false);
+			executeSqlScript("conf/insertCondominio.sql", false);
+			executeSqlScript("conf/insertClinica.sql", false);
+			executeSqlScript("conf/insertAdvocacia.sql", false);
 		}
 		public List<Endereco> enderecoList(PersistenceActionEnum action)
 		{
@@ -1055,7 +1064,7 @@ public IEmpresaBAR getEmpresaBAR()
 			Boleto boleto = new Boleto();
 			Date a = new Date();
 			boleto.setId(100);
-			boleto.setAtivarBolOnLine(Boolean.FALSE);
+			boleto.setAtivarBolOnLine(0);
 			boleto.setTipoBoleto(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
 			boleto.setAgencia(100);
 			boleto.setCedente(100);
@@ -1064,7 +1073,7 @@ public IEmpresaBAR getEmpresaBAR()
 			boleto.setMora(new Double(1.99));
 			boleto.setInstrucoes("NATIVE INSERT UPDATE");
 			boleto.setDemonstrativo("NATIVE INSERT UPDATE");
-			boleto.setImpJuros(Boolean.FALSE);
+			boleto.setImpJuros(0);
 			boleto.setParentId(id);
 			boleto.setEmprId(1);
 			boleto.setModifyDateUTC(a.getTime());
@@ -1083,8 +1092,8 @@ public IEmpresaBAR getEmpresaBAR()
 			ConfigCarne ConfigCarne = new ConfigCarne();
 			Date a = new Date();
 			ConfigCarne.setId(100);
-			ConfigCarne.setCarneBotelo(Boolean.FALSE);
-			ConfigCarne.setCarneNormal(Boolean.FALSE);
+			ConfigCarne.setCarneBotelo(0);
+			ConfigCarne.setCarneNormal(0);
 			ConfigCarne.setParentId(id);
 			ConfigCarne.setEmprId(1);
 			ConfigCarne.setModifyDateUTC(a.getTime());
@@ -1103,8 +1112,8 @@ public IEmpresaBAR getEmpresaBAR()
 			ConfigEntrada ConfigEntrada = new ConfigEntrada();
 			Date a = new Date();
 			ConfigEntrada.setId(100);
-			ConfigEntrada.setValorTotalFixo(Boolean.FALSE);
-			ConfigEntrada.setManterPrecoVendaProd(Boolean.FALSE);
+			ConfigEntrada.setValorTotalFixo(0);
+			ConfigEntrada.setManterPrecoVendaProd(0);
 			ConfigEntrada.setParentId(id);
 			ConfigEntrada.setEmprId(1);
 			ConfigEntrada.setModifyDateUTC(a.getTime());
@@ -1144,10 +1153,10 @@ public IEmpresaBAR getEmpresaBAR()
 			ConfigAlertas ConfigAlertas = new ConfigAlertas();
 			Date a = new Date();
 			ConfigAlertas.setId(100);
-			ConfigAlertas.setEstoqMin(Boolean.FALSE);
-			ConfigAlertas.setEstoqMax(Boolean.FALSE);
-			ConfigAlertas.setErroNFe(Boolean.FALSE);
-			ConfigAlertas.setPdCompra(Boolean.FALSE);
+			ConfigAlertas.setEstoqMin(0);
+			ConfigAlertas.setEstoqMax(0);
+			ConfigAlertas.setErroNFe(0);
+			ConfigAlertas.setPdCompra(0);
 			ConfigAlertas.setParentId(id);
 			ConfigAlertas.setEmprId(1);
 			ConfigAlertas.setModifyDateUTC(a.getTime());
@@ -1169,11 +1178,11 @@ public IEmpresaBAR getEmpresaBAR()
 			ConfigGeral.setFusoHorario(100);
 			ConfigGeral.setCasasDecimais(100);
 			ConfigGeral.setDiasCartaCobr(100);
-			ConfigGeral.setInfPosicionarMouse(Boolean.FALSE);
-			ConfigGeral.setCnpjCPFUnico(Boolean.FALSE);
-			ConfigGeral.setImpCodPersonalizado(Boolean.FALSE);
-			ConfigGeral.setLogListRelImp(Boolean.FALSE);
-			ConfigGeral.setObsProdFinProd(Boolean.FALSE);
+			ConfigGeral.setInfPosicionarMouse(0);
+			ConfigGeral.setCnpjCPFUnico(0);
+			ConfigGeral.setImpCodPersonalizado(0);
+			ConfigGeral.setLogListRelImp(0);
+			ConfigGeral.setObsProdFinProd(0);
 			ConfigGeral.setParentId(id);
 			ConfigGeral.setEmprId(1);
 			ConfigGeral.setModifyDateUTC(a.getTime());
@@ -1267,8 +1276,8 @@ public IEmpresaBAR getEmpresaBAR()
 			Date a = new Date();
 			ConfiguracaoNFe.setId(100);
 			ConfiguracaoNFe.setPresCompr(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
-			ConfiguracaoNFe.setDestConsFinal(Boolean.FALSE);
-			ConfiguracaoNFe.setPreencherDataHora(Boolean.FALSE);
+			ConfiguracaoNFe.setDestConsFinal(0);
+			ConfiguracaoNFe.setPreencherDataHora(0);
 			ConfiguracaoNFe.setIcmsPadrao(new Double(1.99));
 			ConfiguracaoNFe.setIpiPadrao(new Double(1.99));
 			ConfiguracaoNFe.setPisPadrao(new Double(1.99));
@@ -1276,13 +1285,13 @@ public IEmpresaBAR getEmpresaBAR()
 			ConfiguracaoNFe.setAmbienteEnvio(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
 			ConfiguracaoNFe.setServMsmNota(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
 			ConfiguracaoNFe.setSerieEnvio("NATIVE INSERT UPDATE");
-			ConfiguracaoNFe.setAnexarXmlEmail(Boolean.FALSE);
+			ConfiguracaoNFe.setAnexarXmlEmail(0);
 			ConfiguracaoNFe.setIdCSC("NATIVE INSERT UPDATE");
 			ConfiguracaoNFe.setcSC("NATIVE INSERT UPDATE");
 			ConfiguracaoNFe.setInformacaoAdd("NATIVE INSERT UPDATE");
 			ConfiguracaoNFe.setCertificado("NATIVE INSERT UPDATE");
 			ConfiguracaoNFe.setSenha("NATIVE INSERT UPDATE");
-			ConfiguracaoNFe.setSalvarSenha(Boolean.FALSE);
+			ConfiguracaoNFe.setSalvarSenha(0);
 			ConfiguracaoNFe.setCfopPadrao(new Cfop());
 			ConfiguracaoNFe.setConfSMTP(new ConfigSMTP());
 			ConfiguracaoNFe.setParentId(id);
@@ -1305,14 +1314,14 @@ public IEmpresaBAR getEmpresaBAR()
 			ConfigVendas.setId(100);
 			ConfigVendas.setDescontoMaxVenda(new Double(1.99));
 			ConfigVendas.setObservacao("observação");
-			ConfigVendas.setImprSegVia(Boolean.FALSE);
-			ConfigVendas.setImprAssinatura(Boolean.FALSE);
-			ConfigVendas.setImprResumoFinanc(Boolean.FALSE);
-			ConfigVendas.setAtuaPrecoClonar(Boolean.FALSE);
-			ConfigVendas.setImprColUnidade(Boolean.FALSE);
-			ConfigVendas.setBloquearvendProdSemEstoq(Boolean.FALSE);
-			ConfigVendas.setAddDespCalcImposto(Boolean.FALSE);
-			ConfigVendas.setRetSubstTribICMS(Boolean.FALSE);
+			ConfigVendas.setImprSegVia(0);
+			ConfigVendas.setImprAssinatura(0);
+			ConfigVendas.setImprResumoFinanc(0);
+			ConfigVendas.setAtuaPrecoClonar(0);
+			ConfigVendas.setImprColUnidade(0);
+			ConfigVendas.setBloquearvendProdSemEstoq(0);
+			ConfigVendas.setAddDespCalcImposto(0);
+			ConfigVendas.setRetSubstTribICMS(0);
 			ConfigVendas.setParentId(id);
 			ConfigVendas.setEmprId(1);
 			ConfigVendas.setModifyDateUTC(a.getTime());
