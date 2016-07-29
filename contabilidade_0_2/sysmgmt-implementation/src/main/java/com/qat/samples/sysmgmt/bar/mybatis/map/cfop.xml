@@ -90,8 +90,7 @@ cfop
 
 		SELECT id,<include refid="allCfopColumns" />
   		  FROM cfop where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
+
 </select>
 
 <select id="fetchCfopRowCount" resultType="Integer">

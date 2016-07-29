@@ -58,7 +58,7 @@ public class CountyValidator implements IValidator
 	private void validateAll(List<MessageInfo> list, County county)
 	{
 		validateCountyId(list, county);
-		validateCountyDesc(list, county);
+		//validateCountyDesc(list, county);
 	}
 
 	private void validateCountyId(List<MessageInfo> list, County county)

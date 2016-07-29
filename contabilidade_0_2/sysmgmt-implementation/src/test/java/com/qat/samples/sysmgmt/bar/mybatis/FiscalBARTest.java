@@ -148,9 +148,9 @@ public IFiscalBAR getFiscalBAR()
 @Test
 	public void testDeleteCfop()
 	{
-		Cfop cfop = new Cfop(4, "Cfop_999");
+		Cfop cfop = new Cfop(4000, "Cfop_999");
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(4000);
 		Cfop cfopResponse = getFiscalBAR().fetchCfopById(request);
 		Assert.assertEquals(cfopResponse, null);
 		getFiscalBAR().insertCfop(cfop);

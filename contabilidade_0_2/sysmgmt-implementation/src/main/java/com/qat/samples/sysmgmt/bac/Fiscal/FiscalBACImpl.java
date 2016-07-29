@@ -218,16 +218,6 @@ private InternalResultsResponse<Regime> processRegime(ValidationContextIndicator
 		{
 	InternalResultsResponse<Regime> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Regime.class.getSimpleName(), request.getRegime(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Regime>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceRegime(request.getRegime(), persistType);
 		if (internalResponse.isInError())
@@ -434,16 +424,6 @@ private InternalResultsResponse<Cfop> processCfop(ValidationContextIndicator ind
 		CfopMaintenanceRequest request)
 		{
 	InternalResultsResponse<Cfop> response = null;
-
-	// Validate
-	ValidationContext context = new ValidationContext(Cfop.class.getSimpleName(), request.getCfop(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Cfop>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceCfop(request.getCfop(), persistType);

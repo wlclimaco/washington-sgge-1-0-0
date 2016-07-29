@@ -260,9 +260,9 @@ public IProdutoBAR getProdutoBAR()
 @Test
 	public void testDeleteCfop()
 	{
-		Cfop cfop = insertCfop(4, TabelaEnum.CFOP, PersistenceActionEnum.INSERT);
+		Cfop cfop = insertCfop(4000, TabelaEnum.CFOP, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(4000);
 		Cfop cfopResponse = getProdutoBAR().fetchCfopById(request);
 		Assert.assertEquals(cfopResponse, null);
 		getProdutoBAR().insertCfop(cfop);
