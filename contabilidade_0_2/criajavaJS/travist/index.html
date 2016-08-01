@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
@@ -735,7 +734,6 @@ $('#checkeds').append(imputs);
 				}
 				if($('#BARDIMPL').prop('checked')){
 					for (var x = 0;x< oProjet[i].classes.length;x++){
-						debugger
 						$("div#tabs").addTab(""+oProjet[i].classes[x].classe+"BARD",BarDImpl(oProjet[i].classes[x],oProjet[i].classes[x].classe,""));
 					}
 				}
@@ -746,9 +744,18 @@ $('#checkeds').append(imputs);
 				}	
 				
 				if($('#jUnitFront').prop('checked')){
+					var tests = "";
+					var testss = "";
 					for (var x = 0;x< oProjet[i].classes.length;x++){
-						$("div#tabs").addTab(oProjet[i].classes[x].classe,jUnitFront(oProjet[i].classes[x].model,oProjet[i].classes[x].classe));
+						tests = tests + jUnitFront(oProjet[i].classes[x].model,oProjet[i].classes[x].classe);
 					}
+					tests = tests + "=====================================TESTE==========================================================="
+					for(var a = 0;a<oProjet.length;a++){
+						if(oProjet[a] !== undefined)
+							testss = testss + jUnitFrontModels(oProjet[a].classes,oProjet[a].interfaces);
+					}
+					$("div#tabs").addTab("Junit",tests);
+					$("div#tabs").addTab("Models",testss);
 				}
 				if($('#Model').prop('checked')){
 					$("div#tabs").addTab(oProjet[i].interfaces,model(oProjet[i].classes,oProjet[i].interfaces));
@@ -831,7 +838,6 @@ $('#checkeds').append(imputs);
 				if($('#domain').prop('checked')){
 					var sqlJ = "";
 					var sqlJ1 = "";
-					debugger
 					for (var x = 0;x< oProjet[i].classes.length;x++){
 						sqlJ = sqlJ + domain(oProjet[i].classes[x].model,oProjet[i].classes[x].classe);
 						sqlJ1 = sqlJ1 + domainTest(oProjet[i].classes[x].model,oProjet[i].classes[x].classe);

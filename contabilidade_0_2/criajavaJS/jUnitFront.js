@@ -1,5 +1,4 @@
 jUnitFront = function(oField, name) {
-debugger
     var text = '';
     text = text + '\n';
     text = text + '\n';
@@ -53,7 +52,7 @@ debugger
     text = text + '    String a ="request:{pageSize: 20, startPage: 2, sortExpressions: null, preQueryCount: true, maxPreQueryCount: 0}, token:taz@qat.com:1469815365580:33f9281620d9dc7df079e056ad235420, url:fiscal/api/cfop/fetchPage/";\n';
     text = text + '    HttpEntity<String> entity = new HttpEntity<String>("{}",headers);\n';
     text = text + '\n';
-     text = text + ' '+titleize(name)+' objeto = new ' +titleize(name)+'();\n';
+/*     text = text + ' '+titleize(name)+' objeto = new ' +titleize(name)+'();\n';
 for (i = 0; i < oField.length; i++) {
         if (oField[i].field.xml == true) {
             if (oField[i].field.tipo !== undefined) {
@@ -70,7 +69,7 @@ for (i = 0; i < oField.length; i++) {
                          }
                          else
                         {
-                            debugger
+            
                              if(oField[i].field.campo.toLowerCase() == 'id')
                              {
                                     text = text + 'objeto.set' + titleize(oField[i].field.campo) + '(id); \n';
@@ -88,8 +87,8 @@ for (i = 0; i < oField.length; i++) {
             }
         }
 
-    }
-text = text + 'objeto.setModelAction(PersistenceActionEnum.INSERT);\n'
+    }*/
+
     text = text + '\n';
         text = text + '\n';
 text = text + '//=========== fetch ================================================================\n';
@@ -104,7 +103,7 @@ text = text + '        count = result.get'+titleize(name)+'List().size();\n';
         text = text + '\n';
 text = text + '      //=========== Insert ================================================================\n';
 text = text + '        System.out.println("==================================INSERT==============================================");\n';
-text = text + '        jsonInString = mapper.writeValueAsString(objeto);\n';
+text = text + '        jsonInString = mapper.writeValueAsString(Objects.insert'+titleize(name)+'(id,TabelaEnum.'+name.toUpperCase()+',PersistenceActionEnum.INSERT));\n';
 text = text + '        System.out.println(jsonInString);\n';
 
 text = text + '        String requestJson = "{\\"'+name.toLowerCase()+'\\":"+jsonInString+"}";\n';
@@ -117,7 +116,7 @@ text = text + '        Assert.assertEquals(result.isOperationSuccess(), true);\n
 text = text + '      //=========== Update ================================================================\n';
 text = text + '        System.out.println("==================================UPDATE==============================================");\n';
     text = text + '\n';
-text = text + ' objeto = new ' +titleize(name)+'();\n';
+/*text = text + ' objeto = new ' +titleize(name)+'();\n';
    for (i = 0; i < oField.length; i++) {
         if (oField[i].field.xml == true) {
             if (oField[i].field.tipo !== undefined) {
@@ -153,11 +152,12 @@ text = text + ' objeto = new ' +titleize(name)+'();\n';
 
     }
     text = text + 'objeto.setModelAction(PersistenceActionEnum.UPDATE);\n'
+    */
 text = text + '        \n';
-text = text + '        objeto.setModifyDateUTC((new Date()).getTime());\n';
-text = text + '        objeto.setModifyUser("rod");\n';
-
-text = text + '        jsonInString = mapper.writeValueAsString(objeto);\n';
+//text = text + '        objeto.setModifyDateUTC((new Date()).getTime());\n';
+//text = text + '        objeto.setModifyUser("rod");\n';
+//jsonInString = mapper.writeValueAsString(insert'+titleize(name)+'(id,TabelaEnum.'+name.toUpperCase()+',PersistenceActionEnum.INSERT));\n';
+text = text + '        jsonInString = mapper.writeValueAsString(Objects.insert'+titleize(name)+'(id,TabelaEnum.'+name.toUpperCase()+',PersistenceActionEnum.UPDATE));\n';
 text = text + '        requestJson = "{\\"'+name.toLowerCase()+'\\":"+jsonInString+"}";\n';
 text = text + '        entitys = new HttpEntity<String>(requestJson,headers);\n';
 
@@ -214,8 +214,7 @@ for (i = 0; i < oField.length; i++) {
     text = text + '\n';
 text = text + '        //=======================\n';
 text = text + '        System.out.println("==================================DELETE==============================================");\n';
-text = text + '        objeto.setModelAction(PersistenceActionEnum.DELETE);\n'
-text = text + '        jsonInString = mapper.writeValueAsString(objeto);\n';
+text = text + '        jsonInString = mapper.writeValueAsString(Objects.insert'+titleize(name)+'(id,TabelaEnum.'+name.toUpperCase()+',PersistenceActionEnum.DELETE));\n';
 text = text + '        requestJson = "{\\\"'+name.toLowerCase()+'\\\":"+jsonInString+"}";\n';
 text = text + '        entitys = new HttpEntity<String>(requestJson,headers);\n';
 text = text + '        result = restTemplate.postForObject( REST_SERVICE_URI + "fiscal/api/'+name.toLowerCase()+'/delete/",entitys,  '+titleize(name)+'Response.class);\n';
@@ -230,4 +229,75 @@ text = text + '    }\n';
     text = text + "\n";
 
     return text;
+}
+
+
+
+jUnitFrontModels = function(teste,bar) {
+
+var text = '';
+text = text + "\n";
+text = text + "\n";
+for(var i=0;i < teste.length;i++){
+text = text + ' \n';
+
+text = text + ' public static '+titleize(teste[i].classe)+' insert'+titleize(teste[i].classe)+'(Integer id,TabelaEnum tabela,PersistenceActionEnum action)\n';
+text = text + '     {\n';
+text = text + '         '+titleize(teste[i].classe)+' '+teste[i].classe.toLowerCase()+' = new '+titleize(teste[i].classe)+'();\n';
+text = text + '         Date a = new Date();\n';
+    for(var y=0;y < teste[i].model.length;y++){
+        var oField = teste[i].model[y];
+        console.log(teste[i].model[y].field.tipo);
+        if(teste[i].model[y].field.tipo !== undefined){
+            if(teste[i].model[y].field.tipo.indexOf('List') == -1){
+                if ((oField.field.tipo.toLowerCase() == 'boolean') ||(oField.field.tipo.toLowerCase() == 'integer') || (oField.field.tipo.toLowerCase() == 'double')||(oField.field.tipo.toLowerCase() == 'string')||(oField.field.tipo.toLowerCase() == 'data')||(oField.field.tipo.toLowerCase() == 'float')) 
+                    {
+
+                        if(oField.field.tipo.toLowerCase() == 'string')
+                        {
+                            text = text + '         '+teste[i].classe.toLowerCase()+'.set'+titleize(teste[i].model[y].field.campo)+'( '+convertModuless(teste[i].model[y].field.tipo, y ,teste[i].model[y].field.campo)+' + action.toString());\n';
+
+                        }
+                         else
+                        {
+                            if(oField.field.campo.toLowerCase() != 'id')
+                            {
+                             
+                                text = text + '         '+teste[i].classe.toLowerCase()+'.set'+titleize(teste[i].model[y].field.campo)+'('+convertModuless(teste[i].model[y].field.tipo, y ,teste[i].model[y].field.campo)+');\n';
+                            }
+                            else
+                            {
+                                text = text + '         '+teste[i].classe.toLowerCase()+'.set'+titleize(teste[i].model[y].field.campo)+'(id);\n';
+                            }
+                        }
+                       
+                    }else {
+                         text = text + '         '+teste[i].classe.toLowerCase()+'.set'+titleize(teste[i].model[y].field.campo)+'('+convertModuless(teste[i].model[y].field.tipo, y ,teste[i].model[y].field.campo)+');\n';
+                    }
+                
+            }else{
+
+                text = text + '         '+teste[i].classe.toLowerCase()+'.set'+titleize(teste[i].model[y].field.campo)+'(new ArrayList<'+titleize(teste[i].model[y].field.campo)+'>());\n';
+                text = text + '         '+teste[i].classe.toLowerCase()+'.get'+titleize(teste[i].model[y].field.campo)+'().add(insert'+titleize(teste[i].model[y].field.campo)+'(id,TabelaEnum.'+teste[i].classe.toUpperCase()+',action));\n';
+            }
+        }
+    }
+text = text + '         '+teste[i].classe.toLowerCase()+'.setTabelaEnum(tabela);\n';
+text = text + '         '+teste[i].classe.toLowerCase()+'.setParentId(id);\n';
+text = text + '         '+teste[i].classe.toLowerCase()+'.setEmprId(EMPID);\n';
+text = text + '         '+teste[i].classe.toLowerCase()+'.setModifyDateUTC(a.getTime());\n';
+text = text + '         '+teste[i].classe.toLowerCase()+'.setCreateDateUTC(a.getTime());\n';
+text = text + '         '+teste[i].classe.toLowerCase()+'.setCreateUser("system");\n';
+text = text + '         '+teste[i].classe.toLowerCase()+'.setModifyUser("system");\n';
+text = text + '         '+teste[i].classe.toLowerCase()+'.setProcessId(1);\n';
+text = text + '         '+teste[i].classe.toLowerCase()+'.setModelAction(action);\n';
+text = text + ' \n';
+text = text + '         return '+teste[i].classe.toLowerCase()+';\n';
+text = text + '     }\n';
+text = text + "\n";
+}
+text = text + "\n";
+text = text + "}\n";
+return text;
+
 }

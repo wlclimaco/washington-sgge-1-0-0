@@ -63,14 +63,54 @@ convertModule = function(stipo,sCampo,list){
 
 convertModules = function(stipo,index,campo){
 	var sReturn = "";
-	debugger
 	b = new Date();
 		switch(stipo.toLowerCase()) {
 		    case "string":
-		        sReturn = "'"+campo+'_'+index+"'"
+		        sReturn = '"'+campo+'_'+index+'"'
 		        break;
 		    case "long":
-		        sReturn = "b.getTime()"
+		        sReturn = "a.getTime()"
+		        break;
+		    case "date":
+		        sReturn = "a.getTime()"
+		        break;
+		     case "data":
+		        sReturn = "a.getTime()"
+		        break;
+		    case "double":
+		        sReturn = "10.00"
+		        break;
+		    case "boolean":
+		        sReturn = "true"
+		        break;
+		    case "integer":
+		        sReturn = ""+(1000 + index)+"" 
+		        break;
+		    case "doisValores":
+		        sReturn = ""+(1000 + index)+"" 
+		        break;
+		    default:
+		    	if(stipo.indexOf('List') > 0){
+		    			sReturn = ""
+		    	}else{
+		    		sReturn = ""+(1000 + index)+"" 
+		    	}
+
+		        break;
+		}
+		return sReturn;
+	}
+
+
+	convertModuless = function(stipo,index,campo){
+	var sReturn = "";
+	b = new Date();
+		switch(stipo.toLowerCase()) {
+		    case "string":
+		        sReturn = '"'+campo+'_'+index+' - "'
+		        break;
+		    case "long":
+		        sReturn = "a.getTime()"
 		        break;
 		    case "date":
 		        sReturn = "a.getTime()"
