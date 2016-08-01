@@ -245,6 +245,12 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 
 	INQUILINO(73, "sendsolv.base.model.risklevelenum.medium"),
 
+	AUDIENCIA(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	PROCESSO(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	BAIXATITULO(73, "sendsolv.base.model.risklevelenum.medium"),
+
 	CONFIGVENDAS(73, "sendsolv.base.model.risklevelenum.medium");
 
 

@@ -17,11 +17,11 @@ public class Consulta extends ModelCosmeDamiao
 	private Integer id;
 
 	/** The type of an account. */
-	private Integer dataConsulta;
+	private Long dataConsulta;
 
 	private Double valor;
 
-	private Integer dataMarcacao;
+	private Long dataMarcacao;
 
 	private Medico medico;
 
@@ -58,22 +58,22 @@ public class Consulta extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	public Integer getDataConsulta()
+	public Long getDataConsulta()
 	{
 		return dataConsulta;
 	}
 
-	public void setDataConsulta(Integer dataConsulta)
+	public void setDataConsulta(Long dataConsulta)
 	{
 		this.dataConsulta = dataConsulta;
 	}
 
-	public Integer getDataMarcacao()
+	public Long getDataMarcacao()
 	{
 		return dataMarcacao;
 	}
 
-	public void setDataMarcacao(Integer dataMarcacao)
+	public void setDataMarcacao(Long dataMarcacao)
 	{
 		this.dataMarcacao = dataMarcacao;
 	}

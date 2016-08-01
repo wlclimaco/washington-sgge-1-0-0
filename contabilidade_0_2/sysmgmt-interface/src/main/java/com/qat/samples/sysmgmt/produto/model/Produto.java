@@ -38,6 +38,8 @@ public class Produto extends ModelCosmeDamiao
 	/** The top. */
 	private UniMed uniMed;
 
+	private Marca marca;
+
 	/** The width. */
 	private Grupo grupo;
 
@@ -78,6 +80,22 @@ public class Produto extends ModelCosmeDamiao
 	public Integer getId()
 	{
 		return id;
+	}
+
+	public String getNcm() {
+		return ncm;
+	}
+
+	public void setNcm(String ncm) {
+		this.ncm = ncm;
+	}
+
+	public Marca getMarca() {
+		return marca;
+	}
+
+	public void setMarca(Marca marca) {
+		this.marca = marca;
 	}
 
 	/**
@@ -254,16 +272,16 @@ public class Produto extends ModelCosmeDamiao
 
 	@Override
 	public String toString() {
-		return "Produto [getId()=" + getId() + ", getCodigo()=" + getCodigo() + ", getCdBarras()=" + getCdBarras()
-				+ ", getClassificacao()=" + getClassificacao() + ", getDataCreate()=" + getDataCreate()
-				+ ", getProduto()=" + getProduto() + ", getAplicacao()=" + getAplicacao() + ", getFracao()="
-				+ getFracao() + ", getUniMed()=" + getUniMed() + ", getGrupo()=" + getGrupo() + ", getSubGrupo()="
-				+ getSubGrupo() + ", getPorcao()=" + getPorcao() + ", getPesoBruto()=" + getPesoBruto()
-				+ ", getPesoLiquido()=" + getPesoLiquido() + ", getModoUso()=" + getModoUso() + ", toString()="
-				+ super.toString() + "]";
+		return "Produto [getId()=" + getId() + ", getNcm()=" + getNcm() + ", getMarca()=" + getMarca()
+				+ ", getCodigo()=" + getCodigo() + ", getCdBarras()=" + getCdBarras() + ", getClassificacao()="
+				+ getClassificacao() + ", getDataCreate()=" + getDataCreate() + ", getProduto()=" + getProduto()
+				+ ", getAplicacao()=" + getAplicacao() + ", getFracao()=" + getFracao() + ", getUniMed()=" + getUniMed()
+				+ ", getGrupo()=" + getGrupo() + ", getSubGrupo()=" + getSubGrupo() + ", getPorcao()=" + getPorcao()
+				+ ", getPesoBruto()=" + getPesoBruto() + ", getPesoLiquido()=" + getPesoLiquido() + ", getModoUso()="
+				+ getModoUso() + ", toString()=" + super.toString() + "]";
 	}
 
-	
+
 
 
 }

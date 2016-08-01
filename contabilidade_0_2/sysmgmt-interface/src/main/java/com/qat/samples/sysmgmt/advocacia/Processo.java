@@ -21,6 +21,8 @@ public class Processo extends ModelCosmeDamiao
 
 	private Long dataFim;
 
+	private Double valor;
+
 	private ProcessoAcao acao;
 
 	private List<ContasReceber> tituloList;
@@ -61,6 +63,14 @@ public class Processo extends ModelCosmeDamiao
 	public void setDataProcess(Long dataProcess)
 	{
 		this.dataProcess = dataProcess;
+	}
+
+	public Double getValor() {
+		return valor;
+	}
+
+	public void setValor(Double valor) {
+		this.valor = valor;
 	}
 
 	public List<Cliente> getClienteList()
@@ -127,11 +137,11 @@ public class Processo extends ModelCosmeDamiao
 
 	@Override
 	public String toString() {
-		return "Processo [getId()=" + getId() + ", getDataProcess()=" + getDataProcess() + ", getClienteList()="
-				+ getClienteList() + ", getAudienciaList()=" + getAudienciaList() + ", getProcessoStatusList()="
-				+ getProcessoStatusList() + ", getDataFim()=" + getDataFim() + ", getAcao()=" + getAcao()
-				+ ", getTituloList()=" + getTituloList() + ", getAdvogadoList()=" + getAdvogadoList() + ", toString()="
-				+ super.toString() + "]";
+		return "Processo [getId()=" + getId() + ", getDataProcess()=" + getDataProcess() + ", getValor()=" + getValor()
+				+ ", getClienteList()=" + getClienteList() + ", getAudienciaList()=" + getAudienciaList()
+				+ ", getProcessoStatusList()=" + getProcessoStatusList() + ", getDataFim()=" + getDataFim()
+				+ ", getAcao()=" + getAcao() + ", getTituloList()=" + getTituloList() + ", getAdvogadoList()="
+				+ getAdvogadoList() + ", toString()=" + super.toString() + "]";
 	}
 
 }
