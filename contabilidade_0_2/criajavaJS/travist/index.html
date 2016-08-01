@@ -65,6 +65,7 @@
 	<script type='text/javascript' src="../functionUtil.js"/></script>
 	<script type='text/javascript' src="../formularioData.js"/></script>
 	<script type='text/javascript' src="../json.js"/></script>
+	<script type='text/javascript' src="../jUnitFront.js"/></script>
    
     <script type='text/javascript'>
       var maxDepth = 3;
@@ -310,6 +311,10 @@
 								
 								<label>
 									<input id="WSImplTest" type="checkbox" /> WSImplTest
+								</label>
+
+								<label>
+									<input id="jUnitFront" type="checkbox" /> jUnit Front-End
 								</label>
 							</div> 
 						</div>
@@ -739,6 +744,12 @@ $('#checkeds').append(imputs);
 						$("div#tabs").addTab(oProjet[i].classes[x].classe,implXML(oProjet[i].classes[x].model,oProjet[i].classes[x].classe));
 					}
 				}	
+				
+				if($('#jUnitFront').prop('checked')){
+					for (var x = 0;x< oProjet[i].classes.length;x++){
+						$("div#tabs").addTab(oProjet[i].classes[x].classe,jUnitFront(oProjet[i].classes[x].model,oProjet[i].classes[x].classe));
+					}
+				}
 				if($('#Model').prop('checked')){
 					$("div#tabs").addTab(oProjet[i].interfaces,model(oProjet[i].classes,oProjet[i].interfaces));
 				}	

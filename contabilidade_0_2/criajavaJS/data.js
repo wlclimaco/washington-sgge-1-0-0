@@ -8147,7 +8147,7 @@ function dependenciaConf() {
     });
     a.push({
         dependencia: "configVendas",
-        campos: character varying(50)()
+        campos: VendasModel()
     });
     a.push({
         dependencia: "Configuracao",

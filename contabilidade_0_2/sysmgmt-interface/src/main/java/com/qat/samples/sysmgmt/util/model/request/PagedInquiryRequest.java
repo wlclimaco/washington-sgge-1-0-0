@@ -13,7 +13,7 @@ public class PagedInquiryRequest extends InquiryRequest
 	private Integer emprId;
 
 	/** The recipient id. */
-	private Integer Id;
+	private Integer id;
 
 	private Integer parentId;
 
@@ -43,13 +43,20 @@ public class PagedInquiryRequest extends InquiryRequest
 		this.emprId = emprId;
 	}
 
+	public Integer getParentId() {
+		return parentId;
+	}
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
+	}
+
 
 
 
 
 
 	public Integer getId() {
-		return Id;
+		return id;
 	}
 
 
@@ -58,25 +65,7 @@ public class PagedInquiryRequest extends InquiryRequest
 
 
 	public void setId(Integer id) {
-		Id = id;
-	}
-
-
-
-
-
-
-	public Integer getParentId() {
-		return parentId;
-	}
-
-
-
-
-
-
-	public void setParentId(Integer parentId) {
-		this.parentId = parentId;
+		this.id = id;
 	}
 
 

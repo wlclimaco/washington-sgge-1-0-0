@@ -67,13 +67,14 @@ codigo
  <select id="fetchAllCnaesRequest" parameterType="CnaeInquiryRequest" resultMap="CnaeResult">
 
 		SELECT id,<include refid="allCnaeColumns" />
-  		  FROM cnae ORDER BY id ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
+  		  FROM cnae WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+		<if test="id != null"> and id = id</if> ORDER BY id ASC
+		  
 </select>
 
 <select id="fetchCnaeRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM cnae WHERE id IS NOT NULL
+		SELECT COUNT(*) AS RECORD_COUNT FROM cnae WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+		<if test="id != null"> and id = id</if>
 
  </select>
 
