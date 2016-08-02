@@ -4,13 +4,13 @@ import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.advocacia.Advogado;
+import com.qat.samples.sysmgmt.cotacao.model.Cotacao;
 
 public class CotacaoResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<Advogado> AdvogadoList;
+	private List<Cotacao> cotacaoList;
 
 	/**
 	 * The Constructor.
@@ -21,19 +21,19 @@ public class CotacaoResponse extends InquiryResponse
 	}
 
 	/**
-	 * @return the AdvogadoList
+	 * @return the CotacaoList
 	 */
-	public List<Advogado> getAdvogadoList()
+	public List<Cotacao> getCotacaoList()
 	{
-		return AdvogadoList;
+		return cotacaoList;
 	}
 
 	/**
-	 * @param AdvogadoList the AdvogadoList to set
+	 * @param CotacaoList the CotacaoList to set
 	 */
-	public void setAdvogadoList(List<Advogado> AdvogadoList)
+	public void setCotacaoList(List<Cotacao> CotacaoList)
 	{
-		this.AdvogadoList = AdvogadoList;
+		this.cotacaoList = CotacaoList;
 	}
 
 	/*
@@ -44,7 +44,7 @@ public class CotacaoResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setAdvogadoList((List<Advogado>)coll);
+		setCotacaoList((List<Cotacao>)coll);
 	}
 
 	/*
@@ -54,7 +54,7 @@ public class CotacaoResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "LocationResponse [getLocationList()=" + getAdvogadoList() + ", getResultsSetInfo()="
+		return "CotacaoResponse [getCotacaoList()=" + getCotacaoList() + ", getResultsSetInfo()="
 				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
 				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
 				+ isOperationSuccess() + "]";

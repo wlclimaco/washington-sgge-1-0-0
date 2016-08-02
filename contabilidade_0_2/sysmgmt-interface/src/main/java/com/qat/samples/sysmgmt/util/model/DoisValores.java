@@ -20,7 +20,7 @@ public class DoisValores extends ModelCosmeDamiao
 	private String descricao;
 
 	/** The atributos. */
-	private List<Atributos> atributos;
+	private DoisValorTypeEnum doisValorTypeEnum;
 
 	/**
 	 * Default constructor.
@@ -34,6 +34,20 @@ public class DoisValores extends ModelCosmeDamiao
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	public Integer getDoisValorTypeEnumValue()
+	{
+		if (doisValorTypeEnum != null)
+		{
+			return doisValorTypeEnum.getValue();
+		}
+		return null;
+	}
+
+	public void setDoisValorTypeEnumValue(Integer acaoTypeValue)
+	{
+		doisValorTypeEnum = DoisValorTypeEnum.enumForValue(acaoTypeValue);
+	}
 	/**
 	 * Gets the id.
 	 *
@@ -70,19 +84,22 @@ public class DoisValores extends ModelCosmeDamiao
 		this.descricao = descricao;
 	}
 
-	public List<Atributos> getAtributos() {
-		return atributos;
+	public DoisValorTypeEnum getDoisValorTypeEnum() {
+		return doisValorTypeEnum;
 	}
 
-	public void setAtributos(List<Atributos> atributos) {
-		this.atributos = atributos;
+	public void setDoisValorTypeEnum(DoisValorTypeEnum doisValorTypeEnum) {
+		this.doisValorTypeEnum = doisValorTypeEnum;
 	}
 
 	@Override
 	public String toString() {
-		return "DoisValores [getId()=" + getId() + ", getNome()=" + getNome() + ", getDescricao()=" + getDescricao()
-				+ ", getAtributos()=" + getAtributos() + ", toString()=" + super.toString() + "]";
+		return "DoisValores [getDoisValorTypeEnumValue()=" + getDoisValorTypeEnumValue() + ", getId()=" + getId()
+				+ ", getNome()=" + getNome() + ", getDescricao()=" + getDescricao() + ", getDoisValorTypeEnum()="
+				+ getDoisValorTypeEnum() + ", toString()=" + super.toString() + "]";
 	}
+
+
 
 	
 

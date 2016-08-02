@@ -2,6 +2,7 @@ package com.qat.samples.sysmgmt.agencia.model;
 
 import java.util.List;
 
+import com.qat.samples.sysmgmt.util.model.DoisValorTypeEnum;
 import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
@@ -23,6 +24,7 @@ public class Agencia extends ModelCosmeDamiao
 	private List<Endereco> enderecos;
 	private List<Email> emails;
 	private List<Telefone> telefones;
+
 
 	private String gerente;
 

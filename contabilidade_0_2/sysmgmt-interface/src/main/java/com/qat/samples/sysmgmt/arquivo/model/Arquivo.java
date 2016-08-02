@@ -42,4 +42,68 @@ public class Arquivo extends ModelCosmeDamiao
 
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getParentKey() {
+		return parentKey;
+	}
+
+	public void setParentKey(Integer parentKey) {
+		this.parentKey = parentKey;
+	}
+
+	public String getKeywordText() {
+		return keywordText;
+	}
+
+	public void setKeywordText(String keywordText) {
+		this.keywordText = keywordText;
+	}
+
+	public Boolean getIsActionRequired() {
+		return isActionRequired;
+	}
+
+	public void setIsActionRequired(Boolean isActionRequired) {
+		this.isActionRequired = isActionRequired;
+	}
+
+	public String getNoteText() {
+		return noteText;
+	}
+
+	public void setNoteText(String noteText) {
+		this.noteText = noteText;
+	}
+
+	public Long getExpirationDate() {
+		return expirationDate;
+	}
+
+	public void setExpirationDate(Long expirationDate) {
+		this.expirationDate = expirationDate;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	@Override
+	public String toString() {
+		return "Arquivo [getId()=" + getId() + ", getParentKey()=" + getParentKey() + ", getKeywordText()="
+				+ getKeywordText() + ", getIsActionRequired()=" + getIsActionRequired() + ", getNoteText()="
+				+ getNoteText() + ", getExpirationDate()=" + getExpirationDate() + ", getValue()=" + getValue()
+				+ ", toString()=" + super.toString() + "]";
+	}
+
 }

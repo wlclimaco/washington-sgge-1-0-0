@@ -250,6 +250,10 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	PROCESSO(73, "sendsolv.base.model.risklevelenum.medium"),
 
 	BAIXATITULO(73, "sendsolv.base.model.risklevelenum.medium"),
+	
+	COTACAO(73, "sendsolv.base.model.risklevelenum.medium"),
+	
+	AVISO(73, "sendsolv.base.model.risklevelenum.medium"),
 
 	CONFIGVENDAS(73, "sendsolv.base.model.risklevelenum.medium");
 
