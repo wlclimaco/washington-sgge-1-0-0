@@ -1,39 +1,39 @@
-package com.qat.samples.sysmgmt.util.model.response;
+package com.qat.samples.sysmgmt.produto.model.response;
 
 import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.entidade.model.Usuario;
+import com.qat.samples.sysmgmt.produto.model.RentabilidadeItens;
 
-public class UsuarioResponse extends InquiryResponse
+public class RentabilidadeItensResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<Usuario> usuarioList;
+	private List<RentabilidadeItens> arquivoList;
 
 	/**
 	 * The Constructor.
 	 */
-	public UsuarioResponse()
+	public RentabilidadeItensResponse()
 	{
 
 	}
 
 	/**
-	 * @return the usuarioList
+	 * @return the arquivoList
 	 */
-	public List<Usuario> getUsuarioList()
+	public List<RentabilidadeItens> getRentabilidadeItensList()
 	{
-		return usuarioList;
+		return arquivoList;
 	}
 
 	/**
-	 * @param usuarioList the usuarioList to set
+	 * @param arquivoList the arquivoList to set
 	 */
-	public void setUsuarioList(List<Usuario> usuarioList)
+	public void setRentabilidadeItensList(List<RentabilidadeItens> arquivoList)
 	{
-		this.usuarioList = usuarioList;
+		this.arquivoList = arquivoList;
 	}
 
 	/*
@@ -44,7 +44,7 @@ public class UsuarioResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setUsuarioList((List<Usuario>)coll);
+		setRentabilidadeItensList((List<RentabilidadeItens>)coll);
 	}
 
 	/*
@@ -54,7 +54,7 @@ public class UsuarioResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "UsuarioResponse [getUsuarioList()=" + getUsuarioList() + ", getResultsSetInfo()="
+		return "LocationResponse [getLocationList()=" + getRentabilidadeItensList() + ", getResultsSetInfo()="
 				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
 				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
 				+ isOperationSuccess() + "]";

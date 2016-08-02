@@ -59,14 +59,14 @@ nome
  <select id="fetchAllRegimesRequest" parameterType="RegimeInquiryRequest" resultMap="RegimeResult">
 
 		SELECT id,<include refid="allRegimeColumns" />
-  		  FROM regime WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
-		<if test="id != null"> and id = id</if> ORDER BY id ASC
+  		  FROM regime WHERE id IS NOT NULL <if test="emprId != null"> and emprId = #{emprId}</if>
+		<if test="id != null"> and id = #{id}</if> ORDER BY id ASC
 
 </select>
 
 <select id="fetchRegimeRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM regime WHERE id IS NOT NULL WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
-		<if test="id != null"> and id = id</if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM regime WHERE id IS NOT NULL <if test="emprId != null"> and emprId = #{emprId}</if>
+		<if test="id != null"> and id = #{id}</if>
 
  </select>
 

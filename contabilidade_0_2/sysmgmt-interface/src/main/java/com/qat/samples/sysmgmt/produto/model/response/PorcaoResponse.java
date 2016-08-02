@@ -1,39 +1,39 @@
-package com.qat.samples.sysmgmt.util.model.response;
+package com.qat.samples.sysmgmt.produto.model.response;
 
 import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.entidade.model.Usuario;
+import com.qat.samples.sysmgmt.produto.model.Porcao;
 
-public class UsuarioResponse extends InquiryResponse
+public class PorcaoResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<Usuario> usuarioList;
+	private List<Porcao> arquivoList;
 
 	/**
 	 * The Constructor.
 	 */
-	public UsuarioResponse()
+	public PorcaoResponse()
 	{
 
 	}
 
 	/**
-	 * @return the usuarioList
+	 * @return the arquivoList
 	 */
-	public List<Usuario> getUsuarioList()
+	public List<Porcao> getPorcaoList()
 	{
-		return usuarioList;
+		return arquivoList;
 	}
 
 	/**
-	 * @param usuarioList the usuarioList to set
+	 * @param arquivoList the arquivoList to set
 	 */
-	public void setUsuarioList(List<Usuario> usuarioList)
+	public void setPorcaoList(List<Porcao> arquivoList)
 	{
-		this.usuarioList = usuarioList;
+		this.arquivoList = arquivoList;
 	}
 
 	/*
@@ -44,7 +44,7 @@ public class UsuarioResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setUsuarioList((List<Usuario>)coll);
+		setPorcaoList((List<Porcao>)coll);
 	}
 
 	/*
@@ -54,7 +54,7 @@ public class UsuarioResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "UsuarioResponse [getUsuarioList()=" + getUsuarioList() + ", getResultsSetInfo()="
+		return "PorcaoResponse [getPorcaoList()=" + getPorcaoList() + ", getResultsSetInfo()="
 				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
 				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
 				+ isOperationSuccess() + "]";

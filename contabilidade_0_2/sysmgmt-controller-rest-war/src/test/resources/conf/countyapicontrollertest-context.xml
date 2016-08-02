@@ -74,4 +74,16 @@
 		<constructor-arg value="com.qat.samples.sysmgmt.bac.Produto.IProdutoBAC" />
 	</bean>
 
+	<bean id="clinicaBACTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.qat.samples.sysmgmt.bac.Clinica.IClinicaBAC" />
+	</bean>
+
+	<bean id="dicionarioBACTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.qat.samples.sysmgmt.bac.Dicionario.IDicionarioBAC" />
+	</bean>
+
+	<bean id="configuracaoBACTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.qat.samples.sysmgmt.bac.Configuracao.IConfiguracaoBAC" />
+	</bean>
+
 </beans>

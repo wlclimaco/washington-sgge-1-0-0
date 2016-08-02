@@ -4,39 +4,39 @@ import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.ProdutoParent;
 
 /**
- * The Class ProdutoResponse.
+ * The Class ProdutoParentResponse.
  *
- * @author aportoProdutoParentResponse
+ * @author aportoProdutoParentParentResponse
  * @version 1.0
  * @created 11-Sep-2014 09:39:00 AM
  */
-public class ProdutoResponse extends InquiryResponse
+public class ProdutoParentResponse extends InquiryResponse
 {
 
 	/** Attributes. */
-	private List<Produto> produtoList;
+	private List<ProdutoParent> produtoParentList;
 
 	/**
-	 * Gets the produto list.
+	 * Gets the produtoParent list.
 	 *
-	 * @return the produto list
+	 * @return the produtoParent list
 	 */
-	public List<Produto> getProdutoList()
+	public List<ProdutoParent> getProdutoParentList()
 	{
-		return produtoList;
+		return produtoParentList;
 	}
 
 	/**
-	 * Sets the produto list.
+	 * Sets the produtoParent list.
 	 *
-	 * @param produtoList the produto list
+	 * @param produtoParentList the produtoParent list
 	 */
-	public void setProdutoList(List<Produto> produtoList)
+	public void setProdutoParentList(List<ProdutoParent> produtoParentList)
 	{
-		this.produtoList = produtoList;
+		this.produtoParentList = produtoParentList;
 	}
 
 	/*
@@ -47,7 +47,7 @@ public class ProdutoResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setProdutoList((List<Produto>)coll);
+		setProdutoParentList((List<ProdutoParent>)coll);
 	}
 
 	/*
@@ -57,7 +57,7 @@ public class ProdutoResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "ProdutoResponse [getProdutoList()=" + getProdutoList() + ", getResultsSetInfo()=" + getResultsSetInfo()
+		return "ProdutoParentResponse [getProdutoParentList()=" + getProdutoParentList() + ", getResultsSetInfo()=" + getResultsSetInfo()
 				+ ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()=" + getMessageList()
 				+ ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()=" + isOperationSuccess()
 				+ "]";

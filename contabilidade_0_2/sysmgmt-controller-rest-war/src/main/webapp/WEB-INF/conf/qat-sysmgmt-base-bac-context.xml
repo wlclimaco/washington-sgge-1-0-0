@@ -61,6 +61,20 @@
 		<property name="validationController" ref="countyValidationController"/>
 	</bean>
 
+	<bean id="clinicaBACTarget" class="com.qat.samples.sysmgmt.bac.Clinica.ClinicaBACImpl">
+		<property name="clinicaBAR" ref="clinicaBARTarget"/>
+		<property name="validationController" ref="countyValidationController"/>
+	</bean>
+
+	<bean id="dicionarioBACTarget" class="com.qat.samples.sysmgmt.bac.Dicionario.DicionarioBACImpl">
+		<property name="dicionarioBAR" ref="dicionarioBARTarget"/>
+		<property name="validationController" ref="countyValidationController"/>
+	</bean>
+
+	<bean id="configuracaoBACTarget" class="com.qat.samples.sysmgmt.bac.Configuracao.ConfiguracaoBACImpl">
+		<property name="configuracaoBAR" ref="configuracaoBARTarget"/>
+		<property name="validationController" ref="countyValidationController"/>
+	</bean>
 	<!-- ========================= ASPECT CONFIGURATION ======================== -->
 
 	<!-- ========================= InternalResponse status categories ========== -->
