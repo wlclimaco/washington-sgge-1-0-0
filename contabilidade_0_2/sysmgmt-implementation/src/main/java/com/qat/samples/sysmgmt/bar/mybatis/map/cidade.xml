@@ -21,7 +21,6 @@
     <result property="nome" column="nome"/>
     <result property="cdIBGE" column="cdIBGE"/>
     <result property="cep" column="cep"/>
-    <result property="municipio" column="municipio"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>

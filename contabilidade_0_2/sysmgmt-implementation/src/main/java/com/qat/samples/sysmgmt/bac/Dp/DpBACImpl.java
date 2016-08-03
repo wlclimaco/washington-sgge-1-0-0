@@ -221,16 +221,6 @@ private InternalResultsResponse<Funcionario> processFuncionario(ValidationContex
 		{
 	InternalResultsResponse<Funcionario> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Funcionario.class.getSimpleName(), request.getFuncionario(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Funcionario>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceFuncionario(request.getFuncionario(), persistType);
 		if (internalResponse.isInError())
@@ -437,16 +427,6 @@ private InternalResultsResponse<Eventos> processEventos(ValidationContextIndicat
 		EventosMaintenanceRequest request)
 		{
 	InternalResultsResponse<Eventos> response = null;
-
-	// Validate
-	ValidationContext context = new ValidationContext(Eventos.class.getSimpleName(), request.getEventos(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Eventos>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceEventos(request.getEventos(), persistType);
@@ -655,16 +635,6 @@ private InternalResultsResponse<Beneficios> processBeneficios(ValidationContextI
 		{
 	InternalResultsResponse<Beneficios> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Beneficios.class.getSimpleName(), request.getBeneficios(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Beneficios>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceBeneficios(request.getBeneficios(), persistType);
 		if (internalResponse.isInError())
@@ -872,15 +842,6 @@ private InternalResultsResponse<HorarioFunc> processHorarioFunc(ValidationContex
 		{
 	InternalResultsResponse<HorarioFunc> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(HorarioFunc.class.getSimpleName(), request.getHorarioFunc(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<HorarioFunc>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceHorarioFunc(request.getHorarioFunc(), persistType);

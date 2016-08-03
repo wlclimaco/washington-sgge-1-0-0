@@ -121,7 +121,7 @@
      WHERE id = #{fetchId}
 
   </select>
-
+			  
   <select id="fetchAllExamesByRequest" parameterType="ExameInquiryRequest" resultMap="exameResult">
 	   SELECT * FROM
     			(

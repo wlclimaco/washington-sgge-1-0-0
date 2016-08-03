@@ -141,7 +141,7 @@ private static final String STMT_DELETE_EXAME = NAMESPACE_EXAME + "deleteExameBy
 	private static final String STMT_FETCH_EXAME_COUNT = NAMESPACE_EXAME + "fetchExameRowCount";
 
 	/** The Constant STMT_FETCH_EXAME_ALL_REQUEST. */
-	private static final String STMT_FETCH_EXAME_ALL_REQUEST = NAMESPACE_EXAME + "fetchAllExamesRequest";
+	private static final String STMT_FETCH_EXAME_ALL_REQUEST = NAMESPACE_EXAME + "fetchAllExamesByRequest";
 
 //===================================### MEDICO ####======================================
 	/**

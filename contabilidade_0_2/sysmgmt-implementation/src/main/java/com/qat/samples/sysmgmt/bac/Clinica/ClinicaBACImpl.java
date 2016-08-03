@@ -221,16 +221,6 @@ private InternalResultsResponse<Medico> processMedico(ValidationContextIndicator
 		{
 	InternalResultsResponse<Medico> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Medico.class.getSimpleName(), request.getMedico(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Medico>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceMedico(request.getMedico(), persistType);
 		if (internalResponse.isInError())
@@ -437,16 +427,6 @@ private InternalResultsResponse<Paciente> processPaciente(ValidationContextIndic
 		PacienteMaintenanceRequest request)
 		{
 	InternalResultsResponse<Paciente> response = null;
-
-	// Validate
-	ValidationContext context = new ValidationContext(Paciente.class.getSimpleName(), request.getPaciente(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Paciente>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistencePaciente(request.getPaciente(), persistType);
@@ -655,15 +635,7 @@ private InternalResultsResponse<Consulta> processConsulta(ValidationContextIndic
 		{
 	InternalResultsResponse<Consulta> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Consulta.class.getSimpleName(), request.getConsulta(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Consulta>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
+
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceConsulta(request.getConsulta(), persistType);
@@ -872,15 +844,6 @@ private InternalResultsResponse<Exame> processExame(ValidationContextIndicator i
 		{
 	InternalResultsResponse<Exame> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Exame.class.getSimpleName(), request.getExame(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Exame>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceExame(request.getExame(), persistType);

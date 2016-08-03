@@ -632,15 +632,6 @@ private InternalResultsResponse<Cnae> processCnae(ValidationContextIndicator ind
 		{
 	InternalResultsResponse<Cnae> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Cnae.class.getSimpleName(), request.getCnae(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Cnae>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceCnae(request.getCnae(), persistType);

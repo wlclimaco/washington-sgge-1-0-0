@@ -233,16 +233,6 @@ private InternalResultsResponse<Configuracao> processConfiguracao(ValidationCont
 		{
 	InternalResultsResponse<Configuracao> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Configuracao.class.getSimpleName(), request.getConfiguracao(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Configuracao>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceConfiguracao(request.getConfiguracao(), persistType);
 		if (internalResponse.isInError())
@@ -449,18 +439,7 @@ private InternalResultsResponse<Boleto> processBoleto(ValidationContextIndicator
 		BoletoMaintenanceRequest request)
 		{
 	InternalResultsResponse<Boleto> response = null;
-
-	// Validate
-	ValidationContext context = new ValidationContext(Boleto.class.getSimpleName(), request.getBoleto(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Boleto>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
-		// Persist
+	// Persist
 		InternalResponse internalResponse = doPersistenceBoleto(request.getBoleto(), persistType);
 		if (internalResponse.isInError())
 		{
@@ -666,16 +645,6 @@ private InternalResultsResponse<ConfigCarne> processConfigCarne(ValidationContex
 		ConfigCarneMaintenanceRequest request)
 		{
 	InternalResultsResponse<ConfigCarne> response = null;
-
-	// Validate
-	ValidationContext context = new ValidationContext(ConfigCarne.class.getSimpleName(), request.getConfigCarne(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<ConfigCarne>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceConfigCarne(request.getConfigCarne(), persistType);
@@ -884,16 +853,6 @@ private InternalResultsResponse<ConfigEntrada> processConfigEntrada(ValidationCo
 		{
 	InternalResultsResponse<ConfigEntrada> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(ConfigEntrada.class.getSimpleName(), request.getConfigEntrada(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<ConfigEntrada>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceConfigEntrada(request.getConfigEntrada(), persistType);
 		if (internalResponse.isInError())
@@ -1100,16 +1059,6 @@ private InternalResultsResponse<ConfigFiscal> processConfigFiscal(ValidationCont
 		ConfigFiscalMaintenanceRequest request)
 		{
 	InternalResultsResponse<ConfigFiscal> response = null;
-
-	// Validate
-	ValidationContext context = new ValidationContext(ConfigFiscal.class.getSimpleName(), request.getConfigFiscal(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<ConfigFiscal>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceConfigFiscal(request.getConfigFiscal(), persistType);
@@ -1318,16 +1267,6 @@ private InternalResultsResponse<ConfigAlertas> processConfigAlertas(ValidationCo
 		{
 	InternalResultsResponse<ConfigAlertas> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(ConfigAlertas.class.getSimpleName(), request.getConfigAlertas(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<ConfigAlertas>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceConfigAlertas(request.getConfigAlertas(), persistType);
 		if (internalResponse.isInError())
@@ -1534,16 +1473,6 @@ private InternalResultsResponse<ConfigGeral> processConfigGeral(ValidationContex
 		ConfigGeralMaintenanceRequest request)
 		{
 	InternalResultsResponse<ConfigGeral> response = null;
-
-	// Validate
-	ValidationContext context = new ValidationContext(ConfigGeral.class.getSimpleName(), request.getConfigGeral(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<ConfigGeral>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceConfigGeral(request.getConfigGeral(), persistType);
@@ -1752,15 +1681,6 @@ private InternalResultsResponse<ConfigProduto> processConfigProduto(ValidationCo
 		{
 	InternalResultsResponse<ConfigProduto> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(ConfigProduto.class.getSimpleName(), request.getConfigProduto(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<ConfigProduto>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceConfigProduto(request.getConfigProduto(), persistType);
@@ -1969,16 +1889,6 @@ private InternalResultsResponse<ConfigSMTP> processConfigSMTP(ValidationContextI
 		{
 	InternalResultsResponse<ConfigSMTP> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(ConfigSMTP.class.getSimpleName(), request.getConfigSMTP(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<ConfigSMTP>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceConfigSMTP(request.getConfigSMTP(), persistType);
 		if (internalResponse.isInError())
@@ -2186,15 +2096,6 @@ private InternalResultsResponse<ConfiguracaoNFe> processConfiguracaoNFe(Validati
 		{
 	InternalResultsResponse<ConfiguracaoNFe> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(ConfiguracaoNFe.class.getSimpleName(), request.getConfiguracaoNFe(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<ConfiguracaoNFe>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceConfiguracaoNFe(request.getConfiguracaoNFe(), persistType);
@@ -2403,15 +2304,7 @@ private InternalResultsResponse<ConfigVendas> processConfigVendas(ValidationCont
 		{
 	InternalResultsResponse<ConfigVendas> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(ConfigVendas.class.getSimpleName(), request.getConfigVendas(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<ConfigVendas>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
+
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceConfigVendas(request.getConfigVendas(), persistType);

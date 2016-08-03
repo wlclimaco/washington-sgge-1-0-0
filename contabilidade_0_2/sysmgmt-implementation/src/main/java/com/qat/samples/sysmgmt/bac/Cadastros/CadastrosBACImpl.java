@@ -230,16 +230,6 @@ private InternalResultsResponse<Cliente> processCliente(ValidationContextIndicat
 		{
 	InternalResultsResponse<Cliente> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Cliente.class.getSimpleName(), request.getCliente(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Cliente>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceCliente(request.getCliente(), persistType);
 		if (internalResponse.isInError())
@@ -446,16 +436,6 @@ private InternalResultsResponse<Fornecedor> processFornecedor(ValidationContextI
 		FornecedorMaintenanceRequest request)
 		{
 	InternalResultsResponse<Fornecedor> response = null;
-
-	// Validate
-	ValidationContext context = new ValidationContext(Fornecedor.class.getSimpleName(), request.getFornecedor(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Fornecedor>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceFornecedor(request.getFornecedor(), persistType);
@@ -664,16 +644,6 @@ private InternalResultsResponse<Transportador> processTransportador(ValidationCo
 		{
 	InternalResultsResponse<Transportador> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Transportador.class.getSimpleName(), request.getTransportador(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Transportador>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceTransportador(request.getTransportador(), persistType);
 		if (internalResponse.isInError())
@@ -880,17 +850,6 @@ private InternalResultsResponse<Convenio> processConvenio(ValidationContextIndic
 		ConvenioMaintenanceRequest request)
 		{
 	InternalResultsResponse<Convenio> response = null;
-
-	// Validate
-	ValidationContext context = new ValidationContext(Convenio.class.getSimpleName(), request.getConvenio(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Convenio>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceConvenio(request.getConvenio(), persistType);
 		if (internalResponse.isInError())
@@ -1097,16 +1056,6 @@ private InternalResultsResponse<Cidade> processCidade(ValidationContextIndicator
 		CidadeMaintenanceRequest request)
 		{
 	InternalResultsResponse<Cidade> response = null;
-
-	// Validate
-	ValidationContext context = new ValidationContext(Cidade.class.getSimpleName(), request.getCidade(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Cidade>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceCidade(request.getCidade(), persistType);
@@ -1315,15 +1264,6 @@ private InternalResultsResponse<Estado> processEstado(ValidationContextIndicator
 		{
 	InternalResultsResponse<Estado> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Estado.class.getSimpleName(), request.getEstado(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Estado>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceEstado(request.getEstado(), persistType);
@@ -1532,15 +1472,7 @@ private InternalResultsResponse<Tarefa> processTarefa(ValidationContextIndicator
 		{
 	InternalResultsResponse<Tarefa> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Tarefa.class.getSimpleName(), request.getTarefa(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Tarefa>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
+
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceTarefa(request.getTarefa(), persistType);

@@ -218,16 +218,6 @@ private InternalResultsResponse<NotaFiscalEntrada> processNotaFiscalEntrada(Vali
 		{
 	InternalResultsResponse<NotaFiscalEntrada> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(NotaFiscalEntrada.class.getSimpleName(), request.getNotafiscal(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<NotaFiscalEntrada>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceNotaFiscalEntrada(request.getNotafiscal(), persistType);
 		if (internalResponse.isInError())
@@ -435,15 +425,6 @@ private InternalResultsResponse<PedidoCompras> processPedidoCompras(ValidationCo
 		{
 	InternalResultsResponse<PedidoCompras> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(PedidoCompras.class.getSimpleName(), request.getPedidoCompras(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<PedidoCompras>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistencePedidoCompras(request.getPedidoCompras(), persistType);
@@ -651,16 +632,6 @@ private InternalResultsResponse<Cotacao> processCotacao(ValidationContextIndicat
 		CotacaoMaintenanceRequest request)
 		{
 	InternalResultsResponse<Cotacao> response = null;
-
-	// Validate
-	ValidationContext context = new ValidationContext(Cotacao.class.getSimpleName(), request.getCotacao(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Cotacao>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceCotacao(request.getCotacao(), persistType);

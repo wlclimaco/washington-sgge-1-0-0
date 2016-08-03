@@ -230,16 +230,6 @@ private InternalResultsResponse<ContasPagar> processContasPagar(ValidationContex
 		{
 	InternalResultsResponse<ContasPagar> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(ContasPagar.class.getSimpleName(), request.getContasPagar(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<ContasPagar>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceContasPagar(request.getContasPagar(), persistType);
 		if (internalResponse.isInError())
@@ -446,16 +436,6 @@ private InternalResultsResponse<ContasReceber> processContasReceber(ValidationCo
 		ContasReceberMaintenanceRequest request)
 		{
 	InternalResultsResponse<ContasReceber> response = null;
-
-	// Validate
-	ValidationContext context = new ValidationContext(ContasReceber.class.getSimpleName(), request.getContasReceber(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<ContasReceber>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceContasReceber(request.getContasReceber(), persistType);
@@ -664,16 +644,6 @@ private InternalResultsResponse<CondPag> processCondPag(ValidationContextIndicat
 		{
 	InternalResultsResponse<CondPag> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(CondPag.class.getSimpleName(), request.getCondPag(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<CondPag>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceCondPag(request.getCondPag(), persistType);
 		if (internalResponse.isInError())
@@ -880,16 +850,6 @@ private InternalResultsResponse<FormaPg> processFormaPg(ValidationContextIndicat
 		FormaPgMaintenanceRequest request)
 		{
 	InternalResultsResponse<FormaPg> response = null;
-
-	// Validate
-	ValidationContext context = new ValidationContext(FormaPg.class.getSimpleName(), request.getFormaPg(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<FormaPg>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceFormaPg(request.getFormaPg(), persistType);
@@ -1098,15 +1058,6 @@ private InternalResultsResponse<Banco> processBanco(ValidationContextIndicator i
 		{
 	InternalResultsResponse<Banco> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Banco.class.getSimpleName(), request.getBanco(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Banco>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceBanco(request.getBanco(), persistType);
@@ -1315,16 +1266,6 @@ private InternalResultsResponse<ContaCorrente> processContaCorrente(ValidationCo
 		{
 	InternalResultsResponse<ContaCorrente> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(ContaCorrente.class.getSimpleName(), request.getContaCorrente(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<ContaCorrente>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceContaCorrente(request.getContaCorrente(), persistType);
 		if (internalResponse.isInError())
@@ -1531,16 +1472,6 @@ private InternalResultsResponse<Caixa> processCaixa(ValidationContextIndicator i
 		CaixaMaintenanceRequest request)
 		{
 	InternalResultsResponse<Caixa> response = null;
-
-	// Validate
-	ValidationContext context = new ValidationContext(Caixa.class.getSimpleName(), request.getCaixa(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Caixa>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceCaixa(request.getCaixa(), persistType);

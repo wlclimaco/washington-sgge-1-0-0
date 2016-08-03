@@ -224,16 +224,6 @@ private InternalResultsResponse<Produto> processProduto(ValidationContextIndicat
 		{
 	InternalResultsResponse<Produto> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Produto.class.getSimpleName(), request.getProduto(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Produto>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceProduto(request.getProduto(), persistType);
 		if (internalResponse.isInError())
@@ -441,15 +431,6 @@ private InternalResultsResponse<Marca> processMarca(ValidationContextIndicator i
 		{
 	InternalResultsResponse<Marca> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Marca.class.getSimpleName(), request.getMarca(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Marca>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceMarca(request.getMarca(), persistType);
@@ -658,16 +639,6 @@ private InternalResultsResponse<Grupo> processGrupo(ValidationContextIndicator i
 		{
 	InternalResultsResponse<Grupo> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Grupo.class.getSimpleName(), request.getGrupo(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Grupo>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceGrupo(request.getGrupo(), persistType);
 		if (internalResponse.isInError())
@@ -875,15 +846,6 @@ private InternalResultsResponse<SubGrupo> processSubGrupo(ValidationContextIndic
 		{
 	InternalResultsResponse<SubGrupo> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(SubGrupo.class.getSimpleName(), request.getSubGrupo(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<SubGrupo>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceSubGrupo(request.getSubGrupo(), persistType);
@@ -1092,15 +1054,6 @@ private InternalResultsResponse<UniMed> processUniMed(ValidationContextIndicator
 		{
 	InternalResultsResponse<UniMed> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(UniMed.class.getSimpleName(), request.getUniMed(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<UniMed>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceUniMed(request.getUniMed(), persistType);

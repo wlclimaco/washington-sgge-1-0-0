@@ -213,15 +213,6 @@ private InternalResultsResponse<DoisValores> processDoisValores(ValidationContex
 		{
 	InternalResultsResponse<DoisValores> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(DoisValores.class.getSimpleName(), request.getDoisValores(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<DoisValores>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceDoisValores(request.getDoisValores(), persistType);

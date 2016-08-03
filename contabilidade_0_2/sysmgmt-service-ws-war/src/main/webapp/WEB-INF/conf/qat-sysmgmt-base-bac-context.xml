@@ -80,6 +80,23 @@
 		<property name="configuracaoBAR" ref="configuracaoBARTarget"/>
 		<property name="validationController" ref="countyValidationController"/>
 	</bean>
+	
+	<bean id="advocaciaBACTarget" class="com.qat.samples.sysmgmt.bac.Advogado.AdvocaciaBACImpl">
+		<property name="advocaciaBAR" ref="advocaciaBARTarget"/>
+		<property name="validationController" ref="countyValidationController"/>
+	</bean>
+	
+	<bean id="condominioBACTarget" class="com.qat.samples.sysmgmt.bac.Condominio.CondominioBACImpl">
+		<property name="condominioBAR" ref="condominioBARTarget"/>
+		<property name="validationController" ref="countyValidationController"/>
+	</bean>
+	
+	<bean id="dpBACTarget" class="com.qat.samples.sysmgmt.bac.Dp.DpBACImpl">
+		<property name="dpBAR" ref="dpBARTarget"/>
+		<property name="validationController" ref="countyValidationController"/>
+	</bean>
+	
+	
 	<!-- ========================= ASPECT CONFIGURATION ======================== -->
 
 	<!-- ========================= InternalResponse status categories ========== -->

@@ -224,16 +224,6 @@ private InternalResultsResponse<Site> processSite(ValidationContextIndicator ind
 		{
 	InternalResultsResponse<Site> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Site.class.getSimpleName(), request.getSite(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Site>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceSite(request.getSite(), persistType);
 		if (internalResponse.isInError())
@@ -440,16 +430,6 @@ private InternalResultsResponse<Contato> processContato(ValidationContextIndicat
 		ContatoMaintenanceRequest request)
 		{
 	InternalResultsResponse<Contato> response = null;
-
-	// Validate
-	ValidationContext context = new ValidationContext(Contato.class.getSimpleName(), request.getContato(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Contato>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceContato(request.getContato(), persistType);
@@ -658,16 +638,6 @@ private InternalResultsResponse<OrdemServico> processOrdemServico(ValidationCont
 		{
 	InternalResultsResponse<OrdemServico> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(OrdemServico.class.getSimpleName(), request.getOrdemServico(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<OrdemServico>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceOrdemServico(request.getOrdemServico(), persistType);
 		if (internalResponse.isInError())
@@ -875,15 +845,6 @@ private InternalResultsResponse<Plano> processPlano(ValidationContextIndicator i
 		{
 	InternalResultsResponse<Plano> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Plano.class.getSimpleName(), request.getPlano(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Plano>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistencePlano(request.getPlano(), persistType);
@@ -1091,16 +1052,6 @@ private InternalResultsResponse<Plano> processPlano(ValidationContextIndicator i
 			ServicoMaintenanceRequest request)
 			{
 		InternalResultsResponse<Servico> response = null;
-
-		// Validate
-		ValidationContext context = new ValidationContext(Servico.class.getSimpleName(), request.getServico(), indicator);
-		if (!getValidationController().validate(context))
-		{
-			response = new InternalResultsResponse<Servico>();
-			response.setStatus(SystemErrorCategory.SystemValidation);
-			response.addMessages(context.getMessages());
-			return response;
-		}
 
 			// Persist
 			InternalResponse internalResponse = doPersistenceServico(request.getServico(), persistType);

@@ -439,15 +439,6 @@ private InternalResultsResponse<Filial> processFilial(ValidationContextIndicator
 		{
 	InternalResultsResponse<Filial> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Filial.class.getSimpleName(), request.getFilial(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Filial>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceFilial(request.getFilial(), persistType);
@@ -656,15 +647,6 @@ private InternalResultsResponse<Deposito> processDeposito(ValidationContextIndic
 		{
 	InternalResultsResponse<Deposito> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Deposito.class.getSimpleName(), request.getDeposito(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Deposito>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceDeposito(request.getDeposito(), persistType);
@@ -873,16 +855,6 @@ private InternalResultsResponse<Usuario> processUsuario(ValidationContextIndicat
 		{
 	InternalResultsResponse<Usuario> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Usuario.class.getSimpleName(), request.getUsuario(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Usuario>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceUsuario(request.getUsuario(), persistType);
 		if (internalResponse.isInError())
@@ -1090,15 +1062,6 @@ private InternalResultsResponse<Advocacia> processAdvocacia(ValidationContextInd
 		{
 	InternalResultsResponse<Advocacia> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Advocacia.class.getSimpleName(), request.getAdvocacia(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Advocacia>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceAdvocacia(request.getAdvocacia(), persistType);
@@ -1307,16 +1270,6 @@ private InternalResultsResponse<Clinica> processClinica(ValidationContextIndicat
 		{
 	InternalResultsResponse<Clinica> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Clinica.class.getSimpleName(), request.getClinica(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Clinica>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceClinica(request.getClinica(), persistType);
 		if (internalResponse.isInError())
@@ -1524,15 +1477,6 @@ private InternalResultsResponse<Condominio> processCondominio(ValidationContextI
 		{
 	InternalResultsResponse<Condominio> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Condominio.class.getSimpleName(), request.getCondominio(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Condominio>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceCondominio(request.getCondominio(), persistType);

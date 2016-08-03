@@ -218,16 +218,6 @@ private InternalResultsResponse<Sindico> processSindico(ValidationContextIndicat
 		{
 	InternalResultsResponse<Sindico> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Sindico.class.getSimpleName(), request.getSindico(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Sindico>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceSindico(request.getSindico(), persistType);
 		if (internalResponse.isInError())
@@ -435,16 +425,6 @@ private InternalResultsResponse<Inquilino> processInquilino(ValidationContextInd
 		{
 	InternalResultsResponse<Inquilino> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Inquilino.class.getSimpleName(), request.getInquilino(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Inquilino>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceInquilino(request.getInquilino(), persistType);
 		if (internalResponse.isInError())
@@ -651,16 +631,6 @@ private InternalResultsResponse<Avisos> processAvisos(ValidationContextIndicator
 		AvisoMaintenanceRequest request)
 		{
 	InternalResultsResponse<Avisos> response = null;
-
-	// Validate
-	ValidationContext context = new ValidationContext(Avisos.class.getSimpleName(), request.getAviso(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Avisos>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceAvisos(request.getAviso(), persistType);

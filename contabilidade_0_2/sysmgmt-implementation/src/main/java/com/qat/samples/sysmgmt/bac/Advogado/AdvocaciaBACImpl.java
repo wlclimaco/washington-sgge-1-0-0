@@ -436,16 +436,6 @@ private InternalResultsResponse<Audiencia> processAudiencia(ValidationContextInd
 		{
 	InternalResultsResponse<Audiencia> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Audiencia.class.getSimpleName(), request.getAudiencia(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Audiencia>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceAudiencia(request.getAudiencia(), persistType);
 		if (internalResponse.isInError())
@@ -652,16 +642,6 @@ private InternalResultsResponse<Processo> processProcesso(ValidationContextIndic
 		ProcessoMaintenanceRequest request)
 		{
 	InternalResultsResponse<Processo> response = null;
-
-	// Validate
-	ValidationContext context = new ValidationContext(Processo.class.getSimpleName(), request.getProcesso(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Processo>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceProcesso(request.getProcesso(), persistType);

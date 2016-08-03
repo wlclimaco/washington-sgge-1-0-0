@@ -218,16 +218,6 @@ private InternalResultsResponse<NotaFiscalSaida> processNotaFiscalSaida(Validati
 		{
 	InternalResultsResponse<NotaFiscalSaida> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(NotaFiscalSaida.class.getSimpleName(), request.getNotafiscal(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<NotaFiscalSaida>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
-
 		// Persist
 		InternalResponse internalResponse = doPersistenceNotaFiscalSaida(request.getNotafiscal(), persistType);
 		if (internalResponse.isInError())
@@ -435,15 +425,6 @@ private InternalResultsResponse<Orcamento> processOrcamento(ValidationContextInd
 		{
 	InternalResultsResponse<Orcamento> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(Orcamento.class.getSimpleName(), request.getOrcamento(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Orcamento>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceOrcamento(request.getOrcamento(), persistType);
@@ -652,15 +633,6 @@ private InternalResultsResponse<OrdemServico> processOrdemServico(ValidationCont
 		{
 	InternalResultsResponse<OrdemServico> response = null;
 
-	// Validate
-	ValidationContext context = new ValidationContext(OrdemServico.class.getSimpleName(), request.getOrdemServico(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<OrdemServico>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceOrdemServico(request.getOrdemServico(), persistType);

@@ -31,31 +31,31 @@ public class ComprasBARImpl extends SqlSessionDaoSupport implements IComprasBAR
 
 ///===================================### NOTAFISCALENTRADA ####======================================
 /** The Constant NAMESPACE. */
-private static final String NAMESPACE_NOTAFISCALENTRADA = "NotaFiscalEntradaMap.";
+private static final String NAMESPACE_NOTAFISCALENTRADA = "NotaFiscalMap.";
 
 /** The Constant STMT_INSERT_NOTAFISCALENTRADA. */
-private static final String STMT_INSERT_NOTAFISCALENTRADA = NAMESPACE_NOTAFISCALENTRADA + "insertNotaFiscalEntrada";
+private static final String STMT_INSERT_NOTAFISCALENTRADA = NAMESPACE_NOTAFISCALENTRADA + "insertNotaFiscal";
 
 /** The Constant STMT_UPDATE_NOTAFISCALENTRADA. */
-private static final String STMT_UPDATE_NOTAFISCALENTRADA = NAMESPACE_NOTAFISCALENTRADA + "updateNotaFiscalEntrada";
+private static final String STMT_UPDATE_NOTAFISCALENTRADA = NAMESPACE_NOTAFISCALENTRADA + "updateNotaFiscal";
 
 /** The Constant STMT_DELETE_NOTAFISCALENTRADA. */
-private static final String STMT_DELETE_NOTAFISCALENTRADA = NAMESPACE_NOTAFISCALENTRADA + "deleteNotaFiscalEntradaById";
+private static final String STMT_DELETE_NOTAFISCALENTRADA = NAMESPACE_NOTAFISCALENTRADA + "deleteNotaFiscalById";
 
 	/** The Constant STMT_DELETE_NOTAFISCALENTRADA_ALL. */
-	private static final String STMT_DELETE_NOTAFISCALENTRADA_ALL = NAMESPACE_NOTAFISCALENTRADA + "deleteAllNotaFiscalEntradas";
+	private static final String STMT_DELETE_NOTAFISCALENTRADA_ALL = NAMESPACE_NOTAFISCALENTRADA + "deleteAllNotaFiscals";
 
 	/** The Constant STMT_FETCH_NOTAFISCALENTRADA. */
-	private static final String STMT_FETCH_NOTAFISCALENTRADA = NAMESPACE_NOTAFISCALENTRADA + "fetchNotaFiscalEntradaById";
+	private static final String STMT_FETCH_NOTAFISCALENTRADA = NAMESPACE_NOTAFISCALENTRADA + "fetchNotaFiscalById";
 
 	/** The Constant STMT_FETCH_NOTAFISCALENTRADA_ALL. */
-	private static final String STMT_FETCH_NOTAFISCALENTRADA_ALL = NAMESPACE_NOTAFISCALENTRADA + "fetchAllNotaFiscalEntradas";
+	private static final String STMT_FETCH_NOTAFISCALENTRADA_ALL = NAMESPACE_NOTAFISCALENTRADA + "fetchAllNotaFiscals";
 
 	/** The Constant STMT_FETCH_NOTAFISCALENTRADA_COUNT. */
-	private static final String STMT_FETCH_NOTAFISCALENTRADA_COUNT = NAMESPACE_NOTAFISCALENTRADA + "fetchNotaFiscalEntradaRowCount";
+	private static final String STMT_FETCH_NOTAFISCALENTRADA_COUNT = NAMESPACE_NOTAFISCALENTRADA + "fetchNotaFiscalRowCount";
 
 	/** The Constant STMT_FETCH_NOTAFISCALENTRADA_ALL_REQUEST. */
-	private static final String STMT_FETCH_NOTAFISCALENTRADA_ALL_REQUEST = NAMESPACE_NOTAFISCALENTRADA + "fetchAllNotaFiscalEntradasRequest";
+	private static final String STMT_FETCH_NOTAFISCALENTRADA_ALL_REQUEST = NAMESPACE_NOTAFISCALENTRADA + "fetchAllNotaFiscalsRequest";
 
 ///===================================### PEDIDOCOMPRAS ####======================================
 /** The Constant NAMESPACE. */

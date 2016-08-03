@@ -85,5 +85,18 @@
 	<bean id="configuracaoBACTarget" class="org.mockito.Mockito" factory-method="mock">
 		<constructor-arg value="com.qat.samples.sysmgmt.bac.Configuracao.IConfiguracaoBAC" />
 	</bean>
+	
+	<bean id="advocaciaBACTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.qat.samples.sysmgmt.bac.Advogado.IAdvocaciaBAC" />
+	</bean>
+	
+	<bean id="condominioBACTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.qat.samples.sysmgmt.bac.Condominio.ICondominioBAC" />
+	</bean>
+	
+	<bean id="dpBACTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.qat.samples.sysmgmt.bac.Dp.IDpBAC" />
+	</bean>
+
 
 </beans>
