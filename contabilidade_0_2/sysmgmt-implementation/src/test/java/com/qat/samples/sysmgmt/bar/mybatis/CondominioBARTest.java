@@ -148,19 +148,7 @@ public ICondominioBAR getCondominioBAR()
 
 	public Avisos insertAvisos(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
-			Avisos avisos = new Avisos();
-			Date a = new Date();
-			avisos.setId(id);
-			avisos.setParentId(id);
-			avisos.setEmprId(1);
-			avisos.setModifyDateUTC(a.getTime());
-			avisos.setCreateDateUTC(a.getTime());
-			avisos.setCreateUser("system");
-			avisos.setModifyUser("system");
-			avisos.setProcessId(1);
-			avisos.setModelAction(action);
-
-			return avisos;
+		return Objects.insertAvisos(id,tabela,action);
 		}
 
 

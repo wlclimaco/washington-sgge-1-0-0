@@ -100,7 +100,7 @@ public void setAdvocaciaBAR(IAdvocaciaBAR advocaciaBAR) {
 		Assert.assertEquals(audienciaResponse.getDescricao(), "descricao_0");
 		getAdvocaciaBAR().updateAudiencia(audiencia);
 		audienciaResponse = getAdvocaciaBAR().fetchAudienciaById(request);
-		Assert.assertEquals(audienciaResponse.getDescricao(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(audienciaResponse.getDescricao(), "descricao_3 - UPDATE");
 	}
 
 	@Test

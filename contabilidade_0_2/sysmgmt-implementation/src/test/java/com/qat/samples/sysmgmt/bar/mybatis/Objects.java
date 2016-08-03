@@ -542,7 +542,7 @@ public class Objects {
 		Date a = new Date();
 		processo.setId(id);
 		processo.setDataProcess(a.getTime());
-		processo.setValor(new Double(10.00));
+		processo.setValor(new Double(11.00));
 		processo.setAdvogadoList(new ArrayList<Advogado>());
 		processo.getAdvogadoList().add(insertAdvogado(id, TabelaEnum.PROCESSO, action));
 		processo.setClienteList(new ArrayList<Cliente>());

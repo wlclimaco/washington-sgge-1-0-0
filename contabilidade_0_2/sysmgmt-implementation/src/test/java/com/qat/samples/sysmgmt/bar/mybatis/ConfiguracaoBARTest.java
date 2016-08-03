@@ -1328,29 +1328,7 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 
 	public ConfigVendas insertConfigVendas(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
-			ConfigVendas ConfigVendas = new ConfigVendas();
-			Date a = new Date();
-			ConfigVendas.setId(id);
-			ConfigVendas.setDescontoMaxVenda(new Double(1.99));
-			ConfigVendas.setObservacao("observação");
-			ConfigVendas.setImprSegVia(1);
-			ConfigVendas.setImprAssinatura(1);
-			ConfigVendas.setImprResumoFinanc(1);
-			ConfigVendas.setAtuaPrecoClonar(1);
-			ConfigVendas.setImprColUnidade(1);
-			ConfigVendas.setBloquearvendProdSemEstoq(1);
-			ConfigVendas.setAddDespCalcImposto(1);
-			ConfigVendas.setRetSubstTribICMS(1);
-			ConfigVendas.setParentId(id);
-			ConfigVendas.setEmprId(1);
-			ConfigVendas.setModifyDateUTC(a.getTime());
-			ConfigVendas.setCreateDateUTC(a.getTime());
-			ConfigVendas.setCreateUser("system");
-			ConfigVendas.setModifyUser("system");
-			ConfigVendas.setProcessId(1);
-			ConfigVendas.setModelAction(action);
-
-			return ConfigVendas;
+		return Objects.insertConfigVendas(id,tabela,action);
 		}
 
 	public DoisValores insertDoisValor(Integer id,TabelaEnum tabela,PersistenceActionEnum action)

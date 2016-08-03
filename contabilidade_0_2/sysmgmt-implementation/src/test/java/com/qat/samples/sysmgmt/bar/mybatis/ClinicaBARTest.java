@@ -239,46 +239,13 @@ public IClinicaBAR getClinicaBAR()
 
 	public Consulta insertConsulta(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
-			Consulta consulta = new Consulta();
-			Date a = new Date();
-			consulta.setId(id);
-			consulta.setDataConsulta(a.getTime());
-			consulta.setValor(new Double(11.00));
-			consulta.setDataMarcacao(a.getTime());
-
-//			consulta.setMedico(10000);
-//			consulta.setPaciente(10000);
-//			consulta.setPlanoSaude(10000);
-//			consulta.setExameList(10000);
-//			consulta.getundefined().add(insertundefined(id,TabelaEnum.CONSULTA,action));
-			consulta.setParentId(id);
-			consulta.setEmprId(1);
-			consulta.setModifyDateUTC(a.getTime());
-			consulta.setCreateDateUTC(a.getTime());
-			consulta.setCreateUser("system");
-			consulta.setModifyUser("system");
-			consulta.setProcessId(1);
-			consulta.setModelAction(action);
-
-			return consulta;
+		return Objects.insertConsulta(id,tabela,action);
 		}
 
 
 	public Exame insertExame(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
-			Exame exame = new Exame();
-			Date a = new Date();
-			exame.setId(id);
-			exame.setParentId(id);
-			exame.setEmprId(1);
-			exame.setModifyDateUTC(a.getTime());
-			exame.setCreateDateUTC(a.getTime());
-			exame.setCreateUser("system");
-			exame.setModifyUser("system");
-			exame.setProcessId(1);
-			exame.setModelAction(action);
-
-			return exame;
+		return Objects.insertExame(id,tabela,action);
 		}
 
 
