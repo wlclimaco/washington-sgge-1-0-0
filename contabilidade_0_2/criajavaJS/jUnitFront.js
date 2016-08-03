@@ -297,7 +297,6 @@ text = text + '     }\n';
 text = text + "\n";
 }
 text = text + "\n";
-text = text + "}\n";
 return text;
 
 }
