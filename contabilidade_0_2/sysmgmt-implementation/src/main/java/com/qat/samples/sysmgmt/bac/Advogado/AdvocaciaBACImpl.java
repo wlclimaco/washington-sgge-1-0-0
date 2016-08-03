@@ -48,28 +48,17 @@ public class AdvocaciaBACImpl implements IAdvocaciaBAC
 	private static final Logger LOG = LoggerFactory.getLogger(AdvocaciaBACImpl.class);
 
 	/** The Advogado BAR. */
-	private IAdvocaciaBAR advogadoBAR; // injected by Spring through setter
+	private IAdvocaciaBAR advocaciaBAR; // injected by Spring through setter
 
 	private ValidationController validationController; // injected by Spring through setter
 
-	/**
-	 * Spring Sets the Advogado BAR.
-	 *
-	 * @param AdvogadoBAR the new Advogado BAR
-	 */
-	public void setAdvogadoBAR(IAdvocaciaBAR advogadoBAR)
-	{
-		this.advogadoBAR = advogadoBAR;
+
+	public IAdvocaciaBAR getAdvocaciaBAR() {
+		return advocaciaBAR;
 	}
 
-	/**
-	 * Gets the Advogado BAR.
-	 *
-	 * @return the Advogado BAR
-	 */
-	public IAdvocaciaBAR getAdvogadoBAR()
-	{
-		return advogadoBAR;
+	public void setAdvocaciaBAR(IAdvocaciaBAR advocaciaBAR) {
+		this.advocaciaBAR = advocaciaBAR;
 	}
 
 	/**
@@ -145,13 +134,13 @@ public InternalResultsResponse<Advogado> deleteAdvogado(AdvogadoMaintenanceReque
 public InternalResultsResponse<Advogado> refreshAdvogados(RefreshRequest request)
 {
 	// This method is demo code only. Do not view this as a QAT Global Standard.
-	getAdvogadoBAR().deleteAllAdvogados();
+	getAdvocaciaBAR().deleteAllAdvogados();
 	int refreshNumber = request.getRefreshInt();
 	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
 
 	for (int i = 1; i <= refreshNumber; i++)
 	{
-	getAdvogadoBAR().insertAdvogado(new Advogado(i, "AdvogadoDesc" + i));
+	getAdvocaciaBAR().insertAdvogado(new Advogado(i, "AdvogadoDesc" + i));
 	}
 
 	// Call maintain to see if we need to return the advogado list and if so whether it should be paged or not
@@ -166,7 +155,7 @@ public InternalResultsResponse<Advogado> refreshAdvogados(RefreshRequest request
 public InternalResultsResponse<Advogado> fetchAllAdvogados(Advogado advogado)
 {
 	InternalResultsResponse<Advogado> response = new InternalResultsResponse<Advogado>();
-	response.getResultsList().addAll(getAdvogadoBAR().fetchAllAdvogados(advogado).getResultsList());
+	response.getResultsList().addAll(getAdvocaciaBAR().fetchAllAdvogados(advogado).getResultsList());
 	return response;
 }
 
@@ -188,7 +177,7 @@ public InternalResultsResponse<Advogado> fetchAdvogadoById(FetchByIdRequest requ
 	}
 	else
 	{
-		response.getResultsList().add(getAdvogadoBAR().fetchAdvogadoById(request));
+		response.getResultsList().add(getAdvocaciaBAR().fetchAdvogadoById(request));
 	}
 
 	return response;
@@ -202,7 +191,7 @@ public InternalResultsResponse<Advogado> fetchAdvogadoById(FetchByIdRequest requ
 @Override
 public InternalResultsResponse<Advogado> fetchAdvogadosByRequest(AdvogadoInquiryRequest request)
 {
-	return getAdvogadoBAR().fetchAdvogadosByRequest(request);
+	return getAdvocaciaBAR().fetchAdvogadosByRequest(request);
 }
 
 /**
@@ -261,13 +250,13 @@ private InternalResultsResponse<Advogado> processAdvogado(ValidationContextIndic
 		switch (updateType)
 		{
 			case INSERT:
-				return getAdvogadoBAR().insertAdvogado(advogado);
+				return getAdvocaciaBAR().insertAdvogado(advogado);
 
 			case UPDATE:
-				return getAdvogadoBAR().updateAdvogado(advogado);
+				return getAdvocaciaBAR().updateAdvogado(advogado);
 
 			case DELETE:
-				return getAdvogadoBAR().deleteAdvogadoById(advogado);
+				return getAdvocaciaBAR().deleteAdvogadoById(advogado);
 			default:
 				if (LOG.isDebugEnabled())
 				{
@@ -362,13 +351,13 @@ public InternalResultsResponse<Audiencia> deleteAudiencia(AudienciaMaintenanceRe
 public InternalResultsResponse<Audiencia> refreshAudiencias(RefreshRequest request)
 {
 	// This method is demo code only. Do not view this as a QAT Global Standard.
-	getAdvogadoBAR().deleteAllAudiencias();
+	getAdvocaciaBAR().deleteAllAudiencias();
 	int refreshNumber = request.getRefreshInt();
 	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
 
 	for (int i = 1; i <= refreshNumber; i++)
 	{
-	getAdvogadoBAR().insertAudiencia(new Audiencia(i, "AudienciaDesc" + i));
+	getAdvocaciaBAR().insertAudiencia(new Audiencia(i, "AudienciaDesc" + i));
 	}
 
 	// Call maintain to see if we need to return the audiencia list and if so whether it should be paged or not
@@ -383,7 +372,7 @@ public InternalResultsResponse<Audiencia> refreshAudiencias(RefreshRequest reque
 public InternalResultsResponse<Audiencia> fetchAllAudiencias(Audiencia audiencia)
 {
 	InternalResultsResponse<Audiencia> response = new InternalResultsResponse<Audiencia>();
-	response.getResultsList().addAll(getAdvogadoBAR().fetchAllAudiencias(audiencia).getResultsList());
+	response.getResultsList().addAll(getAdvocaciaBAR().fetchAllAudiencias(audiencia).getResultsList());
 	return response;
 }
 
@@ -405,7 +394,7 @@ public InternalResultsResponse<Audiencia> fetchAudienciaById(FetchByIdRequest re
 	}
 	else
 	{
-		response.getResultsList().add(getAdvogadoBAR().fetchAudienciaById(request));
+		response.getResultsList().add(getAdvocaciaBAR().fetchAudienciaById(request));
 	}
 
 	return response;
@@ -419,7 +408,7 @@ public InternalResultsResponse<Audiencia> fetchAudienciaById(FetchByIdRequest re
 @Override
 public InternalResultsResponse<Audiencia> fetchAudienciasByRequest(AudienciaInquiryRequest request)
 {
-	return getAdvogadoBAR().fetchAudienciasByRequest(request);
+	return getAdvocaciaBAR().fetchAudienciasByRequest(request);
 }
 
 /**
@@ -468,13 +457,13 @@ private InternalResultsResponse<Audiencia> processAudiencia(ValidationContextInd
 		switch (updateType)
 		{
 			case INSERT:
-				return getAdvogadoBAR().insertAudiencia(audiencia);
+				return getAdvocaciaBAR().insertAudiencia(audiencia);
 
 			case UPDATE:
-				return getAdvogadoBAR().updateAudiencia(audiencia);
+				return getAdvocaciaBAR().updateAudiencia(audiencia);
 
 			case DELETE:
-				return getAdvogadoBAR().deleteAudienciaById(audiencia);
+				return getAdvocaciaBAR().deleteAudienciaById(audiencia);
 			default:
 				if (LOG.isDebugEnabled())
 				{
@@ -569,13 +558,13 @@ public InternalResultsResponse<Processo> deleteProcesso(ProcessoMaintenanceReque
 public InternalResultsResponse<Processo> refreshProcessos(RefreshRequest request)
 {
 	// This method is demo code only. Do not view this as a QAT Global Standard.
-	getAdvogadoBAR().deleteAllProcessos();
+	getAdvocaciaBAR().deleteAllProcessos();
 	int refreshNumber = request.getRefreshInt();
 	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
 
 	for (int i = 1; i <= refreshNumber; i++)
 	{
-	getAdvogadoBAR().insertProcesso(new Processo(i, "ProcessoDesc" + i));
+	getAdvocaciaBAR().insertProcesso(new Processo(i, "ProcessoDesc" + i));
 	}
 
 	// Call maintain to see if we need to return the processo list and if so whether it should be paged or not
@@ -590,7 +579,7 @@ public InternalResultsResponse<Processo> refreshProcessos(RefreshRequest request
 public InternalResultsResponse<Processo> fetchAllProcessos(Processo processo)
 {
 	InternalResultsResponse<Processo> response = new InternalResultsResponse<Processo>();
-	response.getResultsList().addAll(getAdvogadoBAR().fetchAllProcessos(processo).getResultsList());
+	response.getResultsList().addAll(getAdvocaciaBAR().fetchAllProcessos(processo).getResultsList());
 	return response;
 }
 
@@ -612,7 +601,7 @@ public InternalResultsResponse<Processo> fetchProcessoById(FetchByIdRequest requ
 	}
 	else
 	{
-		response.getResultsList().add(getAdvogadoBAR().fetchProcessoById(request));
+		response.getResultsList().add(getAdvocaciaBAR().fetchProcessoById(request));
 	}
 
 	return response;
@@ -626,7 +615,7 @@ public InternalResultsResponse<Processo> fetchProcessoById(FetchByIdRequest requ
 @Override
 public InternalResultsResponse<Processo> fetchProcessosByRequest(ProcessoInquiryRequest request)
 {
-	return getAdvogadoBAR().fetchProcessosByRequest(request);
+	return getAdvocaciaBAR().fetchProcessosByRequest(request);
 }
 
 /**
@@ -675,13 +664,13 @@ private InternalResultsResponse<Processo> processProcesso(ValidationContextIndic
 		switch (updateType)
 		{
 			case INSERT:
-				return getAdvogadoBAR().insertProcesso(processo);
+				return getAdvocaciaBAR().insertProcesso(processo);
 
 			case UPDATE:
-				return getAdvogadoBAR().updateProcesso(processo);
+				return getAdvocaciaBAR().updateProcesso(processo);
 
 			case DELETE:
-				return getAdvogadoBAR().deleteProcessoById(processo);
+				return getAdvocaciaBAR().deleteProcessoById(processo);
 			default:
 				if (LOG.isDebugEnabled())
 				{
