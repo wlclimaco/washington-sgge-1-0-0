@@ -469,12 +469,9 @@ public InternalResponse deleteAllConsultas()
  * com.qat.samples.sysmgmt.bar.IConsultaBAR#fetchConsultaById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<Consulta> fetchConsultaById(FetchByIdRequest request)
+public Consulta fetchConsultaById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Consulta> response = new InternalResultsResponse<Consulta>();
-	response.addResult((Consulta)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONSULTA,
-			request.getFetchId()));
-	return response;
+	return (Consulta)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONSULTA, request.getFetchId());
 }
 
 /*
@@ -604,12 +601,10 @@ public InternalResponse deleteAllExames()
  * com.qat.samples.sysmgmt.bar.IExameBAR#fetchExameById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<Exame> fetchExameById(FetchByIdRequest request)
+public Exame fetchExameById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Exame> response = new InternalResultsResponse<Exame>();
-	response.addResult((Exame)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_EXAME,
-			request.getFetchId()));
-	return response;
+	return (Exame)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_EXAME, request.getFetchId());
+
 }
 
 /*

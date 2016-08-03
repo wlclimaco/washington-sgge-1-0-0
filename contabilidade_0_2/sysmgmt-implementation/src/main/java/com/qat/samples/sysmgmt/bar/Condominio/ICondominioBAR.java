@@ -135,7 +135,7 @@ public interface ICondominioBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Avisos> fetchAvisosById(FetchByIdRequest request);
+	public Avisos fetchAvisosById(FetchByIdRequest request);
 
 	/**
 * Insert avisos.

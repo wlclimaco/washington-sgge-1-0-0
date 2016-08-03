@@ -18,8 +18,6 @@ public class Avisos extends ModelCosmeDamiao
 	/** The type of an account. */
 	private Long dataAviso;
 
-	private List<Note> noteList;
-
 	public Avisos()
 	{
 		super();
@@ -50,21 +48,11 @@ public class Avisos extends ModelCosmeDamiao
 		this.dataAviso = dataAviso;
 	}
 
-	public List<Note> getNoteList()
-	{
-		return noteList;
-	}
-
-	public void setNoteList(List<Note> noteList)
-	{
-		this.noteList = noteList;
-	}
 
 	@Override
-	public String toString()
-	{
-		return "Avisos [getId()=" + getId() + ", getDataAviso()=" + getDataAviso() + ", getNoteList()=" + getNoteList()
-				+ ", toString()=" + super.toString() + "]";
+	public String toString() {
+		return "Avisos [getId()=" + getId() + ", getDataAviso()=" + getDataAviso() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
 }

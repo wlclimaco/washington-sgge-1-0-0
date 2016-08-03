@@ -20,8 +20,6 @@ public class Audiencia extends ModelCosmeDamiao
 
 	private String descricao;
 
-	private List<Note> noteLIst;
-
 	public Audiencia()
 	{
 		super();
@@ -62,21 +60,11 @@ public class Audiencia extends ModelCosmeDamiao
 		this.descricao = descricao;
 	}
 
-	public List<Note> getNoteLIst()
-	{
-		return noteLIst;
-	}
-
-	public void setNoteLIst(List<Note> noteLIst)
-	{
-		this.noteLIst = noteLIst;
-	}
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "Audiencia [getId()=" + getId() + ", getDataAudiencia()=" + getDataAudiencia() + ", getDescricao()="
-				+ getDescricao() + ", getNoteLIst()=" + getNoteLIst() + ", toString()=" + super.toString() + "]";
+				+ getDescricao() + ", toString()=" + super.toString() + "]";
 	}
 
 }

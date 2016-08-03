@@ -137,7 +137,7 @@ public interface IClinicaBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Consulta> fetchConsultaById(FetchByIdRequest request);
+	public Consulta fetchConsultaById(FetchByIdRequest request);
 
 	/**
 * Insert consulta.
@@ -194,7 +194,7 @@ public interface IClinicaBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Exame> fetchExameById(FetchByIdRequest request);
+	public Exame fetchExameById(FetchByIdRequest request);
 
 	/**
 * Insert exame.

@@ -1,160 +1,116 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+
+<!-- create by system gera-java version 1.0.0 03/08/2016 12:24 : 19-->
+
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ProcessoMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
-	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
-
-  	<!-- Result maps describe the mapping between the columns returned
-       from a query, and the class properties.  A result map isn't
-       necessary if the columns (or aliases) match to the properties
-       exactly.
-       private Integer id;
-
-	/** The type of an account. */
-	private String nome;
-
-	private List<Endereco> enderecos;
-	private List<Email> emails;
-	private List<Telefone> telefones;
-
-	private String gerente;
-
-	private String responsavelConta;
-
-	private String numeroConta;;-->
-
-  <resultMap id="processoResult" type="Processo" >
-    <result property="id" column="id" />
-    <result property="nome" column="nome" />
-    <result property="gerente" column="gerente" />
-    <result property="responsavelConta" column="responsavelConta" />
-    <result property="numeroConta" column="numeroConta" />
-   	<result property="createUser" column="create_user"/>
-	<result property="createDataUTC" column="create_date"/>
-	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDataUTC" column="modify_date"/>
-	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByPessoaId"/>
-	<collection property="emails" column="id" select="EmailMap.fetchAllEmailsByPessoaId"/>
-	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByPessoaId"/>
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByPessoaId"/>
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="ProcessoResult" type="Processo">
+    <result property="id" column="id"/>
+    <result property="dataProcess" column="dataProcess"/>
+    <result property="valor" column="valor"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+<collection property="advogadoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="clienteList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="audienciaList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
   </resultMap>
 
-  <!--
-		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
-	-->
   <sql id="allProcessoColumns">
-		 nome
-		,gerente
-		,responsavelConta
-		,numeroConta
-      	,create_date
-      	,create_user
-      	,modify_date
-      	,modify_user
+dataProcess
+,valor
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allProcessoValues">
+#{dataProcess},
+#{valor},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
   </sql>
 
-  <sql id="allProcessoValues">
-  		#{nome},
-  		#{gerente},
-  		#{responsavelConta},
-  		#{numeroConta},
-    	<include refid="CBOFMap.changeControlFields"/>
-  </sql>
 
-  <!--
-		SQL Insert Statements.
- 	-->
-  <insert id="insertProcesso" parameterType="Processo" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO processo (
-		<include refid="allProcessoColumns" />
-      )
-    VALUES (<include refid="allProcessoValues" /> )
-  </insert>
+ <select id="fetchAllProcessos" resultMap="ProcessoResult">
+    SELECT id,
+ <include refid="allProcessoColumns" />
+   FROM processo ORDER BY id ASC
+ </select>
 
+ <select id="fetchProcessoById" parameterType="Integer" resultMap="ProcessoResult">
+    SELECT id,
+ <include refid="allProcessoColumns" />
+   FROM processo WHERE id = #{fetchid}
+ </select>
 
-	<!--
-		SQL Update Statements.
- 	-->
+ <select id="fetchAllProcessosRequest" parameterType="ProcessoInquiryRequest" resultMap="ProcessoResult">
 
-  <update id="updateProcesso" parameterType="Processo">
-    UPDATE processo
-    	<set>
-    		<if test="nome!= null">nome = #{nome},</if>
-			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
-			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
-		</set>
-    WHERE
-     id = #{id}
-  </update>
+     SELECT id,<include refid="allProcessoColumns" />
+           FROM processo where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
 
-   <!--
-		SQL Delete Statements.
-   -->
-  <delete id="deleteProcessoById" parameterType="Integer">
-    	DELETE FROM processo WHERE id = #{id}
+<select id="fetchProcessoRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM processo WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+
+ </select>
+
+ <insert id="insertProcesso" parameterType="Processo" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO processo (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allProcessoColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allProcessoValues" /> )
+ </insert>
+
+ <update id="updateProcesso" parameterType="Processo">
+   UPDATE processo SET
+<if test="dataProcess!= null">dataProcess = #{dataProcess},</if>
+<if test="valor!= null">valor = #{valor},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteProcessoById" parameterType="Processo">
+  DELETE FROM processo WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllProcessos">
+ DELETE FROM processo
   </delete>
-
-	<!--
-		SQL Fetch Statements.
- 	-->
-  <select id="fetchProcessoRowCount" parameterType="ProcessoInquiryRequest" resultType="Integer">
-     SELECT COUNT(id) AS RECORD_COUNT
-        FROM processo
-     WHERE 1=1
-     <if test="criteria.id != null">
-		  AND id = #{criteria.id}
-	 </if>
-  </select>
-
-  <select id="fetchAllProcessos" resultMap="processoResult">
-    SELECT id
-	<include refid="allProcessoColumns" />
-    FROM processo b ORDER BY id ASC
-  </select>
-
-  <select id="fetchProcessoById" parameterType="FetchByIdRequest" resultMap="processoResult">
-	SELECT
-		<include refid="allProcessoColumns" />
-        FROM processo b
-     WHERE 1=1  AND id = #{id}
-  </select>
-
-  <select id="fetchAllProcessosByRequest" parameterType="ProcessoInquiryRequest" resultMap="processoResult">
-	    SELECT * FROM
-    			(
-    				SELECT id,
-    						<include refid="allProcessoColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
-    				FROM processo b
-					WHERE 2 = 2
-					<if test="criteria.id != null">
-						AND id = #{criteria.id}
-					</if>
-    			) LIST
-				<choose>
-					<when test="pageSize != null and pageSize > 0">
-					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
-					        LOWER: startRow + 1 and
-					        UPPER: startRow + pageSize -->
-					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
-					</when>
-					<otherwise>
-					 	WHERE RowNumber BETWEEN 1 AND RowNumber
-					 	ORDER BY RowNumber
-					</otherwise>
-				</choose>
-  </select>
-
-  <select id="fetchProcessoByBanco" parameterType="Integer" resultMap="processoResult">
-	SELECT id,
-		<include refid="allProcessoColumns" />
-		FROM processo b where id = #{id} ORDER BY id ASC
-  </select>
-
-
 </mapper>
+
+

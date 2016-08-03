@@ -397,7 +397,7 @@ public InternalResultsResponse<Eventos> fetchEventosById(FetchByIdRequest reques
 	}
 	else
 	{
-		response.getResultsList().add(getDpBAR().fetchEventosById(request).getFirstResult());
+		response.getResultsList().add(getDpBAR().fetchEventosById(request));
 	}
 
 	return response;
@@ -604,7 +604,7 @@ public InternalResultsResponse<Beneficios> fetchBeneficiosById(FetchByIdRequest 
 	}
 	else
 	{
-		response.getResultsList().add(getDpBAR().fetchBeneficiosById(request).getFirstResult());
+		response.getResultsList().add(getDpBAR().fetchBeneficiosById(request));
 	}
 
 	return response;
@@ -811,7 +811,7 @@ public InternalResultsResponse<HorarioFunc> fetchHoraFuncById(FetchByIdRequest r
 	}
 	else
 	{
-		response.getResultsList().add(getDpBAR().fetchHorafuncById(request).getFirstResult());
+		response.getResultsList().add(getDpBAR().fetchHorafuncById(request));
 	}
 
 	return response;

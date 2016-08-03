@@ -601,7 +601,7 @@ public InternalResultsResponse<Avisos> fetchAvisosById(FetchByIdRequest request)
 	}
 	else
 	{
-		response.getResultsList().add(getCondominioBAR().fetchAvisosById(request).getFirstResult());
+		response.getResultsList().add(getCondominioBAR().fetchAvisosById(request));
 	}
 
 	return response;

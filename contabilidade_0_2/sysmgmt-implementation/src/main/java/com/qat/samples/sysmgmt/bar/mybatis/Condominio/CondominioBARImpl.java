@@ -10,6 +10,7 @@ import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.MyBatisBARHelper;
 import com.qat.samples.sysmgmt.bar.Condominio.ICondominioBAR;
+import com.qat.samples.sysmgmt.clinica.model.Exame;
 import com.qat.samples.sysmgmt.condominio.model.Avisos;
 import com.qat.samples.sysmgmt.condominio.model.Inquilino;
 import com.qat.samples.sysmgmt.condominio.model.Sindico;
@@ -439,12 +440,10 @@ public InternalResponse deleteAllAvisoss()
  * com.qat.samples.sysmgmt.bar.IAvisosBAR#fetchAvisosById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<Avisos> fetchAvisosById(FetchByIdRequest request)
+public Avisos fetchAvisosById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Avisos> response = new InternalResultsResponse<Avisos>();
-	response.addResult((Avisos)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_AVISOS,
-			request.getFetchId()));
-	return response;
+	return (Avisos)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_AVISOS, request.getFetchId());
+
 }
 
 /*

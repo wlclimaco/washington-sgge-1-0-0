@@ -12,6 +12,15 @@
 
     <typeAliases>
 
+    	<typeAlias alias="Processo" type="com.qat.samples.sysmgmt.advocacia.Processo" />
+    	<typeAlias alias="ProcessoInquiryRequest" type="com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest" />
+
+    	<typeAlias alias="Avisos" type="com.qat.samples.sysmgmt.condominio.model.Avisos" />
+    	<typeAlias alias="AvisoInquiryRequest" type="com.qat.samples.sysmgmt.condominio.model.request.AvisoInquiryRequest" />
+
+    	<typeAlias alias="Audiencia" type="com.qat.samples.sysmgmt.advocacia.Audiencia" />
+    	<typeAlias alias="AudienciaInquiryRequest" type="com.qat.samples.sysmgmt.advocacia.request.AudienciaInquiryRequest" />
+
         <typeAlias alias="County" type="com.qat.samples.sysmgmt.model.County" />
         <typeAlias alias="Drug" type="com.qat.samples.sysmgmt.model.Drug" />
         <typeAlias alias="DrugPrice" type="com.qat.samples.sysmgmt.model.DrugPrice" />
@@ -445,6 +454,10 @@
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configVendas.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configuracao.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/doisValor.xml" />
+
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/processo.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/audiencia.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/avisos.xml" />
     </mappers>
 
 </configuration>

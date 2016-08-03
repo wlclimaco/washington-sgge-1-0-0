@@ -129,6 +129,22 @@
 		<property name="financeiroBAR" ref="financeiroBARTarget" />
 	</bean>
 
+		<bean id="advocaciaBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Advogado.AdvocaciaBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="clinicaBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Clinica.ClinicaBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="condominioBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Condominio.CondominioBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="dpBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Dp.DpBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
 
 	<bean id="qat-debug-loggingInterceptor" class="com.qat.framework.aop.DebugLoggingAOP"></bean>
 

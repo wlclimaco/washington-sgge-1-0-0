@@ -27,11 +27,13 @@ public class Consulta extends ModelCosmeDamiao
 
 	private Paciente paciente;
 
+	private PlanoSaudePessoa planoSaude;
+
 	private List<ExamePessoa> exameList;
 
 	private List<Resultado> resultadoList;
 
-	private PlanoSaudePessoa planoSaude;
+
 
 	public Consulta()
 	{

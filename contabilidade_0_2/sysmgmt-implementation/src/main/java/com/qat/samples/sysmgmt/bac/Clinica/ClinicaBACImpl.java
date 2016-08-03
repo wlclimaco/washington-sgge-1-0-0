@@ -604,7 +604,7 @@ public InternalResultsResponse<Consulta> fetchConsultaById(FetchByIdRequest requ
 	}
 	else
 	{
-		response.getResultsList().add(getClinicaBAR().fetchConsultaById(request).getFirstResult());
+		response.getResultsList().add(getClinicaBAR().fetchConsultaById(request));
 	}
 
 	return response;
@@ -813,7 +813,7 @@ public InternalResultsResponse<Exame> fetchExameById(FetchByIdRequest request)
 	}
 	else
 	{
-		response.getResultsList().add(getClinicaBAR().fetchExameById(request).getFirstResult());
+		response.getResultsList().add(getClinicaBAR().fetchExameById(request));
 	}
 
 	return response;

@@ -12,6 +12,7 @@ import com.qat.framework.util.MyBatisBARHelper;
 import com.qat.samples.sysmgmt.bar.Dp.IDpBAR;
 import com.qat.samples.sysmgmt.beneficios.model.Beneficios;
 import com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.Avisos;
 import com.qat.samples.sysmgmt.dp.model.Eventos;
 import com.qat.samples.sysmgmt.dp.model.HorarioFunc;
 import com.qat.samples.sysmgmt.dp.model.request.EventoInquiryRequest;
@@ -73,19 +74,19 @@ private static final String STMT_UPDATE_EVENTOS = NAMESPACE_EVENTOS + "updateEve
 private static final String STMT_DELETE_EVENTOS = NAMESPACE_EVENTOS + "deleteEventosById";
 
 	/** The Constant STMT_DELETE_EVENTOS_ALL. */
-	private static final String STMT_DELETE_EVENTOS_ALL = NAMESPACE_EVENTOS + "deleteAllEventoss";
+	private static final String STMT_DELETE_EVENTOS_ALL = NAMESPACE_EVENTOS + "deleteAllEventos";
 
 	/** The Constant STMT_FETCH_EVENTOS. */
 	private static final String STMT_FETCH_EVENTOS = NAMESPACE_EVENTOS + "fetchEventosById";
 
 	/** The Constant STMT_FETCH_EVENTOS_ALL. */
-	private static final String STMT_FETCH_EVENTOS_ALL = NAMESPACE_EVENTOS + "fetchAllEventoss";
+	private static final String STMT_FETCH_EVENTOS_ALL = NAMESPACE_EVENTOS + "fetchAllEventos";
 
 	/** The Constant STMT_FETCH_EVENTOS_COUNT. */
 	private static final String STMT_FETCH_EVENTOS_COUNT = NAMESPACE_EVENTOS + "fetchEventosRowCount";
 
 	/** The Constant STMT_FETCH_EVENTOS_ALL_REQUEST. */
-	private static final String STMT_FETCH_EVENTOS_ALL_REQUEST = NAMESPACE_EVENTOS + "fetchAllEventossRequest";
+	private static final String STMT_FETCH_EVENTOS_ALL_REQUEST = NAMESPACE_EVENTOS + "fetchAllEventosRequest";
 
 ///===================================### BENEFICIOS ####======================================
 /** The Constant NAMESPACE. */
@@ -334,12 +335,9 @@ public InternalResponse deleteAllEventos()
  * com.qat.samples.sysmgmt.bar.IEventosBAR#fetchEventosById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<Eventos> fetchEventosById(FetchByIdRequest request)
+public Eventos fetchEventosById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Eventos> response = new InternalResultsResponse<Eventos>();
-	response.addResult((Eventos)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_EVENTOS,
-			request.getFetchId()));
-	return response;
+	return (Eventos)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_EVENTOS, request.getFetchId());
 }
 
 /*
@@ -469,12 +467,9 @@ public InternalResponse deleteAllBeneficioss()
  * com.qat.samples.sysmgmt.bar.IBeneficiosBAR#fetchBeneficiosById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<Beneficios> fetchBeneficiosById(FetchByIdRequest request)
+public Beneficios fetchBeneficiosById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Beneficios> response = new InternalResultsResponse<Beneficios>();
-	response.addResult((Beneficios)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_BENEFICIOS,
-			request.getFetchId()));
-	return response;
+	return (Beneficios)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_BENEFICIOS, request.getFetchId());
 }
 
 /*
@@ -604,12 +599,9 @@ public InternalResponse deleteAllHorafuncs()
  * com.qat.samples.sysmgmt.bar.IHorafuncBAR#fetchHorafuncById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public InternalResultsResponse<HorarioFunc> fetchHorafuncById(FetchByIdRequest request)
+public HorarioFunc fetchHorafuncById(FetchByIdRequest request)
 {
-	InternalResultsResponse<HorarioFunc> response = new InternalResultsResponse<HorarioFunc>();
-	response.addResult((HorarioFunc)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_HORAFUNC,
-			request.getFetchId()));
-	return response;
+	return (HorarioFunc)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_HORAFUNC, request.getFetchId());
 }
 
 /*

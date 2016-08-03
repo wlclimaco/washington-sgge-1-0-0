@@ -80,7 +80,7 @@ public interface IDpBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Eventos> fetchEventosById(FetchByIdRequest request);
+	public Eventos fetchEventosById(FetchByIdRequest request);
 
 	/**
 * Insert eventos.
@@ -137,7 +137,7 @@ public interface IDpBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Beneficios> fetchBeneficiosById(FetchByIdRequest request);
+	public Beneficios fetchBeneficiosById(FetchByIdRequest request);
 
 	/**
 * Insert beneficios.
@@ -194,7 +194,7 @@ public interface IDpBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<HorarioFunc> fetchHorafuncById(FetchByIdRequest request);
+	public HorarioFunc fetchHorafuncById(FetchByIdRequest request);
 
 	/**
 * Insert horafunc.
