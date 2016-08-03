@@ -240,61 +240,15 @@ public void setAdvocaciaBAR(IAdvocaciaBAR advocaciaBAR) {
 
 	public Audiencia insertAudiencia(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
-			Audiencia audiencia = new Audiencia();
-			Date a = new Date();
-			audiencia.setId(id);
-			audiencia.setDataAudiencia(100);
-			audiencia.setDescricao("NATIVE INSERT UPDATE");
-			audiencia.setNotes(new ArrayList<Note>());
-			audiencia.getNotes().add(insertNote(id,TabelaEnum.AUDIENCIA,action));
-			audiencia.setParentId(id);
-			audiencia.setEmprId(1);
-			audiencia.setModifyDateUTC(a.getTime());
-			audiencia.setCreateDateUTC(a.getTime());
-			audiencia.setCreateUser("system");
-			audiencia.setModifyUser("system");
-			audiencia.setProcessId(1);
-			audiencia.setModelAction(action);
 
-			return audiencia;
+
+			return Objects.insertAudiencia(id,tabela,action);
 		}
 
 
-	private Note insertNote(Integer id, TabelaEnum audiencia, PersistenceActionEnum action) {
-		Note note = new Note();
-		Date a = new Date();
-		note.setNoteText("testette");
-		note.setModifyDateUTC(a.getTime());
-		note.setCreateDateUTC(a.getTime());
-		note.setCreateUser("system");
-		note.setModifyUser("system");
-		note.setProcessId(1);
-		note.setModelAction(action);
-		return null;
-	}
 	public Processo insertProcesso(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
-			Processo processo = new Processo();
-			Date a = new Date();
-			processo.setId(id);
-			processo.setDataProcess(a.getTime());
-			processo.setValor(new Double(11.00));
-//			processo.setAdvogadoList(10000);
-//			processo.getundefined().add(insertundefined(id,TabelaEnum.PROCESSO,action));
-//			processo.setClienteList(10000);
-//			processo.getundefined().add(insertundefined(id,TabelaEnum.PROCESSO,action));
-//			processo.setAudienciaList(10000);
-//			processo.getundefined().add(insertundefined(id,TabelaEnum.PROCESSO,action));
-			processo.setParentId(id);
-			processo.setEmprId(1);
-			processo.setModifyDateUTC(a.getTime());
-			processo.setCreateDateUTC(a.getTime());
-			processo.setCreateUser("system");
-			processo.setModifyUser("system");
-			processo.setProcessId(1);
-			processo.setModelAction(action);
-
-			return processo;
+		return Objects.insertProcesso(id,tabela,action);
 		}
 
 

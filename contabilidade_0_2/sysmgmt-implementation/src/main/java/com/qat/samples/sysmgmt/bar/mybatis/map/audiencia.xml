@@ -27,7 +27,7 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="notes" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="notes" column="id" select="NoteMap.fetchNoteById"/>
   </resultMap>
 
   <sql id="allAudienciaColumns">
