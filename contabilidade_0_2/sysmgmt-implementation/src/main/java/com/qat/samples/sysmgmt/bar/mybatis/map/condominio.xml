@@ -40,7 +40,10 @@
 		SELECT <include refid="allCondominioColumns" />
   		  FROM entidade where entidadeEnumValue = 5 <if test="criteria.emprId != null">
 						AND emprId = #{criteria.emprId}
-					</if>ORDER BY id ASC
+					</if>
+					<if test="criteria.id != null">
+						AND id = #{criteria.emprId}
+					</if> ORDER BY id ASC
 </select>
 
 <select id="fetchCondominioRowCount" resultType="Integer">

@@ -46,7 +46,10 @@
 		SELECT <include refid="allClinicaColumns" />
   		  FROM entidade where entidadeEnumValue = 4 and id IS NOT NULL <if test="criteria.emprId != null">
 						AND emprId = #{criteria.emprId}
-					</if>ORDER BY id ASC
+					</if>
+					<if test="criteria.id != null">
+						AND id = #{criteria.emprId}
+					</if> ORDER BY id ASC
 
 </select>
 
