@@ -40,14 +40,14 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allEmpresaColumns">
-			id,<include refid="EntidadeMap.allEntidadeColumns"/>
+			<include refid="EntidadeMap.allEntidadeColumns"/>
 			,parceiroId
 	,contabilidadeId
 	,permissaoTypeEnumValue
   </sql>
 
   <sql id="allEmpresaValues">
-  			#{id},<include refid="EntidadeMap.allEntidadeValues"/>
+  			<include refid="EntidadeMap.allEntidadeValues"/>
   			,#{parceiroId}
 	,#{contabilidadeId}
 	,#{permissaoTypeEnumValue}
@@ -61,7 +61,7 @@
   </select>
 
   <select id="fetchAllEmpresas" resultMap="empresaTableResult">
-    SELECT
+    SELECT id,
 	<include refid="allEmpresaColumns" />
     FROM entidade  where entidadeEnumValue = 1 ORDER BY nome ASC
   </select>
@@ -84,13 +84,15 @@
      SELECT id,
     						<include refid="allEmpresaColumns" />
     				FROM entidade
-					where entidadeEnumValue = 1 
+					where entidadeEnumValue = 1
 					<if test="permissaoTypeEnumValue != 1 and permissaoTypeEnumValue != 2 and permissaoTypeEnumValue != 3 "> and emprId = #{emprId}</if>
 					<if test="permissaoTypeEnumValue != 1 and permissaoTypeEnumValue != 4 and permissaoTypeEnumValue != 3 "> and parceiroId = #{parceiroId}</if>
 					<if test="permissaoTypeEnumValue != 1 and permissaoTypeEnumValue != 4 and permissaoTypeEnumValue != 2 "> and contabilidadeId = #{contabilidadeId}</if>
+					<if test="id != null"> AND id = #{criteria.id}</if>
+					ORDER BY id ASC
 
-    			
-				
+
+
   </select>
 
 <delete id="deleteEmpresaById" parameterType="Empresa">
@@ -100,7 +102,7 @@
  <delete id="deleteAllEmpresas">
 	DELETE FROM entidade
   </delete>
-  
+
    <insert id="insertEmpresa" parameterType="Empresa" useGeneratedKeys="true" keyProperty="id">
      INSERT INTO entidade (
  <if test="id != null"><if test="id > 0">id,</if></if><include refid="allEmpresaColumns" />
@@ -127,5 +129,5 @@
    WHERE
     id = #{id}
  </update>
-  
+
 </mapper>

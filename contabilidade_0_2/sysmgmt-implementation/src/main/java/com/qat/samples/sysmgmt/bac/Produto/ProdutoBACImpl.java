@@ -16,22 +16,48 @@ import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Produto.IProdutoBAR;
+import com.qat.samples.sysmgmt.cfop.model.Cfop;
+import com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest;
+import com.qat.samples.sysmgmt.cfop.model.request.CfopMaintenanceRequest;
+import com.qat.samples.sysmgmt.fiscal.model.Tributacao;
+import com.qat.samples.sysmgmt.produto.model.Custo;
+import com.qat.samples.sysmgmt.produto.model.CustoItens;
+import com.qat.samples.sysmgmt.produto.model.Estoque;
 import com.qat.samples.sysmgmt.produto.model.Grupo;
 import com.qat.samples.sysmgmt.produto.model.Marca;
+import com.qat.samples.sysmgmt.produto.model.MarcaProduto;
+import com.qat.samples.sysmgmt.produto.model.Porcao;
+import com.qat.samples.sysmgmt.produto.model.PorcaoItens;
 import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.ProdutoParent;
+import com.qat.samples.sysmgmt.produto.model.Rentabilidade;
+import com.qat.samples.sysmgmt.produto.model.RentabilidadeItens;
 import com.qat.samples.sysmgmt.produto.model.SubGrupo;
 import com.qat.samples.sysmgmt.produto.model.UniMed;
+import com.qat.samples.sysmgmt.produto.model.request.CustoItensMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.CustoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.EstoqueMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.GrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.GrupoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.MarcaMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.MarcaProdutoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.PorcaoItensMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.PorcaoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoParentInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoParentMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.RentabilidadeItensMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.RentabilidadeMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.TributacaoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.UniMedMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -1133,5 +1159,471 @@ private InternalResultsResponse<UniMed> processUniMed(ValidationContextIndicator
 		{
 			return new InternalResultsResponse<UniMed>();
 		}
+	}
+
+	@Override
+	public InternalResultsResponse<ProdutoParent> insertProdutoParent(ProdutoParentMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<ProdutoParent> updateProdutoParent(ProdutoParentMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<ProdutoParent> deleteProdutoParent(ProdutoParentMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<ProdutoParent> refreshProdutoParents(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<ProdutoParent> fetchProdutoParentById(FetchByIdRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<ProdutoParent> fetchAllProdutoParents(ProdutoParent produtoparent) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<ProdutoParent> fetchProdutoParentsByRequest(ProdutoParentInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Cfop> insertCfop(CfopMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Cfop> updateCfop(CfopMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Cfop> deleteCfop(CfopMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Cfop> refreshCfops(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Cfop> fetchCfopById(FetchByIdRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Cfop> fetchAllCfops(Cfop cfop) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Cfop> fetchCfopsByRequest(CfopInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<MarcaProduto> insertMarcaProduto(MarcaProdutoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<MarcaProduto> updateMarcaProduto(MarcaProdutoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<MarcaProduto> deleteMarcaProduto(MarcaProdutoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<MarcaProduto> refreshMarcaProdutos(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<MarcaProduto> fetchMarcaProdutoById(FetchByIdRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<MarcaProduto> fetchAllMarcaProdutos(MarcaProduto marcaproduto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<MarcaProduto> fetchMarcaProdutosByRequest(PagedInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Tributacao> insertTributacao(TributacaoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Tributacao> updateTributacao(TributacaoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Tributacao> deleteTributacao(TributacaoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Tributacao> refreshTributacaos(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Tributacao> fetchTributacaoById(FetchByIdRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Tributacao> fetchAllTributacaos(Tributacao tributacao) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Tributacao> fetchTributacaosByRequest(TributacaoInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Custo> insertCusto(CustoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Custo> updateCusto(CustoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Custo> deleteCusto(CustoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Custo> refreshCustos(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Custo> fetchCustoById(FetchByIdRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Custo> fetchAllCustos(Custo custo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Custo> fetchCustosByRequest(PagedInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<CustoItens> insertCustoItens(CustoItensMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<CustoItens> updateCustoItens(CustoItensMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<CustoItens> deleteCustoItens(CustoItensMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<CustoItens> refreshCustoItenss(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<CustoItens> fetchCustoItensById(FetchByIdRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<CustoItens> fetchAllCustoItenss(CustoItens custoitens) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<CustoItens> fetchCustoItenssByRequest(PagedInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Estoque> insertEstoque(EstoqueMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Estoque> updateEstoque(EstoqueMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Estoque> deleteEstoque(EstoqueMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Estoque> refreshEstoques(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Estoque> fetchEstoqueById(FetchByIdRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Estoque> fetchAllEstoques(Estoque estoque) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Estoque> fetchEstoquesByRequest(PagedInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Porcao> insertPorcao(PorcaoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Porcao> updatePorcao(PorcaoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Porcao> deletePorcao(PorcaoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Porcao> refreshPorcaos(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Porcao> fetchPorcaoById(FetchByIdRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Porcao> fetchAllPorcaos(Porcao porcao) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Porcao> fetchPorcaosByRequest(PagedInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<PorcaoItens> insertPorcaoItens(PorcaoItensMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<PorcaoItens> updatePorcaoItens(PorcaoItensMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<PorcaoItens> deletePorcaoItens(PorcaoItensMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<PorcaoItens> refreshPorcaoItenss(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<PorcaoItens> fetchPorcaoItensById(FetchByIdRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<PorcaoItens> fetchAllPorcaoItenss(PorcaoItens porcaoitens) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<PorcaoItens> fetchPorcaoItenssByRequest(PagedInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Rentabilidade> insertRentabilidade(RentabilidadeMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Rentabilidade> updateRentabilidade(RentabilidadeMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Rentabilidade> deleteRentabilidade(RentabilidadeMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Rentabilidade> refreshRentabilidades(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Rentabilidade> fetchRentabilidadeById(FetchByIdRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Rentabilidade> fetchAllRentabilidades(Rentabilidade rentabilidade) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Rentabilidade> fetchRentabilidadesByRequest(PagedInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<RentabilidadeItens> insertRentabilidadeItens(
+			RentabilidadeItensMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<RentabilidadeItens> updateRentabilidadeItens(
+			RentabilidadeItensMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<RentabilidadeItens> deleteRentabilidadeItens(
+			RentabilidadeItensMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<RentabilidadeItens> refreshRentabilidadeItenss(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<RentabilidadeItens> fetchRentabilidadeItensById(FetchByIdRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<RentabilidadeItens> fetchAllRentabilidadeItenss(
+			RentabilidadeItens rentabilidadeitens) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<RentabilidadeItens> fetchRentabilidadeItenssByRequest(PagedInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -1335,7 +1335,10 @@ public class Objects {
 	public static Cnae insertCnae(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Cnae cnae = new Cnae();
 		Date a = new Date();
-		cnae.setId(id);
+		if(tabela == TabelaEnum.CNAE)
+		{
+			cnae.setId(id);
+		}
 		cnae.setCodigo("codigo_1 - " + action.toString());
 		cnae.setCnae("cnae_2 - " + action.toString());
 		cnae.setDescricao("descricao_3 - " + action.toString());
@@ -1356,7 +1359,6 @@ public class Objects {
 	public static CnaeEmpresa insertCnaeEmpresa(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		CnaeEmpresa cnaeempresa = new CnaeEmpresa();
 		Date a = new Date();
-		cnaeempresa.setId(id);
 		cnaeempresa.setIdCnae(insertCnae(id, TabelaEnum.CNAEPORRELACIONAMENTO, action));
 		cnaeempresa.setTabelaEnum(tabela);
 		cnaeempresa.setParentId(id);
@@ -2008,7 +2010,6 @@ public class Objects {
 	public static Endereco insertEndereco(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Endereco endereco = new Endereco();
 		Date a = new Date();
-		endereco.setId(id);
 		endereco.setCodIbge("555555");
 		endereco.setLogradouro("logradouro_2 - " + action.toString());
 		endereco.setBairro("bairro_3 - " + action.toString());
@@ -2018,7 +2019,7 @@ public class Objects {
 		endereco.setLatitude(new Double(10.10));
 		endereco.setLongitude(new Double(10.10));
 		endereco.setComplemento("complemento_9 - " + action.toString());
-		endereco.setCidade(insertCidade(id, TabelaEnum.PLANO, action));
+		endereco.setCidade(insertCidade(id, TabelaEnum.ENDERECO, action));
 		endereco.setTabelaEnum(tabela);
 		endereco.setParentId(id);
 		endereco.setEmprId(EMPID);
@@ -2036,7 +2037,6 @@ public class Objects {
 	public static Email insertEmail(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Email email = new Email();
 		Date a = new Date();
-		email.setId(id);
 		email.setTypeValue(1001);
 		email.setEmail("email_2 - " + action.toString());
 		email.setEmailTypeEnumValue(1003);
@@ -2058,7 +2058,7 @@ public class Objects {
 	public static Telefone insertTelefone(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Telefone telefone = new Telefone();
 		Date a = new Date();
-		telefone.setId(id);
+
 		telefone.setTypeValue(1001);
 		telefone.setDdd("ddd_2 - " + action.toString());
 		telefone.setNumero("numero_3 - " + action.toString());
@@ -2121,7 +2121,6 @@ public class Objects {
 	public static Documento insertDocumento(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Documento documento = new Documento();
 		Date a = new Date();
-		documento.setId(id);
 		documento.setDocumentoTypeEnumValue(1001);
 		documento.setNumero("numero_2 - " + action.toString());
 		documento.setData(a.getTime());
@@ -2202,7 +2201,6 @@ public class Objects {
 	public static Note insertNotes(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Note notes = new Note();
 		Date a = new Date();
-		notes.setId(id);
 		notes.setNoteText("noteText_1 - " + action.toString());
 		notes.setTabelaEnum(tabela);
 		notes.setParentId(id);

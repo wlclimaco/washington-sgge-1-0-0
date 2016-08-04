@@ -103,8 +103,10 @@ c.tabelaEnumValue,
 		SELECT id,<include refid="allUsuarioColumns" />
   		  FROM usuario WHERE id IS NOT NULL <if test="criteria.emprId != null">
 						AND emprId = #{criteria.emprId}
-					</if>ORDER BY id ASC
-		  
+					</if> <if test="criteria.id != null">
+						AND id = #{criteria.id}
+					</if> ORDER BY id ASC
+
 </select>
 
 <select id="fetchUsuarioRowCount" resultType="Integer">

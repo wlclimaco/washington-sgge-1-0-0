@@ -20,6 +20,7 @@ import com.qat.samples.sysmgmt.bac.Produto.IProdutoBAC;
 import com.qat.samples.sysmgmt.produto.model.Grupo;
 import com.qat.samples.sysmgmt.produto.model.Marca;
 import com.qat.samples.sysmgmt.produto.model.Produto;
+import com.qat.samples.sysmgmt.produto.model.ProdutoParent;
 import com.qat.samples.sysmgmt.produto.model.SubGrupo;
 import com.qat.samples.sysmgmt.produto.model.UniMed;
 import com.qat.samples.sysmgmt.produto.model.request.GrupoInquiryRequest;
@@ -28,12 +29,15 @@ import com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.MarcaMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoParentInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoParentMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.UniMedMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.GrupoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.MarcaResponse;
+import com.qat.samples.sysmgmt.produto.model.response.ProdutoParentResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.SubGrupoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.UniMedResponse;
@@ -658,6 +662,124 @@ public class ProdutoAPIController extends BaseController {
 					new Object[] { ex.toString() });
 		}
 		return unimedResponse;
+
+	}
+
+	// ===================================### PRODUTOPARENT
+	// ####======================================
+	/**
+	 * Refresh produtoparents.
+	 *
+	 * @param refreshInt
+	 *            the refresh int
+	 * @param retList
+	 *            the ret list
+	 * @param retPaged
+	 *            the ret paged
+	 * @return the produtoparent response
+	 */
+	@RequestMapping(value = "/produtoParent/refresh", method = RequestMethod.GET)
+	@ResponseBody
+	public ProdutoParentResponse refreshProdutoParents(@RequestParam("refreshInt") Integer refreshInt,
+			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
+		ProdutoParentResponse produtoparentResponse = new ProdutoParentResponse();
+
+		try {
+			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
+			InternalResultsResponse<ProdutoParent> internalResponse = getProdutoBAC().refreshProdutoParents(request);
+			ResponseHandler.handleOperationStatusAndMessages(produtoparentResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, produtoparentResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return produtoparentResponse;
+
+	}
+
+	/**
+	 * Fetch produtoparent paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the produtoparent response
+	 */
+	@RequestMapping(value = "/produtoParent/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public ProdutoParentResponse fetchProdutoParentPaged(@RequestBody ProdutoParentInquiryRequest request) {
+		ProdutoParentResponse produtoparentResponse = new ProdutoParentResponse();
+		try {
+			InternalResultsResponse<ProdutoParent> internalResponse = getProdutoBAC()
+					.fetchProdutoParentsByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(produtoparentResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, produtoparentResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return produtoparentResponse;
+	}
+
+	/**
+	 * Insert produtoparent.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the produtoparent response
+	 */
+	@RequestMapping(value = "/produtoParent/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public ProdutoParentResponse insertProdutoParent(@RequestBody ProdutoParentMaintenanceRequest request) {
+		ProdutoParentResponse produtoparentResponse = new ProdutoParentResponse();
+		try {
+			InternalResultsResponse<ProdutoParent> internalResponse = getProdutoBAC().insertProdutoParent(request);
+			ResponseHandler.handleOperationStatusAndMessages(produtoparentResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, produtoparentResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return produtoparentResponse;
+	}
+
+	/**
+	 * Update produtoparent.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the produtoparent response
+	 */
+	@RequestMapping(value = "/produtoParent/update", method = RequestMethod.POST)
+	@ResponseBody
+	public ProdutoParentResponse updateProdutoParent(@RequestBody ProdutoParentMaintenanceRequest request) {
+		ProdutoParentResponse produtoparentResponse = new ProdutoParentResponse();
+		try {
+			InternalResultsResponse<ProdutoParent> internalResponse = getProdutoBAC().updateProdutoParent(request);
+			ResponseHandler.handleOperationStatusAndMessages(produtoparentResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, produtoparentResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return produtoparentResponse;
+	}
+
+	/**
+	 * Delete produtoparent.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the produtoparent response
+	 */
+	@RequestMapping(value = "/produtoParent/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public ProdutoParentResponse deleteProdutoParent(@RequestBody ProdutoParentMaintenanceRequest request) {
+		ProdutoParentResponse produtoparentResponse = new ProdutoParentResponse();
+
+		try {
+			InternalResultsResponse<ProdutoParent> internalResponse = getProdutoBAC().deleteProdutoParent(request);
+			ResponseHandler.handleOperationStatusAndMessages(produtoparentResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, produtoparentResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return produtoparentResponse;
 
 	}
 

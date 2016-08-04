@@ -78,14 +78,14 @@
   <select id="fetchAllFilialsByRequest" parameterType="FilialInquiryRequest" resultMap="filialResult">
      SELECT id,
     						<include refid="allFilialColumns" />
-    						
+
     				FROM entidade
 						where entidadeEnumValue = 2
 					<if test="criteria.emprId != null">
 						AND emprId = #{criteria.emprId}
 					</if>
 					<if test="criteria.id != null">
-						AND id = #{criteria.emprId}
+						AND id = #{criteria.id}
 					</if>
 
 

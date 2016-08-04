@@ -16,7 +16,7 @@ public class FilialCriteria implements Serializable
 	private Integer emprId;
 
 	/** The recipient id. */
-	private Integer Id;
+	private Integer id;
 
 	/** The location name. */
 	private String cidade;
@@ -101,20 +101,14 @@ public class FilialCriteria implements Serializable
 		this.status = status;
 	}
 
-	/**
-	 * @return the id
-	 */
-	public Integer getId()
-	{
-		return Id;
+
+
+	public Integer getId() {
+		return id;
 	}
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Integer id)
-	{
-		Id = id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	/**

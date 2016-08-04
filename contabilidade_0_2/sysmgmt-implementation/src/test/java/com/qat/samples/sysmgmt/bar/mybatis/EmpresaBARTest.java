@@ -53,6 +53,7 @@ import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.EntidadeTypeEnum;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
 import com.qat.samples.sysmgmt.entidade.model.Usuario;
+import com.qat.samples.sysmgmt.entidade.model.criteria.FilialCriteria;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
@@ -196,9 +197,9 @@ public IEmpresaBAR getEmpresaBAR()
 @Test
 	public void testDeleteFilial()
 	{
-		Filial filial = new Filial(1900, "Filial_999");
+		Filial filial = Objects.insertFilial(999999, TabelaEnum.FILIAL,PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1900);
+		request.setFetchId(999999);
 		Filial filialResponse = getEmpresaBAR().fetchFilialById(request);
 		Assert.assertEquals(filialResponse, null);
 		getEmpresaBAR().insertFilial(filial);
@@ -229,14 +230,14 @@ public IEmpresaBAR getEmpresaBAR()
 	@Test
 	public void testUpdateFilial()
 	{
-		Filial filial = new Filial(1014, "NATIVE INSERT UPDATE");
+		Filial filial = Objects.insertFilial(1014, TabelaEnum.FILIAL,PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1014);
 		Filial filialResponse = getEmpresaBAR().fetchFilialById(request);
 		Assert.assertEquals(filialResponse.getNome(), "nome_1");
 		getEmpresaBAR().updateFilial(filial);
 		filialResponse = getEmpresaBAR().fetchFilialById(request);
-		Assert.assertEquals(filialResponse.getNome(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(filialResponse.getNome(), "nome_1 - UPDATE");
 	}
 
 	@Test
@@ -244,6 +245,9 @@ public IEmpresaBAR getEmpresaBAR()
 	{
 		// check for valid and precount
 		FilialInquiryRequest request = new FilialInquiryRequest();
+		FilialCriteria criteria =new FilialCriteria();
+		criteria.setId(1014);
+		request.setCriteria(criteria);
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
@@ -1030,7 +1034,7 @@ public IEmpresaBAR getEmpresaBAR()
 
 			return plano;
 		}
-		
+
 		public Configuracao insertConfiguracao(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			Configuracao configuracao = new Configuracao();
@@ -1054,11 +1058,11 @@ public IEmpresaBAR getEmpresaBAR()
 			configuracao.setModifyUser("system");
 			configuracao.setProcessId(1);
 			configuracao.setModelAction(action);
-	
+
 			return configuracao;
 		}
 
-	
+
 	public Boleto insertBoleto(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			Boleto boleto = new Boleto();
@@ -1082,11 +1086,11 @@ public IEmpresaBAR getEmpresaBAR()
 			boleto.setModifyUser("system");
 			boleto.setProcessId(1);
 			boleto.setModelAction(action);
-	
+
 			return boleto;
 		}
 
-	
+
 	public ConfigCarne insertConfigCarne(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			ConfigCarne ConfigCarne = new ConfigCarne();
@@ -1102,11 +1106,11 @@ public IEmpresaBAR getEmpresaBAR()
 			ConfigCarne.setModifyUser("system");
 			ConfigCarne.setProcessId(1);
 			ConfigCarne.setModelAction(action);
-	
+
 			return ConfigCarne;
 		}
 
-	
+
 	public ConfigEntrada insertConfigEntrada(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			ConfigEntrada ConfigEntrada = new ConfigEntrada();
@@ -1122,11 +1126,11 @@ public IEmpresaBAR getEmpresaBAR()
 			ConfigEntrada.setModifyUser("system");
 			ConfigEntrada.setProcessId(1);
 			ConfigEntrada.setModelAction(action);
-	
+
 			return ConfigEntrada;
 		}
 
-	
+
 	public ConfigFiscal insertConfigFiscal(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			ConfigFiscal ConfigFiscal = new ConfigFiscal();
@@ -1143,11 +1147,11 @@ public IEmpresaBAR getEmpresaBAR()
 			ConfigFiscal.setModifyUser("system");
 			ConfigFiscal.setProcessId(1);
 			ConfigFiscal.setModelAction(action);
-	
+
 			return ConfigFiscal;
 		}
 
-	
+
 	public ConfigAlertas insertConfigAlertas(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			ConfigAlertas ConfigAlertas = new ConfigAlertas();
@@ -1165,11 +1169,11 @@ public IEmpresaBAR getEmpresaBAR()
 			ConfigAlertas.setModifyUser("system");
 			ConfigAlertas.setProcessId(1);
 			ConfigAlertas.setModelAction(action);
-	
+
 			return ConfigAlertas;
 		}
 
-	
+
 	public ConfigGeral insertConfigGeral(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			ConfigGeral ConfigGeral = new ConfigGeral();
@@ -1191,11 +1195,11 @@ public IEmpresaBAR getEmpresaBAR()
 			ConfigGeral.setModifyUser("system");
 			ConfigGeral.setProcessId(1);
 			ConfigGeral.setModelAction(action);
-	
+
 			return ConfigGeral;
 		}
 
-	
+
 	public ConfigProduto insertConfigProduto(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			ConfigProduto ConfigProduto = new ConfigProduto();
@@ -1241,11 +1245,11 @@ public IEmpresaBAR getEmpresaBAR()
 			ConfigProduto.setModifyUser("system");
 			ConfigProduto.setProcessId(1);
 			ConfigProduto.setModelAction(action);
-	
+
 			return ConfigProduto;
 		}
 
-	
+
 	public ConfigSMTP insertConfigSMTP(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			ConfigSMTP ConfigSMTP = new ConfigSMTP();
@@ -1265,11 +1269,11 @@ public IEmpresaBAR getEmpresaBAR()
 			ConfigSMTP.setModifyUser("system");
 			ConfigSMTP.setProcessId(1);
 			ConfigSMTP.setModelAction(action);
-	
+
 			return ConfigSMTP;
 		}
 
-	
+
 	public ConfiguracaoNFe insertConfiguracaoNFe(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			ConfiguracaoNFe ConfiguracaoNFe = new ConfiguracaoNFe();
@@ -1302,11 +1306,11 @@ public IEmpresaBAR getEmpresaBAR()
 			ConfiguracaoNFe.setModifyUser("system");
 			ConfiguracaoNFe.setProcessId(1);
 			ConfiguracaoNFe.setModelAction(action);
-	
+
 			return ConfiguracaoNFe;
 		}
 
-	
+
 	public ConfigVendas insertConfigVendas(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
 			ConfigVendas ConfigVendas = new ConfigVendas();
@@ -1330,10 +1334,10 @@ public IEmpresaBAR getEmpresaBAR()
 			ConfigVendas.setModifyUser("system");
 			ConfigVendas.setProcessId(1);
 			ConfigVendas.setModelAction(action);
-	
+
 			return ConfigVendas;
 		}
-	
+
 	public DoisValores insertDoisValor(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 	{
 		DoisValores ConfigVendas = new DoisValores();

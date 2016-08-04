@@ -70,7 +70,7 @@ public class CondominioAPIController extends BaseController {
 	 *            the ret paged
 	 * @return the avisos response
 	 */
-	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	@RequestMapping(value = "/avisos/refresh", method = RequestMethod.GET)
 	@ResponseBody
 	public AvisoResponse refreshAvisoss(@RequestParam("refreshInt") Integer refreshInt,
 			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
@@ -95,7 +95,7 @@ public class CondominioAPIController extends BaseController {
 	 *            the request
 	 * @return the avisos response
 	 */
-	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	@RequestMapping(value = "/avisos/fetchPage", method = RequestMethod.POST)
 	@ResponseBody
 	public AvisoResponse fetchAvisosPaged(@RequestBody AvisoInquiryRequest request) {
 		AvisoResponse avisosResponse = new AvisoResponse();
@@ -116,7 +116,7 @@ public class CondominioAPIController extends BaseController {
 	 *            the request
 	 * @return the avisos response
 	 */
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	@RequestMapping(value = "/avisos/insert", method = RequestMethod.POST)
 	@ResponseBody
 	public AvisoResponse insertAvisos(@RequestBody AvisoMaintenanceRequest request) {
 		AvisoResponse avisosResponse = new AvisoResponse();
@@ -137,7 +137,7 @@ public class CondominioAPIController extends BaseController {
 	 *            the request
 	 * @return the avisos response
 	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/avisos/update", method = RequestMethod.POST)
 	@ResponseBody
 	public AvisoResponse updateAvisos(@RequestBody AvisoMaintenanceRequest request) {
 		AvisoResponse avisosResponse = new AvisoResponse();
@@ -158,7 +158,7 @@ public class CondominioAPIController extends BaseController {
 	 *            the request
 	 * @return the avisos response
 	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/avisos/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public AvisoResponse deleteAvisos(@RequestBody AvisoMaintenanceRequest request) {
 		AvisoResponse avisosResponse = new AvisoResponse();

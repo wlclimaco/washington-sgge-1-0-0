@@ -28,18 +28,18 @@ public class Empresa extends Entidade
 	private List<ContaCorrente> contaCorrenteList;
 
 	private List<TarefaEnt> tarefaList;
-	
+
 	private Integer parceiroId;
-	
+
 	private Integer contabilidadeId;
-	
+
 	private EmpresaTypeEnum permissaoTypeEnum;
 
 	public Empresa()
 	{
 		super();
 	}
-	
+
 	public Integer getPermissaoTypeEnumValue()
 	{
 		if (permissaoTypeEnum != null)
