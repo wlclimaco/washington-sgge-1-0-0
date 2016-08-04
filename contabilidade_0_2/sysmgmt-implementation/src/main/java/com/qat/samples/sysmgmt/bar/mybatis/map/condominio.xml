@@ -38,9 +38,9 @@
  <select id="fetchAllCondominiosRequest" parameterType="CondominioInquiryRequest" resultMap="CondominioResult">
 
 		SELECT <include refid="allCondominioColumns" />
-  		  FROM entidade where entidadeEnumValue = 5 ORDER BY id ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
+  		  FROM entidade where entidadeEnumValue = 5 <if test="criteria.emprId != null">
+						AND emprId = #{criteria.emprId}
+					</if>ORDER BY id ASC
 </select>
 
 <select id="fetchCondominioRowCount" resultType="Integer">

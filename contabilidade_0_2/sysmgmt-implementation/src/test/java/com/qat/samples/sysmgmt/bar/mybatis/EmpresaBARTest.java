@@ -141,14 +141,14 @@ public IEmpresaBAR getEmpresaBAR()
 	@Test
 	public void testUpdateEmpresa()
 	{
-		Empresa empresa = new Empresa(1, "NATIVE INSERT UPDATE");
+		Empresa empresa = Objects.insertEmpresa(1004, TabelaEnum.EMPRESA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1004);
 		Empresa empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
 		Assert.assertEquals(empresaResponse.getNome(), "nome_1");
 		getEmpresaBAR().updateEmpresa(empresa);
 		empresaResponse = getEmpresaBAR().fetchEmpresaById(request);
-		Assert.assertEquals(empresaResponse.getNome(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(empresaResponse.getNome(), "nome_1 - UPDATE");
 	}
 
 	@Test

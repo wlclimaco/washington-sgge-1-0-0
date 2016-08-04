@@ -77,6 +77,10 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	/** The Constant STMT_FETCH_EMPRESA. */
 	private static final String STMT_FETCH_EMPRESA = NAMESPACE_EMPRESA + "fetchEmpresaById";
+	
+	private static final String STMT_INSERT_EMPRESA = NAMESPACE_EMPRESA + "insertEmpresa";
+	
+	private static final String STMT_UPDATE_EMPRESA = NAMESPACE_EMPRESA + "updateEmpresa";
 
 	/** The Constant STMT_FETCH_EMPRESA_ALL. */
 	private static final String STMT_FETCH_EMPRESA_ALL = NAMESPACE_EMPRESA + "fetchAllEmpresas";
@@ -351,7 +355,7 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 		Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.EMPRESA, getHistoricoBAR(), response);
 		Integer processId = 1;
 		empresa.setProcessId(historicoId);
-		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ENTIDADE, empresa, response);
+		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_EMPRESA, empresa, response);
 
 		BaseBARD.maintainInsertBase(empresa, historicoId, processId, TabelaEnum.EMPRESA, getEnderecoBAR(),
 				getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getFiscalBAR(), getTelefoneBAR(), getEmailBAR(),
@@ -397,7 +401,7 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	@Override
 	public InternalResponse updateEmpresa(Empresa empresa) {
 		InternalResponse response = new InternalResponse();
-		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ENTIDADE, empresa, response);
+		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_EMPRESA, empresa, response);
 
 		Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.EMPRESA, getHistoricoBAR(), response);
 		Integer processId = 1;

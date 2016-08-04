@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.entidade.model.request;
 
+import com.qat.samples.sysmgmt.entidade.model.EmpresaTypeEnum;
 import com.qat.samples.sysmgmt.entidade.model.criteria.EmpresaCriteria;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
@@ -10,45 +11,73 @@ public class EmpresaInquiryRequest extends PagedInquiryRequest
 {
 
 	/** The criteria. */
-	private EmpresaCriteria criteria;
+	private Integer emprId;
+	
+	private Integer parceiroId;
+	
+	private Integer contabilidadeId;
+	
+	
+	private EmpresaTypeEnum permissaoTypeEnum;
 
 	public EmpresaInquiryRequest()
 	{
 		super();
 	}
-
-	/**
-	 * Gets the criteria.
-	 *
-	 * @return the criteria
-	 */
-	public EmpresaCriteria getCriteria()
+	
+	public Integer getPermissaoTypeEnumValue()
 	{
-		if (criteria == null)
+		if (permissaoTypeEnum != null)
 		{
-			criteria = new EmpresaCriteria();
+			return permissaoTypeEnum.getValue();
 		}
-		return criteria;
+		return null;
 	}
 
-	/**
-	 * Sets the criteria.
-	 *
-	 * @param criteria the criteria
-	 */
-	public void setCriteria(EmpresaCriteria criteria)
+	public void setPermissaoTypeEnumValue(Integer acaoTypeValue)
 	{
-		this.criteria = criteria;
+		permissaoTypeEnum = EmpresaTypeEnum.enumForValue(acaoTypeValue);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	public Integer getEmprId() {
+		return emprId;
+	}
+
+	public void setEmprId(Integer emprId) {
+		this.emprId = emprId;
+	}
+
+	public EmpresaTypeEnum getPermissaoTypeEnum() {
+		return permissaoTypeEnum;
+	}
+
+	public void setPermissaoTypeEnum(EmpresaTypeEnum permissaoTypeEnum) {
+		this.permissaoTypeEnum = permissaoTypeEnum;
+	}
+
+	public Integer getParceiroId() {
+		return parceiroId;
+	}
+
+	public void setParceiroId(Integer parceiroId) {
+		this.parceiroId = parceiroId;
+	}
+
+	public Integer getContabilidadeId() {
+		return contabilidadeId;
+	}
+
+	public void setContabilidadeId(Integer contabilidadeId) {
+		this.contabilidadeId = contabilidadeId;
+	}
+
 	@Override
-	public String toString()
-	{
-		return "EmpresaInquiryRequest [getCriteria()=" + getCriteria() + ", toString()=" + super.toString() + "]";
+	public String toString() {
+		return "EmpresaInquiryRequest [getPermissaoTypeEnumValue()=" + getPermissaoTypeEnumValue() + ", getEmprId()="
+				+ getEmprId() + ", getPermissaoTypeEnum()=" + getPermissaoTypeEnum() + ", getParceiroId()="
+				+ getParceiroId() + ", getContabilidadeId()=" + getContabilidadeId() + ", toString()="
+				+ super.toString() + "]";
 	}
 
+	
 }

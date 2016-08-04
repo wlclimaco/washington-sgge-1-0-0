@@ -35,7 +35,6 @@ codigo
 ,nome
 ,cdIBGE
 ,cep
-,municipio
 ,estado
 ,emprId
 ,processId
@@ -50,8 +49,7 @@ codigo
 #{nome},
 #{cdIBGE},
 #{cep},
-#{municipio},
-#{estado},
+#{estado.id},
 		#{emprId},
 		#{processId},
 		#{createDateUTC},
@@ -99,8 +97,7 @@ codigo
 <if test="nome!= null">nome = #{nome},</if>
 <if test="cdIBGE!= null">cdIBGE = #{cdIBGE},</if>
 <if test="cep!= null">cep = #{cep},</if>
-<if test="municipio!= null">municipio = #{municipio},</if>
-<if test="estado!= null">estado = #{estado},</if>
+<if test="estado!= null">estado = #{estado.id},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

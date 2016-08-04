@@ -643,7 +643,7 @@ public class Objects {
 		Date a = new Date();
 		consulta.setId(id);
 		consulta.setDataConsulta(a.getTime());
-		consulta.setValor(new Double(10.00));
+		consulta.setValor(new Double(11.00));
 		consulta.setDataMarcacao(a.getTime());
 		consulta.setMedico(insertMedico(id, TabelaEnum.CONSULTA, action));
 		consulta.setPaciente(insertPaciente(id, TabelaEnum.CONSULTA, action));

@@ -28,10 +28,38 @@ public class Empresa extends Entidade
 	private List<ContaCorrente> contaCorrenteList;
 
 	private List<TarefaEnt> tarefaList;
+	
+	private Integer parceiroId;
+	
+	private Integer contabilidadeId;
+	
+	private EmpresaTypeEnum permissaoTypeEnum;
 
 	public Empresa()
 	{
 		super();
+	}
+	
+	public Integer getPermissaoTypeEnumValue()
+	{
+		if (permissaoTypeEnum != null)
+		{
+			return permissaoTypeEnum.getValue();
+		}
+		return null;
+	}
+
+	public void setPermissaoTypeEnumValue(Integer acaoTypeValue)
+	{
+		permissaoTypeEnum = EmpresaTypeEnum.enumForValue(acaoTypeValue);
+	}
+
+	public EmpresaTypeEnum getPermissaoTypeEnum() {
+		return permissaoTypeEnum;
+	}
+
+	public void setPermissaoTypeEnum(EmpresaTypeEnum permissaoTypeEnum) {
+		this.permissaoTypeEnum = permissaoTypeEnum;
 	}
 
 	public Empresa(Integer id)
@@ -148,12 +176,30 @@ public class Empresa extends Entidade
 		this.tarefaList = tarefaList;
 	}
 
+	public Integer getParceiroId() {
+		return parceiroId;
+	}
+
+	public void setParceiroId(Integer parceiroId) {
+		this.parceiroId = parceiroId;
+	}
+
+	public Integer getContabilidadeId() {
+		return contabilidadeId;
+	}
+
+	public void setContabilidadeId(Integer contabilidadeId) {
+		this.contabilidadeId = contabilidadeId;
+	}
+
 	@Override
 	public String toString() {
-		return "Empresa [getPlanoList()=" + getPlanoList() + ", getQntFilial()=" + getQntFilial()
+		return "Empresa [getPermissaoTypeEnumValue()=" + getPermissaoTypeEnumValue() + ", getPermissaoTypeEnum()="
+				+ getPermissaoTypeEnum() + ", getPlanoList()=" + getPlanoList() + ", getQntFilial()=" + getQntFilial()
 				+ ", getQntDeposito()=" + getQntDeposito() + ", getFilialList()=" + getFilialList()
 				+ ", getDepositoList()=" + getDepositoList() + ", getContaCorrenteList()=" + getContaCorrenteList()
-				+ ", getTarefaList()=" + getTarefaList() + ", toString()=" + super.toString() + "]";
+				+ ", getTarefaList()=" + getTarefaList() + ", getParceiroId()=" + getParceiroId()
+				+ ", getContabilidadeId()=" + getContabilidadeId() + ", toString()=" + super.toString() + "]";
 	}
 
 }

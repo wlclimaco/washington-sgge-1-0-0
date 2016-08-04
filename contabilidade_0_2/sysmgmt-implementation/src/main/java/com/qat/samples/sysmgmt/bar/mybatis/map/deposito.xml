@@ -42,7 +42,7 @@
         FROM entidade
         where entidadeEnumValue = 3
         	<if test="criteria.emprId != null">
-				AND b.emprId = #{id}
+				AND emprId = #{criteria.emprId}
 			</if>
 
   </select>
@@ -68,27 +68,11 @@
   </select>
 
   <select id="fetchAllDepositosByRequest" parameterType="DepositoInquiryRequest" resultMap="depositoResult">
-     SELECT * FROM ( SELECT b.id,
-    						<include refid="allDepositoColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
-    				FROM entidade b
-						where b.entidadeEnumValue = 3
-					<if test="criteria.emprId != null">
-						AND b.emprId = #{id}
+     SELECT <include refid="allDepositoColumns" />
+  		  FROM entidade where entidadeEnumValue = 3 <if test="criteria.emprId != null">
+						AND emprId = #{criteria.emprId}
 					</if>
-    			) LIST
-				<choose>
-					<when test="pageSize != null and pageSize > 0">
-					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
-					        LOWER: startRow + 1 and
-					        UPPER: startRow + pageSize -->
-					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
-					</when>
-					<otherwise>
-					 	WHERE RowNumber BETWEEN 1 AND RowNumber
-					 	ORDER BY RowNumber
-					</otherwise>
-				</choose>
+			ORDER BY id ASC
   </select>
 
     <select id="fetchAllDepositoByEntidade" parameterType="Integer" resultMap="depositoResult">

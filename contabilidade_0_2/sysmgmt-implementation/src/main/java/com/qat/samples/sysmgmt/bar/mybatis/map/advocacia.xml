@@ -41,9 +41,10 @@
  <select id="fetchAllAdvocaciasRequest" parameterType="AdvocaciaInquiryRequest" resultMap="AdvocaciaResult">
 
 		SELECT <include refid="allAdvocaciaColumns" />
-  		  FROM entidade where entidadeEnumValue = 6 ORDER BY id ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
+  		  FROM entidade where entidadeEnumValue = 6 <if test="criteria.emprId != null">
+						AND emprId = #{criteria.emprId}
+					</if>
+			ORDER BY id ASC
 </select>
 
 <select id="fetchAdvocaciaRowCount" resultType="Integer">

@@ -30,6 +30,9 @@
   </resultMap>
 
    <resultMap id="empresaTableResult" type="Empresa" extends="EntidadeMap.EntidadeResult">
+    <result property="parceiroId" column="parceiroId"/>
+    <result property="contabilidadeId" column="contabilidadeId"/>
+    <result property="permissaoTypeEnumValue" column="permissaoTypeEnumValue"/>
 	</resultMap>
 
 
@@ -38,10 +41,16 @@
 	-->
   <sql id="allEmpresaColumns">
 			id,<include refid="EntidadeMap.allEntidadeColumns"/>
+			,parceiroId
+	,contabilidadeId
+	,permissaoTypeEnumValue
   </sql>
 
   <sql id="allEmpresaValues">
   			#{id},<include refid="EntidadeMap.allEntidadeValues"/>
+  			,#{parceiroId}
+	,#{contabilidadeId}
+	,#{permissaoTypeEnumValue}
   </sql>
 
   <select id="fetchEmpresaRowCount" parameterType="EmpresaInquiryRequest" resultType="Integer">
@@ -66,31 +75,22 @@
 
     <select id="fetchEmpresaByNota" parameterType="Integer" resultMap="empresaResult">
     			   SELECT
-					b.id,	<include refid="allEmpresaColumns" />
+					id,	<include refid="allEmpresaColumns" />
  				   FROM entidade b
-					where b.id = #{id}
+					where id = #{id}
   </select>
 
   <select id="fetchAllEmpresasByRequest" parameterType="EmpresaInquiryRequest" resultMap="empresaResult">
-     SELECT * FROM ( SELECT b.id,
-    						<include refid="allEmpresaColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY b.id) AS RowNumber
-    				FROM entidade b
-					where entidadeEnumValue = 1
+     SELECT id,
+    						<include refid="allEmpresaColumns" />
+    				FROM entidade
+					where entidadeEnumValue = 1 
+					<if test="permissaoTypeEnumValue != 1 and permissaoTypeEnumValue != 2 and permissaoTypeEnumValue != 3 "> and emprId = #{emprId}</if>
+					<if test="permissaoTypeEnumValue != 1 and permissaoTypeEnumValue != 4 and permissaoTypeEnumValue != 3 "> and parceiroId = #{parceiroId}</if>
+					<if test="permissaoTypeEnumValue != 1 and permissaoTypeEnumValue != 4 and permissaoTypeEnumValue != 2 "> and contabilidadeId = #{contabilidadeId}</if>
 
-    			) LIST
-				<choose>
-					<when test="pageSize != null and pageSize > 0">
-					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
-					        LOWER: startRow + 1 and
-					        UPPER: startRow + pageSize -->
-					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
-					</when>
-					<otherwise>
-					 	WHERE RowNumber BETWEEN 1 AND RowNumber
-					 	ORDER BY RowNumber
-					</otherwise>
-				</choose>
+    			
+				
   </select>
 
 <delete id="deleteEmpresaById" parameterType="Empresa">
@@ -100,4 +100,32 @@
  <delete id="deleteAllEmpresas">
 	DELETE FROM entidade
   </delete>
+  
+   <insert id="insertEmpresa" parameterType="Empresa" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO entidade (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allEmpresaColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allEmpresaValues" /> )
+ </insert>
+
+ <update id="updateEmpresa" parameterType="Empresa">
+   UPDATE entidade SET
+<if test="nome!= null">nome = #{nome},</if>
+<if test="parceiroId!= null">parceiroId = #{parceiroId},</if>
+<if test="contabilidadeId!= null">contabilidadeId = #{contabilidadeId},</if>
+<if test="permissaoTypeEnumValue!= null">permissaoTypeEnumValue = #{permissaoTypeEnumValue},</if>
+<if test="entidadeId!= null">entidadeId = #{entidadeId},</if>
+<if test="numFunc!= null">numFunc = #{numFunc},</if>
+<if test="entidadeEnumValue!= null">entidadeEnumValue = #{entidadeEnumValue},</if>
+<if test="regime!= null">regime = #{regime.id},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+  
 </mapper>

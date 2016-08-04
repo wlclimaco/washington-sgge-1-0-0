@@ -44,9 +44,10 @@
  <select id="fetchAllClinicasRequest" parameterType="ClinicaInquiryRequest" resultMap="ClinicaResult">
 
 		SELECT <include refid="allClinicaColumns" />
-  		  FROM entidade where entidadeEnumValue = 4 ORDER BY id ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
+  		  FROM entidade where entidadeEnumValue = 4 and id IS NOT NULL <if test="criteria.emprId != null">
+						AND emprId = #{criteria.emprId}
+					</if>ORDER BY id ASC
+
 </select>
 
 <select id="fetchClinicaRowCount" resultType="Integer">

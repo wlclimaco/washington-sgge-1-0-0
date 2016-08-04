@@ -101,9 +101,10 @@ c.tabelaEnumValue,
  <select id="fetchAllUsuariosRequest" parameterType="UsuarioInquiryRequest" resultMap="UsuarioResult">
 
 		SELECT id,<include refid="allUsuarioColumns" />
-  		  FROM usuario ORDER BY id ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
+  		  FROM usuario WHERE id IS NOT NULL <if test="criteria.emprId != null">
+						AND emprId = #{criteria.emprId}
+					</if>ORDER BY id ASC
+		  
 </select>
 
 <select id="fetchUsuarioRowCount" resultType="Integer">

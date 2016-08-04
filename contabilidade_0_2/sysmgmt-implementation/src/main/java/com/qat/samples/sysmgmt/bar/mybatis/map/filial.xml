@@ -39,9 +39,10 @@
   </sql>
 
   <select id="fetchFilialRowCount" parameterType="FilialInquiryRequest" resultType="Integer">
-     SELECT COUNT(id) AS RECORD_COUNT
-        FROM entidade
-        where entidadeEnumValue = 2
+     SELECT COUNT(*) AS RECORD_COUNT FROM entidade WHERE id IS NOT NULL and entidadeEnumValue = 2 <if test="criteria.emprId != null">
+						AND emprId = #{criteria.emprId}
+					</if>
+
 
   </select>
 
@@ -54,7 +55,7 @@
   <select id="fetchFilialById" parameterType="FetchByIdRequest" resultMap="filialResult">
     			   SELECT
 					id,	<include refid="allFilialColumns" />
- 				   FROM entidade b
+ 				   FROM entidade
 					where id = #{fetchId}
   </select>
 
@@ -75,28 +76,16 @@
 
 
   <select id="fetchAllFilialsByRequest" parameterType="FilialInquiryRequest" resultMap="filialResult">
-     SELECT * FROM ( SELECT id,
-    						<include refid="allFilialColumns" />,
-    						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber
-    				FROM entidade b
+     SELECT id,
+    						<include refid="allFilialColumns" />
+    						
+    				FROM entidade
 						where entidadeEnumValue = 2
 					<if test="criteria.emprId != null">
-						AND emprId = #{id}
+						AND emprId = #{criteria.emprId}
 					</if>
 
-    			) LIST
-				<choose>
-					<when test="pageSize != null and pageSize > 0">
-					   <!-- #{startPage}*#{pageSize} = startRow, so limits are:
-					        LOWER: startRow + 1 and
-					        UPPER: startRow + pageSize -->
-					   WHERE RowNumber BETWEEN (#{startPage}*#{pageSize})+ 1 AND (#{startPage}*#{pageSize})+#{pageSize}
-					</when>
-					<otherwise>
-					 	WHERE RowNumber BETWEEN 1 AND RowNumber
-					 	ORDER BY RowNumber
-					</otherwise>
-				</choose>
+
   </select>
 
 <delete id="deleteFilialById" parameterType="Filial">
