@@ -172,9 +172,9 @@ public IProdutoBAR getProdutoBAR()
 @Test
 	public void testDeleteProduto()
 	{
-		Produto produto = insertProduto(4, TabelaEnum.PRODUTO, PersistenceActionEnum.INSERT);
+		Produto produto = insertProduto(1004, TabelaEnum.PRODUTO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(1004);
 		Produto produtoResponse = getProdutoBAR().fetchProdutoById(request);
 		Assert.assertEquals(produtoResponse, null);
 		getProdutoBAR().insertProduto(produto);
@@ -700,9 +700,9 @@ public IProdutoBAR getProdutoBAR()
 @Test
 	public void testDeleteUniMed()
 	{
-		UniMed unimed = insertUniMed(4, TabelaEnum.UNIMED, PersistenceActionEnum.INSERT);
+		UniMed unimed = insertUniMed(1004, TabelaEnum.UNIMED, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(1004);
 		UniMed unimedResponse = getProdutoBAR().fetchUniMedById(request);
 		Assert.assertEquals(unimedResponse, null);
 		getProdutoBAR().insertUniMed(unimed);
