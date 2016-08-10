@@ -26,6 +26,8 @@ public class Endereco extends ModelCosmeDamiao
 	/** The bairro. */
 	private String bairro;
 
+	private String pais;
+
 	/** The numero. */
 	private String numero;
 

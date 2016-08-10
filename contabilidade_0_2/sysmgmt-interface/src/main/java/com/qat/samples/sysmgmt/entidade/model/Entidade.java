@@ -28,6 +28,8 @@ public class Entidade extends ModelCosmeDamiao
 	/** The type of an account. */
 	private String nome;
 
+	private String razao;
+
 	private Regime regime;
 
 	private Integer entidadeId;
@@ -320,6 +322,16 @@ public class Entidade extends ModelCosmeDamiao
 		this.configuracaoNFe = configuracaoNFe;
 	}
 
+
+
+	public String getRazao() {
+		return razao;
+	}
+
+	public void setRazao(String razao) {
+		this.razao = razao;
+	}
+
 	@Override
 	public String toString() {
 		return "Entidade [getUsuarios()=" + getUsuarios() + ", getBancos()=" + getBancos() + ", getEntidadeEnumValue()="
@@ -329,8 +341,8 @@ public class Entidade extends ModelCosmeDamiao
 				+ ", getEntidadeEnum()=" + getEntidadeEnum() + ", getConfiguracao()=" + getConfiguracao()
 				+ ", getEntidadeId()=" + getEntidadeId() + ", getNotificacoes()=" + getNotificacoes()
 				+ ", getNumFunc()=" + getNumFunc() + ", getPlanosServicos()=" + getPlanosServicos() + ", getSocios()="
-				+ getSocios() + ", getConfiguracaoNFe()=" + getConfiguracaoNFe() + ", toString()=" + super.toString()
-				+ "]";
+				+ getSocios() + ", getConfiguracaoNFe()=" + getConfiguracaoNFe() + ", getRazao()=" + getRazao()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 

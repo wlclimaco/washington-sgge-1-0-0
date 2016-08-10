@@ -60,7 +60,7 @@ nome
 
 		SELECT id,<include refid="allRegimeColumns" />
   		  FROM regime WHERE id IS NOT NULL <if test="emprId != null"> and emprId = #{emprId}</if>
-		<if test="id != null"> and id = #{id}</if> ORDER BY id ASC
+		<if test="id != null"> and id = #{id}</if> ORDER BY nome ASC
 
 </select>
 

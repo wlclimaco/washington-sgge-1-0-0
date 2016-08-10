@@ -18,6 +18,7 @@
   <resultMap id="EntidadeResult" type="Empresa">
     <result property="id" column="id"/>
     <result property="nome" column="nome"/>
+    <result property="razao" column="razao"/>
     <result property="processId" column="processId"/>
     <result property="entidadeId" column="entidadeId"/>
     <result property="emprId" column="emprId"/>
@@ -39,6 +40,7 @@
   <sql id="allEntidadeColumns">
 
 nome
+,razao
 ,processId
 ,entidadeId
 ,emprId
@@ -53,6 +55,7 @@ nome
 <sql id="allEntidadeValues">
 
 #{nome},
+#{razao},
 #{processId},
 #{entidadeId},
 #{emprId},
@@ -89,6 +92,7 @@ c.regime,
  <update id="updateEntidade" parameterType="Empresa">
    UPDATE entidade SET
 <if test="nome!= null">nome = #{nome},</if>
+<if test="razao!= null">razao = #{razao},</if>
 <if test="processId!= null">processId = #{processId},</if>
 <if test="entidadeId!= null">entidadeId = #{entidadeId},</if>
 <if test="emprId!= null">emprId = #{emprId},</if>

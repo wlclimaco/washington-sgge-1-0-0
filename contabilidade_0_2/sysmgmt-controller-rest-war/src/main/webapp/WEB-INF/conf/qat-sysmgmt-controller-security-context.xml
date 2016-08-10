@@ -33,6 +33,8 @@
 		<sec:intercept-url pattern="/procedure/api/insert" access="hasAnyRole('ROLE_DOMAIN_ADMINS')" />
 		<sec:intercept-url pattern="/procedure/api/delete" access="hasAnyRole('ROLE_DOMAIN_ADMINS')" />
 		<sec:intercept-url pattern="/procedure/api/update" access="hasAnyRole('ROLE_DOMAIN_ADMINS', 'ROLE_DOMAIN_USERS')" />
+		<sec:intercept-url pattern="/entidade/api/empresa/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
+		<sec:intercept-url pattern="/entidade/api/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
 		<!-- All other urls/resources not listed above will fall here -->
 		<sec:intercept-url pattern="/**/**"	access="hasAnyRole('ROLE_DOMAIN_ADMINS', 'ROLE_DOMAIN_USERS', 'ROLE_GUEST')" />
 	</sec:http>
@@ -50,7 +52,7 @@
 		</sec:authentication-provider>-->
 		<sec:authentication-provider>
        <sec:jdbc-user-service data-source-ref="qatDataSource" id="userService"
-        users-by-username-query="select username,password, emprId from usuario where username=?"
+        users-by-username-query="select username,password,enabled, emprId from users where username=?"
         authorities-by-username-query="select username, role from user_roles where username =?  " />
       </sec:authentication-provider>
 	</sec:authentication-manager>

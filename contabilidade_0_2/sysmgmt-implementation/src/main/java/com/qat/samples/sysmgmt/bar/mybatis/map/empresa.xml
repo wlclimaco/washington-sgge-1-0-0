@@ -40,7 +40,16 @@
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
 	-->
   <sql id="allEmpresaColumns">
-			<include refid="EntidadeMap.allEntidadeColumns"/>
+			e.nome
+,e.processId
+,e.entidadeId
+,e.emprId
+,e.entidadeEnumValue
+,e.regime
+,e.create_date
+,e.create_user
+,e.modify_date
+,e.modify_user
 			,parceiroId
 	,contabilidadeId
 	,permissaoTypeEnumValue
@@ -61,34 +70,36 @@
   </select>
 
   <select id="fetchAllEmpresas" resultMap="empresaTableResult">
-    SELECT id,
+    SELECT e.id,
 	<include refid="allEmpresaColumns" />
-    FROM entidade  where entidadeEnumValue = 1 ORDER BY nome ASC
+    FROM entidade e where e.entidadeEnumValue = 1 ORDER BY nome ASC
   </select>
 
   <select id="fetchEmpresaById" parameterType="FetchByIdRequest" resultMap="empresaResult">
     			   SELECT
-					id,	<include refid="allEmpresaColumns" />
- 				   FROM entidade
-					where id = #{fetchId}
+					e.id,	<include refid="allEmpresaColumns" />
+ 				   FROM entidade e
+					where e.id = #{fetchId}
   </select>
 
     <select id="fetchEmpresaByNota" parameterType="Integer" resultMap="empresaResult">
     			   SELECT
-					id,	<include refid="allEmpresaColumns" />
- 				   FROM entidade b
-					where id = #{id}
+					e.id,	<include refid="allEmpresaColumns" />
+ 				   FROM entidade e
+					where e.id = #{id}
   </select>
 
   <select id="fetchAllEmpresasByRequest" parameterType="EmpresaInquiryRequest" resultMap="empresaResult">
-     SELECT id,
+     SELECT e.id,
     						<include refid="allEmpresaColumns" />
-    				FROM entidade
-					where entidadeEnumValue = 1
-					<if test="permissaoTypeEnumValue != 1 and permissaoTypeEnumValue != 2 and permissaoTypeEnumValue != 3 "> and emprId = #{emprId}</if>
-					<if test="permissaoTypeEnumValue != 1 and permissaoTypeEnumValue != 4 and permissaoTypeEnumValue != 3 "> and parceiroId = #{parceiroId}</if>
-					<if test="permissaoTypeEnumValue != 1 and permissaoTypeEnumValue != 4 and permissaoTypeEnumValue != 2 "> and contabilidadeId = #{contabilidadeId}</if>
-					<if test="id != null"> AND id = #{criteria.id}</if>
+    				FROM entidade e <if test="userId != null"> INNER JOIN  users on (users.emprId = e.id and users.username like #{userId})</if>
+					where e.entidadeEnumValue = 1
+					<if test="permissaoTypeEnumValue != null">
+						<if test="permissaoTypeEnumValue != 1 and permissaoTypeEnumValue != 2 and permissaoTypeEnumValue != 3 "> and e.emprId = #{emprId}</if>
+						<if test="permissaoTypeEnumValue != 1 and permissaoTypeEnumValue != 4 and permissaoTypeEnumValue != 3 "> and e.parceiroId = #{parceiroId}</if>
+						<if test="permissaoTypeEnumValue != 1 and permissaoTypeEnumValue != 4 and permissaoTypeEnumValue != 2 "> and e.contabilidadeId = #{contabilidadeId}</if>
+					</if>
+					<if test="id != null"> AND e.id = #{id}</if>
 					ORDER BY id ASC
 
 
@@ -104,8 +115,8 @@
   </delete>
 
    <insert id="insertEmpresa" parameterType="Empresa" useGeneratedKeys="true" keyProperty="id">
-     INSERT INTO entidade (
- <if test="id != null"><if test="id > 0">id,</if></if><include refid="allEmpresaColumns" />
+     INSERT INTO entidade e (
+ <if test="id != null"><if test="id > 0">e.id,</if></if><include refid="allEmpresaColumns" />
      )
    VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allEmpresaValues" /> )
  </insert>
