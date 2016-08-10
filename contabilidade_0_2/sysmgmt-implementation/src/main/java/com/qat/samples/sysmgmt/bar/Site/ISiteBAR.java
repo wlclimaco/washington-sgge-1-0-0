@@ -1,7 +1,5 @@
 /** create by system gera-java version 1.0.0 07/05/2016 18:30 : 34*/
 package com.qat.samples.sysmgmt.bar.Site;
-import org.apache.ibatis.annotations.Insert;
-
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
@@ -16,6 +14,7 @@ import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryReq
 import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
+import com.qat.samples.sysmgmt.site.model.PlanoByEmpresa;
 import com.qat.samples.sysmgmt.site.model.ServicoAndPlano;
 import com.qat.samples.sysmgmt.site.model.Site;
 import com.qat.samples.sysmgmt.site.model.request.SiteInquiryRequest;
@@ -523,5 +522,55 @@ public interface ISiteBAR
 	* @return the internal results response
 	*/
 		public InternalResultsResponse<ServicoAndPlano> fetchServicoAndPlanosByRequest(PagedInquiryRequest request);
+		/**
+		* Insert planobyempresa.
+		* 
+		* @param planobyempresa the planobyempresa
+		* 
+		* @return the internal response
+		*/
+			public InternalResponse insertPlanoByEmpresa(PlanoByEmpresa planobyempresa);
+
+			/**
+		* Update planobyempresa.
+		* 
+		* @param planobyempresa the planobyempresa
+		* 
+		* @return the internal response
+		*/
+			public InternalResponse updatePlanoByEmpresa(PlanoByEmpresa planobyempresa);
+
+			/**
+		* Delete planobyempresa.
+		* 
+		* @param planobyempresa the planobyempresa
+		* 
+		* @return the internal response
+		*/
+			public InternalResponse deletePlanoByEmpresaById(PlanoByEmpresa planobyempresa);
+
+			/**
+		* Delete all planobyempresas.
+		* 
+		* @return the internal response
+		*/
+			public InternalResponse deleteAllPlanoByEmpresas();
+
+			/**
+		* Fetch all planobyempresas.
+		* 
+		* @return the list< planobyempresa>
+		*/
+			public InternalResultsResponse<PlanoByEmpresa> fetchAllPlanoByEmpresas(PlanoByEmpresa  planobyempresa);
+
+			/**
+		* Fetch planobyempresas by request.
+		* 
+		* @param request the request
+		* @return the internal results response
+		*/
+			public InternalResultsResponse<PlanoByEmpresa> fetchPlanoByEmpresasByRequest(PagedInquiryRequest request);
+
+			public PlanoByEmpresa fetchPlanoByEmpresaById(FetchByIdRequest request);
 
 }

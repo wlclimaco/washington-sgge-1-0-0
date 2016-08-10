@@ -27,8 +27,7 @@ import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.BaseBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
-import com.qat.samples.sysmgmt.bar.mybatis.delegate.PlanoBARD;
-import com.qat.samples.sysmgmt.bar.mybatis.delegate.ServicoAndPlanoBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.PlanoByEmpresaBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.SociosBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.UsuarioBARD;
 import com.qat.samples.sysmgmt.clinica.model.Clinica;
@@ -372,10 +371,19 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 							empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
 
 		}
-		if (!ValidationUtil.isNullOrEmpty(empresa.getPlanosServicos()))
+//		if (!ValidationUtil.isNullOrEmpty(empresa.getPlanosServicos()))
+//		{
+//			a +=
+//					ServicoAndPlanoBARD.maintainServicoAndPlanoAssociations(empresa.getPlanosServicos(), response, empresa.getId(), null, null,
+//							TabelaEnum.EMPRESA, getSiteBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
+//							empresa.getCreateUser(), historicoId, historicoId);
+//		}
+		
+		if (!ValidationUtil.isNullOrEmpty(empresa.getPlanoByEmpresaList()))
 		{
 			a +=
-					ServicoAndPlanoBARD.maintainServicoAndPlanoAssociations(empresa.getPlanosServicos(), response, empresa.getId(), null, null,
+					PlanoByEmpresaBARD.maintainPlanoByEmpresaAssociations(empresa.getPlanoByEmpresaList(), response, empresa.getId(), null,
+							null,
 							TabelaEnum.EMPRESA, getSiteBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
 							empresa.getCreateUser(), historicoId, historicoId);
 		}

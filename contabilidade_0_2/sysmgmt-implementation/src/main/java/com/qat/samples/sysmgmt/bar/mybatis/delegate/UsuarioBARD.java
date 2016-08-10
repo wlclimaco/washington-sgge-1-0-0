@@ -53,6 +53,7 @@ public final class UsuarioBARD extends SqlSessionDaoSupport
 		{
 			// Make sure we set the parent key
 			usuario.setParentId(parentId);
+			usuario.setEmprId(parentId);
 			usuario.setTabelaEnum(tabelaEnum);
 			usuario.setProcessId(processId);
 

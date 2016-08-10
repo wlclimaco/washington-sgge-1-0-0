@@ -1,7 +1,6 @@
 /** create by system gera-java version 1.0.0 07/05/2016 18:36 : 29*/
 package com.qat.samples.sysmgmt.bar.mybatis;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +24,6 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.bar.Site.ISiteBAR;
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
 import com.qat.samples.sysmgmt.contabilidade.model.PlanoByServico;
-import com.qat.samples.sysmgmt.contabilidade.model.PlanoBySite;
 import com.qat.samples.sysmgmt.contato.model.Contato;
 import com.qat.samples.sysmgmt.contato.model.ContatoItens;
 import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
@@ -37,181 +35,186 @@ import com.qat.samples.sysmgmt.produto.model.Preco;
 import com.qat.samples.sysmgmt.produto.model.PrecoTypeEnum;
 import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
-import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
+import com.qat.samples.sysmgmt.site.model.PlanoByEmpresa;
 import com.qat.samples.sysmgmt.site.model.Site;
 import com.qat.samples.sysmgmt.site.model.criteria.SiteCriteria;
 import com.qat.samples.sysmgmt.site.model.request.SiteInquiryRequest;
-import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
-@ContextConfiguration(locations = {
-		"classpath:conf/unittest-base-context.xml",
-		"classpath:conf/bartest-context.xml"
-})
+@ContextConfiguration(locations = { "classpath:conf/unittest-base-context.xml", "classpath:conf/bartest-context.xml" })
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 @Transactional
 @ActiveProfiles("postgres")
-public class SiteBARTest extends AbstractTransactionalJUnit4SpringContextTests
-{
-private static final Logger LOG = LoggerFactory.getLogger(SiteBARTest.class);
-private ISiteBAR siteBAR; // injected by Spring through @Resource
+public class SiteBARTest extends AbstractTransactionalJUnit4SpringContextTests {
+	private static final Logger LOG = LoggerFactory.getLogger(SiteBARTest.class);
+	private ISiteBAR siteBAR; // injected by Spring through @Resource
 
-@Resource
-public void setSiteBAR(ISiteBAR siteBAR)
-{
-	this.siteBAR = siteBAR;
-}
+	@Resource
+	public void setSiteBAR(ISiteBAR siteBAR) {
+		this.siteBAR = siteBAR;
+	}
 
-public ISiteBAR getSiteBAR()
-{
-	return siteBAR;
-}
+	public ISiteBAR getSiteBAR() {
+		return siteBAR;
+	}
 
+	// ===================================### SERVICO
+	// ####======================================
 
-//===================================### SERVICO ####======================================
-
-
-//@Test
-//	public void testDeleteServico()
-//	{
-//		Servico servico = insertServico(4,TabelaEnum.SERVICO,PersistenceActionEnum.INSERT);
-//		FetchByIdRequest request = new FetchByIdRequest();
-//		request.setFetchId(4);
-//		Servico servicoResponse = getSiteBAR().fetchServicoById(request);
-//		Assert.assertEquals(servicoResponse, null);
-//		getSiteBAR().insertServico(servico);
-//		servicoResponse = getSiteBAR().fetchServicoById(request);
-//		Assert.assertEquals(servico.getId(), servicoResponse.getId());
-//		Assert.assertEquals(servicoResponse.getPreco().size(), 1);
-//		getSiteBAR().deleteServicoById(servico);
-//		servicoResponse = getSiteBAR().fetchServicoById(request);
-//		Assert.assertEquals(servicoResponse, null);
-//	}
-//
-//	@Test
-//	public void testFetchAllServicos()
-//	{
-//	Servico servico = new Servico();
-//		List<Servico> response = getSiteBAR().fetchAllServicos(servico).getResultsList();
-//		Assert.assertNotNull(response);
-//	}
-//
-//	@Test
-//	public void testDeleteAllServicos()
-//	{
-//		getSiteBAR().deleteAllServicos();
-//		Servico servico = new Servico();
-//		List<Servico> response = getSiteBAR().fetchAllServicos(new Servico()).getResultsList();
-//		Assert.assertEquals(response.size(), 0);
-//	}
-//
-//	@Test
-//	public void testUpdateServico()
-//	{
-//		Servico servico = insertServico(1,TabelaEnum.SERVICO,PersistenceActionEnum.UPDATE);
-//		FetchByIdRequest request = new FetchByIdRequest();
-//		request.setFetchId(1);
-//		Servico servicoResponse = getSiteBAR().fetchServicoById(request);
-//		Assert.assertEquals(servicoResponse.getNome(), "nome");
-//		getSiteBAR().updateServico(servico);
-//		servicoResponse = getSiteBAR().fetchServicoById(request);
-//		Assert.assertEquals(servicoResponse.getNome(), "NATIVE INSERT UPDATE");
-//		Assert.assertEquals(servicoResponse.getPreco().size(), 1);
-//	}
-//
-//	@Test
-//	public void testFetchServicosByRequest() throws Exception
-//	{
-//		// check for valid and precount
-//		ServicoInquiryRequest request = new ServicoInquiryRequest();
-//		request.setPreQueryCount(true);
-//		request.setStartPage(0);
-//		request.setPageSize(3);
-//		InternalResultsResponse<Servico> response = getSiteBAR().fetchServicosByRequest(request);
-//		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-//		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-//		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-//		// check for valid and precount and start 2nd page
-//		request.setPreQueryCount(true);
-//		request.setStartPage(1);
-//		request.setPageSize(3);
-//		response = getSiteBAR().fetchServicosByRequest(request);
-//		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-//		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-//		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-//
-//		// check for valid and no precount
-//		ServicoInquiryRequest request2 = new ServicoInquiryRequest();
-//		request2.setPreQueryCount(false);
-//		InternalResultsResponse<Servico> response2 = getSiteBAR().fetchServicosByRequest(request2);
-//		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
-//		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
-//		// this is because we did not choose to precount
-//		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
-//
-//		// check for zero rows
-//		getSiteBAR().deleteAllServicos();
-//		ServicoInquiryRequest request3 = new ServicoInquiryRequest();
-//		request3.setPreQueryCount(true);
-//		InternalResultsResponse<Servico> response3 = getSiteBAR().fetchServicosByRequest(request3);
-//		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
-//
-//	}
-//
-////===================================### SITE ####======================================
-//
-//
-//@Test
-//	public void testDeleteSite()
-//	{
-//		Site site = insertSite(4,TabelaEnum.SERVICO,PersistenceActionEnum.INSERT);
-//		FetchByIdRequest request = new FetchByIdRequest();
-//		request.setFetchId(4);
-//		Site siteResponse = getSiteBAR().fetchSiteById(request);
-//		Assert.assertEquals(siteResponse, null);
-//		getSiteBAR().insertSite(site);
-//		siteResponse = getSiteBAR().fetchSiteById(request);
-//		Assert.assertEquals(site.getId(), siteResponse.getId());
-//		getSiteBAR().deleteSiteById(site);
-//		siteResponse = getSiteBAR().fetchSiteById(request);
-//	//	Assert.assertEquals(siteResponse, siteResponse.getId());
-//	}
-//
-//	@Test
-//	public void testFetchAllSites()
-//	{
-//	Site site = new Site();
-//		List<Site> response = getSiteBAR().fetchAllSites(site).getResultsList();
-//		Assert.assertNotNull(response);
-//	}
-//
-//	@Test
-//	public void testDeleteAllSites()
-//	{
-//		getSiteBAR().deleteAllSites();
-//		Site site = new Site();
-//		List<Site> response = getSiteBAR().fetchAllSites(new Site()).getResultsList();
-//		Assert.assertEquals(response.size(), 0);
-//	}
-//
-//	@Test
-//	public void testUpdateSite()
-//	{
-//		Site site = insertSite(1,TabelaEnum.SITE,PersistenceActionEnum.INSERT);
-//		FetchByIdRequest request = new FetchByIdRequest();
-//		request.setFetchId(1);
-//		Site siteResponse = getSiteBAR().fetchSiteById(request);
-//		Assert.assertEquals(siteResponse.getNome(), "nome_1");
-//		getSiteBAR().updateSite(site);
-//		siteResponse = getSiteBAR().fetchSiteById(request);
-//		Assert.assertEquals(siteResponse.getNome(), "NATIVE INSERT UPDATE");
-//	}
+	// @Test
+	// public void testDeleteServico()
+	// {
+	// Servico servico =
+	// insertServico(4,TabelaEnum.SERVICO,PersistenceActionEnum.INSERT);
+	// FetchByIdRequest request = new FetchByIdRequest();
+	// request.setFetchId(4);
+	// Servico servicoResponse = getSiteBAR().fetchServicoById(request);
+	// Assert.assertEquals(servicoResponse, null);
+	// getSiteBAR().insertServico(servico);
+	// servicoResponse = getSiteBAR().fetchServicoById(request);
+	// Assert.assertEquals(servico.getId(), servicoResponse.getId());
+	// Assert.assertEquals(servicoResponse.getPreco().size(), 1);
+	// getSiteBAR().deleteServicoById(servico);
+	// servicoResponse = getSiteBAR().fetchServicoById(request);
+	// Assert.assertEquals(servicoResponse, null);
+	// }
+	//
+	// @Test
+	// public void testFetchAllServicos()
+	// {
+	// Servico servico = new Servico();
+	// List<Servico> response =
+	// getSiteBAR().fetchAllServicos(servico).getResultsList();
+	// Assert.assertNotNull(response);
+	// }
+	//
+	// @Test
+	// public void testDeleteAllServicos()
+	// {
+	// getSiteBAR().deleteAllServicos();
+	// Servico servico = new Servico();
+	// List<Servico> response = getSiteBAR().fetchAllServicos(new
+	// Servico()).getResultsList();
+	// Assert.assertEquals(response.size(), 0);
+	// }
+	//
+	// @Test
+	// public void testUpdateServico()
+	// {
+	// Servico servico =
+	// insertServico(1,TabelaEnum.SERVICO,PersistenceActionEnum.UPDATE);
+	// FetchByIdRequest request = new FetchByIdRequest();
+	// request.setFetchId(1);
+	// Servico servicoResponse = getSiteBAR().fetchServicoById(request);
+	// Assert.assertEquals(servicoResponse.getNome(), "nome");
+	// getSiteBAR().updateServico(servico);
+	// servicoResponse = getSiteBAR().fetchServicoById(request);
+	// Assert.assertEquals(servicoResponse.getNome(), "NATIVE INSERT UPDATE");
+	// Assert.assertEquals(servicoResponse.getPreco().size(), 1);
+	// }
+	//
+	// @Test
+	// public void testFetchServicosByRequest() throws Exception
+	// {
+	// // check for valid and precount
+	// ServicoInquiryRequest request = new ServicoInquiryRequest();
+	// request.setPreQueryCount(true);
+	// request.setStartPage(0);
+	// request.setPageSize(3);
+	// InternalResultsResponse<Servico> response =
+	// getSiteBAR().fetchServicosByRequest(request);
+	// //Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+	// Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+	// Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() >
+	// 0);
+	// // check for valid and precount and start 2nd page
+	// request.setPreQueryCount(true);
+	// request.setStartPage(1);
+	// request.setPageSize(3);
+	// response = getSiteBAR().fetchServicosByRequest(request);
+	// //Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+	// Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+	// Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() >
+	// 0);
+	//
+	// // check for valid and no precount
+	// ServicoInquiryRequest request2 = new ServicoInquiryRequest();
+	// request2.setPreQueryCount(false);
+	// InternalResultsResponse<Servico> response2 =
+	// getSiteBAR().fetchServicosByRequest(request2);
+	// Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+	// Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+	// // this is because we did not choose to precount
+	// Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable()
+	// == 0);
+	//
+	// // check for zero rows
+	// getSiteBAR().deleteAllServicos();
+	// ServicoInquiryRequest request3 = new ServicoInquiryRequest();
+	// request3.setPreQueryCount(true);
+	// InternalResultsResponse<Servico> response3 =
+	// getSiteBAR().fetchServicosByRequest(request3);
+	// Assert.assertTrue(response3.getBusinessError() ==
+	// BusinessErrorCategory.NoRowsFound);
+	//
+	// }
+	//
+	//// ===================================### SITE
+	// ####======================================
+	//
+	//
+	// @Test
+	// public void testDeleteSite()
+	// {
+	// Site site =
+	// insertSite(4,TabelaEnum.SERVICO,PersistenceActionEnum.INSERT);
+	// FetchByIdRequest request = new FetchByIdRequest();
+	// request.setFetchId(4);
+	// Site siteResponse = getSiteBAR().fetchSiteById(request);
+	// Assert.assertEquals(siteResponse, null);
+	// getSiteBAR().insertSite(site);
+	// siteResponse = getSiteBAR().fetchSiteById(request);
+	// Assert.assertEquals(site.getId(), siteResponse.getId());
+	// getSiteBAR().deleteSiteById(site);
+	// siteResponse = getSiteBAR().fetchSiteById(request);
+	// // Assert.assertEquals(siteResponse, siteResponse.getId());
+	// }
+	//
+	// @Test
+	// public void testFetchAllSites()
+	// {
+	// Site site = new Site();
+	// List<Site> response = getSiteBAR().fetchAllSites(site).getResultsList();
+	// Assert.assertNotNull(response);
+	// }
+	//
+	// @Test
+	// public void testDeleteAllSites()
+	// {
+	// getSiteBAR().deleteAllSites();
+	// Site site = new Site();
+	// List<Site> response = getSiteBAR().fetchAllSites(new
+	// Site()).getResultsList();
+	// Assert.assertEquals(response.size(), 0);
+	// }
+	//
+	// @Test
+	// public void testUpdateSite()
+	// {
+	// Site site = insertSite(1,TabelaEnum.SITE,PersistenceActionEnum.INSERT);
+	// FetchByIdRequest request = new FetchByIdRequest();
+	// request.setFetchId(1);
+	// Site siteResponse = getSiteBAR().fetchSiteById(request);
+	// Assert.assertEquals(siteResponse.getNome(), "nome_1");
+	// getSiteBAR().updateSite(site);
+	// siteResponse = getSiteBAR().fetchSiteById(request);
+	// Assert.assertEquals(siteResponse.getNome(), "NATIVE INSERT UPDATE");
+	// }
 
 	@Test
-	public void testFetchSitesByRequest() throws Exception
-	{
+	public void testFetchSitesByRequest() throws Exception {
 		// check for valid and precount
 
 		SiteInquiryRequest request = new SiteInquiryRequest();
@@ -220,7 +223,7 @@ public ISiteBAR getSiteBAR()
 		request.setPageSize(1);
 		request.setUrl("http://localhost:8080/webSite/");
 		InternalResultsResponse<Site> response = getSiteBAR().fetchSitesByRequest(request);
-		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		// Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		Assert.assertTrue(response.getResultsList().size() == 4);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
@@ -229,7 +232,7 @@ public ISiteBAR getSiteBAR()
 		request.setStartPage(1);
 		request.setPageSize(3);
 		response = getSiteBAR().fetchSitesByRequest(request);
-		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		// Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
@@ -251,13 +254,13 @@ public ISiteBAR getSiteBAR()
 
 	}
 
-//===================================### CONTATO ####======================================
-//
-//
-@Test
-	public void testDeleteContato()
-	{
-		Contato contato = insertContato(4,TabelaEnum.CONTATO,PersistenceActionEnum.INSERT);
+	// ===================================### CONTATO
+	// ####======================================
+	//
+	//
+	@Test
+	public void testDeleteContato() {
+		Contato contato = insertContato(4, TabelaEnum.CONTATO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		Contato contatoResponse = getSiteBAR().fetchContatoById(request);
@@ -271,26 +274,23 @@ public ISiteBAR getSiteBAR()
 	}
 
 	@Test
-	public void testFetchAllContatos()
-	{
-	Contato contato = new Contato();
+	public void testFetchAllContatos() {
+		Contato contato = new Contato();
 		List<Contato> response = getSiteBAR().fetchAllContatos(contato).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
 	@Test
-	public void testDeleteAllContatos()
-	{
+	public void testDeleteAllContatos() {
 		getSiteBAR().deleteAllContatos();
-	Contato contato = new Contato();
+		Contato contato = new Contato();
 		List<Contato> response = getSiteBAR().fetchAllContatos(new Contato()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
-	public void testUpdateContato()
-	{
-		Contato contato = insertContato(1001,TabelaEnum.CONTATO,PersistenceActionEnum.UPDATE);
+	public void testUpdateContato() {
+		Contato contato = insertContato(1001, TabelaEnum.CONTATO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		Contato contatoResponse = getSiteBAR().fetchContatoById(request);
@@ -301,15 +301,14 @@ public ISiteBAR getSiteBAR()
 	}
 
 	@Test
-	public void testFetchContatosByRequest() throws Exception
-	{
+	public void testFetchContatosByRequest() throws Exception {
 		// check for valid and precount
 		ContatoInquiryRequest request = new ContatoInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
 		InternalResultsResponse<Contato> response = getSiteBAR().fetchContatosByRequest(request);
-		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		// Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 		// check for valid and precount and start 2nd page
@@ -317,7 +316,7 @@ public ISiteBAR getSiteBAR()
 		request.setStartPage(1);
 		request.setPageSize(3);
 		response = getSiteBAR().fetchContatosByRequest(request);
-		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		// Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
@@ -339,13 +338,12 @@ public ISiteBAR getSiteBAR()
 
 	}
 
-//===================================### CONTATOITENS ####======================================
+	// ===================================### CONTATOITENS
+	// ####======================================
 
-
-@Test
-	public void testDeleteContatoItens()
-	{
-		ContatoItens contatoitens = insertContatoItens(4,TabelaEnum.CONTATOITENS,PersistenceActionEnum.INSERT);
+	@Test
+	public void testDeleteContatoItens() {
+		ContatoItens contatoitens = insertContatoItens(4, TabelaEnum.CONTATOITENS, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		ContatoItens contatoitensResponse = getSiteBAR().fetchContatoItensById(request);
@@ -359,26 +357,23 @@ public ISiteBAR getSiteBAR()
 	}
 
 	@Test
-	public void testFetchAllContatoItenss()
-	{
-	ContatoItens contatoitens = new ContatoItens();
+	public void testFetchAllContatoItenss() {
+		ContatoItens contatoitens = new ContatoItens();
 		List<ContatoItens> response = getSiteBAR().fetchAllContatoItenss(contatoitens).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
 	@Test
-	public void testDeleteAllContatoItenss()
-	{
+	public void testDeleteAllContatoItenss() {
 		getSiteBAR().deleteAllContatoItenss();
-	ContatoItens contatoitens = new ContatoItens();
+		ContatoItens contatoitens = new ContatoItens();
 		List<ContatoItens> response = getSiteBAR().fetchAllContatoItenss(new ContatoItens()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
-	public void testUpdateContatoItens()
-	{
-		ContatoItens contatoitens = insertContatoItens(1001,TabelaEnum.CONTATOITENS,PersistenceActionEnum.INSERT);
+	public void testUpdateContatoItens() {
+		ContatoItens contatoitens = insertContatoItens(1001, TabelaEnum.CONTATOITENS, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		ContatoItens contatoitensResponse = getSiteBAR().fetchContatoItensById(request);
@@ -389,15 +384,14 @@ public ISiteBAR getSiteBAR()
 	}
 
 	@Test
-	public void testFetchContatoItenssByRequest() throws Exception
-	{
+	public void testFetchContatoItenssByRequest() throws Exception {
 		// check for valid and precount
 		PagedInquiryRequest request = new PagedInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
 		InternalResultsResponse<ContatoItens> response = getSiteBAR().fetchContatoItenssByRequest(request);
-		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		// Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 		// check for valid and precount and start 2nd page
@@ -405,7 +399,7 @@ public ISiteBAR getSiteBAR()
 		request.setStartPage(1);
 		request.setPageSize(3);
 		response = getSiteBAR().fetchContatoItenssByRequest(request);
-		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		// Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
@@ -427,13 +421,12 @@ public ISiteBAR getSiteBAR()
 
 	}
 
-//===================================### ORDEMSERVICO ####======================================
+	// ===================================### ORDEMSERVICO
+	// ####======================================
 
-
-@Test
-	public void testDeleteOrdemServico()
-	{
-		OrdemServico ordemservico = insertOrdemServico(4,TabelaEnum.ORDEMSERVICO,PersistenceActionEnum.INSERT);
+	@Test
+	public void testDeleteOrdemServico() {
+		OrdemServico ordemservico = insertOrdemServico(4, TabelaEnum.ORDEMSERVICO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		OrdemServico ordemservicoResponse = getSiteBAR().fetchOrdemServicoById(request);
@@ -447,26 +440,23 @@ public ISiteBAR getSiteBAR()
 	}
 
 	@Test
-	public void testFetchAllOrdemServicos()
-	{
-	OrdemServico ordemservico = new OrdemServico();
+	public void testFetchAllOrdemServicos() {
+		OrdemServico ordemservico = new OrdemServico();
 		List<OrdemServico> response = getSiteBAR().fetchAllOrdemServicos(ordemservico).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
 	@Test
-	public void testDeleteAllOrdemServicos()
-	{
+	public void testDeleteAllOrdemServicos() {
 		getSiteBAR().deleteAllOrdemServicos();
-	OrdemServico ordemservico = new OrdemServico();
+		OrdemServico ordemservico = new OrdemServico();
 		List<OrdemServico> response = getSiteBAR().fetchAllOrdemServicos(new OrdemServico()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
-	public void testUpdateOrdemServico()
-	{
-		OrdemServico ordemservico = insertOrdemServico(1001,TabelaEnum.ORDEMSERVICO,PersistenceActionEnum.INSERT);
+	public void testUpdateOrdemServico() {
+		OrdemServico ordemservico = insertOrdemServico(1001, TabelaEnum.ORDEMSERVICO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		OrdemServico ordemservicoResponse = getSiteBAR().fetchOrdemServicoById(request);
@@ -477,15 +467,14 @@ public ISiteBAR getSiteBAR()
 	}
 
 	@Test
-	public void testFetchOrdemServicosByRequest() throws Exception
-	{
+	public void testFetchOrdemServicosByRequest() throws Exception {
 		// check for valid and precount
 		OrdemServicoInquiryRequest request = new OrdemServicoInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
 		InternalResultsResponse<OrdemServico> response = getSiteBAR().fetchOrdemServicosByRequest(request);
-		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		// Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 		// check for valid and precount and start 2nd page
@@ -493,7 +482,7 @@ public ISiteBAR getSiteBAR()
 		request.setStartPage(1);
 		request.setPageSize(3);
 		response = getSiteBAR().fetchOrdemServicosByRequest(request);
-		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		// Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
@@ -515,13 +504,13 @@ public ISiteBAR getSiteBAR()
 
 	}
 
-//===================================### ORDEMSERVICOITENS ####======================================
+	// ===================================### ORDEMSERVICOITENS
+	// ####======================================
 
-
-@Test
-	public void testDeleteOrdemServicoItens()
-	{
-		OrdemServicoItens ordemservicoitens = insertOrdemServicoItens(4,TabelaEnum.ORDEMSERVICOITENS,PersistenceActionEnum.INSERT);
+	@Test
+	public void testDeleteOrdemServicoItens() {
+		OrdemServicoItens ordemservicoitens = insertOrdemServicoItens(4, TabelaEnum.ORDEMSERVICOITENS,
+				PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		OrdemServicoItens ordemservicoitensResponse = getSiteBAR().fetchOrdemServicoItensById(request);
@@ -535,26 +524,25 @@ public ISiteBAR getSiteBAR()
 	}
 
 	@Test
-	public void testFetchAllOrdemServicoItenss()
-	{
-	OrdemServicoItens ordemservicoitens = new OrdemServicoItens();
+	public void testFetchAllOrdemServicoItenss() {
+		OrdemServicoItens ordemservicoitens = new OrdemServicoItens();
 		List<OrdemServicoItens> response = getSiteBAR().fetchAllOrdemServicoItenss(ordemservicoitens).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
 	@Test
-	public void testDeleteAllOrdemServicoItenss()
-	{
+	public void testDeleteAllOrdemServicoItenss() {
 		getSiteBAR().deleteAllOrdemServicoItenss();
-	OrdemServicoItens ordemservicoitens = new OrdemServicoItens();
-		List<OrdemServicoItens> response = getSiteBAR().fetchAllOrdemServicoItenss(new OrdemServicoItens()).getResultsList();
+		OrdemServicoItens ordemservicoitens = new OrdemServicoItens();
+		List<OrdemServicoItens> response = getSiteBAR().fetchAllOrdemServicoItenss(new OrdemServicoItens())
+				.getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
-	public void testUpdateOrdemServicoItens()
-	{
-		OrdemServicoItens ordemservicoitens = insertOrdemServicoItens(100001,TabelaEnum.ORDEMSERVICOITENS,PersistenceActionEnum.UPDATE);
+	public void testUpdateOrdemServicoItens() {
+		OrdemServicoItens ordemservicoitens = insertOrdemServicoItens(100001, TabelaEnum.ORDEMSERVICOITENS,
+				PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(100001);
 		OrdemServicoItens ordemservicoitensResponse = getSiteBAR().fetchOrdemServicoItensById(request);
@@ -565,15 +553,14 @@ public ISiteBAR getSiteBAR()
 	}
 
 	@Test
-	public void testFetchOrdemServicoItenssByRequest() throws Exception
-	{
+	public void testFetchOrdemServicoItenssByRequest() throws Exception {
 		// check for valid and precount
 		PagedInquiryRequest request = new PagedInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
 		InternalResultsResponse<OrdemServicoItens> response = getSiteBAR().fetchOrdemServicoItenssByRequest(request);
-		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		// Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 		// check for valid and precount and start 2nd page
@@ -581,7 +568,7 @@ public ISiteBAR getSiteBAR()
 		request.setStartPage(1);
 		request.setPageSize(3);
 		response = getSiteBAR().fetchOrdemServicoItenssByRequest(request);
-		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		// Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
@@ -603,12 +590,11 @@ public ISiteBAR getSiteBAR()
 
 	}
 
-//===================================### PLANO ####======================================
+	// ===================================### PLANO
+	// ####======================================
 
-
-@Test
-	public void testDeletePlano()
-	{
+	@Test
+	public void testDeletePlano() {
 		Plano plano = insertPlano(1005, TabelaEnum.PLANO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1005);
@@ -619,29 +605,27 @@ public ISiteBAR getSiteBAR()
 		Assert.assertEquals(plano.getId(), planoResponse.getId());
 		getSiteBAR().deletePlanoById(plano);
 		planoResponse = getSiteBAR().fetchPlanoById(request);
-		//Assert.assertEquals(planoResponse.getStatusList().get(planoResponse.getStatusList().size() -1).getStatus(), CdStatusTypeEnum.DELETADO);
+		// Assert.assertEquals(planoResponse.getStatusList().get(planoResponse.getStatusList().size()
+		// -1).getStatus(), CdStatusTypeEnum.DELETADO);
 	}
 
 	@Test
-	public void testFetchAllPlanos()
-	{
-	Plano plano = new Plano();
+	public void testFetchAllPlanos() {
+		Plano plano = new Plano();
 		List<Plano> response = getSiteBAR().fetchAllPlanos(plano).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
 	@Test
-	public void testDeleteAllPlanos()
-	{
+	public void testDeleteAllPlanos() {
 		getSiteBAR().deleteAllPlanos();
-	Plano plano = new Plano();
+		Plano plano = new Plano();
 		List<Plano> response = getSiteBAR().fetchAllPlanos(new Plano()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
-	public void testUpdatePlano()
-	{
+	public void testUpdatePlano() {
 		Plano plano = insertPlano(1, TabelaEnum.PLANO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
@@ -653,8 +637,7 @@ public ISiteBAR getSiteBAR()
 	}
 
 	@Test
-	public void testFetchPlanosByRequest() throws Exception
-	{
+	public void testFetchPlanosByRequest() throws Exception {
 		// check for valid and precount
 		PlanoInquiryRequest request = new PlanoInquiryRequest();
 		request.setPreQueryCount(true);
@@ -662,9 +645,9 @@ public ISiteBAR getSiteBAR()
 		request.setPageSize(3);
 		SiteCriteria criteria = new SiteCriteria();
 		criteria.setUrl("URL 2");
-	//	request.setCriteria(criteria);
+		// request.setCriteria(criteria);
 		InternalResultsResponse<Plano> response = getSiteBAR().fetchPlanosByRequest(request);
-		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		// Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 		// check for valid and precount and start 2nd page
@@ -672,7 +655,7 @@ public ISiteBAR getSiteBAR()
 		request.setStartPage(1);
 		request.setPageSize(3);
 		response = getSiteBAR().fetchPlanosByRequest(request);
-		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		// Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
@@ -694,9 +677,93 @@ public ISiteBAR getSiteBAR()
 
 	}
 
+	// ===================================### PLANOBYEMPRESA
+	// ####======================================
+
+	@Test
+	public void testDeletePlanoByEmpresa() {
+		PlanoByEmpresa planobyempresa = insertPlanoByEmpresa(400, TabelaEnum.PLANOBYEMPRESA,
+				PersistenceActionEnum.INSERT);
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(400);
+		PlanoByEmpresa planobyempresaResponse = getSiteBAR().fetchPlanoByEmpresaById(request);
+		Assert.assertEquals(planobyempresaResponse, null);
+		getSiteBAR().insertPlanoByEmpresa(planobyempresa);
+		planobyempresaResponse = getSiteBAR().fetchPlanoByEmpresaById(request);
+		Assert.assertEquals(planobyempresa.getId(), planobyempresaResponse.getId());
+		getSiteBAR().deletePlanoByEmpresaById(planobyempresa);
+		planobyempresaResponse = getSiteBAR().fetchPlanoByEmpresaById(request);
+		Assert.assertEquals(planobyempresaResponse, null);
+	}
+
+	@Test
+	public void testFetchAllPlanoByEmpresas() {
+		PlanoByEmpresa planobyempresa = new PlanoByEmpresa();
+		List<PlanoByEmpresa> response = getSiteBAR().fetchAllPlanoByEmpresas(planobyempresa).getResultsList();
+		Assert.assertNotNull(response);
+	}
+
+	@Test
+	public void testDeleteAllPlanoByEmpresas() {
+		getSiteBAR().deleteAllPlanoByEmpresas();
+		PlanoByEmpresa planobyempresa = new PlanoByEmpresa();
+		List<PlanoByEmpresa> response = getSiteBAR().fetchAllPlanoByEmpresas(new PlanoByEmpresa()).getResultsList();
+		Assert.assertEquals(response.size(), 0);
+	}
+
+	@Test
+	public void testUpdatePlanoByEmpresa() {
+		PlanoByEmpresa planobyempresa = insertPlanoByEmpresa(1000, TabelaEnum.PLANOBYEMPRESA,
+				PersistenceActionEnum.UPDATE);
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(1000);
+		PlanoByEmpresa planobyempresaResponse = getSiteBAR().fetchPlanoByEmpresaById(request);
+		Assert.assertEquals(planobyempresaResponse.getNumContrato().toString(), "1000");
+		getSiteBAR().updatePlanoByEmpresa(planobyempresa);
+		planobyempresaResponse = getSiteBAR().fetchPlanoByEmpresaById(request);
+		Assert.assertEquals(planobyempresaResponse.getNumContrato().toString(), "100");
+	}
+
+	@Test
+	public void testFetchPlanoByEmpresasByRequest() throws Exception {
+		// check for valid and precount
+		PagedInquiryRequest request = new PagedInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(3);
+		InternalResultsResponse<PlanoByEmpresa> response = getSiteBAR().fetchPlanoByEmpresasByRequest(request);
+		// Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+		// check for valid and precount and start 2nd page
+		request.setPreQueryCount(true);
+		request.setStartPage(1);
+		request.setPageSize(3);
+		response = getSiteBAR().fetchPlanoByEmpresasByRequest(request);
+		// Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+
+		// check for valid and no precount
+		PagedInquiryRequest request2 = new PagedInquiryRequest();
+		request2.setPreQueryCount(false);
+		InternalResultsResponse<PlanoByEmpresa> response2 = getSiteBAR().fetchPlanoByEmpresasByRequest(request2);
+		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+		// this is because we did not choose to precount
+		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+		// check for zero rows
+		getSiteBAR().deleteAllPlanoByEmpresas();
+		PagedInquiryRequest request3 = new PagedInquiryRequest();
+		request3.setPreQueryCount(true);
+		InternalResultsResponse<PlanoByEmpresa> response3 = getSiteBAR().fetchPlanoByEmpresasByRequest(request3);
+		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+
+	}
+
 	@Before
-	public void setup()
-	{
+	public void setup() {
 		executeSqlScript("conf/insertServico.sql", false);
 		executeSqlScript("conf/insertSite.sql", false);
 		executeSqlScript("conf/insertContato.sql", false);
@@ -704,13 +771,13 @@ public ISiteBAR getSiteBAR()
 		executeSqlScript("conf/insertOrdemServico.sql", false);
 		executeSqlScript("conf/insertOrdemServicoItens.sql", false);
 		executeSqlScript("conf/insertPlano.sql", false);
+		executeSqlScript("conf/insertPlanoByEmpresa.sql", false);
 	}
 
-	public Servico insertServico(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public Servico insertServico(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Servico servico = new Servico();
 		Date a = new Date();
-		if(id != null){
+		if (id != null) {
 			servico.setId(id);
 		}
 
@@ -730,8 +797,7 @@ public ISiteBAR getSiteBAR()
 		return servico;
 	}
 
-	public Preco insertPreco(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public Preco insertPreco(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Preco servico = new Preco();
 		Date a = new Date();
 
@@ -754,9 +820,8 @@ public ISiteBAR getSiteBAR()
 		return servico;
 	}
 
-public PlanoByServico insertServicoByPlano(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
-	PlanoByServico servicobyplano = new PlanoByServico();
+	public PlanoByServico insertServicoByPlano(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+		PlanoByServico servicobyplano = new PlanoByServico();
 		Date a = new Date();
 
 		servicobyplano.setServico(insertServico(id, tabela, action));
@@ -772,24 +837,22 @@ public PlanoByServico insertServicoByPlano(Integer id,TabelaEnum tabela,Persiste
 		return servicobyplano;
 	}
 
-
-public Site insertSite(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public Site insertSite(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Site site = new Site();
 		Date a = new Date();
-site.setId(id);
-site.setNome("NATIVE INSERT UPDATE");
-site.setUrl("url");
-site.setQuemSomos("quemSomos");
-site.setMissao("missao");
-site.setVisao("visao");
-site.setTitulo("titulo");
-site.setLogo("logo");
-site.setAtorization(Boolean.TRUE);
-site.setSiteTypeEnumValue(1);
-site.setEmpresa(new Empresa());
-site.setServicoList(new ArrayList<Servico>());
-site.setPlanoList(new ArrayList<Plano>());
+		site.setId(id);
+		site.setNome("NATIVE INSERT UPDATE");
+		site.setUrl("url");
+		site.setQuemSomos("quemSomos");
+		site.setMissao("missao");
+		site.setVisao("visao");
+		site.setTitulo("titulo");
+		site.setLogo("logo");
+		site.setAtorization(Boolean.TRUE);
+		site.setSiteTypeEnumValue(1);
+		site.setEmpresa(new Empresa());
+		site.setServicoList(new ArrayList<Servico>());
+		site.setPlanoList(new ArrayList<Plano>());
 		site.setParentId(id);
 		site.setEmprId(1);
 		site.setModifyDateUTC(a.getTime());
@@ -802,17 +865,15 @@ site.setPlanoList(new ArrayList<Plano>());
 		return site;
 	}
 
-
-public Contato insertContato(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public Contato insertContato(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Contato contato = new Contato();
 		Date a = new Date();
-contato.setId(id);
-contato.setParentId(id);
-contato.setDataContato(a.getTime());
-contato.setNome("NATIVE INSERT UPDATE");
-contato.setMotivoValue(100);
-contato.setContatoItensList(new ArrayList<ContatoItens>());
+		contato.setId(id);
+		contato.setParentId(id);
+		contato.setDataContato(a.getTime());
+		contato.setNome("NATIVE INSERT UPDATE");
+		contato.setMotivoValue(100);
+		contato.setContatoItensList(new ArrayList<ContatoItens>());
 		contato.setParentId(id);
 		contato.setEmprId(1);
 		contato.setModifyDateUTC(a.getTime());
@@ -825,15 +886,13 @@ contato.setContatoItensList(new ArrayList<ContatoItens>());
 		return contato;
 	}
 
-
-public ContatoItens insertContatoItens(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public ContatoItens insertContatoItens(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		ContatoItens contatoitens = new ContatoItens();
 		Date a = new Date();
-contatoitens.setId(id);
-contatoitens.setDataAlt(a.getTime());
-contatoitens.setTexto("NATIVE INSERT UPDATE");
-contatoitens.setTitulo("NATIVE INSERT UPDATE");
+		contatoitens.setId(id);
+		contatoitens.setDataAlt(a.getTime());
+		contatoitens.setTexto("NATIVE INSERT UPDATE");
+		contatoitens.setTitulo("NATIVE INSERT UPDATE");
 		contatoitens.setParentId(id);
 		contatoitens.setEmprId(1);
 		contatoitens.setModifyDateUTC(a.getTime());
@@ -846,19 +905,17 @@ contatoitens.setTitulo("NATIVE INSERT UPDATE");
 		return contatoitens;
 	}
 
-
-public OrdemServico insertOrdemServico(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public OrdemServico insertOrdemServico(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		OrdemServico ordemservico = new OrdemServico();
 		Date a = new Date();
-ordemservico.setId(id);
-ordemservico.setEmprId(4);
-ordemservico.setUserId("100");
-ordemservico.setNome("NATIVE INSERT UPDATE");
-ordemservico.setData(a.getTime());
-ordemservico.setAssunto("assunto");
-ordemservico.setStatusValue(100);
-ordemservico.setOrdemServicoItensList(new ArrayList<OrdemServicoItens>());
+		ordemservico.setId(id);
+		ordemservico.setEmprId(4);
+		ordemservico.setUserId("100");
+		ordemservico.setNome("NATIVE INSERT UPDATE");
+		ordemservico.setData(a.getTime());
+		ordemservico.setAssunto("assunto");
+		ordemservico.setStatusValue(100);
+		ordemservico.setOrdemServicoItensList(new ArrayList<OrdemServicoItens>());
 		ordemservico.setParentId(id);
 		ordemservico.setEmprId(1);
 		ordemservico.setModifyDateUTC(a.getTime());
@@ -871,14 +928,12 @@ ordemservico.setOrdemServicoItensList(new ArrayList<OrdemServicoItens>());
 		return ordemservico;
 	}
 
-
-public OrdemServicoItens insertOrdemServicoItens(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public OrdemServicoItens insertOrdemServicoItens(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		OrdemServicoItens ordemservicoitens = new OrdemServicoItens();
 		Date a = new Date();
-ordemservicoitens.setId(id);
-ordemservicoitens.setData(a.getTime());
-ordemservicoitens.setTexto("NATIVE INSERT UPDATE");
+		ordemservicoitens.setId(id);
+		ordemservicoitens.setData(a.getTime());
+		ordemservicoitens.setTexto("NATIVE INSERT UPDATE");
 		ordemservicoitens.setParentId(id);
 		ordemservicoitens.setEmprId(1);
 		ordemservicoitens.setModifyDateUTC(a.getTime());
@@ -891,21 +946,19 @@ ordemservicoitens.setTexto("NATIVE INSERT UPDATE");
 		return ordemservicoitens;
 	}
 
-
-public Plano insertPlano(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
+	public Plano insertPlano(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Plano plano = new Plano();
 		Date a = new Date();
-plano.setId(id);
-plano.setDataInicio(a.getTime());
-plano.setDataFinal(a.getTime());
-plano.setNumeroContrato(100);
-plano.setDescricao("descricao");
-plano.setTitulo("NATIVE INSERT UPDATE");
-plano.setPrecoList(new ArrayList<Preco>());
-plano.getPrecoList().add(insertPreco(id, TabelaEnum.PLANO, action));
-plano.setServicoList(new ArrayList<PlanoByServico>());
-plano.getServicoList().add(insertServicoByPlano(id, TabelaEnum.PLANO, action));
+		plano.setId(id);
+		plano.setDataInicio(a.getTime());
+		plano.setDataFinal(a.getTime());
+		plano.setNumeroContrato(100);
+		plano.setDescricao("descricao");
+		plano.setTitulo("NATIVE INSERT UPDATE");
+		plano.setPrecoList(new ArrayList<Preco>());
+		plano.getPrecoList().add(insertPreco(id, TabelaEnum.PLANO, action));
+		plano.setServicoList(new ArrayList<PlanoByServico>());
+		plano.getServicoList().add(insertServicoByPlano(id, TabelaEnum.PLANO, action));
 		plano.setParentId(id);
 		plano.setEmprId(1);
 		plano.setModifyDateUTC(a.getTime());
@@ -918,5 +971,25 @@ plano.getServicoList().add(insertServicoByPlano(id, TabelaEnum.PLANO, action));
 		return plano;
 	}
 
+	public PlanoByEmpresa insertPlanoByEmpresa(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+		PlanoByEmpresa planobyempresa = new PlanoByEmpresa();
+		Date a = new Date();
+		planobyempresa.setId(id);
+		planobyempresa.setNumContrato(100);
+		planobyempresa.setDataInicio(a.getTime());
+		planobyempresa.setDataFim(a.getTime());
+		planobyempresa.setValor(new Double(10.00));
+		planobyempresa.setPlanoId(insertPlano(id, tabela, action));
+		planobyempresa.setParentId(id);
+		planobyempresa.setEmprId(1);
+		planobyempresa.setModifyDateUTC(a.getTime());
+		planobyempresa.setCreateDateUTC(a.getTime());
+		planobyempresa.setCreateUser("system");
+		planobyempresa.setModifyUser("system");
+		planobyempresa.setProcessId(1);
+		planobyempresa.setModelAction(action);
+
+		return planobyempresa;
+	}
 
 }

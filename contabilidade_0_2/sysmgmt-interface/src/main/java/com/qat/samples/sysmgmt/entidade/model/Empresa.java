@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
-import com.qat.samples.sysmgmt.pessoa.model.Socio;
+import com.qat.samples.sysmgmt.site.model.PlanoByEmpresa;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -16,6 +16,8 @@ public class Empresa extends Entidade
 {
 
 	private List<Plano> planoList;
+	
+	private List<PlanoByEmpresa> planoByEmpresaList;
 
 	private Integer qntFilial;
 
@@ -192,6 +194,14 @@ public class Empresa extends Entidade
 		this.contabilidadeId = contabilidadeId;
 	}
 
+	public List<PlanoByEmpresa> getPlanoByEmpresaList() {
+		return planoByEmpresaList;
+	}
+
+	public void setPlanoByEmpresaList(List<PlanoByEmpresa> planoByEmpresaList) {
+		this.planoByEmpresaList = planoByEmpresaList;
+	}
+
 	@Override
 	public String toString() {
 		return "Empresa [getPermissaoTypeEnumValue()=" + getPermissaoTypeEnumValue() + ", getPermissaoTypeEnum()="
@@ -199,7 +209,8 @@ public class Empresa extends Entidade
 				+ ", getQntDeposito()=" + getQntDeposito() + ", getFilialList()=" + getFilialList()
 				+ ", getDepositoList()=" + getDepositoList() + ", getContaCorrenteList()=" + getContaCorrenteList()
 				+ ", getTarefaList()=" + getTarefaList() + ", getParceiroId()=" + getParceiroId()
-				+ ", getContabilidadeId()=" + getContabilidadeId() + ", toString()=" + super.toString() + "]";
+				+ ", getContabilidadeId()=" + getContabilidadeId() + ", getPlanoByEmpresaList()="
+				+ getPlanoByEmpresaList() + ", toString()=" + super.toString() + "]";
 	}
 
 }

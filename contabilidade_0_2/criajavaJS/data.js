@@ -167,6 +167,83 @@ function CarneModel() {
     return a;
 }
 
+//carne
+function PlanoByEmpresaModel() {
+
+    a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "numContrato",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "dataInicio",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "dataFim",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valor",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "planoId",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    return a;
+}
+
 //entrada
 function EntradaModel() {
 
@@ -9098,6 +9175,9 @@ dataModel = function() {
             classe: "Plano",
             model: PlanoModel()
         }, {
+            classe: "PlanoByEmpresa",
+            model: PlanoByEmpresaModel()
+        },{
             classe: "ServicoAndPlano",
             model: ServicoAndPlanoModel()
         }],

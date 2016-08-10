@@ -35,6 +35,7 @@ import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryReq
 import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
+import com.qat.samples.sysmgmt.site.model.PlanoByEmpresa;
 import com.qat.samples.sysmgmt.site.model.ServicoAndPlano;
 import com.qat.samples.sysmgmt.site.model.Site;
 import com.qat.samples.sysmgmt.site.model.request.SiteInquiryRequest;
@@ -296,6 +297,34 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 	// ===================================### SERVICO
 	// ####======================================
+	
+	///===================================### PLANOBYEMPRESA ####======================================
+	/** The Constant NAMESPACE. */
+	private static final String NAMESPACE_PLANOBYEMPRESA = "PlanoByEmpresaMap.";
+
+	/** The Constant STMT_INSERT_PLANOBYEMPRESA. */
+	private static final String STMT_INSERT_PLANOBYEMPRESA = NAMESPACE_PLANOBYEMPRESA + "insertPlanoByEmpresa";
+
+	/** The Constant STMT_UPDATE_PLANOBYEMPRESA. */
+	private static final String STMT_UPDATE_PLANOBYEMPRESA = NAMESPACE_PLANOBYEMPRESA + "updatePlanoByEmpresa";
+
+	/** The Constant STMT_DELETE_PLANOBYEMPRESA. */
+	private static final String STMT_DELETE_PLANOBYEMPRESA = NAMESPACE_PLANOBYEMPRESA + "deletePlanoByEmpresaById";
+
+		/** The Constant STMT_DELETE_PLANOBYEMPRESA_ALL. */
+		private static final String STMT_DELETE_PLANOBYEMPRESA_ALL = NAMESPACE_PLANOBYEMPRESA + "deleteAllPlanoByEmpresas";
+
+		/** The Constant STMT_FETCH_PLANOBYEMPRESA. */
+		private static final String STMT_FETCH_PLANOBYEMPRESA = NAMESPACE_PLANOBYEMPRESA + "fetchPlanoByEmpresaById";
+
+		/** The Constant STMT_FETCH_PLANOBYEMPRESA_ALL. */
+		private static final String STMT_FETCH_PLANOBYEMPRESA_ALL = NAMESPACE_PLANOBYEMPRESA + "fetchAllPlanoByEmpresas";
+
+		/** The Constant STMT_FETCH_PLANOBYEMPRESA_COUNT. */
+		private static final String STMT_FETCH_PLANOBYEMPRESA_COUNT = NAMESPACE_PLANOBYEMPRESA + "fetchPlanoByEmpresaRowCount";
+
+		/** The Constant STMT_FETCH_PLANOBYEMPRESA_ALL_REQUEST. */
+		private static final String STMT_FETCH_PLANOBYEMPRESA_ALL_REQUEST = NAMESPACE_PLANOBYEMPRESA + "fetchAllPlanoByEmpresasRequest";
 	IStatusBAR statusBAR;
 
 	IHistoricoBAR historicoBAR;
@@ -1814,5 +1843,131 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 			}
 
 		}
+	//===================================### PLANOBYEMPRESA ####======================================
+		/**
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.base.bar.IPlanoByEmpresaBAR#insertPlanoByEmpresa(com.qat.samples.sysmgmt.base.model.PlanoByEmpresa)
+	 */
+	@Override
+	public InternalResponse insertPlanoByEmpresa(PlanoByEmpresa planobyempresa)
+	{
+		InternalResponse response = new InternalResponse();
+		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PLANOBYEMPRESA, planobyempresa, response);
+		return response;
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.base.bar.IPlanoByEmpresaBAR#updatePlanoByEmpresa(com.qat.samples.sysmgmt.base.model.PlanoByEmpresa)
+	 */
+	@Override
+	public InternalResponse updatePlanoByEmpresa(PlanoByEmpresa planobyempresa)
+	{
+		InternalResponse response = new InternalResponse();
+		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PLANOBYEMPRESA, planobyempresa, response);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.base.bar.IPlanoByEmpresaBAR#deletePlanoByEmpresa(com.qat.samples.sysmgmt.base.model.PlanoByEmpresa)
+	 */
+	@Override
+	public InternalResponse deletePlanoByEmpresaById(PlanoByEmpresa planobyempresa)
+	{
+		InternalResponse response = new InternalResponse();
+		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PLANOBYEMPRESA, planobyempresa, response);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.base.bar.IPlanoByEmpresaBAR#deleteAllPlanoByEmpresas()
+	 */
+	@Override
+	public InternalResponse deleteAllPlanoByEmpresas()
+	{
+		InternalResponse response = new InternalResponse();
+		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PLANOBYEMPRESA_ALL, response);
+		return response;
+	}
+
+
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.base.bar.IPlanoByEmpresaBAR#fetchAllPlanoByEmpresasCache()
+	 */
+	@Override
+	public InternalResultsResponse<PlanoByEmpresa> fetchAllPlanoByEmpresas(PlanoByEmpresa planobyempresa)
+	{
+		InternalResultsResponse<PlanoByEmpresa> response = new InternalResultsResponse<PlanoByEmpresa>();
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_PLANOBYEMPRESA_ALL));
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.bar.IPlanoByEmpresaBAR#fetchPlanoByEmpresasByRequest(com.qat.samples.sysmgmt.model.request.
+	 * PagedInquiryRequest)
+	 */
+	@Override
+	public InternalResultsResponse<PlanoByEmpresa> fetchPlanoByEmpresasByRequest(PagedInquiryRequest request)
+	{
+		InternalResultsResponse<PlanoByEmpresa> response = new InternalResultsResponse<PlanoByEmpresa>();
+		fetchPlanoByEmpresasByRequest(getSqlSession(), request, STMT_FETCH_PLANOBYEMPRESA_COUNT, STMT_FETCH_PLANOBYEMPRESA_ALL_REQUEST,
+				response);
+		return response;
+	}
+
+	//===================================### fetchPlanoByEmpresasByRequest ####======================================
+
+	public static void fetchPlanoByEmpresasByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
+				String fetchPagedStatement,
+				InternalResultsResponse<?> response)
+		{
+
+			// If the user requested the total rows/record count
+			if (request.isPreQueryCount())
+			{
+				// set the total rows available in the response
+				response.getResultsSetInfo().setTotalRowsAvailable(
+						(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+				if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
+				{
+					response.setStatus(BusinessErrorCategory.NoRowsFound);
+					return;
+				}
+			}
+
+			// Fetch Objects by InquiryRequest Object, paged of course
+			response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+			// move request start page to response start page
+			response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+			// move request page size to response page size
+			response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+			// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
+			// 1.
+			int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+			// set moreRowsAvailable in response based on total rows compared to (page size * start page)
+			// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
+			// is that you your own logic to handle this.
+			if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
+			{
+				response.getResultsSetInfo().setMoreRowsAvailable(true);
+			}
+
+		}
+
+	@Override
+	public PlanoByEmpresa fetchPlanoByEmpresaById(FetchByIdRequest request) {
+		return (PlanoByEmpresa) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_PLANOBYEMPRESA,
+				request.getFetchId());
+	}
 }
