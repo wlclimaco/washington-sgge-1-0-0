@@ -595,9 +595,9 @@ public class SiteBARTest extends AbstractTransactionalJUnit4SpringContextTests {
 
 	@Test
 	public void testDeletePlano() {
-		Plano plano = insertPlano(1005, TabelaEnum.PLANO, PersistenceActionEnum.INSERT);
+		Plano plano = insertPlano(1015, TabelaEnum.PLANO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1005);
+		request.setFetchId(1015);
 		Plano planoResponse = getSiteBAR().fetchPlanoById(request);
 		Assert.assertEquals(planoResponse, null);
 		getSiteBAR().insertPlano(plano);

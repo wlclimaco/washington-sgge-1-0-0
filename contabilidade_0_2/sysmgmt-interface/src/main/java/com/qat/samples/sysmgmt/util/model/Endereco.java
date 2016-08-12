@@ -275,6 +275,14 @@ public class Endereco extends ModelCosmeDamiao
 		this.codIbge = codIbge;
 	}
 
+	public String getPais() {
+		return pais;
+	}
+
+	public void setPais(String pais) {
+		this.pais = pais;
+	}
+
 	@Override
 	public String toString() {
 		return "Endereco [getEnderecoTypeValue()=" + getEnderecoTypeValue() + ", getId()=" + getId()
@@ -282,7 +290,7 @@ public class Endereco extends ModelCosmeDamiao
 				+ getEstado() + ", getBairro()=" + getBairro() + ", getNumero()=" + getNumero() + ", getCep()="
 				+ getCep() + ", getComplemento()=" + getComplemento() + ", getEnderecoType()=" + getEnderecoType()
 				+ ", getLatitude()=" + getLatitude() + ", getLongitude()=" + getLongitude() + ", getCodIbge()="
-				+ getCodIbge() + ", toString()=" + super.toString() + "]";
+				+ getCodIbge() + ", getPais()=" + getPais() + ", toString()=" + super.toString() + "]";
 	}
 
 }

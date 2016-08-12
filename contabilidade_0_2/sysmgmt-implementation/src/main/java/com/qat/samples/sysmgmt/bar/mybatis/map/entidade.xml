@@ -23,6 +23,9 @@
     <result property="entidadeId" column="entidadeId"/>
     <result property="emprId" column="emprId"/>
     <result property="entidadeEnumValue" column="entidadeEnumValue"/>
+    <result property="statusEmpresa" column="statusEmpresa"/>
+    <result property="dtAbertura" column="dtAbertura"/>
+    <result property="responsavel" column="responsavel"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -45,6 +48,9 @@ nome
 ,entidadeId
 ,emprId
 ,entidadeEnumValue
+,statusEmpresa
+,dtAbertura
+,responsavel
 ,regime
 ,create_date
 ,create_user
@@ -60,6 +66,9 @@ nome
 #{entidadeId},
 #{emprId},
 #{entidadeEnumValue},
+#{statusEmpresa},
+#{dtAbertura},
+#{responsavel},
 #{regime.id},
 		#{createDateUTC},
 		#{createUser},
@@ -96,6 +105,9 @@ c.regime,
 <if test="processId!= null">processId = #{processId},</if>
 <if test="entidadeId!= null">entidadeId = #{entidadeId},</if>
 <if test="emprId!= null">emprId = #{emprId},</if>
+<if test="statusEmpresa!= null">statusEmpresa = #{statusEmpresa},</if>
+<if test="dtAbertura!= null">dtAbertura = #{dtAbertura},</if>
+<if test="responsavel!= null">responsavel = #{responsavel},</if>
 <if test="regime != null">regime = #{regime.id},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>

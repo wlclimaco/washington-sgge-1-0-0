@@ -22,6 +22,8 @@ public class Entidade extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
+	
+	private Integer statusEmpresa;
 
 	private Integer numFunc;
 
@@ -31,6 +33,8 @@ public class Entidade extends ModelCosmeDamiao
 	private String razao;
 
 	private Regime regime;
+	
+	private Long dtAbertura;
 
 	private Integer entidadeId;
 
@@ -58,6 +62,7 @@ public class Entidade extends ModelCosmeDamiao
 
 	private List<Socio> socios;
 
+	private String responsavel;
 	private List<NotificationPreferences> notificacoes;
 
 	public List<Usuario> getUsuarios()
@@ -332,6 +337,30 @@ public class Entidade extends ModelCosmeDamiao
 		this.razao = razao;
 	}
 
+	public Integer getStatusEmpresa() {
+		return statusEmpresa;
+	}
+
+	public void setStatusEmpresa(Integer statusEmpresa) {
+		this.statusEmpresa = statusEmpresa;
+	}
+
+	public Long getDtAbertura() {
+		return dtAbertura;
+	}
+
+	public void setDtAbertura(Long dtAbertura) {
+		this.dtAbertura = dtAbertura;
+	}
+
+	public String getResponsavel() {
+		return responsavel;
+	}
+
+	public void setResponsavel(String responsavel) {
+		this.responsavel = responsavel;
+	}
+
 	@Override
 	public String toString() {
 		return "Entidade [getUsuarios()=" + getUsuarios() + ", getBancos()=" + getBancos() + ", getEntidadeEnumValue()="
@@ -342,7 +371,8 @@ public class Entidade extends ModelCosmeDamiao
 				+ ", getEntidadeId()=" + getEntidadeId() + ", getNotificacoes()=" + getNotificacoes()
 				+ ", getNumFunc()=" + getNumFunc() + ", getPlanosServicos()=" + getPlanosServicos() + ", getSocios()="
 				+ getSocios() + ", getConfiguracaoNFe()=" + getConfiguracaoNFe() + ", getRazao()=" + getRazao()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", getStatusEmpresa()=" + getStatusEmpresa() + ", getDtAbertura()=" + getDtAbertura()
+				+ ", getResponsavel()=" + getResponsavel() + ", toString()=" + super.toString() + "]";
 	}
 
 
