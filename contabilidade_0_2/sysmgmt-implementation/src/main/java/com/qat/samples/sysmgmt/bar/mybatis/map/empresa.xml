@@ -41,18 +41,23 @@
 	-->
   <sql id="allEmpresaColumns">
 			e.nome
+
+,e.razao
 ,e.processId
 ,e.entidadeId
 ,e.emprId
 ,e.entidadeEnumValue
+,e.statusEmpresa
+,e.dtAbertura
+,e.responsavel
 ,e.regime
 ,e.create_date
 ,e.create_user
 ,e.modify_date
 ,e.modify_user
-			,parceiroId
-	,contabilidadeId
-	,permissaoTypeEnumValue
+,e.parceiroId
+,e.contabilidadeId
+,e.permissaoTypeEnumValue
   </sql>
 
   <sql id="allEmpresaValues">
@@ -115,8 +120,25 @@
   </delete>
 
    <insert id="insertEmpresa" parameterType="Empresa" useGeneratedKeys="true" keyProperty="id">
-     INSERT INTO entidade e (
- <if test="id != null"><if test="id > 0">e.id,</if></if><include refid="allEmpresaColumns" />
+     INSERT INTO entidade  (
+ <if test="id != null"><if test="id > 0">id,</if></if>
+nome
+,razao
+,processId
+,entidadeId
+,emprId
+,entidadeEnumValue
+,statusEmpresa
+,dtAbertura
+,responsavel
+,regime
+,create_date
+,create_user
+,modify_date
+,modify_user
+,parceiroId
+,contabilidadeId
+,permissaoTypeEnumValue
      )
    VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allEmpresaValues" /> )
  </insert>
