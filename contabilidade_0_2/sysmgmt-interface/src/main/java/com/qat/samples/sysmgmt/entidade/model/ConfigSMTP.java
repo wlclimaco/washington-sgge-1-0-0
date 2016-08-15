@@ -18,6 +18,7 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 public class ConfigSMTP extends ModelCosmeDamiao
 {
 	private Integer id;
+	private Integer ativSMTP;
 	private String servSMTP;
 	private String porta;
 	private String endEmail;

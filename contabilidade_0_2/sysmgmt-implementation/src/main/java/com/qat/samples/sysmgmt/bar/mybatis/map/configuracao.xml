@@ -22,6 +22,7 @@
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
+<result property="confCabecalho" column="confCabecalho"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
@@ -38,6 +39,7 @@
   </resultMap>
 
   <sql id="allConfiguracaoColumns">
+  confCabecalho,
 confGeral
 ,confFiscal
 ,confProd
@@ -57,6 +59,7 @@ confGeral
 
 </sql>
 <sql id="allConfiguracaoValues">
+#{confCabecalho},
 #{confGeral.id},
 #{confFiscal.id},
 #{confProd.id},
@@ -121,6 +124,7 @@ confGeral
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>
 <if test="processId!= null"> processId=#{processId},</if>
+<if test="confCabecalho!= null"> confCabecalho=#{confCabecalho},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

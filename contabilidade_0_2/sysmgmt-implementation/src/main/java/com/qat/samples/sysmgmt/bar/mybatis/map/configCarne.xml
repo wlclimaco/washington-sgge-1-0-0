@@ -19,6 +19,11 @@
     <result property="id" column="id"/>
     <result property="carneBotelo" column="carneBotelo"/>
     <result property="carneNormal" column="carneNormal"/>
+<result property="localPag" column="localPag"/>
+<result property="instr1" column="instr1"/>
+<result property="instr2" column="instr2"/>
+<result property="instr3" column="instr3"/>
+<result property="instr4" column="instr4"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -32,6 +37,11 @@
   <sql id="allConfigCarneColumns">
 carneBotelo
 ,carneNormal
+,localPag
+,instr1
+,instr2
+,instr3
+,instr4
 ,parentId
 ,tabelaEnumValue
 ,emprId
@@ -45,6 +55,11 @@ carneBotelo
 <sql id="allConfigCarneValues">
 #{carneBotelo},
 #{carneNormal},
+#{localPag},
+#{instr1},
+#{instr2},
+#{instr3},
+#{instr4},
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -92,6 +107,11 @@ carneBotelo
    UPDATE configcarne SET
 <if test="carneBotelo!= null">carneBotelo = #{carneBotelo},</if>
 <if test="carneNormal!= null">carneNormal = #{carneNormal},</if>
+<if test="localPag!= null">localPag = #{localPag},</if>
+<if test="instr1!= null">instr1 = #{instr1},</if>
+<if test="instr2!= null">instr2 = #{instr2},</if>
+<if test="instr3!= null">instr3 = #{instr3},</if>
+<if test="instr4!= null">instr4 = #{instr4},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>

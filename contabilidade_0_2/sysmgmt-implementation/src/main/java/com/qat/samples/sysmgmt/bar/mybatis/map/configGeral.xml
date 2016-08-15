@@ -25,6 +25,7 @@
     <result property="impCodPersonalizado" column="impCodPersonalizado"/>
     <result property="logListRelImp" column="logListRelImp"/>
     <result property="obsProdFinProd" column="obsProdFinProd"/>
+    <result property="ativNFCe" column="ativNFCe"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -44,6 +45,7 @@ fusoHorario
 ,impCodPersonalizado
 ,logListRelImp
 ,obsProdFinProd
+,ativNFCe
 ,parentId
 ,tabelaEnumValue
 ,emprId
@@ -63,6 +65,7 @@ fusoHorario
 #{impCodPersonalizado},
 #{logListRelImp},
 #{obsProdFinProd},
+ #{ativNFCe},
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -116,6 +119,7 @@ fusoHorario
 <if test="impCodPersonalizado!= null">impCodPersonalizado = #{impCodPersonalizado},</if>
 <if test="logListRelImp!= null">logListRelImp = #{logListRelImp},</if>
 <if test="obsProdFinProd!= null">obsProdFinProd = #{obsProdFinProd},</if>
+<if test="ativNFCe!= null">ativNFCe = #{ativNFCe},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>

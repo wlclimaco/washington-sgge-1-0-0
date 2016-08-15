@@ -1,11 +1,7 @@
 package com.qat.samples.sysmgmt.entidade.model;
 
-import java.util.Date;
 import java.util.List;
 
-import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
-import com.qat.samples.sysmgmt.contabilidade.model.Plano;
-import com.qat.samples.sysmgmt.pessoa.model.Socio;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -17,14 +13,18 @@ public class Configuracao extends ModelCosmeDamiao
 {
 	private Integer id;
 
+	private String confCabecalho;
 	private ConfigGeral confGeral;
 	private ConfigFiscal confFiscal;
 	private ConfigProduto confProd;
 	private ConfigVendas confVendas;
-	private ConfigSMTP confCMTP;
+	private ConfigSMTP confSMTP;
+	private ConfigOS configOS;
 	private ConfigEntrada confEntrada;
 	private ConfigCarne confCarne;
 	private ConfiguracaoNFe confNFe;
+	private ConfigAlertas confAlertas;
+	private ConfigBlueSoft confBlueSoft;
 	private List<Boleto> boletoList;
 
 
@@ -91,11 +91,11 @@ public class Configuracao extends ModelCosmeDamiao
 	}
 
 	public ConfigSMTP getConfCMTP() {
-		return confCMTP;
+		return confSMTP;
 	}
 
 	public void setConfCMTP(ConfigSMTP confCMTP) {
-		this.confCMTP = confCMTP;
+		this.confSMTP = confCMTP;
 	}
 
 	public ConfigEntrada getConfEntrada() {
@@ -122,12 +122,46 @@ public class Configuracao extends ModelCosmeDamiao
 		this.confNFe = confNFe;
 	}
 
+	public String getConfCabecalho() {
+		return confCabecalho;
+	}
+
+	public void setConfCabecalho(String confCabecalho) {
+		this.confCabecalho = confCabecalho;
+	}
+
+	public ConfigOS getConfigOS() {
+		return configOS;
+	}
+
+	public void setConfigOS(ConfigOS configOS) {
+		this.configOS = configOS;
+	}
+
+	public ConfigAlertas getConfAlertas() {
+		return confAlertas;
+	}
+
+	public void setConfAlertas(ConfigAlertas confAlertas) {
+		this.confAlertas = confAlertas;
+	}
+
+	public ConfigBlueSoft getConfBlueSoft() {
+		return confBlueSoft;
+	}
+
+	public void setConfBlueSoft(ConfigBlueSoft confBlueSoft) {
+		this.confBlueSoft = confBlueSoft;
+	}
+
 	@Override
 	public String toString() {
 		return "Configuracao [getId()=" + getId() + ", getBoletoList()=" + getBoletoList() + ", getConfGeral()="
 				+ getConfGeral() + ", getConfFiscal()=" + getConfFiscal() + ", getConfProd()=" + getConfProd()
 				+ ", getConfVendas()=" + getConfVendas() + ", getConfCMTP()=" + getConfCMTP() + ", getConfEntrada()="
 				+ getConfEntrada() + ", getConfCarne()=" + getConfCarne() + ", getConfNFe()=" + getConfNFe()
+				+ ", getConfCabecalho()=" + getConfCabecalho() + ", getConfigOS()=" + getConfigOS()
+				+ ", getConfAlertas()=" + getConfAlertas() + ", getConfBlueSoft()=" + getConfBlueSoft()
 				+ ", toString()=" + super.toString() + "]";
 	}
 

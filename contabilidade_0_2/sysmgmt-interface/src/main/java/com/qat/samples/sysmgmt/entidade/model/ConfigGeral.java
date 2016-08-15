@@ -22,6 +22,7 @@ public class ConfigGeral extends ModelCosmeDamiao
 	private Integer diasCartaCobr;
 	private Integer infPosicionarMouse;
 	private Integer cnpjCPFUnico;
+	private Integer ativNFCe;
 	private Integer impCodPersonalizado;
 	private Integer logListRelImp;
 	private Integer obsProdFinProd;
@@ -112,13 +113,21 @@ public class ConfigGeral extends ModelCosmeDamiao
 		this.obsProdFinProd = obsProdFinProd;
 	}
 
+	public Integer getAtivNFCe() {
+		return ativNFCe;
+	}
+
+	public void setAtivNFCe(Integer ativNFCe) {
+		this.ativNFCe = ativNFCe;
+	}
+
 	@Override
 	public String toString() {
 		return "ConfigGeral [getId()=" + getId() + ", getFusoHorario()=" + getFusoHorario() + ", getCasasDecimais()="
 				+ getCasasDecimais() + ", getDiasCartaCobr()=" + getDiasCartaCobr() + ", getInfPosicionarMouse()="
 				+ getInfPosicionarMouse() + ", getCnpjCPFUnico()=" + getCnpjCPFUnico() + ", getImpCodPersonalizado()="
 				+ getImpCodPersonalizado() + ", getLogListRelImp()=" + getLogListRelImp() + ", getObsProdFinProd()="
-				+ getObsProdFinProd() + ", toString()=" + super.toString() + "]";
+				+ getObsProdFinProd() + ", getAtivNFCe()=" + getAtivNFCe() + ", toString()=" + super.toString() + "]";
 	}
 
 }

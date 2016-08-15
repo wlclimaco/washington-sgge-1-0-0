@@ -1,13 +1,7 @@
 package com.qat.samples.sysmgmt.entidade.model;
 
-import java.util.Date;
-import java.util.List;
-
-import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
-import com.qat.samples.sysmgmt.contabilidade.model.Plano;
+import com.qat.samples.sysmgmt.cnae.model.Cnae;
 import com.qat.samples.sysmgmt.fiscal.model.Regime;
-import com.qat.samples.sysmgmt.pessoa.model.Socio;
-import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -18,9 +12,14 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 public class ConfigFiscal extends ModelCosmeDamiao
 {
 	private Integer id;
-	private DoisValores princAtividade;
+	private Cnae princAtividade;
 	private Regime regime;
 	private Double aliqSimples;
+	private Double aliqICMS;
+	private Double aliqPIS;
+	private Double aliqCONFINS;
+	private Double aliqIRPJ;
+	private Double aliqCLSS;
 
 
 	public ConfigFiscal()
@@ -45,12 +44,54 @@ public class ConfigFiscal extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	public DoisValores getPrincAtividade() {
+	
+
+	public Cnae getPrincAtividade() {
 		return princAtividade;
 	}
 
-	public void setPrincAtividade(DoisValores princAtividade) {
+	public void setPrincAtividade(Cnae princAtividade) {
 		this.princAtividade = princAtividade;
+	}
+
+	public Double getAliqICMS() {
+		return aliqICMS;
+	}
+
+	public void setAliqICMS(Double aliqICMS) {
+		this.aliqICMS = aliqICMS;
+	}
+
+	public Double getAliqPIS() {
+		return aliqPIS;
+	}
+
+	public void setAliqPIS(Double aliqPIS) {
+		this.aliqPIS = aliqPIS;
+	}
+
+	public Double getAliqCONFINS() {
+		return aliqCONFINS;
+	}
+
+	public void setAliqCONFINS(Double aliqCONFINS) {
+		this.aliqCONFINS = aliqCONFINS;
+	}
+
+	public Double getAliqIRPJ() {
+		return aliqIRPJ;
+	}
+
+	public void setAliqIRPJ(Double aliqIRPJ) {
+		this.aliqIRPJ = aliqIRPJ;
+	}
+
+	public Double getAliqCLSS() {
+		return aliqCLSS;
+	}
+
+	public void setAliqCLSS(Double aliqCLSS) {
+		this.aliqCLSS = aliqCLSS;
 	}
 
 	public Regime getRegime() {
@@ -71,7 +112,9 @@ public class ConfigFiscal extends ModelCosmeDamiao
 
 	@Override
 	public String toString() {
-		return "ConfigFiscal [getId()=" + getId() + ", getPrincAtividade()=" + getPrincAtividade() + ", getRegime()="
+		return "ConfigFiscal [getId()=" + getId() + ", getPrincAtividade()=" + getPrincAtividade() + ", getAliqICMS()="
+				+ getAliqICMS() + ", getAliqPIS()=" + getAliqPIS() + ", getAliqCONFINS()=" + getAliqCONFINS()
+				+ ", getAliqIRPJ()=" + getAliqIRPJ() + ", getAliqCLSS()=" + getAliqCLSS() + ", getRegime()="
 				+ getRegime() + ", getAliqSimples()=" + getAliqSimples() + ", toString()=" + super.toString() + "]";
 	}
 

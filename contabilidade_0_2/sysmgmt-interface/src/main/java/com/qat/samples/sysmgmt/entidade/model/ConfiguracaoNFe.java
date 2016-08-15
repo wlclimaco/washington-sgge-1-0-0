@@ -49,12 +49,13 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 	private String certificado;
 
 	private String senha;
+	private String tokenNFCe;
+	
+	private String logoDanfe;
 
 	private Integer salvarSenha;
 
 	private Cfop cfopPadrao;
-
-	private ConfigSMTP confSMTP;
 
 
 	public ConfiguracaoNFe()
@@ -223,12 +224,20 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 		this.cfopPadrao = cfopPadrao;
 	}
 
-	public ConfigSMTP getConfSMTP() {
-		return confSMTP;
+	public String getTokenNFCe() {
+		return tokenNFCe;
 	}
 
-	public void setConfSMTP(ConfigSMTP confSMTP) {
-		this.confSMTP = confSMTP;
+	public void setTokenNFCe(String tokenNFCe) {
+		this.tokenNFCe = tokenNFCe;
+	}
+
+	public String getLogoDanfe() {
+		return logoDanfe;
+	}
+
+	public void setLogoDanfe(String logoDanfe) {
+		this.logoDanfe = logoDanfe;
 	}
 
 	@Override
@@ -241,7 +250,8 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 				+ ", getAnexarXmlEmail()=" + getAnexarXmlEmail() + ", getIdCSC()=" + getIdCSC() + ", getcSC()="
 				+ getcSC() + ", getInformacaoAdd()=" + getInformacaoAdd() + ", getCertificado()=" + getCertificado()
 				+ ", getSenha()=" + getSenha() + ", getSalvarSenha()=" + getSalvarSenha() + ", getCfopPadrao()="
-				+ getCfopPadrao() + ", getConfSMTP()=" + getConfSMTP() + ", toString()=" + super.toString() + "]";
+				+ getCfopPadrao() + ", getTokenNFCe()=" + getTokenNFCe() + ", getLogoDanfe()=" + getLogoDanfe()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 

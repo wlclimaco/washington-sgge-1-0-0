@@ -17,8 +17,12 @@
        exactly. -->
   <resultMap id="ConfigFiscalResult" type="ConfigFiscal">
     <result property="id" column="id"/>
-
     <result property="aliqSimples" column="aliqSimples"/>
+    <result property="aliqICMS" column="aliqSimples"/>
+	<result property="aliqPIS" column="aliqSimples"/>
+	<result property="aliqCONFINS" column="aliqSimples"/>
+	<result property="aliqIRPJ" column="aliqSimples"/>
+	<result property="aliqCLSS" column="aliqSimples"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -33,6 +37,11 @@
 
   <sql id="allConfigFiscalColumns">
 princAtividade
+,aliqICMS
+,aliqPIS
+,aliqCONFINS
+,aliqIRPJ
+,aliqCLSS
 ,regime
 ,aliqSimples
 ,parentId
@@ -47,6 +56,11 @@ princAtividade
 </sql>
 <sql id="allConfigFiscalValues">
 #{princAtividade.id},
+#{aliqICMS},
+#{aliqPIS},
+#{aliqCONFINS},
+#{aliqIRPJ},
+#{aliqCLSS},
 #{regime.id},
 #{aliqSimples},
      #{parentId},
@@ -95,6 +109,11 @@ princAtividade
  <update id="updateConfigFiscal" parameterType="ConfigFiscal">
    UPDATE configfiscal SET
 <if test="princAtividade!= null">princAtividade = #{princAtividade.id},</if>
+<if test="aliqICMS!= null">aliqICMS = #{aliqICMS},</if>
+<if test="aliqPIS!= null">aliqPIS = #{aliqPIS},</if>
+<if test="aliqCONFINS!= null">aliqCONFINS = #{aliqCONFINS},</if>
+<if test="aliqIRPJ!= null">aliqIRPJ = #{aliqIRPJ},</if>
+<if test="aliqCLSS!= null">aliqCLSS = #{aliqCLSS},</if>
 <if test="regime!= null">regime = #{regime.id},</if>
 <if test="aliqSimples!= null">aliqSimples = #{aliqSimples},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>

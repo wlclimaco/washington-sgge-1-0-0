@@ -12,6 +12,11 @@ public class ConfigCarne extends ModelCosmeDamiao
 	private Integer id;
 	private Integer carneBotelo;
 	private Integer carneNormal;
+	private String localPag;
+	private String instr1;
+	private String instr2;
+	private String instr3;
+	private String instr4;
 
 
 	public ConfigCarne()
@@ -52,10 +57,52 @@ public class ConfigCarne extends ModelCosmeDamiao
 		this.id = id;
 	}
 
+	public String getLocalPag() {
+		return localPag;
+	}
+
+	public void setLocalPag(String localPag) {
+		this.localPag = localPag;
+	}
+
+	public String getInstr1() {
+		return instr1;
+	}
+
+	public void setInstr1(String instr1) {
+		this.instr1 = instr1;
+	}
+
+	public String getInstr2() {
+		return instr2;
+	}
+
+	public void setInstr2(String instr2) {
+		this.instr2 = instr2;
+	}
+
+	public String getInstr3() {
+		return instr3;
+	}
+
+	public void setInstr3(String instr3) {
+		this.instr3 = instr3;
+	}
+
+	public String getInstr4() {
+		return instr4;
+	}
+
+	public void setInstr4(String instr4) {
+		this.instr4 = instr4;
+	}
+
 	@Override
 	public String toString() {
-		return "ConfigCarne [getId()=" + getId() + ", getCarneBotelo()=" + getCarneBotelo() + ", getCarneNormal()="
-				+ getCarneNormal() + ", toString()=" + super.toString() + "]";
+		return "ConfigCarne [getCarneBotelo()=" + getCarneBotelo() + ", getCarneNormal()=" + getCarneNormal()
+				+ ", getId()=" + getId() + ", getLocalPag()=" + getLocalPag() + ", getInstr1()=" + getInstr1()
+				+ ", getInstr2()=" + getInstr2() + ", getInstr3()=" + getInstr3() + ", getInstr4()=" + getInstr4()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 

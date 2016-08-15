@@ -23,6 +23,8 @@ public class ConfigAlertas extends ModelCosmeDamiao
 	private Integer estoqMax;
 	private Integer erroNFe;
 	private Integer pdCompra;
+	private Integer nvCliente;
+	private Integer retCaixa;
 
 	public ConfigAlertas()
 	{
@@ -78,11 +80,29 @@ public class ConfigAlertas extends ModelCosmeDamiao
 		this.pdCompra = pdCompra;
 	}
 
+
+	public Integer getNvCliente() {
+		return nvCliente;
+	}
+
+	public void setNvCliente(Integer nvCliente) {
+		this.nvCliente = nvCliente;
+	}
+
+	public Integer getRetCaixa() {
+		return retCaixa;
+	}
+
+	public void setRetCaixa(Integer retCaixa) {
+		this.retCaixa = retCaixa;
+	}
+
 	@Override
 	public String toString() {
 		return "ConfigAlertas [getId()=" + getId() + ", getEstoqMin()=" + getEstoqMin() + ", getEstoqMax()="
 				+ getEstoqMax() + ", getErroNFe()=" + getErroNFe() + ", getPdCompra()=" + getPdCompra()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", getNvCliente()=" + getNvCliente() + ", getRetCaixa()=" + getRetCaixa() + ", toString()="
+				+ super.toString() + "]";
 	}
 
 	
