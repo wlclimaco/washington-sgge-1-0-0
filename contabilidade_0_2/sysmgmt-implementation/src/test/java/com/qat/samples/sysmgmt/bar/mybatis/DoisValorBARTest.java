@@ -78,11 +78,11 @@ public class DoisValorBARTest extends AbstractTransactionalJUnit4SpringContextTe
 
 	@Test
 	public void testUpdateDoisValores() {
-		DoisValores DoisValores = insertDoisValores(10001, TabelaEnum.DOISVALOR, PersistenceActionEnum.UPDATE);
+		DoisValores DoisValores = insertDoisValores(1, TabelaEnum.DOISVALOR, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(10001);
+		request.setFetchId(1);
 		DoisValores DoisValoresResponse = getDoisValorBAR().fetchDoisValoresById(request);
-		Assert.assertEquals(DoisValoresResponse.getDescricao(), "10001");
+		Assert.assertEquals(DoisValoresResponse.getDescricao(), "10000");
 		getDoisValorBAR().updateDoisValores(DoisValores);
 		DoisValoresResponse = getDoisValorBAR().fetchDoisValoresById(request);
 		Assert.assertEquals(DoisValoresResponse.getDescricao(), "NATIVE INSERT");

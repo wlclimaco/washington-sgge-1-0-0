@@ -1136,7 +1136,7 @@ public IEmpresaBAR getEmpresaBAR()
 			ConfigFiscal ConfigFiscal = new ConfigFiscal();
 			Date a = new Date();
 			ConfigFiscal.setId(100);
-			ConfigFiscal.setPrincAtividade(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
+			//ConfigFiscal.setPrincAtividade(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
 			ConfigFiscal.setRegime(new Regime());
 			ConfigFiscal.setAliqSimples(new Double(1.99));
 			ConfigFiscal.setParentId(id);
@@ -1297,7 +1297,7 @@ public IEmpresaBAR getEmpresaBAR()
 			ConfiguracaoNFe.setSenha("NATIVE INSERT UPDATE");
 			ConfiguracaoNFe.setSalvarSenha(0);
 			ConfiguracaoNFe.setCfopPadrao(new Cfop());
-			ConfiguracaoNFe.setConfSMTP(new ConfigSMTP());
+		//	ConfiguracaoNFe.setConfSMTP(new ConfigSMTP());
 			ConfiguracaoNFe.setParentId(id);
 			ConfiguracaoNFe.setEmprId(1);
 			ConfiguracaoNFe.setModifyDateUTC(a.getTime());

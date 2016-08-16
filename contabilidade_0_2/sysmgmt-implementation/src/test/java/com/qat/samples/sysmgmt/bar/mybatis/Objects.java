@@ -2634,7 +2634,7 @@ public class Objects {
 		ConfigFiscal configfiscal = new ConfigFiscal();
 		Date a = new Date();
 		configfiscal.setId(id);
-		configfiscal.setPrincAtividade(insertDoisValor(id, TabelaEnum.CONFIGFISCAL, action));
+		//configfiscal.setPrincAtividade(insertDoisValor(id, TabelaEnum.CONFIGFISCAL, action));
 		configfiscal.setRegime(insertRegime(id, TabelaEnum.BOLETO, action));
 		configfiscal.setAliqSimples(new Double(10.00));
 		configfiscal.setTabelaEnum(tabela);
@@ -2790,7 +2790,7 @@ public class Objects {
 		configuracaonfe.setSenha("senha_16 - " + action.toString());
 		configuracaonfe.setSalvarSenha(1017);
 		configuracaonfe.setCfopPadrao(insertCfop(id, TabelaEnum.BOLETO, action));
-		configuracaonfe.setConfSMTP(insertConfigSMTP(id, TabelaEnum.BOLETO, action));
+	//	configuracaonfe.setConfSMTP(insertConfigSMTP(id, TabelaEnum.BOLETO, action));
 		configuracaonfe.setTabelaEnum(tabela);
 		configuracaonfe.setParentId(id);
 		configuracaonfe.setEmprId(EMPID);

@@ -896,9 +896,9 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 	@Test
 	public void testUpdateConfiguracaoNFe()
 	{
-		ConfiguracaoNFe ConfiguracaoNFe = insertConfiguracaoNFe(1010, TabelaEnum.CONFIGURACAONFE, PersistenceActionEnum.UPDATE);
+		ConfiguracaoNFe ConfiguracaoNFe = insertConfiguracaoNFe(1000, TabelaEnum.CONFIGURACAONFE, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1010);
+		request.setFetchId(1000);
 		ConfiguracaoNFe ConfiguracaoNFeResponse = getConfiguracaoBAR().fetchConfiguracaoNFeById(request);
 		Assert.assertEquals(ConfiguracaoNFeResponse.getcSC(), "cSC_0");
 		getConfiguracaoBAR().updateConfiguracaoNFe(ConfiguracaoNFe);
