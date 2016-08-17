@@ -23,6 +23,7 @@
 		<sec:custom-filter ref="authenticationTokenProcessingFilter" position="FORM_LOGIN_FILTER" />
 		<sec:intercept-url pattern="/auth/api/authenticate" access="permitAll" />
 		<sec:intercept-url pattern="/site/api/fetchPage" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
+		<sec:intercept-url pattern="/site/api/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
 		<sec:intercept-url pattern="/county/api/refresh" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
 		<sec:intercept-url pattern="/entidade/api/empresa/insert" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
 		<sec:intercept-url pattern="/fiscal/api/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />

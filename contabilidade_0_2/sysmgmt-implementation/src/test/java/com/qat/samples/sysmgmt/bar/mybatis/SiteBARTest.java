@@ -34,10 +34,10 @@ import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryReq
 import com.qat.samples.sysmgmt.produto.model.Preco;
 import com.qat.samples.sysmgmt.produto.model.PrecoTypeEnum;
 import com.qat.samples.sysmgmt.produto.model.Servico;
+import com.qat.samples.sysmgmt.produto.model.criteria.ProdutoCriteria;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.site.model.PlanoByEmpresa;
 import com.qat.samples.sysmgmt.site.model.Site;
-import com.qat.samples.sysmgmt.site.model.criteria.SiteCriteria;
 import com.qat.samples.sysmgmt.site.model.request.SiteInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
@@ -643,8 +643,8 @@ public class SiteBARTest extends AbstractTransactionalJUnit4SpringContextTests {
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
-		SiteCriteria criteria = new SiteCriteria();
-		criteria.setUrl("URL 2");
+		ProdutoCriteria criteria = new ProdutoCriteria();
+		criteria.setEmprId(4595);
 		// request.setCriteria(criteria);
 		InternalResultsResponse<Plano> response = getSiteBAR().fetchPlanosByRequest(request);
 		// Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());

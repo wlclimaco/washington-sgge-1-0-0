@@ -103,9 +103,8 @@ c.emprId,
  <select id="fetchAllPlanosRequest" parameterType="PlanoInquiryRequest" resultMap="PlanoResult">
 
 		SELECT id,<include refid="allPlanoColumns" />
-  		  FROM plano ORDER BY id ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
+  		  FROM plano <if test="emprId != null">where  emprId = #{emprId}</if> ORDER BY dataInicio ASC
+		 
 </select>
 
 <select id="fetchPlanoRowCount" resultType="Integer">
