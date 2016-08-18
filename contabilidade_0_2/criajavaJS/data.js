@@ -1712,6 +1712,17 @@ function EntidadeModel() {
     });
     a.push({
         field: {
+            campo: "razao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
             campo: "entidadeId",
             tipo: "Integer",
             requerid: false,
@@ -6896,6 +6907,17 @@ function EnderecoModel() {
         field: {
             campo: "codIbge",
             tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "pais",
+            tipo: "String",
             requerid: true,
             primaryKey: true,
             forenkey: false,

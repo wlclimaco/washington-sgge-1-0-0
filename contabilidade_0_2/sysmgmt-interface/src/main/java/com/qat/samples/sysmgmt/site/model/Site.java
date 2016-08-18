@@ -21,6 +21,8 @@ public class Site extends ModelCosmeDamiao
 
 	/** The type of an account. */
 	private String nome;
+	
+	private String comoTrabalhamos;
 
 	private String url;
 
@@ -174,6 +176,14 @@ public class Site extends ModelCosmeDamiao
 		this.empresa = empresa;
 	}
 
+	public String getComoTrabalhamos() {
+		return comoTrabalhamos;
+	}
+
+	public void setComoTrabalhamos(String comoTrabalhamos) {
+		this.comoTrabalhamos = comoTrabalhamos;
+	}
+
 	@Override
 	public String toString() {
 		return "Site [getSiteTypeEnumValue()=" + getSiteTypeEnumValue() + ", getSiteTypeEnum()=" + getSiteTypeEnum()
@@ -181,7 +191,7 @@ public class Site extends ModelCosmeDamiao
 				+ getServicoList() + ", getPlanoList()=" + getPlanoList() + ", getQuemSomos()=" + getQuemSomos()
 				+ ", getMissao()=" + getMissao() + ", getVisao()=" + getVisao() + ", getTitulo()=" + getTitulo()
 				+ ", getLogo()=" + getLogo() + ", isAtorization()=" + isAtorization() + ", getEmpresa()=" + getEmpresa()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", getComoTrabalhamos()=" + getComoTrabalhamos() + ", toString()=" + super.toString() + "]";
 	}
 
 

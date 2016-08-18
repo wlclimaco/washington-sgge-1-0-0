@@ -26,6 +26,7 @@
     <result property="logo" column="logo"/>
     <result property="atorization" column="atorization"/>
     <result property="siteTypeEnumValue" column="siteTypeEnum"/>
+    <result property="comoTrabalhamos" column="comoTrabalhamos"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -47,6 +48,7 @@ nome
 ,siteTypeEnum
 ,atorization
 ,empresa
+,comoTrabalhamos
 ,create_date
 ,create_user
 ,modify_date
@@ -64,6 +66,7 @@ nome
 #{siteTypeEnumValue},
 #{atorization},
 #{empresa.id},
+#{comoTrabalhamos},
 		#{createDateUTC},
 		#{createUser},
 		#{modifyDateUTC},
@@ -112,6 +115,7 @@ nome
 <if test="visao!= null">visao = #{visao},</if>
 <if test="titulo!= null">titulo = #{titulo},</if>
 <if test="logo!= null">logo = #{logo},</if>
+<if test="comoTrabalhamos!= null">comoTrabalhamos = #{comoTrabalhamos},</if>
 <if test="siteTypeEnumValue!= null">siteTypeEnum = #{siteTypeEnumValue},</if>
 <if test="empresa.id!= null">empresa = #{empresa.id},</if>
 <if test="atorization!= null">atorization = #{atorization},</if>

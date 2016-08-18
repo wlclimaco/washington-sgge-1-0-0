@@ -36,21 +36,17 @@
 		<property name="financeiroBAR" ref="financeiroBARTarget" />
 		<property name="notesBAR" ref="notesBARTarget" />
 		<property name="empresaBAR" ref="empresaBARTarget" />
-
 	</bean>
 
-	<bean id="produtoBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Produto.ProdutoBARImpl">
+	<bean id="emailBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Email.EmailBARImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-	</bean>
-
-	<bean id="financeiroBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Financeiro.FinanceiroBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-		<property name="historicoBAR" ref="historicoBARTarget" />
-		<property name="statusBAR" ref="statusBARTarget" />
-		<property name="financeiroBAR" ref="financeiroBARTarget" />
 	</bean>
 
 	<bean id="cadastroBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Cadastros.CadastrosBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="configuracaoBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Configuracao.ConfiguracaoBARImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 	</bean>
 
@@ -62,11 +58,109 @@
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 	</bean>
 
-	<bean id="emailBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Email.EmailBARImpl">
+	<bean id="siteBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Site.SiteBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+		<property name="historicoBAR" ref="historicoBARTarget" />
+		<property name="statusBAR" ref="statusBARTarget" />
+		<property name="precoBAR" ref="precoBARTarget" />
+		<property name="siteBAR" ref="siteBARTarget" />
+
+	</bean>
+
+
+	<bean id="drugBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.DrugBARImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 	</bean>
 
-	<bean id="siteBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Site.SiteBARImpl">
+	<bean id="precoBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Produto.PrecoBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="dicionarioBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Dicionario.DicionarioBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="countyBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.CountyBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="cadastrosBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Cadastros.CadastrosBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="telefoneBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Telefone.TelefoneBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="statusBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Status.StatusBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="procedureBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.ProcedureBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="pessoaBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Pessoa.PessoaBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	  	<property name="enderecoBAR" ref="enderecoBARTarget" />
+		<property name="emailBAR" ref="emailBARTarget" />
+		<property name="documentoBAR" ref="documentoBARTarget" />
+		<property name="telefoneBAR" ref="telefoneBARTarget" />
+		<property name="statusBAR" ref="statusBARTarget" />
+		<property name="notesBAR" ref="notesBARTarget" />
+	</bean>
+
+	<bean id="notesBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Notes.NotesBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="doisValorBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Util.DoisValorBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="historicoBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Historico.HistoricoBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="fiscalBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Fiscal.FiscalBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="enderecoBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Endereco.EnderecoBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="produtoBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Produto.ProdutoBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	<!--  	<property name="enderecoBAR" ref="enderecoBARTarget" />
+		<property name="emailBAR" ref="emailBARTarget" />
+		<property name="historicoBAR" ref="historicoBARTarget" />
+		<property name="telefoneBAR" ref="telefoneBARTarget" />
+		<property name="statusBAR" ref="statusBARTarget" />
+		<property name="notesBAR" ref="notesBARTarget" />
+		<property name="fiscalBAR" ref="fiscalBARTarget" />-->
+	</bean>
+
+	<bean id="financeiroBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Financeiro.FinanceiroBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+		<property name="historicoBAR" ref="historicoBARTarget" />
+		<property name="statusBAR" ref="statusBARTarget" />
+		<property name="financeiroBAR" ref="financeiroBARTarget" />
+	</bean>
+
+		<bean id="advocaciaBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Advogado.AdvocaciaBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="clinicaBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Clinica.ClinicaBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="condominioBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Condominio.CondominioBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	</bean>
+
+	<bean id="dpBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Dp.DpBARImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 	</bean>
 

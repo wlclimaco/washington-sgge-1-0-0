@@ -74,9 +74,8 @@ nome
  <select id="fetchAllServicosRequest" parameterType="ServicoInquiryRequest" resultMap="ServicoResult">
 
 		SELECT id,<include refid="allServicoColumns" />
-  		  FROM servico ORDER BY id ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
+  		  FROM servico <if test="emprId != null">where  emprId = #{emprId}</if> ORDER BY dataInicio ASC
+
 </select>
 
 <select id="fetchServicoRowCount" resultType="Integer">
