@@ -76,10 +76,6 @@
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 	</bean>
 
-	<bean id="dicionarioBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Dicionario.DicionarioBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-	</bean>
-
 	<bean id="countyBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.CountyBARImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 	</bean>
@@ -164,54 +160,21 @@
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 	</bean>
 
-	<bean id="precoBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Produto.PrecoBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-	</bean>
 
 	<bean id="dicionarioBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Dicionario.DicionarioBARImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 	</bean>
 
-	<bean id="countyBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.CountyBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-	</bean>
 
-	<bean id="cadastrosBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Cadastros.CadastrosBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-	</bean>
 
-	<bean id="telefoneBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Telefone.TelefoneBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-	</bean>
 
-	<bean id="statusBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Status.StatusBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-	</bean>
 
-	<bean id="procedureBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.ProcedureBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-	</bean>
 
-	<bean id="pessoaBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Pessoa.PessoaBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 
-	</bean>
 
-	<bean id="notesBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Notes.NotesBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-	</bean>
 
-	<bean id="historicoBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Historico.HistoricoBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-	</bean>
 
-	<bean id="fiscalBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Fiscal.FiscalBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-	</bean>
 
-	<bean id="enderecoBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Endereco.EnderecoBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-	</bean>
 
 
 
@@ -225,24 +188,12 @@
 	</bean>
 
 
-	<bean id="clinicaBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Clinica.ClinicaBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-	</bean>
 
-	<bean id="configuracaoBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Configuracao.ConfiguracaoBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-	</bean>
+
+
 	
 		
-	<bean id="advocaciaBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Advogado.AdvocaciaBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-	</bean>
 	
-	<bean id="condominioBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Condominio.CondominioBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-	</bean>
 	
-	<bean id="dpBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Dp.DpBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-	</bean>
+
 </beans>
