@@ -99,7 +99,7 @@ nome
 
  </select>
 
- <insert id="insertSite" parameterType="Site">
+ <insert id="insertSite" parameterType="Site" useGeneratedKeys="true" keyProperty="id">
  	INSERT INTO site (
 	<if test="id != null">id,</if><include refid="allSiteColumns" />
      )
