@@ -112,7 +112,7 @@ c.emprId,
 
  </select>
 
- <insert id="insertPlano" parameterType="Plano">
+ <insert id="insertPlano" parameterType="Plano" useGeneratedKeys="true" keyProperty="id">
  	INSERT INTO plano (
 	<if test="id != null">id,</if><include refid="allPlanoColumns" />
      )

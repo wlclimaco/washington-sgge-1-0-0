@@ -117,7 +117,6 @@ nome
 <if test="logo!= null">logo = #{logo},</if>
 <if test="comoTrabalhamos!= null">comoTrabalhamos = #{comoTrabalhamos},</if>
 <if test="siteTypeEnumValue!= null">siteTypeEnum = #{siteTypeEnumValue},</if>
-<if test="empresa.id!= null">empresa = #{empresa.id},</if>
 <if test="atorization!= null">atorization = #{atorization},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>

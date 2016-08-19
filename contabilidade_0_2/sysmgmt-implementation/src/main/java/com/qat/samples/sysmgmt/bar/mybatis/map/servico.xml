@@ -74,7 +74,7 @@ nome
  <select id="fetchAllServicosRequest" parameterType="ServicoInquiryRequest" resultMap="ServicoResult">
 
 		SELECT id,<include refid="allServicoColumns" />
-  		  FROM servico <if test="emprId != null">where  emprId = #{emprId}</if> ORDER BY dataInicio ASC
+  		  FROM servico <if test="emprId != null">where  emprId = #{emprId}</if> ORDER BY id ASC
 
 </select>
 
