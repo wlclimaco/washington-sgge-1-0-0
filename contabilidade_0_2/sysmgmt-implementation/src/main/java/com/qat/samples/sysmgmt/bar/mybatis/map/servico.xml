@@ -83,7 +83,7 @@ nome
 
  </select>
 
- <insert id="insertServico" parameterType="Servico">
+ <insert id="insertServico" parameterType="Servico" useGeneratedKeys="true" keyProperty="id">
  	INSERT INTO servico (
 	<if test="id != null">id,</if><include refid="allServicoColumns" />
      )

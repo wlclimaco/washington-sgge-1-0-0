@@ -297,7 +297,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 	// ===================================### SERVICO
 	// ####======================================
-	
+
 	///===================================### PLANOBYEMPRESA ####======================================
 	/** The Constant NAMESPACE. */
 	private static final String NAMESPACE_PLANOBYEMPRESA = "PlanoByEmpresaMap.";
@@ -376,7 +376,6 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.SERVICO, getHistoricoBAR(), response);
 		Integer processId = 1;
-		servico.setProcessId(historicoId);
 
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_SERVICO, servico, response);
 
@@ -759,7 +758,6 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.CONTATO, getHistoricoBAR(), response);
 		Integer processId = 1;
-		contato.setProcessId(historicoId);
 
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONTATO, contato, response);
 

@@ -88,7 +88,7 @@ c.motivoValue,
 
  </select>
 
- <insert id="insertContato" parameterType="Contato">
+ <insert id="insertContato" parameterType="Contato"  useGeneratedKeys="true" keyProperty="id">
  	INSERT INTO contato (
 	<if test="id != null">id,</if><include refid="allContatoColumns" />
      )
