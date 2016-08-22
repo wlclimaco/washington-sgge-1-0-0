@@ -1,27 +1,9 @@
 
-INSERT INTO Contato( id, parentId, dataContato, nome, motivoValue,create_user,create_date,modify_user,modify_date)values
-( 1001, 1, 1462656383021, 'nome_3', 1,'system',1462656383021,'rod',1462656383021);
+INSERT INTO Contato( id, ledo, dataContato, nome, email, telefone, assunto, texto, motivoValue,parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values
+( 1000, 1000, 1471711587260, 'nome_0', 'email_0', 'telefone_0', 'assunto_0', 'texto_0', 1000,10000,1,1,1,'system',1471710867806,'rod',1471710867806);
 
-INSERT INTO Contato( id, parentId, dataContato, nome, motivoValue,create_user,create_date,modify_user,modify_date)values
-( 1002, 2, 1462656383022, 'nome_3', 2,'system',1462656383022,'rod',1462656383022);
+INSERT INTO Contato( id, ledo, dataContato, nome, email, telefone, assunto, texto, motivoValue,parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values
+( 1001, 1001, 1471711587260, 'nome_1', 'email_1', 'telefone_1', 'assunto_1', 'texto_1', 1001,10000,1,1,1,'system',1471710867807,'rod',1471710867807);
 
-INSERT INTO Contato( id, parentId, dataContato, nome, motivoValue,create_user,create_date,modify_user,modify_date)values
-( 1003, 3, 1462656383022, 'nome_3', 3,'system',1462656383022,'rod',1462656383022);
-
-INSERT INTO Email( id, tabelaEnumValue, parentId, typeValue, email, emailTypeEnumValue,create_user,create_date,modify_user,modify_date)values
-( 1100, 1, 1001, 1, 'email_4', 1,'system',1462656383022,'rod',1462656383022);
-
-INSERT INTO Email( id, tabelaEnumValue, parentId, typeValue, email, emailTypeEnumValue,create_user,create_date,modify_user,modify_date)values
-( 2100, 2, 1002, 2, 'email_4', 2,'system',1462656383022,'rod',1462656383022);
-
-INSERT INTO Email( id, tabelaEnumValue, parentId, typeValue, email, emailTypeEnumValue,create_user,create_date,modify_user,modify_date)values
-( 3100, 3, 1003, 3, 'email_4', 3,'system',1462656383022,'rod',1462656383022);
-
-INSERT INTO Telefone( id, typeValue, parentId, tabelaEnumValue, ddd, numero, telefoneTypeEnumValue, processId,create_user,create_date,modify_user,modify_date)values
-( 10012, 1, 1001, 1, 'ddd_4', 'numero_5', 1, 1,'system',1462656383022,'rod',1462656383022);
-
-INSERT INTO Telefone( id, typeValue, parentId, tabelaEnumValue, ddd, numero, telefoneTypeEnumValue, processId,create_user,create_date,modify_user,modify_date)values
-( 10022, 2, 1002, 2, 'ddd_4', 'numero_5', 2, 2,'system',1462656383022,'rod',1462656383022);
-
-INSERT INTO Telefone( id, typeValue, parentId, tabelaEnumValue, ddd, numero, telefoneTypeEnumValue, processId,create_user,create_date,modify_user,modify_date)values
-( 10032, 3, 1003, 3, 'ddd_4', 'numero_5', 3, 3,'system',1462656383022,'rod',1462656383022);
+INSERT INTO Contato( id, ledo, dataContato, nome, email, telefone, assunto, texto, motivoValue,parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values
+( 1002, 1002, 1471711587260, 'nome_2', 'email_2', 'telefone_2', 'assunto_2', 'texto_2', 1002,10000,1,1,1,'system',1471710867807,'rod',1471710867807);

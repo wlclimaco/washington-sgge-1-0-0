@@ -294,7 +294,7 @@ public class SiteBARTest extends AbstractTransactionalJUnit4SpringContextTests {
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		Contato contatoResponse = getSiteBAR().fetchContatoById(request);
-		Assert.assertEquals(contatoResponse.getNome(), "nome_3");
+		Assert.assertEquals(contatoResponse.getNome(), "nome_1");
 		getSiteBAR().updateContato(contato);
 		contatoResponse = getSiteBAR().fetchContatoById(request);
 		Assert.assertEquals(contatoResponse.getNome(), "NATIVE INSERT UPDATE");
@@ -873,7 +873,6 @@ public class SiteBARTest extends AbstractTransactionalJUnit4SpringContextTests {
 		contato.setDataContato(a.getTime());
 		contato.setNome("NATIVE INSERT UPDATE");
 		contato.setMotivoValue(100);
-		contato.setContatoItensList(new ArrayList<ContatoItens>());
 		contato.setParentId(id);
 		contato.setEmprId(1);
 		contato.setModifyDateUTC(a.getTime());

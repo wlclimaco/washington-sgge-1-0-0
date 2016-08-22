@@ -1435,8 +1435,6 @@ public IPessoaBAR getPessoaBAR()
 			contato.setDataContato(a.getTime());
 			contato.setNome("NATIVE INSERT UPDATE");
 			contato.setMotivoValue(100);
-			contato.setContatoItensList(new ArrayList<ContatoItens>());
-			contato.getContatoItensList().add(insertContatoItens(id,TabelaEnum.CONTATO,action));
 			contato.setParentId(id);
 			contato.setEmprId(1);
 			contato.setModifyDateUTC(a.getTime());

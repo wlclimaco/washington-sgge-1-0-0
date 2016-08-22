@@ -23,9 +23,13 @@ public enum ContatoTypeEnum implements IIntegerEnum, II18nEnum
 	INFORMATIVO(3, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
 
 	PROMOCOES(4, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
+	
+	SISTEMA(5, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
+	
+	PARCERIAS(6, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
 
 	/** The unknown. */
-	OUTROS(5, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
+	OUTROS(7, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
 
 	/** The code. */
 	private Integer code;

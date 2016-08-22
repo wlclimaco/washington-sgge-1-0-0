@@ -361,11 +361,6 @@ public InternalResultsResponse<Contato> refreshContatos(RefreshRequest request)
 	int refreshNumber = request.getRefreshInt();
 	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
 
-	for (int i = 1; i <= refreshNumber; i++)
-	{
-	getSiteBAR().insertContato(new Contato(i, "ContatoDesc" + i));
-	}
-
 	// Call maintain to see if we need to return the contato list and if so whether it should be paged or not
 	return maintainReturnListContato(request.getReturnList(), request.getReturnListPaged(),new Contato());
 }

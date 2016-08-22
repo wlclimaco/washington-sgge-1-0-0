@@ -8165,8 +8165,6 @@ function PrecoModel() {
 }
 
 
-
-
 //================ Orcamento
 function ContatoModel() {
 
@@ -8177,6 +8175,18 @@ function ContatoModel() {
             tipo: "Integer",
             requerid: true,
             primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "ledo",
+            tipo: "Integer",
+            requerid: true,
+            defauld : 0,
+            primaryKey: false,
             forenkey: false,
             model: true,
             xml: true
@@ -8206,8 +8216,8 @@ function ContatoModel() {
     });
     a.push({
         field: {
-            campo: "motivoValue",
-            tipo: "Integer",
+            campo: "email",
+            tipo: "String",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -8217,11 +8227,44 @@ function ContatoModel() {
     });
     a.push({
         field: {
-            campo: "contatoItensList",
-            tipo: "List<ContatoItens>",
-            list: ContatoItensModel(),
-            requerid: true,
-            primaryKey: true,
+            campo: "telefone",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "assunto",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "texto",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "motivoValue",
+            tipo: "Integer",
+            defauld : 0,
+            requerid: false,
+            primaryKey: false,
             forenkey: false,
             model: true,
             xml: true

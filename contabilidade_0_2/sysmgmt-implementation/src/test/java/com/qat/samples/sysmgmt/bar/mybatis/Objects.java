@@ -1816,8 +1816,7 @@ public class Objects {
 		contato.setDataContato(a.getTime());
 		contato.setNome("nome_2 - " + action.toString());
 		contato.setMotivoValue(1003);
-		contato.setContatoItensList(new ArrayList<ContatoItens>());
-		contato.getContatoItensList().add(insertContatoItens(id, TabelaEnum.CONTATO, action));
+
 		contato.setTabelaEnum(tabela);
 		contato.setParentId(id);
 		contato.setEmprId(EMPID);

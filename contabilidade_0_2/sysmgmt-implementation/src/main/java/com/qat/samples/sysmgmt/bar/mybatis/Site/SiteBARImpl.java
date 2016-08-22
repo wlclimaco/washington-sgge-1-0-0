@@ -764,13 +764,8 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.CONTATO, AcaoEnum.INSERT, historicoId,
 				getHistoricoBAR(), response, contato.getId());
 
-		if (!ValidationUtil.isNullOrEmpty(contato.getContatoItensList())) {
-			a += ContatoItensBARD.maintainContatoItensAssociations(contato.getContatoItensList(),
-					 response, contato.getId(), null, null, TabelaEnum.CONTATO,
-					getSiteBAR(), getStatusBAR(), getHistoricoBAR(), contato.getId(), contato.getCreateUser(),
-					historicoId, historicoId);
 
-		}
+		
 
 		return response;
 	}
@@ -789,13 +784,6 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.CONTATO, AcaoEnum.UPDATE,
 				contato.getProcessId(), getHistoricoBAR(), response, contato.getId());
 
-		if (!ValidationUtil.isNullOrEmpty(contato.getContatoItensList())) {
-			a += ContatoItensBARD.maintainContatoItensAssociations(contato.getContatoItensList(),
-					 response, contato.getId(), null, null, TabelaEnum.CONTATO,
-					getSiteBAR(), getStatusBAR(), getHistoricoBAR(), contato.getId(), contato.getCreateUser(),
-					contato.getProcessId(), contato.getProcessId());
-
-		}
 
 		return response;
 	}
@@ -813,14 +801,6 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.CONTATO, AcaoEnum.DELETE,
 				contato.getProcessId(), getHistoricoBAR(), response, contato.getId());
-
-		if (!ValidationUtil.isNullOrEmpty(contato.getContatoItensList())) {
-			a += ContatoItensBARD.maintainContatoItensAssociations(contato.getContatoItensList(),
-					 response, contato.getId(), null, null, TabelaEnum.CONTATO,
-					getSiteBAR(), getStatusBAR(), getHistoricoBAR(), contato.getId(), contato.getCreateUser(),
-					contato.getProcessId(), contato.getProcessId());
-
-		}
 
 		return response;
 	}
