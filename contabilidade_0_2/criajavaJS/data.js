@@ -5363,6 +5363,7 @@ function ProdutoParentIdModel() {
     return a;
 }
 
+
 function ProdutoModel() {
 
     var a = [];
@@ -5401,7 +5402,7 @@ function ProdutoModel() {
     });
     a.push({
         field: {
-            campo: "produto",
+            campo: "nCM",
             tipo: "String",
             requerid: false,
             primaryKey: false,
@@ -5412,18 +5413,7 @@ function ProdutoModel() {
     });
     a.push({
         field: {
-            campo: "dataCreate",
-            tipo: "Long",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "aplicacao",
+            campo: "excecaoIPI",
             tipo: "String",
             requerid: false,
             primaryKey: false,
@@ -5432,9 +5422,10 @@ function ProdutoModel() {
             xml: true
         }
     });
+    
     a.push({
         field: {
-            campo: "fracao",
+            campo: "cEST",
             tipo: "String",
             requerid: false,
             primaryKey: false,
@@ -5443,17 +5434,7 @@ function ProdutoModel() {
             xml: true
         }
     });
-    a.push({
-        field: {
-            campo: "classificacao",
-            tipo: "Integer",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
+    
     a.push({
         field: {
             campo: "uniMed",
@@ -5467,18 +5448,7 @@ function ProdutoModel() {
     });
     a.push({
         field: {
-            campo: "grupo",
-            tipo: "Integer",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "subGrupo",
+            campo: "categoria",
             tipo: "Integer",
             requerid: false,
             primaryKey: false,
@@ -5490,18 +5460,7 @@ function ProdutoModel() {
     a.push({
         field: {
             campo: "marca",
-            tipo: "List<MarcaProd>",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "porcao",
-            tipo: "Double",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -5542,9 +5501,583 @@ function ProdutoModel() {
             xml: true
         }
     });
+    a.push({
+        field: {
+            campo: "tributacao",
+            tipo: "Tributacao",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
 
     return a;
+}
+
+//================ Categoria
+function ProdutoEmpresaModel() {
+
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "prodId",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "informAdicionaisParaNFe",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "anotainternas",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "dataCadastro",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "estoque",
+            tipo: "EstoqueList",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "custo",
+            tipo: "CustoList",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "preco",
+            tipo: "PrecoList",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "margem",
+            tipo: "MargemList",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+
+}
+
+
+//================ Categoria
+function ICMSModel() {
+
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "prodId",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "sitTributaria",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "origem",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "modalidadeBC",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "redBase",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+
+    a.push({
+        field: {
+            campo: "aliqICMS",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+
+    a.push({
+        field: {
+            campo: "motDesoneracao",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+
+    
+
+}
+
+//================ Categoria
+function PISModel() {
+
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "prodId",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "sitTributaria",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "classeCigarrosBebidas",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "cNPJProdutor",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "codControleIPI",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "qtdSeloIPI",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "codEnquadramento",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "tipoCalculo",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "aliquotaIPI",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });   
+
+}
+
+//================ Categoria
+function COFINSModel() {
+
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "prodId",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "sitTributaria",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorTribCOFINS",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "tipoCalculoSubstTrib",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "aliquotaCOFINSST",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    
+
+}
+
+//================ Categoria
+function IPIModel() {
+
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "prodId",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "pISSituaTributaria",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorUnidtribPIS",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "tipocalculoSubstTrib",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorTribPISST",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    
+
+}
+
+//================ Categoria
+function TributacaoModel() {
+
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "prodId",
+            tipo: "Produto",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "cFOPPadraoNFe",
+            tipo: "Cfop",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "iCMS",
+            tipo: "Icms",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "pIS",
+            tipo: "Pis",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "cOFINS",
+            tipo: "Cofins",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "iPI",
+            tipo: "IPI",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 }
 
 
@@ -6057,123 +6590,6 @@ function UniMedModel() {
         field: {
             campo: "sigla",
             tipo: "String",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    return a;
-}
-
-//================ Orcamento
-function TributacaoModel() {
-
-    var a = [];
-    a.push({
-        field: {
-            campo: "id",
-            tipo: "Integer",
-            requerid: true,
-            primaryKey: true,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "cstId",
-            tipo: "Integer",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "icms",
-            tipo: "Double",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "st",
-            tipo: "Double",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "mva",
-            tipo: "Double",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "csosnId",
-            tipo: "Integer",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "ipi",
-            tipo: "Double",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "iat",
-            tipo: "Double",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "ippt",
-            tipo: "Double",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "incidencia",
-            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -9151,8 +9567,8 @@ dataModel = function() {
 
     oProjet.push({
         classes: [{
-            classe: "ProdutoParent",
-            model: ProdutoParentIdModel(),
+            classe: "ProdutoEmpresa",
+            model: ProdutoEmpresaModel(),
             dependencias: dependenciaProdutoParent()
         }, {
             classe: "Produto",
@@ -9180,6 +9596,18 @@ dataModel = function() {
         }, {
             classe: "Tributacao",
             model: TributacaoModel()
+        }, {
+            classe: "Icms",
+            model: ICMSModel()
+        }, {
+            classe: "Pis",
+            model: PISModel()
+        }, {
+            classe: "Ipi",
+            model: IPIModel()
+        }, {
+            classe: "Cofins",
+            model: COFINSModel()
         }, {
             classe: "Custo",
             model: CustoModel(),
