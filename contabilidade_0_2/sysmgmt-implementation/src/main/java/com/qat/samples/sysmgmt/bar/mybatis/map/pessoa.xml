@@ -31,11 +31,11 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-<!--	<collection property="enderecos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="emails" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="telefones" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="bancos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByPessoa"/>
+	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByPessoa"/>
+	<collection property="emails" column="id" select="EmailMap.fetchEmailByPessoa"/>
+	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByPessoa"/>
+<!-- <collection property="bancos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
 <collection property="formaPagamentoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
 <collection property="condPagList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
 <collection property="contatoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>-->
@@ -76,7 +76,7 @@ nome
 		#{modifyUser}
   </sql>
 
- <insert id="insertPessoa" parameterType="Cliente">
+ <insert id="insertPessoa" parameterType="Cliente" useGeneratedKeys="true" keyProperty="id">
    INSERT INTO pessoa (
 	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allPessoaColumns" />
      )

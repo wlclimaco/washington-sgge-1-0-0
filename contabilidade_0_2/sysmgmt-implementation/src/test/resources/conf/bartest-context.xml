@@ -89,6 +89,7 @@
 		<property name="telefoneBAR" ref="telefoneBARTarget" />
 		<property name="statusBAR" ref="statusBARTarget" />
 		<property name="notesBAR" ref="notesBARTarget" />
+		<property name="historicoBAR" ref="historicoBARTarget" />
 	</bean>
 
 	<bean id="notesBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Notes.NotesBARImpl">

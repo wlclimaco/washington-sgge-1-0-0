@@ -71,6 +71,13 @@ typeValue
    FROM telefone WHERE id = #{fetchid}
  </select>
 
+ <select id="fetchTelefoneByPessoa" parameterType="Integer" resultMap="TelefoneResult">
+    SELECT id,
+	<include refid="allTelefoneColumns" />
+   FROM telefone WHERE parentId = #{id}  and tabelaEnumValue in (16,17,18,19)
+ </select>
+
+
  <select id="fetchAllTelefonesRequest" parameterType="PagedInquiryRequest" resultMap="TelefoneResult">
 
 		SELECT id,<include refid="allTelefoneColumns" />

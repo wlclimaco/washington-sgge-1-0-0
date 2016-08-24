@@ -87,6 +87,12 @@ parentId
 	<include refid="allEnderecoColumns" />
    FROM endereco WHERE id = #{fetchid}
  </select>
+ 
+  <select id="fetchEnderecoByPessoa" parameterType="Integer" resultMap="EnderecoResult">
+    SELECT id,
+	<include refid="allEnderecoColumns" />
+   FROM endereco WHERE parentId = #{parentId} and tabelaEnumValue in (16,17,18,19)
+ </select>
 
  <select id="fetchAllEnderecosRequest" parameterType="PagedInquiryRequest" resultMap="EnderecoResult">
 

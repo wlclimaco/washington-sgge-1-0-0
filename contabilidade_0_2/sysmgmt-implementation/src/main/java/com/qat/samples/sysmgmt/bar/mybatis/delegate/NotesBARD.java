@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
-import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Notes.INotesBAR;
@@ -34,7 +34,7 @@ public final class NotesBARD extends SqlSessionDaoSupport
 	 */
 	@SuppressWarnings("unchecked")
 	public static Integer maintainNoteAssociations(List<Note> noteList,
-			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, INotesBAR noteDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC,
 			Integer empId, String UserId, Integer processId, Integer historicoId)
 	{

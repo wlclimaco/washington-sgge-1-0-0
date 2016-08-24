@@ -2,6 +2,9 @@
 package com.qat.samples.sysmgmt.bar.mybatis.Pessoa;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -10,6 +13,7 @@ import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.MyBatisBARHelper;
+import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.advocacia.Advogado;
 import com.qat.samples.sysmgmt.advocacia.request.AdvogadoInquiryRequest;
 import com.qat.samples.sysmgmt.bar.Documentos.IDocumentoBAR;
@@ -20,6 +24,14 @@ import com.qat.samples.sysmgmt.bar.Notes.INotesBAR;
 import com.qat.samples.sysmgmt.bar.Pessoa.IPessoaBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.CnaeBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.DocumentosBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.EmailBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.EnderecoBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.NotesBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.StatusBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.TelefoneBARD;
 import com.qat.samples.sysmgmt.clinica.model.request.MedicoInquiryRequest;
 import com.qat.samples.sysmgmt.clinica.model.request.PacienteInquiryRequest;
 import com.qat.samples.sysmgmt.condominio.model.Inquilino;
@@ -32,10 +44,15 @@ import com.qat.samples.sysmgmt.pessoa.model.Fornecedor;
 import com.qat.samples.sysmgmt.pessoa.model.Funcionario;
 import com.qat.samples.sysmgmt.pessoa.model.Medico;
 import com.qat.samples.sysmgmt.pessoa.model.Paciente;
+import com.qat.samples.sysmgmt.pessoa.model.Pessoa;
 import com.qat.samples.sysmgmt.pessoa.model.Transportador;
 import com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.AcaoEnum;
+import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
+import com.qat.samples.sysmgmt.util.model.Status;
+import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 
 /**
@@ -422,7 +439,15 @@ public static void fetchAdvogadosByRequest(SqlSession sqlSession, AdvogadoInquir
 public InternalResponse insertCliente(Cliente cliente)
 {
 	InternalResponse response = new InternalResponse();
+	
+	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.CLIENTE, getHistoricoBAR(), response);
+	
+	cliente.setProcessId(historicoId);
+	
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PESSOA, cliente, response);
+	
+	insertPessoa(cliente, response, TabelaEnum.CLIENTE, historicoId);
+	
 	return response;
 }
 
@@ -1475,4 +1500,65 @@ public static void fetchFuncionariosByRequest(SqlSession sqlSession, Funcionario
 
 	}
 
+	public boolean insertPessoa(Pessoa pessoa, InternalResponse response ,TabelaEnum tabela,Integer historicoId){
+		
+		Integer count = 0;
+		Boolean count1 = false;
+		if (!ValidationUtil.isNullOrEmpty(pessoa.getEnderecos()))
+		{
+			count +=
+					EnderecoBARD.maintainEnderecoAssociations(pessoa.getEnderecos(), response, pessoa.getId(), null,
+							null,
+							tabela, enderecoBAR, statusBAR, historicoBAR, pessoa.getId(),
+							pessoa.getCreateUser(), historicoId, historicoId);
+		}
+		
+		if (!ValidationUtil.isNullOrEmpty(pessoa.getEmails()))
+		{
+			count +=
+					EmailBARD.maintainEmailAssociations(pessoa.getEmails(), response, pessoa.getId(), null, null,
+							tabela, emailBAR, statusBAR, historicoBAR, pessoa.getId(),
+							pessoa.getCreateUser(), historicoId, historicoId);
+		}
+		if (!ValidationUtil.isNullOrEmpty(pessoa.getTelefones()))
+		{
+			count +=
+					TelefoneBARD.maintainTelefoneAssociations(pessoa.getTelefones(), response, pessoa.getId(), null,
+							null,
+							tabela, telefoneBAR, statusBAR, historicoBAR, pessoa.getId(),
+							pessoa.getCreateUser(), historicoId, historicoId);
+		}
+		if (!ValidationUtil.isNullOrEmpty(pessoa.getDocumentos()))
+		{
+			count +=
+					DocumentosBARD.maintainDocumentoAssociations(pessoa.getDocumentos(), response, pessoa.getId(),
+							null,
+							null,
+							tabela, documentoBAR, statusBAR, historicoBAR, pessoa.getId(),
+							pessoa.getCreateUser(), historicoId, historicoId);
+		}
+		if (!ValidationUtil.isNullOrEmpty(pessoa.getNotes()))
+		{
+			count +=
+					NotesBARD.maintainNoteAssociations(pessoa.getNotes(), response, pessoa.getId(), null,
+							null,
+							tabela, getNotesBAR(), statusBAR, historicoBAR, pessoa.getEmprId(),
+							pessoa.getCreateUser(), historicoId, historicoId);
+		}
+
+		if (count > 0)
+		{
+			Status status = new Status();
+			status.setStatus(CdStatusTypeEnum.ANALISANDO);
+			List<Status> statusList = new ArrayList<Status>();
+			statusList.add(status);
+			count1 =
+					StatusBARD.maintainStatusAssociations(statusList, response, pessoa.getId(), null, AcaoEnum.INSERT,
+							pessoa.getCreateUser(), pessoa.getId(), tabela, statusBAR,
+							historicoBAR, historicoId, historicoId);
+
+		}
+		
+		return true;
+	}
 }

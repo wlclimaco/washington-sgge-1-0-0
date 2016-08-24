@@ -260,9 +260,9 @@ public class SiteBARTest extends AbstractTransactionalJUnit4SpringContextTests {
 	//
 	@Test
 	public void testDeleteContato() {
-		Contato contato = insertContato(4, TabelaEnum.CONTATO, PersistenceActionEnum.INSERT);
+		Contato contato = insertContato(1004, TabelaEnum.CONTATO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(1004);
 		Contato contatoResponse = getSiteBAR().fetchContatoById(request);
 		Assert.assertEquals(contatoResponse, null);
 		getSiteBAR().insertContato(contato);

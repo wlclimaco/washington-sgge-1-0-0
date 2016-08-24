@@ -53,7 +53,7 @@ public final class BaseBARD extends SqlSessionDaoSupport
 					EnderecoBARD.maintainEnderecoAssociations(empresa.getEnderecos(), response, empresa.getId(), null,
 							null,
 							tabela, enderecoBAR, statusBAR, historicoBAR, empresa.getId(),
-							empresa.getCreateUser(), processId, historicoId, cadastroBAR);
+							empresa.getCreateUser(), processId, historicoId);
 		}
 		if (!ValidationUtil.isNullOrEmpty(empresa.getCnaes()))
 		{

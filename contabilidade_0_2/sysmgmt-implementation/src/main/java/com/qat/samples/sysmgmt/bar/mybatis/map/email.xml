@@ -62,6 +62,14 @@ tabelaEnumValue
 	<include refid="allEmailColumns" />
    FROM email WHERE id = #{fetchid}
  </select>
+ 
+  <select id="fetchEmailByPessoa" parameterType="Integer" resultMap="EmailResult">
+    SELECT id,
+	<include refid="allEmailColumns" />
+   FROM email WHERE parentId = #{id}  and tabelaEnumValue in (16,17,18,19)
+ </select>
+ 
+ 
 
  <select id="fetchAllEmailsRequest" parameterType="PagedInquiryRequest" resultMap="EmailResult">
 

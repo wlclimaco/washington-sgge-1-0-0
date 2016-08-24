@@ -177,9 +177,9 @@ public IPessoaBAR getPessoaBAR()
 @Test
 	public void testDeleteCliente()
 	{
-		Cliente cliente = insertCliente(1040, TabelaEnum.ADVOCACIA,PersistenceActionEnum.INSERT);
+		Cliente cliente = insertCliente(1090, TabelaEnum.ADVOCACIA,PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1040);
+		request.setFetchId(1090);
 		Cliente clienteResponse = getPessoaBAR().fetchClienteById(request);
 		Assert.assertEquals(clienteResponse, null);
 		getPessoaBAR().insertCliente(cliente);

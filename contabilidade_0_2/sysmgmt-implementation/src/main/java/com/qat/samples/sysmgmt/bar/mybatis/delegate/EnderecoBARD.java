@@ -5,9 +5,8 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
-import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.bar.Cadastros.ICadastrosBAR;
 import com.qat.samples.sysmgmt.bar.Endereco.IEnderecoBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
@@ -36,9 +35,9 @@ public final class EnderecoBARD extends SqlSessionDaoSupport
 	 */
 	@SuppressWarnings("unchecked")
 	public static Integer maintainEnderecoAssociations(List<Endereco> enderecoList,
-			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IEnderecoBAR enderecoDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC,
-			Integer empId, String UserId, Integer processId, Integer historicoId, ICadastrosBAR cidadeDAC)
+			Integer empId, String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
@@ -98,11 +97,6 @@ public final class EnderecoBARD extends SqlSessionDaoSupport
 							StatusBARD.maintainStatusAssociations(statusList, response, endereco.getId(), null,
 									AcaoEnum.DELETE, UserId, empId, TabelaEnum.ENDERECO, statusDAC, historicoDAC,
 									processId, historicoId);
-
-					break;
-				case NONE:
-					CidadeBARD.maintainCidadeAssociations(endereco.getCidade(), response, parentId, type, acaoType,
-							tabelaEnum, cidadeDAC, statusDAC, historicoDAC, empId, UserId, processId, historicoId);
 
 					break;
 				default:

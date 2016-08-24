@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
-import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Documentos.IDocumentoBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
@@ -34,7 +34,7 @@ public final class DocumentosBARD extends SqlSessionDaoSupport
 	 */
 	@SuppressWarnings("unchecked")
 	public static Integer maintainDocumentoAssociations(List<Documento> documentoList,
-			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IDocumentoBAR documentoDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC,
 			Integer empId, String UserId, Integer processId, Integer historicoId)
 	{
