@@ -6,6 +6,7 @@ import com.qat.samples.sysmgmt.nf.model.NotaFiscalEntrada;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
 import com.qat.samples.sysmgmt.pessoa.model.Cliente;
 import com.qat.samples.sysmgmt.pessoa.model.Fornecedor;
+import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 
@@ -32,7 +33,7 @@ public class Titulo extends ModelCosmeDamiao
 	/** The numero. */
 	private String docId;
 
-	private TipoDocEnum tipoDocEnum;
+	private DoisValores tipoDoc;
 
 	private String observacao;
 
@@ -41,20 +42,6 @@ public class Titulo extends ModelCosmeDamiao
 	private FinanceiroStatusEnum financeiroEnum;
 
 	private List<BaixaTitulo> listBaixa;
-
-	public Integer getTipoDocEnumValue()
-	{
-		if (tipoDocEnum != null)
-		{
-			return tipoDocEnum.getValue();
-		}
-		return null;
-	}
-
-	public void setTipoDocEnumValue(Integer acaoTypeValue)
-	{
-		tipoDocEnum = TipoDocEnum.enumForValue(acaoTypeValue);
-	}
 
 	public Integer getFinanceiroEnumValue()
 	{
@@ -142,17 +129,21 @@ public class Titulo extends ModelCosmeDamiao
 		this.dataVencimento = dataVencimento;
 	}
 
-	public Integer getDocId()
-	{
+	public String getDocId() {
 		return docId;
 	}
 
-	public void setDocId(Integer docId)
-	{
+	public void setDocId(String docId) {
 		this.docId = docId;
 	}
 
+	public DoisValores getTipoDoc() {
+		return tipoDoc;
+	}
 
+	public void setTipoDoc(DoisValores tipoDoc) {
+		this.tipoDoc = tipoDoc;
+	}
 
 	public String getObservacao()
 	{
@@ -196,10 +187,11 @@ public class Titulo extends ModelCosmeDamiao
 
 	@Override
 	public String toString() {
-		return "Titulo [getId()=" + getId() + ", getNumero()=" + getNumero() + ", getParcela()=" + getParcela()
-				+ ", getDataEmissao()=" + getDataEmissao() + ", getDataVencimento()=" + getDataVencimento()
-				+ ", getDocId()=" + getDocId() + ", getObservacao()=" + getObservacao() + ", getValor()=" + getValor()
-				+ ", getFinanceiroEnum()=" + getFinanceiroEnum() + ", getListBaixa()=" + getListBaixa()
+		return "Titulo [getFinanceiroEnumValue()=" + getFinanceiroEnumValue() + ", getId()=" + getId()
+				+ ", getNumero()=" + getNumero() + ", getParcela()=" + getParcela() + ", getDataEmissao()="
+				+ getDataEmissao() + ", getDataVencimento()=" + getDataVencimento() + ", getDocId()=" + getDocId()
+				+ ", getTipoDoc()=" + getTipoDoc() + ", getObservacao()=" + getObservacao() + ", getValor()="
+				+ getValor() + ", getFinanceiroEnum()=" + getFinanceiroEnum() + ", getListBaixa()=" + getListBaixa()
 				+ ", toString()=" + super.toString() + "]";
 	}
 

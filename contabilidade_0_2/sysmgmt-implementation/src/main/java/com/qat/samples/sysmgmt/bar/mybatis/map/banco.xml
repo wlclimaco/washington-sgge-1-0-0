@@ -18,6 +18,8 @@
   <resultMap id="BancoResult" type="Banco">
     <result property="id" column="id"/>
      <result property="nome" column="nome"/>
+     <result property="site" column="site"/>
+     <result property="descricao" column="descricao"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
@@ -28,6 +30,8 @@
 
   <sql id="allBancoColumns">
 nome
+,site
+,descricao
 ,emprId
 ,processId
 ,create_date
@@ -38,6 +42,8 @@ nome
 </sql>
 <sql id="allBancoValues">
 		#{nome},
+		#{site},
+		#{descricao},
 		#{emprId},
 		#{processId},
 		#{createDateUTC},
@@ -82,6 +88,8 @@ nome
  <update id="updateBanco" parameterType="Banco">
    UPDATE banco SET
    <if test="nome!= null"> nome=#{nome},</if>
+   <if test="descricao!= null"> descricao=#{descricao},</if>
+   <if test="site!= null"> site=#{site},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

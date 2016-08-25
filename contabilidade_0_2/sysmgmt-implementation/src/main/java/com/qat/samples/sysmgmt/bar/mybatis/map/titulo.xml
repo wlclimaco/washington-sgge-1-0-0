@@ -31,6 +31,7 @@
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
 	<collection property="listBaixa" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+	<collection property="tipoDoc" column="tipoDoc" select="DoisValoresMap.fetchDoisValoresById"/>
   </resultMap>
 
   <sql id="allTituloColumns">

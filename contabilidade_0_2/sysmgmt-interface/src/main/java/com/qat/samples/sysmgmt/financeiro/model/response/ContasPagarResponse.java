@@ -4,11 +4,11 @@ import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.entidade.model.Empresa;
+import com.qat.samples.sysmgmt.financeiro.model.ContasPagar;
 
 /**
- * The Class LocationResponse.
- * 
+ * The Class ContasPagarResponse.
+ *
  * @author abarros
  * @version 1.0
  * @created 22-Jul-2014 10:26:05 AM
@@ -17,7 +17,7 @@ public class ContasPagarResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<Empresa> empresaList;
+	private List<ContasPagar> contasPagarList;
 
 	/**
 	 * The Constructor.
@@ -28,19 +28,19 @@ public class ContasPagarResponse extends InquiryResponse
 	}
 
 	/**
-	 * @return the empresaList
+	 * @return the contasPagarList
 	 */
-	public List<Empresa> getEmpresaList()
+	public List<ContasPagar> getContasPagarList()
 	{
-		return empresaList;
+		return contasPagarList;
 	}
 
 	/**
-	 * @param empresaList the empresaList to set
+	 * @param contasPagarList the contasPagarList to set
 	 */
-	public void setEmpresaList(List<Empresa> empresaList)
+	public void setContasPagarList(List<ContasPagar> contasPagarList)
 	{
-		this.empresaList = empresaList;
+		this.contasPagarList = contasPagarList;
 	}
 
 	/*
@@ -51,7 +51,7 @@ public class ContasPagarResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setEmpresaList((List<Empresa>)coll);
+		setContasPagarList((List<ContasPagar>)coll);
 	}
 
 	/*
@@ -61,7 +61,7 @@ public class ContasPagarResponse extends InquiryResponse
 	@Override
 	public String toString()
 	{
-		return "LocationResponse [getLocationList()=" + getEmpresaList() + ", getResultsSetInfo()="
+		return "ContasPagarResponse [getContasPagarList()=" + getContasPagarList() + ", getResultsSetInfo()="
 				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
 				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
 				+ isOperationSuccess() + "]";

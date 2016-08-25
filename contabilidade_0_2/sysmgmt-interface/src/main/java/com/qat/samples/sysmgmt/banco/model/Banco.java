@@ -14,6 +14,8 @@ public class Banco extends ModelCosmeDamiao
 
 	private String nome;
 
+	private String descricao;
+
 	public Banco(Integer id)
 	{
 		super();
@@ -75,10 +77,17 @@ public class Banco extends ModelCosmeDamiao
 		this.nome = nome;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 	@Override
-	public String toString()
-	{
-		return "Banco [getId()=" + getId() + ", getNome()=" + getNome()
+	public String toString() {
+		return "Banco [getId()=" + getId() + ", getNome()=" + getNome() + ", getDescricao()=" + getDescricao()
 				+ ", toString()=" + super.toString() + "]";
 	}
 
