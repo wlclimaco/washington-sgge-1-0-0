@@ -2,6 +2,8 @@
 package com.qat.samples.sysmgmt.bar.Financeiro;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.agencia.model.Agencia;
+import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
 import com.qat.samples.sysmgmt.banco.model.Banco;
 import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
 import com.qat.samples.sysmgmt.condpag.model.CondPag;
@@ -597,5 +599,67 @@ public interface IFinanceiroBAR
 * @return the internal results response
 */
 	public InternalResultsResponse<Caixa> fetchCaixasByRequest(CaixaInquiryRequest request);
+
+
+	
+	
+	
+	/**
+	 * Fetch caixa by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	/**
+* Insert caixa.
+*
+* @param caixa the caixa
+*
+* @return the internal response
+*/
+	public InternalResponse insertAgencia(Agencia caixa);
+
+	/**
+* Update caixa.
+*
+* @param caixa the caixa
+*
+* @return the internal response
+*/
+	public InternalResponse updateAgencia(Agencia caixa);
+
+	/**
+* Delete caixa.
+*
+* @param caixa the caixa
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAgenciaById(Agencia caixa);
+
+	/**
+* Delete all caixas.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllAgencias();
+
+	/**
+* Fetch all caixas.
+*
+* @return the list< caixa>
+*/
+	public InternalResultsResponse<Agencia> fetchAllAgencias(Agencia  caixa);
+
+	/**
+* Fetch caixas by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Agencia> fetchAgenciasByRequest(AgenciaInquiryRequest request);
+
+	public Agencia fetchAgenciaById(FetchByIdRequest request);
+
 
 }

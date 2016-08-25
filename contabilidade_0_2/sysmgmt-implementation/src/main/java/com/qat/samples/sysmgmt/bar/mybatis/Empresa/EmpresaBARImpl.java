@@ -593,12 +593,11 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	public InternalResponse deleteFilialById(Filial filial) {
 		InternalResponse response = new InternalResponse();
 
-		Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.EMPRESA, getHistoricoBAR(), response);
-		Integer processId = historicoId;
+		Integer historicoId = filial.getProcessId();
 
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ENTIDADE, filial, response);
 
-		BaseBARD.maintainInsertBase(filial, historicoId, processId, TabelaEnum.FILIAL, getEnderecoBAR(), getStatusBAR(),
+		BaseBARD.maintainInsertBase(filial, historicoId, historicoId, TabelaEnum.FILIAL, getEnderecoBAR(), getStatusBAR(),
 				getHistoricoBAR(), getCadastrosBAR(), getFiscalBAR(), getTelefoneBAR(), getEmailBAR(),
 				getDocumentosBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
 		return response;

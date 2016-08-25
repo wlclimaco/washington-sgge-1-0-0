@@ -73,7 +73,7 @@ public final class CnaeBARD extends SqlSessionDaoSupport
 									cnae.getCreateUser(), processId, historicoId);
 
 					countSucess = cnaeDAC.insertCnaeEmpresa(cnae).hasSystemError();
-					if (countSucess == true)
+					if (countSucess == false)
 					{
 						Status status = new Status();
 						status.setStatus(CdStatusTypeEnum.ATIVO);
@@ -94,7 +94,7 @@ public final class CnaeBARD extends SqlSessionDaoSupport
 									cnae.getCreateUser(), processId, historicoId);
 
 					countSucess = cnaeDAC.updateCnaeEmpresa(cnae).hasSystemError();
-					if (countSucess == true)
+					if (countSucess == false)
 					{
 						countSucess =
 								StatusBARD
@@ -155,7 +155,7 @@ public final class CnaeBARD extends SqlSessionDaoSupport
 		{
 			case INSERT:
 				countSucess = cnaeDAC.insertCnae(cnae).hasSystemError();
-				if (countSucess == true)
+				if (countSucess == false)
 				{
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.ATIVO);
@@ -168,7 +168,7 @@ public final class CnaeBARD extends SqlSessionDaoSupport
 				break;
 			case UPDATE:
 				countSucess = cnaeDAC.updateCnae(cnae).hasSystemError();
-				if (countSucess == true)
+				if (countSucess == false)
 				{
 					countSucess =
 							StatusBARD

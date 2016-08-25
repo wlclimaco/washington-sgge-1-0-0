@@ -2,7 +2,8 @@ package com.qat.samples.sysmgmt.agencia.model;
 
 import java.util.List;
 
-import com.qat.samples.sysmgmt.util.model.DoisValorTypeEnum;
+import com.qat.samples.sysmgmt.banco.model.Banco;
+import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
 import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
@@ -30,7 +31,9 @@ public class Agencia extends ModelCosmeDamiao
 
 	private String responsavelConta;
 
-	private String numeroConta;
+	private List<ContaCorrente> numeroConta;
+	
+	private Banco banco;
 
 	public Agencia()
 	{
@@ -152,7 +155,7 @@ public class Agencia extends ModelCosmeDamiao
 	/**
 	 * @return the numeroConta
 	 */
-	public String getNumeroConta()
+	public List<ContaCorrente> getNumeroConta()
 	{
 		return numeroConta;
 	}
@@ -160,18 +163,25 @@ public class Agencia extends ModelCosmeDamiao
 	/**
 	 * @param numeroConta the numeroConta to set
 	 */
-	public void setNumeroConta(String numeroConta)
+	public void setNumeroConta(List<ContaCorrente> numeroConta)
 	{
 		this.numeroConta = numeroConta;
 	}
 
+	public Banco getBanco() {
+		return banco;
+	}
+
+	public void setBanco(Banco banco) {
+		this.banco = banco;
+	}
+
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "Agencia [getId()=" + getId() + ", getNome()=" + getNome() + ", getEnderecos()=" + getEnderecos()
 				+ ", getEmails()=" + getEmails() + ", getTelefones()=" + getTelefones() + ", getGerente()="
 				+ getGerente() + ", getResponsavelConta()=" + getResponsavelConta() + ", getNumeroConta()="
-				+ getNumeroConta() + ", toString()=" + super.toString() + "]";
+				+ getNumeroConta() + ", getBanco()=" + getBanco() + ", toString()=" + super.toString() + "]";
 	}
 
 }

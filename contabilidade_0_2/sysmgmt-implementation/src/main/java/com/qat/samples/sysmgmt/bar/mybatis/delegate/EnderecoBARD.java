@@ -11,6 +11,7 @@ import com.qat.samples.sysmgmt.bar.Endereco.IEnderecoBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
+import com.qat.samples.sysmgmt.util.model.AcaoTypeEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.Status;
@@ -61,7 +62,11 @@ public final class EnderecoBARD extends SqlSessionDaoSupport
 			{
 				case INSERT:
 					count = enderecoDAC.insertEndereco(endereco).hasSystemError();
-					if (count == true)
+					
+//					InsertHistBARD.maintainInsertHistoricoItens(tabelaEnum, AcaoEnum.INSERT, historicoId,
+//							historicoDAC, response, parentId);
+					
+					if (count == false)
 					{
 						Status status = new Status();
 						status.setStatus(CdStatusTypeEnum.ATIVO);
@@ -75,7 +80,7 @@ public final class EnderecoBARD extends SqlSessionDaoSupport
 					break;
 				case UPDATE:
 					count = enderecoDAC.updateEndereco(endereco).hasSystemError();
-					if (count == true)
+					if (count == false)
 					{
 						Status status = new Status();
 						status.setStatus(CdStatusTypeEnum.ATIVO);

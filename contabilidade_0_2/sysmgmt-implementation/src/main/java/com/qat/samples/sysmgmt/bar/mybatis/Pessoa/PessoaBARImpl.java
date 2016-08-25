@@ -446,6 +446,9 @@ public InternalResponse insertCliente(Cliente cliente)
 	
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PESSOA, cliente, response);
 	
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.CLIENTE, AcaoEnum.INSERT, historicoId,
+			getHistoricoBAR(), response, cliente.getId());
+	
 	insertPessoa(cliente, response, TabelaEnum.CLIENTE, historicoId);
 	
 	return response;

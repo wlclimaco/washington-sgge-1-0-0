@@ -1244,7 +1244,7 @@ public class Objects {
 		ContaCorrente contacorrente = new ContaCorrente();
 		Date a = new Date();
 		contacorrente.setId(id);
-		contacorrente.setAgencia(insertAgencia(id, TabelaEnum.CONTACORRENTE, action));
+		
 		contacorrente.setSaldo(new Double(10.00));
 		contacorrente.setNumeroConta("numeroConta_3 - " + action.toString());
 		contacorrente.setNossoNumero("nossoNumero_4 - " + action.toString());
@@ -2009,6 +2009,7 @@ public class Objects {
 	public static Endereco insertEndereco(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Endereco endereco = new Endereco();
 		Date a = new Date();
+		endereco.setId(id);
 		endereco.setCodIbge("555555");
 		endereco.setLogradouro("logradouro_2 - " + action.toString());
 		endereco.setBairro("bairro_3 - " + action.toString());
@@ -2036,6 +2037,7 @@ public class Objects {
 	public static Email insertEmail(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Email email = new Email();
 		Date a = new Date();
+		email.setId(id);
 		email.setTypeValue(1001);
 		email.setEmail("email_2 - " + action.toString());
 		email.setEmailTypeEnumValue(1003);

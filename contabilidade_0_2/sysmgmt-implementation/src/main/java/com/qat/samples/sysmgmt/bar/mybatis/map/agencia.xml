@@ -14,19 +14,33 @@
   <!-- Result maps describe the mapping between the columns returned
       from a query, and the class properties.  A result map isnt
       necessary if the columns (or aliases) match to the properties
-       exactly. -->
+       exactly.   
+       -->
   <resultMap id="AgenciaResult" type="Agencia">
     <result property="id" column="id"/>
+<result property="nome" column="nome"/>
+<result property="gerente" column="gerente"/>
+<result property="responsavelConta" column="responsavelConta"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<collection property="banco" column="banco" select="BancoMap.fetchBancoById"/>
+<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByAgencia"/>
+<collection property="emails" column="id" select="EmailMap.fetchEmailByAgencia"/>
+<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByAgencia"/>
+<collection property="numeroConta" column="id" select="ContaCorrenteMap.fetchContaCorrenteByAgencia"/>
   </resultMap>
 
   <sql id="allAgenciaColumns">
-emprId
+nome
+,gerente
+,responsavelConta
+,numeroConta
+,banco
+,emprId
 ,processId
 ,create_date
 ,create_user
@@ -35,6 +49,11 @@ emprId
 
 </sql>
 <sql id="allAgenciaValues">
+#{nome},
+#{gerente},
+#{responsavelConta},
+#{numeroConta},
+#{banco.id},
 		#{emprId},
 		#{processId},
 		#{createDateUTC},
@@ -78,6 +97,11 @@ emprId
 
  <update id="updateAgencia" parameterType="Agencia">
    UPDATE agencia SET
+<if test="nome!= null"> nome=#{nome},</if>
+<if test="gerente!= null"> gerente=#{gerente},</if>
+<if test="responsavelConta!= null"> responsavelConta=#{responsavelConta},</if>
+<if test="numeroConta!= null"> numeroConta=#{numeroConta},</if>
+<if test="banco.id!= null"> banco=#{banco.id},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

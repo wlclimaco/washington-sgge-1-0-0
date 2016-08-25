@@ -64,7 +64,7 @@ public final class EmailBARD extends SqlSessionDaoSupport
 			{
 				case INSERT:
 					count = emailDAC.insertEmail(email).hasSystemError();
-					if (count == true)
+					if (count == false)
 					{
 						Status status = new Status();
 						status.setStatus(CdStatusTypeEnum.ATIVO);
@@ -78,7 +78,7 @@ public final class EmailBARD extends SqlSessionDaoSupport
 					break;
 				case UPDATE:
 					count = emailDAC.updateEmail(email).hasSystemError();
-					if (count == true)
+					if (count == false)
 					{
 						count =
 								StatusBARD.maintainStatusAssociations(email.getStatusList(), response, email.getId(),

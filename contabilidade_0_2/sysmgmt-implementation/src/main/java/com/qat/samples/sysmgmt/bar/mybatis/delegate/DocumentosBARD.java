@@ -60,7 +60,7 @@ public final class DocumentosBARD extends SqlSessionDaoSupport
 			{
 				case INSERT:
 					count = documentoDAC.insertDocumento(documento).hasSystemError();
-					if (count == true)
+					if (count == false)
 					{
 						Status status = new Status();
 						status.setStatus(CdStatusTypeEnum.ATIVO);
@@ -74,7 +74,7 @@ public final class DocumentosBARD extends SqlSessionDaoSupport
 					break;
 				case UPDATE:
 					count = documentoDAC.updateDocumento(documento).hasSystemError();
-					if (count == true)
+					if (count == false)
 					{
 						count =
 								StatusBARD.maintainStatusAssociations(documento.getStatusList(), response,

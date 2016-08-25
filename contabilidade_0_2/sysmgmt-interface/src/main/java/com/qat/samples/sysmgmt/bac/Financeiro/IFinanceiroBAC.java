@@ -1,5 +1,8 @@
 package com.qat.samples.sysmgmt.bac.Financeiro;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.agencia.model.Agencia;
+import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
+import com.qat.samples.sysmgmt.agencia.model.request.AgenciaMaintenanceRequest;
 import com.qat.samples.sysmgmt.banco.model.Banco;
 import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
 import com.qat.samples.sysmgmt.banco.model.request.BancoMaintenanceRequest;
@@ -457,5 +460,67 @@ public interface IFinanceiroBAC
 * @return the internal results response
 */
 	public InternalResultsResponse<Caixa> fetchCaixasByRequest(CaixaInquiryRequest request);
+	
+	
+	
+	//===================================### CAIXA ####======================================
+		/**
+
+		/**
+		 * Insert caixa.
+		 *
+	* @param request the caixa maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Agencia> insertAgencia(AgenciaMaintenanceRequest request);
+
+		/**
+	* Update caixa.
+	*
+	* @param request the caixa maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Agencia> updateAgencia(AgenciaMaintenanceRequest request);
+
+		/**
+	* Delete caixa.
+	*
+	* @param request the caixa maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Agencia> deleteAgencia(AgenciaMaintenanceRequest request);
+
+		/**
+	* Refresh caixas.
+	*
+	* @param request containing the number to refresh with and whether to return the result
+	*/
+		public InternalResultsResponse<Agencia> refreshAgencias(RefreshRequest request);
+
+		/**
+	* Fetch caixa by id.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Agencia> fetchAgenciaById(FetchByIdRequest request);
+
+		/**
+	* Fetch all caixas.
+	*
+	* @return the internal results response< caixa>
+	*/
+		public InternalResultsResponse<Agencia> fetchAllAgencias(Agencia  caixa);
+
+		/**
+	* Fetch caixas by request.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Agencia> fetchAgenciasByRequest(AgenciaInquiryRequest request);
 
 }

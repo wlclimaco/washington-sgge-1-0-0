@@ -2,6 +2,9 @@
 package com.qat.samples.sysmgmt.bar.mybatis.Financeiro;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -10,11 +13,26 @@ import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.MyBatisBARHelper;
+import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.agencia.model.Agencia;
+import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
 import com.qat.samples.sysmgmt.banco.model.Banco;
 import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
+import com.qat.samples.sysmgmt.bar.Documentos.IDocumentoBAR;
+import com.qat.samples.sysmgmt.bar.Email.IEmailBAR;
+import com.qat.samples.sysmgmt.bar.Endereco.IEnderecoBAR;
 import com.qat.samples.sysmgmt.bar.Financeiro.IFinanceiroBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.ContaCorrenteBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.DocumentosBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.EmailBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.EnderecoBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.NotesBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.StatusBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.TelefoneBARD;
 import com.qat.samples.sysmgmt.condpag.model.CondPag;
 import com.qat.samples.sysmgmt.condpag.model.FormaPg;
 import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
@@ -30,6 +48,13 @@ import com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteInquiryRequ
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.FormaPgInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.Pessoa;
+import com.qat.samples.sysmgmt.util.model.AcaoEnum;
+import com.qat.samples.sysmgmt.util.model.AcaoTypeEnum;
+import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
+import com.qat.samples.sysmgmt.util.model.Status;
+import com.qat.samples.sysmgmt.util.model.TabelaEnum;
+import com.qat.samples.sysmgmt.util.model.TypeEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
@@ -323,12 +348,46 @@ private static final String STMT_DELETE_CAIXA = NAMESPACE_CAIXA + "deleteCaixaBy
 
 	/** The Constant STMT_FETCH_CAIXA_ALL_REQUEST. */
 	private static final String STMT_FETCH_CAIXA_ALL_REQUEST = NAMESPACE_CAIXA + "fetchAllCaixasRequest";
+	
+	
+	///===================================### AGENCIA ####======================================
+	/** The Constant NAMESPACE. */
+	private static final String NAMESPACE_AGENCIA = "AgenciaMap.";
+
+	/** The Constant STMT_INSERT_AGENCIA. */
+	private static final String STMT_INSERT_AGENCIA = NAMESPACE_AGENCIA + "insertAgencia";
+
+	/** The Constant STMT_UPDATE_AGENCIA. */
+	private static final String STMT_UPDATE_AGENCIA = NAMESPACE_AGENCIA + "updateAgencia";
+
+	/** The Constant STMT_DELETE_AGENCIA. */
+	private static final String STMT_DELETE_AGENCIA = NAMESPACE_AGENCIA + "deleteAgenciaById";
+
+		/** The Constant STMT_DELETE_AGENCIA_ALL. */
+		private static final String STMT_DELETE_AGENCIA_ALL = NAMESPACE_AGENCIA + "deleteAllAgencias";
+
+		/** The Constant STMT_FETCH_AGENCIA. */
+		private static final String STMT_FETCH_AGENCIA = NAMESPACE_AGENCIA + "fetchAgenciaById";
+
+		/** The Constant STMT_FETCH_AGENCIA_ALL. */
+		private static final String STMT_FETCH_AGENCIA_ALL = NAMESPACE_AGENCIA + "fetchAllAgencias";
+
+		/** The Constant STMT_FETCH_AGENCIA_COUNT. */
+		private static final String STMT_FETCH_AGENCIA_COUNT = NAMESPACE_AGENCIA + "fetchAgenciaRowCount";
+
+		/** The Constant STMT_FETCH_AGENCIA_ALL_REQUEST. */
+		private static final String STMT_FETCH_AGENCIA_ALL_REQUEST = NAMESPACE_AGENCIA + "fetchAllAgenciasRequest";
 
 	IStatusBAR statusBAR;
 
 	IHistoricoBAR historicoBAR;
 
 	IFinanceiroBAR financeiroBAR;
+	
+	
+	IEnderecoBAR enderecoBAR;
+	IEmailBAR emailBAR;
+	ITelefoneBAR telefoneBAR;
 
 
 	public IStatusBAR getStatusBAR() {
@@ -353,6 +412,30 @@ private static final String STMT_DELETE_CAIXA = NAMESPACE_CAIXA + "deleteCaixaBy
 
 	public void setFinanceiroBAR(IFinanceiroBAR financeiroBAR) {
 		this.financeiroBAR = financeiroBAR;
+	}
+
+	public IEnderecoBAR getEnderecoBAR() {
+		return enderecoBAR;
+	}
+
+	public void setEnderecoBAR(IEnderecoBAR enderecoBAR) {
+		this.enderecoBAR = enderecoBAR;
+	}
+
+	public IEmailBAR getEmailBAR() {
+		return emailBAR;
+	}
+
+	public void setEmailBAR(IEmailBAR emailBAR) {
+		this.emailBAR = emailBAR;
+	}
+
+	public ITelefoneBAR getTelefoneBAR() {
+		return telefoneBAR;
+	}
+
+	public void setTelefoneBAR(ITelefoneBAR telefoneBAR) {
+		this.telefoneBAR = telefoneBAR;
 	}
 
 	//===================================### CONTASPAGAR ####======================================
@@ -1683,5 +1766,193 @@ public static void fetchCaixasByRequest(SqlSession sqlSession, CaixaInquiryReque
 		}
 
 	}
+
+
+//===================================### AGENCIA ####======================================
+	/**
+/*
+* (non-Javadoc)
+* @see com.qat.samples.sysmgmt.base.bar.ICaixaBAR#insertCaixa(com.qat.samples.sysmgmt.base.model.Caixa)
+*/
+@Override
+public InternalResponse insertAgencia(Agencia caixa)
+{
+	InternalResponse response = new InternalResponse();
+	
+	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.AGENCIA, getHistoricoBAR(), response);
+	
+	caixa.setProcessId(historicoId);
+	
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_AGENCIA, caixa, response);
+	
+	insertPessoa(caixa, response, TabelaEnum.AGENCIA, historicoId);
+	
+	ContaCorrenteBARD.maintainContaCorrenteAssociationsA(caixa.getNumeroConta(), response, caixa.getId(), TypeEnum.HIGH, AcaoTypeEnum.INSERT, TabelaEnum.AGENCIA, getFinanceiroBAR(), statusBAR, historicoBAR, caixa.getEmprId(), caixa.getUserId(), historicoId, historicoId);
+	
+	return response;
+}
+
+/*
+* (non-Javadoc)
+* @see com.qat.samples.sysmgmt.base.bar.IAgenciaBAR#updateAgencia(com.qat.samples.sysmgmt.base.model.Agencia)
+*/
+@Override
+public InternalResponse updateAgencia(Agencia caixa)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_AGENCIA, caixa, response);
+	return response;
+}
+
+/*
+* (non-Javadoc)
+* @see com.qat.samples.sysmgmt.base.bar.IAgenciaBAR#deleteAgencia(com.qat.samples.sysmgmt.base.model.Agencia)
+*/
+@Override
+public InternalResponse deleteAgenciaById(Agencia caixa)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_AGENCIA, caixa, response);
+	return response;
+}
+
+/*
+* (non-Javadoc)
+* @see com.qat.samples.sysmgmt.base.bar.IAgenciaBAR#deleteAllAgencias()
+*/
+@Override
+public InternalResponse deleteAllAgencias()
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_AGENCIA_ALL, response);
+	return response;
+}
+
+/*
+* (non-Javadoc)
+* @see
+* com.qat.samples.sysmgmt.bar.IAgenciaBAR#fetchAgenciaById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+*/
+@Override
+public Agencia fetchAgenciaById(FetchByIdRequest request)
+{
+return (Agencia)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_AGENCIA, request.getFetchId());
+
+}
+
+/*
+* (non-Javadoc)
+* @see com.qat.samples.sysmgmt.base.bar.IAgenciaBAR#fetchAllAgenciasCache()
+*/
+@Override
+public InternalResultsResponse<Agencia> fetchAllAgencias(Agencia caixa)
+{
+	InternalResultsResponse<Agencia> response = new InternalResultsResponse<Agencia>();
+	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_AGENCIA_ALL));
+	return response;
+}
+
+/*
+* (non-Javadoc)
+* @see com.qat.samples.sysmgmt.bar.IAgenciaBAR#fetchAgenciasByRequest(com.qat.samples.sysmgmt.model.request.
+* PagedInquiryRequest)
+*/
+@Override
+public InternalResultsResponse<Agencia> fetchAgenciasByRequest(AgenciaInquiryRequest request)
+{
+	InternalResultsResponse<Agencia> response = new InternalResultsResponse<Agencia>();
+	fetchAgenciasByRequest(getSqlSession(), request, STMT_FETCH_AGENCIA_COUNT, STMT_FETCH_AGENCIA_ALL_REQUEST,
+			response);
+	return response;
+}
+
+//===================================### fetchAgenciasByRequest ####======================================
+
+public static void fetchAgenciasByRequest(SqlSession sqlSession, AgenciaInquiryRequest request, String countStatement,
+			String fetchPagedStatement,
+			InternalResultsResponse<?> response)
+	{
+
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount())
+		{
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
+			{
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
+			}
+		}
+
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
+		{
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
+public boolean insertPessoa(Agencia pessoa, InternalResponse response ,TabelaEnum tabela,Integer historicoId){
+	
+	Integer count = 0;
+	Boolean count1 = false;
+	if (!ValidationUtil.isNullOrEmpty(pessoa.getEnderecos()))
+	{
+		count +=
+				EnderecoBARD.maintainEnderecoAssociations(pessoa.getEnderecos(), response, pessoa.getId(), null,
+						null,
+						tabela, enderecoBAR, statusBAR, historicoBAR, pessoa.getId(),
+						pessoa.getCreateUser(), historicoId, historicoId);
+	}
+	
+	if (!ValidationUtil.isNullOrEmpty(pessoa.getEmails()))
+	{
+		count +=
+				EmailBARD.maintainEmailAssociations(pessoa.getEmails(), response, pessoa.getId(), null, null,
+						tabela, emailBAR, statusBAR, historicoBAR, pessoa.getId(),
+						pessoa.getCreateUser(), historicoId, historicoId);
+	}
+	if (!ValidationUtil.isNullOrEmpty(pessoa.getTelefones()))
+	{
+		count +=
+				TelefoneBARD.maintainTelefoneAssociations(pessoa.getTelefones(), response, pessoa.getId(), null,
+						null,
+						tabela, telefoneBAR, statusBAR, historicoBAR, pessoa.getId(),
+						pessoa.getCreateUser(), historicoId, historicoId);
+	}
+
+	if (count > 0)
+	{
+		Status status = new Status();
+		status.setStatus(CdStatusTypeEnum.ANALISANDO);
+		List<Status> statusList = new ArrayList<Status>();
+		statusList.add(status);
+		count1 =
+				StatusBARD.maintainStatusAssociations(statusList, response, pessoa.getId(), null, AcaoEnum.INSERT,
+						pessoa.getCreateUser(), pessoa.getId(), tabela, statusBAR,
+						historicoBAR, historicoId, historicoId);
+
+	}
+	
+	return true;
+}
 
 }

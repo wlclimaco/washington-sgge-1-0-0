@@ -11,10 +11,12 @@ import com.qat.framework.model.MessageSeverity;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.SystemErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.validation.ValidationContext;
 import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
 import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.agencia.model.Agencia;
+import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
+import com.qat.samples.sysmgmt.agencia.model.request.AgenciaMaintenanceRequest;
 import com.qat.samples.sysmgmt.banco.model.Banco;
 import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
 import com.qat.samples.sysmgmt.banco.model.request.BancoMaintenanceRequest;
@@ -1551,5 +1553,191 @@ private InternalResultsResponse<Caixa> processCaixa(ValidationContextIndicator i
 		{
 			return new InternalResultsResponse<Caixa>();
 		}
+	}
+	
+	//===================================### CAIXA ####======================================
+	/**
+/*
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.ICountyBAC#insertAgencia(com.qat.samples.sysmgmt.model.request.AgenciaMaintenanceRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Agencia> insertAgencia(AgenciaMaintenanceRequest request)
+{
+	InternalResultsResponse<Agencia> response =
+			processAgencia(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.IAgenciaBAC#updateAgencia(com.qat.samples.sysmgmt.model.request.AgenciaMaintenanceRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Agencia> updateAgencia(AgenciaMaintenanceRequest request)
+{
+	InternalResultsResponse<Agencia> response =
+			processAgencia(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.IAgenciaBAC#deleteAgencia(com.qat.samples.sysmgmt.model.request.AgenciaMaintenanceRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Agencia> deleteAgencia(AgenciaMaintenanceRequest request)
+{
+	InternalResultsResponse<Agencia> response =
+			processAgencia(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.IAgenciaBAC#fetchAgenciaById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Agencia> fetchAgenciaById(FetchByIdRequest request)
+{
+	InternalResultsResponse<Agencia> response = new InternalResultsResponse<Agencia>();
+	// validate fetchId field
+	if (ValidationUtil.isNull(request.getFetchId()))
+	{
+		response.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
+		response.setStatus(SystemErrorCategory.SystemValidation);
+	}
+	else
+	{
+		response.getResultsList().add(getFinanceiroBAR().fetchAgenciaById(request));
+	}
+
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IAgenciaBAC#fetchAgenciasByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<Agencia> fetchAgenciasByRequest(AgenciaInquiryRequest request)
+{
+	return getFinanceiroBAR().fetchAgenciasByRequest(request);
+}
+
+/**
+ * Process.
+ *
+ * @param indicator the indicator
+ * @param persistType the persist type
+ * @param request the request
+ * @return the agencia response
+ */
+private InternalResultsResponse<Agencia> processAgencia(ValidationContextIndicator indicator,
+		PersistenceActionEnum persistType,
+		AgenciaMaintenanceRequest request)
+		{
+	InternalResultsResponse<Agencia> response = null;
+
+		// Persist
+		InternalResponse internalResponse = doPersistenceAgencia(request.getAgencia(), persistType);
+		if (internalResponse.isInError())
+		{
+			response = new InternalResultsResponse<Agencia>();
+			response.setStatus(internalResponse.getError());
+			response.addMessages(internalResponse.getMessageInfoList());
+			response.addMessage(DEFAULT_FINANCEIRO_BAC_EXCEPTION_MSG, MessageSeverity.Error,
+					MessageLevel.Object, new Object[] {internalResponse.errorToString()});
+
+			return response;
+		}
+
+		// Call maintainReurnList to see if we need to return the agencia list and if so whether it should be paged or
+		// not
+		response = maintainReturnListAgencia(request.getReturnList(), request.getReturnListPaged(),new Agencia());
+
+		return response;
+			}
+
+	/**
+	 * Do persistenceAgencia.
+	 *
+	 * @param request the request
+	 * @param updateType the update type
+	 * @return the internal response
+	 */
+	private InternalResponse doPersistenceAgencia(Agencia agencia, PersistenceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			case INSERT:
+				return getFinanceiroBAR().insertAgencia(agencia);
+
+			case UPDATE:
+				return getFinanceiroBAR().updateAgencia(agencia);
+
+			case DELETE:
+				return getFinanceiroBAR().deleteAgenciaById(agencia);
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
+		}
+
+		return null;
+	}
+
+	/**
+	 * Maintain return list.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private InternalResultsResponse<Agencia> maintainReturnListAgencia(Boolean listIndicator, Boolean pageListIndicator,Agencia agencia)
+	{
+		// Fetch again if requested.
+		if (listIndicator)
+		{
+			// Fetch Paged is requested.
+			if (pageListIndicator)
+			{
+				AgenciaInquiryRequest request = new AgenciaInquiryRequest();
+				request.setPreQueryCount(true);
+				return fetchAgenciasByRequest(request);
+			}
+			else
+			{
+				// otherwise return all rows not paged
+				return fetchAllAgencias(agencia);
+			}
+		}
+		else
+		{
+			return new InternalResultsResponse<Agencia>();
+		}
+	}
+
+	@Override
+	public InternalResultsResponse<Agencia> refreshAgencias(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Agencia> fetchAllAgencias(Agencia caixa) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

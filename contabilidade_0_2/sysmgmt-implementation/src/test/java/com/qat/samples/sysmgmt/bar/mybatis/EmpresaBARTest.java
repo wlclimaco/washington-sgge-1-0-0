@@ -197,15 +197,15 @@ public IEmpresaBAR getEmpresaBAR()
 @Test
 	public void testDeleteFilial()
 	{
-		Filial filial = Objects.insertFilial(999999, TabelaEnum.FILIAL,PersistenceActionEnum.INSERT);
+		Filial filial = Objects.insertFilial(587574, TabelaEnum.FILIAL,PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(999999);
+		request.setFetchId(587574);
 		Filial filialResponse = getEmpresaBAR().fetchFilialById(request);
 		Assert.assertEquals(filialResponse, null);
 		getEmpresaBAR().insertFilial(filial);
 		filialResponse = getEmpresaBAR().fetchFilialById(request);
 		Assert.assertEquals(filial.getId(), filialResponse.getId());
-		getEmpresaBAR().deleteFilialById(filial);
+		getEmpresaBAR().deleteFilialById(Objects.insertFilial(587574, TabelaEnum.FILIAL,PersistenceActionEnum.DELETE));
 		filialResponse = getEmpresaBAR().fetchFilialById(request);
 		Assert.assertEquals(filialResponse, null);
 	}

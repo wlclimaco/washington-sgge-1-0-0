@@ -63,7 +63,7 @@ public final class TelefoneBARD extends SqlSessionDaoSupport
 			{
 				case INSERT:
 					count = telefoneDAC.insertTelefone(telefone).hasSystemError();
-					if (count == true)
+					if (count == false)
 					{
 						Status status = new Status();
 						status.setStatus(CdStatusTypeEnum.ATIVO);
@@ -77,7 +77,7 @@ public final class TelefoneBARD extends SqlSessionDaoSupport
 					break;
 				case UPDATE:
 					count = telefoneDAC.updateTelefone(telefone).hasSystemError();
-					if (count == true)
+					if (count == false)
 					{
 						count =
 								StatusBARD.maintainStatusAssociations(telefone.getStatusList(), response,

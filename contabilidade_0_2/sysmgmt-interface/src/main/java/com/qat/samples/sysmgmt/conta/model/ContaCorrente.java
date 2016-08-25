@@ -15,13 +15,13 @@ public class ContaCorrente extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
-
-	private Agencia agencia;
-
+	
 
 	/** The type of an account. */
 	private String numeroConta;
 	private String nossoNumero;
+	
+	private Integer statusConta;
 
 	private double saldo;
 
@@ -50,14 +50,6 @@ public class ContaCorrente extends ModelCosmeDamiao
 	public void setId(Integer id)
 	{
 		this.id = id;
-	}
-
-	public Agencia getAgencia() {
-		return agencia;
-	}
-
-	public void setAgencia(Agencia agencia) {
-		this.agencia = agencia;
 	}
 
 	public String getNumeroConta() {
@@ -92,11 +84,20 @@ public class ContaCorrente extends ModelCosmeDamiao
 		this.historicoList = historicoList;
 	}
 
-	@Override
-	public String toString() {
-		return "ContaCorrente [getId()=" + getId() + ", getAgencia()=" + getAgencia() + ", getNumeroConta()="
-				+ getNumeroConta() + ", getNossoNumero()=" + getNossoNumero() + ", getSaldo()=" + getSaldo()
-				+ ", getHistoricoList()=" + getHistoricoList() + ", toString()=" + super.toString() + "]";
+	public Integer getStatusConta() {
+		return statusConta;
 	}
 
+	public void setStatusConta(Integer statusConta) {
+		this.statusConta = statusConta;
+	}
+
+	@Override
+	public String toString() {
+		return "ContaCorrente [getId()=" + getId() + ", getNumeroConta()=" + getNumeroConta() + ", getNossoNumero()="
+				+ getNossoNumero() + ", getSaldo()=" + getSaldo() + ", getHistoricoList()=" + getHistoricoList()
+				+ ", getStatusConta()=" + getStatusConta() + ", toString()=" + super.toString() + "]";
+	}
+
+	
 }

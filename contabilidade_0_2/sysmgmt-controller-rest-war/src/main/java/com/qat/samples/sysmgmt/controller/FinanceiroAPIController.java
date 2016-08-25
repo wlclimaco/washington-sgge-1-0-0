@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
+import com.qat.samples.sysmgmt.agencia.model.Agencia;
+import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
+import com.qat.samples.sysmgmt.agencia.model.request.AgenciaMaintenanceRequest;
+import com.qat.samples.sysmgmt.agencia.model.response.AgenciaResponse;
 import com.qat.samples.sysmgmt.bac.Financeiro.IFinanceiroBAC;
 import com.qat.samples.sysmgmt.banco.model.Banco;
 import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
@@ -900,6 +904,123 @@ public class FinanceiroAPIController extends BaseController {
 					new Object[] { ex.toString() });
 		}
 		return caixaResponse;
+
+	}
+
+	// ===================================### CONDPAG
+	// ####======================================
+	/**
+	 * Refresh condpags.
+	 *
+	 * @param refreshInt
+	 *            the refresh int
+	 * @param retList
+	 *            the ret list
+	 * @param retPaged
+	 *            the ret paged
+	 * @return the condpag response
+	 */
+	@RequestMapping(value = "/agencia/refresh", method = RequestMethod.GET)
+	@ResponseBody
+	public AgenciaResponse refreshAgencias(@RequestParam("refreshInt") Integer refreshInt,
+			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
+		AgenciaResponse agenciaResponse = new AgenciaResponse();
+
+		try {
+			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
+			InternalResultsResponse<Agencia> internalResponse = getFinanceiroBAC().refreshAgencias(request);
+			ResponseHandler.handleOperationStatusAndMessages(agenciaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, agenciaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return agenciaResponse;
+
+	}
+
+	/**
+	 * Fetch agencia paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the agencia response
+	 */
+	@RequestMapping(value = "/agencia/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public AgenciaResponse fetchAgenciaPaged(@RequestBody AgenciaInquiryRequest request) {
+		AgenciaResponse agenciaResponse = new AgenciaResponse();
+		try {
+			InternalResultsResponse<Agencia> internalResponse = getFinanceiroBAC().fetchAgenciasByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(agenciaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, agenciaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return agenciaResponse;
+	}
+
+	/**
+	 * Insert agencia.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the agencia response
+	 */
+	@RequestMapping(value = "/agencia/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public AgenciaResponse insertAgencia(@RequestBody AgenciaMaintenanceRequest request) {
+		AgenciaResponse agenciaResponse = new AgenciaResponse();
+		try {
+			InternalResultsResponse<Agencia> internalResponse = getFinanceiroBAC().insertAgencia(request);
+			ResponseHandler.handleOperationStatusAndMessages(agenciaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, agenciaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return agenciaResponse;
+	}
+
+	/**
+	 * Update agencia.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the agencia response
+	 */
+	@RequestMapping(value = "/agencia/update", method = RequestMethod.POST)
+	@ResponseBody
+	public AgenciaResponse updateAgencia(@RequestBody AgenciaMaintenanceRequest request) {
+		AgenciaResponse agenciaResponse = new AgenciaResponse();
+		try {
+			InternalResultsResponse<Agencia> internalResponse = getFinanceiroBAC().updateAgencia(request);
+			ResponseHandler.handleOperationStatusAndMessages(agenciaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, agenciaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return agenciaResponse;
+	}
+
+	/**
+	 * Delete agencia.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the agencia response
+	 */
+	@RequestMapping(value = "/agencia/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public AgenciaResponse deleteAgencia(@RequestBody AgenciaMaintenanceRequest request) {
+		AgenciaResponse agenciaResponse = new AgenciaResponse();
+
+		try {
+			InternalResultsResponse<Agencia> internalResponse = getFinanceiroBAC().deleteAgencia(request);
+			ResponseHandler.handleOperationStatusAndMessages(agenciaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, agenciaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return agenciaResponse;
 
 	}
 

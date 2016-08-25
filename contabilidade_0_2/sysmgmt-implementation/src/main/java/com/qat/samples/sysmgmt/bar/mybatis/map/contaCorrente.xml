@@ -17,6 +17,7 @@
        exactly. -->
   <resultMap id="ContaCorrenteResult" type="ContaCorrente">
     <result property="id" column="id"/>
+    <result property="statusConta" column="statusConta"/>
     <result property="saldo" column="saldo"/>
     <result property="numeroConta" column="numeroConta"/>
     <result property="nossoNumero" column="nossoNumero"/>
@@ -26,12 +27,12 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<!-- <collection property="historicoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/> -->
-<collection property="agencia" column="agencia" select="AgenciaMap.fetchAgenciaById"/>
+<!-- <collection property="historicoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/> 
+<collection property="agencia" column="agencia" select="AgenciaMap.fetchAgenciaById"/>-->
   </resultMap>
 
   <sql id="allContaCorrenteColumns">
-agencia
+statusConta
 ,saldo
 ,numeroConta
 ,nossoNumero
@@ -44,7 +45,7 @@ agencia
 
 </sql>
 <sql id="allContaCorrenteValues">
-#{agencia.id},
+#{statusConta},
 #{saldo},
 #{numeroConta},
 #{nossoNumero},
@@ -68,6 +69,14 @@ agencia
 	<include refid="allContaCorrenteColumns" />
    FROM contacorrente WHERE id = #{fetchid}
  </select>
+ 
+  <select id="fetchContaCorrenteByAgencia" parameterType="Integer" resultMap="ContaCorrenteResult">
+    SELECT id,
+	<include refid="allContaCorrenteColumns" />
+   FROM contacorrente WHERE parentId = #{fetchid}
+ </select>
+ 
+ 
 
  <select id="fetchAllContaCorrentesRequest" parameterType="ContaCorrenteInquiryRequest" resultMap="ContaCorrenteResult">
 
@@ -91,7 +100,7 @@ agencia
 
  <update id="updateContaCorrente" parameterType="ContaCorrente">
    UPDATE contacorrente SET
-<if test="agencia.id!= null">agencia = #{agencia.id},</if>
+<if test="statusConta!= null">statusConta = #{statusConta},</if>
 <if test="saldo!= null">saldo = #{saldo},</if>
 <if test="numeroConta!= null">numeroConta = #{numeroConta},</if>
 <if test="nossoNumero!= null">nossoNumero = #{nossoNumero},</if>

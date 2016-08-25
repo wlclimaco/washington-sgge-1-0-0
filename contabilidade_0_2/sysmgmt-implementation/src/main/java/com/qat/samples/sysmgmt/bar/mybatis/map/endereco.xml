@@ -93,6 +93,12 @@ parentId
 	<include refid="allEnderecoColumns" />
    FROM endereco WHERE parentId = #{parentId} and tabelaEnumValue in (16,17,18,19)
  </select>
+ 
+   <select id="fetchEnderecoByAgencia" parameterType="Integer" resultMap="EnderecoResult">
+    SELECT id,
+	<include refid="allEnderecoColumns" />
+   FROM endereco WHERE parentId = #{parentId} and tabelaEnumValue = 30 
+ </select>
 
  <select id="fetchAllEnderecosRequest" parameterType="PagedInquiryRequest" resultMap="EnderecoResult">
 
@@ -113,7 +119,7 @@ parentId
    FROM endereco WHERE parentId = #{id} and tabelaEnumValue in (1,51,52,61,62,63)
  </select>
 
- <insert id="insertEndereco" parameterType="Endereco">
+ <insert id="insertEndereco" parameterType="Endereco"  useGeneratedKeys="true" keyProperty="id">
  	INSERT INTO endereco (
  	<if test="id != null">id,</if>
 	<include refid="allEnderecoColumns" />

@@ -1151,7 +1151,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 			contacorrente.setNumeroConta("NATIVE INSERT UPDATE");
 			contacorrente.setParentId(id);
 			contacorrente.setEmprId(1);
-			contacorrente.setAgencia(new Agencia());
+
 			contacorrente.setModifyDateUTC(a.getTime());
 			contacorrente.setCreateDateUTC(a.getTime());
 			contacorrente.setCreateUser("system");

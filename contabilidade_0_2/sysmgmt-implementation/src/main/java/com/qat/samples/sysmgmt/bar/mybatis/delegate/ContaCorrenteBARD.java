@@ -14,6 +14,7 @@ import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
+import com.qat.samples.sysmgmt.util.model.AcaoTypeEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
@@ -40,8 +41,8 @@ public final class ContaCorrenteBARD extends SqlSessionDaoSupport
 	 */
 	@SuppressWarnings("unchecked")
 	public static Integer maintainContaCorrenteAssociationsA(List<ContaCorrente> contaCorrenteList,
-			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IEmpresaBAR iEmpresaBAR, IStatusBAR statusBAR,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoTypeEnum insert,
+			TabelaEnum tabelaEnum, IFinanceiroBAR iEmpresaBAR, IStatusBAR statusBAR,
 			IHistoricoBAR historicoBAR,
 			Integer empId,
 			String UserId, Integer processId, Integer historicoId)
@@ -62,7 +63,7 @@ public final class ContaCorrenteBARD extends SqlSessionDaoSupport
 		switch (contaCorrente.getModelAction())
 		{
 			case INSERT:
-				count = ((IFinanceiroBAR) iEmpresaBAR).insertContaCorrente(contaCorrente).hasSystemError();
+				count = iEmpresaBAR.insertContaCorrente(contaCorrente).hasSystemError();
 				if (count == true)
 				{
 					Status status = new Status();
@@ -75,7 +76,7 @@ public final class ContaCorrenteBARD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
-				count = ((IFinanceiroBAR) iEmpresaBAR).updateContaCorrente(contaCorrente).hasSystemError();
+				count = iEmpresaBAR.updateContaCorrente(contaCorrente).hasSystemError();
 				if (count == true)
 				{
 					count =
@@ -87,7 +88,7 @@ public final class ContaCorrenteBARD extends SqlSessionDaoSupport
 				}
 				break;
 			case DELETE:
-				count = ((IFinanceiroBAR) iEmpresaBAR).deleteContaCorrenteById(contaCorrente).hasSystemError();
+				count = iEmpresaBAR.deleteContaCorrenteById(contaCorrente).hasSystemError();
 				Status status = new Status();
 				status.setStatus(CdStatusTypeEnum.DELETADO);
 				List<Status> statusList = new ArrayList<Status>();

@@ -69,9 +69,6 @@ public final class StatusBARD extends SqlSessionDaoSupport
 			{
 				case INSERT:
 					count = statusDAC.insertStatus(status).hasSystemError();
-					if (count = true)
-					{
-
 						if (!ValidationUtil.isNullOrZero(historicoId))
 						{
 							historicoItens = new HistoricoItens();
@@ -82,12 +79,10 @@ public final class StatusBARD extends SqlSessionDaoSupport
 							historicoItens.setAcaoType(AcaoEnum.INSERT);
 							historicoDAC.insertHistoricoItens(historicoItens);
 						}
-					}
+					
 					break;
 				case UPDATE:
 					count = statusDAC.updateStatus(status).hasSystemError();
-					if (count == true)
-					{
 						if (!ValidationUtil.isNullOrZero(historicoId))
 						{
 							historicoItens = new HistoricoItens();
@@ -97,7 +92,7 @@ public final class StatusBARD extends SqlSessionDaoSupport
 							historicoItens.setAcaoType(AcaoEnum.UPDATE);
 							historicoDAC.insertHistoricoItens(historicoItens);
 						}
-					}
+				
 					break;
 				case DELETE:
 					if (!ValidationUtil.isNullOrZero(historicoId))

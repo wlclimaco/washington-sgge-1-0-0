@@ -80,7 +80,7 @@ tabelaEnumValue
 		SELECT COUNT(*) AS RECORD_COUNT FROM documento WHERE id IS NOT NULL
  </select>
 
- <insert id="insertDocumento" parameterType="Documento">
+ <insert id="insertDocumento" parameterType="Documento" useGeneratedKeys="true" keyProperty="id">
  	INSERT INTO documento (<if test="id != null">id,</if>
 	<include refid="allDocumentoColumns" />
      )
