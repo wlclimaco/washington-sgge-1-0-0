@@ -30,7 +30,9 @@ public class Titulo extends ModelCosmeDamiao
 	private Long dataVencimento;
 
 	/** The numero. */
-	private Integer docId;
+	private String docId;
+
+	private TipoDocEnum tipoDocEnum;
 
 	private String observacao;
 
@@ -39,6 +41,20 @@ public class Titulo extends ModelCosmeDamiao
 	private FinanceiroStatusEnum financeiroEnum;
 
 	private List<BaixaTitulo> listBaixa;
+
+	public Integer getTipoDocEnumValue()
+	{
+		if (tipoDocEnum != null)
+		{
+			return tipoDocEnum.getValue();
+		}
+		return null;
+	}
+
+	public void setTipoDocEnumValue(Integer acaoTypeValue)
+	{
+		tipoDocEnum = TipoDocEnum.enumForValue(acaoTypeValue);
+	}
 
 	public Integer getFinanceiroEnumValue()
 	{
