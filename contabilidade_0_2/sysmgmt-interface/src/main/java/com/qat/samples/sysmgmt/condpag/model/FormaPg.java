@@ -1,5 +1,7 @@
 package com.qat.samples.sysmgmt.condpag.model;
 
+import com.qat.samples.sysmgmt.conta.model.Conta;
+import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -14,12 +16,114 @@ public class FormaPg extends ModelCosmeDamiao
 
 	/** The descricao. */
 	private String descricao;
+	
+	private String observacao;
 
-	/** The dias pg. */
 	private Integer diasPg;
+	
+	private Integer parcelamentoMax;
+	
+	private Integer parcelamentoSemJuros;
+	
+	private Double juros;
+	
+	private Double taxaFixa;
+	
+	private Double descAvista;
+	
+	private Conta conta;
+	
+	private DoisValores tipoDoc;
+	
+	private Integer qntIntervalo;
+	
+	private Integer intervalo;
+
 
 	/** The entrada. */
 	private Integer entrada;
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+
+	public Integer getParcelamentoMax() {
+		return parcelamentoMax;
+	}
+
+	public void setParcelamentoMax(Integer parcelamentoMax) {
+		this.parcelamentoMax = parcelamentoMax;
+	}
+
+	public Integer getParcelamentoSemJuros() {
+		return parcelamentoSemJuros;
+	}
+
+	public void setParcelamentoSemJuros(Integer parcelamentoSemJuros) {
+		this.parcelamentoSemJuros = parcelamentoSemJuros;
+	}
+
+	public Double getJuros() {
+		return juros;
+	}
+
+	public void setJuros(Double juros) {
+		this.juros = juros;
+	}
+
+	public Double getTaxaFixa() {
+		return taxaFixa;
+	}
+
+	public void setTaxaFixa(Double taxaFixa) {
+		this.taxaFixa = taxaFixa;
+	}
+
+	public Double getDescAvista() {
+		return descAvista;
+	}
+
+	public void setDescAvista(Double descAvista) {
+		this.descAvista = descAvista;
+	}
+
+	public Conta getConta() {
+		return conta;
+	}
+
+	public void setConta(Conta conta) {
+		this.conta = conta;
+	}
+
+	public DoisValores getTipoDoc() {
+		return tipoDoc;
+	}
+
+	public void setTipoDoc(DoisValores tipoDoc) {
+		this.tipoDoc = tipoDoc;
+	}
+
+	public Integer getQntIntervalo() {
+		return qntIntervalo;
+	}
+
+	public void setQntIntervalo(Integer qntIntervalo) {
+		this.qntIntervalo = qntIntervalo;
+	}
+
+	public Integer getIntervalo() {
+		return intervalo;
+	}
+
+	public void setIntervalo(Integer intervalo) {
+		this.intervalo = intervalo;
+	}
+
+	/** The dias pg. */
+	
 
 	public FormaPg(Integer id, PersistenceActionEnum modelAction)
 	{
@@ -118,10 +222,14 @@ public class FormaPg extends ModelCosmeDamiao
 	}
 
 	@Override
-	public String toString()
-	{
-		return "FormaPg [getId()=" + getId() + ", getDescricao()=" + getDescricao() + ", getDiasPg()=" + getDiasPg()
-				+ ", getEntrada()=" + getEntrada() + ", toString()=" + super.toString() + "]";
+	public String toString() {
+		return "FormaPg [getObservacao()=" + getObservacao() + ", getParcelamentoMax()=" + getParcelamentoMax()
+				+ ", getParcelamentoSemJuros()=" + getParcelamentoSemJuros() + ", getJuros()=" + getJuros()
+				+ ", getTaxaFixa()=" + getTaxaFixa() + ", getDescAvista()=" + getDescAvista() + ", getConta()="
+				+ getConta() + ", getTipoDoc()=" + getTipoDoc() + ", getQntIntervalo()=" + getQntIntervalo()
+				+ ", getIntervalo()=" + getIntervalo() + ", getId()=" + getId() + ", getDescricao()=" + getDescricao()
+				+ ", getDiasPg()=" + getDiasPg() + ", getEntrada()=" + getEntrada() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
 }

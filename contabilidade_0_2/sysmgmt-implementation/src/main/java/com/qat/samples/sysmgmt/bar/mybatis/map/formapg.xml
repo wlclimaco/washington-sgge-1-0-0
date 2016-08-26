@@ -14,11 +14,50 @@
   <!-- Result maps describe the mapping between the columns returned
       from a query, and the class properties.  A result map isnt
       necessary if the columns (or aliases) match to the properties
-       exactly. -->
+       exactly. 
+       private Integer id;
+
+	/** The descricao. */
+	private String descricao;
+	
+	private String observacao;
+
+	private Integer diasPg;
+	
+	private Integer parcelamentoMax;
+	
+	private Integer parcelamentoSemJuros;
+	
+	private Double juros;
+	
+	private Double taxaFixa;
+	
+	private Double descAvista;
+	
+	private Conta conta;
+	
+	private DoisValores tipoDoc;
+	
+	private Integer qntIntervalo;
+	
+	private Integer intervalo;
+
+
+	/** The entrada. */
+	private Integer entrada;
+       -->
   <resultMap id="FormaPgResult" type="FormaPg">
     <result property="id" column="id"/>
     <result property="descricao" column="descricao"/>
-    <result property="diasPg" column="diasPg"/>
+    <result property="observacao" column="observacao"/>
+    <result property="diasPg" column="entrada"/>
+    <result property="parcelamentoMax" column="entrada"/>
+    <result property="parcelamentoSemJuros" column="entrada"/>
+    <result property="juros" column="entrada"/>
+    <result property="taxaFixa" column="entrada"/>
+    <result property="descAvista" column="entrada"/>
+    <result property="qntIntervalo" column="entrada"/>
+    <result property="intervalo" column="entrada"/>
     <result property="entrada" column="entrada"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
@@ -26,11 +65,23 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<collection property="conta" column="conta" select="ContaMap.fetchContaById"/>
+<collection property="tipoDoc" column="tipoDoc" select="DoisValoresMap.fetchDoisValoresById"/>
   </resultMap>
 
   <sql id="allFormaPgColumns">
 descricao
+,observacao
 ,diasPg
+,parcelamentoMax
+,parcelamentoSemJuros
+,juros
+,taxaFixa
+,descAvista
+,conta
+,tipoDoc
+,qntIntervalo
+,intervalo
 ,entrada
 ,emprId
 ,processId
@@ -42,7 +93,17 @@ descricao
 </sql>
 <sql id="allFormaPgValues">
 #{descricao},
+#{observacao},
 #{diasPg},
+#{parcelamentoMax},
+#{parcelamentoSemJuros},
+#{juros},
+#{taxaFixa},
+#{descAvista},
+#{conta.id},
+#{tipoDoc.id},
+#{qntIntervalo},
+#{intervalo},
 #{entrada},
 		#{emprId},
 		#{processId},
@@ -88,7 +149,17 @@ descricao
  <update id="updateFormaPg" parameterType="FormaPg">
    UPDATE formapg SET
 <if test="descricao!= null">descricao = #{descricao},</if>
+<if test="observacao!= null">observacao = #{observacao},</if>
 <if test="diasPg!= null">diasPg = #{diasPg},</if>
+<if test="parcelamentoMax!= null">parcelamentoMax = #{parcelamentoMax},</if>
+<if test="parcelamentoSemJuros!= null">parcelamentoSemJuros = #{parcelamentoSemJuros},</if>
+<if test="juros!= null">juros = #{juros},</if>
+<if test="taxaFixa!= null">taxaFixa = #{taxaFixa},</if>
+<if test="descAvista!= null">descAvista = #{descAvista},</if>
+<if test="conta.id!= null">conta = #{conta.id},</if>
+<if test="tipoDoc.id!= null">tipoDoc = #{tipoDoc.id},</if>
+<if test="qntIntervalo!= null">qntIntervalo = #{qntIntervalo},</if>
+<if test="intervalo!= null">intervalo = #{intervalo},</if>
 <if test="entrada!= null">entrada = #{entrada},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>

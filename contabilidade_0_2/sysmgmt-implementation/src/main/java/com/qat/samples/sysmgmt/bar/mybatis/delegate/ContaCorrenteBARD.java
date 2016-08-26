@@ -64,7 +64,7 @@ public final class ContaCorrenteBARD extends SqlSessionDaoSupport
 		{
 			case INSERT:
 				count = iEmpresaBAR.insertContaCorrente(contaCorrente).hasSystemError();
-				if (count == true)
+				if (count == false)
 				{
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.ATIVO);

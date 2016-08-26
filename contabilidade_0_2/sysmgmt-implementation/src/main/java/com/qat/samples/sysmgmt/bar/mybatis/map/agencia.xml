@@ -21,6 +21,7 @@
 <result property="nome" column="nome"/>
 <result property="gerente" column="gerente"/>
 <result property="responsavelConta" column="responsavelConta"/>
+<result property="parentId" column="parentId"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
@@ -38,7 +39,7 @@
 nome
 ,gerente
 ,responsavelConta
-,numeroConta
+,parentId
 ,banco
 ,emprId
 ,processId
@@ -52,7 +53,7 @@ nome
 #{nome},
 #{gerente},
 #{responsavelConta},
-#{numeroConta},
+#{parentId},
 #{banco.id},
 		#{emprId},
 		#{processId},
@@ -100,7 +101,6 @@ nome
 <if test="nome!= null"> nome=#{nome},</if>
 <if test="gerente!= null"> gerente=#{gerente},</if>
 <if test="responsavelConta!= null"> responsavelConta=#{responsavelConta},</if>
-<if test="numeroConta!= null"> numeroConta=#{numeroConta},</if>
 <if test="banco.id!= null"> banco=#{banco.id},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>

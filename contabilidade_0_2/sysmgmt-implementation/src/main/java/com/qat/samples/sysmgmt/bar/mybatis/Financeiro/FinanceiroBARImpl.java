@@ -1786,9 +1786,10 @@ public InternalResponse insertAgencia(Agencia caixa)
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_AGENCIA, caixa, response);
 	
 	insertPessoa(caixa, response, TabelaEnum.AGENCIA, historicoId);
-	
-	ContaCorrenteBARD.maintainContaCorrenteAssociationsA(caixa.getNumeroConta(), response, caixa.getId(), TypeEnum.HIGH, AcaoTypeEnum.INSERT, TabelaEnum.AGENCIA, getFinanceiroBAR(), statusBAR, historicoBAR, caixa.getEmprId(), caixa.getUserId(), historicoId, historicoId);
-	
+	if (!ValidationUtil.isNullOrEmpty(caixa.getNumeroConta()))
+	{
+		ContaCorrenteBARD.maintainContaCorrenteAssociationsA(caixa.getNumeroConta(), response, caixa.getId(), TypeEnum.HIGH, AcaoTypeEnum.INSERT, TabelaEnum.AGENCIA, getFinanceiroBAR(), statusBAR, historicoBAR, caixa.getEmprId(), caixa.getUserId(), historicoId, historicoId);
+	}
 	return response;
 }
 

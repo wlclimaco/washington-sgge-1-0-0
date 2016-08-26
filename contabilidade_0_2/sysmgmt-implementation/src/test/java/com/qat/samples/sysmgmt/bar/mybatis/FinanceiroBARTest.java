@@ -743,9 +743,9 @@ public IFinanceiroBAR getFinanceiroBAR()
 	@Test
 	public void testUpdateBanco()
 	{
-		Banco banco = insertBANCO(1, TabelaEnum.FORMAPG, PersistenceActionEnum.UPDATE);
+		Banco banco = insertBANCO(1001, TabelaEnum.FORMAPG, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1001);
 		Banco bancoResponse = getFinanceiroBAR().fetchBancoById(request);
 		Assert.assertEquals(bancoResponse.getNome(), "nome_1");
 		getFinanceiroBAR().updateBanco(banco);
@@ -798,9 +798,9 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteContaCorrente()
 	{
-		ContaCorrente contacorrente = insertContaCorrente(4, TabelaEnum.CONTACORRENTE, PersistenceActionEnum.INSERT);
+		ContaCorrente contacorrente = insertContaCorrente(4000, TabelaEnum.CONTACORRENTE, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(4000);
 		ContaCorrente contacorrenteResponse = getFinanceiroBAR().fetchContaCorrenteById(request);
 		Assert.assertEquals(contacorrenteResponse, null);
 		getFinanceiroBAR().insertContaCorrente(contacorrente);
@@ -831,9 +831,9 @@ public IFinanceiroBAR getFinanceiroBAR()
 	@Test
 	public void testUpdateContaCorrente()
 	{
-		ContaCorrente contacorrente = insertContaCorrente(1, TabelaEnum.CONTACORRENTE, PersistenceActionEnum.UPDATE);
+		ContaCorrente contacorrente = insertContaCorrente(1001, TabelaEnum.CONTACORRENTE, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1001);
 		ContaCorrente contacorrenteResponse = getFinanceiroBAR().fetchContaCorrenteById(request);
 		Assert.assertEquals(contacorrenteResponse.getNumeroConta(), "NATIVE INSERT");
 		getFinanceiroBAR().updateContaCorrente(contacorrente);
@@ -1151,7 +1151,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 			contacorrente.setNumeroConta("NATIVE INSERT UPDATE");
 			contacorrente.setParentId(id);
 			contacorrente.setEmprId(1);
-
+			contacorrente.setStatusConta(1);
 			contacorrente.setModifyDateUTC(a.getTime());
 			contacorrente.setCreateDateUTC(a.getTime());
 			contacorrente.setCreateUser("system");

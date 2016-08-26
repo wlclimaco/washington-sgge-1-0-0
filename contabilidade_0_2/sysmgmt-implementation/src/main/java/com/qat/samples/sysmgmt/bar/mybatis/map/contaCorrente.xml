@@ -73,7 +73,7 @@ statusConta
   <select id="fetchContaCorrenteByAgencia" parameterType="Integer" resultMap="ContaCorrenteResult">
     SELECT id,
 	<include refid="allContaCorrenteColumns" />
-   FROM contacorrente WHERE parentId = #{fetchid}
+   FROM contacorrente WHERE parentId = #{id}
  </select>
  
  
