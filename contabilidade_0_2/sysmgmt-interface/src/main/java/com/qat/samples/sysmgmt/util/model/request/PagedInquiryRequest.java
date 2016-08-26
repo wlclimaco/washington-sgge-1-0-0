@@ -20,6 +20,8 @@ public class PagedInquiryRequest extends InquiryRequest {
 
 	private String userId;
 
+	private Boolean select;
+
 	public PagedInquiryRequest() {
 
 	}
@@ -64,11 +66,19 @@ public class PagedInquiryRequest extends InquiryRequest {
 		this.userId = userId;
 	}
 
+	public Boolean getSelect() {
+		return select;
+	}
+
+	public void setSelect(Boolean select) {
+		this.select = select;
+	}
+
 	@Override
 	public String toString() {
 		return "PagedInquiryRequest [getEmprId()=" + getEmprId() + ", getParentId()=" + getParentId() + ", getId()="
-				+ getId() + ", getString()=" + getString() + ", getUserId()=" + getUserId() + ", toString()="
-				+ super.toString() + "]";
+				+ getId() + ", getString()=" + getString() + ", getUserId()=" + getUserId() + ", getSelect()="
+				+ getSelect() + ", toString()=" + super.toString() + "]";
 	}
 
 }

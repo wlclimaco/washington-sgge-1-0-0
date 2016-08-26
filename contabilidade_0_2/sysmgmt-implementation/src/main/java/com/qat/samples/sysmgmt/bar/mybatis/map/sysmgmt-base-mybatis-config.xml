@@ -13,7 +13,7 @@
     <typeAliases>
 
     	<typeAlias alias="PlanoByEmpresa" type="com.qat.samples.sysmgmt.site.model.PlanoByEmpresa" />
-    	
+
     	<typeAlias alias="Processo" type="com.qat.samples.sysmgmt.advocacia.Processo" />
     	<typeAlias alias="ProcessoInquiryRequest" type="com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest" />
 
@@ -461,6 +461,7 @@
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/audiencia.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/avisos.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/planoByEmpresa.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/util.xml" />
     </mappers>
 
 </configuration>

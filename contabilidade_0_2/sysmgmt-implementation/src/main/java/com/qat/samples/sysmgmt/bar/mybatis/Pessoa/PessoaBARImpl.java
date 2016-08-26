@@ -439,18 +439,18 @@ public static void fetchAdvogadosByRequest(SqlSession sqlSession, AdvogadoInquir
 public InternalResponse insertCliente(Cliente cliente)
 {
 	InternalResponse response = new InternalResponse();
-	
+
 	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.CLIENTE, getHistoricoBAR(), response);
-	
+
 	cliente.setProcessId(historicoId);
-	
+
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PESSOA, cliente, response);
-	
+
 	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.CLIENTE, AcaoEnum.INSERT, historicoId,
 			getHistoricoBAR(), response, cliente.getId());
-	
+
 	insertPessoa(cliente, response, TabelaEnum.CLIENTE, historicoId);
-	
+
 	return response;
 }
 
@@ -523,8 +523,15 @@ public InternalResultsResponse<Cliente> fetchAllClientes(Cliente cliente)
 public InternalResultsResponse<Cliente> fetchClientesByRequest(ClienteInquiryRequest request)
 {
 	InternalResultsResponse<Cliente> response = new InternalResultsResponse<Cliente>();
-	fetchClientesByRequest(getSqlSession(), request, STMT_FETCH_CLIENTE_COUNT, STMT_FETCH_CLIENTE_ALL_REQUEST,
-			response);
+	if((!ValidationUtil.isNull(request.getSelect())) && (request.getSelect()))
+	{
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), "UtilMap.fetchAllCliente"));
+	}
+	else
+	{
+		fetchClientesByRequest(getSqlSession(), request, STMT_FETCH_CLIENTE_COUNT, STMT_FETCH_CLIENTE_ALL_REQUEST,
+				response);
+	}
 	return response;
 }
 
@@ -1504,7 +1511,7 @@ public static void fetchFuncionariosByRequest(SqlSession sqlSession, Funcionario
 	}
 
 	public boolean insertPessoa(Pessoa pessoa, InternalResponse response ,TabelaEnum tabela,Integer historicoId){
-		
+
 		Integer count = 0;
 		Boolean count1 = false;
 		if (!ValidationUtil.isNullOrEmpty(pessoa.getEnderecos()))
@@ -1515,7 +1522,7 @@ public static void fetchFuncionariosByRequest(SqlSession sqlSession, Funcionario
 							tabela, enderecoBAR, statusBAR, historicoBAR, pessoa.getId(),
 							pessoa.getCreateUser(), historicoId, historicoId);
 		}
-		
+
 		if (!ValidationUtil.isNullOrEmpty(pessoa.getEmails()))
 		{
 			count +=
@@ -1561,7 +1568,7 @@ public static void fetchFuncionariosByRequest(SqlSession sqlSession, Funcionario
 							historicoBAR, historicoId, historicoId);
 
 		}
-		
+
 		return true;
 	}
 }

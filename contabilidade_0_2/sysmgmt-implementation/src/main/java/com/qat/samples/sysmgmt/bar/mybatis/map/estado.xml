@@ -70,9 +70,7 @@ c.abreviacao,
  <select id="fetchAllEstadosRequest" parameterType="EstadoInquiryRequest" resultMap="EstadoResult">
 
 		SELECT <include refid="allEstadoColumns" />
-  		  FROM estado ORDER BY id ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
+  		  FROM estado  where id IS NOT NULL  <if test="estadoId != null"> and estadoId = estadoId </if>  <if test="id != null"> and id = id </if> ORDER BY abreviacao ASC
 </select>
 
 <select id="fetchEstadoRowCount" resultType="Integer">

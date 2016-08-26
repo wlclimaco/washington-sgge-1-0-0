@@ -1,6 +1,5 @@
 package com.qat.samples.sysmgmt.estado.model.request;
 
-import com.qat.samples.sysmgmt.estado.model.criteria.EstadoCriteria;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
 /**
@@ -10,40 +9,19 @@ public class EstadoInquiryRequest extends PagedInquiryRequest
 {
 
 	/** The criteria. */
-	private EstadoCriteria criteria;
+	private Integer estadoId;
 
-	/**
-	 * Gets the criteria.
-	 *
-	 * @return the criteria
-	 */
-	public EstadoCriteria getCriteria()
-	{
-		if (criteria == null)
-		{
-			criteria = new EstadoCriteria();
-		}
-		return criteria;
+	public Integer getEstadoId() {
+		return estadoId;
 	}
 
-	/**
-	 * Sets the criteria.
-	 *
-	 * @param criteria the criteria
-	 */
-	public void setCriteria(EstadoCriteria criteria)
-	{
-		this.criteria = criteria;
+	public void setEstadoId(Integer estadoId) {
+		this.estadoId = estadoId;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
-	public String toString()
-	{
-		return "EstadoInquiryRequest [getCriteria()=" + getCriteria() + ", toString()=" + super.toString() + "]";
+	public String toString() {
+		return "EstadoInquiryRequest [getEstadoId()=" + getEstadoId() + ", toString()=" + super.toString() + "]";
 	}
 
 }

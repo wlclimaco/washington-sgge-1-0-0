@@ -17,6 +17,7 @@
        exactly. -->
   <resultMap id="BancoResult" type="Banco">
     <result property="id" column="id"/>
+    <result property="codigo" column="codigo"/>
      <result property="nome" column="nome"/>
      <result property="site" column="site"/>
      <result property="descricao" column="descricao"/>
@@ -29,7 +30,8 @@
   </resultMap>
 
   <sql id="allBancoColumns">
-nome
+codigo
+,nome
 ,site
 ,descricao
 ,emprId
@@ -41,6 +43,7 @@ nome
 
 </sql>
 <sql id="allBancoValues">
+#{codigo},
 		#{nome},
 		#{site},
 		#{descricao},
@@ -68,13 +71,12 @@ nome
  <select id="fetchAllBancosRequest" parameterType="BancoInquiryRequest" resultMap="BancoResult">
 
 		SELECT id,<include refid="allBancoColumns" />
-  		  FROM banco where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
+  		  FROM banco where 0 = 0 <if test="id != null"> and id = id</if> ORDER BY nome ASC
+
 </select>
 
 <select id="fetchBancoRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM banco WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM banco WHERE id IS NOT NULL <if test="id != null"> and id = id</if>
 
  </select>
 
@@ -87,6 +89,7 @@ nome
 
  <update id="updateBanco" parameterType="Banco">
    UPDATE banco SET
+   <if test="codigo!= null"> codigo=#{codigo},</if>
    <if test="nome!= null"> nome=#{nome},</if>
    <if test="descricao!= null"> descricao=#{descricao},</if>
    <if test="site!= null"> site=#{site},</if>

@@ -692,9 +692,9 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteBanco()
 	{
-		Banco banco = insertBANCO(4, TabelaEnum.FORMAPG, PersistenceActionEnum.INSERT);
+		Banco banco = insertBANCO(4001, TabelaEnum.FORMAPG, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(4001);
 		Banco bancoResponse = getFinanceiroBAR().fetchBancoById(request);
 		Assert.assertEquals(bancoResponse, null);
 		getFinanceiroBAR().insertBanco(banco);

@@ -116,7 +116,7 @@ public IPessoaBAR getPessoaBAR()
 		getPessoaBAR().deleteAllAdvogados();
 		Advogado advogado = insertAdvogado(1001, TabelaEnum.ADVOCACIA,PersistenceActionEnum.INSERT);
 		List<Advogado> response = getPessoaBAR().fetchAllAdvogados(new Advogado()).getResultsList();
-		Assert.assertEquals(response.size(), 3);
+		Assert.assertEquals(response.size(), 4);
 	}
 
 	@Test
@@ -228,6 +228,7 @@ public IPessoaBAR getPessoaBAR()
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
+		request.setSelect(false);
 		InternalResultsResponse<Cliente> response = getPessoaBAR().fetchClientesByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
@@ -236,14 +237,15 @@ public IPessoaBAR getPessoaBAR()
 		request.setPreQueryCount(true);
 		request.setStartPage(1);
 		request.setPageSize(3);
+		request.setSelect(true);
 		response = getPessoaBAR().fetchClientesByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 20);
 
 		// check for valid and no precount
 		ClienteInquiryRequest request2 = new ClienteInquiryRequest();
 		request2.setPreQueryCount(false);
+		request2.setSelect(false);
 		InternalResultsResponse<Cliente> response2 = getPessoaBAR().fetchClientesByRequest(request2);
 		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
@@ -380,7 +382,7 @@ public IPessoaBAR getPessoaBAR()
 		getPessoaBAR().deleteAllTransportadors();
 	Transportador transportador = insertTransportador(1001, TabelaEnum.TRANSPORTADOR,PersistenceActionEnum.INSERT);
 		List<Transportador> response = getPessoaBAR().fetchAllTransportadors(new Transportador()).getResultsList();
-		Assert.assertEquals(response.size(), 3);
+		Assert.assertEquals(response.size(), 4);
 	}
 
 	@Test
