@@ -637,9 +637,9 @@ public IFinanceiroBAR getFinanceiroBAR()
 	@Test
 	public void testUpdateFormaPg()
 	{
-		FormaPg formapg = insertFormaPg(1, TabelaEnum.FORMAPG, PersistenceActionEnum.UPDATE);
+		FormaPg formapg = insertFormaPg(1001, TabelaEnum.FORMAPG, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1001);
 		FormaPg formapgResponse = getFinanceiroBAR().fetchFormaPgById(request);
 		Assert.assertEquals(formapgResponse.getDescricao(), "NATIVE INSERT");
 		getFinanceiroBAR().updateFormaPg(formapg);

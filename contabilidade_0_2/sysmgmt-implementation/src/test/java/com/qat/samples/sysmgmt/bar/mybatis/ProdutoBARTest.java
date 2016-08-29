@@ -348,9 +348,9 @@ public IProdutoBAR getProdutoBAR()
 @Test
 	public void testDeleteMarca()
 	{
-		Marca marca = insertMarca(4, TabelaEnum.MARCA, PersistenceActionEnum.INSERT);
+		Marca marca = insertMarca(1004, TabelaEnum.MARCA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(1004);
 		Marca marcaResponse = getProdutoBAR().fetchMarcaById(request);
 		Assert.assertEquals(marcaResponse, null);
 		getProdutoBAR().insertMarca(marca);

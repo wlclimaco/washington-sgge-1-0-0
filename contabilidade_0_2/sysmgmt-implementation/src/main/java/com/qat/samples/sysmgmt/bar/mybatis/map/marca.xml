@@ -19,16 +19,14 @@
     <result property="id" column="id"/>
     <result property="marca" column="marca"/>
     <result property="fabricante" column="fabricante"/>
-
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="emailList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="enderecoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="telefoneList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="emailList" column="id" select="EmailMap.fetchEmailByTable"/>
+<collection property="telefoneList" column="id" select="TelefoneMap.fetchTelefoneByMarca"/>
   </resultMap>
 
   <sql id="allMarcaColumns">

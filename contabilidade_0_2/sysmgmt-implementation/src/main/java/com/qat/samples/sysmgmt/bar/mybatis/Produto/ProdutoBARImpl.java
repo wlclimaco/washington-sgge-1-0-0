@@ -2,6 +2,9 @@
 package com.qat.samples.sysmgmt.bar.mybatis.Produto;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -10,7 +13,24 @@ import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.MyBatisBARHelper;
+import com.qat.framework.validation.ValidationUtil;
+import com.qat.samples.sysmgmt.bar.Cadastros.ICadastrosBAR;
+import com.qat.samples.sysmgmt.bar.Documentos.IDocumentoBAR;
+import com.qat.samples.sysmgmt.bar.Email.IEmailBAR;
+import com.qat.samples.sysmgmt.bar.Empresa.IEmpresaBAR;
+import com.qat.samples.sysmgmt.bar.Financeiro.IFinanceiroBAR;
+import com.qat.samples.sysmgmt.bar.Fiscal.IFiscalBAR;
+import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
+import com.qat.samples.sysmgmt.bar.Notes.INotesBAR;
 import com.qat.samples.sysmgmt.bar.Produto.IProdutoBAR;
+import com.qat.samples.sysmgmt.bar.Site.ISiteBAR;
+import com.qat.samples.sysmgmt.bar.Socios.ISociosBAR;
+import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.EmailBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.StatusBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.TelefoneBARD;
 import com.qat.samples.sysmgmt.cfop.model.Cfop;
 import com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.Tributacao;
@@ -35,6 +55,10 @@ import com.qat.samples.sysmgmt.produto.model.request.ProdutoParentInquiryRequest
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.AcaoEnum;
+import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
+import com.qat.samples.sysmgmt.util.model.Status;
+import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
@@ -497,7 +521,69 @@ private static final String STMT_DELETE_RENTABILIDADEITENS = NAMESPACE_RENTABILI
 	/** The Constant STMT_FETCH_RENTABILIDADEITENS_ALL_REQUEST. */
 	private static final String STMT_FETCH_RENTABILIDADEITENS_ALL_REQUEST = NAMESPACE_RENTABILIDADEITENS + "fetchAllRentabilidadeItenssRequest";
 
-//===================================### PRODUTOPARENT ####======================================
+	IStatusBAR statusBAR;
+	
+	IProdutoBAR produtoBAR;
+
+	IHistoricoBAR historicoBAR;
+
+	ITelefoneBAR telefoneBAR;
+
+	IEmailBAR emailBAR;
+
+	INotesBAR notesBAR;
+
+	
+	
+public IStatusBAR getStatusBAR() {
+		return statusBAR;
+	}
+
+	public void setStatusBAR(IStatusBAR statusBAR) {
+		this.statusBAR = statusBAR;
+	}
+
+	public IProdutoBAR getProdutoBAR() {
+		return produtoBAR;
+	}
+
+	public void setProdutoBAR(IProdutoBAR produtoBAR) {
+		this.produtoBAR = produtoBAR;
+	}
+
+	public IHistoricoBAR getHistoricoBAR() {
+		return historicoBAR;
+	}
+
+	public void setHistoricoBAR(IHistoricoBAR historicoBAR) {
+		this.historicoBAR = historicoBAR;
+	}
+
+	public ITelefoneBAR getTelefoneBAR() {
+		return telefoneBAR;
+	}
+
+	public void setTelefoneBAR(ITelefoneBAR telefoneBAR) {
+		this.telefoneBAR = telefoneBAR;
+	}
+
+	public IEmailBAR getEmailBAR() {
+		return emailBAR;
+	}
+
+	public void setEmailBAR(IEmailBAR emailBAR) {
+		this.emailBAR = emailBAR;
+	}
+
+	public INotesBAR getNotesBAR() {
+		return notesBAR;
+	}
+
+	public void setNotesBAR(INotesBAR notesBAR) {
+		this.notesBAR = notesBAR;
+	}
+
+	//===================================### PRODUTOPARENT ####======================================
 	/**
 /*
  * (non-Javadoc)
@@ -906,7 +992,46 @@ public static void fetchCfopsByRequest(SqlSession sqlSession, CfopInquiryRequest
 public InternalResponse insertMarca(Marca marca)
 {
 	InternalResponse response = new InternalResponse();
+	Integer count = null;
+	Boolean count1;
+Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.MARCA, getHistoricoBAR(), response);
+	
+marca.setProcessId(historicoId);
+	
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_MARCA, marca, response);
+	
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.MARCA, AcaoEnum.INSERT, historicoId,
+			getHistoricoBAR(), response, marca.getId());
+	
+	if (!ValidationUtil.isNullOrEmpty(marca.getEmailList()))
+	{
+		count +=
+				EmailBARD.maintainEmailAssociations(marca.getEmailList(), response, marca.getId(), null, null,
+						TabelaEnum.MARCA, emailBAR, statusBAR, historicoBAR, marca.getId(),
+						marca.getCreateUser(), historicoId, historicoId);
+	}
+	if (!ValidationUtil.isNullOrEmpty(marca.getTelefoneList()))
+	{
+		count +=
+				TelefoneBARD.maintainTelefoneAssociations(marca.getTelefoneList(), response, marca.getId(), null,
+						null,
+						TabelaEnum.MARCA, telefoneBAR, statusBAR, historicoBAR, marca.getId(),
+						marca.getCreateUser(), historicoId, historicoId);
+	}
+
+	if (count > 0)
+	{
+		Status status = new Status();
+		status.setStatus(CdStatusTypeEnum.ATIVO);
+		List<Status> statusList = new ArrayList<Status>();
+		statusList.add(status);
+		count1 =
+				StatusBARD.maintainStatusAssociations(statusList, response, marca.getId(), null, AcaoEnum.INSERT,
+						marca.getCreateUser(), marca.getId(), TabelaEnum.MARCA, statusBAR,
+						historicoBAR, historicoId, historicoId);
+
+	}
+	
 	return response;
 }
 
