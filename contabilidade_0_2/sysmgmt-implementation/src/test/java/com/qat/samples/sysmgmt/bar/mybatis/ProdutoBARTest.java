@@ -38,15 +38,15 @@ import com.qat.samples.sysmgmt.produto.model.PorcaoItens;
 import com.qat.samples.sysmgmt.produto.model.Preco;
 import com.qat.samples.sysmgmt.produto.model.PrecoTypeEnum;
 import com.qat.samples.sysmgmt.produto.model.Produto;
-import com.qat.samples.sysmgmt.produto.model.ProdutoParent;
+import com.qat.samples.sysmgmt.produto.model.ProdutoEmpresa;
 import com.qat.samples.sysmgmt.produto.model.Rentabilidade;
 import com.qat.samples.sysmgmt.produto.model.RentabilidadeItens;
 import com.qat.samples.sysmgmt.produto.model.SubGrupo;
 import com.qat.samples.sysmgmt.produto.model.UniMed;
 import com.qat.samples.sysmgmt.produto.model.request.GrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoEmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
-import com.qat.samples.sysmgmt.produto.model.request.ProdutoParentInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest;
@@ -78,64 +78,64 @@ public IProdutoBAR getProdutoBAR()
 }
 
 
-//===================================### ProdutoParent ####======================================
+//===================================### ProdutoEmpresa ####======================================
 
 
 @Test
-	public void testDeleteProdutoParent()
+	public void testDeleteProdutoEmpresa()
 	{
-		ProdutoParent ProdutoParent = insertProdutoParent(4, TabelaEnum.PRODUTOPARENT, PersistenceActionEnum.INSERT);
+		ProdutoEmpresa ProdutoEmpresa = insertProdutoEmpresa(4, TabelaEnum.PRODUTOPARENT, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
-		ProdutoParent ProdutoParentResponse = getProdutoBAR().fetchProdutoParentById(request);
-		Assert.assertEquals(ProdutoParentResponse, null);
-		getProdutoBAR().insertProdutoParent(ProdutoParent);
-		ProdutoParentResponse = getProdutoBAR().fetchProdutoParentById(request);
-		Assert.assertEquals(ProdutoParent.getId(), ProdutoParentResponse.getId());
-		getProdutoBAR().deleteProdutoParentById(ProdutoParent);
-		ProdutoParentResponse = getProdutoBAR().fetchProdutoParentById(request);
-		Assert.assertEquals(ProdutoParentResponse, null);
+		ProdutoEmpresa ProdutoEmpresaResponse = getProdutoBAR().fetchProdutoEmpresaById(request);
+		Assert.assertEquals(ProdutoEmpresaResponse, null);
+		getProdutoBAR().insertProdutoEmpresa(ProdutoEmpresa);
+		ProdutoEmpresaResponse = getProdutoBAR().fetchProdutoEmpresaById(request);
+		Assert.assertEquals(ProdutoEmpresa.getId(), ProdutoEmpresaResponse.getId());
+		getProdutoBAR().deleteProdutoEmpresaById(ProdutoEmpresa);
+		ProdutoEmpresaResponse = getProdutoBAR().fetchProdutoEmpresaById(request);
+		Assert.assertEquals(ProdutoEmpresaResponse, null);
 	}
 
 	@Test
-	public void testFetchAllProdutoParents()
+	public void testFetchAllProdutoEmpresas()
 	{
-	ProdutoParent ProdutoParent = new ProdutoParent();
-		List<ProdutoParent> response = getProdutoBAR().fetchAllProdutoParents(ProdutoParent).getResultsList();
+	ProdutoEmpresa ProdutoEmpresa = new ProdutoEmpresa();
+		List<ProdutoEmpresa> response = getProdutoBAR().fetchAllProdutoEmpresas(ProdutoEmpresa).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
 	@Test
-	public void testDeleteAllProdutoParents()
+	public void testDeleteAllProdutoEmpresas()
 	{
-		getProdutoBAR().deleteAllProdutoParents();
-	ProdutoParent ProdutoParent = new ProdutoParent();
-		List<ProdutoParent> response = getProdutoBAR().fetchAllProdutoParents(new ProdutoParent()).getResultsList();
+		getProdutoBAR().deleteAllProdutoEmpresas();
+	ProdutoEmpresa ProdutoEmpresa = new ProdutoEmpresa();
+		List<ProdutoEmpresa> response = getProdutoBAR().fetchAllProdutoEmpresas(new ProdutoEmpresa()).getResultsList();
 		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
-	public void testUpdateProdutoParent()
+	public void testUpdateProdutoEmpresa()
 	{
-		ProdutoParent ProdutoParent = insertProdutoParent(1011, TabelaEnum.PRODUTOPARENT, PersistenceActionEnum.UPDATE);
+		ProdutoEmpresa ProdutoEmpresa = insertProdutoEmpresa(1011, TabelaEnum.PRODUTOPARENT, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1011);
-		ProdutoParent ProdutoParentResponse = getProdutoBAR().fetchProdutoParentById(request);
-		Assert.assertEquals(ProdutoParentResponse.getLocalizacao(), "localizacao_11");
-		getProdutoBAR().updateProdutoParent(ProdutoParent);
-		ProdutoParentResponse = getProdutoBAR().fetchProdutoParentById(request);
-		Assert.assertEquals(ProdutoParentResponse.getLocalizacao(), "NATIVE INSERT UPDATE");
+		ProdutoEmpresa ProdutoEmpresaResponse = getProdutoBAR().fetchProdutoEmpresaById(request);
+		Assert.assertEquals(ProdutoEmpresaResponse.getLocalizacao(), "localizacao_11");
+		getProdutoBAR().updateProdutoEmpresa(ProdutoEmpresa);
+		ProdutoEmpresaResponse = getProdutoBAR().fetchProdutoEmpresaById(request);
+		Assert.assertEquals(ProdutoEmpresaResponse.getLocalizacao(), "NATIVE INSERT UPDATE");
 	}
 
 	@Test
-	public void testFetchProdutoParentsByRequest() throws Exception
+	public void testFetchProdutoEmpresasByRequest() throws Exception
 	{
 		// check for valid and precount
-		ProdutoParentInquiryRequest request = new ProdutoParentInquiryRequest();
+		ProdutoEmpresaInquiryRequest request = new ProdutoEmpresaInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
-		InternalResultsResponse<ProdutoParent> response = getProdutoBAR().fetchProdutoParentsByRequest(request);
+		InternalResultsResponse<ProdutoEmpresa> response = getProdutoBAR().fetchProdutoEmpresasByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
@@ -143,25 +143,25 @@ public IProdutoBAR getProdutoBAR()
 		request.setPreQueryCount(true);
 		request.setStartPage(1);
 		request.setPageSize(3);
-		response = getProdutoBAR().fetchProdutoParentsByRequest(request);
+		response = getProdutoBAR().fetchProdutoEmpresasByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
 		// check for valid and no precount
-		ProdutoParentInquiryRequest request2 = new ProdutoParentInquiryRequest();
+		ProdutoEmpresaInquiryRequest request2 = new ProdutoEmpresaInquiryRequest();
 		request2.setPreQueryCount(false);
-		InternalResultsResponse<ProdutoParent> response2 = getProdutoBAR().fetchProdutoParentsByRequest(request2);
+		InternalResultsResponse<ProdutoEmpresa> response2 = getProdutoBAR().fetchProdutoEmpresasByRequest(request2);
 		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
 		// this is because we did not choose to precount
 		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
 
 		// check for zero rows
-		getProdutoBAR().deleteAllProdutoParents();
-		ProdutoParentInquiryRequest request3 = new ProdutoParentInquiryRequest();
+		getProdutoBAR().deleteAllProdutoEmpresas();
+		ProdutoEmpresaInquiryRequest request3 = new ProdutoEmpresaInquiryRequest();
 		request3.setPreQueryCount(true);
-		InternalResultsResponse<ProdutoParent> response3 = getProdutoBAR().fetchProdutoParentsByRequest(request3);
+		InternalResultsResponse<ProdutoEmpresa> response3 = getProdutoBAR().fetchProdutoEmpresasByRequest(request3);
 		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 	}
@@ -1489,7 +1489,7 @@ public IProdutoBAR getProdutoBAR()
 	@Before
 	public void setup()
 	{
-		executeSqlScript("conf/insertProdutoParent.sql", false);
+		executeSqlScript("conf/insertProdutoEmpresa.sql", false);
 		executeSqlScript("conf/insertProduto.sql", false);
 		executeSqlScript("conf/insertCfop.sql", false);
 		executeSqlScript("conf/insertMarca.sql", false);
@@ -1508,38 +1508,38 @@ public IProdutoBAR getProdutoBAR()
 	}
 
 
-	public ProdutoParent insertProdutoParent(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	public ProdutoEmpresa insertProdutoEmpresa(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
-			ProdutoParent ProdutoParent = new ProdutoParent();
+			ProdutoEmpresa ProdutoEmpresa = new ProdutoEmpresa();
 			Date a = new Date();
-			ProdutoParent.setId(id);
-			ProdutoParent.setParentId(id);
-			ProdutoParent.setEmprId(100);
-			ProdutoParent.setLocalizacao("NATIVE INSERT UPDATE");
-			ProdutoParent.setTributacao(insertTributacao(id, tabela, action));
-			ProdutoParent.setEstoqueList(new ArrayList<Estoque>());
-			ProdutoParent.getEstoqueList().add(insertEstoque(id,TabelaEnum.PRODUTOPARENT,action));
-			ProdutoParent.setPrecoList(new ArrayList<Preco>());
-			ProdutoParent.getPrecoList().add(insertPreco(id,TabelaEnum.PRODUTOPARENT,action));
-			ProdutoParent.setCustoList(new ArrayList<Custo>());
-			ProdutoParent.getCustoList().add(insertCusto(id,TabelaEnum.PRODUTOPARENT,action));
-			ProdutoParent.setPorcaoList(new ArrayList<Porcao>());
-			ProdutoParent.getPorcaoList().add(insertPorcao(id,TabelaEnum.PRODUTOPARENT,action));
-			ProdutoParent.setRentabilidadeList(new ArrayList<Rentabilidade>());
-			ProdutoParent.getRentabilidadeList().add(insertRentabilidade(id,TabelaEnum.PRODUTOPARENT,action));
-			ProdutoParent.setCfopList(new ArrayList<CfopParentId>());
-			ProdutoParent.getCfopList().add(insertCfopParentId(id,TabelaEnum.PRODUTOPARENT,action));
-			ProdutoParent.setDataValidade(a.getTime());
-			ProdutoParent.setParentId(id);
-			ProdutoParent.setEmprId(1);
-			ProdutoParent.setModifyDateUTC(a.getTime());
-			ProdutoParent.setCreateDateUTC(a.getTime());
-			ProdutoParent.setCreateUser("system");
-			ProdutoParent.setModifyUser("system");
-			ProdutoParent.setProcessId(1);
-			ProdutoParent.setModelAction(action);
+			ProdutoEmpresa.setId(id);
+			ProdutoEmpresa.setParentId(id);
+			ProdutoEmpresa.setEmprId(100);
+			ProdutoEmpresa.setLocalizacao("NATIVE INSERT UPDATE");
+			ProdutoEmpresa.setTributacao(insertTributacao(id, tabela, action));
+			ProdutoEmpresa.setEstoqueList(new ArrayList<Estoque>());
+			ProdutoEmpresa.getEstoqueList().add(insertEstoque(id,TabelaEnum.PRODUTOPARENT,action));
+			ProdutoEmpresa.setPrecoList(new ArrayList<Preco>());
+			ProdutoEmpresa.getPrecoList().add(insertPreco(id,TabelaEnum.PRODUTOPARENT,action));
+			ProdutoEmpresa.setCustoList(new ArrayList<Custo>());
+			ProdutoEmpresa.getCustoList().add(insertCusto(id,TabelaEnum.PRODUTOPARENT,action));
+			ProdutoEmpresa.setPorcaoList(new ArrayList<Porcao>());
+			ProdutoEmpresa.getPorcaoList().add(insertPorcao(id,TabelaEnum.PRODUTOPARENT,action));
+			ProdutoEmpresa.setRentabilidadeList(new ArrayList<Rentabilidade>());
+			ProdutoEmpresa.getRentabilidadeList().add(insertRentabilidade(id,TabelaEnum.PRODUTOPARENT,action));
+			ProdutoEmpresa.setCfopList(new ArrayList<CfopParentId>());
+			ProdutoEmpresa.getCfopList().add(insertCfopParentId(id,TabelaEnum.PRODUTOPARENT,action));
+			ProdutoEmpresa.setDataValidade(a.getTime());
+			ProdutoEmpresa.setParentId(id);
+			ProdutoEmpresa.setEmprId(1);
+			ProdutoEmpresa.setModifyDateUTC(a.getTime());
+			ProdutoEmpresa.setCreateDateUTC(a.getTime());
+			ProdutoEmpresa.setCreateUser("system");
+			ProdutoEmpresa.setModifyUser("system");
+			ProdutoEmpresa.setProcessId(1);
+			ProdutoEmpresa.setModelAction(action);
 
-			return ProdutoParent;
+			return ProdutoEmpresa;
 		}
 
 

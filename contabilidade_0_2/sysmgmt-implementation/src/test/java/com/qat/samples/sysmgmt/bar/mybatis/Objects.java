@@ -100,7 +100,7 @@ import com.qat.samples.sysmgmt.produto.model.PorcaoItens;
 import com.qat.samples.sysmgmt.produto.model.Preco;
 import com.qat.samples.sysmgmt.produto.model.PrecoTypeEnum;
 import com.qat.samples.sysmgmt.produto.model.Produto;
-import com.qat.samples.sysmgmt.produto.model.ProdutoParent;
+import com.qat.samples.sysmgmt.produto.model.ProdutoEmpresa;
 import com.qat.samples.sysmgmt.produto.model.Rentabilidade;
 import com.qat.samples.sysmgmt.produto.model.RentabilidadeItens;
 import com.qat.samples.sysmgmt.produto.model.Servico;
@@ -1374,8 +1374,8 @@ public class Objects {
 	}
 
 
-	public static ProdutoParent insertProdutoParent(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
-		ProdutoParent produtoparent = new ProdutoParent();
+	public static ProdutoEmpresa insertProdutoParent(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+		ProdutoEmpresa produtoparent = new ProdutoEmpresa();
 		Date a = new Date();
 		produtoparent.setId(id);
 		produtoparent.setTributacao(insertTributacao(id, TabelaEnum.PRODUTOPARENT, action));

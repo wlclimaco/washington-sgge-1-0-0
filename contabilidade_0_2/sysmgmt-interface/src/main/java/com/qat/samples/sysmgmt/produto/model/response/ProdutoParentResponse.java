@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.produto.model.ProdutoParent;
+import com.qat.samples.sysmgmt.produto.model.ProdutoEmpresa;
 
 /**
  * The Class ProdutoParentResponse.
@@ -17,14 +17,14 @@ public class ProdutoParentResponse extends InquiryResponse
 {
 
 	/** Attributes. */
-	private List<ProdutoParent> produtoParentList;
+	private List<ProdutoEmpresa> produtoParentList;
 
 	/**
 	 * Gets the produtoParent list.
 	 *
 	 * @return the produtoParent list
 	 */
-	public List<ProdutoParent> getProdutoParentList()
+	public List<ProdutoEmpresa> getProdutoParentList()
 	{
 		return produtoParentList;
 	}
@@ -34,7 +34,7 @@ public class ProdutoParentResponse extends InquiryResponse
 	 *
 	 * @param produtoParentList the produtoParent list
 	 */
-	public void setProdutoParentList(List<ProdutoParent> produtoParentList)
+	public void setProdutoParentList(List<ProdutoEmpresa> produtoParentList)
 	{
 		this.produtoParentList = produtoParentList;
 	}
@@ -47,7 +47,7 @@ public class ProdutoParentResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setProdutoParentList((List<ProdutoParent>)coll);
+		setProdutoParentList((List<ProdutoEmpresa>)coll);
 	}
 
 	/*

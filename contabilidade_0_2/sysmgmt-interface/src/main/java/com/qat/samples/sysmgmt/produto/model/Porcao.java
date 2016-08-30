@@ -29,6 +29,10 @@ public class Porcao extends ModelCosmeDamiao
 		super();
 	}
 
+	public Porcao(int i, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Gets the id.
 	 * 

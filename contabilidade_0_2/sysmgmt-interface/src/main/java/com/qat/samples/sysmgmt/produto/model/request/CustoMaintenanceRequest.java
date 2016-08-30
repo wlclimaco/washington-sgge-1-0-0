@@ -1,13 +1,13 @@
 package com.qat.samples.sysmgmt.produto.model.request;
 
-import com.qat.samples.sysmgmt.produto.model.Marca;
+import com.qat.samples.sysmgmt.produto.model.Custo;
 import com.qat.samples.sysmgmt.util.model.request.UtilMaintenanceRequest;
 
 public class CustoMaintenanceRequest extends UtilMaintenanceRequest
 {
 
 	/** Attributes. */
-	private Marca plano;
+	private Custo custo;
 
 	/**
 	 * The Constructor.
@@ -17,28 +17,18 @@ public class CustoMaintenanceRequest extends UtilMaintenanceRequest
 
 	}
 
-	/**
-	 * Gets the plano.
-	 *
-	 * @return the plano
-	 */
-	public Marca getMarca()
-	{
-		return plano;
+	public Custo getCusto() {
+		return custo;
 	}
 
-	/**
-	 * Sets the plano.
-	 *
-	 * @param plano the plano
-	 */
-	public void setMarca(Marca plano)
-	{
-		this.plano = plano;
+	public void setCusto(Custo custo) {
+		this.custo = custo;
 	}
 
 	@Override
 	public String toString() {
-		return "MarcaMaintenanceRequest [getMarca()=" + getMarca() + ", toString()=" + super.toString() + "]";
+		return "CustoMaintenanceRequest [getCusto()=" + getCusto() + ", toString()=" + super.toString() + "]";
 	}
+
+	
 }

@@ -28,6 +28,10 @@ public class Estoque extends ModelCosmeDamiao
 		super();
 	}
 
+	public Estoque(int i, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getEstoqueTypeEnumValue()
 	{
 		if (estoqueTypeEnum != null)

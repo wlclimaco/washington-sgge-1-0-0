@@ -9,7 +9,7 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
  * setting.
  */
 @SuppressWarnings("serial")
-public class Custo extends ModelCosmeDamiao
+public class Categoria extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
@@ -24,12 +24,12 @@ public class Custo extends ModelCosmeDamiao
 	/**
 	 * Default constructor.
 	 */
-	public Custo()
+	public Categoria()
 	{
 		super();
 	}
 
-	public Custo(int i, String string) {
+	public Categoria(int i, String string) {
 		// TODO Auto-generated constructor stub
 	}
 

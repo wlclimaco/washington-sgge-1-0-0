@@ -49,7 +49,7 @@ public final class InsertHistBARD extends SqlSessionDaoSupport
 		return count;
 
 	}
-	public static Integer maintainInsertHistoricoItens(TabelaEnum tabela,AcaoEnum acao ,Integer historicoId,IHistoricoBAR historicoBAR,InternalResponse response,Integer parendId)
+	public static Integer maintainInsertHistoricoItens(TabelaEnum tabela,AcaoEnum acao ,Integer historicoId,IHistoricoBAR historicoBAR,InternalResponse response,Integer parendId,String userId)
 	{
 		Integer count = 0;
 		if (!ValidationUtil.isNullOrZero(historicoId))
@@ -60,7 +60,7 @@ public final class InsertHistBARD extends SqlSessionDaoSupport
 			historico.setAcaoType(acao);
 			historico.setParentId(parendId);
 			historico.setModifyDateUTC((new Date()).getTime());
-			historico.setModifyUser("system");
+			historico.setModifyUser(userId);
 			count = historicoBAR.insertHistoricoItens(historico).getId();
 
 		}

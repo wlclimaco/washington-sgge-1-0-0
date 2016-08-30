@@ -31,7 +31,7 @@ for(i=0;i < teste.length;i++){
 
 
 var nome = teste[i].classe.toLowerCase();
-nomeM = titleize(nome);
+nomeM = titleize(teste[i].classe);
 text = text + "\n";
 text = text + '///===================================### '+nomeM.toUpperCase()+' ####======================================\n';
 text = text + '/** The Constant NAMESPACE. */\n';
@@ -77,7 +77,32 @@ text = text + "@Override\n";
 text = text + "public InternalResponse insert"+nomeM+"("+nomeM+" "+nome+")\n";
 text = text + "{\n";
 text = text + "	InternalResponse response = new InternalResponse();\n";
+text = text + "		Integer count = 0;\n";
+text = text + "		Boolean count1 = false;\n";
+text = text + "\n";
+text = text + ""+nome+".setProcessId("+nome+".getTransactionId());\n";
+text = text + "\n";
 text = text + "	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_"+nomeM.toUpperCase()+", "+nome+", response);\n";
+text = text + "\n";
+text = text + "\n";
+text = text + "Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum."+nomeM.toUpperCase()+", AcaoEnum.INSERT, "+nome+".getTransactionId(),\n";
+text = text + "			getHistoricoBAR(), response, "+nome+".getId(),"+nome+".getUserId());\n";
+text = text + "	\n";	
+text = text + "	\n";
+text = text + "if ("+nome+".getId() !=  0 && "+nome+".getId() != null)\n";	
+text = text + "	{\n";	
+text = text + "		Status status = new Status();\n";	
+text = text + "		status.setStatus(CdStatusTypeEnum.ATIVO);\n";	
+text = text + "		List<Status> statusList = new ArrayList<Status>();\n";	
+text = text + "		statusList.add(status);\n";	
+text = text + "		count1 =\n";	
+text = text + "				StatusBARD.maintainStatusAssociations(statusList, response, "+nome+".getId(), null, AcaoEnum.INSERT,\n";	
+text = text + "						"+nome+".getCreateUser(), "+nome+".getId(), TabelaEnum."+nomeM.toUpperCase()+", statusBAR,\n";	
+text = text + "						historicoBAR, "+nome+".getTransactionId(), "+nome+".getTransactionId());\n";	
+text = text + "\n";	
+text = text + "	}\n";	
+text = text + "	\n";
+text = text + "	\n";	
 text = text + "	return response;\n";
 text = text + "}\n";
 text = text + '\n';
@@ -89,7 +114,16 @@ text = text + "@Override\n";
 text = text + "public InternalResponse update"+nomeM+"("+nomeM+" "+nome+")\n";
 text = text + "{\n";
 text = text + "	InternalResponse response = new InternalResponse();\n";
+
+text = text + " "+nome+".setProcessId("+nome+".getTransactionId());\n";
+
 text = text + "	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_"+nomeM.toUpperCase()+", "+nome+", response);\n";
+
+text = text + "\n";
+text = text + "Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum."+nomeM.toUpperCase()+", AcaoEnum.UPDATE, "+nome+".getTransactionId(),\n";
+text = text + "			getHistoricoBAR(), response, "+nome+".getId(),"+nome+".getUserId());\n";
+text = text + "	\n";
+
 text = text + "	return response;\n";
 text = text + "}\n";
 text = text + '\n';
@@ -101,7 +135,15 @@ text = text + "@Override\n";
 text = text + "public InternalResponse delete"+nomeM+"ById("+nomeM+" "+nome+")\n";
 text = text + "{\n";
 text = text + "	InternalResponse response = new InternalResponse();\n";
+
+text = text + ""+nome+".setProcessId("+nome+".getTransactionId());\n";
+
 text = text + "	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_"+nomeM.toUpperCase()+", "+nome+", response);\n";
+text = text + "\n";
+text = text + "Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum."+nomeM.toUpperCase()+", AcaoEnum.DELETE, "+nome+".getTransactionId(),\n";
+text = text + "			getHistoricoBAR(), response, "+nome+".getId(),"+nome+".getUserId());\n";
+text = text + "	\n";
+
 text = text + "	return response;\n";
 text = text + "}\n";
 text = text + '\n';

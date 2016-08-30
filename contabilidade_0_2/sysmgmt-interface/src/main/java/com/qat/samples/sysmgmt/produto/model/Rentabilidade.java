@@ -27,6 +27,10 @@ public class Rentabilidade extends ModelCosmeDamiao
 		super();
 	}
 
+	public Rentabilidade(int i, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getId() {
 		return id;
 	}

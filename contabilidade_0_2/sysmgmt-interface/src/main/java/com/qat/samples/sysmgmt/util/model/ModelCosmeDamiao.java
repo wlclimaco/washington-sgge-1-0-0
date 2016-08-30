@@ -23,6 +23,8 @@ public class ModelCosmeDamiao extends QATModel1
 	private Integer emprId;
 
 	private String site;
+	
+	private Integer transactionId;
 
 	private String userId;
 
@@ -200,6 +202,14 @@ public class ModelCosmeDamiao extends QATModel1
 		return notes;
 	}
 
+	public Integer getTransactionId() {
+		return transactionId;
+	}
+
+	public void setTransactionId(Integer transactionId) {
+		this.transactionId = transactionId;
+	}
+
 	/**
 	 * @param notes the notes to set
 	 */
@@ -209,14 +219,13 @@ public class ModelCosmeDamiao extends QATModel1
 	}
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "ModelCosmeDamiao [getTabelaEnumValue()=" + getTabelaEnumValue() + ", getTypeValue()=" + getTypeValue()
 				+ ", getAcaoEnumValue()=" + getAcaoEnumValue() + ", getParentId()=" + getParentId() + ", getType()="
 				+ getType() + ", getAcaoType()=" + getAcaoType() + ", getTabelaEnum()=" + getTabelaEnum()
 				+ ", getStatusList()=" + getStatusList() + ", getEmprId()=" + getEmprId() + ", getSite()=" + getSite()
 				+ ", getProcessId()=" + getProcessId() + ", getUserId()=" + getUserId() + ", getNotes()=" + getNotes()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", getTransactionId()=" + getTransactionId() + ", toString()=" + super.toString() + "]";
 	}
 
 }

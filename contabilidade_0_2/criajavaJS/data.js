@@ -5622,7 +5622,7 @@ function ProdutoEmpresaModel() {
             xml: true
         }
     });
-
+return a;
 
 }
 
@@ -5726,7 +5726,7 @@ function ICMSModel() {
     });
 
 
-    
+    return a;
 
 }
 
@@ -5844,7 +5844,7 @@ function PISModel() {
             xml: true
         }
     });   
-
+return a;
 }
 
 //================ Categoria
@@ -5918,7 +5918,7 @@ function COFINSModel() {
         }
     });
 
-    
+    return a;
 
 }
 
@@ -5993,7 +5993,7 @@ function IPIModel() {
         }
     });
 
-    
+    return a;
 
 }
 
@@ -6078,6 +6078,7 @@ function TributacaoModel() {
             xml: true
         }
     });
+    return a;
 }
 
 
@@ -6096,6 +6097,7 @@ function CategoriaModel() {
             xml: true
         }
     });
+    
     a.push({
         field: {
             campo: "categoria",
@@ -6107,94 +6109,7 @@ function CategoriaModel() {
             xml: true
         }
     });
-    a.push({
-        field: {
-            campo: "natureza",
-            tipo: "String",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "simplificado",
-            tipo: "String",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "cfopTypeEnum",
-            tipo: "Integer",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "icms",
-            tipo: "Double",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "icmsReduzido",
-            tipo: "Double",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "margemAgregadaST",
-            tipo: "Double",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "cstPrincipal",
-            tipo: "Double",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "classFiscal",
-            tipo: "Double",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
+
     a.push({
         field: {
             campo: "observacao",
@@ -9632,6 +9547,9 @@ dataModel = function() {
         }, {
             classe: "RentabilidadeItens",
             model: RentabilidadeItensModel()
+        }, {
+            classe: "Categoria",
+            model: CategoriaModel()
         }],
         interfaces: "Produto",
         local: "Produto"

@@ -1,13 +1,14 @@
 package com.qat.samples.sysmgmt.produto.model.request;
 
 import com.qat.samples.sysmgmt.produto.model.Marca;
+import com.qat.samples.sysmgmt.produto.model.Porcao;
 import com.qat.samples.sysmgmt.util.model.request.UtilMaintenanceRequest;
 
 public class PorcaoMaintenanceRequest extends UtilMaintenanceRequest
 {
 
 	/** Attributes. */
-	private Marca plano;
+	private Porcao porcao;
 
 	/**
 	 * The Constructor.
@@ -17,28 +18,17 @@ public class PorcaoMaintenanceRequest extends UtilMaintenanceRequest
 
 	}
 
-	/**
-	 * Gets the plano.
-	 *
-	 * @return the plano
-	 */
-	public Marca getMarca()
-	{
-		return plano;
+	public Porcao getPorcao() {
+		return porcao;
 	}
 
-	/**
-	 * Sets the plano.
-	 *
-	 * @param plano the plano
-	 */
-	public void setMarca(Marca plano)
-	{
-		this.plano = plano;
+	public void setPorcao(Porcao porcao) {
+		this.porcao = porcao;
 	}
 
 	@Override
 	public String toString() {
-		return "MarcaMaintenanceRequest [getMarca()=" + getMarca() + ", toString()=" + super.toString() + "]";
+		return "PorcaoMaintenanceRequest [getPorcao()=" + getPorcao() + ", toString()=" + super.toString() + "]";
 	}
+
 }

@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.produto.model.request;
 
+import com.qat.samples.sysmgmt.fiscal.model.Tributacao;
 import com.qat.samples.sysmgmt.produto.model.Marca;
 import com.qat.samples.sysmgmt.util.model.request.UtilMaintenanceRequest;
 
@@ -7,7 +8,7 @@ public class TributacaoMaintenanceRequest extends UtilMaintenanceRequest
 {
 
 	/** Attributes. */
-	private Marca plano;
+	private Tributacao tributacao;
 
 	/**
 	 * The Constructor.
@@ -17,28 +18,19 @@ public class TributacaoMaintenanceRequest extends UtilMaintenanceRequest
 
 	}
 
-	/**
-	 * Gets the plano.
-	 *
-	 * @return the plano
-	 */
-	public Marca getMarca()
-	{
-		return plano;
+	public Tributacao getTributacao() {
+		return tributacao;
 	}
 
-	/**
-	 * Sets the plano.
-	 *
-	 * @param plano the plano
-	 */
-	public void setMarca(Marca plano)
-	{
-		this.plano = plano;
+	public void setTributacao(Tributacao tributacao) {
+		this.tributacao = tributacao;
 	}
 
 	@Override
 	public String toString() {
-		return "MarcaMaintenanceRequest [getMarca()=" + getMarca() + ", toString()=" + super.toString() + "]";
+		return "TributacaoMaintenanceRequest [getTributacao()=" + getTributacao() + ", toString()=" + super.toString()
+				+ "]";
 	}
+
+	
 }

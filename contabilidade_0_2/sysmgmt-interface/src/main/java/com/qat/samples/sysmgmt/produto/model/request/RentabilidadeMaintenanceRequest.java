@@ -1,13 +1,14 @@
 package com.qat.samples.sysmgmt.produto.model.request;
 
 import com.qat.samples.sysmgmt.produto.model.Marca;
+import com.qat.samples.sysmgmt.produto.model.Rentabilidade;
 import com.qat.samples.sysmgmt.util.model.request.UtilMaintenanceRequest;
 
 public class RentabilidadeMaintenanceRequest extends UtilMaintenanceRequest
 {
 
 	/** Attributes. */
-	private Marca plano;
+	private Rentabilidade rentabilidade;
 
 	/**
 	 * The Constructor.
@@ -17,28 +18,19 @@ public class RentabilidadeMaintenanceRequest extends UtilMaintenanceRequest
 
 	}
 
-	/**
-	 * Gets the plano.
-	 *
-	 * @return the plano
-	 */
-	public Marca getMarca()
-	{
-		return plano;
+	public Rentabilidade getRentabilidade() {
+		return rentabilidade;
 	}
 
-	/**
-	 * Sets the plano.
-	 *
-	 * @param plano the plano
-	 */
-	public void setMarca(Marca plano)
-	{
-		this.plano = plano;
+	public void setRentabilidade(Rentabilidade rentabilidade) {
+		this.rentabilidade = rentabilidade;
 	}
 
 	@Override
 	public String toString() {
-		return "MarcaMaintenanceRequest [getMarca()=" + getMarca() + ", toString()=" + super.toString() + "]";
+		return "RentabilidadeMaintenanceRequest [getRentabilidade()=" + getRentabilidade() + ", toString()="
+				+ super.toString() + "]";
 	}
+
+
 }

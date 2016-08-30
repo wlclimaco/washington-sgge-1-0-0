@@ -1,39 +1,33 @@
-/** create by system gera-java version 1.0.0 04/08/2016 14:46 : 15*/
+/** create by system gera-java version 1.0.0 29/08/2016 22:9 : 4*/
 package com.qat.samples.sysmgmt.bac.Produto;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.cfop.model.Cfop;
 import com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest;
 import com.qat.samples.sysmgmt.cfop.model.request.CfopMaintenanceRequest;
 import com.qat.samples.sysmgmt.fiscal.model.Tributacao;
+import com.qat.samples.sysmgmt.produto.model.Categoria;
 import com.qat.samples.sysmgmt.produto.model.Custo;
-import com.qat.samples.sysmgmt.produto.model.CustoItens;
 import com.qat.samples.sysmgmt.produto.model.Estoque;
 import com.qat.samples.sysmgmt.produto.model.Grupo;
 import com.qat.samples.sysmgmt.produto.model.Marca;
-import com.qat.samples.sysmgmt.produto.model.MarcaProduto;
 import com.qat.samples.sysmgmt.produto.model.Porcao;
-import com.qat.samples.sysmgmt.produto.model.PorcaoItens;
 import com.qat.samples.sysmgmt.produto.model.Produto;
-import com.qat.samples.sysmgmt.produto.model.ProdutoParent;
+import com.qat.samples.sysmgmt.produto.model.ProdutoEmpresa;
 import com.qat.samples.sysmgmt.produto.model.Rentabilidade;
-import com.qat.samples.sysmgmt.produto.model.RentabilidadeItens;
 import com.qat.samples.sysmgmt.produto.model.SubGrupo;
 import com.qat.samples.sysmgmt.produto.model.UniMed;
-import com.qat.samples.sysmgmt.produto.model.request.CustoItensMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.CategoriaMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CustoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.EstoqueMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.GrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.GrupoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.MarcaMaintenanceRequest;
-import com.qat.samples.sysmgmt.produto.model.request.MarcaProdutoMaintenanceRequest;
-import com.qat.samples.sysmgmt.produto.model.request.PorcaoItensMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PorcaoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoEmpresaInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoEmpresaMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
-import com.qat.samples.sysmgmt.produto.model.request.ProdutoParentInquiryRequest;
-import com.qat.samples.sysmgmt.produto.model.request.ProdutoParentMaintenanceRequest;
-import com.qat.samples.sysmgmt.produto.model.request.RentabilidadeItensMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.RentabilidadeMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoMaintenanceRequest;
@@ -53,65 +47,65 @@ public interface IProdutoBAC
 
 
 
-//===================================### PRODUTOPARENT ####======================================
+//===================================### PRODUTOEMPRESA ####======================================
 	/**
 
 	/**
-	 * Insert produtoparent.
+	 * Insert produtoempresa.
 	 *
-* @param request the produtoparent maintenance request
+* @param request the produtoempresa maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<ProdutoParent> insertProdutoParent(ProdutoParentMaintenanceRequest request);
+	public InternalResultsResponse<ProdutoEmpresa> insertProdutoEmpresa(ProdutoEmpresaMaintenanceRequest request);
 
 	/**
-* Update produtoparent.
+* Update produtoempresa.
 *
-* @param request the produtoparent maintenance request
+* @param request the produtoempresa maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<ProdutoParent> updateProdutoParent(ProdutoParentMaintenanceRequest request);
+	public InternalResultsResponse<ProdutoEmpresa> updateProdutoEmpresa(ProdutoEmpresaMaintenanceRequest request);
 
 	/**
-* Delete produtoparent.
+* Delete produtoempresa.
 *
-* @param request the produtoparent maintenance request
+* @param request the produtoempresa maintenance request
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<ProdutoParent> deleteProdutoParent(ProdutoParentMaintenanceRequest request);
+	public InternalResultsResponse<ProdutoEmpresa> deleteProdutoEmpresa(ProdutoEmpresaMaintenanceRequest request);
 
 	/**
-* Refresh produtoparents.
+* Refresh produtoempresas.
 *
 * @param request containing the number to refresh with and whether to return the result
 */
-	public InternalResultsResponse<ProdutoParent> refreshProdutoParents(RefreshRequest request);
+	public InternalResultsResponse<ProdutoEmpresa> refreshProdutoEmpresas(RefreshRequest request);
 
 	/**
-* Fetch produtoparent by id.
+* Fetch produtoempresa by id.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<ProdutoParent> fetchProdutoParentById(FetchByIdRequest request);
+	public InternalResultsResponse<ProdutoEmpresa> fetchProdutoEmpresaById(FetchByIdRequest request);
 
 	/**
-* Fetch all produtoparents.
+* Fetch all produtoempresas.
 *
-* @return the internal results response< produtoparent>
+* @return the internal results response< produtoempresa>
 */
-	public InternalResultsResponse<ProdutoParent> fetchAllProdutoParents(ProdutoParent  produtoparent);
+	public InternalResultsResponse<ProdutoEmpresa> fetchAllProdutoEmpresas(ProdutoEmpresa  produtoempresa);
 
 	/**
-* Fetch produtoparents by request.
+* Fetch produtoempresas by request.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<ProdutoParent> fetchProdutoParentsByRequest(ProdutoParentInquiryRequest request);
+	public InternalResultsResponse<ProdutoEmpresa> fetchProdutoEmpresasByRequest(ProdutoEmpresaInquiryRequest request);
 
 
 //===================================### PRODUTO ####======================================
@@ -297,65 +291,6 @@ public interface IProdutoBAC
 	public InternalResultsResponse<Marca> fetchMarcasByRequest(MarcaInquiryRequest request);
 
 
-//===================================### MARCAPRODUTO ####======================================
-	/**
-
-	/**
-	 * Insert marcaproduto.
-	 *
-* @param request the marcaproduto maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<MarcaProduto> insertMarcaProduto(MarcaProdutoMaintenanceRequest request);
-
-	/**
-* Update marcaproduto.
-*
-* @param request the marcaproduto maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<MarcaProduto> updateMarcaProduto(MarcaProdutoMaintenanceRequest request);
-
-	/**
-* Delete marcaproduto.
-*
-* @param request the marcaproduto maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<MarcaProduto> deleteMarcaProduto(MarcaProdutoMaintenanceRequest request);
-
-	/**
-* Refresh marcaprodutos.
-*
-* @param request containing the number to refresh with and whether to return the result
-*/
-	public InternalResultsResponse<MarcaProduto> refreshMarcaProdutos(RefreshRequest request);
-
-	/**
-* Fetch marcaproduto by id.
-*
-* @param request the request
-* @return the internal results response
-*/
-	public InternalResultsResponse<MarcaProduto> fetchMarcaProdutoById(FetchByIdRequest request);
-
-	/**
-* Fetch all marcaprodutos.
-*
-* @return the internal results response< marcaproduto>
-*/
-	public InternalResultsResponse<MarcaProduto> fetchAllMarcaProdutos(MarcaProduto  marcaproduto);
-
-	/**
-* Fetch marcaprodutos by request.
-*
-* @param request the request
-* @return the internal results response
-*/
-	public InternalResultsResponse<MarcaProduto> fetchMarcaProdutosByRequest(PagedInquiryRequest request);
 
 
 //===================================### GRUPO ####======================================
@@ -663,67 +598,6 @@ public interface IProdutoBAC
 	public InternalResultsResponse<Custo> fetchCustosByRequest(PagedInquiryRequest request);
 
 
-//===================================### CUSTOITENS ####======================================
-	/**
-
-	/**
-	 * Insert custoitens.
-	 *
-* @param request the custoitens maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<CustoItens> insertCustoItens(CustoItensMaintenanceRequest request);
-
-	/**
-* Update custoitens.
-*
-* @param request the custoitens maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<CustoItens> updateCustoItens(CustoItensMaintenanceRequest request);
-
-	/**
-* Delete custoitens.
-*
-* @param request the custoitens maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<CustoItens> deleteCustoItens(CustoItensMaintenanceRequest request);
-
-	/**
-* Refresh custoitenss.
-*
-* @param request containing the number to refresh with and whether to return the result
-*/
-	public InternalResultsResponse<CustoItens> refreshCustoItenss(RefreshRequest request);
-
-	/**
-* Fetch custoitens by id.
-*
-* @param request the request
-* @return the internal results response
-*/
-	public InternalResultsResponse<CustoItens> fetchCustoItensById(FetchByIdRequest request);
-
-	/**
-* Fetch all custoitenss.
-*
-* @return the internal results response< custoitens>
-*/
-	public InternalResultsResponse<CustoItens> fetchAllCustoItenss(CustoItens  custoitens);
-
-	/**
-* Fetch custoitenss by request.
-*
-* @param request the request
-* @return the internal results response
-*/
-	public InternalResultsResponse<CustoItens> fetchCustoItenssByRequest(PagedInquiryRequest request);
-
-
 //===================================### ESTOQUE ####======================================
 	/**
 
@@ -846,66 +720,6 @@ public interface IProdutoBAC
 	public InternalResultsResponse<Porcao> fetchPorcaosByRequest(PagedInquiryRequest request);
 
 
-//===================================### PORCAOITENS ####======================================
-	/**
-
-	/**
-	 * Insert porcaoitens.
-	 *
-* @param request the porcaoitens maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<PorcaoItens> insertPorcaoItens(PorcaoItensMaintenanceRequest request);
-
-	/**
-* Update porcaoitens.
-*
-* @param request the porcaoitens maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<PorcaoItens> updatePorcaoItens(PorcaoItensMaintenanceRequest request);
-
-	/**
-* Delete porcaoitens.
-*
-* @param request the porcaoitens maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<PorcaoItens> deletePorcaoItens(PorcaoItensMaintenanceRequest request);
-
-	/**
-* Refresh porcaoitenss.
-*
-* @param request containing the number to refresh with and whether to return the result
-*/
-	public InternalResultsResponse<PorcaoItens> refreshPorcaoItenss(RefreshRequest request);
-
-	/**
-* Fetch porcaoitens by id.
-*
-* @param request the request
-* @return the internal results response
-*/
-	public InternalResultsResponse<PorcaoItens> fetchPorcaoItensById(FetchByIdRequest request);
-
-	/**
-* Fetch all porcaoitenss.
-*
-* @return the internal results response< porcaoitens>
-*/
-	public InternalResultsResponse<PorcaoItens> fetchAllPorcaoItenss(PorcaoItens  porcaoitens);
-
-	/**
-* Fetch porcaoitenss by request.
-*
-* @param request the request
-* @return the internal results response
-*/
-	public InternalResultsResponse<PorcaoItens> fetchPorcaoItenssByRequest(PagedInquiryRequest request);
-
 
 //===================================### RENTABILIDADE ####======================================
 	/**
@@ -966,66 +780,68 @@ public interface IProdutoBAC
 * @return the internal results response
 */
 	public InternalResultsResponse<Rentabilidade> fetchRentabilidadesByRequest(PagedInquiryRequest request);
+	
+	
+	//===================================### CATEGORIA ####======================================
+		/**
+
+		/**
+		 * Insert categoria.
+		 *
+	* @param request the categoria maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Categoria> insertCategoria(CategoriaMaintenanceRequest request);
+
+		/**
+	* Update categoria.
+	*
+	* @param request the categoria maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Categoria> updateCategoria(CategoriaMaintenanceRequest request);
+
+		/**
+	* Delete categoria.
+	*
+	* @param request the categoria maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Categoria> deleteCategoria(CategoriaMaintenanceRequest request);
+
+		/**
+	* Refresh categorias.
+	*
+	* @param request containing the number to refresh with and whether to return the result
+	*/
+		public InternalResultsResponse<Categoria> refreshCategorias(RefreshRequest request);
+
+		/**
+	* Fetch categoria by id.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Categoria> fetchCategoriaById(FetchByIdRequest request);
+
+		/**
+	* Fetch all categorias.
+	*
+	* @return the internal results response< categoria>
+	*/
+		public InternalResultsResponse<Categoria> fetchAllCategorias(Categoria  categoria);
+
+		/**
+	* Fetch categorias by request.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Categoria> fetchCategoriasByRequest(PagedInquiryRequest request);
 
 
-//===================================### RENTABILIDADEITENS ####======================================
-	/**
-
-	/**
-	 * Insert rentabilidadeitens.
-	 *
-* @param request the rentabilidadeitens maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<RentabilidadeItens> insertRentabilidadeItens(RentabilidadeItensMaintenanceRequest request);
-
-	/**
-* Update rentabilidadeitens.
-*
-* @param request the rentabilidadeitens maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<RentabilidadeItens> updateRentabilidadeItens(RentabilidadeItensMaintenanceRequest request);
-
-	/**
-* Delete rentabilidadeitens.
-*
-* @param request the rentabilidadeitens maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<RentabilidadeItens> deleteRentabilidadeItens(RentabilidadeItensMaintenanceRequest request);
-
-	/**
-* Refresh rentabilidadeitenss.
-*
-* @param request containing the number to refresh with and whether to return the result
-*/
-	public InternalResultsResponse<RentabilidadeItens> refreshRentabilidadeItenss(RefreshRequest request);
-
-	/**
-* Fetch rentabilidadeitens by id.
-*
-* @param request the request
-* @return the internal results response
-*/
-	public InternalResultsResponse<RentabilidadeItens> fetchRentabilidadeItensById(FetchByIdRequest request);
-
-	/**
-* Fetch all rentabilidadeitenss.
-*
-* @return the internal results response< rentabilidadeitens>
-*/
-	public InternalResultsResponse<RentabilidadeItens> fetchAllRentabilidadeItenss(RentabilidadeItens  rentabilidadeitens);
-
-	/**
-* Fetch rentabilidadeitenss by request.
-*
-* @param request the request
-* @return the internal results response
-*/
-	public InternalResultsResponse<RentabilidadeItens> fetchRentabilidadeItenssByRequest(PagedInquiryRequest request);
 
 }

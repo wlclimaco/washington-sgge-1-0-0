@@ -1,27 +1,27 @@
 package com.qat.samples.sysmgmt.produto.model.request;
 
-import com.qat.samples.sysmgmt.produto.model.criteria.ProdutoCriteria;
+import com.qat.samples.sysmgmt.produto.model.criteria.SubGrupoCriteria;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
 /**
  * The Class ProdutoInquiryRequest.
  */
-public class ProdutoParentInquiryRequest extends PagedInquiryRequest
+public class IpiInquiryRequest extends PagedInquiryRequest
 {
 
 	/** The criteria. */
-	private ProdutoCriteria criteria;
+	private SubGrupoCriteria criteria;
 
 	/**
 	 * Gets the criteria.
 	 * 
 	 * @return the criteria
 	 */
-	public ProdutoCriteria getCriteria()
+	public SubGrupoCriteria getCriteria()
 	{
 		if (criteria == null)
 		{
-			criteria = new ProdutoCriteria();
+			criteria = new SubGrupoCriteria();
 		}
 		return criteria;
 	}
@@ -31,7 +31,7 @@ public class ProdutoParentInquiryRequest extends PagedInquiryRequest
 	 * 
 	 * @param criteria the criteria
 	 */
-	public void setCriteria(ProdutoCriteria criteria)
+	public void setCriteria(SubGrupoCriteria criteria)
 	{
 		this.criteria = criteria;
 	}
@@ -43,7 +43,7 @@ public class ProdutoParentInquiryRequest extends PagedInquiryRequest
 	@Override
 	public String toString()
 	{
-		return "ProdutoInquiryRequest [getCriteria()=" + getCriteria() + ", toString()=" + super.toString() + "]";
+		return "SubGrupoInquiryRequest [getCriteria()=" + getCriteria() + ", toString()=" + super.toString() + "]";
 	}
 
 }

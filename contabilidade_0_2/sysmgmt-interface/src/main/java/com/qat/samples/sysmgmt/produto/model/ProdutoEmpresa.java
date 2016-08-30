@@ -13,7 +13,7 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
  * setting.
  */
 @SuppressWarnings("serial")
-public class ProdutoParent extends ModelCosmeDamiao
+public class ProdutoEmpresa extends ModelCosmeDamiao
 {
 
 	/** The SendSolv id for the account. */
@@ -50,18 +50,18 @@ public class ProdutoParent extends ModelCosmeDamiao
 	/**
 	 * Default constructor.
 	 */
-	public ProdutoParent()
+	public ProdutoEmpresa()
 	{
 		super();
 	}
 
-	public ProdutoParent(Integer id)
+	public ProdutoEmpresa(Integer id)
 	{
 		super();
 		this.id = id;
 	}
 
-	public ProdutoParent(int i, String string) {
+	public ProdutoEmpresa(int i, String string) {
 		// TODO Auto-generated constructor stub
 	}
 
