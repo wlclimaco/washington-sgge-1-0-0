@@ -8,62 +8,32 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
  * setting.
  */
 @SuppressWarnings("serial")
-public class Produto extends ModelCosmeDamiao
+public class pis extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
+	private Integer prodId;
+	private DoisValores pISSituaTributaria;
+	private Double valorUnidtribPIS;
+	private DoisValores tipocalculoSubstTrib;
+	private Double valorTribPISST;
 
-	/** The type of an account. */
-	private String codigo;
-
-	/** The type of an account. */
-	private String ncm;
-
-	/** The description. */
-	private String cdBarras;
-
-	/** The nome. */
-	private Long dataCreate;
-
-	/** The left. */
-	private String produto;
-
-	private String aplicacao;
-
-	private String fracao;
-
-	/** The numero. */
-	private Classificacao classificacao;
-
-	private Double pesoBruto;
-
-	private Double pesoLiquido;
-
-	private String modoUso;
-
-	private String excTabIPI;
-
-	private String cEST;
-
-	private String InfaddNFe;
-
-	private String AnotInt;
 
 	/**
 	 * Default constructor.
 	 */
-	public Produto()
+	public pis()
 	{
 		super();
 	}
 
-	public Produto(Integer id)
+	public pis(Integer id)
 	{
 		super();
 		this.id = id;
 	}
 
-	public Produto(int i, String string) {
+	public pis(int i, String string) {
 		// TODO Auto-generated constructor stub
 	}
 

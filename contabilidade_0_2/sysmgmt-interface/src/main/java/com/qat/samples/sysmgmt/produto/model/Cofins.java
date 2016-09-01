@@ -8,62 +8,37 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
  * setting.
  */
 @SuppressWarnings("serial")
-public class Produto extends ModelCosmeDamiao
+public class cofins extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	/** The type of an account. */
-	private String codigo;
 
-	/** The type of an account. */
-	private String ncm;
+private Integer prodId;
 
-	/** The description. */
-	private String cdBarras;
+private DoisValores sitTributaria;
 
-	/** The nome. */
-	private Long dataCreate;
+private Double valorTribCOFINS;
 
-	/** The left. */
-	private String produto;
+private DoisValores tipoCalculoSubstTrib;
 
-	private String aplicacao;
-
-	private String fracao;
-
-	/** The numero. */
-	private Classificacao classificacao;
-
-	private Double pesoBruto;
-
-	private Double pesoLiquido;
-
-	private String modoUso;
-
-	private String excTabIPI;
-
-	private String cEST;
-
-	private String InfaddNFe;
-
-	private String AnotInt;
+private Double aliquotaCOFINSST;
 
 	/**
 	 * Default constructor.
 	 */
-	public Produto()
+	public cofins()
 	{
 		super();
 	}
 
-	public Produto(Integer id)
+	public cofins(Integer id)
 	{
 		super();
 		this.id = id;
 	}
 
-	public Produto(int i, String string) {
+	public cofins(int i, String string) {
 		// TODO Auto-generated constructor stub
 	}
 

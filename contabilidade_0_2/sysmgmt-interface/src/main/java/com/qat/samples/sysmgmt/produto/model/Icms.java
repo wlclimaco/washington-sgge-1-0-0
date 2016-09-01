@@ -8,62 +8,34 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
  * setting.
  */
 @SuppressWarnings("serial")
-public class Produto extends ModelCosmeDamiao
+public class icms extends ModelCosmeDamiao
 {
-	/** The SendSolv id for the account. */
-	private Integer id;
 
-	/** The type of an account. */
-	private String codigo;
 
-	/** The type of an account. */
-	private String ncm;
-
-	/** The description. */
-	private String cdBarras;
-
-	/** The nome. */
-	private Long dataCreate;
-
-	/** The left. */
-	private String produto;
-
-	private String aplicacao;
-
-	private String fracao;
-
-	/** The numero. */
-	private Classificacao classificacao;
-
-	private Double pesoBruto;
-
-	private Double pesoLiquido;
-
-	private String modoUso;
-
-	private String excTabIPI;
-
-	private String cEST;
-
-	private String InfaddNFe;
-
-	private String AnotInt;
+private Integer id;
+private Integer prodId;
+private DoisValores sitTributaria;
+private DoisValores origem;
+private DoisValores modalidadeBC;
+private String redBase;
+private String aliqICMS;
+private DoisValores motDesoneracao;
 
 	/**
 	 * Default constructor.
 	 */
-	public Produto()
+	public icms()
 	{
 		super();
 	}
 
-	public Produto(Integer id)
+	public icms(Integer id)
 	{
 		super();
 		this.id = id;
 	}
 
-	public Produto(int i, String string) {
+	public icms(int i, String string) {
 		// TODO Auto-generated constructor stub
 	}
 

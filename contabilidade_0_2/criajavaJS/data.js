@@ -5731,7 +5731,7 @@ function ICMSModel() {
 }
 
 //================ Categoria
-function PISModel() {
+function IPIModel() {
 
     var a = [];
     a.push({
@@ -5923,7 +5923,7 @@ function COFINSModel() {
 }
 
 //================ Categoria
-function IPIModel() {
+function PISModel() {
 
     var a = [];
     a.push({

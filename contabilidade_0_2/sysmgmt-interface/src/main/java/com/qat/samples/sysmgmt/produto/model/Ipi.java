@@ -8,62 +8,45 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
  * setting.
  */
 @SuppressWarnings("serial")
-public class Produto extends ModelCosmeDamiao
+public class ipi extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
-	private Integer id;
+private Integer id;
 
-	/** The type of an account. */
-	private String codigo;
+private Integer prodId;
 
-	/** The type of an account. */
-	private String ncm;
+private DoisValores sitTributaria;
 
-	/** The description. */
-	private String cdBarras;
+private String classeCigarrosBebidas;
 
-	/** The nome. */
-	private Long dataCreate;
+private String cNPJProdutor;
 
-	/** The left. */
-	private String produto;
+private String codControleIPI;
 
-	private String aplicacao;
+private String qtdSeloIPI;
 
-	private String fracao;
+private DoisValores codEnquadramento;
 
-	/** The numero. */
-	private Classificacao classificacao;
+private DoisValores tipoCalculo;
 
-	private Double pesoBruto;
+private Double aliquotaIPI;
 
-	private Double pesoLiquido;
-
-	private String modoUso;
-
-	private String excTabIPI;
-
-	private String cEST;
-
-	private String InfaddNFe;
-
-	private String AnotInt;
 
 	/**
 	 * Default constructor.
 	 */
-	public Produto()
+	public ipi()
 	{
 		super();
 	}
 
-	public Produto(Integer id)
+	public ipi(Integer id)
 	{
 		super();
 		this.id = id;
 	}
 
-	public Produto(int i, String string) {
+	public ipi(int i, String string) {
 		// TODO Auto-generated constructor stub
 	}
 

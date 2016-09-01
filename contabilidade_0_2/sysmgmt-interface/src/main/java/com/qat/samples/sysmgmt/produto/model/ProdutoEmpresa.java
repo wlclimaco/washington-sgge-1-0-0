@@ -19,23 +19,19 @@ public class ProdutoEmpresa extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
+	private Produto prodId;
 
-	private Long dataValidade;
+	private String informAdicionaisParaNFe;
 
-	private String comissao;
+	private Integer anotainternas;
 
-	private String fracao;
-
-	private String localizacao;
-
-	private List<MarcaProduto> marca;
-
-	/** The numero. */
-	private Classificacao classificacao;
-
-	private Tributacao tributacao;
+	private Long dataCadastro;
 
 	private List<Estoque> estoqueList;
+
+	private List<Margem> MargemList;
+
+	private Tributacao tributacao;
 
 	private List<Preco> precoList;
 
