@@ -7,7 +7,7 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="ProdutoParentMap">
+<mapper namespace="ProdutoEmpresaMap">
 	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
@@ -15,7 +15,7 @@
       from a query, and the class properties.  A result map isnt
       necessary if the columns (or aliases) match to the properties
        exactly. -->
-  <resultMap id="ProdutoParentResult" type="ProdutoParent">
+  <resultMap id="ProdutoEmpresaResult" type="ProdutoEmpresa">
     <result property="id" column="id"/>
     <result property="parentId" column="parentId"/>
  <!--     <result property="tributacao" column="tributacao"/>
@@ -36,7 +36,7 @@
 <result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
-  <sql id="allProdutoParentColumns">
+  <sql id="allProdutoEmpresaColumns">
 parentId
 ,tributacao
 ,dataValidade
@@ -50,7 +50,7 @@ parentId
 ,modify_user
 
 </sql>
-<sql id="allProdutoParentValues">
+<sql id="allProdutoEmpresaValues">
 #{parentId},
 #{tributacao.id},
 #{dataValidade},
@@ -65,39 +65,39 @@ parentId
   </sql>
 
 
- <select id="fetchAllProdutoParents" resultMap="ProdutoParentResult">
+ <select id="fetchAllProdutoEmpresas" resultMap="ProdutoEmpresaResult">
     SELECT id,
-	<include refid="allProdutoParentColumns" />
+	<include refid="allProdutoEmpresaColumns" />
    FROM produtoparent ORDER BY id ASC
  </select>
 
- <select id="fetchProdutoParentById" parameterType="Integer" resultMap="ProdutoParentResult">
+ <select id="fetchProdutoEmpresaById" parameterType="Integer" resultMap="ProdutoEmpresaResult">
     SELECT id,
-	<include refid="allProdutoParentColumns" />
+	<include refid="allProdutoEmpresaColumns" />
    FROM produtoparent WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllProdutoParentsRequest" parameterType="ProdutoParentInquiryRequest" resultMap="ProdutoParentResult">
+ <select id="fetchAllProdutoEmpresasRequest" parameterType="ProdutoEmpresaInquiryRequest" resultMap="ProdutoEmpresaResult">
 
-		SELECT id,<include refid="allProdutoParentColumns" />
+		SELECT id,<include refid="allProdutoEmpresaColumns" />
   		  FROM produtoparent where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
-<select id="fetchProdutoParentRowCount" resultType="Integer">
+<select id="fetchProdutoEmpresaRowCount" resultType="Integer">
 		SELECT COUNT(*) AS RECORD_COUNT FROM produtoparent WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
 
  </select>
 
- <insert id="insertProdutoParent" parameterType="ProdutoParent" useGeneratedKeys="true" keyProperty="id">
+ <insert id="insertProdutoEmpresa" parameterType="ProdutoEmpresa" useGeneratedKeys="true" keyProperty="id">
  	INSERT INTO produtoparent (
-	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allProdutoParentColumns" />
+	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allProdutoEmpresaColumns" />
      )
-   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allProdutoParentValues" /> )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allProdutoEmpresaValues" /> )
  </insert>
 
- <update id="updateProdutoParent" parameterType="ProdutoParent">
+ <update id="updateProdutoEmpresa" parameterType="ProdutoEmpresa">
    UPDATE produtoparent SET
 <if test="parentId!= null">parentId = #{parentId},</if>
 <if test="emprId!= null">emprId = #{emprId},</if>
@@ -111,11 +111,11 @@ parentId
     id = #{id}
  </update>
 
-<delete id="deleteProdutoParentById" parameterType="ProdutoParent">
+<delete id="deleteProdutoEmpresaById" parameterType="ProdutoEmpresa">
   DELETE FROM produtoparent WHERE id = #{id}
  </delete>
 
- <delete id="deleteAllProdutoParents">
+ <delete id="deleteAllProdutoEmpresas">
 	DELETE FROM produtoparent
   </delete>
 </mapper>

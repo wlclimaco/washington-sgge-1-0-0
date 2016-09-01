@@ -13,7 +13,7 @@ import com.qat.samples.sysmgmt.produto.model.ProdutoEmpresa;
  * @version 1.0
  * @created 11-Sep-2014 09:39:00 AM
  */
-public class ProdutoParentResponse extends InquiryResponse
+public class ProdutoEmpresaResponse extends InquiryResponse
 {
 
 	/** Attributes. */

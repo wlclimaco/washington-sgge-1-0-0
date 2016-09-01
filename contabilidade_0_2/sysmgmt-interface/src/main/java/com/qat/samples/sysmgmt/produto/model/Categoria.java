@@ -13,11 +13,10 @@ public class Categoria extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
+	
+	private String categoria;
 
-	private Double valor;
-
-	/** The type of an account. */
-	private List<CustoItens> custoItens;
+	private Double margem;
 
 
 
@@ -44,31 +43,36 @@ public class Categoria extends ModelCosmeDamiao
 	}
 
 	public Double getValor() {
-		return valor;
+		return margem;
 	}
 
 	public void setValor(Double valor) {
-		this.valor = valor;
-	}
-
-	public List<CustoItens> getCustoItens() {
-		return custoItens;
-	}
-
-	public void setCustoItens(List<CustoItens> custoItens) {
-		this.custoItens = custoItens;
+		this.margem = valor;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	@Override
-	public String toString() {
-		return "Custo [getId()=" + getId() + ", getValor()=" + getValor() + ", getCustoItens()=" + getCustoItens()
-				+ ", toString()=" + super.toString() + "]";
+	public String getCategoria() {
+		return categoria;
 	}
 
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
 
+	public Double getMargem() {
+		return margem;
+	}
 
+	public void setMargem(Double margem) {
+		this.margem = margem;
+	}
+
+	@Override
+	public String toString() {
+		return "Categoria [getId()=" + getId() + ", getValor()=" + getValor() + ", getCategoria()=" + getCategoria()
+				+ ", getMargem()=" + getMargem() + ", toString()=" + super.toString() + "]";
+	}
 }

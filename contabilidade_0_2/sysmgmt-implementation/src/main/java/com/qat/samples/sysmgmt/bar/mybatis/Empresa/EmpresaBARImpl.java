@@ -361,7 +361,7 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 				getDocumentosBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoId,
-				getHistoricoBAR(), response, empresa.getId());
+				getHistoricoBAR(), response, empresa.getId(),empresa.getUserId());
 
 		if (!ValidationUtil.isNullOrEmpty(empresa.getSocios()))
 		{

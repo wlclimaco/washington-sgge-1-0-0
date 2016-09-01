@@ -17,30 +17,35 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
 import com.qat.samples.sysmgmt.Dto.ProdutoTransforme;
 import com.qat.samples.sysmgmt.bac.Produto.IProdutoBAC;
+import com.qat.samples.sysmgmt.produto.model.Categoria;
 import com.qat.samples.sysmgmt.produto.model.Grupo;
 import com.qat.samples.sysmgmt.produto.model.Marca;
 import com.qat.samples.sysmgmt.produto.model.Produto;
-import com.qat.samples.sysmgmt.produto.model.ProdutoParent;
+import com.qat.samples.sysmgmt.produto.model.ProdutoEmpresa;
 import com.qat.samples.sysmgmt.produto.model.SubGrupo;
 import com.qat.samples.sysmgmt.produto.model.UniMed;
+import com.qat.samples.sysmgmt.produto.model.request.CategoriaInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.CategoriaMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.GrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.GrupoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.MarcaMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoEmpresaInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ProdutoEmpresaMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
-import com.qat.samples.sysmgmt.produto.model.request.ProdutoParentInquiryRequest;
-import com.qat.samples.sysmgmt.produto.model.request.ProdutoParentMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.UniMedMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.response.CategoriaResponse;
 import com.qat.samples.sysmgmt.produto.model.response.GrupoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.MarcaResponse;
-import com.qat.samples.sysmgmt.produto.model.response.ProdutoParentResponse;
+import com.qat.samples.sysmgmt.produto.model.response.ProdutoEmpresaResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.SubGrupoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.UniMedResponse;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -678,15 +683,15 @@ public class ProdutoAPIController extends BaseController {
 	 *            the ret paged
 	 * @return the produtoparent response
 	 */
-	@RequestMapping(value = "/produtoParent/refresh", method = RequestMethod.GET)
+	@RequestMapping(value = "/categoria/refresh", method = RequestMethod.GET)
 	@ResponseBody
-	public ProdutoParentResponse refreshProdutoParents(@RequestParam("refreshInt") Integer refreshInt,
+	public ProdutoEmpresaResponse refreshProdutoEmpresas(@RequestParam("refreshInt") Integer refreshInt,
 			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
-		ProdutoParentResponse produtoparentResponse = new ProdutoParentResponse();
+		ProdutoEmpresaResponse produtoparentResponse = new ProdutoEmpresaResponse();
 
 		try {
 			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
-			InternalResultsResponse<ProdutoParent> internalResponse = getProdutoBAC().refreshProdutoParents(request);
+			InternalResultsResponse<ProdutoEmpresa> internalResponse = getProdutoBAC().refreshProdutoEmpresas(request);
 			ResponseHandler.handleOperationStatusAndMessages(produtoparentResponse, internalResponse, true);
 		} catch (Exception ex) {
 			ResponseHandler.handleException(LOG, produtoparentResponse, ex, DEFAULT_EXCEPTION_MSG,
@@ -705,11 +710,11 @@ public class ProdutoAPIController extends BaseController {
 	 */
 	@RequestMapping(value = "/produtoParent/fetchPage", method = RequestMethod.POST)
 	@ResponseBody
-	public ProdutoParentResponse fetchProdutoParentPaged(@RequestBody ProdutoParentInquiryRequest request) {
-		ProdutoParentResponse produtoparentResponse = new ProdutoParentResponse();
+	public ProdutoEmpresaResponse fetchProdutoEmpresaPaged(@RequestBody ProdutoEmpresaInquiryRequest request) {
+		ProdutoEmpresaResponse produtoparentResponse = new ProdutoEmpresaResponse();
 		try {
-			InternalResultsResponse<ProdutoParent> internalResponse = getProdutoBAC()
-					.fetchProdutoParentsByRequest(request);
+			InternalResultsResponse<ProdutoEmpresa> internalResponse = getProdutoBAC()
+					.fetchProdutoEmpresasByRequest(request);
 			ResponseHandler.handleOperationStatusAndMessages(produtoparentResponse, internalResponse, true);
 		} catch (Exception ex) {
 			ResponseHandler.handleException(LOG, produtoparentResponse, ex, DEFAULT_EXCEPTION_MSG,
@@ -727,10 +732,10 @@ public class ProdutoAPIController extends BaseController {
 	 */
 	@RequestMapping(value = "/produtoParent/insert", method = RequestMethod.POST)
 	@ResponseBody
-	public ProdutoParentResponse insertProdutoParent(@RequestBody ProdutoParentMaintenanceRequest request) {
-		ProdutoParentResponse produtoparentResponse = new ProdutoParentResponse();
+	public ProdutoEmpresaResponse insertProdutoEmpresa(@RequestBody ProdutoEmpresaMaintenanceRequest request) {
+		ProdutoEmpresaResponse produtoparentResponse = new ProdutoEmpresaResponse();
 		try {
-			InternalResultsResponse<ProdutoParent> internalResponse = getProdutoBAC().insertProdutoParent(request);
+			InternalResultsResponse<ProdutoEmpresa> internalResponse = getProdutoBAC().insertProdutoEmpresa(request);
 			ResponseHandler.handleOperationStatusAndMessages(produtoparentResponse, internalResponse, true);
 		} catch (Exception ex) {
 			ResponseHandler.handleException(LOG, produtoparentResponse, ex, DEFAULT_EXCEPTION_MSG,
@@ -748,10 +753,10 @@ public class ProdutoAPIController extends BaseController {
 	 */
 	@RequestMapping(value = "/produtoParent/update", method = RequestMethod.POST)
 	@ResponseBody
-	public ProdutoParentResponse updateProdutoParent(@RequestBody ProdutoParentMaintenanceRequest request) {
-		ProdutoParentResponse produtoparentResponse = new ProdutoParentResponse();
+	public ProdutoEmpresaResponse updateProdutoEmpresa(@RequestBody ProdutoEmpresaMaintenanceRequest request) {
+		ProdutoEmpresaResponse produtoparentResponse = new ProdutoEmpresaResponse();
 		try {
-			InternalResultsResponse<ProdutoParent> internalResponse = getProdutoBAC().updateProdutoParent(request);
+			InternalResultsResponse<ProdutoEmpresa> internalResponse = getProdutoBAC().updateProdutoEmpresa(request);
 			ResponseHandler.handleOperationStatusAndMessages(produtoparentResponse, internalResponse, true);
 		} catch (Exception ex) {
 			ResponseHandler.handleException(LOG, produtoparentResponse, ex, DEFAULT_EXCEPTION_MSG,
@@ -769,17 +774,131 @@ public class ProdutoAPIController extends BaseController {
 	 */
 	@RequestMapping(value = "/produtoParent/delete", method = RequestMethod.POST)
 	@ResponseBody
-	public ProdutoParentResponse deleteProdutoParent(@RequestBody ProdutoParentMaintenanceRequest request) {
-		ProdutoParentResponse produtoparentResponse = new ProdutoParentResponse();
+	public ProdutoEmpresaResponse deleteProdutoEmpresa(@RequestBody ProdutoEmpresaMaintenanceRequest request) {
+		ProdutoEmpresaResponse produtoparentResponse = new ProdutoEmpresaResponse();
 
 		try {
-			InternalResultsResponse<ProdutoParent> internalResponse = getProdutoBAC().deleteProdutoParent(request);
+			InternalResultsResponse<ProdutoEmpresa> internalResponse = getProdutoBAC().deleteProdutoEmpresa(request);
 			ResponseHandler.handleOperationStatusAndMessages(produtoparentResponse, internalResponse, true);
 		} catch (Exception ex) {
 			ResponseHandler.handleException(LOG, produtoparentResponse, ex, DEFAULT_EXCEPTION_MSG,
 					new Object[] { ex.toString() });
 		}
 		return produtoparentResponse;
+
+	}
+
+	/**
+	 * Refresh produtoparents.
+	 *
+	 * @param refreshInt
+	 *            the refresh int
+	 * @param retList
+	 *            the ret list
+	 * @param retPaged
+	 *            the ret paged
+	 * @return the produtoparent response
+	 */
+	@RequestMapping(value = "/categoria/fetchCategoriaById", method = RequestMethod.GET)
+	@ResponseBody
+	public CategoriaResponse refreshProdutoEmpresas(@RequestBody FetchByIdRequest request) {
+		CategoriaResponse produtoparentResponse = new CategoriaResponse();
+
+		try {
+
+			InternalResultsResponse<Categoria> internalResponse = getProdutoBAC().fetchCategoriaById(request);
+			ResponseHandler.handleOperationStatusAndMessages(produtoparentResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, produtoparentResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return produtoparentResponse;
+
+	}
+
+	/**
+	 * Fetch produtoparent paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the produtoparent response
+	 */
+	@RequestMapping(value = "/categoria/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public CategoriaResponse fetchCategoriaPaged(@RequestBody CategoriaInquiryRequest request) {
+		CategoriaResponse produtoparentResponse = new CategoriaResponse();
+		try {
+			InternalResultsResponse<Categoria> internalResponse = getProdutoBAC().fetchCategoriasByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(produtoparentResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, produtoparentResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return produtoparentResponse;
+	}
+
+	/**
+	 * Insert marca.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the marca response
+	 */
+	@RequestMapping(value = "/categoria/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public CategoriaResponse insertCategoria(@RequestBody CategoriaMaintenanceRequest request) {
+		CategoriaResponse categoriaResponse = new CategoriaResponse();
+		try {
+			InternalResultsResponse<Categoria> internalResponse = getProdutoBAC().insertCategoria(request);
+			ResponseHandler.handleOperationStatusAndMessages(categoriaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, categoriaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return categoriaResponse;
+	}
+
+	/**
+	 * Update categoria.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the categoria response
+	 */
+	@RequestMapping(value = "/categoria/update", method = RequestMethod.POST)
+	@ResponseBody
+	public CategoriaResponse updateCategoria(@RequestBody CategoriaMaintenanceRequest request) {
+		CategoriaResponse categoriaResponse = new CategoriaResponse();
+		try {
+			InternalResultsResponse<Categoria> internalResponse = getProdutoBAC().updateCategoria(request);
+			ResponseHandler.handleOperationStatusAndMessages(categoriaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, categoriaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return categoriaResponse;
+	}
+
+	/**
+	 * Delete categoria.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the categoria response
+	 */
+	@RequestMapping(value = "/categoria/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public CategoriaResponse deleteCategoria(@RequestBody CategoriaMaintenanceRequest request) {
+		CategoriaResponse categoriaResponse = new CategoriaResponse();
+
+		try {
+			InternalResultsResponse<Categoria> internalResponse = getProdutoBAC().deleteCategoria(request);
+			ResponseHandler.handleOperationStatusAndMessages(categoriaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, categoriaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return categoriaResponse;
 
 	}
 

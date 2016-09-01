@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 31/08/2016 19:59 : 34-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CategoriaMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="CategoriaResult" type="Categoria">
+    <result property="id" column="id"/>
+    <result property="categoria" column="categoria"/>
+    <result property="margem" column="margem"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
+
+  <sql id="allCategoriaColumns">
+categoria
+,margem
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allCategoriaValues">
+#{categoria},
+#{margem},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllCategorias" resultMap="CategoriaResult">
+    SELECT id,
+ <include refid="allCategoriaColumns" />
+   FROM categoria ORDER BY id ASC
+ </select>
+
+ <select id="fetchCategoriaById" parameterType="Integer" resultMap="CategoriaResult">
+    SELECT id,
+ <include refid="allCategoriaColumns" />
+   FROM categoria WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllCategoriasRequest" parameterType="CategoriaInquiryRequest" resultMap="CategoriaResult">
+
+     SELECT id,<include refid="allCategoriaColumns" />
+           FROM categoria where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
+</select>
+
+<select id="fetchCategoriaRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM categoria WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+
+ </select>
+
+ <insert id="insertCategoria" parameterType="Categoria" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO categoria (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allCategoriaColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allCategoriaValues" /> )
+ </insert>
+
+ <update id="updateCategoria" parameterType="Categoria">
+   UPDATE categoria SET
+<if test="categoria!= null">categoria = #{categoria},</if>
+<if test="margem!= null">margem = #{margem},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteCategoriaById" parameterType="Categoria">
+  DELETE FROM categoria WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllCategorias">
+ DELETE FROM categoria
+  </delete>
+</mapper>
+
+

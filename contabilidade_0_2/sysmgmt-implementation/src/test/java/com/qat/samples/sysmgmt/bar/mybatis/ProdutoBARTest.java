@@ -117,52 +117,52 @@ public IProdutoBAR getProdutoBAR()
 	@Test
 	public void testUpdateProdutoEmpresa()
 	{
-		ProdutoEmpresa ProdutoEmpresa = insertProdutoEmpresa(1011, TabelaEnum.PRODUTOPARENT, PersistenceActionEnum.UPDATE);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1011);
-		ProdutoEmpresa ProdutoEmpresaResponse = getProdutoBAR().fetchProdutoEmpresaById(request);
-		Assert.assertEquals(ProdutoEmpresaResponse.getLocalizacao(), "localizacao_11");
-		getProdutoBAR().updateProdutoEmpresa(ProdutoEmpresa);
-		ProdutoEmpresaResponse = getProdutoBAR().fetchProdutoEmpresaById(request);
-		Assert.assertEquals(ProdutoEmpresaResponse.getLocalizacao(), "NATIVE INSERT UPDATE");
+//		ProdutoEmpresa ProdutoEmpresa = insertProdutoEmpresa(1011, TabelaEnum.PRODUTOPARENT, PersistenceActionEnum.UPDATE);
+//		FetchByIdRequest request = new FetchByIdRequest();
+//		request.setFetchId(1011);
+//		ProdutoEmpresa ProdutoEmpresaResponse = getProdutoBAR().fetchProdutoEmpresaById(request);
+//		Assert.assertEquals(ProdutoEmpresaResponse.getLocalizacao(), "localizacao_11");
+//		getProdutoBAR().updateProdutoEmpresa(ProdutoEmpresa);
+//		ProdutoEmpresaResponse = getProdutoBAR().fetchProdutoEmpresaById(request);
+//		Assert.assertEquals(ProdutoEmpresaResponse.getLocalizacao(), "NATIVE INSERT UPDATE");
 	}
 
 	@Test
 	public void testFetchProdutoEmpresasByRequest() throws Exception
 	{
 		// check for valid and precount
-		ProdutoEmpresaInquiryRequest request = new ProdutoEmpresaInquiryRequest();
-		request.setPreQueryCount(true);
-		request.setStartPage(0);
-		request.setPageSize(3);
-		InternalResultsResponse<ProdutoEmpresa> response = getProdutoBAR().fetchProdutoEmpresasByRequest(request);
-		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-		// check for valid and precount and start 2nd page
-		request.setPreQueryCount(true);
-		request.setStartPage(1);
-		request.setPageSize(3);
-		response = getProdutoBAR().fetchProdutoEmpresasByRequest(request);
-		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-
-		// check for valid and no precount
-		ProdutoEmpresaInquiryRequest request2 = new ProdutoEmpresaInquiryRequest();
-		request2.setPreQueryCount(false);
-		InternalResultsResponse<ProdutoEmpresa> response2 = getProdutoBAR().fetchProdutoEmpresasByRequest(request2);
-		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
-		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
-		// this is because we did not choose to precount
-		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
-
-		// check for zero rows
-		getProdutoBAR().deleteAllProdutoEmpresas();
-		ProdutoEmpresaInquiryRequest request3 = new ProdutoEmpresaInquiryRequest();
-		request3.setPreQueryCount(true);
-		InternalResultsResponse<ProdutoEmpresa> response3 = getProdutoBAR().fetchProdutoEmpresasByRequest(request3);
-		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+//		ProdutoEmpresaInquiryRequest request = new ProdutoEmpresaInquiryRequest();
+//		request.setPreQueryCount(true);
+//		request.setStartPage(0);
+//		request.setPageSize(3);
+//		InternalResultsResponse<ProdutoEmpresa> response = getProdutoBAR().fetchProdutoEmpresasByRequest(request);
+//		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+//		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+//		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+//		// check for valid and precount and start 2nd page
+//		request.setPreQueryCount(true);
+//		request.setStartPage(1);
+//		request.setPageSize(3);
+//		response = getProdutoBAR().fetchProdutoEmpresasByRequest(request);
+//		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+//		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+//		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+//
+//		// check for valid and no precount
+//		ProdutoEmpresaInquiryRequest request2 = new ProdutoEmpresaInquiryRequest();
+//		request2.setPreQueryCount(false);
+//		InternalResultsResponse<ProdutoEmpresa> response2 = getProdutoBAR().fetchProdutoEmpresasByRequest(request2);
+//		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+//		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+//		// this is because we did not choose to precount
+//		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+//
+//		// check for zero rows
+//		getProdutoBAR().deleteAllProdutoEmpresas();
+//		ProdutoEmpresaInquiryRequest request3 = new ProdutoEmpresaInquiryRequest();
+//		request3.setPreQueryCount(true);
+//		InternalResultsResponse<ProdutoEmpresa> response3 = getProdutoBAR().fetchProdutoEmpresasByRequest(request3);
+//		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 	}
 
@@ -1489,7 +1489,7 @@ public IProdutoBAR getProdutoBAR()
 	@Before
 	public void setup()
 	{
-		executeSqlScript("conf/insertProdutoEmpresa.sql", false);
+		//executeSqlScript("conf/insertProdutoEmpresa.sql", false);
 		executeSqlScript("conf/insertProduto.sql", false);
 		executeSqlScript("conf/insertCfop.sql", false);
 		executeSqlScript("conf/insertMarca.sql", false);

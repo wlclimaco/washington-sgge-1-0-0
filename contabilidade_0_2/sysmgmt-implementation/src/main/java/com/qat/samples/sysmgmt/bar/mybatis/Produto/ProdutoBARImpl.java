@@ -13,6 +13,7 @@ import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.MyBatisBARHelper;
+import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Email.IEmailBAR;
 import com.qat.samples.sysmgmt.bar.Fiscal.IFiscalBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
@@ -20,8 +21,10 @@ import com.qat.samples.sysmgmt.bar.Notes.INotesBAR;
 import com.qat.samples.sysmgmt.bar.Produto.IProdutoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.EmailBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.StatusBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.TelefoneBARD;
 import com.qat.samples.sysmgmt.cfop.model.Cfop;
 import com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest;
 import com.qat.samples.sysmgmt.fiscal.model.Cofins;
@@ -1258,7 +1261,22 @@ marca.setProcessId(marca.getTransactionId());
 
 Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.MARCA, AcaoEnum.INSERT, marca.getTransactionId(),
 			getHistoricoBAR(), response, marca.getId(),marca.getUserId());
-	
+
+if (!ValidationUtil.isNullOrEmpty(marca.getEmailList()))
+{
+	count +=
+			EmailBARD.maintainEmailAssociations(marca.getEmailList(), response, marca.getId(), null, null,
+					TabelaEnum.MARCA, emailBAR, statusBAR, historicoBAR, marca.getId(),
+					marca.getCreateUser(), marca.getTransactionId(), marca.getTransactionId());
+}
+if (!ValidationUtil.isNullOrEmpty(marca.getTelefoneList()))
+{
+	count +=
+			TelefoneBARD.maintainTelefoneAssociations(marca.getTelefoneList(), response, marca.getId(), null,
+					null,
+					TabelaEnum.MARCA, telefoneBAR, statusBAR, historicoBAR, marca.getId(),
+					marca.getCreateUser(), marca.getTransactionId(), marca.getTransactionId());
+}
 	
 if (marca.getId() !=  0 && marca.getId() != null)
 	{
@@ -1284,6 +1302,7 @@ if (marca.getId() !=  0 && marca.getId() != null)
 @Override
 public InternalResponse updateMarca(Marca marca)
 {
+	Integer count = 0;
 	InternalResponse response = new InternalResponse();
  marca.setProcessId(marca.getTransactionId());
 	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_MARCA, marca, response);
@@ -1291,6 +1310,21 @@ public InternalResponse updateMarca(Marca marca)
 Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.MARCA, AcaoEnum.UPDATE, marca.getTransactionId(),
 			getHistoricoBAR(), response, marca.getId(),marca.getUserId());
 	
+if (!ValidationUtil.isNullOrEmpty(marca.getEmailList()))
+{
+	count +=
+			EmailBARD.maintainEmailAssociations(marca.getEmailList(), response, marca.getId(), null, null,
+					TabelaEnum.MARCA, emailBAR, statusBAR, historicoBAR, marca.getId(),
+					marca.getCreateUser(), marca.getTransactionId(), marca.getTransactionId());
+}
+if (!ValidationUtil.isNullOrEmpty(marca.getTelefoneList()))
+{
+	count +=
+			TelefoneBARD.maintainTelefoneAssociations(marca.getTelefoneList(), response, marca.getId(), null,
+					null,
+					TabelaEnum.MARCA, telefoneBAR, statusBAR, historicoBAR, marca.getId(),
+					marca.getCreateUser(), marca.getTransactionId(), marca.getTransactionId());
+}
 	return response;
 }
 

@@ -380,7 +380,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_SERVICO, servico, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SERVICO, AcaoEnum.INSERT, historicoId,
-				getHistoricoBAR(), response, servico.getId());
+				getHistoricoBAR(), response, servico.getId(),servico.getUserId());
 
 		if (!ValidationUtil.isNullOrEmpty(servico.getPreco())) {
 			a += PrecoBARD.maintainPrecoAssociations(servico.getPreco(),  response,
@@ -404,7 +404,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_SERVICO, servico, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SERVICO, AcaoEnum.UPDATE,
-				servico.getProcessId(), getHistoricoBAR(), response, servico.getId());
+				servico.getProcessId(), getHistoricoBAR(), response, servico.getId(),servico.getUserId());
 
 		if (!ValidationUtil.isNullOrEmpty(servico.getPreco())) {
 			a += PrecoBARD.maintainPrecoAssociations(servico.getPreco(), response,
@@ -428,7 +428,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_SERVICO, servico, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SERVICO, AcaoEnum.DELETE,
-				servico.getProcessId(), getHistoricoBAR(), response, servico.getId());
+				servico.getProcessId(), getHistoricoBAR(), response, servico.getId(),servico.getUserId());
 
 		if (!ValidationUtil.isNullOrEmpty(servico.getPreco())) {
 			a += PrecoBARD.maintainPrecoAssociations(servico.getPreco(),  response,
@@ -554,7 +554,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_SITE, site, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SITE, AcaoEnum.INSERT, historicoId,
-				getHistoricoBAR(), response, site.getId());
+				getHistoricoBAR(), response, site.getId(),site.getUserId());
 
 		if (!ValidationUtil.isNullOrEmpty(site.getServicoList())) {
 			a += ServicoBARD.maintainServicoAssociations(site.getServicoList(),  response,
@@ -593,7 +593,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_SITE, site, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SITE, AcaoEnum.UPDATE, site.getProcessId(),
-				getHistoricoBAR(), response, site.getId());
+				getHistoricoBAR(), response, site.getId(),site.getUserId());
 
 		if (!ValidationUtil.isNullOrEmpty(site.getServicoList())) {
 			a += ServicoBARD.maintainServicoAssociations(site.getServicoList(),  response,
@@ -625,7 +625,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		// response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SITE, AcaoEnum.DELETE, site.getProcessId(),
-				getHistoricoBAR(), response, site.getId());
+				getHistoricoBAR(), response, site.getId(),site.getUserId());
 
 		if (!ValidationUtil.isNullOrEmpty(site.getServicoList())) {
 			a += ServicoBARD.maintainServicoAssociations(site.getServicoList(),  response,
@@ -762,7 +762,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONTATO, contato, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.CONTATO, AcaoEnum.INSERT, historicoId,
-				getHistoricoBAR(), response, contato.getId());
+				getHistoricoBAR(), response, contato.getId(),contato.getUserId());
 
 
 		
@@ -782,7 +782,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CONTATO, contato, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.CONTATO, AcaoEnum.UPDATE,
-				contato.getProcessId(), getHistoricoBAR(), response, contato.getId());
+				contato.getProcessId(), getHistoricoBAR(), response, contato.getId(),contato.getUserId());
 
 
 		return response;
@@ -800,7 +800,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONTATO, contato, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.CONTATO, AcaoEnum.DELETE,
-				contato.getProcessId(), getHistoricoBAR(), response, contato.getId());
+				contato.getProcessId(), getHistoricoBAR(), response, contato.getId(),contato.getUserId());
 
 		return response;
 	}
@@ -1063,7 +1063,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ORDEMSERVICO, ordemservico, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ORDEMSERVICO, AcaoEnum.INSERT, historicoId,
-				getHistoricoBAR(), response, ordemservico.getId());
+				getHistoricoBAR(), response, ordemservico.getId(),ordemservico.getUserId());
 
 		if (!ValidationUtil.isNullOrEmpty(ordemservico.getOrdemServicoItensList())) {
 			a += OrdemServicoItensBARD.maintainOrdemServicoItensAssociations(ordemservico.getOrdemServicoItensList(),
@@ -1098,7 +1098,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ORDEMSERVICO, ordemservico, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ORDEMSERVICO, AcaoEnum.UPDATE,
-				ordemservico.getProcessId(), getHistoricoBAR(), response, ordemservico.getId());
+				ordemservico.getProcessId(), getHistoricoBAR(), response, ordemservico.getId(),ordemservico.getUserId());
 
 		if (!ValidationUtil.isNullOrEmpty(ordemservico.getOrdemServicoItensList())) {
 			a += OrdemServicoItensBARD.maintainOrdemServicoItensAssociations(ordemservico.getOrdemServicoItensList(),
@@ -1124,7 +1124,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ORDEMSERVICO, ordemservico, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ORDEMSERVICO, AcaoEnum.UPDATE,
-				ordemservico.getProcessId(), getHistoricoBAR(), response, ordemservico.getId());
+				ordemservico.getProcessId(), getHistoricoBAR(), response, ordemservico.getId(),ordemservico.getUserId());
 
 		if (!ValidationUtil.isNullOrEmpty(ordemservico.getOrdemServicoItensList())) {
 			a += OrdemServicoItensBARD.maintainOrdemServicoItensAssociations(ordemservico.getOrdemServicoItensList(),
@@ -1259,7 +1259,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ORDEMSERVICOITENS, ordemservicoitens, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ORDEMSERVICOITENS, AcaoEnum.INSERT,
-				ordemservicoitens.getProcessId(), getHistoricoBAR(), response, ordemservicoitens.getId());
+				ordemservicoitens.getProcessId(), getHistoricoBAR(), response, ordemservicoitens.getId(),ordemservicoitens.getUserId());
 
 		return response;
 	}
@@ -1277,7 +1277,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ORDEMSERVICOITENS, ordemservicoitens, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ORDEMSERVICOITENS, AcaoEnum.UPDATE,
-				ordemservicoitens.getProcessId(), getHistoricoBAR(), response, ordemservicoitens.getId());
+				ordemservicoitens.getProcessId(), getHistoricoBAR(), response, ordemservicoitens.getId(),ordemservicoitens.getUserId());
 
 		return response;
 	}
@@ -1295,7 +1295,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ORDEMSERVICOITENS, ordemservicoitens, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ORDEMSERVICOITENS, AcaoEnum.DELETE,
-				ordemservicoitens.getProcessId(), getHistoricoBAR(), response, ordemservicoitens.getId());
+				ordemservicoitens.getProcessId(), getHistoricoBAR(), response, ordemservicoitens.getId(),ordemservicoitens.getUserId());
 
 		return response;
 	}
@@ -1418,7 +1418,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PLANO, plano, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PLANO, AcaoEnum.INSERT, historicoId,
-				getHistoricoBAR(), response, plano.getId());
+				getHistoricoBAR(), response, plano.getId(),plano.getUserId());
 
 		if (!ValidationUtil.isNullOrEmpty(plano.getPrecoList())) {
 			a += PrecoBARD.maintainPrecoAssociations(plano.getPrecoList(),  response,
@@ -1458,7 +1458,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PLANO, plano, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PLANO, AcaoEnum.UPDATE, plano.getProcessId(),
-				getHistoricoBAR(), response, plano.getId());
+				getHistoricoBAR(), response, plano.getId(),plano.getUserId());
 
 		if (!ValidationUtil.isNullOrEmpty(plano.getPrecoList())) {
 			a += PrecoBARD.maintainPrecoAssociations(plano.getPrecoList(),  response,
@@ -1493,7 +1493,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		// response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PLANO, AcaoEnum.DELETE, plano.getProcessId(),
-				getHistoricoBAR(), response, plano.getId());
+				getHistoricoBAR(), response, plano.getId(),plano.getUserId());
 
 		if (!ValidationUtil.isNullOrEmpty(plano.getPrecoList())) {
 			a += PrecoBARD.maintainPrecoAssociations(plano.getPrecoList(),  response,
@@ -1623,7 +1623,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doInsert(getSqlSession(), "PlanoBySiteMAP.insertPlanoBySite", plano, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PLANO, AcaoEnum.DELETE, plano.getProcessId(),
-				getHistoricoBAR(), response, plano.getId());
+				getHistoricoBAR(), response, plano.getId(),plano.getUserId());
 
 		return response;
 	}
@@ -1636,7 +1636,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doUpdate(getSqlSession(), "PlanoBySiteMAP.updadePlanoBySite", plano, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PLANO, AcaoEnum.DELETE, plano.getProcessId(),
-				getHistoricoBAR(), response, plano.getId());
+				getHistoricoBAR(), response, plano.getId(),plano.getUserId());
 
 		return response;
 	}
@@ -1648,7 +1648,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doRemove(getSqlSession(), "PlanoBySiteMAP.deletePlanoBySite", plano, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PLANO, AcaoEnum.DELETE, plano.getProcessId(),
-				getHistoricoBAR(), response, plano.getId());
+				getHistoricoBAR(), response, plano.getId(),plano.getUserId());
 
 		return response;
 	}
@@ -1661,7 +1661,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doInsert(getSqlSession(), "PlanoByServicoMap.insertPlanoByServico", servico, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PLANO, AcaoEnum.DELETE,
-				servico.getProcessId(), getHistoricoBAR(), response, servico.getId());
+				servico.getProcessId(), getHistoricoBAR(), response, servico.getId(),servico.getUserId());
 
 		return response;
 	}
@@ -1673,7 +1673,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doUpdate(getSqlSession(), "PlanoByServicoMap.updatePlanoByServico", servico, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PLANO, AcaoEnum.DELETE,
-				servico.getProcessId(), getHistoricoBAR(), response, servico.getId());
+				servico.getProcessId(), getHistoricoBAR(), response, servico.getId(),servico.getUserId());
 
 		return response;
 	}
@@ -1685,7 +1685,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doRemove(getSqlSession(), "PlanoByServicoMap.deletePlanoByServicoById", servico, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PLANO, AcaoEnum.DELETE,
-				servico.getProcessId(), getHistoricoBAR(), response, servico.getId());
+				servico.getProcessId(), getHistoricoBAR(), response, servico.getId(),servico.getUserId());
 
 		return response;
 	}
