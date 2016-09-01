@@ -11,6 +11,7 @@ import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest
 import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
+import com.qat.samples.sysmgmt.entidade.model.Transaction;
 import com.qat.samples.sysmgmt.entidade.model.Usuario;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
@@ -31,6 +32,8 @@ public interface IEmpresaBAR
 * @return the internal results response
 */
 	public Empresa fetchEmpresaById(FetchByIdRequest request);
+
+	public Transaction fetchTransactionById(FetchByIdRequest request);
 
 	/**
 * Insert empresa.

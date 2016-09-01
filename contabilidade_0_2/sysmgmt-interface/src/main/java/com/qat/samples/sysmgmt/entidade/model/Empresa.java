@@ -16,7 +16,7 @@ public class Empresa extends Entidade
 {
 
 	private List<Plano> planoList;
-	
+
 	private List<PlanoByEmpresa> planoByEmpresaList;
 
 	private Integer qntFilial;

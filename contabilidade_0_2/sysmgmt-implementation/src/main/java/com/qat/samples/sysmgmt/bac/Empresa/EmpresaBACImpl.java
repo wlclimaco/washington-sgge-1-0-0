@@ -30,6 +30,7 @@ import com.qat.samples.sysmgmt.condominio.model.request.CondominioMaintenanceReq
 import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
+import com.qat.samples.sysmgmt.entidade.model.Transaction;
 import com.qat.samples.sysmgmt.entidade.model.Usuario;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoMaintenanceRequest;
@@ -1447,6 +1448,23 @@ public InternalResultsResponse<Condominio> fetchCondominioById(FetchByIdRequest 
 	else
 	{
 		response.getResultsList().add(getEmpresaBAR().fetchCondominioById(request));
+	}
+
+	return response;
+}
+
+public InternalResultsResponse<Transaction> fetchTransactionById(FetchByIdRequest request)
+{
+	InternalResultsResponse<Transaction> response = new InternalResultsResponse<Transaction>();
+	// validate fetchId field
+	if (ValidationUtil.isNull(request.getFetchId()))
+	{
+		response.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
+		response.setStatus(SystemErrorCategory.SystemValidation);
+	}
+	else
+	{
+		response.getResultsList().add(getEmpresaBAR().fetchTransactionById(request));
 	}
 
 	return response;

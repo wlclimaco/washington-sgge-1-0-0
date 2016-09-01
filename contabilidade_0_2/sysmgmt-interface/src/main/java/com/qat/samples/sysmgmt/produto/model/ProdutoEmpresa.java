@@ -5,7 +5,6 @@ import java.util.List;
 import com.qat.samples.sysmgmt.cfop.model.CfopParentId;
 import com.qat.samples.sysmgmt.fiscal.model.Classificacao;
 import com.qat.samples.sysmgmt.fiscal.model.Tributacao;
-import com.qat.samples.sysmgmt.pessoa.model.Fornecedor;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -28,8 +27,6 @@ public class ProdutoEmpresa extends ModelCosmeDamiao
 	private Long dataCadastro;
 
 	private List<Estoque> estoqueList;
-
-	private List<Margem> MargemList;
 
 	private Tributacao tributacao;
 
@@ -81,52 +78,36 @@ public class ProdutoEmpresa extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	public Long getDataValidade() {
-		return dataValidade;
+	public Produto getProdId() {
+		return prodId;
 	}
 
-	public void setDataValidade(Long dataValidade) {
-		this.dataValidade = dataValidade;
+	public void setProdId(Produto prodId) {
+		this.prodId = prodId;
 	}
 
-	public String getComissao() {
-		return comissao;
+	public String getInformAdicionaisParaNFe() {
+		return informAdicionaisParaNFe;
 	}
 
-	public void setComissao(String comissao) {
-		this.comissao = comissao;
+	public void setInformAdicionaisParaNFe(String informAdicionaisParaNFe) {
+		this.informAdicionaisParaNFe = informAdicionaisParaNFe;
 	}
 
-	public String getFracao() {
-		return fracao;
+	public Integer getAnotainternas() {
+		return anotainternas;
 	}
 
-	public void setFracao(String fracao) {
-		this.fracao = fracao;
+	public void setAnotainternas(Integer anotainternas) {
+		this.anotainternas = anotainternas;
 	}
 
-	public String getLocalizacao() {
-		return localizacao;
+	public Long getDataCadastro() {
+		return dataCadastro;
 	}
 
-	public void setLocalizacao(String localizacao) {
-		this.localizacao = localizacao;
-	}
-
-	public Classificacao getClassificacao() {
-		return classificacao;
-	}
-
-	public void setClassificacao(Classificacao classificacao) {
-		this.classificacao = classificacao;
-	}
-
-	public Tributacao getTributacao() {
-		return tributacao;
-	}
-
-	public void setTributacao(Tributacao tributacao) {
-		this.tributacao = tributacao;
+	public void setDataCadastro(Long dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
 
 	public List<Estoque> getEstoqueList() {
@@ -135,6 +116,14 @@ public class ProdutoEmpresa extends ModelCosmeDamiao
 
 	public void setEstoqueList(List<Estoque> estoqueList) {
 		this.estoqueList = estoqueList;
+	}
+
+	public Tributacao getTributacao() {
+		return tributacao;
+	}
+
+	public void setTributacao(Tributacao tributacao) {
+		this.tributacao = tributacao;
 	}
 
 	public List<Preco> getPrecoList() {
@@ -179,13 +168,13 @@ public class ProdutoEmpresa extends ModelCosmeDamiao
 
 	@Override
 	public String toString() {
-		return "ProdutoParent [getId()=" + getId() + ", getDataValidade()=" + getDataValidade() + ", getComissao()="
-				+ getComissao() + ", getFracao()=" + getFracao() + ", getLocalizacao()=" + getLocalizacao()
-				+ ", getClassificacao()=" + getClassificacao() + ", getTributacao()=" + getTributacao()
-				+ ", getEstoqueList()=" + getEstoqueList() + ", getPrecoList()=" + getPrecoList() + ", getCustoList()="
-				+ getCustoList() + ", getPorcaoList()=" + getPorcaoList() + ", getRentabilidadeList()="
-				+ getRentabilidadeList() + ", getCfopList()=" + getCfopList() + ", toString()=" + super.toString()
-				+ "]";
+		return "ProdutoEmpresa [getId()=" + getId() + ", getProdId()=" + getProdId() + ", getInformAdicionaisParaNFe()="
+				+ getInformAdicionaisParaNFe() + ", getAnotainternas()=" + getAnotainternas() + ", getDataCadastro()="
+				+ getDataCadastro() + ", getEstoqueList()=" + getEstoqueList() + ", getTributacao()=" + getTributacao()
+				+ ", getPrecoList()=" + getPrecoList() + ", getCustoList()=" + getCustoList() + ", getPorcaoList()="
+				+ getPorcaoList() + ", getRentabilidadeList()=" + getRentabilidadeList() + ", getCfopList()="
+				+ getCfopList() + ", toString()=" + super.toString() + "]";
 	}
+
 
 }

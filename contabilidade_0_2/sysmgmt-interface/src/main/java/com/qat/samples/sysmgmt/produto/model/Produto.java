@@ -67,14 +67,20 @@ public class Produto extends ModelCosmeDamiao
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * Gets the id.
-	 *
-	 * @return the id
-	 */
-	public Integer getId()
-	{
+	public Integer getId() {
 		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 	public String getNcm() {
@@ -85,117 +91,35 @@ public class Produto extends ModelCosmeDamiao
 		this.ncm = ncm;
 	}
 
-	public Marca getMarca() {
-		return marca;
-	}
-
-	public void setMarca(Marca marca) {
-		this.marca = marca;
-	}
-
-	/**
-	 * Sets the id.
-	 *
-	 * @param id the id to set
-	 */
-	public void setId(Integer id)
-	{
-		this.id = id;
-	}
-
-	/**
-	 * @return the codigo
-	 */
-	public String getCodigo()
-	{
-		return codigo;
-	}
-
-	/**
-	 * @param codigo the codigo to set
-	 */
-	public void setCodigo(String codigo)
-	{
-		this.codigo = codigo;
-	}
-
-	/**
-	 * @return the cdBarras
-	 */
-	public String getCdBarras()
-	{
+	public String getCdBarras() {
 		return cdBarras;
 	}
 
-	/**
-	 * @param cdBarras the cdBarras to set
-	 */
-	public void setCdBarras(String cdBarras)
-	{
+	public void setCdBarras(String cdBarras) {
 		this.cdBarras = cdBarras;
 	}
 
-	/**
-	 * @return the classificacao
-	 */
-	public Classificacao getClassificacao()
-	{
-		return classificacao;
-	}
-
-	/**
-	 * @param classificacao the classificacao to set
-	 */
-	public void setClassificacao(Classificacao classificacao)
-	{
-		this.classificacao = classificacao;
-	}
-
-	/**
-	 * @return the dataCreate
-	 */
-	public Long getDataCreate()
-	{
+	public Long getDataCreate() {
 		return dataCreate;
 	}
 
-	/**
-	 * @param dataCreate the dataCreate to set
-	 */
-	public void setDataCreate(Long dataCreate)
-	{
+	public void setDataCreate(Long dataCreate) {
 		this.dataCreate = dataCreate;
 	}
 
-	/**
-	 * @return the produto
-	 */
-	public String getProduto()
-	{
+	public String getProduto() {
 		return produto;
 	}
 
-	/**
-	 * @param produto the produto to set
-	 */
-	public void setProduto(String produto)
-	{
+	public void setProduto(String produto) {
 		this.produto = produto;
 	}
 
-	/**
-	 * @return the aplicacao
-	 */
-	public String getAplicacao()
-	{
+	public String getAplicacao() {
 		return aplicacao;
 	}
 
-	/**
-	 * @param aplicacao the aplicacao to set
-	 */
-	public void setAplicacao(String aplicacao)
-	{
+	public void setAplicacao(String aplicacao) {
 		this.aplicacao = aplicacao;
 	}
 
@@ -207,38 +131,12 @@ public class Produto extends ModelCosmeDamiao
 		this.fracao = fracao;
 	}
 
-
-
-	public UniMed getUniMed() {
-		return uniMed;
+	public Classificacao getClassificacao() {
+		return classificacao;
 	}
 
-	public void setUniMed(UniMed uniMed) {
-		this.uniMed = uniMed;
-	}
-
-	public Grupo getGrupo() {
-		return grupo;
-	}
-
-	public void setGrupo(Grupo grupo) {
-		this.grupo = grupo;
-	}
-
-	public SubGrupo getSubGrupo() {
-		return subGrupo;
-	}
-
-	public void setSubGrupo(SubGrupo subGrupo) {
-		this.subGrupo = subGrupo;
-	}
-
-	public Double getPorcao() {
-		return porcao;
-	}
-
-	public void setPorcao(Double porcao) {
-		this.porcao = porcao;
+	public void setClassificacao(Classificacao classificacao) {
+		this.classificacao = classificacao;
 	}
 
 	public Double getPesoBruto() {
@@ -265,16 +163,50 @@ public class Produto extends ModelCosmeDamiao
 		this.modoUso = modoUso;
 	}
 
+	public String getExcTabIPI() {
+		return excTabIPI;
+	}
+
+	public void setExcTabIPI(String excTabIPI) {
+		this.excTabIPI = excTabIPI;
+	}
+
+	public String getcEST() {
+		return cEST;
+	}
+
+	public void setcEST(String cEST) {
+		this.cEST = cEST;
+	}
+
+	public String getInfaddNFe() {
+		return InfaddNFe;
+	}
+
+	public void setInfaddNFe(String infaddNFe) {
+		InfaddNFe = infaddNFe;
+	}
+
+	public String getAnotInt() {
+		return AnotInt;
+	}
+
+	public void setAnotInt(String anotInt) {
+		AnotInt = anotInt;
+	}
+
 	@Override
 	public String toString() {
-		return "Produto [getId()=" + getId() + ", getNcm()=" + getNcm() + ", getMarca()=" + getMarca()
-				+ ", getCodigo()=" + getCodigo() + ", getCdBarras()=" + getCdBarras() + ", getClassificacao()="
-				+ getClassificacao() + ", getDataCreate()=" + getDataCreate() + ", getProduto()=" + getProduto()
-				+ ", getAplicacao()=" + getAplicacao() + ", getFracao()=" + getFracao() + ", getUniMed()=" + getUniMed()
-				+ ", getGrupo()=" + getGrupo() + ", getSubGrupo()=" + getSubGrupo() + ", getPorcao()=" + getPorcao()
-				+ ", getPesoBruto()=" + getPesoBruto() + ", getPesoLiquido()=" + getPesoLiquido() + ", getModoUso()="
-				+ getModoUso() + ", toString()=" + super.toString() + "]";
+		return "Produto [getId()=" + getId() + ", getCodigo()=" + getCodigo() + ", getNcm()=" + getNcm()
+				+ ", getCdBarras()=" + getCdBarras() + ", getDataCreate()=" + getDataCreate() + ", getProduto()="
+				+ getProduto() + ", getAplicacao()=" + getAplicacao() + ", getFracao()=" + getFracao()
+				+ ", getClassificacao()=" + getClassificacao() + ", getPesoBruto()=" + getPesoBruto()
+				+ ", getPesoLiquido()=" + getPesoLiquido() + ", getModoUso()=" + getModoUso() + ", getExcTabIPI()="
+				+ getExcTabIPI() + ", getcEST()=" + getcEST() + ", getInfaddNFe()=" + getInfaddNFe() + ", getAnotInt()="
+				+ getAnotInt() + ", toString()=" + super.toString() + "]";
 	}
+
+
 
 
 

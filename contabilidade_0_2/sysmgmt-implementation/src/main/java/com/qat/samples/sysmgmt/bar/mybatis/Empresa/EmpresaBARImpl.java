@@ -37,6 +37,7 @@ import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest
 import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
+import com.qat.samples.sysmgmt.entidade.model.Transaction;
 import com.qat.samples.sysmgmt.entidade.model.Usuario;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
@@ -76,9 +77,9 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	/** The Constant STMT_FETCH_EMPRESA. */
 	private static final String STMT_FETCH_EMPRESA = NAMESPACE_EMPRESA + "fetchEmpresaById";
-	
+
 	private static final String STMT_INSERT_EMPRESA = NAMESPACE_EMPRESA + "insertEmpresa";
-	
+
 	private static final String STMT_UPDATE_EMPRESA = NAMESPACE_EMPRESA + "updateEmpresa";
 
 	/** The Constant STMT_FETCH_EMPRESA_ALL. */
@@ -378,7 +379,7 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 //							TabelaEnum.EMPRESA, getSiteBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
 //							empresa.getCreateUser(), historicoId, historicoId);
 //		}
-		
+
 		if (!ValidationUtil.isNullOrEmpty(empresa.getPlanoByEmpresaList()))
 		{
 			a +=
@@ -625,6 +626,19 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	@Override
 	public Filial fetchFilialById(FetchByIdRequest request) {
 		return (Filial) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_FILIAL, request.getFetchId());
+
+	}
+
+
+	@Override
+	public Transaction fetchTransactionById(FetchByIdRequest request) {
+
+		InternalResponse response = new InternalResponse();
+
+		MyBatisBARHelper.doInsert(getSqlSession(), "", request.getTransaction(), response);
+
+
+		return (Transaction) MyBatisBARHelper.doQueryForObject(getSqlSession(), "", request.getFetchId());
 
 	}
 

@@ -3,6 +3,7 @@ package com.qat.samples.sysmgmt.util.model.request;
 import javax.xml.bind.annotation.XmlElement;
 
 import com.qat.framework.model.request.Request;
+import com.qat.samples.sysmgmt.entidade.model.Transaction;
 
 /**
  * The Class FetchByIdRequest.
@@ -13,6 +14,13 @@ public class FetchByIdRequest extends Request
 	/** The fetch id. */
 	@XmlElement(nillable = true)
 	private Integer fetchId;
+
+
+	@XmlElement(nillable = true)
+	private Transaction transaction;
+
+	@XmlElement(nillable = true)
+	private Integer emprId;
 
 	/**
 	 * Instantiates a new fetch by id request.
@@ -51,14 +59,29 @@ public class FetchByIdRequest extends Request
 		this.fetchId = fetchId;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+
+
+	public Integer getEmprId() {
+		return emprId;
+	}
+
+	public void setEmprId(Integer emprId) {
+		this.emprId = emprId;
+	}
+
+
+	public Transaction getTransaction() {
+		return transaction;
+	}
+
+	public void setTransaction(Transaction transaction) {
+		this.transaction = transaction;
+	}
+
 	@Override
-	public String toString()
-	{
-		return "FetchByIdRequest [fetchId=" + fetchId + ", getFetchId()=" + getFetchId() + ", getUserContext()=" + getRequestContext() + "]";
+	public String toString() {
+		return "FetchByIdRequest [getFetchId()=" + getFetchId() + ", getEmprId()=" + getEmprId() + ", getTransaction()="
+				+ getTransaction() + ", toString()=" + super.toString() + "]";
 	}
 
 }

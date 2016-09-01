@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.produto.model;
 
+import com.qat.samples.sysmgmt.cfop.model.Cfop;
 import com.qat.samples.sysmgmt.fiscal.model.Classificacao;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
@@ -17,13 +18,13 @@ private Integer prodId;
 
 private Cfop cfop;
 
-private Icms iCMS;
+private Icms icms;
 
-private Pis pIS;
+private Pis pis;
 
-private Cofins cOFINS;
+private Cofins cofins;
 
-private Ipi iPI;
+private Ipi ipi;
 
 
 	/**
@@ -44,216 +45,68 @@ private Ipi iPI;
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * Gets the id.
-	 *
-	 * @return the id
-	 */
-	public Integer getId()
-	{
+	public Integer getId() {
 		return id;
 	}
 
-	public String getNcm() {
-		return ncm;
-	}
-
-	public void setNcm(String ncm) {
-		this.ncm = ncm;
-	}
-
-	public Marca getMarca() {
-		return marca;
-	}
-
-	public void setMarca(Marca marca) {
-		this.marca = marca;
-	}
-
-	/**
-	 * Sets the id.
-	 *
-	 * @param id the id to set
-	 */
-	public void setId(Integer id)
-	{
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the codigo
-	 */
-	public String getCodigo()
-	{
-		return codigo;
+	public Integer getProdId() {
+		return prodId;
 	}
 
-	/**
-	 * @param codigo the codigo to set
-	 */
-	public void setCodigo(String codigo)
-	{
-		this.codigo = codigo;
+	public void setProdId(Integer prodId) {
+		this.prodId = prodId;
 	}
 
-	/**
-	 * @return the cdBarras
-	 */
-	public String getCdBarras()
-	{
-		return cdBarras;
+	public Cfop getCfop() {
+		return cfop;
 	}
 
-	/**
-	 * @param cdBarras the cdBarras to set
-	 */
-	public void setCdBarras(String cdBarras)
-	{
-		this.cdBarras = cdBarras;
+	public void setCfop(Cfop cfop) {
+		this.cfop = cfop;
 	}
 
-	/**
-	 * @return the classificacao
-	 */
-	public Classificacao getClassificacao()
-	{
-		return classificacao;
+	public Icms getIcms() {
+		return icms;
 	}
 
-	/**
-	 * @param classificacao the classificacao to set
-	 */
-	public void setClassificacao(Classificacao classificacao)
-	{
-		this.classificacao = classificacao;
+	public void setIcms(Icms icms) {
+		this.icms = icms;
 	}
 
-	/**
-	 * @return the dataCreate
-	 */
-	public Long getDataCreate()
-	{
-		return dataCreate;
+	public Pis getPis() {
+		return pis;
 	}
 
-	/**
-	 * @param dataCreate the dataCreate to set
-	 */
-	public void setDataCreate(Long dataCreate)
-	{
-		this.dataCreate = dataCreate;
+	public void setPis(Pis pis) {
+		this.pis = pis;
 	}
 
-	/**
-	 * @return the produto
-	 */
-	public String getProduto()
-	{
-		return produto;
+	public Cofins getCofins() {
+		return cofins;
 	}
 
-	/**
-	 * @param produto the produto to set
-	 */
-	public void setProduto(String produto)
-	{
-		this.produto = produto;
+	public void setCofins(Cofins cofins) {
+		this.cofins = cofins;
 	}
 
-	/**
-	 * @return the aplicacao
-	 */
-	public String getAplicacao()
-	{
-		return aplicacao;
+	public Ipi getIpi() {
+		return ipi;
 	}
 
-	/**
-	 * @param aplicacao the aplicacao to set
-	 */
-	public void setAplicacao(String aplicacao)
-	{
-		this.aplicacao = aplicacao;
-	}
-
-	public String getFracao() {
-		return fracao;
-	}
-
-	public void setFracao(String fracao) {
-		this.fracao = fracao;
-	}
-
-
-
-	public UniMed getUniMed() {
-		return uniMed;
-	}
-
-	public void setUniMed(UniMed uniMed) {
-		this.uniMed = uniMed;
-	}
-
-	public Grupo getGrupo() {
-		return grupo;
-	}
-
-	public void setGrupo(Grupo grupo) {
-		this.grupo = grupo;
-	}
-
-	public SubGrupo getSubGrupo() {
-		return subGrupo;
-	}
-
-	public void setSubGrupo(SubGrupo subGrupo) {
-		this.subGrupo = subGrupo;
-	}
-
-	public Double getPorcao() {
-		return porcao;
-	}
-
-	public void setPorcao(Double porcao) {
-		this.porcao = porcao;
-	}
-
-	public Double getPesoBruto() {
-		return pesoBruto;
-	}
-
-	public void setPesoBruto(Double pesoBruto) {
-		this.pesoBruto = pesoBruto;
-	}
-
-	public Double getPesoLiquido() {
-		return pesoLiquido;
-	}
-
-	public void setPesoLiquido(Double pesoLiquido) {
-		this.pesoLiquido = pesoLiquido;
-	}
-
-	public String getModoUso() {
-		return modoUso;
-	}
-
-	public void setModoUso(String modoUso) {
-		this.modoUso = modoUso;
+	public void setIpi(Ipi ipi) {
+		this.ipi = ipi;
 	}
 
 	@Override
 	public String toString() {
-		return "Produto [getId()=" + getId() + ", getNcm()=" + getNcm() + ", getMarca()=" + getMarca()
-				+ ", getCodigo()=" + getCodigo() + ", getCdBarras()=" + getCdBarras() + ", getClassificacao()="
-				+ getClassificacao() + ", getDataCreate()=" + getDataCreate() + ", getProduto()=" + getProduto()
-				+ ", getAplicacao()=" + getAplicacao() + ", getFracao()=" + getFracao() + ", getUniMed()=" + getUniMed()
-				+ ", getGrupo()=" + getGrupo() + ", getSubGrupo()=" + getSubGrupo() + ", getPorcao()=" + getPorcao()
-				+ ", getPesoBruto()=" + getPesoBruto() + ", getPesoLiquido()=" + getPesoLiquido() + ", getModoUso()="
-				+ getModoUso() + ", toString()=" + super.toString() + "]";
+		return "Tributacao [getId()=" + getId() + ", getProdId()=" + getProdId() + ", getCfop()=" + getCfop()
+				+ ", getIcms()=" + getIcms() + ", getPis()=" + getPis() + ", getCofins()=" + getCofins() + ", getIpi()="
+				+ getIpi() + ", toString()=" + super.toString() + "]";
 	}
-
-
 
 
 }
