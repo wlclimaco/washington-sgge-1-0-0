@@ -6112,8 +6112,8 @@ function CategoriaModel() {
 
     a.push({
         field: {
-            campo: "observacao",
-            tipo: "String",
+            campo: "margem",
+            tipo: "Double",
             requerid: false,
             primaryKey: false,
             forenkey: false,
