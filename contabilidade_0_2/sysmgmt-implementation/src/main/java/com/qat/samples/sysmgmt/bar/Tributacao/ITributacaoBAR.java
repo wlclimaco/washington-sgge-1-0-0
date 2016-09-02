@@ -1,7 +1,7 @@
 package com.qat.samples.sysmgmt.bar.Tributacao;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.fiscal.model.Tributacao;
+import com.qat.samples.sysmgmt.produto.model.Tributacao;
 import com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 

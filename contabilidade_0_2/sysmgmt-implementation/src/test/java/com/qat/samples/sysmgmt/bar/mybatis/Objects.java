@@ -60,6 +60,7 @@ import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.EntidadeTypeEnum;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
+import com.qat.samples.sysmgmt.entidade.model.Transaction;
 import com.qat.samples.sysmgmt.entidade.model.Usuario;
 import com.qat.samples.sysmgmt.estado.model.Estado;
 import com.qat.samples.sysmgmt.financeiro.model.BaixaTitulo;
@@ -70,7 +71,6 @@ import com.qat.samples.sysmgmt.financeiro.model.TipoBaixa;
 import com.qat.samples.sysmgmt.financeiro.model.Titulo;
 import com.qat.samples.sysmgmt.fiscal.model.Classificacao;
 import com.qat.samples.sysmgmt.fiscal.model.Regime;
-import com.qat.samples.sysmgmt.fiscal.model.Tributacao;
 import com.qat.samples.sysmgmt.historico.model.Historico;
 import com.qat.samples.sysmgmt.historico.model.HistoricoItens;
 import com.qat.samples.sysmgmt.historico.model.HistoricoMovimento;
@@ -88,13 +88,17 @@ import com.qat.samples.sysmgmt.pessoa.model.Medico;
 import com.qat.samples.sysmgmt.pessoa.model.Paciente;
 import com.qat.samples.sysmgmt.pessoa.model.Socio;
 import com.qat.samples.sysmgmt.pessoa.model.Transportador;
+import com.qat.samples.sysmgmt.produto.model.Cofins;
 import com.qat.samples.sysmgmt.produto.model.Custo;
 import com.qat.samples.sysmgmt.produto.model.CustoItens;
 import com.qat.samples.sysmgmt.produto.model.Estoque;
 import com.qat.samples.sysmgmt.produto.model.EstoqueTypeEnum;
 import com.qat.samples.sysmgmt.produto.model.Grupo;
+import com.qat.samples.sysmgmt.produto.model.Icms;
+import com.qat.samples.sysmgmt.produto.model.Ipi;
 import com.qat.samples.sysmgmt.produto.model.Marca;
 import com.qat.samples.sysmgmt.produto.model.MarcaProduto;
+import com.qat.samples.sysmgmt.produto.model.Pis;
 import com.qat.samples.sysmgmt.produto.model.Porcao;
 import com.qat.samples.sysmgmt.produto.model.PorcaoItens;
 import com.qat.samples.sysmgmt.produto.model.Preco;
@@ -105,6 +109,7 @@ import com.qat.samples.sysmgmt.produto.model.Rentabilidade;
 import com.qat.samples.sysmgmt.produto.model.RentabilidadeItens;
 import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.produto.model.SubGrupo;
+import com.qat.samples.sysmgmt.produto.model.Tributacao;
 import com.qat.samples.sysmgmt.produto.model.UniMed;
 import com.qat.samples.sysmgmt.site.model.ServicoAndPlano;
 import com.qat.samples.sysmgmt.site.model.Site;
@@ -1378,6 +1383,8 @@ public class Objects {
 		ProdutoEmpresa produtoparent = new ProdutoEmpresa();
 		Date a = new Date();
 		produtoparent.setId(id);
+		produtoparent.setProdId(insertProduto(id, TabelaEnum.PRODUTOPARENT, action));
+		produtoparent.setTransactionId(insertTransaction(id, TabelaEnum.PRODUTOPARENT, action).getId());
 		produtoparent.setTributacao(insertTributacao(id, TabelaEnum.PRODUTOPARENT, action));
 		produtoparent.setEstoqueList(new ArrayList<Estoque>());
 		produtoparent.getEstoqueList().add(insertEstoque(id, TabelaEnum.PRODUTOPARENT, action));
@@ -1391,9 +1398,6 @@ public class Objects {
 		produtoparent.getRentabilidadeList().add(insertRentabilidade(id, TabelaEnum.PRODUTOPARENT, action));
 		produtoparent.setCfopList(new ArrayList<CfopParentId>());
 		produtoparent.getCfopList().add(insertCfopParentId(id, TabelaEnum.PRODUTOPARENT, action));
-		produtoparent.setDataValidade(a.getTime());
-		produtoparent.setLocalizacao("localizacao_9 - " + action.toString());
-		produtoparent.setComissao("comissao_10 - " + action.toString());
 		produtoparent.setTabelaEnum(tabela);
 		produtoparent.setParentId(id);
 		produtoparent.setEmprId(EMPID);
@@ -1411,7 +1415,7 @@ public class Objects {
 
 
 
-	public static Produto insertProduto(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+	public static Produto insertProdutos(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Produto produto = new Produto();
 		Date a = new Date();
 		produto.setId(id);
@@ -1422,12 +1426,8 @@ public class Objects {
 		produto.setAplicacao("aplicacao_5 - " + action.toString());
 		produto.setFracao("fracao_6 - " + action.toString());
 		produto.setClassificacao(insertClassificacao(id, TabelaEnum.PRODUTOPARENT, action));
-		produto.setUniMed(insertUniMed(id, TabelaEnum.PRODUTOPARENT, action));
-		produto.setGrupo(insertGrupo(id, TabelaEnum.PRODUTOPARENT, action));
-		produto.setSubGrupo(insertSubGrupo(id, TabelaEnum.PRODUTOPARENT, action));
 		//produto.setMarca(new ArrayList<Marca>());
 		//produto.getMarca().add(insertMarca(id, TabelaEnum.PRODUTO, action));
-		produto.setPorcao(new Double(10.00));
 		produto.setPesoBruto(new Double(10.00));
 		produto.setPesoLiquido(new Double(10.00));
 		produto.setModoUso("modoUso_15 - " + action.toString());
@@ -1570,32 +1570,6 @@ public class Objects {
 		unimed.setModelAction(action);
 
 		return unimed;
-	}
-
-	public static Tributacao insertTributacaos(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
-		Tributacao tributacao = new Tributacao();
-		Date a = new Date();
-		tributacao.setId(id);
-	//	tributacao.setCstId(1001);
-		tributacao.setIcms(new Double(10.00));
-		tributacao.setSt(new Double(10.00));
-		tributacao.setMva(new Double(10.00));
-	//	tributacao.setCsosnId(1005);
-		tributacao.setIpi(new Double(10.00));
-		tributacao.setIat(new Double(10.00));
-		tributacao.setIppt(new Double(10.00));
-	//	tributacao.setIncidencia(1009);
-		tributacao.setTabelaEnum(tabela);
-		tributacao.setParentId(id);
-		tributacao.setEmprId(EMPID);
-		tributacao.setModifyDateUTC(a.getTime());
-		tributacao.setCreateDateUTC(a.getTime());
-		tributacao.setCreateUser("system");
-		tributacao.setModifyUser("system");
-		tributacao.setProcessId(1);
-		tributacao.setModelAction(action);
-
-		return tributacao;
 	}
 
 	public static Custo insertCustos(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
@@ -2343,30 +2317,132 @@ public class Objects {
 
 
 	public static Tributacao insertTributacao(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
-		Tributacao tributacao = new Tributacao();
-		Date a = new Date();
-		tributacao.setId(id);
-		//tributacao.setCstId(new Cst());
-		tributacao.setIcms(new Double(10.00));
-		tributacao.setSt(new Double(10.00));
-		tributacao.setMva(new Double(10.00));
-	//	tributacao.setCsosnId(1005);
-		tributacao.setIpi(new Double(10.00));
-		tributacao.setIat(new Double(10.00));
-		tributacao.setIppt(new Double(10.00));
-	//	tributacao.setIncidencia(1009);
-		tributacao.setTabelaEnum(tabela);
-		tributacao.setParentId(id);
-		tributacao.setEmprId(EMPID);
-		tributacao.setModifyDateUTC(a.getTime());
-		tributacao.setCreateDateUTC(a.getTime());
-		tributacao.setCreateUser("system");
-		tributacao.setModifyUser("system");
-		tributacao.setProcessId(1);
-		tributacao.setModelAction(action);
 
-		return tributacao;
-	}
+	Tributacao tributacao = new Tributacao();
+    Date a = new Date();
+    tributacao.setId(id);
+    tributacao.setProdId(1001);
+    tributacao.setCfop(insertCfop(id, tabela, action));
+    tributacao.setIcms(insertIcms(id, tabela, action));
+    tributacao.setPis(insertPis(id, tabela, action));
+    tributacao.setCofins(insertCofins(id, tabela, action));
+    tributacao.setIpi(insertIpi(id, tabela, action));
+    tributacao.setTabelaEnum(tabela);
+    tributacao.setParentId(id);
+    tributacao.setEmprId(EMPID);
+    tributacao.setModifyDateUTC(a.getTime());
+    tributacao.setCreateDateUTC(a.getTime());
+    tributacao.setCreateUser("system");
+    tributacao.setModifyUser("system");
+    tributacao.setProcessId(1);
+    tributacao.setModelAction(action);
+
+    return tributacao;
+}
+
+
+public static Icms insertIcms(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+{
+    Icms icms = new Icms();
+    Date a = new Date();
+    icms.setId(id);
+    icms.setProdId(1001);
+    icms.setSitTributaria(insertDoisValor(id, tabela, action));
+    icms.setOrigem(insertDoisValor(id, tabela, action));
+    icms.setModalidadeBC(insertDoisValor(id, tabela, action));
+    icms.setRedBase( "redBase_5 - " + action.toString());
+    icms.setAliqICMS( "aliqICMS_6 - " + action.toString());
+    icms.setMotDesoneracao(insertDoisValor(id, tabela, action));
+    icms.setTabelaEnum(tabela);
+    icms.setParentId(id);
+    icms.setEmprId(EMPID);
+    icms.setModifyDateUTC(a.getTime());
+    icms.setCreateDateUTC(a.getTime());
+    icms.setCreateUser("system");
+    icms.setModifyUser("system");
+    icms.setProcessId(1);
+    icms.setModelAction(action);
+
+    return icms;
+}
+
+
+public static Pis insertPis(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+{
+    Pis pis = new Pis();
+    Date a = new Date();
+    pis.setId(id);
+    pis.setProdId(1001);
+    pis.setpISSituaTributaria(insertDoisValor(id, tabela, action));
+    pis.setValorUnidtribPIS(10.00);
+    pis.setTipocalculoSubstTrib(insertDoisValor(id, tabela, action));
+    pis.setValorTribPISST(10.00);
+    pis.setTabelaEnum(tabela);
+    pis.setParentId(id);
+    pis.setEmprId(EMPID);
+    pis.setModifyDateUTC(a.getTime());
+    pis.setCreateDateUTC(a.getTime());
+    pis.setCreateUser("system");
+    pis.setModifyUser("system");
+    pis.setProcessId(1);
+    pis.setModelAction(action);
+
+    return pis;
+}
+
+
+public static Ipi insertIpi(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+{
+    Ipi ipi = new Ipi();
+    Date a = new Date();
+    ipi.setId(id);
+    ipi.setProdId(1001);
+    ipi.setSitTributaria(insertDoisValor(id, tabela, action));
+    ipi.setClasseCigarrosBebidas( "classeCigarrosBebidas_3 - " + action.toString());
+    ipi.setcNPJProdutor( "cNPJProdutor_4 - " + action.toString());
+    ipi.setCodControleIPI( "codControleIPI_5 - " + action.toString());
+    ipi.setQtdSeloIPI( "qtdSeloIPI_6 - " + action.toString());
+    ipi.setCodEnquadramento(insertDoisValor(id, tabela, action));
+    ipi.setTipoCalculo(insertDoisValor(id, tabela, action));
+    ipi.setAliquotaIPI(10.00);
+    ipi.setTabelaEnum(tabela);
+    ipi.setParentId(id);
+    ipi.setEmprId(EMPID);
+    ipi.setModifyDateUTC(a.getTime());
+    ipi.setCreateDateUTC(a.getTime());
+    ipi.setCreateUser("system");
+    ipi.setModifyUser("system");
+    ipi.setProcessId(1);
+    ipi.setModelAction(action);
+
+    return ipi;
+}
+
+
+public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+{
+    Cofins cofins = new Cofins();
+    Date a = new Date();
+    cofins.setId(id);
+    cofins.setProdId(1001);
+    cofins.setSitTributaria(insertDoisValor(id, tabela, action));
+    cofins.setValorTribCOFINS(10.00);
+    cofins.setTipoCalculoSubstTrib(insertDoisValor(id, tabela, action));
+    cofins.setAliquotaCOFINSST(10.00);
+    cofins.setTabelaEnum(tabela);
+    cofins.setParentId(id);
+    cofins.setEmprId(EMPID);
+    cofins.setModifyDateUTC(a.getTime());
+    cofins.setCreateDateUTC(a.getTime());
+    cofins.setCreateUser("system");
+    cofins.setModifyUser("system");
+    cofins.setProcessId(1);
+    cofins.setModelAction(action);
+
+    return cofins;
+}
+
+
 
 	public static Agencia insertAgencia(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Agencia agencia = new Agencia();
@@ -2937,6 +3013,121 @@ public class Objects {
 
 		return field;
 	}
+	
+
+	public static ProdutoEmpresa insertProdutoEmpresa(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			ProdutoEmpresa ProdutoEmpresa = new ProdutoEmpresa();
+			Date a = new Date();
+			ProdutoEmpresa.setId(id);
+			ProdutoEmpresa.setParentId(id);
+			ProdutoEmpresa.setEmprId(100);
+			ProdutoEmpresa.setInformAdicionaisParaNFe("NATIVE INSERT UPDATE");
+			ProdutoEmpresa.setTributacao(insertTributacao(id, tabela, action));
+			ProdutoEmpresa.setEstoqueList(new ArrayList<Estoque>());
+			ProdutoEmpresa.getEstoqueList().add(insertEstoque(id,TabelaEnum.PRODUTOPARENT,action));
+			ProdutoEmpresa.setPrecoList(new ArrayList<Preco>());
+			ProdutoEmpresa.getPrecoList().add(insertPreco(id,TabelaEnum.PRODUTOPARENT,action));
+			ProdutoEmpresa.setCustoList(new ArrayList<Custo>());
+			ProdutoEmpresa.getCustoList().add(insertCusto(id,TabelaEnum.PRODUTOPARENT,action));
+			ProdutoEmpresa.setPorcaoList(new ArrayList<Porcao>());
+			ProdutoEmpresa.getPorcaoList().add(insertPorcao(id,TabelaEnum.PRODUTOPARENT,action));
+			ProdutoEmpresa.setRentabilidadeList(new ArrayList<Rentabilidade>());
+			ProdutoEmpresa.getRentabilidadeList().add(insertRentabilidade(id,TabelaEnum.PRODUTOPARENT,action));
+			ProdutoEmpresa.setCfopList(new ArrayList<CfopParentId>());
+			ProdutoEmpresa.getCfopList().add(insertCfopParentId(id,TabelaEnum.PRODUTOPARENT,action));
+
+			ProdutoEmpresa.setParentId(id);
+			ProdutoEmpresa.setEmprId(1);
+			ProdutoEmpresa.setModifyDateUTC(a.getTime());
+			ProdutoEmpresa.setCreateDateUTC(a.getTime());
+			ProdutoEmpresa.setCreateUser("system");
+			ProdutoEmpresa.setModifyUser("system");
+			ProdutoEmpresa.setProcessId(1);
+			ProdutoEmpresa.setModelAction(action);
+
+			return ProdutoEmpresa;
+		}
+
+
+
+
+	public static Produto insertProduto(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			Produto produto = new Produto();
+			Date a = new Date();
+			produto.setId(id);
+			produto.setCodigo("NATIVE INSERT UPDATE");
+			produto.setCdBarras("NATIVE INSERT UPDATE");
+			produto.setProduto("NATIVE INSERT UPDATE");
+			produto.setDataCreate(a.getTime());
+			produto.setAplicacao("NATIVE INSERT UPDATE");
+			produto.setFracao("NATIVE INSERT UPDATE");
+//			produto.setPorcao(new Double(1.99));
+//			produto.setPesoBruto(new Double(1.99));
+//			produto.setPesoLiquido(new Double(1.99));
+			produto.setModoUso("NATIVE INSERT UPDATE");
+			produto.setParentId(id);
+			produto.setEmprId(1);
+			produto.setModifyDateUTC(a.getTime());
+			produto.setCreateDateUTC(a.getTime());
+			produto.setCreateUser("system");
+			produto.setModifyUser("system");
+			produto.setProcessId(1);
+			produto.setModelAction(action);
+
+			return produto;
+		}
+
+
+
+
+
+	public static MarcaProduto insertMarcaProd(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			MarcaProduto marcaproduto = new MarcaProduto();
+			Date a = new Date();
+			marcaproduto.setId(id);
+			marcaproduto.setParentId(id);
+			marcaproduto.setMarcaId(insertMarca(id, tabela, action));
+			marcaproduto.setParentId(id);
+			marcaproduto.setEmprId(1);
+			marcaproduto.setModifyDateUTC(a.getTime());
+			marcaproduto.setCreateDateUTC(a.getTime());
+			marcaproduto.setCreateUser("system");
+			marcaproduto.setModifyUser("system");
+			marcaproduto.setProcessId(1);
+			marcaproduto.setModelAction(action);
+
+			return marcaproduto;
+		}
+	
+	public static Transaction insertTransaction(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		Transaction transaction = new Transaction();
+		Date a = new Date();
+		
+		transaction.setId(id);
+		transaction.setInicioSession(a.getTime());
+		transaction.setFinalSession(a.getTime());
+		transaction.setUserId("system");
+		transaction.setEmprId(1);
+		transaction.setModifyDateUTC(a.getTime());
+		transaction.setCreateDateUTC(a.getTime());
+		transaction.setCreateUser("system");
+		transaction.setModifyUser("system");
+		transaction.setProcessId(1);
+		transaction.setModelAction(action);
+
+		return transaction;
+	}
+
+
+
+
+
+
+
 
 	private static ExamePessoa insertExamePessoa(Integer id, TabelaEnum consulta, PersistenceActionEnum action) {
 		// TODO Auto-generated method stub

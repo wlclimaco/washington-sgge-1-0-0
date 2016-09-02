@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 15/05/2016 20:34 : 51-->
+<!-- create by system gera-java version 1.0.0 01/09/2016 22:10 : 26-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ProdutoMap">
-	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
   <!-- Result maps describe the mapping between the columns returned
       from a query, and the class properties.  A result map isnt
@@ -19,45 +19,48 @@
     <result property="id" column="id"/>
     <result property="codigo" column="codigo"/>
     <result property="cdBarras" column="cdBarras"/>
-    <result property="produto" column="produto"/>
-    <result property="dataCreate" column="dataCreate"/>
-    <result property="aplicacao" column="aplicacao"/>
-    <result property="fracao" column="fracao"/>
+    <result property="ncm" column="nCM"/>
+    <result property="cEST" column="cEST"/>
+
     <result property="pesoBruto" column="pesoBruto"/>
     <result property="pesoLiquido" column="pesoLiquido"/>
     <result property="modoUso" column="modoUso"/>
+    <result property="excTabIPI" column="excTabIPI"/>
+    <result property="produto" column="produto"/>
+    <result property="InfaddNFe" column="InfaddNFe"/>
+    <result property="AnotInt" column="AnotInt"/>
+    <result property="dataCreate" column="dataCreate"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-  <association property="classificacao"    column="classificacao" select="ClassificacaoMap.fetchClassificacaoById"  />
-	<association property="uniMed"    column="uniMed" select="UniMedMap.fetchUniMedById"  />
-	<association property="grupo"    column="grupo" select="GrupoMap.fetchGrupoById"  />
-	<association property="subGrupo"    column="subGrupo" select="ClassificacaoMap.fetchClassificacaoById"  />
-	<association property="marca"    column="marca" select="ClassificacaoMap.fetchClassificacaoById"  />
-	<association property="porcao"    column="porcao" select="ClassificacaoMap.fetchClassificacaoById"  />
-	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
-	<collection property="notes" column="id" select="NoteMap.fetchNoteByNotes"/>
-	<!--<collection property="marca" column="marca" select="NoteMap.fetchNoteByNotes"/>-->
+    <collection property="uniMed" column="uniMed" select="UniMedMap.fetchUniMedById"/>
+    <collection property="categoria" column="categoria" select="CategoriaMap.fetchCategoriaById"/>
+    <collection property="marca" column="marca" select="MarcaMap.fetchMarcaById"/>
   </resultMap>
 
   <sql id="allProdutoColumns">
 codigo
 ,cdBarras
-,produto
-,dataCreate
-,aplicacao
-,fracao
-,classificacao
+,nCM
+,cEST
 ,uniMed
-,grupo
-,subGrupo
-,porcao
+,categoria
+,marca
 ,pesoBruto
 ,pesoLiquido
 ,modoUso
+,excTabIPI
+,produto
+,InfaddNFe
+,AnotInt
+,dataCreate
+,parentId
+,tabelaEnumValue
 ,emprId
 ,processId
 ,create_date
@@ -69,55 +72,58 @@ codigo
 <sql id="allProdutoValues">
 #{codigo},
 #{cdBarras},
-#{produto},
-#{dataCreate},
-#{aplicacao},
-#{fracao},
-#{classificacao.id},
+#{ncm},
+#{cEST},
 #{uniMed.id},
-#{grupo.id},
-#{subGrupo.id},
-#{porcao.id},
+#{categoria.id},
+#{marca.id},
 #{pesoBruto},
 #{pesoLiquido},
 #{modoUso},
-		#{emprId},
-		#{processId},
-		#{createDateUTC},
-		#{createUser},
-		#{modifyDateUTC},
-		#{modifyUser}
+#{excTabIPI},
+#{produto},
+#{InfaddNFe},
+#{AnotInt},
+#{dataCreate},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
   </sql>
 
 
  <select id="fetchAllProdutos" resultMap="ProdutoResult">
     SELECT id,
-	<include refid="allProdutoColumns" />
+ <include refid="allProdutoColumns" />
    FROM produto ORDER BY id ASC
  </select>
 
  <select id="fetchProdutoById" parameterType="Integer" resultMap="ProdutoResult">
     SELECT id,
-	<include refid="allProdutoColumns" />
+ <include refid="allProdutoColumns" />
    FROM produto WHERE id = #{fetchid}
  </select>
 
  <select id="fetchAllProdutosRequest" parameterType="ProdutoInquiryRequest" resultMap="ProdutoResult">
 
-		SELECT id,<include refid="allProdutoColumns" />
-  		  FROM produto where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
+     SELECT id,<include refid="allProdutoColumns" />
+           FROM produto where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
 </select>
 
 <select id="fetchProdutoRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM produto WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+     SELECT COUNT(*) AS RECORD_COUNT FROM produto WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
 
  </select>
 
  <insert id="insertProduto" parameterType="Produto" useGeneratedKeys="true" keyProperty="id">
- 	INSERT INTO produto (
-	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allProdutoColumns" />
+     INSERT INTO produto (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allProdutoColumns" />
      )
    VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allProdutoValues" /> )
  </insert>
@@ -126,18 +132,23 @@ codigo
    UPDATE produto SET
 <if test="codigo!= null">codigo = #{codigo},</if>
 <if test="cdBarras!= null">cdBarras = #{cdBarras},</if>
-<if test="produto!= null">produto = #{produto},</if>
-<if test="dataCreate!= null">dataCreate = #{dataCreate},</if>
-<if test="aplicacao!= null">aplicacao = #{aplicacao},</if>
-<if test="fracao!= null">fracao = #{fracao},</if>
-<if test="classificacao!= null">classificacao = #{classificacao},</if>
-<if test="uniMed!= null">uniMed = #{uniMed},</if>
-<if test="grupo!= null">grupo = #{grupo},</if>
-<if test="subGrupo!= null">subGrupo = #{subGrupo},</if>
-<if test="porcao!= null">porcao = #{porcao},</if>
+<if test="ncm!= null">nCM = #{ncm},</if>
+<if test="cEST!= null">cEST = #{cEST},</if>
+<if test="uniMed!= null">uniMed = #{uniMed.id},</if>
+<if test="categoria!= null">categoria = #{categoria.id},</if>
+<if test="marca!= null">marca = #{marca.id},</if>
 <if test="pesoBruto!= null">pesoBruto = #{pesoBruto},</if>
 <if test="pesoLiquido!= null">pesoLiquido = #{pesoLiquido},</if>
 <if test="modoUso!= null">modoUso = #{modoUso},</if>
+<if test="excTabIPI!= null">excTabIPI = #{excTabIPI},</if>
+<if test="produto!= null">produto = #{produto},</if>
+<if test="InfaddNFe!= null">InfaddNFe = #{InfaddNFe},</if>
+<if test="AnotInt!= null">AnotInt = #{AnotInt},</if>
+<if test="dataCreate!= null">dataCreate = #{dataCreate},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE
@@ -149,7 +160,7 @@ codigo
  </delete>
 
  <delete id="deleteAllProdutos">
-	DELETE FROM produto
+ DELETE FROM produto
   </delete>
 </mapper>
 

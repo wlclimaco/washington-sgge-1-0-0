@@ -1,6 +1,5 @@
 /** create by system gera-java version 1.0.0 01/09/2016 12:56 : 31*/
 
-
 package com.qat.samples.sysmgmt.bar.mybatis.delegate;
 
 import java.util.ArrayList;
@@ -8,24 +7,26 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.bar.Pis.IPisBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
+import com.qat.samples.sysmgmt.bar.Produto.IProdutoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.historico.model.HistoricoItens;
+import com.qat.samples.sysmgmt.produto.model.Pis;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
+import com.qat.samples.sysmgmt.util.model.AcaoTypeEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.Pis;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
 
 /**
- * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
- * passed into the methods. Nothing injected.
+ * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY
+ * static methods so everything must be passed into the methods. Nothing
+ * injected.
  */
-public final class PisBARD extends SqlSessionDaoSupport
-{
+public final class PisBARD extends SqlSessionDaoSupport {
 
 	/** The Constant ZERO. */
 	private static final Integer ZERO = 0;
@@ -33,82 +34,78 @@ public final class PisBARD extends SqlSessionDaoSupport
 	/**
 	 * Fetch objects by request.
 	 *
-	 * @param sqlSession the sql session
-	 * @param request the request
-	 * @param countStatement the count statement
-	 * @param fetchPagedStatement the fetch paged statement
-	 * @param response the response
+	 * @param sqlSession
+	 *            the sql session
+	 * @param request
+	 *            the request
+	 * @param countStatement
+	 *            the count statement
+	 * @param fetchPagedStatement
+	 *            the fetch paged statement
+	 * @param response
+	 *            the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainPisAssociations(List<Pis> pisList,
-			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IPisBAR pisDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
-			String UserId, Integer processId, Integer historicoId)
-	{
+	public static Integer maintainPisAssociations(Pis pis, InternalResponse response, Integer parentId,
+			TypeEnum type, AcaoTypeEnum insert, TabelaEnum tabelaEnum, IProdutoBAR pisDAC, IStatusBAR statusDAC,
+			IHistoricoBAR historicoDAC, Integer empId, String UserId, Integer processId, Integer historicoId) {
 		Boolean count = false;
-		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(pisList))
-		{
-			return 0;
-		}
-		// For Each Contact...
-		for (Pis pis : pisList)
-		{
-			// Make sure we set the parent key
-			pis.setParentId(parentId);
-			pis.setTabelaEnum(tabelaEnum);
-			pis.setProcessId(processId);
 
-			if (ValidationUtil.isNull(pis.getModelAction()))
+		// Make sure we set the parent key
+		pis.setParentId(parentId);
+		pis.setTabelaEnum(tabelaEnum);
+		pis.setProcessId(processId);
+		switch (pis.getModelAction()) {
+		case INSERT:
+			count = pisDAC.insertPis(pis).hasSystemError();
+			if (count == false)
 			{
-				continue;
+				HistoricoItens historicoItens = new HistoricoItens();
+				historicoItens = new HistoricoItens();
+				historicoItens.setIdHist(historicoId);
+				historicoItens.setProcessId(processId);
+				historicoItens.setTabelaEnum(tabelaEnum);
+				historicoItens.setParentId(parentId);
+				historicoItens.setAcaoType(AcaoEnum.INSERT);
+				historicoDAC.insertHistoricoItens(historicoItens);
 			}
-			switch (pis.getModelAction())
+			break;
+		case UPDATE:
+			count = pisDAC.updatePis(pis).hasSystemError();
+			if (count == false)
 			{
-				case INSERT:
-					count = pisDAC.insertPis(pis).hasSystemError();
-					if (count == true)
-					{
-						Status status = new Status();
-						status.setStatus(CdStatusTypeEnum.ATIVO);
-						List<Status> statusList = new ArrayList<Status>();
-						statusList.add(status);
-						count =
-								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.PIS, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
-					break;
-				case UPDATE:
-					count = pisDAC.updatePis(pis).hasSystemError();
-					if (count == true)
-					{
-						count =
-								StatusBARD.maintainStatusAssociations(pis.getStatusList(), response, pis.getId(),
-										null,
-										AcaoEnum.UPDATE, UserId, empId, TabelaEnum.PIS, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
-					break;
-				case DELETE:
-					count = pisDAC.deletePisById(pis).hasSystemError();
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.DELETADO);
-					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
-					count =
-							StatusBARD.maintainStatusAssociations(statusList, response, pis.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.PIS, statusDAC, historicoDAC,
-									processId, historicoId);
+				HistoricoItens historicoItens = new HistoricoItens();
+				historicoItens = new HistoricoItens();
+				historicoItens.setIdHist(historicoId);
+				historicoItens.setProcessId(processId);
+				historicoItens.setTabelaEnum(tabelaEnum);
+				historicoItens.setParentId(parentId);
+				historicoItens.setAcaoType(AcaoEnum.UPDATE);
+				historicoDAC.insertHistoricoItens(historicoItens);
+			}
+			break;
+		case DELETE:
+			count = pisDAC.deletePisById(pis).hasSystemError();
+			if (count == false)
+			{
+				HistoricoItens historicoItens = new HistoricoItens();
+				historicoItens = new HistoricoItens();
+				historicoItens.setIdHist(historicoId);
+				historicoItens.setProcessId(processId);
+				historicoItens.setTabelaEnum(tabelaEnum);
+				historicoItens.setParentId(parentId);
+				historicoItens.setAcaoType(AcaoEnum.DELETE);
+				historicoDAC.insertHistoricoItens(historicoItens);
+			}
 
-					break;
-			}
+			break;
 		}
-		if(count == true ){
+
+		if (count == true) {
 			return 1;
-		}else{
+		} else {
 			return 0;
 		}
-		
+
 	}
 }

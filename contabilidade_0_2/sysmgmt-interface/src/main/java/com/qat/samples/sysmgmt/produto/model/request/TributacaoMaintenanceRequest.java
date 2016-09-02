@@ -1,7 +1,6 @@
 package com.qat.samples.sysmgmt.produto.model.request;
 
-import com.qat.samples.sysmgmt.fiscal.model.Tributacao;
-import com.qat.samples.sysmgmt.produto.model.Marca;
+import com.qat.samples.sysmgmt.produto.model.Tributacao;
 import com.qat.samples.sysmgmt.util.model.request.UtilMaintenanceRequest;
 
 public class TributacaoMaintenanceRequest extends UtilMaintenanceRequest

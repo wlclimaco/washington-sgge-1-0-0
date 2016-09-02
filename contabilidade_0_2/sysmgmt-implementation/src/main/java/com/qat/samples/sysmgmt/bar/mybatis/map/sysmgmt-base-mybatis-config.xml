@@ -114,6 +114,11 @@
         <!--      <typeAlias alias="Cidade" type="com.qat.samples.sysmgmt.cidade.model.Cidade"/> -->
         <typeAlias alias="Produto" type="com.qat.samples.sysmgmt.produto.model.Produto" />
         <typeAlias alias="ProdutoEmpresa" type="com.qat.samples.sysmgmt.produto.model.ProdutoEmpresa" />
+        
+         <typeAlias alias="Icms" type="com.qat.samples.sysmgmt.produto.model.Icms" />
+          <typeAlias alias="Cofins" type="com.qat.samples.sysmgmt.produto.model.Cofins" />
+           <typeAlias alias="Ipi" type="com.qat.samples.sysmgmt.produto.model.Ipi" />
+            <typeAlias alias="Pis" type="com.qat.samples.sysmgmt.produto.model.Pis" />
 
         <typeAlias alias="Cidade" type="com.qat.samples.sysmgmt.util.model.Cidade" />
         <typeAlias alias="CidadeInquiryRequest" type="com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest" />
@@ -322,7 +327,7 @@
         <typeAlias alias="SubGrupoProd" type="com.qat.samples.sysmgmt.produto.model.SubGrupoProd" />
         <typeAlias alias="SubGrupoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest" />
 
-        <typeAlias alias="Tributacao" type="com.qat.samples.sysmgmt.fiscal.model.Tributacao" />
+        <typeAlias alias="Tributacao" type="com.qat.samples.sysmgmt.produto.model.Tributacao" />
         <typeAlias alias="TributacaoInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest" />
         <typeAlias alias="ProdutoEmpresaInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.ProdutoEmpresaInquiryRequest" />
         <typeAlias alias="ProdutoEmpresa" type="com.qat.samples.sysmgmt.produto.model.ProdutoEmpresa" />
@@ -415,7 +420,7 @@
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/rentabilidadeItens.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/subgrupo.xml" />
 
-        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/tributos.xml" />
+<!--         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/tributos.xml" /> -->
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/uniMed.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/produto.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/advogado.xml" />
@@ -465,6 +470,10 @@
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/planoByEmpresa.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/util.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/categoria.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/icms.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/cofins.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/pis.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/ipi.xml" />
     </mappers>
 
 </configuration>

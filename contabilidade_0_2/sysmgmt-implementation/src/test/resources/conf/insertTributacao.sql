@@ -1,9 +1,9 @@
 
-INSERT INTO Tributacao( id, parentId, cst, icms, st, mva, csosn, ipi, iat, ippt, incidencia,emprId,processId,create_user,create_date,modify_user,modify_date)values
-( 1011, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,'system',1463354114937,'rod',1463354114937);
+INSERT INTO Tributacao( id, prodId, cfop, iCMS, pIS, cOFINS, iPI,parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values
+( 1000, 1000, 1000, 1000, 1000, 1000, 1000,10000,1,1,1,'system',1472777092977,'rod',1472777092977);
 
-INSERT INTO Tributacao( id, parentId, cst, icms, st, mva, csosn, ipi, iat, ippt, incidencia,emprId,processId,create_user,create_date,modify_user,modify_date)values
-( 1012, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,1,1,'system',1463354114937,'rod',1463354114937);
+INSERT INTO Tributacao( id, prodId, cfop, iCMS, pIS, cOFINS, iPI,parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values
+( 1001, 1001, 1001, 1001, 1001, 1001, 1001,10000,1,1,1,'system',1472777092977,'rod',1472777092977);
 
-INSERT INTO Tributacao( id, parentId, cst, icms, st, mva, csosn, ipi, iat, ippt, incidencia,emprId,processId,create_user,create_date,modify_user,modify_date)values
-( 1013, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,1,1,'system',1463354114937,'rod',1463354114937);
+INSERT INTO Tributacao( id, prodId, cfop, iCMS, pIS, cOFINS, iPI,parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values
+( 1002, 1002, 1002, 1002, 1002, 1002, 1002,10000,1,1,1,'system',1472777092977,'rod',1472777092977);

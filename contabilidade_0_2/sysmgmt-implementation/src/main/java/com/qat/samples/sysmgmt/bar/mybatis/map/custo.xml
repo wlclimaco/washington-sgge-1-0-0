@@ -62,6 +62,12 @@ valor
 	<include refid="allCustoColumns" />
    FROM custo WHERE id = #{fetchid}
  </select>
+ 
+  <select id="fetchCustoByParentId" parameterType="Integer" resultMap="CustoResult">
+    SELECT id,
+	<include refid="allCustoColumns" />
+   FROM custo WHERE parentid = #{fetchid}
+ </select>
 
  <select id="fetchAllCustosRequest" parameterType="PagedInquiryRequest" resultMap="CustoResult">
 

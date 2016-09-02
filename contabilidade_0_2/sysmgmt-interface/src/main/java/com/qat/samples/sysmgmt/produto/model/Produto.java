@@ -48,6 +48,12 @@ public class Produto extends ModelCosmeDamiao
 	private String InfaddNFe;
 
 	private String AnotInt;
+	
+	private UniMed uniMed;
+	
+	private Categoria categoria;
+	
+	private Marca marca;
 
 	/**
 	 * Default constructor.
@@ -195,6 +201,30 @@ public class Produto extends ModelCosmeDamiao
 		AnotInt = anotInt;
 	}
 
+	public UniMed getUniMed() {
+		return uniMed;
+	}
+
+	public void setUniMed(UniMed uniMed) {
+		this.uniMed = uniMed;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public Marca getMarca() {
+		return marca;
+	}
+
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
+
 	@Override
 	public String toString() {
 		return "Produto [getId()=" + getId() + ", getCodigo()=" + getCodigo() + ", getNcm()=" + getNcm()
@@ -203,7 +233,8 @@ public class Produto extends ModelCosmeDamiao
 				+ ", getClassificacao()=" + getClassificacao() + ", getPesoBruto()=" + getPesoBruto()
 				+ ", getPesoLiquido()=" + getPesoLiquido() + ", getModoUso()=" + getModoUso() + ", getExcTabIPI()="
 				+ getExcTabIPI() + ", getcEST()=" + getcEST() + ", getInfaddNFe()=" + getInfaddNFe() + ", getAnotInt()="
-				+ getAnotInt() + ", toString()=" + super.toString() + "]";
+				+ getAnotInt() + ", getUniMed()=" + getUniMed() + ", getCategoria()=" + getCategoria() + ", getMarca()="
+				+ getMarca() + ", toString()=" + super.toString() + "]";
 	}
 
 

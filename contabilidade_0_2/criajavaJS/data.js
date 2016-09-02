@@ -5411,17 +5411,6 @@ function ProdutoModel() {
             xml: true
         }
     });
-    a.push({
-        field: {
-            campo: "excecaoIPI",
-            tipo: "String",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
     
     a.push({
         field: {
@@ -5503,8 +5492,54 @@ function ProdutoModel() {
     });
     a.push({
         field: {
-            campo: "tributacao",
-            tipo: "Tributacao",
+            campo: "excTabIPI",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "produto",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "InfaddNFe",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "AnotInt",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "dataCreate",
+            tipo: "Long",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -5615,6 +5650,18 @@ function ProdutoEmpresaModel() {
         field: {
             campo: "margem",
             tipo: "MargemList",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "tributacao",
+            tipo: "Tributacao",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -6025,7 +6072,7 @@ function TributacaoModel() {
     });
     a.push({
         field: {
-            campo: "cFOPPadraoNFe",
+            campo: "cfop",
             tipo: "Cfop",
             requerid: false,
             primaryKey: false,

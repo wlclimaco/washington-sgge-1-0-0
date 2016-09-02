@@ -6,10 +6,10 @@ import com.qat.samples.sysmgmt.cfop.model.Cfop;
 import com.qat.samples.sysmgmt.condpag.model.FormaPgPessoa;
 import com.qat.samples.sysmgmt.conta.model.Conta;
 import com.qat.samples.sysmgmt.entidade.model.Entidade;
-import com.qat.samples.sysmgmt.fiscal.model.Tributacao;
 import com.qat.samples.sysmgmt.pessoa.model.Pessoa;
 import com.qat.samples.sysmgmt.pessoa.model.Transportador;
 import com.qat.samples.sysmgmt.produto.model.ItensEspeciais;
+import com.qat.samples.sysmgmt.produto.model.Tributacao;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 import com.qat.samples.sysmgmt.util.model.Note;
 

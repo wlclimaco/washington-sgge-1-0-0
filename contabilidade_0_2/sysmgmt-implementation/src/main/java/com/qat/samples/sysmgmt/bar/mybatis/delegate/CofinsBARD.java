@@ -8,13 +8,15 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Produto.IProdutoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.historico.model.HistoricoItens;
 import com.qat.samples.sysmgmt.produto.model.Cofins;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
+import com.qat.samples.sysmgmt.util.model.AcaoTypeEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
@@ -40,70 +42,64 @@ public final class CofinsBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainCofinsAssociations(List<Cofins> cofinsList,
-			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+	public static Integer maintainCofinsAssociations(Cofins cofins,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoTypeEnum insert,
 			TabelaEnum tabelaEnum, IProdutoBAR cofinsDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
-		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(cofinsList))
-		{
-			return 0;
-		}
-		// For Each Contact...
-		for (Cofins cofins : cofinsList)
-		{
+
 			// Make sure we set the parent key
 			cofins.setParentId(parentId);
 			cofins.setTabelaEnum(tabelaEnum);
 			cofins.setProcessId(processId);
 
-			if (ValidationUtil.isNull(cofins.getModelAction()))
-			{
-				continue;
-			}
 			switch (cofins.getModelAction())
 			{
 				case INSERT:
 					count = cofinsDAC.insertCofins(cofins).hasSystemError();
-					if (count == true)
+					if (count == false)
 					{
-						Status status = new Status();
-						status.setStatus(CdStatusTypeEnum.ATIVO);
-						List<Status> statusList = new ArrayList<Status>();
-						statusList.add(status);
-						count =
-								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.COFINS, statusDAC, historicoDAC,
-										processId, historicoId);
+						HistoricoItens historicoItens = new HistoricoItens();
+						historicoItens = new HistoricoItens();
+						historicoItens.setIdHist(historicoId);
+						historicoItens.setProcessId(processId);
+						historicoItens.setTabelaEnum(tabelaEnum);
+						historicoItens.setParentId(parentId);
+						historicoItens.setAcaoType(AcaoEnum.INSERT);
+						historicoDAC.insertHistoricoItens(historicoItens);
 					}
 					break;
 				case UPDATE:
 					count = cofinsDAC.updateCofins(cofins).hasSystemError();
-					if (count == true)
+					if (count == false)
 					{
-						count =
-								StatusBARD.maintainStatusAssociations(cofins.getStatusList(), response, cofins.getId(),
-										null,
-										AcaoEnum.UPDATE, UserId, empId, TabelaEnum.COFINS, statusDAC, historicoDAC,
-										processId, historicoId);
+						HistoricoItens historicoItens = new HistoricoItens();
+						historicoItens = new HistoricoItens();
+						historicoItens.setIdHist(historicoId);
+						historicoItens.setProcessId(processId);
+						historicoItens.setTabelaEnum(tabelaEnum);
+						historicoItens.setParentId(parentId);
+						historicoItens.setAcaoType(AcaoEnum.UPDATE);
+						historicoDAC.insertHistoricoItens(historicoItens);
 					}
 					break;
 				case DELETE:
 					count = cofinsDAC.deleteCofinsById(cofins).hasSystemError();
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.DELETADO);
-					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
-					count =
-							StatusBARD.maintainStatusAssociations(statusList, response, cofins.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.COFINS, statusDAC, historicoDAC,
-									processId, historicoId);
-
+					if (count == false)
+					{
+						HistoricoItens historicoItens = new HistoricoItens();
+						historicoItens = new HistoricoItens();
+						historicoItens.setIdHist(historicoId);
+						historicoItens.setProcessId(processId);
+						historicoItens.setTabelaEnum(tabelaEnum);
+						historicoItens.setParentId(parentId);
+						historicoItens.setAcaoType(AcaoEnum.DELETE);
+						historicoDAC.insertHistoricoItens(historicoItens);
+					}
 					break;
 			}
-		}
+
 		if(count == true ){
 			return 1;
 		}else{

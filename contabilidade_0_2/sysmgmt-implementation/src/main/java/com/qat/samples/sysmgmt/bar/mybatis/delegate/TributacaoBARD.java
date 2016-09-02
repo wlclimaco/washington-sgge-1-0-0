@@ -8,14 +8,16 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.bar.Tributacao.ITributacaoBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
+import com.qat.samples.sysmgmt.bar.Produto.IProdutoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.historico.model.HistoricoItens;
+import com.qat.samples.sysmgmt.produto.model.Tributacao;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
+import com.qat.samples.sysmgmt.util.model.AcaoTypeEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.Tributacao;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
@@ -40,70 +42,65 @@ public final class TributacaoBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainTributacaoAssociations(List<Tributacao> tributacaoList,
-			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, ITributacaoBAR tributacaoDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
+	public static Integer maintainTributacaoAssociations(Tributacao tributacao,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoTypeEnum insert,
+			TabelaEnum tabelaEnum, IProdutoBAR tributacaoDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
-		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(tributacaoList))
-		{
-			return 0;
-		}
-		// For Each Contact...
-		for (Tributacao tributacao : tributacaoList)
-		{
+
 			// Make sure we set the parent key
 			tributacao.setParentId(parentId);
 			tributacao.setTabelaEnum(tabelaEnum);
 			tributacao.setProcessId(processId);
 
-			if (ValidationUtil.isNull(tributacao.getModelAction()))
-			{
-				continue;
-			}
 			switch (tributacao.getModelAction())
 			{
 				case INSERT:
 					count = tributacaoDAC.insertTributacao(tributacao).hasSystemError();
-					if (count == true)
+					if (count == false)
 					{
-						Status status = new Status();
-						status.setStatus(CdStatusTypeEnum.ATIVO);
-						List<Status> statusList = new ArrayList<Status>();
-						statusList.add(status);
-						count =
-								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.TRIBUTACAO, statusDAC, historicoDAC,
-										processId, historicoId);
+						HistoricoItens historicoItens = new HistoricoItens();
+						historicoItens = new HistoricoItens();
+						historicoItens.setIdHist(historicoId);
+						historicoItens.setProcessId(processId);
+						historicoItens.setTabelaEnum(tabelaEnum);
+						historicoItens.setParentId(parentId);
+						historicoItens.setAcaoType(AcaoEnum.INSERT);
+						historicoDAC.insertHistoricoItens(historicoItens);
 					}
 					break;
 				case UPDATE:
 					count = tributacaoDAC.updateTributacao(tributacao).hasSystemError();
-					if (count == true)
+					if (count == false)
 					{
-						count =
-								StatusBARD.maintainStatusAssociations(tributacao.getStatusList(), response, tributacao.getId(),
-										null,
-										AcaoEnum.UPDATE, UserId, empId, TabelaEnum.TRIBUTACAO, statusDAC, historicoDAC,
-										processId, historicoId);
+						HistoricoItens historicoItens = new HistoricoItens();
+						historicoItens = new HistoricoItens();
+						historicoItens.setIdHist(historicoId);
+						historicoItens.setProcessId(processId);
+						historicoItens.setTabelaEnum(tabelaEnum);
+						historicoItens.setParentId(parentId);
+						historicoItens.setAcaoType(AcaoEnum.UPDATE);
+						historicoDAC.insertHistoricoItens(historicoItens);
 					}
 					break;
 				case DELETE:
 					count = tributacaoDAC.deleteTributacaoById(tributacao).hasSystemError();
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.DELETADO);
-					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
-					count =
-							StatusBARD.maintainStatusAssociations(statusList, response, tributacao.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.TRIBUTACAO, statusDAC, historicoDAC,
-									processId, historicoId);
+					if (count == false)
+					{
+						HistoricoItens historicoItens = new HistoricoItens();
+						historicoItens = new HistoricoItens();
+						historicoItens.setIdHist(historicoId);
+						historicoItens.setProcessId(processId);
+						historicoItens.setTabelaEnum(tabelaEnum);
+						historicoItens.setParentId(parentId);
+						historicoItens.setAcaoType(AcaoEnum.DELETE);
+						historicoDAC.insertHistoricoItens(historicoItens);
+					}
 
 					break;
 			}
-		}
+	
 		if(count == true ){
 			return 1;
 		}else{

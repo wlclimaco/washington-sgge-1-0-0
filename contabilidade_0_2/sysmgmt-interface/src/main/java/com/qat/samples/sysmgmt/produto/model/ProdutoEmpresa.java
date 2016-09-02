@@ -3,8 +3,6 @@ package com.qat.samples.sysmgmt.produto.model;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.cfop.model.CfopParentId;
-import com.qat.samples.sysmgmt.fiscal.model.Classificacao;
-import com.qat.samples.sysmgmt.fiscal.model.Tributacao;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**

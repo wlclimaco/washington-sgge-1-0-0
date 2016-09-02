@@ -67,6 +67,12 @@ parentId
 	<include refid="allEstoqueColumns" />
    FROM estoque WHERE id = #{fetchid}
  </select>
+ 
+ <select id="fetchEstoqueByParentId" parameterType="Integer" resultMap="EstoqueResult">
+    SELECT id,
+	<include refid="allEstoqueColumns" />
+   FROM estoque WHERE parentid = #{fetchid}
+ </select>
 
  <select id="fetchAllEstoquesRequest" parameterType="PagedInquiryRequest" resultMap="EstoqueResult">
 

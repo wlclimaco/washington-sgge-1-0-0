@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.fiscal.model.Tributacao;
+import com.qat.samples.sysmgmt.produto.model.Tributacao;
 
 public class TributacaoResponse extends InquiryResponse
 {

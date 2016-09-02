@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 17/05/2016 23:35 : 36-->
+<!-- create by system gera-java version 1.0.0 01/09/2016 20:59 : 5-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ProdutoEmpresaMap">
-	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
   <!-- Result maps describe the mapping between the columns returned
       from a query, and the class properties.  A result map isnt
@@ -17,94 +17,100 @@
        exactly. -->
   <resultMap id="ProdutoEmpresaResult" type="ProdutoEmpresa">
     <result property="id" column="id"/>
-    <result property="parentId" column="parentId"/>
- <!--     <result property="tributacao" column="tributacao"/>
-<collection property="estoqueList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="precoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="custoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="porcaoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="rentabilidadeList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="cfopList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>-->
-    <result property="dataValidade" column="dataValidade"/>
-    <result property="localizacao" column="localizacao"/>
-    <result property="comissao" column="comissao"/>
+    <result property="informAdicionaisParaNFe" column="informAdicionaisParaNFe"/>
+    <result property="anotainternas" column="anotainternas"/>
+    <result property="dataCadastro" column="dataCadastro"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<collection property="prodId" column="prodId" select="ProdutoMap.fetchProdutoById"/>
+<collection property="estoqueList" column="id" select="EstoqueMap.fetchEstoqueByParentId"/>
+<collection property="custoList" column="id" select="CustoMap.fetchCustoByParentId"/>
+<collection property="precoList" column="id" select="PrecoMap.fetchPrecoByProduto"/>
+<collection property="tributacao" column="tributacao" select="TributacaoMap.fetchTributacaoById"/>
   </resultMap>
 
   <sql id="allProdutoEmpresaColumns">
-parentId
-,tributacao
-,dataValidade
-,localizacao
-,comissao
+
+informAdicionaisParaNFe
+,anotainternas
+,dataCadastro
+,parentId
+,tabelaEnumValue
 ,emprId
 ,processId
 ,create_date
 ,create_user
 ,modify_date
 ,modify_user
+,prodId
+,tributacao
 
 </sql>
 <sql id="allProdutoEmpresaValues">
+#{informAdicionaisParaNFe},
+#{anotainternas},
+#{dataCadastro},
 #{parentId},
-#{tributacao.id},
-#{dataValidade},
-#{localizacao},
-#{comissao},
-		#{emprId},
-		#{processId},
-		#{createDateUTC},
-		#{createUser},
-		#{modifyDateUTC},
-		#{modifyUser}
+#{tabelaEnumValue},
+#{emprId},
+#{processId},
+#{createDateUTC},
+#{createUser},
+#{modifyDateUTC},
+#{modifyUser},
+#{prodId.id},
+#{tributacao.id}
   </sql>
 
 
  <select id="fetchAllProdutoEmpresas" resultMap="ProdutoEmpresaResult">
     SELECT id,
-	<include refid="allProdutoEmpresaColumns" />
-   FROM produtoparent ORDER BY id ASC
+ <include refid="allProdutoEmpresaColumns" />
+   FROM produtoempresa ORDER BY id ASC
  </select>
 
  <select id="fetchProdutoEmpresaById" parameterType="Integer" resultMap="ProdutoEmpresaResult">
     SELECT id,
-	<include refid="allProdutoEmpresaColumns" />
-   FROM produtoparent WHERE id = #{fetchid}
+ <include refid="allProdutoEmpresaColumns" />
+   FROM produtoempresa WHERE id = #{fetchid}
  </select>
 
  <select id="fetchAllProdutoEmpresasRequest" parameterType="ProdutoEmpresaInquiryRequest" resultMap="ProdutoEmpresaResult">
 
-		SELECT id,<include refid="allProdutoEmpresaColumns" />
-  		  FROM produtoparent where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
+     SELECT id,<include refid="allProdutoEmpresaColumns" />
+           FROM produtoempresa where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
+
 </select>
 
 <select id="fetchProdutoEmpresaRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM produtoparent WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+     SELECT COUNT(*) AS RECORD_COUNT FROM produtoempresa WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 
  <insert id="insertProdutoEmpresa" parameterType="ProdutoEmpresa" useGeneratedKeys="true" keyProperty="id">
- 	INSERT INTO produtoparent (
-	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allProdutoEmpresaColumns" />
+     INSERT INTO produtoempresa (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allProdutoEmpresaColumns" />
      )
    VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allProdutoEmpresaValues" /> )
  </insert>
 
  <update id="updateProdutoEmpresa" parameterType="ProdutoEmpresa">
-   UPDATE produtoparent SET
-<if test="parentId!= null">parentId = #{parentId},</if>
-<if test="emprId!= null">emprId = #{emprId},</if>
-<if test="tributacao.id!= null">tributacao = #{tributacao.id},</if>
-<if test="dataValidade!= null">dataValidade = #{dataValidade},</if>
-<if test="localizacao!= null">localizacao = #{localizacao},</if>
-<if test="comissao!= null">comissao = #{comissao},</if>
+   UPDATE produtoempresa SET
+<if test="prodId!= null">prodId = #{prodId.id},</if>
+<if test="tributacao!= null">tributacao = #{tributacao.id},</if>
+<if test="informAdicionaisParaNFe!= null">informAdicionaisParaNFe = #{informAdicionaisParaNFe},</if>
+<if test="anotainternas!= null">anotainternas = #{anotainternas},</if>
+<if test="dataCadastro!= null">dataCadastro = #{dataCadastro},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE
@@ -112,11 +118,11 @@ parentId
  </update>
 
 <delete id="deleteProdutoEmpresaById" parameterType="ProdutoEmpresa">
-  DELETE FROM produtoparent WHERE id = #{id}
+  DELETE FROM produtoempresa WHERE id = #{id}
  </delete>
 
  <delete id="deleteAllProdutoEmpresas">
-	DELETE FROM produtoparent
+ DELETE FROM produtoempresa
   </delete>
 </mapper>
 

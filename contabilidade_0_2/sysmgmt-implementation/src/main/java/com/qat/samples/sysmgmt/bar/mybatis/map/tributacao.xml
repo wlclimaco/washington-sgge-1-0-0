@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 13/05/2016 17:59 : 56-->
+<!-- create by system gera-java version 1.0.0 01/09/2016 20:59 : 5-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="TributacaoMap">
-	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
   <!-- Result maps describe the mapping between the columns returned
       from a query, and the class properties.  A result map isnt
@@ -17,36 +17,31 @@
        exactly. -->
   <resultMap id="TributacaoResult" type="Tributacao">
     <result property="id" column="id"/>
-    <result property="parentId" column="parentId"/>
-
-    <result property="icms" column="icms"/>
-    <result property="st" column="st"/>
-    <result property="mva" column="mva"/>
-    <result property="ipi" column="ipi"/>
-    <result property="iat" column="iat"/>
-    <result property="ippt" column="ippt"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<!--  <association property="incidencia"    column="incidencia" select="ClassificacaoMap.fetchClassificacaoById"  />
-<association property="cst"    column="cst" select="ClassificacaoMap.fetchClassificacaoById"  />
-<association property="csosn"    column="csosn" select="ClassificacaoMap.fetchClassificacaoById"  />-->
+<result property="prodId" column="prodId" />
+<collection property="cfop" column="cfop" select="CfopMap.fetchCfopById"/>
+<collection property="icms" column="icms" select="IcmsMap.fetchIcmsById"/>
+<collection property="pis" column="pis" select="PisMap.fetchPisById"/>
+<collection property="cofins" column="cofins" select="CofinsMap.fetchCofinsById"/>
+<collection property="ipi" column="ipi" select="IpiMap.fetchIpiById"/>
   </resultMap>
 
   <sql id="allTributacaoColumns">
-parentId
-,cst
+prodId
+,cfop
 ,icms
-,st
-,mva
-,csosn
+,pis
+,cofins
 ,ipi
-,iat
-,ippt
-,incidencia
+,parentId
+,tabelaEnumValue
 ,emprId
 ,processId
 ,create_date
@@ -56,69 +51,67 @@ parentId
 
 </sql>
 <sql id="allTributacaoValues">
-#{parentId},
-#{cst.id},
-#{icms},
-#{st},
-#{mva},
-#{csosn.id},
-#{ipi},
-#{iat},
-#{ippt},
-#{incidencia.id},
-		#{emprId},
-		#{processId},
-		#{createDateUTC},
-		#{createUser},
-		#{modifyDateUTC},
-		#{modifyUser}
+#{prodId},
+#{cfop.id},
+#{icms.id},
+#{pis.id},
+#{cofins.id},
+#{ipi.id},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
   </sql>
 
 
  <select id="fetchAllTributacaos" resultMap="TributacaoResult">
     SELECT id,
-	<include refid="allTributacaoColumns" />
+ <include refid="allTributacaoColumns" />
    FROM tributacao ORDER BY id ASC
  </select>
 
  <select id="fetchTributacaoById" parameterType="Integer" resultMap="TributacaoResult">
     SELECT id,
-	<include refid="allTributacaoColumns" />
+ <include refid="allTributacaoColumns" />
    FROM tributacao WHERE id = #{fetchid}
  </select>
 
  <select id="fetchAllTributacaosRequest" parameterType="TributacaoInquiryRequest" resultMap="TributacaoResult">
 
-		SELECT id,<include refid="allTributacaoColumns" />
-  		  FROM tributacao where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
+     SELECT id,<include refid="allTributacaoColumns" />
+           FROM tributacao where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
 </select>
 
 <select id="fetchTributacaoRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM tributacao WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+     SELECT COUNT(*) AS RECORD_COUNT FROM tributacao WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
 
  </select>
 
  <insert id="insertTributacao" parameterType="Tributacao" useGeneratedKeys="true" keyProperty="id">
- 	INSERT INTO tributacao (
-	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allTributacaoColumns" />
+     INSERT INTO tributacao (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allTributacaoColumns" />
      )
    VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allTributacaoValues" /> )
  </insert>
 
  <update id="updateTributacao" parameterType="Tributacao">
    UPDATE tributacao SET
-<if test="parentId!= null">parentId = #{parentId},</if>
-<!--  <if test="cst.id!= null">cst = #{cst.id},</if>-->
-<if test="icms!= null">icms = #{icms},</if>
-<if test="st!= null">st = #{st},</if>
-<if test="mva!= null">mva = #{mva},</if>
-<!--<if test="csosn.id!= null">csosn = #{csosn.id},</if>-->
-<if test="ipi!= null">ipi = #{ipi},</if>
-<if test="iat!= null">iat = #{iat},</if>
-<if test="ippt!= null">ippt = #{ippt},</if>
-<!--<if test="incidencia.id!= null">incidencia = #{incidencia.id},</if>-->
+<if test="prodId!= null">prodId = #{prodId},</if>
+<if test="cfop != null">cfop = #{cfop.id},</if>
+<if test="icms!= null">icms = #{icms.id},</if>
+<if test="pis!= null">pis = #{pis.id},</if>
+<if test="cofins!= null">cofins = #{cofins.id},</if>
+<if test="ipi!= null">ipi = #{ipi.id},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE
@@ -130,7 +123,7 @@ parentId
  </delete>
 
  <delete id="deleteAllTributacaos">
-	DELETE FROM tributacao
+ DELETE FROM tributacao
   </delete>
 </mapper>
 
