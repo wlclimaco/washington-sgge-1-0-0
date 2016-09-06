@@ -14,9 +14,6 @@ public class Produto extends ModelCosmeDamiao
 	private Integer id;
 
 	/** The type of an account. */
-	private String codigo;
-
-	/** The type of an account. */
 	private String ncm;
 
 	/** The description. */
@@ -28,32 +25,9 @@ public class Produto extends ModelCosmeDamiao
 	/** The left. */
 	private String produto;
 
-	private String aplicacao;
-
-	private String fracao;
-
-	/** The numero. */
-	private Classificacao classificacao;
-
-	private Double pesoBruto;
-
-	private Double pesoLiquido;
-
-	private String modoUso;
-
 	private String excTabIPI;
 
 	private String cEST;
-
-	private String InfaddNFe;
-
-	private String AnotInt;
-	
-	private UniMed uniMed;
-	
-	private Categoria categoria;
-	
-	private Marca marca;
 
 	/**
 	 * Default constructor.
@@ -79,14 +53,6 @@ public class Produto extends ModelCosmeDamiao
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
 	}
 
 	public String getNcm() {
@@ -121,54 +87,6 @@ public class Produto extends ModelCosmeDamiao
 		this.produto = produto;
 	}
 
-	public String getAplicacao() {
-		return aplicacao;
-	}
-
-	public void setAplicacao(String aplicacao) {
-		this.aplicacao = aplicacao;
-	}
-
-	public String getFracao() {
-		return fracao;
-	}
-
-	public void setFracao(String fracao) {
-		this.fracao = fracao;
-	}
-
-	public Classificacao getClassificacao() {
-		return classificacao;
-	}
-
-	public void setClassificacao(Classificacao classificacao) {
-		this.classificacao = classificacao;
-	}
-
-	public Double getPesoBruto() {
-		return pesoBruto;
-	}
-
-	public void setPesoBruto(Double pesoBruto) {
-		this.pesoBruto = pesoBruto;
-	}
-
-	public Double getPesoLiquido() {
-		return pesoLiquido;
-	}
-
-	public void setPesoLiquido(Double pesoLiquido) {
-		this.pesoLiquido = pesoLiquido;
-	}
-
-	public String getModoUso() {
-		return modoUso;
-	}
-
-	public void setModoUso(String modoUso) {
-		this.modoUso = modoUso;
-	}
-
 	public String getExcTabIPI() {
 		return excTabIPI;
 	}
@@ -185,61 +103,12 @@ public class Produto extends ModelCosmeDamiao
 		this.cEST = cEST;
 	}
 
-	public String getInfaddNFe() {
-		return InfaddNFe;
-	}
-
-	public void setInfaddNFe(String infaddNFe) {
-		InfaddNFe = infaddNFe;
-	}
-
-	public String getAnotInt() {
-		return AnotInt;
-	}
-
-	public void setAnotInt(String anotInt) {
-		AnotInt = anotInt;
-	}
-
-	public UniMed getUniMed() {
-		return uniMed;
-	}
-
-	public void setUniMed(UniMed uniMed) {
-		this.uniMed = uniMed;
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-
-	public Marca getMarca() {
-		return marca;
-	}
-
-	public void setMarca(Marca marca) {
-		this.marca = marca;
-	}
-
 	@Override
 	public String toString() {
-		return "Produto [getId()=" + getId() + ", getCodigo()=" + getCodigo() + ", getNcm()=" + getNcm()
-				+ ", getCdBarras()=" + getCdBarras() + ", getDataCreate()=" + getDataCreate() + ", getProduto()="
-				+ getProduto() + ", getAplicacao()=" + getAplicacao() + ", getFracao()=" + getFracao()
-				+ ", getClassificacao()=" + getClassificacao() + ", getPesoBruto()=" + getPesoBruto()
-				+ ", getPesoLiquido()=" + getPesoLiquido() + ", getModoUso()=" + getModoUso() + ", getExcTabIPI()="
-				+ getExcTabIPI() + ", getcEST()=" + getcEST() + ", getInfaddNFe()=" + getInfaddNFe() + ", getAnotInt()="
-				+ getAnotInt() + ", getUniMed()=" + getUniMed() + ", getCategoria()=" + getCategoria() + ", getMarca()="
-				+ getMarca() + ", toString()=" + super.toString() + "]";
+		return "Produto [getId()=" + getId() + ", getNcm()=" + getNcm() + ", getCdBarras()=" + getCdBarras()
+				+ ", getDataCreate()=" + getDataCreate() + ", getProduto()=" + getProduto() + ", getExcTabIPI()="
+				+ getExcTabIPI() + ", getcEST()=" + getcEST() + ", toString()=" + super.toString() + "]";
 	}
 
-
-
-
-
-
+	
 }

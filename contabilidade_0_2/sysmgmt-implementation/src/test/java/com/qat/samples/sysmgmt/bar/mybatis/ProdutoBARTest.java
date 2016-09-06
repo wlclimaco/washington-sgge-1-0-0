@@ -207,7 +207,7 @@ public IProdutoBAR getProdutoBAR()
 		Assert.assertEquals(produtoResponse.getProduto(), "produto_1");
 		getProdutoBAR().updateProduto(produto);
 		produtoResponse = getProdutoBAR().fetchProdutoById(request);
-		Assert.assertEquals(produtoResponse.getProduto(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(produtoResponse.getProduto(), "produto_3 - UPDATE");
 	}
 
 	@Test

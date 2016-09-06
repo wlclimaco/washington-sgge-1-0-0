@@ -17,12 +17,16 @@ public class ProdutoEmpresa extends ModelCosmeDamiao
 	private Integer id;
 
 	private Produto prodId;
+	
+	private String codigo;
 
 	private String informAdicionaisParaNFe;
 
 	private Integer anotainternas;
 
 	private Long dataCadastro;
+	
+	private Double margemLucro;
 
 	private List<Estoque> estoqueList;
 
@@ -36,7 +40,25 @@ public class ProdutoEmpresa extends ModelCosmeDamiao
 
 	private List<Rentabilidade> rentabilidadeList;
 
-	private List<CfopParentId> cfopList;
+	private String aplicacao;
+
+	private String fracao;
+
+	private Double pesoBruto;
+
+	private Double pesoLiquido;
+
+	private String modoUso;
+	
+	private String InfaddNFe;
+
+	private String AnotInt;
+	
+	private UniMed uniMed;
+	
+	private Categoria categoria;
+	
+	private Marca marca;
 
 	/**
 	 * Default constructor.
@@ -156,12 +178,100 @@ public class ProdutoEmpresa extends ModelCosmeDamiao
 		this.rentabilidadeList = rentabilidadeList;
 	}
 
-	public List<CfopParentId> getCfopList() {
-		return cfopList;
+	public String getCodigo() {
+		return codigo;
 	}
 
-	public void setCfopList(List<CfopParentId> cfopList) {
-		this.cfopList = cfopList;
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public String getAplicacao() {
+		return aplicacao;
+	}
+
+	public void setAplicacao(String aplicacao) {
+		this.aplicacao = aplicacao;
+	}
+
+	public String getFracao() {
+		return fracao;
+	}
+
+	public void setFracao(String fracao) {
+		this.fracao = fracao;
+	}
+
+	public Double getPesoBruto() {
+		return pesoBruto;
+	}
+
+	public void setPesoBruto(Double pesoBruto) {
+		this.pesoBruto = pesoBruto;
+	}
+
+	public Double getPesoLiquido() {
+		return pesoLiquido;
+	}
+
+	public void setPesoLiquido(Double pesoLiquido) {
+		this.pesoLiquido = pesoLiquido;
+	}
+
+	public String getModoUso() {
+		return modoUso;
+	}
+
+	public void setModoUso(String modoUso) {
+		this.modoUso = modoUso;
+	}
+
+	public String getInfaddNFe() {
+		return InfaddNFe;
+	}
+
+	public void setInfaddNFe(String infaddNFe) {
+		InfaddNFe = infaddNFe;
+	}
+
+	public String getAnotInt() {
+		return AnotInt;
+	}
+
+	public void setAnotInt(String anotInt) {
+		AnotInt = anotInt;
+	}
+
+	public UniMed getUniMed() {
+		return uniMed;
+	}
+
+	public void setUniMed(UniMed uniMed) {
+		this.uniMed = uniMed;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public Marca getMarca() {
+		return marca;
+	}
+
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
+
+	public Double getMargemLucro() {
+		return margemLucro;
+	}
+
+	public void setMargemLucro(Double margemLucro) {
+		this.margemLucro = margemLucro;
 	}
 
 	@Override
@@ -170,9 +280,13 @@ public class ProdutoEmpresa extends ModelCosmeDamiao
 				+ getInformAdicionaisParaNFe() + ", getAnotainternas()=" + getAnotainternas() + ", getDataCadastro()="
 				+ getDataCadastro() + ", getEstoqueList()=" + getEstoqueList() + ", getTributacao()=" + getTributacao()
 				+ ", getPrecoList()=" + getPrecoList() + ", getCustoList()=" + getCustoList() + ", getPorcaoList()="
-				+ getPorcaoList() + ", getRentabilidadeList()=" + getRentabilidadeList() + ", getCfopList()="
-				+ getCfopList() + ", toString()=" + super.toString() + "]";
+				+ getPorcaoList() + ", getRentabilidadeList()=" + getRentabilidadeList() + ", getCodigo()="
+				+ getCodigo() + ", getAplicacao()=" + getAplicacao() + ", getFracao()=" + getFracao()
+				+ ", getPesoBruto()=" + getPesoBruto() + ", getPesoLiquido()=" + getPesoLiquido() + ", getModoUso()="
+				+ getModoUso() + ", getInfaddNFe()=" + getInfaddNFe() + ", getAnotInt()=" + getAnotInt()
+				+ ", getUniMed()=" + getUniMed() + ", getCategoria()=" + getCategoria() + ", getMarca()=" + getMarca()
+				+ ", getMargemLucro()=" + getMargemLucro() + ", toString()=" + super.toString() + "]";
 	}
 
-
+	
 }

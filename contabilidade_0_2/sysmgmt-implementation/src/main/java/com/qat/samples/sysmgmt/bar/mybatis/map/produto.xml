@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 01/09/2016 22:10 : 26-->
+<!-- create by system gera-java version 1.0.0 05/09/2016 21:18 : 39-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -17,19 +17,12 @@
        exactly. -->
   <resultMap id="ProdutoResult" type="Produto">
     <result property="id" column="id"/>
-    <result property="codigo" column="codigo"/>
     <result property="cdBarras" column="cdBarras"/>
-    <result property="ncm" column="nCM"/>
+    <result property="ncm" column="ncm"/>
     <result property="cEST" column="cEST"/>
-
-    <result property="pesoBruto" column="pesoBruto"/>
-    <result property="pesoLiquido" column="pesoLiquido"/>
-    <result property="modoUso" column="modoUso"/>
     <result property="excTabIPI" column="excTabIPI"/>
     <result property="produto" column="produto"/>
-    <result property="InfaddNFe" column="InfaddNFe"/>
-    <result property="AnotInt" column="AnotInt"/>
-    <result property="dataCreate" column="dataCreate"/>
+    <result property="dataCreate" column="dataCreate" />
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -38,26 +31,14 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-    <collection property="uniMed" column="uniMed" select="UniMedMap.fetchUniMedById"/>
-    <collection property="categoria" column="categoria" select="CategoriaMap.fetchCategoriaById"/>
-    <collection property="marca" column="marca" select="MarcaMap.fetchMarcaById"/>
   </resultMap>
 
   <sql id="allProdutoColumns">
-codigo
-,cdBarras
-,nCM
+cdBarras
+,ncm
 ,cEST
-,uniMed
-,categoria
-,marca
-,pesoBruto
-,pesoLiquido
-,modoUso
 ,excTabIPI
 ,produto
-,InfaddNFe
-,AnotInt
 ,dataCreate
 ,parentId
 ,tabelaEnumValue
@@ -70,20 +51,11 @@ codigo
 
 </sql>
 <sql id="allProdutoValues">
-#{codigo},
 #{cdBarras},
 #{ncm},
 #{cEST},
-#{uniMed.id},
-#{categoria.id},
-#{marca.id},
-#{pesoBruto},
-#{pesoLiquido},
-#{modoUso},
 #{excTabIPI},
 #{produto},
-#{InfaddNFe},
-#{AnotInt},
 #{dataCreate},
      #{parentId},
      #{tabelaEnumValue},
@@ -111,13 +83,13 @@ codigo
  <select id="fetchAllProdutosRequest" parameterType="ProdutoInquiryRequest" resultMap="ProdutoResult">
 
      SELECT id,<include refid="allProdutoColumns" />
-           FROM produto where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+           FROM produto where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
        OFFSET ( #{startPage} * #{pageSize} )
        LIMIT #{pageSize}
 </select>
 
 <select id="fetchProdutoRowCount" resultType="Integer">
-     SELECT COUNT(*) AS RECORD_COUNT FROM produto WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+     SELECT COUNT(*) AS RECORD_COUNT FROM produto WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 
@@ -130,20 +102,11 @@ codigo
 
  <update id="updateProduto" parameterType="Produto">
    UPDATE produto SET
-<if test="codigo!= null">codigo = #{codigo},</if>
 <if test="cdBarras!= null">cdBarras = #{cdBarras},</if>
-<if test="ncm!= null">nCM = #{ncm},</if>
+<if test="ncm!= null">ncm = #{ncm},</if>
 <if test="cEST!= null">cEST = #{cEST},</if>
-<if test="uniMed!= null">uniMed = #{uniMed.id},</if>
-<if test="categoria!= null">categoria = #{categoria.id},</if>
-<if test="marca!= null">marca = #{marca.id},</if>
-<if test="pesoBruto!= null">pesoBruto = #{pesoBruto},</if>
-<if test="pesoLiquido!= null">pesoLiquido = #{pesoLiquido},</if>
-<if test="modoUso!= null">modoUso = #{modoUso},</if>
 <if test="excTabIPI!= null">excTabIPI = #{excTabIPI},</if>
 <if test="produto!= null">produto = #{produto},</if>
-<if test="InfaddNFe!= null">InfaddNFe = #{InfaddNFe},</if>
-<if test="AnotInt!= null">AnotInt = #{AnotInt},</if>
 <if test="dataCreate!= null">dataCreate = #{dataCreate},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>

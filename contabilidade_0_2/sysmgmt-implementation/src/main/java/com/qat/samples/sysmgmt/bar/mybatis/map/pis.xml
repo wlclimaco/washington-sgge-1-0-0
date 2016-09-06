@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 01/09/2016 20:59 : 5-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PisMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="PisResult" type="Pis">
+    <result property="id" column="id"/>
+    <result property="prodId" column="prodId"/> 
+    <result property="valorUnidtribPIS" column="valorUnidtribPIS"/> 
+	<result property="valorTribPISST" column="valorTribPISST"/>
+	<result property="parentId" column="parentId"/>
+	<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+	<result property="emprId" column="emprId"/>
+	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<collection property="pISSituaTributaria" column="pISSituaTributaria" select="DoisValorMap.fetchDoisValorById"/>
+	<collection property="tipocalculoSubstTrib" column="tipocalculoSubstTrib" select="DoisValorMap.fetchDoisValorById"/>
+  </resultMap>
+
+  <sql id="allPisColumns">
+prodId
+,pISSituaTributaria
+,valorUnidtribPIS
+,tipocalculoSubstTrib
+,valorTribPISST
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allPisValues">
+#{prodId},
+#{pISSituaTributaria.id},
+#{valorUnidtribPIS},
+#{tipocalculoSubstTrib.id},
+#{valorTribPISST},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllPiss" resultMap="PisResult">
+    SELECT id,
+ <include refid="allPisColumns" />
+   FROM pis ORDER BY id ASC
+ </select>
+
+ <select id="fetchPisById" parameterType="Integer" resultMap="PisResult">
+    SELECT id,
+ <include refid="allPisColumns" />
+   FROM pis WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllPissRequest" parameterType="PagedInquiryRequest" resultMap="PisResult">
+
+     SELECT id,<include refid="allPisColumns" />
+           FROM pis where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchPisRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM pis WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+
+ </select>
+
+ <insert id="insertPis" parameterType="Pis" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO pis (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allPisColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allPisValues" /> )
+ </insert>
+
+ <update id="updatePis" parameterType="Pis">
+   UPDATE pis SET
+<if test="prodId!= null">prodId = #{prodId},</if>
+<if test="pISSituaTributaria!= null">pISSituaTributaria = #{pISSituaTributaria.id},</if>
+<if test="valorUnidtribPIS!= null">valorUnidtribPIS = #{valorUnidtribPIS},</if>
+<if test="tipocalculoSubstTrib!= null">tipocalculoSubstTrib = #{tipocalculoSubstTrib.id},</if>
+<if test="valorTribPISST!= null">valorTribPISST = #{valorTribPISST},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deletePisById" parameterType="Pis">
+  DELETE FROM pis WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllPiss">
+ DELETE FROM pis
+  </delete>
+</mapper>
+
+

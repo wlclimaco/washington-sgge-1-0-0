@@ -5378,17 +5378,7 @@ function ProdutoModel() {
             xml: true
         }
     });
-    a.push({
-        field: {
-            campo: "codigo",
-            tipo: "String",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
+
     a.push({
         field: {
             campo: "cdBarras",
@@ -5424,72 +5414,7 @@ function ProdutoModel() {
         }
     });
     
-    a.push({
-        field: {
-            campo: "uniMed",
-            tipo: "Integer",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "categoria",
-            tipo: "Integer",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "marca",
-            tipo: "Integer",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "pesoBruto",
-            tipo: "Double",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "pesoLiquido",
-            tipo: "Double",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "modoUso",
-            tipo: "String",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
+    
     a.push({
         field: {
             campo: "excTabIPI",
@@ -5505,29 +5430,6 @@ function ProdutoModel() {
     a.push({
         field: {
             campo: "produto",
-            tipo: "String",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "InfaddNFe",
-            tipo: "String",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "AnotInt",
             tipo: "String",
             requerid: false,
             primaryKey: false,
@@ -5662,6 +5564,83 @@ function ProdutoEmpresaModel() {
         field: {
             campo: "tributacao",
             tipo: "Tributacao",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "codigo",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+        a.push({
+        field: {
+            campo: "uniMed",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "categoria",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "marca",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "pesoBruto",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "pesoLiquido",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "modoUso",
+            tipo: "String",
             requerid: false,
             primaryKey: false,
             forenkey: false,

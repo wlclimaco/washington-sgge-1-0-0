@@ -1396,8 +1396,6 @@ public class Objects {
 		produtoparent.getPorcaoList().add(insertPorcao(id, TabelaEnum.PRODUTOPARENT, action));
 		produtoparent.setRentabilidadeList(new ArrayList<Rentabilidade>());
 		produtoparent.getRentabilidadeList().add(insertRentabilidade(id, TabelaEnum.PRODUTOPARENT, action));
-		produtoparent.setCfopList(new ArrayList<CfopParentId>());
-		produtoparent.getCfopList().add(insertCfopParentId(id, TabelaEnum.PRODUTOPARENT, action));
 		produtoparent.setTabelaEnum(tabela);
 		produtoparent.setParentId(id);
 		produtoparent.setEmprId(EMPID);
@@ -1407,6 +1405,13 @@ public class Objects {
 		produtoparent.setModifyUser("system");
 		produtoparent.setProcessId(1);
 		produtoparent.setModelAction(action);
+		produtoparent.setAplicacao("aplicacao_5 - " + action.toString());
+		produtoparent.setFracao("fracao_6 - " + action.toString());
+		produtoparent.setMarca(insertMarca(id, TabelaEnum.PRODUTO, action));
+		produtoparent.setPesoBruto(new Double(10.00));
+		produtoparent.setPesoLiquido(new Double(10.00));
+		produtoparent.setModoUso("modoUso_15 - " + action.toString());
+		produtoparent.setCodigo("codigo_1 - " + action.toString());
 
 		return produtoparent;
 	}
@@ -1415,22 +1420,15 @@ public class Objects {
 
 
 
-	public static Produto insertProdutos(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+	public static Produto insertProduto(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Produto produto = new Produto();
 		Date a = new Date();
 		produto.setId(id);
-		produto.setCodigo("codigo_1 - " + action.toString());
+		
 		produto.setCdBarras("cdBarras_2 - " + action.toString());
 		produto.setProduto("produto_3 - " + action.toString());
 		produto.setDataCreate(a.getTime());
-		produto.setAplicacao("aplicacao_5 - " + action.toString());
-		produto.setFracao("fracao_6 - " + action.toString());
-		produto.setClassificacao(insertClassificacao(id, TabelaEnum.PRODUTOPARENT, action));
-		//produto.setMarca(new ArrayList<Marca>());
-		//produto.getMarca().add(insertMarca(id, TabelaEnum.PRODUTO, action));
-		produto.setPesoBruto(new Double(10.00));
-		produto.setPesoLiquido(new Double(10.00));
-		produto.setModoUso("modoUso_15 - " + action.toString());
+
 		produto.setTabelaEnum(tabela);
 		produto.setParentId(id);
 		produto.setEmprId(EMPID);
@@ -3034,8 +3032,7 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 			ProdutoEmpresa.getPorcaoList().add(insertPorcao(id,TabelaEnum.PRODUTOPARENT,action));
 			ProdutoEmpresa.setRentabilidadeList(new ArrayList<Rentabilidade>());
 			ProdutoEmpresa.getRentabilidadeList().add(insertRentabilidade(id,TabelaEnum.PRODUTOPARENT,action));
-			ProdutoEmpresa.setCfopList(new ArrayList<CfopParentId>());
-			ProdutoEmpresa.getCfopList().add(insertCfopParentId(id,TabelaEnum.PRODUTOPARENT,action));
+
 
 			ProdutoEmpresa.setParentId(id);
 			ProdutoEmpresa.setEmprId(1);
@@ -3051,33 +3048,6 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 
 
 
-
-	public static Produto insertProduto(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			Produto produto = new Produto();
-			Date a = new Date();
-			produto.setId(id);
-			produto.setCodigo("NATIVE INSERT UPDATE");
-			produto.setCdBarras("NATIVE INSERT UPDATE");
-			produto.setProduto("NATIVE INSERT UPDATE");
-			produto.setDataCreate(a.getTime());
-			produto.setAplicacao("NATIVE INSERT UPDATE");
-			produto.setFracao("NATIVE INSERT UPDATE");
-//			produto.setPorcao(new Double(1.99));
-//			produto.setPesoBruto(new Double(1.99));
-//			produto.setPesoLiquido(new Double(1.99));
-			produto.setModoUso("NATIVE INSERT UPDATE");
-			produto.setParentId(id);
-			produto.setEmprId(1);
-			produto.setModifyDateUTC(a.getTime());
-			produto.setCreateDateUTC(a.getTime());
-			produto.setCreateUser("system");
-			produto.setModifyUser("system");
-			produto.setProcessId(1);
-			produto.setModelAction(action);
-
-			return produto;
-		}
 
 
 
