@@ -1,6 +1,5 @@
 package com.qat.samples.sysmgmt.produto.model;
 
-import com.qat.samples.sysmgmt.fiscal.model.Classificacao;
 import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 

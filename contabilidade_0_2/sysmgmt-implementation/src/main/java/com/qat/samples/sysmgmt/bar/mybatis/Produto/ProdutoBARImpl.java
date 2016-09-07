@@ -789,7 +789,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 		produtoempresa.setProcessId(produtoempresa.getTransactionId());
 		
-		if (!ValidationUtil.isNullOrZero(produtoempresa.getProdId().getId()))
+		if (ValidationUtil.isNullOrZero(produtoempresa.getProdId().getId()))
 		{
 			ProdutoBARD.maintainProdutoAssociations(produtoempresa.getProdId(), response,null,  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
 					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
@@ -800,25 +800,30 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 			if (!ValidationUtil.isNull(produtoempresa.getTributacao().getCofins()))
 			{
+				produtoempresa.getTributacao().getCofins().setProdId(produtoempresa.getProdId().getId());
 				CofinsBARD.maintainCofinsAssociations(produtoempresa.getTributacao().getCofins(), response,null,  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
 					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
 			}
 			if (!ValidationUtil.isNull(produtoempresa.getTributacao().getIcms()))
 			{
+				produtoempresa.getTributacao().getIcms().setProdId(produtoempresa.getProdId().getId());
 				IcmsBARD.maintainIcmsAssociations(produtoempresa.getTributacao().getIcms(), response,null,  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
 						getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
 			}
 			if (!ValidationUtil.isNull(produtoempresa.getTributacao().getIpi()))
 			{
+				produtoempresa.getTributacao().getIpi().setProdId(produtoempresa.getProdId().getId());
 				IpiBARD.maintainIpiAssociations(produtoempresa.getTributacao().getIpi(), response,null,  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
 						getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
 			}
 			if (!ValidationUtil.isNull(produtoempresa.getTributacao().getPis()))
 			{
+				produtoempresa.getTributacao().getPis().setProdId(produtoempresa.getProdId().getId());
 				PisBARD.maintainPisAssociations(produtoempresa.getTributacao().getPis(), response,null,  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
 						getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
 			}
 			
+			produtoempresa.getTributacao().setProdId(produtoempresa.getProdId().getId());
 			TributacaoBARD.maintainTributacaoAssociations(produtoempresa.getTributacao(), response,null,  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
 					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
 			

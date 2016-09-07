@@ -27,6 +27,7 @@
     <result property="foto" column="foto"/>
     <result property="pessoaTypeEnumValue" column="pessoaTypeEnum"/>
     <result property="sexo" column="sexo"/>
+    <result property="emprId" column="emprId"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -53,6 +54,7 @@ nome
 ,foto
 ,pessoaTypeEnum
 ,sexo
+,emprId
 ,create_date
 ,create_user
 ,modify_date
@@ -70,6 +72,7 @@ nome
 #{foto},
 #{pessoaTypeEnumValue},
 #{sexo},
+#{emprId},
 		#{createDateUTC},
 		#{createUser},
 		#{modifyDateUTC},
