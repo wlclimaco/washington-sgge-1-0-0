@@ -10,6 +10,7 @@ import com.qat.samples.sysmgmt.clinica.model.request.ClinicaMaintenanceRequest;
 import com.qat.samples.sysmgmt.condominio.model.Condominio;
 import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
 import com.qat.samples.sysmgmt.condominio.model.request.CondominioMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.TransactionInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
@@ -461,6 +462,7 @@ public interface IEmpresaBAC
 	public InternalResultsResponse<Condominio> fetchCondominiosByRequest(CondominioInquiryRequest request);
 
 
-	public InternalResultsResponse<Transaction> fetchTransactionById(FetchByIdRequest request);
+	public InternalResultsResponse<Transaction> fetchTransactionById(TransactionInquiryRequest request);
+
 
 }

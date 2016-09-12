@@ -79,9 +79,9 @@ public IProdutoBAR getProdutoBAR()
 @Test
 	public void testDeleteProdutoEmpresa()
 	{
-		ProdutoEmpresa ProdutoEmpresa = Objects.insertProdutoParent(4, TabelaEnum.PRODUTOPARENT, PersistenceActionEnum.INSERT);
+		ProdutoEmpresa ProdutoEmpresa = Objects.insertProdutoParent(4000, TabelaEnum.PRODUTOPARENT, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(4000);
 		ProdutoEmpresa ProdutoEmpresaResponse = getProdutoBAR().fetchProdutoEmpresaById(request);
 		Assert.assertEquals(ProdutoEmpresaResponse, null);
 		getProdutoBAR().insertProdutoEmpresa(ProdutoEmpresa);

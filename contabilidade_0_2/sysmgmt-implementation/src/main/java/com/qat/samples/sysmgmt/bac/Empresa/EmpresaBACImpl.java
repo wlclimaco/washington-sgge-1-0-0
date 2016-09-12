@@ -13,7 +13,6 @@ import com.qat.framework.model.MessageSeverity;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.SystemErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.validation.ValidationContext;
 import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
 import com.qat.framework.validation.ValidationUtil;
@@ -27,6 +26,7 @@ import com.qat.samples.sysmgmt.clinica.model.request.ClinicaMaintenanceRequest;
 import com.qat.samples.sysmgmt.condominio.model.Condominio;
 import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
 import com.qat.samples.sysmgmt.condominio.model.request.CondominioMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.TransactionInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
@@ -1453,23 +1453,6 @@ public InternalResultsResponse<Condominio> fetchCondominioById(FetchByIdRequest 
 	return response;
 }
 
-public InternalResultsResponse<Transaction> fetchTransactionById(FetchByIdRequest request)
-{
-	InternalResultsResponse<Transaction> response = new InternalResultsResponse<Transaction>();
-	// validate fetchId field
-	if (ValidationUtil.isNull(request.getFetchId()))
-	{
-		response.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
-		response.setStatus(SystemErrorCategory.SystemValidation);
-	}
-	else
-	{
-		response.getResultsList().add(getEmpresaBAR().fetchTransactionById(request));
-	}
-
-	return response;
-}
-
 /*
  * (non-Javadoc)
  * @see com.qat.samples.sysmgmt.bac.ICondominioBAC#fetchCondominiosByRequest(com.qat.samples.sysmgmt.model.request.
@@ -1574,5 +1557,10 @@ private InternalResultsResponse<Condominio> processCondominio(ValidationContextI
 		{
 			return new InternalResultsResponse<Condominio>();
 		}
+	}
+
+	@Override
+	public InternalResultsResponse<Transaction> fetchTransactionById(TransactionInquiryRequest request) {
+		return getEmpresaBAR().fetchTransactionById(request);
 	}
 }

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 13/05/2016 17:59 : 56-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TransactionMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly.
+       private String token;
+
+	private Long inicioSession;
+
+	private Long finalSession;-->
+  <resultMap id="TransactionResult" type="Transaction">
+    <result property="id" column="id"/>
+    <result property="token" column="token"/>
+    <result property="inicioSession" column="inicioSession"/>
+    <result property="finalSession" column="finalSession"/>
+    <result property="userId" column="userId"/>
+	<result property="emprId" column="emprId"/>
+	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
+
+  <sql id="allTransactionColumns">
+token
+,inicioSession
+,finalSession
+,userId
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allTransactionValues">
+#{token},
+#{inicioSession},
+#{finalSession},
+#{userId},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllTransactions" resultMap="TransactionResult">
+    SELECT id,
+	<include refid="allTransactionColumns" />
+   FROM transaction ORDER BY id ASC
+ </select>
+
+ <select id="fetchTransactionById" parameterType="Integer" resultMap="TransactionResult">
+    SELECT id,
+	<include refid="allTransactionColumns" />
+   FROM transaction WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllTransactionsRequest" parameterType="TransactionInquiryRequest" resultMap="TransactionResult">
+
+		SELECT id,<include refid="allTransactionColumns" />
+  		  FROM transaction where 0 = 0  <if test="transaction.id != null"> and id = #{transaction.id}</if> ORDER BY id ASC
+
+</select>
+
+<select id="fetchTransactionRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM transaction WHERE id IS NOT NULL
+		<if test="transaction.id != null"> and id = #{transaction.id}</if>
+
+ </select>
+
+ <insert id="insertTransaction" parameterType="Transaction" useGeneratedKeys="true" keyProperty="id">
+ 	INSERT INTO transaction (
+	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allTransactionColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allTransactionValues" /> )
+ </insert>
+
+ <update id="updateTransaction" parameterType="Transaction">
+   UPDATE transaction SET
+<if test="token!= null">token = #{token},</if>
+<if test="inicioSession!= null">inicioSession = #{inicioSession},</if>
+<if test="finalSession!= null">finalSession = #{finalSession},</if>
+<if test="userId null">userId = #{userId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteTransactionById" parameterType="Transaction">
+  DELETE FROM transaction WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllTransactions">
+	DELETE FROM transaction
+  </delete>
+</mapper>
+
+

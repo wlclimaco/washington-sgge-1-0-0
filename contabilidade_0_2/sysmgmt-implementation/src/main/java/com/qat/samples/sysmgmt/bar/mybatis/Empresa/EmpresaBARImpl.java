@@ -34,6 +34,7 @@ import com.qat.samples.sysmgmt.clinica.model.Clinica;
 import com.qat.samples.sysmgmt.clinica.model.request.ClinicaInquiryRequest;
 import com.qat.samples.sysmgmt.condominio.model.Condominio;
 import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.TransactionInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
@@ -539,6 +540,63 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	}
 
+	@Override
+	public InternalResultsResponse<Transaction> fetchTransactionById(TransactionInquiryRequest request) {
+
+		InternalResponse response1 = new InternalResponse();
+
+		MyBatisBARHelper.doInsert(getSqlSession(), "TransactionMap.insertTransaction", request.getTransaction(), response1);
+
+
+		InternalResultsResponse<Transaction> response = new InternalResultsResponse<Transaction>();
+		fetchTransactionByRequest(getSqlSession(), request, "TransactionMap.fetchTransactionRowCount", "TransactionMap.fetchAllTransactionsRequest",
+				response);
+		return response;
+	}
+	// ===================================### fetchEmpresasByRequest
+		// ####======================================
+
+		public static void fetchTransactionByRequest(SqlSession sqlSession, TransactionInquiryRequest request,
+				String countStatement, String fetchPagedStatement, InternalResultsResponse<?> response) {
+
+			// If the user requested the total rows/record count
+			if (request.isPreQueryCount()) {
+				// set the total rows available in the response
+				response.getResultsSetInfo().setTotalRowsAvailable(
+						(Integer) MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+				if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO) {
+					response.setStatus(BusinessErrorCategory.NoRowsFound);
+					return;
+				}
+			}
+
+			// Fetch Objects by InquiryRequest Object, paged of course
+			response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+			// move request start page to response start page
+			response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+			// move request page size to response page size
+			response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+			// calculate correct startPage for more rows available comparison, since
+			// it is zero based, we have to offset by
+			// 1.
+			int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+			// set moreRowsAvailable in response based on total rows compared to
+			// (page size * start page)
+			// remember if the count was not requested the TotalRowsAvailable will
+			// be false because the assumption
+			// is that you your own logic to handle this.
+			if (response.getResultsSetInfo()
+					.getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage)) {
+				response.getResultsSetInfo().setMoreRowsAvailable(true);
+			}
+
+		}
+
 	// ===================================### FILIAL
 	// ####======================================
 	/**
@@ -626,19 +684,6 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	@Override
 	public Filial fetchFilialById(FetchByIdRequest request) {
 		return (Filial) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_FILIAL, request.getFetchId());
-
-	}
-
-
-	@Override
-	public Transaction fetchTransactionById(FetchByIdRequest request) {
-
-		InternalResponse response = new InternalResponse();
-
-		MyBatisBARHelper.doInsert(getSqlSession(), "", request.getTransaction(), response);
-
-
-		return (Transaction) MyBatisBARHelper.doQueryForObject(getSqlSession(), "", request.getFetchId());
 
 	}
 
@@ -1430,5 +1475,7 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 		}
 
 	}
+
+
 
 }

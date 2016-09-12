@@ -36,6 +36,7 @@ import com.qat.samples.sysmgmt.cnae.model.Cnae;
 import com.qat.samples.sysmgmt.cnae.model.CnaeEmpresa;
 import com.qat.samples.sysmgmt.condominio.model.Condominio;
 import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.TransactionInquiryRequest;
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
 import com.qat.samples.sysmgmt.entidade.model.Boleto;
 import com.qat.samples.sysmgmt.entidade.model.ConfigAlertas;
@@ -52,6 +53,7 @@ import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.EntidadeTypeEnum;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
+import com.qat.samples.sysmgmt.entidade.model.Transaction;
 import com.qat.samples.sysmgmt.entidade.model.Usuario;
 import com.qat.samples.sysmgmt.entidade.model.criteria.FilialCriteria;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
@@ -155,6 +157,17 @@ public IEmpresaBAR getEmpresaBAR()
 	@Test
 	public void testFetchEmpresasByRequest() throws Exception
 	{
+
+		TransactionInquiryRequest request1 = new TransactionInquiryRequest();
+		request1.setTransaction(new Transaction("tolen001Test",(new Date()).getTime(),"system"));
+		request1.setPreQueryCount(true);
+		request1.setStartPage(0);
+		request1.setPageSize(3);
+
+		InternalResultsResponse<Transaction> response1 = getEmpresaBAR().fetchTransactionById(request1);
+		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response1.getResultsSetInfo().getPageSize() == 3);
+		Assert.assertTrue(response1.getResultsSetInfo().getTotalRowsAvailable() > 0);
 		// check for valid and precount
 		EmpresaInquiryRequest request = new EmpresaInquiryRequest();
 		request.setPreQueryCount(true);

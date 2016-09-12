@@ -27,10 +27,13 @@ import com.qat.samples.sysmgmt.clinica.model.response.ClinicaResponse;
 import com.qat.samples.sysmgmt.condominio.model.Condominio;
 import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
 import com.qat.samples.sysmgmt.condominio.model.request.CondominioMaintenanceRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.TransactionInquiryRequest;
 import com.qat.samples.sysmgmt.condominio.model.response.CondominioResponse;
+import com.qat.samples.sysmgmt.condominio.model.response.TransactionResponse;
 import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
+import com.qat.samples.sysmgmt.entidade.model.Transaction;
 import com.qat.samples.sysmgmt.entidade.model.Usuario;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoMaintenanceRequest;
@@ -897,6 +900,29 @@ public class EmpresaAPIController extends BaseController {
 					new Object[] { ex.toString() });
 		}
 		return condominioResponse;
+
+	}
+
+	/**
+	 * Delete condominio.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the condominio response
+	 */
+	@RequestMapping(value = "/transaction/fetch", method = RequestMethod.POST)
+	@ResponseBody
+	public TransactionResponse deleteCondominio(@RequestBody TransactionInquiryRequest request) {
+		TransactionResponse transactionResponse = new TransactionResponse();
+
+		try {
+			InternalResultsResponse<Transaction> internalResponse = getEmpresaBAC().fetchTransactionById(request);
+			ResponseHandler.handleOperationStatusAndMessages(transactionResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, transactionResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return transactionResponse;
 
 	}
 

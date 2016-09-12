@@ -8,6 +8,7 @@ import com.qat.samples.sysmgmt.clinica.model.Clinica;
 import com.qat.samples.sysmgmt.clinica.model.request.ClinicaInquiryRequest;
 import com.qat.samples.sysmgmt.condominio.model.Condominio;
 import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
+import com.qat.samples.sysmgmt.condominio.model.request.TransactionInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
@@ -33,7 +34,6 @@ public interface IEmpresaBAR
 */
 	public Empresa fetchEmpresaById(FetchByIdRequest request);
 
-	public Transaction fetchTransactionById(FetchByIdRequest request);
 
 	/**
 * Insert empresa.
@@ -425,5 +425,7 @@ public interface IEmpresaBAR
 * @return the internal results response
 */
 	public InternalResultsResponse<Advocacia> fetchAdvocaciasByRequest(AdvocaciaInquiryRequest request);
+
+	public InternalResultsResponse<Transaction> fetchTransactionById(TransactionInquiryRequest request);
 
 }
