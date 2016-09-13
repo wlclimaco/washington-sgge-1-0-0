@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.dicionario.Field;
+import com.qat.samples.sysmgmt.entidade.model.Field;
 
 public class FieldResponse extends InquiryResponse
 {
