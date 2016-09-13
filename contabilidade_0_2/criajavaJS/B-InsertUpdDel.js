@@ -116,9 +116,16 @@ for(i=0;i < oField.length;i++){
 			if(oField[i].field.tipo.indexOf('List') == -1){
 				if(oField[i].field.campo.toLowerCase() !== 'id'){
 					if(oField[i].field.requerid == true){
-						a = a + oField[i].field.campo+' '+convertBanco(oField[i].field.tipo,100)+' NOT NULL,\n'
+				
+						if(oField[i].field.default != null)
+							a = a + oField[i].field.campo+' '+convertBanco(oField[i].field.tipo,100)+' NOT NULL  DEFAULT '+oField[i].field.default+',\n'
+						else
+							a = a + oField[i].field.campo+' '+convertBanco(oField[i].field.tipo,100)+' NOT NULL ,\n'
 					}else{
-						a = a + oField[i].field.campo+' '+convertBanco(oField[i].field.tipo,100)+' ,\n';
+						if(oField[i].field.default != null)
+							a = a + oField[i].field.campo+' '+convertBanco(oField[i].field.tipo,100)+'  DEFAULT '+oField[i].field.default+',\n';
+						else
+							a = a + oField[i].field.campo+' '+convertBanco(oField[i].field.tipo,100)+' ,\n';
 					}
 				}
 			}

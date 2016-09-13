@@ -1,3 +1,490 @@
+//Boleto    
+function user_rolesModel() {
+    a = [];
+    a.push({
+        field: {
+            campo: "user_role_id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "username",
+            default : 0,
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "role",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
+
+//Boleto    
+function rolesModel() {
+    a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "role",
+            default : 0,
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "status",
+            default : 0,
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "pagina",
+            tipo: "Pagina",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
+
+//Boleto    
+function paginaModel() {
+    a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "pagina",
+            default : "",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "status",
+            default : 0,
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "menu",
+            default : 0,
+            tipo: "Menu",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "help",
+            tipo: "Help",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "filds",
+            tipo: "Field",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    return a;
+}
+
+//Boleto    
+function menuModel() {
+    a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "nome",
+            default : 0,
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "label",
+            default : 0,
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "status",
+            default : 0,
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "nivel",
+            default : 0,
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "permissao",
+            default : 0,
+            tipo: "Role",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+
+    a.push({
+        field: {
+            campo: "help",
+            tipo: "Help",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
+
+//Boleto    
+function helpModel() {
+    a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "titulo",
+            default : 0,
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "status",
+            default : 0,
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "texto",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
+
+//Boleto    
+function fieldModel() {
+    a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "nome",
+            default : 0,
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "status",
+            default : 0,
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "tipo",
+            default : 0,
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "label",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "tootip",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "help",
+            tipo: "Help",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "validacao",
+            tipo: "Validacao",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+     a.push({
+        field: {
+            campo: "role",
+            tipo: "Role",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
+
+//Boleto    
+function validacaoModel() {
+    a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "Error",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "tipo",
+            default : 0,
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    return a;
+}
+
+
 //Boleto	
 function BoletoModel() {
 
@@ -16,6 +503,7 @@ function BoletoModel() {
     a.push({
         field: {
             campo: "ativarBolOnLine",
+            default : 0,
             tipo: "Integer",
             requerid: false,
             primaryKey: false,
@@ -145,6 +633,7 @@ function CarneModel() {
         field: {
             campo: "carneBotelo",
             tipo: "Integer",
+            default : 0,
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -156,6 +645,62 @@ function CarneModel() {
         field: {
             campo: "carneNormal",
             tipo: "Integer",
+            default : 0,
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "localPag",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "instr1",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "instr2",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "instr3",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "instr4",
+            tipo: "String",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -273,6 +818,7 @@ function EntradaModel() {
     a.push({
         field: {
             campo: "manterPrecoVendaProd",
+            default : 0,
             tipo: "Integer",
             requerid: false,
             primaryKey: false,
@@ -332,6 +878,61 @@ function FiscalModel() {
             xml: true
         }
     });
+    a.push({
+        field: {
+            campo: "aliqICMS",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "aliqPIS",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "aliqCONFINS",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "aliqIRPJ",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "aliqCLSS",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     return a;
 }
 
@@ -357,6 +958,7 @@ function AlertasModel() {
             requerid: false,
             primaryKey: false,
             forenkey: false,
+            default : 0,
             model: true,
             xml: true
         }
@@ -368,6 +970,7 @@ function AlertasModel() {
             requerid: false,
             primaryKey: false,
             forenkey: false,
+            default : 0,
             model: true,
             xml: true
         }
@@ -379,6 +982,7 @@ function AlertasModel() {
             requerid: false,
             primaryKey: false,
             forenkey: false,
+            default : 0,
             model: true,
             xml: true
         }
@@ -387,6 +991,84 @@ function AlertasModel() {
         field: {
             campo: "pdCompra",
             tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            default : 0,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "nvCliente",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            default : 0,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "retCaixa",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            default : 0,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
+
+//ConfigBlueSoft
+function ConfigBlueSoftModel() {
+
+    a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "ativBlue",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            default : 0,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "url",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "token",
+            tipo: "String",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -500,6 +1182,114 @@ function GeralModel() {
             xml: true
         }
     });
+    a.push({
+        field: {
+            campo: "ativNFCe",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            default : 0,
+            xml: true
+        }
+    });
+    return a;
+}
+
+    //ConfigBlueSoft
+function ConfigOSModel() {
+
+    a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "impr2Via",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            default : 0,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "imprAss",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            default : 0,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "imprResumo",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            default : 0,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "imprDetHorz",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            default : 0,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "diasGarantia",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            default : 0,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "observ",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    
     return a;
 }
 
@@ -947,6 +1737,7 @@ function SMTPModel() {
             xml: true
         }
     });
+
     a.push({
         field: {
             campo: "seguranca",
@@ -954,6 +1745,18 @@ function SMTPModel() {
             requerid: false,
             primaryKey: false,
             forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "ativSMTP",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            default:0,
             model: true,
             xml: true
         }
@@ -1177,8 +1980,19 @@ function ConfNFEModel() {
     });
     a.push({
         field: {
-            campo: "confSMTP",
-            tipo: "ConfigSMTP",
+            campo: "tokenNFCe",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "logoDanfe",
+            tipo: "String",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -1336,6 +2150,18 @@ function ConfiguracaoModel() {
             xml: true
         }
     });
+    
+    a.push({
+        field: {
+            campo: "confCabecalho",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "confGeral",
@@ -1404,6 +2230,17 @@ function ConfiguracaoModel() {
     });
     a.push({
         field: {
+            campo: "confAlertas",
+            tipo: "ConfigAlertas",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
             campo: "confEntrada",
             tipo: "ConfigEntrada",
             requerid: false,
@@ -1417,6 +2254,28 @@ function ConfiguracaoModel() {
         field: {
             campo: "confCarne",
             tipo: "ConfigCarne",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "configOS",
+            tipo: "ConfigOS",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "confBlueSoft",
+            tipo: "ConfigBlueSoft",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -8869,6 +9728,21 @@ function dependenciaConf() {
         campos: ConfiguracaoModel()
     });
 
+    a.push({
+        dependencia: "configOS",
+        campos: ConfigOSModel()
+    });
+
+    a.push({
+        dependencia: "confAlertas",
+        campos: AlertasModel()
+    });
+
+    a.push({
+        dependencia: "confBlueSoft",
+        campos: ConfigBlueSoftModel()
+    });
+
     return a
 }
 
@@ -9417,7 +10291,7 @@ dataModel = function() {
 
     oProjet.push({
         classes: [{
-            classe: "Empresa",
+            classe: "Empresa"
             model: EmpresaModel(),
             dependencias: dependenciaEmpresa()
         }, {
@@ -9432,6 +10306,27 @@ dataModel = function() {
             classe: "Usuario",
             model: UsuarioModel(),
             dependencias: dependenciaUsuario()
+        }, {
+            classe: "UserRoles",
+            model: user_rolesModel()
+        }, {
+            classe: "Role",
+            model: rolesModel()
+        }, {
+            classe: "Pagina",
+            model: paginaModel()
+        }, {
+            classe: "Validacao",
+            model: validacaoModel()
+        }, {
+            classe: "Field",
+            model: fieldModel()
+        }, {
+            classe: "Ajuda",
+            model: helpModel()
+        }, {
+            classe: "Menu",
+            model: menuModel()
         }, {
             classe: "Advocacia",
             model: AdvocaciaModel(),
@@ -9867,6 +10762,15 @@ dataModel = function() {
         }, {
             classe: "ConfigVendas",
             model: VendasModel()
+        }, {
+            classe: "ConfigOS",
+            model: ConfigOSModel()
+        }, {
+            classe: "ConfAlertas",
+            model: AlertasModel()
+        }, {
+            classe: "ConfBlueSoft",
+            model: ConfigBlueSoftModel()
         }
         ],
         interfaces: "Configuracao",
