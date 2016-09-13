@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 13/09/2016 13:56 : 36-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ValidacaoMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="ValidacaoResult" type="Validacao">
+    <result property="id" column="id"/>
+    <result property="Error" column="Error"/>
+    <result property="tipo" column="tipo"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
+
+  <sql id="allValidacaoColumns">
+,Error
+,tipo
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allValidacaoValues">
+#{Error},
+#{tipo},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllValidacaos" resultMap="ValidacaoResult">
+    SELECT id,
+ <include refid="allValidacaoColumns" />
+   FROM validacao ORDER BY id ASC
+ </select>
+
+ <select id="fetchValidacaoById" parameterType="Integer" resultMap="ValidacaoResult">
+    SELECT id,
+ <include refid="allValidacaoColumns" />
+   FROM validacao WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllValidacaosRequest" parameterType="ValidacaoInquiryRequest" resultMap="ValidacaoResult">
+
+     SELECT id,<include refid="allValidacaoColumns" />
+           FROM validacao where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchValidacaoRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM validacao WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+
+ </select>
+
+ <insert id="insertValidacao" parameterType="Validacao" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO validacao (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allValidacaoColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allValidacaoValues" /> )
+ </insert>
+
+ <update id="updateValidacao" parameterType="Validacao">
+   UPDATE validacao SET
+<if test="Error!= null">Error = #{Error},</if>
+<if test="tipo!= null">tipo = #{tipo},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteValidacaoById" parameterType="Validacao">
+  DELETE FROM validacao WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllValidacaos">
+ DELETE FROM validacao
+  </delete>
+</mapper>
+
+

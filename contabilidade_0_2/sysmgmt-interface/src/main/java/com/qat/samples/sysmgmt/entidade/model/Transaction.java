@@ -1,12 +1,5 @@
 package com.qat.samples.sysmgmt.entidade.model;
 
-import java.util.Date;
-import java.util.List;
-
-import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
-import com.qat.samples.sysmgmt.contabilidade.model.Plano;
-import com.qat.samples.sysmgmt.site.model.PlanoByEmpresa;
-
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -22,8 +15,6 @@ public class Transaction extends Entidade
 	private Long inicioSession;
 
 	private Long finalSession;
-
-
 
 	public Transaction()
 	{

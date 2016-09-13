@@ -14,6 +14,14 @@
 
     	<typeAlias alias="PlanoByEmpresa" type="com.qat.samples.sysmgmt.site.model.PlanoByEmpresa" />
 
+    	<typeAlias alias="Ajuda" type="com.qat.samples.sysmgmt.entidade.model.Ajuda" />
+    	<typeAlias alias="Menu" type="com.qat.samples.sysmgmt.entidade.model.Menu" />
+    	<typeAlias alias="Pagina" type="com.qat.samples.sysmgmt.entidade.model.Pagina" />
+    	<typeAlias alias="Role" type="com.qat.samples.sysmgmt.entidade.model.Role" />
+    	<typeAlias alias="UserRoles" type="com.qat.samples.sysmgmt.entidade.model.UserRoles" />
+    	<typeAlias alias="Validacao" type="com.qat.samples.sysmgmt.entidade.model.Validacao" />
+
+
     	<typeAlias alias="Transaction" type="com.qat.samples.sysmgmt.entidade.model.Transaction" />
     	<typeAlias alias="TransactionInquiryRequest" type="com.qat.samples.sysmgmt.condominio.model.request.TransactionInquiryRequest" />
 
@@ -478,6 +486,13 @@
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/pis.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/ipi.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/transaction.xml" />
+
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/ajuda.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/menu.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/pagina.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/role.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/userRoles.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/validacao.xml" />
     </mappers>
 
 </configuration>

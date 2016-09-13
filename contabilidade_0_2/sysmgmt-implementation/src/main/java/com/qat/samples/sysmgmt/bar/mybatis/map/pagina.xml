@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 13/09/2016 13:56 : 36-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PaginaMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="PaginaResult" type="Pagina">
+    <result property="id" column="id"/>
+    <result property="pagina" column="pagina"/>
+    <result property="status" column="status"/>
+
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+<collection property="menu" column="menu" select="RegimeMap.fetchRegimeById"/>
+    <collection property="help" column="help" select="RegimeMap.fetchRegimeById"/>
+    <collection property="filds" column="filds" select="RegimeMap.fetchRegimeById"/>
+  </resultMap>
+
+  <sql id="allPaginaColumns">
+,pagina
+,status
+,menu
+,help
+,filds
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allPaginaValues">
+#{pagina},
+#{status},
+#{menu.id},
+#{help.id},
+#{filds.id},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllPaginas" resultMap="PaginaResult">
+    SELECT id,
+ <include refid="allPaginaColumns" />
+   FROM pagina ORDER BY id ASC
+ </select>
+
+ <select id="fetchPaginaById" parameterType="Integer" resultMap="PaginaResult">
+    SELECT id,
+ <include refid="allPaginaColumns" />
+   FROM pagina WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllPaginasRequest" parameterType="PaginaInquiryRequest" resultMap="PaginaResult">
+
+     SELECT id,<include refid="allPaginaColumns" />
+           FROM pagina where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchPaginaRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM pagina WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+
+ </select>
+
+ <insert id="insertPagina" parameterType="Pagina" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO pagina (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allPaginaColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allPaginaValues" /> )
+ </insert>
+
+ <update id="updatePagina" parameterType="Pagina">
+   UPDATE pagina SET
+<if test="pagina!= null">pagina = #{pagina},</if>
+<if test="status!= null">status = #{status},</if>
+<if test="menu!= null">menu = #{menu.id},</if>
+<if test="help!= null">help = #{help.id},</if>
+<if test="filds!= null">filds = #{filds.id},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deletePaginaById" parameterType="Pagina">
+  DELETE FROM pagina WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllPaginas">
+ DELETE FROM pagina
+  </delete>
+</mapper>
+
+

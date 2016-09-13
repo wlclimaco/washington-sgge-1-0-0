@@ -11,21 +11,37 @@ import com.qat.samples.sysmgmt.condominio.model.Condominio;
 import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
 import com.qat.samples.sysmgmt.condominio.model.request.CondominioMaintenanceRequest;
 import com.qat.samples.sysmgmt.condominio.model.request.TransactionInquiryRequest;
+import com.qat.samples.sysmgmt.dicionario.request.FieldInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.Ajuda;
 import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
+import com.qat.samples.sysmgmt.entidade.model.Field;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
+import com.qat.samples.sysmgmt.entidade.model.Menu;
+import com.qat.samples.sysmgmt.entidade.model.Pagina;
+import com.qat.samples.sysmgmt.entidade.model.Role;
 import com.qat.samples.sysmgmt.entidade.model.Transaction;
+import com.qat.samples.sysmgmt.entidade.model.UserRoles;
 import com.qat.samples.sysmgmt.entidade.model.Usuario;
+import com.qat.samples.sysmgmt.entidade.model.Validacao;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.request.AjudaMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.util.model.request.FieldMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.request.MenuMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.PaginaMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
+import com.qat.samples.sysmgmt.util.model.request.RoleMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.request.UserRolesMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.UsuarioMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.request.ValidacaoMaintenanceRequest;
 
 /**
  * The Interface IEmpresaBAC. (Business Area Component - BAC)
@@ -463,6 +479,433 @@ public interface IEmpresaBAC
 
 
 	public InternalResultsResponse<Transaction> fetchTransactionById(TransactionInquiryRequest request);
+
+
+	//===================================### USERROLES ####======================================
+		/**
+
+		/**
+		 * Insert userroles.
+		 *
+	* @param request the userroles maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<UserRoles> insertUserRoles(UserRolesMaintenanceRequest request);
+
+		/**
+	* Update userroles.
+	*
+	* @param request the userroles maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<UserRoles> updateUserRoles(UserRolesMaintenanceRequest request);
+
+		/**
+	* Delete userroles.
+	*
+	* @param request the userroles maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<UserRoles> deleteUserRoles(UserRolesMaintenanceRequest request);
+
+		/**
+	* Refresh userroless.
+	*
+	* @param request containing the number to refresh with and whether to return the result
+	*/
+		public InternalResultsResponse<UserRoles> refreshUserRoless(RefreshRequest request);
+
+		/**
+	* Fetch userroles by id.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<UserRoles> fetchUserRolesById(FetchByIdRequest request);
+
+		/**
+	* Fetch all userroless.
+	*
+	* @return the internal results response< userroles>
+	*/
+		public InternalResultsResponse<UserRoles> fetchAllUserRoless(UserRoles  userroles);
+
+		/**
+	* Fetch userroless by request.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<UserRoles> fetchUserRolessByRequest(PagedInquiryRequest request);
+
+
+	//===================================### ROLE ####======================================
+		/**
+
+		/**
+		 * Insert role.
+		 *
+	* @param request the role maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Role> insertRole(RoleMaintenanceRequest request);
+
+		/**
+	* Update role.
+	*
+	* @param request the role maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Role> updateRole(RoleMaintenanceRequest request);
+
+		/**
+	* Delete role.
+	*
+	* @param request the role maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Role> deleteRole(RoleMaintenanceRequest request);
+
+		/**
+	* Refresh roles.
+	*
+	* @param request containing the number to refresh with and whether to return the result
+	*/
+		public InternalResultsResponse<Role> refreshRoles(RefreshRequest request);
+
+		/**
+	* Fetch role by id.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Role> fetchRoleById(FetchByIdRequest request);
+
+		/**
+	* Fetch all roles.
+	*
+	* @return the internal results response< role>
+	*/
+		public InternalResultsResponse<Role> fetchAllRoles(Role  role);
+
+		/**
+	* Fetch roles by request.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Role> fetchRolesByRequest(PagedInquiryRequest request);
+
+
+	//===================================### PAGINA ####======================================
+		/**
+
+		/**
+		 * Insert pagina.
+		 *
+	* @param request the pagina maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Pagina> insertPagina(PaginaMaintenanceRequest request);
+
+		/**
+	* Update pagina.
+	*
+	* @param request the pagina maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Pagina> updatePagina(PaginaMaintenanceRequest request);
+
+		/**
+	* Delete pagina.
+	*
+	* @param request the pagina maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Pagina> deletePagina(PaginaMaintenanceRequest request);
+
+		/**
+	* Refresh paginas.
+	*
+	* @param request containing the number to refresh with and whether to return the result
+	*/
+		public InternalResultsResponse<Pagina> refreshPaginas(RefreshRequest request);
+
+		/**
+	* Fetch pagina by id.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Pagina> fetchPaginaById(FetchByIdRequest request);
+
+		/**
+	* Fetch all paginas.
+	*
+	* @return the internal results response< pagina>
+	*/
+		public InternalResultsResponse<Pagina> fetchAllPaginas(Pagina  pagina);
+
+		/**
+	* Fetch paginas by request.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Pagina> fetchPaginasByRequest(PagedInquiryRequest request);
+
+
+	//===================================### VALIDACAO ####======================================
+		/**
+
+		/**
+		 * Insert validacao.
+		 *
+	* @param request the validacao maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Validacao> insertValidacao(ValidacaoMaintenanceRequest request);
+
+		/**
+	* Update validacao.
+	*
+	* @param request the validacao maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Validacao> updateValidacao(ValidacaoMaintenanceRequest request);
+
+		/**
+	* Delete validacao.
+	*
+	* @param request the validacao maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Validacao> deleteValidacao(ValidacaoMaintenanceRequest request);
+
+		/**
+	* Refresh validacaos.
+	*
+	* @param request containing the number to refresh with and whether to return the result
+	*/
+		public InternalResultsResponse<Validacao> refreshValidacaos(RefreshRequest request);
+
+		/**
+	* Fetch validacao by id.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Validacao> fetchValidacaoById(FetchByIdRequest request);
+
+		/**
+	* Fetch all validacaos.
+	*
+	* @return the internal results response< validacao>
+	*/
+		public InternalResultsResponse<Validacao> fetchAllValidacaos(Validacao  validacao);
+
+		/**
+	* Fetch validacaos by request.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Validacao> fetchValidacaosByRequest(PagedInquiryRequest request);
+
+
+	//===================================### FIELD ####======================================
+		/**
+
+		/**
+		 * Insert field.
+		 *
+	* @param request the field maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Field> insertField(FieldMaintenanceRequest request);
+
+		/**
+	* Update field.
+	*
+	* @param request the field maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Field> updateField(FieldMaintenanceRequest request);
+
+		/**
+	* Delete field.
+	*
+	* @param request the field maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Field> deleteField(FieldMaintenanceRequest request);
+
+		/**
+	* Refresh fields.
+	*
+	* @param request containing the number to refresh with and whether to return the result
+	*/
+		public InternalResultsResponse<Field> refreshFields(RefreshRequest request);
+
+		/**
+	* Fetch field by id.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Field> fetchFieldById(FetchByIdRequest request);
+
+		/**
+	* Fetch all fields.
+	*
+	* @return the internal results response< field>
+	*/
+		public InternalResultsResponse<Field> fetchAllFields(Field  field);
+
+		/**
+	* Fetch fields by request.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Field> fetchFieldsByRequest(FieldInquiryRequest request);
+
+
+	//===================================### AJUDA ####======================================
+		/**
+
+		/**
+		 * Insert ajuda.
+		 *
+	* @param request the ajuda maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Ajuda> insertAjuda(AjudaMaintenanceRequest request);
+
+		/**
+	* Update ajuda.
+	*
+	* @param request the ajuda maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Ajuda> updateAjuda(AjudaMaintenanceRequest request);
+
+		/**
+	* Delete ajuda.
+	*
+	* @param request the ajuda maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Ajuda> deleteAjuda(AjudaMaintenanceRequest request);
+
+		/**
+	* Refresh ajudas.
+	*
+	* @param request containing the number to refresh with and whether to return the result
+	*/
+		public InternalResultsResponse<Ajuda> refreshAjudas(RefreshRequest request);
+
+		/**
+	* Fetch ajuda by id.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Ajuda> fetchAjudaById(FetchByIdRequest request);
+
+		/**
+	* Fetch all ajudas.
+	*
+	* @return the internal results response< ajuda>
+	*/
+		public InternalResultsResponse<Ajuda> fetchAllAjudas(Ajuda  ajuda);
+
+		/**
+	* Fetch ajudas by request.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Ajuda> fetchAjudasByRequest(PagedInquiryRequest request);
+
+
+	//===================================### MENU ####======================================
+		/**
+
+		/**
+		 * Insert menu.
+		 *
+	* @param request the menu maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Menu> insertMenu(MenuMaintenanceRequest request);
+
+		/**
+	* Update menu.
+	*
+	* @param request the menu maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Menu> updateMenu(MenuMaintenanceRequest request);
+
+		/**
+	* Delete menu.
+	*
+	* @param request the menu maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Menu> deleteMenu(MenuMaintenanceRequest request);
+
+		/**
+	* Refresh menus.
+	*
+	* @param request containing the number to refresh with and whether to return the result
+	*/
+		public InternalResultsResponse<Menu> refreshMenus(RefreshRequest request);
+
+		/**
+	* Fetch menu by id.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Menu> fetchMenuById(FetchByIdRequest request);
+
+		/**
+	* Fetch all menus.
+	*
+	* @return the internal results response< menu>
+	*/
+		public InternalResultsResponse<Menu> fetchAllMenus(Menu  menu);
+
+		/**
+	* Fetch menus by request.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Menu> fetchMenusByRequest(PagedInquiryRequest request);
 
 
 }

@@ -260,22 +260,34 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	INTERFACE(73, "sendsolv.base.model.risklevelenum.medium"),
 
 	FIELD(73, "sendsolv.base.model.risklevelenum.medium"),
-	
+
 	PLANOBYEMPRESA(73, "sendsolv.base.model.risklevelenum.medium"),
 
 	CONFIGVENDAS(73, "sendsolv.base.model.risklevelenum.medium"),
-	
+
 	ICMS(73, "sendsolv.base.model.risklevelenum.medium"),
-	
+
 	PIS(73, "sendsolv.base.model.risklevelenum.medium"),
-	
+
 	IPI(73, "sendsolv.base.model.risklevelenum.medium"),
-	
+
 	COFINS(73, "sendsolv.base.model.risklevelenum.medium"),
-	
+
 	CATEGORIA(73, "sendsolv.base.model.risklevelenum.medium"),
-	
-	PRODUTOEMPRESA(73, "sendsolv.base.model.risklevelenum.medium");
+
+	PRODUTOEMPRESA(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	ROLE(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	PAGINA(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	VALIDACAO(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	AJUDA(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	MENU(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	USERROLES(73, "sendsolv.base.model.risklevelenum.medium");
 
 
 

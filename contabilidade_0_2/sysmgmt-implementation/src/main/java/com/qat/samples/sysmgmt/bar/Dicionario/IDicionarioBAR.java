@@ -2,11 +2,11 @@ package com.qat.samples.sysmgmt.bar.Dicionario;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.dicionario.Classes;
-import com.qat.samples.sysmgmt.dicionario.Field;
 import com.qat.samples.sysmgmt.dicionario.Interface;
 import com.qat.samples.sysmgmt.dicionario.request.ClassesInquiryRequest;
 import com.qat.samples.sysmgmt.dicionario.request.FieldInquiryRequest;
 import com.qat.samples.sysmgmt.dicionario.request.InterfaceInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.Field;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 
 /**

@@ -3,8 +3,8 @@ package com.qat.samples.sysmgmt.dicionario;
 import java.util.Date;
 import java.util.List;
 
+import com.qat.samples.sysmgmt.entidade.model.Field;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
-import com.qat.samples.sysmgmt.util.model.Note;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
