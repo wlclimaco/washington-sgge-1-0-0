@@ -1,11 +1,13 @@
 package com.qat.samples.sysmgmt.entidade.model;
 
+import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
+
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
  */
 @SuppressWarnings("serial")
-public class Transaction extends Entidade
+public class Transaction extends ModelCosmeDamiao
 {
 
 	private Integer id;

@@ -7,7 +7,7 @@ public class FormaPgMaintenanceRequest extends UtilMaintenanceRequest
 {
 
 	/** Attributes. */
-	private FormaPg financeiro;
+	private FormaPg formaPg;
 
 	/**
 	 * The Constructor.
@@ -17,25 +17,18 @@ public class FormaPgMaintenanceRequest extends UtilMaintenanceRequest
 
 	}
 
-	/**
-	 * @return the financeiro
-	 */
-	public FormaPg getFormaPg()
-	{
-		return financeiro;
+	public FormaPg getFormaPg() {
+		return formaPg;
 	}
 
-	/**
-	 * @param financeiro the financeiro to set
-	 */
-	public void setFormaPg(FormaPg financeiro)
-	{
-		this.financeiro = financeiro;
+	public void setFormaPg(FormaPg formaPg) {
+		this.formaPg = formaPg;
 	}
 
 	@Override
 	public String toString() {
-		return "FormaPgMaintenanceRequest [getFormaPg()=" + getFormaPg() + ", toString()=" + super.toString()
-				+ "]";
+		return "FormaPgMaintenanceRequest [getFormaPg()=" + getFormaPg() + ", toString()=" + super.toString() + "]";
 	}
+
+	
 }

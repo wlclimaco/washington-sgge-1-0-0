@@ -18,7 +18,6 @@
   <resultMap id="ValidacaoResult" type="Validacao">
     <result property="id" column="id"/>
     <result property="Error" column="Error"/>
-    <result property="tipo" column="tipo"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -27,6 +26,7 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<collection property="tipo" column="tipo" select="RegimeMap.fetchRegimeById"/>
   </resultMap>
 
   <sql id="allValidacaoColumns">
@@ -44,7 +44,7 @@
 </sql>
 <sql id="allValidacaoValues">
 #{Error},
-#{tipo},
+#{tipo.id},
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -68,16 +68,16 @@
    FROM validacao WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllValidacaosRequest" parameterType="ValidacaoInquiryRequest" resultMap="ValidacaoResult">
+ <select id="fetchAllValidacaosRequest" parameterType="PagedInquiryRequest" resultMap="ValidacaoResult">
 
      SELECT id,<include refid="allValidacaoColumns" />
-           FROM validacao where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+           FROM validacao where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
        OFFSET ( #{startPage} * #{pageSize} )
        LIMIT #{pageSize}
 </select>
 
 <select id="fetchValidacaoRowCount" resultType="Integer">
-     SELECT COUNT(*) AS RECORD_COUNT FROM validacao WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+     SELECT COUNT(*) AS RECORD_COUNT FROM validacao WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 
@@ -91,7 +91,7 @@
  <update id="updateValidacao" parameterType="Validacao">
    UPDATE validacao SET
 <if test="Error!= null">Error = #{Error},</if>
-<if test="tipo!= null">tipo = #{tipo},</if>
+<if test="tipo!= null">tipo = #{tipo.id},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>

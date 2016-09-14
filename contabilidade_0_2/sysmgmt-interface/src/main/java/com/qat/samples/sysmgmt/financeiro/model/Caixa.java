@@ -2,7 +2,8 @@ package com.qat.samples.sysmgmt.financeiro.model;
 
 import java.util.List;
 
-import com.qat.samples.sysmgmt.conta.model.ContasTypeEnum;
+import com.qat.samples.sysmgmt.conta.model.Conta;
+import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -14,8 +15,14 @@ public class Caixa extends ModelCosmeDamiao
 
 	/** Attributes. */
 	private Integer id;
+	
+	private String nome;
 
 	private Double saldo;
+	
+	private Conta conta;
+	
+	private DoisValores caixaType;
 
 	private List<BaixaTitulo> baixaTituloList;
 
@@ -43,10 +50,35 @@ public class Caixa extends ModelCosmeDamiao
 		this.baixaTituloList = baixaTituloList;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public DoisValores getCaixaType() {
+		return caixaType;
+	}
+
+	public void setCaixaType(DoisValores caixaType) {
+		this.caixaType = caixaType;
+	}
+
+	public Conta getConta() {
+		return conta;
+	}
+
+	public void setConta(Conta conta) {
+		this.conta = conta;
+	}
+
 	@Override
 	public String toString() {
 		return "Caixa [getId()=" + getId() + ", getSaldo()=" + getSaldo() + ", getBaixaTituloList()="
-				+ getBaixaTituloList() + ", toString()=" + super.toString() + "]";
+				+ getBaixaTituloList() + ", getNome()=" + getNome() + ", getCaixaType()=" + getCaixaType()
+				+ ", getConta()=" + getConta() + ", toString()=" + super.toString() + "]";
 	}
 
 

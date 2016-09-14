@@ -70,10 +70,10 @@ user_role_id
    FROM userroles WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllUserRolessRequest" parameterType="UserRolesInquiryRequest" resultMap="UserRolesResult">
+ <select id="fetchAllUserRolessRequest" parameterType="PagedInquiryRequest" resultMap="UserRolesResult">
 
      SELECT id,<include refid="allUserRolesColumns" />
-           FROM userroles where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+           FROM userroles where 0 = 0 <if test="emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
        OFFSET ( #{startPage} * #{pageSize} )
        LIMIT #{pageSize}
 </select>

@@ -12,7 +12,6 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 @SuppressWarnings("serial")
 public class Field extends ModelCosmeDamiao
 {
-	private NotificationTypeEnum notificationType;
 
 	private Integer id;
 
@@ -44,16 +43,6 @@ public class Field extends ModelCosmeDamiao
 
 	public Field() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public NotificationTypeEnum getNotificationType()
-	{
-		return notificationType;
-	}
-
-	public void setNotificationType(NotificationTypeEnum notificationType)
-	{
-		this.notificationType = notificationType;
 	}
 
 	public Integer getId() {
@@ -154,13 +143,14 @@ public class Field extends ModelCosmeDamiao
 
 	@Override
 	public String toString() {
-		return "Field [getNotificationType()=" + getNotificationType() + ", getId()=" + getId() + ", getNome()="
-				+ getNome() + ", getStatus()=" + getStatus() + ", getObrigatorio()=" + getObrigatorio()
-				+ ", getCampoBanco()=" + getCampoBanco() + ", getTabelaBanco()=" + getTabelaBanco() + ", getTipo()="
-				+ getTipo() + ", getLabel()=" + getLabel() + ", getTootip()=" + getTootip() + ", getHelp()=" + getHelp()
-				+ ", getValidacao()=" + getValidacao() + ", getRole()=" + getRole() + ", toString()=" + super.toString()
-				+ "]";
+		return "Field [getId()=" + getId() + ", getNome()=" + getNome() + ", getStatus()=" + getStatus()
+				+ ", getObrigatorio()=" + getObrigatorio() + ", getCampoBanco()=" + getCampoBanco()
+				+ ", getTabelaBanco()=" + getTabelaBanco() + ", getTipo()=" + getTipo() + ", getLabel()=" + getLabel()
+				+ ", getTootip()=" + getTootip() + ", getHelp()=" + getHelp() + ", getValidacao()=" + getValidacao()
+				+ ", getRole()=" + getRole() + ", toString()=" + super.toString() + "]";
 	}
+
+
 
 
 

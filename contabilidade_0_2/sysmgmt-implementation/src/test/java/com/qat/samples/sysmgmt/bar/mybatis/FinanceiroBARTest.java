@@ -604,9 +604,9 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteFormaPg()
 	{
-		FormaPg formapg = insertFormaPg(4, TabelaEnum.FORMAPG, PersistenceActionEnum.INSERT);
+		FormaPg formapg = insertFormaPg(4000, TabelaEnum.FORMAPG, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(4000);
 		FormaPg formapgResponse = getFinanceiroBAR().fetchFormaPgById(request);
 		Assert.assertEquals(formapgResponse, null);
 		getFinanceiroBAR().insertFormaPg(formapg);

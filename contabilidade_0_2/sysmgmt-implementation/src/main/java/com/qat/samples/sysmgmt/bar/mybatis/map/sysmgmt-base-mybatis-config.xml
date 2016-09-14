@@ -53,7 +53,7 @@
 
 
         <!-- Dicionario -->
-        <typeAlias alias="Field" type="com.qat.samples.sysmgmt.dicionario.Field" />
+        <typeAlias alias="Field" type="com.qat.samples.sysmgmt.entidade.model.Field" />
         <typeAlias alias="Classes" type="com.qat.samples.sysmgmt.dicionario.Classes" />
         <typeAlias alias="Interface" type="com.qat.samples.sysmgmt.dicionario.Interface" />
         <typeAlias alias="FieldInquiryRequest" type="com.qat.samples.sysmgmt.dicionario.request.FieldInquiryRequest" />

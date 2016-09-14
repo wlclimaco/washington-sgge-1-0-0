@@ -22,7 +22,7 @@
     <result property="obrigatorio" column="obrigatorio"/>
     <result property="campoBanco" column="campoBanco"/>
     <result property="tabelaBanco" column="tabelaBanco"/>
-    <result property="tipo" column="tipo"/>
+    
     <result property="label" column="label"/>
     <result property="tootip" column="tootip"/>
 
@@ -37,6 +37,7 @@
 <collection property="help" column="help" select="RegimeMap.fetchRegimeById"/>
     <collection property="validacao" column="validacao" select="RegimeMap.fetchRegimeById"/>
     <collection property="role" column="role" select="RegimeMap.fetchRegimeById"/>
+    <collection property="tipo" column="tipo" select="RegimeMap.fetchRegimeById"/>
   </resultMap>
 
   <sql id="allFieldColumns">
@@ -67,7 +68,7 @@
 #{obrigatorio},
 #{campoBanco},
 #{tabelaBanco},
-#{tipo},
+#{tipo.id},
 #{label},
 #{tootip},
 #{help.id},
@@ -123,7 +124,7 @@
 <if test="obrigatorio!= null">obrigatorio = #{obrigatorio},</if>
 <if test="campoBanco!= null">campoBanco = #{campoBanco},</if>
 <if test="tabelaBanco!= null">tabelaBanco = #{tabelaBanco},</if>
-<if test="tipo!= null">tipo = #{tipo},</if>
+<if test="tipo!= null">tipo = #{tipo.id},</if>
 <if test="label!= null">label = #{label},</if>
 <if test="tootip!= null">tootip = #{tootip},</if>
 <if test="help!= null">help = #{help.id},</if>

@@ -81,16 +81,16 @@
    FROM menu WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllMenusRequest" parameterType="MenuInquiryRequest" resultMap="MenuResult">
+ <select id="fetchAllMenusRequest" parameterType="PagedInquiryRequest" resultMap="MenuResult">
 
      SELECT id,<include refid="allMenuColumns" />
-           FROM menu where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+           FROM menu where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
        OFFSET ( #{startPage} * #{pageSize} )
        LIMIT #{pageSize}
 </select>
 
 <select id="fetchMenuRowCount" resultType="Integer">
-     SELECT COUNT(*) AS RECORD_COUNT FROM menu WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+     SELECT COUNT(*) AS RECORD_COUNT FROM menu WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 

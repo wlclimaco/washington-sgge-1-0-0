@@ -17,15 +17,18 @@ import com.qat.samples.sysmgmt.bar.Email.IEmailBAR;
 import com.qat.samples.sysmgmt.bar.Fiscal.IFiscalBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Notes.INotesBAR;
+import com.qat.samples.sysmgmt.bar.Produto.IPrecoBAR;
 import com.qat.samples.sysmgmt.bar.Produto.IProdutoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.CofinsBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EmailBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.EstoqueBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.IcmsBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.IpiBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.PisBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.PrecoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ProdutoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.StatusBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.TelefoneBARD;
@@ -719,6 +722,16 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	INotesBAR notesBAR;
 
 	IFiscalBAR fiscalBAR;
+	
+	IPrecoBAR precoBAR;
+
+	public IPrecoBAR getPrecoBAR() {
+		return precoBAR;
+	}
+
+	public void setPrecoBAR(IPrecoBAR precoBAR) {
+		this.precoBAR = precoBAR;
+	}
 
 	public IStatusBAR getStatusBAR() {
 		return statusBAR;
@@ -834,6 +847,18 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PRODUTOEMPRESA, AcaoEnum.INSERT,
 				produtoempresa.getTransactionId(), getHistoricoBAR(), response, produtoempresa.getId(),
 				produtoempresa.getUserId());
+		
+		if (!ValidationUtil.isNull(produtoempresa.getEstoqueList()))
+		{
+			
+			EstoqueBARD.maintainEstoqueAssociations(produtoempresa.getEstoqueList(), response,produtoempresa.getId(),  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
+					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
+		}
+		if (!ValidationUtil.isNull(produtoempresa.getPrecoList()))
+		{
+			PrecoBARD.maintainPrecoAssociations(produtoempresa.getPrecoList(), response,produtoempresa.getId(),  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
+					getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
+		}
 
 		if (produtoempresa.getId() != 0 && produtoempresa.getId() != null) {
 			Status status = new Status();
