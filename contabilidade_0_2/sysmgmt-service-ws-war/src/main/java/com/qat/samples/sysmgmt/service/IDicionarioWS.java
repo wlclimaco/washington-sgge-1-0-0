@@ -13,7 +13,6 @@ import org.apache.cxf.annotations.WSDLDocumentation;
 import com.qat.samples.sysmgmt.dicionario.request.ClassesInquiryRequest;
 import com.qat.samples.sysmgmt.dicionario.request.ClassesMaintenanceRequest;
 import com.qat.samples.sysmgmt.dicionario.request.FieldInquiryRequest;
-import com.qat.samples.sysmgmt.dicionario.request.FieldMaintenanceRequest;
 import com.qat.samples.sysmgmt.dicionario.request.InterfaceInquiryRequest;
 import com.qat.samples.sysmgmt.dicionario.request.InterfaceMaintenanceRequest;
 import com.qat.samples.sysmgmt.dicionario.response.ClassesResponse;
@@ -21,6 +20,7 @@ import com.qat.samples.sysmgmt.dicionario.response.FieldResponse;
 import com.qat.samples.sysmgmt.dicionario.response.InterfaceResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchAllRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.util.model.request.FieldMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
