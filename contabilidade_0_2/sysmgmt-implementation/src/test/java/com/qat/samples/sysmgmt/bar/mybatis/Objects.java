@@ -44,6 +44,7 @@ import com.qat.samples.sysmgmt.dp.model.Eventos;
 import com.qat.samples.sysmgmt.dp.model.HorarioFunc;
 import com.qat.samples.sysmgmt.dp.model.Profissao;
 import com.qat.samples.sysmgmt.dp.model.Salario;
+import com.qat.samples.sysmgmt.entidade.model.Ajuda;
 import com.qat.samples.sysmgmt.entidade.model.Boleto;
 import com.qat.samples.sysmgmt.entidade.model.ConfigAlertas;
 import com.qat.samples.sysmgmt.entidade.model.ConfigCarne;
@@ -60,8 +61,13 @@ import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.EntidadeTypeEnum;
 import com.qat.samples.sysmgmt.entidade.model.Field;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
+import com.qat.samples.sysmgmt.entidade.model.Menu;
+import com.qat.samples.sysmgmt.entidade.model.Pagina;
+import com.qat.samples.sysmgmt.entidade.model.Role;
 import com.qat.samples.sysmgmt.entidade.model.Transaction;
+import com.qat.samples.sysmgmt.entidade.model.UserRoles;
 import com.qat.samples.sysmgmt.entidade.model.Usuario;
+import com.qat.samples.sysmgmt.entidade.model.Validacao;
 import com.qat.samples.sysmgmt.estado.model.Estado;
 import com.qat.samples.sysmgmt.financeiro.model.BaixaTitulo;
 import com.qat.samples.sysmgmt.financeiro.model.Caixa;
@@ -1424,7 +1430,7 @@ public class Objects {
 		Produto produto = new Produto();
 		Date a = new Date();
 		produto.setId(id);
-		
+
 		produto.setCdBarras("cdBarras_2 - " + action.toString());
 		produto.setProduto("produto_3 - " + action.toString());
 		produto.setDataCreate(a.getTime());
@@ -2987,25 +2993,6 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 	         return interfaces;
 	     }
 
-	public static Field insertField(Integer id, TabelaEnum tabela, PersistenceActionEnum action)
-	{
-		Field field = new Field();
-		Date a = new Date();
-		field.setId(id);
-		
-		field.setTabelaEnum(tabela);
-		field.setParentId(id);
-		field.setEmprId(EMPID);
-		field.setModifyDateUTC(a.getTime());
-		field.setCreateDateUTC(a.getTime());
-		field.setCreateUser("system");
-		field.setModifyUser("system");
-		field.setProcessId(1);
-		field.setModelAction(action);
-
-		return field;
-	}
-	
 
 	public static ProdutoEmpresa insertProdutoEmpresa(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
@@ -3065,12 +3052,12 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 
 			return marcaproduto;
 		}
-	
+
 	public static Transaction insertTransaction(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 	{
 		Transaction transaction = new Transaction();
 		Date a = new Date();
-		
+
 		transaction.setId(id);
 		transaction.setInicioSession(a.getTime());
 		transaction.setFinalSession(a.getTime());
@@ -3132,5 +3119,169 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
+
+	public static UserRoles insertUserRoles(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		UserRoles userroles = new UserRoles();
+		Date a = new Date();
+		userroles.setUser_role_id(id);
+		userroles.setUsername("NATIVE INSERT UPDATE");
+		userroles.setRole("NATIVE INSERT UPDATE");
+		userroles.setParentId(id);
+		userroles.setEmprId(1);
+		userroles.setModifyDateUTC(a.getTime());
+		userroles.setCreateDateUTC(a.getTime());
+		userroles.setCreateUser("system");
+		userroles.setModifyUser("system");
+		userroles.setProcessId(1);
+		userroles.setModelAction(action);
+
+		return userroles;
+	}
+
+
+public static Role insertRole(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		Role role = new Role();
+		Date a = new Date();
+		role.setId(id);
+		role.setRole("NATIVE INSERT UPDATE");
+		role.setStatus(100);
+		role.setPagina(insertPagina(id, tabela, action));
+		role.setParentId(id);
+		role.setEmprId(1);
+		role.setModifyDateUTC(a.getTime());
+		role.setCreateDateUTC(a.getTime());
+		role.setCreateUser("system");
+		role.setModifyUser("system");
+		role.setProcessId(1);
+		role.setModelAction(action);
+
+		return role;
+	}
+
+
+public static Pagina insertPagina(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		Pagina pagina = new Pagina();
+		Date a = new Date();
+		pagina.setId(id);
+		pagina.setPagina("NATIVE INSERT UPDATE");
+		pagina.setStatus(100);
+		//pagina.setMenu(insertMenu(id, tabela, action));
+		//pagina.setHelp(insertAjuda(id, tabela, action));
+		//pagina.setFilds(insertField(id, tabela, action));
+		pagina.setParentId(id);
+		pagina.setEmprId(1);
+		pagina.setModifyDateUTC(a.getTime());
+		pagina.setCreateDateUTC(a.getTime());
+		pagina.setCreateUser("system");
+		pagina.setModifyUser("system");
+		pagina.setProcessId(1);
+		pagina.setModelAction(action);
+
+		return pagina;
+	}
+
+
+public static Validacao insertValidacao(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		Validacao validacao = new Validacao();
+		Date a = new Date();
+		validacao.setId(id);
+		validacao.setError("NATIVE INSERT UPDATE");
+		validacao.setTipo(insertDoisValor(id, tabela, action));
+		validacao.setParentId(id);
+		validacao.setEmprId(1);
+		validacao.setModifyDateUTC(a.getTime());
+		validacao.setCreateDateUTC(a.getTime());
+		validacao.setCreateUser("system");
+		validacao.setModifyUser("system");
+		validacao.setProcessId(1);
+		validacao.setModelAction(action);
+
+		return validacao;
+	}
+
+
+public static Field insertField(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		Field field = new Field();
+		Date a = new Date();
+		field.setId(id);
+		field.setNome("NATIVE INSERT UPDATE");
+		field.setStatus(100);
+		field.setObrigatorio(100);
+		field.setCampoBanco("NATIVE INSERT UPDATE");
+		field.setTabelaBanco("NATIVE INSERT UPDATE");
+		field.setTipo(insertDoisValor(id, tabela, action));
+		field.setLabel("NATIVE INSERT UPDATE");
+		field.setTootip("NATIVE INSERT UPDATE");
+		field.setHelp(insertAjuda(id, tabela, action));
+		field.setValidacao(new ArrayList<Validacao>());
+		field.getValidacao().add(insertValidacao(id, tabela, action));
+	//	field.setRole(new ArrayList<Role>());
+	//	field.getRole().add(insertRole(id, tabela, action));
+		field.setParentId(id);
+		field.setEmprId(1);
+		field.setModifyDateUTC(a.getTime());
+		field.setCreateDateUTC(a.getTime());
+		field.setCreateUser("system");
+		field.setModifyUser("system");
+		field.setProcessId(1);
+		field.setModelAction(action);
+
+		return field;
+	}
+
+
+public static Ajuda insertAjuda(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		Ajuda ajuda = new Ajuda();
+		Date a = new Date();
+		ajuda.setId(id);
+		ajuda.setTitulo("NATIVE INSERT UPDATE");
+		ajuda.setStatus(100);
+		ajuda.setTexto("NATIVE INSERT UPDATE");
+		ajuda.setParentId(id);
+		ajuda.setEmprId(1);
+		ajuda.setModifyDateUTC(a.getTime());
+		ajuda.setCreateDateUTC(a.getTime());
+		ajuda.setCreateUser("system");
+		ajuda.setModifyUser("system");
+		ajuda.setProcessId(1);
+		ajuda.setModelAction(action);
+
+		return ajuda;
+	}
+
+
+public static Menu insertMenu(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		Menu menu = new Menu();
+		Date a = new Date();
+		menu.setId(id);
+		menu.setNome("NATIVE INSERT UPDATE");
+		menu.setLabel("NATIVE INSERT UPDATE");
+		menu.setStatus(100);
+		menu.setNivel(100);
+		//menu.setPermissao(insertRole(id, tabela, action));
+		//menu.setHelp(insertAjuda(id, tabela, action));
+		menu.setParentId(id);
+		menu.setEmprId(1);
+		menu.setModifyDateUTC(a.getTime());
+		menu.setCreateDateUTC(a.getTime());
+		menu.setCreateUser("system");
+		menu.setModifyUser("system");
+		menu.setProcessId(1);
+		menu.setModelAction(action);
+
+		return menu;
+	}
+
+
 
 }

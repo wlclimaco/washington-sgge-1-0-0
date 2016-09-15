@@ -59,40 +59,39 @@ user_role_id
 
 
  <select id="fetchAllUserRoless" resultMap="UserRolesResult">
-    SELECT id,
+    SELECT
  <include refid="allUserRolesColumns" />
-   FROM userroles ORDER BY id ASC
+   FROM User_Roles ORDER BY User_Roles ASC
  </select>
 
  <select id="fetchUserRolesById" parameterType="Integer" resultMap="UserRolesResult">
-    SELECT id,
+    SELECT
  <include refid="allUserRolesColumns" />
-   FROM userroles WHERE id = #{fetchid}
+   FROM User_Roles WHERE user_role_id = #{fetchid}
  </select>
 
  <select id="fetchAllUserRolessRequest" parameterType="PagedInquiryRequest" resultMap="UserRolesResult">
 
-     SELECT id,<include refid="allUserRolesColumns" />
-           FROM userroles where 0 = 0 <if test="emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+     SELECT <include refid="allUserRolesColumns" />
+           FROM User_Roles where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY user_role_id ASC
        OFFSET ( #{startPage} * #{pageSize} )
        LIMIT #{pageSize}
 </select>
 
 <select id="fetchUserRolesRowCount" resultType="Integer">
-     SELECT COUNT(*) AS RECORD_COUNT FROM userroles WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+     SELECT COUNT(*) AS RECORD_COUNT FROM User_Roles WHERE User_Roles IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 
  <insert id="insertUserRoles" parameterType="UserRoles" useGeneratedKeys="true" keyProperty="id">
-     INSERT INTO userroles (
- <if test="id != null"><if test="id > 0">id,</if></if><include refid="allUserRolesColumns" />
+     INSERT INTO User_Roles (
+       <include refid="allUserRolesColumns" />
      )
-   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allUserRolesValues" /> )
+   VALUES (<include refid="allUserRolesValues" /> )
  </insert>
 
  <update id="updateUserRoles" parameterType="UserRoles">
-   UPDATE userroles SET
-<if test="user_role_id!= null">user_role_id = #{user_role_id},</if>
+   UPDATE User_Roles SET
 <if test="username!= null">username = #{username},</if>
 <if test="role!= null">role = #{role},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
@@ -102,15 +101,15 @@ user_role_id
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE
-    id = #{id}
+    user_role_id = #{user_role_id}
  </update>
 
 <delete id="deleteUserRolesById" parameterType="UserRoles">
-  DELETE FROM userroles WHERE id = #{id}
+  DELETE FROM User_Roles WHERE user_role_id = #{user_role_id}
  </delete>
 
  <delete id="deleteAllUserRoless">
- DELETE FROM userroles
+ DELETE FROM User_Roles
   </delete>
 </mapper>
 

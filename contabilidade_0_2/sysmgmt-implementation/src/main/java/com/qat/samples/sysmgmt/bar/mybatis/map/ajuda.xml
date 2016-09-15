@@ -31,7 +31,7 @@
   </resultMap>
 
   <sql id="allAjudaColumns">
-,titulo
+titulo
 ,status
 ,texto
 ,parentId

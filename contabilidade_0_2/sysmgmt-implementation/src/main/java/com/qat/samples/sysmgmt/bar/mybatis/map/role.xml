@@ -32,7 +32,7 @@
   </resultMap>
 
   <sql id="allRoleColumns">
-,role
+role
 ,status
 ,pagina
 ,parentId
@@ -70,6 +70,12 @@
     SELECT id,
  <include refid="allRoleColumns" />
    FROM role WHERE id = #{fetchid}
+ </select>
+
+  <select id="fetchRoleByField" parameterType="Integer" resultMap="RoleResult">
+    SELECT id,
+ <include refid="allRoleColumns" />
+   FROM role WHERE tabelaEnumValue = 75 and parentid = #{fetchid}
  </select>
 
  <select id="fetchAllRolesRequest" parameterType="PagedInquiryRequest" resultMap="RoleResult">

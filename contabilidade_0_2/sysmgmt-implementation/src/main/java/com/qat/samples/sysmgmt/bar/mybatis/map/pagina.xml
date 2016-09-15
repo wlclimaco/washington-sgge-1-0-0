@@ -34,7 +34,7 @@
   </resultMap>
 
   <sql id="allPaginaColumns">
-,pagina
+pagina
 ,status
 ,menu
 ,help

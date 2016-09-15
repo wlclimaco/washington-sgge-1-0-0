@@ -17,7 +17,7 @@
        exactly. -->
   <resultMap id="ValidacaoResult" type="Validacao">
     <result property="id" column="id"/>
-    <result property="Error" column="Error"/>
+    <result property="error" column="error"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -30,7 +30,7 @@
   </resultMap>
 
   <sql id="allValidacaoColumns">
-,Error
+error
 ,tipo
 ,parentId
 ,tabelaEnumValue
@@ -43,7 +43,7 @@
 
 </sql>
 <sql id="allValidacaoValues">
-#{Error},
+#{error},
 #{tipo.id},
      #{parentId},
      #{tabelaEnumValue},
@@ -90,7 +90,7 @@
 
  <update id="updateValidacao" parameterType="Validacao">
    UPDATE validacao SET
-<if test="Error!= null">Error = #{Error},</if>
+<if test="error!= null">error = #{error},</if>
 <if test="tipo!= null">tipo = #{tipo.id},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>

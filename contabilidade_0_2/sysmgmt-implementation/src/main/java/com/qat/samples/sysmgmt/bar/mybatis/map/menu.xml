@@ -35,7 +35,7 @@
   </resultMap>
 
   <sql id="allMenuColumns">
-,nome
+nome
 ,label
 ,status
 ,nivel

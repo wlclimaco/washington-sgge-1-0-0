@@ -2,7 +2,6 @@
 package com.qat.samples.sysmgmt.bar.mybatis;
 
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,59 +23,32 @@ import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.advocacia.Advocacia;
 import com.qat.samples.sysmgmt.advocacia.request.AdvocaciaInquiryRequest;
-import com.qat.samples.sysmgmt.banco.model.Banco;
-import com.qat.samples.sysmgmt.banco.model.BancoPessoa;
 import com.qat.samples.sysmgmt.bar.Empresa.IEmpresaBAR;
-import com.qat.samples.sysmgmt.cfop.model.Cfop;
-import com.qat.samples.sysmgmt.cfop.model.CfopParentId;
-import com.qat.samples.sysmgmt.cfop.model.CfopTypeEnum;
 import com.qat.samples.sysmgmt.clinica.model.Clinica;
 import com.qat.samples.sysmgmt.clinica.model.request.ClinicaInquiryRequest;
-import com.qat.samples.sysmgmt.cnae.model.Cnae;
-import com.qat.samples.sysmgmt.cnae.model.CnaeEmpresa;
 import com.qat.samples.sysmgmt.condominio.model.Condominio;
 import com.qat.samples.sysmgmt.condominio.model.request.CondominioInquiryRequest;
 import com.qat.samples.sysmgmt.condominio.model.request.TransactionInquiryRequest;
-import com.qat.samples.sysmgmt.contabilidade.model.Plano;
-import com.qat.samples.sysmgmt.entidade.model.Boleto;
-import com.qat.samples.sysmgmt.entidade.model.ConfigAlertas;
-import com.qat.samples.sysmgmt.entidade.model.ConfigCarne;
-import com.qat.samples.sysmgmt.entidade.model.ConfigEntrada;
-import com.qat.samples.sysmgmt.entidade.model.ConfigFiscal;
-import com.qat.samples.sysmgmt.entidade.model.ConfigGeral;
-import com.qat.samples.sysmgmt.entidade.model.ConfigProduto;
-import com.qat.samples.sysmgmt.entidade.model.ConfigSMTP;
-import com.qat.samples.sysmgmt.entidade.model.ConfigVendas;
-import com.qat.samples.sysmgmt.entidade.model.Configuracao;
-import com.qat.samples.sysmgmt.entidade.model.ConfiguracaoNFe;
+import com.qat.samples.sysmgmt.dicionario.request.FieldInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.Ajuda;
 import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
-import com.qat.samples.sysmgmt.entidade.model.EntidadeTypeEnum;
+import com.qat.samples.sysmgmt.entidade.model.Field;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
+import com.qat.samples.sysmgmt.entidade.model.Menu;
+import com.qat.samples.sysmgmt.entidade.model.Pagina;
+import com.qat.samples.sysmgmt.entidade.model.Role;
 import com.qat.samples.sysmgmt.entidade.model.Transaction;
+import com.qat.samples.sysmgmt.entidade.model.UserRoles;
 import com.qat.samples.sysmgmt.entidade.model.Usuario;
+import com.qat.samples.sysmgmt.entidade.model.Validacao;
 import com.qat.samples.sysmgmt.entidade.model.criteria.FilialCriteria;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
-import com.qat.samples.sysmgmt.estado.model.Estado;
-import com.qat.samples.sysmgmt.fiscal.model.Regime;
-import com.qat.samples.sysmgmt.pessoa.model.Socio;
-import com.qat.samples.sysmgmt.produto.model.Servico;
-import com.qat.samples.sysmgmt.site.model.ServicoAndPlano;
-import com.qat.samples.sysmgmt.util.model.Cidade;
-import com.qat.samples.sysmgmt.util.model.Documento;
-import com.qat.samples.sysmgmt.util.model.DocumentoTypeEnum;
-import com.qat.samples.sysmgmt.util.model.DoisValores;
-import com.qat.samples.sysmgmt.util.model.Email;
-import com.qat.samples.sysmgmt.util.model.EmailTypeEnum;
-import com.qat.samples.sysmgmt.util.model.Endereco;
-import com.qat.samples.sysmgmt.util.model.EnderecoTypeEnum;
-import com.qat.samples.sysmgmt.util.model.Note;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
-import com.qat.samples.sysmgmt.util.model.Telefone;
-import com.qat.samples.sysmgmt.util.model.TelefoneTypeEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
 
 @ContextConfiguration(locations = {
@@ -109,8 +81,7 @@ public IEmpresaBAR getEmpresaBAR()
 @Test
 	public void testDeleteEmpresa()
 	{
-		Empresa empresa = new Empresa();
-		empresa = 		insertEmpresa(19000,PersistenceActionEnum.INSERT);
+		Empresa empresa = 		Objects.insertEmpresa(19000,TabelaEnum.EMPRESA,PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(19000);
 
@@ -681,7 +652,7 @@ public IEmpresaBAR getEmpresaBAR()
 			getEmpresaBAR().deleteAllAdvocacias();
 			Advocacia advocacia = new Advocacia();
 			List<Advocacia> response = getEmpresaBAR().fetchAllAdvocacias(new Advocacia()).getResultsList();
-			Assert.assertEquals(response.size(), 3);
+			Assert.assertEquals(response.size(), 6);
 		}
 
 		@Test
@@ -743,631 +714,634 @@ public IEmpresaBAR getEmpresaBAR()
 			executeSqlScript("conf/insertFilial.sql", false);
 			executeSqlScript("conf/insertDeposito.sql", false);
 			executeSqlScript("conf/insertUsuario.sql", false);
-			executeSqlScript("conf/insertCondominio.sql", false);
-			executeSqlScript("conf/insertClinica.sql", false);
+			executeSqlScript("conf/insertUserRoles.sql", false);
+			executeSqlScript("conf/insertRoles.sql", false);
+			executeSqlScript("conf/insertPagina.sql", false);
+			executeSqlScript("conf/insertValidacao.sql", false);
+			executeSqlScript("conf/insertField.sql", false);
+			executeSqlScript("conf/insertAjuda.sql", false);
+			executeSqlScript("conf/insertMenu.sql", false);
 			executeSqlScript("conf/insertAdvocacia.sql", false);
+			executeSqlScript("conf/insertClinica.sql", false);
+			executeSqlScript("conf/insertCondominio.sql", false);
 		}
-		public List<Endereco> enderecoList(PersistenceActionEnum action)
+
+
+	//===================================### USERROLES ####======================================
+
+
+	@Test
+		public void testDeleteUserRoles()
 		{
-			List<Endereco> enderecoList = new ArrayList<Endereco>();
-			Endereco endereco =
-					new Endereco(null, "logradouro", new Cidade(), new Estado(), "bairro", "numero", "cep", "complemento",
-							EnderecoTypeEnum.ENTREGA, action);
-			endereco.setProcessId(1);
-			enderecoList.add(endereco);
-
-			endereco =
-					new Endereco(null, "logradouro", new Cidade(), new Estado(), "bairro", "numero", "cep", "complemento",
-							EnderecoTypeEnum.COBRANCA, action);
-			endereco.setProcessId(1);
-			enderecoList.add(endereco);
-
-			endereco =
-					new Endereco(null, "logradouro", new Cidade(), new Estado(), "bairro", "numero", "cep", "complemento",
-							EnderecoTypeEnum.PRINCIPAL, action);
-			endereco.setProcessId(1);
-			enderecoList.add(endereco);
-			return enderecoList;
-
+			UserRoles userroles = Objects.insertUserRoles(1004, TabelaEnum.USERROLES, PersistenceActionEnum.INSERT);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(1004);
+			UserRoles userrolesResponse = getEmpresaBAR().fetchUserRolesById(request);
+			Assert.assertEquals(userrolesResponse, null);
+			getEmpresaBAR().insertUserRoles(userroles);
+			userrolesResponse = getEmpresaBAR().fetchUserRolesById(request);
+			Assert.assertEquals(userroles.getUser_role_id(), userrolesResponse.getUser_role_id());
+			getEmpresaBAR().deleteUserRolesById(userroles);
+			userrolesResponse = getEmpresaBAR().fetchUserRolesById(request);
+			Assert.assertEquals(userrolesResponse, null);
 		}
 
-		public List<Documento> documentoList(PersistenceActionEnum action)
+		@Test
+		public void testFetchAllUserRoless()
 		{
-			List<Documento> documentoList = new ArrayList<Documento>();
-			Documento documento = new Documento(null, DocumentoTypeEnum.CNPJ, "numero", (long)123456789, new Estado(), action);
-			documento.setProcessId(1);
-			documentoList.add(documento);
-
-			documento = new Documento(null, DocumentoTypeEnum.IE, "numero", (long)123456789, new Estado(), action);
-			documento.setProcessId(1);
-			documentoList.add(documento);
-
-			documento = new Documento(null, DocumentoTypeEnum.IM, "numero", (long)123456789, new Estado(), action);
-			documento.setProcessId(1);
-			documentoList.add(documento);
-			return documentoList;
-
+		UserRoles userroles = new UserRoles();
+			List<UserRoles> response = getEmpresaBAR().fetchAllUserRoless(userroles).getResultsList();
+			Assert.assertNotNull(response);
 		}
 
-		public List<Email> emailList(PersistenceActionEnum action)
+		@Test
+		public void testDeleteAllUserRoless()
 		{
-			List<Email> documentoList = new ArrayList<Email>();
-			Email documento = new Email(null, "email", EmailTypeEnum.COMPRAS, action);
-			documento.setProcessId(1);
-			documentoList.add(documento);
-			documento = new Email(null, "email", EmailTypeEnum.NFE, action);
-			documento.setProcessId(1);
-			documentoList.add(documento);
-			documento = new Email(null, "email", EmailTypeEnum.VENDAS, action);
-			documento.setProcessId(1);
-			documentoList.add(documento);
-			return documentoList;
-
+			getEmpresaBAR().deleteAllUserRoless();
+			UserRoles userroles = new UserRoles();
+			List<UserRoles> response = getEmpresaBAR().fetchAllUserRoless(new UserRoles()).getResultsList();
+			Assert.assertEquals(response.size(), 0);
 		}
 
-		public List<Telefone> telefoneList(PersistenceActionEnum action)
+		@Test
+		public void testUpdateUserRoles()
 		{
-			List<Telefone> documentoList = new ArrayList<Telefone>();
-			Telefone documento = new Telefone(null, "ddd", "numero", TelefoneTypeEnum.DIRETOR, action);
-			documento.setProcessId(1);
-			documentoList.add(documento);
-
-			documento = new Telefone(null, "ddd", "numero", TelefoneTypeEnum.COMPRAS, action);
-			documento.setProcessId(1);
-			documentoList.add(documento);
-
-			documento = new Telefone(null, "ddd", "numero", TelefoneTypeEnum.REPRESENTANTE, action);
-			documento.setProcessId(1);
-			documentoList.add(documento);
-
-			return documentoList;
-
+			UserRoles userroles = Objects.insertUserRoles(1001, TabelaEnum.USERROLES, PersistenceActionEnum.UPDATE);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(1001);
+			UserRoles userrolesResponse = getEmpresaBAR().fetchUserRolesById(request);
+			Assert.assertEquals(userrolesResponse.getUsername(), "username_1");
+			getEmpresaBAR().updateUserRoles(userroles);
+			userrolesResponse = getEmpresaBAR().fetchUserRolesById(request);
+			Assert.assertEquals(userrolesResponse.getUsername(), "NATIVE INSERT UPDATE");
 		}
 
-		public List<BancoPessoa> bancoList(PersistenceActionEnum action)
+		@Test
+		public void testFetchUserRolessByRequest() throws Exception
 		{
-			List<BancoPessoa> documentoList = new ArrayList<BancoPessoa>();
-			BancoPessoa documento = new BancoPessoa();
-			documento.setModelAction(action);
-			documento.setBancoId(new Banco(null, "ITAU", action));
-			documento.setProcessId(1);
-			documento.setSaldo(new Double(1.99));
-			documentoList.add(documento);
-			return documentoList;
+			// check for valid and precount
+			PagedInquiryRequest request = new PagedInquiryRequest();
+			request.setPreQueryCount(true);
+			request.setStartPage(0);
+			request.setPageSize(3);
+			InternalResultsResponse<UserRoles> response = getEmpresaBAR().fetchUserRolessByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+			// check for valid and precount and start 2nd page
+			request.setPreQueryCount(true);
+			request.setStartPage(1);
+			request.setPageSize(3);
+			response = getEmpresaBAR().fetchUserRolessByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+
+			// check for valid and no precount
+			PagedInquiryRequest request2 = new PagedInquiryRequest();
+			request2.setPreQueryCount(false);
+			InternalResultsResponse<UserRoles> response2 = getEmpresaBAR().fetchUserRolessByRequest(request2);
+			Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+			// this is because we did not choose to precount
+			Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+			// check for zero rows
+			getEmpresaBAR().deleteAllUserRoless();
+			PagedInquiryRequest request3 = new PagedInquiryRequest();
+			request3.setPreQueryCount(true);
+			InternalResultsResponse<UserRoles> response3 = getEmpresaBAR().fetchUserRolessByRequest(request3);
+			Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 		}
 
-		public List<CfopParentId> cfopList(PersistenceActionEnum action)
+	//===================================### ROLE ####======================================
+
+
+	@Test
+		public void testDeleteRole()
 		{
-			List<CfopParentId> documentoList = new ArrayList<CfopParentId>();
-			CfopParentId documento = new CfopParentId();
-			documento.setModelAction(action);
-			documento.setProcessId(1);
-			documento.setCfop(new Cfop(null, "cfop", "natureza", "simplificado", CfopTypeEnum.ENTRADA, 0.39, 0.15, 0.54,
-					0.9, 0.1, "observacao", action));
-			documento.setParentId(1);
-
-			documentoList.add(documento);
-			return documentoList;
-
+			Role role = Objects.insertRole(4, TabelaEnum.ROLE, PersistenceActionEnum.INSERT);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(4);
+			Role roleResponse = getEmpresaBAR().fetchRoleById(request);
+			Assert.assertEquals(roleResponse, null);
+			getEmpresaBAR().insertRole(role);
+			roleResponse = getEmpresaBAR().fetchRoleById(request);
+			Assert.assertEquals(role.getId(), roleResponse.getId());
+			getEmpresaBAR().deleteRoleById(role);
+			roleResponse = getEmpresaBAR().fetchRoleById(request);
+			Assert.assertEquals(roleResponse, null);
 		}
 
-		public List<Note> noteList(PersistenceActionEnum action)
+		@Test
+		public void testFetchAllRoles()
 		{
-			List<Note> documentoList = new ArrayList<Note>();
-			Note documento = new Note();
-			documento.setModelAction(action);
-			documento.setId(null);
-			documento.setEmprId(1);
-			documento.setNoteText("Test NOte");
-			documento.setProcessId(1);
-			documentoList.add(documento);
-			return documentoList;
-
+		Role role = new Role();
+			List<Role> response = getEmpresaBAR().fetchAllRoles(role).getResultsList();
+			Assert.assertNotNull(response);
 		}
 
-		public List<CnaeEmpresa> cnaeList(PersistenceActionEnum action)
+		@Test
+		public void testDeleteAllRoles()
 		{
-			List<CnaeEmpresa> cnaeList = new ArrayList<CnaeEmpresa>();
-			cnaeList.add(new CnaeEmpresa(null, 1, action, new Cnae(null, "CNAE", "DESCRICAO", "ABREV", action)));
-			cnaeList.add(new CnaeEmpresa(null, 1, action, new Cnae(null, "CNAE", "DESCRICAO", "ABREV", action)));
-			cnaeList.add(new CnaeEmpresa(null, 1, action, new Cnae(null, "CNAE", "DESCRICAO", "ABREV", action)));
-			cnaeList.add(new CnaeEmpresa(null, 1, action, new Cnae(null, "CNAE", "DESCRICAO", "ABREV", action)));
-			cnaeList.add(new CnaeEmpresa(null, 1, action, new Cnae(null, "CNAE", "DESCRICAO", "ABREV", action)));
-			return cnaeList;
-
+			getEmpresaBAR().deleteAllRoles();
+		Role role = new Role();
+			List<Role> response = getEmpresaBAR().fetchAllRoles(new Role()).getResultsList();
+			Assert.assertEquals(response.size(), 0);
 		}
 
-		public Regime insertRegime(PersistenceActionEnum action)
+		@Test
+		public void testUpdateRole()
 		{
-
-			Regime regime = new Regime();
-			regime.setId(null);
-			regime.setNome("Teste");
-			regime.setDescricao("Teste");
-			regime.setModelAction(action);
-			return regime;
+			Role role = Objects.insertRole(1001, TabelaEnum.ROLE, PersistenceActionEnum.UPDATE);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(1001);
+			Role roleResponse = getEmpresaBAR().fetchRoleById(request);
+			Assert.assertEquals(roleResponse.getRole(), "role_1");
+			getEmpresaBAR().updateRole(role);
+			roleResponse = getEmpresaBAR().fetchRoleById(request);
+			Assert.assertEquals(roleResponse.getRole(), "NATIVE INSERT UPDATE");
 		}
 
-		public List<Usuario> insertUsuario(PersistenceActionEnum action)
+		@Test
+		public void testFetchRolesByRequest() throws Exception
 		{
-			List<Usuario> list = new ArrayList<Usuario>();
-			Date a = new Date();
-			for (Integer i = 0; i < 10; i++)
-			{
-				Usuario usuario = new Usuario();
-				usuario.setId(null);
-				usuario.setEmail("LOGIN");
-				usuario.setSenha("SENHA");
-				usuario.setPergunta("PERGUNTA");
-				usuario.setRole("ROLE");
-				usuario.setLanguage("LAN");
-				usuario.setUltAcesso(a.getTime());
-				usuario.setEmails(emailList(action));
-				usuario.setModelAction(action);
-				list.add(usuario);
-			}
-			return list;
+			// check for valid and precount
+			PagedInquiryRequest request = new PagedInquiryRequest();
+			request.setPreQueryCount(true);
+			request.setStartPage(0);
+			request.setPageSize(3);
+			InternalResultsResponse<Role> response = getEmpresaBAR().fetchRolesByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+			// check for valid and precount and start 2nd page
+			request.setPreQueryCount(true);
+			request.setStartPage(1);
+			request.setPageSize(3);
+			response = getEmpresaBAR().fetchRolesByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+
+			// check for valid and no precount
+			PagedInquiryRequest request2 = new PagedInquiryRequest();
+			request2.setPreQueryCount(false);
+			InternalResultsResponse<Role> response2 = getEmpresaBAR().fetchRolesByRequest(request2);
+			Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+			// this is because we did not choose to precount
+			Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+			// check for zero rows
+			getEmpresaBAR().deleteAllRoles();
+			PagedInquiryRequest request3 = new PagedInquiryRequest();
+			request3.setPreQueryCount(true);
+			InternalResultsResponse<Role> response3 = getEmpresaBAR().fetchRolesByRequest(request3);
+			Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 		}
 
-		public Empresa insertEmpresa(Integer id,PersistenceActionEnum action)
+	//===================================### PAGINA ####======================================
+
+
+	@Test
+		public void testDeletePagina()
 		{
-			Empresa funcionario = new Empresa();
-			Date a = new Date();
-
-			funcionario.setId(id);
-			funcionario.setNome("NOME");
-			funcionario.setRegime(insertRegime(action));
-			funcionario.setEntidadeId(1);
-			funcionario.setEntidadeEnum(EntidadeTypeEnum.EMPRESA);
-			funcionario.setConfiguracao(insertConfiguracao(id,TabelaEnum.EMPRESA,action));
-			funcionario.setCnaes(cnaeList(action));
-			funcionario.setUsuarios(insertUsuario(action));
-			funcionario.setProcessId(1);
-			funcionario.setDocumentos(documentoList(action));
-			funcionario.setTelefones(telefoneList(action));
-			funcionario.setEmails(emailList(action));
-			funcionario.setEnderecos(enderecoList(action));
-			funcionario.setBancos(bancoList(action));
-			funcionario.setSocios(new ArrayList<Socio>());
-			funcionario.setPlanosServicos(new ArrayList<ServicoAndPlano>());
-			funcionario.getPlanosServicos().add(insertPlano(id,TabelaEnum.EMPRESA,action));
-			funcionario.getSocios().add(insertSocios(19,action));
-
-			funcionario.setNotes(noteList(action));
-			funcionario.setModelAction(action);
-
-			return funcionario;
+			Pagina pagina = Objects.insertPagina(4, TabelaEnum.PAGINA, PersistenceActionEnum.INSERT);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(4);
+			Pagina paginaResponse = getEmpresaBAR().fetchPaginaById(request);
+			Assert.assertEquals(paginaResponse, null);
+			getEmpresaBAR().insertPagina(pagina);
+			paginaResponse = getEmpresaBAR().fetchPaginaById(request);
+			Assert.assertEquals(pagina.getId(), paginaResponse.getId());
+			getEmpresaBAR().deletePaginaById(pagina);
+			paginaResponse = getEmpresaBAR().fetchPaginaById(request);
+			Assert.assertEquals(paginaResponse, null);
 		}
 
-		public Filial insertFilial(Integer id,PersistenceActionEnum action)
+		@Test
+		public void testFetchAllPaginas()
 		{
-			Filial funcionario = new Filial();
-			Date a = new Date();
-
-			funcionario.setId(null);
-			funcionario.setNome("NOME");
-			funcionario.setRegime(insertRegime(action));
-			funcionario.setEntidadeId(1);
-			funcionario.setEntidadeEnum(EntidadeTypeEnum.FILIAL);
-			funcionario.setConfiguracao(insertConfiguracao(id,TabelaEnum.EMPRESA,action));
-			funcionario.setCnaes(cnaeList(action));
-			funcionario.setProcessId(1);
-			funcionario.setDocumentos(documentoList(action));
-			funcionario.setTelefones(telefoneList(action));
-			funcionario.setEmails(emailList(action));
-			funcionario.setEnderecos(enderecoList(action));
-			funcionario.setNotes(noteList(action));
-			funcionario.setModelAction(action);
-
-			return funcionario;
+		Pagina pagina = new Pagina();
+			List<Pagina> response = getEmpresaBAR().fetchAllPaginas(pagina).getResultsList();
+			Assert.assertNotNull(response);
 		}
 
-		public Deposito insertDeposito(Integer id,PersistenceActionEnum action)
+		@Test
+		public void testDeleteAllPaginas()
 		{
-			Deposito funcionario = new Deposito();
-			Date a = new Date();
-
-			funcionario.setId(null);
-			funcionario.setNome("NOME");
-			funcionario.setRegime(insertRegime(action));
-			funcionario.setEntidadeId(1);
-			funcionario.setEntidadeEnum(EntidadeTypeEnum.DEPOSITO);
-			funcionario.setConfiguracao(insertConfiguracao(id,TabelaEnum.EMPRESA,action));
-			funcionario.setCnaes(cnaeList(action));
-			funcionario.setProcessId(1);
-			funcionario.setDocumentos(documentoList(action));
-			funcionario.setTelefones(telefoneList(action));
-			funcionario.setEmails(emailList(action));
-			funcionario.setEnderecos(enderecoList(action));
-			funcionario.setNotes(noteList(action));
-			funcionario.setModelAction(action);
-
-			return funcionario;
+			getEmpresaBAR().deleteAllPaginas();
+		Pagina pagina = new Pagina();
+			List<Pagina> response = getEmpresaBAR().fetchAllPaginas(new Pagina()).getResultsList();
+			Assert.assertEquals(response.size(), 0);
 		}
 
-		public Cidade insertCidade(PersistenceActionEnum action)
+//		@Test
+//		public void testUpdatePagina()
+//		{
+//			Pagina pagina = Objects.insertPagina(1000, TabelaEnum.PAGINA, PersistenceActionEnum.UPDATE);
+//			FetchByIdRequest request = new FetchByIdRequest();
+//			request.setFetchId(1000);
+//			Pagina paginaResponse = getEmpresaBAR().fetchPaginaById(request);
+//			Assert.assertEquals(paginaResponse.getPagina(), "NATIVE INSERT");
+//			getEmpresaBAR().updatePagina(pagina);
+//			paginaResponse = getEmpresaBAR().fetchPaginaById(request);
+//			Assert.assertEquals(paginaResponse.getPagina(), "NATIVE INSERT UPDATE");
+//		}
+
+		@Test
+		public void testFetchPaginasByRequest() throws Exception
 		{
-			Cidade cidade = new Cidade();
-			Date a = new Date();
+			// check for valid and precount
+			PagedInquiryRequest request = new PagedInquiryRequest();
+			request.setPreQueryCount(true);
+			request.setStartPage(0);
+			request.setPageSize(3);
+			InternalResultsResponse<Pagina> response = getEmpresaBAR().fetchPaginasByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() > 0);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() == 0);
+			// check for valid and precount and start 2nd page
+			request.setPreQueryCount(true);
+			request.setStartPage(1);
+			request.setPageSize(3);
+			response = getEmpresaBAR().fetchPaginasByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() > 0);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() == 0);
 
-			cidade.setId(1);
-			cidade.setCodigo("CODIGO");
-			cidade.setNome("NOME");
-			cidade.setCdIBGE("CDIBGE");
-			cidade.setEstado(new Estado(1));
-			cidade.setCep("CEP");
-			cidade.setNotes(noteList(action));
+			// check for valid and no precount
+			PagedInquiryRequest request2 = new PagedInquiryRequest();
+			request2.setPreQueryCount(false);
+			InternalResultsResponse<Pagina> response2 = getEmpresaBAR().fetchPaginasByRequest(request2);
+			Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+			// this is because we did not choose to precount
+			Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
 
-			return cidade;
+			// check for zero rows
+			getEmpresaBAR().deleteAllPaginas();
+			PagedInquiryRequest request3 = new PagedInquiryRequest();
+			request3.setPreQueryCount(true);
+			InternalResultsResponse<Pagina> response3 = getEmpresaBAR().fetchPaginasByRequest(request3);
+			Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+
 		}
 
-		public Socio insertSocios(Integer id,PersistenceActionEnum action)
+	//===================================### VALIDACAO ####======================================
+
+
+	@Test
+		public void testDeleteValidacao()
 		{
-			Socio cidade = new Socio();
-			Date a = new Date();
-
-			cidade.setId(id);
-			cidade.setDocumentos(documentoList(action));
-			cidade.setNome("NOME");
-			cidade.setPorcentagem("100%");
-			cidade.setCota("10");
-			cidade.setParentId(id);
-			cidade.setEmprId(1);
-			cidade.setModifyDateUTC(a.getTime());
-			cidade.setCreateDateUTC(a.getTime());
-			cidade.setCreateUser("system");
-			cidade.setModifyUser("system");
-			cidade.setProcessId(1);
-			cidade.setModelAction(action);
-
-
-			return cidade;
+			Validacao validacao = Objects.insertValidacao(4, TabelaEnum.VALIDACAO, PersistenceActionEnum.INSERT);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(4);
+			Validacao validacaoResponse = getEmpresaBAR().fetchValidacaoById(request);
+			Assert.assertEquals(validacaoResponse, null);
+			getEmpresaBAR().insertValidacao(validacao);
+			validacaoResponse = getEmpresaBAR().fetchValidacaoById(request);
+			Assert.assertEquals(validacao.getId(), validacaoResponse.getId());
+			getEmpresaBAR().deleteValidacaoById(validacao);
+			validacaoResponse = getEmpresaBAR().fetchValidacaoById(request);
+			Assert.assertEquals(validacaoResponse, null);
 		}
 
-		public ServicoAndPlano insertPlano(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		@Test
+		public void testFetchAllValidacaos()
 		{
-			ServicoAndPlano plano = new ServicoAndPlano();
-			Date a = new Date();
-			plano.setId(id);
-			plano.setDataInicio(a.getTime());
-			plano.setValor(new Double(1.99));
-			plano.setServicoPlanoEnumValue(1);
-			plano.setServicoList(new Servico(1,"tanga"));
-			plano.setPlanoList(new Plano(2,"Tanga"));
-			plano.setParentId(id);
-			plano.setEmprId(1);
-			plano.setModifyDateUTC(a.getTime());
-			plano.setCreateDateUTC(a.getTime());
-			plano.setCreateUser("system");
-			plano.setModifyUser("system");
-			plano.setProcessId(1);
-			plano.setModelAction(action);
-
-			return plano;
+		Validacao validacao = new Validacao();
+			List<Validacao> response = getEmpresaBAR().fetchAllValidacaos(validacao).getResultsList();
+			Assert.assertNotNull(response);
 		}
 
-		public Configuracao insertConfiguracao(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		@Test
+		public void testDeleteAllValidacaos()
 		{
-			Configuracao configuracao = new Configuracao();
-			Date a = new Date();
-			configuracao.setId(100);
-			configuracao.setConfGeral(insertConfigGeral(id,TabelaEnum.BOLETO,action));
-			configuracao.setConfNFe(insertConfiguracaoNFe(id,TabelaEnum.BOLETO,action));
-			configuracao.setConfFiscal(insertConfigFiscal(id,TabelaEnum.BOLETO,action));
-			configuracao.setConfProd(insertConfigProduto(id,TabelaEnum.BOLETO,action));
-			configuracao.setConfVendas(insertConfigVendas(id,TabelaEnum.BOLETO,action));
-			configuracao.setConfCMTP(insertConfigSMTP(id,TabelaEnum.BOLETO,action));
-			configuracao.setConfEntrada(insertConfigEntrada(id,TabelaEnum.BOLETO,action));
-			configuracao.setConfCarne(insertConfigCarne(id,TabelaEnum.BOLETO,action));
-			configuracao.setBoletoList(new ArrayList<Boleto>());
-			configuracao.getBoletoList().add(insertBoleto(id,TabelaEnum.BOLETO,action));
-			configuracao.setParentId(id);
-			configuracao.setEmprId(1);
-			configuracao.setModifyDateUTC(a.getTime());
-			configuracao.setCreateDateUTC(a.getTime());
-			configuracao.setCreateUser("system");
-			configuracao.setModifyUser("system");
-			configuracao.setProcessId(1);
-			configuracao.setModelAction(action);
-
-			return configuracao;
+			getEmpresaBAR().deleteAllValidacaos();
+		Validacao validacao = new Validacao();
+			List<Validacao> response = getEmpresaBAR().fetchAllValidacaos(new Validacao()).getResultsList();
+			Assert.assertEquals(response.size(), 0);
 		}
 
-
-	public Boleto insertBoleto(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		@Test
+		public void testUpdateValidacao()
 		{
-			Boleto boleto = new Boleto();
-			Date a = new Date();
-			boleto.setId(100);
-			boleto.setAtivarBolOnLine(0);
-			boleto.setTipoBoleto(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
-			boleto.setAgencia(100);
-			boleto.setCedente(100);
-			boleto.setJuros(new Double(1.99));
-			boleto.setTipoCalcMora(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
-			boleto.setMora(new Double(1.99));
-			boleto.setInstrucoes("NATIVE INSERT UPDATE");
-			boleto.setDemonstrativo("NATIVE INSERT UPDATE");
-			boleto.setImpJuros(0);
-			boleto.setParentId(id);
-			boleto.setEmprId(1);
-			boleto.setModifyDateUTC(a.getTime());
-			boleto.setCreateDateUTC(a.getTime());
-			boleto.setCreateUser("system");
-			boleto.setModifyUser("system");
-			boleto.setProcessId(1);
-			boleto.setModelAction(action);
-
-			return boleto;
+			Validacao validacao = Objects.insertValidacao(1001, TabelaEnum.VALIDACAO, PersistenceActionEnum.UPDATE);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(1001);
+			Validacao validacaoResponse = getEmpresaBAR().fetchValidacaoById(request);
+			Assert.assertEquals(validacaoResponse.getError(), "error_1");
+			getEmpresaBAR().updateValidacao(validacao);
+			validacaoResponse = getEmpresaBAR().fetchValidacaoById(request);
+			Assert.assertEquals(validacaoResponse.getError(), "NATIVE INSERT UPDATE");
 		}
 
-
-	public ConfigCarne insertConfigCarne(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		@Test
+		public void testFetchValidacaosByRequest() throws Exception
 		{
-			ConfigCarne ConfigCarne = new ConfigCarne();
-			Date a = new Date();
-			ConfigCarne.setId(100);
-			ConfigCarne.setCarneBotelo(0);
-			ConfigCarne.setCarneNormal(0);
-			ConfigCarne.setParentId(id);
-			ConfigCarne.setEmprId(1);
-			ConfigCarne.setModifyDateUTC(a.getTime());
-			ConfigCarne.setCreateDateUTC(a.getTime());
-			ConfigCarne.setCreateUser("system");
-			ConfigCarne.setModifyUser("system");
-			ConfigCarne.setProcessId(1);
-			ConfigCarne.setModelAction(action);
+			// check for valid and precount
+			PagedInquiryRequest request = new PagedInquiryRequest();
+			request.setPreQueryCount(true);
+			request.setStartPage(0);
+			request.setPageSize(3);
+			InternalResultsResponse<Validacao> response = getEmpresaBAR().fetchValidacaosByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+			// check for valid and precount and start 2nd page
+			request.setPreQueryCount(true);
+			request.setStartPage(1);
+			request.setPageSize(3);
+			response = getEmpresaBAR().fetchValidacaosByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
-			return ConfigCarne;
+			// check for valid and no precount
+			PagedInquiryRequest request2 = new PagedInquiryRequest();
+			request2.setPreQueryCount(false);
+			InternalResultsResponse<Validacao> response2 = getEmpresaBAR().fetchValidacaosByRequest(request2);
+			Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+			// this is because we did not choose to precount
+			Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+			// check for zero rows
+			getEmpresaBAR().deleteAllValidacaos();
+			PagedInquiryRequest request3 = new PagedInquiryRequest();
+			request3.setPreQueryCount(true);
+			InternalResultsResponse<Validacao> response3 = getEmpresaBAR().fetchValidacaosByRequest(request3);
+			Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+
 		}
 
+	//===================================### FIELD ####======================================
 
-	public ConfigEntrada insertConfigEntrada(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+
+	@Test
+		public void testDeleteField()
 		{
-			ConfigEntrada ConfigEntrada = new ConfigEntrada();
-			Date a = new Date();
-			ConfigEntrada.setId(100);
-			ConfigEntrada.setValorTotalFixo(0);
-			ConfigEntrada.setManterPrecoVendaProd(0);
-			ConfigEntrada.setParentId(id);
-			ConfigEntrada.setEmprId(1);
-			ConfigEntrada.setModifyDateUTC(a.getTime());
-			ConfigEntrada.setCreateDateUTC(a.getTime());
-			ConfigEntrada.setCreateUser("system");
-			ConfigEntrada.setModifyUser("system");
-			ConfigEntrada.setProcessId(1);
-			ConfigEntrada.setModelAction(action);
-
-			return ConfigEntrada;
+			Field field = Objects.insertField(4, TabelaEnum.FIELD, PersistenceActionEnum.INSERT);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(4);
+			Field fieldResponse = getEmpresaBAR().fetchFieldById(request);
+			Assert.assertEquals(fieldResponse, null);
+			getEmpresaBAR().insertField(field);
+			fieldResponse = getEmpresaBAR().fetchFieldById(request);
+			Assert.assertEquals(field.getId(), fieldResponse.getId());
+			getEmpresaBAR().deleteFieldById(field);
+			fieldResponse = getEmpresaBAR().fetchFieldById(request);
+			Assert.assertEquals(fieldResponse, null);
 		}
 
-
-	public ConfigFiscal insertConfigFiscal(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		@Test
+		public void testFetchAllFields()
 		{
-			ConfigFiscal ConfigFiscal = new ConfigFiscal();
-			Date a = new Date();
-			ConfigFiscal.setId(100);
-			//ConfigFiscal.setPrincAtividade(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
-			ConfigFiscal.setRegime(new Regime());
-			ConfigFiscal.setAliqSimples(new Double(1.99));
-			ConfigFiscal.setParentId(id);
-			ConfigFiscal.setEmprId(1);
-			ConfigFiscal.setModifyDateUTC(a.getTime());
-			ConfigFiscal.setCreateDateUTC(a.getTime());
-			ConfigFiscal.setCreateUser("system");
-			ConfigFiscal.setModifyUser("system");
-			ConfigFiscal.setProcessId(1);
-			ConfigFiscal.setModelAction(action);
-
-			return ConfigFiscal;
+		Field field = new Field();
+			List<Field> response = getEmpresaBAR().fetchAllFields(field).getResultsList();
+			Assert.assertNotNull(response);
 		}
 
-
-	public ConfigAlertas insertConfigAlertas(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		@Test
+		public void testDeleteAllFields()
 		{
-			ConfigAlertas ConfigAlertas = new ConfigAlertas();
-			Date a = new Date();
-			ConfigAlertas.setId(100);
-			ConfigAlertas.setEstoqMin(0);
-			ConfigAlertas.setEstoqMax(0);
-			ConfigAlertas.setErroNFe(0);
-			ConfigAlertas.setPdCompra(0);
-			ConfigAlertas.setParentId(id);
-			ConfigAlertas.setEmprId(1);
-			ConfigAlertas.setModifyDateUTC(a.getTime());
-			ConfigAlertas.setCreateDateUTC(a.getTime());
-			ConfigAlertas.setCreateUser("system");
-			ConfigAlertas.setModifyUser("system");
-			ConfigAlertas.setProcessId(1);
-			ConfigAlertas.setModelAction(action);
-
-			return ConfigAlertas;
+			getEmpresaBAR().deleteAllFields();
+		Field field = new Field();
+			List<Field> response = getEmpresaBAR().fetchAllFields(new Field()).getResultsList();
+			Assert.assertEquals(response.size(), 0);
 		}
 
-
-	public ConfigGeral insertConfigGeral(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		@Test
+		public void testUpdateField()
 		{
-			ConfigGeral ConfigGeral = new ConfigGeral();
-			Date a = new Date();
-			ConfigGeral.setId(100);
-			ConfigGeral.setFusoHorario(100);
-			ConfigGeral.setCasasDecimais(100);
-			ConfigGeral.setDiasCartaCobr(100);
-			ConfigGeral.setInfPosicionarMouse(0);
-			ConfigGeral.setCnpjCPFUnico(0);
-			ConfigGeral.setImpCodPersonalizado(0);
-			ConfigGeral.setLogListRelImp(0);
-			ConfigGeral.setObsProdFinProd(0);
-			ConfigGeral.setParentId(id);
-			ConfigGeral.setEmprId(1);
-			ConfigGeral.setModifyDateUTC(a.getTime());
-			ConfigGeral.setCreateDateUTC(a.getTime());
-			ConfigGeral.setCreateUser("system");
-			ConfigGeral.setModifyUser("system");
-			ConfigGeral.setProcessId(1);
-			ConfigGeral.setModelAction(action);
-
-			return ConfigGeral;
+			Field field = Objects.insertField(1001, TabelaEnum.FIELD, PersistenceActionEnum.UPDATE);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(1001);
+			Field fieldResponse = getEmpresaBAR().fetchFieldById(request);
+			Assert.assertEquals(fieldResponse.getLabel(), "label_1");
+			getEmpresaBAR().updateField(field);
+			fieldResponse = getEmpresaBAR().fetchFieldById(request);
+			Assert.assertEquals(fieldResponse.getLabel(), "NATIVE INSERT UPDATE");
 		}
 
-
-	public ConfigProduto insertConfigProduto(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		@Test
+		public void testFetchFieldsByRequest() throws Exception
 		{
-			ConfigProduto ConfigProduto = new ConfigProduto();
-			Date a = new Date();
-			ConfigProduto.setId(100);
-			ConfigProduto.setCfop(new Cfop());
-			ConfigProduto.setIcmsSitTrib(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
-			ConfigProduto.setIcmsOrigem(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
-			ConfigProduto.setIcmsModalidadeBC(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
-			ConfigProduto.setIcmsRedBaseCalc(new Double(1.99));
-			ConfigProduto.setIcmsAliq(new Double(1.99));
-			ConfigProduto.setIcmsMotDesoneracao(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
-			ConfigProduto.setIcmsModBCST(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
-			ConfigProduto.setIcmsMargValAdic(new Double(1.99));
-			ConfigProduto.setIcmsRedBaseCalcST(new Double(1.99));
-			ConfigProduto.setIcmsPrecoUnitPautaST(new Double(1.99));
-			ConfigProduto.setIcmsAliqST(new Double(1.99));
-			ConfigProduto.setIpiSitTrib(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
-			ConfigProduto.setIpiClasCigarroBebida(new Double(1.99));
-			ConfigProduto.setIpiCNPJProd("NATIVE INSERT UPDATE");
-			ConfigProduto.setIpiCodSeloCont("NATIVE INSERT UPDATE");
-			ConfigProduto.setIpiQtdSelo(new Double(1.99));
-			ConfigProduto.setIpiCodEnquad(100);
-			ConfigProduto.setIpiTipCalc(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
-			ConfigProduto.setIpiAliq(new Double(1.99));
-			ConfigProduto.setPisSitTrib(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
-			ConfigProduto.setPisAliq(new Double(1.99));
-			ConfigProduto.setPisValUnidtrib(new Double(1.99));
-			ConfigProduto.setPistipoCalcSubstTrib(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
-			ConfigProduto.setPisAliqST(new Double(1.99));
-			ConfigProduto.setPisValorAliqST(new Double(1.99));
-			ConfigProduto.setCofinsSubstTrib(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
-			ConfigProduto.setCofinsAliq(new Double(1.99));
-			ConfigProduto.setCofinsValorAliq(new Double(1.99));
-			ConfigProduto.setCofinsTipoCalcSubstTrib(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
-			ConfigProduto.setCofinsAliqST(new Double(1.99));
-			ConfigProduto.setCofinsValorAliqST(new Double(1.99));
-			ConfigProduto.setParentId(id);
-			ConfigProduto.setEmprId(1);
-			ConfigProduto.setModifyDateUTC(a.getTime());
-			ConfigProduto.setCreateDateUTC(a.getTime());
-			ConfigProduto.setCreateUser("system");
-			ConfigProduto.setModifyUser("system");
-			ConfigProduto.setProcessId(1);
-			ConfigProduto.setModelAction(action);
+			// check for valid and precount
+			FieldInquiryRequest request = new FieldInquiryRequest();
+			request.setPreQueryCount(true);
+			request.setStartPage(0);
+			request.setPageSize(3);
+			InternalResultsResponse<Field> response = getEmpresaBAR().fetchFieldsByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+			// check for valid and precount and start 2nd page
+			request.setPreQueryCount(true);
+			request.setStartPage(1);
+			request.setPageSize(3);
+			response = getEmpresaBAR().fetchFieldsByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
-			return ConfigProduto;
+			// check for valid and no precount
+			FieldInquiryRequest request2 = new FieldInquiryRequest();
+			request2.setPreQueryCount(false);
+			InternalResultsResponse<Field> response2 = getEmpresaBAR().fetchFieldsByRequest(request2);
+			Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+			// this is because we did not choose to precount
+			Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+			// check for zero rows
+			getEmpresaBAR().deleteAllFields();
+			FieldInquiryRequest request3 = new FieldInquiryRequest();
+			request3.setPreQueryCount(true);
+			InternalResultsResponse<Field> response3 = getEmpresaBAR().fetchFieldsByRequest(request3);
+			Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+
 		}
 
+	//===================================### AJUDA ####======================================
 
-	public ConfigSMTP insertConfigSMTP(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+
+	@Test
+		public void testDeleteAjuda()
 		{
-			ConfigSMTP ConfigSMTP = new ConfigSMTP();
-			Date a = new Date();
-			ConfigSMTP.setId(100);
-			ConfigSMTP.setServSMTP("NATIVE INSERT UPDATE");
-			ConfigSMTP.setPorta("NATIVE INSERT UPDATE");
-			ConfigSMTP.setEndEmail("NATIVE INSERT UPDATE");
-			ConfigSMTP.setUsuario("NATIVE INSERT UPDATE");
-			ConfigSMTP.setSenha("NATIVE INSERT UPDATE");
-			ConfigSMTP.setSeguranca(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
-			ConfigSMTP.setParentId(id);
-			ConfigSMTP.setEmprId(1);
-			ConfigSMTP.setModifyDateUTC(a.getTime());
-			ConfigSMTP.setCreateDateUTC(a.getTime());
-			ConfigSMTP.setCreateUser("system");
-			ConfigSMTP.setModifyUser("system");
-			ConfigSMTP.setProcessId(1);
-			ConfigSMTP.setModelAction(action);
-
-			return ConfigSMTP;
+			Ajuda ajuda = Objects.insertAjuda(4, TabelaEnum.AJUDA, PersistenceActionEnum.INSERT);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(4);
+			Ajuda ajudaResponse = getEmpresaBAR().fetchAjudaById(request);
+			Assert.assertEquals(ajudaResponse, null);
+			getEmpresaBAR().insertAjuda(ajuda);
+			ajudaResponse = getEmpresaBAR().fetchAjudaById(request);
+			Assert.assertEquals(ajuda.getId(), ajudaResponse.getId());
+			getEmpresaBAR().deleteAjudaById(ajuda);
+			ajudaResponse = getEmpresaBAR().fetchAjudaById(request);
+			Assert.assertEquals(ajudaResponse, null);
 		}
 
-
-	public ConfiguracaoNFe insertConfiguracaoNFe(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		@Test
+		public void testFetchAllAjudas()
 		{
-			ConfiguracaoNFe ConfiguracaoNFe = new ConfiguracaoNFe();
-			Date a = new Date();
-			ConfiguracaoNFe.setId(100);
-			ConfiguracaoNFe.setPresCompr(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
-			ConfiguracaoNFe.setDestConsFinal(0);
-			ConfiguracaoNFe.setPreencherDataHora(0);
-			ConfiguracaoNFe.setIcmsPadrao(new Double(1.99));
-			ConfiguracaoNFe.setIpiPadrao(new Double(1.99));
-			ConfiguracaoNFe.setPisPadrao(new Double(1.99));
-			ConfiguracaoNFe.setCofinsPadrao(new Double(1.99));
-			ConfiguracaoNFe.setAmbienteEnvio(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
-			ConfiguracaoNFe.setServMsmNota(insertDoisValor(id,TabelaEnum.CONFIGVENDAS, action));
-			ConfiguracaoNFe.setSerieEnvio("NATIVE INSERT UPDATE");
-			ConfiguracaoNFe.setAnexarXmlEmail(0);
-			ConfiguracaoNFe.setIdCSC("NATIVE INSERT UPDATE");
-			ConfiguracaoNFe.setcSC("NATIVE INSERT UPDATE");
-			ConfiguracaoNFe.setInformacaoAdd("NATIVE INSERT UPDATE");
-			ConfiguracaoNFe.setCertificado("NATIVE INSERT UPDATE");
-			ConfiguracaoNFe.setSenha("NATIVE INSERT UPDATE");
-			ConfiguracaoNFe.setSalvarSenha(0);
-			ConfiguracaoNFe.setCfopPadrao(new Cfop());
-		//	ConfiguracaoNFe.setConfSMTP(new ConfigSMTP());
-			ConfiguracaoNFe.setParentId(id);
-			ConfiguracaoNFe.setEmprId(1);
-			ConfiguracaoNFe.setModifyDateUTC(a.getTime());
-			ConfiguracaoNFe.setCreateDateUTC(a.getTime());
-			ConfiguracaoNFe.setCreateUser("system");
-			ConfiguracaoNFe.setModifyUser("system");
-			ConfiguracaoNFe.setProcessId(1);
-			ConfiguracaoNFe.setModelAction(action);
-
-			return ConfiguracaoNFe;
+		Ajuda ajuda = new Ajuda();
+			List<Ajuda> response = getEmpresaBAR().fetchAllAjudas(ajuda).getResultsList();
+			Assert.assertNotNull(response);
 		}
 
-
-	public ConfigVendas insertConfigVendas(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		@Test
+		public void testDeleteAllAjudas()
 		{
-			ConfigVendas ConfigVendas = new ConfigVendas();
-			Date a = new Date();
-			ConfigVendas.setId(100);
-			ConfigVendas.setDescontoMaxVenda(new Double(1.99));
-			ConfigVendas.setObservacao("observação");
-			ConfigVendas.setImprSegVia(0);
-			ConfigVendas.setImprAssinatura(0);
-			ConfigVendas.setImprResumoFinanc(0);
-			ConfigVendas.setAtuaPrecoClonar(0);
-			ConfigVendas.setImprColUnidade(0);
-			ConfigVendas.setBloquearvendProdSemEstoq(0);
-			ConfigVendas.setAddDespCalcImposto(0);
-			ConfigVendas.setRetSubstTribICMS(0);
-			ConfigVendas.setParentId(id);
-			ConfigVendas.setEmprId(1);
-			ConfigVendas.setModifyDateUTC(a.getTime());
-			ConfigVendas.setCreateDateUTC(a.getTime());
-			ConfigVendas.setCreateUser("system");
-			ConfigVendas.setModifyUser("system");
-			ConfigVendas.setProcessId(1);
-			ConfigVendas.setModelAction(action);
-
-			return ConfigVendas;
+			getEmpresaBAR().deleteAllAjudas();
+		Ajuda ajuda = new Ajuda();
+			List<Ajuda> response = getEmpresaBAR().fetchAllAjudas(new Ajuda()).getResultsList();
+			Assert.assertEquals(response.size(), 0);
 		}
 
-	public DoisValores insertDoisValor(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-	{
-		DoisValores ConfigVendas = new DoisValores();
-		Date a = new Date();
-		ConfigVendas.setId(100);
-		ConfigVendas.setNome("teste");
-		ConfigVendas.setDescricao("Description");
-		ConfigVendas.setParentId(id);
-		ConfigVendas.setEmprId(1);
-		ConfigVendas.setModifyDateUTC(a.getTime());
-		ConfigVendas.setCreateDateUTC(a.getTime());
-		ConfigVendas.setCreateUser("system");
-		ConfigVendas.setModifyUser("system");
-		ConfigVendas.setProcessId(1);
-		ConfigVendas.setModelAction(action);
+		@Test
+		public void testUpdateAjuda()
+		{
+			Ajuda ajuda = Objects.insertAjuda(1001, TabelaEnum.AJUDA, PersistenceActionEnum.UPDATE);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(1001);
+			Ajuda ajudaResponse = getEmpresaBAR().fetchAjudaById(request);
+			Assert.assertEquals(ajudaResponse.getTexto(), "texto_1");
+			getEmpresaBAR().updateAjuda(ajuda);
+			ajudaResponse = getEmpresaBAR().fetchAjudaById(request);
+			Assert.assertEquals(ajudaResponse.getTexto(), "NATIVE INSERT UPDATE");
+		}
 
-		return ConfigVendas;
-	}
+		@Test
+		public void testFetchAjudasByRequest() throws Exception
+		{
+			// check for valid and precount
+			PagedInquiryRequest request = new PagedInquiryRequest();
+			request.setPreQueryCount(true);
+			request.setStartPage(0);
+			request.setPageSize(3);
+			InternalResultsResponse<Ajuda> response = getEmpresaBAR().fetchAjudasByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+			// check for valid and precount and start 2nd page
+			request.setPreQueryCount(true);
+			request.setStartPage(1);
+			request.setPageSize(3);
+			response = getEmpresaBAR().fetchAjudasByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+
+			// check for valid and no precount
+			PagedInquiryRequest request2 = new PagedInquiryRequest();
+			request2.setPreQueryCount(false);
+			InternalResultsResponse<Ajuda> response2 = getEmpresaBAR().fetchAjudasByRequest(request2);
+			Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+			// this is because we did not choose to precount
+			Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+			// check for zero rows
+			getEmpresaBAR().deleteAllAjudas();
+			PagedInquiryRequest request3 = new PagedInquiryRequest();
+			request3.setPreQueryCount(true);
+			InternalResultsResponse<Ajuda> response3 = getEmpresaBAR().fetchAjudasByRequest(request3);
+			Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+
+		}
+
+	//===================================### MENU ####======================================
+
+
+	@Test
+		public void testDeleteMenu()
+		{
+			Menu menu = Objects.insertMenu(4, TabelaEnum.MENU, PersistenceActionEnum.INSERT);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(4);
+			Menu menuResponse = getEmpresaBAR().fetchMenuById(request);
+			Assert.assertEquals(menuResponse, null);
+			getEmpresaBAR().insertMenu(menu);
+			menuResponse = getEmpresaBAR().fetchMenuById(request);
+			Assert.assertEquals(menu.getId(), menuResponse.getId());
+			getEmpresaBAR().deleteMenuById(menu);
+			menuResponse = getEmpresaBAR().fetchMenuById(request);
+			Assert.assertEquals(menuResponse, null);
+		}
+
+		@Test
+		public void testFetchAllMenus()
+		{
+		Menu menu = new Menu();
+			List<Menu> response = getEmpresaBAR().fetchAllMenus(menu).getResultsList();
+			Assert.assertNotNull(response);
+		}
+
+		@Test
+		public void testDeleteAllMenus()
+		{
+			getEmpresaBAR().deleteAllMenus();
+		Menu menu = new Menu();
+			List<Menu> response = getEmpresaBAR().fetchAllMenus(new Menu()).getResultsList();
+			Assert.assertEquals(response.size(), 0);
+		}
+
+		@Test
+		public void testUpdateMenu()
+		{
+			Menu menu = Objects.insertMenu(1001, TabelaEnum.MENU, PersistenceActionEnum.UPDATE);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(1001);
+			Menu menuResponse = getEmpresaBAR().fetchMenuById(request);
+			Assert.assertEquals(menuResponse.getNome(), "nome_1");
+			getEmpresaBAR().updateMenu(menu);
+			menuResponse = getEmpresaBAR().fetchMenuById(request);
+			Assert.assertEquals(menuResponse.getNome(), "NATIVE INSERT UPDATE");
+		}
+
+		@Test
+		public void testFetchMenusByRequest() throws Exception
+		{
+			// check for valid and precount
+			PagedInquiryRequest request = new PagedInquiryRequest();
+			request.setPreQueryCount(true);
+			request.setStartPage(0);
+			request.setPageSize(3);
+			InternalResultsResponse<Menu> response = getEmpresaBAR().fetchMenusByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+			// check for valid and precount and start 2nd page
+			request.setPreQueryCount(true);
+			request.setStartPage(1);
+			request.setPageSize(3);
+			response = getEmpresaBAR().fetchMenusByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+
+			// check for valid and no precount
+			PagedInquiryRequest request2 = new PagedInquiryRequest();
+			request2.setPreQueryCount(false);
+			InternalResultsResponse<Menu> response2 = getEmpresaBAR().fetchMenusByRequest(request2);
+			Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+			// this is because we did not choose to precount
+			Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+			// check for zero rows
+			getEmpresaBAR().deleteAllMenus();
+			PagedInquiryRequest request3 = new PagedInquiryRequest();
+			request3.setPreQueryCount(true);
+			InternalResultsResponse<Menu> response3 = getEmpresaBAR().fetchMenusByRequest(request3);
+			Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+
+		}
+
 
 }

@@ -30,11 +30,20 @@ import com.qat.samples.sysmgmt.condominio.model.request.CondominioMaintenanceReq
 import com.qat.samples.sysmgmt.condominio.model.request.TransactionInquiryRequest;
 import com.qat.samples.sysmgmt.condominio.model.response.CondominioResponse;
 import com.qat.samples.sysmgmt.condominio.model.response.TransactionResponse;
+import com.qat.samples.sysmgmt.contabilidade.response.FieldResponse;
+import com.qat.samples.sysmgmt.dicionario.request.FieldInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.Ajuda;
 import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
+import com.qat.samples.sysmgmt.entidade.model.Field;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
+import com.qat.samples.sysmgmt.entidade.model.Menu;
+import com.qat.samples.sysmgmt.entidade.model.Pagina;
+import com.qat.samples.sysmgmt.entidade.model.Role;
 import com.qat.samples.sysmgmt.entidade.model.Transaction;
+import com.qat.samples.sysmgmt.entidade.model.UserRoles;
 import com.qat.samples.sysmgmt.entidade.model.Usuario;
+import com.qat.samples.sysmgmt.entidade.model.Validacao;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
@@ -44,9 +53,20 @@ import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.response.DepositoResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.EmpresaResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.FilialResponse;
+import com.qat.samples.sysmgmt.entidade.model.response.PaginaResponse;
+import com.qat.samples.sysmgmt.entidade.model.response.RoleResponse;
+import com.qat.samples.sysmgmt.entidade.model.response.UserRolesResponse;
+import com.qat.samples.sysmgmt.util.model.request.AjudaMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.request.FieldMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.request.MenuMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.PaginaMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
+import com.qat.samples.sysmgmt.util.model.request.RoleMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.request.UserRolesMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.UsuarioMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.request.ValidacaoMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.response.UsuarioResponse;
 
 /**
@@ -925,5 +945,912 @@ public class EmpresaAPIController extends BaseController {
 		return transactionResponse;
 
 	}
+
+	// ===================================### USERROLES
+	// ####======================================
+	/**
+	 * Refresh userroless.
+	 *
+	 * @param refreshInt
+	 *            the refresh int
+	 * @param retList
+	 *            the ret list
+	 * @param retPaged
+	 *            the ret paged
+	 * @return the userroles response
+	 */
+	@RequestMapping(value = "/userRoles/refresh", method = RequestMethod.GET)
+	@ResponseBody
+	public UserRolesResponse refreshUserRoless(@RequestParam("refreshInt") Integer refreshInt,
+			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
+		UserRolesResponse userrolesResponse = new UserRolesResponse();
+
+		try {
+			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
+			InternalResultsResponse<UserRoles> internalResponse = getEmpresaBAC().refreshUserRoless(request);
+			ResponseHandler.handleOperationStatusAndMessages(userrolesResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, userrolesResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return userrolesResponse;
+
+	}
+
+	/**
+	 * Fetch userroles paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the userroles response
+	 */
+	@RequestMapping(value = "/userRoles/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public UserRolesResponse fetchUserRolesPaged(@RequestBody PagedInquiryRequest request) {
+		UserRolesResponse userrolesResponse = new UserRolesResponse();
+		try {
+			InternalResultsResponse<UserRoles> internalResponse = getEmpresaBAC().fetchUserRolessByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(userrolesResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, userrolesResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return userrolesResponse;
+	}
+
+	/**
+	 * Insert userroles.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the userroles response
+	 */
+	@RequestMapping(value = "/userRoles/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public UserRolesResponse insertUserRoles(@RequestBody UserRolesMaintenanceRequest request) {
+		UserRolesResponse userrolesResponse = new UserRolesResponse();
+		try {
+			InternalResultsResponse<UserRoles> internalResponse = getEmpresaBAC().insertUserRoles(request);
+			ResponseHandler.handleOperationStatusAndMessages(userrolesResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, userrolesResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return userrolesResponse;
+	}
+
+	/**
+	 * Update userroles.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the userroles response
+	 */
+	@RequestMapping(value = "/userRoles/update", method = RequestMethod.POST)
+	@ResponseBody
+	public UserRolesResponse updateUserRoles(@RequestBody UserRolesMaintenanceRequest request) {
+		UserRolesResponse userrolesResponse = new UserRolesResponse();
+		try {
+			InternalResultsResponse<UserRoles> internalResponse = getEmpresaBAC().updateUserRoles(request);
+			ResponseHandler.handleOperationStatusAndMessages(userrolesResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, userrolesResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return userrolesResponse;
+	}
+
+	/**
+	 * Delete userroles.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the userroles response
+	 */
+	@RequestMapping(value = "/userRoles/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public UserRolesResponse deleteUserRoles(@RequestBody UserRolesMaintenanceRequest request) {
+		UserRolesResponse userrolesResponse = new UserRolesResponse();
+
+		try {
+			InternalResultsResponse<UserRoles> internalResponse = getEmpresaBAC().deleteUserRoles(request);
+			ResponseHandler.handleOperationStatusAndMessages(userrolesResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, userrolesResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return userrolesResponse;
+
+	}
+
+	// ===================================### ROLE
+	// ####======================================
+	/**
+	 * Refresh roles.
+	 *
+	 * @param refreshInt
+	 *            the refresh int
+	 * @param retList
+	 *            the ret list
+	 * @param retPaged
+	 *            the ret paged
+	 * @return the role response
+	 */
+	@RequestMapping(value = "/role/refresh", method = RequestMethod.GET)
+	@ResponseBody
+	public RoleResponse refreshRoles(@RequestParam("refreshInt") Integer refreshInt,
+			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
+		RoleResponse roleResponse = new RoleResponse();
+
+		try {
+			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
+			InternalResultsResponse<Role> internalResponse = getEmpresaBAC().refreshRoles(request);
+			ResponseHandler.handleOperationStatusAndMessages(roleResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, roleResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return roleResponse;
+
+	}
+
+	/**
+	 * Fetch role paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the role response
+	 */
+	@RequestMapping(value = "/role/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public RoleResponse fetchRolePaged(@RequestBody PagedInquiryRequest request) {
+		RoleResponse roleResponse = new RoleResponse();
+		try {
+			InternalResultsResponse<Role> internalResponse = getEmpresaBAC().fetchRolesByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(roleResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, roleResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return roleResponse;
+	}
+
+	/**
+	 * Insert role.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the role response
+	 */
+	@RequestMapping(value = "/role/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public RoleResponse insertRole(@RequestBody RoleMaintenanceRequest request) {
+		RoleResponse roleResponse = new RoleResponse();
+		try {
+			InternalResultsResponse<Role> internalResponse = getEmpresaBAC().insertRole(request);
+			ResponseHandler.handleOperationStatusAndMessages(roleResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, roleResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return roleResponse;
+	}
+
+	/**
+	 * Update role.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the role response
+	 */
+	@RequestMapping(value = "/role/update", method = RequestMethod.POST)
+	@ResponseBody
+	public RoleResponse updateRole(@RequestBody RoleMaintenanceRequest request) {
+		RoleResponse roleResponse = new RoleResponse();
+		try {
+			InternalResultsResponse<Role> internalResponse = getEmpresaBAC().updateRole(request);
+			ResponseHandler.handleOperationStatusAndMessages(roleResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, roleResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return roleResponse;
+	}
+
+	/**
+	 * Delete role.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the role response
+	 */
+	@RequestMapping(value = "/role/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public RoleResponse deleteRole(@RequestBody RoleMaintenanceRequest request) {
+		RoleResponse roleResponse = new RoleResponse();
+
+		try {
+			InternalResultsResponse<Role> internalResponse = getEmpresaBAC().deleteRole(request);
+			ResponseHandler.handleOperationStatusAndMessages(roleResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, roleResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return roleResponse;
+
+	}
+
+	// ===================================### PAGINA
+	// ####======================================
+	/**
+	 * Refresh paginas.
+	 *
+	 * @param refreshInt
+	 *            the refresh int
+	 * @param retList
+	 *            the ret list
+	 * @param retPaged
+	 *            the ret paged
+	 * @return the pagina response
+	 */
+	@RequestMapping(value = "/pagina/refresh", method = RequestMethod.GET)
+	@ResponseBody
+	public PaginaResponse refreshPaginas(@RequestParam("refreshInt") Integer refreshInt,
+			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
+		PaginaResponse paginaResponse = new PaginaResponse();
+
+		try {
+			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
+			InternalResultsResponse<Pagina> internalResponse = getEmpresaBAC().refreshPaginas(request);
+			ResponseHandler.handleOperationStatusAndMessages(paginaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, paginaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return paginaResponse;
+
+	}
+
+	/**
+	 * Fetch pagina paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the pagina response
+	 */
+	@RequestMapping(value = "/pagina/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public PaginaResponse fetchPaginaPaged(@RequestBody PagedInquiryRequest request) {
+		PaginaResponse paginaResponse = new PaginaResponse();
+		try {
+			InternalResultsResponse<Pagina> internalResponse = getEmpresaBAC().fetchPaginasByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(paginaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, paginaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return paginaResponse;
+	}
+
+	/**
+	 * Insert pagina.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the pagina response
+	 */
+	@RequestMapping(value = "/pagina/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public PaginaResponse insertPagina(@RequestBody PaginaMaintenanceRequest request) {
+		PaginaResponse paginaResponse = new PaginaResponse();
+		try {
+			InternalResultsResponse<Pagina> internalResponse = getEmpresaBAC().insertPagina(request);
+			ResponseHandler.handleOperationStatusAndMessages(paginaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, paginaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return paginaResponse;
+	}
+
+	/**
+	 * Update pagina.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the pagina response
+	 */
+	@RequestMapping(value = "/pagina/update", method = RequestMethod.POST)
+	@ResponseBody
+	public PaginaResponse updatePagina(@RequestBody PaginaMaintenanceRequest request) {
+		PaginaResponse paginaResponse = new PaginaResponse();
+		try {
+			InternalResultsResponse<Pagina> internalResponse = getEmpresaBAC().updatePagina(request);
+			ResponseHandler.handleOperationStatusAndMessages(paginaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, paginaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return paginaResponse;
+	}
+
+	/**
+	 * Delete pagina.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the pagina response
+	 */
+	@RequestMapping(value = "/pagina/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public PaginaResponse deletePagina(@RequestBody PaginaMaintenanceRequest request) {
+		PaginaResponse paginaResponse = new PaginaResponse();
+
+		try {
+			InternalResultsResponse<Pagina> internalResponse = getEmpresaBAC().deletePagina(request);
+			ResponseHandler.handleOperationStatusAndMessages(paginaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, paginaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return paginaResponse;
+
+	}
+
+	// // ===================================### VALIDACAO
+	// // ####======================================
+	// /**
+	// * Refresh validacaos.
+	// *
+	// * @param refreshInt
+	// * the refresh int
+	// * @param retList
+	// * the ret list
+	// * @param retPaged
+	// * the ret paged
+	// * @return the validacao response
+	// */
+	// @RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	// @ResponseBody
+	// public ValidacaoResponse refreshValidacaos(@RequestParam("refreshInt")
+	// Integer refreshInt,
+	// @RequestParam("retList") Boolean retList, @RequestParam("retPaged")
+	// Boolean retPaged) {
+	// ValidacaoResponse validacaoResponse = new ValidacaoResponse();
+	//
+	// try {
+	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
+	// retPaged);
+	// InternalResultsResponse<Validacao> internalResponse =
+	// getEmpresaBAC().refreshValidacaos(request);
+	// ResponseHandler.handleOperationStatusAndMessages(validacaoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, validacaoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return validacaoResponse;
+	//
+	// }
+	//
+	// /**
+	// * Fetch validacao paged.
+	// *
+	// * @param request
+	// * the request
+	// * @return the validacao response
+	// */
+	// @RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	// @ResponseBody
+	// public ValidacaoResponse fetchValidacaoPaged(@RequestBody
+	// ValidacaoInquiryRequest request) {
+	// ValidacaoResponse validacaoResponse = new ValidacaoResponse();
+	// try {
+	// InternalResultsResponse<Validacao> internalResponse =
+	// getEmpresaBAC().fetchValidacaosByRequest(request);
+	// ResponseHandler.handleOperationStatusAndMessages(validacaoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, validacaoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return validacaoResponse;
+	// }
+	//
+	// /**
+	// * Insert validacao.
+	// *
+	// * @param request
+	// * the request
+	// * @return the validacao response
+	// */
+	// @RequestMapping(value = "/insert", method = RequestMethod.POST)
+	// @ResponseBody
+	// public ValidacaoResponse insertValidacao(@RequestBody
+	// ValidacaoMaintenanceRequest request) {
+	// ValidacaoResponse validacaoResponse = new ValidacaoResponse();
+	// try {
+	// InternalResultsResponse<Validacao> internalResponse =
+	// getEmpresaBAC().insertValidacao(request);
+	// ResponseHandler.handleOperationStatusAndMessages(validacaoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, validacaoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return validacaoResponse;
+	// }
+	//
+	// /**
+	// * Update validacao.
+	// *
+	// * @param request
+	// * the request
+	// * @return the validacao response
+	// */
+	// @RequestMapping(value = "/update", method = RequestMethod.POST)
+	// @ResponseBody
+	// public ValidacaoResponse updateValidacao(@RequestBody
+	// ValidacaoMaintenanceRequest request) {
+	// ValidacaoResponse validacaoResponse = new ValidacaoResponse();
+	// try {
+	// InternalResultsResponse<Validacao> internalResponse =
+	// getEmpresaBAC().updateValidacao(request);
+	// ResponseHandler.handleOperationStatusAndMessages(validacaoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, validacaoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return validacaoResponse;
+	// }
+	//
+	// /**
+	// * Delete validacao.
+	// *
+	// * @param request
+	// * the request
+	// * @return the validacao response
+	// */
+	// @RequestMapping(value = "/delete", method = RequestMethod.POST)
+	// @ResponseBody
+	// public ValidacaoResponse deleteValidacao(@RequestBody
+	// ValidacaoMaintenanceRequest request) {
+	// ValidacaoResponse validacaoResponse = new ValidacaoResponse();
+	//
+	// try {
+	// InternalResultsResponse<Validacao> internalResponse =
+	// getEmpresaBAC().deleteValidacao(request);
+	// ResponseHandler.handleOperationStatusAndMessages(validacaoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, validacaoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return validacaoResponse;
+	//
+	// }
+	//
+	// // ===================================### FIELD
+	// // ####======================================
+	// /**
+	// * Refresh fields.
+	// *
+	// * @param refreshInt
+	// * the refresh int
+	// * @param retList
+	// * the ret list
+	// * @param retPaged
+	// * the ret paged
+	// * @return the field response
+	// */
+	// @RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	// @ResponseBody
+	// public FieldResponse refreshFields(@RequestParam("refreshInt") Integer
+	// refreshInt,
+	// @RequestParam("retList") Boolean retList, @RequestParam("retPaged")
+	// Boolean retPaged) {
+	// FieldResponse fieldResponse = new FieldResponse();
+	//
+	// try {
+	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
+	// retPaged);
+	// InternalResultsResponse<Field> internalResponse =
+	// getEmpresaBAC().refreshFields(request);
+	// ResponseHandler.handleOperationStatusAndMessages(fieldResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, fieldResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return fieldResponse;
+	//
+	// }
+	//
+	// /**
+	// * Fetch field paged.
+	// *
+	// * @param request
+	// * the request
+	// * @return the field response
+	// */
+	// @RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	// @ResponseBody
+	// public FieldResponse fetchFieldPaged(@RequestBody FieldInquiryRequest
+	// request) {
+	// FieldResponse fieldResponse = new FieldResponse();
+	// try {
+	// InternalResultsResponse<Field> internalResponse =
+	// getEmpresaBAC().fetchFieldsByRequest(request);
+	// ResponseHandler.handleOperationStatusAndMessages(fieldResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, fieldResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return fieldResponse;
+	// }
+	//
+	// /**
+	// * Insert field.
+	// *
+	// * @param request
+	// * the request
+	// * @return the field response
+	// */
+	// @RequestMapping(value = "/insert", method = RequestMethod.POST)
+	// @ResponseBody
+	// public FieldResponse insertField(@RequestBody FieldMaintenanceRequest
+	// request) {
+	// FieldResponse fieldResponse = new FieldResponse();
+	// try {
+	// InternalResultsResponse<Field> internalResponse =
+	// getEmpresaBAC().insertField(request);
+	// ResponseHandler.handleOperationStatusAndMessages(fieldResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, fieldResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return fieldResponse;
+	// }
+	//
+	// /**
+	// * Update field.
+	// *
+	// * @param request
+	// * the request
+	// * @return the field response
+	// */
+	// @RequestMapping(value = "/update", method = RequestMethod.POST)
+	// @ResponseBody
+	// public FieldResponse updateField(@RequestBody FieldMaintenanceRequest
+	// request) {
+	// FieldResponse fieldResponse = new FieldResponse();
+	// try {
+	// InternalResultsResponse<Field> internalResponse =
+	// getEmpresaBAC().updateField(request);
+	// ResponseHandler.handleOperationStatusAndMessages(fieldResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, fieldResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return fieldResponse;
+	// }
+	//
+	// /**
+	// * Delete field.
+	// *
+	// * @param request
+	// * the request
+	// * @return the field response
+	// */
+	// @RequestMapping(value = "/delete", method = RequestMethod.POST)
+	// @ResponseBody
+	// public FieldResponse deleteField(@RequestBody FieldMaintenanceRequest
+	// request) {
+	// FieldResponse fieldResponse = new FieldResponse();
+	//
+	// try {
+	// InternalResultsResponse<Field> internalResponse =
+	// getEmpresaBAC().deleteField(request);
+	// ResponseHandler.handleOperationStatusAndMessages(fieldResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, fieldResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return fieldResponse;
+	//
+	// }
+	//
+	// // ===================================### AJUDA
+	// // ####======================================
+	// /**
+	// * Refresh ajudas.
+	// *
+	// * @param refreshInt
+	// * the refresh int
+	// * @param retList
+	// * the ret list
+	// * @param retPaged
+	// * the ret paged
+	// * @return the ajuda response
+	// */
+	// @RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	// @ResponseBody
+	// public AjudaResponse refreshAjudas(@RequestParam("refreshInt") Integer
+	// refreshInt,
+	// @RequestParam("retList") Boolean retList, @RequestParam("retPaged")
+	// Boolean retPaged) {
+	// AjudaResponse ajudaResponse = new AjudaResponse();
+	//
+	// try {
+	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
+	// retPaged);
+	// InternalResultsResponse<Ajuda> internalResponse =
+	// getEmpresaBAC().refreshAjudas(request);
+	// ResponseHandler.handleOperationStatusAndMessages(ajudaResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, ajudaResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return ajudaResponse;
+	//
+	// }
+	//
+	// /**
+	// * Fetch ajuda paged.
+	// *
+	// * @param request
+	// * the request
+	// * @return the ajuda response
+	// */
+	// @RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	// @ResponseBody
+	// public AjudaResponse fetchAjudaPaged(@RequestBody AjudaInquiryRequest
+	// request) {
+	// AjudaResponse ajudaResponse = new AjudaResponse();
+	// try {
+	// InternalResultsResponse<Ajuda> internalResponse =
+	// getEmpresaBAC().fetchAjudasByRequest(request);
+	// ResponseHandler.handleOperationStatusAndMessages(ajudaResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, ajudaResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return ajudaResponse;
+	// }
+	//
+	// /**
+	// * Insert ajuda.
+	// *
+	// * @param request
+	// * the request
+	// * @return the ajuda response
+	// */
+	// @RequestMapping(value = "/insert", method = RequestMethod.POST)
+	// @ResponseBody
+	// public AjudaResponse insertAjuda(@RequestBody AjudaMaintenanceRequest
+	// request) {
+	// AjudaResponse ajudaResponse = new AjudaResponse();
+	// try {
+	// InternalResultsResponse<Ajuda> internalResponse =
+	// getEmpresaBAC().insertAjuda(request);
+	// ResponseHandler.handleOperationStatusAndMessages(ajudaResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, ajudaResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return ajudaResponse;
+	// }
+	//
+	// /**
+	// * Update ajuda.
+	// *
+	// * @param request
+	// * the request
+	// * @return the ajuda response
+	// */
+	// @RequestMapping(value = "/update", method = RequestMethod.POST)
+	// @ResponseBody
+	// public AjudaResponse updateAjuda(@RequestBody AjudaMaintenanceRequest
+	// request) {
+	// AjudaResponse ajudaResponse = new AjudaResponse();
+	// try {
+	// InternalResultsResponse<Ajuda> internalResponse =
+	// getEmpresaBAC().updateAjuda(request);
+	// ResponseHandler.handleOperationStatusAndMessages(ajudaResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, ajudaResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return ajudaResponse;
+	// }
+	//
+	// /**
+	// * Delete ajuda.
+	// *
+	// * @param request
+	// * the request
+	// * @return the ajuda response
+	// */
+	// @RequestMapping(value = "/delete", method = RequestMethod.POST)
+	// @ResponseBody
+	// public AjudaResponse deleteAjuda(@RequestBody AjudaMaintenanceRequest
+	// request) {
+	// AjudaResponse ajudaResponse = new AjudaResponse();
+	//
+	// try {
+	// InternalResultsResponse<Ajuda> internalResponse =
+	// getEmpresaBAC().deleteAjuda(request);
+	// ResponseHandler.handleOperationStatusAndMessages(ajudaResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, ajudaResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return ajudaResponse;
+	//
+	// }
+	//
+	// // ===================================### MENU
+	// // ####======================================
+	// /**
+	// * Refresh menus.
+	// *
+	// * @param refreshInt
+	// * the refresh int
+	// * @param retList
+	// * the ret list
+	// * @param retPaged
+	// * the ret paged
+	// * @return the menu response
+	// */
+	// @RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	// @ResponseBody
+	// public MenuResponse refreshMenus(@RequestParam("refreshInt") Integer
+	// refreshInt,
+	// @RequestParam("retList") Boolean retList, @RequestParam("retPaged")
+	// Boolean retPaged) {
+	// MenuResponse menuResponse = new MenuResponse();
+	//
+	// try {
+	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
+	// retPaged);
+	// InternalResultsResponse<Menu> internalResponse =
+	// getEmpresaBAC().refreshMenus(request);
+	// ResponseHandler.handleOperationStatusAndMessages(menuResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, menuResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return menuResponse;
+	//
+	// }
+	//
+	// /**
+	// * Fetch menu paged.
+	// *
+	// * @param request
+	// * the request
+	// * @return the menu response
+	// */
+	// @RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	// @ResponseBody
+	// public MenuResponse fetchMenuPaged(@RequestBody MenuInquiryRequest
+	// request) {
+	// MenuResponse menuResponse = new MenuResponse();
+	// try {
+	// InternalResultsResponse<Menu> internalResponse =
+	// getEmpresaBAC().fetchMenusByRequest(request);
+	// ResponseHandler.handleOperationStatusAndMessages(menuResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, menuResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return menuResponse;
+	// }
+	//
+	// /**
+	// * Insert menu.
+	// *
+	// * @param request
+	// * the request
+	// * @return the menu response
+	// */
+	// @RequestMapping(value = "/insert", method = RequestMethod.POST)
+	// @ResponseBody
+	// public MenuResponse insertMenu(@RequestBody MenuMaintenanceRequest
+	// request) {
+	// MenuResponse menuResponse = new MenuResponse();
+	// try {
+	// InternalResultsResponse<Menu> internalResponse =
+	// getEmpresaBAC().insertMenu(request);
+	// ResponseHandler.handleOperationStatusAndMessages(menuResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, menuResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return menuResponse;
+	// }
+	//
+	// /**
+	// * Update menu.
+	// *
+	// * @param request
+	// * the request
+	// * @return the menu response
+	// */
+	// @RequestMapping(value = "/update", method = RequestMethod.POST)
+	// @ResponseBody
+	// public MenuResponse updateMenu(@RequestBody MenuMaintenanceRequest
+	// request) {
+	// MenuResponse menuResponse = new MenuResponse();
+	// try {
+	// InternalResultsResponse<Menu> internalResponse =
+	// getEmpresaBAC().updateMenu(request);
+	// ResponseHandler.handleOperationStatusAndMessages(menuResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, menuResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return menuResponse;
+	// }
+	//
+	// /**
+	// * Delete menu.
+	// *
+	// * @param request
+	// * the request
+	// * @return the menu response
+	// */
+	// @RequestMapping(value = "/delete", method = RequestMethod.POST)
+	// @ResponseBody
+	// public MenuResponse deleteMenu(@RequestBody MenuMaintenanceRequest
+	// request) {
+	// MenuResponse menuResponse = new MenuResponse();
+	//
+	// try {
+	// InternalResultsResponse<Menu> internalResponse =
+	// getEmpresaBAC().deleteMenu(request);
+	// ResponseHandler.handleOperationStatusAndMessages(menuResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, menuResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return menuResponse;
+	//
+	// }
 
 }
