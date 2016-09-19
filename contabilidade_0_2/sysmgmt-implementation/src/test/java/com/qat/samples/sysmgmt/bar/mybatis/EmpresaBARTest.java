@@ -821,9 +821,9 @@ public IEmpresaBAR getEmpresaBAR()
 	@Test
 		public void testDeleteRole()
 		{
-			Role role = Objects.insertRole(4, TabelaEnum.ROLE, PersistenceActionEnum.INSERT);
+			Role role = Objects.insertRole(1004, TabelaEnum.ROLE, PersistenceActionEnum.INSERT);
 			FetchByIdRequest request = new FetchByIdRequest();
-			request.setFetchId(4);
+			request.setFetchId(1004);
 			Role roleResponse = getEmpresaBAR().fetchRoleById(request);
 			Assert.assertEquals(roleResponse, null);
 			getEmpresaBAR().insertRole(role);

@@ -54,7 +54,7 @@
 		<sec:authentication-provider>
        <sec:jdbc-user-service data-source-ref="qatDataSource" id="userService"
         users-by-username-query="select username,password,enabled, emprId from users where username=?"
-        authorities-by-username-query="select username, role from user_roles where username =?  " />
+        authorities-by-username-query="select user_roles.username, role.role from user_roles ,role where user_roles.role = role.id and user_roles.username =?  " />
       </sec:authentication-provider>
 	</sec:authentication-manager>
 

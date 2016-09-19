@@ -18,7 +18,6 @@
   <resultMap id="UserRolesResult" type="UserRoles">
     <result property="user_role_id" column="user_role_id"/>
     <result property="username" column="username"/>
-    <result property="role" column="role"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -27,6 +26,7 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<collection property="role" column="role" select="RoleMap.fetchRoleById"/>
   </resultMap>
 
   <sql id="allUserRolesColumns">
@@ -46,7 +46,7 @@ user_role_id
 <sql id="allUserRolesValues">
 #{user_role_id},
 #{username},
-#{role},
+#{role.id},
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -93,7 +93,7 @@ user_role_id
  <update id="updateUserRoles" parameterType="UserRoles">
    UPDATE User_Roles SET
 <if test="username!= null">username = #{username},</if>
-<if test="role!= null">role = #{role},</if>
+<if test="role!= null">role = #{role.id},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>

@@ -3129,7 +3129,7 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		Date a = new Date();
 		userroles.setUser_role_id(id);
 		userroles.setUsername("NATIVE INSERT UPDATE");
-		userroles.setRole("NATIVE INSERT UPDATE");
+		userroles.setRole(Objects.insertRole(id, tabela, action));
 		userroles.setParentId(id);
 		userroles.setEmprId(1);
 		userroles.setModifyDateUTC(a.getTime());

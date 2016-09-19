@@ -12,7 +12,7 @@ public class UserRoles extends ModelCosmeDamiao
 
 	 private Integer user_role_id;
 	 private String username;
-	 private String role;
+	 private Role role;
 
 
 	public UserRoles(int i, String string) {
@@ -39,11 +39,11 @@ public class UserRoles extends ModelCosmeDamiao
 		this.username = username;
 	}
 
-	public String getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 
