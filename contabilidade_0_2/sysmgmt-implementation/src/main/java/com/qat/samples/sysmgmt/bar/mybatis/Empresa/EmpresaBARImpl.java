@@ -117,7 +117,7 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	private static final String STMT_FETCH_ENDERECO_COUNT = NAMESPACE_ENDERECO + "fetchEnderecoRowCount";
 
 	/** The Constant STMT_FETCH_EMPRESA_ALL_REQUEST. */
-	private static final String STMT_FETCH_ENDERECO_ALL_REQUEST = NAMESPACE_ENDERECO + "fetchAllEnderecosByRequest";
+	private static final String STMT_FETCH_ENDERECO_ALL_REQUEST = NAMESPACE_ENDERECO + "fetchAllEnderecosRequest";
 
 	/// ===================================### FILIAL
 	/// ####======================================
