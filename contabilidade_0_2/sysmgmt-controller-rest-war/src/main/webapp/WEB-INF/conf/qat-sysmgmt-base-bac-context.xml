@@ -23,6 +23,7 @@
 
 	<bean id="empresaBACTarget" class="com.qat.samples.sysmgmt.bac.Empresa.EmpresaBACImpl">
 		<property name="empresaBAR" ref="empresaBARTarget"/>
+		<property name="doisValorBAR" ref="doisValorBARTarget"/>
 		<property name="validationController" ref="countyValidationController"/>
 	</bean>
 
@@ -75,17 +76,17 @@
 		<property name="advocaciaBAR" ref="advocaciaBARTarget"/>
 		<property name="validationController" ref="countyValidationController"/>
 	</bean>
-	
+
 	<bean id="condominioBACTarget" class="com.qat.samples.sysmgmt.bac.Condominio.CondominioBACImpl">
 		<property name="condominioBAR" ref="condominioBARTarget"/>
 		<property name="validationController" ref="countyValidationController"/>
 	</bean>
-	
+
 	<bean id="dpBACTarget" class="com.qat.samples.sysmgmt.bac.Dp.DpBACImpl">
 		<property name="dpBAR" ref="dpBARTarget"/>
 		<property name="validationController" ref="countyValidationController"/>
 	</bean>
-	
+
 	<bean id="configuracaoBACTarget" class="com.qat.samples.sysmgmt.bac.Configuracao.ConfiguracaoBACImpl">
 		<property name="configuracaoBAR" ref="configuracaoBARTarget"/>
 		<property name="validationController" ref="countyValidationController"/>

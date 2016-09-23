@@ -1,6 +1,6 @@
 package com.qat.samples.sysmgmt.util.model;
 
-import java.util.List;
+import com.qat.samples.sysmgmt.entidade.model.Pagina;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -16,8 +16,13 @@ public class DoisValores extends ModelCosmeDamiao
 	/** The type of an account. */
 	private String nome;
 
+	private String value;
+
 	/** The description. */
 	private String descricao;
+
+
+	private Pagina pagina;
 
 	/** The atributos. */
 	private DoisValorTypeEnum doisValorTypeEnum;
@@ -34,7 +39,7 @@ public class DoisValores extends ModelCosmeDamiao
 		// TODO Auto-generated constructor stub
 	}
 
-	
+
 	public Integer getDoisValorTypeEnumValue()
 	{
 		if (doisValorTypeEnum != null)
@@ -92,15 +97,33 @@ public class DoisValores extends ModelCosmeDamiao
 		this.doisValorTypeEnum = doisValorTypeEnum;
 	}
 
+	public Pagina getPagina() {
+		return pagina;
+	}
+
+	public void setPagina(Pagina pagina) {
+		this.pagina = pagina;
+	}
+
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
 	@Override
 	public String toString() {
 		return "DoisValores [getDoisValorTypeEnumValue()=" + getDoisValorTypeEnumValue() + ", getId()=" + getId()
 				+ ", getNome()=" + getNome() + ", getDescricao()=" + getDescricao() + ", getDoisValorTypeEnum()="
-				+ getDoisValorTypeEnum() + ", toString()=" + super.toString() + "]";
+				+ getDoisValorTypeEnum() + ", getPagina()=" + getPagina() + ", getValue()=" + getValue()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 
 
-	
+
 
 }

@@ -20,6 +20,7 @@ import com.qat.samples.sysmgmt.advocacia.Advocacia;
 import com.qat.samples.sysmgmt.advocacia.request.AdvocaciaInquiryRequest;
 import com.qat.samples.sysmgmt.advocacia.request.AdvocaciaMaintenanceRequest;
 import com.qat.samples.sysmgmt.bar.Empresa.IEmpresaBAR;
+import com.qat.samples.sysmgmt.bar.Util.IDoisValorBAR;
 import com.qat.samples.sysmgmt.clinica.model.Clinica;
 import com.qat.samples.sysmgmt.clinica.model.request.ClinicaInquiryRequest;
 import com.qat.samples.sysmgmt.clinica.model.request.ClinicaMaintenanceRequest;
@@ -46,7 +47,11 @@ import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.DoisValores;
+import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.request.AjudaMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.request.DoisValoresInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.DoisValoresMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.FieldMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.MenuMaintenanceRequest;
@@ -80,6 +85,8 @@ public class EmpresaBACImpl implements IEmpresaBAC
 	/** The Empresa BAR. */
 	private IEmpresaBAR empresaBAR; // injected by Spring through setter
 
+	private IDoisValorBAR doisValorBAR; // injected by Spring through setter
+
 	private ValidationController validationController; // injected by Spring through setter
 
 	/**
@@ -100,6 +107,14 @@ public class EmpresaBACImpl implements IEmpresaBAC
 	public IEmpresaBAR getEmpresaBAR()
 	{
 		return empresaBAR;
+	}
+
+	public IDoisValorBAR getDoisValorBAR() {
+		return doisValorBAR;
+	}
+
+	public void setDoisValorBAR(IDoisValorBAR doisValorBAR) {
+		this.doisValorBAR = doisValorBAR;
 	}
 
 	/**
@@ -3098,4 +3113,210 @@ private InternalResultsResponse<Condominio> processCondominio(ValidationContextI
 				return new InternalResultsResponse<Menu>();
 			}
 		}
+
+		@Override
+		public InternalResultsResponse<Endereco> fetchEnderecosByRequest(EmpresaInquiryRequest request) {
+			return getEmpresaBAR().fetchEnderecosByRequest(request);
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		//===================================### FIELD ####======================================
+				/**
+			/*
+			/*
+			 * (non-Javadoc)
+			 * @see
+			 * com.qat.samples.sysmgmt.bac.ICountyBAC#insertField(com.qat.samples.sysmgmt.model.request.FieldMaintenanceRequest
+			 * )
+			 */
+			@Override
+			public InternalResultsResponse<DoisValores> insertDoisValores(DoisValoresMaintenanceRequest request)
+			{
+				InternalResultsResponse<DoisValores> response =
+						processDoisValores(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+				return response;
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * @see
+			 * com.qat.samples.sysmgmt.bac.IDoisValoresBAC#updateDoisValores(com.qat.samples.sysmgmt.model.request.DoisValoresMaintenanceRequest
+			 * )
+			 */
+			@Override
+			public InternalResultsResponse<DoisValores> updateDoisValores(DoisValoresMaintenanceRequest request)
+			{
+				InternalResultsResponse<DoisValores> response =
+						processDoisValores(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+				return response;
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * @see
+			 * com.qat.samples.sysmgmt.bac.IDoisValoresBAC#deleteDoisValores(com.qat.samples.sysmgmt.model.request.DoisValoresMaintenanceRequest
+			 * )
+			 */
+			@Override
+			public InternalResultsResponse<DoisValores> deleteDoisValoresById(DoisValoresMaintenanceRequest request)
+			{
+				InternalResultsResponse<DoisValores> response =
+						processDoisValores(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+				return response;
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * @see com.qat.samples.sysmgmt.bac.IDoisValoresBAC#fetchAllDoisValoress(DoisValores field)
+			 */
+			@Override
+			public InternalResultsResponse<DoisValores> fetchAllDoisValoress(DoisValores field)
+			{
+				InternalResultsResponse<DoisValores> response = new InternalResultsResponse<DoisValores>();
+				response.getResultsList().addAll(getDoisValorBAR().fetchAllDoisValoress(field).getResultsList());
+				return response;
+			}
+
+
+			/*
+			 * (non-Javadoc)
+			 * @see com.qat.samples.sysmgmt.bac.IDoisValoresBAC#fetchDoisValoressByRequest(com.qat.samples.sysmgmt.model.request.
+			 * PagedInquiryRequest)
+			 */
+			@Override
+			public InternalResultsResponse<DoisValores> fetchDoisValoressByRequest(DoisValoresInquiryRequest request)
+			{
+				return getDoisValorBAR().fetchDoisValoressByRequest(request);
+			}
+
+			/**
+			 * Process.
+			 *
+			 * @param indicator the indicator
+			 * @param persistType the persist type
+			 * @param request the request
+			 * @return the field response
+			 */
+			private InternalResultsResponse<DoisValores> processDoisValores(ValidationContextIndicator indicator,
+					PersistenceActionEnum persistType,
+					DoisValoresMaintenanceRequest request)
+					{
+				InternalResultsResponse<DoisValores> response = null;
+
+				// Validate
+				//ValidationContext context = new ValidationContext(DoisValores.class.getSimpleName(), request.getDoisValores(), indicator);
+				//if (!getValidationController().validate(context))
+				//{
+				//	response = new InternalResultsResponse<DoisValores>();
+				//	response.setStatus(SystemErrorCategory.SystemValidation);
+				//	response.addMessages(context.getMessages());
+				//	return response;
+				//}
+
+					// Persist
+					InternalResponse internalResponse = doPersistenceDoisValores(request.getDoisValores(), persistType);
+					if (internalResponse.isInError())
+					{
+						response = new InternalResultsResponse<DoisValores>();
+						response.setStatus(internalResponse.getError());
+						response.addMessages(internalResponse.getMessageInfoList());
+						response.addMessage(DEFAULT_EMPRESA_BAC_EXCEPTION_MSG, MessageSeverity.Error,
+								MessageLevel.Object, new Object[] {internalResponse.errorToString()});
+
+						return response;
+					}
+
+					// Call maintainReurnList to see if we need to return the field list and if so whether it should be paged or
+					// not
+					response = maintainReturnListDoisValores(request.getReturnList(), request.getReturnListPaged(),new DoisValores());
+
+					return response;
+						}
+
+				/**
+				 * Do persistenceDoisValores.
+				 *
+				 * @param request the request
+				 * @param updateType the update type
+				 * @return the internal response
+				 */
+				private InternalResponse doPersistenceDoisValores(DoisValores field, PersistenceActionEnum updateType)
+				{
+					switch (updateType)
+					{
+						case INSERT:
+							return getDoisValorBAR().insertDoisValores(field);
+
+						case UPDATE:
+							return getDoisValorBAR().updateDoisValores(field);
+
+						case DELETE:
+							return getDoisValorBAR().deleteDoisValoresById(field);
+						default:
+							if (LOG.isDebugEnabled())
+							{
+								LOG.debug("updateType missing!");
+							}
+							break;
+					}
+
+					return null;
+				}
+
+				/**
+				 * Maintain return list.
+				 *
+				 * @param request the request
+				 * @param response the response
+				 */
+				private InternalResultsResponse<DoisValores> maintainReturnListDoisValores(Boolean listIndicator, Boolean pageListIndicator,DoisValores field)
+				{
+					// Fetch again if requested.
+					if (listIndicator)
+					{
+						// Fetch Paged is requested.
+						if (pageListIndicator)
+						{
+							DoisValoresInquiryRequest request = new DoisValoresInquiryRequest();
+							request.setPreQueryCount(true);
+							return fetchDoisValoressByRequest(request);
+						}
+						else
+						{
+							// otherwise return all rows not paged
+							return fetchAllDoisValoress(field);
+						}
+					}
+					else
+					{
+						return new InternalResultsResponse<DoisValores>();
+					}
+				}
+
+				@Override
+				public DoisValores fetchDoisValoresById(FetchByIdRequest request) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public InternalResponse deleteAllDoisValoress() {
+					// TODO Auto-generated method stub
+					return null;
+				}
 }

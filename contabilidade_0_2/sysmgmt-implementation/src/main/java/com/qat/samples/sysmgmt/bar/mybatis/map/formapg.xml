@@ -50,14 +50,14 @@
     <result property="id" column="id"/>
     <result property="descricao" column="descricao"/>
     <result property="observacao" column="observacao"/>
-    <result property="diasPg" column="entrada"/>
-    <result property="parcelamentoMax" column="entrada"/>
-    <result property="parcelamentoSemJuros" column="entrada"/>
-    <result property="juros" column="entrada"/>
-    <result property="taxaFixa" column="entrada"/>
-    <result property="descAvista" column="entrada"/>
-    <result property="qntIntervalo" column="entrada"/>
-    <result property="intervalo" column="entrada"/>
+    <result property="diasPg" column="diasPg"/>
+    <result property="parcelamentoMax" column="parcelamentoMax"/>
+    <result property="parcelamentoSemJuros" column="parcelamentoSemJuros"/>
+    <result property="juros" column="juros"/>
+    <result property="taxaFixa" column="taxaFixa"/>
+    <result property="descAvista" column="descAvista"/>
+    <result property="qntIntervalo" column="qntIntervalo"/>
+    <result property="intervalo" column="intervalo"/>
     <result property="entrada" column="entrada"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
@@ -129,13 +129,11 @@ descricao
  <select id="fetchAllFormaPgsRequest" parameterType="FormaPgInquiryRequest" resultMap="FormaPgResult">
 
 		SELECT id,<include refid="allFormaPgColumns" />
-  		  FROM formapg where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
+  		  FROM formapg where 0 = 0 <if test="emprId != null"> and emprId = #{emprId}</if> ORDER BY id ASC
 </select>
 
 <select id="fetchFormaPgRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM formapg WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM formapg WHERE id IS NOT NULL <if test="emprId != null"> and emprId = #{emprId}</if>
 
  </select>
 

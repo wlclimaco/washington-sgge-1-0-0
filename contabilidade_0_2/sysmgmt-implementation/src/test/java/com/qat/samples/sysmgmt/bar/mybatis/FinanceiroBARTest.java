@@ -655,6 +655,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
+		request.setEmprId(4595);
 		InternalResultsResponse<FormaPg> response = getFinanceiroBAR().fetchFormaPgsByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);

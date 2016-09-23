@@ -48,9 +48,9 @@ public class DoisValorBARTest extends AbstractTransactionalJUnit4SpringContextTe
 
 	@Test
 	public void testDeleteDoisValores() {
-		DoisValores DoisValores = insertDoisValores(4, TabelaEnum.DOISVALOR, PersistenceActionEnum.INSERT);
+		DoisValores DoisValores = insertDoisValores(1004, TabelaEnum.DOISVALOR, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(1004);
 		DoisValores DoisValoresResponse = getDoisValorBAR().fetchDoisValoresById(request);
 		Assert.assertEquals(DoisValoresResponse, null);
 		getDoisValorBAR().insertDoisValores(DoisValores);
@@ -82,7 +82,7 @@ public class DoisValorBARTest extends AbstractTransactionalJUnit4SpringContextTe
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		DoisValores DoisValoresResponse = getDoisValorBAR().fetchDoisValoresById(request);
-		Assert.assertEquals(DoisValoresResponse.getDescricao(), "10000");
+		Assert.assertEquals(DoisValoresResponse.getDescricao(), "Cheque");
 		getDoisValorBAR().updateDoisValores(DoisValores);
 		DoisValoresResponse = getDoisValorBAR().fetchDoisValoresById(request);
 		Assert.assertEquals(DoisValoresResponse.getDescricao(), "NATIVE INSERT");

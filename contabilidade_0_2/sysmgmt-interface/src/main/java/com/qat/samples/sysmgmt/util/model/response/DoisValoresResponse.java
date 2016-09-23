@@ -1,46 +1,39 @@
-package com.qat.samples.sysmgmt.entidade.model.response;
+package com.qat.samples.sysmgmt.util.model.response;
 
 import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.entidade.model.Empresa;
+import com.qat.samples.sysmgmt.util.model.DoisValores;
 
-/**
- * The Class EmpresaResponse.
- *
- * @author abarros
- * @version 1.0
- * @created 22-Jul-2014 10:26:05 AM
- */
-public class EmpresaResponse extends InquiryResponse
+public class DoisValoresResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<Empresa> empresaList;
+	private List<DoisValores> doisValoresList;
 
 	/**
 	 * The Constructor.
 	 */
-	public EmpresaResponse()
+	public DoisValoresResponse()
 	{
 
 	}
 
 	/**
-	 * @return the empresaList
+	 * @return the doisValoresList
 	 */
-	public List<Empresa> getEmpresaList()
+	public List<DoisValores> getDoisValoresList()
 	{
-		return empresaList;
+		return doisValoresList;
 	}
 
 	/**
-	 * @param empresaList the empresaList to set
+	 * @param doisValoresList the doisValoresList to set
 	 */
-	public void setEmpresaList(List<Empresa> empresaList)
+	public void setDoisValoresList(List<DoisValores> doisValoresList)
 	{
-		this.empresaList = empresaList;
+		this.doisValoresList = doisValoresList;
 	}
 
 	/*
@@ -51,15 +44,20 @@ public class EmpresaResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setEmpresaList((List<Empresa>)coll);
+		setDoisValoresList((List<DoisValores>)coll);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString()
 	{
-		return "EmpresaResponse [getEmpresaList()=" + getEmpresaList() + ", getResultsSetInfo()="
+		return "DoisValoresResponse [getDoisValoresList()=" + getDoisValoresList() + ", getResultsSetInfo()="
 				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
 				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
 				+ isOperationSuccess() + "]";
 	}
+
 }

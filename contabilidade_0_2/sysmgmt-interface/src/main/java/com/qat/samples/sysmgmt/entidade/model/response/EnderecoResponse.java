@@ -4,43 +4,43 @@ import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.entidade.model.Empresa;
+import com.qat.samples.sysmgmt.util.model.Endereco;
 
 /**
- * The Class EmpresaResponse.
+ * The Class EnderecoResponse.
  *
  * @author abarros
  * @version 1.0
  * @created 22-Jul-2014 10:26:05 AM
  */
-public class EmpresaResponse extends InquiryResponse
+public class EnderecoResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<Empresa> empresaList;
+	private List<Endereco> enderecoList;
 
 	/**
 	 * The Constructor.
 	 */
-	public EmpresaResponse()
+	public EnderecoResponse()
 	{
 
 	}
 
 	/**
-	 * @return the empresaList
+	 * @return the enderecoList
 	 */
-	public List<Empresa> getEmpresaList()
+	public List<Endereco> getEnderecoList()
 	{
-		return empresaList;
+		return enderecoList;
 	}
 
 	/**
-	 * @param empresaList the empresaList to set
+	 * @param enderecoList the enderecoList to set
 	 */
-	public void setEmpresaList(List<Empresa> empresaList)
+	public void setEnderecoList(List<Endereco> enderecoList)
 	{
-		this.empresaList = empresaList;
+		this.enderecoList = enderecoList;
 	}
 
 	/*
@@ -51,13 +51,13 @@ public class EmpresaResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setEmpresaList((List<Empresa>)coll);
+		setEnderecoList((List<Endereco>)coll);
 	}
 
 	@Override
 	public String toString()
 	{
-		return "EmpresaResponse [getEmpresaList()=" + getEmpresaList() + ", getResultsSetInfo()="
+		return "EnderecoResponse [getEnderecoList()=" + getEnderecoList() + ", getResultsSetInfo()="
 				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
 				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
 				+ isOperationSuccess() + "]";

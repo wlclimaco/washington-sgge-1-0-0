@@ -57,6 +57,7 @@ import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
+import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
@@ -106,6 +107,17 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	/** The Constant STMT_FETCH_EMPRESA_ALL_REQUEST. */
 	private static final String STMT_FETCH_EMPRESA_ALL_REQUEST = NAMESPACE_EMPRESA + "fetchAllEmpresasByRequest";
+
+
+	/// ======================================
+
+	private static final String NAMESPACE_ENDERECO = "EnderecoMap.";
+
+	/** The Constant STMT_FETCH_EMPRESA_COUNT. */
+	private static final String STMT_FETCH_ENDERECO_COUNT = NAMESPACE_ENDERECO + "fetchEnderecoRowCount";
+
+	/** The Constant STMT_FETCH_EMPRESA_ALL_REQUEST. */
+	private static final String STMT_FETCH_ENDERECO_ALL_REQUEST = NAMESPACE_ENDERECO + "fetchAllEnderecosByRequest";
 
 	/// ===================================### FILIAL
 	/// ####======================================
@@ -2811,6 +2823,59 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 			}
 
 		}
+
+
+	@Override
+	public InternalResultsResponse<Endereco> fetchEnderecosByRequest(EmpresaInquiryRequest request) {
+		InternalResultsResponse<Endereco> response = new InternalResultsResponse<Endereco>();
+		fetchEnderecosByRequest(getSqlSession(), request, STMT_FETCH_ENDERECO_COUNT, STMT_FETCH_ENDERECO_ALL_REQUEST,
+				response);
+		return response;
+	}
+
+	// ===================================### fetchEmpresasByRequest
+	// ####======================================
+
+	public static void fetchEnderecosByRequest(SqlSession sqlSession, EmpresaInquiryRequest request,
+			String countStatement, String fetchPagedStatement, InternalResultsResponse<?> response) {
+
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount()) {
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer) MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO) {
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
+			}
+		}
+
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since
+		// it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to
+		// (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will
+		// be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo()
+				.getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage)) {
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
 
 
 }

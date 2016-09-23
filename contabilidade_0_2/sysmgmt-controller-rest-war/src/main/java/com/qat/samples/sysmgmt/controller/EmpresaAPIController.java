@@ -30,20 +30,14 @@ import com.qat.samples.sysmgmt.condominio.model.request.CondominioMaintenanceReq
 import com.qat.samples.sysmgmt.condominio.model.request.TransactionInquiryRequest;
 import com.qat.samples.sysmgmt.condominio.model.response.CondominioResponse;
 import com.qat.samples.sysmgmt.condominio.model.response.TransactionResponse;
-import com.qat.samples.sysmgmt.contabilidade.response.FieldResponse;
-import com.qat.samples.sysmgmt.dicionario.request.FieldInquiryRequest;
-import com.qat.samples.sysmgmt.entidade.model.Ajuda;
 import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
-import com.qat.samples.sysmgmt.entidade.model.Field;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
-import com.qat.samples.sysmgmt.entidade.model.Menu;
 import com.qat.samples.sysmgmt.entidade.model.Pagina;
 import com.qat.samples.sysmgmt.entidade.model.Role;
 import com.qat.samples.sysmgmt.entidade.model.Transaction;
 import com.qat.samples.sysmgmt.entidade.model.UserRoles;
 import com.qat.samples.sysmgmt.entidade.model.Usuario;
-import com.qat.samples.sysmgmt.entidade.model.Validacao;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
@@ -52,13 +46,15 @@ import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.response.DepositoResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.EmpresaResponse;
+import com.qat.samples.sysmgmt.entidade.model.response.EnderecoResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.FilialResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.PaginaResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.RoleResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.UserRolesResponse;
-import com.qat.samples.sysmgmt.util.model.request.AjudaMaintenanceRequest;
-import com.qat.samples.sysmgmt.util.model.request.FieldMaintenanceRequest;
-import com.qat.samples.sysmgmt.util.model.request.MenuMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.DoisValores;
+import com.qat.samples.sysmgmt.util.model.Endereco;
+import com.qat.samples.sysmgmt.util.model.request.DoisValoresInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.DoisValoresMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.PaginaMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
@@ -66,7 +62,7 @@ import com.qat.samples.sysmgmt.util.model.request.RoleMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.UserRolesMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.UsuarioMaintenanceRequest;
-import com.qat.samples.sysmgmt.util.model.request.ValidacaoMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.response.DoisValoresResponse;
 import com.qat.samples.sysmgmt.util.model.response.UsuarioResponse;
 
 /**
@@ -148,6 +144,27 @@ public class EmpresaAPIController extends BaseController {
 		EmpresaResponse empresaResponse = new EmpresaResponse();
 		try {
 			InternalResultsResponse<Empresa> internalResponse = getEmpresaBAC().fetchEmpresasByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(empresaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, empresaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return empresaResponse;
+	}
+
+	/**
+	 * Fetch empresa paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the empresa response
+	 */
+	@RequestMapping(value = "/endereco/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public EnderecoResponse fetchEnderecoPaged(@RequestBody EmpresaInquiryRequest request) {
+		EnderecoResponse empresaResponse = new EnderecoResponse();
+		try {
+			InternalResultsResponse<Endereco> internalResponse = getEmpresaBAC().fetchEnderecosByRequest(request);
 			ResponseHandler.handleOperationStatusAndMessages(empresaResponse, internalResponse, true);
 		} catch (Exception ex) {
 			ResponseHandler.handleException(LOG, empresaResponse, ex, DEFAULT_EXCEPTION_MSG,
@@ -1852,5 +1869,91 @@ public class EmpresaAPIController extends BaseController {
 	// return menuResponse;
 	//
 	// }
+
+	/**
+	 * Fetch empresa paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the empresa response
+	 */
+	@RequestMapping(value = "/doisValores/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public DoisValoresResponse fetchDoisValoresPaged(@RequestBody DoisValoresInquiryRequest request) {
+		DoisValoresResponse empresaResponse = new DoisValoresResponse();
+		try {
+			InternalResultsResponse<DoisValores> internalResponse = getEmpresaBAC().fetchDoisValoressByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(empresaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, empresaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return empresaResponse;
+	}
+
+	/**
+	 * Insert empresa.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the empresa response
+	 */
+	@RequestMapping(value = "/doisValores/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public DoisValoresResponse insertDoisValores(@RequestBody DoisValoresMaintenanceRequest request) {
+		DoisValoresResponse empresaResponse = new DoisValoresResponse();
+		try {
+			InternalResultsResponse<DoisValores> internalResponse = getEmpresaBAC().insertDoisValores(request);
+			ResponseHandler.handleOperationStatusAndMessages(empresaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, empresaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return empresaResponse;
+	}
+
+	/**
+	 * Update empresa.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the empresa response
+	 */
+	@RequestMapping(value = "/doisValores/update", method = RequestMethod.POST)
+	@ResponseBody
+	public DoisValoresResponse updateDoisValores(@RequestBody DoisValoresMaintenanceRequest request) {
+		DoisValoresResponse empresaResponse = new DoisValoresResponse();
+		try {
+			InternalResultsResponse<DoisValores> internalResponse = getEmpresaBAC().updateDoisValores(request);
+			ResponseHandler.handleOperationStatusAndMessages(empresaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, empresaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return empresaResponse;
+	}
+
+	/**
+	 * Delete empresa.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the empresa response
+	 */
+	@RequestMapping(value = "/doisValores/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public DoisValoresResponse deleteDoisValores(@RequestBody DoisValoresMaintenanceRequest request) {
+		DoisValoresResponse empresaResponse = new DoisValoresResponse();
+
+		try {
+			InternalResultsResponse<DoisValores> internalResponse = getEmpresaBAC().deleteDoisValoresById(request);
+			ResponseHandler.handleOperationStatusAndMessages(empresaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, empresaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return empresaResponse;
+
+	}
 
 }

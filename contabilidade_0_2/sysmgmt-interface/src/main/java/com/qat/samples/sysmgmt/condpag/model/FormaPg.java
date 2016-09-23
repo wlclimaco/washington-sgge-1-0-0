@@ -16,32 +16,33 @@ public class FormaPg extends ModelCosmeDamiao
 
 	/** The descricao. */
 	private String descricao;
-	
+
 	private String observacao;
 
 	private Integer diasPg;
-	
-	private Integer parcelamentoMax;
-	
-	private Integer parcelamentoSemJuros;
-	
-	private Double juros;
-	
-	private Double taxaFixa;
-	
-	private Double descAvista;
-	
-	private Conta conta;
-	
-	private DoisValores tipoDoc;
-	
-	private Integer qntIntervalo;
-	
-	private Integer intervalo;
 
+	private Integer parcelamentoMax;
+
+	private Integer parcelamentoSemJuros;
+
+	private Double juros;
+
+	private Double taxaFixa;
+
+	private Double descAvista;
+
+	private Conta conta;
+
+	private DoisValores tipoDoc;
+
+	private Integer qntIntervalo;
+
+	private Integer intervalo;
 
 	/** The entrada. */
 	private Integer entrada;
+
+
 	public String getObservacao() {
 		return observacao;
 	}
@@ -123,7 +124,7 @@ public class FormaPg extends ModelCosmeDamiao
 	}
 
 	/** The dias pg. */
-	
+
 
 	public FormaPg(Integer id, PersistenceActionEnum modelAction)
 	{

@@ -18,6 +18,7 @@
     <resultMap id="DoisValorResult" type="DoisValor">
         <result property="id" column="id" />
         <result property="nome" column="nome" />
+        <result property="value" column="value" />
         <result property="descricao" column="descricao" />
         <result property="parentId" column="parentId" />
         <result property="tabelaEnumValue" column="tabelaEnumValue" />
@@ -27,14 +28,15 @@
         <result property="createDateUTC" column="create_date" />
         <result property="modifyUser" column="modify_user" />
         <result property="modifyDateUTC" column="modify_date" />
+        <collection property="pagina" column="pagina" select="PaginaMap.fetchPaginaById"/>
     </resultMap>
 
     <sql id="allDoisValorColumns">
-        nome ,descricao ,parentId ,tabelaEnumValue ,emprId ,processId ,create_date ,create_user ,modify_date ,modify_user
+        nome,value ,descricao ,parentId ,tabelaEnumValue,pagina ,emprId ,processId ,create_date ,create_user ,modify_date ,modify_user
 
     </sql>
     <sql id="allDoisValorValues">
-        #{nome}, #{descricao}, #{parentId}, #{tabelaEnumValue}, #{emprId}, #{processId}, #{createDateUTC}, #{createUser}, #{modifyDateUTC}, #{modifyUser}
+        #{nome},#{value}, #{descricao}, #{parentId}, #{tabelaEnumValue}, #{pagina.id}, #{emprId}, #{processId}, #{createDateUTC}, #{createUser}, #{modifyDateUTC}, #{modifyUser}
     </sql>
 
 
@@ -53,13 +55,12 @@
     <select id="fetchAllDoisValorsRequest" parameterType="DoisValorInquiryRequest" resultMap="DoisValorResult">
 
      SELECT id,<include refid="allDoisValorColumns" />
-           FROM doisvalor where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
-       OFFSET ( #{startPage} * #{pageSize} )
-       LIMIT #{pageSize}
+           FROM doisvalor where 0 = 0  <if test="paginaId != null"> and pagina = #{paginaId}</if> ORDER BY id ASC
+
 </select>
 
-    <select id="fetchDoisValorRowCount" resultType="Integer">
-     SELECT COUNT(*) AS RECORD_COUNT FROM doisvalor WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+    <select id="fetchDoisValorRowCount" resultType="Integer" parameterType="DoisValorInquiryRequest">
+     SELECT COUNT(*) AS RECORD_COUNT FROM doisvalor WHERE id IS NOT NULL <if test="paginaId != null"> and pagina = #{paginaId}</if>
 
  </select>
 
@@ -78,6 +79,7 @@
     <update id="updateDoisValor" parameterType="DoisValor">
         UPDATE doisvalor SET
         <if test="nome!= null">nome = #{nome},</if>
+        <if test="value!= null">value = #{value},</if>
         <if test="descricao!= null">descricao = #{descricao},</if>
         <if test="parentId!= null"> parentId=#{parentId},</if>
         <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>

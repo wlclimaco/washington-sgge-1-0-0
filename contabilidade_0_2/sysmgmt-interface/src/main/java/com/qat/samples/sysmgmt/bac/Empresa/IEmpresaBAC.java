@@ -1,5 +1,6 @@
 /** create by system gera-java version 1.0.0 04/06/2016 19:30 : 57*/
 package com.qat.samples.sysmgmt.bac.Empresa;
+import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.advocacia.Advocacia;
 import com.qat.samples.sysmgmt.advocacia.request.AdvocaciaInquiryRequest;
@@ -30,7 +31,11 @@ import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.DoisValores;
+import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.request.AjudaMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.request.DoisValoresInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.request.DoisValoresMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.FieldMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.MenuMaintenanceRequest;
@@ -906,6 +911,71 @@ public interface IEmpresaBAC
 	* @return the internal results response
 	*/
 		public InternalResultsResponse<Menu> fetchMenusByRequest(PagedInquiryRequest request);
+
+
+
+		public InternalResultsResponse<Endereco> fetchEnderecosByRequest(EmpresaInquiryRequest request);
+
+
+
+
+		/**
+		 * Fetch doisvalor by id.
+		 *
+		 * @param request the request
+	* @return the internal results response
+	*/
+		public DoisValores fetchDoisValoresById(FetchByIdRequest request);
+
+		/**
+	* Insert doisvalor.
+	*
+	* @param doisvalor the doisvalor
+	*
+	* @return the internal response
+	*/
+		public InternalResultsResponse<DoisValores> insertDoisValores(DoisValoresMaintenanceRequest doisvalor);
+
+		/**
+	* Update doisvalor.
+	*
+	* @param doisvalor the doisvalor
+	*
+	* @return the internal response
+	*/
+		public InternalResultsResponse<DoisValores> updateDoisValores(DoisValoresMaintenanceRequest doisvalor);
+
+		/**
+	* Delete doisvalor.
+	*
+	* @param doisvalor the doisvalor
+	*
+	* @return the internal response
+	*/
+		public InternalResultsResponse<DoisValores> deleteDoisValoresById(DoisValoresMaintenanceRequest doisvalor);
+
+		/**
+	* Delete all doisvalors.
+	*
+	* @return the internal response
+	*/
+		public InternalResponse deleteAllDoisValoress();
+
+		/**
+	* Fetch all doisvalors.
+	*
+	* @return the list< doisvalor>
+	*/
+		public InternalResultsResponse<DoisValores> fetchAllDoisValoress(DoisValores  doisvalor);
+
+		/**
+	* Fetch doisvalors by request.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<DoisValores> fetchDoisValoressByRequest(DoisValoresInquiryRequest request);
+
 
 
 }

@@ -25,6 +25,7 @@ import com.qat.samples.sysmgmt.entidade.model.Validacao;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
+import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
@@ -837,5 +838,7 @@ public interface IEmpresaBAR
 */
 	public InternalResultsResponse<Menu> fetchMenusByRequest(PagedInquiryRequest request);
 
+
+	public InternalResultsResponse<Endereco> fetchEnderecosByRequest(EmpresaInquiryRequest request);
 
 }
