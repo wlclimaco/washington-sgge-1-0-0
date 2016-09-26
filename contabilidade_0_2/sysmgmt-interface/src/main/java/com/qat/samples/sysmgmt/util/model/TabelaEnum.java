@@ -214,12 +214,12 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 
 	RENTABILIDADE(80, "sendsolv.base.model.risklevelenum.medium"),
 
-	RENTABILIDADEITENS(73, "sendsolv.base.model.risklevelenum.medium"),
+	RENTABILIDADEITENS(81, "sendsolv.base.model.risklevelenum.medium"),
 
-	TRIBUTACAO(73, "sendsolv.base.model.risklevelenum.medium"),
+	TRIBUTACAO(82, "sendsolv.base.model.risklevelenum.medium"),
 
 
-	BOLETO(73, "sendsolv.base.model.risklevelenum.medium"),
+	BOLETO(83, "sendsolv.base.model.risklevelenum.medium"),
 
 	CONFIGALERTAS(73, "sendsolv.base.model.risklevelenum.medium"),
 

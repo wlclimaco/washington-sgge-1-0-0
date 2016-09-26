@@ -105,6 +105,7 @@
         <typeAlias alias="ContaCorrenteInquiryRequest" type="com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteInquiryRequest" />
         <typeAlias alias="CaixaInquiryRequest" type="com.qat.samples.sysmgmt.financeiro.model.request.CaixaInquiryRequest" />
 
+
         <typeAlias alias="TabelaEnum" type="com.qat.samples.sysmgmt.util.model.TabelaEnum" />
         <typeAlias alias="AcaoEnum" type="com.qat.samples.sysmgmt.util.model.AcaoEnum" />
         <typeAlias alias="CdStatusTypeEnum" type="com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum" />
