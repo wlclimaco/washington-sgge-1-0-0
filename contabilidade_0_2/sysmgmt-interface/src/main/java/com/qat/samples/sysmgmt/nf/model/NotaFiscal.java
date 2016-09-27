@@ -3,6 +3,7 @@ package com.qat.samples.sysmgmt.nf.model;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.cfop.model.Cfop;
+import com.qat.samples.sysmgmt.condpag.model.FormaPg;
 import com.qat.samples.sysmgmt.condpag.model.FormaPgPessoa;
 import com.qat.samples.sysmgmt.conta.model.Conta;
 import com.qat.samples.sysmgmt.entidade.model.Entidade;
@@ -33,13 +34,10 @@ public class NotaFiscal extends ModelCosmeDamiao
 	private String numero;
 
 	/** The numero. */
-	private String tipo;
+	private Integer tipo;
 
 	/** The nf valor. */
 	private Double nfValor;
-
-	/** The transportador. */
-	private Transportador transportador;
 
 	/** The conhecimento transporte. */
 	private ConhecimentoTransporte conhecimentoTransporte;
@@ -53,7 +51,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 	private List<Tributacao> tributosList;
 
 	/** The cep. */
-	private List<FormaPgPessoa> formaPagList;
+	private List<FormaPg> formaPagList;
 
 	/** The tipo endereco. */
 	private List<NotaFiscalItens> notaFiscalItens;
@@ -106,7 +104,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Gets the id.
-	 * 
+	 *
 	 * @return the id
 	 */
 	public Integer getId()
@@ -116,7 +114,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Sets the id.
-	 * 
+	 *
 	 * @param id the id to set
 	 */
 	public void setId(Integer id)
@@ -126,7 +124,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Gets the serie.
-	 * 
+	 *
 	 * @return the serie
 	 */
 	public String getSerie()
@@ -136,7 +134,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Sets the serie.
-	 * 
+	 *
 	 * @param serie the serie to set
 	 */
 	public void setSerie(String serie)
@@ -146,7 +144,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Gets the ordem.
-	 * 
+	 *
 	 * @return the ordem
 	 */
 	public String getOrdem()
@@ -156,7 +154,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Sets the ordem.
-	 * 
+	 *
 	 * @param ordem the ordem to set
 	 */
 	public void setOrdem(String ordem)
@@ -166,7 +164,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Gets the numero.
-	 * 
+	 *
 	 * @return the numero
 	 */
 	public String getNumero()
@@ -176,7 +174,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Sets the numero.
-	 * 
+	 *
 	 * @param numero the numero to set
 	 */
 	public void setNumero(String numero)
@@ -186,27 +184,27 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Gets the tipo.
-	 * 
+	 *
 	 * @return the tipo
 	 */
-	public String getTipo()
+	public Integer getTipo()
 	{
 		return tipo;
 	}
 
 	/**
 	 * Sets the tipo.
-	 * 
+	 *
 	 * @param tipo the tipo to set
 	 */
-	public void setTipo(String tipo)
+	public void setTipo(Integer tipo)
 	{
 		this.tipo = tipo;
 	}
 
 	/**
 	 * Gets the nf valor.
-	 * 
+	 *
 	 * @return the nfValor
 	 */
 	public Double getNfValor()
@@ -216,7 +214,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Sets the nf valor.
-	 * 
+	 *
 	 * @param nfValor the nfValor to set
 	 */
 	public void setNfValor(Double nfValor)
@@ -225,28 +223,8 @@ public class NotaFiscal extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the transportador.
-	 * 
-	 * @return the transportador
-	 */
-	public Transportador getTransportador()
-	{
-		return transportador;
-	}
-
-	/**
-	 * Sets the transportador.
-	 * 
-	 * @param transportador the transportador to set
-	 */
-	public void setTransportador(Transportador transportador)
-	{
-		this.transportador = transportador;
-	}
-
-	/**
 	 * Gets the conhecimento transporte.
-	 * 
+	 *
 	 * @return the conhecimentoTransporte
 	 */
 	public ConhecimentoTransporte getConhecimentoTransporte()
@@ -256,7 +234,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Sets the conhecimento transporte.
-	 * 
+	 *
 	 * @param conhecimentoTransporte the conhecimentoTransporte to set
 	 */
 	public void setConhecimentoTransporte(ConhecimentoTransporte conhecimentoTransporte)
@@ -266,7 +244,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Gets the empresa.
-	 * 
+	 *
 	 * @return the empresa
 	 */
 	public Entidade getEmpresa()
@@ -276,7 +254,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Sets the empresa.
-	 * 
+	 *
 	 * @param empresa the empresa to set
 	 */
 	public void setEmpresa(Entidade empresa)
@@ -286,7 +264,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Gets the tributos list.
-	 * 
+	 *
 	 * @return the tributosList
 	 */
 	public List<Tributacao> getTributosList()
@@ -296,7 +274,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Sets the tributos list.
-	 * 
+	 *
 	 * @param tributosList the tributosList to set
 	 */
 	public void setTributosList(List<Tributacao> tributosList)
@@ -305,28 +283,8 @@ public class NotaFiscal extends ModelCosmeDamiao
 	}
 
 	/**
-	 * Gets the forma pag list.
-	 * 
-	 * @return the formaPagList
-	 */
-	public List<FormaPgPessoa> getFormaPagList()
-	{
-		return formaPagList;
-	}
-
-	/**
-	 * Sets the forma pag list.
-	 * 
-	 * @param formaPagList the formaPagList to set
-	 */
-	public void setFormaPagList(List<FormaPgPessoa> formaPagList)
-	{
-		this.formaPagList = formaPagList;
-	}
-
-	/**
 	 * Gets the nota fiscal itens.
-	 * 
+	 *
 	 * @return the notaFiscalItens
 	 */
 	public List<NotaFiscalItens> getNotaFiscalItens()
@@ -336,7 +294,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Sets the nota fiscal itens.
-	 * 
+	 *
 	 * @param notaFiscalItens the notaFiscalItens to set
 	 */
 	public void setNotaFiscalItens(List<NotaFiscalItens> notaFiscalItens)
@@ -346,7 +304,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Gets the note list.
-	 * 
+	 *
 	 * @return the noteList
 	 */
 	public List<Note> getNoteList()
@@ -356,7 +314,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Sets the note list.
-	 * 
+	 *
 	 * @param noteList the noteList to set
 	 */
 	public void setNoteList(List<Note> noteList)
@@ -366,7 +324,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Gets the contaspagar list.
-	 * 
+	 *
 	 * @return the contaspagarList
 	 */
 	public List<Conta> getContaspagarList()
@@ -376,7 +334,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Sets the contaspagar list.
-	 * 
+	 *
 	 * @param contaspagarList the contaspagarList to set
 	 */
 	public void setContaspagarList(List<Conta> contaspagarList)
@@ -386,7 +344,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Gets the itens especiais.
-	 * 
+	 *
 	 * @return the itensEspeciais
 	 */
 	public List<ItensEspeciais> getItensEspeciais()
@@ -396,7 +354,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Sets the itens especiais.
-	 * 
+	 *
 	 * @param itensEspeciais the itensEspeciais to set
 	 */
 	public void setItensEspeciais(List<ItensEspeciais> itensEspeciais)
@@ -406,7 +364,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Gets the data emissao.
-	 * 
+	 *
 	 * @return the dataEmissao
 	 */
 	public Long getDataEmissao()
@@ -416,7 +374,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Sets the data emissao.
-	 * 
+	 *
 	 * @param dataEmissao the dataEmissao to set
 	 */
 	public void setDataEmissao(Long dataEmissao)
@@ -426,7 +384,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Gets the data saida.
-	 * 
+	 *
 	 * @return the dataSaida
 	 */
 	public Long getDataSaida()
@@ -436,7 +394,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Sets the data saida.
-	 * 
+	 *
 	 * @param dataSaida the dataSaida to set
 	 */
 	public void setDataSaida(Long dataSaida)
@@ -446,7 +404,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Gets the data entrada.
-	 * 
+	 *
 	 * @return the dataEntrada
 	 */
 	public Long getDataEntrada()
@@ -456,7 +414,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Sets the data entrada.
-	 * 
+	 *
 	 * @param dataEntrada the dataEntrada to set
 	 */
 	public void setDataEntrada(Long dataEntrada)
@@ -466,7 +424,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Gets the modelo.
-	 * 
+	 *
 	 * @return the modelo
 	 */
 	public Integer getModelo()
@@ -476,7 +434,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Sets the modelo.
-	 * 
+	 *
 	 * @param modelo the modelo to set
 	 */
 	public void setModelo(Integer modelo)
@@ -486,7 +444,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Gets the cfop.
-	 * 
+	 *
 	 * @return the cfop
 	 */
 	public Cfop getCfop()
@@ -496,7 +454,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Sets the cfop.
-	 * 
+	 *
 	 * @param cfop the cfop to set
 	 */
 	public void setCfop(Cfop cfop)
@@ -506,7 +464,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Gets the bx estoque.
-	 * 
+	 *
 	 * @return the bxEstoque
 	 */
 	public Integer getBxEstoque()
@@ -516,7 +474,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Sets the bx estoque.
-	 * 
+	 *
 	 * @param bxEstoque the bxEstoque to set
 	 */
 	public void setBxEstoque(Integer bxEstoque)
@@ -526,7 +484,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Gets the desc itens.
-	 * 
+	 *
 	 * @return the descItens
 	 */
 	public Integer getDescItens()
@@ -536,7 +494,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Sets the desc itens.
-	 * 
+	 *
 	 * @param descItens the descItens to set
 	 */
 	public void setDescItens(Integer descItens)
@@ -546,7 +504,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Gets the pc custo.
-	 * 
+	 *
 	 * @return the pcCusto
 	 */
 	public Integer getPcCusto()
@@ -556,7 +514,7 @@ public class NotaFiscal extends ModelCosmeDamiao
 
 	/**
 	 * Sets the pc custo.
-	 * 
+	 *
 	 * @param pcCusto the pcCusto to set
 	 */
 	public void setPcCusto(Integer pcCusto)
@@ -628,21 +586,29 @@ public class NotaFiscal extends ModelCosmeDamiao
 		this.contasList = contasList;
 	}
 
+	public List<FormaPg> getFormaPagList() {
+		return formaPagList;
+	}
+
+	public void setFormaPagList(List<FormaPg> formaPagList) {
+		this.formaPagList = formaPagList;
+	}
+
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "NotaFiscal [getId()=" + getId() + ", getSerie()=" + getSerie() + ", getOrdem()=" + getOrdem()
 				+ ", getNumero()=" + getNumero() + ", getTipo()=" + getTipo() + ", getNfValor()=" + getNfValor()
-				+ ", getTransportador()=" + getTransportador() + ", getConhecimentoTransporte()="
-				+ getConhecimentoTransporte() + ", getEmpresa()=" + getEmpresa() + ", getTributosList()="
-				+ getTributosList() + ", getFormaPagList()=" + getFormaPagList() + ", getNotaFiscalItens()="
-				+ getNotaFiscalItens() + ", getNoteList()=" + getNoteList() + ", getContaspagarList()="
-				+ getContaspagarList() + ", getItensEspeciais()=" + getItensEspeciais() + ", getDataEmissao()="
-				+ getDataEmissao() + ", getDataSaida()=" + getDataSaida() + ", getDataEntrada()=" + getDataEntrada()
-				+ ", getModelo()=" + getModelo() + ", getCfop()=" + getCfop() + ", getBxEstoque()=" + getBxEstoque()
-				+ ", getDescItens()=" + getDescItens() + ", getPcCusto()=" + getPcCusto() + ", getNfStatusList()="
-				+ getNfStatusList() + ", getHistoricoNFList()=" + getHistoricoNFList() + ", getPessoa()=" + getPessoa()
-				+ ", getContasList()=" + getContasList() + ", toString()=" + super.toString() + "]";
+				+ ", getConhecimentoTransporte()=" + getConhecimentoTransporte() + ", getEmpresa()=" + getEmpresa()
+				+ ", getTributosList()=" + getTributosList() + ", getNotaFiscalItens()=" + getNotaFiscalItens()
+				+ ", getNoteList()=" + getNoteList() + ", getContaspagarList()=" + getContaspagarList()
+				+ ", getItensEspeciais()=" + getItensEspeciais() + ", getDataEmissao()=" + getDataEmissao()
+				+ ", getDataSaida()=" + getDataSaida() + ", getDataEntrada()=" + getDataEntrada() + ", getModelo()="
+				+ getModelo() + ", getCfop()=" + getCfop() + ", getBxEstoque()=" + getBxEstoque() + ", getDescItens()="
+				+ getDescItens() + ", getPcCusto()=" + getPcCusto() + ", getNfStatusList()=" + getNfStatusList()
+				+ ", getHistoricoNFList()=" + getHistoricoNFList() + ", getPessoa()=" + getPessoa()
+				+ ", getContasList()=" + getContasList() + ", getFormaPagList()=" + getFormaPagList() + ", toString()="
+				+ super.toString() + "]";
 	}
+
 
 }
