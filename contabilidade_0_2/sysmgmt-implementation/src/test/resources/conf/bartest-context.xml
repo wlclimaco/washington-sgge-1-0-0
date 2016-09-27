@@ -4,7 +4,7 @@
 
 	<bean id="empresaBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Empresa.EmpresaBARImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-		
+
 		<property name="statusBAR" ref="statusBARTarget" />
 		<property name="historicoBAR" ref="historicoBARTarget" />
 		<property name="cadastrosBAR" ref="cadastroBARTarget" />
@@ -90,6 +90,14 @@
 		<property name="telefoneBAR" ref="telefoneBARTarget" />
 		<property name="statusBAR" ref="statusBARTarget" />
 		<property name="notesBAR" ref="notesBARTarget" />
+		<property name="historicoBAR" ref="historicoBARTarget" />
+	</bean>
+
+	<bean id="vendaBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Vendas.VendasBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+	  	<property name="enderecoBAR" ref="enderecoBARTarget" />
+	  	<property name="financeiroBAR" ref="financeiroBARTarget" />
+		<property name="statusBAR" ref="statusBARTarget" />
 		<property name="historicoBAR" ref="historicoBARTarget" />
 	</bean>
 

@@ -36,6 +36,10 @@ public class Estado extends ModelCosmeDamiao
 		// TODO Auto-generated constructor stub
 	}
 
+	public Estado(String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Gets the id.
 	 *

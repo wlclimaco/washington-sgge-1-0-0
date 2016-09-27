@@ -1,164 +1,170 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+
+<!-- create by system gera-java version 1.0.0 27/09/2016 12:37 : 52-->
+
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ConhecimentoTransporteMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
-	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
-
-  	<!-- Result maps describe the mapping between the columns returned
-       from a query, and the class properties.  A result map isn't
-       necessary if the columns (or aliases) match to the properties
-       exactly.-->
-
-  <resultMap id="conhecimentoTransporteResult" type="ConhecimentoTransporte">
-    <result property="id" column="id" />
-    <result property="IdNota" column="IdNota" />
-   	<result property="remetente" column="remetente"/>
-	<result property="vrTotalMercadorias" column="vrTotalMercadorias"/>
-	<result property="apCreIcms" column="apCreIcms" />
-    <result property="fretePorConta" column="fretePorConta" />
-	<result property="placa" column="placa"/>
-	<result property="especie" column="especie"/>
-	<result property="volume" column="volume"/>
-	<result property="pesoLiquido" column="pesoLiquido"/>
-	<result property="pesoBruto" column="pesoBruto"/>
-	<result property="createUser" column="create_user"/>
-	<result property="createDataUTC" column="create_date"/>
-	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDataUTC" column="modify_date"/>
-	<association property="transportador"    column="transportador" select="PessoaMap.fetchPessoaById"  />
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="ConhecimentoTransporteResult" type="ConhecimentoTransporte">
+    <result property="id" column="id"/>
+    <result property="idNota" column="IdNota"/>
+    <result property="remetente" column="remetente"/>
+    <result property="vrTotalMercadorias" column="vrTotalMercadorias"/>
+    <result property="apCreIcms" column="apCreIcms"/>
+    <result property="fretePorConta" column="fretePorConta"/>
+    <result property="placa" column="placa"/>
+    <result property="especie" column="especie"/>
+    <result property="volume" column="volume"/>
+    <result property="pesoLiquido" column="pesoLiquido"/>
+    <result property="pesoBruto" column="pesoBruto"/>
+    <result property="registroNacionalTransportadorCarga" column="registroNacionalTransportadorCarga"/>
+    <result property="vagao" column="vagao"/>
+    <result property="balsa" column="balsa"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+	<association property="transportador"    column="transportador" select="TransportadorMap.fetchTransportadorById"  />
 	<association property="marca"    column="marca" select="MarcaMap.fetchMarcaById"  />
 	<association property="estado"    column="estado" select="EstadoMap.fetchEstadoById"  />
   </resultMap>
 
-  <!--
-		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
-	-->
   <sql id="allConhecimentoTransporteColumns">
-		 IdNota
-		,remetente
-		,vrTotalMercadorias
-		,apCreIcms
-		,fretePorConta
-		,placa
-		,especie
-		,volume
-		,pesoLiquido
-		,pesoBruto
-		,transportador
-		,marca
-		,estado
-      	,create_date
-      	,create_user
-      	,modify_date
-      	,modify_user
+IdNota
+,remetente
+,vrTotalMercadorias
+,apCreIcms
+,fretePorConta
+,placa
+,especie
+,volume
+,pesoLiquido
+,pesoBruto
+,transportador
+,marca
+,estado
+,registroNacionalTransportadorCarga
+,vagao
+,balsa
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allConhecimentoTransporteValues">
+#{idNota},
+#{remetente},
+#{vrTotalMercadorias},
+#{apCreIcms},
+#{fretePorConta},
+#{placa},
+#{especie},
+#{volume},
+#{pesoLiquido},
+#{pesoBruto},
+#{transportador.id},
+#{marca.id},
+#{estado.id},
+#{registroNacionalTransportadorCarga},
+#{vagao},
+#{balsa},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
   </sql>
 
-  <sql id="allConhecimentoTransporteValues">
-		 #{IdNota},
-		 #{remetente},
-		 #{vrTotalMercadorias},
-		 #{apCreIcms},
-		 #{fretePorConta},
-		 #{placa},
-		 #{especie},
-		 #{volume},
-		 #{pesoLiquido},
-		 #{pesoBruto},
-		 #{transportador.id},
-		 #{marca.id},
-		 #{estado.id},
-    	<include refid="CBOFMap.changeControlFields"/>
-  </sql>
 
-  <!--
-		SQL Insert Statements.
- 	-->
-  <insert id="insertConhecimentoTransporte" parameterType="ConhecimentoTransporte" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO conhecimentoTransporte (
-		<include refid="allConhecimentoTransporteColumns" />
-      )
-    VALUES (<include refid="allConhecimentoTransporteValues" /> )
-  </insert>
+ <select id="fetchAllConhecimentoTransportes" resultMap="ConhecimentoTransporteResult">
+    SELECT id,
+ <include refid="allConhecimentoTransporteColumns" />
+   FROM conhecimentotransporte ORDER BY id ASC
+ </select>
 
+ <select id="fetchConhecimentoTransporteById" parameterType="Integer" resultMap="ConhecimentoTransporteResult">
+    SELECT id,
+ <include refid="allConhecimentoTransporteColumns" />
+   FROM conhecimentotransporte WHERE id = #{fetchid}
+ </select>
 
-	<!--
-		SQL Update Statements.
- 	-->
+ <select id="fetchAllConhecimentoTransportesRequest" parameterType="PagedInquiryRequest" resultMap="ConhecimentoTransporteResult">
 
-  <update id="updateConhecimentoTransporte" parameterType="ConhecimentoTransporte">
-    UPDATE conhecimentoTransporte
-    	<set>
-    		<if test="remetente != null">remetente = #{remetente},</if>
-	    	<if test="vrTotalMercadorias != null"> vrTotalMercadorias=#{vrTotalMercadorias},</if>
-	    	<if test="apCreIcms != null">apCreIcms = #{apCreIcms},</if>
-	    	<if test="fretePorConta != null"> fretePorConta=#{fretePorConta},</if>
-	    	<if test="placa != null">placa = #{placa},</if>
-	    	<if test="especie != null"> especie=#{especie},</if>
-	    	<if test="volume != null"> volume=#{volume},</if>
-	    	<if test="pesoLiquido != null">pesoLiquido = #{pesoLiquido},</if>
-	    	<if test="pesoBruto != null"> pesoBruto=#{pesoBruto},</if>
-	    	<if test="transportador.id != null"> transportador=#{transportador.id},</if>
-	    	<if test="marca.id != null">marca = #{marca.id},</if>
-	    	<if test="estado.id != null"> estado=#{estado.id},</if>
-			<if test="modifyDataUTC != null"> modify_date=#{modifyDataUTC},</if>
-			<if test="modifyUser != null"> modify_user=#{modifyUser}</if>
-		</set>
-    WHERE
-     id = #{id}
-  </update>
+     SELECT id,<include refid="allConhecimentoTransporteColumns" />
+           FROM conhecimentotransporte where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
 
-   <!--
-		SQL Delete Statements.
-   -->
-  <delete id="deleteConhecimentoTransporteById" parameterType="Integer">
-    	DELETE FROM conhecimentoTransporte WHERE id = #{id}
+<select id="fetchConhecimentoTransporteRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM conhecimentotransporte WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+
+ </select>
+
+ <insert id="insertConhecimentoTransporte" parameterType="ConhecimentoTransporte" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO conhecimentotransporte (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allConhecimentoTransporteColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allConhecimentoTransporteValues" /> )
+ </insert>
+
+ <update id="updateConhecimentoTransporte" parameterType="ConhecimentoTransporte">
+   UPDATE conhecimentotransporte SET
+<if test="idNota!= null">idNota = #{idNota},</if>
+<if test="remetente!= null">remetente = #{remetente},</if>
+<if test="vrTotalMercadorias!= null">vrTotalMercadorias = #{vrTotalMercadorias},</if>
+<if test="apCreIcms!= null">apCreIcms = #{apCreIcms},</if>
+<if test="fretePorConta!= null">fretePorConta = #{fretePorConta},</if>
+<if test="placa!= null">placa = #{placa},</if>
+<if test="especie!= null">especie = #{especie},</if>
+<if test="volume!= null">volume = #{volume},</if>
+<if test="pesoLiquido!= null">pesoLiquido = #{pesoLiquido},</if>
+<if test="pesoBruto!= null">pesoBruto = #{pesoBruto},</if>
+<if test="transportador!= null">transportador = #{transportador.id},</if>
+<if test="marca!= null">marca = #{marca.id},</if>
+<if test="estado!= null">estado = #{estado.id},</if>
+<if test="registroNacionalTransportadorCarga!= null">registroNacionalTransportadorCarga = #{registroNacionalTransportadorCarga},</if>
+<if test="vagao!= null">vagao = #{vagao},</if>
+<if test="balsa!= null">balsa = #{balsa},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteConhecimentoTransporteById" parameterType="ConhecimentoTransporte">
+  DELETE FROM conhecimentotransporte WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllConhecimentoTransportes">
+ DELETE FROM conhecimentotransporte
   </delete>
-
-	<!--
-		SQL Fetch Statements.
- 	-->
-  <select id="fetchConhecimentoTransporteRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
-     SELECT COUNT(id) AS RECORD_COUNT
-        FROM conhecimentoTransporte
-     WHERE 2 = 2
-     <if test="empId != null">
-		  AND FK_conhecimentoTransporte_id = #{empId}
-	 </if>
-  </select>
-
-  <select id="fetchAllConhecimentoTransportes" resultMap="conhecimentoTransporteResult">
-    SELECT
-	<include refid="allConhecimentoTransporteColumns" />
-    FROM business ORDER BY name ASC
-  </select>
-
- <select id="fetchAllConhecimentoTransportesByEmpresa" parameterType="Integer" resultMap="conhecimentoTransporteResult">
-	 SELECT
-	<include refid="allConhecimentoTransporteColumns" />
-    FROM conhecimentoTransporte b where tabela = 1 and parentId= #{id} ORDER BY id ASC
- </select>
-
- <select id="fetchAllConhecimentoTransportesByFuncionario" parameterType="Integer" resultMap="conhecimentoTransporteResult">
-	 SELECT
-	<include refid="allConhecimentoTransporteColumns" />
-    FROM conhecimentoTransporte b where tabela = 16 and parentId= #{id} ORDER BY id ASC
- </select>
-
- <select id="fetchAllConhecimentoTransportesByPessoaId" parameterType="Integer" resultMap="conhecimentoTransporteResult">
-	 SELECT
-	<include refid="allConhecimentoTransporteColumns" />
-    FROM conhecimentoTransporte b where tabela = 23 and parentId= #{id} ORDER BY id ASC
- </select>
-
- <select id="fetchAllConhecimentoTransportesByNotaFiscalId" parameterType="Integer" resultMap="conhecimentoTransporteResult">
-	 SELECT
-	<include refid="allConhecimentoTransporteColumns" />
-    FROM conhecimentoTransporte b where IdNota= #{id} ORDER BY id ASC
- </select>
-
 </mapper>
+
+

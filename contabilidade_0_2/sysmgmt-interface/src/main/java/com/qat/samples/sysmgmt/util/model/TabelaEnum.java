@@ -287,8 +287,13 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 
 	MENU(73, "sendsolv.base.model.risklevelenum.medium"),
 
-	USERROLES(73, "sendsolv.base.model.risklevelenum.medium");
+	USERROLES(73, "sendsolv.base.model.risklevelenum.medium"),
 
+	CONHECIMENTOTRANSPORTE(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	NOTAFISCALITENS(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	NOTAFISCALSAIDA(73, "sendsolv.base.model.risklevelenum.medium");
 
 
 	/** The code. */

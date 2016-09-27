@@ -388,9 +388,9 @@ public IPessoaBAR getPessoaBAR()
 	@Test
 	public void testUpdateTransportador()
 	{
-		Transportador transportador = insertTransportador(1001, TabelaEnum.TRANSPORTADOR,PersistenceActionEnum.INSERT);
+		Transportador transportador = insertTransportador(10010, TabelaEnum.TRANSPORTADOR,PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1001);
+		request.setFetchId(10010);
 		Transportador transportadorResponse = getPessoaBAR().fetchTransportadorById(request);
 		Assert.assertEquals(transportadorResponse.getNome(), "nome_1");
 		getPessoaBAR().updateTransportador(transportador);

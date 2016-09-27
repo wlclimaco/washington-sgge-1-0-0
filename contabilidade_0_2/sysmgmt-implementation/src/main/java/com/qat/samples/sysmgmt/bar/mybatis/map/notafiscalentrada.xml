@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 27/09/2016 14:37 : 36-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NotaFiscalEntradaMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="NotaFiscalEntradaResult" type="NotaFiscalEntrada" extends="NotaFiscalMap.NotaFiscalResult">
+
+  </resultMap>
+
+ <sql id="allNotaFiscalEntradaColumns">
+	<include refid="NotaFiscalMap.allNotaFiscalColumns"/>
+  </sql>
+  <sql id="allNotaFiscalEntradaValues">
+     <include refid="NotaFiscalMap.allNotaFiscalValues"/>
+  </sql>
+
+
+ <select id="fetchAllNotaFiscalEntradas" resultMap="NotaFiscalEntradaResult">
+    SELECT id,
+ <include refid="allNotaFiscalEntradaColumns" />
+   FROM notafiscal ORDER BY id ASC
+ </select>
+
+ <select id="fetchNotaFiscalEntradaById" parameterType="Integer" resultMap="NotaFiscalEntradaResult">
+    SELECT id,
+ <include refid="allNotaFiscalEntradaColumns" />
+   FROM notafiscal WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllNotaFiscalEntradasRequest" parameterType="PagedInquiryRequest" resultMap="NotaFiscalEntradaResult">
+
+     SELECT id,<include refid="allNotaFiscalEntradaColumns" />
+           FROM notafiscal where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchNotaFiscalEntradaRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM notafiscal WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+
+ </select>
+
+
+</mapper>
+
+

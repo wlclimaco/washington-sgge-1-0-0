@@ -460,7 +460,7 @@ public class SiteBARTest extends AbstractTransactionalJUnit4SpringContextTests {
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		OrdemServico ordemservicoResponse = getSiteBAR().fetchOrdemServicoById(request);
-		Assert.assertEquals(ordemservicoResponse.getNome(), "nome_3");
+		Assert.assertEquals(ordemservicoResponse.getNome(), "nome_1");
 		getSiteBAR().updateOrdemServico(ordemservico);
 		ordemservicoResponse = getSiteBAR().fetchOrdemServicoById(request);
 		Assert.assertEquals(ordemservicoResponse.getNome(), "NATIVE INSERT UPDATE");

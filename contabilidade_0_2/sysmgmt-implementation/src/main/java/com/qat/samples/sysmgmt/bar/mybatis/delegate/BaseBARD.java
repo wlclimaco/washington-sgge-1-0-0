@@ -17,6 +17,7 @@ import com.qat.samples.sysmgmt.bar.Notes.INotesBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
 import com.qat.samples.sysmgmt.entidade.model.Entidade;
+import com.qat.samples.sysmgmt.nf.model.NotaFiscal;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.model.Status;
@@ -106,6 +107,52 @@ public final class BaseBARD extends SqlSessionDaoSupport
 							empresa.getCreateUser(), empresa.getId(), tabela, statusBAR,
 							historicoBAR, processId, historicoId);
 
+		}
+
+		return 0;
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public static Integer maintainInsertBaseNF(NotaFiscal empresa,Integer historicoId,Integer processId,TabelaEnum tabela,IEnderecoBAR enderecoBAR,IStatusBAR statusBAR,IHistoricoBAR historicoBAR,
+			ICadastrosBAR cadastroBAR,IFiscalBAR fiscalBAR,ITelefoneBAR telefoneBAR,IEmailBAR emailBAR,IDocumentoBAR documentoBAR,INotesBAR noteBAR, InternalResultsResponse<?> response)
+	{
+		Integer count = 0;
+		Boolean count1 = false;
+		if (!ValidationUtil.isNull(empresa.getConhecimentoTransporte()))
+		{
+			count +=
+					EnderecoBARD.maintainEnderecoAssociations(empresa.getEnderecos(), response, empresa.getId(), null,
+							null,
+							tabela, enderecoBAR, statusBAR, historicoBAR, empresa.getId(),
+							empresa.getCreateUser(), processId, historicoId);
+		}
+		if (!ValidationUtil.isNullOrEmpty(empresa.getNotaFiscalItens()))
+		{
+			count +=
+					CnaeBARD.maintainCnaeAssociations(empresa.getCnaes(), response, empresa.getId(), null, null,
+							tabela, fiscalBAR, statusBAR, historicoBAR, empresa.getId(),
+							empresa.getCreateUser(), processId, historicoId);
+		}
+
+
+		return 0;
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public static Integer maintainInsertBaseNFSaidas(NotaFiscal empresa,Integer historicoId,Integer processId,TabelaEnum tabela,IEnderecoBAR enderecoBAR,IStatusBAR statusBAR,IHistoricoBAR historicoBAR,
+			ICadastrosBAR cadastroBAR,IFiscalBAR fiscalBAR,ITelefoneBAR telefoneBAR,IEmailBAR emailBAR,IDocumentoBAR documentoBAR,INotesBAR noteBAR, InternalResultsResponse<?> response)
+	{
+		Integer count = 0;
+		Boolean count1 = false;
+		if (!ValidationUtil.isNull(empresa.getContaspagarList()))
+		{
+			count +=
+					EnderecoBARD.maintainContasPagarAssociations(empresa.getContaspagarList(), response, empresa.getId(), null,
+							null,
+							tabela, enderecoBAR, statusBAR, historicoBAR, empresa.getId(),
+							empresa.getCreateUser(), processId, historicoId);
 		}
 
 		return 0;

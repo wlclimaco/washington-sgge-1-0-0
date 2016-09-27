@@ -1,156 +1,203 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+
+<!-- create by system gera-java version 1.0.0 27/09/2016 12:37 : 52-->
+
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="NotaFiscalItensMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
-	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="NotaFiscalItensResult" type="NotaFiscalItens">
+    <result property="id" column="id"/>
+    <result property="dataInicio" column="dataInicio"/>
+    <result property="valor" column="valor"/>
+    <result property="servicoPlanoEnumValue" column="servicoPlanoEnumValue"/>
+    <result property="numeroRegistro" column="numeroRegistro"/>
+    <result property="dataRegistro" column="dataRegistro" />
+    <result property="localDesembaraco" column="localDesembaraco"/>
+	<result property="dataDesembaraco" column="dataDesembaraco"/>
+    <result property="transporteInternacional" column="transporteInternacional"/>
+    <result property="valorAFRMM" column="valorAFRMM"/>
+    <result property="tpIntermedio" column="tpIntermedio"/>
+    <result property="cnpj" column="cnpj"/>
+    <result property="ufTerceiro" column="ufTerceiro"/>
+    <result property="codigoExportador" column="codigoExportador"/>
+    <result property="descricao" column="descricao"/>
+    <result property="valorUnitario" column="valorUnitario"/>
+    <result property="valorTotalBruto" column="valorTotalBruto"/>
+    <result property="valorFrete" column="valorFrete"/>
+    <result property="valorSeguro" column="valorSeguro"/>
+    <result property="valorDesconto" column="valorDesconto"/>
+    <result property="valorOutrasDespesasAcessorias" column="valorOutrasDespesasAcessorias"/>
+    <result property="numeroRECOPI" column="numeroRECOPI"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+    <collection property="ufDesembaraco" column="ufDesembaraco" select="RegimeMap.fetchRegimeById"/>
+        <collection property="produto" column="produto" select="RegimeMap.fetchRegimeById"/>
+    <collection property="cfop" column="cfop" select="RegimeMap.fetchRegimeById"/>
 
-  	<!-- Result maps describe the mapping between the columns returned
-       from a query, and the class properties.  A result map isn't
-       necessary if the columns (or aliases) match to the properties
-       exactly. 	private Integer id;
-
-	private Integer IdNota;
-
-	/** The tipo endereco. */
-	private Produto produto;
-
-	private Double qnt;
-
-	private Double vrUnitario;
-
-	private Double vrDesconto;
-
-	private Cfop cfop;
-
-	private Cst crt;
-
-	private Classificacao classificacao;
-
-	private List<Tributos> tributosList;-->
-
-  <resultMap id="notaFiscalItensResult" type="NotaFiscalItens">
-    <result property="id" column="id" />
-    <result property="IdNota" column="IdNota" />
-   	<result property="qnt" column="qnt"/>
-	<result property="vrUnitario" column="vrUnitario"/>
-    <result property="vrDesconto" column="vrDesconto" />
-     <result property="processId" column="processId" />
-   	<result property="createUser" column="create_user"/>
-	<result property="createDataUTC" column="create_date"/>
-	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDataUTC" column="modify_date"/>
-    <association property="produto"    column="produto" select="ProdutoMap.fetchProdutoById"  />
-    <association property="cfop"    column="cfop" select="CfopMap.fetchCfopById"  />
-    <association property="classificacao"    column="classificacao" select="ClassificacaoMap.fetchClassificacaoById"  />
-	<collection property="tributosList" column="id" select="TributosMap.fetchTributosById"/>
   </resultMap>
 
-  <!--
-		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.
-	-->
   <sql id="allNotaFiscalItensColumns">
-		 IdNota
-		,qnt
-		,vrUnitario
-		,vrDesconto
-		,cfop
-		,classificacao
-		,produto
-		,processId
-      	,create_date
-      	,create_user
-      	,modify_date
-      	,modify_user
+dataInicio
+,valor
+,servicoPlanoEnumValue
+,numeroRegistro
+,dataRegistro
+,localDesembaraco
+,ufDesembaraco
+,dataDesembaraco
+,transporteInternacional
+,valorAFRMM
+,tpIntermedio
+,cnpj
+,ufTerceiro
+,codigoExportador
+,descricao
+,produto
+,cfop
+,valorUnitario
+,valorTotalBruto
+,valorFrete
+,valorSeguro
+,valorDesconto
+,valorOutrasDespesasAcessorias
+,numeroRECOPI
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allNotaFiscalItensValues">
+#{dataInicio},
+#{valor},
+#{servicoPlanoEnumValue},
+#{numeroRegistro},
+#{dataRegistro},
+#{localDesembaraco},
+#{ufDesembaraco.id},
+#{dataDesembaraco},
+#{transporteInternacional},
+#{valorAFRMM},
+#{tpIntermedio},
+#{cnpj},
+#{ufTerceiro},
+#{codigoExportador},
+#{descricao},
+#{produto.id},
+#{cfop.id},
+#{valorUnitario},
+#{valorTotalBruto},
+#{valorFrete},
+#{valorSeguro},
+#{valorDesconto},
+#{valorOutrasDespesasAcessorias},
+#{numeroRECOPI},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
   </sql>
 
-  <sql id="allNotaFiscalItensValues">
-		 #{IdNota},
-		 #{qnt},
-		 #{vrUnitario},
-		 #{vrDesconto},
-		 #{cfop.id},
-		 #{classificacao.id},
-		 #{produto.id},
-		 #{processId},
-    	<include refid="CBOFMap.changeControlFields"/>
-  </sql>
 
-  <!--
-		SQL Insert Statements.
- 	-->
-  <insert id="insertNotaFiscalItens" parameterType="NotaFiscalItens" useGeneratedKeys="true" keyProperty="id">
-  	INSERT INTO notaFiscalItens (
-		<include refid="allNotaFiscalItensColumns" />
-      )
-    VALUES (<include refid="allNotaFiscalItensValues" /> )
-  </insert>
+ <select id="fetchAllNotaFiscalItenss" resultMap="NotaFiscalItensResult">
+    SELECT id,
+ <include refid="allNotaFiscalItensColumns" />
+   FROM notafiscalitens ORDER BY id ASC
+ </select>
 
+ <select id="fetchNotaFiscalItensById" parameterType="Integer" resultMap="NotaFiscalItensResult">
+    SELECT id,
+ <include refid="allNotaFiscalItensColumns" />
+   FROM notafiscalitens WHERE id = #{fetchid}
+ </select>
 
-	<!--
-		SQL Update Statements.
- 	-->
+ <select id="fetchAllNotaFiscalItenssRequest" parameterType="PagedInquiryRequest" resultMap="NotaFiscalItensResult">
 
-  <update id="updateNotaFiscalItens" parameterType="NotaFiscalItens">
-    UPDATE notaFiscalItens
-    	<set>
-    		<if test="qnt!= null">qnt = #{qnt},</if>
-	    	<if test="vrUnitario!= null"> vrUnitario=#{vrUnitario},</if>
-	    	<if test="vrDesconto!= null"> vrDesconto=#{vrDesconto},</if>
-	    	<if test="cfop.id!= null"> cfop=#{cfop.id},</if>
-	    	<if test="classificacao.id!= null"> classificacao=#{classificacao.id},</if>
-			<if test="modifyDataUTC!= null"> modify_date=#{modifyDataUTC},</if>
-			<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
-		</set>
-    WHERE
-     id = #{id}
-  </update>
+     SELECT id,<include refid="allNotaFiscalItensColumns" />
+           FROM notafiscalitens where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
 
-   <!--
-		SQL Delete Statements.
-   -->
-  <delete id="deleteNotaFiscalItensById" parameterType="Integer">
-    	DELETE FROM notaFiscalItens WHERE id = #{id}
+<select id="fetchNotaFiscalItensRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM notafiscalitens WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+
+ </select>
+
+ <insert id="insertNotaFiscalItens" parameterType="NotaFiscalItens" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO notafiscalitens (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allNotaFiscalItensColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allNotaFiscalItensValues" /> )
+ </insert>
+
+ <update id="updateNotaFiscalItens" parameterType="NotaFiscalItens">
+   UPDATE notafiscalitens SET
+<if test="dataInicio!= null">dataInicio = #{dataInicio},</if>
+<if test="valor!= null">valor = #{valor},</if>
+<if test="servicoPlanoEnumValue!= null">servicoPlanoEnumValue = #{servicoPlanoEnumValue},</if>
+<if test="numeroRegistro!= null">numeroRegistro = #{numeroRegistro},</if>
+<if test="dataRegistro!= null">dataRegistro = #{dataRegistro},</if>
+<if test="localDesembaraco!= null">localDesembaraco = #{localDesembaraco},</if>
+<if test="ufDesembaraco!= null">ufDesembaraco = #{ufDesembaraco.id},</if>
+<if test="dataDesembaraco!= null">dataDesembaraco = #{dataDesembaraco},</if>
+<if test="transporteInternacional!= null">transporteInternacional = #{transporteInternacional},</if>
+<if test="valorAFRMM!= null">valorAFRMM = #{valorAFRMM},</if>
+<if test="tpIntermedio!= null">tpIntermedio = #{tpIntermedio},</if>
+<if test="cnpj!= null">cnpj = #{cnpj},</if>
+<if test="ufTerceiro!= null">ufTerceiro = #{ufTerceiro},</if>
+<if test="codigoExportador!= null">codigoExportador = #{codigoExportador},</if>
+<if test="descricao!= null">descricao = #{descricao},</if>
+<if test="produto!= null">produto = #{produto.id},</if>
+<if test="cfop!= null">cfop = #{cfop.id},</if>
+<if test="valorUnitario!= null">valorUnitario = #{valorUnitario},</if>
+<if test="valorTotalBruto!= null">valorTotalBruto = #{valorTotalBruto},</if>
+<if test="valorFrete!= null">valorFrete = #{valorFrete},</if>
+<if test="valorSeguro!= null">valorSeguro = #{valorSeguro},</if>
+<if test="valorDesconto!= null">valorDesconto = #{valorDesconto},</if>
+<if test="valorOutrasDespesasAcessorias!= null">valorOutrasDespesasAcessorias = #{valorOutrasDespesasAcessorias},</if>
+<if test="numeroRECOPI!= null">numeroRECOPI = #{numeroRECOPI},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteNotaFiscalItensById" parameterType="NotaFiscalItens">
+  DELETE FROM notafiscalitens WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllNotaFiscalItenss">
+ DELETE FROM notafiscalitens
   </delete>
-
-	<!--
-		SQL Fetch Statements.
- 	-->
-  <select id="fetchNotaFiscalItensRowCount" parameterType="PagedInquiryRequest" resultType="Integer">
-     SELECT COUNT(id) AS RECORD_COUNT
-        FROM notaFiscalItens
-     WHERE 2 = 2
-     <if test="parentId != null">
-		  AND FK_notaFiscalItens_id = #{parentId}
-	 </if>
-  </select>
-
-  <select id="fetchAllNotaFiscalItenss" resultMap="notaFiscalItensResult">
-    SELECT
-	<include refid="allNotaFiscalItensColumns" />
-    FROM business ORDER BY name ASC
-  </select>
-
- <select id="fetchAllNotaFiscalItensByNota" parameterType="Integer" resultMap="notaFiscalItensResult">
-	 SELECT
-	<include refid="allNotaFiscalItensColumns" />
-    FROM notaFiscalItens b where IdNota= #{id} ORDER BY id ASC
- </select>
-
- <select id="fetchAllNotaFiscalItenssByFuncionario" parameterType="Integer" resultMap="notaFiscalItensResult">
-	 SELECT
-	<include refid="allNotaFiscalItensColumns" />
-    FROM notaFiscalItens b where tabela = 16 and parentId= #{id} ORDER BY id ASC
- </select>
-
- <select id="fetchAllNotaFiscalItenssByPessoaId" parameterType="Integer" resultMap="notaFiscalItensResult">
-	 SELECT
-	<include refid="allNotaFiscalItensColumns" />
-    FROM notaFiscalItens b where tabela = 23 and parentId= #{id} ORDER BY id ASC
- </select>
-
 </mapper>
+
+

@@ -89,6 +89,18 @@
         <typeAlias alias="DoisValor" type="com.qat.samples.sysmgmt.util.model.DoisValores" />
         <typeAlias alias="DoisValorInquiryRequest" type="com.qat.samples.sysmgmt.util.model.request.DoisValoresInquiryRequest" />
 
+
+        <!-- Vendas -->
+
+        <typeAlias alias="NotaFiscalItens" type="com.qat.samples.sysmgmt.nf.model.NotaFiscalItens" />
+        <typeAlias alias="NotaFiscal" type="com.qat.samples.sysmgmt.nf.model.NotaFiscal" />
+        <typeAlias alias="ConhecimentoTransporte" type="com.qat.samples.sysmgmt.nf.model.ConhecimentoTransporte" />
+        <typeAlias alias="NotaFiscalEntrada" type="com.qat.samples.sysmgmt.nf.model.NotaFiscalEntrada" />
+        <typeAlias alias="NotaFiscalSaida" type="com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida" />
+        <typeAlias alias="Orcamento" type="com.qat.samples.sysmgmt.nf.model.Orcamento" />
+        <typeAlias alias="NotaFiscalInquiryRequest" type="com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest" />
+        <typeAlias alias="OrcamentoInquiryRequest" type="com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest" />
+
         <!-- Financeiro -->
 
         <typeAlias alias="ContasPagar" type="com.qat.samples.sysmgmt.financeiro.model.ContasPagar" />
@@ -494,6 +506,12 @@
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/role.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/userRoles.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/validacao.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/notaFiscalItens.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/notafiscal.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/notafiscalentrada.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/notafiscalsaida.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/orcamento.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/conhecimentoTransporte.xml" />
     </mappers>
 
 </configuration>
