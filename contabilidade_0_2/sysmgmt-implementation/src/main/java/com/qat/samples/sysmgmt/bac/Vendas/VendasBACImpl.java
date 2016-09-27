@@ -11,7 +11,6 @@ import com.qat.framework.model.MessageSeverity;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.SystemErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.validation.ValidationContext;
 import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
 import com.qat.framework.validation.ValidationUtil;
@@ -187,7 +186,7 @@ public InternalResultsResponse<NotaFiscalSaida> fetchNotaFiscalSaidaById(FetchBy
 	}
 	else
 	{
-		response.getResultsList().add(getVendasBAR().fetchNotaFiscalSaidaById(request).getFirstResult());
+		response.getResultsList().add(getVendasBAR().fetchNotaFiscalSaidaById(request));
 	}
 
 	return response;
@@ -394,7 +393,7 @@ public InternalResultsResponse<Orcamento> fetchOrcamentoById(FetchByIdRequest re
 	}
 	else
 	{
-		response.getResultsList().add(getVendasBAR().fetchOrcamentoById(request).getFirstResult());
+		response.getResultsList().add(getVendasBAR().fetchOrcamentoById(request));
 	}
 
 	return response;
@@ -602,7 +601,7 @@ public InternalResultsResponse<OrdemServico> fetchOrdemServicoById(FetchByIdRequ
 	}
 	else
 	{
-		response.getResultsList().add(getVendasBAR().fetchOrdemServicoById(request).getFirstResult());
+		response.getResultsList().add(getVendasBAR().fetchOrdemServicoById(request));
 	}
 
 	return response;

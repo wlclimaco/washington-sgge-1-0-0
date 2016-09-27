@@ -1,4 +1,6 @@
+/** create by system gera-java version 1.0.0 27/09/2016 12:23 : 27*/
 package com.qat.samples.sysmgmt.nf.model;
+
 
 import com.qat.samples.sysmgmt.estado.model.Estado;
 import com.qat.samples.sysmgmt.pessoa.model.Transportador;
@@ -9,281 +11,514 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
  */
+
 @SuppressWarnings("serial")
 public class ConhecimentoTransporte extends ModelCosmeDamiao
 {
-	/** The SendSolv id for the account. */
-	private Integer id;
 
-	private Integer IdNota;
+    /** The econtabil id for the ConhecimentoTransporte. */
+    private Integer id;
 
-	private Transportador transportador;
+    /** The econtabil IdNota for the ConhecimentoTransporte. */
+    private Integer idnota;
 
-	/** The tipo endereco. */
-	private String remetente;
+    /** The econtabil remetente for the ConhecimentoTransporte. */
+    private Integer remetente;
 
-	private Double vrTotalMercadorias;
+    /** The econtabil vrTotalMercadorias for the ConhecimentoTransporte. */
+    private Double vrtotalmercadorias;
 
-	private Integer apCreIcms;
+    /** The econtabil apCreIcms for the ConhecimentoTransporte. */
+    private Integer apcreicms;
 
-	private Integer fretePorConta;
+    /** The econtabil fretePorConta for the ConhecimentoTransporte. */
+    private Integer freteporconta;
 
-	private String placa;
+    /** The econtabil placa for the ConhecimentoTransporte. */
+    private String placa;
 
-	private Estado estado;
+    /** The econtabil especie for the ConhecimentoTransporte. */
+    private Integer especie;
 
-	private Marca marca;
+    /** The econtabil volume for the ConhecimentoTransporte. */
+    private Double volume;
 
-	private Double especie;
+    /** The econtabil pesoLiquido for the ConhecimentoTransporte. */
+    private Double pesoliquido;
 
-	private Double volume;
+    /** The econtabil pesoBruto for the ConhecimentoTransporte. */
+    private Double pesobruto;
 
-	private Double pesoLiquido;
+    /** The econtabil transportador for the ConhecimentoTransporte. */
+    private Transportador transportador;
 
-	private Double pesoBruto;
+    /** The econtabil marca for the ConhecimentoTransporte. */
+    private Marca marca;
 
-	/**
-	 * Default constructor.
-	 */
-	public ConhecimentoTransporte()
-	{
-		super();
-	}
+    /** The econtabil estado for the ConhecimentoTransporte. */
+    private Estado estado;
 
-	/**
-	 * @return the id
-	 */
-	public Integer getId()
-	{
-		return id;
-	}
+    /** The econtabil registroNacionalTransportadorCarga for the ConhecimentoTransporte. */
+    private String registronacionaltransportadorcarga;
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Integer id)
-	{
-		this.id = id;
-	}
+    /** The econtabil vagao for the ConhecimentoTransporte. */
+    private String vagao;
 
-	/**
-	 * @return the idNota
-	 */
-	public Integer getIdNota()
-	{
-		return IdNota;
-	}
+    /** The econtabil balsa for the ConhecimentoTransporte. */
+    private String balsa;
 
-	/**
-	 * @param idNota the idNota to set
-	 */
-	public void setIdNota(Integer idNota)
-	{
-		IdNota = idNota;
-	}
 
-	/**
-	 * @return the transportador
-	 */
-	public Transportador getTransportador()
-	{
-		return transportador;
-	}
 
-	/**
-	 * @param transportador the transportador to set
-	 */
-	public void setTransportador(Transportador transportador)
-	{
-		this.transportador = transportador;
-	}
+    /**
+     * Default constructor.
+     */
+    public ConhecimentoTransporte()
+    {
+        super();
+    }
 
-	/**
-	 * @return the remetente
-	 */
-	public String getRemetente()
-	{
-		return remetente;
-	}
 
-	/**
-	 * @param remetente the remetente to set
-	 */
-	public void setRemetente(String remetente)
-	{
-		this.remetente = remetente;
-	}
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
+    public Integer getId()
+    {
+        return id;
+    }
 
-	/**
-	 * @return the vrTotalMercadorias
-	 */
-	public Double getVrTotalMercadorias()
-	{
-		return vrTotalMercadorias;
-	}
+    /**
+     * Sets the id.
+     *
+* @param id the id to set
+ */
+public void setId(Integer id)
+{
+        this.id = id;
+    }
 
-	/**
-	 * @param vrTotalMercadorias the vrTotalMercadorias to set
-	 */
-	public void setVrTotalMercadorias(Double vrTotalMercadorias)
-	{
-		this.vrTotalMercadorias = vrTotalMercadorias;
-	}
+    /**
+     * Gets the idnota.
+     *
+     * @return the idnota
+     */
+    /**
+     * Gets the idnota.
+     *
+     * @return the idnota
+     */
+    public Integer getIdNota()
+    {
+        return idnota;
+    }
 
-	/**
-	 * @return the apCreIcms
-	 */
-	public Integer getApCreIcms()
-	{
-		return apCreIcms;
-	}
+    /**
+     * Sets the idnota.
+     *
+* @param id the idnota to set
+ */
+public void setIdNota(Integer idnota)
+{
+        this.idnota = idnota;
+    }
 
-	/**
-	 * @param apCreIcms the apCreIcms to set
-	 */
-	public void setApCreIcms(Integer apCreIcms)
-	{
-		this.apCreIcms = apCreIcms;
-	}
+    /**
+     * Gets the remetente.
+     *
+     * @return the remetente
+     */
+    /**
+     * Gets the remetente.
+     *
+     * @return the remetente
+     */
+    public Integer getRemetente()
+    {
+        return remetente;
+    }
 
-	/**
-	 * @return the fretePorConta
-	 */
-	public Integer getFretePorConta()
-	{
-		return fretePorConta;
-	}
+    /**
+     * Sets the remetente.
+     *
+* @param id the remetente to set
+ */
+public void setRemetente(Integer remetente)
+{
+        this.remetente = remetente;
+    }
 
-	/**
-	 * @param fretePorConta the fretePorConta to set
-	 */
-	public void setFretePorConta(Integer fretePorConta)
-	{
-		this.fretePorConta = fretePorConta;
-	}
+    /**
+     * Gets the vrtotalmercadorias.
+     *
+     * @return the vrtotalmercadorias
+     */
+    /**
+     * Gets the vrtotalmercadorias.
+     *
+     * @return the vrtotalmercadorias
+     */
+    public Double getVrTotalMercadorias()
+    {
+        return vrtotalmercadorias;
+    }
 
-	/**
-	 * @return the placa
-	 */
-	public String getPlaca()
-	{
-		return placa;
-	}
+    /**
+     * Sets the vrtotalmercadorias.
+     *
+* @param id the vrtotalmercadorias to set
+ */
+public void setVrTotalMercadorias(Double vrtotalmercadorias)
+{
+        this.vrtotalmercadorias = vrtotalmercadorias;
+    }
 
-	/**
-	 * @param placa the placa to set
-	 */
-	public void setPlaca(String placa)
-	{
-		this.placa = placa;
-	}
+    /**
+     * Gets the apcreicms.
+     *
+     * @return the apcreicms
+     */
+    /**
+     * Gets the apcreicms.
+     *
+     * @return the apcreicms
+     */
+    public Integer getApCreIcms()
+    {
+        return apcreicms;
+    }
 
-	/**
-	 * @return the estado
-	 */
-	public Estado getEstado()
-	{
-		return estado;
-	}
+    /**
+     * Sets the apcreicms.
+     *
+* @param id the apcreicms to set
+ */
+public void setApCreIcms(Integer apcreicms)
+{
+        this.apcreicms = apcreicms;
+    }
 
-	/**
-	 * @param estado the estado to set
-	 */
-	public void setEstado(Estado estado)
-	{
-		this.estado = estado;
-	}
+    /**
+     * Gets the freteporconta.
+     *
+     * @return the freteporconta
+     */
+    /**
+     * Gets the freteporconta.
+     *
+     * @return the freteporconta
+     */
+    public Integer getFretePorConta()
+    {
+        return freteporconta;
+    }
 
-	/**
-	 * @return the marca
-	 */
-	public Marca getMarca()
-	{
-		return marca;
-	}
+    /**
+     * Sets the freteporconta.
+     *
+* @param id the freteporconta to set
+ */
+public void setFretePorConta(Integer freteporconta)
+{
+        this.freteporconta = freteporconta;
+    }
 
-	/**
-	 * @param marca the marca to set
-	 */
-	public void setMarca(Marca marca)
-	{
-		this.marca = marca;
-	}
+    /**
+     * Gets the placa.
+     *
+     * @return the placa
+     */
+    /**
+     * Gets the placa.
+     *
+     * @return the placa
+     */
+    public String getPlaca()
+    {
+        return placa;
+    }
 
-	/**
-	 * @return the especie
-	 */
-	public Double getEspecie()
-	{
-		return especie;
-	}
+    /**
+     * Sets the placa.
+     *
+* @param id the placa to set
+ */
+public void setPlaca(String placa)
+{
+        this.placa = placa;
+    }
 
-	/**
-	 * @param especie the especie to set
-	 */
-	public void setEspecie(Double especie)
-	{
-		this.especie = especie;
-	}
+    /**
+     * Gets the especie.
+     *
+     * @return the especie
+     */
+    /**
+     * Gets the especie.
+     *
+     * @return the especie
+     */
+    public Integer getEspecie()
+    {
+        return especie;
+    }
 
-	/**
-	 * @return the volume
-	 */
-	public Double getVolume()
-	{
-		return volume;
-	}
+    /**
+     * Sets the especie.
+     *
+* @param id the especie to set
+ */
+public void setEspecie(Integer especie)
+{
+        this.especie = especie;
+    }
 
-	/**
-	 * @param volume the volume to set
-	 */
-	public void setVolume(Double volume)
-	{
-		this.volume = volume;
-	}
+    /**
+     * Gets the volume.
+     *
+     * @return the volume
+     */
+    /**
+     * Gets the volume.
+     *
+     * @return the volume
+     */
+    public Double getVolume()
+    {
+        return volume;
+    }
 
-	/**
-	 * @return the pesoLiquido
-	 */
-	public Double getPesoLiquido()
-	{
-		return pesoLiquido;
-	}
+    /**
+     * Sets the volume.
+     *
+* @param id the volume to set
+ */
+public void setVolume(Double volume)
+{
+        this.volume = volume;
+    }
 
-	/**
-	 * @param pesoLiquido the pesoLiquido to set
-	 */
-	public void setPesoLiquido(Double pesoLiquido)
-	{
-		this.pesoLiquido = pesoLiquido;
-	}
+    /**
+     * Gets the pesoliquido.
+     *
+     * @return the pesoliquido
+     */
+    /**
+     * Gets the pesoliquido.
+     *
+     * @return the pesoliquido
+     */
+    public Double getPesoLiquido()
+    {
+        return pesoliquido;
+    }
 
-	/**
-	 * @return the pesoBruto
-	 */
-	public Double getPesoBruto()
-	{
-		return pesoBruto;
-	}
+    /**
+     * Sets the pesoliquido.
+     *
+* @param id the pesoliquido to set
+ */
+public void setPesoLiquido(Double pesoliquido)
+{
+        this.pesoliquido = pesoliquido;
+    }
 
-	/**
-	 * @param pesoBruto the pesoBruto to set
-	 */
-	public void setPesoBruto(Double pesoBruto)
-	{
-		this.pesoBruto = pesoBruto;
-	}
+    /**
+     * Gets the pesobruto.
+     *
+     * @return the pesobruto
+     */
+    /**
+     * Gets the pesobruto.
+     *
+     * @return the pesobruto
+     */
+    public Double getPesoBruto()
+    {
+        return pesobruto;
+    }
+
+    /**
+     * Sets the pesobruto.
+     *
+* @param id the pesobruto to set
+ */
+public void setPesoBruto(Double pesobruto)
+{
+        this.pesobruto = pesobruto;
+    }
+
+    /**
+     * Gets the transportador.
+     *
+     * @return the transportador
+     */
+    /**
+     * Gets the transportador.
+     *
+     * @return the transportador
+     */
+    public Transportador getTransportador()
+    {
+        return transportador;
+    }
+
+    /**
+     * Sets the transportador.
+     *
+* @param id the transportador to set
+ */
+public void setTransportador(Transportador transportador)
+{
+        this.transportador = transportador;
+    }
+
+    /**
+     * Gets the marca.
+     *
+     * @return the marca
+     */
+    /**
+     * Gets the marca.
+     *
+     * @return the marca
+     */
+    public Marca getMarca()
+    {
+        return marca;
+    }
+
+    /**
+     * Sets the marca.
+     *
+* @param id the marca to set
+ */
+public void setMarca(Marca marca)
+{
+        this.marca = marca;
+    }
+
+    /**
+     * Gets the estado.
+     *
+     * @return the estado
+     */
+    /**
+     * Gets the estado.
+     *
+     * @return the estado
+     */
+    public Estado getEstado()
+    {
+        return estado;
+    }
+
+    /**
+     * Sets the estado.
+     *
+* @param id the estado to set
+ */
+public void setEstado(Estado estado)
+{
+        this.estado = estado;
+    }
+
+    /**
+     * Gets the registronacionaltransportadorcarga.
+     *
+     * @return the registronacionaltransportadorcarga
+     */
+    /**
+     * Gets the registronacionaltransportadorcarga.
+     *
+     * @return the registronacionaltransportadorcarga
+     */
+    public String getRegistroNacionalTransportadorCarga()
+    {
+        return registronacionaltransportadorcarga;
+    }
+
+    /**
+     * Sets the registronacionaltransportadorcarga.
+     *
+* @param id the registronacionaltransportadorcarga to set
+ */
+public void setRegistroNacionalTransportadorCarga(String registronacionaltransportadorcarga)
+{
+        this.registronacionaltransportadorcarga = registronacionaltransportadorcarga;
+    }
+
+    /**
+     * Gets the vagao.
+     *
+     * @return the vagao
+     */
+    /**
+     * Gets the vagao.
+     *
+     * @return the vagao
+     */
+    public String getVagao()
+    {
+        return vagao;
+    }
+
+    /**
+     * Sets the vagao.
+     *
+* @param id the vagao to set
+ */
+public void setVagao(String vagao)
+{
+        this.vagao = vagao;
+    }
+
+    /**
+     * Gets the balsa.
+     *
+     * @return the balsa
+     */
+    /**
+     * Gets the balsa.
+     *
+     * @return the balsa
+     */
+    public String getBalsa()
+    {
+        return balsa;
+    }
+
+    /**
+     * Sets the balsa.
+     *
+* @param id the balsa to set
+ */
+public void setBalsa(String balsa)
+{
+        this.balsa = balsa;
+    }
+
 
 	@Override
-	public String toString()
-	{
-		return "ConhecimentoTransporte [getId()=" + getId() + ", getIdNota()=" + getIdNota() + ", getTransportador()="
-				+ getTransportador() + ", getRemetente()=" + getRemetente() + ", getVrTotalMercadorias()="
-				+ getVrTotalMercadorias() + ", getApCreIcms()=" + getApCreIcms() + ", getFretePorConta()="
-				+ getFretePorConta() + ", getPlaca()=" + getPlaca() + ", getEstado()=" + getEstado() + ", getMarca()="
-				+ getMarca() + ", getEspecie()=" + getEspecie() + ", getVolume()=" + getVolume()
-				+ ", getPesoLiquido()=" + getPesoLiquido() + ", getPesoBruto()=" + getPesoBruto() + ", toString()="
-				+ super.toString() + "]";
+	public String toString() {
+		return "ConhecimentoTransporte [getId()=" + getId() + ", getIdNota()=" + getIdNota() + ", getRemetente()="
+				+ getRemetente() + ", getVrTotalMercadorias()=" + getVrTotalMercadorias() + ", getApCreIcms()="
+				+ getApCreIcms() + ", getFretePorConta()=" + getFretePorConta() + ", getPlaca()=" + getPlaca()
+				+ ", getEspecie()=" + getEspecie() + ", getVolume()=" + getVolume() + ", getPesoLiquido()="
+				+ getPesoLiquido() + ", getPesoBruto()=" + getPesoBruto() + ", getTransportador()=" + getTransportador()
+				+ ", getMarca()=" + getMarca() + ", getEstado()=" + getEstado()
+				+ ", getRegistroNacionalTransportadorCarga()=" + getRegistroNacionalTransportadorCarga()
+				+ ", getVagao()=" + getVagao() + ", getBalsa()=" + getBalsa() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
-}
+
+
+
+
+ }

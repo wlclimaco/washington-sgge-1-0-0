@@ -17,8 +17,10 @@ import com.qat.samples.sysmgmt.bar.Financeiro.IFinanceiroBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Vendas.IVendasBAR;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.BaseBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.StatusBARD;
+import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.nf.model.ConhecimentoTransporte;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscalItens;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
@@ -245,6 +247,10 @@ public InternalResponse insertNotaFiscalSaida(NotaFiscalSaida county)
 	county.setProcessId(historicoId);
 
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_NF, county, response);
+
+	BaseBARD.maintainInsertBaseNF(county, historicoId, processId, TabelaEnum.NOTAFISCALSAIDA, getEnderecoBAR(),
+			getStatusBAR(), getHistoricoBAR(), getVendasBAR(), getFinanceiroBAR(),new InternalResultsResponse<Empresa>());
+
 	return response;
 }
 

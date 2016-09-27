@@ -7,12 +7,12 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.bar.Cadastros.ICadastrosBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.bar.Vendas.IVendasBAR;
+import com.qat.samples.sysmgmt.nf.model.NotaFiscalItens;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.Cidade;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
@@ -37,67 +37,65 @@ public final class NotaFiscalItensBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainCidadeAssociations(Cidade cidadeList,
+	public static Integer maintainNotaFiscalItensAssociations(List<NotaFiscalItens> cidadeList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, ICadastrosBAR CidadeDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC,
+			TabelaEnum tabelaEnum, IVendasBAR NotaFiscalItensDAC, IStatusBAR statusBAR, IHistoricoBAR historicoBAR,
 			Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
-		Boolean countSucess = false;
-		Integer count = ZERO;
+		Boolean count = false;
 		// First Maintain Empresa
 		if (ValidationUtil.isNull(cidadeList))
 		{
-			return count;
+			return 0;
 		}
-
+		for (NotaFiscalItens contaCorrente : cidadeList)
+		{
 		// Make sure we set the parent key
-		cidadeList.setParentId(parentId);
-		cidadeList.setTabelaEnum(tabelaEnum);
-		cidadeList.setProcessId(processId);
+		contaCorrente.setParentId(parentId);
+		contaCorrente.setProcessId(processId);
 
-		switch (cidadeList.getModelAction())
+		switch (contaCorrente.getModelAction())
 		{
 			case INSERT:
-				countSucess = CidadeDAC.insertCidade(cidadeList).hasSystemError();
-				if (countSucess = true)
+				count = NotaFiscalItensDAC.insertNotaFiscalItens(contaCorrente).hasSystemError();
+				if (count == false)
 				{
-					count = count + 1;
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.ATIVO);
 					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
-					countSucess =
-							StatusBARD.maintainStatusAssociations(cidadeList.getStatusList(), response,
-									cidadeList.getId(),
-									null,
-									AcaoEnum.INSERT, UserId, empId, TabelaEnum.CIDADE, statusDAC, historicoDAC,
+					count =
+							StatusBARD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>) response, parentId, null,
+									AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusBAR, historicoBAR,
 									processId, historicoId);
 				}
 				break;
 			case UPDATE:
-				countSucess = CidadeDAC.updateCidade(cidadeList).hasSystemError();;
-				if (countSucess = true)
+				count = NotaFiscalItensDAC.updateNotaFiscalItens(contaCorrente).hasSystemError();
+				if (count == true)
 				{
-					count = count + 1;
-					countSucess =
-							StatusBARD.maintainStatusAssociations(cidadeList.getStatusList(), response,
-									cidadeList.getId(),
-									null,
-									AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CIDADE, statusDAC, historicoDAC,
-									processId, historicoId);
+					count =
+							StatusBARD
+									.maintainStatusAssociations(contaCorrente.getStatusList(), (InternalResultsResponse<?>) response,
+											contaCorrente.getId(),
+											null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusBAR,
+											historicoBAR, processId, historicoId);
 				}
 				break;
 			case DELETE:
+				count = NotaFiscalItensDAC.deleteNotaFiscalItensById(contaCorrente).hasSystemError();
+				Status status = new Status();
+				status.setStatus(CdStatusTypeEnum.DELETADO);
+				List<Status> statusList = new ArrayList<Status>();
+				count =
+						StatusBARD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>) response, contaCorrente.getId(), null,
+								AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusBAR, historicoBAR,
+								processId, historicoId);
 
-				countSucess = CidadeDAC.deleteCidadeById(cidadeList).hasSystemError();
-				if (countSucess = true)
-				{
-					count = count + 1;
-				}
 				break;
 		}
+		}
+		return 1;
 
-		return count;
 	}
 }

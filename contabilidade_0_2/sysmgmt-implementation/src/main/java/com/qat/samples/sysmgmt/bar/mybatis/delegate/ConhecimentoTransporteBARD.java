@@ -7,12 +7,12 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.bar.Cadastros.ICadastrosBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.bar.Vendas.IVendasBAR;
+import com.qat.samples.sysmgmt.nf.model.ConhecimentoTransporte;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.Cidade;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
@@ -37,9 +37,9 @@ public final class ConhecimentoTransporteBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainCidadeAssociations(Cidade cidadeList,
+	public static Integer maintainConhecimentoTransporteAssociations(ConhecimentoTransporte cidadeList,
 			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, ICadastrosBAR CidadeDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC,
+			TabelaEnum tabelaEnum, IVendasBAR CidadeDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC,
 			Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
@@ -59,7 +59,7 @@ public final class ConhecimentoTransporteBARD extends SqlSessionDaoSupport
 		switch (cidadeList.getModelAction())
 		{
 			case INSERT:
-				countSucess = CidadeDAC.insertCidade(cidadeList).hasSystemError();
+				countSucess = CidadeDAC.insertConhecimentoTransporte(cidadeList).hasSystemError();
 				if (countSucess = true)
 				{
 					count = count + 1;
@@ -76,7 +76,7 @@ public final class ConhecimentoTransporteBARD extends SqlSessionDaoSupport
 				}
 				break;
 			case UPDATE:
-				countSucess = CidadeDAC.updateCidade(cidadeList).hasSystemError();;
+				countSucess = CidadeDAC.updateConhecimentoTransporte(cidadeList).hasSystemError();;
 				if (countSucess = true)
 				{
 					count = count + 1;
@@ -90,7 +90,7 @@ public final class ConhecimentoTransporteBARD extends SqlSessionDaoSupport
 				break;
 			case DELETE:
 
-				countSucess = CidadeDAC.deleteCidadeById(cidadeList).hasSystemError();
+				countSucess = CidadeDAC.deleteConhecimentoTransporteById(cidadeList).hasSystemError();
 				if (countSucess = true)
 				{
 					count = count + 1;
