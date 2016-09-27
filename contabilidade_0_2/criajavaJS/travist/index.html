@@ -758,7 +758,10 @@ $('#checkeds').append(imputs);
 					$("div#tabs").addTab("Models",testss);
 				}
 				if($('#Model').prop('checked')){
-					$("div#tabs").addTab(oProjet[i].interfaces,model(oProjet[i].classes,oProjet[i].interfaces));
+
+					for (var x = 0;x< oProjet[i].classes.length;x++){
+						$("div#tabs").addTab(oProjet[i].classes[x].classe,model(oProjet[i].classes[x].model,oProjet[i].classes[x].classe));
+					}
 				}	
 				if($('#Request').prop('checked')){
 					$("div#tabs").addTab(oProjet[i].interfaces,requestInquery(oProjet[i].classes,oProjet[i].interfaces));

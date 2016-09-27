@@ -3777,6 +3777,258 @@ function TelefoneModel() {
     });
     return a;
 }
+function NotaFiscalItensModel() {
+
+    a.push({
+        field: {
+            campo: "numeroRegistro",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "dataRegistro",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "localDesembaraco",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "ufDesembaraco",
+            tipo: "Estado",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "dataDesembaraco",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "transporteInternacional",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorAFRMM",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "tpIntermedio",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "cnpj",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "ufTerceiro",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "codigoExportador",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "descricao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "produto",
+            tipo: "ProdutoEmpresa",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "cfop",
+            tipo: "Cfop",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorUnitario",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorTotalBruto",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorFrete",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorSeguro",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorDesconto",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorOutrasDespesasAcessorias",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "numeroRECOPI",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    return a;
+}
 
 function ConhecimentoTransporteModel() {
 
@@ -3924,10 +4176,47 @@ function ConhecimentoTransporteModel() {
             xml: true
         }
     });
+
     a.push({
         field: {
             campo: "estado",
             tipo: "Estado",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "registroNacionalTransportadorCarga",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "vagao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "balsa",
+            tipo: "String",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -4162,7 +4451,7 @@ function NotaFiscalModel() {
     a.push({
         field: {
             campo: "tipo",
-            tipo: "String",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -4381,112 +4670,7 @@ function NotaFiscalModel() {
     });
     return a;
 }
-//================ Cidade
-function NotaFiscalModel() {
 
-    var a = [];
-    a.push({
-        field: {
-            campo: "id",
-            tipo: "Integer",
-            requerid: true,
-            primaryKey: true,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "IdNota",
-            tipo: "Integer",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "qnt",
-            tipo: "Double",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "vrUnitario",
-            tipo: "Double",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "vrDesconto",
-            tipo: "Double",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "produto",
-            tipo: "Produto",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "cfop",
-            tipo: "Cfop",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "classificacao",
-            tipo: "Classificacao",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "tributosList",
-            tipo: "List<Tributos>",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    return a;
-}
 //================ Estado
 function EstadoModel() {
 
@@ -4672,24 +4856,6 @@ function ConsultaModel() {
             tipo: "List<Exame>",
             requerid: false,
             primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    return a;
-}
-
-//================ NotaFiscal
-function NotaFiscalModel() {
-
-    var a = [];
-    a.push({
-        field: {
-            campo: "id",
-            tipo: "Integer",
-            requerid: true,
-            primaryKey: true,
             forenkey: false,
             model: true,
             xml: true
@@ -10291,7 +10457,7 @@ dataModel = function() {
 
     oProjet.push({
         classes: [{
-            classe: "Empresa"
+            classe: "Empresa",
             model: EmpresaModel(),
             dependencias: dependenciaEmpresa()
         }, {
@@ -10519,7 +10685,14 @@ dataModel = function() {
 
     oProjet.push({
             classes: [{
+                classe: "NotaFiscal",
+                model: NotaFiscalModel()
+            },{
                 classe: "NotaFiscalSaida",
+                model: NotaFiscalModel()
+            },
+            {
+                classe: "NotaFiscalEntrada",
                 model: NotaFiscalModel()
             }, {
                 classe: "Orcamento",
@@ -10527,6 +10700,14 @@ dataModel = function() {
             }, {
                 classe: "OrdemServico",
                 model: OrdemServicoModel()
+            }
+            , {
+                classe: "ConhecimentoTransporte",
+                model: ConhecimentoTransporteModel()
+            }
+            , {
+                classe: "NotaFiscalItens",
+                model: NotaFiscalItensModel()
             }],
             interfaces: "Vendas",
             local: "Vendas"
