@@ -1,3 +1,393 @@
+
+
+
+public class NFNotaInfo extends NFBase {
+
+	public static final String IDENT = "NFe";
+
+	@Attribute(name = "Id", required = true)
+	private String identificador;
+
+	@Attribute(name = "versao", required = true)
+	private String versao;
+
+	@Element(name = "ide", required = true)
+	private NFNotaInfoIdentificacao identificacao;
+
+	@Element(name = "emit", required = true)
+	private NFNotaInfoEmitente emitente;
+
+	@Element(name = "avulsa", required = false)
+	private NFNotaInfoAvulsa avulsa;
+
+	@Element(name = "dest", required = false)
+	private NFNotaInfoDestinatario destinatario;
+
+	@Element(name = "retirada", required = false)
+	private NFNotaInfoLocal retirada;
+
+	@Element(name = "entrega", required = false)
+	private NFNotaInfoLocal entrega;
+
+	@ElementList(entry = "autXML", inline = true, required = false)
+	private List<NFPessoaAutorizadaDownloadNFe> pessoasAutorizadasDownloadNFe;
+
+	@ElementList(entry = "det", inline = true, required = true)
+	private List<NFNotaInfoItem> itens;
+
+	@Element(name = "total", required = true)
+	private NFNotaInfoTotal total;
+
+	@Element(name = "transp", required = true)
+	private NFNotaInfoTransporte transporte;
+
+	@Element(name = "cobr", required = false)
+	private NFNotaInfoCobranca cobranca;
+
+	@ElementList(entry = "pag", inline = true, required = false)
+	private List<NFNotaInfoPagamento> pagamentos;
+
+	@Element(name = "infAdic", required = false)
+	private NFNotaInfoInformacoesAdicionais informacoesAdicionais;
+
+	@Element(name = "exporta", required = false)
+	private NFNotaInfoExportacao exportacao;
+
+	@Element(name = "compra", required = false)
+	private NFNotaInfoCompra compra;
+
+	@Element(name = "cana", required = false)
+	private NFNotaInfoCana cana;
+
+<----------------
+
+ @Element(name = "cUF", required = true)
+    private NFUnidadeFederativa uf;
+
+    @Element(name = "cNF", required = true)
+    private String codigoRandomico;
+
+    @Element(name = "natOp", required = true)
+    private String naturezaOperacao;
+
+    @Element(name = "indPag", required = true)
+    private NFFormaPagamentoPrazo formaPagamento;
+
+    @Element(name = "mod", required = true)
+    private NFModelo modelo;
+
+    @Element(name = "serie", required = true)
+    private String serie;
+
+    @Element(name = "nNF", required = true)
+    private String numeroNota;
+
+    @Element(name = "dhEmi", required = true)
+    private DateTime dataHoraEmissao;
+
+    @Element(name = "dhSaiEnt", required = false)
+    private DateTime dataHoraSaidaOuEntrada;
+
+    @Element(name = "tpNF", required = true)
+    private NFTipo tipo;
+
+    @Element(name = "idDest", required = true)
+    private NFIdentificadorLocalDestinoOperacao identificadorLocalDestinoOperacao;
+
+    @Element(name = "cMunFG", required = true)
+    private String codigoMunicipio;
+
+    @Element(name = "tpImp", required = true)
+    private NFTipoImpressao tipoImpressao;
+
+    @Element(name = "tpEmis", required = true)
+    private NFTipoEmissao tipoEmissao;
+
+    @Element(name = "cDV", required = true)
+    private Integer digitoVerificador;
+
+    @Element(name = "tpAmb", required = true)
+    private NFAmbiente ambiente;
+
+    @Element(name = "finNFe", required = true)
+    private NFFinalidade finalidade;
+
+    @Element(name = "indFinal", required = true)
+    private NFOperacaoConsumidorFinal operacaoConsumidorFinal;
+
+    @Element(name = "indPres", required = true)
+    private NFIndicadorPresencaComprador indicadorPresencaComprador;
+
+    @Element(name = "procEmi", required = true)
+    private NFProcessoEmissor programaEmissor;
+
+    @Element(name = "verProc", required = true)
+    private String versaoEmissor;
+
+    @Element(name = "dhCont", required = false)
+    private DateTime dataHoraContigencia;
+
+    @Element(name = "xJust", required = false)
+    private String justificativaEntradaContingencia;
+
+    @ElementList(entry = "NFref", inline = true, required = false)
+    private List<NFInfoReferenciada> referenciadas;
+<------------------
+
+ @Element(name = "CNPJ", required = false)
+    private String cnpj;
+
+    @Element(name = "CPF", required = false)
+    private String cpf;
+
+    @Element(name = "xNome", required = true)
+    private String razaoSocial;
+
+    @Element(name = "xFant", required = false)
+    private String nomeFantasia;
+
+    @Element(name = "enderEmit", required = true)
+    private NFEndereco endereco;
+
+    @Element(name = "IE", required = true)
+    private String inscricaoEstadual;
+
+    @Element(name = "IEST", required = false)
+    private String inscricaoEstadualSubstituicaoTributaria;
+
+    @Element(name = "IM", required = false)
+    private String inscricaoMunicipal;
+
+    @Element(name = "CNAE", required = false)
+    private String classificacaoNacionalAtividadesEconomicas;
+
+    @Element(name = "CRT", required = true)
+    private NFRegimeTributario regimeTributario;
+
+
+<---------------------
+
+@Element(name = "CNPJ", required = true)
+    private String cnpj;
+
+    @Element(name = "xOrgao", required = true)
+    private String orgaoEmitente;
+
+    @Element(name = "matr", required = true)
+    private String matriculaAgente;
+
+    @Element(name = "xAgente", required = true)
+    private String nomeAgente;
+
+    @Element(name = "fone", required = false)
+    private String fone;
+
+    @Element(name = "UF", required = true)
+    private String uf;
+
+    @Element(name = "nDAR", required = false)
+    private String numeroDocumentoArrecadacaoReceita;
+
+    @Element(name = "dEmi", required = false)
+    private LocalDate dataEmissaoDocumentoArrecadacao;
+
+    @Element(name = "vDAR", required = false)
+    private String valorTotalConstanteDocumentoArrecadacaoReceita;
+
+    @Element(name = "repEmi", required = true)
+    private String reparticaoFiscalEmitente;
+
+    @Element(name = "dPag", required = false)
+    private LocalDate dataPagamentoDocumentoArrecadacao;
+
+
+    <-----------------
+
+    @Element(name = "CNPJ", required = false)
+	private String cnpj;
+
+	@Element(name = "CPF", required = false)
+	private String cpf;
+
+	@Element(name = "idEstrangeiro", required = false)
+	private String idEstrangeiro;
+
+	@Element(name = "xNome", required = false)
+	private String razaoSocial;
+
+	@Element(name = "enderDest", required = false)
+	private NFEndereco endereco;
+
+	@Element(name = "indIEDest", required = true)
+	private NFIndicadorIEDestinatario indicadorIEDestinatario;
+
+	@Element(name = "IE", required = false)
+	private String inscricaoEstadual;
+
+	@Element(name = "ISUF", required = false)
+	private String inscricaoSuframa;
+
+	@Element(name = "IM", required = false)
+	private String inscricaoMunicipal;
+
+	@Element(name = "email", required = false)
+	private String email;
+<---------------------
+
+NFNotaInfoLocal
+
+	@Element(name = "CNPJ", required = false)
+    private String cnpj;
+
+    @Element(name = "CPF", required = false)
+    private String cpf;
+
+    @Element(name = "xLgr", required = true)
+    private String logradouro;
+
+    @Element(name = "nro", required = true)
+    private String numero;
+
+    @Element(name = "xCpl", required = false)
+    private String complemento;
+
+    @Element(name = "xBairro", required = true)
+    private String bairro;
+
+    @Element(name = "cMun", required = true)
+    private String codigoMunicipio;
+
+    @Element(name = "xMun", required = true)
+    private String nomeMunicipio;
+
+    @Element(name = "UF", required = true)
+    private String uf;
+
+<----------------------------------
+public class NFPessoaAutorizadaDownloadNFe extends NFBase {
+    @Element(name = "CNPJ", required = false)
+    private String cnpj;
+
+    @Element(name = "CPF", required = false)
+    private String cpf;
+
+   <-----------------
+
+   public class NFNotaInfoItem extends NFBase {
+
+    @Attribute(name = "nItem", required = true)
+    private Integer numeroItem;
+
+    @Element(name = "prod", required = true)
+    private NFNotaInfoItemProduto produto;
+
+    @Element(name = "imposto", required = true)
+    private NFNotaInfoItemImposto imposto;
+
+    @Element(name = "impostoDevol", required = false)
+    private NFImpostoDevolvido impostoDevolvido;
+
+    @Element(name = "infAdProd", required = false)
+    private String informacoesAdicionais;
+<-----------------
+
+NFNotaInfoTotal
+@Element(name = "ICMSTot", required = true)
+    private NFNotaInfoICMSTotal icmsTotal;
+
+    @Element(name = "ISSQNtot", required = false)
+    private NFNotaInfoISSQNTotal issqnTotal;
+
+    @Element(name = "retTrib", required = false)
+    private NFNotaInfoRetencoesTributos retencoesTributos;
+
+    <---------------------
+
+
+    public class NFNotaInfoTransporte extends NFBase {
+    @Element(name = "modFrete", required = true)
+    private NFModalidadeFrete modalidadeFrete;
+
+    @Element(name = "transporta", required = false)
+    private NFNotaInfoTransportador transportador;
+
+    @Element(name = "retTransp", required = false)
+    private NFNotaInfoRetencaoICMSTransporte icmsTransporte;
+
+    @Element(name = "veicTransp", required = false)
+    private NFNotaInfoVeiculo veiculo;
+
+    @ElementList(entry = "reboque", inline = true, required = false)
+    private List<NFNotaInfoReboque> reboques;
+
+    @Element(name = "vagao", required = false)
+    private String vagao;
+
+    @Element(name = "balsa", required = false)
+    private String balsa;
+
+<====================================
+NFNotaInfoCobranca
+@Element(name = "fat", required = false)
+    private NFNotaInfoFatura fatura;
+
+    @ElementList(entry = "dup", inline = true, required = false)
+    private List<NFNotaInfoDuplicata> duplicatas;
+
+
+
+<-----------------------
+
+
+public class NFNotaInfoPagamento extends NFBase {
+
+    @Element(name = "tPag", required = true)
+    private NFFormaPagamentoMoeda formaPagamentoMoeda;
+
+    @Element(name = "vPag", required = true)
+    private String valorPagamento;
+
+    @Element(name = "card", required = false)
+    private NFNotaInfoCartao cartao;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Boleto    
 function user_rolesModel() {
     a = [];
