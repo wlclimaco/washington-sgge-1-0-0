@@ -293,6 +293,39 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 
 	NOTAFISCALITENS(73, "sendsolv.base.model.risklevelenum.medium"),
 
+	NFNOTA(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	NFNOTAINFO(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	NFNOTAINFOIDENTIFICACAO(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	NFINFOMODELO1POR1AREFERENCIADA(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	NFINFOREFERENCIADA(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	NFINFOPRODUTORRURALREFERENCIADA(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	NFNOTAINFOEMITENTE(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	NFNOTAINFOAVULSA(73, "sendsolv.base.model.risklevelenum.medium"),
+	NFNOTAINFODESTINATARIO(73, "sendsolv.base.model.risklevelenum.medium"),
+
+	NFNOTAINFOLOCAL(73, "sendsolv.base.model.risklevelenum.medium"),
+	NFPESSOAAUTORIZADADOWNLOADNFE(73, "sendsolv.base.model.risklevelenum.medium"),
+	NFNOTAINFOTOTAL(73, "sendsolv.base.model.risklevelenum.medium"),
+	NFNOTAINFOICMSTOTAL(73, "sendsolv.base.model.risklevelenum.medium"),
+	NFNOTAINFOISSQNTOTAL(73, "sendsolv.base.model.risklevelenum.medium"),
+	NFNOTAINFORETENCOESTRIBUTOS(73, "sendsolv.base.model.risklevelenum.medium"),
+	NFNOTAINFOTRANSPORTE(73, "sendsolv.base.model.risklevelenum.medium"),
+	NFNOTAINFORETENCAOICMSTRANSPORTE(73, "sendsolv.base.model.risklevelenum.medium"),
+	NFNOTAINFOTRANSPORTADOR(73, "sendsolv.base.model.risklevelenum.medium"),
+	NFNOTAINFOVEICULO(73, "sendsolv.base.model.risklevelenum.medium"),
+	NFNOTAINFOREBOQUE(73, "sendsolv.base.model.risklevelenum.medium"),
+	NFNOTAINFOCOBRANCA(73, "sendsolv.base.model.risklevelenum.medium"),
+	NFNOTAINFODUPLICATA(73, "sendsolv.base.model.risklevelenum.medium"),
+	NFNOTAINFOFATURA(73, "sendsolv.base.model.risklevelenum.medium"),
+	NFNOTAINFOCARTAO(73, "sendsolv.base.model.risklevelenum.medium"),
+
 	NOTAFISCALSAIDA(73, "sendsolv.base.model.risklevelenum.medium");
 
 

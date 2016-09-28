@@ -57,7 +57,7 @@ private static final String STMT_DELETE_EMAIL = NAMESPACE_EMAIL + "deleteEmailBy
 	/**
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.base.bar.IEmailBAR#insertEmail(com.qat.samples.sysmgmt.base.model.Email)
+ * @see com.qat.samples.sysmgmt.INFeBAR.bar.IEmailBAR#insertEmail(com.qat.samples.sysmgmt.base.model.Email)
  */
 @Override
 public InternalResponse insertEmail(Email email)
