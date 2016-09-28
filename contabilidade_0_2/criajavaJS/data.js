@@ -1,366 +1,2820 @@
 
 
-
-public class NFNotaInfo extends NFBase {
-
-	public static final String IDENT = "NFe";
-
-	@Attribute(name = "Id", required = true)
-	private String identificador;
-
-	@Attribute(name = "versao", required = true)
-	private String versao;
-
-	@Element(name = "ide", required = true)
-	private NFNotaInfoIdentificacao identificacao;
-
-	@Element(name = "emit", required = true)
-	private NFNotaInfoEmitente emitente;
-
-	@Element(name = "avulsa", required = false)
-	private NFNotaInfoAvulsa avulsa;
-
-	@Element(name = "dest", required = false)
-	private NFNotaInfoDestinatario destinatario;
-
-	@Element(name = "retirada", required = false)
-	private NFNotaInfoLocal retirada;
-
-	@Element(name = "entrega", required = false)
-	private NFNotaInfoLocal entrega;
-
-	@ElementList(entry = "autXML", inline = true, required = false)
-	private List<NFPessoaAutorizadaDownloadNFe> pessoasAutorizadasDownloadNFe;
-
-	@ElementList(entry = "det", inline = true, required = true)
-	private List<NFNotaInfoItem> itens;
-
-	@Element(name = "total", required = true)
-	private NFNotaInfoTotal total;
-
-	@Element(name = "transp", required = true)
-	private NFNotaInfoTransporte transporte;
-
-	@Element(name = "cobr", required = false)
-	private NFNotaInfoCobranca cobranca;
-
-	@ElementList(entry = "pag", inline = true, required = false)
-	private List<NFNotaInfoPagamento> pagamentos;
-
-	@Element(name = "infAdic", required = false)
-	private NFNotaInfoInformacoesAdicionais informacoesAdicionais;
-
-	@Element(name = "exporta", required = false)
-	private NFNotaInfoExportacao exportacao;
-
-	@Element(name = "compra", required = false)
-	private NFNotaInfoCompra compra;
-
-	@Element(name = "cana", required = false)
-	private NFNotaInfoCana cana;
-
-<----------------
-
- @Element(name = "cUF", required = true)
-    private NFUnidadeFederativa uf;
-
-    @Element(name = "cNF", required = true)
-    private String codigoRandomico;
-
-    @Element(name = "natOp", required = true)
-    private String naturezaOperacao;
-
-    @Element(name = "indPag", required = true)
-    private NFFormaPagamentoPrazo formaPagamento;
-
-    @Element(name = "mod", required = true)
-    private NFModelo modelo;
-
-    @Element(name = "serie", required = true)
-    private String serie;
-
-    @Element(name = "nNF", required = true)
-    private String numeroNota;
-
-    @Element(name = "dhEmi", required = true)
-    private DateTime dataHoraEmissao;
-
-    @Element(name = "dhSaiEnt", required = false)
-    private DateTime dataHoraSaidaOuEntrada;
-
-    @Element(name = "tpNF", required = true)
-    private NFTipo tipo;
-
-    @Element(name = "idDest", required = true)
-    private NFIdentificadorLocalDestinoOperacao identificadorLocalDestinoOperacao;
-
-    @Element(name = "cMunFG", required = true)
-    private String codigoMunicipio;
-
-    @Element(name = "tpImp", required = true)
-    private NFTipoImpressao tipoImpressao;
-
-    @Element(name = "tpEmis", required = true)
-    private NFTipoEmissao tipoEmissao;
-
-    @Element(name = "cDV", required = true)
-    private Integer digitoVerificador;
-
-    @Element(name = "tpAmb", required = true)
-    private NFAmbiente ambiente;
-
-    @Element(name = "finNFe", required = true)
-    private NFFinalidade finalidade;
-
-    @Element(name = "indFinal", required = true)
-    private NFOperacaoConsumidorFinal operacaoConsumidorFinal;
-
-    @Element(name = "indPres", required = true)
-    private NFIndicadorPresencaComprador indicadorPresencaComprador;
-
-    @Element(name = "procEmi", required = true)
-    private NFProcessoEmissor programaEmissor;
-
-    @Element(name = "verProc", required = true)
-    private String versaoEmissor;
-
-    @Element(name = "dhCont", required = false)
-    private DateTime dataHoraContigencia;
-
-    @Element(name = "xJust", required = false)
-    private String justificativaEntradaContingencia;
-
-    @ElementList(entry = "NFref", inline = true, required = false)
-    private List<NFInfoReferenciada> referenciadas;
-<------------------
-
- @Element(name = "CNPJ", required = false)
-    private String cnpj;
-
-    @Element(name = "CPF", required = false)
-    private String cpf;
-
-    @Element(name = "xNome", required = true)
-    private String razaoSocial;
-
-    @Element(name = "xFant", required = false)
-    private String nomeFantasia;
-
-    @Element(name = "enderEmit", required = true)
-    private NFEndereco endereco;
-
-    @Element(name = "IE", required = true)
-    private String inscricaoEstadual;
-
-    @Element(name = "IEST", required = false)
-    private String inscricaoEstadualSubstituicaoTributaria;
-
-    @Element(name = "IM", required = false)
-    private String inscricaoMunicipal;
-
-    @Element(name = "CNAE", required = false)
-    private String classificacaoNacionalAtividadesEconomicas;
-
-    @Element(name = "CRT", required = true)
-    private NFRegimeTributario regimeTributario;
-
-
-<---------------------
-
-@Element(name = "CNPJ", required = true)
-    private String cnpj;
-
-    @Element(name = "xOrgao", required = true)
-    private String orgaoEmitente;
-
-    @Element(name = "matr", required = true)
-    private String matriculaAgente;
-
-    @Element(name = "xAgente", required = true)
-    private String nomeAgente;
-
-    @Element(name = "fone", required = false)
-    private String fone;
-
-    @Element(name = "UF", required = true)
-    private String uf;
-
-    @Element(name = "nDAR", required = false)
-    private String numeroDocumentoArrecadacaoReceita;
-
-    @Element(name = "dEmi", required = false)
-    private LocalDate dataEmissaoDocumentoArrecadacao;
-
-    @Element(name = "vDAR", required = false)
-    private String valorTotalConstanteDocumentoArrecadacaoReceita;
-
-    @Element(name = "repEmi", required = true)
-    private String reparticaoFiscalEmitente;
-
-    @Element(name = "dPag", required = false)
-    private LocalDate dataPagamentoDocumentoArrecadacao;
-
-
-    <-----------------
-
-    @Element(name = "CNPJ", required = false)
-	private String cnpj;
-
-	@Element(name = "CPF", required = false)
-	private String cpf;
-
-	@Element(name = "idEstrangeiro", required = false)
-	private String idEstrangeiro;
-
-	@Element(name = "xNome", required = false)
-	private String razaoSocial;
-
-	@Element(name = "enderDest", required = false)
-	private NFEndereco endereco;
-
-	@Element(name = "indIEDest", required = true)
-	private NFIndicadorIEDestinatario indicadorIEDestinatario;
-
-	@Element(name = "IE", required = false)
-	private String inscricaoEstadual;
-
-	@Element(name = "ISUF", required = false)
-	private String inscricaoSuframa;
-
-	@Element(name = "IM", required = false)
-	private String inscricaoMunicipal;
-
-	@Element(name = "email", required = false)
-	private String email;
-<---------------------
-
-NFNotaInfoLocal
-
-	@Element(name = "CNPJ", required = false)
-    private String cnpj;
-
-    @Element(name = "CPF", required = false)
-    private String cpf;
-
-    @Element(name = "xLgr", required = true)
-    private String logradouro;
-
-    @Element(name = "nro", required = true)
-    private String numero;
-
-    @Element(name = "xCpl", required = false)
-    private String complemento;
-
-    @Element(name = "xBairro", required = true)
-    private String bairro;
-
-    @Element(name = "cMun", required = true)
-    private String codigoMunicipio;
-
-    @Element(name = "xMun", required = true)
-    private String nomeMunicipio;
-
-    @Element(name = "UF", required = true)
-    private String uf;
-
-<----------------------------------
-public class NFPessoaAutorizadaDownloadNFe extends NFBase {
-    @Element(name = "CNPJ", required = false)
-    private String cnpj;
-
-    @Element(name = "CPF", required = false)
-    private String cpf;
-
-   <-----------------
-
-   public class NFNotaInfoItem extends NFBase {
-
-    @Attribute(name = "nItem", required = true)
-    private Integer numeroItem;
-
-    @Element(name = "prod", required = true)
-    private NFNotaInfoItemProduto produto;
-
-    @Element(name = "imposto", required = true)
-    private NFNotaInfoItemImposto imposto;
-
-    @Element(name = "impostoDevol", required = false)
-    private NFImpostoDevolvido impostoDevolvido;
-
-    @Element(name = "infAdProd", required = false)
-    private String informacoesAdicionais;
-<-----------------
-
-NFNotaInfoTotal
-@Element(name = "ICMSTot", required = true)
-    private NFNotaInfoICMSTotal icmsTotal;
-
-    @Element(name = "ISSQNtot", required = false)
-    private NFNotaInfoISSQNTotal issqnTotal;
-
-    @Element(name = "retTrib", required = false)
-    private NFNotaInfoRetencoesTributos retencoesTributos;
-
-    <---------------------
-
-
-    public class NFNotaInfoTransporte extends NFBase {
-    @Element(name = "modFrete", required = true)
-    private NFModalidadeFrete modalidadeFrete;
-
-    @Element(name = "transporta", required = false)
-    private NFNotaInfoTransportador transportador;
-
-    @Element(name = "retTransp", required = false)
-    private NFNotaInfoRetencaoICMSTransporte icmsTransporte;
-
-    @Element(name = "veicTransp", required = false)
-    private NFNotaInfoVeiculo veiculo;
-
-    @ElementList(entry = "reboque", inline = true, required = false)
-    private List<NFNotaInfoReboque> reboques;
-
-    @Element(name = "vagao", required = false)
-    private String vagao;
-
-    @Element(name = "balsa", required = false)
-    private String balsa;
-
-<====================================
-NFNotaInfoCobranca
-@Element(name = "fat", required = false)
-    private NFNotaInfoFatura fatura;
-
-    @ElementList(entry = "dup", inline = true, required = false)
-    private List<NFNotaInfoDuplicata> duplicatas;
-
-
-
-<-----------------------
-
-
-public class NFNotaInfoPagamento extends NFBase {
-
-    @Element(name = "tPag", required = true)
-    private NFFormaPagamentoMoeda formaPagamentoMoeda;
-
-    @Element(name = "vPag", required = true)
-    private String valorPagamento;
-
-    @Element(name = "card", required = false)
-    private NFNotaInfoCartao cartao;
-
-
-
-
-
-
-
-
-
-
-
-
+function NFNotaInfo() {
+    a = [];
+    
+	a.push({
+        field: {
+            campo: "identificador",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+	a.push({
+        field: {
+            campo: "versao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "identificacao",
+            tipo: "NFNotaInfoIdentificacao",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "emitente",
+            tipo: "NFNotaInfoEmitente",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "avulsa",
+            tipo: "NFNotaInfoAvulsa",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "destinatario",
+            tipo: "NFNotaInfoDestinatario",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "retirada",
+            tipo: "NFNotaInfoLocal",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "entrega",
+            tipo: "NFNotaInfoLocal",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "pessoasAutorizadasDownloadNFe",
+            tipo: "List<NFPessoaAutorizadaDownloadNFe>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "itens",
+            tipo: "List<NotaFiscalItens>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "total",
+            tipo: "NFNotaInfoTotal",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "transporte",
+            tipo: "NFNotaInfoTransporte",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "cobranca",
+            tipo: "NFNotaInfoCobranca",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "pagamentos",
+            tipo: "List<NFNotaInfoPagamento>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "informacoesAdicionais",
+            tipo: "NFNotaInfoInformacoesAdicionais",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "exportacao",
+            tipo: "NFNotaInfoExportacao",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "compra",
+            tipo: "NFNotaInfoCompra",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "cana",
+            tipo: "NFNotaInfoCana",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+     return a;
+}
+
+
+function NFNotaInfoIdentificacao() {
+    a = [];
+    
+    
+    a.push({
+        field: {
+            campo: "uf",
+            tipo: "Estado",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "codigoRandomico",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "naturezaOperacao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "formaPagamento",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "modelo",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "serie",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "numeroNota",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "dataHoraEmissao",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "dataHoraSaidaOuEntrada",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "tipo",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "identificadorLocalDestinoOperacao",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "codigoMunicipio",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "tipoImpressao",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "tipoEmissao",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "digitoVerificador",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "ambiente",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "finalidade",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "operacaoConsumidorFinal",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+
+    a.push({
+        field: {
+            campo: "indicadorPresencaComprador",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "programaEmissor",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "versaoEmissor",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+
+a.push({
+        field: {
+            campo: "dataHoraContigencia",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "justificativaEntradaContingencia",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "referenciadas",
+            tipo: "List<NFInfoReferenciada>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+       return a;
+}
+
+
+function NFInfoModelo1Por1AReferenciada() {
+    a = [];
+
+    a.push({
+        field: {
+            campo: "uf",
+            tipo: "Estado",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "anoMesEmissaoNFe",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "cnpj",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "modeloDocumentoFiscal",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "serie",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "numeroDocumentoFiscal",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+          return a;
+}
+
+
+function NFInfoReferenciada() {
+    a = [];
+
+
+    a.push({
+        field: {
+            campo: "chaveAcesso",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "modelo1por1Referenciada",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "infoNFProdutorRuralReferenciada",
+            tipo: "NFInfoProdutorRuralReferenciada",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "chaveAcessoCTReferenciada",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "cupomFiscalReferenciado",
+            tipo: "NFInfoCupomFiscalReferenciado",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+           return a;
+}
+
+
+function NFInfoProdutorRuralReferenciada() {
+    a = [];
+
+    a.push({
+        field: {
+            campo: "ufEmitente",
+            tipo: "Estado",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "anoMesEmissao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "cnpjEmitente",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "cpfEmitente",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "ieEmitente",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "modeloDocumentoFiscal",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "serieDocumentoFiscal",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "numeroDocumentoFiscal",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+
+ return a;
+}
+
+function NFInfoCupomFiscalReferenciado() {
+    a = [];
+    a.push({
+        field: {
+            campo: "modeloDocumentoFiscal",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "numeroOrdemSequencialECF",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "numeroContadorOrdemOperacao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+ return a;
+}
+
+function NFNotaInfoEmitente() {
+    a = [];
+    
+    a.push({
+        field: {
+            campo: "cnpj",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "cpf",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "razaoSocial",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "nomeFantasia",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "endereco",
+            tipo: "Endereco",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "inscricaoEstadual",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "inscricaoEstadualSubstituicaoTributaria",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "inscricaoMunicipal",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "classificacaoNacionalAtividadesEconomicas",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "regimeTributario",
+            tipo: "Regime",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+     return a;
+}
+
+
+function NFNotaInfoAvulsa() {
+    a = [];
+    
+a.push({
+        field: {
+            campo: "cnpj",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+a.push({
+        field: {
+            campo: "orgaoEmitente",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+a.push({
+        field: {
+            campo: "matriculaAgente",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+a.push({
+        field: {
+            campo: "nomeAgente",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+a.push({
+        field: {
+            campo: "fone",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+a.push({
+        field: {
+            campo: "uf",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+a.push({
+        field: {
+            campo: "numeroDocumentoArrecadacaoReceita",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+a.push({
+        field: {
+            campo: "dataEmissaoDocumentoArrecadacao",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+a.push({
+        field: {
+            campo: "valorTotalConstanteDocumentoArrecadacaoReceita",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+a.push({
+        field: {
+            campo: "reparticaoFiscalEmitente",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "dataPagamentoDocumentoArrecadacao",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+      return a;
+}
+
+function NFNotaInfoDestinatario() {
+    a = [];
+	a.push({
+        field: {
+            campo: "cnpj",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "cpf",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "idEstrangeiro",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "razaoSocial",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "endereco",
+            tipo: "Endereco",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "indicadorIEDestinatario",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "inscricaoEstadual",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "inscricaoSuframa",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+	a.push({
+        field: {
+            campo: "inscricaoMunicipal",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "email",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+       return a;
+}
+
+function NFNotaInfoLocal() {
+    a = [];
+    a.push({
+        field: {
+            campo: "cnpj",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "cpf",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "logradouro",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "numero",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "complemento",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "bairro",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "codigoMunicipio",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "nomeMunicipio",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "uf",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+       return a;
+}
+
+   function NFPessoaAutorizadaDownloadNFe() {
+    a = [];
+    a.push({
+        field: {
+            campo: "cnpj",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "cpf",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+       return a;
+}
+
+    function NFNotaInfoTotal() {
+	    a = [];
+	    a.push({
+	        field: {
+	            campo: "icmsTotal",
+	            tipo: "NFNotaInfoICMSTotal",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+	     a.push({
+	        field: {
+	            campo: "issqnTotal",
+	            tipo: "NFNotaInfoISSQNTotal",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+	      a.push({
+	        field: {
+	            campo: "retencoesTributos",
+	            tipo: "NFNotaInfoRetencoesTributos",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+	       return a;
+	}
+
+    function NFNotaInfoICMSTotal() {
+	var  a = [];
+    a.push({
+	        field: {
+	            campo: "baseCalculoICMS",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+
+    a.push({
+	        field: {
+	            campo: "valorTotalICMS",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+
+    a.push({
+	        field: {
+	            campo: "valorICMSDesonerado",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+
+    a.push({
+	        field: {
+	            campo: "valorICMSFundoCombatePobreza",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+    a.push({
+	        field: {
+	            campo: "valorICMSPartilhaDestinatario",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+    a.push({
+	        field: {
+	            campo: "valorICMSPartilhaRementente",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+    a.push({
+	        field: {
+	            campo: "baseCalculoICMSST",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+
+    a.push({
+	        field: {
+	            campo: "valorTotalICMSST",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+    a.push({
+	        field: {
+	            campo: "valorTotalDosProdutosServicos",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+    a.push({
+	        field: {
+	            campo: "valorTotalFrete",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+    a.push({
+	        field: {
+	            campo: "valorTotalSeguro",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+    a.push({
+	        field: {
+	            campo: "valorTotalDesconto",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+
+    a.push({
+	        field: {
+	            campo: "valorTotalII",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+
+    a.push({
+	        field: {
+	            campo: "valorTotalIPI",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+
+    a.push({
+	        field: {
+	            campo: "valorPIS",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+
+    a.push({
+	        field: {
+	            campo: "valorCOFINS",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+    a.push({
+	        field: {
+	            campo: "outrasDespesasAcessorias",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+
+    a.push({
+	        field: {
+	            campo: "valorTotalNFe",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+
+	    a.push({
+	        field: {
+	            campo: "valorTotalTributos",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+	       return a;
+	}
+
+    function NFNotaInfoISSQNTotal() {
+    var 	    a = [];
+    a.push({
+	        field: {
+	            campo: "valorTotalServicosSobNaoIncidenciaNaoTributadosICMS",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+    a.push({
+	        field: {
+	            campo: "baseCalculoISS",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+    a.push({
+	        field: {
+	            campo: "valorTotalISS",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+    a.push({
+	        field: {
+	            campo: "valorPISsobreServicos",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+    a.push({
+	        field: {
+	            campo: "valorCOFINSsobreServicos",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+    a.push({
+	        field: {
+	            campo: "dataPrestacaoServico",
+	            tipo: "Long",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+    a.push({
+	        field: {
+	            campo: "valorDeducao",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+    a.push({
+	        field: {
+	            campo: "valorOutros",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+    a.push({
+	        field: {
+	            campo: "valorTotalDescontoIncondicionado",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+    a.push({
+	        field: {
+	            campo: "valorTotalDescontoCondicionado",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+    a.push({
+	        field: {
+	            campo: "valorTotalRetencaoISS",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+
+	    a.push({
+	        field: {
+	            campo: "tributacao",
+	            tipo: "DoisValores",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+	       return a;
+	}
+
+    function NFNotaInfoRetencoesTributos() {
+a = [];
+ a.push({
+	        field: {
+	            campo: "valorRetidoPIS",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+ a.push({
+	        field: {
+	            campo: "valorRetidoCOFINS",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+ a.push({
+	        field: {
+	            campo: "valorRetidoCSLL",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+ a.push({
+	        field: {
+	            campo: "baseCalculoIRRF",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+ a.push({
+	        field: {
+	            campo: "valorRetidoIRRF",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+ a.push({
+	        field: {
+	            campo: "baseCalculoRetencaoPrevidenciaSocial",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+	    
+	    a.push({
+	        field: {
+	            campo: "valorRetencaoPrevidenciaSocial",
+	            tipo: "String",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
+	       return a;
+	}
+
+
+
+
+function NFNotaInfoTransporte() {
+    a = [];
+    a.push({
+        field: {
+            campo: "modalidadeFrete",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "transportador",
+            tipo: "NFNotaInfoTransportador",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "icmsTransporte",
+            tipo: "NFNotaInfoRetencaoICMSTransporte",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "veiculo",
+            tipo: "NFNotaInfoVeiculo",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "reboques",
+            tipo: "List<NFNotaInfoReboque>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "vagao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "balsa",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+       return a;
+}
+
+
+    function NFNotaInfoRetencaoICMSTransporte() {
+    a = [];
+    a.push({
+        field: {
+            campo: "valorServico",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "bcRetencaoICMS",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "aliquotaRetencao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorICMSRetido",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "cfop",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "codigoMunicipioOcorrenciaFatoGeradorICMSTransporte",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+       return a;
+}
+
+
+function NFNotaInfoTransportador() {
+    a = [];
+    a.push({
+        field: {
+            campo: "cnpj",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "cpf",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+        a.push({
+        field: {
+            campo: "razaoSocial",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "inscricaoEstadual",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "enderecoComplemento",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "nomeMunicipio",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "uf",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+       return a;
+}
+
+    function NFNotaInfoVeiculo() {
+    a = [];
+    a.push({
+        field: {
+            campo: "placaVeiculo",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "uf",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "registroNacionalTransportadorCarga",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+       return a;
+}
+
+function NFNotaInfoReboque() {
+    a = [];
+    a.push({
+        field: {
+            campo: "placaVeiculo",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "uf",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "registroNacionalTransportadorCarga",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+       return a;
+}
+
+
+function NFNotaInfoCobranca() {
+    a = [];
+    a.push({
+        field: {
+            campo: "fatura",
+            tipo: "NFNotaInfoFatura",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "duplicatas",
+            tipo: "NFNotaInfoDuplicata",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+       return a;
+}
+
+    function NFNotaInfoDuplicata() {
+    a = [];
+    a.push({
+        field: {
+            campo: "numeroDuplicata",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "dataVencimento",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorDuplicata",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+       return a;
+}
+
+
+
+    function NFNotaInfoFatura() {
+    a = [];
+    a.push({
+        field: {
+            campo: "numeroFatura",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorOriginalFatura",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorDesconto",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorLiquidoFatura",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+       return a;
+}
+
+    function NFNotaInfoCartao() {
+    a = [];
+    a.push({
+        field: {
+            campo: "tipoIntegracao",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "cnpj",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "operadoraCartao",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "numeroAutorizacaoOperacaoCartao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+       return a;
+}
+
+function NFNotaInfoPagamento() {
+    a = [];
+    a.push({
+        field: {
+            campo: "formaPagamentoMoeda",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorPagamento",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "cartao",
+            tipo: "NFNotaInfoCartao",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+       return a;
+}
+
+function NFNotaInfoInformacoesAdicionais() {
+    a = [];
+    a.push({
+        field: {
+            campo: "informacoesAdicionaisInteresseFisco",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "informacoesComplementaresInteresseContribuinte",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "observacoesContribuinte",
+            tipo: "List<NFNotaInfoObservacao>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "observacoesFisco",
+            tipo: "List<NFNotaInfoObservacao>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "processosRefenciado",
+            tipo: "List<NFNotaInfoProcessoReferenciado>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+       return a;
+}
+
+function NFNotaInfoObservacao() {
+    a = [];
+    a.push({
+        field: {
+            campo: "identificacaoCampo",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "conteudoCampo",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+       return a;
+}
+
+function NFNotaInfoProcessoReferenciado() {
+    a = [];
+    a.push({
+        field: {
+            campo: "identificadorProcessoOuAtoConcessorio",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "indicadorOrigemProcesso",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+       return a;
+}
+
+
+    function NFNotaInfoExportacao() {
+    a = [];
+    a.push({
+        field: {
+            campo: "ufEmbarqueProduto",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "localEmbarqueProdutos",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "localDespachoProdutos",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+       return a;
+}
+
+function NFNotaInfoCompra() {
+    a = [];
+    a.push({
+        field: {
+            campo: "notaDeEmpenho",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "pedido",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "contrato",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+       return a;
+}
+
+
+function NFNotaInfoCana() {
+    a = [];
+    a.push({
+        field: {
+            campo: "safra",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "referencia",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "fornecimentosDiario",
+            tipo: "List<NFNotaInfoCanaFornecimentoDiario>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "deducoes",
+            tipo: "List<NFNotaInfoCanaDeducao>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "quantidadeTotalMes",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "quantidadeTotalAnterior",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "quantidadeTotalGeral",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorFornecimento",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorTotalDeducao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorLiquidoFornecimento",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+       return a;
+}
+
+
+
+function NFNotaInfoCanaFornecimentoDiario() {
+    a = [];
+    a.push({
+        field: {
+            campo: "dia",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "quantidade",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+       return a;
+}
+
+
+
+function NFNotaInfoCanaDeducao() {
+    a = [];
+    a.push({
+        field: {
+            campo: "descricaoDeducao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorDeducao",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+       return a;
+}
+
+
+
+
+
+function NFNota() {
+    a = [];
+
+    a.push({
+        field: {
+            campo: "identificadorLocal",
+            tipo: "long",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "info",
+            tipo: "NFNotaInfo",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    
+    a.push({
+        field: {
+            campo: "infoSuplementar",
+            tipo: "NFNotaInfoSuplementar",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "assinatura",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    
+       return a;
+}
+
+
+function NFNotaInfoSuplementar () {
+
+ a = [];
+
+a.push({
+        field: {
+            campo: "qrCode",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+   return a;
+}
 
 
 
@@ -10898,6 +13352,119 @@ dataModel = function() {
         }],
         interfaces: "Empresa",
         local: "Empresa"
+    })
+
+
+
+    oProjet.push({
+        classes: [{
+            classe: "NFNota",
+            model: NFNota()
+        }, {
+            classe: "NFNotaInfo",
+            model: NFNotaInfo()
+        }, {
+            classe: "NFNotaInfoIdentificacao",
+            model: NFNotaInfoIdentificacao()
+        }, {
+            classe: "NFInfoModelo1Por1AReferenciada",
+            model: NFInfoModelo1Por1AReferenciada()
+        }, {
+            classe: "NFInfoReferenciada",
+            model: NFInfoReferenciada()
+        }, {
+            classe: "NFInfoProdutorRuralReferenciada",
+            model: NFInfoProdutorRuralReferenciada()
+        }, {
+            classe: "NFNotaInfoEmitente",
+            model: NFNotaInfoEmitente()
+        }, {
+            classe: "NFNotaInfoEmitente",
+            model: NFNotaInfoEmitente()
+        },{
+            classe: "NFNotaInfoAvulsa",
+            model: NFNotaInfoAvulsa()
+        }, {
+            classe: "NFNotaInfoDestinatario",
+            model: NFNotaInfoDestinatario()
+        }, {
+            classe: "NFNotaInfoLocal",
+            model: NFNotaInfoLocal()
+        }, {
+            classe: "NFPessoaAutorizadaDownloadNFe",
+            model: NFPessoaAutorizadaDownloadNFe()
+        }, {
+            classe: "NFNotaInfoTotal",
+            model: NFNotaInfoTotal()
+        }, {
+            classe: "NFNotaInfoICMSTotal",
+            model: NFNotaInfoICMSTotal()
+        }, {
+            classe: "NFNotaInfoISSQNTotal",
+            model: NFNotaInfoISSQNTotal()
+        }, {
+            classe: "NFNotaInfoRetencoesTributos",
+            model: NFNotaInfoRetencoesTributos()
+        }, {
+            classe: "NFNotaInfoTransporte",
+            model: NFNotaInfoTransporte()
+        }, {
+            classe: "NFNotaInfoRetencaoICMSTransporte",
+            model: NFNotaInfoRetencaoICMSTransporte()
+        }, {
+            classe: "NFNotaInfoTransportador",
+            model: NFNotaInfoTransportador()
+        }, {
+            classe: "NFNotaInfoVeiculo",
+            model: NFNotaInfoVeiculo()
+        }, {
+            classe: "NFNotaInfoReboque",
+            model: NFNotaInfoReboque()
+        }, {
+            classe: "NFNotaInfoCobranca",
+            model: NFNotaInfoCobranca()
+        }, {
+            classe: "NFNotaInfoDuplicata",
+            model: NFNotaInfoDuplicata()
+        }, {
+            classe: "NFNotaInfoFatura",
+            model: NFNotaInfoFatura()
+        }, {
+            classe: "NFNotaInfoCartao",
+            model: NFNotaInfoCartao()
+        }, {
+            classe: "NFNotaInfoPagamento",
+            model: NFNotaInfoPagamento()
+        }, {
+            classe: "NFNotaInfoInformacoesAdicionais",
+            model: NFNotaInfoInformacoesAdicionais()
+        }, {
+            classe: "NFNotaInfoObservacao",
+            model: NFNotaInfoObservacao()
+        }, {
+            classe: "NFNotaInfoProcessoReferenciado",
+            model: NFNotaInfoProcessoReferenciado()
+        }, {
+            classe: "NFNotaInfoExportacao",
+            model: NFNotaInfoExportacao()
+        }, {
+            classe: "NFNotaInfoCompra",
+            model: NFNotaInfoCompra()
+        }, {
+            classe: "NFNotaInfoCana",
+            model: NFNotaInfoCana()
+        }, {
+            classe: "NFNotaInfoCanaFornecimentoDiario",
+            model: NFNotaInfoCanaFornecimentoDiario()
+        }, {
+            classe: "NFNotaInfoCanaDeducao",
+            model: NFNotaInfoCanaDeducao()
+        }, {
+            classe: "NFNotaInfoSuplementar",
+            model: NFNotaInfoSuplementar()
+        }],
+        interfaces: "NFe",
+        local: "NFe"
     })
 
     oProjet.push({
