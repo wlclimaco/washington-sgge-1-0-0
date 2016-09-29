@@ -25,7 +25,7 @@ implXML = function(oField, name) {
                 if (oField[i].field.tipo.indexOf('List') > -1) {
                     text = text + '<collection property="' + oField[i].field.campo + '" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>\n';
                 } else {
-                    if ((oField[i].field.tipo.toLowerCase() == 'boolean') ||(oField[i].field.tipo.toLowerCase() == 'integer') || (oField[i].field.tipo.toLowerCase() == 'double')||(oField[i].field.tipo.toLowerCase() == 'string')||(oField[i].field.tipo.toLowerCase() == 'data')||(oField[i].field.tipo.toLowerCase() == 'float')) 
+                    if ((oField[i].field.tipo.toLowerCase() == 'boolean') ||(oField[i].field.tipo.toLowerCase() == 'integer') || (oField[i].field.tipo.toLowerCase() == 'double')||(oField[i].field.tipo.toLowerCase() == 'string')||(oField[i].field.tipo.toLowerCase() == 'long')||(oField[i].field.tipo.toLowerCase() == 'float')) 
                     {
                         text = text + '    <result property="' + oField[i].field.campo + '" column="' + oField[i].field.campo + '"/>\n';
                     } else {
@@ -114,16 +114,16 @@ implXML = function(oField, name) {
     text = text + '   FROM ' + name.toLowerCase() + ' WHERE id = #{fetchid}\n';
     text = text + ' </select>\n';
     text = text + '\n';
-    text = text + ' <select id="fetchAll' + name + 'sRequest" parameterType="' + name + 'InquiryRequest" resultMap="' + name + 'Result">\n';
+    text = text + ' <select id="fetchAll' + name + 'sRequest" parameterType="PagedInquiryRequest" resultMap="' + name + 'Result">\n';
     text = text + '\n';
     text = text + '     SELECT id,<include refid="all' + name + 'Columns" />\n';
-    text = text + '           FROM ' + name.toLowerCase() + ' where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC\n';
+    text = text + '           FROM ' + name.toLowerCase() + ' where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC\n';
     text = text + '       OFFSET ( #{startPage} * #{pageSize} )\n';
     text = text + '       LIMIT #{pageSize}\n';
     text = text + '</select>\n';
     text = text + '\n';
     text = text + '<select id="fetch' + name + 'RowCount" resultType="Integer">\n';
-    text = text + '     SELECT COUNT(*) AS RECORD_COUNT FROM ' + name.toLowerCase() + ' WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>\n';
+    text = text + '     SELECT COUNT(*) AS RECORD_COUNT FROM ' + name.toLowerCase() + ' WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>\n';
     text = text + '\n';
     text = text + ' </select>\n';
     text = text + '\n';

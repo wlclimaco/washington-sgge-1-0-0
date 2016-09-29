@@ -66,16 +66,16 @@ convertModules = function(stipo,index,campo){
 	b = new Date();
 		switch(stipo.toLowerCase()) {
 		    case "string":
-		        sReturn = '"'+campo+'_'+index+'"'
+		        sReturn = "'"+campo+'_'+index+"'"
 		        break;
 		    case "long":
-		        sReturn = "a.getTime()"
+		        sReturn = " "+b.getTime()+" "
 		        break;
 		    case "date":
-		        sReturn = "a.getTime()"
+		        sReturn = " "+b.getTime()+" "
 		        break;
 		     case "data":
-		        sReturn = "a.getTime()"
+		        sReturn = " "+b.getTime()+" "
 		        break;
 		    case "double":
 		        sReturn = "10.00"

@@ -27,6 +27,36 @@ function titleize(text) {
     return text;
 }
 
+
+function titleize2(text) {
+
+    // Convertendo primeira letra em maiuscula.
+    text = text.charAt(0).toLowerCase() + text.slice(1);
+
+    for (var i = 0; i < text.length; i++) {
+        if (text.charAt(i) ===" ") {
+
+            // Convertendo letra ap�s o ESPA�O em maiuscula
+            var charToUper = text.charAt(i+1).toLowerCase();
+
+            // Colocando texto de antes do ESPA�O na vari�vel
+            var sliceBegin = text.slice(0, (i+1));
+
+            // colocando o texto de depois do ESPA�O na vari�vel
+            var sliceEnd = text.slice(i + 2);
+
+            // Juntando tudo
+            text = sliceBegin + charToUper + sliceEnd;
+
+        } else {
+
+            // NAO CONSIGO PENSAR EM COMO TRANSFORMAR O RESTANTE DAS LETRAS EM MINUSCULA
+        }
+    }
+    return text;
+}
+
+
 model = function (oField, name){
 
 var text = '/** create by system gera-java version 1.0.0 '+dataAtualFormatada()+'*/\n';
@@ -61,12 +91,12 @@ text = text + "\n";
 for (i = 0; i < oField.length; i++) {
         if (oField[i].field.xml == true) {
             if (oField[i].field.tipo !== undefined) {
-                text = text + '    /** The econtabil ' + oField[i].field.campo + ' for the ' + name + '. */\n';
+                text = text + '    /** The econtabil ' + titleize2(oField[i].field.campo) + ' for the ' + name + '. */\n';
                 if ((oField[i].field.tipo.indexOf('List') == -1)) {
-                    text = text + '    private ' + oField[i].field.tipo + ' ' + oField[i].field.campo.toLowerCase() + ';\n';
+                    text = text + '    private ' + oField[i].field.tipo + ' ' + titleize2(oField[i].field.campo) + ';\n';
                     text = text + "\n";
                 } else {
-                    text = text + '    private List<' + oField[i].field.tipo + '> ' + oField[i].field.campo.toLowerCase() + ';\n';
+                    text = text + '    private List<' + oField[i].field.tipo + '> ' + titleize2(oField[i].field.campo) + ';\n';
                     text = text + "\n";
                 }
             }
@@ -90,19 +120,19 @@ for (i = 0; i < oField.length; i++) {
         if (oField[i].field.xml == true) {
             if (oField[i].field.tipo !== undefined) {
                 text = text + "    /**\n";
-                text = text + "     * Gets the " + oField[i].field.campo.toLowerCase() + ".\n";
+                text = text + "     * Gets the " + titleize2(oField[i].field.campo) + ".\n";
                 text = text + "     *\n";
-                text = text + "     * @return the " + oField[i].field.campo.toLowerCase() + "\n";
+                text = text + "     * @return the " + titleize2(oField[i].field.campo) + "\n";
                 text = text + "     */\n";
                 if ((oField[i].field.tipo.indexOf('List') == -1)) {
                         text = text + "    /**\n";
-                        text = text + "     * Gets the " + oField[i].field.campo.toLowerCase() + ".\n";
+                        text = text + "     * Gets the " + titleize2(oField[i].field.campo) + ".\n";
                         text = text + "     *\n";
-                        text = text + "     * @return the " + oField[i].field.campo.toLowerCase() + "\n";
+                        text = text + "     * @return the " + titleize2(oField[i].field.campo) + "\n";
                         text = text + "     */\n";
                         text = text + "    public "+titleize(oField[i].field.tipo)+" get"+titleize(oField[i].field.campo)+"()\n";
                         text = text + "    {\n";
-                        text = text + "        return " + oField[i].field.campo.toLowerCase() + ";\n";
+                        text = text + "        return " + titleize2(oField[i].field.campo) + ";\n";
                         text = text + "    }\n";
                         text = text + "\n";
                         text = text + "    /**\n";
@@ -112,7 +142,7 @@ for (i = 0; i < oField.length; i++) {
                         text = text + " */\n";
                         text = text + "public void set"+titleize(oField[i].field.campo)+"("+titleize(oField[i].field.tipo)+" " + oField[i].field.campo.toLowerCase() + ")\n";
                         text = text + "{\n";
-                        text = text + "        this." + oField[i].field.campo.toLowerCase() + " = " + oField[i].field.campo.toLowerCase() + ";\n";
+                        text = text + "        this." + titleize2(oField[i].field.campo) + " = " + oField[i].field.campo.toLowerCase() + ";\n";
                         text = text + "    }\n";
                         text = text + "\n";
                     } else {
@@ -123,7 +153,7 @@ for (i = 0; i < oField.length; i++) {
                         text = text + "     */\n";
                         text = text + "    public List<"+titleize(oField[i].field.tipo)+"> get"+titleize(oField[i].field.campo)+"()\n";
                         text = text + "    {\n";
-                        text = text + "        return " + oField[i].field.campo.toLowerCase() + ";\n";
+                        text = text + "        return " + titleize2(oField[i].field.campo) + ";\n";
                         text = text + "    }\n";
                         text = text + "\n";
                         text = text + "    /**\n";
@@ -133,7 +163,7 @@ for (i = 0; i < oField.length; i++) {
                         text = text + " */\n";
                         text = text + "public void set"+titleize(oField[i].field.campo)+"(List<"+titleize(oField[i].field.tipo)+"> " + oField[i].field.campo.toLowerCase() + ")\n";
                         text = text + "{\n";
-                        text = text + "        this." + oField[i].field.campo.toLowerCase() + " = " + oField[i].field.campo.toLowerCase() + ";\n";
+                        text = text + "        this." + titleize2(oField[i].field.campo) + " = " + oField[i].field.campo.toLowerCase() + ";\n";
                         text = text + "    }\n";
                         text = text + "\n";
 

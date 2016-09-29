@@ -1,7 +1,18 @@
 
 
 function NFNotaInfo() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     
 	a.push({
         field: {
@@ -223,7 +234,18 @@ function NFNotaInfo() {
 
 
 function NFNotaInfoIdentificacao() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     
     
     a.push({
@@ -521,7 +543,18 @@ a.push({
 
 
 function NFInfoModelo1Por1AReferenciada() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
     a.push({
         field: {
@@ -600,7 +633,18 @@ function NFInfoModelo1Por1AReferenciada() {
 
 
 function NFInfoReferenciada() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
 
     a.push({
@@ -668,7 +712,18 @@ function NFInfoReferenciada() {
 
 
 function NFInfoProdutorRuralReferenciada() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
     a.push({
         field: {
@@ -771,7 +826,18 @@ function NFInfoProdutorRuralReferenciada() {
 }
 
 function NFInfoCupomFiscalReferenciado() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "modeloDocumentoFiscal",
@@ -811,7 +877,18 @@ function NFInfoCupomFiscalReferenciado() {
 }
 
 function NFNotaInfoEmitente() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     
     a.push({
         field: {
@@ -938,7 +1015,18 @@ function NFNotaInfoEmitente() {
 
 
 function NFNotaInfoAvulsa() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     
 a.push({
         field: {
@@ -1074,7 +1162,18 @@ a.push({
 }
 
 function NFNotaInfoDestinatario() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 	a.push({
         field: {
             campo: "cnpj",
@@ -1198,7 +1297,18 @@ function NFNotaInfoDestinatario() {
 }
 
 function NFNotaInfoLocal() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "cnpj",
@@ -1309,7 +1419,18 @@ function NFNotaInfoLocal() {
 }
 
    function NFPessoaAutorizadaDownloadNFe() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "cnpj",
@@ -1336,7 +1457,18 @@ function NFNotaInfoLocal() {
 }
 
     function NFNotaInfoTotal() {
-	    a = [];
+	    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 	    a.push({
 	        field: {
 	            campo: "icmsTotal",
@@ -1374,7 +1506,18 @@ function NFNotaInfoLocal() {
 	}
 
     function NFNotaInfoICMSTotal() {
-	var  a = [];
+	var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
 	        field: {
 	            campo: "baseCalculoICMS",
@@ -1598,7 +1741,18 @@ function NFNotaInfoLocal() {
 	}
 
     function NFNotaInfoISSQNTotal() {
-    var 	    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
 	        field: {
 	            campo: "valorTotalServicosSobNaoIncidenciaNaoTributadosICMS",
@@ -1736,7 +1890,18 @@ function NFNotaInfoLocal() {
 	}
 
     function NFNotaInfoRetencoesTributos() {
-a = [];
+var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
  a.push({
 	        field: {
 	            campo: "valorRetidoPIS",
@@ -1822,7 +1987,18 @@ a = [];
 
 
 function NFNotaInfoTransporte() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "modalidadeFrete",
@@ -1907,7 +2083,18 @@ function NFNotaInfoTransporte() {
 
 
     function NFNotaInfoRetencaoICMSTransporte() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "valorServico",
@@ -1980,7 +2167,18 @@ function NFNotaInfoTransporte() {
 
 
 function NFNotaInfoTransportador() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "cnpj",
@@ -2068,7 +2266,18 @@ function NFNotaInfoTransportador() {
 }
 
     function NFNotaInfoVeiculo() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "placaVeiculo",
@@ -2108,7 +2317,18 @@ function NFNotaInfoTransportador() {
 }
 
 function NFNotaInfoReboque() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "placaVeiculo",
@@ -2149,7 +2369,18 @@ function NFNotaInfoReboque() {
 
 
 function NFNotaInfoCobranca() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "fatura",
@@ -2177,7 +2408,18 @@ function NFNotaInfoCobranca() {
 }
 
     function NFNotaInfoDuplicata() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "numeroDuplicata",
@@ -2219,7 +2461,18 @@ function NFNotaInfoCobranca() {
 
 
     function NFNotaInfoFatura() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "numeroFatura",
@@ -2271,7 +2524,18 @@ function NFNotaInfoCobranca() {
 }
 
     function NFNotaInfoCartao() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "tipoIntegracao",
@@ -2323,7 +2587,18 @@ function NFNotaInfoCobranca() {
 }
 
 function NFNotaInfoPagamento() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "formaPagamentoMoeda",
@@ -2363,7 +2638,18 @@ function NFNotaInfoPagamento() {
 }
 
 function NFNotaInfoInformacoesAdicionais() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "informacoesAdicionaisInteresseFisco",
@@ -2423,7 +2709,18 @@ function NFNotaInfoInformacoesAdicionais() {
 }
 
 function NFNotaInfoObservacao() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "identificacaoCampo",
@@ -2451,7 +2748,18 @@ function NFNotaInfoObservacao() {
 }
 
 function NFNotaInfoProcessoReferenciado() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "identificadorProcessoOuAtoConcessorio",
@@ -2480,7 +2788,18 @@ function NFNotaInfoProcessoReferenciado() {
 
 
     function NFNotaInfoExportacao() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "ufEmbarqueProduto",
@@ -2520,7 +2839,18 @@ function NFNotaInfoProcessoReferenciado() {
 }
 
 function NFNotaInfoCompra() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "notaDeEmpenho",
@@ -2561,7 +2891,18 @@ function NFNotaInfoCompra() {
 
 
 function NFNotaInfoCana() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "safra",
@@ -2682,7 +3023,18 @@ function NFNotaInfoCana() {
 
 
 function NFNotaInfoCanaFornecimentoDiario() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "dia",
@@ -2712,7 +3064,18 @@ function NFNotaInfoCanaFornecimentoDiario() {
 
 
 function NFNotaInfoCanaDeducao() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
         field: {
             campo: "descricaoDeducao",
@@ -2744,7 +3107,18 @@ function NFNotaInfoCanaDeducao() {
 
 
 function NFNota() {
-    a = [];
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
     a.push({
         field: {
@@ -2800,7 +3174,18 @@ function NFNota() {
 
 function NFNotaInfoSuplementar () {
 
- a = [];
+ var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
 a.push({
         field: {
@@ -13364,6 +13749,9 @@ dataModel = function() {
             classe: "NFNotaInfo",
             model: NFNotaInfo()
         }, {
+            classe: "NFInfoCupomFiscalReferenciado",
+            model: NFInfoCupomFiscalReferenciado()
+        }, {
             classe: "NFNotaInfoIdentificacao",
             model: NFNotaInfoIdentificacao()
         }, {
@@ -13379,9 +13767,6 @@ dataModel = function() {
             classe: "NFNotaInfoEmitente",
             model: NFNotaInfoEmitente()
         }, {
-            classe: "NFNotaInfoEmitente",
-            model: NFNotaInfoEmitente()
-        },{
             classe: "NFNotaInfoAvulsa",
             model: NFNotaInfoAvulsa()
         }, {
