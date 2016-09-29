@@ -1,5 +1,8 @@
-/** create by system gera-java version 1.0.0 28/09/2016 14:58 : 22*/
+/** create by system gera-java version 1.0.0 29/09/2016 14:23 : 49*/
 package com.qat.samples.sysmgmt.nfe.model;
+
+
+import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -7,20 +10,23 @@ package com.qat.samples.sysmgmt.nfe.model;
  */
 
 @SuppressWarnings("serial")
-public class NFNotaInfoAvulsa extends NFBase
+public class NFNotaInfoAvulsa extends ModelCosmeDamiao
 {
+
+    /** The econtabil id for the NFNotaInfoAvulsa. */
+    private Integer id;
 
     /** The econtabil cnpj for the NFNotaInfoAvulsa. */
     private String cnpj;
 
     /** The econtabil orgaoEmitente for the NFNotaInfoAvulsa. */
-    private String orgaoemitente;
+    private String orgaoEmitente;
 
     /** The econtabil matriculaAgente for the NFNotaInfoAvulsa. */
-    private String matriculaagente;
+    private String matriculaAgente;
 
     /** The econtabil nomeAgente for the NFNotaInfoAvulsa. */
-    private String nomeagente;
+    private String nomeAgente;
 
     /** The econtabil fone for the NFNotaInfoAvulsa. */
     private String fone;
@@ -29,19 +35,19 @@ public class NFNotaInfoAvulsa extends NFBase
     private String uf;
 
     /** The econtabil numeroDocumentoArrecadacaoReceita for the NFNotaInfoAvulsa. */
-    private String numerodocumentoarrecadacaoreceita;
+    private String numeroDocumentoArrecadacaoReceita;
 
     /** The econtabil dataEmissaoDocumentoArrecadacao for the NFNotaInfoAvulsa. */
-    private Long dataemissaodocumentoarrecadacao;
+    private Long dataEmissaoDocumentoArrecadacao;
 
     /** The econtabil valorTotalConstanteDocumentoArrecadacaoReceita for the NFNotaInfoAvulsa. */
-    private String valortotalconstantedocumentoarrecadacaoreceita;
+    private String valorTotalConstanteDocumentoArrecadacaoReceita;
 
     /** The econtabil reparticaoFiscalEmitente for the NFNotaInfoAvulsa. */
-    private String reparticaofiscalemitente;
+    private String reparticaoFiscalEmitente;
 
     /** The econtabil dataPagamentoDocumentoArrecadacao for the NFNotaInfoAvulsa. */
-    private Long datapagamentodocumentoarrecadacao;
+    private Long dataPagamentoDocumentoArrecadacao;
 
 
 
@@ -53,6 +59,31 @@ public class NFNotaInfoAvulsa extends NFBase
         super();
     }
 
+
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
+    public Integer getId()
+    {
+        return id;
+    }
+
+    /**
+     * Sets the id.
+     *
+* @param id the id to set
+ */
+public void setId(Integer id)
+{
+        this.id = id;
+    }
 
     /**
      * Gets the cnpj.
@@ -80,18 +111,18 @@ public void setCnpj(String cnpj)
     }
 
     /**
-     * Gets the orgaoemitente.
+     * Gets the orgaoEmitente.
      *
-     * @return the orgaoemitente
+     * @return the orgaoEmitente
      */
     /**
-     * Gets the orgaoemitente.
+     * Gets the orgaoEmitente.
      *
-     * @return the orgaoemitente
+     * @return the orgaoEmitente
      */
     public String getOrgaoEmitente()
     {
-        return orgaoemitente;
+        return orgaoEmitente;
     }
 
     /**
@@ -101,22 +132,22 @@ public void setCnpj(String cnpj)
  */
 public void setOrgaoEmitente(String orgaoemitente)
 {
-        this.orgaoemitente = orgaoemitente;
+        this.orgaoEmitente = orgaoemitente;
     }
 
     /**
-     * Gets the matriculaagente.
+     * Gets the matriculaAgente.
      *
-     * @return the matriculaagente
+     * @return the matriculaAgente
      */
     /**
-     * Gets the matriculaagente.
+     * Gets the matriculaAgente.
      *
-     * @return the matriculaagente
+     * @return the matriculaAgente
      */
     public String getMatriculaAgente()
     {
-        return matriculaagente;
+        return matriculaAgente;
     }
 
     /**
@@ -126,22 +157,22 @@ public void setOrgaoEmitente(String orgaoemitente)
  */
 public void setMatriculaAgente(String matriculaagente)
 {
-        this.matriculaagente = matriculaagente;
+        this.matriculaAgente = matriculaagente;
     }
 
     /**
-     * Gets the nomeagente.
+     * Gets the nomeAgente.
      *
-     * @return the nomeagente
+     * @return the nomeAgente
      */
     /**
-     * Gets the nomeagente.
+     * Gets the nomeAgente.
      *
-     * @return the nomeagente
+     * @return the nomeAgente
      */
     public String getNomeAgente()
     {
-        return nomeagente;
+        return nomeAgente;
     }
 
     /**
@@ -151,7 +182,7 @@ public void setMatriculaAgente(String matriculaagente)
  */
 public void setNomeAgente(String nomeagente)
 {
-        this.nomeagente = nomeagente;
+        this.nomeAgente = nomeagente;
     }
 
     /**
@@ -205,18 +236,18 @@ public void setUf(String uf)
     }
 
     /**
-     * Gets the numerodocumentoarrecadacaoreceita.
+     * Gets the numeroDocumentoArrecadacaoReceita.
      *
-     * @return the numerodocumentoarrecadacaoreceita
+     * @return the numeroDocumentoArrecadacaoReceita
      */
     /**
-     * Gets the numerodocumentoarrecadacaoreceita.
+     * Gets the numeroDocumentoArrecadacaoReceita.
      *
-     * @return the numerodocumentoarrecadacaoreceita
+     * @return the numeroDocumentoArrecadacaoReceita
      */
     public String getNumeroDocumentoArrecadacaoReceita()
     {
-        return numerodocumentoarrecadacaoreceita;
+        return numeroDocumentoArrecadacaoReceita;
     }
 
     /**
@@ -226,22 +257,22 @@ public void setUf(String uf)
  */
 public void setNumeroDocumentoArrecadacaoReceita(String numerodocumentoarrecadacaoreceita)
 {
-        this.numerodocumentoarrecadacaoreceita = numerodocumentoarrecadacaoreceita;
+        this.numeroDocumentoArrecadacaoReceita = numerodocumentoarrecadacaoreceita;
     }
 
     /**
-     * Gets the dataemissaodocumentoarrecadacao.
+     * Gets the dataEmissaoDocumentoArrecadacao.
      *
-     * @return the dataemissaodocumentoarrecadacao
+     * @return the dataEmissaoDocumentoArrecadacao
      */
     /**
-     * Gets the dataemissaodocumentoarrecadacao.
+     * Gets the dataEmissaoDocumentoArrecadacao.
      *
-     * @return the dataemissaodocumentoarrecadacao
+     * @return the dataEmissaoDocumentoArrecadacao
      */
     public Long getDataEmissaoDocumentoArrecadacao()
     {
-        return dataemissaodocumentoarrecadacao;
+        return dataEmissaoDocumentoArrecadacao;
     }
 
     /**
@@ -251,22 +282,22 @@ public void setNumeroDocumentoArrecadacaoReceita(String numerodocumentoarrecadac
  */
 public void setDataEmissaoDocumentoArrecadacao(Long dataemissaodocumentoarrecadacao)
 {
-        this.dataemissaodocumentoarrecadacao = dataemissaodocumentoarrecadacao;
+        this.dataEmissaoDocumentoArrecadacao = dataemissaodocumentoarrecadacao;
     }
 
     /**
-     * Gets the valortotalconstantedocumentoarrecadacaoreceita.
+     * Gets the valorTotalConstanteDocumentoArrecadacaoReceita.
      *
-     * @return the valortotalconstantedocumentoarrecadacaoreceita
+     * @return the valorTotalConstanteDocumentoArrecadacaoReceita
      */
     /**
-     * Gets the valortotalconstantedocumentoarrecadacaoreceita.
+     * Gets the valorTotalConstanteDocumentoArrecadacaoReceita.
      *
-     * @return the valortotalconstantedocumentoarrecadacaoreceita
+     * @return the valorTotalConstanteDocumentoArrecadacaoReceita
      */
     public String getValorTotalConstanteDocumentoArrecadacaoReceita()
     {
-        return valortotalconstantedocumentoarrecadacaoreceita;
+        return valorTotalConstanteDocumentoArrecadacaoReceita;
     }
 
     /**
@@ -276,22 +307,22 @@ public void setDataEmissaoDocumentoArrecadacao(Long dataemissaodocumentoarrecada
  */
 public void setValorTotalConstanteDocumentoArrecadacaoReceita(String valortotalconstantedocumentoarrecadacaoreceita)
 {
-        this.valortotalconstantedocumentoarrecadacaoreceita = valortotalconstantedocumentoarrecadacaoreceita;
+        this.valorTotalConstanteDocumentoArrecadacaoReceita = valortotalconstantedocumentoarrecadacaoreceita;
     }
 
     /**
-     * Gets the reparticaofiscalemitente.
+     * Gets the reparticaoFiscalEmitente.
      *
-     * @return the reparticaofiscalemitente
+     * @return the reparticaoFiscalEmitente
      */
     /**
-     * Gets the reparticaofiscalemitente.
+     * Gets the reparticaoFiscalEmitente.
      *
-     * @return the reparticaofiscalemitente
+     * @return the reparticaoFiscalEmitente
      */
     public String getReparticaoFiscalEmitente()
     {
-        return reparticaofiscalemitente;
+        return reparticaoFiscalEmitente;
     }
 
     /**
@@ -301,22 +332,22 @@ public void setValorTotalConstanteDocumentoArrecadacaoReceita(String valortotalc
  */
 public void setReparticaoFiscalEmitente(String reparticaofiscalemitente)
 {
-        this.reparticaofiscalemitente = reparticaofiscalemitente;
+        this.reparticaoFiscalEmitente = reparticaofiscalemitente;
     }
 
     /**
-     * Gets the datapagamentodocumentoarrecadacao.
+     * Gets the dataPagamentoDocumentoArrecadacao.
      *
-     * @return the datapagamentodocumentoarrecadacao
+     * @return the dataPagamentoDocumentoArrecadacao
      */
     /**
-     * Gets the datapagamentodocumentoarrecadacao.
+     * Gets the dataPagamentoDocumentoArrecadacao.
      *
-     * @return the datapagamentodocumentoarrecadacao
+     * @return the dataPagamentoDocumentoArrecadacao
      */
     public Long getDataPagamentoDocumentoArrecadacao()
     {
-        return datapagamentodocumentoarrecadacao;
+        return dataPagamentoDocumentoArrecadacao;
     }
 
     /**
@@ -326,108 +357,24 @@ public void setReparticaoFiscalEmitente(String reparticaofiscalemitente)
  */
 public void setDataPagamentoDocumentoArrecadacao(Long datapagamentodocumentoarrecadacao)
 {
-        this.datapagamentodocumentoarrecadacao = datapagamentodocumentoarrecadacao;
+        this.dataPagamentoDocumentoArrecadacao = datapagamentodocumentoarrecadacao;
     }
-
-
-	public String getOrgaoemitente() {
-		return orgaoemitente;
-	}
-
-
-	public void setOrgaoemitente(String orgaoemitente) {
-		this.orgaoemitente = orgaoemitente;
-	}
-
-
-	public String getMatriculaagente() {
-		return matriculaagente;
-	}
-
-
-	public void setMatriculaagente(String matriculaagente) {
-		this.matriculaagente = matriculaagente;
-	}
-
-
-	public String getNomeagente() {
-		return nomeagente;
-	}
-
-
-	public void setNomeagente(String nomeagente) {
-		this.nomeagente = nomeagente;
-	}
-
-
-	public String getNumerodocumentoarrecadacaoreceita() {
-		return numerodocumentoarrecadacaoreceita;
-	}
-
-
-	public void setNumerodocumentoarrecadacaoreceita(String numerodocumentoarrecadacaoreceita) {
-		this.numerodocumentoarrecadacaoreceita = numerodocumentoarrecadacaoreceita;
-	}
-
-
-	public Long getDataemissaodocumentoarrecadacao() {
-		return dataemissaodocumentoarrecadacao;
-	}
-
-
-	public void setDataemissaodocumentoarrecadacao(Long dataemissaodocumentoarrecadacao) {
-		this.dataemissaodocumentoarrecadacao = dataemissaodocumentoarrecadacao;
-	}
-
-
-	public String getValortotalconstantedocumentoarrecadacaoreceita() {
-		return valortotalconstantedocumentoarrecadacaoreceita;
-	}
-
-
-	public void setValortotalconstantedocumentoarrecadacaoreceita(String valortotalconstantedocumentoarrecadacaoreceita) {
-		this.valortotalconstantedocumentoarrecadacaoreceita = valortotalconstantedocumentoarrecadacaoreceita;
-	}
-
-
-	public String getReparticaofiscalemitente() {
-		return reparticaofiscalemitente;
-	}
-
-
-	public void setReparticaofiscalemitente(String reparticaofiscalemitente) {
-		this.reparticaofiscalemitente = reparticaofiscalemitente;
-	}
-
-
-	public Long getDatapagamentodocumentoarrecadacao() {
-		return datapagamentodocumentoarrecadacao;
-	}
-
-
-	public void setDatapagamentodocumentoarrecadacao(Long datapagamentodocumentoarrecadacao) {
-		this.datapagamentodocumentoarrecadacao = datapagamentodocumentoarrecadacao;
-	}
 
 
 	@Override
 	public String toString() {
-		return "NFNotaInfoAvulsa [getCnpj()=" + getCnpj() + ", getOrgaoEmitente()=" + getOrgaoEmitente()
-				+ ", getMatriculaAgente()=" + getMatriculaAgente() + ", getNomeAgente()=" + getNomeAgente()
-				+ ", getFone()=" + getFone() + ", getUf()=" + getUf() + ", getNumeroDocumentoArrecadacaoReceita()="
-				+ getNumeroDocumentoArrecadacaoReceita() + ", getDataEmissaoDocumentoArrecadacao()="
-				+ getDataEmissaoDocumentoArrecadacao() + ", getValorTotalConstanteDocumentoArrecadacaoReceita()="
+		return "NFNotaInfoAvulsa [getId()=" + getId() + ", getCnpj()=" + getCnpj() + ", getOrgaoEmitente()="
+				+ getOrgaoEmitente() + ", getMatriculaAgente()=" + getMatriculaAgente() + ", getNomeAgente()="
+				+ getNomeAgente() + ", getFone()=" + getFone() + ", getUf()=" + getUf()
+				+ ", getNumeroDocumentoArrecadacaoReceita()=" + getNumeroDocumentoArrecadacaoReceita()
+				+ ", getDataEmissaoDocumentoArrecadacao()=" + getDataEmissaoDocumentoArrecadacao()
+				+ ", getValorTotalConstanteDocumentoArrecadacaoReceita()="
 				+ getValorTotalConstanteDocumentoArrecadacaoReceita() + ", getReparticaoFiscalEmitente()="
 				+ getReparticaoFiscalEmitente() + ", getDataPagamentoDocumentoArrecadacao()="
-				+ getDataPagamentoDocumentoArrecadacao() + ", getOrgaoemitente()=" + getOrgaoemitente()
-				+ ", getMatriculaagente()=" + getMatriculaagente() + ", getNomeagente()=" + getNomeagente()
-				+ ", getNumerodocumentoarrecadacaoreceita()=" + getNumerodocumentoarrecadacaoreceita()
-				+ ", getDataemissaodocumentoarrecadacao()=" + getDataemissaodocumentoarrecadacao()
-				+ ", getValortotalconstantedocumentoarrecadacaoreceita()="
-				+ getValortotalconstantedocumentoarrecadacaoreceita() + ", getReparticaofiscalemitente()="
-				+ getReparticaofiscalemitente() + ", getDatapagamentodocumentoarrecadacao()="
-				+ getDatapagamentodocumentoarrecadacao() + ", toString()=" + super.toString() + "]";
+				+ getDataPagamentoDocumentoArrecadacao() + ", toString()=" + super.toString() + "]";
 	}
+
+
 
 
 

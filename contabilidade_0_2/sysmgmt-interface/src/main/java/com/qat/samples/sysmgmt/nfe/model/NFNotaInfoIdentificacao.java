@@ -86,7 +86,7 @@ public class NFNotaInfoIdentificacao extends NFBase
     private String justificativaentradacontingencia;
 
     /** The econtabil referenciadas for the NFNotaInfoIdentificacao. */
-    private List<List<NFInfoReferenciada>> referenciadas;
+    private List<NFInfoReferenciada> referenciadas;
 
 
 
@@ -684,7 +684,7 @@ public void setJustificativaEntradaContingencia(String justificativaentradaconti
      *
      * @return the referenciadas
      */
-    public List<List<NFInfoReferenciada>> getReferenciadas()
+    public List<NFInfoReferenciada> getReferenciadas()
     {
         return referenciadas;
     }
@@ -694,7 +694,7 @@ public void setJustificativaEntradaContingencia(String justificativaentradaconti
      *
 * @param id the referenciadas to set
  */
-public void setReferenciadas(List<List<NFInfoReferenciada>> referenciadas)
+public void setReferenciadas(List<NFInfoReferenciada> referenciadas)
 {
         this.referenciadas = referenciadas;
     }

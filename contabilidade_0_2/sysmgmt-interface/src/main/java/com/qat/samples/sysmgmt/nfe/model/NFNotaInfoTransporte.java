@@ -28,7 +28,7 @@ public class NFNotaInfoTransporte extends NFBase
     private NFNotaInfoVeiculo veiculo;
 
     /** The econtabil reboques for the NFNotaInfoTransporte. */
-    private List<List<NFNotaInfoReboque>> reboques;
+    private List<NFNotaInfoReboque> reboques;
 
     /** The econtabil vagao for the NFNotaInfoTransporte. */
     private String vagao;
@@ -157,7 +157,7 @@ public void setVeiculo(NFNotaInfoVeiculo veiculo)
      *
      * @return the reboques
      */
-    public List<List<NFNotaInfoReboque>> getReboques()
+    public List<NFNotaInfoReboque> getReboques()
     {
         return reboques;
     }
@@ -167,7 +167,7 @@ public void setVeiculo(NFNotaInfoVeiculo veiculo)
      *
 * @param id the reboques to set
  */
-public void setReboques(List<List<NFNotaInfoReboque>> reboques)
+public void setReboques(List<NFNotaInfoReboque> reboques)
 {
         this.reboques = reboques;
     }

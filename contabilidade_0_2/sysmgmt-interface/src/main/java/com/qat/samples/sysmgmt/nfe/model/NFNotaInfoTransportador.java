@@ -136,5 +136,4 @@ public class NFNotaInfoTransportador extends NFBase
 	}
 
 
-
  }

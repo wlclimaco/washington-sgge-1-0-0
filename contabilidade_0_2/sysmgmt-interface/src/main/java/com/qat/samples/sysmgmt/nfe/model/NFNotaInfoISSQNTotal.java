@@ -1,8 +1,9 @@
-/** create by system gera-java version 1.0.0 28/09/2016 14:58 : 22*/
+/** create by system gera-java version 1.0.0 29/09/2016 14:23 : 49*/
 package com.qat.samples.sysmgmt.nfe.model;
 
 
 import com.qat.samples.sysmgmt.util.model.DoisValores;
+import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -10,41 +11,44 @@ import com.qat.samples.sysmgmt.util.model.DoisValores;
  */
 
 @SuppressWarnings("serial")
-public class NFNotaInfoISSQNTotal extends NFBase
+public class NFNotaInfoISSQNTotal extends ModelCosmeDamiao
 {
 
+    /** The econtabil id for the NFNotaInfoISSQNTotal. */
+    private Integer id;
+
     /** The econtabil valorTotalServicosSobNaoIncidenciaNaoTributadosICMS for the NFNotaInfoISSQNTotal. */
-    private String valortotalservicossobnaoincidencianaotributadosicms;
+    private String valorTotalServicosSobNaoIncidenciaNaoTributadosICMS;
 
     /** The econtabil baseCalculoISS for the NFNotaInfoISSQNTotal. */
-    private String basecalculoiss;
+    private String baseCalculoISS;
 
     /** The econtabil valorTotalISS for the NFNotaInfoISSQNTotal. */
-    private String valortotaliss;
+    private String valorTotalISS;
 
     /** The econtabil valorPISsobreServicos for the NFNotaInfoISSQNTotal. */
-    private String valorpissobreservicos;
+    private String valorPISsobreServicos;
 
     /** The econtabil valorCOFINSsobreServicos for the NFNotaInfoISSQNTotal. */
-    private String valorcofinssobreservicos;
+    private String valorCOFINSsobreServicos;
 
     /** The econtabil dataPrestacaoServico for the NFNotaInfoISSQNTotal. */
-    private Long dataprestacaoservico;
+    private Long dataPrestacaoServico;
 
     /** The econtabil valorDeducao for the NFNotaInfoISSQNTotal. */
-    private String valordeducao;
+    private String valorDeducao;
 
     /** The econtabil valorOutros for the NFNotaInfoISSQNTotal. */
-    private String valoroutros;
+    private String valorOutros;
 
     /** The econtabil valorTotalDescontoIncondicionado for the NFNotaInfoISSQNTotal. */
-    private String valortotaldescontoincondicionado;
+    private String valorTotalDescontoIncondicionado;
 
     /** The econtabil valorTotalDescontoCondicionado for the NFNotaInfoISSQNTotal. */
-    private String valortotaldescontocondicionado;
+    private String valorTotalDescontoCondicionado;
 
     /** The econtabil valorTotalRetencaoISS for the NFNotaInfoISSQNTotal. */
-    private String valortotalretencaoiss;
+    private String valorTotalRetencaoISS;
 
     /** The econtabil tributacao for the NFNotaInfoISSQNTotal. */
     private DoisValores tributacao;
@@ -61,18 +65,43 @@ public class NFNotaInfoISSQNTotal extends NFBase
 
 
     /**
-     * Gets the valortotalservicossobnaoincidencianaotributadosicms.
+     * Gets the id.
      *
-     * @return the valortotalservicossobnaoincidencianaotributadosicms
+     * @return the id
      */
     /**
-     * Gets the valortotalservicossobnaoincidencianaotributadosicms.
+     * Gets the id.
      *
-     * @return the valortotalservicossobnaoincidencianaotributadosicms
+     * @return the id
+     */
+    public Integer getId()
+    {
+        return id;
+    }
+
+    /**
+     * Sets the id.
+     *
+* @param id the id to set
+ */
+public void setId(Integer id)
+{
+        this.id = id;
+    }
+
+    /**
+     * Gets the valorTotalServicosSobNaoIncidenciaNaoTributadosICMS.
+     *
+     * @return the valorTotalServicosSobNaoIncidenciaNaoTributadosICMS
+     */
+    /**
+     * Gets the valorTotalServicosSobNaoIncidenciaNaoTributadosICMS.
+     *
+     * @return the valorTotalServicosSobNaoIncidenciaNaoTributadosICMS
      */
     public String getValorTotalServicosSobNaoIncidenciaNaoTributadosICMS()
     {
-        return valortotalservicossobnaoincidencianaotributadosicms;
+        return valorTotalServicosSobNaoIncidenciaNaoTributadosICMS;
     }
 
     /**
@@ -82,22 +111,22 @@ public class NFNotaInfoISSQNTotal extends NFBase
  */
 public void setValorTotalServicosSobNaoIncidenciaNaoTributadosICMS(String valortotalservicossobnaoincidencianaotributadosicms)
 {
-        this.valortotalservicossobnaoincidencianaotributadosicms = valortotalservicossobnaoincidencianaotributadosicms;
+        this.valorTotalServicosSobNaoIncidenciaNaoTributadosICMS = valortotalservicossobnaoincidencianaotributadosicms;
     }
 
     /**
-     * Gets the basecalculoiss.
+     * Gets the baseCalculoISS.
      *
-     * @return the basecalculoiss
+     * @return the baseCalculoISS
      */
     /**
-     * Gets the basecalculoiss.
+     * Gets the baseCalculoISS.
      *
-     * @return the basecalculoiss
+     * @return the baseCalculoISS
      */
     public String getBaseCalculoISS()
     {
-        return basecalculoiss;
+        return baseCalculoISS;
     }
 
     /**
@@ -107,22 +136,22 @@ public void setValorTotalServicosSobNaoIncidenciaNaoTributadosICMS(String valort
  */
 public void setBaseCalculoISS(String basecalculoiss)
 {
-        this.basecalculoiss = basecalculoiss;
+        this.baseCalculoISS = basecalculoiss;
     }
 
     /**
-     * Gets the valortotaliss.
+     * Gets the valorTotalISS.
      *
-     * @return the valortotaliss
+     * @return the valorTotalISS
      */
     /**
-     * Gets the valortotaliss.
+     * Gets the valorTotalISS.
      *
-     * @return the valortotaliss
+     * @return the valorTotalISS
      */
     public String getValorTotalISS()
     {
-        return valortotaliss;
+        return valorTotalISS;
     }
 
     /**
@@ -132,22 +161,22 @@ public void setBaseCalculoISS(String basecalculoiss)
  */
 public void setValorTotalISS(String valortotaliss)
 {
-        this.valortotaliss = valortotaliss;
+        this.valorTotalISS = valortotaliss;
     }
 
     /**
-     * Gets the valorpissobreservicos.
+     * Gets the valorPISsobreServicos.
      *
-     * @return the valorpissobreservicos
+     * @return the valorPISsobreServicos
      */
     /**
-     * Gets the valorpissobreservicos.
+     * Gets the valorPISsobreServicos.
      *
-     * @return the valorpissobreservicos
+     * @return the valorPISsobreServicos
      */
     public String getValorPISsobreServicos()
     {
-        return valorpissobreservicos;
+        return valorPISsobreServicos;
     }
 
     /**
@@ -157,22 +186,22 @@ public void setValorTotalISS(String valortotaliss)
  */
 public void setValorPISsobreServicos(String valorpissobreservicos)
 {
-        this.valorpissobreservicos = valorpissobreservicos;
+        this.valorPISsobreServicos = valorpissobreservicos;
     }
 
     /**
-     * Gets the valorcofinssobreservicos.
+     * Gets the valorCOFINSsobreServicos.
      *
-     * @return the valorcofinssobreservicos
+     * @return the valorCOFINSsobreServicos
      */
     /**
-     * Gets the valorcofinssobreservicos.
+     * Gets the valorCOFINSsobreServicos.
      *
-     * @return the valorcofinssobreservicos
+     * @return the valorCOFINSsobreServicos
      */
     public String getValorCOFINSsobreServicos()
     {
-        return valorcofinssobreservicos;
+        return valorCOFINSsobreServicos;
     }
 
     /**
@@ -182,22 +211,22 @@ public void setValorPISsobreServicos(String valorpissobreservicos)
  */
 public void setValorCOFINSsobreServicos(String valorcofinssobreservicos)
 {
-        this.valorcofinssobreservicos = valorcofinssobreservicos;
+        this.valorCOFINSsobreServicos = valorcofinssobreservicos;
     }
 
     /**
-     * Gets the dataprestacaoservico.
+     * Gets the dataPrestacaoServico.
      *
-     * @return the dataprestacaoservico
+     * @return the dataPrestacaoServico
      */
     /**
-     * Gets the dataprestacaoservico.
+     * Gets the dataPrestacaoServico.
      *
-     * @return the dataprestacaoservico
+     * @return the dataPrestacaoServico
      */
     public Long getDataPrestacaoServico()
     {
-        return dataprestacaoservico;
+        return dataPrestacaoServico;
     }
 
     /**
@@ -207,22 +236,22 @@ public void setValorCOFINSsobreServicos(String valorcofinssobreservicos)
  */
 public void setDataPrestacaoServico(Long dataprestacaoservico)
 {
-        this.dataprestacaoservico = dataprestacaoservico;
+        this.dataPrestacaoServico = dataprestacaoservico;
     }
 
     /**
-     * Gets the valordeducao.
+     * Gets the valorDeducao.
      *
-     * @return the valordeducao
+     * @return the valorDeducao
      */
     /**
-     * Gets the valordeducao.
+     * Gets the valorDeducao.
      *
-     * @return the valordeducao
+     * @return the valorDeducao
      */
     public String getValorDeducao()
     {
-        return valordeducao;
+        return valorDeducao;
     }
 
     /**
@@ -232,22 +261,22 @@ public void setDataPrestacaoServico(Long dataprestacaoservico)
  */
 public void setValorDeducao(String valordeducao)
 {
-        this.valordeducao = valordeducao;
+        this.valorDeducao = valordeducao;
     }
 
     /**
-     * Gets the valoroutros.
+     * Gets the valorOutros.
      *
-     * @return the valoroutros
+     * @return the valorOutros
      */
     /**
-     * Gets the valoroutros.
+     * Gets the valorOutros.
      *
-     * @return the valoroutros
+     * @return the valorOutros
      */
     public String getValorOutros()
     {
-        return valoroutros;
+        return valorOutros;
     }
 
     /**
@@ -257,22 +286,22 @@ public void setValorDeducao(String valordeducao)
  */
 public void setValorOutros(String valoroutros)
 {
-        this.valoroutros = valoroutros;
+        this.valorOutros = valoroutros;
     }
 
     /**
-     * Gets the valortotaldescontoincondicionado.
+     * Gets the valorTotalDescontoIncondicionado.
      *
-     * @return the valortotaldescontoincondicionado
+     * @return the valorTotalDescontoIncondicionado
      */
     /**
-     * Gets the valortotaldescontoincondicionado.
+     * Gets the valorTotalDescontoIncondicionado.
      *
-     * @return the valortotaldescontoincondicionado
+     * @return the valorTotalDescontoIncondicionado
      */
     public String getValorTotalDescontoIncondicionado()
     {
-        return valortotaldescontoincondicionado;
+        return valorTotalDescontoIncondicionado;
     }
 
     /**
@@ -282,22 +311,22 @@ public void setValorOutros(String valoroutros)
  */
 public void setValorTotalDescontoIncondicionado(String valortotaldescontoincondicionado)
 {
-        this.valortotaldescontoincondicionado = valortotaldescontoincondicionado;
+        this.valorTotalDescontoIncondicionado = valortotaldescontoincondicionado;
     }
 
     /**
-     * Gets the valortotaldescontocondicionado.
+     * Gets the valorTotalDescontoCondicionado.
      *
-     * @return the valortotaldescontocondicionado
+     * @return the valorTotalDescontoCondicionado
      */
     /**
-     * Gets the valortotaldescontocondicionado.
+     * Gets the valorTotalDescontoCondicionado.
      *
-     * @return the valortotaldescontocondicionado
+     * @return the valorTotalDescontoCondicionado
      */
     public String getValorTotalDescontoCondicionado()
     {
-        return valortotaldescontocondicionado;
+        return valorTotalDescontoCondicionado;
     }
 
     /**
@@ -307,22 +336,22 @@ public void setValorTotalDescontoIncondicionado(String valortotaldescontoincondi
  */
 public void setValorTotalDescontoCondicionado(String valortotaldescontocondicionado)
 {
-        this.valortotaldescontocondicionado = valortotaldescontocondicionado;
+        this.valorTotalDescontoCondicionado = valortotaldescontocondicionado;
     }
 
     /**
-     * Gets the valortotalretencaoiss.
+     * Gets the valorTotalRetencaoISS.
      *
-     * @return the valortotalretencaoiss
+     * @return the valorTotalRetencaoISS
      */
     /**
-     * Gets the valortotalretencaoiss.
+     * Gets the valorTotalRetencaoISS.
      *
-     * @return the valortotalretencaoiss
+     * @return the valorTotalRetencaoISS
      */
     public String getValorTotalRetencaoISS()
     {
-        return valortotalretencaoiss;
+        return valorTotalRetencaoISS;
     }
 
     /**
@@ -332,7 +361,7 @@ public void setValorTotalDescontoCondicionado(String valortotaldescontocondicion
  */
 public void setValorTotalRetencaoISS(String valortotalretencaoiss)
 {
-        this.valortotalretencaoiss = valortotalretencaoiss;
+        this.valorTotalRetencaoISS = valortotalretencaoiss;
     }
 
     /**
@@ -361,120 +390,10 @@ public void setTributacao(DoisValores tributacao)
     }
 
 
-	public String getValortotalservicossobnaoincidencianaotributadosicms() {
-		return valortotalservicossobnaoincidencianaotributadosicms;
-	}
-
-
-	public void setValortotalservicossobnaoincidencianaotributadosicms(
-			String valortotalservicossobnaoincidencianaotributadosicms) {
-		this.valortotalservicossobnaoincidencianaotributadosicms = valortotalservicossobnaoincidencianaotributadosicms;
-	}
-
-
-	public String getBasecalculoiss() {
-		return basecalculoiss;
-	}
-
-
-	public void setBasecalculoiss(String basecalculoiss) {
-		this.basecalculoiss = basecalculoiss;
-	}
-
-
-	public String getValortotaliss() {
-		return valortotaliss;
-	}
-
-
-	public void setValortotaliss(String valortotaliss) {
-		this.valortotaliss = valortotaliss;
-	}
-
-
-	public String getValorpissobreservicos() {
-		return valorpissobreservicos;
-	}
-
-
-	public void setValorpissobreservicos(String valorpissobreservicos) {
-		this.valorpissobreservicos = valorpissobreservicos;
-	}
-
-
-	public String getValorcofinssobreservicos() {
-		return valorcofinssobreservicos;
-	}
-
-
-	public void setValorcofinssobreservicos(String valorcofinssobreservicos) {
-		this.valorcofinssobreservicos = valorcofinssobreservicos;
-	}
-
-
-	public Long getDataprestacaoservico() {
-		return dataprestacaoservico;
-	}
-
-
-	public void setDataprestacaoservico(Long dataprestacaoservico) {
-		this.dataprestacaoservico = dataprestacaoservico;
-	}
-
-
-	public String getValordeducao() {
-		return valordeducao;
-	}
-
-
-	public void setValordeducao(String valordeducao) {
-		this.valordeducao = valordeducao;
-	}
-
-
-	public String getValoroutros() {
-		return valoroutros;
-	}
-
-
-	public void setValoroutros(String valoroutros) {
-		this.valoroutros = valoroutros;
-	}
-
-
-	public String getValortotaldescontoincondicionado() {
-		return valortotaldescontoincondicionado;
-	}
-
-
-	public void setValortotaldescontoincondicionado(String valortotaldescontoincondicionado) {
-		this.valortotaldescontoincondicionado = valortotaldescontoincondicionado;
-	}
-
-
-	public String getValortotaldescontocondicionado() {
-		return valortotaldescontocondicionado;
-	}
-
-
-	public void setValortotaldescontocondicionado(String valortotaldescontocondicionado) {
-		this.valortotaldescontocondicionado = valortotaldescontocondicionado;
-	}
-
-
-	public String getValortotalretencaoiss() {
-		return valortotalretencaoiss;
-	}
-
-
-	public void setValortotalretencaoiss(String valortotalretencaoiss) {
-		this.valortotalretencaoiss = valortotalretencaoiss;
-	}
-
-
 	@Override
 	public String toString() {
-		return "NFNotaInfoISSQNTotal [getValorTotalServicosSobNaoIncidenciaNaoTributadosICMS()="
+		return "NFNotaInfoISSQNTotal [getId()=" + getId()
+				+ ", getValorTotalServicosSobNaoIncidenciaNaoTributadosICMS()="
 				+ getValorTotalServicosSobNaoIncidenciaNaoTributadosICMS() + ", getBaseCalculoISS()="
 				+ getBaseCalculoISS() + ", getValorTotalISS()=" + getValorTotalISS() + ", getValorPISsobreServicos()="
 				+ getValorPISsobreServicos() + ", getValorCOFINSsobreServicos()=" + getValorCOFINSsobreServicos()
@@ -483,17 +402,9 @@ public void setTributacao(DoisValores tributacao)
 				+ ", getValorTotalDescontoIncondicionado()=" + getValorTotalDescontoIncondicionado()
 				+ ", getValorTotalDescontoCondicionado()=" + getValorTotalDescontoCondicionado()
 				+ ", getValorTotalRetencaoISS()=" + getValorTotalRetencaoISS() + ", getTributacao()=" + getTributacao()
-				+ ", getValortotalservicossobnaoincidencianaotributadosicms()="
-				+ getValortotalservicossobnaoincidencianaotributadosicms() + ", getBasecalculoiss()="
-				+ getBasecalculoiss() + ", getValortotaliss()=" + getValortotaliss() + ", getValorpissobreservicos()="
-				+ getValorpissobreservicos() + ", getValorcofinssobreservicos()=" + getValorcofinssobreservicos()
-				+ ", getDataprestacaoservico()=" + getDataprestacaoservico() + ", getValordeducao()="
-				+ getValordeducao() + ", getValoroutros()=" + getValoroutros()
-				+ ", getValortotaldescontoincondicionado()=" + getValortotaldescontoincondicionado()
-				+ ", getValortotaldescontocondicionado()=" + getValortotaldescontocondicionado()
-				+ ", getValortotalretencaoiss()=" + getValortotalretencaoiss() + ", toString()=" + super.toString()
-				+ "]";
+				+ ", toString()=" + super.toString() + "]";
 	}
+
 
 
 
