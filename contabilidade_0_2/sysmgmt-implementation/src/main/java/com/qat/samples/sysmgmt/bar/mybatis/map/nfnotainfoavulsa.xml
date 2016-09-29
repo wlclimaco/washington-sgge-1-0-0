@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 29/09/2016 9:45 : 13-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NFNotaInfoAvulsaMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="NFNotaInfoAvulsaResult" type="NFNotaInfoAvulsa">
+<result property="id" column="id"/>
+    <result property="cnpj" column="cnpj"/>
+    <result property="orgaoEmitente" column="orgaoEmitente"/>
+    <result property="matriculaAgente" column="matriculaAgente"/>
+    <result property="nomeAgente" column="nomeAgente"/>
+    <result property="fone" column="fone"/>
+    <result property="uf" column="uf"/>
+    <result property="numeroDocumentoArrecadacaoReceita" column="numeroDocumentoArrecadacaoReceita"/>
+    <result property="dataEmissaoDocumentoArrecadacao" column="dataEmissaoDocumentoArrecadacao"/>
+    <result property="valorTotalConstanteDocumentoArrecadacaoReceita" column="valorTotalConstanteDocumentoArrecadacaoReceita"/>
+    <result property="reparticaoFiscalEmitente" column="reparticaoFiscalEmitente"/>
+    <result property="dataPagamentoDocumentoArrecadacao" column="dataPagamentoDocumentoArrecadacao"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
+
+  <sql id="allNFNotaInfoAvulsaColumns">
+cnpj
+,orgaoEmitente
+,matriculaAgente
+,nomeAgente
+,fone
+,uf
+,numeroDocumentoArrecadacaoReceita
+,dataEmissaoDocumentoArrecadacao
+,valorTotalConstanteDocumentoArrecadacaoReceita
+,reparticaoFiscalEmitente
+,dataPagamentoDocumentoArrecadacao
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allNFNotaInfoAvulsaValues">
+#{cnpj},
+#{orgaoEmitente},
+#{matriculaAgente},
+#{nomeAgente},
+#{fone},
+#{uf},
+#{numeroDocumentoArrecadacaoReceita},
+#{dataEmissaoDocumentoArrecadacao},
+#{valorTotalConstanteDocumentoArrecadacaoReceita},
+#{reparticaoFiscalEmitente},
+#{dataPagamentoDocumentoArrecadacao},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllNFNotaInfoAvulsas" resultMap="NFNotaInfoAvulsaResult">
+    SELECT id,
+ <include refid="allNFNotaInfoAvulsaColumns" />
+   FROM nfnotainfoavulsa ORDER BY id ASC
+ </select>
+
+ <select id="fetchNFNotaInfoAvulsaById" parameterType="Integer" resultMap="NFNotaInfoAvulsaResult">
+    SELECT id,
+ <include refid="allNFNotaInfoAvulsaColumns" />
+   FROM nfnotainfoavulsa WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllNFNotaInfoAvulsasRequest" parameterType="PagedInquiryRequest" resultMap="NFNotaInfoAvulsaResult">
+
+     SELECT id,<include refid="allNFNotaInfoAvulsaColumns" />
+           FROM nfnotainfoavulsa where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchNFNotaInfoAvulsaRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM nfnotainfoavulsa WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+
+ </select>
+
+ <insert id="insertNFNotaInfoAvulsa" parameterType="NFNotaInfoAvulsa" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO nfnotainfoavulsa (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allNFNotaInfoAvulsaColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allNFNotaInfoAvulsaValues" /> )
+ </insert>
+
+ <update id="updateNFNotaInfoAvulsa" parameterType="NFNotaInfoAvulsa">
+   UPDATE nfnotainfoavulsa SET
+<if test="cnpj!= null">cnpj = #{cnpj},</if>
+<if test="orgaoEmitente!= null">orgaoEmitente = #{orgaoEmitente},</if>
+<if test="matriculaAgente!= null">matriculaAgente = #{matriculaAgente},</if>
+<if test="nomeAgente!= null">nomeAgente = #{nomeAgente},</if>
+<if test="fone!= null">fone = #{fone},</if>
+<if test="uf!= null">uf = #{uf},</if>
+<if test="numeroDocumentoArrecadacaoReceita!= null">numeroDocumentoArrecadacaoReceita = #{numeroDocumentoArrecadacaoReceita},</if>
+<if test="dataEmissaoDocumentoArrecadacao!= null">dataEmissaoDocumentoArrecadacao = #{dataEmissaoDocumentoArrecadacao},</if>
+<if test="valorTotalConstanteDocumentoArrecadacaoReceita!= null">valorTotalConstanteDocumentoArrecadacaoReceita = #{valorTotalConstanteDocumentoArrecadacaoReceita},</if>
+<if test="reparticaoFiscalEmitente!= null">reparticaoFiscalEmitente = #{reparticaoFiscalEmitente},</if>
+<if test="dataPagamentoDocumentoArrecadacao!= null">dataPagamentoDocumentoArrecadacao = #{dataPagamentoDocumentoArrecadacao},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteNFNotaInfoAvulsaById" parameterType="NFNotaInfoAvulsa">
+  DELETE FROM nfnotainfoavulsa WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllNFNotaInfoAvulsas">
+ DELETE FROM nfnotainfoavulsa
+  </delete>
+</mapper>
+
+

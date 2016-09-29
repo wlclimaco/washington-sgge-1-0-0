@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 29/09/2016 9:45 : 13-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NFNotaInfoCanaDeducaoMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="NFNotaInfoCanaDeducaoResult" type="NFNotaInfoCanaDeducao">
+  <result property="id" column="id"/>
+    <result property="descricaoDeducao" column="descricaoDeducao"/>
+    <result property="valorDeducao" column="valorDeducao"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
+
+  <sql id="allNFNotaInfoCanaDeducaoColumns">
+descricaoDeducao
+,valorDeducao
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allNFNotaInfoCanaDeducaoValues">
+#{descricaoDeducao},
+#{valorDeducao},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllNFNotaInfoCanaDeducaos" resultMap="NFNotaInfoCanaDeducaoResult">
+    SELECT id,
+ <include refid="allNFNotaInfoCanaDeducaoColumns" />
+   FROM nfnotainfocanadeducao ORDER BY id ASC
+ </select>
+
+ <select id="fetchNFNotaInfoCanaDeducaoById" parameterType="Integer" resultMap="NFNotaInfoCanaDeducaoResult">
+    SELECT id,
+ <include refid="allNFNotaInfoCanaDeducaoColumns" />
+   FROM nfnotainfocanadeducao WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllNFNotaInfoCanaDeducaosRequest" parameterType="PagedInquiryRequest" resultMap="NFNotaInfoCanaDeducaoResult">
+
+     SELECT id,<include refid="allNFNotaInfoCanaDeducaoColumns" />
+           FROM nfnotainfocanadeducao where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchNFNotaInfoCanaDeducaoRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM nfnotainfocanadeducao WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+
+ </select>
+
+ <insert id="insertNFNotaInfoCanaDeducao" parameterType="NFNotaInfoCanaDeducao" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO nfnotainfocanadeducao (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allNFNotaInfoCanaDeducaoColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allNFNotaInfoCanaDeducaoValues" /> )
+ </insert>
+
+ <update id="updateNFNotaInfoCanaDeducao" parameterType="NFNotaInfoCanaDeducao">
+   UPDATE nfnotainfocanadeducao SET
+<if test="descricaoDeducao!= null">descricaoDeducao = #{descricaoDeducao},</if>
+<if test="valorDeducao!= null">valorDeducao = #{valorDeducao},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteNFNotaInfoCanaDeducaoById" parameterType="NFNotaInfoCanaDeducao">
+  DELETE FROM nfnotainfocanadeducao WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllNFNotaInfoCanaDeducaos">
+ DELETE FROM nfnotainfocanadeducao
+  </delete>
+</mapper>
+
+

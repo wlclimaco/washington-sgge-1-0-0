@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 29/09/2016 9:45 : 13-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NFNotaInfoInformacoesAdicionaisMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="NFNotaInfoInformacoesAdicionaisResult" type="NFNotaInfoInformacoesAdicionais">
+  <result property="id" column="id"/>
+    <result property="informacoesAdicionaisInteresseFisco" column="informacoesAdicionaisInteresseFisco"/>
+    <result property="informacoesComplementaresInteresseContribuinte" column="informacoesComplementaresInteresseContribuinte"/>
+
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+<collection property="observacoesContribuinte" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="observacoesFisco" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="processosRefenciado" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+  </resultMap>
+
+  <sql id="allNFNotaInfoInformacoesAdicionaisColumns">
+informacoesAdicionaisInteresseFisco
+,informacoesComplementaresInteresseContribuinte
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allNFNotaInfoInformacoesAdicionaisValues">
+#{informacoesAdicionaisInteresseFisco},
+#{informacoesComplementaresInteresseContribuinte},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllNFNotaInfoInformacoesAdicionaiss" resultMap="NFNotaInfoInformacoesAdicionaisResult">
+    SELECT id,
+ <include refid="allNFNotaInfoInformacoesAdicionaisColumns" />
+   FROM nfnotainfoinformacoesadicionais ORDER BY id ASC
+ </select>
+
+ <select id="fetchNFNotaInfoInformacoesAdicionaisById" parameterType="Integer" resultMap="NFNotaInfoInformacoesAdicionaisResult">
+    SELECT id,
+ <include refid="allNFNotaInfoInformacoesAdicionaisColumns" />
+   FROM nfnotainfoinformacoesadicionais WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllNFNotaInfoInformacoesAdicionaissRequest" parameterType="PagedInquiryRequest" resultMap="NFNotaInfoInformacoesAdicionaisResult">
+
+     SELECT id,<include refid="allNFNotaInfoInformacoesAdicionaisColumns" />
+           FROM nfnotainfoinformacoesadicionais where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchNFNotaInfoInformacoesAdicionaisRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM nfnotainfoinformacoesadicionais WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+
+ </select>
+
+ <insert id="insertNFNotaInfoInformacoesAdicionais" parameterType="NFNotaInfoInformacoesAdicionais" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO nfnotainfoinformacoesadicionais (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allNFNotaInfoInformacoesAdicionaisColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allNFNotaInfoInformacoesAdicionaisValues" /> )
+ </insert>
+
+ <update id="updateNFNotaInfoInformacoesAdicionais" parameterType="NFNotaInfoInformacoesAdicionais">
+   UPDATE nfnotainfoinformacoesadicionais SET
+<if test="informacoesAdicionaisInteresseFisco!= null">informacoesAdicionaisInteresseFisco = #{informacoesAdicionaisInteresseFisco},</if>
+<if test="informacoesComplementaresInteresseContribuinte!= null">informacoesComplementaresInteresseContribuinte = #{informacoesComplementaresInteresseContribuinte},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteNFNotaInfoInformacoesAdicionaisById" parameterType="NFNotaInfoInformacoesAdicionais">
+  DELETE FROM nfnotainfoinformacoesadicionais WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllNFNotaInfoInformacoesAdicionaiss">
+ DELETE FROM nfnotainfoinformacoesadicionais
+  </delete>
+</mapper>
+
+

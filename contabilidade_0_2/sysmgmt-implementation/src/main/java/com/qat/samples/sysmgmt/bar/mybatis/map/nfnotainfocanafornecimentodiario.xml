@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 29/09/2016 9:45 : 13-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NFNotaInfoCanaFornecimentoDiarioMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="NFNotaInfoCanaFornecimentoDiarioResult" type="NFNotaInfoCanaFornecimentoDiario">
+  <result property="id" column="id"/>
+    <result property="dia" column="dia"/>
+    <result property="quantidade" column="quantidade"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
+
+  <sql id="allNFNotaInfoCanaFornecimentoDiarioColumns">
+dia
+,quantidade
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allNFNotaInfoCanaFornecimentoDiarioValues">
+#{dia},
+#{quantidade},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllNFNotaInfoCanaFornecimentoDiarios" resultMap="NFNotaInfoCanaFornecimentoDiarioResult">
+    SELECT id,
+ <include refid="allNFNotaInfoCanaFornecimentoDiarioColumns" />
+   FROM nfnotainfocanafornecimentodiario ORDER BY id ASC
+ </select>
+
+ <select id="fetchNFNotaInfoCanaFornecimentoDiarioById" parameterType="Integer" resultMap="NFNotaInfoCanaFornecimentoDiarioResult">
+    SELECT id,
+ <include refid="allNFNotaInfoCanaFornecimentoDiarioColumns" />
+   FROM nfnotainfocanafornecimentodiario WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllNFNotaInfoCanaFornecimentoDiariosRequest" parameterType="PagedInquiryRequest" resultMap="NFNotaInfoCanaFornecimentoDiarioResult">
+
+     SELECT id,<include refid="allNFNotaInfoCanaFornecimentoDiarioColumns" />
+           FROM nfnotainfocanafornecimentodiario where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchNFNotaInfoCanaFornecimentoDiarioRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM nfnotainfocanafornecimentodiario WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+
+ </select>
+
+ <insert id="insertNFNotaInfoCanaFornecimentoDiario" parameterType="NFNotaInfoCanaFornecimentoDiario" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO nfnotainfocanafornecimentodiario (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allNFNotaInfoCanaFornecimentoDiarioColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allNFNotaInfoCanaFornecimentoDiarioValues" /> )
+ </insert>
+
+ <update id="updateNFNotaInfoCanaFornecimentoDiario" parameterType="NFNotaInfoCanaFornecimentoDiario">
+   UPDATE nfnotainfocanafornecimentodiario SET
+<if test="dia!= null">dia = #{dia},</if>
+<if test="quantidade!= null">quantidade = #{quantidade},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteNFNotaInfoCanaFornecimentoDiarioById" parameterType="NFNotaInfoCanaFornecimentoDiario">
+  DELETE FROM nfnotainfocanafornecimentodiario WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllNFNotaInfoCanaFornecimentoDiarios">
+ DELETE FROM nfnotainfocanafornecimentodiario
+  </delete>
+</mapper>
+
+

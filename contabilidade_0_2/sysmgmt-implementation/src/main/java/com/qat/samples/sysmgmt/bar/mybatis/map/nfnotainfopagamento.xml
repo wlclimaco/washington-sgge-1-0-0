@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 29/09/2016 9:45 : 13-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NFNotaInfoPagamentoMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="NFNotaInfoPagamentoResult" type="NFNotaInfoPagamento">
+<result property="id" column="id"/>
+    <result property="valorPagamento" column="valorPagamento"/>
+
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+<collection property="formaPagamentoMoeda" column="formaPagamentoMoeda" select="RegimeMap.fetchRegimeById"/>
+    <collection property="cartao" column="cartao" select="RegimeMap.fetchRegimeById"/>
+  </resultMap>
+
+  <sql id="allNFNotaInfoPagamentoColumns">
+formaPagamentoMoeda
+,valorPagamento
+,cartao
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allNFNotaInfoPagamentoValues">
+#{formaPagamentoMoeda.id},
+#{valorPagamento},
+#{cartao.id},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllNFNotaInfoPagamentos" resultMap="NFNotaInfoPagamentoResult">
+    SELECT id,
+ <include refid="allNFNotaInfoPagamentoColumns" />
+   FROM nfnotainfopagamento ORDER BY id ASC
+ </select>
+
+ <select id="fetchNFNotaInfoPagamentoById" parameterType="Integer" resultMap="NFNotaInfoPagamentoResult">
+    SELECT id,
+ <include refid="allNFNotaInfoPagamentoColumns" />
+   FROM nfnotainfopagamento WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllNFNotaInfoPagamentosRequest" parameterType="PagedInquiryRequest" resultMap="NFNotaInfoPagamentoResult">
+
+     SELECT id,<include refid="allNFNotaInfoPagamentoColumns" />
+           FROM nfnotainfopagamento where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchNFNotaInfoPagamentoRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM nfnotainfopagamento WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+
+ </select>
+
+ <insert id="insertNFNotaInfoPagamento" parameterType="NFNotaInfoPagamento" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO nfnotainfopagamento (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allNFNotaInfoPagamentoColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allNFNotaInfoPagamentoValues" /> )
+ </insert>
+
+ <update id="updateNFNotaInfoPagamento" parameterType="NFNotaInfoPagamento">
+   UPDATE nfnotainfopagamento SET
+<if test="formaPagamentoMoeda!= null">formaPagamentoMoeda = #{formaPagamentoMoeda.id},</if>
+<if test="valorPagamento!= null">valorPagamento = #{valorPagamento},</if>
+<if test="cartao!= null">cartao = #{cartao.id},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteNFNotaInfoPagamentoById" parameterType="NFNotaInfoPagamento">
+  DELETE FROM nfnotainfopagamento WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllNFNotaInfoPagamentos">
+ DELETE FROM nfnotainfopagamento
+  </delete>
+</mapper>
+
+

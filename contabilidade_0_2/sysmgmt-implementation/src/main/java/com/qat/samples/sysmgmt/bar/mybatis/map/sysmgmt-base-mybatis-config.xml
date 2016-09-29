@@ -12,6 +12,44 @@
 
     <typeAliases>
 
+
+     <!--  Nota Fiscal -->
+ <typeAlias alias="NFNota" type="com.qat.samples.sysmgmt.nfe.model.NFNota" />
+<typeAlias alias="NFNotaInfo" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfo" />
+<typeAlias alias="NFNotaInfoIdentificacao" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoIdentificacao" />
+<typeAlias alias="NFInfoModelo1Por1AReferenciada" type="com.qat.samples.sysmgmt.nfe.model.NFInfoModelo1Por1AReferenciada" />
+<typeAlias alias="NFInfoReferenciada" type="com.qat.samples.sysmgmt.nfe.model.NFInfoReferenciada" />
+<typeAlias alias="NFInfoProdutorRuralReferenciada" type="com.qat.samples.sysmgmt.nfe.model.NFInfoProdutorRuralReferenciada" />
+<typeAlias alias="NFNotaInfoEmitente" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoEmitente" />
+<typeAlias alias="NFNotaInfoAvulsa" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoAvulsa" />
+<typeAlias alias="NFNotaInfoDestinatario" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoDestinatario" />
+<typeAlias alias="NFNotaInfoLocal" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoLocal" />
+<typeAlias alias="NFPessoaAutorizadaDownloadNFe" type="com.qat.samples.sysmgmt.nfe.model.NFPessoaAutorizadaDownloadNFe" />
+<typeAlias alias="NFNotaInfoTotal" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoTotal" />
+<typeAlias alias="NFNotaInfoICMSTotal" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoICMSTotal" />
+<typeAlias alias="NFNotaInfoISSQNTotal" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoISSQNTotal" />
+<typeAlias alias="NFNotaInfoRetencoesTributos" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoRetencoesTributos" />
+<typeAlias alias="NFNotaInfoTransporte" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoTransporte" />
+<typeAlias alias="NFNotaInfoRetencaoICMSTransporte" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoRetencaoICMSTransporte" />
+<typeAlias alias="NFNotaInfoTransportador" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoTransportador" />
+<typeAlias alias="NFNotaInfoVeiculo" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoVeiculo" />
+<typeAlias alias="NFNotaInfoReboque" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoReboque" />
+<typeAlias alias="NFNotaInfoCobranca" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoCobranca" />
+<typeAlias alias="NFNotaInfoDuplicata" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoDuplicata" />
+<typeAlias alias="NFNotaInfoFatura" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoFatura" />
+<typeAlias alias="NFNotaInfoCartao" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoCartao" />
+<typeAlias alias="NFNotaInfoPagamento" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoPagamento" />
+<typeAlias alias="NFNotaInfoInformacoesAdicionais" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoInformacoesAdicionais" />
+<typeAlias alias="NFNotaInfoObservacao" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoObservacao" />
+<typeAlias alias="NFNotaInfoProcessoReferenciado" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoProcessoReferenciado" />
+ <typeAlias alias="NFNotaInfoExportacao" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoExportacao" />
+<typeAlias alias="NFNotaInfoCompra" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoCompra" />
+<typeAlias alias="NFNotaInfoCana" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoCana" />
+<typeAlias alias="NFNotaInfoCanaFornecimentoDiario" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoCanaFornecimentoDiario" />
+<typeAlias alias="NFNotaInfoCanaDeducao" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoCanaDeducao" />
+<typeAlias alias="NFNotaInfoSuplementar" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoSuplementar" />
+
+
     	<typeAlias alias="PlanoByEmpresa" type="com.qat.samples.sysmgmt.site.model.PlanoByEmpresa" />
 
     	<typeAlias alias="Ajuda" type="com.qat.samples.sysmgmt.entidade.model.Ajuda" />
@@ -512,6 +550,41 @@
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/notafiscalsaida.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/orcamento.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/conhecimentoTransporte.xml" />
+
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfinfomodelo1por1areferenciada.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfinfoprodutorruralreferenciada.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfinforeferenciada.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnota.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfo.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfoavulsa.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfocana.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfocanadeducao.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfocanafornecimentodiario.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfocartao.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfocobranca.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfocompra.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfodestinatario.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfoduplicata.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfoemitente.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfoexportacao.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfofatura.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfoicmstotal.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfoidentificacao.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfoinformacoesadicionais.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfoissqntotal.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfolocal.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfoobservacao.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfopagamento.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfoprocessoreferenciado.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainforeboque.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInforetencaoicmstransporte.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainforetencoestributos.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfosuplementar.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfototal.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfotransportador.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfotransporte.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfoveiculo.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfpessoaautorizadadownloadnfe.xml" />
     </mappers>
 
 </configuration>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 29/09/2016 9:45 : 13-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NFNotaInfoIdentificacaoMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="NFNotaInfoIdentificacaoResult" type="NFNotaInfoIdentificacao">
+<result property="id" column="id"/>
+    <result property="codigoRandomico" column="codigoRandomico"/>
+    <result property="naturezaOperacao" column="naturezaOperacao"/>
+
+    <result property="serie" column="serie"/>
+    <result property="numeroNota" column="numeroNota"/>
+    <result property="dataHoraEmissao" column="dataHoraEmissao"/>
+    <result property="dataHoraSaidaOuEntrada" column="dataHoraSaidaOuEntrada"/>
+    <result property="codigoMunicipio" column="codigoMunicipio"/>
+    <result property="digitoVerificador" column="digitoVerificador"/>
+    <result property="versaoEmissor" column="versaoEmissor"/>
+    <result property="dataHoraContigencia" column="dataHoraContigencia"/>
+    <result property="justificativaEntradaContingencia" column="justificativaEntradaContingencia"/>
+
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+<collection property="uf" column="uf" select="RegimeMap.fetchRegimeById"/>
+ <collection property="formaPagamento" column="formaPagamento" select="RegimeMap.fetchRegimeById"/>
+    <collection property="modelo" column="modelo" select="RegimeMap.fetchRegimeById"/>
+    <collection property="tipo" column="tipo" select="RegimeMap.fetchRegimeById"/>
+    <collection property="identificadorLocalDestinoOperacao" column="identificadorLocalDestinoOperacao" select="RegimeMap.fetchRegimeById"/>
+    <collection property="tipoImpressao" column="tipoImpressao" select="RegimeMap.fetchRegimeById"/>
+    <collection property="tipoEmissao" column="tipoEmissao" select="RegimeMap.fetchRegimeById"/>
+    <collection property="ambiente" column="ambiente" select="RegimeMap.fetchRegimeById"/>
+    <collection property="finalidade" column="finalidade" select="RegimeMap.fetchRegimeById"/>
+    <collection property="operacaoConsumidorFinal" column="operacaoConsumidorFinal" select="RegimeMap.fetchRegimeById"/>
+    <collection property="indicadorPresencaComprador" column="indicadorPresencaComprador" select="RegimeMap.fetchRegimeById"/>
+    <collection property="programaEmissor" column="programaEmissor" select="RegimeMap.fetchRegimeById"/>
+    <collection property="referenciadas" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+  </resultMap>
+
+  <sql id="allNFNotaInfoIdentificacaoColumns">
+uf
+,codigoRandomico
+,naturezaOperacao
+,formaPagamento
+,modelo
+,serie
+,numeroNota
+,dataHoraEmissao
+,dataHoraSaidaOuEntrada
+,tipo
+,identificadorLocalDestinoOperacao
+,codigoMunicipio
+,tipoImpressao
+,tipoEmissao
+,digitoVerificador
+,ambiente
+,finalidade
+,operacaoConsumidorFinal
+,indicadorPresencaComprador
+,programaEmissor
+,versaoEmissor
+,dataHoraContigencia
+,justificativaEntradaContingencia
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allNFNotaInfoIdentificacaoValues">
+#{uf.id},
+#{codigoRandomico},
+#{naturezaOperacao},
+#{formaPagamento.id},
+#{modelo.id},
+#{serie},
+#{numeroNota},
+#{dataHoraEmissao},
+#{dataHoraSaidaOuEntrada},
+#{tipo.id},
+#{identificadorLocalDestinoOperacao.id},
+#{codigoMunicipio},
+#{tipoImpressao.id},
+#{tipoEmissao.id},
+#{digitoVerificador},
+#{ambiente.id},
+#{finalidade.id},
+#{operacaoConsumidorFinal.id},
+#{indicadorPresencaComprador.id},
+#{programaEmissor.id},
+#{versaoEmissor},
+#{dataHoraContigencia},
+#{justificativaEntradaContingencia},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllNFNotaInfoIdentificacaos" resultMap="NFNotaInfoIdentificacaoResult">
+    SELECT id,
+ <include refid="allNFNotaInfoIdentificacaoColumns" />
+   FROM nfnotainfoidentificacao ORDER BY id ASC
+ </select>
+
+ <select id="fetchNFNotaInfoIdentificacaoById" parameterType="Integer" resultMap="NFNotaInfoIdentificacaoResult">
+    SELECT id,
+ <include refid="allNFNotaInfoIdentificacaoColumns" />
+   FROM nfnotainfoidentificacao WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllNFNotaInfoIdentificacaosRequest" parameterType="PagedInquiryRequest" resultMap="NFNotaInfoIdentificacaoResult">
+
+     SELECT id,<include refid="allNFNotaInfoIdentificacaoColumns" />
+           FROM nfnotainfoidentificacao where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchNFNotaInfoIdentificacaoRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM nfnotainfoidentificacao WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+
+ </select>
+
+ <insert id="insertNFNotaInfoIdentificacao" parameterType="NFNotaInfoIdentificacao" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO nfnotainfoidentificacao (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allNFNotaInfoIdentificacaoColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allNFNotaInfoIdentificacaoValues" /> )
+ </insert>
+
+ <update id="updateNFNotaInfoIdentificacao" parameterType="NFNotaInfoIdentificacao">
+   UPDATE nfnotainfoidentificacao SET
+<if test="uf!= null">uf = #{uf.id},</if>
+<if test="codigoRandomico!= null">codigoRandomico = #{codigoRandomico},</if>
+<if test="naturezaOperacao!= null">naturezaOperacao = #{naturezaOperacao},</if>
+<if test="formaPagamento!= null">formaPagamento = #{formaPagamento.id},</if>
+<if test="modelo!= null">modelo = #{modelo.id},</if>
+<if test="serie!= null">serie = #{serie},</if>
+<if test="numeroNota!= null">numeroNota = #{numeroNota},</if>
+<if test="dataHoraEmissao!= null">dataHoraEmissao = #{dataHoraEmissao},</if>
+<if test="dataHoraSaidaOuEntrada!= null">dataHoraSaidaOuEntrada = #{dataHoraSaidaOuEntrada},</if>
+<if test="tipo!= null">tipo = #{tipo.id},</if>
+<if test="identificadorLocalDestinoOperacao!= null">identificadorLocalDestinoOperacao = #{identificadorLocalDestinoOperacao.id},</if>
+<if test="codigoMunicipio!= null">codigoMunicipio = #{codigoMunicipio},</if>
+<if test="tipoImpressao!= null">tipoImpressao = #{tipoImpressao.id},</if>
+<if test="tipoEmissao!= null">tipoEmissao = #{tipoEmissao.id},</if>
+<if test="digitoVerificador!= null">digitoVerificador = #{digitoVerificador},</if>
+<if test="ambiente!= null">ambiente = #{ambiente.id},</if>
+<if test="finalidade!= null">finalidade = #{finalidade.id},</if>
+<if test="operacaoConsumidorFinal!= null">operacaoConsumidorFinal = #{operacaoConsumidorFinal.id},</if>
+<if test="indicadorPresencaComprador!= null">indicadorPresencaComprador = #{indicadorPresencaComprador.id},</if>
+<if test="programaEmissor!= null">programaEmissor = #{programaEmissor.id},</if>
+<if test="versaoEmissor!= null">versaoEmissor = #{versaoEmissor},</if>
+<if test="dataHoraContigencia!= null">dataHoraContigencia = #{dataHoraContigencia},</if>
+<if test="justificativaEntradaContingencia!= null">justificativaEntradaContingencia = #{justificativaEntradaContingencia},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteNFNotaInfoIdentificacaoById" parameterType="NFNotaInfoIdentificacao">
+  DELETE FROM nfnotainfoidentificacao WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllNFNotaInfoIdentificacaos">
+ DELETE FROM nfnotainfoidentificacao
+  </delete>
+</mapper>
+
+

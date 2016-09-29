@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 29/09/2016 9:45 : 13-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NFNotaInfoISSQNTotalMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="NFNotaInfoISSQNTotalResult" type="NFNotaInfoISSQNTotal">
+     <result property="id" column="id"/>
+    <result property="valorTotalServicosSobNaoIncidenciaNaoTributadosICMS" column="valorTotalServicosSobNaoIncidenciaNaoTributadosICMS"/>
+    <result property="baseCalculoISS" column="baseCalculoISS"/>
+    <result property="valorTotalISS" column="valorTotalISS"/>
+    <result property="valorPISsobreServicos" column="valorPISsobreServicos"/>
+    <result property="valorCOFINSsobreServicos" column="valorCOFINSsobreServicos"/>
+    <result property="dataPrestacaoServico" column="dataPrestacaoServico"/>
+    <result property="valorDeducao" column="valorDeducao"/>
+    <result property="valorOutros" column="valorOutros"/>
+    <result property="valorTotalDescontoIncondicionado" column="valorTotalDescontoIncondicionado"/>
+    <result property="valorTotalDescontoCondicionado" column="valorTotalDescontoCondicionado"/>
+    <result property="valorTotalRetencaoISS" column="valorTotalRetencaoISS"/>
+
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+<collection property="tributacao" column="tributacao" select="RegimeMap.fetchRegimeById"/>
+  </resultMap>
+
+  <sql id="allNFNotaInfoISSQNTotalColumns">
+valorTotalServicosSobNaoIncidenciaNaoTributadosICMS
+,baseCalculoISS
+,valorTotalISS
+,valorPISsobreServicos
+,valorCOFINSsobreServicos
+,dataPrestacaoServico
+,valorDeducao
+,valorOutros
+,valorTotalDescontoIncondicionado
+,valorTotalDescontoCondicionado
+,valorTotalRetencaoISS
+,tributacao
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allNFNotaInfoISSQNTotalValues">
+#{valorTotalServicosSobNaoIncidenciaNaoTributadosICMS},
+#{baseCalculoISS},
+#{valorTotalISS},
+#{valorPISsobreServicos},
+#{valorCOFINSsobreServicos},
+#{dataPrestacaoServico},
+#{valorDeducao},
+#{valorOutros},
+#{valorTotalDescontoIncondicionado},
+#{valorTotalDescontoCondicionado},
+#{valorTotalRetencaoISS},
+#{tributacao.id},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllNFNotaInfoISSQNTotals" resultMap="NFNotaInfoISSQNTotalResult">
+    SELECT id,
+ <include refid="allNFNotaInfoISSQNTotalColumns" />
+   FROM nfnotainfoissqntotal ORDER BY id ASC
+ </select>
+
+ <select id="fetchNFNotaInfoISSQNTotalById" parameterType="Integer" resultMap="NFNotaInfoISSQNTotalResult">
+    SELECT id,
+ <include refid="allNFNotaInfoISSQNTotalColumns" />
+   FROM nfnotainfoissqntotal WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllNFNotaInfoISSQNTotalsRequest" parameterType="PagedInquiryRequest" resultMap="NFNotaInfoISSQNTotalResult">
+
+     SELECT id,<include refid="allNFNotaInfoISSQNTotalColumns" />
+           FROM nfnotainfoissqntotal where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchNFNotaInfoISSQNTotalRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM nfnotainfoissqntotal WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+
+ </select>
+
+ <insert id="insertNFNotaInfoISSQNTotal" parameterType="NFNotaInfoISSQNTotal" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO nfnotainfoissqntotal (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allNFNotaInfoISSQNTotalColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allNFNotaInfoISSQNTotalValues" /> )
+ </insert>
+
+ <update id="updateNFNotaInfoISSQNTotal" parameterType="NFNotaInfoISSQNTotal">
+   UPDATE nfnotainfoissqntotal SET
+<if test="valorTotalServicosSobNaoIncidenciaNaoTributadosICMS!= null">valorTotalServicosSobNaoIncidenciaNaoTributadosICMS = #{valorTotalServicosSobNaoIncidenciaNaoTributadosICMS},</if>
+<if test="baseCalculoISS!= null">baseCalculoISS = #{baseCalculoISS},</if>
+<if test="valorTotalISS!= null">valorTotalISS = #{valorTotalISS},</if>
+<if test="valorPISsobreServicos!= null">valorPISsobreServicos = #{valorPISsobreServicos},</if>
+<if test="valorCOFINSsobreServicos!= null">valorCOFINSsobreServicos = #{valorCOFINSsobreServicos},</if>
+<if test="dataPrestacaoServico!= null">dataPrestacaoServico = #{dataPrestacaoServico},</if>
+<if test="valorDeducao!= null">valorDeducao = #{valorDeducao},</if>
+<if test="valorOutros!= null">valorOutros = #{valorOutros},</if>
+<if test="valorTotalDescontoIncondicionado!= null">valorTotalDescontoIncondicionado = #{valorTotalDescontoIncondicionado},</if>
+<if test="valorTotalDescontoCondicionado!= null">valorTotalDescontoCondicionado = #{valorTotalDescontoCondicionado},</if>
+<if test="valorTotalRetencaoISS!= null">valorTotalRetencaoISS = #{valorTotalRetencaoISS},</if>
+<if test="tributacao!= null">tributacao = #{tributacao.id},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteNFNotaInfoISSQNTotalById" parameterType="NFNotaInfoISSQNTotal">
+  DELETE FROM nfnotainfoissqntotal WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllNFNotaInfoISSQNTotals">
+ DELETE FROM nfnotainfoissqntotal
+  </delete>
+</mapper>
+
+

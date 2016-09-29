@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 29/09/2016 9:45 : 13-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NFNotaInfoProcessoReferenciadoMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="NFNotaInfoProcessoReferenciadoResult" type="NFNotaInfoProcessoReferenciado">
+  <result property="id" column="id"/>
+    <result property="identificadorProcessoOuAtoConcessorio" column="identificadorProcessoOuAtoConcessorio"/>
+
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+<collection property="indicadorOrigemProcesso" column="indicadorOrigemProcesso" select="RegimeMap.fetchRegimeById"/>
+  </resultMap>
+
+  <sql id="allNFNotaInfoProcessoReferenciadoColumns">
+identificadorProcessoOuAtoConcessorio
+,indicadorOrigemProcesso
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allNFNotaInfoProcessoReferenciadoValues">
+#{identificadorProcessoOuAtoConcessorio},
+#{indicadorOrigemProcesso.id},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllNFNotaInfoProcessoReferenciados" resultMap="NFNotaInfoProcessoReferenciadoResult">
+    SELECT id,
+ <include refid="allNFNotaInfoProcessoReferenciadoColumns" />
+   FROM nfnotainfoprocessoreferenciado ORDER BY id ASC
+ </select>
+
+ <select id="fetchNFNotaInfoProcessoReferenciadoById" parameterType="Integer" resultMap="NFNotaInfoProcessoReferenciadoResult">
+    SELECT id,
+ <include refid="allNFNotaInfoProcessoReferenciadoColumns" />
+   FROM nfnotainfoprocessoreferenciado WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllNFNotaInfoProcessoReferenciadosRequest" parameterType="PagedInquiryRequest" resultMap="NFNotaInfoProcessoReferenciadoResult">
+
+     SELECT id,<include refid="allNFNotaInfoProcessoReferenciadoColumns" />
+           FROM nfnotainfoprocessoreferenciado where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchNFNotaInfoProcessoReferenciadoRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM nfnotainfoprocessoreferenciado WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+
+ </select>
+
+ <insert id="insertNFNotaInfoProcessoReferenciado" parameterType="NFNotaInfoProcessoReferenciado" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO nfnotainfoprocessoreferenciado (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allNFNotaInfoProcessoReferenciadoColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allNFNotaInfoProcessoReferenciadoValues" /> )
+ </insert>
+
+ <update id="updateNFNotaInfoProcessoReferenciado" parameterType="NFNotaInfoProcessoReferenciado">
+   UPDATE nfnotainfoprocessoreferenciado SET
+<if test="identificadorProcessoOuAtoConcessorio!= null">identificadorProcessoOuAtoConcessorio = #{identificadorProcessoOuAtoConcessorio},</if>
+<if test="indicadorOrigemProcesso!= null">indicadorOrigemProcesso = #{indicadorOrigemProcesso.id},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteNFNotaInfoProcessoReferenciadoById" parameterType="NFNotaInfoProcessoReferenciado">
+  DELETE FROM nfnotainfoprocessoreferenciado WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllNFNotaInfoProcessoReferenciados">
+ DELETE FROM nfnotainfoprocessoreferenciado
+  </delete>
+</mapper>
+
+

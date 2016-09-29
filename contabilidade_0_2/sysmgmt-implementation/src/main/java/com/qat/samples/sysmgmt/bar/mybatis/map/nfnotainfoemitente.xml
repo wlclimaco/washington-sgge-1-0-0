@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 29/09/2016 9:45 : 13-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NFNotaInfoEmitenteMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="NFNotaInfoEmitenteResult" type="NFNotaInfoEmitente">
+  <result property="id" column="id"/>
+    <result property="cnpj" column="cnpj"/>
+    <result property="cpf" column="cpf"/>
+    <result property="razaoSocial" column="razaoSocial"/>
+    <result property="nomeFantasia" column="nomeFantasia"/>
+    <result property="inscricaoEstadual" column="inscricaoEstadual"/>
+    <result property="inscricaoEstadualSubstituicaoTributaria" column="inscricaoEstadualSubstituicaoTributaria"/>
+    <result property="inscricaoMunicipal" column="inscricaoMunicipal"/>
+    <result property="classificacaoNacionalAtividadesEconomicas" column="classificacaoNacionalAtividadesEconomicas"/>
+	<result property="parentId" column="parentId"/>
+	<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+	<result property="emprId" column="emprId"/>
+	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<collection property="regimeTributario" column="regimeTributario" select="RegimeMap.fetchRegimeById"/>
+	<collection property="endereco" column="endereco" select="RegimeMap.fetchRegimeById"/>
+  </resultMap>
+
+  <sql id="allNFNotaInfoEmitenteColumns">
+cnpj
+,cpf
+,razaoSocial
+,nomeFantasia
+,endereco
+,inscricaoEstadual
+,inscricaoEstadualSubstituicaoTributaria
+,inscricaoMunicipal
+,classificacaoNacionalAtividadesEconomicas
+,regimeTributario
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allNFNotaInfoEmitenteValues">
+#{cnpj},
+#{cpf},
+#{razaoSocial},
+#{nomeFantasia},
+#{endereco.id},
+#{inscricaoEstadual},
+#{inscricaoEstadualSubstituicaoTributaria},
+#{inscricaoMunicipal},
+#{classificacaoNacionalAtividadesEconomicas},
+#{regimeTributario.id},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllNFNotaInfoEmitentes" resultMap="NFNotaInfoEmitenteResult">
+    SELECT id,
+ <include refid="allNFNotaInfoEmitenteColumns" />
+   FROM nfnotainfoemitente ORDER BY id ASC
+ </select>
+
+ <select id="fetchNFNotaInfoEmitenteById" parameterType="Integer" resultMap="NFNotaInfoEmitenteResult">
+    SELECT id,
+ <include refid="allNFNotaInfoEmitenteColumns" />
+   FROM nfnotainfoemitente WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllNFNotaInfoEmitentesRequest" parameterType="PagedInquiryRequest" resultMap="NFNotaInfoEmitenteResult">
+
+     SELECT id,<include refid="allNFNotaInfoEmitenteColumns" />
+           FROM nfnotainfoemitente where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchNFNotaInfoEmitenteRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM nfnotainfoemitente WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+
+ </select>
+
+ <insert id="insertNFNotaInfoEmitente" parameterType="NFNotaInfoEmitente" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO nfnotainfoemitente (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allNFNotaInfoEmitenteColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allNFNotaInfoEmitenteValues" /> )
+ </insert>
+
+ <update id="updateNFNotaInfoEmitente" parameterType="NFNotaInfoEmitente">
+   UPDATE nfnotainfoemitente SET
+<if test="cnpj!= null">cnpj = #{cnpj},</if>
+<if test="cpf!= null">cpf = #{cpf},</if>
+<if test="razaoSocial!= null">razaoSocial = #{razaoSocial},</if>
+<if test="nomeFantasia!= null">nomeFantasia = #{nomeFantasia},</if>
+<if test="endereco!= null">endereco = #{endereco.id},</if>
+<if test="inscricaoEstadual!= null">inscricaoEstadual = #{inscricaoEstadual},</if>
+<if test="inscricaoEstadualSubstituicaoTributaria!= null">inscricaoEstadualSubstituicaoTributaria = #{inscricaoEstadualSubstituicaoTributaria},</if>
+<if test="inscricaoMunicipal!= null">inscricaoMunicipal = #{inscricaoMunicipal},</if>
+<if test="classificacaoNacionalAtividadesEconomicas!= null">classificacaoNacionalAtividadesEconomicas = #{classificacaoNacionalAtividadesEconomicas},</if>
+<if test="regimeTributario!= null">regimeTributario = #{regimeTributario.id},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteNFNotaInfoEmitenteById" parameterType="NFNotaInfoEmitente">
+  DELETE FROM nfnotainfoemitente WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllNFNotaInfoEmitentes">
+ DELETE FROM nfnotainfoemitente
+  </delete>
+</mapper>
+
+

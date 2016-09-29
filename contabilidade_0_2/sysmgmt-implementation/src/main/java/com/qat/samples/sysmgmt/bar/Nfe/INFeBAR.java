@@ -2,6 +2,7 @@
 package com.qat.samples.sysmgmt.bar.Nfe;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.nfe.model.NFInfoCupomFiscalReferenciado;
 import com.qat.samples.sysmgmt.nfe.model.NFInfoModelo1Por1AReferenciada;
 import com.qat.samples.sysmgmt.nfe.model.NFInfoProdutorRuralReferenciada;
 import com.qat.samples.sysmgmt.nfe.model.NFInfoReferenciada;
@@ -1986,5 +1987,64 @@ public interface INFeBAR
 * @return the internal results response
 */
 	public InternalResultsResponse<NFNotaInfoSuplementar> fetchNFNotaInfoSuplementarsByRequest(PagedInquiryRequest request);
+
+
+	/**
+	 * Fetch nfinfocupomfiscalreferenciado by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public NFInfoCupomFiscalReferenciado fetchNFInfoCupomFiscalReferenciadoById(FetchByIdRequest request);
+
+	/**
+* Insert nfinfocupomfiscalreferenciado.
+*
+* @param nfinfocupomfiscalreferenciado the nfinfocupomfiscalreferenciado
+*
+* @return the internal response
+*/
+	public InternalResponse insertNFInfoCupomFiscalReferenciado(NFInfoCupomFiscalReferenciado nfinfocupomfiscalreferenciado);
+
+	/**
+* Update nfinfocupomfiscalreferenciado.
+*
+* @param nfinfocupomfiscalreferenciado the nfinfocupomfiscalreferenciado
+*
+* @return the internal response
+*/
+	public InternalResponse updateNFInfoCupomFiscalReferenciado(NFInfoCupomFiscalReferenciado nfinfocupomfiscalreferenciado);
+
+	/**
+* Delete nfinfocupomfiscalreferenciado.
+*
+* @param nfinfocupomfiscalreferenciado the nfinfocupomfiscalreferenciado
+*
+* @return the internal response
+*/
+	public InternalResponse deleteNFInfoCupomFiscalReferenciadoById(NFInfoCupomFiscalReferenciado nfinfocupomfiscalreferenciado);
+
+	/**
+* Delete all nfinfocupomfiscalreferenciados.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllNFInfoCupomFiscalReferenciados();
+
+	/**
+* Fetch all nfinfocupomfiscalreferenciados.
+*
+* @return the list< nfinfocupomfiscalreferenciado>
+*/
+	public InternalResultsResponse<NFInfoCupomFiscalReferenciado> fetchAllNFInfoCupomFiscalReferenciados(NFInfoCupomFiscalReferenciado  nfinfocupomfiscalreferenciado);
+
+	/**
+* Fetch nfinfocupomfiscalreferenciados by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<NFInfoCupomFiscalReferenciado> fetchNFInfoCupomFiscalReferenciadosByRequest(PagedInquiryRequest request);
+
 
 }

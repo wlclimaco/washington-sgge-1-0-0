@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 29/09/2016 9:45 : 13-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NFNotaInfoFaturaMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="NFNotaInfoFaturaResult" type="NFNotaInfoFatura">
+  <result property="id" column="id"/>
+    <result property="numeroFatura" column="numeroFatura"/>
+    <result property="valorOriginalFatura" column="valorOriginalFatura"/>
+    <result property="valorDesconto" column="valorDesconto"/>
+    <result property="valorLiquidoFatura" column="valorLiquidoFatura"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
+
+  <sql id="allNFNotaInfoFaturaColumns">
+numeroFatura
+,valorOriginalFatura
+,valorDesconto
+,valorLiquidoFatura
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allNFNotaInfoFaturaValues">
+#{numeroFatura},
+#{valorOriginalFatura},
+#{valorDesconto},
+#{valorLiquidoFatura},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllNFNotaInfoFaturas" resultMap="NFNotaInfoFaturaResult">
+    SELECT id,
+ <include refid="allNFNotaInfoFaturaColumns" />
+   FROM nfnotainfofatura ORDER BY id ASC
+ </select>
+
+ <select id="fetchNFNotaInfoFaturaById" parameterType="Integer" resultMap="NFNotaInfoFaturaResult">
+    SELECT id,
+ <include refid="allNFNotaInfoFaturaColumns" />
+   FROM nfnotainfofatura WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllNFNotaInfoFaturasRequest" parameterType="PagedInquiryRequest" resultMap="NFNotaInfoFaturaResult">
+
+     SELECT id,<include refid="allNFNotaInfoFaturaColumns" />
+           FROM nfnotainfofatura where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchNFNotaInfoFaturaRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM nfnotainfofatura WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+
+ </select>
+
+ <insert id="insertNFNotaInfoFatura" parameterType="NFNotaInfoFatura" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO nfnotainfofatura (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allNFNotaInfoFaturaColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allNFNotaInfoFaturaValues" /> )
+ </insert>
+
+ <update id="updateNFNotaInfoFatura" parameterType="NFNotaInfoFatura">
+   UPDATE nfnotainfofatura SET
+<if test="numeroFatura!= null">numeroFatura = #{numeroFatura},</if>
+<if test="valorOriginalFatura!= null">valorOriginalFatura = #{valorOriginalFatura},</if>
+<if test="valorDesconto!= null">valorDesconto = #{valorDesconto},</if>
+<if test="valorLiquidoFatura!= null">valorLiquidoFatura = #{valorLiquidoFatura},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteNFNotaInfoFaturaById" parameterType="NFNotaInfoFatura">
+  DELETE FROM nfnotainfofatura WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllNFNotaInfoFaturas">
+ DELETE FROM nfnotainfofatura
+  </delete>
+</mapper>
+
+

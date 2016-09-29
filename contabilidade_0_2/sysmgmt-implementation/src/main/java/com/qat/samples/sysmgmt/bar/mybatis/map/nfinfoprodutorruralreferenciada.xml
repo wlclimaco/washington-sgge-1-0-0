@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 29/09/2016 9:45 : 13-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NFInfoProdutorRuralReferenciadaMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="NFInfoProdutorRuralReferenciadaResult" type="NFInfoProdutorRuralReferenciada">
+<result property="id" column="id"/>
+<result property="anoMesEmissao" column="anoMesEmissao"/>
+<result property="cnpjEmitente" column="cnpjEmitente"/>
+<result property="cpfEmitente" column="cpfEmitente"/>
+<result property="ieEmitente" column="ieEmitente"/>
+<result property="modeloDocumentoFiscal" column="modeloDocumentoFiscal"/>
+<result property="serieDocumentoFiscal" column="serieDocumentoFiscal"/>
+<result property="numeroDocumentoFiscal" column="numeroDocumentoFiscal"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+<collection property="ufEmitente" column="ufEmitente" select="RegimeMap.fetchRegimeById"/>
+  </resultMap>
+
+  <sql id="allNFInfoProdutorRuralReferenciadaColumns">
+ufEmitente
+,anoMesEmissao
+,cnpjEmitente
+,cpfEmitente
+,ieEmitente
+,modeloDocumentoFiscal
+,serieDocumentoFiscal
+,numeroDocumentoFiscal
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allNFInfoProdutorRuralReferenciadaValues">
+#{ufEmitente.id},
+#{anoMesEmissao},
+#{cnpjEmitente},
+#{cpfEmitente},
+#{ieEmitente},
+#{modeloDocumentoFiscal},
+#{serieDocumentoFiscal},
+#{numeroDocumentoFiscal},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllNFInfoProdutorRuralReferenciadas" resultMap="NFInfoProdutorRuralReferenciadaResult">
+    SELECT id,
+ <include refid="allNFInfoProdutorRuralReferenciadaColumns" />
+   FROM nfinfoprodutorruralreferenciada ORDER BY id ASC
+ </select>
+
+ <select id="fetchNFInfoProdutorRuralReferenciadaById" parameterType="Integer" resultMap="NFInfoProdutorRuralReferenciadaResult">
+    SELECT id,
+ <include refid="allNFInfoProdutorRuralReferenciadaColumns" />
+   FROM nfinfoprodutorruralreferenciada WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllNFInfoProdutorRuralReferenciadasRequest" parameterType="PagedInquiryRequest" resultMap="NFInfoProdutorRuralReferenciadaResult">
+
+     SELECT id,<include refid="allNFInfoProdutorRuralReferenciadaColumns" />
+           FROM nfinfoprodutorruralreferenciada where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchNFInfoProdutorRuralReferenciadaRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM nfinfoprodutorruralreferenciada WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+
+ </select>
+
+ <insert id="insertNFInfoProdutorRuralReferenciada" parameterType="NFInfoProdutorRuralReferenciada" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO nfinfoprodutorruralreferenciada (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allNFInfoProdutorRuralReferenciadaColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allNFInfoProdutorRuralReferenciadaValues" /> )
+ </insert>
+
+ <update id="updateNFInfoProdutorRuralReferenciada" parameterType="NFInfoProdutorRuralReferenciada">
+   UPDATE nfinfoprodutorruralreferenciada SET
+<if test="ufEmitente!= null">ufEmitente = #{ufEmitente.id},</if>
+<if test="anoMesEmissao!= null">anoMesEmissao = #{anoMesEmissao},</if>
+<if test="cnpjEmitente!= null">cnpjEmitente = #{cnpjEmitente},</if>
+<if test="cpfEmitente!= null">cpfEmitente = #{cpfEmitente},</if>
+<if test="ieEmitente!= null">ieEmitente = #{ieEmitente},</if>
+<if test="modeloDocumentoFiscal!= null">modeloDocumentoFiscal = #{modeloDocumentoFiscal},</if>
+<if test="serieDocumentoFiscal!= null">serieDocumentoFiscal = #{serieDocumentoFiscal},</if>
+<if test="numeroDocumentoFiscal!= null">numeroDocumentoFiscal = #{numeroDocumentoFiscal},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteNFInfoProdutorRuralReferenciadaById" parameterType="NFInfoProdutorRuralReferenciada">
+  DELETE FROM nfinfoprodutorruralreferenciada WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllNFInfoProdutorRuralReferenciadas">
+ DELETE FROM nfinfoprodutorruralreferenciada
+  </delete>
+</mapper>
+
+

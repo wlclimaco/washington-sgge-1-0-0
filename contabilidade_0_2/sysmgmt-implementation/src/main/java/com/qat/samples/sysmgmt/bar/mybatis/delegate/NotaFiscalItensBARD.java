@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
@@ -38,7 +39,7 @@ public final class NotaFiscalItensBARD extends SqlSessionDaoSupport
 	 */
 	@SuppressWarnings("unchecked")
 	public static Integer maintainNotaFiscalItensAssociations(List<NotaFiscalItens> cidadeList,
-			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IVendasBAR NotaFiscalItensDAC, IStatusBAR statusBAR, IHistoricoBAR historicoBAR,
 			Integer empId,
 			String UserId, Integer processId, Integer historicoId)
