@@ -325,6 +325,9 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	NFNOTAINFODUPLICATA(73, "sendsolv.base.model.risklevelenum.medium"),
 	NFNOTAINFOFATURA(73, "sendsolv.base.model.risklevelenum.medium"),
 	NFNOTAINFOCARTAO(73, "sendsolv.base.model.risklevelenum.medium"),
+	NFNOTAINFOPAGAMENTO(73, "sendsolv.base.model.risklevelenum.medium"),
+	NFNOTAINFOINFORMACOESADICIONAIS(73, "sendsolv.base.model.risklevelenum.medium"),
+	NFNOTAINFOOBSERVACAO(73, "sendsolv.base.model.risklevelenum.medium"),
 
 	NOTAFISCALSAIDA(73, "sendsolv.base.model.risklevelenum.medium");
 

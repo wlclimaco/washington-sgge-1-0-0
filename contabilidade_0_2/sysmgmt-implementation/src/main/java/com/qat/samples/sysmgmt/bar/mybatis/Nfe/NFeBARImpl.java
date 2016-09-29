@@ -5197,7 +5197,7 @@ public InternalResultsResponse<NFNotaInfoPagamento> fetchAllNFNotaInfoPagamentos
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<NFNotaInfoPagamento> fetchNFNotaInfoPagamentosByRequest(NFNotaInfoPagamentoInquiryRequest request)
+public InternalResultsResponse<NFNotaInfoPagamento> fetchNFNotaInfoPagamentosByRequest(PagedInquiryRequest request)
 {
 	InternalResultsResponse<NFNotaInfoPagamento> response = new InternalResultsResponse<NFNotaInfoPagamento>();
 	fetchNFNotaInfoPagamentosByRequest(getSqlSession(), request, STMT_FETCH_NFNOTAINFOPAGAMENTO_COUNT, STMT_FETCH_NFNOTAINFOPAGAMENTO_ALL_REQUEST,
@@ -5207,7 +5207,7 @@ public InternalResultsResponse<NFNotaInfoPagamento> fetchNFNotaInfoPagamentosByR
 
 //===================================### fetchNFNotaInfoPagamentosByRequest ####======================================
 
-public static void fetchNFNotaInfoPagamentosByRequest(SqlSession sqlSession, NFNotaInfoPagamentoInquiryRequest request, String countStatement,
+public static void fetchNFNotaInfoPagamentosByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
 			String fetchPagedStatement,
 			InternalResultsResponse<?> response)
 	{
@@ -5365,7 +5365,7 @@ public InternalResultsResponse<NFNotaInfoInformacoesAdicionais> fetchAllNFNotaIn
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<NFNotaInfoInformacoesAdicionais> fetchNFNotaInfoInformacoesAdicionaissByRequest(NFNotaInfoInformacoesAdicionaisInquiryRequest request)
+public InternalResultsResponse<NFNotaInfoInformacoesAdicionais> fetchNFNotaInfoInformacoesAdicionaissByRequest(PagedInquiryRequest request)
 {
 	InternalResultsResponse<NFNotaInfoInformacoesAdicionais> response = new InternalResultsResponse<NFNotaInfoInformacoesAdicionais>();
 	fetchNFNotaInfoInformacoesAdicionaissByRequest(getSqlSession(), request, STMT_FETCH_NFNOTAINFOINFORMACOESADICIONAIS_COUNT, STMT_FETCH_NFNOTAINFOINFORMACOESADICIONAIS_ALL_REQUEST,
@@ -5375,7 +5375,7 @@ public InternalResultsResponse<NFNotaInfoInformacoesAdicionais> fetchNFNotaInfoI
 
 //===================================### fetchNFNotaInfoInformacoesAdicionaissByRequest ####======================================
 
-public static void fetchNFNotaInfoInformacoesAdicionaissByRequest(SqlSession sqlSession, NFNotaInfoInformacoesAdicionaisInquiryRequest request, String countStatement,
+public static void fetchNFNotaInfoInformacoesAdicionaissByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
 			String fetchPagedStatement,
 			InternalResultsResponse<?> response)
 	{
