@@ -63,6 +63,7 @@ codigo
 	<include refid="allCnaeColumns" />
    FROM cnae WHERE id = #{fetchid}
  </select>
+ 
 
  <select id="fetchAllCnaesRequest" parameterType="CnaeInquiryRequest" resultMap="CnaeResult">
 

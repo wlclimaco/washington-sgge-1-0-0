@@ -27,6 +27,7 @@
 		<sec:intercept-url pattern="/county/api/refresh" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
 		<sec:intercept-url pattern="/entidade/api/empresa/insert" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
 		<sec:intercept-url pattern="/fiscal/api/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
+		<sec:intercept-url pattern="/cadastros/api/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
 		<sec:intercept-url pattern="/county/api/insert" access="hasAnyRole('ROLE_DOMAIN_ADMINS')" />
 		<sec:intercept-url pattern="/county/api/delete" access="hasAnyRole('ROLE_DOMAIN_ADMINS')" />
 		<sec:intercept-url pattern="/county/api/update" access="hasAnyRole('ROLE_DOMAIN_ADMINS', 'ROLE_DOMAIN_USERS')" />
