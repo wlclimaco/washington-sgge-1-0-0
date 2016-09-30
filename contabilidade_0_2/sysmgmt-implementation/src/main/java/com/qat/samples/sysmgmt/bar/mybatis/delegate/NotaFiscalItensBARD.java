@@ -60,38 +60,15 @@ public final class NotaFiscalItensBARD extends SqlSessionDaoSupport
 		{
 			case INSERT:
 				count = NotaFiscalItensDAC.insertNotaFiscalItens(contaCorrente).hasSystemError();
-				if (count == false)
-				{
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.ATIVO);
-					List<Status> statusList = new ArrayList<Status>();
-					count =
-							StatusBARD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>) response, parentId, null,
-									AcaoEnum.INSERT, UserId, empId, TabelaEnum.BANCO, statusBAR, historicoBAR,
-									processId, historicoId);
-				}
+				
 				break;
 			case UPDATE:
 				count = NotaFiscalItensDAC.updateNotaFiscalItens(contaCorrente).hasSystemError();
-				if (count == true)
-				{
-					count =
-							StatusBARD
-									.maintainStatusAssociations(contaCorrente.getStatusList(), (InternalResultsResponse<?>) response,
-											contaCorrente.getId(),
-											null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.BANCO, statusBAR,
-											historicoBAR, processId, historicoId);
-				}
+				
 				break;
 			case DELETE:
 				count = NotaFiscalItensDAC.deleteNotaFiscalItensById(contaCorrente).hasSystemError();
-				Status status = new Status();
-				status.setStatus(CdStatusTypeEnum.DELETADO);
-				List<Status> statusList = new ArrayList<Status>();
-				count =
-						StatusBARD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>) response, contaCorrente.getId(), null,
-								AcaoEnum.DELETE, UserId, empId, TabelaEnum.BANCO, statusBAR, historicoBAR,
-								processId, historicoId);
+				
 
 				break;
 		}

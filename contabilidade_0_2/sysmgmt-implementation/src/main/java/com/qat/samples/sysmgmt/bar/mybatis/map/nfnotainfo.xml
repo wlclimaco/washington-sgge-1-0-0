@@ -34,13 +34,13 @@
     <collection property="destinatario" column="destinatario" select="RegimeMap.fetchRegimeById"/>
     <collection property="retirada" column="retirada" select="RegimeMap.fetchRegimeById"/>
     <collection property="entrega" column="entrega" select="RegimeMap.fetchRegimeById"/>
-<collection property="pessoasAutorizadasDownloadNFe" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="pessoasautorizadasdownloadnfe" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
 <collection property="itens" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
     <collection property="total" column="total" select="RegimeMap.fetchRegimeById"/>
     <collection property="transporte" column="transporte" select="RegimeMap.fetchRegimeById"/>
     <collection property="cobranca" column="cobranca" select="RegimeMap.fetchRegimeById"/>
 <collection property="pagamentos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-    <collection property="informacoesAdicionais" column="informacoesAdicionais" select="RegimeMap.fetchRegimeById"/>
+    <collection property="informacoesadicionais" column="informacoesadicionais" select="RegimeMap.fetchRegimeById"/>
     <collection property="exportacao" column="exportacao" select="RegimeMap.fetchRegimeById"/>
     <collection property="compra" column="compra" select="RegimeMap.fetchRegimeById"/>
     <collection property="cana" column="cana" select="RegimeMap.fetchRegimeById"/>
@@ -58,7 +58,7 @@ identificador
 ,total
 ,transporte
 ,cobranca
-,informacoesAdicionais
+,informacoesadicionais
 ,exportacao
 ,compra
 ,cana
@@ -84,7 +84,7 @@ identificador
 #{total.id},
 #{transporte.id},
 #{cobranca.id},
-#{informacoesAdicionais.id},
+#{informacoesadicionais.id},
 #{exportacao.id},
 #{compra.id},
 #{cana.id},
@@ -144,7 +144,7 @@ identificador
 <if test="total!= null">total = #{total.id},</if>
 <if test="transporte!= null">transporte = #{transporte.id},</if>
 <if test="cobranca!= null">cobranca = #{cobranca.id},</if>
-<if test="informacoesAdicionais!= null">informacoesAdicionais = #{informacoesAdicionais.id},</if>
+<if test="informacoesadicionais!= null">informacoesadicionais = #{informacoesadicionais.id},</if>
 <if test="exportacao!= null">exportacao = #{exportacao.id},</if>
 <if test="compra!= null">compra = #{compra.id},</if>
 <if test="cana!= null">cana = #{cana.id},</if>

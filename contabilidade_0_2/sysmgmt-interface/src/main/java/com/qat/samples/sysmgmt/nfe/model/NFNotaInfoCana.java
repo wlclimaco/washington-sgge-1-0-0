@@ -1,8 +1,10 @@
-/** create by system gera-java version 1.0.0 28/09/2016 14:58 : 22*/
+/** create by system gera-java version 1.0.0 29/09/2016 22:42 : 1*/
 package com.qat.samples.sysmgmt.nfe.model;
 
 
 import java.util.List;
+
+import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -10,8 +12,11 @@ import java.util.List;
  */
 
 @SuppressWarnings("serial")
-public class NFNotaInfoCana extends NFBase
+public class NFNotaInfoCana extends ModelCosmeDamiao
 {
+
+    /** The econtabil id for the NFNotaInfoCana. */
+    private Integer id;
 
     /** The econtabil safra for the NFNotaInfoCana. */
     private String safra;
@@ -20,28 +25,28 @@ public class NFNotaInfoCana extends NFBase
     private String referencia;
 
     /** The econtabil fornecimentosDiario for the NFNotaInfoCana. */
-    private List<List<NFNotaInfoCanaFornecimentoDiario>> fornecimentosdiario;
+    private List<NFNotaInfoCanaFornecimentoDiario> fornecimentosDiario;
 
     /** The econtabil deducoes for the NFNotaInfoCana. */
-    private List<List<NFNotaInfoCanaDeducao>> deducoes;
+    private List<NFNotaInfoCanaDeducao> deducoes;
 
     /** The econtabil quantidadeTotalMes for the NFNotaInfoCana. */
-    private String quantidadetotalmes;
+    private String quantidadeTotalMes;
 
     /** The econtabil quantidadeTotalAnterior for the NFNotaInfoCana. */
-    private String quantidadetotalanterior;
+    private String quantidadeTotalAnterior;
 
     /** The econtabil quantidadeTotalGeral for the NFNotaInfoCana. */
-    private String quantidadetotalgeral;
+    private String quantidadeTotalGeral;
 
     /** The econtabil valorFornecimento for the NFNotaInfoCana. */
-    private String valorfornecimento;
+    private String valorFornecimento;
 
     /** The econtabil valorTotalDeducao for the NFNotaInfoCana. */
-    private String valortotaldeducao;
+    private String valorTotalDeducao;
 
     /** The econtabil valorLiquidoFornecimento for the NFNotaInfoCana. */
-    private String valorliquidofornecimento;
+    private String valorLiquidoFornecimento;
 
 
 
@@ -54,343 +59,148 @@ public class NFNotaInfoCana extends NFBase
     }
 
 
-    /**
-     * Gets the safra.
-     *
-     * @return the safra
-     */
-    /**
-     * Gets the safra.
-     *
-     * @return the safra
-     */
-    public String getSafra()
-    {
-        return safra;
-    }
 
-    /**
-     * Sets the safra.
-     *
-* @param id the safra to set
- */
-public void setSafra(String safra)
-{
-        this.safra = safra;
-    }
-
-    /**
-     * Gets the referencia.
-     *
-     * @return the referencia
-     */
-    /**
-     * Gets the referencia.
-     *
-     * @return the referencia
-     */
-    public String getReferencia()
-    {
-        return referencia;
-    }
-
-    /**
-     * Sets the referencia.
-     *
-* @param id the referencia to set
- */
-public void setReferencia(String referencia)
-{
-        this.referencia = referencia;
-    }
-
-    /**
-     * Gets the fornecimentosdiario.
-     *
-     * @return the fornecimentosdiario
-     */
-    /**
-     * Gets the fornecimentosdiario.
-     *
-     * @return the fornecimentosdiario
-     */
-    public List<List<NFNotaInfoCanaFornecimentoDiario>> getFornecimentosDiario()
-    {
-        return fornecimentosdiario;
-    }
-
-    /**
-     * Sets the fornecimentosdiario.
-     *
-* @param id the fornecimentosdiario to set
- */
-public void setFornecimentosDiario(List<List<NFNotaInfoCanaFornecimentoDiario>> fornecimentosdiario)
-{
-        this.fornecimentosdiario = fornecimentosdiario;
-    }
-
-    /**
-     * Gets the deducoes.
-     *
-     * @return the deducoes
-     */
-    /**
-     * Gets the deducoes.
-     *
-     * @return the deducoes
-     */
-    public List<List<NFNotaInfoCanaDeducao>> getDeducoes()
-    {
-        return deducoes;
-    }
-
-    /**
-     * Sets the deducoes.
-     *
-* @param id the deducoes to set
- */
-public void setDeducoes(List<List<NFNotaInfoCanaDeducao>> deducoes)
-{
-        this.deducoes = deducoes;
-    }
-
-    /**
-     * Gets the quantidadetotalmes.
-     *
-     * @return the quantidadetotalmes
-     */
-    /**
-     * Gets the quantidadetotalmes.
-     *
-     * @return the quantidadetotalmes
-     */
-    public String getQuantidadeTotalMes()
-    {
-        return quantidadetotalmes;
-    }
-
-    /**
-     * Sets the quantidadetotalmes.
-     *
-* @param id the quantidadetotalmes to set
- */
-public void setQuantidadeTotalMes(String quantidadetotalmes)
-{
-        this.quantidadetotalmes = quantidadetotalmes;
-    }
-
-    /**
-     * Gets the quantidadetotalanterior.
-     *
-     * @return the quantidadetotalanterior
-     */
-    /**
-     * Gets the quantidadetotalanterior.
-     *
-     * @return the quantidadetotalanterior
-     */
-    public String getQuantidadeTotalAnterior()
-    {
-        return quantidadetotalanterior;
-    }
-
-    /**
-     * Sets the quantidadetotalanterior.
-     *
-* @param id the quantidadetotalanterior to set
- */
-public void setQuantidadeTotalAnterior(String quantidadetotalanterior)
-{
-        this.quantidadetotalanterior = quantidadetotalanterior;
-    }
-
-    /**
-     * Gets the quantidadetotalgeral.
-     *
-     * @return the quantidadetotalgeral
-     */
-    /**
-     * Gets the quantidadetotalgeral.
-     *
-     * @return the quantidadetotalgeral
-     */
-    public String getQuantidadeTotalGeral()
-    {
-        return quantidadetotalgeral;
-    }
-
-    /**
-     * Sets the quantidadetotalgeral.
-     *
-* @param id the quantidadetotalgeral to set
- */
-public void setQuantidadeTotalGeral(String quantidadetotalgeral)
-{
-        this.quantidadetotalgeral = quantidadetotalgeral;
-    }
-
-    /**
-     * Gets the valorfornecimento.
-     *
-     * @return the valorfornecimento
-     */
-    /**
-     * Gets the valorfornecimento.
-     *
-     * @return the valorfornecimento
-     */
-    public String getValorFornecimento()
-    {
-        return valorfornecimento;
-    }
-
-    /**
-     * Sets the valorfornecimento.
-     *
-* @param id the valorfornecimento to set
- */
-public void setValorFornecimento(String valorfornecimento)
-{
-        this.valorfornecimento = valorfornecimento;
-    }
-
-    /**
-     * Gets the valortotaldeducao.
-     *
-     * @return the valortotaldeducao
-     */
-    /**
-     * Gets the valortotaldeducao.
-     *
-     * @return the valortotaldeducao
-     */
-    public String getValorTotalDeducao()
-    {
-        return valortotaldeducao;
-    }
-
-    /**
-     * Sets the valortotaldeducao.
-     *
-* @param id the valortotaldeducao to set
- */
-public void setValorTotalDeducao(String valortotaldeducao)
-{
-        this.valortotaldeducao = valortotaldeducao;
-    }
-
-    /**
-     * Gets the valorliquidofornecimento.
-     *
-     * @return the valorliquidofornecimento
-     */
-    /**
-     * Gets the valorliquidofornecimento.
-     *
-     * @return the valorliquidofornecimento
-     */
-    public String getValorLiquidoFornecimento()
-    {
-        return valorliquidofornecimento;
-    }
-
-    /**
-     * Sets the valorliquidofornecimento.
-     *
-* @param id the valorliquidofornecimento to set
- */
-public void setValorLiquidoFornecimento(String valorliquidofornecimento)
-{
-        this.valorliquidofornecimento = valorliquidofornecimento;
-    }
-
-
-	public List<List<NFNotaInfoCanaFornecimentoDiario>> getFornecimentosdiario() {
-		return fornecimentosdiario;
+	public Integer getId() {
+		return id;
 	}
 
 
-	public void setFornecimentosdiario(List<List<NFNotaInfoCanaFornecimentoDiario>> fornecimentosdiario) {
-		this.fornecimentosdiario = fornecimentosdiario;
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 
-	public String getQuantidadetotalmes() {
-		return quantidadetotalmes;
+
+	public String getSafra() {
+		return safra;
 	}
 
 
-	public void setQuantidadetotalmes(String quantidadetotalmes) {
-		this.quantidadetotalmes = quantidadetotalmes;
+
+	public void setSafra(String safra) {
+		this.safra = safra;
 	}
 
 
-	public String getQuantidadetotalanterior() {
-		return quantidadetotalanterior;
+
+	public String getReferencia() {
+		return referencia;
 	}
 
 
-	public void setQuantidadetotalanterior(String quantidadetotalanterior) {
-		this.quantidadetotalanterior = quantidadetotalanterior;
+
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
 	}
 
 
-	public String getQuantidadetotalgeral() {
-		return quantidadetotalgeral;
+
+	public List<NFNotaInfoCanaFornecimentoDiario> getFornecimentosDiario() {
+		return fornecimentosDiario;
 	}
 
 
-	public void setQuantidadetotalgeral(String quantidadetotalgeral) {
-		this.quantidadetotalgeral = quantidadetotalgeral;
+
+	public void setFornecimentosDiario(List<NFNotaInfoCanaFornecimentoDiario> fornecimentosDiario) {
+		this.fornecimentosDiario = fornecimentosDiario;
 	}
 
 
-	public String getValorfornecimento() {
-		return valorfornecimento;
+
+	public List<NFNotaInfoCanaDeducao> getDeducoes() {
+		return deducoes;
 	}
 
 
-	public void setValorfornecimento(String valorfornecimento) {
-		this.valorfornecimento = valorfornecimento;
+
+	public void setDeducoes(List<NFNotaInfoCanaDeducao> deducoes) {
+		this.deducoes = deducoes;
 	}
 
 
-	public String getValortotaldeducao() {
-		return valortotaldeducao;
+
+	public String getQuantidadeTotalMes() {
+		return quantidadeTotalMes;
 	}
 
 
-	public void setValortotaldeducao(String valortotaldeducao) {
-		this.valortotaldeducao = valortotaldeducao;
+
+	public void setQuantidadeTotalMes(String quantidadeTotalMes) {
+		this.quantidadeTotalMes = quantidadeTotalMes;
 	}
 
 
-	public String getValorliquidofornecimento() {
-		return valorliquidofornecimento;
+
+	public String getQuantidadeTotalAnterior() {
+		return quantidadeTotalAnterior;
 	}
 
 
-	public void setValorliquidofornecimento(String valorliquidofornecimento) {
-		this.valorliquidofornecimento = valorliquidofornecimento;
+
+	public void setQuantidadeTotalAnterior(String quantidadeTotalAnterior) {
+		this.quantidadeTotalAnterior = quantidadeTotalAnterior;
 	}
+
+
+
+	public String getQuantidadeTotalGeral() {
+		return quantidadeTotalGeral;
+	}
+
+
+
+	public void setQuantidadeTotalGeral(String quantidadeTotalGeral) {
+		this.quantidadeTotalGeral = quantidadeTotalGeral;
+	}
+
+
+
+	public String getValorFornecimento() {
+		return valorFornecimento;
+	}
+
+
+
+	public void setValorFornecimento(String valorFornecimento) {
+		this.valorFornecimento = valorFornecimento;
+	}
+
+
+
+	public String getValorTotalDeducao() {
+		return valorTotalDeducao;
+	}
+
+
+
+	public void setValorTotalDeducao(String valorTotalDeducao) {
+		this.valorTotalDeducao = valorTotalDeducao;
+	}
+
+
+
+	public String getValorLiquidoFornecimento() {
+		return valorLiquidoFornecimento;
+	}
+
+
+
+	public void setValorLiquidoFornecimento(String valorLiquidoFornecimento) {
+		this.valorLiquidoFornecimento = valorLiquidoFornecimento;
+	}
+
 
 
 	@Override
 	public String toString() {
-		return "NFNotaInfoCana [getSafra()=" + getSafra() + ", getReferencia()=" + getReferencia()
-				+ ", getFornecimentosDiario()=" + getFornecimentosDiario() + ", getDeducoes()=" + getDeducoes()
-				+ ", getQuantidadeTotalMes()=" + getQuantidadeTotalMes() + ", getQuantidadeTotalAnterior()="
-				+ getQuantidadeTotalAnterior() + ", getQuantidadeTotalGeral()=" + getQuantidadeTotalGeral()
-				+ ", getValorFornecimento()=" + getValorFornecimento() + ", getValorTotalDeducao()="
-				+ getValorTotalDeducao() + ", getValorLiquidoFornecimento()=" + getValorLiquidoFornecimento()
-				+ ", getFornecimentosdiario()=" + getFornecimentosdiario() + ", getQuantidadetotalmes()="
-				+ getQuantidadetotalmes() + ", getQuantidadetotalanterior()=" + getQuantidadetotalanterior()
-				+ ", getQuantidadetotalgeral()=" + getQuantidadetotalgeral() + ", getValorfornecimento()="
-				+ getValorfornecimento() + ", getValortotaldeducao()=" + getValortotaldeducao()
-				+ ", getValorliquidofornecimento()=" + getValorliquidofornecimento() + ", toString()="
-				+ super.toString() + "]";
+		return "NFNotaInfoCana [getId()=" + getId() + ", getSafra()=" + getSafra() + ", getReferencia()="
+				+ getReferencia() + ", getFornecimentosDiario()=" + getFornecimentosDiario() + ", getDeducoes()="
+				+ getDeducoes() + ", getQuantidadeTotalMes()=" + getQuantidadeTotalMes()
+				+ ", getQuantidadeTotalAnterior()=" + getQuantidadeTotalAnterior() + ", getQuantidadeTotalGeral()="
+				+ getQuantidadeTotalGeral() + ", getValorFornecimento()=" + getValorFornecimento()
+				+ ", getValorTotalDeducao()=" + getValorTotalDeducao() + ", getValorLiquidoFornecimento()="
+				+ getValorLiquidoFornecimento() + ", toString()=" + super.toString() + "]";
 	}
-
-
 
  }

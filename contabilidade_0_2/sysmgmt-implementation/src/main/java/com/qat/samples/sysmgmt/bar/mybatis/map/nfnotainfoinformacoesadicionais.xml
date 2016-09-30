@@ -17,8 +17,8 @@
        exactly. -->
   <resultMap id="NFNotaInfoInformacoesAdicionaisResult" type="NFNotaInfoInformacoesAdicionais">
   <result property="id" column="id"/>
-    <result property="informacoesAdicionaisInteresseFisco" column="informacoesAdicionaisInteresseFisco"/>
-    <result property="informacoesComplementaresInteresseContribuinte" column="informacoesComplementaresInteresseContribuinte"/>
+    <result property="informacoesadicionaisinteressefisco" column="informacoesadicionaisinteressefisco"/>
+    <result property="informacoescomplementaresinteressecontribuinte" column="informacoescomplementaresinteressecontribuinte"/>
 
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
@@ -28,14 +28,14 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="observacoesContribuinte" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="observacoesFisco" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="processosRefenciado" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="observacoescontribuinte" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="observacoesfisco" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="processosrefenciado" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
   </resultMap>
 
   <sql id="allNFNotaInfoInformacoesAdicionaisColumns">
-informacoesAdicionaisInteresseFisco
-,informacoesComplementaresInteresseContribuinte
+informacoesadicionaisinteressefisco
+,informacoescomplementaresinteressecontribuinte
 ,parentId
 ,tabelaEnumValue
 ,emprId
@@ -47,8 +47,8 @@ informacoesAdicionaisInteresseFisco
 
 </sql>
 <sql id="allNFNotaInfoInformacoesAdicionaisValues">
-#{informacoesAdicionaisInteresseFisco},
-#{informacoesComplementaresInteresseContribuinte},
+#{informacoesadicionaisinteressefisco},
+#{informacoescomplementaresinteressecontribuinte},
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -94,8 +94,8 @@ informacoesAdicionaisInteresseFisco
 
  <update id="updateNFNotaInfoInformacoesAdicionais" parameterType="NFNotaInfoInformacoesAdicionais">
    UPDATE nfnotainfoinformacoesadicionais SET
-<if test="informacoesAdicionaisInteresseFisco!= null">informacoesAdicionaisInteresseFisco = #{informacoesAdicionaisInteresseFisco},</if>
-<if test="informacoesComplementaresInteresseContribuinte!= null">informacoesComplementaresInteresseContribuinte = #{informacoesComplementaresInteresseContribuinte},</if>
+<if test="informacoesadicionaisinteressefisco!= null">informacoesadicionaisinteressefisco = #{informacoesadicionaisinteressefisco},</if>
+<if test="informacoescomplementaresinteressecontribuinte!= null">informacoescomplementaresinteressecontribuinte = #{informacoescomplementaresinteressecontribuinte},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>

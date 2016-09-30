@@ -81,6 +81,7 @@ import com.qat.samples.sysmgmt.historico.model.Historico;
 import com.qat.samples.sysmgmt.historico.model.HistoricoItens;
 import com.qat.samples.sysmgmt.historico.model.HistoricoMovimento;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscalEntrada;
+import com.qat.samples.sysmgmt.nf.model.NotaFiscalItens;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
 import com.qat.samples.sysmgmt.nf.model.Orcamento;
 import com.qat.samples.sysmgmt.nf.model.PedidoCompras;
@@ -3281,7 +3282,48 @@ public static Menu insertMenu(Integer id,TabelaEnum tabela,PersistenceActionEnum
 
 		return menu;
 	}
+public static NotaFiscalItens insertNotaFiscalItens(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+{
+	NotaFiscalItens notafiscalitens = new NotaFiscalItens();
+	Date a = new Date();
+	notafiscalitens.setId(id);
+	notafiscalitens.setDataInicio(a.getTime());
+	notafiscalitens.setValor(new Double(10.00));
+	notafiscalitens.setServicoPlanoEnumValue(100);
+//	notafiscalitens.setServicoList(10000);
+//	notafiscalitens.setPlanoList(10000);
+	notafiscalitens.setNumeroRegistro("NATIVE INSERT UPDATE");
+	notafiscalitens.setDataRegistro(a.getTime());
+	notafiscalitens.setLocalDesembaraco("NATIVE INSERT UPDATE");
+//		notafiscalitens.setUfDesembaraco(new Estado("MG"));
+	notafiscalitens.setDataDesembaraco(a.getTime());
+	notafiscalitens.setTransporteInternacional(100);
+	notafiscalitens.setValorAFRMM(new Double(10.00));
+	notafiscalitens.setTpIntermedio(100);
+	notafiscalitens.setCnpj("NATIVE INSERT UPDATE");
+	notafiscalitens.setUfTerceiro(100);
+	notafiscalitens.setCodigoExportador(100);
+	notafiscalitens.setDescricao("NATIVE INSERT UPDATE");
+//	notafiscalitens.setProduto(10000);
+//	notafiscalitens.setCfop(10000);
+	notafiscalitens.setValorUnitario(new Double(10.00));
+	notafiscalitens.setValorTotalBruto(new Double(10.00));
+	notafiscalitens.setValorFrete(new Double(10.00));
+	notafiscalitens.setValorSeguro(new Double(10.00));
+	notafiscalitens.setValorDesconto(new Double(10.00));
+	notafiscalitens.setValorOutrasDespesasAcessorias(new Double(10.00));
+	notafiscalitens.setNumeroRECOPI(100);
+	notafiscalitens.setParentId(id);
+	notafiscalitens.setEmprId(1);
+	notafiscalitens.setModifyDateUTC(a.getTime());
+	notafiscalitens.setCreateDateUTC(a.getTime());
+	notafiscalitens.setCreateUser("system");
+	notafiscalitens.setModifyUser("system");
+	notafiscalitens.setProcessId(1);
+	notafiscalitens.setModelAction(action);
 
+	return notafiscalitens;
+}
 
 
 }

@@ -19,7 +19,6 @@
   <result property="id" column="id"/>
     <result property="safra" column="safra"/>
     <result property="referencia" column="referencia"/>
-
     <result property="quantidadeTotalMes" column="quantidadeTotalMes"/>
     <result property="quantidadeTotalAnterior" column="quantidadeTotalAnterior"/>
     <result property="quantidadeTotalGeral" column="quantidadeTotalGeral"/>

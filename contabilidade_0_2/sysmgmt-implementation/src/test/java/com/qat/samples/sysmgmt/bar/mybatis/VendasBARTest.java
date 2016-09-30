@@ -23,7 +23,6 @@ import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.bar.Vendas.IVendasBAR;
-import com.qat.samples.sysmgmt.estado.model.Estado;
 import com.qat.samples.sysmgmt.nf.model.ConhecimentoTransporte;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscalItens;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
@@ -419,7 +418,7 @@ public IVendasBAR getVendasBAR()
 @Test
 	public void testDeleteNotaFiscalItens()
 	{
-		NotaFiscalItens notafiscalitens = insertNotaFiscalItens(40001, TabelaEnum.NOTAFISCALITENS, PersistenceActionEnum.INSERT);
+		NotaFiscalItens notafiscalitens = Objects.insertNotaFiscalItens(40001, TabelaEnum.NOTAFISCALITENS, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(40001);
 		NotaFiscalItens notafiscalitensResponse = getVendasBAR().fetchNotaFiscalItensById(request);
@@ -452,7 +451,7 @@ public IVendasBAR getVendasBAR()
 	@Test
 	public void testUpdateNotaFiscalItens()
 	{
-		NotaFiscalItens notafiscalitens = insertNotaFiscalItens(1001, TabelaEnum.NOTAFISCALITENS, PersistenceActionEnum.UPDATE);
+		NotaFiscalItens notafiscalitens = Objects.insertNotaFiscalItens(1001, TabelaEnum.NOTAFISCALITENS, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NotaFiscalItens notafiscalitensResponse = getVendasBAR().fetchNotaFiscalItensById(request);
@@ -610,48 +609,7 @@ public IVendasBAR getVendasBAR()
 		}
 
 
-	public NotaFiscalItens insertNotaFiscalItens(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NotaFiscalItens notafiscalitens = new NotaFiscalItens();
-			Date a = new Date();
-			notafiscalitens.setId(id);
-			notafiscalitens.setDataInicio(a.getTime());
-			notafiscalitens.setValor(new Double(10.00));
-			notafiscalitens.setServicoPlanoEnumValue(100);
-		//	notafiscalitens.setServicoList(10000);
-		//	notafiscalitens.setPlanoList(10000);
-			notafiscalitens.setNumeroRegistro("NATIVE INSERT UPDATE");
-			notafiscalitens.setDataRegistro(a.getTime());
-			notafiscalitens.setLocalDesembaraco("NATIVE INSERT UPDATE");
-	//		notafiscalitens.setUfDesembaraco(new Estado("MG"));
-			notafiscalitens.setDataDesembaraco(a.getTime());
-			notafiscalitens.setTransporteInternacional(100);
-			notafiscalitens.setValorAFRMM(new Double(10.00));
-			notafiscalitens.setTpIntermedio(100);
-			notafiscalitens.setCnpj("NATIVE INSERT UPDATE");
-			notafiscalitens.setUfTerceiro(100);
-			notafiscalitens.setCodigoExportador(100);
-			notafiscalitens.setDescricao("NATIVE INSERT UPDATE");
-		//	notafiscalitens.setProduto(10000);
-		//	notafiscalitens.setCfop(10000);
-			notafiscalitens.setValorUnitario(new Double(10.00));
-			notafiscalitens.setValorTotalBruto(new Double(10.00));
-			notafiscalitens.setValorFrete(new Double(10.00));
-			notafiscalitens.setValorSeguro(new Double(10.00));
-			notafiscalitens.setValorDesconto(new Double(10.00));
-			notafiscalitens.setValorOutrasDespesasAcessorias(new Double(10.00));
-			notafiscalitens.setNumeroRECOPI(100);
-			notafiscalitens.setParentId(id);
-			notafiscalitens.setEmprId(1);
-			notafiscalitens.setModifyDateUTC(a.getTime());
-			notafiscalitens.setCreateDateUTC(a.getTime());
-			notafiscalitens.setCreateUser("system");
-			notafiscalitens.setModifyUser("system");
-			notafiscalitens.setProcessId(1);
-			notafiscalitens.setModelAction(action);
-
-			return notafiscalitens;
-		}
+	
 
 
 }

@@ -828,18 +828,7 @@ Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NOTAFISCALITE
 			getHistoricoBAR(), response, notafiscalitens.getId(),notafiscalitens.getUserId());
 
 
-if (notafiscalitens.getId() !=  0 && notafiscalitens.getId() != null)
-	{
-		Status status = new Status();
-		status.setStatus(CdStatusTypeEnum.ATIVO);
-		List<Status> statusList = new ArrayList<Status>();
-		statusList.add(status);
-		count1 =
-				StatusBARD.maintainStatusAssociations(statusList, response, notafiscalitens.getId(), null, AcaoEnum.INSERT,
-						notafiscalitens.getCreateUser(), notafiscalitens.getId(), TabelaEnum.NOTAFISCALITENS, statusBAR,
-						historicoBAR, notafiscalitens.getTransactionId(), notafiscalitens.getTransactionId());
 
-	}
 
 
 	return response;
