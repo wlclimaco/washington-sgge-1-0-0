@@ -3,7 +3,9 @@ package com.qat.samples.sysmgmt.contabilidade.model;
 import java.util.Date;
 import java.util.List;
 
+import com.qat.samples.sysmgmt.produto.model.PlanoByServico;
 import com.qat.samples.sysmgmt.produto.model.Preco;
+import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -23,7 +25,7 @@ public class Plano extends ModelCosmeDamiao
 
 	private Integer numeroContrato;
 
-	private List<PlanoByServico> servicoList;
+	private List<Servico> servicoList;
 
 	private String descricao;
 
@@ -116,11 +118,11 @@ public class Plano extends ModelCosmeDamiao
 		this.precoList = precoList;
 	}
 
-	public List<PlanoByServico> getServicoList() {
+	public List<Servico> getServicoList() {
 		return servicoList;
 	}
 
-	public void setServicoList(List<PlanoByServico> servicoList) {
+	public void setServicoList(List<Servico> servicoList) {
 		this.servicoList = servicoList;
 	}
 

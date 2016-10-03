@@ -50,6 +50,7 @@
 ,e.statusEmpresa
 ,e.dtAbertura
 ,e.responsavel
+,e.planosServicos
 ,e.regime
 ,e.create_date
 ,e.create_user
@@ -131,6 +132,7 @@ nome
 ,statusEmpresa
 ,dtAbertura
 ,responsavel
+,planosServicos
 ,regime
 ,create_date
 ,create_user

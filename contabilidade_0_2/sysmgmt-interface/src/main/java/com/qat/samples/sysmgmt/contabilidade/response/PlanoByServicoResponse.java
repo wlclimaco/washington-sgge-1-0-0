@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.contabilidade.model.PlanoByServico;
+import com.qat.samples.sysmgmt.produto.model.PlanoByServico;
 
 public class PlanoByServicoResponse extends InquiryResponse
 {

@@ -111,6 +111,72 @@ public final class PlanoByEmpresaBARD extends SqlSessionDaoSupport
 		}else{
 			return 0;
 		}
-		
+
+	}
+
+	public static Integer maintainPlanoByEmpresaAssociations(PlanoByEmpresa planobyempresa,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			TabelaEnum tabelaEnum, ISiteBAR iSiteBAR, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
+			String UserId, Integer processId, Integer historicoId)
+	{
+		Boolean count = false;
+		// First Maintain Empresa
+		if (ValidationUtil.isNull(planobyempresa))
+		{
+			return 0;
+		}
+
+			// Make sure we set the parent key
+			planobyempresa.setParentId(parentId);
+			planobyempresa.setTabelaEnum(tabelaEnum);
+			planobyempresa.setProcessId(processId);
+
+			switch (planobyempresa.getModelAction())
+			{
+				case INSERT:
+					count = iSiteBAR.insertPlanoByEmpresa(planobyempresa).hasSystemError();
+					if (count == true)
+					{
+						Status status = new Status();
+						status.setStatus(CdStatusTypeEnum.ATIVO);
+						List<Status> statusList = new ArrayList<Status>();
+						statusList.add(status);
+						count =
+								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
+										AcaoEnum.INSERT, UserId, empId, TabelaEnum.PLANOBYEMPRESA, statusDAC, historicoDAC,
+										processId, historicoId);
+					}
+					break;
+				case UPDATE:
+					count = iSiteBAR.updatePlanoByEmpresa(planobyempresa).hasSystemError();
+					if (count == true)
+					{
+						count =
+								StatusBARD.maintainStatusAssociations(planobyempresa.getStatusList(), response, planobyempresa.getId(),
+										null,
+										AcaoEnum.UPDATE, UserId, empId, TabelaEnum.PLANOBYEMPRESA, statusDAC, historicoDAC,
+										processId, historicoId);
+					}
+					break;
+				case DELETE:
+					count = iSiteBAR.deletePlanoByEmpresaById(planobyempresa).hasSystemError();
+					Status status = new Status();
+					status.setStatus(CdStatusTypeEnum.DELETADO);
+					List<Status> statusList = new ArrayList<Status>();
+					statusList.add(status);
+					count =
+							StatusBARD.maintainStatusAssociations(statusList, response, planobyempresa.getId(), null,
+									AcaoEnum.DELETE, UserId, empId, TabelaEnum.PLANOBYEMPRESA, statusDAC, historicoDAC,
+									processId, historicoId);
+
+					break;
+			}
+
+		if(count == true ){
+			return 1;
+		}else{
+			return 0;
+		}
+
 	}
 }

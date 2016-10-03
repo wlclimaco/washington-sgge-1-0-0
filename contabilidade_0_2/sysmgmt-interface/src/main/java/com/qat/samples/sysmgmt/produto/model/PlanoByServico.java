@@ -14,7 +14,8 @@ public class PlanoByServico extends ModelCosmeDamiao
 
 	private Integer planoId;
 
-	private Integer servicoId;
+	private Servico servico;
+
 
 	public Integer getId()
 	{
@@ -36,21 +37,14 @@ public class PlanoByServico extends ModelCosmeDamiao
 		this.planoId = planoId;
 	}
 
-	public Integer getServicoId()
-	{
-		return servicoId;
+	public Servico getServico() {
+		return servico;
 	}
 
-	public void setServicoId(Integer servicoId)
-	{
-		this.servicoId = servicoId;
+	public void setServico(Servico servico) {
+		this.servico = servico;
 	}
 
-	@Override
-	public String toString()
-	{
-		return "PlanoByServico [getId()=" + getId() + ", getPlanoId()=" + getPlanoId() + ", getServicoId()="
-				+ getServicoId() + ", toString()=" + super.toString() + "]";
-	}
+
 
 }

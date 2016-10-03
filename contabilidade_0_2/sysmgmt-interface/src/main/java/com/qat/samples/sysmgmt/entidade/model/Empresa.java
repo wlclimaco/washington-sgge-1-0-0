@@ -17,8 +17,6 @@ public class Empresa extends Entidade
 
 	private List<Plano> planoList;
 
-	private List<PlanoByEmpresa> planoByEmpresaList;
-
 	private Integer qntFilial;
 
 	private Integer qntDeposito;
@@ -194,14 +192,6 @@ public class Empresa extends Entidade
 		this.contabilidadeId = contabilidadeId;
 	}
 
-	public List<PlanoByEmpresa> getPlanoByEmpresaList() {
-		return planoByEmpresaList;
-	}
-
-	public void setPlanoByEmpresaList(List<PlanoByEmpresa> planoByEmpresaList) {
-		this.planoByEmpresaList = planoByEmpresaList;
-	}
-
 	@Override
 	public String toString() {
 		return "Empresa [getPermissaoTypeEnumValue()=" + getPermissaoTypeEnumValue() + ", getPermissaoTypeEnum()="
@@ -209,8 +199,10 @@ public class Empresa extends Entidade
 				+ ", getQntDeposito()=" + getQntDeposito() + ", getFilialList()=" + getFilialList()
 				+ ", getDepositoList()=" + getDepositoList() + ", getContaCorrenteList()=" + getContaCorrenteList()
 				+ ", getTarefaList()=" + getTarefaList() + ", getParceiroId()=" + getParceiroId()
-				+ ", getContabilidadeId()=" + getContabilidadeId() + ", getPlanoByEmpresaList()="
-				+ getPlanoByEmpresaList() + ", toString()=" + super.toString() + "]";
+				+ ", getContabilidadeId()=" + getContabilidadeId() + ", toString()=" + super.toString() + "]";
 	}
+
+
+
 
 }

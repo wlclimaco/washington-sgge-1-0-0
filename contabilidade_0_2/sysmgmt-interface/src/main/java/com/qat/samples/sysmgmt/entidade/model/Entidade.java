@@ -22,7 +22,7 @@ public class Entidade extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
-	
+
 	private Integer statusEmpresa;
 
 	private Integer numFunc;
@@ -33,7 +33,7 @@ public class Entidade extends ModelCosmeDamiao
 	private String razao;
 
 	private Regime regime;
-	
+
 	private Long dtAbertura;
 
 	private Integer entidadeId;
@@ -58,7 +58,7 @@ public class Entidade extends ModelCosmeDamiao
 
 	private List<BancoPessoa> bancos;
 
-	private List<PlanoByEmpresa> planosServicos;
+	private PlanoByEmpresa planosServicos;
 
 	private List<Socio> socios;
 
@@ -301,11 +301,11 @@ public class Entidade extends ModelCosmeDamiao
 		this.numFunc = numFunc;
 	}
 
-	public List<PlanoByEmpresa> getPlanosServicos() {
+	public PlanoByEmpresa getPlanosServicos() {
 		return planosServicos;
 	}
 
-	public void setPlanosServicos(List<PlanoByEmpresa> planosServicos) {
+	public void setPlanosServicos(PlanoByEmpresa planosServicos) {
 		this.planosServicos = planosServicos;
 	}
 

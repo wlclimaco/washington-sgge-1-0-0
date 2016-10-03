@@ -82,7 +82,6 @@
         <typeAlias alias="FetchByIdRequest" type="com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest" />
         <typeAlias alias="Entidade" type="com.qat.samples.sysmgmt.entidade.model.Entidade" />
 
-        <typeAlias alias="PlanoByServico" type="com.qat.samples.sysmgmt.contabilidade.model.PlanoByServico" />
         <typeAlias alias="ServicoAndPlano" type="com.qat.samples.sysmgmt.site.model.ServicoAndPlano" />
 
         <typeAlias alias="Estado" type="com.qat.samples.sysmgmt.estado.model.Estado" />
@@ -191,7 +190,7 @@
         <typeAlias alias="Regime" type="com.qat.samples.sysmgmt.fiscal.model.Regime" />
         <typeAlias alias="RegimeInquiryRequest" type="com.qat.samples.sysmgmt.fiscal.model.request.RegimeInquiryRequest" />
 
-        <typeAlias alias="PlanoByServico" type="com.qat.samples.sysmgmt.contabilidade.model.PlanoByServico" />
+        <typeAlias alias="PlanoByServico" type="com.qat.samples.sysmgmt.produto.model.PlanoByServico" />
 
         <typeAlias alias="Deposito" type="com.qat.samples.sysmgmt.entidade.model.Deposito" />
         <typeAlias alias="DepositoInquiryRequest" type="com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest" />

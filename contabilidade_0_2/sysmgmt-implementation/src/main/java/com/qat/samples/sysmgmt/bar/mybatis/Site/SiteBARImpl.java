@@ -17,14 +17,14 @@ import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Produto.IPrecoBAR;
 import com.qat.samples.sysmgmt.bar.Site.ISiteBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
-import com.qat.samples.sysmgmt.bar.mybatis.delegate.ContatoItensBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.OrdemServicoItensBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.PlanoAndServicoBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.PlanoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.PrecoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ServicoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.StatusBARD;
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
-import com.qat.samples.sysmgmt.contabilidade.model.PlanoByServico;
 import com.qat.samples.sysmgmt.contabilidade.model.PlanoBySite;
 import com.qat.samples.sysmgmt.contato.model.Contato;
 import com.qat.samples.sysmgmt.contato.model.ContatoItens;
@@ -32,6 +32,7 @@ import com.qat.samples.sysmgmt.contato.model.request.ContatoInquiryRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
 import com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoItens;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.PlanoByServico;
 import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.produto.model.request.PlanoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
@@ -765,7 +766,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 				getHistoricoBAR(), response, contato.getId(),contato.getUserId());
 
 
-		
+
 
 		return response;
 	}
@@ -1427,12 +1428,12 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		}
 
-		if (!ValidationUtil.isNullOrEmpty(plano.getServicoList())) {
-			a += ServicoBARD.maintainServicoByPlanoAssociations(plano.getServicoList(),
-					 response, plano.getId(), null, null, TabelaEnum.PLANO, getSiteBAR(),
-					getStatusBAR(), getHistoricoBAR(), plano.getId(), plano.getCreateUser(), historicoId, historicoId);
-
-		}
+//		if (!ValidationUtil.isNullOrEmpty(plano.getServicoList())) {
+//			a += ServicoBARD.maintainServicoByPlanoAssociations(plano.getServicoList(),
+//					 response, plano.getId(), null, null, TabelaEnum.PLANO, getSiteBAR(),
+//					getStatusBAR(), getHistoricoBAR(), plano.getId(), plano.getCreateUser(), historicoId, historicoId);
+//
+//		}
 
 		Status status = new Status();
 		status.setStatus(CdStatusTypeEnum.ATIVO);
@@ -1467,13 +1468,13 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		}
 
-		if (!ValidationUtil.isNullOrEmpty(plano.getServicoList())) {
-			a += ServicoBARD.maintainServicoByPlanoAssociations(plano.getServicoList(),
-					 response, plano.getId(), null, null, TabelaEnum.PLANO, getSiteBAR(),
-					getStatusBAR(), getHistoricoBAR(), plano.getId(), plano.getCreateUser(), plano.getProcessId(),
-					plano.getProcessId());
-
-		}
+//		if (!ValidationUtil.isNullOrEmpty(plano.getServicoList())) {
+//			a += ServicoBARD.maintainServicoByPlanoAssociations(plano.getServicoList(),
+//					 response, plano.getId(), null, null, TabelaEnum.PLANO, getSiteBAR(),
+//					getStatusBAR(), getHistoricoBAR(), plano.getId(), plano.getCreateUser(), plano.getProcessId(),
+//					plano.getProcessId());
+//
+//		}
 
 		return response;
 	}
@@ -1700,7 +1701,31 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 	public InternalResponse insertServicoAndPlano(ServicoAndPlano servicoandplano)
 	{
 		InternalResponse response = new InternalResponse();
+
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_SERVICOANDPLANO, servicoandplano, response);
+		Integer a = 0;
+
+//		if (!ValidationUtil.isNull(servicoandplano.getServicoList())) {
+//			ArrayList<Servico> servicoList = new ArrayList<Servico>();
+//			servicoList.add(servicoandplano.getServicoList());
+//			a += ServicoBARD.maintainServicoAssociations(servicoList,  response,
+//					servicoandplano.getId(), null, null, TabelaEnum.SERVICO, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
+//					servicoandplano.getId(), servicoandplano.getCreateUser(), servicoandplano.getTransactionId(), servicoandplano.getTransactionId());
+//
+//		}
+//
+//		if (!ValidationUtil.isNull(servicoandplano.getPlanoList())) {
+//
+//			ArrayList<Plano> planoList = new ArrayList<Plano>();
+//			planoList.add(servicoandplano.getPlanoList());
+//
+//			a += PlanoBARD.maintainPlanoAssociations(planoList,  response,
+//					servicoandplano.getId(), null, null, TabelaEnum.PLANO, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
+//					servicoandplano.getId(), servicoandplano.getCreateUser(), servicoandplano.getTransactionId(), servicoandplano.getTransactionId());
+//
+//		}
+
+
 		return response;
 	}
 
@@ -1831,7 +1856,19 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 	public InternalResponse insertPlanoByEmpresa(PlanoByEmpresa planobyempresa)
 	{
 		InternalResponse response = new InternalResponse();
+
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PLANOBYEMPRESA, planobyempresa, response);
+
+		if (!ValidationUtil.isNullOrEmpty(planobyempresa.getPlanoServicoList()))
+		{
+			Integer a =
+					PlanoAndServicoBARD.maintainServicoAndPlanoAssociations(planobyempresa.getPlanoServicoList(), response, planobyempresa.getId(), null,
+							null,
+							TabelaEnum.PLANOBYEMPRESA, getSiteBAR(), getStatusBAR(), getHistoricoBAR(), planobyempresa.getId(),
+							planobyempresa.getCreateUser(), planobyempresa.getTransactionId(), planobyempresa.getTransactionId());
+		}
+
+
 		return response;
 	}
 

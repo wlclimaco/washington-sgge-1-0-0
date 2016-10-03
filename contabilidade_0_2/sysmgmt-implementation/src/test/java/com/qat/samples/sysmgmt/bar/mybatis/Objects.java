@@ -33,7 +33,6 @@ import com.qat.samples.sysmgmt.condpag.model.FormaPgPessoa;
 import com.qat.samples.sysmgmt.condpag.model.TipoPag;
 import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
-import com.qat.samples.sysmgmt.contabilidade.model.PlanoByServico;
 import com.qat.samples.sysmgmt.contato.model.Contato;
 import com.qat.samples.sysmgmt.contato.model.ContatoItens;
 import com.qat.samples.sysmgmt.convenio.model.Convenio;
@@ -106,6 +105,7 @@ import com.qat.samples.sysmgmt.produto.model.Ipi;
 import com.qat.samples.sysmgmt.produto.model.Marca;
 import com.qat.samples.sysmgmt.produto.model.MarcaProduto;
 import com.qat.samples.sysmgmt.produto.model.Pis;
+import com.qat.samples.sysmgmt.produto.model.PlanoByServico;
 import com.qat.samples.sysmgmt.produto.model.Porcao;
 import com.qat.samples.sysmgmt.produto.model.PorcaoItens;
 import com.qat.samples.sysmgmt.produto.model.Preco;
@@ -118,6 +118,7 @@ import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.produto.model.SubGrupo;
 import com.qat.samples.sysmgmt.produto.model.Tributacao;
 import com.qat.samples.sysmgmt.produto.model.UniMed;
+import com.qat.samples.sysmgmt.site.model.PlanoByEmpresa;
 import com.qat.samples.sysmgmt.site.model.ServicoAndPlano;
 import com.qat.samples.sysmgmt.site.model.Site;
 import com.qat.samples.sysmgmt.util.model.Cidade;
@@ -854,6 +855,33 @@ public class Objects {
 
 		return empresa;
 	}
+
+	private static PlanoByEmpresa insertPlanoByEmpresa(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+
+		PlanoByEmpresa empresa = new PlanoByEmpresa();
+		Date a = new Date();
+		empresa.setId(id);
+
+		empresa.setNumContrato(1000);
+		empresa.setValor(2.2);
+		empresa.setDataInicio(a.getTime());
+		empresa.setDataFim(a.getTime());
+		empresa.setPlanoServicoList(new ArrayList<ServicoAndPlano>());
+		empresa.getPlanoServicoList().add(insertServicoAndPlano(id, tabela, action));
+		empresa.setTabelaEnum(tabela);
+		empresa.setParentId(id);
+		empresa.setEmprId(EMPID);
+		empresa.setModifyDateUTC(a.getTime());
+		empresa.setCreateDateUTC(a.getTime());
+		empresa.setCreateUser("system");
+		empresa.setModifyUser("system");
+		empresa.setProcessId(1);
+		empresa.setModelAction(action);
+
+		return empresa;
+	}
+
+
 
 	public static Filial insertFilial(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Filial filial = new Filial();
@@ -1743,7 +1771,7 @@ public class Objects {
 		PlanoByServico planobyservico = new PlanoByServico();
 		Date a = new Date();
 		planobyservico.setId(id);
-		planobyservico.setServico(insertServico(id, TabelaEnum.CUSTO, action));
+	//	planobyservico.setServico(insertServico(id, TabelaEnum.CUSTO, action));
 		planobyservico.setTabelaEnum(tabela);
 		planobyservico.setParentId(id);
 		planobyservico.setEmprId(EMPID);
@@ -1887,8 +1915,8 @@ public class Objects {
 		plano.setCor("cor_6 - " + action.toString());
 		plano.setPrecoList(new ArrayList<Preco>());
 		plano.getPrecoList().add(insertPreco(id, TabelaEnum.PLANO, action));
-		plano.setServicoList(new ArrayList<PlanoByServico>());
-		plano.getServicoList().add(insertPlanoByServico(id, TabelaEnum.PLANO, action));
+	//	plano.setServicoList(new ArrayList<PlanoByServico>());
+	//	plano.getServicoList().add(insertPlanoByServico(id, TabelaEnum.PLANO, action));
 		plano.setTabelaEnum(tabela);
 		plano.setParentId(id);
 		plano.setEmprId(EMPID);
@@ -3313,6 +3341,26 @@ public static NotaFiscalItens insertNotaFiscalItens(Integer id,TabelaEnum tabela
 	notafiscalitens.setValorDesconto(new Double(10.00));
 	notafiscalitens.setValorOutrasDespesasAcessorias(new Double(10.00));
 	notafiscalitens.setNumeroRECOPI(100);
+	notafiscalitens.setParentId(id);
+	notafiscalitens.setEmprId(1);
+	notafiscalitens.setModifyDateUTC(a.getTime());
+	notafiscalitens.setCreateDateUTC(a.getTime());
+	notafiscalitens.setCreateUser("system");
+	notafiscalitens.setModifyUser("system");
+	notafiscalitens.setProcessId(1);
+	notafiscalitens.setModelAction(action);
+
+	return notafiscalitens;
+}
+
+
+
+public static ServicoAndPlano insertServicoByPlano(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+
+	ServicoAndPlano notafiscalitens = new ServicoAndPlano();
+	Date a = new Date();
+	notafiscalitens.setId(id);
+
 	notafiscalitens.setParentId(id);
 	notafiscalitens.setEmprId(1);
 	notafiscalitens.setModifyDateUTC(a.getTime());

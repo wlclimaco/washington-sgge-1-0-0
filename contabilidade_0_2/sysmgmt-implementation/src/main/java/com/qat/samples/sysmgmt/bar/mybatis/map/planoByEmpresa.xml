@@ -21,7 +21,6 @@
     <result property="dataInicio" column="dataInicio"/>
     <result property="dataFim" column="dataFim" />
     <result property="valor" column="valor"/>
-    <result property="servicoPlano" column="servicoPlano"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -39,8 +38,6 @@ numContrato
 ,dataInicio
 ,dataFim
 ,valor
-,servicoPlano
-,planoId
 ,parentId
 ,tabelaEnumValue
 ,emprId
@@ -55,9 +52,7 @@ numContrato
 #{numContrato},
 #{dataInicio},
 #{dataFim},
-#{servicoPlano},
 #{valor},
-#{planoId.id},
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -107,11 +102,9 @@ numContrato
 <if test="dataInicio!= null">dataInicio = #{dataInicio},</if>
 <if test="dataFim!= null">dataFim = #{dataFim},</if>
 <if test="valor!= null">valor = #{valor},</if>
-<if test="planoId!= null">planoId = #{planoId.id},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>
-<if test="servicoPlano!= null"> servicoPlano=#{servicoPlano},</if>
 <if test="processId!= null"> processId=#{processId},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>

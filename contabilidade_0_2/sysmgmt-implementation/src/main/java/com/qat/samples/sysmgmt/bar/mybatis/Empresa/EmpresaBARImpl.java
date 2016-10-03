@@ -597,18 +597,11 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 							empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
 
 		}
-//		if (!ValidationUtil.isNullOrEmpty(empresa.getPlanosServicos()))
-//		{
-//			a +=
-//					ServicoAndPlanoBARD.maintainServicoAndPlanoAssociations(empresa.getPlanosServicos(), response, empresa.getId(), null, null,
-//							TabelaEnum.EMPRESA, getSiteBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-//							empresa.getCreateUser(), historicoId, historicoId);
-//		}
 
-		if (!ValidationUtil.isNullOrEmpty(empresa.getPlanoByEmpresaList()))
+		if (!ValidationUtil.isNull(empresa.getPlanosServicos()))
 		{
 			a +=
-					PlanoByEmpresaBARD.maintainPlanoByEmpresaAssociations(empresa.getPlanoByEmpresaList(), response, empresa.getId(), null,
+					PlanoByEmpresaBARD.maintainPlanoByEmpresaAssociations(empresa.getPlanosServicos(), response, empresa.getId(), null,
 							null,
 							TabelaEnum.EMPRESA, getSiteBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
 							empresa.getCreateUser(), historicoId, historicoId);
