@@ -6,7 +6,7 @@ import com.qat.samples.sysmgmt.banco.model.BancoPessoa;
 import com.qat.samples.sysmgmt.cnae.model.CnaeEmpresa;
 import com.qat.samples.sysmgmt.fiscal.model.Regime;
 import com.qat.samples.sysmgmt.pessoa.model.Socio;
-import com.qat.samples.sysmgmt.site.model.ServicoAndPlano;
+import com.qat.samples.sysmgmt.site.model.PlanoByEmpresa;
 import com.qat.samples.sysmgmt.util.model.Documento;
 import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.Endereco;
@@ -58,7 +58,7 @@ public class Entidade extends ModelCosmeDamiao
 
 	private List<BancoPessoa> bancos;
 
-	private List<ServicoAndPlano> planosServicos;
+	private List<PlanoByEmpresa> planosServicos;
 
 	private List<Socio> socios;
 
@@ -301,11 +301,11 @@ public class Entidade extends ModelCosmeDamiao
 		this.numFunc = numFunc;
 	}
 
-	public List<ServicoAndPlano> getPlanosServicos() {
+	public List<PlanoByEmpresa> getPlanosServicos() {
 		return planosServicos;
 	}
 
-	public void setPlanosServicos(List<ServicoAndPlano> planosServicos) {
+	public void setPlanosServicos(List<PlanoByEmpresa> planosServicos) {
 		this.planosServicos = planosServicos;
 	}
 

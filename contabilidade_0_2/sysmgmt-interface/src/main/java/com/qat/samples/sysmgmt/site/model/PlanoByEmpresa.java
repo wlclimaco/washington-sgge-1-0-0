@@ -1,6 +1,9 @@
 package com.qat.samples.sysmgmt.site.model;
 
+import java.util.List;
+
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
+import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -21,12 +24,14 @@ public class PlanoByEmpresa extends ModelCosmeDamiao {
 
 	private Long dataFim;
 
-	private Plano planoId;
+	private List<ServicoAndPlano> planoServicoList;
+	
 
 	public PlanoByEmpresa() {
 
 	}
-
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -67,19 +72,27 @@ public class PlanoByEmpresa extends ModelCosmeDamiao {
 		this.dataFim = dataFim;
 	}
 
-	public Plano getPlanoId() {
-		return planoId;
+
+	public List<ServicoAndPlano> getPlanoServicoList() {
+		return planoServicoList;
 	}
 
-	public void setPlanoId(Plano planoId) {
-		this.planoId = planoId;
+
+	public void setPlanoServicoList(List<ServicoAndPlano> planoServicoList) {
+		this.planoServicoList = planoServicoList;
 	}
+
 
 	@Override
 	public String toString() {
 		return "PlanoByEmpresa [getId()=" + getId() + ", getNumContrato()=" + getNumContrato() + ", getValor()="
 				+ getValor() + ", getDataInicio()=" + getDataInicio() + ", getDataFim()=" + getDataFim()
-				+ ", getPlanoId()=" + getPlanoId() + ", toString()=" + super.toString() + "]";
+				+ ", getPlanoServicoList()=" + getPlanoServicoList() + ", toString()=" + super.toString() + "]";
 	}
+	
+	
 
+	
+
+	
 }

@@ -74,12 +74,12 @@ codigo
  <select id="fetchAllCidadesRequest" parameterType="CidadeInquiryRequest" resultMap="CidadeResult">
 
 		SELECT id,<include refid="allCidadeColumns" />
-  		  FROM cidade where 0 = 0 <if test="id != null"> and id = id </if> ORDER BY nome ASC
+  		  FROM cidade where 0 = 0 <if test="id != null"> and id = id </if> <if test="estadoId != null"> and estado = #{estadoId} </if> ORDER BY nome ASC
 
 </select>
 
 <select id="fetchCidadeRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM cidade WHERE id IS NOT NULL <if test="id != null"> and id = id </if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM cidade WHERE id IS NOT NULL <if test="id != null"> and id = id </if> <if test="estadoId != null"> and estado = #{estadoId} </if>
 
  </select>
 

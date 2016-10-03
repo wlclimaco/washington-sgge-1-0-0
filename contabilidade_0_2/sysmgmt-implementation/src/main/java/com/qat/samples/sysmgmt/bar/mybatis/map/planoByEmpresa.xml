@@ -21,7 +21,7 @@
     <result property="dataInicio" column="dataInicio"/>
     <result property="dataFim" column="dataFim" />
     <result property="valor" column="valor"/>
-    
+    <result property="servicoPlano" column="servicoPlano"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -30,7 +30,8 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="planoId" column="planoId" select="RegimeMap.fetchRegimeById"/>
+<collection property="planoServicoList" column="id" select="RegimeMap.fetchRegimeById"/>
+
   </resultMap>
 
   <sql id="allPlanoByEmpresaColumns">
@@ -38,6 +39,7 @@ numContrato
 ,dataInicio
 ,dataFim
 ,valor
+,servicoPlano
 ,planoId
 ,parentId
 ,tabelaEnumValue
@@ -53,6 +55,7 @@ numContrato
 #{numContrato},
 #{dataInicio},
 #{dataFim},
+#{servicoPlano},
 #{valor},
 #{planoId.id},
      #{parentId},
@@ -108,6 +111,7 @@ numContrato
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="servicoPlano!= null"> servicoPlano=#{servicoPlano},</if>
 <if test="processId!= null"> processId=#{processId},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
