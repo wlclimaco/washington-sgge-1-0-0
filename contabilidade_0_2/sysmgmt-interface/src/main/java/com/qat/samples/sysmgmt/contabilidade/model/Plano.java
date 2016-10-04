@@ -6,6 +6,7 @@ import java.util.List;
 import com.qat.samples.sysmgmt.produto.model.PlanoByServico;
 import com.qat.samples.sysmgmt.produto.model.Preco;
 import com.qat.samples.sysmgmt.produto.model.Servico;
+import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -26,6 +27,8 @@ public class Plano extends ModelCosmeDamiao
 	private Integer numeroContrato;
 
 	private List<Servico> servicoList;
+	
+	private List<DoisValores> itensList;
 
 	private String descricao;
 
@@ -150,12 +153,21 @@ public class Plano extends ModelCosmeDamiao
 		this.cor = cor;
 	}
 
+	public List<DoisValores> getItensList() {
+		return itensList;
+	}
+
+	public void setItensList(List<DoisValores> itensList) {
+		this.itensList = itensList;
+	}
+
 	@Override
 	public String toString() {
 		return "Plano [getDataInicio()=" + getDataInicio() + ", getDataFinal()=" + getDataFinal()
 				+ ", getNumeroContrato()=" + getNumeroContrato() + ", getId()=" + getId() + ", getPrecoList()="
 				+ getPrecoList() + ", getServicoList()=" + getServicoList() + ", getDescricao()=" + getDescricao()
-				+ ", getTitulo()=" + getTitulo() + ", getCor()=" + getCor() + ", toString()=" + super.toString() + "]";
+				+ ", getTitulo()=" + getTitulo() + ", getCor()=" + getCor() + ", getItensList()=" + getItensList()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 

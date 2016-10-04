@@ -17,10 +17,11 @@ import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Produto.IPrecoBAR;
 import com.qat.samples.sysmgmt.bar.Site.ISiteBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.bar.Util.IDoisValorBAR;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.DoisValoresBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.OrdemServicoItensBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.PlanoAndServicoBARD;
-import com.qat.samples.sysmgmt.bar.mybatis.delegate.PlanoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.PrecoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ServicoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.StatusBARD;
@@ -333,6 +334,8 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 	IPrecoBAR precoBAR;
 
 	ISiteBAR siteBAR;
+	
+	IDoisValorBAR doisValorBAR;
 
 	public IStatusBAR getStatusBAR() {
 		return statusBAR;
@@ -364,6 +367,14 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 	public void setSiteBAR(ISiteBAR siteBAR) {
 		this.siteBAR = siteBAR;
+	}
+
+	public IDoisValorBAR getDoisValorBAR() {
+		return doisValorBAR;
+	}
+
+	public void setDoisValorBAR(IDoisValorBAR doisValorBAR) {
+		this.doisValorBAR = doisValorBAR;
 	}
 
 	/**
@@ -1424,6 +1435,13 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		if (!ValidationUtil.isNullOrEmpty(plano.getPrecoList())) {
 			a += PrecoBARD.maintainPrecoAssociations(plano.getPrecoList(),  response,
 					plano.getId(), null, null, TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(),
+					plano.getId(), plano.getCreateUser(), historicoId, historicoId);
+
+		}
+		
+		if (!ValidationUtil.isNullOrEmpty(plano.getItensList())) {
+			a += DoisValoresBARD.maintainDoisValoresAssociations(plano.getItensList(),  response,
+					plano.getId(), null, null, TabelaEnum.EMPRESA, getDoisValorBAR(), getStatusBAR(), getHistoricoBAR(),
 					plano.getId(), plano.getCreateUser(), historicoId, historicoId);
 
 		}

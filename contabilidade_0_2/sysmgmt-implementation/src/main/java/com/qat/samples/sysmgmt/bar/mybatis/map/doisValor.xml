@@ -51,6 +51,12 @@
  <include refid="allDoisValorColumns" />
    FROM doisvalor WHERE id = #{fetchid}
  </select>
+ 
+ <select id="fetchItensByPlano" parameterType="Integer" resultMap="DoisValorResult">
+    SELECT id,
+ <include refid="allDoisValorColumns" />
+   FROM doisvalor WHERE tabelaEnumValue = 54 and parentId = #{id}
+ </select>
 
     <select id="fetchAllDoisValorsRequest" parameterType="DoisValorInquiryRequest" resultMap="DoisValorResult">
 

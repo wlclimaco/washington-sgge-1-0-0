@@ -64,6 +64,7 @@
 		<property name="statusBAR" ref="statusBARTarget" />
 		<property name="precoBAR" ref="precoBARTarget" />
 		<property name="siteBAR" ref="siteBARTarget" />
+		<property name="doisValorBAR" ref="doisValorBARTarget" />
 
 	</bean>
 
