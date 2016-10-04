@@ -66,9 +66,9 @@ public IVendasBAR getVendasBAR()
 @Test
 	public void testDeleteNotaFiscalSaida()
 	{
-		NotaFiscalSaida notafiscalsaida = insertNotaFiscalSaida(4, TabelaEnum.NOTAFISCALSAIDA, PersistenceActionEnum.INSERT);
+		NotaFiscalSaida notafiscalsaida = insertNotaFiscalSaida(4000, TabelaEnum.NOTAFISCALSAIDA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(4000);
 		NotaFiscalSaida notafiscalsaidaResponse = getVendasBAR().fetchNotaFiscalSaidaById(request);
 		Assert.assertEquals(notafiscalsaidaResponse, null);
 		getVendasBAR().insertNotaFiscalSaida(notafiscalsaida);
@@ -93,7 +93,7 @@ public IVendasBAR getVendasBAR()
 		getVendasBAR().deleteAllNotaFiscalSaidas();
 	NotaFiscalSaida notafiscalsaida = new NotaFiscalSaida();
 		List<NotaFiscalSaida> response = getVendasBAR().fetchAllNotaFiscalSaidas(new NotaFiscalSaida()).getResultsList();
-		Assert.assertEquals(response.size(), 9);
+		Assert.assertEquals(response.size(), 10);
 	}
 
 	@Test
@@ -154,9 +154,9 @@ public IVendasBAR getVendasBAR()
 @Test
 	public void testDeleteOrcamento()
 	{
-		Orcamento orcamento = insertOrcamento(4, TabelaEnum.ORCAMENTO, PersistenceActionEnum.INSERT);
+		Orcamento orcamento = insertOrcamento(4000, TabelaEnum.ORCAMENTO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(4000);
 		Orcamento orcamentoResponse = getVendasBAR().fetchOrcamentoById(request);
 		Assert.assertEquals(orcamentoResponse, null);
 		getVendasBAR().insertOrcamento(orcamento);

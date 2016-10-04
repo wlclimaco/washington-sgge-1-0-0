@@ -334,7 +334,7 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 	IPrecoBAR precoBAR;
 
 	ISiteBAR siteBAR;
-	
+
 	IDoisValorBAR doisValorBAR;
 
 	public IStatusBAR getStatusBAR() {
@@ -1434,24 +1434,24 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 
 		if (!ValidationUtil.isNullOrEmpty(plano.getPrecoList())) {
 			a += PrecoBARD.maintainPrecoAssociations(plano.getPrecoList(),  response,
-					plano.getId(), null, null, TabelaEnum.EMPRESA, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(),
+					plano.getId(), null, null, TabelaEnum.PLANO, getPrecoBAR(), getStatusBAR(), getHistoricoBAR(),
 					plano.getId(), plano.getCreateUser(), historicoId, historicoId);
 
 		}
-		
+
 		if (!ValidationUtil.isNullOrEmpty(plano.getItensList())) {
 			a += DoisValoresBARD.maintainDoisValoresAssociations(plano.getItensList(),  response,
-					plano.getId(), null, null, TabelaEnum.EMPRESA, getDoisValorBAR(), getStatusBAR(), getHistoricoBAR(),
+					plano.getId(), null, null, TabelaEnum.PLANO, getDoisValorBAR(), getStatusBAR(), getHistoricoBAR(),
 					plano.getId(), plano.getCreateUser(), historicoId, historicoId);
 
 		}
 
-//		if (!ValidationUtil.isNullOrEmpty(plano.getServicoList())) {
-//			a += ServicoBARD.maintainServicoByPlanoAssociations(plano.getServicoList(),
-//					 response, plano.getId(), null, null, TabelaEnum.PLANO, getSiteBAR(),
-//					getStatusBAR(), getHistoricoBAR(), plano.getId(), plano.getCreateUser(), historicoId, historicoId);
-//
-//		}
+		if (!ValidationUtil.isNullOrEmpty(plano.getServicoList())) {
+			a += ServicoBARD.maintainServicoAssociations(plano.getServicoList(),  response,
+					plano.getId(), null, null, TabelaEnum.PLANO, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
+					plano.getId(), plano.getCreateUser(), historicoId, historicoId);
+
+		}
 
 		Status status = new Status();
 		status.setStatus(CdStatusTypeEnum.ATIVO);

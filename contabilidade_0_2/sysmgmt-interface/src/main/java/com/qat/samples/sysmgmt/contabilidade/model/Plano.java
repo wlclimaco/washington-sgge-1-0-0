@@ -27,7 +27,7 @@ public class Plano extends ModelCosmeDamiao
 	private Integer numeroContrato;
 
 	private List<Servico> servicoList;
-	
+
 	private List<DoisValores> itensList;
 
 	private String descricao;
