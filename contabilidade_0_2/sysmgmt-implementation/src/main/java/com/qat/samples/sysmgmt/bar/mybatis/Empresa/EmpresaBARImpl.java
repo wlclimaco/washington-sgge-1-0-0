@@ -29,6 +29,7 @@ import com.qat.samples.sysmgmt.bar.Socios.ISociosBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.BaseBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.EnviarEmailBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.PlanoByEmpresaBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.SociosBARD;
@@ -108,7 +109,6 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	/** The Constant STMT_FETCH_EMPRESA_ALL_REQUEST. */
 	private static final String STMT_FETCH_EMPRESA_ALL_REQUEST = NAMESPACE_EMPRESA + "fetchAllEmpresasByRequest";
 
-
 	/// ======================================
 
 	private static final String NAMESPACE_ENDERECO = "EnderecoMap.";
@@ -136,8 +136,8 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	/** The Constant STMT_FETCH_FILIAL_ALL_REQUEST. */
 	private static final String STMT_FETCH_FILIAL_ALL_REQUEST = NAMESPACE_FILIAL + "fetchAllFilialsByRequest";
 
-
-	///===================================### USERROLES ####======================================
+	/// ===================================### USERROLES
+	/// ####======================================
 	/** The Constant NAMESPACE. */
 	private static final String NAMESPACE_USERROLES = "UserRolesMap.";
 
@@ -150,22 +150,23 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	/** The Constant STMT_DELETE_USERROLES. */
 	private static final String STMT_DELETE_USERROLES = NAMESPACE_USERROLES + "deleteUserRolesById";
 
-		/** The Constant STMT_DELETE_USERROLES_ALL. */
-		private static final String STMT_DELETE_USERROLES_ALL = NAMESPACE_USERROLES + "deleteAllUserRoless";
+	/** The Constant STMT_DELETE_USERROLES_ALL. */
+	private static final String STMT_DELETE_USERROLES_ALL = NAMESPACE_USERROLES + "deleteAllUserRoless";
 
-		/** The Constant STMT_FETCH_USERROLES. */
-		private static final String STMT_FETCH_USERROLES = NAMESPACE_USERROLES + "fetchUserRolesById";
+	/** The Constant STMT_FETCH_USERROLES. */
+	private static final String STMT_FETCH_USERROLES = NAMESPACE_USERROLES + "fetchUserRolesById";
 
-		/** The Constant STMT_FETCH_USERROLES_ALL. */
-		private static final String STMT_FETCH_USERROLES_ALL = NAMESPACE_USERROLES + "fetchAllUserRoless";
+	/** The Constant STMT_FETCH_USERROLES_ALL. */
+	private static final String STMT_FETCH_USERROLES_ALL = NAMESPACE_USERROLES + "fetchAllUserRoless";
 
-		/** The Constant STMT_FETCH_USERROLES_COUNT. */
-		private static final String STMT_FETCH_USERROLES_COUNT = NAMESPACE_USERROLES + "fetchUserRolesRowCount";
+	/** The Constant STMT_FETCH_USERROLES_COUNT. */
+	private static final String STMT_FETCH_USERROLES_COUNT = NAMESPACE_USERROLES + "fetchUserRolesRowCount";
 
-		/** The Constant STMT_FETCH_USERROLES_ALL_REQUEST. */
-		private static final String STMT_FETCH_USERROLES_ALL_REQUEST = NAMESPACE_USERROLES + "fetchAllUserRolessRequest";
+	/** The Constant STMT_FETCH_USERROLES_ALL_REQUEST. */
+	private static final String STMT_FETCH_USERROLES_ALL_REQUEST = NAMESPACE_USERROLES + "fetchAllUserRolessRequest";
 
-	///===================================### ROLE ####======================================
+	/// ===================================### ROLE
+	/// ####======================================
 	/** The Constant NAMESPACE. */
 	private static final String NAMESPACE_ROLE = "RoleMap.";
 
@@ -178,22 +179,23 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	/** The Constant STMT_DELETE_ROLE. */
 	private static final String STMT_DELETE_ROLE = NAMESPACE_ROLE + "deleteRoleById";
 
-		/** The Constant STMT_DELETE_ROLE_ALL. */
-		private static final String STMT_DELETE_ROLE_ALL = NAMESPACE_ROLE + "deleteAllRoles";
+	/** The Constant STMT_DELETE_ROLE_ALL. */
+	private static final String STMT_DELETE_ROLE_ALL = NAMESPACE_ROLE + "deleteAllRoles";
 
-		/** The Constant STMT_FETCH_ROLE. */
-		private static final String STMT_FETCH_ROLE = NAMESPACE_ROLE + "fetchRoleById";
+	/** The Constant STMT_FETCH_ROLE. */
+	private static final String STMT_FETCH_ROLE = NAMESPACE_ROLE + "fetchRoleById";
 
-		/** The Constant STMT_FETCH_ROLE_ALL. */
-		private static final String STMT_FETCH_ROLE_ALL = NAMESPACE_ROLE + "fetchAllRoles";
+	/** The Constant STMT_FETCH_ROLE_ALL. */
+	private static final String STMT_FETCH_ROLE_ALL = NAMESPACE_ROLE + "fetchAllRoles";
 
-		/** The Constant STMT_FETCH_ROLE_COUNT. */
-		private static final String STMT_FETCH_ROLE_COUNT = NAMESPACE_ROLE + "fetchRoleRowCount";
+	/** The Constant STMT_FETCH_ROLE_COUNT. */
+	private static final String STMT_FETCH_ROLE_COUNT = NAMESPACE_ROLE + "fetchRoleRowCount";
 
-		/** The Constant STMT_FETCH_ROLE_ALL_REQUEST. */
-		private static final String STMT_FETCH_ROLE_ALL_REQUEST = NAMESPACE_ROLE + "fetchAllRolesRequest";
+	/** The Constant STMT_FETCH_ROLE_ALL_REQUEST. */
+	private static final String STMT_FETCH_ROLE_ALL_REQUEST = NAMESPACE_ROLE + "fetchAllRolesRequest";
 
-	///===================================### PAGINA ####======================================
+	/// ===================================### PAGINA
+	/// ####======================================
 	/** The Constant NAMESPACE. */
 	private static final String NAMESPACE_PAGINA = "PaginaMap.";
 
@@ -206,22 +208,23 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	/** The Constant STMT_DELETE_PAGINA. */
 	private static final String STMT_DELETE_PAGINA = NAMESPACE_PAGINA + "deletePaginaById";
 
-		/** The Constant STMT_DELETE_PAGINA_ALL. */
-		private static final String STMT_DELETE_PAGINA_ALL = NAMESPACE_PAGINA + "deleteAllPaginas";
+	/** The Constant STMT_DELETE_PAGINA_ALL. */
+	private static final String STMT_DELETE_PAGINA_ALL = NAMESPACE_PAGINA + "deleteAllPaginas";
 
-		/** The Constant STMT_FETCH_PAGINA. */
-		private static final String STMT_FETCH_PAGINA = NAMESPACE_PAGINA + "fetchPaginaById";
+	/** The Constant STMT_FETCH_PAGINA. */
+	private static final String STMT_FETCH_PAGINA = NAMESPACE_PAGINA + "fetchPaginaById";
 
-		/** The Constant STMT_FETCH_PAGINA_ALL. */
-		private static final String STMT_FETCH_PAGINA_ALL = NAMESPACE_PAGINA + "fetchAllPaginas";
+	/** The Constant STMT_FETCH_PAGINA_ALL. */
+	private static final String STMT_FETCH_PAGINA_ALL = NAMESPACE_PAGINA + "fetchAllPaginas";
 
-		/** The Constant STMT_FETCH_PAGINA_COUNT. */
-		private static final String STMT_FETCH_PAGINA_COUNT = NAMESPACE_PAGINA + "fetchPaginaRowCount";
+	/** The Constant STMT_FETCH_PAGINA_COUNT. */
+	private static final String STMT_FETCH_PAGINA_COUNT = NAMESPACE_PAGINA + "fetchPaginaRowCount";
 
-		/** The Constant STMT_FETCH_PAGINA_ALL_REQUEST. */
-		private static final String STMT_FETCH_PAGINA_ALL_REQUEST = NAMESPACE_PAGINA + "fetchAllPaginasRequest";
+	/** The Constant STMT_FETCH_PAGINA_ALL_REQUEST. */
+	private static final String STMT_FETCH_PAGINA_ALL_REQUEST = NAMESPACE_PAGINA + "fetchAllPaginasRequest";
 
-	///===================================### VALIDACAO ####======================================
+	/// ===================================### VALIDACAO
+	/// ####======================================
 	/** The Constant NAMESPACE. */
 	private static final String NAMESPACE_VALIDACAO = "ValidacaoMap.";
 
@@ -234,22 +237,23 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	/** The Constant STMT_DELETE_VALIDACAO. */
 	private static final String STMT_DELETE_VALIDACAO = NAMESPACE_VALIDACAO + "deleteValidacaoById";
 
-		/** The Constant STMT_DELETE_VALIDACAO_ALL. */
-		private static final String STMT_DELETE_VALIDACAO_ALL = NAMESPACE_VALIDACAO + "deleteAllValidacaos";
+	/** The Constant STMT_DELETE_VALIDACAO_ALL. */
+	private static final String STMT_DELETE_VALIDACAO_ALL = NAMESPACE_VALIDACAO + "deleteAllValidacaos";
 
-		/** The Constant STMT_FETCH_VALIDACAO. */
-		private static final String STMT_FETCH_VALIDACAO = NAMESPACE_VALIDACAO + "fetchValidacaoById";
+	/** The Constant STMT_FETCH_VALIDACAO. */
+	private static final String STMT_FETCH_VALIDACAO = NAMESPACE_VALIDACAO + "fetchValidacaoById";
 
-		/** The Constant STMT_FETCH_VALIDACAO_ALL. */
-		private static final String STMT_FETCH_VALIDACAO_ALL = NAMESPACE_VALIDACAO + "fetchAllValidacaos";
+	/** The Constant STMT_FETCH_VALIDACAO_ALL. */
+	private static final String STMT_FETCH_VALIDACAO_ALL = NAMESPACE_VALIDACAO + "fetchAllValidacaos";
 
-		/** The Constant STMT_FETCH_VALIDACAO_COUNT. */
-		private static final String STMT_FETCH_VALIDACAO_COUNT = NAMESPACE_VALIDACAO + "fetchValidacaoRowCount";
+	/** The Constant STMT_FETCH_VALIDACAO_COUNT. */
+	private static final String STMT_FETCH_VALIDACAO_COUNT = NAMESPACE_VALIDACAO + "fetchValidacaoRowCount";
 
-		/** The Constant STMT_FETCH_VALIDACAO_ALL_REQUEST. */
-		private static final String STMT_FETCH_VALIDACAO_ALL_REQUEST = NAMESPACE_VALIDACAO + "fetchAllValidacaosRequest";
+	/** The Constant STMT_FETCH_VALIDACAO_ALL_REQUEST. */
+	private static final String STMT_FETCH_VALIDACAO_ALL_REQUEST = NAMESPACE_VALIDACAO + "fetchAllValidacaosRequest";
 
-	///===================================### FIELD ####======================================
+	/// ===================================### FIELD
+	/// ####======================================
 	/** The Constant NAMESPACE. */
 	private static final String NAMESPACE_FIELD = "FieldMap.";
 
@@ -262,22 +266,23 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	/** The Constant STMT_DELETE_FIELD. */
 	private static final String STMT_DELETE_FIELD = NAMESPACE_FIELD + "deleteFieldById";
 
-		/** The Constant STMT_DELETE_FIELD_ALL. */
-		private static final String STMT_DELETE_FIELD_ALL = NAMESPACE_FIELD + "deleteAllFields";
+	/** The Constant STMT_DELETE_FIELD_ALL. */
+	private static final String STMT_DELETE_FIELD_ALL = NAMESPACE_FIELD + "deleteAllFields";
 
-		/** The Constant STMT_FETCH_FIELD. */
-		private static final String STMT_FETCH_FIELD = NAMESPACE_FIELD + "fetchFieldById";
+	/** The Constant STMT_FETCH_FIELD. */
+	private static final String STMT_FETCH_FIELD = NAMESPACE_FIELD + "fetchFieldById";
 
-		/** The Constant STMT_FETCH_FIELD_ALL. */
-		private static final String STMT_FETCH_FIELD_ALL = NAMESPACE_FIELD + "fetchAllFields";
+	/** The Constant STMT_FETCH_FIELD_ALL. */
+	private static final String STMT_FETCH_FIELD_ALL = NAMESPACE_FIELD + "fetchAllFields";
 
-		/** The Constant STMT_FETCH_FIELD_COUNT. */
-		private static final String STMT_FETCH_FIELD_COUNT = NAMESPACE_FIELD + "fetchFieldRowCount";
+	/** The Constant STMT_FETCH_FIELD_COUNT. */
+	private static final String STMT_FETCH_FIELD_COUNT = NAMESPACE_FIELD + "fetchFieldRowCount";
 
-		/** The Constant STMT_FETCH_FIELD_ALL_REQUEST. */
-		private static final String STMT_FETCH_FIELD_ALL_REQUEST = NAMESPACE_FIELD + "fetchAllFieldsRequest";
+	/** The Constant STMT_FETCH_FIELD_ALL_REQUEST. */
+	private static final String STMT_FETCH_FIELD_ALL_REQUEST = NAMESPACE_FIELD + "fetchAllFieldsRequest";
 
-	///===================================### AJUDA ####======================================
+	/// ===================================### AJUDA
+	/// ####======================================
 	/** The Constant NAMESPACE. */
 	private static final String NAMESPACE_AJUDA = "AjudaMap.";
 
@@ -290,22 +295,23 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	/** The Constant STMT_DELETE_AJUDA. */
 	private static final String STMT_DELETE_AJUDA = NAMESPACE_AJUDA + "deleteAjudaById";
 
-		/** The Constant STMT_DELETE_AJUDA_ALL. */
-		private static final String STMT_DELETE_AJUDA_ALL = NAMESPACE_AJUDA + "deleteAllAjudas";
+	/** The Constant STMT_DELETE_AJUDA_ALL. */
+	private static final String STMT_DELETE_AJUDA_ALL = NAMESPACE_AJUDA + "deleteAllAjudas";
 
-		/** The Constant STMT_FETCH_AJUDA. */
-		private static final String STMT_FETCH_AJUDA = NAMESPACE_AJUDA + "fetchAjudaById";
+	/** The Constant STMT_FETCH_AJUDA. */
+	private static final String STMT_FETCH_AJUDA = NAMESPACE_AJUDA + "fetchAjudaById";
 
-		/** The Constant STMT_FETCH_AJUDA_ALL. */
-		private static final String STMT_FETCH_AJUDA_ALL = NAMESPACE_AJUDA + "fetchAllAjudas";
+	/** The Constant STMT_FETCH_AJUDA_ALL. */
+	private static final String STMT_FETCH_AJUDA_ALL = NAMESPACE_AJUDA + "fetchAllAjudas";
 
-		/** The Constant STMT_FETCH_AJUDA_COUNT. */
-		private static final String STMT_FETCH_AJUDA_COUNT = NAMESPACE_AJUDA + "fetchAjudaRowCount";
+	/** The Constant STMT_FETCH_AJUDA_COUNT. */
+	private static final String STMT_FETCH_AJUDA_COUNT = NAMESPACE_AJUDA + "fetchAjudaRowCount";
 
-		/** The Constant STMT_FETCH_AJUDA_ALL_REQUEST. */
-		private static final String STMT_FETCH_AJUDA_ALL_REQUEST = NAMESPACE_AJUDA + "fetchAllAjudasRequest";
+	/** The Constant STMT_FETCH_AJUDA_ALL_REQUEST. */
+	private static final String STMT_FETCH_AJUDA_ALL_REQUEST = NAMESPACE_AJUDA + "fetchAllAjudasRequest";
 
-	///===================================### MENU ####======================================
+	/// ===================================### MENU
+	/// ####======================================
 	/** The Constant NAMESPACE. */
 	private static final String NAMESPACE_MENU = "MenuMap.";
 
@@ -318,20 +324,20 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	/** The Constant STMT_DELETE_MENU. */
 	private static final String STMT_DELETE_MENU = NAMESPACE_MENU + "deleteMenuById";
 
-		/** The Constant STMT_DELETE_MENU_ALL. */
-		private static final String STMT_DELETE_MENU_ALL = NAMESPACE_MENU + "deleteAllMenus";
+	/** The Constant STMT_DELETE_MENU_ALL. */
+	private static final String STMT_DELETE_MENU_ALL = NAMESPACE_MENU + "deleteAllMenus";
 
-		/** The Constant STMT_FETCH_MENU. */
-		private static final String STMT_FETCH_MENU = NAMESPACE_MENU + "fetchMenuById";
+	/** The Constant STMT_FETCH_MENU. */
+	private static final String STMT_FETCH_MENU = NAMESPACE_MENU + "fetchMenuById";
 
-		/** The Constant STMT_FETCH_MENU_ALL. */
-		private static final String STMT_FETCH_MENU_ALL = NAMESPACE_MENU + "fetchAllMenus";
+	/** The Constant STMT_FETCH_MENU_ALL. */
+	private static final String STMT_FETCH_MENU_ALL = NAMESPACE_MENU + "fetchAllMenus";
 
-		/** The Constant STMT_FETCH_MENU_COUNT. */
-		private static final String STMT_FETCH_MENU_COUNT = NAMESPACE_MENU + "fetchMenuRowCount";
+	/** The Constant STMT_FETCH_MENU_COUNT. */
+	private static final String STMT_FETCH_MENU_COUNT = NAMESPACE_MENU + "fetchMenuRowCount";
 
-		/** The Constant STMT_FETCH_MENU_ALL_REQUEST. */
-		private static final String STMT_FETCH_MENU_ALL_REQUEST = NAMESPACE_MENU + "fetchAllMenusRequest";
+	/** The Constant STMT_FETCH_MENU_ALL_REQUEST. */
+	private static final String STMT_FETCH_MENU_ALL_REQUEST = NAMESPACE_MENU + "fetchAllMenusRequest";
 
 	/// ===================================### DEPOSITO
 	/// ####======================================
@@ -457,8 +463,6 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	INotesBAR notesBAR;
 
 	IEmpresaBAR empresaBAR;
-
-
 
 	public ISociosBAR getSociosBAR() {
 		return sociosBAR;
@@ -587,36 +591,56 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 				getDocumentosBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoId,
-				getHistoricoBAR(), response, empresa.getId(),empresa.getUserId());
+				getHistoricoBAR(), response, empresa.getId(), empresa.getUserId());
 
-		if (!ValidationUtil.isNullOrEmpty(empresa.getSocios()))
-		{
-			a +=
-					SociosBARD.maintainSocioAssociations(empresa.getSocios(), response, empresa.getId(), null, null,
-							TabelaEnum.EMPRESA, getSociosBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-							empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+		if (!ValidationUtil.isNullOrEmpty(empresa.getSocios())) {
+			a += SociosBARD.maintainSocioAssociations(empresa.getSocios(), response, empresa.getId(), null, null,
+					TabelaEnum.EMPRESA, getSociosBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
+					empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
 
 		}
 
-		if (!ValidationUtil.isNull(empresa.getPlanosServicos()))
-		{
-			a +=
-					PlanoByEmpresaBARD.maintainPlanoByEmpresaAssociations(empresa.getPlanosServicos(), response, empresa.getId(), null,
-							null,
-							TabelaEnum.EMPRESA, getSiteBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-							empresa.getCreateUser(), historicoId, historicoId);
+		if (!ValidationUtil.isNull(empresa.getPlanosServicos())) {
+			a += PlanoByEmpresaBARD.maintainPlanoByEmpresaAssociations(empresa.getPlanosServicos(), response,
+					empresa.getId(), null, null, TabelaEnum.EMPRESA, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
+					empresa.getId(), empresa.getCreateUser(), historicoId, historicoId);
 		}
 
-		if (!ValidationUtil.isNullOrEmpty(empresa.getUsuarios()))
-		{
-			a +=
-					UsuarioBARD.maintainUsuarioAssociations(empresa.getUsuarios(), response, empresa.getId(), null,
-							null,
-							TabelaEnum.EMPRESA, getEmpresaBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-							empresa.getCreateUser(), historicoId, historicoId);
+		if (!ValidationUtil.isNullOrEmpty(empresa.getUsuarios())) {
+			a += UsuarioBARD.maintainUsuarioAssociations(empresa.getUsuarios(), response, empresa.getId(), null, null,
+					TabelaEnum.EMPRESA, getEmpresaBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
+					empresa.getCreateUser(), historicoId, historicoId);
 
+			switch (empresa.getEntidadeEnumValue()) {
+			case 1:
+				System.out.println("Domingo");
+				break;
+			case 2:
+				System.out.println("Segunda-feira");
+				break;
+			case 3:
+				System.out.println("Terça-feira");
+				break;
+			case 4:
+				System.out.println("Quarta-feira");
+				break;
+			case 5:
+				System.out.println("Quinta-feira");
+				break;
+			case 6:
+				System.out.println("Sexta-feira");
+				break;
+			case 7:
+				System.out.println("Sábado");
+				break;
+			default:
+				System.out.println("Este não é um dia válido!");
+
+			}
 
 		}
+
+		EnviarEmailBARD.sendMailTLS(null, null, null);
 
 		return response;
 	}
@@ -764,57 +788,57 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 		InternalResponse response1 = new InternalResponse();
 
-		MyBatisBARHelper.doInsert(getSqlSession(), "TransactionMap.insertTransaction", request.getTransaction(), response1);
-
+		MyBatisBARHelper.doInsert(getSqlSession(), "TransactionMap.insertTransaction", request.getTransaction(),
+				response1);
 
 		InternalResultsResponse<Transaction> response = new InternalResultsResponse<Transaction>();
-		fetchTransactionByRequest(getSqlSession(), request, "TransactionMap.fetchTransactionRowCount", "TransactionMap.fetchAllTransactionsRequest",
-				response);
+		fetchTransactionByRequest(getSqlSession(), request, "TransactionMap.fetchTransactionRowCount",
+				"TransactionMap.fetchAllTransactionsRequest", response);
 		return response;
 	}
 	// ===================================### fetchEmpresasByRequest
-		// ####======================================
+	// ####======================================
 
-		public static void fetchTransactionByRequest(SqlSession sqlSession, TransactionInquiryRequest request,
-				String countStatement, String fetchPagedStatement, InternalResultsResponse<?> response) {
+	public static void fetchTransactionByRequest(SqlSession sqlSession, TransactionInquiryRequest request,
+			String countStatement, String fetchPagedStatement, InternalResultsResponse<?> response) {
 
-			// If the user requested the total rows/record count
-			if (request.isPreQueryCount()) {
-				// set the total rows available in the response
-				response.getResultsSetInfo().setTotalRowsAvailable(
-						(Integer) MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount()) {
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer) MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
 
-				if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO) {
-					response.setStatus(BusinessErrorCategory.NoRowsFound);
-					return;
-				}
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO) {
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
 			}
-
-			// Fetch Objects by InquiryRequest Object, paged of course
-			response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
-
-			// move request start page to response start page
-			response.getResultsSetInfo().setStartPage(request.getStartPage());
-
-			// move request page size to response page size
-			response.getResultsSetInfo().setPageSize(request.getPageSize());
-
-			// calculate correct startPage for more rows available comparison, since
-			// it is zero based, we have to offset by
-			// 1.
-			int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
-
-			// set moreRowsAvailable in response based on total rows compared to
-			// (page size * start page)
-			// remember if the count was not requested the TotalRowsAvailable will
-			// be false because the assumption
-			// is that you your own logic to handle this.
-			if (response.getResultsSetInfo()
-					.getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage)) {
-				response.getResultsSetInfo().setMoreRowsAvailable(true);
-			}
-
 		}
+
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since
+		// it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to
+		// (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will
+		// be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo()
+				.getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage)) {
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
 
 	// ===================================### FILIAL
 	// ####======================================
@@ -875,8 +899,8 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ENTIDADE, filial, response);
 
-		BaseBARD.maintainInsertBase(filial, historicoId, historicoId, TabelaEnum.FILIAL, getEnderecoBAR(), getStatusBAR(),
-				getHistoricoBAR(), getCadastrosBAR(), getFiscalBAR(), getTelefoneBAR(), getEmailBAR(),
+		BaseBARD.maintainInsertBase(filial, historicoId, historicoId, TabelaEnum.FILIAL, getEnderecoBAR(),
+				getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getFiscalBAR(), getTelefoneBAR(), getEmailBAR(),
 				getDocumentosBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
 		return response;
 	}
@@ -1695,73 +1719,77 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	}
 
-
-	//===================================### USERROLES ####======================================
-		/**
-	/*
-	 * (non-Javadoc)
+	// ===================================### USERROLES
+	// ####======================================
+	/**
+	 * /* (non-Javadoc)
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IUserRolesBAR#insertUserRoles(com.qat.samples.sysmgmt.base.model.UserRoles)
 	 */
 	@Override
-	public InternalResponse insertUserRoles(UserRoles userroles)
-	{
+	public InternalResponse insertUserRoles(UserRoles userroles) {
 		InternalResponse response = new InternalResponse();
-			Integer count = 0;
-			Boolean count1 = false;
+		Integer count = 0;
+		Boolean count1 = false;
 
-	userroles.setProcessId(userroles.getTransactionId());
+		userroles.setProcessId(userroles.getTransactionId());
 
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_USERROLES, userroles, response);
 
-
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.USERROLES, AcaoEnum.INSERT, userroles.getTransactionId(),
-				getHistoricoBAR(), response, userroles.getUser_role_id(),userroles.getUserId());
-
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.USERROLES, AcaoEnum.INSERT,
+				userroles.getTransactionId(), getHistoricoBAR(), response, userroles.getUser_role_id(),
+				userroles.getUserId());
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.base.bar.IUserRolesBAR#updateUserRoles(com.qat.samples.sysmgmt.base.model.UserRoles)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.base.bar.IUserRolesBAR#updateUserRoles(com.qat.
+	 * samples.sysmgmt.base.model.UserRoles)
 	 */
 	@Override
-	public InternalResponse updateUserRoles(UserRoles userroles)
-	{
+	public InternalResponse updateUserRoles(UserRoles userroles) {
 		InternalResponse response = new InternalResponse();
-	 userroles.setProcessId(userroles.getTransactionId());
+		userroles.setProcessId(userroles.getTransactionId());
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_USERROLES, userroles, response);
 
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.USERROLES, AcaoEnum.UPDATE, userroles.getTransactionId(),
-				getHistoricoBAR(), response, userroles.getUser_role_id(),userroles.getUserId());
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.USERROLES, AcaoEnum.UPDATE,
+				userroles.getTransactionId(), getHistoricoBAR(), response, userroles.getUser_role_id(),
+				userroles.getUserId());
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.base.bar.IUserRolesBAR#deleteUserRoles(com.qat.samples.sysmgmt.base.model.UserRoles)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.base.bar.IUserRolesBAR#deleteUserRoles(com.qat.
+	 * samples.sysmgmt.base.model.UserRoles)
 	 */
 	@Override
-	public InternalResponse deleteUserRolesById(UserRoles userroles)
-	{
+	public InternalResponse deleteUserRolesById(UserRoles userroles) {
 		InternalResponse response = new InternalResponse();
-	userroles.setProcessId(userroles.getTransactionId());
+		userroles.setProcessId(userroles.getTransactionId());
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_USERROLES, userroles, response);
 
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.USERROLES, AcaoEnum.DELETE, userroles.getTransactionId(),
-				getHistoricoBAR(), response, userroles.getUser_role_id(),userroles.getUserId());
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.USERROLES, AcaoEnum.DELETE,
+				userroles.getTransactionId(), getHistoricoBAR(), response, userroles.getUser_role_id(),
+				userroles.getUserId());
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IUserRolesBAR#deleteAllUserRoless()
 	 */
 	@Override
-	public InternalResponse deleteAllUserRoless()
-	{
+	public InternalResponse deleteAllUserRoless() {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_USERROLES_ALL, response);
 		return response;
@@ -1769,23 +1797,26 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see
-	 * com.qat.samples.sysmgmt.bar.IUserRolesBAR#fetchUserRolesById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+	 * com.qat.samples.sysmgmt.bar.IUserRolesBAR#fetchUserRolesById(com.qat.
+	 * samples.sysmgmt.model.request.FetchByIdRequest)
 	 */
 	@Override
-	public UserRoles fetchUserRolesById(FetchByIdRequest request)
-	{
-	return (UserRoles)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_USERROLES, request.getFetchId());
+	public UserRoles fetchUserRolesById(FetchByIdRequest request) {
+		return (UserRoles) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_USERROLES,
+				request.getFetchId());
 
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.base.bar.IUserRolesBAR#fetchAllUserRolessCache()
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.base.bar.IUserRolesBAR#fetchAllUserRolessCache()
 	 */
 	@Override
-	public InternalResultsResponse<UserRoles> fetchAllUserRoless(UserRoles userroles)
-	{
+	public InternalResultsResponse<UserRoles> fetchAllUserRoless(UserRoles userroles) {
 		InternalResultsResponse<UserRoles> response = new InternalResultsResponse<UserRoles>();
 		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_USERROLES_ALL));
 		return response;
@@ -1793,129 +1824,131 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bar.IUserRolesBAR#fetchUserRolessByRequest(com.qat.samples.sysmgmt.model.request.
-	 * PagedInquiryRequest)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.bar.IUserRolesBAR#fetchUserRolessByRequest(com.
+	 * qat.samples.sysmgmt.model.request. PagedInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<UserRoles> fetchUserRolessByRequest(PagedInquiryRequest request)
-	{
+	public InternalResultsResponse<UserRoles> fetchUserRolessByRequest(PagedInquiryRequest request) {
 		InternalResultsResponse<UserRoles> response = new InternalResultsResponse<UserRoles>();
 		fetchUserRolessByRequest(getSqlSession(), request, STMT_FETCH_USERROLES_COUNT, STMT_FETCH_USERROLES_ALL_REQUEST,
 				response);
 		return response;
 	}
 
-	//===================================### fetchUserRolessByRequest ####======================================
+	// ===================================### fetchUserRolessByRequest
+	// ####======================================
 
-	public static void fetchUserRolessByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
-				String fetchPagedStatement,
-				InternalResultsResponse<?> response)
-		{
+	public static void fetchUserRolessByRequest(SqlSession sqlSession, PagedInquiryRequest request,
+			String countStatement, String fetchPagedStatement, InternalResultsResponse<?> response) {
 
-			// If the user requested the total rows/record count
-			if (request.isPreQueryCount())
-			{
-				// set the total rows available in the response
-				response.getResultsSetInfo().setTotalRowsAvailable(
-						(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount()) {
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer) MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
 
-				if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
-				{
-					response.setStatus(BusinessErrorCategory.NoRowsFound);
-					return;
-				}
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO) {
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
 			}
-
-			// Fetch Objects by InquiryRequest Object, paged of course
-			response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
-
-			// move request start page to response start page
-			response.getResultsSetInfo().setStartPage(request.getStartPage());
-
-			// move request page size to response page size
-			response.getResultsSetInfo().setPageSize(request.getPageSize());
-
-			// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
-			// 1.
-			int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
-
-			// set moreRowsAvailable in response based on total rows compared to (page size * start page)
-			// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
-			// is that you your own logic to handle this.
-			if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
-			{
-				response.getResultsSetInfo().setMoreRowsAvailable(true);
-			}
-
 		}
 
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
 
-	//===================================### ROLE ####======================================
-		/**
-	/*
-	 * (non-Javadoc)
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since
+		// it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to
+		// (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will
+		// be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo()
+				.getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage)) {
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
+	// ===================================### ROLE
+	// ####======================================
+	/**
+	 * /* (non-Javadoc)
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IRoleBAR#insertRole(com.qat.samples.sysmgmt.base.model.Role)
 	 */
 	@Override
-	public InternalResponse insertRole(Role role)
-	{
+	public InternalResponse insertRole(Role role) {
 		InternalResponse response = new InternalResponse();
-			Integer count = 0;
-			Boolean count1 = false;
+		Integer count = 0;
+		Boolean count1 = false;
 
-	role.setProcessId(role.getTransactionId());
+		role.setProcessId(role.getTransactionId());
 
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ROLE, role, response);
 
-
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ROLE, AcaoEnum.INSERT, role.getTransactionId(),
-				getHistoricoBAR(), response, role.getId(),role.getUserId());
-
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ROLE, AcaoEnum.INSERT,
+				role.getTransactionId(), getHistoricoBAR(), response, role.getId(), role.getUserId());
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.base.bar.IRoleBAR#updateRole(com.qat.samples.sysmgmt.base.model.Role)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.base.bar.IRoleBAR#updateRole(com.qat.samples.
+	 * sysmgmt.base.model.Role)
 	 */
 	@Override
-	public InternalResponse updateRole(Role role)
-	{
+	public InternalResponse updateRole(Role role) {
 		InternalResponse response = new InternalResponse();
-	 role.setProcessId(role.getTransactionId());
+		role.setProcessId(role.getTransactionId());
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ROLE, role, response);
 
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ROLE, AcaoEnum.UPDATE, role.getTransactionId(),
-				getHistoricoBAR(), response, role.getId(),role.getUserId());
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ROLE, AcaoEnum.UPDATE,
+				role.getTransactionId(), getHistoricoBAR(), response, role.getId(), role.getUserId());
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.base.bar.IRoleBAR#deleteRole(com.qat.samples.sysmgmt.base.model.Role)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.base.bar.IRoleBAR#deleteRole(com.qat.samples.
+	 * sysmgmt.base.model.Role)
 	 */
 	@Override
-	public InternalResponse deleteRoleById(Role role)
-	{
+	public InternalResponse deleteRoleById(Role role) {
 		InternalResponse response = new InternalResponse();
-	role.setProcessId(role.getTransactionId());
+		role.setProcessId(role.getTransactionId());
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ROLE, role, response);
 
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ROLE, AcaoEnum.DELETE, role.getTransactionId(),
-				getHistoricoBAR(), response, role.getId(),role.getUserId());
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ROLE, AcaoEnum.DELETE,
+				role.getTransactionId(), getHistoricoBAR(), response, role.getId(), role.getUserId());
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IRoleBAR#deleteAllRoles()
 	 */
 	@Override
-	public InternalResponse deleteAllRoles()
-	{
+	public InternalResponse deleteAllRoles() {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ROLE_ALL, response);
 		return response;
@@ -1923,23 +1956,23 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * com.qat.samples.sysmgmt.bar.IRoleBAR#fetchRoleById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+	 *
+	 * @see com.qat.samples.sysmgmt.bar.IRoleBAR#fetchRoleById(com.qat.samples.
+	 * sysmgmt.model.request.FetchByIdRequest)
 	 */
 	@Override
-	public Role fetchRoleById(FetchByIdRequest request)
-	{
-	return (Role)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_ROLE, request.getFetchId());
+	public Role fetchRoleById(FetchByIdRequest request) {
+		return (Role) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_ROLE, request.getFetchId());
 
 	}
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IRoleBAR#fetchAllRolesCache()
 	 */
 	@Override
-	public InternalResultsResponse<Role> fetchAllRoles(Role role)
-	{
+	public InternalResultsResponse<Role> fetchAllRoles(Role role) {
 		InternalResultsResponse<Role> response = new InternalResultsResponse<Role>();
 		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_ROLE_ALL));
 		return response;
@@ -1947,130 +1980,130 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bar.IRoleBAR#fetchRolesByRequest(com.qat.samples.sysmgmt.model.request.
-	 * PagedInquiryRequest)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.bar.IRoleBAR#fetchRolesByRequest(com.qat.samples.
+	 * sysmgmt.model.request. PagedInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Role> fetchRolesByRequest(PagedInquiryRequest request)
-	{
+	public InternalResultsResponse<Role> fetchRolesByRequest(PagedInquiryRequest request) {
 		InternalResultsResponse<Role> response = new InternalResultsResponse<Role>();
-		fetchRolesByRequest(getSqlSession(), request, STMT_FETCH_ROLE_COUNT, STMT_FETCH_ROLE_ALL_REQUEST,
-				response);
+		fetchRolesByRequest(getSqlSession(), request, STMT_FETCH_ROLE_COUNT, STMT_FETCH_ROLE_ALL_REQUEST, response);
 		return response;
 	}
 
-	//===================================### fetchRolesByRequest ####======================================
+	// ===================================### fetchRolesByRequest
+	// ####======================================
 
 	public static void fetchRolesByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
-				String fetchPagedStatement,
-				InternalResultsResponse<?> response)
-		{
+			String fetchPagedStatement, InternalResultsResponse<?> response) {
 
-			// If the user requested the total rows/record count
-			if (request.isPreQueryCount())
-			{
-				// set the total rows available in the response
-				response.getResultsSetInfo().setTotalRowsAvailable(
-						(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount()) {
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer) MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
 
-				if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
-				{
-					response.setStatus(BusinessErrorCategory.NoRowsFound);
-					return;
-				}
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO) {
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
 			}
-
-			// Fetch Objects by InquiryRequest Object, paged of course
-			response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
-
-			// move request start page to response start page
-			response.getResultsSetInfo().setStartPage(request.getStartPage());
-
-			// move request page size to response page size
-			response.getResultsSetInfo().setPageSize(request.getPageSize());
-
-			// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
-			// 1.
-			int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
-
-			// set moreRowsAvailable in response based on total rows compared to (page size * start page)
-			// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
-			// is that you your own logic to handle this.
-			if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
-			{
-				response.getResultsSetInfo().setMoreRowsAvailable(true);
-			}
-
 		}
 
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
 
-	//===================================### PAGINA ####======================================
-		/**
-	/*
-	 * (non-Javadoc)
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since
+		// it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to
+		// (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will
+		// be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo()
+				.getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage)) {
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
+	// ===================================### PAGINA
+	// ####======================================
+	/**
+	 * /* (non-Javadoc)
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IPaginaBAR#insertPagina(com.qat.samples.sysmgmt.base.model.Pagina)
 	 */
 	@Override
-	public InternalResponse insertPagina(Pagina pagina)
-	{
+	public InternalResponse insertPagina(Pagina pagina) {
 		InternalResponse response = new InternalResponse();
-			Integer count = 0;
-			Boolean count1 = false;
+		Integer count = 0;
+		Boolean count1 = false;
 
-	pagina.setProcessId(pagina.getTransactionId());
+		pagina.setProcessId(pagina.getTransactionId());
 
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PAGINA, pagina, response);
 
-
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PAGINA, AcaoEnum.INSERT, pagina.getTransactionId(),
-				getHistoricoBAR(), response, pagina.getId(),pagina.getUserId());
-
-
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PAGINA, AcaoEnum.INSERT,
+				pagina.getTransactionId(), getHistoricoBAR(), response, pagina.getId(), pagina.getUserId());
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.base.bar.IPaginaBAR#updatePagina(com.qat.samples.sysmgmt.base.model.Pagina)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.base.bar.IPaginaBAR#updatePagina(com.qat.samples.
+	 * sysmgmt.base.model.Pagina)
 	 */
 	@Override
-	public InternalResponse updatePagina(Pagina pagina)
-	{
+	public InternalResponse updatePagina(Pagina pagina) {
 		InternalResponse response = new InternalResponse();
-	 pagina.setProcessId(pagina.getTransactionId());
+		pagina.setProcessId(pagina.getTransactionId());
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PAGINA, pagina, response);
 
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PAGINA, AcaoEnum.UPDATE, pagina.getTransactionId(),
-				getHistoricoBAR(), response, pagina.getId(),pagina.getUserId());
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PAGINA, AcaoEnum.UPDATE,
+				pagina.getTransactionId(), getHistoricoBAR(), response, pagina.getId(), pagina.getUserId());
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.base.bar.IPaginaBAR#deletePagina(com.qat.samples.sysmgmt.base.model.Pagina)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.base.bar.IPaginaBAR#deletePagina(com.qat.samples.
+	 * sysmgmt.base.model.Pagina)
 	 */
 	@Override
-	public InternalResponse deletePaginaById(Pagina pagina)
-	{
+	public InternalResponse deletePaginaById(Pagina pagina) {
 		InternalResponse response = new InternalResponse();
-	pagina.setProcessId(pagina.getTransactionId());
+		pagina.setProcessId(pagina.getTransactionId());
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PAGINA, pagina, response);
 
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PAGINA, AcaoEnum.DELETE, pagina.getTransactionId(),
-				getHistoricoBAR(), response, pagina.getId(),pagina.getUserId());
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PAGINA, AcaoEnum.DELETE,
+				pagina.getTransactionId(), getHistoricoBAR(), response, pagina.getId(), pagina.getUserId());
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IPaginaBAR#deleteAllPaginas()
 	 */
 	@Override
-	public InternalResponse deleteAllPaginas()
-	{
+	public InternalResponse deleteAllPaginas() {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PAGINA_ALL, response);
 		return response;
@@ -2078,23 +2111,24 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see
-	 * com.qat.samples.sysmgmt.bar.IPaginaBAR#fetchPaginaById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+	 * com.qat.samples.sysmgmt.bar.IPaginaBAR#fetchPaginaById(com.qat.samples.
+	 * sysmgmt.model.request.FetchByIdRequest)
 	 */
 	@Override
-	public Pagina fetchPaginaById(FetchByIdRequest request)
-	{
-	return (Pagina)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_PAGINA, request.getFetchId());
+	public Pagina fetchPaginaById(FetchByIdRequest request) {
+		return (Pagina) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_PAGINA, request.getFetchId());
 
 	}
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IPaginaBAR#fetchAllPaginasCache()
 	 */
 	@Override
-	public InternalResultsResponse<Pagina> fetchAllPaginas(Pagina pagina)
-	{
+	public InternalResultsResponse<Pagina> fetchAllPaginas(Pagina pagina) {
 		InternalResultsResponse<Pagina> response = new InternalResultsResponse<Pagina>();
 		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_PAGINA_ALL));
 		return response;
@@ -2102,130 +2136,131 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bar.IPaginaBAR#fetchPaginasByRequest(com.qat.samples.sysmgmt.model.request.
-	 * PagedInquiryRequest)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.bar.IPaginaBAR#fetchPaginasByRequest(com.qat.
+	 * samples.sysmgmt.model.request. PagedInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Pagina> fetchPaginasByRequest(PagedInquiryRequest request)
-	{
+	public InternalResultsResponse<Pagina> fetchPaginasByRequest(PagedInquiryRequest request) {
 		InternalResultsResponse<Pagina> response = new InternalResultsResponse<Pagina>();
 		fetchPaginasByRequest(getSqlSession(), request, STMT_FETCH_PAGINA_COUNT, STMT_FETCH_PAGINA_ALL_REQUEST,
 				response);
 		return response;
 	}
 
-	//===================================### fetchPaginasByRequest ####======================================
+	// ===================================### fetchPaginasByRequest
+	// ####======================================
 
 	public static void fetchPaginasByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
-				String fetchPagedStatement,
-				InternalResultsResponse<?> response)
-		{
+			String fetchPagedStatement, InternalResultsResponse<?> response) {
 
-			// If the user requested the total rows/record count
-			if (request.isPreQueryCount())
-			{
-				// set the total rows available in the response
-				response.getResultsSetInfo().setTotalRowsAvailable(
-						(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount()) {
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer) MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
 
-				if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
-				{
-					response.setStatus(BusinessErrorCategory.NoRowsFound);
-					return;
-				}
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO) {
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
 			}
-
-			// Fetch Objects by InquiryRequest Object, paged of course
-			response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
-
-			// move request start page to response start page
-			response.getResultsSetInfo().setStartPage(request.getStartPage());
-
-			// move request page size to response page size
-			response.getResultsSetInfo().setPageSize(request.getPageSize());
-
-			// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
-			// 1.
-			int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
-
-			// set moreRowsAvailable in response based on total rows compared to (page size * start page)
-			// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
-			// is that you your own logic to handle this.
-			if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
-			{
-				response.getResultsSetInfo().setMoreRowsAvailable(true);
-			}
-
 		}
 
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
 
-	//===================================### VALIDACAO ####======================================
-		/**
-	/*
-	 * (non-Javadoc)
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since
+		// it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to
+		// (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will
+		// be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo()
+				.getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage)) {
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
+	// ===================================### VALIDACAO
+	// ####======================================
+	/**
+	 * /* (non-Javadoc)
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IValidacaoBAR#insertValidacao(com.qat.samples.sysmgmt.base.model.Validacao)
 	 */
 	@Override
-	public InternalResponse insertValidacao(Validacao validacao)
-	{
+	public InternalResponse insertValidacao(Validacao validacao) {
 		InternalResponse response = new InternalResponse();
-			Integer count = 0;
-			Boolean count1 = false;
+		Integer count = 0;
+		Boolean count1 = false;
 
-	validacao.setProcessId(validacao.getTransactionId());
+		validacao.setProcessId(validacao.getTransactionId());
 
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_VALIDACAO, validacao, response);
 
-
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.VALIDACAO, AcaoEnum.INSERT, validacao.getTransactionId(),
-				getHistoricoBAR(), response, validacao.getId(),validacao.getUserId());
-
-
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.VALIDACAO, AcaoEnum.INSERT,
+				validacao.getTransactionId(), getHistoricoBAR(), response, validacao.getId(), validacao.getUserId());
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.base.bar.IValidacaoBAR#updateValidacao(com.qat.samples.sysmgmt.base.model.Validacao)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.base.bar.IValidacaoBAR#updateValidacao(com.qat.
+	 * samples.sysmgmt.base.model.Validacao)
 	 */
 	@Override
-	public InternalResponse updateValidacao(Validacao validacao)
-	{
+	public InternalResponse updateValidacao(Validacao validacao) {
 		InternalResponse response = new InternalResponse();
-	 validacao.setProcessId(validacao.getTransactionId());
+		validacao.setProcessId(validacao.getTransactionId());
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_VALIDACAO, validacao, response);
 
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.VALIDACAO, AcaoEnum.UPDATE, validacao.getTransactionId(),
-				getHistoricoBAR(), response, validacao.getId(),validacao.getUserId());
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.VALIDACAO, AcaoEnum.UPDATE,
+				validacao.getTransactionId(), getHistoricoBAR(), response, validacao.getId(), validacao.getUserId());
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.base.bar.IValidacaoBAR#deleteValidacao(com.qat.samples.sysmgmt.base.model.Validacao)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.base.bar.IValidacaoBAR#deleteValidacao(com.qat.
+	 * samples.sysmgmt.base.model.Validacao)
 	 */
 	@Override
-	public InternalResponse deleteValidacaoById(Validacao validacao)
-	{
+	public InternalResponse deleteValidacaoById(Validacao validacao) {
 		InternalResponse response = new InternalResponse();
-	validacao.setProcessId(validacao.getTransactionId());
+		validacao.setProcessId(validacao.getTransactionId());
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_VALIDACAO, validacao, response);
 
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.VALIDACAO, AcaoEnum.DELETE, validacao.getTransactionId(),
-				getHistoricoBAR(), response, validacao.getId(),validacao.getUserId());
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.VALIDACAO, AcaoEnum.DELETE,
+				validacao.getTransactionId(), getHistoricoBAR(), response, validacao.getId(), validacao.getUserId());
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IValidacaoBAR#deleteAllValidacaos()
 	 */
 	@Override
-	public InternalResponse deleteAllValidacaos()
-	{
+	public InternalResponse deleteAllValidacaos() {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_VALIDACAO_ALL, response);
 		return response;
@@ -2233,23 +2268,26 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see
-	 * com.qat.samples.sysmgmt.bar.IValidacaoBAR#fetchValidacaoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+	 * com.qat.samples.sysmgmt.bar.IValidacaoBAR#fetchValidacaoById(com.qat.
+	 * samples.sysmgmt.model.request.FetchByIdRequest)
 	 */
 	@Override
-	public Validacao fetchValidacaoById(FetchByIdRequest request)
-	{
-	return (Validacao)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_VALIDACAO, request.getFetchId());
+	public Validacao fetchValidacaoById(FetchByIdRequest request) {
+		return (Validacao) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_VALIDACAO,
+				request.getFetchId());
 
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.base.bar.IValidacaoBAR#fetchAllValidacaosCache()
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.base.bar.IValidacaoBAR#fetchAllValidacaosCache()
 	 */
 	@Override
-	public InternalResultsResponse<Validacao> fetchAllValidacaos(Validacao validacao)
-	{
+	public InternalResultsResponse<Validacao> fetchAllValidacaos(Validacao validacao) {
 		InternalResultsResponse<Validacao> response = new InternalResultsResponse<Validacao>();
 		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_VALIDACAO_ALL));
 		return response;
@@ -2257,143 +2295,142 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bar.IValidacaoBAR#fetchValidacaosByRequest(com.qat.samples.sysmgmt.model.request.
-	 * PagedInquiryRequest)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.bar.IValidacaoBAR#fetchValidacaosByRequest(com.
+	 * qat.samples.sysmgmt.model.request. PagedInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Validacao> fetchValidacaosByRequest(PagedInquiryRequest request)
-	{
+	public InternalResultsResponse<Validacao> fetchValidacaosByRequest(PagedInquiryRequest request) {
 		InternalResultsResponse<Validacao> response = new InternalResultsResponse<Validacao>();
 		fetchValidacaosByRequest(getSqlSession(), request, STMT_FETCH_VALIDACAO_COUNT, STMT_FETCH_VALIDACAO_ALL_REQUEST,
 				response);
 		return response;
 	}
 
-	//===================================### fetchValidacaosByRequest ####======================================
+	// ===================================### fetchValidacaosByRequest
+	// ####======================================
 
-	public static void fetchValidacaosByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
-				String fetchPagedStatement,
-				InternalResultsResponse<?> response)
-		{
+	public static void fetchValidacaosByRequest(SqlSession sqlSession, PagedInquiryRequest request,
+			String countStatement, String fetchPagedStatement, InternalResultsResponse<?> response) {
 
-			// If the user requested the total rows/record count
-			if (request.isPreQueryCount())
-			{
-				// set the total rows available in the response
-				response.getResultsSetInfo().setTotalRowsAvailable(
-						(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount()) {
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer) MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
 
-				if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
-				{
-					response.setStatus(BusinessErrorCategory.NoRowsFound);
-					return;
-				}
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO) {
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
 			}
-
-			// Fetch Objects by InquiryRequest Object, paged of course
-			response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
-
-			// move request start page to response start page
-			response.getResultsSetInfo().setStartPage(request.getStartPage());
-
-			// move request page size to response page size
-			response.getResultsSetInfo().setPageSize(request.getPageSize());
-
-			// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
-			// 1.
-			int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
-
-			// set moreRowsAvailable in response based on total rows compared to (page size * start page)
-			// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
-			// is that you your own logic to handle this.
-			if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
-			{
-				response.getResultsSetInfo().setMoreRowsAvailable(true);
-			}
-
 		}
 
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
 
-	//===================================### FIELD ####======================================
-		/**
-	/*
-	 * (non-Javadoc)
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since
+		// it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to
+		// (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will
+		// be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo()
+				.getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage)) {
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
+	// ===================================### FIELD
+	// ####======================================
+	/**
+	 * /* (non-Javadoc)
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IFieldBAR#insertField(com.qat.samples.sysmgmt.base.model.Field)
 	 */
 	@Override
-	public InternalResponse insertField(Field field)
-	{
+	public InternalResponse insertField(Field field) {
 		InternalResponse response = new InternalResponse();
-			Integer count = 0;
-			Boolean count1 = false;
+		Integer count = 0;
+		Boolean count1 = false;
 
-	field.setProcessId(field.getTransactionId());
+		field.setProcessId(field.getTransactionId());
 
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_FIELD, field, response);
 
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.FIELD, AcaoEnum.INSERT,
+				field.getTransactionId(), getHistoricoBAR(), response, field.getId(), field.getUserId());
 
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.FIELD, AcaoEnum.INSERT, field.getTransactionId(),
-				getHistoricoBAR(), response, field.getId(),field.getUserId());
-
-
-	if (field.getId() !=  0 && field.getId() != null)
-		{
+		if (field.getId() != 0 && field.getId() != null) {
 			Status status = new Status();
 			status.setStatus(CdStatusTypeEnum.ATIVO);
 			List<Status> statusList = new ArrayList<Status>();
 			statusList.add(status);
-			count1 =
-					StatusBARD.maintainStatusAssociations(statusList, response, field.getId(), null, AcaoEnum.INSERT,
-							field.getCreateUser(), field.getId(), TabelaEnum.FIELD, statusBAR,
-							historicoBAR, field.getTransactionId(), field.getTransactionId());
+			count1 = StatusBARD.maintainStatusAssociations(statusList, response, field.getId(), null, AcaoEnum.INSERT,
+					field.getCreateUser(), field.getId(), TabelaEnum.FIELD, statusBAR, historicoBAR,
+					field.getTransactionId(), field.getTransactionId());
 
 		}
 
-
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.base.bar.IFieldBAR#updateField(com.qat.samples.sysmgmt.base.model.Field)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.base.bar.IFieldBAR#updateField(com.qat.samples.
+	 * sysmgmt.base.model.Field)
 	 */
 	@Override
-	public InternalResponse updateField(Field field)
-	{
+	public InternalResponse updateField(Field field) {
 		InternalResponse response = new InternalResponse();
-	 field.setProcessId(field.getTransactionId());
+		field.setProcessId(field.getTransactionId());
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_FIELD, field, response);
 
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.FIELD, AcaoEnum.UPDATE, field.getTransactionId(),
-				getHistoricoBAR(), response, field.getId(),field.getUserId());
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.FIELD, AcaoEnum.UPDATE,
+				field.getTransactionId(), getHistoricoBAR(), response, field.getId(), field.getUserId());
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.base.bar.IFieldBAR#deleteField(com.qat.samples.sysmgmt.base.model.Field)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.base.bar.IFieldBAR#deleteField(com.qat.samples.
+	 * sysmgmt.base.model.Field)
 	 */
 	@Override
-	public InternalResponse deleteFieldById(Field field)
-	{
+	public InternalResponse deleteFieldById(Field field) {
 		InternalResponse response = new InternalResponse();
-	field.setProcessId(field.getTransactionId());
+		field.setProcessId(field.getTransactionId());
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_FIELD, field, response);
 
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.FIELD, AcaoEnum.DELETE, field.getTransactionId(),
-				getHistoricoBAR(), response, field.getId(),field.getUserId());
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.FIELD, AcaoEnum.DELETE,
+				field.getTransactionId(), getHistoricoBAR(), response, field.getId(), field.getUserId());
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IFieldBAR#deleteAllFields()
 	 */
 	@Override
-	public InternalResponse deleteAllFields()
-	{
+	public InternalResponse deleteAllFields() {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_FIELD_ALL, response);
 		return response;
@@ -2401,23 +2438,24 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see
-	 * com.qat.samples.sysmgmt.bar.IFieldBAR#fetchFieldById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+	 * com.qat.samples.sysmgmt.bar.IFieldBAR#fetchFieldById(com.qat.samples.
+	 * sysmgmt.model.request.FetchByIdRequest)
 	 */
 	@Override
-	public Field fetchFieldById(FetchByIdRequest request)
-	{
-	return (Field)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_FIELD, request.getFetchId());
+	public Field fetchFieldById(FetchByIdRequest request) {
+		return (Field) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_FIELD, request.getFetchId());
 
 	}
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IFieldBAR#fetchAllFieldsCache()
 	 */
 	@Override
-	public InternalResultsResponse<Field> fetchAllFields(Field field)
-	{
+	public InternalResultsResponse<Field> fetchAllFields(Field field) {
 		InternalResultsResponse<Field> response = new InternalResultsResponse<Field>();
 		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_FIELD_ALL));
 		return response;
@@ -2425,143 +2463,140 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bar.IFieldBAR#fetchFieldsByRequest(com.qat.samples.sysmgmt.model.request.
-	 * PagedInquiryRequest)
+	 *
+	 * @see com.qat.samples.sysmgmt.bar.IFieldBAR#fetchFieldsByRequest(com.qat.
+	 * samples.sysmgmt.model.request. PagedInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Field> fetchFieldsByRequest(FieldInquiryRequest request)
-	{
+	public InternalResultsResponse<Field> fetchFieldsByRequest(FieldInquiryRequest request) {
 		InternalResultsResponse<Field> response = new InternalResultsResponse<Field>();
-		fetchFieldsByRequest(getSqlSession(), request, STMT_FETCH_FIELD_COUNT, STMT_FETCH_FIELD_ALL_REQUEST,
-				response);
+		fetchFieldsByRequest(getSqlSession(), request, STMT_FETCH_FIELD_COUNT, STMT_FETCH_FIELD_ALL_REQUEST, response);
 		return response;
 	}
 
-	//===================================### fetchFieldsByRequest ####======================================
+	// ===================================### fetchFieldsByRequest
+	// ####======================================
 
 	public static void fetchFieldsByRequest(SqlSession sqlSession, FieldInquiryRequest request, String countStatement,
-				String fetchPagedStatement,
-				InternalResultsResponse<?> response)
-		{
+			String fetchPagedStatement, InternalResultsResponse<?> response) {
 
-			// If the user requested the total rows/record count
-			if (request.isPreQueryCount())
-			{
-				// set the total rows available in the response
-				response.getResultsSetInfo().setTotalRowsAvailable(
-						(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount()) {
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer) MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
 
-				if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
-				{
-					response.setStatus(BusinessErrorCategory.NoRowsFound);
-					return;
-				}
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO) {
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
 			}
-
-			// Fetch Objects by InquiryRequest Object, paged of course
-			response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
-
-			// move request start page to response start page
-			response.getResultsSetInfo().setStartPage(request.getStartPage());
-
-			// move request page size to response page size
-			response.getResultsSetInfo().setPageSize(request.getPageSize());
-
-			// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
-			// 1.
-			int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
-
-			// set moreRowsAvailable in response based on total rows compared to (page size * start page)
-			// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
-			// is that you your own logic to handle this.
-			if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
-			{
-				response.getResultsSetInfo().setMoreRowsAvailable(true);
-			}
-
 		}
 
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
 
-	//===================================### AJUDA ####======================================
-		/**
-	/*
-	 * (non-Javadoc)
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since
+		// it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to
+		// (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will
+		// be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo()
+				.getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage)) {
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
+	// ===================================### AJUDA
+	// ####======================================
+	/**
+	 * /* (non-Javadoc)
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IAjudaBAR#insertAjuda(com.qat.samples.sysmgmt.base.model.Ajuda)
 	 */
 	@Override
-	public InternalResponse insertAjuda(Ajuda ajuda)
-	{
+	public InternalResponse insertAjuda(Ajuda ajuda) {
 		InternalResponse response = new InternalResponse();
-			Integer count = 0;
-			Boolean count1 = false;
+		Integer count = 0;
+		Boolean count1 = false;
 
-	ajuda.setProcessId(ajuda.getTransactionId());
+		ajuda.setProcessId(ajuda.getTransactionId());
 
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_AJUDA, ajuda, response);
 
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.AJUDA, AcaoEnum.INSERT,
+				ajuda.getTransactionId(), getHistoricoBAR(), response, ajuda.getId(), ajuda.getUserId());
 
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.AJUDA, AcaoEnum.INSERT, ajuda.getTransactionId(),
-				getHistoricoBAR(), response, ajuda.getId(),ajuda.getUserId());
-
-
-	if (ajuda.getId() !=  0 && ajuda.getId() != null)
-		{
+		if (ajuda.getId() != 0 && ajuda.getId() != null) {
 			Status status = new Status();
 			status.setStatus(CdStatusTypeEnum.ATIVO);
 			List<Status> statusList = new ArrayList<Status>();
 			statusList.add(status);
-			count1 =
-					StatusBARD.maintainStatusAssociations(statusList, response, ajuda.getId(), null, AcaoEnum.INSERT,
-							ajuda.getCreateUser(), ajuda.getId(), TabelaEnum.AJUDA, statusBAR,
-							historicoBAR, ajuda.getTransactionId(), ajuda.getTransactionId());
+			count1 = StatusBARD.maintainStatusAssociations(statusList, response, ajuda.getId(), null, AcaoEnum.INSERT,
+					ajuda.getCreateUser(), ajuda.getId(), TabelaEnum.AJUDA, statusBAR, historicoBAR,
+					ajuda.getTransactionId(), ajuda.getTransactionId());
 
 		}
 
-
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.base.bar.IAjudaBAR#updateAjuda(com.qat.samples.sysmgmt.base.model.Ajuda)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.base.bar.IAjudaBAR#updateAjuda(com.qat.samples.
+	 * sysmgmt.base.model.Ajuda)
 	 */
 	@Override
-	public InternalResponse updateAjuda(Ajuda ajuda)
-	{
+	public InternalResponse updateAjuda(Ajuda ajuda) {
 		InternalResponse response = new InternalResponse();
-	 ajuda.setProcessId(ajuda.getTransactionId());
+		ajuda.setProcessId(ajuda.getTransactionId());
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_AJUDA, ajuda, response);
 
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.AJUDA, AcaoEnum.UPDATE, ajuda.getTransactionId(),
-				getHistoricoBAR(), response, ajuda.getId(),ajuda.getUserId());
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.AJUDA, AcaoEnum.UPDATE,
+				ajuda.getTransactionId(), getHistoricoBAR(), response, ajuda.getId(), ajuda.getUserId());
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.base.bar.IAjudaBAR#deleteAjuda(com.qat.samples.sysmgmt.base.model.Ajuda)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.base.bar.IAjudaBAR#deleteAjuda(com.qat.samples.
+	 * sysmgmt.base.model.Ajuda)
 	 */
 	@Override
-	public InternalResponse deleteAjudaById(Ajuda ajuda)
-	{
+	public InternalResponse deleteAjudaById(Ajuda ajuda) {
 		InternalResponse response = new InternalResponse();
-	ajuda.setProcessId(ajuda.getTransactionId());
+		ajuda.setProcessId(ajuda.getTransactionId());
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_AJUDA, ajuda, response);
 
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.AJUDA, AcaoEnum.DELETE, ajuda.getTransactionId(),
-				getHistoricoBAR(), response, ajuda.getId(),ajuda.getUserId());
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.AJUDA, AcaoEnum.DELETE,
+				ajuda.getTransactionId(), getHistoricoBAR(), response, ajuda.getId(), ajuda.getUserId());
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IAjudaBAR#deleteAllAjudas()
 	 */
 	@Override
-	public InternalResponse deleteAllAjudas()
-	{
+	public InternalResponse deleteAllAjudas() {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_AJUDA_ALL, response);
 		return response;
@@ -2569,23 +2604,24 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see
-	 * com.qat.samples.sysmgmt.bar.IAjudaBAR#fetchAjudaById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+	 * com.qat.samples.sysmgmt.bar.IAjudaBAR#fetchAjudaById(com.qat.samples.
+	 * sysmgmt.model.request.FetchByIdRequest)
 	 */
 	@Override
-	public Ajuda fetchAjudaById(FetchByIdRequest request)
-	{
-	return (Ajuda)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_AJUDA, request.getFetchId());
+	public Ajuda fetchAjudaById(FetchByIdRequest request) {
+		return (Ajuda) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_AJUDA, request.getFetchId());
 
 	}
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IAjudaBAR#fetchAllAjudasCache()
 	 */
 	@Override
-	public InternalResultsResponse<Ajuda> fetchAllAjudas(Ajuda ajuda)
-	{
+	public InternalResultsResponse<Ajuda> fetchAllAjudas(Ajuda ajuda) {
 		InternalResultsResponse<Ajuda> response = new InternalResultsResponse<Ajuda>();
 		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_AJUDA_ALL));
 		return response;
@@ -2593,143 +2629,140 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bar.IAjudaBAR#fetchAjudasByRequest(com.qat.samples.sysmgmt.model.request.
-	 * PagedInquiryRequest)
+	 *
+	 * @see com.qat.samples.sysmgmt.bar.IAjudaBAR#fetchAjudasByRequest(com.qat.
+	 * samples.sysmgmt.model.request. PagedInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Ajuda> fetchAjudasByRequest(PagedInquiryRequest request)
-	{
+	public InternalResultsResponse<Ajuda> fetchAjudasByRequest(PagedInquiryRequest request) {
 		InternalResultsResponse<Ajuda> response = new InternalResultsResponse<Ajuda>();
-		fetchAjudasByRequest(getSqlSession(), request, STMT_FETCH_AJUDA_COUNT, STMT_FETCH_AJUDA_ALL_REQUEST,
-				response);
+		fetchAjudasByRequest(getSqlSession(), request, STMT_FETCH_AJUDA_COUNT, STMT_FETCH_AJUDA_ALL_REQUEST, response);
 		return response;
 	}
 
-	//===================================### fetchAjudasByRequest ####======================================
+	// ===================================### fetchAjudasByRequest
+	// ####======================================
 
 	public static void fetchAjudasByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
-				String fetchPagedStatement,
-				InternalResultsResponse<?> response)
-		{
+			String fetchPagedStatement, InternalResultsResponse<?> response) {
 
-			// If the user requested the total rows/record count
-			if (request.isPreQueryCount())
-			{
-				// set the total rows available in the response
-				response.getResultsSetInfo().setTotalRowsAvailable(
-						(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount()) {
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer) MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
 
-				if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
-				{
-					response.setStatus(BusinessErrorCategory.NoRowsFound);
-					return;
-				}
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO) {
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
 			}
-
-			// Fetch Objects by InquiryRequest Object, paged of course
-			response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
-
-			// move request start page to response start page
-			response.getResultsSetInfo().setStartPage(request.getStartPage());
-
-			// move request page size to response page size
-			response.getResultsSetInfo().setPageSize(request.getPageSize());
-
-			// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
-			// 1.
-			int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
-
-			// set moreRowsAvailable in response based on total rows compared to (page size * start page)
-			// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
-			// is that you your own logic to handle this.
-			if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
-			{
-				response.getResultsSetInfo().setMoreRowsAvailable(true);
-			}
-
 		}
 
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
 
-	//===================================### MENU ####======================================
-		/**
-	/*
-	 * (non-Javadoc)
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since
+		// it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to
+		// (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will
+		// be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo()
+				.getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage)) {
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
+	// ===================================### MENU
+	// ####======================================
+	/**
+	 * /* (non-Javadoc)
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IMenuBAR#insertMenu(com.qat.samples.sysmgmt.base.model.Menu)
 	 */
 	@Override
-	public InternalResponse insertMenu(Menu menu)
-	{
+	public InternalResponse insertMenu(Menu menu) {
 		InternalResponse response = new InternalResponse();
-			Integer count = 0;
-			Boolean count1 = false;
+		Integer count = 0;
+		Boolean count1 = false;
 
-	menu.setProcessId(menu.getTransactionId());
+		menu.setProcessId(menu.getTransactionId());
 
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_MENU, menu, response);
 
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.MENU, AcaoEnum.INSERT,
+				menu.getTransactionId(), getHistoricoBAR(), response, menu.getId(), menu.getUserId());
 
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.MENU, AcaoEnum.INSERT, menu.getTransactionId(),
-				getHistoricoBAR(), response, menu.getId(),menu.getUserId());
-
-
-	if (menu.getId() !=  0 && menu.getId() != null)
-		{
+		if (menu.getId() != 0 && menu.getId() != null) {
 			Status status = new Status();
 			status.setStatus(CdStatusTypeEnum.ATIVO);
 			List<Status> statusList = new ArrayList<Status>();
 			statusList.add(status);
-			count1 =
-					StatusBARD.maintainStatusAssociations(statusList, response, menu.getId(), null, AcaoEnum.INSERT,
-							menu.getCreateUser(), menu.getId(), TabelaEnum.MENU, statusBAR,
-							historicoBAR, menu.getTransactionId(), menu.getTransactionId());
+			count1 = StatusBARD.maintainStatusAssociations(statusList, response, menu.getId(), null, AcaoEnum.INSERT,
+					menu.getCreateUser(), menu.getId(), TabelaEnum.MENU, statusBAR, historicoBAR,
+					menu.getTransactionId(), menu.getTransactionId());
 
 		}
 
-
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.base.bar.IMenuBAR#updateMenu(com.qat.samples.sysmgmt.base.model.Menu)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.base.bar.IMenuBAR#updateMenu(com.qat.samples.
+	 * sysmgmt.base.model.Menu)
 	 */
 	@Override
-	public InternalResponse updateMenu(Menu menu)
-	{
+	public InternalResponse updateMenu(Menu menu) {
 		InternalResponse response = new InternalResponse();
-	 menu.setProcessId(menu.getTransactionId());
+		menu.setProcessId(menu.getTransactionId());
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_MENU, menu, response);
 
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.MENU, AcaoEnum.UPDATE, menu.getTransactionId(),
-				getHistoricoBAR(), response, menu.getId(),menu.getUserId());
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.MENU, AcaoEnum.UPDATE,
+				menu.getTransactionId(), getHistoricoBAR(), response, menu.getId(), menu.getUserId());
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.base.bar.IMenuBAR#deleteMenu(com.qat.samples.sysmgmt.base.model.Menu)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.base.bar.IMenuBAR#deleteMenu(com.qat.samples.
+	 * sysmgmt.base.model.Menu)
 	 */
 	@Override
-	public InternalResponse deleteMenuById(Menu menu)
-	{
+	public InternalResponse deleteMenuById(Menu menu) {
 		InternalResponse response = new InternalResponse();
-	menu.setProcessId(menu.getTransactionId());
+		menu.setProcessId(menu.getTransactionId());
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_MENU, menu, response);
 
-	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.MENU, AcaoEnum.DELETE, menu.getTransactionId(),
-				getHistoricoBAR(), response, menu.getId(),menu.getUserId());
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.MENU, AcaoEnum.DELETE,
+				menu.getTransactionId(), getHistoricoBAR(), response, menu.getId(), menu.getUserId());
 
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IMenuBAR#deleteAllMenus()
 	 */
 	@Override
-	public InternalResponse deleteAllMenus()
-	{
+	public InternalResponse deleteAllMenus() {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_MENU_ALL, response);
 		return response;
@@ -2737,23 +2770,23 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * com.qat.samples.sysmgmt.bar.IMenuBAR#fetchMenuById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+	 *
+	 * @see com.qat.samples.sysmgmt.bar.IMenuBAR#fetchMenuById(com.qat.samples.
+	 * sysmgmt.model.request.FetchByIdRequest)
 	 */
 	@Override
-	public Menu fetchMenuById(FetchByIdRequest request)
-	{
-	return (Menu)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_MENU, request.getFetchId());
+	public Menu fetchMenuById(FetchByIdRequest request) {
+		return (Menu) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_MENU, request.getFetchId());
 
 	}
 
 	/*
 	 * (non-Javadoc)
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IMenuBAR#fetchAllMenusCache()
 	 */
 	@Override
-	public InternalResultsResponse<Menu> fetchAllMenus(Menu menu)
-	{
+	public InternalResultsResponse<Menu> fetchAllMenus(Menu menu) {
 		InternalResultsResponse<Menu> response = new InternalResultsResponse<Menu>();
 		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_MENU_ALL));
 		return response;
@@ -2761,62 +2794,61 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bar.IMenuBAR#fetchMenusByRequest(com.qat.samples.sysmgmt.model.request.
-	 * PagedInquiryRequest)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.bar.IMenuBAR#fetchMenusByRequest(com.qat.samples.
+	 * sysmgmt.model.request. PagedInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Menu> fetchMenusByRequest(PagedInquiryRequest request)
-	{
+	public InternalResultsResponse<Menu> fetchMenusByRequest(PagedInquiryRequest request) {
 		InternalResultsResponse<Menu> response = new InternalResultsResponse<Menu>();
-		fetchMenusByRequest(getSqlSession(), request, STMT_FETCH_MENU_COUNT, STMT_FETCH_MENU_ALL_REQUEST,
-				response);
+		fetchMenusByRequest(getSqlSession(), request, STMT_FETCH_MENU_COUNT, STMT_FETCH_MENU_ALL_REQUEST, response);
 		return response;
 	}
 
-	//===================================### fetchMenusByRequest ####======================================
+	// ===================================### fetchMenusByRequest
+	// ####======================================
 
 	public static void fetchMenusByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
-				String fetchPagedStatement,
-				InternalResultsResponse<?> response)
-		{
+			String fetchPagedStatement, InternalResultsResponse<?> response) {
 
-			// If the user requested the total rows/record count
-			if (request.isPreQueryCount())
-			{
-				// set the total rows available in the response
-				response.getResultsSetInfo().setTotalRowsAvailable(
-						(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount()) {
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer) MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
 
-				if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
-				{
-					response.setStatus(BusinessErrorCategory.NoRowsFound);
-					return;
-				}
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO) {
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
 			}
-
-			// Fetch Objects by InquiryRequest Object, paged of course
-			response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
-
-			// move request start page to response start page
-			response.getResultsSetInfo().setStartPage(request.getStartPage());
-
-			// move request page size to response page size
-			response.getResultsSetInfo().setPageSize(request.getPageSize());
-
-			// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
-			// 1.
-			int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
-
-			// set moreRowsAvailable in response based on total rows compared to (page size * start page)
-			// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
-			// is that you your own logic to handle this.
-			if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
-			{
-				response.getResultsSetInfo().setMoreRowsAvailable(true);
-			}
-
 		}
 
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since
+		// it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to
+		// (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will
+		// be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo()
+				.getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage)) {
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
 
 	@Override
 	public InternalResultsResponse<Endereco> fetchEnderecosByRequest(EmpresaInquiryRequest request) {
@@ -2869,6 +2901,5 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 		}
 
 	}
-
 
 }
