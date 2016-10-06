@@ -25,6 +25,11 @@ public class Role extends ModelCosmeDamiao
 		// TODO Auto-generated constructor stub
 	}
 
+	public Role(Integer id) {
+		super();
+		this.id = id;
+	}
+
 	public Integer getId() {
 		return id;
 	}

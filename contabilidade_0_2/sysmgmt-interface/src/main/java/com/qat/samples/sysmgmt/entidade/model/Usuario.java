@@ -23,7 +23,7 @@ public class Usuario extends Pessoa
 
 	private String pergunta;
 
-	private String role;
+	private List<Role> roles;
 
 	private String telefone;
 
@@ -37,15 +37,18 @@ public class Usuario extends Pessoa
 
 
 
-	public Usuario(Integer id,String role) {
+	public Usuario(Integer id) {
 		super();
-		this.role = role;
 		setId(id);
 		setModifyDateUTC((new Date()).getTime());
 		setModifyUser("system");
 	}
 
 	public Usuario() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Usuario(int i, String string) {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -69,14 +72,14 @@ public class Usuario extends Pessoa
 		this.pergunta = pergunta;
 	}
 
-	public String getRole()
-	{
-		return role;
+
+
+	public List<Role> getRoles() {
+		return roles;
 	}
 
-	public void setRole(String role)
-	{
-		this.role = role;
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
 	public String getLanguage()
@@ -137,7 +140,7 @@ public class Usuario extends Pessoa
 
 	@Override
 	public String toString() {
-		return "Usuario [getSenha()=" + getSenha() + ", getPergunta()=" + getPergunta() + ", getRole()=" + getRole()
+		return "Usuario [getSenha()=" + getSenha() + ", getPergunta()=" + getPergunta() + ", getRoles()=" + getRoles()
 				+ ", getLanguage()=" + getLanguage() + ", getUltAcesso()=" + getUltAcesso() + ", getEmails()="
 				+ getEmails() + ", getTelefone()=" + getTelefone() + ", getCpf()=" + getCpf() + ", getEmail()="
 				+ getEmail() + ", toString()=" + super.toString() + "]";

@@ -28,10 +28,14 @@ public enum EntidadeTypeEnum implements IIntegerEnum, II18nEnum
 
 	ADVOCACIA(6, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
 
-	OUTROS(7, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
+	PRESTADORSERVICO(7, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
+
+	PARCEIRO(8, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
+
+	OUTROS(9, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
 
 	/** The unknown. */
-	UNKNOWN(8, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
+	UNKNOWN(10, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
 
 	/** The code. */
 	private Integer code;

@@ -31,6 +31,12 @@ public class UserRoles extends ModelCosmeDamiao
 		this.user_role_id = user_role_id;
 	}
 
+	public UserRoles(String username, Role role) {
+		super();
+		this.username = username;
+		this.role = role;
+	}
+
 	public String getUsername() {
 		return username;
 	}

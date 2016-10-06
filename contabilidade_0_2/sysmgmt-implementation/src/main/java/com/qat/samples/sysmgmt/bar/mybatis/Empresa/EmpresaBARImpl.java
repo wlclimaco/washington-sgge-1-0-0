@@ -34,6 +34,7 @@ import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.PlanoByEmpresaBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.SociosBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.StatusBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.UserRoleBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.UsuarioBARD;
 import com.qat.samples.sysmgmt.clinica.model.Clinica;
 import com.qat.samples.sysmgmt.clinica.model.request.ClinicaInquiryRequest;
@@ -610,37 +611,49 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 			a += UsuarioBARD.maintainUsuarioAssociations(empresa.getUsuarios(), response, empresa.getId(), null, null,
 					TabelaEnum.EMPRESA, getEmpresaBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
 					empresa.getCreateUser(), historicoId, historicoId);
+			UserRoles userRoles = new UserRoles();
+			ArrayList<UserRoles> userRoleList = new ArrayList<UserRoles>();
+			for (Usuario usuario : empresa.getUsuarios()) {
+				userRoles = new UserRoles();
+				switch (empresa.getEntidadeEnumValue()) {
+				case 1: // comercio
+					userRoles.setRole(new Role(12));
+					break;
+				case 4:// clinica
+					userRoles.setRole(new Role(6));
+					break;
+				case 5:// condominio
+					userRoles.setRole(new Role(5));
+					break;
+				case 6: // adbocacia
+					userRoles.setRole(new Role(8));
+					break;
+				case 7:// prest Servico
+					userRoles.setRole(new Role(13));
+					break;
+				case 8: // Parceiro
+					userRoles.setRole(new Role(7));
+					break;
+				default:
+					System.out.println("Este não é um dia válido!");
 
-			switch (empresa.getEntidadeEnumValue()) {
-			case 1:
-				System.out.println("Domingo");
-				break;
-			case 2:
-				System.out.println("Segunda-feira");
-				break;
-			case 3:
-				System.out.println("Terça-feira");
-				break;
-			case 4:
-				System.out.println("Quarta-feira");
-				break;
-			case 5:
-				System.out.println("Quinta-feira");
-				break;
-			case 6:
-				System.out.println("Sexta-feira");
-				break;
-			case 7:
-				System.out.println("Sábado");
-				break;
-			default:
-				System.out.println("Este não é um dia válido!");
+				}
+				userRoles.setUsername(usuario.getEmail());
+
+
+				userRoleList.add(userRoles);
+				userRoleList.add(new UserRoles(usuario.getEmail(),new Role(1)));
 
 			}
 
+			UserRoleBARD.maintainUserRolesAssociations(userRoleList, response, empresa.getId(), null, null,
+					TabelaEnum.EMPRESA, getEmpresaBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
+					empresa.getCreateUser(), historicoId, historicoId);
+
+
 		}
 
-		EnviarEmailBARD.sendMailTLS(null, null, null);
+		EnviarEmailBARD.sendMailTLS(empresa.getEmprId(), getEmpresaBAR(), empresa);
 
 		return response;
 	}

@@ -72,6 +72,24 @@ role
    FROM role WHERE id = #{fetchid}
  </select>
 
+  <select id="fetchRoleByUsuario" parameterType="String" resultMap="RoleResult">
+
+   select role role.id
+		,role.status
+		,role.pagina
+		,role.parentId
+		,role.tabelaEnumValue
+		,role.emprId
+		,role.processId
+		,role.create_date
+		,role.create_user
+		,role.modify_date
+		,role.modify_user from role
+			LEFT JOIN user_roles on role.id = user_roles.role
+		where user_roles.username like #{username}
+
+ </select>
+
   <select id="fetchRoleByField" parameterType="Integer" resultMap="RoleResult">
     SELECT id,
  <include refid="allRoleColumns" />

@@ -28,6 +28,17 @@
             <artifactId>spring-tx</artifactId>
             <version>${springframework.version}</version>
         </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>javax.mail-api</artifactId>
+            <version>1.5.5</version>
+        </dependency>
 
         <!-- Testing Dependencies. -->
         <dependency>
@@ -96,17 +107,6 @@
             <version>${log4j.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4.7</version>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>javax.mail-api</artifactId>
-			<version>1.5.5</version>
-		</dependency>
     </dependencies>
 
     <build>

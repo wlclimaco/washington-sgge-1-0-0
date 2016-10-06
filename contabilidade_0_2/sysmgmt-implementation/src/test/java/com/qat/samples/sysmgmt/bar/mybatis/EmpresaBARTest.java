@@ -361,7 +361,7 @@ public IEmpresaBAR getEmpresaBAR()
 @Test
 	public void testDeleteUsuario()
 	{
-		Usuario usuario = new Usuario(4, "Usuario_999");
+		Usuario usuario = Objects.insertUsuario(4, TabelaEnum.USUARIO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		Usuario usuarioResponse = getEmpresaBAR().fetchUsuarioById(request);
@@ -394,14 +394,14 @@ public IEmpresaBAR getEmpresaBAR()
 	@Test
 	public void testUpdateUsuario()
 	{
-		Usuario usuario = new Usuario(1011, "NATIVE INSERT UPDATE");
+		Usuario usuario =  Objects.insertUsuario(4, TabelaEnum.USUARIO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1011);
 		Usuario usuarioResponse = getEmpresaBAR().fetchUsuarioById(request);
-		Assert.assertEquals(usuarioResponse.getRole(), "role_6");
+		Assert.assertEquals(usuarioResponse.getEmail(), "username_3");
 		getEmpresaBAR().updateUsuario(usuario);
 		usuarioResponse = getEmpresaBAR().fetchUsuarioById(request);
-		Assert.assertEquals(usuarioResponse.getRole(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(usuarioResponse.getEmail(), "username_3");
 	}
 
 	@Test

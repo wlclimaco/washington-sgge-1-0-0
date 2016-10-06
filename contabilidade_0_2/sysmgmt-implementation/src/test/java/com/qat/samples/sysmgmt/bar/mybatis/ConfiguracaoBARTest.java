@@ -815,7 +815,7 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 		Assert.assertEquals(ConfigSMTPResponse.getEndEmail(), "endEmail_0");
 		getConfiguracaoBAR().updateConfigSMTP(ConfigSMTP);
 		ConfigSMTPResponse = getConfiguracaoBAR().fetchConfigSMTPById(request);
-		Assert.assertEquals(ConfigSMTPResponse.getEndEmail(), "endEmail_3 - UPDATE");
+		Assert.assertEquals(ConfigSMTPResponse.getEndEmail(), "wlclimaco@gmail.com");
 	}
 
 	@Test

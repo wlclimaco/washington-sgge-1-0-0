@@ -23,7 +23,6 @@
     <result property="processId" column="processId"/>
     <result property="senha" column="password"/>
     <result property="pergunta" column="pergunta"/>
-    <result property="role" column="role"/>
     <result property="language" column="language"/>
     <result property="ultAcesso" column="ultAcesso"/>
     <result property="tabelaEnumValue" column="tabelaEnumValue"/>
@@ -32,6 +31,7 @@
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
 <collection property="cpf" column="id" select="DocumentoMap.fetchDocumentoByUsuario"/>
+<collection property="roles" column="email" select="RoleMap.fetchRoleByUsuario"/>
   </resultMap>
 
   <sql id="allUsuarioColumns">
@@ -41,7 +41,6 @@ username
 ,processId
 ,password
 ,pergunta
-,role
 ,language
 ,ultAcesso
 ,tabelaEnumValue
@@ -58,7 +57,6 @@ username
 #{processId},
 #{senha},
 #{pergunta},
-#{role},
 #{language},
 #{ultAcesso},
 #{tabelaEnumValue},
@@ -76,7 +74,6 @@ c.processId,
 c.email,
 c.senha,
 c.pergunta,
-c.role,
 c.language,
 c.ultAcesso,
 c.tabelaEnumValue,
@@ -130,7 +127,6 @@ c.tabelaEnumValue,
 <if test="processId!= null">processId = #{processId},</if>
 <if test="senha!= null">password = #{senha},</if>
 <if test="pergunta!= null">pergunta = #{pergunta},</if>
-<if test="role!= null">role = #{role},</if>
 <if test="language!= null">language = #{language},</if>
 <if test="ultAcesso!= null">ultAcesso = #{ultAcesso},</if>
 <if test="tabelaEnumValue!= null">tabelaEnumValue = #{tabelaEnumValue},</if>

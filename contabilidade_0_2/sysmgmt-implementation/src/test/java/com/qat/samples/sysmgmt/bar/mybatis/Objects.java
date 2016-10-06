@@ -842,10 +842,16 @@ public class Objects {
 		empresa.getStatusList().add(insertStatus(id, TabelaEnum.EMPRESA, action));
 		empresa.setNotes(new ArrayList<Note>());
 		empresa.getNotes().add(insertNotes(id, TabelaEnum.EMPRESA, action));
+
+		empresa.setUsuarios(new ArrayList<Usuario>());
+		empresa.getUsuarios().add(insertUsuario(id, TabelaEnum.EMPRESA, action));
+
+		empresa.setConfiguracao(insertConfiguracao(id, TabelaEnum.EMPRESA, action));
+
 		empresa.setTabelaEnum(tabela);
 		empresa.setParentId(id);
 		empresa.setEntidadeEnum(EntidadeTypeEnum.EMPRESA);
-		empresa.setEmprId(EMPID);
+		empresa.setEmprId(4595);
 		empresa.setModifyDateUTC(a.getTime());
 		empresa.setCreateDateUTC(a.getTime());
 		empresa.setCreateUser("system");
@@ -963,10 +969,10 @@ public class Objects {
 		usuario.setId(id);
 
 		usuario.setCpf(insertDocumento(id, TabelaEnum.USUARIO, action));
-		usuario.setEmail("email_3 - " + action.toString());
+		usuario.setEmail("econtabilsistemas@gmail.com");
 		usuario.setSenha("senha_4 - " + action.toString());
 		usuario.setPergunta("pergunta_5 - " + action.toString());
-		usuario.setRole("role_6 - " + action.toString());
+		//usuario.setRole("role_6 - " + action.toString());
 		usuario.setLanguage("pt");
 		usuario.setUltAcesso(a.getTime());
 		usuario.setTabelaEnum(tabela);
@@ -2046,7 +2052,7 @@ public class Objects {
 		Date a = new Date();
 		email.setId(id);
 		email.setTypeValue(1001);
-		email.setEmail("email_2 - " + action.toString());
+		email.setEmail("econtabilsistemas@gmail.com");
 		email.setEmailTypeEnumValue(1003);
 		email.setTabelaEnum(tabela);
 		email.setParentId(id);
@@ -2859,11 +2865,11 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		ConfigSMTP configsmtp = new ConfigSMTP();
 		Date a = new Date();
 		configsmtp.setId(id);
-		configsmtp.setServSMTP("servSMTP_1 - " + action.toString());
-		configsmtp.setPorta("porta_2 - " + action.toString());
-		configsmtp.setEndEmail("endEmail_3 - " + action.toString());
-		configsmtp.setUsuario("usuario_4 - " + action.toString());
-		configsmtp.setSenha("senha_5 - " + action.toString());
+		configsmtp.setServSMTP("smtp.gmail.com");
+		configsmtp.setPorta("587");
+		configsmtp.setEndEmail("wlclimaco@gmail.com");
+		configsmtp.setUsuario("wlclimaco@gmail.com");
+		configsmtp.setSenha("gugubravo");
 		configsmtp.setSeguranca(insertDoisValor(id, TabelaEnum.BOLETO, action));
 		configsmtp.setTabelaEnum(tabela);
 		configsmtp.setParentId(id);
