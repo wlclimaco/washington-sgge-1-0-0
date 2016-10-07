@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.bar.Configuracao.IConfiguracaoBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
@@ -40,13 +41,13 @@ public final class ConfiguracaoBARD extends SqlSessionDaoSupport
 	 */
 	@SuppressWarnings("unchecked")
 	public static Integer maintainConfiguracaoAssociations(Configuracao configuracao,
-			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IConfiguracaoBAR configuracaoDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
-	
+
 			// Make sure we set the parent key
 			configuracao.setParentId(parentId);
 			configuracao.setTabelaEnum(tabelaEnum);
@@ -57,48 +58,23 @@ public final class ConfiguracaoBARD extends SqlSessionDaoSupport
 			{
 				case INSERT:
 					count = configuracaoDAC.insertConfiguracao(configuracao).hasSystemError();
-					if (count == true)
-					{
-						Status status = new Status();
-						status.setStatus(CdStatusTypeEnum.ATIVO);
-						List<Status> statusList = new ArrayList<Status>();
-						statusList.add(status);
-						count =
-								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.CONFIGURACAO, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case UPDATE:
 					count = configuracaoDAC.updateConfiguracao(configuracao).hasSystemError();
-					if (count == true)
-					{
-						count =
-								StatusBARD.maintainStatusAssociations(configuracao.getStatusList(), response, configuracao.getId(),
-										null,
-										AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CONFIGURACAO, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case DELETE:
 					count = configuracaoDAC.deleteConfiguracaoById(configuracao).hasSystemError();
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.DELETADO);
-					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
-					count =
-							StatusBARD.maintainStatusAssociations(statusList, response, configuracao.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.CONFIGURACAO, statusDAC, historicoDAC,
-									processId, historicoId);
 
 					break;
 			}
-	
+
 		if(count == true ){
 			return 1;
 		}else{
 			return 0;
 		}
-		
+
 	}
 }

@@ -16,6 +16,7 @@ import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.advocacia.Advocacia;
 import com.qat.samples.sysmgmt.advocacia.request.AdvocaciaInquiryRequest;
 import com.qat.samples.sysmgmt.bar.Cadastros.ICadastrosBAR;
+import com.qat.samples.sysmgmt.bar.Configuracao.IConfiguracaoBAR;
 import com.qat.samples.sysmgmt.bar.Documentos.IDocumentoBAR;
 import com.qat.samples.sysmgmt.bar.Email.IEmailBAR;
 import com.qat.samples.sysmgmt.bar.Empresa.IEmpresaBAR;
@@ -29,6 +30,7 @@ import com.qat.samples.sysmgmt.bar.Socios.ISociosBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.BaseBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.ConfiguracaoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EnviarEmailBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.PlanoByEmpresaBARD;
@@ -465,6 +467,8 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	IEmpresaBAR empresaBAR;
 
+	IConfiguracaoBAR configuracaoBAR;
+
 	public ISociosBAR getSociosBAR() {
 		return sociosBAR;
 	}
@@ -574,6 +578,14 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 		this.empresaBAR = empresaBAR;
 	}
 
+	public IConfiguracaoBAR getConfiguracaoBAR() {
+		return configuracaoBAR;
+	}
+
+	public void setConfiguracaoBAR(IConfiguracaoBAR configuracaoBAR) {
+		this.configuracaoBAR = configuracaoBAR;
+	}
+
 	/**
 	 * /* (non-Javadoc)
 	 *
@@ -672,9 +684,21 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 		Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.EMPRESA, getHistoricoBAR(), response);
 		Integer processId = 1;
 
+		BaseBARD.maintainDeleteBase(empresa, historicoId, processId, TabelaEnum.EMPRESA, getEnderecoBAR(),
+				getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getFiscalBAR(), getTelefoneBAR(), getEmailBAR(),
+				getDocumentosBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
+
 		BaseBARD.maintainInsertBase(empresa, historicoId, processId, TabelaEnum.EMPRESA, getEnderecoBAR(),
 				getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getFiscalBAR(), getTelefoneBAR(), getEmailBAR(),
 				getDocumentosBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
+
+
+		if (!ValidationUtil.isNull(empresa.getConfiguracao())) {
+			Integer a = ConfiguracaoBARD.maintainConfiguracaoAssociations(empresa.getConfiguracao(), response,
+					empresa.getId(), null, null, TabelaEnum.EMPRESA, getConfiguracaoBAR(), getStatusBAR(), getHistoricoBAR(),
+					empresa.getId(), empresa.getCreateUser(), historicoId, historicoId);
+		}
+
 
 		return response;
 	}

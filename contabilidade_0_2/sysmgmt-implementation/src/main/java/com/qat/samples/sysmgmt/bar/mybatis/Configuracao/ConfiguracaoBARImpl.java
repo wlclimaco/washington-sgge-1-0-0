@@ -1,6 +1,8 @@
 /** create by system gera-java version 1.0.0 27/07/2016 12:37 : 46*/
 package com.qat.samples.sysmgmt.bar.mybatis.Configuracao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -11,13 +13,24 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.MyBatisBARHelper;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Configuracao.IConfiguracaoBAR;
+import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
+import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.ConfigCarneBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.ConfigEntradaBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.ConfigFiscalBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.ConfigGeralBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.ConfigProdutoBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.ConfigSMTPBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.ConfigVendasBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.SociosBARD;
 import com.qat.samples.sysmgmt.entidade.model.Boleto;
 import com.qat.samples.sysmgmt.entidade.model.ConfigAlertas;
+import com.qat.samples.sysmgmt.entidade.model.ConfigBlueSoft;
 import com.qat.samples.sysmgmt.entidade.model.ConfigCarne;
 import com.qat.samples.sysmgmt.entidade.model.ConfigEntrada;
 import com.qat.samples.sysmgmt.entidade.model.ConfigFiscal;
 import com.qat.samples.sysmgmt.entidade.model.ConfigGeral;
+import com.qat.samples.sysmgmt.entidade.model.ConfigOS;
 import com.qat.samples.sysmgmt.entidade.model.ConfigProduto;
 import com.qat.samples.sysmgmt.entidade.model.ConfigSMTP;
 import com.qat.samples.sysmgmt.entidade.model.ConfigVendas;
@@ -366,6 +379,37 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 	private static final String STMT_FETCH_CONFIGVENDAS_ALL_REQUEST = NAMESPACE_CONFIGVENDAS
 			+ "fetchAllConfigVendassRequest";
 
+
+	IConfiguracaoBAR configuracaoBAR;
+
+	IStatusBAR statusBAR;
+
+	IHistoricoBAR historicoBAR;
+
+	public IStatusBAR getStatusBAR() {
+		return statusBAR;
+	}
+
+	public void setStatusBAR(IStatusBAR statusBAR) {
+		this.statusBAR = statusBAR;
+	}
+
+	public IHistoricoBAR getHistoricoBAR() {
+		return historicoBAR;
+	}
+
+	public void setHistoricoBAR(IHistoricoBAR historicoBAR) {
+		this.historicoBAR = historicoBAR;
+	}
+
+	public IConfiguracaoBAR getConfiguracaoBAR() {
+		return configuracaoBAR;
+	}
+
+	public void setConfiguracaoBAR(IConfiguracaoBAR configuracaoBAR) {
+		this.configuracaoBAR = configuracaoBAR;
+	}
+
 	// ===================================### CONFIGURACAO
 	// ####======================================
 	/**
@@ -377,8 +421,20 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 	public InternalResponse insertConfiguracao(Configuracao configuracao) {
 		InternalResponse response = new InternalResponse();
 
-		insertModulosConfiguracao(configuracao);
+		insertModulosConfiguracao(configuracao,response);
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONFIGURACAO, configuracao, response);
+
+//		<collection property="confGeral" column="confGeral" select="ConfigGeralMap.fetchConfigGeralById"/>
+//	    <collection property="confFiscal" column="confFiscal" select="ConfigFiscalMap.fetchConfigFiscalById"/>
+//	    <collection property="confProd" column="confProd" select="ConfigProdutoMap.fetchConfigProdutoById"/>
+//	    <collection property="confVendas" column="confVendas" select="ConfigVendasMap.fetchConfigVendasById"/>
+//	    <collection property="confCMTP" column="confCMTP" select="ConfigSMTPMap.fetchConfigSMTPById"/>
+//	    <collection property="confEntrada" column="confEntrada" select="ConfigEntradaMap.fetchConfigEntradaById"/>
+//	    <collection property="confCarne" column="confCarne" select="ConfigCarneMap.fetchConfigCarneById"/>
+//	    <collection property="confNFe" column="confNFe" select="ConfiguracaoNFeMap.fetchConfiguracaoNFeById"/>
+
+
+
 		return response;
 	}
 
@@ -1927,62 +1983,81 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 
 	}
 
-	public static void insertModulosConfiguracao(Configuracao configuracao) {
+	public static void insertModulosConfiguracao(Configuracao configuracao,InternalResponse response,IConfiguracaoBAR configuracaoBAR,IStatusBAR statusBAR,IHistoricoBAR historicoBAR,Integer historicoId) {
+		Integer a = 0;
 
-//		if (!ValidationUtil.isNull(configuracao.getConfGeral())) {
-//			a += SociosBARD.maintainSocioAssociations(configuracao.getConfGeral(), response, empresa.getId(), null,
-//					null, TabelaEnum.EMPRESA, getSociosBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-//					empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
-//
-//		}
-//		if (!ValidationUtil.isNullOrEmpty(configuracao.getConfFiscal())) {
-//			a += SociosBARD.maintainSocioAssociations(configuracao.getConfFiscal(), response, empresa.getId(), null,
-//					null, TabelaEnum.EMPRESA, getSociosBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-//					empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
-//
-//		}
-//		if (!ValidationUtil.isNullOrEmpty(configuracao.getConfProd())) {
-//			a += SociosBARD.maintainSocioAssociations(configuracao.getConfProd(), response, empresa.getId(), null, null,
-//					TabelaEnum.EMPRESA, getSociosBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-//					empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
-//
-//		}
-//		if (!ValidationUtil.isNullOrEmpty(configuracao.getConfVendas())) {
-//			a += SociosBARD.maintainSocioAssociations(configuracao.getConfVendas(), response, empresa.getId(), null,
-//					null, TabelaEnum.EMPRESA, getSociosBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-//					empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
-//
-//		}
-//		if (!ValidationUtil.isNullOrEmpty(configuracao.getConfCMTP())) {
-//			a += SociosBARD.maintainSocioAssociations(empresa.getConfCMTP(), response, empresa.getId(), null, null,
-//					TabelaEnum.EMPRESA, getSociosBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-//					empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
-//
-//		}
-//		if (!ValidationUtil.isNullOrEmpty(configuracao.getConfEntrada)) {
-//			a += SociosBARD.maintainSocioAssociations(configuracao.getConfEntrada(), response, empresa.getId(), null,
-//					null, TabelaEnum.EMPRESA, getSociosBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-//					empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
-//
-//		}
-//		if (!ValidationUtil.isNullOrEmpty(configuracao.getConfCarne)) {
-//			a += SociosBARD.maintainSocioAssociations(configuracao.getConfCarne(), response, empresa.getId(), null,
-//					null, TabelaEnum.EMPRESA, getSociosBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-//					empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
-//
-//		}
-//		if (!ValidationUtil.isNullOrEmpty(configuracao.getConfCarne)) {
-//			a += SociosBARD.maintainSocioAssociations(configuracao.getConfCarne(), response, empresa.getId(), null,
-//					null, TabelaEnum.EMPRESA, getSociosBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-//					empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
-//
-//		}
-//		if (!ValidationUtil.isNullOrEmpty(configuracao.getBoletoList)) {
-//			a += SociosBARD.maintainSocioAssociations(configuracao.getBoletoList(), response, empresa.getId(), null,
-//					null, TabelaEnum.EMPRESA, getSociosBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
-//					empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
-//
-//		}
+//		private ConfigGeral confGeral;
+//		private ConfigFiscal confFiscal;
+//		private ConfigProduto confProd;
+//		private ConfigVendas confVendas;
+//		private ConfigSMTP confSMTP;
+//		private ConfigOS configOS;
+//		private ConfigEntrada confEntrada;
+//		private ConfigCarne confCarne;
+//		private ConfiguracaoNFe confNFe;
+//		private ConfigAlertas confAlertas;
+//		private ConfigBlueSoft confBlueSoft;
+//		private List<Boleto> boletoList;
+		if (!ValidationUtil.isNull(configuracao.getConfGeral())) {
+			a += ConfigGeralBARD.maintainConfigGeralAssociations(configuracao.getConfGeral(), response, configuracao.getId(), null,
+					null, TabelaEnum.EMPRESA, configuracaoBAR, statusBAR, historicoBAR, configuracao.getId(),
+					configuracao.getCreateUser(), historicoId, historicoId);
+
+		}
+		if (!ValidationUtil.isNull(configuracao.getConfFiscal())) {
+			a += ConfigFiscalBARD.maintainConfigFiscalAssociations(configuracao.getConfFiscal(), response, configuracao.getId(), null,
+					null, TabelaEnum.EMPRESA, configuracaoBAR, statusBAR, historicoBAR, configuracao.getId(),
+					configuracao.getCreateUser(), historicoId, historicoId);
+
+		}
+		if (!ValidationUtil.isNull(configuracao.getConfProd())) {
+			a +=ConfigProdutoBARD.maintainConfigProdutoAssociations(configuracao.getConfProd(), response, configuracao.getId(), null, null,
+					TabelaEnum.EMPRESA, configuracaoBAR, statusBAR, historicoBAR, configuracao.getId(),
+					configuracao.getCreateUser(), historicoId, historicoId);
+
+		}
+		if (!ValidationUtil.isNull(configuracao.getConfVendas())) {
+			a += ConfigVendasBARD.maintainConfigVendasAssociations(configuracao.getConfVendas(), response, configuracao.getId(), null,
+					null, TabelaEnum.EMPRESA, configuracaoBAR, statusBAR, historicoBAR, configuracao.getId(),
+					configuracao.getCreateUser(), historicoId, historicoId);
+
+		}
+		if (!ValidationUtil.isNull(configuracao.getConfCMTP())) {
+			a += ConfigSMTPBARD.maintainConfigSMTPAssociations(configuracao.getConfCMTP(), response, configuracao.getId(), null, null,
+					TabelaEnum.EMPRESA, configuracaoBAR, statusBAR, historicoBAR, configuracao.getId(),
+					configuracao.getCreateUser(), historicoId, historicoId);
+
+		}
+		if (!ValidationUtil.isNull(configuracao.getConfigOS())) {
+			a += ConfigEntradaBARD.maintainConfigEntradaAssociations(configuracao.getConfigOS(), response, configuracao.getId(), null,
+					null, TabelaEnum.EMPRESA, configuracaoBAR, statusBAR, historicoBAR, configuracao.getId(),
+					configuracao.getCreateUser(), historicoId, historicoId);
+
+		}
+		if (!ValidationUtil.isNull(configuracao.getConfEntrada())) {
+			a += ConfigEntradaBARD.maintainConfigEntradaAssociations(configuracao.getConfEntrada(), response, configuracao.getId(), null,
+					null, TabelaEnum.EMPRESA, configuracaoBAR, statusBAR, historicoBAR, configuracao.getId(),
+					configuracao.getCreateUser(), historicoId, historicoId);
+
+		}
+		if (!ValidationUtil.isNull(configuracao.getConfCarne())) {
+			a += ConfigCarneBARD.maintainConfigCarneAssociations(configuracao.getConfCarne(), response, configuracao.getId(), null,
+					null, TabelaEnum.EMPRESA, configuracaoBAR, statusBAR, historicoBAR, configuracao.getId(),
+					configuracao.getCreateUser(), historicoId, historicoId);
+
+		}
+		if (!ValidationUtil.isNullOrEmpty(configuracao.getConfCarne)) {
+			a += SociosBARD.maintainSocioAssociations(configuracao.getConfCarne(), response, configuracao.getId(), null,
+					null, TabelaEnum.EMPRESA, getSociosBAR(), getStatusBAR(), getHistoricoBAR(), configuracao.getId(),
+					configuracao.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+
+		}
+		if (!ValidationUtil.isNullOrEmpty(configuracao.getBoletoList)) {
+			a += SociosBARD.maintainSocioAssociations(configuracao.getBoletoList(), response, configuracao.getId(), null,
+					null, TabelaEnum.EMPRESA, getSociosBAR(), getStatusBAR(), getHistoricoBAR(), configuracao.getId(),
+					configuracao.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+
+		}
 
 	}
 }

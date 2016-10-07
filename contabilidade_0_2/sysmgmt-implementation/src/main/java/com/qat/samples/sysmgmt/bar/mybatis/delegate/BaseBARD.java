@@ -18,12 +18,17 @@ import com.qat.samples.sysmgmt.bar.Notes.INotesBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
 import com.qat.samples.sysmgmt.bar.Vendas.IVendasBAR;
+import com.qat.samples.sysmgmt.cnae.model.CnaeEmpresa;
 import com.qat.samples.sysmgmt.entidade.model.Entidade;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscal;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
+import com.qat.samples.sysmgmt.util.model.Documento;
+import com.qat.samples.sysmgmt.util.model.Email;
+import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
+import com.qat.samples.sysmgmt.util.model.Telefone;
 
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
@@ -150,5 +155,50 @@ public final class BaseBARD extends SqlSessionDaoSupport
 		return 0;
 
 	}
+	public static Boolean maintainDeleteBase(Entidade empresa,Integer historicoId,Integer processId,TabelaEnum tabela,IEnderecoBAR enderecoBAR,IStatusBAR statusBAR,IHistoricoBAR historicoBAR,
+			ICadastrosBAR cadastroBAR,IFiscalBAR fiscalBAR,ITelefoneBAR telefoneBAR,IEmailBAR emailBAR,IDocumentoBAR documentoBAR,INotesBAR noteBAR, InternalResultsResponse<?> response)
+	{
+		Integer count = 0;
+		Boolean count1 = false;
+		if (!ValidationUtil.isNullOrEmpty(empresa.getEnderecos()))
+		{
+			for (Endereco endereco : empresa.getEnderecos())
+			{
+				count1 =  enderecoBAR.deleteEnderecoById(endereco).hasSystemError();
+			}
+		}
+		if (!ValidationUtil.isNullOrEmpty(empresa.getCnaes()))
+		{
+			for (CnaeEmpresa cnae : empresa.getCnaes())
+			{
+				count1 =  fiscalBAR.deleteCnaeEmpresaById(cnae).hasSystemError();
+			}
+		}
+		if (!ValidationUtil.isNullOrEmpty(empresa.getEmails()))
+		{
+			for (Email email : empresa.getEmails())
+			{
+				count1 =  emailBAR.deleteEmailById(email).hasSystemError();
+			}
+		}
+		if (!ValidationUtil.isNullOrEmpty(empresa.getTelefones()))
+		{
+			for (Telefone telefone : empresa.getTelefones())
+			{
+				count1 =  telefoneBAR.deleteTelefoneById(telefone).hasSystemError();
+			}
+		}
+		if (!ValidationUtil.isNullOrEmpty(empresa.getDocumentos()))
+		{
+			for (Documento documento : empresa.getDocumentos())
+			{
+				count1 =  documentoBAR.deleteDocumentoById(documento).hasSystemError();
+			}
+		}
+
+		return count1;
+
+	}
+
 
 }

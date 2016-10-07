@@ -37,6 +37,28 @@
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
 </resultMap>
 
+  <resultMap id="SiteNotEmpresaResult" type="Site">
+    <result property="id" column="id"/>
+    <result property="nome" column="nome"/>
+    <result property="url" column="url"/>
+    <result property="quemSomos" column="quemSomos"/>
+    <result property="missao" column="missao"/>
+    <result property="visao" column="visao"/>
+    <result property="titulo" column="titulo"/>
+    <result property="logo" column="logo"/>
+    <result property="atorization" column="atorization"/>
+    <result property="siteTypeEnumValue" column="siteTypeEnum"/>
+    <result property="comoTrabalhamos" column="comoTrabalhamos"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<collection property="servicoList" column="id" select="ServicoMap.fetchServicoBySite"/>
+	<collection property="planoList" column="id" select="PlanoMap.fetchPlanoBySite"/>
+	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
+</resultMap>
+
+
   <sql id="allSiteColumns">
 nome
 ,url
@@ -84,6 +106,12 @@ nome
     SELECT id,
 	<include refid="allSiteColumns" />
    FROM site WHERE id = #{fetchid}
+ </select>
+
+  <select id="fetchSiteByEmpresa" parameterType="Integer" resultMap="SiteNotEmpresaResult">
+    SELECT id,
+	<include refid="allSiteColumns" />
+   FROM site WHERE empresa = #{id}
  </select>
 
  <select id="fetchAllSitesRequest" parameterType="SiteInquiryRequest" resultMap="SiteResult">

@@ -62,10 +62,10 @@ public final class EnderecoBARD extends SqlSessionDaoSupport
 			{
 				case INSERT:
 					count = enderecoDAC.insertEndereco(endereco).hasSystemError();
-					
+
 //					InsertHistBARD.maintainInsertHistoricoItens(tabelaEnum, AcaoEnum.INSERT, historicoId,
 //							historicoDAC, response, parentId);
-					
+
 					if (count == false)
 					{
 						Status status = new Status();
@@ -94,15 +94,6 @@ public final class EnderecoBARD extends SqlSessionDaoSupport
 					break;
 				case DELETE:
 					count = enderecoDAC.deleteEnderecoById(endereco).hasSystemError();
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.DELETADO);
-					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
-					count =
-							StatusBARD.maintainStatusAssociations(statusList, response, endereco.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.ENDERECO, statusDAC, historicoDAC,
-									processId, historicoId);
-
 					break;
 				default:
 

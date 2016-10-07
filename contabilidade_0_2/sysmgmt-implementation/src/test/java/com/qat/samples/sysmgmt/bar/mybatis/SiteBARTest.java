@@ -83,7 +83,7 @@ public class SiteBARTest extends AbstractTransactionalJUnit4SpringContextTests {
 	 servicoResponse = getSiteBAR().fetchServicoById(request);
 	 Assert.assertEquals(servicoResponse, null);
 	 }
-	
+
 	 @Test
 	 public void testFetchAllServicos()
 	 {
@@ -92,7 +92,7 @@ public class SiteBARTest extends AbstractTransactionalJUnit4SpringContextTests {
 	 getSiteBAR().fetchAllServicos(servico).getResultsList();
 	 Assert.assertNotNull(response);
 	 }
-	
+
 	 @Test
 	 public void testDeleteAllServicos()
 	 {
@@ -102,7 +102,7 @@ public class SiteBARTest extends AbstractTransactionalJUnit4SpringContextTests {
 	 Servico()).getResultsList();
 	 Assert.assertEquals(response.size(), 0);
 	 }
-	
+
 	 @Test
 	 public void testUpdateServico()
 	 {
@@ -117,7 +117,7 @@ public class SiteBARTest extends AbstractTransactionalJUnit4SpringContextTests {
 	 Assert.assertEquals(servicoResponse.getNome(), "NATIVE INSERT UPDATE");
 	 Assert.assertEquals(servicoResponse.getPreco().size(), 1);
 	 }
-	
+
 	 @Test
 	 public void testFetchServicosByRequest() throws Exception
 	 {
@@ -141,7 +141,7 @@ public class SiteBARTest extends AbstractTransactionalJUnit4SpringContextTests {
 	 Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 	 Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() >
 	 0);
-	
+
 	 // check for valid and no precount
 	 ServicoInquiryRequest request2 = new ServicoInquiryRequest();
 	 request2.setPreQueryCount(false);
@@ -152,7 +152,7 @@ public class SiteBARTest extends AbstractTransactionalJUnit4SpringContextTests {
 	 // this is because we did not choose to precount
 	 Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable()
 	 == 0);
-	
+
 	 // check for zero rows
 	 getSiteBAR().deleteAllServicos();
 	 ServicoInquiryRequest request3 = new ServicoInquiryRequest();
@@ -161,13 +161,13 @@ public class SiteBARTest extends AbstractTransactionalJUnit4SpringContextTests {
 	 getSiteBAR().fetchServicosByRequest(request3);
 	 Assert.assertTrue(response3.getBusinessError() ==
 	 BusinessErrorCategory.NoRowsFound);
-	
+
 	 }
-	
+
 	// ===================================### SITE
 	// ####======================================
-	
-	
+
+
 	 @Test
 	 public void testDeleteSite()
 	 {
@@ -186,7 +186,7 @@ public class SiteBARTest extends AbstractTransactionalJUnit4SpringContextTests {
 	 siteResponse = getSiteBAR().fetchSiteById(request);
 	 // Assert.assertEquals(siteResponse, siteResponse.getId());
 	 }
-	
+
 	 @Test
 	 public void testFetchAllSites()
 	 {
@@ -194,7 +194,7 @@ public class SiteBARTest extends AbstractTransactionalJUnit4SpringContextTests {
 	 List<Site> response = getSiteBAR().fetchAllSites(site).getResultsList();
 	 Assert.assertNotNull(response);
 	 }
-	
+
 	 @Test
 	 public void testDeleteAllSites()
 	 {
@@ -204,15 +204,15 @@ public class SiteBARTest extends AbstractTransactionalJUnit4SpringContextTests {
 	 Site()).getResultsList();
 	 Assert.assertEquals(response.size(), 0);
 	 }
-	
+
 	 @Test
 	 public void testUpdateSite()
 	 {
-	 Site site = insertSite(1,TabelaEnum.SITE,PersistenceActionEnum.INSERT);
+	 Site site = insertSite(1001,TabelaEnum.SITE,PersistenceActionEnum.INSERT);
 	 FetchByIdRequest request = new FetchByIdRequest();
-	 request.setFetchId(1);
+	 request.setFetchId(1001);
 	 Site siteResponse = getSiteBAR().fetchSiteById(request);
-	 Assert.assertEquals(siteResponse.getNome(), "E-Contábil");
+	 Assert.assertEquals(siteResponse.getNome(), "nome_1");
 	 getSiteBAR().updateSite(site);
 	 siteResponse = getSiteBAR().fetchSiteById(request);
 	 Assert.assertEquals(siteResponse.getNome(), "NATIVE INSERT UPDATE");

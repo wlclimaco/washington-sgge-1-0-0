@@ -13,7 +13,7 @@ import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Configuracao.IConfiguracaoBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
-import com.qat.samples.sysmgmt.entidade.model.ConfigEntrada;
+import com.qat.samples.sysmgmt.entidade.model.ConfigOS;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.model.Status;
@@ -24,7 +24,7 @@ import com.qat.samples.sysmgmt.util.model.TypeEnum;
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
  */
-public final class ConfigEntradaBARD extends SqlSessionDaoSupport
+public final class ConfigOSBARD extends SqlSessionDaoSupport
 {
 
 	/** The Constant ZERO. */
@@ -40,28 +40,27 @@ public final class ConfigEntradaBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainConfigEntradaAssociations(ConfigEntrada configentrada,
+	public static Integer maintainConfigOSAssociations(ConfigOS configcarne,
 			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IConfiguracaoBAR configentradaDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
+			TabelaEnum tabelaEnum, IConfiguracaoBAR configcarneDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
-		if (ValidationUtil.isNull(configentrada))
+		if (ValidationUtil.isNull(configcarne))
 		{
 			return 0;
 		}
 
 			// Make sure we set the parent key
-			configentrada.setParentId(parentId);
-			configentrada.setTabelaEnum(tabelaEnum);
-			configentrada.setProcessId(processId);
+			configcarne.setParentId(parentId);
+			configcarne.setTabelaEnum(tabelaEnum);
+			configcarne.setProcessId(processId);
 
-
-			switch (configentrada.getModelAction())
+			switch (configcarne.getModelAction())
 			{
 				case INSERT:
-					count = configentradaDAC.insertConfigEntrada(configentrada).hasSystemError();
+					count = configcarneDAC.insertConfigOS(configcarne).hasSystemError();
 					if (count == true)
 					{
 						Status status = new Status();
@@ -70,35 +69,35 @@ public final class ConfigEntradaBARD extends SqlSessionDaoSupport
 						statusList.add(status);
 						count =
 								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.CONFIGENTRADA, statusDAC, historicoDAC,
+										AcaoEnum.INSERT, UserId, empId, TabelaEnum.CONFIGCARNE, statusDAC, historicoDAC,
 										processId, historicoId);
 					}
 					break;
 				case UPDATE:
-					count = configentradaDAC.updateConfigEntrada(configentrada).hasSystemError();
+					count = configcarneDAC.updateConfigOS(configcarne).hasSystemError();
 					if (count == true)
 					{
 						count =
-								StatusBARD.maintainStatusAssociations(configentrada.getStatusList(), response, configentrada.getId(),
+								StatusBARD.maintainStatusAssociations(configcarne.getStatusList(), response, configcarne.getId(),
 										null,
-										AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CONFIGENTRADA, statusDAC, historicoDAC,
+										AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CONFIGCARNE, statusDAC, historicoDAC,
 										processId, historicoId);
 					}
 					break;
 				case DELETE:
-					count = configentradaDAC.deleteConfigEntradaById(configentrada).hasSystemError();
+					count = configcarneDAC.deleteConfigOSById(configcarne).hasSystemError();
 					Status status = new Status();
 					status.setStatus(CdStatusTypeEnum.DELETADO);
 					List<Status> statusList = new ArrayList<Status>();
 					statusList.add(status);
 					count =
-							StatusBARD.maintainStatusAssociations(statusList, response, configentrada.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.CONFIGENTRADA, statusDAC, historicoDAC,
+							StatusBARD.maintainStatusAssociations(statusList, response, configcarne.getId(), null,
+									AcaoEnum.DELETE, UserId, empId, TabelaEnum.CONFIGCARNE, statusDAC, historicoDAC,
 									processId, historicoId);
 
 					break;
+			}
 
-		}
 		if(count == true ){
 			return 1;
 		}else{

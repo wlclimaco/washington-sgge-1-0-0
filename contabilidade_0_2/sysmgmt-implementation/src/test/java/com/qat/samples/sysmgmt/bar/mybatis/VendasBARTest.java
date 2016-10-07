@@ -93,7 +93,7 @@ public IVendasBAR getVendasBAR()
 		getVendasBAR().deleteAllNotaFiscalSaidas();
 	NotaFiscalSaida notafiscalsaida = new NotaFiscalSaida();
 		List<NotaFiscalSaida> response = getVendasBAR().fetchAllNotaFiscalSaidas(new NotaFiscalSaida()).getResultsList();
-		Assert.assertEquals(response.size(), 11);
+		Assert.assertEquals(response.size(), 16);
 	}
 
 	@Test

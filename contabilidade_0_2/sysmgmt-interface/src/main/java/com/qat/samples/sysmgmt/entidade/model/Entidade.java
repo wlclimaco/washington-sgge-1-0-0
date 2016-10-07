@@ -7,6 +7,7 @@ import com.qat.samples.sysmgmt.cnae.model.CnaeEmpresa;
 import com.qat.samples.sysmgmt.fiscal.model.Regime;
 import com.qat.samples.sysmgmt.pessoa.model.Socio;
 import com.qat.samples.sysmgmt.site.model.PlanoByEmpresa;
+import com.qat.samples.sysmgmt.site.model.Site;
 import com.qat.samples.sysmgmt.util.model.Documento;
 import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.Endereco;
@@ -61,6 +62,8 @@ public class Entidade extends ModelCosmeDamiao
 	private PlanoByEmpresa planosServicos;
 
 	private List<Socio> socios;
+
+	private List<Site> siteList;
 
 	private String responsavel;
 	private List<NotificationPreferences> notificacoes;
@@ -361,6 +364,14 @@ public class Entidade extends ModelCosmeDamiao
 		this.responsavel = responsavel;
 	}
 
+	public List<Site> getSiteList() {
+		return siteList;
+	}
+
+	public void setSiteList(List<Site> siteList) {
+		this.siteList = siteList;
+	}
+
 	@Override
 	public String toString() {
 		return "Entidade [getUsuarios()=" + getUsuarios() + ", getBancos()=" + getBancos() + ", getEntidadeEnumValue()="
@@ -372,8 +383,12 @@ public class Entidade extends ModelCosmeDamiao
 				+ ", getNumFunc()=" + getNumFunc() + ", getPlanosServicos()=" + getPlanosServicos() + ", getSocios()="
 				+ getSocios() + ", getConfiguracaoNFe()=" + getConfiguracaoNFe() + ", getRazao()=" + getRazao()
 				+ ", getStatusEmpresa()=" + getStatusEmpresa() + ", getDtAbertura()=" + getDtAbertura()
-				+ ", getResponsavel()=" + getResponsavel() + ", toString()=" + super.toString() + "]";
+				+ ", getResponsavel()=" + getResponsavel() + ", getSiteList()=" + getSiteList() + ", toString()="
+				+ super.toString() + "]";
 	}
+
+
+
 
 
 
