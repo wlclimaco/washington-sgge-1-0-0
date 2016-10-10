@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
-import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.framework.model.response.InternalResponse;
 import com.qat.samples.sysmgmt.bar.Configuracao.IConfiguracaoBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
@@ -40,7 +40,7 @@ public final class ConfiguracaoNFeBARD extends SqlSessionDaoSupport
 	 */
 	@SuppressWarnings("unchecked")
 	public static Integer maintainConfiguracaoNFeAssociations(ConfiguracaoNFe configuracaonfe,
-			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, IConfiguracaoBAR configuracaonfeDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
@@ -55,48 +55,23 @@ public final class ConfiguracaoNFeBARD extends SqlSessionDaoSupport
 			{
 				case INSERT:
 					count = configuracaonfeDAC.insertConfiguracaoNFe(configuracaonfe).hasSystemError();
-					if (count == true)
-					{
-						Status status = new Status();
-						status.setStatus(CdStatusTypeEnum.ATIVO);
-						List<Status> statusList = new ArrayList<Status>();
-						statusList.add(status);
-						count =
-								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.CONFIGURACAONFE, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case UPDATE:
 					count = configuracaonfeDAC.updateConfiguracaoNFe(configuracaonfe).hasSystemError();
-					if (count == true)
-					{
-						count =
-								StatusBARD.maintainStatusAssociations(configuracaonfe.getStatusList(), response, configuracaonfe.getId(),
-										null,
-										AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CONFIGURACAONFE, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case DELETE:
 					count = configuracaonfeDAC.deleteConfiguracaoNFeById(configuracaonfe).hasSystemError();
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.DELETADO);
-					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
-					count =
-							StatusBARD.maintainStatusAssociations(statusList, response, configuracaonfe.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.CONFIGURACAONFE, statusDAC, historicoDAC,
-									processId, historicoId);
 
 					break;
 			}
-	
+
 		if(count == true ){
 			return 1;
 		}else{
 			return 0;
 		}
-		
+
 	}
 }

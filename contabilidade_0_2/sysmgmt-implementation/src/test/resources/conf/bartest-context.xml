@@ -18,6 +18,7 @@
 		<property name="financeiroBAR" ref="financeiroBARTarget" />
 		<property name="notesBAR" ref="notesBARTarget" />
 		<property name="empresaBAR" ref="empresaBARTarget" />
+		<property name="configuracaoBAR" ref="configuracaoBARTarget" />
 	</bean>
 
 	<bean id="emailBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Email.EmailBARImpl">
@@ -48,6 +49,9 @@
 
 	<bean id="configuracaoBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Configuracao.ConfiguracaoBARImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+		<property name="historicoBAR" ref="historicoBARTarget" />
+		<property name="statusBAR" ref="statusBARTarget" />
+		<property name="configuracaoBAR" ref="configuracaoBARTarget" />
 	</bean>
 
 	<bean id="documentoBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Documentos.DocumentoBARImpl">

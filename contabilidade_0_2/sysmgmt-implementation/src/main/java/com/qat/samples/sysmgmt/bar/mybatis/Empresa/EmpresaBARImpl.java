@@ -665,6 +665,12 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 		}
 
+		if (!ValidationUtil.isNull(empresa.getConfiguracao())) {
+			 a = ConfiguracaoBARD.maintainConfiguracaoAssociations(empresa.getConfiguracao(), response,
+					empresa.getId(), null, null, TabelaEnum.EMPRESA, getConfiguracaoBAR(), getStatusBAR(), getHistoricoBAR(),
+					empresa.getId(), empresa.getCreateUser(), historicoId, historicoId);
+		}
+
 		EnviarEmailBARD.sendMailTLS(empresa.getEmprId(), getEmpresaBAR(), empresa);
 
 		return response;
@@ -720,6 +726,12 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 		BaseBARD.maintainInsertBase(empresa, historicoId, processId, TabelaEnum.EMPRESA, getEnderecoBAR(),
 				getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getFiscalBAR(), getTelefoneBAR(), getEmailBAR(),
 				getDocumentosBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
+
+		if (!ValidationUtil.isNull(empresa.getConfiguracao())) {
+			Integer a = ConfiguracaoBARD.maintainConfiguracaoAssociations(empresa.getConfiguracao(), response,
+					empresa.getId(), null, null, TabelaEnum.EMPRESA, getConfiguracaoBAR(), getStatusBAR(), getHistoricoBAR(),
+					empresa.getId(), empresa.getCreateUser(), historicoId, historicoId);
+		}
 
 		return response;
 	}

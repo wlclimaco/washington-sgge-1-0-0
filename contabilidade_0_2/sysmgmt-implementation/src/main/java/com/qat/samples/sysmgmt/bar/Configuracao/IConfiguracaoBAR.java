@@ -8,6 +8,7 @@ import com.qat.samples.sysmgmt.entidade.model.ConfigCarne;
 import com.qat.samples.sysmgmt.entidade.model.ConfigEntrada;
 import com.qat.samples.sysmgmt.entidade.model.ConfigFiscal;
 import com.qat.samples.sysmgmt.entidade.model.ConfigGeral;
+import com.qat.samples.sysmgmt.entidade.model.ConfigOS;
 import com.qat.samples.sysmgmt.entidade.model.ConfigProduto;
 import com.qat.samples.sysmgmt.entidade.model.ConfigSMTP;
 import com.qat.samples.sysmgmt.entidade.model.ConfigVendas;
@@ -648,5 +649,64 @@ public interface IConfiguracaoBAR
 * @return the internal results response
 */
 	public InternalResultsResponse<ConfigVendas> fetchConfigVendassByRequest(PagedInquiryRequest request);
+
+
+	/**
+	 * Fetch boleto by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public ConfigOS fetchConfigOSById(FetchByIdRequest request);
+
+	/**
+* Insert boleto.
+*
+* @param boleto the boleto
+*
+* @return the internal response
+*/
+	public InternalResponse insertConfigOS(ConfigOS boleto);
+
+	/**
+* Update boleto.
+*
+* @param boleto the boleto
+*
+* @return the internal response
+*/
+	public InternalResponse updateConfigOS(ConfigOS boleto);
+
+	/**
+* Delete boleto.
+*
+* @param boleto the boleto
+*
+* @return the internal response
+*/
+	public InternalResponse deleteConfigOSById(ConfigOS boleto);
+
+	/**
+* Delete all boletos.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllConfigOSs();
+
+	/**
+* Fetch all boletos.
+*
+* @return the list< boleto>
+*/
+	public InternalResultsResponse<ConfigOS> fetchAllConfigOSs(ConfigOS  boleto);
+
+	/**
+* Fetch boletos by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<ConfigOS> fetchConfigOSsByRequest(PagedInquiryRequest request);
+
 
 }

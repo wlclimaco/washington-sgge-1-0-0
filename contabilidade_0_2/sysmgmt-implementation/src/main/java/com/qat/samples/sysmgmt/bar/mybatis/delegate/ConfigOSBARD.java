@@ -3,9 +3,6 @@
 
 package com.qat.samples.sysmgmt.bar.mybatis.delegate;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResponse;
@@ -15,8 +12,6 @@ import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.entidade.model.ConfigOS;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
-import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
 
@@ -61,41 +56,15 @@ public final class ConfigOSBARD extends SqlSessionDaoSupport
 			{
 				case INSERT:
 					count = configcarneDAC.insertConfigOS(configcarne).hasSystemError();
-					if (count == true)
-					{
-						Status status = new Status();
-						status.setStatus(CdStatusTypeEnum.ATIVO);
-						List<Status> statusList = new ArrayList<Status>();
-						statusList.add(status);
-						count =
-								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.CONFIGCARNE, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case UPDATE:
 					count = configcarneDAC.updateConfigOS(configcarne).hasSystemError();
-					if (count == true)
-					{
-						count =
-								StatusBARD.maintainStatusAssociations(configcarne.getStatusList(), response, configcarne.getId(),
-										null,
-										AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CONFIGCARNE, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case DELETE:
 					count = configcarneDAC.deleteConfigOSById(configcarne).hasSystemError();
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.DELETADO);
-					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
-					count =
-							StatusBARD.maintainStatusAssociations(statusList, response, configcarne.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.CONFIGCARNE, statusDAC, historicoDAC,
-									processId, historicoId);
 
-					break;
 			}
 
 		if(count == true ){

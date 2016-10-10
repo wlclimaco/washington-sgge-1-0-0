@@ -1,8 +1,6 @@
 /** create by system gera-java version 1.0.0 27/07/2016 12:37 : 46*/
 package com.qat.samples.sysmgmt.bar.mybatis.Configuracao;
 
-import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -15,17 +13,19 @@ import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Configuracao.IConfiguracaoBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.ConfigAlertasBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ConfigCarneBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ConfigEntradaBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ConfigFiscalBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ConfigGeralBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.ConfigOSBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ConfigProdutoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ConfigSMTPBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ConfigVendasBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.ConfiguracaoNFeBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.SociosBARD;
 import com.qat.samples.sysmgmt.entidade.model.Boleto;
 import com.qat.samples.sysmgmt.entidade.model.ConfigAlertas;
-import com.qat.samples.sysmgmt.entidade.model.ConfigBlueSoft;
 import com.qat.samples.sysmgmt.entidade.model.ConfigCarne;
 import com.qat.samples.sysmgmt.entidade.model.ConfigEntrada;
 import com.qat.samples.sysmgmt.entidade.model.ConfigFiscal;
@@ -421,19 +421,9 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 	public InternalResponse insertConfiguracao(Configuracao configuracao) {
 		InternalResponse response = new InternalResponse();
 
-		insertModulosConfiguracao(configuracao,response);
+		insertModulosConfiguracao(configuracao,response, configuracaoBAR, statusBAR, historicoBAR, configuracao.getTransactionId());
+
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONFIGURACAO, configuracao, response);
-
-//		<collection property="confGeral" column="confGeral" select="ConfigGeralMap.fetchConfigGeralById"/>
-//	    <collection property="confFiscal" column="confFiscal" select="ConfigFiscalMap.fetchConfigFiscalById"/>
-//	    <collection property="confProd" column="confProd" select="ConfigProdutoMap.fetchConfigProdutoById"/>
-//	    <collection property="confVendas" column="confVendas" select="ConfigVendasMap.fetchConfigVendasById"/>
-//	    <collection property="confCMTP" column="confCMTP" select="ConfigSMTPMap.fetchConfigSMTPById"/>
-//	    <collection property="confEntrada" column="confEntrada" select="ConfigEntradaMap.fetchConfigEntradaById"/>
-//	    <collection property="confCarne" column="confCarne" select="ConfigCarneMap.fetchConfigCarneById"/>
-//	    <collection property="confNFe" column="confNFe" select="ConfiguracaoNFeMap.fetchConfiguracaoNFeById"/>
-
-
 
 		return response;
 	}
@@ -449,7 +439,7 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 	public InternalResponse updateConfiguracao(Configuracao configuracao) {
 		InternalResponse response = new InternalResponse();
 
-		insertModulosConfiguracao(configuracao);
+		insertModulosConfiguracao(configuracao,response, configuracaoBAR, statusBAR, historicoBAR, configuracao.getTransactionId());
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CONFIGURACAO, configuracao, response);
 		return response;
 	}
@@ -465,7 +455,7 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 	public InternalResponse deleteConfiguracaoById(Configuracao configuracao) {
 		InternalResponse response = new InternalResponse();
 
-		insertModulosConfiguracao(configuracao);
+		insertModulosConfiguracao(configuracao,response, configuracaoBAR, statusBAR, historicoBAR, configuracao.getTransactionId());
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONFIGURACAO, configuracao, response);
 		return response;
 	}
@@ -1841,15 +1831,15 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 
 	}
 
-	// ===================================### CONFIGVENDAS
+	// ===================================### CONFIGOS
 	// ####======================================
 	/**
 	 * /* (non-Javadoc)
 	 *
-	 * @see com.qat.samples.sysmgmt.base.bar.IConfigVendasBAR#insertConfigVendas(com.qat.samples.sysmgmt.base.model.ConfigVendas)
+	 * @see com.qat.samples.sysmgmt.base.bar.IConfigOSBAR#insertConfigOS(com.qat.samples.sysmgmt.base.model.ConfigOS)
 	 */
 	@Override
-	public InternalResponse insertConfigVendas(ConfigVendas configvendas) {
+	public InternalResponse insertConfigOS(ConfigOS configvendas) {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONFIGVENDAS, configvendas, response);
 		return response;
@@ -1859,11 +1849,11 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.qat.samples.sysmgmt.base.bar.IConfigVendasBAR#updateConfigVendas(com.
-	 * qat.samples.sysmgmt.base.model.ConfigVendas)
+	 * com.qat.samples.sysmgmt.base.bar.IConfigOSBAR#updateConfigOS(com.
+	 * qat.samples.sysmgmt.base.model.ConfigOS)
 	 */
 	@Override
-	public InternalResponse updateConfigVendas(ConfigVendas configvendas) {
+	public InternalResponse updateConfigOS(ConfigOS configvendas) {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CONFIGVENDAS, configvendas, response);
 		return response;
@@ -1873,11 +1863,11 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.qat.samples.sysmgmt.base.bar.IConfigVendasBAR#deleteConfigVendas(com.
-	 * qat.samples.sysmgmt.base.model.ConfigVendas)
+	 * com.qat.samples.sysmgmt.base.bar.IConfigOSBAR#deleteConfigOS(com.
+	 * qat.samples.sysmgmt.base.model.ConfigOS)
 	 */
 	@Override
-	public InternalResponse deleteConfigVendasById(ConfigVendas configvendas) {
+	public InternalResponse deleteConfigOSById(ConfigOS configvendas) {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONFIGVENDAS, configvendas, response);
 		return response;
@@ -1887,11 +1877,11 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.qat.samples.sysmgmt.base.bar.IConfigVendasBAR#deleteAllConfigVendass(
+	 * com.qat.samples.sysmgmt.base.bar.IConfigOSBAR#deleteAllConfigOSs(
 	 * )
 	 */
 	@Override
-	public InternalResponse deleteAllConfigVendass() {
+	public InternalResponse deleteAllConfigOSs() {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONFIGVENDAS_ALL, response);
 		return response;
@@ -1901,12 +1891,12 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.qat.samples.sysmgmt.bar.IConfigVendasBAR#fetchConfigVendasById(com.
+	 * com.qat.samples.sysmgmt.bar.IConfigOSBAR#fetchConfigOSById(com.
 	 * qat.samples.sysmgmt.model.request.FetchByIdRequest)
 	 */
 	@Override
-	public ConfigVendas fetchConfigVendasById(FetchByIdRequest request) {
-		return (ConfigVendas) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONFIGVENDAS,
+	public ConfigOS fetchConfigOSById(FetchByIdRequest request) {
+		return (ConfigOS) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONFIGVENDAS,
 				request.getFetchId());
 
 	}
@@ -1914,12 +1904,12 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.qat.samples.sysmgmt.base.bar.IConfigVendasBAR#
-	 * fetchAllConfigVendassCache()
+	 * @see com.qat.samples.sysmgmt.base.bar.IConfigOSBAR#
+	 * fetchAllConfigOSsCache()
 	 */
 	@Override
-	public InternalResultsResponse<ConfigVendas> fetchAllConfigVendass(ConfigVendas configvendas) {
-		InternalResultsResponse<ConfigVendas> response = new InternalResultsResponse<ConfigVendas>();
+	public InternalResultsResponse<ConfigOS> fetchAllConfigOSs(ConfigOS configvendas) {
+		InternalResultsResponse<ConfigOS> response = new InternalResultsResponse<ConfigOS>();
 		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_CONFIGVENDAS_ALL));
 		return response;
 	}
@@ -1928,21 +1918,21 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.qat.samples.sysmgmt.bar.IConfigVendasBAR#fetchConfigVendassByRequest(
+	 * com.qat.samples.sysmgmt.bar.IConfigOSBAR#fetchConfigOSsByRequest(
 	 * com.qat.samples.sysmgmt.model.request. PagedInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<ConfigVendas> fetchConfigVendassByRequest(PagedInquiryRequest request) {
-		InternalResultsResponse<ConfigVendas> response = new InternalResultsResponse<ConfigVendas>();
-		fetchConfigVendassByRequest(getSqlSession(), request, STMT_FETCH_CONFIGVENDAS_COUNT,
+	public InternalResultsResponse<ConfigOS> fetchConfigOSsByRequest(PagedInquiryRequest request) {
+		InternalResultsResponse<ConfigOS> response = new InternalResultsResponse<ConfigOS>();
+		fetchConfigOSsByRequest(getSqlSession(), request, STMT_FETCH_CONFIGVENDAS_COUNT,
 				STMT_FETCH_CONFIGVENDAS_ALL_REQUEST, response);
 		return response;
 	}
 
-	// ===================================### fetchConfigVendassByRequest
+	// ===================================### fetchConfigOSsByRequest
 	// ####======================================
 
-	public static void fetchConfigVendassByRequest(SqlSession sqlSession, PagedInquiryRequest request,
+	public static void fetchConfigOSsByRequest(SqlSession sqlSession, PagedInquiryRequest request,
 			String countStatement, String fetchPagedStatement, InternalResultsResponse<?> response) {
 
 		// If the user requested the total rows/record count
@@ -1982,6 +1972,150 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 		}
 
 	}
+
+
+	// ===================================### CONFIGVENDAS
+		// ####======================================
+		/**
+		 * /* (non-Javadoc)
+		 *
+		 * @see com.qat.samples.sysmgmt.base.bar.IConfigVendasBAR#insertConfigVendas(com.qat.samples.sysmgmt.base.model.ConfigVendas)
+		 */
+		@Override
+		public InternalResponse insertConfigVendas(ConfigVendas configvendas) {
+			InternalResponse response = new InternalResponse();
+			MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONFIGVENDAS, configvendas, response);
+			return response;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 *
+		 * @see
+		 * com.qat.samples.sysmgmt.base.bar.IConfigVendasBAR#updateConfigVendas(com.
+		 * qat.samples.sysmgmt.base.model.ConfigVendas)
+		 */
+		@Override
+		public InternalResponse updateConfigVendas(ConfigVendas configvendas) {
+			InternalResponse response = new InternalResponse();
+			MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CONFIGVENDAS, configvendas, response);
+			return response;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 *
+		 * @see
+		 * com.qat.samples.sysmgmt.base.bar.IConfigVendasBAR#deleteConfigVendas(com.
+		 * qat.samples.sysmgmt.base.model.ConfigVendas)
+		 */
+		@Override
+		public InternalResponse deleteConfigVendasById(ConfigVendas configvendas) {
+			InternalResponse response = new InternalResponse();
+			MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONFIGVENDAS, configvendas, response);
+			return response;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 *
+		 * @see
+		 * com.qat.samples.sysmgmt.base.bar.IConfigVendasBAR#deleteAllConfigVendass(
+		 * )
+		 */
+		@Override
+		public InternalResponse deleteAllConfigVendass() {
+			InternalResponse response = new InternalResponse();
+			MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONFIGVENDAS_ALL, response);
+			return response;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 *
+		 * @see
+		 * com.qat.samples.sysmgmt.bar.IConfigVendasBAR#fetchConfigVendasById(com.
+		 * qat.samples.sysmgmt.model.request.FetchByIdRequest)
+		 */
+		@Override
+		public ConfigVendas fetchConfigVendasById(FetchByIdRequest request) {
+			return (ConfigVendas) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONFIGVENDAS,
+					request.getFetchId());
+
+		}
+
+		/*
+		 * (non-Javadoc)
+		 *
+		 * @see com.qat.samples.sysmgmt.base.bar.IConfigVendasBAR#
+		 * fetchAllConfigVendassCache()
+		 */
+		@Override
+		public InternalResultsResponse<ConfigVendas> fetchAllConfigVendass(ConfigVendas configvendas) {
+			InternalResultsResponse<ConfigVendas> response = new InternalResultsResponse<ConfigVendas>();
+			response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_CONFIGVENDAS_ALL));
+			return response;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 *
+		 * @see
+		 * com.qat.samples.sysmgmt.bar.IConfigVendasBAR#fetchConfigVendassByRequest(
+		 * com.qat.samples.sysmgmt.model.request. PagedInquiryRequest)
+		 */
+		@Override
+		public InternalResultsResponse<ConfigVendas> fetchConfigVendassByRequest(PagedInquiryRequest request) {
+			InternalResultsResponse<ConfigVendas> response = new InternalResultsResponse<ConfigVendas>();
+			fetchConfigVendassByRequest(getSqlSession(), request, STMT_FETCH_CONFIGVENDAS_COUNT,
+					STMT_FETCH_CONFIGVENDAS_ALL_REQUEST, response);
+			return response;
+		}
+
+		// ===================================### fetchConfigVendassByRequest
+		// ####======================================
+
+		public static void fetchConfigVendassByRequest(SqlSession sqlSession, PagedInquiryRequest request,
+				String countStatement, String fetchPagedStatement, InternalResultsResponse<?> response) {
+
+			// If the user requested the total rows/record count
+			if (request.isPreQueryCount()) {
+				// set the total rows available in the response
+				response.getResultsSetInfo().setTotalRowsAvailable(
+						(Integer) MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+				if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO) {
+					response.setStatus(BusinessErrorCategory.NoRowsFound);
+					return;
+				}
+			}
+
+			// Fetch Objects by InquiryRequest Object, paged of course
+			response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+			// move request start page to response start page
+			response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+			// move request page size to response page size
+			response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+			// calculate correct startPage for more rows available comparison, since
+			// it is zero based, we have to offset by
+			// 1.
+			int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+			// set moreRowsAvailable in response based on total rows compared to
+			// (page size * start page)
+			// remember if the count was not requested the TotalRowsAvailable will
+			// be false because the assumption
+			// is that you your own logic to handle this.
+			if (response.getResultsSetInfo()
+					.getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage)) {
+				response.getResultsSetInfo().setMoreRowsAvailable(true);
+			}
+
+		}
+
 
 	public static void insertModulosConfiguracao(Configuracao configuracao,InternalResponse response,IConfiguracaoBAR configuracaoBAR,IStatusBAR statusBAR,IHistoricoBAR historicoBAR,Integer historicoId) {
 		Integer a = 0;
@@ -2029,7 +2163,7 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 
 		}
 		if (!ValidationUtil.isNull(configuracao.getConfigOS())) {
-			a += ConfigEntradaBARD.maintainConfigEntradaAssociations(configuracao.getConfigOS(), response, configuracao.getId(), null,
+			a += ConfigOSBARD.maintainConfigOSAssociations(configuracao.getConfigOS(), response, configuracao.getId(), null,
 					null, TabelaEnum.EMPRESA, configuracaoBAR, statusBAR, historicoBAR, configuracao.getId(),
 					configuracao.getCreateUser(), historicoId, historicoId);
 
@@ -2046,18 +2180,24 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 					configuracao.getCreateUser(), historicoId, historicoId);
 
 		}
-		if (!ValidationUtil.isNullOrEmpty(configuracao.getConfCarne)) {
-			a += SociosBARD.maintainSocioAssociations(configuracao.getConfCarne(), response, configuracao.getId(), null,
-					null, TabelaEnum.EMPRESA, getSociosBAR(), getStatusBAR(), getHistoricoBAR(), configuracao.getId(),
-					configuracao.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+		if (!ValidationUtil.isNull(configuracao.getConfNFe())) {
+			a += ConfiguracaoNFeBARD.maintainConfiguracaoNFeAssociations(configuracao.getConfNFe(), response, configuracao.getId(), null,
+					null, TabelaEnum.EMPRESA, configuracaoBAR, statusBAR, historicoBAR, configuracao.getId(),
+					configuracao.getCreateUser(), historicoId, historicoId);
 
 		}
-		if (!ValidationUtil.isNullOrEmpty(configuracao.getBoletoList)) {
-			a += SociosBARD.maintainSocioAssociations(configuracao.getBoletoList(), response, configuracao.getId(), null,
-					null, TabelaEnum.EMPRESA, getSociosBAR(), getStatusBAR(), getHistoricoBAR(), configuracao.getId(),
-					configuracao.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+		if (!ValidationUtil.isNull(configuracao.getConfAlertas())) {
+			a += ConfigAlertasBARD.maintainConfigAlertasAssociations(configuracao.getConfAlertas(), response, configuracao.getId(), null,
+					null, TabelaEnum.EMPRESA, configuracaoBAR, statusBAR, historicoBAR, configuracao.getId(),
+					configuracao.getCreateUser(), historicoId, historicoId);
 
 		}
+//		if (!ValidationUtil.isNullOrEmpty(configuracao.getBoletoList)) {
+//			a += SociosBARD.maintainSocioAssociations(configuracao.getBoletoList(), response, configuracao.getId(), null,
+//					null, TabelaEnum.EMPRESA, getSociosBAR(), getStatusBAR(), getHistoricoBAR(), configuracao.getId(),
+//					configuracao.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
+//
+//		}
 
 	}
 }

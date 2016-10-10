@@ -71,14 +71,15 @@ public IConfiguracaoBAR getConfiguracaoBAR()
 @Test
 	public void testDeleteConfiguracao()
 	{
-		Configuracao configuracao = insertConfiguracao(4, TabelaEnum.CONFIGURACAO, PersistenceActionEnum.INSERT);
+		Configuracao configuracao = insertConfiguracao(4000, TabelaEnum.CONFIGURACAO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(4000);
 		Configuracao configuracaoResponse = getConfiguracaoBAR().fetchConfiguracaoById(request);
 		Assert.assertEquals(configuracaoResponse, null);
 		getConfiguracaoBAR().insertConfiguracao(configuracao);
 		configuracaoResponse = getConfiguracaoBAR().fetchConfiguracaoById(request);
 		Assert.assertEquals(configuracao.getId(), configuracaoResponse.getId());
+		configuracao = insertConfiguracao(4000, TabelaEnum.CONFIGURACAO, PersistenceActionEnum.DELETE);
 		getConfiguracaoBAR().deleteConfiguracaoById(configuracao);
 		configuracaoResponse = getConfiguracaoBAR().fetchConfiguracaoById(request);
 		Assert.assertEquals(configuracaoResponse, null);
