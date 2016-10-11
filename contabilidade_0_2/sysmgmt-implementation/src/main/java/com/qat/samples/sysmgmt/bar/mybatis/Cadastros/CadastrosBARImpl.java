@@ -38,21 +38,26 @@ public class CadastrosBARImpl extends SqlSessionDaoSupport implements ICadastros
 	private static final int ZERO = 0;
 
 
+	///===================================### Pessoa ####======================================
+	/** The Constant NAMESPACE. */
+	private static final String NAMESPACE_PESSOA = "PessoaMap.";
+
+	/** The Constant STMT_INSERT_CLIENTE. */
+	private static final String STMT_INSERT_PESSOA = NAMESPACE_PESSOA + "insertPessoa";
+
+	/** The Constant STMT_UPDATE_CLIENTE. */
+	private static final String STMT_UPDATE_PESSOA = NAMESPACE_PESSOA + "updatePessoa";
+
+	/** The Constant STMT_DELETE_CLIENTE. */
+	private static final String STMT_DELETE_PESSOA = NAMESPACE_PESSOA + "deletePessoaById";
+
+	/** The Constant STMT_DELETE_CLIENTE_ALL. */
+	private static final String STMT_DELETE_PESSOA_ALL = NAMESPACE_PESSOA + "deleteAllPessoas";
+
 ///===================================### CLIENTE ####======================================
 /** The Constant NAMESPACE. */
 private static final String NAMESPACE_CLIENTE = "ClienteMap.";
 
-/** The Constant STMT_INSERT_CLIENTE. */
-private static final String STMT_INSERT_CLIENTE = NAMESPACE_CLIENTE + "insertCliente";
-
-/** The Constant STMT_UPDATE_CLIENTE. */
-private static final String STMT_UPDATE_CLIENTE = NAMESPACE_CLIENTE + "updateCliente";
-
-/** The Constant STMT_DELETE_CLIENTE. */
-private static final String STMT_DELETE_CLIENTE = NAMESPACE_CLIENTE + "deleteClienteById";
-
-	/** The Constant STMT_DELETE_CLIENTE_ALL. */
-	private static final String STMT_DELETE_CLIENTE_ALL = NAMESPACE_CLIENTE + "deleteAllClientes";
 
 	/** The Constant STMT_FETCH_CLIENTE. */
 	private static final String STMT_FETCH_CLIENTE = NAMESPACE_CLIENTE + "fetchClienteById";
@@ -70,17 +75,6 @@ private static final String STMT_DELETE_CLIENTE = NAMESPACE_CLIENTE + "deleteCli
 /** The Constant NAMESPACE. */
 private static final String NAMESPACE_FORNECEDOR = "FornecedorMap.";
 
-/** The Constant STMT_INSERT_FORNECEDOR. */
-private static final String STMT_INSERT_FORNECEDOR = NAMESPACE_FORNECEDOR + "insertFornecedor";
-
-/** The Constant STMT_UPDATE_FORNECEDOR. */
-private static final String STMT_UPDATE_FORNECEDOR = NAMESPACE_FORNECEDOR + "updateFornecedor";
-
-/** The Constant STMT_DELETE_FORNECEDOR. */
-private static final String STMT_DELETE_FORNECEDOR = NAMESPACE_FORNECEDOR + "deleteFornecedorById";
-
-	/** The Constant STMT_DELETE_FORNECEDOR_ALL. */
-	private static final String STMT_DELETE_FORNECEDOR_ALL = NAMESPACE_FORNECEDOR + "deleteAllFornecedors";
 
 	/** The Constant STMT_FETCH_FORNECEDOR. */
 	private static final String STMT_FETCH_FORNECEDOR = NAMESPACE_FORNECEDOR + "fetchFornecedorById";
@@ -98,17 +92,6 @@ private static final String STMT_DELETE_FORNECEDOR = NAMESPACE_FORNECEDOR + "del
 /** The Constant NAMESPACE. */
 private static final String NAMESPACE_TRANSPORTADOR = "TransportadorMap.";
 
-/** The Constant STMT_INSERT_TRANSPORTADOR. */
-private static final String STMT_INSERT_TRANSPORTADOR = NAMESPACE_TRANSPORTADOR + "insertTransportador";
-
-/** The Constant STMT_UPDATE_TRANSPORTADOR. */
-private static final String STMT_UPDATE_TRANSPORTADOR = NAMESPACE_TRANSPORTADOR + "updateTransportador";
-
-/** The Constant STMT_DELETE_TRANSPORTADOR. */
-private static final String STMT_DELETE_TRANSPORTADOR = NAMESPACE_TRANSPORTADOR + "deleteTransportadorById";
-
-	/** The Constant STMT_DELETE_TRANSPORTADOR_ALL. */
-	private static final String STMT_DELETE_TRANSPORTADOR_ALL = NAMESPACE_TRANSPORTADOR + "deleteAllTransportadors";
 
 	/** The Constant STMT_FETCH_TRANSPORTADOR. */
 	private static final String STMT_FETCH_TRANSPORTADOR = NAMESPACE_TRANSPORTADOR + "fetchTransportadorById";
@@ -244,7 +227,7 @@ private static final String STMT_DELETE_TAREFA = NAMESPACE_TAREFA + "deleteTaref
 public InternalResponse insertCliente(Cliente cliente)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CLIENTE, cliente, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PESSOA, cliente, response);
 	return response;
 }
 
@@ -256,7 +239,7 @@ public InternalResponse insertCliente(Cliente cliente)
 public InternalResponse updateCliente(Cliente cliente)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CLIENTE, cliente, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PESSOA, cliente, response);
 	return response;
 }
 
@@ -268,7 +251,7 @@ public InternalResponse updateCliente(Cliente cliente)
 public InternalResponse deleteClienteById(Cliente cliente)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CLIENTE, cliente, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA, cliente, response);
 	return response;
 }
 
@@ -280,7 +263,7 @@ public InternalResponse deleteClienteById(Cliente cliente)
 public InternalResponse deleteAllClientes()
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CLIENTE_ALL, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA_ALL, response);
 	return response;
 }
 
@@ -377,7 +360,7 @@ public static void fetchClientesByRequest(SqlSession sqlSession, ClienteInquiryR
 public InternalResponse insertFornecedor(Fornecedor fornecedor)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_FORNECEDOR, fornecedor, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PESSOA, fornecedor, response);
 	return response;
 }
 
@@ -389,7 +372,7 @@ public InternalResponse insertFornecedor(Fornecedor fornecedor)
 public InternalResponse updateFornecedor(Fornecedor fornecedor)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_FORNECEDOR, fornecedor, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PESSOA, fornecedor, response);
 	return response;
 }
 
@@ -401,7 +384,7 @@ public InternalResponse updateFornecedor(Fornecedor fornecedor)
 public InternalResponse deleteFornecedorById(Fornecedor fornecedor)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_FORNECEDOR, fornecedor, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA, fornecedor, response);
 	return response;
 }
 
@@ -413,7 +396,7 @@ public InternalResponse deleteFornecedorById(Fornecedor fornecedor)
 public InternalResponse deleteAllFornecedors()
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_FORNECEDOR_ALL, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA_ALL, response);
 	return response;
 }
 
@@ -510,7 +493,7 @@ public static void fetchFornecedorsByRequest(SqlSession sqlSession, FornecedorIn
 public InternalResponse insertTransportador(Transportador transportador)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_TRANSPORTADOR, transportador, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PESSOA, transportador, response);
 	return response;
 }
 
@@ -522,7 +505,7 @@ public InternalResponse insertTransportador(Transportador transportador)
 public InternalResponse updateTransportador(Transportador transportador)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_TRANSPORTADOR, transportador, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PESSOA, transportador, response);
 	return response;
 }
 
@@ -534,7 +517,7 @@ public InternalResponse updateTransportador(Transportador transportador)
 public InternalResponse deleteTransportadorById(Transportador transportador)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_TRANSPORTADOR, transportador, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA, transportador, response);
 	return response;
 }
 
@@ -546,7 +529,7 @@ public InternalResponse deleteTransportadorById(Transportador transportador)
 public InternalResponse deleteAllTransportadors()
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_TRANSPORTADOR_ALL, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA_ALL, response);
 	return response;
 }
 

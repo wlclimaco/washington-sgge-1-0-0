@@ -1,80 +1,128 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+
+<!-- create by system gera-java version 1.0.0 11/10/2016 16:5 : 4-->
+
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="SocioMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
   <!-- Result maps describe the mapping between the columns returned
       from a query, and the class properties.  A result map isnt
       necessary if the columns (or aliases) match to the properties
        exactly. -->
-<resultMap id="socioResult" type="Socio" extends="PessoaMap.PessoaResult">
-	<result property="cota" column="cota"/>
-	<result property="porcentagem" column="porcentagem" />
-	<result property="socioAdm" column="admin" />
+  <resultMap id="SocioResult" type="Socio">
+    <result property="id" column="id"/>
+    <result property="nome" column="nome"/>
+    <result property="cota" column="cota"/>
+    <result property="porcentagem" column="porcentagem"/>
+    <result property="dataProlabore" column="dataProlabore"/>
+	<result property="valorProlabore" column="valorProlabore"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+<collection property="pessoa" column="pessoa" select="PessoaMap.fetchPessoaById"/>
   </resultMap>
 
-<sql id="allSocioColumns">
-	cota,porcentagem,admin,
-	<include refid="PessoaMap.allPessoaColumns"/>
+  <sql id="allSocioColumns">
+nome
+,cota
+,porcentagem
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+,pessoa
+,dataProlabore
+,valorProlabore
 </sql>
 <sql id="allSocioValues">
-	#{cota},#{porcentagem},#{socioAdm},
-	<include refid="PessoaMap.allPessoaValues"/>
-</sql>
- <insert id="insertSocio" parameterType="Socio" useGeneratedKeys="true" keyProperty="id">
- 	INSERT INTO pessoa (
-	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allSocioColumns" />
-     )
-   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allSocioValues" /> )
- </insert>
- <select id="fetchAllSocios" resultMap="socioResult">
+#{nome},
+#{cota},
+#{porcentagem},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser},
+     #{pessoa.id},
+     #{dataProlabore},
+     #{valorProlabore}
+  </sql>
+
+
+ <select id="fetchAllSocios" resultMap="SocioResult">
     SELECT id,
-	<include refid="allSocioColumns" />
-   FROM pessoa where pessoaTypeEnum = 6 ORDER BY id ASC
+ <include refid="allSocioColumns" />
+   FROM socio ORDER BY id ASC
  </select>
 
- <select id="fetchSocioById" parameterType="Integer" resultMap="socioResult">
+ <select id="fetchSocioById" parameterType="Integer" resultMap="SocioResult">
     SELECT id,
-	<include refid="allSocioColumns" />
-   FROM pessoa WHERE id = #{fetchid}
+ <include refid="allSocioColumns" />
+   FROM socio WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllSociosRequest" parameterType="SocioInquiryRequest" resultMap="socioResult">
+ <select id="fetchAllSociosRequest" parameterType="PagedInquiryRequest" resultMap="SocioResult">
 
-		SELECT id,<include refid="allSocioColumns" />
-  		  FROM pessoa where pessoaTypeEnum = 6 ORDER BY id ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
+     SELECT id,<include refid="allSocioColumns" />
+           FROM socio where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
 </select>
 
 <select id="fetchSocioRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM pessoa WHERE id IS NOT NULL and pessoaTypeEnum = 6
+     SELECT COUNT(*) AS RECORD_COUNT FROM socio WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 
+ <insert id="insertSocio" parameterType="Socio" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO socio (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allSocioColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allSocioValues" /> )
+ </insert>
+
  <update id="updateSocio" parameterType="Socio">
-   UPDATE pessoa SET
+   UPDATE socio SET
 <if test="nome!= null">nome = #{nome},</if>
-<if test="nomePai!= null">nomePai = #{nomePai},</if>
-<if test="nomeMae!= null">nomeMae = #{nomeMae},</if>
-<if test="nomeConjugue!= null">nomeConjugue = #{nomeConjugue},</if>
-<if test="estadoCivil!= null">estadoCivil = #{estadoCivil},</if>
-<if test="tipoPessoa!= null">tipoPessoa = #{tipoPessoa},</if>
-<if test="datanasc!= null">datanasc = #{datanasc},</if>
-<if test="foto!= null">foto = #{foto},</if>
-<if test="pessoaTypeEnumValue!= null">pessoaTypeEnum = #{pessoaTypeEnumValue},</if>
-<if test="sexo!= null">sexo = #{sexo},</if>
 <if test="cota!= null">cota = #{cota},</if>
-<if test="socioAdm!= null">admin = #{socioAdm},</if>
+<if test="dataProlabore!= null">dataProlabore = #{dataProlabore},</if>
+<if test="valorProlabore!= null">valorProlabore = #{valorProlabore},</if>
 <if test="porcentagem!= null">porcentagem = #{porcentagem},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE
     id = #{id}
  </update>
+
+<delete id="deleteSocioById" parameterType="Socio">
+  DELETE FROM socio WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllSocios">
+ DELETE FROM socio
+  </delete>
 </mapper>
 
 

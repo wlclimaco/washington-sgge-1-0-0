@@ -40,6 +40,8 @@
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByEmpresa"/>
 	<collection property="notes" column="id" select="NoteMap.fetchNoteByNotes"/>
     <collection property="siteList" column="id" select="SiteMap.fetchSiteByEmpresa"/>
+    <collection property="configuracao" column="configuracao" select="ConfiguracaoMap.fetchConfiguracaoById"/>
+
   </resultMap>
 
   <sql id="allEntidadeColumns">
@@ -59,6 +61,7 @@ nome
 ,create_user
 ,modify_date
 ,modify_user
+,configuracao
 
 
 </sql>
@@ -75,10 +78,11 @@ nome
 #{responsavel},
 #{regime.id},
 #{planosServicos.id},
-		#{createDateUTC},
-		#{createUser},
-		#{modifyDateUTC},
-		#{modifyUser}
+#{createDateUTC},
+#{createUser},
+#{modifyDateUTC},
+#{modifyUser},
+#{configuracao.id}
 
   </sql>
 

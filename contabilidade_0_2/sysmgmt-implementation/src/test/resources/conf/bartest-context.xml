@@ -60,6 +60,7 @@
 
 	<bean id="sociosBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Socios.SociosBARImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+		<property name="cadastrosBAR" ref="cadastroBARTarget" />
 	</bean>
 
 	<bean id="siteBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Site.SiteBARImpl">

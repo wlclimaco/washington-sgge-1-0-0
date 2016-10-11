@@ -60,10 +60,6 @@
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 	</bean>
 
-	<bean id="sociosBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Socios.SociosBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-	</bean>
-
 	<bean id="siteBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Site.SiteBARImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 		<property name="historicoBAR" ref="historicoBARTarget" />
@@ -145,6 +141,11 @@
 		<property name="produtoBAR" ref="produtoBARTarget" />
 		<property name="precoBAR" ref="precoBARTarget" />
 
+	</bean>
+
+	<bean id="sociosBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Socios.SociosBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+		<property name="cadastrosBAR" ref="cadastroBARTarget" />
 	</bean>
 
 	<bean id="financeiroBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Financeiro.FinanceiroBARImpl">

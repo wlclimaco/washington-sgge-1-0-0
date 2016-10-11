@@ -59,6 +59,7 @@
 ,e.parceiroId
 ,e.contabilidadeId
 ,e.permissaoTypeEnumValue
+,e.configuracao
   </sql>
 
   <sql id="allEmpresaValues">
@@ -140,6 +141,7 @@ nome
 ,modify_user
 ,parceiroId
 ,contabilidadeId
+,configuracao
 ,permissaoTypeEnumValue
      )
    VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allEmpresaValues" /> )

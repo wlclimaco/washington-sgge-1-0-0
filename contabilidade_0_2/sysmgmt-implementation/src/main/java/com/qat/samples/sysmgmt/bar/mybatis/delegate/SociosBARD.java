@@ -103,9 +103,9 @@ public final class SociosBARD extends SqlSessionDaoSupport
 					break;
 			}
 
-			if (!ValidationUtil.isNullOrEmpty(socio.getDocumentos()))
+			if (!ValidationUtil.isNullOrEmpty(socio.getPessoa().getDocumentos()))
 			{
-				DocumentosBARD.maintainDocumentoAssociations(socio.getDocumentos(), response, socio.getId(),
+				DocumentosBARD.maintainDocumentoAssociations(socio.getPessoa().getDocumentos(), response, socio.getId(),
 						null,
 						null,
 						TabelaEnum.SOCIO, documentoDAC, statusDAC, historicoDAC, empId,

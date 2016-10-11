@@ -1,6 +1,7 @@
 /** create by system gera-java version 1.0.0 01/05/2016 18:42 : 57*/
 package com.qat.samples.sysmgmt.bar.mybatis.Empresa;
 
+import java.awt.Dialog.ModalExclusionType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
@@ -598,14 +600,34 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 		Integer historicoId = empresa.getTransactionId();
 		Integer processId = empresa.getTransactionId();
 		empresa.setProcessId(historicoId);
-		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_EMPRESA, empresa, response);
+		Boolean count1;
+		Integer a = 0;
+
+		if(empresa.getModelAction() == PersistenceActionEnum.INSERT)
+		{
+			MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_EMPRESA, empresa, response);
+
+			if (a > 0)
+			{
+				Status status = new Status();
+				status.setStatus(CdStatusTypeEnum.ANALISANDO);
+				List<Status> statusList = new ArrayList<Status>();
+				statusList.add(status);
+				count1 =
+						StatusBARD.maintainStatusAssociations(statusList, response, empresa.getId(), null, AcaoEnum.INSERT,
+								empresa.getCreateUser(), empresa.getId(), TabelaEnum.EMPRESA, statusBAR,
+								historicoBAR, processId, historicoId);
+
+			}
+			a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoId,
+					getHistoricoBAR(), response, empresa.getId(), empresa.getUserId());
+		}
 
 		BaseBARD.maintainInsertBase(empresa, historicoId, processId, TabelaEnum.EMPRESA, getEnderecoBAR(),
 				getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getFiscalBAR(), getTelefoneBAR(), getEmailBAR(),
 				getDocumentosBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
 
-		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoId,
-				getHistoricoBAR(), response, empresa.getId(), empresa.getUserId());
+
 
 		if (!ValidationUtil.isNullOrEmpty(empresa.getSocios())) {
 			a += SociosBARD.maintainSocioAssociations(empresa.getSocios(), response, empresa.getId(), null, null,
@@ -686,25 +708,42 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	@Override
 	public InternalResponse updateEmpresa(Empresa empresa) {
 		InternalResponse response = new InternalResponse();
-		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_EMPRESA, empresa, response);
+		Integer a = 0;
 
-		Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.EMPRESA, getHistoricoBAR(), response);
-		Integer processId = 1;
+//		BaseBARD.maintainDeleteBase(empresa, empresa.getTransactionId(), empresa.getTransactionId(), TabelaEnum.EMPRESA, getEnderecoBAR(),
+//				getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getFiscalBAR(), getTelefoneBAR(), getEmailBAR(),
+//				getDocumentosBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
 
-		BaseBARD.maintainDeleteBase(empresa, historicoId, processId, TabelaEnum.EMPRESA, getEnderecoBAR(),
-				getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getFiscalBAR(), getTelefoneBAR(), getEmailBAR(),
-				getDocumentosBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
-
-		BaseBARD.maintainInsertBase(empresa, historicoId, processId, TabelaEnum.EMPRESA, getEnderecoBAR(),
+		BaseBARD.maintainInsertBase(empresa, empresa.getTransactionId(), empresa.getTransactionId(), TabelaEnum.EMPRESA, getEnderecoBAR(),
 				getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getFiscalBAR(), getTelefoneBAR(), getEmailBAR(),
 				getDocumentosBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
 
 
 		if (!ValidationUtil.isNull(empresa.getConfiguracao())) {
-			Integer a = ConfiguracaoBARD.maintainConfiguracaoAssociations(empresa.getConfiguracao(), response,
+			 a = ConfiguracaoBARD.maintainConfiguracaoAssociations(empresa.getConfiguracao(), response,
 					empresa.getId(), null, null, TabelaEnum.EMPRESA, getConfiguracaoBAR(), getStatusBAR(), getHistoricoBAR(),
-					empresa.getId(), empresa.getCreateUser(), historicoId, historicoId);
+					empresa.getId(), empresa.getCreateUser(), empresa.getTransactionId(), empresa.getTransactionId());
 		}
+		if(empresa.getModelAction() == PersistenceActionEnum.UPDATE)
+		{
+			MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_EMPRESA, empresa, response);
+
+			InsertHistBARD.maintainInsertHistorico(TabelaEnum.EMPRESA, getHistoricoBAR(), response);
+		}
+
+		if (!ValidationUtil.isNullOrEmpty(empresa.getSocios())) {
+			a += SociosBARD.maintainSocioAssociations(empresa.getSocios(), response, empresa.getId(), null, null,
+					TabelaEnum.EMPRESA, getSociosBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
+					empresa.getCreateUser(), empresa.getTransactionId(), empresa.getTransactionId(), getDocumentosBAR());
+
+		}
+
+		if (!ValidationUtil.isNull(empresa.getPlanosServicos())) {
+			a += PlanoByEmpresaBARD.maintainPlanoByEmpresaAssociations(empresa.getPlanosServicos(), response,
+					empresa.getId(), null, null, TabelaEnum.EMPRESA, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
+					empresa.getId(), empresa.getCreateUser(), empresa.getTransactionId(), empresa.getTransactionId());
+		}
+
 
 
 		return response;

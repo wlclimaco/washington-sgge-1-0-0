@@ -103,18 +103,7 @@ public final class BaseBARD extends SqlSessionDaoSupport
 							empresa.getCreateUser(), processId, historicoId);
 		}
 
-		if (count > 0)
-		{
-			Status status = new Status();
-			status.setStatus(CdStatusTypeEnum.ANALISANDO);
-			List<Status> statusList = new ArrayList<Status>();
-			statusList.add(status);
-			count1 =
-					StatusBARD.maintainStatusAssociations(statusList, response, empresa.getId(), null, AcaoEnum.INSERT,
-							empresa.getCreateUser(), empresa.getId(), tabela, statusBAR,
-							historicoBAR, processId, historicoId);
 
-		}
 
 		return 0;
 

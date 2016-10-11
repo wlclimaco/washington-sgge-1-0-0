@@ -2235,7 +2235,7 @@ public class Objects {
 		Socio socio = new Socio();
 		Date a = new Date();
 		socio.setId(id);
-		socio.setNome("nome_1 - " + action.toString());
+		socio.setPessoa(insertCliente(id, tabela, action));
 		socio.setCota("10.00");
 		socio.setPorcentagem("10.00");
 		socio.setTabelaEnum(tabela);
