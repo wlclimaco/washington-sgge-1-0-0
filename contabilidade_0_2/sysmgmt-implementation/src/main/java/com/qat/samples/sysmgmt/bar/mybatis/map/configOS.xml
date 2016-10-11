@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 10/10/2016 23:11 : 54-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ConfigOSMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="ConfigOSResult" type="ConfigOS">
+    <result property="id" column="id"/>
+    <result property="impr2Via" column="impr2Via"/>
+    <result property="imprAss" column="imprAss"/>
+    <result property="imprResumo" column="imprResumo"/>
+    <result property="imprDetHorz" column="imprDetHorz"/>
+    <result property="diasGarantia" column="diasGarantia"/>
+    <result property="observ" column="observ"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
+
+  <sql id="allConfigOSColumns">
+impr2Via
+,imprAss
+,imprResumo
+,imprDetHorz
+,diasGarantia
+,observ
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allConfigOSValues">
+#{impr2Via},
+#{imprAss},
+#{imprResumo},
+#{imprDetHorz},
+#{diasGarantia},
+#{observ},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllConfigOSs" resultMap="ConfigOSResult">
+    SELECT id,
+ <include refid="allConfigOSColumns" />
+   FROM configos ORDER BY id ASC
+ </select>
+
+ <select id="fetchConfigOSById" parameterType="Integer" resultMap="ConfigOSResult">
+    SELECT id,
+ <include refid="allConfigOSColumns" />
+   FROM configos WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllConfigOSsRequest" parameterType="PagedInquiryRequest" resultMap="ConfigOSResult">
+
+     SELECT id,<include refid="allConfigOSColumns" />
+           FROM configos where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
+
+</select>
+
+<select id="fetchConfigOSRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM configos WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+
+ </select>
+
+ <insert id="insertConfigOS" parameterType="ConfigOS" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO configos (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allConfigOSColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allConfigOSValues" /> )
+ </insert>
+
+ <update id="updateConfigOS" parameterType="ConfigOS">
+   UPDATE configos SET
+<if test="impr2Via!= null">impr2Via = #{impr2Via},</if>
+<if test="imprAss!= null">imprAss = #{imprAss},</if>
+<if test="imprResumo!= null">imprResumo = #{imprResumo},</if>
+<if test="imprDetHorz!= null">imprDetHorz = #{imprDetHorz},</if>
+<if test="diasGarantia!= null">diasGarantia = #{diasGarantia},</if>
+<if test="observ!= null">observ = #{observ},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteConfigOSById" parameterType="ConfigOS">
+  DELETE FROM configos WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllConfigOSs">
+ DELETE FROM configos
+  </delete>
+</mapper>
+
+

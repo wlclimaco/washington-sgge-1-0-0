@@ -26,6 +26,8 @@ import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.Endereco;
+import com.qat.samples.sysmgmt.util.model.Note;
+import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
@@ -840,5 +842,106 @@ public interface IEmpresaBAR
 
 
 	public InternalResultsResponse<Endereco> fetchEnderecosByRequest(EmpresaInquiryRequest request);
+	
+	
+	
+	/**
+* Insert Note.
+*
+* @param Note the empresa
+*
+* @return the internal response
+*/
+	public InternalResponse insertNote(Note note);
+
+	/**
+* Update note.
+*
+notem note the note
+*
+* @return the internal response
+*/
+	public InternalResponse updateNote(Note note);
+
+	/**
+* Delete note.
+*
+* @param note the note
+*
+* @return the internal response
+*/
+	public InternalResponse deleteNoteById(Note note);
+
+	/**
+* Delete all notes.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllNotes();
+
+	/**
+* Fetch all notes.
+*
+* @return the list< note>
+*/
+	public InternalResultsResponse<Note> fetchAllNotes(Note  note);
+
+	/**
+* Fetch notes by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Note> fetchNotesByRequest(PagedInquiryRequest request);
+	
+	
+	/**
+* Insert note.
+*
+* @param status the status
+*
+* @return the internal response
+*/
+	public InternalResponse insertStatus(Status status);
+
+	/**
+* Update status.
+*
+* @param status the status
+*
+* @return the internal response
+*/
+	public InternalResponse updateStatus(Status status);
+
+	/**
+* Delete status.
+*
+* @param status the status
+*
+* @return the internal response
+*/
+	public InternalResponse deleteStatusById(Status status);
+
+	/**
+* Delete all statuss.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllStatuss();
+
+	/**
+* Fetch all statuss.
+*
+* @return the list< status>
+*/
+	public InternalResultsResponse<Status> fetchAllStatuss(Status  status);
+
+	/**
+* Fetch statuss by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Status> fetchStatussByRequest(PagedInquiryRequest request);
 
 }

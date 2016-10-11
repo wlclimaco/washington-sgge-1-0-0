@@ -48,17 +48,23 @@ import com.qat.samples.sysmgmt.entidade.model.response.DepositoResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.EmpresaResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.EnderecoResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.FilialResponse;
+import com.qat.samples.sysmgmt.entidade.model.response.NoteResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.PaginaResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.RoleResponse;
+import com.qat.samples.sysmgmt.entidade.model.response.StatusResponse;
 import com.qat.samples.sysmgmt.entidade.model.response.UserRolesResponse;
 import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.Endereco;
+import com.qat.samples.sysmgmt.util.model.Note;
+import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.request.DoisValoresInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.DoisValoresMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.request.NoteMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.PaginaMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 import com.qat.samples.sysmgmt.util.model.request.RoleMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.request.StatusMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.UserRolesMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.UsuarioMaintenanceRequest;
@@ -1953,6 +1959,178 @@ public class EmpresaAPIController extends BaseController {
 					new Object[] { ex.toString() });
 		}
 		return empresaResponse;
+
+	}
+
+	/**
+	 * Fetch filial paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the filial response
+	 */
+	@RequestMapping(value = "/note/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public NoteResponse fetchNotePaged(@RequestBody PagedInquiryRequest request) {
+		NoteResponse filialResponse = new NoteResponse();
+		try {
+			InternalResultsResponse<Note> internalResponse = getEmpresaBAC().fetchNotesByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(filialResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, filialResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return filialResponse;
+	}
+
+	/**
+	 * Insert filial.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the filial response
+	 */
+	@RequestMapping(value = "/note/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public NoteResponse insertNote(@RequestBody NoteMaintenanceRequest request) {
+		NoteResponse filialResponse = new NoteResponse();
+		try {
+			InternalResultsResponse<Note> internalResponse = getEmpresaBAC().insertNote(request);
+			ResponseHandler.handleOperationStatusAndMessages(filialResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, filialResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return filialResponse;
+	}
+
+	/**
+	 * Update filial.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the filial response
+	 */
+	@RequestMapping(value = "/note/update", method = RequestMethod.POST)
+	@ResponseBody
+	public NoteResponse updateNote(@RequestBody NoteMaintenanceRequest request) {
+		NoteResponse filialResponse = new NoteResponse();
+		try {
+			InternalResultsResponse<Note> internalResponse = getEmpresaBAC().updateNote(request);
+			ResponseHandler.handleOperationStatusAndMessages(filialResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, filialResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return filialResponse;
+	}
+
+	/**
+	 * Delete filial.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the filial response
+	 */
+	@RequestMapping(value = "/note/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public NoteResponse deleteNote(@RequestBody NoteMaintenanceRequest request) {
+		NoteResponse filialResponse = new NoteResponse();
+
+		try {
+			InternalResultsResponse<Note> internalResponse = getEmpresaBAC().deleteNote(request);
+			ResponseHandler.handleOperationStatusAndMessages(filialResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, filialResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return filialResponse;
+
+	}
+
+	/**
+	 * Fetch filial paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the filial response
+	 */
+	@RequestMapping(value = "/status/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public StatusResponse fetchStatusPaged(@RequestBody PagedInquiryRequest request) {
+		StatusResponse filialResponse = new StatusResponse();
+		try {
+			InternalResultsResponse<Status> internalResponse = getEmpresaBAC().fetchStatussByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(filialResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, filialResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return filialResponse;
+	}
+
+	/**
+	 * Insert filial.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the filial response
+	 */
+	@RequestMapping(value = "/status/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public StatusResponse insertStatus(@RequestBody StatusMaintenanceRequest request) {
+		StatusResponse filialResponse = new StatusResponse();
+		try {
+			InternalResultsResponse<Status> internalResponse = getEmpresaBAC().insertStatus(request);
+			ResponseHandler.handleOperationStatusAndMessages(filialResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, filialResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return filialResponse;
+	}
+
+	/**
+	 * Update filial.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the filial response
+	 */
+	@RequestMapping(value = "/status/update", method = RequestMethod.POST)
+	@ResponseBody
+	public StatusResponse updateStatus(@RequestBody StatusMaintenanceRequest request) {
+		StatusResponse filialResponse = new StatusResponse();
+		try {
+			InternalResultsResponse<Status> internalResponse = getEmpresaBAC().updateStatus(request);
+			ResponseHandler.handleOperationStatusAndMessages(filialResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, filialResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return filialResponse;
+	}
+
+	/**
+	 * Delete filial.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the filial response
+	 */
+	@RequestMapping(value = "/status/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public StatusResponse deleteStatus(@RequestBody StatusMaintenanceRequest request) {
+		StatusResponse filialResponse = new StatusResponse();
+
+		try {
+			InternalResultsResponse<Status> internalResponse = getEmpresaBAC().deleteStatus(request);
+			ResponseHandler.handleOperationStatusAndMessages(filialResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, filialResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return filialResponse;
 
 	}
 

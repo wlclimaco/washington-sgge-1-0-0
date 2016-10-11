@@ -62,6 +62,7 @@ import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.model.Endereco;
+import com.qat.samples.sysmgmt.util.model.Note;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
@@ -2949,6 +2950,66 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 			response.getResultsSetInfo().setMoreRowsAvailable(true);
 		}
 
+	}
+
+	@Override
+	public InternalResponse insertNote(Note note) {
+		return getNotesBAR().insertNotes(note);
+	}
+
+	@Override
+	public InternalResponse updateNote(Note note) {
+		return getNotesBAR().updateNotes(note);
+	}
+
+	@Override
+	public InternalResponse deleteNoteById(Note note) {
+		return getNotesBAR().deleteNotesById(note);
+	}
+
+	@Override
+	public InternalResponse deleteAllNotes() {
+		return getNotesBAR().deleteAllNotess();
+	}
+
+	@Override
+	public InternalResultsResponse<Note> fetchAllNotes(Note note) {
+		return getNotesBAR().fetchAllNotess(note);
+	}
+
+	@Override
+	public InternalResultsResponse<Note> fetchNotesByRequest(PagedInquiryRequest request) {
+		return getNotesBAR().fetchNotessByRequest(request);
+	}
+
+	@Override
+	public InternalResponse insertStatus(Status status) {
+		return getStatusBAR().insertStatus(status);
+	}
+
+	@Override
+	public InternalResponse updateStatus(Status status) {
+		return getStatusBAR().updateStatus(status);
+	}
+
+	@Override
+	public InternalResponse deleteStatusById(Status status) {
+		return getStatusBAR().deleteStatusById(status);
+	}
+
+	@Override
+	public InternalResponse deleteAllStatuss() {
+		return getStatusBAR().deleteAllStatus();
+	}
+
+	@Override
+	public InternalResultsResponse<Status> fetchAllStatuss(Status status) {
+		return getStatusBAR().fetchAllStatus(status);
+	}
+
+	@Override
+	public InternalResultsResponse<Status> fetchStatussByRequest(PagedInquiryRequest request) {
+		return getStatusBAR().fetchStatusByRequest(request);
 	}
 
 }

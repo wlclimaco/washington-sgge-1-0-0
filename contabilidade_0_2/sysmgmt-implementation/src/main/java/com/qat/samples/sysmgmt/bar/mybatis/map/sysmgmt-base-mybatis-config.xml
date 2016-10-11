@@ -120,6 +120,7 @@
         <typeAlias alias="ConfiguracaoNFe" type="com.qat.samples.sysmgmt.entidade.model.ConfiguracaoNFe" />
         <typeAlias alias="ConfigVendas" type="com.qat.samples.sysmgmt.entidade.model.ConfigVendas" />
         <typeAlias alias="Configuracao" type="com.qat.samples.sysmgmt.entidade.model.Configuracao" />
+        <typeAlias alias="ConfigOS" type="com.qat.samples.sysmgmt.entidade.model.ConfigOS" />
 
 
         <!-- Util-->
@@ -524,6 +525,7 @@
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configVendas.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configuracao.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/doisValor.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configOS.xml" />
 
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/processo.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/audiencia.xml" />

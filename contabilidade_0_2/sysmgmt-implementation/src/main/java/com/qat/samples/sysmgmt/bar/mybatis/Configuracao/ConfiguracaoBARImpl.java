@@ -378,6 +378,37 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 	/** The Constant STMT_FETCH_CONFIGVENDAS_ALL_REQUEST. */
 	private static final String STMT_FETCH_CONFIGVENDAS_ALL_REQUEST = NAMESPACE_CONFIGVENDAS
 			+ "fetchAllConfigVendassRequest";
+	
+	
+	/// ===================================### CONFIGOS
+		/// ####======================================
+		/** The Constant NAMESPACE. */
+		private static final String NAMESPACE_CONFIGOS = "ConfigOSMap.";
+
+		/** The Constant STMT_INSERT_CONFIGOS. */
+		private static final String STMT_INSERT_CONFIGOS = NAMESPACE_CONFIGOS + "insertConfigOS";
+
+		/** The Constant STMT_UPDATE_CONFIGOS. */
+		private static final String STMT_UPDATE_CONFIGOS = NAMESPACE_CONFIGOS + "updateConfigOS";
+
+		/** The Constant STMT_DELETE_CONFIGOS. */
+		private static final String STMT_DELETE_CONFIGOS = NAMESPACE_CONFIGOS + "deleteConfigOSById";
+
+		/** The Constant STMT_DELETE_CONFIGOS_ALL. */
+		private static final String STMT_DELETE_CONFIGOS_ALL = NAMESPACE_CONFIGOS + "deleteAllConfigOSs";
+
+		/** The Constant STMT_FETCH_CONFIGOS. */
+		private static final String STMT_FETCH_CONFIGOS = NAMESPACE_CONFIGOS + "fetchConfigOSById";
+
+		/** The Constant STMT_FETCH_CONFIGOS_ALL. */
+		private static final String STMT_FETCH_CONFIGOS_ALL = NAMESPACE_CONFIGOS + "fetchAllConfigOSs";
+
+		/** The Constant STMT_FETCH_CONFIGOS_COUNT. */
+		private static final String STMT_FETCH_CONFIGOS_COUNT = NAMESPACE_CONFIGOS + "fetchConfigOSRowCount";
+
+		/** The Constant STMT_FETCH_CONFIGOS_ALL_REQUEST. */
+		private static final String STMT_FETCH_CONFIGOS_ALL_REQUEST = NAMESPACE_CONFIGOS
+				+ "fetchAllConfigOSsRequest";
 
 
 	IConfiguracaoBAR configuracaoBAR;
@@ -1841,7 +1872,7 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 	@Override
 	public InternalResponse insertConfigOS(ConfigOS configvendas) {
 		InternalResponse response = new InternalResponse();
-		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONFIGVENDAS, configvendas, response);
+		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONFIGOS, configvendas, response);
 		return response;
 	}
 
@@ -1855,7 +1886,7 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 	@Override
 	public InternalResponse updateConfigOS(ConfigOS configvendas) {
 		InternalResponse response = new InternalResponse();
-		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CONFIGVENDAS, configvendas, response);
+		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CONFIGOS, configvendas, response);
 		return response;
 	}
 
@@ -1869,7 +1900,7 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 	@Override
 	public InternalResponse deleteConfigOSById(ConfigOS configvendas) {
 		InternalResponse response = new InternalResponse();
-		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONFIGVENDAS, configvendas, response);
+		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONFIGOS, configvendas, response);
 		return response;
 	}
 
@@ -1883,7 +1914,7 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 	@Override
 	public InternalResponse deleteAllConfigOSs() {
 		InternalResponse response = new InternalResponse();
-		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONFIGVENDAS_ALL, response);
+		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONFIGOS_ALL, response);
 		return response;
 	}
 
@@ -1896,7 +1927,7 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 	 */
 	@Override
 	public ConfigOS fetchConfigOSById(FetchByIdRequest request) {
-		return (ConfigOS) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONFIGVENDAS,
+		return (ConfigOS) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONFIGOS,
 				request.getFetchId());
 
 	}
@@ -1910,7 +1941,7 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 	@Override
 	public InternalResultsResponse<ConfigOS> fetchAllConfigOSs(ConfigOS configvendas) {
 		InternalResultsResponse<ConfigOS> response = new InternalResultsResponse<ConfigOS>();
-		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_CONFIGVENDAS_ALL));
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_CONFIGOS_ALL));
 		return response;
 	}
 
@@ -1924,8 +1955,8 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 	@Override
 	public InternalResultsResponse<ConfigOS> fetchConfigOSsByRequest(PagedInquiryRequest request) {
 		InternalResultsResponse<ConfigOS> response = new InternalResultsResponse<ConfigOS>();
-		fetchConfigOSsByRequest(getSqlSession(), request, STMT_FETCH_CONFIGVENDAS_COUNT,
-				STMT_FETCH_CONFIGVENDAS_ALL_REQUEST, response);
+		fetchConfigOSsByRequest(getSqlSession(), request, STMT_FETCH_CONFIGOS_COUNT,
+				STMT_FETCH_CONFIGOS_ALL_REQUEST, response);
 		return response;
 	}
 

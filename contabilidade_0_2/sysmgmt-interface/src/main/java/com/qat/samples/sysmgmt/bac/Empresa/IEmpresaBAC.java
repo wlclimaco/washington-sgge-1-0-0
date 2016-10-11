@@ -33,16 +33,20 @@ import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.Endereco;
+import com.qat.samples.sysmgmt.util.model.Note;
+import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.request.AjudaMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.DoisValoresInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.DoisValoresMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.FieldMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.MenuMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.request.NoteMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.PaginaMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 import com.qat.samples.sysmgmt.util.model.request.RoleMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.request.StatusMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.UserRolesMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.UsuarioMaintenanceRequest;
@@ -977,5 +981,95 @@ public interface IEmpresaBAC
 		public InternalResultsResponse<DoisValores> fetchDoisValoressByRequest(DoisValoresInquiryRequest request);
 
 
+		//===================================### NOTE ####======================================
+		/**
 
+		/**
+		 * Insert note.
+		 *
+	* @param request the note maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Note> insertNote(NoteMaintenanceRequest request);
+
+		/**
+	* Update note.
+	*
+	* @param request the note maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Note> updateNote(NoteMaintenanceRequest request);
+
+		/**
+	* Delete note.
+	*
+	* @param request the note maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Note> deleteNote(NoteMaintenanceRequest request);
+
+		/**
+	* Fetch all notes.
+	*
+	* @return the internal results response< note>
+	*/
+		public InternalResultsResponse<Note> fetchAllNotes(Note  note);
+
+		/**
+	* Fetch notes by request.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Note> fetchNotesByRequest(PagedInquiryRequest request);
+		
+		//===================================### STATUS ####======================================
+		/**
+
+		/**
+		 * Insert note.
+		 *
+	* @param request the status maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Status> insertStatus(StatusMaintenanceRequest request);
+
+		/**
+	* Update status.
+	*
+	* @param request the status maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Status> updateStatus(StatusMaintenanceRequest request);
+
+		/**
+	* Delete status.
+	*
+	* @param request the status maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Status> deleteStatus(StatusMaintenanceRequest request);
+
+
+
+		/**
+	* Fetch all statuss.
+	*
+	* @return the internal results response< status>
+	*/
+		public InternalResultsResponse<Status> fetchAllStatuss(Status  status);
+
+		/**
+	* Fetch statuss by request.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Status> fetchStatussByRequest(PagedInquiryRequest request);
 }

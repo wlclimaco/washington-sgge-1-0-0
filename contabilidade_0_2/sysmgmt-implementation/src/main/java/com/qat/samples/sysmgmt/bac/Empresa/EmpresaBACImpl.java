@@ -49,16 +49,20 @@ import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.Endereco;
+import com.qat.samples.sysmgmt.util.model.Note;
+import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.request.AjudaMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.DoisValoresInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.DoisValoresMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.FieldMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.MenuMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.request.NoteMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.PaginaMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 import com.qat.samples.sysmgmt.util.model.request.RoleMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.request.StatusMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.UserRolesMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.UsuarioInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.UsuarioMaintenanceRequest;
@@ -2897,7 +2901,7 @@ private InternalResultsResponse<Condominio> processCondominio(ValidationContextI
 			}
 		}
 
-	//===================================### MENU ####======================================
+	//===================================### NOTE ####======================================
 		/**
 	/*
 	/*
@@ -2907,107 +2911,62 @@ private InternalResultsResponse<Condominio> processCondominio(ValidationContextI
 	 * )
 	 */
 	@Override
-	public InternalResultsResponse<Menu> insertMenu(MenuMaintenanceRequest request)
+	public InternalResultsResponse<Note> insertNote(NoteMaintenanceRequest request)
 	{
-		InternalResultsResponse<Menu> response =
-				processMenu(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+		InternalResultsResponse<Note> response =
+				processNote(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.qat.samples.sysmgmt.bac.IMenuBAC#updateMenu(com.qat.samples.sysmgmt.model.request.MenuMaintenanceRequest
+	 * com.qat.samples.sysmgmt.bac.INoteBAC#updateNote(com.qat.samples.sysmgmt.model.request.NoteMaintenanceRequest
 	 * )
 	 */
 	@Override
-	public InternalResultsResponse<Menu> updateMenu(MenuMaintenanceRequest request)
+	public InternalResultsResponse<Note> updateNote(NoteMaintenanceRequest request)
 	{
-		InternalResultsResponse<Menu> response =
-				processMenu(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+		InternalResultsResponse<Note> response =
+				processNote(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.qat.samples.sysmgmt.bac.IMenuBAC#deleteMenu(com.qat.samples.sysmgmt.model.request.MenuMaintenanceRequest
+	 * com.qat.samples.sysmgmt.bac.INoteBAC#deleteNote(com.qat.samples.sysmgmt.model.request.NoteMaintenanceRequest
 	 * )
 	 */
 	@Override
-	public InternalResultsResponse<Menu> deleteMenu(MenuMaintenanceRequest request)
+	public InternalResultsResponse<Note> deleteNote(NoteMaintenanceRequest request)
 	{
-		InternalResultsResponse<Menu> response =
-				processMenu(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+		InternalResultsResponse<Note> response =
+				processNote(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bac.IMenuBAC#refreshMenus(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+	 * @see com.qat.samples.sysmgmt.bac.INoteBAC#fetchAllNotes(Note menu)
 	 */
 	@Override
-	public InternalResultsResponse<Menu> refreshMenus(RefreshRequest request)
+	public InternalResultsResponse<Note> fetchAllNotes(Note menu)
 	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		getEmpresaBAR().deleteAllMenus();
-		int refreshNumber = request.getRefreshInt();
-		refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
-
-		for (int i = 1; i <= refreshNumber; i++)
-		{
-		getEmpresaBAR().insertMenu(new Menu(i, "MenuDesc" + i));
-		}
-
-		// Call maintain to see if we need to return the menu list and if so whether it should be paged or not
-		return maintainReturnListMenu(request.getReturnList(), request.getReturnListPaged(),new Menu());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bac.IMenuBAC#fetchAllMenus(Menu menu)
-	 */
-	@Override
-	public InternalResultsResponse<Menu> fetchAllMenus(Menu menu)
-	{
-		InternalResultsResponse<Menu> response = new InternalResultsResponse<Menu>();
-		response.getResultsList().addAll(getEmpresaBAR().fetchAllMenus(menu).getResultsList());
+		InternalResultsResponse<Note> response = new InternalResultsResponse<Note>();
+		response.getResultsList().addAll(getEmpresaBAR().fetchAllNotes(menu).getResultsList());
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * com.qat.samples.sysmgmt.bac.IMenuBAC#fetchMenuById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
-	 * )
-	 */
-	@Override
-	public InternalResultsResponse<Menu> fetchMenuById(FetchByIdRequest request)
-	{
-		InternalResultsResponse<Menu> response = new InternalResultsResponse<Menu>();
-		// validate fetchId field
-		if (ValidationUtil.isNull(request.getFetchId()))
-		{
-			response.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
-			response.setStatus(SystemErrorCategory.SystemValidation);
-		}
-		else
-		{
-			response.getResultsList().add(getEmpresaBAR().fetchMenuById(request));
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.bac.IMenuBAC#fetchMenusByRequest(com.qat.samples.sysmgmt.model.request.
+	 * @see com.qat.samples.sysmgmt.bac.INoteBAC#fetchNotesByRequest(com.qat.samples.sysmgmt.model.request.
 	 * PagedInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Menu> fetchMenusByRequest(PagedInquiryRequest request)
+	public InternalResultsResponse<Note> fetchNotesByRequest(PagedInquiryRequest request)
 	{
-		return getEmpresaBAR().fetchMenusByRequest(request);
+		return getEmpresaBAR().fetchNotesByRequest(request);
 	}
 
 	/**
@@ -3018,27 +2977,27 @@ private InternalResultsResponse<Condominio> processCondominio(ValidationContextI
 	 * @param request the request
 	 * @return the menu response
 	 */
-	private InternalResultsResponse<Menu> processMenu(ValidationContextIndicator indicator,
+	private InternalResultsResponse<Note> processNote(ValidationContextIndicator indicator,
 			PersistenceActionEnum persistType,
-			MenuMaintenanceRequest request)
+			NoteMaintenanceRequest request)
 			{
-		InternalResultsResponse<Menu> response = null;
+		InternalResultsResponse<Note> response = null;
 
 		// Validate
-		//ValidationContext context = new ValidationContext(Menu.class.getSimpleName(), request.getMenu(), indicator);
+		//ValidationContext context = new ValidationContext(Note.class.getSimpleName(), request.getNote(), indicator);
 		//if (!getValidationController().validate(context))
 		//{
-		//	response = new InternalResultsResponse<Menu>();
+		//	response = new InternalResultsResponse<Note>();
 		//	response.setStatus(SystemErrorCategory.SystemValidation);
 		//	response.addMessages(context.getMessages());
 		//	return response;
 		//}
 
 			// Persist
-			InternalResponse internalResponse = doPersistenceMenu(request.getMenu(), persistType);
+			InternalResponse internalResponse = doPersistenceNote(request.getNote(), persistType);
 			if (internalResponse.isInError())
 			{
-				response = new InternalResultsResponse<Menu>();
+				response = new InternalResultsResponse<Note>();
 				response.setStatus(internalResponse.getError());
 				response.addMessages(internalResponse.getMessageInfoList());
 				response.addMessage(DEFAULT_EMPRESA_BAC_EXCEPTION_MSG, MessageSeverity.Error,
@@ -3049,30 +3008,30 @@ private InternalResultsResponse<Condominio> processCondominio(ValidationContextI
 
 			// Call maintainReurnList to see if we need to return the menu list and if so whether it should be paged or
 			// not
-			response = maintainReturnListMenu(request.getReturnList(), request.getReturnListPaged(),new Menu());
+			response = maintainReturnListNote(request.getReturnList(), request.getReturnListPaged(),new Note());
 
 			return response;
 				}
 
 		/**
-		 * Do persistenceMenu.
+		 * Do persistenceNote.
 		 *
 		 * @param request the request
 		 * @param updateType the update type
 		 * @return the internal response
 		 */
-		private InternalResponse doPersistenceMenu(Menu menu, PersistenceActionEnum updateType)
+		private InternalResponse doPersistenceNote(Note menu, PersistenceActionEnum updateType)
 		{
 			switch (updateType)
 			{
 				case INSERT:
-					return getEmpresaBAR().insertMenu(menu);
+					return getEmpresaBAR().insertNote(menu);
 
 				case UPDATE:
-					return getEmpresaBAR().updateMenu(menu);
+					return getEmpresaBAR().updateNote(menu);
 
 				case DELETE:
-					return getEmpresaBAR().deleteMenuById(menu);
+					return getEmpresaBAR().deleteNoteById(menu);
 				default:
 					if (LOG.isDebugEnabled())
 					{
@@ -3090,7 +3049,7 @@ private InternalResultsResponse<Condominio> processCondominio(ValidationContextI
 		 * @param request the request
 		 * @param response the response
 		 */
-		private InternalResultsResponse<Menu> maintainReturnListMenu(Boolean listIndicator, Boolean pageListIndicator,Menu menu)
+		private InternalResultsResponse<Note> maintainReturnListNote(Boolean listIndicator, Boolean pageListIndicator,Note menu)
 		{
 			// Fetch again if requested.
 			if (listIndicator)
@@ -3100,17 +3059,17 @@ private InternalResultsResponse<Condominio> processCondominio(ValidationContextI
 				{
 					PagedInquiryRequest request = new PagedInquiryRequest();
 					request.setPreQueryCount(true);
-					return fetchMenusByRequest(request);
+					return fetchNotesByRequest(request);
 				}
 				else
 				{
 					// otherwise return all rows not paged
-					return fetchAllMenus(menu);
+					return fetchAllNotes(menu);
 				}
 			}
 			else
 			{
-				return new InternalResultsResponse<Menu>();
+				return new InternalResultsResponse<Note>();
 			}
 		}
 
@@ -3319,4 +3278,397 @@ private InternalResultsResponse<Condominio> processCondominio(ValidationContextI
 					// TODO Auto-generated method stub
 					return null;
 				}
+
+				//===================================### MENU ####======================================
+				/**
+			/*
+			/*
+			 * (non-Javadoc)
+			 * @see
+			 * com.qat.samples.sysmgmt.bac.ICountyBAC#insertNote(com.qat.samples.sysmgmt.model.request.MenuMaintenanceRequest
+			 * )
+			 */
+			@Override
+			public InternalResultsResponse<Status> insertStatus(StatusMaintenanceRequest request)
+			{
+				InternalResultsResponse<Status> response =
+						processStatus(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+				return response;
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * @see
+			 * com.qat.samples.sysmgmt.bac.IStatusBAC#updateStatus(com.qat.samples.sysmgmt.model.request.StatusMaintenanceRequest
+			 * )
+			 */
+			@Override
+			public InternalResultsResponse<Status> updateStatus(StatusMaintenanceRequest request)
+			{
+				InternalResultsResponse<Status> response =
+						processStatus(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+				return response;
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * @see
+			 * com.qat.samples.sysmgmt.bac.IStatusBAC#deleteStatus(com.qat.samples.sysmgmt.model.request.StatusMaintenanceRequest
+			 * )
+			 */
+			@Override
+			public InternalResultsResponse<Status> deleteStatus(StatusMaintenanceRequest request)
+			{
+				InternalResultsResponse<Status> response =
+						processStatus(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+				return response;
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * @see com.qat.samples.sysmgmt.bac.IStatusBAC#fetchAllStatuss(Status menu)
+			 */
+			@Override
+			public InternalResultsResponse<Status> fetchAllStatuss(Status menu)
+			{
+				InternalResultsResponse<Status> response = new InternalResultsResponse<Status>();
+				response.getResultsList().addAll(getEmpresaBAR().fetchAllStatuss(menu).getResultsList());
+				return response;
+			}
+
+			
+
+			/*
+			 * (non-Javadoc)
+			 * @see com.qat.samples.sysmgmt.bac.IStatusBAC#fetchStatussByRequest(com.qat.samples.sysmgmt.model.request.
+			 * PagedInquiryRequest)
+			 */
+			@Override
+			public InternalResultsResponse<Status> fetchStatussByRequest(PagedInquiryRequest request)
+			{
+				return getEmpresaBAR().fetchStatussByRequest(request);
+			}
+
+			/**
+			 * Process.
+			 *
+			 * @param indicator the indicator
+			 * @param persistType the persist type
+			 * @param request the request
+			 * @return the menu response
+			 */
+			private InternalResultsResponse<Status> processStatus(ValidationContextIndicator indicator,
+					PersistenceActionEnum persistType,
+					StatusMaintenanceRequest request)
+					{
+				InternalResultsResponse<Status> response = null;
+
+				// Validate
+				//ValidationContext context = new ValidationContext(Status.class.getSimpleName(), request.getStatus(), indicator);
+				//if (!getValidationController().validate(context))
+				//{
+				//	response = new InternalResultsResponse<Status>();
+				//	response.setStatus(SystemErrorCategory.SystemValidation);
+				//	response.addMessages(context.getMessages());
+				//	return response;
+				//}
+
+					// Persist
+					InternalResponse internalResponse = doPersistenceStatus(request.getStatus(), persistType);
+					if (internalResponse.isInError())
+					{
+						response = new InternalResultsResponse<Status>();
+						response.setStatus(internalResponse.getError());
+						response.addMessages(internalResponse.getMessageInfoList());
+						response.addMessage(DEFAULT_EMPRESA_BAC_EXCEPTION_MSG, MessageSeverity.Error,
+								MessageLevel.Object, new Object[] {internalResponse.errorToString()});
+
+						return response;
+					}
+
+					// Call maintainReurnList to see if we need to return the menu list and if so whether it should be paged or
+					// not
+					response = maintainReturnListStatus(request.getReturnList(), request.getReturnListPaged(),new Status());
+
+					return response;
+						}
+
+				/**
+				 * Do persistenceStatus.
+				 *
+				 * @param request the request
+				 * @param updateType the update type
+				 * @return the internal response
+				 */
+				private InternalResponse doPersistenceStatus(Status menu, PersistenceActionEnum updateType)
+				{
+					switch (updateType)
+					{
+						case INSERT:
+							return getEmpresaBAR().insertStatus(menu);
+
+						case UPDATE:
+							return getEmpresaBAR().updateStatus(menu);
+
+						case DELETE:
+							return getEmpresaBAR().deleteStatusById(menu);
+						default:
+							if (LOG.isDebugEnabled())
+							{
+								LOG.debug("updateType missing!");
+							}
+							break;
+					}
+
+					return null;
+				}
+
+				/**
+				 * Maintain return list.
+				 *
+				 * @param request the request
+				 * @param response the response
+				 */
+				private InternalResultsResponse<Status> maintainReturnListStatus(Boolean listIndicator, Boolean pageListIndicator,Status menu)
+				{
+					// Fetch again if requested.
+					if (listIndicator)
+					{
+						// Fetch Paged is requested.
+						if (pageListIndicator)
+						{
+							PagedInquiryRequest request = new PagedInquiryRequest();
+							request.setPreQueryCount(true);
+							return fetchStatussByRequest(request);
+						}
+						else
+						{
+							// otherwise return all rows not paged
+							return fetchAllStatuss(menu);
+						}
+					}
+					else
+					{
+						return new InternalResultsResponse<Status>();
+					}
+				}
+
+				
+				//===================================### MENU ####======================================
+				/**
+			/*
+			/*
+			 * (non-Javadoc)
+			 * @see
+			 * com.qat.samples.sysmgmt.bac.ICountyBAC#insertMenu(com.qat.samples.sysmgmt.model.request.MenuMaintenanceRequest
+			 * )
+			 */
+			@Override
+			public InternalResultsResponse<Menu> insertMenu(MenuMaintenanceRequest request)
+			{
+				InternalResultsResponse<Menu> response =
+						processMenu(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+				return response;
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * @see
+			 * com.qat.samples.sysmgmt.bac.IMenuBAC#updateMenu(com.qat.samples.sysmgmt.model.request.MenuMaintenanceRequest
+			 * )
+			 */
+			@Override
+			public InternalResultsResponse<Menu> updateMenu(MenuMaintenanceRequest request)
+			{
+				InternalResultsResponse<Menu> response =
+						processMenu(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+				return response;
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * @see
+			 * com.qat.samples.sysmgmt.bac.IMenuBAC#deleteMenu(com.qat.samples.sysmgmt.model.request.MenuMaintenanceRequest
+			 * )
+			 */
+			@Override
+			public InternalResultsResponse<Menu> deleteMenu(MenuMaintenanceRequest request)
+			{
+				InternalResultsResponse<Menu> response =
+						processMenu(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+				return response;
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * @see com.qat.samples.sysmgmt.bac.IMenuBAC#refreshMenus(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+			 */
+			@Override
+			public InternalResultsResponse<Menu> refreshMenus(RefreshRequest request)
+			{
+				// This method is demo code only. Do not view this as a QAT Global Standard.
+				getEmpresaBAR().deleteAllMenus();
+				int refreshNumber = request.getRefreshInt();
+				refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
+
+				for (int i = 1; i <= refreshNumber; i++)
+				{
+				getEmpresaBAR().insertMenu(new Menu(i, "MenuDesc" + i));
+				}
+
+				// Call maintain to see if we need to return the menu list and if so whether it should be paged or not
+				return maintainReturnListMenu(request.getReturnList(), request.getReturnListPaged(),new Menu());
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * @see com.qat.samples.sysmgmt.bac.IMenuBAC#fetchAllMenus(Menu menu)
+			 */
+			@Override
+			public InternalResultsResponse<Menu> fetchAllMenus(Menu menu)
+			{
+				InternalResultsResponse<Menu> response = new InternalResultsResponse<Menu>();
+				response.getResultsList().addAll(getEmpresaBAR().fetchAllMenus(menu).getResultsList());
+				return response;
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * @see
+			 * com.qat.samples.sysmgmt.bac.IMenuBAC#fetchMenuById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+			 * )
+			 */
+			@Override
+			public InternalResultsResponse<Menu> fetchMenuById(FetchByIdRequest request)
+			{
+				InternalResultsResponse<Menu> response = new InternalResultsResponse<Menu>();
+				// validate fetchId field
+				if (ValidationUtil.isNull(request.getFetchId()))
+				{
+					response.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
+					response.setStatus(SystemErrorCategory.SystemValidation);
+				}
+				else
+				{
+					response.getResultsList().add(getEmpresaBAR().fetchMenuById(request));
+				}
+
+				return response;
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * @see com.qat.samples.sysmgmt.bac.IMenuBAC#fetchMenusByRequest(com.qat.samples.sysmgmt.model.request.
+			 * PagedInquiryRequest)
+			 */
+			@Override
+			public InternalResultsResponse<Menu> fetchMenusByRequest(PagedInquiryRequest request)
+			{
+				return getEmpresaBAR().fetchMenusByRequest(request);
+			}
+
+			/**
+			 * Process.
+			 *
+			 * @param indicator the indicator
+			 * @param persistType the persist type
+			 * @param request the request
+			 * @return the menu response
+			 */
+			private InternalResultsResponse<Menu> processMenu(ValidationContextIndicator indicator,
+					PersistenceActionEnum persistType,
+					MenuMaintenanceRequest request)
+					{
+				InternalResultsResponse<Menu> response = null;
+
+				// Validate
+				//ValidationContext context = new ValidationContext(Menu.class.getSimpleName(), request.getMenu(), indicator);
+				//if (!getValidationController().validate(context))
+				//{
+				//	response = new InternalResultsResponse<Menu>();
+				//	response.setStatus(SystemErrorCategory.SystemValidation);
+				//	response.addMessages(context.getMessages());
+				//	return response;
+				//}
+
+					// Persist
+					InternalResponse internalResponse = doPersistenceMenu(request.getMenu(), persistType);
+					if (internalResponse.isInError())
+					{
+						response = new InternalResultsResponse<Menu>();
+						response.setStatus(internalResponse.getError());
+						response.addMessages(internalResponse.getMessageInfoList());
+						response.addMessage(DEFAULT_EMPRESA_BAC_EXCEPTION_MSG, MessageSeverity.Error,
+								MessageLevel.Object, new Object[] {internalResponse.errorToString()});
+
+						return response;
+					}
+
+					// Call maintainReurnList to see if we need to return the menu list and if so whether it should be paged or
+					// not
+					response = maintainReturnListMenu(request.getReturnList(), request.getReturnListPaged(),new Menu());
+
+					return response;
+						}
+
+				/**
+				 * Do persistenceMenu.
+				 *
+				 * @param request the request
+				 * @param updateType the update type
+				 * @return the internal response
+				 */
+				private InternalResponse doPersistenceMenu(Menu menu, PersistenceActionEnum updateType)
+				{
+					switch (updateType)
+					{
+						case INSERT:
+							return getEmpresaBAR().insertMenu(menu);
+
+						case UPDATE:
+							return getEmpresaBAR().updateMenu(menu);
+
+						case DELETE:
+							return getEmpresaBAR().deleteMenuById(menu);
+						default:
+							if (LOG.isDebugEnabled())
+							{
+								LOG.debug("updateType missing!");
+							}
+							break;
+					}
+
+					return null;
+				}
+
+				/**
+				 * Maintain return list.
+				 *
+				 * @param request the request
+				 * @param response the response
+				 */
+				private InternalResultsResponse<Menu> maintainReturnListMenu(Boolean listIndicator, Boolean pageListIndicator,Menu menu)
+				{
+					// Fetch again if requested.
+					if (listIndicator)
+					{
+						// Fetch Paged is requested.
+						if (pageListIndicator)
+						{
+							PagedInquiryRequest request = new PagedInquiryRequest();
+							request.setPreQueryCount(true);
+							return fetchMenusByRequest(request);
+						}
+						else
+						{
+							// otherwise return all rows not paged
+							return fetchAllMenus(menu);
+						}
+					}
+					else
+					{
+						return new InternalResultsResponse<Menu>();
+					}
+				}
+
 }
