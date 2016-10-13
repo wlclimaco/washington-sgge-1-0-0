@@ -20,8 +20,8 @@ public class ConfigBlueSoft extends ModelCosmeDamiao
 
 
 	private Integer ativBlue;
-	private Integer url;
-	private Integer token;
+	private String url;
+	private String token;
 
 	public ConfigBlueSoft()
 	{
@@ -53,19 +53,19 @@ public class ConfigBlueSoft extends ModelCosmeDamiao
 		this.ativBlue = ativBlue;
 	}
 
-	public Integer getUrl() {
+	public String getUrl() {
 		return url;
 	}
 
-	public void setUrl(Integer url) {
+	public void setUrl(String url) {
 		this.url = url;
 	}
 
-	public Integer getToken() {
+	public String getToken() {
 		return token;
 	}
 
-	public void setToken(Integer token) {
+	public void setToken(String token) {
 		this.token = token;
 	}
 
@@ -74,6 +74,8 @@ public class ConfigBlueSoft extends ModelCosmeDamiao
 		return "ConfigBlueSoft [getId()=" + getId() + ", getAtivBlue()=" + getAtivBlue() + ", getUrl()=" + getUrl()
 				+ ", getToken()=" + getToken() + ", toString()=" + super.toString() + "]";
 	}
-	
-	
+
+
+
+
 }

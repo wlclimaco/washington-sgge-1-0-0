@@ -38,8 +38,12 @@ public enum DocumentoTypeEnum implements IIntegerEnum, II18nEnum
 
 	IF(11, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
 
+	INSCRESTSUBSTTRIB(12, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
+
 	/** The unknown. */
-	CERTIDADONASCIMENTO(12, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
+	CERTIDADONASCIMENTO(13, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
+
+	INDICADORIE(14, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
 
 	/** The code. */
 	private Integer code;

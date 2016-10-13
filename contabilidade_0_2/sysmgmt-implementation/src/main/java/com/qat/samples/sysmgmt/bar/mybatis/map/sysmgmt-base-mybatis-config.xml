@@ -110,6 +110,7 @@
 
         <!-- Configuracao -->
         <typeAlias alias="Boleto" type="com.qat.samples.sysmgmt.entidade.model.Boleto" />
+        <typeAlias alias="ConfigBlueSoft" type="com.qat.samples.sysmgmt.entidade.model.ConfigBlueSoft" />
         <typeAlias alias="ConfigCarne" type="com.qat.samples.sysmgmt.entidade.model.ConfigCarne" />
         <typeAlias alias="ConfigEntrada" type="com.qat.samples.sysmgmt.entidade.model.ConfigEntrada" />
         <typeAlias alias="ConfigFiscal" type="com.qat.samples.sysmgmt.entidade.model.ConfigFiscal" />
@@ -514,6 +515,7 @@
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/servicoAndPlano.xml" />
         <!-- Configuracao -->
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/boleto.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configBlueSoft.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configCarne.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configEntrada.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/configFiscal.xml" />

@@ -35,6 +35,10 @@
     <collection property="confEntrada" column="confEntrada" select="ConfigEntradaMap.fetchConfigEntradaById"/>
     <collection property="confCarne" column="confCarne" select="ConfigCarneMap.fetchConfigCarneById"/>
     <collection property="confNFe" column="confNFe" select="ConfiguracaoNFeMap.fetchConfiguracaoNFeById"/>
+    <collection property="configOS" column="configOS" select="ConfigOSMap.fetchConfigOSById"/>
+    <collection property="confAlertas" column="configOS" select="ConfigAlertasMap.fetchConfigAlertasById"/>
+   <!--   <collection property="confBlueSoft" column="confBlueSoft" select="ConfiguracaoNFeMap.fetchConfiguracaoNFeById"/>-->
+
 <collection property="boletoList" column="id" select="BoletoMap.fetchBoletoByEmprId"/>
   </resultMap>
 
@@ -56,6 +60,9 @@ confGeral
 ,create_user
 ,modify_date
 ,modify_user
+,configOS
+,confAlertas
+,confBlueSoft
 
 </sql>
 <sql id="allConfiguracaoValues">
@@ -75,7 +82,10 @@ confGeral
      #{createDateUTC},
      #{createUser},
      #{modifyDateUTC},
-     #{modifyUser}
+     #{modifyUser},
+#{configOS.id},
+#{confAlertas.id},
+#{confBlueSoft.id}
   </sql>
 
 

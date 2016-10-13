@@ -21,6 +21,7 @@ import com.qat.samples.sysmgmt.bar.Vendas.IVendasBAR;
 import com.qat.samples.sysmgmt.cnae.model.CnaeEmpresa;
 import com.qat.samples.sysmgmt.entidade.model.Entidade;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscal;
+import com.qat.samples.sysmgmt.pessoa.model.Pessoa;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.model.Documento;
@@ -108,6 +109,60 @@ public final class BaseBARD extends SqlSessionDaoSupport
 		return 0;
 
 	}
+
+	@SuppressWarnings("unchecked")
+	public static Integer maintainInsertBasePessoa(Pessoa empresa,Integer historicoId,Integer processId,TabelaEnum tabela,IEnderecoBAR enderecoBAR,IStatusBAR statusBAR,IHistoricoBAR historicoBAR,
+			ICadastrosBAR cadastroBAR,ITelefoneBAR telefoneBAR,IEmailBAR emailBAR,IDocumentoBAR documentoBAR,INotesBAR noteBAR, InternalResultsResponse<?> response)
+	{
+		Integer count = 0;
+		Boolean count1 = false;
+		if (!ValidationUtil.isNullOrEmpty(empresa.getEnderecos()))
+		{
+			count +=
+					EnderecoBARD.maintainEnderecoAssociations(empresa.getEnderecos(), response, empresa.getId(), null,
+							null,
+							tabela, enderecoBAR, statusBAR, historicoBAR, empresa.getId(),
+							empresa.getCreateUser(), processId, historicoId);
+		}
+		if (!ValidationUtil.isNullOrEmpty(empresa.getEmails()))
+		{
+			count +=
+					EmailBARD.maintainEmailAssociations(empresa.getEmails(), response, empresa.getId(), null, null,
+							tabela, emailBAR, statusBAR, historicoBAR, empresa.getId(),
+							empresa.getCreateUser(), processId, historicoId);
+		}
+		if (!ValidationUtil.isNullOrEmpty(empresa.getTelefones()))
+		{
+			count +=
+					TelefoneBARD.maintainTelefoneAssociations(empresa.getTelefones(), response, empresa.getId(), null,
+							null,
+							tabela, telefoneBAR, statusBAR, historicoBAR, empresa.getId(),
+							empresa.getCreateUser(), processId, historicoId);
+		}
+		if (!ValidationUtil.isNullOrEmpty(empresa.getDocumentos()))
+		{
+			count +=
+					DocumentosBARD.maintainDocumentoAssociations(empresa.getDocumentos(), response, empresa.getId(),
+							null,
+							null,
+							tabela, documentoBAR, statusBAR, historicoBAR, empresa.getId(),
+							empresa.getCreateUser(), processId, historicoId);
+		}
+		if (!ValidationUtil.isNullOrEmpty(empresa.getNotes()))
+		{
+			count +=
+					NotesBARD.maintainNoteAssociations(empresa.getNotes(), response, empresa.getId(), null,
+							null,
+							tabela, noteBAR, statusBAR, historicoBAR, empresa.getEmprId(),
+							empresa.getCreateUser(), processId, historicoId);
+		}
+
+
+
+		return 0;
+
+	}
+
 
 	@SuppressWarnings("unchecked")
 	public static Integer maintainInsertBaseNF(NotaFiscal empresa,Integer historicoId,Integer processId,TabelaEnum tabela,IEnderecoBAR enderecoBAR,IStatusBAR statusBAR,IHistoricoBAR historicoBAR,

@@ -11,7 +11,17 @@ import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.MyBatisBARHelper;
 import com.qat.samples.sysmgmt.bar.Cadastros.ICadastrosBAR;
+import com.qat.samples.sysmgmt.bar.Documentos.IDocumentoBAR;
+import com.qat.samples.sysmgmt.bar.Email.IEmailBAR;
+import com.qat.samples.sysmgmt.bar.Endereco.IEnderecoBAR;
+import com.qat.samples.sysmgmt.bar.Fiscal.IFiscalBAR;
+import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
+import com.qat.samples.sysmgmt.bar.Notes.INotesBAR;
+import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.BaseBARD;
 import com.qat.samples.sysmgmt.convenio.model.Convenio;
+import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.estado.model.Estado;
 import com.qat.samples.sysmgmt.estado.model.request.EstadoInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.Cliente;
@@ -22,6 +32,7 @@ import com.qat.samples.sysmgmt.pessoa.model.request.ConvenioInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.Cidade;
+import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.Tarefa;
 import com.qat.samples.sysmgmt.util.model.request.CidadeInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
@@ -218,6 +229,89 @@ private static final String STMT_DELETE_TAREFA = NAMESPACE_TAREFA + "deleteTaref
 	private static final String STMT_FETCH_TAREFA_ALL_REQUEST = NAMESPACE_TAREFA + "fetchAllTarefasRequest";
 
 //===================================### CLIENTE ####======================================
+
+	IEnderecoBAR enderecoBAR;
+
+	IStatusBAR statusBAR;
+
+	IHistoricoBAR historicoBAR;
+
+	ICadastrosBAR cadastrosBAR;
+
+	ITelefoneBAR telefoneBAR;
+
+	IEmailBAR emailBAR;
+
+	IDocumentoBAR documentoBAR;
+
+	INotesBAR notesBAR;
+
+
+
+	public IEnderecoBAR getEnderecoBAR() {
+		return enderecoBAR;
+	}
+
+	public void setEnderecoBAR(IEnderecoBAR enderecoBAR) {
+		this.enderecoBAR = enderecoBAR;
+	}
+
+	public IStatusBAR getStatusBAR() {
+		return statusBAR;
+	}
+
+	public void setStatusBAR(IStatusBAR statusBAR) {
+		this.statusBAR = statusBAR;
+	}
+
+	public IHistoricoBAR getHistoricoBAR() {
+		return historicoBAR;
+	}
+
+	public void setHistoricoBAR(IHistoricoBAR historicoBAR) {
+		this.historicoBAR = historicoBAR;
+	}
+
+	public ICadastrosBAR getCadastrosBAR() {
+		return cadastrosBAR;
+	}
+
+	public void setCadastrosBAR(ICadastrosBAR cadastrosBAR) {
+		this.cadastrosBAR = cadastrosBAR;
+	}
+
+	public ITelefoneBAR getTelefoneBAR() {
+		return telefoneBAR;
+	}
+
+	public void setTelefoneBAR(ITelefoneBAR telefoneBAR) {
+		this.telefoneBAR = telefoneBAR;
+	}
+
+	public IEmailBAR getEmailBAR() {
+		return emailBAR;
+	}
+
+	public void setEmailBAR(IEmailBAR emailBAR) {
+		this.emailBAR = emailBAR;
+	}
+
+	public IDocumentoBAR getDocumentoBAR() {
+		return documentoBAR;
+	}
+
+	public void setDocumentoBAR(IDocumentoBAR documentoBAR) {
+		this.documentoBAR = documentoBAR;
+	}
+
+	public INotesBAR getNotesBAR() {
+		return notesBAR;
+	}
+
+	public void setNotesBAR(INotesBAR notesBAR) {
+		this.notesBAR = notesBAR;
+	}
+
 	/**
 /*
  * (non-Javadoc)
@@ -228,6 +322,10 @@ public InternalResponse insertCliente(Cliente cliente)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PESSOA, cliente, response);
+
+	BaseBARD.maintainInsertBasePessoa(cliente, cliente.getTransactionId(), cliente.getTransactionId(), TabelaEnum.EMPRESA, getEnderecoBAR(),
+			getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getTelefoneBAR(), getEmailBAR(),
+			getDocumentoBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
 	return response;
 }
 
@@ -240,6 +338,9 @@ public InternalResponse updateCliente(Cliente cliente)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PESSOA, cliente, response);
+	BaseBARD.maintainInsertBasePessoa(cliente, cliente.getTransactionId(), cliente.getTransactionId(), TabelaEnum.EMPRESA, getEnderecoBAR(),
+			getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getTelefoneBAR(), getEmailBAR(),
+			getDocumentoBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
 	return response;
 }
 
@@ -252,6 +353,9 @@ public InternalResponse deleteClienteById(Cliente cliente)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA, cliente, response);
+	BaseBARD.maintainInsertBasePessoa(cliente, cliente.getTransactionId(), cliente.getTransactionId(), TabelaEnum.EMPRESA, getEnderecoBAR(),
+			getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getTelefoneBAR(), getEmailBAR(),
+			getDocumentoBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
 	return response;
 }
 
@@ -361,6 +465,9 @@ public InternalResponse insertFornecedor(Fornecedor fornecedor)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PESSOA, fornecedor, response);
+	BaseBARD.maintainInsertBasePessoa(fornecedor, fornecedor.getTransactionId(), fornecedor.getTransactionId(), TabelaEnum.EMPRESA, getEnderecoBAR(),
+			getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getTelefoneBAR(), getEmailBAR(),
+			getDocumentoBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
 	return response;
 }
 
@@ -373,6 +480,9 @@ public InternalResponse updateFornecedor(Fornecedor fornecedor)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PESSOA, fornecedor, response);
+	BaseBARD.maintainInsertBasePessoa(fornecedor, fornecedor.getTransactionId(), fornecedor.getTransactionId(), TabelaEnum.EMPRESA, getEnderecoBAR(),
+			getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getTelefoneBAR(), getEmailBAR(),
+			getDocumentoBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
 	return response;
 }
 
@@ -385,6 +495,9 @@ public InternalResponse deleteFornecedorById(Fornecedor fornecedor)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA, fornecedor, response);
+	BaseBARD.maintainInsertBasePessoa(fornecedor, fornecedor.getTransactionId(), fornecedor.getTransactionId(), TabelaEnum.EMPRESA, getEnderecoBAR(),
+			getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getTelefoneBAR(), getEmailBAR(),
+			getDocumentoBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
 	return response;
 }
 
@@ -494,6 +607,9 @@ public InternalResponse insertTransportador(Transportador transportador)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PESSOA, transportador, response);
+	BaseBARD.maintainInsertBasePessoa(transportador, transportador.getTransactionId(), transportador.getTransactionId(), TabelaEnum.EMPRESA, getEnderecoBAR(),
+			getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getTelefoneBAR(), getEmailBAR(),
+			getDocumentoBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
 	return response;
 }
 
@@ -506,6 +622,9 @@ public InternalResponse updateTransportador(Transportador transportador)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PESSOA, transportador, response);
+	BaseBARD.maintainInsertBasePessoa(transportador, transportador.getTransactionId(), transportador.getTransactionId(), TabelaEnum.EMPRESA, getEnderecoBAR(),
+			getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getTelefoneBAR(), getEmailBAR(),
+			getDocumentoBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
 	return response;
 }
 
@@ -518,6 +637,9 @@ public InternalResponse deleteTransportadorById(Transportador transportador)
 {
 	InternalResponse response = new InternalResponse();
 	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA, transportador, response);
+	BaseBARD.maintainInsertBasePessoa(transportador, transportador.getTransactionId(), transportador.getTransactionId(), TabelaEnum.EMPRESA, getEnderecoBAR(),
+			getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getTelefoneBAR(), getEmailBAR(),
+			getDocumentoBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
 	return response;
 }
 

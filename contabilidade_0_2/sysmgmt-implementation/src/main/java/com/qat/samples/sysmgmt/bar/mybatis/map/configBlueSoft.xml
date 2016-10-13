@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 28/07/2016 19:49 : 19-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ConfigBlueSoftMap">
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="ConfigBlueSoftResult" type="ConfigBlueSoft">
+    <result property="id" column="id"/>
+    <result property="ativBlue" column="ativBlue"/>
+    <result property="url" column="url"/>
+    <result property="token" column="token"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
+
+  <sql id="allConfigBlueSoftColumns">
+ativBlue
+,url
+,token
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+
+</sql>
+<sql id="allConfigBlueSoftValues">
+#{ativBlue},
+#{url},
+#{token},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
+
+
+ <select id="fetchAllConfigBlueSofts" resultMap="ConfigBlueSoftResult">
+    SELECT id,
+ <include refid="allConfigBlueSoftColumns" />
+   FROM configblueSoft ORDER BY id ASC
+ </select>
+
+ <select id="fetchConfigBlueSoftById" parameterType="Integer" resultMap="ConfigBlueSoftResult">
+    SELECT id,
+ <include refid="allConfigBlueSoftColumns" />
+   FROM configblueSoft WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchAllConfigBlueSoftsRequest" parameterType="pagedInquiryRequest" resultMap="ConfigBlueSoftResult">
+
+     SELECT id,<include refid="allConfigBlueSoftColumns" />
+           FROM configblueSoft where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
+       OFFSET ( #{startPage} * #{pageSize} )
+       LIMIT #{pageSize}
+</select>
+
+<select id="fetchConfigBlueSoftRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM configblueSoft WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+
+ </select>
+
+ <insert id="insertConfigBlueSoft" parameterType="ConfigBlueSoft" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO configblueSoft (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allConfigBlueSoftColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allConfigBlueSoftValues" /> )
+ </insert>
+
+ <update id="updateConfigBlueSoft" parameterType="ConfigBlueSoft">
+   UPDATE configblueSoft SET
+<if test="ativBlue!= null">ativBlue = #{ativBlue},</if>
+<if test="url!= null">url = #{url},</if>
+<if test="token!= null">token = #{token},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteConfigBlueSoftById" parameterType="ConfigBlueSoft">
+  DELETE FROM configblueSoft WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllConfigBlueSofts">
+ DELETE FROM configblueSoft
+  </delete>
+</mapper>
+
+
