@@ -21,11 +21,11 @@
     [modify_user]  [varchar](50) NULL,-->
 
   <resultMap id="empresaResult" type="Empresa" extends="EntidadeMap.EntidadeResult">
-	<!--<collection property="socios" column="id" select="SocioMap.fetchSocioByEmpresaId"/>
+	<collection property="socios" column="id" select="SocioMap.fetchSocioByEmpresaId"/>
 	<collection property="planoList" column="id" select="PlanoMap.fetchPlanoByEmpresa"/>
 	<collection property="filialList" column="id" select="FilialMap.fetchAllFilialByEntidade"/>
 	<collection property="depositoList" column="id" select="DepositoMap.fetchAllDepositoByEntidade"/>
-	  <collection property="contaCorrenteList" column="id" select="ContaCorrenteMap.fetchAllDepositoByEntidade"/>
+	<!--  <collection property="contaCorrenteList" column="id" select="ContaCorrenteMap.fetchAllDepositoByEntidade"/>
 	<collection property="tarefaList" column="id" select="TarefaMap.fetchAllDepositoByEntidade"/>-->
   </resultMap>
 
@@ -152,6 +152,7 @@ nome
 <if test="nome!= null">nome = #{nome},</if>
 <if test="parceiroId!= null">parceiroId = #{parceiroId},</if>
 <if test="contabilidadeId!= null">contabilidadeId = #{contabilidadeId},</if>
+<if test="configuracao!= null">configuracao = #{configuracao.id},</if>
 <if test="permissaoTypeEnumValue!= null">permissaoTypeEnumValue = #{permissaoTypeEnumValue},</if>
 <if test="entidadeId!= null">entidadeId = #{entidadeId},</if>
 <if test="numFunc!= null">numFunc = #{numFunc},</if>

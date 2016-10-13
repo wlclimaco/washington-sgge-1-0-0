@@ -104,6 +104,13 @@ nome
     id = #{id}
  </update>
 
+
+
+ <select id="fetchPessoaById" resultMap="PessoaResult">
+    SELECT id,
+ <include refid="allPessoaColumns" />
+   FROM pessoa where id = #{id} ORDER BY id ASC
+ </select>
 <delete id="deletePessoaById" parameterType="Cliente">
   DELETE FROM pessoa WHERE id = #{id}
  </delete>

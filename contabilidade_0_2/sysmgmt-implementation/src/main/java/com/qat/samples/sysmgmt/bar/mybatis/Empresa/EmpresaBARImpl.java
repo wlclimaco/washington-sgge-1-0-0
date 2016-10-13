@@ -1,7 +1,6 @@
 /** create by system gera-java version 1.0.0 01/05/2016 18:42 : 57*/
 package com.qat.samples.sysmgmt.bar.mybatis.Empresa;
 
-import java.awt.Dialog.ModalExclusionType;
 import java.util.ArrayList;
 import java.util.List;
 

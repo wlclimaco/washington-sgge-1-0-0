@@ -114,6 +114,7 @@ c.regime,
 <if test="razao!= null">razao = #{razao},</if>
 <if test="processId!= null">processId = #{processId},</if>
 <if test="entidadeId!= null">entidadeId = #{entidadeId},</if>
+<if test="configuracao!= null">configuracao = #{configuracao.id},</if>
 <if test="emprId!= null">emprId = #{emprId},</if>
 <if test="statusEmpresa!= null">statusEmpresa = #{statusEmpresa},</if>
 <if test="dtAbertura!= null">dtAbertura = #{dtAbertura},</if>

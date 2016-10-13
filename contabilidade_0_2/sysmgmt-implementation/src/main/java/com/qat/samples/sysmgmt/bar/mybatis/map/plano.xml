@@ -94,6 +94,12 @@ c.emprId,
 	<include refid="allPlanoColumns" />
    FROM plano WHERE parentId = #{fetchid} and tabelaEnumValue = 64
  </select>
+ 
+ <select id="fetchPlanoByEmpresa" parameterType="Integer" resultMap="PlanoResult">
+    SELECT id,
+	<include refid="allPlanoColumns" />
+   FROM plano WHERE emprId = #{fetchid}
+ </select>
 
  <select id="fetchPlanoById" parameterType="Integer" resultMap="PlanoResult">
     SELECT id,

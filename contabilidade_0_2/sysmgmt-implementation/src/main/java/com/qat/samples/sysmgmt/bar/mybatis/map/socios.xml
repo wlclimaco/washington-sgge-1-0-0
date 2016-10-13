@@ -17,7 +17,7 @@
        exactly. -->
   <resultMap id="SocioResult" type="Socio">
     <result property="id" column="id"/>
-    <result property="nome" column="nome"/>
+    <result property="socioAdm" column="socioAdm"/>
     <result property="cota" column="cota"/>
     <result property="porcentagem" column="porcentagem"/>
     <result property="dataProlabore" column="dataProlabore"/>
@@ -34,7 +34,7 @@
   </resultMap>
 
   <sql id="allSocioColumns">
-nome
+socioAdm
 ,cota
 ,porcentagem
 ,parentId
@@ -50,7 +50,7 @@ nome
 ,valorProlabore
 </sql>
 <sql id="allSocioValues">
-#{nome},
+#{socioAdm},
 #{cota},
 #{porcentagem},
      #{parentId},
@@ -71,6 +71,13 @@ nome
     SELECT id,
  <include refid="allSocioColumns" />
    FROM socio ORDER BY id ASC
+ </select>
+
+
+<select id="fetchSocioByEmpresaId" parameterType="Integer" resultMap="SocioResult">
+    SELECT id,
+ <include refid="allSocioColumns" />
+   FROM socio WHERE emprid = #{fetchid}
  </select>
 
  <select id="fetchSocioById" parameterType="Integer" resultMap="SocioResult">
@@ -101,7 +108,7 @@ nome
 
  <update id="updateSocio" parameterType="Socio">
    UPDATE socio SET
-<if test="nome!= null">nome = #{nome},</if>
+<if test="socioAdm!= null">socioAdm = #{socioAdm},</if>
 <if test="cota!= null">cota = #{cota},</if>
 <if test="dataProlabore!= null">dataProlabore = #{dataProlabore},</if>
 <if test="valorProlabore!= null">valorProlabore = #{valorProlabore},</if>
