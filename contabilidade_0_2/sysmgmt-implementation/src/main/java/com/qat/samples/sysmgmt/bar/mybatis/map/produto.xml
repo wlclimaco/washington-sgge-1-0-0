@@ -22,6 +22,7 @@
     <result property="cEST" column="cEST"/>
     <result property="excTabIPI" column="excTabIPI"/>
     <result property="produto" column="produto"/>
+    <result property="quant" column="quant"/>
     <result property="dataCreate" column="dataCreate" />
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
@@ -31,6 +32,8 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<collection property="uniMed" column="uniMed" select="UniMedMap.fetchUniMedById"/>
+<collection property="marca" column="marca" select="MarcaMap.fetchMarcaById"/>
   </resultMap>
 
   <sql id="allProdutoColumns">
@@ -39,6 +42,7 @@ cdBarras
 ,cEST
 ,excTabIPI
 ,produto
+,quant
 ,dataCreate
 ,parentId
 ,tabelaEnumValue
@@ -48,6 +52,9 @@ cdBarras
 ,create_user
 ,modify_date
 ,modify_user
+,uniMed
+,marca
+
 
 </sql>
 <sql id="allProdutoValues">
@@ -56,6 +63,7 @@ cdBarras
 #{cEST},
 #{excTabIPI},
 #{produto},
+#{quant},
 #{dataCreate},
      #{parentId},
      #{tabelaEnumValue},
@@ -64,7 +72,9 @@ cdBarras
      #{createDateUTC},
      #{createUser},
      #{modifyDateUTC},
-     #{modifyUser}
+     #{modifyUser},
+     #{uniMed.id},
+#{marca.id}
   </sql>
 
 
@@ -108,6 +118,9 @@ cdBarras
 <if test="excTabIPI!= null">excTabIPI = #{excTabIPI},</if>
 <if test="produto!= null">produto = #{produto},</if>
 <if test="dataCreate!= null">dataCreate = #{dataCreate},</if>
+<if test="quant!= null">quant = #{quant},</if>
+<if test="uniMed!= null">uniMed = #{uniMed.id},</if>
+<if test="marca!= null">marca = #{marca.id},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>

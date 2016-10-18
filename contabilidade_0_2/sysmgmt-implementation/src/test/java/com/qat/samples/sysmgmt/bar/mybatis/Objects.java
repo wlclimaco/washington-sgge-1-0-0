@@ -1448,7 +1448,8 @@ public class Objects {
 		produtoparent.setModelAction(action);
 		produtoparent.setAplicacao("aplicacao_5 - " + action.toString());
 		produtoparent.setFracao("fracao_6 - " + action.toString());
-		produtoparent.setMarca(insertMarca(id, TabelaEnum.PRODUTO, action));
+		
+		
 		produtoparent.setPesoBruto(new Double(10.00));
 		produtoparent.setPesoLiquido(new Double(10.00));
 		produtoparent.setModoUso("modoUso_15 - " + action.toString());
@@ -1473,6 +1474,8 @@ public class Objects {
 		produto.setTabelaEnum(tabela);
 		produto.setParentId(id);
 		produto.setEmprId(EMPID);
+		produto.setMarca(insertMarca(id, TabelaEnum.PRODUTO, action));
+		produto.setUniMed(insertUniMed(id, TabelaEnum.PRODUTO, action));
 		produto.setModifyDateUTC(a.getTime());
 		produto.setCreateDateUTC(a.getTime());
 		produto.setCreateUser("system");

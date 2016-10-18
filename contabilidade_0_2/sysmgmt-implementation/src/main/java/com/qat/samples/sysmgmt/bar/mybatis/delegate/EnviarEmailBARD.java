@@ -55,7 +55,7 @@ public final class EnviarEmailBARD extends SqlSessionDaoSupport {
 		Empresa empresa = empresaBAR.fetchEmpresaById(new FetchByIdRequest(empresaPai));
 		if (!ValidationUtil.isNull(empresa)) {
 			if (!ValidationUtil.isNull(empresa.getConfiguracao())) {
-				if (!ValidationUtil.isNull(empresa.getConfiguracao().getConfCMTP())) {
+				if ((!ValidationUtil.isNull(empresa.getConfiguracao().getConfCMTP()))&&(!ValidationUtil.isNull(empresa.getConfiguracao().getConfCMTP().getPorta()))) {
 					// Step1
 					System.out.println("\n 1st ===> setup Mail Server Properties..");
 					mailServerProperties = System.getProperties();

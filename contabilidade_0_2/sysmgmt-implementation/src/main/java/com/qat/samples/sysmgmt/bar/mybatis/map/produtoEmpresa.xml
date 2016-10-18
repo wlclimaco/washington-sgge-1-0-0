@@ -38,9 +38,8 @@
 <collection property="custoList" column="id" select="CustoMap.fetchCustoByParentId"/>
 <collection property="precoList" column="id" select="PrecoMap.fetchPrecoByProduto"/>
 <collection property="tributacao" column="tributacao" select="TributacaoMap.fetchTributacaoById"/>
-<collection property="uniMed" column="uniMed" select="UniMedMap.fetchUniMedById"/>
 <collection property="categoria" column="categoria" select="CategoriaMap.fetchCategoriaById"/>
-<collection property="marca" column="marca" select="MarcaMap.fetchMarcaById"/>
+
   </resultMap>
 
   <sql id="allProdutoEmpresaColumns">
@@ -50,9 +49,8 @@ prodId
 ,dataCadastro
 ,tributacao
 ,codigo
-,uniMed
 ,categoria
-,marca
+
 ,pesoBruto
 ,pesoLiquido
 ,modoUso
@@ -74,9 +72,7 @@ prodId
 #{dataCadastro},
 #{tributacao.id},
 #{codigo},
-#{uniMed.id},
 #{categoria.id},
-#{marca.id},
 #{pesoBruto},
 #{pesoLiquido},
 #{modoUso},
@@ -131,9 +127,7 @@ prodId
 <if test="dataCadastro!= null">dataCadastro = #{dataCadastro},</if>
 <if test="tributacao!= null">tributacao = #{tributacao.id},</if>
 <if test="codigo!= null">codigo = #{codigo},</if>
-<if test="uniMed!= null">uniMed = #{uniMed.id},</if>
 <if test="categoria!= null">categoria = #{categoria.id},</if>
-<if test="marca!= null">marca = #{marca.id},</if>
 <if test="pesoBruto!= null">pesoBruto = #{pesoBruto},</if>
 <if test="pesoLiquido!= null">pesoLiquido = #{pesoLiquido},</if>
 <if test="modoUso!= null">modoUso = #{modoUso},</if>

@@ -22,6 +22,7 @@ import com.qat.samples.sysmgmt.bar.Produto.IProdutoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.CofinsBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.CustoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EmailBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EstoqueBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.IcmsBARD;
@@ -848,16 +849,21 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 				produtoempresa.getTransactionId(), getHistoricoBAR(), response, produtoempresa.getId(),
 				produtoempresa.getUserId());
 		
-		if (!ValidationUtil.isNull(produtoempresa.getEstoqueList()))
+		if (!ValidationUtil.isNullOrEmpty(produtoempresa.getEstoqueList()))
 		{
 			
 			EstoqueBARD.maintainEstoqueAssociations(produtoempresa.getEstoqueList(), response,produtoempresa.getId(),  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
 					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
 		}
-		if (!ValidationUtil.isNull(produtoempresa.getPrecoList()))
+		if (!ValidationUtil.isNullOrEmpty(produtoempresa.getPrecoList()))
 		{
 			PrecoBARD.maintainPrecoAssociations(produtoempresa.getPrecoList(), response,produtoempresa.getId(),  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
 					getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
+		}
+		if (!ValidationUtil.isNullOrEmpty(produtoempresa.getCustoList()))
+		{
+			CustoBARD.maintainCustoAssociations(produtoempresa.getCustoList(), response,produtoempresa.getId(),  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
+					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
 		}
 
 		if (produtoempresa.getId() != 0 && produtoempresa.getId() != null) {

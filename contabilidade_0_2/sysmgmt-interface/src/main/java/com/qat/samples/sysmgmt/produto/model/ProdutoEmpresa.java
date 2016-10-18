@@ -2,7 +2,6 @@ package com.qat.samples.sysmgmt.produto.model;
 
 import java.util.List;
 
-import com.qat.samples.sysmgmt.cfop.model.CfopParentId;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -54,11 +53,9 @@ public class ProdutoEmpresa extends ModelCosmeDamiao
 
 	private String AnotInt;
 	
-	private UniMed uniMed;
-	
 	private Categoria categoria;
 	
-	private Marca marca;
+
 
 	/**
 	 * Default constructor.
@@ -242,28 +239,12 @@ public class ProdutoEmpresa extends ModelCosmeDamiao
 		AnotInt = anotInt;
 	}
 
-	public UniMed getUniMed() {
-		return uniMed;
-	}
-
-	public void setUniMed(UniMed uniMed) {
-		this.uniMed = uniMed;
-	}
-
 	public Categoria getCategoria() {
 		return categoria;
 	}
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
-	}
-
-	public Marca getMarca() {
-		return marca;
-	}
-
-	public void setMarca(Marca marca) {
-		this.marca = marca;
 	}
 
 	public Double getMargemLucro() {
@@ -284,8 +265,8 @@ public class ProdutoEmpresa extends ModelCosmeDamiao
 				+ getCodigo() + ", getAplicacao()=" + getAplicacao() + ", getFracao()=" + getFracao()
 				+ ", getPesoBruto()=" + getPesoBruto() + ", getPesoLiquido()=" + getPesoLiquido() + ", getModoUso()="
 				+ getModoUso() + ", getInfaddNFe()=" + getInfaddNFe() + ", getAnotInt()=" + getAnotInt()
-				+ ", getUniMed()=" + getUniMed() + ", getCategoria()=" + getCategoria() + ", getMarca()=" + getMarca()
-				+ ", getMargemLucro()=" + getMargemLucro() + ", toString()=" + super.toString() + "]";
+				+ ", getCategoria()=" + getCategoria() + ", getMargemLucro()=" + getMargemLucro() + ", toString()="
+				+ super.toString() + "]";
 	}
 
 	

@@ -1,6 +1,5 @@
 package com.qat.samples.sysmgmt.produto.model;
 
-import com.qat.samples.sysmgmt.fiscal.model.Classificacao;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -28,6 +27,12 @@ public class Produto extends ModelCosmeDamiao
 	private String excTabIPI;
 
 	private String cEST;
+	
+	private Double quant;
+	
+	private UniMed uniMed;
+	
+	private Marca marca;
 
 	/**
 	 * Default constructor.
@@ -103,11 +108,36 @@ public class Produto extends ModelCosmeDamiao
 		this.cEST = cEST;
 	}
 
+	public Double getQuant() {
+		return quant;
+	}
+
+	public void setQuant(Double quant) {
+		this.quant = quant;
+	}
+
+	public UniMed getUniMed() {
+		return uniMed;
+	}
+
+	public void setUniMed(UniMed uniMed) {
+		this.uniMed = uniMed;
+	}
+
+	public Marca getMarca() {
+		return marca;
+	}
+
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
+
 	@Override
 	public String toString() {
 		return "Produto [getId()=" + getId() + ", getNcm()=" + getNcm() + ", getCdBarras()=" + getCdBarras()
 				+ ", getDataCreate()=" + getDataCreate() + ", getProduto()=" + getProduto() + ", getExcTabIPI()="
-				+ getExcTabIPI() + ", getcEST()=" + getcEST() + ", toString()=" + super.toString() + "]";
+				+ getExcTabIPI() + ", getcEST()=" + getcEST() + ", getQuant()=" + getQuant() + ", getUniMed()="
+				+ getUniMed() + ", getMarca()=" + getMarca() + ", toString()=" + super.toString() + "]";
 	}
 
 	
