@@ -18,6 +18,7 @@
   <resultMap id="PessoaResult" type="Cliente">
     <result property="id" column="id"/>
     <result property="nome" column="nome"/>
+    <result property="nomeFantasia" column="nomeFantasia"/>
     <result property="nomePai" column="nomePai"/>
     <result property="nomeMae" column="nomeMae"/>
     <result property="nomeConjugue" column="nomeConjugue"/>
@@ -45,6 +46,7 @@
   <sql id="allPessoaColumns">
 
 nome
+,nomeFantasia
 ,nomePai
 ,nomeMae
 ,nomeConjugue
@@ -63,6 +65,7 @@ nome
 </sql>
 <sql id="allPessoaValues">
 #{nome},
+#{nomeFantasia},
 #{nomePai},
 #{nomeMae},
 #{nomeConjugue},
@@ -89,6 +92,7 @@ nome
  <update id="updatePessoa" parameterType="Cliente">
    UPDATE pessoa SET
 <if test="nome!= null">nome = #{nome},</if>
+<if test="nomeFantasia!= null">nomeFantasia = #{nomeFantasia},</if>
 <if test="nomePai!= null">nomePai = #{nomePai},</if>
 <if test="nomeMae!= null">nomeMae = #{nomeMae},</if>
 <if test="nomeConjugue!= null">nomeConjugue = #{nomeConjugue},</if>

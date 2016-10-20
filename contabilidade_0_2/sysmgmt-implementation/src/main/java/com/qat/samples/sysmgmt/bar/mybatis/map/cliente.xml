@@ -8,8 +8,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ClienteMap">
-	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
 
   <!-- Result maps describe the mapping between the columns returned
       from a query, and the class properties.  A result map isnt

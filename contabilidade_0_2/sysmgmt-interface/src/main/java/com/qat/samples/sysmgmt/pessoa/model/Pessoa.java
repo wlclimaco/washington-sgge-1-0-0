@@ -23,6 +23,8 @@ public class Pessoa extends ModelCosmeDamiao
 	private Integer id;
 
 	private String nome;
+	
+	private String nomeFantasia;
 
 	private String nomePai;
 
@@ -394,9 +396,16 @@ public class Pessoa extends ModelCosmeDamiao
 		this.tipoPessoa = tipoPessoa;
 	}
 
+	public String getNomeFantasia() {
+		return nomeFantasia;
+	}
+
+	public void setNomeFantasia(String nomeFantasia) {
+		this.nomeFantasia = nomeFantasia;
+	}
+
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "Pessoa [getPessoaTypeEnumValue()=" + getPessoaTypeEnumValue() + ", getId()=" + getId() + ", getNome()="
 				+ getNome() + ", getNomePai()=" + getNomePai() + ", getNomeMae()=" + getNomeMae()
 				+ ", getNomeConjugue()=" + getNomeConjugue() + ", getEstadoCivil()=" + getEstadoCivil()
@@ -405,7 +414,8 @@ public class Pessoa extends ModelCosmeDamiao
 				+ ", getEnderecos()=" + getEnderecos() + ", getDocumentos()=" + getDocumentos() + ", getEmails()="
 				+ getEmails() + ", getTelefones()=" + getTelefones() + ", getBancos()=" + getBancos()
 				+ ", getFormaPagamentoList()=" + getFormaPagamentoList() + ", getCondPagList()=" + getCondPagList()
-				+ ", getTipoPessoa()=" + getTipoPessoa() + ", toString()=" + super.toString() + "]";
+				+ ", getTipoPessoa()=" + getTipoPessoa() + ", getNomeFantasia()=" + getNomeFantasia() + ", toString()="
+				+ super.toString() + "]";
 	}
 
 }
