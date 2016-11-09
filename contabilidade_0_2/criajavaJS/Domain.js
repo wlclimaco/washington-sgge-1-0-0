@@ -1,26 +1,46 @@
 
 domain = function (oField,name){
 
-	var text = '/** create by system gera-java version 1.0.0 '+dataAtualFormatada()+'*/\n';
+
+    var text = '/** create by system gera-java version 1.0.0 '+dataAtualFormatada()+'*/\n';
+
+    text = text + 'qat.model.fn'+name+' =function(_'+name+',modelAction)\n';
+    text = text + '{\n';    
     text = text + '\n';
-    text = text + '//'+name+' Object\n';
-    text = text + 'qat.model.'+name+' = function(_oObjet)\n';
-    text = text + '{\n';
+    text = text + '     var _id = null;\n';
+    text = text + '     if(_'+name+'.id == "" || _'+name+'.id == " "){\n';
+    text = text + '         _id = null;\n';
+    text = text + '     }\n';
+    text = text + '     var _emprId = null;\n';
+    text = text + "     if(localStorage.getItem('empresa') == null || localStorage.getItem('empresa') == ''){\n";
+    text = text + '         _emprId = null;\n';
+    text = text + '     }else{\n';
+    text = text + "         _emprId = JSON.parse(localStorage.getItem('empresa')).id;\n";
+    text = text + '     }\n';
+    text = text + '     '+name+'  = {\n';
+    text = text + '             id : _id,\n';
+
     for(i=0;i < oField.length;i++){
-        text = text + '     this.'+oField[i].field.campo+' = _oObjet.'+oField[i].field.campo+';\n';
+        if(oField[i].field.campo != 'id')
+        text = text + '             '+oField[i].field.campo+' : _'+name+'.'+oField[i].field.campo+',\n';
                
     }
-    text = text + '     this.parentId       = _oObjet.parentId;\n';
-    text = text + '     this.emprId         = _oObjet.emprId;\n';
-    text = text + '     this.processId      = _oObjet.processId;\n';
-    text = text + '     this.tableEnumValue = _oObjet.tableEnumValue;\n';
-    text = text + '     this.modelAction    = _oObjet.modelAction;\n';
-    text = text + '     this.createUser     = $rootScope.user;\n';
-    text = text + '     this.createDateUTC  = (new Date()).getTime();\n';
-    text = text + '     this.modifyUser     = $rootScope.user;\n';
-    text = text + '     this.modifyDateUTC  = (new Date()).getTime();\n';
+
+    text = text + '             parentId       : 0,\n';
+    text = text + '             emprId         : _emprId,\n';
+    text = text + '             processId      : 0,\n';
+    text = text + '             tableEnumValue : 0,\n';
+    text = text + '             modelAction    : modelAction,\n';
+    text = text + '             createUser     : "System",\n';
+    text = text + '             createDateUTC  : (new Date()).getTime(),\n';
+    text = text + '             modifyUser     : "System",\n';
+    text = text + '             modifyDateUTC  : (new Date()).getTime()\n';
+    text = text + '\n';
+    text = text + '     }\n';
+    text = text + '     return '+name+';\n';
     text = text + '}\n';
     text = text + '\n';
+
 return text;
 }
 

@@ -606,7 +606,7 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 		{
 			MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_EMPRESA, empresa, response);
 
-			if (a > 0)
+			if (!ValidationUtil.isNullOrZero(empresa.getId()))
 			{
 				Status status = new Status();
 				status.setStatus(CdStatusTypeEnum.ANALISANDO);

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
 import com.qat.samples.sysmgmt.bac.IProcedureBAC;
-import com.qat.samples.sysmgmt.model.Procedure;
+import com.qat.samples.sysmgmt.model.NFNota;
 import com.qat.samples.sysmgmt.model.request.ProcedureMaintenanceRequest;
 import com.qat.samples.sysmgmt.model.response.ProcedureResponse;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
@@ -74,7 +74,7 @@ public class ProcedureAPIController extends BaseController {
 
 		try {
 			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().refreshProcedures(request);
+			InternalResultsResponse<NFNota> internalResponse = getProcedureBAC().refreshProcedures(request);
 			ResponseHandler.handleOperationStatusAndMessages(procedureResponse, internalResponse, true);
 		} catch (Exception ex) {
 			ResponseHandler.handleException(LOG, procedureResponse, ex, DEFAULT_EXCEPTION_MSG,
@@ -96,7 +96,7 @@ public class ProcedureAPIController extends BaseController {
 	public ProcedureResponse fetchProcedurePaged(@RequestBody PagedInquiryRequest request) {
 		ProcedureResponse procedureResponse = new ProcedureResponse();
 		try {
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().fetchProceduresByRequest(request);
+			InternalResultsResponse<NFNota> internalResponse = getProcedureBAC().fetchProceduresByRequest(request);
 			ResponseHandler.handleOperationStatusAndMessages(procedureResponse, internalResponse, true);
 		} catch (Exception ex) {
 			ResponseHandler.handleException(LOG, procedureResponse, ex, DEFAULT_EXCEPTION_MSG,
@@ -117,7 +117,7 @@ public class ProcedureAPIController extends BaseController {
 	public ProcedureResponse insertProcedure(@RequestBody ProcedureMaintenanceRequest request) {
 		ProcedureResponse procedureResponse = new ProcedureResponse();
 		try {
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().insertProcedure(request);
+			InternalResultsResponse<NFNota> internalResponse = getProcedureBAC().insertProcedure(request);
 			ResponseHandler.handleOperationStatusAndMessages(procedureResponse, internalResponse, true);
 		} catch (Exception ex) {
 			ResponseHandler.handleException(LOG, procedureResponse, ex, DEFAULT_EXCEPTION_MSG,
@@ -138,7 +138,7 @@ public class ProcedureAPIController extends BaseController {
 	public ProcedureResponse updateProcedure(@RequestBody ProcedureMaintenanceRequest request) {
 		ProcedureResponse procedureResponse = new ProcedureResponse();
 		try {
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().updateProcedure(request);
+			InternalResultsResponse<NFNota> internalResponse = getProcedureBAC().updateProcedure(request);
 			ResponseHandler.handleOperationStatusAndMessages(procedureResponse, internalResponse, true);
 		} catch (Exception ex) {
 			ResponseHandler.handleException(LOG, procedureResponse, ex, DEFAULT_EXCEPTION_MSG,
@@ -160,7 +160,7 @@ public class ProcedureAPIController extends BaseController {
 		ProcedureResponse procedureResponse = new ProcedureResponse();
 
 		try {
-			InternalResultsResponse<Procedure> internalResponse = getProcedureBAC().deleteProcedure(request);
+			InternalResultsResponse<NFNota> internalResponse = getProcedureBAC().deleteProcedure(request);
 			ResponseHandler.handleOperationStatusAndMessages(procedureResponse, internalResponse, true);
 		} catch (Exception ex) {
 			ResponseHandler.handleException(LOG, procedureResponse, ex, DEFAULT_EXCEPTION_MSG,

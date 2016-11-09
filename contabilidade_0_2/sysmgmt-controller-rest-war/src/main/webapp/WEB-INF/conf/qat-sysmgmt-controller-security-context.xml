@@ -36,6 +36,10 @@
 		<sec:intercept-url pattern="/procedure/api/insert" access="hasAnyRole('ROLE_DOMAIN_ADMINS')" />
 		<sec:intercept-url pattern="/procedure/api/delete" access="hasAnyRole('ROLE_DOMAIN_ADMINS')" />
 		<sec:intercept-url pattern="/procedure/api/update" access="hasAnyRole('ROLE_DOMAIN_ADMINS', 'ROLE_DOMAIN_USERS')" />
+		
+		<sec:intercept-url pattern="/vendas/api/nfSaidas/**" access="hasAnyRole('ROLE_DOMAIN_ADMINS')" />
+		
+		
 		<sec:intercept-url pattern="/entidade/api/empresa/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
 		<sec:intercept-url pattern="/entidade/api/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
 		<!-- All other urls/resources not listed above will fall here -->

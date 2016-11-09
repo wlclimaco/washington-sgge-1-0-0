@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
+import com.qat.samples.sysmgmt.bac.Nfe.INFeBAC;
 import com.qat.samples.sysmgmt.bac.Vendas.IVendasBAC;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
 import com.qat.samples.sysmgmt.nf.model.Orcamento;
@@ -24,6 +25,9 @@ import com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest;
 import com.qat.samples.sysmgmt.nf.model.request.OrcamentoMaintenanceRequest;
 import com.qat.samples.sysmgmt.nf.model.response.NotaFiscalSaidaResponse;
 import com.qat.samples.sysmgmt.nf.model.response.OrcamentoResponse;
+import com.qat.samples.sysmgmt.nfe.model.NFNota;
+import com.qat.samples.sysmgmt.nfe.request.NFNotaMaintenanceRequest;
+import com.qat.samples.sysmgmt.nfe.response.NFNotaResponse;
 import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoMaintenanceRequest;
@@ -45,6 +49,8 @@ public class VendasAPIController extends BaseController {
 	/** The vendas bac. */
 	private IVendasBAC vendasBAC; // injected by @Resource
 
+	private INFeBAC nfeBAC;
+
 	/**
 	 * Gets the vendas bac.
 	 *
@@ -63,6 +69,15 @@ public class VendasAPIController extends BaseController {
 	@Resource
 	public void setVendasBAC(IVendasBAC vendasBAC) {
 		this.vendasBAC = vendasBAC;
+	}
+
+	public INFeBAC getNfeBAC() {
+		return nfeBAC;
+	}
+
+	@Resource
+	public void setNfeBAC(INFeBAC nfeBAC) {
+		this.nfeBAC = nfeBAC;
 	}
 
 	// ===================================### NOTAFISCALSAIDA
@@ -127,10 +142,10 @@ public class VendasAPIController extends BaseController {
 	 */
 	@RequestMapping(value = "/nfSaidas/insert", method = RequestMethod.POST)
 	@ResponseBody
-	public NotaFiscalSaidaResponse insertNotaFiscalSaida(@RequestBody NotaFiscalSaidaMaintenanceRequest request) {
-		NotaFiscalSaidaResponse notafiscalsaidaResponse = new NotaFiscalSaidaResponse();
+	public NFNotaResponse insertNotaFiscalSaida(@RequestBody NFNotaMaintenanceRequest request) {
+		NFNotaResponse notafiscalsaidaResponse = new NFNotaResponse();
 		try {
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().insertNotaFiscalSaida(request);
+			InternalResultsResponse<NFNota> internalResponse = getNfeBAC().insertNFNota(request);
 			ResponseHandler.handleOperationStatusAndMessages(notafiscalsaidaResponse, internalResponse, true);
 		} catch (Exception ex) {
 			ResponseHandler.handleException(LOG, notafiscalsaidaResponse, ex, DEFAULT_EXCEPTION_MSG,
