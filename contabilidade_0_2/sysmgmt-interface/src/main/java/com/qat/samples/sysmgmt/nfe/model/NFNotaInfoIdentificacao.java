@@ -4,6 +4,7 @@ package com.qat.samples.sysmgmt.nfe.model;
 
 import java.util.List;
 
+import com.qat.samples.sysmgmt.condpag.model.FormaPg;
 import com.qat.samples.sysmgmt.estado.model.Estado;
 import com.qat.samples.sysmgmt.util.model.DoisValores;
 
@@ -26,7 +27,7 @@ public class NFNotaInfoIdentificacao extends NFBase
     private String naturezaoperacao;
 
     /** The econtabil formaPagamento for the NFNotaInfoIdentificacao. */
-    private DoisValores formapagamento;
+    private FormaPg formapagamento;
 
     /** The econtabil modelo for the NFNotaInfoIdentificacao. */
     private DoisValores modelo;
@@ -184,7 +185,7 @@ public void setNaturezaOperacao(String naturezaoperacao)
      *
      * @return the formapagamento
      */
-    public DoisValores getFormaPagamento()
+    public FormaPg getFormaPagamento()
     {
         return formapagamento;
     }
@@ -194,7 +195,7 @@ public void setNaturezaOperacao(String naturezaoperacao)
      *
 * @param id the formapagamento to set
  */
-public void setFormaPagamento(DoisValores formapagamento)
+public void setFormaPagamento(FormaPg formapagamento)
 {
         this.formapagamento = formapagamento;
     }
@@ -720,12 +721,12 @@ public void setReferenciadas(List<NFInfoReferenciada> referenciadas)
 	}
 
 
-	public DoisValores getFormapagamento() {
+	public FormaPg getFormapagamento() {
 		return formapagamento;
 	}
 
 
-	public void setFormapagamento(DoisValores formapagamento) {
+	public void setFormapagamento(FormaPg formapagamento) {
 		this.formapagamento = formapagamento;
 	}
 

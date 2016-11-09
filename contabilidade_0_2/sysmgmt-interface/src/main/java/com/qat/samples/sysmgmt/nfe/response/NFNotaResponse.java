@@ -6,7 +6,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.model.Procedure;
+import com.qat.samples.sysmgmt.nfe.model.NFNota;
 
 /**
  * The Model Object ProcedureResponse.
@@ -16,16 +16,16 @@ public class NFNotaResponse extends InquiryResponse
 
 	/** The procedures. */
 	@XmlElement(nillable = true)
-	private List<Procedure> procedures;
+	private List<NFNota> notas;
 
 	/**
 	 * Gets the procedures.
 	 * 
 	 * @return the procedures
 	 */
-	public List<Procedure> getProcedures()
+	public List<NFNota> getProcedures()
 	{
-		return procedures;
+		return notas;
 	}
 
 	/**
@@ -33,9 +33,9 @@ public class NFNotaResponse extends InquiryResponse
 	 * 
 	 * @param procedures the new procedures
 	 */
-	public void setProcedures(List<Procedure> procedures)
+	public void setProcedures(List<NFNota> procedures)
 	{
-		this.procedures = procedures;
+		this.notas = procedures;
 	}
 
 	/*
@@ -45,16 +45,14 @@ public class NFNotaResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setProcedures((List<Procedure>)coll);
+		setProcedures((List<NFNota>)coll);
 	}
 
 	@Override
-	public String toString()
-	{
-		// return some interesting information for logging/debugging
-		// avoid personally identifying information
-		return "ProcedureResponse [getProcedures()=" + getProcedures() + ", getResultsSetInfo()=" + getResultsSetInfo() + ", getMessageList()=" + getMessageList()
-				+ ", isOperationSuccess()=" + isOperationSuccess() + "]";
+	public String toString() {
+		return "NFNotaResponse [getProcedures()=" + getProcedures() + ", toString()=" + super.toString() + "]";
 	}
+
+	
 
 }

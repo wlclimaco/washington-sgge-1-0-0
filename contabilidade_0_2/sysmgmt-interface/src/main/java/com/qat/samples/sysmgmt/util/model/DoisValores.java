@@ -25,7 +25,7 @@ public class DoisValores extends ModelCosmeDamiao
 	private Pagina pagina;
 
 	/** The atributos. */
-	private DoisValorTypeEnum doisValorTypeEnum;
+	private DoisValorType doisValorType;
 
 	/**
 	 * Default constructor.
@@ -40,19 +40,7 @@ public class DoisValores extends ModelCosmeDamiao
 	}
 
 
-	public Integer getDoisValorTypeEnumValue()
-	{
-		if (doisValorTypeEnum != null)
-		{
-			return doisValorTypeEnum.getValue();
-		}
-		return null;
-	}
-
-	public void setDoisValorTypeEnumValue(Integer acaoTypeValue)
-	{
-		doisValorTypeEnum = DoisValorTypeEnum.enumForValue(acaoTypeValue);
-	}
+	
 	/**
 	 * Gets the id.
 	 *
@@ -89,12 +77,14 @@ public class DoisValores extends ModelCosmeDamiao
 		this.descricao = descricao;
 	}
 
-	public DoisValorTypeEnum getDoisValorTypeEnum() {
-		return doisValorTypeEnum;
+	
+
+	public DoisValorType getDoisValorType() {
+		return doisValorType;
 	}
 
-	public void setDoisValorTypeEnum(DoisValorTypeEnum doisValorTypeEnum) {
-		this.doisValorTypeEnum = doisValorTypeEnum;
+	public void setDoisValorType(DoisValorType doisValorType) {
+		this.doisValorType = doisValorType;
 	}
 
 	public Pagina getPagina() {
@@ -116,14 +106,9 @@ public class DoisValores extends ModelCosmeDamiao
 
 	@Override
 	public String toString() {
-		return "DoisValores [getDoisValorTypeEnumValue()=" + getDoisValorTypeEnumValue() + ", getId()=" + getId()
-				+ ", getNome()=" + getNome() + ", getDescricao()=" + getDescricao() + ", getDoisValorTypeEnum()="
-				+ getDoisValorTypeEnum() + ", getPagina()=" + getPagina() + ", getValue()=" + getValue()
-				+ ", toString()=" + super.toString() + "]";
+		return "DoisValores [getId()=" + getId() + ", getNome()=" + getNome() + ", getDescricao()=" + getDescricao()
+				+ ", getDoisValorType()=" + getDoisValorType() + ", getPagina()=" + getPagina() + ", getValue()="
+				+ getValue() + ", toString()=" + super.toString() + "]";
 	}
-
-
-
-
 
 }

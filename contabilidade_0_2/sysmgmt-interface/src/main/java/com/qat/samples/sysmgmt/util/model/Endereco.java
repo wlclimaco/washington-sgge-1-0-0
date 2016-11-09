@@ -26,7 +26,7 @@ public class Endereco extends ModelCosmeDamiao
 	/** The bairro. */
 	private String bairro;
 
-	private String pais;
+	private DoisValores pais;
 
 	/** The numero. */
 	private String numero;
@@ -275,11 +275,11 @@ public class Endereco extends ModelCosmeDamiao
 		this.codIbge = codIbge;
 	}
 
-	public String getPais() {
+	public DoisValores getPais() {
 		return pais;
 	}
 
-	public void setPais(String pais) {
+	public void setPais(DoisValores pais) {
 		this.pais = pais;
 	}
 

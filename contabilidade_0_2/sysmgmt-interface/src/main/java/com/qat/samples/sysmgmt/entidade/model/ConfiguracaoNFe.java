@@ -56,6 +56,8 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 	private Integer salvarSenha;
 
 	private Cfop cfopPadrao;
+	
+	private DoisValores modelo;
 
 
 	public ConfiguracaoNFe()
@@ -240,6 +242,14 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 		this.logoDanfe = logoDanfe;
 	}
 
+	public DoisValores getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(DoisValores modelo) {
+		this.modelo = modelo;
+	}
+
 	@Override
 	public String toString() {
 		return "ConfiguracaoNFe [getId()=" + getId() + ", getPresCompr()=" + getPresCompr() + ", getDestConsFinal()="
@@ -251,8 +261,7 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 				+ getcSC() + ", getInformacaoAdd()=" + getInformacaoAdd() + ", getCertificado()=" + getCertificado()
 				+ ", getSenha()=" + getSenha() + ", getSalvarSenha()=" + getSalvarSenha() + ", getCfopPadrao()="
 				+ getCfopPadrao() + ", getTokenNFCe()=" + getTokenNFCe() + ", getLogoDanfe()=" + getLogoDanfe()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", getModelo()=" + getModelo() + ", toString()=" + super.toString() + "]";
 	}
-
 
 }

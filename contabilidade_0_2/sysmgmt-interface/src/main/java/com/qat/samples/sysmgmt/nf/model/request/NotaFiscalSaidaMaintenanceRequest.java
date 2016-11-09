@@ -2,13 +2,14 @@ package com.qat.samples.sysmgmt.nf.model.request;
 
 import com.qat.framework.model.request.Request;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
+import com.qat.samples.sysmgmt.nfe.model.NFNota;
 import com.qat.samples.sysmgmt.util.model.request.UtilMaintenanceRequest;
 
 public class NotaFiscalSaidaMaintenanceRequest extends UtilMaintenanceRequest
 {
 
 	/** Attributes */
-	private NotaFiscalSaida notafiscal;
+	private NFNota notafiscal;
 
 	/**
 	 * The Constructor.
@@ -21,7 +22,7 @@ public class NotaFiscalSaidaMaintenanceRequest extends UtilMaintenanceRequest
 	/**
 	 * @return the notafiscalList
 	 */
-	public NotaFiscalSaida getNotafiscal()
+	public NFNota getNotafiscal()
 	{
 		return notafiscal;
 	}
@@ -29,7 +30,7 @@ public class NotaFiscalSaidaMaintenanceRequest extends UtilMaintenanceRequest
 	/**
 	 * @param notafiscalList the notafiscalList to set
 	 */
-	public void setNotafiscal(NotaFiscalSaida notafiscal)
+	public void setNotafiscal(NFNota notafiscal)
 	{
 		this.notafiscal = notafiscal;
 	}

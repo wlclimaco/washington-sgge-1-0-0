@@ -99,6 +99,7 @@ public class NotaFiscalItens extends ModelCosmeDamiao
     /** The econtabil numeroRECOPI for the NotaFiscalItens. */
     private Integer numerorecopi;
 
+    private Double quantidade;
 
 
     /**
@@ -786,6 +787,226 @@ public void setNumeroRECOPI(Integer numerorecopi)
     }
 
 
+	public Long getDatainicio() {
+		return datainicio;
+	}
+
+
+	public void setDatainicio(Long datainicio) {
+		this.datainicio = datainicio;
+	}
+
+
+	public Integer getServicoplanoenumvalue() {
+		return servicoplanoenumvalue;
+	}
+
+
+	public void setServicoplanoenumvalue(Integer servicoplanoenumvalue) {
+		this.servicoplanoenumvalue = servicoplanoenumvalue;
+	}
+
+
+	public Servico getServicolist() {
+		return servicolist;
+	}
+
+
+	public void setServicolist(Servico servicolist) {
+		this.servicolist = servicolist;
+	}
+
+
+	public Plano getPlanolist() {
+		return planolist;
+	}
+
+
+	public void setPlanolist(Plano planolist) {
+		this.planolist = planolist;
+	}
+
+
+	public String getNumeroregistro() {
+		return numeroregistro;
+	}
+
+
+	public void setNumeroregistro(String numeroregistro) {
+		this.numeroregistro = numeroregistro;
+	}
+
+
+	public Long getDataregistro() {
+		return dataregistro;
+	}
+
+
+	public void setDataregistro(Long dataregistro) {
+		this.dataregistro = dataregistro;
+	}
+
+
+	public String getLocaldesembaraco() {
+		return localdesembaraco;
+	}
+
+
+	public void setLocaldesembaraco(String localdesembaraco) {
+		this.localdesembaraco = localdesembaraco;
+	}
+
+
+	public Estado getUfdesembaraco() {
+		return ufdesembaraco;
+	}
+
+
+	public void setUfdesembaraco(Estado ufdesembaraco) {
+		this.ufdesembaraco = ufdesembaraco;
+	}
+
+
+	public Long getDatadesembaraco() {
+		return datadesembaraco;
+	}
+
+
+	public void setDatadesembaraco(Long datadesembaraco) {
+		this.datadesembaraco = datadesembaraco;
+	}
+
+
+	public Integer getTransporteinternacional() {
+		return transporteinternacional;
+	}
+
+
+	public void setTransporteinternacional(Integer transporteinternacional) {
+		this.transporteinternacional = transporteinternacional;
+	}
+
+
+	public Double getValorafrmm() {
+		return valorafrmm;
+	}
+
+
+	public void setValorafrmm(Double valorafrmm) {
+		this.valorafrmm = valorafrmm;
+	}
+
+
+	public Integer getTpintermedio() {
+		return tpintermedio;
+	}
+
+
+	public void setTpintermedio(Integer tpintermedio) {
+		this.tpintermedio = tpintermedio;
+	}
+
+
+	public Integer getUfterceiro() {
+		return ufterceiro;
+	}
+
+
+	public void setUfterceiro(Integer ufterceiro) {
+		this.ufterceiro = ufterceiro;
+	}
+
+
+	public Integer getCodigoexportador() {
+		return codigoexportador;
+	}
+
+
+	public void setCodigoexportador(Integer codigoexportador) {
+		this.codigoexportador = codigoexportador;
+	}
+
+
+	public Double getValorunitario() {
+		return valorunitario;
+	}
+
+
+	public void setValorunitario(Double valorunitario) {
+		this.valorunitario = valorunitario;
+	}
+
+
+	public Double getValortotalbruto() {
+		return valortotalbruto;
+	}
+
+
+	public void setValortotalbruto(Double valortotalbruto) {
+		this.valortotalbruto = valortotalbruto;
+	}
+
+
+	public Double getValorfrete() {
+		return valorfrete;
+	}
+
+
+	public void setValorfrete(Double valorfrete) {
+		this.valorfrete = valorfrete;
+	}
+
+
+	public Double getValorseguro() {
+		return valorseguro;
+	}
+
+
+	public void setValorseguro(Double valorseguro) {
+		this.valorseguro = valorseguro;
+	}
+
+
+	public Double getValordesconto() {
+		return valordesconto;
+	}
+
+
+	public void setValordesconto(Double valordesconto) {
+		this.valordesconto = valordesconto;
+	}
+
+
+	public Double getValoroutrasdespesasacessorias() {
+		return valoroutrasdespesasacessorias;
+	}
+
+
+	public void setValoroutrasdespesasacessorias(Double valoroutrasdespesasacessorias) {
+		this.valoroutrasdespesasacessorias = valoroutrasdespesasacessorias;
+	}
+
+
+	public Integer getNumerorecopi() {
+		return numerorecopi;
+	}
+
+
+	public void setNumerorecopi(Integer numerorecopi) {
+		this.numerorecopi = numerorecopi;
+	}
+
+
+	public Double getQuantidade() {
+		return quantidade;
+	}
+
+
+	public void setQuantidade(Double quantidade) {
+		this.quantidade = quantidade;
+	}
+
+
 	@Override
 	public String toString() {
 		return "NotaFiscalItens [getId()=" + getId() + ", getDataInicio()=" + getDataInicio() + ", getValor()="
@@ -801,7 +1022,18 @@ public void setNumeroRECOPI(Integer numerorecopi)
 				+ getValorTotalBruto() + ", getValorFrete()=" + getValorFrete() + ", getValorSeguro()="
 				+ getValorSeguro() + ", getValorDesconto()=" + getValorDesconto()
 				+ ", getValorOutrasDespesasAcessorias()=" + getValorOutrasDespesasAcessorias() + ", getNumeroRECOPI()="
-				+ getNumeroRECOPI() + ", toString()=" + super.toString() + "]";
+				+ getNumeroRECOPI() + ", getDatainicio()=" + getDatainicio() + ", getServicoplanoenumvalue()="
+				+ getServicoplanoenumvalue() + ", getServicolist()=" + getServicolist() + ", getPlanolist()="
+				+ getPlanolist() + ", getNumeroregistro()=" + getNumeroregistro() + ", getDataregistro()="
+				+ getDataregistro() + ", getLocaldesembaraco()=" + getLocaldesembaraco() + ", getUfdesembaraco()="
+				+ getUfdesembaraco() + ", getDatadesembaraco()=" + getDatadesembaraco()
+				+ ", getTransporteinternacional()=" + getTransporteinternacional() + ", getValorafrmm()="
+				+ getValorafrmm() + ", getTpintermedio()=" + getTpintermedio() + ", getUfterceiro()=" + getUfterceiro()
+				+ ", getCodigoexportador()=" + getCodigoexportador() + ", getValorunitario()=" + getValorunitario()
+				+ ", getValortotalbruto()=" + getValortotalbruto() + ", getValorfrete()=" + getValorfrete()
+				+ ", getValorseguro()=" + getValorseguro() + ", getValordesconto()=" + getValordesconto()
+				+ ", getValoroutrasdespesasacessorias()=" + getValoroutrasdespesasacessorias() + ", getNumerorecopi()="
+				+ getNumerorecopi() + ", getQuantidade()=" + getQuantidade() + ", toString()=" + super.toString() + "]";
 	}
 
 

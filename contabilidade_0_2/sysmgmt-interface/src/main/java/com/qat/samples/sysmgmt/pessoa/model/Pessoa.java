@@ -6,6 +6,7 @@ import com.qat.samples.sysmgmt.banco.model.BancoPessoa;
 import com.qat.samples.sysmgmt.condpag.model.CondPagPessoa;
 import com.qat.samples.sysmgmt.condpag.model.FormaPgPessoa;
 import com.qat.samples.sysmgmt.contato.model.Contato;
+import com.qat.samples.sysmgmt.fiscal.model.Regime;
 import com.qat.samples.sysmgmt.util.model.Documento;
 import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.Endereco;
@@ -45,6 +46,8 @@ public class Pessoa extends ModelCosmeDamiao
 
 	/** The sexo. */
 	private Integer sexo;
+	
+	private Regime regime;
 
 	/** The enderecos. */
 	private List<Endereco> enderecos;
@@ -404,6 +407,14 @@ public class Pessoa extends ModelCosmeDamiao
 		this.nomeFantasia = nomeFantasia;
 	}
 
+	public Regime getRegime() {
+		return regime;
+	}
+
+	public void setRegime(Regime regime) {
+		this.regime = regime;
+	}
+
 	@Override
 	public String toString() {
 		return "Pessoa [getPessoaTypeEnumValue()=" + getPessoaTypeEnumValue() + ", getId()=" + getId() + ", getNome()="
@@ -414,8 +425,8 @@ public class Pessoa extends ModelCosmeDamiao
 				+ ", getEnderecos()=" + getEnderecos() + ", getDocumentos()=" + getDocumentos() + ", getEmails()="
 				+ getEmails() + ", getTelefones()=" + getTelefones() + ", getBancos()=" + getBancos()
 				+ ", getFormaPagamentoList()=" + getFormaPagamentoList() + ", getCondPagList()=" + getCondPagList()
-				+ ", getTipoPessoa()=" + getTipoPessoa() + ", getNomeFantasia()=" + getNomeFantasia() + ", toString()="
-				+ super.toString() + "]";
+				+ ", getTipoPessoa()=" + getTipoPessoa() + ", getNomeFantasia()=" + getNomeFantasia() + ", getRegime()="
+				+ getRegime() + ", toString()=" + super.toString() + "]";
 	}
 
 }
