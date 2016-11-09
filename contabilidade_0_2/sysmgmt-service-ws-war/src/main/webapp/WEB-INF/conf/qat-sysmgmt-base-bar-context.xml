@@ -46,6 +46,9 @@
 		<property name="historicoBAR" ref="historicoBARTarget" />
 		<property name="statusBAR" ref="statusBARTarget" />
 		<property name="financeiroBAR" ref="financeiroBARTarget" />
+				<property name="enderecoBAR" ref="enderecoBARTarget" />
+		<property name="telefoneBAR" ref="telefoneBARTarget" />
+		<property name="emailBAR" ref="emailBARTarget" />
 	</bean>
 
 	<bean id="cadastroBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Cadastros.CadastrosBARImpl">
