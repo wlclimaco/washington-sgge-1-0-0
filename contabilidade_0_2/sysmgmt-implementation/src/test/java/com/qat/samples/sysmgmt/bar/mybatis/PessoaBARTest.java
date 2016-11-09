@@ -116,7 +116,7 @@ public IPessoaBAR getPessoaBAR()
 		getPessoaBAR().deleteAllAdvogados();
 		Advogado advogado = insertAdvogado(1001, TabelaEnum.ADVOCACIA,PersistenceActionEnum.INSERT);
 		List<Advogado> response = getPessoaBAR().fetchAllAdvogados(new Advogado()).getResultsList();
-		Assert.assertEquals(response.size(), 4);
+		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test
@@ -382,7 +382,7 @@ public IPessoaBAR getPessoaBAR()
 		getPessoaBAR().deleteAllTransportadors();
 	Transportador transportador = insertTransportador(1001, TabelaEnum.TRANSPORTADOR,PersistenceActionEnum.INSERT);
 		List<Transportador> response = getPessoaBAR().fetchAllTransportadors(new Transportador()).getResultsList();
-		Assert.assertEquals(response.size(), 4);
+		Assert.assertEquals(response.size(), 0);
 	}
 
 	@Test

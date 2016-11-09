@@ -653,7 +653,7 @@ public IEmpresaBAR getEmpresaBAR()
 			getEmpresaBAR().deleteAllAdvocacias();
 			Advocacia advocacia = new Advocacia();
 			List<Advocacia> response = getEmpresaBAR().fetchAllAdvocacias(new Advocacia()).getResultsList();
-			Assert.assertEquals(response.size(), 6);
+			Assert.assertEquals(response.size(), 0);
 		}
 
 		@Test
@@ -910,9 +910,9 @@ public IEmpresaBAR getEmpresaBAR()
 	@Test
 		public void testDeletePagina()
 		{
-			Pagina pagina = Objects.insertPagina(4, TabelaEnum.PAGINA, PersistenceActionEnum.INSERT);
+			Pagina pagina = Objects.insertPagina(4001, TabelaEnum.PAGINA, PersistenceActionEnum.INSERT);
 			FetchByIdRequest request = new FetchByIdRequest();
-			request.setFetchId(4);
+			request.setFetchId(4001);
 			Pagina paginaResponse = getEmpresaBAR().fetchPaginaById(request);
 			Assert.assertEquals(paginaResponse, null);
 			getEmpresaBAR().insertPagina(pagina);

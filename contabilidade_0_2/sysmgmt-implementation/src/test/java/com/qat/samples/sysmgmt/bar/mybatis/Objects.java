@@ -123,7 +123,7 @@ import com.qat.samples.sysmgmt.site.model.ServicoAndPlano;
 import com.qat.samples.sysmgmt.site.model.Site;
 import com.qat.samples.sysmgmt.util.model.Cidade;
 import com.qat.samples.sysmgmt.util.model.Documento;
-import com.qat.samples.sysmgmt.util.model.DoisValorTypeEnum;
+import com.qat.samples.sysmgmt.util.model.DoisValorType;
 import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.Endereco;
@@ -2642,7 +2642,7 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		doisvalor.setId(id);
 		doisvalor.setNome("nome_1 - " + action.toString());
 		doisvalor.setDescricao("descricao_2 - " + action.toString());
-		doisvalor.setDoisValorTypeEnum(DoisValorTypeEnum.COMPRAS);
+		doisvalor.setDoisValorType(new DoisValorType(1));
 		doisvalor.setTabelaEnum(tabela);
 		doisvalor.setParentId(id);
 		doisvalor.setEmprId(EMPID);

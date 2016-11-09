@@ -3200,7 +3200,7 @@ public INFeBAR getNFeBAR()
 			nfnotainfoidentificacao.setUf(Objects.insertEstado(null, tabela, action));
 			nfnotainfoidentificacao.setCodigoRandomico("NATIVE INSERT UPDATE");
 			nfnotainfoidentificacao.setNaturezaOperacao("NATIVE INSERT UPDATE");
-			nfnotainfoidentificacao.setFormaPagamento(Objects.insertDoisValor(id, tabela, action));
+		//	nfnotainfoidentificacao.setFormaPagamento(Objects.insertDoisValor(id, tabela, action));
 			nfnotainfoidentificacao.setModelo(Objects.insertDoisValor(id, tabela, action));
 			nfnotainfoidentificacao.setSerie("NATIVE INSERT UPDATE");
 			nfnotainfoidentificacao.setNumeroNota("NATIVE INSERT UPDATE");

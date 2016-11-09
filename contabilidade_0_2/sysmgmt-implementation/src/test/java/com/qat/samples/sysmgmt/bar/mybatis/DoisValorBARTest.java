@@ -103,6 +103,7 @@ public class DoisValorBARTest extends AbstractTransactionalJUnit4SpringContextTe
 		request.setPreQueryCount(true);
 		request.setStartPage(1);
 		request.setPageSize(3);
+		request.setDoisValorType(10001);
 		response = getDoisValorBAR().fetchDoisValoressByRequest(request);
 		// Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);

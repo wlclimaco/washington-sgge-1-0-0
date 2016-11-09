@@ -38,6 +38,7 @@
     <result property="valorDesconto" column="valorDesconto"/>
     <result property="valorOutrasDespesasAcessorias" column="valorOutrasDespesasAcessorias"/>
     <result property="numeroRECOPI" column="numeroRECOPI"/>
+    <result property="quantidade" column="quantidade"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -77,6 +78,7 @@ dataInicio
 ,valorDesconto
 ,valorOutrasDespesasAcessorias
 ,numeroRECOPI
+,quantidade
 ,parentId
 ,tabelaEnumValue
 ,emprId
@@ -112,6 +114,7 @@ dataInicio
 #{valorDesconto},
 #{valorOutrasDespesasAcessorias},
 #{numeroRECOPI},
+#{quantidade},
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -181,6 +184,7 @@ dataInicio
 <if test="valorDesconto!= null">valorDesconto = #{valorDesconto},</if>
 <if test="valorOutrasDespesasAcessorias!= null">valorOutrasDespesasAcessorias = #{valorOutrasDespesasAcessorias},</if>
 <if test="numeroRECOPI!= null">numeroRECOPI = #{numeroRECOPI},</if>
+<if test="quantidade!= null">quantidade = #{quantidade},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>
