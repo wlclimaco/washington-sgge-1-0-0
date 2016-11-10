@@ -21,7 +21,6 @@
     <result property="perICMSUFDest" column="perICMSUFDest"/>
     <result property="vrBaseCalcUFDest" column="vrBaseCalcUFDest"/>
     <result property="aliqIntUFDest" column="aliqIntUFDest"/>
-
     <result property="vrICMSPartUFDest" column="vrICMSPartUFDest"/>
     <result property="vrICMSPartUFReme" column="vrICMSPartUFReme"/>
     <result property="vrICMSRelFCPUFDest" column="vrICMSRelFCPUFDest"/>

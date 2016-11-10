@@ -16,7 +16,7 @@ public class ICMSOpInter extends ModelCosmeDamiao
 
     /** The econtabil id for the ICMSOpInter. */
     private Integer id;
-    
+
     private Integer prodId;
 
     /** The econtabil perICMSUFDest for the ICMSOpInter. */
@@ -141,7 +141,7 @@ public class ICMSOpInter extends ModelCosmeDamiao
 
 
 
-	
+
 
 
 	public Double getVrICMSRelFCPUFDest() {
@@ -166,8 +166,6 @@ public class ICMSOpInter extends ModelCosmeDamiao
 		this.prodId = prodId;
 	}
 
-
-
 	/**
      * Default constructor.
      */
@@ -175,7 +173,6 @@ public class ICMSOpInter extends ModelCosmeDamiao
     {
         super();
     }
-
 
 
 	@Override

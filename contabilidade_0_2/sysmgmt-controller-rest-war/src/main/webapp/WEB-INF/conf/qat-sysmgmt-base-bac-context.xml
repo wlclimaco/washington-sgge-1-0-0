@@ -20,11 +20,6 @@
 		<property name="siteBAR" ref="siteBARTarget"/>
 		<property name="validationController" ref="countyValidationController"/>
 	</bean>
-	
-	<bean id="nfeBACTarget" class="com.qat.samples.sysmgmt.bac.Nfe.NFeBACImpl">
-		<property name="nfeBAR" ref="nfeBARTarget"/>
-		<property name="validationController" ref="countyValidationController"/>
-	</bean>
 
 	<bean id="empresaBACTarget" class="com.qat.samples.sysmgmt.bac.Empresa.EmpresaBACImpl">
 		<property name="empresaBAR" ref="empresaBARTarget"/>

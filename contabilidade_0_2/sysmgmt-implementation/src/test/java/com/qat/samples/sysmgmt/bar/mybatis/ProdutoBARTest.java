@@ -1570,7 +1570,7 @@ public IProdutoBAR getProdutoBAR()
 			Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 		}
-		
+
 	@Before
 	public void setup()
 	{
@@ -1608,7 +1608,6 @@ public IProdutoBAR getProdutoBAR()
 		icmsopinter.setPercProvPart(Objects.insertDoisValor(id, tabela, action));
 		icmsopinter.setVrICMSPartUFDest(new Double(10.00));
 		icmsopinter.setVrICMSPartUFReme(new Double(10.00));
-		icmsopinter.setVrICMSPartUFRemet(new Double(10.00));
 		icmsopinter.setParentId(id);
 		icmsopinter.setEmprId(1);
 		icmsopinter.setModifyDateUTC(a.getTime());
