@@ -186,6 +186,7 @@
 
 	<bean id="dicionarioBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Dicionario.DicionarioBARImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+		
 	</bean>
 
 

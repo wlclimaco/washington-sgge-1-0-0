@@ -67,7 +67,7 @@
 	</bean>
 
 	<bean id="vendasBACTarget" class="org.mockito.Mockito" factory-method="mock">
-		<constructor-arg value="com.qat.samples.sysmgmt.bac.Vendas.IVendasBAC" />
+		<constructor-arg value="com.qat.samples.sysmgmt.bac.Nfe.INFeBAC" />
 	</bean>
 
 	<bean id="produtoBACTarget" class="org.mockito.Mockito" factory-method="mock">

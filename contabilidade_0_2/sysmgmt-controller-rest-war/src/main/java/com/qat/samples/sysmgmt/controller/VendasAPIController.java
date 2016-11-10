@@ -47,29 +47,29 @@ public class VendasAPIController extends BaseController {
 	private static final Logger LOG = LoggerFactory.getLogger(VendasAPIController.class);
 
 	/** The vendas bac. */
-	private IVendasBAC vendasBAC; // injected by @Resource
+	// private IVendasBAC vendasBAC; // injected by @Resource
 
 	private INFeBAC nfeBAC;
 
-	/**
-	 * Gets the vendas bac.
-	 *
-	 * @return the vendas bac
-	 */
-	public IVendasBAC getVendasBAC() {
-		return vendasBAC;
-	}
-
-	/**
-	 * Sets the vendas bac.
-	 *
-	 * @param vendasBAC
-	 *            the new vendas bac
-	 */
-	@Resource
-	public void setVendasBAC(IVendasBAC vendasBAC) {
-		this.vendasBAC = vendasBAC;
-	}
+	// /**
+	// * Gets the vendas bac.
+	// *
+	// * @return the vendas bac
+	// */
+	// public IVendasBAC getVendasBAC() {
+	// return vendasBAC;
+	// }
+	//
+	// /**
+	// * Sets the vendas bac.
+	// *
+	// * @param vendasBAC
+	// * the new vendas bac
+	// */
+	// @Resource
+	// public void setVendasBAC(IVendasBAC vendasBAC) {
+	// this.vendasBAC = vendasBAC;
+	// }
 
 	public INFeBAC getNfeBAC() {
 		return nfeBAC;
@@ -82,56 +82,69 @@ public class VendasAPIController extends BaseController {
 
 	// ===================================### NOTAFISCALSAIDA
 	// ####======================================
-	/**
-	 * Refresh notafiscalsaidas.
-	 *
-	 * @param refreshInt
-	 *            the refresh int
-	 * @param retList
-	 *            the ret list
-	 * @param retPaged
-	 *            the ret paged
-	 * @return the notafiscalsaida response
-	 */
-	@RequestMapping(value = "/nfSaidas/refresh", method = RequestMethod.GET)
-	@ResponseBody
-	public NotaFiscalSaidaResponse refreshNotaFiscalSaidas(@RequestParam("refreshInt") Integer refreshInt,
-			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
-		NotaFiscalSaidaResponse notafiscalsaidaResponse = new NotaFiscalSaidaResponse();
-
-		try {
-			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().refreshNotaFiscalSaidas(request);
-			ResponseHandler.handleOperationStatusAndMessages(notafiscalsaidaResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, notafiscalsaidaResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return notafiscalsaidaResponse;
-
-	}
-
-	/**
-	 * Fetch notafiscalsaida paged.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the notafiscalsaida response
-	 */
-	@RequestMapping(value = "/nfSaidas/fetchPage", method = RequestMethod.POST)
-	@ResponseBody
-	public NotaFiscalSaidaResponse fetchNotaFiscalSaidaPaged(@RequestBody NotaFiscalInquiryRequest request) {
-		NotaFiscalSaidaResponse notafiscalsaidaResponse = new NotaFiscalSaidaResponse();
-		try {
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC()
-					.fetchNotaFiscalSaidasByRequest(request);
-			ResponseHandler.handleOperationStatusAndMessages(notafiscalsaidaResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, notafiscalsaidaResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return notafiscalsaidaResponse;
-	}
+	// /**
+	// * Refresh notafiscalsaidas.
+	// *
+	// * @param refreshInt
+	// * the refresh int
+	// * @param retList
+	// * the ret list
+	// * @param retPaged
+	// * the ret paged
+	// * @return the notafiscalsaida response
+	// */
+	// @RequestMapping(value = "/nfSaidas/refresh", method = RequestMethod.GET)
+	// @ResponseBody
+	// public NotaFiscalSaidaResponse
+	// refreshNotaFiscalSaidas(@RequestParam("refreshInt") Integer refreshInt,
+	// @RequestParam("retList") Boolean retList, @RequestParam("retPaged")
+	// Boolean retPaged) {
+	// NotaFiscalSaidaResponse notafiscalsaidaResponse = new
+	// NotaFiscalSaidaResponse();
+	//
+	// try {
+	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
+	// retPaged);
+	// InternalResultsResponse<NotaFiscalSaida> internalResponse =
+	// getVendasBAC().refreshNotaFiscalSaidas(request);
+	// ResponseHandler.handleOperationStatusAndMessages(notafiscalsaidaResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, notafiscalsaidaResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return notafiscalsaidaResponse;
+	//
+	// }
+	//
+	// /**
+	// * Fetch notafiscalsaida paged.
+	// *
+	// * @param request
+	// * the request
+	// * @return the notafiscalsaida response
+	// */
+	// @RequestMapping(value = "/nfSaidas/fetchPage", method =
+	// RequestMethod.POST)
+	// @ResponseBody
+	// public NotaFiscalSaidaResponse fetchNotaFiscalSaidaPaged(@RequestBody
+	// NotaFiscalInquiryRequest request) {
+	// NotaFiscalSaidaResponse notafiscalsaidaResponse = new
+	// NotaFiscalSaidaResponse();
+	// try {
+	// InternalResultsResponse<NotaFiscalSaida> internalResponse =
+	// getVendasBAC()
+	// .fetchNotaFiscalSaidasByRequest(request);
+	// ResponseHandler.handleOperationStatusAndMessages(notafiscalsaidaResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, notafiscalsaidaResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return notafiscalsaidaResponse;
+	// }
 
 	/**
 	 * Insert notafiscalsaida.
@@ -153,284 +166,343 @@ public class VendasAPIController extends BaseController {
 		}
 		return notafiscalsaidaResponse;
 	}
-
-	/**
-	 * Update notafiscalsaida.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the notafiscalsaida response
-	 */
-	@RequestMapping(value = "/nfSaidas/update", method = RequestMethod.POST)
-	@ResponseBody
-	public NotaFiscalSaidaResponse updateNotaFiscalSaida(@RequestBody NotaFiscalSaidaMaintenanceRequest request) {
-		NotaFiscalSaidaResponse notafiscalsaidaResponse = new NotaFiscalSaidaResponse();
-		try {
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().updateNotaFiscalSaida(request);
-			ResponseHandler.handleOperationStatusAndMessages(notafiscalsaidaResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, notafiscalsaidaResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return notafiscalsaidaResponse;
-	}
-
-	/**
-	 * Delete notafiscalsaida.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the notafiscalsaida response
-	 */
-	@RequestMapping(value = "/nfSaidas/delete", method = RequestMethod.POST)
-	@ResponseBody
-	public NotaFiscalSaidaResponse deleteNotaFiscalSaida(@RequestBody NotaFiscalSaidaMaintenanceRequest request) {
-		NotaFiscalSaidaResponse notafiscalsaidaResponse = new NotaFiscalSaidaResponse();
-
-		try {
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().deleteNotaFiscalSaida(request);
-			ResponseHandler.handleOperationStatusAndMessages(notafiscalsaidaResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, notafiscalsaidaResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return notafiscalsaidaResponse;
-
-	}
-
-	// ===================================### ORCAMENTO
-	// ####======================================
-	/**
-	 * Refresh orcamentos.
-	 *
-	 * @param refreshInt
-	 *            the refresh int
-	 * @param retList
-	 *            the ret list
-	 * @param retPaged
-	 *            the ret paged
-	 * @return the orcamento response
-	 */
-	@RequestMapping(value = "/orcamento/refresh", method = RequestMethod.GET)
-	@ResponseBody
-	public OrcamentoResponse refreshOrcamentos(@RequestParam("refreshInt") Integer refreshInt,
-			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
-		OrcamentoResponse orcamentoResponse = new OrcamentoResponse();
-
-		try {
-			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
-			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().refreshOrcamentos(request);
-			ResponseHandler.handleOperationStatusAndMessages(orcamentoResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, orcamentoResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return orcamentoResponse;
-
-	}
-
-	/**
-	 * Fetch orcamento paged.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the orcamento response
-	 */
-	@RequestMapping(value = "/orcamento/fetchPage", method = RequestMethod.POST)
-	@ResponseBody
-	public OrcamentoResponse fetchOrcamentoPaged(@RequestBody OrcamentoInquiryRequest request) {
-		OrcamentoResponse orcamentoResponse = new OrcamentoResponse();
-		try {
-			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().fetchOrcamentosByRequest(request);
-			ResponseHandler.handleOperationStatusAndMessages(orcamentoResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, orcamentoResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return orcamentoResponse;
-	}
-
-	/**
-	 * Insert orcamento.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the orcamento response
-	 */
-	@RequestMapping(value = "/orcamento/insert", method = RequestMethod.POST)
-	@ResponseBody
-	public OrcamentoResponse insertOrcamento(@RequestBody OrcamentoMaintenanceRequest request) {
-		OrcamentoResponse orcamentoResponse = new OrcamentoResponse();
-		try {
-			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().insertOrcamento(request);
-			ResponseHandler.handleOperationStatusAndMessages(orcamentoResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, orcamentoResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return orcamentoResponse;
-	}
-
-	/**
-	 * Update orcamento.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the orcamento response
-	 */
-	@RequestMapping(value = "/orcamento/update", method = RequestMethod.POST)
-	@ResponseBody
-	public OrcamentoResponse updateOrcamento(@RequestBody OrcamentoMaintenanceRequest request) {
-		OrcamentoResponse orcamentoResponse = new OrcamentoResponse();
-		try {
-			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().updateOrcamento(request);
-			ResponseHandler.handleOperationStatusAndMessages(orcamentoResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, orcamentoResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return orcamentoResponse;
-	}
-
-	/**
-	 * Delete orcamento.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the orcamento response
-	 */
-	@RequestMapping(value = "/orcamento/delete", method = RequestMethod.POST)
-	@ResponseBody
-	public OrcamentoResponse deleteOrcamento(@RequestBody OrcamentoMaintenanceRequest request) {
-		OrcamentoResponse orcamentoResponse = new OrcamentoResponse();
-
-		try {
-			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().deleteOrcamento(request);
-			ResponseHandler.handleOperationStatusAndMessages(orcamentoResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, orcamentoResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return orcamentoResponse;
-
-	}
-
-	// ===================================### ORDEMSERVICO
-	// ####======================================
-	/**
-	 * Refresh ordemservicos.
-	 *
-	 * @param refreshInt
-	 *            the refresh int
-	 * @param retList
-	 *            the ret list
-	 * @param retPaged
-	 *            the ret paged
-	 * @return the ordemservico response
-	 */
-	@RequestMapping(value = "/ordemServico/refresh", method = RequestMethod.GET)
-	@ResponseBody
-	public OrdemServicoResponse refreshOrdemServicos(@RequestParam("refreshInt") Integer refreshInt,
-			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
-		OrdemServicoResponse ordemservicoResponse = new OrdemServicoResponse();
-
-		try {
-			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
-			InternalResultsResponse<OrdemServico> internalResponse = getVendasBAC().refreshOrdemServicos(request);
-			ResponseHandler.handleOperationStatusAndMessages(ordemservicoResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, ordemservicoResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return ordemservicoResponse;
-
-	}
-
-	/**
-	 * Fetch ordemservico paged.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the ordemservico response
-	 */
-	@RequestMapping(value = "/ordemServico/fetchPage", method = RequestMethod.POST)
-	@ResponseBody
-	public OrdemServicoResponse fetchOrdemServicoPaged(@RequestBody OrdemServicoInquiryRequest request) {
-		OrdemServicoResponse ordemservicoResponse = new OrdemServicoResponse();
-		try {
-			InternalResultsResponse<OrdemServico> internalResponse = getVendasBAC()
-					.fetchOrdemServicosByRequest(request);
-			ResponseHandler.handleOperationStatusAndMessages(ordemservicoResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, ordemservicoResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return ordemservicoResponse;
-	}
-
-	/**
-	 * Insert ordemservico.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the ordemservico response
-	 */
-	@RequestMapping(value = "/ordemServico/insert", method = RequestMethod.POST)
-	@ResponseBody
-	public OrdemServicoResponse insertOrdemServico(@RequestBody OrdemServicoMaintenanceRequest request) {
-		OrdemServicoResponse ordemservicoResponse = new OrdemServicoResponse();
-		try {
-			InternalResultsResponse<OrdemServico> internalResponse = getVendasBAC().insertOrdemServico(request);
-			ResponseHandler.handleOperationStatusAndMessages(ordemservicoResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, ordemservicoResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return ordemservicoResponse;
-	}
-
-	/**
-	 * Update ordemservico.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the ordemservico response
-	 */
-	@RequestMapping(value = "/ordemServico/update", method = RequestMethod.POST)
-	@ResponseBody
-	public OrdemServicoResponse updateOrdemServico(@RequestBody OrdemServicoMaintenanceRequest request) {
-		OrdemServicoResponse ordemservicoResponse = new OrdemServicoResponse();
-		try {
-			InternalResultsResponse<OrdemServico> internalResponse = getVendasBAC().updateOrdemServico(request);
-			ResponseHandler.handleOperationStatusAndMessages(ordemservicoResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, ordemservicoResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return ordemservicoResponse;
-	}
-
-	/**
-	 * Delete ordemservico.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the ordemservico response
-	 */
-	@RequestMapping(value = "/ordemServico/delete", method = RequestMethod.POST)
-	@ResponseBody
-	public OrdemServicoResponse deleteOrdemServico(@RequestBody OrdemServicoMaintenanceRequest request) {
-		OrdemServicoResponse ordemservicoResponse = new OrdemServicoResponse();
-
-		try {
-			InternalResultsResponse<OrdemServico> internalResponse = getVendasBAC().deleteOrdemServico(request);
-			ResponseHandler.handleOperationStatusAndMessages(ordemservicoResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, ordemservicoResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return ordemservicoResponse;
-
-	}
+	//
+	// /**
+	// * Update notafiscalsaida.
+	// *
+	// * @param request
+	// * the request
+	// * @return the notafiscalsaida response
+	// */
+	// @RequestMapping(value = "/nfSaidas/update", method = RequestMethod.POST)
+	// @ResponseBody
+	// public NotaFiscalSaidaResponse updateNotaFiscalSaida(@RequestBody
+	// NotaFiscalSaidaMaintenanceRequest request) {
+	// NotaFiscalSaidaResponse notafiscalsaidaResponse = new
+	// NotaFiscalSaidaResponse();
+	// try {
+	// InternalResultsResponse<NotaFiscalSaida> internalResponse =
+	// getVendasBAC().updateNotaFiscalSaida(request);
+	// ResponseHandler.handleOperationStatusAndMessages(notafiscalsaidaResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, notafiscalsaidaResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return notafiscalsaidaResponse;
+	// }
+	//
+	// /**
+	// * Delete notafiscalsaida.
+	// *
+	// * @param request
+	// * the request
+	// * @return the notafiscalsaida response
+	// */
+	// @RequestMapping(value = "/nfSaidas/delete", method = RequestMethod.POST)
+	// @ResponseBody
+	// public NotaFiscalSaidaResponse deleteNotaFiscalSaida(@RequestBody
+	// NotaFiscalSaidaMaintenanceRequest request) {
+	// NotaFiscalSaidaResponse notafiscalsaidaResponse = new
+	// NotaFiscalSaidaResponse();
+	//
+	// try {
+	// InternalResultsResponse<NotaFiscalSaida> internalResponse =
+	// getVendasBAC().deleteNotaFiscalSaida(request);
+	// ResponseHandler.handleOperationStatusAndMessages(notafiscalsaidaResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, notafiscalsaidaResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return notafiscalsaidaResponse;
+	//
+	// }
+	//
+	// // ===================================### ORCAMENTO
+	// // ####======================================
+	// /**
+	// * Refresh orcamentos.
+	// *
+	// * @param refreshInt
+	// * the refresh int
+	// * @param retList
+	// * the ret list
+	// * @param retPaged
+	// * the ret paged
+	// * @return the orcamento response
+	// */
+	// @RequestMapping(value = "/orcamento/refresh", method = RequestMethod.GET)
+	// @ResponseBody
+	// public OrcamentoResponse refreshOrcamentos(@RequestParam("refreshInt")
+	// Integer refreshInt,
+	// @RequestParam("retList") Boolean retList, @RequestParam("retPaged")
+	// Boolean retPaged) {
+	// OrcamentoResponse orcamentoResponse = new OrcamentoResponse();
+	//
+	// try {
+	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
+	// retPaged);
+	// InternalResultsResponse<Orcamento> internalResponse =
+	// getVendasBAC().refreshOrcamentos(request);
+	// ResponseHandler.handleOperationStatusAndMessages(orcamentoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, orcamentoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return orcamentoResponse;
+	//
+	// }
+	//
+	// /**
+	// * Fetch orcamento paged.
+	// *
+	// * @param request
+	// * the request
+	// * @return the orcamento response
+	// */
+	// @RequestMapping(value = "/orcamento/fetchPage", method =
+	// RequestMethod.POST)
+	// @ResponseBody
+	// public OrcamentoResponse fetchOrcamentoPaged(@RequestBody
+	// OrcamentoInquiryRequest request) {
+	// OrcamentoResponse orcamentoResponse = new OrcamentoResponse();
+	// try {
+	// InternalResultsResponse<Orcamento> internalResponse =
+	// getVendasBAC().fetchOrcamentosByRequest(request);
+	// ResponseHandler.handleOperationStatusAndMessages(orcamentoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, orcamentoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return orcamentoResponse;
+	// }
+	//
+	// /**
+	// * Insert orcamento.
+	// *
+	// * @param request
+	// * the request
+	// * @return the orcamento response
+	// */
+	// @RequestMapping(value = "/orcamento/insert", method = RequestMethod.POST)
+	// @ResponseBody
+	// public OrcamentoResponse insertOrcamento(@RequestBody
+	// OrcamentoMaintenanceRequest request) {
+	// OrcamentoResponse orcamentoResponse = new OrcamentoResponse();
+	// try {
+	// InternalResultsResponse<Orcamento> internalResponse =
+	// getVendasBAC().insertOrcamento(request);
+	// ResponseHandler.handleOperationStatusAndMessages(orcamentoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, orcamentoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return orcamentoResponse;
+	// }
+	//
+	// /**
+	// * Update orcamento.
+	// *
+	// * @param request
+	// * the request
+	// * @return the orcamento response
+	// */
+	// @RequestMapping(value = "/orcamento/update", method = RequestMethod.POST)
+	// @ResponseBody
+	// public OrcamentoResponse updateOrcamento(@RequestBody
+	// OrcamentoMaintenanceRequest request) {
+	// OrcamentoResponse orcamentoResponse = new OrcamentoResponse();
+	// try {
+	// InternalResultsResponse<Orcamento> internalResponse =
+	// getVendasBAC().updateOrcamento(request);
+	// ResponseHandler.handleOperationStatusAndMessages(orcamentoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, orcamentoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return orcamentoResponse;
+	// }
+	//
+	// /**
+	// * Delete orcamento.
+	// *
+	// * @param request
+	// * the request
+	// * @return the orcamento response
+	// */
+	// @RequestMapping(value = "/orcamento/delete", method = RequestMethod.POST)
+	// @ResponseBody
+	// public OrcamentoResponse deleteOrcamento(@RequestBody
+	// OrcamentoMaintenanceRequest request) {
+	// OrcamentoResponse orcamentoResponse = new OrcamentoResponse();
+	//
+	// try {
+	// InternalResultsResponse<Orcamento> internalResponse =
+	// getVendasBAC().deleteOrcamento(request);
+	// ResponseHandler.handleOperationStatusAndMessages(orcamentoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, orcamentoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return orcamentoResponse;
+	//
+	// }
+	//
+	// // ===================================### ORDEMSERVICO
+	// // ####======================================
+	// /**
+	// * Refresh ordemservicos.
+	// *
+	// * @param refreshInt
+	// * the refresh int
+	// * @param retList
+	// * the ret list
+	// * @param retPaged
+	// * the ret paged
+	// * @return the ordemservico response
+	// */
+	// @RequestMapping(value = "/ordemServico/refresh", method =
+	// RequestMethod.GET)
+	// @ResponseBody
+	// public OrdemServicoResponse
+	// refreshOrdemServicos(@RequestParam("refreshInt") Integer refreshInt,
+	// @RequestParam("retList") Boolean retList, @RequestParam("retPaged")
+	// Boolean retPaged) {
+	// OrdemServicoResponse ordemservicoResponse = new OrdemServicoResponse();
+	//
+	// try {
+	// RefreshRequest request = new RefreshRequest(refreshInt, retList,
+	// retPaged);
+	// InternalResultsResponse<OrdemServico> internalResponse =
+	// getVendasBAC().refreshOrdemServicos(request);
+	// ResponseHandler.handleOperationStatusAndMessages(ordemservicoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, ordemservicoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return ordemservicoResponse;
+	//
+	// }
+	//
+	// /**
+	// * Fetch ordemservico paged.
+	// *
+	// * @param request
+	// * the request
+	// * @return the ordemservico response
+	// */
+	// @RequestMapping(value = "/ordemServico/fetchPage", method =
+	// RequestMethod.POST)
+	// @ResponseBody
+	// public OrdemServicoResponse fetchOrdemServicoPaged(@RequestBody
+	// OrdemServicoInquiryRequest request) {
+	// OrdemServicoResponse ordemservicoResponse = new OrdemServicoResponse();
+	// try {
+	// InternalResultsResponse<OrdemServico> internalResponse = getVendasBAC()
+	// .fetchOrdemServicosByRequest(request);
+	// ResponseHandler.handleOperationStatusAndMessages(ordemservicoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, ordemservicoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return ordemservicoResponse;
+	// }
+	//
+	// /**
+	// * Insert ordemservico.
+	// *
+	// * @param request
+	// * the request
+	// * @return the ordemservico response
+	// */
+	// @RequestMapping(value = "/ordemServico/insert", method =
+	// RequestMethod.POST)
+	// @ResponseBody
+	// public OrdemServicoResponse insertOrdemServico(@RequestBody
+	// OrdemServicoMaintenanceRequest request) {
+	// OrdemServicoResponse ordemservicoResponse = new OrdemServicoResponse();
+	// try {
+	// InternalResultsResponse<OrdemServico> internalResponse =
+	// getVendasBAC().insertOrdemServico(request);
+	// ResponseHandler.handleOperationStatusAndMessages(ordemservicoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, ordemservicoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return ordemservicoResponse;
+	// }
+	//
+	// /**
+	// * Update ordemservico.
+	// *
+	// * @param request
+	// * the request
+	// * @return the ordemservico response
+	// */
+	// @RequestMapping(value = "/ordemServico/update", method =
+	// RequestMethod.POST)
+	// @ResponseBody
+	// public OrdemServicoResponse updateOrdemServico(@RequestBody
+	// OrdemServicoMaintenanceRequest request) {
+	// OrdemServicoResponse ordemservicoResponse = new OrdemServicoResponse();
+	// try {
+	// InternalResultsResponse<OrdemServico> internalResponse =
+	// getVendasBAC().updateOrdemServico(request);
+	// ResponseHandler.handleOperationStatusAndMessages(ordemservicoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, ordemservicoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return ordemservicoResponse;
+	// }
+	//
+	// /**
+	// * Delete ordemservico.
+	// *
+	// * @param request
+	// * the request
+	// * @return the ordemservico response
+	// */
+	// @RequestMapping(value = "/ordemServico/delete", method =
+	// RequestMethod.POST)
+	// @ResponseBody
+	// public OrdemServicoResponse deleteOrdemServico(@RequestBody
+	// OrdemServicoMaintenanceRequest request) {
+	// OrdemServicoResponse ordemservicoResponse = new OrdemServicoResponse();
+	//
+	// try {
+	// InternalResultsResponse<OrdemServico> internalResponse =
+	// getVendasBAC().deleteOrdemServico(request);
+	// ResponseHandler.handleOperationStatusAndMessages(ordemservicoResponse,
+	// internalResponse, true);
+	// } catch (Exception ex) {
+	// ResponseHandler.handleException(LOG, ordemservicoResponse, ex,
+	// DEFAULT_EXCEPTION_MSG,
+	// new Object[] { ex.toString() });
+	// }
+	// return ordemservicoResponse;
+	//
+	// }
 
 }

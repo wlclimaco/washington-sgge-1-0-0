@@ -63,7 +63,7 @@
 	</bean>
 
 	<bean id="vendasBACTarget" class="com.qat.samples.sysmgmt.bac.Vendas.VendasBACImpl">
-		<property name="vendasBAR" ref="vendasBARTarget"/>
+		<property name="nfeBAR" ref="nfeBARTarget"/>
 		<property name="validationController" ref="countyValidationController"/>
 	</bean>
 
