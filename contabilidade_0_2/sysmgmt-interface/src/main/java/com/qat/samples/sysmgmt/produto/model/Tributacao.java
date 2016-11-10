@@ -26,6 +26,8 @@ private Cofins cofins;
 
 private Ipi ipi;
 
+private ICMSOpInter icmsOpInter;
+
 
 	/**
 	 * Default constructor.
@@ -101,11 +103,19 @@ private Ipi ipi;
 		this.ipi = ipi;
 	}
 
+	public ICMSOpInter getIcmsOpInter() {
+		return icmsOpInter;
+	}
+
+	public void setIcmsOpInter(ICMSOpInter icmsOpInter) {
+		this.icmsOpInter = icmsOpInter;
+	}
+
 	@Override
 	public String toString() {
 		return "Tributacao [getId()=" + getId() + ", getProdId()=" + getProdId() + ", getCfop()=" + getCfop()
 				+ ", getIcms()=" + getIcms() + ", getPis()=" + getPis() + ", getCofins()=" + getCofins() + ", getIpi()="
-				+ getIpi() + ", toString()=" + super.toString() + "]";
+				+ getIpi() + ", getIcmsOpInter()=" + getIcmsOpInter() + ", toString()=" + super.toString() + "]";
 	}
 
 
