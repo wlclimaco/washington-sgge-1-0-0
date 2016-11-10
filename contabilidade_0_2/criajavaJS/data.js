@@ -1713,6 +1713,17 @@ function NFNotaInfoLocal() {
 	            xml: true
 	        }
 	    });
+    a.push({
+	        field: {
+	            campo: "iCMSOpInter",
+	            tipo: "ICMSOpInter",
+	            requerid: false,
+	            primaryKey: false,
+	            forenkey: false,
+	            model: true,
+	            xml: true
+	        }
+	    });
 
     a.push({
 	        field: {
@@ -10203,6 +10214,115 @@ function COFINSModel() {
 }
 
 //================ Categoria
+function ICMSOpInterModel() {
+
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "perICMSUFDest",
+            tipo: "Double",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "vrBaseCalcUFDest",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "aliqIntUFDest",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "aliqInterestadual",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "percProvPart",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "vrICMSPartUFDest",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "vrICMSPartUFReme",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "vrICMSPartUFRemet",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    return a;
+
+}
+
+
+//================ Categoria
 function PISModel() {
 
     var a = [];
@@ -10351,6 +10471,17 @@ function TributacaoModel() {
         field: {
             campo: "iPI",
             tipo: "IPI",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+     a.push({
+        field: {
+            campo: "iCMSOpInter",
+            tipo: "ICMSOpInter",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -13952,7 +14083,10 @@ dataModel = function() {
         }, {
             classe: "Cofins",
             model: COFINSModel()
-        }, {
+        },{
+            classe: "ICMSOpInter",
+            model: ICMSOpInterModel()
+        }, { // ICMSOpInter
             classe: "Custo",
             model: CustoModel(),
             dependencias: dependenciaCusto()
