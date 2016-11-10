@@ -2,6 +2,7 @@
 package com.qat.samples.sysmgmt.bar.mybatis;
 
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -27,6 +28,7 @@ import com.qat.samples.sysmgmt.produto.model.Custo;
 import com.qat.samples.sysmgmt.produto.model.CustoItens;
 import com.qat.samples.sysmgmt.produto.model.Estoque;
 import com.qat.samples.sysmgmt.produto.model.Grupo;
+import com.qat.samples.sysmgmt.produto.model.ICMSOpInter;
 import com.qat.samples.sysmgmt.produto.model.Marca;
 import com.qat.samples.sysmgmt.produto.model.MarcaProduto;
 import com.qat.samples.sysmgmt.produto.model.Porcao;
@@ -1481,6 +1483,94 @@ public IProdutoBAR getProdutoBAR()
 
 	}
 
+	//===================================### ICMSOPINTER ####======================================
+
+
+	@Test
+		public void testDeleteICMSOpInter()
+		{
+			ICMSOpInter icmsopinter = insertICMSOpInter(1004, TabelaEnum.ICMSOPINTER, PersistenceActionEnum.INSERT);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(1004);
+			ICMSOpInter icmsopinterResponse = getProdutoBAR().fetchICMSOpInterById(request);
+			Assert.assertEquals(icmsopinterResponse, null);
+			getProdutoBAR().insertICMSOpInter(icmsopinter);
+			icmsopinterResponse = getProdutoBAR().fetchICMSOpInterById(request);
+			Assert.assertEquals(icmsopinter.getId(), icmsopinterResponse.getId());
+			getProdutoBAR().deleteICMSOpInterById(icmsopinter);
+			icmsopinterResponse = getProdutoBAR().fetchICMSOpInterById(request);
+			Assert.assertEquals(icmsopinterResponse, null);
+		}
+
+		@Test
+		public void testFetchAllICMSOpInters()
+		{
+		ICMSOpInter icmsopinter = new ICMSOpInter();
+			List<ICMSOpInter> response = getProdutoBAR().fetchAllICMSOpInters(icmsopinter).getResultsList();
+			Assert.assertNotNull(response);
+		}
+
+		@Test
+		public void testDeleteAllICMSOpInters()
+		{
+			getProdutoBAR().deleteAllICMSOpInters();
+		ICMSOpInter icmsopinter = new ICMSOpInter();
+			List<ICMSOpInter> response = getProdutoBAR().fetchAllICMSOpInters(new ICMSOpInter()).getResultsList();
+			Assert.assertEquals(response.size(), 0);
+		}
+
+		@Test
+		public void testUpdateICMSOpInter()
+		{
+			ICMSOpInter icmsopinter = insertICMSOpInter(1001, TabelaEnum.ICMSOPINTER, PersistenceActionEnum.UPDATE);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(1001);
+			ICMSOpInter icmsopinterResponse = getProdutoBAR().fetchICMSOpInterById(request);
+			Assert.assertEquals(icmsopinterResponse.getModifyUser(), "rod");
+			getProdutoBAR().updateICMSOpInter(icmsopinter);
+			icmsopinterResponse = getProdutoBAR().fetchICMSOpInterById(request);
+			Assert.assertEquals(icmsopinterResponse.getModifyUser(), "system");
+		}
+
+		@Test
+		public void testFetchICMSOpIntersByRequest() throws Exception
+		{
+			// check for valid and precount
+			PagedInquiryRequest request = new PagedInquiryRequest();
+			request.setPreQueryCount(true);
+			request.setStartPage(0);
+			request.setPageSize(3);
+			InternalResultsResponse<ICMSOpInter> response = getProdutoBAR().fetchICMSOpIntersByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+			// check for valid and precount and start 2nd page
+			request.setPreQueryCount(true);
+			request.setStartPage(1);
+			request.setPageSize(3);
+			response = getProdutoBAR().fetchICMSOpIntersByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+
+			// check for valid and no precount
+			PagedInquiryRequest request2 = new PagedInquiryRequest();
+			request2.setPreQueryCount(false);
+			InternalResultsResponse<ICMSOpInter> response2 = getProdutoBAR().fetchICMSOpIntersByRequest(request2);
+			Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+			// this is because we did not choose to precount
+			Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+			// check for zero rows
+			getProdutoBAR().deleteAllICMSOpInters();
+			PagedInquiryRequest request3 = new PagedInquiryRequest();
+			request3.setPreQueryCount(true);
+			InternalResultsResponse<ICMSOpInter> response3 = getProdutoBAR().fetchICMSOpIntersByRequest(request3);
+			Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+
+		}
+		
 	@Before
 	public void setup()
 	{
@@ -1504,7 +1594,31 @@ public IProdutoBAR getProdutoBAR()
 		executeSqlScript("conf/insertPorcaoItens.sql", false);
 		executeSqlScript("conf/insertRentabilidade.sql", false);
 		executeSqlScript("conf/insertRentabilidadeItens.sql", false);
+		executeSqlScript("conf/insertIcmsopInter.sql", false);
 	}
+	public ICMSOpInter insertICMSOpInter(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		ICMSOpInter icmsopinter = new ICMSOpInter();
+		Date a = new Date();
+		icmsopinter.setId(id);
+		icmsopinter.setPerICMSUFDest(new Double(10.00));
+		icmsopinter.setVrBaseCalcUFDest(new Double(10.00));
+		icmsopinter.setAliqIntUFDest(new Double(10.00));
+		icmsopinter.setAliqInterestadual(Objects.insertDoisValor(id, tabela, action));
+		icmsopinter.setPercProvPart(Objects.insertDoisValor(id, tabela, action));
+		icmsopinter.setVrICMSPartUFDest(new Double(10.00));
+		icmsopinter.setVrICMSPartUFReme(new Double(10.00));
+		icmsopinter.setVrICMSPartUFRemet(new Double(10.00));
+		icmsopinter.setParentId(id);
+		icmsopinter.setEmprId(1);
+		icmsopinter.setModifyDateUTC(a.getTime());
+		icmsopinter.setCreateDateUTC(a.getTime());
+		icmsopinter.setCreateUser("system");
+		icmsopinter.setModifyUser("system");
+		icmsopinter.setProcessId(1);
+		icmsopinter.setModelAction(action);
 
+		return icmsopinter;
+	}
 
 }

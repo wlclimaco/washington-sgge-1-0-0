@@ -180,6 +180,7 @@
         <typeAlias alias="ProdutoEmpresa" type="com.qat.samples.sysmgmt.produto.model.ProdutoEmpresa" />
 
          <typeAlias alias="Icms" type="com.qat.samples.sysmgmt.produto.model.Icms" />
+         <typeAlias alias="ICMSOpInter" type="com.qat.samples.sysmgmt.produto.model.ICMSOpInter" />
           <typeAlias alias="Cofins" type="com.qat.samples.sysmgmt.produto.model.Cofins" />
            <typeAlias alias="Ipi" type="com.qat.samples.sysmgmt.produto.model.Ipi" />
             <typeAlias alias="Pis" type="com.qat.samples.sysmgmt.produto.model.Pis" />
@@ -589,6 +590,7 @@
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfotransporte.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfoveiculo.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfpessoaautorizadadownloadnfe.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/icmsopinter.xml" />
     </mappers>
 
 </configuration>

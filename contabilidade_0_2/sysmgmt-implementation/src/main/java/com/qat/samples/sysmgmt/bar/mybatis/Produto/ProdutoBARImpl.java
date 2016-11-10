@@ -25,6 +25,7 @@ import com.qat.samples.sysmgmt.bar.mybatis.delegate.CofinsBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.CustoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EmailBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EstoqueBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.ICMSOpInterBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.IcmsBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.IpiBARD;
@@ -42,6 +43,7 @@ import com.qat.samples.sysmgmt.produto.model.Custo;
 import com.qat.samples.sysmgmt.produto.model.CustoItens;
 import com.qat.samples.sysmgmt.produto.model.Estoque;
 import com.qat.samples.sysmgmt.produto.model.Grupo;
+import com.qat.samples.sysmgmt.produto.model.ICMSOpInter;
 import com.qat.samples.sysmgmt.produto.model.Icms;
 import com.qat.samples.sysmgmt.produto.model.Ipi;
 import com.qat.samples.sysmgmt.produto.model.Marca;
@@ -641,6 +643,33 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	private static final String STMT_FETCH_RENTABILIDADE_ALL_REQUEST = NAMESPACE_RENTABILIDADE
 			+ "fetchAllRentabilidadesRequest";
 
+	///===================================### ICMSOPINTER ####======================================
+	/** The Constant NAMESPACE. */
+	private static final String NAMESPACE_ICMSOPINTER = "ICMSOpInterMap.";
+
+	/** The Constant STMT_INSERT_ICMSOPINTER. */
+	private static final String STMT_INSERT_ICMSOPINTER = NAMESPACE_ICMSOPINTER + "insertICMSOpInter";
+
+	/** The Constant STMT_UPDATE_ICMSOPINTER. */
+	private static final String STMT_UPDATE_ICMSOPINTER = NAMESPACE_ICMSOPINTER + "updateICMSOpInter";
+
+	/** The Constant STMT_DELETE_ICMSOPINTER. */
+	private static final String STMT_DELETE_ICMSOPINTER = NAMESPACE_ICMSOPINTER + "deleteICMSOpInterById";
+
+		/** The Constant STMT_DELETE_ICMSOPINTER_ALL. */
+		private static final String STMT_DELETE_ICMSOPINTER_ALL = NAMESPACE_ICMSOPINTER + "deleteAllICMSOpInters";
+
+		/** The Constant STMT_FETCH_ICMSOPINTER. */
+		private static final String STMT_FETCH_ICMSOPINTER = NAMESPACE_ICMSOPINTER + "fetchICMSOpInterById";
+
+		/** The Constant STMT_FETCH_ICMSOPINTER_ALL. */
+		private static final String STMT_FETCH_ICMSOPINTER_ALL = NAMESPACE_ICMSOPINTER + "fetchAllICMSOpInters";
+
+		/** The Constant STMT_FETCH_ICMSOPINTER_COUNT. */
+		private static final String STMT_FETCH_ICMSOPINTER_COUNT = NAMESPACE_ICMSOPINTER + "fetchICMSOpInterRowCount";
+
+		/** The Constant STMT_FETCH_ICMSOPINTER_ALL_REQUEST. */
+		private static final String STMT_FETCH_ICMSOPINTER_ALL_REQUEST = NAMESPACE_ICMSOPINTER + "fetchAllICMSOpIntersRequest";
 	/// ===================================### RENTABILIDADEITENS
 	/// ####======================================
 	/** The Constant NAMESPACE. */
@@ -834,6 +863,12 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 			{
 				produtoempresa.getTributacao().getPis().setProdId(produtoempresa.getProdId().getId());
 				PisBARD.maintainPisAssociations(produtoempresa.getTributacao().getPis(), response,null,  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
+						getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
+			}
+			if (!ValidationUtil.isNull(produtoempresa.getTributacao().getIcmsOpInter()))
+			{
+				produtoempresa.getTributacao().getIcmsOpInter().setProdId(produtoempresa.getProdId().getId());
+				ICMSOpInterBARD.maintainICMSOpInterAssociations(produtoempresa.getTributacao().getIcmsOpInter(), response,null,  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
 						getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
 			}
 			
@@ -4420,5 +4455,172 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 		}
 
 	}
+	
+	//===================================### ICMSOPINTER ####======================================
+		/**
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.base.bar.IICMSOpInterBAR#insertICMSOpInter(com.qat.samples.sysmgmt.base.model.ICMSOpInter)
+	 */
+	@Override
+	public InternalResponse insertICMSOpInter(ICMSOpInter icmsopinter)
+	{
+		InternalResponse response = new InternalResponse();
+			Integer count = 0;
+			Boolean count1 = false;
+
+	icmsopinter.setProcessId(icmsopinter.getTransactionId());
+
+		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ICMSOPINTER, icmsopinter, response);
+
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ICMSOPINTER, AcaoEnum.INSERT, icmsopinter.getTransactionId(),
+				getHistoricoBAR(), response, icmsopinter.getId(),icmsopinter.getUserId());
+		
+		
+	if (icmsopinter.getId() !=  0 && icmsopinter.getId() != null)
+		{
+			Status status = new Status();
+			status.setStatus(CdStatusTypeEnum.ATIVO);
+			List<Status> statusList = new ArrayList<Status>();
+			statusList.add(status);
+			count1 =
+					StatusBARD.maintainStatusAssociations(statusList, response, icmsopinter.getId(), null, AcaoEnum.INSERT,
+							icmsopinter.getCreateUser(), icmsopinter.getId(), TabelaEnum.ICMSOPINTER, statusBAR,
+							historicoBAR, icmsopinter.getTransactionId(), icmsopinter.getTransactionId());
+
+		}
+		
+		
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.base.bar.IICMSOpInterBAR#updateICMSOpInter(com.qat.samples.sysmgmt.base.model.ICMSOpInter)
+	 */
+	@Override
+	public InternalResponse updateICMSOpInter(ICMSOpInter icmsopinter)
+	{
+		InternalResponse response = new InternalResponse();
+	 icmsopinter.setProcessId(icmsopinter.getTransactionId());
+		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ICMSOPINTER, icmsopinter, response);
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ICMSOPINTER, AcaoEnum.UPDATE, icmsopinter.getTransactionId(),
+				getHistoricoBAR(), response, icmsopinter.getId(),icmsopinter.getUserId());
+		
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.base.bar.IICMSOpInterBAR#deleteICMSOpInter(com.qat.samples.sysmgmt.base.model.ICMSOpInter)
+	 */
+	@Override
+	public InternalResponse deleteICMSOpInterById(ICMSOpInter icmsopinter)
+	{
+		InternalResponse response = new InternalResponse();
+	icmsopinter.setProcessId(icmsopinter.getTransactionId());
+		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ICMSOPINTER, icmsopinter, response);
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ICMSOPINTER, AcaoEnum.DELETE, icmsopinter.getTransactionId(),
+				getHistoricoBAR(), response, icmsopinter.getId(),icmsopinter.getUserId());
+		
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.base.bar.IICMSOpInterBAR#deleteAllICMSOpInters()
+	 */
+	@Override
+	public InternalResponse deleteAllICMSOpInters()
+	{
+		InternalResponse response = new InternalResponse();
+		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ICMSOPINTER_ALL, response);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bar.IICMSOpInterBAR#fetchICMSOpInterById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+	 */
+	@Override
+	public ICMSOpInter fetchICMSOpInterById(FetchByIdRequest request)
+	{
+	return (ICMSOpInter)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_ICMSOPINTER, request.getFetchId());
+		
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.base.bar.IICMSOpInterBAR#fetchAllICMSOpIntersCache()
+	 */
+	@Override
+	public InternalResultsResponse<ICMSOpInter> fetchAllICMSOpInters(ICMSOpInter icmsopinter)
+	{
+		InternalResultsResponse<ICMSOpInter> response = new InternalResultsResponse<ICMSOpInter>();
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_ICMSOPINTER_ALL));
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.bar.IICMSOpInterBAR#fetchICMSOpIntersByRequest(com.qat.samples.sysmgmt.model.request.
+	 * PagedInquiryRequest)
+	 */
+	@Override
+	public InternalResultsResponse<ICMSOpInter> fetchICMSOpIntersByRequest(PagedInquiryRequest request)
+	{
+		InternalResultsResponse<ICMSOpInter> response = new InternalResultsResponse<ICMSOpInter>();
+		fetchICMSOpIntersByRequest(getSqlSession(), request, STMT_FETCH_ICMSOPINTER_COUNT, STMT_FETCH_ICMSOPINTER_ALL_REQUEST,
+				response);
+		return response;
+	}
+
+	//===================================### fetchICMSOpIntersByRequest ####======================================
+
+	public static void fetchICMSOpIntersByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
+				String fetchPagedStatement,
+				InternalResultsResponse<?> response)
+		{
+
+			// If the user requested the total rows/record count
+			if (request.isPreQueryCount())
+			{
+				// set the total rows available in the response
+				response.getResultsSetInfo().setTotalRowsAvailable(
+						(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+				if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
+				{
+					response.setStatus(BusinessErrorCategory.NoRowsFound);
+					return;
+				}
+			}
+
+			// Fetch Objects by InquiryRequest Object, paged of course
+			response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+			// move request start page to response start page
+			response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+			// move request page size to response page size
+			response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+			// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
+			// 1.
+			int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+			// set moreRowsAvailable in response based on total rows compared to (page size * start page)
+			// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
+			// is that you your own logic to handle this.
+			if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
+			{
+				response.getResultsSetInfo().setMoreRowsAvailable(true);
+			}
+
+		}
 
 }

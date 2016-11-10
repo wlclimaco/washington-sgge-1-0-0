@@ -12,6 +12,7 @@ import com.qat.samples.sysmgmt.produto.model.Custo;
 import com.qat.samples.sysmgmt.produto.model.CustoItens;
 import com.qat.samples.sysmgmt.produto.model.Estoque;
 import com.qat.samples.sysmgmt.produto.model.Grupo;
+import com.qat.samples.sysmgmt.produto.model.ICMSOpInter;
 import com.qat.samples.sysmgmt.produto.model.Icms;
 import com.qat.samples.sysmgmt.produto.model.Ipi;
 import com.qat.samples.sysmgmt.produto.model.Marca;
@@ -1243,5 +1244,61 @@ public interface IProdutoBAR
 */
 	public InternalResultsResponse<Categoria> fetchCategoriasByRequest(PagedInquiryRequest request);
 
+	/**
+	 * Fetch icmsopinter by id.
+	 * 
+	 * @param request the request
+* @return the internal results response
+*/
+	public ICMSOpInter fetchICMSOpInterById(FetchByIdRequest request);
+
+	/**
+* Insert icmsopinter.
+* 
+* @param icmsopinter the icmsopinter
+* 
+* @return the internal response
+*/
+	public InternalResponse insertICMSOpInter(ICMSOpInter icmsopinter);
+
+	/**
+* Update icmsopinter.
+* 
+* @param icmsopinter the icmsopinter
+* 
+* @return the internal response
+*/
+	public InternalResponse updateICMSOpInter(ICMSOpInter icmsopinter);
+
+	/**
+* Delete icmsopinter.
+* 
+* @param request the icmsopinter
+* 
+* @return the internal response
+*/
+	public InternalResponse deleteICMSOpInterById(ICMSOpInter request);
+
+	/**
+* Delete all icmsopinters.
+* 
+* @return the internal response
+*/
+	public InternalResponse deleteAllICMSOpInters();
+
+	/**
+* Fetch all icmsopinters.
+* 
+* @return the list< icmsopinter>
+*/
+	public InternalResultsResponse<ICMSOpInter> fetchAllICMSOpInters(ICMSOpInter  icmsopinter);
+
+	/**
+* Fetch icmsopinters by request.
+* 
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<ICMSOpInter> fetchICMSOpIntersByRequest(PagedInquiryRequest request);
 
 }
