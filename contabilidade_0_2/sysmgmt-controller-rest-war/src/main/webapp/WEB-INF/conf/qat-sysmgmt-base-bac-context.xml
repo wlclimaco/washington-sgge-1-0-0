@@ -57,11 +57,6 @@
 		<property name="validationController" ref="countyValidationController"/>
 	</bean>
 
-	<bean id="vendasBACTarget" class="com.qat.samples.sysmgmt.bac.Vendas.VendasBACImpl">
-		<property name="nfeBAR" ref="nfeBARTarget"/>
-		<property name="validationController" ref="countyValidationController"/>
-	</bean>
-
 	<bean id="clinicaBACTarget" class="com.qat.samples.sysmgmt.bac.Clinica.ClinicaBACImpl">
 		<property name="clinicaBAR" ref="clinicaBARTarget"/>
 		<property name="validationController" ref="countyValidationController"/>
@@ -79,6 +74,11 @@
 
 	<bean id="condominioBACTarget" class="com.qat.samples.sysmgmt.bac.Condominio.CondominioBACImpl">
 		<property name="condominioBAR" ref="condominioBARTarget"/>
+		<property name="validationController" ref="countyValidationController"/>
+	</bean>
+
+	<bean id="vendasBACTarget" class="com.qat.samples.sysmgmt.bac.Vendas.vendasBACImpl">
+		<property name="vendasBAR" ref="vendasBACTarget"/>
 		<property name="validationController" ref="countyValidationController"/>
 	</bean>
 

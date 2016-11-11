@@ -66,16 +66,16 @@
 		<constructor-arg value="com.qat.samples.sysmgmt.bac.Pessoa.IPessoaBAC" />
 	</bean>
 
-	<bean id="vendasBACTarget" class="org.mockito.Mockito" factory-method="mock">
-		<constructor-arg value="com.qat.samples.sysmgmt.bac.Nfe.INFeBAC" />
-	</bean>
-
 	<bean id="produtoBACTarget" class="org.mockito.Mockito" factory-method="mock">
 		<constructor-arg value="com.qat.samples.sysmgmt.bac.Produto.IProdutoBAC" />
 	</bean>
 
 	<bean id="clinicaBACTarget" class="org.mockito.Mockito" factory-method="mock">
 		<constructor-arg value="com.qat.samples.sysmgmt.bac.Clinica.IClinicaBAC" />
+	</bean>
+
+	<bean id="vendasBACTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.qat.samples.sysmgmt.bac.Vendas.IVendasBAC" />
 	</bean>
 
 	<bean id="dicionarioBACTarget" class="org.mockito.Mockito" factory-method="mock">
@@ -85,15 +85,15 @@
 	<bean id="configuracaoBACTarget" class="org.mockito.Mockito" factory-method="mock">
 		<constructor-arg value="com.qat.samples.sysmgmt.bac.Configuracao.IConfiguracaoBAC" />
 	</bean>
-	
+
 	<bean id="advocaciaBACTarget" class="org.mockito.Mockito" factory-method="mock">
 		<constructor-arg value="com.qat.samples.sysmgmt.bac.Advogado.IAdvocaciaBAC" />
 	</bean>
-	
+
 	<bean id="condominioBACTarget" class="org.mockito.Mockito" factory-method="mock">
 		<constructor-arg value="com.qat.samples.sysmgmt.bac.Condominio.ICondominioBAC" />
 	</bean>
-	
+
 	<bean id="dpBACTarget" class="org.mockito.Mockito" factory-method="mock">
 		<constructor-arg value="com.qat.samples.sysmgmt.bac.Dp.IDpBAC" />
 	</bean>

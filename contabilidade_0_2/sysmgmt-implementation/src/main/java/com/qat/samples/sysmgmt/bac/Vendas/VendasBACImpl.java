@@ -217,25 +217,25 @@ private InternalResultsResponse<NotaFiscalSaida> processNotaFiscalSaida(Validati
 		{
 	InternalResultsResponse<NotaFiscalSaida> response = null;
 
-//		// Persist
-//	//	InternalResponse internalResponse = doPersistenceNotaFiscalSaida(request.getNotafiscal(), persistType);
-//		if (internalResponse.isInError())
-//		{
-//			response = new InternalResultsResponse<NotaFiscalSaida>();
-//			response.setStatus(internalResponse.getError());
-//			response.addMessages(internalResponse.getMessageInfoList());
-//			response.addMessage(DEFAULT_VENDAS_BAC_EXCEPTION_MSG, MessageSeverity.Error,
-//					MessageLevel.Object, new Object[] {internalResponse.errorToString()});
+		// Persist
+		InternalResponse internalResponse = new InternalResponse ();//doPersistenceNotaFiscalSaida(request.getNotafiscal(), persistType);
+		if (internalResponse.isInError())
+		{
+			response = new InternalResultsResponse<NotaFiscalSaida>();
+			response.setStatus(internalResponse.getError());
+			response.addMessages(internalResponse.getMessageInfoList());
+			response.addMessage(DEFAULT_VENDAS_BAC_EXCEPTION_MSG, MessageSeverity.Error,
+					MessageLevel.Object, new Object[] {internalResponse.errorToString()});
 
 			return response;
 		}
 
 		// Call maintainReurnList to see if we need to return the notafiscalsaida list and if so whether it should be paged or
 		// not
-	//	response = maintainReturnListNotaFiscalSaida(request.getReturnList(), request.getReturnListPaged(),new NotaFiscalSaida());
+		response = maintainReturnListNotaFiscalSaida(request.getReturnList(), request.getReturnListPaged(),new NotaFiscalSaida());
 
-	//	return response;
-		//	}
+		return response;
+			}
 
 	/**
 	 * Do persistenceNotaFiscalSaida.
