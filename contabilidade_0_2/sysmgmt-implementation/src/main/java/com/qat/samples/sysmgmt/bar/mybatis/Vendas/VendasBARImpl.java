@@ -15,6 +15,7 @@ import com.qat.framework.util.MyBatisBARHelper;
 import com.qat.samples.sysmgmt.bar.Endereco.IEnderecoBAR;
 import com.qat.samples.sysmgmt.bar.Financeiro.IFinanceiroBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
+import com.qat.samples.sysmgmt.bar.Nfe.INFeBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Vendas.IVendasBAR;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.BaseBARD;
@@ -190,6 +191,8 @@ private static final String STMT_DELETE_ORDEMSERVICO = NAMESPACE_ORDEMSERVICO + 
 	IVendasBAR vendasBAR;
 
 	IFinanceiroBAR financeiroBAR;
+	
+	INFeBAR nfeBAR;
 
 
 
