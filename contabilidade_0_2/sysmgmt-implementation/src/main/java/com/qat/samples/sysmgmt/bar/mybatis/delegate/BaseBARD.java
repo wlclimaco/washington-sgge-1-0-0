@@ -170,14 +170,14 @@ public final class BaseBARD extends SqlSessionDaoSupport
 	{
 		Integer count = 0;
 		Boolean count1 = false;
-		if (!ValidationUtil.isNull(empresa.getConhecimentoTransporte()))
-		{
-			count +=
-					ConhecimentoTransporteBARD.maintainConhecimentoTransporteAssociations(empresa.getConhecimentoTransporte(), response, empresa.getId(), null,
-							null,
-							tabela, cadastroBAR, statusBAR, historicoBAR, empresa.getId(),
-							empresa.getCreateUser(), processId, historicoId);
-		}
+//		if (!ValidationUtil.isNull(empresa.getConhecimentoTransporte()))
+//		{
+//			count +=
+//					ConhecimentoTransporteBARD.maintainConhecimentoTransporteAssociations(empresa.getConhecimentoTransporte(), response, empresa.getId(), null,
+//							null,
+//							tabela, cadastroBAR, statusBAR, historicoBAR, empresa.getId(),
+//							empresa.getCreateUser(), processId, historicoId);
+//		}
 		if (!ValidationUtil.isNullOrEmpty(empresa.getNotaFiscalItens()))
 		{
 			count +=

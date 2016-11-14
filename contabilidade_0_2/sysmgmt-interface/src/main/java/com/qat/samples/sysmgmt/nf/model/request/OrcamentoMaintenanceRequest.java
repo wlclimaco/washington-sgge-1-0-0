@@ -1,6 +1,5 @@
 package com.qat.samples.sysmgmt.nf.model.request;
 
-import com.qat.framework.model.request.Request;
 import com.qat.samples.sysmgmt.nf.model.Orcamento;
 import com.qat.samples.sysmgmt.util.model.request.UtilMaintenanceRequest;
 

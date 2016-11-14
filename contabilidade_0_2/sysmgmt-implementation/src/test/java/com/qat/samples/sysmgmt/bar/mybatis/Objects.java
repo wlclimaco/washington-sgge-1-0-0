@@ -84,6 +84,40 @@ import com.qat.samples.sysmgmt.nf.model.NotaFiscalItens;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
 import com.qat.samples.sysmgmt.nf.model.Orcamento;
 import com.qat.samples.sysmgmt.nf.model.PedidoCompras;
+import com.qat.samples.sysmgmt.nfe.model.NFInfoModelo1Por1AReferenciada;
+import com.qat.samples.sysmgmt.nfe.model.NFInfoProdutorRuralReferenciada;
+import com.qat.samples.sysmgmt.nfe.model.NFInfoReferenciada;
+import com.qat.samples.sysmgmt.nfe.model.NFNota;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfo;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoAvulsa;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoCana;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoCanaDeducao;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoCanaFornecimentoDiario;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoCartao;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoCobranca;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoCompra;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoDestinatario;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoDuplicata;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoEmitente;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoExportacao;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoFatura;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoICMSTotal;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoISSQNTotal;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoIdentificacao;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoInformacoesAdicionais;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoLocal;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoObservacao;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoPagamento;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoProcessoReferenciado;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoReboque;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoRetencaoICMSTransporte;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoRetencoesTributos;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoSuplementar;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoTotal;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoTransportador;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoTransporte;
+import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoVeiculo;
+import com.qat.samples.sysmgmt.nfe.model.NFPessoaAutorizadaDownloadNFe;
 import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
 import com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoItens;
 import com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoStatus;
@@ -1448,8 +1482,8 @@ public class Objects {
 		produtoparent.setModelAction(action);
 		produtoparent.setAplicacao("aplicacao_5 - " + action.toString());
 		produtoparent.setFracao("fracao_6 - " + action.toString());
-		
-		
+
+
 		produtoparent.setPesoBruto(new Double(10.00));
 		produtoparent.setPesoLiquido(new Double(10.00));
 		produtoparent.setModoUso("modoUso_15 - " + action.toString());
@@ -3381,6 +3415,848 @@ public static ServicoAndPlano insertServicoByPlano(Integer id, TabelaEnum tabela
 
 	return notafiscalitens;
 }
+
+
+public static NFNota insertNFNota(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNota nfnota = new NFNota();
+		Date a = new Date();
+		nfnota.setId(id);
+		nfnota.setIdentificadorLocal(a.getTime());
+		nfnota.setInfo(insertNFNotaInfo(id,tabela,action));
+		nfnota.setInfoSuplementar(insertNFNotaInfoSuplementar(id,tabela,action));
+		nfnota.setAssinatura(Objects.insertDoisValor(id, tabela, action));
+		nfnota.setParentId(id);
+		nfnota.setEmprId(1);
+		nfnota.setModifyDateUTC(a.getTime());
+		nfnota.setCreateDateUTC(a.getTime());
+		nfnota.setCreateUser("system");
+		nfnota.setModifyUser("system");
+		nfnota.setProcessId(1);
+		nfnota.setModelAction(action);
+
+		return nfnota;
+	}
+
+
+public static NFNotaInfo insertNFNotaInfo(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfo nfnotainfo = new NFNotaInfo();
+		Date a = new Date();
+		nfnotainfo.setId(id);
+		nfnotainfo.setIdentificador("NATIVE INSERT UPDATE");
+		nfnotainfo.setVersao("NATIVE INSERT UPDATE");
+		nfnotainfo.setIdentificacao(insertNFNotaInfoIdentificacao(null, tabela, action));
+		nfnotainfo.setEmitente(insertNFNotaInfoEmitente(null, tabela, action));
+		nfnotainfo.setAvulsa(insertNFNotaInfoAvulsa(null, tabela, action));
+		nfnotainfo.setDestinatario(insertNFNotaInfoDestinatario(null, tabela, action));
+		nfnotainfo.setRetirada(insertNFNotaInfoLocal(null, tabela, action));
+		nfnotainfo.setEntrega(insertNFNotaInfoLocal(null, tabela, action));
+		nfnotainfo.setPessoasautorizadasdownloadnfe(new ArrayList<NFPessoaAutorizadaDownloadNFe>());
+		nfnotainfo.getPessoasautorizadasdownloadnfe().add(insertNFPessoaAutorizadaDownloadNFe(null, tabela, action));
+		nfnotainfo.setItens(new ArrayList<NotaFiscalItens>());
+		nfnotainfo.getItens().add(Objects.insertNotaFiscalItens(null, tabela, action));
+		nfnotainfo.setTotal(insertNFNotaInfoTotal(null, tabela, action));
+		nfnotainfo.setTransporte(insertNFNotaInfoTransporte(null, tabela, action));
+		nfnotainfo.setCobranca(insertNFNotaInfoCobranca(null, tabela, action));
+		nfnotainfo.setPagamentos(new ArrayList<NFNotaInfoPagamento>());
+		nfnotainfo.getPagamentos().add(insertNFNotaInfoPagamento(null, tabela, action));
+		nfnotainfo.setInformacoesadicionais(insertNFNotaInfoInformacoesAdicionais(null, tabela, action));
+		nfnotainfo.setExportacao(insertNFNotaInfoExportacao(null, tabela, action));
+		nfnotainfo.setCompra(insertNFNotaInfoCompra(null, tabela, action));
+		nfnotainfo.setCana(insertNFNotaInfoCana(null, tabela, action));
+		nfnotainfo.setParentId(id);
+		nfnotainfo.setEmprId(1);
+		nfnotainfo.setModifyDateUTC(a.getTime());
+		nfnotainfo.setCreateDateUTC(a.getTime());
+		nfnotainfo.setCreateUser("system");
+		nfnotainfo.setModifyUser("system");
+		nfnotainfo.setProcessId(1);
+		nfnotainfo.setModelAction(action);
+
+		return nfnotainfo;
+	}
+
+
+public static NFNotaInfoIdentificacao insertNFNotaInfoIdentificacao(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoIdentificacao nfnotainfoidentificacao = new NFNotaInfoIdentificacao();
+		Date a = new Date();
+		nfnotainfoidentificacao.setId(id);
+		nfnotainfoidentificacao.setUf(Objects.insertEstado(null, tabela, action));
+		nfnotainfoidentificacao.setCodigoRandomico("NATIVE INSERT UPDATE");
+		nfnotainfoidentificacao.setNaturezaOperacao("NATIVE INSERT UPDATE");
+	//	nfnotainfoidentificacao.setFormaPagamento(Objects.insertDoisValor(id, tabela, action));
+		nfnotainfoidentificacao.setModelo(Objects.insertDoisValor(id, tabela, action));
+		nfnotainfoidentificacao.setSerie("NATIVE INSERT UPDATE");
+		nfnotainfoidentificacao.setNumeroNota("NATIVE INSERT UPDATE");
+		nfnotainfoidentificacao.setDataHoraEmissao(a.getTime());
+		nfnotainfoidentificacao.setDataHoraSaidaOuEntrada(a.getTime());
+		nfnotainfoidentificacao.setTipo(Objects.insertDoisValor(id, tabela, action));
+		nfnotainfoidentificacao.setIdentificadorLocalDestinoOperacao(Objects.insertDoisValor(id, tabela, action));
+		nfnotainfoidentificacao.setCodigoMunicipio("NATIVE INSERT UPDATE");
+		nfnotainfoidentificacao.setTipoImpressao(Objects.insertDoisValor(id, tabela, action));
+		nfnotainfoidentificacao.setTipoEmissao(Objects.insertDoisValor(id, tabela, action));
+		nfnotainfoidentificacao.setDigitoVerificador(100);
+		nfnotainfoidentificacao.setAmbiente(Objects.insertDoisValor(id, tabela, action));
+		nfnotainfoidentificacao.setFinalidade(Objects.insertDoisValor(id, tabela, action));
+		nfnotainfoidentificacao.setOperacaoConsumidorFinal(Objects.insertDoisValor(id, tabela, action));
+		nfnotainfoidentificacao.setIndicadorPresencaComprador(Objects.insertDoisValor(id, tabela, action));
+		nfnotainfoidentificacao.setProgramaEmissor(Objects.insertDoisValor(id, tabela, action));
+		nfnotainfoidentificacao.setVersaoEmissor("NATIVE INSERT UPDATE");
+		nfnotainfoidentificacao.setDataHoraContigencia(a.getTime());
+		nfnotainfoidentificacao.setJustificativaEntradaContingencia("NATIVE INSERT UPDATE");
+		nfnotainfoidentificacao.setReferenciadas(new ArrayList<NFInfoReferenciada>());
+		nfnotainfoidentificacao.getReferenciadas().add(insertNFInfoReferenciada(null, tabela, action));
+		nfnotainfoidentificacao.setParentId(id);
+		nfnotainfoidentificacao.setEmprId(1);
+		nfnotainfoidentificacao.setModifyDateUTC(a.getTime());
+		nfnotainfoidentificacao.setCreateDateUTC(a.getTime());
+		nfnotainfoidentificacao.setCreateUser("system");
+		nfnotainfoidentificacao.setModifyUser("system");
+		nfnotainfoidentificacao.setProcessId(1);
+		nfnotainfoidentificacao.setModelAction(action);
+
+		return nfnotainfoidentificacao;
+	}
+
+
+public static NFInfoModelo1Por1AReferenciada insertNFInfoModelo1Por1AReferenciada(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFInfoModelo1Por1AReferenciada nfinfomodelo1por1areferenciada = new NFInfoModelo1Por1AReferenciada();
+		Date a = new Date();
+		nfinfomodelo1por1areferenciada.setId(id);
+		nfinfomodelo1por1areferenciada.setUf(Objects.insertEstado(id, tabela, action));
+		nfinfomodelo1por1areferenciada.setAnoMesEmissaoNFe("NATIVE INSERT UPDATE");
+		nfinfomodelo1por1areferenciada.setCnpj("NATIVE INSERT UPDATE");
+		nfinfomodelo1por1areferenciada.setModeloDocumentoFiscal("NATIVE INSERT UPDATE");
+		nfinfomodelo1por1areferenciada.setSerie("NATIVE INSERT UPDATE");
+		nfinfomodelo1por1areferenciada.setNumeroDocumentoFiscal("NATIVE INSERT UPDATE");
+		nfinfomodelo1por1areferenciada.setParentId(id);
+		nfinfomodelo1por1areferenciada.setEmprId(1);
+		nfinfomodelo1por1areferenciada.setModifyDateUTC(a.getTime());
+		nfinfomodelo1por1areferenciada.setCreateDateUTC(a.getTime());
+		nfinfomodelo1por1areferenciada.setCreateUser("system");
+		nfinfomodelo1por1areferenciada.setModifyUser("system");
+		nfinfomodelo1por1areferenciada.setProcessId(1);
+		nfinfomodelo1por1areferenciada.setModelAction(action);
+
+		return nfinfomodelo1por1areferenciada;
+	}
+
+
+public static NFInfoReferenciada insertNFInfoReferenciada(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFInfoReferenciada nfinforeferenciada = new NFInfoReferenciada();
+		Date a = new Date();
+		nfinforeferenciada.setId(id);
+		nfinforeferenciada.setChaveAcesso("NATIVE INSERT UPDATE");
+		nfinforeferenciada.setModelo1por1Referenciada(100);
+		nfinforeferenciada.setInfoNFProdutorRuralReferenciada(insertNFInfoProdutorRuralReferenciada(null, tabela, action));
+		nfinforeferenciada.setChaveAcessoCTReferenciada("NATIVE INSERT UPDATE");
+		//nfinforeferenciada.setCupomFiscalReferenciado(insertnfinfof);
+		nfinforeferenciada.setParentId(id);
+		nfinforeferenciada.setEmprId(1);
+		nfinforeferenciada.setModifyDateUTC(a.getTime());
+		nfinforeferenciada.setCreateDateUTC(a.getTime());
+		nfinforeferenciada.setCreateUser("system");
+		nfinforeferenciada.setModifyUser("system");
+		nfinforeferenciada.setProcessId(1);
+		nfinforeferenciada.setModelAction(action);
+
+		return nfinforeferenciada;
+	}
+
+
+public static NFInfoProdutorRuralReferenciada insertNFInfoProdutorRuralReferenciada(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFInfoProdutorRuralReferenciada nfinfoprodutorruralreferenciada = new NFInfoProdutorRuralReferenciada();
+		Date a = new Date();
+		nfinfoprodutorruralreferenciada.setId(id);
+		nfinfoprodutorruralreferenciada.setUfEmitente(Objects.insertEstado(id, tabela, action));
+		nfinfoprodutorruralreferenciada.setAnoMesEmissao("NATIVE INSERT UPDATE");
+		nfinfoprodutorruralreferenciada.setCnpjEmitente("NATIVE INSERT UPDATE");
+		nfinfoprodutorruralreferenciada.setCpfEmitente("NATIVE INSERT UPDATE");
+		nfinfoprodutorruralreferenciada.setIeEmitente("NATIVE INSERT UPDATE");
+		nfinfoprodutorruralreferenciada.setModeloDocumentoFiscal("NATIVE INSERT UPDATE");
+		nfinfoprodutorruralreferenciada.setSerieDocumentoFiscal(100);
+		nfinfoprodutorruralreferenciada.setNumeroDocumentoFiscal(100);
+		nfinfoprodutorruralreferenciada.setParentId(id);
+		nfinfoprodutorruralreferenciada.setEmprId(1);
+		nfinfoprodutorruralreferenciada.setModifyDateUTC(a.getTime());
+		nfinfoprodutorruralreferenciada.setCreateDateUTC(a.getTime());
+		nfinfoprodutorruralreferenciada.setCreateUser("system");
+		nfinfoprodutorruralreferenciada.setModifyUser("system");
+		nfinfoprodutorruralreferenciada.setProcessId(1);
+		nfinfoprodutorruralreferenciada.setModelAction(action);
+
+		return nfinfoprodutorruralreferenciada;
+	}
+
+
+public static NFNotaInfoEmitente insertNFNotaInfoEmitente(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoEmitente nfnotainfoemitente = new NFNotaInfoEmitente();
+		Date a = new Date();
+		nfnotainfoemitente.setId(id);
+		nfnotainfoemitente.setCnpj("NATIVE INSERT UPDATE");
+		nfnotainfoemitente.setCpf("NATIVE INSERT UPDATE");
+		nfnotainfoemitente.setRazaoSocial("NATIVE INSERT UPDATE");
+		nfnotainfoemitente.setNomeFantasia("NATIVE INSERT UPDATE");
+		nfnotainfoemitente.setEndereco(Objects.insertEndereco(id, tabela, action));
+		nfnotainfoemitente.setInscricaoEstadual("NATIVE INSERT UPDATE");
+		nfnotainfoemitente.setInscricaoEstadualSubstituicaoTributaria("NATIVE INSERT UPDATE");
+		nfnotainfoemitente.setInscricaoMunicipal("NATIVE INSERT UPDATE");
+		nfnotainfoemitente.setClassificacaoNacionalAtividadesEconomicas("NATIVE INSERT UPDATE");
+		nfnotainfoemitente.setRegimeTributario(Objects.insertRegime(id, tabela, action));
+		nfnotainfoemitente.setParentId(id);
+		nfnotainfoemitente.setEmprId(1);
+		nfnotainfoemitente.setModifyDateUTC(a.getTime());
+		nfnotainfoemitente.setCreateDateUTC(a.getTime());
+		nfnotainfoemitente.setCreateUser("system");
+		nfnotainfoemitente.setModifyUser("system");
+		nfnotainfoemitente.setProcessId(1);
+		nfnotainfoemitente.setModelAction(action);
+
+		return nfnotainfoemitente;
+	}
+
+
+public static NFNotaInfoAvulsa insertNFNotaInfoAvulsa(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoAvulsa nfnotainfoavulsa = new NFNotaInfoAvulsa();
+		Date a = new Date();
+		nfnotainfoavulsa.setId(id);
+		nfnotainfoavulsa.setCnpj("NATIVE INSERT UPDATE");
+		nfnotainfoavulsa.setOrgaoEmitente("NATIVE INSERT UPDATE");
+		nfnotainfoavulsa.setMatriculaAgente("NATIVE INSERT UPDATE");
+		nfnotainfoavulsa.setNomeAgente("NATIVE INSERT UPDATE");
+		nfnotainfoavulsa.setFone("NATIVE INSERT UPDATE");
+		nfnotainfoavulsa.setUf("NATIVE INSERT UPDATE");
+		nfnotainfoavulsa.setNumeroDocumentoArrecadacaoReceita("NATIVE INSERT UPDATE");
+		nfnotainfoavulsa.setDataEmissaoDocumentoArrecadacao(a.getTime());
+		nfnotainfoavulsa.setValorTotalConstanteDocumentoArrecadacaoReceita("NATIVE INSERT UPDATE");
+		nfnotainfoavulsa.setReparticaoFiscalEmitente("NATIVE INSERT UPDATE");
+		nfnotainfoavulsa.setDataPagamentoDocumentoArrecadacao(a.getTime());
+		nfnotainfoavulsa.setParentId(id);
+		nfnotainfoavulsa.setEmprId(1);
+		nfnotainfoavulsa.setModifyDateUTC(a.getTime());
+		nfnotainfoavulsa.setCreateDateUTC(a.getTime());
+		nfnotainfoavulsa.setCreateUser("system");
+		nfnotainfoavulsa.setModifyUser("system");
+		nfnotainfoavulsa.setProcessId(1);
+		nfnotainfoavulsa.setModelAction(action);
+
+		return nfnotainfoavulsa;
+	}
+
+
+public static NFNotaInfoDestinatario insertNFNotaInfoDestinatario(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoDestinatario nfnotainfodestinatario = new NFNotaInfoDestinatario();
+		Date a = new Date();
+		nfnotainfodestinatario.setId(id);
+		nfnotainfodestinatario.setCnpj("NATIVE INSERT UPDATE");
+		nfnotainfodestinatario.setCpf("NATIVE INSERT UPDATE");
+		nfnotainfodestinatario.setIdEstrangeiro("NATIVE INSERT UPDATE");
+		nfnotainfodestinatario.setRazaoSocial("NATIVE INSERT UPDATE");
+		nfnotainfodestinatario.setEndereco(Objects.insertEndereco(id, tabela, action));
+		nfnotainfodestinatario.setIndicadorIEDestinatario(Objects.insertDoisValor(id, tabela, action));
+		nfnotainfodestinatario.setInscricaoEstadual("NATIVE INSERT UPDATE");
+		nfnotainfodestinatario.setInscricaoSuframa("NATIVE INSERT UPDATE");
+		nfnotainfodestinatario.setInscricaoMunicipal("NATIVE INSERT UPDATE");
+		nfnotainfodestinatario.setEmail("NATIVE INSERT UPDATE");
+		nfnotainfodestinatario.setParentId(id);
+		nfnotainfodestinatario.setEmprId(1);
+		nfnotainfodestinatario.setModifyDateUTC(a.getTime());
+		nfnotainfodestinatario.setCreateDateUTC(a.getTime());
+		nfnotainfodestinatario.setCreateUser("system");
+		nfnotainfodestinatario.setModifyUser("system");
+		nfnotainfodestinatario.setProcessId(1);
+		nfnotainfodestinatario.setModelAction(action);
+
+		return nfnotainfodestinatario;
+	}
+
+
+public static NFNotaInfoLocal insertNFNotaInfoLocal(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoLocal nfnotainfolocal = new NFNotaInfoLocal();
+		Date a = new Date();
+		nfnotainfolocal.setId(id);
+		nfnotainfolocal.setCnpj("NATIVE INSERT UPDATE");
+		nfnotainfolocal.setCpf("NATIVE INSERT UPDATE");
+		nfnotainfolocal.setLogradouro("NATIVE INSERT UPDATE");
+		nfnotainfolocal.setNumero("NATIVE INSERT UPDATE");
+		nfnotainfolocal.setComplemento("NATIVE INSERT UPDATE");
+		nfnotainfolocal.setBairro("NATIVE INSERT UPDATE");
+		nfnotainfolocal.setCodigoMunicipio("NATIVE INSERT UPDATE");
+		nfnotainfolocal.setNomeMunicipio("NATIVE INSERT UPDATE");
+		nfnotainfolocal.setUf("NATIVE INSERT UPDATE");
+		nfnotainfolocal.setParentId(id);
+		nfnotainfolocal.setEmprId(1);
+		nfnotainfolocal.setModifyDateUTC(a.getTime());
+		nfnotainfolocal.setCreateDateUTC(a.getTime());
+		nfnotainfolocal.setCreateUser("system");
+		nfnotainfolocal.setModifyUser("system");
+		nfnotainfolocal.setProcessId(1);
+		nfnotainfolocal.setModelAction(action);
+
+		return nfnotainfolocal;
+	}
+
+
+public static NFPessoaAutorizadaDownloadNFe insertNFPessoaAutorizadaDownloadNFe(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFPessoaAutorizadaDownloadNFe nfpessoaautorizadadownloadnfe = new NFPessoaAutorizadaDownloadNFe();
+		Date a = new Date();
+		nfpessoaautorizadadownloadnfe.setId(id);
+		nfpessoaautorizadadownloadnfe.setCnpj("NATIVE INSERT UPDATE");
+		nfpessoaautorizadadownloadnfe.setCpf("NATIVE INSERT UPDATE");
+		nfpessoaautorizadadownloadnfe.setParentId(id);
+		nfpessoaautorizadadownloadnfe.setEmprId(1);
+		nfpessoaautorizadadownloadnfe.setModifyDateUTC(a.getTime());
+		nfpessoaautorizadadownloadnfe.setCreateDateUTC(a.getTime());
+		nfpessoaautorizadadownloadnfe.setCreateUser("system");
+		nfpessoaautorizadadownloadnfe.setModifyUser("system");
+		nfpessoaautorizadadownloadnfe.setProcessId(1);
+		nfpessoaautorizadadownloadnfe.setModelAction(action);
+
+		return nfpessoaautorizadadownloadnfe;
+	}
+
+
+public static NFNotaInfoTotal insertNFNotaInfoTotal(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoTotal nfnotainfototal = new NFNotaInfoTotal();
+		Date a = new Date();
+		nfnotainfototal.setId(id);
+		nfnotainfototal.setIcmsTotal(insertNFNotaInfoICMSTotal(null, tabela, action));
+		nfnotainfototal.setIssqnTotal(insertNFNotaInfoISSQNTotal(null, tabela, action));
+		nfnotainfototal.setRetencoesTributos(insertNFNotaInfoRetencoesTributos(null, tabela, action));
+		nfnotainfototal.setParentId(id);
+		nfnotainfototal.setEmprId(1);
+		nfnotainfototal.setModifyDateUTC(a.getTime());
+		nfnotainfototal.setCreateDateUTC(a.getTime());
+		nfnotainfototal.setCreateUser("system");
+		nfnotainfototal.setModifyUser("system");
+		nfnotainfototal.setProcessId(1);
+		nfnotainfototal.setModelAction(action);
+
+		return nfnotainfototal;
+	}
+
+
+public static NFNotaInfoICMSTotal insertNFNotaInfoICMSTotal(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoICMSTotal nfnotainfoicmstotal = new NFNotaInfoICMSTotal();
+		Date a = new Date();
+		nfnotainfoicmstotal.setId(id);
+		nfnotainfoicmstotal.setBaseCalculoICMS("NATIVE INSERT UPDATE");
+		nfnotainfoicmstotal.setValorTotalICMS("NATIVE INSERT UPDATE");
+		nfnotainfoicmstotal.setValorICMSDesonerado("NATIVE INSERT UPDATE");
+		nfnotainfoicmstotal.setValorICMSFundoCombatePobreza("NATIVE INSERT UPDATE");
+		nfnotainfoicmstotal.setValorICMSPartilhaDestinatario("NATIVE INSERT UPDATE");
+		nfnotainfoicmstotal.setValorICMSPartilhaRementente("NATIVE INSERT UPDATE");
+		nfnotainfoicmstotal.setBaseCalculoICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoicmstotal.setValorTotalICMSST("NATIVE INSERT UPDATE");
+		nfnotainfoicmstotal.setValorTotalDosProdutosServicos("NATIVE INSERT UPDATE");
+		nfnotainfoicmstotal.setValorTotalFrete("NATIVE INSERT UPDATE");
+		nfnotainfoicmstotal.setValorTotalSeguro("NATIVE INSERT UPDATE");
+		nfnotainfoicmstotal.setValorTotalDesconto("NATIVE INSERT UPDATE");
+		nfnotainfoicmstotal.setValorTotalII("NATIVE INSERT UPDATE");
+		nfnotainfoicmstotal.setValorTotalIPI("NATIVE INSERT UPDATE");
+		nfnotainfoicmstotal.setValorPIS("NATIVE INSERT UPDATE");
+		nfnotainfoicmstotal.setValorCOFINS("NATIVE INSERT UPDATE");
+		nfnotainfoicmstotal.setOutrasDespesasAcessorias("NATIVE INSERT UPDATE");
+		nfnotainfoicmstotal.setValorTotalNFe("NATIVE INSERT UPDATE");
+		nfnotainfoicmstotal.setValorTotalTributos("NATIVE INSERT UPDATE");
+		nfnotainfoicmstotal.setParentId(id);
+		nfnotainfoicmstotal.setEmprId(1);
+		nfnotainfoicmstotal.setModifyDateUTC(a.getTime());
+		nfnotainfoicmstotal.setCreateDateUTC(a.getTime());
+		nfnotainfoicmstotal.setCreateUser("system");
+		nfnotainfoicmstotal.setModifyUser("system");
+		nfnotainfoicmstotal.setProcessId(1);
+		nfnotainfoicmstotal.setModelAction(action);
+
+		return nfnotainfoicmstotal;
+	}
+
+
+public static NFNotaInfoISSQNTotal insertNFNotaInfoISSQNTotal(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoISSQNTotal nfnotainfoissqntotal = new NFNotaInfoISSQNTotal();
+		Date a = new Date();
+		nfnotainfoissqntotal.setId(id);
+		nfnotainfoissqntotal.setValorTotalServicosSobNaoIncidenciaNaoTributadosICMS("NATIVE INSERT UPDATE");
+		nfnotainfoissqntotal.setBaseCalculoISS("NATIVE INSERT UPDATE");
+		nfnotainfoissqntotal.setValorTotalISS("NATIVE INSERT UPDATE");
+		nfnotainfoissqntotal.setValorPISsobreServicos("NATIVE INSERT UPDATE");
+		nfnotainfoissqntotal.setValorCOFINSsobreServicos("NATIVE INSERT UPDATE");
+		nfnotainfoissqntotal.setDataPrestacaoServico(a.getTime());
+		nfnotainfoissqntotal.setValorDeducao("NATIVE INSERT UPDATE");
+		nfnotainfoissqntotal.setValorOutros("NATIVE INSERT UPDATE");
+		nfnotainfoissqntotal.setValorTotalDescontoIncondicionado("NATIVE INSERT UPDATE");
+		nfnotainfoissqntotal.setValorTotalDescontoCondicionado("NATIVE INSERT UPDATE");
+		nfnotainfoissqntotal.setValorTotalRetencaoISS("NATIVE INSERT UPDATE");
+		nfnotainfoissqntotal.setTributacao(Objects.insertDoisValor(id, tabela, action));
+		nfnotainfoissqntotal.setParentId(id);
+		nfnotainfoissqntotal.setEmprId(1);
+		nfnotainfoissqntotal.setModifyDateUTC(a.getTime());
+		nfnotainfoissqntotal.setCreateDateUTC(a.getTime());
+		nfnotainfoissqntotal.setCreateUser("system");
+		nfnotainfoissqntotal.setModifyUser("system");
+		nfnotainfoissqntotal.setProcessId(1);
+		nfnotainfoissqntotal.setModelAction(action);
+
+		return nfnotainfoissqntotal;
+	}
+
+
+public static NFNotaInfoRetencoesTributos insertNFNotaInfoRetencoesTributos(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoRetencoesTributos nfnotainforetencoestributos = new NFNotaInfoRetencoesTributos();
+		Date a = new Date();
+		nfnotainforetencoestributos.setId(id);
+		nfnotainforetencoestributos.setValorRetidoPIS("NATIVE INSERT UPDATE");
+		nfnotainforetencoestributos.setValorRetidoCOFINS("NATIVE INSERT UPDATE");
+		nfnotainforetencoestributos.setValorRetidoCSLL("NATIVE INSERT UPDATE");
+		nfnotainforetencoestributos.setBaseCalculoIRRF("NATIVE INSERT UPDATE");
+		nfnotainforetencoestributos.setValorRetidoIRRF("NATIVE INSERT UPDATE");
+		nfnotainforetencoestributos.setBaseCalculoRetencaoPrevidenciaSocial("NATIVE INSERT UPDATE");
+		nfnotainforetencoestributos.setValorRetencaoPrevidenciaSocial("NATIVE INSERT UPDATE");
+		nfnotainforetencoestributos.setParentId(id);
+		nfnotainforetencoestributos.setEmprId(1);
+		nfnotainforetencoestributos.setModifyDateUTC(a.getTime());
+		nfnotainforetencoestributos.setCreateDateUTC(a.getTime());
+		nfnotainforetencoestributos.setCreateUser("system");
+		nfnotainforetencoestributos.setModifyUser("system");
+		nfnotainforetencoestributos.setProcessId(1);
+		nfnotainforetencoestributos.setModelAction(action);
+
+		return nfnotainforetencoestributos;
+	}
+
+
+public static NFNotaInfoTransporte insertNFNotaInfoTransporte(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoTransporte nfnotainfotransporte = new NFNotaInfoTransporte();
+		Date a = new Date();
+		nfnotainfotransporte.setId(id);
+		nfnotainfotransporte.setModalidadeFrete(Objects.insertDoisValor(id, tabela, action));
+		nfnotainfotransporte.setTransportador(insertNFNotaInfoTransportador(null, tabela, action));
+		nfnotainfotransporte.setIcmsTransporte(insertNFNotaInfoRetencaoICMSTransporte(null, tabela, action));
+		nfnotainfotransporte.setVeiculo(insertNFNotaInfoVeiculo(null, tabela, action));
+		nfnotainfotransporte.setReboques(new ArrayList<NFNotaInfoReboque>());
+		nfnotainfotransporte.getReboques().add(insertNFNotaInfoReboque(null, tabela, action));
+		nfnotainfotransporte.setVagao("NATIVE INSERT UPDATE");
+		nfnotainfotransporte.setBalsa("NATIVE INSERT UPDATE");
+		nfnotainfotransporte.setParentId(id);
+		nfnotainfotransporte.setEmprId(1);
+		nfnotainfotransporte.setModifyDateUTC(a.getTime());
+		nfnotainfotransporte.setCreateDateUTC(a.getTime());
+		nfnotainfotransporte.setCreateUser("system");
+		nfnotainfotransporte.setModifyUser("system");
+		nfnotainfotransporte.setProcessId(1);
+		nfnotainfotransporte.setModelAction(action);
+
+		return nfnotainfotransporte;
+	}
+
+
+public static NFNotaInfoRetencaoICMSTransporte insertNFNotaInfoRetencaoICMSTransporte(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoRetencaoICMSTransporte nfnotainforetencaoicmstransporte = new NFNotaInfoRetencaoICMSTransporte();
+		Date a = new Date();
+		nfnotainforetencaoicmstransporte.setId(id);
+		nfnotainforetencaoicmstransporte.setValorServico("NATIVE INSERT UPDATE");
+		nfnotainforetencaoicmstransporte.setBcRetencaoICMS("NATIVE INSERT UPDATE");
+		nfnotainforetencaoicmstransporte.setAliquotaRetencao("NATIVE INSERT UPDATE");
+		nfnotainforetencaoicmstransporte.setValorICMSRetido("NATIVE INSERT UPDATE");
+		nfnotainforetencaoicmstransporte.setCfop("NATIVE INSERT UPDATE");
+		nfnotainforetencaoicmstransporte.setCodigoMunicipioOcorrenciaFatoGeradorICMSTransporte("NATIVE INSERT UPDATE");
+		nfnotainforetencaoicmstransporte.setParentId(id);
+		nfnotainforetencaoicmstransporte.setEmprId(1);
+		nfnotainforetencaoicmstransporte.setModifyDateUTC(a.getTime());
+		nfnotainforetencaoicmstransporte.setCreateDateUTC(a.getTime());
+		nfnotainforetencaoicmstransporte.setCreateUser("system");
+		nfnotainforetencaoicmstransporte.setModifyUser("system");
+		nfnotainforetencaoicmstransporte.setProcessId(1);
+		nfnotainforetencaoicmstransporte.setModelAction(action);
+
+		return nfnotainforetencaoicmstransporte;
+	}
+
+
+public static NFNotaInfoTransportador insertNFNotaInfoTransportador(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoTransportador nfnotainfotransportador = new NFNotaInfoTransportador();
+		Date a = new Date();
+		nfnotainfotransportador.setId(id);
+		nfnotainfotransportador.setCnpj("NATIVE INSERT UPDATE");
+		nfnotainfotransportador.setCpf("NATIVE INSERT UPDATE");
+		nfnotainfotransportador.setRazaosocial("NATIVE INSERT UPDATE");
+		nfnotainfotransportador.setInscricaoestadual("NATIVE INSERT UPDATE");
+		nfnotainfotransportador.setEnderecocomplemento("NATIVE INSERT UPDATE");
+		nfnotainfotransportador.setNomemunicipio("NATIVE INSERT UPDATE");
+		nfnotainfotransportador.setUf("NATIVE INSERT UPDATE");
+		nfnotainfotransportador.setParentId(id);
+		nfnotainfotransportador.setEmprId(1);
+		nfnotainfotransportador.setModifyDateUTC(a.getTime());
+		nfnotainfotransportador.setCreateDateUTC(a.getTime());
+		nfnotainfotransportador.setCreateUser("system");
+		nfnotainfotransportador.setModifyUser("system");
+		nfnotainfotransportador.setProcessId(1);
+		nfnotainfotransportador.setModelAction(action);
+
+		return nfnotainfotransportador;
+	}
+
+
+public static NFNotaInfoVeiculo insertNFNotaInfoVeiculo(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoVeiculo nfnotainfoveiculo = new NFNotaInfoVeiculo();
+		Date a = new Date();
+		nfnotainfoveiculo.setId(id);
+		nfnotainfoveiculo.setPlacaVeiculo("NATIVE INSERT UPDATE");
+		nfnotainfoveiculo.setUf("NATIVE INSERT UPDATE");
+		nfnotainfoveiculo.setRegistroNacionalTransportadorCarga("NATIVE INSERT UPDATE");
+		nfnotainfoveiculo.setParentId(id);
+		nfnotainfoveiculo.setEmprId(1);
+		nfnotainfoveiculo.setModifyDateUTC(a.getTime());
+		nfnotainfoveiculo.setCreateDateUTC(a.getTime());
+		nfnotainfoveiculo.setCreateUser("system");
+		nfnotainfoveiculo.setModifyUser("system");
+		nfnotainfoveiculo.setProcessId(1);
+		nfnotainfoveiculo.setModelAction(action);
+
+		return nfnotainfoveiculo;
+	}
+
+
+public static NFNotaInfoReboque insertNFNotaInfoReboque(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoReboque nfnotainforeboque = new NFNotaInfoReboque();
+		Date a = new Date();
+		nfnotainforeboque.setId(id);
+		nfnotainforeboque.setPlacaVeiculo("NATIVE INSERT UPDATE");
+		nfnotainforeboque.setUf("NATIVE INSERT UPDATE");
+		nfnotainforeboque.setRegistroNacionalTransportadorCarga("NATIVE INSERT UPDATE");
+		nfnotainforeboque.setParentId(id);
+		nfnotainforeboque.setEmprId(1);
+		nfnotainforeboque.setModifyDateUTC(a.getTime());
+		nfnotainforeboque.setCreateDateUTC(a.getTime());
+		nfnotainforeboque.setCreateUser("system");
+		nfnotainforeboque.setModifyUser("system");
+		nfnotainforeboque.setProcessId(1);
+		nfnotainforeboque.setModelAction(action);
+
+		return nfnotainforeboque;
+	}
+
+
+public static NFNotaInfoCobranca insertNFNotaInfoCobranca(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoCobranca nfnotainfocobranca = new NFNotaInfoCobranca();
+		Date a = new Date();
+		nfnotainfocobranca.setId(id);
+		nfnotainfocobranca.setFatura(insertNFNotaInfoFatura(null, tabela, action));
+		nfnotainfocobranca.setDuplicatas(insertNFNotaInfoDuplicata(null, tabela, action));
+		nfnotainfocobranca.setParentId(id);
+		nfnotainfocobranca.setEmprId(1);
+		nfnotainfocobranca.setModifyDateUTC(a.getTime());
+		nfnotainfocobranca.setCreateDateUTC(a.getTime());
+		nfnotainfocobranca.setCreateUser("system");
+		nfnotainfocobranca.setModifyUser("system");
+		nfnotainfocobranca.setProcessId(1);
+		nfnotainfocobranca.setModelAction(action);
+
+		return nfnotainfocobranca;
+	}
+
+
+public static NFNotaInfoDuplicata insertNFNotaInfoDuplicata(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoDuplicata nfnotainfoduplicata = new NFNotaInfoDuplicata();
+		Date a = new Date();
+		nfnotainfoduplicata.setId(id);
+		nfnotainfoduplicata.setNumeroDuplicata("NATIVE INSERT UPDATE");
+		nfnotainfoduplicata.setDataVencimento(a.getTime());
+		nfnotainfoduplicata.setValorDuplicata("NATIVE INSERT UPDATE");
+		nfnotainfoduplicata.setParentId(id);
+		nfnotainfoduplicata.setEmprId(1);
+		nfnotainfoduplicata.setModifyDateUTC(a.getTime());
+		nfnotainfoduplicata.setCreateDateUTC(a.getTime());
+		nfnotainfoduplicata.setCreateUser("system");
+		nfnotainfoduplicata.setModifyUser("system");
+		nfnotainfoduplicata.setProcessId(1);
+		nfnotainfoduplicata.setModelAction(action);
+
+		return nfnotainfoduplicata;
+	}
+
+
+public static NFNotaInfoFatura insertNFNotaInfoFatura(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoFatura nfnotainfofatura = new NFNotaInfoFatura();
+		Date a = new Date();
+		nfnotainfofatura.setId(id);
+		nfnotainfofatura.setNumeroFatura("NATIVE INSERT UPDATE");
+		nfnotainfofatura.setValorOriginalFatura("NATIVE INSERT UPDATE");
+		nfnotainfofatura.setValorDesconto("NATIVE INSERT UPDATE");
+		nfnotainfofatura.setValorLiquidoFatura("NATIVE INSERT UPDATE");
+		nfnotainfofatura.setParentId(id);
+		nfnotainfofatura.setEmprId(1);
+		nfnotainfofatura.setModifyDateUTC(a.getTime());
+		nfnotainfofatura.setCreateDateUTC(a.getTime());
+		nfnotainfofatura.setCreateUser("system");
+		nfnotainfofatura.setModifyUser("system");
+		nfnotainfofatura.setProcessId(1);
+		nfnotainfofatura.setModelAction(action);
+
+		return nfnotainfofatura;
+	}
+
+
+public static NFNotaInfoCartao insertNFNotaInfoCartao(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoCartao nfnotainfocartao = new NFNotaInfoCartao();
+		Date a = new Date();
+		nfnotainfocartao.setId(id);
+		nfnotainfocartao.setTipoIntegracao(Objects.insertDoisValor(id, tabela, action));
+		nfnotainfocartao.setCnpj("NATIVE INSERT UPDATE");
+		nfnotainfocartao.setOperadoraCartao(Objects.insertDoisValor(id, tabela, action));
+		nfnotainfocartao.setNumeroAutorizacaoOperacaoCartao("NATIVE INSERT UPDATE");
+		nfnotainfocartao.setParentId(id);
+		nfnotainfocartao.setEmprId(1);
+		nfnotainfocartao.setModifyDateUTC(a.getTime());
+		nfnotainfocartao.setCreateDateUTC(a.getTime());
+		nfnotainfocartao.setCreateUser("system");
+		nfnotainfocartao.setModifyUser("system");
+		nfnotainfocartao.setProcessId(1);
+		nfnotainfocartao.setModelAction(action);
+
+		return nfnotainfocartao;
+	}
+
+
+public static NFNotaInfoPagamento insertNFNotaInfoPagamento(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoPagamento nfnotainfopagamento = new NFNotaInfoPagamento();
+		Date a = new Date();
+		nfnotainfopagamento.setId(id);
+		nfnotainfopagamento.setFormaPagamentoMoeda(Objects.insertDoisValor(id, tabela, action));
+		nfnotainfopagamento.setValorPagamento("NATIVE INSERT UPDATE");
+		nfnotainfopagamento.setCartao(insertNFNotaInfoCartao(null, tabela, action));
+		nfnotainfopagamento.setParentId(id);
+		nfnotainfopagamento.setEmprId(1);
+		nfnotainfopagamento.setModifyDateUTC(a.getTime());
+		nfnotainfopagamento.setCreateDateUTC(a.getTime());
+		nfnotainfopagamento.setCreateUser("system");
+		nfnotainfopagamento.setModifyUser("system");
+		nfnotainfopagamento.setProcessId(1);
+		nfnotainfopagamento.setModelAction(action);
+
+		return nfnotainfopagamento;
+	}
+
+
+public static NFNotaInfoInformacoesAdicionais insertNFNotaInfoInformacoesAdicionais(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoInformacoesAdicionais nfnotainfoinformacoesadicionais = new NFNotaInfoInformacoesAdicionais();
+		Date a = new Date();
+		nfnotainfoinformacoesadicionais.setId(id);
+		nfnotainfoinformacoesadicionais.setInformacoesadicionaisinteressefisco("NATIVE INSERT UPDATE");
+		nfnotainfoinformacoesadicionais.setInformacoescomplementaresinteressecontribuinte("NATIVE INSERT UPDATE");
+		nfnotainfoinformacoesadicionais.setObservacoescontribuinte(new ArrayList<NFNotaInfoObservacao>());
+		nfnotainfoinformacoesadicionais.getObservacoescontribuinte().add(insertNFNotaInfoObservacao(null, tabela, action));
+		nfnotainfoinformacoesadicionais.setObservacoesfisco(new ArrayList<NFNotaInfoObservacao>());
+		nfnotainfoinformacoesadicionais.getObservacoesfisco().add(insertNFNotaInfoObservacao(null, tabela, action));
+		nfnotainfoinformacoesadicionais.setProcessosrefenciado(new ArrayList<NFNotaInfoProcessoReferenciado>());
+		nfnotainfoinformacoesadicionais.getProcessosrefenciado().add(insertNFNotaInfoProcessoReferenciado(null, tabela, action));
+		nfnotainfoinformacoesadicionais.setParentId(id);
+		nfnotainfoinformacoesadicionais.setEmprId(1);
+		nfnotainfoinformacoesadicionais.setModifyDateUTC(a.getTime());
+		nfnotainfoinformacoesadicionais.setCreateDateUTC(a.getTime());
+		nfnotainfoinformacoesadicionais.setCreateUser("system");
+		nfnotainfoinformacoesadicionais.setModifyUser("system");
+		nfnotainfoinformacoesadicionais.setProcessId(1);
+		nfnotainfoinformacoesadicionais.setModelAction(action);
+
+		return nfnotainfoinformacoesadicionais;
+	}
+
+
+public static NFNotaInfoObservacao insertNFNotaInfoObservacao(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoObservacao nfnotainfoobservacao = new NFNotaInfoObservacao();
+		Date a = new Date();
+		nfnotainfoobservacao.setId(id);
+		nfnotainfoobservacao.setIdentificacaoCampo("NATIVE INSERT UPDATE");
+		nfnotainfoobservacao.setConteudoCampo("NATIVE INSERT UPDATE");
+		nfnotainfoobservacao.setParentId(id);
+		nfnotainfoobservacao.setEmprId(1);
+		nfnotainfoobservacao.setModifyDateUTC(a.getTime());
+		nfnotainfoobservacao.setCreateDateUTC(a.getTime());
+		nfnotainfoobservacao.setCreateUser("system");
+		nfnotainfoobservacao.setModifyUser("system");
+		nfnotainfoobservacao.setProcessId(1);
+		nfnotainfoobservacao.setModelAction(action);
+
+		return nfnotainfoobservacao;
+	}
+
+
+public static NFNotaInfoProcessoReferenciado insertNFNotaInfoProcessoReferenciado(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoProcessoReferenciado nfnotainfoprocessoreferenciado = new NFNotaInfoProcessoReferenciado();
+		Date a = new Date();
+		nfnotainfoprocessoreferenciado.setId(id);
+		nfnotainfoprocessoreferenciado.setIdentificadorProcessoOuAtoConcessorio("NATIVE INSERT UPDATE");
+		nfnotainfoprocessoreferenciado.setIndicadorOrigemProcesso(Objects.insertDoisValor(id, tabela, action));
+		nfnotainfoprocessoreferenciado.setParentId(id);
+		nfnotainfoprocessoreferenciado.setEmprId(1);
+		nfnotainfoprocessoreferenciado.setModifyDateUTC(a.getTime());
+		nfnotainfoprocessoreferenciado.setCreateDateUTC(a.getTime());
+		nfnotainfoprocessoreferenciado.setCreateUser("system");
+		nfnotainfoprocessoreferenciado.setModifyUser("system");
+		nfnotainfoprocessoreferenciado.setProcessId(1);
+		nfnotainfoprocessoreferenciado.setModelAction(action);
+
+		return nfnotainfoprocessoreferenciado;
+	}
+
+
+public static NFNotaInfoExportacao insertNFNotaInfoExportacao(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoExportacao nfnotainfoexportacao = new NFNotaInfoExportacao();
+		Date a = new Date();
+		nfnotainfoexportacao.setId(id);
+		nfnotainfoexportacao.setUfEmbarqueProduto("NATIVE INSERT UPDATE");
+		nfnotainfoexportacao.setLocalEmbarqueProdutos("NATIVE INSERT UPDATE");
+		nfnotainfoexportacao.setLocalDespachoProdutos("NATIVE INSERT UPDATE");
+		nfnotainfoexportacao.setParentId(id);
+		nfnotainfoexportacao.setEmprId(1);
+		nfnotainfoexportacao.setModifyDateUTC(a.getTime());
+		nfnotainfoexportacao.setCreateDateUTC(a.getTime());
+		nfnotainfoexportacao.setCreateUser("system");
+		nfnotainfoexportacao.setModifyUser("system");
+		nfnotainfoexportacao.setProcessId(1);
+		nfnotainfoexportacao.setModelAction(action);
+
+		return nfnotainfoexportacao;
+	}
+
+
+public static NFNotaInfoCompra insertNFNotaInfoCompra(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoCompra nfnotainfocompra = new NFNotaInfoCompra();
+		Date a = new Date();
+		nfnotainfocompra.setId(id);
+		nfnotainfocompra.setNotaDeEmpenho("NATIVE INSERT UPDATE");
+		nfnotainfocompra.setPedido("NATIVE INSERT UPDATE");
+		nfnotainfocompra.setContrato("NATIVE INSERT UPDATE");
+		nfnotainfocompra.setParentId(id);
+		nfnotainfocompra.setEmprId(1);
+		nfnotainfocompra.setModifyDateUTC(a.getTime());
+		nfnotainfocompra.setCreateDateUTC(a.getTime());
+		nfnotainfocompra.setCreateUser("system");
+		nfnotainfocompra.setModifyUser("system");
+		nfnotainfocompra.setProcessId(1);
+		nfnotainfocompra.setModelAction(action);
+
+		return nfnotainfocompra;
+	}
+
+
+public static NFNotaInfoCana insertNFNotaInfoCana(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoCana nfnotainfocana = new NFNotaInfoCana();
+		Date a = new Date();
+		nfnotainfocana.setId(id);
+		nfnotainfocana.setSafra("NATIVE INSERT UPDATE");
+		nfnotainfocana.setReferencia("NATIVE INSERT UPDATE");
+		nfnotainfocana.setFornecimentosDiario(new ArrayList<NFNotaInfoCanaFornecimentoDiario>());
+		nfnotainfocana.getFornecimentosDiario().add(insertNFNotaInfoCanaFornecimentoDiario(null, tabela, action));
+		nfnotainfocana.setDeducoes(new ArrayList<NFNotaInfoCanaDeducao>());
+		nfnotainfocana.getDeducoes().add(insertNFNotaInfoCanaDeducao(null, tabela, action));
+		nfnotainfocana.setQuantidadeTotalMes("NATIVE INSERT UPDATE");
+		nfnotainfocana.setQuantidadeTotalAnterior("NATIVE INSERT UPDATE");
+		nfnotainfocana.setQuantidadeTotalGeral("NATIVE INSERT UPDATE");
+		nfnotainfocana.setValorFornecimento("NATIVE INSERT UPDATE");
+		nfnotainfocana.setValorTotalDeducao("NATIVE INSERT UPDATE");
+		nfnotainfocana.setValorLiquidoFornecimento("NATIVE INSERT UPDATE");
+		nfnotainfocana.setParentId(id);
+		nfnotainfocana.setEmprId(1);
+		nfnotainfocana.setModifyDateUTC(a.getTime());
+		nfnotainfocana.setCreateDateUTC(a.getTime());
+		nfnotainfocana.setCreateUser("system");
+		nfnotainfocana.setModifyUser("system");
+		nfnotainfocana.setProcessId(1);
+		nfnotainfocana.setModelAction(action);
+
+		return nfnotainfocana;
+	}
+
+
+public static NFNotaInfoCanaFornecimentoDiario insertNFNotaInfoCanaFornecimentoDiario(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoCanaFornecimentoDiario nfnotainfocanafornecimentodiario = new NFNotaInfoCanaFornecimentoDiario();
+		Date a = new Date();
+		nfnotainfocanafornecimentodiario.setId(id);
+		nfnotainfocanafornecimentodiario.setDia(100);
+		nfnotainfocanafornecimentodiario.setQuantidade(new Double(10.00));
+		nfnotainfocanafornecimentodiario.setParentId(id);
+		nfnotainfocanafornecimentodiario.setEmprId(1);
+		nfnotainfocanafornecimentodiario.setModifyDateUTC(a.getTime());
+		nfnotainfocanafornecimentodiario.setCreateDateUTC(a.getTime());
+		nfnotainfocanafornecimentodiario.setCreateUser("system");
+		nfnotainfocanafornecimentodiario.setModifyUser("system");
+		nfnotainfocanafornecimentodiario.setProcessId(1);
+		nfnotainfocanafornecimentodiario.setModelAction(action);
+
+		return nfnotainfocanafornecimentodiario;
+	}
+
+
+public static NFNotaInfoCanaDeducao insertNFNotaInfoCanaDeducao(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoCanaDeducao nfnotainfocanadeducao = new NFNotaInfoCanaDeducao();
+		Date a = new Date();
+		nfnotainfocanadeducao.setId(id);
+		nfnotainfocanadeducao.setDescricaoDeducao("NATIVE INSERT UPDATE");
+		nfnotainfocanadeducao.setValorDeducao(new Double(10.00));
+		nfnotainfocanadeducao.setParentId(id);
+		nfnotainfocanadeducao.setEmprId(1);
+		nfnotainfocanadeducao.setModifyDateUTC(a.getTime());
+		nfnotainfocanadeducao.setCreateDateUTC(a.getTime());
+		nfnotainfocanadeducao.setCreateUser("system");
+		nfnotainfocanadeducao.setModifyUser("system");
+		nfnotainfocanadeducao.setProcessId(1);
+		nfnotainfocanadeducao.setModelAction(action);
+
+		return nfnotainfocanadeducao;
+	}
+
+
+public static NFNotaInfoSuplementar insertNFNotaInfoSuplementar(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		NFNotaInfoSuplementar nfnotainfosuplementar = new NFNotaInfoSuplementar();
+		Date a = new Date();
+		nfnotainfosuplementar.setId(id);
+		nfnotainfosuplementar.setQrCode("NATIVE INSERT UPDATE");
+		nfnotainfosuplementar.setParentId(id);
+		nfnotainfosuplementar.setEmprId(1);
+		nfnotainfosuplementar.setModifyDateUTC(a.getTime());
+		nfnotainfosuplementar.setCreateDateUTC(a.getTime());
+		nfnotainfosuplementar.setCreateUser("system");
+		nfnotainfosuplementar.setModifyUser("system");
+		nfnotainfosuplementar.setProcessId(1);
+		nfnotainfosuplementar.setModelAction(action);
+
+		return nfnotainfosuplementar;
+	}
 
 
 }

@@ -29,6 +29,8 @@ import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
 import com.qat.samples.sysmgmt.nf.model.Orcamento;
 import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
 import com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest;
+import com.qat.samples.sysmgmt.nfe.model.NFNota;
+import com.qat.samples.sysmgmt.nfe.request.NFNotaInquiryRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
 import com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoItens;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
@@ -66,14 +68,15 @@ public IVendasBAR getVendasBAR()
 @Test
 	public void testDeleteNotaFiscalSaida()
 	{
-		NotaFiscalSaida notafiscalsaida = insertNotaFiscalSaida(4000, TabelaEnum.NOTAFISCALSAIDA, PersistenceActionEnum.INSERT);
+		NFNota notafiscalsaida = Objects.insertNFNota(4001, TabelaEnum.NOTAFISCALSAIDA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4000);
-		NotaFiscalSaida notafiscalsaidaResponse = getVendasBAR().fetchNotaFiscalSaidaById(request);
+		request.setFetchId(4001);
+		NFNota notafiscalsaidaResponse = getVendasBAR().fetchNotaFiscalSaidaById(request);
 		Assert.assertEquals(notafiscalsaidaResponse, null);
 		getVendasBAR().insertNotaFiscalSaida(notafiscalsaida);
 		notafiscalsaidaResponse = getVendasBAR().fetchNotaFiscalSaidaById(request);
 		Assert.assertEquals(notafiscalsaida.getId(), notafiscalsaidaResponse.getId());
+		notafiscalsaida = Objects.insertNFNota(4001, TabelaEnum.NOTAFISCALSAIDA, PersistenceActionEnum.DELETE);
 		getVendasBAR().deleteNotaFiscalSaidaById(notafiscalsaida);
 		notafiscalsaidaResponse = getVendasBAR().fetchNotaFiscalSaidaById(request);
 		Assert.assertEquals(notafiscalsaidaResponse, null);
@@ -82,8 +85,8 @@ public IVendasBAR getVendasBAR()
 	@Test
 	public void testFetchAllNotaFiscalSaidas()
 	{
-	NotaFiscalSaida notafiscalsaida = new NotaFiscalSaida();
-		List<NotaFiscalSaida> response = getVendasBAR().fetchAllNotaFiscalSaidas(notafiscalsaida).getResultsList();
+		NFNota notafiscalsaida = new NFNota();
+		List<NFNota> response = getVendasBAR().fetchAllNotaFiscalSaidas(notafiscalsaida).getResultsList();
 		Assert.assertNotNull(response);
 	}
 
@@ -91,33 +94,33 @@ public IVendasBAR getVendasBAR()
 	public void testDeleteAllNotaFiscalSaidas()
 	{
 		getVendasBAR().deleteAllNotaFiscalSaidas();
-	NotaFiscalSaida notafiscalsaida = new NotaFiscalSaida();
-		List<NotaFiscalSaida> response = getVendasBAR().fetchAllNotaFiscalSaidas(new NotaFiscalSaida()).getResultsList();
-		Assert.assertEquals(response.size(), 0);
+		NFNota notafiscalsaida = new NFNota();
+		List<NFNota> response = getVendasBAR().fetchAllNotaFiscalSaidas(new NFNota()).getResultsList();
+		Assert.assertEquals(response.size(), 3);
 	}
 
 	@Test
 	public void testUpdateNotaFiscalSaida()
 	{
-		NotaFiscalSaida notafiscalsaida = insertNotaFiscalSaida(5000, TabelaEnum.NOTAFISCALSAIDA, PersistenceActionEnum.UPDATE);
+		NFNota notafiscalsaida = Objects.insertNFNota(1000, TabelaEnum.NOTAFISCALSAIDA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(5000);
-		NotaFiscalSaida notafiscalsaidaResponse = getVendasBAR().fetchNotaFiscalSaidaById(request);
-		Assert.assertEquals(notafiscalsaidaResponse.getSerie(), "NATIVE INSERT");
+		request.setFetchId(1000);
+		NFNota notafiscalsaidaResponse = getVendasBAR().fetchNotaFiscalSaidaById(request);
+		Assert.assertEquals(notafiscalsaidaResponse.getCreateUser(), "system");
 		getVendasBAR().updateNotaFiscalSaida(notafiscalsaida);
 		notafiscalsaidaResponse = getVendasBAR().fetchNotaFiscalSaidaById(request);
-		Assert.assertEquals(notafiscalsaidaResponse.getSerie(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(notafiscalsaidaResponse.getCreateUser(), "system");
 	}
 
 	@Test
 	public void testFetchNotaFiscalSaidasByRequest() throws Exception
 	{
 		// check for valid and precount
-		NotaFiscalInquiryRequest request = new NotaFiscalInquiryRequest();
+		NFNotaInquiryRequest request = new NFNotaInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
 		request.setPageSize(3);
-		InternalResultsResponse<NotaFiscalSaida> response = getVendasBAR().fetchNotaFiscalSaidasByRequest(request);
+		InternalResultsResponse<NFNota> response = getVendasBAR().fetchNotaFiscalSaidasByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
@@ -131,108 +134,20 @@ public IVendasBAR getVendasBAR()
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 
 		// check for valid and no precount
-		NotaFiscalInquiryRequest request2 = new NotaFiscalInquiryRequest();
+		NFNotaInquiryRequest request2 = new NFNotaInquiryRequest();
 		request2.setPreQueryCount(false);
-		InternalResultsResponse<NotaFiscalSaida> response2 = getVendasBAR().fetchNotaFiscalSaidasByRequest(request2);
+		InternalResultsResponse<NFNota> response2 = getVendasBAR().fetchNotaFiscalSaidasByRequest(request2);
 		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
 		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
 		// this is because we did not choose to precount
 		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
 
 		// check for zero rows
-		getVendasBAR().deleteAllNotaFiscalSaidas();
-		NotaFiscalInquiryRequest request3 = new NotaFiscalInquiryRequest();
-		request3.setPreQueryCount(true);
-		InternalResultsResponse<NotaFiscalSaida> response3 = getVendasBAR().fetchNotaFiscalSaidasByRequest(request3);
-		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
-
-	}
-
-//===================================### ORCAMENTO ####======================================
-
-
-@Test
-	public void testDeleteOrcamento()
-	{
-		Orcamento orcamento = insertOrcamento(4000, TabelaEnum.ORCAMENTO, PersistenceActionEnum.INSERT);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4000);
-		Orcamento orcamentoResponse = getVendasBAR().fetchOrcamentoById(request);
-		Assert.assertEquals(orcamentoResponse, null);
-		getVendasBAR().insertOrcamento(orcamento);
-		orcamentoResponse = getVendasBAR().fetchOrcamentoById(request);
-		Assert.assertEquals(orcamento.getId(), orcamentoResponse.getId());
-		getVendasBAR().deleteOrcamentoById(orcamento);
-		orcamentoResponse = getVendasBAR().fetchOrcamentoById(request);
-		Assert.assertEquals(orcamentoResponse, null);
-	}
-
-	@Test
-	public void testFetchAllOrcamentos()
-	{
-	Orcamento orcamento = new Orcamento();
-		List<Orcamento> response = getVendasBAR().fetchAllOrcamentos(orcamento).getResultsList();
-		Assert.assertNotNull(response);
-	}
-
-	@Test
-	public void testDeleteAllOrcamentos()
-	{
-		getVendasBAR().deleteAllOrcamentos();
-	Orcamento orcamento = new Orcamento();
-		List<Orcamento> response = getVendasBAR().fetchAllOrcamentos(new Orcamento()).getResultsList();
-		Assert.assertEquals(response.size(), 0);
-	}
-
-	@Test
-	public void testUpdateOrcamento()
-	{
-		Orcamento orcamento = insertOrcamento(3001, TabelaEnum.ORCAMENTO, PersistenceActionEnum.UPDATE);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(3001);
-		Orcamento orcamentoResponse = getVendasBAR().fetchOrcamentoById(request);
-		Assert.assertEquals(orcamentoResponse.getSerie(), "NATIVE INSERT");
-		getVendasBAR().updateOrcamento(orcamento);
-		orcamentoResponse = getVendasBAR().fetchOrcamentoById(request);
-		Assert.assertEquals(orcamentoResponse.getSerie(), "NATIVE INSERT UPDATE");
-	}
-
-	@Test
-	public void testFetchOrcamentosByRequest() throws Exception
-	{
-		// check for valid and precount
-		OrcamentoInquiryRequest request = new OrcamentoInquiryRequest();
-		request.setPreQueryCount(true);
-		request.setStartPage(0);
-		request.setPageSize(3);
-		InternalResultsResponse<Orcamento> response = getVendasBAR().fetchOrcamentosByRequest(request);
-		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-		// check for valid and precount and start 2nd page
-		request.setPreQueryCount(true);
-		request.setStartPage(1);
-		request.setPageSize(3);
-		response = getVendasBAR().fetchOrcamentosByRequest(request);
-		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-
-		// check for valid and no precount
-		OrcamentoInquiryRequest request2 = new OrcamentoInquiryRequest();
-		request2.setPreQueryCount(false);
-		InternalResultsResponse<Orcamento> response2 = getVendasBAR().fetchOrcamentosByRequest(request2);
-		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
-		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
-		// this is because we did not choose to precount
-		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
-
-		// check for zero rows
-		getVendasBAR().deleteAllOrcamentos();
-		OrcamentoInquiryRequest request3 = new OrcamentoInquiryRequest();
-		request3.setPreQueryCount(true);
-		InternalResultsResponse<Orcamento> response3 = getVendasBAR().fetchOrcamentosByRequest(request3);
-		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+//		getVendasBAR().deleteAllNotaFiscalSaidas();
+//		NFNotaInquiryRequest request3 = new NFNotaInquiryRequest();
+//		request3.setPreQueryCount(true);
+//		InternalResultsResponse<NFNota> response3 = getVendasBAR().fetchNotaFiscalSaidasByRequest(request3);
+//		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
 
 	}
 
@@ -324,93 +239,6 @@ public IVendasBAR getVendasBAR()
 
 	}
 
-//===================================### CONHECIMENTOTRANSPORTE ####======================================
-
-
-@Test
-	public void testDeleteConhecimentoTransporte()
-	{
-		ConhecimentoTransporte conhecimentotransporte = insertConhecimentoTransporte(4, TabelaEnum.CONHECIMENTOTRANSPORTE, PersistenceActionEnum.INSERT);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
-		ConhecimentoTransporte conhecimentotransporteResponse = getVendasBAR().fetchConhecimentoTransporteById(request);
-		Assert.assertEquals(conhecimentotransporteResponse, null);
-		getVendasBAR().insertConhecimentoTransporte(conhecimentotransporte);
-		conhecimentotransporteResponse = getVendasBAR().fetchConhecimentoTransporteById(request);
-		Assert.assertEquals(conhecimentotransporte.getId(), conhecimentotransporteResponse.getId());
-		getVendasBAR().deleteConhecimentoTransporteById(conhecimentotransporte);
-		conhecimentotransporteResponse = getVendasBAR().fetchConhecimentoTransporteById(request);
-		Assert.assertEquals(conhecimentotransporteResponse, null);
-	}
-
-	@Test
-	public void testFetchAllConhecimentoTransportes()
-	{
-	ConhecimentoTransporte conhecimentotransporte = new ConhecimentoTransporte();
-		List<ConhecimentoTransporte> response = getVendasBAR().fetchAllConhecimentoTransportes(conhecimentotransporte).getResultsList();
-		Assert.assertNotNull(response);
-	}
-
-	@Test
-	public void testDeleteAllConhecimentoTransportes()
-	{
-		getVendasBAR().deleteAllConhecimentoTransportes();
-	ConhecimentoTransporte conhecimentotransporte = new ConhecimentoTransporte();
-		List<ConhecimentoTransporte> response = getVendasBAR().fetchAllConhecimentoTransportes(new ConhecimentoTransporte()).getResultsList();
-		Assert.assertEquals(response.size(), 0);
-	}
-
-	@Test
-	public void testUpdateConhecimentoTransporte()
-	{
-		ConhecimentoTransporte conhecimentotransporte = insertConhecimentoTransporte(1001, TabelaEnum.CONHECIMENTOTRANSPORTE, PersistenceActionEnum.UPDATE);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1001);
-		ConhecimentoTransporte conhecimentotransporteResponse = getVendasBAR().fetchConhecimentoTransporteById(request);
-		Assert.assertEquals(conhecimentotransporteResponse.getBalsa(), "balsa_1");
-		getVendasBAR().updateConhecimentoTransporte(conhecimentotransporte);
-		conhecimentotransporteResponse = getVendasBAR().fetchConhecimentoTransporteById(request);
-		Assert.assertEquals(conhecimentotransporteResponse.getBalsa(), "NATIVE INSERT UPDATE");
-	}
-
-	@Test
-	public void testFetchConhecimentoTransportesByRequest() throws Exception
-	{
-		// check for valid and precount
-		PagedInquiryRequest request = new PagedInquiryRequest();
-		request.setPreQueryCount(true);
-		request.setStartPage(0);
-		request.setPageSize(3);
-		InternalResultsResponse<ConhecimentoTransporte> response = getVendasBAR().fetchConhecimentoTransportesByRequest(request);
-		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-		// check for valid and precount and start 2nd page
-		request.setPreQueryCount(true);
-		request.setStartPage(1);
-		request.setPageSize(3);
-		response = getVendasBAR().fetchConhecimentoTransportesByRequest(request);
-		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
-		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
-
-		// check for valid and no precount
-		PagedInquiryRequest request2 = new PagedInquiryRequest();
-		request2.setPreQueryCount(false);
-		InternalResultsResponse<ConhecimentoTransporte> response2 = getVendasBAR().fetchConhecimentoTransportesByRequest(request2);
-		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
-		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
-		// this is because we did not choose to precount
-		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
-
-		// check for zero rows
-		getVendasBAR().deleteAllConhecimentoTransportes();
-		PagedInquiryRequest request3 = new PagedInquiryRequest();
-		request3.setPreQueryCount(true);
-		InternalResultsResponse<ConhecimentoTransporte> response3 = getVendasBAR().fetchConhecimentoTransportesByRequest(request3);
-		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
-
-	}
 
 //===================================### NOTAFISCALITENS ####======================================
 
@@ -508,6 +336,40 @@ public IVendasBAR getVendasBAR()
 		executeSqlScript("conf/insertOrdemServico.sql", false);
 		executeSqlScript("conf/insertConhecimentoTransporte.sql", false);
 		executeSqlScript("conf/insertNotaFiscalItens.sql", false);
+		executeSqlScript("conf/insertNFNota.sql", false);
+		executeSqlScript("conf/insertNFNotaInfo.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoIdentificacao.sql", false);
+		executeSqlScript("conf/insertNFInfoModelo1Por1AReferenciada.sql", false);
+		executeSqlScript("conf/insertNFInfoReferenciada.sql", false);
+		executeSqlScript("conf/insertNFInfoProdutorRuralReferenciada.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoEmitente.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoAvulsa.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoDestinatario.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoLocal.sql", false);
+		executeSqlScript("conf/insertNFPessoaAutorizadaDownloadNFe.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoTotal.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoICMSTotal.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoISSQNTotal.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoRetencoesTributos.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoTransporte.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoRetencaoICMSTransporte.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoTransportador.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoVeiculo.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoReboque.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoCobranca.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoDuplicata.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoFatura.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoCartao.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoPagamento.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoInformacoesAdicionais.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoObservacao.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoProcessoReferenciado.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoExportacao.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoCompra.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoCana.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoCanaFornecimentoDiario.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoCanaDeducao.sql", false);
+		executeSqlScript("conf/insertNFNotaInfoSuplementar.sql", false);
 	}
 
 

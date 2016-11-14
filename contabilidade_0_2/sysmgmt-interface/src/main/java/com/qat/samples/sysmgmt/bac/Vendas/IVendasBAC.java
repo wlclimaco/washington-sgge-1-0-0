@@ -1,11 +1,8 @@
 package com.qat.samples.sysmgmt.bac.Vendas;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
-import com.qat.samples.sysmgmt.nf.model.Orcamento;
-import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
 import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalSaidaMaintenanceRequest;
-import com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest;
-import com.qat.samples.sysmgmt.nf.model.request.OrcamentoMaintenanceRequest;
+import com.qat.samples.sysmgmt.nfe.model.NFNota;
+import com.qat.samples.sysmgmt.nfe.request.NFNotaInquiryRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoMaintenanceRequest;
@@ -30,7 +27,7 @@ public interface IVendasBAC
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<NotaFiscalSaida> insertNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request);
+	public InternalResultsResponse<NFNota> insertNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request);
 
 	/**
 * Update notafiscalsaida.
@@ -39,7 +36,7 @@ public interface IVendasBAC
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<NotaFiscalSaida> updateNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request);
+	public InternalResultsResponse<NFNota> updateNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request);
 
 	/**
 * Delete notafiscalsaida.
@@ -48,14 +45,14 @@ public interface IVendasBAC
 *
 * @return the internal results response
 */
-	public InternalResultsResponse<NotaFiscalSaida> deleteNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request);
+	public InternalResultsResponse<NFNota> deleteNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request);
 
 	/**
 * Refresh notafiscalsaidas.
 *
 * @param request containing the number to refresh with and whether to return the result
 */
-	public InternalResultsResponse<NotaFiscalSaida> refreshNotaFiscalSaidas(RefreshRequest request);
+	public InternalResultsResponse<NFNota> refreshNotaFiscalSaidas(RefreshRequest request);
 
 	/**
 * Fetch notafiscalsaida by id.
@@ -63,14 +60,14 @@ public interface IVendasBAC
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<NotaFiscalSaida> fetchNotaFiscalSaidaById(FetchByIdRequest request);
+	public InternalResultsResponse<NFNota> fetchNotaFiscalSaidaById(FetchByIdRequest request);
 
 	/**
 * Fetch all notafiscalsaidas.
 *
 * @return the internal results response< notafiscalsaida>
 */
-	public InternalResultsResponse<NotaFiscalSaida> fetchAllNotaFiscalSaidas(NotaFiscalSaida  notafiscalsaida);
+	public InternalResultsResponse<NFNota> fetchAllNotaFiscalSaidas(NFNota  notafiscalsaida);
 
 	/**
 * Fetch notafiscalsaidas by request.
@@ -78,68 +75,7 @@ public interface IVendasBAC
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<NotaFiscalSaida> fetchNotaFiscalSaidasByRequest(NotaFiscalInquiryRequest request);
-
-
-//===================================### ORCAMENTO ####======================================
-	/**
-
-	/**
-	 * Insert orcamento.
-	 *
-* @param request the orcamento maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<Orcamento> insertOrcamento(OrcamentoMaintenanceRequest request);
-
-	/**
-* Update orcamento.
-*
-* @param request the orcamento maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<Orcamento> updateOrcamento(OrcamentoMaintenanceRequest request);
-
-	/**
-* Delete orcamento.
-*
-* @param request the orcamento maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<Orcamento> deleteOrcamento(OrcamentoMaintenanceRequest request);
-
-	/**
-* Refresh orcamentos.
-*
-* @param request containing the number to refresh with and whether to return the result
-*/
-	public InternalResultsResponse<Orcamento> refreshOrcamentos(RefreshRequest request);
-
-	/**
-* Fetch orcamento by id.
-*
-* @param request the request
-* @return the internal results response
-*/
-	public InternalResultsResponse<Orcamento> fetchOrcamentoById(FetchByIdRequest request);
-
-	/**
-* Fetch all orcamentos.
-*
-* @return the internal results response< orcamento>
-*/
-	public InternalResultsResponse<Orcamento> fetchAllOrcamentos(Orcamento  orcamento);
-
-	/**
-* Fetch orcamentos by request.
-*
-* @param request the request
-* @return the internal results response
-*/
-	public InternalResultsResponse<Orcamento> fetchOrcamentosByRequest(OrcamentoInquiryRequest request);
+	public InternalResultsResponse<NFNota> fetchNotaFiscalSaidasByRequest(NFNotaInquiryRequest request);
 
 
 //===================================### ORDEMSERVICO ####======================================

@@ -21,6 +21,8 @@ import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
 import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalSaidaMaintenanceRequest;
 import com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest;
 import com.qat.samples.sysmgmt.nf.model.request.OrcamentoMaintenanceRequest;
+import com.qat.samples.sysmgmt.nfe.model.NFNota;
+import com.qat.samples.sysmgmt.nfe.request.NFNotaInquiryRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoMaintenanceRequest;
@@ -100,9 +102,9 @@ public class VendasBACImpl implements IVendasBAC
  * )
  */
 @Override
-public InternalResultsResponse<NotaFiscalSaida> insertNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request)
+public InternalResultsResponse<NFNota> insertNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request)
 {
-	InternalResultsResponse<NotaFiscalSaida> response =
+	InternalResultsResponse<NFNota> response =
 			processNotaFiscalSaida(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
 	return response;
 }
@@ -114,9 +116,9 @@ public InternalResultsResponse<NotaFiscalSaida> insertNotaFiscalSaida(NotaFiscal
  * )
  */
 @Override
-public InternalResultsResponse<NotaFiscalSaida> updateNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request)
+public InternalResultsResponse<NFNota> updateNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request)
 {
-	InternalResultsResponse<NotaFiscalSaida> response =
+	InternalResultsResponse<NFNota> response =
 			processNotaFiscalSaida(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
 	return response;
 }
@@ -128,32 +130,11 @@ public InternalResultsResponse<NotaFiscalSaida> updateNotaFiscalSaida(NotaFiscal
  * )
  */
 @Override
-public InternalResultsResponse<NotaFiscalSaida> deleteNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request)
+public InternalResultsResponse<NFNota> deleteNotaFiscalSaida(NotaFiscalSaidaMaintenanceRequest request)
 {
-	InternalResultsResponse<NotaFiscalSaida> response =
+	InternalResultsResponse<NFNota> response =
 			processNotaFiscalSaida(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
 	return response;
-}
-
-/*
- * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.INotaFiscalSaidaBAC#refreshNotaFiscalSaidas(com.qat.samples.sysmgmt.model.request.RefreshRequest)
- */
-@Override
-public InternalResultsResponse<NotaFiscalSaida> refreshNotaFiscalSaidas(RefreshRequest request)
-{
-	// This method is demo code only. Do not view this as a QAT Global Standard.
-	getVendasBAR().deleteAllNotaFiscalSaidas();
-	int refreshNumber = request.getRefreshInt();
-	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
-
-	for (int i = 1; i <= refreshNumber; i++)
-	{
-	getVendasBAR().insertNotaFiscalSaida(new NotaFiscalSaida(i, "NotaFiscalSaidaDesc" + i));
-	}
-
-	// Call maintain to see if we need to return the notafiscalsaida list and if so whether it should be paged or not
-	return maintainReturnListNotaFiscalSaida(request.getReturnList(), request.getReturnListPaged(),new NotaFiscalSaida());
 }
 
 /*
@@ -161,9 +142,9 @@ public InternalResultsResponse<NotaFiscalSaida> refreshNotaFiscalSaidas(RefreshR
  * @see com.qat.samples.sysmgmt.bac.INotaFiscalSaidaBAC#fetchAllNotaFiscalSaidas(NotaFiscalSaida notafiscalsaida)
  */
 @Override
-public InternalResultsResponse<NotaFiscalSaida> fetchAllNotaFiscalSaidas(NotaFiscalSaida notafiscalsaida)
+public InternalResultsResponse<NFNota> fetchAllNotaFiscalSaidas(NFNota notafiscalsaida)
 {
-	InternalResultsResponse<NotaFiscalSaida> response = new InternalResultsResponse<NotaFiscalSaida>();
+	InternalResultsResponse<NFNota> response = new InternalResultsResponse<NFNota>();
 	response.getResultsList().addAll(getVendasBAR().fetchAllNotaFiscalSaidas(notafiscalsaida).getResultsList());
 	return response;
 }
@@ -175,9 +156,9 @@ public InternalResultsResponse<NotaFiscalSaida> fetchAllNotaFiscalSaidas(NotaFis
  * )
  */
 @Override
-public InternalResultsResponse<NotaFiscalSaida> fetchNotaFiscalSaidaById(FetchByIdRequest request)
+public InternalResultsResponse<NFNota> fetchNotaFiscalSaidaById(FetchByIdRequest request)
 {
-	InternalResultsResponse<NotaFiscalSaida> response = new InternalResultsResponse<NotaFiscalSaida>();
+	InternalResultsResponse<NFNota> response = new InternalResultsResponse<NFNota>();
 	// validate fetchId field
 	if (ValidationUtil.isNull(request.getFetchId()))
 	{
@@ -198,7 +179,7 @@ public InternalResultsResponse<NotaFiscalSaida> fetchNotaFiscalSaidaById(FetchBy
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<NotaFiscalSaida> fetchNotaFiscalSaidasByRequest(NotaFiscalInquiryRequest request)
+public InternalResultsResponse<NFNota> fetchNotaFiscalSaidasByRequest(NFNotaInquiryRequest request)
 {
 	return getVendasBAR().fetchNotaFiscalSaidasByRequest(request);
 }
@@ -211,17 +192,17 @@ public InternalResultsResponse<NotaFiscalSaida> fetchNotaFiscalSaidasByRequest(N
  * @param request the request
  * @return the notafiscalsaida response
  */
-private InternalResultsResponse<NotaFiscalSaida> processNotaFiscalSaida(ValidationContextIndicator indicator,
+private InternalResultsResponse<NFNota> processNotaFiscalSaida(ValidationContextIndicator indicator,
 		PersistenceActionEnum persistType,
 		NotaFiscalSaidaMaintenanceRequest request)
 		{
-	InternalResultsResponse<NotaFiscalSaida> response = null;
+	InternalResultsResponse<NFNota> response = null;
 
 		// Persist
-		InternalResponse internalResponse = new InternalResponse ();//doPersistenceNotaFiscalSaida(request.getNotafiscal(), persistType);
+		InternalResponse internalResponse = doPersistenceNotaFiscalSaida(request.getNotafiscal(), persistType);
 		if (internalResponse.isInError())
 		{
-			response = new InternalResultsResponse<NotaFiscalSaida>();
+			response = new InternalResultsResponse<NFNota>();
 			response.setStatus(internalResponse.getError());
 			response.addMessages(internalResponse.getMessageInfoList());
 			response.addMessage(DEFAULT_VENDAS_BAC_EXCEPTION_MSG, MessageSeverity.Error,
@@ -232,19 +213,19 @@ private InternalResultsResponse<NotaFiscalSaida> processNotaFiscalSaida(Validati
 
 		// Call maintainReurnList to see if we need to return the notafiscalsaida list and if so whether it should be paged or
 		// not
-		response = maintainReturnListNotaFiscalSaida(request.getReturnList(), request.getReturnListPaged(),new NotaFiscalSaida());
+		response = maintainReturnListNotaFiscalSaida(request.getReturnList(), request.getReturnListPaged(),new NFNota());
 
 		return response;
 			}
 
 	/**
-	 * Do persistenceNotaFiscalSaida.
+	 * Do persistenceNFNota.
 	 *
 	 * @param request the request
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistenceNotaFiscalSaida(NotaFiscalSaida notafiscalsaida, PersistenceActionEnum updateType)
+	private InternalResponse doPersistenceNotaFiscalSaida(NFNota notafiscalsaida, PersistenceActionEnum updateType)
 	{
 		switch (updateType)
 		{
@@ -273,7 +254,7 @@ private InternalResultsResponse<NotaFiscalSaida> processNotaFiscalSaida(Validati
 	 * @param request the request
 	 * @param response the response
 	 */
-	private InternalResultsResponse<NotaFiscalSaida> maintainReturnListNotaFiscalSaida(Boolean listIndicator, Boolean pageListIndicator,NotaFiscalSaida notafiscalsaida)
+	private InternalResultsResponse<NFNota> maintainReturnListNotaFiscalSaida(Boolean listIndicator, Boolean pageListIndicator,NFNota notafiscalsaida)
 	{
 		// Fetch again if requested.
 		if (listIndicator)
@@ -281,7 +262,7 @@ private InternalResultsResponse<NotaFiscalSaida> processNotaFiscalSaida(Validati
 			// Fetch Paged is requested.
 			if (pageListIndicator)
 			{
-				NotaFiscalInquiryRequest request = new NotaFiscalInquiryRequest();
+				NFNotaInquiryRequest request = new NFNotaInquiryRequest();
 				request.setPreQueryCount(true);
 				return fetchNotaFiscalSaidasByRequest(request);
 			}
@@ -293,218 +274,9 @@ private InternalResultsResponse<NotaFiscalSaida> processNotaFiscalSaida(Validati
 		}
 		else
 		{
-			return new InternalResultsResponse<NotaFiscalSaida>();
+			return new InternalResultsResponse<NFNota>();
 		}
 	}
-
-//===================================### ORCAMENTO ####======================================
-	/**
-/*
-/*
- * (non-Javadoc)
- * @see
- * com.qat.samples.sysmgmt.bac.ICountyBAC#insertOrcamento(com.qat.samples.sysmgmt.model.request.OrcamentoMaintenanceRequest
- * )
- */
-@Override
-public InternalResultsResponse<Orcamento> insertOrcamento(OrcamentoMaintenanceRequest request)
-{
-	InternalResultsResponse<Orcamento> response =
-			processOrcamento(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
-	return response;
-}
-
-/*
- * (non-Javadoc)
- * @see
- * com.qat.samples.sysmgmt.bac.IOrcamentoBAC#updateOrcamento(com.qat.samples.sysmgmt.model.request.OrcamentoMaintenanceRequest
- * )
- */
-@Override
-public InternalResultsResponse<Orcamento> updateOrcamento(OrcamentoMaintenanceRequest request)
-{
-	InternalResultsResponse<Orcamento> response =
-			processOrcamento(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
-	return response;
-}
-
-/*
- * (non-Javadoc)
- * @see
- * com.qat.samples.sysmgmt.bac.IOrcamentoBAC#deleteOrcamento(com.qat.samples.sysmgmt.model.request.OrcamentoMaintenanceRequest
- * )
- */
-@Override
-public InternalResultsResponse<Orcamento> deleteOrcamento(OrcamentoMaintenanceRequest request)
-{
-	InternalResultsResponse<Orcamento> response =
-			processOrcamento(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
-	return response;
-}
-
-/*
- * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IOrcamentoBAC#refreshOrcamentos(com.qat.samples.sysmgmt.model.request.RefreshRequest)
- */
-@Override
-public InternalResultsResponse<Orcamento> refreshOrcamentos(RefreshRequest request)
-{
-	// This method is demo code only. Do not view this as a QAT Global Standard.
-	getVendasBAR().deleteAllOrcamentos();
-	int refreshNumber = request.getRefreshInt();
-	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
-
-	for (int i = 1; i <= refreshNumber; i++)
-	{
-	getVendasBAR().insertOrcamento(new Orcamento(i, "OrcamentoDesc" + i));
-	}
-
-	// Call maintain to see if we need to return the orcamento list and if so whether it should be paged or not
-	return maintainReturnListOrcamento(request.getReturnList(), request.getReturnListPaged(),new Orcamento());
-}
-
-/*
- * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IOrcamentoBAC#fetchAllOrcamentos(Orcamento orcamento)
- */
-@Override
-public InternalResultsResponse<Orcamento> fetchAllOrcamentos(Orcamento orcamento)
-{
-	InternalResultsResponse<Orcamento> response = new InternalResultsResponse<Orcamento>();
-	response.getResultsList().addAll(getVendasBAR().fetchAllOrcamentos(orcamento).getResultsList());
-	return response;
-}
-
-/*
- * (non-Javadoc)
- * @see
- * com.qat.samples.sysmgmt.bac.IOrcamentoBAC#fetchOrcamentoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
- * )
- */
-@Override
-public InternalResultsResponse<Orcamento> fetchOrcamentoById(FetchByIdRequest request)
-{
-	InternalResultsResponse<Orcamento> response = new InternalResultsResponse<Orcamento>();
-	// validate fetchId field
-	if (ValidationUtil.isNull(request.getFetchId()))
-	{
-		response.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
-		response.setStatus(SystemErrorCategory.SystemValidation);
-	}
-	else
-	{
-		response.getResultsList().add(getVendasBAR().fetchOrcamentoById(request));
-	}
-
-	return response;
-}
-
-/*
- * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IOrcamentoBAC#fetchOrcamentosByRequest(com.qat.samples.sysmgmt.model.request.
- * PagedInquiryRequest)
- */
-@Override
-public InternalResultsResponse<Orcamento> fetchOrcamentosByRequest(OrcamentoInquiryRequest request)
-{
-	return getVendasBAR().fetchOrcamentosByRequest(request);
-}
-
-/**
- * Process.
- *
- * @param indicator the indicator
- * @param persistType the persist type
- * @param request the request
- * @return the orcamento response
- */
-private InternalResultsResponse<Orcamento> processOrcamento(ValidationContextIndicator indicator,
-		PersistenceActionEnum persistType,
-		OrcamentoMaintenanceRequest request)
-		{
-	InternalResultsResponse<Orcamento> response = null;
-
-
-		// Persist
-		InternalResponse internalResponse = doPersistenceOrcamento(request.getOrcamento(), persistType);
-		if (internalResponse.isInError())
-		{
-			response = new InternalResultsResponse<Orcamento>();
-			response.setStatus(internalResponse.getError());
-			response.addMessages(internalResponse.getMessageInfoList());
-			response.addMessage(DEFAULT_VENDAS_BAC_EXCEPTION_MSG, MessageSeverity.Error,
-					MessageLevel.Object, new Object[] {internalResponse.errorToString()});
-
-			return response;
-		}
-
-		// Call maintainReurnList to see if we need to return the orcamento list and if so whether it should be paged or
-		// not
-		response = maintainReturnListOrcamento(request.getReturnList(), request.getReturnListPaged(),new Orcamento());
-
-		return response;
-			}
-
-	/**
-	 * Do persistenceOrcamento.
-	 *
-	 * @param request the request
-	 * @param updateType the update type
-	 * @return the internal response
-	 */
-	private InternalResponse doPersistenceOrcamento(Orcamento orcamento, PersistenceActionEnum updateType)
-	{
-		switch (updateType)
-		{
-			case INSERT:
-				return getVendasBAR().insertOrcamento(orcamento);
-
-			case UPDATE:
-				return getVendasBAR().updateOrcamento(orcamento);
-
-			case DELETE:
-				return getVendasBAR().deleteOrcamentoById(orcamento);
-			default:
-				if (LOG.isDebugEnabled())
-				{
-					LOG.debug("updateType missing!");
-				}
-				break;
-		}
-
-		return null;
-	}
-
-	/**
-	 * Maintain return list.
-	 *
-	 * @param request the request
-	 * @param response the response
-	 */
-	private InternalResultsResponse<Orcamento> maintainReturnListOrcamento(Boolean listIndicator, Boolean pageListIndicator,Orcamento orcamento)
-	{
-		// Fetch again if requested.
-		if (listIndicator)
-		{
-			// Fetch Paged is requested.
-			if (pageListIndicator)
-			{
-				OrcamentoInquiryRequest request = new OrcamentoInquiryRequest();
-				request.setPreQueryCount(true);
-				return fetchOrcamentosByRequest(request);
-			}
-			else
-			{
-				// otherwise return all rows not paged
-				return fetchAllOrcamentos(orcamento);
-			}
-		}
-		else
-		{
-			return new InternalResultsResponse<Orcamento>();
-		}
-	}
-
 //===================================### ORDEMSERVICO ####======================================
 	/**
 /*
@@ -711,5 +483,11 @@ private InternalResultsResponse<OrdemServico> processOrdemServico(ValidationCont
 		{
 			return new InternalResultsResponse<OrdemServico>();
 		}
+	}
+
+	@Override
+	public InternalResultsResponse<NFNota> refreshNotaFiscalSaidas(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

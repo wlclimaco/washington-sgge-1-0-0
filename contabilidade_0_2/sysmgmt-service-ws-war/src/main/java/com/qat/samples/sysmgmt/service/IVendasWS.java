@@ -10,12 +10,12 @@ import javax.jws.WebService;
 
 import org.apache.cxf.annotations.WSDLDocumentation;
 
-import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
 import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalSaidaMaintenanceRequest;
 import com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest;
 import com.qat.samples.sysmgmt.nf.model.request.OrcamentoMaintenanceRequest;
 import com.qat.samples.sysmgmt.nf.model.response.NotaFiscalSaidaResponse;
 import com.qat.samples.sysmgmt.nf.model.response.OrcamentoResponse;
+import com.qat.samples.sysmgmt.nfe.request.NFNotaInquiryRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoMaintenanceRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.response.OrdemServicoResponse;
@@ -113,7 +113,7 @@ public interface IVendasWS
 	@WebMethod(action = "fetchNotaFiscalSaidasByRequest")
 	@WebResult(name = "fetchNotaFiscalSaidasByRequestReturn")
 	@WSDLDocumentation(value = "Returns the list of procedures in a paged list (start and ending rows).")
-	public NotaFiscalSaidaResponse fetchNotaFiscalSaidasByRequest(@WebParam(name = "request") NotaFiscalInquiryRequest request);
+	public NotaFiscalSaidaResponse fetchNotaFiscalSaidasByRequest(@WebParam(name = "request") NFNotaInquiryRequest request);
 
 
 //===================================### ORCAMENTO ####======================================

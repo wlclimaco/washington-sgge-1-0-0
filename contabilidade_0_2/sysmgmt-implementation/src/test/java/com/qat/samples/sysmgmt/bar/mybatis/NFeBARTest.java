@@ -2,8 +2,6 @@
 package com.qat.samples.sysmgmt.bar.mybatis;
 
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -23,7 +21,6 @@ import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.bar.Nfe.INFeBAR;
-import com.qat.samples.sysmgmt.nf.model.NotaFiscalItens;
 import com.qat.samples.sysmgmt.nfe.model.NFInfoModelo1Por1AReferenciada;
 import com.qat.samples.sysmgmt.nfe.model.NFInfoProdutorRuralReferenciada;
 import com.qat.samples.sysmgmt.nfe.model.NFInfoReferenciada;
@@ -93,7 +90,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNota()
 	{
-		NFNota nfnota = insertNFNota(4, TabelaEnum.NFNOTA, PersistenceActionEnum.INSERT);
+		NFNota nfnota = Objects.insertNFNota(4, TabelaEnum.NFNOTA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNota nfnotaResponse = getNFeBAR().fetchNFNotaById(request);
@@ -101,7 +98,7 @@ public INFeBAR getNFeBAR()
 		getNFeBAR().insertNFNota(nfnota);
 		nfnotaResponse = getNFeBAR().fetchNFNotaById(request);
 		Assert.assertEquals(nfnota.getId(), nfnotaResponse.getId());
-		nfnota = insertNFNota(4, TabelaEnum.NFNOTA, PersistenceActionEnum.DELETE);
+		nfnota = Objects.insertNFNota(4, TabelaEnum.NFNOTA, PersistenceActionEnum.DELETE);
 		getNFeBAR().deleteNFNotaById(nfnota);
 		nfnotaResponse = getNFeBAR().fetchNFNotaById(request);
 		Assert.assertEquals(nfnotaResponse, null);
@@ -127,7 +124,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNota()
 	{
-		NFNota nfnota = insertNFNota(1001, TabelaEnum.NFNOTA, PersistenceActionEnum.UPDATE);
+		NFNota nfnota = Objects.insertNFNota(1001, TabelaEnum.NFNOTA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNota nfnotaResponse = getNFeBAR().fetchNFNotaById(request);
@@ -182,7 +179,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfo()
 	{
-		NFNotaInfo nfnotainfo = insertNFNotaInfo(4, TabelaEnum.NFNOTAINFO, PersistenceActionEnum.INSERT);
+		NFNotaInfo nfnotainfo = Objects.insertNFNotaInfo(4, TabelaEnum.NFNOTAINFO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfo nfnotainfoResponse = getNFeBAR().fetchNFNotaInfoById(request);
@@ -190,7 +187,7 @@ public INFeBAR getNFeBAR()
 		getNFeBAR().insertNFNotaInfo(nfnotainfo);
 		nfnotainfoResponse = getNFeBAR().fetchNFNotaInfoById(request);
 		Assert.assertEquals(nfnotainfo.getId(), nfnotainfoResponse.getId());
-		insertNFNotaInfo(4, TabelaEnum.NFNOTAINFO, PersistenceActionEnum.DELETE);
+		Objects.insertNFNotaInfo(4, TabelaEnum.NFNOTAINFO, PersistenceActionEnum.DELETE);
 		//getNFeBAR().deleteNFNotaInfoById(nfnotainfo);
 		//nfnotainfoResponse = getNFeBAR().fetchNFNotaInfoById(request);
 		//Assert.assertEquals(nfnotainfoResponse, null);
@@ -216,7 +213,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfo()
 	{
-		NFNotaInfo nfnotainfo = insertNFNotaInfo(1001, TabelaEnum.NFNOTAINFO, PersistenceActionEnum.UPDATE);
+		NFNotaInfo nfnotainfo = Objects.insertNFNotaInfo(1001, TabelaEnum.NFNOTAINFO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfo nfnotainfoResponse = getNFeBAR().fetchNFNotaInfoById(request);
@@ -271,7 +268,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoIdentificacao()
 	{
-		NFNotaInfoIdentificacao nfnotainfoidentificacao = insertNFNotaInfoIdentificacao(4, TabelaEnum.NFNOTAINFOIDENTIFICACAO, PersistenceActionEnum.INSERT);
+		NFNotaInfoIdentificacao nfnotainfoidentificacao = Objects.insertNFNotaInfoIdentificacao(4, TabelaEnum.NFNOTAINFOIDENTIFICACAO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoIdentificacao nfnotainfoidentificacaoResponse = getNFeBAR().fetchNFNotaInfoIdentificacaoById(request);
@@ -279,9 +276,9 @@ public INFeBAR getNFeBAR()
 		getNFeBAR().insertNFNotaInfoIdentificacao(nfnotainfoidentificacao);
 		nfnotainfoidentificacaoResponse = getNFeBAR().fetchNFNotaInfoIdentificacaoById(request);
 		Assert.assertEquals(nfnotainfoidentificacao.getId(), nfnotainfoidentificacaoResponse.getId());
-		nfnotainfoidentificacao = insertNFNotaInfoIdentificacao(4, TabelaEnum.NFNOTAINFOIDENTIFICACAO, PersistenceActionEnum.DELETE);
+		nfnotainfoidentificacao = Objects.insertNFNotaInfoIdentificacao(4, TabelaEnum.NFNOTAINFOIDENTIFICACAO, PersistenceActionEnum.DELETE);
 		getNFeBAR().deleteNFNotaInfoIdentificacaoById(nfnotainfoidentificacao);
-		
+
 		nfnotainfoidentificacaoResponse = getNFeBAR().fetchNFNotaInfoIdentificacaoById(request);
 		Assert.assertEquals(nfnotainfoidentificacaoResponse, null);
 	}
@@ -306,7 +303,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoIdentificacao()
 	{
-		NFNotaInfoIdentificacao nfnotainfoidentificacao = insertNFNotaInfoIdentificacao(1001, TabelaEnum.NFNOTAINFOIDENTIFICACAO, PersistenceActionEnum.UPDATE);
+		NFNotaInfoIdentificacao nfnotainfoidentificacao = Objects.insertNFNotaInfoIdentificacao(1001, TabelaEnum.NFNOTAINFOIDENTIFICACAO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoIdentificacao nfnotainfoidentificacaoResponse = getNFeBAR().fetchNFNotaInfoIdentificacaoById(request);
@@ -361,7 +358,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFInfoModelo1Por1AReferenciada()
 	{
-		NFInfoModelo1Por1AReferenciada nfinfomodelo1por1areferenciada = insertNFInfoModelo1Por1AReferenciada(4, TabelaEnum.NFINFOMODELO1POR1AREFERENCIADA, PersistenceActionEnum.INSERT);
+		NFInfoModelo1Por1AReferenciada nfinfomodelo1por1areferenciada = Objects.insertNFInfoModelo1Por1AReferenciada(4, TabelaEnum.NFINFOMODELO1POR1AREFERENCIADA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFInfoModelo1Por1AReferenciada nfinfomodelo1por1areferenciadaResponse = getNFeBAR().fetchNFInfoModelo1Por1AReferenciadaById(request);
@@ -394,7 +391,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFInfoModelo1Por1AReferenciada()
 	{
-		NFInfoModelo1Por1AReferenciada nfinfomodelo1por1areferenciada = insertNFInfoModelo1Por1AReferenciada(1001, TabelaEnum.NFINFOMODELO1POR1AREFERENCIADA, PersistenceActionEnum.UPDATE);
+		NFInfoModelo1Por1AReferenciada nfinfomodelo1por1areferenciada = Objects.insertNFInfoModelo1Por1AReferenciada(1001, TabelaEnum.NFINFOMODELO1POR1AREFERENCIADA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFInfoModelo1Por1AReferenciada nfinfomodelo1por1areferenciadaResponse = getNFeBAR().fetchNFInfoModelo1Por1AReferenciadaById(request);
@@ -449,7 +446,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFInfoReferenciada()
 	{
-		NFInfoReferenciada nfinforeferenciada = insertNFInfoReferenciada(4, TabelaEnum.NFINFOREFERENCIADA, PersistenceActionEnum.INSERT);
+		NFInfoReferenciada nfinforeferenciada = Objects.insertNFInfoReferenciada(4, TabelaEnum.NFINFOREFERENCIADA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFInfoReferenciada nfinforeferenciadaResponse = getNFeBAR().fetchNFInfoReferenciadaById(request);
@@ -457,9 +454,9 @@ public INFeBAR getNFeBAR()
 		getNFeBAR().insertNFInfoReferenciada(nfinforeferenciada);
 		nfinforeferenciadaResponse = getNFeBAR().fetchNFInfoReferenciadaById(request);
 		Assert.assertEquals(nfinforeferenciada.getId(), nfinforeferenciadaResponse.getId());
-		nfinforeferenciada = insertNFInfoReferenciada(4, TabelaEnum.NFINFOREFERENCIADA, PersistenceActionEnum.DELETE);
+		nfinforeferenciada = Objects.insertNFInfoReferenciada(4, TabelaEnum.NFINFOREFERENCIADA, PersistenceActionEnum.DELETE);
 		getNFeBAR().deleteNFInfoReferenciadaById(nfinforeferenciada);
-		
+
 		nfinforeferenciadaResponse = getNFeBAR().fetchNFInfoReferenciadaById(request);
 		Assert.assertEquals(nfinforeferenciadaResponse, null);
 	}
@@ -484,7 +481,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFInfoReferenciada()
 	{
-		NFInfoReferenciada nfinforeferenciada = insertNFInfoReferenciada(1001, TabelaEnum.NFINFOREFERENCIADA, PersistenceActionEnum.UPDATE);
+		NFInfoReferenciada nfinforeferenciada = Objects.insertNFInfoReferenciada(1001, TabelaEnum.NFINFOREFERENCIADA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFInfoReferenciada nfinforeferenciadaResponse = getNFeBAR().fetchNFInfoReferenciadaById(request);
@@ -539,7 +536,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFInfoProdutorRuralReferenciada()
 	{
-		NFInfoProdutorRuralReferenciada nfinfoprodutorruralreferenciada = insertNFInfoProdutorRuralReferenciada(4, TabelaEnum.NFINFOPRODUTORRURALREFERENCIADA, PersistenceActionEnum.INSERT);
+		NFInfoProdutorRuralReferenciada nfinfoprodutorruralreferenciada = Objects.insertNFInfoProdutorRuralReferenciada(4, TabelaEnum.NFINFOPRODUTORRURALREFERENCIADA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFInfoProdutorRuralReferenciada nfinfoprodutorruralreferenciadaResponse = getNFeBAR().fetchNFInfoProdutorRuralReferenciadaById(request);
@@ -572,7 +569,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFInfoProdutorRuralReferenciada()
 	{
-		NFInfoProdutorRuralReferenciada nfinfoprodutorruralreferenciada = insertNFInfoProdutorRuralReferenciada(1001, TabelaEnum.NFINFOPRODUTORRURALREFERENCIADA, PersistenceActionEnum.UPDATE);
+		NFInfoProdutorRuralReferenciada nfinfoprodutorruralreferenciada = Objects.insertNFInfoProdutorRuralReferenciada(1001, TabelaEnum.NFINFOPRODUTORRURALREFERENCIADA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFInfoProdutorRuralReferenciada nfinfoprodutorruralreferenciadaResponse = getNFeBAR().fetchNFInfoProdutorRuralReferenciadaById(request);
@@ -627,7 +624,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoEmitente()
 	{
-		NFNotaInfoEmitente nfnotainfoemitente = insertNFNotaInfoEmitente(4, TabelaEnum.NFNOTAINFOEMITENTE, PersistenceActionEnum.INSERT);
+		NFNotaInfoEmitente nfnotainfoemitente = Objects.insertNFNotaInfoEmitente(4, TabelaEnum.NFNOTAINFOEMITENTE, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoEmitente nfnotainfoemitenteResponse = getNFeBAR().fetchNFNotaInfoEmitenteById(request);
@@ -660,7 +657,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoEmitente()
 	{
-		NFNotaInfoEmitente nfnotainfoemitente = insertNFNotaInfoEmitente(1001, TabelaEnum.NFNOTAINFOEMITENTE, PersistenceActionEnum.UPDATE);
+		NFNotaInfoEmitente nfnotainfoemitente = Objects.insertNFNotaInfoEmitente(1001, TabelaEnum.NFNOTAINFOEMITENTE, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoEmitente nfnotainfoemitenteResponse = getNFeBAR().fetchNFNotaInfoEmitenteById(request);
@@ -715,7 +712,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoAvulsa()
 	{
-		NFNotaInfoAvulsa nfnotainfoavulsa = insertNFNotaInfoAvulsa(4, TabelaEnum.NFNOTAINFOAVULSA, PersistenceActionEnum.INSERT);
+		NFNotaInfoAvulsa nfnotainfoavulsa = Objects.insertNFNotaInfoAvulsa(4, TabelaEnum.NFNOTAINFOAVULSA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoAvulsa nfnotainfoavulsaResponse = getNFeBAR().fetchNFNotaInfoAvulsaById(request);
@@ -748,7 +745,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoAvulsa()
 	{
-		NFNotaInfoAvulsa nfnotainfoavulsa = insertNFNotaInfoAvulsa(1001, TabelaEnum.NFNOTAINFOAVULSA, PersistenceActionEnum.UPDATE);
+		NFNotaInfoAvulsa nfnotainfoavulsa = Objects.insertNFNotaInfoAvulsa(1001, TabelaEnum.NFNOTAINFOAVULSA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoAvulsa nfnotainfoavulsaResponse = getNFeBAR().fetchNFNotaInfoAvulsaById(request);
@@ -803,7 +800,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoDestinatario()
 	{
-		NFNotaInfoDestinatario nfnotainfodestinatario = insertNFNotaInfoDestinatario(4, TabelaEnum.NFNOTAINFODESTINATARIO, PersistenceActionEnum.INSERT);
+		NFNotaInfoDestinatario nfnotainfodestinatario = Objects.insertNFNotaInfoDestinatario(4, TabelaEnum.NFNOTAINFODESTINATARIO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoDestinatario nfnotainfodestinatarioResponse = getNFeBAR().fetchNFNotaInfoDestinatarioById(request);
@@ -836,7 +833,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoDestinatario()
 	{
-		NFNotaInfoDestinatario nfnotainfodestinatario = insertNFNotaInfoDestinatario(1001, TabelaEnum.NFNOTAINFODESTINATARIO, PersistenceActionEnum.UPDATE);
+		NFNotaInfoDestinatario nfnotainfodestinatario = Objects.insertNFNotaInfoDestinatario(1001, TabelaEnum.NFNOTAINFODESTINATARIO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoDestinatario nfnotainfodestinatarioResponse = getNFeBAR().fetchNFNotaInfoDestinatarioById(request);
@@ -891,7 +888,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoLocal()
 	{
-		NFNotaInfoLocal nfnotainfolocal = insertNFNotaInfoLocal(4, TabelaEnum.NFNOTAINFOLOCAL, PersistenceActionEnum.INSERT);
+		NFNotaInfoLocal nfnotainfolocal = Objects.insertNFNotaInfoLocal(4, TabelaEnum.NFNOTAINFOLOCAL, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoLocal nfnotainfolocalResponse = getNFeBAR().fetchNFNotaInfoLocalById(request);
@@ -924,7 +921,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoLocal()
 	{
-		NFNotaInfoLocal nfnotainfolocal = insertNFNotaInfoLocal(1001, TabelaEnum.NFNOTAINFOLOCAL, PersistenceActionEnum.UPDATE);
+		NFNotaInfoLocal nfnotainfolocal = Objects.insertNFNotaInfoLocal(1001, TabelaEnum.NFNOTAINFOLOCAL, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoLocal nfnotainfolocalResponse = getNFeBAR().fetchNFNotaInfoLocalById(request);
@@ -979,7 +976,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFPessoaAutorizadaDownloadNFe()
 	{
-		NFPessoaAutorizadaDownloadNFe nfpessoaautorizadadownloadnfe = insertNFPessoaAutorizadaDownloadNFe(4, TabelaEnum.NFPESSOAAUTORIZADADOWNLOADNFE, PersistenceActionEnum.INSERT);
+		NFPessoaAutorizadaDownloadNFe nfpessoaautorizadadownloadnfe = Objects.insertNFPessoaAutorizadaDownloadNFe(4, TabelaEnum.NFPESSOAAUTORIZADADOWNLOADNFE, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFPessoaAutorizadaDownloadNFe nfpessoaautorizadadownloadnfeResponse = getNFeBAR().fetchNFPessoaAutorizadaDownloadNFeById(request);
@@ -1012,7 +1009,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFPessoaAutorizadaDownloadNFe()
 	{
-		NFPessoaAutorizadaDownloadNFe nfpessoaautorizadadownloadnfe = insertNFPessoaAutorizadaDownloadNFe(1001, TabelaEnum.NFPESSOAAUTORIZADADOWNLOADNFE, PersistenceActionEnum.UPDATE);
+		NFPessoaAutorizadaDownloadNFe nfpessoaautorizadadownloadnfe = Objects.insertNFPessoaAutorizadaDownloadNFe(1001, TabelaEnum.NFPESSOAAUTORIZADADOWNLOADNFE, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFPessoaAutorizadaDownloadNFe nfpessoaautorizadadownloadnfeResponse = getNFeBAR().fetchNFPessoaAutorizadaDownloadNFeById(request);
@@ -1067,7 +1064,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoTotal()
 	{
-		NFNotaInfoTotal nfnotainfototal = insertNFNotaInfoTotal(4000, TabelaEnum.NFNOTAINFOTOTAL, PersistenceActionEnum.INSERT);
+		NFNotaInfoTotal nfnotainfototal = Objects.insertNFNotaInfoTotal(4000, TabelaEnum.NFNOTAINFOTOTAL, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4000);
 		NFNotaInfoTotal nfnotainfototalResponse = getNFeBAR().fetchNFNotaInfoTotalById(request);
@@ -1075,7 +1072,7 @@ public INFeBAR getNFeBAR()
 		getNFeBAR().insertNFNotaInfoTotal(nfnotainfototal);
 		nfnotainfototalResponse = getNFeBAR().fetchNFNotaInfoTotalById(request);
 		Assert.assertEquals(nfnotainfototal.getId(), nfnotainfototalResponse.getId());
-		insertNFNotaInfoTotal(4, TabelaEnum.NFNOTAINFOTOTAL, PersistenceActionEnum.DELETE);
+		Objects.insertNFNotaInfoTotal(4, TabelaEnum.NFNOTAINFOTOTAL, PersistenceActionEnum.DELETE);
 //		getNFeBAR().deleteNFNotaInfoTotalById(nfnotainfototal);
 //		nfnotainfototalResponse = getNFeBAR().fetchNFNotaInfoTotalById(request);
 //		Assert.assertEquals(nfnotainfototalResponse, null);
@@ -1101,7 +1098,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoTotal()
 	{
-		NFNotaInfoTotal nfnotainfototal = insertNFNotaInfoTotal(1001, TabelaEnum.NFNOTAINFOTOTAL, PersistenceActionEnum.UPDATE);
+		NFNotaInfoTotal nfnotainfototal = Objects.insertNFNotaInfoTotal(1001, TabelaEnum.NFNOTAINFOTOTAL, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoTotal nfnotainfototalResponse = getNFeBAR().fetchNFNotaInfoTotalById(request);
@@ -1156,7 +1153,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoICMSTotal()
 	{
-		NFNotaInfoICMSTotal nfnotainfoicmstotal = insertNFNotaInfoICMSTotal(4, TabelaEnum.NFNOTAINFOICMSTOTAL, PersistenceActionEnum.INSERT);
+		NFNotaInfoICMSTotal nfnotainfoicmstotal = Objects.insertNFNotaInfoICMSTotal(4, TabelaEnum.NFNOTAINFOICMSTOTAL, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoICMSTotal nfnotainfoicmstotalResponse = getNFeBAR().fetchNFNotaInfoICMSTotalById(request);
@@ -1189,7 +1186,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoICMSTotal()
 	{
-		NFNotaInfoICMSTotal nfnotainfoicmstotal = insertNFNotaInfoICMSTotal(1001, TabelaEnum.NFNOTAINFOICMSTOTAL, PersistenceActionEnum.UPDATE);
+		NFNotaInfoICMSTotal nfnotainfoicmstotal = Objects.insertNFNotaInfoICMSTotal(1001, TabelaEnum.NFNOTAINFOICMSTOTAL, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoICMSTotal nfnotainfoicmstotalResponse = getNFeBAR().fetchNFNotaInfoICMSTotalById(request);
@@ -1244,7 +1241,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoISSQNTotal()
 	{
-		NFNotaInfoISSQNTotal nfnotainfoissqntotal = insertNFNotaInfoISSQNTotal(4, TabelaEnum.NFNOTAINFOISSQNTOTAL, PersistenceActionEnum.INSERT);
+		NFNotaInfoISSQNTotal nfnotainfoissqntotal = Objects.insertNFNotaInfoISSQNTotal(4, TabelaEnum.NFNOTAINFOISSQNTOTAL, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoISSQNTotal nfnotainfoissqntotalResponse = getNFeBAR().fetchNFNotaInfoISSQNTotalById(request);
@@ -1277,7 +1274,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoISSQNTotal()
 	{
-		NFNotaInfoISSQNTotal nfnotainfoissqntotal = insertNFNotaInfoISSQNTotal(1001, TabelaEnum.NFNOTAINFOISSQNTOTAL, PersistenceActionEnum.UPDATE);
+		NFNotaInfoISSQNTotal nfnotainfoissqntotal = Objects.insertNFNotaInfoISSQNTotal(1001, TabelaEnum.NFNOTAINFOISSQNTOTAL, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoISSQNTotal nfnotainfoissqntotalResponse = getNFeBAR().fetchNFNotaInfoISSQNTotalById(request);
@@ -1332,7 +1329,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoRetencoesTributos()
 	{
-		NFNotaInfoRetencoesTributos nfnotainforetencoestributos = insertNFNotaInfoRetencoesTributos(4, TabelaEnum.NFNOTAINFORETENCOESTRIBUTOS, PersistenceActionEnum.INSERT);
+		NFNotaInfoRetencoesTributos nfnotainforetencoestributos = Objects.insertNFNotaInfoRetencoesTributos(4, TabelaEnum.NFNOTAINFORETENCOESTRIBUTOS, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoRetencoesTributos nfnotainforetencoestributosResponse = getNFeBAR().fetchNFNotaInfoRetencoesTributosById(request);
@@ -1365,7 +1362,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoRetencoesTributos()
 	{
-		NFNotaInfoRetencoesTributos nfnotainforetencoestributos = insertNFNotaInfoRetencoesTributos(1001, TabelaEnum.NFNOTAINFORETENCOESTRIBUTOS, PersistenceActionEnum.UPDATE);
+		NFNotaInfoRetencoesTributos nfnotainforetencoestributos = Objects.insertNFNotaInfoRetencoesTributos(1001, TabelaEnum.NFNOTAINFORETENCOESTRIBUTOS, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoRetencoesTributos nfnotainforetencoestributosResponse = getNFeBAR().fetchNFNotaInfoRetencoesTributosById(request);
@@ -1420,7 +1417,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoTransporte()
 	{
-		NFNotaInfoTransporte nfnotainfotransporte = insertNFNotaInfoTransporte(4, TabelaEnum.NFNOTAINFOTRANSPORTE, PersistenceActionEnum.INSERT);
+		NFNotaInfoTransporte nfnotainfotransporte = Objects.insertNFNotaInfoTransporte(4, TabelaEnum.NFNOTAINFOTRANSPORTE, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoTransporte nfnotainfotransporteResponse = getNFeBAR().fetchNFNotaInfoTransporteById(request);
@@ -1428,7 +1425,7 @@ public INFeBAR getNFeBAR()
 		getNFeBAR().insertNFNotaInfoTransporte(nfnotainfotransporte);
 		nfnotainfotransporteResponse = getNFeBAR().fetchNFNotaInfoTransporteById(request);
 		Assert.assertEquals(nfnotainfotransporte.getId(), nfnotainfotransporteResponse.getId());
-		nfnotainfotransporte = insertNFNotaInfoTransporte(4, TabelaEnum.NFNOTAINFOTRANSPORTE, PersistenceActionEnum.DELETE);
+		nfnotainfotransporte = Objects.insertNFNotaInfoTransporte(4, TabelaEnum.NFNOTAINFOTRANSPORTE, PersistenceActionEnum.DELETE);
 		getNFeBAR().deleteNFNotaInfoTransporteById(nfnotainfotransporte);
 		nfnotainfotransporteResponse = getNFeBAR().fetchNFNotaInfoTransporteById(request);
 		Assert.assertEquals(nfnotainfotransporteResponse, null);
@@ -1454,7 +1451,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoTransporte()
 	{
-		NFNotaInfoTransporte nfnotainfotransporte = insertNFNotaInfoTransporte(1001, TabelaEnum.NFNOTAINFOTRANSPORTE, PersistenceActionEnum.UPDATE);
+		NFNotaInfoTransporte nfnotainfotransporte = Objects.insertNFNotaInfoTransporte(1001, TabelaEnum.NFNOTAINFOTRANSPORTE, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoTransporte nfnotainfotransporteResponse = getNFeBAR().fetchNFNotaInfoTransporteById(request);
@@ -1509,7 +1506,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoRetencaoICMSTransporte()
 	{
-		NFNotaInfoRetencaoICMSTransporte nfnotainforetencaoicmstransporte = insertNFNotaInfoRetencaoICMSTransporte(4, TabelaEnum.NFNOTAINFORETENCAOICMSTRANSPORTE, PersistenceActionEnum.INSERT);
+		NFNotaInfoRetencaoICMSTransporte nfnotainforetencaoicmstransporte = Objects.insertNFNotaInfoRetencaoICMSTransporte(4, TabelaEnum.NFNOTAINFORETENCAOICMSTRANSPORTE, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoRetencaoICMSTransporte nfnotainforetencaoicmstransporteResponse = getNFeBAR().fetchNFNotaInfoRetencaoICMSTransporteById(request);
@@ -1542,7 +1539,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoRetencaoICMSTransporte()
 	{
-		NFNotaInfoRetencaoICMSTransporte nfnotainforetencaoicmstransporte = insertNFNotaInfoRetencaoICMSTransporte(1001, TabelaEnum.NFNOTAINFORETENCAOICMSTRANSPORTE, PersistenceActionEnum.UPDATE);
+		NFNotaInfoRetencaoICMSTransporte nfnotainforetencaoicmstransporte = Objects.insertNFNotaInfoRetencaoICMSTransporte(1001, TabelaEnum.NFNOTAINFORETENCAOICMSTRANSPORTE, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoRetencaoICMSTransporte nfnotainforetencaoicmstransporteResponse = getNFeBAR().fetchNFNotaInfoRetencaoICMSTransporteById(request);
@@ -1597,7 +1594,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoTransportador()
 	{
-		NFNotaInfoTransportador nfnotainfotransportador = insertNFNotaInfoTransportador(4, TabelaEnum.NFNOTAINFOTRANSPORTADOR, PersistenceActionEnum.INSERT);
+		NFNotaInfoTransportador nfnotainfotransportador = Objects.insertNFNotaInfoTransportador(4, TabelaEnum.NFNOTAINFOTRANSPORTADOR, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoTransportador nfnotainfotransportadorResponse = getNFeBAR().fetchNFNotaInfoTransportadorById(request);
@@ -1630,7 +1627,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoTransportador()
 	{
-		NFNotaInfoTransportador nfnotainfotransportador = insertNFNotaInfoTransportador(1001, TabelaEnum.NFNOTAINFOTRANSPORTADOR, PersistenceActionEnum.UPDATE);
+		NFNotaInfoTransportador nfnotainfotransportador = Objects.insertNFNotaInfoTransportador(1001, TabelaEnum.NFNOTAINFOTRANSPORTADOR, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoTransportador nfnotainfotransportadorResponse = getNFeBAR().fetchNFNotaInfoTransportadorById(request);
@@ -1685,7 +1682,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoVeiculo()
 	{
-		NFNotaInfoVeiculo nfnotainfoveiculo = insertNFNotaInfoVeiculo(4, TabelaEnum.NFNOTAINFOVEICULO, PersistenceActionEnum.INSERT);
+		NFNotaInfoVeiculo nfnotainfoveiculo = Objects.insertNFNotaInfoVeiculo(4, TabelaEnum.NFNOTAINFOVEICULO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoVeiculo nfnotainfoveiculoResponse = getNFeBAR().fetchNFNotaInfoVeiculoById(request);
@@ -1718,7 +1715,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoVeiculo()
 	{
-		NFNotaInfoVeiculo nfnotainfoveiculo = insertNFNotaInfoVeiculo(1001, TabelaEnum.NFNOTAINFOVEICULO, PersistenceActionEnum.UPDATE);
+		NFNotaInfoVeiculo nfnotainfoveiculo = Objects.insertNFNotaInfoVeiculo(1001, TabelaEnum.NFNOTAINFOVEICULO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoVeiculo nfnotainfoveiculoResponse = getNFeBAR().fetchNFNotaInfoVeiculoById(request);
@@ -1773,7 +1770,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoReboque()
 	{
-		NFNotaInfoReboque nfnotainforeboque = insertNFNotaInfoReboque(4, TabelaEnum.NFNOTAINFOREBOQUE, PersistenceActionEnum.INSERT);
+		NFNotaInfoReboque nfnotainforeboque = Objects.insertNFNotaInfoReboque(4, TabelaEnum.NFNOTAINFOREBOQUE, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoReboque nfnotainforeboqueResponse = getNFeBAR().fetchNFNotaInfoReboqueById(request);
@@ -1806,7 +1803,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoReboque()
 	{
-		NFNotaInfoReboque nfnotainforeboque = insertNFNotaInfoReboque(1001, TabelaEnum.NFNOTAINFOREBOQUE, PersistenceActionEnum.UPDATE);
+		NFNotaInfoReboque nfnotainforeboque = Objects.insertNFNotaInfoReboque(1001, TabelaEnum.NFNOTAINFOREBOQUE, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoReboque nfnotainforeboqueResponse = getNFeBAR().fetchNFNotaInfoReboqueById(request);
@@ -1861,7 +1858,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoCobranca()
 	{
-		NFNotaInfoCobranca nfnotainfocobranca = insertNFNotaInfoCobranca(4, TabelaEnum.NFNOTAINFOCOBRANCA, PersistenceActionEnum.INSERT);
+		NFNotaInfoCobranca nfnotainfocobranca = Objects.insertNFNotaInfoCobranca(4, TabelaEnum.NFNOTAINFOCOBRANCA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoCobranca nfnotainfocobrancaResponse = getNFeBAR().fetchNFNotaInfoCobrancaById(request);
@@ -1869,7 +1866,7 @@ public INFeBAR getNFeBAR()
 		getNFeBAR().insertNFNotaInfoCobranca(nfnotainfocobranca);
 		nfnotainfocobrancaResponse = getNFeBAR().fetchNFNotaInfoCobrancaById(request);
 		Assert.assertEquals(nfnotainfocobranca.getId(), nfnotainfocobrancaResponse.getId());
-		nfnotainfocobranca = insertNFNotaInfoCobranca(4, TabelaEnum.NFNOTAINFOCOBRANCA, PersistenceActionEnum.DELETE);
+		nfnotainfocobranca = Objects.insertNFNotaInfoCobranca(4, TabelaEnum.NFNOTAINFOCOBRANCA, PersistenceActionEnum.DELETE);
 		getNFeBAR().deleteNFNotaInfoCobrancaById(nfnotainfocobranca);
 		nfnotainfocobrancaResponse = getNFeBAR().fetchNFNotaInfoCobrancaById(request);
 		Assert.assertEquals(nfnotainfocobrancaResponse, null);
@@ -1895,7 +1892,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoCobranca()
 	{
-		NFNotaInfoCobranca nfnotainfocobranca = insertNFNotaInfoCobranca(1001, TabelaEnum.NFNOTAINFOCOBRANCA, PersistenceActionEnum.UPDATE);
+		NFNotaInfoCobranca nfnotainfocobranca = Objects.insertNFNotaInfoCobranca(1001, TabelaEnum.NFNOTAINFOCOBRANCA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoCobranca nfnotainfocobrancaResponse = getNFeBAR().fetchNFNotaInfoCobrancaById(request);
@@ -1950,7 +1947,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoDuplicata()
 	{
-		NFNotaInfoDuplicata nfnotainfoduplicata = insertNFNotaInfoDuplicata(4, TabelaEnum.NFNOTAINFODUPLICATA, PersistenceActionEnum.INSERT);
+		NFNotaInfoDuplicata nfnotainfoduplicata = Objects.insertNFNotaInfoDuplicata(4, TabelaEnum.NFNOTAINFODUPLICATA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoDuplicata nfnotainfoduplicataResponse = getNFeBAR().fetchNFNotaInfoDuplicataById(request);
@@ -1983,7 +1980,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoDuplicata()
 	{
-		NFNotaInfoDuplicata nfnotainfoduplicata = insertNFNotaInfoDuplicata(1001, TabelaEnum.NFNOTAINFODUPLICATA, PersistenceActionEnum.UPDATE);
+		NFNotaInfoDuplicata nfnotainfoduplicata = Objects.insertNFNotaInfoDuplicata(1001, TabelaEnum.NFNOTAINFODUPLICATA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoDuplicata nfnotainfoduplicataResponse = getNFeBAR().fetchNFNotaInfoDuplicataById(request);
@@ -2038,7 +2035,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoFatura()
 	{
-		NFNotaInfoFatura nfnotainfofatura = insertNFNotaInfoFatura(4, TabelaEnum.NFNOTAINFOFATURA, PersistenceActionEnum.INSERT);
+		NFNotaInfoFatura nfnotainfofatura = Objects.insertNFNotaInfoFatura(4, TabelaEnum.NFNOTAINFOFATURA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoFatura nfnotainfofaturaResponse = getNFeBAR().fetchNFNotaInfoFaturaById(request);
@@ -2071,7 +2068,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoFatura()
 	{
-		NFNotaInfoFatura nfnotainfofatura = insertNFNotaInfoFatura(1001, TabelaEnum.NFNOTAINFOFATURA, PersistenceActionEnum.UPDATE);
+		NFNotaInfoFatura nfnotainfofatura = Objects.insertNFNotaInfoFatura(1001, TabelaEnum.NFNOTAINFOFATURA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoFatura nfnotainfofaturaResponse = getNFeBAR().fetchNFNotaInfoFaturaById(request);
@@ -2126,7 +2123,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoCartao()
 	{
-		NFNotaInfoCartao nfnotainfocartao = insertNFNotaInfoCartao(4, TabelaEnum.NFNOTAINFOCARTAO, PersistenceActionEnum.INSERT);
+		NFNotaInfoCartao nfnotainfocartao = Objects.insertNFNotaInfoCartao(4, TabelaEnum.NFNOTAINFOCARTAO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoCartao nfnotainfocartaoResponse = getNFeBAR().fetchNFNotaInfoCartaoById(request);
@@ -2159,7 +2156,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoCartao()
 	{
-		NFNotaInfoCartao nfnotainfocartao = insertNFNotaInfoCartao(1001, TabelaEnum.NFNOTAINFOCARTAO, PersistenceActionEnum.UPDATE);
+		NFNotaInfoCartao nfnotainfocartao = Objects.insertNFNotaInfoCartao(1001, TabelaEnum.NFNOTAINFOCARTAO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoCartao nfnotainfocartaoResponse = getNFeBAR().fetchNFNotaInfoCartaoById(request);
@@ -2214,7 +2211,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoPagamento()
 	{
-		NFNotaInfoPagamento nfnotainfopagamento = insertNFNotaInfoPagamento(4, TabelaEnum.NFNOTAINFOPAGAMENTO, PersistenceActionEnum.INSERT);
+		NFNotaInfoPagamento nfnotainfopagamento = Objects.insertNFNotaInfoPagamento(4, TabelaEnum.NFNOTAINFOPAGAMENTO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoPagamento nfnotainfopagamentoResponse = getNFeBAR().fetchNFNotaInfoPagamentoById(request);
@@ -2222,7 +2219,7 @@ public INFeBAR getNFeBAR()
 		getNFeBAR().insertNFNotaInfoPagamento(nfnotainfopagamento);
 		nfnotainfopagamentoResponse = getNFeBAR().fetchNFNotaInfoPagamentoById(request);
 		Assert.assertEquals(nfnotainfopagamento.getId(), nfnotainfopagamentoResponse.getId());
-		nfnotainfopagamento = insertNFNotaInfoPagamento(4, TabelaEnum.NFNOTAINFOPAGAMENTO, PersistenceActionEnum.DELETE);
+		nfnotainfopagamento = Objects.insertNFNotaInfoPagamento(4, TabelaEnum.NFNOTAINFOPAGAMENTO, PersistenceActionEnum.DELETE);
 		getNFeBAR().deleteNFNotaInfoPagamentoById(nfnotainfopagamento);
 		nfnotainfopagamentoResponse = getNFeBAR().fetchNFNotaInfoPagamentoById(request);
 		Assert.assertEquals(nfnotainfopagamentoResponse, null);
@@ -2248,7 +2245,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoPagamento()
 	{
-		NFNotaInfoPagamento nfnotainfopagamento = insertNFNotaInfoPagamento(1001, TabelaEnum.NFNOTAINFOPAGAMENTO, PersistenceActionEnum.UPDATE);
+		NFNotaInfoPagamento nfnotainfopagamento = Objects.insertNFNotaInfoPagamento(1001, TabelaEnum.NFNOTAINFOPAGAMENTO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoPagamento nfnotainfopagamentoResponse = getNFeBAR().fetchNFNotaInfoPagamentoById(request);
@@ -2303,7 +2300,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoInformacoesAdicionais()
 	{
-		NFNotaInfoInformacoesAdicionais nfnotainfoinformacoesadicionais = insertNFNotaInfoInformacoesAdicionais(4, TabelaEnum.NFNOTAINFOINFORMACOESADICIONAIS, PersistenceActionEnum.INSERT);
+		NFNotaInfoInformacoesAdicionais nfnotainfoinformacoesadicionais = Objects.insertNFNotaInfoInformacoesAdicionais(4, TabelaEnum.NFNOTAINFOINFORMACOESADICIONAIS, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoInformacoesAdicionais nfnotainfoinformacoesadicionaisResponse = getNFeBAR().fetchNFNotaInfoInformacoesAdicionaisById(request);
@@ -2311,7 +2308,7 @@ public INFeBAR getNFeBAR()
 		getNFeBAR().insertNFNotaInfoInformacoesAdicionais(nfnotainfoinformacoesadicionais);
 		nfnotainfoinformacoesadicionaisResponse = getNFeBAR().fetchNFNotaInfoInformacoesAdicionaisById(request);
 		Assert.assertEquals(nfnotainfoinformacoesadicionais.getId(), nfnotainfoinformacoesadicionaisResponse.getId());
-		nfnotainfoinformacoesadicionais = insertNFNotaInfoInformacoesAdicionais(4, TabelaEnum.NFNOTAINFOINFORMACOESADICIONAIS, PersistenceActionEnum.DELETE);
+		nfnotainfoinformacoesadicionais = Objects.insertNFNotaInfoInformacoesAdicionais(4, TabelaEnum.NFNOTAINFOINFORMACOESADICIONAIS, PersistenceActionEnum.DELETE);
 		getNFeBAR().deleteNFNotaInfoInformacoesAdicionaisById(nfnotainfoinformacoesadicionais);
 		nfnotainfoinformacoesadicionaisResponse = getNFeBAR().fetchNFNotaInfoInformacoesAdicionaisById(request);
 		Assert.assertEquals(nfnotainfoinformacoesadicionaisResponse, null);
@@ -2337,7 +2334,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoInformacoesAdicionais()
 	{
-		NFNotaInfoInformacoesAdicionais nfnotainfoinformacoesadicionais = insertNFNotaInfoInformacoesAdicionais(1001, TabelaEnum.NFNOTAINFOINFORMACOESADICIONAIS, PersistenceActionEnum.UPDATE);
+		NFNotaInfoInformacoesAdicionais nfnotainfoinformacoesadicionais = Objects.insertNFNotaInfoInformacoesAdicionais(1001, TabelaEnum.NFNOTAINFOINFORMACOESADICIONAIS, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoInformacoesAdicionais nfnotainfoinformacoesadicionaisResponse = getNFeBAR().fetchNFNotaInfoInformacoesAdicionaisById(request);
@@ -2392,7 +2389,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoObservacao()
 	{
-		NFNotaInfoObservacao nfnotainfoobservacao = insertNFNotaInfoObservacao(4, TabelaEnum.NFNOTAINFOOBSERVACAO, PersistenceActionEnum.INSERT);
+		NFNotaInfoObservacao nfnotainfoobservacao = Objects.insertNFNotaInfoObservacao(4, TabelaEnum.NFNOTAINFOOBSERVACAO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoObservacao nfnotainfoobservacaoResponse = getNFeBAR().fetchNFNotaInfoObservacaoById(request);
@@ -2425,7 +2422,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoObservacao()
 	{
-		NFNotaInfoObservacao nfnotainfoobservacao = insertNFNotaInfoObservacao(1001, TabelaEnum.NFNOTAINFOOBSERVACAO, PersistenceActionEnum.UPDATE);
+		NFNotaInfoObservacao nfnotainfoobservacao = Objects.insertNFNotaInfoObservacao(1001, TabelaEnum.NFNOTAINFOOBSERVACAO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoObservacao nfnotainfoobservacaoResponse = getNFeBAR().fetchNFNotaInfoObservacaoById(request);
@@ -2480,7 +2477,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoProcessoReferenciado()
 	{
-		NFNotaInfoProcessoReferenciado nfnotainfoprocessoreferenciado = insertNFNotaInfoProcessoReferenciado(4, TabelaEnum.NFNOTAINFOPROCESSOREFERENCIADO, PersistenceActionEnum.INSERT);
+		NFNotaInfoProcessoReferenciado nfnotainfoprocessoreferenciado = Objects.insertNFNotaInfoProcessoReferenciado(4, TabelaEnum.NFNOTAINFOPROCESSOREFERENCIADO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoProcessoReferenciado nfnotainfoprocessoreferenciadoResponse = getNFeBAR().fetchNFNotaInfoProcessoReferenciadoById(request);
@@ -2513,7 +2510,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoProcessoReferenciado()
 	{
-		NFNotaInfoProcessoReferenciado nfnotainfoprocessoreferenciado = insertNFNotaInfoProcessoReferenciado(1001, TabelaEnum.NFNOTAINFOPROCESSOREFERENCIADO, PersistenceActionEnum.UPDATE);
+		NFNotaInfoProcessoReferenciado nfnotainfoprocessoreferenciado = Objects.insertNFNotaInfoProcessoReferenciado(1001, TabelaEnum.NFNOTAINFOPROCESSOREFERENCIADO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoProcessoReferenciado nfnotainfoprocessoreferenciadoResponse = getNFeBAR().fetchNFNotaInfoProcessoReferenciadoById(request);
@@ -2568,7 +2565,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoExportacao()
 	{
-		NFNotaInfoExportacao nfnotainfoexportacao = insertNFNotaInfoExportacao(4, TabelaEnum.NFNOTAINFOEXPORTACAO, PersistenceActionEnum.INSERT);
+		NFNotaInfoExportacao nfnotainfoexportacao = Objects.insertNFNotaInfoExportacao(4, TabelaEnum.NFNOTAINFOEXPORTACAO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoExportacao nfnotainfoexportacaoResponse = getNFeBAR().fetchNFNotaInfoExportacaoById(request);
@@ -2601,7 +2598,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoExportacao()
 	{
-		NFNotaInfoExportacao nfnotainfoexportacao = insertNFNotaInfoExportacao(1001, TabelaEnum.NFNOTAINFOEXPORTACAO, PersistenceActionEnum.UPDATE);
+		NFNotaInfoExportacao nfnotainfoexportacao = Objects.insertNFNotaInfoExportacao(1001, TabelaEnum.NFNOTAINFOEXPORTACAO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoExportacao nfnotainfoexportacaoResponse = getNFeBAR().fetchNFNotaInfoExportacaoById(request);
@@ -2656,7 +2653,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoCompra()
 	{
-		NFNotaInfoCompra nfnotainfocompra = insertNFNotaInfoCompra(4, TabelaEnum.NFNOTAINFOCOMPRA, PersistenceActionEnum.INSERT);
+		NFNotaInfoCompra nfnotainfocompra = Objects.insertNFNotaInfoCompra(4, TabelaEnum.NFNOTAINFOCOMPRA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoCompra nfnotainfocompraResponse = getNFeBAR().fetchNFNotaInfoCompraById(request);
@@ -2689,7 +2686,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoCompra()
 	{
-		NFNotaInfoCompra nfnotainfocompra = insertNFNotaInfoCompra(1001, TabelaEnum.NFNOTAINFOCOMPRA, PersistenceActionEnum.UPDATE);
+		NFNotaInfoCompra nfnotainfocompra = Objects.insertNFNotaInfoCompra(1001, TabelaEnum.NFNOTAINFOCOMPRA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoCompra nfnotainfocompraResponse = getNFeBAR().fetchNFNotaInfoCompraById(request);
@@ -2744,7 +2741,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoCana()
 	{
-		NFNotaInfoCana nfnotainfocana = insertNFNotaInfoCana(1400, TabelaEnum.NFNOTAINFOCANA, PersistenceActionEnum.INSERT);
+		NFNotaInfoCana nfnotainfocana = Objects.insertNFNotaInfoCana(1400, TabelaEnum.NFNOTAINFOCANA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1400);
 		NFNotaInfoCana nfnotainfocanaResponse = getNFeBAR().fetchNFNotaInfoCanaById(request);
@@ -2752,7 +2749,7 @@ public INFeBAR getNFeBAR()
 		getNFeBAR().insertNFNotaInfoCana(nfnotainfocana);
 		nfnotainfocanaResponse = getNFeBAR().fetchNFNotaInfoCanaById(request);
 		Assert.assertEquals(nfnotainfocana.getId(), nfnotainfocanaResponse.getId());
-		nfnotainfocana = insertNFNotaInfoCana(1400, TabelaEnum.NFNOTAINFOCANA, PersistenceActionEnum.DELETE);
+		nfnotainfocana = Objects.insertNFNotaInfoCana(1400, TabelaEnum.NFNOTAINFOCANA, PersistenceActionEnum.DELETE);
 		getNFeBAR().deleteNFNotaInfoCanaById(nfnotainfocana);
 		nfnotainfocanaResponse = getNFeBAR().fetchNFNotaInfoCanaById(request);
 		Assert.assertEquals(nfnotainfocanaResponse, null);
@@ -2778,7 +2775,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoCana()
 	{
-		NFNotaInfoCana nfnotainfocana = insertNFNotaInfoCana(1001, TabelaEnum.NFNOTAINFOCANA, PersistenceActionEnum.UPDATE);
+		NFNotaInfoCana nfnotainfocana = Objects.insertNFNotaInfoCana(1001, TabelaEnum.NFNOTAINFOCANA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoCana nfnotainfocanaResponse = getNFeBAR().fetchNFNotaInfoCanaById(request);
@@ -2833,7 +2830,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoCanaFornecimentoDiario()
 	{
-		NFNotaInfoCanaFornecimentoDiario nfnotainfocanafornecimentodiario = insertNFNotaInfoCanaFornecimentoDiario(4, TabelaEnum.NFNOTAINFOCANAFORNECIMENTODIARIO, PersistenceActionEnum.INSERT);
+		NFNotaInfoCanaFornecimentoDiario nfnotainfocanafornecimentodiario = Objects.insertNFNotaInfoCanaFornecimentoDiario(4, TabelaEnum.NFNOTAINFOCANAFORNECIMENTODIARIO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoCanaFornecimentoDiario nfnotainfocanafornecimentodiarioResponse = getNFeBAR().fetchNFNotaInfoCanaFornecimentoDiarioById(request);
@@ -2866,7 +2863,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoCanaFornecimentoDiario()
 	{
-		NFNotaInfoCanaFornecimentoDiario nfnotainfocanafornecimentodiario = insertNFNotaInfoCanaFornecimentoDiario(1001, TabelaEnum.NFNOTAINFOCANAFORNECIMENTODIARIO, PersistenceActionEnum.UPDATE);
+		NFNotaInfoCanaFornecimentoDiario nfnotainfocanafornecimentodiario = Objects.insertNFNotaInfoCanaFornecimentoDiario(1001, TabelaEnum.NFNOTAINFOCANAFORNECIMENTODIARIO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoCanaFornecimentoDiario nfnotainfocanafornecimentodiarioResponse = getNFeBAR().fetchNFNotaInfoCanaFornecimentoDiarioById(request);
@@ -2921,7 +2918,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoCanaDeducao()
 	{
-		NFNotaInfoCanaDeducao nfnotainfocanadeducao = insertNFNotaInfoCanaDeducao(4, TabelaEnum.NFNOTAINFOCANADEDUCAO, PersistenceActionEnum.INSERT);
+		NFNotaInfoCanaDeducao nfnotainfocanadeducao = Objects.insertNFNotaInfoCanaDeducao(4, TabelaEnum.NFNOTAINFOCANADEDUCAO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoCanaDeducao nfnotainfocanadeducaoResponse = getNFeBAR().fetchNFNotaInfoCanaDeducaoById(request);
@@ -2954,7 +2951,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoCanaDeducao()
 	{
-		NFNotaInfoCanaDeducao nfnotainfocanadeducao = insertNFNotaInfoCanaDeducao(1001, TabelaEnum.NFNOTAINFOCANADEDUCAO, PersistenceActionEnum.UPDATE);
+		NFNotaInfoCanaDeducao nfnotainfocanadeducao = Objects.insertNFNotaInfoCanaDeducao(1001, TabelaEnum.NFNOTAINFOCANADEDUCAO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoCanaDeducao nfnotainfocanadeducaoResponse = getNFeBAR().fetchNFNotaInfoCanaDeducaoById(request);
@@ -3009,7 +3006,7 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfoSuplementar()
 	{
-		NFNotaInfoSuplementar nfnotainfosuplementar = insertNFNotaInfoSuplementar(4, TabelaEnum.NFNOTAINFOSUPLEMENTAR, PersistenceActionEnum.INSERT);
+		NFNotaInfoSuplementar nfnotainfosuplementar = Objects.insertNFNotaInfoSuplementar(4, TabelaEnum.NFNOTAINFOSUPLEMENTAR, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoSuplementar nfnotainfosuplementarResponse = getNFeBAR().fetchNFNotaInfoSuplementarById(request);
@@ -3042,7 +3039,7 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoSuplementar()
 	{
-		NFNotaInfoSuplementar nfnotainfosuplementar = insertNFNotaInfoSuplementar(1001, TabelaEnum.NFNOTAINFOSUPLEMENTAR, PersistenceActionEnum.UPDATE);
+		NFNotaInfoSuplementar nfnotainfosuplementar = Objects.insertNFNotaInfoSuplementar(1001, TabelaEnum.NFNOTAINFOSUPLEMENTAR, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		NFNotaInfoSuplementar nfnotainfosuplementarResponse = getNFeBAR().fetchNFNotaInfoSuplementarById(request);
@@ -3129,848 +3126,6 @@ public INFeBAR getNFeBAR()
 		executeSqlScript("conf/insertNFNotaInfoCanaDeducao.sql", false);
 		executeSqlScript("conf/insertNFNotaInfoSuplementar.sql", false);
 	}
-
-
-	public NFNota insertNFNota(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNota nfnota = new NFNota();
-			Date a = new Date();
-			nfnota.setId(id);
-			nfnota.setIdentificadorLocal(a.getTime());
-			nfnota.setInfo(insertNFNotaInfo(id,tabela,action));
-			nfnota.setInfoSuplementar(insertNFNotaInfoSuplementar(id,tabela,action));
-			nfnota.setAssinatura(Objects.insertDoisValor(id, tabela, action));
-			nfnota.setParentId(id);
-			nfnota.setEmprId(1);
-			nfnota.setModifyDateUTC(a.getTime());
-			nfnota.setCreateDateUTC(a.getTime());
-			nfnota.setCreateUser("system");
-			nfnota.setModifyUser("system");
-			nfnota.setProcessId(1);
-			nfnota.setModelAction(action);
-
-			return nfnota;
-		}
-
-
-	public NFNotaInfo insertNFNotaInfo(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfo nfnotainfo = new NFNotaInfo();
-			Date a = new Date();
-			nfnotainfo.setId(id);
-			nfnotainfo.setIdentificador("NATIVE INSERT UPDATE");
-			nfnotainfo.setVersao("NATIVE INSERT UPDATE");
-			nfnotainfo.setIdentificacao(insertNFNotaInfoIdentificacao(null, tabela, action));
-			nfnotainfo.setEmitente(insertNFNotaInfoEmitente(null, tabela, action));
-			nfnotainfo.setAvulsa(insertNFNotaInfoAvulsa(null, tabela, action));
-			nfnotainfo.setDestinatario(insertNFNotaInfoDestinatario(null, tabela, action));
-			nfnotainfo.setRetirada(insertNFNotaInfoLocal(null, tabela, action));
-			nfnotainfo.setEntrega(insertNFNotaInfoLocal(null, tabela, action));
-			nfnotainfo.setPessoasautorizadasdownloadnfe(new ArrayList<NFPessoaAutorizadaDownloadNFe>());
-			nfnotainfo.getPessoasautorizadasdownloadnfe().add(insertNFPessoaAutorizadaDownloadNFe(null, tabela, action));
-			nfnotainfo.setItens(new ArrayList<NotaFiscalItens>());
-			nfnotainfo.getItens().add(Objects.insertNotaFiscalItens(null, tabela, action));
-			nfnotainfo.setTotal(insertNFNotaInfoTotal(null, tabela, action));
-			nfnotainfo.setTransporte(insertNFNotaInfoTransporte(null, tabela, action));
-			nfnotainfo.setCobranca(insertNFNotaInfoCobranca(null, tabela, action));
-			nfnotainfo.setPagamentos(new ArrayList<NFNotaInfoPagamento>());
-			nfnotainfo.getPagamentos().add(insertNFNotaInfoPagamento(null, tabela, action));
-			nfnotainfo.setInformacoesadicionais(insertNFNotaInfoInformacoesAdicionais(null, tabela, action));
-			nfnotainfo.setExportacao(insertNFNotaInfoExportacao(null, tabela, action));
-			nfnotainfo.setCompra(insertNFNotaInfoCompra(null, tabela, action));
-			nfnotainfo.setCana(insertNFNotaInfoCana(null, tabela, action));
-			nfnotainfo.setParentId(id);
-			nfnotainfo.setEmprId(1);
-			nfnotainfo.setModifyDateUTC(a.getTime());
-			nfnotainfo.setCreateDateUTC(a.getTime());
-			nfnotainfo.setCreateUser("system");
-			nfnotainfo.setModifyUser("system");
-			nfnotainfo.setProcessId(1);
-			nfnotainfo.setModelAction(action);
-
-			return nfnotainfo;
-		}
-
-
-	public NFNotaInfoIdentificacao insertNFNotaInfoIdentificacao(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoIdentificacao nfnotainfoidentificacao = new NFNotaInfoIdentificacao();
-			Date a = new Date();
-			nfnotainfoidentificacao.setId(id);
-			nfnotainfoidentificacao.setUf(Objects.insertEstado(null, tabela, action));
-			nfnotainfoidentificacao.setCodigoRandomico("NATIVE INSERT UPDATE");
-			nfnotainfoidentificacao.setNaturezaOperacao("NATIVE INSERT UPDATE");
-		//	nfnotainfoidentificacao.setFormaPagamento(Objects.insertDoisValor(id, tabela, action));
-			nfnotainfoidentificacao.setModelo(Objects.insertDoisValor(id, tabela, action));
-			nfnotainfoidentificacao.setSerie("NATIVE INSERT UPDATE");
-			nfnotainfoidentificacao.setNumeroNota("NATIVE INSERT UPDATE");
-			nfnotainfoidentificacao.setDataHoraEmissao(a.getTime());
-			nfnotainfoidentificacao.setDataHoraSaidaOuEntrada(a.getTime());
-			nfnotainfoidentificacao.setTipo(Objects.insertDoisValor(id, tabela, action));
-			nfnotainfoidentificacao.setIdentificadorLocalDestinoOperacao(Objects.insertDoisValor(id, tabela, action));
-			nfnotainfoidentificacao.setCodigoMunicipio("NATIVE INSERT UPDATE");
-			nfnotainfoidentificacao.setTipoImpressao(Objects.insertDoisValor(id, tabela, action));
-			nfnotainfoidentificacao.setTipoEmissao(Objects.insertDoisValor(id, tabela, action));
-			nfnotainfoidentificacao.setDigitoVerificador(100);
-			nfnotainfoidentificacao.setAmbiente(Objects.insertDoisValor(id, tabela, action));
-			nfnotainfoidentificacao.setFinalidade(Objects.insertDoisValor(id, tabela, action));
-			nfnotainfoidentificacao.setOperacaoConsumidorFinal(Objects.insertDoisValor(id, tabela, action));
-			nfnotainfoidentificacao.setIndicadorPresencaComprador(Objects.insertDoisValor(id, tabela, action));
-			nfnotainfoidentificacao.setProgramaEmissor(Objects.insertDoisValor(id, tabela, action));
-			nfnotainfoidentificacao.setVersaoEmissor("NATIVE INSERT UPDATE");
-			nfnotainfoidentificacao.setDataHoraContigencia(a.getTime());
-			nfnotainfoidentificacao.setJustificativaEntradaContingencia("NATIVE INSERT UPDATE");
-			nfnotainfoidentificacao.setReferenciadas(new ArrayList<NFInfoReferenciada>());
-			nfnotainfoidentificacao.getReferenciadas().add(insertNFInfoReferenciada(null, tabela, action));
-			nfnotainfoidentificacao.setParentId(id);
-			nfnotainfoidentificacao.setEmprId(1);
-			nfnotainfoidentificacao.setModifyDateUTC(a.getTime());
-			nfnotainfoidentificacao.setCreateDateUTC(a.getTime());
-			nfnotainfoidentificacao.setCreateUser("system");
-			nfnotainfoidentificacao.setModifyUser("system");
-			nfnotainfoidentificacao.setProcessId(1);
-			nfnotainfoidentificacao.setModelAction(action);
-
-			return nfnotainfoidentificacao;
-		}
-
-
-	public NFInfoModelo1Por1AReferenciada insertNFInfoModelo1Por1AReferenciada(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFInfoModelo1Por1AReferenciada nfinfomodelo1por1areferenciada = new NFInfoModelo1Por1AReferenciada();
-			Date a = new Date();
-			nfinfomodelo1por1areferenciada.setId(id);
-			nfinfomodelo1por1areferenciada.setUf(Objects.insertEstado(id, tabela, action));
-			nfinfomodelo1por1areferenciada.setAnoMesEmissaoNFe("NATIVE INSERT UPDATE");
-			nfinfomodelo1por1areferenciada.setCnpj("NATIVE INSERT UPDATE");
-			nfinfomodelo1por1areferenciada.setModeloDocumentoFiscal("NATIVE INSERT UPDATE");
-			nfinfomodelo1por1areferenciada.setSerie("NATIVE INSERT UPDATE");
-			nfinfomodelo1por1areferenciada.setNumeroDocumentoFiscal("NATIVE INSERT UPDATE");
-			nfinfomodelo1por1areferenciada.setParentId(id);
-			nfinfomodelo1por1areferenciada.setEmprId(1);
-			nfinfomodelo1por1areferenciada.setModifyDateUTC(a.getTime());
-			nfinfomodelo1por1areferenciada.setCreateDateUTC(a.getTime());
-			nfinfomodelo1por1areferenciada.setCreateUser("system");
-			nfinfomodelo1por1areferenciada.setModifyUser("system");
-			nfinfomodelo1por1areferenciada.setProcessId(1);
-			nfinfomodelo1por1areferenciada.setModelAction(action);
-
-			return nfinfomodelo1por1areferenciada;
-		}
-
-
-	public NFInfoReferenciada insertNFInfoReferenciada(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFInfoReferenciada nfinforeferenciada = new NFInfoReferenciada();
-			Date a = new Date();
-			nfinforeferenciada.setId(id);
-			nfinforeferenciada.setChaveAcesso("NATIVE INSERT UPDATE");
-			nfinforeferenciada.setModelo1por1Referenciada(100);
-			nfinforeferenciada.setInfoNFProdutorRuralReferenciada(insertNFInfoProdutorRuralReferenciada(null, tabela, action));
-			nfinforeferenciada.setChaveAcessoCTReferenciada("NATIVE INSERT UPDATE");
-			//nfinforeferenciada.setCupomFiscalReferenciado(insertnfinfof);
-			nfinforeferenciada.setParentId(id);
-			nfinforeferenciada.setEmprId(1);
-			nfinforeferenciada.setModifyDateUTC(a.getTime());
-			nfinforeferenciada.setCreateDateUTC(a.getTime());
-			nfinforeferenciada.setCreateUser("system");
-			nfinforeferenciada.setModifyUser("system");
-			nfinforeferenciada.setProcessId(1);
-			nfinforeferenciada.setModelAction(action);
-
-			return nfinforeferenciada;
-		}
-
-
-	public NFInfoProdutorRuralReferenciada insertNFInfoProdutorRuralReferenciada(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFInfoProdutorRuralReferenciada nfinfoprodutorruralreferenciada = new NFInfoProdutorRuralReferenciada();
-			Date a = new Date();
-			nfinfoprodutorruralreferenciada.setId(id);
-			nfinfoprodutorruralreferenciada.setUfEmitente(Objects.insertEstado(id, tabela, action));
-			nfinfoprodutorruralreferenciada.setAnoMesEmissao("NATIVE INSERT UPDATE");
-			nfinfoprodutorruralreferenciada.setCnpjEmitente("NATIVE INSERT UPDATE");
-			nfinfoprodutorruralreferenciada.setCpfEmitente("NATIVE INSERT UPDATE");
-			nfinfoprodutorruralreferenciada.setIeEmitente("NATIVE INSERT UPDATE");
-			nfinfoprodutorruralreferenciada.setModeloDocumentoFiscal("NATIVE INSERT UPDATE");
-			nfinfoprodutorruralreferenciada.setSerieDocumentoFiscal(100);
-			nfinfoprodutorruralreferenciada.setNumeroDocumentoFiscal(100);
-			nfinfoprodutorruralreferenciada.setParentId(id);
-			nfinfoprodutorruralreferenciada.setEmprId(1);
-			nfinfoprodutorruralreferenciada.setModifyDateUTC(a.getTime());
-			nfinfoprodutorruralreferenciada.setCreateDateUTC(a.getTime());
-			nfinfoprodutorruralreferenciada.setCreateUser("system");
-			nfinfoprodutorruralreferenciada.setModifyUser("system");
-			nfinfoprodutorruralreferenciada.setProcessId(1);
-			nfinfoprodutorruralreferenciada.setModelAction(action);
-
-			return nfinfoprodutorruralreferenciada;
-		}
-
-
-	public NFNotaInfoEmitente insertNFNotaInfoEmitente(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoEmitente nfnotainfoemitente = new NFNotaInfoEmitente();
-			Date a = new Date();
-			nfnotainfoemitente.setId(id);
-			nfnotainfoemitente.setCnpj("NATIVE INSERT UPDATE");
-			nfnotainfoemitente.setCpf("NATIVE INSERT UPDATE");
-			nfnotainfoemitente.setRazaoSocial("NATIVE INSERT UPDATE");
-			nfnotainfoemitente.setNomeFantasia("NATIVE INSERT UPDATE");
-			nfnotainfoemitente.setEndereco(Objects.insertEndereco(id, tabela, action));
-			nfnotainfoemitente.setInscricaoEstadual("NATIVE INSERT UPDATE");
-			nfnotainfoemitente.setInscricaoEstadualSubstituicaoTributaria("NATIVE INSERT UPDATE");
-			nfnotainfoemitente.setInscricaoMunicipal("NATIVE INSERT UPDATE");
-			nfnotainfoemitente.setClassificacaoNacionalAtividadesEconomicas("NATIVE INSERT UPDATE");
-			nfnotainfoemitente.setRegimeTributario(Objects.insertRegime(id, tabela, action));
-			nfnotainfoemitente.setParentId(id);
-			nfnotainfoemitente.setEmprId(1);
-			nfnotainfoemitente.setModifyDateUTC(a.getTime());
-			nfnotainfoemitente.setCreateDateUTC(a.getTime());
-			nfnotainfoemitente.setCreateUser("system");
-			nfnotainfoemitente.setModifyUser("system");
-			nfnotainfoemitente.setProcessId(1);
-			nfnotainfoemitente.setModelAction(action);
-
-			return nfnotainfoemitente;
-		}
-
-
-	public NFNotaInfoAvulsa insertNFNotaInfoAvulsa(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoAvulsa nfnotainfoavulsa = new NFNotaInfoAvulsa();
-			Date a = new Date();
-			nfnotainfoavulsa.setId(id);
-			nfnotainfoavulsa.setCnpj("NATIVE INSERT UPDATE");
-			nfnotainfoavulsa.setOrgaoEmitente("NATIVE INSERT UPDATE");
-			nfnotainfoavulsa.setMatriculaAgente("NATIVE INSERT UPDATE");
-			nfnotainfoavulsa.setNomeAgente("NATIVE INSERT UPDATE");
-			nfnotainfoavulsa.setFone("NATIVE INSERT UPDATE");
-			nfnotainfoavulsa.setUf("NATIVE INSERT UPDATE");
-			nfnotainfoavulsa.setNumeroDocumentoArrecadacaoReceita("NATIVE INSERT UPDATE");
-			nfnotainfoavulsa.setDataEmissaoDocumentoArrecadacao(a.getTime());
-			nfnotainfoavulsa.setValorTotalConstanteDocumentoArrecadacaoReceita("NATIVE INSERT UPDATE");
-			nfnotainfoavulsa.setReparticaoFiscalEmitente("NATIVE INSERT UPDATE");
-			nfnotainfoavulsa.setDataPagamentoDocumentoArrecadacao(a.getTime());
-			nfnotainfoavulsa.setParentId(id);
-			nfnotainfoavulsa.setEmprId(1);
-			nfnotainfoavulsa.setModifyDateUTC(a.getTime());
-			nfnotainfoavulsa.setCreateDateUTC(a.getTime());
-			nfnotainfoavulsa.setCreateUser("system");
-			nfnotainfoavulsa.setModifyUser("system");
-			nfnotainfoavulsa.setProcessId(1);
-			nfnotainfoavulsa.setModelAction(action);
-
-			return nfnotainfoavulsa;
-		}
-
-
-	public NFNotaInfoDestinatario insertNFNotaInfoDestinatario(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoDestinatario nfnotainfodestinatario = new NFNotaInfoDestinatario();
-			Date a = new Date();
-			nfnotainfodestinatario.setId(id);
-			nfnotainfodestinatario.setCnpj("NATIVE INSERT UPDATE");
-			nfnotainfodestinatario.setCpf("NATIVE INSERT UPDATE");
-			nfnotainfodestinatario.setIdEstrangeiro("NATIVE INSERT UPDATE");
-			nfnotainfodestinatario.setRazaoSocial("NATIVE INSERT UPDATE");
-			nfnotainfodestinatario.setEndereco(Objects.insertEndereco(id, tabela, action));
-			nfnotainfodestinatario.setIndicadorIEDestinatario(Objects.insertDoisValor(id, tabela, action));
-			nfnotainfodestinatario.setInscricaoEstadual("NATIVE INSERT UPDATE");
-			nfnotainfodestinatario.setInscricaoSuframa("NATIVE INSERT UPDATE");
-			nfnotainfodestinatario.setInscricaoMunicipal("NATIVE INSERT UPDATE");
-			nfnotainfodestinatario.setEmail("NATIVE INSERT UPDATE");
-			nfnotainfodestinatario.setParentId(id);
-			nfnotainfodestinatario.setEmprId(1);
-			nfnotainfodestinatario.setModifyDateUTC(a.getTime());
-			nfnotainfodestinatario.setCreateDateUTC(a.getTime());
-			nfnotainfodestinatario.setCreateUser("system");
-			nfnotainfodestinatario.setModifyUser("system");
-			nfnotainfodestinatario.setProcessId(1);
-			nfnotainfodestinatario.setModelAction(action);
-
-			return nfnotainfodestinatario;
-		}
-
-
-	public NFNotaInfoLocal insertNFNotaInfoLocal(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoLocal nfnotainfolocal = new NFNotaInfoLocal();
-			Date a = new Date();
-			nfnotainfolocal.setId(id);
-			nfnotainfolocal.setCnpj("NATIVE INSERT UPDATE");
-			nfnotainfolocal.setCpf("NATIVE INSERT UPDATE");
-			nfnotainfolocal.setLogradouro("NATIVE INSERT UPDATE");
-			nfnotainfolocal.setNumero("NATIVE INSERT UPDATE");
-			nfnotainfolocal.setComplemento("NATIVE INSERT UPDATE");
-			nfnotainfolocal.setBairro("NATIVE INSERT UPDATE");
-			nfnotainfolocal.setCodigoMunicipio("NATIVE INSERT UPDATE");
-			nfnotainfolocal.setNomeMunicipio("NATIVE INSERT UPDATE");
-			nfnotainfolocal.setUf("NATIVE INSERT UPDATE");
-			nfnotainfolocal.setParentId(id);
-			nfnotainfolocal.setEmprId(1);
-			nfnotainfolocal.setModifyDateUTC(a.getTime());
-			nfnotainfolocal.setCreateDateUTC(a.getTime());
-			nfnotainfolocal.setCreateUser("system");
-			nfnotainfolocal.setModifyUser("system");
-			nfnotainfolocal.setProcessId(1);
-			nfnotainfolocal.setModelAction(action);
-
-			return nfnotainfolocal;
-		}
-
-
-	public NFPessoaAutorizadaDownloadNFe insertNFPessoaAutorizadaDownloadNFe(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFPessoaAutorizadaDownloadNFe nfpessoaautorizadadownloadnfe = new NFPessoaAutorizadaDownloadNFe();
-			Date a = new Date();
-			nfpessoaautorizadadownloadnfe.setId(id);
-			nfpessoaautorizadadownloadnfe.setCnpj("NATIVE INSERT UPDATE");
-			nfpessoaautorizadadownloadnfe.setCpf("NATIVE INSERT UPDATE");
-			nfpessoaautorizadadownloadnfe.setParentId(id);
-			nfpessoaautorizadadownloadnfe.setEmprId(1);
-			nfpessoaautorizadadownloadnfe.setModifyDateUTC(a.getTime());
-			nfpessoaautorizadadownloadnfe.setCreateDateUTC(a.getTime());
-			nfpessoaautorizadadownloadnfe.setCreateUser("system");
-			nfpessoaautorizadadownloadnfe.setModifyUser("system");
-			nfpessoaautorizadadownloadnfe.setProcessId(1);
-			nfpessoaautorizadadownloadnfe.setModelAction(action);
-
-			return nfpessoaautorizadadownloadnfe;
-		}
-
-
-	public NFNotaInfoTotal insertNFNotaInfoTotal(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoTotal nfnotainfototal = new NFNotaInfoTotal();
-			Date a = new Date();
-			nfnotainfototal.setId(id);
-			nfnotainfototal.setIcmsTotal(insertNFNotaInfoICMSTotal(null, tabela, action));
-			nfnotainfototal.setIssqnTotal(insertNFNotaInfoISSQNTotal(null, tabela, action));
-			nfnotainfototal.setRetencoesTributos(insertNFNotaInfoRetencoesTributos(null, tabela, action));
-			nfnotainfototal.setParentId(id);
-			nfnotainfototal.setEmprId(1);
-			nfnotainfototal.setModifyDateUTC(a.getTime());
-			nfnotainfototal.setCreateDateUTC(a.getTime());
-			nfnotainfototal.setCreateUser("system");
-			nfnotainfototal.setModifyUser("system");
-			nfnotainfototal.setProcessId(1);
-			nfnotainfototal.setModelAction(action);
-
-			return nfnotainfototal;
-		}
-
-
-	public NFNotaInfoICMSTotal insertNFNotaInfoICMSTotal(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoICMSTotal nfnotainfoicmstotal = new NFNotaInfoICMSTotal();
-			Date a = new Date();
-			nfnotainfoicmstotal.setId(id);
-			nfnotainfoicmstotal.setBaseCalculoICMS("NATIVE INSERT UPDATE");
-			nfnotainfoicmstotal.setValorTotalICMS("NATIVE INSERT UPDATE");
-			nfnotainfoicmstotal.setValorICMSDesonerado("NATIVE INSERT UPDATE");
-			nfnotainfoicmstotal.setValorICMSFundoCombatePobreza("NATIVE INSERT UPDATE");
-			nfnotainfoicmstotal.setValorICMSPartilhaDestinatario("NATIVE INSERT UPDATE");
-			nfnotainfoicmstotal.setValorICMSPartilhaRementente("NATIVE INSERT UPDATE");
-			nfnotainfoicmstotal.setBaseCalculoICMSST("NATIVE INSERT UPDATE");
-			nfnotainfoicmstotal.setValorTotalICMSST("NATIVE INSERT UPDATE");
-			nfnotainfoicmstotal.setValorTotalDosProdutosServicos("NATIVE INSERT UPDATE");
-			nfnotainfoicmstotal.setValorTotalFrete("NATIVE INSERT UPDATE");
-			nfnotainfoicmstotal.setValorTotalSeguro("NATIVE INSERT UPDATE");
-			nfnotainfoicmstotal.setValorTotalDesconto("NATIVE INSERT UPDATE");
-			nfnotainfoicmstotal.setValorTotalII("NATIVE INSERT UPDATE");
-			nfnotainfoicmstotal.setValorTotalIPI("NATIVE INSERT UPDATE");
-			nfnotainfoicmstotal.setValorPIS("NATIVE INSERT UPDATE");
-			nfnotainfoicmstotal.setValorCOFINS("NATIVE INSERT UPDATE");
-			nfnotainfoicmstotal.setOutrasDespesasAcessorias("NATIVE INSERT UPDATE");
-			nfnotainfoicmstotal.setValorTotalNFe("NATIVE INSERT UPDATE");
-			nfnotainfoicmstotal.setValorTotalTributos("NATIVE INSERT UPDATE");
-			nfnotainfoicmstotal.setParentId(id);
-			nfnotainfoicmstotal.setEmprId(1);
-			nfnotainfoicmstotal.setModifyDateUTC(a.getTime());
-			nfnotainfoicmstotal.setCreateDateUTC(a.getTime());
-			nfnotainfoicmstotal.setCreateUser("system");
-			nfnotainfoicmstotal.setModifyUser("system");
-			nfnotainfoicmstotal.setProcessId(1);
-			nfnotainfoicmstotal.setModelAction(action);
-
-			return nfnotainfoicmstotal;
-		}
-
-
-	public NFNotaInfoISSQNTotal insertNFNotaInfoISSQNTotal(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoISSQNTotal nfnotainfoissqntotal = new NFNotaInfoISSQNTotal();
-			Date a = new Date();
-			nfnotainfoissqntotal.setId(id);
-			nfnotainfoissqntotal.setValorTotalServicosSobNaoIncidenciaNaoTributadosICMS("NATIVE INSERT UPDATE");
-			nfnotainfoissqntotal.setBaseCalculoISS("NATIVE INSERT UPDATE");
-			nfnotainfoissqntotal.setValorTotalISS("NATIVE INSERT UPDATE");
-			nfnotainfoissqntotal.setValorPISsobreServicos("NATIVE INSERT UPDATE");
-			nfnotainfoissqntotal.setValorCOFINSsobreServicos("NATIVE INSERT UPDATE");
-			nfnotainfoissqntotal.setDataPrestacaoServico(a.getTime());
-			nfnotainfoissqntotal.setValorDeducao("NATIVE INSERT UPDATE");
-			nfnotainfoissqntotal.setValorOutros("NATIVE INSERT UPDATE");
-			nfnotainfoissqntotal.setValorTotalDescontoIncondicionado("NATIVE INSERT UPDATE");
-			nfnotainfoissqntotal.setValorTotalDescontoCondicionado("NATIVE INSERT UPDATE");
-			nfnotainfoissqntotal.setValorTotalRetencaoISS("NATIVE INSERT UPDATE");
-			nfnotainfoissqntotal.setTributacao(Objects.insertDoisValor(id, tabela, action));
-			nfnotainfoissqntotal.setParentId(id);
-			nfnotainfoissqntotal.setEmprId(1);
-			nfnotainfoissqntotal.setModifyDateUTC(a.getTime());
-			nfnotainfoissqntotal.setCreateDateUTC(a.getTime());
-			nfnotainfoissqntotal.setCreateUser("system");
-			nfnotainfoissqntotal.setModifyUser("system");
-			nfnotainfoissqntotal.setProcessId(1);
-			nfnotainfoissqntotal.setModelAction(action);
-
-			return nfnotainfoissqntotal;
-		}
-
-
-	public NFNotaInfoRetencoesTributos insertNFNotaInfoRetencoesTributos(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoRetencoesTributos nfnotainforetencoestributos = new NFNotaInfoRetencoesTributos();
-			Date a = new Date();
-			nfnotainforetencoestributos.setId(id);
-			nfnotainforetencoestributos.setValorRetidoPIS("NATIVE INSERT UPDATE");
-			nfnotainforetencoestributos.setValorRetidoCOFINS("NATIVE INSERT UPDATE");
-			nfnotainforetencoestributos.setValorRetidoCSLL("NATIVE INSERT UPDATE");
-			nfnotainforetencoestributos.setBaseCalculoIRRF("NATIVE INSERT UPDATE");
-			nfnotainforetencoestributos.setValorRetidoIRRF("NATIVE INSERT UPDATE");
-			nfnotainforetencoestributos.setBaseCalculoRetencaoPrevidenciaSocial("NATIVE INSERT UPDATE");
-			nfnotainforetencoestributos.setValorRetencaoPrevidenciaSocial("NATIVE INSERT UPDATE");
-			nfnotainforetencoestributos.setParentId(id);
-			nfnotainforetencoestributos.setEmprId(1);
-			nfnotainforetencoestributos.setModifyDateUTC(a.getTime());
-			nfnotainforetencoestributos.setCreateDateUTC(a.getTime());
-			nfnotainforetencoestributos.setCreateUser("system");
-			nfnotainforetencoestributos.setModifyUser("system");
-			nfnotainforetencoestributos.setProcessId(1);
-			nfnotainforetencoestributos.setModelAction(action);
-
-			return nfnotainforetencoestributos;
-		}
-
-
-	public NFNotaInfoTransporte insertNFNotaInfoTransporte(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoTransporte nfnotainfotransporte = new NFNotaInfoTransporte();
-			Date a = new Date();
-			nfnotainfotransporte.setId(id);
-			nfnotainfotransporte.setModalidadeFrete(Objects.insertDoisValor(id, tabela, action));
-			nfnotainfotransporte.setTransportador(insertNFNotaInfoTransportador(null, tabela, action));
-			nfnotainfotransporte.setIcmsTransporte(insertNFNotaInfoRetencaoICMSTransporte(null, tabela, action));
-			nfnotainfotransporte.setVeiculo(insertNFNotaInfoVeiculo(null, tabela, action));
-			nfnotainfotransporte.setReboques(new ArrayList<NFNotaInfoReboque>());
-			nfnotainfotransporte.getReboques().add(insertNFNotaInfoReboque(null, tabela, action));
-			nfnotainfotransporte.setVagao("NATIVE INSERT UPDATE");
-			nfnotainfotransporte.setBalsa("NATIVE INSERT UPDATE");
-			nfnotainfotransporte.setParentId(id);
-			nfnotainfotransporte.setEmprId(1);
-			nfnotainfotransporte.setModifyDateUTC(a.getTime());
-			nfnotainfotransporte.setCreateDateUTC(a.getTime());
-			nfnotainfotransporte.setCreateUser("system");
-			nfnotainfotransporte.setModifyUser("system");
-			nfnotainfotransporte.setProcessId(1);
-			nfnotainfotransporte.setModelAction(action);
-
-			return nfnotainfotransporte;
-		}
-
-
-	public NFNotaInfoRetencaoICMSTransporte insertNFNotaInfoRetencaoICMSTransporte(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoRetencaoICMSTransporte nfnotainforetencaoicmstransporte = new NFNotaInfoRetencaoICMSTransporte();
-			Date a = new Date();
-			nfnotainforetencaoicmstransporte.setId(id);
-			nfnotainforetencaoicmstransporte.setValorServico("NATIVE INSERT UPDATE");
-			nfnotainforetencaoicmstransporte.setBcRetencaoICMS("NATIVE INSERT UPDATE");
-			nfnotainforetencaoicmstransporte.setAliquotaRetencao("NATIVE INSERT UPDATE");
-			nfnotainforetencaoicmstransporte.setValorICMSRetido("NATIVE INSERT UPDATE");
-			nfnotainforetencaoicmstransporte.setCfop("NATIVE INSERT UPDATE");
-			nfnotainforetencaoicmstransporte.setCodigoMunicipioOcorrenciaFatoGeradorICMSTransporte("NATIVE INSERT UPDATE");
-			nfnotainforetencaoicmstransporte.setParentId(id);
-			nfnotainforetencaoicmstransporte.setEmprId(1);
-			nfnotainforetencaoicmstransporte.setModifyDateUTC(a.getTime());
-			nfnotainforetencaoicmstransporte.setCreateDateUTC(a.getTime());
-			nfnotainforetencaoicmstransporte.setCreateUser("system");
-			nfnotainforetencaoicmstransporte.setModifyUser("system");
-			nfnotainforetencaoicmstransporte.setProcessId(1);
-			nfnotainforetencaoicmstransporte.setModelAction(action);
-
-			return nfnotainforetencaoicmstransporte;
-		}
-
-
-	public NFNotaInfoTransportador insertNFNotaInfoTransportador(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoTransportador nfnotainfotransportador = new NFNotaInfoTransportador();
-			Date a = new Date();
-			nfnotainfotransportador.setId(id);
-			nfnotainfotransportador.setCnpj("NATIVE INSERT UPDATE");
-			nfnotainfotransportador.setCpf("NATIVE INSERT UPDATE");
-			nfnotainfotransportador.setRazaosocial("NATIVE INSERT UPDATE");
-			nfnotainfotransportador.setInscricaoestadual("NATIVE INSERT UPDATE");
-			nfnotainfotransportador.setEnderecocomplemento("NATIVE INSERT UPDATE");
-			nfnotainfotransportador.setNomemunicipio("NATIVE INSERT UPDATE");
-			nfnotainfotransportador.setUf("NATIVE INSERT UPDATE");
-			nfnotainfotransportador.setParentId(id);
-			nfnotainfotransportador.setEmprId(1);
-			nfnotainfotransportador.setModifyDateUTC(a.getTime());
-			nfnotainfotransportador.setCreateDateUTC(a.getTime());
-			nfnotainfotransportador.setCreateUser("system");
-			nfnotainfotransportador.setModifyUser("system");
-			nfnotainfotransportador.setProcessId(1);
-			nfnotainfotransportador.setModelAction(action);
-
-			return nfnotainfotransportador;
-		}
-
-
-	public NFNotaInfoVeiculo insertNFNotaInfoVeiculo(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoVeiculo nfnotainfoveiculo = new NFNotaInfoVeiculo();
-			Date a = new Date();
-			nfnotainfoveiculo.setId(id);
-			nfnotainfoveiculo.setPlacaVeiculo("NATIVE INSERT UPDATE");
-			nfnotainfoveiculo.setUf("NATIVE INSERT UPDATE");
-			nfnotainfoveiculo.setRegistroNacionalTransportadorCarga("NATIVE INSERT UPDATE");
-			nfnotainfoveiculo.setParentId(id);
-			nfnotainfoveiculo.setEmprId(1);
-			nfnotainfoveiculo.setModifyDateUTC(a.getTime());
-			nfnotainfoveiculo.setCreateDateUTC(a.getTime());
-			nfnotainfoveiculo.setCreateUser("system");
-			nfnotainfoveiculo.setModifyUser("system");
-			nfnotainfoveiculo.setProcessId(1);
-			nfnotainfoveiculo.setModelAction(action);
-
-			return nfnotainfoveiculo;
-		}
-
-
-	public NFNotaInfoReboque insertNFNotaInfoReboque(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoReboque nfnotainforeboque = new NFNotaInfoReboque();
-			Date a = new Date();
-			nfnotainforeboque.setId(id);
-			nfnotainforeboque.setPlacaVeiculo("NATIVE INSERT UPDATE");
-			nfnotainforeboque.setUf("NATIVE INSERT UPDATE");
-			nfnotainforeboque.setRegistroNacionalTransportadorCarga("NATIVE INSERT UPDATE");
-			nfnotainforeboque.setParentId(id);
-			nfnotainforeboque.setEmprId(1);
-			nfnotainforeboque.setModifyDateUTC(a.getTime());
-			nfnotainforeboque.setCreateDateUTC(a.getTime());
-			nfnotainforeboque.setCreateUser("system");
-			nfnotainforeboque.setModifyUser("system");
-			nfnotainforeboque.setProcessId(1);
-			nfnotainforeboque.setModelAction(action);
-
-			return nfnotainforeboque;
-		}
-
-
-	public NFNotaInfoCobranca insertNFNotaInfoCobranca(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoCobranca nfnotainfocobranca = new NFNotaInfoCobranca();
-			Date a = new Date();
-			nfnotainfocobranca.setId(id);
-			nfnotainfocobranca.setFatura(insertNFNotaInfoFatura(null, tabela, action));
-			nfnotainfocobranca.setDuplicatas(insertNFNotaInfoDuplicata(null, tabela, action));
-			nfnotainfocobranca.setParentId(id);
-			nfnotainfocobranca.setEmprId(1);
-			nfnotainfocobranca.setModifyDateUTC(a.getTime());
-			nfnotainfocobranca.setCreateDateUTC(a.getTime());
-			nfnotainfocobranca.setCreateUser("system");
-			nfnotainfocobranca.setModifyUser("system");
-			nfnotainfocobranca.setProcessId(1);
-			nfnotainfocobranca.setModelAction(action);
-
-			return nfnotainfocobranca;
-		}
-
-
-	public NFNotaInfoDuplicata insertNFNotaInfoDuplicata(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoDuplicata nfnotainfoduplicata = new NFNotaInfoDuplicata();
-			Date a = new Date();
-			nfnotainfoduplicata.setId(id);
-			nfnotainfoduplicata.setNumeroDuplicata("NATIVE INSERT UPDATE");
-			nfnotainfoduplicata.setDataVencimento(a.getTime());
-			nfnotainfoduplicata.setValorDuplicata("NATIVE INSERT UPDATE");
-			nfnotainfoduplicata.setParentId(id);
-			nfnotainfoduplicata.setEmprId(1);
-			nfnotainfoduplicata.setModifyDateUTC(a.getTime());
-			nfnotainfoduplicata.setCreateDateUTC(a.getTime());
-			nfnotainfoduplicata.setCreateUser("system");
-			nfnotainfoduplicata.setModifyUser("system");
-			nfnotainfoduplicata.setProcessId(1);
-			nfnotainfoduplicata.setModelAction(action);
-
-			return nfnotainfoduplicata;
-		}
-
-
-	public NFNotaInfoFatura insertNFNotaInfoFatura(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoFatura nfnotainfofatura = new NFNotaInfoFatura();
-			Date a = new Date();
-			nfnotainfofatura.setId(id);
-			nfnotainfofatura.setNumeroFatura("NATIVE INSERT UPDATE");
-			nfnotainfofatura.setValorOriginalFatura("NATIVE INSERT UPDATE");
-			nfnotainfofatura.setValorDesconto("NATIVE INSERT UPDATE");
-			nfnotainfofatura.setValorLiquidoFatura("NATIVE INSERT UPDATE");
-			nfnotainfofatura.setParentId(id);
-			nfnotainfofatura.setEmprId(1);
-			nfnotainfofatura.setModifyDateUTC(a.getTime());
-			nfnotainfofatura.setCreateDateUTC(a.getTime());
-			nfnotainfofatura.setCreateUser("system");
-			nfnotainfofatura.setModifyUser("system");
-			nfnotainfofatura.setProcessId(1);
-			nfnotainfofatura.setModelAction(action);
-
-			return nfnotainfofatura;
-		}
-
-
-	public NFNotaInfoCartao insertNFNotaInfoCartao(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoCartao nfnotainfocartao = new NFNotaInfoCartao();
-			Date a = new Date();
-			nfnotainfocartao.setId(id);
-			nfnotainfocartao.setTipoIntegracao(Objects.insertDoisValor(id, tabela, action));
-			nfnotainfocartao.setCnpj("NATIVE INSERT UPDATE");
-			nfnotainfocartao.setOperadoraCartao(Objects.insertDoisValor(id, tabela, action));
-			nfnotainfocartao.setNumeroAutorizacaoOperacaoCartao("NATIVE INSERT UPDATE");
-			nfnotainfocartao.setParentId(id);
-			nfnotainfocartao.setEmprId(1);
-			nfnotainfocartao.setModifyDateUTC(a.getTime());
-			nfnotainfocartao.setCreateDateUTC(a.getTime());
-			nfnotainfocartao.setCreateUser("system");
-			nfnotainfocartao.setModifyUser("system");
-			nfnotainfocartao.setProcessId(1);
-			nfnotainfocartao.setModelAction(action);
-
-			return nfnotainfocartao;
-		}
-
-
-	public NFNotaInfoPagamento insertNFNotaInfoPagamento(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoPagamento nfnotainfopagamento = new NFNotaInfoPagamento();
-			Date a = new Date();
-			nfnotainfopagamento.setId(id);
-			nfnotainfopagamento.setFormaPagamentoMoeda(Objects.insertDoisValor(id, tabela, action));
-			nfnotainfopagamento.setValorPagamento("NATIVE INSERT UPDATE");
-			nfnotainfopagamento.setCartao(insertNFNotaInfoCartao(null, tabela, action));
-			nfnotainfopagamento.setParentId(id);
-			nfnotainfopagamento.setEmprId(1);
-			nfnotainfopagamento.setModifyDateUTC(a.getTime());
-			nfnotainfopagamento.setCreateDateUTC(a.getTime());
-			nfnotainfopagamento.setCreateUser("system");
-			nfnotainfopagamento.setModifyUser("system");
-			nfnotainfopagamento.setProcessId(1);
-			nfnotainfopagamento.setModelAction(action);
-
-			return nfnotainfopagamento;
-		}
-
-
-	public NFNotaInfoInformacoesAdicionais insertNFNotaInfoInformacoesAdicionais(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoInformacoesAdicionais nfnotainfoinformacoesadicionais = new NFNotaInfoInformacoesAdicionais();
-			Date a = new Date();
-			nfnotainfoinformacoesadicionais.setId(id);
-			nfnotainfoinformacoesadicionais.setInformacoesadicionaisinteressefisco("NATIVE INSERT UPDATE");
-			nfnotainfoinformacoesadicionais.setInformacoescomplementaresinteressecontribuinte("NATIVE INSERT UPDATE");
-			nfnotainfoinformacoesadicionais.setObservacoescontribuinte(new ArrayList<NFNotaInfoObservacao>());
-			nfnotainfoinformacoesadicionais.getObservacoescontribuinte().add(insertNFNotaInfoObservacao(null, tabela, action));
-			nfnotainfoinformacoesadicionais.setObservacoesfisco(new ArrayList<NFNotaInfoObservacao>());
-			nfnotainfoinformacoesadicionais.getObservacoesfisco().add(insertNFNotaInfoObservacao(null, tabela, action));
-			nfnotainfoinformacoesadicionais.setProcessosrefenciado(new ArrayList<NFNotaInfoProcessoReferenciado>());
-			nfnotainfoinformacoesadicionais.getProcessosrefenciado().add(insertNFNotaInfoProcessoReferenciado(null, tabela, action));
-			nfnotainfoinformacoesadicionais.setParentId(id);
-			nfnotainfoinformacoesadicionais.setEmprId(1);
-			nfnotainfoinformacoesadicionais.setModifyDateUTC(a.getTime());
-			nfnotainfoinformacoesadicionais.setCreateDateUTC(a.getTime());
-			nfnotainfoinformacoesadicionais.setCreateUser("system");
-			nfnotainfoinformacoesadicionais.setModifyUser("system");
-			nfnotainfoinformacoesadicionais.setProcessId(1);
-			nfnotainfoinformacoesadicionais.setModelAction(action);
-
-			return nfnotainfoinformacoesadicionais;
-		}
-
-
-	public NFNotaInfoObservacao insertNFNotaInfoObservacao(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoObservacao nfnotainfoobservacao = new NFNotaInfoObservacao();
-			Date a = new Date();
-			nfnotainfoobservacao.setId(id);
-			nfnotainfoobservacao.setIdentificacaoCampo("NATIVE INSERT UPDATE");
-			nfnotainfoobservacao.setConteudoCampo("NATIVE INSERT UPDATE");
-			nfnotainfoobservacao.setParentId(id);
-			nfnotainfoobservacao.setEmprId(1);
-			nfnotainfoobservacao.setModifyDateUTC(a.getTime());
-			nfnotainfoobservacao.setCreateDateUTC(a.getTime());
-			nfnotainfoobservacao.setCreateUser("system");
-			nfnotainfoobservacao.setModifyUser("system");
-			nfnotainfoobservacao.setProcessId(1);
-			nfnotainfoobservacao.setModelAction(action);
-
-			return nfnotainfoobservacao;
-		}
-
-
-	public NFNotaInfoProcessoReferenciado insertNFNotaInfoProcessoReferenciado(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoProcessoReferenciado nfnotainfoprocessoreferenciado = new NFNotaInfoProcessoReferenciado();
-			Date a = new Date();
-			nfnotainfoprocessoreferenciado.setId(id);
-			nfnotainfoprocessoreferenciado.setIdentificadorProcessoOuAtoConcessorio("NATIVE INSERT UPDATE");
-			nfnotainfoprocessoreferenciado.setIndicadorOrigemProcesso(Objects.insertDoisValor(id, tabela, action));
-			nfnotainfoprocessoreferenciado.setParentId(id);
-			nfnotainfoprocessoreferenciado.setEmprId(1);
-			nfnotainfoprocessoreferenciado.setModifyDateUTC(a.getTime());
-			nfnotainfoprocessoreferenciado.setCreateDateUTC(a.getTime());
-			nfnotainfoprocessoreferenciado.setCreateUser("system");
-			nfnotainfoprocessoreferenciado.setModifyUser("system");
-			nfnotainfoprocessoreferenciado.setProcessId(1);
-			nfnotainfoprocessoreferenciado.setModelAction(action);
-
-			return nfnotainfoprocessoreferenciado;
-		}
-
-
-	public NFNotaInfoExportacao insertNFNotaInfoExportacao(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoExportacao nfnotainfoexportacao = new NFNotaInfoExportacao();
-			Date a = new Date();
-			nfnotainfoexportacao.setId(id);
-			nfnotainfoexportacao.setUfEmbarqueProduto("NATIVE INSERT UPDATE");
-			nfnotainfoexportacao.setLocalEmbarqueProdutos("NATIVE INSERT UPDATE");
-			nfnotainfoexportacao.setLocalDespachoProdutos("NATIVE INSERT UPDATE");
-			nfnotainfoexportacao.setParentId(id);
-			nfnotainfoexportacao.setEmprId(1);
-			nfnotainfoexportacao.setModifyDateUTC(a.getTime());
-			nfnotainfoexportacao.setCreateDateUTC(a.getTime());
-			nfnotainfoexportacao.setCreateUser("system");
-			nfnotainfoexportacao.setModifyUser("system");
-			nfnotainfoexportacao.setProcessId(1);
-			nfnotainfoexportacao.setModelAction(action);
-
-			return nfnotainfoexportacao;
-		}
-
-
-	public NFNotaInfoCompra insertNFNotaInfoCompra(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoCompra nfnotainfocompra = new NFNotaInfoCompra();
-			Date a = new Date();
-			nfnotainfocompra.setId(id);
-			nfnotainfocompra.setNotaDeEmpenho("NATIVE INSERT UPDATE");
-			nfnotainfocompra.setPedido("NATIVE INSERT UPDATE");
-			nfnotainfocompra.setContrato("NATIVE INSERT UPDATE");
-			nfnotainfocompra.setParentId(id);
-			nfnotainfocompra.setEmprId(1);
-			nfnotainfocompra.setModifyDateUTC(a.getTime());
-			nfnotainfocompra.setCreateDateUTC(a.getTime());
-			nfnotainfocompra.setCreateUser("system");
-			nfnotainfocompra.setModifyUser("system");
-			nfnotainfocompra.setProcessId(1);
-			nfnotainfocompra.setModelAction(action);
-
-			return nfnotainfocompra;
-		}
-
-
-	public NFNotaInfoCana insertNFNotaInfoCana(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoCana nfnotainfocana = new NFNotaInfoCana();
-			Date a = new Date();
-			nfnotainfocana.setId(id);
-			nfnotainfocana.setSafra("NATIVE INSERT UPDATE");
-			nfnotainfocana.setReferencia("NATIVE INSERT UPDATE");
-			nfnotainfocana.setFornecimentosDiario(new ArrayList<NFNotaInfoCanaFornecimentoDiario>());
-			nfnotainfocana.getFornecimentosDiario().add(insertNFNotaInfoCanaFornecimentoDiario(null, tabela, action));
-			nfnotainfocana.setDeducoes(new ArrayList<NFNotaInfoCanaDeducao>());
-			nfnotainfocana.getDeducoes().add(insertNFNotaInfoCanaDeducao(null, tabela, action));
-			nfnotainfocana.setQuantidadeTotalMes("NATIVE INSERT UPDATE");
-			nfnotainfocana.setQuantidadeTotalAnterior("NATIVE INSERT UPDATE");
-			nfnotainfocana.setQuantidadeTotalGeral("NATIVE INSERT UPDATE");
-			nfnotainfocana.setValorFornecimento("NATIVE INSERT UPDATE");
-			nfnotainfocana.setValorTotalDeducao("NATIVE INSERT UPDATE");
-			nfnotainfocana.setValorLiquidoFornecimento("NATIVE INSERT UPDATE");
-			nfnotainfocana.setParentId(id);
-			nfnotainfocana.setEmprId(1);
-			nfnotainfocana.setModifyDateUTC(a.getTime());
-			nfnotainfocana.setCreateDateUTC(a.getTime());
-			nfnotainfocana.setCreateUser("system");
-			nfnotainfocana.setModifyUser("system");
-			nfnotainfocana.setProcessId(1);
-			nfnotainfocana.setModelAction(action);
-
-			return nfnotainfocana;
-		}
-
-
-	public NFNotaInfoCanaFornecimentoDiario insertNFNotaInfoCanaFornecimentoDiario(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoCanaFornecimentoDiario nfnotainfocanafornecimentodiario = new NFNotaInfoCanaFornecimentoDiario();
-			Date a = new Date();
-			nfnotainfocanafornecimentodiario.setId(id);
-			nfnotainfocanafornecimentodiario.setDia(100);
-			nfnotainfocanafornecimentodiario.setQuantidade(new Double(10.00));
-			nfnotainfocanafornecimentodiario.setParentId(id);
-			nfnotainfocanafornecimentodiario.setEmprId(1);
-			nfnotainfocanafornecimentodiario.setModifyDateUTC(a.getTime());
-			nfnotainfocanafornecimentodiario.setCreateDateUTC(a.getTime());
-			nfnotainfocanafornecimentodiario.setCreateUser("system");
-			nfnotainfocanafornecimentodiario.setModifyUser("system");
-			nfnotainfocanafornecimentodiario.setProcessId(1);
-			nfnotainfocanafornecimentodiario.setModelAction(action);
-
-			return nfnotainfocanafornecimentodiario;
-		}
-
-
-	public NFNotaInfoCanaDeducao insertNFNotaInfoCanaDeducao(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoCanaDeducao nfnotainfocanadeducao = new NFNotaInfoCanaDeducao();
-			Date a = new Date();
-			nfnotainfocanadeducao.setId(id);
-			nfnotainfocanadeducao.setDescricaoDeducao("NATIVE INSERT UPDATE");
-			nfnotainfocanadeducao.setValorDeducao(new Double(10.00));
-			nfnotainfocanadeducao.setParentId(id);
-			nfnotainfocanadeducao.setEmprId(1);
-			nfnotainfocanadeducao.setModifyDateUTC(a.getTime());
-			nfnotainfocanadeducao.setCreateDateUTC(a.getTime());
-			nfnotainfocanadeducao.setCreateUser("system");
-			nfnotainfocanadeducao.setModifyUser("system");
-			nfnotainfocanadeducao.setProcessId(1);
-			nfnotainfocanadeducao.setModelAction(action);
-
-			return nfnotainfocanadeducao;
-		}
-
-
-	public NFNotaInfoSuplementar insertNFNotaInfoSuplementar(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			NFNotaInfoSuplementar nfnotainfosuplementar = new NFNotaInfoSuplementar();
-			Date a = new Date();
-			nfnotainfosuplementar.setId(id);
-			nfnotainfosuplementar.setQrCode("NATIVE INSERT UPDATE");
-			nfnotainfosuplementar.setParentId(id);
-			nfnotainfosuplementar.setEmprId(1);
-			nfnotainfosuplementar.setModifyDateUTC(a.getTime());
-			nfnotainfosuplementar.setCreateDateUTC(a.getTime());
-			nfnotainfosuplementar.setCreateUser("system");
-			nfnotainfosuplementar.setModifyUser("system");
-			nfnotainfosuplementar.setProcessId(1);
-			nfnotainfosuplementar.setModelAction(action);
-
-			return nfnotainfosuplementar;
-		}
 
 
 }

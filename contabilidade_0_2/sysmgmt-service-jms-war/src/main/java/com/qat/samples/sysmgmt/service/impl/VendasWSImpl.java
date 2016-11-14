@@ -11,12 +11,13 @@ import com.qat.framework.util.ResponseHandler;
 import com.qat.samples.sysmgmt.bac.Vendas.IVendasBAC;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
 import com.qat.samples.sysmgmt.nf.model.Orcamento;
-import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
 import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalSaidaMaintenanceRequest;
 import com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest;
 import com.qat.samples.sysmgmt.nf.model.request.OrcamentoMaintenanceRequest;
 import com.qat.samples.sysmgmt.nf.model.response.NotaFiscalSaidaResponse;
 import com.qat.samples.sysmgmt.nf.model.response.OrcamentoResponse;
+import com.qat.samples.sysmgmt.nfe.model.NFNota;
+import com.qat.samples.sysmgmt.nfe.request.NFNotaInquiryRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoMaintenanceRequest;
@@ -75,7 +76,7 @@ public class VendasWSImpl implements IVendasWS
 		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
 		try
 		{
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().insertNotaFiscalSaida(request);
+			InternalResultsResponse<NFNota> internalResponse = getVendasBAC().insertNotaFiscalSaida(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -99,7 +100,7 @@ public class VendasWSImpl implements IVendasWS
 		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
 		try
 		{
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().updateNotaFiscalSaida(request);
+			InternalResultsResponse<NFNota> internalResponse = getVendasBAC().updateNotaFiscalSaida(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -123,7 +124,7 @@ public class VendasWSImpl implements IVendasWS
 		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
 		try
 		{
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().deleteNotaFiscalSaida(request);
+			InternalResultsResponse<NFNota> internalResponse = getVendasBAC().deleteNotaFiscalSaida(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -147,7 +148,7 @@ public class VendasWSImpl implements IVendasWS
 		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
 		try
 		{
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().fetchNotaFiscalSaidaById(request);
+			InternalResultsResponse<NFNota> internalResponse = getVendasBAC().fetchNotaFiscalSaidaById(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -165,13 +166,13 @@ public class VendasWSImpl implements IVendasWS
 	 * @return NotaFiscalSaidaResponse
 	 */
 	@Override
-	public NotaFiscalSaidaResponse fetchNotaFiscalSaidasByRequest(NotaFiscalInquiryRequest request)
+	public NotaFiscalSaidaResponse fetchNotaFiscalSaidasByRequest(NFNotaInquiryRequest request)
 	{
 		// This method is demo code only. Do not view this as a QAT Global Standard.
 		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
 		try
 		{
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().fetchNotaFiscalSaidasByRequest(request);
+			InternalResultsResponse<NFNota> internalResponse = getVendasBAC().fetchNotaFiscalSaidasByRequest(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -194,7 +195,7 @@ public class VendasWSImpl implements IVendasWS
 		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
 		try
 		{
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().refreshNotaFiscalSaidas(request);
+			InternalResultsResponse<NFNota> internalResponse = getVendasBAC().refreshNotaFiscalSaidas(request);
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -216,174 +217,7 @@ public class VendasWSImpl implements IVendasWS
 		NotaFiscalSaidaResponse response = new NotaFiscalSaidaResponse();
 		try
 		{
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().fetchAllNotaFiscalSaidas(new NotaFiscalSaida());
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-//===================================### ORCAMENTO ####======================================
-
-	/**
-	 * Delegates call to {@link IOrcamentoBAC}
-	 *
-	 * @param request a OrcamentoRequest
-	 * @return OrcamentoResponse
-	 */
-	@Override
-	public OrcamentoResponse insertOrcamento(OrcamentoMaintenanceRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		OrcamentoResponse response = new OrcamentoResponse();
-		try
-		{
-			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().insertOrcamento(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	/**
-	 * Delegates call to {@link IOrcamentoBAC}
-	 *
-	 * @param request a OrcamentoRequest
-	 * @return OrcamentoResponse
-	 */
-	@Override
-	public OrcamentoResponse updateOrcamento(OrcamentoMaintenanceRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		OrcamentoResponse response = new OrcamentoResponse();
-		try
-		{
-			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().updateOrcamento(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	/**
-	 * Delegates call to {@link IOrcamentoBAC}
-	 *
-	 * @param request a OrcamentoRequest
-	 * @return OrcamentoResponse
-	 */
-	@Override
-	public OrcamentoResponse deleteOrcamento(OrcamentoMaintenanceRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		OrcamentoResponse response = new OrcamentoResponse();
-		try
-		{
-			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().deleteOrcamento(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	/**
-	 * Delegates call to {@link IOrcamentoBAC}
-	 *
-	 * @param request a OrcamentoRequest
-	 * @return OrcamentoResponse
-	 */
-	@Override
-	public OrcamentoResponse fetchOrcamentoById(FetchByIdRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		OrcamentoResponse response = new OrcamentoResponse();
-		try
-		{
-			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().fetchOrcamentoById(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	/**
-	 * Delegates call to {@link IOrcamentoBAC}
-	 *
-	 * @param request a OrcamentoRequest
-	 * @return OrcamentoResponse
-	 */
-	@Override
-	public OrcamentoResponse fetchOrcamentosByRequest(OrcamentoInquiryRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		OrcamentoResponse response = new OrcamentoResponse();
-		try
-		{
-			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().fetchOrcamentosByRequest(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	/**
-	 * Delegates call to {@link IOrcamentoBAC}
-	 *
-	 * @param request a OrcamentoRequest
-	 * @return OrcamentoResponse
-	 */
-	@Override
-	public OrcamentoResponse refreshOrcamentos(RefreshRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		OrcamentoResponse response = new OrcamentoResponse();
-		try
-		{
-			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().refreshOrcamentos(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	/**
-	 * Delegates call to {@link IOrcamentoBAC}
-	 *
-	 * @param request a OrcamentoRequest
-	 * @return OrcamentoResponse
-	 */
-	@Override
-	public OrcamentoResponse fetchAllOrcamentos(FetchAllRequest request)
-	{
-		OrcamentoResponse response = new OrcamentoResponse();
-		try
-		{
-			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().fetchAllOrcamentos(new Orcamento());
+			InternalResultsResponse<NFNota> internalResponse = getVendasBAC().fetchAllNotaFiscalSaidas(new NFNota());
 			ResponseHandler
 					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
 		}
@@ -559,5 +393,40 @@ public class VendasWSImpl implements IVendasWS
 			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
 		}
 		return response;
+	}
+	@Override
+	public OrcamentoResponse insertOrcamento(OrcamentoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public OrcamentoResponse updateOrcamento(OrcamentoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public OrcamentoResponse deleteOrcamento(OrcamentoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public OrcamentoResponse fetchOrcamentoById(FetchByIdRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public OrcamentoResponse fetchOrcamentosByRequest(OrcamentoInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public OrcamentoResponse refreshOrcamentos(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public OrcamentoResponse fetchAllOrcamentos(FetchAllRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

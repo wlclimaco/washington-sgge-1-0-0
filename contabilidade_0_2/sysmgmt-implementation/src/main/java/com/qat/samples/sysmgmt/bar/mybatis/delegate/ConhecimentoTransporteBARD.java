@@ -24,80 +24,80 @@ import com.qat.samples.sysmgmt.util.model.TypeEnum;
 public final class ConhecimentoTransporteBARD extends SqlSessionDaoSupport
 {
 
-	/** The Constant ZERO. */
-	private static final Integer ZERO = 0;
-
-	/**
-	 * Fetch objects by request.
-	 *
-	 * @param sqlSession the sql session
-	 * @param request the request
-	 * @param countStatement the count statement
-	 * @param fetchPagedStatement the fetch paged statement
-	 * @param response the response
-	 */
-	@SuppressWarnings("unchecked")
-	public static Integer maintainConhecimentoTransporteAssociations(ConhecimentoTransporte cidadeList,
-			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IVendasBAR CidadeDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC,
-			Integer empId,
-			String UserId, Integer processId, Integer historicoId)
-	{
-		Boolean countSucess = false;
-		Integer count = ZERO;
-		// First Maintain Empresa
-		if (ValidationUtil.isNull(cidadeList))
-		{
-			return count;
-		}
-
-		// Make sure we set the parent key
-		cidadeList.setParentId(parentId);
-		cidadeList.setTabelaEnum(tabelaEnum);
-		cidadeList.setProcessId(processId);
-
-		switch (cidadeList.getModelAction())
-		{
-			case INSERT:
-				countSucess = CidadeDAC.insertConhecimentoTransporte(cidadeList).hasSystemError();
-				if (countSucess = true)
-				{
-					count = count + 1;
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.ATIVO);
-					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
-					countSucess =
-							StatusBARD.maintainStatusAssociations(cidadeList.getStatusList(), response,
-									cidadeList.getId(),
-									null,
-									AcaoEnum.INSERT, UserId, empId, TabelaEnum.CIDADE, statusDAC, historicoDAC,
-									processId, historicoId);
-				}
-				break;
-			case UPDATE:
-				countSucess = CidadeDAC.updateConhecimentoTransporte(cidadeList).hasSystemError();;
-				if (countSucess = true)
-				{
-					count = count + 1;
-					countSucess =
-							StatusBARD.maintainStatusAssociations(cidadeList.getStatusList(), response,
-									cidadeList.getId(),
-									null,
-									AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CIDADE, statusDAC, historicoDAC,
-									processId, historicoId);
-				}
-				break;
-			case DELETE:
-
-				countSucess = CidadeDAC.deleteConhecimentoTransporteById(cidadeList).hasSystemError();
-				if (countSucess = true)
-				{
-					count = count + 1;
-				}
-				break;
-		}
-
-		return count;
-	}
+//	/** The Constant ZERO. */
+//	private static final Integer ZERO = 0;
+//
+//	/**
+//	 * Fetch objects by request.
+//	 *
+//	 * @param sqlSession the sql session
+//	 * @param request the request
+//	 * @param countStatement the count statement
+//	 * @param fetchPagedStatement the fetch paged statement
+//	 * @param response the response
+//	 */
+//	@SuppressWarnings("unchecked")
+//	public static Integer maintainConhecimentoTransporteAssociations(ConhecimentoTransporte cidadeList,
+//			InternalResultsResponse<?> response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+//			TabelaEnum tabelaEnum, IVendasBAR CidadeDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC,
+//			Integer empId,
+//			String UserId, Integer processId, Integer historicoId)
+//	{
+//		Boolean countSucess = false;
+//		Integer count = ZERO;
+//		// First Maintain Empresa
+//		if (ValidationUtil.isNull(cidadeList))
+//		{
+//			return count;
+//		}
+//
+//		// Make sure we set the parent key
+//		cidadeList.setParentId(parentId);
+//		cidadeList.setTabelaEnum(tabelaEnum);
+//		cidadeList.setProcessId(processId);
+//
+//		switch (cidadeList.getModelAction())
+//		{
+//			case INSERT:
+//				countSucess = CidadeDAC.insertConhecimentoTransporte(cidadeList).hasSystemError();
+//				if (countSucess = true)
+//				{
+//					count = count + 1;
+//					Status status = new Status();
+//					status.setStatus(CdStatusTypeEnum.ATIVO);
+//					List<Status> statusList = new ArrayList<Status>();
+//					statusList.add(status);
+//					countSucess =
+//							StatusBARD.maintainStatusAssociations(cidadeList.getStatusList(), response,
+//									cidadeList.getId(),
+//									null,
+//									AcaoEnum.INSERT, UserId, empId, TabelaEnum.CIDADE, statusDAC, historicoDAC,
+//									processId, historicoId);
+//				}
+//				break;
+//			case UPDATE:
+//				countSucess = CidadeDAC.updateConhecimentoTransporte(cidadeList).hasSystemError();;
+//				if (countSucess = true)
+//				{
+//					count = count + 1;
+//					countSucess =
+//							StatusBARD.maintainStatusAssociations(cidadeList.getStatusList(), response,
+//									cidadeList.getId(),
+//									null,
+//									AcaoEnum.UPDATE, UserId, empId, TabelaEnum.CIDADE, statusDAC, historicoDAC,
+//									processId, historicoId);
+//				}
+//				break;
+//			case DELETE:
+//
+//				countSucess = CidadeDAC.deleteConhecimentoTransporteById(cidadeList).hasSystemError();
+//				if (countSucess = true)
+//				{
+//					count = count + 1;
+//				}
+//				break;
+//		}
+//
+//		return count;
+//	}
 }

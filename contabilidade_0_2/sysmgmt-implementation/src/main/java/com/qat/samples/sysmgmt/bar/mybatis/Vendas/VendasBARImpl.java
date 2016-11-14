@@ -1,9 +1,6 @@
 package com.qat.samples.sysmgmt.bar.mybatis.Vendas;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -12,27 +9,16 @@ import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.MyBatisBARHelper;
-import com.qat.samples.sysmgmt.bar.Endereco.IEnderecoBAR;
-import com.qat.samples.sysmgmt.bar.Financeiro.IFinanceiroBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Nfe.INFeBAR;
-import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Vendas.IVendasBAR;
-import com.qat.samples.sysmgmt.bar.mybatis.delegate.BaseBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
-import com.qat.samples.sysmgmt.bar.mybatis.delegate.StatusBARD;
-import com.qat.samples.sysmgmt.entidade.model.Empresa;
-import com.qat.samples.sysmgmt.nf.model.ConhecimentoTransporte;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscalItens;
-import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
-import com.qat.samples.sysmgmt.nf.model.Orcamento;
-import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
-import com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest;
+import com.qat.samples.sysmgmt.nfe.model.NFNota;
+import com.qat.samples.sysmgmt.nfe.request.NFNotaInquiryRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
-import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
@@ -179,38 +165,10 @@ private static final String STMT_DELETE_ORDEMSERVICO = NAMESPACE_ORDEMSERVICO + 
 	/** The Constant STMT_FETCH_ORDEMSERVICO_ALL_REQUEST. */
 	private static final String STMT_FETCH_ORDEMSERVICO_ALL_REQUEST = NAMESPACE_ORDEMSERVICO + "fetchAllOrdemServicosRequest";
 
-//===================================### NOTAFISCALSAIDA ####======================================
+//===================================### NOTAFISCALSAIDA ####====================================//
 
-
-	IEnderecoBAR enderecoBAR;
-
-	IStatusBAR statusBAR;
-
-	IHistoricoBAR historicoBAR;
-
-	IVendasBAR vendasBAR;
-
-	IFinanceiroBAR financeiroBAR;
-	
 	INFeBAR nfeBAR;
-
-
-
-	public IEnderecoBAR getEnderecoBAR() {
-		return enderecoBAR;
-	}
-
-	public void setEnderecoBAR(IEnderecoBAR enderecoBAR) {
-		this.enderecoBAR = enderecoBAR;
-	}
-
-	public IStatusBAR getStatusBAR() {
-		return statusBAR;
-	}
-
-	public void setStatusBAR(IStatusBAR statusBAR) {
-		this.statusBAR = statusBAR;
-	}
+	IHistoricoBAR historicoBAR;
 
 	public IHistoricoBAR getHistoricoBAR() {
 		return historicoBAR;
@@ -220,20 +178,12 @@ private static final String STMT_DELETE_ORDEMSERVICO = NAMESPACE_ORDEMSERVICO + 
 		this.historicoBAR = historicoBAR;
 	}
 
-	public IVendasBAR getVendasBAR() {
-		return vendasBAR;
+	public INFeBAR getNfeBAR() {
+		return nfeBAR;
 	}
 
-	public void setVendasBAR(IVendasBAR vendasBAR) {
-		this.vendasBAR = vendasBAR;
-	}
-
-	public IFinanceiroBAR getFinanceiroBAR() {
-		return financeiroBAR;
-	}
-
-	public void setFinanceiroBAR(IFinanceiroBAR financeiroBAR) {
-		this.financeiroBAR = financeiroBAR;
+	public void setNfeBAR(INFeBAR nfeBAR) {
+		this.nfeBAR = nfeBAR;
 	}
 
 	/**
@@ -242,19 +192,10 @@ private static final String STMT_DELETE_ORDEMSERVICO = NAMESPACE_ORDEMSERVICO + 
  * @see com.qat.samples.sysmgmt.base.bar.INotaFiscalSaidaBAR#insertNotaFiscalSaida(com.qat.samples.sysmgmt.base.model.NotaFiscalSaida)
  */
 @Override
-public InternalResponse insertNotaFiscalSaida(NotaFiscalSaida county)
+public InternalResponse insertNotaFiscalSaida(NFNota nota)
 {
-	InternalResponse response = new InternalResponse();
-	Integer historicoId = county.getTransactionId();
-	Integer processId = county.getTransactionId();
-	county.setProcessId(historicoId);
 
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_NF, county, response);
-
-	BaseBARD.maintainInsertBaseNF(county, historicoId, processId, TabelaEnum.NOTAFISCALSAIDA, getEnderecoBAR(),
-			getStatusBAR(), getHistoricoBAR(), getVendasBAR(), getFinanceiroBAR(),new InternalResultsResponse<Empresa>());
-
-	return response;
+	return getNfeBAR().insertNFNota(nota);
 }
 
 /*
@@ -262,11 +203,9 @@ public InternalResponse insertNotaFiscalSaida(NotaFiscalSaida county)
  * @see com.qat.samples.sysmgmt.base.bar.INotaFiscalSaidaBAR#updateNotaFiscalSaida(com.qat.samples.sysmgmt.base.model.NotaFiscalSaida)
  */
 @Override
-public InternalResponse updateNotaFiscalSaida(NotaFiscalSaida county)
+public InternalResponse updateNotaFiscalSaida(NFNota nota)
 {
-	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_NF, county, response);
-	return response;
+	return getNfeBAR().updateNFNota(nota);
 }
 
 /*
@@ -274,11 +213,9 @@ public InternalResponse updateNotaFiscalSaida(NotaFiscalSaida county)
  * @see com.qat.samples.sysmgmt.base.bar.INotaFiscalSaidaBAR#deleteNotaFiscalSaida(com.qat.samples.sysmgmt.base.model.NotaFiscalSaida)
  */
 @Override
-public InternalResponse deleteNotaFiscalSaidaById(NotaFiscalSaida county)
+public InternalResponse deleteNotaFiscalSaidaById(NFNota nota)
 {
-	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NF, county, response);
-	return response;
+	return getNfeBAR().deleteNFNotaById(nota);
 }
 
 /*
@@ -288,9 +225,7 @@ public InternalResponse deleteNotaFiscalSaidaById(NotaFiscalSaida county)
 @Override
 public InternalResponse deleteAllNotaFiscalSaidas()
 {
-	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NF_ALL, response);
-	return response;
+	return null;
 }
 
 /*
@@ -299,10 +234,10 @@ public InternalResponse deleteAllNotaFiscalSaidas()
  * com.qat.samples.sysmgmt.bar.INotaFiscalSaidaBAR#fetchNotaFiscalSaidaById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
  */
 @Override
-public NotaFiscalSaida fetchNotaFiscalSaidaById(FetchByIdRequest request)
+public NFNota fetchNotaFiscalSaidaById(FetchByIdRequest request)
 {
 
-	return (NotaFiscalSaida)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_NOTAFISCALSAIDA, request.getFetchId());
+	return getNfeBAR().fetchNFNotaById(request);
 }
 
 /*
@@ -310,11 +245,9 @@ public NotaFiscalSaida fetchNotaFiscalSaidaById(FetchByIdRequest request)
  * @see com.qat.samples.sysmgmt.base.bar.INotaFiscalSaidaBAR#fetchAllNotaFiscalSaidasCache()
  */
 @Override
-public InternalResultsResponse<NotaFiscalSaida> fetchAllNotaFiscalSaidas(NotaFiscalSaida notafiscalsaida)
+public InternalResultsResponse<NFNota> fetchAllNotaFiscalSaidas(NFNota notafiscalsaida)
 {
-	InternalResultsResponse<NotaFiscalSaida> response = new InternalResultsResponse<NotaFiscalSaida>();
-	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_NOTAFISCALSAIDA_ALL));
-	return response;
+	return getNfeBAR().fetchAllNFNotas(notafiscalsaida);
 }
 
 /*
@@ -323,198 +256,18 @@ public InternalResultsResponse<NotaFiscalSaida> fetchAllNotaFiscalSaidas(NotaFis
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<NotaFiscalSaida> fetchNotaFiscalSaidasByRequest(NotaFiscalInquiryRequest request)
+public InternalResultsResponse<NFNota> fetchNotaFiscalSaidasByRequest(NFNotaInquiryRequest request)
 {
-	InternalResultsResponse<NotaFiscalSaida> response = new InternalResultsResponse<NotaFiscalSaida>();
-	fetchNotaFiscalSaidasByRequest(getSqlSession(), request, STMT_FETCH_NOTAFISCALSAIDA_COUNT, STMT_FETCH_NOTAFISCALSAIDA_ALL_REQUEST,
-			response);
-	return response;
+	return getNfeBAR().fetchNFNotasByRequest(request);
 }
-
-//===================================### fetchNotaFiscalSaidasByRequest ####======================================
-
-public static void fetchNotaFiscalSaidasByRequest(SqlSession sqlSession, NotaFiscalInquiryRequest request, String countStatement,
-			String fetchPagedStatement,
-			InternalResultsResponse<?> response)
-	{
-
-		// If the user requested the total rows/record count
-		if (request.isPreQueryCount())
-		{
-			// set the total rows available in the response
-			response.getResultsSetInfo().setTotalRowsAvailable(
-					(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
-
-			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
-			{
-				response.setStatus(BusinessErrorCategory.NoRowsFound);
-				return;
-			}
-		}
-
-		// Fetch Objects by InquiryRequest Object, paged of course
-		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
-
-		// move request start page to response start page
-		response.getResultsSetInfo().setStartPage(request.getStartPage());
-
-		// move request page size to response page size
-		response.getResultsSetInfo().setPageSize(request.getPageSize());
-
-		// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
-		// 1.
-		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
-
-		// set moreRowsAvailable in response based on total rows compared to (page size * start page)
-		// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
-		// is that you your own logic to handle this.
-		if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
-		{
-			response.getResultsSetInfo().setMoreRowsAvailable(true);
-		}
-
-	}
-
-
-//===================================### ORCAMENTO ####======================================
-	/**
-/*
- * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.base.bar.IOrcamentoBAR#insertOrcamento(com.qat.samples.sysmgmt.base.model.Orcamento)
- */
-@Override
-public InternalResponse insertOrcamento(Orcamento county)
-{
-	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_NF, county, response);
-	return response;
-}
-
-/*
- * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.base.bar.IOrcamentoBAR#updateOrcamento(com.qat.samples.sysmgmt.base.model.Orcamento)
- */
-@Override
-public InternalResponse updateOrcamento(Orcamento county)
-{
-	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_NF, county, response);
-	return response;
-}
-
-/*
- * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.base.bar.IOrcamentoBAR#deleteOrcamento(com.qat.samples.sysmgmt.base.model.Orcamento)
- */
-@Override
-public InternalResponse deleteOrcamentoById(Orcamento county)
-{
-	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NF, county, response);
-	return response;
-}
-
-/*
- * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.base.bar.IOrcamentoBAR#deleteAllOrcamentos()
- */
-@Override
-public InternalResponse deleteAllOrcamentos()
-{
-	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NF_ALL, response);
-	return response;
-}
-
-/*
- * (non-Javadoc)
- * @see
- * com.qat.samples.sysmgmt.bar.IOrcamentoBAR#fetchOrcamentoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
- */
-@Override
-public Orcamento fetchOrcamentoById(FetchByIdRequest request)
-{
-
-	return (Orcamento)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_ORCAMENTO, request.getFetchId());
-}
-
-/*
- * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.base.bar.IOrcamentoBAR#fetchAllOrcamentosCache()
- */
-@Override
-public InternalResultsResponse<Orcamento> fetchAllOrcamentos(Orcamento orcamento)
-{
-	InternalResultsResponse<Orcamento> response = new InternalResultsResponse<Orcamento>();
-	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_ORCAMENTO_ALL));
-	return response;
-}
-
-/*
- * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bar.IOrcamentoBAR#fetchOrcamentosByRequest(com.qat.samples.sysmgmt.model.request.
- * PagedInquiryRequest)
- */
-@Override
-public InternalResultsResponse<Orcamento> fetchOrcamentosByRequest(OrcamentoInquiryRequest request)
-{
-	InternalResultsResponse<Orcamento> response = new InternalResultsResponse<Orcamento>();
-	fetchOrcamentosByRequest(getSqlSession(), request, STMT_FETCH_ORCAMENTO_COUNT, STMT_FETCH_ORCAMENTO_ALL_REQUEST,
-			response);
-	return response;
-}
-
-//===================================### fetchOrcamentosByRequest ####======================================
-
-public static void fetchOrcamentosByRequest(SqlSession sqlSession, OrcamentoInquiryRequest request, String countStatement,
-			String fetchPagedStatement,
-			InternalResultsResponse<?> response)
-	{
-
-		// If the user requested the total rows/record count
-		if (request.isPreQueryCount())
-		{
-			// set the total rows available in the response
-			response.getResultsSetInfo().setTotalRowsAvailable(
-					(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
-
-			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
-			{
-				response.setStatus(BusinessErrorCategory.NoRowsFound);
-				return;
-			}
-		}
-
-		// Fetch Objects by InquiryRequest Object, paged of course
-		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
-
-		// move request start page to response start page
-		response.getResultsSetInfo().setStartPage(request.getStartPage());
-
-		// move request page size to response page size
-		response.getResultsSetInfo().setPageSize(request.getPageSize());
-
-		// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
-		// 1.
-		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
-
-		// set moreRowsAvailable in response based on total rows compared to (page size * start page)
-		// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
-		// is that you your own logic to handle this.
-		if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
-		{
-			response.getResultsSetInfo().setMoreRowsAvailable(true);
-		}
-
-	}
 
 
 //===================================### ORDEMSERVICO ####======================================
 	/**
 /*
- * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.base.bar.IOrdemServicoBAR#insertOrdemServico(com.qat.samples.sysmgmt.base.model.OrdemServico)
- */
+* (non-Javadoc)
+* @see com.qat.samples.sysmgmt.base.bar.IOrdemServicoBAR#insertOrdemServico(com.qat.samples.sysmgmt.base.model.OrdemServico)
+*/
 @Override
 public InternalResponse insertOrdemServico(OrdemServico county)
 {
@@ -524,9 +277,9 @@ public InternalResponse insertOrdemServico(OrdemServico county)
 }
 
 /*
- * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.base.bar.IOrdemServicoBAR#updateOrdemServico(com.qat.samples.sysmgmt.base.model.OrdemServico)
- */
+* (non-Javadoc)
+* @see com.qat.samples.sysmgmt.base.bar.IOrdemServicoBAR#updateOrdemServico(com.qat.samples.sysmgmt.base.model.OrdemServico)
+*/
 @Override
 public InternalResponse updateOrdemServico(OrdemServico county)
 {
@@ -536,9 +289,9 @@ public InternalResponse updateOrdemServico(OrdemServico county)
 }
 
 /*
- * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.base.bar.IOrdemServicoBAR#deleteOrdemServico(com.qat.samples.sysmgmt.base.model.OrdemServico)
- */
+* (non-Javadoc)
+* @see com.qat.samples.sysmgmt.base.bar.IOrdemServicoBAR#deleteOrdemServico(com.qat.samples.sysmgmt.base.model.OrdemServico)
+*/
 @Override
 public InternalResponse deleteOrdemServicoById(OrdemServico county)
 {
@@ -548,9 +301,9 @@ public InternalResponse deleteOrdemServicoById(OrdemServico county)
 }
 
 /*
- * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.base.bar.IOrdemServicoBAR#deleteAllOrdemServicos()
- */
+* (non-Javadoc)
+* @see com.qat.samples.sysmgmt.base.bar.IOrdemServicoBAR#deleteAllOrdemServicos()
+*/
 @Override
 public InternalResponse deleteAllOrdemServicos()
 {
@@ -560,10 +313,10 @@ public InternalResponse deleteAllOrdemServicos()
 }
 
 /*
- * (non-Javadoc)
- * @see
- * com.qat.samples.sysmgmt.bar.IOrdemServicoBAR#fetchOrdemServicoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
- */
+* (non-Javadoc)
+* @see
+* com.qat.samples.sysmgmt.bar.IOrdemServicoBAR#fetchOrdemServicoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+*/
 @Override
 public OrdemServico fetchOrdemServicoById(FetchByIdRequest request)
 {
@@ -571,9 +324,9 @@ public OrdemServico fetchOrdemServicoById(FetchByIdRequest request)
 }
 
 /*
- * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.base.bar.IOrdemServicoBAR#fetchAllOrdemServicosCache()
- */
+* (non-Javadoc)
+* @see com.qat.samples.sysmgmt.base.bar.IOrdemServicoBAR#fetchAllOrdemServicosCache()
+*/
 @Override
 public InternalResultsResponse<OrdemServico> fetchAllOrdemServicos(OrdemServico ordemservico)
 {
@@ -583,10 +336,10 @@ public InternalResultsResponse<OrdemServico> fetchAllOrdemServicos(OrdemServico 
 }
 
 /*
- * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bar.IOrdemServicoBAR#fetchOrdemServicosByRequest(com.qat.samples.sysmgmt.model.request.
- * PagedInquiryRequest)
- */
+* (non-Javadoc)
+* @see com.qat.samples.sysmgmt.bar.IOrdemServicoBAR#fetchOrdemServicosByRequest(com.qat.samples.sysmgmt.model.request.
+* PagedInquiryRequest)
+*/
 @Override
 public InternalResultsResponse<OrdemServico> fetchOrdemServicosByRequest(OrdemServicoInquiryRequest request)
 {
@@ -640,173 +393,6 @@ public static void fetchOrdemServicosByRequest(SqlSession sqlSession, OrdemServi
 
 	}
 
-
-//===================================### CONHECIMENTOTRANSPORTE ####======================================
-	/**
-/*
-* (non-Javadoc)
-* @see com.qat.samples.sysmgmt.base.bar.IConhecimentoTransporteBAR#insertConhecimentoTransporte(com.qat.samples.sysmgmt.base.model.ConhecimentoTransporte)
-*/
-@Override
-public InternalResponse insertConhecimentoTransporte(ConhecimentoTransporte conhecimentotransporte)
-{
-	InternalResponse response = new InternalResponse();
-		Integer count = 0;
-		Boolean count1 = false;
-
-conhecimentotransporte.setProcessId(conhecimentotransporte.getTransactionId());
-
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONHECIMENTOTRANSPORTE, conhecimentotransporte, response);
-
-
-Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.CONHECIMENTOTRANSPORTE, AcaoEnum.INSERT, conhecimentotransporte.getTransactionId(),
-			getHistoricoBAR(), response, conhecimentotransporte.getId(),conhecimentotransporte.getUserId());
-
-
-if (conhecimentotransporte.getId() !=  0 && conhecimentotransporte.getId() != null)
-	{
-		Status status = new Status();
-		status.setStatus(CdStatusTypeEnum.ATIVO);
-		List<Status> statusList = new ArrayList<Status>();
-		statusList.add(status);
-		count1 =
-				StatusBARD.maintainStatusAssociations(statusList, response, conhecimentotransporte.getId(), null, AcaoEnum.INSERT,
-						conhecimentotransporte.getCreateUser(), conhecimentotransporte.getId(), TabelaEnum.CONHECIMENTOTRANSPORTE, statusBAR,
-						historicoBAR, conhecimentotransporte.getTransactionId(), conhecimentotransporte.getTransactionId());
-
-	}
-
-
-	return response;
-}
-
-/*
-* (non-Javadoc)
-* @see com.qat.samples.sysmgmt.base.bar.IConhecimentoTransporteBAR#updateConhecimentoTransporte(com.qat.samples.sysmgmt.base.model.ConhecimentoTransporte)
-*/
-@Override
-public InternalResponse updateConhecimentoTransporte(ConhecimentoTransporte conhecimentotransporte)
-{
-	InternalResponse response = new InternalResponse();
-conhecimentotransporte.setProcessId(conhecimentotransporte.getTransactionId());
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CONHECIMENTOTRANSPORTE, conhecimentotransporte, response);
-
-Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.CONHECIMENTOTRANSPORTE, AcaoEnum.UPDATE, conhecimentotransporte.getTransactionId(),
-			getHistoricoBAR(), response, conhecimentotransporte.getId(),conhecimentotransporte.getUserId());
-
-	return response;
-}
-
-/*
-* (non-Javadoc)
-* @see com.qat.samples.sysmgmt.base.bar.IConhecimentoTransporteBAR#deleteConhecimentoTransporte(com.qat.samples.sysmgmt.base.model.ConhecimentoTransporte)
-*/
-@Override
-public InternalResponse deleteConhecimentoTransporteById(ConhecimentoTransporte conhecimentotransporte)
-{
-	InternalResponse response = new InternalResponse();
-conhecimentotransporte.setProcessId(conhecimentotransporte.getTransactionId());
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONHECIMENTOTRANSPORTE, conhecimentotransporte, response);
-
-Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.CONHECIMENTOTRANSPORTE, AcaoEnum.DELETE, conhecimentotransporte.getTransactionId(),
-			getHistoricoBAR(), response, conhecimentotransporte.getId(),conhecimentotransporte.getUserId());
-
-	return response;
-}
-
-/*
-* (non-Javadoc)
-* @see com.qat.samples.sysmgmt.base.bar.IConhecimentoTransporteBAR#deleteAllConhecimentoTransportes()
-*/
-@Override
-public InternalResponse deleteAllConhecimentoTransportes()
-{
-	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONHECIMENTOTRANSPORTE_ALL, response);
-	return response;
-}
-
-/*
-* (non-Javadoc)
-* @see
-* com.qat.samples.sysmgmt.bar.IConhecimentoTransporteBAR#fetchConhecimentoTransporteById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
-*/
-@Override
-public ConhecimentoTransporte fetchConhecimentoTransporteById(FetchByIdRequest request)
-{
-return (ConhecimentoTransporte)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONHECIMENTOTRANSPORTE, request.getFetchId());
-
-}
-
-/*
-* (non-Javadoc)
-* @see com.qat.samples.sysmgmt.base.bar.IConhecimentoTransporteBAR#fetchAllConhecimentoTransportesCache()
-*/
-@Override
-public InternalResultsResponse<ConhecimentoTransporte> fetchAllConhecimentoTransportes(ConhecimentoTransporte conhecimentotransporte)
-{
-	InternalResultsResponse<ConhecimentoTransporte> response = new InternalResultsResponse<ConhecimentoTransporte>();
-	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_CONHECIMENTOTRANSPORTE_ALL));
-	return response;
-}
-
-/*
-* (non-Javadoc)
-* @see com.qat.samples.sysmgmt.bar.IConhecimentoTransporteBAR#fetchConhecimentoTransportesByRequest(com.qat.samples.sysmgmt.model.request.
-* PagedInquiryRequest)
-*/
-@Override
-public InternalResultsResponse<ConhecimentoTransporte> fetchConhecimentoTransportesByRequest(PagedInquiryRequest request)
-{
-	InternalResultsResponse<ConhecimentoTransporte> response = new InternalResultsResponse<ConhecimentoTransporte>();
-	fetchConhecimentoTransportesByRequest(getSqlSession(), request, STMT_FETCH_CONHECIMENTOTRANSPORTE_COUNT, STMT_FETCH_CONHECIMENTOTRANSPORTE_ALL_REQUEST,
-			response);
-	return response;
-}
-
-//===================================### fetchConhecimentoTransportesByRequest ####======================================
-
-public static void fetchConhecimentoTransportesByRequest(SqlSession sqlSession, PagedInquiryRequest request, String countStatement,
-			String fetchPagedStatement,
-			InternalResultsResponse<?> response)
-	{
-
-		// If the user requested the total rows/record count
-		if (request.isPreQueryCount())
-		{
-			// set the total rows available in the response
-			response.getResultsSetInfo().setTotalRowsAvailable(
-					(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
-
-			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
-			{
-				response.setStatus(BusinessErrorCategory.NoRowsFound);
-				return;
-			}
-		}
-
-		// Fetch Objects by InquiryRequest Object, paged of course
-		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
-
-		// move request start page to response start page
-		response.getResultsSetInfo().setStartPage(request.getStartPage());
-
-		// move request page size to response page size
-		response.getResultsSetInfo().setPageSize(request.getPageSize());
-
-		// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
-		// 1.
-		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
-
-		// set moreRowsAvailable in response based on total rows compared to (page size * start page)
-		// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
-		// is that you your own logic to handle this.
-		if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
-		{
-			response.getResultsSetInfo().setMoreRowsAvailable(true);
-		}
-
-	}
 
 
 //===================================### NOTAFISCALITENS ####======================================

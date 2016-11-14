@@ -1,12 +1,9 @@
 package com.qat.samples.sysmgmt.bar.Vendas;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.nf.model.ConhecimentoTransporte;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscalItens;
-import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
-import com.qat.samples.sysmgmt.nf.model.Orcamento;
-import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
-import com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest;
+import com.qat.samples.sysmgmt.nfe.model.NFNota;
+import com.qat.samples.sysmgmt.nfe.request.NFNotaInquiryRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
@@ -24,7 +21,7 @@ public interface IVendasBAR
 	 * @param request the request
 * @return the internal results response
 */
-	public NotaFiscalSaida fetchNotaFiscalSaidaById(FetchByIdRequest request);
+	public NFNota fetchNotaFiscalSaidaById(FetchByIdRequest request);
 
 	/**
 * Insert notafiscalsaida.
@@ -33,7 +30,7 @@ public interface IVendasBAR
 *
 * @return the internal response
 */
-	public InternalResponse insertNotaFiscalSaida(NotaFiscalSaida notafiscalsaida);
+	public InternalResponse insertNotaFiscalSaida(NFNota notafiscalsaida);
 
 	/**
 * Update notafiscalsaida.
@@ -42,7 +39,7 @@ public interface IVendasBAR
 *
 * @return the internal response
 */
-	public InternalResponse updateNotaFiscalSaida(NotaFiscalSaida notafiscalsaida);
+	public InternalResponse updateNotaFiscalSaida(NFNota notafiscalsaida);
 
 	/**
 * Delete notafiscalsaida.
@@ -51,7 +48,7 @@ public interface IVendasBAR
 *
 * @return the internal response
 */
-	public InternalResponse deleteNotaFiscalSaidaById(NotaFiscalSaida notafiscalsaida);
+	public InternalResponse deleteNotaFiscalSaidaById(NFNota notafiscalsaida);
 
 	/**
 * Delete all notafiscalsaidas.
@@ -65,7 +62,7 @@ public interface IVendasBAR
 *
 * @return the list< notafiscalsaida>
 */
-	public InternalResultsResponse<NotaFiscalSaida> fetchAllNotaFiscalSaidas(NotaFiscalSaida  notafiscalsaida);
+	public InternalResultsResponse<NFNota> fetchAllNotaFiscalSaidas(NFNota  notafiscalsaida);
 
 	/**
 * Fetch notafiscalsaidas by request.
@@ -73,180 +70,7 @@ public interface IVendasBAR
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<NotaFiscalSaida> fetchNotaFiscalSaidasByRequest(NotaFiscalInquiryRequest request);
-
-	/**
-	 * Fetch orcamento by id.
-	 *
-	 * @param request the request
-* @return the internal results response
-*/
-	public Orcamento fetchOrcamentoById(FetchByIdRequest request);
-
-	/**
-* Insert orcamento.
-*
-* @param orcamento the orcamento
-*
-* @return the internal response
-*/
-	public InternalResponse insertOrcamento(Orcamento orcamento);
-
-	/**
-* Update orcamento.
-*
-* @param orcamento the orcamento
-*
-* @return the internal response
-*/
-	public InternalResponse updateOrcamento(Orcamento orcamento);
-
-	/**
-* Delete orcamento.
-*
-* @param orcamento the orcamento
-*
-* @return the internal response
-*/
-	public InternalResponse deleteOrcamentoById(Orcamento orcamento);
-
-	/**
-* Delete all orcamentos.
-*
-* @return the internal response
-*/
-	public InternalResponse deleteAllOrcamentos();
-
-	/**
-* Fetch all orcamentos.
-*
-* @return the list< orcamento>
-*/
-	public InternalResultsResponse<Orcamento> fetchAllOrcamentos(Orcamento  orcamento);
-
-	/**
-* Fetch orcamentos by request.
-*
-* @param request the request
-* @return the internal results response
-*/
-	public InternalResultsResponse<Orcamento> fetchOrcamentosByRequest(OrcamentoInquiryRequest request);
-
-	/**
-	 * Fetch ordemservico by id.
-	 *
-	 * @param request the request
-* @return the internal results response
-*/
-	public OrdemServico fetchOrdemServicoById(FetchByIdRequest request);
-
-	/**
-* Insert ordemservico.
-*
-* @param ordemservico the ordemservico
-*
-* @return the internal response
-*/
-	public InternalResponse insertOrdemServico(OrdemServico ordemservico);
-
-	/**
-* Update ordemservico.
-*
-* @param ordemservico the ordemservico
-*
-* @return the internal response
-*/
-	public InternalResponse updateOrdemServico(OrdemServico ordemservico);
-
-	/**
-* Delete ordemservico.
-*
-* @param ordemservico the ordemservico
-*
-* @return the internal response
-*/
-	public InternalResponse deleteOrdemServicoById(OrdemServico ordemservico);
-
-	/**
-* Delete all ordemservicos.
-*
-* @return the internal response
-*/
-	public InternalResponse deleteAllOrdemServicos();
-
-	/**
-* Fetch all ordemservicos.
-*
-* @return the list< ordemservico>
-*/
-	public InternalResultsResponse<OrdemServico> fetchAllOrdemServicos(OrdemServico  ordemservico);
-
-	/**
-* Fetch ordemservicos by request.
-*
-* @param request the request
-* @return the internal results response
-*/
-	public InternalResultsResponse<OrdemServico> fetchOrdemServicosByRequest(OrdemServicoInquiryRequest request);
-
-
-
-	/**
-	 * Fetch conhecimentotransporte by id.
-	 *
-	 * @param request the request
-* @return the internal results response
-*/
-	public ConhecimentoTransporte fetchConhecimentoTransporteById(FetchByIdRequest request);
-
-	/**
-* Insert conhecimentotransporte.
-*
-* @param conhecimentotransporte the conhecimentotransporte
-*
-* @return the internal response
-*/
-	public InternalResponse insertConhecimentoTransporte(ConhecimentoTransporte conhecimentotransporte);
-
-	/**
-* Update conhecimentotransporte.
-*
-* @param conhecimentotransporte the conhecimentotransporte
-*
-* @return the internal response
-*/
-	public InternalResponse updateConhecimentoTransporte(ConhecimentoTransporte conhecimentotransporte);
-
-	/**
-* Delete conhecimentotransporte.
-*
-* @param conhecimentotransporte the conhecimentotransporte
-*
-* @return the internal response
-*/
-	public InternalResponse deleteConhecimentoTransporteById(ConhecimentoTransporte conhecimentotransporte);
-
-	/**
-* Delete all conhecimentotransportes.
-*
-* @return the internal response
-*/
-	public InternalResponse deleteAllConhecimentoTransportes();
-
-	/**
-* Fetch all conhecimentotransportes.
-*
-* @return the list< conhecimentotransporte>
-*/
-	public InternalResultsResponse<ConhecimentoTransporte> fetchAllConhecimentoTransportes(ConhecimentoTransporte  conhecimentotransporte);
-
-	/**
-* Fetch conhecimentotransportes by request.
-*
-* @param request the request
-* @return the internal results response
-*/
-	public InternalResultsResponse<ConhecimentoTransporte> fetchConhecimentoTransportesByRequest(PagedInquiryRequest request);
+	public InternalResultsResponse<NFNota> fetchNotaFiscalSaidasByRequest(NFNotaInquiryRequest request);
 
 	/**
 	 * Fetch notafiscalitens by id.
@@ -304,5 +128,64 @@ public interface IVendasBAR
 * @return the internal results response
 */
 	public InternalResultsResponse<NotaFiscalItens> fetchNotaFiscalItenssByRequest(PagedInquiryRequest request);
+
+
+/**
+	 * Fetch ordemservico by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public OrdemServico fetchOrdemServicoById(FetchByIdRequest request);
+
+	/**
+* Insert ordemservico.
+*
+* @param ordemservico the ordemservico
+*
+* @return the internal response
+*/
+	public InternalResponse insertOrdemServico(OrdemServico ordemservico);
+
+	/**
+* Update ordemservico.
+*
+* @param ordemservico the ordemservico
+*
+* @return the internal response
+*/
+	public InternalResponse updateOrdemServico(OrdemServico ordemservico);
+
+	/**
+* Delete ordemservico.
+*
+* @param ordemservico the ordemservico
+*
+* @return the internal response
+*/
+	public InternalResponse deleteOrdemServicoById(OrdemServico ordemservico);
+
+	/**
+* Delete all ordemservicos.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllOrdemServicos();
+
+	/**
+* Fetch all ordemservicos.
+*
+* @return the list< ordemservico>
+*/
+	public InternalResultsResponse<OrdemServico> fetchAllOrdemServicos(OrdemServico  ordemservico);
+
+	/**
+* Fetch ordemservicos by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<OrdemServico> fetchOrdemServicosByRequest(OrdemServicoInquiryRequest request);
+
 
 }

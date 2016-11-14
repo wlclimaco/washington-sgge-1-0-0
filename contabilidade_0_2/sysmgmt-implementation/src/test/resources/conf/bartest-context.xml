@@ -36,11 +36,8 @@
 
 	<bean id="vendasBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Vendas.VendasBARImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-		<property name="statusBAR" ref="statusBARTarget" />
 		<property name="historicoBAR" ref="historicoBARTarget" />
-		<property name="vendasBAR" ref="vendasBARTarget" />
-		<property name="financeiroBAR" ref="financeiroBARTarget" />
-		<property name="enderecoBAR" ref="enderecoBARTarget" />
+		<property name="nfeBAR" ref="nfeBARTarget" />
 	</bean>
 
 	<bean id="cadastroBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Cadastros.CadastrosBARImpl">
