@@ -77,8 +77,8 @@
 		<property name="validationController" ref="countyValidationController"/>
 	</bean>
 
-	<bean id="vendasBACTarget" class="com.qat.samples.sysmgmt.bac.Vendas.vendasBACImpl">
-		<property name="vendasBAR" ref="vendasBACTarget"/>
+	<bean id="vendasBACTarget" class="com.qat.samples.sysmgmt.bac.Vendas.VendasBACImpl">
+		<property name="vendasBAR" ref="vendasBARTarget"/>
 		<property name="validationController" ref="countyValidationController"/>
 	</bean>
 

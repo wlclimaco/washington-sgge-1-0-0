@@ -27,8 +27,6 @@ import com.qat.samples.sysmgmt.nf.model.ConhecimentoTransporte;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscalItens;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
 import com.qat.samples.sysmgmt.nf.model.Orcamento;
-import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
-import com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest;
 import com.qat.samples.sysmgmt.nfe.model.NFNota;
 import com.qat.samples.sysmgmt.nfe.request.NFNotaInquiryRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;

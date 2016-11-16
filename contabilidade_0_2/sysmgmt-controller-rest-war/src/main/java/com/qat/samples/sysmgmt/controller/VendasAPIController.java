@@ -18,12 +18,13 @@ import com.qat.framework.util.ResponseHandler;
 import com.qat.samples.sysmgmt.bac.Vendas.IVendasBAC;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
 import com.qat.samples.sysmgmt.nf.model.Orcamento;
-import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalInquiryRequest;
 import com.qat.samples.sysmgmt.nf.model.request.NotaFiscalSaidaMaintenanceRequest;
 import com.qat.samples.sysmgmt.nf.model.request.OrcamentoInquiryRequest;
 import com.qat.samples.sysmgmt.nf.model.request.OrcamentoMaintenanceRequest;
 import com.qat.samples.sysmgmt.nf.model.response.NotaFiscalSaidaResponse;
 import com.qat.samples.sysmgmt.nf.model.response.OrcamentoResponse;
+import com.qat.samples.sysmgmt.nfe.model.NFNota;
+import com.qat.samples.sysmgmt.nfe.request.NFNotaInquiryRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.OrdemServico;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoInquiryRequest;
 import com.qat.samples.sysmgmt.ordemServico.model.request.OrdemServicoMaintenanceRequest;
@@ -84,14 +85,18 @@ public class VendasAPIController extends BaseController {
 			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
 		NotaFiscalSaidaResponse notafiscalsaidaResponse = new NotaFiscalSaidaResponse();
 
-		try {
-			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().refreshNotaFiscalSaidas(request);
-			ResponseHandler.handleOperationStatusAndMessages(notafiscalsaidaResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, notafiscalsaidaResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
+		// try {
+		// RefreshRequest request = new RefreshRequest(refreshInt, retList,
+		// retPaged);
+		// InternalResultsResponse<NotaFiscalSaida> internalResponse =
+		// getVendasBAC().refreshNotaFiscalSaidas(request);
+		// ResponseHandler.handleOperationStatusAndMessages(notafiscalsaidaResponse,
+		// internalResponse, true);
+		// } catch (Exception ex) {
+		// ResponseHandler.handleException(LOG, notafiscalsaidaResponse, ex,
+		// DEFAULT_EXCEPTION_MSG,
+		// new Object[] { ex.toString() });
+		// }
 		return notafiscalsaidaResponse;
 
 	}
@@ -105,11 +110,10 @@ public class VendasAPIController extends BaseController {
 	 */
 	@RequestMapping(value = "/nfSaidas/fetchPage", method = RequestMethod.POST)
 	@ResponseBody
-	public NotaFiscalSaidaResponse fetchNotaFiscalSaidaPaged(@RequestBody NotaFiscalInquiryRequest request) {
+	public NotaFiscalSaidaResponse fetchNotaFiscalSaidaPaged(@RequestBody NFNotaInquiryRequest request) {
 		NotaFiscalSaidaResponse notafiscalsaidaResponse = new NotaFiscalSaidaResponse();
 		try {
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC()
-					.fetchNotaFiscalSaidasByRequest(request);
+			InternalResultsResponse<NFNota> internalResponse = getVendasBAC().fetchNotaFiscalSaidasByRequest(request);
 			ResponseHandler.handleOperationStatusAndMessages(notafiscalsaidaResponse, internalResponse, true);
 		} catch (Exception ex) {
 			ResponseHandler.handleException(LOG, notafiscalsaidaResponse, ex, DEFAULT_EXCEPTION_MSG,
@@ -130,7 +134,7 @@ public class VendasAPIController extends BaseController {
 	public NotaFiscalSaidaResponse insertNotaFiscalSaida(@RequestBody NotaFiscalSaidaMaintenanceRequest request) {
 		NotaFiscalSaidaResponse notafiscalsaidaResponse = new NotaFiscalSaidaResponse();
 		try {
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().insertNotaFiscalSaida(request);
+			InternalResultsResponse<NFNota> internalResponse = getVendasBAC().insertNotaFiscalSaida(request);
 			ResponseHandler.handleOperationStatusAndMessages(notafiscalsaidaResponse, internalResponse, true);
 		} catch (Exception ex) {
 			ResponseHandler.handleException(LOG, notafiscalsaidaResponse, ex, DEFAULT_EXCEPTION_MSG,
@@ -151,7 +155,7 @@ public class VendasAPIController extends BaseController {
 	public NotaFiscalSaidaResponse updateNotaFiscalSaida(@RequestBody NotaFiscalSaidaMaintenanceRequest request) {
 		NotaFiscalSaidaResponse notafiscalsaidaResponse = new NotaFiscalSaidaResponse();
 		try {
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().updateNotaFiscalSaida(request);
+			InternalResultsResponse<NFNota> internalResponse = getVendasBAC().updateNotaFiscalSaida(request);
 			ResponseHandler.handleOperationStatusAndMessages(notafiscalsaidaResponse, internalResponse, true);
 		} catch (Exception ex) {
 			ResponseHandler.handleException(LOG, notafiscalsaidaResponse, ex, DEFAULT_EXCEPTION_MSG,
@@ -173,130 +177,13 @@ public class VendasAPIController extends BaseController {
 		NotaFiscalSaidaResponse notafiscalsaidaResponse = new NotaFiscalSaidaResponse();
 
 		try {
-			InternalResultsResponse<NotaFiscalSaida> internalResponse = getVendasBAC().deleteNotaFiscalSaida(request);
+			InternalResultsResponse<NFNota> internalResponse = getVendasBAC().deleteNotaFiscalSaida(request);
 			ResponseHandler.handleOperationStatusAndMessages(notafiscalsaidaResponse, internalResponse, true);
 		} catch (Exception ex) {
 			ResponseHandler.handleException(LOG, notafiscalsaidaResponse, ex, DEFAULT_EXCEPTION_MSG,
 					new Object[] { ex.toString() });
 		}
 		return notafiscalsaidaResponse;
-
-	}
-
-	// ===================================### ORCAMENTO
-	// ####======================================
-	/**
-	 * Refresh orcamentos.
-	 *
-	 * @param refreshInt
-	 *            the refresh int
-	 * @param retList
-	 *            the ret list
-	 * @param retPaged
-	 *            the ret paged
-	 * @return the orcamento response
-	 */
-	@RequestMapping(value = "/orcamento/refresh", method = RequestMethod.GET)
-	@ResponseBody
-	public OrcamentoResponse refreshOrcamentos(@RequestParam("refreshInt") Integer refreshInt,
-			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
-		OrcamentoResponse orcamentoResponse = new OrcamentoResponse();
-
-		try {
-			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
-			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().refreshOrcamentos(request);
-			ResponseHandler.handleOperationStatusAndMessages(orcamentoResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, orcamentoResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return orcamentoResponse;
-
-	}
-
-	/**
-	 * Fetch orcamento paged.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the orcamento response
-	 */
-	@RequestMapping(value = "/orcamento/fetchPage", method = RequestMethod.POST)
-	@ResponseBody
-	public OrcamentoResponse fetchOrcamentoPaged(@RequestBody OrcamentoInquiryRequest request) {
-		OrcamentoResponse orcamentoResponse = new OrcamentoResponse();
-		try {
-			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().fetchOrcamentosByRequest(request);
-			ResponseHandler.handleOperationStatusAndMessages(orcamentoResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, orcamentoResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return orcamentoResponse;
-	}
-
-	/**
-	 * Insert orcamento.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the orcamento response
-	 */
-	@RequestMapping(value = "/orcamento/insert", method = RequestMethod.POST)
-	@ResponseBody
-	public OrcamentoResponse insertOrcamento(@RequestBody OrcamentoMaintenanceRequest request) {
-		OrcamentoResponse orcamentoResponse = new OrcamentoResponse();
-		try {
-			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().insertOrcamento(request);
-			ResponseHandler.handleOperationStatusAndMessages(orcamentoResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, orcamentoResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return orcamentoResponse;
-	}
-
-	/**
-	 * Update orcamento.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the orcamento response
-	 */
-	@RequestMapping(value = "/orcamento/update", method = RequestMethod.POST)
-	@ResponseBody
-	public OrcamentoResponse updateOrcamento(@RequestBody OrcamentoMaintenanceRequest request) {
-		OrcamentoResponse orcamentoResponse = new OrcamentoResponse();
-		try {
-			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().updateOrcamento(request);
-			ResponseHandler.handleOperationStatusAndMessages(orcamentoResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, orcamentoResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return orcamentoResponse;
-	}
-
-	/**
-	 * Delete orcamento.
-	 *
-	 * @param request
-	 *            the request
-	 * @return the orcamento response
-	 */
-	@RequestMapping(value = "/orcamento/delete", method = RequestMethod.POST)
-	@ResponseBody
-	public OrcamentoResponse deleteOrcamento(@RequestBody OrcamentoMaintenanceRequest request) {
-		OrcamentoResponse orcamentoResponse = new OrcamentoResponse();
-
-		try {
-			InternalResultsResponse<Orcamento> internalResponse = getVendasBAC().deleteOrcamento(request);
-			ResponseHandler.handleOperationStatusAndMessages(orcamentoResponse, internalResponse, true);
-		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, orcamentoResponse, ex, DEFAULT_EXCEPTION_MSG,
-					new Object[] { ex.toString() });
-		}
-		return orcamentoResponse;
 
 	}
 

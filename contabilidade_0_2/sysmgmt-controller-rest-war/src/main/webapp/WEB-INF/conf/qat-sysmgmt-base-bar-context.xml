@@ -180,6 +180,21 @@
 
 	</bean>
 
+	<bean id="nfeBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Nfe.NFeBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+		<property name="statusBAR" ref="statusBARTarget" />
+		<property name="historicoBAR" ref="historicoBARTarget" />
+		<property name="cadastrosBAR" ref="cadastrosBARTarget" />
+		<property name="nfeBAR" ref="nfeBARTarget" />
+		<property name="vendasBAR" ref="vendasBARTarget" />
+	</bean>
+
+	<bean id="vendasBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Vendas.VendasBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+		<property name="historicoBAR" ref="historicoBARTarget" />
+		<property name="nfeBAR" ref="nfeBARTarget" />
+	</bean>
+
 
 
 
@@ -198,9 +213,7 @@
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 	</bean>
 
-	<bean id="vendasBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Vendas.VendasBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-	</bean>
+
 
 
 
