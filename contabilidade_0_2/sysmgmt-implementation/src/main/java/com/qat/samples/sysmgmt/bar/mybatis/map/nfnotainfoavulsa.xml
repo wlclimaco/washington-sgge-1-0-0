@@ -28,14 +28,14 @@
     <result property="valorTotalConstanteDocumentoArrecadacaoReceita" column="valorTotalConstanteDocumentoArrecadacaoReceita"/>
     <result property="reparticaoFiscalEmitente" column="reparticaoFiscalEmitente"/>
     <result property="dataPagamentoDocumentoArrecadacao" column="dataPagamentoDocumentoArrecadacao"/>
-<result property="parentId" column="parentId"/>
-<result property="tabelaEnumValue" column="tabelaEnumValue"/>
-<result property="emprId" column="emprId"/>
-<result property="processId" column="processId"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
+	<result property="parentId" column="parentId"/>
+	<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+	<result property="emprId" column="emprId"/>
+	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
   <sql id="allNFNotaInfoAvulsaColumns">

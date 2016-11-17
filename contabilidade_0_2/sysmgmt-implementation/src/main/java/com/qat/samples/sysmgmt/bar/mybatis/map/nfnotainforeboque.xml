@@ -71,6 +71,12 @@ placaVeiculo
    FROM nfnotainforeboque WHERE id = #{fetchid}
  </select>
 
+ <select id="fetchNFNotaInfoReboqueByParentId" parameterType="Integer" resultMap="NFNotaInfoReboqueResult">
+    SELECT id,
+ <include refid="allNFNotaInfoReboqueColumns" />
+   FROM nfnotainforeboque WHERE parentid = #{fetchid}
+ </select>
+
  <select id="fetchAllNFNotaInfoReboquesRequest" parameterType="PagedInquiryRequest" resultMap="NFNotaInfoReboqueResult">
 
      SELECT id,<include refid="allNFNotaInfoReboqueColumns" />

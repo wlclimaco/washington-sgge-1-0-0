@@ -19,31 +19,30 @@
   <result property="id" column="id"/>
     <result property="identificador" column="identificador"/>
     <result property="versao" column="versao"/>
-
-<result property="parentId" column="parentId"/>
-<result property="tabelaEnumValue" column="tabelaEnumValue"/>
-<result property="emprId" column="emprId"/>
-<result property="processId" column="processId"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
-<collection property="identificacao" column="identificacao" select="RegimeMap.fetchRegimeById"/>
-    <collection property="emitente" column="emitente" select="RegimeMap.fetchRegimeById"/>
-    <collection property="avulsa" column="avulsa" select="RegimeMap.fetchRegimeById"/>
-    <collection property="destinatario" column="destinatario" select="RegimeMap.fetchRegimeById"/>
-    <collection property="retirada" column="retirada" select="RegimeMap.fetchRegimeById"/>
-    <collection property="entrega" column="entrega" select="RegimeMap.fetchRegimeById"/>
-<collection property="pessoasautorizadasdownloadnfe" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="itens" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-    <collection property="total" column="total" select="RegimeMap.fetchRegimeById"/>
-    <collection property="transporte" column="transporte" select="RegimeMap.fetchRegimeById"/>
-    <collection property="cobranca" column="cobranca" select="RegimeMap.fetchRegimeById"/>
-<collection property="pagamentos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-    <collection property="informacoesadicionais" column="informacoesadicionais" select="RegimeMap.fetchRegimeById"/>
-    <collection property="exportacao" column="exportacao" select="RegimeMap.fetchRegimeById"/>
-    <collection property="compra" column="compra" select="RegimeMap.fetchRegimeById"/>
-    <collection property="cana" column="cana" select="RegimeMap.fetchRegimeById"/>
+	<result property="parentId" column="parentId"/>
+	<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+	<result property="emprId" column="emprId"/>
+	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<collection property="identificacao" column="identificacao" select="NFNotaInfoIdentificacaoMap.fetchNFNotaInfoIdentificacaoById"/>
+	<collection property="emitente" column="emitente" select="NFNotaInfoEmitenteMap.fetchNFNotaInfoEmitenteById"/>
+	<collection property="avulsa" column="avulsa" select="NFNotaInfoAvulsaMap.fetchNFNotaInfoAvulsaById"/>
+	<collection property="destinatario" column="destinatario" select="NFNotaInfoDestinatarioMap.fetchNFNotaInfoDestinatarioById"/>
+	<collection property="retirada" column="retirada" select="NFNotaInfoLocalMap.fetchNFNotaInfoLocalById"/>
+	<collection property="entrega" column="entrega" select="NFNotaInfoLocalMap.fetchNFNotaInfoLocalById"/>
+	<collection property="pessoasautorizadasdownloadnfe" column="id" select="NFPessoaAutorizadaDownloadNFeMap.fetchNFPessoaAutorizadaDownloadNFeByParentId"/>
+	<collection property="itens" column="id" select="NotaFiscalItensMap.fetchNotaFiscalItensByParentId"/>
+	<collection property="total" column="total" select="NFNotaInfoTotalMap.fetchNFNotaInfoTotalById"/>
+	<collection property="transporte" column="transporte" select="NFNotaInfoTransporteMap.fetchNFNotaInfoTransporteById"/>
+	<collection property="cobranca" column="cobranca" select="NFNotaInfoCobrancaMap.fetchNFNotaInfoCobrancaById"/>
+	<collection property="pagamentos" column="id" select="NFNotaInfoPagamentoMap.fetchNFNotaInfoPagamentoByParentId"/>
+	<collection property="informacoesadicionais" column="informacoesadicionais" select="NFNotaInfoInformacoesAdicionaisMap.fetchNFNotaInfoInformacoesAdicionaisById"/>
+	<collection property="exportacao" column="exportacao" select="NFNotaInfoExportacaoMap.fetchNFNotaInfoExportacaoById"/>
+	<collection property="compra" column="compra" select="NFNotaInfoCompraMap.fetchNFNotaInfoCompraById"/>
+	<collection property="cana" column="cana" select="NFNotaInfoCanaMap.fetchNFNotaInfoCanaById"/>
   </resultMap>
 
   <sql id="allNFNotaInfoColumns">

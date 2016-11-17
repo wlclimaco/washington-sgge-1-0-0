@@ -22,6 +22,7 @@ import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFInfoCupomFiscalReferenciadoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFInfoProdutorRuralReferenciadaBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFInfoReferenciadaBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoAvulsaBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoCanaBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoCanaDeducaoBARD;
@@ -30,10 +31,12 @@ import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoCartaoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoCobrancaBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoCompraBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoDuplicataBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoEmitenteBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoExportacaoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoFaturaBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoICMSTotalBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoISSQNTotalBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoIdentificacaoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoInformacoesAdicionaisBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoObservacaoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoPagamentoBARD;
@@ -1407,7 +1410,7 @@ public class NFeBARImpl extends SqlSessionDaoSupport implements INFeBAR {
 
 		nfnota.setProcessId(nfnota.getTransactionId());
 
-		
+
 
 		if (!ValidationUtil.isNull(nfnota.getInfo()))
 		{
@@ -1448,7 +1451,7 @@ public class NFeBARImpl extends SqlSessionDaoSupport implements INFeBAR {
 		InternalResponse response = new InternalResponse();
 		nfnota.setProcessId(nfnota.getTransactionId());
 		Integer count = 0;
-		
+
 
 
 		if (!ValidationUtil.isNull(nfnota.getInfo()))
@@ -1488,7 +1491,7 @@ public class NFeBARImpl extends SqlSessionDaoSupport implements INFeBAR {
 	public InternalResponse deleteNFNotaById(NFNota nfnota) {
 		InternalResponse response = new InternalResponse();
 		nfnota.setProcessId(nfnota.getTransactionId());
-		
+
 
 		Integer count = 0;
 
@@ -1511,7 +1514,7 @@ public class NFeBARImpl extends SqlSessionDaoSupport implements INFeBAR {
 		}
 
 MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response);
-		
+
 		count = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFNOTA, AcaoEnum.DELETE,
 				nfnota.getTransactionId(), getHistoricoBAR(), response, nfnota.getId(), nfnota.getUserId());
 		return response;
@@ -1628,13 +1631,39 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 
 		nfnotainfo.setProcessId(nfnotainfo.getTransactionId());
 
+		insertNFNotaInfoBARD(nfnotainfo, response);
+
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_NFNOTAINFO, nfnotainfo, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFNOTAINFO, AcaoEnum.INSERT,
 				nfnotainfo.getTransactionId(), getHistoricoBAR(), response, nfnotainfo.getId(), nfnotainfo.getUserId());
 
-		insertNFNotaInfoBARD(nfnotainfo, response);
+		if (!ValidationUtil.isNullOrEmpty(nfnotainfo.getPessoasautorizadasdownloadnfe()))
+		{
+			count +=
+					NFPessoaAutorizadaDownloadNFeBARD.maintainNFPessoaAutorizadaDownloadNFeAssociations(nfnotainfo.getPessoasautorizadasdownloadnfe(), response, nfnotainfo.getId(), null,
+							null,
+							TabelaEnum.NFNOTAINFO, getNfeBAR(), statusBAR, historicoBAR, nfnotainfo.getId(),
+							nfnotainfo.getCreateUser(), nfnotainfo.getTransactionId(), nfnotainfo.getTransactionId());
+		}
 
+		if (!ValidationUtil.isNullOrEmpty(nfnotainfo.getItens()))
+		{
+			count +=
+					NotaFiscalItensBARD.maintainNotaFiscalItensAssociations(nfnotainfo.getItens(), response, nfnotainfo.getId(), null,
+							null,
+							TabelaEnum.NFNOTAINFO, getVendasBAR(), statusBAR, historicoBAR, nfnotainfo.getId(),
+							nfnotainfo.getCreateUser(), nfnotainfo.getTransactionId(), nfnotainfo.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNullOrEmpty(nfnotainfo.getPagamentos()))
+		{
+			count +=
+					NFNotaInfoPagamentoBARD.maintainNFNotaInfoPagamentoAssociations(nfnotainfo.getPagamentos(), response, nfnotainfo.getId(), null,
+							null,
+							TabelaEnum.NFNOTAINFO, getNfeBAR(), statusBAR, historicoBAR, nfnotainfo.getId(),
+							nfnotainfo.getCreateUser(), nfnotainfo.getTransactionId(), nfnotainfo.getTransactionId());
+		}
 
 		return response;
 	}
@@ -1671,10 +1700,10 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 	public InternalResponse deleteNFNotaInfoById(NFNotaInfo nfnotainfo) {
 		InternalResponse response = new InternalResponse();
 		nfnotainfo.setProcessId(nfnotainfo.getTransactionId());
-		
+
 
 		insertNFNotaInfoBARD(nfnotainfo, response);
-		
+
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTAINFO, nfnotainfo, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFNOTAINFO, AcaoEnum.DELETE,
@@ -4441,7 +4470,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 							TabelaEnum.NFNOTAINFO, getNfeBAR(), statusBAR, historicoBAR, nfnotainfotransporte.getId(),
 							nfnotainfotransporte.getCreateUser(), nfnotainfotransporte.getTransactionId(), nfnotainfotransporte.getTransactionId());
 		}
-		
+
 		if (!ValidationUtil.isNullOrEmpty(nfnotainfotransporte.getReboques()))
 		{
 			count +=
@@ -4458,7 +4487,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 							TabelaEnum.NFNOTAINFO, getNfeBAR(), statusBAR, historicoBAR, nfnotainfotransporte.getId(),
 							nfnotainfotransporte.getCreateUser(), nfnotainfotransporte.getTransactionId(), nfnotainfotransporte.getTransactionId());
 		}
-		
+
 		if (!ValidationUtil.isNull(nfnotainfotransporte.getIcmsTransporte()))
 		{
 			count +=
@@ -4487,7 +4516,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 		Integer count = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFNOTAINFOTRANSPORTE, AcaoEnum.UPDATE,
 				nfnotainfotransporte.getTransactionId(), getHistoricoBAR(), response, nfnotainfotransporte.getId(),
 				nfnotainfotransporte.getUserId());
-		
+
 		if (!ValidationUtil.isNull(nfnotainfotransporte.getTransportador()))
 		{
 			count +=
@@ -4496,7 +4525,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 							TabelaEnum.NFNOTAINFO, getNfeBAR(), statusBAR, historicoBAR, nfnotainfotransporte.getId(),
 							nfnotainfotransporte.getCreateUser(), nfnotainfotransporte.getTransactionId(), nfnotainfotransporte.getTransactionId());
 		}
-		
+
 		if (!ValidationUtil.isNullOrEmpty(nfnotainfotransporte.getReboques()))
 		{
 			count +=
@@ -4513,7 +4542,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 							TabelaEnum.NFNOTAINFO, getNfeBAR(), statusBAR, historicoBAR, nfnotainfotransporte.getId(),
 							nfnotainfotransporte.getCreateUser(), nfnotainfotransporte.getTransactionId(), nfnotainfotransporte.getTransactionId());
 		}
-		
+
 		if (!ValidationUtil.isNull(nfnotainfotransporte.getIcmsTransporte()))
 		{
 			count +=
@@ -4542,7 +4571,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 		Integer count = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFNOTAINFOTRANSPORTE, AcaoEnum.DELETE,
 				nfnotainfotransporte.getTransactionId(), getHistoricoBAR(), response, nfnotainfotransporte.getId(),
 				nfnotainfotransporte.getUserId());
-		
+
 		if (!ValidationUtil.isNull(nfnotainfotransporte.getTransportador()))
 		{
 			count +=
@@ -4551,7 +4580,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 							TabelaEnum.NFNOTAINFO, getNfeBAR(), statusBAR, historicoBAR, nfnotainfotransporte.getId(),
 							nfnotainfotransporte.getCreateUser(), nfnotainfotransporte.getTransactionId(), nfnotainfotransporte.getTransactionId());
 		}
-		
+
 		if (!ValidationUtil.isNullOrEmpty(nfnotainfotransporte.getReboques()))
 		{
 			count +=
@@ -4568,7 +4597,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 							TabelaEnum.NFNOTAINFO, getNfeBAR(), statusBAR, historicoBAR, nfnotainfotransporte.getId(),
 							nfnotainfotransporte.getCreateUser(), nfnotainfotransporte.getTransactionId(), nfnotainfotransporte.getTransactionId());
 		}
-		
+
 		if (!ValidationUtil.isNull(nfnotainfotransporte.getIcmsTransporte()))
 		{
 			count +=
@@ -5442,7 +5471,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 							TabelaEnum.NFNOTAINFOCOBRANCA, getNfeBAR(), statusBAR, historicoBAR, nfnotainfocobranca.getId(),
 							nfnotainfocobranca.getCreateUser(), nfnotainfocobranca.getTransactionId(), nfnotainfocobranca.getTransactionId());
 		}
-		
+
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_NFNOTAINFOCOBRANCA, nfnotainfocobranca, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFNOTAINFOCOBRANCA, AcaoEnum.INSERT,
@@ -5480,7 +5509,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 							TabelaEnum.NFNOTAINFOCOBRANCA, getNfeBAR(), statusBAR, historicoBAR, nfnotainfocobranca.getId(),
 							nfnotainfocobranca.getCreateUser(), nfnotainfocobranca.getTransactionId(), nfnotainfocobranca.getTransactionId());
 		}
-		
+
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_NFNOTAINFOCOBRANCA, nfnotainfocobranca, response);
 
 		count = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFNOTAINFOCOBRANCA, AcaoEnum.UPDATE,
@@ -5501,7 +5530,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 	public InternalResponse deleteNFNotaInfoCobrancaById(NFNotaInfoCobranca nfnotainfocobranca) {
 		InternalResponse response = new InternalResponse();
 		nfnotainfocobranca.setProcessId(nfnotainfocobranca.getTransactionId());
-		
+
 		Integer count = 0;
 		if (!ValidationUtil.isNull(nfnotainfocobranca.getFatura()))
 		{
@@ -5519,7 +5548,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 							TabelaEnum.NFNOTAINFOCOBRANCA, getNfeBAR(), statusBAR, historicoBAR, nfnotainfocobranca.getId(),
 							nfnotainfocobranca.getCreateUser(), nfnotainfocobranca.getTransactionId(), nfnotainfocobranca.getTransactionId());
 		}
-		
+
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTAINFOCOBRANCA, nfnotainfocobranca, response);
 
 		 count = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFNOTAINFOCOBRANCA, AcaoEnum.DELETE,
@@ -6173,7 +6202,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 
 
 		nfnotainfopagamento.setProcessId(nfnotainfopagamento.getTransactionId());
-		
+
 		Integer count = 0;
 		if (!ValidationUtil.isNull(nfnotainfopagamento.getCartao()))
 		{
@@ -6205,7 +6234,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 	public InternalResponse updateNFNotaInfoPagamento(NFNotaInfoPagamento nfnotainfopagamento) {
 		InternalResponse response = new InternalResponse();
 		nfnotainfopagamento.setProcessId(nfnotainfopagamento.getTransactionId());
-		
+
 		Integer count = 0;
 		if (!ValidationUtil.isNull(nfnotainfopagamento.getCartao()))
 		{
@@ -6215,10 +6244,10 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 							TabelaEnum.NFNOTAINFOPAGAMENTO, getNfeBAR(), statusBAR, historicoBAR, nfnotainfopagamento.getId(),
 							nfnotainfopagamento.getCreateUser(), nfnotainfopagamento.getTransactionId(), nfnotainfopagamento.getTransactionId());
 		}
-		
+
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_NFNOTAINFOPAGAMENTO, nfnotainfopagamento, response);
 
-		
+
 		count = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFNOTAINFOPAGAMENTO, AcaoEnum.UPDATE,
 				nfnotainfopagamento.getTransactionId(), getHistoricoBAR(), response, nfnotainfopagamento.getId(),
 				nfnotainfopagamento.getUserId());
@@ -6237,7 +6266,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 	public InternalResponse deleteNFNotaInfoPagamentoById(NFNotaInfoPagamento nfnotainfopagamento) {
 		InternalResponse response = new InternalResponse();
 		nfnotainfopagamento.setProcessId(nfnotainfopagamento.getTransactionId());
-		
+
 		Integer count = 0;
 		if (!ValidationUtil.isNull(nfnotainfopagamento.getCartao()))
 		{
@@ -6247,7 +6276,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 							TabelaEnum.NFNOTAINFOPAGAMENTO, getNfeBAR(), statusBAR, historicoBAR, nfnotainfopagamento.getId(),
 							nfnotainfopagamento.getCreateUser(), nfnotainfopagamento.getTransactionId(), nfnotainfopagamento.getTransactionId());
 		}
-		
+
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTAINFOPAGAMENTO, nfnotainfopagamento, response);
 
 		 count = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFNOTAINFOPAGAMENTO, AcaoEnum.DELETE,
@@ -6370,7 +6399,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 	public InternalResponse insertNFNotaInfoInformacoesAdicionais(
 			NFNotaInfoInformacoesAdicionais nfnotainfoinformacoesadicionais) {
 		InternalResponse response = new InternalResponse();
-		
+
 		Boolean count1 = false;
 
 		nfnotainfoinformacoesadicionais.setProcessId(nfnotainfoinformacoesadicionais.getTransactionId());
@@ -6400,7 +6429,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 							TabelaEnum.NFNOTAINFOINFORMACOESADICIONAIS, getNfeBAR(), statusBAR, historicoBAR, nfnotainfoinformacoesadicionais.getId(),
 							nfnotainfoinformacoesadicionais.getCreateUser(), nfnotainfoinformacoesadicionais.getTransactionId(), nfnotainfoinformacoesadicionais.getTransactionId());
 		}
-		
+
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_NFNOTAINFOINFORMACOESADICIONAIS,
 				nfnotainfoinformacoesadicionais, response);
 
@@ -7402,7 +7431,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 	public InternalResponse updateNFNotaInfoCana(NFNotaInfoCana nfnotainfocana) {
 		InternalResponse response = new InternalResponse();
 		nfnotainfocana.setProcessId(nfnotainfocana.getTransactionId());
-		
+
 		Integer count = 0;
 		if (!ValidationUtil.isNullOrEmpty(nfnotainfocana.getFornecimentosDiario()))
 		{
@@ -7420,7 +7449,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 							TabelaEnum.NFNOTAINFOCANA, getNfeBAR(), statusBAR, historicoBAR, nfnotainfocana.getId(),
 							nfnotainfocana.getCreateUser(), nfnotainfocana.getTransactionId(), nfnotainfocana.getTransactionId());
 		}
-		
+
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_NFNOTAINFOCANA, nfnotainfocana, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFNOTAINFOCANA, AcaoEnum.UPDATE,
@@ -7441,7 +7470,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 	public InternalResponse deleteNFNotaInfoCanaById(NFNotaInfoCana nfnotainfocana) {
 		InternalResponse response = new InternalResponse();
 		nfnotainfocana.setProcessId(nfnotainfocana.getTransactionId());
-		
+
 		Integer count = 0;
 		if (!ValidationUtil.isNullOrEmpty(nfnotainfocana.getFornecimentosDiario()))
 		{
@@ -7459,7 +7488,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 							TabelaEnum.NFNOTAINFOCANA, getNfeBAR(), statusBAR, historicoBAR, nfnotainfocana.getId(),
 							nfnotainfocana.getCreateUser(), nfnotainfocana.getTransactionId(), nfnotainfocana.getTransactionId());
 		}
-		
+
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTAINFOCANA, nfnotainfocana, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFNOTAINFOCANA, AcaoEnum.DELETE,
@@ -8108,23 +8137,61 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 
 	public Integer insertNFNotaInfoBARD(NFNotaInfo nfnotainfo,InternalResponse response) {
 		Integer count = 0;
-		if (!ValidationUtil.isNullOrEmpty(nfnotainfo.getPessoasautorizadasdownloadnfe()))
+
+		if (!ValidationUtil.isNull(nfnotainfo.getIdentificacao()))
 		{
 			count +=
-					NFPessoaAutorizadaDownloadNFeBARD.maintainNFPessoaAutorizadaDownloadNFeAssociations(nfnotainfo.getPessoasautorizadasdownloadnfe(), response, nfnotainfo.getId(), null,
+					NFNotaInfoIdentificacaoBARD.maintainNFNotaInfoIdentificacaoAssociations(nfnotainfo.getIdentificacao(), response, nfnotainfo.getId(), null,
 							null,
 							TabelaEnum.NFNOTAINFO, getNfeBAR(), statusBAR, historicoBAR, nfnotainfo.getId(),
 							nfnotainfo.getCreateUser(), nfnotainfo.getTransactionId(), nfnotainfo.getTransactionId());
 		}
 
-		if (!ValidationUtil.isNullOrEmpty(nfnotainfo.getItens()))
+		if (!ValidationUtil.isNull(nfnotainfo.getEmitente()))
 		{
 			count +=
-					NotaFiscalItensBARD.maintainNotaFiscalItensAssociations(nfnotainfo.getItens(), response, nfnotainfo.getId(), null,
+					NFNotaInfoEmitenteBARD.maintainNFNotaInfoEmitenteAssociations(nfnotainfo.getEmitente(), response, nfnotainfo.getId(), null,
 							null,
-							TabelaEnum.NFNOTAINFO, getVendasBAR(), statusBAR, historicoBAR, nfnotainfo.getId(),
+							TabelaEnum.NFNOTAINFO, getNfeBAR(), statusBAR, historicoBAR, nfnotainfo.getId(),
 							nfnotainfo.getCreateUser(), nfnotainfo.getTransactionId(), nfnotainfo.getTransactionId());
 		}
+
+		if (!ValidationUtil.isNull(nfnotainfo.getAvulsa()))
+		{
+			count +=
+					NFNotaInfoAvulsaBARD.maintainNFNotaInfoAvulsaAssociations(nfnotainfo.getAvulsa(), response, nfnotainfo.getId(), null,
+							null,
+							TabelaEnum.NFNOTAINFO, getNfeBAR(), statusBAR, historicoBAR, nfnotainfo.getId(),
+							nfnotainfo.getCreateUser(), nfnotainfo.getTransactionId(), nfnotainfo.getTransactionId());
+		}
+		//NFNotaInfoDestinatario
+		if (!ValidationUtil.isNull(nfnotainfo.getTotal()))
+		{
+			count +=
+					NFNotaInfoTotalBARD.maintainNFNotaInfoTotalAssociations(nfnotainfo.getTotal(), response, nfnotainfo.getId(), null,
+							null,
+							TabelaEnum.NFNOTAINFO, getNfeBAR(), statusBAR, historicoBAR, nfnotainfo.getId(),
+							nfnotainfo.getCreateUser(), nfnotainfo.getTransactionId(), nfnotainfo.getTransactionId());
+		}
+		//NFNotaInfoLocal
+		if (!ValidationUtil.isNull(nfnotainfo.getTotal()))
+		{
+			count +=
+					NFNotaInfoTotalBARD.maintainNFNotaInfoTotalAssociations(nfnotainfo.getTotal(), response, nfnotainfo.getId(), null,
+							null,
+							TabelaEnum.NFNOTAINFO, getNfeBAR(), statusBAR, historicoBAR, nfnotainfo.getId(),
+							nfnotainfo.getCreateUser(), nfnotainfo.getTransactionId(), nfnotainfo.getTransactionId());
+		}
+		//NFNotaInfoLocal
+		if (!ValidationUtil.isNull(nfnotainfo.getTotal()))
+		{
+			count +=
+					NFNotaInfoTotalBARD.maintainNFNotaInfoTotalAssociations(nfnotainfo.getTotal(), response, nfnotainfo.getId(), null,
+							null,
+							TabelaEnum.NFNOTAINFO, getNfeBAR(), statusBAR, historicoBAR, nfnotainfo.getId(),
+							nfnotainfo.getCreateUser(), nfnotainfo.getTransactionId(), nfnotainfo.getTransactionId());
+		}
+
 		if (!ValidationUtil.isNull(nfnotainfo.getTotal()))
 		{
 			count +=
@@ -8149,14 +8216,7 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 							TabelaEnum.NFNOTAINFO, getNfeBAR(), statusBAR, historicoBAR, nfnotainfo.getId(),
 							nfnotainfo.getCreateUser(), nfnotainfo.getTransactionId(), nfnotainfo.getTransactionId());
 		}
-		if (!ValidationUtil.isNullOrEmpty(nfnotainfo.getPagamentos()))
-		{
-			count +=
-					NFNotaInfoPagamentoBARD.maintainNFNotaInfoPagamentoAssociations(nfnotainfo.getPagamentos(), response, nfnotainfo.getId(), null,
-							null,
-							TabelaEnum.NFNOTAINFO, getNfeBAR(), statusBAR, historicoBAR, nfnotainfo.getId(),
-							nfnotainfo.getCreateUser(), nfnotainfo.getTransactionId(), nfnotainfo.getTransactionId());
-		}
+
 		if (!ValidationUtil.isNull(nfnotainfo.getInformacoesadicionais()))
 		{
 			count +=

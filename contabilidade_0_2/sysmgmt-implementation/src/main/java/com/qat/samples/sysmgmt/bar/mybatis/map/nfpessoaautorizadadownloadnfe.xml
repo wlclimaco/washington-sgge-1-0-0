@@ -68,6 +68,12 @@ cnpj
    FROM nfpessoaautorizadadownloadnfe WHERE id = #{fetchid}
  </select>
 
+  <select id="fetchNFPessoaAutorizadaDownloadNFeByParentId" parameterType="Integer" resultMap="NFPessoaAutorizadaDownloadNFeResult">
+    SELECT id,
+ <include refid="allNFPessoaAutorizadaDownloadNFeColumns" />
+   FROM nfpessoaautorizadadownloadnfe WHERE parentId = #{fetchid}
+ </select>
+
  <select id="fetchAllNFPessoaAutorizadaDownloadNFesRequest" parameterType="PagedInquiryRequest" resultMap="NFPessoaAutorizadaDownloadNFeResult">
 
      SELECT id,<include refid="allNFPessoaAutorizadaDownloadNFeColumns" />

@@ -20,19 +20,19 @@
 
     <result property="vagao" column="vagao"/>
     <result property="balsa" column="balsa"/>
-<result property="parentId" column="parentId"/>
-<result property="tabelaEnumValue" column="tabelaEnumValue"/>
-<result property="emprId" column="emprId"/>
-<result property="processId" column="processId"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
-<collection property="modalidadeFrete" column="modalidadeFrete" select="RegimeMap.fetchRegimeById"/>
-    <collection property="transportador" column="transportador" select="RegimeMap.fetchRegimeById"/>
-    <collection property="icmsTransporte" column="icmsTransporte" select="RegimeMap.fetchRegimeById"/>
-    <collection property="veiculo" column="veiculo" select="RegimeMap.fetchRegimeById"/>
-    <collection property="reboques" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+	<result property="parentId" column="parentId"/>
+	<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+	<result property="emprId" column="emprId"/>
+	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<collection property="modalidadeFrete" column="modalidadeFrete" select="DoisValorMap.fetchDoisValorById"/>
+    <collection property="transportador" column="transportador" select="NFNotaInfoTransportadorMap.fetchNFNotaInfoTransportadorById"/>
+    <collection property="icmsTransporte" column="icmsTransporte" select="NFNotaInfoRetencaoICMSTransporteMap.fetchNFNotaInfoRetencaoICMSTransporteById"/>
+    <collection property="veiculo" column="veiculo" select="NFNotaInfoVeiculoMap.fetchNFNotaInfoVeiculoById"/>
+    <collection property="reboques" column="id" select="NFNotaInfoReboqueMap.fetchNFNotaInfoReboqueByParentId"/>
 
   </resultMap>
 

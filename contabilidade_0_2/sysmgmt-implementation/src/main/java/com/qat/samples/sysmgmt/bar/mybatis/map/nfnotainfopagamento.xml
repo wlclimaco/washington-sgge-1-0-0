@@ -72,6 +72,13 @@ formaPagamentoMoeda
    FROM nfnotainfopagamento WHERE id = #{fetchid}
  </select>
 
+
+  <select id="fetchNFNotaInfoPagamentoByParentId" parameterType="Integer" resultMap="NFNotaInfoPagamentoResult">
+    SELECT id,
+ <include refid="allNFNotaInfoPagamentoColumns" />
+   FROM nfnotainfopagamento WHERE parentId = #{fetchid}
+ </select>
+
  <select id="fetchAllNFNotaInfoPagamentosRequest" parameterType="PagedInquiryRequest" resultMap="NFNotaInfoPagamentoResult">
 
      SELECT id,<include refid="allNFNotaInfoPagamentoColumns" />

@@ -68,6 +68,12 @@ dia
    FROM nfnotainfocanafornecimentodiario WHERE id = #{fetchid}
  </select>
 
+  <select id="fetchNFNotaInfoCanaFornecimentoDiarioByParentId" parameterType="Integer" resultMap="NFNotaInfoCanaFornecimentoDiarioResult">
+    SELECT id,
+ <include refid="allNFNotaInfoCanaFornecimentoDiarioColumns" />
+   FROM nfnotainfocanafornecimentodiario WHERE parentid = #{fetchid}
+ </select>
+
  <select id="fetchAllNFNotaInfoCanaFornecimentoDiariosRequest" parameterType="PagedInquiryRequest" resultMap="NFNotaInfoCanaFornecimentoDiarioResult">
 
      SELECT id,<include refid="allNFNotaInfoCanaFornecimentoDiarioColumns" />

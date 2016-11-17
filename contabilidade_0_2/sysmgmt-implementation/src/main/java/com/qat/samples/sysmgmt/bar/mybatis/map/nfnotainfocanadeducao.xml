@@ -68,6 +68,12 @@ descricaoDeducao
    FROM nfnotainfocanadeducao WHERE id = #{fetchid}
  </select>
 
+ <select id="fetchNFNotaInfoCanaDeducaoByParentId" parameterType="Integer" resultMap="NFNotaInfoCanaDeducaoResult">
+    SELECT id,
+ <include refid="allNFNotaInfoCanaDeducaoColumns" />
+   FROM nfnotainfocanadeducao WHERE parentid = #{fetchid}
+ </select>
+
  <select id="fetchAllNFNotaInfoCanaDeducaosRequest" parameterType="PagedInquiryRequest" resultMap="NFNotaInfoCanaDeducaoResult">
 
      SELECT id,<include refid="allNFNotaInfoCanaDeducaoColumns" />

@@ -138,6 +138,12 @@ dataInicio
    FROM notafiscalitens WHERE id = #{fetchid}
  </select>
 
+  <select id="fetchNotaFiscalItensByParentId" parameterType="Integer" resultMap="NotaFiscalItensResult">
+    SELECT id,
+ <include refid="allNotaFiscalItensColumns" />
+   FROM notafiscalitens WHERE parentId = #{fetchid}
+ </select>
+
  <select id="fetchAllNotaFiscalItenssRequest" parameterType="PagedInquiryRequest" resultMap="NotaFiscalItensResult">
 
      SELECT id,<include refid="allNotaFiscalItensColumns" />

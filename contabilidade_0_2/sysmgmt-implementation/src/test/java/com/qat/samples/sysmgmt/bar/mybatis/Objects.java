@@ -3488,7 +3488,7 @@ public static NFNotaInfoIdentificacao insertNFNotaInfoIdentificacao(Integer id,T
 		nfnotainfoidentificacao.setNaturezaOperacao("NATIVE INSERT UPDATE");
 	//	nfnotainfoidentificacao.setFormaPagamento(Objects.insertDoisValor(id, tabela, action));
 		nfnotainfoidentificacao.setModelo(Objects.insertDoisValor(id, tabela, action));
-		nfnotainfoidentificacao.setSerie("NATIVE INSERT UPDATE");
+		nfnotainfoidentificacao.setSerie(Objects.insertDoisValor(id, tabela, action));
 		nfnotainfoidentificacao.setNumeroNota("NATIVE INSERT UPDATE");
 		nfnotainfoidentificacao.setDataHoraEmissao(a.getTime());
 		nfnotainfoidentificacao.setDataHoraSaidaOuEntrada(a.getTime());

@@ -28,7 +28,7 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="infoNFProdutorRuralReferenciada" column="infoNFProdutorRuralReferenciada" select="RegimeMap.fetchRegimeById"/>
+<collection property="infoNFProdutorRuralReferenciada" column="infoNFProdutorRuralReferenciada" select="NFInfoProdutorRuralReferenciadaMap.fetchNFInfoProdutorRuralReferenciadaById"/>
 <collection property="cupomFiscalReferenciado" column="cupomFiscalReferenciado" select="RegimeMap.fetchRegimeById"/>
   </resultMap>
 
@@ -75,6 +75,12 @@ chaveAcesso
     SELECT id,
  <include refid="allNFInfoReferenciadaColumns" />
    FROM nfinforeferenciada WHERE id = #{fetchid}
+ </select>
+
+  <select id="fetchNFInfoReferenciadaByParentId" parameterType="Integer" resultMap="NFInfoReferenciadaResult">
+    SELECT id,
+ <include refid="allNFInfoReferenciadaColumns" />
+   FROM nfinforeferenciada WHERE parentId = #{fetchid}
  </select>
 
  <select id="fetchAllNFInfoReferenciadasRequest" parameterType="PagedInquiryRequest" resultMap="NFInfoReferenciadaResult">

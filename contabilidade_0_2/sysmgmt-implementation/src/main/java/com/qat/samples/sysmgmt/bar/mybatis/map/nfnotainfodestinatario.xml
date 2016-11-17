@@ -35,7 +35,7 @@
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
 <collection property="endereco" column="endereco" select="RegimeMap.fetchRegimeById"/>
-    <collection property="indicadorIEDestinatario" column="indicadorIEDestinatario" select="RegimeMap.fetchRegimeById"/>
+    <collection property="indicadorIEDestinatario" column="indicadorIEDestinatario" select="DoisValorMap.fetchDoisValorById"/>
   </resultMap>
 
   <sql id="allNFNotaInfoDestinatarioColumns">

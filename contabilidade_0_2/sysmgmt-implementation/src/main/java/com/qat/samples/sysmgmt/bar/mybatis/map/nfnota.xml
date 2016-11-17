@@ -18,17 +18,17 @@
   <resultMap id="NFNotaResult" type="NFNota">
   <result property="id" column="id"/>
     <result property="identificadorLocal" column="identificadorLocal"/>
-<result property="parentId" column="parentId"/>
-<result property="tabelaEnumValue" column="tabelaEnumValue"/>
-<result property="emprId" column="emprId"/>
-<result property="processId" column="processId"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
- <collection property="info" column="info" select="RegimeMap.fetchRegimeById"/>
-    <collection property="infoSuplementar" column="infoSuplementar" select="RegimeMap.fetchRegimeById"/>
-    <collection property="assinatura" column="assinatura" select="RegimeMap.fetchRegimeById"/>
+	<result property="parentId" column="parentId"/>
+	<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+	<result property="emprId" column="emprId"/>
+	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+ 	<collection property="info" column="info" select="NFNotaInfoMap.fetchNFNotaInfoById"/>
+    <collection property="infoSuplementar" column="infoSuplementar" select="NFNotaInfoSuplementarMap.fetchNFNotaInfoSuplementarById"/>
+    <collection property="assinatura" column="assinatura" select="DoisValorMap.fetchDoisValorById"/>
   </resultMap>
 
   <sql id="allNFNotaColumns">

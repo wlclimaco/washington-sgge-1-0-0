@@ -33,7 +33,7 @@ public class NFNotaInfoIdentificacao extends NFBase
     private DoisValores modelo;
 
     /** The econtabil serie for the NFNotaInfoIdentificacao. */
-    private String serie;
+    private DoisValores serie;
 
     /** The econtabil numeroNota for the NFNotaInfoIdentificacao. */
     private String numeronota;
@@ -225,32 +225,19 @@ public void setModelo(DoisValores modelo)
         this.modelo = modelo;
     }
 
-    /**
-     * Gets the serie.
-     *
-     * @return the serie
-     */
-    /**
-     * Gets the serie.
-     *
-     * @return the serie
-     */
-    public String getSerie()
-    {
-        return serie;
-    }
 
-    /**
-     * Sets the serie.
-     *
-* @param id the serie to set
- */
-public void setSerie(String serie)
-{
-        this.serie = serie;
-    }
 
-    /**
+    public DoisValores getSerie() {
+		return serie;
+	}
+
+
+	public void setSerie(DoisValores serie) {
+		this.serie = serie;
+	}
+
+
+	/**
      * Gets the numeronota.
      *
      * @return the numeronota
@@ -898,6 +885,8 @@ public void setReferenciadas(List<NFInfoReferenciada> referenciadas)
 				+ ", getDatahoracontigencia()=" + getDatahoracontigencia() + ", getJustificativaentradacontingencia()="
 				+ getJustificativaentradacontingencia() + ", toString()=" + super.toString() + "]";
 	}
+
+
 
 
 

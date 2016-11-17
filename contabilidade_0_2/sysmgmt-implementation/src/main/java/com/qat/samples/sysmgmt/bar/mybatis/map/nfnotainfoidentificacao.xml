@@ -19,8 +19,6 @@
 <result property="id" column="id"/>
     <result property="codigoRandomico" column="codigoRandomico"/>
     <result property="naturezaOperacao" column="naturezaOperacao"/>
-
-    <result property="serie" column="serie"/>
     <result property="numeroNota" column="numeroNota"/>
     <result property="dataHoraEmissao" column="dataHoraEmissao"/>
     <result property="dataHoraSaidaOuEntrada" column="dataHoraSaidaOuEntrada"/>
@@ -39,18 +37,19 @@
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
 <collection property="uf" column="uf" select="RegimeMap.fetchRegimeById"/>
- <collection property="formaPagamento" column="formaPagamento" select="RegimeMap.fetchRegimeById"/>
-    <collection property="modelo" column="modelo" select="RegimeMap.fetchRegimeById"/>
-    <collection property="tipo" column="tipo" select="RegimeMap.fetchRegimeById"/>
-    <collection property="identificadorLocalDestinoOperacao" column="identificadorLocalDestinoOperacao" select="RegimeMap.fetchRegimeById"/>
-    <collection property="tipoImpressao" column="tipoImpressao" select="RegimeMap.fetchRegimeById"/>
-    <collection property="tipoEmissao" column="tipoEmissao" select="RegimeMap.fetchRegimeById"/>
-    <collection property="ambiente" column="ambiente" select="RegimeMap.fetchRegimeById"/>
-    <collection property="finalidade" column="finalidade" select="RegimeMap.fetchRegimeById"/>
-    <collection property="operacaoConsumidorFinal" column="operacaoConsumidorFinal" select="RegimeMap.fetchRegimeById"/>
-    <collection property="indicadorPresencaComprador" column="indicadorPresencaComprador" select="RegimeMap.fetchRegimeById"/>
-    <collection property="programaEmissor" column="programaEmissor" select="RegimeMap.fetchRegimeById"/>
-    <collection property="referenciadas" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+ <collection property="formaPagamento" column="formaPagamento" select="FormaPgMap.fetchFormaPgById"/>
+    <collection property="modelo" column="modelo" select="DoisValorMap.fetchDoisValorById"/>
+    <collection property="tipo" column="tipo" select="DoisValorMap.fetchDoisValorById"/>
+    <collection property="serie" column="serie" select="DoisValorMap.fetchDoisValorById"/>
+    <collection property="identificadorLocalDestinoOperacao" column="identificadorLocalDestinoOperacao" select="DoisValorMap.fetchDoisValorById"/>
+    <collection property="tipoImpressao" column="tipoImpressao" select="DoisValorMap.fetchDoisValorById"/>
+    <collection property="tipoEmissao" column="tipoEmissao" select="DoisValorMap.fetchDoisValorById"/>
+    <collection property="ambiente" column="ambiente" select="DoisValorMap.fetchDoisValorById"/>
+    <collection property="finalidade" column="finalidade" select="DoisValorMap.fetchDoisValorById"/>
+    <collection property="operacaoConsumidorFinal" column="operacaoConsumidorFinal" select="DoisValorMap.fetchDoisValorById"/>
+    <collection property="indicadorPresencaComprador" column="indicadorPresencaComprador" select="DoisValorMap.fetchDoisValorById"/>
+    <collection property="programaEmissor" column="programaEmissor" select="DoisValorMap.fetchDoisValorById"/>
+    <collection property="referenciadas" column="id" select="NFInfoReferenciadaMap.fetchNFInfoReferenciadaByParentId"/>
   </resultMap>
 
   <sql id="allNFNotaInfoIdentificacaoColumns">
@@ -93,7 +92,7 @@ uf
 #{naturezaOperacao},
 #{formaPagamento.id},
 #{modelo.id},
-#{serie},
+#{serie.id},
 #{numeroNota},
 #{dataHoraEmissao},
 #{dataHoraSaidaOuEntrada},
@@ -161,7 +160,7 @@ uf
 <if test="naturezaOperacao!= null">naturezaOperacao = #{naturezaOperacao},</if>
 <if test="formaPagamento!= null">formaPagamento = #{formaPagamento.id},</if>
 <if test="modelo!= null">modelo = #{modelo.id},</if>
-<if test="serie!= null">serie = #{serie},</if>
+<if test="serie!= null">serie = #{serie.id},</if>
 <if test="numeroNota!= null">numeroNota = #{numeroNota},</if>
 <if test="dataHoraEmissao!= null">dataHoraEmissao = #{dataHoraEmissao},</if>
 <if test="dataHoraSaidaOuEntrada!= null">dataHoraSaidaOuEntrada = #{dataHoraSaidaOuEntrada},</if>
