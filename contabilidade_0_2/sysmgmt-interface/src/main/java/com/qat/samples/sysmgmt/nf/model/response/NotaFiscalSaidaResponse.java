@@ -4,13 +4,13 @@ import java.util.Collection;
 import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
-import com.qat.samples.sysmgmt.arquivo.model.Arquivo;
+import com.qat.samples.sysmgmt.nfe.model.NFNota;
 
 public class NotaFiscalSaidaResponse extends InquiryResponse
 {
 
 	/** Attributes */
-	private List<Arquivo> arquivoList;
+	private List<NFNota> nfnotaList;
 
 	/**
 	 * The Constructor.
@@ -20,21 +20,15 @@ public class NotaFiscalSaidaResponse extends InquiryResponse
 
 	}
 
-	/**
-	 * @return the arquivoList
-	 */
-	public List<Arquivo> getArquivoList()
-	{
-		return arquivoList;
+	public List<NFNota> getNfnotaList() {
+		return nfnotaList;
 	}
 
-	/**
-	 * @param arquivoList the arquivoList to set
-	 */
-	public void setArquivoList(List<Arquivo> arquivoList)
-	{
-		this.arquivoList = arquivoList;
+	public void setNfnotaList(List<NFNota> nfnotaList) {
+		this.nfnotaList = nfnotaList;
 	}
+
+
 
 	/*
 	 * (non-Javadoc)
@@ -44,20 +38,17 @@ public class NotaFiscalSaidaResponse extends InquiryResponse
 	@Override
 	public void addResults(Collection coll)
 	{
-		setArquivoList((List<Arquivo>)coll);
+		setNfnotaList((List<NFNota>)coll);
+	}
+
+	@Override
+	public String toString() {
+		return "NotaFiscalSaidaResponse [getNfnotaList()=" + getNfnotaList() + ", toString()=" + super.toString() + "]";
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
-	@Override
-	public String toString()
-	{
-		return "LocationResponse [getLocationList()=" + getArquivoList() + ", getResultsSetInfo()="
-				+ getResultsSetInfo() + ", getMessageIterator()=" + getMessageIterator() + ", getMessageList()="
-				+ getMessageList() + ", getMessageInfoList()=" + getMessageInfoList() + ", isOperationSuccess()="
-				+ isOperationSuccess() + "]";
-	}
 
 }

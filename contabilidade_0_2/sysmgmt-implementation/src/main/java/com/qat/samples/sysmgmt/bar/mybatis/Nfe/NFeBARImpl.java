@@ -3679,12 +3679,6 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 
 		nfnotainfototal.setProcessId(nfnotainfototal.getTransactionId());
 
-		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_NFNOTAINFOTOTAL, nfnotainfototal, response);
-
-		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFNOTAINFOTOTAL, AcaoEnum.INSERT,
-				nfnotainfototal.getTransactionId(), getHistoricoBAR(), response, nfnotainfototal.getId(),
-				nfnotainfototal.getUserId());
-
 		if (!ValidationUtil.isNull(nfnotainfototal.getIcmstotal()))
 		{
 			count +=
@@ -3709,6 +3703,14 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 							TabelaEnum.NFNOTAINFOTOTAL, getNfeBAR(), statusBAR, historicoBAR, nfnotainfototal.getId(),
 							nfnotainfototal.getCreateUser(), nfnotainfototal.getTransactionId(), nfnotainfototal.getTransactionId());
 		}
+
+
+		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_NFNOTAINFOTOTAL, nfnotainfototal, response);
+
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFNOTAINFOTOTAL, AcaoEnum.INSERT,
+				nfnotainfototal.getTransactionId(), getHistoricoBAR(), response, nfnotainfototal.getId(),
+				nfnotainfototal.getUserId());
+
 
 		return response;
 	}

@@ -25,9 +25,9 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="icmsTotal" column="icmsTotal" select="RegimeMap.fetchRegimeById"/>
-    <collection property="issqnTotal" column="issqnTotal" select="RegimeMap.fetchRegimeById"/>
-    <collection property="retencoesTributos" column="retencoesTributos" select="RegimeMap.fetchRegimeById"/>
+<collection property="icmsTotal" column="icmsTotal" select="NFNotaInfoICMSTotalMap.fetchNFNotaInfoICMSTotalById"/>
+<collection property="issqnTotal" column="issqnTotal" select="NFNotaInfoISSQNTotalMap.fetchNFNotaInfoISSQNTotalById"/>
+<collection property="retencoesTributos" column="retencoesTributos" select="NFNotaInfoRetencoesTributosMap.fetchNFNotaInfoRetencoesTributosById"/>
   </resultMap>
 
   <sql id="allNFNotaInfoTotalColumns">
