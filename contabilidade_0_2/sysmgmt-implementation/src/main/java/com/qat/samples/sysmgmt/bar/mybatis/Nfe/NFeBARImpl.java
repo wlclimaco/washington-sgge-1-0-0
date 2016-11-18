@@ -30,6 +30,7 @@ import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoCanaFornecimentoDi
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoCartaoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoCobrancaBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoCompraBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoDestinatarioBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoDuplicataBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoEmitenteBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoExportacaoBARD;
@@ -38,6 +39,7 @@ import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoICMSTotalBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoISSQNTotalBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoIdentificacaoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoInformacoesAdicionaisBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoLocalBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoObservacaoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoPagamentoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoProcessoReferenciadoBARD;
@@ -8165,28 +8167,28 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 							nfnotainfo.getCreateUser(), nfnotainfo.getTransactionId(), nfnotainfo.getTransactionId());
 		}
 		//NFNotaInfoDestinatario
-		if (!ValidationUtil.isNull(nfnotainfo.getTotal()))
+		if (!ValidationUtil.isNull(nfnotainfo.getDestinatario()))
 		{
 			count +=
-					NFNotaInfoTotalBARD.maintainNFNotaInfoTotalAssociations(nfnotainfo.getTotal(), response, nfnotainfo.getId(), null,
+					NFNotaInfoDestinatarioBARD.maintainNFNotaInfoDestinatarioAssociations(nfnotainfo.getDestinatario(), response, nfnotainfo.getId(), null,
 							null,
 							TabelaEnum.NFNOTAINFO, getNfeBAR(), statusBAR, historicoBAR, nfnotainfo.getId(),
 							nfnotainfo.getCreateUser(), nfnotainfo.getTransactionId(), nfnotainfo.getTransactionId());
 		}
 		//NFNotaInfoLocal
-		if (!ValidationUtil.isNull(nfnotainfo.getTotal()))
+		if (!ValidationUtil.isNull(nfnotainfo.getRetirada()))
 		{
 			count +=
-					NFNotaInfoTotalBARD.maintainNFNotaInfoTotalAssociations(nfnotainfo.getTotal(), response, nfnotainfo.getId(), null,
+					NFNotaInfoLocalBARD.maintainNFNotaInfoLocalAssociations(nfnotainfo.getRetirada(), response, nfnotainfo.getId(), null,
 							null,
 							TabelaEnum.NFNOTAINFO, getNfeBAR(), statusBAR, historicoBAR, nfnotainfo.getId(),
 							nfnotainfo.getCreateUser(), nfnotainfo.getTransactionId(), nfnotainfo.getTransactionId());
 		}
 		//NFNotaInfoLocal
-		if (!ValidationUtil.isNull(nfnotainfo.getTotal()))
+		if (!ValidationUtil.isNull(nfnotainfo.getEntrega()))
 		{
 			count +=
-					NFNotaInfoTotalBARD.maintainNFNotaInfoTotalAssociations(nfnotainfo.getTotal(), response, nfnotainfo.getId(), null,
+					NFNotaInfoLocalBARD.maintainNFNotaInfoLocalAssociations(nfnotainfo.getEntrega(), response, nfnotainfo.getId(), null,
 							null,
 							TabelaEnum.NFNOTAINFO, getNfeBAR(), statusBAR, historicoBAR, nfnotainfo.getId(),
 							nfnotainfo.getCreateUser(), nfnotainfo.getTransactionId(), nfnotainfo.getTransactionId());
