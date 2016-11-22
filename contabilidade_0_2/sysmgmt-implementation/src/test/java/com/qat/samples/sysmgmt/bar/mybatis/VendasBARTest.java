@@ -94,7 +94,7 @@ public IVendasBAR getVendasBAR()
 		getVendasBAR().deleteAllNotaFiscalSaidas();
 		NFNota notafiscalsaida = new NFNota();
 		List<NFNota> response = getVendasBAR().fetchAllNotaFiscalSaidas(new NFNota()).getResultsList();
-		Assert.assertEquals(response.size(), 5);
+		Assert.assertEquals(response.size(), 7);
 	}
 
 	@Test

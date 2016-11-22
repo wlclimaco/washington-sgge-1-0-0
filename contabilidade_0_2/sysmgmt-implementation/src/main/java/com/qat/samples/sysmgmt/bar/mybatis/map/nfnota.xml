@@ -29,6 +29,7 @@
  	<collection property="info" column="info" select="NFNotaInfoMap.fetchNFNotaInfoById"/>
     <collection property="infoSuplementar" column="infoSuplementar" select="NFNotaInfoSuplementarMap.fetchNFNotaInfoSuplementarById"/>
     <collection property="assinatura" column="assinatura" select="DoisValorMap.fetchDoisValorById"/>
+    <collection property="tipo" column="tipo" select="DoisValorMap.fetchDoisValorById"/>
   </resultMap>
 
   <sql id="allNFNotaColumns">
@@ -36,6 +37,7 @@ identificadorLocal
 ,info
 ,infoSuplementar
 ,assinatura
+,tipo
 ,parentId
 ,tabelaEnumValue
 ,emprId
@@ -51,6 +53,7 @@ identificadorLocal
 #{info.id},
 #{infoSuplementar.id},
 #{assinatura.id},
+#{tipo.id},
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -100,6 +103,7 @@ identificadorLocal
 <if test="info!= null">info = #{info.id},</if>
 <if test="infoSuplementar!= null">infoSuplementar = #{infoSuplementar.id},</if>
 <if test="assinatura!= null">assinatura = #{assinatura.id},</if>
+<if test="tipo!= null">tipo = #{tipo.id},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>

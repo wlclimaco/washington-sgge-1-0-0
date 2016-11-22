@@ -25,6 +25,8 @@ public class NFNota extends NFBase
     /** The econtabil assinatura for the NFNota. */
     private DoisValores assinatura;
 
+    private DoisValores tipo;
+
 
 
     /**
@@ -157,12 +159,22 @@ public void setAssinatura(DoisValores assinatura)
 	}
 
 
+	public DoisValores getTipo() {
+		return tipo;
+	}
+
+
+	public void setTipo(DoisValores tipo) {
+		this.tipo = tipo;
+	}
+
+
 	@Override
 	public String toString() {
 		return "NFNota [getIdentificadorLocal()=" + getIdentificadorLocal() + ", getInfo()=" + getInfo()
 				+ ", getInfoSuplementar()=" + getInfoSuplementar() + ", getAssinatura()=" + getAssinatura()
 				+ ", getIdentificadorlocal()=" + getIdentificadorlocal() + ", getInfosuplementar()="
-				+ getInfosuplementar() + ", toString()=" + super.toString() + "]";
+				+ getInfosuplementar() + ", getTipo()=" + getTipo() + ", toString()=" + super.toString() + "]";
 	}
 
  }

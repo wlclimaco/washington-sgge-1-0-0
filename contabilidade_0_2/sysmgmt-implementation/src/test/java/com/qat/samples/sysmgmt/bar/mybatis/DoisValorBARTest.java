@@ -48,9 +48,9 @@ public class DoisValorBARTest extends AbstractTransactionalJUnit4SpringContextTe
 
 	@Test
 	public void testDeleteDoisValores() {
-		DoisValores DoisValores = insertDoisValores(1004, TabelaEnum.DOISVALOR, PersistenceActionEnum.INSERT);
+		DoisValores DoisValores = insertDoisValores(100004, TabelaEnum.DOISVALOR, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1004);
+		request.setFetchId(100004);
 		DoisValores DoisValoresResponse = getDoisValorBAR().fetchDoisValoresById(request);
 		Assert.assertEquals(DoisValoresResponse, null);
 		getDoisValorBAR().insertDoisValores(DoisValores);
