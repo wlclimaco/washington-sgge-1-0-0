@@ -42,6 +42,11 @@ public class Cfop extends ModelCosmeDamiao
 		super();
 	}
 
+	public Cfop(String cfop) {
+		super();
+		this.cfop = cfop;
+	}
+
 	public Cfop(Integer id, PersistenceActionEnum modelAction)
 	{
 		super();

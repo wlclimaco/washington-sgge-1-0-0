@@ -1,10 +1,10 @@
 package com.qat.samples.sysmgmt.bar.mybatis.delegate;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Cadastros.ICadastrosBAR;
@@ -18,16 +18,23 @@ import com.qat.samples.sysmgmt.bar.Notes.INotesBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
 import com.qat.samples.sysmgmt.bar.Vendas.IVendasBAR;
+import com.qat.samples.sysmgmt.cfop.model.Cfop;
 import com.qat.samples.sysmgmt.cnae.model.CnaeEmpresa;
+import com.qat.samples.sysmgmt.entidade.model.ConfigCarne;
+import com.qat.samples.sysmgmt.entidade.model.ConfigEntrada;
+import com.qat.samples.sysmgmt.entidade.model.ConfigFiscal;
+import com.qat.samples.sysmgmt.entidade.model.ConfigGeral;
+import com.qat.samples.sysmgmt.entidade.model.ConfigVendas;
+import com.qat.samples.sysmgmt.entidade.model.Configuracao;
+import com.qat.samples.sysmgmt.entidade.model.ConfiguracaoNFe;
+import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.Entidade;
 import com.qat.samples.sysmgmt.nf.model.NotaFiscal;
 import com.qat.samples.sysmgmt.pessoa.model.Pessoa;
-import com.qat.samples.sysmgmt.util.model.AcaoEnum;
-import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.model.Documento;
+import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.Endereco;
-import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.Telefone;
 
@@ -241,6 +248,139 @@ public final class BaseBARD extends SqlSessionDaoSupport
 		}
 
 		return count1;
+
+	}
+	public static Empresa empresaConfigInicial(Empresa empresa)
+	{
+
+		ConfigGeral configgeral = new ConfigGeral();
+		Date a = new Date();
+		configgeral.setFusoHorario(1001);
+		configgeral.setCasasDecimais(1002);
+		configgeral.setDiasCartaCobr(1003);
+		configgeral.setInfPosicionarMouse(1004);
+		configgeral.setCnpjCPFUnico(1005);
+		configgeral.setImpCodPersonalizado(1006);
+		configgeral.setLogListRelImp(1007);
+		configgeral.setObsProdFinProd(1008);
+		configgeral.setParentId(empresa.getId());
+		configgeral.setEmprId(empresa.getId());
+		configgeral.setModifyDateUTC(a.getTime());
+		configgeral.setCreateDateUTC(a.getTime());
+		configgeral.setCreateUser("system");
+		configgeral.setModifyUser("system");
+		configgeral.setProcessId(1);
+		configgeral.setModelAction(PersistenceActionEnum.INSERT);
+
+		ConfiguracaoNFe configuracaonfe = new ConfiguracaoNFe();
+
+		configuracaonfe.setDestConsFinal(1002);
+		configuracaonfe.setPreencherDataHora(1003);
+		configuracaonfe.setIcmsPadrao(new Double(10.00));
+		configuracaonfe.setIpiPadrao(new Double(10.00));
+		configuracaonfe.setPisPadrao(new Double(10.00));
+		configuracaonfe.setCofinsPadrao(new Double(10.00));
+		configuracaonfe.setAmbienteEnvio(new DoisValores(new Integer(500)));
+		configuracaonfe.setServMsmNota(new DoisValores(new Integer(500)));
+		configuracaonfe.setSerieEnvio("0001");
+		configuracaonfe.setAnexarXmlEmail(1011);
+		configuracaonfe.setIdCSC("idCSC_12");
+		configuracaonfe.setcSC("cSC_13");
+		configuracaonfe.setInformacaoAdd("informacaoAdd_14");
+		configuracaonfe.setCertificado("certificado_15");
+		configuracaonfe.setSenha("senha_16");
+		configuracaonfe.setSalvarSenha(1017);
+		configuracaonfe.setCfopPadrao(new Cfop("501"));
+
+		configuracaonfe.setParentId(empresa.getId());
+		configuracaonfe.setEmprId(empresa.getId());
+		configuracaonfe.setModifyDateUTC(a.getTime());
+		configuracaonfe.setCreateDateUTC(a.getTime());
+		configuracaonfe.setCreateUser("system");
+		configuracaonfe.setModifyUser("system");
+		configuracaonfe.setProcessId(1);
+		configuracaonfe.setModelAction(PersistenceActionEnum.INSERT);
+
+		ConfigFiscal configfiscal = new ConfigFiscal();
+
+		configfiscal.setPrincAtividade(empresa.getCnaes().get(0).getIdCnae());
+		configfiscal.setRegime(empresa.getRegime());
+		configfiscal.setAliqSimples(new Double(10.00));
+		configfiscal.setParentId(empresa.getId());
+		configfiscal.setEmprId(empresa.getId());
+		configfiscal.setModifyDateUTC(a.getTime());
+		configfiscal.setCreateDateUTC(a.getTime());
+		configfiscal.setCreateUser("system");
+		configfiscal.setModifyUser("system");
+		configfiscal.setProcessId(1);
+		configfiscal.setModelAction(PersistenceActionEnum.INSERT);
+
+
+		ConfigVendas configvendas = new ConfigVendas();
+
+		configvendas.setDescontoMaxVenda(new Double(10.00));
+		configvendas.setObservacao("observacao_2");
+		configvendas.setImprSegVia(1);
+		configvendas.setImprAssinatura(1);
+		configvendas.setImprResumoFinanc(0);
+		configvendas.setAtuaPrecoClonar(1);
+		configvendas.setImprColUnidade(0);
+		configvendas.setBloquearvendProdSemEstoq(1);
+		configvendas.setAddDespCalcImposto(0);
+		configvendas.setRetSubstTribICMS(0);
+		configvendas.setParentId(empresa.getId());
+		configvendas.setEmprId(empresa.getId());
+		configvendas.setModifyDateUTC(a.getTime());
+		configvendas.setCreateDateUTC(a.getTime());
+		configvendas.setCreateUser("system");
+		configvendas.setModifyUser("system");
+		configvendas.setProcessId(1);
+		configfiscal.setModelAction(PersistenceActionEnum.INSERT);
+
+		ConfigEntrada configentrada = new ConfigEntrada();
+		configentrada.setValorTotalFixo(1);
+		configentrada.setManterPrecoVendaProd(1);
+		configentrada.setParentId(empresa.getId());
+		configentrada.setEmprId(empresa.getId());
+		configentrada.setModifyDateUTC(a.getTime());
+		configentrada.setCreateDateUTC(a.getTime());
+		configentrada.setCreateUser("system");
+		configentrada.setModifyUser("system");
+		configentrada.setProcessId(1);
+		configentrada.setModelAction(PersistenceActionEnum.INSERT);
+
+		ConfigCarne configcarne = new ConfigCarne();
+		configcarne.setCarneBotelo(1);
+		configcarne.setCarneNormal(1);
+		configcarne.setParentId(empresa.getId());
+		configcarne.setEmprId(empresa.getId());
+		configcarne.setModifyDateUTC(a.getTime());
+		configcarne.setCreateDateUTC(a.getTime());
+		configcarne.setCreateUser("system");
+		configcarne.setModifyUser("system");
+		configcarne.setProcessId(1);
+		configcarne.setModelAction(PersistenceActionEnum.INSERT);
+
+
+		Configuracao configuracao = new Configuracao();
+		configuracao.setConfGeral(configgeral);
+		configuracao.setConfNFe(configuracaonfe);
+		configuracao.setConfFiscal(configfiscal);
+		configuracao.setConfVendas(configvendas);
+		configuracao.setConfEntrada(configentrada);
+		configuracao.setConfCarne(configcarne);
+		configuracao.setParentId(empresa.getId());
+		configuracao.setEmprId(empresa.getId());
+		configuracao.setModifyDateUTC(a.getTime());
+		configuracao.setCreateDateUTC(a.getTime());
+		configuracao.setCreateUser("system");
+		configuracao.setModifyUser("system");
+		configuracao.setProcessId(1);
+		configuracao.setModelAction(PersistenceActionEnum.INSERT);
+
+		empresa.setConfiguracao(configuracao);
+
+		return empresa;
 
 	}
 

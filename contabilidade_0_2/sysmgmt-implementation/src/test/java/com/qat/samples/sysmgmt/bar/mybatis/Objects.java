@@ -243,11 +243,11 @@ public class Objects {
 		cliente.setBancos(new ArrayList<BancoPessoa>());
 		cliente.getBancos().add(insertBancoPessoa(id, TabelaEnum.CLIENTE, action));
 		cliente.setFormaPagamentoList(new ArrayList<FormaPgPessoa>());
-		cliente.getFormaPagamentoList().add(insertFormaPgPessoa(id, TabelaEnum.CLIENTE, action));
+		cliente.getFormaPagamentoList().add(insertFormaPgPessoa(null, TabelaEnum.CLIENTE, action));
 		cliente.setCondPagList(new ArrayList<CondPagPessoa>());
-		cliente.getCondPagList().add(insertCondPagPessoa(id, TabelaEnum.CLIENTE, action));
+		cliente.getCondPagList().add(insertCondPagPessoa(null, TabelaEnum.CLIENTE, action));
 		cliente.setContatoList(new ArrayList<Contato>());
-		cliente.getContatoList().add(insertContato(id, TabelaEnum.CLIENTE, action));
+		cliente.getContatoList().add(insertContato(null, TabelaEnum.CLIENTE, action));
 		cliente.setTabelaEnum(tabela);
 		cliente.setParentId(id);
 		cliente.setEmprId(EMPID);
@@ -881,6 +881,9 @@ public class Objects {
 		empresa.getUsuarios().add(insertUsuario(id, TabelaEnum.EMPRESA, action));
 
 		empresa.setConfiguracao(insertConfiguracao(id, TabelaEnum.EMPRESA, action));
+
+		empresa.setSocios(new ArrayList<Socio>());
+		empresa.getSocios().add(insertSocio(id, TabelaEnum.EMPRESA, action));
 
 		empresa.setTabelaEnum(tabela);
 		empresa.setParentId(id);
@@ -2059,7 +2062,7 @@ public class Objects {
 	public static Endereco insertEndereco(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Endereco endereco = new Endereco();
 		Date a = new Date();
-		endereco.setId(id);
+		//endereco.setId(id);
 		endereco.setCodIbge("555555");
 		endereco.setLogradouro("logradouro_2 - " + action.toString());
 		endereco.setBairro("bairro_3 - " + action.toString());
@@ -2087,7 +2090,7 @@ public class Objects {
 	public static Email insertEmail(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Email email = new Email();
 		Date a = new Date();
-		email.setId(id);
+		//email.setId(id);
 		email.setTypeValue(1001);
 		email.setEmail("econtabilsistemas@gmail.com");
 		email.setEmailTypeEnumValue(1003);
@@ -2273,7 +2276,7 @@ public class Objects {
 		Date a = new Date();
 		socio.setId(id);
 		socio.setPessoa(insertCliente(id, tabela, action));
-		socio.setCota("10.00");
+		socio.setCota(new Double(10));
 		socio.setPorcentagem("10.00");
 		socio.setTabelaEnum(tabela);
 		socio.setParentId(id);

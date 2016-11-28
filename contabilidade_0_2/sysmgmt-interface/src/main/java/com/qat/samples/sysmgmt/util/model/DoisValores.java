@@ -35,12 +35,21 @@ public class DoisValores extends ModelCosmeDamiao
 		super();
 	}
 
+
+
+	public DoisValores(Integer id) {
+		super();
+		this.id = id;
+	}
+
+
+
 	public DoisValores(int i, String string) {
 		// TODO Auto-generated constructor stub
 	}
 
 
-	
+
 	/**
 	 * Gets the id.
 	 *
@@ -77,7 +86,7 @@ public class DoisValores extends ModelCosmeDamiao
 		this.descricao = descricao;
 	}
 
-	
+
 
 	public DoisValorType getDoisValorType() {
 		return doisValorType;

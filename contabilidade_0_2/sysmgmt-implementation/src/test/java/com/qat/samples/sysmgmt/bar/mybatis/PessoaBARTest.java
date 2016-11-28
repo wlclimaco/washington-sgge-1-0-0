@@ -1337,7 +1337,6 @@ public IPessoaBAR getPessoaBAR()
 		{
 			Documento documento = new Documento();
 			Date a = new Date();
-			documento.setId(100);
 			documento.setDocumentoTypeEnumValue(100);
 			documento.setNumero("NATIVE INSERT UPDATE");
 			documento.setData(a.getTime());

@@ -48,6 +48,7 @@ import com.qat.samples.sysmgmt.dicionario.request.FieldInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.Ajuda;
 import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
+import com.qat.samples.sysmgmt.entidade.model.Entidade;
 import com.qat.samples.sysmgmt.entidade.model.Field;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
 import com.qat.samples.sysmgmt.entidade.model.Menu;
@@ -602,6 +603,20 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 		Boolean count1;
 		Integer a = 0;
 
+
+
+		if (!ValidationUtil.isNull(empresa.getConfiguracao())) {
+			 a = ConfiguracaoBARD.maintainConfiguracaoAssociations(empresa.getConfiguracao(), response,
+					empresa.getId(), null, null, TabelaEnum.EMPRESA, getConfiguracaoBAR(), getStatusBAR(), getHistoricoBAR(),
+					empresa.getId(), empresa.getCreateUser(), historicoId, historicoId);
+		}else{
+			empresa = BaseBARD.empresaConfigInicial(empresa);
+			a = ConfiguracaoBARD.maintainConfiguracaoAssociations(empresa.getConfiguracao(), response,
+					empresa.getId(), null, null, TabelaEnum.EMPRESA, getConfiguracaoBAR(), getStatusBAR(), getHistoricoBAR(),
+					empresa.getId(), empresa.getCreateUser(), historicoId, historicoId);
+
+		}
+
 		if(empresa.getModelAction() == PersistenceActionEnum.INSERT)
 		{
 			MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_EMPRESA, empresa, response);
@@ -685,12 +700,6 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 					empresa.getCreateUser(), historicoId, historicoId);
 
 
-		}
-
-		if (!ValidationUtil.isNull(empresa.getConfiguracao())) {
-			 a = ConfiguracaoBARD.maintainConfiguracaoAssociations(empresa.getConfiguracao(), response,
-					empresa.getId(), null, null, TabelaEnum.EMPRESA, getConfiguracaoBAR(), getStatusBAR(), getHistoricoBAR(),
-					empresa.getId(), empresa.getCreateUser(), historicoId, historicoId);
 		}
 
 		EnviarEmailBARD.sendMailTLS(empresa.getEmprId(), getEmpresaBAR(), empresa);
@@ -2989,6 +2998,8 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 		}
 
 	}
+
+
 
 	@Override
 	public InternalResponse insertNote(Note note) {

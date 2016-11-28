@@ -20,9 +20,6 @@ public class Endereco extends ModelCosmeDamiao
 	/** The description. */
 	private Cidade cidade;
 
-	/** The estado. */
-	private Estado estado;
-
 	/** The bairro. */
 	private String bairro;
 
@@ -58,7 +55,7 @@ public class Endereco extends ModelCosmeDamiao
 		this.id = id;
 		this.logradouro = logradouro;
 		this.cidade = cidade;
-		this.estado = estado;
+		this.cidade.setEstado(estado);
 		this.bairro = bairro;
 		this.numero = numero;
 		this.cep = cep;
@@ -145,26 +142,6 @@ public class Endereco extends ModelCosmeDamiao
 	public void setCidade(Cidade cidade)
 	{
 		this.cidade = cidade;
-	}
-
-	/**
-	 * Gets the estado.
-	 *
-	 * @return the estado
-	 */
-	public Estado getEstado()
-	{
-		return estado;
-	}
-
-	/**
-	 * Sets the estado.
-	 *
-	 * @param estado the estado to set
-	 */
-	public void setEstado(Estado estado)
-	{
-		this.estado = estado;
 	}
 
 	/**
@@ -286,8 +263,8 @@ public class Endereco extends ModelCosmeDamiao
 	@Override
 	public String toString() {
 		return "Endereco [getEnderecoTypeValue()=" + getEnderecoTypeValue() + ", getId()=" + getId()
-				+ ", getLogradouro()=" + getLogradouro() + ", getCidade()=" + getCidade() + ", getEstado()="
-				+ getEstado() + ", getBairro()=" + getBairro() + ", getNumero()=" + getNumero() + ", getCep()="
+				+ ", getLogradouro()=" + getLogradouro() + ", getCidade()=" + getCidade() + ", getBairro()=" + getBairro()
+				+ ", getNumero()=" + getNumero() + ", getCep()="
 				+ getCep() + ", getComplemento()=" + getComplemento() + ", getEnderecoType()=" + getEnderecoType()
 				+ ", getLatitude()=" + getLatitude() + ", getLongitude()=" + getLongitude() + ", getCodIbge()="
 				+ getCodIbge() + ", getPais()=" + getPais() + ", toString()=" + super.toString() + "]";

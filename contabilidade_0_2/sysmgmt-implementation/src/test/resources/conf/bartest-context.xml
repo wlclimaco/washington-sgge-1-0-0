@@ -7,7 +7,7 @@
 
 		<property name="statusBAR" ref="statusBARTarget" />
 		<property name="historicoBAR" ref="historicoBARTarget" />
-		<property name="cadastrosBAR" ref="cadastroBARTarget" />
+		<property name="cadastrosBAR" ref="cadastrosBARTarget" />
 		<property name="fiscalBAR" ref="fiscalBARTarget" />
 		<property name="enderecoBAR" ref="enderecoBARTarget" />
 		<property name="telefoneBAR" ref="telefoneBARTarget" />
@@ -40,10 +40,6 @@
 		<property name="nfeBAR" ref="nfeBARTarget" />
 	</bean>
 
-	<bean id="cadastroBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Cadastros.CadastrosBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-	</bean>
-
 	<bean id="configuracaoBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Configuracao.ConfiguracaoBARImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 		<property name="historicoBAR" ref="historicoBARTarget" />
@@ -57,7 +53,7 @@
 
 	<bean id="sociosBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Socios.SociosBARImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
-		<property name="cadastrosBAR" ref="cadastroBARTarget" />
+		<property name="cadastrosBAR" ref="cadastrosBARTarget" />
 	</bean>
 
 	<bean id="siteBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Site.SiteBARImpl">
@@ -89,6 +85,14 @@
 
 	<bean id="cadastrosBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Cadastros.CadastrosBARImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+		<property name="enderecoBAR" ref="enderecoBARTarget" />
+		<property name="emailBAR" ref="emailBARTarget" />
+		<property name="documentoBAR" ref="documentoBARTarget" />
+		<property name="telefoneBAR" ref="telefoneBARTarget" />
+		<property name="statusBAR" ref="statusBARTarget" />
+		<property name="notesBAR" ref="notesBARTarget" />
+		<property name="historicoBAR" ref="historicoBARTarget" />
+		<property name="cadastrosBAR" ref="cadastrosBARTarget" />
 	</bean>
 
 	<bean id="telefoneBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Telefone.TelefoneBARImpl">

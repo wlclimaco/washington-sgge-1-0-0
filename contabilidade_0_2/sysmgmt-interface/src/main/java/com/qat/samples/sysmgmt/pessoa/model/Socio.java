@@ -12,7 +12,7 @@ public class Socio extends ModelCosmeDamiao
 
 	private Integer id;
 	/** The description. */
-	private String cota;
+	private Double cota;
 
 	private Long dataProlabore;
 
@@ -38,7 +38,7 @@ public class Socio extends ModelCosmeDamiao
 	 *
 	 * @return the cota
 	 */
-	public String getCota()
+	public Double getCota()
 	{
 		return cota;
 	}
@@ -48,7 +48,7 @@ public class Socio extends ModelCosmeDamiao
 	 *
 	 * @param cota the cota to set
 	 */
-	public void setCota(String cota)
+	public void setCota(Double cota)
 	{
 		this.cota = cota;
 	}
