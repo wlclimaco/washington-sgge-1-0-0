@@ -60,13 +60,32 @@
 ,e.contabilidadeId
 ,e.permissaoTypeEnumValue
 ,e.configuracao
+,e.numFunc
+
   </sql>
 
   <sql id="allEmpresaValues">
-  			<include refid="EntidadeMap.allEntidadeValues"/>
-  			,#{parceiroId}
-	,#{contabilidadeId}
-	,#{permissaoTypeEnumValue}
+  
+#{nome},
+#{razao},
+#{processId},
+#{entidadeId},
+#{emprId},
+#{entidadeEnumValue},
+#{statusEmpresa},
+#{dtAbertura},
+#{responsavel},
+#{regime.id},
+#{planosServicos.id},
+#{createDateUTC},
+#{createUser},
+#{modifyDateUTC},
+#{modifyUser},
+#{configuracao.id},
+#{parceiroId},
+#{contabilidadeId},
+#{permissaoTypeEnumValue},
+#{numFunc}
   </sql>
 
   <select id="fetchEmpresaRowCount" parameterType="EmpresaInquiryRequest" resultType="Integer">
@@ -133,16 +152,17 @@ nome
 ,statusEmpresa
 ,dtAbertura
 ,responsavel
-,planosServicos
 ,regime
+,planosServicos
 ,create_date
 ,create_user
 ,modify_date
 ,modify_user
+,configuracao
 ,parceiroId
 ,contabilidadeId
-,configuracao
 ,permissaoTypeEnumValue
+,numFunc
      )
    VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allEmpresaValues" /> )
  </insert>

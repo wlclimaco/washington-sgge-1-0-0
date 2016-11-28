@@ -858,6 +858,7 @@ public class Objects {
 		Date a = new Date();
 		empresa.setId(id);
 		empresa.setNome("nome_1 - " + action.toString());
+		empresa.setRazao("razao_1 - " + action.toString());
 		empresa.setEntidadeId(1002);
 		empresa.setNumFunc(1003);
 		empresa.setEntidadeEnumValue(1005);

@@ -19,6 +19,7 @@
     <result property="id" column="id"/>
     <result property="nome" column="nome"/>
     <result property="razao" column="razao"/>
+    <result property="numFunc" column="numFunc"/>
     <result property="processId" column="processId"/>
     <result property="entidadeId" column="entidadeId"/>
     <result property="emprId" column="emprId"/>

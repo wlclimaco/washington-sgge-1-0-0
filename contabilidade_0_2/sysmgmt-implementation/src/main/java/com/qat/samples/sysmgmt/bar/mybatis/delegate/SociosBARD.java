@@ -103,15 +103,7 @@ public final class SociosBARD extends SqlSessionDaoSupport
 					break;
 			}
 
-			if (!ValidationUtil.isNullOrEmpty(socio.getPessoa().getDocumentos()))
-			{
-				DocumentosBARD.maintainDocumentoAssociations(socio.getPessoa().getDocumentos(), response, socio.getId(),
-						null,
-						null,
-						TabelaEnum.SOCIO, documentoDAC, statusDAC, historicoDAC, empId,
-						socio.getCreateUser(), processId, historicoId);
-			}
-
+			
 		}
 		return 1;
 	}

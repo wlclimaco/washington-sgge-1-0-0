@@ -77,7 +77,7 @@ socioAdm
 <select id="fetchSocioByEmpresaId" parameterType="Integer" resultMap="SocioResult">
     SELECT id,
  <include refid="allSocioColumns" />
-   FROM socio WHERE emprid = #{fetchid}
+   FROM socio WHERE parentId = #{fetchid}
  </select>
 
  <select id="fetchSocioById" parameterType="Integer" resultMap="SocioResult">
