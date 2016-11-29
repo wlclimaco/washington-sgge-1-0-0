@@ -616,6 +616,11 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 					empresa.getId(), empresa.getCreateUser(), historicoId, historicoId);
 
 		}
+		if (!ValidationUtil.isNull(empresa.getPlanosServicos())) {
+			a += PlanoByEmpresaBARD.maintainPlanoByEmpresaAssociations(empresa.getPlanosServicos(), response,
+					empresa.getId(), null, null, TabelaEnum.EMPRESA, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
+					empresa.getId(), empresa.getCreateUser(), historicoId, historicoId);
+		}
 
 		if(empresa.getModelAction() == PersistenceActionEnum.INSERT)
 		{
@@ -648,12 +653,6 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 					TabelaEnum.EMPRESA, getSociosBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
 					empresa.getCreateUser(), historicoId, historicoId, getDocumentosBAR());
 
-		}
-
-		if (!ValidationUtil.isNull(empresa.getPlanosServicos())) {
-			a += PlanoByEmpresaBARD.maintainPlanoByEmpresaAssociations(empresa.getPlanosServicos(), response,
-					empresa.getId(), null, null, TabelaEnum.EMPRESA, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
-					empresa.getId(), empresa.getCreateUser(), historicoId, historicoId);
 		}
 
 		if (!ValidationUtil.isNullOrEmpty(empresa.getUsuarios())) {
@@ -726,6 +725,11 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 				getStatusBAR(), getHistoricoBAR(), getCadastrosBAR(), getFiscalBAR(), getTelefoneBAR(), getEmailBAR(),
 				getDocumentosBAR(), getNotesBAR(), new InternalResultsResponse<Empresa>());
 
+		if (!ValidationUtil.isNull(empresa.getPlanosServicos())) {
+			a += PlanoByEmpresaBARD.maintainPlanoByEmpresaAssociations(empresa.getPlanosServicos(), response,
+					empresa.getId(), null, null, TabelaEnum.EMPRESA, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
+					empresa.getId(), empresa.getCreateUser(), empresa.getTransactionId(), empresa.getTransactionId());
+		}
 
 		if (!ValidationUtil.isNull(empresa.getConfiguracao())) {
 			 a = ConfiguracaoBARD.maintainConfiguracaoAssociations(empresa.getConfiguracao(), response,
@@ -744,12 +748,6 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 					TabelaEnum.EMPRESA, getSociosBAR(), getStatusBAR(), getHistoricoBAR(), empresa.getId(),
 					empresa.getCreateUser(), empresa.getTransactionId(), empresa.getTransactionId(), getDocumentosBAR());
 
-		}
-
-		if (!ValidationUtil.isNull(empresa.getPlanosServicos())) {
-			a += PlanoByEmpresaBARD.maintainPlanoByEmpresaAssociations(empresa.getPlanosServicos(), response,
-					empresa.getId(), null, null, TabelaEnum.EMPRESA, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
-					empresa.getId(), empresa.getCreateUser(), empresa.getTransactionId(), empresa.getTransactionId());
 		}
 
 

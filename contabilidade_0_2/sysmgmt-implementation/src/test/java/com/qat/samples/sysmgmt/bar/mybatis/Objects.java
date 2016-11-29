@@ -877,7 +877,7 @@ public class Objects {
 		empresa.getStatusList().add(insertStatus(id, TabelaEnum.EMPRESA, action));
 		empresa.setNotes(new ArrayList<Note>());
 		empresa.getNotes().add(insertNotes(id, TabelaEnum.EMPRESA, action));
-
+		empresa.setPlanosServicos(insertPlanoByEmpresa(id, tabela, action));
 		empresa.setUsuarios(new ArrayList<Usuario>());
 		empresa.getUsuarios().add(insertUsuario(id, TabelaEnum.EMPRESA, action));
 
@@ -2654,7 +2654,6 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 	public static Preco insertPreco(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Preco preco = new Preco();
 		Date a = new Date();
-		preco.setId(id);
 		preco.setDataMarcacao(a.getTime());
 		preco.setPrecoTypeEnum(PrecoTypeEnum.COMPRA);
 		preco.setValor(new Double(10.00));

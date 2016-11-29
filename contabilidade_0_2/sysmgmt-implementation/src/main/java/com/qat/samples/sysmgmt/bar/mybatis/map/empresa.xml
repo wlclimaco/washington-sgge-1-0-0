@@ -65,7 +65,7 @@
   </sql>
 
   <sql id="allEmpresaValues">
-  
+
 #{nome},
 #{razao},
 #{processId},
@@ -75,8 +75,8 @@
 #{statusEmpresa},
 #{dtAbertura},
 #{responsavel},
-#{regime.id},
 #{planosServicos.id},
+#{regime.id},
 #{createDateUTC},
 #{createUser},
 #{modifyDateUTC},
@@ -152,8 +152,8 @@ nome
 ,statusEmpresa
 ,dtAbertura
 ,responsavel
-,regime
 ,planosServicos
+,regime
 ,create_date
 ,create_user
 ,modify_date

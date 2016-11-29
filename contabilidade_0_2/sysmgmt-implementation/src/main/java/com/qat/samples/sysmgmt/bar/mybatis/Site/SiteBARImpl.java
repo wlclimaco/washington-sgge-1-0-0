@@ -22,6 +22,7 @@ import com.qat.samples.sysmgmt.bar.mybatis.delegate.DoisValoresBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.OrdemServicoItensBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.PlanoAndServicoBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.PlanoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.PrecoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ServicoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.StatusBARD;
@@ -1723,25 +1724,25 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_SERVICOANDPLANO, servicoandplano, response);
 		Integer a = 0;
 
-//		if (!ValidationUtil.isNull(servicoandplano.getServicoList())) {
-//			ArrayList<Servico> servicoList = new ArrayList<Servico>();
-//			servicoList.add(servicoandplano.getServicoList());
-//			a += ServicoBARD.maintainServicoAssociations(servicoList,  response,
-//					servicoandplano.getId(), null, null, TabelaEnum.SERVICO, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
-//					servicoandplano.getId(), servicoandplano.getCreateUser(), servicoandplano.getTransactionId(), servicoandplano.getTransactionId());
-//
-//		}
-//
-//		if (!ValidationUtil.isNull(servicoandplano.getPlanoList())) {
-//
-//			ArrayList<Plano> planoList = new ArrayList<Plano>();
-//			planoList.add(servicoandplano.getPlanoList());
-//
-//			a += PlanoBARD.maintainPlanoAssociations(planoList,  response,
-//					servicoandplano.getId(), null, null, TabelaEnum.PLANO, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
-//					servicoandplano.getId(), servicoandplano.getCreateUser(), servicoandplano.getTransactionId(), servicoandplano.getTransactionId());
-//
-//		}
+		if (!ValidationUtil.isNull(servicoandplano.getServicoList())) {
+			ArrayList<Servico> servicoList = new ArrayList<Servico>();
+			servicoList.add(servicoandplano.getServicoList());
+			a += ServicoBARD.maintainServicoAssociations(servicoList,  response,
+					servicoandplano.getId(), null, null, TabelaEnum.SERVICO, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
+					servicoandplano.getId(), servicoandplano.getCreateUser(), servicoandplano.getTransactionId(), servicoandplano.getTransactionId());
+
+		}
+
+		if (!ValidationUtil.isNull(servicoandplano.getPlanoList())) {
+
+			ArrayList<Plano> planoList = new ArrayList<Plano>();
+			planoList.add(servicoandplano.getPlanoList());
+
+			a += PlanoBARD.maintainPlanoAssociations(planoList,  response,
+					servicoandplano.getId(), null, null, TabelaEnum.PLANO, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
+					servicoandplano.getId(), servicoandplano.getCreateUser(), servicoandplano.getTransactionId(), servicoandplano.getTransactionId());
+
+		}
 
 
 		return response;
