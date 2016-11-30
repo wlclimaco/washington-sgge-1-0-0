@@ -1722,28 +1722,6 @@ public class SiteBARImpl extends SqlSessionDaoSupport implements ISiteBAR {
 		InternalResponse response = new InternalResponse();
 
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_SERVICOANDPLANO, servicoandplano, response);
-		Integer a = 0;
-
-		if (!ValidationUtil.isNull(servicoandplano.getServicoList())) {
-			ArrayList<Servico> servicoList = new ArrayList<Servico>();
-			servicoList.add(servicoandplano.getServicoList());
-			a += ServicoBARD.maintainServicoAssociations(servicoList,  response,
-					servicoandplano.getId(), null, null, TabelaEnum.SERVICO, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
-					servicoandplano.getId(), servicoandplano.getCreateUser(), servicoandplano.getTransactionId(), servicoandplano.getTransactionId());
-
-		}
-
-		if (!ValidationUtil.isNull(servicoandplano.getPlanoList())) {
-
-			ArrayList<Plano> planoList = new ArrayList<Plano>();
-			planoList.add(servicoandplano.getPlanoList());
-
-			a += PlanoBARD.maintainPlanoAssociations(planoList,  response,
-					servicoandplano.getId(), null, null, TabelaEnum.PLANO, getSiteBAR(), getStatusBAR(), getHistoricoBAR(),
-					servicoandplano.getId(), servicoandplano.getCreateUser(), servicoandplano.getTransactionId(), servicoandplano.getTransactionId());
-
-		}
-
 
 		return response;
 	}

@@ -77,6 +77,12 @@ dataInicio
    FROM servicoandplano WHERE id = #{fetchid}
  </select>
 
+  <select id="fetchServicoAndPlanoByParentId" parameterType="Integer" resultMap="ServicoAndPlanoResult">
+    SELECT id,
+	<include refid="allServicoAndPlanoColumns" />
+   FROM servicoandplano WHERE parentId = #{fetchid}
+ </select>
+
  <select id="fetchAllServicoAndPlanosRequest" parameterType="PagedInquiryRequest" resultMap="ServicoAndPlanoResult">
 
 		SELECT id,<include refid="allServicoAndPlanoColumns" />
