@@ -50,14 +50,18 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 
 	private String senha;
 	private String tokenNFCe;
-	
+
 	private String logoDanfe;
 
 	private Integer salvarSenha;
 
 	private Cfop cfopPadrao;
-	
+
 	private DoisValores modelo;
+
+	private DoisValores tipoImpressao;
+
+	private DoisValores tipoEmissao;
 
 
 	public ConfiguracaoNFe()
@@ -248,6 +252,24 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 
 	public void setModelo(DoisValores modelo) {
 		this.modelo = modelo;
+	}
+	
+	
+
+	public DoisValores getTipoImpressao() {
+		return tipoImpressao;
+	}
+
+	public void setTipoImpressao(DoisValores tipoImpressao) {
+		this.tipoImpressao = tipoImpressao;
+	}
+
+	public DoisValores getTipoEmissao() {
+		return tipoEmissao;
+	}
+
+	public void setTipoEmissao(DoisValores tipoEmissao) {
+		this.tipoEmissao = tipoEmissao;
 	}
 
 	@Override

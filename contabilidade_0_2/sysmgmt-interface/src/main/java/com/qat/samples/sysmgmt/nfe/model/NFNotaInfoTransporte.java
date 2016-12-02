@@ -36,6 +36,13 @@ public class NFNotaInfoTransporte extends NFBase
     /** The econtabil balsa for the NFNotaInfoTransporte. */
     private String balsa;
 
+    private Double quantVol;
+    private String especieVol;
+    private String marcaVol;
+    private String numeroVol;
+    private Double pesoLiquido;
+    private Double pesoBruto;
+    private String numeroLacres;
 
 
     /**
@@ -243,17 +250,86 @@ public void setBalsa(String balsa)
 	}
 
 
+	public Double getQuantVol() {
+		return quantVol;
+	}
+
+
+	public void setQuantVol(Double quantVol) {
+		this.quantVol = quantVol;
+	}
+
+
+	public String getEspecieVol() {
+		return especieVol;
+	}
+
+
+	public void setEspecieVol(String especieVol) {
+		this.especieVol = especieVol;
+	}
+
+
+	public String getMarcaVol() {
+		return marcaVol;
+	}
+
+
+	public void setMarcaVol(String marcaVol) {
+		this.marcaVol = marcaVol;
+	}
+
+
+	public String getNumeroVol() {
+		return numeroVol;
+	}
+
+
+	public void setNumeroVol(String numeroVol) {
+		this.numeroVol = numeroVol;
+	}
+
+
+	public Double getPesoLiquido() {
+		return pesoLiquido;
+	}
+
+
+	public void setPesoLiquido(Double pesoLiquido) {
+		this.pesoLiquido = pesoLiquido;
+	}
+
+
+	public Double getPesoBruto() {
+		return pesoBruto;
+	}
+
+
+	public void setPesoBruto(Double pesoBruto) {
+		this.pesoBruto = pesoBruto;
+	}
+
+
+	public String getNumeroLacres() {
+		return numeroLacres;
+	}
+
+
+	public void setNumeroLacres(String numeroLacres) {
+		this.numeroLacres = numeroLacres;
+	}
+
+
 	@Override
 	public String toString() {
 		return "NFNotaInfoTransporte [getModalidadeFrete()=" + getModalidadeFrete() + ", getTransportador()="
 				+ getTransportador() + ", getIcmsTransporte()=" + getIcmsTransporte() + ", getVeiculo()=" + getVeiculo()
 				+ ", getReboques()=" + getReboques() + ", getVagao()=" + getVagao() + ", getBalsa()=" + getBalsa()
-				+ ", getModalidadefrete()=" + getModalidadefrete() + ", getIcmstransporte()=" + getIcmstransporte()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", getIcmstransporte()=" + getIcmstransporte() + ", getModalidadefrete()=" + getModalidadefrete()
+				+ ", getQuantVol()=" + getQuantVol() + ", getEspecieVol()=" + getEspecieVol() + ", getMarcaVol()="
+				+ getMarcaVol() + ", getNumeroVol()=" + getNumeroVol() + ", getPesoLiquido()=" + getPesoLiquido()
+				+ ", getPesoBruto()=" + getPesoBruto() + ", getNumeroLacres()=" + getNumeroLacres() + ", toString()="
+				+ super.toString() + "]";
 	}
-
-
-
-
 
  }
