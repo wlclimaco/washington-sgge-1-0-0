@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 04/12/2016 13:15 : 3 -->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NFNotaInfoItemImpostoIPINaoTributadoMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+
+	<!-- Result maps describe the mapping between the columns returned from 
+		a query, and the class properties. A result map isnt necessary if the columns 
+		(or aliases) match to the properties exactly. -->
+	<resultMap id="NFNotaInfoItemImpostoIPINaoTributadoResult"
+		type="NFNotaInfoItemImpostoIPINaoTributado">
+		<result property="id" column="id" />
+
+		<result property="parentId" column="parentId" />
+		<result property="tabelaEnumValue" column="tabelaEnumValue" />
+		<result property="emprId" column="emprId" />
+		<result property="processId" column="processId" />
+		<result property="createUser" column="create_user" />
+		<result property="createDateUTC" column="create_date" />
+		<result property="modifyUser" column="modify_user" />
+		<result property="modifyDateUTC" column="modify_date" />
+		<collection property="situacaoTributaria" column="situacaoTributaria"
+			select="RegimeMap.fetchRegimeById" />
+	</resultMap>
+
+	<sql id="allNFNotaInfoItemImpostoIPINaoTributadoColumns">
+		situacaoTributaria
+		,parentId
+		,tabelaEnumValue
+		,emprId
+		,processId
+		,create_date
+		,create_user
+		,modify_date
+		,modify_user
+
+	</sql>
+	<sql id="allNFNotaInfoItemImpostoIPINaoTributadoValues">
+		#{situacaoTributaria.id},
+		#{parentId},
+		#{tabelaEnumValue},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+	</sql>
+
+
+	<select id="fetchAllNFNotaInfoItemImpostoIPINaoTributados"
+		resultMap="NFNotaInfoItemImpostoIPINaoTributadoResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemImpostoIPINaoTributadoColumns" />
+		FROM nfnotainfoitemimpostoipinaotributado ORDER BY id ASC
+	</select>
+
+	<select id="fetchNFNotaInfoItemImpostoIPINaoTributadoById"
+		parameterType="Integer" resultMap="NFNotaInfoItemImpostoIPINaoTributadoResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemImpostoIPINaoTributadoColumns" />
+		FROM nfnotainfoitemimpostoipinaotributado WHERE id = #{fetchid}
+	</select>
+
+	<select id="fetchAllNFNotaInfoItemImpostoIPINaoTributadosRequest"
+		parameterType="PagedInquiryRequest" resultMap="NFNotaInfoItemImpostoIPINaoTributadoResult">
+
+		SELECT id,
+		<include refid="allNFNotaInfoItemImpostoIPINaoTributadoColumns" />
+		FROM nfnotainfoitemimpostoipinaotributado where 0 = 0
+		<if test="emprId != null"> and emprId = emprId</if>
+		ORDER BY id ASC
+		OFFSET ( #{startPage} * #{pageSize} )
+		LIMIT #{pageSize}
+	</select>
+
+	<select id="fetchNFNotaInfoItemImpostoIPINaoTributadoRowCount"
+		resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM
+		nfnotainfoitemimpostoipinaotributado WHERE id IS NOT NULL
+		<if test="emprId != null"> and emprId = emprId</if>
+
+	</select>
+
+	<insert id="insertNFNotaInfoItemImpostoIPINaoTributado"
+		parameterType="NFNotaInfoItemImpostoIPINaoTributado" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO nfnotainfoitemimpostoipinaotributado (
+		<if test="id != null">
+			<if test="id > 0">id,</if>
+		</if>
+		<include refid="allNFNotaInfoItemImpostoIPINaoTributadoColumns" />
+		)
+		VALUES (
+		<if test="id != null">
+			<if test="id > 0">#{id},</if>
+		</if>
+		<include refid="allNFNotaInfoItemImpostoIPINaoTributadoValues" />
+		)
+	</insert>
+
+	<update id="updateNFNotaInfoItemImpostoIPINaoTributado"
+		parameterType="NFNotaInfoItemImpostoIPINaoTributado">
+		UPDATE nfnotainfoitemimpostoipinaotributado SET
+		<if test="situacaoTributaria!= null">situacaoTributaria = #{situacaoTributaria.id},</if>
+		<if test="parentId!= null"> parentId=#{parentId},</if>
+		<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+		<if test="emprId!= null"> emprId=#{emprId},</if>
+		<if test="processId!= null"> processId=#{processId},</if>
+		<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+		<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="deleteNFNotaInfoItemImpostoIPINaoTributadoById"
+		parameterType="NFNotaInfoItemImpostoIPINaoTributado">
+		DELETE FROM nfnotainfoitemimpostoipinaotributado WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteAllNFNotaInfoItemImpostoIPINaoTributados">
+		DELETE FROM nfnotainfoitemimpostoipinaotributado
+	</delete>
+</mapper>
+
+

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 04/12/2016 13:15 : 3 -->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NFNotaInfoItemImpostoMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+
+	<!-- Result maps describe the mapping between the columns returned from 
+		a query, and the class properties. A result map isnt necessary if the columns 
+		(or aliases) match to the properties exactly. -->
+	<resultMap id="NFNotaInfoItemImpostoResult" type="NFNotaInfoItemImposto">
+		<result property="id" column="id" />
+		<result property="valorTotalTributos" column="valorTotalTributos" />
+		<result property="parentId" column="parentId" />
+		<result property="tabelaEnumValue" column="tabelaEnumValue" />
+		<result property="emprId" column="emprId" />
+		<result property="processId" column="processId" />
+		<result property="createUser" column="create_user" />
+		<result property="createDateUTC" column="create_date" />
+		<result property="modifyUser" column="modify_user" />
+		<result property="modifyDateUTC" column="modify_date" />
+		<collection property="icms" column="icms"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="ipi" column="ipi"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="impostoImportacao" column="impostoImportacao"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="issqn" column="issqn"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="pis" column="pis"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="pisst" column="pisst"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="cofins" column="cofins"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="cofinsst" column="cofinsst"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="icmsUfDestino" column="icmsUfDestino"
+			select="RegimeMap.fetchRegimeById" />
+	</resultMap>
+
+	<sql id="allNFNotaInfoItemImpostoColumns">
+		valorTotalTributos
+		,icms
+		,ipi
+		,impostoImportacao
+		,issqn
+		,pis
+		,pisst
+		,cofins
+		,cofinsst
+		,icmsUfDestino
+		,parentId
+		,tabelaEnumValue
+		,emprId
+		,processId
+		,create_date
+		,create_user
+		,modify_date
+		,modify_user
+
+	</sql>
+	<sql id="allNFNotaInfoItemImpostoValues">
+		#{valorTotalTributos},
+		#{icms.id},
+		#{ipi.id},
+		#{impostoImportacao.id},
+		#{issqn.id},
+		#{pis.id},
+		#{pisst.id},
+		#{cofins.id},
+		#{cofinsst.id},
+		#{icmsUfDestino.id},
+		#{parentId},
+		#{tabelaEnumValue},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+	</sql>
+
+
+	<select id="fetchAllNFNotaInfoItemImpostos" resultMap="NFNotaInfoItemImpostoResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemImpostoColumns" />
+		FROM nfnotainfoitemimposto ORDER BY id ASC
+	</select>
+
+	<select id="fetchNFNotaInfoItemImpostoById" parameterType="Integer"
+		resultMap="NFNotaInfoItemImpostoResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemImpostoColumns" />
+		FROM nfnotainfoitemimposto WHERE id = #{fetchid}
+	</select>
+
+	<select id="fetchAllNFNotaInfoItemImpostosRequest"
+		parameterType="PagedInquiryRequest" resultMap="NFNotaInfoItemImpostoResult">
+
+		SELECT id,
+		<include refid="allNFNotaInfoItemImpostoColumns" />
+		FROM nfnotainfoitemimposto where 0 = 0
+		<if test="emprId != null"> and emprId = emprId</if>
+		ORDER BY id ASC
+		OFFSET ( #{startPage} * #{pageSize} )
+		LIMIT #{pageSize}
+	</select>
+
+	<select id="fetchNFNotaInfoItemImpostoRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM nfnotainfoitemimposto WHERE id IS
+		NOT NULL
+		<if test="emprId != null"> and emprId = emprId</if>
+
+	</select>
+
+	<insert id="insertNFNotaInfoItemImposto" parameterType="NFNotaInfoItemImposto"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO nfnotainfoitemimposto (
+		<if test="id != null">
+			<if test="id > 0">id,</if>
+		</if>
+		<include refid="allNFNotaInfoItemImpostoColumns" />
+		)
+		VALUES (
+		<if test="id != null">
+			<if test="id > 0">#{id},</if>
+		</if>
+		<include refid="allNFNotaInfoItemImpostoValues" />
+		)
+	</insert>
+
+	<update id="updateNFNotaInfoItemImposto" parameterType="NFNotaInfoItemImposto">
+		UPDATE nfnotainfoitemimposto SET
+		<if test="valorTotalTributos!= null">valorTotalTributos = #{valorTotalTributos},</if>
+		<if test="icms!= null">icms = #{icms.id},</if>
+		<if test="ipi!= null">ipi = #{ipi.id},</if>
+		<if test="impostoImportacao!= null">impostoImportacao = #{impostoImportacao.id},</if>
+		<if test="issqn!= null">issqn = #{issqn.id},</if>
+		<if test="pis!= null">pis = #{pis.id},</if>
+		<if test="pisst!= null">pisst = #{pisst.id},</if>
+		<if test="cofins!= null">cofins = #{cofins.id},</if>
+		<if test="cofinsst!= null">cofinsst = #{cofinsst.id},</if>
+		<if test="icmsUfDestino!= null">icmsUfDestino = #{icmsUfDestino.id},</if>
+		<if test="parentId!= null"> parentId=#{parentId},</if>
+		<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+		<if test="emprId!= null"> emprId=#{emprId},</if>
+		<if test="processId!= null"> processId=#{processId},</if>
+		<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+		<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="deleteNFNotaInfoItemImpostoById" parameterType="NFNotaInfoItemImposto">
+		DELETE FROM nfnotainfoitemimposto WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteAllNFNotaInfoItemImpostos">
+		DELETE FROM nfnotainfoitemimposto
+	</delete>
+</mapper>
+
+

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 04/12/2016 13:15 : 3 -->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NFNotaInfoItemImpostoICMSPartilhadoMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+
+	<!-- Result maps describe the mapping between the columns returned from 
+		a query, and the class properties. A result map isnt necessary if the columns 
+		(or aliases) match to the properties exactly. -->
+	<resultMap id="NFNotaInfoItemImpostoICMSPartilhadoResult"
+		type="NFNotaInfoItemImpostoICMSPartilhado">
+		<result property="id" column="id" />
+
+		<result property="valorBCICMS" column="valorBCICMS" />
+		<result property="percentualReducaoBC" column="percentualReducaoBC" />
+		<result property="percentualAliquotaImposto" column="percentualAliquotaImposto" />
+		<result property="valorICMS" column="valorICMS" />
+
+		<result property="percentualMargemValorAdicionadoICMSST"
+			column="percentualMargemValorAdicionadoICMSST" />
+		<result property="percentualReducaoBCICMSST" column="percentualReducaoBCICMSST" />
+		<result property="valorBCICMSST" column="valorBCICMSST" />
+		<result property="percentualAliquotaImpostoICMSST" column="percentualAliquotaImpostoICMSST" />
+		<result property="valorICMSST" column="valorICMSST" />
+		<result property="percentualBCOperacaoPropria" column="percentualBCOperacaoPropria" />
+
+		<result property="parentId" column="parentId" />
+		<result property="tabelaEnumValue" column="tabelaEnumValue" />
+		<result property="emprId" column="emprId" />
+		<result property="processId" column="processId" />
+		<result property="createUser" column="create_user" />
+		<result property="createDateUTC" column="create_date" />
+		<result property="modifyUser" column="modify_user" />
+		<result property="modifyDateUTC" column="modify_date" />
+		<collection property="origem" column="origem"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="situacaoTributaria" column="situacaoTributaria"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="modalidadeBCICMS" column="modalidadeBCICMS"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="modalidadeBCICMSST" column="modalidadeBCICMSST"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="ufICMSST" column="ufICMSST"
+			select="RegimeMap.fetchRegimeById" />
+	</resultMap>
+
+	<sql id="allNFNotaInfoItemImpostoICMSPartilhadoColumns">
+		origem
+		,situacaoTributaria
+		,modalidadeBCICMS
+		,valorBCICMS
+		,percentualReducaoBC
+		,percentualAliquotaImposto
+		,valorICMS
+		,modalidadeBCICMSST
+		,percentualMargemValorAdicionadoICMSST
+		,percentualReducaoBCICMSST
+		,valorBCICMSST
+		,percentualAliquotaImpostoICMSST
+		,valorICMSST
+		,percentualBCOperacaoPropria
+		,ufICMSST
+		,parentId
+		,tabelaEnumValue
+		,emprId
+		,processId
+		,create_date
+		,create_user
+		,modify_date
+		,modify_user
+
+	</sql>
+	<sql id="allNFNotaInfoItemImpostoICMSPartilhadoValues">
+		#{origem.id},
+		#{situacaoTributaria.id},
+		#{modalidadeBCICMS.id},
+		#{valorBCICMS},
+		#{percentualReducaoBC},
+		#{percentualAliquotaImposto},
+		#{valorICMS},
+		#{modalidadeBCICMSST.id},
+		#{percentualMargemValorAdicionadoICMSST},
+		#{percentualReducaoBCICMSST},
+		#{valorBCICMSST},
+		#{percentualAliquotaImpostoICMSST},
+		#{valorICMSST},
+		#{percentualBCOperacaoPropria},
+		#{ufICMSST.id},
+		#{parentId},
+		#{tabelaEnumValue},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+	</sql>
+
+
+	<select id="fetchAllNFNotaInfoItemImpostoICMSPartilhados"
+		resultMap="NFNotaInfoItemImpostoICMSPartilhadoResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemImpostoICMSPartilhadoColumns" />
+		FROM nfnotainfoitemimpostoicmspartilhado ORDER BY id ASC
+	</select>
+
+	<select id="fetchNFNotaInfoItemImpostoICMSPartilhadoById"
+		parameterType="Integer" resultMap="NFNotaInfoItemImpostoICMSPartilhadoResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemImpostoICMSPartilhadoColumns" />
+		FROM nfnotainfoitemimpostoicmspartilhado WHERE id = #{fetchid}
+	</select>
+
+	<select id="fetchAllNFNotaInfoItemImpostoICMSPartilhadosRequest"
+		parameterType="PagedInquiryRequest" resultMap="NFNotaInfoItemImpostoICMSPartilhadoResult">
+
+		SELECT id,
+		<include refid="allNFNotaInfoItemImpostoICMSPartilhadoColumns" />
+		FROM nfnotainfoitemimpostoicmspartilhado where 0 = 0
+		<if test="emprId != null"> and emprId = emprId</if>
+		ORDER BY id ASC
+		OFFSET ( #{startPage} * #{pageSize} )
+		LIMIT #{pageSize}
+	</select>
+
+	<select id="fetchNFNotaInfoItemImpostoICMSPartilhadoRowCount"
+		resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM
+		nfnotainfoitemimpostoicmspartilhado WHERE id IS NOT NULL
+		<if test="emprId != null"> and emprId = emprId</if>
+
+	</select>
+
+	<insert id="insertNFNotaInfoItemImpostoICMSPartilhado"
+		parameterType="NFNotaInfoItemImpostoICMSPartilhado" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO nfnotainfoitemimpostoicmspartilhado (
+		<if test="id != null">
+			<if test="id > 0">id,</if>
+		</if>
+		<include refid="allNFNotaInfoItemImpostoICMSPartilhadoColumns" />
+		)
+		VALUES (
+		<if test="id != null">
+			<if test="id > 0">#{id},</if>
+		</if>
+		<include refid="allNFNotaInfoItemImpostoICMSPartilhadoValues" />
+		)
+	</insert>
+
+	<update id="updateNFNotaInfoItemImpostoICMSPartilhado"
+		parameterType="NFNotaInfoItemImpostoICMSPartilhado">
+		UPDATE nfnotainfoitemimpostoicmspartilhado SET
+		<if test="origem!= null">origem = #{origem.id},</if>
+		<if test="situacaoTributaria!= null">situacaoTributaria = #{situacaoTributaria.id},</if>
+		<if test="modalidadeBCICMS!= null">modalidadeBCICMS = #{modalidadeBCICMS.id},</if>
+		<if test="valorBCICMS!= null">valorBCICMS = #{valorBCICMS},</if>
+		<if test="percentualReducaoBC!= null">percentualReducaoBC = #{percentualReducaoBC},</if>
+		<if test="percentualAliquotaImposto!= null">percentualAliquotaImposto = #{percentualAliquotaImposto},
+		</if>
+		<if test="valorICMS!= null">valorICMS = #{valorICMS},</if>
+		<if test="modalidadeBCICMSST!= null">modalidadeBCICMSST = #{modalidadeBCICMSST.id},</if>
+		<if test="percentualMargemValorAdicionadoICMSST!= null">percentualMargemValorAdicionadoICMSST =
+			#{percentualMargemValorAdicionadoICMSST},</if>
+		<if test="percentualReducaoBCICMSST!= null">percentualReducaoBCICMSST = #{percentualReducaoBCICMSST},
+		</if>
+		<if test="valorBCICMSST!= null">valorBCICMSST = #{valorBCICMSST},</if>
+		<if test="percentualAliquotaImpostoICMSST!= null">percentualAliquotaImpostoICMSST =
+			#{percentualAliquotaImpostoICMSST},</if>
+		<if test="valorICMSST!= null">valorICMSST = #{valorICMSST},</if>
+		<if test="percentualBCOperacaoPropria!= null">percentualBCOperacaoPropria =
+			#{percentualBCOperacaoPropria},</if>
+		<if test="ufICMSST!= null">ufICMSST = #{ufICMSST.id},</if>
+		<if test="parentId!= null"> parentId=#{parentId},</if>
+		<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+		<if test="emprId!= null"> emprId=#{emprId},</if>
+		<if test="processId!= null"> processId=#{processId},</if>
+		<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+		<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="deleteNFNotaInfoItemImpostoICMSPartilhadoById"
+		parameterType="NFNotaInfoItemImpostoICMSPartilhado">
+		DELETE FROM nfnotainfoitemimpostoicmspartilhado WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteAllNFNotaInfoItemImpostoICMSPartilhados">
+		DELETE FROM nfnotainfoitemimpostoicmspartilhado
+	</delete>
+</mapper>
+
+

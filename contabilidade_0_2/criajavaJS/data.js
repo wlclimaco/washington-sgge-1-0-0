@@ -565,31 +565,12 @@ return a;
 function NFNotaInfoItemImpostoIPITributado() {
     var a = [];
     a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-
-
-    @Element(name = "CST", required = true)
-    private NFNotaInfoSituacaoTributariaIPI situacaoTributaria;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vBC", required = false)
-    private String valorBaseCalculo;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "pIPI", required = false)
-    private String percentualAliquota;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "qUnid", required = false)
-    private String quantidade;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vUnid", required = false)
-    private String valorUnidadeTributavel;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vIPI", required = true)
-    private String valorTributo;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorBaseCalculo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "percentualAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "quantidade",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorUnidadeTributavel",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorTributo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
 
 return a;
 };
@@ -600,10 +581,7 @@ return a;
 function NFNotaInfoItemImpostoIPINaoTributado() {
     var a = [];
     a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "CST", required = true)
-    private NFNotaInfoSituacaoTributariaIPI situacaoTributaria;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
 
 
 return a;
@@ -613,23 +591,10 @@ return a;
 function NFNotaInfoItemImpostoImportacao() {
     var a = [];
     a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-
-
-    @Element(name = "vBC", required = true)
-    private String valorBaseCalculo;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vDespAdu", required = true)
-    private String valorDespesaAduaneira;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vII", required = true)
-    private String valorImpostoImportacao;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vIOF", required = true)
-    private String valorIOF;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorBaseCalculo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorDespesaAduaneira",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorImpostoImportacao",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorIOF",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
 
 
 return a;
@@ -639,102 +604,33 @@ return a;
 function NFNotaInfoItemImpostoISSQN() {
     var a = [];
     a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vBC", required = true)
-    private String valorBaseCalculo;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vAliq", required = true)
-    private String valorAliquota;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vISSQN", required = true)
-    private String valor;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "cMunFG", required = true)
-    private Integer codigoMunicipio;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "cListServ", required = true)
-    private String itemListaServicos;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vDeducao", required = false)
-    private String valorDeducao;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vOutro", required = false)
-    private String valorOutro;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vDescIncond", required = false)
-    private String valorDescontoIncondicionado;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vDescCond", required = false)
-    private String valorDescontoCondicionado;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vISSRet", required = false)
-    private String valorRetencaoISS;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "indISS", required = true)
-    private NFNotaInfoItemIndicadorExigibilidadeISS indicadorExigibilidadeISS;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "cServico", required = false)
-    private String codigoServico;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "cMun", required = false)
-    private String codigoMunicipioIncidenciaImposto;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "cPais", required = false)
-    private String codigoPais;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "nProcesso", required = false)
-    private String numeroProcesso;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "indIncentivo", required = true)
-    private NFNotaInfoItemIndicadorIncentivoFiscal indicadorIncentivoFiscal;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorBaseCalculo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valor",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "codigoMunicipio",tipo: "Integer",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "itemListaServicos",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorDeducao",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorOutro",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorDescontoIncondicionado",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorDescontoCondicionado",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorRetencaoISS",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "indicadorExigibilidadeISS",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "codigoServico",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "codigoMunicipioIncidenciaImposto",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "codigoPais",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "numeroProcesso",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "indicadorIncentivoFiscal",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
 
 return a;
 };
 
-
-
-
-
-
-
-
-
-
 function NFNotaInfoItemImpostoPIS() {
     var a = [];
     a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "PISAliq", required = false)
-    private NFNotaInfoItemImpostoPISAliquota aliquota;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "PISQtde", required = false)
-    private NFNotaInfoItemImpostoPISQuantidade quantidade;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "PISNT", required = false)
-    private NFNotaInfoItemImpostoPISNaoTributado naoTributado;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "PISOutr", required = false)
-    private NFNotaInfoItemImpostoPISOutrasOperacoes outrasOperacoes;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "aliquota",tipo: "NFNotaInfoItemImpostoPISAliquota",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "quantidade",tipo: "NFNotaInfoItemImpostoPISQuantidade",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "naoTributado",tipo: "NFNotaInfoItemImpostoPISNaoTributado",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "outrasOperacoes",tipo: "NFNotaInfoItemImpostoPISOutrasOperacoes",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
 
 
 return a;
@@ -743,48 +639,20 @@ return a;
 function NFNotaInfoItemImpostoPISAliquota() {
     var a = [];
     a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-
-
-    @Element(name = "CST", required = true)
-    private NFNotaInfoSituacaoTributariaPIS situacaoTributaria;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vBC", required = true)
-    private String valorBaseCalculo;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "pPIS", required = true)
-    private String percentualAliquota;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vPIS", required = true)
-    private String valorTributo;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-
+    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorBaseCalculo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "percentualAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorTributo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
 return a;
 };
 
 function NFNotaInfoItemImpostoPISQuantidade() {
     var a = [];
     a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-
-
-    @Element(name = "CST", required = true)
-    private NFNotaInfoSituacaoTributariaPIS situacaoTributaria;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "qBCProd", required = true)
-    private String quantidadeVendida;
-
-a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    @Element(name = "vAliqProd", required = true)
-    private String valorAliquota;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vPIS", required = true)
-    private String valorTributo;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+	a.push({field: {campo: "quantidadeVendida",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorTributo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
 
 
 
@@ -795,10 +663,7 @@ return a;
 function NFNotaInfoItemImpostoPISNaoTributado() {
     var a = [];
     a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "CST", required = true)
-    private NFNotaInfoSituacaoTributariaPIS situacaoTributaria;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
 
 
 
@@ -808,30 +673,12 @@ return a;
 function NFNotaInfoItemImpostoPISOutrasOperacoes() {
     var a = [];
     a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "CST", required = true)
-    private NFNotaInfoSituacaoTributariaPIS situacaoTributaria;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vBC", required = false)
-    private String valorBaseCalculo;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "pPIS", required = false)
-    private String percentualAliquota;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "qBCProd", required = false)
-    private String quantidadeVendida;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vAliqProd", required = false)
-    private String valorAliquota;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vPIS", required = true)
-    private String valorTributo;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorBaseCalculo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "percentualAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "quantidadeVendida",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorTributo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
 
 
 return a;
@@ -840,26 +687,11 @@ return a;
 function NFNotaInfoItemImpostoPISST() {
     var a = [];
     a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vBC", required = false)
-    private String valorBaseCalculo;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "pPIS", required = false)
-    private String percentualAliquota;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "qBCProd", required = false)
-    private String quantidadeVendida;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vAliqProd", required = false)
-    private String valorAliquota;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vPIS", required = true)
-    private String valorTributo;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorBaseCalculo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "percentualAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "quantidadeVendida",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorTributo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
 
 
 return a;
@@ -868,22 +700,10 @@ return a;
 function NFNotaInfoItemImpostoCOFINS() {
     var a = [];
     a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "COFINSAliq", required = false)
-    private NFNotaInfoItemImpostoCOFINSAliquota aliquota;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "COFINSQtde", required = false)
-    private NFNotaInfoItemImpostoCOFINSQuantidade quantidade;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "COFINSNT", required = false)
-    private NFNotaInfoItemImpostoCOFINSNaoTributavel naoTributavel;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "COFINSOutr", required = false)
-    private NFNotaInfoItemImpostoCOFINSOutrasOperacoes outrasOperacoes;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "aliquota",tipo: "NFNotaInfoItemImpostoCOFINSAliquota",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "quantidade",tipo: "NFNotaInfoItemImpostoCOFINSQuantidade",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "naoTributavel",tipo: "NFNotaInfoItemImpostoCOFINSNaoTributavel",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "outrasOperacoes",tipo: "NFNotaInfoItemImpostoCOFINSOutrasOperacoes",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
 
 
 return a;
@@ -892,22 +712,10 @@ return a;
 function NFNotaInfoItemImpostoCOFINSAliquota() {
     var a = [];
     a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "CST", required = true)
-    private NFNotaInfoSituacaoTributariaCOFINS situacaoTributaria;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vBC", required = true)
-    private String valorBaseCalulo;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "pCOFINS", required = true)
-    private String percentualAliquota;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vCOFINS", required = true)
-    private String valor;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorBaseCalulo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "percentualAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valor",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
 
 
 return a;
@@ -917,22 +725,10 @@ return a;
 function NFNotaInfoItemImpostoCOFINSQuantidade() {
     var a = [];
     a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "CST", required = true)
-    private NFNotaInfoSituacaoTributariaCOFINS situacaoTributaria;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "qBCProd", required = true)
-    private String quantidadeVendida;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vAliqProd", required = true)
-    private String valorAliquota;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vCOFINS", required = true)
-    private String valorTributo;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "quantidadeVendida",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorTributo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
 
 return a;
 };
@@ -941,10 +737,7 @@ return a;
 function NFNotaInfoItemImpostoCOFINSNaoTributavel() {
     var a = [];
     a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "CST", required = true)
-    private NFNotaInfoSituacaoTributariaCOFINS situacaoTributaria;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
 
 return a;
 };
@@ -952,30 +745,12 @@ return a;
 function NFNotaInfoItemImpostoCOFINSOutrasOperacoes() {
     var a = [];
     a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "CST", required = true)
-    private NFNotaInfoSituacaoTributariaCOFINS situacaoTributaria;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vBC", required = false)
-    private String valorBaseCalculo;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "pCOFINS", required = false)
-    private String percentualCOFINS;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "qBCProd", required = false)
-    private String quantidadeVendida;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vAliqProd", required = false)
-    private String valorAliquota;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vCOFINS", required = false)
-    private String valorCOFINS;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorBaseCalculo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "percentualCOFINS",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "quantidadeVendida",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorCOFINS",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
 return a;
 };
 
@@ -983,26 +758,11 @@ return a;
 function NFNotaInfoItemImpostoCOFINSST() {
     var a = [];
     a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vBC", required = false)
-    private String valorBaseCalculo;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "pCOFINS", required = false)
-    private String percentualAliquota;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "qBCProd", required = false)
-    private String quantidadeVendida;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vAliqProd", required = false)
-    private String valorAliquotaCOFINS;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vCOFINS", required = true)
-    private String valorCOFINS;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorBaseCalculo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "percentualAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "quantidadeVendida",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorAliquotaCOFINS",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorCOFINS",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
 
 
 return a;
@@ -1012,38 +772,14 @@ return a;
 function NFNotaInfoItemImpostoICMSUFDestino() {
     var a = [];
     a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vBCUFDest", required = true)
-    private String valorBaseCalculoDestino;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "pFCPUFDest", required = true)
-    private String percentualRelativoFundoCombatePobrezaDestino;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "pICMSUFDest", required = true)
-    private String percentualAliquotaInternaDestino;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "pICMSInter", required = true)
-    private String percentualInterestadual;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "pICMSInterPart", required = true)
-    private String percentualProvisorioPartilha;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vFCPUFDest", required = true)
-    private String valorRelativoFundoCombatePobrezaDestino;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vICMSUFDest", required = true)
-    private String valorICMSInterestadualDestino;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vICMSUFRemet", required = true)
-    private String valorICMSInterestadualRemetente;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorBaseCalculoDestino",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "percentualRelativoFundoCombatePobrezaDestino",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "percentualAliquotaInternaDestino",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "percentualInterestadual",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "percentualProvisorioPartilha",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorRelativoFundoCombatePobrezaDestino",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorICMSInterestadualDestino",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorICMSInterestadualRemetente",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
 
 return a;
 };
@@ -1052,14 +788,8 @@ return a;
 function NFImpostoDevolvido() {
     var a = [];
     a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "pDevol", required = true)
-    private String percentualDevolucao;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "IPI", required = true)
-    private NFInformacaoImpostoDevolvido informacaoIPIDevolvido;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "percentualDevolucao",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "informacaoIPIDevolvido",tipo: "NFInformacaoImpostoDevolvido",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
 
 return a;
 };
@@ -1068,10 +798,7 @@ return a;
 function NFInformacaoImpostoDevolvido() {
     var a = [];
     a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-
-    @Element(name = "vIPIDevol", required = true)
-    private String valorIPIDevolvido;
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({field: {campo: "valorIPIDevolvido",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
 
 
 return a;
@@ -15053,6 +14780,168 @@ dataModel = function() {
         }],
         interfaces: "NFe",
         local: "NFe"
+    })
+
+    oProjet.push({
+        classes: [{
+            classe: "NFNotaInfoItem",
+            model: NFNotaInfoItem(),
+        }, {
+            classe: "NFNotaInfoItemProduto",
+            model: NFNotaInfoItemProduto()
+        }, {
+            classe: "NFNotaInfoItemProdutoDeclaracaoImportacao",
+            model: NFNotaInfoItemProdutoDeclaracaoImportacao()
+        }, {
+            classe: "NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao",
+            model: NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao()
+        }, {
+            classe: "NFNotaInfoItemDetalheExportacao",
+            model: NFNotaInfoItemDetalheExportacao()
+        }, {
+            classe: "NFNotaInfoItemExportacaoIndireta",
+            model: NFNotaInfoItemExportacaoIndireta()
+        }, {
+            classe: "NFNotaInfoItemProdutoVeiculo",
+            model: NFNotaInfoItemProdutoVeiculo()
+        }, {
+            classe: "NFNotaInfoItemProdutoMedicamento",
+            model: NFNotaInfoItemProdutoMedicamento()
+        }, {
+            classe: "NFNotaInfoItemProdutoArmamento",
+            model: NFNotaInfoItemProdutoArmamento()
+        }, {
+            classe: "NFNotaInfoItemProdutoCombustivel",
+            model: NFNotaInfoItemProdutoCombustivel()
+        }, {
+            classe: "NFNotaInfoItemProdutoCombustivelCIDE",
+            model: NFNotaInfoItemProdutoCombustivelCIDE()
+        }, {
+            classe: "NFImpostoDevolvido",
+            model: NFImpostoDevolvido()
+        }, {
+            classe: "NFInformacaoImpostoDevolvido",
+            model: NFInformacaoImpostoDevolvido()
+        }, {
+            classe: "NFNotaInfoItemImposto",
+            model: NFNotaInfoItemImposto()
+        }, {
+            classe: "NFNotaInfoItemImpostoICMS",
+            model: NFNotaInfoItemImpostoICMS()
+        }, {
+            classe: "NFNotaInfoItemImpostoICMS00",
+            model: NFNotaInfoItemImpostoICMS00()
+        }, {
+            classe: "NFNotaInfoItemImpostoICMS10",
+            model: NFNotaInfoItemImpostoICMS10()
+        }, {
+            classe: "NFNotaInfoItemImpostoICMS20",
+            model: NFNotaInfoItemImpostoICMS20()
+        }, {
+            classe: "NFNotaInfoItemImpostoICMS30",
+            model: NFNotaInfoItemImpostoICMS30()
+        }, {
+            classe: "NFNotaInfoItemImpostoICMS40",
+            model: NFNotaInfoItemImpostoICMS40()
+        }, {
+            classe: "NFNotaInfoItemImpostoICMS51",
+            model: NFNotaInfoItemImpostoICMS51()
+        }, {
+            classe: "NFNotaInfoItemImpostoICMS60",
+            model: NFNotaInfoItemImpostoICMS60()
+        }, {
+            classe: "NFNotaInfoItemImpostoICMS70",
+            model: NFNotaInfoItemImpostoICMS70()
+        }, {
+            classe: "NFNotaInfoItemImpostoICMS90",
+            model: NFNotaInfoItemImpostoICMS90()
+        }, {
+            classe: "NFNotaInfoItemImpostoICMSPartilhado",
+            model: NFNotaInfoItemImpostoICMSPartilhado()
+        }, {
+            classe: "NFNotaInfoItemImpostoICMSST",
+            model: NFNotaInfoItemImpostoICMSST()
+        }, {
+            classe: "NFNotaInfoItemImpostoICMSSN101",
+            model: NFNotaInfoItemImpostoICMSSN101()
+        }, {
+            classe: "NFNotaInfoItemImpostoICMSSN102",
+            model: NFNotaInfoItemImpostoICMSSN102()
+        }, {
+            classe: "NFNotaInfoItemImpostoICMSSN201",
+            model: NFNotaInfoItemImpostoICMSSN201()
+        }, {
+            classe: "NFNotaInfoItemImpostoICMSSN202",
+            model: NFNotaInfoItemImpostoICMSSN202()
+        }, {
+            classe: "NFNotaInfoItemImpostoICMSSN500",
+            model: NFNotaInfoItemImpostoICMSSN500()
+        }, {
+            classe: "NFNotaInfoItemImpostoICMSSN900",
+            model: NFNotaInfoItemImpostoICMSSN900()
+        }, {
+            classe: "NFNotaInfoItemImpostoIPI",
+            model: NFNotaInfoItemImpostoIPI()
+        }, {
+            classe: "NFNotaInfoItemImpostoIPITributado",
+            model: NFNotaInfoItemImpostoIPITributado()
+        }, {
+            classe: "NFNotaInfoItemImpostoIPINaoTributado",
+            model: NFNotaInfoItemImpostoIPINaoTributado()
+        }, {
+            classe: "NFNotaInfoItemImpostoImportacao",
+            model: NFNotaInfoItemImpostoImportacao()
+        }, {
+            classe: "NFNotaInfoItemImpostoISSQN",
+            model: NFNotaInfoItemImpostoISSQN()
+        }, {
+            classe: "NFNotaInfoItemImpostoPIS",
+            model: NFNotaInfoItemImpostoPIS()
+        }, {
+            classe: "NFNotaInfoItemImpostoPISAliquota",
+            model: NFNotaInfoItemImpostoPISAliquota()
+        }, {
+            classe: "NFNotaInfoItemImpostoPISQuantidade",
+            model: NFNotaInfoItemImpostoPISQuantidade()
+        }, {
+            classe: "NFNotaInfoItemImpostoPISNaoTributado",
+            model: NFNotaInfoItemImpostoPISNaoTributado()
+        }, {
+            classe: "NFNotaInfoItemImpostoPISOutrasOperacoes",
+            model: NFNotaInfoItemImpostoPISOutrasOperacoes()
+        }, {
+            classe: "NFNotaInfoItemImpostoPISST",
+            model: NFNotaInfoItemImpostoPISST()
+        }, {
+            classe: "NFNotaInfoItemImpostoCOFINS",
+            model: NFNotaInfoItemImpostoCOFINS()
+        }, {
+            classe: "NFNotaInfoItemImpostoCOFINSAliquota",
+            model: NFNotaInfoItemImpostoCOFINSAliquota()
+        }, {
+            classe: "NFNotaInfoItemImpostoCOFINSQuantidade",
+            model: NFNotaInfoItemImpostoCOFINSQuantidade()
+        }, {
+            classe: "NFNotaInfoItemImpostoCOFINSNaoTributavel",
+            model: NFNotaInfoItemImpostoCOFINSNaoTributavel()
+        }, {
+            classe: "NFNotaInfoItemImpostoCOFINSOutrasOperacoes",
+            model: NFNotaInfoItemImpostoCOFINSOutrasOperacoes()
+        }, {
+            classe: "NFNotaInfoItemImpostoCOFINSST",
+            model: NFNotaInfoItemImpostoCOFINSST()
+        }, {
+            classe: "NFNotaInfoItemImpostoICMSUFDestino",
+            model: NFNotaInfoItemImpostoICMSUFDestino()
+        }, {
+            classe: "NFImpostoDevolvido",
+            model: NFImpostoDevolvido()
+        }, {
+            classe: "NFInformacaoImpostoDevolvido",
+            model: NFInformacaoImpostoDevolvido()
+        }],
+        interfaces: "NFNotaInfoItem",
+        local: "NFNotaInfoItem"
     })
 
     oProjet.push({

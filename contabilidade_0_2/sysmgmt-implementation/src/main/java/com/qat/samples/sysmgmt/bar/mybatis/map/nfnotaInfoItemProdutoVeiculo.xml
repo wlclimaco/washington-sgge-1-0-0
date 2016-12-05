@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 04/12/2016 13:15 : 3 -->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NFNotaInfoItemProdutoVeiculoMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+
+	<!-- Result maps describe the mapping between the columns returned from 
+		a query, and the class properties. A result map isnt necessary if the columns 
+		(or aliases) match to the properties exactly. -->
+	<resultMap id="NFNotaInfoItemProdutoVeiculoResult" type="NFNotaInfoItemProdutoVeiculo">
+		<result property="id" column="id" />
+		<result property="chassi" column="chassi" />
+		<result property="codigoCor" column="codigoCor" />
+		<result property="descricaoCor" column="descricaoCor" />
+		<result property="potencia" column="potencia" />
+		<result property="cilindrada" column="cilindrada" />
+		<result property="pesoLiquido" column="pesoLiquido" />
+		<result property="pesoBruto" column="pesoBruto" />
+		<result property="numeroSerie" column="numeroSerie" />
+		<result property="numeroMotor" column="numeroMotor" />
+		<result property="capacidadeMaximaTracao" column="capacidadeMaximaTracao" />
+		<result property="distanciaEntreEixos" column="distanciaEntreEixos" />
+		<result property="anoModeloFabricacao" column="anoModeloFabricacao" />
+		<result property="anoFabricacao" column="anoFabricacao" />
+		<result property="tipoPintura" column="tipoPintura" />
+		<result property="especieVeiculo" column="especieVeiculo" />
+		<result property="codigoMarcaModelo" column="codigoMarcaModelo" />
+		<result property="lotacao" column="lotacao" />
+		<result property="parentId" column="parentId" />
+		<result property="tabelaEnumValue" column="tabelaEnumValue" />
+		<result property="emprId" column="emprId" />
+		<result property="processId" column="processId" />
+		<result property="createUser" column="create_user" />
+		<result property="createDateUTC" column="create_date" />
+		<result property="modifyUser" column="modify_user" />
+		<result property="modifyDateUTC" column="modify_date" />
+		<collection property="restricao" column="restricao"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="corDENATRAN" column="corDENATRAN"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="condicaoChassi" column="condicaoChassi"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="condicao" column="condicao"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="tipoVeiculo" column="tipoVeiculo"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="tipoCombustivel" column="tipoCombustivel"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="tipoOperacao" column="tipoOperacao"
+			select="RegimeMap.fetchRegimeById" />
+	</resultMap>
+
+	<sql id="allNFNotaInfoItemProdutoVeiculoColumns">
+		tipoOperacao
+		,chassi
+		,codigoCor
+		,descricaoCor
+		,potencia
+		,cilindrada
+		,pesoLiquido
+		,pesoBruto
+		,numeroSerie
+		,tipoCombustivel
+		,numeroMotor
+		,capacidadeMaximaTracao
+		,distanciaEntreEixos
+		,anoModeloFabricacao
+		,anoFabricacao
+		,tipoPintura
+		,tipoVeiculo
+		,especieVeiculo
+		,condicaoChassi
+		,condicao
+		,codigoMarcaModelo
+		,corDENATRAN
+		,lotacao
+		,restricao
+		,parentId
+		,tabelaEnumValue
+		,emprId
+		,processId
+		,create_date
+		,create_user
+		,modify_date
+		,modify_user
+
+	</sql>
+	<sql id="allNFNotaInfoItemProdutoVeiculoValues">
+		#{tipoOperacao.id},
+		#{chassi},
+		#{codigoCor},
+		#{descricaoCor},
+		#{potencia},
+		#{cilindrada},
+		#{pesoLiquido},
+		#{pesoBruto},
+		#{numeroSerie},
+		#{tipoCombustivel.id},
+		#{numeroMotor},
+		#{capacidadeMaximaTracao},
+		#{distanciaEntreEixos},
+		#{anoModeloFabricacao},
+		#{anoFabricacao},
+		#{tipoPintura},
+		#{tipoVeiculo.id},
+		#{especieVeiculo},
+		#{condicaoChassi.id},
+		#{condicao.id},
+		#{codigoMarcaModelo},
+		#{corDENATRAN.id},
+		#{lotacao},
+		#{restricao.id},
+		#{parentId},
+		#{tabelaEnumValue},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+	</sql>
+
+
+	<select id="fetchAllNFNotaInfoItemProdutoVeiculos" resultMap="NFNotaInfoItemProdutoVeiculoResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemProdutoVeiculoColumns" />
+		FROM nfnotainfoitemprodutoveiculo ORDER BY id ASC
+	</select>
+
+	<select id="fetchNFNotaInfoItemProdutoVeiculoById"
+		parameterType="Integer" resultMap="NFNotaInfoItemProdutoVeiculoResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemProdutoVeiculoColumns" />
+		FROM nfnotainfoitemprodutoveiculo WHERE id = #{fetchid}
+	</select>
+
+	<select id="fetchAllNFNotaInfoItemProdutoVeiculosRequest"
+		parameterType="PagedInquiryRequest" resultMap="NFNotaInfoItemProdutoVeiculoResult">
+
+		SELECT id,
+		<include refid="allNFNotaInfoItemProdutoVeiculoColumns" />
+		FROM nfnotainfoitemprodutoveiculo where 0 = 0
+		<if test="emprId != null"> and emprId = emprId</if>
+		ORDER BY id ASC
+		OFFSET ( #{startPage} * #{pageSize} )
+		LIMIT #{pageSize}
+	</select>
+
+	<select id="fetchNFNotaInfoItemProdutoVeiculoRowCount"
+		resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM nfnotainfoitemprodutoveiculo
+		WHERE id IS NOT NULL
+		<if test="emprId != null"> and emprId = emprId</if>
+
+	</select>
+
+	<insert id="insertNFNotaInfoItemProdutoVeiculo" parameterType="NFNotaInfoItemProdutoVeiculo"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO nfnotainfoitemprodutoveiculo (
+		<if test="id != null">
+			<if test="id > 0">id,</if>
+		</if>
+		<include refid="allNFNotaInfoItemProdutoVeiculoColumns" />
+		)
+		VALUES (
+		<if test="id != null">
+			<if test="id > 0">#{id},</if>
+		</if>
+		<include refid="allNFNotaInfoItemProdutoVeiculoValues" />
+		)
+	</insert>
+
+	<update id="updateNFNotaInfoItemProdutoVeiculo" parameterType="NFNotaInfoItemProdutoVeiculo">
+		UPDATE nfnotainfoitemprodutoveiculo SET
+		<if test="tipoOperacao!= null">tipoOperacao = #{tipoOperacao.id},</if>
+		<if test="chassi!= null">chassi = #{chassi},</if>
+		<if test="codigoCor!= null">codigoCor = #{codigoCor},</if>
+		<if test="descricaoCor!= null">descricaoCor = #{descricaoCor},</if>
+		<if test="potencia!= null">potencia = #{potencia},</if>
+		<if test="cilindrada!= null">cilindrada = #{cilindrada},</if>
+		<if test="pesoLiquido!= null">pesoLiquido = #{pesoLiquido},</if>
+		<if test="pesoBruto!= null">pesoBruto = #{pesoBruto},</if>
+		<if test="numeroSerie!= null">numeroSerie = #{numeroSerie},</if>
+		<if test="tipoCombustivel!= null">tipoCombustivel = #{tipoCombustivel.id},</if>
+		<if test="numeroMotor!= null">numeroMotor = #{numeroMotor},</if>
+		<if test="capacidadeMaximaTracao!= null">capacidadeMaximaTracao = #{capacidadeMaximaTracao},</if>
+		<if test="distanciaEntreEixos!= null">distanciaEntreEixos = #{distanciaEntreEixos},</if>
+		<if test="anoModeloFabricacao!= null">anoModeloFabricacao = #{anoModeloFabricacao},</if>
+		<if test="anoFabricacao!= null">anoFabricacao = #{anoFabricacao},</if>
+		<if test="tipoPintura!= null">tipoPintura = #{tipoPintura},</if>
+		<if test="tipoVeiculo!= null">tipoVeiculo = #{tipoVeiculo.id},</if>
+		<if test="especieVeiculo!= null">especieVeiculo = #{especieVeiculo},</if>
+		<if test="condicaoChassi!= null">condicaoChassi = #{condicaoChassi.id},</if>
+		<if test="condicao!= null">condicao = #{condicao.id},</if>
+		<if test="codigoMarcaModelo!= null">codigoMarcaModelo = #{codigoMarcaModelo},</if>
+		<if test="corDENATRAN!= null">corDENATRAN = #{corDENATRAN.id},</if>
+		<if test="lotacao!= null">lotacao = #{lotacao},</if>
+		<if test="restricao!= null">restricao = #{restricao.id},</if>
+		<if test="parentId!= null"> parentId=#{parentId},</if>
+		<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+		<if test="emprId!= null"> emprId=#{emprId},</if>
+		<if test="processId!= null"> processId=#{processId},</if>
+		<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+		<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="deleteNFNotaInfoItemProdutoVeiculoById"
+		parameterType="NFNotaInfoItemProdutoVeiculo">
+		DELETE FROM nfnotainfoitemprodutoveiculo WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteAllNFNotaInfoItemProdutoVeiculos">
+		DELETE FROM nfnotainfoitemprodutoveiculo
+	</delete>
+</mapper>
+
+

@@ -49,7 +49,59 @@
 <typeAlias alias="NFNotaInfoCanaDeducao" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoCanaDeducao" />
 <typeAlias alias="NFNotaInfoSuplementar" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoSuplementar" />
 
+<!-- NFE ITENS -->
 
+<typeAlias alias="NFNotaInfoItem" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItem" />
+<typeAlias alias="NFNotaInfoItemProduto" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemProduto" />
+<typeAlias alias="NFNotaInfoItemProdutoDeclaracaoImportacao" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemProdutoDeclaracaoImportacao" />
+<typeAlias alias="NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao" />
+<typeAlias alias="NFNotaInfoItemDetalheExportacao" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemDetalheExportacao" />
+<typeAlias alias="NFNotaInfoItemExportacaoIndireta" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemExportacaoIndireta" />
+<typeAlias alias="NFNotaInfoItemProdutoVeiculo" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemProdutoVeiculo" />
+<typeAlias alias="NFNotaInfoItemProdutoMedicamento" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemProdutoMedicamento" />
+<typeAlias alias="NFNotaInfoItemProdutoArmamento" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemProdutoArmamento" />
+<typeAlias alias="NFNotaInfoItemProdutoCombustivel" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemProdutoCombustivel" />
+<typeAlias alias="NFNotaInfoItemProdutoCombustivelCIDE" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemProdutoCombustivelCIDE" />
+<typeAlias alias="NFImpostoDevolvido" type="com.qat.samples.sysmgmt.nfeItens.model.NFImpostoDevolvido" />
+<typeAlias alias="NFInformacaoImpostoDevolvido" type="com.qat.samples.sysmgmt.nfeItens.model.NFInformacaoImpostoDevolvido" />
+<typeAlias alias="NFNotaInfoItemImposto" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImposto" />
+<typeAlias alias="NFNotaInfoItemImpostoICMS" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoICMS" />
+<typeAlias alias="NFNotaInfoItemImpostoICMS00" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoICMS00" />
+<typeAlias alias="NFNotaInfoItemImpostoICMS10" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoICMS10" />
+<typeAlias alias="NFNotaInfoItemImpostoICMS20" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoICMS20" />
+<typeAlias alias="NFNotaInfoItemImpostoICMS30" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoICMS30" />
+<typeAlias alias="NFNotaInfoItemImpostoICMS40" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoICMS40" />
+<typeAlias alias="NFNotaInfoItemImpostoICMS51" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoICMS51" />
+<typeAlias alias="NFNotaInfoItemImpostoICMS60" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoICMS60" />
+<typeAlias alias="NFNotaInfoItemImpostoICMS70" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoICMS70" />
+<typeAlias alias="NFNotaInfoItemImpostoICMS90" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoICMS90" />
+<typeAlias alias="NFNotaInfoItemImpostoICMSPartilhado" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoICMSPartilhado" />
+<typeAlias alias="NFNotaInfoItemImpostoICMSST" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoICMSST" />
+<typeAlias alias="NFNotaInfoItemImpostoICMSSN101" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoICMSSN101" />
+<typeAlias alias="NFNotaInfoItemImpostoICMSSN102" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoICMSSN102" />
+<typeAlias alias="NFNotaInfoItemImpostoICMSSN201" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoICMSSN201" />
+<typeAlias alias="NFNotaInfoItemImpostoICMSSN202" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoICMSSN202" />
+<typeAlias alias="NFNotaInfoItemImpostoICMSSN500" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoICMSSN500" />
+<typeAlias alias="NFNotaInfoItemImpostoICMSSN900" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoICMSSN900" />
+<typeAlias alias="NFNotaInfoItemImpostoIPI" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoIPI" />
+<typeAlias alias="NFNotaInfoItemImpostoIPITributado" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoIPITributado" />
+<typeAlias alias="NFNotaInfoItemImpostoIPINaoTributado" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoIPINaoTributado" />
+<typeAlias alias="NFNotaInfoItemImpostoImportacao" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoImportacao" />
+<typeAlias alias="NFNotaInfoItemImpostoISSQN" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoISSQN" />
+<typeAlias alias="NFNotaInfoItemImpostoPIS" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoPIS" />
+<typeAlias alias="NFNotaInfoItemImpostoPISAliquota" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoPISAliquota" />
+<typeAlias alias="NFNotaInfoItemImpostoPISQuantidade" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoPISQuantidade" />
+<typeAlias alias="NFNotaInfoItemImpostoPISNaoTributado" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoPISNaoTributado" />
+<typeAlias alias="NFNotaInfoItemImpostoPISOutrasOperacoes" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoPISOutrasOperacoes" />
+<typeAlias alias="NFNotaInfoItemImpostoPISST" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoPISST" />
+<typeAlias alias="NFNotaInfoItemImpostoCOFINS" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoCOFINS" />
+<typeAlias alias="NFNotaInfoItemImpostoCOFINSAliquota" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoCOFINSAliquota" />
+<typeAlias alias="NFNotaInfoItemImpostoCOFINSQuantidade" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoCOFINSQuantidade" />
+<typeAlias alias="NFNotaInfoItemImpostoCOFINSNaoTributavel" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoCOFINSNaoTributavel" />
+<typeAlias alias="NFNotaInfoItemImpostoCOFINSOutrasOperacoes" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoCOFINSOutrasOperacoes" />
+<typeAlias alias="NFNotaInfoItemImpostoCOFINSST" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoCOFINSST" />
+<typeAlias alias="NFNotaInfoItemImpostoICMSUFDestino" type="com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoICMSUFDestino" />
+<typeAlias alias="NFImpostoDevolvido" type="com.qat.samples.sysmgmt.nfeItens.model.NFImpostoDevolvido" />
     	<typeAlias alias="PlanoByEmpresa" type="com.qat.samples.sysmgmt.site.model.PlanoByEmpresa" />
 
     	<typeAlias alias="Ajuda" type="com.qat.samples.sysmgmt.entidade.model.Ajuda" />
@@ -591,6 +643,55 @@
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotainfoveiculo.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfpessoaautorizadadownloadnfe.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/icmsopinter.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItem.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemProduto.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemProdutoDeclaracaoImportacao.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemProdutoDeclaracaoImportacaoAdicao.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemDetalheExportacao.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemExportacaoIndireta.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemProdutoVeiculo.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemProdutoMedicamento.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemProdutoArmamento.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemProdutoCombustivel.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemProdutoCombustivelCIDE.xml" />
+<!--<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfinformacaoImpostoDevolvido.xml" /> -->
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImposto.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMS.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMS00.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMS10.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMS20.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMS30.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMS40.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMS51.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMS60.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMS70.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMS90.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMSPartilhado.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMSST.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMSSN101.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMSSN102.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMSSN201.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMSSN202.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMSSN500.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMSSN900.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoIPI.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoIPITributado.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoIPINaoTributado.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoImportacao.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoISSQN.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoPIS.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoPISAliquota.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoPISQuantidade.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoPISNaoTributado.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoPISOutrasOperacoes.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoPISST.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoCOFINS.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoCOFINSAliquota.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoCOFINSQuantidade.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoCOFINSNaoTributavel.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoCOFINSOutrasOperacoes.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoCOFINSST.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMSUFDestino.xml" />
     </mappers>
 
 </configuration>

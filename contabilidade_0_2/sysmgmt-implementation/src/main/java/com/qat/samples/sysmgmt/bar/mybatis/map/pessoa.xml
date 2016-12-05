@@ -38,6 +38,7 @@
 	<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByPessoa"/>
 	<collection property="emails" column="id" select="EmailMap.fetchEmailByPessoa"/>
 	<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByPessoa"/>
+	<collection property="tipoContribuinte" column="tipoContribuinte" select="DoisValorMap.fetchDoisValorById"/>
 <!-- <collection property="bancos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
 <collection property="formaPagamentoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
 <collection property="condPagList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
@@ -58,6 +59,7 @@ nome
 ,pessoaTypeEnum
 ,sexo
 ,regime
+,tipoContribuinte
 ,emprId
 ,create_date
 ,create_user
@@ -78,6 +80,7 @@ nome
 #{pessoaTypeEnumValue},
 #{sexo},
 #{regime.id},
+#{tipoContribuinte.id},
 #{emprId},
 		#{createDateUTC},
 		#{createUser},
@@ -106,6 +109,7 @@ nome
 <if test="pessoaTypeEnumValue!= null">pessoaTypeEnum = #{pessoaTypeEnumValue},</if>
 <if test="sexo!= null">sexo = #{sexo},</if>
 <if test="regime!= null">regime = #{regime.id},</if>
+<if test="tipoContribuinte!= null">tipoContribuinte = #{tipoContribuinte.id},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

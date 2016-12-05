@@ -8,6 +8,7 @@ import com.qat.samples.sysmgmt.condpag.model.FormaPgPessoa;
 import com.qat.samples.sysmgmt.contato.model.Contato;
 import com.qat.samples.sysmgmt.fiscal.model.Regime;
 import com.qat.samples.sysmgmt.util.model.Documento;
+import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
@@ -40,6 +41,8 @@ public class Pessoa extends ModelCosmeDamiao
 	private Long datanasc;
 
 	private String foto;
+	
+	private DoisValores tipoContribuinte;
 
 	/** The type of an account. */
 	private PessoaTypeEnum pessoaTypeEnum;
@@ -415,6 +418,14 @@ public class Pessoa extends ModelCosmeDamiao
 		this.regime = regime;
 	}
 
+	public DoisValores getTipoContribuinte() {
+		return tipoContribuinte;
+	}
+
+	public void setTipoContribuinte(DoisValores tipoContribuinte) {
+		this.tipoContribuinte = tipoContribuinte;
+	}
+
 	@Override
 	public String toString() {
 		return "Pessoa [getPessoaTypeEnumValue()=" + getPessoaTypeEnumValue() + ", getId()=" + getId() + ", getNome()="
@@ -426,7 +437,9 @@ public class Pessoa extends ModelCosmeDamiao
 				+ getEmails() + ", getTelefones()=" + getTelefones() + ", getBancos()=" + getBancos()
 				+ ", getFormaPagamentoList()=" + getFormaPagamentoList() + ", getCondPagList()=" + getCondPagList()
 				+ ", getTipoPessoa()=" + getTipoPessoa() + ", getNomeFantasia()=" + getNomeFantasia() + ", getRegime()="
-				+ getRegime() + ", toString()=" + super.toString() + "]";
+				+ getRegime() + ", getTipoContribuinte()=" + getTipoContribuinte() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
+	
 }

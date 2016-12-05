@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 04/12/2016 13:15 : 3 -->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NFNotaInfoItemProdutoCombustivelMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+
+	<!-- Result maps describe the mapping between the columns returned from 
+		a query, and the class properties. A result map isnt necessary if the columns 
+		(or aliases) match to the properties exactly. -->
+	<resultMap id="NFNotaInfoItemProdutoCombustivelResult" type="NFNotaInfoItemProdutoCombustivel">
+		<result property="id" column="id" />
+		<result property="codigoProdutoANP" column="codigoProdutoANP" />
+		<result property="percentualGasNatural" column="percentualGasNatural" />
+		<result property="codigoAutorizacaoCOFIF" column="codigoAutorizacaoCOFIF" />
+		<result property="quantidade" column="quantidade" />
+		<result property="uf" column="uf" />
+
+		<result property="parentId" column="parentId" />
+		<result property="tabelaEnumValue" column="tabelaEnumValue" />
+		<result property="emprId" column="emprId" />
+		<result property="processId" column="processId" />
+		<result property="createUser" column="create_user" />
+		<result property="createDateUTC" column="create_date" />
+		<result property="modifyUser" column="modify_user" />
+		<result property="modifyDateUTC" column="modify_date" />
+		<collection property="cide" column="cide"
+			select="RegimeMap.fetchRegimeById" />
+	</resultMap>
+
+	<sql id="allNFNotaInfoItemProdutoCombustivelColumns">
+		 codigoProdutoANP
+		,percentualGasNatural
+		,codigoAutorizacaoCOFIF
+		,quantidade
+		,uf
+		,cide
+		,parentId
+		,tabelaEnumValue
+		,emprId
+		,processId
+		,create_date
+		,create_user
+		,modify_date
+		,modify_user
+
+	</sql>
+	<sql id="allNFNotaInfoItemProdutoCombustivelValues">
+		#{codigoProdutoANP},
+		#{percentualGasNatural},
+		#{codigoAutorizacaoCOFIF},
+		#{quantidade},
+		#{uf},
+		#{cide.id},
+		#{parentId},
+		#{tabelaEnumValue},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+	</sql>
+
+
+	<select id="fetchAllNFNotaInfoItemProdutoCombustivels"
+		resultMap="NFNotaInfoItemProdutoCombustivelResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemProdutoCombustivelColumns" />
+		FROM nfnotainfoitemprodutocombustivel ORDER BY id ASC
+	</select>
+
+	<select id="fetchNFNotaInfoItemProdutoCombustivelById"
+		parameterType="Integer" resultMap="NFNotaInfoItemProdutoCombustivelResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemProdutoCombustivelColumns" />
+		FROM nfnotainfoitemprodutocombustivel WHERE id = #{fetchid}
+	</select>
+
+	<select id="fetchAllNFNotaInfoItemProdutoCombustivelsRequest"
+		parameterType="PagedInquiryRequest" resultMap="NFNotaInfoItemProdutoCombustivelResult">
+
+		SELECT id,
+		<include refid="allNFNotaInfoItemProdutoCombustivelColumns" />
+		FROM nfnotainfoitemprodutocombustivel where 0 = 0
+		<if test="emprId != null"> and emprId = emprId</if>
+		ORDER BY id ASC
+		OFFSET ( #{startPage} * #{pageSize} )
+		LIMIT #{pageSize}
+	</select>
+
+	<select id="fetchNFNotaInfoItemProdutoCombustivelRowCount"
+		resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM nfnotainfoitemprodutocombustivel
+		WHERE id IS NOT NULL
+		<if test="emprId != null"> and emprId = emprId</if>
+
+	</select>
+
+	<insert id="insertNFNotaInfoItemProdutoCombustivel"
+		parameterType="NFNotaInfoItemProdutoCombustivel" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO nfnotainfoitemprodutocombustivel (
+		<if test="id != null">
+			<if test="id > 0">id,</if>
+		</if>
+		<include refid="allNFNotaInfoItemProdutoCombustivelColumns" />
+		)
+		VALUES (
+		<if test="id != null">
+			<if test="id > 0">#{id},</if>
+		</if>
+		<include refid="allNFNotaInfoItemProdutoCombustivelValues" />
+		)
+	</insert>
+
+	<update id="updateNFNotaInfoItemProdutoCombustivel"
+		parameterType="NFNotaInfoItemProdutoCombustivel">
+		UPDATE nfnotainfoitemprodutocombustivel SET
+		<if test="codigoProdutoANP!= null">codigoProdutoANP = #{codigoProdutoANP},</if>
+		<if test="percentualGasNatural!= null">percentualGasNatural = #{percentualGasNatural},</if>
+		<if test="codigoAutorizacaoCOFIF!= null">codigoAutorizacaoCOFIF = #{codigoAutorizacaoCOFIF},</if>
+		<if test="quantidade!= null">quantidade = #{quantidade},</if>
+		<if test="uf!= null">uf = #{uf},</if>
+		<if test="cide!= null">cide = #{cide.id},</if>
+		<if test="parentId!= null"> parentId=#{parentId},</if>
+		<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+		<if test="emprId!= null"> emprId=#{emprId},</if>
+		<if test="processId!= null"> processId=#{processId},</if>
+		<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+		<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="deleteNFNotaInfoItemProdutoCombustivelById"
+		parameterType="NFNotaInfoItemProdutoCombustivel">
+		DELETE FROM nfnotainfoitemprodutocombustivel WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteAllNFNotaInfoItemProdutoCombustivels">
+		DELETE FROM nfnotainfoitemprodutocombustivel
+	</delete>
+</mapper>
+
+

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 04/12/2016 13:15 : 3 -->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NFNotaInfoItemImpostoICMSSTMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+
+	<!-- Result maps describe the mapping between the columns returned from 
+		a query, and the class properties. A result map isnt necessary if the columns 
+		(or aliases) match to the properties exactly. -->
+	<resultMap id="NFNotaInfoItemImpostoICMSSTResult" type="NFNotaInfoItemImpostoICMSST">
+		<result property="id" column="id" />
+
+		<result property="valorBCICMSSTRetidoUFRemetente" column="valorBCICMSSTRetidoUFRemetente" />
+		<result property="valorICMSSTRetidoUFRemetente" column="valorICMSSTRetidoUFRemetente" />
+		<result property="valorBCICMSSTUFDestino" column="valorBCICMSSTUFDestino" />
+		<result property="valorICMSSTUFDestino" column="valorICMSSTUFDestino" />
+		<result property="parentId" column="parentId" />
+		<result property="tabelaEnumValue" column="tabelaEnumValue" />
+		<result property="emprId" column="emprId" />
+		<result property="processId" column="processId" />
+		<result property="createUser" column="create_user" />
+		<result property="createDateUTC" column="create_date" />
+		<result property="modifyUser" column="modify_user" />
+		<result property="modifyDateUTC" column="modify_date" />
+		<collection property="origem" column="origem"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="situacaoTributaria" column="situacaoTributaria"
+			select="RegimeMap.fetchRegimeById" />
+	</resultMap>
+
+	<sql id="allNFNotaInfoItemImpostoICMSSTColumns">
+		origem
+		,situacaoTributaria
+		,valorBCICMSSTRetidoUFRemetente
+		,valorICMSSTRetidoUFRemetente
+		,valorBCICMSSTUFDestino
+		,valorICMSSTUFDestino
+		,parentId
+		,tabelaEnumValue
+		,emprId
+		,processId
+		,create_date
+		,create_user
+		,modify_date
+		,modify_user
+
+	</sql>
+	<sql id="allNFNotaInfoItemImpostoICMSSTValues">
+		#{origem.id},
+		#{situacaoTributaria.id},
+		#{valorBCICMSSTRetidoUFRemetente},
+		#{valorICMSSTRetidoUFRemetente},
+		#{valorBCICMSSTUFDestino},
+		#{valorICMSSTUFDestino},
+		#{parentId},
+		#{tabelaEnumValue},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+	</sql>
+
+
+	<select id="fetchAllNFNotaInfoItemImpostoICMSSTs" resultMap="NFNotaInfoItemImpostoICMSSTResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemImpostoICMSSTColumns" />
+		FROM nfnotainfoitemimpostoicmsst ORDER BY id ASC
+	</select>
+
+	<select id="fetchNFNotaInfoItemImpostoICMSSTById" parameterType="Integer"
+		resultMap="NFNotaInfoItemImpostoICMSSTResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemImpostoICMSSTColumns" />
+		FROM nfnotainfoitemimpostoicmsst WHERE id = #{fetchid}
+	</select>
+
+	<select id="fetchAllNFNotaInfoItemImpostoICMSSTsRequest"
+		parameterType="PagedInquiryRequest" resultMap="NFNotaInfoItemImpostoICMSSTResult">
+
+		SELECT id,
+		<include refid="allNFNotaInfoItemImpostoICMSSTColumns" />
+		FROM nfnotainfoitemimpostoicmsst where 0 = 0
+		<if test="emprId != null"> and emprId = emprId</if>
+		ORDER BY id ASC
+		OFFSET ( #{startPage} * #{pageSize} )
+		LIMIT #{pageSize}
+	</select>
+
+	<select id="fetchNFNotaInfoItemImpostoICMSSTRowCount"
+		resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM nfnotainfoitemimpostoicmsst WHERE
+		id IS NOT NULL
+		<if test="emprId != null"> and emprId = emprId</if>
+
+	</select>
+
+	<insert id="insertNFNotaInfoItemImpostoICMSST" parameterType="NFNotaInfoItemImpostoICMSST"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO nfnotainfoitemimpostoicmsst (
+		<if test="id != null">
+			<if test="id > 0">id,</if>
+		</if>
+		<include refid="allNFNotaInfoItemImpostoICMSSTColumns" />
+		)
+		VALUES (
+		<if test="id != null">
+			<if test="id > 0">#{id},</if>
+		</if>
+		<include refid="allNFNotaInfoItemImpostoICMSSTValues" />
+		)
+	</insert>
+
+	<update id="updateNFNotaInfoItemImpostoICMSST" parameterType="NFNotaInfoItemImpostoICMSST">
+		UPDATE nfnotainfoitemimpostoicmsst SET
+		<if test="origem!= null">origem = #{origem.id},</if>
+		<if test="situacaoTributaria!= null">situacaoTributaria = #{situacaoTributaria.id},</if>
+		<if test="valorBCICMSSTRetidoUFRemetente!= null">valorBCICMSSTRetidoUFRemetente =
+			#{valorBCICMSSTRetidoUFRemetente},</if>
+		<if test="valorICMSSTRetidoUFRemetente!= null">valorICMSSTRetidoUFRemetente =
+			#{valorICMSSTRetidoUFRemetente},</if>
+		<if test="valorBCICMSSTUFDestino!= null">valorBCICMSSTUFDestino = #{valorBCICMSSTUFDestino},</if>
+		<if test="valorICMSSTUFDestino!= null">valorICMSSTUFDestino = #{valorICMSSTUFDestino},</if>
+		<if test="parentId!= null"> parentId=#{parentId},</if>
+		<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+		<if test="emprId!= null"> emprId=#{emprId},</if>
+		<if test="processId!= null"> processId=#{processId},</if>
+		<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+		<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="deleteNFNotaInfoItemImpostoICMSSTById"
+		parameterType="NFNotaInfoItemImpostoICMSST">
+		DELETE FROM nfnotainfoitemimpostoicmsst WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteAllNFNotaInfoItemImpostoICMSSTs">
+		DELETE FROM nfnotainfoitemimpostoicmsst
+	</delete>
+</mapper>
+
+

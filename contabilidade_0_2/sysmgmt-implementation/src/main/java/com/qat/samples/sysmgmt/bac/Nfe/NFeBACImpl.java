@@ -90,7 +90,7 @@ public class NFeBACImpl implements INFeBAC
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.ICountyBAC#insertNFNota(com.qat.samples.sysmgmt.model.request.NFNotaMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.ICountyBAC#insertNFNota(com.qat.samples.sysmgmt.model.request.NFNotaItensMaintenanceRequest
  * )
  */
 @Override

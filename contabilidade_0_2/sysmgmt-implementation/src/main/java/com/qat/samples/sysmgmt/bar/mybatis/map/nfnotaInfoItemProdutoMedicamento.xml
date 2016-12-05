@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 04/12/2016 13:15 : 3 -->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NFNotaInfoItemProdutoMedicamentoMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+
+	<!-- Result maps describe the mapping between the columns returned from 
+		a query, and the class properties. A result map isnt necessary if the columns 
+		(or aliases) match to the properties exactly. -->
+	<resultMap id="NFNotaInfoItemProdutoMedicamentoResult" type="NFNotaInfoItemProdutoMedicamento">
+		<result property="id" column="id" />
+		<result property="lote" column="lote" />
+		<result property="quantidade" column="quantidade" />
+		<result property="dataFabricacao" column="dataFabricacao" />
+		<result property="dataValidade" column="dataValidade" />
+		<result property="precoMaximoConsumidor" column="precoMaximoConsumidor" />
+		<result property="parentId" column="parentId" />
+		<result property="tabelaEnumValue" column="tabelaEnumValue" />
+		<result property="emprId" column="emprId" />
+		<result property="processId" column="processId" />
+		<result property="createUser" column="create_user" />
+		<result property="createDateUTC" column="create_date" />
+		<result property="modifyUser" column="modify_user" />
+		<result property="modifyDateUTC" column="modify_date" />
+	</resultMap>
+
+	<sql id="allNFNotaInfoItemProdutoMedicamentoColumns">
+		lote
+		,quantidade
+		,dataFabricacao
+		,dataValidade
+		,precoMaximoConsumidor
+		,parentId
+		,tabelaEnumValue
+		,emprId
+		,processId
+		,create_date
+		,create_user
+		,modify_date
+		,modify_user
+
+	</sql>
+	<sql id="allNFNotaInfoItemProdutoMedicamentoValues">
+		#{lote},
+		#{quantidade},
+		#{dataFabricacao.id},
+		#{dataValidade.id},
+		#{precoMaximoConsumidor},
+		#{parentId},
+		#{tabelaEnumValue},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+	</sql>
+
+
+	<select id="fetchAllNFNotaInfoItemProdutoMedicamentos"
+		resultMap="NFNotaInfoItemProdutoMedicamentoResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemProdutoMedicamentoColumns" />
+		FROM nfnotainfoitemprodutomedicamento ORDER BY id ASC
+	</select>
+
+	<select id="fetchNFNotaInfoItemProdutoMedicamentoById"
+		parameterType="Integer" resultMap="NFNotaInfoItemProdutoMedicamentoResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemProdutoMedicamentoColumns" />
+		FROM nfnotainfoitemprodutomedicamento WHERE id = #{fetchid}
+	</select>
+
+	<select id="fetchAllNFNotaInfoItemProdutoMedicamentosRequest"
+		parameterType="PagedInquiryRequest" resultMap="NFNotaInfoItemProdutoMedicamentoResult">
+
+		SELECT id,
+		<include refid="allNFNotaInfoItemProdutoMedicamentoColumns" />
+		FROM nfnotainfoitemprodutomedicamento where 0 = 0
+		<if test="emprId != null"> and emprId = emprId</if>
+		ORDER BY id ASC
+		OFFSET ( #{startPage} * #{pageSize} )
+		LIMIT #{pageSize}
+	</select>
+
+	<select id="fetchNFNotaInfoItemProdutoMedicamentoRowCount"
+		resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM nfnotainfoitemprodutomedicamento
+		WHERE id IS NOT NULL
+		<if test="emprId != null"> and emprId = emprId</if>
+
+	</select>
+
+	<insert id="insertNFNotaInfoItemProdutoMedicamento"
+		parameterType="NFNotaInfoItemProdutoMedicamento" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO nfnotainfoitemprodutomedicamento (
+		<if test="id != null">
+			<if test="id > 0">id,</if>
+		</if>
+		<include refid="allNFNotaInfoItemProdutoMedicamentoColumns" />
+		)
+		VALUES (
+		<if test="id != null">
+			<if test="id > 0">#{id},</if>
+		</if>
+		<include refid="allNFNotaInfoItemProdutoMedicamentoValues" />
+		)
+	</insert>
+
+	<update id="updateNFNotaInfoItemProdutoMedicamento"
+		parameterType="NFNotaInfoItemProdutoMedicamento">
+		UPDATE nfnotainfoitemprodutomedicamento SET
+		<if test="lote!= null">lote = #{lote},</if>
+		<if test="quantidade!= null">quantidade = #{quantidade},</if>
+		<if test="dataFabricacao!= null">dataFabricacao = #{dataFabricacao.id},</if>
+		<if test="dataValidade!= null">dataValidade = #{dataValidade.id},</if>
+		<if test="precoMaximoConsumidor!= null">precoMaximoConsumidor = #{precoMaximoConsumidor},</if>
+		<if test="parentId!= null"> parentId=#{parentId},</if>
+		<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+		<if test="emprId!= null"> emprId=#{emprId},</if>
+		<if test="processId!= null"> processId=#{processId},</if>
+		<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+		<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="deleteNFNotaInfoItemProdutoMedicamentoById"
+		parameterType="NFNotaInfoItemProdutoMedicamento">
+		DELETE FROM nfnotainfoitemprodutomedicamento WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteAllNFNotaInfoItemProdutoMedicamentos">
+		DELETE FROM nfnotainfoitemprodutomedicamento
+	</delete>
+</mapper>
+
+

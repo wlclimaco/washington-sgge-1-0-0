@@ -1,0 +1,9 @@
+
+INSERT INTO NFNotaInfoItemImpostoICMS30( id, origem, situacaoTributaria, modalidadeBCICMSST, percentualMargemValorAdicionadoICMSST, percentualReducaoBCICMSST, valorBCICMSST, percentualAliquotaImpostoICMSST, valorImpostoICMSST, valorICMSDesoneracao, desoneracao,parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values
+( 1000, 1000, 1000, 1000, 'percentualMargemValorAdicionadoICMSST_0', 'percentualReducaoBCICMSST_0', 'valorBCICMSST_0', 'percentualAliquotaImpostoICMSST_0', 'valorImpostoICMSST_0', 'valorICMSDesoneracao_0', 1000,10000,1,1,1,'system',1480868161261,'rod',1480868161261);
+
+INSERT INTO NFNotaInfoItemImpostoICMS30( id, origem, situacaoTributaria, modalidadeBCICMSST, percentualMargemValorAdicionadoICMSST, percentualReducaoBCICMSST, valorBCICMSST, percentualAliquotaImpostoICMSST, valorImpostoICMSST, valorICMSDesoneracao, desoneracao,parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values
+( 1001, 1001, 1001, 1001, 'percentualMargemValorAdicionadoICMSST_1', 'percentualReducaoBCICMSST_1', 'valorBCICMSST_1', 'percentualAliquotaImpostoICMSST_1', 'valorImpostoICMSST_1', 'valorICMSDesoneracao_1', 1001,10000,1,1,1,'system',1480868161261,'rod',1480868161261);
+
+INSERT INTO NFNotaInfoItemImpostoICMS30( id, origem, situacaoTributaria, modalidadeBCICMSST, percentualMargemValorAdicionadoICMSST, percentualReducaoBCICMSST, valorBCICMSST, percentualAliquotaImpostoICMSST, valorImpostoICMSST, valorICMSDesoneracao, desoneracao,parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values
+( 1002, 1002, 1002, 1002, 'percentualMargemValorAdicionadoICMSST_2', 'percentualReducaoBCICMSST_2', 'valorBCICMSST_2', 'percentualAliquotaImpostoICMSST_2', 'valorImpostoICMSST_2', 'valorICMSDesoneracao_2', 1002,10000,1,1,1,'system',1480868161261,'rod',1480868161261);

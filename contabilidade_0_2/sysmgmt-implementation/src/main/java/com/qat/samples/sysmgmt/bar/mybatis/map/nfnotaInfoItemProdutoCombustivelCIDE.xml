@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 04/12/2016 13:15 : 3 -->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NFNotaInfoItemProdutoCombustivelCIDEMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+
+	<!-- Result maps describe the mapping between the columns returned from 
+		a query, and the class properties. A result map isnt necessary if the columns 
+		(or aliases) match to the properties exactly. -->
+	<resultMap id="NFNotaInfoItemProdutoCombustivelCIDEResult"
+		type="NFNotaInfoItemProdutoCombustivelCIDE">
+		<result property="id" column="id" />
+		<result property="quantidadeBCCIDE" column="quantidadeBCCIDE" />
+		<result property="valorAliquota" column="valorAliquota" />
+		<result property="valor" column="valor" />
+		<result property="parentId" column="parentId" />
+		<result property="tabelaEnumValue" column="tabelaEnumValue" />
+		<result property="emprId" column="emprId" />
+		<result property="processId" column="processId" />
+		<result property="createUser" column="create_user" />
+		<result property="createDateUTC" column="create_date" />
+		<result property="modifyUser" column="modify_user" />
+		<result property="modifyDateUTC" column="modify_date" />
+	</resultMap>
+
+	<sql id="allNFNotaInfoItemProdutoCombustivelCIDEColumns">
+		quantidadeBCCIDE
+		,valorAliquota
+		,valor
+		,parentId
+		,tabelaEnumValue
+		,emprId
+		,processId
+		,create_date
+		,create_user
+		,modify_date
+		,modify_user
+
+	</sql>
+	<sql id="allNFNotaInfoItemProdutoCombustivelCIDEValues">
+		#{quantidadeBCCIDE},
+		#{valorAliquota},
+		#{valor},
+		#{parentId},
+		#{tabelaEnumValue},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+	</sql>
+
+
+	<select id="fetchAllNFNotaInfoItemProdutoCombustivelCIDEs"
+		resultMap="NFNotaInfoItemProdutoCombustivelCIDEResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemProdutoCombustivelCIDEColumns" />
+		FROM nfnotainfoitemprodutocombustivelcide ORDER BY id ASC
+	</select>
+
+	<select id="fetchNFNotaInfoItemProdutoCombustivelCIDEById"
+		parameterType="Integer" resultMap="NFNotaInfoItemProdutoCombustivelCIDEResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemProdutoCombustivelCIDEColumns" />
+		FROM nfnotainfoitemprodutocombustivelcide WHERE id = #{fetchid}
+	</select>
+
+	<select id="fetchAllNFNotaInfoItemProdutoCombustivelCIDEsRequest"
+		parameterType="PagedInquiryRequest" resultMap="NFNotaInfoItemProdutoCombustivelCIDEResult">
+
+		SELECT id,
+		<include refid="allNFNotaInfoItemProdutoCombustivelCIDEColumns" />
+		FROM nfnotainfoitemprodutocombustivelcide where 0 = 0
+		<if test="emprId != null"> and emprId = emprId</if>
+		ORDER BY id ASC
+		OFFSET ( #{startPage} * #{pageSize} )
+		LIMIT #{pageSize}
+	</select>
+
+	<select id="fetchNFNotaInfoItemProdutoCombustivelCIDERowCount"
+		resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM
+		nfnotainfoitemprodutocombustivelcide WHERE id IS NOT NULL
+		<if test="emprId != null"> and emprId = emprId</if>
+
+	</select>
+
+	<insert id="insertNFNotaInfoItemProdutoCombustivelCIDE"
+		parameterType="NFNotaInfoItemProdutoCombustivelCIDE" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO nfnotainfoitemprodutocombustivelcide (
+		<if test="id != null">
+			<if test="id > 0">id,</if>
+		</if>
+		<include refid="allNFNotaInfoItemProdutoCombustivelCIDEColumns" />
+		)
+		VALUES (
+		<if test="id != null">
+			<if test="id > 0">#{id},</if>
+		</if>
+		<include refid="allNFNotaInfoItemProdutoCombustivelCIDEValues" />
+		)
+	</insert>
+
+	<update id="updateNFNotaInfoItemProdutoCombustivelCIDE"
+		parameterType="NFNotaInfoItemProdutoCombustivelCIDE">
+		UPDATE nfnotainfoitemprodutocombustivelcide SET
+		<if test="quantidadeBCCIDE!= null">quantidadeBCCIDE = #{quantidadeBCCIDE},</if>
+		<if test="valorAliquota!= null">valorAliquota = #{valorAliquota},</if>
+		<if test="valor!= null">valor = #{valor},</if>
+		<if test="parentId!= null"> parentId=#{parentId},</if>
+		<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+		<if test="emprId!= null"> emprId=#{emprId},</if>
+		<if test="processId!= null"> processId=#{processId},</if>
+		<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+		<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="deleteNFNotaInfoItemProdutoCombustivelCIDEById"
+		parameterType="NFNotaInfoItemProdutoCombustivelCIDE">
+		DELETE FROM nfnotainfoitemprodutocombustivelcide WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteAllNFNotaInfoItemProdutoCombustivelCIDEs">
+		DELETE FROM nfnotainfoitemprodutocombustivelcide
+	</delete>
+</mapper>
+
+

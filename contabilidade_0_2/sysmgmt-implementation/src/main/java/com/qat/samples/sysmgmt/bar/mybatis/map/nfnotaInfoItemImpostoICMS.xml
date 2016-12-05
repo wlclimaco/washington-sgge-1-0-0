@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 04/12/2016 13:15 : 3 -->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NFNotaInfoItemImpostoICMSMap">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+
+	<!-- Result maps describe the mapping between the columns returned from 
+		a query, and the class properties. A result map isnt necessary if the columns 
+		(or aliases) match to the properties exactly. -->
+	<resultMap id="NFNotaInfoItemImpostoICMSResult" type="NFNotaInfoItemImpostoICMS">
+		<result property="id" column="id" />
+
+		<result property="parentId" column="parentId" />
+		<result property="tabelaEnumValue" column="tabelaEnumValue" />
+		<result property="emprId" column="emprId" />
+		<result property="processId" column="processId" />
+		<result property="createUser" column="create_user" />
+		<result property="createDateUTC" column="create_date" />
+		<result property="modifyUser" column="modify_user" />
+		<result property="modifyDateUTC" column="modify_date" />
+		<collection property="icms00" column="icms00"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="icms10" column="icms10"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="icms20" column="icms20"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="icms30" column="icms30"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="icms40" column="icms40"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="icms51" column="icms51"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="icms60" column="icms60"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="icms70" column="icms70"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="icms90" column="icms90"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="icmsPartilhado" column="icmsPartilhado"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="icmsst" column="icmsst"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="icmssn101" column="icmssn101"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="icmssn102" column="icmssn102"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="icmssn201" column="icmssn201"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="icmssn202" column="icmssn202"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="icmssn500" column="icmssn500"
+			select="RegimeMap.fetchRegimeById" />
+		<collection property="icmssn900" column="icmssn900"
+			select="RegimeMap.fetchRegimeById" />
+	</resultMap>
+
+	<sql id="allNFNotaInfoItemImpostoICMSColumns">
+		icms00
+		,icms10
+		,icms20
+		,icms30
+		,icms40
+		,icms51
+		,icms60
+		,icms70
+		,icms90
+		,icmsPartilhado
+		,icmsst
+		,icmssn101
+		,icmssn102
+		,icmssn201
+		,icmssn202
+		,icmssn500
+		,icmssn900
+		,parentId
+		,tabelaEnumValue
+		,emprId
+		,processId
+		,create_date
+		,create_user
+		,modify_date
+		,modify_user
+
+	</sql>
+	<sql id="allNFNotaInfoItemImpostoICMSValues">
+		#{icms00.id},
+		#{icms10.id},
+		#{icms20.id},
+		#{icms30.id},
+		#{icms40.id},
+		#{icms51.id},
+		#{icms60.id},
+		#{icms70.id},
+		#{icms90.id},
+		#{icmsPartilhado.id},
+		#{icmsst.id},
+		#{icmssn101.id},
+		#{icmssn102.id},
+		#{icmssn201.id},
+		#{icmssn202.id},
+		#{icmssn500.id},
+		#{icmssn900.id},
+		#{parentId},
+		#{tabelaEnumValue},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+	</sql>
+
+
+	<select id="fetchAllNFNotaInfoItemImpostoICMSs" resultMap="NFNotaInfoItemImpostoICMSResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemImpostoICMSColumns" />
+		FROM nfnotainfoitemimpostoicms ORDER BY id ASC
+	</select>
+
+	<select id="fetchNFNotaInfoItemImpostoICMSById" parameterType="Integer"
+		resultMap="NFNotaInfoItemImpostoICMSResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemImpostoICMSColumns" />
+		FROM nfnotainfoitemimpostoicms WHERE id = #{fetchid}
+	</select>
+
+	<select id="fetchAllNFNotaInfoItemImpostoICMSsRequest"
+		parameterType="PagedInquiryRequest" resultMap="NFNotaInfoItemImpostoICMSResult">
+
+		SELECT id,
+		<include refid="allNFNotaInfoItemImpostoICMSColumns" />
+		FROM nfnotainfoitemimpostoicms where 0 = 0
+		<if test="emprId != null"> and emprId = emprId</if>
+		ORDER BY id ASC
+		OFFSET ( #{startPage} * #{pageSize} )
+		LIMIT #{pageSize}
+	</select>
+
+	<select id="fetchNFNotaInfoItemImpostoICMSRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM nfnotainfoitemimpostoicms WHERE
+		id IS NOT NULL
+		<if test="emprId != null"> and emprId = emprId</if>
+
+	</select>
+
+	<insert id="insertNFNotaInfoItemImpostoICMS" parameterType="NFNotaInfoItemImpostoICMS"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO nfnotainfoitemimpostoicms (
+		<if test="id != null">
+			<if test="id > 0">id,</if>
+		</if>
+		<include refid="allNFNotaInfoItemImpostoICMSColumns" />
+		)
+		VALUES (
+		<if test="id != null">
+			<if test="id > 0">#{id},</if>
+		</if>
+		<include refid="allNFNotaInfoItemImpostoICMSValues" />
+		)
+	</insert>
+
+	<update id="updateNFNotaInfoItemImpostoICMS" parameterType="NFNotaInfoItemImpostoICMS">
+		UPDATE nfnotainfoitemimpostoicms SET
+		<if test="icms00!= null">icms00 = #{icms00.id},</if>
+		<if test="icms10!= null">icms10 = #{icms10.id},</if>
+		<if test="icms20!= null">icms20 = #{icms20.id},</if>
+		<if test="icms30!= null">icms30 = #{icms30.id},</if>
+		<if test="icms40!= null">icms40 = #{icms40.id},</if>
+		<if test="icms51!= null">icms51 = #{icms51.id},</if>
+		<if test="icms60!= null">icms60 = #{icms60.id},</if>
+		<if test="icms70!= null">icms70 = #{icms70.id},</if>
+		<if test="icms90!= null">icms90 = #{icms90.id},</if>
+		<if test="icmsPartilhado!= null">icmsPartilhado = #{icmsPartilhado.id},</if>
+		<if test="icmsst!= null">icmsst = #{icmsst.id},</if>
+		<if test="icmssn101!= null">icmssn101 = #{icmssn101.id},</if>
+		<if test="icmssn102!= null">icmssn102 = #{icmssn102.id},</if>
+		<if test="icmssn201!= null">icmssn201 = #{icmssn201.id},</if>
+		<if test="icmssn202!= null">icmssn202 = #{icmssn202.id},</if>
+		<if test="icmssn500!= null">icmssn500 = #{icmssn500.id},</if>
+		<if test="icmssn900!= null">icmssn900 = #{icmssn900.id},</if>
+		<if test="parentId!= null"> parentId=#{parentId},</if>
+		<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+		<if test="emprId!= null"> emprId=#{emprId},</if>
+		<if test="processId!= null"> processId=#{processId},</if>
+		<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+		<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="deleteNFNotaInfoItemImpostoICMSById" parameterType="NFNotaInfoItemImpostoICMS">
+		DELETE FROM nfnotainfoitemimpostoicms WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteAllNFNotaInfoItemImpostoICMSs">
+		DELETE FROM nfnotainfoitemimpostoicms
+	</delete>
+</mapper>
+
+
