@@ -52,7 +52,7 @@ public final class NFNotaInfoItemBARD extends SqlSessionDaoSupport
 		{
 			return 0;
 		}
-		
+
 		// For Each Contact...
 		for (NFNotaInfoItem list : lists)
 		{
@@ -61,49 +61,23 @@ public final class NFNotaInfoItemBARD extends SqlSessionDaoSupport
 			list.setTabelaEnum(tabelaEnum);
 			list.setProcessId(processId);
 
-		//	if (ValidationUtil.isNull(nfnotainfoitem.getModelAction()))
-		//	{
-		//		continue;
-		//	}
+			if (ValidationUtil.isNull(list.getModelAction()))
+			{
+				continue;
+			}
 			switch (list.getModelAction())
 			{
 				case INSERT:
 					count = nfnotainfoitemDAC.insertNFNotaInfoItem(list).hasSystemError();
-					if (count == true)
-					{
-						Status status = new Status();
-						status.setStatus(CdStatusTypeEnum.ATIVO);
-						List<Status> statusList = new ArrayList<Status>();
-						statusList.add(status);
-						count =
-								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.NFNOTAINFOITEM, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case UPDATE:
 					count = nfnotainfoitemDAC.updateNFNotaInfoItem(list).hasSystemError();
-					if (count == true)
-					{
-						count =
-								StatusBARD.maintainStatusAssociations(list.getStatusList(), response, list.getId(),
-										null,
-										AcaoEnum.UPDATE, UserId, empId, TabelaEnum.NFNOTAINFOITEM, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case DELETE:
 					count = nfnotainfoitemDAC.deleteNFNotaInfoItemById(list).hasSystemError();
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.DELETADO);
-					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
-					count =
-							StatusBARD.maintainStatusAssociations(statusList, response, list.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.NFNOTAINFOITEM, statusDAC, historicoDAC,
-									processId, historicoId);
 
-					break;
 			}
 		}
 		if(count == true ){
@@ -111,6 +85,6 @@ public final class NFNotaInfoItemBARD extends SqlSessionDaoSupport
 		}else{
 			return 0;
 		}
-		
+
 	}
 }

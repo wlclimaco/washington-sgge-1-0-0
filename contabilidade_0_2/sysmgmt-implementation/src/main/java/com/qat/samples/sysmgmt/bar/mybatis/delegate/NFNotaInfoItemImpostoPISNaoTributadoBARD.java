@@ -3,9 +3,6 @@
 
 package com.qat.samples.sysmgmt.bar.mybatis.delegate;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResponse;
@@ -13,10 +10,8 @@ import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Nfe.INFNotaInfoItemBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
-import com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoICMS;
+import com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoPISNaoTributado;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
-import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
 
@@ -24,7 +19,7 @@ import com.qat.samples.sysmgmt.util.model.TypeEnum;
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
  */
-public final class NFNotaInfoItemImpostoICMSBARD extends SqlSessionDaoSupport
+public final class NFNotaInfoItemImpostoPISNaoTributadoBARD extends SqlSessionDaoSupport
 {
 
 	/** The Constant ZERO. */
@@ -40,39 +35,40 @@ public final class NFNotaInfoItemImpostoICMSBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainNFNotaInfoItemImpostoICMSAssociations(NFNotaInfoItemImpostoICMS nfnotainfoitemimpostoicms,
+	public static Integer maintainNFNotaInfoItemImpostoPISNaoTributadoAssociations(NFNotaInfoItemImpostoPISNaoTributado nfnotainfoitemimpostoicms30,
 			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, INFNotaInfoItemBAR nfnotainfoitemimpostoicmsDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
+			TabelaEnum tabelaEnum, INFNotaInfoItemBAR nfnotainfoitemimpostoicms30DAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
-		if (ValidationUtil.isNull(nfnotainfoitemimpostoicms))
+		if (ValidationUtil.isNull(nfnotainfoitemimpostoicms30))
 		{
 			return 0;
 		}
 		// For Each Contact...
 			// Make sure we set the parent key
-			nfnotainfoitemimpostoicms.setParentId(parentId);
-			nfnotainfoitemimpostoicms.setTabelaEnum(tabelaEnum);
-			nfnotainfoitemimpostoicms.setProcessId(processId);
+			nfnotainfoitemimpostoicms30.setParentId(parentId);
+			nfnotainfoitemimpostoicms30.setTabelaEnum(tabelaEnum);
+			nfnotainfoitemimpostoicms30.setProcessId(processId);
 
-		//	if (ValidationUtil.isNull(nfnotainfoitemimpostoicms.getModelAction()))
+		//	if (ValidationUtil.isNull(nfnotainfoitemimpostoicms30.getModelAction()))
 		//	{
 		//		continue;
 		//	}
-			switch (nfnotainfoitemimpostoicms.getModelAction())
+			switch (nfnotainfoitemimpostoicms30.getModelAction())
 			{
 				case INSERT:
-					count = nfnotainfoitemimpostoicmsDAC.insertNFNotaInfoItemImpostoICMS(nfnotainfoitemimpostoicms).hasSystemError();
+					count = nfnotainfoitemimpostoicms30DAC.insertNFNotaInfoItemImpostoPISNaoTributado(nfnotainfoitemimpostoicms30).hasSystemError();
 
 					break;
 				case UPDATE:
-					count = nfnotainfoitemimpostoicmsDAC.updateNFNotaInfoItemImpostoICMS(nfnotainfoitemimpostoicms).hasSystemError();
+					count = nfnotainfoitemimpostoicms30DAC.updateNFNotaInfoItemImpostoPISNaoTributado(nfnotainfoitemimpostoicms30).hasSystemError();
 
 					break;
 				case DELETE:
-					count = nfnotainfoitemimpostoicmsDAC.deleteNFNotaInfoItemImpostoICMSById(nfnotainfoitemimpostoicms).hasSystemError();
+					count = nfnotainfoitemimpostoicms30DAC.deleteNFNotaInfoItemImpostoPISNaoTributadoById(nfnotainfoitemimpostoicms30).hasSystemError();
+
 
 					break;
 			}

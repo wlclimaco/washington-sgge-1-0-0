@@ -3,7 +3,6 @@
 
 package com.qat.samples.sysmgmt.bar.mybatis.delegate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -15,8 +14,6 @@ import com.qat.samples.sysmgmt.bar.Nfe.INFNotaInfoItemBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemProdutoMedicamento;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
-import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
 
@@ -40,73 +37,50 @@ public final class NFNotaInfoItemProdutoMedicamentoBARD extends SqlSessionDaoSup
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainNFNotaInfoItemProdutoMedicamentoAssociations(NFNotaInfoItemProdutoMedicamento nfnotainfoitemprodutomedicamento,
+	public static Integer maintainNFNotaInfoItemProdutoMedicamentoAssociations(List<NFNotaInfoItemProdutoMedicamento> list,
 			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, INFNotaInfoItemBAR nfnotainfoitemprodutomedicamentoDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
-		if (ValidationUtil.isNull(nfnotainfoitemprodutomedicamento))
+		if (ValidationUtil.isNull(list))
 		{
 			return 0;
 		}
 		// For Each Contact...
+		for (NFNotaInfoItemProdutoMedicamento nfnotainfoitemprodutomedicamento : list)
+		{
 			// Make sure we set the parent key
 			nfnotainfoitemprodutomedicamento.setParentId(parentId);
 			nfnotainfoitemprodutomedicamento.setTabelaEnum(tabelaEnum);
 			nfnotainfoitemprodutomedicamento.setProcessId(processId);
 
-		//	if (ValidationUtil.isNull(nfnotainfoitemprodutomedicamento.getModelAction()))
-		//	{
-		//		continue;
-		//	}
+			if (ValidationUtil.isNull(nfnotainfoitemprodutomedicamento.getModelAction()))
+			{
+				continue;
+			}
 			switch (nfnotainfoitemprodutomedicamento.getModelAction())
 			{
 				case INSERT:
 					count = nfnotainfoitemprodutomedicamentoDAC.insertNFNotaInfoItemProdutoMedicamento(nfnotainfoitemprodutomedicamento).hasSystemError();
-					if (count == true)
-					{
-						Status status = new Status();
-						status.setStatus(CdStatusTypeEnum.ATIVO);
-						List<Status> statusList = new ArrayList<Status>();
-						statusList.add(status);
-						count =
-								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.NFNOTAINFOITEMPRODUTOMEDICAMENTO, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case UPDATE:
 					count = nfnotainfoitemprodutomedicamentoDAC.updateNFNotaInfoItemProdutoMedicamento(nfnotainfoitemprodutomedicamento).hasSystemError();
-					if (count == true)
-					{
-						count =
-								StatusBARD.maintainStatusAssociations(nfnotainfoitemprodutomedicamento.getStatusList(), response, nfnotainfoitemprodutomedicamento.getId(),
-										null,
-										AcaoEnum.UPDATE, UserId, empId, TabelaEnum.NFNOTAINFOITEMPRODUTOMEDICAMENTO, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case DELETE:
 					count = nfnotainfoitemprodutomedicamentoDAC.deleteNFNotaInfoItemProdutoMedicamentoById(nfnotainfoitemprodutomedicamento).hasSystemError();
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.DELETADO);
-					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
-					count =
-							StatusBARD.maintainStatusAssociations(statusList, response, nfnotainfoitemprodutomedicamento.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.NFNOTAINFOITEMPRODUTOMEDICAMENTO, statusDAC, historicoDAC,
-									processId, historicoId);
 
 					break;
 			}
-		
+		}
 		if(count == true ){
 			return 1;
 		}else{
 			return 0;
 		}
-		
+
 	}
 }

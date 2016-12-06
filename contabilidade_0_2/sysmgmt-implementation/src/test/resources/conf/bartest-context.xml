@@ -24,11 +24,12 @@
 	<bean id="emailBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Email.EmailBARImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 	</bean>
-	
+
 	<bean id="nfnotainfoitemBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Nfe.NFNotaInfoItemBARImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 		<property name="statusBAR" ref="statusBARTarget" />
 		<property name="historicoBAR" ref="historicoBARTarget" />
+		<property name="nfnotaInfoItemBAR" ref="nfnotainfoitemBARTarget" />
 	</bean>
 
 	<bean id="nfeBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Nfe.NFeBARImpl">

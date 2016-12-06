@@ -3509,7 +3509,7 @@ public static NFNotaInfo insertNFNotaInfo(Integer id,TabelaEnum tabela,Persisten
 		nfnotainfo.setPessoasautorizadasdownloadnfe(new ArrayList<NFPessoaAutorizadaDownloadNFe>());
 		nfnotainfo.getPessoasautorizadasdownloadnfe().add(insertNFPessoaAutorizadaDownloadNFe(null, tabela, action));
 		nfnotainfo.setItens(new ArrayList<NFNotaInfoItem>());
-		nfnotainfo.getItens().add(Objects.insertNFNotaInfoItem(id, tabela, action));
+		nfnotainfo.getItens().add(Objects.insertNFNotaInfoItem(null, tabela, action));
 		nfnotainfo.setTotal(insertNFNotaInfoTotal(null, tabela, action));
 		nfnotainfo.setTransporte(insertNFNotaInfoTransporte(null, tabela, action));
 		nfnotainfo.setCobranca(insertNFNotaInfoCobranca(null, tabela, action));

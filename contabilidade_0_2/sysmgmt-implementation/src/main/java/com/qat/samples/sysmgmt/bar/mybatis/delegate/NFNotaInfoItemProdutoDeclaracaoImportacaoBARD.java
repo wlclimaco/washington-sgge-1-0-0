@@ -16,6 +16,7 @@ import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemProdutoDeclaracaoImportacao;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
+import com.qat.samples.sysmgmt.util.model.Note;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
@@ -40,73 +41,51 @@ public final class NFNotaInfoItemProdutoDeclaracaoImportacaoBARD extends SqlSess
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainNFNotaInfoItemProdutoDeclaracaoImportacaoAssociations(NFNotaInfoItemProdutoDeclaracaoImportacao nfnotainfoitemprodutodeclaracaoimportacao,
+	public static Integer maintainNFNotaInfoItemProdutoDeclaracaoImportacaoAssociations(List<NFNotaInfoItemProdutoDeclaracaoImportacao> list,
 			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, INFNotaInfoItemBAR nfnotainfoitemprodutodeclaracaoimportacaoDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
-		if (ValidationUtil.isNull(nfnotainfoitemprodutodeclaracaoimportacao))
+		if (ValidationUtil.isNull(list))
 		{
 			return 0;
 		}
 		// For Each Contact...
+		for (NFNotaInfoItemProdutoDeclaracaoImportacao nfnotainfoitemprodutodeclaracaoimportacao : list)
+		{
 			// Make sure we set the parent key
 			nfnotainfoitemprodutodeclaracaoimportacao.setParentId(parentId);
 			nfnotainfoitemprodutodeclaracaoimportacao.setTabelaEnum(tabelaEnum);
 			nfnotainfoitemprodutodeclaracaoimportacao.setProcessId(processId);
 
-		//	if (ValidationUtil.isNull(nfnotainfoitemprodutodeclaracaoimportacao.getModelAction()))
-		//	{
-		//		continue;
-		//	}
+			if (ValidationUtil.isNull(nfnotainfoitemprodutodeclaracaoimportacao.getModelAction()))
+			{
+				continue;
+			}
 			switch (nfnotainfoitemprodutodeclaracaoimportacao.getModelAction())
 			{
 				case INSERT:
 					count = nfnotainfoitemprodutodeclaracaoimportacaoDAC.insertNFNotaInfoItemProdutoDeclaracaoImportacao(nfnotainfoitemprodutodeclaracaoimportacao).hasSystemError();
-					if (count == true)
-					{
-						Status status = new Status();
-						status.setStatus(CdStatusTypeEnum.ATIVO);
-						List<Status> statusList = new ArrayList<Status>();
-						statusList.add(status);
-						count =
-								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.NFNOTAINFOITEMPRODUTODECLARACAOIMPORTACAO, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case UPDATE:
 					count = nfnotainfoitemprodutodeclaracaoimportacaoDAC.updateNFNotaInfoItemProdutoDeclaracaoImportacao(nfnotainfoitemprodutodeclaracaoimportacao).hasSystemError();
-					if (count == true)
-					{
-						count =
-								StatusBARD.maintainStatusAssociations(nfnotainfoitemprodutodeclaracaoimportacao.getStatusList(), response, nfnotainfoitemprodutodeclaracaoimportacao.getId(),
-										null,
-										AcaoEnum.UPDATE, UserId, empId, TabelaEnum.NFNOTAINFOITEMPRODUTODECLARACAOIMPORTACAO, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case DELETE:
 					count = nfnotainfoitemprodutodeclaracaoimportacaoDAC.deleteNFNotaInfoItemProdutoDeclaracaoImportacaoById(nfnotainfoitemprodutodeclaracaoimportacao).hasSystemError();
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.DELETADO);
-					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
-					count =
-							StatusBARD.maintainStatusAssociations(statusList, response, nfnotainfoitemprodutodeclaracaoimportacao.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.NFNOTAINFOITEMPRODUTODECLARACAOIMPORTACAO, statusDAC, historicoDAC,
-									processId, historicoId);
+
 
 					break;
 			}
-		
+		}
 		if(count == true ){
 			return 1;
 		}else{
 			return 0;
 		}
-		
+
 	}
 }
