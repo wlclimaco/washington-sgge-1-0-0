@@ -3508,8 +3508,8 @@ public static NFNotaInfo insertNFNotaInfo(Integer id,TabelaEnum tabela,Persisten
 		nfnotainfo.setEntrega(insertNFNotaInfoLocal(null, tabela, action));
 		nfnotainfo.setPessoasautorizadasdownloadnfe(new ArrayList<NFPessoaAutorizadaDownloadNFe>());
 		nfnotainfo.getPessoasautorizadasdownloadnfe().add(insertNFPessoaAutorizadaDownloadNFe(null, tabela, action));
-		nfnotainfo.setItens(new ArrayList<NotaFiscalItens>());
-		nfnotainfo.getItens().add(Objects.insertNotaFiscalItens(null, tabela, action));
+		nfnotainfo.setItens(new ArrayList<NFNotaInfoItem>());
+		nfnotainfo.getItens().add(Objects.insertNFNotaInfoItem(id, tabela, action));
 		nfnotainfo.setTotal(insertNFNotaInfoTotal(null, tabela, action));
 		nfnotainfo.setTransporte(insertNFNotaInfoTransporte(null, tabela, action));
 		nfnotainfo.setCobranca(insertNFNotaInfoCobranca(null, tabela, action));
@@ -5147,7 +5147,7 @@ public static NFNotaInfoItemImpostoIPI insertNFNotaInfoItemImpostoIPI(Integer id
 	nfnotainfoitemimpostoipi.setClasseEnquadramento("NATIVE INSERT UPDATE");
 	nfnotainfoitemimpostoipi.setCnpjProdutor("NATIVE INSERT UPDATE");
 	nfnotainfoitemimpostoipi.setCodigoSelo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoipi.setQuantidadeSelo(new BigInteger("100"));
+	nfnotainfoitemimpostoipi.setQuantidadeSelo(new Integer("100"));
 	nfnotainfoitemimpostoipi.setCodigoEnquadramento("NATIVE INSERT UPDATE");
 	nfnotainfoitemimpostoipi.setTributado(insertNFNotaInfoItemImpostoIPITributado(id, tabela, action));
 	nfnotainfoitemimpostoipi.setNaoTributado(insertNFNotaInfoItemImpostoIPINaoTributado(id, tabela, action));

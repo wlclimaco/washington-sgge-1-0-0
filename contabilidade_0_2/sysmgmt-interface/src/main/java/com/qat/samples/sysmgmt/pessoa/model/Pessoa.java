@@ -41,8 +41,6 @@ public class Pessoa extends ModelCosmeDamiao
 	private Long datanasc;
 
 	private String foto;
-	
-	private DoisValores tipoContribuinte;
 
 	/** The type of an account. */
 	private PessoaTypeEnum pessoaTypeEnum;
@@ -418,14 +416,6 @@ public class Pessoa extends ModelCosmeDamiao
 		this.regime = regime;
 	}
 
-	public DoisValores getTipoContribuinte() {
-		return tipoContribuinte;
-	}
-
-	public void setTipoContribuinte(DoisValores tipoContribuinte) {
-		this.tipoContribuinte = tipoContribuinte;
-	}
-
 	@Override
 	public String toString() {
 		return "Pessoa [getPessoaTypeEnumValue()=" + getPessoaTypeEnumValue() + ", getId()=" + getId() + ", getNome()="
@@ -437,7 +427,7 @@ public class Pessoa extends ModelCosmeDamiao
 				+ getEmails() + ", getTelefones()=" + getTelefones() + ", getBancos()=" + getBancos()
 				+ ", getFormaPagamentoList()=" + getFormaPagamentoList() + ", getCondPagList()=" + getCondPagList()
 				+ ", getTipoPessoa()=" + getTipoPessoa() + ", getNomeFantasia()=" + getNomeFantasia() + ", getRegime()="
-				+ getRegime() + ", getTipoContribuinte()=" + getTipoContribuinte() + ", toString()=" + super.toString()
+				+ getRegime() + ", toString()=" + super.toString()
 				+ "]";
 	}
 

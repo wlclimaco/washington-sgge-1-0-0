@@ -15,6 +15,7 @@ import com.qat.framework.util.MyBatisBARHelper;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Cadastros.ICadastrosBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
+import com.qat.samples.sysmgmt.bar.Nfe.INFNotaInfoItemBAR;
 import com.qat.samples.sysmgmt.bar.Nfe.INFeBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Vendas.IVendasBAR;
@@ -39,6 +40,7 @@ import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoICMSTotalBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoISSQNTotalBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoIdentificacaoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoInformacoesAdicionaisBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoItemBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoLocalBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoObservacaoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoPagamentoBARD;
@@ -52,7 +54,6 @@ import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoTransportadorBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoTransporteBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoVeiculoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFPessoaAutorizadaDownloadNFeBARD;
-import com.qat.samples.sysmgmt.bar.mybatis.delegate.NotaFiscalItensBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.StatusBARD;
 import com.qat.samples.sysmgmt.nfe.model.NFInfoCupomFiscalReferenciado;
 import com.qat.samples.sysmgmt.nfe.model.NFInfoModelo1Por1AReferenciada;
@@ -1356,6 +1357,8 @@ public class NFeBARImpl extends SqlSessionDaoSupport implements INFeBAR {
 	IVendasBAR vendasBAR;
 
 	ICadastrosBAR cadastrosBAR;
+	
+	INFNotaInfoItemBAR nfnotaInfoItemBAR;
 
 	public IStatusBAR getStatusBAR() {
 		return statusBAR;
@@ -1397,6 +1400,15 @@ public class NFeBARImpl extends SqlSessionDaoSupport implements INFeBAR {
 
 	public void setCadastrosBAR(ICadastrosBAR cadastrosBAR) {
 		this.cadastrosBAR = cadastrosBAR;
+	}
+
+	
+	public INFNotaInfoItemBAR getNfnotaInfoItemBAR() {
+		return nfnotaInfoItemBAR;
+	}
+
+	public void setNfnotaInfoItemBAR(INFNotaInfoItemBAR nfnotaInfoItemBAR) {
+		this.nfnotaInfoItemBAR = nfnotaInfoItemBAR;
 	}
 
 	/**
@@ -1651,10 +1663,10 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 
 		if (!ValidationUtil.isNullOrEmpty(nfnotainfo.getItens()))
 		{
-			count +=
-					NotaFiscalItensBARD.maintainNotaFiscalItensAssociations(nfnotainfo.getItens(), response, nfnotainfo.getId(), null,
+			count += 
+					NFNotaInfoItemBARD.maintainNFNotaInfoItemAssociations(nfnotainfo.getItens(), response, nfnotainfo.getId(), null,
 							null,
-							TabelaEnum.NFNOTAINFO, getVendasBAR(), statusBAR, historicoBAR, nfnotainfo.getId(),
+							TabelaEnum.NFNOTAINFO, getNfnotaInfoItemBAR(), statusBAR, historicoBAR, nfnotainfo.getId(),
 							nfnotainfo.getCreateUser(), nfnotainfo.getTransactionId(), nfnotainfo.getTransactionId());
 		}
 

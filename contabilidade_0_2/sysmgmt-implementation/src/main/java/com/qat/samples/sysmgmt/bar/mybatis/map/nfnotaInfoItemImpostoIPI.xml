@@ -28,8 +28,7 @@
 		<result property="createDateUTC" column="create_date" />
 		<result property="modifyUser" column="modify_user" />
 		<result property="modifyDateUTC" column="modify_date" />
-		<collection property="quantidadeSelo" column="quantidadeSelo"
-			select="RegimeMap.fetchRegimeById" />
+		<result property="quantidadeSelo" column="quantidadeSelo" />
 		<collection property="tributado" column="tributado"
 			select="RegimeMap.fetchRegimeById" />
 		<collection property="naoTributado" column="naoTributado"
@@ -58,7 +57,7 @@
 		#{classeEnquadramento},
 		#{cnpjProdutor},
 		#{codigoSelo},
-		#{quantidadeSelo.id},
+		#{quantidadeSelo},
 		#{codigoEnquadramento},
 		#{tributado.id},
 		#{naoTributado.id},
@@ -126,7 +125,7 @@
 		<if test="classeEnquadramento!= null">classeEnquadramento = #{classeEnquadramento},</if>
 		<if test="cnpjProdutor!= null">cnpjProdutor = #{cnpjProdutor},</if>
 		<if test="codigoSelo!= null">codigoSelo = #{codigoSelo},</if>
-		<if test="quantidadeSelo!= null">quantidadeSelo = #{quantidadeSelo.id},</if>
+		<if test="quantidadeSelo!= null">quantidadeSelo = #{quantidadeSelo},</if>
 		<if test="codigoEnquadramento!= null">codigoEnquadramento = #{codigoEnquadramento},</if>
 		<if test="tributado!= null">tributado = #{tributado.id},</if>
 		<if test="naoTributado!= null">naoTributado = #{naoTributado.id},</if>

@@ -409,9 +409,10 @@ public class NFNotaInfoItemProdutoDeclaracaoImportacao extends ModelCosmeDamiao 
 		return "NFNotaInfoItemProdutoDeclaracaoImportacao [getId()=" + getId() + ", getNumeroRegistro()="
 				+ getNumeroRegistro() + ", getDataRegistro()=" + getDataRegistro() + ", getLocalDesembaraco()="
 				+ getLocalDesembaraco() + ", getUfDesembaraco()=" + getUfDesembaraco() + ", getDataDesembaraco()="
-				+ getDataDesembaraco() + ", getValorAFRMM()=" + getValorAFRMM() + ", getCnpj()=" + getCnpj()
-				+ ", getUfTerceiro()=" + getUfTerceiro() + ", getCodigoExportador()=" + getCodigoExportador()
-				+ ", toString()=" + super.toString() + "]";
+				+ getDataDesembaraco() + ", getTransporteInternacional()=" + getTransporteInternacional()
+				+ ", getValorAFRMM()=" + getValorAFRMM() + ", getFormaImportacaoIntermediacao()="
+				+ getFormaImportacaoIntermediacao() + ", getCnpj()=" + getCnpj() + ", getUfTerceiro()="
+				+ getUfTerceiro() + ", getCodigoExportador()=" + getCodigoExportador() + ", getAdicoes()="
+				+ getAdicoes() + ", toString()=" + super.toString() + "]";
 	}
-
 }

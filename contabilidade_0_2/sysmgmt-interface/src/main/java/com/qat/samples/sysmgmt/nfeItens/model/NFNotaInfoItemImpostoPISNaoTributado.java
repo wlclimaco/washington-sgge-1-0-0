@@ -82,4 +82,6 @@ public class NFNotaInfoItemImpostoPISNaoTributado extends ModelCosmeDamiao {
 				+ getSituacaoTributaria() + ", toString()=" + super.toString() + "]";
 	}
 
+
+
 }

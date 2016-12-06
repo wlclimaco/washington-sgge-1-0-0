@@ -2,8 +2,6 @@
 package com.qat.samples.sysmgmt.nfeItens.model;
 
 
-import java.math.BigInteger;
-
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -28,7 +26,7 @@ public class NFNotaInfoItemImpostoIPI extends ModelCosmeDamiao
     private String codigoSelo;
 
     /** The econtabil quantidadeSelo for the NFNotaInfoItemImpostoIPI. */
-    private BigInteger quantidadeSelo;
+    private Integer quantidadeSelo;
 
     /** The econtabil codigoEnquadramento for the NFNotaInfoItemImpostoIPI. */
     private String codigoEnquadramento;
@@ -160,7 +158,7 @@ public void setCodigoSelo(String codigoselo)
      *
      * @return the quantidadeSelo
      */
-    public BigInteger getQuantidadeSelo()
+    public Integer getQuantidadeSelo()
     {
         return quantidadeSelo;
     }
@@ -170,7 +168,7 @@ public void setCodigoSelo(String codigoselo)
      *
 * @param id the quantidadeselo to set
  */
-public void setQuantidadeSelo(BigInteger quantidadeselo)
+public void setQuantidadeSelo(Integer quantidadeselo)
 {
         this.quantidadeSelo = quantidadeselo;
     }
@@ -249,6 +247,16 @@ public void setNaoTributado(NFNotaInfoItemImpostoIPINaoTributado naotributado)
 {
         this.naoTributado = naotributado;
     }
+
+
+	@Override
+	public String toString() {
+		return "NFNotaInfoItemImpostoIPI [getId()=" + getId() + ", getClasseEnquadramento()=" + getClasseEnquadramento()
+				+ ", getCnpjProdutor()=" + getCnpjProdutor() + ", getCodigoSelo()=" + getCodigoSelo()
+				+ ", getQuantidadeSelo()=" + getQuantidadeSelo() + ", getCodigoEnquadramento()="
+				+ getCodigoEnquadramento() + ", getTributado()=" + getTributado() + ", getNaoTributado()="
+				+ getNaoTributado() + ", toString()=" + super.toString() + "]";
+	}
 
 
 

@@ -5,6 +5,7 @@ package com.qat.samples.sysmgmt.nfe.model;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.nf.model.NotaFiscalItens;
+import com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItem;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -43,7 +44,7 @@ public class NFNotaInfo extends NFBase
     private List<NFPessoaAutorizadaDownloadNFe> pessoasautorizadasdownloadnfe;
 
     /** The econtabil itens for the NFNotaInfo. */
-    private List<NotaFiscalItens> itens;
+    private List<NFNotaInfoItem> itens;
 
     /** The econtabil total for the NFNotaInfo. */
     private NFNotaInfoTotal total;
@@ -189,13 +190,14 @@ public class NFNotaInfo extends NFBase
 
 
 
-	public List<NotaFiscalItens> getItens() {
+	public List<NFNotaInfoItem> getItens() {
 		return itens;
 	}
 
 
 
-	public void setItens(List<NotaFiscalItens> itens) {
+	
+	public void setItens(List<NFNotaInfoItem> itens) {
 		this.itens = itens;
 	}
 

@@ -654,7 +654,8 @@
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemProdutoArmamento.xml" />
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemProdutoCombustivel.xml" />
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemProdutoCombustivelCIDE.xml" />
-<!--<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfinformacaoImpostoDevolvido.xml" /> -->
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfinformacaoImpostoDevolvido.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfimpostoDevolvido.xml" />
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImposto.xml" />
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMS.xml" />
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMS00.xml" />

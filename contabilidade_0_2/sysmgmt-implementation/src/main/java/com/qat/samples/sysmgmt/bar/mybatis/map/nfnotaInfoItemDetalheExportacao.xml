@@ -44,7 +44,7 @@
 
 	</sql>
 	<sql id="allNFNotaInfoItemDetalheExportacaoValues">
-		#{atoConcessorioDrawback.id},
+		#{atoConcessorioDrawback},
 		#{exportacaoIndireta.id},
 		#{parentId},
 		#{tabelaEnumValue},
@@ -110,7 +110,7 @@
 	<update id="updateNFNotaInfoItemDetalheExportacao"
 		parameterType="NFNotaInfoItemDetalheExportacao">
 		UPDATE nfnotainfoitemdetalheexportacao SET
-		<if test="atoConcessorioDrawback!= null">atoConcessorioDrawback = #{atoConcessorioDrawback.id},
+		<if test="atoConcessorioDrawback!= null">atoConcessorioDrawback = #{atoConcessorioDrawback},
 		</if>
 		<if test="exportacaoIndireta!= null">exportacaoIndireta = #{exportacaoIndireta.id},</if>
 		<if test="parentId!= null"> parentId=#{parentId},</if>

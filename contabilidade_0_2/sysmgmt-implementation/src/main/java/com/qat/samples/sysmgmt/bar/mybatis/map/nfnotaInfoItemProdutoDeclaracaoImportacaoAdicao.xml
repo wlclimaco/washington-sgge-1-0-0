@@ -53,7 +53,7 @@
 #{sequencial},
 #{codigoFabricante},
 #{desconto},
-#{numeroAtoConcessorioDrawback.id},
+#{numeroAtoConcessorioDrawback},
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -103,7 +103,7 @@
 <if test="sequencial!= null">sequencial = #{sequencial},</if>
 <if test="codigoFabricante!= null">codigoFabricante = #{codigoFabricante},</if>
 <if test="desconto!= null">desconto = #{desconto},</if>
-<if test="numeroAtoConcessorioDrawback!= null">numeroAtoConcessorioDrawback = #{numeroAtoConcessorioDrawback.id},</if>
+<if test="numeroAtoConcessorioDrawback!= null">numeroAtoConcessorioDrawback = #{numeroAtoConcessorioDrawback},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>

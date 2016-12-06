@@ -132,9 +132,9 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItem nfnotainfoitem = Objects.insertNFNotaInfoItem(1000, TabelaEnum.NFNOTAINFOITEM,
 				PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItem nfnotainfoitemResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemById(request);
-		Assert.assertEquals(nfnotainfoitemResponse.getInformacoesAdicionais(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemResponse.getInformacoesAdicionais(), "informacoesAdicionais_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItem(nfnotainfoitem);
 		nfnotainfoitemResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemById(request);
 		Assert.assertEquals(nfnotainfoitemResponse.getInformacoesAdicionais(), "NATIVE INSERT UPDATE");
@@ -223,10 +223,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemProduto nfnotainfoitemproduto = Objects.insertNFNotaInfoItemProduto(1000, TabelaEnum.NFNOTAINFOITEMPRODUTO,
 				PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemProduto nfnotainfoitemprodutoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemProdutoById(request);
-		Assert.assertEquals(nfnotainfoitemprodutoResponse.getCfop(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemprodutoResponse.getCfop(), "cfop_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemProduto(nfnotainfoitemproduto);
 		nfnotainfoitemprodutoResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemProdutoById(request);
 		Assert.assertEquals(nfnotainfoitemprodutoResponse.getCfop(), "NATIVE INSERT UPDATE");
@@ -280,9 +280,9 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 	@Test
 	public void testDeleteNFNotaInfoItemProdutoDeclaracaoImportacao() {
 		NFNotaInfoItemProdutoDeclaracaoImportacao nfnotainfoitemprodutodeclaracaoimportacao = Objects.insertNFNotaInfoItemProdutoDeclaracaoImportacao(
-				4, TabelaEnum.NFNOTAINFOITEMPRODUTODECLARACAOIMPORTACAO, PersistenceActionEnum.INSERT);
+				1004, TabelaEnum.NFNOTAINFOITEMPRODUTODECLARACAOIMPORTACAO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(1004);
 		NFNotaInfoItemProdutoDeclaracaoImportacao nfnotainfoitemprodutodeclaracaoimportacaoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemProdutoDeclaracaoImportacaoById(request);
 		Assert.assertEquals(nfnotainfoitemprodutodeclaracaoimportacaoResponse, null);
@@ -321,12 +321,12 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 	@Test
 	public void testUpdateNFNotaInfoItemProdutoDeclaracaoImportacao() {
 		NFNotaInfoItemProdutoDeclaracaoImportacao nfnotainfoitemprodutodeclaracaoimportacao = Objects.insertNFNotaInfoItemProdutoDeclaracaoImportacao(
-				1, TabelaEnum.NFNOTAINFOITEMPRODUTODECLARACAOIMPORTACAO, PersistenceActionEnum.UPDATE);
+				1000, TabelaEnum.NFNOTAINFOITEMPRODUTODECLARACAOIMPORTACAO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemProdutoDeclaracaoImportacao nfnotainfoitemprodutodeclaracaoimportacaoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemProdutoDeclaracaoImportacaoById(request);
-		Assert.assertEquals(nfnotainfoitemprodutodeclaracaoimportacaoResponse.getCnpj(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemprodutodeclaracaoimportacaoResponse.getCnpj(), "cnpj_0");
 		getNFNotaInfoItemBAR()
 				.updateNFNotaInfoItemProdutoDeclaracaoImportacao(nfnotainfoitemprodutodeclaracaoimportacao);
 		nfnotainfoitemprodutodeclaracaoimportacaoResponse = getNFNotaInfoItemBAR()
@@ -382,9 +382,9 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 	@Test
 	public void testDeleteNFNotaInfoItemProdutoDeclaracaoImportacaoAdicao() {
 		NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao nfnotainfoitemprodutodeclaracaoimportacaoadicao = Objects.insertNFNotaInfoItemProdutoDeclaracaoImportacaoAdicao(
-				4, TabelaEnum.NFNOTAINFOITEMPRODUTODECLARACAOIMPORTACAOADICAO, PersistenceActionEnum.INSERT);
+				1004, TabelaEnum.NFNOTAINFOITEMPRODUTODECLARACAOIMPORTACAOADICAO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(1004);
 		NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao nfnotainfoitemprodutodeclaracaoimportacaoadicaoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemProdutoDeclaracaoImportacaoAdicaoById(request);
 		Assert.assertEquals(nfnotainfoitemprodutodeclaracaoimportacaoadicaoResponse, null);
@@ -425,12 +425,12 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 	@Test
 	public void testUpdateNFNotaInfoItemProdutoDeclaracaoImportacaoAdicao() {
 		NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao nfnotainfoitemprodutodeclaracaoimportacaoadicao = Objects.insertNFNotaInfoItemProdutoDeclaracaoImportacaoAdicao(
-				1, TabelaEnum.NFNOTAINFOITEMPRODUTODECLARACAOIMPORTACAOADICAO, PersistenceActionEnum.UPDATE);
+				1000, TabelaEnum.NFNOTAINFOITEMPRODUTODECLARACAOIMPORTACAOADICAO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao nfnotainfoitemprodutodeclaracaoimportacaoadicaoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemProdutoDeclaracaoImportacaoAdicaoById(request);
-		Assert.assertEquals(nfnotainfoitemprodutodeclaracaoimportacaoadicaoResponse.getCodigoFabricante(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemprodutodeclaracaoimportacaoadicaoResponse.getCodigoFabricante(), "codigoFabricante_0");
 		getNFNotaInfoItemBAR()
 				.updateNFNotaInfoItemProdutoDeclaracaoImportacaoAdicao(nfnotainfoitemprodutodeclaracaoimportacaoadicao);
 		nfnotainfoitemprodutodeclaracaoimportacaoadicaoResponse = getNFNotaInfoItemBAR()
@@ -485,10 +485,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 
 	@Test
 	public void testDeleteNFNotaInfoItemDetalheExportacao() {
-		NFNotaInfoItemDetalheExportacao nfnotainfoitemdetalheexportacao = Objects.insertNFNotaInfoItemDetalheExportacao(4,
+		NFNotaInfoItemDetalheExportacao nfnotainfoitemdetalheexportacao = Objects.insertNFNotaInfoItemDetalheExportacao(1004,
 				TabelaEnum.NFNOTAINFOITEMDETALHEEXPORTACAO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(1004);
 		NFNotaInfoItemDetalheExportacao nfnotainfoitemdetalheexportacaoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemDetalheExportacaoById(request);
 		Assert.assertEquals(nfnotainfoitemdetalheexportacaoResponse, null);
@@ -524,14 +524,14 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemDetalheExportacao nfnotainfoitemdetalheexportacao = Objects.insertNFNotaInfoItemDetalheExportacao(1000,
 				TabelaEnum.NFNOTAINFOITEMDETALHEEXPORTACAO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemDetalheExportacao nfnotainfoitemdetalheexportacaoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemDetalheExportacaoById(request);
-		Assert.assertEquals(nfnotainfoitemdetalheexportacaoResponse.getCreateUser(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemdetalheexportacaoResponse.getCreateUser(), "system");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemDetalheExportacao(nfnotainfoitemdetalheexportacao);
 		nfnotainfoitemdetalheexportacaoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemDetalheExportacaoById(request);
-		Assert.assertEquals(nfnotainfoitemdetalheexportacaoResponse.getCreateUser(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(nfnotainfoitemdetalheexportacaoResponse.getCreateUser(), "system");
 	}
 
 	@Test
@@ -580,10 +580,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 
 	@Test
 	public void testDeleteNFNotaInfoItemExportacaoIndireta() {
-		NFNotaInfoItemExportacaoIndireta nfnotainfoitemexportacaoindireta = Objects.insertNFNotaInfoItemExportacaoIndireta(4,
+		NFNotaInfoItemExportacaoIndireta nfnotainfoitemexportacaoindireta = Objects.insertNFNotaInfoItemExportacaoIndireta(1004,
 				TabelaEnum.NFNOTAINFOITEMEXPORTACAOINDIRETA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(1004);
 		NFNotaInfoItemExportacaoIndireta nfnotainfoitemexportacaoindiretaResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemExportacaoIndiretaById(request);
 		Assert.assertEquals(nfnotainfoitemexportacaoindiretaResponse, null);
@@ -619,10 +619,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemExportacaoIndireta nfnotainfoitemexportacaoindireta = Objects.insertNFNotaInfoItemExportacaoIndireta(1000,
 				TabelaEnum.NFNOTAINFOITEMEXPORTACAOINDIRETA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemExportacaoIndireta nfnotainfoitemexportacaoindiretaResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemExportacaoIndiretaById(request);
-		Assert.assertEquals(nfnotainfoitemexportacaoindiretaResponse.getChaveAcessoNFe(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemexportacaoindiretaResponse.getChaveAcessoNFe(), "chaveAcessoNFe_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemExportacaoIndireta(nfnotainfoitemexportacaoindireta);
 		nfnotainfoitemexportacaoindiretaResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemExportacaoIndiretaById(request);
@@ -712,10 +712,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemProdutoVeiculo nfnotainfoitemprodutoveiculo = Objects.insertNFNotaInfoItemProdutoVeiculo(1000,
 				TabelaEnum.NFNOTAINFOITEMPRODUTOVEICULO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemProdutoVeiculo nfnotainfoitemprodutoveiculoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemProdutoVeiculoById(request);
-		Assert.assertEquals(nfnotainfoitemprodutoveiculoResponse.getCapacidadeMaximaTracao(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemprodutoveiculoResponse.getCapacidadeMaximaTracao(), "capacidadeMaximaTracao_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemProdutoVeiculo(nfnotainfoitemprodutoveiculo);
 		nfnotainfoitemprodutoveiculoResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemProdutoVeiculoById(request);
 		Assert.assertEquals(nfnotainfoitemprodutoveiculoResponse.getCapacidadeMaximaTracao(), "NATIVE INSERT UPDATE");
@@ -767,10 +767,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 
 	@Test
 	public void testDeleteNFNotaInfoItemProdutoMedicamento() {
-		NFNotaInfoItemProdutoMedicamento nfnotainfoitemprodutomedicamento = Objects.insertNFNotaInfoItemProdutoMedicamento(4,
+		NFNotaInfoItemProdutoMedicamento nfnotainfoitemprodutomedicamento = Objects.insertNFNotaInfoItemProdutoMedicamento(1004,
 				TabelaEnum.NFNOTAINFOITEMPRODUTOMEDICAMENTO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(1004);
 		NFNotaInfoItemProdutoMedicamento nfnotainfoitemprodutomedicamentoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemProdutoMedicamentoById(request);
 		Assert.assertEquals(nfnotainfoitemprodutomedicamentoResponse, null);
@@ -806,10 +806,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemProdutoMedicamento nfnotainfoitemprodutomedicamento = Objects.insertNFNotaInfoItemProdutoMedicamento(1000,
 				TabelaEnum.NFNOTAINFOITEMPRODUTOMEDICAMENTO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemProdutoMedicamento nfnotainfoitemprodutomedicamentoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemProdutoMedicamentoById(request);
-		Assert.assertEquals(nfnotainfoitemprodutomedicamentoResponse.getQuantidade(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemprodutomedicamentoResponse.getQuantidade(), "quantidade_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemProdutoMedicamento(nfnotainfoitemprodutomedicamento);
 		nfnotainfoitemprodutomedicamentoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemProdutoMedicamentoById(request);
@@ -901,10 +901,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemProdutoArmamento nfnotainfoitemprodutoarmamento = Objects.insertNFNotaInfoItemProdutoArmamento(1000,
 				TabelaEnum.NFNOTAINFOITEMPRODUTOARMAMENTO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemProdutoArmamento nfnotainfoitemprodutoarmamentoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemProdutoArmamentoById(request);
-		Assert.assertEquals(nfnotainfoitemprodutoarmamentoResponse.getDescricao(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemprodutoarmamentoResponse.getDescricao(), "descricao_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemProdutoArmamento(nfnotainfoitemprodutoarmamento);
 		nfnotainfoitemprodutoarmamentoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemProdutoArmamentoById(request);
@@ -996,10 +996,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemProdutoCombustivel nfnotainfoitemprodutocombustivel = Objects.insertNFNotaInfoItemProdutoCombustivel(1000,
 				TabelaEnum.NFNOTAINFOITEMPRODUTOCOMBUSTIVEL, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemProdutoCombustivel nfnotainfoitemprodutocombustivelResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemProdutoCombustivelById(request);
-		Assert.assertEquals(nfnotainfoitemprodutocombustivelResponse.getCodigoAutorizacaoCOFIF(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemprodutocombustivelResponse.getCodigoAutorizacaoCOFIF(), "codigoAutorizacaoCOFIF_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemProdutoCombustivel(nfnotainfoitemprodutocombustivel);
 		nfnotainfoitemprodutocombustivelResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemProdutoCombustivelById(request);
@@ -1092,12 +1092,12 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 	@Test
 	public void testUpdateNFNotaInfoItemProdutoCombustivelCIDE() {
 		NFNotaInfoItemProdutoCombustivelCIDE nfnotainfoitemprodutocombustivelcide = Objects.insertNFNotaInfoItemProdutoCombustivelCIDE(
-				1, TabelaEnum.NFNOTAINFOITEMPRODUTOCOMBUSTIVELCIDE, PersistenceActionEnum.UPDATE);
+				1000, TabelaEnum.NFNOTAINFOITEMPRODUTOCOMBUSTIVELCIDE, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemProdutoCombustivelCIDE nfnotainfoitemprodutocombustivelcideResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemProdutoCombustivelCIDEById(request);
-		Assert.assertEquals(nfnotainfoitemprodutocombustivelcideResponse.getQuantidadeBCCIDE(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemprodutocombustivelcideResponse.getQuantidadeBCCIDE(), "quantidadeBCCIDE_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemProdutoCombustivelCIDE(nfnotainfoitemprodutocombustivelcide);
 		nfnotainfoitemprodutocombustivelcideResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemProdutoCombustivelCIDEById(request);
@@ -1186,9 +1186,9 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFImpostoDevolvido nfimpostodevolvido = Objects.insertNFImpostoDevolvido(1000, TabelaEnum.NFIMPOSTODEVOLVIDO,
 				PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFImpostoDevolvido nfimpostodevolvidoResponse = getNFNotaInfoItemBAR().fetchNFImpostoDevolvidoById(request);
-		Assert.assertEquals(nfimpostodevolvidoResponse.getPercentualDevolucao(), "NATIVE INSERT");
+		Assert.assertEquals(nfimpostodevolvidoResponse.getPercentualDevolucao(), "percentualDevolucao_0");
 		getNFNotaInfoItemBAR().updateNFImpostoDevolvido(nfimpostodevolvido);
 		nfimpostodevolvidoResponse = getNFNotaInfoItemBAR().fetchNFImpostoDevolvidoById(request);
 		Assert.assertEquals(nfimpostodevolvidoResponse.getPercentualDevolucao(), "NATIVE INSERT UPDATE");
@@ -1277,10 +1277,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFInformacaoImpostoDevolvido nfinformacaoimpostodevolvido = Objects.insertNFInformacaoImpostoDevolvido(1000,
 				TabelaEnum.NFINFORMACAOIMPOSTODEVOLVIDO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFInformacaoImpostoDevolvido nfinformacaoimpostodevolvidoResponse = getNFNotaInfoItemBAR()
 				.fetchNFInformacaoImpostoDevolvidoById(request);
-		Assert.assertEquals(nfinformacaoimpostodevolvidoResponse.getValorIPIDevolvido(), "NATIVE INSERT");
+		Assert.assertEquals(nfinformacaoimpostodevolvidoResponse.getValorIPIDevolvido(), "valorIPIDevolvido_0");
 		getNFNotaInfoItemBAR().updateNFInformacaoImpostoDevolvido(nfinformacaoimpostodevolvido);
 		nfinformacaoimpostodevolvidoResponse = getNFNotaInfoItemBAR().fetchNFInformacaoImpostoDevolvidoById(request);
 		Assert.assertEquals(nfinformacaoimpostodevolvidoResponse.getValorIPIDevolvido(), "NATIVE INSERT UPDATE");
@@ -1369,13 +1369,13 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImposto nfnotainfoitemimposto = Objects.insertNFNotaInfoItemImposto(1000, TabelaEnum.NFNOTAINFOITEMIMPOSTO,
 				PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImposto nfnotainfoitemimpostoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoResponse.getUserId(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoResponse.getCreateUser(), "system");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImposto(nfnotainfoitemimposto);
 		nfnotainfoitemimpostoResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoResponse.getUserId(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(nfnotainfoitemimpostoResponse.getCreateUser(), "system");
 	}
 
 	@Test
@@ -1461,13 +1461,13 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoICMS nfnotainfoitemimpostoicms = Objects.insertNFNotaInfoItemImpostoICMS(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMS, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoICMS nfnotainfoitemimpostoicmsResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMSById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicmsResponse.getIcmsst().getValorICMSSTUFDestino(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoicmsResponse.getModifyUser(), "rod");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoICMS(nfnotainfoitemimpostoicms);
 		nfnotainfoitemimpostoicmsResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoICMSById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicmsResponse.getIcmsst().getValorICMSSTUFDestino(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(nfnotainfoitemimpostoicmsResponse.getModifyUser(), "system");
 	}
 
 	@Test
@@ -1553,10 +1553,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoICMS00 nfnotainfoitemimpostoicms00 = Objects.insertNFNotaInfoItemImpostoICMS00(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMS00, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoICMS00 nfnotainfoitemimpostoicms00Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMS00ById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicms00Response.getPercentualAliquota(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoicms00Response.getPercentualAliquota(), "percentualAliquota_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoICMS00(nfnotainfoitemimpostoicms00);
 		nfnotainfoitemimpostoicms00Response = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoICMS00ById(request);
 		Assert.assertEquals(nfnotainfoitemimpostoicms00Response.getPercentualAliquota(), "NATIVE INSERT UPDATE");
@@ -1645,10 +1645,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoICMS10 nfnotainfoitemimpostoicms10 = Objects.insertNFNotaInfoItemImpostoICMS10(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMS10, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoICMS10 nfnotainfoitemimpostoicms10Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMS10ById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicms10Response.getValorBaseCalculo(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoicms10Response.getValorBaseCalculo(), "valorBaseCalculo_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoICMS10(nfnotainfoitemimpostoicms10);
 		nfnotainfoitemimpostoicms10Response = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoICMS10ById(request);
 		Assert.assertEquals(nfnotainfoitemimpostoicms10Response.getValorBaseCalculo(), "NATIVE INSERT UPDATE");
@@ -1737,10 +1737,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoICMS20 nfnotainfoitemimpostoicms20 = Objects.insertNFNotaInfoItemImpostoICMS20(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMS20, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoICMS20 nfnotainfoitemimpostoicms20Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMS20ById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicms20Response.getValorBCICMS(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoicms20Response.getValorBCICMS(), "valorBCICMS_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoICMS20(nfnotainfoitemimpostoicms20);
 		nfnotainfoitemimpostoicms20Response = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoICMS20ById(request);
 		Assert.assertEquals(nfnotainfoitemimpostoicms20Response.getValorBCICMS(), "NATIVE INSERT UPDATE");
@@ -1829,10 +1829,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoICMS30 nfnotainfoitemimpostoicms30 = Objects.insertNFNotaInfoItemImpostoICMS30(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMS30, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoICMS30 nfnotainfoitemimpostoicms30Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMS30ById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicms30Response.getPercentualAliquotaImpostoICMSST(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoicms30Response.getPercentualAliquotaImpostoICMSST(), "percentualAliquotaImpostoICMSST_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoICMS30(nfnotainfoitemimpostoicms30);
 		nfnotainfoitemimpostoicms30Response = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoICMS30ById(request);
 		Assert.assertEquals(nfnotainfoitemimpostoicms30Response.getPercentualAliquotaImpostoICMSST(), "NATIVE INSERT UPDATE");
@@ -1921,10 +1921,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoICMS40 nfnotainfoitemimpostoicms40 = Objects.insertNFNotaInfoItemImpostoICMS40(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMS40, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoICMS40 nfnotainfoitemimpostoicms40Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMS40ById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicms40Response.getValorICMSDesoneracao(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoicms40Response.getValorICMSDesoneracao(), "valorICMSDesoneracao_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoICMS40(nfnotainfoitemimpostoicms40);
 		nfnotainfoitemimpostoicms40Response = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoICMS40ById(request);
 		Assert.assertEquals(nfnotainfoitemimpostoicms40Response.getValorICMSDesoneracao(), "NATIVE INSERT UPDATE");
@@ -2013,10 +2013,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoICMS51 nfnotainfoitemimpostoicms51 = Objects.insertNFNotaInfoItemImpostoICMS51(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMS51, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoICMS51 nfnotainfoitemimpostoicms51Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMS51ById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicms51Response.getPercentualDiferimento(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoicms51Response.getPercentualDiferimento(), "percentualDiferimento_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoICMS51(nfnotainfoitemimpostoicms51);
 		nfnotainfoitemimpostoicms51Response = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoICMS51ById(request);
 		Assert.assertEquals(nfnotainfoitemimpostoicms51Response.getPercentualDiferimento(), "NATIVE INSERT UPDATE");
@@ -2105,10 +2105,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoICMS60 nfnotainfoitemimpostoicms60 = Objects.insertNFNotaInfoItemImpostoICMS60(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMS60, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoICMS60 nfnotainfoitemimpostoicms60Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMS60ById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicms60Response.getValorICMSSTRetido(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoicms60Response.getValorICMSSTRetido(), "valorICMSSTRetido_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoICMS60(nfnotainfoitemimpostoicms60);
 		nfnotainfoitemimpostoicms60Response = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoICMS60ById(request);
 		Assert.assertEquals(nfnotainfoitemimpostoicms60Response.getValorICMSSTRetido(), "NATIVE INSERT UPDATE");
@@ -2197,10 +2197,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoICMS70 nfnotainfoitemimpostoicms70 = Objects.insertNFNotaInfoItemImpostoICMS70(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMS70, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoICMS70 nfnotainfoitemimpostoicms70Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMS70ById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicms70Response.getDesoneracao(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoicms70Response.getDesoneracao(), "desoneracao_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoICMS70(nfnotainfoitemimpostoicms70);
 		nfnotainfoitemimpostoicms70Response = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoICMS70ById(request);
 		Assert.assertEquals(nfnotainfoitemimpostoicms70Response.getDesoneracao(), "NATIVE INSERT UPDATE");
@@ -2289,10 +2289,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoICMS90 nfnotainfoitemimpostoicms90 = Objects.insertNFNotaInfoItemImpostoICMS90(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMS90, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoICMS90 nfnotainfoitemimpostoicms90Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMS90ById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicms90Response.getPercentualAliquota(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoicms90Response.getPercentualAliquota(), "percentualAliquota_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoICMS90(nfnotainfoitemimpostoicms90);
 		nfnotainfoitemimpostoicms90Response = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoICMS90ById(request);
 		Assert.assertEquals(nfnotainfoitemimpostoicms90Response.getPercentualAliquota(), "NATIVE INSERT UPDATE");
@@ -2384,12 +2384,12 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 	@Test
 	public void testUpdateNFNotaInfoItemImpostoICMSPartilhado() {
 		NFNotaInfoItemImpostoICMSPartilhado nfnotainfoitemimpostoicmspartilhado = Objects.insertNFNotaInfoItemImpostoICMSPartilhado(
-				1005, TabelaEnum.NFNOTAINFOITEMIMPOSTOICMSPARTILHADO, PersistenceActionEnum.UPDATE);
+				1000, TabelaEnum.NFNOTAINFOITEMIMPOSTOICMSPARTILHADO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1000);
 		NFNotaInfoItemImpostoICMSPartilhado nfnotainfoitemimpostoicmspartilhadoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMSPartilhadoById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicmspartilhadoResponse.getPercentualReducaoBCICMSST(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoicmspartilhadoResponse.getPercentualReducaoBCICMSST(), "percentualReducaoBCICMSST_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoICMSPartilhado(nfnotainfoitemimpostoicmspartilhado);
 		nfnotainfoitemimpostoicmspartilhadoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMSPartilhadoById(request);
@@ -2479,10 +2479,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoICMSST nfnotainfoitemimpostoicmsst = Objects.insertNFNotaInfoItemImpostoICMSST(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMSST, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoICMSST nfnotainfoitemimpostoicmsstResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMSSTById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicmsstResponse.getValorBCICMSSTRetidoUFRemetente(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoicmsstResponse.getValorBCICMSSTRetidoUFRemetente(), "valorBCICMSSTRetidoUFRemetente_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoICMSST(nfnotainfoitemimpostoicmsst);
 		nfnotainfoitemimpostoicmsstResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoICMSSTById(request);
 		Assert.assertEquals(nfnotainfoitemimpostoicmsstResponse.getValorBCICMSSTRetidoUFRemetente(), "NATIVE INSERT UPDATE");
@@ -2573,10 +2573,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoICMSSN101 nfnotainfoitemimpostoicmssn101 = Objects.insertNFNotaInfoItemImpostoICMSSN101(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMSSN101, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoICMSSN101 nfnotainfoitemimpostoicmssn101Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMSSN101ById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicmssn101Response.getPercentualAliquotaAplicavelCalculoCreditoSN(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoicmssn101Response.getPercentualAliquotaAplicavelCalculoCreditoSN(), "percentualAliquotaAplicavelCalculoCreditoSN_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoICMSSN101(nfnotainfoitemimpostoicmssn101);
 		nfnotainfoitemimpostoicmssn101Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMSSN101ById(request);
@@ -2629,10 +2629,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 
 	@Test
 	public void testDeleteNFNotaInfoItemImpostoICMSSN102() {
-		NFNotaInfoItemImpostoICMSSN102 nfnotainfoitemimpostoicmssn102 = Objects.insertNFNotaInfoItemImpostoICMSSN102(4,
+		NFNotaInfoItemImpostoICMSSN102 nfnotainfoitemimpostoicmssn102 = Objects.insertNFNotaInfoItemImpostoICMSSN102(1004,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMSSN102, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(1004);
 		NFNotaInfoItemImpostoICMSSN102 nfnotainfoitemimpostoicmssn102Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMSSN102ById(request);
 		Assert.assertEquals(nfnotainfoitemimpostoicmssn102Response, null);
@@ -2668,14 +2668,14 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoICMSSN102 nfnotainfoitemimpostoicmssn102 = Objects.insertNFNotaInfoItemImpostoICMSSN102(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMSSN102, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoICMSSN102 nfnotainfoitemimpostoicmssn102Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMSSN102ById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicmssn102Response.getSituacaoOperacaoSN().getValue(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoicmssn102Response.getCreateUser(), "system");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoICMSSN102(nfnotainfoitemimpostoicmssn102);
 		nfnotainfoitemimpostoicmssn102Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMSSN102ById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicmssn102Response.getSituacaoOperacaoSN().getValue(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(nfnotainfoitemimpostoicmssn102Response.getCreateUser(), "system");
 	}
 
 	@Test
@@ -2763,10 +2763,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoICMSSN201 nfnotainfoitemimpostoicmssn201 = Objects.insertNFNotaInfoItemImpostoICMSSN201(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMSSN201, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoICMSSN201 nfnotainfoitemimpostoicmssn201Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMSSN201ById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicmssn201Response.getPercentualAliquotaAplicavelCalculoCreditoSN(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoicmssn201Response.getPercentualAliquotaAplicavelCalculoCreditoSN(), "percentualAliquotaAplicavelCalculoCreditoSN_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoICMSSN201(nfnotainfoitemimpostoicmssn201);
 		nfnotainfoitemimpostoicmssn201Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMSSN201ById(request);
@@ -2858,10 +2858,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoICMSSN202 nfnotainfoitemimpostoicmssn202 = Objects.insertNFNotaInfoItemImpostoICMSSN202(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMSSN202, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoICMSSN202 nfnotainfoitemimpostoicmssn202Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMSSN202ById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicmssn202Response.getPercentualAliquotaImpostoICMSST(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoicmssn202Response.getPercentualAliquotaImpostoICMSST(), "percentualAliquotaImpostoICMSST_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoICMSSN202(nfnotainfoitemimpostoicmssn202);
 		nfnotainfoitemimpostoicmssn202Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMSSN202ById(request);
@@ -2953,10 +2953,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoICMSSN500 nfnotainfoitemimpostoicmssn500 = Objects.insertNFNotaInfoItemImpostoICMSSN500(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMSSN500, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoICMSSN500 nfnotainfoitemimpostoicmssn500Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMSSN500ById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicmssn500Response.getValorBCICMSSTRetido(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoicmssn500Response.getValorBCICMSSTRetido(), "valorBCICMSSTRetido_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoICMSSN500(nfnotainfoitemimpostoicmssn500);
 		nfnotainfoitemimpostoicmssn500Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMSSN500ById(request);
@@ -3048,10 +3048,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoICMSSN900 nfnotainfoitemimpostoicmssn900 = Objects.insertNFNotaInfoItemImpostoICMSSN900(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMSSN900, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoICMSSN900 nfnotainfoitemimpostoicmssn900Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMSSN900ById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicmssn900Response.getOrigem(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoicmssn900Response.getOrigem(), "origem_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoICMSSN900(nfnotainfoitemimpostoicmssn900);
 		nfnotainfoitemimpostoicmssn900Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMSSN900ById(request);
@@ -3141,10 +3141,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoIPI nfnotainfoitemimpostoipi = Objects.insertNFNotaInfoItemImpostoIPI(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOIPI, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoIPI nfnotainfoitemimpostoipiResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoIPIById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoipiResponse.getClasseEnquadramento(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoipiResponse.getClasseEnquadramento(), "classeEnquadramento_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoIPI(nfnotainfoitemimpostoipi);
 		nfnotainfoitemimpostoipiResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoIPIById(request);
 		Assert.assertEquals(nfnotainfoitemimpostoipiResponse.getClasseEnquadramento(), "NATIVE INSERT UPDATE");
@@ -3236,10 +3236,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoIPITributado nfnotainfoitemimpostoipitributado = Objects.insertNFNotaInfoItemImpostoIPITributado(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOIPITRIBUTADO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoIPITributado nfnotainfoitemimpostoipitributadoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoIPITributadoById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoipitributadoResponse.getPercentualAliquota(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoipitributadoResponse.getPercentualAliquota(), "percentualAliquota_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoIPITributado(nfnotainfoitemimpostoipitributado);
 		nfnotainfoitemimpostoipitributadoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoIPITributadoById(request);
@@ -3332,16 +3332,16 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 	@Test
 	public void testUpdateNFNotaInfoItemImpostoIPINaoTributado() {
 		NFNotaInfoItemImpostoIPINaoTributado nfnotainfoitemimpostoipinaotributado = Objects.insertNFNotaInfoItemImpostoIPINaoTributado(
-				1, TabelaEnum.NFNOTAINFOITEMIMPOSTOIPINAOTRIBUTADO, PersistenceActionEnum.UPDATE);
+				1000, TabelaEnum.NFNOTAINFOITEMIMPOSTOIPINAOTRIBUTADO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoIPINaoTributado nfnotainfoitemimpostoipinaotributadoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoIPINaoTributadoById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoipinaotributadoResponse.getSite(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoipinaotributadoResponse.getCreateUser(), "system");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoIPINaoTributado(nfnotainfoitemimpostoipinaotributado);
 		nfnotainfoitemimpostoipinaotributadoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoIPINaoTributadoById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoipinaotributadoResponse.getSite(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(nfnotainfoitemimpostoipinaotributadoResponse.getCreateUser(), "system");
 	}
 
 	@Test
@@ -3429,10 +3429,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoImportacao nfnotainfoitemimpostoimportacao = Objects.insertNFNotaInfoItemImpostoImportacao(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOIMPORTACAO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoImportacao nfnotainfoitemimpostoimportacaoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoImportacaoById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoimportacaoResponse.getValorBaseCalculo(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoimportacaoResponse.getValorBaseCalculo(), "valorBaseCalculo_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoImportacao(nfnotainfoitemimpostoimportacao);
 		nfnotainfoitemimpostoimportacaoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoImportacaoById(request);
@@ -3522,10 +3522,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoISSQN nfnotainfoitemimpostoissqn = Objects.insertNFNotaInfoItemImpostoISSQN(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOISSQN, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoISSQN nfnotainfoitemimpostoissqnResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoISSQNById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoissqnResponse.getCodigoMunicipioIncidenciaImposto(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoissqnResponse.getCodigoMunicipioIncidenciaImposto(), "codigoMunicipioIncidenciaImposto_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoISSQN(nfnotainfoitemimpostoissqn);
 		nfnotainfoitemimpostoissqnResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoISSQNById(request);
 		Assert.assertEquals(nfnotainfoitemimpostoissqnResponse.getCodigoMunicipioIncidenciaImposto(), "NATIVE INSERT UPDATE");
@@ -3614,13 +3614,13 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoPIS nfnotainfoitemimpostopis = Objects.insertNFNotaInfoItemImpostoPIS(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOPIS, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoPIS nfnotainfoitemimpostopisResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoPISById(request);
-		Assert.assertEquals(nfnotainfoitemimpostopisResponse.getCreateUser(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostopisResponse.getCreateUser(), "system");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoPIS(nfnotainfoitemimpostopis);
 		nfnotainfoitemimpostopisResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoPISById(request);
-		Assert.assertEquals(nfnotainfoitemimpostopisResponse.getCreateUser(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(nfnotainfoitemimpostopisResponse.getCreateUser(), "system");
 	}
 
 	@Test
@@ -3708,10 +3708,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoPISAliquota nfnotainfoitemimpostopisaliquota = Objects.insertNFNotaInfoItemImpostoPISAliquota(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOPISALIQUOTA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoPISAliquota nfnotainfoitemimpostopisaliquotaResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoPISAliquotaById(request);
-		Assert.assertEquals(nfnotainfoitemimpostopisaliquotaResponse.getPercentualAliquota(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostopisaliquotaResponse.getPercentualAliquota(), "percentualAliquota_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoPISAliquota(nfnotainfoitemimpostopisaliquota);
 		nfnotainfoitemimpostopisaliquotaResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoPISAliquotaById(request);
@@ -3802,12 +3802,12 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 	@Test
 	public void testUpdateNFNotaInfoItemImpostoPISQuantidade() {
 		NFNotaInfoItemImpostoPISQuantidade nfnotainfoitemimpostopisquantidade = Objects.insertNFNotaInfoItemImpostoPISQuantidade(
-				1, TabelaEnum.NFNOTAINFOITEMIMPOSTOPISQUANTIDADE, PersistenceActionEnum.UPDATE);
+				1000, TabelaEnum.NFNOTAINFOITEMIMPOSTOPISQUANTIDADE, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoPISQuantidade nfnotainfoitemimpostopisquantidadeResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoPISQuantidadeById(request);
-		Assert.assertEquals(nfnotainfoitemimpostopisquantidadeResponse.getQuantidadeVendida(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostopisquantidadeResponse.getQuantidadeVendida(), "quantidadeVendida_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoPISQuantidade(nfnotainfoitemimpostopisquantidade);
 		nfnotainfoitemimpostopisquantidadeResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoPISQuantidadeById(request);
@@ -3862,9 +3862,9 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 	@Test
 	public void testDeleteNFNotaInfoItemImpostoPISNaoTributado() {
 		NFNotaInfoItemImpostoPISNaoTributado nfnotainfoitemimpostopisnaotributado = Objects.insertNFNotaInfoItemImpostoPISNaoTributado(
-				4, TabelaEnum.NFNOTAINFOITEMIMPOSTOPISNAOTRIBUTADO, PersistenceActionEnum.INSERT);
+				1004, TabelaEnum.NFNOTAINFOITEMIMPOSTOPISNAOTRIBUTADO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(1004);
 		NFNotaInfoItemImpostoPISNaoTributado nfnotainfoitemimpostopisnaotributadoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoPISNaoTributadoById(request);
 		Assert.assertEquals(nfnotainfoitemimpostopisnaotributadoResponse, null);
@@ -3900,16 +3900,16 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 	@Test
 	public void testUpdateNFNotaInfoItemImpostoPISNaoTributado() {
 		NFNotaInfoItemImpostoPISNaoTributado nfnotainfoitemimpostopisnaotributado = Objects.insertNFNotaInfoItemImpostoPISNaoTributado(
-				1, TabelaEnum.NFNOTAINFOITEMIMPOSTOPISNAOTRIBUTADO, PersistenceActionEnum.UPDATE);
+				1000, TabelaEnum.NFNOTAINFOITEMIMPOSTOPISNAOTRIBUTADO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoPISNaoTributado nfnotainfoitemimpostopisnaotributadoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoPISNaoTributadoById(request);
-		Assert.assertEquals(nfnotainfoitemimpostopisnaotributadoResponse.getUserId(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostopisnaotributadoResponse.getCreateUser(), "system");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoPISNaoTributado(nfnotainfoitemimpostopisnaotributado);
 		nfnotainfoitemimpostopisnaotributadoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoPISNaoTributadoById(request);
-		Assert.assertEquals(nfnotainfoitemimpostopisnaotributadoResponse.getUserId(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(nfnotainfoitemimpostopisnaotributadoResponse.getCreateUser(), "system");
 	}
 
 	@Test
@@ -4000,12 +4000,12 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 	@Test
 	public void testUpdateNFNotaInfoItemImpostoPISOutrasOperacoes() {
 		NFNotaInfoItemImpostoPISOutrasOperacoes nfnotainfoitemimpostopisoutrasoperacoes = Objects.insertNFNotaInfoItemImpostoPISOutrasOperacoes(
-				1, TabelaEnum.NFNOTAINFOITEMIMPOSTOPISOUTRASOPERACOES, PersistenceActionEnum.UPDATE);
+				1000, TabelaEnum.NFNOTAINFOITEMIMPOSTOPISOUTRASOPERACOES, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoPISOutrasOperacoes nfnotainfoitemimpostopisoutrasoperacoesResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoPISOutrasOperacoesById(request);
-		Assert.assertEquals(nfnotainfoitemimpostopisoutrasoperacoesResponse.getQuantidadeVendida(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostopisoutrasoperacoesResponse.getQuantidadeVendida(), "quantidadeVendida_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoPISOutrasOperacoes(nfnotainfoitemimpostopisoutrasoperacoes);
 		nfnotainfoitemimpostopisoutrasoperacoesResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoPISOutrasOperacoesById(request);
@@ -4095,10 +4095,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoPISST nfnotainfoitemimpostopisst = Objects.insertNFNotaInfoItemImpostoPISST(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOPISST, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoPISST nfnotainfoitemimpostopisstResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoPISSTById(request);
-		Assert.assertEquals(nfnotainfoitemimpostopisstResponse.getPercentualAliquota(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostopisstResponse.getPercentualAliquota(), "percentualAliquota_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoPISST(nfnotainfoitemimpostopisst);
 		nfnotainfoitemimpostopisstResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoPISSTById(request);
 		Assert.assertEquals(nfnotainfoitemimpostopisstResponse.getPercentualAliquota(), "NATIVE INSERT UPDATE");
@@ -4187,13 +4187,13 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoCOFINS nfnotainfoitemimpostocofins = Objects.insertNFNotaInfoItemImpostoCOFINS(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOCOFINS, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoCOFINS nfnotainfoitemimpostocofinsResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoCOFINSById(request);
-		Assert.assertEquals(nfnotainfoitemimpostocofinsResponse.getCreateUser(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostocofinsResponse.getCreateUser(), "system");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoCOFINS(nfnotainfoitemimpostocofins);
 		nfnotainfoitemimpostocofinsResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoCOFINSById(request);
-		Assert.assertEquals(nfnotainfoitemimpostocofinsResponse.getCreateUser(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(nfnotainfoitemimpostocofinsResponse.getCreateUser(), "system");
 	}
 
 	@Test
@@ -4282,12 +4282,12 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 	@Test
 	public void testUpdateNFNotaInfoItemImpostoCOFINSAliquota() {
 		NFNotaInfoItemImpostoCOFINSAliquota nfnotainfoitemimpostocofinsaliquota = Objects.insertNFNotaInfoItemImpostoCOFINSAliquota(
-				1, TabelaEnum.NFNOTAINFOITEMIMPOSTOCOFINSALIQUOTA, PersistenceActionEnum.UPDATE);
+				1000, TabelaEnum.NFNOTAINFOITEMIMPOSTOCOFINSALIQUOTA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoCOFINSAliquota nfnotainfoitemimpostocofinsaliquotaResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoCOFINSAliquotaById(request);
-		Assert.assertEquals(nfnotainfoitemimpostocofinsaliquotaResponse.getPercentualAliquota(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostocofinsaliquotaResponse.getPercentualAliquota(), "percentualAliquota_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoCOFINSAliquota(nfnotainfoitemimpostocofinsaliquota);
 		nfnotainfoitemimpostocofinsaliquotaResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoCOFINSAliquotaById(request);
@@ -4380,12 +4380,12 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 	@Test
 	public void testUpdateNFNotaInfoItemImpostoCOFINSQuantidade() {
 		NFNotaInfoItemImpostoCOFINSQuantidade nfnotainfoitemimpostocofinsquantidade = Objects.insertNFNotaInfoItemImpostoCOFINSQuantidade(
-				1, TabelaEnum.NFNOTAINFOITEMIMPOSTOCOFINSQUANTIDADE, PersistenceActionEnum.UPDATE);
+				1000, TabelaEnum.NFNOTAINFOITEMIMPOSTOCOFINSQUANTIDADE, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoCOFINSQuantidade nfnotainfoitemimpostocofinsquantidadeResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoCOFINSQuantidadeById(request);
-		Assert.assertEquals(nfnotainfoitemimpostocofinsquantidadeResponse.getValorAliquota(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostocofinsquantidadeResponse.getValorAliquota(), "valorAliquota_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoCOFINSQuantidade(nfnotainfoitemimpostocofinsquantidade);
 		nfnotainfoitemimpostocofinsquantidadeResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoCOFINSQuantidadeById(request);
@@ -4480,16 +4480,16 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 	@Test
 	public void testUpdateNFNotaInfoItemImpostoCOFINSNaoTributavel() {
 		NFNotaInfoItemImpostoCOFINSNaoTributavel nfnotainfoitemimpostocofinsnaotributavel = Objects.insertNFNotaInfoItemImpostoCOFINSNaoTributavel(
-				1, TabelaEnum.NFNOTAINFOITEMIMPOSTOCOFINSNAOTRIBUTAVEL, PersistenceActionEnum.UPDATE);
+				1000, TabelaEnum.NFNOTAINFOITEMIMPOSTOCOFINSNAOTRIBUTAVEL, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoCOFINSNaoTributavel nfnotainfoitemimpostocofinsnaotributavelResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoCOFINSNaoTributavelById(request);
-		Assert.assertEquals(nfnotainfoitemimpostocofinsnaotributavelResponse.getUserId(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostocofinsnaotributavelResponse.getCreateUser(), "system");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoCOFINSNaoTributavel(nfnotainfoitemimpostocofinsnaotributavel);
 		nfnotainfoitemimpostocofinsnaotributavelResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoCOFINSNaoTributavelById(request);
-		Assert.assertEquals(nfnotainfoitemimpostocofinsnaotributavelResponse.getUserId(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(nfnotainfoitemimpostocofinsnaotributavelResponse.getCreateUser(), "system");
 	}
 
 	@Test
@@ -4581,12 +4581,12 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 	@Test
 	public void testUpdateNFNotaInfoItemImpostoCOFINSOutrasOperacoes() {
 		NFNotaInfoItemImpostoCOFINSOutrasOperacoes nfnotainfoitemimpostocofinsoutrasoperacoes = Objects.insertNFNotaInfoItemImpostoCOFINSOutrasOperacoes(
-				1, TabelaEnum.NFNOTAINFOITEMIMPOSTOCOFINSOUTRASOPERACOES, PersistenceActionEnum.UPDATE);
+				1000, TabelaEnum.NFNOTAINFOITEMIMPOSTOCOFINSOUTRASOPERACOES, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoCOFINSOutrasOperacoes nfnotainfoitemimpostocofinsoutrasoperacoesResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoCOFINSOutrasOperacoesById(request);
-		Assert.assertEquals(nfnotainfoitemimpostocofinsoutrasoperacoesResponse.getQuantidadeVendida(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostocofinsoutrasoperacoesResponse.getQuantidadeVendida(), "quantidadeVendida_0");
 		getNFNotaInfoItemBAR()
 				.updateNFNotaInfoItemImpostoCOFINSOutrasOperacoes(nfnotainfoitemimpostocofinsoutrasoperacoes);
 		nfnotainfoitemimpostocofinsoutrasoperacoesResponse = getNFNotaInfoItemBAR()
@@ -4678,10 +4678,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFNotaInfoItemImpostoCOFINSST nfnotainfoitemimpostocofinsst = Objects.insertNFNotaInfoItemImpostoCOFINSST(1000,
 				TabelaEnum.NFNOTAINFOITEMIMPOSTOCOFINSST, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoCOFINSST nfnotainfoitemimpostocofinsstResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoCOFINSSTById(request);
-		Assert.assertEquals(nfnotainfoitemimpostocofinsstResponse.getPercentualAliquota(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostocofinsstResponse.getPercentualAliquota(), "percentualAliquota_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoCOFINSST(nfnotainfoitemimpostocofinsst);
 		nfnotainfoitemimpostocofinsstResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoCOFINSSTById(request);
 		Assert.assertEquals(nfnotainfoitemimpostocofinsstResponse.getPercentualAliquota(), "NATIVE INSERT UPDATE");
@@ -4771,12 +4771,12 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 	@Test
 	public void testUpdateNFNotaInfoItemImpostoICMSUFDestino() {
 		NFNotaInfoItemImpostoICMSUFDestino nfnotainfoitemimpostoicmsufdestino = Objects.insertNFNotaInfoItemImpostoICMSUFDestino(
-				1, TabelaEnum.NFNOTAINFOITEMIMPOSTOICMSUFDESTINO, PersistenceActionEnum.UPDATE);
+				1000, TabelaEnum.NFNOTAINFOITEMIMPOSTOICMSUFDESTINO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFNotaInfoItemImpostoICMSUFDestino nfnotainfoitemimpostoicmsufdestinoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMSUFDestinoById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicmsufdestinoResponse.getPercentualInterestadual(), "NATIVE INSERT");
+		Assert.assertEquals(nfnotainfoitemimpostoicmsufdestinoResponse.getPercentualInterestadual(), "percentualInterestadual_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoICMSUFDestino(nfnotainfoitemimpostoicmsufdestino);
 		nfnotainfoitemimpostoicmsufdestinoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMSUFDestinoById(request);
@@ -4865,9 +4865,9 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFImpostoDevolvido nfimpostodevolvido = Objects.insertNFImpostoDevolvido(1000, TabelaEnum.NFIMPOSTODEVOLVIDO,
 				PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFImpostoDevolvido nfimpostodevolvidoResponse = getNFNotaInfoItemBAR().fetchNFImpostoDevolvidoById(request);
-		Assert.assertEquals(nfimpostodevolvidoResponse.getPercentualDevolucao(), "NATIVE INSERT");
+		Assert.assertEquals(nfimpostodevolvidoResponse.getPercentualDevolucao(), "percentualDevolucao_0");
 		getNFNotaInfoItemBAR().updateNFImpostoDevolvido(nfimpostodevolvido);
 		nfimpostodevolvidoResponse = getNFNotaInfoItemBAR().fetchNFImpostoDevolvidoById(request);
 		Assert.assertEquals(nfimpostodevolvidoResponse.getPercentualDevolucao(), "NATIVE INSERT UPDATE");
@@ -4956,10 +4956,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		NFInformacaoImpostoDevolvido nfinformacaoimpostodevolvido = Objects.insertNFInformacaoImpostoDevolvido(1000,
 				TabelaEnum.NFINFORMACAOIMPOSTODEVOLVIDO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		NFInformacaoImpostoDevolvido nfinformacaoimpostodevolvidoResponse = getNFNotaInfoItemBAR()
 				.fetchNFInformacaoImpostoDevolvidoById(request);
-		Assert.assertEquals(nfinformacaoimpostodevolvidoResponse.getValorIPIDevolvido(), "NATIVE INSERT");
+		Assert.assertEquals(nfinformacaoimpostodevolvidoResponse.getValorIPIDevolvido(), "valorIPIDevolvido_0");
 		getNFNotaInfoItemBAR().updateNFInformacaoImpostoDevolvido(nfinformacaoimpostodevolvido);
 		nfinformacaoimpostodevolvidoResponse = getNFNotaInfoItemBAR().fetchNFInformacaoImpostoDevolvidoById(request);
 		Assert.assertEquals(nfinformacaoimpostodevolvidoResponse.getValorIPIDevolvido(), "NATIVE INSERT UPDATE");

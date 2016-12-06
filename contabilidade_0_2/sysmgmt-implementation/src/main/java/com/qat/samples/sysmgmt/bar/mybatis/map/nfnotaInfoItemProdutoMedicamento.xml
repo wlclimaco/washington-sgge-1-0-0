@@ -50,8 +50,8 @@
 	<sql id="allNFNotaInfoItemProdutoMedicamentoValues">
 		#{lote},
 		#{quantidade},
-		#{dataFabricacao.id},
-		#{dataValidade.id},
+		#{dataFabricacao},
+		#{dataValidade},
 		#{precoMaximoConsumidor},
 		#{parentId},
 		#{tabelaEnumValue},
@@ -120,8 +120,8 @@
 		UPDATE nfnotainfoitemprodutomedicamento SET
 		<if test="lote!= null">lote = #{lote},</if>
 		<if test="quantidade!= null">quantidade = #{quantidade},</if>
-		<if test="dataFabricacao!= null">dataFabricacao = #{dataFabricacao.id},</if>
-		<if test="dataValidade!= null">dataValidade = #{dataValidade.id},</if>
+		<if test="dataFabricacao!= null">dataFabricacao = #{dataFabricacao},</if>
+		<if test="dataValidade!= null">dataValidade = #{dataValidade},</if>
 		<if test="precoMaximoConsumidor!= null">precoMaximoConsumidor = #{precoMaximoConsumidor},</if>
 		<if test="parentId!= null"> parentId=#{parentId},</if>
 		<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>

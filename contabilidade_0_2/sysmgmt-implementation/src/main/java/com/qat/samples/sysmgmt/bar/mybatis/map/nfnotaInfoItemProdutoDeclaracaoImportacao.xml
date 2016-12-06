@@ -22,13 +22,10 @@
 		<result property="localDesembaraco" column="localDesembaraco" />
 		<result property="ufDesembaraco" column="ufDesembaraco" />
 		<result property="dataDesembaraco" column="dataDesembaraco" />
-
 		<result property="valorAFRMM" column="valorAFRMM" />
-
 		<result property="cnpj" column="cnpj" />
 		<result property="ufTerceiro" column="ufTerceiro" />
 		<result property="codigoExportador" column="codigoExportador" />
-
 		<result property="parentId" column="parentId" />
 		<result property="tabelaEnumValue" column="tabelaEnumValue" />
 		<result property="emprId" column="emprId" />
@@ -69,10 +66,10 @@
 	</sql>
 	<sql id="allNFNotaInfoItemProdutoDeclaracaoImportacaoValues">
 		#{numeroRegistro},
-		#{dataRegistro.id},
+		#{dataRegistro},
 		#{localDesembaraco},
 		#{ufDesembaraco},
-		#{dataDesembaraco.id},
+		#{dataDesembaraco},
 		#{transporteInternacional.id},
 		#{valorAFRMM},
 		#{formaImportacaoIntermediacao.id},
@@ -145,10 +142,10 @@
 		parameterType="NFNotaInfoItemProdutoDeclaracaoImportacao">
 		UPDATE nfnotainfoitemprodutodeclaracaoimportacao SET
 		<if test="numeroRegistro!= null">numeroRegistro = #{numeroRegistro},</if>
-		<if test="dataRegistro!= null">dataRegistro = #{dataRegistro.id},</if>
+		<if test="dataRegistro!= null">dataRegistro = #{dataRegistro},</if>
 		<if test="localDesembaraco!= null">localDesembaraco = #{localDesembaraco},</if>
 		<if test="ufDesembaraco!= null">ufDesembaraco = #{ufDesembaraco},</if>
-		<if test="dataDesembaraco!= null">dataDesembaraco = #{dataDesembaraco.id},</if>
+		<if test="dataDesembaraco!= null">dataDesembaraco = #{dataDesembaraco},</if>
 		<if test="transporteInternacional!= null">transporteInternacional = #{transporteInternacional.id},
 		</if>
 		<if test="valorAFRMM!= null">valorAFRMM = #{valorAFRMM},</if>

@@ -38,6 +38,7 @@
 		<property name="cadastrosBAR" ref="cadastrosBARTarget" />
 		<property name="nfeBAR" ref="nfeBARTarget" />
 		<property name="vendasBAR" ref="vendasBARTarget" />
+		<property name="nfnotaInfoItemBAR" ref="nfnotainfoitemBARTarget" />
 	</bean>
 
 	<bean id="vendasBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Vendas.VendasBARImpl">

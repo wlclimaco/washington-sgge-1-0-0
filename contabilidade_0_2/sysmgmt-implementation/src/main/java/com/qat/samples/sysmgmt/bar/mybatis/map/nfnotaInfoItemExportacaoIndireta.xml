@@ -44,7 +44,7 @@
 
 	</sql>
 	<sql id="allNFNotaInfoItemExportacaoIndiretaValues">
-		#{numeroRegistroExportacao.id},
+		#{numeroRegistroExportacao},
 		#{chaveAcessoNFe},
 		#{quantidadeItemEfetivamenteExportado},
 		#{parentId},
@@ -112,7 +112,7 @@
 	<update id="updateNFNotaInfoItemExportacaoIndireta"
 		parameterType="NFNotaInfoItemExportacaoIndireta">
 		UPDATE nfnotainfoitemexportacaoindireta SET
-		<if test="numeroRegistroExportacao!= null">numeroRegistroExportacao = #{numeroRegistroExportacao.id},
+		<if test="numeroRegistroExportacao!= null">numeroRegistroExportacao = #{numeroRegistroExportacao},
 		</if>
 		<if test="chaveAcessoNFe!= null">chaveAcessoNFe = #{chaveAcessoNFe},</if>
 		<if test="quantidadeItemEfetivamenteExportado!= null">quantidadeItemEfetivamenteExportado =
