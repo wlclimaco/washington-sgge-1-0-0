@@ -4342,8 +4342,7 @@ public static NFNotaInfoItemProduto insertNFNotaInfoItemProduto(Integer id, Tabe
 	nfnotainfoitemproduto.setCodigoDeBarras("NATIVE INSERT UPDATE");
 	nfnotainfoitemproduto.setDescricao("NATIVE INSERT UPDATE");
 	nfnotainfoitemproduto.setNcm("NATIVE INSERT UPDATE");
-	nfnotainfoitemproduto.setNomeclaturaValorAduaneiroEstatistica(new ArrayList<String>());
-	nfnotainfoitemproduto.getNomeclaturaValorAduaneiroEstatistica().add(new String("Teste"));
+	nfnotainfoitemproduto.setNomeclaturaValorAduaneiroEstatistica("ddddd,ddd,ffff,fff");
 	nfnotainfoitemproduto.setCodigoEspecificadorSituacaoTributaria("NATIVE INSERT UPDATE");
 	nfnotainfoitemproduto.setExtipi("NATIVE INSERT UPDATE");
 	nfnotainfoitemproduto.setCfop("NATIVE INSERT UPDATE");
@@ -4404,7 +4403,7 @@ public static NFNotaInfoItemProdutoDeclaracaoImportacao insertNFNotaInfoItemProd
 	nfnotainfoitemprodutodeclaracaoimportacao.setCodigoExportador("NATIVE INSERT UPDATE");
 	nfnotainfoitemprodutodeclaracaoimportacao.setAdicoes(new ArrayList<NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao>());
 	nfnotainfoitemprodutodeclaracaoimportacao.getAdicoes()
-			.add(insertNFNotaInfoItemProdutoDeclaracaoImportacaoAdicao(id, tabela, action));
+			.add(insertNFNotaInfoItemProdutoDeclaracaoImportacaoAdicao(null, tabela, action));
 	nfnotainfoitemprodutodeclaracaoimportacao.setParentId(id);
 	nfnotainfoitemprodutodeclaracaoimportacao.setEmprId(1);
 	nfnotainfoitemprodutodeclaracaoimportacao.setModifyDateUTC(a.getTime());
@@ -4445,7 +4444,7 @@ public static NFNotaInfoItemDetalheExportacao insertNFNotaInfoItemDetalheExporta
 	Date a = new Date();
 	nfnotainfoitemdetalheexportacao.setId(id);
 	nfnotainfoitemdetalheexportacao.setAtoConcessorioDrawback(a.getTime());
-	nfnotainfoitemdetalheexportacao.setExportacaoIndireta(insertNFNotaInfoItemExportacaoIndireta(id, tabela, action));
+	nfnotainfoitemdetalheexportacao.setExportacaoIndireta(insertNFNotaInfoItemExportacaoIndireta(null, tabela, action));
 	nfnotainfoitemdetalheexportacao.setParentId(id);
 	nfnotainfoitemdetalheexportacao.setEmprId(1);
 	nfnotainfoitemdetalheexportacao.setModifyDateUTC(a.getTime());
@@ -4572,7 +4571,7 @@ public static NFNotaInfoItemProdutoCombustivel insertNFNotaInfoItemProdutoCombus
 	nfnotainfoitemprodutocombustivel.setCodigoAutorizacaoCOFIF("NATIVE INSERT UPDATE");
 	nfnotainfoitemprodutocombustivel.setQuantidade("NATIVE INSERT UPDATE");
 	nfnotainfoitemprodutocombustivel.setUf("NATIVE INSERT UPDATE");
-	nfnotainfoitemprodutocombustivel.setCide(insertNFNotaInfoItemProdutoCombustivelCIDE(id, tabela, action));
+	nfnotainfoitemprodutocombustivel.setCide(insertNFNotaInfoItemProdutoCombustivelCIDE(null, tabela, action));
 	nfnotainfoitemprodutocombustivel.setParentId(id);
 	nfnotainfoitemprodutocombustivel.setEmprId(1);
 	nfnotainfoitemprodutocombustivel.setModifyDateUTC(a.getTime());
@@ -4647,15 +4646,15 @@ public static NFNotaInfoItemImposto insertNFNotaInfoItemImposto(Integer id, Tabe
 	Date a = new Date();
 	nfnotainfoitemimposto.setId(id);
 	nfnotainfoitemimposto.setValorTotalTributos("NATIVE INSERT UPDATE");
-	nfnotainfoitemimposto.setIcms(insertNFNotaInfoItemImpostoICMS(id, tabela, action));
-	nfnotainfoitemimposto.setIpi(insertNFNotaInfoItemImpostoIPI(id, tabela, action));
-	nfnotainfoitemimposto.setImpostoImportacao(insertNFNotaInfoItemImpostoImportacao(id, tabela, action));
-	nfnotainfoitemimposto.setIssqn(insertNFNotaInfoItemImpostoISSQN(id, tabela, action));
-	nfnotainfoitemimposto.setPis(insertNFNotaInfoItemImpostoPIS(id, tabela, action));
-	nfnotainfoitemimposto.setPisst(insertNFNotaInfoItemImpostoPISST(id, tabela, action));
-	nfnotainfoitemimposto.setCofins(insertNFNotaInfoItemImpostoCOFINS(id, tabela, action));
-	nfnotainfoitemimposto.setCofinsst(insertNFNotaInfoItemImpostoCOFINSST(id, tabela, action));
-	nfnotainfoitemimposto.setIcmsUfDestino(insertNFNotaInfoItemImpostoICMSUFDestino(id, tabela, action));
+	nfnotainfoitemimposto.setIcms(insertNFNotaInfoItemImpostoICMS(null, tabela, action));
+	nfnotainfoitemimposto.setIpi(insertNFNotaInfoItemImpostoIPI(null, tabela, action));
+	nfnotainfoitemimposto.setImpostoImportacao(insertNFNotaInfoItemImpostoImportacao(null, tabela, action));
+	nfnotainfoitemimposto.setIssqn(insertNFNotaInfoItemImpostoISSQN(null, tabela, action));
+	nfnotainfoitemimposto.setPis(insertNFNotaInfoItemImpostoPIS(null, tabela, action));
+	nfnotainfoitemimposto.setPisst(insertNFNotaInfoItemImpostoPISST(null, tabela, action));
+	nfnotainfoitemimposto.setCofins(insertNFNotaInfoItemImpostoCOFINS(null, tabela, action));
+	nfnotainfoitemimposto.setCofinsst(insertNFNotaInfoItemImpostoCOFINSST(null, tabela, action));
+	nfnotainfoitemimposto.setIcmsUfDestino(insertNFNotaInfoItemImpostoICMSUFDestino(null, tabela, action));
 	nfnotainfoitemimposto.setParentId(id);
 	nfnotainfoitemimposto.setEmprId(1);
 	nfnotainfoitemimposto.setModifyDateUTC(a.getTime());
@@ -5389,10 +5388,10 @@ public static NFNotaInfoItemImpostoCOFINS insertNFNotaInfoItemImpostoCOFINS(Inte
 	NFNotaInfoItemImpostoCOFINS nfnotainfoitemimpostocofins = new NFNotaInfoItemImpostoCOFINS();
 	Date a = new Date();
 	nfnotainfoitemimpostocofins.setId(id);
-	nfnotainfoitemimpostocofins.setAliquota(insertNFNotaInfoItemImpostoCOFINSAliquota(id, tabela, action));
-	nfnotainfoitemimpostocofins.setQuantidade(insertNFNotaInfoItemImpostoCOFINSQuantidade(id, tabela, action));
-	nfnotainfoitemimpostocofins.setNaoTributavel(insertNFNotaInfoItemImpostoCOFINSNaoTributavel(id, tabela, action));
-	nfnotainfoitemimpostocofins.setOutrasOperacoes(insertNFNotaInfoItemImpostoCOFINSOutrasOperacoes(id, tabela, action));
+	nfnotainfoitemimpostocofins.setAliquota(insertNFNotaInfoItemImpostoCOFINSAliquota(null, tabela, action));
+	nfnotainfoitemimpostocofins.setQuantidade(insertNFNotaInfoItemImpostoCOFINSQuantidade(null, tabela, action));
+	nfnotainfoitemimpostocofins.setNaoTributavel(insertNFNotaInfoItemImpostoCOFINSNaoTributavel(null, tabela, action));
+	nfnotainfoitemimpostocofins.setOutrasOperacoes(insertNFNotaInfoItemImpostoCOFINSOutrasOperacoes(null, tabela, action));
 	nfnotainfoitemimpostocofins.setParentId(id);
 	nfnotainfoitemimpostocofins.setEmprId(1);
 	nfnotainfoitemimpostocofins.setModifyDateUTC(a.getTime());
@@ -5540,7 +5539,7 @@ public static NFImpostoDevolvido insertNFImpostoDevolvido(Integer id, TabelaEnum
 	Date a = new Date();
 	nfimpostodevolvido.setId(id);
 	nfimpostodevolvido.setPercentualDevolucao("NATIVE INSERT UPDATE");
-	nfimpostodevolvido.setInformacaoIPIDevolvido(insertNFInformacaoImpostoDevolvido(id, tabela, action));
+	nfimpostodevolvido.setInformacaoIPIDevolvido(insertNFInformacaoImpostoDevolvido(null, tabela, action));
 	nfimpostodevolvido.setParentId(id);
 	nfimpostodevolvido.setEmprId(1);
 	nfimpostodevolvido.setModifyDateUTC(a.getTime());

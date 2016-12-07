@@ -26,39 +26,39 @@
 		<result property="modifyUser" column="modify_user" />
 		<result property="modifyDateUTC" column="modify_date" />
 		<collection property="icms00" column="icms00"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoICMS00Map.fetchNFNotaInfoItemImpostoICMS00ById" />
 		<collection property="icms10" column="icms10"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoICMS10Map.fetchNFNotaInfoItemImpostoICMS10ById" />
 		<collection property="icms20" column="icms20"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoICMS20Map.fetchNFNotaInfoItemImpostoICMS20ById" />
 		<collection property="icms30" column="icms30"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoICMS30Map.fetchNFNotaInfoItemImpostoICMS30ById" />
 		<collection property="icms40" column="icms40"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoICMS40Map.fetchNFNotaInfoItemImpostoICMS40ById" />
 		<collection property="icms51" column="icms51"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoICMS51Map.fetchNFNotaInfoItemImpostoICMS51ById" />
 		<collection property="icms60" column="icms60"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoICMS60Map.fetchNFNotaInfoItemImpostoICMS60ById" />
 		<collection property="icms70" column="icms70"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoICMS70Map.fetchNFNotaInfoItemImpostoICMS70ById" />
 		<collection property="icms90" column="icms90"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoICMS90Map.fetchNFNotaInfoItemImpostoICMS90ById" />
 		<collection property="icmsPartilhado" column="icmsPartilhado"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoICMSPartilhadoMap.fetchNFNotaInfoItemImpostoICMSPartilhadoById" />
 		<collection property="icmsst" column="icmsst"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoICMSSTMap.fetchNFNotaInfoItemImpostoICMSSTById" />
 		<collection property="icmssn101" column="icmssn101"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoICMSSN101Map.fetchNFNotaInfoItemImpostoICMSSN101ById" />
 		<collection property="icmssn102" column="icmssn102"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoICMSSN102Map.fetchNFNotaInfoItemImpostoICMSSN102ById" />
 		<collection property="icmssn201" column="icmssn201"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoICMSSN201Map.fetchNFNotaInfoItemImpostoICMSSN201ById" />
 		<collection property="icmssn202" column="icmssn202"
-			select="RegimeMap.fetchRegimeById" />
-		<collection property="icmssn500" column="icmssn500"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoICMSSN202Map.fetchNFNotaInfoItemImpostoICMSSN202ById" />
+		<collection property="icmssn5202" column="icmssn5202"
+			select="NFNotaInfoItemImpostoICMSSN500Map.fetchNFNotaInfoItemImpostoICMSSN500ById" />
 		<collection property="icmssn900" column="icmssn900"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoICMSSN900Map.fetchNFNotaInfoItemImpostoICMSSN900ById" />
 	</resultMap>
 
 	<sql id="allNFNotaInfoItemImpostoICMSColumns">

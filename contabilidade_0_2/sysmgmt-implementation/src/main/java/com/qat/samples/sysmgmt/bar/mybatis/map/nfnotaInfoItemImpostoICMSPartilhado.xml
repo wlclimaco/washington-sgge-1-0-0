@@ -40,15 +40,15 @@
 		<result property="modifyUser" column="modify_user" />
 		<result property="modifyDateUTC" column="modify_date" />
 		<collection property="origem" column="origem"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="situacaoTributaria" column="situacaoTributaria"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="modalidadeBCICMS" column="modalidadeBCICMS"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="modalidadeBCICMSST" column="modalidadeBCICMSST"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="ufICMSST" column="ufICMSST"
-			select="RegimeMap.fetchRegimeById" />
+			select="EstadoMap.fetchEstadoById" />
 	</resultMap>
 
 	<sql id="allNFNotaInfoItemImpostoICMSPartilhadoColumns">

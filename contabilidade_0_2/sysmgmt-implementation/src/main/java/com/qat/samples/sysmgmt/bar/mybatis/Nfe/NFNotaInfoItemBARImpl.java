@@ -9528,17 +9528,6 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 				nfnotainfoitemimpostopis.getTransactionId(), getHistoricoBAR(), response,
 				nfnotainfoitemimpostopis.getId(), nfnotainfoitemimpostopis.getUserId());
 
-		if (nfnotainfoitemimpostopis.getId() != 0 && nfnotainfoitemimpostopis.getId() != null) {
-			Status status = new Status();
-			status.setStatus(CdStatusTypeEnum.ATIVO);
-			List<Status> statusList = new ArrayList<Status>();
-			statusList.add(status);
-			count1 = StatusBARD.maintainStatusAssociations(statusList, response, nfnotainfoitemimpostopis.getId(), null,
-					AcaoEnum.INSERT, nfnotainfoitemimpostopis.getCreateUser(), nfnotainfoitemimpostopis.getId(),
-					TabelaEnum.NFNOTAINFOITEMIMPOSTOPIS, statusBAR, historicoBAR,
-					nfnotainfoitemimpostopis.getTransactionId(), nfnotainfoitemimpostopis.getTransactionId());
-
-		}
 
 		return response;
 	}

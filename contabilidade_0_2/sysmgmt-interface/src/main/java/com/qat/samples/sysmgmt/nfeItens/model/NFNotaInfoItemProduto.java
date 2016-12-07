@@ -33,7 +33,7 @@ public class NFNotaInfoItemProduto extends ModelCosmeDamiao {
 	 * The econtabil nomeclaturaValorAduaneiroEstatistica for the
 	 * NFNotaInfoItemProduto.
 	 */
-	private List<String> nomeclaturaValorAduaneiroEstatistica;
+	private String nomeclaturaValorAduaneiroEstatistica;
 
 	/**
 	 * The econtabil codigoEspecificadorSituacaoTributaria for the
@@ -256,7 +256,7 @@ public class NFNotaInfoItemProduto extends ModelCosmeDamiao {
 	 *
 	 * @return the nomeclaturavaloraduaneiroestatistica
 	 */
-	public List<String> getNomeclaturaValorAduaneiroEstatistica() {
+	public String getNomeclaturaValorAduaneiroEstatistica() {
 		return nomeclaturaValorAduaneiroEstatistica;
 	}
 
@@ -266,7 +266,7 @@ public class NFNotaInfoItemProduto extends ModelCosmeDamiao {
 	 * @param id
 	 *            the nomeclaturavaloraduaneiroestatistica to set
 	 */
-	public void setNomeclaturaValorAduaneiroEstatistica(List<String> nomeclaturavaloraduaneiroestatistica) {
+	public void setNomeclaturaValorAduaneiroEstatistica(String nomeclaturavaloraduaneiroestatistica) {
 		this.nomeclaturaValorAduaneiroEstatistica = nomeclaturavaloraduaneiroestatistica;
 	}
 

@@ -42,19 +42,19 @@
 		<result property="modifyUser" column="modify_user" />
 		<result property="modifyDateUTC" column="modify_date" />
 		<collection property="restricao" column="restricao"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="corDENATRAN" column="corDENATRAN"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="condicaoChassi" column="condicaoChassi"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="condicao" column="condicao"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="tipoVeiculo" column="tipoVeiculo"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="tipoCombustivel" column="tipoCombustivel"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="tipoOperacao" column="tipoOperacao"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 	</resultMap>
 
 	<sql id="allNFNotaInfoItemProdutoVeiculoColumns">

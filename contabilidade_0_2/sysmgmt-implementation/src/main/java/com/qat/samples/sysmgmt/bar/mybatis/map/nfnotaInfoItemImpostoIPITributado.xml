@@ -31,7 +31,7 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="situacaoTributaria" column="situacaoTributaria" select="RegimeMap.fetchRegimeById"/>
+<collection property="situacaoTributaria" column="situacaoTributaria" select="DoisValorMap.fetchDoisValorById"/>
   </resultMap>
 
   <sql id="allNFNotaInfoItemImpostoIPITributadoColumns">

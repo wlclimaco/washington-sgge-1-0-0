@@ -21,7 +21,6 @@
 		<result property="codigoAutorizacaoCOFIF" column="codigoAutorizacaoCOFIF" />
 		<result property="quantidade" column="quantidade" />
 		<result property="uf" column="uf" />
-
 		<result property="parentId" column="parentId" />
 		<result property="tabelaEnumValue" column="tabelaEnumValue" />
 		<result property="emprId" column="emprId" />
@@ -31,7 +30,7 @@
 		<result property="modifyUser" column="modify_user" />
 		<result property="modifyDateUTC" column="modify_date" />
 		<collection property="cide" column="cide"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemProdutoCombustivelCIDEMap.fetchNFNotaInfoItemProdutoCombustivelCIDEById" />
 	</resultMap>
 
 	<sql id="allNFNotaInfoItemProdutoCombustivelColumns">

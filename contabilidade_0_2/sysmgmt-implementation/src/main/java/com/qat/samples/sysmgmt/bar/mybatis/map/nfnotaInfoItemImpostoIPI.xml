@@ -30,9 +30,9 @@
 		<result property="modifyDateUTC" column="modify_date" />
 		<result property="quantidadeSelo" column="quantidadeSelo" />
 		<collection property="tributado" column="tributado"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoIPITributadoMap.fetchNFNotaInfoItemImpostoIPITributadoById" />
 		<collection property="naoTributado" column="naoTributado"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoIPINaoTributadoMap.fetchNFNotaInfoItemImpostoIPINaoTributadoById" />
 	</resultMap>
 
 	<sql id="allNFNotaInfoItemImpostoIPIColumns">

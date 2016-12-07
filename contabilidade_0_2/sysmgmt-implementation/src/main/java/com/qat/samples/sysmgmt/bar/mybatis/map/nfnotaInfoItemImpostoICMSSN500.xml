@@ -28,9 +28,9 @@
 		<result property="modifyUser" column="modify_user" />
 		<result property="modifyDateUTC" column="modify_date" />
 		<collection property="origem" column="origem"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="situacaoOperacaoSN" column="situacaoOperacaoSN"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 	</resultMap>
 
 	<sql id="allNFNotaInfoItemImpostoICMSSN500Columns">

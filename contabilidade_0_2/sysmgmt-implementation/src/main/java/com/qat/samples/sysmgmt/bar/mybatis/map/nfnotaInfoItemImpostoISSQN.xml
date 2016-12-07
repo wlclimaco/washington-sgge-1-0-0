@@ -40,8 +40,8 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-    <collection property="indicadorExigibilidadeISS" column="indicadorExigibilidadeISS" select="RegimeMap.fetchRegimeById"/>
-    <collection property="indicadorIncentivoFiscal" column="indicadorIncentivoFiscal" select="RegimeMap.fetchRegimeById"/>
+    <collection property="indicadorExigibilidadeISS" column="indicadorExigibilidadeISS" select="DoisValorMap.fetchDoisValorById"/>
+    <collection property="indicadorIncentivoFiscal" column="indicadorIncentivoFiscal" select="DoisValorMap.fetchDoisValorById"/>
   </resultMap>
 
   <sql id="allNFNotaInfoItemImpostoISSQNColumns">

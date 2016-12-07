@@ -77,6 +77,13 @@
 		<include refid="allNFNotaInfoItemProdutoMedicamentoColumns" />
 		FROM nfnotainfoitemprodutomedicamento WHERE id = #{fetchid}
 	</select>
+	
+	<select id="fetchNFNotaInfoItemProdutoMedicamentoByParentId"
+		parameterType="Integer" resultMap="NFNotaInfoItemProdutoMedicamentoResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemProdutoMedicamentoColumns" />
+		FROM nfnotainfoitemprodutomedicamento WHERE parentId = #{fetchid}
+	</select>
 
 	<select id="fetchAllNFNotaInfoItemProdutoMedicamentosRequest"
 		parameterType="PagedInquiryRequest" resultMap="NFNotaInfoItemProdutoMedicamentoResult">

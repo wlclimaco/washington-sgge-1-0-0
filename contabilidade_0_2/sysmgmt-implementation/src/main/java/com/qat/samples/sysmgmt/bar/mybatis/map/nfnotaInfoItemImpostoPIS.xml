@@ -26,13 +26,13 @@
 		<result property="modifyUser" column="modify_user" />
 		<result property="modifyDateUTC" column="modify_date" />
 		<collection property="aliquota" column="aliquota"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoPISAliquotaMap.fetchNFNotaInfoItemImpostoPISAliquotaById" />
 		<collection property="quantidade" column="quantidade"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoPISQuantidadeMap.fetchNFNotaInfoItemImpostoPISQuantidadeById" />
 		<collection property="naoTributado" column="naoTributado"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoPISNaoTributadoMap.fetchNFNotaInfoItemImpostoPISNaoTributadoById" />
 		<collection property="outrasOperacoes" column="outrasOperacoes"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoPISOutrasOperacoesMap.fetchNFNotaInfoItemImpostoPISOutrasOperacoesById" />
 	</resultMap>
 
 	<sql id="allNFNotaInfoItemImpostoPISColumns">

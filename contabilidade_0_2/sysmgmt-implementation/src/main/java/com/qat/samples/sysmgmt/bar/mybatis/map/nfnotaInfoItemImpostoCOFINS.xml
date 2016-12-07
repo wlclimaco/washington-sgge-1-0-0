@@ -26,13 +26,13 @@
 		<result property="modifyUser" column="modify_user" />
 		<result property="modifyDateUTC" column="modify_date" />
 		<collection property="aliquota" column="aliquota"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoCOFINSAliquotaMap.fetchNFNotaInfoItemImpostoCOFINSAliquotaById" />
 		<collection property="quantidade" column="quantidade"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoCOFINSQuantidadeMap.fetchNFNotaInfoItemImpostoCOFINSQuantidadeById" />
 		<collection property="naoTributavel" column="naoTributavel"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoCOFINSNaoTributavelMap.fetchNFNotaInfoItemImpostoCOFINSNaoTributavelById" />
 		<collection property="outrasOperacoes" column="outrasOperacoes"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoCOFINSOutrasOperacoesMap.fetchNFNotaInfoItemImpostoCOFINSOutrasOperacoesById" />
 	</resultMap>
 
 	<sql id="allNFNotaInfoItemImpostoCOFINSColumns">

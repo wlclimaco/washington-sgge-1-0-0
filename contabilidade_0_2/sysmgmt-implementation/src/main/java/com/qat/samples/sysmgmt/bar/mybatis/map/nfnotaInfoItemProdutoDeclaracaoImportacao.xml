@@ -35,11 +35,11 @@
 		<result property="modifyUser" column="modify_user" />
 		<result property="modifyDateUTC" column="modify_date" />
 		<collection property="transporteInternacional" column="transporteInternacional"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="formaImportacaoIntermediacao" column="formaImportacaoIntermediacao"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="adicoes" column="id"
-			select="DocumentoMap.fetchDocumentoByEmpresa" />
+			select="NFNotaInfoItemProdutoDeclaracaoImportacaoAdicaoMap.fetchNFNotaInfoItemProdutoDeclaracaoImportacaoAdicaoByParentId" />
 	</resultMap>
 
 	<sql id="allNFNotaInfoItemProdutoDeclaracaoImportacaoColumns">
@@ -100,6 +100,14 @@
 		<include refid="allNFNotaInfoItemProdutoDeclaracaoImportacaoColumns" />
 		FROM nfnotainfoitemprodutodeclaracaoimportacao WHERE id = #{fetchid}
 	</select>
+	
+	<select id="fetchNFNotaInfoItemProdutoDeclaracaoImportacaoByParentId"
+		parameterType="Integer" resultMap="NFNotaInfoItemProdutoDeclaracaoImportacaoResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemProdutoDeclaracaoImportacaoColumns" />
+		FROM nfnotainfoitemprodutodeclaracaoimportacao WHERE parentId = #{fetchid}
+	</select>
+	
 
 	<select id="fetchAllNFNotaInfoItemProdutoDeclaracaoImportacaosRequest"
 		parameterType="PagedInquiryRequest" resultMap="NFNotaInfoItemProdutoDeclaracaoImportacaoResult">

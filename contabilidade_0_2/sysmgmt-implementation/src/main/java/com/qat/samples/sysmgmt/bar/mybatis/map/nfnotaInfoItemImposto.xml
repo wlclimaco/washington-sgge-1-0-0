@@ -26,23 +26,23 @@
 		<result property="modifyUser" column="modify_user" />
 		<result property="modifyDateUTC" column="modify_date" />
 		<collection property="icms" column="icms"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoICMSMap.fetchNFNotaInfoItemImpostoICMSById" />
 		<collection property="ipi" column="ipi"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoIPIMap.fetchNFNotaInfoItemImpostoIPIById" />
 		<collection property="impostoImportacao" column="impostoImportacao"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoImportacaoMap.fetchNFNotaInfoItemImpostoImportacaoById" />
 		<collection property="issqn" column="issqn"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoISSQNMap.fetchNFNotaInfoItemImpostoISSQNById" />
 		<collection property="pis" column="pis"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoPISMap.fetchNFNotaInfoItemImpostoPISById" />
 		<collection property="pisst" column="pisst"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoPISSTMap.fetchNFNotaInfoItemImpostoPISSTById" />
 		<collection property="cofins" column="cofins"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoCOFINSMap.fetchNFNotaInfoItemImpostoCOFINSById" />
 		<collection property="cofinsst" column="cofinsst"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoCOFINSSTMap.fetchNFNotaInfoItemImpostoCOFINSSTById" />
 		<collection property="icmsUfDestino" column="icmsUfDestino"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoICMSUFDestinoMap.fetchNFNotaInfoItemImpostoICMSUFDestinoById" />
 	</resultMap>
 
 	<sql id="allNFNotaInfoItemImpostoColumns">

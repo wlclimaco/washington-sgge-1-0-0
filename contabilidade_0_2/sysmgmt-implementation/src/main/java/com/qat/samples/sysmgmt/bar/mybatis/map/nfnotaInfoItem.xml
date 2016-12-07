@@ -28,11 +28,11 @@
 		<result property="modifyUser" column="modify_user" />
 		<result property="modifyDateUTC" column="modify_date" />
 		<collection property="produto" column="produto"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemProdutoMap.fetchNFNotaInfoItemProdutoById" />
 		<collection property="imposto" column="imposto"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemImpostoMap.fetchNFNotaInfoItemImpostoById" />
 		<collection property="impostoDevolvido" column="impostoDevolvido"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFImpostoDevolvidoMap.fetchNFImpostoDevolvidoById" />
 	</resultMap>
 
 	<sql id="allNFNotaInfoItemColumns">

@@ -51,22 +51,22 @@
 		<result property="createDateUTC" column="create_date" />
 		<result property="modifyUser" column="modify_user" />
 		<result property="modifyDateUTC" column="modify_date" />
-		<collection property="nomeclaturaValorAduaneiroEstatistica"
-			column="id" select="DocumentoMap.fetchDocumentoByEmpresa" />
+		<result property="nomeclaturaValorAduaneiroEstatistica"
+			column="nomeclaturaValorAduaneiroEstatistica"/>
 		<collection property="compoeValorNota" column="compoeValorNota"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="declaracoesImportacao" column="id"
-			select="DocumentoMap.fetchDocumentoByEmpresa" />
+			select="NFNotaInfoItemProdutoDeclaracaoImportacaoMap.fetchNFNotaInfoItemProdutoDeclaracaoImportacaoByParentId" />
 		<collection property="detalhesExportacao" column="id"
-			select="DocumentoMap.fetchDocumentoByEmpresa" />
+			select="NFNotaInfoItemDetalheExportacaoMap.fetchNFNotaInfoItemDetalheExportacaoByParentId" />
 		<collection property="veiculo" column="veiculo"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemProdutoVeiculoMap.fetchNFNotaInfoItemProdutoVeiculoById" />
 		<collection property="medicamentos" column="id"
-			select="DocumentoMap.fetchDocumentoByEmpresa" />
+			select="NFNotaInfoItemProdutoMedicamentoMap.fetchNFNotaInfoItemProdutoMedicamentoByParentId" />
 		<collection property="armamentos" column="id"
-			select="DocumentoMap.fetchDocumentoByEmpresa" />
+			select="NFNotaInfoItemProdutoArmamentoMap.fetchNFNotaInfoItemProdutoArmamentoByParentId" />
 		<collection property="combustivel" column="combustivel"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemProdutoCombustivelMap.fetchNFNotaInfoItemProdutoCombustivelById" />
 	</resultMap>
 
 	<sql id="allNFNotaInfoItemProdutoColumns">

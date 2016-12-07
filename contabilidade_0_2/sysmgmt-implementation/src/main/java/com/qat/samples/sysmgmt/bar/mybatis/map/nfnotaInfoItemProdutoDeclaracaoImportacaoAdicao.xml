@@ -76,6 +76,12 @@
  <include refid="allNFNotaInfoItemProdutoDeclaracaoImportacaoAdicaoColumns" />
    FROM nfnotainfoitemprodutodeclaracaoimportacaoadicao WHERE id = #{fetchid}
  </select>
+ 
+  <select id="fetchNFNotaInfoItemProdutoDeclaracaoImportacaoAdicaoByParentId" parameterType="Integer" resultMap="NFNotaInfoItemProdutoDeclaracaoImportacaoAdicaoResult">
+    SELECT id,
+ <include refid="allNFNotaInfoItemProdutoDeclaracaoImportacaoAdicaoColumns" />
+   FROM nfnotainfoitemprodutodeclaracaoimportacaoadicao WHERE parentId = #{fetchid}
+ </select>
 
  <select id="fetchAllNFNotaInfoItemProdutoDeclaracaoImportacaoAdicaosRequest" parameterType="PagedInquiryRequest" resultMap="NFNotaInfoItemProdutoDeclaracaoImportacaoAdicaoResult">
 

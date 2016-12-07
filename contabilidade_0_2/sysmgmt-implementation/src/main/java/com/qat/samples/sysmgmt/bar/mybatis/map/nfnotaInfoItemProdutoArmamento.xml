@@ -29,7 +29,7 @@
 		<result property="modifyUser" column="modify_user" />
 		<result property="modifyDateUTC" column="modify_date" />
 		<collection property="tipo" column="tipo"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 	</resultMap>
 
 	<sql id="allNFNotaInfoItemProdutoArmamentoColumns">
@@ -74,6 +74,13 @@
 		SELECT id,
 		<include refid="allNFNotaInfoItemProdutoArmamentoColumns" />
 		FROM nfnotainfoitemprodutoarmamento WHERE id = #{fetchid}
+	</select>
+	
+	<select id="fetchNFNotaInfoItemProdutoArmamentoByParentId"
+		parameterType="Integer" resultMap="NFNotaInfoItemProdutoArmamentoResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemProdutoArmamentoColumns" />
+		FROM nfnotainfoitemprodutoarmamento WHERE parentId = #{fetchid}
 	</select>
 
 	<select id="fetchAllNFNotaInfoItemProdutoArmamentosRequest"

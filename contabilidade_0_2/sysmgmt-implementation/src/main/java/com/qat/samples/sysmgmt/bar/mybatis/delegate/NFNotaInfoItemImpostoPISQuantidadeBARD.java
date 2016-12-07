@@ -65,40 +65,15 @@ public final class NFNotaInfoItemImpostoPISQuantidadeBARD extends SqlSessionDaoS
 			{
 				case INSERT:
 					count = nfnotainfoitemimpostopisquantidadeDAC.insertNFNotaInfoItemImpostoPISQuantidade(nfnotainfoitemimpostopisquantidade).hasSystemError();
-					if (count == true)
-					{
-						Status status = new Status();
-						status.setStatus(CdStatusTypeEnum.ATIVO);
-						List<Status> statusList = new ArrayList<Status>();
-						statusList.add(status);
-						count =
-								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.NFNOTAINFOITEMIMPOSTOPISQUANTIDADE, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+					
 					break;
 				case UPDATE:
 					count = nfnotainfoitemimpostopisquantidadeDAC.updateNFNotaInfoItemImpostoPISQuantidade(nfnotainfoitemimpostopisquantidade).hasSystemError();
-					if (count == true)
-					{
-						count =
-								StatusBARD.maintainStatusAssociations(nfnotainfoitemimpostopisquantidade.getStatusList(), response, nfnotainfoitemimpostopisquantidade.getId(),
-										null,
-										AcaoEnum.UPDATE, UserId, empId, TabelaEnum.NFNOTAINFOITEMIMPOSTOPISQUANTIDADE, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+					
 					break;
 				case DELETE:
 					count = nfnotainfoitemimpostopisquantidadeDAC.deleteNFNotaInfoItemImpostoPISQuantidadeById(nfnotainfoitemimpostopisquantidade).hasSystemError();
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.DELETADO);
-					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
-					count =
-							StatusBARD.maintainStatusAssociations(statusList, response, nfnotainfoitemimpostopisquantidade.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.NFNOTAINFOITEMIMPOSTOPISQUANTIDADE, statusDAC, historicoDAC,
-									processId, historicoId);
-
+					
 					break;
 			}
 		

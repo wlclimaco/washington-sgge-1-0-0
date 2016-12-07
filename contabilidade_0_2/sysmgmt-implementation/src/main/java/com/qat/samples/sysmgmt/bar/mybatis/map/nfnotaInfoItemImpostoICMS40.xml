@@ -26,11 +26,11 @@
 		<result property="modifyUser" column="modify_user" />
 		<result property="modifyDateUTC" column="modify_date" />
 		<collection property="origem" column="origem"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="situacaoTributaria" column="situacaoTributaria"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="motivoDesoneracaoICMS" column="motivoDesoneracaoICMS"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 	</resultMap>
 
 	<sql id="allNFNotaInfoItemImpostoICMS40Columns">

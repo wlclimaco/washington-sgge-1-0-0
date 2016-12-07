@@ -65,7 +65,7 @@ public final class NFNotaInfoItemProdutoBARD extends SqlSessionDaoSupport
 			{
 				case INSERT:
 					count = nfnotainfoitemprodutoDAC.insertNFNotaInfoItemProduto(nfnotainfoitemproduto).hasSystemError();
-					if (count == true)
+					
 					break;
 				case UPDATE:
 					count = nfnotainfoitemprodutoDAC.updateNFNotaInfoItemProduto(nfnotainfoitemproduto).hasSystemError();

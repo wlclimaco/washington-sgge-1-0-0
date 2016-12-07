@@ -106,6 +106,8 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		getNFNotaInfoItemBAR().insertNFNotaInfoItem(nfnotainfoitem);
 		nfnotainfoitemResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemById(request);
 		Assert.assertEquals(nfnotainfoitem.getId(), nfnotainfoitemResponse.getId());
+		nfnotainfoitem = Objects.insertNFNotaInfoItem(4, TabelaEnum.NFNOTAINFOITEM,
+				PersistenceActionEnum.DELETE);
 		getNFNotaInfoItemBAR().deleteNFNotaInfoItemById(nfnotainfoitem);
 		nfnotainfoitemResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemById(request);
 		Assert.assertEquals(nfnotainfoitemResponse, null);
@@ -196,6 +198,8 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		getNFNotaInfoItemBAR().insertNFNotaInfoItemProduto(nfnotainfoitemproduto);
 		nfnotainfoitemprodutoResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemProdutoById(request);
 		Assert.assertEquals(nfnotainfoitemproduto.getId(), nfnotainfoitemprodutoResponse.getId());
+		nfnotainfoitemproduto = Objects.insertNFNotaInfoItemProduto(4, TabelaEnum.NFNOTAINFOITEMPRODUTO,
+				PersistenceActionEnum.DELETE);
 		getNFNotaInfoItemBAR().deleteNFNotaInfoItemProdutoById(nfnotainfoitemproduto);
 		nfnotainfoitemprodutoResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemProdutoById(request);
 		Assert.assertEquals(nfnotainfoitemprodutoResponse, null);
@@ -292,6 +296,8 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 				.fetchNFNotaInfoItemProdutoDeclaracaoImportacaoById(request);
 		Assert.assertEquals(nfnotainfoitemprodutodeclaracaoimportacao.getId(),
 				nfnotainfoitemprodutodeclaracaoimportacaoResponse.getId());
+		nfnotainfoitemprodutodeclaracaoimportacao = Objects.insertNFNotaInfoItemProdutoDeclaracaoImportacao(
+				1004, TabelaEnum.NFNOTAINFOITEMPRODUTODECLARACAOIMPORTACAO, PersistenceActionEnum.DELETE);
 		getNFNotaInfoItemBAR()
 				.deleteNFNotaInfoItemProdutoDeclaracaoImportacaoById(nfnotainfoitemprodutodeclaracaoimportacao);
 		nfnotainfoitemprodutodeclaracaoimportacaoResponse = getNFNotaInfoItemBAR()
@@ -485,10 +491,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 
 	@Test
 	public void testDeleteNFNotaInfoItemDetalheExportacao() {
-		NFNotaInfoItemDetalheExportacao nfnotainfoitemdetalheexportacao = Objects.insertNFNotaInfoItemDetalheExportacao(1004,
+		NFNotaInfoItemDetalheExportacao nfnotainfoitemdetalheexportacao = Objects.insertNFNotaInfoItemDetalheExportacao(10010,
 				TabelaEnum.NFNOTAINFOITEMDETALHEEXPORTACAO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1004);
+		request.setFetchId(10010);
 		NFNotaInfoItemDetalheExportacao nfnotainfoitemdetalheexportacaoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemDetalheExportacaoById(request);
 		Assert.assertEquals(nfnotainfoitemdetalheexportacaoResponse, null);
@@ -496,6 +502,8 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		nfnotainfoitemdetalheexportacaoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemDetalheExportacaoById(request);
 		Assert.assertEquals(nfnotainfoitemdetalheexportacao.getId(), nfnotainfoitemdetalheexportacaoResponse.getId());
+		nfnotainfoitemdetalheexportacao = Objects.insertNFNotaInfoItemDetalheExportacao(10010,
+				TabelaEnum.NFNOTAINFOITEMDETALHEEXPORTACAO, PersistenceActionEnum.DELETE);
 		getNFNotaInfoItemBAR().deleteNFNotaInfoItemDetalheExportacaoById(nfnotainfoitemdetalheexportacao);
 		nfnotainfoitemdetalheexportacaoResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemDetalheExportacaoById(request);
@@ -968,6 +976,8 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		nfnotainfoitemprodutocombustivelResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemProdutoCombustivelById(request);
 		Assert.assertEquals(nfnotainfoitemprodutocombustivel.getId(), nfnotainfoitemprodutocombustivelResponse.getId());
+		nfnotainfoitemprodutocombustivel = Objects.insertNFNotaInfoItemProdutoCombustivel(4,
+				TabelaEnum.NFNOTAINFOITEMPRODUTOCOMBUSTIVEL, PersistenceActionEnum.DELETE);
 		getNFNotaInfoItemBAR().deleteNFNotaInfoItemProdutoCombustivelById(nfnotainfoitemprodutocombustivel);
 		nfnotainfoitemprodutocombustivelResponse = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemProdutoCombustivelById(request);
@@ -1159,6 +1169,8 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		getNFNotaInfoItemBAR().insertNFImpostoDevolvido(nfimpostodevolvido);
 		nfimpostodevolvidoResponse = getNFNotaInfoItemBAR().fetchNFImpostoDevolvidoById(request);
 		Assert.assertEquals(nfimpostodevolvido.getId(), nfimpostodevolvidoResponse.getId());
+		nfimpostodevolvido = Objects.insertNFImpostoDevolvido(4, TabelaEnum.NFIMPOSTODEVOLVIDO,
+				PersistenceActionEnum.DELETE);
 		getNFNotaInfoItemBAR().deleteNFImpostoDevolvidoById(nfimpostodevolvido);
 		nfimpostodevolvidoResponse = getNFNotaInfoItemBAR().fetchNFImpostoDevolvidoById(request);
 		Assert.assertEquals(nfimpostodevolvidoResponse, null);
@@ -1342,6 +1354,8 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		getNFNotaInfoItemBAR().insertNFNotaInfoItemImposto(nfnotainfoitemimposto);
 		nfnotainfoitemimpostoResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoById(request);
 		Assert.assertEquals(nfnotainfoitemimposto.getId(), nfnotainfoitemimpostoResponse.getId());
+		nfnotainfoitemimposto = Objects.insertNFNotaInfoItemImposto(4, TabelaEnum.NFNOTAINFOITEMIMPOSTO,
+				PersistenceActionEnum.DELETE);
 		getNFNotaInfoItemBAR().deleteNFNotaInfoItemImpostoById(nfnotainfoitemimposto);
 		nfnotainfoitemimpostoResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoById(request);
 		Assert.assertEquals(nfnotainfoitemimpostoResponse, null);
@@ -1434,6 +1448,8 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		getNFNotaInfoItemBAR().insertNFNotaInfoItemImpostoICMS(nfnotainfoitemimpostoicms);
 		nfnotainfoitemimpostoicmsResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoICMSById(request);
 		Assert.assertEquals(nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicmsResponse.getId());
+		nfnotainfoitemimpostoicms = Objects.insertNFNotaInfoItemImpostoICMS(4,
+				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMS, PersistenceActionEnum.DELETE);
 		getNFNotaInfoItemBAR().deleteNFNotaInfoItemImpostoICMSById(nfnotainfoitemimpostoicms);
 		nfnotainfoitemimpostoicmsResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoICMSById(request);
 		Assert.assertEquals(nfnotainfoitemimpostoicmsResponse, null);
@@ -3114,6 +3130,8 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		getNFNotaInfoItemBAR().insertNFNotaInfoItemImpostoIPI(nfnotainfoitemimpostoipi);
 		nfnotainfoitemimpostoipiResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoIPIById(request);
 		Assert.assertEquals(nfnotainfoitemimpostoipi.getId(), nfnotainfoitemimpostoipiResponse.getId());
+		nfnotainfoitemimpostoipi = Objects.insertNFNotaInfoItemImpostoIPI(4,
+				TabelaEnum.NFNOTAINFOITEMIMPOSTOIPI, PersistenceActionEnum.DELETE);
 		getNFNotaInfoItemBAR().deleteNFNotaInfoItemImpostoIPIById(nfnotainfoitemimpostoipi);
 		nfnotainfoitemimpostoipiResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoIPIById(request);
 		Assert.assertEquals(nfnotainfoitemimpostoipiResponse, null);
@@ -3587,6 +3605,8 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		getNFNotaInfoItemBAR().insertNFNotaInfoItemImpostoPIS(nfnotainfoitemimpostopis);
 		nfnotainfoitemimpostopisResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoPISById(request);
 		Assert.assertEquals(nfnotainfoitemimpostopis.getId(), nfnotainfoitemimpostopisResponse.getId());
+		nfnotainfoitemimpostopis = Objects.insertNFNotaInfoItemImpostoPIS(4,
+				TabelaEnum.NFNOTAINFOITEMIMPOSTOPIS, PersistenceActionEnum.DELETE);
 		getNFNotaInfoItemBAR().deleteNFNotaInfoItemImpostoPISById(nfnotainfoitemimpostopis);
 		nfnotainfoitemimpostopisResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoPISById(request);
 		Assert.assertEquals(nfnotainfoitemimpostopisResponse, null);
@@ -4160,6 +4180,8 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		getNFNotaInfoItemBAR().insertNFNotaInfoItemImpostoCOFINS(nfnotainfoitemimpostocofins);
 		nfnotainfoitemimpostocofinsResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoCOFINSById(request);
 		Assert.assertEquals(nfnotainfoitemimpostocofins.getId(), nfnotainfoitemimpostocofinsResponse.getId());
+		nfnotainfoitemimpostocofins = Objects.insertNFNotaInfoItemImpostoCOFINS(4,
+				TabelaEnum.NFNOTAINFOITEMIMPOSTOCOFINS, PersistenceActionEnum.DELETE);
 		getNFNotaInfoItemBAR().deleteNFNotaInfoItemImpostoCOFINSById(nfnotainfoitemimpostocofins);
 		nfnotainfoitemimpostocofinsResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoCOFINSById(request);
 		Assert.assertEquals(nfnotainfoitemimpostocofinsResponse, null);
@@ -4829,15 +4851,17 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 
 	@Test
 	public void testDeleteNFImpostoDevolvido() {
-		NFImpostoDevolvido nfimpostodevolvido = Objects.insertNFImpostoDevolvido(4, TabelaEnum.NFIMPOSTODEVOLVIDO,
+		NFImpostoDevolvido nfimpostodevolvido = Objects.insertNFImpostoDevolvido(4000, TabelaEnum.NFIMPOSTODEVOLVIDO,
 				PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(4000);
 		NFImpostoDevolvido nfimpostodevolvidoResponse = getNFNotaInfoItemBAR().fetchNFImpostoDevolvidoById(request);
 		Assert.assertEquals(nfimpostodevolvidoResponse, null);
 		getNFNotaInfoItemBAR().insertNFImpostoDevolvido(nfimpostodevolvido);
 		nfimpostodevolvidoResponse = getNFNotaInfoItemBAR().fetchNFImpostoDevolvidoById(request);
 		Assert.assertEquals(nfimpostodevolvido.getId(), nfimpostodevolvidoResponse.getId());
+		nfimpostodevolvido = Objects.insertNFImpostoDevolvido(4000, TabelaEnum.NFIMPOSTODEVOLVIDO,
+				PersistenceActionEnum.DELETE);
 		getNFNotaInfoItemBAR().deleteNFImpostoDevolvidoById(nfimpostodevolvido);
 		nfimpostodevolvidoResponse = getNFNotaInfoItemBAR().fetchNFImpostoDevolvidoById(request);
 		Assert.assertEquals(nfimpostodevolvidoResponse, null);

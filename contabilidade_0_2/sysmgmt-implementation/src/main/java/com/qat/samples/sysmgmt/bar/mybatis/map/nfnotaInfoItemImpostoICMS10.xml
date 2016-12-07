@@ -35,13 +35,13 @@
 		<result property="modifyUser" column="modify_user" />
 		<result property="modifyDateUTC" column="modify_date" />
 		<collection property="modalidadeBCICMSST" column="modalidadeBCICMSST"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="origem" column="origem"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="situacaoTributaria" column="situacaoTributaria"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="modalidadeBCICMS" column="modalidadeBCICMS"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 	</resultMap>
 
 	<sql id="allNFNotaInfoItemImpostoICMS10Columns">

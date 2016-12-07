@@ -98,7 +98,7 @@ public INFeBAR getNFeBAR()
 		getNFeBAR().insertNFNota(nfnota);
 		nfnotaResponse = getNFeBAR().fetchNFNotaById(request);
 		Assert.assertEquals(nfnota.getId(), nfnotaResponse.getId());
-		nfnota = Objects.insertNFNota(4002, TabelaEnum.NFNOTA, PersistenceActionEnum.DELETE);
+		nfnota = Objects.insertNFNota(40002, TabelaEnum.NFNOTA, PersistenceActionEnum.DELETE);
 		getNFeBAR().deleteNFNotaById(nfnota);
 		nfnotaResponse = getNFeBAR().fetchNFNotaById(request);
 	//	Assert.assertEquals(nfnotaResponse, null);

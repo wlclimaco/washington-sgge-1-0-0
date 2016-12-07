@@ -17,7 +17,6 @@
 	<resultMap id="NFNotaInfoItemDetalheExportacaoResult" type="NFNotaInfoItemDetalheExportacao">
 		<result property="id" column="id" />
 		<result property="atoConcessorioDrawback" column="atoConcessorioDrawback" />
-
 		<result property="parentId" column="parentId" />
 		<result property="tabelaEnumValue" column="tabelaEnumValue" />
 		<result property="emprId" column="emprId" />
@@ -27,7 +26,7 @@
 		<result property="modifyUser" column="modify_user" />
 		<result property="modifyDateUTC" column="modify_date" />
 		<collection property="exportacaoIndireta" column="exportacaoIndireta"
-			select="RegimeMap.fetchRegimeById" />
+			select="NFNotaInfoItemExportacaoIndiretaMap.fetchNFNotaInfoItemExportacaoIndiretaById" />
 	</resultMap>
 
 	<sql id="allNFNotaInfoItemDetalheExportacaoColumns">
@@ -68,6 +67,13 @@
 		SELECT id,
 		<include refid="allNFNotaInfoItemDetalheExportacaoColumns" />
 		FROM nfnotainfoitemdetalheexportacao WHERE id = #{fetchid}
+	</select>
+	
+	<select id="fetchNFNotaInfoItemDetalheExportacaoByParentId"
+		parameterType="Integer" resultMap="NFNotaInfoItemDetalheExportacaoResult">
+		SELECT id,
+		<include refid="allNFNotaInfoItemDetalheExportacaoColumns" />
+		FROM nfnotainfoitemdetalheexportacao WHERE parentId = #{fetchid}
 	</select>
 
 	<select id="fetchAllNFNotaInfoItemDetalheExportacaosRequest"
