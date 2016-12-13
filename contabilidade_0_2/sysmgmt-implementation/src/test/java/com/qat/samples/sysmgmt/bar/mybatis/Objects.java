@@ -2453,10 +2453,8 @@ public class Objects {
     tributacao.setId(id);
     tributacao.setProdId(1001);
     tributacao.setCfop(insertCfop(id, tabela, action));
-    tributacao.setIcms(insertIcms(id, tabela, action));
-    tributacao.setPis(insertPis(id, tabela, action));
-    tributacao.setCofins(insertCofins(id, tabela, action));
-    tributacao.setIpi(insertIpi(id, tabela, action));
+    tributacao.setImposto(insertNFNotaInfoItemImposto(id, tabela, action));
+    tributacao.setImpostoDevolvido(insertNFImpostoDevolvido(id, tabela, action));
     tributacao.setTabelaEnum(tabela);
     tributacao.setParentId(id);
     tributacao.setEmprId(EMPID);

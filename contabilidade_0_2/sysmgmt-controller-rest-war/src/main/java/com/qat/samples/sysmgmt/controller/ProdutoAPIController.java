@@ -23,6 +23,7 @@ import com.qat.samples.sysmgmt.produto.model.Marca;
 import com.qat.samples.sysmgmt.produto.model.Produto;
 import com.qat.samples.sysmgmt.produto.model.ProdutoEmpresa;
 import com.qat.samples.sysmgmt.produto.model.SubGrupo;
+import com.qat.samples.sysmgmt.produto.model.Tributacao;
 import com.qat.samples.sysmgmt.produto.model.UniMed;
 import com.qat.samples.sysmgmt.produto.model.request.CategoriaInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.CategoriaMaintenanceRequest;
@@ -36,6 +37,8 @@ import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.TributacaoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.UniMedMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.response.CategoriaResponse;
@@ -44,6 +47,7 @@ import com.qat.samples.sysmgmt.produto.model.response.MarcaResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoEmpresaResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.SubGrupoResponse;
+import com.qat.samples.sysmgmt.produto.model.response.TributacaoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.UniMedResponse;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
@@ -899,6 +903,92 @@ public class ProdutoAPIController extends BaseController {
 					new Object[] { ex.toString() });
 		}
 		return categoriaResponse;
+
+	}
+
+	/**
+	 * Fetch produtoparent paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the produtoparent response
+	 */
+	@RequestMapping(value = "/tributacao/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public TributacaoResponse fetchTributacaoPaged(@RequestBody TributacaoInquiryRequest request) {
+		TributacaoResponse produtoparentResponse = new TributacaoResponse();
+		try {
+			InternalResultsResponse<Tributacao> internalResponse = getProdutoBAC().fetchTributacaosByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(produtoparentResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, produtoparentResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return produtoparentResponse;
+	}
+
+	/**
+	 * Insert marca.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the marca response
+	 */
+	@RequestMapping(value = "/tributacao/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public TributacaoResponse insertTributacao(@RequestBody TributacaoMaintenanceRequest request) {
+		TributacaoResponse tributacaoResponse = new TributacaoResponse();
+		try {
+			InternalResultsResponse<Tributacao> internalResponse = getProdutoBAC().insertTributacao(request);
+			ResponseHandler.handleOperationStatusAndMessages(tributacaoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, tributacaoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return tributacaoResponse;
+	}
+
+	/**
+	 * Update tributacao.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the tributacao response
+	 */
+	@RequestMapping(value = "/tributacao/update", method = RequestMethod.POST)
+	@ResponseBody
+	public TributacaoResponse updateTributacao(@RequestBody TributacaoMaintenanceRequest request) {
+		TributacaoResponse tributacaoResponse = new TributacaoResponse();
+		try {
+			InternalResultsResponse<Tributacao> internalResponse = getProdutoBAC().updateTributacao(request);
+			ResponseHandler.handleOperationStatusAndMessages(tributacaoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, tributacaoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return tributacaoResponse;
+	}
+
+	/**
+	 * Delete tributacao.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the tributacao response
+	 */
+	@RequestMapping(value = "/tributacao/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public TributacaoResponse deleteTributacao(@RequestBody TributacaoMaintenanceRequest request) {
+		TributacaoResponse tributacaoResponse = new TributacaoResponse();
+
+		try {
+			InternalResultsResponse<Tributacao> internalResponse = getProdutoBAC().deleteTributacao(request);
+			ResponseHandler.handleOperationStatusAndMessages(tributacaoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, tributacaoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return tributacaoResponse;
 
 	}
 

@@ -48,7 +48,6 @@ import com.qat.samples.sysmgmt.dicionario.request.FieldInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.Ajuda;
 import com.qat.samples.sysmgmt.entidade.model.Deposito;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;
-import com.qat.samples.sysmgmt.entidade.model.Entidade;
 import com.qat.samples.sysmgmt.entidade.model.Field;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
 import com.qat.samples.sysmgmt.entidade.model.Menu;

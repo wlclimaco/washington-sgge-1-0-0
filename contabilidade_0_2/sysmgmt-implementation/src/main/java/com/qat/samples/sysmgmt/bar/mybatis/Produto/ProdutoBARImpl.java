@@ -16,6 +16,7 @@ import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Email.IEmailBAR;
 import com.qat.samples.sysmgmt.bar.Fiscal.IFiscalBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
+import com.qat.samples.sysmgmt.bar.Nfe.INFNotaInfoItemBAR;
 import com.qat.samples.sysmgmt.bar.Notes.INotesBAR;
 import com.qat.samples.sysmgmt.bar.Produto.IPrecoBAR;
 import com.qat.samples.sysmgmt.bar.Produto.IProdutoBAR;
@@ -29,6 +30,8 @@ import com.qat.samples.sysmgmt.bar.mybatis.delegate.ICMSOpInterBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.IcmsBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.IpiBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFImpostoDevolvidoBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoItemImpostoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.PisBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.PrecoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ProdutoBARD;
@@ -752,8 +755,10 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	INotesBAR notesBAR;
 
 	IFiscalBAR fiscalBAR;
-	
+
 	IPrecoBAR precoBAR;
+
+	INFNotaInfoItemBAR nfnotaInfoItemBAR;
 
 	public IPrecoBAR getPrecoBAR() {
 		return precoBAR;
@@ -819,9 +824,18 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 		this.fiscalBAR = fiscalBAR;
 	}
 
+
+	public INFNotaInfoItemBAR getNfnotaInfoItemBAR() {
+		return nfnotaInfoItemBAR;
+	}
+
+	public void setNfnotaInfoItemBAR(INFNotaInfoItemBAR nfnotaInfoItemBAR) {
+		this.nfnotaInfoItemBAR = nfnotaInfoItemBAR;
+	}
+
 	/**
 	 * /* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IProdutoEmpresaBAR#insertProdutoEmpresa(com.qat.samples.sysmgmt.base.model.ProdutoEmpresa)
 	 */
 	@Override
@@ -831,62 +845,31 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 		Boolean count1 = false;
 
 		produtoempresa.setProcessId(produtoempresa.getTransactionId());
-		
+
 		if (ValidationUtil.isNullOrZero(produtoempresa.getProdId().getId()))
 		{
 			ProdutoBARD.maintainProdutoAssociations(produtoempresa.getProdId(), response,null,  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
 					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
 		}
-		
+
 		if (!ValidationUtil.isNull(produtoempresa.getTributacao()))
 		{
 
-			if (!ValidationUtil.isNull(produtoempresa.getTributacao().getCofins()))
-			{
-				produtoempresa.getTributacao().getCofins().setProdId(produtoempresa.getProdId().getId());
-				CofinsBARD.maintainCofinsAssociations(produtoempresa.getTributacao().getCofins(), response,null,  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
-					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
-			}
-			if (!ValidationUtil.isNull(produtoempresa.getTributacao().getIcms()))
-			{
-				produtoempresa.getTributacao().getIcms().setProdId(produtoempresa.getProdId().getId());
-				IcmsBARD.maintainIcmsAssociations(produtoempresa.getTributacao().getIcms(), response,null,  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
-						getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
-			}
-			if (!ValidationUtil.isNull(produtoempresa.getTributacao().getIpi()))
-			{
-				produtoempresa.getTributacao().getIpi().setProdId(produtoempresa.getProdId().getId());
-				IpiBARD.maintainIpiAssociations(produtoempresa.getTributacao().getIpi(), response,null,  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
-						getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
-			}
-			if (!ValidationUtil.isNull(produtoempresa.getTributacao().getPis()))
-			{
-				produtoempresa.getTributacao().getPis().setProdId(produtoempresa.getProdId().getId());
-				PisBARD.maintainPisAssociations(produtoempresa.getTributacao().getPis(), response,null,  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
-						getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
-			}
-			if (!ValidationUtil.isNull(produtoempresa.getTributacao().getIcmsOpInter()))
-			{
-				produtoempresa.getTributacao().getIcmsOpInter().setProdId(produtoempresa.getProdId().getId());
-				ICMSOpInterBARD.maintainICMSOpInterAssociations(produtoempresa.getTributacao().getIcmsOpInter(), response,null,  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
-						getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
-			}
-			
 			produtoempresa.getTributacao().setProdId(produtoempresa.getProdId().getId());
 			TributacaoBARD.maintainTributacaoAssociations(produtoempresa.getTributacao(), response,null,  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
 					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
-			
+
 		}
-		
+
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PRODUTOEMPRESA, produtoempresa, response);
-		
+
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PRODUTOEMPRESA, AcaoEnum.INSERT,
 				produtoempresa.getTransactionId(), getHistoricoBAR(), response, produtoempresa.getId(),
 				produtoempresa.getUserId());
-		
+
 		if (!ValidationUtil.isNullOrEmpty(produtoempresa.getEstoqueList()))
 		{
-			
+
 			EstoqueBARD.maintainEstoqueAssociations(produtoempresa.getEstoqueList(), response,produtoempresa.getId(),  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
 					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
 		}
@@ -917,7 +900,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.IProdutoEmpresaBAR#updateProdutoEmpresa(
 	 * com.qat.samples.sysmgmt.base.model.ProdutoEmpresa)
@@ -937,7 +920,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.IProdutoEmpresaBAR#deleteProdutoEmpresa(
 	 * com.qat.samples.sysmgmt.base.model.ProdutoEmpresa)
@@ -957,7 +940,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IProdutoEmpresaBAR#
 	 * deleteAllProdutoEmpresas()
 	 */
@@ -970,7 +953,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.IProdutoEmpresaBAR#fetchProdutoEmpresaById(
 	 * com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
@@ -984,7 +967,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IProdutoEmpresaBAR#
 	 * fetchAllProdutoEmpresasCache()
 	 */
@@ -998,7 +981,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.bar.IProdutoEmpresaBAR#
 	 * fetchProdutoEmpresasByRequest(com.qat.samples.sysmgmt.model.request.
 	 * PagedInquiryRequest)
@@ -1059,7 +1042,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	// ####======================================
 	/**
 	 * /* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IProdutoBAR#insertProduto(com.qat.samples.sysmgmt.base.model.Produto)
 	 */
 	@Override
@@ -1091,7 +1074,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IProdutoBAR#updateProduto(com.qat.
 	 * samples.sysmgmt.base.model.Produto)
 	 */
@@ -1109,7 +1092,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IProdutoBAR#deleteProduto(com.qat.
 	 * samples.sysmgmt.base.model.Produto)
 	 */
@@ -1127,7 +1110,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IProdutoBAR#deleteAllProdutos()
 	 */
 	@Override
@@ -1139,7 +1122,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.IProdutoBAR#fetchProdutoById(com.qat.samples.
 	 * sysmgmt.model.request.FetchByIdRequest)
@@ -1152,7 +1135,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IProdutoBAR#fetchAllProdutosCache()
 	 */
 	@Override
@@ -1164,7 +1147,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.IProdutoBAR#fetchProdutosByRequest(com.qat.
 	 * samples.sysmgmt.model.request. PagedInquiryRequest)
@@ -1225,7 +1208,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	// ####======================================
 	/**
 	 * /* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.ICfopBAR#insertCfop(com.qat.samples.sysmgmt.base.model.Cfop)
 	 */
 	@Override
@@ -1257,7 +1240,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.ICfopBAR#updateCfop(com.qat.samples.
 	 * sysmgmt.base.model.Cfop)
@@ -1276,7 +1259,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.ICfopBAR#deleteCfop(com.qat.samples.
 	 * sysmgmt.base.model.Cfop)
@@ -1295,7 +1278,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.ICfopBAR#deleteAllCfops()
 	 */
 	@Override
@@ -1307,7 +1290,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.bar.ICfopBAR#fetchCfopById(com.qat.samples.
 	 * sysmgmt.model.request.FetchByIdRequest)
 	 */
@@ -1319,7 +1302,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.ICfopBAR#fetchAllCfopsCache()
 	 */
 	@Override
@@ -1331,7 +1314,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.ICfopBAR#fetchCfopsByRequest(com.qat.samples.
 	 * sysmgmt.model.request. PagedInquiryRequest)
@@ -1391,7 +1374,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	// ####======================================
 	/**
 	 * /* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IMarcaBAR#insertMarca(com.qat.samples.sysmgmt.base.model.Marca)
 	 */
 	@Override
@@ -1434,7 +1417,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.IMarcaBAR#updateMarca(com.qat.samples.
 	 * sysmgmt.base.model.Marca)
@@ -1464,7 +1447,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.IMarcaBAR#deleteMarca(com.qat.samples.
 	 * sysmgmt.base.model.Marca)
@@ -1483,7 +1466,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IMarcaBAR#deleteAllMarcas()
 	 */
 	@Override
@@ -1495,7 +1478,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.IMarcaBAR#fetchMarcaById(com.qat.samples.
 	 * sysmgmt.model.request.FetchByIdRequest)
@@ -1508,7 +1491,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IMarcaBAR#fetchAllMarcasCache()
 	 */
 	@Override
@@ -1520,7 +1503,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.bar.IMarcaBAR#fetchMarcasByRequest(com.qat.
 	 * samples.sysmgmt.model.request. PagedInquiryRequest)
 	 */
@@ -1579,7 +1562,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	// ####======================================
 	/**
 	 * /* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IMarcaProdutoBAR#insertMarcaProduto(com.qat.samples.sysmgmt.base.model.MarcaProduto)
 	 */
 	@Override
@@ -1612,7 +1595,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.IMarcaProdutoBAR#updateMarcaProduto(com.
 	 * qat.samples.sysmgmt.base.model.MarcaProduto)
@@ -1632,7 +1615,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.IMarcaProdutoBAR#deleteMarcaProduto(com.
 	 * qat.samples.sysmgmt.base.model.MarcaProduto)
@@ -1652,7 +1635,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.IMarcaProdutoBAR#deleteAllMarcaProdutos(
 	 * )
@@ -1666,7 +1649,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.IMarcaProdutoBAR#fetchMarcaProdutoById(com.
 	 * qat.samples.sysmgmt.model.request.FetchByIdRequest)
@@ -1680,7 +1663,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IMarcaProdutoBAR#
 	 * fetchAllMarcaProdutosCache()
 	 */
@@ -1693,7 +1676,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.IMarcaProdutoBAR#fetchMarcaProdutosByRequest(
 	 * com.qat.samples.sysmgmt.model.request. PagedInquiryRequest)
@@ -1754,7 +1737,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	// ####======================================
 	/**
 	 * /* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IGrupoBAR#insertGrupo(com.qat.samples.sysmgmt.base.model.Grupo)
 	 */
 	@Override
@@ -1786,7 +1769,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.IGrupoBAR#updateGrupo(com.qat.samples.
 	 * sysmgmt.base.model.Grupo)
@@ -1805,7 +1788,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.IGrupoBAR#deleteGrupo(com.qat.samples.
 	 * sysmgmt.base.model.Grupo)
@@ -1824,7 +1807,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IGrupoBAR#deleteAllGrupos()
 	 */
 	@Override
@@ -1836,7 +1819,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.IGrupoBAR#fetchGrupoById(com.qat.samples.
 	 * sysmgmt.model.request.FetchByIdRequest)
@@ -1849,7 +1832,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IGrupoBAR#fetchAllGruposCache()
 	 */
 	@Override
@@ -1861,7 +1844,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.bar.IGrupoBAR#fetchGruposByRequest(com.qat.
 	 * samples.sysmgmt.model.request. PagedInquiryRequest)
 	 */
@@ -1920,7 +1903,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	// ####======================================
 	/**
 	 * /* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.ISubGrupoBAR#insertSubGrupo(com.qat.samples.sysmgmt.base.model.SubGrupo)
 	 */
 	@Override
@@ -1952,7 +1935,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.ISubGrupoBAR#updateSubGrupo(com.qat.
 	 * samples.sysmgmt.base.model.SubGrupo)
@@ -1971,7 +1954,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.ISubGrupoBAR#deleteSubGrupo(com.qat.
 	 * samples.sysmgmt.base.model.SubGrupo)
@@ -1990,7 +1973,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.ISubGrupoBAR#deleteAllSubGrupos()
 	 */
 	@Override
@@ -2002,7 +1985,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.bar.ISubGrupoBAR#fetchSubGrupoById(com.qat.
 	 * samples.sysmgmt.model.request.FetchByIdRequest)
 	 */
@@ -2014,7 +1997,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.ISubGrupoBAR#fetchAllSubGruposCache()
 	 */
@@ -2027,7 +2010,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.ISubGrupoBAR#fetchSubGruposByRequest(com.qat.
 	 * samples.sysmgmt.model.request. PagedInquiryRequest)
@@ -2088,7 +2071,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	// ####======================================
 	/**
 	 * /* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IUniMedBAR#insertUniMed(com.qat.samples.sysmgmt.base.model.UniMed)
 	 */
 	@Override
@@ -2120,7 +2103,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.IUniMedBAR#updateUniMed(com.qat.samples.
 	 * sysmgmt.base.model.UniMed)
@@ -2139,7 +2122,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.IUniMedBAR#deleteUniMed(com.qat.samples.
 	 * sysmgmt.base.model.UniMed)
@@ -2158,7 +2141,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IUniMedBAR#deleteAllUniMeds()
 	 */
 	@Override
@@ -2170,7 +2153,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.IUniMedBAR#fetchUniMedById(com.qat.samples.
 	 * sysmgmt.model.request.FetchByIdRequest)
@@ -2183,7 +2166,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IUniMedBAR#fetchAllUniMedsCache()
 	 */
 	@Override
@@ -2195,7 +2178,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.IUniMedBAR#fetchUniMedsByRequest(com.qat.
 	 * samples.sysmgmt.model.request. PagedInquiryRequest)
@@ -2256,7 +2239,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	// ####======================================
 	/**
 	 * /* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.ITributacaoBAR#insertTributacao(com.qat.samples.sysmgmt.base.model.Tributacao)
 	 */
 	@Override
@@ -2265,30 +2248,33 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 		Integer count = 0;
 		Boolean count1 = false;
 
-		tributacao.setProcessId(tributacao.getTransactionId());
+		tributacao.setTransactionId(tributacao.getTransactionId());
+
+		if (!ValidationUtil.isNull(tributacao.getImposto())) {
+			count += NFNotaInfoItemImpostoBARD.maintainNFNotaInfoItemImpostoAssociations(tributacao.getImposto(),
+					response, tributacao.getId(), null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR,
+					historicoBAR, tributacao.getId(), tributacao.getCreateUser(),
+					tributacao.getTransactionId(), tributacao.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(tributacao.getImpostoDevolvido())) {
+			count += NFImpostoDevolvidoBARD.maintainNFImpostoDevolvidoAssociations(tributacao.getImpostoDevolvido(),
+					response, tributacao.getId(), null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR,
+					historicoBAR, tributacao.getId(), tributacao.getCreateUser(),
+					tributacao.getTransactionId(), tributacao.getTransactionId());
+		}
 
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_TRIBUTACAO, tributacao, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.TRIBUTACAO, AcaoEnum.INSERT,
 				tributacao.getTransactionId(), getHistoricoBAR(), response, tributacao.getId(), tributacao.getUserId());
 
-		if (tributacao.getId() != 0 && tributacao.getId() != null) {
-			Status status = new Status();
-			status.setStatus(CdStatusTypeEnum.ATIVO);
-			List<Status> statusList = new ArrayList<Status>();
-			statusList.add(status);
-			count1 = StatusBARD.maintainStatusAssociations(statusList, response, tributacao.getId(), null,
-					AcaoEnum.INSERT, tributacao.getCreateUser(), tributacao.getId(), TabelaEnum.TRIBUTACAO, statusBAR,
-					historicoBAR, tributacao.getTransactionId(), tributacao.getTransactionId());
-
-		}
-
 		return response;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.ITributacaoBAR#updateTributacao(com.qat.
 	 * samples.sysmgmt.base.model.Tributacao)
@@ -2307,7 +2293,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.ITributacaoBAR#deleteTributacao(com.qat.
 	 * samples.sysmgmt.base.model.Tributacao)
@@ -2326,7 +2312,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.ITributacaoBAR#deleteAllTributacaos()
 	 */
@@ -2339,7 +2325,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.ITributacaoBAR#fetchTributacaoById(com.qat.
 	 * samples.sysmgmt.model.request.FetchByIdRequest)
@@ -2353,7 +2339,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.ITributacaoBAR#fetchAllTributacaosCache(
 	 * )
@@ -2367,7 +2353,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.ITributacaoBAR#fetchTributacaosByRequest(com.
 	 * qat.samples.sysmgmt.model.request. PagedInquiryRequest)
@@ -2428,7 +2414,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	// ####======================================
 	/**
 	 * /* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IIcmsBAR#insertIcms(com.qat.samples.sysmgmt.base.model.Icms)
 	 */
 	@Override
@@ -2460,7 +2446,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.IIcmsBAR#updateIcms(com.qat.samples.
 	 * sysmgmt.base.model.Icms)
@@ -2479,7 +2465,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.IIcmsBAR#deleteIcms(com.qat.samples.
 	 * sysmgmt.base.model.Icms)
@@ -2498,7 +2484,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IIcmsBAR#deleteAllIcmss()
 	 */
 	@Override
@@ -2510,7 +2496,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.bar.IIcmsBAR#fetchIcmsById(com.qat.samples.
 	 * sysmgmt.model.request.FetchByIdRequest)
 	 */
@@ -2522,7 +2508,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IIcmsBAR#fetchAllIcmssCache()
 	 */
 	@Override
@@ -2534,7 +2520,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.IIcmsBAR#fetchIcmssByRequest(com.qat.samples.
 	 * sysmgmt.model.request. PagedInquiryRequest)
@@ -2594,7 +2580,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	// ####======================================
 	/**
 	 * /* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IPisBAR#insertPis(com.qat.samples.sysmgmt.base.model.Pis)
 	 */
 	@Override
@@ -2626,7 +2612,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IPisBAR#updatePis(com.qat.samples.
 	 * sysmgmt.base.model.Pis)
 	 */
@@ -2644,7 +2630,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IPisBAR#deletePis(com.qat.samples.
 	 * sysmgmt.base.model.Pis)
 	 */
@@ -2662,7 +2648,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IPisBAR#deleteAllPiss()
 	 */
 	@Override
@@ -2674,7 +2660,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.IPisBAR#fetchPisById(com.qat.samples.sysmgmt.
 	 * model.request.FetchByIdRequest)
@@ -2687,7 +2673,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IPisBAR#fetchAllPissCache()
 	 */
 	@Override
@@ -2699,7 +2685,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.IPisBAR#fetchPissByRequest(com.qat.samples.
 	 * sysmgmt.model.request. PagedInquiryRequest)
@@ -2759,7 +2745,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	// ####======================================
 	/**
 	 * /* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IIpiBAR#insertIpi(com.qat.samples.sysmgmt.base.model.Ipi)
 	 */
 	@Override
@@ -2791,7 +2777,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IIpiBAR#updateIpi(com.qat.samples.
 	 * sysmgmt.base.model.Ipi)
 	 */
@@ -2809,7 +2795,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IIpiBAR#deleteIpi(com.qat.samples.
 	 * sysmgmt.base.model.Ipi)
 	 */
@@ -2827,7 +2813,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IIpiBAR#deleteAllIpis()
 	 */
 	@Override
@@ -2839,7 +2825,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.IIpiBAR#fetchIpiById(com.qat.samples.sysmgmt.
 	 * model.request.FetchByIdRequest)
@@ -2852,7 +2838,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IIpiBAR#fetchAllIpisCache()
 	 */
 	@Override
@@ -2864,7 +2850,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.IIpiBAR#fetchIpisByRequest(com.qat.samples.
 	 * sysmgmt.model.request. PagedInquiryRequest)
@@ -2924,7 +2910,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	// ####======================================
 	/**
 	 * /* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.ICofinsBAR#insertCofins(com.qat.samples.sysmgmt.base.model.Cofins)
 	 */
 	@Override
@@ -2956,7 +2942,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.ICofinsBAR#updateCofins(com.qat.samples.
 	 * sysmgmt.base.model.Cofins)
@@ -2975,7 +2961,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.ICofinsBAR#deleteCofins(com.qat.samples.
 	 * sysmgmt.base.model.Cofins)
@@ -2994,7 +2980,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.ICofinsBAR#deleteAllCofinss()
 	 */
 	@Override
@@ -3006,7 +2992,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.ICofinsBAR#fetchCofinsById(com.qat.samples.
 	 * sysmgmt.model.request.FetchByIdRequest)
@@ -3019,7 +3005,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.ICofinsBAR#fetchAllCofinssCache()
 	 */
 	@Override
@@ -3031,7 +3017,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.ICofinsBAR#fetchCofinssByRequest(com.qat.
 	 * samples.sysmgmt.model.request. PagedInquiryRequest)
@@ -3092,7 +3078,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	// ####======================================
 	/**
 	 * /* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.ICustoBAR#insertCusto(com.qat.samples.sysmgmt.base.model.Custo)
 	 */
 	@Override
@@ -3124,7 +3110,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.ICustoBAR#updateCusto(com.qat.samples.
 	 * sysmgmt.base.model.Custo)
@@ -3143,7 +3129,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.ICustoBAR#deleteCusto(com.qat.samples.
 	 * sysmgmt.base.model.Custo)
@@ -3162,7 +3148,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.ICustoBAR#deleteAllCustos()
 	 */
 	@Override
@@ -3174,7 +3160,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.ICustoBAR#fetchCustoById(com.qat.samples.
 	 * sysmgmt.model.request.FetchByIdRequest)
@@ -3187,7 +3173,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.ICustoBAR#fetchAllCustosCache()
 	 */
 	@Override
@@ -3199,7 +3185,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.bar.ICustoBAR#fetchCustosByRequest(com.qat.
 	 * samples.sysmgmt.model.request. PagedInquiryRequest)
 	 */
@@ -3258,7 +3244,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	// ####======================================
 	/**
 	 * /* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.ICustoItensBAR#insertCustoItens(com.qat.samples.sysmgmt.base.model.CustoItens)
 	 */
 	@Override
@@ -3290,7 +3276,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.ICustoItensBAR#updateCustoItens(com.qat.
 	 * samples.sysmgmt.base.model.CustoItens)
@@ -3309,7 +3295,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.ICustoItensBAR#deleteCustoItens(com.qat.
 	 * samples.sysmgmt.base.model.CustoItens)
@@ -3328,7 +3314,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.ICustoItensBAR#deleteAllCustoItenss()
 	 */
@@ -3341,7 +3327,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.ICustoItensBAR#fetchCustoItensById(com.qat.
 	 * samples.sysmgmt.model.request.FetchByIdRequest)
@@ -3355,7 +3341,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.ICustoItensBAR#fetchAllCustoItenssCache(
 	 * )
@@ -3369,7 +3355,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.ICustoItensBAR#fetchCustoItenssByRequest(com.
 	 * qat.samples.sysmgmt.model.request. PagedInquiryRequest)
@@ -3430,7 +3416,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	// ####======================================
 	/**
 	 * /* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IEstoqueBAR#insertEstoque(com.qat.samples.sysmgmt.base.model.Estoque)
 	 */
 	@Override
@@ -3462,7 +3448,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IEstoqueBAR#updateEstoque(com.qat.
 	 * samples.sysmgmt.base.model.Estoque)
 	 */
@@ -3480,7 +3466,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IEstoqueBAR#deleteEstoque(com.qat.
 	 * samples.sysmgmt.base.model.Estoque)
 	 */
@@ -3498,7 +3484,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IEstoqueBAR#deleteAllEstoques()
 	 */
 	@Override
@@ -3510,7 +3496,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.IEstoqueBAR#fetchEstoqueById(com.qat.samples.
 	 * sysmgmt.model.request.FetchByIdRequest)
@@ -3523,7 +3509,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IEstoqueBAR#fetchAllEstoquesCache()
 	 */
 	@Override
@@ -3535,7 +3521,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.IEstoqueBAR#fetchEstoquesByRequest(com.qat.
 	 * samples.sysmgmt.model.request. PagedInquiryRequest)
@@ -3596,7 +3582,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	// ####======================================
 	/**
 	 * /* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IPorcaoBAR#insertPorcao(com.qat.samples.sysmgmt.base.model.Porcao)
 	 */
 	@Override
@@ -3628,7 +3614,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.IPorcaoBAR#updatePorcao(com.qat.samples.
 	 * sysmgmt.base.model.Porcao)
@@ -3647,7 +3633,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.IPorcaoBAR#deletePorcao(com.qat.samples.
 	 * sysmgmt.base.model.Porcao)
@@ -3666,7 +3652,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IPorcaoBAR#deleteAllPorcaos()
 	 */
 	@Override
@@ -3678,7 +3664,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.IPorcaoBAR#fetchPorcaoById(com.qat.samples.
 	 * sysmgmt.model.request.FetchByIdRequest)
@@ -3691,7 +3677,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IPorcaoBAR#fetchAllPorcaosCache()
 	 */
 	@Override
@@ -3703,7 +3689,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.IPorcaoBAR#fetchPorcaosByRequest(com.qat.
 	 * samples.sysmgmt.model.request. PagedInquiryRequest)
@@ -3764,7 +3750,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	// ####======================================
 	/**
 	 * /* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IPorcaoItensBAR#insertPorcaoItens(com.qat.samples.sysmgmt.base.model.PorcaoItens)
 	 */
 	@Override
@@ -3797,7 +3783,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.IPorcaoItensBAR#updatePorcaoItens(com.
 	 * qat.samples.sysmgmt.base.model.PorcaoItens)
@@ -3817,7 +3803,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.IPorcaoItensBAR#deletePorcaoItens(com.
 	 * qat.samples.sysmgmt.base.model.PorcaoItens)
@@ -3837,7 +3823,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.IPorcaoItensBAR#deleteAllPorcaoItenss()
 	 */
@@ -3850,7 +3836,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.IPorcaoItensBAR#fetchPorcaoItensById(com.qat.
 	 * samples.sysmgmt.model.request.FetchByIdRequest)
@@ -3864,7 +3850,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IPorcaoItensBAR#
 	 * fetchAllPorcaoItenssCache()
 	 */
@@ -3877,7 +3863,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.IPorcaoItensBAR#fetchPorcaoItenssByRequest(
 	 * com.qat.samples.sysmgmt.model.request. PagedInquiryRequest)
@@ -3938,7 +3924,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	// ####======================================
 	/**
 	 * /* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IRentabilidadeBAR#insertRentabilidade(com.qat.samples.sysmgmt.base.model.Rentabilidade)
 	 */
 	@Override
@@ -3971,7 +3957,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.IRentabilidadeBAR#updateRentabilidade(
 	 * com.qat.samples.sysmgmt.base.model.Rentabilidade)
@@ -3991,7 +3977,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.IRentabilidadeBAR#deleteRentabilidade(
 	 * com.qat.samples.sysmgmt.base.model.Rentabilidade)
@@ -4011,7 +3997,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IRentabilidadeBAR#
 	 * deleteAllRentabilidades()
 	 */
@@ -4024,7 +4010,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.IRentabilidadeBAR#fetchRentabilidadeById(com.
 	 * qat.samples.sysmgmt.model.request.FetchByIdRequest)
@@ -4038,7 +4024,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IRentabilidadeBAR#
 	 * fetchAllRentabilidadesCache()
 	 */
@@ -4052,7 +4038,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.bar.IRentabilidadeBAR#
 	 * fetchRentabilidadesByRequest(com.qat.samples.sysmgmt.model.request.
 	 * PagedInquiryRequest)
@@ -4113,7 +4099,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	// ####======================================
 	/**
 	 * /* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IRentabilidadeItensBAR#insertRentabilidadeItens(com.qat.samples.sysmgmt.base.model.RentabilidadeItens)
 	 */
 	@Override
@@ -4147,7 +4133,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IRentabilidadeItensBAR#
 	 * updateRentabilidadeItens(com.qat.samples.sysmgmt.base.model.
 	 * RentabilidadeItens)
@@ -4167,7 +4153,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IRentabilidadeItensBAR#
 	 * deleteRentabilidadeItens(com.qat.samples.sysmgmt.base.model.
 	 * RentabilidadeItens)
@@ -4187,7 +4173,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IRentabilidadeItensBAR#
 	 * deleteAllRentabilidadeItenss()
 	 */
@@ -4200,7 +4186,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.bar.IRentabilidadeItensBAR#
 	 * fetchRentabilidadeItensById(com.qat.samples.sysmgmt.model.request.
 	 * FetchByIdRequest)
@@ -4214,7 +4200,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.IRentabilidadeItensBAR#
 	 * fetchAllRentabilidadeItenssCache()
 	 */
@@ -4229,7 +4215,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.bar.IRentabilidadeItensBAR#
 	 * fetchRentabilidadeItenssByRequest(com.qat.samples.sysmgmt.model.request.
 	 * PagedInquiryRequest)
@@ -4290,7 +4276,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	// ####======================================
 	/**
 	 * /* (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.ICategoriaBAR#insertCategoria(com.qat.samples.sysmgmt.base.model.Categoria)
 	 */
 	@Override
@@ -4322,7 +4308,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.ICategoriaBAR#updateCategoria(com.qat.
 	 * samples.sysmgmt.base.model.Categoria)
@@ -4341,7 +4327,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.ICategoriaBAR#deleteCategoria(com.qat.
 	 * samples.sysmgmt.base.model.Categoria)
@@ -4360,7 +4346,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.qat.samples.sysmgmt.base.bar.ICategoriaBAR#deleteAllCategorias()
 	 */
 	@Override
@@ -4372,7 +4358,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.ICategoriaBAR#fetchCategoriaById(com.qat.
 	 * samples.sysmgmt.model.request.FetchByIdRequest)
@@ -4386,7 +4372,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.base.bar.ICategoriaBAR#fetchAllCategoriasCache()
 	 */
@@ -4399,7 +4385,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.qat.samples.sysmgmt.bar.ICategoriaBAR#fetchCategoriasByRequest(com.
 	 * qat.samples.sysmgmt.model.request. PagedInquiryRequest)
@@ -4455,7 +4441,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 		}
 
 	}
-	
+
 	//===================================### ICMSOPINTER ####======================================
 		/**
 	/*
@@ -4476,8 +4462,8 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ICMSOPINTER, AcaoEnum.INSERT, icmsopinter.getTransactionId(),
 				getHistoricoBAR(), response, icmsopinter.getId(),icmsopinter.getUserId());
-		
-		
+
+
 	if (icmsopinter.getId() !=  0 && icmsopinter.getId() != null)
 		{
 			Status status = new Status();
@@ -4490,8 +4476,8 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 							historicoBAR, icmsopinter.getTransactionId(), icmsopinter.getTransactionId());
 
 		}
-		
-		
+
+
 		return response;
 	}
 
@@ -4508,7 +4494,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ICMSOPINTER, AcaoEnum.UPDATE, icmsopinter.getTransactionId(),
 				getHistoricoBAR(), response, icmsopinter.getId(),icmsopinter.getUserId());
-		
+
 		return response;
 	}
 
@@ -4525,7 +4511,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ICMSOPINTER, AcaoEnum.DELETE, icmsopinter.getTransactionId(),
 				getHistoricoBAR(), response, icmsopinter.getId(),icmsopinter.getUserId());
-		
+
 		return response;
 	}
 
@@ -4550,7 +4536,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	public ICMSOpInter fetchICMSOpInterById(FetchByIdRequest request)
 	{
 	return (ICMSOpInter)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_ICMSOPINTER, request.getFetchId());
-		
+
 	}
 
 	/*

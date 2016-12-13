@@ -25,10 +25,10 @@
 		<sec:intercept-url pattern="/site/api/fetchPage" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
 		<sec:intercept-url pattern="/site/api/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
 		<sec:intercept-url pattern="/county/api/refresh" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
-		<sec:intercept-url pattern="/entidade/api/empresa/insert" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
-		<sec:intercept-url pattern="/fiscal/api/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
-		<sec:intercept-url pattern="/cadastros/api/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
-		<sec:intercept-url pattern="/cadastros/api/cidade/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
+		<sec:intercept-url pattern="/entidade/api/empresa/insert" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS','ROLE_EMPRESA')" />
+		<sec:intercept-url pattern="/fiscal/api/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS','ROLE_EMPRESA')" />
+		<sec:intercept-url pattern="/cadastros/api/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS','ROLE_EMPRESA')" />
+		<sec:intercept-url pattern="/cadastros/api/cidade/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS','ROLE_EMPRESA')" />
 		<sec:intercept-url pattern="/county/api/insert" access="hasAnyRole('ROLE_DOMAIN_ADMINS')" />
 		<sec:intercept-url pattern="/county/api/delete" access="hasAnyRole('ROLE_DOMAIN_ADMINS')" />
 		<sec:intercept-url pattern="/county/api/update" access="hasAnyRole('ROLE_DOMAIN_ADMINS', 'ROLE_DOMAIN_USERS')" />
@@ -36,15 +36,14 @@
 		<sec:intercept-url pattern="/procedure/api/insert" access="hasAnyRole('ROLE_DOMAIN_ADMINS')" />
 		<sec:intercept-url pattern="/procedure/api/delete" access="hasAnyRole('ROLE_DOMAIN_ADMINS')" />
 		<sec:intercept-url pattern="/procedure/api/update" access="hasAnyRole('ROLE_DOMAIN_ADMINS', 'ROLE_DOMAIN_USERS')" />
-		
-		<sec:intercept-url pattern="/vendas/api/nfSaidas/**" access="hasAnyRole('ROLE_DOMAIN_ADMINS')" />
-		
-		
-		<sec:intercept-url pattern="/entidade/api/empresa/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
-		<sec:intercept-url pattern="/entidade/api/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
-		<sec:intercept-url pattern="/vendas/api/nfSaidas/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS')" />
+		<sec:intercept-url pattern="/entidade/api/empresa/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS','ROLE_EMPRESA')" />
+		<sec:intercept-url pattern="/entidade/api/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS','ROLE_EMPRESA')" />
+		<sec:intercept-url pattern="/vendas/api/nfSaidas/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS','ROLE_EMPRESA')" />
+		<sec:intercept-url pattern="/vendas/api/nfSaidas/**/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS','ROLE_EMPRESA')" />
+		<sec:intercept-url pattern="/produto/api/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS','ROLE_EMPRESA')" />
+		<sec:intercept-url pattern="/produto/api/**/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS','ROLE_EMPRESA')" />
 		<!-- All other urls/resources not listed above will fall here -->
-		<sec:intercept-url pattern="/**/**"	access="hasAnyRole('ROLE_DOMAIN_ADMINS', 'ROLE_DOMAIN_USERS', 'ROLE_GUEST')" />
+		<sec:intercept-url pattern="/**/**"	access="hasAnyRole('ROLE_DOMAIN_ADMINS', 'ROLE_DOMAIN_USERS', 'ROLE_GUEST','ROLE_EMPRESA')" />
 	</sec:http>
 
 	<!-- Usernames/Passwords below -->

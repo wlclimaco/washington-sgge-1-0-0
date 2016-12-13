@@ -1,44 +1,39 @@
 package com.qat.samples.sysmgmt.produto.model;
 
 import com.qat.samples.sysmgmt.cfop.model.Cfop;
-import com.qat.samples.sysmgmt.fiscal.model.Classificacao;
+import com.qat.samples.sysmgmt.nfeItens.model.NFImpostoDevolvido;
+import com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImposto;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
- * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
- * setting.
+ * This class is a representation of an Account (i.e Checking, Savings, etc.).
+ * This represents an account for a transfer setting.
  */
 @SuppressWarnings("serial")
-public class Tributacao extends ModelCosmeDamiao
-{
+public class Tributacao extends ModelCosmeDamiao {
 	/** The SendSolv id for the account. */
-private Integer id;
+	private Integer id;
 
-private Integer prodId;
+	private String descricao;
 
-private Cfop cfop;
+	private Integer prodId;
 
-private Icms icms;
+	private Cfop cfop;
 
-private Pis pis;
+	/** The econtabil imposto for the NFNotaInfoItem. */
+	private NFNotaInfoItemImposto imposto;
 
-private Cofins cofins;
-
-private Ipi ipi;
-
-private ICMSOpInter icmsOpInter;
-
+	/** The econtabil impostoDevolvido for the NFNotaInfoItem. */
+	private NFImpostoDevolvido impostoDevolvido;
 
 	/**
 	 * Default constructor.
 	 */
-	public Tributacao()
-	{
+	public Tributacao() {
 		super();
 	}
 
-	public Tributacao(Integer id)
-	{
+	public Tributacao(Integer id) {
 		super();
 		this.id = id;
 	}
@@ -71,52 +66,38 @@ private ICMSOpInter icmsOpInter;
 		this.cfop = cfop;
 	}
 
-	public Icms getIcms() {
-		return icms;
+	public NFNotaInfoItemImposto getImposto() {
+		return imposto;
 	}
 
-	public void setIcms(Icms icms) {
-		this.icms = icms;
+	public void setImposto(NFNotaInfoItemImposto imposto) {
+		this.imposto = imposto;
 	}
 
-	public Pis getPis() {
-		return pis;
+	public NFImpostoDevolvido getImpostoDevolvido() {
+		return impostoDevolvido;
 	}
 
-	public void setPis(Pis pis) {
-		this.pis = pis;
+	public void setImpostoDevolvido(NFImpostoDevolvido impostoDevolvido) {
+		this.impostoDevolvido = impostoDevolvido;
 	}
 
-	public Cofins getCofins() {
-		return cofins;
+
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setCofins(Cofins cofins) {
-		this.cofins = cofins;
-	}
-
-	public Ipi getIpi() {
-		return ipi;
-	}
-
-	public void setIpi(Ipi ipi) {
-		this.ipi = ipi;
-	}
-
-	public ICMSOpInter getIcmsOpInter() {
-		return icmsOpInter;
-	}
-
-	public void setIcmsOpInter(ICMSOpInter icmsOpInter) {
-		this.icmsOpInter = icmsOpInter;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	@Override
 	public String toString() {
 		return "Tributacao [getId()=" + getId() + ", getProdId()=" + getProdId() + ", getCfop()=" + getCfop()
-				+ ", getIcms()=" + getIcms() + ", getPis()=" + getPis() + ", getCofins()=" + getCofins() + ", getIpi()="
-				+ getIpi() + ", getIcmsOpInter()=" + getIcmsOpInter() + ", toString()=" + super.toString() + "]";
+				+ ", getImposto()=" + getImposto() + ", getImpostoDevolvido()=" + getImpostoDevolvido()
+				+ ", getDescricao()=" + getDescricao() + ", toString()=" + super.toString() + "]";
 	}
+
 
 
 }

@@ -158,6 +158,7 @@
 		<property name="fiscalBAR" ref="fiscalBARTarget" />
 		<property name="produtoBAR" ref="produtoBARTarget" />
 		<property name="precoBAR" ref="precoBARTarget" />
+		<property name="nfnotaInfoItemBAR" ref="nfnotainfoitemBARTarget" />
 	</bean>
 
 	<bean id="financeiroBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Financeiro.FinanceiroBARImpl">

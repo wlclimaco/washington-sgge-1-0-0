@@ -17,6 +17,7 @@
        exactly. -->
   <resultMap id="TributacaoResult" type="Tributacao">
     <result property="id" column="id"/>
+     <result property="descricao" column="descricao"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -26,20 +27,18 @@
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
 <result property="prodId" column="prodId" />
-<collection property="cfop" column="cfop" select="CfopMap.fetchCfopById"/>
-<collection property="icms" column="icms" select="IcmsMap.fetchIcmsById"/>
-<collection property="pis" column="pis" select="PisMap.fetchPisById"/>
-<collection property="cofins" column="cofins" select="CofinsMap.fetchCofinsById"/>
-<collection property="ipi" column="ipi" select="IpiMap.fetchIpiById"/>
+<collection property="imposto" column="imposto"
+			select="NFNotaInfoItemImpostoMap.fetchNFNotaInfoItemImpostoById" />
+		<collection property="impostoDevolvido" column="impostoDevolvido"
+			select="NFImpostoDevolvidoMap.fetchNFImpostoDevolvidoById" />
   </resultMap>
 
   <sql id="allTributacaoColumns">
-prodId
+descricao
+,prodId
 ,cfop
-,icms
-,pis
-,cofins
-,ipi
+,imposto
+,impostoDevolvido
 ,parentId
 ,tabelaEnumValue
 ,emprId
@@ -51,20 +50,19 @@ prodId
 
 </sql>
 <sql id="allTributacaoValues">
+#{descricao},
 #{prodId},
 #{cfop.id},
-#{icms.id},
-#{pis.id},
-#{cofins.id},
-#{ipi.id},
-     #{parentId},
-     #{tabelaEnumValue},
-     #{emprId},
-     #{processId},
-     #{createDateUTC},
-     #{createUser},
-     #{modifyDateUTC},
-     #{modifyUser}
+#{imposto.id},
+#{impostoDevolvido.id},
+#{parentId},
+#{tabelaEnumValue},
+#{emprId},
+#{processId},
+#{createDateUTC},
+#{createUser},
+#{modifyDateUTC},
+#{modifyUser}
   </sql>
 
 
@@ -102,12 +100,11 @@ prodId
 
  <update id="updateTributacao" parameterType="Tributacao">
    UPDATE tributacao SET
+<if test="descricao!= null">descricao = #{descricao},</if>
 <if test="prodId!= null">prodId = #{prodId},</if>
 <if test="cfop != null">cfop = #{cfop.id},</if>
-<if test="icms!= null">icms = #{icms.id},</if>
-<if test="pis!= null">pis = #{pis.id},</if>
-<if test="cofins!= null">cofins = #{cofins.id},</if>
-<if test="ipi!= null">ipi = #{ipi.id},</if>
+<if test="imposto!= null">imposto = #{imposto.id},</if>
+<if test="impostoDevolvido!= null">impostoDevolvido = #{impostoDevolvido.id},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>

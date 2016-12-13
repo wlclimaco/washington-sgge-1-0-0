@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.qat.framework.model.response.InquiryResponse;
 import com.qat.samples.sysmgmt.produto.model.Categoria;
-import com.qat.samples.sysmgmt.produto.model.Porcao;
 
 public class CategoriaResponse extends InquiryResponse
 {
@@ -45,5 +44,5 @@ public class CategoriaResponse extends InquiryResponse
 		return "CategoriaResponse [getCategoriaList()=" + getCategoriaList() + ", toString()=" + super.toString() + "]";
 	}
 
-	
+
 }
