@@ -1,6 +1,5 @@
 package com.qat.samples.sysmgmt.bar.mybatis;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -1061,7 +1060,7 @@ public class Objects {
 		usuario.setEmail("econtabilsistemas@gmail.com");
 		usuario.setSenha("senha_4 - " + action.toString());
 		usuario.setPergunta("pergunta_5 - " + action.toString());
-		//usuario.setRole("role_6 - " + action.toString());
+		usuario.setRoles(new ArrayList<Role>());
 		usuario.setLanguage("pt");
 		usuario.setUltAcesso(a.getTime());
 		usuario.setTabelaEnum(tabela);

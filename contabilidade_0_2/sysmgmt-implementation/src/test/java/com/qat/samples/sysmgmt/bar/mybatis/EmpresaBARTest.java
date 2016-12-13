@@ -394,14 +394,14 @@ public IEmpresaBAR getEmpresaBAR()
 	@Test
 	public void testUpdateUsuario()
 	{
-		Usuario usuario =  Objects.insertUsuario(4, TabelaEnum.USUARIO, PersistenceActionEnum.UPDATE);
+		Usuario usuario =  Objects.insertUsuario(10110, TabelaEnum.USUARIO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1011);
+		request.setFetchId(10110);
 		Usuario usuarioResponse = getEmpresaBAR().fetchUsuarioById(request);
-		Assert.assertEquals(usuarioResponse.getEmail(), "username_3");
+		Assert.assertEquals(usuarioResponse.getEmail(), "username_4");
 		getEmpresaBAR().updateUsuario(usuario);
 		usuarioResponse = getEmpresaBAR().fetchUsuarioById(request);
-		Assert.assertEquals(usuarioResponse.getEmail(), "username_3");
+		Assert.assertEquals(usuarioResponse.getEmail(), "econtabilsistemas@gmail.com");
 	}
 
 	@Test

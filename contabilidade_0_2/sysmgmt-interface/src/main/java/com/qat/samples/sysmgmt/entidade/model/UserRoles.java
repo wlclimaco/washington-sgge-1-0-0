@@ -20,8 +20,10 @@ public class UserRoles extends ModelCosmeDamiao
 	}
 
 	public UserRoles() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
+
+
 
 	public Integer getUser_role_id() {
 		return user_role_id;

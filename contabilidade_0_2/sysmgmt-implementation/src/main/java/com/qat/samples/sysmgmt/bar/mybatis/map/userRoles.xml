@@ -30,8 +30,8 @@
   </resultMap>
 
   <sql id="allUserRolesColumns">
-user_role_id
-,username
+
+ username
 ,role
 ,parentId
 ,tabelaEnumValue
@@ -44,7 +44,7 @@ user_role_id
 
 </sql>
 <sql id="allUserRolesValues">
-#{user_role_id},
+
 #{username},
 #{role.id},
      #{parentId},
@@ -59,35 +59,35 @@ user_role_id
 
 
  <select id="fetchAllUserRoless" resultMap="UserRolesResult">
-    SELECT
+    SELECT user_role_id,
  <include refid="allUserRolesColumns" />
-   FROM User_Roles ORDER BY User_Roles ASC
+   FROM User_Roles ORDER BY user_role_id ASC
  </select>
 
  <select id="fetchUserRolesById" parameterType="Integer" resultMap="UserRolesResult">
-    SELECT
+    SELECT user_role_id,
  <include refid="allUserRolesColumns" />
    FROM User_Roles WHERE user_role_id = #{fetchid}
  </select>
 
  <select id="fetchAllUserRolessRequest" parameterType="PagedInquiryRequest" resultMap="UserRolesResult">
 
-     SELECT <include refid="allUserRolesColumns" />
+     SELECT user_role_id, <include refid="allUserRolesColumns" />
            FROM User_Roles where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY user_role_id ASC
        OFFSET ( #{startPage} * #{pageSize} )
        LIMIT #{pageSize}
 </select>
 
 <select id="fetchUserRolesRowCount" resultType="Integer">
-     SELECT COUNT(*) AS RECORD_COUNT FROM User_Roles WHERE User_Roles IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+     SELECT COUNT(*) AS RECORD_COUNT FROM User_Roles WHERE user_role_id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
-
- <insert id="insertUserRoles" parameterType="UserRoles" useGeneratedKeys="true" keyProperty="id">
+ 
+  <insert id="insertUserRoles" parameterType="UserRoles" useGeneratedKeys="true" keyProperty="user_role_id">
      INSERT INTO User_Roles (
-       <include refid="allUserRolesColumns" />
+ <if test="user_role_id != null"><if test="user_role_id > 0">user_role_id,</if></if><include refid="allUserRolesColumns" />
      )
-   VALUES (<include refid="allUserRolesValues" /> )
+   VALUES (<if test="user_role_id != null"><if test="user_role_id > 0">#{user_role_id},</if></if><include refid="allUserRolesValues" /> )
  </insert>
 
  <update id="updateUserRoles" parameterType="UserRoles">

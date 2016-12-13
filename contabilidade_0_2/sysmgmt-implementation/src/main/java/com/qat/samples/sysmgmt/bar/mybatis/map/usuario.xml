@@ -86,19 +86,19 @@ c.tabelaEnumValue,
  <select id="fetchAllUsuarios" resultMap="UsuarioResult">
     SELECT
 	id,<include refid="allUsuarioColumns" />
-   FROM usuario ORDER BY id ASC
+   FROM users ORDER BY id ASC
  </select>
 
  <select id="fetchUsuarioById" parameterType="Integer" resultMap="UsuarioResult">
     SELECT
 	id,<include refid="allUsuarioColumns" />
-   FROM usuario WHERE id = #{fetchid}
+   FROM users WHERE id = #{fetchid}
  </select>
 
  <select id="fetchAllUsuariosRequest" parameterType="UsuarioInquiryRequest" resultMap="UsuarioResult">
 
 		SELECT id,<include refid="allUsuarioColumns" />
-  		  FROM usuario WHERE id IS NOT NULL <if test="criteria.emprId != null">
+  		  FROM users WHERE id IS NOT NULL <if test="criteria.emprId != null">
 						AND emprId = #{criteria.emprId}
 					</if> <if test="criteria.id != null">
 						AND id = #{criteria.id}
@@ -107,19 +107,19 @@ c.tabelaEnumValue,
 </select>
 
 <select id="fetchUsuarioRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM usuario WHERE id IS NOT NULL
+		SELECT COUNT(*) AS RECORD_COUNT FROM users WHERE id IS NOT NULL
 
  </select>
 
  <insert id="insertUsuario" parameterType="Usuario" useGeneratedKeys="true" keyProperty="id">
- 	INSERT INTO usuario (
+ 	INSERT INTO users (
 	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allUsuarioColumns" />
      )
    VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allUsuarioValues" /> )
  </insert>
 
  <update id="updateUsuario" parameterType="Usuario">
-   UPDATE usuario SET
+   UPDATE users SET
 <if test="id!= null">id = #{id},</if>
 <if test="emprId!= null">emprId = #{emprId},</if>
 <if test="email!= null">username = #{email},</if>
@@ -137,11 +137,11 @@ c.tabelaEnumValue,
  </update>
 
 <delete id="deleteUsuarioById" parameterType="Usuario">
-  DELETE FROM usuario WHERE id = #{id}
+  DELETE FROM users WHERE id = #{id}
  </delete>
 
  <delete id="deleteAllUsuarios">
-	DELETE FROM usuario
+	DELETE FROM users
   </delete>
 </mapper>
 

@@ -687,10 +687,8 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 				}
 				userRoles.setUsername(usuario.getEmail());
-
-
+				userRoles.setModelAction(PersistenceActionEnum.INSERT);
 				userRoleList.add(userRoles);
-				userRoleList.add(new UserRoles(usuario.getEmail(),new Role(1)));
 
 			}
 
