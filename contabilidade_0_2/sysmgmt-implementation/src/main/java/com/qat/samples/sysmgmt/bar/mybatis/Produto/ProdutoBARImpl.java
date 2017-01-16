@@ -2250,6 +2250,8 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 		tributacao.setTransactionId(tributacao.getTransactionId());
 
+		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_TRIBUTACAO, tributacao, response);
+
 		if (!ValidationUtil.isNull(tributacao.getImposto())) {
 			count += NFNotaInfoItemImpostoBARD.maintainNFNotaInfoItemImpostoAssociations(tributacao.getImposto(),
 					response, tributacao.getId(), null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR,
@@ -2263,8 +2265,6 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 					historicoBAR, tributacao.getId(), tributacao.getCreateUser(),
 					tributacao.getTransactionId(), tributacao.getTransactionId());
 		}
-
-		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_TRIBUTACAO, tributacao, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.TRIBUTACAO, AcaoEnum.INSERT,
 				tributacao.getTransactionId(), getHistoricoBAR(), response, tributacao.getId(), tributacao.getUserId());
