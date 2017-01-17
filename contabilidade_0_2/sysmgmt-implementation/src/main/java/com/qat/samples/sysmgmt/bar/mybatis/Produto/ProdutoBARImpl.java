@@ -22,17 +22,12 @@ import com.qat.samples.sysmgmt.bar.Produto.IPrecoBAR;
 import com.qat.samples.sysmgmt.bar.Produto.IProdutoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
-import com.qat.samples.sysmgmt.bar.mybatis.delegate.CofinsBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.CustoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EmailBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EstoqueBARD;
-import com.qat.samples.sysmgmt.bar.mybatis.delegate.ICMSOpInterBARD;
-import com.qat.samples.sysmgmt.bar.mybatis.delegate.IcmsBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
-import com.qat.samples.sysmgmt.bar.mybatis.delegate.IpiBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFImpostoDevolvidoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoItemImpostoBARD;
-import com.qat.samples.sysmgmt.bar.mybatis.delegate.PisBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.PrecoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ProdutoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.StatusBARD;
@@ -2250,8 +2245,6 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 		tributacao.setTransactionId(tributacao.getTransactionId());
 
-		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_TRIBUTACAO, tributacao, response);
-
 		if (!ValidationUtil.isNull(tributacao.getImposto())) {
 			count += NFNotaInfoItemImpostoBARD.maintainNFNotaInfoItemImpostoAssociations(tributacao.getImposto(),
 					response, tributacao.getId(), null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR,
@@ -2265,6 +2258,8 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 					historicoBAR, tributacao.getId(), tributacao.getCreateUser(),
 					tributacao.getTransactionId(), tributacao.getTransactionId());
 		}
+
+		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_TRIBUTACAO, tributacao, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.TRIBUTACAO, AcaoEnum.INSERT,
 				tributacao.getTransactionId(), getHistoricoBAR(), response, tributacao.getId(), tributacao.getUserId());
