@@ -25,7 +25,7 @@ public class Pessoa extends ModelCosmeDamiao
 	private Integer id;
 
 	private String nome;
-	
+
 	private String nomeFantasia;
 
 	private String nomePai;
@@ -43,11 +43,11 @@ public class Pessoa extends ModelCosmeDamiao
 	private String foto;
 
 	/** The type of an account. */
-	private PessoaTypeEnum pessoaTypeEnum;
+	private List<PessoaTipo> pessoaTipo;
 
 	/** The sexo. */
 	private Integer sexo;
-	
+
 	private Regime regime;
 
 	/** The enderecos. */
@@ -78,23 +78,10 @@ public class Pessoa extends ModelCosmeDamiao
 		super();
 	}
 
-	public Integer getPessoaTypeEnumValue()
-	{
-		if (pessoaTypeEnum != null)
-		{
-			return pessoaTypeEnum.getValue();
-		}
-		return null;
-	}
-
-	public void setPessoaTypeEnumValue(Integer acaoTypeValue)
-	{
-		pessoaTypeEnum = PessoaTypeEnum.enumForValue(acaoTypeValue);
-	}
 
 	/**
 	 * Gets the id.
-	 * 
+	 *
 	 * @return the id
 	 */
 	public Integer getId()
@@ -104,7 +91,7 @@ public class Pessoa extends ModelCosmeDamiao
 
 	/**
 	 * Sets the id.
-	 * 
+	 *
 	 * @param id the id to set
 	 */
 	public void setId(Integer id)
@@ -224,21 +211,16 @@ public class Pessoa extends ModelCosmeDamiao
 		this.foto = foto;
 	}
 
-	/**
-	 * @return the pessoaTypeEnum
-	 */
-	public PessoaTypeEnum getPessoaTypeEnum()
-	{
-		return pessoaTypeEnum;
+
+	public List<PessoaTipo> getPessoaTipo() {
+		return pessoaTipo;
 	}
 
-	/**
-	 * @param pessoaTypeEnum the pessoaTypeEnum to set
-	 */
-	public void setPessoaTypeEnum(PessoaTypeEnum pessoaTypeEnum)
-	{
-		this.pessoaTypeEnum = pessoaTypeEnum;
+
+	public void setPessoaTipo(List<PessoaTipo> pessoaTipo) {
+		this.pessoaTipo = pessoaTipo;
 	}
+
 
 	/**
 	 * @return the contatoList
@@ -416,20 +398,18 @@ public class Pessoa extends ModelCosmeDamiao
 		this.regime = regime;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Pessoa [getPessoaTypeEnumValue()=" + getPessoaTypeEnumValue() + ", getId()=" + getId() + ", getNome()="
-				+ getNome() + ", getNomePai()=" + getNomePai() + ", getNomeMae()=" + getNomeMae()
-				+ ", getNomeConjugue()=" + getNomeConjugue() + ", getEstadoCivil()=" + getEstadoCivil()
-				+ ", getDatanasc()=" + getDatanasc() + ", getFoto()=" + getFoto() + ", getPessoaTypeEnum()="
-				+ getPessoaTypeEnum() + ", getContatoList()=" + getContatoList() + ", getSexo()=" + getSexo()
-				+ ", getEnderecos()=" + getEnderecos() + ", getDocumentos()=" + getDocumentos() + ", getEmails()="
-				+ getEmails() + ", getTelefones()=" + getTelefones() + ", getBancos()=" + getBancos()
+		return "Pessoa [getId()=" + getId() + ", getNome()=" + getNome() + ", getNomePai()=" + getNomePai()
+				+ ", getNomeMae()=" + getNomeMae() + ", getNomeConjugue()=" + getNomeConjugue() + ", getEstadoCivil()="
+				+ getEstadoCivil() + ", getDatanasc()=" + getDatanasc() + ", getFoto()=" + getFoto()
+				+ ", getPessoaTipo()=" + getPessoaTipo() + ", getContatoList()=" + getContatoList() + ", getSexo()="
+				+ getSexo() + ", getEnderecos()=" + getEnderecos() + ", getDocumentos()=" + getDocumentos()
+				+ ", getEmails()=" + getEmails() + ", getTelefones()=" + getTelefones() + ", getBancos()=" + getBancos()
 				+ ", getFormaPagamentoList()=" + getFormaPagamentoList() + ", getCondPagList()=" + getCondPagList()
 				+ ", getTipoPessoa()=" + getTipoPessoa() + ", getNomeFantasia()=" + getNomeFantasia() + ", getRegime()="
-				+ getRegime() + ", toString()=" + super.toString()
-				+ "]";
+				+ getRegime() + ", toString()=" + super.toString() + "]";
 	}
 
-	
 }

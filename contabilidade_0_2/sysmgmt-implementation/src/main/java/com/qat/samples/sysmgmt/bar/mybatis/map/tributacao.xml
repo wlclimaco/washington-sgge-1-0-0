@@ -31,6 +31,8 @@
 			select="NFNotaInfoItemImpostoMap.fetchNFNotaInfoItemImpostoById" />
 		<collection property="impostoDevolvido" column="impostoDevolvido"
 			select="NFImpostoDevolvidoMap.fetchNFImpostoDevolvidoById" />
+			 <collection property="cfop" column="cfop"
+	select="CfopMap.fetchCfopById" />
   </resultMap>
 
   <sql id="allTributacaoColumns">
@@ -81,9 +83,8 @@ descricao
  <select id="fetchAllTributacaosRequest" parameterType="TributacaoInquiryRequest" resultMap="TributacaoResult">
 
      SELECT id,<include refid="allTributacaoColumns" />
-           FROM tributacao where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
-       OFFSET ( #{startPage} * #{pageSize} )
-       LIMIT #{pageSize}
+           FROM tributacao WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY descricao ASC
+
 </select>
 
 <select id="fetchTributacaoRowCount" resultType="Integer">

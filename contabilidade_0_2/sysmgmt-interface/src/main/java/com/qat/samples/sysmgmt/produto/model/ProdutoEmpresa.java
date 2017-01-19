@@ -16,15 +16,15 @@ public class ProdutoEmpresa extends ModelCosmeDamiao
 	private Integer id;
 
 	private Produto prodId;
-	
+
 	private String codigo;
 
 	private String informAdicionaisParaNFe;
 
-	private Integer anotainternas;
+	private String anotainternas;
 
 	private Long dataCadastro;
-	
+
 	private Double margemLucro;
 
 	private List<Estoque> estoqueList;
@@ -48,13 +48,13 @@ public class ProdutoEmpresa extends ModelCosmeDamiao
 	private Double pesoLiquido;
 
 	private String modoUso;
-	
+
 	private String InfaddNFe;
 
 	private String AnotInt;
-	
+
 	private Categoria categoria;
-	
+
 
 
 	/**
@@ -111,11 +111,11 @@ public class ProdutoEmpresa extends ModelCosmeDamiao
 		this.informAdicionaisParaNFe = informAdicionaisParaNFe;
 	}
 
-	public Integer getAnotainternas() {
+	public String getAnotainternas() {
 		return anotainternas;
 	}
 
-	public void setAnotainternas(Integer anotainternas) {
+	public void setAnotainternas(String anotainternas) {
 		this.anotainternas = anotainternas;
 	}
 
@@ -269,5 +269,5 @@ public class ProdutoEmpresa extends ModelCosmeDamiao
 				+ super.toString() + "]";
 	}
 
-	
+
 }

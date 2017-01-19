@@ -847,14 +847,14 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
 		}
 
-		if (!ValidationUtil.isNull(produtoempresa.getTributacao()))
-		{
-
-			produtoempresa.getTributacao().setProdId(produtoempresa.getProdId().getId());
-			TributacaoBARD.maintainTributacaoAssociations(produtoempresa.getTributacao(), response,null,  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
-					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
-
-		}
+//		if (!ValidationUtil.isNull(produtoempresa.getTributacao()))
+//		{
+//
+//			produtoempresa.getTributacao().setProdId(produtoempresa.getProdId().getId());
+//			TributacaoBARD.maintainTributacaoAssociations(produtoempresa.getTributacao(), response,null,  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
+//					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
+//
+//		}
 
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PRODUTOEMPRESA, produtoempresa, response);
 

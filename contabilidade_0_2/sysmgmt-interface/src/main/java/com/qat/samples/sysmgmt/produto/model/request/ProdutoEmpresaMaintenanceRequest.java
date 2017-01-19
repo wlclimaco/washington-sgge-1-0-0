@@ -1,6 +1,5 @@
 package com.qat.samples.sysmgmt.produto.model.request;
 
-import com.qat.samples.sysmgmt.produto.model.Produto;
 import com.qat.samples.sysmgmt.produto.model.ProdutoEmpresa;
 import com.qat.samples.sysmgmt.util.model.request.UtilMaintenanceRequest;
 

@@ -42,6 +42,7 @@
 		<sec:intercept-url pattern="/vendas/api/nfSaidas/**/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS','ROLE_EMPRESA')" />
 		<sec:intercept-url pattern="/produto/api/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS','ROLE_EMPRESA')" />
 		<sec:intercept-url pattern="/produto/api/**/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS','ROLE_EMPRESA')" />
+		<sec:intercept-url pattern="/pessoa/api/cliente/**" access="hasAnyRole('ROLE_ANONIMO','ROLE_DOMAIN_ADMINS','ROLE_EMPRESA')" />
 		<!-- All other urls/resources not listed above will fall here -->
 		<sec:intercept-url pattern="/**/**"	access="hasAnyRole('ROLE_DOMAIN_ADMINS', 'ROLE_DOMAIN_USERS', 'ROLE_GUEST','ROLE_EMPRESA')" />
 	</sec:http>
