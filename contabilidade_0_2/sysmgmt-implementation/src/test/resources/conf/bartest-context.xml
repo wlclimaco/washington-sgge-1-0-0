@@ -124,6 +124,7 @@
 		<property name="statusBAR" ref="statusBARTarget" />
 		<property name="notesBAR" ref="notesBARTarget" />
 		<property name="historicoBAR" ref="historicoBARTarget" />
+		<property name="pessoaBAR" ref="pessoaBARTarget" />
 	</bean>
 
 

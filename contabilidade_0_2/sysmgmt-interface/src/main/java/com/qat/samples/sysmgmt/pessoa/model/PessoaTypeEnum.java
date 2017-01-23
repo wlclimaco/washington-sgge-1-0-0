@@ -14,16 +14,16 @@ public enum PessoaTypeEnum implements IIntegerEnum, II18nEnum
 {
 
 	/** The centralized. */
-	CLIENTE(1, "com.prosperitasglobal.sendsolv.model.payrolltype.centralized"),
+	CLIENTE(1, "Cliente"),
 
 	/** The not centralized. */
-	FORNECEDOR(2, "com.prosperitasglobal.sendsolv.model.payrolltype.not_centralized"),
+	FORNECEDOR(2, "Fornecedor"),
 
 	/** The mixed. */
 	FUNCIONARIO(3, "com.prosperitasglobal.sendsolv.model.payrolltype.mixed"),
 
 	/** The unknown. */
-	TRANSPORTADOR(4, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
+	TRANSPORTADOR(4, "Transportador"),
 
 	CONTADOR(5, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
 
@@ -39,7 +39,9 @@ public enum PessoaTypeEnum implements IIntegerEnum, II18nEnum
 
 	INQUILINO(10, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
 
-	SINDICO(11, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
+	SINDICO(11, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
+
+	CONSFINAL(12, "Consumidor Final");
 
 	/** The code. */
 	private Integer code;

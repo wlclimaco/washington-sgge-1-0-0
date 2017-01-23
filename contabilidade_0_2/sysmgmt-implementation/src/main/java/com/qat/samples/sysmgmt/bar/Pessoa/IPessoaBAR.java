@@ -16,6 +16,7 @@ import com.qat.samples.sysmgmt.pessoa.model.Fornecedor;
 import com.qat.samples.sysmgmt.pessoa.model.Funcionario;
 import com.qat.samples.sysmgmt.pessoa.model.Medico;
 import com.qat.samples.sysmgmt.pessoa.model.Paciente;
+import com.qat.samples.sysmgmt.pessoa.model.PessoaTipo;
 import com.qat.samples.sysmgmt.pessoa.model.Transportador;
 import com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorInquiryRequest;
@@ -540,5 +541,11 @@ public interface IPessoaBAR
 * @return the internal results response
 */
 	public InternalResultsResponse<Funcionario> fetchFuncionariosByRequest(FuncionarioInquiryRequest request);
+
+	InternalResponse insertTipoPessoa(PessoaTipo funcionario);
+
+	InternalResponse updateTipoPessoa(PessoaTipo funcionario);
+
+	InternalResponse deleteTipoPessoaById(PessoaTipo funcionario);
 
 }

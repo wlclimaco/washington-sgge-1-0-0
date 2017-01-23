@@ -24,12 +24,12 @@ import com.qat.samples.sysmgmt.bar.Notes.INotesBAR;
 import com.qat.samples.sysmgmt.bar.Pessoa.IPessoaBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
-import com.qat.samples.sysmgmt.bar.mybatis.delegate.CnaeBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.DocumentosBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EmailBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EnderecoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NotesBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.PessoaTipoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.StatusBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.TelefoneBARD;
 import com.qat.samples.sysmgmt.clinica.model.request.MedicoInquiryRequest;
@@ -45,6 +45,7 @@ import com.qat.samples.sysmgmt.pessoa.model.Funcionario;
 import com.qat.samples.sysmgmt.pessoa.model.Medico;
 import com.qat.samples.sysmgmt.pessoa.model.Paciente;
 import com.qat.samples.sysmgmt.pessoa.model.Pessoa;
+import com.qat.samples.sysmgmt.pessoa.model.PessoaTipo;
 import com.qat.samples.sysmgmt.pessoa.model.Transportador;
 import com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorInquiryRequest;
@@ -237,6 +238,7 @@ private static final String NAMESPACE_FUNCIONARIO = "FuncionarioMap.";
 	IDocumentoBAR documentoBAR;
 	ITelefoneBAR telefoneBAR;
 	INotesBAR notesBAR;
+	IPessoaBAR pessoaBAR;
 
 
 
@@ -295,6 +297,15 @@ private static final String NAMESPACE_FUNCIONARIO = "FuncionarioMap.";
 
 	public void setNotesBAR(INotesBAR notesBAR) {
 		this.notesBAR = notesBAR;
+	}
+
+
+	public IPessoaBAR getPessoaBAR() {
+		return pessoaBAR;
+	}
+
+	public void setPessoaBAR(IPessoaBAR pessoaBAR) {
+		this.pessoaBAR = pessoaBAR;
 	}
 
 	/**
@@ -1513,7 +1524,7 @@ public static void fetchFuncionariosByRequest(SqlSession sqlSession, Funcionario
 	public boolean insertPessoa(Pessoa pessoa, InternalResponse response ,TabelaEnum tabela,Integer historicoId){
 
 		Integer count = 0;
-		Boolean count1 = false;
+
 		if (!ValidationUtil.isNullOrEmpty(pessoa.getEnderecos()))
 		{
 			count +=
@@ -1556,19 +1567,67 @@ public static void fetchFuncionariosByRequest(SqlSession sqlSession, Funcionario
 							pessoa.getCreateUser(), historicoId, historicoId);
 		}
 
+		if (!ValidationUtil.isNullOrEmpty(pessoa.getPessoaTipo()))
+		{
+			count +=
+					PessoaTipoBARD.maintainPessoaTipoAssociations(pessoa.getPessoaTipo(), response, pessoa.getId(), null,
+							null,
+							tabela, getPessoaBAR(), statusBAR, historicoBAR, pessoa.getEmprId(),
+							pessoa.getCreateUser(), historicoId, historicoId);
+		}
+
+
 		if (count > 0)
 		{
 			Status status = new Status();
 			status.setStatus(CdStatusTypeEnum.ANALISANDO);
 			List<Status> statusList = new ArrayList<Status>();
 			statusList.add(status);
-			count1 =
+			count = Boolean.hashCode(
 					StatusBARD.maintainStatusAssociations(statusList, response, pessoa.getId(), null, AcaoEnum.INSERT,
 							pessoa.getCreateUser(), pessoa.getId(), tabela, statusBAR,
-							historicoBAR, historicoId, historicoId);
+							historicoBAR, historicoId, historicoId));
 
 		}
 
 		return true;
+	}
+
+	//===================================### TIPO PESSOA ####======================================
+		/**
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.base.bar.IFuncionarioBAR#insertFuncionario(com.qat.samples.sysmgmt.base.model.Funcionario)
+	 */
+	@Override
+	public InternalResponse insertTipoPessoa(PessoaTipo funcionario)
+	{
+		InternalResponse response = new InternalResponse();
+		MyBatisBARHelper.doInsert(getSqlSession(), "PessoaMap.insertPessoaTipo", funcionario, response);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.base.bar.IFuncionarioBAR#updateFuncionario(com.qat.samples.sysmgmt.base.model.Funcionario)
+	 */
+	@Override
+	public InternalResponse updateTipoPessoa(PessoaTipo funcionario)
+	{
+		InternalResponse response = new InternalResponse();
+		MyBatisBARHelper.doUpdate(getSqlSession(), "PessoaMap.updatePessoaTipo", funcionario, response);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.base.bar.IFuncionarioBAR#deleteFuncionario(com.qat.samples.sysmgmt.base.model.Funcionario)
+	 */
+	@Override
+	public InternalResponse deleteTipoPessoaById(PessoaTipo funcionario)
+	{
+		InternalResponse response = new InternalResponse();
+		MyBatisBARHelper.doRemove(getSqlSession(), "PessoaMap.deletePessoaTipoById", funcionario, response);
+		return response;
 	}
 }

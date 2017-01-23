@@ -1,5 +1,8 @@
 package com.qat.samples.sysmgmt.pessoa.model;
 
+
+import java.util.Date;
+
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -38,6 +41,17 @@ public class PessoaTipo extends ModelCosmeDamiao
 	public void setPessoaTypeEnumValue(Integer acaoTypeValue)
 	{
 		pessoaTypeEnum = PessoaTypeEnum.enumForValue(acaoTypeValue);
+	}
+
+
+
+	public PessoaTipo(PessoaTypeEnum pessoaTypeEnum,Integer parentId,PersistenceActionEnum action) {
+		super();
+		this.pessoaTypeEnum = pessoaTypeEnum;
+		setParentId(parentId);
+		setModelAction(action);
+		setCreateDateUTC((new Date()).getTime());
+		setCreateUser("System");
 	}
 
 	/**

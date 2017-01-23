@@ -332,6 +332,7 @@
         <typeAlias alias="BeneficiosInquiryRequest" type="com.qat.samples.sysmgmt.beneficios.model.request.BeneficiosInquiryRequest" />
 
         <typeAlias alias="Cliente" type="com.qat.samples.sysmgmt.pessoa.model.Cliente" />
+        <typeAlias alias="PessoaTipo" type="com.qat.samples.sysmgmt.pessoa.model.PessoaTipo" />
         <typeAlias alias="ClienteInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest" />
         <typeAlias alias="SocioInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.SocioInquiryRequest" />
 
