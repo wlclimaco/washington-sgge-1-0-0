@@ -45,6 +45,8 @@ public class Pessoa extends ModelCosmeDamiao
 	/** The sexo. */
 	private Integer sexo;
 
+	private Integer tipoPessoa;
+
 	private Regime regime;
 
 	/** The enderecos. */
@@ -380,6 +382,17 @@ public class Pessoa extends ModelCosmeDamiao
 	}
 
 
+
+	public Integer getTipoPessoa() {
+		return tipoPessoa;
+	}
+
+
+	public void setTipoPessoa(Integer tipoPessoa) {
+		this.tipoPessoa = tipoPessoa;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Pessoa [getId()=" + getId() + ", getNome()=" + getNome() + ", getNomePai()=" + getNomePai()
@@ -389,8 +402,11 @@ public class Pessoa extends ModelCosmeDamiao
 				+ getSexo() + ", getEnderecos()=" + getEnderecos() + ", getDocumentos()=" + getDocumentos()
 				+ ", getEmails()=" + getEmails() + ", getTelefones()=" + getTelefones() + ", getBancos()=" + getBancos()
 				+ ", getFormaPagamentoList()=" + getFormaPagamentoList() + ", getCondPagList()=" + getCondPagList()
-				+ ", getNomeFantasia()=" + getNomeFantasia() + ", getRegime()="
-				+ getRegime() + ", toString()=" + super.toString() + "]";
+				+ ", getNomeFantasia()=" + getNomeFantasia() + ", getRegime()=" + getRegime() + ", getTipoPessoa()="
+				+ getTipoPessoa() + ", toString()=" + super.toString() + "]";
 	}
+
+
+
 
 }

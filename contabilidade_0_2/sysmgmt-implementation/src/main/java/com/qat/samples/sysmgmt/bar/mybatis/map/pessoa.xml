@@ -25,6 +25,7 @@
     <result property="estadoCivil" column="estadoCivil"/>
     <result property="datanasc" column="datanasc"/>
     <result property="foto" column="foto"/>
+    <result property="tipoPessoa" column="tipoPessoa"/>
     <result property="sexo" column="sexo"/>
     <result property="emprId" column="emprId"/>
 	<result property="createUser" column="create_user"/>
@@ -56,6 +57,7 @@
 	,foto
 	,sexo
 	,regime
+	,tipoPessoa
 	,emprId
 	,create_date
 	,create_user
@@ -74,6 +76,7 @@
 	#{foto},
 	#{sexo},
 	#{regime.id},
+	#{tipoPessoa},
 	#{emprId},
 	#{createDateUTC},
 	#{createUser},
@@ -91,6 +94,7 @@
  <update id="updatePessoa" parameterType="Cliente">
    UPDATE pessoa SET
 <if test="nome!= null">nome = #{nome},</if>
+<if test="tipoPessoa!= null">tipoPessoa = #{tipoPessoa},</if>
 <if test="nomeFantasia!= null">nomeFantasia = #{nomeFantasia},</if>
 <if test="nomePai!= null">nomePai = #{nomePai},</if>
 <if test="nomeMae!= null">nomeMae = #{nomeMae},</if>
