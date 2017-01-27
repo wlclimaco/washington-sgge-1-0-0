@@ -20,7 +20,6 @@ import com.qat.samples.sysmgmt.cfop.model.Cfop;
 import com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest;
 import com.qat.samples.sysmgmt.cfop.model.request.CfopMaintenanceRequest;
 import com.qat.samples.sysmgmt.cnae.model.Cnae;
-import com.qat.samples.sysmgmt.cnae.model.CnaeEmpresa;
 import com.qat.samples.sysmgmt.cnae.model.request.CnaeInquiryRequest;
 import com.qat.samples.sysmgmt.cnae.model.request.CnaeMaintenanceRequest;
 import com.qat.samples.sysmgmt.cnae.model.response.CnaeResponse;
