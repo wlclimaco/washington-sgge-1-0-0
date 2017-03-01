@@ -8,6 +8,7 @@ import com.qat.samples.sysmgmt.banco.model.Banco;
 import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
 import com.qat.samples.sysmgmt.condpag.model.CondPag;
 import com.qat.samples.sysmgmt.condpag.model.FormaPg;
+import com.qat.samples.sysmgmt.conta.model.Conta;
 import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
 import com.qat.samples.sysmgmt.financeiro.model.BaixaTitulo;
 import com.qat.samples.sysmgmt.financeiro.model.Caixa;
@@ -21,6 +22,7 @@ import com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteInquiryRequ
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.FormaPgInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ContaInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
@@ -542,6 +544,65 @@ public interface IFinanceiroBAR
 * @return the internal results response
 */
 	public InternalResultsResponse<ContaCorrente> fetchContaCorrentesByRequest(ContaCorrenteInquiryRequest request);
+
+	
+	
+	/**
+	 * Fetch contacorrente by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public Conta fetchContaById(FetchByIdRequest request);
+
+	/**
+* Insert contacorrente.
+*
+* @param contacorrente the contacorrente
+*
+* @return the internal response
+*/
+	public InternalResponse insertConta(Conta contacorrente);
+
+	/**
+* Update contacorrente.
+*
+* @param contacorrente the contacorrente
+*
+* @return the internal response
+*/
+	public InternalResponse updateConta(Conta contacorrente);
+
+	/**
+* Delete contacorrente.
+*
+* @param contacorrente the contacorrente
+*
+* @return the internal response
+*/
+	public InternalResponse deleteContaById(Conta contacorrente);
+
+	/**
+* Delete all contacorrentes.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllContas();
+
+	/**
+* Fetch all contacorrentes.
+*
+* @return the list< contacorrente>
+*/
+	public InternalResultsResponse<Conta> fetchAllContas(Conta  contacorrente);
+
+	/**
+* Fetch contacorrentes by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Conta> fetchContasByRequest(ContaInquiryRequest request);
 
 	/**
 	 * Fetch caixa by id.

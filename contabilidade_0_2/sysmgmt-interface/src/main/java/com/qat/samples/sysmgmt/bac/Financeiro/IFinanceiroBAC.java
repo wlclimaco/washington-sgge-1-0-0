@@ -8,6 +8,7 @@ import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
 import com.qat.samples.sysmgmt.banco.model.request.BancoMaintenanceRequest;
 import com.qat.samples.sysmgmt.condpag.model.CondPag;
 import com.qat.samples.sysmgmt.condpag.model.FormaPg;
+import com.qat.samples.sysmgmt.conta.model.Conta;
 import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
 import com.qat.samples.sysmgmt.financeiro.model.Caixa;
 import com.qat.samples.sysmgmt.financeiro.model.ContasPagar;
@@ -18,12 +19,14 @@ import com.qat.samples.sysmgmt.financeiro.model.request.CondPagInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.CondPagMaintenanceRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.ContaMaintenanceRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarMaintenanceRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberMaintenanceRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.FormaPgInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.FormaPgMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ContaInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
@@ -399,6 +402,67 @@ public interface IFinanceiroBAC
 * @return the internal results response
 */
 	public InternalResultsResponse<ContaCorrente> fetchContaCorrentesByRequest(ContaCorrenteInquiryRequest request);
+
+	
+	//===================================### CONTACORRENTE ####======================================
+		/**
+
+		/**
+		 * Insert contacorrente.
+		 *
+	* @param request the contacorrente maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Conta> insertConta(ContaMaintenanceRequest request);
+
+		/**
+	* Update contacorrente.
+	*
+	* @param request the contacorrente maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Conta> updateConta(ContaMaintenanceRequest request);
+
+		/**
+	* Delete contacorrente.
+	*
+	* @param request the contacorrente maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Conta> deleteConta(ContaMaintenanceRequest request);
+
+		/**
+	* Refresh contacorrentes.
+	*
+	* @param request containing the number to refresh with and whether to return the result
+	*/
+		public InternalResultsResponse<Conta> refreshContas(RefreshRequest request);
+
+		/**
+	* Fetch contacorrente by id.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Conta> fetchContaById(FetchByIdRequest request);
+
+		/**
+	* Fetch all contacorrentes.
+	*
+	* @return the internal results response< contacorrente>
+	*/
+		public InternalResultsResponse<Conta> fetchAllContas(Conta  contacorrente);
+
+		/**
+	* Fetch contacorrentes by request.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Conta> fetchContasByRequest(ContaInquiryRequest request);
 
 
 //===================================### CAIXA ####======================================

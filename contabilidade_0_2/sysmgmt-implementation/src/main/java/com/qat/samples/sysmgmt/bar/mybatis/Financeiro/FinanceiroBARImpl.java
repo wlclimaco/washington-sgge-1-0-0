@@ -18,7 +18,6 @@ import com.qat.samples.sysmgmt.agencia.model.Agencia;
 import com.qat.samples.sysmgmt.agencia.model.request.AgenciaInquiryRequest;
 import com.qat.samples.sysmgmt.banco.model.Banco;
 import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
-import com.qat.samples.sysmgmt.bar.Documentos.IDocumentoBAR;
 import com.qat.samples.sysmgmt.bar.Email.IEmailBAR;
 import com.qat.samples.sysmgmt.bar.Endereco.IEnderecoBAR;
 import com.qat.samples.sysmgmt.bar.Financeiro.IFinanceiroBAR;
@@ -26,15 +25,14 @@ import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ContaCorrenteBARD;
-import com.qat.samples.sysmgmt.bar.mybatis.delegate.DocumentosBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EmailBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EnderecoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
-import com.qat.samples.sysmgmt.bar.mybatis.delegate.NotesBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.StatusBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.TelefoneBARD;
 import com.qat.samples.sysmgmt.condpag.model.CondPag;
 import com.qat.samples.sysmgmt.condpag.model.FormaPg;
+import com.qat.samples.sysmgmt.conta.model.Conta;
 import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
 import com.qat.samples.sysmgmt.financeiro.model.BaixaTitulo;
 import com.qat.samples.sysmgmt.financeiro.model.Caixa;
@@ -48,7 +46,7 @@ import com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteInquiryRequ
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.FormaPgInquiryRequest;
-import com.qat.samples.sysmgmt.pessoa.model.Pessoa;
+import com.qat.samples.sysmgmt.pessoa.model.request.ContaInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.AcaoTypeEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
@@ -320,6 +318,35 @@ private static final String STMT_DELETE_CONTACORRENTE = NAMESPACE_CONTACORRENTE 
 
 	/** The Constant STMT_FETCH_CONTACORRENTE_ALL_REQUEST. */
 	private static final String STMT_FETCH_CONTACORRENTE_ALL_REQUEST = NAMESPACE_CONTACORRENTE + "fetchAllContaCorrentesRequest";
+
+	
+	///===================================### CONTA ####======================================
+	/** The Constant NAMESPACE. */
+	private static final String NAMESPACE_CONTA = "ContaMap.";
+
+	/** The Constant STMT_INSERT_CONTA. */
+	private static final String STMT_INSERT_CONTA = NAMESPACE_CONTA + "insertConta";
+
+	/** The Constant STMT_UPDATE_CONTA. */
+	private static final String STMT_UPDATE_CONTA = NAMESPACE_CONTA + "updateConta";
+
+	/** The Constant STMT_DELETE_CONTA. */
+	private static final String STMT_DELETE_CONTA = NAMESPACE_CONTA + "deleteContaById";
+
+		/** The Constant STMT_DELETE_CONTA_ALL. */
+		private static final String STMT_DELETE_CONTA_ALL = NAMESPACE_CONTA + "deleteAllContas";
+
+		/** The Constant STMT_FETCH_CONTA. */
+		private static final String STMT_FETCH_CONTA = NAMESPACE_CONTA + "fetchContaById";
+
+		/** The Constant STMT_FETCH_CONTA_ALL. */
+		private static final String STMT_FETCH_CONTA_ALL = NAMESPACE_CONTA + "fetchAllContas";
+
+		/** The Constant STMT_FETCH_CONTA_COUNT. */
+		private static final String STMT_FETCH_CONTA_COUNT = NAMESPACE_CONTA + "fetchContaRowCount";
+
+		/** The Constant STMT_FETCH_CONTA_ALL_REQUEST. */
+		private static final String STMT_FETCH_CONTA_ALL_REQUEST = NAMESPACE_CONTA + "fetchAllContasRequest";
 
 ///===================================### CAIXA ####======================================
 /** The Constant NAMESPACE. */
@@ -1633,6 +1660,140 @@ public static void fetchContaCorrentesByRequest(SqlSession sqlSession, ContaCorr
 		}
 
 	}
+
+
+//===================================### CONTA ####======================================
+	/**
+/*
+* (non-Javadoc)
+* @see com.qat.samples.sysmgmt.base.bar.IContaBAR#insertConta(com.qat.samples.sysmgmt.base.model.Conta)
+*/
+@Override
+public InternalResponse insertConta(Conta contacorrente)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONTA, contacorrente, response);
+	return response;
+}
+
+/*
+* (non-Javadoc)
+* @see com.qat.samples.sysmgmt.base.bar.IContaBAR#updateConta(com.qat.samples.sysmgmt.base.model.Conta)
+*/
+@Override
+public InternalResponse updateConta(Conta contacorrente)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CONTA, contacorrente, response);
+	return response;
+}
+
+/*
+* (non-Javadoc)
+* @see com.qat.samples.sysmgmt.base.bar.IContaBAR#deleteConta(com.qat.samples.sysmgmt.base.model.Conta)
+*/
+@Override
+public InternalResponse deleteContaById(Conta contacorrente)
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONTA, contacorrente, response);
+	return response;
+}
+
+/*
+* (non-Javadoc)
+* @see com.qat.samples.sysmgmt.base.bar.IContaBAR#deleteAllContas()
+*/
+@Override
+public InternalResponse deleteAllContas()
+{
+	InternalResponse response = new InternalResponse();
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONTA_ALL, response);
+	return response;
+}
+
+/*
+* (non-Javadoc)
+* @see
+* com.qat.samples.sysmgmt.bar.IContaBAR#fetchContaById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest)
+*/
+@Override
+public Conta fetchContaById(FetchByIdRequest request)
+{
+return (Conta)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_CONTA, request.getFetchId());
+
+}
+
+/*
+* (non-Javadoc)
+* @see com.qat.samples.sysmgmt.base.bar.IContaBAR#fetchAllContasCache()
+*/
+@Override
+public InternalResultsResponse<Conta> fetchAllContas(Conta contacorrente)
+{
+	InternalResultsResponse<Conta> response = new InternalResultsResponse<Conta>();
+	response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_CONTA_ALL));
+	return response;
+}
+
+/*
+* (non-Javadoc)
+* @see com.qat.samples.sysmgmt.bar.IContaBAR#fetchContasByRequest(com.qat.samples.sysmgmt.model.request.
+* PagedInquiryRequest)
+*/
+@Override
+public InternalResultsResponse<Conta> fetchContasByRequest(ContaInquiryRequest request)
+{
+	InternalResultsResponse<Conta> response = new InternalResultsResponse<Conta>();
+	fetchContasByRequest(getSqlSession(), request, STMT_FETCH_CONTA_COUNT, STMT_FETCH_CONTA_ALL_REQUEST,
+			response);
+	return response;
+}
+
+//===================================### fetchContasByRequest ####======================================
+
+public static void fetchContasByRequest(SqlSession sqlSession, ContaInquiryRequest request, String countStatement,
+			String fetchPagedStatement,
+			InternalResultsResponse<?> response)
+	{
+
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount())
+		{
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer)MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO)
+			{
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
+			}
+		}
+
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo().getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage))
+		{
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
+	}
+
 
 
 //===================================### CAIXA ####======================================

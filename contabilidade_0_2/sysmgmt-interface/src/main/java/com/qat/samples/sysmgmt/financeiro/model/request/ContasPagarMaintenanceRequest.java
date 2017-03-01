@@ -7,7 +7,7 @@ public class ContasPagarMaintenanceRequest extends UtilMaintenanceRequest
 {
 
 	/** Attributes. */
-	private ContasPagar financeiro;
+	private ContasPagar contasPagar;
 
 	/**
 	 * The Constructor.
@@ -17,25 +17,18 @@ public class ContasPagarMaintenanceRequest extends UtilMaintenanceRequest
 
 	}
 
-	/**
-	 * @return the financeiro
-	 */
-	public ContasPagar getContasPagar()
-	{
-		return financeiro;
+	public ContasPagar getContasPagar() {
+		return contasPagar;
 	}
 
-	/**
-	 * @param financeiro the financeiro to set
-	 */
-	public void setContasPagar(ContasPagar financeiro)
-	{
-		this.financeiro = financeiro;
+	public void setContasPagar(ContasPagar contasPagar) {
+		this.contasPagar = contasPagar;
 	}
 
 	@Override
 	public String toString() {
-		return "ContasPagarMaintenanceRequest [getContasPagar()=" + getContasPagar() + ", toString()=" + super.toString()
-				+ "]";
+		return "ContasPagarMaintenanceRequest [getContasPagar()=" + getContasPagar() + ", toString()="
+				+ super.toString() + "]";
 	}
+
 }

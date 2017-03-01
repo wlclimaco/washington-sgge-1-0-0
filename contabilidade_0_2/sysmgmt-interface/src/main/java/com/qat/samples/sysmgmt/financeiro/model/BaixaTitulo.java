@@ -2,6 +2,7 @@ package com.qat.samples.sysmgmt.financeiro.model;
 
 import java.util.List;
 
+import com.qat.samples.sysmgmt.conta.model.Conta;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -29,7 +30,7 @@ public class BaixaTitulo extends ModelCosmeDamiao
 
 	private Double desconto;
 
-	private List<TipoBaixa> tipoBaixaList;
+	private Conta conta;
 
 	/**
 	 * Default constructor.
@@ -119,12 +120,13 @@ public class BaixaTitulo extends ModelCosmeDamiao
 		this.multa = multa;
 	}
 
-	public List<TipoBaixa> getTipoBaixaList() {
-		return tipoBaixaList;
+	
+	public Conta getConta() {
+		return conta;
 	}
 
-	public void setTipoBaixaList(List<TipoBaixa> tipoBaixaList) {
-		this.tipoBaixaList = tipoBaixaList;
+	public void setConta(Conta conta) {
+		this.conta = conta;
 	}
 
 	public Double getDesconto() {
@@ -139,8 +141,8 @@ public class BaixaTitulo extends ModelCosmeDamiao
 	public String toString() {
 		return "BaixaTitulo [getId()=" + getId() + ", getFinanId()=" + getFinanId() + ", getDataBaixa()="
 				+ getDataBaixa() + ", getObservacao()=" + getObservacao() + ", getValor()=" + getValor()
-				+ ", getJuros()=" + getJuros() + ", getMulta()=" + getMulta() + ", getTipoBaixaList()="
-				+ getTipoBaixaList() + ", getDesconto()=" + getDesconto() + ", toString()=" + super.toString() + "]";
+				+ ", getJuros()=" + getJuros() + ", getMulta()=" + getMulta() + ", getConta()=" + getConta()
+				+ ", getDesconto()=" + getDesconto() + ", toString()=" + super.toString() + "]";
 	}
 
 

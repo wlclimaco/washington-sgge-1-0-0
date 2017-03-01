@@ -2,13 +2,9 @@ package com.qat.samples.sysmgmt.financeiro.model;
 
 import java.util.List;
 
-import com.qat.samples.sysmgmt.nf.model.NotaFiscalEntrada;
-import com.qat.samples.sysmgmt.nf.model.NotaFiscalSaida;
-import com.qat.samples.sysmgmt.pessoa.model.Cliente;
-import com.qat.samples.sysmgmt.pessoa.model.Fornecedor;
+import com.qat.samples.sysmgmt.condpag.model.FormaPg;
 import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
-import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -20,24 +16,38 @@ public class Titulo extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
+	private String descricao;
+	
 	private String numero;
 
 	private Integer parcela;
+	
+	private FormaPg formapg;
 
 	/** The estado. */
 	private Long dataEmissao;
 
 	/** The bairro. */
 	private Long dataVencimento;
+	
+	private Long dataPagamento;
 
 	/** The numero. */
 	private String docId;
 
 	private DoisValores tipoDoc;
+	
+	private DoisValores formaCadastro;
+	
+	private DoisValores intervalo;
+	
+	private DoisValores categoria;
 
 	private String observacao;
 
 	private Double valor;
+	
+	private DoisValores situacao;
 
 	private FinanceiroStatusEnum financeiroEnum;
 
@@ -185,6 +195,62 @@ public class Titulo extends ModelCosmeDamiao
 		this.listBaixa = listBaixa;
 	}
 
+	public DoisValores getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(DoisValores categoria) {
+		this.categoria = categoria;
+	}
+
+	public FormaPg getFormapg() {
+		return formapg;
+	}
+
+	public void setFormapg(FormaPg formapg) {
+		this.formapg = formapg;
+	}
+
+	public DoisValores getFormaCadastro() {
+		return formaCadastro;
+	}
+
+	public void setFormaCadastro(DoisValores formaCadastro) {
+		this.formaCadastro = formaCadastro;
+	}
+
+	public DoisValores getIntervalo() {
+		return intervalo;
+	}
+
+	public void setIntervalo(DoisValores intervalo) {
+		this.intervalo = intervalo;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Long getDataPagamento() {
+		return dataPagamento;
+	}
+
+	public void setDataPagamento(Long dataPagamento) {
+		this.dataPagamento = dataPagamento;
+	}
+
+	public DoisValores getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(DoisValores situacao) {
+		this.situacao = situacao;
+	}
+
 	@Override
 	public String toString() {
 		return "Titulo [getFinanceiroEnumValue()=" + getFinanceiroEnumValue() + ", getId()=" + getId()
@@ -192,7 +258,15 @@ public class Titulo extends ModelCosmeDamiao
 				+ getDataEmissao() + ", getDataVencimento()=" + getDataVencimento() + ", getDocId()=" + getDocId()
 				+ ", getTipoDoc()=" + getTipoDoc() + ", getObservacao()=" + getObservacao() + ", getValor()="
 				+ getValor() + ", getFinanceiroEnum()=" + getFinanceiroEnum() + ", getListBaixa()=" + getListBaixa()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", getCategoria()=" + getCategoria() + ", getFormapg()=" + getFormapg() + ", getFormaCadastro()="
+				+ getFormaCadastro() + ", getIntervalo()=" + getIntervalo() + ", getDescricao()=" + getDescricao()
+				+ ", getDataPagamento()=" + getDataPagamento() + ", getSituacao()=" + getSituacao() + ", toString()="
+				+ super.toString() + "]";
 	}
 
+	
+
+
+
+	
 }

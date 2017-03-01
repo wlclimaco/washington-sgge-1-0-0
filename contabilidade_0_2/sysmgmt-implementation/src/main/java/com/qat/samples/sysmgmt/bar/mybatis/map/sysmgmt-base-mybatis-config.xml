@@ -123,6 +123,10 @@
 
     	<typeAlias alias="Audiencia" type="com.qat.samples.sysmgmt.advocacia.Audiencia" />
     	<typeAlias alias="AudienciaInquiryRequest" type="com.qat.samples.sysmgmt.advocacia.request.AudienciaInquiryRequest" />
+    	
+    	
+    	<typeAlias alias="Conta" type="com.qat.samples.sysmgmt.conta.model.Conta" />
+    	<typeAlias alias="ContaInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.ContaInquiryRequest" />
 
         <typeAlias alias="County" type="com.qat.samples.sysmgmt.model.County" />
         <typeAlias alias="Drug" type="com.qat.samples.sysmgmt.model.Drug" />
@@ -694,6 +698,7 @@
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoCOFINSOutrasOperacoes.xml" />
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoCOFINSST.xml" />
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMSUFDestino.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/conta.xml" />
     </mappers>
 
 </configuration>

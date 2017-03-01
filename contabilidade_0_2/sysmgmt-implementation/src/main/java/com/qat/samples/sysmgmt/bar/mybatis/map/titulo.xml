@@ -14,11 +14,33 @@
   <!-- Result maps describe the mapping between the columns returned
       from a query, and the class properties.  A result map isnt
       necessary if the columns (or aliases) match to the properties
-       exactly. -->
+       exactly. 
+       
+       private Integer id;
+
+	private String numero;
+	private Integer parcela;
+	private FormaPg formapg;
+	private Long dataEmissao;
+	private Long dataVencimento;
+	private String docId;
+	private DoisValores tipoDoc;
+	private DoisValores formaCadastro;
+	private DoisValores intervalo;
+	private DoisValores categoria;
+	private String observacao;
+	private Double valor;
+	private FinanceiroStatusEnum financeiroEnum;
+	private List<BaixaTitulo> listBaixa;
+       
+       -->
   <resultMap id="TituloResult" type="Titulo">
     <result property="id" column="id"/>
+    <result property="descricao" column="descricao"/>
+    <result property="parcela" column="parcela"/>
     <result property="numero" column="numero"/>
     <result property="dataEmissao" column="dataEmissao"/>
+    <result property="dataPagamento" column="dataPagamento"/>
     <result property="dataVencimento" column="dataVencimento"/>
     <result property="docId" column="docId"/>
     <result property="valor" column="valor"/>
@@ -31,39 +53,62 @@
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
 	<collection property="listBaixa" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-	<collection property="tipoDoc" column="tipoDoc" select="DoisValoresMap.fetchDoisValoresById"/>
+	<collection property="tipoDoc" column="tipoDoc" select="DoisValorMap.fetchDoisValorById"/>
+	<collection property="formapg" column="formapg" select="DoisValorMap.fetchDoisValorById"/>
+	<collection property="formaCadastro" column="formaCadastro" select="DoisValorMap.fetchDoisValorById"/>
+	<collection property="intervalo" column="formaCadastro" select="DoisValorMap.fetchDoisValorById"/>
+	<collection property="categoria" column="formaCadastro" select="DoisValorMap.fetchDoisValorById"/>
+	<collection property="situacao" column="situacao" select="DoisValorMap.fetchDoisValorById"/>
   </resultMap>
 
   <sql id="allTituloColumns">
-numero
-,dataEmissao
-,dataVencimento
-,docId
-,valor
-,observacao
-,financeiroEnumValue
-,emprId
-,processId
-,create_date
-,create_user
-,modify_date
-,modify_user
-
+	descricao,
+    parcela,
+    numero,
+    dataEmissao,
+    dataPagamento,
+    dataVencimento,
+    docId,
+    valor,
+    observacao,
+    financeiroEnumValue,
+	emprId,
+	processId,
+	tipoDoc,
+	formapg,
+	formaCadastro,
+	intervalo,
+	categoria,
+	situacao,
+	create_date,
+	create_user,
+	modify_date,
+	modify_user
 </sql>
 <sql id="allTituloValues">
+
+#{descricao},
+#{parcela},
 #{numero},
 #{dataEmissao},
+#{dataPagamento},
 #{dataVencimento},
 #{docId},
 #{valor},
 #{observacao},
 #{financeiroEnumValue},
-		#{emprId},
-		#{processId},
-		#{createDateUTC},
-		#{createUser},
-		#{modifyDateUTC},
-		#{modifyUser}
+#{emprId},
+#{processId},
+#{tipoDoc.id},
+#{formapg.id},
+#{formaCadastro.id},
+#{intervalo.id},
+#{categoria.id},
+#{situacao.id},
+#{createDateUTC},
+	#{createUser},
+	#{modifyDateUTC},
+	#{modifyUser}
   </sql>
 
 

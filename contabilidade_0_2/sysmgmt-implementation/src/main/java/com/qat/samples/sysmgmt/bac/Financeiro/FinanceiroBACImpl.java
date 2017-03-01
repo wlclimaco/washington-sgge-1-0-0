@@ -23,6 +23,7 @@ import com.qat.samples.sysmgmt.banco.model.request.BancoMaintenanceRequest;
 import com.qat.samples.sysmgmt.bar.Financeiro.IFinanceiroBAR;
 import com.qat.samples.sysmgmt.condpag.model.CondPag;
 import com.qat.samples.sysmgmt.condpag.model.FormaPg;
+import com.qat.samples.sysmgmt.conta.model.Conta;
 import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
 import com.qat.samples.sysmgmt.financeiro.model.Caixa;
 import com.qat.samples.sysmgmt.financeiro.model.ContasPagar;
@@ -33,12 +34,14 @@ import com.qat.samples.sysmgmt.financeiro.model.request.CondPagInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.CondPagMaintenanceRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.ContaMaintenanceRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarMaintenanceRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberMaintenanceRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.FormaPgInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.FormaPgMaintenanceRequest;
+import com.qat.samples.sysmgmt.pessoa.model.request.ContaInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
@@ -1141,7 +1144,7 @@ private InternalResultsResponse<Banco> processBanco(ValidationContextIndicator i
 		}
 	}
 
-//===================================### CONTACORRENTE ####======================================
+//===================================### CONTA ####======================================
 	/**
 /*
 /*
@@ -1151,84 +1154,64 @@ private InternalResultsResponse<Banco> processBanco(ValidationContextIndicator i
  * )
  */
 @Override
-public InternalResultsResponse<ContaCorrente> insertContaCorrente(ContaCorrenteMaintenanceRequest request)
+public InternalResultsResponse<Conta> insertConta(ContaMaintenanceRequest request)
 {
-	InternalResultsResponse<ContaCorrente> response =
-			processContaCorrente(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+	InternalResultsResponse<Conta> response =
+			processConta(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IContaCorrenteBAC#updateContaCorrente(com.qat.samples.sysmgmt.model.request.ContaCorrenteMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IContaBAC#updateConta(com.qat.samples.sysmgmt.model.request.ContaMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<ContaCorrente> updateContaCorrente(ContaCorrenteMaintenanceRequest request)
+public InternalResultsResponse<Conta> updateConta(ContaMaintenanceRequest request)
 {
-	InternalResultsResponse<ContaCorrente> response =
-			processContaCorrente(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+	InternalResultsResponse<Conta> response =
+			processConta(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IContaCorrenteBAC#deleteContaCorrente(com.qat.samples.sysmgmt.model.request.ContaCorrenteMaintenanceRequest
+ * com.qat.samples.sysmgmt.bac.IContaBAC#deleteConta(com.qat.samples.sysmgmt.model.request.ContaMaintenanceRequest
  * )
  */
 @Override
-public InternalResultsResponse<ContaCorrente> deleteContaCorrente(ContaCorrenteMaintenanceRequest request)
+public InternalResultsResponse<Conta> deleteConta(ContaMaintenanceRequest request)
 {
-	InternalResultsResponse<ContaCorrente> response =
-			processContaCorrente(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+	InternalResultsResponse<Conta> response =
+			processConta(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
 	return response;
 }
 
-/*
- * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IContaCorrenteBAC#refreshContaCorrentes(com.qat.samples.sysmgmt.model.request.RefreshRequest)
- */
-@Override
-public InternalResultsResponse<ContaCorrente> refreshContaCorrentes(RefreshRequest request)
-{
-	// This method is demo code only. Do not view this as a QAT Global Standard.
-	getFinanceiroBAR().deleteAllContaCorrentes();
-	int refreshNumber = request.getRefreshInt();
-	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
-
-	for (int i = 1; i <= refreshNumber; i++)
-	{
-	getFinanceiroBAR().insertContaCorrente(new ContaCorrente(i, "ContaCorrenteDesc" + i));
-	}
-
-	// Call maintain to see if we need to return the contacorrente list and if so whether it should be paged or not
-	return maintainReturnListContaCorrente(request.getReturnList(), request.getReturnListPaged(),new ContaCorrente());
-}
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IContaCorrenteBAC#fetchAllContaCorrentes(ContaCorrente contacorrente)
+ * @see com.qat.samples.sysmgmt.bac.IContaBAC#fetchAllContas(Conta contacorrente)
  */
 @Override
-public InternalResultsResponse<ContaCorrente> fetchAllContaCorrentes(ContaCorrente contacorrente)
+public InternalResultsResponse<Conta> fetchAllContas(Conta contacorrente)
 {
-	InternalResultsResponse<ContaCorrente> response = new InternalResultsResponse<ContaCorrente>();
-	response.getResultsList().addAll(getFinanceiroBAR().fetchAllContaCorrentes(contacorrente).getResultsList());
+	InternalResultsResponse<Conta> response = new InternalResultsResponse<Conta>();
+	response.getResultsList().addAll(getFinanceiroBAR().fetchAllContas(contacorrente).getResultsList());
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IContaCorrenteBAC#fetchContaCorrenteById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * com.qat.samples.sysmgmt.bac.IContaBAC#fetchContaById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
  * )
  */
 @Override
-public InternalResultsResponse<ContaCorrente> fetchContaCorrenteById(FetchByIdRequest request)
+public InternalResultsResponse<Conta> fetchContaById(FetchByIdRequest request)
 {
-	InternalResultsResponse<ContaCorrente> response = new InternalResultsResponse<ContaCorrente>();
+	InternalResultsResponse<Conta> response = new InternalResultsResponse<Conta>();
 	// validate fetchId field
 	if (ValidationUtil.isNull(request.getFetchId()))
 	{
@@ -1237,7 +1220,7 @@ public InternalResultsResponse<ContaCorrente> fetchContaCorrenteById(FetchByIdRe
 	}
 	else
 	{
-		response.getResultsList().add(getFinanceiroBAR().fetchContaCorrenteById(request));
+		response.getResultsList().add(getFinanceiroBAR().fetchContaById(request));
 	}
 
 	return response;
@@ -1245,13 +1228,13 @@ public InternalResultsResponse<ContaCorrente> fetchContaCorrenteById(FetchByIdRe
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IContaCorrenteBAC#fetchContaCorrentesByRequest(com.qat.samples.sysmgmt.model.request.
+ * @see com.qat.samples.sysmgmt.bac.IContaBAC#fetchContasByRequest(com.qat.samples.sysmgmt.model.request.
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<ContaCorrente> fetchContaCorrentesByRequest(ContaCorrenteInquiryRequest request)
+public InternalResultsResponse<Conta> fetchContasByRequest(ContaInquiryRequest request)
 {
-	return getFinanceiroBAR().fetchContaCorrentesByRequest(request);
+	return getFinanceiroBAR().fetchContasByRequest(request);
 }
 
 /**
@@ -1262,17 +1245,17 @@ public InternalResultsResponse<ContaCorrente> fetchContaCorrentesByRequest(Conta
  * @param request the request
  * @return the contacorrente response
  */
-private InternalResultsResponse<ContaCorrente> processContaCorrente(ValidationContextIndicator indicator,
+private InternalResultsResponse<Conta> processConta(ValidationContextIndicator indicator,
 		PersistenceActionEnum persistType,
-		ContaCorrenteMaintenanceRequest request)
+		ContaMaintenanceRequest request)
 		{
-	InternalResultsResponse<ContaCorrente> response = null;
+	InternalResultsResponse<Conta> response = null;
 
 		// Persist
-		InternalResponse internalResponse = doPersistenceContaCorrente(request.getContaCorrente(), persistType);
+		InternalResponse internalResponse = doPersistenceConta(request.getConta(), persistType);
 		if (internalResponse.isInError())
 		{
-			response = new InternalResultsResponse<ContaCorrente>();
+			response = new InternalResultsResponse<Conta>();
 			response.setStatus(internalResponse.getError());
 			response.addMessages(internalResponse.getMessageInfoList());
 			response.addMessage(DEFAULT_FINANCEIRO_BAC_EXCEPTION_MSG, MessageSeverity.Error,
@@ -1283,30 +1266,30 @@ private InternalResultsResponse<ContaCorrente> processContaCorrente(ValidationCo
 
 		// Call maintainReurnList to see if we need to return the contacorrente list and if so whether it should be paged or
 		// not
-		response = maintainReturnListContaCorrente(request.getReturnList(), request.getReturnListPaged(),new ContaCorrente());
+		response = maintainReturnListConta(request.getReturnList(), request.getReturnListPaged(),new Conta());
 
 		return response;
 			}
 
 	/**
-	 * Do persistenceContaCorrente.
+	 * Do persistenceConta.
 	 *
 	 * @param request the request
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistenceContaCorrente(ContaCorrente contacorrente, PersistenceActionEnum updateType)
+	private InternalResponse doPersistenceConta(Conta contacorrente, PersistenceActionEnum updateType)
 	{
 		switch (updateType)
 		{
 			case INSERT:
-				return getFinanceiroBAR().insertContaCorrente(contacorrente);
+				return getFinanceiroBAR().insertConta(contacorrente);
 
 			case UPDATE:
-				return getFinanceiroBAR().updateContaCorrente(contacorrente);
+				return getFinanceiroBAR().updateConta(contacorrente);
 
 			case DELETE:
-				return getFinanceiroBAR().deleteContaCorrenteById(contacorrente);
+				return getFinanceiroBAR().deleteContaById(contacorrente);
 			default:
 				if (LOG.isDebugEnabled())
 				{
@@ -1324,7 +1307,7 @@ private InternalResultsResponse<ContaCorrente> processContaCorrente(ValidationCo
 	 * @param request the request
 	 * @param response the response
 	 */
-	private InternalResultsResponse<ContaCorrente> maintainReturnListContaCorrente(Boolean listIndicator, Boolean pageListIndicator,ContaCorrente contacorrente)
+	private InternalResultsResponse<Conta> maintainReturnListConta(Boolean listIndicator, Boolean pageListIndicator,Conta contacorrente)
 	{
 		// Fetch again if requested.
 		if (listIndicator)
@@ -1332,21 +1315,229 @@ private InternalResultsResponse<ContaCorrente> processContaCorrente(ValidationCo
 			// Fetch Paged is requested.
 			if (pageListIndicator)
 			{
-				ContaCorrenteInquiryRequest request = new ContaCorrenteInquiryRequest();
+				ContaInquiryRequest request = new ContaInquiryRequest();
 				request.setPreQueryCount(true);
-				return fetchContaCorrentesByRequest(request);
+				return fetchContasByRequest(request);
 			}
 			else
 			{
 				// otherwise return all rows not paged
-				return fetchAllContaCorrentes(contacorrente);
+				return fetchAllContas(contacorrente);
 			}
 		}
 		else
 		{
-			return new InternalResultsResponse<ContaCorrente>();
+			return new InternalResultsResponse<Conta>();
 		}
 	}
+	
+	//===================================### CONTACORRENTE ####======================================
+		/**
+	/*
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bac.ICountyBAC#insertContaCorrente(com.qat.samples.sysmgmt.model.request.ContaCorrenteMaintenanceRequest
+	 * )
+	 */
+	@Override
+	public InternalResultsResponse<ContaCorrente> insertContaCorrente(ContaCorrenteMaintenanceRequest request)
+	{
+		InternalResultsResponse<ContaCorrente> response =
+				processContaCorrente(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bac.IContaCorrenteBAC#updateContaCorrente(com.qat.samples.sysmgmt.model.request.ContaCorrenteMaintenanceRequest
+	 * )
+	 */
+	@Override
+	public InternalResultsResponse<ContaCorrente> updateContaCorrente(ContaCorrenteMaintenanceRequest request)
+	{
+		InternalResultsResponse<ContaCorrente> response =
+				processContaCorrente(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bac.IContaCorrenteBAC#deleteContaCorrente(com.qat.samples.sysmgmt.model.request.ContaCorrenteMaintenanceRequest
+	 * )
+	 */
+	@Override
+	public InternalResultsResponse<ContaCorrente> deleteContaCorrente(ContaCorrenteMaintenanceRequest request)
+	{
+		InternalResultsResponse<ContaCorrente> response =
+				processContaCorrente(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.bac.IContaCorrenteBAC#refreshContaCorrentes(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+	 */
+	@Override
+	public InternalResultsResponse<ContaCorrente> refreshContaCorrentes(RefreshRequest request)
+	{
+		// This method is demo code only. Do not view this as a QAT Global Standard.
+		getFinanceiroBAR().deleteAllContaCorrentes();
+		int refreshNumber = request.getRefreshInt();
+		refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
+
+		for (int i = 1; i <= refreshNumber; i++)
+		{
+		getFinanceiroBAR().insertContaCorrente(new ContaCorrente(i, "ContaCorrenteDesc" + i));
+		}
+
+		// Call maintain to see if we need to return the contacorrente list and if so whether it should be paged or not
+		return maintainReturnListContaCorrente(request.getReturnList(), request.getReturnListPaged(),new ContaCorrente());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.bac.IContaCorrenteBAC#fetchAllContaCorrentes(ContaCorrente contacorrente)
+	 */
+	@Override
+	public InternalResultsResponse<ContaCorrente> fetchAllContaCorrentes(ContaCorrente contacorrente)
+	{
+		InternalResultsResponse<ContaCorrente> response = new InternalResultsResponse<ContaCorrente>();
+		response.getResultsList().addAll(getFinanceiroBAR().fetchAllContaCorrentes(contacorrente).getResultsList());
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bac.IContaCorrenteBAC#fetchContaCorrenteById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+	 * )
+	 */
+	@Override
+	public InternalResultsResponse<ContaCorrente> fetchContaCorrenteById(FetchByIdRequest request)
+	{
+		InternalResultsResponse<ContaCorrente> response = new InternalResultsResponse<ContaCorrente>();
+		// validate fetchId field
+		if (ValidationUtil.isNull(request.getFetchId()))
+		{
+			response.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
+			response.setStatus(SystemErrorCategory.SystemValidation);
+		}
+		else
+		{
+			response.getResultsList().add(getFinanceiroBAR().fetchContaCorrenteById(request));
+		}
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.bac.IContaCorrenteBAC#fetchContaCorrentesByRequest(com.qat.samples.sysmgmt.model.request.
+	 * PagedInquiryRequest)
+	 */
+	@Override
+	public InternalResultsResponse<ContaCorrente> fetchContaCorrentesByRequest(ContaCorrenteInquiryRequest request)
+	{
+		return getFinanceiroBAR().fetchContaCorrentesByRequest(request);
+	}
+
+	/**
+	 * Process.
+	 *
+	 * @param indicator the indicator
+	 * @param persistType the persist type
+	 * @param request the request
+	 * @return the contacorrente response
+	 */
+	private InternalResultsResponse<ContaCorrente> processContaCorrente(ValidationContextIndicator indicator,
+			PersistenceActionEnum persistType,
+			ContaCorrenteMaintenanceRequest request)
+			{
+		InternalResultsResponse<ContaCorrente> response = null;
+
+			// Persist
+			InternalResponse internalResponse = doPersistenceContaCorrente(request.getContaCorrente(), persistType);
+			if (internalResponse.isInError())
+			{
+				response = new InternalResultsResponse<ContaCorrente>();
+				response.setStatus(internalResponse.getError());
+				response.addMessages(internalResponse.getMessageInfoList());
+				response.addMessage(DEFAULT_FINANCEIRO_BAC_EXCEPTION_MSG, MessageSeverity.Error,
+						MessageLevel.Object, new Object[] {internalResponse.errorToString()});
+
+				return response;
+			}
+
+			// Call maintainReurnList to see if we need to return the contacorrente list and if so whether it should be paged or
+			// not
+			response = maintainReturnListContaCorrente(request.getReturnList(), request.getReturnListPaged(),new ContaCorrente());
+
+			return response;
+				}
+
+		/**
+		 * Do persistenceContaCorrente.
+		 *
+		 * @param request the request
+		 * @param updateType the update type
+		 * @return the internal response
+		 */
+		private InternalResponse doPersistenceContaCorrente(ContaCorrente contacorrente, PersistenceActionEnum updateType)
+		{
+			switch (updateType)
+			{
+				case INSERT:
+					return getFinanceiroBAR().insertContaCorrente(contacorrente);
+
+				case UPDATE:
+					return getFinanceiroBAR().updateContaCorrente(contacorrente);
+
+				case DELETE:
+					return getFinanceiroBAR().deleteContaCorrenteById(contacorrente);
+				default:
+					if (LOG.isDebugEnabled())
+					{
+						LOG.debug("updateType missing!");
+					}
+					break;
+			}
+
+			return null;
+		}
+
+		/**
+		 * Maintain return list.
+		 *
+		 * @param request the request
+		 * @param response the response
+		 */
+		private InternalResultsResponse<ContaCorrente> maintainReturnListContaCorrente(Boolean listIndicator, Boolean pageListIndicator,ContaCorrente contacorrente)
+		{
+			// Fetch again if requested.
+			if (listIndicator)
+			{
+				// Fetch Paged is requested.
+				if (pageListIndicator)
+				{
+					ContaCorrenteInquiryRequest request = new ContaCorrenteInquiryRequest();
+					request.setPreQueryCount(true);
+					return fetchContaCorrentesByRequest(request);
+				}
+				else
+				{
+					// otherwise return all rows not paged
+					return fetchAllContaCorrentes(contacorrente);
+				}
+			}
+			else
+			{
+				return new InternalResultsResponse<ContaCorrente>();
+			}
+		}
+
 
 //===================================### CAIXA ####======================================
 	/**
@@ -1737,6 +1928,12 @@ private InternalResultsResponse<Agencia> processAgencia(ValidationContextIndicat
 
 	@Override
 	public InternalResultsResponse<Agencia> fetchAllAgencias(Agencia caixa) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Conta> refreshContas(RefreshRequest request) {
 		// TODO Auto-generated method stub
 		return null;
 	}

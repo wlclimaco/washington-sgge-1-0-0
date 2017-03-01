@@ -31,37 +31,37 @@
  <select id="fetchAllContasPagars" resultMap="ContasPagarResult">
     SELECT id,
 	<include refid="allContasPagarColumns" />
-   FROM titulo ORDER BY id ASC
+   FROM contaspagar ORDER BY id ASC
  </select>
 
  <select id="fetchContasPagarById" parameterType="Integer" resultMap="ContasPagarResult">
     SELECT id,
 	<include refid="allContasPagarColumns" />
-   FROM titulo WHERE id = #{fetchid}
+   FROM contaspagar WHERE id = #{fetchid}
  </select>
 
  <select id="fetchAllContasPagarsRequest" parameterType="ContasPagarInquiryRequest" resultMap="ContasPagarResult">
 
 		SELECT id,<include refid="allContasPagarColumns" />
-  		  FROM titulo where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+  		  FROM contaspagar where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchContasPagarRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM titulo WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM contaspagar WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
 
  </select>
 
  <insert id="insertContasPagar" parameterType="ContasPagar" useGeneratedKeys="true" keyProperty="id">
- 	INSERT INTO titulo (
+ 	INSERT INTO contaspagar (
 	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allContasPagarColumns" />
      )
    VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allContasPagarValues" /> )
  </insert>
 
  <update id="updateContasPagar" parameterType="ContasPagar">
-   UPDATE titulo SET
+   UPDATE contaspagar SET
 <if test="numero!= null">numero = #{numero},</if>
 <if test="dataEmissao!= null">dataEmissao = #{dataEmissao},</if>
 <if test="dataVencimento!= null">dataVencimento = #{dataVencimento},</if>
@@ -77,11 +77,11 @@
  </update>
 
 <delete id="deleteContasPagarById" parameterType="ContasPagar">
-  DELETE FROM titulo WHERE id = #{id}
+  DELETE FROM contaspagar WHERE id = #{id}
  </delete>
 
  <delete id="deleteAllContasPagars">
-	DELETE FROM titulo
+	DELETE FROM contaspagar
   </delete>
 </mapper>
 

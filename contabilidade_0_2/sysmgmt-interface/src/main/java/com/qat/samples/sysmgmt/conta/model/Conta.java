@@ -1,6 +1,9 @@
 package com.qat.samples.sysmgmt.conta.model;
 
-import com.qat.samples.sysmgmt.banco.model.Banco;
+import java.util.List;
+
+import com.qat.samples.sysmgmt.financeiro.model.BaixaTitulo;
+import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -13,12 +16,15 @@ public class Conta extends ModelCosmeDamiao
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	private Banco banco;
-
-	/** The type of an account. */
-	private String numeroConta;
+	private String descricao;
 
 	private double saldo;
+	
+	private Long dataUltLanc;
+	
+	private List<BaixaTitulo> listBaixa;
+	
+	private DoisValores tipoConta;
 
 	public Conta()
 	{
@@ -41,59 +47,52 @@ public class Conta extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	/**
-	 * @return the banco
-	 */
-	public Banco getBanco()
-	{
-		return banco;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	/**
-	 * @param banco the banco to set
-	 */
-	public void setBanco(Banco banco)
-	{
-		this.banco = banco;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	/**
-	 * @return the numeroConta
-	 */
-	public String getNumeroConta()
-	{
-		return numeroConta;
-	}
-
-	/**
-	 * @param numeroConta the numeroConta to set
-	 */
-	public void setNumeroConta(String numeroConta)
-	{
-		this.numeroConta = numeroConta;
-	}
-
-	/**
-	 * @return the saldo
-	 */
-	public double getSaldo()
-	{
+	public double getSaldo() {
 		return saldo;
 	}
 
-	/**
-	 * @param saldo the saldo to set
-	 */
-	public void setSaldo(double saldo)
-	{
+	public void setSaldo(double saldo) {
 		this.saldo = saldo;
 	}
 
-	@Override
-	public String toString()
-	{
-		return "Conta [getId()=" + getId() + ", getBanco()=" + getBanco() + ", getNumeroConta()=" + getNumeroConta()
-				+ ", getSaldo()=" + getSaldo() + ", toString()=" + super.toString() + "]";
+	public Long getDataUltLanc() {
+		return dataUltLanc;
 	}
 
+	public void setDataUltLanc(Long dataUltLanc) {
+		this.dataUltLanc = dataUltLanc;
+	}
+
+	public List<BaixaTitulo> getListBaixa() {
+		return listBaixa;
+	}
+
+	public void setListBaixa(List<BaixaTitulo> listBaixa) {
+		this.listBaixa = listBaixa;
+	}
+
+	public DoisValores getTipoConta() {
+		return tipoConta;
+	}
+
+	public void setTipoConta(DoisValores tipoConta) {
+		this.tipoConta = tipoConta;
+	}
+
+	@Override
+	public String toString() {
+		return "Conta [getId()=" + getId() + ", getDescricao()=" + getDescricao() + ", getSaldo()=" + getSaldo()
+				+ ", getDataUltLanc()=" + getDataUltLanc() + ", getListBaixa()=" + getListBaixa() + ", getTipoConta()="
+				+ getTipoConta() + ", toString()=" + super.toString() + "]";
+	}
+
+	
 }

@@ -2,6 +2,7 @@ package com.qat.samples.sysmgmt.bar.mybatis;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.samples.sysmgmt.advocacia.Advocacia;
@@ -31,6 +32,7 @@ import com.qat.samples.sysmgmt.condpag.model.CondPagPessoa;
 import com.qat.samples.sysmgmt.condpag.model.FormaPg;
 import com.qat.samples.sysmgmt.condpag.model.FormaPgPessoa;
 import com.qat.samples.sysmgmt.condpag.model.TipoPag;
+import com.qat.samples.sysmgmt.conta.model.Conta;
 import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
 import com.qat.samples.sysmgmt.contato.model.Contato;
@@ -1252,8 +1254,8 @@ public class Objects {
 		baixatitulo.setJuros(new Double(10.00));
 		baixatitulo.setMulta(new Double(10.00));
 		baixatitulo.setDesconto(new Double(10.00));
-		baixatitulo.setTipoBaixaList(new ArrayList<TipoBaixa>());
-		baixatitulo.getTipoBaixaList().add(insertTipoBaixa(id, TabelaEnum.BAIXATITULO, action));
+		//baixatitulo.setTipoBaixaList(new ArrayList<TipoBaixa>());
+		//baixatitulo.getTipoBaixaList().add(insertTipoBaixa(id, TabelaEnum.BAIXATITULO, action));
 		baixatitulo.setTabelaEnum(tabela);
 		baixatitulo.setParentId(id);
 		baixatitulo.setEmprId(EMPID);
@@ -5568,6 +5570,28 @@ public static NFInformacaoImpostoDevolvido insertNFInformacaoImpostoDevolvido(In
 	nfinformacaoimpostodevolvido.setModelAction(action);
 
 	return nfinformacaoimpostodevolvido;
+}
+
+public static Conta insertConta(Integer id, TabelaEnum tabela,
+		PersistenceActionEnum action) {
+	Conta conta = new Conta();
+	Date a = new Date();
+	conta.setId(id);
+	conta.setDescricao("NATIVE INSERT UPDATE");
+	conta.setSaldo(new Double(1.99));
+	conta.setDataUltLanc(a.getTime());
+	conta.setListBaixa(new ArrayList<BaixaTitulo>());
+	conta.getListBaixa().add(insertBaixaTitulo(id, tabela, action));
+	conta.setTipoConta(insertDoisValor(id, tabela, action));
+	conta.setEmprId(1);
+	conta.setModifyDateUTC(a.getTime());
+	conta.setCreateDateUTC(a.getTime());
+	conta.setCreateUser("system");
+	conta.setModifyUser("system");
+	conta.setProcessId(1);
+	conta.setModelAction(action);
+
+	return conta;
 }
 
 

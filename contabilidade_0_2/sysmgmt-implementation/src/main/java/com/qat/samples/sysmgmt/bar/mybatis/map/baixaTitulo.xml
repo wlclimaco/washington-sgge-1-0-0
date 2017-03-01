@@ -30,7 +30,7 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<collection property="tipoBaixaList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+	  <!--<collection property="tipoBaixaList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/> --> 
   </resultMap>
 
   <sql id="allBaixaTituloColumns">
@@ -65,7 +65,12 @@ dataBaixa
 		#{modifyUser}
   </sql>
 
-
+ <select id="fetchParentIdBaixaTitulos" parameterType="Integer" resultMap="BaixaTituloResult">
+    SELECT id,
+	<include refid="allBaixaTituloColumns" />
+   FROM baixatitulo where parentId = #{id} ORDER BY id ASC
+ </select>
+ 
  <select id="fetchAllBaixaTitulos" resultMap="BaixaTituloResult">
     SELECT id,
 	<include refid="allBaixaTituloColumns" />
