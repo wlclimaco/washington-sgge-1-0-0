@@ -17,6 +17,8 @@ public class Conta extends ModelCosmeDamiao
 	private Integer id;
 
 	private String descricao;
+	
+	private String numeroConta;
 
 	private double saldo;
 	
@@ -25,6 +27,8 @@ public class Conta extends ModelCosmeDamiao
 	private List<BaixaTitulo> listBaixa;
 	
 	private DoisValores tipoConta;
+	
+	private String observacao;
 
 	public Conta()
 	{
@@ -87,11 +91,28 @@ public class Conta extends ModelCosmeDamiao
 		this.tipoConta = tipoConta;
 	}
 
+	public String getNumeroConta() {
+		return numeroConta;
+	}
+
+	public void setNumeroConta(String numeroConta) {
+		this.numeroConta = numeroConta;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+
 	@Override
 	public String toString() {
 		return "Conta [getId()=" + getId() + ", getDescricao()=" + getDescricao() + ", getSaldo()=" + getSaldo()
 				+ ", getDataUltLanc()=" + getDataUltLanc() + ", getListBaixa()=" + getListBaixa() + ", getTipoConta()="
-				+ getTipoConta() + ", toString()=" + super.toString() + "]";
+				+ getTipoConta() + ", getNumeroConta()=" + getNumeroConta() + ", getObservacao()=" + getObservacao()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 	

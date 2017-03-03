@@ -25,8 +25,10 @@ import com.qat.samples.sysmgmt.banco.model.request.BancoInquiryRequest;
 import com.qat.samples.sysmgmt.banco.model.request.BancoMaintenanceRequest;
 import com.qat.samples.sysmgmt.condpag.model.CondPag;
 import com.qat.samples.sysmgmt.condpag.model.FormaPg;
+import com.qat.samples.sysmgmt.conta.model.Conta;
 import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
 import com.qat.samples.sysmgmt.dp.model.response.BancoResponse;
+import com.qat.samples.sysmgmt.dp.model.response.ContaResponse;
 import com.qat.samples.sysmgmt.dp.model.response.FormaPgResponse;
 import com.qat.samples.sysmgmt.financeiro.model.Caixa;
 import com.qat.samples.sysmgmt.financeiro.model.ContasPagar;
@@ -37,6 +39,7 @@ import com.qat.samples.sysmgmt.financeiro.model.request.CondPagInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.CondPagMaintenanceRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.ContaMaintenanceRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarMaintenanceRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberInquiryRequest;
@@ -48,6 +51,7 @@ import com.qat.samples.sysmgmt.financeiro.model.response.ContaCorrenteResponse;
 import com.qat.samples.sysmgmt.financeiro.model.response.ContasPagarResponse;
 import com.qat.samples.sysmgmt.financeiro.model.response.ContasReceberResponse;
 import com.qat.samples.sysmgmt.nf.model.response.CaixaResponse;
+import com.qat.samples.sysmgmt.pessoa.model.request.ContaInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -1021,6 +1025,123 @@ public class FinanceiroAPIController extends BaseController {
 					new Object[] { ex.toString() });
 		}
 		return agenciaResponse;
+
+	}
+
+	// ===================================### CONTAS
+	// ####======================================
+	/**
+	 * Refresh contaspagars.
+	 *
+	 * @param refreshInt
+	 *            the refresh int
+	 * @param retList
+	 *            the ret list
+	 * @param retPaged
+	 *            the ret paged
+	 * @return the contaspagar response
+	 */
+	@RequestMapping(value = "/conta/refresh", method = RequestMethod.GET)
+	@ResponseBody
+	public ContaResponse refreshContas(@RequestParam("refreshInt") Integer refreshInt,
+			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
+		ContaResponse contaspagarResponse = new ContaResponse();
+
+		try {
+			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
+			InternalResultsResponse<Conta> internalResponse = getFinanceiroBAC().refreshContas(request);
+			ResponseHandler.handleOperationStatusAndMessages(contaspagarResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, contaspagarResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return contaspagarResponse;
+
+	}
+
+	/**
+	 * Fetch contaspagar paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the contaspagar response
+	 */
+	@RequestMapping(value = "/conta/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public ContaResponse fetchContaPaged(@RequestBody ContaInquiryRequest request) {
+		ContaResponse contaspagarResponse = new ContaResponse();
+		try {
+			InternalResultsResponse<Conta> internalResponse = getFinanceiroBAC().fetchContasByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(contaspagarResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, contaspagarResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return contaspagarResponse;
+	}
+
+	/**
+	 * Insert contaspagar.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the contaspagar response
+	 */
+	@RequestMapping(value = "/conta/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public ContaResponse insertConta(@RequestBody ContaMaintenanceRequest request) {
+		ContaResponse contaspagarResponse = new ContaResponse();
+		try {
+			InternalResultsResponse<Conta> internalResponse = getFinanceiroBAC().insertConta(request);
+			ResponseHandler.handleOperationStatusAndMessages(contaspagarResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, contaspagarResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return contaspagarResponse;
+	}
+
+	/**
+	 * Update contaspagar.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the contaspagar response
+	 */
+	@RequestMapping(value = "/conta/update", method = RequestMethod.POST)
+	@ResponseBody
+	public ContaResponse updateConta(@RequestBody ContaMaintenanceRequest request) {
+		ContaResponse contaspagarResponse = new ContaResponse();
+		try {
+			InternalResultsResponse<Conta> internalResponse = getFinanceiroBAC().updateConta(request);
+			ResponseHandler.handleOperationStatusAndMessages(contaspagarResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, contaspagarResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return contaspagarResponse;
+	}
+
+	/**
+	 * Delete contaspagar.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the contaspagar response
+	 */
+	@RequestMapping(value = "/conta/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public ContaResponse deleteConta(@RequestBody ContaMaintenanceRequest request) {
+		ContaResponse contaspagarResponse = new ContaResponse();
+
+		try {
+			InternalResultsResponse<Conta> internalResponse = getFinanceiroBAC().deleteConta(request);
+			ResponseHandler.handleOperationStatusAndMessages(contaspagarResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, contaspagarResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return contaspagarResponse;
 
 	}
 

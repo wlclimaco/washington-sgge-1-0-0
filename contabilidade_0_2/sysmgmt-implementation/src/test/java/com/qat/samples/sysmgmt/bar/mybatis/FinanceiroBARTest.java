@@ -77,7 +77,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteContasPagar()
 	{
-		ContasPagar contaspagar = insertContasPagar(7, TabelaEnum.CONTASPAGAR, PersistenceActionEnum.INSERT);
+		ContasPagar contaspagar = Objects.insertContasPagar(7, TabelaEnum.CONTASPAGAR, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(7);
 		ContasPagar contaspagarResponse = getFinanceiroBAR().fetchContasPagarById(request);
@@ -110,14 +110,14 @@ public IFinanceiroBAR getFinanceiroBAR()
 	@Test
 	public void testUpdateContasPagar()
 	{
-		ContasPagar contaspagar = insertContasPagar(1001, TabelaEnum.CONTASPAGAR, PersistenceActionEnum.UPDATE);
+		ContasPagar contaspagar = Objects.insertContasPagar(1001, TabelaEnum.CONTASPAGAR, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		ContasPagar contaspagarResponse = getFinanceiroBAR().fetchContasPagarById(request);
 		Assert.assertEquals(contaspagarResponse.getNumero(), "NATIVE INSERT");
 		getFinanceiroBAR().updateContasPagar(contaspagar);
 		contaspagarResponse = getFinanceiroBAR().fetchContasPagarById(request);
-		Assert.assertEquals(contaspagarResponse.getNumero(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(contaspagarResponse.getNumero(), "numero_1 - UPDATE");
 	}
 
 	@Test
@@ -165,7 +165,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteTitulo()
 	{
-		Titulo titulo = insertTitulo(7, TabelaEnum.TITULO, PersistenceActionEnum.INSERT);
+		Titulo titulo = Objects.insertTitulo(7, TabelaEnum.TITULO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(7);
 		Titulo tituloResponse = getFinanceiroBAR().fetchTituloById(request);
@@ -198,14 +198,14 @@ public IFinanceiroBAR getFinanceiroBAR()
 	@Test
 	public void testUpdateTitulo()
 	{
-		Titulo titulo = insertTitulo(1001, TabelaEnum.TITULO, PersistenceActionEnum.UPDATE);
+		Titulo titulo = Objects.insertTitulo(1001, TabelaEnum.TITULO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		Titulo tituloResponse = getFinanceiroBAR().fetchTituloById(request);
 		Assert.assertEquals(tituloResponse.getNumero(), "NATIVE INSERT");
 		getFinanceiroBAR().updateTitulo(titulo);
 		tituloResponse = getFinanceiroBAR().fetchTituloById(request);
-		Assert.assertEquals(tituloResponse.getNumero(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(tituloResponse.getNumero(), "numero_1 - UPDATE");
 	}
 
 	@Test
@@ -253,7 +253,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteBaixaTitulo()
 	{
-		BaixaTitulo baixatitulo = insertBaixaTitulo(7, TabelaEnum.BAIXARTITULO, PersistenceActionEnum.INSERT);
+		BaixaTitulo baixatitulo = Objects.insertBaixaTitulo(7, TabelaEnum.BAIXARTITULO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(7);
 		BaixaTitulo baixatituloResponse = getFinanceiroBAR().fetchBaixaTituloById(request);
@@ -286,14 +286,14 @@ public IFinanceiroBAR getFinanceiroBAR()
 	@Test
 	public void testUpdateBaixaTitulo()
 	{
-		BaixaTitulo baixatitulo = insertBaixaTitulo(1, TabelaEnum.BAIXARTITULO, PersistenceActionEnum.UPDATE);
+		BaixaTitulo baixatitulo = Objects.insertBaixaTitulo(1001, TabelaEnum.BAIXARTITULO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1001);
 		BaixaTitulo baixatituloResponse = getFinanceiroBAR().fetchBaixaTituloById(request);
 		Assert.assertEquals(baixatituloResponse.getModifyUser(), "NATIVE INSERT");
 		getFinanceiroBAR().updateBaixaTitulo(baixatitulo);
 		baixatituloResponse = getFinanceiroBAR().fetchBaixaTituloById(request);
-		Assert.assertEquals(baixatituloResponse.getModifyUser(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(baixatituloResponse.getModifyUser(), "system");
 	}
 
 	@Test
@@ -341,7 +341,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteTipoBaixa()
 	{
-		TipoBaixa tipobaixa = insertTipoBaixa(7, TabelaEnum.TIPOBAIXA, PersistenceActionEnum.INSERT);
+		TipoBaixa tipobaixa = Objects.insertTipoBaixa(7, TabelaEnum.TIPOBAIXA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(7);
 		TipoBaixa tipobaixaResponse = getFinanceiroBAR().fetchTipoBaixaById(request);
@@ -374,14 +374,14 @@ public IFinanceiroBAR getFinanceiroBAR()
 	@Test
 	public void testUpdateTipoBaixa()
 	{
-		TipoBaixa tipobaixa = insertTipoBaixa(1, TabelaEnum.TIPOBAIXA, PersistenceActionEnum.INSERT);
+		TipoBaixa tipobaixa = Objects.insertTipoBaixa(1, TabelaEnum.TIPOBAIXA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		TipoBaixa tipobaixaResponse = getFinanceiroBAR().fetchTipoBaixaById(request);
 		Assert.assertEquals(tipobaixaResponse.getNome(), "NATIVE INSERT");
 		getFinanceiroBAR().updateTipoBaixa(tipobaixa);
 		tipobaixaResponse = getFinanceiroBAR().fetchTipoBaixaById(request);
-		Assert.assertEquals(tipobaixaResponse.getNome(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(tipobaixaResponse.getNome(), "nome_1 - INSERT");
 	}
 
 	@Test
@@ -429,7 +429,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteContasReceber()
 	{
-		ContasReceber contasreceber = insertContasReceber(7, TabelaEnum.CONTASRECEBER, PersistenceActionEnum.INSERT);
+		ContasReceber contasreceber = Objects.insertContasReceber(7, TabelaEnum.CONTASRECEBER, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(7);
 		ContasReceber contasreceberResponse = getFinanceiroBAR().fetchContasReceberById(request);
@@ -462,14 +462,14 @@ public IFinanceiroBAR getFinanceiroBAR()
 	@Test
 	public void testUpdateContasReceber()
 	{
-		ContasReceber contasreceber = insertContasReceber(1001, TabelaEnum.CONTASRECEBER, PersistenceActionEnum.UPDATE);
+		ContasReceber contasreceber = Objects.insertContasReceber(1001, TabelaEnum.CONTASRECEBER, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		ContasReceber contasreceberResponse = getFinanceiroBAR().fetchContasReceberById(request);
 		Assert.assertEquals(contasreceberResponse.getNumero(), "NATIVE INSERT");
 		getFinanceiroBAR().updateContasReceber(contasreceber);
 		contasreceberResponse = getFinanceiroBAR().fetchContasReceberById(request);
-		Assert.assertEquals(contasreceberResponse.getNumero(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(contasreceberResponse.getNumero(), "numero_1 - UPDATE");
 	}
 
 	@Test
@@ -517,7 +517,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteCondPag()
 	{
-		CondPag condpag = insertCondPag(4, TabelaEnum.CONDPAG, PersistenceActionEnum.INSERT);
+		CondPag condpag = Objects.insertCondPag(4, TabelaEnum.CONDPAG, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		CondPag condpagResponse = getFinanceiroBAR().fetchCondPagById(request);
@@ -550,14 +550,14 @@ public IFinanceiroBAR getFinanceiroBAR()
 	@Test
 	public void testUpdateCondPag()
 	{
-		CondPag condpag = insertCondPag(1, TabelaEnum.CONDPAG, PersistenceActionEnum.INSERT);
+		CondPag condpag = Objects.insertCondPag(1, TabelaEnum.CONDPAG, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		CondPag condpagResponse = getFinanceiroBAR().fetchCondPagById(request);
 		Assert.assertEquals(condpagResponse.getNome(), "NATIVE INSERT");
 		getFinanceiroBAR().updateCondPag(condpag);
 		condpagResponse = getFinanceiroBAR().fetchCondPagById(request);
-		Assert.assertEquals(condpagResponse.getNome(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(condpagResponse.getNome(), "nome_1 - INSERT");
 	}
 
 	@Test
@@ -605,7 +605,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteFormaPg()
 	{
-		FormaPg formapg = insertFormaPg(4000, TabelaEnum.FORMAPG, PersistenceActionEnum.INSERT);
+		FormaPg formapg = Objects.insertFormaPg(4000, TabelaEnum.FORMAPG, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4000);
 		FormaPg formapgResponse = getFinanceiroBAR().fetchFormaPgById(request);
@@ -638,14 +638,14 @@ public IFinanceiroBAR getFinanceiroBAR()
 	@Test
 	public void testUpdateFormaPg()
 	{
-		FormaPg formapg = insertFormaPg(1001, TabelaEnum.FORMAPG, PersistenceActionEnum.UPDATE);
+		FormaPg formapg = Objects.insertFormaPg(1001, TabelaEnum.FORMAPG, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		FormaPg formapgResponse = getFinanceiroBAR().fetchFormaPgById(request);
 		Assert.assertEquals(formapgResponse.getDescricao(), "NATIVE INSERT");
 		getFinanceiroBAR().updateFormaPg(formapg);
 		formapgResponse = getFinanceiroBAR().fetchFormaPgById(request);
-		Assert.assertEquals(formapgResponse.getDescricao(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(formapgResponse.getDescricao(), "descricao_1 - UPDATE");
 	}
 
 	@Test
@@ -800,9 +800,9 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteContaCorrente()
 	{
-		ContaCorrente contacorrente = insertContaCorrente(4000, TabelaEnum.CONTACORRENTE, PersistenceActionEnum.INSERT);
+		ContaCorrente contacorrente = Objects.insertContaCorrente(4002, TabelaEnum.CONTACORRENTE, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4000);
+		request.setFetchId(4002);
 		ContaCorrente contacorrenteResponse = getFinanceiroBAR().fetchContaCorrenteById(request);
 		Assert.assertEquals(contacorrenteResponse, null);
 		getFinanceiroBAR().insertContaCorrente(contacorrente);
@@ -833,14 +833,14 @@ public IFinanceiroBAR getFinanceiroBAR()
 	@Test
 	public void testUpdateContaCorrente()
 	{
-		ContaCorrente contacorrente = insertContaCorrente(1001, TabelaEnum.CONTACORRENTE, PersistenceActionEnum.UPDATE);
+		ContaCorrente contacorrente = Objects.insertContaCorrente(1001, TabelaEnum.CONTACORRENTE, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		ContaCorrente contacorrenteResponse = getFinanceiroBAR().fetchContaCorrenteById(request);
 		Assert.assertEquals(contacorrenteResponse.getNumeroConta(), "NATIVE INSERT");
 		getFinanceiroBAR().updateContaCorrente(contacorrente);
 		contacorrenteResponse = getFinanceiroBAR().fetchContaCorrenteById(request);
-		Assert.assertEquals(contacorrenteResponse.getNumeroConta(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(contacorrenteResponse.getNumeroConta(), "numeroConta_3 - UPDATE");
 	}
 
 	@Test
@@ -977,7 +977,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteCaixa()
 	{
-		Caixa caixa =  insertCaixa(4, TabelaEnum.CAIXA, PersistenceActionEnum.INSERT);
+		Caixa caixa =  Objects.insertCaixa(4, TabelaEnum.CAIXA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		Caixa caixaResponse = getFinanceiroBAR().fetchCaixaById(request);
@@ -1010,14 +1010,14 @@ public IFinanceiroBAR getFinanceiroBAR()
 	@Test
 	public void testUpdateCaixa()
 	{
-		Caixa caixa = insertCaixa(1, TabelaEnum.CAIXA, PersistenceActionEnum.UPDATE);
+		Caixa caixa = Objects.insertCaixa(1, TabelaEnum.CAIXA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1);
 		Caixa caixaResponse = getFinanceiroBAR().fetchCaixaById(request);
 		Assert.assertEquals(caixaResponse.getCreateUser(), "NATIVE INSERT");
 		getFinanceiroBAR().updateCaixa(caixa);
 		caixaResponse = getFinanceiroBAR().fetchCaixaById(request);
-		Assert.assertEquals(caixaResponse.getModifyUser(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(caixaResponse.getModifyUser(), "system");
 	}
 
 	@Test
@@ -1075,203 +1075,6 @@ public IFinanceiroBAR getFinanceiroBAR()
 	}
 
 
-	public ContasPagar insertContasPagar(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			ContasPagar contaspagar = new ContasPagar();
-			Date a = new Date();
-			contaspagar.setId(id);
-			contaspagar.setParentId(id);
-			contaspagar.setEmprId(1);
-			contaspagar.setNumero("NATIVE INSERT UPDATE");
-			contaspagar.setModifyDateUTC(a.getTime());
-			contaspagar.setCreateDateUTC(a.getTime());
-			contaspagar.setCreateUser("system");
-			contaspagar.setModifyUser("system");
-			contaspagar.setFornecedor(new Fornecedor());
-			contaspagar.setProcessId(1);
-			contaspagar.setModelAction(action);
-
-			return contaspagar;
-		}
-
-
-	public Titulo insertTitulo(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			Titulo titulo = new Titulo();
-			Date a = new Date();
-			titulo.setId(id);
-			titulo.setNumero("NATIVE INSERT UPDATE");
-
-			titulo.setParentId(id);
-			titulo.setEmprId(1);
-			titulo.setModifyDateUTC(a.getTime());
-			titulo.setCreateDateUTC(a.getTime());
-			titulo.setCreateUser("system");
-			titulo.setModifyUser("system");
-			titulo.setProcessId(1);
-			titulo.setModelAction(action);
-
-			return titulo;
-		}
-
-
-	public BaixaTitulo insertBaixaTitulo(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			BaixaTitulo baixatitulo = new BaixaTitulo();
-			Date a = new Date();
-			baixatitulo.setId(id);
-			baixatitulo.setDataBaixa(a.getTime());
-			baixatitulo.setObservacao("NATIVE INSERT UPDATE");
-			baixatitulo.setValor(new Double(1.99));
-			baixatitulo.setJuros(new Double(1.99));
-			baixatitulo.setMulta(new Double(1.99));
-			baixatitulo.setDesconto(new Double(1.99));
-			baixatitulo.setParentId(id);
-			baixatitulo.setEmprId(1);
-			baixatitulo.setModifyDateUTC(a.getTime());
-			baixatitulo.setCreateDateUTC(a.getTime());
-			baixatitulo.setCreateUser("NATIVE INSERT UPDATE");
-			baixatitulo.setModifyUser("NATIVE INSERT UPDATE");
-			baixatitulo.setProcessId(1);
-			baixatitulo.setModelAction(action);
-
-			return baixatitulo;
-		}
-
-
-	public TipoBaixa insertTipoBaixa(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			TipoBaixa tipobaixa = new TipoBaixa();
-			Date a = new Date();
-			tipobaixa.setId(id);
-			tipobaixa.setNome("NATIVE INSERT UPDATE");
-			tipobaixa.setDescricao("NATIVE INSERT UPDATE");
-			tipobaixa.setParentId(id);
-			tipobaixa.setEmprId(1);
-			tipobaixa.setModifyDateUTC(a.getTime());
-			tipobaixa.setCreateDateUTC(a.getTime());
-			tipobaixa.setCreateUser("system");
-			tipobaixa.setModifyUser("system");
-			tipobaixa.setProcessId(1);
-			tipobaixa.setModelAction(action);
-
-			return tipobaixa;
-		}
-
-
-	public ContasReceber insertContasReceber(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			ContasReceber contasreceber = new ContasReceber();
-			Date a = new Date();
-			contasreceber.setId(id);
-			contasreceber.setParentId(id);
-			contasreceber.setEmprId(1);
-			contasreceber.setModifyDateUTC(a.getTime());
-			contasreceber.setCreateDateUTC(a.getTime());
-			contasreceber.setCreateUser("system");
-			contasreceber.setModifyUser("system");
-			contasreceber.setCliente(new Cliente());
-			contasreceber.setNumero("NATIVE INSERT UPDATE");
-			contasreceber.setProcessId(1);
-			contasreceber.setModelAction(action);
-
-			return contasreceber;
-		}
-
-
-	public CondPag insertCondPag(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			CondPag condpag = new CondPag();
-			Date a = new Date();
-			condpag.setId(id);
-			condpag.setParentId(id);
-			condpag.setEmprId(1);
-			condpag.setNome("NATIVE INSERT UPDATE");
-			condpag.setModifyDateUTC(a.getTime());
-			condpag.setCreateDateUTC(a.getTime());
-			condpag.setCreateUser("system");
-			condpag.setModifyUser("system");
-			condpag.setProcessId(1);
-			condpag.setModelAction(action);
-
-			return condpag;
-		}
-
-
-	public FormaPg insertFormaPg(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			FormaPg formapg = new FormaPg();
-			Date a = new Date();
-			formapg.setId(id);
-			formapg.setParentId(id);
-			formapg.setEmprId(1);
-			formapg.setDescricao("NATIVE INSERT UPDATE");
-			formapg.setModifyDateUTC(a.getTime());
-			formapg.setCreateDateUTC(a.getTime());
-			formapg.setCreateUser("NATIVE INSERT UPDATE");
-			formapg.setModifyUser("system");
-			formapg.setProcessId(1);
-			formapg.setModelAction(action);
-
-			return formapg;
-		}
-
-
-	public Banco insertBanco(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			Banco banco = new Banco();
-			Date a = new Date();
-			banco.setId(100);
-			banco.setParentId(id);
-			banco.setEmprId(1);
-			banco.setModifyDateUTC(a.getTime());
-			banco.setCreateDateUTC(a.getTime());
-			banco.setCreateUser("system");
-			banco.setModifyUser("system");
-			banco.setProcessId(1);
-			banco.setModelAction(action);
-
-			return banco;
-		}
-
-
-	public ContaCorrente insertContaCorrente(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			ContaCorrente contacorrente = new ContaCorrente();
-			Date a = new Date();
-			contacorrente.setId(id);
-			contacorrente.setSaldo(new Double(1.99));
-			contacorrente.setNumeroConta("NATIVE INSERT UPDATE");
-			contacorrente.setParentId(id);
-			contacorrente.setEmprId(1);
-			contacorrente.setStatusConta(1);
-			contacorrente.setModifyDateUTC(a.getTime());
-			contacorrente.setCreateDateUTC(a.getTime());
-			contacorrente.setCreateUser("system");
-			contacorrente.setModifyUser("system");
-			contacorrente.setProcessId(1);
-			contacorrente.setModelAction(action);
-
-			return contacorrente;
-		}
-
-
-	public Caixa insertCaixa(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-			Caixa caixa = new Caixa();
-			Date a = new Date();
-			caixa.setId(id);
-			caixa.setParentId(id);
-			caixa.setEmprId(1);
-			caixa.setModifyDateUTC(a.getTime());
-			caixa.setCreateDateUTC(a.getTime());
-			caixa.setCreateUser("NATIVE INSERT UPDATE");
-			caixa.setModifyUser("NATIVE INSERT UPDATE");
-			caixa.setProcessId(1);
-			caixa.setModelAction(action);
-
-			return caixa;
-		}
-
+	
 
 }

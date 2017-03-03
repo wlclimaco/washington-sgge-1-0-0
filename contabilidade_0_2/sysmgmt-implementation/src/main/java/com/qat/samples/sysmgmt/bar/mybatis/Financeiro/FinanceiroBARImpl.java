@@ -24,6 +24,7 @@ import com.qat.samples.sysmgmt.bar.Financeiro.IFinanceiroBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.BaixaTituloBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ContaCorrenteBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EmailBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EnderecoBARD;
@@ -475,7 +476,13 @@ private static final String STMT_DELETE_CAIXA = NAMESPACE_CAIXA + "deleteCaixaBy
 public InternalResponse insertContasPagar(ContasPagar contaspagar)
 {
 	InternalResponse response = new InternalResponse();
+	
+	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.CONTA, getHistoricoBAR(), response);
+	
+	contaspagar.setProcessId(historicoId);
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONTASPAGAR, contaspagar, response);
+	
+	BaixaTituloBARD.maintainBaixaTituloAssociations(contaspagar.getListBaixa(), response, contaspagar.getId(), TypeEnum.HIGH, AcaoTypeEnum.INSERT, TabelaEnum.CONTASPAGAR, getFinanceiroBAR(), statusBAR, historicoBAR, contaspagar.getEmprId(), contaspagar.getUserId(), historicoId, historicoId);
 	return response;
 }
 

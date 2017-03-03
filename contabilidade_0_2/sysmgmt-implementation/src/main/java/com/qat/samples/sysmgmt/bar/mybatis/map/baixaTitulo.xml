@@ -19,7 +19,7 @@
     <result property="id" column="id"/>
     <result property="dataBaixa" column="dataBaixa"/>
     <result property="observacao" column="observacao"/>
-    <result property="Valor" column="Valor"/>
+    <result property="valor" column="valor"/>
     <result property="juros" column="juros"/>
     <result property="multa" column="multa"/>
     <result property="desconto" column="desconto"/>
@@ -30,16 +30,17 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	  <!--<collection property="tipoBaixaList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/> --> 
+	<collection property="conta" column="conta" select="ContaMap.fetchContaById"/>
   </resultMap>
 
   <sql id="allBaixaTituloColumns">
 dataBaixa
 ,observacao
-,Valor
+,valor
 ,juros
 ,multa
 ,desconto
+,conta
 ,emprId
 ,parentId
 ,processId
@@ -52,10 +53,11 @@ dataBaixa
 <sql id="allBaixaTituloValues">
 #{dataBaixa},
 #{observacao},
-#{Valor},
+#{valor},
 #{juros},
 #{multa},
 #{desconto},
+#{conta.id},
 		#{emprId},
 		#{parentId},
 		#{processId},
@@ -68,8 +70,17 @@ dataBaixa
  <select id="fetchParentIdBaixaTitulos" parameterType="Integer" resultMap="BaixaTituloResult">
     SELECT id,
 	<include refid="allBaixaTituloColumns" />
-   FROM baixatitulo where parentId = #{id} ORDER BY id ASC
+   FROM baixatitulo where parentId = #{parentId} ORDER BY dataBaixa ASC
  </select>
+ 
+ 
+  <select id="fetchContaIdBaixaTitulos" parameterType="Integer" resultMap="BaixaTituloResult">
+    SELECT id,
+	<include refid="allBaixaTituloColumns" />
+   FROM baixatitulo where conta = #{conta} ORDER BY dataBaixa ASC
+ </select>
+ 
+ 
  
  <select id="fetchAllBaixaTitulos" resultMap="BaixaTituloResult">
     SELECT id,
@@ -113,10 +124,11 @@ dataBaixa
    UPDATE baixatitulo SET
 <if test="dataBaixa!= null">dataBaixa = #{dataBaixa},</if>
 <if test="observacao!= null">observacao = #{observacao},</if>
-<if test="Valor!= null">Valor = #{Valor},</if>
+<if test="valor!= null">valor = #{valor},</if>
 <if test="juros!= null">juros = #{juros},</if>
 <if test="multa!= null">multa = #{multa},</if>
 <if test="desconto!= null">desconto = #{desconto},</if>
+<if test="conta!= null">conta = #{conta.id},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
    WHERE

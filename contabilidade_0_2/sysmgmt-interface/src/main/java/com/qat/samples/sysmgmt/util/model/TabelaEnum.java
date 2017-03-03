@@ -388,7 +388,8 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	NFNOTAINFOITEMIMPOSTOCOFINSST(73, "sendsolv.base.model.risklevelenum.medium"),
 	NFNOTAINFOITEMIMPOSTOICMSUFDESTINO(73, "sendsolv.base.model.risklevelenum.medium"),
 	NFIMPOSTODEVOLVIDO(73, "sendsolv.base.model.risklevelenum.medium"),
-	NFNOTAINFOITEMPRODUTOCOMBUSTIVEL(73, "sendsolv.base.model.risklevelenum.medium");
+	NFNOTAINFOITEMPRODUTOCOMBUSTIVEL(73, "sendsolv.base.model.risklevelenum.medium"),
+	CONTA(103, "sendsolv.base.model.risklevelenum.medium");
 
 	/** The code. */
 	private Integer code;

@@ -1196,6 +1196,7 @@ public class Objects {
 		ContasPagar contaspagar = new ContasPagar();
 		Date a = new Date();
 		contaspagar.setId(id);
+		contaspagar.setFornecedor(insertFornecedor(id, tabela, action));
 		contaspagar.setNumero("numero_1 - " + action.toString());
 		contaspagar.setDataEmissao(a.getTime());
 		contaspagar.setDataVencimento(a.getTime());
@@ -1292,6 +1293,7 @@ public class Objects {
 		ContasReceber contasreceber = new ContasReceber();
 		Date a = new Date();
 		contasreceber.setId(id);
+		contasreceber.setCliente(insertCliente(null, tabela, action));
 		contasreceber.setNumero("numero_1 - " + action.toString());
 		contasreceber.setDataEmissao(a.getTime());
 		contasreceber.setDataVencimento(a.getTime());
@@ -1385,10 +1387,11 @@ public class Objects {
 		contacorrente.setId(id);
 
 		contacorrente.setSaldo(new Double(10.00));
+		contacorrente.setStatusConta(10);
 		contacorrente.setNumeroConta("numeroConta_3 - " + action.toString());
 		contacorrente.setNossoNumero("nossoNumero_4 - " + action.toString());
 		contacorrente.setHistoricoList(new ArrayList<HistoricoMovimento>());
-		contacorrente.getHistoricoList().add(insertHistoricoMovimento(id, TabelaEnum.CONTACORRENTE, action));
+		contacorrente.getHistoricoList().add(insertHistoricoMovimento(null, TabelaEnum.CONTACORRENTE, action));
 		contacorrente.setTabelaEnum(tabela);
 		contacorrente.setParentId(id);
 		contacorrente.setEmprId(EMPID);

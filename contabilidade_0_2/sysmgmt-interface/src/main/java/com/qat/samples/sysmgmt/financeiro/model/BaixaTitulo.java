@@ -1,7 +1,5 @@
 package com.qat.samples.sysmgmt.financeiro.model;
 
-import java.util.List;
-
 import com.qat.samples.sysmgmt.conta.model.Conta;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
@@ -22,7 +20,7 @@ public class BaixaTitulo extends ModelCosmeDamiao
 	/** The tipo endereco. */
 	private String observacao;
 
-	private Double Valor;
+	private Double valor;
 
 	private Double juros;
 
@@ -90,15 +88,6 @@ public class BaixaTitulo extends ModelCosmeDamiao
 		this.observacao = observacao;
 	}
 
-	public Double getValor()
-	{
-		return Valor;
-	}
-
-	public void setValor(Double valor)
-	{
-		Valor = valor;
-	}
 
 	public Double getJuros()
 	{
@@ -135,6 +124,14 @@ public class BaixaTitulo extends ModelCosmeDamiao
 
 	public void setDesconto(Double desconto) {
 		this.desconto = desconto;
+	}
+
+	public Double getValor() {
+		return valor;
+	}
+
+	public void setValor(Double valor) {
+		this.valor = valor;
 	}
 
 	@Override

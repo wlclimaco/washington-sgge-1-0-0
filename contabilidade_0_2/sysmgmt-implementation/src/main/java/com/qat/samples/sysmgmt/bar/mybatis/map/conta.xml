@@ -20,6 +20,8 @@
     <result property="descricao" column="descricao"/>
      <result property="saldo" column="saldo"/>
      <result property="dataUltLanc" column="dataUltLanc"/>
+     <result property="numeroConta" column="numeroConta"/>
+     <result property="observacao" column="observacao"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
@@ -27,13 +29,15 @@
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
 <collection property="tipoConta" column="tipoConta" select="DoisValorMap.fetchDoisValorById"/>
-<collection property="listBaixa" column="id" select="BaixaTituloMap.fetchParentIdBaixaTitulos"/>
+<collection property="listBaixa" column="id" select="BaixaTituloMap.fetchContaIdBaixaTitulos"/>
   </resultMap>
 
   <sql id="allContaColumns">
 descricao
 ,saldo
 ,dataUltLanc
+,numeroConta
+,observacao
 ,tipoConta
 ,emprId
 ,processId
@@ -47,6 +51,8 @@ descricao
 #{descricao},
 		#{saldo},
 		#{dataUltLanc},
+		#{numeroConta},
+		#{observacao},
 		#{tipoConta.id},
 		#{emprId},
 		#{processId},
@@ -93,6 +99,8 @@ descricao
    <if test="saldo!= null"> saldo=#{saldo},</if>
    <if test="dataUltLanc!= null"> dataUltLanc=#{dataUltLanc},</if>
    <if test="descricao!= null"> descricao=#{descricao},</if>
+   <if test="numeroConta!= null"> numeroConta=#{numeroConta},</if>
+   <if test="observacao!= null"> observacao=#{observacao},</if>
    <if test="tipoConta!= null"> tipoConta=#{tipoConta.id},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>

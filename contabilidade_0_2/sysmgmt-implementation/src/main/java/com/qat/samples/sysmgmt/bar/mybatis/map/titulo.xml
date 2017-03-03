@@ -52,12 +52,12 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
-	<collection property="listBaixa" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+	<collection property="listBaixa" column="id" select="BaixaTituloMap.fetchParentIdBaixaTitulos"/>
 	<collection property="tipoDoc" column="tipoDoc" select="DoisValorMap.fetchDoisValorById"/>
-	<collection property="formapg" column="formapg" select="DoisValorMap.fetchDoisValorById"/>
+	<collection property="formapg" column="formapg" select="FormaPgMap.fetchFormaPgById"/>
 	<collection property="formaCadastro" column="formaCadastro" select="DoisValorMap.fetchDoisValorById"/>
-	<collection property="intervalo" column="formaCadastro" select="DoisValorMap.fetchDoisValorById"/>
-	<collection property="categoria" column="formaCadastro" select="DoisValorMap.fetchDoisValorById"/>
+	<collection property="intervalo" column="intervalo" select="DoisValorMap.fetchDoisValorById"/>
+	<collection property="categoria" column="categoria" select="DoisValorMap.fetchDoisValorById"/>
 	<collection property="situacao" column="situacao" select="DoisValorMap.fetchDoisValorById"/>
   </resultMap>
 
