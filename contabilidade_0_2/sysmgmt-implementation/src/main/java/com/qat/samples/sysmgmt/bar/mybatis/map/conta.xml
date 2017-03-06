@@ -68,6 +68,11 @@ descricao
 	<include refid="allContaColumns" />
    FROM conta ORDER BY id ASC
  </select>
+ 
+  <select id="fetchAllContas" resultMap="ContaResult">
+   select c.id, c.descricao,c.datavencimento,c.docid,c.valor as "valor titulo",(select d.descricao from doisvalor d where id = c.tipodoc ) as "Tipo Doc" ,(select d.descricao from doisvalor d where id = c.situacao ) as "Situacao" ,b.databaixa , b.valor as "Valor Baixa" from baixatitulo b, contaspagar c where c.id = b.parentId
+
+ </select>
 
  <select id="fetchContaById" parameterType="Integer" resultMap="ContaResult">
     SELECT id,

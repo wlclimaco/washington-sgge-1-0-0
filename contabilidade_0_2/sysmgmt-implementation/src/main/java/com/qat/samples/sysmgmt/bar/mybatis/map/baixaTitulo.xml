@@ -33,6 +33,22 @@
 	<collection property="conta" column="conta" select="ContaMap.fetchContaById"/>
   </resultMap>
 
+ <resultMap id="BaixaTitulo2Result" type="BaixaTitulo">
+    <result property="id" column="id"/>
+    <result property="dataBaixa" column="dataBaixa"/>
+    <result property="observacao" column="observacao"/>
+    <result property="valor" column="valor"/>
+    <result property="juros" column="juros"/>
+    <result property="multa" column="multa"/>
+    <result property="desconto" column="desconto"/>
+	<result property="emprId" column="emprId"/>
+	<result property="parentId" column="parentId"/>
+	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+  </resultMap>
   <sql id="allBaixaTituloColumns">
 dataBaixa
 ,observacao
@@ -74,7 +90,7 @@ dataBaixa
  </select>
  
  
-  <select id="fetchContaIdBaixaTitulos" parameterType="Integer" resultMap="BaixaTituloResult">
+  <select id="fetchContaIdBaixaTitulos" parameterType="Integer" resultMap="BaixaTitulo2Result">
     SELECT id,
 	<include refid="allBaixaTituloColumns" />
    FROM baixatitulo where conta = #{conta} ORDER BY dataBaixa ASC

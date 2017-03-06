@@ -56,6 +56,7 @@ public final class BaixaTituloBARD extends SqlSessionDaoSupport
 			baixa.setParentId(parentId);
 			baixa.setTabelaEnum(tabelaEnum);
 			baixa.setProcessId(processId);
+			baixa.setFinanId(parentId);
 
 			if (ValidationUtil.isNull(baixa.getModelAction()))
 			{
