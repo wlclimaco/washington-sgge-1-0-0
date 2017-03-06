@@ -12,22 +12,14 @@ public class BaixaTitulo extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
-
 	private Integer finanId;
-
 	private Long dataBaixa;
-
-	/** The tipo endereco. */
+	private Long dataVencimento;
 	private String observacao;
-
 	private Double valor;
-
 	private Double juros;
-
 	private Double multa;
-
 	private Double desconto;
-
 	private Conta conta;
 
 	/**
@@ -38,92 +30,36 @@ public class BaixaTitulo extends ModelCosmeDamiao
 		super();
 	}
 
-	/**
-	 * Gets the id.
-	 *
-	 * @return the id
-	 */
-	public Integer getId()
-	{
+	public Integer getId() {
 		return id;
 	}
 
-	/**
-	 * Sets the id.
-	 *
-	 * @param id the id to set
-	 */
-	public void setId(Integer id)
-	{
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Integer getFinanId()
-	{
+	public Integer getFinanId() {
 		return finanId;
 	}
 
-	public void setFinanId(Integer finanId)
-	{
+	public void setFinanId(Integer finanId) {
 		this.finanId = finanId;
 	}
 
-	public Long getDataBaixa()
-	{
+	public Long getDataBaixa() {
 		return dataBaixa;
 	}
 
-	public void setDataBaixa(Long dataBaixa)
-	{
+	public void setDataBaixa(Long dataBaixa) {
 		this.dataBaixa = dataBaixa;
 	}
 
-	public String getObservacao()
-	{
+	public String getObservacao() {
 		return observacao;
 	}
 
-	public void setObservacao(String observacao)
-	{
+	public void setObservacao(String observacao) {
 		this.observacao = observacao;
-	}
-
-
-	public Double getJuros()
-	{
-		return juros;
-	}
-
-	public void setJuros(Double juros)
-	{
-		this.juros = juros;
-	}
-
-	public Double getMulta()
-	{
-		return multa;
-	}
-
-	public void setMulta(Double multa)
-	{
-		this.multa = multa;
-	}
-
-	
-	public Conta getConta() {
-		return conta;
-	}
-
-	public void setConta(Conta conta) {
-		this.conta = conta;
-	}
-
-	public Double getDesconto() {
-		return desconto;
-	}
-
-	public void setDesconto(Double desconto) {
-		this.desconto = desconto;
 	}
 
 	public Double getValor() {
@@ -134,13 +70,57 @@ public class BaixaTitulo extends ModelCosmeDamiao
 		this.valor = valor;
 	}
 
+	public Double getJuros() {
+		return juros;
+	}
+
+	public void setJuros(Double juros) {
+		this.juros = juros;
+	}
+
+	public Double getMulta() {
+		return multa;
+	}
+
+	public void setMulta(Double multa) {
+		this.multa = multa;
+	}
+
+	public Double getDesconto() {
+		return desconto;
+	}
+
+	public void setDesconto(Double desconto) {
+		this.desconto = desconto;
+	}
+
+	public Conta getConta() {
+		return conta;
+	}
+
+	public void setConta(Conta conta) {
+		this.conta = conta;
+	}
+
+	public Long getDataVencimento() {
+		return dataVencimento;
+	}
+
+	public void setDataVencimento(Long dataVencimento) {
+		this.dataVencimento = dataVencimento;
+	}
+
 	@Override
 	public String toString() {
 		return "BaixaTitulo [getId()=" + getId() + ", getFinanId()=" + getFinanId() + ", getDataBaixa()="
 				+ getDataBaixa() + ", getObservacao()=" + getObservacao() + ", getValor()=" + getValor()
-				+ ", getJuros()=" + getJuros() + ", getMulta()=" + getMulta() + ", getConta()=" + getConta()
-				+ ", getDesconto()=" + getDesconto() + ", toString()=" + super.toString() + "]";
+				+ ", getJuros()=" + getJuros() + ", getMulta()=" + getMulta() + ", getDesconto()=" + getDesconto()
+				+ ", getConta()=" + getConta() + ", getDataVencimento()=" + getDataVencimento() + ", toString()="
+				+ super.toString() + "]";
 	}
+
+
+
 
 
 

@@ -2,7 +2,7 @@ package com.qat.samples.sysmgmt.conta.model;
 
 import java.util.List;
 
-import com.qat.samples.sysmgmt.financeiro.model.BaixaTitulo;
+import com.qat.samples.sysmgmt.financeiro.model.BaixaDetalhe;
 import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
@@ -17,17 +17,17 @@ public class Conta extends ModelCosmeDamiao
 	private Integer id;
 
 	private String descricao;
-	
+
 	private String numeroConta;
 
 	private double saldo;
-	
+
 	private Long dataUltLanc;
-	
-	private List<BaixaTitulo> listBaixa;
-	
+
+	private List<BaixaDetalhe> listBaixa;
+
 	private DoisValores tipoConta;
-	
+
 	private String observacao;
 
 	public Conta()
@@ -35,19 +35,11 @@ public class Conta extends ModelCosmeDamiao
 
 	}
 
-	/**
-	 * @return the id
-	 */
-	public Integer getId()
-	{
+	public Integer getId() {
 		return id;
 	}
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Integer id)
-	{
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -57,6 +49,14 @@ public class Conta extends ModelCosmeDamiao
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public String getNumeroConta() {
+		return numeroConta;
+	}
+
+	public void setNumeroConta(String numeroConta) {
+		this.numeroConta = numeroConta;
 	}
 
 	public double getSaldo() {
@@ -75,13 +75,13 @@ public class Conta extends ModelCosmeDamiao
 		this.dataUltLanc = dataUltLanc;
 	}
 
-	public List<BaixaTitulo> getListBaixa() {
-		return listBaixa;
-	}
-
-	public void setListBaixa(List<BaixaTitulo> listBaixa) {
-		this.listBaixa = listBaixa;
-	}
+//	public List<BaixaTitulo> getListBaixa() {
+//		return listBaixa;
+//	}
+//
+//	public void setListBaixa(List<BaixaTitulo> listBaixa) {
+//		this.listBaixa = listBaixa;
+//	}
 
 	public DoisValores getTipoConta() {
 		return tipoConta;
@@ -89,14 +89,6 @@ public class Conta extends ModelCosmeDamiao
 
 	public void setTipoConta(DoisValores tipoConta) {
 		this.tipoConta = tipoConta;
-	}
-
-	public String getNumeroConta() {
-		return numeroConta;
-	}
-
-	public void setNumeroConta(String numeroConta) {
-		this.numeroConta = numeroConta;
 	}
 
 	public String getObservacao() {
@@ -107,13 +99,24 @@ public class Conta extends ModelCosmeDamiao
 		this.observacao = observacao;
 	}
 
-	@Override
-	public String toString() {
-		return "Conta [getId()=" + getId() + ", getDescricao()=" + getDescricao() + ", getSaldo()=" + getSaldo()
-				+ ", getDataUltLanc()=" + getDataUltLanc() + ", getListBaixa()=" + getListBaixa() + ", getTipoConta()="
-				+ getTipoConta() + ", getNumeroConta()=" + getNumeroConta() + ", getObservacao()=" + getObservacao()
-				+ ", toString()=" + super.toString() + "]";
+	public List<BaixaDetalhe> getListBaixa() {
+		return listBaixa;
 	}
 
-	
+	public void setListBaixa(List<BaixaDetalhe> listBaixa) {
+		this.listBaixa = listBaixa;
+	}
+
+	@Override
+	public String toString() {
+		return "Conta [getId()=" + getId() + ", getDescricao()=" + getDescricao() + ", getNumeroConta()="
+				+ getNumeroConta() + ", getSaldo()=" + getSaldo() + ", getDataUltLanc()=" + getDataUltLanc()
+				+ ", getTipoConta()=" + getTipoConta() + ", getObservacao()=" + getObservacao() + ", getListBaixa()="
+				+ getListBaixa() + ", toString()=" + super.toString() + "]";
+	}
+
+
+
+
+
 }

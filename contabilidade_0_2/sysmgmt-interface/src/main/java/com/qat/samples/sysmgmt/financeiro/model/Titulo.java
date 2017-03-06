@@ -17,11 +17,11 @@ public class Titulo extends ModelCosmeDamiao
 	private Integer id;
 
 	private String descricao;
-	
+
 	private String numero;
 
 	private Integer parcela;
-	
+
 	private FormaPg formapg;
 
 	/** The estado. */
@@ -29,24 +29,24 @@ public class Titulo extends ModelCosmeDamiao
 
 	/** The bairro. */
 	private Long dataVencimento;
-	
+
 	private Long dataPagamento;
 
 	/** The numero. */
 	private String docId;
 
 	private DoisValores tipoDoc;
-	
+
 	private DoisValores formaCadastro;
-	
+
 	private DoisValores intervalo;
-	
+
 	private DoisValores categoria;
 
 	private String observacao;
 
 	private Double valor;
-	
+
 	private DoisValores situacao;
 
 	private FinanceiroStatusEnum financeiroEnum;
@@ -264,9 +264,11 @@ public class Titulo extends ModelCosmeDamiao
 				+ super.toString() + "]";
 	}
 
-	
 
 
 
-	
+
+
+
+
 }

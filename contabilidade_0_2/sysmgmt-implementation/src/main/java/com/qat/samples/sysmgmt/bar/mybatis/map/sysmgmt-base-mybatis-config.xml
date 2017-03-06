@@ -123,8 +123,8 @@
 
     	<typeAlias alias="Audiencia" type="com.qat.samples.sysmgmt.advocacia.Audiencia" />
     	<typeAlias alias="AudienciaInquiryRequest" type="com.qat.samples.sysmgmt.advocacia.request.AudienciaInquiryRequest" />
-    	
-    	
+
+
     	<typeAlias alias="Conta" type="com.qat.samples.sysmgmt.conta.model.Conta" />
     	<typeAlias alias="ContaInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.ContaInquiryRequest" />
 
@@ -202,6 +202,7 @@
         <typeAlias alias="ContasPagar" type="com.qat.samples.sysmgmt.financeiro.model.ContasPagar" />
         <typeAlias alias="Titulo" type="com.qat.samples.sysmgmt.financeiro.model.Titulo" />
         <typeAlias alias="BaixaTitulo" type="com.qat.samples.sysmgmt.financeiro.model.BaixaTitulo" />
+        <typeAlias alias="BaixaDetalhe" type="com.qat.samples.sysmgmt.financeiro.model.BaixaDetalhe" />
         <typeAlias alias="TipoBaixa" type="com.qat.samples.sysmgmt.financeiro.model.TipoBaixa" />
         <typeAlias alias="ContasReceber" type="com.qat.samples.sysmgmt.financeiro.model.ContasReceber" />
         <typeAlias alias="CondPag" type="com.qat.samples.sysmgmt.condpag.model.CondPag" />

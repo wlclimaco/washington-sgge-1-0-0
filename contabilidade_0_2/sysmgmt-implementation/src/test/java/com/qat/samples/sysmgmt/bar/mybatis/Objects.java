@@ -1255,6 +1255,7 @@ public class Objects {
 		baixatitulo.setJuros(new Double(10.00));
 		baixatitulo.setMulta(new Double(10.00));
 		baixatitulo.setDesconto(new Double(10.00));
+		baixatitulo.setConta(insertConta(id, tabela, action));
 		//baixatitulo.setTipoBaixaList(new ArrayList<TipoBaixa>());
 		//baixatitulo.getTipoBaixaList().add(insertTipoBaixa(id, TabelaEnum.BAIXATITULO, action));
 		baixatitulo.setTabelaEnum(tabela);
@@ -5583,8 +5584,8 @@ public static Conta insertConta(Integer id, TabelaEnum tabela,
 	conta.setDescricao("NATIVE INSERT UPDATE");
 	conta.setSaldo(new Double(1.99));
 	conta.setDataUltLanc(a.getTime());
-	conta.setListBaixa(new ArrayList<BaixaTitulo>());
-	conta.getListBaixa().add(insertBaixaTitulo(id, tabela, action));
+//	conta.setListBaixa(new ArrayList<BaixaTitulo>());
+//	conta.getListBaixa().add(insertBaixaTitulo(id, tabela, action));
 	conta.setTipoConta(insertDoisValor(id, tabela, action));
 	conta.setEmprId(1);
 	conta.setModifyDateUTC(a.getTime());

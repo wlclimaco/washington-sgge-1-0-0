@@ -29,7 +29,20 @@
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
 <collection property="tipoConta" column="tipoConta" select="DoisValorMap.fetchDoisValorById"/>
-<collection property="listBaixa" column="id" select="BaixaTituloMap.fetchContaIdBaixaTitulos"/>
+<collection property="listBaixa" column="id" select="fetchBaixaDetalheById"/>
+  </resultMap>
+
+
+    <resultMap id="BaixaDetalheResult" type="BaixaDetalhe">
+    <result property="id" column="id"/>
+    <result property="descricao" column="descricao"/>
+    <result property="dataVencimento" column="dataVencimento"/>
+    <result property="dataBaixa" column="dataBaixa"/>
+    <result property="docid" column="docid"/>
+    <result property="valorTitulo" column="valorTitulo"/>
+	<result property="tipoDoc" column="tipoDoc"/>
+	<result property="situacao" column="situacao"/>
+
   </resultMap>
 
   <sql id="allContaColumns">
@@ -68,9 +81,10 @@ descricao
 	<include refid="allContaColumns" />
    FROM conta ORDER BY id ASC
  </select>
- 
-  <select id="fetchAllContas" resultMap="ContaResult">
-   select c.id, c.descricao,c.datavencimento,c.docid,c.valor as "valor titulo",(select d.descricao from doisvalor d where id = c.tipodoc ) as "Tipo Doc" ,(select d.descricao from doisvalor d where id = c.situacao ) as "Situacao" ,b.databaixa , b.valor as "Valor Baixa" from baixatitulo b, contaspagar c where c.id = b.parentId
+
+  <select id="fetchBaixaDetalheById" parameterType="Integer" resultMap="BaixaDetalheResult">
+  select c.id, c.descricao,c.datavencimento,c.docid,c.valor as "valorTitulo",b.dataBaixa,(select d.descricao from doisvalor d where id = c.tipodoc ) as "tipoDoc" ,(select d.descricao from doisvalor d where id = c.situacao ) as "situacao" ,b.databaixa , b.valor as "valorBaixa" from baixatitulo b, contaspagar c where c.id = b.parentId
+
 
  </select>
 

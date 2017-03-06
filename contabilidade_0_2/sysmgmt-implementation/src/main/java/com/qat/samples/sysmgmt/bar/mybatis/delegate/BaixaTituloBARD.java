@@ -1,6 +1,7 @@
 package com.qat.samples.sysmgmt.bar.mybatis.delegate;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -10,6 +11,7 @@ import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Financeiro.IFinanceiroBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.conta.model.Conta;
 import com.qat.samples.sysmgmt.financeiro.model.BaixaTitulo;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.AcaoTypeEnum;
@@ -17,6 +19,7 @@ import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
+import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 
 /**
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
@@ -66,15 +69,32 @@ public final class BaixaTituloBARD extends SqlSessionDaoSupport
 			{
 				case INSERT:
 					count = emailDAC.insertBaixaTitulo(baixa).hasSystemError();
-					
+					if(!count)
+					{
+					 Conta conta = new Conta();
+					    Double value;
+
+						// diminuir saldo conta
+					    conta = emailDAC.fetchContaById(new FetchByIdRequest(baixa.getConta().getId()));
+					    if (!ValidationUtil.isNull(conta))
+					    {
+						    value = conta.getSaldo() - baixa.getValor();
+						    conta.setSaldo(value);
+
+						 // atualizar ulttrans conta
+						    conta.setDataUltLanc((new Date()).getTime());
+
+						    emailDAC.updateConta(conta);
+					    }
+					}
 					break;
 				case UPDATE:
 					count = emailDAC.updateBaixaTitulo(baixa).hasSystemError();
-					
+
 					break;
 				case DELETE:
 					count = emailDAC.deleteBaixaTituloById(baixa).hasSystemError();
-					
+
 					break;
 			}
 		}

@@ -3,12 +3,14 @@ package com.qat.samples.sysmgmt.bar.mybatis.Financeiro;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
@@ -320,7 +322,7 @@ private static final String STMT_DELETE_CONTACORRENTE = NAMESPACE_CONTACORRENTE 
 	/** The Constant STMT_FETCH_CONTACORRENTE_ALL_REQUEST. */
 	private static final String STMT_FETCH_CONTACORRENTE_ALL_REQUEST = NAMESPACE_CONTACORRENTE + "fetchAllContaCorrentesRequest";
 
-	
+
 	///===================================### CONTA ####======================================
 	/** The Constant NAMESPACE. */
 	private static final String NAMESPACE_CONTA = "ContaMap.";
@@ -376,8 +378,8 @@ private static final String STMT_DELETE_CAIXA = NAMESPACE_CAIXA + "deleteCaixaBy
 
 	/** The Constant STMT_FETCH_CAIXA_ALL_REQUEST. */
 	private static final String STMT_FETCH_CAIXA_ALL_REQUEST = NAMESPACE_CAIXA + "fetchAllCaixasRequest";
-	
-	
+
+
 	///===================================### AGENCIA ####======================================
 	/** The Constant NAMESPACE. */
 	private static final String NAMESPACE_AGENCIA = "AgenciaMap.";
@@ -411,8 +413,8 @@ private static final String STMT_DELETE_CAIXA = NAMESPACE_CAIXA + "deleteCaixaBy
 	IHistoricoBAR historicoBAR;
 
 	IFinanceiroBAR financeiroBAR;
-	
-	
+
+
 	IEnderecoBAR enderecoBAR;
 	IEmailBAR emailBAR;
 	ITelefoneBAR telefoneBAR;
@@ -476,13 +478,21 @@ private static final String STMT_DELETE_CAIXA = NAMESPACE_CAIXA + "deleteCaixaBy
 public InternalResponse insertContasPagar(ContasPagar contaspagar)
 {
 	InternalResponse response = new InternalResponse();
-	
+
 	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.CONTA, getHistoricoBAR(), response);
-	
+
 	contaspagar.setProcessId(historicoId);
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONTASPAGAR, contaspagar, response);
-	
-	BaixaTituloBARD.maintainBaixaTituloAssociations(contaspagar.getListBaixa(), response, contaspagar.getId(), TypeEnum.HIGH, AcaoTypeEnum.INSERT, TabelaEnum.CONTASPAGAR, getFinanceiroBAR(), statusBAR, historicoBAR, contaspagar.getEmprId(), contaspagar.getUserId(), historicoId, historicoId);
+
+	if(contaspagar.getModelAction() == PersistenceActionEnum.INSERT)
+	{
+		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONTASPAGAR, contaspagar, response);
+	}
+
+	if (!ValidationUtil.isNullOrEmpty(contaspagar.getListBaixa()))
+	{
+	//	insertBaixaTitulo(contaspagar.getListBaixa().get(0));
+		BaixaTituloBARD.maintainBaixaTituloAssociations(contaspagar.getListBaixa(), response, contaspagar.getId(), TypeEnum.HIGH, AcaoTypeEnum.INSERT, TabelaEnum.CONTASPAGAR, getFinanceiroBAR(), statusBAR, historicoBAR, contaspagar.getEmprId(), contaspagar.getUserId(), historicoId, historicoId);
+	}
 	return response;
 }
 
@@ -747,8 +757,41 @@ public static void fetchTitulosByRequest(SqlSession sqlSession, PagedInquiryRequ
 @Override
 public InternalResponse insertBaixaTitulo(BaixaTitulo baixatitulo)
 {
+
 	InternalResponse response = new InternalResponse();
+	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.CONTA, getHistoricoBAR(), response);
+	baixatitulo.setProcessId(historicoId);
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_BAIXATITULO, baixatitulo, response);
+	//List<BaixaTitulo> baixa = new ArrayList<BaixaTitulo>();
+//	baixa.add(baixatitulo);
+	//Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.CONTA, getHistoricoBAR(), response);
+
+	//baixatitulo.setProcessId(historicoId);
+
+	//BaixaTituloBARD.maintainBaixaTituloAssociations(baixa, response, baixatitulo.getId(), TypeEnum.HIGH, AcaoTypeEnum.INSERT, TabelaEnum.CONTASPAGAR, getFinanceiroBAR(), statusBAR, historicoBAR, baixatitulo.getEmprId(), baixatitulo.getUserId(), historicoId, historicoId);
+
+
+
+	//
+	return response;
+}
+
+public InternalResponse insertBaixaTitulo2(BaixaTitulo baixatitulo)
+{
+
+	InternalResponse response = new InternalResponse();
+	//MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_BAIXATITULO, baixatitulo, response);
+	List<BaixaTitulo> baixa = new ArrayList<BaixaTitulo>();
+	baixa.add(baixatitulo);
+	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.CONTA, getHistoricoBAR(), response);
+
+	baixatitulo.setProcessId(historicoId);
+
+	BaixaTituloBARD.maintainBaixaTituloAssociations(baixa, response, baixatitulo.getId(), TypeEnum.HIGH, AcaoTypeEnum.INSERT, TabelaEnum.CONTASPAGAR, getFinanceiroBAR(), statusBAR, historicoBAR, baixatitulo.getEmprId(), baixatitulo.getUserId(), historicoId, historicoId);
+
+
+
+	//
 	return response;
 }
 
@@ -1946,13 +1989,13 @@ public static void fetchCaixasByRequest(SqlSession sqlSession, CaixaInquiryReque
 public InternalResponse insertAgencia(Agencia caixa)
 {
 	InternalResponse response = new InternalResponse();
-	
+
 	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.AGENCIA, getHistoricoBAR(), response);
-	
+
 	caixa.setProcessId(historicoId);
-	
+
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_AGENCIA, caixa, response);
-	
+
 	insertPessoa(caixa, response, TabelaEnum.AGENCIA, historicoId);
 	if (!ValidationUtil.isNullOrEmpty(caixa.getNumeroConta()))
 	{
@@ -2080,7 +2123,7 @@ public static void fetchAgenciasByRequest(SqlSession sqlSession, AgenciaInquiryR
 	}
 
 public boolean insertPessoa(Agencia pessoa, InternalResponse response ,TabelaEnum tabela,Integer historicoId){
-	
+
 	Integer count = 0;
 	Boolean count1 = false;
 	if (!ValidationUtil.isNullOrEmpty(pessoa.getEnderecos()))
@@ -2091,7 +2134,7 @@ public boolean insertPessoa(Agencia pessoa, InternalResponse response ,TabelaEnu
 						tabela, enderecoBAR, statusBAR, historicoBAR, pessoa.getId(),
 						pessoa.getCreateUser(), historicoId, historicoId);
 	}
-	
+
 	if (!ValidationUtil.isNullOrEmpty(pessoa.getEmails()))
 	{
 		count +=
@@ -2120,7 +2163,7 @@ public boolean insertPessoa(Agencia pessoa, InternalResponse response ,TabelaEnu
 						historicoBAR, historicoId, historicoId);
 
 	}
-	
+
 	return true;
 }
 
