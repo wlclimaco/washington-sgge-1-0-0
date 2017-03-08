@@ -1,7 +1,6 @@
 package com.qat.samples.sysmgmt.contato.model;
 
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
-import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -13,8 +12,8 @@ public class Contato extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
-	
-	private Integer ledo;
+
+	private Integer lido;
 
 	/** The data contato. */
 	private Long dataContato;
@@ -33,8 +32,8 @@ public class Contato extends ModelCosmeDamiao
 	private ContatoTypeEnum motivo;
 
 	private String texto;
-	
-	
+
+
 	public Integer getMotivoValue()
 	{
 		if (motivo != null)
@@ -105,12 +104,12 @@ public class Contato extends ModelCosmeDamiao
 		this.texto = texto;
 	}
 
-	public Integer getLedo() {
-		return ledo;
+	public Integer getLido() {
+		return lido;
 	}
 
-	public void setLedo(Integer ledo) {
-		this.ledo = ledo;
+	public void setLido(Integer ledo) {
+		this.lido = ledo;
 	}
 
 	public String getAssunto() {
@@ -125,8 +124,8 @@ public class Contato extends ModelCosmeDamiao
 	public String toString() {
 		return "Contato [getMotivoValue()=" + getMotivoValue() + ", getId()=" + getId() + ", getDataContato()="
 				+ getDataContato() + ", getNome()=" + getNome() + ", getEmail()=" + getEmail() + ", getTelefone()="
-				+ getTelefone() + ", getMotivo()=" + getMotivo() + ", getTexto()=" + getTexto() + ", getLedo()="
-				+ getLedo() + ", getAssunto()=" + getAssunto() + ", toString()=" + super.toString() + "]";
+				+ getTelefone() + ", getMotivo()=" + getMotivo() + ", getTexto()=" + getTexto() + ", getLido()="
+				+ getLido() + ", getAssunto()=" + getAssunto() + ", toString()=" + super.toString() + "]";
 	}
 
 

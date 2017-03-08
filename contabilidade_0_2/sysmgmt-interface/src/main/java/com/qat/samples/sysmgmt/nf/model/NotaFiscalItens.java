@@ -2,6 +2,8 @@
 package com.qat.samples.sysmgmt.nf.model;
 
 
+import java.util.ArrayList;
+
 import com.qat.samples.sysmgmt.cfop.model.Cfop;
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
 import com.qat.samples.sysmgmt.estado.model.Estado;
@@ -1035,6 +1037,8 @@ public void setNumeroRECOPI(Integer numerorecopi)
 				+ ", getValoroutrasdespesasacessorias()=" + getValoroutrasdespesasacessorias() + ", getNumerorecopi()="
 				+ getNumerorecopi() + ", getQuantidade()=" + getQuantidade() + ", toString()=" + super.toString() + "]";
 	}
+
+
 
 
 

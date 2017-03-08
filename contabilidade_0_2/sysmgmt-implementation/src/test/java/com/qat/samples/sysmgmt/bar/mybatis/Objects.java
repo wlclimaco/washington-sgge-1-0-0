@@ -3437,6 +3437,7 @@ public static NotaFiscalItens insertNotaFiscalItens(Integer id,TabelaEnum tabela
 	notafiscalitens.setDescricao("NATIVE INSERT UPDATE");
 //	notafiscalitens.setProduto(10000);
 //	notafiscalitens.setCfop(10000);
+	notafiscalitens.setServicoList(insertServico(id, tabela, action));
 	notafiscalitens.setValorUnitario(new Double(10.00));
 	notafiscalitens.setValorTotalBruto(new Double(10.00));
 	notafiscalitens.setValorFrete(new Double(10.00));
@@ -3466,6 +3467,7 @@ public static ServicoAndPlano insertServicoByPlano(Integer id, TabelaEnum tabela
 
 	notafiscalitens.setParentId(id);
 	notafiscalitens.setEmprId(1);
+	notafiscalitens.setValor(new Double(1.99));
 	notafiscalitens.setModifyDateUTC(a.getTime());
 	notafiscalitens.setCreateDateUTC(a.getTime());
 	notafiscalitens.setCreateUser("system");
@@ -5596,6 +5598,28 @@ public static Conta insertConta(Integer id, TabelaEnum tabela,
 	conta.setModelAction(action);
 
 	return conta;
+}
+
+
+
+public static Cnae cnae(int i, String string, PersistenceActionEnum action) {
+
+	Cnae cnae = new Cnae();
+	Date a = new Date();
+	cnae.setId(i);
+	cnae.setCodigo("5555");
+	cnae.setCnae("5555");
+	cnae.setDescricao("5555");
+	cnae.setAbreviado("5555");
+	cnae.setEmprId(1);
+	cnae.setModifyDateUTC(a.getTime());
+	cnae.setCreateDateUTC(a.getTime());
+	cnae.setCreateUser("system");
+	cnae.setModifyUser("system");
+	cnae.setProcessId(1);
+	cnae.setModelAction(action);
+
+	return cnae;
 }
 
 

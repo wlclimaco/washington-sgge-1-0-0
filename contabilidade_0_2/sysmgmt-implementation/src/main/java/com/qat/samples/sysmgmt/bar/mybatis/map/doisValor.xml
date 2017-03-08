@@ -31,7 +31,7 @@
         <collection property="pagina" column="pagina" select="PaginaMap.fetchPaginaById"/>
         <collection property="doisValorType" column="doisValorType" select="DoisValorMap.fetchDoisValorTypeByDoisValor"/>
     </resultMap>
-    
+
     <resultMap id="DoisValorTypeResult" type="DoisValorType">
         <result property="id" column="id" />
         <result property="tipo" column="tipo" />
@@ -66,13 +66,13 @@
  <include refid="allDoisValorColumns" />
    FROM doisvalor WHERE id = #{fetchid}
  </select>
- 
+
      <select id="fetchDoisValorTypeByDoisValor" parameterType="Integer" resultMap="DoisValorTypeResult">
-	SELECT id, tipo, descricao, parentid, tabelaenumvalue, emprid, processid, 
-	       create_date, create_user, modify_date, modify_user, pagina, value
-	  FROM doisvalortype WHERE id = #{fetchid} 
+	SELECT id, tipo, descricao, parentid, tabelaenumvalue, emprid, processid,
+	       create_date, create_user, modify_date, modify_user, pagina
+	  FROM doisvalortype WHERE id = #{fetchid}
  </select>
- 
+
  <select id="fetchItensByPlano" parameterType="Integer" resultMap="DoisValorResult">
     SELECT id,
  <include refid="allDoisValorColumns" />
@@ -82,7 +82,7 @@
     <select id="fetchAllDoisValorsRequest" parameterType="DoisValorInquiryRequest" resultMap="DoisValorResult">
 
      SELECT id,<include refid="allDoisValorColumns" />
-           FROM doisvalor where 0 = 0  
+           FROM doisvalor where 0 = 0
            <if test="paginaId != null"> and pagina = #{paginaId}</if>
            <if test="doisValorType != null"> and doisvalortype = #{doisValorType}</if> ORDER BY value ASC
 

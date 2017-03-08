@@ -1,11 +1,8 @@
 package com.qat.samples.sysmgmt.site.model;
 
 import java.util.Date;
-import java.util.List;
 
 import com.qat.samples.sysmgmt.contabilidade.model.Plano;
-import com.qat.samples.sysmgmt.contabilidade.model.PlanoBySite;
-import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 

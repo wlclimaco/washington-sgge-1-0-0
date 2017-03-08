@@ -36,15 +36,6 @@ INSERT INTO Notes(  parentId, noteText, tabelaEnumValue,create_user,create_date,
 (  1003, 'noteText_2', 3,'system',1462656383021,'rod',1462656383021);
 
 
-INSERT INTO ServicoByPlano( id, parentId, servico,emprId,processId,create_user,create_date,modify_user,modify_date)values
-( 1001, 1001, 1,1,1,'system',1464059658104,'rod',1464059658104);
-
-INSERT INTO ServicoByPlano( id, parentId, servico,emprId,processId,create_user,create_date,modify_user,modify_date)values
-( 1002, 1002, 2,1,1,'system',1464059658104,'rod',1464059658104);
-
-INSERT INTO ServicoByPlano( id, parentId, servico,emprId,processId,create_user,create_date,modify_user,modify_date)values
-( 1003, 1003, 3,1,1,'system',1464059658104,'rod',1464059658104);
-
 INSERT INTO Preco(dataMarcacao, precoTypeEnum, tabelaEnumValue, valor, dataProInicial, dataProFinal, parentId, emprId,create_user,create_date,modify_user,modify_date)values
 (1464059658104, 1, 1, 1, 1464059658104, 1464059658104, 1, 1,'system',1464059658104,'rod',1464059658104);
 
