@@ -3977,6 +3977,17 @@ function NFNota() {
             xml: true
         }
     });
+    a.push({
+        field: {
+            campo: "tipo",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     
        return a;
 }
@@ -4037,7 +4048,7 @@ a.push({
 
 
 
-//Boleto    
+//Boleto    User_Roles( user_role_id, username, role,parentId,tabelaEnumValue,emprId,processId,create_user,c
 function user_rolesModel() {
     a = [];
     a.push({
@@ -4152,7 +4163,6 @@ function paginaModel() {
     a.push({
         field: {
             campo: "pagina",
-            default : "",
             tipo: "String",
             requerid: false,
             primaryKey: false,
@@ -4367,6 +4377,9 @@ function helpModel() {
 
 //Boleto    
 function fieldModel() {
+
+    
+
     a = [];
     a.push({
         field: {
@@ -4397,6 +4410,18 @@ function fieldModel() {
         field: {
             campo: "status",
             default : 0,
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "obrigatorio",
             tipo: "Integer",
             requerid: false,
             primaryKey: false,
@@ -4458,7 +4483,7 @@ function fieldModel() {
     a.push({
         field: {
             campo: "validacao",
-            tipo: "Validacao",
+            tipo: "List<Validacao>",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -4470,7 +4495,7 @@ function fieldModel() {
      a.push({
         field: {
             campo: "role",
-            tipo: "Role",
+            tipo: "List<Role>",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -4478,6 +4503,33 @@ function fieldModel() {
             xml: true
         }
     });
+     a.push({
+        field: {
+            campo: "campoBanco",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "tabelaBanco",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+
+
+
     return a;
 }
 
@@ -6040,6 +6092,42 @@ function ConfNFEModel() {
         }
     });
 
+    a.push({
+        field: {
+            campo: "modelo",
+            tipo: "DoisValor",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "tipoImpressao",
+            tipo: "DoisValor",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "tipoEmissao",
+            tipo: "DoisValor",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
     return a;
 }
 
@@ -6362,6 +6450,30 @@ function DoisValorModel() {
     });
     a.push({
         field: {
+            campo: "value",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "pagina",
+            tipo: "Pagina",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
             campo: "descricao",
             tipo: "String",
             requerid: false,
@@ -6385,7 +6497,58 @@ function DoisValorModel() {
     return a;
 }
 
+function DoisValorTypeModel () 
+{
+    a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
+    a.push({
+        field: {
+            campo: "tipo",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "descricao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "pagina",
+            tipo: "Pagina",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
 function InsertUtilModel() {
     a = [];
     a.push({
@@ -6453,7 +6616,7 @@ function ProcessModel() {
     a.push({
         field: {
             campo: "dataProcess",
-            tipo: "Integer",
+            tipo: "Long",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -6549,8 +6712,8 @@ function ServicoAndPlanoModel() {
         field: {
             campo: "servicoPlanoEnumValue",
             tipo: "Integer",
-            requerid: true,
-            primaryKey: true,
+            requerid: false,
+            primaryKey: false,
             forenkey: false,
             model: true,
             xml: true
@@ -6560,8 +6723,8 @@ function ServicoAndPlanoModel() {
         field: {
             campo: "servicoList",
             tipo: "Servico",
-            requerid: true,
-            primaryKey: true,
+            requerid: false,
+            primaryKey: false,
             forenkey: false,
             model: true,
             xml: true
@@ -6571,8 +6734,8 @@ function ServicoAndPlanoModel() {
         field: {
             campo: "planoList",
             tipo: "Plano",
-            requerid: true,
-            primaryKey: true,
+            requerid: false,
+            primaryKey: false,
             forenkey: false,
             model: true,
             xml: true
@@ -6592,6 +6755,30 @@ function EntidadeModel() {
             tipo: "Integer",
             requerid: true,
             primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    
+    a.push({
+        field: {
+            campo: "statusEmpresa",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "permissaotypeenumvalue",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
             forenkey: false,
             model: true,
             xml: true
@@ -6751,6 +6938,125 @@ function EntidadeModel() {
             xml: true
         }
     });
+        a.push({
+        field: {
+            campo: "dtAbertura",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "configuracao",
+            tipo: "Configuracao",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "configuracaoNFe",
+            tipo: "ConfiguracaoNFe",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "usuarios",
+            tipo: "List<Usuario>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "bancos",
+            tipo: "List<BancoPessoa>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "planosServicos",
+            tipo: "PlanoByEmpresa",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "socios",
+            tipo: "List<Socio>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "siteList",
+            tipo: "List<Site>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "responsavel",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "notificacoes",
+            tipo: "List<NotificationPreferences>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     return a;
 }
 //================ AUDITORIA
@@ -6771,8 +7077,8 @@ function AuditoriaModel() {
         field: {
             campo: "dataAudiencia",
             tipo: "Integer",
-            requerid: true,
-            primaryKey: true,
+            requerid: false,
+            primaryKey: false,
             forenkey: false,
             model: true,
             xml: true
@@ -6782,8 +7088,8 @@ function AuditoriaModel() {
         field: {
             campo: "valor",
             tipo: "Double",
-            requerid: true,
-            primaryKey: true,
+            requerid: false,
+            primaryKey: false,
             forenkey: false,
             model: true,
             xml: true
@@ -6793,8 +7099,8 @@ function AuditoriaModel() {
         field: {
             campo: "descricao",
             tipo: "String",
-            requerid: true,
-            primaryKey: true,
+            requerid: false,
+            primaryKey: false,
             forenkey: false,
             model: true,
             xml: true
@@ -6804,8 +7110,8 @@ function AuditoriaModel() {
         field: {
             campo: "noteLIst",
             tipo: "List<Note>",
-            requerid: true,
-            primaryKey: true,
+            requerid: false,
+            primaryKey: false,
             forenkey: false,
             model: true,
             xml: true
@@ -7284,6 +7590,35 @@ function ProdutoDTOModel() {
 
 }
 
+
+function PessoaTipoModel() {
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "pessoaTypeEnum",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
+
 //================ Advogado
 function PessoaModel() {
 
@@ -7310,6 +7645,31 @@ function PessoaModel() {
             xml: true
         }
     });
+
+    a.push({
+        field: {
+            campo: "nomeFantasia",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "regime",
+            tipo: "Regime",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
     a.push({
         field: {
             campo: "nomePai",
@@ -7356,17 +7716,6 @@ function PessoaModel() {
     });
     a.push({
         field: {
-            campo: "tipoPessoa",
-            tipo: "Integer",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
             campo: "datanasc",
             tipo: "Long",
             requerid: false,
@@ -7376,6 +7725,18 @@ function PessoaModel() {
             xml: true
         }
     });
+    a.push({
+        field: {
+            campo: "tipoPessoa",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
     a.push({
         field: {
             campo: "foto",
@@ -7442,6 +7803,7 @@ function PessoaModel() {
             xml: true
         }
     });
+
     a.push({
         field: {
             campo: "telefones",
@@ -7490,6 +7852,17 @@ function PessoaModel() {
         field: {
             campo: "contatoList",
             tipo: "List<Contato>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "pessoaTipo",
+            tipo: "List<pessoaTipo>",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -7974,6 +8347,18 @@ function NotaFiscalItensModel() {
         field: {
             campo: "cfop",
             tipo: "Cfop",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "quantidade",
+            tipo: "Double",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -8794,17 +9179,129 @@ function TarefaModel() {
 function EmpresaModel() {
 
     var a = [];
-    a.push({
+   
+     a = EntidadeModel();
+
+      a.push({
         field: {
-            campo: "id",
-            tipo: "Integer",
-            requerid: true,
-            primaryKey: true,
+            campo: "planoList",
+            tipo: "List<Plano>",
+            requerid: false,
+            primaryKey: false,
             forenkey: false,
             model: true,
             xml: true
         }
     });
+
+     a.push({
+        field: {
+            campo: "qntFilial",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+     a.push({
+        field: {
+            campo: "qntDeposito",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+     a.push({
+        field: {
+            campo: "filialList",
+            tipo: "List<Filial>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+     a.push({
+        field: {
+            campo: "depositoList",
+            tipo: "List<Deposito>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+     a.push({
+        field: {
+            campo: "contaCorrenteList",
+            tipo: "List<ContaCorrente>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+     a.push({
+        field: {
+            campo: "tarefaList",
+            tipo: "List<TarefaEnt>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+     a.push({
+        field: {
+            campo: "parceiroId",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+     a.push({
+        field: {
+            campo: "contabilidadeId",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+     a.push({
+        field: {
+            campo: "permissaoTypeEnum",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
     return a;
 }
 
@@ -9118,9 +9615,74 @@ function EventosModel() {
     return a;
 }
 
+//transaction (    token ,inicioSession ,finalSession ,userId ,emprId ,processId ,create_date ,create_user ,modify_date ,modify_user         )
+function TransactionModel() {
+
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "token",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "inicioSession",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "finalSession",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "userId",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    return a;
+}
+
+
 //================ Usuario
 function UsuarioModel() {
-
+//users( id, emprId, processId, username, password, pergunta, role, language, ultAcesso, tabelaEnumValue,create_user,create_date,modify_user,modify_date)values ( 10110, 1, 1, 'username_4', 'password_4', 'p
+ //id,  username ,telefone ,emprId ,processId ,password ,pergunta ,language ,ultAcesso ,tabelaEnumValue ,create_date ,create_user ,modify_date ,modify_user   
     var a = [];
     a.push({
         field: {
@@ -9135,29 +9697,7 @@ function UsuarioModel() {
     });
     a.push({
         field: {
-            campo: "nome",
-            tipo: "Integer",
-            requerid: true,
-            primaryKey: true,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "cpf",
-            tipo: "Integer",
-            requerid: true,
-            primaryKey: true,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "email",
+            campo: "telefone",
             tipo: "String",
             requerid: false,
             primaryKey: false,
@@ -9168,7 +9708,18 @@ function UsuarioModel() {
     });
     a.push({
         field: {
-            campo: "senha",
+            campo: "username",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "password",
             tipo: "String",
             requerid: false,
             primaryKey: false,
@@ -9190,6 +9741,50 @@ function UsuarioModel() {
     });
     a.push({
         field: {
+            campo: "nome",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "cpf",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "email",
+            tipo: "String",
+             requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "senha",
+            tipo: "String",
+             requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
             campo: "role",
             tipo: "String",
             requerid: false,
@@ -9202,7 +9797,7 @@ function UsuarioModel() {
     a.push({
         field: {
             campo: "language",
-            tipo: "Integer",
+            tipo: "String",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -9229,6 +9824,19 @@ function ContasPagarModel() {
 
     var a = [];
     a = TituloModel();
+
+    a.push({
+        field: {
+            campo: "fornecedor",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
     return a;
 }
 
@@ -9373,7 +9981,40 @@ function FormaPgModel() {
     });
     a.push({
         field: {
+            campo: "observacao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
             campo: "diasPg",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "parcelamentoMax",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "parcelamentoSemJuros",
             tipo: "Integer",
             requerid: false,
             primaryKey: false,
@@ -9393,6 +10034,91 @@ function FormaPgModel() {
             xml: true
         }
     });
+
+    a.push({
+        field: {
+            campo: "juros",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "taxaFixa",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "descAvista",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "conta",
+            tipo: "Conta",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "tipoDoc",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "qntIntervalo",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "intervalo",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
     return a;
 }
 
@@ -9443,7 +10169,41 @@ function BancoModel() {
     });
     a.push({
         field: {
+            campo: "site",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "codigo",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
             campo: "nome",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "descricao",
             tipo: "String",
             requerid: false,
             primaryKey: false,
@@ -9548,7 +10308,93 @@ function TipoPagModel() {
 
     return a;
 }
+//================ ContaCorrente
+function ContaModel() {
 
+    var a = [];
+
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+     a.push({
+        field: {
+            campo: "descricao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+     a.push({
+        field: {
+            campo: "numeroConta",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+     a.push({
+        field: {
+            campo: "saldo",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+     a.push({
+        field: {
+            campo: "dataUltLanc",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+     a.push({
+        field: {
+            campo: "tipoConta",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "observacao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+return a;
+}
 //================ ContaCorrente
 function ContaCorrenteModel() {
 
@@ -9602,6 +10448,17 @@ function ContaCorrenteModel() {
         field: {
             campo: "nossoNumero",
             tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "statusConta",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -9797,509 +10654,6 @@ function CnaeEmpresaModel() {
     return a;
 }
 
-//===========================================================================================NFE=======================================================================================================
-/*
-function NFBaseModel() {
-
-	var a = [];
-
-		a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-	return a;
-}
-
-function NFNotaModel() {
-
-	private long identificadorLocal;
-
-    @Element(name = "infNFe")
-    private NFNotaInfo info;
-
-    @Element(name = "infNFeSupl", required = false)
-    private NFNotaInfoSuplementar infoSuplementar;
-
-    @Element(name = "Signature", required = false)
-    private NFSignature assinatura;
-	var a = [];
-
-		a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-	return a;
-}
-
-function NFNotaInfoModel() {
-
-	var a = [];
-
-		a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-		public static final String IDENT = "NFe";
-
-	@Attribute(name = "Id", required = true)
-	private String identificador;
-
-	@Attribute(name = "versao", required = true)
-	private String versao;
-
-	@Element(name = "ide", required = true)
-	private NFNotaInfoIdentificacao identificacao;
-
-	@Element(name = "emit", required = true)
-	private NFNotaInfoEmitente emitente;
-
-	@Element(name = "avulsa", required = false)
-	private NFNotaInfoAvulsa avulsa;
-
-	@Element(name = "dest", required = false)
-	private NFNotaInfoDestinatario destinatario;
-
-	@Element(name = "retirada", required = false)
-	private NFNotaInfoLocal retirada;
-
-	@Element(name = "entrega", required = false)
-	private NFNotaInfoLocal entrega;
-
-	@ElementList(entry = "autXML", inline = true, required = false)
-	private List<NFPessoaAutorizadaDownloadNFe> pessoasAutorizadasDownloadNFe;
-
-	@ElementList(entry = "det", inline = true, required = true)
-	private List<NFNotaInfoItem> itens;
-
-	@Element(name = "total", required = true)
-	private NFNotaInfoTotal total;
-
-	@Element(name = "transp", required = true)
-	private NFNotaInfoTransporte transporte;
-
-	@Element(name = "cobr", required = false)
-	private NFNotaInfoCobranca cobranca;
-
-	@ElementList(entry = "pag", inline = true, required = false)
-	private List<NFNotaInfoPagamento> pagamentos;
-
-	@Element(name = "infAdic", required = false)
-	private NFNotaInfoInformacoesAdicionais informacoesAdicionais;
-
-	@Element(name = "exporta", required = false)
-	private NFNotaInfoExportacao exportacao;
-
-	@Element(name = "compra", required = false)
-	private NFNotaInfoCompra compra;
-
-	@Element(name = "cana", required = false)
-	private NFNotaInfoCana cana;
-	return a;
-}
-function NFNotaInfoIdentificacaoModel() {
-
-	var a = [];
-
-@Element(name = "cUF", required = true)
-    private NFUnidadeFederativa uf;
-
-    @Element(name = "cNF", required = true)
-    private String codigoRandomico;
-
-    @Element(name = "natOp", required = true)
-    private String naturezaOperacao;
-
-    @Element(name = "indPag", required = true)
-    private NFFormaPagamentoPrazo formaPagamento;
-
-    @Element(name = "mod", required = true)
-    private NFModelo modelo;
-
-    @Element(name = "serie", required = true)
-    private String serie;
-
-    @Element(name = "nNF", required = true)
-    private String numeroNota;
-
-    @Element(name = "dhEmi", required = true)
-    private DateTime dataHoraEmissao;
-
-    @Element(name = "dhSaiEnt", required = false)
-    private DateTime dataHoraSaidaOuEntrada;
-
-    @Element(name = "tpNF", required = true)
-    private NFTipo tipo;
-
-    @Element(name = "idDest", required = true)
-    private NFIdentificadorLocalDestinoOperacao identificadorLocalDestinoOperacao;
-
-    @Element(name = "cMunFG", required = true)
-    private String codigoMunicipio;
-
-    @Element(name = "tpImp", required = true)
-    private NFTipoImpressao tipoImpressao;
-
-    @Element(name = "tpEmis", required = true)
-    private NFTipoEmissao tipoEmissao;
-
-    @Element(name = "cDV", required = true)
-    private Integer digitoVerificador;
-
-    @Element(name = "tpAmb", required = true)
-    private NFAmbiente ambiente;
-
-    @Element(name = "finNFe", required = true)
-    private NFFinalidade finalidade;
-
-    @Element(name = "indFinal", required = true)
-    private NFOperacaoConsumidorFinal operacaoConsumidorFinal;
-
-    @Element(name = "indPres", required = true)
-    private NFIndicadorPresencaComprador indicadorPresencaComprador;
-
-    @Element(name = "procEmi", required = true)
-    private NFProcessoEmissor programaEmissor;
-
-    @Element(name = "verProc", required = true)
-    private String versaoEmissor;
-
-    @Element(name = "dhCont", required = false)
-    private DateTime dataHoraContigencia;
-
-    @Element(name = "xJust", required = false)
-    private String justificativaEntradaContingencia;
-
-    @ElementList(entry = "NFref", inline = true, required = false)
-    private List<NFInfoReferenciada> referenciadas;
-
- }
-
-function NFNotaInfoSuplementarModel() {
-
-	var a = [];
-
-		public class NFNotaInfoEmitente extends NFBase {
-
-    @Element(name = "CNPJ", required = false)
-    private String cnpj;
-
-    @Element(name = "CPF", required = false)
-    private String cpf;
-
-    @Element(name = "xNome", required = true)
-    private String razaoSocial;
-
-    @Element(name = "xFant", required = false)
-    private String nomeFantasia;
-
-    @Element(name = "enderEmit", required = true)
-    private NFEndereco endereco;
-
-    @Element(name = "IE", required = true)
-    private String inscricaoEstadual;
-
-    @Element(name = "IEST", required = false)
-    private String inscricaoEstadualSubstituicaoTributaria;
-
-    @Element(name = "IM", required = false)
-    private String inscricaoMunicipal;
-
-    @Element(name = "CNAE", required = false)
-    private String classificacaoNacionalAtividadesEconomicas;
-
-    @Element(name = "CRT", required = true)
-    private NFRegimeTributario regimeTributario;
-	return a;
-}
-
-function NFNotaInfoSuplementarModel() {
-
-	var a = [];
-
-		@Element(name = "CNPJ", required = true)
-    private String cnpj;
-
-    @Element(name = "xOrgao", required = true)
-    private String orgaoEmitente;
-
-    @Element(name = "matr", required = true)
-    private String matriculaAgente;
-
-    @Element(name = "xAgente", required = true)
-    private String nomeAgente;
-
-    @Element(name = "fone", required = false)
-    private String fone;
-
-    @Element(name = "UF", required = true)
-    private String uf;
-
-    @Element(name = "nDAR", required = false)
-    private String numeroDocumentoArrecadacaoReceita;
-
-    @Element(name = "dEmi", required = false)
-    private LocalDate dataEmissaoDocumentoArrecadacao;
-
-    @Element(name = "vDAR", required = false)
-    private String valorTotalConstanteDocumentoArrecadacaoReceita;
-
-    @Element(name = "repEmi", required = true)
-    private String reparticaoFiscalEmitente;
-
-    @Element(name = "dPag", required = false)
-    private LocalDate dataPagamentoDocumentoArrecadacao;
-	return a;
-}
-
-function NFNotaInfoSuplementarModel() {
-
-	public class NFNotaInfoDestinatario extends NFBase {
-
-	@Element(name = "CNPJ", required = false)
-	private String cnpj;
-
-	@Element(name = "CPF", required = false)
-	private String cpf;
-
-	@Element(name = "idEstrangeiro", required = false)
-	private String idEstrangeiro;
-
-	@Element(name = "xNome", required = false)
-	private String razaoSocial;
-
-	@Element(name = "enderDest", required = false)
-	private NFEndereco endereco;
-
-	@Element(name = "indIEDest", required = true)
-	private NFIndicadorIEDestinatario indicadorIEDestinatario;
-
-	@Element(name = "IE", required = false)
-	private String inscricaoEstadual;
-
-	@Element(name = "ISUF", required = false)
-	private String inscricaoSuframa;
-
-	@Element(name = "IM", required = false)
-	private String inscricaoMunicipal;
-
-	@Element(name = "email", required = false)
-	private String email;
-
-	public String getCnpj() {
-		return this.cnpj;
-	}
-	return a;
-}
-
-
-function NFNotaInfoSuplementarModel() {
-
-	var a = [];
-
-		@Element(name = "CNPJ", required = false)
-    private String cnpj;
-
-    @Element(name = "CPF", required = false)
-    private String cpf;
-
-    @Element(name = "xLgr", required = true)
-    private String logradouro;
-
-    @Element(name = "nro", required = true)
-    private String numero;
-
-    @Element(name = "xCpl", required = false)
-    private String complemento;
-
-    @Element(name = "xBairro", required = true)
-    private String bairro;
-
-    @Element(name = "cMun", required = true)
-    private String codigoMunicipio;
-
-    @Element(name = "xMun", required = true)
-    private String nomeMunicipio;
-
-    @Element(name = "UF", required = true)
-    private String uf;
-	return a;
-}
-
-
-function NFNotaInfoSuplementarModel() {
-
-	var a = [];
-
-		ublic class NFPessoaAutorizadaDownloadNFe extends NFBase {
-    @Element(name = "CNPJ", required = false)
-    private String cnpj;
-
-    @Element(name = "CPF", required = false)
-    private String cpf;
-	return a;
-}
-
-
-function NFNotaInfoItemModel() {
-
-	var a = [];
-
-		@Attribute(name = "nItem", required = true)
-    private Integer numeroItem;
-
-    @Element(name = "prod", required = true)
-    private NFNotaInfoItemProduto produto;
-
-    @Element(name = "imposto", required = true)
-    private NFNotaInfoItemImposto imposto;
-
-    @Element(name = "impostoDevol", required = false)
-    private NFImpostoDevolvido impostoDevolvido;
-
-    @Element(name = "infAdProd", required = false)
-    private String informacoesAdicionais;
-
-	return a;
-}
-
-
-function NFNotaInfoSuplementarModel() {
-
-	var a = [];
-
-		NFNotaInfoTotal extends NFBase {
-
-    @Element(name = "ICMSTot", required = true)
-    private NFNotaInfoICMSTotal icmsTotal;
-
-    @Element(name = "ISSQNtot", required = false)
-    private NFNotaInfoISSQNTotal issqnTotal;
-
-    @Element(name = "retTrib", required = false)
-    private NFNotaInfoRetencoesTributos retencoesTributos;
-	return a;
-}
-
-function NFNotaInfoSuplementarModel() {
-
-	var a = [];
-
-		NFNotaInfoTransporte extends NFBase {
-    @Element(name = "modFrete", required = true)
-    private NFModalidadeFrete modalidadeFrete;
-
-    @Element(name = "transporta", required = false)
-    private NFNotaInfoTransportador transportador;
-
-    @Element(name = "retTransp", required = false)
-    private NFNotaInfoRetencaoICMSTransporte icmsTransporte;
-
-    @Element(name = "veicTransp", required = false)
-    private NFNotaInfoVeiculo veiculo;
-
-    @ElementList(entry = "reboque", inline = true, required = false)
-    private List<NFNotaInfoReboque> reboques;
-
-    @Element(name = "vagao", required = false)
-    private String vagao;
-
-    @Element(name = "balsa", required = false)
-    private String balsa;
-
-    @ElementList(entry = "vol", inline = true, required = false)
-    private List<NFNotaInfoVolume> volumes;
-
-	return a;
-}
-
-
-function NFBaseModel() {
-
-	var a = [];
-
-		NFNotaInfoCobranca extends NFBase {
-    @Element(name = "fat", required = false)
-    private NFNotaInfoFatura fatura;
-
-    @ElementList(entry = "dup", inline = true, required = false)
-    private List<NFNotaInfoDuplicata> duplicatas;
-	return a;
-}
-
-
-function NFBaseModel() {
-
-	var a = [];
-
-		NFNotaInfoPagamento extends NFBase {
-
-    @Element(name = "tPag", required = true)
-    private NFFormaPagamentoMoeda formaPagamentoMoeda;
-
-    @Element(name = "vPag", required = true)
-    private String valorPagamento;
-
-    @Element(name = "card", required = false)
-    private NFNotaInfoCartao cartao;
-	return a;
-}
-
-
-function NFBaseModel() {
-
-	var a = [];
-
-		NFNotaInfoInformacoesAdicionais extends NFBase {
-    @Element(name = "infAdFisco", required = false)
-    private String informacoesAdicionaisInteresseFisco;
-
-    @Element(name = "infCpl", required = false)
-    private String informacoesComplementaresInteresseContribuinte;
-
-    @ElementList(entry = "obsCont", inline = true, required = false)
-    private List<NFNotaInfoObservacao> observacoesContribuinte;
-
-    @ElementList(entry = "obsFisco", inline = true, required = false)
-    private List<NFNotaInfoObservacao> observacoesFisco;
-
-    @ElementList(entry = "procRef", inline = true, required = false)
-    private List<NFNotaInfoProcessoReferenciado> processosRefenciado;
-	return a;
-}
-
-
-function NFBaseModel() {
-
-	var a = [];
-
-		a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-	return a;
-}
-
-
-function NFBaseModel() {
-
-	var a = [];
-
-		a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-	return a;
-}
-
-
-function NFBaseModel() {
-
-	var a = [];
-
-		a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-	return a;
-}
-
-
-function NFBaseModel() {
-
-	var a = [];
-
-		a.push({field :{campo : "id", tipo :"Integer",requerid : true ,primaryKey:true,forenkey : false,model:true,xml:true}});
-	return a;
-}
-
-*/
-
-//======================================================================================================================================================================================================
-
-//================ Produto
-//================================================================================================================================================================================= Produto =====================================================
 function ProdutoParentIdModel() {
 
     var a = [];
@@ -10513,6 +10867,43 @@ function ProdutoModel() {
             xml: true
         }
     });
+    a.push({
+        field: {
+            campo: "quant",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "unimed",
+            tipo: "UniMed",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+
+a.push({
+        field: {
+            campo: "marca",
+            tipo: "Marca",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
 
 
     return a;
@@ -10537,13 +10928,14 @@ function ProdutoEmpresaModel() {
         field: {
             campo: "prodId",
             tipo: "Integer",
-            requerid: true,
-            primaryKey: true,
+            requerid: false,
+            primaryKey: false,
             forenkey: false,
             model: true,
             xml: true
         }
     });
+
 
     a.push({
         field: {
@@ -10581,8 +10973,92 @@ function ProdutoEmpresaModel() {
     });
     a.push({
         field: {
-            campo: "estoque",
-            tipo: "EstoqueList",
+            campo: "estoqueList",
+            tipo: "List<Estoque>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+     a.push({
+        field: {
+            campo: "aplicacao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+     a.push({
+        field: {
+            campo: "fracao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+     a.push({
+        field: {
+            campo: "InfaddNFe",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+     a.push({
+        field: {
+            campo: "AnotInt",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "custoList",
+            tipo: "List<Preco>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "rentabilidadeList",
+            tipo: "List<Rentabilidade>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "porcaoList",
+            tipo: "List<Porcao>",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -10592,19 +11068,8 @@ function ProdutoEmpresaModel() {
     });
     a.push({
         field: {
-            campo: "custo",
-            tipo: "CustoList",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "preco",
-            tipo: "PrecoList",
+            campo: "precoList",
+            tipo: "List<Preco>",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -10616,6 +11081,18 @@ function ProdutoEmpresaModel() {
         field: {
             campo: "margem",
             tipo: "MargemList",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    
+    a.push({
+        field: {
+            campo: "margemlucro",
+            tipo: "Double",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -11015,6 +11492,7 @@ function COFINSModel() {
 //================ Categoria
 function ICMSOpInterModel() {
 
+
     var a = [];
     a.push({
         field: {
@@ -11022,6 +11500,18 @@ function ICMSOpInterModel() {
             tipo: "Integer",
             requerid: true,
             primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "prodid",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
             forenkey: false,
             model: true,
             xml: true
@@ -11082,6 +11572,7 @@ function ICMSOpInterModel() {
             xml: true
         }
     });
+
     a.push({
         field: {
             campo: "vrICMSPartUFDest",
@@ -11106,7 +11597,7 @@ function ICMSOpInterModel() {
     });
     a.push({
         field: {
-            campo: "vrICMSPartUFRemet",
+            campo: "vrICMSRelFCPUFDest",
             tipo: "Double",
             requerid: false,
             primaryKey: false,
@@ -11199,6 +11690,7 @@ function PISModel() {
 //================ Categoria
 function TributacaoModel() {
 
+
     var a = [];
     a.push({
         field: {
@@ -11213,10 +11705,21 @@ function TributacaoModel() {
     });
     a.push({
         field: {
+            campo: "descricao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
             campo: "prodId",
             tipo: "Produto",
-            requerid: true,
-            primaryKey: true,
+            requerid: false,
+            primaryKey: false,
             forenkey: false,
             model: true,
             xml: true
@@ -11235,8 +11738,8 @@ function TributacaoModel() {
     });
     a.push({
         field: {
-            campo: "iCMS",
-            tipo: "Icms",
+            campo: "imposto",
+            tipo: "NFNotaInfoItemImposto",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -11246,8 +11749,8 @@ function TributacaoModel() {
     });
     a.push({
         field: {
-            campo: "pIS",
-            tipo: "Pis",
+            campo: "impostoDevolvido",
+            tipo: "impostoDevolvido",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -11255,39 +11758,7 @@ function TributacaoModel() {
             xml: true
         }
     });
-    a.push({
-        field: {
-            campo: "cOFINS",
-            tipo: "Cofins",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "iPI",
-            tipo: "IPI",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-     a.push({
-        field: {
-            campo: "iCMSOpInter",
-            tipo: "ICMSOpInter",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
+   
     return a;
 }
 
@@ -12047,7 +12518,39 @@ function RentabilidadeItensModel() {
 
 //=================================================================================================================================================================================
 
+
+function ServicoByPlano() {
+
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "rentabilidadeTypeEnum",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    return a;
+}
+
 //================ Site
+
+
 function SiteModel() {
 
     var a = [];
@@ -12065,6 +12568,17 @@ function SiteModel() {
     a.push({
         field: {
             campo: "nome",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "comoTrabalhamos",
             tipo: "String",
             requerid: false,
             primaryKey: false,
@@ -12139,6 +12653,7 @@ function SiteModel() {
             xml: true
         }
     });
+
     a.push({
         field: {
             campo: "atorization",
@@ -12164,7 +12679,7 @@ function SiteModel() {
     a.push({
         field: {
             campo: "empresa",
-            tipo: "Integer",
+            tipo: "Empresa",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -12447,9 +12962,9 @@ function EnderecoModel() {
     a.push({
         field: {
             campo: "codIbge",
-            tipo: "Integer",
-            requerid: true,
-            primaryKey: true,
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
             forenkey: false,
             model: true,
             xml: true
@@ -12458,9 +12973,9 @@ function EnderecoModel() {
     a.push({
         field: {
             campo: "pais",
-            tipo: "String",
-            requerid: true,
-            primaryKey: true,
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
             forenkey: false,
             model: true,
             xml: true
@@ -12524,7 +13039,7 @@ function EnderecoModel() {
     a.push({
         field: {
             campo: "latitude",
-            tipo: "String",
+            tipo: "Double",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -12535,7 +13050,7 @@ function EnderecoModel() {
     a.push({
         field: {
             campo: "longitude",
-            tipo: "String",
+            tipo: "Double",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -12557,7 +13072,7 @@ function EnderecoModel() {
     a.push({
         field: {
             campo: "cidade",
-            tipo: "Integer",
+            tipo: "Cidade",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -12621,6 +13136,9 @@ function EmailModel() {
 //================ Orcamento
 function TituloModel() {
 
+
+    
+
     var a = [];
     a.push({
         field: {
@@ -12637,6 +13155,29 @@ function TituloModel() {
         field: {
             campo: "numero",
             tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "formapg",
+            tipo: "FormaPg",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+     a.push({
+        field: {
+            campo: "parcela",
+            tipo: "Integer",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -12668,28 +13209,6 @@ function TituloModel() {
     });
     a.push({
         field: {
-            campo: "docId",
-            tipo: "Integer",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "valor",
-            tipo: "Double",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
             campo: "observacao",
             tipo: "String",
             requerid: false,
@@ -12699,6 +13218,19 @@ function TituloModel() {
             xml: true
         }
     });
+
+    a.push({
+        field: {
+            campo: "descricao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
     a.push({
         field: {
             campo: "financeiroEnumValue",
@@ -12722,6 +13254,103 @@ function TituloModel() {
             xml: true
         }
     });
+
+    a.push({
+        field: {
+            campo: "dataPagamento",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "docId",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "tipoDoc",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "formaCadastro",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "intervalo",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "categoria",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valor",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "situacao",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
     return a;
 }
 
@@ -12775,6 +13404,17 @@ function BaixaTituloModel() {
             tipo: "Integer",
             requerid: true,
             primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "conta",
+            tipo: "Conta",
+            requerid: false,
+            primaryKey: false,
             forenkey: false,
             model: true,
             xml: true
@@ -13009,7 +13649,7 @@ function HistoricoModel() {
     a.push({
         field: {
             campo: "userId",
-            tipo: "Integer",
+            tipo: "String",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -13157,7 +13797,7 @@ function NoteModel() {
 
 //================ Orcamento
 function SocioModel() {
-
+// id,    socioAdm ,cota ,porcentagem ,parentId ,tabelaEnumValue ,emprId ,processId ,create_date ,create_user ,modify_date ,modify_user ,pessoa ,dataProlabore ,valorProlabore 
     var a = [];
     a.push({
         field: {
@@ -13172,8 +13812,52 @@ function SocioModel() {
     });
     a.push({
         field: {
+            campo: "socioAdm",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "pessoa",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
             campo: "nome",
             tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorProlabore",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "dataProlabore",
+            tipo: "Long",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -13723,9 +14407,9 @@ function ContatoModel() {
     });
     a.push({
         field: {
-            campo: "ledo",
+            campo: "lido",
             tipo: "Integer",
-            requerid: true,
+            requerid: false,
             defauld : 0,
             primaryKey: false,
             forenkey: false,
@@ -14378,17 +15062,6 @@ function dependenciaContasReceber() {
     return a
 }
 
-function EmpresaModel() {
-
-    var a = [];
-    a = EntidadeModel();
-    /*	a.push({field :{campo : "socios" column="id" select="SocioMap.fetchSocioByEmpresaId"/>
-    	a.push({field :{campo : "planoList" column="id" select="PlanoMap.fetchPlanoByEmpresa"/>
-    	a.push({field :{campo : "filialList" column="id" select="FilialMap.fetchAllFilialByEntidade"/>
-    	a.push({field :{campo : "depositoList" column="id" select="DepositoMap.fetchAllDepositoByEntidade"/>*/
-    return a;
-}
-
 function dependenciaProdutoParent() {
     var a = [];
     a.push({
@@ -14489,13 +15162,20 @@ function dependenciaRentabilidade() {
 
 
 dataModel = function() {
-
+PessoaTipoModel
     var oProjet = [];
 
     oProjet.push({
         classes: [{
             classe: "advogado",
             model: PessoaModel()
+        }, {
+            classe: "PessoaTipo",
+            model: PessoaTipoModel(),
+        }, {
+            classe: "Pessoa",
+            model: PessoaModel(),
+            dependencias: dependenciaCliente()
         }, {
             classe: "Cliente",
             model: PessoaModel(),
@@ -14619,6 +15299,13 @@ dataModel = function() {
             classe: "Empresa",
             model: EmpresaModel(),
             dependencias: dependenciaEmpresa()
+        },{
+            classe: "Entidade",
+            model: EmpresaModel(),
+            dependencias: dependenciaEmpresa()
+        },{
+            classe: "Transaction",
+            model: TransactionModel(),
         }, {
             classe: "Filial",
             model: EmpresaModel(),
@@ -14631,8 +15318,12 @@ dataModel = function() {
             classe: "Usuario",
             model: UsuarioModel(),
             dependencias: dependenciaUsuario()
+        },{
+            classe: "Users",
+            model: UsuarioModel(),
+            dependencias: dependenciaUsuario()
         }, {
-            classe: "UserRoles",
+            classe: "User_Roles",
             model: user_rolesModel()
         }, {
             classe: "Role",
@@ -14974,10 +15665,13 @@ dataModel = function() {
             model: BancoModel()
         }, {
             classe: "ContaCorrente",
-            model: ContaCorrenteModel()
+            model: ContaCorrenteModel()//ContaModel
         }, {
             classe: "Caixa",
             model: CaixaModel()
+        }, {
+            classe: "Conta",
+            model: ContaModel()
         }],
         interfaces: "Financeiro",
         local: "Financeiro"
@@ -15340,6 +16034,9 @@ dataModel = function() {
         classes: [{
             classe: "DoisValor",
             model: DoisValorModel()
+        },{
+            classe: "DoisValorType",
+            model: DoisValorTypeModel()
         }],
         interfaces: "DoisValor",
         local: "DoisValor"
