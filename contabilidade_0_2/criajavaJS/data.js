@@ -13720,17 +13720,7 @@ function HistoricoUtilModel() {
             xml: true
         }
     });
-    a.push({
-        field: {
-            campo: "tabelaEnumValue",
-            tipo: "Integer",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
+
 
     return a;
 }
@@ -14219,17 +14209,7 @@ function AgenciaModel() {
             xml: true
         }
     });
-    a.push({
-        field: {
-            campo: "parentId",
-            tipo: "Integer",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
+
     a.push({
         field: {
             campo: "enderecos",
