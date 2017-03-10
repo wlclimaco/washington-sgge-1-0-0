@@ -1205,7 +1205,7 @@ public class Objects {
 		contaspagar.setObservacao("observacao_6 - " + action.toString());
 		contaspagar.setFinanceiroEnumValue(1007);
 		contaspagar.setListBaixa(new ArrayList<BaixaTitulo>());
-		contaspagar.getListBaixa().add(insertBaixaTitulo(id, TabelaEnum.CONTASPAGAR, action));
+		contaspagar.getListBaixa().add(insertBaixaTitulo(null, TabelaEnum.CONTASPAGAR, action));
 		contaspagar.setTabelaEnum(tabela);
 		contaspagar.setParentId(id);
 		contaspagar.setEmprId(EMPID);

@@ -10,9 +10,12 @@ import com.qat.samples.sysmgmt.condpag.model.CondPag;
 import com.qat.samples.sysmgmt.condpag.model.FormaPg;
 import com.qat.samples.sysmgmt.conta.model.Conta;
 import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
+import com.qat.samples.sysmgmt.financeiro.model.BaixaTitulo;
 import com.qat.samples.sysmgmt.financeiro.model.Caixa;
 import com.qat.samples.sysmgmt.financeiro.model.ContasPagar;
 import com.qat.samples.sysmgmt.financeiro.model.ContasReceber;
+import com.qat.samples.sysmgmt.financeiro.model.request.BaixaTituloInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.BaixaTituloMaintenanceRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.CaixaInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.CaixaMaintenanceRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.CondPagInquiryRequest;
@@ -586,5 +589,67 @@ public interface IFinanceiroBAC
 	* @return the internal results response
 	*/
 		public InternalResultsResponse<Agencia> fetchAgenciasByRequest(AgenciaInquiryRequest request);
+		
+		//===================================### CONDPAG ####======================================
+		/**
+
+		/**
+		 * Insert condpag.
+		 *
+	* @param request the condpag maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<BaixaTitulo> insertBaixaTitulo(BaixaTituloMaintenanceRequest request);
+
+		/**
+	* Update BaixaTitulo.
+	*
+	* @param request the BaixaTitulo maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<BaixaTitulo> updateBaixaTitulo(BaixaTituloMaintenanceRequest request);
+
+		/**
+	* Delete BaixaTitulo.
+	*
+	* @param request the BaixaTitulo maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<BaixaTitulo> deleteBaixaTitulo(BaixaTituloMaintenanceRequest request);
+
+		/**
+	* Refresh BaixaTitulos.
+	*
+	* @param request containing the number to refresh with and whether to return the result
+	*/
+		public InternalResultsResponse<BaixaTitulo> refreshBaixaTitulos(RefreshRequest request);
+
+		/**
+	* Fetch BaixaTitulo by id.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<BaixaTitulo> fetchBaixaTituloById(FetchByIdRequest request);
+
+		/**
+	* Fetch all BaixaTitulos.
+	*
+	* @return the internal results response< BaixaTitulo>
+	*/
+		public InternalResultsResponse<BaixaTitulo> fetchAllBaixaTitulos(BaixaTitulo  condpag);
+
+		/**
+	* Fetch condpags by request.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<BaixaTitulo> fetchBaixaTitulosByRequest(BaixaTituloInquiryRequest request);
+
+
 
 }

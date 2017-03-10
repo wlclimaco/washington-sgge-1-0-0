@@ -25,9 +25,12 @@ import com.qat.samples.sysmgmt.condpag.model.CondPag;
 import com.qat.samples.sysmgmt.condpag.model.FormaPg;
 import com.qat.samples.sysmgmt.conta.model.Conta;
 import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
+import com.qat.samples.sysmgmt.financeiro.model.BaixaTitulo;
 import com.qat.samples.sysmgmt.financeiro.model.Caixa;
 import com.qat.samples.sysmgmt.financeiro.model.ContasPagar;
 import com.qat.samples.sysmgmt.financeiro.model.ContasReceber;
+import com.qat.samples.sysmgmt.financeiro.model.request.BaixaTituloInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.BaixaTituloMaintenanceRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.CaixaInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.CaixaMaintenanceRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.CondPagInquiryRequest;
@@ -1937,4 +1940,213 @@ private InternalResultsResponse<Agencia> processAgencia(ValidationContextIndicat
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
+	//===================================### CAIXA ####======================================
+		/**
+	/*
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bac.ICountyBAC#insertCaixa(com.qat.samples.sysmgmt.model.request.CaixaMaintenanceRequest
+	 * )
+	 */
+	@Override
+	public InternalResultsResponse<BaixaTitulo> insertBaixaTitulo(BaixaTituloMaintenanceRequest request)
+	{
+		InternalResultsResponse<BaixaTitulo> response =
+				processBaixaTitulo(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bac.IBaixaTituloBAC#updateBaixaTitulo(com.qat.samples.sysmgmt.model.request.BaixaTituloMaintenanceRequest
+	 * )
+	 */
+	@Override
+	public InternalResultsResponse<BaixaTitulo> updateBaixaTitulo(BaixaTituloMaintenanceRequest request)
+	{
+		InternalResultsResponse<BaixaTitulo> response =
+				processBaixaTitulo(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bac.IBaixaTituloBAC#deleteBaixaTitulo(com.qat.samples.sysmgmt.model.request.BaixaTituloMaintenanceRequest
+	 * )
+	 */
+	@Override
+	public InternalResultsResponse<BaixaTitulo> deleteBaixaTitulo(BaixaTituloMaintenanceRequest request)
+	{
+		InternalResultsResponse<BaixaTitulo> response =
+				processBaixaTitulo(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.bac.IBaixaTituloBAC#refreshBaixaTitulos(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+	 */
+	@Override
+	public InternalResultsResponse<BaixaTitulo> refreshBaixaTitulos(RefreshRequest request)
+	{
+		// This method is demo code only. Do not view this as a QAT Global Standard.
+		getFinanceiroBAR().deleteAllBaixaTitulos();
+		int refreshNumber = request.getRefreshInt();
+		refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
+
+		for (int i = 1; i <= refreshNumber; i++)
+		{
+		getFinanceiroBAR().insertBaixaTitulo(new BaixaTitulo());
+		}
+
+		// Call maintain to see if we need to return the caixa list and if so whether it should be paged or not
+		return maintainReturnListBaixaTitulo(request.getReturnList(), request.getReturnListPaged(),new BaixaTitulo());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.bac.IBaixaTituloBAC#fetchAllBaixaTitulos(BaixaTitulo caixa)
+	 */
+	@Override
+	public InternalResultsResponse<BaixaTitulo> fetchAllBaixaTitulos(BaixaTitulo caixa)
+	{
+		InternalResultsResponse<BaixaTitulo> response = new InternalResultsResponse<BaixaTitulo>();
+		response.getResultsList().addAll(getFinanceiroBAR().fetchAllBaixaTitulos(caixa).getResultsList());
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bac.IBaixaTituloBAC#fetchBaixaTituloById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+	 * )
+	 */
+	@Override
+	public InternalResultsResponse<BaixaTitulo> fetchBaixaTituloById(FetchByIdRequest request)
+	{
+		InternalResultsResponse<BaixaTitulo> response = new InternalResultsResponse<BaixaTitulo>();
+		// validate fetchId field
+		if (ValidationUtil.isNull(request.getFetchId()))
+		{
+			response.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
+			response.setStatus(SystemErrorCategory.SystemValidation);
+		}
+		else
+		{
+			response.getResultsList().add(getFinanceiroBAR().fetchBaixaTituloById(request));
+		}
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.bac.IBaixaTituloBAC#fetchBaixaTitulosByRequest(com.qat.samples.sysmgmt.model.request.
+	 * PagedInquiryRequest)
+	 */
+	@Override
+	public InternalResultsResponse<BaixaTitulo> fetchBaixaTitulosByRequest(BaixaTituloInquiryRequest request)
+	{
+		return getFinanceiroBAR().fetchBaixaTitulosByRequest(request);
+	}
+
+	/**
+	 * Process.
+	 *
+	 * @param indicator the indicator
+	 * @param persistType the persist type
+	 * @param request the request
+	 * @return the caixa response
+	 */
+	private InternalResultsResponse<BaixaTitulo> processBaixaTitulo(ValidationContextIndicator indicator,
+			PersistenceActionEnum persistType,
+			BaixaTituloMaintenanceRequest request)
+			{
+		InternalResultsResponse<BaixaTitulo> response = null;
+
+			// Persist
+			InternalResponse internalResponse = doPersistenceBaixaTitulo(request.getBaixaTitulo(), persistType);
+			if (internalResponse.isInError())
+			{
+				response = new InternalResultsResponse<BaixaTitulo>();
+				response.setStatus(internalResponse.getError());
+				response.addMessages(internalResponse.getMessageInfoList());
+				response.addMessage(DEFAULT_FINANCEIRO_BAC_EXCEPTION_MSG, MessageSeverity.Error,
+						MessageLevel.Object, new Object[] {internalResponse.errorToString()});
+
+				return response;
+			}
+
+			// Call maintainReurnList to see if we need to return the caixa list and if so whether it should be paged or
+			// not
+			response = maintainReturnListBaixaTitulo(request.getReturnList(), request.getReturnListPaged(),new BaixaTitulo());
+
+			return response;
+				}
+
+		/**
+		 * Do persistenceBaixaTitulo.
+		 *
+		 * @param request the request
+		 * @param updateType the update type
+		 * @return the internal response
+		 */
+		private InternalResponse doPersistenceBaixaTitulo(BaixaTitulo caixa, PersistenceActionEnum updateType)
+		{
+			switch (updateType)
+			{
+				case INSERT:
+					return getFinanceiroBAR().insertBaixaTitulo(caixa);
+
+				case UPDATE:
+					return getFinanceiroBAR().updateBaixaTitulo(caixa);
+
+				case DELETE:
+					return getFinanceiroBAR().deleteBaixaTituloById(caixa);
+				default:
+					if (LOG.isDebugEnabled())
+					{
+						LOG.debug("updateType missing!");
+					}
+					break;
+			}
+
+			return null;
+		}
+
+		/**
+		 * Maintain return list.
+		 *
+		 * @param request the request
+		 * @param response the response
+		 */
+		private InternalResultsResponse<BaixaTitulo> maintainReturnListBaixaTitulo(Boolean listIndicator, Boolean pageListIndicator,BaixaTitulo caixa)
+		{
+			// Fetch again if requested.
+			if (listIndicator)
+			{
+				// Fetch Paged is requested.
+				if (pageListIndicator)
+				{
+					BaixaTituloInquiryRequest request = new BaixaTituloInquiryRequest();
+					request.setPreQueryCount(true);
+					return fetchBaixaTitulosByRequest(request);
+				}
+				else
+				{
+					// otherwise return all rows not paged
+					return fetchAllBaixaTitulos(caixa);
+				}
+			}
+			else
+			{
+				return new InternalResultsResponse<BaixaTitulo>();
+			}
+		}
+		
 }

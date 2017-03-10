@@ -206,7 +206,7 @@ public IProdutoBAR getProdutoBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		Produto produtoResponse = getProdutoBAR().fetchProdutoById(request);
-		Assert.assertEquals(produtoResponse.getProduto(), "produto_1");
+		Assert.assertEquals(produtoResponse.getProduto(), "produto_0");
 		getProdutoBAR().updateProduto(produto);
 		produtoResponse = getProdutoBAR().fetchProdutoById(request);
 		Assert.assertEquals(produtoResponse.getProduto(), "produto_3 - UPDATE");

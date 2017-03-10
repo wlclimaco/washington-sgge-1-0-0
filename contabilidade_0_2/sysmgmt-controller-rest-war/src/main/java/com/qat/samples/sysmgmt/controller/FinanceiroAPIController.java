@@ -30,9 +30,12 @@ import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
 import com.qat.samples.sysmgmt.dp.model.response.BancoResponse;
 import com.qat.samples.sysmgmt.dp.model.response.ContaResponse;
 import com.qat.samples.sysmgmt.dp.model.response.FormaPgResponse;
+import com.qat.samples.sysmgmt.financeiro.model.BaixaTitulo;
 import com.qat.samples.sysmgmt.financeiro.model.Caixa;
 import com.qat.samples.sysmgmt.financeiro.model.ContasPagar;
 import com.qat.samples.sysmgmt.financeiro.model.ContasReceber;
+import com.qat.samples.sysmgmt.financeiro.model.request.BaixaTituloInquiryRequest;
+import com.qat.samples.sysmgmt.financeiro.model.request.BaixaTituloMaintenanceRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.CaixaInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.CaixaMaintenanceRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.CondPagInquiryRequest;
@@ -46,6 +49,7 @@ import com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberInquiryRequ
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberMaintenanceRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.FormaPgInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.FormaPgMaintenanceRequest;
+import com.qat.samples.sysmgmt.financeiro.model.response.BaixaTituloResponse;
 import com.qat.samples.sysmgmt.financeiro.model.response.CondPagResponse;
 import com.qat.samples.sysmgmt.financeiro.model.response.ContaCorrenteResponse;
 import com.qat.samples.sysmgmt.financeiro.model.response.ContasPagarResponse;
@@ -1142,6 +1146,124 @@ public class FinanceiroAPIController extends BaseController {
 					new Object[] { ex.toString() });
 		}
 		return contaspagarResponse;
+
+	}
+
+	// ===================================### CONTAS
+	// ####======================================
+	/**
+	 * Refresh contaspagars.
+	 *
+	 * @param refreshInt
+	 *            the refresh int
+	 * @param retList
+	 *            the ret list
+	 * @param retPaged
+	 *            the ret paged
+	 * @return the contaspagar response
+	 */
+	@RequestMapping(value = "/baixaTitulo/refresh", method = RequestMethod.GET)
+	@ResponseBody
+	public BaixaTituloResponse refreshBaixaTitulos(@RequestParam("refreshInt") Integer refreshInt,
+			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
+		BaixaTituloResponse baixaTitulospagarResponse = new BaixaTituloResponse();
+
+		try {
+			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
+			InternalResultsResponse<BaixaTitulo> internalResponse = getFinanceiroBAC().refreshBaixaTitulos(request);
+			ResponseHandler.handleOperationStatusAndMessages(baixaTitulospagarResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, baixaTitulospagarResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return baixaTitulospagarResponse;
+
+	}
+
+	/**
+	 * Fetch baixaTitulospagar paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the baixaTitulospagar response
+	 */
+	@RequestMapping(value = "/baixaTitulo/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public BaixaTituloResponse fetchBaixaTituloPaged(@RequestBody BaixaTituloInquiryRequest request) {
+		BaixaTituloResponse baixaTitulospagarResponse = new BaixaTituloResponse();
+		try {
+			InternalResultsResponse<BaixaTitulo> internalResponse = getFinanceiroBAC()
+					.fetchBaixaTitulosByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(baixaTitulospagarResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, baixaTitulospagarResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return baixaTitulospagarResponse;
+	}
+
+	/**
+	 * Insert baixaTitulospagar.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the baixaTitulospagar response
+	 */
+	@RequestMapping(value = "/baixaTitulo/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public BaixaTituloResponse insertBaixaTitulo(@RequestBody BaixaTituloMaintenanceRequest request) {
+		BaixaTituloResponse baixaTitulospagarResponse = new BaixaTituloResponse();
+		try {
+			InternalResultsResponse<BaixaTitulo> internalResponse = getFinanceiroBAC().insertBaixaTitulo(request);
+			ResponseHandler.handleOperationStatusAndMessages(baixaTitulospagarResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, baixaTitulospagarResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return baixaTitulospagarResponse;
+	}
+
+	/**
+	 * Update baixaTitulospagar.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the baixaTitulospagar response
+	 */
+	@RequestMapping(value = "/baixaTitulo/update", method = RequestMethod.POST)
+	@ResponseBody
+	public BaixaTituloResponse updateBaixaTitulo(@RequestBody BaixaTituloMaintenanceRequest request) {
+		BaixaTituloResponse baixaTitulospagarResponse = new BaixaTituloResponse();
+		try {
+			InternalResultsResponse<BaixaTitulo> internalResponse = getFinanceiroBAC().updateBaixaTitulo(request);
+			ResponseHandler.handleOperationStatusAndMessages(baixaTitulospagarResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, baixaTitulospagarResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return baixaTitulospagarResponse;
+	}
+
+	/**
+	 * Delete baixaTitulospagar.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the baixaTitulospagar response
+	 */
+	@RequestMapping(value = "/baixaTitulo/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public BaixaTituloResponse deleteBaixaTitulo(@RequestBody BaixaTituloMaintenanceRequest request) {
+		BaixaTituloResponse baixaTitulospagarResponse = new BaixaTituloResponse();
+
+		try {
+			InternalResultsResponse<BaixaTitulo> internalResponse = getFinanceiroBAC().deleteBaixaTitulo(request);
+			ResponseHandler.handleOperationStatusAndMessages(baixaTitulospagarResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, baixaTitulospagarResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return baixaTitulospagarResponse;
 
 	}
 

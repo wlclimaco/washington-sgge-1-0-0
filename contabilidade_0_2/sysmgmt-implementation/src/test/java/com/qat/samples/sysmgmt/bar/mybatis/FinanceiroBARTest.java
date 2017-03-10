@@ -253,9 +253,9 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteBaixaTitulo()
 	{
-		BaixaTitulo baixatitulo = Objects.insertBaixaTitulo(7, TabelaEnum.BAIXARTITULO, PersistenceActionEnum.INSERT);
+		BaixaTitulo baixatitulo = Objects.insertBaixaTitulo(7001, TabelaEnum.BAIXARTITULO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(7);
+		request.setFetchId(7001);
 		BaixaTitulo baixatituloResponse = getFinanceiroBAR().fetchBaixaTituloById(request);
 		Assert.assertEquals(baixatituloResponse, null);
 		getFinanceiroBAR().insertBaixaTitulo(baixatitulo);

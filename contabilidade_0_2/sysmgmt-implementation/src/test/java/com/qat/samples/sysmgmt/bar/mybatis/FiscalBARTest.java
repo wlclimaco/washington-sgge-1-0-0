@@ -274,7 +274,7 @@ public IFiscalBAR getFiscalBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		Cnae cnaeResponse = getFiscalBAR().fetchCnaeById(request);
-		Assert.assertEquals(cnaeResponse.getCnae(), "cnae_2");
+		Assert.assertEquals(cnaeResponse.getCnae(), "'cnae_2' - INSERT");
 		getFiscalBAR().updateCnae(cnae);
 		cnaeResponse = getFiscalBAR().fetchCnaeById(request);
 		Assert.assertEquals(cnaeResponse.getCnae(), "5555");

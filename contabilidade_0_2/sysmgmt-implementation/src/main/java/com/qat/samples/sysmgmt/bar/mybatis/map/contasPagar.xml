@@ -31,7 +31,7 @@
  <select id="fetchAllContasPagars" resultMap="ContasPagarResult">
     SELECT id,
 	<include refid="allContasPagarColumns" />
-   FROM contaspagar ORDER BY id ASC
+   FROM contaspagar ORDER BY dataVencimento ASC
  </select>
 
  <select id="fetchContasPagarById" parameterType="Integer" resultMap="ContasPagarResult">
@@ -43,13 +43,12 @@
  <select id="fetchAllContasPagarsRequest" parameterType="ContasPagarInquiryRequest" resultMap="ContasPagarResult">
 
 		SELECT id,<include refid="allContasPagarColumns" />
-  		  FROM contaspagar where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
+  		  FROM contaspagar where 0 = 0 <if test="id != null"> and id = #{id}</if> <if test="emprId != null"> and emprId = #{emprId}</if> ORDER BY dataVencimento ASC
+		  
 </select>
 
 <select id="fetchContasPagarRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM contaspagar WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM contaspagar WHERE id IS NOT NULL  <if test="id != null"> and id = #{id}</if> <if test="emprId != null"> and emprId = #{emprId}</if>
 
  </select>
 

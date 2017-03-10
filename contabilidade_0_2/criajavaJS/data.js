@@ -13869,7 +13869,7 @@ function SocioModel() {
     a.push({
         field: {
             campo: "porcentagem",
-            tipo: "Double",
+            tipo: "String",
             requerid: false,
             primaryKey: false,
             forenkey: false,
