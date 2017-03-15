@@ -69,13 +69,21 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
+<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>9.4-1206-jdbc42</version>
+</dependency>
+
+
+      <!--  <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>9.4-1201-jdbc41</version>
+            <version>9.6-1201-jdbc41</version>
             <scope>test</scope>
         </dependency>
-        <!-- If Oracle is needed there is no legal Maven download.  Get the ojbc6.jar and add it to the local Maven repository
+         If Oracle is needed there is no legal Maven download.  Get the ojbc6.jar and add it to the local Maven repository
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc6</artifactId>
