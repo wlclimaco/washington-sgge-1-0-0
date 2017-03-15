@@ -13455,7 +13455,29 @@ function BaixaTituloModel() {
     });
     a.push({
         field: {
-            campo: "Valor",
+            campo: "valor",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "seguro",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "outros",
             tipo: "Double",
             requerid: false,
             primaryKey: false,

@@ -23,6 +23,8 @@
     <result property="juros" column="juros"/>
     <result property="multa" column="multa"/>
     <result property="desconto" column="desconto"/>
+    <result property="seguro" column="seguro"/>
+    <result property="outros" column="outros"/>
 	<result property="emprId" column="emprId"/>
 	<result property="parentId" column="parentId"/>
 	<result property="processId" column="processId"/>
@@ -37,6 +39,8 @@
     <result property="id" column="id"/>
     <result property="dataBaixa" column="dataBaixa"/>
     <result property="observacao" column="observacao"/>
+    <result property="seguro" column="seguro"/>
+    <result property="outros" column="outros"/>
     <result property="valor" column="valor"/>
     <result property="juros" column="juros"/>
     <result property="multa" column="multa"/>
@@ -56,6 +60,8 @@ dataBaixa
 ,juros
 ,multa
 ,desconto
+,seguro
+,outros
 ,conta
 ,emprId
 ,parentId
@@ -72,6 +78,8 @@ dataBaixa
 #{valor},
 #{juros},
 #{multa},
+#{seguro},
+#{outros},
 #{desconto},
 #{conta.id},
 		#{emprId},

@@ -11,6 +11,15 @@
         <dependent-module archiveName="sysmgmt-interface-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/sysmgmt-interface/sysmgmt-interface">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="qat-framework-repository-mybatis-2.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/qat-framework-repository-mybatis/qat-framework-repository-mybatis">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="qat-framework-service-cxf-2.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/qat-framework-service-cxf/qat-framework-service-cxf">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="qat-framework-core-2.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/qat-framework-core/qat-framework-core">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/sysmgmt-service-ws-war/target/classes"/>
         <property name="component.exclusion.patterns" value="WEB-INF/lib/cglib-2.2.2.jar"/>
         <property name="context-root" value="qat-sysmgmt-sample-ws-service"/>

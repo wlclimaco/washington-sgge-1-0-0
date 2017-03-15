@@ -3,7 +3,6 @@ package com.qat.samples.sysmgmt.bar.mybatis.Financeiro;
 
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;

@@ -19,6 +19,8 @@ public class BaixaTitulo extends ModelCosmeDamiao
 	private Double valor;
 	private Double juros;
 	private Double multa;
+	private Double seguro;
+	private Double outros;
 	private Double desconto;
 	private Conta conta;
 
@@ -110,13 +112,29 @@ public class BaixaTitulo extends ModelCosmeDamiao
 		this.dataVencimento = dataVencimento;
 	}
 
+	public Double getSeguro() {
+		return seguro;
+	}
+
+	public void setSeguro(Double seguro) {
+		this.seguro = seguro;
+	}
+
+	public Double getOutros() {
+		return outros;
+	}
+
+	public void setOutros(Double outros) {
+		this.outros = outros;
+	}
+
 	@Override
 	public String toString() {
 		return "BaixaTitulo [getId()=" + getId() + ", getFinanId()=" + getFinanId() + ", getDataBaixa()="
 				+ getDataBaixa() + ", getObservacao()=" + getObservacao() + ", getValor()=" + getValor()
 				+ ", getJuros()=" + getJuros() + ", getMulta()=" + getMulta() + ", getDesconto()=" + getDesconto()
-				+ ", getConta()=" + getConta() + ", getDataVencimento()=" + getDataVencimento() + ", toString()="
-				+ super.toString() + "]";
+				+ ", getConta()=" + getConta() + ", getDataVencimento()=" + getDataVencimento() + ", getSeguro()="
+				+ getSeguro() + ", getOutros()=" + getOutros() + ", toString()=" + super.toString() + "]";
 	}
 
 
