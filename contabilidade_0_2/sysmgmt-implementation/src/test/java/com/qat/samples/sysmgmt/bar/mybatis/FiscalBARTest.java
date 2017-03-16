@@ -270,11 +270,11 @@ public IFiscalBAR getFiscalBAR()
 	@Test
 	public void testUpdateCnae()
 	{
-		Cnae cnae = Objects.cnae(1001, "NATIVE INSERT UPDATE",PersistenceActionEnum.UPDATE);
+		Cnae cnae = Objects.cnae(11001, "NATIVE INSERT UPDATE",PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1001);
+		request.setFetchId(11001);
 		Cnae cnaeResponse = getFiscalBAR().fetchCnaeById(request);
-		Assert.assertEquals(cnaeResponse.getCnae(), "'cnae_2' - INSERT");
+		Assert.assertEquals(cnaeResponse.getCnae(), "cnae_2");
 		getFiscalBAR().updateCnae(cnae);
 		cnaeResponse = getFiscalBAR().fetchCnaeById(request);
 		Assert.assertEquals(cnaeResponse.getCnae(), "5555");
