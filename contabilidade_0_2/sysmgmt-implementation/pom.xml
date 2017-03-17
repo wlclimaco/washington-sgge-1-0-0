@@ -40,6 +40,13 @@
             <version>1.5.5</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4-1206-jdbc42</version>
+        </dependency>
+
         <!-- Testing Dependencies. -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -69,15 +76,7 @@
             <scope>test</scope>
         </dependency>
 
-<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
-<dependency>
-    <groupId>org.postgresql</groupId>
-    <artifactId>postgresql</artifactId>
-    <version>9.4-1206-jdbc42</version>
-</dependency>
-
-
-      <!--  <dependency>
+        <!--  <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>9.6-1201-jdbc41</version>

@@ -3,6 +3,7 @@ package com.qat.samples.sysmgmt.bar.mybatis.Financeiro;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -52,6 +53,7 @@ import com.qat.samples.sysmgmt.pessoa.model.request.ContaInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.AcaoTypeEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
+import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
@@ -492,6 +494,27 @@ public InternalResponse insertContasPagar(ContasPagar contaspagar)
 	//	insertBaixaTitulo(contaspagar.getListBaixa().get(0));
 		BaixaTituloBARD.maintainBaixaTituloAssociations(contaspagar.getListBaixa(), response, contaspagar.getId(), TypeEnum.HIGH, AcaoTypeEnum.INSERT, TabelaEnum.CONTASPAGAR, getFinanceiroBAR(), statusBAR, historicoBAR, contaspagar.getEmprId(), contaspagar.getUserId(), historicoId, historicoId);
 	}
+	Double valor = 0.0;
+	valor = contaspagar.getValor();
+	Long dateV = contaspagar.getDataVencimento();
+	for (BaixaTitulo baixa : contaspagar.getListBaixa())
+	{
+
+		valor = valor + baixa.getValor();
+	}
+	Long dataNow = (new Date()).getTime();
+
+	ContasPagar contasPagars = new ContasPagar();
+	contasPagars.setId(contaspagar.getId());
+	if((dataNow <= dateV)&&(valor >= contaspagar.getValor()))
+	{
+		contasPagars.setSituacao(new DoisValores(391));
+	}
+	else if((dataNow > dateV)&&(valor < contaspagar.getValor()))
+	{
+		contasPagars.setSituacao(new DoisValores(393));
+	}
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CONTASPAGAR, contaspagar, response);
 	return response;
 }
 
