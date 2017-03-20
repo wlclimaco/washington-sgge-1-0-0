@@ -44,7 +44,7 @@
 
 		SELECT id,<include refid="allContasPagarColumns" />
   		  FROM contaspagar where 0 = 0 <if test="id != null"> and id = #{id}</if> <if test="emprId != null"> and emprId = #{emprId}</if> ORDER BY dataVencimento ASC
-		  
+
 </select>
 
 <select id="fetchContasPagarRowCount" resultType="Integer">
@@ -62,11 +62,19 @@
  <update id="updateContasPagar" parameterType="ContasPagar">
    UPDATE contaspagar SET
 <if test="numero!= null">numero = #{numero},</if>
+<if test="descricao!= null">descricao = #{descricao},</if>
+<if test="parcela!= null">parcela = #{parcela},</if>
 <if test="dataEmissao!= null">dataEmissao = #{dataEmissao},</if>
 <if test="dataVencimento!= null">dataVencimento = #{dataVencimento},</if>
+<if test="dataPagamento!= null">dataPagamento = #{dataPagamento},</if>
 <if test="docId!= null">docId = #{docId},</if>
-<if test="valor!= null">valor = #{valor},</if>
+<if test="tipoDoc!= null">tipoDoc = #{tipoDoc.id},</if>
+<if test="formaCadastro!= null">formaCadastro = #{formaCadastro.id},</if>
+<if test="intervalo!= null">intervalo = #{intervalo.id},</if>
+<if test="categoria!= null">categoria = #{categoria.id},</if>
 <if test="observacao!= null">observacao = #{observacao},</if>
+<if test="valor!= null">valor = #{valor},</if>
+<if test="situacao!= null">situacao = #{situacao.id},</if>
 <if test="financeiroEnumValue!= null">financeiroEnumValue = #{financeiroEnumValue},</if>
 <if test="fornecedor.id!= null">parentId = #{fornecedor.id},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
