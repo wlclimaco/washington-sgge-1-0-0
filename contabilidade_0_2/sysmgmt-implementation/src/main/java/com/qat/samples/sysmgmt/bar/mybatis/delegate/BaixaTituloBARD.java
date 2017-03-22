@@ -78,7 +78,14 @@ public final class BaixaTituloBARD extends SqlSessionDaoSupport
 					    conta = emailDAC.fetchContaById(new FetchByIdRequest(baixa.getConta().getId()));
 					    if (!ValidationUtil.isNull(conta))
 					    {
-						    value = conta.getSaldo() - baixa.getValor();
+					    	if(tabelaEnum.equals(TabelaEnum.CONTASPAGAR))
+					    	{
+					    		value = conta.getSaldo() - baixa.getValor();
+					    	}
+					    	else
+					    	{
+					    		value = conta.getSaldo() + baixa.getValor();
+					    	}
 						    conta.setSaldo(value);
 
 						 // atualizar ulttrans conta
@@ -94,6 +101,34 @@ public final class BaixaTituloBARD extends SqlSessionDaoSupport
 					break;
 				case DELETE:
 					count = emailDAC.deleteBaixaTituloById(baixa).hasSystemError();
+					if(!count)
+					{
+					 Conta conta = new Conta();
+					    Double value;
+
+						// voltar saldo conta
+					    conta = emailDAC.fetchContaById(new FetchByIdRequest(baixa.getConta().getId()));
+					    if (!ValidationUtil.isNull(conta))
+					    {
+					    	if(tabelaEnum.equals(TabelaEnum.CONTASPAGAR))
+					    	{
+					    		value = conta.getSaldo() + baixa.getValor();
+					    	}
+					    	else
+					    	{
+					    		value = conta.getSaldo() - baixa.getValor();
+					    	}
+
+						    conta.setSaldo(value);
+
+						 // atualizar ulttrans conta
+						    conta.setDataUltLanc((new Date()).getTime());
+
+						    emailDAC.updateConta(conta);
+
+						    emailDAC.deleteBaixaTituloById(baixa);
+					    }
+					}
 
 					break;
 			}

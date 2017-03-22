@@ -525,7 +525,11 @@ public InternalResponse insertContasPagar(ContasPagar contaspagar)
 @Override
 public InternalResponse updateContasPagar(ContasPagar contaspagar)
 {
+
 	InternalResponse response = new InternalResponse();
+	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.CONTA, getHistoricoBAR(), response);
+
+	contaspagar.setProcessId(historicoId);
 	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CONTASPAGAR, contaspagar, response);
 	return response;
 }
@@ -538,7 +542,20 @@ public InternalResponse updateContasPagar(ContasPagar contaspagar)
 public InternalResponse deleteContasPagarById(ContasPagar contaspagar)
 {
 	InternalResponse response = new InternalResponse();
+
+	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.CONTA, getHistoricoBAR(), response);
+
+	contaspagar.setProcessId(historicoId);
+
+
 	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONTASPAGAR, contaspagar, response);
+
+	if (!ValidationUtil.isNullOrEmpty(contaspagar.getListBaixa()))
+	{
+	//	insertBaixaTitulo(contaspagar.getListBaixa().get(0));
+		BaixaTituloBARD.maintainBaixaTituloAssociations(contaspagar.getListBaixa(), response, contaspagar.getId(), TypeEnum.HIGH, AcaoTypeEnum.INSERT, TabelaEnum.CONTASPAGAR, getFinanceiroBAR(), statusBAR, historicoBAR, contaspagar.getEmprId(), contaspagar.getUserId(), historicoId, historicoId);
+	}
+
 	return response;
 }
 
@@ -1078,8 +1095,46 @@ public static void fetchTipoBaixasByRequest(SqlSession sqlSession, PagedInquiryR
 @Override
 public InternalResponse insertContasReceber(ContasReceber contasreceber)
 {
+
+
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONTASRECEBER, contasreceber, response);
+
+	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.CONTA, getHistoricoBAR(), response);
+
+	contasreceber.setProcessId(historicoId);
+
+	if(contasreceber.getModelAction() == PersistenceActionEnum.INSERT)
+	{
+		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_CONTASRECEBER, contasreceber, response);
+	}
+
+	if (!ValidationUtil.isNullOrEmpty(contasreceber.getListBaixa()))
+	{
+	//	insertBaixaTitulo(contasreceber.getListBaixa().get(0));
+		BaixaTituloBARD.maintainBaixaTituloAssociations(contasreceber.getListBaixa(), response, contasreceber.getId(), TypeEnum.HIGH, AcaoTypeEnum.INSERT, TabelaEnum.CONTASRECEBER, getFinanceiroBAR(), statusBAR, historicoBAR, contasreceber.getEmprId(), contasreceber.getUserId(), historicoId, historicoId);
+	}
+	Double valor = 0.0;
+	valor = contasreceber.getValor();
+	Long dateV = contasreceber.getDataVencimento();
+	for (BaixaTitulo baixa : contasreceber.getListBaixa())
+	{
+
+		valor = valor + baixa.getValor();
+	}
+	Long dataNow = (new Date()).getTime();
+
+	ContasReceber contasPagars = new ContasReceber();
+	contasPagars.setId(contasreceber.getId());
+	if((dataNow <= dateV)&&(valor >= contasreceber.getValor()))
+	{
+		contasPagars.setSituacao(new DoisValores(391));
+	}
+	else if((dataNow > dateV)&&(valor < contasreceber.getValor()))
+	{
+		contasPagars.setSituacao(new DoisValores(393));
+	}
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_CONTASRECEBER, contasreceber, response);
+
 	return response;
 }
 
@@ -1102,8 +1157,22 @@ public InternalResponse updateContasReceber(ContasReceber contasreceber)
 @Override
 public InternalResponse deleteContasReceberById(ContasReceber contasreceber)
 {
+
 	InternalResponse response = new InternalResponse();
+
+	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.CONTA, getHistoricoBAR(), response);
+
+	contasreceber.setProcessId(historicoId);
+
+
 	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_CONTASRECEBER, contasreceber, response);
+
+	if (!ValidationUtil.isNullOrEmpty(contasreceber.getListBaixa()))
+	{
+	//	insertBaixaTitulo(contaspagar.getListBaixa().get(0));
+		BaixaTituloBARD.maintainBaixaTituloAssociations(contasreceber.getListBaixa(), response, contasreceber.getId(), TypeEnum.HIGH, AcaoTypeEnum.INSERT, TabelaEnum.CONTASRECEBER, getFinanceiroBAR(), statusBAR, historicoBAR, contasreceber.getEmprId(), contasreceber.getUserId(), historicoId, historicoId);
+	}
+
 	return response;
 }
 

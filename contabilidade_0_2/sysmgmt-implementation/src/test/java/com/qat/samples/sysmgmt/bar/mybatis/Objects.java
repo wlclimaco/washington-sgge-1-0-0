@@ -1255,9 +1255,7 @@ public class Objects {
 		baixatitulo.setJuros(new Double(10.00));
 		baixatitulo.setMulta(new Double(10.00));
 		baixatitulo.setDesconto(new Double(10.00));
-		baixatitulo.setConta(insertConta(id, tabela, action));
-		//baixatitulo.setTipoBaixaList(new ArrayList<TipoBaixa>());
-		//baixatitulo.getTipoBaixaList().add(insertTipoBaixa(id, TabelaEnum.BAIXATITULO, action));
+		baixatitulo.setConta(new Conta(1001));
 		baixatitulo.setTabelaEnum(tabela);
 		baixatitulo.setParentId(id);
 		baixatitulo.setEmprId(EMPID);

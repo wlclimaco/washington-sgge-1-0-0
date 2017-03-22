@@ -81,12 +81,18 @@ public IFinanceiroBAR getFinanceiroBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(7);
 		ContasPagar contaspagarResponse = getFinanceiroBAR().fetchContasPagarById(request);
+		Conta conta1 = getFinanceiroBAR().fetchContaById(new FetchByIdRequest(contaspagar.getListBaixa().get(0).getConta().getId()));
 		Assert.assertEquals(contaspagarResponse, null);
 		getFinanceiroBAR().insertContasPagar(contaspagar);
+		Conta conta = getFinanceiroBAR().fetchContaById(new FetchByIdRequest(contaspagar.getListBaixa().get(0).getConta().getId()));
 		contaspagarResponse = getFinanceiroBAR().fetchContasPagarById(request);
+		Assert.assertEquals(new Double(conta1.getSaldo() - conta.getSaldo()), contaspagarResponse.getListBaixa().get(0).getValor());
 		Assert.assertEquals(contaspagar.getId(), contaspagarResponse.getId());
+		contaspagar = Objects.insertContasPagar(7, TabelaEnum.CONTASPAGAR, PersistenceActionEnum.DELETE);
 		getFinanceiroBAR().deleteContasPagarById(contaspagar);
 		contaspagarResponse = getFinanceiroBAR().fetchContasPagarById(request);
+		conta = getFinanceiroBAR().fetchContaById(new FetchByIdRequest(contaspagar.getListBaixa().get(0).getConta().getId()));
+		Assert.assertEquals(new Double(conta1.getSaldo()), new Double(conta.getSaldo()));
 		Assert.assertEquals(contaspagarResponse, null);
 	}
 
@@ -429,17 +435,24 @@ public IFinanceiroBAR getFinanceiroBAR()
 @Test
 	public void testDeleteContasReceber()
 	{
-		ContasReceber contasreceber = Objects.insertContasReceber(7, TabelaEnum.CONTASRECEBER, PersistenceActionEnum.INSERT);
-		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(7);
-		ContasReceber contasreceberResponse = getFinanceiroBAR().fetchContasReceberById(request);
-		Assert.assertEquals(contasreceberResponse, null);
-		getFinanceiroBAR().insertContasReceber(contasreceber);
-		contasreceberResponse = getFinanceiroBAR().fetchContasReceberById(request);
-		Assert.assertEquals(contasreceber.getId(), contasreceberResponse.getId());
-		getFinanceiroBAR().deleteContasReceberById(contasreceber);
-		contasreceberResponse = getFinanceiroBAR().fetchContasReceberById(request);
-		Assert.assertEquals(contasreceberResponse, null);
+	ContasReceber contasreceber = Objects.insertContasReceber(7, TabelaEnum.CONTASRECEBER, PersistenceActionEnum.INSERT);
+	FetchByIdRequest request = new FetchByIdRequest();
+	request.setFetchId(7);
+	ContasReceber contasreceberResponse = getFinanceiroBAR().fetchContasReceberById(request);
+	Conta conta1 = getFinanceiroBAR().fetchContaById(new FetchByIdRequest(contasreceber.getListBaixa().get(0).getConta().getId()));
+	Assert.assertEquals(contasreceberResponse, null);
+	getFinanceiroBAR().insertContasReceber(contasreceber);
+	Conta conta = getFinanceiroBAR().fetchContaById(new FetchByIdRequest(contasreceber.getListBaixa().get(0).getConta().getId()));
+	contasreceberResponse = getFinanceiroBAR().fetchContasReceberById(request);
+	Assert.assertEquals(new Double( conta.getSaldo()), new Double(conta1.getSaldo() +contasreceberResponse.getListBaixa().get(0).getValor()));
+	Assert.assertEquals(contasreceber.getId(), contasreceberResponse.getId());
+	contasreceber = Objects.insertContasReceber(7, TabelaEnum.CONTASRECEBER, PersistenceActionEnum.DELETE);
+	getFinanceiroBAR().deleteContasReceberById(contasreceber);
+	contasreceberResponse = getFinanceiroBAR().fetchContasReceberById(request);
+	conta = getFinanceiroBAR().fetchContaById(new FetchByIdRequest(contasreceber.getListBaixa().get(0).getConta().getId()));
+	Assert.assertEquals(new Double(conta1.getSaldo()), new Double(conta.getSaldo()));
+	Assert.assertEquals(contasreceberResponse, null);
+
 	}
 
 	@Test
@@ -1063,6 +1076,7 @@ public IFinanceiroBAR getFinanceiroBAR()
 	public void setup()
 	{
 		executeSqlScript("conf/insertContasPagar.sql", false);
+		executeSqlScript("conf/insertContasReceber.sql", false);
 		executeSqlScript("conf/insertTitulo.sql", false);
 		executeSqlScript("conf/insertBaixaTitulo.sql", false);
 		executeSqlScript("conf/insertTipoBaixa.sql", false);

@@ -35,6 +35,11 @@ public class Conta extends ModelCosmeDamiao
 
 	}
 
+	public Conta(Integer id) {
+		super();
+		this.id = id;
+	}
+
 	public Integer getId() {
 		return id;
 	}
