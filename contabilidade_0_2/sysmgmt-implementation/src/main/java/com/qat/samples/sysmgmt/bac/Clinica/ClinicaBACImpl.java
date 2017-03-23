@@ -11,7 +11,6 @@ import com.qat.framework.model.MessageSeverity;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.SystemErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.validation.ValidationContext;
 import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
 import com.qat.framework.validation.ValidationUtil;
