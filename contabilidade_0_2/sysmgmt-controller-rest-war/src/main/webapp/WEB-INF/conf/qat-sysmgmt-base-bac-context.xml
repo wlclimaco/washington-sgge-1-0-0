@@ -42,6 +42,11 @@
 		<property name="validationController" ref="countyValidationController"/>
 	</bean>
 
+	<bean id="historicoBACTarget" class="com.qat.samples.sysmgmt.bac.Historico.HistoricoBACImpl">
+		<property name="historicoBAR" ref="historicoBARTarget"/>
+		<property name="validationController" ref="countyValidationController"/>
+	</bean>
+
 	<bean id="fiscalBACTarget" class="com.qat.samples.sysmgmt.bac.Fiscal.FiscalBACImpl">
 		<property name="fiscalBAR" ref="fiscalBARTarget"/>
 		<property name="validationController" ref="countyValidationController"/>
@@ -91,6 +96,7 @@
 		<property name="configuracaoBAR" ref="configuracaoBARTarget"/>
 		<property name="validationController" ref="countyValidationController"/>
 	</bean>
+
 	<!-- ========================= ASPECT CONFIGURATION ======================== -->
 
 	<!-- ========================= InternalResponse status categories ========== -->

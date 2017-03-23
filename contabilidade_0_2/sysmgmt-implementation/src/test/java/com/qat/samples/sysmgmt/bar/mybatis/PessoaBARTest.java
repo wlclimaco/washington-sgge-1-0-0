@@ -2,8 +2,6 @@
 package com.qat.samples.sysmgmt.bar.mybatis;
 
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -24,8 +22,6 @@ import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.advocacia.Advogado;
 import com.qat.samples.sysmgmt.advocacia.request.AdvogadoInquiryRequest;
-import com.qat.samples.sysmgmt.banco.model.Banco;
-import com.qat.samples.sysmgmt.banco.model.BancoPessoa;
 import com.qat.samples.sysmgmt.bar.Pessoa.IPessoaBAR;
 import com.qat.samples.sysmgmt.clinica.model.request.MedicoInquiryRequest;
 import com.qat.samples.sysmgmt.clinica.model.request.PacienteInquiryRequest;
@@ -33,13 +29,6 @@ import com.qat.samples.sysmgmt.condominio.model.Inquilino;
 import com.qat.samples.sysmgmt.condominio.model.Sindico;
 import com.qat.samples.sysmgmt.condominio.model.request.InquilinoInquiryRequest;
 import com.qat.samples.sysmgmt.condominio.model.request.SindicoInquiryRequest;
-import com.qat.samples.sysmgmt.condpag.model.CondPag;
-import com.qat.samples.sysmgmt.condpag.model.CondPagPessoa;
-import com.qat.samples.sysmgmt.condpag.model.FormaPg;
-import com.qat.samples.sysmgmt.condpag.model.FormaPgPessoa;
-import com.qat.samples.sysmgmt.contato.model.Contato;
-import com.qat.samples.sysmgmt.contato.model.ContatoItens;
-import com.qat.samples.sysmgmt.contato.model.ContatoStatusEnum;
 import com.qat.samples.sysmgmt.dp.model.request.FuncionarioInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.Cliente;
 import com.qat.samples.sysmgmt.pessoa.model.Fornecedor;
@@ -51,12 +40,7 @@ import com.qat.samples.sysmgmt.pessoa.model.Transportador;
 import com.qat.samples.sysmgmt.pessoa.model.request.ClienteInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.request.FornecedorInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.request.TransportadorInquiryRequest;
-import com.qat.samples.sysmgmt.util.model.Cidade;
-import com.qat.samples.sysmgmt.util.model.Documento;
-import com.qat.samples.sysmgmt.util.model.Email;
-import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
-import com.qat.samples.sysmgmt.util.model.Telefone;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 
 @ContextConfiguration(locations = {
@@ -177,13 +161,14 @@ public IPessoaBAR getPessoaBAR()
 @Test
 	public void testDeleteCliente()
 	{
-		Cliente cliente = Objects.insertCliente(1090, TabelaEnum.ADVOCACIA,PersistenceActionEnum.INSERT);
+		Cliente cliente = Objects.insertCliente(1090, TabelaEnum.CLIENTE,PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1090);
 		Cliente clienteResponse = getPessoaBAR().fetchClienteById(request);
 		Assert.assertEquals(clienteResponse, null);
 		getPessoaBAR().insertCliente(cliente);
 		clienteResponse = getPessoaBAR().fetchClienteById(request);
+		Assert.assertEquals(PessoaTypeEnum.CLIENTE.getLabelKey().toLowerCase(), clienteResponse.getPessoaTipo().get(0).getPessoaTypeEnum().name().toLowerCase());
 		Assert.assertEquals(cliente.getNome(), clienteResponse.getNome());
 		getPessoaBAR().deleteClienteById(cliente);
 		clienteResponse = getPessoaBAR().fetchClienteById(request);

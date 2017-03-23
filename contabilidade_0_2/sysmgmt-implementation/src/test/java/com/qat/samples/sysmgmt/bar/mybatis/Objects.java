@@ -284,7 +284,7 @@ public class Objects {
 		cliente.setDatanasc(a.getTime());
 		cliente.setFoto("foto_8 - " + action.toString());
 		cliente.setPessoaTipo(new ArrayList<PessoaTipo>());
-		cliente.getPessoaTipo().add(new PessoaTipo(PessoaTypeEnum.ADVOGADO,id,action));
+		cliente.getPessoaTipo().add(new PessoaTipo(PessoaTypeEnum.CLIENTE,id,action));
 		cliente.setSexo(1010);
 		cliente.setEnderecos(new ArrayList<Endereco>());
 		cliente.getEnderecos().add(insertEndereco(id, TabelaEnum.CLIENTE, action));

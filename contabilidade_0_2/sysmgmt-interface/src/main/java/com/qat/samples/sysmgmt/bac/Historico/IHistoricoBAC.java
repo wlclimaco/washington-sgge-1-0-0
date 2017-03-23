@@ -3,9 +3,7 @@ package com.qat.samples.sysmgmt.bac.Historico;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.historico.model.Historico;
 import com.qat.samples.sysmgmt.historico.model.request.HistoricoInquiryRequest;
-import com.qat.samples.sysmgmt.historico.model.request.HistoricoMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
-import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
  * The Interface IHistoricoBAC. (Business Area Component - BAC)

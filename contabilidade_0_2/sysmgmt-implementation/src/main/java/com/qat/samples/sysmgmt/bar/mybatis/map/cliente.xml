@@ -39,7 +39,7 @@
  <select id="fetchAllClientesRequest" parameterType="ClienteInquiryRequest" resultMap="clienteResult">
 
            	select pessoa.* from pessoa , pessoaTipo where pessoaTipo.parentId = pessoa.id and pessoaTipo.pessoaTypeEnum = 1 <if test="emprId != null"> and pessoa.emprId = #{emprId}</if>
-           	<if test="id != null and id > 0"> and pessoa.id = #{id}</if> ORDER BY pessoa.id ASC
+           	<if test="id != null and id > 0"> and pessoa.id = #{id}</if> ORDER BY pessoa.nome ASC
 
 
 

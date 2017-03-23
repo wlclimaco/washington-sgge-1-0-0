@@ -98,5 +98,9 @@
 		<constructor-arg value="com.qat.samples.sysmgmt.bac.Dp.IDpBAC" />
 	</bean>
 
+	<bean id="historicoBACTarget" class="org.mockito.Mockito" factory-method="mock">
+		<constructor-arg value="com.qat.samples.sysmgmt.bac.Historico.IHistoricoBAC" />
+	</bean>
+
 
 </beans>
