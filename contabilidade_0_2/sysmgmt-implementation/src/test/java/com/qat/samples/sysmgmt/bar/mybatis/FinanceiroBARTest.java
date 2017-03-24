@@ -19,6 +19,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.qat.framework.model.BaseModel.PersistenceActionEnum;
+import com.qat.framework.model.SortExpression;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.banco.model.Banco;
@@ -40,8 +41,6 @@ import com.qat.samples.sysmgmt.financeiro.model.request.ContaCorrenteInquiryRequ
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasPagarInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.ContasReceberInquiryRequest;
 import com.qat.samples.sysmgmt.financeiro.model.request.FormaPgInquiryRequest;
-import com.qat.samples.sysmgmt.pessoa.model.Cliente;
-import com.qat.samples.sysmgmt.pessoa.model.Fornecedor;
 import com.qat.samples.sysmgmt.pessoa.model.request.ContaInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
@@ -133,10 +132,14 @@ public IFinanceiroBAR getFinanceiroBAR()
 		ContasPagarInquiryRequest request = new ContasPagarInquiryRequest();
 		request.setPreQueryCount(true);
 		request.setStartPage(0);
-		request.setPageSize(3);
+		request.setPageSize(4);
+		request.setBuscaTable("id");
+		request.setBuscaValue("1003");
+		request.setColumnName1(1);
+		request.setDirection1(com.qat.framework.model.SortExpression.Direction.Descending);
 		InternalResultsResponse<ContasPagar> response = getFinanceiroBAR().fetchContasPagarsByRequest(request);
 		//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
-		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+	//	Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 1);
 		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
 		// check for valid and precount and start 2nd page
 		request.setPreQueryCount(true);
