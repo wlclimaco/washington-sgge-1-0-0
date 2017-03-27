@@ -89,12 +89,17 @@ cfop
  <select id="fetchAllCfopsRequest" parameterType="CfopInquiryRequest" resultMap="CfopResult">
 
 		SELECT id,<include refid="allCfopColumns" />
-  		  FROM cfop where 0 = 0  <if test="id != null"> and id = #{id}</if> ORDER BY id ASC
-		
+  		  FROM cfop where 0 = 0 <if test="id != null"> and id = #{id}</if> <if test="emprId != null"> and emprId = #{emprId}</if>
+		  <if test="buscaTable != null"> and ${buscaTable} = ${buscaValue}</if>
+		  <if test="columnName1 != null">ORDER BY  ${columnName1} ${direction1}</if>
+  		  OFFSET ( #{startPage} * #{pageSize} )
+		  LIMIT #{pageSize}
+
+
 </select>
 
 <select id="fetchCfopRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM cfop WHERE id IS NOT NULL 
+		SELECT COUNT(*) AS RECORD_COUNT FROM cfop WHERE id IS NOT NULL
 		<if test="id != null"> and id = id</if>
 
  </select>
