@@ -43,11 +43,14 @@
  <select id="fetchAllContasPagarsRequest" parameterType="ContasPagarInquiryRequest" resultMap="ContasPagarResult">
 
 		SELECT id,<include refid="allContasPagarColumns" />
-  		  FROM contaspagar where 0 = 0 <if test="id != null"> and id = #{id}</if> <if test="emprId != null"> and emprId = #{emprId}</if>
-		  <if test="buscaTable != null"> and ${buscaTable} = ${buscaValue}</if>
-		  <if test="columnName1 != null">ORDER BY  ${columnName1} DESC</if>
-  		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
+  		  FROM contaspagar where 0 = 0
+  		  <if test="id != null"> and id = #{id}</if>
+  		  <if test="emprId != null"> and emprId = #{emprId}</if>
+  		  <if test="descricao != null"> and descricao = #{descricao}</if>
+  		  <if test="dataInicial != null"> and dataVencimento between  #{dataInicial} and #{dataFinal}</if>
+  		  <if test="status != null"> and status = #{status.id}</if>
+		 ORDER BY  dataVencimento DESC
+
 
 </select>
 
