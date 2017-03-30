@@ -214,7 +214,7 @@ private InternalResultsResponse<DoisValores> processDoisValores(ValidationContex
 
 
 		// Persist
-		InternalResponse internalResponse = doPersistenceDoisValores(request.getDoisValores(), persistType);
+		InternalResponse internalResponse = doPersistenceDoisValores(request.getDoisValor(), persistType);
 		if (internalResponse.isInError())
 		{
 			response = new InternalResultsResponse<DoisValores>();

@@ -3188,7 +3188,7 @@ private InternalResultsResponse<Condominio> processCondominio(ValidationContextI
 				//}
 
 					// Persist
-					InternalResponse internalResponse = doPersistenceDoisValores(request.getDoisValores(), persistType);
+					InternalResponse internalResponse = doPersistenceDoisValores(request.getDoisValor(), persistType);
 					if (internalResponse.isInError())
 					{
 						response = new InternalResultsResponse<DoisValores>();
@@ -3336,7 +3336,7 @@ private InternalResultsResponse<Condominio> processCondominio(ValidationContextI
 				return response;
 			}
 
-			
+
 
 			/*
 			 * (non-Javadoc)
@@ -3453,7 +3453,7 @@ private InternalResultsResponse<Condominio> processCondominio(ValidationContextI
 					}
 				}
 
-				
+
 				//===================================### MENU ####======================================
 				/**
 			/*
