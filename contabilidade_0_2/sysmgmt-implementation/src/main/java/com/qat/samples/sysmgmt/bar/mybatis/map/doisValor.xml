@@ -84,7 +84,11 @@
      SELECT id,<include refid="allDoisValorColumns" />
            FROM doisvalor where 0 = 0
            <if test="paginaId != null"> and pagina = #{paginaId}</if>
-           <if test="doisValorType != null"> and doisvalortype = #{doisValorType}</if> ORDER BY value ASC
+           <if test="doisValorType != null"> and doisvalortype = #{doisValorType}</if>
+           <if test="descricao != null"> and descricao = #{descricao}</if>
+           <if test="nome != null"> and nome = #{nome}</if>
+           <if test="value != null"> and value = #{value}</if>
+           ORDER BY id ASC
 
 </select>
 

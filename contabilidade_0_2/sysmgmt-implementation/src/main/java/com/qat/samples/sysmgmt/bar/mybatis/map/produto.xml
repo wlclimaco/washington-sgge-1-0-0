@@ -93,9 +93,8 @@ cdBarras
  <select id="fetchAllProdutosRequest" parameterType="ProdutoInquiryRequest" resultMap="ProdutoResult">
 
      SELECT id,<include refid="allProdutoColumns" />
-           FROM produto where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
-       OFFSET ( #{startPage} * #{pageSize} )
-       LIMIT #{pageSize}
+           FROM produto where 0 = 0 <if test="emprId != null"> and emprId = #{emprId}</if> <if test="ncm != null"> and ncm = #{ncm}</if> ORDER BY id ASC
+
 </select>
 
 <select id="fetchProdutoRowCount" resultType="Integer">

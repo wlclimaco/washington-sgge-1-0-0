@@ -8,8 +8,14 @@ public class DoisValoresInquiryRequest extends PagedInquiryRequest
 
 	/** The criteria. */
 	private Integer paginaId;
-	
+
 	private Integer doisValorType;
+
+	private String nome;
+
+	private String descricao;
+
+	private String value;
 
 
 
@@ -33,10 +39,36 @@ public class DoisValoresInquiryRequest extends PagedInquiryRequest
 		this.doisValorType = doisValorType;
 	}
 
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
 	@Override
 	public String toString() {
 		return "DoisValoresInquiryRequest [getPaginaId()=" + getPaginaId() + ", getDoisValorType()="
-				+ getDoisValorType() + ", toString()=" + super.toString() + "]";
+				+ getDoisValorType() + ", getNome()=" + getNome() + ", getDescricao()=" + getDescricao()
+				+ ", getValue()=" + getValue() + ", toString()=" + super.toString() + "]";
 	}
 
 

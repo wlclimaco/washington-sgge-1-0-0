@@ -12,9 +12,12 @@ public class ProdutoInquiryRequest extends PagedInquiryRequest
 	/** The criteria. */
 	private ProdutoCriteria criteria;
 
+	private String ncm;
+
+
 	/**
 	 * Gets the criteria.
-	 * 
+	 *
 	 * @return the criteria
 	 */
 	public ProdutoCriteria getCriteria()
@@ -28,7 +31,7 @@ public class ProdutoInquiryRequest extends PagedInquiryRequest
 
 	/**
 	 * Sets the criteria.
-	 * 
+	 *
 	 * @param criteria the criteria
 	 */
 	public void setCriteria(ProdutoCriteria criteria)
@@ -36,14 +39,19 @@ public class ProdutoInquiryRequest extends PagedInquiryRequest
 		this.criteria = criteria;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+
+	public String getNcm() {
+		return ncm;
+	}
+
+	public void setNcm(String ncm) {
+		this.ncm = ncm;
+	}
+
 	@Override
-	public String toString()
-	{
-		return "ProdutoInquiryRequest [getCriteria()=" + getCriteria() + ", toString()=" + super.toString() + "]";
+	public String toString() {
+		return "ProdutoInquiryRequest [getCriteria()=" + getCriteria() + ", getNcm()=" + getNcm() + ", toString()="
+				+ super.toString() + "]";
 	}
 
 }
