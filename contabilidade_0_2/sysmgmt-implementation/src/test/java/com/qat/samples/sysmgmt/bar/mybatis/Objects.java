@@ -4022,7 +4022,8 @@ public static NFNotaInfoCobranca insertNFNotaInfoCobranca(Integer id,TabelaEnum 
 		Date a = new Date();
 		nfnotainfocobranca.setId(id);
 		nfnotainfocobranca.setFatura(insertNFNotaInfoFatura(null, tabela, action));
-		nfnotainfocobranca.setDuplicatas(insertNFNotaInfoDuplicata(null, tabela, action));
+		nfnotainfocobranca.setDuplicatas(new ArrayList<NFNotaInfoDuplicata>());
+		nfnotainfocobranca.getDuplicatas().add(insertNFNotaInfoDuplicata(null, tabela, action));
 		nfnotainfocobranca.setParentId(id);
 		nfnotainfocobranca.setEmprId(1);
 		nfnotainfocobranca.setModifyDateUTC(a.getTime());

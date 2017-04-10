@@ -26,12 +26,11 @@
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
 <collection property="fatura" column="fatura" select="RegimeMap.fetchRegimeById"/>
-    <collection property="duplicatas" column="duplicatas" select="RegimeMap.fetchRegimeById"/>
+<collection property="duplicatas" column="id" select="RegimeMap.fetchRegimeById"/>
   </resultMap>
 
   <sql id="allNFNotaInfoCobrancaColumns">
 fatura
-,duplicatas
 ,parentId
 ,tabelaEnumValue
 ,emprId
@@ -44,7 +43,6 @@ fatura
 </sql>
 <sql id="allNFNotaInfoCobrancaValues">
 #{fatura.id},
-#{duplicatas.id},
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -91,7 +89,6 @@ fatura
  <update id="updateNFNotaInfoCobranca" parameterType="NFNotaInfoCobranca">
    UPDATE nfnotainfocobranca SET
 <if test="fatura!= null">fatura = #{fatura.id},</if>
-<if test="duplicatas!= null">duplicatas = #{duplicatas.id},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>

@@ -90,9 +90,9 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNota()
 	{
-		NFNota nfnota = Objects.insertNFNota(40002, TabelaEnum.NFNOTA, PersistenceActionEnum.INSERT);
+		NFNota nfnota = Objects.insertNFNota(40003, TabelaEnum.NFNOTA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(40002);
+		request.setFetchId(40003);
 		NFNota nfnotaResponse = getNFeBAR().fetchNFNotaById(request);
 		Assert.assertEquals(nfnotaResponse, null);
 		getNFeBAR().insertNFNota(nfnota);

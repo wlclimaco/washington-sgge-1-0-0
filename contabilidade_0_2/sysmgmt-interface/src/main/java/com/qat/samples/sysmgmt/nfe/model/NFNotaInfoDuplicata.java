@@ -1,6 +1,8 @@
 /** create by system gera-java version 1.0.0 28/09/2016 14:58 : 22*/
 package com.qat.samples.sysmgmt.nfe.model;
 
+import com.qat.samples.sysmgmt.util.model.DoisValores;
+
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
@@ -18,6 +20,10 @@ public class NFNotaInfoDuplicata extends NFBase
 
     /** The econtabil valorDuplicata for the NFNotaInfoDuplicata. */
     private String valorDuplicata;
+
+    private String receberAgora;
+
+    private DoisValores tipoDoc;
 
 
 
@@ -67,12 +73,40 @@ public class NFNotaInfoDuplicata extends NFBase
 
 
 
+	public String getReceberAgora() {
+		return receberAgora;
+	}
+
+
+
+	public void setReceberAgora(String receberAgora) {
+		this.receberAgora = receberAgora;
+	}
+
+
+
+	public DoisValores getTipoDoc() {
+		return tipoDoc;
+	}
+
+
+
+	public void setTipoDoc(DoisValores tipoDoc) {
+		this.tipoDoc = tipoDoc;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "NFNotaInfoDuplicata [getNumeroDuplicata()=" + getNumeroDuplicata() + ", getDataVencimento()="
-				+ getDataVencimento() + ", getValorDuplicata()=" + getValorDuplicata() + ", toString()="
-				+ super.toString() + "]";
+				+ getDataVencimento() + ", getValorDuplicata()=" + getValorDuplicata() + ", getReceberAgora()="
+				+ getReceberAgora() + ", getTipoDoc()=" + getTipoDoc() + ", toString()=" + super.toString() + "]";
 	}
+
+
+
+
 
 
  }

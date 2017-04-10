@@ -13,6 +13,7 @@ import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Nfe.INFeBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.nfe.model.NFInfoReferenciada;
 import com.qat.samples.sysmgmt.nfe.model.NFNotaInfoDuplicata;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
@@ -40,73 +41,53 @@ public final class NFNotaInfoDuplicataBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainNFNotaInfoDuplicataAssociations(NFNotaInfoDuplicata nfnotainfoduplicata,
+	public static Integer maintainNFNotaInfoDuplicataAssociations(List<NFNotaInfoDuplicata> nfnotainfoduplicatas,
 			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
 			TabelaEnum tabelaEnum, INFeBAR nfnotainfoduplicataDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
-		if (ValidationUtil.isNull(nfnotainfoduplicata))
+		if (ValidationUtil.isNull(nfnotainfoduplicatas))
 		{
 			return 0;
 		}
+		for (NFNotaInfoDuplicata nfnotainfoduplicata : nfnotainfoduplicatas)
+		{
+			if (ValidationUtil.isNull(nfnotainfoduplicata.getModelAction()))
+			{
+				continue;
+			}
 		// For Each Contact...
 			// Make sure we set the parent key
 			nfnotainfoduplicata.setParentId(parentId);
 			nfnotainfoduplicata.setTabelaEnum(tabelaEnum);
 			nfnotainfoduplicata.setProcessId(processId);
 
-		//	if (ValidationUtil.isNull(nfnotainfoduplicata.getModelAction()))
-		//	{
-		//		continue;
-		//	}
+			if (ValidationUtil.isNull(nfnotainfoduplicata.getModelAction()))
+			{
+				continue;
+			}
 			switch (nfnotainfoduplicata.getModelAction())
 			{
 				case INSERT:
 					count = nfnotainfoduplicataDAC.insertNFNotaInfoDuplicata(nfnotainfoduplicata).hasSystemError();
-					if (count == true)
-					{
-						Status status = new Status();
-						status.setStatus(CdStatusTypeEnum.ATIVO);
-						List<Status> statusList = new ArrayList<Status>();
-						statusList.add(status);
-						count =
-								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.NFNOTAINFODUPLICATA, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
 					break;
 				case UPDATE:
 					count = nfnotainfoduplicataDAC.updateNFNotaInfoDuplicata(nfnotainfoduplicata).hasSystemError();
-					if (count == true)
-					{
-						count =
-								StatusBARD.maintainStatusAssociations(nfnotainfoduplicata.getStatusList(), response, nfnotainfoduplicata.getId(),
-										null,
-										AcaoEnum.UPDATE, UserId, empId, TabelaEnum.NFNOTAINFODUPLICATA, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case DELETE:
 					count = nfnotainfoduplicataDAC.deleteNFNotaInfoDuplicataById(nfnotainfoduplicata).hasSystemError();
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.DELETADO);
-					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
-					count =
-							StatusBARD.maintainStatusAssociations(statusList, response, nfnotainfoduplicata.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.NFNOTAINFODUPLICATA, statusDAC, historicoDAC,
-									processId, historicoId);
 
 					break;
 			}
-		
+		}
 		if(count == true ){
 			return 1;
 		}else{
 			return 0;
 		}
-		
+
 	}
 }
