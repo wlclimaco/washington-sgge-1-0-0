@@ -1357,7 +1357,7 @@ public class NFeBARImpl extends SqlSessionDaoSupport implements INFeBAR {
 	IVendasBAR vendasBAR;
 
 	ICadastrosBAR cadastrosBAR;
-	
+
 	INFNotaInfoItemBAR nfnotaInfoItemBAR;
 
 	public IStatusBAR getStatusBAR() {
@@ -1402,7 +1402,7 @@ public class NFeBARImpl extends SqlSessionDaoSupport implements INFeBAR {
 		this.cadastrosBAR = cadastrosBAR;
 	}
 
-	
+
 	public INFNotaInfoItemBAR getNfnotaInfoItemBAR() {
 		return nfnotaInfoItemBAR;
 	}
@@ -1661,9 +1661,18 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 							nfnotainfo.getCreateUser(), nfnotainfo.getTransactionId(), nfnotainfo.getTransactionId());
 		}
 
+		if (!ValidationUtil.isNullOrEmpty(nfnotainfo.getCobranca().getDuplicatas()))
+		{
+			count +=
+					NFNotaInfoDuplicataBARD.maintainNFNotaInfoDuplicataAssociations(nfnotainfo.getCobranca().getDuplicatas(), response, nfnotainfo.getCobranca().getId(), null,
+							null,
+							TabelaEnum.NFNOTAINFOCOBRANCA, getNfeBAR(), statusBAR, historicoBAR, nfnotainfo.getCobranca().getId(),
+							nfnotainfo.getCobranca().getCreateUser(), nfnotainfo.getCobranca().getTransactionId(), nfnotainfo.getCobranca().getTransactionId());
+		}
+
 		if (!ValidationUtil.isNullOrEmpty(nfnotainfo.getItens()))
 		{
-			count += 
+			count +=
 					NFNotaInfoItemBARD.maintainNFNotaInfoItemAssociations(nfnotainfo.getItens(), response, nfnotainfo.getId(), null,
 							null,
 							TabelaEnum.NFNOTAINFO, getNfnotaInfoItemBAR(), statusBAR, historicoBAR, nfnotainfo.getId(),
@@ -5475,14 +5484,6 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 		{
 			count +=
 					NFNotaInfoFaturaBARD.maintainNFNotaInfoFaturaAssociations(nfnotainfocobranca.getFatura(), response, nfnotainfocobranca.getId(), null,
-							null,
-							TabelaEnum.NFNOTAINFOCOBRANCA, getNfeBAR(), statusBAR, historicoBAR, nfnotainfocobranca.getId(),
-							nfnotainfocobranca.getCreateUser(), nfnotainfocobranca.getTransactionId(), nfnotainfocobranca.getTransactionId());
-		}
-		if (!ValidationUtil.isNull(nfnotainfocobranca.getDuplicatas()))
-		{
-			count +=
-					NFNotaInfoDuplicataBARD.maintainNFNotaInfoDuplicataAssociations(nfnotainfocobranca.getDuplicatas(), response, nfnotainfocobranca.getId(), null,
 							null,
 							TabelaEnum.NFNOTAINFOCOBRANCA, getNfeBAR(), statusBAR, historicoBAR, nfnotainfocobranca.getId(),
 							nfnotainfocobranca.getCreateUser(), nfnotainfocobranca.getTransactionId(), nfnotainfocobranca.getTransactionId());

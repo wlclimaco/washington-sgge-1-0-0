@@ -34,7 +34,7 @@
 	<collection property="retirada" column="retirada" select="NFNotaInfoLocalMap.fetchNFNotaInfoLocalById"/>
 	<collection property="entrega" column="entrega" select="NFNotaInfoLocalMap.fetchNFNotaInfoLocalById"/>
 	<collection property="pessoasautorizadasdownloadnfe" column="id" select="NFPessoaAutorizadaDownloadNFeMap.fetchNFPessoaAutorizadaDownloadNFeByParentId"/>
-	<collection property="itens" column="id" select="NotaFiscalItensMap.fetchNotaFiscalItensByParentId"/>
+	<collection property="itens" column="id" select="NFNotaInfoItemMap.fetchNotaFiscalItensByParentId"/>
 	<collection property="total" column="total" select="NFNotaInfoTotalMap.fetchNFNotaInfoTotalById"/>
 	<collection property="transporte" column="transporte" select="NFNotaInfoTransporteMap.fetchNFNotaInfoTransporteById"/>
 	<collection property="cobranca" column="cobranca" select="NFNotaInfoCobrancaMap.fetchNFNotaInfoCobrancaById"/>

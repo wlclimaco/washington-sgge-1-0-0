@@ -19,5 +19,7 @@
             <artifactId>qat-framework-core</artifactId>
             <version>${qat.framework.version}</version>
         </dependency>
+
+
     </dependencies>
 </project>

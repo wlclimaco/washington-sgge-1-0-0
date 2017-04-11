@@ -80,9 +80,8 @@ identificadorLocal
  <select id="fetchAllNFNotasRequest" parameterType="PagedInquiryRequest" resultMap="NFNotaResult">
 
      SELECT id,<include refid="allNFNotaColumns" />
-           FROM nfnota where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
-       OFFSET ( #{startPage} * #{pageSize} )
-       LIMIT #{pageSize}
+           FROM nfnota where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY create_date ASC
+
 </select>
 
 <select id="fetchNFNotaRowCount" resultType="Integer">
