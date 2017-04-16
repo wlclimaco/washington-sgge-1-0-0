@@ -2984,7 +2984,7 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		Date a = new Date();
 		configuracaonfe.setId(id);
 		configuracaonfe.setPresCompr(insertDoisValor(id, TabelaEnum.BOLETO, action));
-		configuracaonfe.setDestConsFinal(1002);
+		configuracaonfe.setDestConsFinal(insertDoisValor(id, TabelaEnum.BOLETO, action));
 		configuracaonfe.setPreencherDataHora(1003);
 		configuracaonfe.setIcmsPadrao(new Double(10.00));
 		configuracaonfe.setIpiPadrao(new Double(10.00));

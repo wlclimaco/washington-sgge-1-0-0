@@ -1,12 +1,6 @@
 package com.qat.samples.sysmgmt.entidade.model;
 
-import java.util.Date;
-import java.util.List;
-
 import com.qat.samples.sysmgmt.cfop.model.Cfop;
-import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
-import com.qat.samples.sysmgmt.contabilidade.model.Plano;
-import com.qat.samples.sysmgmt.pessoa.model.Socio;
 import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
@@ -20,7 +14,7 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 	private Integer id;
 	private DoisValores presCompr;
 
-	private Integer destConsFinal;
+	private DoisValores destConsFinal;
 
 	private Integer preencherDataHora;
 
@@ -94,11 +88,11 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 		this.presCompr = presCompr;
 	}
 
-	public Integer getDestConsFinal() {
+	public DoisValores getDestConsFinal() {
 		return destConsFinal;
 	}
 
-	public void setDestConsFinal(Integer destConsFinal) {
+	public void setDestConsFinal(DoisValores destConsFinal) {
 		this.destConsFinal = destConsFinal;
 	}
 

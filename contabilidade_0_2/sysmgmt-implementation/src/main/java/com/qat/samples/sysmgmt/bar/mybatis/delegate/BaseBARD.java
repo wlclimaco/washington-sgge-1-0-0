@@ -274,7 +274,7 @@ public final class BaseBARD extends SqlSessionDaoSupport
 
 		ConfiguracaoNFe configuracaonfe = new ConfiguracaoNFe();
 
-		configuracaonfe.setDestConsFinal(1002);
+		configuracaonfe.setDestConsFinal(new DoisValores(new Integer(500)));
 		configuracaonfe.setPreencherDataHora(1003);
 		configuracaonfe.setIcmsPadrao(new Double(10.00));
 		configuracaonfe.setIpiPadrao(new Double(10.00));

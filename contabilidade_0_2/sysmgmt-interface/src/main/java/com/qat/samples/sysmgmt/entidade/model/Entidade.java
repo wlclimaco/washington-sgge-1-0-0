@@ -43,8 +43,6 @@ public class Entidade extends ModelCosmeDamiao
 
 	private Configuracao configuracao;
 
-	private ConfiguracaoNFe configuracaoNFe;
-
 	private List<Endereco> enderecos;
 
 	private List<Documento> documentos;
@@ -320,18 +318,6 @@ public class Entidade extends ModelCosmeDamiao
 		this.socios = socios;
 	}
 
-
-
-	public ConfiguracaoNFe getConfiguracaoNFe() {
-		return configuracaoNFe;
-	}
-
-	public void setConfiguracaoNFe(ConfiguracaoNFe configuracaoNFe) {
-		this.configuracaoNFe = configuracaoNFe;
-	}
-
-
-
 	public String getRazao() {
 		return razao;
 	}
@@ -381,7 +367,7 @@ public class Entidade extends ModelCosmeDamiao
 				+ ", getEntidadeEnum()=" + getEntidadeEnum() + ", getConfiguracao()=" + getConfiguracao()
 				+ ", getEntidadeId()=" + getEntidadeId() + ", getNotificacoes()=" + getNotificacoes()
 				+ ", getNumFunc()=" + getNumFunc() + ", getPlanosServicos()=" + getPlanosServicos() + ", getSocios()="
-				+ getSocios() + ", getConfiguracaoNFe()=" + getConfiguracaoNFe() + ", getRazao()=" + getRazao()
+				+ getSocios() + ", getRazao()=" + getRazao()
 				+ ", getStatusEmpresa()=" + getStatusEmpresa() + ", getDtAbertura()=" + getDtAbertura()
 				+ ", getResponsavel()=" + getResponsavel() + ", getSiteList()=" + getSiteList() + ", toString()="
 				+ super.toString() + "]";

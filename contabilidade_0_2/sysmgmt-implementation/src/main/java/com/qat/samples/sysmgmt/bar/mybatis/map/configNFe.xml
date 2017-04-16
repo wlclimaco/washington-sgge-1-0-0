@@ -17,14 +17,12 @@
        exactly. -->
   <resultMap id="ConfiguracaoNFeResult" type="ConfiguracaoNFe">
     <result property="id" column="id"/>
-
-    <result property="destConsFinal" column="destConsFinal"/>
+    
     <result property="preencherDataHora" column="preencherDataHora"/>
     <result property="icmsPadrao" column="icmsPadrao"/>
     <result property="ipiPadrao" column="ipiPadrao"/>
     <result property="pisPadrao" column="pisPadrao"/>
     <result property="cofinsPadrao" column="cofinsPadrao"/>
-    <result property="serieEnvio" column="serieEnvio"/>
     <result property="anexarXmlEmail" column="anexarXmlEmail"/>
     <result property="idCSC" column="idCSC"/>
     <result property="cSC" column="cSC"/>
@@ -40,17 +38,18 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<collection property="destConsFinal" column="destConsFinal" select="DoisValorMap.fetchDoisValorById"/>
 <collection property="servMsmNota" column="servMsmNota" select="DoisValorMap.fetchDoisValorById"/>
 <collection property="ambienteEnvio" column="ambienteEnvio" select="DoisValorMap.fetchDoisValorById"/>
 <collection property="modelo" column="modelo" select="DoisValorMap.fetchDoisValorById"/>
 <collection property="cfopPadrao" column="cfopPadrao" select="CfopMap.fetchCfopById"/>
 <collection property="presCompr" column="presCompr" select="DoisValorMap.fetchDoisValorById"/>
+<collection property="serieEnvio" column="serieEnvio" select="DoisValorMap.fetchDoisValorById"/>
   </resultMap>
 
   <sql id="allConfiguracaoNFeColumns">
-presCompr
-,destConsFinal
-,preencherDataHora
+
+preencherDataHora
 ,icmsPadrao
 ,ipiPadrao
 ,pisPadrao
@@ -59,6 +58,8 @@ presCompr
 ,servMsmNota
 ,serieEnvio
 ,modelo
+,presCompr
+,destConsFinal
 ,anexarXmlEmail
 ,idCSC
 ,cSC
@@ -79,7 +80,7 @@ presCompr
 </sql>
 <sql id="allConfiguracaoNFeValues">
 #{presCompr.id},
-#{destConsFinal},
+#{destConsFinal.id},
 #{preencherDataHora},
 #{icmsPadrao},
 #{ipiPadrao},
@@ -87,7 +88,7 @@ presCompr
 #{cofinsPadrao},
 #{ambienteEnvio.id},
 #{servMsmNota.id},
-#{serieEnvio},
+#{serieEnvio.id},
 #{modelo.id},
 #{anexarXmlEmail},
 #{idCSC},
@@ -143,7 +144,7 @@ presCompr
  <update id="updateConfiguracaoNFe" parameterType="ConfiguracaoNFe">
    UPDATE configuracaonfe SET
 <if test="presCompr!= null">presCompr = #{presCompr.id},</if>
-<if test="destConsFinal!= null">destConsFinal = #{destConsFinal},</if>
+<if test="destConsFinal!= null">destConsFinal = #{destConsFinal.id},</if>
 <if test="preencherDataHora!= null">preencherDataHora = #{preencherDataHora},</if>
 <if test="icmsPadrao!= null">icmsPadrao = #{icmsPadrao},</if>
 <if test="ipiPadrao!= null">ipiPadrao = #{ipiPadrao},</if>
@@ -152,7 +153,7 @@ presCompr
 <if test="ambienteEnvio!= null">ambienteEnvio = #{ambienteEnvio.id},</if>
 <if test="modelo!= null">modelo = #{modelo.id},</if>
 <if test="servMsmNota!= null">servMsmNota = #{servMsmNota.id},</if>
-<if test="serieEnvio!= null">serieEnvio = #{serieEnvio},</if>
+<if test="serieEnvio!= null">serieEnvio = #{serieEnvio.id},</if>
 <if test="anexarXmlEmail!= null">anexarXmlEmail = #{anexarXmlEmail},</if>
 <if test="idCSC!= null">idCSC = #{idCSC},</if>
 <if test="cSC!= null">cSC = #{cSC},</if>
