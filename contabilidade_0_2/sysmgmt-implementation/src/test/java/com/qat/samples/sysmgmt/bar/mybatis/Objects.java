@@ -2992,7 +2992,7 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 		configuracaonfe.setCofinsPadrao(new Double(10.00));
 		configuracaonfe.setAmbienteEnvio(insertDoisValor(id, TabelaEnum.BOLETO, action));
 		configuracaonfe.setServMsmNota(insertDoisValor(id, TabelaEnum.BOLETO, action));
-		configuracaonfe.setSerieEnvio("serieEnvio_10 - " + action.toString());
+		configuracaonfe.setSerieEnvio(insertDoisValor(id, TabelaEnum.BOLETO, action));
 		configuracaonfe.setAnexarXmlEmail(1011);
 		configuracaonfe.setIdCSC("idCSC_12 - " + action.toString());
 		configuracaonfe.setcSC("cSC_13 - " + action.toString());

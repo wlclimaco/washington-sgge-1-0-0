@@ -81,13 +81,13 @@ INSERT INTO configSMTP( servSMTP, porta, endEmail, usuario, senha, seguranca, at
 ( 'servSMTP_2', 'porta_2', 'endEmail_2', 'usuario_2', 'senha_2', 10002, 10002,'system',1471371796438,'rod',1471371796438);
 
 INSERT INTO ConfiguracaoNFE( presCompr, destConsFinal, preencherDataHora, icmsPadrao, ipiPadrao, pisPadrao, cofinsPadrao, ambienteEnvio, servMsmNota, serieEnvio, anexarXmlEmail, idCSC, cSC, informacaoAdd, certificado, senha, salvarSenha, cfopPadrao, tokenNFCe, logoDanfe,create_user,create_date,modify_user,modify_date)values
-(10000, 10000, 10000, 10.00, 10.00, 10.00, 10.00, 10000, 10.00, 'serieEnvio_0', 10000, 'idCSC_0', 'cSC_0', 'informacaoAdd_0', 'certificado_0', 'senha_0', 10000, 10000, 'tokenNFCe_0', 'logoDanfe_0','system',1471371796438,'rod',1471371796438);
+(10000, 10000, 10000, 10.00, 10.00, 10.00, 10.00, 10000, 10.00, 100, 10000, 'idCSC_0', 'cSC_0', 'informacaoAdd_0', 'certificado_0', 'senha_0', 10000, 10000, 'tokenNFCe_0', 'logoDanfe_0','system',1471371796438,'rod',1471371796438);
 
 INSERT INTO ConfiguracaoNFE( presCompr, destConsFinal, preencherDataHora, icmsPadrao, ipiPadrao, pisPadrao, cofinsPadrao, ambienteEnvio, servMsmNota, serieEnvio, anexarXmlEmail, idCSC, cSC, informacaoAdd, certificado, senha, salvarSenha, cfopPadrao, tokenNFCe, logoDanfe,create_user,create_date,modify_user,modify_date)values
-( 10001, 10001, 10001, 10.00, 10.00, 10.00, 10.00, 10001, 10.00, 'serieEnvio_1', 10001, 'idCSC_1', 'cSC_1', 'informacaoAdd_1', 'certificado_1', 'senha_1', 10001, 10001, 'tokenNFCe_1', 'logoDanfe_1','system',1471371796438,'rod',1471371796438);
+( 10001, 10001, 10001, 10.00, 10.00, 10.00, 10.00, 10001, 10.00, 1000, 10001, 'idCSC_1', 'cSC_1', 'informacaoAdd_1', 'certificado_1', 'senha_1', 10001, 10001, 'tokenNFCe_1', 'logoDanfe_1','system',1471371796438,'rod',1471371796438);
 
 INSERT INTO ConfiguracaoNFE( presCompr, destConsFinal, preencherDataHora, icmsPadrao, ipiPadrao, pisPadrao, cofinsPadrao, ambienteEnvio, servMsmNota, serieEnvio, anexarXmlEmail, idCSC, cSC, informacaoAdd, certificado, senha, salvarSenha, cfopPadrao, tokenNFCe, logoDanfe,create_user,create_date,modify_user,modify_date)values
-( 10002, 10002, 10002, 10.00, 10.00, 10.00, 10.00, 10002, 10.00, 'serieEnvio_2', 10002, 'idCSC_2', 'cSC_2', 'informacaoAdd_2', 'certificado_2', 'senha_2', 10002, 10002, 'tokenNFCe_2', 'logoDanfe_2','system',1471371796438,'rod',1471371796438);
+( 10002, 10002, 10002, 10.00, 10.00, 10.00, 10.00, 10002, 10.00, 1002, 10002, 'idCSC_2', 'cSC_2', 'informacaoAdd_2', 'certificado_2', 'senha_2', 10002, 10002, 'tokenNFCe_2', 'logoDanfe_2','system',1471371796438,'rod',1471371796438);
 
 INSERT INTO configVendas( descontoMaxVenda, observacao, imprSegVia, imprAssinatura, imprResumoFinanc, atuaPrecoClonar, imprColUnidade, bloquearvendProdSemEstoq, addDespCalcImposto, retSubstTribICMS,create_user,create_date,modify_user,modify_date)values
 (10.00, 'observacao_0', 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000,'system',1471371796439,'rod',1471371796439);

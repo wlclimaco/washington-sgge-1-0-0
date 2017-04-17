@@ -282,7 +282,7 @@ public final class BaseBARD extends SqlSessionDaoSupport
 		configuracaonfe.setCofinsPadrao(new Double(10.00));
 		configuracaonfe.setAmbienteEnvio(new DoisValores(new Integer(500)));
 		configuracaonfe.setServMsmNota(new DoisValores(new Integer(500)));
-		configuracaonfe.setSerieEnvio("0001");
+		configuracaonfe.setSerieEnvio(new DoisValores(new Integer(500)));
 		configuracaonfe.setAnexarXmlEmail(1011);
 		configuracaonfe.setIdCSC("idCSC_12");
 		configuracaonfe.setcSC("cSC_13");

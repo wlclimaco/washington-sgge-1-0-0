@@ -17,16 +17,15 @@
        exactly. -->
   <resultMap id="ConfiguracaoResult" type="Configuracao">
     <result property="id" column="id"/>
-
-<result property="parentId" column="parentId"/>
-<result property="tabelaEnumValue" column="tabelaEnumValue"/>
-<result property="emprId" column="emprId"/>
-<result property="processId" column="processId"/>
-<result property="confCabecalho" column="confCabecalho"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
+	<result property="parentId" column="parentId"/>
+	<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+	<result property="emprId" column="emprId"/>
+	<result property="processId" column="processId"/>
+	<result property="confCabecalho" column="confCabecalho"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
     <collection property="confGeral" column="confGeral" select="ConfigGeralMap.fetchConfigGeralById"/>
     <collection property="confFiscal" column="confFiscal" select="ConfigFiscalMap.fetchConfigFiscalById"/>
     <collection property="confProd" column="confProd" select="ConfigProdutoMap.fetchConfigProdutoById"/>
@@ -37,14 +36,13 @@
     <collection property="confNFe" column="confNFe" select="ConfiguracaoNFeMap.fetchConfiguracaoNFeById"/>
     <collection property="configOS" column="configOS" select="ConfigOSMap.fetchConfigOSById"/>
     <collection property="confAlertas" column="configOS" select="ConfigAlertasMap.fetchConfigAlertasById"/>
-   <!--   <collection property="confBlueSoft" column="confBlueSoft" select="ConfiguracaoNFeMap.fetchConfiguracaoNFeById"/>-->
-
-<collection property="boletoList" column="id" select="BoletoMap.fetchBoletoByEmprId"/>
+    <!--  <collection property="confBlueSoft" column="confBlueSoft" select="ConfiguracaoNFeMap.fetchConfiguracaoNFeById"/>-->
+	<collection property="boletoList" column="id" select="BoletoMap.fetchBoletoByEmprId"/>
   </resultMap>
 
   <sql id="allConfiguracaoColumns">
-  confCabecalho,
-confGeral
+confCabecalho
+,confGeral
 ,confFiscal
 ,confProd
 ,confVendas
@@ -52,6 +50,9 @@ confGeral
 ,confEntrada
 ,confCarne
 ,confNFe
+,configOS
+,confAlertas
+,confBlueSoft
 ,parentId
 ,tabelaEnumValue
 ,emprId
@@ -60,9 +61,7 @@ confGeral
 ,create_user
 ,modify_date
 ,modify_user
-,configOS
-,confAlertas
-,confBlueSoft
+
 
 </sql>
 <sql id="allConfiguracaoValues">
@@ -75,17 +74,18 @@ confGeral
 #{confEntrada.id},
 #{confCarne.id},
 #{confNFe.id},
-     #{parentId},
-     #{tabelaEnumValue},
-     #{emprId},
-     #{processId},
-     #{createDateUTC},
-     #{createUser},
-     #{modifyDateUTC},
-     #{modifyUser},
 #{configOS.id},
 #{confAlertas.id},
-#{confBlueSoft.id}
+#{confBlueSoft.id},
+#{parentId},
+#{tabelaEnumValue},
+#{emprId},
+#{processId},
+#{createDateUTC},
+#{createUser},
+#{modifyDateUTC},
+#{modifyUser}
+
   </sql>
 
 
@@ -130,6 +130,10 @@ confGeral
 <if test="confCMTP!= null">confCMTP = #{confCMTP.id},</if>
 <if test="confEntrada!= null">confEntrada = #{confEntrada.id},</if>
 <if test="confCarne!= null">confCarne = #{confCarne.id},</if>
+<if test="confNFe!= null">confNFe = #{confNFe.id},</if>
+<if test="configOS!= null">configOS = #{configOS.id},</if>
+<if test="confAlertas!= null">confAlertas = #{confAlertas.id},</if>
+<if test="confBlueSoft!= null">confBlueSoft = #{confBlueSoft.id}</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>

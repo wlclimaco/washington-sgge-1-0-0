@@ -17,7 +17,6 @@
        exactly. -->
   <resultMap id="ConfiguracaoNFeResult" type="ConfiguracaoNFe">
     <result property="id" column="id"/>
-    
     <result property="preencherDataHora" column="preencherDataHora"/>
     <result property="icmsPadrao" column="icmsPadrao"/>
     <result property="ipiPadrao" column="ipiPadrao"/>
@@ -45,6 +44,8 @@
 <collection property="cfopPadrao" column="cfopPadrao" select="CfopMap.fetchCfopById"/>
 <collection property="presCompr" column="presCompr" select="DoisValorMap.fetchDoisValorById"/>
 <collection property="serieEnvio" column="serieEnvio" select="DoisValorMap.fetchDoisValorById"/>
+<collection property="tipoImpressao" column="tipoImpressao" select="DoisValorMap.fetchDoisValorById"/>
+<collection property="tipoEmissao" column="tipoEmissao" select="DoisValorMap.fetchDoisValorById"/>
   </resultMap>
 
   <sql id="allConfiguracaoNFeColumns">
@@ -54,12 +55,6 @@ preencherDataHora
 ,ipiPadrao
 ,pisPadrao
 ,cofinsPadrao
-,ambienteEnvio
-,servMsmNota
-,serieEnvio
-,modelo
-,presCompr
-,destConsFinal
 ,anexarXmlEmail
 ,idCSC
 ,cSC
@@ -67,7 +62,15 @@ preencherDataHora
 ,certificado
 ,senha
 ,salvarSenha
+,presCompr
+,destConsFinal
+,ambienteEnvio
+,servMsmNota
+,serieEnvio
+,modelo
 ,cfopPadrao
+,tipoImpressao
+,tipoEmissao
 ,parentId
 ,tabelaEnumValue
 ,emprId
@@ -77,19 +80,15 @@ preencherDataHora
 ,modify_date
 ,modify_user
 
+
 </sql>
 <sql id="allConfiguracaoNFeValues">
-#{presCompr.id},
-#{destConsFinal.id},
+
 #{preencherDataHora},
 #{icmsPadrao},
 #{ipiPadrao},
 #{pisPadrao},
 #{cofinsPadrao},
-#{ambienteEnvio.id},
-#{servMsmNota.id},
-#{serieEnvio.id},
-#{modelo.id},
 #{anexarXmlEmail},
 #{idCSC},
 #{cSC},
@@ -97,7 +96,15 @@ preencherDataHora
 #{certificado},
 #{senha},
 #{salvarSenha},
+#{presCompr.id},
+#{destConsFinal.id},
+#{ambienteEnvio.id},
+#{servMsmNota.id},
+#{serieEnvio.id},
+#{modelo.id},
 #{cfopPadrao.id},
+#{tipoImpressao.id},
+#{tipoEmissao.id},
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -154,6 +161,8 @@ preencherDataHora
 <if test="modelo!= null">modelo = #{modelo.id},</if>
 <if test="servMsmNota!= null">servMsmNota = #{servMsmNota.id},</if>
 <if test="serieEnvio!= null">serieEnvio = #{serieEnvio.id},</if>
+<if test="tipoImpressao!= null">tipoImpressao = #{tipoImpressao.id},</if>
+<if test="tipoEmissao!= null">tipoEmissao = #{tipoEmissao.id},</if>
 <if test="anexarXmlEmail!= null">anexarXmlEmail = #{anexarXmlEmail},</if>
 <if test="idCSC!= null">idCSC = #{idCSC},</if>
 <if test="cSC!= null">cSC = #{cSC},</if>

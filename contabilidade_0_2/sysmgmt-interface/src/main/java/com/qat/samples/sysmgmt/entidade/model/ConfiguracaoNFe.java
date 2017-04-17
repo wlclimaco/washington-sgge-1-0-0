@@ -12,9 +12,7 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 public class ConfiguracaoNFe extends ModelCosmeDamiao
 {
 	private Integer id;
-	private DoisValores presCompr;
 
-	private DoisValores destConsFinal;
 
 	private Integer preencherDataHora;
 
@@ -26,11 +24,7 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 
 	private Double cofinsPadrao;
 
-	private DoisValores ambienteEnvio;
-
-	private DoisValores servMsmNota;
-
-	private String serieEnvio;
+	private DoisValores serieEnvio;
 
 	private Integer anexarXmlEmail;
 
@@ -56,6 +50,12 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 	private DoisValores tipoImpressao;
 
 	private DoisValores tipoEmissao;
+	private DoisValores ambienteEnvio;
+
+	private DoisValores servMsmNota;
+	private DoisValores presCompr;
+
+	private DoisValores destConsFinal;
 
 
 	public ConfiguracaoNFe()
@@ -152,11 +152,11 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 		this.servMsmNota = servMsmNota;
 	}
 
-	public String getSerieEnvio() {
+	public DoisValores getSerieEnvio() {
 		return serieEnvio;
 	}
 
-	public void setSerieEnvio(String serieEnvio) {
+	public void setSerieEnvio(DoisValores serieEnvio) {
 		this.serieEnvio = serieEnvio;
 	}
 
@@ -247,8 +247,8 @@ public class ConfiguracaoNFe extends ModelCosmeDamiao
 	public void setModelo(DoisValores modelo) {
 		this.modelo = modelo;
 	}
-	
-	
+
+
 
 	public DoisValores getTipoImpressao() {
 		return tipoImpressao;
