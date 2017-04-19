@@ -133,7 +133,7 @@ confCabecalho
 <if test="confNFe!= null">confNFe = #{confNFe.id},</if>
 <if test="configOS!= null">configOS = #{configOS.id},</if>
 <if test="confAlertas!= null">confAlertas = #{confAlertas.id},</if>
-<if test="confBlueSoft!= null">confBlueSoft = #{confBlueSoft.id}</if>
+<if test="confBlueSoft!= null">confBlueSoft = #{confBlueSoft.id},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>

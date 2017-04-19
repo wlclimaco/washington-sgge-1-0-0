@@ -170,6 +170,7 @@ nome
  <update id="updateEmpresa" parameterType="Empresa">
    UPDATE entidade SET
 <if test="nome!= null">nome = #{nome},</if>
+<if test="razao!= null">razao = #{razao},</if>
 <if test="parceiroId!= null">parceiroId = #{parceiroId},</if>
 <if test="contabilidadeId!= null">contabilidadeId = #{contabilidadeId},</if>
 <if test="configuracao!= null">configuracao = #{configuracao.id},</if>
