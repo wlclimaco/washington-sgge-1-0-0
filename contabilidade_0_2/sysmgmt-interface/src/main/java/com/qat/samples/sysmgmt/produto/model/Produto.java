@@ -1,5 +1,12 @@
 package com.qat.samples.sysmgmt.produto.model;
 
+import java.util.List;
+
+import com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemProdutoArmamento;
+import com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemProdutoCombustivel;
+import com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemProdutoMedicamento;
+import com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemProdutoVeiculo;
+import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -27,12 +34,26 @@ public class Produto extends ModelCosmeDamiao
 	private String excTabIPI;
 
 	private String cEST;
-	
+
 	private Double quant;
-	
+
 	private UniMed uniMed;
-	
+
 	private Marca marca;
+
+	private DoisValores produtoTipo;
+
+	/** The econtabil veiculo for the NFNotaInfoItemProduto. */
+	private NFNotaInfoItemProdutoVeiculo veiculo;
+
+	/** The econtabil medicamentos for the NFNotaInfoItemProduto. */
+	private List<NFNotaInfoItemProdutoMedicamento> medicamentos;
+
+	/** The econtabil armamentos for the NFNotaInfoItemProduto. */
+	private List<NFNotaInfoItemProdutoArmamento> armamentos;
+
+	/** The econtabil combustivel for the NFNotaInfoItemProduto. */
+	private NFNotaInfoItemProdutoCombustivel combustivel;
 
 	/**
 	 * Default constructor.
@@ -132,13 +153,54 @@ public class Produto extends ModelCosmeDamiao
 		this.marca = marca;
 	}
 
+	public DoisValores getProdutoTipo() {
+		return produtoTipo;
+	}
+
+	public void setProdutoTipo(DoisValores produtoTipo) {
+		this.produtoTipo = produtoTipo;
+	}
+
+	public NFNotaInfoItemProdutoVeiculo getVeiculo() {
+		return veiculo;
+	}
+
+	public void setVeiculo(NFNotaInfoItemProdutoVeiculo veiculo) {
+		this.veiculo = veiculo;
+	}
+
+	public List<NFNotaInfoItemProdutoMedicamento> getMedicamentos() {
+		return medicamentos;
+	}
+
+	public void setMedicamentos(List<NFNotaInfoItemProdutoMedicamento> medicamentos) {
+		this.medicamentos = medicamentos;
+	}
+
+	public List<NFNotaInfoItemProdutoArmamento> getArmamentos() {
+		return armamentos;
+	}
+
+	public void setArmamentos(List<NFNotaInfoItemProdutoArmamento> armamentos) {
+		this.armamentos = armamentos;
+	}
+
+	public NFNotaInfoItemProdutoCombustivel getCombustivel() {
+		return combustivel;
+	}
+
+	public void setCombustivel(NFNotaInfoItemProdutoCombustivel combustivel) {
+		this.combustivel = combustivel;
+	}
+
 	@Override
 	public String toString() {
 		return "Produto [getId()=" + getId() + ", getNcm()=" + getNcm() + ", getCdBarras()=" + getCdBarras()
 				+ ", getDataCreate()=" + getDataCreate() + ", getProduto()=" + getProduto() + ", getExcTabIPI()="
 				+ getExcTabIPI() + ", getcEST()=" + getcEST() + ", getQuant()=" + getQuant() + ", getUniMed()="
-				+ getUniMed() + ", getMarca()=" + getMarca() + ", toString()=" + super.toString() + "]";
+				+ getUniMed() + ", getMarca()=" + getMarca() + ", getProdutoTipo()=" + getProdutoTipo()
+				+ ", getVeiculo()=" + getVeiculo() + ", getMedicamentos()=" + getMedicamentos() + ", getArmamentos()="
+				+ getArmamentos() + ", getCombustivel()=" + getCombustivel() + ", toString()=" + super.toString() + "]";
 	}
 
-	
 }

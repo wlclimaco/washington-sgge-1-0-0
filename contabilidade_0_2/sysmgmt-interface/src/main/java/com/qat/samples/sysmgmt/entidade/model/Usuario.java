@@ -36,6 +36,7 @@ public class Usuario extends Pessoa
 	private List<Email> emails;
 
 
+	private ConfiguracaoNFe configNFe;
 
 	public Usuario(Integer id) {
 		super();
@@ -138,12 +139,21 @@ public class Usuario extends Pessoa
 		this.email = email;
 	}
 
+
+	public ConfiguracaoNFe getConfigNFe() {
+		return configNFe;
+	}
+
+	public void setConfigNFe(ConfiguracaoNFe configNFe) {
+		this.configNFe = configNFe;
+	}
+
 	@Override
 	public String toString() {
 		return "Usuario [getSenha()=" + getSenha() + ", getPergunta()=" + getPergunta() + ", getRoles()=" + getRoles()
 				+ ", getLanguage()=" + getLanguage() + ", getUltAcesso()=" + getUltAcesso() + ", getEmails()="
 				+ getEmails() + ", getTelefone()=" + getTelefone() + ", getCpf()=" + getCpf() + ", getEmail()="
-				+ getEmail() + ", toString()=" + super.toString() + "]";
+				+ getEmail() + ", getConfigNFe()=" + getConfigNFe() + ", toString()=" + super.toString() + "]";
 	}
 
 }

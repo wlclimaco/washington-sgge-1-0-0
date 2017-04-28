@@ -65,14 +65,8 @@ tabelaEnumValue
  </select>
 
  <select id="fetchAllDocumentosRequest" parameterType="PagedInquiryRequest" resultMap="DocumentoResult">
-
-
-
 		SELECT id,<include refid="allDocumentoColumns" />
-  		  FROM documento ORDER BY id ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
-
+  		  FROM documento ORDER BY id , parentId ASC
 </select>
 
 <select id="fetchDocumentoRowCount" resultType="Integer">
@@ -112,9 +106,9 @@ tabelaEnumValue
    <select id="fetchDocumentoByEmpresa" parameterType="Integer" resultMap="DocumentoResult">
     SELECT id,
 	<include refid="allDocumentoColumns" />
-   FROM documento WHERE parentId = #{id}  and tabelaEnumValue in (1,51,52,61,62,63)
+   FROM documento WHERE parentId = #{id}  and tabelaEnumValue in (1,51,52,61,62,63) order by id , parentId
  </select>
- 
+
  <select id="fetchDocumentoByPessoa" parameterType="Integer" resultMap="DocumentoResult">
     SELECT id,
 	<include refid="allDocumentoColumns" />
