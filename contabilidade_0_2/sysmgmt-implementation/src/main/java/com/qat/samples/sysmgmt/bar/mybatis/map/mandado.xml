@@ -22,7 +22,7 @@
 	private Double renda;
 
 	/** The list of documents this organization contains. */
-	private Integer dataAdmissao;,-->
+	private Integer dataAdmissao;,
 
   <resultMap id="mandadoResult" type="Mandado">
     <result property="id" column="id" />
@@ -33,7 +33,7 @@
 	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDataUTC" column="modify_date"/>
-  </resultMap>
+  </resultMap>-->
 
   <!--
 		SQL fragments allow "parts" of SQL to be re-used in other SQL statements.

@@ -30,9 +30,7 @@
 	<result property="horarioSair" column="horarioSair"/>
 	<result property="tipo" column="tipo"/>
 	<result property="createUser" column="create_user"/>
-	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDataUTC" column="modify_date"/>
   </resultMap>
 
   <!--

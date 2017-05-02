@@ -47,10 +47,10 @@ public class Produto extends ModelCosmeDamiao
 	private NFNotaInfoItemProdutoVeiculo veiculo;
 
 	/** The econtabil medicamentos for the NFNotaInfoItemProduto. */
-	private List<NFNotaInfoItemProdutoMedicamento> medicamentos;
+	private NFNotaInfoItemProdutoMedicamento medicamento;
 
 	/** The econtabil armamentos for the NFNotaInfoItemProduto. */
-	private List<NFNotaInfoItemProdutoArmamento> armamentos;
+	private NFNotaInfoItemProdutoArmamento armamento;
 
 	/** The econtabil combustivel for the NFNotaInfoItemProduto. */
 	private NFNotaInfoItemProdutoCombustivel combustivel;

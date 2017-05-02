@@ -24,18 +24,13 @@
 
   <resultMap id="imagemResult" type="Imagem" >
 	<result property="id" column="id"/>
-	<result property="local"  column="local"/>
 	 <result property="tabelaEnumValue" column="tabelaEnum" />
     <result property="nome" column="nome"/>
-    <result property="fotoId" column="fotoId"/>
-    <result property="principal" column="principal"/>
     <result property="emprId" column="emprId"/>
     <result property="parentId" column="parentId"/>
     <result property="processId" column="processId"/>
    	<result property="createUser" column="create_user"/>
-	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDataUTC" column="modify_date"/>
   </resultMap>
 
 

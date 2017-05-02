@@ -137,16 +137,13 @@ nome
 
 
    <resultMap id="eventoMesAppResult" type="BeneficioMesApp">
-    <result property="int" column="FK_evento_id" />
     <result property="data" column="data" />
    	<result property="idFuncBenef" column="idFuncBenef"/>
   </resultMap>
 
   <resultMap id="eventoPessoaResult" type="EventoPessoa">
-    <result property="int" column="FK_evento_id" />
     <result property="data" column="data" />
    	<result property="idFunc" column="idFunc"/>
-   	<association property="idEvent"    column="idEvent" select="fetchEventoById"  />
   </resultMap>
 
   <sql id="allEventoAppplyColumns">

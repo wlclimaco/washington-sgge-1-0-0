@@ -18,13 +18,9 @@
 		<result property="valor" column="valor" />
 		<result property="dataMarcacao" column="dataMarcacao" />
 	   	<result property="createUser" column="create_user"/>
-		<result property="createDataUTC" column="create_date"/>
 		<result property="modifyUser" column="modify_user"/>
-		<result property="modifyDataUTC" column="modify_date"/>
       	<association property="medico"    column="medico" select="MedicoMap.fetchMedicoById"  />
-      	<association property="paciente"  column="paciente" select="PacienteMap.fetchMedicoById"  />
       	<association property="planoSaude"  column="planoSaude" select="PlanoSaudeMap.fetchPlanoSaudeByConsulta"  />
-      	<collection property="exameList" column="id" select="ExameMap.fetchAllExameByConsulta"/>
       </resultMap>
 
   <!--
