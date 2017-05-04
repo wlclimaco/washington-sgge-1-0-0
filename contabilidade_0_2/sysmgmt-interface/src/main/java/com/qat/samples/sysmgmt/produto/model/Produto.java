@@ -169,21 +169,6 @@ public class Produto extends ModelCosmeDamiao
 		this.veiculo = veiculo;
 	}
 
-	public List<NFNotaInfoItemProdutoMedicamento> getMedicamentos() {
-		return medicamentos;
-	}
-
-	public void setMedicamentos(List<NFNotaInfoItemProdutoMedicamento> medicamentos) {
-		this.medicamentos = medicamentos;
-	}
-
-	public List<NFNotaInfoItemProdutoArmamento> getArmamentos() {
-		return armamentos;
-	}
-
-	public void setArmamentos(List<NFNotaInfoItemProdutoArmamento> armamentos) {
-		this.armamentos = armamentos;
-	}
 
 	public NFNotaInfoItemProdutoCombustivel getCombustivel() {
 		return combustivel;
@@ -193,14 +178,32 @@ public class Produto extends ModelCosmeDamiao
 		this.combustivel = combustivel;
 	}
 
+
+
+	public NFNotaInfoItemProdutoMedicamento getMedicamento() {
+		return medicamento;
+	}
+
+	public void setMedicamento(NFNotaInfoItemProdutoMedicamento medicamento) {
+		this.medicamento = medicamento;
+	}
+
+	public NFNotaInfoItemProdutoArmamento getArmamento() {
+		return armamento;
+	}
+
+	public void setArmamento(NFNotaInfoItemProdutoArmamento armamento) {
+		this.armamento = armamento;
+	}
+
 	@Override
 	public String toString() {
 		return "Produto [getId()=" + getId() + ", getNcm()=" + getNcm() + ", getCdBarras()=" + getCdBarras()
 				+ ", getDataCreate()=" + getDataCreate() + ", getProduto()=" + getProduto() + ", getExcTabIPI()="
 				+ getExcTabIPI() + ", getcEST()=" + getcEST() + ", getQuant()=" + getQuant() + ", getUniMed()="
 				+ getUniMed() + ", getMarca()=" + getMarca() + ", getProdutoTipo()=" + getProdutoTipo()
-				+ ", getVeiculo()=" + getVeiculo() + ", getMedicamentos()=" + getMedicamentos() + ", getArmamentos()="
-				+ getArmamentos() + ", getCombustivel()=" + getCombustivel() + ", toString()=" + super.toString() + "]";
+				+ ", getVeiculo()=" + getVeiculo() + ", getCombustivel()=" + getCombustivel() + ", getMedicamento()="
+				+ getMedicamento() + ", getArmamento()=" + getArmamento() + ", toString()=" + super.toString() + "]";
 	}
 
 }
