@@ -1,15 +1,17 @@
-package com.qat.samples.sysmgmt.bar.mybatis.delegate;
+/** create by system gera-java version 1.0.0 05/12/2016 22:20 : 14*/
 
-import java.util.List;
+
+package com.qat.samples.sysmgmt.bar.mybatis.delegate;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
-import com.qat.samples.sysmgmt.bar.Produto.IPrecoBAR;
+import com.qat.samples.sysmgmt.bar.Produto.IProdutoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
-import com.qat.samples.sysmgmt.produto.model.Preco;
+import com.qat.samples.sysmgmt.produto.model.UniMed;
+import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.AcaoTypeEnum;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
@@ -18,11 +20,8 @@ import com.qat.samples.sysmgmt.util.model.TypeEnum;
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
  */
-public final class PrecoBARD extends SqlSessionDaoSupport
+public final class UniMedBARD extends SqlSessionDaoSupport
 {
-
-	/** The Constant ZERO. */
-	private static final Integer ZERO = 0;
 
 	/**
 	 * Fetch objects by request.
@@ -34,43 +33,48 @@ public final class PrecoBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainPrecoAssociations(List<Preco> emailList,
-			InternalResponse response, Integer parentId, TypeEnum type, AcaoTypeEnum insert,
-			TabelaEnum tabelaEnum, IPrecoBAR emailDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
+	public static Integer maintainUniMedAssociations(UniMed uniMed,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoTypeEnum update,
+			TabelaEnum tabelaEnum, IProdutoBAR uniMedDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(emailList))
+		if (ValidationUtil.isNull(uniMed))
 		{
 			return 0;
 		}
 		// For Each Contact...
-		for (Preco email : emailList)
-		{
 			// Make sure we set the parent key
-			email.setParentId(parentId);
-			email.setTabelaEnum(tabelaEnum);
-			email.setProcessId(processId);
+			uniMed.setParentId(parentId);
+			uniMed.setTabelaEnum(tabelaEnum);
+			uniMed.setProcessId(processId);
 
-			if (ValidationUtil.isNull(email.getModelAction()))
-			{
-				continue;
-			}
-			switch (email.getModelAction())
+		//	if (ValidationUtil.isNull(uniMed.getModelAction()))
+		//	{
+		//		continue;
+		//	}
+			switch (uniMed.getModelAction())
 			{
 				case INSERT:
-					count = emailDAC.insertPreco(email).hasSystemError();
+					count = uniMedDAC.insertUniMed(uniMed).hasSystemError();
+
 					break;
 				case UPDATE:
-					count = emailDAC.updatePreco(email).hasSystemError();
+					count = uniMedDAC.updateUniMed(uniMed).hasSystemError();
+
 					break;
 				case DELETE:
-					count = emailDAC.deletePrecoById(email).hasSystemError();
+					count = uniMedDAC.deleteUniMedById(uniMed).hasSystemError();
+
 					break;
 			}
+
+		if(count == true ){
+			return 1;
+		}else{
+			return 0;
 		}
 
-		return 1;
 	}
 }

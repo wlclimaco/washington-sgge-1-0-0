@@ -34,6 +34,7 @@
 <result property="modifyDateUTC" column="modify_date"/>
 <collection property="uniMed" column="uniMed" select="UniMedMap.fetchUniMedById"/>
 <collection property="marca" column="marca" select="MarcaMap.fetchMarcaById"/>
+
   </resultMap>
 
   <sql id="allProdutoColumns">

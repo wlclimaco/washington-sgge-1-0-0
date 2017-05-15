@@ -3,9 +3,6 @@
 
 package com.qat.samples.sysmgmt.bar.mybatis.delegate;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResponse;
@@ -15,8 +12,6 @@ import com.qat.samples.sysmgmt.bar.Nfe.INFNotaInfoItemBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemProdutoVeiculo;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
-import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
 
@@ -65,23 +60,24 @@ public final class NFNotaInfoItemProdutoVeiculoBARD extends SqlSessionDaoSupport
 			{
 				case INSERT:
 					count = nfnotainfoitemprodutoveiculoDAC.insertNFNotaInfoItemProdutoVeiculo(nfnotainfoitemprodutoveiculo).hasSystemError();
-					
+
 					break;
 				case UPDATE:
 					count = nfnotainfoitemprodutoveiculoDAC.updateNFNotaInfoItemProdutoVeiculo(nfnotainfoitemprodutoveiculo).hasSystemError();
-					
+
 					break;
 				case DELETE:
 					count = nfnotainfoitemprodutoveiculoDAC.deleteNFNotaInfoItemProdutoVeiculoById(nfnotainfoitemprodutoveiculo).hasSystemError();
-					
+
 					break;
 			}
-		
+
 		if(count == true ){
 			return 1;
 		}else{
 			return 0;
 		}
-		
+
 	}
+
 }

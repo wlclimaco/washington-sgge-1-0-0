@@ -1,16 +1,17 @@
-package com.qat.samples.sysmgmt.bar.mybatis.delegate;
+/** create by system gera-java version 1.0.0 05/12/2016 22:20 : 14*/
 
-import java.util.List;
+
+package com.qat.samples.sysmgmt.bar.mybatis.delegate;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
-import com.qat.samples.sysmgmt.bar.Produto.IPrecoBAR;
+import com.qat.samples.sysmgmt.bar.Produto.IProdutoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
-import com.qat.samples.sysmgmt.produto.model.Preco;
-import com.qat.samples.sysmgmt.util.model.AcaoTypeEnum;
+import com.qat.samples.sysmgmt.produto.model.Categoria;
+import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
 
@@ -18,7 +19,7 @@ import com.qat.samples.sysmgmt.util.model.TypeEnum;
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
  */
-public final class PrecoBARD extends SqlSessionDaoSupport
+public final class CategoriaBARD extends SqlSessionDaoSupport
 {
 
 	/** The Constant ZERO. */
@@ -34,43 +35,48 @@ public final class PrecoBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainPrecoAssociations(List<Preco> emailList,
-			InternalResponse response, Integer parentId, TypeEnum type, AcaoTypeEnum insert,
-			TabelaEnum tabelaEnum, IPrecoBAR emailDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
+	public static Integer maintainCategoriaAssociations(Categoria categoria,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			TabelaEnum tabelaEnum, IProdutoBAR categoriaDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(emailList))
+		if (ValidationUtil.isNull(categoria))
 		{
 			return 0;
 		}
 		// For Each Contact...
-		for (Preco email : emailList)
-		{
 			// Make sure we set the parent key
-			email.setParentId(parentId);
-			email.setTabelaEnum(tabelaEnum);
-			email.setProcessId(processId);
+			categoria.setParentId(parentId);
+			categoria.setTabelaEnum(tabelaEnum);
+			categoria.setProcessId(processId);
 
-			if (ValidationUtil.isNull(email.getModelAction()))
-			{
-				continue;
-			}
-			switch (email.getModelAction())
+		//	if (ValidationUtil.isNull(categoria.getModelAction()))
+		//	{
+		//		continue;
+		//	}
+			switch (categoria.getModelAction())
 			{
 				case INSERT:
-					count = emailDAC.insertPreco(email).hasSystemError();
+					count = categoriaDAC.insertCategoria(categoria).hasSystemError();
+
 					break;
 				case UPDATE:
-					count = emailDAC.updatePreco(email).hasSystemError();
+					count = categoriaDAC.updateCategoria(categoria).hasSystemError();
+
 					break;
 				case DELETE:
-					count = emailDAC.deletePrecoById(email).hasSystemError();
+					count = categoriaDAC.deleteCategoriaById(categoria).hasSystemError();
+
 					break;
 			}
+
+		if(count == true ){
+			return 1;
+		}else{
+			return 0;
 		}
 
-		return 1;
 	}
 }

@@ -847,20 +847,22 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
 		}
 
-//		if (!ValidationUtil.isNull(produtoempresa.getTributacao()))
-//		{
-//
-//			produtoempresa.getTributacao().setProdId(produtoempresa.getProdId().getId());
-//			TributacaoBARD.maintainTributacaoAssociations(produtoempresa.getTributacao(), response,null,  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
-//					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
-//
-//		}
+
 
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PRODUTOEMPRESA, produtoempresa, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PRODUTOEMPRESA, AcaoEnum.INSERT,
 				produtoempresa.getTransactionId(), getHistoricoBAR(), response, produtoempresa.getId(),
 				produtoempresa.getUserId());
+
+		if (!ValidationUtil.isNull(produtoempresa.getTributacao()))
+		{
+
+			produtoempresa.getTributacao().setProdId(produtoempresa.getId());
+			TributacaoBARD.maintainTributacaoAssociations(produtoempresa.getTributacao(), response,null,  TypeEnum.LOW, AcaoTypeEnum.INSERT, TabelaEnum.PRODUTO,
+					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
+
+		}
 
 		if (!ValidationUtil.isNullOrEmpty(produtoempresa.getEstoqueList()))
 		{
@@ -903,12 +905,51 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	@Override
 	public InternalResponse updateProdutoEmpresa(ProdutoEmpresa produtoempresa) {
 		InternalResponse response = new InternalResponse();
+
 		produtoempresa.setProcessId(produtoempresa.getTransactionId());
+
+		if (!ValidationUtil.isNullOrZero(produtoempresa.getProdId().getId()))
+		{
+			ProdutoBARD.maintainProdutoAssociations(produtoempresa.getProdId(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
+					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
+		}
+
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PRODUTOEMPRESA, produtoempresa, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PRODUTOEMPRESA, AcaoEnum.UPDATE,
 				produtoempresa.getTransactionId(), getHistoricoBAR(), response, produtoempresa.getId(),
 				produtoempresa.getUserId());
+
+//		if (!ValidationUtil.isNull(produtoempresa.getTributacao()))
+//		{
+//
+//			produtoempresa.getTributacao().setProdId(produtoempresa.getId());
+//			TributacaoBARD.maintainTributacaoAssociations(produtoempresa.getTributacao(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
+//					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
+//
+//		}
+		if (!ValidationUtil.isNullOrEmpty(produtoempresa.getEstoqueList()))
+		{
+
+			EstoqueBARD.maintainEstoqueAssociations(produtoempresa.getEstoqueList(), response,produtoempresa.getId(),  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
+					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
+		}
+		if (!ValidationUtil.isNullOrEmpty(produtoempresa.getPrecoList()))
+		{
+			PrecoBARD.maintainPrecoAssociations(produtoempresa.getPrecoList(), response,produtoempresa.getId(),  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
+					getPrecoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
+		}
+		if (!ValidationUtil.isNullOrEmpty(produtoempresa.getCustoList()))
+		{
+			CustoBARD.maintainCustoAssociations(produtoempresa.getCustoList(), response,produtoempresa.getId(),  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
+					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNullOrEmpty(produtoempresa.getCustoList()))
+		{
+			CustoBARD.maintainCustoAssociations(produtoempresa.getCustoList(), response,produtoempresa.getId(),  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
+					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
+		}
 
 		return response;
 	}
@@ -1049,6 +1090,57 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 		produto.setProcessId(produto.getTransactionId());
 
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PRODUTO, produto, response);
+
+//		if (ValidationUtil.isNull(produto.getUniMed()))
+//		{
+//			UniMedBARD.maintainUniMedAssociations(produto.getUniMed(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
+//					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produto.getEmprId(), produto.getUserId(), produto.getTransactionId(), produto.getTransactionId());
+//		}
+//
+//		if (ValidationUtil.isNull(produto.getMarca()))
+//		{
+//			MarcaBARD.maintainMarcaAssociations(produto.getMarca(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
+//					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produto.getEmprId(), produto.getUserId(), produto.getTransactionId(), produto.getTransactionId());
+//		}
+//
+//		private DoisValores produtoTipo;
+//		if (ValidationUtil.isNullOrZero(produtoempresa.getProdId().getId()))
+//		{
+//			ProdutoBARD.maintainProdutoAssociations(produtoempresa.getProdId(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
+//					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
+//		}
+
+//		/** The econtabil veiculo for the NFNotaInfoItemProduto. */
+//		//private NFNotaInfoItemProdutoVeiculo veiculo;
+//		if (!ValidationUtil.isNull(produto.getVeiculo()))
+//		{
+//			NFNotaInfoItemProdutoVeiculoBARD.maintainNFNotaInfoItemProdutoVeiculoAssociations(produto.getVeiculo(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
+//					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produto.getEmprId(), produto.getUserId(), produto.getTransactionId(), produto.getTransactionId());
+//		}
+//
+//		/** The econtabil medicamentos for the NFNotaInfoItemProduto. */
+//		private NFNotaInfoItemProdutoMedicamento medicamento;
+//		if (ValidationUtil.isNullOrZero(produtoempresa.getProdId().getId()))
+//		{
+//			ProdutoBARD.maintainProdutoAssociations(produtoempresa.getProdId(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
+//					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
+//		}
+//
+//		/** The econtabil armamentos for the NFNotaInfoItemProduto. */
+//		private NFNotaInfoItemProdutoArmamento armamento;
+//		if (ValidationUtil.isNullOrZero(produtoempresa.getProdId().getId()))
+//		{
+//			ProdutoBARD.maintainProdutoAssociations(produtoempresa.getProdId(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
+//					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
+//		}
+//
+//		/** The econtabil combustivel for the NFNotaInfoItemProduto. */
+//		private NFNotaInfoItemProdutoCombustivel combustivel;
+//		if (ValidationUtil.isNullOrZero(produtoempresa.getProdId().getId()))
+//		{
+//			ProdutoBARD.maintainProdutoAssociations(produtoempresa.getProdId(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
+//					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
+//		}
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.PRODUTO, AcaoEnum.INSERT,
 				produto.getTransactionId(), getHistoricoBAR(), response, produto.getId(), produto.getUserId());

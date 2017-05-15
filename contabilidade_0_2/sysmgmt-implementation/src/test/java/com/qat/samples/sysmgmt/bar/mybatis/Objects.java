@@ -3131,6 +3131,7 @@ public static Cofins insertCofins(Integer id,TabelaEnum tabela,PersistenceAction
 			ProdutoEmpresa.setId(id);
 			ProdutoEmpresa.setParentId(id);
 			ProdutoEmpresa.setEmprId(100);
+			ProdutoEmpresa.setProdId(insertProduto(id, tabela, action));
 			ProdutoEmpresa.setInformAdicionaisParaNFe("NATIVE INSERT UPDATE");
 			ProdutoEmpresa.setTributacao(insertTributacao(id, tabela, action));
 			ProdutoEmpresa.setEstoqueList(new ArrayList<Estoque>());

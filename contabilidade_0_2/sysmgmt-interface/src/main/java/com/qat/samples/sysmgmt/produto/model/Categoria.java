@@ -1,7 +1,5 @@
 package com.qat.samples.sysmgmt.produto.model;
 
-import java.util.List;
-
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -13,7 +11,7 @@ public class Categoria extends ModelCosmeDamiao
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
-	
+
 	private String categoria;
 
 	private Double margem;

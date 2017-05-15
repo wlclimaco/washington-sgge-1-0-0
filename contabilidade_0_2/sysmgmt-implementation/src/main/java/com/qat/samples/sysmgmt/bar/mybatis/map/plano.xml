@@ -32,7 +32,6 @@
 	<result property="modifyDateUTC" column="modify_date"/>
 	<collection property="precoList" column="id" select="PrecoMap.fetchPrecoByPlano"/>
 	<collection property="itensList" column="id" select="DoisValorMap.fetchItensByPlano"/>
-	<collection property="servicoList" column="id" select="PlanoByServicoMap.fetchPlanoByServicos"/>
 	<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByTable"/>
   </resultMap>
 
@@ -94,7 +93,7 @@ c.emprId,
 	<include refid="allPlanoColumns" />
    FROM plano WHERE parentId = #{fetchid} and tabelaEnumValue = 64
  </select>
- 
+
  <select id="fetchPlanoByEmpresa" parameterType="Integer" resultMap="PlanoResult">
     SELECT id,
 	<include refid="allPlanoColumns" />
@@ -111,7 +110,7 @@ c.emprId,
 
 		SELECT id,<include refid="allPlanoColumns" />
   		  FROM plano <if test="emprId != null">where  emprId = #{emprId}</if> ORDER BY dataInicio ASC
-		 
+
 </select>
 
 <select id="fetchPlanoRowCount" resultType="Integer">

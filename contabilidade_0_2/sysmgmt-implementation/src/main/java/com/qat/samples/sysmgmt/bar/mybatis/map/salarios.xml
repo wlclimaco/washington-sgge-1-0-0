@@ -20,9 +20,7 @@
    	<result property="valor" column="valor"/>
 	<result property="data" column="data"/>
   	<result property="createUser" column="create_user"/>
-	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDataUTC" column="modify_date"/>
 	<association property="profissao"  column="profissao" select="ProfissaoMap.fetchProfissaoById"  />
   </resultMap>
 

@@ -33,9 +33,7 @@
 		<result property="nome" column="nome" />
 		<result property="processId" column="processId" />
 	   	<result property="createUser" column="create_user"/>
-		<result property="createDataUTC" column="create_date"/>
 		<result property="modifyUser" column="modify_user"/>
-		<result property="modifyDataUTC" column="modify_date"/>
   </resultMap>
 
   <!--

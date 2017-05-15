@@ -26,9 +26,7 @@
 		<result property="plano" column="plano" />
 		<result property="processId" column="processId" />
 	   	<result property="createUser" column="create_user"/>
-		<result property="createDataUTC" column="create_date"/>
 		<result property="modifyUser" column="modify_user"/>
-		<result property="modifyDataUTC" column="modify_date"/>
       	<association property="planoId"    column="planoId" select="fetchPlanoSaudeByPlanoSaudeId"  />
       </resultMap>
 
@@ -36,9 +34,7 @@
     <result property="id" column="id" />
     <result property="nome" column="nome" />
    	<result property="createUser" column="create_user"/>
-	<result property="createDataUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDataUTC" column="modify_date"/>
   </resultMap>
 
 
@@ -144,6 +140,12 @@
 	 </if>
   </select>
 
+
+ <select id="fetchPlanoSaudeByPlanoSaudeId" resultMap="planoSaudeResult">
+    SELECT id
+	<include refid="allPlanoSaudeColumns" />
+    FROM planoSaude b ORDER BY id ASC
+  </select>
   <select id="fetchAllPlanoSaudes" resultMap="planoSaudeResult">
     SELECT id
 	<include refid="allPlanoSaudeColumns" />
