@@ -39,7 +39,7 @@ public class NFNotaInfoItemImpostoICMS70 extends ModelCosmeDamiao {
 	private String valorTributo;
 
 	/** The econtabil modalidadeBCICMSST for the NFNotaInfoItemImpostoICMS70. */
-	private String modalidadeBCICMSST;
+	private DoisValores modalidadeBCICMSST;
 
 	/**
 	 * The econtabil percentualMargemValorAdicionadoICMSST for the
@@ -71,7 +71,7 @@ public class NFNotaInfoItemImpostoICMS70 extends ModelCosmeDamiao {
 	private String valorICMSDesoneracao;
 
 	/** The econtabil desoneracao for the NFNotaInfoItemImpostoICMS70. */
-	private String desoneracao;
+	private DoisValores desoneracao;
 
 	/**
 	 * Default constructor.
@@ -282,7 +282,7 @@ public class NFNotaInfoItemImpostoICMS70 extends ModelCosmeDamiao {
 	 *
 	 * @return the modalidadeBCICMSST
 	 */
-	public String getModalidadeBCICMSST() {
+	public DoisValores getModalidadeBCICMSST() {
 		return modalidadeBCICMSST;
 	}
 
@@ -292,7 +292,7 @@ public class NFNotaInfoItemImpostoICMS70 extends ModelCosmeDamiao {
 	 * @param id
 	 *            the modalidadebcicmsst to set
 	 */
-	public void setModalidadeBCICMSST(String modalidadebcicmsst) {
+	public void setModalidadeBCICMSST(DoisValores modalidadebcicmsst) {
 		this.modalidadeBCICMSST = modalidadebcicmsst;
 	}
 
@@ -450,7 +450,7 @@ public class NFNotaInfoItemImpostoICMS70 extends ModelCosmeDamiao {
 	 *
 	 * @return the desoneracao
 	 */
-	public String getDesoneracao() {
+	public DoisValores getDesoneracao() {
 		return desoneracao;
 	}
 
@@ -460,7 +460,7 @@ public class NFNotaInfoItemImpostoICMS70 extends ModelCosmeDamiao {
 	 * @param id
 	 *            the desoneracao to set
 	 */
-	public void setDesoneracao(String desoneracao) {
+	public void setDesoneracao(DoisValores desoneracao) {
 		this.desoneracao = desoneracao;
 	}
 

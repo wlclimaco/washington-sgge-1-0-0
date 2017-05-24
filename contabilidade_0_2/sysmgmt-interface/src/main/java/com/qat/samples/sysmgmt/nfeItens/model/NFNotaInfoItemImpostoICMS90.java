@@ -39,7 +39,7 @@ public class NFNotaInfoItemImpostoICMS90 extends ModelCosmeDamiao {
 	private String valorTributo;
 
 	/** The econtabil modalidadeBCICMSST for the NFNotaInfoItemImpostoICMS90. */
-	private String modalidadeBCICMSST;
+	private DoisValores modalidadeBCICMSST;
 
 	/**
 	 * The econtabil percentualMargemValorAdicionadoICMSST for the
@@ -282,7 +282,7 @@ public class NFNotaInfoItemImpostoICMS90 extends ModelCosmeDamiao {
 	 *
 	 * @return the modalidadeBCICMSST
 	 */
-	public String getModalidadeBCICMSST() {
+	public DoisValores getModalidadeBCICMSST() {
 		return modalidadeBCICMSST;
 	}
 
@@ -292,7 +292,7 @@ public class NFNotaInfoItemImpostoICMS90 extends ModelCosmeDamiao {
 	 * @param id
 	 *            the modalidadebcicmsst to set
 	 */
-	public void setModalidadeBCICMSST(String modalidadebcicmsst) {
+	public void setModalidadeBCICMSST(DoisValores modalidadebcicmsst) {
 		this.modalidadeBCICMSST = modalidadebcicmsst;
 	}
 

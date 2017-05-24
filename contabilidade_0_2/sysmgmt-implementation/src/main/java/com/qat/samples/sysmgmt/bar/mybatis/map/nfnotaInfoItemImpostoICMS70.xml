@@ -11,8 +11,8 @@
 	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
 
-	<!-- Result maps describe the mapping between the columns returned from 
-		a query, and the class properties. A result map isnt necessary if the columns 
+	<!-- Result maps describe the mapping between the columns returned from
+		a query, and the class properties. A result map isnt necessary if the columns
 		(or aliases) match to the properties exactly. -->
 	<resultMap id="NFNotaInfoItemImpostoICMS70Result" type="NFNotaInfoItemImpostoICMS70">
 		<result property="id" column="id" />
@@ -21,7 +21,7 @@
 		<result property="valorBC" column="valorBC" />
 		<result property="percentualAliquota" column="percentualAliquota" />
 		<result property="valorTributo" column="valorTributo" />
-		<result property="modalidadeBCICMSST" column="modalidadeBCICMSST" />
+
 		<result property="percentualMargemValorAdicionadoICMSST"
 			column="percentualMargemValorAdicionadoICMSST" />
 		<result property="percentualReducaoBCICMSST" column="percentualReducaoBCICMSST" />
@@ -29,7 +29,6 @@
 		<result property="percentualAliquotaImpostoICMSST" column="percentualAliquotaImpostoICMSST" />
 		<result property="valorICMSST" column="valorICMSST" />
 		<result property="valorICMSDesoneracao" column="valorICMSDesoneracao" />
-		<result property="desoneracao" column="desoneracao" />
 		<result property="parentId" column="parentId" />
 		<result property="tabelaEnumValue" column="tabelaEnumValue" />
 		<result property="emprId" column="emprId" />
@@ -38,6 +37,8 @@
 		<result property="createDateUTC" column="create_date" />
 		<result property="modifyUser" column="modify_user" />
 		<result property="modifyDateUTC" column="modify_date" />
+		<collection property="desoneracao" column="desoneracao" select="DoisValorMap.fetchDoisValorById" />
+		<collection property="modalidadeBCICMSST" column="modalidadeBCICMSST" select="DoisValorMap.fetchDoisValorById" />
 		<collection property="origem" column="origem"
 			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="situacaoTributaria" column="situacaoTributaria"
@@ -80,14 +81,14 @@
 		#{valorBC},
 		#{percentualAliquota},
 		#{valorTributo},
-		#{modalidadeBCICMSST},
+		#{modalidadeBCICMSST.id},
 		#{percentualMargemValorAdicionadoICMSST},
 		#{percentualReducaoBCICMSST},
 		#{valorBCST},
 		#{percentualAliquotaImpostoICMSST},
 		#{valorICMSST},
 		#{valorICMSDesoneracao},
-		#{desoneracao},
+		#{desoneracao.id},
 		#{parentId},
 		#{tabelaEnumValue},
 		#{emprId},
@@ -157,7 +158,7 @@
 		<if test="valorBC!= null">valorBC = #{valorBC},</if>
 		<if test="percentualAliquota!= null">percentualAliquota = #{percentualAliquota},</if>
 		<if test="valorTributo!= null">valorTributo = #{valorTributo},</if>
-		<if test="modalidadeBCICMSST!= null">modalidadeBCICMSST = #{modalidadeBCICMSST},</if>
+		<if test="modalidadeBCICMSST!= null">modalidadeBCICMSST = #{modalidadeBCICMSST.id},</if>
 		<if test="percentualMargemValorAdicionadoICMSST!= null">percentualMargemValorAdicionadoICMSST =
 			#{percentualMargemValorAdicionadoICMSST},</if>
 		<if test="percentualReducaoBCICMSST!= null">percentualReducaoBCICMSST = #{percentualReducaoBCICMSST},
@@ -167,7 +168,7 @@
 			#{percentualAliquotaImpostoICMSST},</if>
 		<if test="valorICMSST!= null">valorICMSST = #{valorICMSST},</if>
 		<if test="valorICMSDesoneracao!= null">valorICMSDesoneracao = #{valorICMSDesoneracao},</if>
-		<if test="desoneracao!= null">desoneracao = #{desoneracao},</if>
+		<if test="desoneracao!= null">desoneracao = #{desoneracao.id},</if>
 		<if test="parentId!= null"> parentId=#{parentId},</if>
 		<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 		<if test="emprId!= null"> emprId=#{emprId},</if>

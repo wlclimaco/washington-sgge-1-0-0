@@ -2216,10 +2216,10 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		request.setFetchId(1000);
 		NFNotaInfoItemImpostoICMS70 nfnotainfoitemimpostoicms70Response = getNFNotaInfoItemBAR()
 				.fetchNFNotaInfoItemImpostoICMS70ById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicms70Response.getDesoneracao(), "desoneracao_0");
+		Assert.assertEquals(nfnotainfoitemimpostoicms70Response.getPercentualAliquota(), "percentualAliquota_0");
 		getNFNotaInfoItemBAR().updateNFNotaInfoItemImpostoICMS70(nfnotainfoitemimpostoicms70);
 		nfnotainfoitemimpostoicms70Response = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoICMS70ById(request);
-		Assert.assertEquals(nfnotainfoitemimpostoicms70Response.getDesoneracao(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(nfnotainfoitemimpostoicms70Response.getPercentualAliquota(), "NATIVE INSERT UPDATE");
 	}
 
 	@Test

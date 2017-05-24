@@ -19,6 +19,7 @@ import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.Field;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
 import com.qat.samples.sysmgmt.entidade.model.Menu;
+import com.qat.samples.sysmgmt.entidade.model.Message;
 import com.qat.samples.sysmgmt.entidade.model.Pagina;
 import com.qat.samples.sysmgmt.entidade.model.Role;
 import com.qat.samples.sysmgmt.entidade.model.Transaction;
@@ -31,6 +32,7 @@ import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.MessageInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.Note;
@@ -41,6 +43,7 @@ import com.qat.samples.sysmgmt.util.model.request.DoisValoresMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.FieldMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.MenuMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.request.MessageMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.NoteMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.PaginaMaintenanceRequest;
@@ -71,6 +74,7 @@ public interface IEmpresaBAC
 * @return the internal results response
 */
 	public InternalResultsResponse<Empresa> insertEmpresa(EmpresaMaintenanceRequest request);
+
 
 	/**
 * Update empresa.
@@ -1025,7 +1029,7 @@ public interface IEmpresaBAC
 	* @return the internal results response
 	*/
 		public InternalResultsResponse<Note> fetchNotesByRequest(PagedInquiryRequest request);
-		
+
 		//===================================### STATUS ####======================================
 		/**
 
@@ -1072,4 +1076,31 @@ public interface IEmpresaBAC
 	* @return the internal results response
 	*/
 		public InternalResultsResponse<Status> fetchStatussByRequest(PagedInquiryRequest request);
+
+
+		//===================================### EMPRESA ####======================================
+		/**
+
+		/**
+		 * Insert empresa.
+		 *
+	* @param request the empresa maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Message> insertMessage(MessageMaintenanceRequest request);
+
+		public InternalResultsResponse<Message> updateMessage(MessageMaintenanceRequest request);
+
+
+		/**
+	* Delete empresa.
+	*
+	* @param request the empresa maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Message> deleteMessage(MessageMaintenanceRequest request);
+
+		public InternalResultsResponse<Message> fetchMessagesByRequest(MessageInquiryRequest request);
 }

@@ -7,7 +7,7 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="CaixaMap">
+<mapper namespace="MessageMap">
 	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
@@ -15,7 +15,7 @@
       from a query, and the class properties.  A result map isnt
       necessary if the columns (or aliases) match to the properties
        exactly. -->
-  <resultMap id="CaixaResult" type="Caixa">
+  <resultMap id="MessageResult" type="Message">
     <result property="id" column="id"/>
     <result property="saldo" column="saldo"/>
 <result property="emprId" column="emprId"/>
@@ -24,10 +24,9 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="baixaTituloList" column="id" select="BaixaTituloMap.fetchBaixaTituloByCaixa"/>
   </resultMap>
 
-  <sql id="allCaixaColumns">
+  <sql id="allMessageColumns">
 saldo
 ,emprId
 ,processId
@@ -37,7 +36,7 @@ saldo
 ,modify_user
 
 </sql>
-<sql id="allCaixaValues">
+<sql id="allMessageValues">
 		#{saldo},
 		#{emprId},
 		#{processId},
@@ -48,38 +47,38 @@ saldo
   </sql>
 
 
- <select id="fetchAllCaixas" resultMap="CaixaResult">
+ <select id="fetchAllMessages" resultMap="MessageResult">
     SELECT id,
-	<include refid="allCaixaColumns" />
-   FROM caixa ORDER BY id ASC
+	<include refid="allMessageColumns" />
+   FROM message ORDER BY id ASC
  </select>
 
- <select id="fetchCaixaById" parameterType="Integer" resultMap="CaixaResult">
+ <select id="fetchMessageById" parameterType="Integer" resultMap="MessageResult">
     SELECT id,
-	<include refid="allCaixaColumns" />
-   FROM caixa WHERE id = #{fetchid}
+	<include refid="allMessageColumns" />
+   FROM message WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllCaixasRequest" parameterType="CaixaInquiryRequest" resultMap="CaixaResult">
+ <select id="fetchAllMessagesRequest" parameterType="MessageInquiryRequest" resultMap="MessageResult">
 
-		SELECT id,<include refid="allCaixaColumns" />
-  		  FROM caixa where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
+		SELECT id,<include refid="allMessageColumns" />
+  		  FROM message where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
 </select>
 
-<select id="fetchCaixaRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM caixa WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+<select id="fetchMessageRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM message WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
 
  </select>
 
- <insert id="insertCaixa" parameterType="Caixa" useGeneratedKeys="true" keyProperty="id">
- 	INSERT INTO caixa (
-	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allCaixaColumns" />
+ <insert id="insertMessage" parameterType="Message" useGeneratedKeys="true" keyProperty="id">
+ 	INSERT INTO message (
+	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allMessageColumns" />
      )
-   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allCaixaValues" /> )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allMessageValues" /> )
  </insert>
 
- <update id="updateCaixa" parameterType="Caixa">
-   UPDATE caixa SET
+ <update id="updateMessage" parameterType="Message">
+   UPDATE message SET
 <if test="saldo!= null"> saldo=#{saldo},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
 <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
@@ -87,12 +86,12 @@ saldo
     id = #{id}
  </update>
 
-<delete id="deleteCaixaById" parameterType="Caixa">
-  DELETE FROM caixa WHERE id = #{id}
+<delete id="deleteMessageById" parameterType="Message">
+  DELETE FROM message WHERE id = #{id}
  </delete>
 
- <delete id="deleteAllCaixas">
-	DELETE FROM caixa
+ <delete id="deleteAllMessages">
+	DELETE FROM message
   </delete>
 </mapper>
 

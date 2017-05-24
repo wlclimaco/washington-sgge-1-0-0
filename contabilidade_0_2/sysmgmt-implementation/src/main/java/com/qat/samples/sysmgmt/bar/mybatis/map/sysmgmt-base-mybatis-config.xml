@@ -144,6 +144,7 @@
         <typeAlias alias="ContatoItens" type="com.qat.samples.sysmgmt.contato.model.ContatoItens" />
         <typeAlias alias="OrdemServicoItens" type="com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoItens" />
 
+<typeAlias alias="Message" type="com.qat.samples.sysmgmt.entidade.model.Message" />
 
         <!-- Dicionario -->
         <typeAlias alias="Field" type="com.qat.samples.sysmgmt.entidade.model.Field" />
@@ -700,6 +701,7 @@
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoCOFINSST.xml" />
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMSUFDestino.xml" />
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/conta.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/message.xml" />
     </mappers>
 
 </configuration>

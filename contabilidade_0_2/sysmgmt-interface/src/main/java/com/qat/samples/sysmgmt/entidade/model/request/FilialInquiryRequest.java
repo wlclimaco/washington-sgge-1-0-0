@@ -14,7 +14,7 @@ public class FilialInquiryRequest extends PagedInquiryRequest
 
 	/**
 	 * Gets the criteria.
-	 * 
+	 *
 	 * @return the criteria
 	 */
 	public FilialCriteria getCriteria()
@@ -28,7 +28,7 @@ public class FilialInquiryRequest extends PagedInquiryRequest
 
 	/**
 	 * Sets the criteria.
-	 * 
+	 *
 	 * @param criteria the criteria
 	 */
 	public void setCriteria(FilialCriteria criteria)

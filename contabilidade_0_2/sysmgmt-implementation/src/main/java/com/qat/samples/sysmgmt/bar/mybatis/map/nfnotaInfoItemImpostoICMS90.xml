@@ -11,8 +11,8 @@
 	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
 
-	<!-- Result maps describe the mapping between the columns returned from 
-		a query, and the class properties. A result map isnt necessary if the columns 
+	<!-- Result maps describe the mapping between the columns returned from
+		a query, and the class properties. A result map isnt necessary if the columns
 		(or aliases) match to the properties exactly. -->
 	<resultMap id="NFNotaInfoItemImpostoICMS90Result" type="NFNotaInfoItemImpostoICMS90">
 		<result property="id" column="id" />
@@ -21,7 +21,6 @@
 		<result property="percentualReducaoBC" column="percentualReducaoBC" />
 		<result property="percentualAliquota" column="percentualAliquota" />
 		<result property="valorTributo" column="valorTributo" />
-		<result property="modalidadeBCICMSST" column="modalidadeBCICMSST" />
 		<result property="percentualMargemValorAdicionadoICMSST"
 			column="percentualMargemValorAdicionadoICMSST" />
 		<result property="percentualReducaoBCICMSST" column="percentualReducaoBCICMSST" />
@@ -38,6 +37,7 @@
 		<result property="createDateUTC" column="create_date" />
 		<result property="modifyUser" column="modify_user" />
 		<result property="modifyDateUTC" column="modify_date" />
+		<collection property="modalidadeBCICMSST" column="modalidadeBCICMSST" select="DoisValorMap.fetchDoisValorById" />
 		<collection property="origem" column="origem"
 			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="situacaoTributaria" column="situacaoTributaria"
@@ -82,7 +82,7 @@
 		#{percentualReducaoBC},
 		#{percentualAliquota},
 		#{valorTributo},
-		#{modalidadeBCICMSST},
+		#{modalidadeBCICMSST.id},
 		#{percentualMargemValorAdicionadoICMSST},
 		#{percentualReducaoBCICMSST},
 		#{valorBCST},
@@ -159,7 +159,7 @@
 		<if test="percentualReducaoBC!= null">percentualReducaoBC = #{percentualReducaoBC},</if>
 		<if test="percentualAliquota!= null">percentualAliquota = #{percentualAliquota},</if>
 		<if test="valorTributo!= null">valorTributo = #{valorTributo},</if>
-		<if test="modalidadeBCICMSST!= null">modalidadeBCICMSST = #{modalidadeBCICMSST},</if>
+		<if test="modalidadeBCICMSST!= null">modalidadeBCICMSST = #{modalidadeBCICMSST.id},</if>
 		<if test="percentualMargemValorAdicionadoICMSST!= null">percentualMargemValorAdicionadoICMSST =
 			#{percentualMargemValorAdicionadoICMSST},</if>
 		<if test="percentualReducaoBCICMSST!= null">percentualReducaoBCICMSST = #{percentualReducaoBCICMSST},

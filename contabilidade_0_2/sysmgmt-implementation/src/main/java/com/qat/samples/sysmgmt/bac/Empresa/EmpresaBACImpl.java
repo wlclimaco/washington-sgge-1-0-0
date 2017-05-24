@@ -35,6 +35,7 @@ import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.Field;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
 import com.qat.samples.sysmgmt.entidade.model.Menu;
+import com.qat.samples.sysmgmt.entidade.model.Message;
 import com.qat.samples.sysmgmt.entidade.model.Pagina;
 import com.qat.samples.sysmgmt.entidade.model.Role;
 import com.qat.samples.sysmgmt.entidade.model.Transaction;
@@ -47,6 +48,7 @@ import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaMaintenanceRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialMaintenanceRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.MessageInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.Note;
@@ -57,6 +59,7 @@ import com.qat.samples.sysmgmt.util.model.request.DoisValoresMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.FieldMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.MenuMaintenanceRequest;
+import com.qat.samples.sysmgmt.util.model.request.MessageMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.NoteMaintenanceRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.PaginaMaintenanceRequest;
@@ -287,7 +290,31 @@ private InternalResultsResponse<Empresa> processEmpresa(ValidationContextIndicat
 
 		return response;
 			}
+private InternalResultsResponse<Message> processMessage(ValidationContextIndicator indicator,
+		PersistenceActionEnum persistType,
+		MessageMaintenanceRequest request)
+		{
+	InternalResultsResponse<Message> response = null;
 
+		// Persist
+		InternalResponse internalResponse = doPersistenceMessage(request.getMessage(), persistType);
+		if (internalResponse.isInError())
+		{
+			response = new InternalResultsResponse<Message>();
+			response.setStatus(internalResponse.getError());
+			response.addMessages(internalResponse.getMessageInfoList());
+			response.addMessage(DEFAULT_EMPRESA_BAC_EXCEPTION_MSG, MessageSeverity.Error,
+					MessageLevel.Object, new Object[] {internalResponse.errorToString()});
+
+			return response;
+		}
+
+		// Call maintainReurnList to see if we need to return the empresa list and if so whether it should be paged or
+		// not
+		response = maintainReturnListMessage(request.getReturnList(), request.getReturnListPaged(),new Message());
+
+		return response;
+			}
 	/**
 	 * Do persistenceEmpresa.
 	 *
@@ -307,6 +334,29 @@ private InternalResultsResponse<Empresa> processEmpresa(ValidationContextIndicat
 
 			case DELETE:
 				return getEmpresaBAR().deleteEmpresaById(empresa);
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
+		}
+
+		return null;
+	}
+
+	private InternalResponse doPersistenceMessage(Message empresa, PersistenceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			case INSERT:
+				return getEmpresaBAR().insertMessage(empresa);
+
+			case UPDATE:
+				return getEmpresaBAR().updateMessage(empresa);
+
+			case DELETE:
+				return getEmpresaBAR().deleteMessageById(empresa);
 			default:
 				if (LOG.isDebugEnabled())
 				{
@@ -346,6 +396,26 @@ private InternalResultsResponse<Empresa> processEmpresa(ValidationContextIndicat
 		{
 			return new InternalResultsResponse<Empresa>();
 		}
+	}
+
+	private InternalResultsResponse<Message> maintainReturnListMessage(Boolean listIndicator, Boolean pageListIndicator,Message empresa)
+	{
+		// Fetch again if requested.
+		if (listIndicator)
+		{
+			// Fetch Paged is requested.
+			if (pageListIndicator)
+			{
+				MessageInquiryRequest request = new MessageInquiryRequest();
+				request.setPreQueryCount(true);
+				return fetchMessagesByRequest(request);
+			}
+		}
+		else
+		{
+			return new InternalResultsResponse<Message>();
+		}
+		return null;
 	}
 
 //===================================### FILIAL ####======================================
@@ -3669,6 +3739,32 @@ private InternalResultsResponse<Condominio> processCondominio(ValidationContextI
 					{
 						return new InternalResultsResponse<Menu>();
 					}
+				}
+
+				@Override
+				public InternalResultsResponse<Message> insertMessage(MessageMaintenanceRequest request) {
+					InternalResultsResponse<Message> response =
+							processMessage(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+					return response;
+				}
+
+				@Override
+				public InternalResultsResponse<Message> updateMessage(MessageMaintenanceRequest request) {
+					InternalResultsResponse<Message> response =
+							processMessage(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+					return response;
+				}
+
+				@Override
+				public InternalResultsResponse<Message> deleteMessage(MessageMaintenanceRequest request) {
+					InternalResultsResponse<Message> response =
+							processMessage(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+					return response;
+				}
+
+				@Override
+				public InternalResultsResponse<Message> fetchMessagesByRequest(MessageInquiryRequest request) {
+					return getEmpresaBAR().fetchMessagesByRequest(request);
 				}
 
 }

@@ -51,6 +51,7 @@ import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.Field;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
 import com.qat.samples.sysmgmt.entidade.model.Menu;
+import com.qat.samples.sysmgmt.entidade.model.Message;
 import com.qat.samples.sysmgmt.entidade.model.Pagina;
 import com.qat.samples.sysmgmt.entidade.model.Role;
 import com.qat.samples.sysmgmt.entidade.model.Transaction;
@@ -60,6 +61,7 @@ import com.qat.samples.sysmgmt.entidade.model.Validacao;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.MessageInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.model.Endereco;
@@ -92,6 +94,25 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 
 	/** The Constant STMT_DELETE_EMPRESA_ALL. */
 	private static final String STMT_DELETE_ENTIDADE_ALL = NAMESPACE_ENTIDADE + "deleteAllEntidades";
+
+	private static final String NAMESPACE_MESSAGE = "MessageMap.";
+
+	/** The Constant STMT_INSERT_EMPRESA. */
+	private static final String STMT_INSERT_MESSAGE = NAMESPACE_MESSAGE + "insertMessage";
+
+	/** The Constant STMT_UPDATE_EMPRESA. */
+	private static final String STMT_UPDATE_MESSAGE = NAMESPACE_MESSAGE + "updateMessage";
+
+	/** The Constant STMT_DELETE_EMPRESA. */
+	private static final String STMT_DELETE_MESSAGE = NAMESPACE_MESSAGE + "deleteMessageById";
+
+	/** The Constant STMT_FETCH_EMPRESA_ALL_REQUEST. */
+	private static final String STMT_FETCH_MESSAGE_ALL_REQUEST = NAMESPACE_MESSAGE + "fetchAllMessagesByRequest";
+
+	/** The Constant STMT_FETCH_EMPRESA_COUNT. */
+	private static final String STMT_FETCH_MESSAGE_COUNT = NAMESPACE_MESSAGE + "fetchMessageRowCount";
+
+
 
 	/// ===================================### EMPRESA
 	/// ####======================================
@@ -3054,6 +3075,97 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	@Override
 	public InternalResultsResponse<Status> fetchStatussByRequest(PagedInquiryRequest request) {
 		return getStatusBAR().fetchStatusByRequest(request);
+	}
+
+	@Override
+	public InternalResponse insertMessage(Message empresa) {
+		InternalResponse response = new InternalResponse();
+		Integer historicoId = empresa.getTransactionId();
+		Integer processId = empresa.getTransactionId();
+		empresa.setProcessId(historicoId);
+
+		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_MESSAGE, empresa, response);
+
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.AJUDA, AcaoEnum.INSERT,
+				empresa.getTransactionId(), getHistoricoBAR(), response, empresa.getId(), empresa.getUserId());
+
+		return response;
+	}
+
+	@Override
+	public InternalResponse updateMessage(Message empresa) {
+		InternalResponse response = new InternalResponse();
+		Integer historicoId = empresa.getTransactionId();
+		Integer processId = empresa.getTransactionId();
+		empresa.setProcessId(historicoId);
+		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_MESSAGE, empresa, response);
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.AJUDA, AcaoEnum.UPDATE,
+				empresa.getTransactionId(), getHistoricoBAR(), response, empresa.getId(), empresa.getUserId());
+
+		return response;
+	}
+
+	@Override
+	public InternalResponse deleteMessageById(Message empresa) {
+		InternalResponse response = new InternalResponse();
+		Integer historicoId = empresa.getTransactionId();
+		Integer processId = empresa.getTransactionId();
+		empresa.setProcessId(historicoId);
+
+		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_MESSAGE, response);
+
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.AJUDA, AcaoEnum.DELETE,
+				empresa.getTransactionId(), getHistoricoBAR(), response, empresa.getId(), empresa.getUserId());
+
+		return response;
+	}
+
+	@Override
+	public InternalResultsResponse<Message> fetchMessagesByRequest(MessageInquiryRequest request) {
+		InternalResultsResponse<Message> response = new InternalResultsResponse<Message>();
+		fetchMessagesByRequest(getSqlSession(), request, STMT_FETCH_MESSAGE_COUNT, STMT_FETCH_MESSAGE_ALL_REQUEST, response);
+		return response;
+	}
+
+	public static void fetchMessagesByRequest(SqlSession sqlSession, MessageInquiryRequest request,
+			String countStatement, String fetchPagedStatement, InternalResultsResponse<?> response) {
+
+		// If the user requested the total rows/record count
+		if (request.isPreQueryCount()) {
+			// set the total rows available in the response
+			response.getResultsSetInfo().setTotalRowsAvailable(
+					(Integer) MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+			if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO) {
+				response.setStatus(BusinessErrorCategory.NoRowsFound);
+				return;
+			}
+		}
+
+		// Fetch Objects by InquiryRequest Object, paged of course
+		response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+		// move request start page to response start page
+		response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+		// move request page size to response page size
+		response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+		// calculate correct startPage for more rows available comparison, since
+		// it is zero based, we have to offset by
+		// 1.
+		int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+		// set moreRowsAvailable in response based on total rows compared to
+		// (page size * start page)
+		// remember if the count was not requested the TotalRowsAvailable will
+		// be false because the assumption
+		// is that you your own logic to handle this.
+		if (response.getResultsSetInfo()
+				.getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage)) {
+			response.getResultsSetInfo().setMoreRowsAvailable(true);
+		}
+
 	}
 
 }

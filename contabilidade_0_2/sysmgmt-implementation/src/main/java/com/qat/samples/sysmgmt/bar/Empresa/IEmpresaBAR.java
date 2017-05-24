@@ -16,6 +16,7 @@ import com.qat.samples.sysmgmt.entidade.model.Empresa;
 import com.qat.samples.sysmgmt.entidade.model.Field;
 import com.qat.samples.sysmgmt.entidade.model.Filial;
 import com.qat.samples.sysmgmt.entidade.model.Menu;
+import com.qat.samples.sysmgmt.entidade.model.Message;
 import com.qat.samples.sysmgmt.entidade.model.Pagina;
 import com.qat.samples.sysmgmt.entidade.model.Role;
 import com.qat.samples.sysmgmt.entidade.model.Transaction;
@@ -25,6 +26,7 @@ import com.qat.samples.sysmgmt.entidade.model.Validacao;
 import com.qat.samples.sysmgmt.entidade.model.request.DepositoInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.EmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.entidade.model.request.FilialInquiryRequest;
+import com.qat.samples.sysmgmt.entidade.model.request.MessageInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.Note;
 import com.qat.samples.sysmgmt.util.model.Status;
@@ -56,6 +58,9 @@ public interface IEmpresaBAR
 */
 	public InternalResponse insertEmpresa(Empresa empresa);
 
+
+	public InternalResponse insertMessage(Message empresa);
+
 	/**
 * Update empresa.
 *
@@ -65,6 +70,8 @@ public interface IEmpresaBAR
 */
 	public InternalResponse updateEmpresa(Empresa empresa);
 
+	public InternalResponse updateMessage(Message empresa);
+
 	/**
 * Delete empresa.
 *
@@ -73,6 +80,8 @@ public interface IEmpresaBAR
 * @return the internal response
 */
 	public InternalResponse deleteEmpresaById(Empresa empresa);
+
+	public InternalResponse deleteMessageById(Message empresa);
 
 	/**
 * Delete all empresas.
@@ -95,6 +104,8 @@ public interface IEmpresaBAR
 * @return the internal results response
 */
 	public InternalResultsResponse<Empresa> fetchEmpresasByRequest(EmpresaInquiryRequest request);
+
+	public InternalResultsResponse<Message> fetchMessagesByRequest(MessageInquiryRequest request);
 
 	/**
 	 * Fetch filial by id.
@@ -842,9 +853,9 @@ public interface IEmpresaBAR
 
 
 	public InternalResultsResponse<Endereco> fetchEnderecosByRequest(EmpresaInquiryRequest request);
-	
-	
-	
+
+
+
 	/**
 * Insert Note.
 *
@@ -893,8 +904,8 @@ notem note the note
 * @return the internal results response
 */
 	public InternalResultsResponse<Note> fetchNotesByRequest(PagedInquiryRequest request);
-	
-	
+
+
 	/**
 * Insert note.
 *

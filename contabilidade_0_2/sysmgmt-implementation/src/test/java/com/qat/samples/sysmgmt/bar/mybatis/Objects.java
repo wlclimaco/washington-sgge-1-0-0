@@ -4895,14 +4895,14 @@ public static NFNotaInfoItemImpostoICMS70 insertNFNotaInfoItemImpostoICMS70(Inte
 	nfnotainfoitemimpostoicms70.setValorBC("NATIVE INSERT UPDATE");
 	nfnotainfoitemimpostoicms70.setPercentualAliquota("NATIVE INSERT UPDATE");
 	nfnotainfoitemimpostoicms70.setValorTributo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms70.setModalidadeBCICMSST("NATIVE INSERT UPDATE");
+	nfnotainfoitemimpostoicms70.setModalidadeBCICMSST(insertDoisValor(id, tabela, action));
 	nfnotainfoitemimpostoicms70.setPercentualMargemValorAdicionadoICMSST("NATIVE INSERT UPDATE");
 	nfnotainfoitemimpostoicms70.setPercentualReducaoBCICMSST("NATIVE INSERT UPDATE");
 	nfnotainfoitemimpostoicms70.setValorBCST("NATIVE INSERT UPDATE");
 	nfnotainfoitemimpostoicms70.setPercentualAliquotaImpostoICMSST("NATIVE INSERT UPDATE");
 	nfnotainfoitemimpostoicms70.setValorICMSST("NATIVE INSERT UPDATE");
 	nfnotainfoitemimpostoicms70.setValorICMSDesoneracao("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms70.setDesoneracao("NATIVE INSERT UPDATE");
+	nfnotainfoitemimpostoicms70.setDesoneracao(insertDoisValor(id, tabela, action));
 	nfnotainfoitemimpostoicms70.setParentId(id);
 	nfnotainfoitemimpostoicms70.setEmprId(1);
 	nfnotainfoitemimpostoicms70.setModifyDateUTC(a.getTime());
@@ -4927,7 +4927,7 @@ public static NFNotaInfoItemImpostoICMS90 insertNFNotaInfoItemImpostoICMS90(Inte
 	nfnotainfoitemimpostoicms90.setPercentualReducaoBC("NATIVE INSERT UPDATE");
 	nfnotainfoitemimpostoicms90.setPercentualAliquota("NATIVE INSERT UPDATE");
 	nfnotainfoitemimpostoicms90.setValorTributo("NATIVE INSERT UPDATE");
-	nfnotainfoitemimpostoicms90.setModalidadeBCICMSST("NATIVE INSERT UPDATE");
+	nfnotainfoitemimpostoicms90.setModalidadeBCICMSST(insertDoisValor(id, tabela, action));
 	nfnotainfoitemimpostoicms90.setPercentualMargemValorAdicionadoICMSST("NATIVE INSERT UPDATE");
 	nfnotainfoitemimpostoicms90.setPercentualReducaoBCICMSST("NATIVE INSERT UPDATE");
 	nfnotainfoitemimpostoicms90.setValorBCST("NATIVE INSERT UPDATE");
