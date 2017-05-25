@@ -145,6 +145,7 @@
         <typeAlias alias="OrdemServicoItens" type="com.qat.samples.sysmgmt.ordemServico.model.OrdemServicoItens" />
 
 <typeAlias alias="Message" type="com.qat.samples.sysmgmt.entidade.model.Message" />
+<typeAlias alias="MessageInquiryRequest" type="com.qat.samples.sysmgmt.entidade.model.request.MessageInquiryRequest" />
 
         <!-- Dicionario -->
         <typeAlias alias="Field" type="com.qat.samples.sysmgmt.entidade.model.Field" />

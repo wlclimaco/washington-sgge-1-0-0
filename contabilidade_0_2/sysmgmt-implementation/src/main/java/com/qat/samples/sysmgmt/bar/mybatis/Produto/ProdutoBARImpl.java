@@ -2369,7 +2369,21 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	@Override
 	public InternalResponse updateTributacao(Tributacao tributacao) {
 		InternalResponse response = new InternalResponse();
+		Integer count = 0;
 		tributacao.setProcessId(tributacao.getTransactionId());
+		if (!ValidationUtil.isNull(tributacao.getImposto())) {
+			count += NFNotaInfoItemImpostoBARD.maintainNFNotaInfoItemImpostoAssociations(tributacao.getImposto(),
+					response, tributacao.getId(), null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR,
+					historicoBAR, tributacao.getId(), tributacao.getCreateUser(),
+					tributacao.getTransactionId(), tributacao.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(tributacao.getImpostoDevolvido())) {
+			count += NFImpostoDevolvidoBARD.maintainNFImpostoDevolvidoAssociations(tributacao.getImpostoDevolvido(),
+					response, tributacao.getId(), null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR,
+					historicoBAR, tributacao.getId(), tributacao.getCreateUser(),
+					tributacao.getTransactionId(), tributacao.getTransactionId());
+		}
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_TRIBUTACAO, tributacao, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.TRIBUTACAO, AcaoEnum.UPDATE,
@@ -2389,8 +2403,25 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 	public InternalResponse deleteTributacaoById(Tributacao tributacao) {
 		InternalResponse response = new InternalResponse();
 		tributacao.setProcessId(tributacao.getTransactionId());
-		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_TRIBUTACAO, tributacao, response);
 
+
+		Integer count = 0;
+		tributacao.setProcessId(tributacao.getTransactionId());
+		if (!ValidationUtil.isNull(tributacao.getImposto())) {
+			count += NFNotaInfoItemImpostoBARD.maintainNFNotaInfoItemImpostoAssociations(tributacao.getImposto(),
+					response, tributacao.getId(), null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR,
+					historicoBAR, tributacao.getId(), tributacao.getCreateUser(),
+					tributacao.getTransactionId(), tributacao.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(tributacao.getImpostoDevolvido())) {
+			count += NFImpostoDevolvidoBARD.maintainNFImpostoDevolvidoAssociations(tributacao.getImpostoDevolvido(),
+					response, tributacao.getId(), null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR,
+					historicoBAR, tributacao.getId(), tributacao.getCreateUser(),
+					tributacao.getTransactionId(), tributacao.getTransactionId());
+		}
+
+		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_TRIBUTACAO, tributacao, response);
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.TRIBUTACAO, AcaoEnum.DELETE,
 				tributacao.getTransactionId(), getHistoricoBAR(), response, tributacao.getId(), tributacao.getUserId());
 

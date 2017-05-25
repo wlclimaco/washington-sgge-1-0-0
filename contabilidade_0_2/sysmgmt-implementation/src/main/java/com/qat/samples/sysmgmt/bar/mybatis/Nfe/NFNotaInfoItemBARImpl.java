@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
@@ -8568,17 +8569,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 				nfnotainfoitemimpostoipi.getTransactionId(), getHistoricoBAR(), response,
 				nfnotainfoitemimpostoipi.getId(), nfnotainfoitemimpostoipi.getUserId());
 
-		if (nfnotainfoitemimpostoipi.getId() != 0 && nfnotainfoitemimpostoipi.getId() != null) {
-			Status status = new Status();
-			status.setStatus(CdStatusTypeEnum.ATIVO);
-			List<Status> statusList = new ArrayList<Status>();
-			statusList.add(status);
-			count1 = StatusBARD.maintainStatusAssociations(statusList, response, nfnotainfoitemimpostoipi.getId(), null,
-					AcaoEnum.INSERT, nfnotainfoitemimpostoipi.getCreateUser(), nfnotainfoitemimpostoipi.getId(),
-					TabelaEnum.NFNOTAINFOITEMIMPOSTOIPI, statusBAR, historicoBAR,
-					nfnotainfoitemimpostoipi.getTransactionId(), nfnotainfoitemimpostoipi.getTransactionId());
 
-		}
 
 		return response;
 	}
@@ -8596,6 +8587,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		nfnotainfoitemimpostoipi.setProcessId(nfnotainfoitemimpostoipi.getTransactionId());
 		Integer a = 0;
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoipi.getTributado())) {
+			nfnotainfoitemimpostoipi.getTributado().setModelAction(PersistenceActionEnum.DELETE);
 			a += NFNotaInfoItemImpostoIPITributadoBARD.maintainNFNotaInfoItemImpostoIPITributadoAssociations(
 					nfnotainfoitemimpostoipi.getTributado(), response, nfnotainfoitemimpostoipi.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -8604,6 +8596,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoipi.getNaoTributado())) {
+			nfnotainfoitemimpostoipi.getNaoTributado().setModelAction(PersistenceActionEnum.DELETE);
 			a += NFNotaInfoItemImpostoIPINaoTributadoBARD.maintainNFNotaInfoItemImpostoIPINaoTributadoAssociations(
 					nfnotainfoitemimpostoipi.getNaoTributado(), response, nfnotainfoitemimpostoipi.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -8613,6 +8606,24 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_NFNOTAINFOITEMIMPOSTOIPI, nfnotainfoitemimpostoipi,
 				response);
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoipi.getTributado())) {
+			nfnotainfoitemimpostoipi.getTributado().setModelAction(PersistenceActionEnum.INSERT);
+			a += NFNotaInfoItemImpostoIPITributadoBARD.maintainNFNotaInfoItemImpostoIPITributadoAssociations(
+					nfnotainfoitemimpostoipi.getTributado(), response, nfnotainfoitemimpostoipi.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoipi.getId(), nfnotainfoitemimpostoipi.getCreateUser(),
+					nfnotainfoitemimpostoipi.getTransactionId(), nfnotainfoitemimpostoipi.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoipi.getNaoTributado())) {
+			nfnotainfoitemimpostoipi.getTributado().setModelAction(PersistenceActionEnum.INSERT);
+			a += NFNotaInfoItemImpostoIPINaoTributadoBARD.maintainNFNotaInfoItemImpostoIPINaoTributadoAssociations(
+					nfnotainfoitemimpostoipi.getNaoTributado(), response, nfnotainfoitemimpostoipi.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoipi.getId(), nfnotainfoitemimpostoipi.getCreateUser(),
+					nfnotainfoitemimpostoipi.getTransactionId(), nfnotainfoitemimpostoipi.getTransactionId());
+		}
 
 		a += InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFNOTAINFOITEMIMPOSTOIPI, AcaoEnum.UPDATE,
 				nfnotainfoitemimpostoipi.getTransactionId(), getHistoricoBAR(), response,

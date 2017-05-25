@@ -793,6 +793,7 @@ public IProdutoBAR getProdutoBAR()
 		getProdutoBAR().insertTributacao(tributacao);
 		tributacaoResponse = getProdutoBAR().fetchTributacaoById(request);
 		Assert.assertEquals(tributacao.getId(), tributacaoResponse.getId());
+		tributacao = Objects.insertTributacao(4, TabelaEnum.TRIBUTACAO, PersistenceActionEnum.DELETE);
 		getProdutoBAR().deleteTributacaoById(tributacao);
 		tributacaoResponse = getProdutoBAR().fetchTributacaoById(request);
 		Assert.assertEquals(tributacaoResponse, null);
