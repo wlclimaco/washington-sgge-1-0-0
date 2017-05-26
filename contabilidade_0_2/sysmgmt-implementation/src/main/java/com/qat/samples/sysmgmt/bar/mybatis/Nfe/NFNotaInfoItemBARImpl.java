@@ -4706,6 +4706,81 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		InternalResponse response = new InternalResponse();
 		nfnotainfoitemimposto.setProcessId(nfnotainfoitemimposto.getTransactionId());
 		Integer count = 0;
+
+		// Delete
+		if (!ValidationUtil.isNull(nfnotainfoitemimposto.getIcms())) {
+			count += NFNotaInfoItemImpostoICMSBARD.maintainNFNotaInfoItemImpostoICMSAssociations(
+					nfnotainfoitemimposto.getIcms(), response, nfnotainfoitemimposto.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR, nfnotainfoitemimposto.getId(),
+					nfnotainfoitemimposto.getCreateUser(), nfnotainfoitemimposto.getTransactionId(),
+					nfnotainfoitemimposto.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimposto.getIpi())) {
+			count += NFNotaInfoItemImpostoIPIBARD.maintainNFNotaInfoItemImpostoIPIAssociations(
+					nfnotainfoitemimposto.getIpi(), response, nfnotainfoitemimposto.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR, nfnotainfoitemimposto.getId(),
+					nfnotainfoitemimposto.getCreateUser(), nfnotainfoitemimposto.getTransactionId(),
+					nfnotainfoitemimposto.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimposto.getImpostoImportacao())) {
+			count += NFNotaInfoItemImpostoImportacaoBARD.maintainNFNotaInfoItemImpostoImportacaoAssociations(
+					nfnotainfoitemimposto.getImpostoImportacao(), response, nfnotainfoitemimposto.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR, nfnotainfoitemimposto.getId(),
+					nfnotainfoitemimposto.getCreateUser(), nfnotainfoitemimposto.getTransactionId(),
+					nfnotainfoitemimposto.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimposto.getIssqn())) {
+			count += NFNotaInfoItemImpostoISSQNBARD.maintainNFNotaInfoItemImpostoISSQNAssociations(
+					nfnotainfoitemimposto.getIssqn(), response, nfnotainfoitemimposto.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR, nfnotainfoitemimposto.getId(),
+					nfnotainfoitemimposto.getCreateUser(), nfnotainfoitemimposto.getTransactionId(),
+					nfnotainfoitemimposto.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimposto.getPis())) {
+			count += NFNotaInfoItemImpostoPISBARD.maintainNFNotaInfoItemImpostoPISAssociations(
+					nfnotainfoitemimposto.getPis(), response, nfnotainfoitemimposto.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR, nfnotainfoitemimposto.getId(),
+					nfnotainfoitemimposto.getCreateUser(), nfnotainfoitemimposto.getTransactionId(),
+					nfnotainfoitemimposto.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimposto.getPisst())) {
+			count += NFNotaInfoItemImpostoPISSTBARD.maintainNFNotaInfoItemImpostoPISSTAssociations(
+					nfnotainfoitemimposto.getPisst(), response, nfnotainfoitemimposto.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR, nfnotainfoitemimposto.getId(),
+					nfnotainfoitemimposto.getCreateUser(), nfnotainfoitemimposto.getTransactionId(),
+					nfnotainfoitemimposto.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimposto.getCofins())) {
+			count += NFNotaInfoItemImpostoCOFINSBARD.maintainNFNotaInfoItemImpostoCOFINSAssociations(
+					nfnotainfoitemimposto.getCofins(), response, nfnotainfoitemimposto.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR, nfnotainfoitemimposto.getId(),
+					nfnotainfoitemimposto.getCreateUser(), nfnotainfoitemimposto.getTransactionId(),
+					nfnotainfoitemimposto.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimposto.getCofinsst())) {
+			count += NFNotaInfoItemImpostoCOFINSSTBARD.maintainNFNotaInfoItemImpostoCOFINSSTAssociations(
+					nfnotainfoitemimposto.getCofinsst(), response, nfnotainfoitemimposto.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR, nfnotainfoitemimposto.getId(),
+					nfnotainfoitemimposto.getCreateUser(), nfnotainfoitemimposto.getTransactionId(),
+					nfnotainfoitemimposto.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimposto.getIcmsUfDestino())) {
+			count += NFNotaInfoItemImpostoICMSUFDestinoBARD.maintainNFNotaInfoItemImpostoICMSUFDestinoAssociations(
+					nfnotainfoitemimposto.getIcmsUfDestino(), response, nfnotainfoitemimposto.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR, nfnotainfoitemimposto.getId(),
+					nfnotainfoitemimposto.getCreateUser(), nfnotainfoitemimposto.getTransactionId(),
+					nfnotainfoitemimposto.getTransactionId());
+		}
+
+		// Insert
 		if (!ValidationUtil.isNull(nfnotainfoitemimposto.getIcms())) {
 			count += NFNotaInfoItemImpostoICMSBARD.maintainNFNotaInfoItemImpostoICMSAssociations(
 					nfnotainfoitemimposto.getIcms(), response, nfnotainfoitemimposto.getId(), null, null,
@@ -4999,7 +5074,9 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 
 		nfnotainfoitemimpostoicms.setProcessId(nfnotainfoitemimpostoicms.getTransactionId());
 
-		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms00())) {
+		// Delete
+		if (nfnotainfoitemimpostoicms.getIcms00() != null) {
+			nfnotainfoitemimpostoicms.getIcms00().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMS00BARD.maintainNFNotaInfoItemImpostoICMS00Associations(
 					nfnotainfoitemimpostoicms.getIcms00(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5008,6 +5085,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms10())) {
+			nfnotainfoitemimpostoicms.getIcms10().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMS10BARD.maintainNFNotaInfoItemImpostoICMS10Associations(
 					nfnotainfoitemimpostoicms.getIcms10(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5016,6 +5094,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms20())) {
+			nfnotainfoitemimpostoicms.getIcms20().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMS20BARD.maintainNFNotaInfoItemImpostoICMS20Associations(
 					nfnotainfoitemimpostoicms.getIcms20(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5024,6 +5103,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms30())) {
+			nfnotainfoitemimpostoicms.getIcms30().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMS30BARD.maintainNFNotaInfoItemImpostoICMS30Associations(
 					nfnotainfoitemimpostoicms.getIcms30(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5032,6 +5112,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms40())) {
+			nfnotainfoitemimpostoicms.getIcms40().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMS40BARD.maintainNFNotaInfoItemImpostoICMS40Associations(
 					nfnotainfoitemimpostoicms.getIcms40(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5040,6 +5121,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms51())) {
+			nfnotainfoitemimpostoicms.getIcms51().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMS51BARD.maintainNFNotaInfoItemImpostoICMS51Associations(
 					nfnotainfoitemimpostoicms.getIcms51(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5048,6 +5130,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms60())) {
+			nfnotainfoitemimpostoicms.getIcms60().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMS60BARD.maintainNFNotaInfoItemImpostoICMS60Associations(
 					nfnotainfoitemimpostoicms.getIcms60(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5056,6 +5139,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms70())) {
+			nfnotainfoitemimpostoicms.getIcms70().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMS70BARD.maintainNFNotaInfoItemImpostoICMS70Associations(
 					nfnotainfoitemimpostoicms.getIcms70(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5064,6 +5148,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms90())) {
+			nfnotainfoitemimpostoicms.getIcms90().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMS90BARD.maintainNFNotaInfoItemImpostoICMS90Associations(
 					nfnotainfoitemimpostoicms.getIcms90(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5072,6 +5157,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmsPartilhado())) {
+			nfnotainfoitemimpostoicms.getIcmsPartilhado().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMSPartilhadoBARD.maintainNFNotaInfoItemImpostoICMSPartilhadoAssociations(
 					nfnotainfoitemimpostoicms.getIcmsPartilhado(), response, nfnotainfoitemimpostoicms.getId(), null,
 					null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5080,6 +5166,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmsst())) {
+			nfnotainfoitemimpostoicms.getIcmsst().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMSSTBARD.maintainNFNotaInfoItemImpostoICMSSTAssociations(
 					nfnotainfoitemimpostoicms.getIcmsst(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5088,6 +5175,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn101())) {
+			nfnotainfoitemimpostoicms.getIcmssn101().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMSSN101BARD.maintainNFNotaInfoItemImpostoICMSSN101Associations(
 					nfnotainfoitemimpostoicms.getIcmssn101(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5096,6 +5184,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn102())) {
+			nfnotainfoitemimpostoicms.getIcmssn102().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMSSN102BARD.maintainNFNotaInfoItemImpostoICMSSN102Associations(
 					nfnotainfoitemimpostoicms.getIcmssn102(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5104,6 +5193,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn201())) {
+			nfnotainfoitemimpostoicms.getIcmssn201().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMSSN201BARD.maintainNFNotaInfoItemImpostoICMSSN201Associations(
 					nfnotainfoitemimpostoicms.getIcmssn201(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5112,6 +5202,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn202())) {
+			nfnotainfoitemimpostoicms.getIcmssn202().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMSSN202BARD.maintainNFNotaInfoItemImpostoICMSSN202Associations(
 					nfnotainfoitemimpostoicms.getIcmssn202(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5120,6 +5211,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn500())) {
+			nfnotainfoitemimpostoicms.getIcmssn500().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMSSN500BARD.maintainNFNotaInfoItemImpostoICMSSN500Associations(
 					nfnotainfoitemimpostoicms.getIcmssn500(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5128,6 +5220,161 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn900())) {
+			nfnotainfoitemimpostoicms.getIcmssn900().setModelAction(PersistenceActionEnum.DELETE);
+			count += NFNotaInfoItemImpostoICMSSN900BARD.maintainNFNotaInfoItemImpostoICMSSN900Associations(
+					nfnotainfoitemimpostoicms.getIcmssn900(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		// INSERT
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms00())) {
+			nfnotainfoitemimpostoicms.getIcms00().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMS00BARD.maintainNFNotaInfoItemImpostoICMS00Associations(
+					nfnotainfoitemimpostoicms.getIcms00(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms10())) {
+			nfnotainfoitemimpostoicms.getIcms10().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMS10BARD.maintainNFNotaInfoItemImpostoICMS10Associations(
+					nfnotainfoitemimpostoicms.getIcms10(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms20())) {
+			nfnotainfoitemimpostoicms.getIcms20().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMS20BARD.maintainNFNotaInfoItemImpostoICMS20Associations(
+					nfnotainfoitemimpostoicms.getIcms20(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms30())) {
+			nfnotainfoitemimpostoicms.getIcms30().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMS30BARD.maintainNFNotaInfoItemImpostoICMS30Associations(
+					nfnotainfoitemimpostoicms.getIcms30(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms40())) {
+			nfnotainfoitemimpostoicms.getIcms40().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMS40BARD.maintainNFNotaInfoItemImpostoICMS40Associations(
+					nfnotainfoitemimpostoicms.getIcms40(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms51())) {
+			nfnotainfoitemimpostoicms.getIcms51().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMS51BARD.maintainNFNotaInfoItemImpostoICMS51Associations(
+					nfnotainfoitemimpostoicms.getIcms51(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms60())) {
+			nfnotainfoitemimpostoicms.getIcms60().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMS60BARD.maintainNFNotaInfoItemImpostoICMS60Associations(
+					nfnotainfoitemimpostoicms.getIcms60(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms70())) {
+			nfnotainfoitemimpostoicms.getIcms70().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMS70BARD.maintainNFNotaInfoItemImpostoICMS70Associations(
+					nfnotainfoitemimpostoicms.getIcms70(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms90())) {
+			nfnotainfoitemimpostoicms.getIcms90().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMS90BARD.maintainNFNotaInfoItemImpostoICMS90Associations(
+					nfnotainfoitemimpostoicms.getIcms90(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmsPartilhado())) {
+			nfnotainfoitemimpostoicms.getIcmsPartilhado().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMSPartilhadoBARD.maintainNFNotaInfoItemImpostoICMSPartilhadoAssociations(
+					nfnotainfoitemimpostoicms.getIcmsPartilhado(), response, nfnotainfoitemimpostoicms.getId(), null,
+					null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmsst())) {
+			nfnotainfoitemimpostoicms.getIcmsst().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMSSTBARD.maintainNFNotaInfoItemImpostoICMSSTAssociations(
+					nfnotainfoitemimpostoicms.getIcmsst(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn101())) {
+			nfnotainfoitemimpostoicms.getIcmssn101().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMSSN101BARD.maintainNFNotaInfoItemImpostoICMSSN101Associations(
+					nfnotainfoitemimpostoicms.getIcmssn101(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn102())) {
+			nfnotainfoitemimpostoicms.getIcmssn102().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMSSN102BARD.maintainNFNotaInfoItemImpostoICMSSN102Associations(
+					nfnotainfoitemimpostoicms.getIcmssn102(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn201())) {
+			nfnotainfoitemimpostoicms.getIcmssn201().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMSSN201BARD.maintainNFNotaInfoItemImpostoICMSSN201Associations(
+					nfnotainfoitemimpostoicms.getIcmssn201(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn202())) {
+			nfnotainfoitemimpostoicms.getIcmssn202().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMSSN202BARD.maintainNFNotaInfoItemImpostoICMSSN202Associations(
+					nfnotainfoitemimpostoicms.getIcmssn202(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn500())) {
+			nfnotainfoitemimpostoicms.getIcmssn500().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMSSN500BARD.maintainNFNotaInfoItemImpostoICMSSN500Associations(
+					nfnotainfoitemimpostoicms.getIcmssn500(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn900())) {
+			nfnotainfoitemimpostoicms.getIcmssn900().setModelAction(PersistenceActionEnum.INSERT);
 			count += NFNotaInfoItemImpostoICMSSN900BARD.maintainNFNotaInfoItemImpostoICMSSN900Associations(
 					nfnotainfoitemimpostoicms.getIcmssn900(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5141,18 +5388,6 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFNOTAINFOITEMIMPOSTOICMS, AcaoEnum.INSERT,
 				nfnotainfoitemimpostoicms.getTransactionId(), getHistoricoBAR(), response,
 				nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getUserId());
-
-		if (nfnotainfoitemimpostoicms.getId() != 0 && nfnotainfoitemimpostoicms.getId() != null) {
-			Status status = new Status();
-			status.setStatus(CdStatusTypeEnum.ATIVO);
-			List<Status> statusList = new ArrayList<Status>();
-			statusList.add(status);
-			count1 = StatusBARD.maintainStatusAssociations(statusList, response, nfnotainfoitemimpostoicms.getId(),
-					null, AcaoEnum.INSERT, nfnotainfoitemimpostoicms.getCreateUser(), nfnotainfoitemimpostoicms.getId(),
-					TabelaEnum.NFNOTAINFOITEMIMPOSTOICMS, statusBAR, historicoBAR,
-					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
-
-		}
 
 		return response;
 	}
@@ -5169,7 +5404,9 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		InternalResponse response = new InternalResponse();
 		nfnotainfoitemimpostoicms.setProcessId(nfnotainfoitemimpostoicms.getTransactionId());
 		Integer count = 0;
+		// Delete
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms00())) {
+			nfnotainfoitemimpostoicms.getIcms00().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMS00BARD.maintainNFNotaInfoItemImpostoICMS00Associations(
 					nfnotainfoitemimpostoicms.getIcms00(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5178,6 +5415,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms10())) {
+			nfnotainfoitemimpostoicms.getIcms10().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMS10BARD.maintainNFNotaInfoItemImpostoICMS10Associations(
 					nfnotainfoitemimpostoicms.getIcms10(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5186,6 +5424,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms20())) {
+			nfnotainfoitemimpostoicms.getIcms20().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMS20BARD.maintainNFNotaInfoItemImpostoICMS20Associations(
 					nfnotainfoitemimpostoicms.getIcms20(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5194,6 +5433,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms30())) {
+			nfnotainfoitemimpostoicms.getIcms30().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMS30BARD.maintainNFNotaInfoItemImpostoICMS30Associations(
 					nfnotainfoitemimpostoicms.getIcms30(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5202,6 +5442,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms40())) {
+			nfnotainfoitemimpostoicms.getIcms40().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMS40BARD.maintainNFNotaInfoItemImpostoICMS40Associations(
 					nfnotainfoitemimpostoicms.getIcms40(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5210,6 +5451,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms51())) {
+			nfnotainfoitemimpostoicms.getIcms51().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMS51BARD.maintainNFNotaInfoItemImpostoICMS51Associations(
 					nfnotainfoitemimpostoicms.getIcms51(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5218,6 +5460,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms60())) {
+			nfnotainfoitemimpostoicms.getIcms60().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMS60BARD.maintainNFNotaInfoItemImpostoICMS60Associations(
 					nfnotainfoitemimpostoicms.getIcms60(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5226,6 +5469,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms70())) {
+			nfnotainfoitemimpostoicms.getIcms70().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMS70BARD.maintainNFNotaInfoItemImpostoICMS70Associations(
 					nfnotainfoitemimpostoicms.getIcms70(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5234,6 +5478,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms90())) {
+			nfnotainfoitemimpostoicms.getIcms90().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMS90BARD.maintainNFNotaInfoItemImpostoICMS90Associations(
 					nfnotainfoitemimpostoicms.getIcms90(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5242,6 +5487,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmsPartilhado())) {
+			nfnotainfoitemimpostoicms.getIcmsPartilhado().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMSPartilhadoBARD.maintainNFNotaInfoItemImpostoICMSPartilhadoAssociations(
 					nfnotainfoitemimpostoicms.getIcmsPartilhado(), response, nfnotainfoitemimpostoicms.getId(), null,
 					null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5250,6 +5496,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmsst())) {
+			nfnotainfoitemimpostoicms.getIcmsst().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMSSTBARD.maintainNFNotaInfoItemImpostoICMSSTAssociations(
 					nfnotainfoitemimpostoicms.getIcmsst(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5258,6 +5505,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn101())) {
+			nfnotainfoitemimpostoicms.getIcmssn101().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMSSN101BARD.maintainNFNotaInfoItemImpostoICMSSN101Associations(
 					nfnotainfoitemimpostoicms.getIcmssn101(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5266,6 +5514,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn102())) {
+			nfnotainfoitemimpostoicms.getIcmssn102().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMSSN102BARD.maintainNFNotaInfoItemImpostoICMSSN102Associations(
 					nfnotainfoitemimpostoicms.getIcmssn102(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5274,6 +5523,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn201())) {
+			nfnotainfoitemimpostoicms.getIcmssn201().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMSSN201BARD.maintainNFNotaInfoItemImpostoICMSSN201Associations(
 					nfnotainfoitemimpostoicms.getIcmssn201(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5282,6 +5532,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn202())) {
+			nfnotainfoitemimpostoicms.getIcmssn202().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMSSN202BARD.maintainNFNotaInfoItemImpostoICMSSN202Associations(
 					nfnotainfoitemimpostoicms.getIcmssn202(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5290,6 +5541,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn500())) {
+			nfnotainfoitemimpostoicms.getIcmssn500().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoICMSSN500BARD.maintainNFNotaInfoItemImpostoICMSSN500Associations(
 					nfnotainfoitemimpostoicms.getIcmssn500(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -5298,6 +5550,161 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn900())) {
+			nfnotainfoitemimpostoicms.getIcmssn900().setModelAction(PersistenceActionEnum.DELETE);
+			count += NFNotaInfoItemImpostoICMSSN900BARD.maintainNFNotaInfoItemImpostoICMSSN900Associations(
+					nfnotainfoitemimpostoicms.getIcmssn900(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		// INSERT
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms00())) {
+			nfnotainfoitemimpostoicms.getIcms00().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMS00BARD.maintainNFNotaInfoItemImpostoICMS00Associations(
+					nfnotainfoitemimpostoicms.getIcms00(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms10())) {
+			nfnotainfoitemimpostoicms.getIcms10().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMS10BARD.maintainNFNotaInfoItemImpostoICMS10Associations(
+					nfnotainfoitemimpostoicms.getIcms10(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms20())) {
+			nfnotainfoitemimpostoicms.getIcms20().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMS20BARD.maintainNFNotaInfoItemImpostoICMS20Associations(
+					nfnotainfoitemimpostoicms.getIcms20(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms30())) {
+			nfnotainfoitemimpostoicms.getIcms30().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMS30BARD.maintainNFNotaInfoItemImpostoICMS30Associations(
+					nfnotainfoitemimpostoicms.getIcms30(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms40())) {
+			nfnotainfoitemimpostoicms.getIcms40().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMS40BARD.maintainNFNotaInfoItemImpostoICMS40Associations(
+					nfnotainfoitemimpostoicms.getIcms40(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms51())) {
+			nfnotainfoitemimpostoicms.getIcms51().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMS51BARD.maintainNFNotaInfoItemImpostoICMS51Associations(
+					nfnotainfoitemimpostoicms.getIcms51(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms60())) {
+			nfnotainfoitemimpostoicms.getIcms60().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMS60BARD.maintainNFNotaInfoItemImpostoICMS60Associations(
+					nfnotainfoitemimpostoicms.getIcms60(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms70())) {
+			nfnotainfoitemimpostoicms.getIcms70().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMS70BARD.maintainNFNotaInfoItemImpostoICMS70Associations(
+					nfnotainfoitemimpostoicms.getIcms70(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcms90())) {
+			nfnotainfoitemimpostoicms.getIcms90().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMS90BARD.maintainNFNotaInfoItemImpostoICMS90Associations(
+					nfnotainfoitemimpostoicms.getIcms90(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmsPartilhado())) {
+			nfnotainfoitemimpostoicms.getIcmsPartilhado().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMSPartilhadoBARD.maintainNFNotaInfoItemImpostoICMSPartilhadoAssociations(
+					nfnotainfoitemimpostoicms.getIcmsPartilhado(), response, nfnotainfoitemimpostoicms.getId(), null,
+					null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmsst())) {
+			nfnotainfoitemimpostoicms.getIcmsst().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMSSTBARD.maintainNFNotaInfoItemImpostoICMSSTAssociations(
+					nfnotainfoitemimpostoicms.getIcmsst(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn101())) {
+			nfnotainfoitemimpostoicms.getIcmssn101().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMSSN101BARD.maintainNFNotaInfoItemImpostoICMSSN101Associations(
+					nfnotainfoitemimpostoicms.getIcmssn101(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn102())) {
+			nfnotainfoitemimpostoicms.getIcmssn102().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMSSN102BARD.maintainNFNotaInfoItemImpostoICMSSN102Associations(
+					nfnotainfoitemimpostoicms.getIcmssn102(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn201())) {
+			nfnotainfoitemimpostoicms.getIcmssn201().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMSSN201BARD.maintainNFNotaInfoItemImpostoICMSSN201Associations(
+					nfnotainfoitemimpostoicms.getIcmssn201(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn202())) {
+			nfnotainfoitemimpostoicms.getIcmssn202().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMSSN202BARD.maintainNFNotaInfoItemImpostoICMSSN202Associations(
+					nfnotainfoitemimpostoicms.getIcmssn202(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn500())) {
+			nfnotainfoitemimpostoicms.getIcmssn500().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoICMSSN500BARD.maintainNFNotaInfoItemImpostoICMSSN500Associations(
+					nfnotainfoitemimpostoicms.getIcmssn500(), response, nfnotainfoitemimpostoicms.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicms.getCreateUser(),
+					nfnotainfoitemimpostoicms.getTransactionId(), nfnotainfoitemimpostoicms.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoicms.getIcmssn900())) {
+			nfnotainfoitemimpostoicms.getIcmssn900().setModelAction(PersistenceActionEnum.INSERT);
 			count += NFNotaInfoItemImpostoICMSSN900BARD.maintainNFNotaInfoItemImpostoICMSSN900Associations(
 					nfnotainfoitemimpostoicms.getIcmssn900(), response, nfnotainfoitemimpostoicms.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -8546,7 +8953,9 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 
 		nfnotainfoitemimpostoipi.setProcessId(nfnotainfoitemimpostoipi.getTransactionId());
 
+		// Delete
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoipi.getTributado())) {
+			nfnotainfoitemimpostoipi.getTributado().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoIPITributadoBARD.maintainNFNotaInfoItemImpostoIPITributadoAssociations(
 					nfnotainfoitemimpostoipi.getTributado(), response, nfnotainfoitemimpostoipi.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -8555,6 +8964,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoipi.getNaoTributado())) {
+			nfnotainfoitemimpostoipi.getNaoTributado().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoIPINaoTributadoBARD.maintainNFNotaInfoItemImpostoIPINaoTributadoAssociations(
 					nfnotainfoitemimpostoipi.getNaoTributado(), response, nfnotainfoitemimpostoipi.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -8562,14 +8972,30 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 					nfnotainfoitemimpostoipi.getTransactionId(), nfnotainfoitemimpostoipi.getTransactionId());
 		}
 
+		// Insert
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoipi.getTributado())) {
+			nfnotainfoitemimpostoipi.getTributado().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoIPITributadoBARD.maintainNFNotaInfoItemImpostoIPITributadoAssociations(
+					nfnotainfoitemimpostoipi.getTributado(), response, nfnotainfoitemimpostoipi.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoipi.getId(), nfnotainfoitemimpostoipi.getCreateUser(),
+					nfnotainfoitemimpostoipi.getTransactionId(), nfnotainfoitemimpostoipi.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoipi.getNaoTributado())) {
+			nfnotainfoitemimpostoipi.getNaoTributado().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoIPINaoTributadoBARD.maintainNFNotaInfoItemImpostoIPINaoTributadoAssociations(
+					nfnotainfoitemimpostoipi.getNaoTributado(), response, nfnotainfoitemimpostoipi.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoipi.getId(), nfnotainfoitemimpostoipi.getCreateUser(),
+					nfnotainfoitemimpostoipi.getTransactionId(), nfnotainfoitemimpostoipi.getTransactionId());
+		}
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_NFNOTAINFOITEMIMPOSTOIPI, nfnotainfoitemimpostoipi,
 				response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFNOTAINFOITEMIMPOSTOIPI, AcaoEnum.INSERT,
 				nfnotainfoitemimpostoipi.getTransactionId(), getHistoricoBAR(), response,
 				nfnotainfoitemimpostoipi.getId(), nfnotainfoitemimpostoipi.getUserId());
-
-
 
 		return response;
 	}
@@ -8586,9 +9012,11 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		InternalResponse response = new InternalResponse();
 		nfnotainfoitemimpostoipi.setProcessId(nfnotainfoitemimpostoipi.getTransactionId());
 		Integer a = 0;
+		Integer count = 0;
+		// Delete
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoipi.getTributado())) {
 			nfnotainfoitemimpostoipi.getTributado().setModelAction(PersistenceActionEnum.DELETE);
-			a += NFNotaInfoItemImpostoIPITributadoBARD.maintainNFNotaInfoItemImpostoIPITributadoAssociations(
+			count += NFNotaInfoItemImpostoIPITributadoBARD.maintainNFNotaInfoItemImpostoIPITributadoAssociations(
 					nfnotainfoitemimpostoipi.getTributado(), response, nfnotainfoitemimpostoipi.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
 					nfnotainfoitemimpostoipi.getId(), nfnotainfoitemimpostoipi.getCreateUser(),
@@ -8597,7 +9025,26 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoipi.getNaoTributado())) {
 			nfnotainfoitemimpostoipi.getNaoTributado().setModelAction(PersistenceActionEnum.DELETE);
-			a += NFNotaInfoItemImpostoIPINaoTributadoBARD.maintainNFNotaInfoItemImpostoIPINaoTributadoAssociations(
+			count += NFNotaInfoItemImpostoIPINaoTributadoBARD.maintainNFNotaInfoItemImpostoIPINaoTributadoAssociations(
+					nfnotainfoitemimpostoipi.getNaoTributado(), response, nfnotainfoitemimpostoipi.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoipi.getId(), nfnotainfoitemimpostoipi.getCreateUser(),
+					nfnotainfoitemimpostoipi.getTransactionId(), nfnotainfoitemimpostoipi.getTransactionId());
+		}
+
+		// Insert
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoipi.getTributado())) {
+			nfnotainfoitemimpostoipi.getTributado().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoIPITributadoBARD.maintainNFNotaInfoItemImpostoIPITributadoAssociations(
+					nfnotainfoitemimpostoipi.getTributado(), response, nfnotainfoitemimpostoipi.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostoipi.getId(), nfnotainfoitemimpostoipi.getCreateUser(),
+					nfnotainfoitemimpostoipi.getTransactionId(), nfnotainfoitemimpostoipi.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostoipi.getNaoTributado())) {
+			nfnotainfoitemimpostoipi.getNaoTributado().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoIPINaoTributadoBARD.maintainNFNotaInfoItemImpostoIPINaoTributadoAssociations(
 					nfnotainfoitemimpostoipi.getNaoTributado(), response, nfnotainfoitemimpostoipi.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
 					nfnotainfoitemimpostoipi.getId(), nfnotainfoitemimpostoipi.getCreateUser(),
@@ -8607,23 +9054,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_NFNOTAINFOITEMIMPOSTOIPI, nfnotainfoitemimpostoipi,
 				response);
 
-		if (!ValidationUtil.isNull(nfnotainfoitemimpostoipi.getTributado())) {
-			nfnotainfoitemimpostoipi.getTributado().setModelAction(PersistenceActionEnum.INSERT);
-			a += NFNotaInfoItemImpostoIPITributadoBARD.maintainNFNotaInfoItemImpostoIPITributadoAssociations(
-					nfnotainfoitemimpostoipi.getTributado(), response, nfnotainfoitemimpostoipi.getId(), null, null,
-					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
-					nfnotainfoitemimpostoipi.getId(), nfnotainfoitemimpostoipi.getCreateUser(),
-					nfnotainfoitemimpostoipi.getTransactionId(), nfnotainfoitemimpostoipi.getTransactionId());
-		}
 
-		if (!ValidationUtil.isNull(nfnotainfoitemimpostoipi.getNaoTributado())) {
-			nfnotainfoitemimpostoipi.getTributado().setModelAction(PersistenceActionEnum.INSERT);
-			a += NFNotaInfoItemImpostoIPINaoTributadoBARD.maintainNFNotaInfoItemImpostoIPINaoTributadoAssociations(
-					nfnotainfoitemimpostoipi.getNaoTributado(), response, nfnotainfoitemimpostoipi.getId(), null, null,
-					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
-					nfnotainfoitemimpostoipi.getId(), nfnotainfoitemimpostoipi.getCreateUser(),
-					nfnotainfoitemimpostoipi.getTransactionId(), nfnotainfoitemimpostoipi.getTransactionId());
-		}
 
 		a += InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFNOTAINFOITEMIMPOSTOIPI, AcaoEnum.UPDATE,
 				nfnotainfoitemimpostoipi.getTransactionId(), getHistoricoBAR(), response,
@@ -8646,8 +9077,11 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTAINFOITEMIMPOSTOIPI, nfnotainfoitemimpostoipi,
 				response);
 		Integer a = 0;
+		Integer count = 0;
+		// Delete
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoipi.getTributado())) {
-			a += NFNotaInfoItemImpostoIPITributadoBARD.maintainNFNotaInfoItemImpostoIPITributadoAssociations(
+			nfnotainfoitemimpostoipi.getTributado().setModelAction(PersistenceActionEnum.DELETE);
+			count += NFNotaInfoItemImpostoIPITributadoBARD.maintainNFNotaInfoItemImpostoIPITributadoAssociations(
 					nfnotainfoitemimpostoipi.getTributado(), response, nfnotainfoitemimpostoipi.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
 					nfnotainfoitemimpostoipi.getId(), nfnotainfoitemimpostoipi.getCreateUser(),
@@ -8655,7 +9089,8 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostoipi.getNaoTributado())) {
-			a += NFNotaInfoItemImpostoIPINaoTributadoBARD.maintainNFNotaInfoItemImpostoIPINaoTributadoAssociations(
+			nfnotainfoitemimpostoipi.getNaoTributado().setModelAction(PersistenceActionEnum.DELETE);
+			count += NFNotaInfoItemImpostoIPINaoTributadoBARD.maintainNFNotaInfoItemImpostoIPINaoTributadoAssociations(
 					nfnotainfoitemimpostoipi.getNaoTributado(), response, nfnotainfoitemimpostoipi.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
 					nfnotainfoitemimpostoipi.getId(), nfnotainfoitemimpostoipi.getCreateUser(),
@@ -8834,6 +9269,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 			NFNotaInfoItemImpostoIPITributado nfnotainfoitemimpostoipitributado) {
 		InternalResponse response = new InternalResponse();
 		nfnotainfoitemimpostoipitributado.setProcessId(nfnotainfoitemimpostoipitributado.getTransactionId());
+
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTAINFOITEMIMPOSTOIPITRIBUTADO,
 				nfnotainfoitemimpostoipitributado, response);
 
@@ -9499,7 +9935,9 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 
 		nfnotainfoitemimpostopis.setProcessId(nfnotainfoitemimpostopis.getTransactionId());
 
+		// Delete
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostopis.getAliquota())) {
+			nfnotainfoitemimpostopis.getAliquota().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoPISAliquotaBARD.maintainNFNotaInfoItemImpostoPISAliquotaAssociations(
 					nfnotainfoitemimpostopis.getAliquota(), response, nfnotainfoitemimpostopis.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -9508,6 +9946,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostopis.getQuantidade())) {
+			nfnotainfoitemimpostopis.getQuantidade().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoPISQuantidadeBARD.maintainNFNotaInfoItemImpostoPISQuantidadeAssociations(
 					nfnotainfoitemimpostopis.getQuantidade(), response, nfnotainfoitemimpostopis.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -9516,6 +9955,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostopis.getNaoTributado())) {
+			nfnotainfoitemimpostopis.getNaoTributado().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoPISNaoTributadoBARD.maintainNFNotaInfoItemImpostoPISNaoTributadoAssociations(
 					nfnotainfoitemimpostopis.getNaoTributado(), response, nfnotainfoitemimpostopis.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -9524,6 +9964,45 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostopis.getOutrasOperacoes())) {
+			nfnotainfoitemimpostopis.getOutrasOperacoes().setModelAction(PersistenceActionEnum.DELETE);
+			count += NFNotaInfoItemImpostoPISOutrasOperacoesBARD
+					.maintainNFNotaInfoItemImpostoPISOutrasOperacoesAssociations(
+							nfnotainfoitemimpostopis.getOutrasOperacoes(), response, nfnotainfoitemimpostopis.getId(),
+							null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+							nfnotainfoitemimpostopis.getId(), nfnotainfoitemimpostopis.getCreateUser(),
+							nfnotainfoitemimpostopis.getTransactionId(), nfnotainfoitemimpostopis.getTransactionId());
+		}
+
+		// Insert
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostopis.getAliquota())) {
+			nfnotainfoitemimpostopis.getAliquota().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoPISAliquotaBARD.maintainNFNotaInfoItemImpostoPISAliquotaAssociations(
+					nfnotainfoitemimpostopis.getAliquota(), response, nfnotainfoitemimpostopis.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostopis.getId(), nfnotainfoitemimpostopis.getCreateUser(),
+					nfnotainfoitemimpostopis.getTransactionId(), nfnotainfoitemimpostopis.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostopis.getQuantidade())) {
+			nfnotainfoitemimpostopis.getQuantidade().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoPISQuantidadeBARD.maintainNFNotaInfoItemImpostoPISQuantidadeAssociations(
+					nfnotainfoitemimpostopis.getQuantidade(), response, nfnotainfoitemimpostopis.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostopis.getId(), nfnotainfoitemimpostopis.getCreateUser(),
+					nfnotainfoitemimpostopis.getTransactionId(), nfnotainfoitemimpostopis.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostopis.getNaoTributado())) {
+			nfnotainfoitemimpostopis.getNaoTributado().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoPISNaoTributadoBARD.maintainNFNotaInfoItemImpostoPISNaoTributadoAssociations(
+					nfnotainfoitemimpostopis.getNaoTributado(), response, nfnotainfoitemimpostopis.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostopis.getId(), nfnotainfoitemimpostopis.getCreateUser(),
+					nfnotainfoitemimpostopis.getTransactionId(), nfnotainfoitemimpostopis.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostopis.getOutrasOperacoes())) {
+			nfnotainfoitemimpostopis.getOutrasOperacoes().setModelAction(PersistenceActionEnum.INSERT);
 			count += NFNotaInfoItemImpostoPISOutrasOperacoesBARD
 					.maintainNFNotaInfoItemImpostoPISOutrasOperacoesAssociations(
 							nfnotainfoitemimpostopis.getOutrasOperacoes(), response, nfnotainfoitemimpostopis.getId(),
@@ -9539,7 +10018,6 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 				nfnotainfoitemimpostopis.getTransactionId(), getHistoricoBAR(), response,
 				nfnotainfoitemimpostopis.getId(), nfnotainfoitemimpostopis.getUserId());
 
-
 		return response;
 	}
 
@@ -9553,7 +10031,85 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 	@Override
 	public InternalResponse updateNFNotaInfoItemImpostoPIS(NFNotaInfoItemImpostoPIS nfnotainfoitemimpostopis) {
 		InternalResponse response = new InternalResponse();
+		Integer count = 0;
 		nfnotainfoitemimpostopis.setProcessId(nfnotainfoitemimpostopis.getTransactionId());
+
+		// Delete
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostopis.getAliquota())) {
+			nfnotainfoitemimpostopis.getAliquota().setModelAction(PersistenceActionEnum.DELETE);
+			count += NFNotaInfoItemImpostoPISAliquotaBARD.maintainNFNotaInfoItemImpostoPISAliquotaAssociations(
+					nfnotainfoitemimpostopis.getAliquota(), response, nfnotainfoitemimpostopis.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostopis.getId(), nfnotainfoitemimpostopis.getCreateUser(),
+					nfnotainfoitemimpostopis.getTransactionId(), nfnotainfoitemimpostopis.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostopis.getQuantidade())) {
+			nfnotainfoitemimpostopis.getQuantidade().setModelAction(PersistenceActionEnum.DELETE);
+			count += NFNotaInfoItemImpostoPISQuantidadeBARD.maintainNFNotaInfoItemImpostoPISQuantidadeAssociations(
+					nfnotainfoitemimpostopis.getQuantidade(), response, nfnotainfoitemimpostopis.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostopis.getId(), nfnotainfoitemimpostopis.getCreateUser(),
+					nfnotainfoitemimpostopis.getTransactionId(), nfnotainfoitemimpostopis.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostopis.getNaoTributado())) {
+			nfnotainfoitemimpostopis.getNaoTributado().setModelAction(PersistenceActionEnum.DELETE);
+			count += NFNotaInfoItemImpostoPISNaoTributadoBARD.maintainNFNotaInfoItemImpostoPISNaoTributadoAssociations(
+					nfnotainfoitemimpostopis.getNaoTributado(), response, nfnotainfoitemimpostopis.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostopis.getId(), nfnotainfoitemimpostopis.getCreateUser(),
+					nfnotainfoitemimpostopis.getTransactionId(), nfnotainfoitemimpostopis.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostopis.getOutrasOperacoes())) {
+			nfnotainfoitemimpostopis.getOutrasOperacoes().setModelAction(PersistenceActionEnum.DELETE);
+			count += NFNotaInfoItemImpostoPISOutrasOperacoesBARD
+					.maintainNFNotaInfoItemImpostoPISOutrasOperacoesAssociations(
+							nfnotainfoitemimpostopis.getOutrasOperacoes(), response, nfnotainfoitemimpostopis.getId(),
+							null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+							nfnotainfoitemimpostopis.getId(), nfnotainfoitemimpostopis.getCreateUser(),
+							nfnotainfoitemimpostopis.getTransactionId(), nfnotainfoitemimpostopis.getTransactionId());
+		}
+
+		// Insert
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostopis.getAliquota())) {
+			nfnotainfoitemimpostopis.getAliquota().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoPISAliquotaBARD.maintainNFNotaInfoItemImpostoPISAliquotaAssociations(
+					nfnotainfoitemimpostopis.getAliquota(), response, nfnotainfoitemimpostopis.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostopis.getId(), nfnotainfoitemimpostopis.getCreateUser(),
+					nfnotainfoitemimpostopis.getTransactionId(), nfnotainfoitemimpostopis.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostopis.getQuantidade())) {
+			nfnotainfoitemimpostopis.getQuantidade().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoPISQuantidadeBARD.maintainNFNotaInfoItemImpostoPISQuantidadeAssociations(
+					nfnotainfoitemimpostopis.getQuantidade(), response, nfnotainfoitemimpostopis.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostopis.getId(), nfnotainfoitemimpostopis.getCreateUser(),
+					nfnotainfoitemimpostopis.getTransactionId(), nfnotainfoitemimpostopis.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostopis.getNaoTributado())) {
+			nfnotainfoitemimpostopis.getNaoTributado().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoPISNaoTributadoBARD.maintainNFNotaInfoItemImpostoPISNaoTributadoAssociations(
+					nfnotainfoitemimpostopis.getNaoTributado(), response, nfnotainfoitemimpostopis.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostopis.getId(), nfnotainfoitemimpostopis.getCreateUser(),
+					nfnotainfoitemimpostopis.getTransactionId(), nfnotainfoitemimpostopis.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostopis.getOutrasOperacoes())) {
+			nfnotainfoitemimpostopis.getOutrasOperacoes().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoPISOutrasOperacoesBARD
+					.maintainNFNotaInfoItemImpostoPISOutrasOperacoesAssociations(
+							nfnotainfoitemimpostopis.getOutrasOperacoes(), response, nfnotainfoitemimpostopis.getId(),
+							null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+							nfnotainfoitemimpostopis.getId(), nfnotainfoitemimpostopis.getCreateUser(),
+							nfnotainfoitemimpostopis.getTransactionId(), nfnotainfoitemimpostopis.getTransactionId());
+		}
+
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_NFNOTAINFOITEMIMPOSTOPIS, nfnotainfoitemimpostopis,
 				response);
 
@@ -9579,6 +10135,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 				response);
 		Integer count = 0;
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostopis.getAliquota())) {
+			nfnotainfoitemimpostopis.getAliquota().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoPISAliquotaBARD.maintainNFNotaInfoItemImpostoPISAliquotaAssociations(
 					nfnotainfoitemimpostopis.getAliquota(), response, nfnotainfoitemimpostopis.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -9587,6 +10144,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostopis.getQuantidade())) {
+			nfnotainfoitemimpostopis.getQuantidade().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoPISQuantidadeBARD.maintainNFNotaInfoItemImpostoPISQuantidadeAssociations(
 					nfnotainfoitemimpostopis.getQuantidade(), response, nfnotainfoitemimpostopis.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -9595,6 +10153,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostopis.getNaoTributado())) {
+			nfnotainfoitemimpostopis.getNaoTributado().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoPISNaoTributadoBARD.maintainNFNotaInfoItemImpostoPISNaoTributadoAssociations(
 					nfnotainfoitemimpostopis.getNaoTributado(), response, nfnotainfoitemimpostopis.getId(), null, null,
 					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -9603,6 +10162,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostopis.getOutrasOperacoes())) {
+			nfnotainfoitemimpostopis.getOutrasOperacoes().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoPISOutrasOperacoesBARD
 					.maintainNFNotaInfoItemImpostoPISOutrasOperacoesAssociations(
 							nfnotainfoitemimpostopis.getOutrasOperacoes(), response, nfnotainfoitemimpostopis.getId(),
@@ -10650,8 +11210,9 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		Boolean count1 = false;
 
 		nfnotainfoitemimpostocofins.setProcessId(nfnotainfoitemimpostocofins.getTransactionId());
-
+		// DELETE
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostocofins.getAliquota())) {
+			nfnotainfoitemimpostocofins.getAliquota().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoCOFINSAliquotaBARD.maintainNFNotaInfoItemImpostoCOFINSAliquotaAssociations(
 					nfnotainfoitemimpostocofins.getAliquota(), response, nfnotainfoitemimpostocofins.getId(), null,
 					null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -10660,6 +11221,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostocofins.getQuantidade())) {
+			nfnotainfoitemimpostocofins.getQuantidade().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoCOFINSQuantidadeBARD
 					.maintainNFNotaInfoItemImpostoCOFINSQuantidadeAssociations(
 							nfnotainfoitemimpostocofins.getQuantidade(), response, nfnotainfoitemimpostocofins.getId(),
@@ -10670,16 +11232,60 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostocofins.getNaoTributavel())) {
+			nfnotainfoitemimpostocofins.getNaoTributavel().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoCOFINSNaoTributavelBARD
 					.maintainNFNotaInfoItemImpostoCOFINSNaoTributavelAssociations(
-							nfnotainfoitemimpostocofins.getNaoTributavel(), response, nfnotainfoitemimpostocofins.getId(),
+							nfnotainfoitemimpostocofins.getNaoTributavel(), response,
+							nfnotainfoitemimpostocofins.getId(), null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(),
+							statusBAR, historicoBAR, nfnotainfoitemimpostocofins.getId(),
+							nfnotainfoitemimpostocofins.getCreateUser(), nfnotainfoitemimpostocofins.getTransactionId(),
+							nfnotainfoitemimpostocofins.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostocofins.getOutrasOperacoes())) {
+			nfnotainfoitemimpostocofins.getOutrasOperacoes().setModelAction(PersistenceActionEnum.DELETE);
+			count += NFNotaInfoItemImpostoCOFINSOutrasOperacoesBARD
+					.maintainNFNotaInfoItemImpostoCOFINSOutrasOperacoesAssociations(
+							nfnotainfoitemimpostocofins.getOutrasOperacoes(), response,
+							nfnotainfoitemimpostocofins.getId(), null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(),
+							statusBAR, historicoBAR, nfnotainfoitemimpostocofins.getId(),
+							nfnotainfoitemimpostocofins.getCreateUser(), nfnotainfoitemimpostocofins.getTransactionId(),
+							nfnotainfoitemimpostocofins.getTransactionId());
+		}
+		// INSERT
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostocofins.getAliquota())) {
+			nfnotainfoitemimpostocofins.getAliquota().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoCOFINSAliquotaBARD.maintainNFNotaInfoItemImpostoCOFINSAliquotaAssociations(
+					nfnotainfoitemimpostocofins.getAliquota(), response, nfnotainfoitemimpostocofins.getId(), null,
+					null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostocofins.getId(), nfnotainfoitemimpostocofins.getCreateUser(),
+					nfnotainfoitemimpostocofins.getTransactionId(), nfnotainfoitemimpostocofins.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostocofins.getQuantidade())) {
+			nfnotainfoitemimpostocofins.getQuantidade().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoCOFINSQuantidadeBARD
+					.maintainNFNotaInfoItemImpostoCOFINSQuantidadeAssociations(
+							nfnotainfoitemimpostocofins.getQuantidade(), response, nfnotainfoitemimpostocofins.getId(),
 							null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
 							nfnotainfoitemimpostocofins.getId(), nfnotainfoitemimpostocofins.getCreateUser(),
 							nfnotainfoitemimpostocofins.getTransactionId(),
 							nfnotainfoitemimpostocofins.getTransactionId());
 		}
 
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostocofins.getNaoTributavel())) {
+			nfnotainfoitemimpostocofins.getNaoTributavel().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoCOFINSNaoTributavelBARD
+					.maintainNFNotaInfoItemImpostoCOFINSNaoTributavelAssociations(
+							nfnotainfoitemimpostocofins.getNaoTributavel(), response,
+							nfnotainfoitemimpostocofins.getId(), null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(),
+							statusBAR, historicoBAR, nfnotainfoitemimpostocofins.getId(),
+							nfnotainfoitemimpostocofins.getCreateUser(), nfnotainfoitemimpostocofins.getTransactionId(),
+							nfnotainfoitemimpostocofins.getTransactionId());
+		}
+
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostocofins.getOutrasOperacoes())) {
+			nfnotainfoitemimpostocofins.getOutrasOperacoes().setModelAction(PersistenceActionEnum.INSERT);
 			count += NFNotaInfoItemImpostoCOFINSOutrasOperacoesBARD
 					.maintainNFNotaInfoItemImpostoCOFINSOutrasOperacoesAssociations(
 							nfnotainfoitemimpostocofins.getOutrasOperacoes(), response,
@@ -10710,8 +11316,10 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 	public InternalResponse updateNFNotaInfoItemImpostoCOFINS(NFNotaInfoItemImpostoCOFINS nfnotainfoitemimpostocofins) {
 		InternalResponse response = new InternalResponse();
 		nfnotainfoitemimpostocofins.setProcessId(nfnotainfoitemimpostocofins.getTransactionId());
-		Integer count =0;
+		Integer count = 0;
+		// DELETE
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostocofins.getAliquota())) {
+			nfnotainfoitemimpostocofins.getAliquota().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoCOFINSAliquotaBARD.maintainNFNotaInfoItemImpostoCOFINSAliquotaAssociations(
 					nfnotainfoitemimpostocofins.getAliquota(), response, nfnotainfoitemimpostocofins.getId(), null,
 					null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -10720,6 +11328,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostocofins.getQuantidade())) {
+			nfnotainfoitemimpostocofins.getQuantidade().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoCOFINSQuantidadeBARD
 					.maintainNFNotaInfoItemImpostoCOFINSQuantidadeAssociations(
 							nfnotainfoitemimpostocofins.getQuantidade(), response, nfnotainfoitemimpostocofins.getId(),
@@ -10730,16 +11339,60 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostocofins.getNaoTributavel())) {
+			nfnotainfoitemimpostocofins.getNaoTributavel().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoCOFINSNaoTributavelBARD
 					.maintainNFNotaInfoItemImpostoCOFINSNaoTributavelAssociations(
-							nfnotainfoitemimpostocofins.getNaoTributavel(), response, nfnotainfoitemimpostocofins.getId(),
+							nfnotainfoitemimpostocofins.getNaoTributavel(), response,
+							nfnotainfoitemimpostocofins.getId(), null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(),
+							statusBAR, historicoBAR, nfnotainfoitemimpostocofins.getId(),
+							nfnotainfoitemimpostocofins.getCreateUser(), nfnotainfoitemimpostocofins.getTransactionId(),
+							nfnotainfoitemimpostocofins.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostocofins.getOutrasOperacoes())) {
+			nfnotainfoitemimpostocofins.getOutrasOperacoes().setModelAction(PersistenceActionEnum.DELETE);
+			count += NFNotaInfoItemImpostoCOFINSOutrasOperacoesBARD
+					.maintainNFNotaInfoItemImpostoCOFINSOutrasOperacoesAssociations(
+							nfnotainfoitemimpostocofins.getOutrasOperacoes(), response,
+							nfnotainfoitemimpostocofins.getId(), null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(),
+							statusBAR, historicoBAR, nfnotainfoitemimpostocofins.getId(),
+							nfnotainfoitemimpostocofins.getCreateUser(), nfnotainfoitemimpostocofins.getTransactionId(),
+							nfnotainfoitemimpostocofins.getTransactionId());
+		}
+		// INSERT
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostocofins.getAliquota())) {
+			nfnotainfoitemimpostocofins.getAliquota().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoCOFINSAliquotaBARD.maintainNFNotaInfoItemImpostoCOFINSAliquotaAssociations(
+					nfnotainfoitemimpostocofins.getAliquota(), response, nfnotainfoitemimpostocofins.getId(), null,
+					null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
+					nfnotainfoitemimpostocofins.getId(), nfnotainfoitemimpostocofins.getCreateUser(),
+					nfnotainfoitemimpostocofins.getTransactionId(), nfnotainfoitemimpostocofins.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostocofins.getQuantidade())) {
+			nfnotainfoitemimpostocofins.getQuantidade().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoCOFINSQuantidadeBARD
+					.maintainNFNotaInfoItemImpostoCOFINSQuantidadeAssociations(
+							nfnotainfoitemimpostocofins.getQuantidade(), response, nfnotainfoitemimpostocofins.getId(),
 							null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
 							nfnotainfoitemimpostocofins.getId(), nfnotainfoitemimpostocofins.getCreateUser(),
 							nfnotainfoitemimpostocofins.getTransactionId(),
 							nfnotainfoitemimpostocofins.getTransactionId());
 		}
 
+		if (!ValidationUtil.isNull(nfnotainfoitemimpostocofins.getNaoTributavel())) {
+			nfnotainfoitemimpostocofins.getNaoTributavel().setModelAction(PersistenceActionEnum.INSERT);
+			count += NFNotaInfoItemImpostoCOFINSNaoTributavelBARD
+					.maintainNFNotaInfoItemImpostoCOFINSNaoTributavelAssociations(
+							nfnotainfoitemimpostocofins.getNaoTributavel(), response,
+							nfnotainfoitemimpostocofins.getId(), null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(),
+							statusBAR, historicoBAR, nfnotainfoitemimpostocofins.getId(),
+							nfnotainfoitemimpostocofins.getCreateUser(), nfnotainfoitemimpostocofins.getTransactionId(),
+							nfnotainfoitemimpostocofins.getTransactionId());
+		}
+
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostocofins.getOutrasOperacoes())) {
+			nfnotainfoitemimpostocofins.getOutrasOperacoes().setModelAction(PersistenceActionEnum.INSERT);
 			count += NFNotaInfoItemImpostoCOFINSOutrasOperacoesBARD
 					.maintainNFNotaInfoItemImpostoCOFINSOutrasOperacoesAssociations(
 							nfnotainfoitemimpostocofins.getOutrasOperacoes(), response,
@@ -10770,11 +11423,12 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 	public InternalResponse deleteNFNotaInfoItemImpostoCOFINSById(
 			NFNotaInfoItemImpostoCOFINS nfnotainfoitemimpostocofins) {
 		InternalResponse response = new InternalResponse();
-		Integer count =0;
+		Integer count = 0;
 		nfnotainfoitemimpostocofins.setProcessId(nfnotainfoitemimpostocofins.getTransactionId());
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTAINFOITEMIMPOSTOCOFINS, nfnotainfoitemimpostocofins,
 				response);
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostocofins.getAliquota())) {
+			nfnotainfoitemimpostocofins.getAliquota().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoCOFINSAliquotaBARD.maintainNFNotaInfoItemImpostoCOFINSAliquotaAssociations(
 					nfnotainfoitemimpostocofins.getAliquota(), response, nfnotainfoitemimpostocofins.getId(), null,
 					null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
@@ -10783,6 +11437,7 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostocofins.getQuantidade())) {
+			nfnotainfoitemimpostocofins.getQuantidade().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoCOFINSQuantidadeBARD
 					.maintainNFNotaInfoItemImpostoCOFINSQuantidadeAssociations(
 							nfnotainfoitemimpostocofins.getQuantidade(), response, nfnotainfoitemimpostocofins.getId(),
@@ -10793,16 +11448,18 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostocofins.getNaoTributavel())) {
+			nfnotainfoitemimpostocofins.getNaoTributavel().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoCOFINSNaoTributavelBARD
 					.maintainNFNotaInfoItemImpostoCOFINSNaoTributavelAssociations(
-							nfnotainfoitemimpostocofins.getNaoTributavel(), response, nfnotainfoitemimpostocofins.getId(),
-							null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR,
-							nfnotainfoitemimpostocofins.getId(), nfnotainfoitemimpostocofins.getCreateUser(),
-							nfnotainfoitemimpostocofins.getTransactionId(),
+							nfnotainfoitemimpostocofins.getNaoTributavel(), response,
+							nfnotainfoitemimpostocofins.getId(), null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(),
+							statusBAR, historicoBAR, nfnotainfoitemimpostocofins.getId(),
+							nfnotainfoitemimpostocofins.getCreateUser(), nfnotainfoitemimpostocofins.getTransactionId(),
 							nfnotainfoitemimpostocofins.getTransactionId());
 		}
 
 		if (!ValidationUtil.isNull(nfnotainfoitemimpostocofins.getOutrasOperacoes())) {
+			nfnotainfoitemimpostocofins.getOutrasOperacoes().setModelAction(PersistenceActionEnum.DELETE);
 			count += NFNotaInfoItemImpostoCOFINSOutrasOperacoesBARD
 					.maintainNFNotaInfoItemImpostoCOFINSOutrasOperacoesAssociations(
 							nfnotainfoitemimpostocofins.getOutrasOperacoes(), response,
@@ -11501,8 +12158,6 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 				response, nfnotainfoitemimpostocofinsoutrasoperacoes.getId(),
 				nfnotainfoitemimpostocofinsoutrasoperacoes.getUserId());
 
-
-
 		return response;
 	}
 
@@ -12036,10 +12691,11 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		nfimpostodevolvido.setProcessId(nfimpostodevolvido.getTransactionId());
 
 		if (!ValidationUtil.isNull(nfimpostodevolvido.getInformacaoIPIDevolvido())) {
-			count += NFInformacaoImpostoDevolvidoBARD.maintainNFInformacaoImpostoDevolvidoAssociations(nfimpostodevolvido.getInformacaoIPIDevolvido(),
-					response, nfimpostodevolvido.getId(), null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR,
-					historicoBAR, nfimpostodevolvido.getId(), nfimpostodevolvido.getCreateUser(),
-					nfimpostodevolvido.getTransactionId(), nfimpostodevolvido.getTransactionId());
+			count += NFInformacaoImpostoDevolvidoBARD.maintainNFInformacaoImpostoDevolvidoAssociations(
+					nfimpostodevolvido.getInformacaoIPIDevolvido(), response, nfimpostodevolvido.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR, nfimpostodevolvido.getId(),
+					nfimpostodevolvido.getCreateUser(), nfimpostodevolvido.getTransactionId(),
+					nfimpostodevolvido.getTransactionId());
 		}
 
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_NFIMPOSTODEVOLVIDO, nfimpostodevolvido, response);
@@ -12047,7 +12703,6 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFIMPOSTODEVOLVIDO, AcaoEnum.INSERT,
 				nfimpostodevolvido.getTransactionId(), getHistoricoBAR(), response, nfimpostodevolvido.getId(),
 				nfimpostodevolvido.getUserId());
-
 
 		return response;
 	}
@@ -12066,16 +12721,16 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		Integer a = 0;
 
 		if (!ValidationUtil.isNull(nfimpostodevolvido.getInformacaoIPIDevolvido())) {
-			a += NFInformacaoImpostoDevolvidoBARD.maintainNFInformacaoImpostoDevolvidoAssociations(nfimpostodevolvido.getInformacaoIPIDevolvido(),
-					response, nfimpostodevolvido.getId(), null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR,
-					historicoBAR, nfimpostodevolvido.getId(), nfimpostodevolvido.getCreateUser(),
-					nfimpostodevolvido.getTransactionId(), nfimpostodevolvido.getTransactionId());
+			a += NFInformacaoImpostoDevolvidoBARD.maintainNFInformacaoImpostoDevolvidoAssociations(
+					nfimpostodevolvido.getInformacaoIPIDevolvido(), response, nfimpostodevolvido.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR, nfimpostodevolvido.getId(),
+					nfimpostodevolvido.getCreateUser(), nfimpostodevolvido.getTransactionId(),
+					nfimpostodevolvido.getTransactionId());
 		}
-
 
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_NFIMPOSTODEVOLVIDO, nfimpostodevolvido, response);
 
-		 a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFIMPOSTODEVOLVIDO, AcaoEnum.UPDATE,
+		a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFIMPOSTODEVOLVIDO, AcaoEnum.UPDATE,
 				nfimpostodevolvido.getTransactionId(), getHistoricoBAR(), response, nfimpostodevolvido.getId(),
 				nfimpostodevolvido.getUserId());
 
@@ -12096,10 +12751,11 @@ public class NFNotaInfoItemBARImpl extends SqlSessionDaoSupport implements INFNo
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFIMPOSTODEVOLVIDO, nfimpostodevolvido, response);
 		Integer a = 0;
 		if (!ValidationUtil.isNull(nfimpostodevolvido.getInformacaoIPIDevolvido())) {
-			a += NFInformacaoImpostoDevolvidoBARD.maintainNFInformacaoImpostoDevolvidoAssociations(nfimpostodevolvido.getInformacaoIPIDevolvido(),
-					response, nfimpostodevolvido.getId(), null, null, TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR,
-					historicoBAR, nfimpostodevolvido.getId(), nfimpostodevolvido.getCreateUser(),
-					nfimpostodevolvido.getTransactionId(), nfimpostodevolvido.getTransactionId());
+			a += NFInformacaoImpostoDevolvidoBARD.maintainNFInformacaoImpostoDevolvidoAssociations(
+					nfimpostodevolvido.getInformacaoIPIDevolvido(), response, nfimpostodevolvido.getId(), null, null,
+					TabelaEnum.NFNOTA, getNfnotaInfoItemBAR(), statusBAR, historicoBAR, nfimpostodevolvido.getId(),
+					nfimpostodevolvido.getCreateUser(), nfimpostodevolvido.getTransactionId(),
+					nfimpostodevolvido.getTransactionId());
 		}
 
 		a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFIMPOSTODEVOLVIDO, AcaoEnum.DELETE,

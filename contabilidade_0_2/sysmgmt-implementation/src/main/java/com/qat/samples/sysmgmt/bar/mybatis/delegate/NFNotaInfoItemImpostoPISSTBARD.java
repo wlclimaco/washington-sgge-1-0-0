@@ -65,48 +65,23 @@ public final class NFNotaInfoItemImpostoPISSTBARD extends SqlSessionDaoSupport
 			{
 				case INSERT:
 					count = nfnotainfoitemimpostopisstDAC.insertNFNotaInfoItemImpostoPISST(nfnotainfoitemimpostopisst).hasSystemError();
-					if (count == true)
-					{
-						Status status = new Status();
-						status.setStatus(CdStatusTypeEnum.ATIVO);
-						List<Status> statusList = new ArrayList<Status>();
-						statusList.add(status);
-						count =
-								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.NFNOTAINFOITEMIMPOSTOPISST, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case UPDATE:
 					count = nfnotainfoitemimpostopisstDAC.updateNFNotaInfoItemImpostoPISST(nfnotainfoitemimpostopisst).hasSystemError();
-					if (count == true)
-					{
-						count =
-								StatusBARD.maintainStatusAssociations(nfnotainfoitemimpostopisst.getStatusList(), response, nfnotainfoitemimpostopisst.getId(),
-										null,
-										AcaoEnum.UPDATE, UserId, empId, TabelaEnum.NFNOTAINFOITEMIMPOSTOPISST, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case DELETE:
 					count = nfnotainfoitemimpostopisstDAC.deleteNFNotaInfoItemImpostoPISSTById(nfnotainfoitemimpostopisst).hasSystemError();
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.DELETADO);
-					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
-					count =
-							StatusBARD.maintainStatusAssociations(statusList, response, nfnotainfoitemimpostopisst.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.NFNOTAINFOITEMIMPOSTOPISST, statusDAC, historicoDAC,
-									processId, historicoId);
 
 					break;
 			}
-		
+
 		if(count == true ){
 			return 1;
 		}else{
 			return 0;
 		}
-		
+
 	}
 }

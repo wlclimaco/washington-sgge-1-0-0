@@ -3,9 +3,6 @@
 
 package com.qat.samples.sysmgmt.bar.mybatis.delegate;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResponse;
@@ -15,8 +12,6 @@ import com.qat.samples.sysmgmt.bar.Nfe.INFNotaInfoItemBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemImpostoIPITributado;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
-import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
-import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
 
@@ -65,48 +60,23 @@ public final class NFNotaInfoItemImpostoIPITributadoBARD extends SqlSessionDaoSu
 			{
 				case INSERT:
 					count = nfnotainfoitemimpostoipitributadoDAC.insertNFNotaInfoItemImpostoIPITributado(nfnotainfoitemimpostoipitributado).hasSystemError();
-					if (count == true)
-					{
-						Status status = new Status();
-						status.setStatus(CdStatusTypeEnum.ATIVO);
-						List<Status> statusList = new ArrayList<Status>();
-						statusList.add(status);
-						count =
-								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.NFNOTAINFOITEMIMPOSTOIPITRIBUTADO, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case UPDATE:
 					count = nfnotainfoitemimpostoipitributadoDAC.updateNFNotaInfoItemImpostoIPITributado(nfnotainfoitemimpostoipitributado).hasSystemError();
-					if (count == true)
-					{
-						count =
-								StatusBARD.maintainStatusAssociations(nfnotainfoitemimpostoipitributado.getStatusList(), response, nfnotainfoitemimpostoipitributado.getId(),
-										null,
-										AcaoEnum.UPDATE, UserId, empId, TabelaEnum.NFNOTAINFOITEMIMPOSTOIPITRIBUTADO, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case DELETE:
 					count = nfnotainfoitemimpostoipitributadoDAC.deleteNFNotaInfoItemImpostoIPITributadoById(nfnotainfoitemimpostoipitributado).hasSystemError();
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.DELETADO);
-					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
-					count =
-							StatusBARD.maintainStatusAssociations(statusList, response, nfnotainfoitemimpostoipitributado.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.NFNOTAINFOITEMIMPOSTOIPITRIBUTADO, statusDAC, historicoDAC,
-									processId, historicoId);
 
 					break;
 			}
-		
+
 		if(count == true ){
 			return 1;
 		}else{
 			return 0;
 		}
-		
+
 	}
 }
