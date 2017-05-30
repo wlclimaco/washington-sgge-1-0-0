@@ -1345,7 +1345,7 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 	@Test
 	public void testDeleteNFNotaInfoItemImposto() {
 		NFNotaInfoItemImposto nfnotainfoitemimposto = Objects.insertNFNotaInfoItemImposto(4, TabelaEnum.NFNOTAINFOITEMIMPOSTO,
-				PersistenceActionEnum.INSERT);
+				PersistenceActionEnum.INSERT,10);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoItemImposto nfnotainfoitemimpostoResponse = getNFNotaInfoItemBAR()
@@ -1355,7 +1355,7 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		nfnotainfoitemimpostoResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoById(request);
 		Assert.assertEquals(nfnotainfoitemimposto.getId(), nfnotainfoitemimpostoResponse.getId());
 		nfnotainfoitemimposto = Objects.insertNFNotaInfoItemImposto(4, TabelaEnum.NFNOTAINFOITEMIMPOSTO,
-				PersistenceActionEnum.DELETE);
+				PersistenceActionEnum.DELETE,41);
 		getNFNotaInfoItemBAR().deleteNFNotaInfoItemImpostoById(nfnotainfoitemimposto);
 		nfnotainfoitemimpostoResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoById(request);
 		Assert.assertEquals(nfnotainfoitemimpostoResponse, null);
@@ -1381,7 +1381,7 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 	@Test
 	public void testUpdateNFNotaInfoItemImposto() {
 		NFNotaInfoItemImposto nfnotainfoitemimposto = Objects.insertNFNotaInfoItemImposto(1000, TabelaEnum.NFNOTAINFOITEMIMPOSTO,
-				PersistenceActionEnum.UPDATE);
+				PersistenceActionEnum.UPDATE,10);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1000);
 		NFNotaInfoItemImposto nfnotainfoitemimpostoResponse = getNFNotaInfoItemBAR()
@@ -1439,7 +1439,7 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 	@Test
 	public void testDeleteNFNotaInfoItemImpostoICMS() {
 		NFNotaInfoItemImpostoICMS nfnotainfoitemimpostoicms = Objects.insertNFNotaInfoItemImpostoICMS(4,
-				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMS, PersistenceActionEnum.INSERT);
+				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMS, PersistenceActionEnum.INSERT,20);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		NFNotaInfoItemImpostoICMS nfnotainfoitemimpostoicmsResponse = getNFNotaInfoItemBAR()
@@ -1449,7 +1449,7 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 		nfnotainfoitemimpostoicmsResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoICMSById(request);
 		Assert.assertEquals(nfnotainfoitemimpostoicms.getId(), nfnotainfoitemimpostoicmsResponse.getId());
 		nfnotainfoitemimpostoicms = Objects.insertNFNotaInfoItemImpostoICMS(4,
-				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMS, PersistenceActionEnum.DELETE);
+				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMS, PersistenceActionEnum.DELETE,30);
 		getNFNotaInfoItemBAR().deleteNFNotaInfoItemImpostoICMSById(nfnotainfoitemimpostoicms);
 		nfnotainfoitemimpostoicmsResponse = getNFNotaInfoItemBAR().fetchNFNotaInfoItemImpostoICMSById(request);
 		Assert.assertEquals(nfnotainfoitemimpostoicmsResponse, null);
@@ -1475,7 +1475,7 @@ public class NFNotaInfoItemBARTest extends AbstractTransactionalJUnit4SpringCont
 	@Test
 	public void testUpdateNFNotaInfoItemImpostoICMS() {
 		NFNotaInfoItemImpostoICMS nfnotainfoitemimpostoicms = Objects.insertNFNotaInfoItemImpostoICMS(1000,
-				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMS, PersistenceActionEnum.UPDATE);
+				TabelaEnum.NFNOTAINFOITEMIMPOSTOICMS, PersistenceActionEnum.UPDATE,40);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1000);
 		NFNotaInfoItemImpostoICMS nfnotainfoitemimpostoicmsResponse = getNFNotaInfoItemBAR()

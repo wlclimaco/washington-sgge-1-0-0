@@ -11,8 +11,8 @@
 	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
 
-	<!-- Result maps describe the mapping between the columns returned from 
-		a query, and the class properties. A result map isnt necessary if the columns 
+	<!-- Result maps describe the mapping between the columns returned from
+		a query, and the class properties. A result map isnt necessary if the columns
 		(or aliases) match to the properties exactly. -->
 	<resultMap id="NFNotaInfoItemImpostoCOFINSSTResult" type="NFNotaInfoItemImpostoCOFINSST">
 		<result property="id" column="id" />
@@ -29,6 +29,8 @@
 		<result property="createDateUTC" column="create_date" />
 		<result property="modifyUser" column="modify_user" />
 		<result property="modifyDateUTC" column="modify_date" />
+		<collection property="tipocalculoSubstTrib" column="tipocalculoSubstTrib"
+			select="DoisValorMap.fetchDoisValorById"/>
 	</resultMap>
 
 	<sql id="allNFNotaInfoItemImpostoCOFINSSTColumns">
@@ -37,6 +39,7 @@
 		,quantidadeVendida
 		,valorAliquotaCOFINS
 		,valorCOFINS
+		,tipocalculoSubstTrib
 		,parentId
 		,tabelaEnumValue
 		,emprId
@@ -53,6 +56,7 @@
 		#{quantidadeVendida},
 		#{valorAliquotaCOFINS},
 		#{valorCOFINS},
+		#{tipocalculoSubstTrib.id},
 		#{parentId},
 		#{tabelaEnumValue},
 		#{emprId},
@@ -120,6 +124,7 @@
 		<if test="quantidadeVendida!= null">quantidadeVendida = #{quantidadeVendida},</if>
 		<if test="valorAliquotaCOFINS!= null">valorAliquotaCOFINS = #{valorAliquotaCOFINS},</if>
 		<if test="valorCOFINS!= null">valorCOFINS = #{valorCOFINS},</if>
+		<if test="tipocalculoSubstTrib!= null">tipocalculoSubstTrib = #{tipocalculoSubstTrib.id},</if>
 		<if test="parentId!= null"> parentId=#{parentId},</if>
 		<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 		<if test="emprId!= null"> emprId=#{emprId},</if>

@@ -114,7 +114,7 @@ public IProdutoBAR getProdutoBAR()
 	@Test
 	public void testUpdateProdutoEmpresa()
 	{
-		ProdutoEmpresa ProdutoEmpresa = Objects.insertProdutoEmpresa(1001, TabelaEnum.PRODUTOPARENT, PersistenceActionEnum.UPDATE);
+		ProdutoEmpresa ProdutoEmpresa = Objects.insertProdutoEmpresa(1001, TabelaEnum.PRODUTOPARENT, PersistenceActionEnum.UPDATE,2);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		ProdutoEmpresa ProdutoEmpresaResponse = getProdutoBAR().fetchProdutoEmpresaById(request);
@@ -785,15 +785,22 @@ public IProdutoBAR getProdutoBAR()
 @Test
 	public void testDeleteTributacao()
 	{
-		Tributacao tributacao = Objects.insertTributacao(4, TabelaEnum.TRIBUTACAO, PersistenceActionEnum.INSERT);
+		//Tributacao tributacao = Objects.insertTributacao(4, TabelaEnum.TRIBUTACAO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(4);
 		Tributacao tributacaoResponse = getProdutoBAR().fetchTributacaoById(request);
 		Assert.assertEquals(tributacaoResponse, null);
+		Tributacao tributacao = Objects.insertTributacao(5, TabelaEnum.TRIBUTACAO, PersistenceActionEnum.INSERT,0);
 		getProdutoBAR().insertTributacao(tributacao);
+		tributacao = Objects.insertTributacao(5, TabelaEnum.TRIBUTACAO, PersistenceActionEnum.UPDATE,20);
+		getProdutoBAR().updateTributacao(tributacao);
+		tributacao = Objects.insertTributacao(4, TabelaEnum.TRIBUTACAO, PersistenceActionEnum.INSERT,10);
+		getProdutoBAR().insertTributacao(tributacao);
+		tributacao = Objects.insertTributacao(4, TabelaEnum.TRIBUTACAO, PersistenceActionEnum.UPDATE,0);
+		getProdutoBAR().updateTributacao(tributacao);
 		tributacaoResponse = getProdutoBAR().fetchTributacaoById(request);
 		Assert.assertEquals(tributacao.getId(), tributacaoResponse.getId());
-		tributacao = Objects.insertTributacao(4, TabelaEnum.TRIBUTACAO, PersistenceActionEnum.DELETE);
+		tributacao = Objects.insertTributacao(4, TabelaEnum.TRIBUTACAO, PersistenceActionEnum.DELETE,20);
 		getProdutoBAR().deleteTributacaoById(tributacao);
 		tributacaoResponse = getProdutoBAR().fetchTributacaoById(request);
 		Assert.assertEquals(tributacaoResponse, null);
@@ -819,7 +826,7 @@ public IProdutoBAR getProdutoBAR()
 	@Test
 	public void testUpdateTributacao()
 	{
-		Tributacao tributacao = Objects.insertTributacao(1001, TabelaEnum.TRIBUTACAO, PersistenceActionEnum.UPDATE);
+		Tributacao tributacao = Objects.insertTributacao(1001, TabelaEnum.TRIBUTACAO, PersistenceActionEnum.UPDATE,3);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		Tributacao tributacaoResponse = getProdutoBAR().fetchTributacaoById(request);

@@ -11,8 +11,8 @@
 	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
 
-	<!-- Result maps describe the mapping between the columns returned from 
-		a query, and the class properties. A result map isnt necessary if the columns 
+	<!-- Result maps describe the mapping between the columns returned from
+		a query, and the class properties. A result map isnt necessary if the columns
 		(or aliases) match to the properties exactly. -->
 	<resultMap id="NFNotaInfoItemImpostoPISResult" type="NFNotaInfoItemImpostoPIS">
 		<result property="id" column="id" />
@@ -33,6 +33,8 @@
 			select="NFNotaInfoItemImpostoPISNaoTributadoMap.fetchNFNotaInfoItemImpostoPISNaoTributadoById" />
 		<collection property="outrasOperacoes" column="outrasOperacoes"
 			select="NFNotaInfoItemImpostoPISOutrasOperacoesMap.fetchNFNotaInfoItemImpostoPISOutrasOperacoesById" />
+			<collection property="tipocalculo" column="tipocalculo"
+			select="DoisValorMap.fetchDoisValorById"/>
 	</resultMap>
 
 	<sql id="allNFNotaInfoItemImpostoPISColumns">
@@ -40,6 +42,7 @@
 		,quantidade
 		,naoTributado
 		,outrasOperacoes
+		,tipocalculo
 		,parentId
 		,tabelaEnumValue
 		,emprId
@@ -55,6 +58,7 @@
 		#{quantidade.id},
 		#{naoTributado.id},
 		#{outrasOperacoes.id},
+		#{tipocalculo.id},
 		#{parentId},
 		#{tabelaEnumValue},
 		#{emprId},
@@ -120,6 +124,7 @@
 		<if test="quantidade!= null">quantidade = #{quantidade.id},</if>
 		<if test="naoTributado!= null">naoTributado = #{naoTributado.id},</if>
 		<if test="outrasOperacoes!= null">outrasOperacoes = #{outrasOperacoes.id},</if>
+		<if test="tipocalculo!= null">tipocalculo = #{tipocalculo.id},</if>
 		<if test="parentId!= null"> parentId=#{parentId},</if>
 		<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 		<if test="emprId!= null"> emprId=#{emprId},</if>

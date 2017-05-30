@@ -1,6 +1,7 @@
 /** create by system gera-java version 1.0.0 03/12/2016 13:29 : 12*/
 package com.qat.samples.sysmgmt.nfeItens.model;
 
+import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -13,6 +14,8 @@ public class NFNotaInfoItemImpostoPIS extends ModelCosmeDamiao {
 
 	/** The econtabil id for the NFNotaInfoItemImpostoPIS. */
 	private Integer id;
+
+	private DoisValores tipocalculo;
 
 	/** The econtabil aliquota for the NFNotaInfoItemImpostoPIS. */
 	private NFNotaInfoItemImpostoPISAliquota aliquota;
@@ -153,11 +156,20 @@ public class NFNotaInfoItemImpostoPIS extends ModelCosmeDamiao {
 		this.outrasOperacoes = outrasoperacoes;
 	}
 
+	public DoisValores getTipocalculo() {
+		return tipocalculo;
+	}
+
+	public void setTipocalculo(DoisValores tipocalculo) {
+		this.tipocalculo = tipocalculo;
+	}
+
 	@Override
 	public String toString() {
 		return "NFNotaInfoItemImpostoPIS [getId()=" + getId() + ", getAliquota()=" + getAliquota()
 				+ ", getQuantidade()=" + getQuantidade() + ", getNaoTributado()=" + getNaoTributado()
-				+ ", getOutrasOperacoes()=" + getOutrasOperacoes() + ", toString()=" + super.toString() + "]";
+				+ ", getOutrasOperacoes()=" + getOutrasOperacoes() + ", getTipocalculo()=" + getTipocalculo()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

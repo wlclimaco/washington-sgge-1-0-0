@@ -1,6 +1,7 @@
 /** create by system gera-java version 1.0.0 03/12/2016 13:29 : 12*/
 package com.qat.samples.sysmgmt.nfeItens.model;
 
+import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -13,6 +14,8 @@ public class NFNotaInfoItemImpostoPISST extends ModelCosmeDamiao {
 
 	/** The econtabil id for the NFNotaInfoItemImpostoPISST. */
 	private Integer id;
+
+	private DoisValores tipocalculoSubstTrib;
 
 	/** The econtabil valorBaseCalculo for the NFNotaInfoItemImpostoPISST. */
 	private String valorBaseCalculo;
@@ -180,12 +183,21 @@ public class NFNotaInfoItemImpostoPISST extends ModelCosmeDamiao {
 		this.valorTributo = valortributo;
 	}
 
+	public DoisValores getTipocalculoSubstTrib() {
+		return tipocalculoSubstTrib;
+	}
+
+	public void setTipocalculoSubstTrib(DoisValores tipocalculoSubstTrib) {
+		this.tipocalculoSubstTrib = tipocalculoSubstTrib;
+	}
+
 	@Override
 	public String toString() {
 		return "NFNotaInfoItemImpostoPISST [getId()=" + getId() + ", getValorBaseCalculo()=" + getValorBaseCalculo()
 				+ ", getPercentualAliquota()=" + getPercentualAliquota() + ", getQuantidadeVendida()="
 				+ getQuantidadeVendida() + ", getValorAliquota()=" + getValorAliquota() + ", getValorTributo()="
-				+ getValorTributo() + ", toString()=" + super.toString() + "]";
+				+ getValorTributo() + ", getTipocalculoSubstTrib()=" + getTipocalculoSubstTrib() + ", toString()="
+				+ super.toString() + "]";
 	}
 
 }

@@ -1,171 +1,185 @@
 /** create by system gera-java version 1.0.0 03/12/2016 13:29 : 12*/
 package com.qat.samples.sysmgmt.nfeItens.model;
 
-
+import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
+
 /**
- * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
- * setting.
+ * This class is a representation of an Account (i.e Checking, Savings, etc.).
+ * This represents an account for a transfer setting.
  */
 
 @SuppressWarnings("serial")
-public class NFNotaInfoItemImpostoCOFINS extends ModelCosmeDamiao
-{
+public class NFNotaInfoItemImpostoCOFINS extends ModelCosmeDamiao {
 
-    /** The econtabil id for the NFNotaInfoItemImpostoCOFINS. */
-    private Integer id;
+	/** The econtabil id for the NFNotaInfoItemImpostoCOFINS. */
+	private Integer id;
 
-    /** The econtabil aliquota for the NFNotaInfoItemImpostoCOFINS. */
-    private NFNotaInfoItemImpostoCOFINSAliquota aliquota;
+	/** The tipocalculo. */
+	private DoisValores tipocalculo;
 
-    /** The econtabil quantidade for the NFNotaInfoItemImpostoCOFINS. */
-    private NFNotaInfoItemImpostoCOFINSQuantidade quantidade;
+	/** The econtabil aliquota for the NFNotaInfoItemImpostoCOFINS. */
+	private NFNotaInfoItemImpostoCOFINSAliquota aliquota;
 
-    /** The econtabil naoTributavel for the NFNotaInfoItemImpostoCOFINS. */
-    private NFNotaInfoItemImpostoCOFINSNaoTributavel naoTributavel;
+	/** The econtabil quantidade for the NFNotaInfoItemImpostoCOFINS. */
+	private NFNotaInfoItemImpostoCOFINSQuantidade quantidade;
 
-    /** The econtabil outrasOperacoes for the NFNotaInfoItemImpostoCOFINS. */
-    private NFNotaInfoItemImpostoCOFINSOutrasOperacoes outrasOperacoes;
+	/** The econtabil naoTributavel for the NFNotaInfoItemImpostoCOFINS. */
+	private NFNotaInfoItemImpostoCOFINSNaoTributavel naoTributavel;
 
+	/** The econtabil outrasOperacoes for the NFNotaInfoItemImpostoCOFINS. */
+	private NFNotaInfoItemImpostoCOFINSOutrasOperacoes outrasOperacoes;
 
+	/**
+	 * Default constructor.
+	 */
+	public NFNotaInfoItemImpostoCOFINS() {
+		super();
+	}
 
-    /**
-     * Default constructor.
-     */
-    public NFNotaInfoItemImpostoCOFINS()
-    {
-        super();
-    }
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
 
+	/**
+	 * Sets the id.
+	 *
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    /**
-     * Gets the id.
-     *
-     * @return the id
-     */
-    /**
-     * Gets the id.
-     *
-     * @return the id
-     */
-    public Integer getId()
-    {
-        return id;
-    }
+	/**
+	 * Gets the aliquota.
+	 *
+	 * @return the aliquota
+	 */
+	/**
+	 * Gets the aliquota.
+	 *
+	 * @return the aliquota
+	 */
+	public NFNotaInfoItemImpostoCOFINSAliquota getAliquota() {
+		return aliquota;
+	}
 
-    /**
-     * Sets the id.
-     *
-* @param id the id to set
- */
-public void setId(Integer id)
-{
-        this.id = id;
-    }
+	/**
+	 * Sets the aliquota.
+	 *
+	 * @param aliquota the new aliquota
+	 */
+	public void setAliquota(NFNotaInfoItemImpostoCOFINSAliquota aliquota) {
+		this.aliquota = aliquota;
+	}
 
-    /**
-     * Gets the aliquota.
-     *
-     * @return the aliquota
-     */
-    /**
-     * Gets the aliquota.
-     *
-     * @return the aliquota
-     */
-    public NFNotaInfoItemImpostoCOFINSAliquota getAliquota()
-    {
-        return aliquota;
-    }
+	/**
+	 * Gets the quantidade.
+	 *
+	 * @return the quantidade
+	 */
+	/**
+	 * Gets the quantidade.
+	 *
+	 * @return the quantidade
+	 */
+	public NFNotaInfoItemImpostoCOFINSQuantidade getQuantidade() {
+		return quantidade;
+	}
 
-    /**
-     * Sets the aliquota.
-     *
-* @param id the aliquota to set
- */
-public void setAliquota(NFNotaInfoItemImpostoCOFINSAliquota aliquota)
-{
-        this.aliquota = aliquota;
-    }
+	/**
+	 * Sets the quantidade.
+	 *
+	 * @param quantidade the new quantidade
+	 */
+	public void setQuantidade(NFNotaInfoItemImpostoCOFINSQuantidade quantidade) {
+		this.quantidade = quantidade;
+	}
 
-    /**
-     * Gets the quantidade.
-     *
-     * @return the quantidade
-     */
-    /**
-     * Gets the quantidade.
-     *
-     * @return the quantidade
-     */
-    public NFNotaInfoItemImpostoCOFINSQuantidade getQuantidade()
-    {
-        return quantidade;
-    }
+	/**
+	 * Gets the naoTributavel.
+	 *
+	 * @return the naoTributavel
+	 */
+	/**
+	 * Gets the naoTributavel.
+	 *
+	 * @return the naoTributavel
+	 */
+	public NFNotaInfoItemImpostoCOFINSNaoTributavel getNaoTributavel() {
+		return naoTributavel;
+	}
 
-    /**
-     * Sets the quantidade.
-     *
-* @param id the quantidade to set
- */
-public void setQuantidade(NFNotaInfoItemImpostoCOFINSQuantidade quantidade)
-{
-        this.quantidade = quantidade;
-    }
+	/**
+	 * Sets the naotributavel.
+	 *
+	 * @param naotributavel the new nao tributavel
+	 */
+	public void setNaoTributavel(NFNotaInfoItemImpostoCOFINSNaoTributavel naotributavel) {
+		this.naoTributavel = naotributavel;
+	}
 
-    /**
-     * Gets the naoTributavel.
-     *
-     * @return the naoTributavel
-     */
-    /**
-     * Gets the naoTributavel.
-     *
-     * @return the naoTributavel
-     */
-    public NFNotaInfoItemImpostoCOFINSNaoTributavel getNaoTributavel()
-    {
-        return naoTributavel;
-    }
+	/**
+	 * Gets the outrasOperacoes.
+	 *
+	 * @return the outrasOperacoes
+	 */
+	/**
+	 * Gets the outrasOperacoes.
+	 *
+	 * @return the outrasOperacoes
+	 */
+	public NFNotaInfoItemImpostoCOFINSOutrasOperacoes getOutrasOperacoes() {
+		return outrasOperacoes;
+	}
 
-    /**
-     * Sets the naotributavel.
-     *
-* @param id the naotributavel to set
- */
-public void setNaoTributavel(NFNotaInfoItemImpostoCOFINSNaoTributavel naotributavel)
-{
-        this.naoTributavel = naotributavel;
-    }
+	/**
+	 * Sets the outrasoperacoes.
+	 *
+	 * @param outrasoperacoes the new outras operacoes
+	 */
+	public void setOutrasOperacoes(NFNotaInfoItemImpostoCOFINSOutrasOperacoes outrasoperacoes) {
+		this.outrasOperacoes = outrasoperacoes;
+	}
 
-    /**
-     * Gets the outrasOperacoes.
-     *
-     * @return the outrasOperacoes
-     */
-    /**
-     * Gets the outrasOperacoes.
-     *
-     * @return the outrasOperacoes
-     */
-    public NFNotaInfoItemImpostoCOFINSOutrasOperacoes getOutrasOperacoes()
-    {
-        return outrasOperacoes;
-    }
+	/**
+	 * Gets the tipocalculo.
+	 *
+	 * @return the tipocalculo
+	 */
+	public DoisValores getTipocalculo() {
+		return tipocalculo;
+	}
 
-    /**
-     * Sets the outrasoperacoes.
-     *
-* @param id the outrasoperacoes to set
- */
-public void setOutrasOperacoes(NFNotaInfoItemImpostoCOFINSOutrasOperacoes outrasoperacoes)
-{
-        this.outrasOperacoes = outrasoperacoes;
-    }
+	/**
+	 * Sets the tipocalculo.
+	 *
+	 * @param tipocalculo the new tipocalculo
+	 */
+	public void setTipocalculo(DoisValores tipocalculo) {
+		this.tipocalculo = tipocalculo;
+	}
 
-
-
-
- 
- }
+	/* (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao#toString()
+	 */
+	@Override
+	public String toString() {
+		return "NFNotaInfoItemImpostoCOFINS [getId()=" + getId() + ", getAliquota()=" + getAliquota()
+				+ ", getQuantidade()=" + getQuantidade() + ", getNaoTributavel()=" + getNaoTributavel()
+				+ ", getOutrasOperacoes()=" + getOutrasOperacoes() + ", getTipocalculo()=" + getTipocalculo()
+				+ ", toString()=" + super.toString() + "]";
+	}
+}

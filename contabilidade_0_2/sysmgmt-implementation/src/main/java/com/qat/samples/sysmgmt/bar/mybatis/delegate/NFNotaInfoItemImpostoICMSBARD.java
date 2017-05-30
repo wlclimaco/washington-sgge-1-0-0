@@ -70,6 +70,8 @@ public final class NFNotaInfoItemImpostoICMSBARD extends SqlSessionDaoSupport
 					count = nfnotainfoitemimpostoicmsDAC.deleteNFNotaInfoItemImpostoICMSById(nfnotainfoitemimpostoicms).hasSystemError();
 
 					break;
+			default:
+				break;
 			}
 
 		if(count == true ){

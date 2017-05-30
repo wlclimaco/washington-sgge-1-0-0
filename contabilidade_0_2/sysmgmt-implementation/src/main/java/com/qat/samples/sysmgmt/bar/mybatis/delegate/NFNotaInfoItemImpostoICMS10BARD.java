@@ -90,14 +90,7 @@ public final class NFNotaInfoItemImpostoICMS10BARD extends SqlSessionDaoSupport
 					break;
 				case DELETE:
 					count = nfnotainfoitemimpostoicms10DAC.deleteNFNotaInfoItemImpostoICMS10ById(nfnotainfoitemimpostoicms10).hasSystemError();
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.DELETADO);
-					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
-					count =
-							StatusBARD.maintainStatusAssociations(statusList, response, nfnotainfoitemimpostoicms10.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.NFNOTAINFOITEMIMPOSTOICMS10, statusDAC, historicoDAC,
-									processId, historicoId);
+					
 
 					break;
 			}
