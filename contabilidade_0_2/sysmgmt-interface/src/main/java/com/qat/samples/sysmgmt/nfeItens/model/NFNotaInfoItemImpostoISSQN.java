@@ -76,7 +76,7 @@ public class NFNotaInfoItemImpostoISSQN extends ModelCosmeDamiao {
 	 * The econtabil indicadorIncentivoFiscal for the
 	 * NFNotaInfoItemImpostoISSQN.
 	 */
-	private DoisValores indicadorIncentivoFiscal;
+	private Integer indicadorIncentivoFiscal;
 
 	/**
 	 * Default constructor.
@@ -479,7 +479,7 @@ public class NFNotaInfoItemImpostoISSQN extends ModelCosmeDamiao {
 	 *
 	 * @return the indicadorIncentivoFiscal
 	 */
-	public DoisValores getIndicadorIncentivoFiscal() {
+	public Integer getIndicadorIncentivoFiscal() {
 		return indicadorIncentivoFiscal;
 	}
 
@@ -489,7 +489,7 @@ public class NFNotaInfoItemImpostoISSQN extends ModelCosmeDamiao {
 	 * @param id
 	 *            the indicadorincentivofiscal to set
 	 */
-	public void setIndicadorIncentivoFiscal(DoisValores indicadorincentivofiscal) {
+	public void setIndicadorIncentivoFiscal(Integer indicadorincentivofiscal) {
 		this.indicadorIncentivoFiscal = indicadorincentivofiscal;
 	}
 

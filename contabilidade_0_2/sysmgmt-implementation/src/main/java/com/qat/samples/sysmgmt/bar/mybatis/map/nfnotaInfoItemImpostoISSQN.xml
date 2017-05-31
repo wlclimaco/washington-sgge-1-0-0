@@ -27,7 +27,7 @@
     <result property="valorDescontoIncondicionado" column="valorDescontoIncondicionado"/>
     <result property="valorDescontoCondicionado" column="valorDescontoCondicionado"/>
     <result property="valorRetencaoISS" column="valorRetencaoISS"/>
-    
+
     <result property="codigoServico" column="codigoServico"/>
     <result property="codigoMunicipioIncidenciaImposto" column="codigoMunicipioIncidenciaImposto"/>
     <result property="codigoPais" column="codigoPais"/>
@@ -40,8 +40,9 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
+<result property="indicadorIncentivoFiscal" column="indicadorIncentivoFiscal"/>
     <collection property="indicadorExigibilidadeISS" column="indicadorExigibilidadeISS" select="DoisValorMap.fetchDoisValorById"/>
-    <collection property="indicadorIncentivoFiscal" column="indicadorIncentivoFiscal" select="DoisValorMap.fetchDoisValorById"/>
+
   </resultMap>
 
   <sql id="allNFNotaInfoItemImpostoISSQNColumns">
@@ -87,7 +88,7 @@ valorBaseCalculo
 #{codigoMunicipioIncidenciaImposto},
 #{codigoPais},
 #{numeroProcesso},
-#{indicadorIncentivoFiscal.id},
+#{indicadorIncentivoFiscal},
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -148,7 +149,7 @@ valorBaseCalculo
 <if test="codigoMunicipioIncidenciaImposto!= null">codigoMunicipioIncidenciaImposto = #{codigoMunicipioIncidenciaImposto},</if>
 <if test="codigoPais!= null">codigoPais = #{codigoPais},</if>
 <if test="numeroProcesso!= null">numeroProcesso = #{numeroProcesso},</if>
-<if test="indicadorIncentivoFiscal!= null">indicadorIncentivoFiscal = #{indicadorIncentivoFiscal.id},</if>
+<if test="indicadorIncentivoFiscal!= null">indicadorIncentivoFiscal = #{indicadorIncentivoFiscal},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>

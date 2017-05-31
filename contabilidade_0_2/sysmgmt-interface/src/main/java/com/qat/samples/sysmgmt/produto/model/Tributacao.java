@@ -18,6 +18,8 @@ public class Tributacao extends ModelCosmeDamiao {
 
 	private Integer prodId;
 
+	private Integer tipo;
+
 	private Cfop cfop;
 
 	/** The econtabil imposto for the NFNotaInfoItem. */
@@ -91,11 +93,20 @@ public class Tributacao extends ModelCosmeDamiao {
 		this.descricao = descricao;
 	}
 
+	public Integer getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
+	}
+
 	@Override
 	public String toString() {
 		return "Tributacao [getId()=" + getId() + ", getProdId()=" + getProdId() + ", getCfop()=" + getCfop()
 				+ ", getImposto()=" + getImposto() + ", getImpostoDevolvido()=" + getImpostoDevolvido()
-				+ ", getDescricao()=" + getDescricao() + ", toString()=" + super.toString() + "]";
+				+ ", getDescricao()=" + getDescricao() + ", getTipo()=" + getTipo() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
 
