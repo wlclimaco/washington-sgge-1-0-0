@@ -14,6 +14,7 @@ import com.qat.samples.sysmgmt.bar.Nfe.INFNotaInfoItemBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemProdutoArmamento;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
+import com.qat.samples.sysmgmt.util.model.AcaoTypeEnum;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
 
@@ -76,6 +77,48 @@ public final class NFNotaInfoItemProdutoArmamentoBARD extends SqlSessionDaoSuppo
 					break;
 			}
 		}
+		if(count == true ){
+			return 1;
+		}else{
+			return 0;
+		}
+
+	}
+	@SuppressWarnings("unchecked")
+	public static Integer maintainNFNotaInfoItemProdutoArmamentoAssociations(NFNotaInfoItemProdutoArmamento nfnotainfoitemprodutoarmamento,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoTypeEnum update,
+			TabelaEnum tabelaEnum, INFNotaInfoItemBAR nfnotainfoitemprodutoarmamentoDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
+			String UserId, Integer processId, Integer historicoId)
+	{
+		Boolean count = false;
+		// First Maintain Empresa
+		if (ValidationUtil.isNull(nfnotainfoitemprodutoarmamento))
+		{
+			return 0;
+		}
+		// For Each Contact...
+
+			// Make sure we set the parent key
+			nfnotainfoitemprodutoarmamento.setParentId(parentId);
+			nfnotainfoitemprodutoarmamento.setTabelaEnum(tabelaEnum);
+			nfnotainfoitemprodutoarmamento.setProcessId(processId);
+
+			switch (nfnotainfoitemprodutoarmamento.getModelAction())
+			{
+				case INSERT:
+					count = nfnotainfoitemprodutoarmamentoDAC.insertNFNotaInfoItemProdutoArmamento(nfnotainfoitemprodutoarmamento).hasSystemError();
+
+					break;
+				case UPDATE:
+					count = nfnotainfoitemprodutoarmamentoDAC.updateNFNotaInfoItemProdutoArmamento(nfnotainfoitemprodutoarmamento).hasSystemError();
+
+					break;
+				case DELETE:
+					count = nfnotainfoitemprodutoarmamentoDAC.deleteNFNotaInfoItemProdutoArmamentoById(nfnotainfoitemprodutoarmamento).hasSystemError();
+
+					break;
+			}
+
 		if(count == true ){
 			return 1;
 		}else{

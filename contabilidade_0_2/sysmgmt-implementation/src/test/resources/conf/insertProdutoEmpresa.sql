@@ -46,10 +46,10 @@ INSERT INTO Porcao(valor,create_user,create_date,modify_user,modify_date)values
 
 
 INSERT INTO Produto(cdBarras, nCM, cEST, excTabIPI, produto, dataCreate,create_user,create_date,modify_user,modify_date)values
-( 'cdBarras_0', 'nCM_0', 'cEST_0', 'excTabIPI_0', 'produto_0', 1473121358152,'system',1473121358151,'rod',1473121358151);
+( 'cdBarras_0', 'nCM_0', 'cEST_0', 0, 'produto_0', 1473121358152,'system',1473121358151,'rod',1473121358151);
 
 INSERT INTO Produto(cdBarras, nCM, cEST, excTabIPI, produto, dataCreate,create_user,create_date,modify_user,modify_date)values
-( 'cdBarras_1', 'nCM_1', 'cEST_1', 'excTabIPI_1', 'produto_1', 1473121358152,'system',1473121358152,'rod',1473121358152);
+( 'cdBarras_1', 'nCM_1', 'cEST_1',1, 'produto_1', 1473121358152,'system',1473121358152,'rod',1473121358152);
 
 INSERT INTO Produto(cdBarras, nCM, cEST, excTabIPI, produto, dataCreate,create_user,create_date,modify_user,modify_date)values
-( 'cdBarras_2', 'nCM_2', 'cEST_2', 'excTabIPI_2', 'produto_2', 1473121358152,'system',1473121358152,'rod',1473121358152);
+( 'cdBarras_2', 'nCM_2', 'cEST_2', 2, 'produto_2', 1473121358152,'system',1473121358152,'rod',1473121358152);

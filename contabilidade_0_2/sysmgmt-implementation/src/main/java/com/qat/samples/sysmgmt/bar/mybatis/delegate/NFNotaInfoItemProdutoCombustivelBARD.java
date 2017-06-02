@@ -15,6 +15,7 @@ import com.qat.samples.sysmgmt.bar.Nfe.INFNotaInfoItemBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemProdutoCombustivel;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
+import com.qat.samples.sysmgmt.util.model.AcaoTypeEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
@@ -41,7 +42,7 @@ public final class NFNotaInfoItemProdutoCombustivelBARD extends SqlSessionDaoSup
 	 */
 	@SuppressWarnings("unchecked")
 	public static Integer maintainNFNotaInfoItemProdutoCombustivelAssociations(NFNotaInfoItemProdutoCombustivel nfnotainfoitemprodutocombustivel,
-			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoTypeEnum update,
 			TabelaEnum tabelaEnum, INFNotaInfoItemBAR nfnotainfoitemprodutocombustivelDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
@@ -101,12 +102,12 @@ public final class NFNotaInfoItemProdutoCombustivelBARD extends SqlSessionDaoSup
 
 					break;
 			}
-		
+
 		if(count == true ){
 			return 1;
 		}else{
 			return 0;
 		}
-		
+
 	}
 }

@@ -20,20 +20,26 @@
     <result property="cdBarras" column="cdBarras"/>
     <result property="ncm" column="ncm"/>
     <result property="cEST" column="cEST"/>
-    <result property="excTabIPI" column="excTabIPI"/>
     <result property="produto" column="produto"/>
     <result property="quant" column="quant"/>
     <result property="dataCreate" column="dataCreate" />
-<result property="parentId" column="parentId"/>
-<result property="tabelaEnumValue" column="tabelaEnumValue"/>
-<result property="emprId" column="emprId"/>
-<result property="processId" column="processId"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
-<collection property="uniMed" column="uniMed" select="UniMedMap.fetchUniMedById"/>
-<collection property="marca" column="marca" select="MarcaMap.fetchMarcaById"/>
+	<result property="parentId" column="parentId"/>
+	<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+	<result property="emprId" column="emprId"/>
+	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<collection property="uniMed" column="uniMed" select="UniMedMap.fetchUniMedById"/>
+	<collection property="marca" column="marca" select="MarcaMap.fetchMarcaById"/>
+	<collection property="excTabIPI" column="excTabIPI" select="DoisValorMap.fetchDoisValorById"/>
+	<collection property="origem" column="origem" select="DoisValorMap.fetchDoisValorById"/>
+	<collection property="produtoTipo" column="produtoTipo" select="DoisValorMap.fetchDoisValorById"/>
+	<collection property="medicamento" column="medicamento" select="NFNotaInfoItemProdutoMedicamentoMap.fetchNFNotaInfoItemProdutoMedicamentoById"/>
+	<collection property="veiculo" column="veiculo" select="NFNotaInfoItemProdutoVeiculoMap.fetchNFNotaInfoItemProdutoVeiculoById"/>
+	<collection property="armamento" column="armamento" select="NFNotaInfoItemProdutoArmamentoMap.fetchNFNotaInfoItemProdutoArmamentoById"/>
+	<collection property="combustivel" column="combustivel" select="NFNotaInfoItemProdutoCombustivelMap.fetchNFNotaInfoItemProdutoCombustivelById"/>
 
   </resultMap>
 
@@ -41,9 +47,15 @@
 cdBarras
 ,ncm
 ,cEST
-,excTabIPI
 ,produto
 ,quant
+,excTabIPI
+,origem
+,produtoTipo
+,medicamento
+,veiculo
+,armamento
+,combustivel
 ,dataCreate
 ,parentId
 ,tabelaEnumValue
@@ -62,9 +74,15 @@ cdBarras
 #{cdBarras},
 #{ncm},
 #{cEST},
-#{excTabIPI},
 #{produto},
 #{quant},
+#{excTabIPI.id},
+#{origem.id},
+#{produtoTipo.id},
+#{medicamento.id},
+#{veiculo.id},
+#{armamento.id},
+#{combustivel.id},
 #{dataCreate},
      #{parentId},
      #{tabelaEnumValue},
@@ -112,10 +130,16 @@ cdBarras
 
  <update id="updateProduto" parameterType="Produto">
    UPDATE produto SET
+<if test="excTabIPI != null">excTabIPI = #{excTabIPI.id},</if>
+<if test="origem != null">origem = #{origem.id},</if>
+<if test="produtoTipo != null">produtoTipo = #{produtoTipo.id},</if>
+<if test="medicamento != null">medicamento = #{medicamento.id},</if>
+<if test="veiculo != null">veiculo = #{veiculo.id},</if>
+<if test="armamento != null">armamento = #{armamento.id},</if>
+<if test="combustivel != null">combustivel = #{combustivel.id},</if>
 <if test="cdBarras!= null">cdBarras = #{cdBarras},</if>
 <if test="ncm!= null">ncm = #{ncm},</if>
 <if test="cEST!= null">cEST = #{cEST},</if>
-<if test="excTabIPI!= null">excTabIPI = #{excTabIPI},</if>
 <if test="produto!= null">produto = #{produto},</if>
 <if test="dataCreate!= null">dataCreate = #{dataCreate},</if>
 <if test="quant!= null">quant = #{quant},</if>

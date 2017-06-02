@@ -1,7 +1,5 @@
 package com.qat.samples.sysmgmt.produto.model;
 
-import java.util.List;
-
 import com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemProdutoArmamento;
 import com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemProdutoCombustivel;
 import com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemProdutoMedicamento;
@@ -31,7 +29,7 @@ public class Produto extends ModelCosmeDamiao
 	/** The left. */
 	private String produto;
 
-	private String excTabIPI;
+	private DoisValores excTabIPI;
 
 	private String cEST;
 
@@ -40,6 +38,8 @@ public class Produto extends ModelCosmeDamiao
 	private UniMed uniMed;
 
 	private Marca marca;
+
+	private DoisValores origem;
 
 	private DoisValores produtoTipo;
 
@@ -113,11 +113,11 @@ public class Produto extends ModelCosmeDamiao
 		this.produto = produto;
 	}
 
-	public String getExcTabIPI() {
+	public DoisValores getExcTabIPI() {
 		return excTabIPI;
 	}
 
-	public void setExcTabIPI(String excTabIPI) {
+	public void setExcTabIPI(DoisValores excTabIPI) {
 		this.excTabIPI = excTabIPI;
 	}
 
@@ -196,6 +196,14 @@ public class Produto extends ModelCosmeDamiao
 		this.armamento = armamento;
 	}
 
+	public DoisValores getOrigem() {
+		return origem;
+	}
+
+	public void setOrigem(DoisValores origem) {
+		this.origem = origem;
+	}
+
 	@Override
 	public String toString() {
 		return "Produto [getId()=" + getId() + ", getNcm()=" + getNcm() + ", getCdBarras()=" + getCdBarras()
@@ -203,7 +211,8 @@ public class Produto extends ModelCosmeDamiao
 				+ getExcTabIPI() + ", getcEST()=" + getcEST() + ", getQuant()=" + getQuant() + ", getUniMed()="
 				+ getUniMed() + ", getMarca()=" + getMarca() + ", getProdutoTipo()=" + getProdutoTipo()
 				+ ", getVeiculo()=" + getVeiculo() + ", getCombustivel()=" + getCombustivel() + ", getMedicamento()="
-				+ getMedicamento() + ", getArmamento()=" + getArmamento() + ", toString()=" + super.toString() + "]";
+				+ getMedicamento() + ", getArmamento()=" + getArmamento() + ", getOrigem()=" + getOrigem()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }
