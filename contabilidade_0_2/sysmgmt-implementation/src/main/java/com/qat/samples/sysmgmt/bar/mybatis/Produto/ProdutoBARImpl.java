@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
@@ -42,7 +43,6 @@ import com.qat.samples.sysmgmt.bar.mybatis.delegate.TributacaoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.UniMedBARD;
 import com.qat.samples.sysmgmt.cfop.model.Cfop;
 import com.qat.samples.sysmgmt.cfop.model.request.CfopInquiryRequest;
-import com.qat.samples.sysmgmt.nfeItens.model.NFNotaInfoItemProdutoCombustivel;
 import com.qat.samples.sysmgmt.produto.model.Categoria;
 import com.qat.samples.sysmgmt.produto.model.Cofins;
 import com.qat.samples.sysmgmt.produto.model.Custo;
@@ -927,7 +927,7 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 		produtoempresa.setProcessId(produtoempresa.getTransactionId());
 
-		if (!ValidationUtil.isNullOrZero(produtoempresa.getProdId().getId()))
+		if (!ValidationUtil.isNull(produtoempresa.getProdId()))
 		{
 			ProdutoBARD.maintainProdutoAssociations(produtoempresa.getProdId(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
 					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produtoempresa.getEmprId(), produtoempresa.getUserId(), produtoempresa.getTransactionId(), produtoempresa.getTransactionId());
@@ -1187,26 +1187,58 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 					getProdutoBAR(), getStatusBAR(), getHistoricoBAR(), produto.getEmprId(), produto.getUserId(), produto.getTransactionId(), produto.getTransactionId());
 		}
 
-		if (!ValidationUtil.isNull(produto.getVeiculo()))
+		if (!ValidationUtil.isNull(produto.getVeiculo()) &&(!ValidationUtil.isNull(produto.getVeiculo().getId())))
 		{
+			produto.getVeiculo().setModelAction(PersistenceActionEnum.DELETE);
 			NFNotaInfoItemProdutoVeiculoBARD.maintainNFNotaInfoItemProdutoVeiculoAssociations(produto.getVeiculo(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
 					getNfnotaInfoItemBAR(), getStatusBAR(), getHistoricoBAR(), produto.getEmprId(), produto.getUserId(), produto.getTransactionId(), produto.getTransactionId());
 		}
 
-		if (ValidationUtil.isNull(produto.getMedicamento()))
+		if (!ValidationUtil.isNull(produto.getMedicamento()) &&(!ValidationUtil.isNull(produto.getMedicamento().getId())))
 		{
+			produto.getMedicamento().setModelAction(PersistenceActionEnum.DELETE);
 			NFNotaInfoItemProdutoMedicamentoBARD.maintainNFNotaInfoItemProdutoMedicamentoAssociations(produto.getMedicamento(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
 					getNfnotaInfoItemBAR(), getStatusBAR(), getHistoricoBAR(), produto.getEmprId(), produto.getUserId(), produto.getTransactionId(), produto.getTransactionId());
 		}
 
-		if (ValidationUtil.isNull(produto.getArmamento()))
+		if (!ValidationUtil.isNull(produto.getArmamento()) &&(!ValidationUtil.isNull(produto.getArmamento().getId())))
 		{
+			produto.getArmamento().setModelAction(PersistenceActionEnum.DELETE);
 			NFNotaInfoItemProdutoArmamentoBARD.maintainNFNotaInfoItemProdutoArmamentoAssociations(produto.getArmamento(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
 					getNfnotaInfoItemBAR(), getStatusBAR(), getHistoricoBAR(), produto.getEmprId(), produto.getUserId(), produto.getTransactionId(), produto.getTransactionId());
 		}
 
-		if (ValidationUtil.isNull(produto.getCombustivel()))
+		if (!ValidationUtil.isNull(produto.getCombustivel()) &&(!ValidationUtil.isNull(produto.getCombustivel().getId())))
 		{
+			produto.getCombustivel().setModelAction(PersistenceActionEnum.DELETE);
+			NFNotaInfoItemProdutoCombustivelBARD.maintainNFNotaInfoItemProdutoCombustivelAssociations(produto.getCombustivel(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
+					getNfnotaInfoItemBAR(), getStatusBAR(), getHistoricoBAR(), produto.getEmprId(), produto.getUserId(), produto.getTransactionId(), produto.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(produto.getVeiculo()) )
+		{
+			produto.getVeiculo().setModelAction(PersistenceActionEnum.DELETE);
+			NFNotaInfoItemProdutoVeiculoBARD.maintainNFNotaInfoItemProdutoVeiculoAssociations(produto.getVeiculo(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
+					getNfnotaInfoItemBAR(), getStatusBAR(), getHistoricoBAR(), produto.getEmprId(), produto.getUserId(), produto.getTransactionId(), produto.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(produto.getMedicamento()))
+		{
+			produto.getMedicamento().setModelAction(PersistenceActionEnum.DELETE);
+			NFNotaInfoItemProdutoMedicamentoBARD.maintainNFNotaInfoItemProdutoMedicamentoAssociations(produto.getMedicamento(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
+					getNfnotaInfoItemBAR(), getStatusBAR(), getHistoricoBAR(), produto.getEmprId(), produto.getUserId(), produto.getTransactionId(), produto.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(produto.getArmamento()))
+		{
+			produto.getArmamento().setModelAction(PersistenceActionEnum.DELETE);
+			NFNotaInfoItemProdutoArmamentoBARD.maintainNFNotaInfoItemProdutoArmamentoAssociations(produto.getArmamento(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
+					getNfnotaInfoItemBAR(), getStatusBAR(), getHistoricoBAR(), produto.getEmprId(), produto.getUserId(), produto.getTransactionId(), produto.getTransactionId());
+		}
+
+		if (!ValidationUtil.isNull(produto.getCombustivel()))
+		{
+			produto.getCombustivel().setModelAction(PersistenceActionEnum.DELETE);
 			NFNotaInfoItemProdutoCombustivelBARD.maintainNFNotaInfoItemProdutoCombustivelAssociations(produto.getCombustivel(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
 					getNfnotaInfoItemBAR(), getStatusBAR(), getHistoricoBAR(), produto.getEmprId(), produto.getUserId(), produto.getTransactionId(), produto.getTransactionId());
 		}

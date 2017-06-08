@@ -74,7 +74,7 @@ public class NFNotaInfoItemProdutoVeiculo extends ModelCosmeDamiao {
 	private DoisValores tipoVeiculo;
 
 	/** The econtabil especieVeiculo for the NFNotaInfoItemProdutoVeiculo. */
-	private Integer especieVeiculo;
+	private DoisValores especieVeiculo;
 
 	/** The econtabil condicaoChassi for the NFNotaInfoItemProdutoVeiculo. */
 	private DoisValores condicaoChassi;
@@ -543,7 +543,7 @@ public class NFNotaInfoItemProdutoVeiculo extends ModelCosmeDamiao {
 	 *
 	 * @return the especieVeiculo
 	 */
-	public Integer getEspecieVeiculo() {
+	public DoisValores getEspecieVeiculo() {
 		return especieVeiculo;
 	}
 
@@ -553,7 +553,7 @@ public class NFNotaInfoItemProdutoVeiculo extends ModelCosmeDamiao {
 	 * @param id
 	 *            the especieveiculo to set
 	 */
-	public void setEspecieVeiculo(Integer especieveiculo) {
+	public void setEspecieVeiculo(DoisValores especieveiculo) {
 		this.especieVeiculo = especieveiculo;
 	}
 

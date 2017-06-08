@@ -58,31 +58,13 @@ public final class ProdutoBARD extends SqlSessionDaoSupport {
 		switch (produto.getModelAction()) {
 		case INSERT:
 			count = produtoDAC.insertProduto(produto).hasSystemError();
-			if (count == true) {
-				Status status = new Status();
-				status.setStatus(CdStatusTypeEnum.ATIVO);
-				List<Status> statusList = new ArrayList<Status>();
-				statusList.add(status);
-				count = StatusBARD.maintainStatusAssociations(statusList, response, parentId, null, AcaoEnum.INSERT,
-						UserId, empId, TabelaEnum.PRODUTO, statusDAC, historicoDAC, processId, historicoId);
-			}
 			break;
 		case UPDATE:
 			count = produtoDAC.updateProduto(produto).hasSystemError();
-			if (count == true) {
-				count = StatusBARD.maintainStatusAssociations(produto.getStatusList(), response, produto.getId(), null,
-						AcaoEnum.UPDATE, UserId, empId, TabelaEnum.PRODUTO, statusDAC, historicoDAC, processId,
-						historicoId);
-			}
 			break;
 		case DELETE:
 			count = produtoDAC.deleteProdutoById(produto).hasSystemError();
-			Status status = new Status();
-			status.setStatus(CdStatusTypeEnum.DELETADO);
-			List<Status> statusList = new ArrayList<Status>();
-			statusList.add(status);
-			count = StatusBARD.maintainStatusAssociations(statusList, response, produto.getId(), null, AcaoEnum.DELETE,
-					UserId, empId, TabelaEnum.PRODUTO, statusDAC, historicoDAC, processId, historicoId);
+
 
 			break;
 		}
